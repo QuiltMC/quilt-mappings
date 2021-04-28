@@ -24,7 +24,7 @@ plugins {
 	id 'java' // for jd gen
 	id 'org.cadixdev.licenser' version '0.5.1'
 	id 'net.fabricmc.filament' version '0.2.0'
-	id "org.ajoberstar.grgit" version "4.1.0"
+	id "net.kyori.indra.git" version "2.0.0"
 }
 
 def minecraft_version = "21w17a"
@@ -37,7 +37,12 @@ def yarnVersion = "${minecraft_version}+build.$build_number"
 version = yarnVersion
 
 if (ENV.VALIDATE_BRANCH) {
-	def branch = grgit.branch.current().name
+	def branch = indraGit.branchName()
+
+	if (branch == null) {
+		throw new IllegalStateException("No repository found? You may have a detached head?");
+	}
+
 	if (minecraft_version != branch) {
 		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${minecraft_version})")
 	}
