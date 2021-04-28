@@ -24,7 +24,6 @@ plugins {
 	id 'java' // for jd gen
 	id 'org.cadixdev.licenser' version '0.5.1'
 	id 'net.fabricmc.filament' version '0.2.0'
-	id "org.ajoberstar.grgit" version "4.1.0"
 }
 
 def minecraft_version = "21w17a"
@@ -38,6 +37,7 @@ version = yarnVersion
 
 if (ENV.BRANCH_NAME) {
 	def branch = ENV.BRANCH_NAME.substring(0, ENV.BRANCH_NAME.lastIndexOf('/'))
+
 	if (minecraft_version != branch) {
 		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${minecraft_version})")
 	}
