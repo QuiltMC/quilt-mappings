@@ -36,8 +36,8 @@ def build_number = ENV.BUILD_NUMBER ?: "local"
 def yarnVersion = "${minecraft_version}+build.$build_number"
 version = yarnVersion
 
-if (ENV.VALIDATE_BRANCH) {
-	def branch = grgit.branch.current().name
+if (ENV.BRANCH_NAME) {
+	def branch = ENV.BRANCH_NAME.substring(0, ENV.BRANCH_NAME.lastIndexOf('/'))
 	if (minecraft_version != branch) {
 		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${minecraft_version})")
 	}
