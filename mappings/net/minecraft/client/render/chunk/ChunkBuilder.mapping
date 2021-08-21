@@ -1,144 +1,144 @@
-CLASS net/minecraft/class_846 net/minecraft/client/render/chunk/ChunkBuilder
-	FIELD field_18766 cameraPosition Lnet/minecraft/class_243;
-	FIELD field_20827 threadBuffers Ljava/util/Queue;
-	FIELD field_20828 buffers Lnet/minecraft/class_750;
-	FIELD field_20829 mailbox Lnet/minecraft/class_3846;
-	FIELD field_20830 executor Ljava/util/concurrent/Executor;
-	FIELD field_20831 world Lnet/minecraft/class_1937;
-	FIELD field_20832 worldRenderer Lnet/minecraft/class_761;
-	FIELD field_20992 queuedTaskCount I
-	FIELD field_20993 bufferCount I
-	FIELD field_29500 POSITION_COLOR_TEXTURE_LIGHT_NORMAL Lnet/minecraft/class_293;
-	FIELD field_4435 rebuildQueue Ljava/util/PriorityQueue;
-	FIELD field_4443 uploadQueue Ljava/util/Queue;
-	FIELD field_4445 LOGGER Lorg/apache/logging/log4j/Logger;
-	METHOD <init> (Lnet/minecraft/class_1937;Lnet/minecraft/class_761;Ljava/util/concurrent/Executor;ZLnet/minecraft/class_750;)V
+CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkBuilder
+	FIELD f_zxntukzo cameraPosition Lnet/minecraft/unmapped/C_xxfpupgv;
+	FIELD f_ksvptrrx threadBuffers Ljava/util/Queue;
+	FIELD f_niojdltb buffers Lnet/minecraft/unmapped/C_wblirdjw;
+	FIELD f_dwkdzrrq mailbox Lnet/minecraft/unmapped/C_agydwuhb;
+	FIELD f_tdmobllv executor Ljava/util/concurrent/Executor;
+	FIELD f_xkcitlln world Lnet/minecraft/unmapped/C_nbzftcdc;
+	FIELD f_vzapgtmr worldRenderer Lnet/minecraft/unmapped/C_xhbakkfs;
+	FIELD f_djoxkqwb queuedTaskCount I
+	FIELD f_wdkwldxr bufferCount I
+	FIELD f_resqsqni POSITION_COLOR_TEXTURE_LIGHT_NORMAL Lnet/minecraft/unmapped/C_epdvdlnr;
+	FIELD f_qnkuhlkk rebuildQueue Ljava/util/PriorityQueue;
+	FIELD f_anhljild uploadQueue Ljava/util/Queue;
+	FIELD f_olhadgcd LOGGER Lorg/apache/logging/log4j/Logger;
+	METHOD <init> (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_xhbakkfs;Ljava/util/concurrent/Executor;ZLnet/minecraft/unmapped/C_wblirdjw;)V
 		ARG 1 world
 		ARG 2 worldRenderer
 		ARG 3 executor
 		ARG 4 is64Bits
 		ARG 5 buffers
-	METHOD method_19419 setCameraPosition (Lnet/minecraft/class_243;)V
+	METHOD m_csoyaeaz setCameraPosition (Lnet/minecraft/unmapped/C_xxfpupgv;)V
 		ARG 1 cameraPosition
-	METHOD method_19420 getCameraPosition ()Lnet/minecraft/class_243;
-	METHOD method_22752 setWorld (Lnet/minecraft/class_1937;)V
+	METHOD m_ckxfvfnd getCameraPosition ()Lnet/minecraft/unmapped/C_xxfpupgv;
+	METHOD m_wvwiytdu setWorld (Lnet/minecraft/unmapped/C_nbzftcdc;)V
 		ARG 1 world
-	METHOD method_22755 (Lnet/minecraft/class_750;Lnet/minecraft/class_846$class_4690;Ljava/lang/Throwable;)V
+	METHOD m_srfiuvnq (Lnet/minecraft/unmapped/C_wblirdjw;Lnet/minecraft/unmapped/C_dxiaofic$C_syqmacqs;Ljava/lang/Throwable;)V
 		ARG 2 result
 		ARG 3 throwable
-	METHOD method_22756 send (Lnet/minecraft/class_846$class_851$class_4577;)V
+	METHOD m_adxdfdom send (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_wnhmotna;)V
 		ARG 1 task
-	METHOD method_22759 upload (Lnet/minecraft/class_287;Lnet/minecraft/class_291;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_ibpdblqu upload (Lnet/minecraft/unmapped/C_gnnmqnxn;Lnet/minecraft/unmapped/C_sijxdjhl;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 buffer
 		ARG 2 glBuffer
-	METHOD method_22761 upload ()Z
-	METHOD method_22763 scheduleRunTasks ()V
-	METHOD method_34845 getToBatchCount ()I
-	METHOD method_34846 getChunksToUpload ()I
-	METHOD method_34847 getFreeBufferCount ()I
-	METHOD method_3619 stop ()V
-	METHOD method_3622 getDebugString ()Ljava/lang/String;
-	METHOD method_3627 rebuild (Lnet/minecraft/class_846$class_851;)V
+	METHOD m_wslxnwyp upload ()Z
+	METHOD m_szemqbol scheduleRunTasks ()V
+	METHOD m_xorlakyn getToBatchCount ()I
+	METHOD m_okixdwsj getChunksToUpload ()I
+	METHOD m_ynakaovh getFreeBufferCount ()I
+	METHOD m_rdwrybti stop ()V
+	METHOD m_fgbtavnj getDebugString ()Ljava/lang/String;
+	METHOD m_qbynyefn rebuild (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl;)V
 		ARG 1 chunk
-	METHOD method_3630 isEmpty ()Z
-	METHOD method_3632 reset ()V
-	METHOD method_3633 clear ()V
-	METHOD method_3635 scheduleUpload (Lnet/minecraft/class_287;Lnet/minecraft/class_291;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_syvfdlnc isEmpty ()Z
+	METHOD m_gcrttrav reset ()V
+	METHOD m_olwnepfx clear ()V
+	METHOD m_lgnyrnhr scheduleUpload (Lnet/minecraft/unmapped/C_gnnmqnxn;Lnet/minecraft/unmapped/C_sijxdjhl;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 buffer
 		ARG 2 glBuffer
-	CLASS class_849 ChunkData
-		FIELD field_4450 nonEmptyLayers Ljava/util/Set;
-		FIELD field_4451 EMPTY Lnet/minecraft/class_846$class_849;
-		FIELD field_4452 initializedLayers Ljava/util/Set;
-		FIELD field_4453 bufferState Lnet/minecraft/class_287$class_5594;
-		FIELD field_4454 empty Z
-		FIELD field_4455 occlusionGraph Lnet/minecraft/class_854;
-		FIELD field_4456 blockEntities Ljava/util/List;
-		METHOD method_3641 isEmpty (Lnet/minecraft/class_1921;)Z
+	CLASS C_aglcjoqz ChunkData
+		FIELD f_fllpqjeo nonEmptyLayers Ljava/util/Set;
+		FIELD f_uuucggzi EMPTY Lnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;
+		FIELD f_hhwskwpp initializedLayers Ljava/util/Set;
+		FIELD f_rnfbjezc bufferState Lnet/minecraft/unmapped/C_gnnmqnxn$C_zprkjimp;
+		FIELD f_efgtpxgc empty Z
+		FIELD f_fqrsqhjf occlusionGraph Lnet/minecraft/unmapped/C_gcxfhifb;
+		FIELD f_krhcegxw blockEntities Ljava/util/List;
+		METHOD m_rlbqulza isEmpty (Lnet/minecraft/unmapped/C_vnnwlzit;)Z
 			ARG 1 layer
-		METHOD method_3642 getBlockEntities ()Ljava/util/List;
-		METHOD method_3645 isEmpty ()Z
-		METHOD method_3650 isVisibleThrough (Lnet/minecraft/class_2350;Lnet/minecraft/class_2350;)Z
+		METHOD m_apaxjunp getBlockEntities ()Ljava/util/List;
+		METHOD m_hrcaxnqv isEmpty ()Z
+		METHOD m_dlxklpbe isVisibleThrough (Lnet/minecraft/unmapped/C_fxhiuupx;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
 			ARG 1 from
 			ARG 2 to
-	CLASS class_851 BuiltChunk
-		FIELD field_20834 rebuildTask Lnet/minecraft/class_846$class_851$class_4578;
-		FIELD field_29641 index I
-		FIELD field_4457 blockEntities Ljava/util/Set;
-		FIELD field_4458 boundingBox Lnet/minecraft/class_238;
-		FIELD field_4459 data Ljava/util/concurrent/atomic/AtomicReference;
-		FIELD field_4461 sortTask Lnet/minecraft/class_846$class_851$class_4579;
-		FIELD field_4462 buffers Ljava/util/Map;
-		FIELD field_4463 needsImportantRebuild Z
-		FIELD field_4464 needsRebuild Z
-		FIELD field_4467 origin Lnet/minecraft/class_2338$class_2339;
-		FIELD field_4471 rebuildFrame I
-		FIELD field_4472 neighborPositions [Lnet/minecraft/class_2338$class_2339;
-		METHOD <init> (Lnet/minecraft/class_846;I)V
+	CLASS C_wxagbycl BuiltChunk
+		FIELD f_ethiplrs rebuildTask Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_xfytfqma;
+		FIELD f_thiowbgt index I
+		FIELD f_voeortrs blockEntities Ljava/util/Set;
+		FIELD f_dgcyokdh boundingBox Lnet/minecraft/unmapped/C_eogzjcbh;
+		FIELD f_zakrfoth data Ljava/util/concurrent/atomic/AtomicReference;
+		FIELD f_cqpehqit sortTask Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_cwrlnmet;
+		FIELD f_jjadauey buffers Ljava/util/Map;
+		FIELD f_lorscetz needsImportantRebuild Z
+		FIELD f_ywsaemnv needsRebuild Z
+		FIELD f_sgofltzp origin Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;
+		FIELD f_botqhqni rebuildFrame I
+		FIELD f_mbsognzg neighborPositions [Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;
+		METHOD <init> (Lnet/minecraft/unmapped/C_dxiaofic;I)V
 			ARG 2 index
-		METHOD method_22773 scheduleSort (Lnet/minecraft/class_1921;Lnet/minecraft/class_846;)Z
+		METHOD m_avhpkjnj scheduleSort (Lnet/minecraft/unmapped/C_vnnwlzit;Lnet/minecraft/unmapped/C_dxiaofic;)Z
 			ARG 1 layer
 			ARG 2 chunkRenderer
-		METHOD method_22777 scheduleRebuild (Lnet/minecraft/class_846;)V
+		METHOD m_screxyok scheduleRebuild (Lnet/minecraft/unmapped/C_dxiaofic;)V
 			ARG 1 chunkRenderer
-		METHOD method_22778 setNoCullingBlockEntities (Ljava/util/Set;)V
+		METHOD m_simlqzmf setNoCullingBlockEntities (Ljava/util/Set;)V
 			ARG 1 noCullingBlockEntities
-		METHOD method_22781 rebuild ()V
-		METHOD method_3651 isChunkNonEmpty (Lnet/minecraft/class_2338;)Z
+		METHOD m_urlaccvs rebuild ()V
+		METHOD m_neilzsft isChunkNonEmpty (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
 			ARG 1 pos
-		METHOD method_3653 setOrigin (III)V
+		METHOD m_uvswrrqn setOrigin (III)V
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
-		METHOD method_3654 scheduleRebuild (Z)V
+		METHOD m_palbvoqf scheduleRebuild (Z)V
 			ARG 1 important
-		METHOD method_3655 beginBufferBuilding (Lnet/minecraft/class_287;)V
+		METHOD m_gyzuewkp beginBufferBuilding (Lnet/minecraft/unmapped/C_gnnmqnxn;)V
 			ARG 1 buffer
-		METHOD method_3656 getBuffer (Lnet/minecraft/class_1921;)Lnet/minecraft/class_291;
+		METHOD m_ghykiexy getBuffer (Lnet/minecraft/unmapped/C_vnnwlzit;)Lnet/minecraft/unmapped/C_sijxdjhl;
 			ARG 1 layer
-		METHOD method_3659 delete ()V
-		METHOD method_3661 needsImportantRebuild ()Z
-		METHOD method_3662 cancelRebuild ()V
-		METHOD method_3663 cancel ()V
-		METHOD method_3668 getSquaredCameraDistance ()D
-		METHOD method_3670 getOrigin ()Lnet/minecraft/class_2338;
-		METHOD method_3671 setRebuildFrame (I)Z
+		METHOD m_jmfqodrf delete ()V
+		METHOD m_dwpbejlm needsImportantRebuild ()Z
+		METHOD m_ifuruewa cancelRebuild ()V
+		METHOD m_lfpzsybq cancel ()V
+		METHOD m_gossnmmg getSquaredCameraDistance ()D
+		METHOD m_wdrwwdew getOrigin ()Lnet/minecraft/unmapped/C_kkdaznyh;
+		METHOD m_ohtqnhcz setRebuildFrame (I)Z
 			ARG 1 frame
-		METHOD method_3672 needsRebuild ()Z
-		METHOD method_3673 shouldBuild ()Z
-		METHOD method_3674 createRebuildTask ()Lnet/minecraft/class_846$class_851$class_4577;
-		METHOD method_3675 clear ()V
-		METHOD method_3676 getNeighborPosition (Lnet/minecraft/class_2350;)Lnet/minecraft/class_2338;
+		METHOD m_yaobrdtl needsRebuild ()Z
+		METHOD m_qycwjuys shouldBuild ()Z
+		METHOD m_ejfhbpek createRebuildTask ()Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_wnhmotna;
+		METHOD m_sicenjjm clear ()V
+		METHOD m_nmjgxqbz getNeighborPosition (Lnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_kkdaznyh;
 			ARG 1 direction
-		METHOD method_3677 getData ()Lnet/minecraft/class_846$class_849;
-		CLASS class_4577 Task
-			FIELD field_20835 distance D
-			FIELD field_20836 cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
-			METHOD <init> (Lnet/minecraft/class_846$class_851;D)V
+		METHOD m_ldzcygqu getData ()Lnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;
+		CLASS C_wnhmotna Task
+			FIELD f_rsbkicla distance D
+			FIELD f_xtxprkid cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
+			METHOD <init> (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl;D)V
 				ARG 2 distance
 			METHOD compareTo (Ljava/lang/Object;)I
 				ARG 1 other
-			METHOD method_22782 cancel ()V
-			METHOD method_22783 run (Lnet/minecraft/class_750;)Ljava/util/concurrent/CompletableFuture;
+			METHOD m_qfyuaork cancel ()V
+			METHOD m_illmbxgc run (Lnet/minecraft/unmapped/C_wblirdjw;)Ljava/util/concurrent/CompletableFuture;
 				ARG 1 buffers
-		CLASS class_4578 RebuildTask
-			FIELD field_20838 region Lnet/minecraft/class_853;
-			METHOD <init> (Lnet/minecraft/class_846$class_851;DLnet/minecraft/class_853;)V
+		CLASS C_xfytfqma RebuildTask
+			FIELD f_rbflolvk region Lnet/minecraft/unmapped/C_unirasnp;
+			METHOD <init> (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl;DLnet/minecraft/unmapped/C_unirasnp;)V
 				ARG 2 distance
 				ARG 4 region
-			METHOD method_22785 render (FFFLnet/minecraft/class_846$class_849;Lnet/minecraft/class_750;)Ljava/util/Set;
+			METHOD m_fchwgkum render (FFFLnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;Lnet/minecraft/unmapped/C_wblirdjw;)Ljava/util/Set;
 				ARG 1 cameraX
 				ARG 2 cameraY
 				ARG 3 cameraZ
 				ARG 4 data
 				ARG 5 buffers
-			METHOD method_23087 addBlockEntity (Lnet/minecraft/class_846$class_849;Ljava/util/Set;Lnet/minecraft/class_2586;)V
+			METHOD m_jftiulwa addBlockEntity (Lnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;Ljava/util/Set;Lnet/minecraft/unmapped/C_hmfagevk;)V
 				ARG 1 data
 				ARG 2 blockEntities
 				ARG 3 blockEntity
-		CLASS class_4579 SortTask
-			FIELD field_20841 data Lnet/minecraft/class_846$class_849;
-			METHOD <init> (Lnet/minecraft/class_846$class_851;DLnet/minecraft/class_846$class_849;)V
+		CLASS C_cwrlnmet SortTask
+			FIELD f_jebywrza data Lnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;
+			METHOD <init> (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl;DLnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;)V
 				ARG 2 distance
 				ARG 4 data
-	CLASS class_4690 Result
+	CLASS C_syqmacqs Result

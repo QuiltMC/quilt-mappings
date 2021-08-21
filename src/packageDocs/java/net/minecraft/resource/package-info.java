@@ -8,7 +8,7 @@
  * <p>"Data" as in "Data Packs" is considered resource as well.
  *
  * <p>Here is a quick overview on the resource access and provision APIs of Minecraft:
- * <div class="fabric" id="resource-access"><table border=1>
+ * <div class="quilt" id="resource-access"><table border=1>
  * <caption>Resource Access APIs</caption>
  * <tr>
  *     <th><b>Class</b></th><th><b>Usage</b></th>
@@ -38,7 +38,7 @@
  * </tr>
  * </table></div>
  *
- * <div class="fabric" id="resource-provision"><table border=1>
+ * <div class="quilt" id="resource-provision"><table border=1>
  * <caption>Resource Provision APIs</caption>
  * <tr>
  *     <th><b>Class</b></th><th><b>Usage</b></th>

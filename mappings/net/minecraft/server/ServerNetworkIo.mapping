@@ -1,50 +1,50 @@
-CLASS net/minecraft/class_3242 net/minecraft/server/ServerNetworkIo
-	FIELD field_14105 EPOLL_CHANNEL Lnet/minecraft/class_3528;
-	FIELD field_14106 channels Ljava/util/List;
-	FIELD field_14107 connections Ljava/util/List;
-	FIELD field_14108 active Z
-	FIELD field_14109 server Lnet/minecraft/server/MinecraftServer;
-	FIELD field_14110 LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD field_14111 DEFAULT_CHANNEL Lnet/minecraft/class_3528;
+CLASS net/minecraft/unmapped/C_xqwebtim net/minecraft/server/ServerNetworkIo
+	FIELD f_vwtepaqz EPOLL_CHANNEL Lnet/minecraft/unmapped/C_lzozgbao;
+	FIELD f_ixxvkiur channels Ljava/util/List;
+	FIELD f_mkdagaqn connections Ljava/util/List;
+	FIELD f_phzqjtpr active Z
+	FIELD f_rfatfvhy server Lnet/minecraft/server/MinecraftServer;
+	FIELD f_lngxirau LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_klflrjtg DEFAULT_CHANNEL Lnet/minecraft/unmapped/C_lzozgbao;
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;)V
 		ARG 1 server
-	METHOD method_14351 getServer ()Lnet/minecraft/server/MinecraftServer;
-	METHOD method_14353 bindLocal ()Ljava/net/SocketAddress;
-	METHOD method_14354 bind (Ljava/net/InetAddress;I)V
+	METHOD m_jjvqzhfl getServer ()Lnet/minecraft/server/MinecraftServer;
+	METHOD m_tbgbuosn bindLocal ()Ljava/net/SocketAddress;
+	METHOD m_ctdmjgig bind (Ljava/net/InetAddress;I)V
 		ARG 1 address
 		ARG 2 port
-	METHOD method_14356 stop ()V
-	METHOD method_14357 tick ()V
-	CLASS 1
+	METHOD m_mqdbvrkb stop ()V
+	METHOD m_vgfmlzhs tick ()V
+	CLASS C_ahweulbn
 		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
-	CLASS 2
+	CLASS C_sgmerwzi
 		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
-	CLASS class_5980 DelayingChannelInboundHandler
+	CLASS C_xxpizgmh DelayingChannelInboundHandler
 		COMMENT A channel in-bound handler that only forwards received messages to the next
 		COMMENT channel in-bound handler in the channel pipeline after a random delay between
 		COMMENT {@link #baseDelay} and {@code baseDelay + }{@link #extraDelay} milliseconds.
 		COMMENT
 		COMMENT @apiNote This may be used to simulate a laggy network enviroment.
-		FIELD field_29772 TIMER Lio/netty/util/Timer;
-		FIELD field_29773 baseDelay I
-		FIELD field_29774 extraDelay I
-		FIELD field_29775 packets Ljava/util/List;
+		FIELD f_wqpghlrq TIMER Lio/netty/util/Timer;
+		FIELD f_agsiperk baseDelay I
+		FIELD f_nclupobs extraDelay I
+		FIELD f_ftavjlyt packets Ljava/util/List;
 		METHOD <init> (II)V
 			ARG 1 baseDelay
 			ARG 2 extraDelay
 		METHOD channelRead (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
 			ARG 1 ctx
 			ARG 2 msg
-		METHOD method_34880 delay (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
+		METHOD m_mtrdqbfo delay (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
 			ARG 1 ctx
 			ARG 2 msg
-		METHOD method_34881 forward (Lio/netty/util/Timeout;)V
+		METHOD m_bjakqpdb forward (Lio/netty/util/Timeout;)V
 			ARG 1 timeout
-		CLASS class_5981 Packet
-			FIELD field_29776 context Lio/netty/channel/ChannelHandlerContext;
-			FIELD field_29777 message Ljava/lang/Object;
+		CLASS C_rprtrrer Packet
+			FIELD f_tkoonsox context Lio/netty/channel/ChannelHandlerContext;
+			FIELD f_ohddiuro message Ljava/lang/Object;
 			METHOD <init> (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
 				ARG 1 context
 				ARG 2 message
