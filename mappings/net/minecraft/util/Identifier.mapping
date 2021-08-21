@@ -1,12 +1,12 @@
-CLASS net/minecraft/class_2960 net/minecraft/util/Identifier
+CLASS net/minecraft/unmapped/C_acfwypcn net/minecraft/util/Identifier
 	COMMENT The namespace and path must contain only lowercase letters ([a-z]), digits ([0-9]), or the characters '_', '.', and '-'. The path can also contain the standard path separator '/'.
-	FIELD field_13353 namespace Ljava/lang/String;
-	FIELD field_13354 COMMAND_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
-	FIELD field_13355 path Ljava/lang/String;
-	FIELD field_25139 CODEC Lcom/mojang/serialization/Codec;
-	FIELD field_33380 NAMESPACE_SEPARATOR C
-	FIELD field_33381 DEFAULT_NAMESPACE Ljava/lang/String;
-	FIELD field_33382 REALMS_NAMESPACE Ljava/lang/String;
+	FIELD f_cjrgsfnx namespace Ljava/lang/String;
+	FIELD f_enwfszqo NAMESPACE_SEPARATOR C
+	FIELD f_ffjgmpis CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_goocxpup DEFAULT_NAMESPACE Ljava/lang/String;
+	FIELD f_ueadkoyv COMMAND_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
+	FIELD f_zebprjly REALMS_NAMESPACE Ljava/lang/String;
+	FIELD f_zvqomdkm path Ljava/lang/String;
 	METHOD <init> (Ljava/lang/String;)V
 		COMMENT <p>Takes a string of the form {@code <namespace>:<path>}, for example {@code minecraft:iron_ingot}.
 		COMMENT <p>The string will be split (on the {@code :}) into an identifier with the specified path and namespace.
@@ -22,37 +22,37 @@ CLASS net/minecraft/class_2960 net/minecraft/util/Identifier
 		ARG 1 other
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD method_12829 tryParse (Ljava/lang/String;)Lnet/minecraft/class_2960;
+	METHOD m_abcvrmhn split (Ljava/lang/String;C)[Ljava/lang/String;
+		ARG 0 id
+		ARG 1 delimiter
+	METHOD m_aotpsxav validate (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 id
+	METHOD m_axmotdkb isPathCharacterValid (C)Z
+		ARG 0 character
+	METHOD m_cgggfjbo getNamespace ()Ljava/lang/String;
+	METHOD m_fkrflraw toUnderscoreSeparatedString ()Ljava/lang/String;
+	METHOD m_iggwsgxa splitOn (Ljava/lang/String;C)Lnet/minecraft/unmapped/C_acfwypcn;
+		ARG 0 id
+		ARG 1 delimiter
+	METHOD m_jfqwxuvo isValid (Ljava/lang/String;)Z
+		ARG 0 id
+	METHOD m_pfaqvryy getPath ()Ljava/lang/String;
+	METHOD m_roteqcnj isCharValid (C)Z
+		ARG 0 c
+	METHOD m_tyzukmtm isNamespaceValid (Ljava/lang/String;)Z
+		ARG 0 namespace
+	METHOD m_udmcekoh isPathValid (Ljava/lang/String;)Z
+		ARG 0 path
+	METHOD m_wghahawk fromCommandInput (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_acfwypcn;
+		ARG 0 reader
+	METHOD m_xfhlshxw tryParse (Ljava/lang/String;)Lnet/minecraft/unmapped/C_acfwypcn;
 		COMMENT <p>Parses a string into an {@code Identifier}.
 		COMMENT Takes a string of the form {@code <namespace>:<path>}, for example {@code minecraft:iron_ingot}.
 		COMMENT @return resulting identifier, or {@code null} if the string couldn't be parsed as an identifier
 		ARG 0 id
-	METHOD method_12830 split (Ljava/lang/String;C)[Ljava/lang/String;
-		ARG 0 id
-		ARG 1 delimiter
-	METHOD method_12831 isCharValid (C)Z
-		ARG 0 c
-	METHOD method_12832 getPath ()Ljava/lang/String;
-	METHOD method_12835 fromCommandInput (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/class_2960;
-		ARG 0 reader
-	METHOD method_12836 getNamespace ()Ljava/lang/String;
-	METHOD method_12838 splitOn (Ljava/lang/String;C)Lnet/minecraft/class_2960;
-		ARG 0 id
-		ARG 1 delimiter
-	METHOD method_20207 isValid (Ljava/lang/String;)Z
-		ARG 0 id
-	METHOD method_20208 isPathValid (Ljava/lang/String;)Z
-		ARG 0 path
-	METHOD method_20209 isNamespaceValid (Ljava/lang/String;)Z
-		ARG 0 namespace
-	METHOD method_29184 isPathCharacterValid (C)Z
+	METHOD m_yhdsmowh isNamespaceCharacterValid (C)Z
 		ARG 0 character
-	METHOD method_29185 isNamespaceCharacterValid (C)Z
-		ARG 0 character
-	METHOD method_29186 validate (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
-		ARG 0 id
-	METHOD method_36181 toUnderscoreSeparatedString ()Ljava/lang/String;
-	CLASS class_2961 Serializer
+	CLASS C_lzzvywud Serializer
 		METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 			ARG 1 json
 			ARG 2 type

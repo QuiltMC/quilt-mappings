@@ -1,34 +1,31 @@
-CLASS net/minecraft/class_765 net/minecraft/client/render/LightmapTextureManager
+CLASS net/minecraft/unmapped/C_mbqtswrg net/minecraft/client/render/LightmapTextureManager
 	COMMENT The lightmap texture manager maintains a texture containing the RGBA overlay for each of the 16&times;16 sky and block light combinations.
 	COMMENT <p>
 	COMMENT Also contains some utilities to pack and unpack lightmap coordinates from sky and block light values,
 	COMMENT and some lightmap coordinates constants.
-	FIELD field_21528 flickerIntensity F
-	FIELD field_32767 MAX_LIGHT_COORDINATE I
+	FIELD f_avbrhgty MAX_LIGHT_COORDINATE I
 		COMMENT Represents the maximum lightmap coordinate, where both sky light and block light equals {@code 15}.
 		COMMENT The value of this maximum lightmap coordinate is {@value}.
-	FIELD field_32768 MAX_SKY_LIGHT_COORDINATE I
-		COMMENT Represents the maximum sky-light-wise lightmap coordinate whose value is {@value}.
-		COMMENT This is equivalent to a {@code 15} sky light and {@code 0} block light.
-	FIELD field_32769 MAX_BLOCK_LIGHT_COORDINATE I
+	FIELD f_cfcaiaai MAX_BLOCK_LIGHT_COORDINATE I
 		COMMENT Represents the maximum block-light-wise lightmap coordinate whose value is {@value}.
 		COMMENT This is equivalent to a {@code 0} sky light and {@code 15} block light.
-	FIELD field_4133 image Lnet/minecraft/class_1011;
-	FIELD field_4134 renderer Lnet/minecraft/class_757;
-	FIELD field_4135 dirty Z
-	FIELD field_4136 textureIdentifier Lnet/minecraft/class_2960;
-	FIELD field_4137 client Lnet/minecraft/class_310;
-	FIELD field_4138 texture Lnet/minecraft/class_1043;
-	METHOD <init> (Lnet/minecraft/class_757;Lnet/minecraft/class_310;)V
+	FIELD f_cnpiivgm client Lnet/minecraft/unmapped/C_diboefya;
+	FIELD f_judmklpe image Lnet/minecraft/unmapped/C_axhukiya;
+	FIELD f_loqsclon textureIdentifier Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_pdrelrws MAX_SKY_LIGHT_COORDINATE I
+		COMMENT Represents the maximum sky-light-wise lightmap coordinate whose value is {@value}.
+		COMMENT This is equivalent to a {@code 15} sky light and {@code 0} block light.
+	FIELD f_pyzqabgn flickerIntensity F
+	FIELD f_waepgwzs texture Lnet/minecraft/unmapped/C_lnsozund;
+	FIELD f_yikhitba renderer Lnet/minecraft/unmapped/C_nuodktks;
+	FIELD f_zintekdq dirty Z
+	METHOD <init> (Lnet/minecraft/unmapped/C_nuodktks;Lnet/minecraft/unmapped/C_diboefya;)V
 		ARG 1 renderer
 		ARG 2 client
-	METHOD method_23284 getBrightness (Lnet/minecraft/class_1937;I)F
-		ARG 1 world
-		ARG 2 lightLevel
-	METHOD method_23687 pack (II)I
-		ARG 0 block
-		ARG 1 sky
-	METHOD method_23795 easeOutQuart (F)F
+	METHOD m_asqybqoo update (F)V
+		ARG 1 delta
+	METHOD m_cctsemuy enable ()V
+	METHOD m_jhrbrllr easeOutQuart (F)F
 		COMMENT Represents an easing function.
 		COMMENT <p>
 		COMMENT In this class, it's also used to brighten colors,
@@ -38,12 +35,15 @@ CLASS net/minecraft/class_765 net/minecraft/client/render/LightmapTextureManager
 		COMMENT @see <a href="https://easings.net/#easeOutQuart">https://easings.net/#easeOutQuart</a>
 		ARG 1 x
 			COMMENT represents the absolute progress of the animation in the bounds of 0 (beginning of the animation) and 1 (end of animation)
-	METHOD method_24186 getBlockLightCoordinates (I)I
+	METHOD m_ofspmjzk tick ()V
+	METHOD m_pdaimobd getBlockLightCoordinates (I)I
 		ARG 0 light
-	METHOD method_24187 getSkyLightCoordinates (I)I
+	METHOD m_trjlntnz getBrightness (Lnet/minecraft/unmapped/C_nbzftcdc;I)F
+		ARG 1 world
+		ARG 2 lightLevel
+	METHOD m_wafowgbe getSkyLightCoordinates (I)I
 		ARG 0 light
-	METHOD method_3313 update (F)V
-		ARG 1 delta
-	METHOD method_3314 tick ()V
-	METHOD method_3315 disable ()V
-	METHOD method_3316 enable ()V
+	METHOD m_xzqbkqwf pack (II)I
+		ARG 0 block
+		ARG 1 sky
+	METHOD m_zjkizrcv disable ()V

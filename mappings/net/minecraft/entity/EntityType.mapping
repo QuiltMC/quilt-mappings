@@ -1,20 +1,20 @@
-CLASS net/minecraft/class_1299 net/minecraft/entity/EntityType
-	FIELD field_16526 lootTableId Lnet/minecraft/class_2960;
-	FIELD field_18070 dimensions Lnet/minecraft/class_4048;
-	FIELD field_18981 fireImmune Z
-	FIELD field_19423 spawnableFarFromPlayer Z
-	FIELD field_24085 maxTrackDistance I
-	FIELD field_24086 trackTickInterval I
-	FIELD field_25355 canSpawnInside Lcom/google/common/collect/ImmutableSet;
-	FIELD field_30053 ENTITY_TAG_KEY Ljava/lang/String;
-	FIELD field_6056 saveable Z
-	FIELD field_6072 summonable Z
-	FIELD field_6088 LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD field_6092 name Lnet/minecraft/class_2561;
-	FIELD field_6094 spawnGroup Lnet/minecraft/class_1311;
-	FIELD field_6101 factory Lnet/minecraft/class_1299$class_4049;
-	FIELD field_6106 translationKey Ljava/lang/String;
-	METHOD <init> (Lnet/minecraft/class_1299$class_4049;Lnet/minecraft/class_1311;ZZZZLcom/google/common/collect/ImmutableSet;Lnet/minecraft/class_4048;II)V
+CLASS net/minecraft/unmapped/C_rbvsvago net/minecraft/entity/EntityType
+	FIELD f_biowdhmn saveable Z
+	FIELD f_eqeigtll dimensions Lnet/minecraft/unmapped/C_opcspzss;
+	FIELD f_flouocbe spawnableFarFromPlayer Z
+	FIELD f_gfdztbez factory Lnet/minecraft/unmapped/C_rbvsvago$C_ldnzcsap;
+	FIELD f_gufkmgxt canSpawnInside Lcom/google/common/collect/ImmutableSet;
+	FIELD f_hdmwuynz LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_kideznti translationKey Ljava/lang/String;
+	FIELD f_oatxwgdh trackTickInterval I
+	FIELD f_otocxiwx spawnGroup Lnet/minecraft/unmapped/C_icxdqmro;
+	FIELD f_qtaifrmc ENTITY_TAG_KEY Ljava/lang/String;
+	FIELD f_rwufiink name Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_thxychoy fireImmune Z
+	FIELD f_uezpfejs lootTableId Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_usoczjbr summonable Z
+	FIELD f_vxihnzue maxTrackDistance I
+	METHOD <init> (Lnet/minecraft/unmapped/C_rbvsvago$C_ldnzcsap;Lnet/minecraft/unmapped/C_icxdqmro;ZZZZLcom/google/common/collect/ImmutableSet;Lnet/minecraft/unmapped/C_opcspzss;II)V
 		ARG 1 factory
 		ARG 2 spawnGroup
 		ARG 3 saveable
@@ -25,64 +25,17 @@ CLASS net/minecraft/class_1299 net/minecraft/entity/EntityType
 		ARG 8 dimensions
 		ARG 9 maxTrackDistance
 		ARG 10 trackTickInterval
-	METHOD method_16351 getLootTableId ()Lnet/minecraft/class_2960;
-	METHOD method_17683 createSimpleBoundingBox (DDD)Lnet/minecraft/class_238;
-		ARG 1 feetX
-		ARG 3 feetY
-		ARG 5 feetZ
-	METHOD method_17684 fromNbt (Lnet/minecraft/class_2487;)Ljava/util/Optional;
-		ARG 0 nbt
-	METHOD method_17685 getWidth ()F
-	METHOD method_17686 getHeight ()F
-	METHOD method_17842 loadEntityWithPassengers (Lnet/minecraft/class_2487;Lnet/minecraft/class_1937;Ljava/util/function/Function;)Lnet/minecraft/class_1297;
+	METHOD m_aivzofld getUntranslatedName ()Ljava/lang/String;
+	METHOD m_amxuatmd loadEntityWithPassengers (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_nbzftcdc;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_srenftsa;
 		ARG 0 nbt
 		ARG 1 world
 		ARG 2 entityProcessor
-	METHOD method_17843 (Lnet/minecraft/class_2487;Lnet/minecraft/class_1937;Ljava/util/function/Function;Lnet/minecraft/class_1297;)Lnet/minecraft/class_1297;
-		ARG 3 entity
-	METHOD method_17848 loadEntityFromNbt (Lnet/minecraft/class_2487;Lnet/minecraft/class_1937;)Ljava/util/Optional;
-		ARG 0 nbt
+	METHOD m_avqifmrf createInstanceFromId (ILnet/minecraft/unmapped/C_nbzftcdc;)Lnet/minecraft/unmapped/C_srenftsa;
+		ARG 0 type
 		ARG 1 world
-	METHOD method_18386 getDimensions ()Lnet/minecraft/class_4048;
-	METHOD method_18387 getMaxTrackDistance ()I
-		COMMENT Returns the tracking distance, <b>in chunks</b>, of this type of entity
-		COMMENT for clients. This will be then modified by the server's tracking
-		COMMENT distance multiplier.
-	METHOD method_18388 getTrackTickInterval ()I
-	METHOD method_18389 alwaysUpdateVelocity ()Z
-	METHOD method_19946 isFireImmune ()Z
-	METHOD method_20210 isIn (Lnet/minecraft/class_3494;)Z
-		ARG 1 tag
-	METHOD method_20814 isSpawnableFarFromPlayer ()Z
-	METHOD method_29496 isInvalidSpawn (Lnet/minecraft/class_2680;)Z
-		COMMENT Returns whether the EntityType can spawn inside the given block.
-		COMMENT
-		COMMENT <p>By default, non-fire-immune mobs can't spawn in/on blocks dealing fire damage.
-		COMMENT Any mob can't spawn in wither roses, sweet berry bush, or cacti.
-		COMMENT
-		COMMENT <p>This can be overwritten via {@link EntityType.Builder#allowSpawningInside(Block[])}
-		ARG 1 state
-	METHOD method_31489 streamFromNbt (Ljava/util/List;Lnet/minecraft/class_1937;)Ljava/util/stream/Stream;
-		ARG 0 entityNbtList
-		ARG 1 world
-	METHOD method_35050 getUntranslatedName ()Ljava/lang/String;
-	METHOD method_5881 loadFromEntityNbt (Lnet/minecraft/class_1937;Lnet/minecraft/class_1657;Lnet/minecraft/class_1297;Lnet/minecraft/class_2487;)V
-		ARG 0 world
-		ARG 1 player
-		ARG 2 entity
-		ARG 3 itemNbt
-	METHOD method_5882 getTranslationKey ()Ljava/lang/String;
-	METHOD method_5883 create (Lnet/minecraft/class_1937;)Lnet/minecraft/class_1297;
-		ARG 1 world
-	METHOD method_5884 getOriginY (Lnet/minecraft/class_4538;Lnet/minecraft/class_2338;ZLnet/minecraft/class_238;)D
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 invertY
-		ARG 3 boundingBox
-	METHOD method_5886 newInstance (Lnet/minecraft/class_1937;Lnet/minecraft/class_1299;)Lnet/minecraft/class_1297;
-		ARG 0 world
-		ARG 1 type
-	METHOD method_5888 create (Lnet/minecraft/class_3218;Lnet/minecraft/class_2487;Lnet/minecraft/class_2561;Lnet/minecraft/class_1657;Lnet/minecraft/class_2338;Lnet/minecraft/class_3730;ZZ)Lnet/minecraft/class_1297;
+	METHOD m_bxwwhbep getId (Lnet/minecraft/unmapped/C_rbvsvago;)Lnet/minecraft/unmapped/C_acfwypcn;
+		ARG 0 type
+	METHOD m_bznfifgj spawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_vfoxvzzu;ZZ)Lnet/minecraft/unmapped/C_srenftsa;
 		ARG 1 world
 		ARG 2 itemNbt
 		ARG 3 name
@@ -91,17 +44,8 @@ CLASS net/minecraft/class_1299 net/minecraft/entity/EntityType
 		ARG 6 spawnReason
 		ARG 7 alignPosition
 		ARG 8 invertY
-	METHOD method_5889 createInstanceFromId (ILnet/minecraft/class_1937;)Lnet/minecraft/class_1297;
-		ARG 0 type
-		ARG 1 world
-	METHOD method_5890 getId (Lnet/minecraft/class_1299;)Lnet/minecraft/class_2960;
-		ARG 0 type
-	METHOD method_5891 getSpawnGroup ()Lnet/minecraft/class_1311;
-	METHOD method_5892 getEntityFromNbt (Lnet/minecraft/class_2487;Lnet/minecraft/class_1937;)Ljava/util/Optional;
-		ARG 0 nbt
-		ARG 1 world
-	METHOD method_5893 isSaveable ()Z
-	METHOD method_5894 spawnFromItemStack (Lnet/minecraft/class_3218;Lnet/minecraft/class_1799;Lnet/minecraft/class_1657;Lnet/minecraft/class_2338;Lnet/minecraft/class_3730;ZZ)Lnet/minecraft/class_1297;
+	METHOD m_fbtcpaaa getSpawnGroup ()Lnet/minecraft/unmapped/C_icxdqmro;
+	METHOD m_fddscxhw spawnFromItemStack (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_vfoxvzzu;ZZ)Lnet/minecraft/unmapped/C_srenftsa;
 		ARG 1 world
 		ARG 2 stack
 		ARG 3 player
@@ -109,14 +53,35 @@ CLASS net/minecraft/class_1299 net/minecraft/entity/EntityType
 		ARG 5 spawnReason
 		ARG 6 alignPosition
 		ARG 7 invertY
-	METHOD method_5895 register (Ljava/lang/String;Lnet/minecraft/class_1299$class_1300;)Lnet/minecraft/class_1299;
+	METHOD m_fdnruyqo getWidth ()F
+	METHOD m_ftpxeaet loadFromEntityNbt (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_hincwlhh;)V
+		ARG 0 world
+		ARG 1 player
+		ARG 2 entity
+		ARG 3 itemNbt
+	METHOD m_ibpizuvn register (Ljava/lang/String;Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;)Lnet/minecraft/unmapped/C_rbvsvago;
 		ARG 0 id
 		ARG 1 type
-	METHOD method_5896 isSummonable ()Z
-	METHOD method_5897 getName ()Lnet/minecraft/class_2561;
-	METHOD method_5898 get (Ljava/lang/String;)Ljava/util/Optional;
+	METHOD m_jekxwsdr streamFromNbt (Ljava/util/List;Lnet/minecraft/unmapped/C_nbzftcdc;)Ljava/util/stream/Stream;
+		ARG 0 entityNbtList
+		ARG 1 world
+	METHOD m_kmxavaab getName ()Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_ldijdofu (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_nbzftcdc;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_srenftsa;)Lnet/minecraft/unmapped/C_srenftsa;
+		ARG 3 entity
+	METHOD m_lgmmhhsn get (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 0 id
-	METHOD method_5899 spawn (Lnet/minecraft/class_3218;Lnet/minecraft/class_2487;Lnet/minecraft/class_2561;Lnet/minecraft/class_1657;Lnet/minecraft/class_2338;Lnet/minecraft/class_3730;ZZ)Lnet/minecraft/class_1297;
+	METHOD m_lmjbhqcn getHeight ()F
+	METHOD m_mcypeoaf getDimensions ()Lnet/minecraft/unmapped/C_opcspzss;
+	METHOD m_mdrnoljd isInvalidSpawn (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
+		COMMENT Returns whether the EntityType can spawn inside the given block.
+		COMMENT
+		COMMENT <p>By default, non-fire-immune mobs can't spawn in/on blocks dealing fire damage.
+		COMMENT Any mob can't spawn in wither roses, sweet berry bush, or cacti.
+		COMMENT
+		COMMENT <p>This can be overwritten via {@link EntityType.Builder#allowSpawningInside(Block[])}
+		ARG 1 state
+	METHOD m_mdybyqhc isFireImmune ()Z
+	METHOD m_mtmnzsez create (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_vfoxvzzu;ZZ)Lnet/minecraft/unmapped/C_srenftsa;
 		ARG 1 world
 		ARG 2 itemNbt
 		ARG 3 name
@@ -125,30 +90,66 @@ CLASS net/minecraft/class_1299 net/minecraft/entity/EntityType
 		ARG 6 spawnReason
 		ARG 7 alignPosition
 		ARG 8 invertY
-	CLASS class_1300 Builder
-		FIELD field_18071 dimensions Lnet/minecraft/class_4048;
-		FIELD field_18982 fireImmune Z
-		FIELD field_19424 spawnableFarFromPlayer Z
-		FIELD field_24087 maxTrackingRange I
-		FIELD field_24088 trackingTickInterval I
-		FIELD field_25356 canSpawnInside Lcom/google/common/collect/ImmutableSet;
-		FIELD field_6148 factory Lnet/minecraft/class_1299$class_4049;
-		FIELD field_6149 spawnGroup Lnet/minecraft/class_1311;
-		FIELD field_6150 summonable Z
-		FIELD field_6151 saveable Z
-		METHOD <init> (Lnet/minecraft/class_1299$class_4049;Lnet/minecraft/class_1311;)V
+	METHOD m_ncwoaajw fromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)Ljava/util/Optional;
+		ARG 0 nbt
+	METHOD m_ochmrlxq getLootTableId ()Lnet/minecraft/unmapped/C_acfwypcn;
+	METHOD m_pbjryejn isIn (Lnet/minecraft/unmapped/C_vxhkekom;)Z
+		ARG 1 tag
+	METHOD m_prhqqabw getMaxTrackDistance ()I
+		COMMENT Returns the tracking distance, <b>in chunks</b>, of this type of entity
+		COMMENT for clients. This will be then modified by the server's tracking
+		COMMENT distance multiplier.
+	METHOD m_qmwdwtrt getTrackTickInterval ()I
+	METHOD m_qozztmrb createSimpleBoundingBox (DDD)Lnet/minecraft/unmapped/C_eogzjcbh;
+		ARG 1 feetX
+		ARG 3 feetY
+		ARG 5 feetZ
+	METHOD m_rxnhpjnz getTranslationKey ()Ljava/lang/String;
+	METHOD m_smnrvznt alwaysUpdateVelocity ()Z
+	METHOD m_trhahehh loadEntityFromNbt (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_nbzftcdc;)Ljava/util/Optional;
+		ARG 0 nbt
+		ARG 1 world
+	METHOD m_ugqsfcwj isSummonable ()Z
+	METHOD m_urlvsukk isSpawnableFarFromPlayer ()Z
+	METHOD m_xgptapfy newInstance (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_rbvsvago;)Lnet/minecraft/unmapped/C_srenftsa;
+		ARG 0 world
+		ARG 1 type
+	METHOD m_xhqymhhl getOriginY (Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_kkdaznyh;ZLnet/minecraft/unmapped/C_eogzjcbh;)D
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 invertY
+		ARG 3 boundingBox
+	METHOD m_xnggfozg getEntityFromNbt (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_nbzftcdc;)Ljava/util/Optional;
+		ARG 0 nbt
+		ARG 1 world
+	METHOD m_zgemgmgu create (Lnet/minecraft/unmapped/C_nbzftcdc;)Lnet/minecraft/unmapped/C_srenftsa;
+		ARG 1 world
+	METHOD m_zywlbrpq isSaveable ()Z
+	CLASS C_bkabkpom Builder
+		FIELD f_axojdspr trackingTickInterval I
+		FIELD f_bbnydcbc dimensions Lnet/minecraft/unmapped/C_opcspzss;
+		FIELD f_epawyobk canSpawnInside Lcom/google/common/collect/ImmutableSet;
+		FIELD f_jlixlpyb summonable Z
+		FIELD f_lcwevhkl maxTrackingRange I
+		FIELD f_mftrzmmn saveable Z
+		FIELD f_mjfsgcka fireImmune Z
+		FIELD f_mvwlqhwl factory Lnet/minecraft/unmapped/C_rbvsvago$C_ldnzcsap;
+		FIELD f_nubkztnt spawnableFarFromPlayer Z
+		FIELD f_spyxdntx spawnGroup Lnet/minecraft/unmapped/C_icxdqmro;
+		METHOD <init> (Lnet/minecraft/unmapped/C_rbvsvago$C_ldnzcsap;Lnet/minecraft/unmapped/C_icxdqmro;)V
 			ARG 1 factory
 			ARG 2 spawnGroup
-		METHOD method_17687 setDimensions (FF)Lnet/minecraft/class_1299$class_1300;
+		METHOD m_akpbacxl disableSummon ()Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
+		METHOD m_bjmpwrti makeFireImmune ()Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
+		METHOD m_bzrfvwvl setDimensions (FF)Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
 			ARG 1 width
 			ARG 2 height
-		METHOD method_19947 makeFireImmune ()Lnet/minecraft/class_1299$class_1300;
-		METHOD method_20815 spawnableFarFromPlayer ()Lnet/minecraft/class_1299$class_1300;
-		METHOD method_27299 maxTrackingRange (I)Lnet/minecraft/class_1299$class_1300;
-			ARG 1 maxTrackingRange
-		METHOD method_27300 trackingTickInterval (I)Lnet/minecraft/class_1299$class_1300;
+		METHOD m_doszxblw trackingTickInterval (I)Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
 			ARG 1 trackingTickInterval
-		METHOD method_29497 allowSpawningInside ([Lnet/minecraft/class_2248;)Lnet/minecraft/class_1299$class_1300;
+		METHOD m_enjjbizj create (Lnet/minecraft/unmapped/C_rbvsvago$C_ldnzcsap;Lnet/minecraft/unmapped/C_icxdqmro;)Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
+			ARG 0 factory
+			ARG 1 spawnGroup
+		METHOD m_etirojyd allowSpawningInside ([Lnet/minecraft/unmapped/C_qodpmxmm;)Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
 			COMMENT Allows this type of entity to spawn inside the given block, bypassing the default
 			COMMENT wither rose, sweet berry bush, cactus, and fire-damage-dealing blocks for
 			COMMENT non-fire-resistant mobs.
@@ -158,16 +159,15 @@ CLASS net/minecraft/class_1299 net/minecraft/entity/EntityType
 			COMMENT and wither skeletons can spawn in wither roses. If a block added is not in the default
 			COMMENT blacklist, the addition has no effect.
 			ARG 1 blocks
-		METHOD method_5901 disableSummon ()Lnet/minecraft/class_1299$class_1300;
-		METHOD method_5902 create (Lnet/minecraft/class_1311;)Lnet/minecraft/class_1299$class_1300;
+		METHOD m_fmfrfnno spawnableFarFromPlayer ()Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
+		METHOD m_gvfksrft create (Lnet/minecraft/unmapped/C_icxdqmro;)Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
 			ARG 0 spawnGroup
-		METHOD method_5903 create (Lnet/minecraft/class_1299$class_4049;Lnet/minecraft/class_1311;)Lnet/minecraft/class_1299$class_1300;
-			ARG 0 factory
-			ARG 1 spawnGroup
-		METHOD method_5904 disableSaving ()Lnet/minecraft/class_1299$class_1300;
-		METHOD method_5905 build (Ljava/lang/String;)Lnet/minecraft/class_1299;
+		METHOD m_ipdqlxff maxTrackingRange (I)Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
+			ARG 1 maxTrackingRange
+		METHOD m_thcvghku build (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rbvsvago;
 			ARG 1 id
-	CLASS class_4049 EntityFactory
-		METHOD create (Lnet/minecraft/class_1299;Lnet/minecraft/class_1937;)Lnet/minecraft/class_1297;
+		METHOD m_vlftjczq disableSaving ()Lnet/minecraft/unmapped/C_rbvsvago$C_bkabkpom;
+	CLASS C_ldnzcsap EntityFactory
+		METHOD m_gkafrgya create (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_nbzftcdc;)Lnet/minecraft/unmapped/C_srenftsa;
 			ARG 1 type
 			ARG 2 world

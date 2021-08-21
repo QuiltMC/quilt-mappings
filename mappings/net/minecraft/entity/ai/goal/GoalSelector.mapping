@@ -1,4 +1,4 @@
-CLASS net/minecraft/class_1355 net/minecraft/entity/ai/goal/GoalSelector
+CLASS net/minecraft/unmapped/C_njrjpsoq net/minecraft/entity/ai/goal/GoalSelector
 	COMMENT Manages a set of goals, which are competing for certain controls on the mob.
 	COMMENT Multiple goals can run at the same time, so long as they are all using different controls.
 	COMMENT
@@ -10,32 +10,32 @@ CLASS net/minecraft/class_1355 net/minecraft/entity/ai/goal/GoalSelector
 	COMMENT <p>If two goals have the same priority and are competing for the same control, then one
 	COMMENT goal cannot replace the other if it's running. The goal selector tries to run goals in the order
 	COMMENT they were added.
-	FIELD field_18410 REPLACEABLE_GOAL Lnet/minecraft/class_4135;
-	FIELD field_18411 goalsByControl Ljava/util/Map;
-	FIELD field_6461 goals Ljava/util/Set;
-	FIELD field_6462 disabledControls Ljava/util/EnumSet;
-	FIELD field_6463 profiler Ljava/util/function/Supplier;
-	FIELD field_6464 timeInterval I
-	FIELD field_6466 LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_exrpunui goals Ljava/util/Set;
+	FIELD f_fezxlhws LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_imnzsmee profiler Ljava/util/function/Supplier;
+	FIELD f_jitbfbaj timeInterval I
+	FIELD f_kdsmhcmv disabledControls Ljava/util/EnumSet;
+	FIELD f_nnxmhees goalsByControl Ljava/util/Map;
+	FIELD f_qvjyfjfs REPLACEABLE_GOAL Lnet/minecraft/unmapped/C_shjcwsgw;
 	METHOD <init> (Ljava/util/function/Supplier;)V
 		ARG 1 profiler
-	METHOD method_19048 getRunningGoals ()Ljava/util/stream/Stream;
-	METHOD method_35113 clear ()V
-	METHOD method_35114 setTimeInterval (I)V
-		ARG 1 timeInterval
-	METHOD method_35115 getGoals ()Ljava/util/Set;
-	METHOD method_6273 enableControl (Lnet/minecraft/class_1352$class_4134;)V
-		ARG 1 control
-	METHOD method_6274 disableControl (Lnet/minecraft/class_1352$class_4134;)V
-		ARG 1 control
-	METHOD method_6275 tick ()V
-	METHOD method_6276 setControlEnabled (Lnet/minecraft/class_1352$class_4134;Z)V
-		ARG 1 control
-		ARG 2 enabled
-	METHOD method_6277 add (ILnet/minecraft/class_1352;)V
+	METHOD m_citdfang add (ILnet/minecraft/unmapped/C_smabejvs;)V
 		COMMENT Adds a goal with a certain priority. Goals with <i>lower</i> priorities will replace running goals
 		COMMENT with a higher priority.
 		ARG 1 priority
 		ARG 2 goal
-	METHOD method_6280 remove (Lnet/minecraft/class_1352;)V
+	METHOD m_dovogygj tick ()V
+	METHOD m_dvgppuky enableControl (Lnet/minecraft/unmapped/C_smabejvs$C_kmvbymeg;)V
+		ARG 1 control
+	METHOD m_iiwkidki getRunningGoals ()Ljava/util/stream/Stream;
+	METHOD m_ijnoeohm getGoals ()Ljava/util/Set;
+	METHOD m_kurawiup setTimeInterval (I)V
+		ARG 1 timeInterval
+	METHOD m_lenuhqox disableControl (Lnet/minecraft/unmapped/C_smabejvs$C_kmvbymeg;)V
+		ARG 1 control
+	METHOD m_lwmogaka remove (Lnet/minecraft/unmapped/C_smabejvs;)V
 		ARG 1 goal
+	METHOD m_ovwnkhqg setControlEnabled (Lnet/minecraft/unmapped/C_smabejvs$C_kmvbymeg;Z)V
+		ARG 1 control
+		ARG 2 enabled
+	METHOD m_umjdlafl clear ()V

@@ -1,14 +1,14 @@
-CLASS net/minecraft/class_2684 net/minecraft/network/packet/s2c/play/EntityS2CPacket
-	FIELD field_12305 rotate Z
-	FIELD field_12306 onGround Z
-	FIELD field_12307 deltaZ S
-	FIELD field_12308 deltaY S
-	FIELD field_12309 deltaX S
-	FIELD field_12310 id I
-	FIELD field_12311 pitch B
-	FIELD field_12312 yaw B
-	FIELD field_20849 positionChanged Z
-	FIELD field_33335 COORDINATE_SCALE D
+CLASS net/minecraft/unmapped/C_efbaclbm net/minecraft/network/packet/s2c/play/EntityS2CPacket
+	FIELD f_cwtbiytd yaw B
+	FIELD f_hcostrbf deltaY S
+	FIELD f_jgrdfuro pitch B
+	FIELD f_pkjmzqhc COORDINATE_SCALE D
+	FIELD f_qerusbex rotate Z
+	FIELD f_rgsrcpdo onGround Z
+	FIELD f_rhlkekgr deltaX S
+	FIELD f_umtvrvlo id I
+	FIELD f_wtmskmlq positionChanged Z
+	FIELD f_yxguelpz deltaZ S
 	METHOD <init> (ISSSBBZZZ)V
 		ARG 1 entityId
 		ARG 2 deltaX
@@ -19,36 +19,36 @@ CLASS net/minecraft/class_2684 net/minecraft/network/packet/s2c/play/EntityS2CPa
 		ARG 7 onGround
 		ARG 8 rotate
 		ARG 9 positionChanged
-	METHOD method_11645 getEntity (Lnet/minecraft/class_1937;)Lnet/minecraft/class_1297;
-		ARG 1 world
-	METHOD method_11649 getYaw ()B
-	METHOD method_11650 getPitch ()B
-	METHOD method_11652 hasRotation ()Z
-	METHOD method_11653 isOnGround ()Z
-	METHOD method_18047 encodePacketCoordinate (D)J
+	METHOD m_azeqwkuv isPositionChanged ()Z
+	METHOD m_befeyvbe hasRotation ()Z
+	METHOD m_gnzjscbw decodePacketCoordinate (J)D
 		ARG 0 coord
-	METHOD method_18695 decodePacketCoordinates (JJJ)Lnet/minecraft/class_243;
+	METHOD m_gqcxigdg getDeltaY ()S
+	METHOD m_hpbnqccj getPitch ()B
+	METHOD m_hzsyuynl getEntity (Lnet/minecraft/unmapped/C_nbzftcdc;)Lnet/minecraft/unmapped/C_srenftsa;
+		ARG 1 world
+	METHOD m_ibimncac calculateDeltaPosition (Lnet/minecraft/unmapped/C_xxfpupgv;)Lnet/minecraft/unmapped/C_xxfpupgv;
+		ARG 1 orig
+	METHOD m_kgjtjkrs getDeltaX ()S
+	METHOD m_nyxajmkq getDeltaZ ()S
+	METHOD m_omzxytld isOnGround ()Z
+	METHOD m_sbqgyuqk encodePacketCoordinate (D)J
+		ARG 0 coord
+	METHOD m_snybsrmq decodePacketCoordinates (JJJ)Lnet/minecraft/unmapped/C_xxfpupgv;
 		ARG 0 x
 		ARG 2 y
 		ARG 4 z
-	METHOD method_22826 isPositionChanged ()Z
-	METHOD method_30301 decodePacketCoordinate (J)D
-		ARG 0 coord
-	METHOD method_30302 calculateDeltaPosition (Lnet/minecraft/class_243;)Lnet/minecraft/class_243;
-		ARG 1 orig
-	METHOD method_36150 getDeltaX ()S
-	METHOD method_36151 getDeltaY ()S
-	METHOD method_36152 getDeltaZ ()S
-	CLASS class_2685 MoveRelative
+	METHOD m_xnygjjpq getYaw ()B
+	CLASS C_ixhlokge MoveRelative
 		METHOD <init> (ISSSZ)V
 			ARG 1 entityId
 			ARG 2 deltaX
 			ARG 3 deltaY
 			ARG 4 deltaZ
 			ARG 5 onGround
-		METHOD method_34138 read (Lnet/minecraft/class_2540;)Lnet/minecraft/class_2684$class_2685;
+		METHOD m_jhhrwkpa read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_efbaclbm$C_ixhlokge;
 			ARG 0 buf
-	CLASS class_2686 RotateAndMoveRelative
+	CLASS C_rpurphph RotateAndMoveRelative
 		METHOD <init> (ISSSBBZ)V
 			ARG 1 entityId
 			ARG 2 deltaX
@@ -57,13 +57,13 @@ CLASS net/minecraft/class_2684 net/minecraft/network/packet/s2c/play/EntityS2CPa
 			ARG 5 yaw
 			ARG 6 pitch
 			ARG 7 onGround
-		METHOD method_34139 read (Lnet/minecraft/class_2540;)Lnet/minecraft/class_2684$class_2686;
+		METHOD m_iycoeadm read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_efbaclbm$C_rpurphph;
 			ARG 0 buf
-	CLASS class_2687 Rotate
+	CLASS C_zglwvqxb Rotate
 		METHOD <init> (IBBZ)V
 			ARG 1 entityId
 			ARG 2 yaw
 			ARG 3 pitch
 			ARG 4 onGround
-		METHOD method_34140 read (Lnet/minecraft/class_2540;)Lnet/minecraft/class_2684$class_2687;
+		METHOD m_evmdfzuu read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_efbaclbm$C_zglwvqxb;
 			ARG 0 buf

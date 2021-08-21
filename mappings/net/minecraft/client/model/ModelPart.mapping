@@ -1,35 +1,37 @@
-CLASS net/minecraft/class_630 net/minecraft/client/model/ModelPart
-	FIELD field_3654 pitch F
-	FIELD field_3655 pivotZ F
-	FIELD field_3656 pivotY F
-	FIELD field_3657 pivotX F
-	FIELD field_3661 children Ljava/util/Map;
-	FIELD field_3663 cuboids Ljava/util/List;
-	FIELD field_3665 visible Z
-	FIELD field_3674 roll F
-	FIELD field_3675 yaw F
+CLASS net/minecraft/unmapped/C_wbnxqlgr net/minecraft/client/model/ModelPart
+	FIELD f_etxfeynp pivotZ F
+	FIELD f_fdyewfaf roll F
+	FIELD f_hndfahwy visible Z
+	FIELD f_jkjlytfl pitch F
+	FIELD f_jnxhfpuw cuboids Ljava/util/List;
+	FIELD f_mbscsutp children Ljava/util/Map;
+	FIELD f_pmgiaela pivotY F
+	FIELD f_qaydwicc yaw F
+	FIELD f_szrpxfxm pivotX F
 	METHOD <init> (Ljava/util/List;Ljava/util/Map;)V
 		ARG 1 cuboids
 		ARG 2 children
-	METHOD method_17138 copyTransform (Lnet/minecraft/class_630;)V
+	METHOD m_amscpzbn copyTransform (Lnet/minecraft/unmapped/C_wbnxqlgr;)V
 		ARG 1 part
-	METHOD method_22698 render (Lnet/minecraft/class_4587;Lnet/minecraft/class_4588;II)V
+	METHOD m_funceirx setPivot (FFF)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_fziknxmq isEmpty ()Z
+	METHOD m_jheibcjd forEachCuboid (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_wbnxqlgr$C_wdypaqxq;)V
 		ARG 1 matrices
-		ARG 2 vertices
-		ARG 3 light
-		ARG 4 overlay
-	METHOD method_22699 render (Lnet/minecraft/class_4587;Lnet/minecraft/class_4588;IIFFFF)V
-		ARG 1 matrices
-		ARG 2 vertices
-		ARG 3 light
-		ARG 4 overlay
-		ARG 5 red
-		ARG 6 green
-		ARG 7 blue
-		ARG 8 alpha
-	METHOD method_22700 getRandomCuboid (Ljava/util/Random;)Lnet/minecraft/class_630$class_628;
+		ARG 2 consumer
+	METHOD m_kwrlevbj traverse ()Ljava/util/stream/Stream;
+	METHOD m_kxufwhos (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_wbnxqlgr$C_wdypaqxq;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_wbnxqlgr;)V
+		ARG 3 name
+		ARG 4 part
+	METHOD m_mhlqebkm getRandomCuboid (Ljava/util/Random;)Lnet/minecraft/unmapped/C_wbnxqlgr$C_eyrregqp;
 		ARG 1 random
-	METHOD method_22702 renderCuboids (Lnet/minecraft/class_4587$class_4665;Lnet/minecraft/class_4588;IIFFFF)V
+	METHOD m_paivdlrh forEachCuboid (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_wbnxqlgr$C_wdypaqxq;Ljava/lang/String;)V
+		ARG 1 matrices
+		ARG 2 consumer
+		ARG 3 path
+	METHOD m_pltlhtcm renderCuboids (Lnet/minecraft/unmapped/C_dvxszsnc$C_bvefkoqp;Lnet/minecraft/unmapped/C_xuzdhtgi;IIFFFF)V
 		ARG 1 entry
 		ARG 2 vertexConsumer
 		ARG 3 light
@@ -38,71 +40,39 @@ CLASS net/minecraft/class_630 net/minecraft/client/model/ModelPart
 		ARG 6 green
 		ARG 7 blue
 		ARG 8 alpha
-	METHOD method_22703 rotate (Lnet/minecraft/class_4587;)V
-		ARG 1 matrix
-	METHOD method_2851 setPivot (FFF)V
-		ARG 1 x
-		ARG 2 y
-		ARG 3 z
-	METHOD method_32084 getTransform ()Lnet/minecraft/class_5603;
-	METHOD method_32085 setTransform (Lnet/minecraft/class_5603;)V
-		ARG 1 rotationData
-	METHOD method_32086 getChild (Ljava/lang/String;)Lnet/minecraft/class_630;
+	METHOD m_qnwdijcj getChild (Ljava/lang/String;)Lnet/minecraft/unmapped/C_wbnxqlgr;
 		ARG 1 name
-	METHOD method_32087 isEmpty ()Z
-	METHOD method_32088 traverse ()Ljava/util/stream/Stream;
-	METHOD method_33425 setAngles (FFF)V
+	METHOD m_qybvaloh setAngles (FFF)V
 		ARG 1 pitch
 		ARG 2 yaw
 		ARG 3 roll
-	METHOD method_35745 forEachCuboid (Lnet/minecraft/class_4587;Lnet/minecraft/class_630$class_6229;)V
+	METHOD m_rsdgofzt render (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_xuzdhtgi;II)V
 		ARG 1 matrices
-		ARG 2 consumer
-	METHOD method_35746 forEachCuboid (Lnet/minecraft/class_4587;Lnet/minecraft/class_630$class_6229;Ljava/lang/String;)V
+		ARG 2 vertices
+		ARG 3 light
+		ARG 4 overlay
+	METHOD m_seyodrth render (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_xuzdhtgi;IIFFFF)V
 		ARG 1 matrices
-		ARG 2 consumer
-		ARG 3 path
-	METHOD method_35747 (Lnet/minecraft/class_4587;Lnet/minecraft/class_630$class_6229;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/class_630;)V
-		ARG 3 name
-		ARG 4 part
-	CLASS class_593 Quad
-		FIELD field_21618 direction Lnet/minecraft/class_1160;
-		FIELD field_3502 vertices [Lnet/minecraft/class_630$class_618;
-		METHOD <init> ([Lnet/minecraft/class_630$class_618;FFFFFFZLnet/minecraft/class_2350;)V
-			ARG 1 vertices
-			ARG 2 u1
-			ARG 3 v1
-			ARG 4 u2
-			ARG 5 v2
-			ARG 6 squishU
-			ARG 7 squishV
-			ARG 8 flip
-			ARG 9 direction
-	CLASS class_618 Vertex
-		FIELD field_3603 v F
-		FIELD field_3604 u F
-		FIELD field_3605 pos Lnet/minecraft/class_1160;
-		METHOD <init> (FFFFF)V
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
-			ARG 4 u
-			ARG 5 v
-		METHOD <init> (Lnet/minecraft/class_1160;FF)V
-			ARG 1 pos
-			ARG 2 u
-			ARG 3 v
-		METHOD method_2837 remap (FF)Lnet/minecraft/class_630$class_618;
-			ARG 1 u
-			ARG 2 v
-	CLASS class_628 Cuboid
-		FIELD field_3643 minZ F
-		FIELD field_3644 minY F
-		FIELD field_3645 minX F
-		FIELD field_3646 maxZ F
-		FIELD field_3647 maxY F
-		FIELD field_3648 maxX F
-		FIELD field_3649 sides [Lnet/minecraft/class_630$class_593;
+		ARG 2 vertices
+		ARG 3 light
+		ARG 4 overlay
+		ARG 5 red
+		ARG 6 green
+		ARG 7 blue
+		ARG 8 alpha
+	METHOD m_vldqeufj getTransform ()Lnet/minecraft/unmapped/C_utdgbehd;
+	METHOD m_ycbboxae rotate (Lnet/minecraft/unmapped/C_dvxszsnc;)V
+		ARG 1 matrix
+	METHOD m_zkphzhos setTransform (Lnet/minecraft/unmapped/C_utdgbehd;)V
+		ARG 1 rotationData
+	CLASS C_eyrregqp Cuboid
+		FIELD f_bfpnznnw maxY F
+		FIELD f_mfhelkce maxX F
+		FIELD f_oyqxwgua minX F
+		FIELD f_rnmhmysr minZ F
+		FIELD f_rrnvrpqb minY F
+		FIELD f_zbbljpwh maxZ F
+		FIELD f_zkpkdxkl sides [Lnet/minecraft/unmapped/C_wbnxqlgr$C_hybvpvvv;
 		METHOD <init> (IIFFFFFFFFFZFF)V
 			ARG 1 u
 			ARG 2 v
@@ -118,7 +88,7 @@ CLASS net/minecraft/class_630 net/minecraft/client/model/ModelPart
 			ARG 12 mirror
 			ARG 13 textureWidth
 			ARG 14 textureHeight
-		METHOD method_32089 renderCuboid (Lnet/minecraft/class_4587$class_4665;Lnet/minecraft/class_4588;IIFFFF)V
+		METHOD m_frngziwc renderCuboid (Lnet/minecraft/unmapped/C_dvxszsnc$C_bvefkoqp;Lnet/minecraft/unmapped/C_xuzdhtgi;IIFFFF)V
 			ARG 1 entry
 			ARG 2 vertexConsumer
 			ARG 3 light
@@ -127,8 +97,38 @@ CLASS net/minecraft/class_630 net/minecraft/client/model/ModelPart
 			ARG 6 green
 			ARG 7 blue
 			ARG 8 alpha
-	CLASS class_6229 CuboidConsumer
-		METHOD method_35748 accept (Lnet/minecraft/class_4587$class_4665;Ljava/lang/String;ILnet/minecraft/class_630$class_628;)V
+	CLASS C_hybvpvvv Quad
+		FIELD f_ddxfdrkw direction Lnet/minecraft/unmapped/C_fgwfwivz;
+		FIELD f_pcuppedz vertices [Lnet/minecraft/unmapped/C_wbnxqlgr$C_oniojnrj;
+		METHOD <init> ([Lnet/minecraft/unmapped/C_wbnxqlgr$C_oniojnrj;FFFFFFZLnet/minecraft/unmapped/C_fxhiuupx;)V
+			ARG 1 vertices
+			ARG 2 u1
+			ARG 3 v1
+			ARG 4 u2
+			ARG 5 v2
+			ARG 6 squishU
+			ARG 7 squishV
+			ARG 8 flip
+			ARG 9 direction
+	CLASS C_oniojnrj Vertex
+		FIELD f_ijsspaty u F
+		FIELD f_ybbgyuys v F
+		FIELD f_ynqiyqpp pos Lnet/minecraft/unmapped/C_fgwfwivz;
+		METHOD <init> (FFFFF)V
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 u
+			ARG 5 v
+		METHOD <init> (Lnet/minecraft/unmapped/C_fgwfwivz;FF)V
+			ARG 1 pos
+			ARG 2 u
+			ARG 3 v
+		METHOD m_sukidlre remap (FF)Lnet/minecraft/unmapped/C_wbnxqlgr$C_oniojnrj;
+			ARG 1 u
+			ARG 2 v
+	CLASS C_wdypaqxq CuboidConsumer
+		METHOD m_fszmjils accept (Lnet/minecraft/unmapped/C_dvxszsnc$C_bvefkoqp;Ljava/lang/String;ILnet/minecraft/unmapped/C_wbnxqlgr$C_eyrregqp;)V
 			COMMENT Accepts a cuboid from a model part.
 			COMMENT
 			COMMENT @see ModelPart#forEachCuboid(MatrixStack, CuboidConsumer)

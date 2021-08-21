@@ -1,38 +1,38 @@
-CLASS net/minecraft/class_2535 net/minecraft/network/ClientConnection
+CLASS net/minecraft/unmapped/C_kkccmsao net/minecraft/network/ClientConnection
 	COMMENT A connection backed by a netty channel. It can be one to a client on the
 	COMMENT server or one to a server on a client.
-	FIELD field_11639 NETWORK_PACKETS_MARKER Lorg/apache/logging/log4j/Marker;
-	FIELD field_11640 errored Z
-	FIELD field_11641 NETWORK_MARKER Lorg/apache/logging/log4j/Marker;
-	FIELD field_11642 LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD field_11643 side Lnet/minecraft/class_2598;
-		COMMENT The side this connection is to.
-	FIELD field_11644 packetQueue Ljava/util/Queue;
-	FIELD field_11645 address Ljava/net/SocketAddress;
-	FIELD field_11646 disconnected Z
-	FIELD field_11647 encrypted Z
-	FIELD field_11648 PROTOCOL_ATTRIBUTE_KEY Lio/netty/util/AttributeKey;
+	FIELD f_blphyceg PROTOCOL_ATTRIBUTE_KEY Lio/netty/util/AttributeKey;
 		COMMENT The attribute key for the current network state of the backing netty
 		COMMENT channel.
-	FIELD field_11649 LOCAL_CLIENT_IO_GROUP Lnet/minecraft/class_3528;
-	FIELD field_11650 CLIENT_IO_GROUP Lnet/minecraft/class_3528;
-	FIELD field_11651 channel Lio/netty/channel/Channel;
-	FIELD field_11652 packetListener Lnet/minecraft/class_2547;
-	FIELD field_11653 averagePacketsSent F
-	FIELD field_11654 averagePacketsReceived F
-	FIELD field_11655 ticks I
-	FIELD field_11656 packetsSentCounter I
-	FIELD field_11657 EPOLL_CLIENT_IO_GROUP Lnet/minecraft/class_3528;
-	FIELD field_11658 packetsReceivedCounter I
-	FIELD field_11660 disconnectReason Lnet/minecraft/class_2561;
-	FIELD field_33280 CURRENT_PACKET_COUNTER_WEIGHT F
+	FIELD f_cyoaaogh disconnectReason Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_equkyedw disconnected Z
+	FIELD f_ermunhjs averagePacketsReceived F
+	FIELD f_fkclgagb packetQueue Ljava/util/Queue;
+	FIELD f_fnysrobw NETWORK_MARKER Lorg/apache/logging/log4j/Marker;
+	FIELD f_fyktdcrj averagePacketsSent F
+	FIELD f_gqpmnyag side Lnet/minecraft/unmapped/C_ddqxqexe;
+		COMMENT The side this connection is to.
+	FIELD f_idtipwoh NETWORK_PACKETS_MARKER Lorg/apache/logging/log4j/Marker;
+	FIELD f_ifeutmam packetsReceivedCounter I
+	FIELD f_lsmpjdhy CURRENT_PACKET_COUNTER_WEIGHT F
 		COMMENT Represents when the average packet counter is updated, what percent of the
 		COMMENT value of the average counter is set from the current counter.
 		COMMENT
 		COMMENT <p>The formula is {@link #averagePacketsSent averagePacketsSent} = {@value}
 		COMMENT &times; {@link #packetsSentCounter packetsSentCounter} + (1 - {@value}) &times;
 		COMMENT {@code averagePacketsSent}.
-	METHOD <init> (Lnet/minecraft/class_2598;)V
+	FIELD f_lxkkltae encrypted Z
+	FIELD f_olsqrnwe LOCAL_CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_lzozgbao;
+	FIELD f_pbxxxduh CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_lzozgbao;
+	FIELD f_pjrldwak channel Lio/netty/channel/Channel;
+	FIELD f_qstbtdcu packetListener Lnet/minecraft/unmapped/C_wqwadgkt;
+	FIELD f_sruotucb ticks I
+	FIELD f_tvtykucv errored Z
+	FIELD f_twolqxad address Ljava/net/SocketAddress;
+	FIELD f_uxndikrz packetsSentCounter I
+	FIELD f_vipstcdp EPOLL_CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_lzozgbao;
+	FIELD f_vtdimpsl LOGGER Lorg/apache/logging/log4j/Logger;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ddqxqexe;)V
 		ARG 1 side
 	METHOD channelActive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 1 context
@@ -44,34 +44,53 @@ CLASS net/minecraft/class_2535 net/minecraft/network/ClientConnection
 	METHOD exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
 		ARG 1 context
 		ARG 2 ex
-	METHOD method_10743 send (Lnet/minecraft/class_2596;)V
-		ARG 1 packet
-	METHOD method_10744 getPacketListener ()Lnet/minecraft/class_2547;
-	METHOD method_10745 getAveragePacketsSent ()F
-	METHOD method_10746 setupEncryption (Ljavax/crypto/Cipher;Ljavax/crypto/Cipher;)V
-		ARG 1 decryptionCipher
-		ARG 2 encryptionCipher
-	METHOD method_10747 disconnect (Lnet/minecraft/class_2561;)V
-		ARG 1 disconnectReason
-	METHOD method_10748 getDisconnectReason ()Lnet/minecraft/class_2561;
-	METHOD method_10750 setState (Lnet/minecraft/class_2539;)V
+	METHOD m_aopeqxrw isLocal ()Z
+	METHOD m_axqmjhpx isOpen ()Z
+	METHOD m_azeqcgis getAddress ()Ljava/net/SocketAddress;
+	METHOD m_bpjfviiz getSide ()Lnet/minecraft/unmapped/C_ddqxqexe;
+		COMMENT Returns the side of this connection, or the direction of the packets received
+		COMMENT by this connection.
+	METHOD m_bugzsigi getState ()Lnet/minecraft/unmapped/C_mrmbodxk;
+		COMMENT Returns the current network state of this connection.
+	METHOD m_celxelut tick ()V
+	METHOD m_coxolwhb getPacketListener ()Lnet/minecraft/unmapped/C_wqwadgkt;
+	METHOD m_eflfwaom setState (Lnet/minecraft/unmapped/C_mrmbodxk;)V
 		ARG 1 state
-	METHOD method_10751 sendQueuedPackets ()V
-	METHOD method_10752 send (Lnet/minecraft/class_2596;Lio/netty/util/concurrent/GenericFutureListener;)V
+	METHOD m_eilgtyyv sendInternal (Lnet/minecraft/unmapped/C_lrjrtjyz;Lio/netty/util/concurrent/GenericFutureListener;Lnet/minecraft/unmapped/C_mrmbodxk;Lnet/minecraft/unmapped/C_mrmbodxk;)V
 		ARG 1 packet
 		ARG 2 callback
-	METHOD method_10753 connect (Ljava/net/InetSocketAddress;Z)Lnet/minecraft/class_2535;
+	METHOD m_fmhkughu getAveragePacketsSent ()F
+	METHOD m_gfyfsvbe setupEncryption (Ljavax/crypto/Cipher;Ljavax/crypto/Cipher;)V
+		ARG 1 decryptionCipher
+		ARG 2 encryptionCipher
+	METHOD m_gpelptbk disconnect (Lnet/minecraft/unmapped/C_tdwiqadr;)V
+		ARG 1 disconnectReason
+	METHOD m_gtwpkmgf send (Lnet/minecraft/unmapped/C_lrjrtjyz;Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 1 packet
+		ARG 2 callback
+	METHOD m_ifbgacgb sendImmediately (Lnet/minecraft/unmapped/C_lrjrtjyz;Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 1 packet
+		ARG 2 callback
+	METHOD m_igjgaqkv connect (Ljava/net/InetSocketAddress;Z)Lnet/minecraft/unmapped/C_kkccmsao;
 		ARG 0 address
 		ARG 1 useEpoll
-	METHOD method_10754 tick ()V
-	METHOD method_10755 getAddress ()Ljava/net/SocketAddress;
-	METHOD method_10756 isLocal ()Z
-	METHOD method_10757 disableAutoRead ()V
-	METHOD method_10758 isOpen ()Z
-	METHOD method_10759 handlePacket (Lnet/minecraft/class_2596;Lnet/minecraft/class_2547;)V
+	METHOD m_ihgmtpyl connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/unmapped/C_kkccmsao;
+		ARG 0 address
+	METHOD m_ihimstij getAveragePacketsReceived ()F
+	METHOD m_jimqbaru isEncrypted ()Z
+	METHOD m_kefzhmlw handleDisconnection ()V
+	METHOD m_lqzuqwyb getDisconnectReason ()Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_mdhmvbqk getOppositeSide ()Lnet/minecraft/unmapped/C_ddqxqexe;
+		COMMENT Returns the opposite side of this connection, or the direction of the packets
+		COMMENT sent by this connection.
+	METHOD m_naypgyxc disableAutoRead ()V
+	METHOD m_qdudqpnb hasChannel ()Z
+	METHOD m_rjucfoge send (Lnet/minecraft/unmapped/C_lrjrtjyz;)V
+		ARG 1 packet
+	METHOD m_rkynorgr handlePacket (Lnet/minecraft/unmapped/C_lrjrtjyz;Lnet/minecraft/unmapped/C_wqwadgkt;)V
 		ARG 0 packet
 		ARG 1 listener
-	METHOD method_10760 setCompressionThreshold (IZ)V
+	METHOD m_tpuzxfyu setCompressionThreshold (IZ)V
 		COMMENT Sets the compression threshold of this connection.
 		COMMENT
 		COMMENT <p>Packets over the threshold in size will be written as a {@code 0}
@@ -84,43 +103,24 @@ CLASS net/minecraft/class_2535 net/minecraft/network/ClientConnection
 			COMMENT the compression threshold, in number of bytes
 		ARG 2 rejectsBadPackets
 			COMMENT whether this connection may abort if a compressed packet with a bad size is received
-	METHOD method_10762 getAveragePacketsReceived ()F
-	METHOD method_10763 setPacketListener (Lnet/minecraft/class_2547;)V
+	METHOD m_ucfjgpka sendQueuedPackets ()V
+	METHOD m_ynjreixt updateStats ()V
+	METHOD m_zumfpoqq setPacketListener (Lnet/minecraft/unmapped/C_wqwadgkt;)V
 		COMMENT Sets the packet listener that will handle oncoming packets, including
 		COMMENT ones that are not yet handled by the current packet listener.
 		COMMENT
 		COMMENT @apiNote This may be called from the {@linkplain #packetListener} stored
 		COMMENT in this connection.
 		ARG 1 listener
-	METHOD method_10764 sendImmediately (Lnet/minecraft/class_2596;Lio/netty/util/concurrent/GenericFutureListener;)V
-		ARG 1 packet
-		ARG 2 callback
-	METHOD method_10768 handleDisconnection ()V
-	METHOD method_10769 connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/class_2535;
-		ARG 0 address
-	METHOD method_10771 isEncrypted ()Z
-	METHOD method_10772 hasChannel ()Z
-	METHOD method_30615 updateStats ()V
-	METHOD method_32306 getState ()Lnet/minecraft/class_2539;
-		COMMENT Returns the current network state of this connection.
-	METHOD method_36121 getSide ()Lnet/minecraft/class_2598;
-		COMMENT Returns the side of this connection, or the direction of the packets received
-		COMMENT by this connection.
-	METHOD method_36122 getOppositeSide ()Lnet/minecraft/class_2598;
-		COMMENT Returns the opposite side of this connection, or the direction of the packets
-		COMMENT sent by this connection.
-	METHOD method_36942 sendInternal (Lnet/minecraft/class_2596;Lio/netty/util/concurrent/GenericFutureListener;Lnet/minecraft/class_2539;Lnet/minecraft/class_2539;)V
-		ARG 1 packet
-		ARG 2 callback
-	CLASS 1
+	CLASS C_gfcuozie
 		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
-	CLASS 2
+	CLASS C_pxrikruq
 		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
-	CLASS class_2536 QueuedPacket
-		FIELD field_11661 packet Lnet/minecraft/class_2596;
-		FIELD field_11662 callback Lio/netty/util/concurrent/GenericFutureListener;
-		METHOD <init> (Lnet/minecraft/class_2596;Lio/netty/util/concurrent/GenericFutureListener;)V
+	CLASS C_qfkmqxhz QueuedPacket
+		FIELD f_lbazcijq packet Lnet/minecraft/unmapped/C_lrjrtjyz;
+		FIELD f_yubkzqgo callback Lio/netty/util/concurrent/GenericFutureListener;
+		METHOD <init> (Lnet/minecraft/unmapped/C_lrjrtjyz;Lio/netty/util/concurrent/GenericFutureListener;)V
 			ARG 1 packet
 			ARG 2 callback

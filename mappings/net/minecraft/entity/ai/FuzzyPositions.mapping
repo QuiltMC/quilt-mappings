@@ -1,39 +1,12 @@
-CLASS net/minecraft/class_5535 net/minecraft/entity/ai/FuzzyPositions
-	FIELD field_30264 GAUSS_RANGE I
-	METHOD method_31537 towardTarget (Lnet/minecraft/class_1314;ILjava/util/Random;Lnet/minecraft/class_2338;)Lnet/minecraft/class_2338;
-		COMMENT Adjusts the input {@code fuzz} slightly toward the given {@code entity}'s
-		COMMENT {@link net.minecraft.entity.mob.MobEntity#getPositionTarget() position target}
-		COMMENT if it exists.
-		ARG 0 entity
-		ARG 1 horizontalRange
-		ARG 2 random
-		ARG 3 fuzz
-	METHOD method_31538 guessBestPathTarget (Lnet/minecraft/class_1314;Ljava/util/function/Supplier;)Lnet/minecraft/class_243;
-		COMMENT Calls {@link #guessBest(Supplier, ToDoubleFunction)} with the {@code entity}'s
-		COMMENT path finding favor as the {@code scorer}.
-		ARG 0 entity
-		ARG 1 factory
-	METHOD method_31539 upWhile (Lnet/minecraft/class_2338;IILjava/util/function/Predicate;)Lnet/minecraft/class_2338;
-		COMMENT Returns the {@code extraAbove + 1}th closest position higher than the
-		COMMENT input {@code pos} that does not fulfill {@code condition}, or a
-		COMMENT position with y set to {@code maxY}.
-		ARG 0 pos
-		ARG 1 extraAbove
-		ARG 2 max
-		ARG 3 condition
-	METHOD method_31540 upWhile (Lnet/minecraft/class_2338;ILjava/util/function/Predicate;)Lnet/minecraft/class_2338;
-		COMMENT Returns the closest position higher than the input {@code pos} that does
-		COMMENT not fulfill {@code condition}, or a position with y set to {@code maxY}.
-		ARG 0 pos
-		ARG 1 maxY
-		ARG 2 condition
-	METHOD method_31541 localFuzz (Ljava/util/Random;II)Lnet/minecraft/class_2338;
-		COMMENT Creates a fuzzy offset position within the given horizontal and vertical
-		COMMENT ranges.
-		ARG 0 random
-		ARG 1 horizontalRange
-		ARG 2 verticalRange
-	METHOD method_31542 localFuzz (Ljava/util/Random;IIIDDD)Lnet/minecraft/class_2338;
+CLASS net/minecraft/unmapped/C_rtfcxzif net/minecraft/entity/ai/FuzzyPositions
+	FIELD f_klpfnpdn GAUSS_RANGE I
+	METHOD m_fncfsvnz guessBest (Ljava/util/function/Supplier;Ljava/util/function/ToDoubleFunction;)Lnet/minecraft/unmapped/C_xxfpupgv;
+		COMMENT Returns the {@link Vec3d#ofBottomCenter(BlockPos) bottom center} of a highest scoring
+		COMMENT position, as determined by {@code scorer}, out of 10 tries on positions obtained from
+		COMMENT {@code factory}.
+		ARG 0 factory
+		ARG 1 scorer
+	METHOD m_hnsnubze localFuzz (Ljava/util/Random;IIIDDD)Lnet/minecraft/unmapped/C_kkdaznyh;
 		COMMENT Tries to create a fuzzy offset position from the direction and the angle
 		COMMENT range given. It fulfills the constraints given by {@code horizontalRange}
 		COMMENT and {@code verticalRange} and returns {@code null} if it cannot do so.
@@ -44,9 +17,36 @@ CLASS net/minecraft/class_5535 net/minecraft/entity/ai/FuzzyPositions
 		ARG 4 directionX
 		ARG 6 directionZ
 		ARG 8 angleRange
-	METHOD method_31543 guessBest (Ljava/util/function/Supplier;Ljava/util/function/ToDoubleFunction;)Lnet/minecraft/class_243;
-		COMMENT Returns the {@link Vec3d#ofBottomCenter(BlockPos) bottom center} of a highest scoring
-		COMMENT position, as determined by {@code scorer}, out of 10 tries on positions obtained from
-		COMMENT {@code factory}.
-		ARG 0 factory
-		ARG 1 scorer
+	METHOD m_mcnfiyqg upWhile (Lnet/minecraft/unmapped/C_kkdaznyh;ILjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_kkdaznyh;
+		COMMENT Returns the closest position higher than the input {@code pos} that does
+		COMMENT not fulfill {@code condition}, or a position with y set to {@code maxY}.
+		ARG 0 pos
+		ARG 1 maxY
+		ARG 2 condition
+	METHOD m_ojpuixak localFuzz (Ljava/util/Random;II)Lnet/minecraft/unmapped/C_kkdaznyh;
+		COMMENT Creates a fuzzy offset position within the given horizontal and vertical
+		COMMENT ranges.
+		ARG 0 random
+		ARG 1 horizontalRange
+		ARG 2 verticalRange
+	METHOD m_pskmztcd upWhile (Lnet/minecraft/unmapped/C_kkdaznyh;IILjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_kkdaznyh;
+		COMMENT Returns the {@code extraAbove + 1}th closest position higher than the
+		COMMENT input {@code pos} that does not fulfill {@code condition}, or a
+		COMMENT position with y set to {@code maxY}.
+		ARG 0 pos
+		ARG 1 extraAbove
+		ARG 2 max
+		ARG 3 condition
+	METHOD m_ugtjslhi towardTarget (Lnet/minecraft/unmapped/C_hbiyadqh;ILjava/util/Random;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_kkdaznyh;
+		COMMENT Adjusts the input {@code fuzz} slightly toward the given {@code entity}'s
+		COMMENT {@link net.minecraft.entity.mob.MobEntity#getPositionTarget() position target}
+		COMMENT if it exists.
+		ARG 0 entity
+		ARG 1 horizontalRange
+		ARG 2 random
+		ARG 3 fuzz
+	METHOD m_vcxwruzo guessBestPathTarget (Lnet/minecraft/unmapped/C_hbiyadqh;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_xxfpupgv;
+		COMMENT Calls {@link #guessBest(Supplier, ToDoubleFunction)} with the {@code entity}'s
+		COMMENT path finding favor as the {@code scorer}.
+		ARG 0 entity
+		ARG 1 factory

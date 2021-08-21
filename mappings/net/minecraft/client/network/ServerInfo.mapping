@@ -1,55 +1,55 @@
-CLASS net/minecraft/class_642 net/minecraft/client/network/ServerInfo
+CLASS net/minecraft/unmapped/C_ggzdltox net/minecraft/client/network/ServerInfo
 	COMMENT The information of a server entry in the list of servers available in
 	COMMENT the multiplayer screen from the menu. The list of these servers is
 	COMMENT stored in the {@code servers.dat} file within the client game directory.
-	FIELD field_3752 name Ljava/lang/String;
-	FIELD field_3753 playerCountLabel Lnet/minecraft/class_2561;
-	FIELD field_3754 online Z
-	FIELD field_3755 resourcePackPolicy Lnet/minecraft/class_642$class_643;
-	FIELD field_3756 protocolVersion I
-	FIELD field_3757 label Lnet/minecraft/class_2561;
-	FIELD field_3758 ping J
-	FIELD field_3759 icon Ljava/lang/String;
-	FIELD field_3760 version Lnet/minecraft/class_2561;
-	FIELD field_3761 address Ljava/lang/String;
-	FIELD field_3762 playerListSummary Ljava/util/List;
-	FIELD field_3763 local Z
+	FIELD f_bstxngzn protocolVersion I
+	FIELD f_etfpchjs version Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_fkhddrcz playerCountLabel Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_gyqxmuwm ping J
+	FIELD f_hemsnzjp local Z
+	FIELD f_izmzyqyu name Ljava/lang/String;
+	FIELD f_jsgyyqhm label Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_uvlvfazs online Z
+	FIELD f_vkgpbree icon Ljava/lang/String;
+	FIELD f_wasnrwzn address Ljava/lang/String;
+	FIELD f_wzueydos resourcePackPolicy Lnet/minecraft/unmapped/C_ggzdltox$C_vbxpeeaj;
+	FIELD f_zlrruidm playerListSummary Ljava/util/List;
 	METHOD <init> (Ljava/lang/String;Ljava/lang/String;Z)V
 		ARG 1 name
 		ARG 2 address
 		ARG 3 local
-	METHOD method_2989 setIcon (Ljava/lang/String;)V
+	METHOD m_fvdvsdal getIcon ()Ljava/lang/String;
+	METHOD m_mjcthjtn copyFrom (Lnet/minecraft/unmapped/C_ggzdltox;)V
+		ARG 1 serverInfo
+	METHOD m_ozumoodm setIcon (Ljava/lang/String;)V
 		ARG 1 icon
-	METHOD method_2990 getResourcePackPolicy ()Lnet/minecraft/class_642$class_643;
-		COMMENT {@return the policy on resource packs sent by this server}
-	METHOD method_2991 getIcon ()Ljava/lang/String;
-	METHOD method_2992 toNbt ()Lnet/minecraft/class_2487;
-	METHOD method_2993 fromNbt (Lnet/minecraft/class_2487;)Lnet/minecraft/class_642;
-		ARG 0 root
-	METHOD method_2994 isLocal ()Z
-	METHOD method_2995 setResourcePackPolicy (Lnet/minecraft/class_642$class_643;)V
+	METHOD m_pyrsbelv isLocal ()Z
+	METHOD m_qmnilvpt setResourcePackPolicy (Lnet/minecraft/unmapped/C_ggzdltox$C_vbxpeeaj;)V
 		COMMENT Sets the resource pack policy on this server.
 		COMMENT
 		COMMENT <p>This is called when a user has responded to the prompt on whether to
 		COMMENT accept server resource packs from this server in the future.
 		ARG 1 policy
-	METHOD method_2996 copyFrom (Lnet/minecraft/class_642;)V
-		ARG 1 serverInfo
-	CLASS class_643 ResourcePackPolicy
+	METHOD m_xmdwapkz getResourcePackPolicy ()Lnet/minecraft/unmapped/C_ggzdltox$C_vbxpeeaj;
+		COMMENT {@return the policy on resource packs sent by this server}
+	METHOD m_ylomrdgm toNbt ()Lnet/minecraft/unmapped/C_hincwlhh;
+	METHOD m_zwnxyytw fromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_ggzdltox;
+		ARG 0 root
+	CLASS C_vbxpeeaj ResourcePackPolicy
 		COMMENT The policy of the client when this server sends a {@linkplain
 		COMMENT net.minecraft.network.packet.s2c.play.ResourcePackSendS2CPacket server
 		COMMENT resource pack}.
 		COMMENT
 		COMMENT @see ServerInfo#getResourcePackPolicy()
-		FIELD field_3764 DISABLED Lnet/minecraft/class_642$class_643;
+		FIELD f_jlmnthvs DISABLED Lnet/minecraft/unmapped/C_ggzdltox$C_vbxpeeaj;
 			COMMENT Always rejects the resource pack.
-		FIELD field_3765 name Lnet/minecraft/class_2561;
-		FIELD field_3766 RESOURCE_PACK_POLICIES [Lnet/minecraft/class_642$class_643;
-		FIELD field_3767 PROMPT Lnet/minecraft/class_642$class_643;
+		FIELD f_paufquef PROMPT Lnet/minecraft/unmapped/C_ggzdltox$C_vbxpeeaj;
 			COMMENT Opens a screen on whether to always accept or reject resource packs from
 			COMMENT this server for the current pack or any pack in the future.
-		FIELD field_3768 ENABLED Lnet/minecraft/class_642$class_643;
+		FIELD f_reptcpsa name Lnet/minecraft/unmapped/C_tdwiqadr;
+		FIELD f_tnzdhyek ENABLED Lnet/minecraft/unmapped/C_ggzdltox$C_vbxpeeaj;
 			COMMENT Always accepts the resource pack and starts downloading it.
+		FIELD f_veeczgco RESOURCE_PACK_POLICIES [Lnet/minecraft/unmapped/C_ggzdltox$C_vbxpeeaj;
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
 			ARG 3 name
-		METHOD method_2997 getName ()Lnet/minecraft/class_2561;
+		METHOD m_llzfuccw getName ()Lnet/minecraft/unmapped/C_tdwiqadr;

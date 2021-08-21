@@ -1,14 +1,11 @@
-CLASS net/minecraft/class_5413 net/minecraft/tag/RequiredTagListRegistry
-	FIELD field_25741 ALL Ljava/util/List;
-	FIELD field_28303 REQUIRED_LIST_KEYS Ljava/util/Set;
-	METHOD method_30196 clearAllTags ()V
-	METHOD method_30198 updateTagManager (Lnet/minecraft/class_5415;)V
-		ARG 0 tagManager
-	METHOD method_30199 (Lnet/minecraft/class_5415;Lnet/minecraft/class_5120;)V
-		ARG 1 list
-	METHOD method_30200 (Lcom/google/common/collect/Multimap;Lnet/minecraft/class_5415;Lnet/minecraft/class_5120;)V
-		ARG 2 list
-	METHOD method_30201 register (Lnet/minecraft/class_5321;Ljava/lang/String;)Lnet/minecraft/class_5120;
+CLASS net/minecraft/unmapped/C_hpyglvdz net/minecraft/tag/RequiredTagListRegistry
+	FIELD f_craftsxa REQUIRED_LIST_KEYS Ljava/util/Set;
+	FIELD f_tjzgumfd ALL Ljava/util/List;
+	METHOD m_epsogyrp forEach (Ljava/util/function/Consumer;)V
+		ARG 0 consumer
+	METHOD m_eqryxxkg validateRegistrations ()V
+	METHOD m_jzxlepzv createBuiltinTagManager ()Lnet/minecraft/unmapped/C_foolhgqs;
+	METHOD m_otwabtms register (Lnet/minecraft/unmapped/C_hcaelhhx;Ljava/lang/String;)Lnet/minecraft/unmapped/C_qwjonqge;
 		COMMENT Creates and registers a required tag list.
 		COMMENT
 		COMMENT <p>The registered tag must be in the set returned by {@link #getBuiltinTags()},
@@ -20,17 +17,20 @@ CLASS net/minecraft/class_5413 net/minecraft/tag/RequiredTagListRegistry
 			COMMENT the key representing the element type of the tags
 		ARG 1 dataType
 			COMMENT the data type, or ID's path prefix, for the tag JSONs in the data pack
-	METHOD method_30202 validateRegistrations ()V
-	METHOD method_30203 getMissingTags (Lnet/minecraft/class_5415;)Lcom/google/common/collect/Multimap;
-		ARG 0 tagManager
-	METHOD method_33150 (Lnet/minecraft/class_5415$class_5749;Lnet/minecraft/class_5120;)V
+	METHOD m_pdazetmy (Lnet/minecraft/unmapped/C_foolhgqs$C_pddlxsew;Lnet/minecraft/unmapped/C_qwjonqge;)V
 		ARG 1 list
-	METHOD method_33151 forEach (Ljava/util/function/Consumer;)V
-		ARG 0 consumer
-	METHOD method_33152 createBuiltinTagManager ()Lnet/minecraft/class_5415;
-	METHOD method_33153 getBuiltinTags ()Ljava/util/Set;
-	METHOD method_33154 validate ()V
+	METHOD m_pozopbyw getMissingTags (Lnet/minecraft/unmapped/C_foolhgqs;)Lcom/google/common/collect/Multimap;
+		ARG 0 tagManager
+	METHOD m_qbrntwfm (Lnet/minecraft/unmapped/C_foolhgqs;Lnet/minecraft/unmapped/C_qwjonqge;)V
+		ARG 1 list
+	METHOD m_qnxdecyo updateTagManager (Lnet/minecraft/unmapped/C_foolhgqs;)V
+		ARG 0 tagManager
+	METHOD m_sevoloel clearAllTags ()V
+	METHOD m_teagizxc getBuiltinTags ()Ljava/util/Set;
+	METHOD m_wgjluqts validate ()V
 		COMMENT Ensures that each key in {@link #REQUIRED_LIST_KEYS} have a corresponding list
 		COMMENT in the return value of {@link #getBuiltinTags()}.
 		COMMENT
 		COMMENT @throws IllegalStateException when the validation fails
+	METHOD m_yohthdqd (Lcom/google/common/collect/Multimap;Lnet/minecraft/unmapped/C_foolhgqs;Lnet/minecraft/unmapped/C_qwjonqge;)V
+		ARG 2 list

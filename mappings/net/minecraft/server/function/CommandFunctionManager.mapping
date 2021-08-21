@@ -1,27 +1,28 @@
-CLASS net/minecraft/class_2991 net/minecraft/server/function/CommandFunctionManager
+CLASS net/minecraft/unmapped/C_wnkocwbn net/minecraft/server/function/CommandFunctionManager
 	COMMENT The command function manager implements execution of functions, like that from
 	COMMENT the {@code function} command.
-	FIELD field_13412 LOAD_TAG_ID Lnet/minecraft/class_2960;
-	FIELD field_13417 TICK_TAG_ID Lnet/minecraft/class_2960;
-	FIELD field_13418 tickFunctions Ljava/util/List;
+	FIELD f_baenwzyh execution Lnet/minecraft/unmapped/C_wnkocwbn$C_fzfyrieu;
+		COMMENT The active execution within this manager.
+	FIELD f_bmufffma NO_TRACE_IN_FUNCTION_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
+		COMMENT A localized piece of text indicating that calling the debug command to debug
+		COMMENT functions from within a function is not supported.
+	FIELD f_boxquauq server Lnet/minecraft/server/MinecraftServer;
+	FIELD f_bzhioxes tickFunctions Ljava/util/List;
 		COMMENT A list of {@code minecraft:tick} tag functions to run on every tick. Set up on
 		COMMENT load, this is more efficient than polling the tag from the {@link #loader}
 		COMMENT every tick.
-	FIELD field_13419 server Lnet/minecraft/server/MinecraftServer;
-	FIELD field_13422 justLoaded Z
+	FIELD f_dnqkehpc LOAD_TAG_ID Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_furdniwy TICK_TAG_ID Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_ltgggeih justLoaded Z
 		COMMENT Whether this command function manager has just {@linkplain #load(FunctionLoader)
 		COMMENT loaded} and should run all functions in the {@code minecraft:load} function tag.
-	FIELD field_25333 loader Lnet/minecraft/class_5349;
+	FIELD f_wlippwki loader Lnet/minecraft/unmapped/C_vwhuveoc;
 		COMMENT The source of functions for this command function manager.
-	FIELD field_33542 NO_TRACE_IN_FUNCTION_TEXT Lnet/minecraft/class_2561;
-		COMMENT A localized piece of text indicating that calling the debug command to debug
-		COMMENT functions from within a function is not supported.
-	FIELD field_33543 execution Lnet/minecraft/class_2991$class_6345;
-		COMMENT The active execution within this manager.
-	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/class_5349;)V
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_vwhuveoc;)V
 		ARG 1 server
 		ARG 2 loader
-	METHOD method_12899 getScheduledCommandSource ()Lnet/minecraft/class_2168;
+	METHOD m_dwbwlohf getAllFunctions ()Ljava/lang/Iterable;
+	METHOD m_fxwbkcoi getScheduledCommandSource ()Lnet/minecraft/unmapped/C_krlbnnep;
 		COMMENT {@return the command source to execute scheduled functions} Scheduled functions
 		COMMENT are those from the {@code /schedule} command and those from the {@code
 		COMMENT minecraft:tick} tag.
@@ -30,37 +31,15 @@ CLASS net/minecraft/class_2991 net/minecraft/server/function/CommandFunctionMana
 		COMMENT has permission level 2} and is {@linkplain ServerCommandSource#withSilent()
 		COMMENT silent} compared to the server's {@linkplain MinecraftServer#getCommandSource()
 		COMMENT command source}.
-	METHOD method_12900 getDispatcher ()Lcom/mojang/brigadier/CommandDispatcher;
-	METHOD method_12902 getMaxCommandChainLength ()I
-	METHOD method_12904 execute (Lnet/minecraft/class_2158;Lnet/minecraft/class_2168;)I
-		COMMENT Executes a function.
-		COMMENT
-		COMMENT <p>This is same as calling {@link #execute(CommandFunction, ServerCommandSource,
-		COMMENT Tracer) execute(function, source, null)}.
-		COMMENT
-		COMMENT @return the command output value
-		COMMENT @see #execute(CommandFunction, ServerCommandSource, Tracer)
-		ARG 1 function
-			COMMENT the function
-		ARG 2 source
-			COMMENT the command source to execute with
-	METHOD method_12905 getFunction (Lnet/minecraft/class_2960;)Ljava/util/Optional;
+	METHOD m_hizkshck tick ()V
+	METHOD m_hqlacucw getTag (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_vxhkekom;
 		ARG 1 id
-	METHOD method_18699 tick ()V
-	METHOD method_29460 executeAll (Ljava/util/Collection;Lnet/minecraft/class_2960;)V
+	METHOD m_jplarsts executeAll (Ljava/util/Collection;Lnet/minecraft/unmapped/C_acfwypcn;)V
 		ARG 1 functions
 		ARG 2 label
-	METHOD method_29461 setFunctions (Lnet/minecraft/class_5349;)V
-		COMMENT Sets the functions that this command function manager will use in executions.
-		ARG 1 loader
-			COMMENT the new loader functions will be taken from
-	METHOD method_29462 getTag (Lnet/minecraft/class_2960;)Lnet/minecraft/class_3494;
+	METHOD m_kukoztba getFunction (Lnet/minecraft/unmapped/C_acfwypcn;)Ljava/util/Optional;
 		ARG 1 id
-	METHOD method_29463 getAllFunctions ()Ljava/lang/Iterable;
-	METHOD method_29464 getFunctionTags ()Ljava/lang/Iterable;
-	METHOD method_29773 load (Lnet/minecraft/class_5349;)V
-		ARG 1 loader
-	METHOD method_36341 execute (Lnet/minecraft/class_2158;Lnet/minecraft/class_2168;Lnet/minecraft/class_2991$class_6346;)I
+	METHOD m_ltpumxpl execute (Lnet/minecraft/unmapped/C_wneopios;Lnet/minecraft/unmapped/C_krlbnnep;Lnet/minecraft/unmapped/C_wnkocwbn$C_slnwodhi;)I
 		COMMENT Executes a function. This may have two cases: new or recursive.
 		COMMENT
 		COMMENT <p>In a new execution, the {@link #execution execution == null}, and a custom
@@ -80,32 +59,42 @@ CLASS net/minecraft/class_2991 net/minecraft/server/function/CommandFunctionMana
 			COMMENT the command source to execute with
 		ARG 3 tracer
 			COMMENT a tracer for a non-recursive function execution
-	CLASS class_2992 Entry
-		FIELD field_13424 source Lnet/minecraft/class_2168;
-		FIELD field_13425 element Lnet/minecraft/class_2158$class_2161;
-		FIELD field_33549 depth I
-		METHOD <init> (Lnet/minecraft/class_2168;ILnet/minecraft/class_2158$class_2161;)V
-			ARG 1 source
-			ARG 2 depth
-			ARG 3 element
-		METHOD method_12914 execute (Lnet/minecraft/class_2991;Ljava/util/Deque;ILnet/minecraft/class_2991$class_6346;)V
-			ARG 1 manager
-			ARG 2 entries
-			ARG 3 maxChainLength
-			ARG 4 tracer
-	CLASS class_6345 Execution
+	METHOD m_ogbehckm getFunctionTags ()Ljava/lang/Iterable;
+	METHOD m_othxfkdh getMaxCommandChainLength ()I
+	METHOD m_pmnkivts execute (Lnet/minecraft/unmapped/C_wneopios;Lnet/minecraft/unmapped/C_krlbnnep;)I
+		COMMENT Executes a function.
+		COMMENT
+		COMMENT <p>This is same as calling {@link #execute(CommandFunction, ServerCommandSource,
+		COMMENT Tracer) execute(function, source, null)}.
+		COMMENT
+		COMMENT @return the command output value
+		COMMENT @see #execute(CommandFunction, ServerCommandSource, Tracer)
+		ARG 1 function
+			COMMENT the function
+		ARG 2 source
+			COMMENT the command source to execute with
+	METHOD m_qbjpjqza getDispatcher ()Lcom/mojang/brigadier/CommandDispatcher;
+	METHOD m_uufzkaaj setFunctions (Lnet/minecraft/unmapped/C_vwhuveoc;)V
+		COMMENT Sets the functions that this command function manager will use in executions.
+		ARG 1 loader
+			COMMENT the new loader functions will be taken from
+	METHOD m_zipjhzlf load (Lnet/minecraft/unmapped/C_vwhuveoc;)V
+		ARG 1 loader
+	CLASS C_fzfyrieu Execution
 		COMMENT An active execution of functions. It uses two deques to simulate a stack for a
 		COMMENT depth-first expansion of functions, as the function call stack depth may exceed
 		COMMENT the allowed JVM stack size.
 		COMMENT
 		COMMENT @see CommandFunctionManager#execution
-		FIELD field_33545 depth I
-		FIELD field_33546 tracer Lnet/minecraft/class_2991$class_6346;
-		FIELD field_33547 queue Ljava/util/Deque;
-		FIELD field_33548 waitlist Ljava/util/List;
-		METHOD <init> (Lnet/minecraft/class_2991;Lnet/minecraft/class_2991$class_6346;)V
+		FIELD f_hbwlzaoj tracer Lnet/minecraft/unmapped/C_wnkocwbn$C_slnwodhi;
+		FIELD f_jtivypok queue Ljava/util/Deque;
+		FIELD f_omedveii depth I
+		FIELD f_spypbhcu waitlist Ljava/util/List;
+		METHOD <init> (Lnet/minecraft/unmapped/C_wnkocwbn;Lnet/minecraft/unmapped/C_wnkocwbn$C_slnwodhi;)V
 			ARG 2 tracer
-		METHOD method_36343 recursiveRun (Lnet/minecraft/class_2158;Lnet/minecraft/class_2168;)V
+		METHOD m_bsyyxiva reportError (Ljava/lang/String;)V
+			ARG 1 message
+		METHOD m_jbxrwvjp recursiveRun (Lnet/minecraft/unmapped/C_wneopios;Lnet/minecraft/unmapped/C_krlbnnep;)V
 			COMMENT Handles a recursive case in {@link CommandFunctionManager#execute(CommandFunction,
 			COMMENT ServerCommandSource, CommandFunctionManager.Tracer)}.
 			COMMENT
@@ -116,9 +105,7 @@ CLASS net/minecraft/class_2991 net/minecraft/server/function/CommandFunctionMana
 				COMMENT the function
 			ARG 2 source
 				COMMENT the command source
-		METHOD method_36344 reportError (Ljava/lang/String;)V
-			ARG 1 message
-		METHOD method_36346 run (Lnet/minecraft/class_2158;Lnet/minecraft/class_2168;)I
+		METHOD m_tvolxwtj run (Lnet/minecraft/unmapped/C_wneopios;Lnet/minecraft/unmapped/C_krlbnnep;)I
 			COMMENT Handles a new case in {@link CommandFunctionManager#execute(CommandFunction,
 			COMMENT ServerCommandSource, CommandFunctionManager.Tracer)}.
 			COMMENT
@@ -127,19 +114,32 @@ CLASS net/minecraft/class_2991 net/minecraft/server/function/CommandFunctionMana
 				COMMENT the function
 			ARG 2 source
 				COMMENT the command source
-	CLASS class_6346 Tracer
+	CLASS C_jwgjyykh Entry
+		FIELD f_beexcvla source Lnet/minecraft/unmapped/C_krlbnnep;
+		FIELD f_gvkdkzpj element Lnet/minecraft/unmapped/C_wneopios$C_jhtidtgw;
+		FIELD f_xeopyyfj depth I
+		METHOD <init> (Lnet/minecraft/unmapped/C_krlbnnep;ILnet/minecraft/unmapped/C_wneopios$C_jhtidtgw;)V
+			ARG 1 source
+			ARG 2 depth
+			ARG 3 element
+		METHOD m_ybfgrmqx execute (Lnet/minecraft/unmapped/C_wnkocwbn;Ljava/util/Deque;ILnet/minecraft/unmapped/C_wnkocwbn$C_slnwodhi;)V
+			ARG 1 manager
+			ARG 2 entries
+			ARG 3 maxChainLength
+			ARG 4 tracer
+	CLASS C_slnwodhi Tracer
 		COMMENT A tree-visitor-like tracer, useful for gaining insights on function execution.
-		METHOD method_36349 traceCommandStart (ILjava/lang/String;)V
-			ARG 1 depth
-			ARG 2 command
-		METHOD method_36350 traceCommandEnd (ILjava/lang/String;I)V
-			ARG 1 depth
-			ARG 2 command
-			ARG 3 result
-		METHOD method_36351 traceFunctionCall (ILnet/minecraft/class_2960;I)V
+		METHOD m_civegyfh traceFunctionCall (ILnet/minecraft/unmapped/C_acfwypcn;I)V
 			ARG 1 depth
 			ARG 2 function
 			ARG 3 size
-		METHOD method_36352 traceError (ILjava/lang/String;)V
+		METHOD m_dnubtjer traceCommandStart (ILjava/lang/String;)V
+			ARG 1 depth
+			ARG 2 command
+		METHOD m_fpdixbjr traceCommandEnd (ILjava/lang/String;I)V
+			ARG 1 depth
+			ARG 2 command
+			ARG 3 result
+		METHOD m_ysfvtkby traceError (ILjava/lang/String;)V
 			ARG 1 depth
 			ARG 2 message

@@ -1,4 +1,4 @@
-CLASS net/minecraft/class_1865 net/minecraft/recipe/RecipeSerializer
+CLASS net/minecraft/unmapped/C_tjzkrxfx net/minecraft/recipe/RecipeSerializer
 	COMMENT The recipe serializer controls the serialization and deserialization of
 	COMMENT recipe content. The caller should handle the serialization of recipes' IDs.
 	COMMENT
@@ -10,29 +10,26 @@ CLASS net/minecraft/class_1865 net/minecraft/recipe/RecipeSerializer
 	COMMENT client, the client will disconnect upon receiving the recipe; if a
 	COMMENT recipe JSON intended for an absent recipe serializer is read, it is
 	COMMENT skipped.
-	FIELD field_17084 BLASTING Lnet/minecraft/class_3957;
-	FIELD field_17085 SMOKING Lnet/minecraft/class_3957;
-	FIELD field_17347 CAMPFIRE_COOKING Lnet/minecraft/class_3957;
-	FIELD field_19421 REPAIR_ITEM Lnet/minecraft/class_1866;
-	FIELD field_9028 ARMOR_DYE Lnet/minecraft/class_1866;
-	FIELD field_9029 BOOK_CLONING Lnet/minecraft/class_1866;
-	FIELD field_9030 SUSPICIOUS_STEW Lnet/minecraft/class_1866;
-	FIELD field_9031 SHAPELESS Lnet/minecraft/class_1865;
-	FIELD field_9034 FIREWORK_STAR_FADE Lnet/minecraft/class_1866;
-	FIELD field_9035 SHAPED Lnet/minecraft/class_1865;
-	FIELD field_9036 FIREWORK_STAR Lnet/minecraft/class_1866;
-	FIELD field_9037 TIPPED_ARROW Lnet/minecraft/class_1866;
-	FIELD field_9038 BANNER_DUPLICATE Lnet/minecraft/class_1866;
-	FIELD field_9039 MAP_EXTENDING Lnet/minecraft/class_1866;
-	FIELD field_9040 SHIELD_DECORATION Lnet/minecraft/class_1866;
-	FIELD field_9041 SHULKER_BOX Lnet/minecraft/class_1866;
-	FIELD field_9042 SMELTING Lnet/minecraft/class_3957;
-	FIELD field_9043 FIREWORK_ROCKET Lnet/minecraft/class_1866;
-	FIELD field_9044 MAP_CLONING Lnet/minecraft/class_1866;
-	METHOD method_17724 register (Ljava/lang/String;Lnet/minecraft/class_1865;)Lnet/minecraft/class_1865;
-		ARG 0 id
-		ARG 1 serializer
-	METHOD method_8121 read (Lnet/minecraft/class_2960;Lcom/google/gson/JsonObject;)Lnet/minecraft/class_1860;
+	FIELD f_azliwncv FIREWORK_STAR_FADE Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_cchtljgr ARMOR_DYE Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_dagsmqmq BLASTING Lnet/minecraft/unmapped/C_yvghmvun;
+	FIELD f_dbzptvrp SMOKING Lnet/minecraft/unmapped/C_yvghmvun;
+	FIELD f_edvmzjwf CAMPFIRE_COOKING Lnet/minecraft/unmapped/C_yvghmvun;
+	FIELD f_gfgqklqp MAP_CLONING Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_gstkmugw FIREWORK_ROCKET Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_hdvgnugh SHIELD_DECORATION Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_hroqequd TIPPED_ARROW Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_joebganr SHAPELESS Lnet/minecraft/unmapped/C_tjzkrxfx;
+	FIELD f_kjwafito SMELTING Lnet/minecraft/unmapped/C_yvghmvun;
+	FIELD f_nnetwedo REPAIR_ITEM Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_pnaotohe BOOK_CLONING Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_sffnamrn SHULKER_BOX Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_sjsrfcjf BANNER_DUPLICATE Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_sugveqtw SUSPICIOUS_STEW Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_ufuwbzte FIREWORK_STAR Lnet/minecraft/unmapped/C_qqkwmvkz;
+	FIELD f_wkeqptno SHAPED Lnet/minecraft/unmapped/C_tjzkrxfx;
+	FIELD f_xcaymysb MAP_EXTENDING Lnet/minecraft/unmapped/C_qqkwmvkz;
+	METHOD m_eunbbwot read (Lnet/minecraft/unmapped/C_acfwypcn;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_dqwdmrwa;
 		COMMENT Reads a recipe from a JSON object.
 		COMMENT
 		COMMENT @implNote If this throws any exception besides {@link com.google.gson.JsonParseException}
@@ -45,7 +42,7 @@ CLASS net/minecraft/class_1865 net/minecraft/recipe/RecipeSerializer
 			COMMENT the recipe's ID
 		ARG 2 json
 			COMMENT the recipe JSON
-	METHOD method_8122 read (Lnet/minecraft/class_2960;Lnet/minecraft/class_2540;)Lnet/minecraft/class_1860;
+	METHOD m_jdglakti read (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_dqwdmrwa;
 		COMMENT Reads a recipe from a packet byte buf, usually on the client.
 		COMMENT
 		COMMENT <p>This can throw whatever exception the packet byte buf throws. This may be
@@ -56,7 +53,7 @@ CLASS net/minecraft/class_1865 net/minecraft/recipe/RecipeSerializer
 			COMMENT the recipe's ID
 		ARG 2 buf
 			COMMENT the recipe buf
-	METHOD method_8124 write (Lnet/minecraft/class_2540;Lnet/minecraft/class_1860;)V
+	METHOD m_jdwwtihg write (Lnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_dqwdmrwa;)V
 		COMMENT Writes a recipe to a packet byte buf, usually on the server.
 		COMMENT
 		COMMENT <p>The recipe's ID is already written into the buf when this is called.
@@ -67,3 +64,6 @@ CLASS net/minecraft/class_1865 net/minecraft/recipe/RecipeSerializer
 			COMMENT the recipe buf
 		ARG 2 recipe
 			COMMENT the recipe
+	METHOD m_upapvlmb register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tjzkrxfx;)Lnet/minecraft/unmapped/C_tjzkrxfx;
+		ARG 0 id
+		ARG 1 serializer

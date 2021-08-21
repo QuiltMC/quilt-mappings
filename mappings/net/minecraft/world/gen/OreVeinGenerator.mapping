@@ -1,50 +1,48 @@
-CLASS net/minecraft/class_6353 net/minecraft/world/gen/OreVeinGenerator
-	FIELD field_33589 ORE_PLACEMENT_NOISE_SCALE F
-	FIELD field_33590 ORE_PLACEMENT_NOISE_THRESHOLD F
-	FIELD field_33591 FREQUENCY_NOISE_THRESHOLD F
-	FIELD field_33592 GENERATION_CHANCE F
-	FIELD field_33595 maxY I
-	FIELD field_33596 minY I
-	FIELD field_33597 defaultState Lnet/minecraft/class_2680;
-	FIELD field_33598 oreFrequencyNoiseSampler Lnet/minecraft/class_5216;
-	FIELD field_33599 firstOrePlacementNoiseSampler Lnet/minecraft/class_5216;
-	FIELD field_33600 secondOrePlacementNoiseSampler Lnet/minecraft/class_5216;
-	FIELD field_33601 horizontalNoiseResolution I
-	FIELD field_33602 verticalNoiseResolution I
-	FIELD field_33662 ORE_CHANCE_START F
-	FIELD field_33663 ORE_CHANCE_END F
-	FIELD field_33664 MAX_ORE_CHANCE_NOISE_THRESHOLD F
-	FIELD field_33665 RAW_ORE_CHANCE F
-	FIELD field_33666 ORE_CHANCE_THRESHOLD F
-	FIELD field_33667 oreChanceNoiseSampler Lnet/minecraft/class_5216;
-	FIELD field_33694 ORE_FREQUENCY_NOISE_SCALE D
-	METHOD <init> (JLnet/minecraft/class_2680;III)V
+CLASS net/minecraft/unmapped/C_pwfazyrk net/minecraft/world/gen/OreVeinGenerator
+	FIELD f_caimizkn oreChanceNoiseSampler Lnet/minecraft/unmapped/C_trjftrxr;
+	FIELD f_dooufbqi maxY I
+	FIELD f_ghdhhzbn ORE_FREQUENCY_NOISE_SCALE D
+	FIELD f_huzhhpua oreFrequencyNoiseSampler Lnet/minecraft/unmapped/C_trjftrxr;
+	FIELD f_jqqqmhlq RAW_ORE_CHANCE F
+	FIELD f_lasgvpdz firstOrePlacementNoiseSampler Lnet/minecraft/unmapped/C_trjftrxr;
+	FIELD f_ndibfqtf FREQUENCY_NOISE_THRESHOLD F
+	FIELD f_nmpmpbwi ORE_CHANCE_START F
+	FIELD f_nqcvfhib ORE_PLACEMENT_NOISE_SCALE F
+	FIELD f_pttuqqdx horizontalNoiseResolution I
+	FIELD f_qxetgmmq MAX_ORE_CHANCE_NOISE_THRESHOLD F
+	FIELD f_renzttzx GENERATION_CHANCE F
+	FIELD f_rvfisrnp ORE_CHANCE_THRESHOLD F
+	FIELD f_usufback secondOrePlacementNoiseSampler Lnet/minecraft/unmapped/C_trjftrxr;
+	FIELD f_vmmywgao ORE_CHANCE_END F
+	FIELD f_waukwgkq defaultState Lnet/minecraft/unmapped/C_pmeibtxt;
+	FIELD f_wsytewsw minY I
+	FIELD f_wtnvarbp verticalNoiseResolution I
+	FIELD f_ynuwsgpp ORE_PLACEMENT_NOISE_THRESHOLD F
+	METHOD <init> (JLnet/minecraft/unmapped/C_pmeibtxt;III)V
 		ARG 1 seed
 		ARG 3 defaultState
 		ARG 4 horizontalNoiseResolution
 		ARG 5 verticalNoiseResolution
 		ARG 6 minY
-	METHOD method_36397 getVeinType (DI)Lnet/minecraft/class_6353$class_6354;
+	METHOD m_bngnozki getVeinType (DI)Lnet/minecraft/unmapped/C_pwfazyrk$C_dmjycmzi;
 		ARG 1 oreFrequencyNoise
 		ARG 3 y
-	METHOD method_36398 shouldPlaceOreBlock (DD)Z
+	METHOD m_gqqukufu shouldPlaceOreBlock (DD)Z
 		ARG 1 firstOrePlacementNoise
 		ARG 3 secondOrePlacementNoise
-	METHOD method_36400 sample (Lnet/minecraft/class_5819;IIIDDD)Lnet/minecraft/class_2680;
-		ARG 1 random
-		ARG 2 x
-		ARG 3 y
-		ARG 4 z
-		ARG 5 oreFrequencyNoise
-		ARG 7 firstOrePlacementNoise
-		ARG 9 secondOrePlacementNoise
-	METHOD method_36401 sampleOreFrequencyNoise ([DIIII)V
+	METHOD m_lhmcyjol sampleOreFrequencyNoise ([DIIII)V
 		ARG 1 buffer
 		ARG 2 x
 		ARG 3 z
 		ARG 4 minY
 		ARG 5 noiseSizeY
-	METHOD method_36402 sample ([DIILnet/minecraft/class_5216;DII)V
+	METHOD m_lumvotug sampleSecondOrePlacementNoise ([DIIII)V
+		ARG 1 buffer
+		ARG 2 x
+		ARG 3 z
+		ARG 4 minY
+		ARG 5 noiseSizeY
+	METHOD m_qgzclkil sample ([DIILnet/minecraft/unmapped/C_trjftrxr;DII)V
 		ARG 1 buffer
 		ARG 2 x
 		ARG 3 z
@@ -52,25 +50,27 @@ CLASS net/minecraft/class_6353 net/minecraft/world/gen/OreVeinGenerator
 		ARG 5 scale
 		ARG 7 minY
 		ARG 8 noiseSizeY
-	METHOD method_36404 sampleFirstOrePlacementNoise ([DIIII)V
+	METHOD m_tmrndcua sample (Lnet/minecraft/unmapped/C_ocsrmolr;IIIDDD)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 1 random
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+		ARG 5 oreFrequencyNoise
+		ARG 7 firstOrePlacementNoise
+		ARG 9 secondOrePlacementNoise
+	METHOD m_ysifdoyj sampleFirstOrePlacementNoise ([DIIII)V
 		ARG 1 buffer
 		ARG 2 x
 		ARG 3 z
 		ARG 4 minY
 		ARG 5 noiseSizeY
-	METHOD method_36405 sampleSecondOrePlacementNoise ([DIIII)V
-		ARG 1 buffer
-		ARG 2 x
-		ARG 3 z
-		ARG 4 minY
-		ARG 5 noiseSizeY
-	CLASS class_6354 VeinType
-		FIELD field_33605 ore Lnet/minecraft/class_2680;
-		FIELD field_33606 stone Lnet/minecraft/class_2680;
-		FIELD field_33607 minY I
-		FIELD field_33608 maxY I
-		FIELD field_33668 rawBlock Lnet/minecraft/class_2680;
-		METHOD <init> (Ljava/lang/String;ILnet/minecraft/class_2680;Lnet/minecraft/class_2680;Lnet/minecraft/class_2680;II)V
+	CLASS C_dmjycmzi VeinType
+		FIELD f_cfrjqbto ore Lnet/minecraft/unmapped/C_pmeibtxt;
+		FIELD f_jpenupmk stone Lnet/minecraft/unmapped/C_pmeibtxt;
+		FIELD f_mrzycjeq maxY I
+		FIELD f_robbksfo rawBlock Lnet/minecraft/unmapped/C_pmeibtxt;
+		FIELD f_snmduzaq minY I
+		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;II)V
 			ARG 3 ore
 			ARG 4 rawBlock
 			ARG 5 stone

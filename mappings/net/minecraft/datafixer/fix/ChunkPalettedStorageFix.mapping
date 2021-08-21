@@ -1,100 +1,100 @@
-CLASS net/minecraft/class_3582 net/minecraft/datafixer/fix/ChunkPalettedStorageFix
-	FIELD field_15834 GRASS_UPPER Lcom/mojang/serialization/Dynamic;
-	FIELD field_15835 ROSE_UPPER Lcom/mojang/serialization/Dynamic;
-	FIELD field_15836 DOOR Ljava/util/Map;
-	FIELD field_15837 COLORS Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-	FIELD field_15838 SNOWY_GRASS Lcom/mojang/serialization/Dynamic;
-	FIELD field_15839 SUNFLOWER_UPPER Lcom/mojang/serialization/Dynamic;
-	FIELD field_15840 PUMPKIN Lcom/mojang/serialization/Dynamic;
-	FIELD field_15841 FLOWER_POT Ljava/util/Map;
-	FIELD field_15842 BLOCKS_NEEDING_SIDE_UPDATE Ljava/util/BitSet;
-	FIELD field_15843 AIR Lcom/mojang/serialization/Dynamic;
-	FIELD field_15844 LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD field_15845 FERN_UPPER Lcom/mojang/serialization/Dynamic;
-	FIELD field_15846 NOTE_BLOCK Ljava/util/Map;
-	FIELD field_15847 PEONY_UPPER Lcom/mojang/serialization/Dynamic;
-	FIELD field_15848 LILAC_UPPER Lcom/mojang/serialization/Dynamic;
-	FIELD field_15849 BED Ljava/util/Map;
-	FIELD field_15850 SNOWY_MYCELIUM Lcom/mojang/serialization/Dynamic;
-	FIELD field_15851 BANNER Ljava/util/Map;
-	FIELD field_15852 PODZOL Lcom/mojang/serialization/Dynamic;
-	FIELD field_15853 SKULL Ljava/util/Map;
-	FIELD field_15854 BLOCKS_NEEDING_IN_PLACE_UPDATE Ljava/util/BitSet;
+CLASS net/minecraft/unmapped/C_suxkosbm net/minecraft/datafixer/fix/ChunkPalettedStorageFix
+	FIELD f_asvnbpvo BLOCKS_NEEDING_IN_PLACE_UPDATE Ljava/util/BitSet;
+	FIELD f_czlrxfqa SKULL Ljava/util/Map;
+	FIELD f_dkrpzbjk BANNER Ljava/util/Map;
+	FIELD f_fuoocwjx LILAC_UPPER Lcom/mojang/serialization/Dynamic;
+	FIELD f_kvnktgij FERN_UPPER Lcom/mojang/serialization/Dynamic;
+	FIELD f_laluldgn LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_mgquajxt NOTE_BLOCK Ljava/util/Map;
+	FIELD f_mgvzqtzb PODZOL Lcom/mojang/serialization/Dynamic;
+	FIELD f_mhnguiaq PUMPKIN Lcom/mojang/serialization/Dynamic;
+	FIELD f_mnwonqit SNOWY_GRASS Lcom/mojang/serialization/Dynamic;
+	FIELD f_mrvgwvtx BED Ljava/util/Map;
+	FIELD f_murrxccy GRASS_UPPER Lcom/mojang/serialization/Dynamic;
+	FIELD f_ncxusove AIR Lcom/mojang/serialization/Dynamic;
+	FIELD f_shhxvvsr DOOR Ljava/util/Map;
+	FIELD f_sifntxgj SNOWY_MYCELIUM Lcom/mojang/serialization/Dynamic;
+	FIELD f_szuunsxh PEONY_UPPER Lcom/mojang/serialization/Dynamic;
+	FIELD f_vorcyqrt ROSE_UPPER Lcom/mojang/serialization/Dynamic;
+	FIELD f_wohnpopg COLORS Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+	FIELD f_xbffbgjh SUNFLOWER_UPPER Lcom/mojang/serialization/Dynamic;
+	FIELD f_xhjaqoep BLOCKS_NEEDING_SIDE_UPDATE Ljava/util/BitSet;
+	FIELD f_yberjcxl FLOWER_POT Ljava/util/Map;
 	METHOD <init> (Lcom/mojang/datafixers/schemas/Schema;Z)V
 		ARG 1 outputSchema
 		ARG 2 changesType
-	METHOD method_15605 buildBanner (Ljava/util/Map;ILjava/lang/String;)V
+	METHOD m_dbbkyzpp addTo (Lnet/minecraft/unmapped/C_gkehovkp;Lcom/mojang/serialization/Dynamic;)I
+	METHOD m_ihhjwahz buildBanner (Ljava/util/Map;ILjava/lang/String;)V
 		ARG 0 out
-	METHOD method_15610 buildSkull (Ljava/util/Map;ILjava/lang/String;Ljava/lang/String;)V
-		ARG 0 out
-		ARG 2 mob
-		ARG 3 block
-	METHOD method_15611 buildDoor (Ljava/util/Map;Ljava/lang/String;I)V
-		ARG 0 out
-		ARG 1 name
-	METHOD method_15615 getSideToUpgradeFlag (ZZZZ)I
+	METHOD m_kqfrjcav getName (Lcom/mojang/serialization/Dynamic;)Ljava/lang/String;
+	METHOD m_ksnkzkbt getSideToUpgradeFlag (ZZZZ)I
 		ARG 0 west
 		ARG 1 east
 		ARG 2 north
 		ARG 3 south
-	METHOD method_15616 addTo (Lnet/minecraft/class_3513;Lcom/mojang/serialization/Dynamic;)I
-	METHOD method_15633 fixChunk (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
-	METHOD method_15636 buildBed (Ljava/util/Map;ILjava/lang/String;)V
+	METHOD m_mspafafy getProperty (Lcom/mojang/serialization/Dynamic;Ljava/lang/String;)Ljava/lang/String;
+	METHOD m_qlucrokk fixChunk (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_tmqxlbgf buildSkull (Ljava/util/Map;ILjava/lang/String;Ljava/lang/String;)V
 		ARG 0 out
-	METHOD method_15637 getName (Lcom/mojang/serialization/Dynamic;)Ljava/lang/String;
-	METHOD method_15638 getProperty (Lcom/mojang/serialization/Dynamic;Ljava/lang/String;)Ljava/lang/String;
-	CLASS class_3583 ChunkNibbleArray
-		FIELD field_15855 contents [B
-		METHOD method_15640 get (III)I
-			ARG 1 x
-			ARG 2 y
-		METHOD method_15641 usesLowNibble (I)Z
-			ARG 1 index
-		METHOD method_15642 getRawIndex (I)I
-			ARG 1 index
-	CLASS class_3584 Facing
-		FIELD field_15861 direction Lnet/minecraft/class_3582$class_3584$class_3586;
-		FIELD field_15864 axis Lnet/minecraft/class_3582$class_3584$class_3585;
-		METHOD <init> (Ljava/lang/String;ILnet/minecraft/class_3582$class_3584$class_3586;Lnet/minecraft/class_3582$class_3584$class_3585;)V
+		ARG 2 mob
+		ARG 3 block
+	METHOD m_trshrcjt buildDoor (Ljava/util/Map;Ljava/lang/String;I)V
+		ARG 0 out
+		ARG 1 name
+	METHOD m_xemkmuef buildBed (Ljava/util/Map;ILjava/lang/String;)V
+		ARG 0 out
+	CLASS C_cbzkexkt Level
+		FIELD f_gpilytbm blockEntities Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+		FIELD f_ihmgxshl x I
+		FIELD f_itbcfwnx z I
+		FIELD f_kssffbhr sidesToUpgrade I
+		FIELD f_otothsry sections [Lnet/minecraft/unmapped/C_suxkosbm$C_rkokuxib;
+		FIELD f_wcqlftmi level Lcom/mojang/serialization/Dynamic;
+		METHOD m_hiqoozze getBlock (I)Lcom/mojang/serialization/Dynamic;
+		METHOD m_izicjqct getSection (I)Lnet/minecraft/unmapped/C_suxkosbm$C_rkokuxib;
+		METHOD m_nrrhfneb setBlock (ILcom/mojang/serialization/Dynamic;)V
+		METHOD m_semupftf transform ()Lcom/mojang/serialization/Dynamic;
+		METHOD m_ugwjeals adjacentTo (ILnet/minecraft/unmapped/C_suxkosbm$C_qiasbqyt;)I
+			ARG 1 direction
+		METHOD m_vrypkkiz removeBlockEntity (I)Lcom/mojang/serialization/Dynamic;
+		METHOD m_wzviiapy getBlockEntity (I)Lcom/mojang/serialization/Dynamic;
+	CLASS C_qiasbqyt Facing
+		FIELD f_iqlkevnu axis Lnet/minecraft/unmapped/C_suxkosbm$C_qiasbqyt$C_bormlsgb;
+		FIELD f_mxlneyjz direction Lnet/minecraft/unmapped/C_suxkosbm$C_qiasbqyt$C_ikqkxjme;
+		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_suxkosbm$C_qiasbqyt$C_ikqkxjme;Lnet/minecraft/unmapped/C_suxkosbm$C_qiasbqyt$C_bormlsgb;)V
 			ARG 3 direction
-		METHOD method_15643 getDirection ()Lnet/minecraft/class_3582$class_3584$class_3586;
-		METHOD method_15644 getAxis ()Lnet/minecraft/class_3582$class_3584$class_3585;
-		CLASS class_3585 Axis
-		CLASS class_3586 Direction
-			FIELD field_15872 offset I
-			METHOD method_15645 getOffset ()I
-	CLASS class_3587 Section
-		FIELD field_15874 innerPositions Lit/unimi/dsi/fastutil/ints/IntList;
-		FIELD field_15875 seenStates Ljava/util/Set;
-		FIELD field_15876 hasBlocks Z
-		FIELD field_15877 states [I
-		FIELD field_15878 section Lcom/mojang/serialization/Dynamic;
-		FIELD field_15879 y I
-		FIELD field_15880 paletteData Ljava/util/List;
-		FIELD field_15881 inPlaceUpdates Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-		FIELD field_15882 paletteMap Lnet/minecraft/class_3513;
-		METHOD method_15647 setBlock (ILcom/mojang/serialization/Dynamic;)V
-			ARG 1 pos
-		METHOD method_15649 getBlock (I)Lcom/mojang/serialization/Dynamic;
+		METHOD m_gotgkitl getAxis ()Lnet/minecraft/unmapped/C_suxkosbm$C_qiasbqyt$C_bormlsgb;
+		METHOD m_jnenohyt getDirection ()Lnet/minecraft/unmapped/C_suxkosbm$C_qiasbqyt$C_ikqkxjme;
+		CLASS C_bormlsgb Axis
+		CLASS C_ikqkxjme Direction
+			FIELD f_isnzohse offset I
+			METHOD m_itaiwhna getOffset ()I
+	CLASS C_rkokuxib Section
+		FIELD f_dlqeoueq paletteMap Lnet/minecraft/unmapped/C_gkehovkp;
+		FIELD f_iokwzzqp paletteData Ljava/util/List;
+		FIELD f_ismmsuzf innerPositions Lit/unimi/dsi/fastutil/ints/IntList;
+		FIELD f_lobxjtcw hasBlocks Z
+		FIELD f_ppwmgxbl inPlaceUpdates Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+		FIELD f_xhgneeoo section Lcom/mojang/serialization/Dynamic;
+		FIELD f_xpotrbea y I
+		FIELD f_xxjqdudl states [I
+		FIELD f_yjjdncxj seenStates Ljava/util/Set;
+		METHOD m_fnthctro getBlock (I)Lcom/mojang/serialization/Dynamic;
 			ARG 1 index
-		METHOD method_15650 addInPlaceUpdate (II)V
+		METHOD m_fpddzvef visit (I)I
+			ARG 1 sidesToUpgrade
+		METHOD m_fynfozzn transform ()Lcom/mojang/serialization/Dynamic;
+		METHOD m_joicavap setBlock (ILcom/mojang/serialization/Dynamic;)V
+			ARG 1 pos
+		METHOD m_yutpwxvy addInPlaceUpdate (II)V
 			ARG 1 section
 			ARG 2 index
-		METHOD method_15651 transform ()Lcom/mojang/serialization/Dynamic;
-		METHOD method_15652 visit (I)I
-			ARG 1 sidesToUpgrade
-	CLASS class_3588 Level
-		FIELD field_15883 z I
-		FIELD field_15884 x I
-		FIELD field_15885 sidesToUpgrade I
-		FIELD field_15886 level Lcom/mojang/serialization/Dynamic;
-		FIELD field_15887 blockEntities Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-		FIELD field_15888 sections [Lnet/minecraft/class_3582$class_3587;
-		METHOD method_15655 getBlockEntity (I)Lcom/mojang/serialization/Dynamic;
-		METHOD method_15657 setBlock (ILcom/mojang/serialization/Dynamic;)V
-		METHOD method_15658 getSection (I)Lnet/minecraft/class_3582$class_3587;
-		METHOD method_15660 removeBlockEntity (I)Lcom/mojang/serialization/Dynamic;
-		METHOD method_15662 getBlock (I)Lcom/mojang/serialization/Dynamic;
-		METHOD method_15663 adjacentTo (ILnet/minecraft/class_3582$class_3584;)I
-			ARG 1 direction
-		METHOD method_15664 transform ()Lcom/mojang/serialization/Dynamic;
+	CLASS C_zfdpsuli ChunkNibbleArray
+		FIELD f_rqushywj contents [B
+		METHOD m_fqfabxkc usesLowNibble (I)Z
+			ARG 1 index
+		METHOD m_rwmjczwq get (III)I
+			ARG 1 x
+			ARG 2 y
+		METHOD m_vomwyzyr getRawIndex (I)I
+			ARG 1 index

@@ -1,9 +1,13 @@
-CLASS net/minecraft/class_3508 net/minecraft/util/collection/PackedIntegerArray
-	FIELD field_15631 storage [J
-	FIELD field_15632 size I
-	FIELD field_15633 elementBits I
-	FIELD field_15634 maxValue J
-	FIELD field_24078 INDEX_PARAMETERS [I
+CLASS net/minecraft/unmapped/C_ctyadtwn net/minecraft/util/collection/PackedIntegerArray
+	FIELD f_fwldclpu elementsPerLong I
+	FIELD f_ilblkaan elementBits I
+	FIELD f_jobwaaze indexOffset I
+	FIELD f_kdpeykjg size I
+	FIELD f_kyfzdxuy maxValue J
+	FIELD f_mcxzurof indexShift I
+	FIELD f_qkznkwlw storage [J
+	FIELD f_rgrarpcs indexScale I
+	FIELD f_wwkusmbx INDEX_PARAMETERS [I
 		COMMENT Magic constants for faster integer division by a constant.
 		COMMENT
 		COMMENT <p>This is computed as {@code (n * scale + offset) >> (32 + shift)}. For a divisor n,
@@ -14,10 +18,6 @@ CLASS net/minecraft/class_3508 net/minecraft/util/collection/PackedIntegerArray
 		COMMENT <li>offset at 3 * (n - 1) + 1</li>
 		COMMENT <li>shift at 3 * (n - 1) + 2</li>
 		COMMENT </ul>
-	FIELD field_24079 elementsPerLong I
-	FIELD field_24080 indexScale I
-	FIELD field_24081 indexOffset I
-	FIELD field_24082 indexShift I
 	METHOD <init> (II)V
 		ARG 1 elementBits
 		ARG 2 size
@@ -25,18 +25,18 @@ CLASS net/minecraft/class_3508 net/minecraft/util/collection/PackedIntegerArray
 		ARG 1 elementBits
 		ARG 2 size
 		ARG 3 storage
-	METHOD method_15210 set (II)V
+	METHOD m_bjjrdoky getElementBits ()I
+	METHOD m_jhjupikz getStorageIndex (I)I
+		ARG 1 index
+	METHOD m_lxzmrqbn getSize ()I
+	METHOD m_mtbrexpj setAndGetOldValue (II)I
 		ARG 1 index
 		ARG 2 value
-	METHOD method_15211 get (I)I
-		ARG 1 index
-	METHOD method_15212 getStorage ()[J
-	METHOD method_15214 setAndGetOldValue (II)I
-		ARG 1 index
-		ARG 2 value
-	METHOD method_15215 getSize ()I
-	METHOD method_21739 forEach (Ljava/util/function/IntConsumer;)V
+	METHOD m_qhzhfowo getStorage ()[J
+	METHOD m_rpzizzck forEach (Ljava/util/function/IntConsumer;)V
 		ARG 1 consumer
-	METHOD method_27284 getStorageIndex (I)I
+	METHOD m_xmrabqtk get (I)I
 		ARG 1 index
-	METHOD method_34896 getElementBits ()I
+	METHOD m_yzeoaezf set (II)V
+		ARG 1 index
+		ARG 2 value

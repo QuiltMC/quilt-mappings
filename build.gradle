@@ -219,7 +219,6 @@ task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
 task downloadHashedMojmap(type: Download) {
 	group = buildMappingGroup
 	def url = "https://maven.quiltmc.org/repository/release/org/quiltmc/hashed-mojmap/${minecraft_version}/hashed-mojmap-${minecraft_version}.jar"
-	url = "file:/C:\\Users\\elior.DESKTOP-A1358B6\\.m2\\repository\\org\\quiltmc\\hashed-mojmap\\1.17.1\\hashed-mojmap-1.17.1.jar"
 	src com.google.common.net.UrlEscapers.urlFragmentEscaper().escape(url)
 	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.jar")
 
@@ -910,11 +909,14 @@ publishing {
 // A task to ensure that the version being released has not already been released.
 task checkVersion {
 	doFirst {
-		def xml = new URL("https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-mappings/maven-metadata.xml").text
-		def metadata = new XmlSlurper().parseText(xml)
-		def versions = metadata.versioning.versions.version*.text();
-		if (versions.contains(version)) {
-			throw new RuntimeException("${version} has already been released!")
+		try {
+			def xml = new URL("https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-mappings/maven-metadata.xml").text
+			def metadata = new XmlSlurper().parseText(xml)
+			def versions = metadata.versioning.versions.version*.text();
+			if (versions.contains(version)) {
+				throw new RuntimeException("${version} has already been released!")
+			}
+		} catch (FileNotFoundException e) {
 		}
 	}
 }

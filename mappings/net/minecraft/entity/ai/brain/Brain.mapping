@@ -1,4 +1,4 @@
-CLASS net/minecraft/class_4095 net/minecraft/entity/ai/brain/Brain
+CLASS net/minecraft/unmapped/C_fexajqjr net/minecraft/entity/ai/brain/Brain
 	COMMENT A brain is associated with each living entity.
 	COMMENT
 	COMMENT <p>A brain has {@linkplain #memories memories}, {@linkplain #sensors sensors},
@@ -12,156 +12,156 @@ CLASS net/minecraft/class_4095 net/minecraft/entity/ai/brain/Brain
 	COMMENT sensors present in a brain, and then you can add individual tasks.
 	COMMENT
 	COMMENT @see LivingEntity#brain
-	FIELD field_18322 memories Ljava/util/Map;
-	FIELD field_18323 sensors Ljava/util/Map;
-	FIELD field_18324 tasks Ljava/util/Map;
-	FIELD field_18325 schedule Lnet/minecraft/class_4170;
-	FIELD field_18326 requiredActivityMemories Ljava/util/Map;
-	FIELD field_18327 coreActivities Ljava/util/Set;
-	FIELD field_18328 possibleActivities Ljava/util/Set;
-	FIELD field_18329 defaultActivity Lnet/minecraft/class_4168;
-	FIELD field_18853 activityStartTime J
-	FIELD field_22282 forgettingActivityMemories Ljava/util/Map;
+	FIELD f_bakmdtnz possibleActivities Ljava/util/Set;
+	FIELD f_cydjuklw LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_debrbutr requiredActivityMemories Ljava/util/Map;
+	FIELD f_dyanzlbh defaultActivity Lnet/minecraft/unmapped/C_wlxgpmqg;
+	FIELD f_ebausbpc sensors Ljava/util/Map;
+	FIELD f_gkvbavkn activityStartTime J
+	FIELD f_imecwjmh codecSupplier Ljava/util/function/Supplier;
+	FIELD f_lwqaxiuj schedule Lnet/minecraft/unmapped/C_jmyttyxt;
+	FIELD f_pwdsqzqg ACTIVITY_REFRESH_COOLDOWN I
+	FIELD f_sduaysoe memories Ljava/util/Map;
+	FIELD f_ymxnhqeg tasks Ljava/util/Map;
+	FIELD f_zsmyqzms coreActivities Ljava/util/Set;
+	FIELD f_zuylurbb forgettingActivityMemories Ljava/util/Map;
 		COMMENT The map from activities to the memories to forget after the activity is
 		COMMENT completed.
-	FIELD field_24656 LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD field_24657 codecSupplier Ljava/util/function/Supplier;
-	FIELD field_30096 ACTIVITY_REFRESH_COOLDOWN I
 	METHOD <init> (Ljava/util/Collection;Ljava/util/Collection;Lcom/google/common/collect/ImmutableList;Ljava/util/function/Supplier;)V
 		ARG 1 memories
 		ARG 2 sensors
 		ARG 3 memoryEntries
 		ARG 4 codecSupplier
-	METHOD method_18871 refreshActivities (JJ)V
-		ARG 1 timeOfDay
-		ARG 3 time
-	METHOD method_18874 canDoActivity (Lnet/minecraft/class_4168;)Z
+	METHOD m_acwsccmx hasMemoryModuleWithValue (Lnet/minecraft/unmapped/C_wyqoybbv;Ljava/lang/Object;)Z
+		ARG 1 type
+		ARG 2 value
+	METHOD m_ahijnfpe doExclusively (Lnet/minecraft/unmapped/C_wlxgpmqg;)V
 		ARG 1 activity
-	METHOD method_18875 forget (Lnet/minecraft/class_4140;)V
-		ARG 1 type
-	METHOD method_18876 isMemoryInState (Lnet/minecraft/class_4140;Lnet/minecraft/class_4141;)Z
-		ARG 1 type
-		ARG 2 state
-	METHOD method_18878 remember (Lnet/minecraft/class_4140;Ljava/lang/Object;)V
-		ARG 1 type
-		ARG 2 value
-	METHOD method_18879 remember (Lnet/minecraft/class_4140;Ljava/util/Optional;)V
-		ARG 1 type
-		ARG 2 value
-	METHOD method_18880 resetPossibleActivities (Lnet/minecraft/class_4168;)V
+	METHOD m_aqptbczn resetPossibleActivities (Lnet/minecraft/unmapped/C_wlxgpmqg;)V
 		ARG 1 except
-	METHOD method_18881 setTaskList (Lnet/minecraft/class_4168;Lcom/google/common/collect/ImmutableList;)V
-		ARG 1 activity
-		ARG 2 indexedTasks
-	METHOD method_18882 setTaskList (Lnet/minecraft/class_4168;ILcom/google/common/collect/ImmutableList;)V
-		ARG 1 activity
-		ARG 2 begin
-		ARG 3 list
-	METHOD method_18884 setSchedule (Lnet/minecraft/class_4170;)V
-		ARG 1 schedule
-	METHOD method_18890 setCoreActivities (Ljava/util/Set;)V
-		ARG 1 coreActivities
-	METHOD method_18891 startTasks (Lnet/minecraft/class_3218;Lnet/minecraft/class_1309;)V
-		ARG 1 world
-		ARG 2 entity
-	METHOD method_18894 getSchedule ()Lnet/minecraft/class_4170;
-	METHOD method_18896 hasMemoryModule (Lnet/minecraft/class_4140;)Z
-		ARG 1 type
-	METHOD method_18897 setDefaultActivity (Lnet/minecraft/class_4168;)V
-		ARG 1 activity
-	METHOD method_18900 stopAllTasks (Lnet/minecraft/class_3218;Lnet/minecraft/class_1309;)V
-		ARG 1 world
-		ARG 2 entity
-	METHOD method_18904 getOptionalMemory (Lnet/minecraft/class_4140;)Ljava/util/Optional;
-		ARG 1 type
-	METHOD method_18906 hasActivity (Lnet/minecraft/class_4168;)Z
-		ARG 1 activity
-	METHOD method_18911 copy ()Lnet/minecraft/class_4095;
-	METHOD method_19542 tick (Lnet/minecraft/class_3218;Lnet/minecraft/class_1309;)V
-		ARG 1 world
-		ARG 2 entity
-	METHOD method_19545 updateTasks (Lnet/minecraft/class_3218;Lnet/minecraft/class_1309;)V
-		ARG 1 world
-		ARG 2 entity
-	METHOD method_19948 isEmptyCollection (Ljava/lang/Object;)Z
-		ARG 1 value
-	METHOD method_24524 indexTaskList (ILcom/google/common/collect/ImmutableList;)Lcom/google/common/collect/ImmutableList;
-		ARG 1 begin
-			COMMENT the beginning of the index of tasks, exclusive
-		ARG 2 tasks
-	METHOD method_24525 remember (Lnet/minecraft/class_4140;Ljava/lang/Object;J)V
+	METHOD m_ashoxqqp remember (Lnet/minecraft/unmapped/C_wyqoybbv;Ljava/util/Optional;)V
 		ARG 1 type
 		ARG 2 value
-		ARG 3 startTime
-	METHOD method_24526 doExclusively (Lnet/minecraft/class_4168;)V
-		ARG 1 activity
-	METHOD method_24527 setTaskList (Lnet/minecraft/class_4168;ILcom/google/common/collect/ImmutableList;Lnet/minecraft/class_4140;)V
-		ARG 1 activity
-		ARG 2 begin
-		ARG 3 tasks
-		ARG 4 memoryType
-	METHOD method_24529 setTaskList (Lnet/minecraft/class_4168;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V
+	METHOD m_beaamvsb getPossibleActivities ()Ljava/util/Set;
+	METHOD m_dergeawd forget (Lnet/minecraft/unmapped/C_wyqoybbv;)V
+		ARG 1 type
+	METHOD m_dulyrbal setSchedule (Lnet/minecraft/unmapped/C_jmyttyxt;)V
+		ARG 1 schedule
+	METHOD m_emnysroe copy ()Lnet/minecraft/unmapped/C_fexajqjr;
+	METHOD m_emvewdzi getOptionalMemory (Lnet/minecraft/unmapped/C_wyqoybbv;)Ljava/util/Optional;
+		ARG 1 type
+	METHOD m_fmlwnnbp createProfile (Ljava/util/Collection;Ljava/util/Collection;)Lnet/minecraft/unmapped/C_fexajqjr$C_qnszfiil;
+		ARG 0 memoryModules
+		ARG 1 sensors
+	METHOD m_fnkmwyip setTaskList (Lnet/minecraft/unmapped/C_wlxgpmqg;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V
 		ARG 1 activity
 		ARG 2 indexedTasks
 		ARG 3 requiredMemories
-	METHOD method_24530 setTaskList (Lnet/minecraft/class_4168;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;Ljava/util/Set;)V
+	METHOD m_ijqxmgio updateTasks (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_iqhzyawv encode (Lcom/mojang/serialization/DynamicOps;)Lcom/mojang/serialization/DataResult;
+		ARG 1 ops
+	METHOD m_kbmmzlgi tick (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_kmqrijmp createBrainCodec (Ljava/util/Collection;Ljava/util/Collection;)Lcom/mojang/serialization/Codec;
+		ARG 0 memoryModules
+		ARG 1 sensors
+	METHOD m_kryfekbn isEmptyCollection (Ljava/lang/Object;)Z
+		ARG 1 value
+	METHOD m_kxwtzwqx tickSensors (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_loiwsagd getSchedule ()Lnet/minecraft/unmapped/C_jmyttyxt;
+	METHOD m_mmvyxjce canDoActivity (Lnet/minecraft/unmapped/C_wlxgpmqg;)Z
+		ARG 1 activity
+	METHOD m_orbpsnos setMemory (Lnet/minecraft/unmapped/C_wyqoybbv;Ljava/util/Optional;)V
+		ARG 1 type
+		ARG 2 memory
+	METHOD m_oyyzepgp setTaskList (Lnet/minecraft/unmapped/C_wlxgpmqg;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;Ljava/util/Set;)V
 		ARG 1 activity
 		ARG 2 indexedTasks
 		ARG 3 requiredMemories
 		ARG 4 forgettingMemories
-	METHOD method_24531 resetPossibleActivities (Ljava/util/List;)V
-		ARG 1 activities
-	METHOD method_24535 setMemory (Lnet/minecraft/class_4140;Ljava/util/Optional;)V
-		ARG 1 type
-		ARG 2 memory
-	METHOD method_24536 resetPossibleActivities ()V
-	METHOD method_24537 forgetIrrelevantMemories (Lnet/minecraft/class_4168;)V
-		ARG 1 except
-	METHOD method_24538 getFirstPossibleNonCoreActivity ()Ljava/util/Optional;
-	METHOD method_27073 tickSensors (Lnet/minecraft/class_3218;Lnet/minecraft/class_1309;)V
-		ARG 1 world
-		ARG 2 entity
-	METHOD method_27074 getRunningTasks ()Ljava/util/List;
-	METHOD method_27075 tickMemories ()V
-	METHOD method_28310 encode (Lcom/mojang/serialization/DynamicOps;)Lcom/mojang/serialization/DataResult;
-		ARG 1 ops
-	METHOD method_28311 createProfile (Ljava/util/Collection;Ljava/util/Collection;)Lnet/minecraft/class_4095$class_5303;
-		ARG 0 memoryModules
-		ARG 1 sensors
-	METHOD method_28313 createBrainCodec (Ljava/util/Collection;Ljava/util/Collection;)Lcom/mojang/serialization/Codec;
-		ARG 0 memoryModules
-		ARG 1 sensors
-	METHOD method_28315 streamMemories ()Ljava/util/stream/Stream;
-	METHOD method_29519 hasMemoryModuleWithValue (Lnet/minecraft/class_4140;Ljava/lang/Object;)Z
+	METHOD m_ppibxnvf remember (Lnet/minecraft/unmapped/C_wyqoybbv;Ljava/lang/Object;)V
 		ARG 1 type
 		ARG 2 value
-	METHOD method_35058 getMemories ()Ljava/util/Map;
-	METHOD method_35059 getPossibleActivities ()Ljava/util/Set;
-	METHOD method_35060 clear ()V
-	METHOD method_36978 getMemory (Lnet/minecraft/class_4140;)J
+	METHOD m_qlvxbofs streamMemories ()Ljava/util/stream/Stream;
+	METHOD m_qzparyta setTaskList (Lnet/minecraft/unmapped/C_wlxgpmqg;Lcom/google/common/collect/ImmutableList;)V
+		ARG 1 activity
+		ARG 2 indexedTasks
+	METHOD m_rehuompz isMemoryInState (Lnet/minecraft/unmapped/C_wyqoybbv;Lnet/minecraft/unmapped/C_rfdezxbn;)Z
 		ARG 1 type
-	CLASS class_5302 MemoryEntry
-		FIELD field_24661 type Lnet/minecraft/class_4140;
-		FIELD field_24662 data Ljava/util/Optional;
-		METHOD <init> (Lnet/minecraft/class_4140;Ljava/util/Optional;)V
+		ARG 2 state
+	METHOD m_rgovbvsg clear ()V
+	METHOD m_rxwsjmgx forgetIrrelevantMemories (Lnet/minecraft/unmapped/C_wlxgpmqg;)V
+		ARG 1 except
+	METHOD m_rypdiyle hasActivity (Lnet/minecraft/unmapped/C_wlxgpmqg;)Z
+		ARG 1 activity
+	METHOD m_sbbusvcp indexTaskList (ILcom/google/common/collect/ImmutableList;)Lcom/google/common/collect/ImmutableList;
+		ARG 1 begin
+			COMMENT the beginning of the index of tasks, exclusive
+		ARG 2 tasks
+	METHOD m_sdiaxsfx setCoreActivities (Ljava/util/Set;)V
+		ARG 1 coreActivities
+	METHOD m_sqmjoppg resetPossibleActivities (Ljava/util/List;)V
+		ARG 1 activities
+	METHOD m_tjkdyqna setTaskList (Lnet/minecraft/unmapped/C_wlxgpmqg;ILcom/google/common/collect/ImmutableList;)V
+		ARG 1 activity
+		ARG 2 begin
+		ARG 3 list
+	METHOD m_tnyayyse refreshActivities (JJ)V
+		ARG 1 timeOfDay
+		ARG 3 time
+	METHOD m_ulvpxhyf getMemories ()Ljava/util/Map;
+	METHOD m_vvkamfcw startTasks (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_wdvacrth remember (Lnet/minecraft/unmapped/C_wyqoybbv;Ljava/lang/Object;J)V
+		ARG 1 type
+		ARG 2 value
+		ARG 3 startTime
+	METHOD m_whvdnljs setDefaultActivity (Lnet/minecraft/unmapped/C_wlxgpmqg;)V
+		ARG 1 activity
+	METHOD m_wqijpsii tickMemories ()V
+	METHOD m_xbwvmzpa getRunningTasks ()Ljava/util/List;
+	METHOD m_xvsmvhcz resetPossibleActivities ()V
+	METHOD m_yyhdfccv getMemory (Lnet/minecraft/unmapped/C_wyqoybbv;)J
+		ARG 1 type
+	METHOD m_zkfvjkry stopAllTasks (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_ztjamfjr setTaskList (Lnet/minecraft/unmapped/C_wlxgpmqg;ILcom/google/common/collect/ImmutableList;Lnet/minecraft/unmapped/C_wyqoybbv;)V
+		ARG 1 activity
+		ARG 2 begin
+		ARG 3 tasks
+		ARG 4 memoryType
+	METHOD m_zvoetmvi getFirstPossibleNonCoreActivity ()Ljava/util/Optional;
+	METHOD m_zzzzhwiz hasMemoryModule (Lnet/minecraft/unmapped/C_wyqoybbv;)Z
+		ARG 1 type
+	CLASS C_bffmzpxc MemoryEntry
+		FIELD f_qlttwqdu data Ljava/util/Optional;
+		FIELD f_rrypfelr type Lnet/minecraft/unmapped/C_wyqoybbv;
+		METHOD <init> (Lnet/minecraft/unmapped/C_wyqoybbv;Ljava/util/Optional;)V
 			ARG 1 type
 			ARG 2 data
-		METHOD method_28328 apply (Lnet/minecraft/class_4095;)V
-			ARG 1 brain
-		METHOD method_28330 serialize (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)V
-			ARG 1 ops
-			ARG 2 builder
-		METHOD method_28333 of (Lnet/minecraft/class_4140;Ljava/util/Optional;)Lnet/minecraft/class_4095$class_5302;
+		METHOD m_afmpczcv of (Lnet/minecraft/unmapped/C_wyqoybbv;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_fexajqjr$C_bffmzpxc;
 			ARG 0 type
 			ARG 1 data
-	CLASS class_5303 Profile
+		METHOD m_axpfxzse serialize (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)V
+			ARG 1 ops
+			ARG 2 builder
+		METHOD m_bcszxtyu apply (Lnet/minecraft/unmapped/C_fexajqjr;)V
+			ARG 1 brain
+	CLASS C_qnszfiil Profile
 		COMMENT A simple profile of a brain. Indicates what types of memory modules and
 		COMMENT sensors a brain can have.
-		FIELD field_24663 memoryModules Ljava/util/Collection;
-		FIELD field_24664 sensors Ljava/util/Collection;
-		FIELD field_24665 codec Lcom/mojang/serialization/Codec;
+		FIELD f_bqzrlweo memoryModules Ljava/util/Collection;
+		FIELD f_tgmhoekb sensors Ljava/util/Collection;
+		FIELD f_yefgqwtt codec Lcom/mojang/serialization/Codec;
 		METHOD <init> (Ljava/util/Collection;Ljava/util/Collection;)V
 			ARG 1 memoryModules
 			ARG 2 sensors
-		METHOD method_28335 deserialize (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/class_4095;
+		METHOD m_zpzfvblu deserialize (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_fexajqjr;
 			ARG 1 data
