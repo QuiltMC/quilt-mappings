@@ -1,4 +1,4 @@
-## Contributing
+# Contributing
 
 Our goal is to provide high-quality names that make intuitive sense. In our experience, this goal is best achieved through contribution of original names, rather than copying names from other mappings projects. While we believe that discussions relating to the names used by other mappings projects can be useful, those names must stand up to scrutiny on their own - we won't accept names just because they're present in other mappings projects. 
 
