@@ -1,20 +1,20 @@
 CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkManager
-	FIELD f_xcsdblxw lightingProvider Lnet/minecraft/unmapped/C_cyzhdzdb;
-	FIELD f_jjahjynz lastMobSpawningTime J
-	FIELD f_pdexdgbc spawnMonsters Z
-	FIELD f_khsyjrwj CHUNK_STATUSES Ljava/util/List;
-	FIELD f_veagurpa chunkGenerator Lnet/minecraft/unmapped/C_miblafgk;
-	FIELD f_ivnzmdmh spawnAnimals Z
-	FIELD f_exaujcbo world Lnet/minecraft/unmapped/C_uihwnwdb;
-	FIELD f_pshsjkdy ticketManager Lnet/minecraft/unmapped/C_dcxeqjrm;
-	FIELD f_hcrueztq serverThread Ljava/lang/Thread;
-	FIELD f_fbjafcxs threadedAnvilChunkStorage Lnet/minecraft/unmapped/C_ccazprxg;
-	FIELD f_pqbljdhi persistentStateManager Lnet/minecraft/unmapped/C_zvphpdsh;
-	FIELD f_zegjxxxi mainThreadExecutor Lnet/minecraft/unmapped/C_jwjvmcbe$C_wqghcsop;
-	FIELD f_rztyssbg chunkPosCache [J
-	FIELD f_qsbrnqqz chunkStatusCache [Lnet/minecraft/unmapped/C_tzhztgok;
 	FIELD f_chwthdbw chunkCache [Lnet/minecraft/unmapped/C_rqmmmzwl;
+	FIELD f_exaujcbo world Lnet/minecraft/unmapped/C_uihwnwdb;
+	FIELD f_fbjafcxs delegate Lnet/minecraft/unmapped/C_ccazprxg;
+	FIELD f_hcrueztq serverThread Ljava/lang/Thread;
 	FIELD f_ikvqjqoo spawnInfo Lnet/minecraft/unmapped/C_ddogyfvr$C_jixqfgst;
+	FIELD f_ivnzmdmh spawnAnimals Z
+	FIELD f_jjahjynz lastMobSpawningTime J
+	FIELD f_khsyjrwj CHUNK_STATUSES Ljava/util/List;
+	FIELD f_pdexdgbc spawnMonsters Z
+	FIELD f_pqbljdhi persistentStateManager Lnet/minecraft/unmapped/C_zvphpdsh;
+	FIELD f_pshsjkdy ticketManager Lnet/minecraft/unmapped/C_dcxeqjrm;
+	FIELD f_qsbrnqqz chunkStatusCache [Lnet/minecraft/unmapped/C_tzhztgok;
+	FIELD f_rztyssbg chunkPosCache [J
+	FIELD f_veagurpa chunkGenerator Lnet/minecraft/unmapped/C_miblafgk;
+	FIELD f_xcsdblxw lightingProvider Lnet/minecraft/unmapped/C_cyzhdzdb;
+	FIELD f_zegjxxxi mainThreadExecutor Lnet/minecraft/unmapped/C_jwjvmcbe$C_wqghcsop;
 	METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_tingawpb$C_wflccenu;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_wviludhr;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_miblafgk;IZLnet/minecraft/unmapped/C_dgwlcfnj;Lnet/minecraft/unmapped/C_ebkfdntg;Ljava/util/function/Supplier;)V
 		ARG 1 world
 		ARG 2 session
@@ -24,42 +24,28 @@ CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkMa
 		ARG 6 chunkGenerator
 		ARG 7 viewDistance
 		ARG 9 worldGenerationProgressListener
-	METHOD m_nyyhglqp getChunkGenerator ()Lnet/minecraft/unmapped/C_miblafgk;
-	METHOD m_nzsykbxo updatePosition (Lnet/minecraft/unmapped/C_ggsborxm;)V
-		COMMENT Updates the chunk section position of the {@code player}. This can either be a
-		COMMENT result of the player's movement or its camera entity's movement.
-		COMMENT
-		COMMENT <p>This updates the section position player's client is currently watching and
-		COMMENT the player's position in its entity tracker.
-		ARG 1 player
-	METHOD m_qsyxgoyk markForUpdate (Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 1 pos
-	METHOD m_rocksfli getChunkHolder (J)Lnet/minecraft/unmapped/C_ojdredkg;
-		ARG 1 pos
-	METHOD m_fxjlsnsh getChunkFuture (IILnet/minecraft/unmapped/C_tzhztgok;Z)Ljava/util/concurrent/CompletableFuture;
-		ARG 1 chunkX
-		ARG 2 chunkZ
-		ARG 3 leastStatus
-		ARG 4 create
 	METHOD m_ajdlypsa applyViewDistance (I)V
 		ARG 1 watchDistance
-	METHOD m_zupklork tickChunks ()V
-	METHOD m_jxyexmyn tick ()Z
-	METHOD m_wvgvexdu addTicket (Lnet/minecraft/unmapped/C_nlvrhxuc;Lnet/minecraft/unmapped/C_utrzsrny;ILjava/lang/Object;)V
-		COMMENT Adds a chunk ticket to the ticket manager.
-		COMMENT
-		COMMENT <p>Addition of a ticket may load chunk(s) at some point in the future depending on the loading level in the ticket's vicinity.
-		ARG 1 ticketType
-		ARG 2 pos
-		ARG 3 radius
-		ARG 4 argument
-	METHOD m_mdyblvyd save (Z)V
-		ARG 1 flush
+	METHOD m_cnjjiphr getPersistentStateManager ()Lnet/minecraft/unmapped/C_zvphpdsh;
 	METHOD m_crgtqygj getChunkFutureSyncOnMainThread (IILnet/minecraft/unmapped/C_tzhztgok;Z)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 chunkX
 		ARG 2 chunkZ
 		ARG 3 leastStatus
 		ARG 4 create
+	METHOD m_ctixghpf isMissingForLevel (Lnet/minecraft/unmapped/C_ojdredkg;I)Z
+		ARG 1 holder
+		ARG 2 maxLevel
+	METHOD m_evipwbxy unloadEntity (Lnet/minecraft/unmapped/C_srenftsa;)V
+		ARG 1 entity
+	METHOD m_fxjlsnsh getChunkFuture (IILnet/minecraft/unmapped/C_tzhztgok;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 chunkX
+		ARG 2 chunkZ
+		ARG 3 leastStatus
+		ARG 4 create
+	METHOD m_iiurnjvy putInCache (JLnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_tzhztgok;)V
+		ARG 1 pos
+		ARG 3 chunk
+		ARG 4 status
 	METHOD m_ivdwjwxt removeTicket (Lnet/minecraft/unmapped/C_nlvrhxuc;Lnet/minecraft/unmapped/C_utrzsrny;ILjava/lang/Object;)V
 		COMMENT Removes a chunk ticket from the ticket manager.
 		COMMENT
@@ -68,40 +54,54 @@ CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkMa
 		ARG 2 pos
 		ARG 3 radius
 		ARG 4 argument
-	METHOD m_xwdmdder getTotalChunksLoadedCount ()I
-	METHOD m_cnjjiphr getPersistentStateManager ()Lnet/minecraft/unmapped/C_zvphpdsh;
-	METHOD m_pylljtgy sendToNearbyPlayers (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_lrjrtjyz;)V
-		ARG 1 entity
-		ARG 2 packet
-	METHOD m_ctixghpf isMissingForLevel (Lnet/minecraft/unmapped/C_ojdredkg;I)Z
-		ARG 1 holder
-		ARG 2 maxLevel
-	METHOD m_evipwbxy unloadEntity (Lnet/minecraft/unmapped/C_srenftsa;)V
-		ARG 1 entity
-	METHOD m_kztitpdm sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_lrjrtjyz;)V
-		ARG 1 entity
-		ARG 2 packet
-	METHOD m_kknprjbd loadEntity (Lnet/minecraft/unmapped/C_srenftsa;)V
-		ARG 1 entity
-	METHOD m_rqizooiq executeQueuedTasks ()Z
-	METHOD m_qwoxxjzk getPointOfInterestStorage ()Lnet/minecraft/unmapped/C_tvigwgeu;
-	METHOD m_ngvucrzj isFutureReady (JLjava/util/function/Function;)Z
-		ARG 1 pos
-		ARG 3 futureFunction
-	METHOD m_tpkjxyoa initChunkCaches ()V
-	METHOD m_lhsgmeui getPendingTasks ()I
-	METHOD m_iiurnjvy putInCache (JLnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_tzhztgok;)V
-		ARG 1 pos
-		ARG 3 chunk
-		ARG 4 status
-	METHOD m_mahskwfl getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_utrzsrny;)Ljava/lang/String;
-		ARG 1 pos
+	METHOD m_jxyexmyn tick ()Z
 	METHOD m_kiddpypk ifChunkLoaded (JLjava/util/function/Consumer;)V
 		ARG 1 pos
 		ARG 3 chunkConsumer
+	METHOD m_kknprjbd loadEntity (Lnet/minecraft/unmapped/C_srenftsa;)V
+		ARG 1 entity
 	METHOD m_kvoepqcp getSpawnInfo ()Lnet/minecraft/unmapped/C_ddogyfvr$C_jixqfgst;
+	METHOD m_kztitpdm sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_lrjrtjyz;)V
+		ARG 1 entity
+		ARG 2 packet
+	METHOD m_lhsgmeui getPendingTasks ()I
+	METHOD m_mahskwfl getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_utrzsrny;)Ljava/lang/String;
+		ARG 1 pos
+	METHOD m_mdyblvyd save (Z)V
+		ARG 1 flush
+	METHOD m_ngvucrzj isFutureReady (JLjava/util/function/Function;)Z
+		ARG 1 pos
+		ARG 3 futureFunction
+	METHOD m_nyyhglqp getChunkGenerator ()Lnet/minecraft/unmapped/C_miblafgk;
+	METHOD m_nzsykbxo updatePosition (Lnet/minecraft/unmapped/C_ggsborxm;)V
+		COMMENT Updates the chunk section position of the {@code player}. This can either be a
+		COMMENT result of the player's movement or its camera entity's movement.
+		COMMENT
+		COMMENT <p>This updates the section position player's client is currently watching and
+		COMMENT the player's position in its entity tracker.
+		ARG 1 player
 	METHOD m_ptdxuape isTickingFutureReady (J)Z
 		ARG 1 pos
+	METHOD m_pylljtgy sendToNearbyPlayers (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_lrjrtjyz;)V
+		ARG 1 entity
+		ARG 2 packet
+	METHOD m_qsyxgoyk markForUpdate (Lnet/minecraft/unmapped/C_kkdaznyh;)V
+		ARG 1 pos
+	METHOD m_qwoxxjzk getPointOfInterestStorage ()Lnet/minecraft/unmapped/C_tvigwgeu;
+	METHOD m_rocksfli getChunkHolder (J)Lnet/minecraft/unmapped/C_ojdredkg;
+		ARG 1 pos
+	METHOD m_rqizooiq executeQueuedTasks ()Z
+	METHOD m_tpkjxyoa initChunkCaches ()V
+	METHOD m_wvgvexdu addTicket (Lnet/minecraft/unmapped/C_nlvrhxuc;Lnet/minecraft/unmapped/C_utrzsrny;ILjava/lang/Object;)V
+		COMMENT Adds a chunk ticket to the ticket manager.
+		COMMENT
+		COMMENT <p>Addition of a ticket may load chunk(s) at some point in the future depending on the loading level in the ticket's vicinity.
+		ARG 1 ticketType
+		ARG 2 pos
+		ARG 3 radius
+		ARG 4 argument
+	METHOD m_xwdmdder getTotalChunksLoadedCount ()I
+	METHOD m_zupklork tickChunks ()V
 	CLASS C_wqghcsop MainThreadExecutor
 		METHOD <init> (Lnet/minecraft/unmapped/C_jwjvmcbe;Lnet/minecraft/unmapped/C_nbzftcdc;)V
 			ARG 2 world
