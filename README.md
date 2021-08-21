@@ -1,16 +1,16 @@
-# Yarn
+# Quilt Mappings
 
-Yarn is a set of open, unencumbered Minecraft mappings, free for everyone to use under the Creative Commons Zero license. The intention is to let 
+Quilt Mappings is a set of open, unencumbered Minecraft mappings, free for everyone to use under the Creative Commons Zero license. The intention is to let 
 everyone mod Minecraft freely and openly, while also being able to innovate and process the mappings as they see fit.
 
 To see the current version being targeted, check the branch name!
 
 ## Usage
-To use yarn-deobfuscated Minecraft for Minecraft modding or as a dependency in a Java project, you can use [loom](https://github.com/fabricmc/fabric-loom) Gradle plugin. See [fabric wiki tutorial](https://fabricmc.net/wiki/tutorial:setup) for more information.
+To use Quilt Mappings-deobfuscated Minecraft for Minecraft modding or as a dependency in a Java project, you can use [quilt-gradle](https://github.com/quiltmc/quilt-gradle) Gradle plugin. See [fabric wiki tutorial](https://fabricmc.net/wiki/tutorial:setup) for more information.
 
 To obtain a deobfuscated Minecraft jar, [`./gradlew mapNamedJar`](#mapNamedJar) will generate a jar named like `<minecraft version>-named.jar`, which can be sent to a decompiler for deobfuscated code.
 
-Please note to run the yarn build script **Java 16** or higher is required!
+Please note to run the Quilt Mappings build script **Java 16** or higher is required!
 
 ## Contributing
 
@@ -24,27 +24,27 @@ Please have a look at the [naming conventions](/CONVENTIONS.md) before submittin
 ### Getting Started
 
 1. Fork and clone the repo
-2. Run `./gradlew yarn` (Linux, macOS) or `gradlew yarn` (Windows) to open [Enigma](https://github.com/FabricMC/Enigma), a user interface to easily edit the mappings
+2. Run `./gradlew mappings` (Linux, macOS) or `gradlew mappings` (Windows) to open [Enigma](https://github.com/QuiltMC/Enigma), a user interface to easily edit the mappings
 3. Commit and push your work to your fork
 4. Open a pull request with your changes
 
 ## Gradle
-Yarn uses Gradle to provide a number of utility tasks for working with the mappings.
+Quilt Mappings uses Gradle to provide a number of utility tasks for working with the mappings.
 
-### `yarn`
-Setup and download and launch the latest version of [Enigma](https://github.com/FabricMC/Enigma) automatically configured to use the merged jar and the mappings.
+### `mappings`
+Setup and download and launch the latest version of [Enigma](https://github.com/QuiltMC/Enigma) automatically configured to use the merged jar and the mappings.
 
 Compared to launching Enigma externally, the gradle task adds a name guesser plugin that automatically maps enums and a few constant field names.
 
-### `yarnUnpicked`
+### `mappingsUnpicked`
 Same as above, but unpicks the constants and launches Enigma with them. Can be a little bit slower to get going.
 
 
 ### `build`
-Build a GZip'd archive containing a tiny mapping between official (obfuscated), [intermediary](https://github.com/FabricMC/intermediary), and yarn names ("named") and packages enigma mappings into a zip archive..
+Build a GZip'd archive containing a tiny mapping between official (obfuscated), [hashed-mojmap](https://github.com/QuiltMC/mappings-hasher), and Quilt Mappings names ("named") and packages enigma mappings into a zip archive.
 
 ### `mapNamedJar`
-Builds a deobfuscated jar with yarn mappings and automapped fields (enums, etc.). Unmapped names will be filled with [intermediary](https://github.com/FabricMC/Intermediary) names.
+Builds a deobfuscated jar with Quilt mappings and automapped fields (enums, etc.). Unmapped names will be filled with [hashed-mojmap](https://github.com/QuiltMC/mappings-hasher) names.
 
 ### `decompileCFR`
 Decompile the mapped source code. **Note:** This is not designed to be recompiled.
