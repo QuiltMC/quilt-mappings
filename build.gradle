@@ -26,6 +26,8 @@ plugins {
 	id "org.barfuin.gradle.taskinfo" version "1.3.0"
 }
 
+def USE_SNAPSHOT_HASHES = true
+
 def minecraft_version = "1.17.1"
 
 def ENV = System.getenv()
@@ -44,6 +46,10 @@ if (ENV.BRANCH_NAME) {
 
 repositories {
 	mavenCentral()
+	maven {
+		name "Quilt Repositiory"
+		url "https://maven.quiltmc.org/repository/release"
+	}
 	maven {
 		name "Fabric Repository"
 		url 'https://maven.fabricmc.net'
@@ -83,7 +89,7 @@ dependencies {
 	javadocClasspath "org.jetbrains:annotations:${project.jetbrains_annotations_version}"
 	javadocClasspath "com.google.code.findbugs:jsr305:3.0.2" // for some other jsr annotations
 	decompileClasspath "net.fabricmc:cfr:${project.cfr_version}"
-	mappingPoetJar "net.fabricmc:mappingpoet:${project.mappingpoet_version}"
+	mappingPoetJar "org.quiltmc:mapping-poet:${project.mapping_poet_version}"
 	unpick "net.fabricmc.unpick:unpick-cli:${project.unpick_version}"
 }
 
@@ -219,6 +225,14 @@ task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
 task downloadHashedMojmap(type: Download) {
 	group = buildMappingGroup
 	def url = "https://maven.quiltmc.org/repository/release/org/quiltmc/hashed-mojmap/${minecraft_version}/hashed-mojmap-${minecraft_version}.jar"
+	if (USE_SNAPSHOT_HASHES) {
+		def xml = new URL("https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/maven-metadata.xml").text
+		def metadata = new XmlSlurper().parseText(xml)
+		def version = metadata.versioning.snapshot;
+		def snapshotVersion = "${minecraft_version}-${version.timestamp}-${version.buildNumber}"
+		url = "https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/hashed-mojmap-${snapshotVersion}.jar"
+	}
+
 	src com.google.common.net.UrlEscapers.urlFragmentEscaper().escape(url)
 	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.jar")
 
@@ -742,7 +756,7 @@ task genFakeSource(type: JavaExec, dependsOn: ["mergeV2", "mapNamedJar"]) {
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
 
-	mainClass = "net.fabricmc.mappingpoet.Main"
+	mainClass = "org.quiltmc.mappingpoet.Main"
 	classpath configurations.mappingPoet
 	// use merged v2 so we have all namespaces in jd
 	args mergeV2.output.getAbsolutePath(), namedJar.getAbsolutePath(), fakeSourceDir.getAbsolutePath(), libraries.getAbsolutePath()
@@ -794,7 +808,7 @@ javadoc {
 				'implSpec:a:Implementation Requirements:',
 				'implNote:a:Implementation Note:'
 		)
-		taglets "net.fabricmc.mappingpoet.jd.MappingTaglet"
+		taglets "org.quiltmc.mappingpoet.jd.MappingTaglet"
 		// taglet path, header, extra stylesheet settings deferred
 		it.use()
 
