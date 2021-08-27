@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
+	FIELD f_agzipcor ACTIVATE_ITEM_ANIMATION_TICKS I
 	FIELD f_aitkporl renderTypeGlintShader Lnet/minecraft/unmapped/C_btihllla;
 	FIELD f_amhsmcci movementFovMultiplier F
 	FIELD f_aptlchoi renderTypeArmorCutoutNoCullShader Lnet/minecraft/unmapped/C_btihllla;
@@ -47,6 +48,7 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 	FIELD f_jvuuxexf lastSkyDarkness F
 	FIELD f_kkxiiaqb positionColorLightmapShader Lnet/minecraft/unmapped/C_btihllla;
 	FIELD f_krvqhlds positionShader Lnet/minecraft/unmapped/C_btihllla;
+	FIELD f_lgullmyp DEBUG_DEPTH_BUFFER Z
 	FIELD f_lohklkcx renderTypeTextShader Lnet/minecraft/unmapped/C_btihllla;
 	FIELD f_lpldzclm renderHand Z
 	FIELD f_ltordjjj zoom F
@@ -119,6 +121,7 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 	METHOD m_bhxtkwyy getPositionTexColorShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_bjwjmsuy loadForcedShader ()V
 	METHOD m_bkvjgtdy loadProjectionMatrix (Lnet/minecraft/unmapped/C_bijddvxg;)V
+		ARG 1 projectionMatrix
 	METHOD m_bmoouuzg (Lnet/minecraft/unmapped/C_btihllla;)V
 		ARG 0 shader
 	METHOD m_bolgeksx getRenderTypeArmorCutoutNoCullShader ()Lnet/minecraft/unmapped/C_btihllla;
@@ -204,7 +207,9 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 	METHOD m_klnjxkgl getRenderTypeItemEntityTranslucentCullShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_kneccsya getNightVisionStrength (Lnet/minecraft/unmapped/C_ndyxaxsu;F)F
 		ARG 0 entity
+		ARG 1 tickDelta
 	METHOD m_kotqqjwc disableShader ()V
+	METHOD m_kuftlleh getFarDepth ()F
 	METHOD m_ldaovznj getRenderTypeTextShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_lkwqdxmi getRenderTypeTextIntensityShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_llyeylha setBlockOutlineEnabled (Z)V
@@ -219,6 +224,8 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 		ARG 3 tickDelta
 	METHOD m_mfcbjmti (Lnet/minecraft/unmapped/C_btihllla;)V
 		ARG 0 shader
+	METHOD m_miruqozx renderNauseaOverlay (F)V
+		ARG 1 distortionAmount
 	METHOD m_mjupnwyl (Lnet/minecraft/unmapped/C_btihllla;)V
 		ARG 0 shader
 	METHOD m_mkxuukod getPositionTexShader ()Lnet/minecraft/unmapped/C_btihllla;
@@ -239,6 +246,8 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 		ARG 0 shader
 	METHOD m_opzijgus onCameraEntitySet (Lnet/minecraft/unmapped/C_srenftsa;)V
 		ARG 1 entity
+	METHOD m_ovisozwf (Lnet/minecraft/unmapped/C_srenftsa;)Z
+		ARG 0 entity
 	METHOD m_pggbnhqb getRenderTypeTripwireShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_pkmjslpn updateTargetedEntity (F)V
 		ARG 1 tickDelta
@@ -249,6 +258,7 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 	METHOD m_qqjqiadg getRenderTypeTextIntensitySeeThroughShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_qtesovxw getParticleShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_qwkoawsr getBasicProjectionMatrix (D)Lnet/minecraft/unmapped/C_bijddvxg;
+		ARG 1 fov
 	METHOD m_qxotrdbc clearShaders ()V
 	METHOD m_racqeipr (Lnet/minecraft/unmapped/C_btihllla;)V
 		ARG 0 shader
@@ -267,6 +277,8 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 		ARG 1 factory
 		ARG 2 name
 		ARG 3 vertexFormat
+	METHOD m_sazjgwlf (Lcom/mojang/datafixers/util/Pair;)V
+		ARG 1 pair
 	METHOD m_sgybcsbk getNewEntityShader ()Lnet/minecraft/unmapped/C_btihllla;
 	METHOD m_swdvpckb (Lnet/minecraft/unmapped/C_btihllla;)V
 		ARG 0 shader
@@ -307,6 +319,8 @@ CLASS net/minecraft/unmapped/C_nuodktks net/minecraft/client/render/GameRenderer
 	METHOD m_wpvfalvi shouldRenderBlockOutline ()Z
 	METHOD m_wslhcntv (Lnet/minecraft/unmapped/C_btihllla;)V
 		ARG 0 shader
+	METHOD m_wuffbxhd (Lcom/mojang/datafixers/util/Pair;)V
+		ARG 0 pair
 	METHOD m_wuimqgzl (Lnet/minecraft/unmapped/C_btihllla;)V
 		ARG 0 shader
 	METHOD m_xesqxfsp (Lnet/minecraft/unmapped/C_btihllla;)V
