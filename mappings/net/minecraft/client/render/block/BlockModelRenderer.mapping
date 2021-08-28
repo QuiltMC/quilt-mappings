@@ -1,11 +1,22 @@
 CLASS net/minecraft/unmapped/C_ywzaaoga net/minecraft/client/render/block/BlockModelRenderer
+	FIELD f_gxbjkmke CUBIC_FACE I
 	FIELD f_herbizmv BRIGHTNESS_CACHE Ljava/lang/ThreadLocal;
+	FIELD f_mbdpzqla PARTIAL_FACE I
 	FIELD f_pmgzizdd colors Lnet/minecraft/unmapped/C_qkygeyii;
 	FIELD f_thenajld BRIGHTNESS_CACHE_MAX_SIZE I
 	FIELD f_vavpvpnv DIRECTIONS [Lnet/minecraft/unmapped/C_fxhiuupx;
 	METHOD <init> (Lnet/minecraft/unmapped/C_qkygeyii;)V
 		ARG 1 colors
 	METHOD m_abljhmlp render (Lnet/minecraft/unmapped/C_dvxszsnc$C_bvefkoqp;Lnet/minecraft/unmapped/C_xuzdhtgi;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_vbkhmhnn;FFFII)V
+		ARG 1 entry
+		ARG 2 consumer
+		ARG 3 blockState
+		ARG 4 model
+		ARG 5 red
+		ARG 6 green
+		ARG 7 blue
+		ARG 8 light
+		ARG 9 overlay
 	METHOD m_bczsxhbv render (Lnet/minecraft/unmapped/C_pupuuejx;Lnet/minecraft/unmapped/C_vbkhmhnn;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_xuzdhtgi;ZLjava/util/Random;JI)Z
 		ARG 1 world
 		ARG 2 model
@@ -30,6 +41,14 @@ CLASS net/minecraft/unmapped/C_ywzaaoga net/minecraft/client/render/block/BlockM
 		ARG 10 overlay
 	METHOD m_eganzhuq enableBrightnessCache ()V
 	METHOD m_iiqufdfy renderQuad (Lnet/minecraft/unmapped/C_dvxszsnc$C_bvefkoqp;Lnet/minecraft/unmapped/C_xuzdhtgi;FFFLjava/util/List;II)V
+		ARG 0 entry
+		ARG 1 consumer
+		ARG 2 red
+		ARG 3 green
+		ARG 4 blue
+		ARG 5 quads
+		ARG 6 light
+		ARG 7 overlay
 	METHOD m_ioldakpt renderQuadsFlat (Lnet/minecraft/unmapped/C_pupuuejx;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;IIZLnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_xuzdhtgi;Ljava/util/List;Ljava/util/BitSet;)V
 		ARG 1 world
 		ARG 2 state
@@ -38,6 +57,7 @@ CLASS net/minecraft/unmapped/C_ywzaaoga net/minecraft/client/render/block/BlockM
 		ARG 5 overlay
 		ARG 6 useWorldLight
 		ARG 7 matrices
+		ARG 8 consumer
 		ARG 9 quads
 		ARG 10 flags
 	METHOD m_quecvzfv renderFlat (Lnet/minecraft/unmapped/C_pupuuejx;Lnet/minecraft/unmapped/C_vbkhmhnn;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_xuzdhtgi;ZLjava/util/Random;JI)Z
@@ -49,6 +69,8 @@ CLASS net/minecraft/unmapped/C_ywzaaoga net/minecraft/client/render/block/BlockM
 		ARG 6 vertexConsumer
 		ARG 7 cull
 		ARG 8 random
+		ARG 9 seedd
+		ARG 11 overlay
 	METHOD m_rnuentom getQuadDimensions (Lnet/minecraft/unmapped/C_pupuuejx;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;[ILnet/minecraft/unmapped/C_fxhiuupx;[FLjava/util/BitSet;)V
 		ARG 1 world
 		ARG 2 state
@@ -86,30 +108,51 @@ CLASS net/minecraft/unmapped/C_ywzaaoga net/minecraft/client/render/block/BlockM
 		ARG 14 light3
 		ARG 15 overlay
 	CLASS C_lsejcjkw NeighborData
+		FIELD f_bmddwyeg $VALUES [Lnet/minecraft/unmapped/C_ywzaaoga$C_lsejcjkw;
+		FIELD f_celbidco vextex1Weights [Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;
+		FIELD f_elsvomkr FACING [Lnet/minecraft/unmapped/C_ywzaaoga$C_lsejcjkw;
+		FIELD f_iqjtpzad vertex0Weights [Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;
 		FIELD f_nfhmxdcw faces [Lnet/minecraft/unmapped/C_fxhiuupx;
+		FIELD f_qiyarbrt vertex3Weights [Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;
 		FIELD f_tudqerls nonCubicWeight Z
+		FIELD f_tuhpccbn vertex2Weights [Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;
 		METHOD <init> (Ljava/lang/String;I[Lnet/minecraft/unmapped/C_fxhiuupx;FZ[Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;[Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;[Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;[Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;)V
 			ARG 3 faces
+			ARG 4 unused
 			ARG 5 nonCubicWeight
+			ARG 6 vertex0Weights
+			ARG 7 vertex1Weights
+			ARG 8 vertex2Weights
+			ARG 9 vertex3Weights
+		METHOD m_dhqgknek $values ()[Lnet/minecraft/unmapped/C_ywzaaoga$C_lsejcjkw;
 		METHOD m_okbwzyng getData (Lnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_ywzaaoga$C_lsejcjkw;
+			ARG 0 direction
+		METHOD m_ucskgeum ([Lnet/minecraft/unmapped/C_ywzaaoga$C_lsejcjkw;)V
+			ARG 0 neighborData
 	CLASS C_lupvxlqn Translation
 		FIELD f_juyyxfzi firstCorner I
 		FIELD f_krirrefd thirdCorner I
 		FIELD f_nsgawsyj VALUES [Lnet/minecraft/unmapped/C_ywzaaoga$C_lupvxlqn;
 		FIELD f_qzahsbct fourthCorner I
+		FIELD f_ulpfekof $VALUES [Lnet/minecraft/unmapped/C_ywzaaoga$C_lupvxlqn;
 		FIELD f_zizwbpul secondCorner I
 		METHOD <init> (Ljava/lang/String;IIIII)V
 			ARG 3 firstCorner
 			ARG 4 secondCorner
 			ARG 5 thirdCorner
 			ARG 6 fourthCorner
+		METHOD m_dxnahwow $values ()[Lnet/minecraft/unmapped/C_ywzaaoga$C_lupvxlqn;
 		METHOD m_phrsyfvn getTranslations (Lnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_ywzaaoga$C_lupvxlqn;
 			ARG 0 direction
+		METHOD m_qehhfhcd ([Lnet/minecraft/unmapped/C_ywzaaoga$C_lupvxlqn;)V
+			ARG 0 translation
 	CLASS C_qsvndnzn NeighborOrientation
 		FIELD f_jauvbxch shape I
+		FIELD f_rqtoolov $VALUES [Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;
 		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_fxhiuupx;Z)V
 			ARG 3 direction
 			ARG 4 flip
+		METHOD m_cyzijosx $values ()[Lnet/minecraft/unmapped/C_ywzaaoga$C_qsvndnzn;
 	CLASS C_vpjlejua BrightnessCache
 		FIELD f_hkppvjjo floatCache Lit/unimi/dsi/fastutil/longs/Long2FloatLinkedOpenHashMap;
 		FIELD f_kamhmrjt enabled Z
@@ -135,4 +178,5 @@ CLASS net/minecraft/unmapped/C_ywzaaoga net/minecraft/client/render/block/BlockM
 			ARG 4 direction
 			ARG 5 box
 			ARG 6 flags
+			ARG 7 shaded
 		METHOD m_wdpubmck getBrightness (IIIIFFFF)I
