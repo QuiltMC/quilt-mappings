@@ -10,6 +10,7 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 	FIELD f_tdmobllv executor Ljava/util/concurrent/Executor;
 	FIELD f_vzapgtmr worldRenderer Lnet/minecraft/unmapped/C_xhbakkfs;
 	FIELD f_wdkwldxr bufferCount I
+	FIELD f_xkbskhhs MAX_WORKER_THREADS_FOR_32_BIT_SYSTEMS I
 	FIELD f_xkcitlln world Lnet/minecraft/unmapped/C_nbzftcdc;
 	FIELD f_zxntukzo cameraPosition Lnet/minecraft/unmapped/C_xxfpupgv;
 	METHOD <init> (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_xhbakkfs;Ljava/util/concurrent/Executor;ZLnet/minecraft/unmapped/C_wblirdjw;)V
@@ -23,6 +24,8 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 	METHOD m_ckxfvfnd getCameraPosition ()Lnet/minecraft/unmapped/C_xxfpupgv;
 	METHOD m_csoyaeaz setCameraPosition (Lnet/minecraft/unmapped/C_xxfpupgv;)V
 		ARG 1 cameraPosition
+	METHOD m_dvexanph (Lnet/minecraft/unmapped/C_gnnmqnxn;Lnet/minecraft/unmapped/C_sijxdjhl;Ljava/lang/Void;)Ljava/util/concurrent/CompletionStage;
+		ARG 3 _void
 	METHOD m_fgbtavnj getDebugString ()Ljava/lang/String;
 	METHOD m_gcrttrav reset ()V
 	METHOD m_ibpdblqu upload (Lnet/minecraft/unmapped/C_gnnmqnxn;Lnet/minecraft/unmapped/C_sijxdjhl;)Ljava/util/concurrent/CompletableFuture;
@@ -46,6 +49,8 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 		ARG 1 world
 	METHOD m_xorlakyn getToBatchCount ()I
 	METHOD m_ynakaovh getFreeBufferCount ()I
+	METHOD m_ynsnuhhl (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_wnhmotna;Lnet/minecraft/unmapped/C_wblirdjw;Ljava/lang/Void;)Ljava/util/concurrent/CompletionStage;
+		ARG 2 _void
 	CLASS C_aglcjoqz ChunkData
 		FIELD f_efgtpxgc empty Z
 		FIELD f_fllpqjeo nonEmptyLayers Ljava/util/Set;
@@ -62,6 +67,8 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 		METHOD m_rlbqulza isEmpty (Lnet/minecraft/unmapped/C_vnnwlzit;)Z
 			ARG 1 layer
 	CLASS C_syqmacqs Result
+		FIELD f_mkxroqsk $VALUES [Lnet/minecraft/unmapped/C_dxiaofic$C_syqmacqs;
+		METHOD m_zpaqtkrt $values ()[Lnet/minecraft/unmapped/C_dxiaofic$C_syqmacqs;
 	CLASS C_wxagbycl BuiltChunk
 		FIELD f_botqhqni rebuildFrame I
 		FIELD f_cqpehqit sortTask Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_cwrlnmet;
@@ -70,6 +77,7 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 		FIELD f_jjadauey buffers Ljava/util/Map;
 		FIELD f_lorscetz needsImportantRebuild Z
 		FIELD f_mbsognzg neighborPositions [Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;
+		FIELD f_sbljonxt CHUNK_SIZE I
 		FIELD f_sgofltzp origin Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;
 		FIELD f_thiowbgt index I
 		FIELD f_voeortrs blockEntities Ljava/util/Set;
@@ -89,6 +97,8 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 			ARG 1 buffer
 		METHOD m_ifuruewa cancelRebuild ()V
 		METHOD m_jmfqodrf delete ()V
+		METHOD m_jsbuiick (Lnet/minecraft/unmapped/C_vnnwlzit;)Lnet/minecraft/unmapped/C_vnnwlzit;
+			ARG 0 renderLayer
 		METHOD m_ldzcygqu getData ()Lnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;
 		METHOD m_lfpzsybq cancel ()V
 		METHOD m_neilzsft isChunkNonEmpty (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
@@ -105,7 +115,11 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 		METHOD m_sicenjjm clear ()V
 		METHOD m_simlqzmf setNoCullingBlockEntities (Ljava/util/Set;)V
 			ARG 1 noCullingBlockEntities
+		METHOD m_thhfsfgo (Lnet/minecraft/unmapped/C_vnnwlzit;)Lnet/minecraft/unmapped/C_sijxdjhl;
+			ARG 0 renderLayer
 		METHOD m_urlaccvs rebuild ()V
+		METHOD m_uuqxgzle ([Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;)V
+			ARG 0 mutablePositions
 		METHOD m_uvswrrqn setOrigin (III)V
 			ARG 1 x
 			ARG 2 y
@@ -117,6 +131,11 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 			METHOD <init> (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl;DLnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;)V
 				ARG 2 distance
 				ARG 4 data
+			METHOD m_qdvtdqxy (Ljava/lang/Void;)Lnet/minecraft/unmapped/C_dxiaofic$C_syqmacqs;
+				ARG 0 _void
+			METHOD m_vutbazom (Lnet/minecraft/unmapped/C_dxiaofic$C_syqmacqs;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_dxiaofic$C_syqmacqs;
+				ARG 1 result
+				ARG 2 throwable
 		CLASS C_wnhmotna Task
 			FIELD f_rsbkicla distance D
 			FIELD f_xtxprkid cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
@@ -142,3 +161,8 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 				ARG 1 data
 				ARG 2 blockEntities
 				ARG 3 blockEntity
+			METHOD m_lfkrblvs (Ljava/util/List;Lnet/minecraft/unmapped/C_wblirdjw;Lnet/minecraft/unmapped/C_vnnwlzit;)V
+				ARG 3 renderLayer
+			METHOD m_rzopqfad (Lnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;Ljava/util/List;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_dxiaofic$C_syqmacqs;
+				ARG 2 list
+				ARG 3 throwable
