@@ -4,7 +4,10 @@ CLASS net/minecraft/unmapped/C_lsgymooz net/minecraft/client/gl/GLImportProcesso
 	COMMENT prefixed by a comment describing the line position and original file location
 	COMMENT of the import.
 	FIELD f_bbymrohg MOJ_IMPORT_PATTERN Ljava/util/regex/Pattern;
+	FIELD f_cnhzpple COMMENT_C Ljava/lang/String;
+	FIELD f_fkyliqvq ENDS_WITH_WHITESPACE Ljava/util/regex/Pattern;
 	FIELD f_rcupoizz IMPORT_VERSION_PATTERN Ljava/util/regex/Pattern;
+	FIELD f_vuhcrekr COMMENT_LINE Ljava/lang/String;
 	METHOD m_ffktimwd readImport (Ljava/lang/String;I)Ljava/lang/String;
 		ARG 1 line
 		ARG 2 start
@@ -13,10 +16,17 @@ CLASS net/minecraft/unmapped/C_lsgymooz net/minecraft/client/gl/GLImportProcesso
 		COMMENT version of itself for insertion as a comment.
 		ARG 1 line
 		ARG 2 context
+	METHOD m_luqzljwt hasDisabledDirective (Ljava/lang/String;Ljava/util/regex/Matcher;I)Z
+		ARG 0 line
+		ARG 1 matcher
+		ARG 2 start
 	METHOD m_qgprjayg loadImport (ZLjava/lang/String;)Ljava/lang/String;
 		COMMENT Called to load an import reference's source code.
 		ARG 1 inline
 		ARG 2 name
+	METHOD m_tzebhmtl hasEnabledDirective (Ljava/lang/String;Ljava/util/regex/Matcher;)Z
+		ARG 0 line
+		ARG 1 matcher
 	METHOD m_ubfqweej parseImports (Ljava/lang/String;Lnet/minecraft/unmapped/C_lsgymooz$C_ewlunvtc;Ljava/lang/String;)Ljava/util/List;
 		ARG 1 source
 		ARG 2 context

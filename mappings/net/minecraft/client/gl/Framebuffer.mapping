@@ -2,12 +2,16 @@ CLASS net/minecraft/unmapped/C_clevgwxx net/minecraft/client/gl/Framebuffer
 	FIELD f_ddcqayjs texFilter I
 	FIELD f_dyasdlat viewportHeight I
 	FIELD f_ejuhwuxs textureHeight I
+	FIELD f_jyaqbdry ALPHA_CHANNEL I
 	FIELD f_lcrovuid colorAttachment I
+	FIELD f_ouwznvlo BLUE_CHANNEL I
 	FIELD f_qfuspsah viewportWidth I
 	FIELD f_tiukbqvw fbo I
 	FIELD f_tlmatqzd useDepthAttachment Z
 	FIELD f_udwurpym depthAttachment I
+	FIELD f_upaaxgtt GREEN_CHANNEL I
 	FIELD f_vsajkyce clearColor [F
+	FIELD f_vtnatmpm RED_CHANNEL I
 	FIELD f_zmjktofc textureWidth I
 	METHOD <init> (Z)V
 		ARG 1 useDepth
@@ -23,6 +27,7 @@ CLASS net/minecraft/unmapped/C_clevgwxx net/minecraft/client/gl/Framebuffer
 	METHOD m_jiutmuvs draw (IIZ)V
 		ARG 1 width
 		ARG 2 height
+		ARG 3 disableBlend
 	METHOD m_jowqbent resize (IIZ)V
 		ARG 1 width
 		ARG 2 height
@@ -37,6 +42,7 @@ CLASS net/minecraft/unmapped/C_clevgwxx net/minecraft/client/gl/Framebuffer
 		ARG 2 height
 		ARG 3 getError
 	METHOD m_nvfoltjm endRead ()V
+	METHOD m_ocxztnxu bindColorAttachmentAsTexture ()V
 	METHOD m_qnfonddf getDepthAttachment ()I
 	METHOD m_rdclizhi beginWrite (Z)V
 		ARG 1 setViewport
@@ -49,6 +55,7 @@ CLASS net/minecraft/unmapped/C_clevgwxx net/minecraft/client/gl/Framebuffer
 	METHOD m_xadninux delete ()V
 	METHOD m_xqmaivih endWrite ()V
 	METHOD m_yxqktozb setTexFilter (I)V
+		ARG 1 filter
 	METHOD m_zshkezrg initFbo (IIZ)V
 		ARG 1 width
 		ARG 2 height
