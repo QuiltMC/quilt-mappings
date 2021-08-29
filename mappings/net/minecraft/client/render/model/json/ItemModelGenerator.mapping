@@ -1,5 +1,7 @@
 CLASS net/minecraft/unmapped/C_qneiiegc net/minecraft/client/render/model/json/ItemModelGenerator
 	FIELD f_ewfhwvfv LAYERS Ljava/util/List;
+	FIELD f_hvxxxdwl MIN_Z F
+	FIELD f_vypkmwkh MAX_Z F
 	METHOD m_bsmfwvov addSubComponents (Lnet/minecraft/unmapped/C_twbwrlfu;Ljava/lang/String;I)Ljava/util/List;
 		ARG 1 sprite
 		ARG 2 key
@@ -13,21 +15,28 @@ CLASS net/minecraft/unmapped/C_qneiiegc net/minecraft/client/render/model/json/I
 		ARG 2 frame
 		ARG 3 x
 		ARG 4 y
+		ARG 5 width
+		ARG 6 height
 	METHOD m_vgriwmin create (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ubzerxmw;)Lnet/minecraft/unmapped/C_ubzerxmw;
 		ARG 1 textureGetter
 		ARG 2 blockModel
-	METHOD m_vlrrvccx buildCube (Ljava/util/List;Lnet/minecraft/unmapped/C_qneiiegc$C_ovwbcvtm;II)V
+	METHOD m_vlrrvccx createOrExpandCurrentCube (Ljava/util/List;Lnet/minecraft/unmapped/C_qneiiegc$C_ovwbcvtm;II)V
 		ARG 1 cubes
 		ARG 2 side
 		ARG 3 x
 		ARG 4 y
-	METHOD m_werifyaw buildCube (Lnet/minecraft/unmapped/C_qneiiegc$C_ovwbcvtm;Ljava/util/List;Lnet/minecraft/unmapped/C_twbwrlfu;IIIIIZ)V
+	METHOD m_werifyaw extendModelBackward (Lnet/minecraft/unmapped/C_qneiiegc$C_ovwbcvtm;Ljava/util/List;Lnet/minecraft/unmapped/C_twbwrlfu;IIIIIZ)V
 		ARG 1 side
 		ARG 2 cubes
 		ARG 3 sprite
 		ARG 4 frame
 		ARG 5 x
 		ARG 6 y
+		ARG 7 width
+		ARG 8 height
+		ARG 9 currentPixelIsTransparent
+	METHOD m_wkgvejpm (IILnet/minecraft/unmapped/C_twbwrlfu;Ljava/util/List;I)V
+		ARG 5 frame
 	METHOD m_zsuxbaqa getFrames (Lnet/minecraft/unmapped/C_twbwrlfu;)Ljava/util/List;
 		ARG 1 sprite
 	CLASS C_oimkekhi Frame
@@ -48,12 +57,14 @@ CLASS net/minecraft/unmapped/C_qneiiegc net/minecraft/client/render/model/json/I
 	CLASS C_ovwbcvtm Side
 		FIELD f_eqyjdice offsetX I
 		FIELD f_fhzayjgk direction Lnet/minecraft/unmapped/C_fxhiuupx;
+		FIELD f_fwmafjmy $VALUES [Lnet/minecraft/unmapped/C_qneiiegc$C_ovwbcvtm;
 		FIELD f_hofztlaw offsetY I
 		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_fxhiuupx;II)V
 			ARG 3 direction
 			ARG 4 offsetX
 			ARG 5 offsetY
 		METHOD m_awtptnvc getOffsetY ()I
+		METHOD m_psqbuvmf $values ()[Lnet/minecraft/unmapped/C_qneiiegc$C_ovwbcvtm;
 		METHOD m_qkotxtyk getDirection ()Lnet/minecraft/unmapped/C_fxhiuupx;
 		METHOD m_rpkiuaus getOffsetX ()I
 		METHOD m_rqwixypp isVertical ()Z

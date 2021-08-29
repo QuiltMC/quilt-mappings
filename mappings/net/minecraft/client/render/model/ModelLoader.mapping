@@ -17,9 +17,11 @@ CLASS net/minecraft/unmapped/C_zfklpnjg net/minecraft/client/render/model/ModelL
 	FIELD f_kuwqtmbt BLOCK_DESTRUCTION_RENDER_LAYERS Ljava/util/List;
 	FIELD f_kvrsgplg stateLookup Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 	FIELD f_lkrrdtux MISSING_DEFINITION Ljava/lang/String;
+	FIELD f_mbbzwonv INVISIBLE_MODEL_GROUP I
 	FIELD f_obyppoub resourceManager Lnet/minecraft/unmapped/C_fsaprnmt;
 	FIELD f_oftffxac bakedModels Ljava/util/Map;
 	FIELD f_ordyoeka variantMapDeserializationContext Lnet/minecraft/unmapped/C_yyierdsh$C_hqdugtxa;
+	FIELD f_pehuumoe MISSING_ID_STRING Ljava/lang/String;
 	FIELD f_pouhwbrz bakedModelCache Ljava/util/Map;
 	FIELD f_qxiywwcw BUILTIN_MODEL_DEFINITIONS Ljava/util/Map;
 	FIELD f_rccmqilw spriteAtlasData Ljava/util/Map;
@@ -32,6 +34,8 @@ CLASS net/minecraft/unmapped/C_zfklpnjg net/minecraft/client/render/model/ModelL
 	FIELD f_tavcbrdb nextStateId I
 	FIELD f_tmihrfvd ITEM_MODEL_GENERATOR Lnet/minecraft/unmapped/C_qneiiegc;
 	FIELD f_uweixnsu LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_uwfqiard SINGLETON_MODEL_GROUP I
+	FIELD f_vodjidvb DESTROY_STAGES I
 	FIELD f_vtfbndha WATER_FLOW Lnet/minecraft/unmapped/C_skpznkwo;
 	FIELD f_wpyqkcri WATER_OVERLAY Lnet/minecraft/unmapped/C_skpznkwo;
 	FIELD f_xjpqefua BANNER_BASE Lnet/minecraft/unmapped/C_skpznkwo;
@@ -41,31 +45,86 @@ CLASS net/minecraft/unmapped/C_zfklpnjg net/minecraft/client/render/model/ModelL
 	METHOD <init> (Lnet/minecraft/unmapped/C_fsaprnmt;Lnet/minecraft/unmapped/C_qkygeyii;Lnet/minecraft/unmapped/C_qsfbclse;I)V
 		ARG 1 resourceManager
 		ARG 2 blockColors
+		ARG 3 profiler
 	METHOD m_arocfxzt loadModelFromJson (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_ubzerxmw;
 		ARG 1 id
+	METHOD m_botnodsl (Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 1 state
+	METHOD m_btxghewn (ILnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 2 blockState
 	METHOD m_ezrsgryx putModel (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_irhmwqrn;)V
 		ARG 1 id
 		ARG 2 unbakedModel
 	METHOD m_flzzjnpu loadModel (Lnet/minecraft/unmapped/C_acfwypcn;)V
 		ARG 1 id
+	METHOD m_gklplmcu (Lnet/minecraft/unmapped/C_ubzerxmw;)V
+		ARG 0 blockModel
 	METHOD m_gndzcsmm getPropertyValue (Lnet/minecraft/unmapped/C_wyutzlzv;Ljava/lang/String;)Ljava/lang/Comparable;
 		ARG 0 property
 		ARG 1 string
+	METHOD m_gsjzbagb (Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;)V
+		ARG 0 map
 	METHOD m_guzwdkyh addModel (Lnet/minecraft/unmapped/C_pmsnducj;)V
 		ARG 1 modelId
+	METHOD m_hfamaucb (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 2 state
 	METHOD m_hwfoueqo addStates (Ljava/lang/Iterable;)V
 		ARG 1 states
+	METHOD m_idmhtcpy (Ljava/util/Map;Lnet/minecraft/unmapped/C_ngeebdfb;Ljava/util/List;Lnet/minecraft/unmapped/C_zosvggtk;Lcom/mojang/datafixers/util/Pair;Lnet/minecraft/unmapped/C_yyierdsh;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 6 blockState
+	METHOD m_ivaeqjze (Lcom/mojang/datafixers/util/Pair;)V
+		ARG 0 pair
+	METHOD m_jbllxvgu (Ljava/util/Map;Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 2 blockState
+	METHOD m_jkeijqzf (Ljava/util/Set;Lnet/minecraft/unmapped/C_irhmwqrn;)Ljava/util/stream/Stream;
+		ARG 2 unbakedModel
+	METHOD m_klkzkuzv (Ljava/util/Map;Lnet/minecraft/unmapped/C_acfwypcn;Lcom/mojang/datafixers/util/Pair;Ljava/util/Map;Lnet/minecraft/unmapped/C_pmsnducj;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 5 identifier
+		ARG 6 blockState
+	METHOD m_lbofjuil (Lnet/minecraft/unmapped/C_ocgenyut;)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 Resource
+	METHOD m_lueloegh (I)Lnet/minecraft/unmapped/C_acfwypcn;
+		ARG 0 stage
+	METHOD m_mzkmftzz (Ljava/util/HashSet;)V
+		ARG 0 identifiers
 	METHOD m_ooodwhgf bake (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_troqycuv;)Lnet/minecraft/unmapped/C_vbkhmhnn;
 		ARG 1 id
 		ARG 2 settings
+	METHOD m_ovfxwayb (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_qakiefze;)V
+		ARG 1 identifier
+		ARG 2 state
+	METHOD m_qfqgvfkt (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_acfwypcn;
+		ARG 0 stage
+	METHOD m_qriabkvh (Lnet/minecraft/unmapped/C_zfklpnjg$C_qleblnbi;Ljava/util/Set;)V
+		ARG 1 ModelDefinition
+		ARG 2 set
+	METHOD m_rfferymu (Lcom/mojang/datafixers/util/Pair;Ljava/util/Map$Entry;)Z
+		ARG 1 entry
 	METHOD m_sgvyomnz getOrLoadModel (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_irhmwqrn;
 		ARG 1 id
 	METHOD m_sstkeeko stateKeyToPredicate (Lnet/minecraft/unmapped/C_qakiefze;Ljava/lang/String;)Ljava/util/function/Predicate;
 		ARG 0 stateFactory
 		ARG 1 key
+	METHOD m_trtyyijy (Ljava/util/Map;Lnet/minecraft/unmapped/C_zosvggtk;Ljava/util/List;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 3 blockState
+	METHOD m_unylsnyk (Lnet/minecraft/unmapped/C_acfwypcn;)V
+		ARG 1 identifier
+	METHOD m_urszokpf (Lnet/minecraft/unmapped/C_zfklpnjg$C_qleblnbi;)Ljava/util/Set;
+		ARG 0 modelDefinition
+	METHOD m_vqdqwpdx (Lcom/mojang/datafixers/util/Pair;)Z
+		ARG 0 pair
 	METHOD m_wilvuttj getStateLookup ()Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+	METHOD m_wqzrbeqw (Lcom/google/common/collect/ImmutableList;Lnet/minecraft/unmapped/C_qakiefze;Ljava/util/Map;Ljava/util/List;Lnet/minecraft/unmapped/C_zosvggtk;Lcom/mojang/datafixers/util/Pair;Lnet/minecraft/unmapped/C_yyierdsh;Lnet/minecraft/unmapped/C_acfwypcn;Lcom/mojang/datafixers/util/Pair;Ljava/lang/String;Lnet/minecraft/unmapped/C_ngeebdfb;)V
+		ARG 9 variant
+		ARG 10 weightedUnbakedModel
 	METHOD m_xfdiruhl upload (Lnet/minecraft/unmapped/C_reudklgr;Lnet/minecraft/unmapped/C_qsfbclse;)Lnet/minecraft/unmapped/C_vsuqdkzp;
+		ARG 1 textureManager
+		ARG 2 profiler
+	METHOD m_xicdwdwa (Lnet/minecraft/unmapped/C_qodpmxmm;Ljava/util/Map;Lnet/minecraft/unmapped/C_pmeibtxt;)Z
+		ARG 2 blockState
 	METHOD m_xpbrkrlr getBakedModelMap ()Ljava/util/Map;
+	METHOD m_yumobdyy (Lnet/minecraft/unmapped/C_ubzerxmw;)V
+		ARG 0 blockModel
 	CLASS C_dznlgeyu ModelLoaderException
 		METHOD <init> (Ljava/lang/String;)V
 			ARG 1 message
@@ -77,6 +136,8 @@ CLASS net/minecraft/unmapped/C_zfklpnjg net/minecraft/client/render/model/ModelL
 			ARG 2 values
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
+		METHOD m_fzvtyeix (Lnet/minecraft/unmapped/C_qakiefze;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_riqhryfa;)Z
+			ARG 2 component
 		METHOD m_ggmjmwoo create (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_zosvggtk;Ljava/util/Collection;)Lnet/minecraft/unmapped/C_zfklpnjg$C_qleblnbi;
 			ARG 0 state
 			ARG 1 rawModel
