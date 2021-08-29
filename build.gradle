@@ -59,6 +59,12 @@ repositories {
 		url 'https://libraries.minecraft.net/'
 	}
 	mavenLocal()
+	if (USE_SNAPSHOT_HASHES) {
+		maven {
+			name "Quilt Snapshot Repositiory"
+			url "https://maven.quiltmc.org/repository/snapshot"
+		}
+	}
 }
 
 configurations {
@@ -78,6 +84,7 @@ configurations {
 		transitive = true
 	}
 	unpick
+	hashed
 }
 
 def unpickMetaFile = file("unpick-definitions/unpick.json")
@@ -91,6 +98,7 @@ dependencies {
 	decompileClasspath "net.fabricmc:cfr:${project.cfr_version}"
 	mappingPoetJar "org.quiltmc:mapping-poet:${project.mapping_poet_version}"
 	unpick "net.fabricmc.unpick:unpick-cli:${project.unpick_version}"
+	hashed "org.quiltmc:hashed-mojmap:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
 
 def setupGroup = "jar setup"
@@ -225,16 +233,8 @@ task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
 
 task downloadHashedMojmap(type: Download) {
 	group = buildMappingGroup
-	def url = "https://maven.quiltmc.org/repository/release/org/quiltmc/hashed-mojmap/${minecraft_version}/hashed-mojmap-${minecraft_version}.jar"
-	if (USE_SNAPSHOT_HASHES) {
-		def xml = new URL("https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/maven-metadata.xml").text
-		def metadata = new XmlSlurper().parseText(xml)
-		def version = metadata.versioning.snapshot;
-		def snapshotVersion = "${minecraft_version}-${version.timestamp}-${version.buildNumber}"
-		url = "https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/hashed-mojmap-${snapshotVersion}.jar"
-	}
 
-	src com.google.common.net.UrlEscapers.urlFragmentEscaper().escape(url)
+	src new URL(configurations.hashed.resolve().iterator().next().toURI().toString())
 	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.jar")
 
 	def output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.tiny")
@@ -311,6 +311,7 @@ task downloadMcLibs(dependsOn: downloadWantedVersionManifest) {
 
 task invertHashedMojmap(dependsOn: downloadHashedMojmap, type: FileOutput) {
 	group = buildMappingGroup
+	println "files: " + downloadHashedMojmap.outputs.getFiles()
 	def input = downloadHashedMojmap.outputs.getFiles()[0]
 
 	output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap-inverted.tiny")
@@ -904,8 +905,14 @@ publishing {
 			}
 			artifact sourcesJar
 			artifact javadocJar
-		}
 
+			pom.withXml {
+				def hashedDep = it.asNode().appendNode('dependencies').appendNode('dependency')
+				hashedDep.appendNode('groupId', 'org.quiltmc')
+				hashedDep.appendNode('artifactId', 'hashed-mojmap')
+				hashedDep.appendNode('version', configurations.hashed.getDependencies().iterator().next().getVersion())
+			}
+		}
 	}
 	repositories {
 		if (ENV.MAVEN_URL) {
