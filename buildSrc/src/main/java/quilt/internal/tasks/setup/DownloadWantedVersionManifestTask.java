@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import groovy.json.JsonSlurper;
 import org.apache.commons.io.FileUtils;
+import org.checkerframework.checker.units.qual.C;
 import org.gradle.api.DefaultTask;
 import quilt.internal.Constants;
 import quilt.internal.MappingsPlugin;
@@ -28,15 +29,15 @@ public class DownloadWantedVersionManifestTask extends DefaultTask {
 
         doLast(_this -> {
             try {
-                Optional<Object> _manifestVersion = getManifestVersion(manifestFile);
+                Optional<Object> _manifestVersion = manifestVersion.isEmpty() ? getManifestVersion(manifestFile) : manifestVersion;
                 //nb need to re-read here in case it didn't exist before
-                if (manifestVersion.isPresent() || MappingsPlugin.getExtension(getProject()).getFileConstants().versionFile.exists()) {
+                if (_manifestVersion.isPresent() || MappingsPlugin.getExtension(getProject()).getFileConstants().versionFile.exists()) {
 
-                    if (manifestVersion.isPresent()) {
-                        FileUtils.copyURLToFile(new URL(((String) ((Map<String, ?>) manifestVersion.get()).get("url"))), MappingsPlugin.getExtension(getProject()).getFileConstants().versionFile);
+                    if (_manifestVersion.isPresent()) {
+                        FileUtils.copyURLToFile(new URL(((String) ((Map<String, ?>) _manifestVersion.get()).get("url"))), MappingsPlugin.getExtension(getProject()).getFileConstants().versionFile);
                     }
                 } else {
-                    throw new RuntimeException("No version data for Minecraft version ${minecraft_version}");
+                    throw new RuntimeException("No version data for Minecraft version " + Constants.MINECRAFT_VERSION);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
