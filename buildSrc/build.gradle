@@ -1,0 +1,36 @@
+plugins {
+	id 'java'
+	id 'java-gradle-plugin'
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		name "Quilt Repositiory"
+		url "https://maven.quiltmc.org/repository/release"
+	}
+	maven {
+		name "Fabric Repository"
+		url 'https://maven.fabricmc.net'
+	}
+	maven {
+		name "Mojang"
+		url 'https://libraries.minecraft.net/'
+	}
+}
+
+dependencies {
+	implementation("commons-io:commons-io:2.11.0")
+	implementation("de.undercouch:gradle-download-task:4.1.1")
+	implementation("net.fabricmc:stitch:${project.stitch_version}")
+	implementation("com.google.guava:guava:30.1.1-jre")
+}
+
+gradlePlugin {
+	plugins {
+		mappingsLogic {
+			id = 'mappings-logic'
+			implementationClass = 'quilt.internal.MappingsPlugin'
+		}
+	}
+}
