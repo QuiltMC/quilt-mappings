@@ -2,6 +2,7 @@ package quilt.internal;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import quilt.internal.tasks.build.CheckMappingsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
@@ -18,6 +19,8 @@ public class MappingsPlugin implements Plugin<Project> {
         target.getTasks().create("downloadMinecraftJars", DownloadMinecraftJarsTask.class);
         target.getTasks().create("mergeJars", MergeJarsTask.class);
         target.getTasks().create("downloadMinecraftLibraries", DownloadMinecraftLibrariesTask.class);
+
+        target.getTasks().create("checkMappings", CheckMappingsTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {

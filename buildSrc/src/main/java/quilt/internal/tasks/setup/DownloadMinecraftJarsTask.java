@@ -2,7 +2,6 @@ package quilt.internal.tasks.setup;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.function.Function;
@@ -10,27 +9,24 @@ import java.util.function.Function;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
-import de.undercouch.gradle.tasks.download.DownloadAction;
-import groovy.json.JsonSlurper;
 import org.apache.commons.io.FileUtils;
-import org.gradle.api.DefaultTask;
+import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
-import quilt.internal.FileConstants;
-import quilt.internal.MappingsPlugin;
+import quilt.internal.tasks.MappingsTask;
+import quilt.internal.util.JsonUtils;
 
-public class DownloadMinecraftJarsTask extends DefaultTask {
+public class DownloadMinecraftJarsTask extends MappingsTask {
     public DownloadMinecraftJarsTask() {
-        this.setGroup(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP_GROUP);
         this.dependsOn("downloadWantedVersionManifest");
-        FileConstants fileConstants = MappingsPlugin.getExtension(getProject()).getFileConstants();
         getInputs().files(fileConstants.versionFile);
 
         getOutputs().files(fileConstants.clientJar, fileConstants.serverJar);
 
         getOutputs().upToDateWhen(_input -> {
             try {
-                Map<String, ?> downloads = (Map<String, ?>) ((Map<String, ?>) new JsonSlurper().parseText(FileUtils.readFileToString(fileConstants.versionFile, Charset.defaultCharset()))).get("downloads");
-                Function<String, String> sha1Getter = name -> ((String) ((Map<String, ?>) downloads.get(name)).get("sha1"));
+                Map<String, ?> downloads = JsonUtils.getFromTree(FileUtils.readFileToString(fileConstants.versionFile, Charset.defaultCharset()), "downloads");
+                Function<String, String> sha1Getter = name -> JsonUtils.getFromTree(downloads, name, "sha1");
                 return fileConstants.clientJar.exists() && fileConstants.serverJar.exists()
                         && validateChecksum(fileConstants.clientJar, sha1Getter.apply("client"))
                         && validateChecksum(fileConstants.serverJar, sha1Getter.apply("server"));
@@ -38,40 +34,36 @@ public class DownloadMinecraftJarsTask extends DefaultTask {
                 return false;
             }
         });
-
-        doLast(_this -> {
-            if (!fileConstants.versionFile.exists()) {
-                throw new RuntimeException("Can't download the jars without the ${versionFile.name} file!");
-            }
-
-            //reload in case it changed
-            try {
-                Map<String, ?> version = (Map<String, ?>) new JsonSlurper().parseText(FileUtils.readFileToString(fileConstants.versionFile, Charset.defaultCharset()));
-
-
-                Function<String, String> urlGetter = name -> ((String) ((Map<String, ?>) ((Map<String, ?>) version.get("downloads")).get(name)).get("url"));
-
-                getLogger().lifecycle(":downloading minecraft jars");
-
-                DownloadAction downloadClient = new DownloadAction(getProject(), this);
-                downloadClient.src(new URL(urlGetter.apply("client")));
-                downloadClient.dest(fileConstants.clientJar);
-                downloadClient.overwrite(false);
-
-                DownloadAction downloadServer = new DownloadAction(getProject(), this);
-                downloadServer.src(new URL(urlGetter.apply("server")));
-                downloadServer.dest(fileConstants.serverJar);
-                downloadServer.overwrite(false);
-
-                downloadClient.execute();
-                downloadServer.execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
-    public static boolean validateChecksum(File file, String checksum) throws IOException {
+    @TaskAction
+    public void downloadMinecraftJars() throws IOException {
+        if (!fileConstants.versionFile.exists()) {
+            throw new RuntimeException("Can't download the jars without the " + fileConstants.versionFile.getName() + " file!");
+        }
+
+        //reload in case it changed
+        Map<String, ?> version = JsonUtils.getFromTree(FileUtils.readFileToString(fileConstants.versionFile, Charset.defaultCharset()));
+
+        Function<String, String> urlGetter = name -> JsonUtils.getFromTree(version, "downloads", name, "url");
+
+        getLogger().lifecycle(":downloading minecraft jars");
+
+        startDownload()
+                .src(urlGetter.apply("client"))
+                .dest(fileConstants.clientJar)
+                .overwrite(false)
+                .download();
+
+        startDownload()
+                .src(urlGetter.apply("server"))
+                .dest(fileConstants.serverJar)
+                .overwrite(false)
+                .download();
+    }
+
+    @SuppressWarnings("deprecation")
+    private static boolean validateChecksum(File file, String checksum) throws IOException {
         if (file != null) {
             HashCode hash = Files.asByteSource(file).hash(Hashing.sha1());
             StringBuilder builder = new StringBuilder();

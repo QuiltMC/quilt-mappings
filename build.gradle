@@ -1,10 +1,14 @@
 buildscript {
 	repositories {
+		mavenCentral()
+		maven {
+			name "Quilt Repositiory"
+			url "https://maven.quiltmc.org/repository/release"
+		}
 		maven {
 			name "Fabric Repository"
 			url 'https://maven.fabricmc.net'
 		}
-		mavenCentral()
 	}
 	dependencies {
 		classpath "cuchaz:enigma-cli:${project.enigma_version}"
@@ -24,6 +28,7 @@ plugins {
 	id 'org.cadixdev.licenser' version '0.6.1'
 	id 'net.fabricmc.filament' version '0.3.0'
 	id "org.barfuin.gradle.taskinfo" version "1.3.0"
+	id "mappings-logic"
 }
 
 def USE_SNAPSHOT_HASHES = true
@@ -101,7 +106,6 @@ dependencies {
 	hashed "org.quiltmc:hashed-mojmap:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
 
-def setupGroup = "jar setup"
 def mappingsGroup = "quilt-mappings"
 def buildMappingGroup = "mapping build"
 def mapJarGroup = "jar mapping"
@@ -109,135 +113,32 @@ def mappingsDir = file("mappings")
 def cacheFilesMinecraft = file(".gradle/minecraft")
 def tempDir = file(".gradle/temp")
 def mergedFile = file("${minecraft_version}-merged.jar")
-def hashedMojmapJar = file("${minecraft_version}-hashed-mojmap.jar")
-def unpickedJar = file("${minecraft_version}-hashed-mojmap-unpicked.jar")
+def hashedMojmapJar = file("${minecraft_version}-hashed.jar")
+def unpickedJar = file("${minecraft_version}-hashed-unpicked.jar")
 def namedJar = file("${minecraft_version}-named.jar")
-def versionFile = new File(cacheFilesMinecraft, "${minecraft_version}.json")
-def clientJar = new File(cacheFilesMinecraft, "${minecraft_version}-client.jar")
-def serverJar = new File(cacheFilesMinecraft, "${minecraft_version}-server.jar")
 def libraries = new File(cacheFilesMinecraft, "libraries")
 def libs = new File("build/libs/")
 
 
-import com.google.common.hash.Hashing
-import com.google.common.io.Files
-import cuchaz.enigma.command.CheckMappingsCommand
 import cuchaz.enigma.command.ComposeMappingsCommand
 import cuchaz.enigma.command.MapSpecializedMethodsCommand
 import groovy.io.FileType
-import groovy.json.JsonSlurper
-import net.fabricmc.stitch.commands.CommandProposeFieldNames
 import net.fabricmc.stitch.commands.tinyv2.CommandMergeTinyV2
 import net.fabricmc.stitch.commands.tinyv2.CommandProposeV2FieldNames
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2
-import net.fabricmc.stitch.merge.JarMerger
 import net.fabricmc.tinyremapper.OutputConsumerPath
 import net.fabricmc.tinyremapper.TinyRemapper
 import net.fabricmc.tinyremapper.TinyUtils
-import org.apache.commons.io.FileUtils
 
-import java.nio.charset.StandardCharsets
-import java.util.regex.Pattern
 import java.util.zip.GZIPOutputStream
-
-static boolean validateChecksum(File file, String checksum) {
-	if (file != null) {
-		def hash = Files.asByteSource(file).hash(Hashing.sha1())
-		def builder = new StringBuilder()
-		hash.asBytes().each {
-			builder.append(Integer.toString((it & 0xFF) + 0x100, 16).substring(1))
-		}
-		return builder.toString() == checksum
-	}
-	return false
-}
-
-task downloadVersionsManifest {
-	group = setupGroup
-	//inputs.property "mc_ver", minecraft_version
-	inputs.property "currenttime", new Date()
-	def manifestFile = new File(cacheFilesMinecraft, "version_manifest_v2.json")
-	outputs.file(manifestFile)
-	doLast {
-		logger.lifecycle(":downloading minecraft versions manifest")
-		FileUtils.copyURLToFile(new URL("https://launchermeta.mojang.com/mc/game/version_manifest_v2.json"), manifestFile)
-	}
-}
-
-static def getManifestVersion(File manifestFile, String minecraft_version) {
-	def manifest = manifestFile.exists() ? new JsonSlurper().parseText(FileUtils.readFileToString(manifestFile)) : null
-	return manifest != null ? manifest.versions.stream().filter({
-		it.id.equals(minecraft_version)
-	}).findFirst() : java.util.Optional.empty()
-}
-
-task downloadWantedVersionManifest(dependsOn: downloadVersionsManifest) {
-	group = setupGroup
-	def manifestFile = downloadVersionsManifest.outputs.files.singleFile
-	def manifestVersion = getManifestVersion(manifestFile, minecraft_version)
-
-	//have to grab the release time as there's a current timestamp on each element?!
-	inputs.property "releaseTime", manifestVersion.isPresent() ? manifestVersion.get().releaseTime : -1
-
-	outputs.file versionFile
-
-	doLast {
-		manifestVersion = getManifestVersion(manifestFile, minecraft_version)
-		//nb need to re-read here in case it didn't exist before
-		if (manifestVersion.isPresent() || versionFile.exists()) {
-
-			if (manifestVersion.isPresent()) {
-				FileUtils.copyURLToFile(new URL(manifestVersion.get().url), versionFile)
-			}
-		} else {
-			throw new RuntimeException("No version data for Minecraft version ${minecraft_version}")
-		}
-	}
-
-}
-
-task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
-	group = setupGroup
-	inputs.files versionFile
-
-	outputs.files(clientJar, serverJar)
-
-	outputs.upToDateWhen {
-		def version = new JsonSlurper().parseText(FileUtils.readFileToString(versionFile))
-		return clientJar.exists() && serverJar.exists() && validateChecksum(clientJar, version.downloads.client.sha1) && validateChecksum(serverJar, version.downloads.server.sha1)
-	}
-
-	doLast {
-		if (!versionFile.exists()) {
-			throw new RuntimeException("Can't download the jars without the ${versionFile.name} file!")
-		}
-
-		//reload in case it changed
-		def version = new JsonSlurper().parseText(FileUtils.readFileToString(versionFile))
-
-		logger.lifecycle(":downloading minecraft jars")
-
-		download {
-			src new URL(version.downloads.client.url)
-			dest clientJar
-			overwrite false
-		}
-
-		download {
-			src new URL(version.downloads.server.url)
-			dest serverJar
-			overwrite false
-		}
-	}
-}
 
 task downloadHashedMojmap(type: Download) {
 	group = buildMappingGroup
 
 	src new URL(configurations.hashed.resolve().iterator().next().toURI().toString())
-	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.jar")
+	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed.jar")
 
-	def output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.tiny")
+	def output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed.tiny")
 	outputs.file output
 
 	doLast {
@@ -252,69 +153,13 @@ task downloadHashedMojmap(type: Download) {
 	}
 }
 
-task mergeJars(dependsOn: downloadMcJars) {
-	group = setupGroup
-	inputs.files downloadMcJars.outputs.files.files
-	outputs.file(mergedFile)
-
-	doLast {
-		logger.lifecycle(":merging jars")
-		def client = inputs.files.files.find { it.name.endsWith("-client.jar") }
-		def server = inputs.files.files.find { it.name.endsWith("-server.jar") }
-		def merged = mergedFile
-
-		if (merged.exists()) {
-			return
-		}
-
-		def jarMerger = new JarMerger(client, server, merged)
-		jarMerger.merge()
-		jarMerger.close()
-	}
-
-}
-
-task downloadMcLibs(dependsOn: downloadWantedVersionManifest) {
-	group = setupGroup
-	inputs.files versionFile
-
-	outputs.dir(libraries)
-
-	outputs.upToDateWhen { false }
-
-	doLast {
-		if (!versionFile.exists()) {
-			throw new RuntimeException("Can't download the jars without the ${versionFile.name} file!")
-		}
-
-		def version = new JsonSlurper().parseText(FileUtils.readFileToString(versionFile, StandardCharsets.UTF_8))
-
-		logger.lifecycle(":downloading minecraft libraries")
-
-		if (!libraries.exists()) {
-			libraries.mkdirs()
-		}
-
-		version.libraries.each {
-			def downloadUrl = it.downloads.artifact.url
-
-			download {
-				src downloadUrl
-				dest new File(libraries, downloadUrl.substring(downloadUrl.lastIndexOf("/") + 1))
-				overwrite false
-			}
-
-			project.dependencies.add("decompileClasspath", it.name)
-		}
-	}
-}
 
 task invertHashedMojmap(dependsOn: downloadHashedMojmap, type: FileOutput) {
 	group = buildMappingGroup
 	println "files: " + downloadHashedMojmap.outputs.getFiles()
 	def input = downloadHashedMojmap.outputs.getFiles()[0]
 
-	output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap-inverted.tiny")
+	output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-inverted.tiny")
 	outputs.file(output)
 
 	outputs.upToDateWhen { false }
@@ -332,9 +177,9 @@ task invertHashedMojmap(dependsOn: downloadHashedMojmap, type: FileOutput) {
 	}
 }
 
-task mapHashedMojmapJar(dependsOn: [downloadMcLibs, downloadHashedMojmap, mergeJars]) {
+task mapHashedMojmapJar(dependsOn: [downloadMinecraftLibraries, downloadHashedMojmap, mergeJars]) {
 	group = mapJarGroup
-	inputs.files downloadMcLibs.outputs.files.files
+	inputs.files downloadMinecraftLibraries.outputs.files.files
 	outputs.file(hashedMojmapJar)
 
 	//Force the task to always run
@@ -385,25 +230,6 @@ task mappings(dependsOn: mapHashedMojmapJar) {
 			arg(value: mappingsDir.getAbsolutePath())
 			arg(value: '-profile')
 			arg(value: 'enigma_profile.json')
-		}
-	}
-}
-
-task checkMappings(dependsOn: mapHashedMojmapJar) {
-	group = buildMappingGroup
-	inputs.dir mappingsDir
-	doLast {
-		logger.lifecycle(":checking mappings")
-
-		String[] args = [
-				hashedMojmapJar.getAbsolutePath(),
-				mappingsDir.getAbsolutePath()
-		]
-
-		try {
-			new CheckMappingsCommand().run(args)
-		} catch (IllegalStateException ignored) {
-			// just print, don't fail the task
 		}
 	}
 }
@@ -573,7 +399,7 @@ task buildTinyWithEnum(dependsOn: "mergeTiny", type: FileOutput) {
 
 task mapNamedJar(dependsOn: ["mergeV2", "unpickHashedJar"]) {
 	group = mapJarGroup
-	inputs.files downloadMcLibs.outputs.files.files
+	inputs.files downloadMinecraftLibraries.outputs.files.files
 	outputs.file(namedJar)
 
 	//Force the task to always run
@@ -781,7 +607,7 @@ task decompileCFR(type: JavaExec, dependsOn: [mapNamedJar]) {
 
 javadoc {
 	dependsOn genFakeSource
-	dependsOn downloadMcLibs
+	dependsOn downloadMinecraftLibraries
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
 
@@ -839,7 +665,7 @@ javadoc {
 		addBooleanOption 'Xdoclint:accessibility', true
 	}
 	source fileTree(fakeSourceDir) + sourceSets.constants.allJava + sourceSets.packageDocs.allJava
-	classpath = configurations.javadocClasspath.plus downloadMcLibs.outputs.files.asFileTree
+	classpath = configurations.javadocClasspath.plus downloadMinecraftLibraries.outputs.files.asFileTree
 
 	doLast {
 		project.copy {
@@ -910,7 +736,7 @@ publishing {
 			pom.withXml {
 				def hashedDep = it.asNode().appendNode('dependencies').appendNode('dependency')
 				hashedDep.appendNode('groupId', 'org.quiltmc')
-				hashedDep.appendNode('artifactId', 'hashed-mojmap')
+				hashedDep.appendNode('artifactId', 'hashed')
 				hashedDep.appendNode('version', configurations.hashed.getDependencies().iterator().next().getVersion())
 			}
 		}
@@ -958,38 +784,6 @@ task checkVersion {
 }
 
 publish.mustRunAfter checkVersion
-
-static void mapJar(File output, File input, File mappings, File libraries, String from, String to,
-				   Action<TinyRemapper.Builder> action = {}) {
-	if (output.exists()) {
-		output.delete()
-	}
-
-	def remapperBuilder = TinyRemapper.newRemapper()
-			.withMappings(TinyUtils.createTinyMappingProvider(mappings.toPath(), from, to))
-			.renameInvalidLocals(true)
-			.rebuildSourceFilenames(true)
-			.invalidLvNamePattern(Pattern.compile(/\$\$\d+/))
-	action.execute(remapperBuilder)
-	def remapper = remapperBuilder
-			.build()
-
-	try {
-		def outputConsumer = new OutputConsumerPath(output.toPath())
-		outputConsumer.addNonClassFiles(input.toPath())
-		remapper.readInputs(input.toPath())
-
-		libraries.eachFileRecurse(FileType.FILES) { file ->
-			remapper.readClassPath(file.toPath())
-		}
-		remapper.apply(outputConsumer)
-		outputConsumer.close()
-		remapper.finish()
-	} catch (Exception e) {
-		remapper.finish()
-		throw new RuntimeException("Failed to remap jar", e)
-	}
-}
 
 class FileOutput extends DefaultTask {
 	@OutputFile
