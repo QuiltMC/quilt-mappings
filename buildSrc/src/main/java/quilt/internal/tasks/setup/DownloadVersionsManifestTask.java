@@ -6,9 +6,9 @@ import java.util.Date;
 
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
-import quilt.internal.tasks.MappingsTask;
+import quilt.internal.tasks.DefaultMappingsTask;
 
-public class DownloadVersionsManifestTask extends MappingsTask {
+public class DownloadVersionsManifestTask extends DefaultMappingsTask {
     private final File manifestFile;
 
     public DownloadVersionsManifestTask() {

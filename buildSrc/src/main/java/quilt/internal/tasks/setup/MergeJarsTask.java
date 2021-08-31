@@ -5,18 +5,15 @@ import java.io.IOException;
 
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
-import quilt.internal.FileConstants;
-import quilt.internal.MappingsPlugin;
-import quilt.internal.tasks.MappingsTask;
+import quilt.internal.tasks.DefaultMappingsTask;
 
 import net.fabricmc.stitch.merge.JarMerger;
 
-public class MergeJarsTask extends MappingsTask {
+public class MergeJarsTask extends DefaultMappingsTask {
     public MergeJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
         dependsOn("downloadMinecraftJars");
-        getInputs().files(getTaskFromName("downloadMinecraftJars").getOutputs().getFiles().getFiles());
-        FileConstants fileConstants = MappingsPlugin.getExtension(getProject()).getFileConstants();
+        getInputs().files(fileConstants.clientJar, fileConstants.serverJar);
         getOutputs().file(fileConstants.mergedFile);
     }
 

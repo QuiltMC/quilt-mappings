@@ -2,7 +2,14 @@ package quilt.internal;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.tasks.TaskContainer;
+import quilt.internal.tasks.build.BuildMappingsTinyTask;
 import quilt.internal.tasks.build.CheckMappingsTask;
+import quilt.internal.tasks.build.CompressTinyTask;
+import quilt.internal.tasks.build.DownloadPerVersionMappingsTask;
+import quilt.internal.tasks.build.InvertPerVersionMappingsTask;
+import quilt.internal.tasks.build.MergeTinyTask;
+import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
@@ -14,13 +21,20 @@ public class MappingsPlugin implements Plugin<Project> {
     public void apply(Project target) {
         target.getExtensions().add("Mappings Extension", new MappingsExtension(target));
 
-        target.getTasks().create("downloadVersionsManifest", DownloadVersionsManifestTask.class);
-        target.getTasks().create("downloadWantedVersionManifest", DownloadWantedVersionManifestTask.class);
-        target.getTasks().create("downloadMinecraftJars", DownloadMinecraftJarsTask.class);
-        target.getTasks().create("mergeJars", MergeJarsTask.class);
-        target.getTasks().create("downloadMinecraftLibraries", DownloadMinecraftLibrariesTask.class);
+        TaskContainer tasks = target.getTasks();
+        tasks.create("downloadVersionsManifest", DownloadVersionsManifestTask.class);
+        tasks.create("downloadWantedVersionManifest", DownloadWantedVersionManifestTask.class);
+        tasks.create("downloadMinecraftJars", DownloadMinecraftJarsTask.class);
+        tasks.create("mergeJars", MergeJarsTask.class);
+        tasks.create("downloadMinecraftLibraries", DownloadMinecraftLibrariesTask.class);
 
-        target.getTasks().create("checkMappings", CheckMappingsTask.class);
+        tasks.create("checkMappings", CheckMappingsTask.class);
+        tasks.create("downloadHashedMojmap", DownloadPerVersionMappingsTask.class);
+        tasks.create("invertHashedMojmap", InvertPerVersionMappingsTask.class);
+        tasks.create("buildMappingsTiny", BuildMappingsTinyTask.class);
+        tasks.create("mergeTiny", MergeTinyTask.class);
+        tasks.create("tinyJar", TinyJarTask.class);
+        tasks.create("compressTiny", CompressTinyTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {

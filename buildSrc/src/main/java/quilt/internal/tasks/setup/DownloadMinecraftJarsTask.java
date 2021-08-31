@@ -12,10 +12,10 @@ import com.google.common.io.Files;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
-import quilt.internal.tasks.MappingsTask;
+import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JsonUtils;
 
-public class DownloadMinecraftJarsTask extends MappingsTask {
+public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
     public DownloadMinecraftJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
         this.dependsOn("downloadWantedVersionManifest");

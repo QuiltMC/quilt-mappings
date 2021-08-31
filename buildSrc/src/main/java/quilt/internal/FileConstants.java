@@ -23,8 +23,8 @@ public class FileConstants {
         cacheFilesMinecraft = project.file(".gradle/minecraft");
         tempDir = project.file(".gradle/temp");
         mergedFile = project.file(Constants.MINECRAFT_VERSION + "-merged.jar");
-        hashedMojmapJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.INTER_VERSION_MAPPINGS_NAME + ".jar");
-        unpickedJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.INTER_VERSION_MAPPINGS_NAME + "-unpicked.jar");
+        hashedMojmapJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar");
+        unpickedJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar");
         namedJar = project.file(Constants.MINECRAFT_VERSION + "-named.jar");
         versionFile = new File(cacheFilesMinecraft, Constants.MINECRAFT_VERSION + ".json");
         clientJar = new File(cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-client.jar");

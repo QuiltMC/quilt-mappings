@@ -9,10 +9,10 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
-import quilt.internal.tasks.MappingsTask;
+import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JsonUtils;
 
-public class DownloadMinecraftLibrariesTask extends MappingsTask {
+public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
     public DownloadMinecraftLibrariesTask() {
         super(Constants.Groups.SETUP_GROUP);
         dependsOn("downloadWantedVersionManifest");
@@ -20,7 +20,7 @@ public class DownloadMinecraftLibrariesTask extends MappingsTask {
         getInputs().files(fileConstants.versionFile);
 
         getOutputs().dir(fileConstants.libraries);
-        getOutputs().upToDateWhen(task -> false);
+        outputsNeverUpToDate();
     }
 
     @TaskAction

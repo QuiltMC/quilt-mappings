@@ -121,7 +121,6 @@ def libs = new File("build/libs/")
 
 
 import cuchaz.enigma.command.ComposeMappingsCommand
-import cuchaz.enigma.command.MapSpecializedMethodsCommand
 import groovy.io.FileType
 import net.fabricmc.stitch.commands.tinyv2.CommandMergeTinyV2
 import net.fabricmc.stitch.commands.tinyv2.CommandProposeV2FieldNames
@@ -131,51 +130,6 @@ import net.fabricmc.tinyremapper.TinyRemapper
 import net.fabricmc.tinyremapper.TinyUtils
 
 import java.util.zip.GZIPOutputStream
-
-task downloadHashedMojmap(type: Download) {
-	group = buildMappingGroup
-
-	src new URL(configurations.hashed.resolve().iterator().next().toURI().toString())
-	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed.jar")
-
-	def output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed.tiny")
-	outputs.file output
-
-	doLast {
-		copy {
-			from({ zipTree(downloadHashedMojmap.dest) }) {
-				from 'hashed/mappings.tiny'
-				rename 'mappings.tiny', "../${output.name}"
-			}
-
-			into output.parentFile
-		}
-	}
-}
-
-
-task invertHashedMojmap(dependsOn: downloadHashedMojmap, type: FileOutput) {
-	group = buildMappingGroup
-	println "files: " + downloadHashedMojmap.outputs.getFiles()
-	def input = downloadHashedMojmap.outputs.getFiles()[0]
-
-	output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-inverted.tiny")
-	outputs.file(output)
-
-	outputs.upToDateWhen { false }
-
-	doLast {
-		logger.lifecycle(":building inverted hashed mojmap")
-
-		String[] args = [
-				input.getAbsolutePath(),
-				output.getAbsolutePath(),
-				"hashed", "official"
-		]
-
-		new CommandReorderTinyV2().run(args)
-	}
-}
 
 task mapHashedMojmapJar(dependsOn: [downloadMinecraftLibraries, downloadHashedMojmap, mergeJars]) {
 	group = mapJarGroup
@@ -187,7 +141,7 @@ task mapHashedMojmapJar(dependsOn: [downloadMinecraftLibraries, downloadHashedMo
 
 	doLast {
 		logger.lifecycle(":mapping minecraft to hashed mojmap")
-		def tinyInput = downloadHashedMojmap.outputs.getFiles()[0]
+		def tinyInput = downloadHashedMojmap.tinyFile
 		mapJar(hashedMojmapJar, mergedFile, tinyInput, libraries, "official", "hashed")
 	}
 }
@@ -234,104 +188,6 @@ task mappings(dependsOn: mapHashedMojmapJar) {
 	}
 }
 
-task buildMappingsTiny(dependsOn: mapHashedMojmapJar, type: FileOutput) {
-	group = buildMappingGroup
-	inputs.dir mappingsDir
-	if (!libs.exists()) {
-		libs.mkdirs()
-	}
-
-	output = new File(tempDir, "quilt-mappings.tiny")
-
-	outputs.upToDateWhen { false }
-
-	doLast {
-		logger.lifecycle(":generating tiny mappings")
-
-		new MapSpecializedMethodsCommand().run(
-				hashedMojmapJar.getAbsolutePath(),
-				"enigma",
-				mappingsDir.getAbsolutePath(),
-				"tinyv2:hashed:named",
-				output.getAbsolutePath()
-		)
-	}
-}
-
-task mergeTiny(dependsOn: ["buildMappingsTiny", "invertHashedMojmap"], type: FileOutput) {
-	group = buildMappingGroup
-	def mappingsTinyInput = buildMappingsTiny.output
-	def hashedTinyInput = invertHashedMojmap.outputs.getFiles()[0]
-
-	def unorderedResultMappings = new File(tempDir, "mappings-unordered.tiny")
-	output = new File(tempDir, "mappings.tiny")
-	outputs.file(output)
-
-	outputs.upToDateWhen { false }
-
-	doLast {
-		logger.lifecycle(":merging quilt-mappings and hashed")
-		String[] args = [
-				hashedTinyInput.getAbsolutePath(),
-				mappingsTinyInput.getAbsolutePath(),
-				unorderedResultMappings.getAbsolutePath(),
-				"hashed",
-				"official"
-		]
-
-		new CommandMergeTinyV2().run(args)
-
-		logger.lifecycle(":reordering merged hashed")
-		String[] args2 = [
-				unorderedResultMappings.getAbsolutePath(),
-				output.getAbsolutePath(),
-				"official", "hashed", "named"
-		]
-
-		new CommandReorderTinyV2().run(args2)
-	}
-}
-
-task tinyJar(type: Jar, dependsOn: mergeTiny) {
-	group = buildMappingGroup
-	outputs.upToDateWhen { false }
-	archiveFileName = "quilt-mappings-${mappingsVersion}.jar"
-	destinationDirectory.set(file("build/libs"))
-	classifier = ""
-	from(mergeTiny.output) {
-		rename { "mappings/mappings.tiny" }
-	}
-}
-
-task compressTiny(dependsOn: [tinyJar, mergeTiny], type: FileOutput) {
-	group = buildMappingGroup
-	def outputFile = new File(libs, "quilt-mappings-tiny-${mappingsVersion}.gz")
-	outputs.file(outputFile)
-	output = outputFile
-
-	def inputFile = mergeTiny.output
-
-	outputs.upToDateWhen { false }
-
-	doLast {
-		logger.lifecycle(":compressing tiny mappings")
-
-		def buffer = new byte[1024]
-		def fileOutputStream = new FileOutputStream(outputFile)
-		def outputStream = new GZIPOutputStream(fileOutputStream)
-		def fileInputStream = new FileInputStream(inputFile)
-
-		def length
-		while ((length = fileInputStream.read(buffer)) > 0) {
-			outputStream.write(buffer, 0, length)
-		}
-
-		fileInputStream.close()
-		outputStream.finish()
-		outputStream.close()
-	}
-}
-
 clean.doFirst {
 	delete tempDir, cacheFilesMinecraft
 }
@@ -339,7 +195,7 @@ clean.doFirst {
 tasks.build.dependsOn "compressTiny", "tinyJar", "v2UnmergedMappingsJar", "v2MergedMappingsJar"
 
 task exportMappingsOfficial(dependsOn: downloadHashedMojmap) {
-	def composeInput = downloadHashedMojmap.dest
+	def composeInput = downloadHashedMojmap.jarFile
 
 	doLast {
 		logger.lifecycle(":exporting mappings")
@@ -358,7 +214,7 @@ task exportMappingsOfficial(dependsOn: downloadHashedMojmap) {
 }
 
 task importMappingsOfficial(dependsOn: invertHashedMojmap) {
-	def composeInput = invertHashedMojmap.output
+	def composeInput = invertHashedMojmap.invertedTinyFile
 
 	doLast {
 		logger.lifecycle(":importing mappings")
@@ -378,7 +234,7 @@ task importMappingsOfficial(dependsOn: invertHashedMojmap) {
 
 task buildTinyWithEnum(dependsOn: "mergeTiny", type: FileOutput) {
 	group = buildMappingGroup
-	def noEnum = mergeTiny.output
+	def noEnum = mergeTiny.mergedTiny
 	output = new File(tempDir, "named-with-enum.tiny")
 
 	outputs.file(output)
@@ -492,7 +348,7 @@ build.dependsOn constantsJar
 
 task insertAutoGeneratedEnumMappings(dependsOn: [buildMappingsTiny, downloadHashedMojmap], type: FileOutput) {
 	group = buildMappingGroup
-	def noEnumV2 = buildMappingsTiny.output
+	def noEnumV2 = buildMappingsTiny.outputMappings
 	output = new File(tempDir, "unmerged-named-v2-with-enum.tiny")
 
 	outputs.upToDateWhen { false }
@@ -520,7 +376,7 @@ task mergeV2(dependsOn: ["v2UnmergedMappingsJar", "invertHashedMojmap"], type: F
 	doLast {
 		logger.lifecycle(":merging quilt-mappings and hashed mojmap")
 		String[] args = [
-				invertHashedMojmap.output.getAbsolutePath(),
+				invertHashedMojmap.invertedTinyFile.getAbsolutePath(),
 				insertAutoGeneratedEnumMappings.output.getAbsolutePath(),
 				merged.getAbsolutePath(),
 				"hashed",
@@ -716,7 +572,7 @@ publishing {
 			artifactId "quilt-mappings"
 			version mappingsVersion
 
-			artifact(compressTiny.output) {
+			artifact(compressTiny.compressedTiny) {
 				classifier "tiny"
 				builtBy compressTiny
 			}

@@ -12,10 +12,10 @@ import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.MappingsPlugin;
-import quilt.internal.tasks.MappingsTask;
+import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JsonUtils;
 
-public class DownloadWantedVersionManifestTask extends MappingsTask {
+public class DownloadWantedVersionManifestTask extends DefaultMappingsTask {
     private final File manifestFile;
     private final Optional<Map<String, String>> manifestVersion;
 
