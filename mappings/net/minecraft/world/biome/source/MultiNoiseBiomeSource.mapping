@@ -1,58 +1,13 @@
 CLASS net/minecraft/unmapped/C_hmvgzazp net/minecraft/world/biome/source/MultiNoiseBiomeSource
 	FIELD f_epmbkklt CUSTOM_CODEC Lcom/mojang/serialization/MapCodec;
 		COMMENT Used to parse a custom biome source, when a preset hasn't been provided.
-	FIELD f_eqqquvgo humidityNoiseParameters Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;
-	FIELD f_fupzufks humidityNoise Lnet/minecraft/unmapped/C_trjftrxr;
-	FIELD f_gjcuonti weirdnessNoise Lnet/minecraft/unmapped/C_trjftrxr;
-	FIELD f_hyyviilw seed J
-	FIELD f_itrqkoix weirdnessNoiseParameters Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;
-	FIELD f_jzmgqrob biomePoints Ljava/util/List;
-	FIELD f_lqunmudw altitudeNoiseParameters Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;
 	FIELD f_lyzugnig instance Ljava/util/Optional;
-	FIELD f_mpxfufxr DEFAULT_NOISE_PARAMETERS Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;
-	FIELD f_nfbsfeym temperatureNoiseParameters Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;
-	FIELD f_pwdwiqwr altitudeNoise Lnet/minecraft/unmapped/C_trjftrxr;
 	FIELD f_robnbsdn CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_rscosedu temperatureNoise Lnet/minecraft/unmapped/C_trjftrxr;
-	FIELD f_wwelnhux threeDimensionalSampling Z
-	METHOD <init> (JLjava/util/List;)V
-		ARG 1 seed
-		ARG 3 biomePoints
-	METHOD <init> (JLjava/util/List;Ljava/util/Optional;)V
-		ARG 1 seed
-		ARG 3 biomePoints
-		ARG 4 instance
-	METHOD <init> (JLjava/util/List;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;)V
-		ARG 1 seed
-		ARG 3 biomePoints
-		ARG 4 temperatureNoiseParameters
-		ARG 5 humidityNoiseParameters
-		ARG 6 altitudeNoiseParameters
-		ARG 7 weirdnessNoiseParameters
-	METHOD <init> (JLjava/util/List;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;Lnet/minecraft/unmapped/C_hmvgzazp$C_hcoloakm;Ljava/util/Optional;)V
-		ARG 1 seed
-		ARG 3 biomePoints
-		ARG 4 temperatureNoiseParameters
-		ARG 5 humidityNoiseParameters
-		ARG 6 altitudeNoiseParameters
-		ARG 7 weirdnessNoiseParameters
-		ARG 8 instance
 	METHOD m_dekjvkyz getInstance ()Ljava/util/Optional;
-	METHOD m_exuingal (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
-	METHOD m_gdxaeiqh (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
-	METHOD m_uddfgyla matchesInstance (J)Z
-		ARG 1 seed
 	CLASS C_bhnepihh Instance
 		FIELD f_adnifdkw CODEC Lcom/mojang/serialization/MapCodec;
 		FIELD f_hfpnkymm biomeRegistry Lnet/minecraft/unmapped/C_ksqjyxqt;
-		FIELD f_kmzrkqml seed J
 		FIELD f_xeooeqxx preset Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
-		METHOD <init> (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;Lnet/minecraft/unmapped/C_ksqjyxqt;J)V
-			ARG 1 preset
-			ARG 2 biomeRegistry
-			ARG 3 seed
 		METHOD m_crsldazj getPreset ()Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
 		METHOD m_dpkxswqz getBiomeRegistry ()Lnet/minecraft/unmapped/C_ksqjyxqt;
 		METHOD m_dwjkdvbx (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;)Lcom/mojang/serialization/DataResult;
@@ -60,35 +15,9 @@ CLASS net/minecraft/unmapped/C_hmvgzazp net/minecraft/world/biome/source/MultiNo
 		METHOD m_fclrhwcq (Lnet/minecraft/unmapped/C_acfwypcn;)Lcom/mojang/serialization/DataResult;
 			ARG 0 id
 		METHOD m_gmhzfipg getBiomeSource ()Lnet/minecraft/unmapped/C_hmvgzazp;
-		METHOD m_qngvqkaa getSeed ()J
 		METHOD m_vsxxwjav (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
-	CLASS C_hcoloakm NoiseParameters
-		FIELD f_arudqbwr CODEC Lcom/mojang/serialization/Codec;
-		FIELD f_tqmetemw amplitudes Lit/unimi/dsi/fastutil/doubles/DoubleList;
-		FIELD f_uvruotpi firstOctave I
-		METHOD <init> (ILjava/util/List;)V
-			ARG 1 firstOctave
-			ARG 2 amplitudes
-		METHOD <init> (I[D)V
-			ARG 1 firstOctave
-			ARG 2 amplitudes
-		METHOD m_dcyhxour (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-			ARG 0 instance
-		METHOD m_japnbcwf getAmplitudes ()Lit/unimi/dsi/fastutil/doubles/DoubleList;
-		METHOD m_rabpjyno getFirstOctave ()I
 	CLASS C_vrgrszqu Preset
 		FIELD f_xfuamabs NETHER Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
-		FIELD f_ytpmdidv biomeSourceFunction Lcom/mojang/datafixers/util/Function3;
 		FIELD f_yzodclaj id Lnet/minecraft/unmapped/C_acfwypcn;
 		FIELD f_zmdeplbk BY_IDENTIFIER Ljava/util/Map;
-		METHOD <init> (Lnet/minecraft/unmapped/C_acfwypcn;Lcom/mojang/datafixers/util/Function3;)V
-			ARG 1 id
-			ARG 2 biomeSourceFunction
-		METHOD m_fyacwywr (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;Lnet/minecraft/unmapped/C_ksqjyxqt;Ljava/lang/Long;)Lnet/minecraft/unmapped/C_hmvgzazp;
-			ARG 0 preset
-			ARG 1 biomeRegistry
-			ARG 2 seed
-		METHOD m_pubcqnsn getBiomeSource (Lnet/minecraft/unmapped/C_ksqjyxqt;J)Lnet/minecraft/unmapped/C_hmvgzazp;
-			ARG 1 biomeRegistry
-			ARG 2 seed
