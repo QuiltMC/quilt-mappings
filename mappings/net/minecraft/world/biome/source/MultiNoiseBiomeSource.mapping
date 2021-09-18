@@ -1,9 +1,12 @@
 CLASS net/minecraft/unmapped/C_hmvgzazp net/minecraft/world/biome/source/MultiNoiseBiomeSource
 	FIELD f_epmbkklt CUSTOM_CODEC Lcom/mojang/serialization/MapCodec;
 		COMMENT Used to parse a custom biome source, when a preset hasn't been provided.
+	FIELD f_jzmgqrob biomePoints Lnet/minecraft/unmapped/C_ygdawqho$C_nuvwgitf;
 	FIELD f_lyzugnig instance Ljava/util/Optional;
 	FIELD f_robnbsdn CODEC Lcom/mojang/serialization/Codec;
 	METHOD m_dekjvkyz getInstance ()Ljava/util/Optional;
+	METHOD m_gdxaeiqh (Lnet/minecraft/unmapped/C_hmvgzazp;)Lnet/minecraft/unmapped/C_ygdawqho$C_nuvwgitf;
+	METHOD m_uddfgyla matchesInstance (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;)Z
 	CLASS C_bhnepihh Instance
 		FIELD f_adnifdkw CODEC Lcom/mojang/serialization/MapCodec;
 		FIELD f_hfpnkymm biomeRegistry Lnet/minecraft/unmapped/C_ksqjyxqt;
@@ -19,5 +22,11 @@ CLASS net/minecraft/unmapped/C_hmvgzazp net/minecraft/world/biome/source/MultiNo
 			ARG 0 instance
 	CLASS C_vrgrszqu Preset
 		FIELD f_xfuamabs NETHER Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
+		FIELD f_ytpmdidv biomeSourceFunction Ljava/util/function/BiFunction;
 		FIELD f_yzodclaj id Lnet/minecraft/unmapped/C_acfwypcn;
 		FIELD f_zmdeplbk BY_IDENTIFIER Ljava/util/Map;
+		METHOD m_fyacwywr (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;Lnet/minecraft/unmapped/C_ksqjyxqt;)Lnet/minecraft/unmapped/C_hmvgzazp;
+			ARG 0 preset
+			ARG 1 biomeRegistry
+		METHOD m_pubcqnsn getBiomeSource (Lnet/minecraft/unmapped/C_ksqjyxqt;)Lnet/minecraft/unmapped/C_hmvgzazp;
+			ARG 1 biomeRegistry
