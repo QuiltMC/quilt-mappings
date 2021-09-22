@@ -250,7 +250,7 @@ task mapNamedJar(dependsOn: ["mergeV2", "unpickHashedJar"]) {
 	doLast {
 		logger.lifecycle(":mapping minecraft to named")
 
-		mapJar(namedJar, unpickedJar, mergeV2.output, libraries, "hashed", "named") {
+		JarRemapper.mapJar(namedJar, unpickedJar, (File) mergeV2.output, libraries, "hashed", "named") {
 			it.withMappings { out ->
 				jsrToJetbrains.each { e ->
 					out.acceptClass e.key, e.value

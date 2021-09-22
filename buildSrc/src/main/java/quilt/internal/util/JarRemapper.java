@@ -7,14 +7,16 @@ import java.util.regex.Pattern;
 
 import groovy.io.FileType;
 import groovy.lang.Closure;
+import javax.annotation.Nullable;
 import org.codehaus.groovy.runtime.ResourceGroovyMethods;
+import org.gradle.api.Action;
 
 import net.fabricmc.tinyremapper.OutputConsumerPath;
 import net.fabricmc.tinyremapper.TinyRemapper;
 import net.fabricmc.tinyremapper.TinyUtils;
 
 public class JarRemapper {
-    public static void mapJar(File output, File input, File mappings, File libraries, String from, String to) {
+    public static void mapJar(File output, File input, File mappings, File libraries, String from, String to, @Nullable Action<TinyRemapper.Builder> action) {
         if (output.exists()) {
             output.delete();
         }
@@ -25,6 +27,11 @@ public class JarRemapper {
                 .rebuildSourceFilenames(true)
                 .ignoreConflicts(true)
                 .invalidLvNamePattern(Pattern.compile("\\$\\$\\d+"));
+
+        if (action!= null) {
+            action.execute(remapperBuilder);
+        }
+
         TinyRemapper remapper = remapperBuilder
                 .build();
 
