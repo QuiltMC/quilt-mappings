@@ -10,6 +10,7 @@ import quilt.internal.tasks.build.DownloadPerVersionMappingsTask;
 import quilt.internal.tasks.build.InvertPerVersionMappingsTask;
 import quilt.internal.tasks.build.MergeTinyTask;
 import quilt.internal.tasks.build.TinyJarTask;
+import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
@@ -35,6 +36,8 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create("mergeTiny", MergeTinyTask.class);
         tasks.create("tinyJar", TinyJarTask.class);
         tasks.create("compressTiny", CompressTinyTask.class);
+
+        tasks.create("mapHashedMojmapJar", MapPerVersionMappingsJarTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {

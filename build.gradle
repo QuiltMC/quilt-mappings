@@ -118,7 +118,6 @@ def hashedMojmapJar = file("${minecraft_version}-hashed.jar")
 def unpickedJar = file("${minecraft_version}-hashed-unpicked.jar")
 def namedJar = file("${minecraft_version}-named.jar")
 def libraries = new File(cacheFilesMinecraft, "libraries")
-def libs = new File("build/libs/")
 
 
 import cuchaz.enigma.command.ComposeMappingsCommand
@@ -126,21 +125,6 @@ import net.fabricmc.stitch.commands.tinyv2.CommandMergeTinyV2
 import net.fabricmc.stitch.commands.tinyv2.CommandProposeV2FieldNames
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2
 import quilt.internal.util.JarRemapper
-
-task mapHashedMojmapJar(dependsOn: [downloadMinecraftLibraries, downloadHashedMojmap, mergeJars]) {
-	group = mapJarGroup
-	inputs.files downloadMinecraftLibraries.outputs.files.files
-	outputs.file(hashedMojmapJar)
-
-	//Force the task to always run
-	outputs.upToDateWhen { false }
-
-	doLast {
-		logger.lifecycle(":mapping minecraft to hashed mojmap")
-		def tinyInput = downloadHashedMojmap.tinyFile
-		JarRemapper.mapJar(hashedMojmapJar, mergedFile, tinyInput, libraries, "official", "hashed")
-	}
-}
 
 task mappingsUnpicked(dependsOn: "unpickHashedJar") {
 	group = mappingsGroup
