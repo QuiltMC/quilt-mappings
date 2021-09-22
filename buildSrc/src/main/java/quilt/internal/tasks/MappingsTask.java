@@ -14,6 +14,10 @@ public interface MappingsTask extends Task {
         return (T) getProject().getTasks().getByName(taskName);
     }
 
+    default <T extends Task> T getTaskFromType(Class<T> taskClass) {
+        return getProject().getTasks().stream().filter(task -> taskClass.isAssignableFrom(task.getClass())).map(taskClass::cast).findAny().orElseThrow();
+    }
+
     default void outputsNeverUpToDate() {
         this.getOutputs().upToDateWhen(task -> false);
     }

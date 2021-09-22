@@ -1,12 +1,13 @@
 package quilt.internal.util;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 import groovy.io.FileType;
 import groovy.lang.Closure;
 import org.codehaus.groovy.runtime.ResourceGroovyMethods;
-import org.gradle.api.Action;
 
 import net.fabricmc.tinyremapper.OutputConsumerPath;
 import net.fabricmc.tinyremapper.TinyRemapper;
@@ -22,21 +23,18 @@ public class JarRemapper {
                 .withMappings(TinyUtils.createTinyMappingProvider(mappings.toPath(), from, to))
                 .renameInvalidLocals(true)
                 .rebuildSourceFilenames(true)
+                .ignoreConflicts(true)
                 .invalidLvNamePattern(Pattern.compile("\\$\\$\\d+"));
-//        action.execute(remapperBuilder);
         TinyRemapper remapper = remapperBuilder
                 .build();
 
         try {
-            OutputConsumerPath outputConsumer = new OutputConsumerPath(output.toPath());
+            OutputConsumerPath outputConsumer = new OutputConsumerPath.Builder(output.toPath()).build();
             outputConsumer.addNonClassFiles(input.toPath());
             remapper.readInputs(input.toPath());
 
-            ResourceGroovyMethods.eachFileRecurse(libraries, FileType.FILES, new Closure(null, null) {
-                public void doCall(File file) {
-                    remapper.readClassPath(file.toPath());
-                }
-            });
+            remapper.readClassPath(libraries.toPath());
+
             remapper.apply(outputConsumer);
             outputConsumer.close();
             remapper.finish();
