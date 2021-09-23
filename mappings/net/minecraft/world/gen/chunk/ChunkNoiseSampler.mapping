@@ -1,13 +1,21 @@
 CLASS net/minecraft/unmapped/C_unqwyjvr net/minecraft/world/gen/chunk/ChunkNoiseSampler
+	FIELD f_ahduwhmz terrainNoisePoints Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_aldydmjt terrainNoisePoint [[Lnet/minecraft/unmapped/C_bnmpwohp;
 	FIELD f_awmsfwzn horizontalNoiseSize I
 	FIELD f_cfqtsput z I
+	FIELD f_eswkfsnx erosion [[D
 	FIELD f_fbayfwid interpolators Ljava/util/List;
 	FIELD f_jvnwcohn biomeX I
 	FIELD f_ketddmoo horizontalNoiseResolution I
+	FIELD f_lopdqtge noiseZ [[D
+	FIELD f_lspcgddd weirdness [[D
 	FIELD f_newwqdcy biomeZ I
 	FIELD f_obgsrqqr verticalNoiseResolution I
+	FIELD f_ouywobog aquiferSampler Lnet/minecraft/unmapped/C_cxzdhgpj;
 	FIELD f_pdmtikph minY I
 	FIELD f_rriidczl noiseSizeY I
+	FIELD f_rstxwtey noiseX [[D
+	FIELD f_rywairec continentalness [[D
 	FIELD f_swzqpqwe x I
 	METHOD <init> (IIIIILnet/minecraft/unmapped/C_wgwzecpu;IILnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_cxzdhgpj$C_tqrpfylv;)V
 		ARG 1 horizontalNoiseResolution
@@ -18,8 +26,66 @@ CLASS net/minecraft/unmapped/C_unqwyjvr net/minecraft/world/gen/chunk/ChunkNoise
 		ARG 6 columnSampler
 		ARG 7 x
 		ARG 8 z
+		ARG 9 noiseSampler
 		ARG 10 settings
+		ARG 11 fluidLevelSampler
+	METHOD m_bnksnjgx getInterpolatedTerrainNoisePoint (II)Lnet/minecraft/unmapped/C_bnmpwohp;
+		ARG 1 x
+		ARG 2 z
+	METHOD m_bpbldepu (III)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_drjyozqh getWeirdness (II)D
+		ARG 1 x
+		ARG 2 z
+	METHOD m_etugejfd getContinentalness (II)D
+		ARG 1 x
+		ARG 2 z
+	METHOD m_eyivlffz createMultiNoisePoint (Lnet/minecraft/unmapped/C_wgwzecpu;II)Lnet/minecraft/unmapped/C_unqwyjvr$C_ydritevk;
+		ARG 0 columnSampler
+		ARG 1 x
+		ARG 2 z
+	METHOD m_fbsgezeh getTerrainNoisePoint (II)Lnet/minecraft/unmapped/C_bnmpwohp;
+		ARG 1 x
+		ARG 2 z
+	METHOD m_hqlkbjrc sampleNoiseX0 ()V
+	METHOD m_jaocstik sampleNoiseX (D)V
+		ARG 1 deltaX
+	METHOD m_kixunegf getErosion (II)D
+		ARG 1 x
+		ARG 2 z
+	METHOD m_nxzvbtxe getNoiseX (II)D
+		ARG 1 x
+		ARG 2 z
+	METHOD m_ogdcmgqp sampleNoiseZ (D)V
+		ARG 1 deltaZ
+	METHOD m_ovecuktv getNoiseZ (II)D
+		ARG 1 x
+		ARG 2 z
+	METHOD m_pzogpiqn sampleNoiseX1 (I)V
+		ARG 1 x
+	METHOD m_qigvbhjb sampleNoiseCorners (II)V
+		ARG 1 noiseY
+		ARG 2 noiseZ
+	METHOD m_rbjtrunh (Lnet/minecraft/unmapped/C_wgwzecpu;J)Lnet/minecraft/unmapped/C_bnmpwohp;
+		ARG 1 pos
 	METHOD m_rhmdxspk swapBuffers ()V
+	METHOD m_slafubek getTerrainNoisePoint (Lnet/minecraft/unmapped/C_wgwzecpu;II)Lnet/minecraft/unmapped/C_bnmpwohp;
+		ARG 1 columnSampler
+		ARG 2 x
+		ARG 3 z
+	METHOD m_vibcskmo (III)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_wfsrcqqn sampleNoiseY (D)V
+		ARG 1 deltaY
+	METHOD m_xyanyqky createNoiseInterpolator (Lnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;)Lnet/minecraft/unmapped/C_unqwyjvr$C_utnexdzf;
+		ARG 1 sampler
+	METHOD m_ynijfsfr getAquiferSampler ()Lnet/minecraft/unmapped/C_cxzdhgpj;
+	CLASS C_dmlpsnok ValueSampler
+		METHOD m_yqvwvobh sample ()D
 	CLASS C_poowcsja BlockStateSampler
 		METHOD m_mdcbjuxu getBlockState (III)Lnet/minecraft/unmapped/C_pmeibtxt;
 			ARG 1 x
@@ -31,24 +97,56 @@ CLASS net/minecraft/unmapped/C_unqwyjvr net/minecraft/world/gen/chunk/ChunkNoise
 			ARG 2 y
 			ARG 3 z
 	CLASS C_utnexdzf NoiseInterpolator
+		FIELD f_aewbqvwn x0y1z1 D
+		FIELD f_bbhngjkr x0y1z0 D
+		FIELD f_gibokijz x1y1z0 D
+		FIELD f_htbpftbb z1 D
 		FIELD f_icmssybp sampler Lnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;
-		FIELD f_mejpfspb startNoiseBuffer [[D
-		FIELD f_sfmejueb endNoiseBuffer [[D
+		FIELD f_islmmpce z0 D
+		FIELD f_keujnqxw x0z0 D
+		FIELD f_lztvxhuc x1y0z0 D
+		FIELD f_mctqespr result D
+		FIELD f_mejpfspb noiseBufferX0 [[D
+		FIELD f_mlcswjik x0z1 D
+		FIELD f_ntforull x0y0z0 D
+		FIELD f_pdvekohd x1y1z1 D
+		FIELD f_puyvfpah x0y0z1 D
+		FIELD f_sfmejueb noiseBufferX1 [[D
+		FIELD f_sppcnxzx x1z1 D
+		FIELD f_ygiitukj x1y0z1 D
+		FIELD f_zjliborh x1z0 D
 		METHOD <init> (Lnet/minecraft/unmapped/C_unqwyjvr;Lnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;)V
 			ARG 2 sampler
+		METHOD m_bzduzvlg sampleNoiseZ (D)V
+			ARG 1 deltaZ
 		METHOD m_cohgrnoy swapBuffers ()V
-		METHOD m_gdohomuy sampleStartNoise ()V
+		METHOD m_ffcniepn sampleNoiseY (D)V
+			ARG 1 deltaY
+		METHOD m_gdohomuy sampleNoiseX0 ()V
 		METHOD m_jvrpqhak sampleNoiseCorners (II)V
+			ARG 1 noiseY
+			ARG 2 noiseZ
+		METHOD m_kcbykdlu sampleNoiseX (D)V
+			ARG 1 deltaX
 		METHOD m_lwxaztkx createBuffer (II)[[D
-			ARG 1 sizeY
-			ARG 2 sizeX
+			ARG 1 noiseY
+			ARG 2 noiseZ
 		METHOD m_wjebstow sampleNoise ([[DI)V
 			ARG 1 buffer
 			ARG 2 noiseX
-		METHOD m_wpfrryvm sampleEndNoise (I)V
+		METHOD m_wpfrryvm sampleNoiseX1 (I)V
 			ARG 1 x
-	CLASS C_ydritevk
+	CLASS C_ydritevk MultiNoisePoint
+		FIELD f_bnwtgria noiseZ D
+		FIELD f_hxmvgjdi erosion D
+		FIELD f_hykvasco weirdness D
+		FIELD f_lxjimxlo noiseX D
+		FIELD f_nyioanax continentalness D
+		FIELD f_swbmoiiq terrainNoisePoint Lnet/minecraft/unmapped/C_bnmpwohp;
 		METHOD <init> (Lnet/minecraft/unmapped/C_wgwzecpu;II)V
 			ARG 1 columnSampler
 			ARG 2 x
 			ARG 3 z
+	CLASS C_zjoxmalt ValueSamplerFactory
+		METHOD m_mhpheghs create (Lnet/minecraft/unmapped/C_unqwyjvr;)Lnet/minecraft/unmapped/C_unqwyjvr$C_dmlpsnok;
+			ARG 1 sampler

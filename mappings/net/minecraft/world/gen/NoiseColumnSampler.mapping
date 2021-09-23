@@ -7,6 +7,7 @@ CLASS net/minecraft/unmapped/C_wgwzecpu net/minecraft/world/gen/NoiseColumnSampl
 	FIELD f_jocitopn noiseSizeY I
 	FIELD f_knvkmuce minimumY I
 	FIELD f_kpoxxibp temperatureNoise Lnet/minecraft/unmapped/C_trjftrxr;
+	FIELD f_mqwrlwfr noiseSampler Lnet/minecraft/unmapped/C_slilxlod;
 	FIELD f_myjdeqil densityOffset D
 	FIELD f_nreftpgj noise Lnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;
 	FIELD f_oawckcuk humidityNoise Lnet/minecraft/unmapped/C_trjftrxr;
@@ -26,10 +27,25 @@ CLASS net/minecraft/unmapped/C_wgwzecpu net/minecraft/world/gen/NoiseColumnSampl
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
+	METHOD m_gcwcgdyb getNoiseSampler ()Lnet/minecraft/unmapped/C_slilxlod;
 	METHOD m_gvxgrwye sampleShiftNoise (III)D
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
+	METHOD m_hgoadvcm createTerrainNoisePoint (IIFFF)Lnet/minecraft/unmapped/C_bnmpwohp;
+		ARG 1 x
+		ARG 2 z
+		ARG 3 continentalness
+		ARG 4 weirdness
+		ARG 5 erosion
+	METHOD m_mgksjntk createAquiferSampler (Lnet/minecraft/unmapped/C_unqwyjvr;IIIILnet/minecraft/unmapped/C_cxzdhgpj$C_tqrpfylv;Z)Lnet/minecraft/unmapped/C_cxzdhgpj;
+		ARG 1 sampler
+		ARG 2 x
+		ARG 3 z
+		ARG 4 minY
+		ARG 5 noiseSizeY
+		ARG 6 fluidLevelSampler
+		ARG 7 hasAquifers
 	METHOD m_nkvirhti sampleTemperatureNoise (DDD)D
 		ARG 1 x
 		ARG 3 y
@@ -43,6 +59,7 @@ CLASS net/minecraft/unmapped/C_wgwzecpu net/minecraft/world/gen/NoiseColumnSampl
 		ARG 8 continentalness
 		ARG 9 erosion
 		ARG 10 weirdness
+		ARG 11 terrainOffset
 	METHOD m_sidhkhwo getDepth (D)D
 		ARG 1 y
 	METHOD m_thewcvkj sampleContinentalnessNoise (DDD)D
