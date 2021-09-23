@@ -5,6 +5,7 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	FIELD f_bhmpnroc VSYNC Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_bltfonza FRAMERATE_LIMIT Lnet/minecraft/unmapped/C_cedfwzsl;
 	FIELD f_bmbisoug PARTICLES Lnet/minecraft/unmapped/C_dqfanxxh;
+	FIELD f_bmqiprey CHUNK_UPDATES_PRIORITIZATION Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_btmvxeld AUTO_SUGGESTIONS Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_byjjnnbh NARRATOR Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_cbdewqnk REALMS_NOTIFICATIONS Lnet/minecraft/unmapped/C_dqfanxxh;
@@ -36,6 +37,7 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	FIELD f_isdwabbj SATURATION Lnet/minecraft/unmapped/C_cedfwzsl;
 	FIELD f_jbnzazfh FOV_EFFECT_SCALE Lnet/minecraft/unmapped/C_cedfwzsl;
 	FIELD f_jhtzprbe HIDE_MATCHED_NAMES Lnet/minecraft/unmapped/C_dqfanxxh;
+	FIELD f_jllydvjc HIDE_LIGHTNING_FLASHES Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_kdzvbjli CLOUDS Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_kfaphphq SENSITIVITY Lnet/minecraft/unmapped/C_cedfwzsl;
 	FIELD f_knggrjjh FOV Lnet/minecraft/unmapped/C_cedfwzsl;
@@ -52,10 +54,12 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	FIELD f_pxunxxab DISCRETE_MOUSE_SCROLL Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_pzgpevcp CHAT_WIDTH Lnet/minecraft/unmapped/C_cedfwzsl;
 	FIELD f_qdukepae RENDER_DISTANCE Lnet/minecraft/unmapped/C_cedfwzsl;
+	FIELD f_qgbohgih HIDE_LIGHTNING_FLASHES_TOOLTIP Lnet/minecraft/unmapped/C_tdwiqadr;
 	FIELD f_qvqbmhfj FABULOUS_GRAPHICS_TOOLTIP Lnet/minecraft/unmapped/C_tdwiqadr;
 	FIELD f_rdqonhei CHAT_DELAY_INSTANT Lnet/minecraft/unmapped/C_cedfwzsl;
 	FIELD f_sokdzsgz key Lnet/minecraft/unmapped/C_tdwiqadr;
 	FIELD f_twyycsec FANCY_GRAPHICS_TOOLTIP Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_ufujbinq AUDIO_DEVICE Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_vrdzdbzh FORCE_UNICODE_FONT Lnet/minecraft/unmapped/C_dqfanxxh;
 	FIELD f_wdpfjxag CHAT_SCALE Lnet/minecraft/unmapped/C_cedfwzsl;
 	FIELD f_zaamkvyp TOGGLE_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
@@ -64,6 +68,8 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 1 key
 	METHOD m_aaahvapc (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_acceblve (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
 	METHOD m_adrrhshf (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
@@ -79,10 +85,16 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 1 chatScale
 	METHOD m_ajopfmwb (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_altojkhj (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_ansjiwdp (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_auhzulof (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
@@ -93,8 +105,11 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_baadkpru (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_bmvifghs (Lnet/minecraft/unmapped/C_eettarni;)Z
+		ARG 0 mode
 	METHOD m_brqjhtim (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_buploqta (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
@@ -102,18 +117,28 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 0 gameOptions
 		ARG 1 chatHeightUnfocused
 	METHOD m_cleweaws (Ljava/util/List;Ljava/util/List;Ljava/util/List;Lnet/minecraft/unmapped/C_eettarni;)Ljava/util/List;
+		ARG 3 mode
+	METHOD m_coywlyed (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
+		ARG 0 gameOptions
 	METHOD m_ctimbogj (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_ctjzceac (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
 	METHOD m_ctnqeqtg (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
 	METHOD m_cvqsbwhl (Lnet/minecraft/unmapped/C_diboefya;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pqkldafk;
+		ARG 0 gameOptions
 	METHOD m_cyxrqpqr (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_dfgxjbya (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
+	METHOD m_djehkmti (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_doufbkob (Lnet/minecraft/unmapped/C_pfhqmtgp;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 aoMode
 	METHOD m_egdztwif (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
@@ -134,6 +159,8 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 2 x
 		ARG 3 y
 		ARG 4 width
+	METHOD m_esfwfxts (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
+		ARG 0 gameOptions
 	METHOD m_etyswcfn (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_flsmjgot (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
@@ -142,6 +169,8 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 0 gameOptions
 	METHOD m_fwuaftcw (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_fzablyzh (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
@@ -152,6 +181,9 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 0 gameOptions
 		ARG 1 option
 	METHOD m_ginpwwjv (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_aszinjjn;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_gjrkqdyu (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_gpcwflah (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
@@ -165,12 +197,18 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_gyxfdbfj (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_eilwypca;)V
 		ARG 0 gameOptions
 		ARG 1 option
+		ARG 2 newValue
 	METHOD m_hejlcnzc (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
 	METHOD m_hexjzwvu (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
+	METHOD m_hhmedbon (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_hhuetexx (Lnet/minecraft/unmapped/C_iqefskkq;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 0 option
 	METHOD m_iabhbjqz (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
 		ARG 1 option
@@ -181,33 +219,44 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 0 gameOptions
 	METHOD m_iodrpasu (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_qjqpteaq;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_iqvqzvab (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
 	METHOD m_ivvlbywq (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 fovEffectScale
+	METHOD m_jbeysaer (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
+		ARG 0 gameOptions
 	METHOD m_jeuorqyi (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
 	METHOD m_jgvprdml (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_jhglgvlm (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_jjhupugj (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_jkeejfrm (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_rshuhzho;)V
 		ARG 0 gameOptions
 		ARG 1 option
+		ARG 2 newValue
 	METHOD m_jkvztfqq (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_joftfuaz (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 maxFps
 	METHOD m_jojhymft (Lnet/minecraft/unmapped/C_rshuhzho;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 0 option
 	METHOD m_jruimrzq (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
-	METHOD m_jxwdsxke ()Z
 	METHOD m_kawidgqa (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_kfovwgha (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
@@ -217,6 +266,8 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 0 gameOptions
 	METHOD m_kltcpehp (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_kvdffcik (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_kyjjgcbi (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
@@ -228,6 +279,7 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_lsgkvkjn (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
 	METHOD m_maappmmk (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 0 name
 	METHOD m_mbqtyiww (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
 	METHOD m_mcjtfwvq (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
@@ -241,6 +293,7 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_mugkpsto (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_myelhzfs (Lnet/minecraft/unmapped/C_bvsmwfaw;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 0 option
 	METHOD m_mzfnfpfd (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
 	METHOD m_nascxggx (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
@@ -250,13 +303,20 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 1 mouseSensitivity
 	METHOD m_nyvrquvg (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_nzgzpbrd getPercentAdditionLabel (I)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 1 percentage
 	METHOD m_nzsbmbvt (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
+	METHOD m_ootnkzyl (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_eettarni;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_oqjegpjt (Lnet/minecraft/unmapped/C_nhbtpcsl;)Lnet/minecraft/unmapped/C_iqefskkq;
 		ARG 0 gameOptions
 	METHOD m_orbfripj (Lnet/minecraft/unmapped/C_nhbtpcsl;)Lnet/minecraft/unmapped/C_eettarni;
+		ARG 0 gameOptions
 	METHOD m_pajlcvxs (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 chatHeightFocused
@@ -266,10 +326,13 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_peewrqjx (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_iqefskkq;)V
 		ARG 0 gameOptions
 		ARG 1 option
-	METHOD m_pylwtzda (Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 2 newValue
 	METHOD m_qhfswtoz (Lnet/minecraft/unmapped/C_qjqpteaq;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 0 option
 	METHOD m_qiehmgau (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_qifhfyzr (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
 		ARG 0 gameOptions
 	METHOD m_qjhgszhu (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
@@ -278,11 +341,19 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 0 gameOptions
 	METHOD m_qsnhxhct (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_rcrudwne (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
 	METHOD m_rurqfvxs (Lnet/minecraft/unmapped/C_eilwypca;)Lnet/minecraft/unmapped/C_tdwiqadr;
-	METHOD m_rzxxdimt ()Ljava/util/List;
+		ARG 0 option
+	METHOD m_rzfbiwdr (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
+	METHOD m_sevaskcs (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
+		ARG 0 gameOptions
 	METHOD m_sqjoaqpu (Lnet/minecraft/unmapped/C_diboefya;)Ljava/util/List;
 		ARG 0 client
 	METHOD m_tbpetqyq getPercentLabel (D)Lnet/minecraft/unmapped/C_tdwiqadr;
@@ -290,10 +361,15 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_tpxinwgk (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 chatDelay
+	METHOD m_txoniyyt (Lnet/minecraft/unmapped/C_nhbtpcsl;)Lnet/minecraft/unmapped/C_bvsmwfaw;
+		ARG 0 gameOptions
 	METHOD m_uabstlmu (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 fov
-	METHOD m_ubgowpmr ()Ljava/util/List;
+	METHOD m_ubctfpgk (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_uefixncl (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_ufdryoax (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Boolean;
@@ -302,15 +378,22 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 1 pixel
 	METHOD m_ukkkgrog (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_hzcyzcke;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_ulthhcse (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
+	METHOD m_umfsfpjf (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_vfeuilwf (Lnet/minecraft/unmapped/C_diboefya;)Ljava/util/List;
 		ARG 0 client
 	METHOD m_vmceofzz (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_cedfwzsl;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 gameOptions
 		ARG 1 option
 	METHOD m_vnmolhhd (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/String;
+		ARG 0 gameOptions
 	METHOD m_vntpwdym (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 chatLineSpacing
@@ -330,8 +413,11 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_wbgqzwjp (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
 		ARG 0 gameOptions
 	METHOD m_wejooqyn (Lnet/minecraft/unmapped/C_hzcyzcke;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 0 option
 	METHOD m_wrknxpyx (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/String;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_xhdcojsg (Lnet/minecraft/unmapped/C_eettarni;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 0 graphicsMode
 	METHOD m_xnertmoo (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Integer;
@@ -340,7 +426,12 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 0 gameOptions
 	METHOD m_xzophvql (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_ybjrjpjg (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Integer;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_ybqktsia getGenericLabel (Lnet/minecraft/unmapped/C_tdwiqadr;)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 1 value
 	METHOD m_yhdtainh (Lnet/minecraft/unmapped/C_nhbtpcsl;)Ljava/lang/Double;
@@ -348,8 +439,13 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 	METHOD m_yjtcdeio getGenericLabel (I)Lnet/minecraft/unmapped/C_tdwiqadr;
 		ARG 1 value
 	METHOD m_ykfatxue (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Lnet/minecraft/unmapped/C_bvsmwfaw;)V
+		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_ylerxkes (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_ylqceodh (Lnet/minecraft/unmapped/C_nhbtpcsl;)Lnet/minecraft/unmapped/C_eilwypca;
 		ARG 0 gameOptions
 	METHOD m_yndcmntv (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
@@ -360,6 +456,8 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 1 entityDistanceScaling
 	METHOD m_ytixlphk (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_yvuwnzvz (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 mipmapLevels
@@ -369,6 +467,8 @@ CLASS net/minecraft/unmapped/C_bmvvayyc net/minecraft/client/option/Option
 		ARG 2 aoMode
 	METHOD m_zhqodipp (Lnet/minecraft/unmapped/C_nhbtpcsl;Lnet/minecraft/unmapped/C_bmvvayyc;Ljava/lang/Boolean;)V
 		ARG 0 gameOptions
+		ARG 1 option
+		ARG 2 newValue
 	METHOD m_zvgehcsd (Lnet/minecraft/unmapped/C_nhbtpcsl;Ljava/lang/Double;)V
 		ARG 0 gameOptions
 		ARG 1 viewDistance

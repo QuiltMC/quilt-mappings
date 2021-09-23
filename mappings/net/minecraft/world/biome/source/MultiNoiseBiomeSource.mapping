@@ -5,12 +5,14 @@ CLASS net/minecraft/unmapped/C_hmvgzazp net/minecraft/world/biome/source/MultiNo
 	FIELD f_lyzugnig instance Ljava/util/Optional;
 	FIELD f_robnbsdn CODEC Lcom/mojang/serialization/Codec;
 	METHOD m_dekjvkyz getInstance ()Ljava/util/Optional;
-	METHOD m_gdxaeiqh (Lnet/minecraft/unmapped/C_hmvgzazp;)Lnet/minecraft/unmapped/C_ygdawqho$C_nuvwgitf;
 	METHOD m_uddfgyla matchesInstance (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;)Z
 	CLASS C_bhnepihh Instance
 		FIELD f_adnifdkw CODEC Lcom/mojang/serialization/MapCodec;
 		FIELD f_hfpnkymm biomeRegistry Lnet/minecraft/unmapped/C_ksqjyxqt;
 		FIELD f_xeooeqxx preset Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;Lnet/minecraft/unmapped/C_ksqjyxqt;)V
+			ARG 1 preset
+			ARG 2 biome
 		METHOD m_crsldazj getPreset ()Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
 		METHOD m_dpkxswqz getBiomeRegistry ()Lnet/minecraft/unmapped/C_ksqjyxqt;
 		METHOD m_dwjkdvbx (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;)Lcom/mojang/serialization/DataResult;
@@ -21,12 +23,23 @@ CLASS net/minecraft/unmapped/C_hmvgzazp net/minecraft/world/biome/source/MultiNo
 		METHOD m_vsxxwjav (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
 	CLASS C_vrgrszqu Preset
+		FIELD f_hragehtv OVERWORLD Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
 		FIELD f_xfuamabs NETHER Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;
 		FIELD f_ytpmdidv biomeSourceFunction Ljava/util/function/BiFunction;
 		FIELD f_yzodclaj id Lnet/minecraft/unmapped/C_acfwypcn;
 		FIELD f_zmdeplbk BY_IDENTIFIER Ljava/util/Map;
+		METHOD <init> (Lnet/minecraft/unmapped/C_acfwypcn;Ljava/util/function/BiFunction;)V
+			ARG 1 id
+			ARG 2 biomeSourceFunction
 		METHOD m_fyacwywr (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;Lnet/minecraft/unmapped/C_ksqjyxqt;)Lnet/minecraft/unmapped/C_hmvgzazp;
 			ARG 0 preset
 			ARG 1 biomeRegistry
+		METHOD m_oadmcoik (Lnet/minecraft/unmapped/C_ksqjyxqt;Lnet/minecraft/unmapped/C_hcaelhhx;)Ljava/util/function/Supplier;
+			ARG 1 biomeKey
 		METHOD m_pubcqnsn getBiomeSource (Lnet/minecraft/unmapped/C_ksqjyxqt;)Lnet/minecraft/unmapped/C_hmvgzazp;
 			ARG 1 biomeRegistry
+		METHOD m_xybcfhpl (Lnet/minecraft/unmapped/C_hmvgzazp$C_vrgrszqu;Lnet/minecraft/unmapped/C_ksqjyxqt;)Lnet/minecraft/unmapped/C_hmvgzazp;
+			ARG 0 preset
+			ARG 1 biomeRegistry
+		METHOD m_yxtaphie (Lcom/google/common/collect/ImmutableList$Builder;Lnet/minecraft/unmapped/C_ksqjyxqt;Lcom/mojang/datafixers/util/Pair;)V
+			ARG 2 entry
