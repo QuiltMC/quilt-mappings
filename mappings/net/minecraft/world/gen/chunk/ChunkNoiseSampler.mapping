@@ -1,0 +1,54 @@
+CLASS net/minecraft/unmapped/C_unqwyjvr net/minecraft/world/gen/chunk/ChunkNoiseSampler
+	FIELD f_awmsfwzn horizontalNoiseSize I
+	FIELD f_cfqtsput z I
+	FIELD f_fbayfwid interpolators Ljava/util/List;
+	FIELD f_jvnwcohn biomeX I
+	FIELD f_ketddmoo horizontalNoiseResolution I
+	FIELD f_newwqdcy biomeZ I
+	FIELD f_obgsrqqr verticalNoiseResolution I
+	FIELD f_pdmtikph minY I
+	FIELD f_rriidczl noiseSizeY I
+	FIELD f_swzqpqwe x I
+	METHOD <init> (IIIIILnet/minecraft/unmapped/C_wgwzecpu;IILnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_cxzdhgpj$C_tqrpfylv;)V
+		ARG 1 horizontalNoiseResolution
+		ARG 2 verticalNoiseResolution
+		ARG 3 horizontalNoiseSize
+		ARG 4 noiseSizeY
+		ARG 5 minY
+		ARG 6 columnSampler
+		ARG 7 x
+		ARG 8 z
+		ARG 10 settings
+	METHOD m_rhmdxspk swapBuffers ()V
+	CLASS C_poowcsja BlockStateSampler
+		METHOD m_mdcbjuxu getBlockState (III)Lnet/minecraft/unmapped/C_pmeibtxt;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+	CLASS C_sdkmrqke NoiseSampler
+		METHOD m_kueojymf sample (III)D
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+	CLASS C_utnexdzf NoiseInterpolator
+		FIELD f_icmssybp sampler Lnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;
+		FIELD f_mejpfspb startNoiseBuffer [[D
+		FIELD f_sfmejueb endNoiseBuffer [[D
+		METHOD <init> (Lnet/minecraft/unmapped/C_unqwyjvr;Lnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;)V
+			ARG 2 sampler
+		METHOD m_cohgrnoy swapBuffers ()V
+		METHOD m_gdohomuy sampleStartNoise ()V
+		METHOD m_jvrpqhak sampleNoiseCorners (II)V
+		METHOD m_lwxaztkx createBuffer (II)[[D
+			ARG 1 sizeY
+			ARG 2 sizeX
+		METHOD m_wjebstow sampleNoise ([[DI)V
+			ARG 1 buffer
+			ARG 2 noiseX
+		METHOD m_wpfrryvm sampleEndNoise (I)V
+			ARG 1 x
+	CLASS C_ydritevk
+		METHOD <init> (Lnet/minecraft/unmapped/C_wgwzecpu;II)V
+			ARG 1 columnSampler
+			ARG 2 x
+			ARG 3 z
