@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
@@ -13,9 +14,11 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JsonUtils;
 
 public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "downloadMinecraftLibraries";
+
     public DownloadMinecraftLibrariesTask() {
         super(Constants.Groups.SETUP_GROUP);
-        dependsOn("downloadWantedVersionManifest");
+        dependsOn(DownloadWantedVersionManifestTask.TASK_NAME);
 
         getInputs().files(fileConstants.versionFile);
 
@@ -26,7 +29,7 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
     @TaskAction
     public void downloadMinecraftLibrariesTask() throws IOException {
         if (!fileConstants.versionFile.exists()) {
-            throw new RuntimeException("Can't download the jars without the " + fileConstants.versionFile.getName() + " file!");
+            throw new RuntimeException(String.format("Can't download the jars without the %s file!", fileConstants.versionFile.getName()));
         }
         Map<String, ?> version = JsonUtils.getFromTree(FileUtils.readFileToString(fileConstants.versionFile, StandardCharsets.UTF_8));
 
@@ -36,16 +39,27 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
             fileConstants.libraries.mkdirs();
         }
 
-        for (var library : JsonUtils.<List<Map<String, Map<String, Map<String, String>>>>>getFromTree(version, "libraries")) {
+        AtomicBoolean failed = new AtomicBoolean(false);
+
+        JsonUtils.<List<Map<String, Map<String, Map<String, String>>>>>getFromTree(version, "libraries").parallelStream().forEach(library -> {
             String downloadUrl = JsonUtils.getFromTree(library, "downloads", "artifact", "url");
 
-            startDownload()
-                    .src(downloadUrl)
-                    .dest(new File(fileConstants.libraries, downloadUrl.substring(downloadUrl.lastIndexOf("/") + 1)))
-                    .overwrite(false)
-                    .download();
+            try {
+                startDownload()
+                        .src(downloadUrl)
+                        .dest(new File(fileConstants.libraries, downloadUrl.substring(downloadUrl.lastIndexOf("/") + 1)))
+                        .overwrite(false)
+                        .download();
+            } catch (IOException e) {
+                failed.set(true);
+                e.printStackTrace();
+            }
 
             getProject().getDependencies().add("decompileClasspath", library.get("name"));
+        });
+
+        if (failed.get()) {
+            throw new RuntimeException("Unable to download libraries for specified minecraft version");
         }
     }
 }

@@ -16,9 +16,11 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JsonUtils;
 
 public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "downloadMinecraftJars";
+
     public DownloadMinecraftJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
-        this.dependsOn("downloadWantedVersionManifest");
+        this.dependsOn(DownloadWantedVersionManifestTask.TASK_NAME);
         getInputs().files(fileConstants.versionFile);
 
         getOutputs().files(fileConstants.clientJar, fileConstants.serverJar);

@@ -9,6 +9,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public class DownloadVersionsManifestTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "downloadVersionsManifest";
     private final File manifestFile;
 
     public DownloadVersionsManifestTask() {

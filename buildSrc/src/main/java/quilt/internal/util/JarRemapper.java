@@ -1,14 +1,9 @@
 package quilt.internal.util;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.regex.Pattern;
 
-import groovy.io.FileType;
-import groovy.lang.Closure;
 import javax.annotation.Nullable;
-import org.codehaus.groovy.runtime.ResourceGroovyMethods;
 import org.gradle.api.Action;
 
 import net.fabricmc.tinyremapper.OutputConsumerPath;
@@ -26,9 +21,9 @@ public class JarRemapper {
                 .renameInvalidLocals(true)
                 .rebuildSourceFilenames(true)
                 .ignoreConflicts(true)
-                .invalidLvNamePattern(Pattern.compile("\\$\\$\\d+"));
+                .invalidLvNamePattern(Pattern.compile("\\$\\$\\d+")); // Current LVT name starting in 21w37a
 
-        if (action!= null) {
+        if (action != null) {
             action.execute(remapperBuilder);
         }
 

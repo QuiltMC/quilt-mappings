@@ -16,14 +16,15 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JsonUtils;
 
 public class DownloadWantedVersionManifestTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "downloadWantedVersionManifest";
+
     private final File manifestFile;
     private final Optional<Map<String, String>> manifestVersion;
 
     public DownloadWantedVersionManifestTask() throws IOException {
         super(Constants.Groups.SETUP_GROUP);
-        this.dependsOn("downloadVersionsManifest");
-        DownloadVersionsManifestTask downloadVersionsManifest = getTaskFromName("downloadVersionsManifest");
-        manifestFile = downloadVersionsManifest.getOutputs().getFiles().getSingleFile();
+        this.dependsOn(DownloadVersionsManifestTask.TASK_NAME);
+        manifestFile = this.getTaskFromName(DownloadVersionsManifestTask.TASK_NAME).getOutputs().getFiles().getSingleFile();
         manifestVersion = getManifestVersion(manifestFile);
 
         //have to grab the release time as there's a current timestamp on each element?!

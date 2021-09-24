@@ -18,26 +18,27 @@ import quilt.internal.tasks.setup.DownloadWantedVersionManifestTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 
 public class MappingsPlugin implements Plugin<Project> {
+
     @Override
     public void apply(Project target) {
         target.getExtensions().add("Mappings Extension", new MappingsExtension(target));
 
         TaskContainer tasks = target.getTasks();
-        tasks.create("downloadVersionsManifest", DownloadVersionsManifestTask.class);
-        tasks.create("downloadWantedVersionManifest", DownloadWantedVersionManifestTask.class);
-        tasks.create("downloadMinecraftJars", DownloadMinecraftJarsTask.class);
-        tasks.create("mergeJars", MergeJarsTask.class);
-        tasks.create("downloadMinecraftLibraries", DownloadMinecraftLibrariesTask.class);
+        tasks.create(DownloadVersionsManifestTask.TASK_NAME, DownloadVersionsManifestTask.class);
+        tasks.create(DownloadWantedVersionManifestTask.TASK_NAME, DownloadWantedVersionManifestTask.class);
+        tasks.create(DownloadMinecraftJarsTask.TASK_NAME, DownloadMinecraftJarsTask.class);
+        tasks.create(MergeJarsTask.TASK_NAME, MergeJarsTask.class);
+        tasks.create(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class);
 
-        tasks.create("checkMappings", CheckMappingsTask.class);
-        tasks.create("downloadHashedMojmap", DownloadPerVersionMappingsTask.class);
-        tasks.create("invertHashedMojmap", InvertPerVersionMappingsTask.class);
-        tasks.create("buildMappingsTiny", BuildMappingsTinyTask.class);
-        tasks.create("mergeTiny", MergeTinyTask.class);
-        tasks.create("tinyJar", TinyJarTask.class);
-        tasks.create("compressTiny", CompressTinyTask.class);
+        tasks.create(CheckMappingsTask.TASK_NAME, CheckMappingsTask.class);
+        tasks.create(DownloadPerVersionMappingsTask.TASK_NAME, DownloadPerVersionMappingsTask.class);
+        tasks.create(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class);
+        tasks.create(BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class);
+        tasks.create(MergeTinyTask.TASK_NAME, MergeTinyTask.class);
+        tasks.create(TinyJarTask.TASK_NAME, TinyJarTask.class);
+        tasks.create(CompressTinyTask.TASK_NAME, CompressTinyTask.class);
 
-        tasks.create("mapHashedMojmapJar", MapPerVersionMappingsJarTask.class);
+        tasks.create(MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {

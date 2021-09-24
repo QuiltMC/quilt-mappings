@@ -12,12 +12,14 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public class CompressTinyTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "compressTiny";
+
     @OutputFile
-    public File compressedTiny = new File(fileConstants.libs, Constants.MAPPINGS_NAME + "-tiny-"+ Constants.MAPPINGS_VERSION +".gz");
+    public File compressedTiny = new File(fileConstants.libs, String.format("%s-tiny-%s.gz", Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION));
 
     public CompressTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        dependsOn("tinyJar", "mergeTiny");
+        dependsOn(TinyJarTask.TASK_NAME, MergeTinyTask.TASK_NAME);
         getOutputs().file(compressedTiny);
         outputsNeverUpToDate();
     }
@@ -29,7 +31,7 @@ public class CompressTinyTask extends DefaultMappingsTask {
         byte[] buffer = new byte[1024];
         FileOutputStream fileOutputStream = new FileOutputStream(compressedTiny);
         GZIPOutputStream outputStream = new GZIPOutputStream(fileOutputStream);
-        FileInputStream fileInputStream = new FileInputStream(this.<MergeTinyTask>getTaskFromName("mergeTiny").mergedTiny);
+        FileInputStream fileInputStream = new FileInputStream(this.getTaskFromType(MergeTinyTask.class).mergedTiny);
 
         int length;
         while ((length = fileInputStream.read(buffer)) > 0) {

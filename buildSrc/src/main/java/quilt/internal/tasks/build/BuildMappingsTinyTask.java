@@ -9,14 +9,17 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 
 public class BuildMappingsTinyTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "buildMappingsTiny";
+
     @OutputFile
-    public File outputMappings = new File(fileConstants.tempDir, "quilt-mappings.tiny");
+    public File outputMappings = new File(fileConstants.tempDir, String.format("%s.tiny", Constants.MAPPINGS_NAME));
 
     public BuildMappingsTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        dependsOn("mapHashedMojmapJar");
+        dependsOn(MapPerVersionMappingsJarTask.TASK_NAME);
         getInputs().dir(fileConstants.mappingsDir);
         outputsNeverUpToDate();
     }
@@ -29,7 +32,7 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
                 fileConstants.hashedMojmapJar.getAbsolutePath(),
                 "enigma",
                 fileConstants.mappingsDir.getAbsolutePath(),
-                "tinyv2:" + Constants.PER_VERSION_MAPPINGS_NAME + ":named",
+                String.format("tinyv2:%s:named", Constants.PER_VERSION_MAPPINGS_NAME),
                 outputMappings.getAbsolutePath()
         );
     }

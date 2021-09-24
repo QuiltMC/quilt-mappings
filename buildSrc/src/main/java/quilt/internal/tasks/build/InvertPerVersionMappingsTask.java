@@ -10,8 +10,10 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 
 public class InvertPerVersionMappingsTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "invertHashedMojmap";
+
     @OutputFile
-    public File invertedTinyFile = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME +"-inverted.tiny");
+    public File invertedTinyFile = new File(fileConstants.cacheFilesMinecraft, String.format("%s-%s-inverted.tiny", Constants.MINECRAFT_VERSION, Constants.PER_VERSION_MAPPINGS_NAME));
 
     public InvertPerVersionMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
@@ -21,14 +23,14 @@ public class InvertPerVersionMappingsTask extends DefaultMappingsTask {
 
     @TaskAction
     public void invertPerVersionMappings() throws Exception {
-        getLogger().lifecycle(":building inverted hashed mojmap");
+        getLogger().lifecycle(":building inverted {}", Constants.PER_VERSION_MAPPINGS_NAME);
 
-        File input = this.<DownloadPerVersionMappingsTask>getTaskFromName("downloadHashedMojmap").getTinyFile();
+        File input = this.getTaskFromType(DownloadPerVersionMappingsTask.class).getTinyFile();
 
         String[] args = {
                 input.getAbsolutePath(),
                 invertedTinyFile.getAbsolutePath(),
-                "hashed", "official"
+                Constants.PER_VERSION_MAPPINGS_NAME, "official"
         };
 
         new CommandReorderTinyV2().run(args);

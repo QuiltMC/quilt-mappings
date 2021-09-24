@@ -22,7 +22,7 @@ public class JsonUtils {
         }
 
         Map<String, ?> current = json;
-        for(int i = 0; i < tree.length - 1; i++) {
+        for (int i = 0; i < tree.length - 1; i++) {
             current = (Map<String, ?>) current.get(tree[i]);
             if (current == null) {
                 throw new NullPointerException("Json Tree does not contain key " + Arrays.toString(tree));

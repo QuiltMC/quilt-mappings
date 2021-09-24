@@ -10,9 +10,11 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import net.fabricmc.stitch.merge.JarMerger;
 
 public class MergeJarsTask extends DefaultMappingsTask {
+    public static final String TASK_NAME = "mergeJars";
+
     public MergeJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
-        dependsOn("downloadMinecraftJars");
+        dependsOn(DownloadMinecraftJarsTask.TASK_NAME);
         getInputs().files(fileConstants.clientJar, fileConstants.serverJar);
         getOutputs().file(fileConstants.mergedFile);
     }
@@ -28,7 +30,7 @@ public class MergeJarsTask extends DefaultMappingsTask {
             return;
         }
 
-        try(JarMerger jarMerger = new JarMerger(client, server, fileConstants.mergedFile)) {
+        try (JarMerger jarMerger = new JarMerger(client, server, fileConstants.mergedFile)) {
             jarMerger.merge();
         }
     }
