@@ -6,11 +6,43 @@ CLASS net/minecraft/unmapped/C_hxzepjyt net/minecraft/util/dynamic/Codecs
 	COMMENT {@link #nonEmptyList(Codec)}.
 	FIELD f_kbfoshii NONNEGATIVE_INT Lcom/mojang/serialization/Codec;
 	FIELD f_mrzfoyht POSITIVE_INT Lcom/mojang/serialization/Codec;
+	FIELD f_sjtqkwad POSITIVE_FLOAT Lcom/mojang/serialization/Codec;
 	METHOD m_ccutyisn nonEmptyList (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		ARG 0 originalCodec
+	METHOD m_cdnirknf (Ljava/lang/Number;Ljava/lang/Number;Ljava/util/function/Function;Ljava/lang/Number;)Lcom/mojang/serialization/DataResult;
+		ARG 3 number
+	METHOD m_crzwntls rangedFloat (FFLjava/util/function/Function;)Lcom/mojang/serialization/Codec;
+		ARG 0 min
+		ARG 1 max
+		ARG 2 messageFactory
+	METHOD m_dchbbbsf (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 0 list
 	METHOD m_dzevxrev createPresentValueChecker ()Ljava/util/function/Function;
 	METHOD m_eophvwek createNonEmptyListChecker ()Ljava/util/function/Function;
+	METHOD m_epxhbvhg (Ljava/lang/Float;)Ljava/lang/String;
+		ARG 0 f
+	METHOD m_fwlzubdd (Ljava/lang/Number;Ljava/lang/Number;Ljava/util/function/Function;Ljava/lang/Number;)Lcom/mojang/serialization/DataResult;
+		ARG 3 number
+	METHOD m_htjvdzew (Ljava/util/function/BiFunction;Lcom/mojang/datafixers/util/Either;)Lcom/mojang/serialization/DataResult;
+		ARG 1 either
+	METHOD m_ikzcupfk (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 left
+	METHOD m_jkfrybsu (Ljava/lang/Integer;)Ljava/lang/String;
+		ARG 0 i
+	METHOD m_lhmtsnkp createCodecForPairObject (Lcom/mojang/serialization/Codec;Ljava/lang/String;Ljava/lang/String;Ljava/util/function/BiFunction;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+		ARG 0 codec
+		ARG 1 leftFieldName
+		ARG 2 rightFieldName
+		ARG 3 combineFunction
+		ARG 4 leftFunction
+		ARG 5 rightFunction
+	METHOD m_lllwtuze (Lcom/mojang/serialization/Codec;Ljava/lang/String;Ljava/lang/String;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 3 instance
 	METHOD m_nxyzvatp createPresentValuesChecker ()Ljava/util/function/Function;
+	METHOD m_pislqwcc (Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Either;
+		ARG 2 o
+	METHOD m_qqtnltay (Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/Object;)Ljava/util/List;
+		ARG 2 o
 	METHOD m_sjcqhyck xor (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		COMMENT Returns an exclusive-or codec for {@link Either} instances.
 		COMMENT
@@ -29,14 +61,28 @@ CLASS net/minecraft/unmapped/C_hxzepjyt net/minecraft/util/dynamic/Codecs
 			COMMENT the first codec
 		ARG 1 second
 			COMMENT the second codec
-	METHOD m_vvuwphmw createRangeChecker (Ljava/lang/Number;Ljava/lang/Number;Ljava/util/function/Function;)Ljava/util/function/Function;
+	METHOD m_swslsjwg (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 0 list
+	METHOD m_vvuwphmw createIntRangeChecker (Ljava/lang/Number;Ljava/lang/Number;Ljava/util/function/Function;)Ljava/util/function/Function;
 		ARG 0 min
 		ARG 1 max
 		ARG 2 messageFactory
+	METHOD m_weqhklgg (Ljava/lang/Integer;)Ljava/lang/String;
+		ARG 0 i
+	METHOD m_xxidgvne (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 right
 	METHOD m_yigevofl rangedInt (IILjava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 min
 		ARG 1 max
 		ARG 2 messageFactory
+	METHOD m_yvtipgpd (Lcom/mojang/datafixers/util/Either;)Ljava/lang/Object;
+		ARG 0 either
+	METHOD m_zdmqtiom createFloatRangeChecker (Ljava/lang/Number;Ljava/lang/Number;Ljava/util/function/Function;)Ljava/util/function/Function;
+		ARG 0 min
+		ARG 1 max
+		ARG 2 messageFactory
+	METHOD m_zxadmnyw (Ljava/util/function/BiFunction;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+		ARG 1 o
 	CLASS C_lbsehpuc Xor
 		COMMENT An xor codec that only permits exactly one of the two data choices to be
 		COMMENT present.
@@ -65,3 +111,26 @@ CLASS net/minecraft/unmapped/C_hxzepjyt net/minecraft/util/dynamic/Codecs
 			ARG 3 right
 		METHOD m_ynqnhebe (Lcom/mojang/datafixers/util/Pair;)Lcom/mojang/datafixers/util/Pair;
 			ARG 0 pair
+	CLASS C_petudmtu EitherCodec
+		FIELD f_jgyugqln right Lcom/mojang/serialization/Codec;
+		FIELD f_rwhflako left Lcom/mojang/serialization/Codec;
+		METHOD <init> (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)V
+			ARG 1 left
+			ARG 2 right
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 ops
+			ARG 2 input
+		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 either
+			ARG 2 ops
+			ARG 3 prefix
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 other
+		METHOD m_cyslolte (Lcom/mojang/datafixers/util/Pair;)Lcom/mojang/datafixers/util/Pair;
+			ARG 0 pair
+		METHOD m_hnopzidm (Lcom/mojang/datafixers/util/Pair;)Lcom/mojang/datafixers/util/Pair;
+			ARG 0 pair
+		METHOD m_imsuxsss (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 3 left
+		METHOD m_mrijykix (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 3 right
