@@ -3,7 +3,7 @@ package quilt.internal.tasks;
 import org.gradle.api.Task;
 import quilt.internal.util.DownloadImmediate;
 
-public interface MappingsTask extends Task {
+public interface AbstractMappingsTask extends Task {
 
     default DownloadImmediate.Builder startDownload() {
         return new DownloadImmediate.Builder(this);

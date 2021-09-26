@@ -2,9 +2,9 @@ package quilt.internal.tasks.build;
 
 import org.gradle.jvm.tasks.Jar;
 import quilt.internal.Constants;
-import quilt.internal.tasks.MappingsTask;
+import quilt.internal.tasks.AbstractMappingsTask;
 
-public class TinyJarTask extends Jar implements MappingsTask {
+public class TinyJarTask extends Jar implements AbstractMappingsTask {
     public static final String TASK_NAME = "tinyJar";
 
     public TinyJarTask() {

@@ -41,6 +41,8 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
 
         AtomicBoolean failed = new AtomicBoolean(false);
 
+        Object lock = new Object();
+
         JsonUtils.<List<Map<String, Map<String, Map<String, String>>>>>getFromTree(version, "libraries").parallelStream().forEach(library -> {
             String downloadUrl = JsonUtils.getFromTree(library, "downloads", "artifact", "url");
 
@@ -54,8 +56,9 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
                 failed.set(true);
                 e.printStackTrace();
             }
-
-            getProject().getDependencies().add("decompileClasspath", library.get("name"));
+            synchronized (lock) {
+                getProject().getDependencies().add("decompileClasspath", library.get("name"));
+            }
         });
 
         if (failed.get()) {
