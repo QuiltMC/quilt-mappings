@@ -20,6 +20,15 @@ public class MappingsTask extends JavaExec implements AbstractMappingsTask {
         this.getMainClass().set("cuchaz.enigma.gui.Main");
         this.classpath(getProject().getConfigurations().getByName("enigmaRuntime"));
         jarToMap = getObjectFactory().property(File.class);
+        jvmArgs("-Xmx2048m");
+    }
+
+    @Override
+    public void exec() {
+        args(List.of(
+                "-jar", this.jarToMap.get().getAbsolutePath(), "-mappings", fileConstants.mappingsDir.getAbsolutePath(), "-profile", "enigma_profile.json"
+        ));
+        super.exec();
     }
 
     @InputFile
@@ -27,10 +36,6 @@ public class MappingsTask extends JavaExec implements AbstractMappingsTask {
 
     public void setJarToMap(File jarToMap) {
         this.jarToMap.set(jarToMap);
-        setArgs(List.of(
-                "-jar", this.jarToMap.get().getAbsolutePath(), "-mappings", fileConstants.mappingsDir.getAbsolutePath(), "-profile", "enigma_profile.json"
-        ));
-        jvmArgs("-Xmx2048m");
     }
 
     public File getJarToMap() {
