@@ -89,12 +89,8 @@ CLASS net/minecraft/unmapped/C_ccazprxg net/minecraft/server/world/ThreadedAnvil
 		ARG 1 chunkPos
 	METHOD m_jvmqkxau doesNotGenerateChunks (Lnet/minecraft/unmapped/C_ggsborxm;)Z
 		ARG 1 player
-	METHOD m_mhfytkmc getChebyshevDistance (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_srenftsa;)I
-		ARG 0 chunkPos
-		ARG 1 entity
-	METHOD m_mwmsmxtn sendChunkDataPackets (Lnet/minecraft/unmapped/C_ggsborxm;[Lnet/minecraft/unmapped/C_lrjrtjyz;Lnet/minecraft/unmapped/C_qklvsdrh;)V
+	METHOD m_mwmsmxtn sendChunkDataPackets (Lnet/minecraft/unmapped/C_ggsborxm;Lorg/apache/commons/lang3/mutable/MutableObject;Lnet/minecraft/unmapped/C_qklvsdrh;)V
 		ARG 1 player
-		ARG 2 packets
 		ARG 3 chunk
 	METHOD m_nemoanvm getSquaredDistance (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_srenftsa;)D
 		ARG 0 pos
@@ -114,18 +110,11 @@ CLASS net/minecraft/unmapped/C_ccazprxg net/minecraft/server/world/ThreadedAnvil
 		COMMENT Updates the watched chunk section position for the {@code player}, and sends a
 		COMMENT render distance update packet to the client.
 		ARG 1 player
-	METHOD m_tbsnqcnu sendWatchPackets (Lnet/minecraft/unmapped/C_ggsborxm;Lnet/minecraft/unmapped/C_utrzsrny;[Lnet/minecraft/unmapped/C_lrjrtjyz;ZZ)V
+	METHOD m_tbsnqcnu sendWatchPackets (Lnet/minecraft/unmapped/C_ggsborxm;Lnet/minecraft/unmapped/C_utrzsrny;Lorg/apache/commons/lang3/mutable/MutableObject;ZZ)V
 		ARG 1 player
 		ARG 2 pos
-		ARG 3 packets
 		ARG 4 withinMaxWatchDistance
 		ARG 5 withinViewDistance
-	METHOD m_tkflqqki (Lnet/minecraft/unmapped/C_ojdredkg;Ljava/util/concurrent/CompletableFuture;JLnet/minecraft/unmapped/C_rqmmmzwl;)V
-		ARG 5 chunk
-	METHOD m_tnisusll getChebyshevDistance (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_ggsborxm;Z)I
-		ARG 0 pos
-		ARG 1 player
-		ARG 2 useWatchedPosition
 	METHOD m_tsdnayon getTotalChunksLoadedCount ()I
 	METHOD m_vanziwbf setLevel (JILnet/minecraft/unmapped/C_ojdredkg;I)Lnet/minecraft/unmapped/C_ojdredkg;
 		ARG 1 pos
@@ -149,17 +138,11 @@ CLASS net/minecraft/unmapped/C_ccazprxg net/minecraft/server/world/ThreadedAnvil
 		ARG 1 centerChunk
 		ARG 2 margin
 		ARG 3 distanceToStatus
-	METHOD m_yrpbryoe (Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/Optional;
-		ARG 0 chunk
 	METHOD m_yveefziy makeChunkTickable (Lnet/minecraft/unmapped/C_ojdredkg;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 holder
 	METHOD m_zedxkgke unloadChunks (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
 	METHOD m_zpfthitm entryIterator ()Ljava/lang/Iterable;
-	METHOD m_zpvyzxaw getChebyshevDistance (Lnet/minecraft/unmapped/C_utrzsrny;II)I
-		ARG 0 pos
-		ARG 1 x
-		ARG 2 z
 	METHOD m_zsbumryl setViewDistance (I)V
 		ARG 1 watchDistance
 	METHOD m_zzbpdijj sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_lrjrtjyz;)V
