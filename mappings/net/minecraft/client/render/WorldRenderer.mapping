@@ -6,16 +6,20 @@ CLASS net/minecraft/unmapped/C_xhbakkfs net/minecraft/client/render/WorldRendere
 	FIELD f_bihgomxx regularEntityCount I
 	FIELD f_blrrqqps entityOutlineShader Lnet/minecraft/unmapped/C_ewxdhhdp;
 	FIELD f_bxnpkmvc chunkUpdateSmoother Lnet/minecraft/unmapped/C_pjrrmqsz;
+	FIELD f_ceeitedm chunkInfoList Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 	FIELD f_ctfaveiy RAIN Lnet/minecraft/unmapped/C_acfwypcn;
 	FIELD f_dcczvlna SIZE_CHUNK I
+	FIELD f_dnsmkpoz CEIL_CUBEROOT_3_TIMES_16 D
 	FIELD f_dpiwqrsp lastCloudsBlockZ I
 	FIELD f_dqbralkn visibleChunks Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 	FIELD f_dsyhvafn RAIN_RENDER_DIAMETER I
 	FIELD f_dtihxgpf blockEntityRenderDispatcher Lnet/minecraft/unmapped/C_mzpxqcis;
+	FIELD f_dwqdhgrf SIZE_HALF_CHUNK I
 	FIELD f_eeovlhor lastCameraChunkUpdateZ D
 	FIELD f_ekluhgww frame I
 	FIELD f_gczpsopj MINIMUM_FOG_DISTANCE I
 	FIELD f_ggbasxzi MOON_PHASES Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_gsrxvodl recentlyCompiledChunks Ljava/util/concurrent/BlockingQueue;
 	FIELD f_gyzwiexu shouldCaptureFrustum Z
 	FIELD f_hnssniwx MAX_CHUNKS_WIDTH I
 	FIELD f_hwrqzrpd frustum Lnet/minecraft/unmapped/C_gveqjzwj;
@@ -31,14 +35,17 @@ CLASS net/minecraft/unmapped/C_xhbakkfs net/minecraft/client/render/WorldRendere
 	FIELD f_klvypkfo DIRECTIONS [Lnet/minecraft/unmapped/C_fxhiuupx;
 	FIELD f_ksykyknk world Lnet/minecraft/unmapped/C_wrrlndhg;
 	FIELD f_kwndipeg blockEntityCount I
+	FIELD f_kzhvtlpg atomicBuiltChunkStorage Ljava/util/concurrent/atomic/AtomicReference;
 	FIELD f_mdgpeidn lastTranslucentSortX D
 	FIELD f_midyiqnc transparencyShader Lnet/minecraft/unmapped/C_ewxdhhdp;
 	FIELD f_mknmrbqd lastCameraYaw D
 	FIELD f_mmfdvicg bufferBuilders Lnet/minecraft/unmapped/C_wugjwmfd;
 	FIELD f_mxcpxpga SUN Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_nguxdfdx lastFullBuiltChunkUpdate Ljava/util/concurrent/Future;
 	FIELD f_nvpkkfkf entityOutlinesFramebuffer Lnet/minecraft/unmapped/C_clevgwxx;
 	FIELD f_odnkuyqx client Lnet/minecraft/unmapped/C_diboefya;
 	FIELD f_olgttztn TRANSPARENT_SORT_AMOUNT I
+	FIELD f_oumywkoy HALF_SECOND_MILLIS I
 	FIELD f_plcgghhu noCullingBlockEntities Ljava/util/Set;
 	FIELD f_pslnaycg lastCameraY D
 	FIELD f_pszgscsd rainSizeZ [F
@@ -61,6 +68,7 @@ CLASS net/minecraft/unmapped/C_xhbakkfs net/minecraft/client/render/WorldRendere
 	FIELD f_wfyrgswz blockBreakingProgressions Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
 	FIELD f_wsuzgdhw lastCloudsBlockY I
 	FIELD f_wtsxgjgh lastCameraX D
+	FIELD f_wuvbqxau MINIMUM_ADVANCED_CULLING_DISTANCE I
 	FIELD f_xxmbkmng lastCameraZ D
 	FIELD f_ybrssrrc lightSkyBuffer Lnet/minecraft/unmapped/C_sijxdjhl;
 	FIELD f_yeiisosa MAX_CHUNKS_AREA I
@@ -456,3 +464,4 @@ CLASS net/minecraft/unmapped/C_xhbakkfs net/minecraft/client/render/WorldRendere
 		METHOD <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
 			ARG 1 message
 			ARG 2 cause
+	CLASS C_sphdwovx BuiltChunkStorage

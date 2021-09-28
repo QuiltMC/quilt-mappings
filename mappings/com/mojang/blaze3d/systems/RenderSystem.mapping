@@ -5,6 +5,8 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 check
 	METHOD bindTexture (I)V
 		ARG 0 texture
+	METHOD bindTextureForSetup (I)V
+		ARG 0 textureId
 	METHOD blendEquation (I)V
 		ARG 0 mode
 	METHOD blendFunc (II)V
@@ -48,6 +50,11 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 mode
 		ARG 1 first
 		ARG 2 count
+	METHOD enableScissor (IIII)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 width
+		ARG 3 height
 	METHOD flipFrame (J)V
 		ARG 0 window
 	METHOD getString (ILjava/util/function/Consumer;)V
@@ -114,6 +121,9 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	METHOD pixelStore (II)V
 		ARG 0 pname
 		ARG 1 param
+	METHOD polygonMode (II)V
+		ARG 0 face
+		ARG 1 mode
 	METHOD polygonOffset (FF)V
 		ARG 0 factor
 		ARG 1 units
@@ -143,6 +153,8 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 func
 		ARG 1 ref
 		ARG 2 mask
+	METHOD stencilMask (I)V
+		ARG 0 mask
 	METHOD stencilOp (III)V
 		ARG 0 sfail
 		ARG 1 dpfail
