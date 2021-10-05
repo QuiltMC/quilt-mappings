@@ -2,6 +2,7 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	FIELD f_alkavmyi LEASH_KEY Ljava/lang/String;
 	FIELD f_dmryvqlg lootTableSeed J
 	FIELD f_drxzjwdx handDropChances [F
+	FIELD f_eiglgwfe PICKUP_REACH I
 	FIELD f_ejcjcslq holdingEntityId I
 	FIELD f_eulxwdgg ATTACKING_FLAG I
 	FIELD f_fdqisjqs jumpControl Lnet/minecraft/unmapped/C_witoudmt;
@@ -21,15 +22,19 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	FIELD f_nnisxirs LEFT_HANDED_FLAG I
 	FIELD f_nqccbtqz armorDropChances [F
 	FIELD f_odeskzwn goalSelector Lnet/minecraft/unmapped/C_njrjpsoq;
+	FIELD f_opqnrywz MAX_WEAR_ARMOR_PROBABILITY F
 	FIELD f_pljjiodd DEFAULT_DROP_CHANCE F
 	FIELD f_rorbsvxm armorItems Lnet/minecraft/unmapped/C_eztffrnr;
+	FIELD f_spmyfgio MAX_ENCHANTED_WEAPON_PROBABILITY F
 	FIELD f_uhdhcnpe AI_DISABLED_FLAG I
 	FIELD f_ulawqzzn pathfindingPenalties Ljava/util/Map;
 	FIELD f_vgryyyci bodyControl Lnet/minecraft/unmapped/C_vgfmyfov;
 	FIELD f_vojyzlkw holdingEntity Lnet/minecraft/unmapped/C_srenftsa;
 	FIELD f_wehfrdxw leashNbt Lnet/minecraft/unmapped/C_hincwlhh;
+	FIELD f_xzjeodja MAX_PICKUP_LOOT_PROBABILITY F
 	FIELD f_ydawyxzp ambientSoundChance I
 	FIELD f_yumgszhc pickUpLoot Z
+	FIELD f_zoqcyjdh MAX_ENCHANTED_ARMOR_PROBABILITY F
 	METHOD m_aagpygmk getPathfindingPenalty (Lnet/minecraft/unmapped/C_xjixeynr;)F
 		ARG 1 nodeType
 	METHOD m_ajtzjufl getLookControl ()Lnet/minecraft/unmapped/C_frcpfugl;
@@ -131,6 +136,8 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 		ARG 2 dropItem
 	METHOD m_nwimxfol setPersistent ()V
 	METHOD m_paebgfjz isAiDisabled ()Z
+	METHOD m_pctroflr (Ljava/lang/String;)Z
+		ARG 0 key
 	METHOD m_pkhnsnqd canPickupItem (Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 1 stack
 	METHOD m_pottbust mobTick ()V
@@ -149,6 +156,8 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	METHOD m_rjtkstsl updateEnchantments (Lnet/minecraft/unmapped/C_tzwliaij;)V
 		ARG 1 difficulty
 	METHOD m_rpmhwluv isLeashed ()Z
+	METHOD m_rpvjmcfc (Ljava/lang/String;)Z
+		ARG 0 key
 	METHOD m_rzqrpawv getPositionTargetRange ()F
 	METHOD m_shjrulag resetSoundDelay ()V
 	METHOD m_sppdjkfc prefersNewEquipment (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
@@ -166,6 +175,9 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 		COMMENT {@return if this entity can jump to the next node in path given the type of
 		COMMENT the node}
 		ARG 1 type
+	METHOD m_umrkeqpc clearPositionTarget ()V
+	METHOD m_utpuzgsj (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_zlwsfkxd;)V
+		ARG 2 entity
 	METHOD m_uuhnvffu readLeashNbt ()V
 	METHOD m_vemhajmw getLookYawSpeed ()I
 	METHOD m_vntwnldk lookAtEntity (Lnet/minecraft/unmapped/C_srenftsa;FF)V

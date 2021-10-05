@@ -11,6 +11,7 @@ CLASS net/minecraft/unmapped/C_lqpxgfgh net/minecraft/entity/passive/BeeEntity
 	FIELD f_eofkjysy ticksSincePollination I
 	FIELD f_etozxllr HAS_NECTAR_KEY Ljava/lang/String;
 	FIELD f_evoimwcd cropsGrownSincePollination I
+	FIELD f_fuhywhqy STING_DEATH_COUNTDOWN I
 	FIELD f_gkwnriwu moveToHiveGoal Lnet/minecraft/unmapped/C_lqpxgfgh$C_brsovroa;
 	FIELD f_hcfxpzkq ticksLeftToFindHive I
 	FIELD f_hiodaefm ANGER Lnet/minecraft/unmapped/C_yxacmnir;
@@ -18,6 +19,8 @@ CLASS net/minecraft/unmapped/C_lqpxgfgh net/minecraft/entity/passive/BeeEntity
 		COMMENT A bee will start moving to a flower once this time in ticks has passed from a pollination.
 	FIELD f_kytungrp NORMAL_DIFFICULTY_STING_POISON_DURATION I
 	FIELD f_mklqhsli MAX_POLLINATED_CROPS I
+	FIELD f_mtgbsvpl HIVE_SEARCH_DISTANCE I
+	FIELD f_narzyzmh HIVE_CLOSE_ENOUGH_DISTANCE I
 	FIELD f_nyqwgjoc CROPS_GROWN_SINCE_POLLINATION_KEY Ljava/lang/String;
 	FIELD f_ofkwekye FLOWER_POS_KEY Ljava/lang/String;
 	FIELD f_oxwzpyme currentPitch F
@@ -26,18 +29,23 @@ CLASS net/minecraft/unmapped/C_lqpxgfgh net/minecraft/entity/passive/BeeEntity
 	FIELD f_rczjmigr flowerPos Lnet/minecraft/unmapped/C_kkdaznyh;
 	FIELD f_rhedkwwv cannotEnterHiveTicks I
 	FIELD f_rnsqranh ticksUntilCanPollinate I
+	FIELD f_rqcnznth FLAP_DEGREES_PER_TICK F
 	FIELD f_suawordm HIVE_POS_KEY Ljava/lang/String;
+	FIELD f_tpfgkhxp TICKS_PER_FLAP I
 	FIELD f_tragtitq ticksSinceSting I
 	FIELD f_trcojbjx CANNOT_ENTER_HIVE_TICKS_KEY Ljava/lang/String;
 	FIELD f_upbutquw targetUuid Ljava/util/UUID;
 	FIELD f_utpsnbgp TOO_FAR_DISTANCE I
 		COMMENT The minimum distance that bees lose their hive or flower position at.
 	FIELD f_uuvosjcy moveToFlowerGoal Lnet/minecraft/unmapped/C_lqpxgfgh$C_cscequvs;
+	FIELD f_vhmvdbrj LOCATING_NEW_HIVE_COOLDOWN I
+	FIELD f_vylhpwms LOCATING_NEW_FLOWER_COOLDOWN I
 	FIELD f_womjokfp lastPitch F
 	FIELD f_wvhxwseh hivePos Lnet/minecraft/unmapped/C_kkdaznyh;
 	FIELD f_xyvdqadb MIN_HIVE_RETURN_DISTANCE I
 		COMMENT The minimum distance that bees will immediately return to their hive at.
 	FIELD f_zqcuqsvh HAS_NECTAR_FLAG I
+	FIELD f_zsdobthw MIN_ATTACK_DISTANCE I
 	METHOD m_astzpvit getFlowerPos ()Lnet/minecraft/unmapped/C_kkdaznyh;
 	METHOD m_bcvhblwa getHivePos ()Lnet/minecraft/unmapped/C_kkdaznyh;
 	METHOD m_bflgeikm isTooFar (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
@@ -96,8 +104,12 @@ CLASS net/minecraft/unmapped/C_lqpxgfgh net/minecraft/entity/passive/BeeEntity
 		ARG 12 effect
 	METHOD m_zwjuxyhp hasFlower ()Z
 	CLASS C_arjfgkys GrowCropsGoal
+		FIELD f_obibpswb GROW_PROBABILITY I
 	CLASS C_brsovroa MoveToHiveGoal
+		FIELD f_dmxiensm TICKS_BEFORE_HIVE_DROP I
 		FIELD f_ftceshed path Lnet/minecraft/unmapped/C_fbepitom;
+		FIELD f_iiorakgs MAX_BLACKLISTED_TARGETS I
+		FIELD f_kjmurkhs MAX_TRAVELLING_TICKS I
 		FIELD f_oldgqmzi possibleHives Ljava/util/List;
 		FIELD f_rkcxixvj ticksUntilLost I
 		FIELD f_rlrxmdok ticks I
@@ -133,14 +145,27 @@ CLASS net/minecraft/unmapped/C_lqpxgfgh net/minecraft/entity/passive/BeeEntity
 			ARG 1 bee
 		METHOD m_vdqmcoct canSting ()Z
 	CLASS C_txqgkphu FindHiveGoal
+		METHOD m_cdbbdlfg (Lnet/minecraft/unmapped/C_grcdtzov;)Z
+			ARG 0 poiType
 		METHOD m_mbchahlf getNearbyFreeHives ()Ljava/util/List;
+		METHOD m_tfbqzzyi (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kkdaznyh;)D
+			ARG 1 pos
 	CLASS C_uruzetsh PollinateGoal
+		FIELD f_binmlhdq ARRIVAL_TRESHOLD D
+		FIELD f_gbsmimqv MAX_POLLINATION_TICKS I
+		FIELD f_gwlccbnl HOVER_HEIGHT_WITHIN_FLOWER F
+		FIELD f_kdvmaicu SPEED_MODIFIER F
 		FIELD f_nhrjilkb running Z
 		FIELD f_onwxawxu pollinationTicks I
+		FIELD f_qponwxjd POSITION_CHANGE_PROBABILITY I
+		FIELD f_sgkgryjb MIN_FIND_FLOWER_RETRY_COOLDOWN I
 		FIELD f_sntkjplh flowerPredicate Ljava/util/function/Predicate;
+		FIELD f_tpuzpvez MIN_POLLINATION_TICKS I
 		FIELD f_ubqcphti ticks I
 		FIELD f_ulsoormu lastPollinationTick I
+		FIELD f_wazhlded MAX_FIND_FLOWER_RETRY_COOLDOWN I
 		FIELD f_xxxthoob nextTarget Lnet/minecraft/unmapped/C_xxfpupgv;
+		FIELD f_yvibxbpl HOVER_POS_OFFSET F
 		METHOD m_ajqoplne getFlower ()Ljava/util/Optional;
 		METHOD m_esraloiy getRandomOffset ()F
 		METHOD m_fqmypkqx completedPollination ()Z
@@ -156,4 +181,5 @@ CLASS net/minecraft/unmapped/C_lqpxgfgh net/minecraft/entity/passive/BeeEntity
 		METHOD <init> (Lnet/minecraft/unmapped/C_lqpxgfgh;Lnet/minecraft/unmapped/C_lqpxgfgh;)V
 			ARG 2 bee
 	CLASS C_ycltabmj BeeWanderAroundGoal
+		FIELD f_cagxzulp WANDER_TRESHOLD I
 		METHOD m_yrstoqyg getRandomLocation ()Lnet/minecraft/unmapped/C_xxfpupgv;

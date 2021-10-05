@@ -4,25 +4,32 @@ CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEn
 	FIELD f_bctzzqlh lastAngryAnimationProgress F
 	FIELD f_cfcxztba lastEatingAnimationProgress F
 	FIELD f_efiixuqo eatingGrassAnimationProgress F
+	FIELD f_ffuresqj INVENTORY_SLOT_OFFSET I
 	FIELD f_fvglhtjc items Lnet/minecraft/unmapped/C_xzwiolsr;
 	FIELD f_geaybwfn OWNER_UUID Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_gmzbjlso CHEST_SLOT_OFFSET I
 	FIELD f_gotinsyl playExtraHorseSounds Z
 	FIELD f_iktymxtz eatingTicks I
 	FIELD f_jhuqvyzv jumping Z
 	FIELD f_jpugbiws BRED_FLAG I
+	FIELD f_mlyxizun EQUIPMENT_SLOT_OFFSET I
 	FIELD f_mnykthxl angryAnimationProgress F
 	FIELD f_mxzroezz tailWagTicks I
 	FIELD f_okdghxdh eatingGrassTicks I
+	FIELD f_olqbpcde sprintCounter I
 	FIELD f_qcjbnfkr EATING_GRASS_FLAG I
 	FIELD f_qpmwvszb jumpStrength F
 	FIELD f_senysywh temper I
 	FIELD f_sqrxxyli HORSE_FLAGS Lnet/minecraft/unmapped/C_yxacmnir;
 	FIELD f_tpxwvsra inAir Z
+	FIELD f_udglgwun SADDLE_INVENTORY_SLOT I
 	FIELD f_ufmrizub lastEatingGrassAnimationProgress F
 	FIELD f_uqbgntel TAMED_FLAG I
 	FIELD f_uwalleen IS_BRED_HORSE Ljava/util/function/Predicate;
 	FIELD f_veiltziv ANGRY_FLAG I
+	FIELD f_vvgiwmrd ARMOR_INVENTORY_SLOT I
 	FIELD f_wmngovua BREEDING_INGREDIENT Lnet/minecraft/unmapped/C_vrdyspct;
+	FIELD f_wzzgtolg INVENTORY_BASE_SIZE I
 	FIELD f_xqnpbcjy PARENT_HORSE_PREDICATE Lnet/minecraft/unmapped/C_hnihytjc;
 	FIELD f_ypyuldte SADDLED_FLAG I
 	FIELD f_zyizooxc EATING_FLAG I
@@ -30,6 +37,8 @@ CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEn
 	METHOD m_aajehkwx getAngryAnimationProgress (F)F
 		ARG 1 tickDelta
 	METHOD m_ajbwwozx getChildMovementSpeedBonus ()D
+	METHOD m_buchkkpz isDifferentInventory (Lnet/minecraft/unmapped/C_qojtstjp;)Z
+		ARG 1 inventory
 	METHOD m_cdboogbw setTemper (I)V
 		ARG 1 temper
 	METHOD m_ciaopbkn initAttributes ()V
@@ -118,6 +127,9 @@ CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEn
 	METHOD m_wirjgdcx getEatingGrassAnimationProgress (F)F
 		ARG 1 tickDelta
 	METHOD m_wulkbvio updateAnger ()V
+	METHOD m_wwcockuy getDismountLocation (Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_ndyxaxsu;)Lnet/minecraft/unmapped/C_xxfpupgv;
+		ARG 1 dismountDirection
+		ARG 2 passenger
 	METHOD m_wxqsgtnf addTemper (I)I
 		ARG 1 difference
 	METHOD m_wyxuomrl spawnPlayerReactionParticles (Z)V

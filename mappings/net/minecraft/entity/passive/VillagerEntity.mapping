@@ -1,18 +1,31 @@
 CLASS net/minecraft/unmapped/C_etbdktdp net/minecraft/entity/passive/VillagerEntity
+	FIELD f_bxbkkqhf TIME_SINCE_SLEEPING_FOR_GOLEM_SPAWNING J
 	FIELD f_cumdgnha MEMORY_MODULES Lcom/google/common/collect/ImmutableList;
 	FIELD f_dkzljqoa gossipStartTime J
 	FIELD f_etkvwhus lastRestockCheckTime J
+	FIELD f_fhctxura TRADE_OFFERS_PER_LEVEL I
+	FIELD f_heknllpo SPEED_MODIFIER F
 	FIELD f_hxcvpdua lastRestockTime J
 	FIELD f_inzuxjqm POINTS_OF_INTEREST Ljava/util/Map;
+	FIELD f_iwuxfkzd GOLEM_COMUNICATION_DISTANCE I
+		COMMENT How far away the villager should "talk" about golems with other villagers.
 	FIELD f_jvixwubx lastCustomer Lnet/minecraft/unmapped/C_oqcyprzj;
 	FIELD f_liscujfh SENSORS Lcom/google/common/collect/ImmutableList;
+	FIELD f_lycwlgjq GOSSIP_DECAY_INTERVAL I
 	FIELD f_mfkejalq levelingUp Z
 	FIELD f_oehgyohj ITEM_FOOD_VALUES Ljava/util/Map;
+	FIELD f_pciijhkl MAX_GOSSIP_TOPICS I
+	FIELD f_pgwtjfrx REPUTATION_CHANGE_PER_EVENT I
 	FIELD f_rztkipor GATHERABLE_ITEMS Ljava/util/Set;
 	FIELD f_spyrdfat levelUpTimer I
 	FIELD f_ttvfrkxg foodLevel B
 	FIELD f_vavdbabs lastGossipDecayTime J
 	FIELD f_vqtjxsix VILLAGER_DATA Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_wnyoalkg GOLEM_SPAWN_REQUIRED_AGREEING_VILLAGERS I
+		COMMENT How many villagers should agree for a golem to be spawned.
+	FIELD f_wxmedmsu GOSSIP_COOLDOWN I
+	FIELD f_xlolrpnm chasing Z
+	FIELD f_xwoehcpe BREEDING_FOOD_REQUIRED I
 	FIELD f_yakoqnuo restocksToday I
 	FIELD f_ybyolewa experience I
 	FIELD f_ycxdmtuy gossip Lnet/minecraft/unmapped/C_vtagjako;
@@ -45,10 +58,13 @@ CLASS net/minecraft/unmapped/C_etbdktdp net/minecraft/entity/passive/VillagerEnt
 		ARG 1 pos
 		ARG 2 x
 		ARG 4 z
+	METHOD m_hkeiymgk (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 2 entity
 	METHOD m_isxucwjj playWorkSound ()V
 	METHOD m_jjxgtawc restock ()V
 	METHOD m_jpgxwhgz shouldRestock ()Z
 	METHOD m_jxuueryu consumeAvailableFood ()V
+	METHOD m_jzvmteds isChasing ()Z
 	METHOD m_kksmmopy initBrain (Lnet/minecraft/unmapped/C_fexajqjr;)V
 		ARG 1 brain
 	METHOD m_krsvkhip (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
@@ -96,6 +112,8 @@ CLASS net/minecraft/unmapped/C_etbdktdp net/minecraft/entity/passive/VillagerEnt
 	METHOD m_vshlbppw (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
 		ARG 0 villager
 		ARG 1 poiType
+	METHOD m_wbdofnms setChasing (Z)V
+		ARG 1 chasing
 	METHOD m_xivdvfxn reinitializeBrain (Lnet/minecraft/unmapped/C_uihwnwdb;)V
 		ARG 1 world
 	METHOD m_xvnbtkvv getReputation (Lnet/minecraft/unmapped/C_oqcyprzj;)I
@@ -107,5 +125,6 @@ CLASS net/minecraft/unmapped/C_etbdktdp net/minecraft/entity/passive/VillagerEnt
 	METHOD m_ynnyuwdh createVillagerAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_sujrwhet;
 	METHOD m_yqzljilc canLevelUp ()Z
 	METHOD m_zbwdboik releaseTicketFor (Lnet/minecraft/unmapped/C_wyqoybbv;)V
+		ARG 1 memoryType
 	METHOD m_zccekgap getAvailableFood ()I
 	METHOD m_zventcwp lacksFood ()Z
