@@ -9,7 +9,6 @@ CLASS net/minecraft/unmapped/C_miblafgk net/minecraft/world/gen/chunk/ChunkGener
 	FIELD f_kupwsezv CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_mcwxzcai strongholds Ljava/util/List;
 	FIELD f_plhwnfil worldSeed J
-	FIELD f_postymmg blockSource Lnet/minecraft/unmapped/C_gkzilmui;
 	FIELD f_wtaxpzrd biomeSource Lnet/minecraft/unmapped/C_aywougja;
 	FIELD f_zyispspy structuresConfig Lnet/minecraft/unmapped/C_ooznwmuz;
 	METHOD <init> (Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_ooznwmuz;J)V
@@ -25,33 +24,20 @@ CLASS net/minecraft/unmapped/C_miblafgk net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_bzjfnqmf isStrongholdStartingChunk (Lnet/minecraft/unmapped/C_utrzsrny;)Z
 		ARG 1 pos
 	METHOD m_dbafvzbu getCodec ()Lcom/mojang/serialization/Codec;
-	METHOD m_dlridwad buildSurface (Lnet/minecraft/unmapped/C_yefcmyze;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
-		COMMENT Places the surface blocks of the biomes after the noise has been generated.
-		ARG 1 region
-		ARG 2 chunk
 	METHOD m_dmnqmuja getBiomeSource ()Lnet/minecraft/unmapped/C_aywougja;
 	METHOD m_fxztkubj getHeightOnGround (IILnet/minecraft/unmapped/C_ckeotzby$C_nbzqedkw;Lnet/minecraft/unmapped/C_byoninpq;)I
 		ARG 1 x
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
-	METHOD m_fzrarauu setStructureStart (Lnet/minecraft/unmapped/C_vqyngcil;Lnet/minecraft/unmapped/C_qdzvmxqw;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_wviludhr;JLnet/minecraft/unmapped/C_sfepklro;)V
-		ARG 1 feature
-		ARG 2 registryManager
-		ARG 3 accessor
-		ARG 4 chunk
-		ARG 5 structureManager
-		ARG 6 worldSeed
-		ARG 8 biome
 	METHOD m_gkhnclvp addStructureReferences (Lnet/minecraft/unmapped/C_rbthpkdl;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
 		COMMENT Finds all structures that the given chunk intersects, and adds references to their starting chunks to it.
 		COMMENT A radius of 8 chunks around the given chunk will be searched for structure starts.
 		ARG 1 world
 		ARG 2 accessor
 		ARG 3 chunk
-	METHOD m_glafleyw generateFeatures (Lnet/minecraft/unmapped/C_yefcmyze;Lnet/minecraft/unmapped/C_zpzevjii;)V
-		ARG 1 region
-		ARG 2 accessor
+	METHOD m_glafleyw generateFeatures (Lnet/minecraft/unmapped/C_rbthpkdl;Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_zpzevjii;)V
+		ARG 3 accessor
 	METHOD m_gxzsdjbb setStructureStarts (Lnet/minecraft/unmapped/C_qdzvmxqw;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_wviludhr;J)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
 		ARG 1 registryManager
@@ -64,8 +50,6 @@ CLASS net/minecraft/unmapped/C_miblafgk net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_khdxazwn populateEntities (Lnet/minecraft/unmapped/C_yefcmyze;)V
 		ARG 1 region
 	METHOD m_knbdrjws getWorldHeight ()I
-	METHOD m_limekccf createAquiferSampler (Lnet/minecraft/unmapped/C_rqmmmzwl;)Lnet/minecraft/unmapped/C_cxzdhgpj;
-		ARG 1 chunk
 	METHOD m_mbvjtqpn getColumnSample (IILnet/minecraft/unmapped/C_byoninpq;)Lnet/minecraft/unmapped/C_vkmvpdyl;
 		COMMENT Returns a sample of all the block states in a column for use in structure generation.
 		ARG 1 x
@@ -86,16 +70,12 @@ CLASS net/minecraft/unmapped/C_miblafgk net/minecraft/world/gen/chunk/ChunkGener
 			COMMENT the search radius in chunks around the chunk the given block position is in; a radius of 0 will only search in the given chunk
 		ARG 5 skipExistingChunks
 			COMMENT whether only structures that are not referenced by generated chunks (chunks past the STRUCTURE_STARTS stage) are returned, excluding strongholds
-	METHOD m_mwzeszkj populateBiomes (Lnet/minecraft/unmapped/C_ksqjyxqt;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
-		ARG 1 biomeRegistry
-		ARG 2 chunk
 	METHOD m_nmzkpqto getEntitySpawnList (Lnet/minecraft/unmapped/C_sfepklro;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_vhgtymyu;
 		ARG 1 biome
 		ARG 2 accessor
 		ARG 3 group
 		ARG 4 pos
 	METHOD m_ogcpucky getSeaLevel ()I
-	METHOD m_ooozxraq getBlockSource ()Lnet/minecraft/unmapped/C_gkzilmui;
 	METHOD m_orzflafi withSeed (J)Lnet/minecraft/unmapped/C_miblafgk;
 		ARG 1 seed
 	METHOD m_ovehgach getHeight (IILnet/minecraft/unmapped/C_ckeotzby$C_nbzqedkw;Lnet/minecraft/unmapped/C_byoninpq;)I
@@ -115,9 +95,3 @@ CLASS net/minecraft/unmapped/C_miblafgk net/minecraft/world/gen/chunk/ChunkGener
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
-	METHOD m_yhhhdjds carve (JLnet/minecraft/unmapped/C_umaimmxt;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_wybemrdr$C_nrmgprms;)V
-		COMMENT Generates caves for the given chunk.
-		ARG 1 seed
-		ARG 3 access
-		ARG 4 chunk
-		ARG 5 carver

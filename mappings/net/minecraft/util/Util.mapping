@@ -33,14 +33,10 @@ CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
 		COMMENT @see #combine(List)
 		ARG 0 futures
 			COMMENT the completable futures to combine
-	METHOD m_dcplpbnv (Ljava/util/function/Consumer;Ljava/lang/String;Ljava/lang/String;)V
-		ARG 2 string
 	METHOD m_dzfbcuet deletionVerifyTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 path
 	METHOD m_ecgpcnzj getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
-	METHOD m_eesbnxjo (Ljava/lang/Runnable;)Ljava/lang/Thread;
-		ARG 0 runnable
 	METHOD m_ermrrjjq getMeasuringTimeMs ()J
 	METHOD m_eyoxlyks debugRunnable (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
 		ARG 0 runnable
@@ -49,16 +45,11 @@ CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
 		ARG 0 object
 		ARG 1 initializer
 	METHOD m_fejbertx getMeasuringTimeNano ()J
-	METHOD m_fiazennh getMainWorkerExecutor ()Ljava/util/concurrent/Executor;
+	METHOD m_fiazennh getMainWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_frkwfsbl identityHashStrategy ()Lit/unimi/dsi/fastutil/Hash$Strategy;
-	METHOD m_ftwgzgvi (Ljava/util/List;[Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;)V
-		ARG 3 future
 	METHOD m_fzqfsgpw addPrefix (Ljava/lang/String;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
 		ARG 0 prefix
 		ARG 1 consumer
-	METHOD m_giufoonj debugRunnable (Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Runnable;
-		ARG 0 activeThreadName
-		ARG 1 task
 	METHOD m_gmqoxcgv throwUnchecked (Ljava/lang/Throwable;)V
 		ARG 0 t
 	METHOD m_gpvuadpq ifPresentOrElse (Ljava/util/Optional;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ljava/util/Optional;
@@ -73,20 +64,13 @@ CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
 		ARG 0 typeReference
 		ARG 1 id
 	METHOD m_htccictf toMap ()Ljava/util/stream/Collector;
-	METHOD m_irhuwupi (Ljava/util/concurrent/CompletableFuture;Ljava/util/List;ILjava/lang/Object;Ljava/lang/Throwable;)V
-		ARG 3 object
-		ARG 4 throwable
 	METHOD m_iufgfmlq error (Ljava/lang/String;)V
 		ARG 0 message
 	METHOD m_iusokygw completeExceptionally (Ljava/lang/Throwable;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 throwable
-	METHOD m_jopbgroq (Ljava/lang/String;Ljava/util/concurrent/ForkJoinPool;)Ljava/util/concurrent/ForkJoinWorkerThread;
-		ARG 1 forkJoinPool
-	METHOD m_jqyettqy (Lnet/minecraft/unmapped/C_rhbkwupz;I)Ljava/lang/String;
-		ARG 1 charCode
 	METHOD m_jvloctym createWorker (Ljava/lang/String;)Ljava/util/concurrent/ExecutorService;
 		ARG 0 name
-	METHOD m_kfjgjsbw getBootstrapExecutor ()Ljava/util/concurrent/Executor;
+	METHOD m_kfjgjsbw getBootstrapExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_khqqmaao attemptShutdown (Ljava/util/concurrent/ExecutorService;)V
 		ARG 0 service
 	METHOD m_mcudhlxg getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
@@ -140,7 +124,7 @@ CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
 		ARG 0 function
 	METHOD m_rxvqhuge throwOrPause (Ljava/lang/Throwable;)Ljava/lang/Throwable;
 		ARG 0 t
-	METHOD m_sapnbtag getIoWorkerExecutor ()Ljava/util/concurrent/Executor;
+	METHOD m_sapnbtag getIoWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_sggisvce memoize (Ljava/util/function/BiFunction;)Ljava/util/function/BiFunction;
 		ARG 0 biFunction
 	METHOD m_svfnenck shutdownExecutors ()V
@@ -164,15 +148,13 @@ CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
 	METHOD m_xeimnjcv previous (Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 iterable
 		ARG 1 object
-	METHOD m_xhrqrqxd pause ()V
+	METHOD m_xhrqrqxd pause (Ljava/lang/String;)V
 	METHOD m_xiqsdfvy getChoiceType (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
 		ARG 0 typeReference
 		ARG 1 id
 	METHOD m_yaqnirpe uncaughtExceptionHandler (Ljava/lang/Thread;Ljava/lang/Throwable;)V
 		ARG 0 thread
 		ARG 1 t
-	METHOD m_zeyyfmbf (Ljava/lang/String;)Z
-		ARG 0 runtimeArg
 	METHOD m_zzufbfgl replaceInvalidChars (Ljava/lang/String;Lnet/minecraft/unmapped/C_rhbkwupz;)Ljava/lang/String;
 		ARG 0 string
 		ARG 1 predicate
