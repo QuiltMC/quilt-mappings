@@ -1,11 +1,24 @@
 CLASS net/minecraft/unmapped/C_huhweqoj net/minecraft/client/particle/BlockLeakParticle
 	FIELD f_ltvzqobs obsidianTear Z
 	FIELD f_zexedrih fluid Lnet/minecraft/unmapped/C_ymruyhxr;
+	METHOD <init> (Lnet/minecraft/unmapped/C_wrrlndhg;DDDLnet/minecraft/unmapped/C_ymruyhxr;)V
+		ARG 1 world
+		ARG 2 x
+		ARG 4 y
+		ARG 6 z
+		ARG 8 fluid
 	METHOD m_cppotvfo updateAge ()V
 	METHOD m_remnrdjh updateVelocity ()V
 	METHOD m_xnffywem getFluid ()Lnet/minecraft/unmapped/C_ymruyhxr;
 	CLASS C_aavpusoy Dripping
 		FIELD f_jibcblmb nextParticle Lnet/minecraft/unmapped/C_tchocuqn;
+		METHOD <init> (Lnet/minecraft/unmapped/C_wrrlndhg;DDDLnet/minecraft/unmapped/C_ymruyhxr;Lnet/minecraft/unmapped/C_tchocuqn;)V
+			ARG 1 world
+			ARG 2 x
+			ARG 4 y
+			ARG 6 z
+			ARG 8 fluid
+			ARG 9 nextParticle
 	CLASS C_anugfonn FallingObsidianTearFactory
 		FIELD f_ckgxsfoj spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
@@ -14,8 +27,8 @@ CLASS net/minecraft/unmapped/C_huhweqoj net/minecraft/client/particle/BlockLeakP
 		FIELD f_kwdmuich spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
-	CLASS C_cfnbjhqg DripstoneLavaDrip
-	CLASS C_dtvvaenu FallingDripstoneWaterFactory
+	CLASS C_cfnbjhqg FallingDripstoneFluid
+	CLASS C_dtvvaenu DrippingDripstoneWaterFactory
 		FIELD f_hcgumnak spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
@@ -24,12 +37,19 @@ CLASS net/minecraft/unmapped/C_huhweqoj net/minecraft/client/particle/BlockLeakP
 		FIELD f_jrdzpxdn spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
-	CLASS C_gcxkmvfo LandingDripstoneLavaFactory
+	CLASS C_gcxkmvfo FallingDripstoneLavaFactory
 		FIELD f_wheclgzp spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
 	CLASS C_ifchibra ContinuousFalling
 		FIELD f_weqqsiqx nextParticle Lnet/minecraft/unmapped/C_tchocuqn;
+		METHOD <init> (Lnet/minecraft/unmapped/C_wrrlndhg;DDDLnet/minecraft/unmapped/C_ymruyhxr;Lnet/minecraft/unmapped/C_tchocuqn;)V
+			ARG 1 world
+			ARG 2 x
+			ARG 4 y
+			ARG 6 z
+			ARG 8 fluid
+			ARG 9 nextParticle
 	CLASS C_ifuuxzpc DrippingObsidianTearFactory
 		FIELD f_weripesb spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
@@ -38,11 +58,18 @@ CLASS net/minecraft/unmapped/C_huhweqoj net/minecraft/client/particle/BlockLeakP
 		FIELD f_qjtshuze spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
-	CLASS C_knwwcvqm LandingLavaFactory
+	CLASS C_knwwcvqm LavaSplashFactory
 		FIELD f_tqbuiyvy spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
 	CLASS C_lhskaepb Falling
+		METHOD <init> (Lnet/minecraft/unmapped/C_wrrlndhg;DDDLnet/minecraft/unmapped/C_ymruyhxr;I)V
+			ARG 1 world
+			ARG 2 x
+			ARG 4 y
+			ARG 6 z
+			ARG 8 fluid
+			ARG 9 maxAge
 	CLASS C_mzlqtqmx LandingHoneyFactory
 		FIELD f_ucxcmezk spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
@@ -52,7 +79,7 @@ CLASS net/minecraft/unmapped/C_huhweqoj net/minecraft/client/particle/BlockLeakP
 		FIELD f_dpawrwpm spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
-	CLASS C_rrshqcpg FallingDripstoneLavaFactory
+	CLASS C_rrshqcpg DrippingDripstoneLavaFactory
 		FIELD f_cokhsytl spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
@@ -61,7 +88,7 @@ CLASS net/minecraft/unmapped/C_huhweqoj net/minecraft/client/particle/BlockLeakP
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider
 	CLASS C_uifstvvh FallingHoney
-	CLASS C_uzdwqejz DripstoneLavaSplashFactory
+	CLASS C_uzdwqejz FallingDripstoneWaterFactory
 		FIELD f_oyekauka spriteProvider Lnet/minecraft/unmapped/C_eagntdua;
 		METHOD <init> (Lnet/minecraft/unmapped/C_eagntdua;)V
 			ARG 1 spriteProvider

@@ -1,55 +1,13 @@
 CLASS net/minecraft/unmapped/C_wgwzecpu net/minecraft/world/gen/NoiseColumnSampler
 	COMMENT Samples noise values for use in chunk generation.
-	FIELD f_bonlasod bottomSlideSize D
 	FIELD f_camihoks config Lnet/minecraft/unmapped/C_ixdagvlu;
-	FIELD f_czussoji bottomSlideTarget D
-	FIELD f_gwjizdwd horizontalNoiseResolution I
-	FIELD f_hsdeoiwp topSlideOffset D
-	FIELD f_ibxwkaxb topSlideSize D
 	FIELD f_jocitopn noiseSizeY I
 	FIELD f_myjdeqil densityOffset D
-	FIELD f_nreftpgj noise Lnet/minecraft/unmapped/C_zcyvbzuu;
-	FIELD f_oobypviq biomeSource Lnet/minecraft/unmapped/C_aywougja;
-	FIELD f_rayjsahf bottomSlideOffset D
+	FIELD f_nreftpgj noise Lnet/minecraft/unmapped/C_unqwyjvr$C_sdkmrqke;
 	FIELD f_rfkorrsx densityFactor D
-	FIELD f_saefhapi densityNoise Lnet/minecraft/unmapped/C_loypvish;
 	FIELD f_ucvjixms verticalNoiseResolution I
-	FIELD f_uqmpxhwo topSlideTarget D
-	FIELD f_vkxakfmn BIOME_WEIGHT_TABLE [F
-		COMMENT Table of weights used to weight faraway biomes less than nearby biomes.
 	FIELD f_yrjrmfbf islandNoise Lnet/minecraft/unmapped/C_pkstvmnm;
-	METHOD <init> (Lnet/minecraft/unmapped/C_aywougja;IIILnet/minecraft/unmapped/C_ixdagvlu;Lnet/minecraft/unmapped/C_zcyvbzuu;Lnet/minecraft/unmapped/C_pkstvmnm;Lnet/minecraft/unmapped/C_loypvish;Lnet/minecraft/unmapped/C_oyoyetkt;)V
-		ARG 1 biomeSource
-		ARG 2 horizontalNoiseResolution
-		ARG 3 verticalNoiseResolution
-		ARG 4 noiseSizeY
-		ARG 5 config
-		ARG 6 noise
-		ARG 7 islandNoise
-		ARG 8 densityNoise
-	METHOD m_bmnowibt getDensityNoise (II)D
-		COMMENT Applies a random change to the density to subtly vary the height of the terrain.
-		ARG 1 x
-		ARG 2 z
-	METHOD m_jpxkapht ([F)V
-		ARG 0 array
-	METHOD m_rulcahjn getOffset (IDDD)D
-		COMMENT Calculates an offset for the noise.
-		COMMENT <p>For example in the overworld, this makes lower y values solid while making higher y values air.
-		ARG 1 y
-		ARG 2 depth
-		ARG 4 scale
-		ARG 6 randomDensityOffset
 	METHOD m_tqvkwvgu applySlides (DI)D
 		COMMENT Interpolates the noise at the top and bottom of the world.
 		ARG 1 noise
 		ARG 3 y
-	METHOD m_ummkmrna sampleNoiseColumn ([DIILnet/minecraft/unmapped/C_ixdagvlu;III)V
-		COMMENT Samples the noise for the given column and stores it in the buffer parameter.
-		ARG 1 buffer
-		ARG 2 x
-		ARG 3 z
-		ARG 4 config
-		ARG 5 seaLevel
-		ARG 6 minY
-		ARG 7 noiseSizeY

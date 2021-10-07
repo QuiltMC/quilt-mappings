@@ -23,6 +23,8 @@ CLASS net/minecraft/unmapped/C_qdzvmxqw net/minecraft/util/registry/DynamicRegis
 		COMMENT
 		COMMENT @throws IllegalStateException if the registry does not exist
 		ARG 1 key
+	METHOD m_epijuyva (Lcom/mojang/serialization/DataResult$PartialResult;)V
+		ARG 0 partial
 	METHOD m_ifkcxrcm addBuiltinEntries (Lnet/minecraft/unmapped/C_qdzvmxqw$C_fesqzelo;Lnet/minecraft/unmapped/C_ksqjyxqt;)V
 		COMMENT Add all entries of the {@code registry} to the corresponding registry
 		COMMENT within this manager.
@@ -45,7 +47,7 @@ CLASS net/minecraft/unmapped/C_qdzvmxqw net/minecraft/util/registry/DynamicRegis
 		ARG 0 manager
 		ARG 1 registryRef
 	METHOD m_pzepsyhp (Lnet/minecraft/unmapped/C_qdzvmxqw$C_fesqzelo;Lnet/minecraft/unmapped/C_hdzcrwdu$C_xcmjnhmg$C_gqhembdc;Lnet/minecraft/unmapped/C_qdzvmxqw$C_mwusbhdy;)V
-		ARG 0 registryManager
+		ARG 0 manager
 		ARG 1 entryLoader
 		ARG 2 info
 	METHOD m_ttcvsjnn load (Lnet/minecraft/unmapped/C_hdzcrwdu;Lnet/minecraft/unmapped/C_qdzvmxqw;Lnet/minecraft/unmapped/C_qdzvmxqw$C_mwusbhdy;)V
@@ -53,9 +55,12 @@ CLASS net/minecraft/unmapped/C_qdzvmxqw net/minecraft/util/registry/DynamicRegis
 		COMMENT info} within the {@code manager}. Note that the resource manager instance
 		COMMENT is kept within the {@code ops}.
 		ARG 0 ops
+		ARG 1 manager
 		ARG 2 info
 	METHOD m_vxhdaybl load (Lnet/minecraft/unmapped/C_qdzvmxqw;Lnet/minecraft/unmapped/C_hdzcrwdu;)V
 		COMMENT Loads a dynamic registry manager from the resource manager's data files.
+		ARG 0 manager
+		ARG 1 ops
 	METHOD m_yqtfwgak getMutable (Lnet/minecraft/unmapped/C_hcaelhhx;)Lnet/minecraft/unmapped/C_ivcnxxee;
 		ARG 1 key
 	CLASS C_fesqzelo Impl

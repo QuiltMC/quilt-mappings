@@ -11,7 +11,7 @@ buildscript {
 		classpath "net.fabricmc:stitch:${project.stitch_version}"
 		classpath "commons-io:commons-io:2.8.0"
 		classpath 'de.undercouch:gradle-download-task:4.1.1'
-		classpath 'net.fabricmc:tiny-remapper:0.4.2'
+		classpath 'net.fabricmc:tiny-remapper:0.6.0'
 		classpath "net.fabricmc.unpick:unpick:${project.unpick_version}"
 		classpath "net.fabricmc.unpick:unpick-format-utils:${project.unpick_version}"
 	}
@@ -22,13 +22,13 @@ plugins {
 	id 'de.undercouch.download' version '4.1.1'
 	id 'maven-publish'
 	id 'org.cadixdev.licenser' version '0.6.1'
-	id 'net.fabricmc.filament' version '0.3.0'
+	id 'net.fabricmc.filament' version '0.3.1'
 	id "org.barfuin.gradle.taskinfo" version "1.3.0"
 }
 
 def USE_SNAPSHOT_HASHES = true
 
-def minecraft_version = "1.17.1"
+def minecraft_version = "21w40a"
 
 def ENV = System.getenv()
 // Fetch build number from Github Actions
@@ -106,6 +106,9 @@ def unpickedJar = file("${minecraft_version}-hashed-mojmap-unpicked.jar")
 def namedJar = file("${minecraft_version}-named.jar")
 def versionFile = new File(cacheFilesMinecraft, "${minecraft_version}.json")
 def clientJar = new File(cacheFilesMinecraft, "${minecraft_version}-client.jar")
+// The vanilla server bootstrap jar (Contains the real server jar)
+def serverBootstrapJar = new File(cacheFilesMinecraft, "${minecraft_version}-serverboostrap.jar")
+// The real server jar, expected from the bootstrap
 def serverJar = new File(cacheFilesMinecraft, "${minecraft_version}-server.jar")
 def libraries = new File(cacheFilesMinecraft, "libraries")
 def libs = new File("build/libs/")
@@ -129,6 +132,7 @@ import net.fabricmc.tinyremapper.TinyUtils
 import org.apache.commons.io.FileUtils
 
 import java.nio.charset.StandardCharsets
+import java.util.regex.Pattern
 import java.util.zip.GZIPOutputStream
 
 static boolean validateChecksum(File file, String checksum) {
@@ -191,11 +195,11 @@ task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
 	group = setupGroup
 	inputs.files versionFile
 
-	outputs.files(clientJar, serverJar)
+	outputs.files(clientJar, serverBootstrapJar)
 
 	outputs.upToDateWhen {
 		def version = new JsonSlurper().parseText(FileUtils.readFileToString(versionFile))
-		return clientJar.exists() && serverJar.exists() && validateChecksum(clientJar, version.downloads.client.sha1) && validateChecksum(serverJar, version.downloads.server.sha1)
+		return clientJar.exists() && serverBootstrapJar.exists() && validateChecksum(clientJar, version.downloads.client.sha1) && validateChecksum(serverBootstrapJar, version.downloads.server.sha1)
 	}
 
 	doLast {
@@ -216,7 +220,7 @@ task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
 
 		download {
 			src new URL(version.downloads.server.url)
-			dest serverJar
+			dest serverBootstrapJar
 			overwrite false
 		}
 	}
@@ -251,22 +255,42 @@ task downloadHashedMojmap(type: Download) {
 	}
 }
 
-task mergeJars(dependsOn: downloadMcJars) {
+import java.util.zip.ZipFile
+
+// Extracts the real server jar from the boostrap jar
+task extractServerJar(dependsOn: downloadMcJars) {
 	group = setupGroup
-	inputs.files downloadMcJars.outputs.files.files
+	inputs.file serverBootstrapJar
+	outputs.file serverJar
+
+	doLast {
+		new ZipFile(serverBootstrapJar as File).withCloseable { zip ->
+			def entry = zip.getEntry("META-INF/versions/${minecraft_version}/server-${minecraft_version}.jar")
+
+			if (!entry) {
+				throw new RuntimeException("Failed to find server jar entry: ")
+			}
+
+			zip.getInputStream(entry).withCloseable { is ->
+				serverJar.bytes = is.readAllBytes()
+			}
+		}
+	}
+}
+
+task mergeJars(dependsOn: extractServerJar) {
+	group = setupGroup
+	inputs.files(serverJar, clientJar)
 	outputs.file(mergedFile)
 
 	doLast {
 		logger.lifecycle(":merging jars")
-		def client = inputs.files.files.find { it.name.endsWith("-client.jar") }
-		def server = inputs.files.files.find { it.name.endsWith("-server.jar") }
-		def merged = mergedFile
 
-		if (merged.exists()) {
+		if (mergedFile.exists()) {
 			return
 		}
 
-		def jarMerger = new JarMerger(client, server, merged)
+		def jarMerger = new JarMerger(clientJar, serverJar, mergedFile)
 		jarMerger.merge()
 		jarMerger.close()
 	}
@@ -947,6 +971,7 @@ static void mapJar(File output, File input, File mappings, File libraries, Strin
 			.withMappings(TinyUtils.createTinyMappingProvider(mappings.toPath(), from, to))
 			.renameInvalidLocals(true)
 			.rebuildSourceFilenames(true)
+			.invalidLvNamePattern(Pattern.compile(/\$\$\d+/))
 	action.execute(remapperBuilder)
 	def remapper = remapperBuilder
 			.build()

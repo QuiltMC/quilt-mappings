@@ -2,33 +2,21 @@ CLASS net/minecraft/unmapped/C_hpmvpjbq net/minecraft/world/biome/GenerationSett
 	FIELD f_ceskehdw LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD f_cvefvmjs CODEC Lcom/mojang/serialization/MapCodec;
 	FIELD f_enpchuot features Ljava/util/List;
-	FIELD f_eukvkore structureFeatures Ljava/util/List;
 	FIELD f_jfgkeroy surfaceBuilder Ljava/util/function/Supplier;
 	FIELD f_nmirdxhe INSTANCE Lnet/minecraft/unmapped/C_hpmvpjbq;
 	FIELD f_reaemppb carvers Ljava/util/Map;
 	FIELD f_xsyaycau flowerFeatures Ljava/util/List;
-	METHOD <init> (Ljava/util/function/Supplier;Ljava/util/Map;Ljava/util/List;Ljava/util/List;)V
-		ARG 1 surfaceBuilder
-		ARG 2 carvers
-		ARG 3 features
-		ARG 4 structureFeatures
 	METHOD m_ghjajpuv getCarversForStep (Lnet/minecraft/unmapped/C_wybemrdr$C_nrmgprms;)Ljava/util/List;
 		ARG 1 carverStep
 	METHOD m_lkqkqqgp getSurfaceConfig ()Lnet/minecraft/unmapped/C_chuasppt;
-	METHOD m_oehscuku getStructureFeatures ()Ljava/util/Collection;
 	METHOD m_oushhqmc getFlowerFeatures ()Ljava/util/List;
-	METHOD m_pflguijr (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
 	METHOD m_psuhiaqm getSurfaceBuilder ()Ljava/util/function/Supplier;
 	METHOD m_pzwdxodx getFeatures ()Ljava/util/List;
 		COMMENT Returns the lists of features configured for each {@link net.minecraft.world.gen.GenerationStep.Feature feature generation step}, up to the highest step that has a configured feature.
 		COMMENT Entries are guaranteed to not be null, but may be empty lists if an earlier step has no features, but a later step does.
-	METHOD m_zwepdygn hasStructureFeature (Lnet/minecraft/unmapped/C_fpbotmvv;)Z
-		ARG 1 structureFeature
 	CLASS C_shdczxwb Builder
 		FIELD f_bjzrjgic surfaceBuilder Ljava/util/Optional;
 		FIELD f_jfyxajjl carvers Ljava/util/Map;
-		FIELD f_veubxuqg structureFeatures Ljava/util/List;
 		FIELD f_zktftioc features Ljava/util/List;
 		METHOD m_dfuhrwtj carver (Lnet/minecraft/unmapped/C_wybemrdr$C_nrmgprms;Lnet/minecraft/unmapped/C_hdtybegt;)Lnet/minecraft/unmapped/C_hpmvpjbq$C_shdczxwb;
 			ARG 1 carverStep
@@ -42,8 +30,6 @@ CLASS net/minecraft/unmapped/C_hpmvpjbq net/minecraft/world/biome/GenerationSett
 		METHOD m_jaftrkcx feature (ILjava/util/function/Supplier;)Lnet/minecraft/unmapped/C_hpmvpjbq$C_shdczxwb;
 			ARG 1 stepIndex
 			ARG 2 featureSupplier
-		METHOD m_qwkfburc structureFeature (Lnet/minecraft/unmapped/C_vqyngcil;)Lnet/minecraft/unmapped/C_hpmvpjbq$C_shdczxwb;
-			ARG 1 structureFeature
 		METHOD m_ubpmlnho surfaceBuilder (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_hpmvpjbq$C_shdczxwb;
 			ARG 1 surfaceBuilderSupplier
 		METHOD m_vfrrtymp surfaceBuilder (Lnet/minecraft/unmapped/C_nzneagmz;)Lnet/minecraft/unmapped/C_hpmvpjbq$C_shdczxwb;
