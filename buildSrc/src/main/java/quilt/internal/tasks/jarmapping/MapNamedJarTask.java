@@ -8,6 +8,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.build.DownloadPerVersionMappingsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.util.JarRemapper;
 
 public class MapNamedJarTask extends DefaultMappingsTask {
@@ -33,7 +34,7 @@ public class MapNamedJarTask extends DefaultMappingsTask {
                 "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
                 "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
         );
-        JarRemapper.mapJar(fileConstants.hashedMojmapJar, fileConstants.mergedFile, tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
+        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskFromType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
     }
 }
 

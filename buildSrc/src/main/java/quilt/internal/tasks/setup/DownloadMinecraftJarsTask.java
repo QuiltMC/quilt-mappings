@@ -2,36 +2,41 @@ package quilt.internal.tasks.setup;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Map;
-import java.util.function.Function;
+import java.nio.charset.StandardCharsets;
 
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
 import org.apache.commons.io.FileUtils;
+import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.util.JsonUtils;
+import quilt.internal.util.json.VersionFile;
 
 public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadMinecraftJars";
+    @OutputFile
+    private final File clientJar;
+
+    @OutputFile
+    private final File serverJar;
+
+    private VersionFile file;
 
     public DownloadMinecraftJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
         this.dependsOn(DownloadWantedVersionManifestTask.TASK_NAME);
-        getInputs().files(fileConstants.versionFile);
 
-        getOutputs().files(fileConstants.clientJar, fileConstants.serverJar);
+        clientJar = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-client.jar");
+        serverJar = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-server.jar");
+        getOutputs().files(clientJar, serverJar);
 
         getOutputs().upToDateWhen(_input -> {
             try {
-                Map<String, ?> downloads = JsonUtils.getFromTree(FileUtils.readFileToString(fileConstants.versionFile, Charset.defaultCharset()), "downloads");
-                Function<String, String> sha1Getter = name -> JsonUtils.getFromTree(downloads, name, "sha1");
-                return fileConstants.clientJar.exists() && fileConstants.serverJar.exists()
-                        && validateChecksum(fileConstants.clientJar, sha1Getter.apply("client"))
-                        && validateChecksum(fileConstants.serverJar, sha1Getter.apply("server"));
+                return clientJar.exists() && serverJar.exists()
+                        && validateChecksum(clientJar, getVersionFile().clientJar().sha1())
+                        && validateChecksum(serverJar, getVersionFile().serverJar().sha1());
             } catch (Exception e) {
                 return false;
             }
@@ -40,26 +45,17 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
 
     @TaskAction
     public void downloadMinecraftJars() throws IOException {
-        if (!fileConstants.versionFile.exists()) {
-            throw new RuntimeException("Can't download the jars without the " + fileConstants.versionFile.getName() + " file!");
-        }
-
-        //reload in case it changed
-        Map<String, ?> version = JsonUtils.getFromTree(FileUtils.readFileToString(fileConstants.versionFile, Charset.defaultCharset()));
-
-        Function<String, String> urlGetter = name -> JsonUtils.getFromTree(version, "downloads", name, "url");
-
         getLogger().lifecycle(":downloading minecraft jars");
 
         startDownload()
-                .src(urlGetter.apply("client"))
-                .dest(fileConstants.clientJar)
+                .src(getVersionFile().clientJar().url())
+                .dest(clientJar)
                 .overwrite(false)
                 .download();
 
         startDownload()
-                .src(urlGetter.apply("server"))
-                .dest(fileConstants.serverJar)
+                .src(getVersionFile().serverJar().url())
+                .dest(serverJar)
                 .overwrite(false)
                 .download();
     }
@@ -75,5 +71,21 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
             return builder.toString().equals(checksum);
         }
         return false;
+    }
+
+    private VersionFile getVersionFile() throws IOException {
+        if (file == null) {
+            file = VersionFile.fromJson(FileUtils.readFileToString(getTaskFromType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
+        }
+
+        return file;
+    }
+
+    public File getClientJar() {
+        return clientJar;
+    }
+
+    public File getServerJar() {
+        return serverJar;
     }
 }

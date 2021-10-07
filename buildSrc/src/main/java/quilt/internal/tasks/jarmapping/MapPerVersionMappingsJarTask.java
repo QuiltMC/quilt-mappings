@@ -28,6 +28,6 @@ public class MapPerVersionMappingsJarTask extends DefaultMappingsTask {
     public void mapPerVersionMappingJar() {
         getLogger().lifecycle(":mapping minecraft to {}", Constants.PER_VERSION_MAPPINGS_NAME);
         File tinyInput = getTaskFromType(DownloadPerVersionMappingsTask.class).getTinyFile();
-        JarRemapper.mapJar(fileConstants.hashedMojmapJar, fileConstants.mergedFile, tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
+        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskFromType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
     }
 }

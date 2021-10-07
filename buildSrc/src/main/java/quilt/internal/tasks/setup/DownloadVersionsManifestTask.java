@@ -3,13 +3,17 @@ package quilt.internal.tasks.setup;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
+import com.google.gson.Gson;
+import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public class DownloadVersionsManifestTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadVersionsManifest";
+    @OutputFile
     private final File manifestFile;
 
     public DownloadVersionsManifestTask() {
@@ -17,7 +21,6 @@ public class DownloadVersionsManifestTask extends DefaultMappingsTask {
         this.getInputs().property("currenttime", new Date());
 
         manifestFile = new File(fileConstants.cacheFilesMinecraft, "version_manifest_v2.json");
-        getOutputs().file(manifestFile);
     }
 
     @TaskAction
@@ -29,4 +32,9 @@ public class DownloadVersionsManifestTask extends DefaultMappingsTask {
                 .overwrite(true)
                 .download();
     }
+
+    public File getManifestFile() {
+        return manifestFile;
+    }
+
 }

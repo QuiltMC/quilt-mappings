@@ -11,7 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.util.JsonUtils;
+import quilt.internal.util.json.JsonUtils;
+import quilt.internal.util.json.VersionFile;
 
 public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadMinecraftLibraries";
@@ -20,18 +21,13 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
         super(Constants.Groups.SETUP_GROUP);
         dependsOn(DownloadWantedVersionManifestTask.TASK_NAME);
 
-        getInputs().files(fileConstants.versionFile);
-
         getOutputs().dir(fileConstants.libraries);
         outputsNeverUpToDate();
     }
 
     @TaskAction
     public void downloadMinecraftLibrariesTask() throws IOException {
-        if (!fileConstants.versionFile.exists()) {
-            throw new RuntimeException(String.format("Can't download the jars without the %s file!", fileConstants.versionFile.getName()));
-        }
-        Map<String, ?> version = JsonUtils.getFromTree(FileUtils.readFileToString(fileConstants.versionFile, StandardCharsets.UTF_8));
+        VersionFile file = VersionFile.fromJson(FileUtils.readFileToString(getTaskFromType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
 
         getLogger().lifecycle(":downloading minecraft libraries");
 
@@ -43,13 +39,11 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
 
         Object lock = new Object();
 
-        JsonUtils.<List<Map<String, Map<String, Map<String, String>>>>>getFromTree(version, "libraries").parallelStream().forEach(library -> {
-            String downloadUrl = JsonUtils.getFromTree(library, "downloads", "artifact", "url");
-
+        file.libraries().parallelStream().forEach(library -> {
             try {
                 startDownload()
-                        .src(downloadUrl)
-                        .dest(new File(fileConstants.libraries, downloadUrl.substring(downloadUrl.lastIndexOf("/") + 1)))
+                        .src(library.url())
+                        .dest(new File(fileConstants.libraries, library.url().substring(library.url().lastIndexOf("/") + 1)))
                         .overwrite(false)
                         .download();
             } catch (IOException e) {
@@ -57,7 +51,7 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
                 e.printStackTrace();
             }
             synchronized (lock) {
-                getProject().getDependencies().add("decompileClasspath", library.get("name"));
+                getProject().getDependencies().add("decompileClasspath", library.name());
             }
         });
 

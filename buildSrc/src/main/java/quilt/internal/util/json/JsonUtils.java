@@ -1,4 +1,4 @@
-package quilt.internal.util;
+package quilt.internal.util.json;
 
 import java.util.Arrays;
 import java.util.Map;
