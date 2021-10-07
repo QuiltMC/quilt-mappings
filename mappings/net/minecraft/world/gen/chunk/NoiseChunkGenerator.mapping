@@ -1,22 +1,14 @@
 CLASS net/minecraft/unmapped/C_yydgvujy net/minecraft/world/gen/chunk/NoiseChunkGenerator
-	FIELD f_audmempi edgeDensityNoise Lnet/minecraft/unmapped/C_trjftrxr;
 	FIELD f_avlwkajs defaultBlock Lnet/minecraft/unmapped/C_pmeibtxt;
-	FIELD f_aygknrfw oreVeinGenerator Lnet/minecraft/unmapped/C_pwfazyrk;
 	FIELD f_cbfdhnmc settings Ljava/util/function/Supplier;
-	FIELD f_eoxzbxnx defaultFluid Lnet/minecraft/unmapped/C_pmeibtxt;
-	FIELD f_eyamapxk fluidTypeNoise Lnet/minecraft/unmapped/C_trjftrxr;
-	FIELD f_gnxuycwo fluidLevelNoise Lnet/minecraft/unmapped/C_trjftrxr;
-	FIELD f_hchyyoah noodleCavesGenerator Lnet/minecraft/unmapped/C_cvnvustu;
 	FIELD f_ikomioee CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_jojpngmf seed J
 	FIELD f_jymafbzv noiseColumnSampler Lnet/minecraft/unmapped/C_wgwzecpu;
 	FIELD f_lnkxgfpd verticalNoiseResolution I
-	FIELD f_nnimdqqd surfaceDepthNoise Lnet/minecraft/unmapped/C_slilxlod;
 	FIELD f_nthyhwrj noiseSizeZ I
 	FIELD f_qpndhoxt noiseSizeY I
 	FIELD f_qtlqxqll AIR Lnet/minecraft/unmapped/C_pmeibtxt;
 	FIELD f_tgbnwqqh EMPTY [Lnet/minecraft/unmapped/C_pmeibtxt;
-	FIELD f_tnrsziyf deepslateSource Lnet/minecraft/unmapped/C_gkzilmui;
 	FIELD f_unjdbpix horizontalNoiseResolution I
 	FIELD f_wggcldca noiseSizeX I
 	FIELD f_zadfcewo worldHeight I
@@ -38,70 +30,11 @@ CLASS net/minecraft/unmapped/C_yydgvujy net/minecraft/world/gen/chunk/NoiseChunk
 		ARG 4 predicate
 		ARG 5 minY
 		ARG 6 noiseSizeY
-	METHOD m_dbsnfzyk hasAquifers ()Z
-	METHOD m_fpboehku getBlockState (Lnet/minecraft/unmapped/C_mwpsmgrl;Lnet/minecraft/unmapped/C_cxzdhgpj;Lnet/minecraft/unmapped/C_gkzilmui;Lnet/minecraft/unmapped/C_oyoyetkt;IIID)Lnet/minecraft/unmapped/C_pmeibtxt;
-		ARG 1 structures
-		ARG 2 aquiferSampler
-		ARG 3 blockInterpolator
 	METHOD m_hydhdfgf populateNoise (Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_rqmmmzwl;II)Lnet/minecraft/unmapped/C_rqmmmzwl;
 		ARG 1 accessor
 		ARG 2 chunk
 		ARG 3 startY
 		ARG 4 noiseSizeY
-	METHOD m_odbvjkpf sampleNoiseColumn (IIII)[D
-		ARG 1 x
-		ARG 2 z
-		ARG 3 minY
-		ARG 4 noiseSizeY
-	METHOD m_qflrvtqn createBlockSourceFactory (ILnet/minecraft/unmapped/C_utrzsrny;Ljava/util/function/Consumer;)Ljava/util/function/DoubleFunction;
-		ARG 1 minY
-		ARG 2 pos
-	METHOD m_ralokvia createBlockSampler (IILnet/minecraft/unmapped/C_utrzsrny;)Lnet/minecraft/unmapped/C_cxzdhgpj;
-		ARG 1 startY
-		ARG 2 deltaY
-		ARG 3 pos
-	METHOD m_rcnvjhav sampleNoiseColumn ([DIIII)V
-		ARG 1 buffer
-		ARG 2 x
-		ARG 3 z
-		ARG 4 minY
-		ARG 5 noiseSizeY
-	METHOD m_sjgazrvo createWeightSamplerFactory (ILnet/minecraft/unmapped/C_utrzsrny;Ljava/util/function/Consumer;)Ljava/util/function/DoubleFunction;
-		ARG 1 minY
-		ARG 2 pos
-	METHOD m_tgqviqut (Lnet/minecraft/unmapped/C_yydgvujy$C_jguartda;Lnet/minecraft/unmapped/C_gkzilmui;D)Lnet/minecraft/unmapped/C_gkzilmui;
-		ARG 2 deltaZ
-	METHOD m_vckcrwfz buildBedrock (Lnet/minecraft/unmapped/C_rqmmmzwl;Ljava/util/Random;)V
-		ARG 1 chunk
-		ARG 2 random
 	METHOD m_xggtjsrt matchesSettings (JLnet/minecraft/unmapped/C_hcaelhhx;)Z
 		ARG 1 seed
 		ARG 3 settingsKey
-	CLASS C_ghzsfpgq NoodleCavesSampler
-		FIELD f_bikkrppd deltaZ D
-		FIELD f_jugdqezo firstWeightNoiseinterpolator Lnet/minecraft/unmapped/C_jgiqkdxf;
-		FIELD f_ofumiqmv frequencyNoiseInterpolator Lnet/minecraft/unmapped/C_jgiqkdxf;
-		FIELD f_umnsxfqr weightReducingNoiseInterpolator Lnet/minecraft/unmapped/C_jgiqkdxf;
-		FIELD f_yckrafuc secondWeightNoiseInterpolator Lnet/minecraft/unmapped/C_jgiqkdxf;
-		METHOD <init> (Lnet/minecraft/unmapped/C_yydgvujy;Lnet/minecraft/unmapped/C_utrzsrny;I)V
-			ARG 2 pos
-			ARG 3 minY
-		METHOD m_nkvxvypd setDeltaZ (D)Lnet/minecraft/unmapped/C_oyoyetkt;
-			ARG 1 deltaZ
-		METHOD m_xenwckyu feed (Ljava/util/function/Consumer;)V
-			ARG 1 f
-	CLASS C_jguartda OreVeinSource
-		FIELD f_clyxhtge random Lnet/minecraft/unmapped/C_gxmecroz;
-		FIELD f_gvnxqzdt seed J
-		FIELD f_kgqwmndj firstOrePlacementNoiseInterpolator Lnet/minecraft/unmapped/C_jgiqkdxf;
-		FIELD f_rcbahsga oreFrequencyNoiseInterpolator Lnet/minecraft/unmapped/C_jgiqkdxf;
-		FIELD f_sszrelto secondOrePlacementNoiseInterpolator Lnet/minecraft/unmapped/C_jgiqkdxf;
-		FIELD f_tttggddx deltaZ D
-		METHOD <init> (Lnet/minecraft/unmapped/C_yydgvujy;Lnet/minecraft/unmapped/C_utrzsrny;IJ)V
-			ARG 2 pos
-			ARG 3 minY
-			ARG 4 seed
-		METHOD m_agcfezak feed (Ljava/util/function/Consumer;)V
-			ARG 1 f
-		METHOD m_bjloyuvq setDeltaZ (D)V
-			ARG 1 deltaZ
