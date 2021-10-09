@@ -20,7 +20,7 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
     private final File clientJar;
 
     @OutputFile
-    private final File serverJar;
+    private final File serverBootstrapJar;
 
     private VersionFile file;
 
@@ -29,14 +29,14 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
         this.dependsOn(DownloadWantedVersionManifestTask.TASK_NAME);
 
         clientJar = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-client.jar");
-        serverJar = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-server.jar");
-        getOutputs().files(clientJar, serverJar);
+        serverBootstrapJar = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-server-bootstrap.jar");
+        getOutputs().files(clientJar, serverBootstrapJar);
 
         getOutputs().upToDateWhen(_input -> {
             try {
-                return clientJar.exists() && serverJar.exists()
+                return clientJar.exists() && serverBootstrapJar.exists()
                         && validateChecksum(clientJar, getVersionFile().clientJar().sha1())
-                        && validateChecksum(serverJar, getVersionFile().serverJar().sha1());
+                        && validateChecksum(serverBootstrapJar, getVersionFile().serverJar().sha1());
             } catch (Exception e) {
                 return false;
             }
@@ -55,7 +55,7 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
 
         startDownload()
                 .src(getVersionFile().serverJar().url())
-                .dest(serverJar)
+                .dest(serverBootstrapJar)
                 .overwrite(false)
                 .download();
     }
@@ -85,7 +85,7 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
         return clientJar;
     }
 
-    public File getServerJar() {
-        return serverJar;
+    public File getServerBootstrapJar() {
+        return serverBootstrapJar;
     }
 }

@@ -26,7 +26,7 @@ public class MappingsTask extends JavaExec implements AbstractMappingsTask {
     @Override
     public void exec() {
         args(List.of(
-                "-jar", this.jarToMap.get().getAbsolutePath(), "-mappings", fileConstants.mappingsDir.getAbsolutePath(), "-profile", "enigma_profile.json"
+                "-jar", this.jarToMap.get().getAbsolutePath(), "-mappings", getProject().file("mappings").getAbsolutePath(), "-profile", "enigma_profile.json"
         ));
         super.exec();
     }

@@ -15,7 +15,7 @@ public class CompressTinyTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "compressTiny";
 
     @OutputFile
-    public File compressedTiny = new File(fileConstants.libs, String.format("%s-tiny-%s.gz", Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION));
+    public File compressedTiny = new File(getProject().file("build/libs/"), String.format("%s-tiny-%s.gz", Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION));
 
     public CompressTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);

@@ -13,6 +13,7 @@ import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 
 public class BuildMappingsTinyTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "buildMappingsTiny";
+    private final File mappings;
 
     @OutputFile
     public File outputMappings = new File(fileConstants.tempDir, String.format("%s.tiny", Constants.MAPPINGS_NAME));
@@ -20,7 +21,8 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
     public BuildMappingsTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
         dependsOn(MapPerVersionMappingsJarTask.TASK_NAME);
-        getInputs().dir(fileConstants.mappingsDir);
+        mappings = getProject().file("mappings");
+        getInputs().dir(mappings);
         outputsNeverUpToDate();
     }
 
@@ -31,7 +33,7 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
         new MapSpecializedMethodsCommand().run(
                 fileConstants.hashedMojmapJar.getAbsolutePath(),
                 "enigma",
-                fileConstants.mappingsDir.getAbsolutePath(),
+                mappings.getAbsolutePath(),
                 String.format("tinyv2:%s:named", Constants.PER_VERSION_MAPPINGS_NAME),
                 outputMappings.getAbsolutePath()
         );

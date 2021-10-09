@@ -13,17 +13,20 @@ import net.fabricmc.stitch.merge.JarMerger;
 public class MergeJarsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "mergeJars";
 
-    private final DownloadMinecraftJarsTask downloadMinecraftJarsTask;
+    private final File clientJar;
+    private final File serverJar;
 
     @OutputFile
     private final File mergedFile;
 
     public MergeJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
-        dependsOn(DownloadMinecraftJarsTask.TASK_NAME);
+        dependsOn(ExtractServerJarTask.TASK_NAME);
 
-        downloadMinecraftJarsTask = getTaskFromType(DownloadMinecraftJarsTask.class);
-        getInputs().files(downloadMinecraftJarsTask.getClientJar(), downloadMinecraftJarsTask.getServerJar());
+        clientJar = getTaskFromType(DownloadMinecraftJarsTask.class).getClientJar();
+        serverJar = getTaskFromType(ExtractServerJarTask.class).getServerJar();
+
+        getInputs().files(clientJar, serverJar);
 
         mergedFile = getProject().file(Constants.MINECRAFT_VERSION + "-merged.jar");
         getOutputs().file(mergedFile);
@@ -33,14 +36,11 @@ public class MergeJarsTask extends DefaultMappingsTask {
     public void mergeJars() throws IOException {
         getLogger().lifecycle(":merging jars");
 
-        File client = downloadMinecraftJarsTask.getClientJar();
-        File server = downloadMinecraftJarsTask.getServerJar();
-
         if (mergedFile.exists()) {
             return;
         }
 
-        try (JarMerger jarMerger = new JarMerger(client, server, mergedFile)) {
+        try (JarMerger jarMerger = new JarMerger(clientJar, serverJar, mergedFile)) {
             jarMerger.merge();
         }
     }

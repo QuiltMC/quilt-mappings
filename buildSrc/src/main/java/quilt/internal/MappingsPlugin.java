@@ -16,18 +16,20 @@ import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
 import quilt.internal.tasks.setup.DownloadWantedVersionManifestTask;
+import quilt.internal.tasks.setup.ExtractServerJarTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 
 public class MappingsPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project target) {
-        target.getExtensions().add("Mappings Extension", new MappingsExtension(target));
+        target.getExtensions().add("mappings", new MappingsExtension(target));
 
         TaskContainer tasks = target.getTasks();
         tasks.create(DownloadVersionsManifestTask.TASK_NAME, DownloadVersionsManifestTask.class);
         tasks.create(DownloadWantedVersionManifestTask.TASK_NAME, DownloadWantedVersionManifestTask.class);
         tasks.create(DownloadMinecraftJarsTask.TASK_NAME, DownloadMinecraftJarsTask.class);
+        tasks.create(ExtractServerJarTask.TASK_NAME, ExtractServerJarTask.class);
         tasks.create(MergeJarsTask.TASK_NAME, MergeJarsTask.class);
         tasks.create(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class);
 
