@@ -37,12 +37,14 @@ CLASS net/minecraft/unmapped/C_bcjitlto net/minecraft/SharedConstants
 		COMMENT Specifies whether Minecraft should use choice type registrations from the game's schema when entity types or block entity types are created.
 	FIELD f_ivxnowhr TICKS_PER_SECOND I
 	FIELD f_iwusaemq ENABLE_DEBUG_FEATURES Z
-	FIELD f_jxryklep gameVersion Lnet/minecraft/unmapped/C_kszroxyx;
+	FIELD f_jxryklep gameAndWorldVersion Lnet/minecraft/unmapped/C_kszroxyx;
 	FIELD f_kcfzxrjj DISABLE_FEATURES Z
+	FIELD f_kjcvvuxm IGNORE_LOCAL_MOB_CAP Z
 	FIELD f_krdczlub STRUCTURE_EDIT_MODE Z
 	FIELD f_kxjuioni GRAVITY_BLOCK_DUPLICATION_FIX Z
 	FIELD f_lussnyax TICKS_PER_IN_GAME_DAY I
 	FIELD f_mgptsirk ENABLE_TICK_TIMES_MONITOR Z
+	FIELD f_mojnoqfy ENABLE_JFR_PROFILING_WORLD_LOADING Z
 	FIELD f_mrlhrsge IS_DEVELOPMENT_VERSION Z
 	FIELD f_ndbnoxru ENABLE_NEIGHBOR_UPDATES_DEBUGGER Z
 	FIELD f_nfxgmzwx ENABLE_RENDER_DEBUGGER Z
@@ -55,7 +57,8 @@ CLASS net/minecraft/unmapped/C_bcjitlto net/minecraft/SharedConstants
 	FIELD f_oltxwmgl DISABLE_ORE_VEINS Z
 	FIELD f_pqkqghlo DISABLE_NOISE_CAVES Z
 	FIELD f_qclzklvp RESOURCE_PACK_FORMAT I
-	FIELD f_qskskxad DEBUG_BIOME_SOURCE Z
+	FIELD f_qskskxad generateSquareTerrainWithoutNoise Z
+	FIELD f_qtwktdoi ENABLE_AQUIFERS_DEBUGGER Z
 	FIELD f_qxqbwgsg ENABLE_WORLD_GENERATION_ATTEMPT_DEBUGGER Z
 	FIELD f_qxwbfhui SHOW_SERVER_DEBUG_VALUES Z
 	FIELD f_rlrfforc ENABLE_WORLD_RECREATION_DEBUGGER Z
@@ -66,7 +69,9 @@ CLASS net/minecraft/unmapped/C_bcjitlto net/minecraft/SharedConstants
 	FIELD f_sqqqordy SAVE_STRUCTURES_AS_SNBT Z
 	FIELD f_srldtyhj SNBT_TOO_OLD_THRESHOLD I
 	FIELD f_sstpibtm TNT_DUPLICATION_FIX Z
+	FIELD f_tfveznfx generateStrippedTerrainWithoutNoise Z
 	FIELD f_tofxbiig ENABLE_COLLISION_DEBUGGER Z
+	FIELD f_tvrbrokk SERIES Ljava/lang/String;
 	FIELD f_uaczzfmy ENABLE_PATHFINDING_DEBUGGER Z
 	FIELD f_ufloawtx INVALID_CHARS_LEVEL_NAME [C
 	FIELD f_urgpyzzs KEEP_JIGSAW_BLOCKS Z
@@ -89,10 +94,12 @@ CLASS net/minecraft/unmapped/C_bcjitlto net/minecraft/SharedConstants
 	FIELD f_yjrqsnqq CHAT_MAX_LENGHT I
 	FIELD f_ypzhrmou ENABLE_BRAIN_DEBUGGER Z
 	FIELD f_ysdktoaf DONT_SAVE_WORLD Z
-	FIELD f_yuzgfrow ALLOW_INCOMPATIBLE_WORLD_HEIGHT Z
 	FIELD f_zjgkboug ENABLE_DEBUG_HOTKEYS Z
 	FIELD f_zpuntnhn USE_NEW_RENDER_SYSTEM Z
 	FIELD f_zxpaxrhe ENABLE_VILLAGE_SECTIONS_DEBUGGER Z
+	METHOD m_bkfmqder isVoidTerrain (II)Z
+		ARG 0 x
+		ARG 1 z
 	METHOD m_dbkxdbfp isValidChar (C)Z
 		ARG 0 chr
 	METHOD m_dqkiuogl getProtocolVersion ()I
@@ -103,3 +110,4 @@ CLASS net/minecraft/unmapped/C_bcjitlto net/minecraft/SharedConstants
 		ARG 0 s
 	METHOD m_lykxuzta createGameVersion ()V
 	METHOD m_otexyrtl setGameVersion (Lnet/minecraft/unmapped/C_kszroxyx;)V
+		ARG 0 gameVersion
