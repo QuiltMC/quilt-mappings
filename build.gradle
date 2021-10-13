@@ -28,7 +28,7 @@ plugins {
 
 def USE_SNAPSHOT_HASHES = true
 
-def minecraft_version = "21w40a"
+def minecraft_version = "21w41a"
 
 def ENV = System.getenv()
 // Fetch build number from Github Actions
@@ -101,8 +101,8 @@ def mappingsDir = file("mappings")
 def cacheFilesMinecraft = file(".gradle/minecraft")
 def tempDir = file(".gradle/temp")
 def mergedFile = file("${minecraft_version}-merged.jar")
-def hashedMojmapJar = file("${minecraft_version}-hashed-mojmap.jar")
-def unpickedJar = file("${minecraft_version}-hashed-mojmap-unpicked.jar")
+def hashedMojmapJar = file("${minecraft_version}-hashed.jar")
+def unpickedJar = file("${minecraft_version}-hashed-unpicked.jar")
 def namedJar = file("${minecraft_version}-named.jar")
 def versionFile = new File(cacheFilesMinecraft, "${minecraft_version}.json")
 def clientJar = new File(cacheFilesMinecraft, "${minecraft_version}-client.jar")
@@ -228,19 +228,19 @@ task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
 
 task downloadHashedMojmap(type: Download) {
 	group = buildMappingGroup
-	def url = "https://maven.quiltmc.org/repository/release/org/quiltmc/hashed-mojmap/${minecraft_version}/hashed-mojmap-${minecraft_version}.jar"
+	def url = "https://maven.quiltmc.org/repository/release/org/quiltmc/hashed/${minecraft_version}/hashed-${minecraft_version}.jar"
 	if (USE_SNAPSHOT_HASHES) {
-		def xml = new URL("https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/maven-metadata.xml").text
+		def xml = new URL("https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed/${minecraft_version}-SNAPSHOT/maven-metadata.xml").text
 		def metadata = new XmlSlurper().parseText(xml)
 		def version = metadata.versioning.snapshot;
 		def snapshotVersion = "${minecraft_version}-${version.timestamp}-${version.buildNumber}"
-		url = "https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/hashed-mojmap-${snapshotVersion}.jar"
+		url = "https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed/${minecraft_version}-SNAPSHOT/hashed-${snapshotVersion}.jar"
 	}
 
 	src com.google.common.net.UrlEscapers.urlFragmentEscaper().escape(url)
-	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.jar")
+	dest new File(cacheFilesMinecraft, "${minecraft_version}-hashed.jar")
 
-	def output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap.tiny")
+	def output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed.tiny")
 	outputs.file output
 
 	doLast {
@@ -336,7 +336,7 @@ task invertHashedMojmap(dependsOn: downloadHashedMojmap, type: FileOutput) {
 	group = buildMappingGroup
 	def input = downloadHashedMojmap.outputs.getFiles()[0]
 
-	output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-mojmap-inverted.tiny")
+	output = new File(cacheFilesMinecraft, "${minecraft_version}-hashed-inverted.tiny")
 	outputs.file(output)
 
 	outputs.upToDateWhen { false }
