@@ -1,9 +1,9 @@
 CLASS net/minecraft/unmapped/C_ixdagvlu net/minecraft/world/gen/chunk/GenerationShapeConfig
 	FIELD f_bzdswzys verticalSize I
-	FIELD f_cgotutfo simplexSurfaceNoise Z
 	FIELD f_gqdwlrvf bottomSlide Lnet/minecraft/unmapped/C_ltdqiucr;
 	FIELD f_guqfljok islandNoiseOverride Z
 	FIELD f_jijqniyc CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_lkqvzjto useLegacyRandom Z
 	FIELD f_lwcptojl minimumY I
 	FIELD f_qmebguco height I
 	FIELD f_rkenyzxn amplified Z
@@ -12,8 +12,7 @@ CLASS net/minecraft/unmapped/C_ixdagvlu net/minecraft/world/gen/chunk/Generation
 	FIELD f_whfajwnc densityFactor D
 	FIELD f_wnoqpiux sampling Lnet/minecraft/unmapped/C_egsqbsov;
 	FIELD f_xkbsqdar densityOffset D
-	FIELD f_xuwzhrsg randomDensityOffset Z
-	METHOD <init> (IILnet/minecraft/unmapped/C_egsqbsov;Lnet/minecraft/unmapped/C_ltdqiucr;Lnet/minecraft/unmapped/C_ltdqiucr;IIDDZZZZZ)V
+	METHOD <init> (IILnet/minecraft/unmapped/C_egsqbsov;Lnet/minecraft/unmapped/C_ltdqiucr;Lnet/minecraft/unmapped/C_ltdqiucr;IIDDZZZ)V
 		ARG 1 minimumY
 		ARG 2 height
 		ARG 3 sampling
@@ -23,15 +22,16 @@ CLASS net/minecraft/unmapped/C_ixdagvlu net/minecraft/world/gen/chunk/Generation
 		ARG 7 verticalSize
 		ARG 8 densityFactor
 		ARG 10 densityOffset
-		ARG 12 simplexSurfaceNoise
-		ARG 13 randomDensityOffset
-		ARG 14 islandNoiseOverride
-		ARG 15 amplified
+		ARG 12 islandNoiseOverride
+		ARG 13 amplified
+		ARG 14 useLegacyRandom
+	METHOD equals (Ljava/lang/Object;)Z
+		ARG 1 o
+	METHOD m_ahpamjoy useLegacyRandom ()Z
 	METHOD m_azqrfsdl (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
 	METHOD m_dpwnelax getSizeHorizontal ()I
-	METHOD m_ihajrnzx hasRandomDensityOffset ()Z
-	METHOD m_iyhyoywr create (IILnet/minecraft/unmapped/C_egsqbsov;Lnet/minecraft/unmapped/C_ltdqiucr;Lnet/minecraft/unmapped/C_ltdqiucr;IIDDZZZZZ)Lnet/minecraft/unmapped/C_ixdagvlu;
+	METHOD m_iyhyoywr create (IILnet/minecraft/unmapped/C_egsqbsov;Lnet/minecraft/unmapped/C_ltdqiucr;Lnet/minecraft/unmapped/C_ltdqiucr;IIDDZZZ)Lnet/minecraft/unmapped/C_ixdagvlu;
 		ARG 0 minimumY
 		ARG 1 height
 		ARG 2 sampling
@@ -44,10 +44,8 @@ CLASS net/minecraft/unmapped/C_ixdagvlu net/minecraft/world/gen/chunk/Generation
 		ARG 11 simplexSurfaceNoise
 		ARG 12 randomDensityOffset
 		ARG 13 islandNoiseOverride
-		ARG 14 amplified
 	METHOD m_jpianfiu getDensityFactor ()D
 	METHOD m_juiwvwzw hasIslandNoiseOverride ()Z
-	METHOD m_koekwbld hasSimplexSurfaceNoise ()Z
 	METHOD m_mbpkkeho getDensityOffset ()D
 	METHOD m_pwjgfiam getBottomSlide ()Lnet/minecraft/unmapped/C_ltdqiucr;
 	METHOD m_qksqykjm checkHeight (Lnet/minecraft/unmapped/C_ixdagvlu;)Lcom/mojang/serialization/DataResult;

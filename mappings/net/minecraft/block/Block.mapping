@@ -1,4 +1,19 @@
 CLASS net/minecraft/unmapped/C_qodpmxmm net/minecraft/block/Block
+	COMMENT Represents a block that can be placed in a world.
+	COMMENT
+	COMMENT <p>There is exactly one instance for every type of block. Every stone
+	COMMENT block for example in a world shares the same block instance. Each block
+	COMMENT instance is registered under {@link net.minecraft.util.registry.Registry#BLOCK}.
+	COMMENT See {@link Blocks} for examples of block instances.
+	COMMENT
+	COMMENT <p>An item corresponding to a block is not automatically created. You
+	COMMENT may create your own {@link net.minecraft.item.BlockItem} and register it
+	COMMENT under {@link net.minecraft.util.registry.Registry#ITEM}.
+	COMMENT
+	COMMENT <p>The translation key for the block name is determined by {@link
+	COMMENT #getTranslationKey}.
+	COMMENT
+	COMMENT @see <a href="https://minecraft.fandom.com/wiki/Model">Model - Official Minecraft Wiki</a>
 	FIELD f_baklvfyh FORCE_STATE I
 		COMMENT Bypass virtual block state changes and forces the passed state to be stored as-is.
 	FIELD f_fvzlffgb translationKey Ljava/lang/String;
@@ -212,6 +227,12 @@ CLASS net/minecraft/unmapped/C_qodpmxmm net/minecraft/block/Block
 		ARG 1 target
 		ARG 2 property
 	METHOD m_wokritlg getTranslationKey ()Ljava/lang/String;
+		COMMENT {@return the translation key for the name of this block}
+		COMMENT
+		COMMENT <p>By default, it returns {@code block.namespace.path} where {@code
+		COMMENT namespace} and {@code path} are of the identifier used for registering
+		COMMENT this block, but {@code /} in {@code path} is replaced with {@code .}.
+		COMMENT If the block is not registered, it returns {@code block.unregistered_sadface}.
 	METHOD m_wptpowza isShapeFullCube (Lnet/minecraft/unmapped/C_dbwhvcsz;)Z
 		ARG 0 shape
 	METHOD m_wslygawy dropStack (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V

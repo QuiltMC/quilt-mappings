@@ -1,18 +1,33 @@
 CLASS net/minecraft/unmapped/C_ddxzphfu net/minecraft/client/render/debug/BeeDebugRenderer
+	FIELD f_arofczcg SHOW_TARGET_FLOWER_FOR_SELECTED_BEE Z
+	FIELD f_beyjqokh SHOW_GOAL_FOR_SELECTED_BEE Z
 	FIELD f_bxrifien targetedEntity Ljava/util/UUID;
 	FIELD f_clgewaec GREEN I
+	FIELD f_dgvhldmo SHOW_HIVE_MEMBERS Z
+	FIELD f_dzsarvbf SHOW_PATH_FOR_ALL_BEES Z
 	FIELD f_guslaoir WHITE I
+	FIELD f_hanieyet SHOW_TRAVEL_TICKS_FOR_SELECTED_BEE Z
 	FIELD f_iyedosdr client Lnet/minecraft/unmapped/C_diboefya;
+	FIELD f_kgvyvktj SHOW_TARGET_FLOWER_FOR_ALL_BEES Z
+	FIELD f_kzanpotj SHOW_HIVE_FOR_SELECTED_BEE Z
 	FIELD f_liqjexny HIVE_RANGE I
 	FIELD f_mekqaozu YELLOW I
+	FIELD f_mholhuyw SHOW_NAME_FOR_SELECTED_BEE Z
+	FIELD f_mmgwxvbs SHOW_HIVE_FOR_ALL_BEES Z
 	FIELD f_mqhejppu RED I
 	FIELD f_onxzotpw PINK I
+	FIELD f_orfxyhij SHOW_TRAVEL_TICKS_FOR_ALL_BEES Z
+	FIELD f_otrccdar SHOW_PATH_FOR_SELECTED_BEE Z
+	FIELD f_qcfxsyzk TIMEOUT_FOR_HIVE I
 	FIELD f_tmtvpkpa GRAY I
+	FIELD f_ucbewxmv SHOW_GOAL_FOR_ALL_BEES Z
+	FIELD f_udprvpnn SHOW_NAME_FOR_ALL_BEES Z
 	FIELD f_vocvtpso hives Ljava/util/Map;
 	FIELD f_vohvlnni bees Ljava/util/Map;
 	FIELD f_wlrrzbvp DEFAULT_DRAWN_STRING_SIZE F
 	FIELD f_yiysqymg BEE_RANGE I
 	FIELD f_ymbhrvqq TARGET_ENTITY_RANGE I
+	FIELD f_zftslxdm SHOW_BLACKLISTS Z
 	FIELD f_zxbrvbmr ORANGE I
 	METHOD <init> (Lnet/minecraft/unmapped/C_diboefya;)V
 		ARG 1 client
@@ -28,6 +43,10 @@ CLASS net/minecraft/unmapped/C_ddxzphfu net/minecraft/client/render/debug/BeeDeb
 		ARG 3 color
 	METHOD m_cjriwxhg (Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Map;Lnet/minecraft/unmapped/C_ddxzphfu$C_prnyapjb;)V
 		ARG 3 hive
+	METHOD m_cvphmylu (Lnet/minecraft/unmapped/C_srenftsa;)V
+		ARG 1 entity
+	METHOD m_eizcrsqc (Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/Set;
+		ARG 0 flowerPos
 	METHOD m_ejsgnfpz (Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;)V
 		ARG 1 bee
 	METHOD m_evnjrdaw getBeeNamesForHive (Lnet/minecraft/unmapped/C_ddxzphfu$C_prnyapjb;)Ljava/util/Set;
@@ -61,12 +80,16 @@ CLASS net/minecraft/unmapped/C_ddxzphfu net/minecraft/client/render/debug/BeeDeb
 		ARG 2 hive
 	METHOD m_naiepmnt addBee (Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;)V
 		ARG 1 bee
+	METHOD m_ndbyzsin (Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/Set;
+		ARG 0 pos
 	METHOD m_nwsbetjb (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;)V
 		ARG 2 hivePos
 		ARG 3 bees
 	METHOD m_oomgjfsj getCameraPos ()Lnet/minecraft/unmapped/C_mvrgtmcd;
 	METHOD m_phncoseg removeBee (I)V
 		ARG 1 id
+	METHOD m_puwwklhv (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;)Z
+		ARG 1 bee
 	METHOD m_rdagpqyo getBlacklistingBees ()Ljava/util/Map;
 	METHOD m_tksholbi drawString (Ljava/lang/String;Lnet/minecraft/unmapped/C_kkdaznyh;II)V
 		ARG 0 string
@@ -76,6 +99,8 @@ CLASS net/minecraft/unmapped/C_ddxzphfu net/minecraft/client/render/debug/BeeDeb
 	METHOD m_tubxrqea getBeesByHive ()Ljava/util/Map;
 	METHOD m_twdqlkgu isTargeted (Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;)Z
 		ARG 1 bee
+	METHOD m_uaupswiq (Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/List;
+		ARG 0 pos
 	METHOD m_upcvafxa updateTargetedEntity ()V
 	METHOD m_usfqmgtm drawPath (Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;)V
 		ARG 1 bee
@@ -84,6 +109,10 @@ CLASS net/minecraft/unmapped/C_ddxzphfu net/minecraft/client/render/debug/BeeDeb
 	METHOD m_vjuaoddo render ()V
 	METHOD m_wczbmwik isInRange (Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;)Z
 		ARG 1 bee
+	METHOD m_wfyvyiqs (Ljava/util/Map$Entry;)V
+		ARG 0 entry
+	METHOD m_xdvnkvzg (Ljava/util/Map;Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;Lnet/minecraft/unmapped/C_kkdaznyh;)V
+		ARG 2 blacklistedPos
 	METHOD m_zarqagaz drawBox (Lnet/minecraft/unmapped/C_kkdaznyh;FFFFF)V
 		ARG 0 pos
 		ARG 1 expand
@@ -91,6 +120,8 @@ CLASS net/minecraft/unmapped/C_ddxzphfu net/minecraft/client/render/debug/BeeDeb
 		ARG 3 green
 		ARG 4 blue
 		ARG 5 alpha
+	METHOD m_ziohzwdu (Ljava/util/Map;Lnet/minecraft/unmapped/C_ddxzphfu$C_tourulds;)V
+		ARG 1 bee
 	METHOD m_zvbbnkcd getBeesForHive (Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/Collection;
 		ARG 1 hivePos
 	CLASS C_prnyapjb Hive

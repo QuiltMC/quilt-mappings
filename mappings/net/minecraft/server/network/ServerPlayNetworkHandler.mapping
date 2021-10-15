@@ -63,7 +63,13 @@ CLASS net/minecraft/unmapped/C_gmybabwh net/minecraft/server/network/ServerPlayN
 		ARG 2 listener
 	METHOD m_giehrows clampVertical (D)D
 		ARG 0 d
-	METHOD m_gqdmyyqn validateVehicleMove (DDDFF)Z
+	METHOD m_gqdmyyqn isMovementInvalid (DDDFF)Z
+		COMMENT {@return whether this movement is invalid}
+		COMMENT
+		COMMENT @implNote This method is used to determine
+		COMMENT whether players sending {@linkplain PlayerMoveC2SPacket player}
+		COMMENT and {@linkplain VehicleMoveC2SPacket vehicle} movement packets
+		COMMENT to the server should be kicked.
 		ARG 0 x
 		ARG 2 y
 		ARG 4 z
