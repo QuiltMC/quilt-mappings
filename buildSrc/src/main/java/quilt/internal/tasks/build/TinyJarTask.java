@@ -14,6 +14,6 @@ public class TinyJarTask extends Jar implements AbstractMappingsTask {
         getArchiveFileName().set(String.format("%s-%s.jar", Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION));
         getDestinationDirectory().set(getProject().file("build/libs"));
         this.getArchiveClassifier().convention("");
-        from(this.getTaskFromType(MergeTinyTask.class).mergedTiny).rename(original -> "mappings/mappings.tiny");
+        from(this.getTaskByType(MergeTinyTask.class).mergedTiny).rename(original -> "mappings/mappings.tiny");
     }
 }

@@ -31,7 +31,7 @@ public class CompressTinyTask extends DefaultMappingsTask {
         byte[] buffer = new byte[1024];
         FileOutputStream fileOutputStream = new FileOutputStream(compressedTiny);
         GZIPOutputStream outputStream = new GZIPOutputStream(fileOutputStream);
-        FileInputStream fileInputStream = new FileInputStream(this.getTaskFromType(MergeTinyTask.class).mergedTiny);
+        FileInputStream fileInputStream = new FileInputStream(this.getTaskByType(MergeTinyTask.class).mergedTiny);
 
         int length;
         while ((length = fileInputStream.read(buffer)) > 0) {

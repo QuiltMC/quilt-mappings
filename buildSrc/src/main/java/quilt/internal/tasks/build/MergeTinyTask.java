@@ -25,8 +25,8 @@ public class MergeTinyTask extends DefaultMappingsTask {
 
     @TaskAction
     public void mergeMappings() throws Exception {
-        File mappingsTinyInput = this.getTaskFromType(BuildMappingsTinyTask.class).outputMappings;
-        File hashedTinyInput = this.getTaskFromType(InvertPerVersionMappingsTask.class).invertedTinyFile;
+        File mappingsTinyInput = this.getTaskByType(BuildMappingsTinyTask.class).outputMappings;
+        File hashedTinyInput = this.getTaskByType(InvertPerVersionMappingsTask.class).invertedTinyFile;
 
         File unorderedResultMappings = new File(fileConstants.tempDir, "mappings-unordered.tiny");
 

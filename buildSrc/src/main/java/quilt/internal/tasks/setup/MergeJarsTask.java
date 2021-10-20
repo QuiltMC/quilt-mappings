@@ -23,8 +23,8 @@ public class MergeJarsTask extends DefaultMappingsTask {
         super(Constants.Groups.SETUP_GROUP);
         dependsOn(ExtractServerJarTask.TASK_NAME);
 
-        clientJar = getTaskFromType(DownloadMinecraftJarsTask.class).getClientJar();
-        serverJar = getTaskFromType(ExtractServerJarTask.class).getServerJar();
+        clientJar = getTaskByType(DownloadMinecraftJarsTask.class).getClientJar();
+        serverJar = getTaskByType(ExtractServerJarTask.class).getServerJar();
 
         getInputs().files(clientJar, serverJar);
 

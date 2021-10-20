@@ -25,7 +25,7 @@ public class InvertPerVersionMappingsTask extends DefaultMappingsTask {
     public void invertPerVersionMappings() throws Exception {
         getLogger().lifecycle(":building inverted {}", Constants.PER_VERSION_MAPPINGS_NAME);
 
-        File input = this.getTaskFromType(DownloadPerVersionMappingsTask.class).getTinyFile();
+        File input = this.getTaskByType(DownloadPerVersionMappingsTask.class).getTinyFile();
 
         String[] args = {
                 input.getAbsolutePath(),

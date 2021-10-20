@@ -75,7 +75,7 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
 
     private VersionFile getVersionFile() throws IOException {
         if (file == null) {
-            file = VersionFile.fromJson(FileUtils.readFileToString(getTaskFromType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
+            file = VersionFile.fromJson(FileUtils.readFileToString(getTaskByType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
         }
 
         return file;

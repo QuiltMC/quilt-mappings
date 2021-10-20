@@ -3,15 +3,12 @@ package quilt.internal.tasks.setup;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.util.json.JsonUtils;
 import quilt.internal.util.json.VersionFile;
 
 public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
@@ -27,7 +24,7 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
 
     @TaskAction
     public void downloadMinecraftLibrariesTask() throws IOException {
-        VersionFile file = VersionFile.fromJson(FileUtils.readFileToString(getTaskFromType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
+        VersionFile file = VersionFile.fromJson(FileUtils.readFileToString(getTaskByType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
 
         getLogger().lifecycle(":downloading minecraft libraries");
 

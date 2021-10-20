@@ -10,7 +10,6 @@ import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
-import quilt.internal.MappingsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.json.ManifestFile;
 
@@ -26,7 +25,7 @@ public class DownloadWantedVersionManifestTask extends DefaultMappingsTask {
     public DownloadWantedVersionManifestTask() throws IOException {
         super(Constants.Groups.SETUP_GROUP);
         this.dependsOn(DownloadVersionsManifestTask.TASK_NAME);
-        manifestFile = this.<DownloadVersionsManifestTask>getTaskFromName(DownloadVersionsManifestTask.TASK_NAME).getManifestFile();
+        manifestFile = this.<DownloadVersionsManifestTask>getTaskByName(DownloadVersionsManifestTask.TASK_NAME).getManifestFile();
         manifestVersion = getManifestVersion(manifestFile);
 
         //have to grab the release time as there's a current timestamp on each element?!

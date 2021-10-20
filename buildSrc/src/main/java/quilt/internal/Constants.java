@@ -14,5 +14,6 @@ public class Constants {
         public static final String MAPPINGS_GROUP = MAPPINGS_NAME;
         public static final String BUILD_MAPPINGS_GROUP = "mappings build";
         public static final String MAP_JAR_GROUP = "jar mapping";
+        public static final String UNPICK = "unpick";
     }
 }

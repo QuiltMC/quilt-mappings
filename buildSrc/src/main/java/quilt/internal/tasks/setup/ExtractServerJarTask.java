@@ -22,14 +22,14 @@ public class ExtractServerJarTask extends DefaultMappingsTask {
         super(Constants.Groups.SETUP_GROUP);
         dependsOn(DownloadMinecraftJarsTask.TASK_NAME);
 
-        getInputs().file(this.getTaskFromType(DownloadMinecraftJarsTask.class).getServerBootstrapJar());
+        getInputs().file(this.getTaskByType(DownloadMinecraftJarsTask.class).getServerBootstrapJar());
 
         serverJar = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-server.jar");
     }
 
     @TaskAction
     public void extractServerJar() throws IOException {
-        try (ZipFile bootstrap = new ZipFile(this.getTaskFromType(DownloadMinecraftJarsTask.class).getServerBootstrapJar())) {
+        try (ZipFile bootstrap = new ZipFile(this.getTaskByType(DownloadMinecraftJarsTask.class).getServerBootstrapJar())) {
 
             ZipEntry serverEntry = bootstrap.getEntry("META-INF/versions/" + Constants.MINECRAFT_VERSION + "/server-" + Constants.MINECRAFT_VERSION + ".jar");
 

@@ -16,7 +16,7 @@ public class MapPerVersionMappingsJarTask extends DefaultMappingsTask {
     public MapPerVersionMappingsJarTask() {
         super(Constants.Groups.MAP_JAR_GROUP);
 
-        getInputs().files(getTaskFromName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
+        getInputs().files(getTaskByName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
         getOutputs().file(this.fileConstants.hashedMojmapJar);
 
         this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadPerVersionMappingsTask.TASK_NAME, MergeJarsTask.TASK_NAME);
@@ -27,7 +27,7 @@ public class MapPerVersionMappingsJarTask extends DefaultMappingsTask {
     @TaskAction
     public void mapPerVersionMappingJar() {
         getLogger().lifecycle(":mapping minecraft to {}", Constants.PER_VERSION_MAPPINGS_NAME);
-        File tinyInput = getTaskFromType(DownloadPerVersionMappingsTask.class).getTinyFile();
-        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskFromType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
+        File tinyInput = getTaskByType(DownloadPerVersionMappingsTask.class).getTinyFile();
+        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskByType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
     }
 }

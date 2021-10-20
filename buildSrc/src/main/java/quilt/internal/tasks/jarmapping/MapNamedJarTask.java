@@ -17,7 +17,7 @@ public class MapNamedJarTask extends DefaultMappingsTask {
     public MapNamedJarTask() {
         super(Constants.Groups.MAP_JAR_GROUP);
 
-        getInputs().files(getTaskFromName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
+        getInputs().files(getTaskByName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
         getOutputs().file(this.fileConstants.namedJar);
 
         this.dependsOn("mergeV2", "unpickHashedJar");
@@ -28,13 +28,13 @@ public class MapNamedJarTask extends DefaultMappingsTask {
     @TaskAction
     public void mapPerVersionMappingJar() {
         getLogger().lifecycle(":mapping minecraft to named");
-        File tinyInput = getTaskFromType(DownloadPerVersionMappingsTask.class).getTinyFile();
+        File tinyInput = getTaskByType(DownloadPerVersionMappingsTask.class).getTinyFile();
         Map<String, String> jsrToJetbrains = Map.of(
                 "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
                 "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
                 "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
         );
-        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskFromType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
+        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskByType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
     }
 }
 

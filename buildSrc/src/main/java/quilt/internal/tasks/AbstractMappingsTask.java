@@ -10,11 +10,11 @@ public interface AbstractMappingsTask extends Task {
     }
 
     @SuppressWarnings("unchecked")
-    default <T extends Task> T getTaskFromName(String taskName) {
+    default <T extends Task> T getTaskByName(String taskName) {
         return (T) getProject().getTasks().getByName(taskName);
     }
 
-    default <T extends Task> T getTaskFromType(Class<T> taskClass) {
+    default <T extends Task> T getTaskByType(Class<T> taskClass) {
         return getProject().getTasks().stream().filter(task -> taskClass.isAssignableFrom(task.getClass())).map(taskClass::cast).findAny().orElseThrow();
     }
 
