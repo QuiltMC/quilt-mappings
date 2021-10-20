@@ -6,56 +6,25 @@ CLASS net/minecraft/unmapped/C_icxdqmro net/minecraft/entity/SpawnGroup
 	COMMENT
 	COMMENT @see EntityType#getSpawnGroup()
 	COMMENT @see net.minecraft.world.SpawnHelper
-	FIELD f_fhpassyc name Ljava/lang/String;
-	FIELD f_ivcgvytg despawnStartRange I
-	FIELD f_lbvzueuo CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_ceaeexil immediateDespawnRange I
+	FIELD f_foccnlhl despawnStartRange I
+	FIELD f_iixahqyg peaceful Z
+	FIELD f_jrpadsgy name Ljava/lang/String;
+	FIELD f_qrsloowy BY_NAME Ljava/util/Map;
+	FIELD f_sdzhpvyt capacity I
+	FIELD f_vlbpckir rare Z
+	FIELD f_vngqsybi CODEC Lcom/mojang/serialization/Codec;
 		COMMENT A codec that encodes and decodes a spawn group from and to its
 		COMMENT {@linkplain #getName() name} string.
-	FIELD f_nejwemww peaceful Z
-	FIELD f_ozgxoalq rare Z
-	FIELD f_rkburxnf immediateDespawnRange I
-	FIELD f_rnnawzbn capacity I
-	FIELD f_yuaykldp BY_NAME Ljava/util/Map;
 	METHOD <init> (Ljava/lang/String;ILjava/lang/String;IZZI)V
 		ARG 3 name
 		ARG 4 spawnCap
 		ARG 5 peaceful
 		ARG 6 rare
 		ARG 7 immediateDespawnRange
-	METHOD m_bcgmobgf byName (Ljava/lang/String;)Lnet/minecraft/unmapped/C_icxdqmro;
-		COMMENT Finds the spawn group with the given {@code name}, or {@code null} if no
-		COMMENT group has the given {@code name}.
-		COMMENT
-		COMMENT @see #getName()
-		COMMENT @return the found group, or {@code null}
-		ARG 0 name
-			COMMENT the name of the group
-	METHOD m_fvuxfkca getCapacity ()I
-		COMMENT Returns the maximum number of mobs in this group that can be spawned per
-		COMMENT chunk.
-	METHOD m_lrkjytlw getDespawnStartRange ()I
-		COMMENT Returns the distance, of a mob of this group from a player, at which
-		COMMENT that mob can despawn at chance.
-		COMMENT
-		COMMENT <p>This is ignored if a mob {@linkplain
-		COMMENT net.minecraft.entity.mob.MobEntity#canImmediatelyDespawn(double) cannot
-		COMMENT immediately despawn}.
-		COMMENT
-		COMMENT @see net.minecraft.entity.mob.MobEntity#checkDespawn()
-	METHOD m_lxgntfjp getName ()Ljava/lang/String;
-		COMMENT Returns the name of this spawn group.
-		COMMENT
-		COMMENT <p>The names are unique and are in {@code lower_snake_case}.
-	METHOD m_qqlbmzcl isRare ()Z
-		COMMENT Returns if this spawn group is spawned only rarely.
-		COMMENT
-		COMMENT <p>A rare spawn only happens when the {@linkplain
-		COMMENT net.minecraft.world.WorldProperties#getTime() world time} is a multiple
-		COMMENT of {@code 400} in {@link
-		COMMENT net.minecraft.server.world.ServerChunkManager#tickChunks()}.
-	METHOD m_sdmxzblv (Lnet/minecraft/unmapped/C_icxdqmro;)Lnet/minecraft/unmapped/C_icxdqmro;
+	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_icxdqmro;)Lnet/minecraft/unmapped/C_icxdqmro;
 		ARG 0 spawnGroup
-	METHOD m_wmvjhqon getImmediateDespawnRange ()I
+	METHOD m_ancththu getImmediateDespawnRange ()I
 		COMMENT Returns the distance, of a mob of this group from a player, at which
 		COMMENT that mob will despawn immediately.
 		COMMENT
@@ -64,8 +33,39 @@ CLASS net/minecraft/unmapped/C_icxdqmro net/minecraft/entity/SpawnGroup
 		COMMENT immediately despawn}.
 		COMMENT
 		COMMENT @see net.minecraft.entity.mob.MobEntity#checkDespawn()
-	METHOD m_xgexoelh isPeaceful ()Z
+	METHOD m_bdiistae getDespawnStartRange ()I
+		COMMENT Returns the distance, of a mob of this group from a player, at which
+		COMMENT that mob can despawn at chance.
+		COMMENT
+		COMMENT <p>This is ignored if a mob {@linkplain
+		COMMENT net.minecraft.entity.mob.MobEntity#canImmediatelyDespawn(double) cannot
+		COMMENT immediately despawn}.
+		COMMENT
+		COMMENT @see net.minecraft.entity.mob.MobEntity#checkDespawn()
+	METHOD m_gvlwjsjf getName ()Ljava/lang/String;
+		COMMENT Returns the name of this spawn group.
+		COMMENT
+		COMMENT <p>The names are unique and are in {@code lower_snake_case}.
+	METHOD m_iixahqyg isPeaceful ()Z
 		COMMENT Returns {@code true} if this group is spawned as animals, or {@code false}
 		COMMENT if this group is spawned as monsters.
 		COMMENT
 		COMMENT @see net.minecraft.world.World#setMobSpawnOptions(boolean, boolean)
+	METHOD m_upelhdnf byName (Ljava/lang/String;)Lnet/minecraft/unmapped/C_icxdqmro;
+		COMMENT Finds the spawn group with the given {@code name}, or {@code null} if no
+		COMMENT group has the given {@code name}.
+		COMMENT
+		COMMENT @see #getName()
+		COMMENT @return the found group, or {@code null}
+		ARG 0 name
+			COMMENT the name of the group
+	METHOD m_vlbpckir isRare ()Z
+		COMMENT Returns if this spawn group is spawned only rarely.
+		COMMENT
+		COMMENT <p>A rare spawn only happens when the {@linkplain
+		COMMENT net.minecraft.world.WorldProperties#getTime() world time} is a multiple
+		COMMENT of {@code 400} in {@link
+		COMMENT net.minecraft.server.world.ServerChunkManager#tickChunks()}.
+	METHOD m_xewcjkpa getCapacity ()I
+		COMMENT Returns the maximum number of mobs in this group that can be spawned per
+		COMMENT chunk.

@@ -2,86 +2,13 @@ CLASS net/minecraft/unmapped/C_brsuesjh net/minecraft/recipe/RecipeManager
 	COMMENT A recipe manager allows easier use of recipes, such as finding matches and
 	COMMENT remainders. It is also integrated with a recipe loader, which loads recipes
 	COMMENT from data packs' JSON files.
-	FIELD f_eypychey errored Z
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_gyetmzkj errored Z
 		COMMENT This isn't quite indicating an errored state; its value is only set to
 		COMMENT {@code false} and is never {@code true}, and isn't used anywhere.
-	FIELD f_fmmwehlq recipes Ljava/util/Map;
-	FIELD f_pckyaaqh LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_vdvpdbwk GSON Lcom/google/gson/Gson;
-	METHOD m_aqsawdra listAllOfType (Lnet/minecraft/unmapped/C_synzqnhr;)Ljava/util/List;
-		COMMENT Creates a list of all recipes of the given {@code type}. The list has an
-		COMMENT arbitrary order.
-		COMMENT
-		COMMENT <p>This list does not update with this manager. Modifications to
-		COMMENT the returned list do not affect this manager.
-		COMMENT
-		COMMENT @return the created list of recipes of the given {@code type}
-		ARG 1 type
-			COMMENT the desired recipe type
-	METHOD m_ataufhyx isErrored ()Z
-		COMMENT {@return the {@link #errored} field} This is unused in vanilla and will only
-		COMMENT return {@code false} without mods.
-	METHOD m_cdelrlow (Lnet/minecraft/unmapped/C_synzqnhr;)Lcom/google/common/collect/ImmutableMap$Builder;
-		ARG 0 recipeType
-	METHOD m_dkdhkurh getAllMatches (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_nbzftcdc;)Ljava/util/List;
-		COMMENT Creates a list of all recipes of the given {@code type} that match the
-		COMMENT given {@code inventory} and {@code world}. The list is ordered by the
-		COMMENT translation key of the output item stack of each recipe.
-		COMMENT
-		COMMENT <p>This list does not update with this manager. Modifications to
-		COMMENT the returned list do not affect this manager.
-		COMMENT
-		COMMENT @return the created list of matching recipes
-		ARG 1 type
-			COMMENT the desired recipe type
-		ARG 2 inventory
-			COMMENT the input inventory
-		ARG 3 world
-			COMMENT the input world
-	METHOD m_ebwqinkt setRecipes (Ljava/lang/Iterable;)V
-		COMMENT Sets the recipes for this recipe manager. Used by the client to set the server
-		COMMENT side recipes.
-		ARG 1 recipes
-			COMMENT the recipes to set
-	METHOD m_etgpfcys getFirstMatch (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_nbzftcdc;)Ljava/util/Optional;
-		COMMENT {@return a recipe of the given {@code type} that match the given
-		COMMENT {@code inventory} and {@code world}}
-		COMMENT
-		COMMENT <p>If there are multiple matching recipes, the result is arbitrary,
-		COMMENT but this method will return the same result unless the recipes in this
-		COMMENT manager are updated.
-		ARG 1 type
-			COMMENT the desired recipe type
-		ARG 2 inventory
-			COMMENT the input inventory
-		ARG 3 world
-			COMMENT the input world
-	METHOD m_hsvlhqbz (Lnet/minecraft/unmapped/C_acfwypcn;Ljava/util/Map;)Lnet/minecraft/unmapped/C_dqwdmrwa;
-		ARG 1 map
-	METHOD m_igqhvikx getAllOfType (Lnet/minecraft/unmapped/C_synzqnhr;)Ljava/util/Map;
-		ARG 1 type
-	METHOD m_kpaoaaru (Lnet/minecraft/unmapped/C_dqwdmrwa;)Lnet/minecraft/unmapped/C_dqwdmrwa;
-		ARG 0 recipe
-	METHOD m_ktsrdjrv values ()Ljava/util/Collection;
-		COMMENT {@return all recipes in this manager}
-		COMMENT
-		COMMENT <p>The returned set does not update with the manager. Modifications to the
-		COMMENT returned set does not affect this manager.
-	METHOD m_kxpcpxsd get (Lnet/minecraft/unmapped/C_acfwypcn;)Ljava/util/Optional;
-		COMMENT {@return a recipe with the given {@code id}, or empty if there is no such recipe}
-		ARG 1 id
-			COMMENT the ID of the desired recipe
-	METHOD m_msuriukh (Lnet/minecraft/unmapped/C_dqwdmrwa;)Ljava/lang/String;
-		ARG 0 recipe
-	METHOD m_nunxcrxh (Ljava/util/Map;)Ljava/util/stream/Stream;
-		ARG 0 map
-	METHOD m_oghstpzz (Ljava/util/Map;Lnet/minecraft/unmapped/C_dqwdmrwa;)V
-		ARG 1 recipe
-	METHOD m_ojeyhhee (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_dqwdmrwa;)Ljava/util/stream/Stream;
-		ARG 3 recipe
-	METHOD m_smrknkfn (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_dqwdmrwa;)Ljava/util/stream/Stream;
-		ARG 3 recipe
-	METHOD m_tthneqch deserialize (Lnet/minecraft/unmapped/C_acfwypcn;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_dqwdmrwa;
+	FIELD f_qquqqwsu GSON Lcom/google/gson/Gson;
+	FIELD f_sfyhccyy recipes Ljava/util/Map;
+	METHOD m_amdvybik deserialize (Lnet/minecraft/unmapped/C_acfwypcn;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_dqwdmrwa;
 		COMMENT Reads a recipe from a JSON object.
 		COMMENT
 		COMMENT @implNote Even though a recipe's {@linkplain Recipe#getSerializer() serializer}
@@ -96,19 +23,12 @@ CLASS net/minecraft/unmapped/C_brsuesjh net/minecraft/recipe/RecipeManager
 			COMMENT the recipe's ID
 		ARG 1 json
 			COMMENT the recipe JSON
-	METHOD m_vpzrfoin (Ljava/util/Map;)Ljava/util/stream/Stream;
-		ARG 0 map
-	METHOD m_xjhumsft keys ()Ljava/util/stream/Stream;
-		COMMENT {@return a stream of IDs of recipes in this manager}
-		COMMENT
-		COMMENT <p>The returned stream does not update after {@link #setRecipes(Iterable)}
-		COMMENT call.
-		COMMENT
-		COMMENT @apiNote This is used by the command sources to suggest recipe IDs for command
-		COMMENT arguments.
-	METHOD m_ymslutey (Lnet/minecraft/unmapped/C_synzqnhr;)Ljava/util/Map;
-		ARG 0 t
-	METHOD m_yybamjgp getRemainingStacks (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_nbzftcdc;)Lnet/minecraft/unmapped/C_eztffrnr;
+	METHOD m_bhmlsguf setRecipes (Ljava/lang/Iterable;)V
+		COMMENT Sets the recipes for this recipe manager. Used by the client to set the server
+		COMMENT side recipes.
+		ARG 1 recipes
+			COMMENT the recipes to set
+	METHOD m_cqlfdlis getRemainingStacks (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_nbzftcdc;)Lnet/minecraft/unmapped/C_eztffrnr;
 		COMMENT {@return the remainder of a recipe of the given {@code type} that match
 		COMMENT the given {@code inventory} and {@code world}, or a shallow copy of the
 		COMMENT {@code inventory}}
@@ -124,3 +44,83 @@ CLASS net/minecraft/unmapped/C_brsuesjh net/minecraft/recipe/RecipeManager
 			COMMENT the input inventory
 		ARG 3 world
 			COMMENT the input world
+	METHOD m_dvfgbnbm (Lnet/minecraft/unmapped/C_synzqnhr;)Ljava/util/Map;
+		ARG 0 t
+	METHOD m_eofvmmsu listAllOfType (Lnet/minecraft/unmapped/C_synzqnhr;)Ljava/util/List;
+		COMMENT Creates a list of all recipes of the given {@code type}. The list has an
+		COMMENT arbitrary order.
+		COMMENT
+		COMMENT <p>This list does not update with this manager. Modifications to
+		COMMENT the returned list do not affect this manager.
+		COMMENT
+		COMMENT @return the created list of recipes of the given {@code type}
+		ARG 1 type
+			COMMENT the desired recipe type
+	METHOD m_gndbkmqb (Ljava/util/Map;)Ljava/util/stream/Stream;
+		ARG 0 map
+	METHOD m_ixdclxqp keys ()Ljava/util/stream/Stream;
+		COMMENT {@return a stream of IDs of recipes in this manager}
+		COMMENT
+		COMMENT <p>The returned stream does not update after {@link #setRecipes(Iterable)}
+		COMMENT call.
+		COMMENT
+		COMMENT @apiNote This is used by the command sources to suggest recipe IDs for command
+		COMMENT arguments.
+	METHOD m_jyixptdm (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_dqwdmrwa;)Ljava/util/stream/Stream;
+		ARG 3 recipe
+	METHOD m_kbasxeev (Lnet/minecraft/unmapped/C_dqwdmrwa;)Lnet/minecraft/unmapped/C_dqwdmrwa;
+		ARG 0 recipe
+	METHOD m_kdqycikt isErrored ()Z
+		COMMENT {@return the {@link #errored} field} This is unused in vanilla and will only
+		COMMENT return {@code false} without mods.
+	METHOD m_kvfjsbgp get (Lnet/minecraft/unmapped/C_acfwypcn;)Ljava/util/Optional;
+		COMMENT {@return a recipe with the given {@code id}, or empty if there is no such recipe}
+		ARG 1 id
+			COMMENT the ID of the desired recipe
+	METHOD m_llukvzzk getAllMatches (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_nbzftcdc;)Ljava/util/List;
+		COMMENT Creates a list of all recipes of the given {@code type} that match the
+		COMMENT given {@code inventory} and {@code world}. The list is ordered by the
+		COMMENT translation key of the output item stack of each recipe.
+		COMMENT
+		COMMENT <p>This list does not update with this manager. Modifications to
+		COMMENT the returned list do not affect this manager.
+		COMMENT
+		COMMENT @return the created list of matching recipes
+		ARG 1 type
+			COMMENT the desired recipe type
+		ARG 2 inventory
+			COMMENT the input inventory
+		ARG 3 world
+			COMMENT the input world
+	METHOD m_lzdwmhtn (Ljava/util/Map;)Ljava/util/stream/Stream;
+		ARG 0 map
+	METHOD m_mqjpvstd (Lnet/minecraft/unmapped/C_synzqnhr;)Lcom/google/common/collect/ImmutableMap$Builder;
+		ARG 0 recipeType
+	METHOD m_mtbgstse (Lnet/minecraft/unmapped/C_dqwdmrwa;)Ljava/lang/String;
+		ARG 0 recipe
+	METHOD m_tvrgvkvf getAllOfType (Lnet/minecraft/unmapped/C_synzqnhr;)Ljava/util/Map;
+		ARG 1 type
+	METHOD m_uozczhgf values ()Ljava/util/Collection;
+		COMMENT {@return all recipes in this manager}
+		COMMENT
+		COMMENT <p>The returned set does not update with the manager. Modifications to the
+		COMMENT returned set does not affect this manager.
+	METHOD m_waekkqcr getFirstMatch (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_nbzftcdc;)Ljava/util/Optional;
+		COMMENT {@return a recipe of the given {@code type} that match the given
+		COMMENT {@code inventory} and {@code world}}
+		COMMENT
+		COMMENT <p>If there are multiple matching recipes, the result is arbitrary,
+		COMMENT but this method will return the same result unless the recipes in this
+		COMMENT manager are updated.
+		ARG 1 type
+			COMMENT the desired recipe type
+		ARG 2 inventory
+			COMMENT the input inventory
+		ARG 3 world
+			COMMENT the input world
+	METHOD m_xppindsy (Ljava/util/Map;Lnet/minecraft/unmapped/C_dqwdmrwa;)V
+		ARG 1 recipe
+	METHOD m_zggclfke (Lnet/minecraft/unmapped/C_synzqnhr;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_qojtstjp;Lnet/minecraft/unmapped/C_dqwdmrwa;)Ljava/util/stream/Stream;
+		ARG 3 recipe
+	METHOD m_zjmzzmgc (Lnet/minecraft/unmapped/C_acfwypcn;Ljava/util/Map;)Lnet/minecraft/unmapped/C_dqwdmrwa;
+		ARG 1 map

@@ -1,107 +1,107 @@
 CLASS net/minecraft/unmapped/C_iwjfvbta net/minecraft/entity/ai/pathing/EntityNavigation
-	FIELD f_adhclufu nodeReachProximity F
+	FIELD f_ackxrvwo entity Lnet/minecraft/unmapped/C_zlwsfkxd;
+	FIELD f_bdxdtvfg currentDistance I
+	FIELD f_cixbbjoo RECALCULATE_COOLDOWN I
+	FIELD f_diefndzw lastNodePosition Lnet/minecraft/unmapped/C_hhqtviec;
+	FIELD f_dnmmzarh pathStartTime I
+	FIELD f_dpftgkdu currentPath Lnet/minecraft/unmapped/C_fbepitom;
+	FIELD f_eyrzyrsw lastRecalculateTime J
+	FIELD f_hngwpsuj pathStartPos Lnet/minecraft/unmapped/C_xxfpupgv;
+	FIELD f_iegoqtye shouldRecalculate Z
+	FIELD f_irfvmhyh rangeMultiplier F
+	FIELD f_knfwpieh lastActiveTickMs J
+	FIELD f_kxnvlmbe currentNodeTimeout D
+	FIELD f_nzncuwof tickCount I
+	FIELD f_okfulwkr world Lnet/minecraft/unmapped/C_nbzftcdc;
+	FIELD f_qhouxdhc currentNodeMs J
+	FIELD f_udzullvd nearPathStartPos Z
+	FIELD f_urpxikgf pathNodeNavigator Lnet/minecraft/unmapped/C_jgffdtjj;
+	FIELD f_vijitczk speed D
+	FIELD f_zhfhlvss currentTarget Lnet/minecraft/unmapped/C_kkdaznyh;
+	FIELD f_zlneulkg nodeReachProximity F
 		COMMENT If the Chebyshev distance from the entity to the next node is less than
 		COMMENT or equal to this value, the entity is considered "reached" the node.
-	FIELD f_cytxurpj lastActiveTickMs J
-	FIELD f_ettzwgyk currentPath Lnet/minecraft/unmapped/C_fbepitom;
-	FIELD f_exgcwxhm tickCount I
-	FIELD f_gxitwoki speed D
-	FIELD f_hrabeqrb currentNodeMs J
-	FIELD f_icmyubvn lastNodePosition Lnet/minecraft/unmapped/C_hhqtviec;
-	FIELD f_iwodnscw lastRecalculateTime J
-	FIELD f_jxzfewkr world Lnet/minecraft/unmapped/C_nbzftcdc;
-	FIELD f_jyjtenqj currentNodeTimeout D
-	FIELD f_ljrzpiwk shouldRecalculate Z
-	FIELD f_nrjmbaty entity Lnet/minecraft/unmapped/C_zlwsfkxd;
-	FIELD f_oqwyfppt rangeMultiplier F
-	FIELD f_ovgdybfp currentTarget Lnet/minecraft/unmapped/C_kkdaznyh;
-	FIELD f_rafqfqdj nearPathStartPos Z
-	FIELD f_riifgnnu nodeMaker Lnet/minecraft/unmapped/C_gfvpgtbp;
-	FIELD f_rywcnecl currentDistance I
-	FIELD f_tuzuahxc RECALCULATE_COOLDOWN I
-	FIELD f_utliqxxt pathNodeNavigator Lnet/minecraft/unmapped/C_jgffdtjj;
-	FIELD f_vxmyjwma pathStartTime I
-	FIELD f_wuvjuekn pathStartPos Lnet/minecraft/unmapped/C_xxfpupgv;
+	FIELD f_zqmznnks nodeMaker Lnet/minecraft/unmapped/C_gfvpgtbp;
 	METHOD <init> (Lnet/minecraft/unmapped/C_zlwsfkxd;Lnet/minecraft/unmapped/C_nbzftcdc;)V
 		ARG 1 mob
 		ARG 2 world
-	METHOD m_avgxnwip adjustPath ()V
-		COMMENT Adjusts the current path according to various special obstacles that may be in the way, for example sunlight
-	METHOD m_beekjkzc isInLiquid ()Z
-	METHOD m_bnmizpuy createPathNodeNavigator (I)Lnet/minecraft/unmapped/C_jgffdtjj;
-		ARG 1 range
-	METHOD m_dbweuknk getCurrentPath ()Lnet/minecraft/unmapped/C_fbepitom;
-	METHOD m_einemysv isValidPosition (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 1 pos
-	METHOD m_fccmkqtp setRangeMultiplier (F)V
-		ARG 1 rangeMultiplier
-	METHOD m_fuibcehs shouldJumpToNextNode (Lnet/minecraft/unmapped/C_xxfpupgv;)Z
-		ARG 1 currentPos
-	METHOD m_hcjxphxc resetNode ()V
-	METHOD m_ifccwtee isFollowingPath ()Z
-	METHOD m_igewmwjn findPathToAny (Ljava/util/stream/Stream;I)Lnet/minecraft/unmapped/C_fbepitom;
-		ARG 1 positions
-		ARG 2 distance
-	METHOD m_jeelgyki canSwim ()Z
-	METHOD m_jsljksfy findPathTo (Lnet/minecraft/unmapped/C_kkdaznyh;II)Lnet/minecraft/unmapped/C_fbepitom;
-		ARG 1 target
-		ARG 2 minDistance
-		ARG 3 maxDistance
-	METHOD m_kecmbwfx getNodeMaker ()Lnet/minecraft/unmapped/C_gfvpgtbp;
-	METHOD m_letznaei isAtValidPosition ()Z
-	METHOD m_lgvpmpfi resetRangeMultiplier ()V
-	METHOD m_mhbuhjgf startMovingTo (DDDD)Z
+	METHOD m_eixecykg isAtValidPosition ()Z
+	METHOD m_fkvbeyuc resetRangeMultiplier ()V
+	METHOD m_ggypdimu startMovingTo (DDDD)Z
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
 		ARG 7 speed
-	METHOD m_mrmykbuy getPos ()Lnet/minecraft/unmapped/C_xxfpupgv;
-		COMMENT The position to act as if the entity is at for pathfinding purposes
-	METHOD m_mshkkfgj onBlockChanged (Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 1 pos
-	METHOD m_nuaaozdu recalculatePath ()V
-	METHOD m_nwdjherr shouldRecalculatePath ()Z
-	METHOD m_oppgtjnr startMovingTo (Lnet/minecraft/unmapped/C_srenftsa;D)Z
+	METHOD m_ggypdimu startMovingAlong (Lnet/minecraft/unmapped/C_fbepitom;D)Z
+		ARG 1 path
+		ARG 2 speed
+	METHOD m_ggypdimu startMovingTo (Lnet/minecraft/unmapped/C_srenftsa;D)Z
 		ARG 1 entity
 		ARG 2 speed
-	METHOD m_paiobpiq findPathTo (Lnet/minecraft/unmapped/C_kkdaznyh;I)Lnet/minecraft/unmapped/C_fbepitom;
-		ARG 1 target
-		ARG 2 distance
-	METHOD m_pfcxkoqk getTargetPos ()Lnet/minecraft/unmapped/C_kkdaznyh;
-	METHOD m_qaqnmpao findPathTo (Lnet/minecraft/unmapped/C_srenftsa;I)Lnet/minecraft/unmapped/C_fbepitom;
-		ARG 1 entity
-		ARG 2 distance
-	METHOD m_sioaohdu getNodeReachProximity ()F
-	METHOD m_sirnkicq canPathDirectlyThrough (Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_xxfpupgv;)Z
+	METHOD m_gntzllor recalculatePath ()V
+	METHOD m_gntzllor onBlockChanged (Lnet/minecraft/unmapped/C_kkdaznyh;)V
+		ARG 1 pos
+	METHOD m_hieljxmn getTargetPos ()Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_hkwzaoef stop ()V
+	METHOD m_iegoqtye shouldRecalculatePath ()Z
+	METHOD m_jwjhfkgr canPathDirectlyThrough (Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_xxfpupgv;)Z
 		ARG 1 origin
 		ARG 2 target
-	METHOD m_sjifrgts setCanSwim (Z)V
-		ARG 1 canSwim
-	METHOD m_trcuunbp findPathTo (Ljava/util/Set;I)Lnet/minecraft/unmapped/C_fbepitom;
+	METHOD m_kardsbdf getNodeReachProximity ()F
+	METHOD m_lgxwosif getCurrentPath ()Lnet/minecraft/unmapped/C_fbepitom;
+	METHOD m_lszlsbbp isValidPosition (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		ARG 1 pos
+	METHOD m_maqtpscx findPathTo (DDDI)Lnet/minecraft/unmapped/C_fbepitom;
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+		ARG 7 distance
+	METHOD m_maqtpscx findPathTo (Ljava/util/Set;I)Lnet/minecraft/unmapped/C_fbepitom;
 		ARG 1 positions
 		ARG 2 distance
-	METHOD m_tuiaahcn resetNodeAndStop ()V
-	METHOD m_ujrhwxua isNearPathStartPos ()Z
-	METHOD m_vburnmhl findPathToAny (Ljava/util/Set;IZIF)Lnet/minecraft/unmapped/C_fbepitom;
+	METHOD m_maqtpscx findPathTo (Ljava/util/Set;IZI)Lnet/minecraft/unmapped/C_fbepitom;
+		ARG 1 positions
+		ARG 2 range
+		ARG 3 useHeadPos
+		ARG 4 distance
+	METHOD m_maqtpscx findPathToAny (Ljava/util/Set;IZIF)Lnet/minecraft/unmapped/C_fbepitom;
 		ARG 1 positions
 		ARG 2 range
 		ARG 3 useHeadPos
 		ARG 4 distance
 		ARG 5 followRange
-	METHOD m_wjjsbpje findPathTo (DDDI)Lnet/minecraft/unmapped/C_fbepitom;
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-		ARG 7 distance
-	METHOD m_xlesptvl findPathTo (Ljava/util/Set;IZI)Lnet/minecraft/unmapped/C_fbepitom;
+	METHOD m_maqtpscx findPathToAny (Ljava/util/stream/Stream;I)Lnet/minecraft/unmapped/C_fbepitom;
 		ARG 1 positions
-		ARG 2 range
-		ARG 3 useHeadPos
-		ARG 4 distance
-	METHOD m_yakoxteq setSpeed (D)V
+		ARG 2 distance
+	METHOD m_maqtpscx findPathTo (Lnet/minecraft/unmapped/C_kkdaznyh;I)Lnet/minecraft/unmapped/C_fbepitom;
+		ARG 1 target
+		ARG 2 distance
+	METHOD m_maqtpscx findPathTo (Lnet/minecraft/unmapped/C_kkdaznyh;II)Lnet/minecraft/unmapped/C_fbepitom;
+		ARG 1 target
+		ARG 2 minDistance
+		ARG 3 maxDistance
+	METHOD m_maqtpscx findPathTo (Lnet/minecraft/unmapped/C_srenftsa;I)Lnet/minecraft/unmapped/C_fbepitom;
+		ARG 1 entity
+		ARG 2 distance
+	METHOD m_moszmwjh resetNode ()V
+	METHOD m_nhnvvujt getPos ()Lnet/minecraft/unmapped/C_xxfpupgv;
+		COMMENT The position to act as if the entity is at for pathfinding purposes
+	METHOD m_nrgevzgi shouldJumpToNextNode (Lnet/minecraft/unmapped/C_xxfpupgv;)Z
+		ARG 1 currentPos
+	METHOD m_oesexjok isInLiquid ()Z
+	METHOD m_pvxgftft setCanSwim (Z)V
+		ARG 1 canSwim
+	METHOD m_qhxkutpe canSwim ()Z
+	METHOD m_qqgprljh getNodeMaker ()Lnet/minecraft/unmapped/C_gfvpgtbp;
+	METHOD m_tjvprrry resetNodeAndStop ()V
+	METHOD m_udzullvd isNearPathStartPos ()Z
+	METHOD m_vqzjqpdw isFollowingPath ()Z
+	METHOD m_wfjazsfj setRangeMultiplier (F)V
+		ARG 1 rangeMultiplier
+	METHOD m_yiqdpash adjustPath ()V
+		COMMENT Adjusts the current path according to various special obstacles that may be in the way, for example sunlight
+	METHOD m_yszemppc isIdle ()Z
+	METHOD m_ywcqwsnd setSpeed (D)V
 		ARG 1 speed
-	METHOD m_ygjxujfe startMovingAlong (Lnet/minecraft/unmapped/C_fbepitom;D)Z
-		ARG 1 path
-		ARG 2 speed
-	METHOD m_ythcmbkq stop ()V
-	METHOD m_zjtikxuc isIdle ()Z
+	METHOD m_zwmnwwvr createPathNodeNavigator (I)Lnet/minecraft/unmapped/C_jgffdtjj;
+		ARG 1 range

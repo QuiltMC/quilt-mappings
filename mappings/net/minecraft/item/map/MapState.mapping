@@ -1,26 +1,26 @@
 CLASS net/minecraft/unmapped/C_gmgllpvn net/minecraft/item/map/MapState
-	FIELD f_bdphmhhj updateTrackers Ljava/util/List;
-	FIELD f_cwbnbvas showIcons Z
-	FIELD f_ewttquml frames Ljava/util/Map;
-	FIELD f_gjimqnlg scale B
-	FIELD f_kgqbtjll colors [B
-	FIELD f_kqpwjkpw icons Ljava/util/Map;
-	FIELD f_lxnobogy centerZ I
-		COMMENT The scaled center coordinate of the map state on the Z axis.
-		COMMENT <p>
-		COMMENT Always {@code 0} for the client.
-	FIELD f_ogecesdu updateTrackersByPlayer Ljava/util/Map;
-	FIELD f_riymsyyt centerX I
-		COMMENT The scaled center coordinate of the map state on the X axis.
-		COMMENT <p>
-		COMMENT Always {@code 0} for the client.
-	FIELD f_tkfszzeu dimension Lnet/minecraft/unmapped/C_hcaelhhx;
-	FIELD f_uzifnpcv unlimitedTracking Z
-	FIELD f_ypfsvfzl locked Z
-	FIELD f_zbhwoaub banners Ljava/util/Map;
+	FIELD f_cjykckjg dimension Lnet/minecraft/unmapped/C_hcaelhhx;
+	FIELD f_cuasuqds banners Ljava/util/Map;
 		COMMENT The banner markers to track in world.
 		COMMENT <p>
 		COMMENT Empty for the client.
+	FIELD f_cwoxiwje scale B
+	FIELD f_hpfqwfzz centerX I
+		COMMENT The scaled center coordinate of the map state on the X axis.
+		COMMENT <p>
+		COMMENT Always {@code 0} for the client.
+	FIELD f_igwaqimr updateTrackers Ljava/util/List;
+	FIELD f_ivomhyli colors [B
+	FIELD f_kssgrnyh centerZ I
+		COMMENT The scaled center coordinate of the map state on the Z axis.
+		COMMENT <p>
+		COMMENT Always {@code 0} for the client.
+	FIELD f_ooajavpe icons Ljava/util/Map;
+	FIELD f_tgiypyyq frames Ljava/util/Map;
+	FIELD f_uiqutpum unlimitedTracking Z
+	FIELD f_uqrhilhv updateTrackersByPlayer Ljava/util/Map;
+	FIELD f_vihuqsoc locked Z
+	FIELD f_zntoqtyb showIcons Z
 	METHOD <init> (IIBZZZLnet/minecraft/unmapped/C_hcaelhhx;)V
 		ARG 1 centerX
 		ARG 2 centerZ
@@ -29,76 +29,25 @@ CLASS net/minecraft/unmapped/C_gmgllpvn net/minecraft/item/map/MapState
 		ARG 5 unlimitedTracking
 		ARG 6 locked
 		ARG 7 dimension
-	METHOD m_actvdazd addDecorationsNbt (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/lang/String;Lnet/minecraft/unmapped/C_uvwbbtpl$C_eemjwsoo;)V
-		ARG 0 stack
-		ARG 1 pos
-		ARG 2 id
-		ARG 3 type
-	METHOD m_cyyvkmzv putColor (IIB)Z
-		COMMENT Sets the color at the specified coordinates if the current color is different.
-		COMMENT
-		COMMENT @return {@code true} if the color has been updated, else {@code false}
+	METHOD m_bfickdth getIcons ()Ljava/lang/Iterable;
+	METHOD m_cxxmmnkl markDirty (II)V
 		ARG 1 x
 		ARG 2 z
-		ARG 3 color
-	METHOD m_emufendo addIcon (Lnet/minecraft/unmapped/C_uvwbbtpl$C_eemjwsoo;Lnet/minecraft/unmapped/C_elysbvdv;Ljava/lang/String;DDDLnet/minecraft/unmapped/C_tdwiqadr;)V
-		ARG 1 type
-		ARG 2 world
-		ARG 3 key
-		ARG 4 x
-		ARG 6 z
-		ARG 8 rotation
-		ARG 10 text
-	METHOD m_fggdnzue getBanners ()Ljava/util/Collection;
-	METHOD m_fzaqzsii getPlayerMarkerPacket (ILnet/minecraft/unmapped/C_oqcyprzj;)Lnet/minecraft/unmapped/C_lrjrtjyz;
+	METHOD m_fclcqoyf addBanner (Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		ARG 1 world
+		ARG 2 pos
+	METHOD m_gchboyhx getPlayerMarkerPacket (ILnet/minecraft/unmapped/C_oqcyprzj;)Lnet/minecraft/unmapped/C_lrjrtjyz;
 		ARG 1 id
 		ARG 2 player
-	METHOD m_jezhpgwk fromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_gmgllpvn;
-		ARG 0 nbt
-	METHOD m_jombtasy replaceIcons (Ljava/util/List;)V
-		ARG 1 icons
-	METHOD m_lwzkggwm removeFrame (Lnet/minecraft/unmapped/C_kkdaznyh;I)V
-		ARG 1 pos
-		ARG 2 id
-	METHOD m_medcyexq hasMonumentIcon ()Z
-	METHOD m_nehqporl markIconsDirty ()V
-	METHOD m_pbrzpaqg of (BZLnet/minecraft/unmapped/C_hcaelhhx;)Lnet/minecraft/unmapped/C_gmgllpvn;
+	METHOD m_ghlsmupj getBanners ()Ljava/util/Collection;
+	METHOD m_gyskgfzo of (BZLnet/minecraft/unmapped/C_hcaelhhx;)Lnet/minecraft/unmapped/C_gmgllpvn;
 		COMMENT Creates a new map state instance for the client.
 		COMMENT <p>
 		COMMENT The client is not aware of the coordinates of the map state so its center coordinates will always be {@code (0, 0)}.
 		ARG 0 scale
 		ARG 1 showIcons
 		ARG 2 dimension
-	METHOD m_pvoicgdz setColor (IIB)V
-		ARG 1 x
-		ARG 2 z
-		ARG 3 color
-	METHOD m_qzpykbqe removeBanner (Lnet/minecraft/unmapped/C_qobevaep;II)V
-		ARG 1 world
-		ARG 2 x
-		ARG 3 z
-	METHOD m_rloanhly addBanner (Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 1 world
-		ARG 2 pos
-	METHOD m_sieridzw zoomOut (I)Lnet/minecraft/unmapped/C_gmgllpvn;
-		COMMENT Creates a new map state which is a zoomed out version of the current one.
-		COMMENT <p>
-		COMMENT The scale of the new map state is {@code currentScale + zoomOutScale} and clamped between {@code 0} and {@code 4}.
-		COMMENT <p>
-		COMMENT The colors are not copied, neither are the icons.
-		ARG 1 zoomOutScale
-			COMMENT the amount to add to the scale of the map
-	METHOD m_skcjbrwp update (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 player
-		ARG 2 stack
-	METHOD m_suvszdpk getPlayerSyncData (Lnet/minecraft/unmapped/C_oqcyprzj;)Lnet/minecraft/unmapped/C_gmgllpvn$C_awccqzlx;
-		ARG 1 player
-	METHOD m_tlsmzmim removeIcon (Ljava/lang/String;)V
-		ARG 1 id
-	METHOD m_vdejccez markDirty (II)V
-		ARG 1 x
-		ARG 2 z
-	METHOD m_veinjgqt of (DDBZZLnet/minecraft/unmapped/C_hcaelhhx;)Lnet/minecraft/unmapped/C_gmgllpvn;
+	METHOD m_imqeisdt of (DDBZZLnet/minecraft/unmapped/C_hcaelhhx;)Lnet/minecraft/unmapped/C_gmgllpvn;
 		COMMENT Creates a new map state instance.
 		ARG 0 centerX
 			COMMENT the absolute center X-coordinate
@@ -108,37 +57,88 @@ CLASS net/minecraft/unmapped/C_gmgllpvn net/minecraft/item/map/MapState
 		ARG 5 showIcons
 		ARG 6 unlimitedTracking
 		ARG 7 dimension
-	METHOD m_zfiiitpo copy ()Lnet/minecraft/unmapped/C_gmgllpvn;
-	METHOD m_zrmchohw getIcons ()Ljava/lang/Iterable;
-	CLASS C_awccqzlx PlayerUpdateTracker
-		FIELD f_gmroocdb startX I
-		FIELD f_gvqtpojw dirty Z
-		FIELD f_jenybewm endX I
-		FIELD f_nfisgmll endZ I
-		FIELD f_qtlghdln startZ I
-		FIELD f_spbjebov iconsDirty Z
-		FIELD f_uhjhxgzd player Lnet/minecraft/unmapped/C_oqcyprzj;
-		FIELD f_zcyyqkem emptyPacketsRequested I
-		METHOD <init> (Lnet/minecraft/unmapped/C_gmgllpvn;Lnet/minecraft/unmapped/C_oqcyprzj;)V
-			ARG 2 player
-		METHOD m_bxpevvzk markDirty (II)V
-			ARG 1 startX
-			ARG 2 startZ
-		METHOD m_smaszgey markIconsDirty ()V
-		METHOD m_uahzmkey getMapUpdateData ()Lnet/minecraft/unmapped/C_gmgllpvn$C_nobvjxvy;
-		METHOD m_wuxncwmi getPacket (I)Lnet/minecraft/unmapped/C_lrjrtjyz;
-			ARG 1 mapId
-	CLASS C_nobvjxvy UpdateData
-		FIELD f_ljahlzsf height I
-		FIELD f_nzsdxkqg colors [B
-		FIELD f_qsvhmljp startZ I
-		FIELD f_qzdeegvm width I
-		FIELD f_xsmonlpb startX I
+	METHOD m_iyvxqrmj getPlayerSyncData (Lnet/minecraft/unmapped/C_oqcyprzj;)Lnet/minecraft/unmapped/C_gmgllpvn$C_wuhctlse;
+		ARG 1 player
+	METHOD m_kcrbblyr replaceIcons (Ljava/util/List;)V
+		ARG 1 icons
+	METHOD m_lkauqmll zoomOut (I)Lnet/minecraft/unmapped/C_gmgllpvn;
+		COMMENT Creates a new map state which is a zoomed out version of the current one.
+		COMMENT <p>
+		COMMENT The scale of the new map state is {@code currentScale + zoomOutScale} and clamped between {@code 0} and {@code 4}.
+		COMMENT <p>
+		COMMENT The colors are not copied, neither are the icons.
+		ARG 1 zoomOutScale
+			COMMENT the amount to add to the scale of the map
+	METHOD m_ngiqseck markIconsDirty ()V
+	METHOD m_nhjmooai putColor (IIB)Z
+		COMMENT Sets the color at the specified coordinates if the current color is different.
+		COMMENT
+		COMMENT @return {@code true} if the color has been updated, else {@code false}
+		ARG 1 x
+		ARG 2 z
+		ARG 3 color
+	METHOD m_otgaafkk setColor (IIB)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 color
+	METHOD m_pkzursnf addIcon (Lnet/minecraft/unmapped/C_uvwbbtpl$C_gbzmuyje;Lnet/minecraft/unmapped/C_elysbvdv;Ljava/lang/String;DDDLnet/minecraft/unmapped/C_tdwiqadr;)V
+		ARG 1 type
+		ARG 2 world
+		ARG 3 key
+		ARG 4 x
+		ARG 6 z
+		ARG 8 rotation
+		ARG 10 text
+	METHOD m_pmrltzhy removeIcon (Ljava/lang/String;)V
+		ARG 1 id
+	METHOD m_qinphqce hasMonumentIcon ()Z
+	METHOD m_qqyovxdk fromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_gmgllpvn;
+		ARG 0 nbt
+	METHOD m_thbxqwvf removeBanner (Lnet/minecraft/unmapped/C_qobevaep;II)V
+		ARG 1 world
+		ARG 2 x
+		ARG 3 z
+	METHOD m_uzlqbzgb removeFrame (Lnet/minecraft/unmapped/C_kkdaznyh;I)V
+		ARG 1 pos
+		ARG 2 id
+	METHOD m_vihuqsoc copy ()Lnet/minecraft/unmapped/C_gmgllpvn;
+	METHOD m_ypuoskwa addDecorationsNbt (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/lang/String;Lnet/minecraft/unmapped/C_uvwbbtpl$C_gbzmuyje;)V
+		ARG 0 stack
+		ARG 1 pos
+		ARG 2 id
+		ARG 3 type
+	METHOD m_yvjbhudb update (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 player
+		ARG 2 stack
+	CLASS C_lfuqdulw UpdateData
+		FIELD f_fwktszbj width I
+		FIELD f_ltgiotlh startX I
+		FIELD f_nkoheunf height I
+		FIELD f_rxaejhzk colors [B
+		FIELD f_wgbbfzps startZ I
 		METHOD <init> (IIII[B)V
 			ARG 1 startX
 			ARG 2 startZ
 			ARG 3 width
 			ARG 4 height
 			ARG 5 colors
-		METHOD m_jivhilcf setColorsTo (Lnet/minecraft/unmapped/C_gmgllpvn;)V
+		METHOD m_cammcdqx setColorsTo (Lnet/minecraft/unmapped/C_gmgllpvn;)V
 			ARG 1 mapState
+	CLASS C_wuhctlse PlayerUpdateTracker
+		FIELD f_aijllkae startX I
+		FIELD f_byssbptr dirty Z
+		FIELD f_eleildjm startZ I
+		FIELD f_fqvbroct endX I
+		FIELD f_gusniucb player Lnet/minecraft/unmapped/C_oqcyprzj;
+		FIELD f_itooqjwq endZ I
+		FIELD f_nouyqstu iconsDirty Z
+		FIELD f_nzncuwof emptyPacketsRequested I
+		METHOD <init> (Lnet/minecraft/unmapped/C_gmgllpvn;Lnet/minecraft/unmapped/C_oqcyprzj;)V
+			ARG 2 player
+		METHOD m_fwmxdxqs markDirty (II)V
+			ARG 1 startX
+			ARG 2 startZ
+		METHOD m_veilhjmc markIconsDirty ()V
+		METHOD m_wxprmggt getPacket (I)Lnet/minecraft/unmapped/C_lrjrtjyz;
+			ARG 1 mapId
+		METHOD m_xohzpmfk getMapUpdateData ()Lnet/minecraft/unmapped/C_gmgllpvn$C_lfuqdulw;

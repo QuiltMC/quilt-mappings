@@ -1,59 +1,120 @@
 CLASS net/minecraft/unmapped/C_apdukrkm net/minecraft/screen/ScreenHandler
-	FIELD f_aapfhwon quickCraftSlots Ljava/util/Set;
-	FIELD f_bhbkbmjl revision I
-	FIELD f_botmkied previousTrackedStacks Lnet/minecraft/unmapped/C_eztffrnr;
-	FIELD f_cnimbylg disableSync Z
-	FIELD f_dafgogxh slots Lnet/minecraft/unmapped/C_eztffrnr;
-	FIELD f_jkkhanfz trackedPropertyValues Lit/unimi/dsi/fastutil/ints/IntList;
-	FIELD f_jwkkcbqs syncId I
-	FIELD f_maouvfsf listeners Ljava/util/List;
-	FIELD f_pdjegycn cursorStack Lnet/minecraft/unmapped/C_kywxadds;
-	FIELD f_rheszpzd EMPTY_SPACE_SLOT_INDEX I
+	FIELD f_bxakqlco previousTrackedStacks Lnet/minecraft/unmapped/C_eztffrnr;
+	FIELD f_djinzvwa type Lnet/minecraft/unmapped/C_xeuqkfyn;
+	FIELD f_djwqgbav revision I
+	FIELD f_eohdpvnn listeners Ljava/util/List;
+	FIELD f_gvwoxjtp quickCraftStage I
+	FIELD f_nlmbdzhk syncId I
+	FIELD f_phzuhbax trackedStacks Lnet/minecraft/unmapped/C_eztffrnr;
+		COMMENT A list of item stacks that is used for tracking changes in {@link #sendContentUpdates()}.
+	FIELD f_qizplcrd quickCraftButton I
+	FIELD f_tdebtzjf cursorStack Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_tkczhidp previousCursorStack Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_tqzpumst slots Lnet/minecraft/unmapped/C_eztffrnr;
+	FIELD f_vvtrqbig trackedPropertyValues Lit/unimi/dsi/fastutil/ints/IntList;
+	FIELD f_xhdgzxem disableSync Z
+	FIELD f_xlbtqhte EMPTY_SPACE_SLOT_INDEX I
 		COMMENT A special slot index value ({@value}) indicating that the player has clicked outside the main panel
 		COMMENT of a screen. Used for dropping the cursor stack.
-	FIELD f_sfwocmfv quickCraftStage I
-	FIELD f_thaqpntu quickCraftButton I
-	FIELD f_vvmzlrhv trackedStacks Lnet/minecraft/unmapped/C_eztffrnr;
-		COMMENT A list of item stacks that is used for tracking changes in {@link #sendContentUpdates()}.
-	FIELD f_vxbmfbve type Lnet/minecraft/unmapped/C_xeuqkfyn;
-	FIELD f_xkdgilif syncHandler Lnet/minecraft/unmapped/C_mwvdgocc;
-	FIELD f_xnxbesho properties Ljava/util/List;
-	FIELD f_xqxnzduq previousCursorStack Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_ynaecmqs quickCraftSlots Ljava/util/Set;
+	FIELD f_zuhbzvff properties Ljava/util/List;
+	FIELD f_zyijbeun syncHandler Lnet/minecraft/unmapped/C_mwvdgocc;
 	METHOD <init> (Lnet/minecraft/unmapped/C_xeuqkfyn;I)V
 		ARG 1 type
 		ARG 2 syncId
-	METHOD m_bozewjvb updateSlotStacks (ILjava/util/List;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 revision
-		ARG 2 stacks
-		ARG 3 cursorStack
-	METHOD m_clyzzxtj removeListener (Lnet/minecraft/unmapped/C_fbcnuruj;)V
-		ARG 1 listener
-	METHOD m_ctiittwt canUse (Lnet/minecraft/unmapped/C_ahjcfmsg;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_qodpmxmm;)Z
-		ARG 0 context
-		ARG 1 player
-		ARG 2 block
-	METHOD m_cxaaxkbv checkSlotUpdates (ILnet/minecraft/unmapped/C_kywxadds;Ljava/util/function/Supplier;)V
+	METHOD m_aldoaatl onSlotClick (IILnet/minecraft/unmapped/C_evueruiv;Lnet/minecraft/unmapped/C_oqcyprzj;)V
+		COMMENT Performs a slot click. This can behave in many different ways depending mainly on the action type.
+		ARG 1 slotIndex
+		ARG 2 button
+		ARG 3 actionType
+			COMMENT the type of slot click, check the docs for each {@link SlotActionType} value for details
+		ARG 4 player
+	METHOD m_bcrioniu checkPropertyUpdates (II)V
+		ARG 1 id
+		ARG 2 value
+	METHOD m_bdcwqmdq updateTrackedSlot (ILnet/minecraft/unmapped/C_kywxadds;Ljava/util/function/Supplier;)V
 		ARG 1 slot
 		ARG 2 stack
 		ARG 3 copySupplier
-	METHOD m_dgjxcgjn getCursorStackReference ()Lnet/minecraft/unmapped/C_kvynpkkx;
-	METHOD m_fsrxljpx packQuickCraftData (II)I
+	METHOD m_berwnark setPreviousTrackedSlot (ILnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 slot
+		ARG 2 stack
+	METHOD m_bixjmuja canInsertItemIntoSlot (Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_kywxadds;Z)Z
+		ARG 0 slot
+		ARG 1 stack
+		ARG 2 allowOverflow
+	METHOD m_brwzmkpy calculateComparatorOutput (Lnet/minecraft/unmapped/C_hmfagevk;)I
+		ARG 0 entity
+	METHOD m_bsmeqgrz packQuickCraftData (II)I
 		ARG 0 quickCraftStage
 		ARG 1 buttonId
-	METHOD m_gzqqasom canUse (Lnet/minecraft/unmapped/C_oqcyprzj;)Z
-		ARG 1 player
-	METHOD m_iawjtbji checkCursorStackUpdates ()V
-	METHOD m_idnztyti calculateComparatorOutput (Lnet/minecraft/unmapped/C_qojtstjp;)I
-		ARG 0 inventory
-	METHOD m_ihjsvyac getSlotIndex (Lnet/minecraft/unmapped/C_qojtstjp;I)Ljava/util/OptionalInt;
+	METHOD m_btskmugp addSlot (Lnet/minecraft/unmapped/C_dfffqvhn;)Lnet/minecraft/unmapped/C_dfffqvhn;
+		ARG 1 slot
+	METHOD m_cdferals getSlotIndex (Lnet/minecraft/unmapped/C_qojtstjp;I)Ljava/util/OptionalInt;
 		ARG 1 inventory
 		ARG 2 index
-	METHOD m_jdpqjole updateToClient ()V
-	METHOD m_jnjgrbtb unpackQuickCraftButton (I)I
+	METHOD m_cvhddngs getCursorStack ()Lnet/minecraft/unmapped/C_kywxadds;
+	METHOD m_doceeqqq sendContentUpdates ()V
+		COMMENT Sends updates to listeners if any properties or slot stacks have changed.
+	METHOD m_dqdgcwfi getRevision ()I
+	METHOD m_efjwsdsq transferSlot (Lnet/minecraft/unmapped/C_oqcyprzj;I)Lnet/minecraft/unmapped/C_kywxadds;
+		ARG 1 player
+		ARG 2 index
+	METHOD m_etehxewm getStacks ()Lnet/minecraft/unmapped/C_eztffrnr;
+	METHOD m_fcxvzdsd addProperties (Lnet/minecraft/unmapped/C_vuhyswwf;)V
+		ARG 1 propertyDelegate
+	METHOD m_fukryidj nextRevision ()I
+	METHOD m_hesifgal canInsertIntoSlot (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;)Z
+		ARG 1 stack
+		ARG 2 slot
+	METHOD m_hlvjzcxr checkSize (Lnet/minecraft/unmapped/C_qojtstjp;I)V
+		COMMENT Checks that the size of the provided inventory is at least as large as the {@code expectedSize}.
+		COMMENT
+		COMMENT @throws IllegalArgumentException if the inventory size is smaller than {@code expectedSize}
+		ARG 0 inventory
+		ARG 1 expectedSize
+	METHOD m_iejnvfdx canUse (Lnet/minecraft/unmapped/C_ahjcfmsg;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_qodpmxmm;)Z
+		ARG 0 context
+		ARG 1 player
+		ARG 2 block
+	METHOD m_iejnvfdx canUse (Lnet/minecraft/unmapped/C_oqcyprzj;)Z
+		ARG 1 player
+	METHOD m_ijhjflur getType ()Lnet/minecraft/unmapped/C_xeuqkfyn;
+	METHOD m_iovvfaap setProperty (II)V
+		ARG 1 id
+		ARG 2 value
+	METHOD m_iwmqqwmp unpackQuickCraftStage (I)I
 		ARG 0 quickCraftData
-	METHOD m_ldtikcnn addSlot (Lnet/minecraft/unmapped/C_dfffqvhn;)Lnet/minecraft/unmapped/C_dfffqvhn;
+	METHOD m_jfbfosyr checkDataCount (Lnet/minecraft/unmapped/C_vuhyswwf;I)V
+		COMMENT Checks that the size of the {@code data} is at least as large as the {@code expectedCount}.
+		COMMENT
+		COMMENT @throws IllegalArgumentException if the {@code data} has a smaller size than {@code expectedCount}
+		ARG 0 data
+		ARG 1 expectedCount
+	METHOD m_jywwyszq (Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 3 stack
+	METHOD m_kwjusylp endQuickCraft ()V
+	METHOD m_llnmhilr getCursorStackReference ()Lnet/minecraft/unmapped/C_kvynpkkx;
+	METHOD m_mjeepfdf checkSlotUpdates (ILnet/minecraft/unmapped/C_kywxadds;Ljava/util/function/Supplier;)V
 		ARG 1 slot
-	METHOD m_lfzpgfqn internalOnSlotClick (IILnet/minecraft/unmapped/C_evueruiv;Lnet/minecraft/unmapped/C_oqcyprzj;)V
+		ARG 2 stack
+		ARG 3 copySupplier
+	METHOD m_mnmhamhq onButtonClick (Lnet/minecraft/unmapped/C_oqcyprzj;I)Z
+		ARG 1 player
+		ARG 2 id
+	METHOD m_mwcfeltp calculateStackSize (Ljava/util/Set;ILnet/minecraft/unmapped/C_kywxadds;I)V
+		ARG 0 slots
+		ARG 1 mode
+		ARG 2 stack
+		ARG 3 stackSize
+	METHOD m_nzeoltlh unpackQuickCraftButton (I)I
+		ARG 0 quickCraftData
+	METHOD m_oxonlzlo getSlot (I)Lnet/minecraft/unmapped/C_dfffqvhn;
+		ARG 1 index
+	METHOD m_oyhzizje dropInventory (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_qojtstjp;)V
+		ARG 1 player
+		ARG 2 inventory
+	METHOD m_piubkycw internalOnSlotClick (IILnet/minecraft/unmapped/C_evueruiv;Lnet/minecraft/unmapped/C_oqcyprzj;)V
 		COMMENT The actual logic that handles a slot click. Called by {@link #onSlotClick
 		COMMENT (int, int, SlotActionType, PlayerEntity)} in a try-catch block that wraps
 		COMMENT exceptions from this method into a crash report.
@@ -61,118 +122,57 @@ CLASS net/minecraft/unmapped/C_apdukrkm net/minecraft/screen/ScreenHandler
 		ARG 2 button
 		ARG 3 actionType
 		ARG 4 player
-	METHOD m_lodhrpdg onSlotClick (IILnet/minecraft/unmapped/C_evueruiv;Lnet/minecraft/unmapped/C_oqcyprzj;)V
-		COMMENT Performs a slot click. This can behave in many different ways depending mainly on the action type.
-		ARG 1 slotIndex
-		ARG 2 button
-		ARG 3 actionType
-			COMMENT the type of slot click, check the docs for each {@link SlotActionType} value for details
-		ARG 4 player
-	METHOD m_lrvgdpjm updateTrackedSlot (ILnet/minecraft/unmapped/C_kywxadds;Ljava/util/function/Supplier;)V
-		ARG 1 slot
-		ARG 2 stack
-		ARG 3 copySupplier
-	METHOD m_madahfof setProperty (II)V
-		ARG 1 id
-		ARG 2 value
-	METHOD m_mbducazm syncState ()V
-	METHOD m_mjyyebge setStackInSlot (IILnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 slot
-		ARG 2 revision
-		ARG 3 stack
-	METHOD m_mnhgvxny close (Lnet/minecraft/unmapped/C_oqcyprzj;)V
-		ARG 1 player
-	METHOD m_nbehzudy addProperty (Lnet/minecraft/unmapped/C_sdnukbzx;)Lnet/minecraft/unmapped/C_sdnukbzx;
-		ARG 1 property
-	METHOD m_nibcsvxm transferSlot (Lnet/minecraft/unmapped/C_oqcyprzj;I)Lnet/minecraft/unmapped/C_kywxadds;
-		ARG 1 player
-		ARG 2 index
-	METHOD m_nwdqrcux checkPropertyUpdates (II)V
-		ARG 1 id
-		ARG 2 value
-	METHOD m_okrdjmke getSlot (I)Lnet/minecraft/unmapped/C_dfffqvhn;
-		ARG 1 index
-	METHOD m_ontyahkb onContentChanged (Lnet/minecraft/unmapped/C_qojtstjp;)V
-		ARG 1 inventory
-	METHOD m_ovgzehvw onButtonClick (Lnet/minecraft/unmapped/C_oqcyprzj;I)Z
-		ARG 1 player
-		ARG 2 id
-	METHOD m_owqewfmu getType ()Lnet/minecraft/unmapped/C_xeuqkfyn;
-	METHOD m_ozjlzyir sendContentUpdates ()V
-		COMMENT Sends updates to listeners if any properties or slot stacks have changed.
-	METHOD m_poiwucpn getRevision ()I
-	METHOD m_qmjmkmcx setCursorStack (Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 stack
-	METHOD m_qrijvghr setPreviousTrackedSlot (ILnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 slot
-		ARG 2 stack
-	METHOD m_rlfxkvtu nextRevision ()I
-	METHOD m_sfjumtpw checkSize (Lnet/minecraft/unmapped/C_qojtstjp;I)V
-		COMMENT Checks that the size of the provided inventory is at least as large as the {@code expectedSize}.
-		COMMENT
-		COMMENT @throws IllegalArgumentException if the inventory size is smaller than {@code expectedSize}
-		ARG 0 inventory
-		ARG 1 expectedSize
-	METHOD m_sjrtcqwl addListener (Lnet/minecraft/unmapped/C_fbcnuruj;)V
-		ARG 1 listener
-	METHOD m_sqlempoj (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 3 stack
-	METHOD m_svtdnxml canInsertIntoSlot (Lnet/minecraft/unmapped/C_dfffqvhn;)Z
-		ARG 1 slot
-	METHOD m_tiuwmgwh getCursorStack ()Lnet/minecraft/unmapped/C_kywxadds;
-	METHOD m_tjsoscbx notifyPropertyUpdate (II)V
-		ARG 1 index
-		ARG 2 value
-	METHOD m_tyymncps setPreviousCursorStack (Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 stack
-	METHOD m_uequlxmj dropInventory (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_qojtstjp;)V
-		ARG 1 player
-		ARG 2 inventory
-	METHOD m_ufsxgdig calculateComparatorOutput (Lnet/minecraft/unmapped/C_hmfagevk;)I
-		ARG 0 entity
-	METHOD m_uylxewup (Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 3 stack
-	METHOD m_vigctpae getStacks ()Lnet/minecraft/unmapped/C_eztffrnr;
-	METHOD m_vmrkqkwo copySharedSlots (Lnet/minecraft/unmapped/C_apdukrkm;)V
+	METHOD m_pkauvvrt copySharedSlots (Lnet/minecraft/unmapped/C_apdukrkm;)V
 		ARG 1 handler
-	METHOD m_waqvkvyf setPreviousTrackedSlotMutable (ILnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 slot
-		ARG 2 stack
-	METHOD m_wcjtowzi updateSyncHandler (Lnet/minecraft/unmapped/C_mwvdgocc;)V
-		ARG 1 handler
-	METHOD m_wejqkxel canInsertItemIntoSlot (Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_kywxadds;Z)Z
-		ARG 0 slot
-		ARG 1 stack
-		ARG 2 allowOverflow
-	METHOD m_wetovbqf endQuickCraft ()V
-	METHOD m_wipvpawd unpackQuickCraftStage (I)I
-		ARG 0 quickCraftData
-	METHOD m_yjrfnfcr checkDataCount (Lnet/minecraft/unmapped/C_vuhyswwf;I)V
-		COMMENT Checks that the size of the {@code data} is at least as large as the {@code expectedCount}.
-		COMMENT
-		COMMENT @throws IllegalArgumentException if the {@code data} has a smaller size than {@code expectedCount}
-		ARG 0 data
-		ARG 1 expectedCount
-	METHOD m_yucjnuor shouldQuickCraftContinue (ILnet/minecraft/unmapped/C_oqcyprzj;)Z
-		ARG 0 stage
-		ARG 1 player
-	METHOD m_ywxfnyle canInsertIntoSlot (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;)Z
-		ARG 1 stack
-		ARG 2 slot
-	METHOD m_yxbgdjpj insertItem (Lnet/minecraft/unmapped/C_kywxadds;IIZ)Z
+	METHOD m_qenbroyd insertItem (Lnet/minecraft/unmapped/C_kywxadds;IIZ)Z
 		ARG 1 stack
 		ARG 2 startIndex
 		ARG 3 endIndex
 		ARG 4 fromLast
-	METHOD m_zlmssejx calculateStackSize (Ljava/util/Set;ILnet/minecraft/unmapped/C_kywxadds;I)V
-		ARG 0 slots
-		ARG 1 mode
-		ARG 2 stack
-		ARG 3 stackSize
-	METHOD m_zujvdkkn disableSyncing ()V
-	METHOD m_zuzudxkg enableSyncing ()V
-	METHOD m_zwvfrvxv (Lnet/minecraft/unmapped/C_qodpmxmm;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/lang/Boolean;
+	METHOD m_qhavxuqu canInsertIntoSlot (Lnet/minecraft/unmapped/C_dfffqvhn;)Z
+		ARG 1 slot
+	METHOD m_qmzpsdlc enableSyncing ()V
+	METHOD m_rjtboalo updateSyncHandler (Lnet/minecraft/unmapped/C_mwvdgocc;)V
+		ARG 1 handler
+	METHOD m_rmmbmkpe shouldQuickCraftContinue (ILnet/minecraft/unmapped/C_oqcyprzj;)Z
+		ARG 0 stage
+		ARG 1 player
+	METHOD m_rzenqvdw removeListener (Lnet/minecraft/unmapped/C_fbcnuruj;)V
+		ARG 1 listener
+	METHOD m_sckhvvrn (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 3 stack
+	METHOD m_tdfxlmgs updateSlotStacks (ILjava/util/List;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 revision
+		ARG 2 stacks
+		ARG 3 cursorStack
+	METHOD m_tfivelje calculateComparatorOutput (Lnet/minecraft/unmapped/C_qojtstjp;)I
+		ARG 0 inventory
+	METHOD m_ttenhfin addListener (Lnet/minecraft/unmapped/C_fbcnuruj;)V
+		ARG 1 listener
+	METHOD m_ujupqkjf (Lnet/minecraft/unmapped/C_qodpmxmm;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/lang/Boolean;
 		ARG 2 world
 		ARG 3 pos
-	METHOD m_zxxdujat addProperties (Lnet/minecraft/unmapped/C_vuhyswwf;)V
-		ARG 1 propertyDelegate
+	METHOD m_usiyjcxw setPreviousTrackedSlotMutable (ILnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 slot
+		ARG 2 stack
+	METHOD m_whfldakm close (Lnet/minecraft/unmapped/C_oqcyprzj;)V
+		ARG 1 player
+	METHOD m_wyietnrh setPreviousCursorStack (Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 stack
+	METHOD m_xhdgzxem disableSyncing ()V
+	METHOD m_xybfgmnn syncState ()V
+	METHOD m_yabswvvl onContentChanged (Lnet/minecraft/unmapped/C_qojtstjp;)V
+		ARG 1 inventory
+	METHOD m_yitijwak addProperty (Lnet/minecraft/unmapped/C_sdnukbzx;)Lnet/minecraft/unmapped/C_sdnukbzx;
+		ARG 1 property
+	METHOD m_ykwwqbxv setCursorStack (Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 stack
+	METHOD m_ynhleuxy checkCursorStackUpdates ()V
+	METHOD m_yosianpl notifyPropertyUpdate (II)V
+		ARG 1 index
+		ARG 2 value
+	METHOD m_zpzldtov setStackInSlot (IILnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 slot
+		ARG 2 revision
+		ARG 3 stack
+	METHOD m_zvpjfdbh updateToClient ()V

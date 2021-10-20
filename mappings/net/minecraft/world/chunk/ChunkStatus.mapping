@@ -1,19 +1,19 @@
 CLASS net/minecraft/unmapped/C_tzhztgok net/minecraft/world/chunk/ChunkStatus
-	FIELD f_agwxbzwm index I
-	FIELD f_bbimekpi taskMargin I
-	FIELD f_egcurhao DISTANCE_TO_STATUS Ljava/util/List;
-	FIELD f_hbtswetc previous Lnet/minecraft/unmapped/C_tzhztgok;
-	FIELD f_jfoaljop heightMapTypes Ljava/util/EnumSet;
-	FIELD f_jxmnsbuj chunkType Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;
-	FIELD f_lujnblgj generationTask Lnet/minecraft/unmapped/C_tzhztgok$C_qbrqtarw;
-	FIELD f_mgytlxdy loadTask Lnet/minecraft/unmapped/C_tzhztgok$C_mjxkndls;
-	FIELD f_oyssuuav PRE_CARVER_HEIGHTMAPS Ljava/util/EnumSet;
-	FIELD f_qfdmnzpx id Ljava/lang/String;
-	FIELD f_vxpbawqh STATUS_BUMP_LOAD_TASK Lnet/minecraft/unmapped/C_tzhztgok$C_mjxkndls;
+	FIELD f_ahqqftdz index I
+	FIELD f_cecrawvt STATUS_TO_DISTANCE Lit/unimi/dsi/fastutil/ints/IntList;
+	FIELD f_damudnvr STATUS_BUMP_LOAD_TASK Lnet/minecraft/unmapped/C_tzhztgok$C_htzpftuq;
 		COMMENT A load task which only bumps the chunk status of the chunk.
-	FIELD f_xdogfqlu STATUS_TO_DISTANCE Lit/unimi/dsi/fastutil/ints/IntList;
-	FIELD f_zpuoocvy POST_CARVER_HEIGHTMAPS Ljava/util/EnumSet;
-	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;Lnet/minecraft/unmapped/C_tzhztgok$C_qbrqtarw;Lnet/minecraft/unmapped/C_tzhztgok$C_mjxkndls;)V
+	FIELD f_dgilbqga taskMargin I
+	FIELD f_dmztxhxj loadTask Lnet/minecraft/unmapped/C_tzhztgok$C_htzpftuq;
+	FIELD f_dngydshf POST_CARVER_HEIGHTMAPS Ljava/util/EnumSet;
+	FIELD f_fpukzjta chunkType Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;
+	FIELD f_jrpadsgy id Ljava/lang/String;
+	FIELD f_ksbekvmk previous Lnet/minecraft/unmapped/C_tzhztgok;
+	FIELD f_viayfwql PRE_CARVER_HEIGHTMAPS Ljava/util/EnumSet;
+	FIELD f_vroteeze generationTask Lnet/minecraft/unmapped/C_tzhztgok$C_frtewcne;
+	FIELD f_ylfutsgc heightMapTypes Ljava/util/EnumSet;
+	FIELD f_zzsipooy DISTANCE_TO_STATUS Ljava/util/List;
+	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;Lnet/minecraft/unmapped/C_tzhztgok$C_frtewcne;Lnet/minecraft/unmapped/C_tzhztgok$C_htzpftuq;)V
 		ARG 1 id
 		ARG 2 previous
 		ARG 3 taskMargin
@@ -21,51 +21,37 @@ CLASS net/minecraft/unmapped/C_tzhztgok net/minecraft/world/chunk/ChunkStatus
 		ARG 5 chunkType
 		ARG 6 generationTask
 		ARG 7 loadTask
-	METHOD m_apypincg getHeightmapTypes ()Ljava/util/EnumSet;
-	METHOD m_atxzfdnu register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;Lnet/minecraft/unmapped/C_tzhztgok$C_qbrqtarw;)Lnet/minecraft/unmapped/C_tzhztgok;
-		ARG 0 id
-		ARG 1 previous
-		ARG 2 taskMargin
-		ARG 3 heightMapTypes
-		ARG 4 chunkType
-		ARG 5 task
-	METHOD m_awgbozqd byDistanceFromFull (I)Lnet/minecraft/unmapped/C_tzhztgok;
-		ARG 0 level
-	METHOD m_cliorpns runLoadTask (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 targetStatus
 		ARG 1 world
 		ARG 2 structureManager
 		ARG 3 lightingProvider
 		ARG 5 chunk
-	METHOD m_cpitdstu register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;Lnet/minecraft/unmapped/C_tzhztgok$C_zkfjespw;)Lnet/minecraft/unmapped/C_tzhztgok;
+	METHOD m_apbdwrik getPrevious ()Lnet/minecraft/unmapped/C_tzhztgok;
+	METHOD m_bjrjrugm shouldExcludeBlockLight (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
+		ARG 0 status
+		ARG 1 chunk
+	METHOD m_bkydvpyz getLightingFuture (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_cyzhdzdb;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 status
+		ARG 1 lightingProvider
+		ARG 2 chunk
+	METHOD m_cfqeopio getIndex ()I
+	METHOD m_dlksntey (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 targetStatus
+		ARG 2 world
+	METHOD m_eakdwghn byDistanceFromFull (I)Lnet/minecraft/unmapped/C_tzhztgok;
+		ARG 0 level
+	METHOD m_gaovskgz getChunkType ()Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;
+	METHOD m_gvlwjsjf getId ()Ljava/lang/String;
+	METHOD m_hhigeodd createOrderedList ()Ljava/util/List;
+	METHOD m_iefnzsxq register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;Lnet/minecraft/unmapped/C_tzhztgok$C_frtewcne;)Lnet/minecraft/unmapped/C_tzhztgok;
 		ARG 0 id
 		ARG 1 previous
 		ARG 2 taskMargin
 		ARG 3 heightMapTypes
 		ARG 4 chunkType
 		ARG 5 task
-	METHOD m_cwfddcrt getIndex ()I
-	METHOD m_extrhbhg getChunkType ()Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;
-	METHOD m_fftcfbel (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
-		ARG 0 targetStatus
-	METHOD m_fltelqin getTaskMargin ()I
-	METHOD m_fokxwfqw getLightingFuture (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_cyzhdzdb;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
-		ARG 0 status
-		ARG 1 lightingProvider
-		ARG 2 chunk
-	METHOD m_fvthbvhq (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
-		ARG 0 status
-		ARG 2 world
-		ARG 4 structureManager
-		ARG 5 lightingProvider
-		ARG 8 chunk
-	METHOD m_fwkrhirb getId ()Ljava/lang/String;
-	METHOD m_gkraxdmt (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
-		ARG 0 targetStatus
-	METHOD m_hbvckttd (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_rqmmmzwl;)Lcom/mojang/datafixers/util/Either;
-	METHOD m_imriuktu getMaxDistanceFromFull ()I
-	METHOD m_kiwpmxbh byId (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tzhztgok;
-		ARG 0 id
-	METHOD m_kslcenns register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;Lnet/minecraft/unmapped/C_tzhztgok$C_qbrqtarw;Lnet/minecraft/unmapped/C_tzhztgok$C_mjxkndls;)Lnet/minecraft/unmapped/C_tzhztgok;
+	METHOD m_iefnzsxq register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;Lnet/minecraft/unmapped/C_tzhztgok$C_frtewcne;Lnet/minecraft/unmapped/C_tzhztgok$C_htzpftuq;)Lnet/minecraft/unmapped/C_tzhztgok;
 		ARG 0 id
 		ARG 1 previous
 		ARG 2 taskMargin
@@ -73,46 +59,56 @@ CLASS net/minecraft/unmapped/C_tzhztgok net/minecraft/world/chunk/ChunkStatus
 		ARG 4 chunkType
 		ARG 5 task
 		ARG 6 loadTask
-	METHOD m_lvmipinv getDistanceFromFull (Lnet/minecraft/unmapped/C_tzhztgok;)I
+	METHOD m_iuwmyxwq (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_rqmmmzwl;)Lcom/mojang/datafixers/util/Either;
+	METHOD m_jjzgthep (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
 		ARG 0 status
-	METHOD m_myfhbvpc createOrderedList ()Ljava/util/List;
-	METHOD m_pjobwffd (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
-		ARG 0 targetStatus
+	METHOD m_jqhtzbbb getTaskMargin ()I
+	METHOD m_pcinmrve (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 status
 		ARG 2 world
-	METHOD m_rnrhmkfj (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
+		ARG 4 structureManager
+		ARG 5 lightingProvider
+		ARG 8 chunk
+	METHOD m_qqyovxdk runLoadTask (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 world
+		ARG 2 structureManager
+		ARG 3 lightingProvider
+		ARG 5 chunk
+	METHOD m_srrvpwxs getMaxDistanceFromFull ()I
+	METHOD m_tmonqgvs runGenerationTask (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 2 world
+		ARG 4 structureManager
+		ARG 5 lightingProvider
+	METHOD m_ueclnixe (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 targetStatus
+	METHOD m_upelhdnf byId (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tzhztgok;
+		ARG 0 id
+	METHOD m_vdssogkr register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tzhztgok;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;Lnet/minecraft/unmapped/C_tzhztgok$C_yqfpykfe;)Lnet/minecraft/unmapped/C_tzhztgok;
+		ARG 0 id
+		ARG 1 previous
+		ARG 2 taskMargin
+		ARG 3 heightMapTypes
+		ARG 4 chunkType
+		ARG 5 task
+	METHOD m_wcvjhapo getDistanceFromFull (Lnet/minecraft/unmapped/C_tzhztgok;)I
 		ARG 0 status
-	METHOD m_syrjijpm shouldExcludeBlockLight (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
-		ARG 0 status
+	METHOD m_woxyecxp (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
+		ARG 0 targetStatus
+	METHOD m_ylfutsgc getHeightmapTypes ()Ljava/util/EnumSet;
+	METHOD m_zlxkuqcv isAtLeast (Lnet/minecraft/unmapped/C_tzhztgok;)Z
 		ARG 1 chunk
-	METHOD m_tbnncdzn (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_zmzmdxko (Lnet/minecraft/unmapped/C_tzhztgok;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 status
 		ARG 2 world
 		ARG 4 structureManager
 		ARG 5 lightingProvider
 		ARG 6 convertCallback
 		ARG 8 chunk
-	METHOD m_ucqxttky isAtLeast (Lnet/minecraft/unmapped/C_tzhztgok;)Z
-		ARG 1 chunk
-	METHOD m_utfgvfyc (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
-		ARG 0 targetStatus
-		ARG 1 world
-		ARG 2 structureManager
-		ARG 3 lightingProvider
-		ARG 5 chunk
-	METHOD m_xpmxlgfl getPrevious ()Lnet/minecraft/unmapped/C_tzhztgok;
-	METHOD m_yxcmmtro runGenerationTask (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Ljava/util/List;Z)Ljava/util/concurrent/CompletableFuture;
-		ARG 2 world
-		ARG 4 structureManager
-		ARG 5 lightingProvider
-	CLASS C_gebkffcl ChunkType
-		COMMENT Specifies the type of a chunk
-		FIELD f_jsenmdtr PROTOCHUNK Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;
-			COMMENT A chunk which is incomplete and not loaded to the world yet.
-		FIELD f_mngerszq LEVELCHUNK Lnet/minecraft/unmapped/C_tzhztgok$C_gebkffcl;
-			COMMENT A chunk which is complete and bound to a world.
-	CLASS C_mjxkndls LoadTask
+	CLASS C_frtewcne GenerationTask
+		COMMENT A task called when a chunk needs to be generated.
+	CLASS C_htzpftuq LoadTask
 		COMMENT A task called when a chunk is loaded but does not need to be generated.
-		METHOD m_vaxupivh doWork (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
+		METHOD doWork doWork (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_cyzhdzdb;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
 			ARG 1 targetStatus
 			ARG 2 world
 			ARG 3 structureManager
@@ -120,9 +116,13 @@ CLASS net/minecraft/unmapped/C_tzhztgok net/minecraft/world/chunk/ChunkStatus
 			ARG 5 convertCallback
 				COMMENT will be invoked by statuses which have some special convert logic (e.g. the FULL status to convert the chunk to a full chunk)
 			ARG 6 chunk
-	CLASS C_qbrqtarw GenerationTask
-		COMMENT A task called when a chunk needs to be generated.
-	CLASS C_zkfjespw SimpleGenerationTask
-		METHOD m_sloqzind doWork (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
+	CLASS C_ndzftste ChunkType
+		COMMENT Specifies the type of a chunk
+		FIELD f_oxgiffrt PROTOCHUNK Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;
+			COMMENT A chunk which is incomplete and not loaded to the world yet.
+		FIELD f_uxtjuzrv LEVELCHUNK Lnet/minecraft/unmapped/C_tzhztgok$C_ndzftste;
+			COMMENT A chunk which is complete and bound to a world.
+	CLASS C_yqfpykfe SimpleGenerationTask
+		METHOD doWork doWork (Lnet/minecraft/unmapped/C_tzhztgok;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_miblafgk;Ljava/util/List;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
 			ARG 1 targetStatus
 			ARG 2 world

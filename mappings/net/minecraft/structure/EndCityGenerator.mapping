@@ -1,12 +1,25 @@
 CLASS net/minecraft/unmapped/C_ujcaxbhj net/minecraft/structure/EndCityGenerator
-	FIELD f_ccsshlht FAT_TOWER_BRIDGE_ATTACHMENTS Ljava/util/List;
-	FIELD f_ocywtkno BRIDGE_PIECE Lnet/minecraft/unmapped/C_ujcaxbhj$C_elnhyall;
-	FIELD f_peoutuzb BUILDING Lnet/minecraft/unmapped/C_ujcaxbhj$C_elnhyall;
-	FIELD f_qvnotrky FAT_TOWER Lnet/minecraft/unmapped/C_ujcaxbhj$C_elnhyall;
-	FIELD f_uqqsmmig MAX_DEPTH I
-	FIELD f_vwaoliae SMALL_TOWER_BRIDGE_ATTACHMENTS Ljava/util/List;
-	FIELD f_yuhjjufe SMALL_TOWER Lnet/minecraft/unmapped/C_ujcaxbhj$C_elnhyall;
-	METHOD m_iyiuxsoj createPart (Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_ujcaxbhj$C_elnhyall;ILnet/minecraft/unmapped/C_ujcaxbhj$C_nppzjygv;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;Ljava/util/Random;)Z
+	FIELD f_biivkxwi BUILDING Lnet/minecraft/unmapped/C_ujcaxbhj$C_kxslacam;
+	FIELD f_bjfdlhdv FAT_TOWER Lnet/minecraft/unmapped/C_ujcaxbhj$C_kxslacam;
+	FIELD f_glkwteei SMALL_TOWER Lnet/minecraft/unmapped/C_ujcaxbhj$C_kxslacam;
+	FIELD f_isazjkrn MAX_DEPTH I
+	FIELD f_jvlevaxz SMALL_TOWER_BRIDGE_ATTACHMENTS Ljava/util/List;
+	FIELD f_lbobjpzu BRIDGE_PIECE Lnet/minecraft/unmapped/C_ujcaxbhj$C_kxslacam;
+	FIELD f_vyhznuyn FAT_TOWER_BRIDGE_ATTACHMENTS Ljava/util/List;
+	METHOD m_jlisqltq addPieces (Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_krilgobm;Ljava/util/List;Ljava/util/Random;)V
+		ARG 0 structureManager
+		ARG 1 pos
+		ARG 2 rotation
+		ARG 3 pieces
+		ARG 4 random
+	METHOD m_lndqgfkf createPiece (Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_ujcaxbhj$C_bgonghjx;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/lang/String;Lnet/minecraft/unmapped/C_krilgobm;Z)Lnet/minecraft/unmapped/C_ujcaxbhj$C_bgonghjx;
+		ARG 0 structureManager
+		ARG 1 lastPiece
+		ARG 2 relativePosition
+		ARG 3 template
+		ARG 4 rotation
+		ARG 5 ignoreAir
+	METHOD m_viuuexkx createPart (Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_ujcaxbhj$C_kxslacam;ILnet/minecraft/unmapped/C_ujcaxbhj$C_bgonghjx;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;Ljava/util/Random;)Z
 		ARG 0 manager
 		ARG 1 piece
 		ARG 2 depth
@@ -14,32 +27,10 @@ CLASS net/minecraft/unmapped/C_ujcaxbhj net/minecraft/structure/EndCityGenerator
 		ARG 4 pos
 		ARG 5 pieces
 		ARG 6 random
-	METHOD m_spnltxfe addPiece (Ljava/util/List;Lnet/minecraft/unmapped/C_ujcaxbhj$C_nppzjygv;)Lnet/minecraft/unmapped/C_ujcaxbhj$C_nppzjygv;
+	METHOD m_zkargqbv addPiece (Ljava/util/List;Lnet/minecraft/unmapped/C_ujcaxbhj$C_bgonghjx;)Lnet/minecraft/unmapped/C_ujcaxbhj$C_bgonghjx;
 		ARG 0 pieces
 		ARG 1 piece
-	METHOD m_yrtxvfax addPieces (Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_krilgobm;Ljava/util/List;Ljava/util/Random;)V
-		ARG 0 structureManager
-		ARG 1 pos
-		ARG 2 rotation
-		ARG 3 pieces
-		ARG 4 random
-	METHOD m_zdaofwss createPiece (Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_ujcaxbhj$C_nppzjygv;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/lang/String;Lnet/minecraft/unmapped/C_krilgobm;Z)Lnet/minecraft/unmapped/C_ujcaxbhj$C_nppzjygv;
-		ARG 0 structureManager
-		ARG 1 lastPiece
-		ARG 2 relativePosition
-		ARG 3 template
-		ARG 4 rotation
-		ARG 5 ignoreAir
-	CLASS C_elnhyall Part
-		METHOD m_dquozxxa create (Lnet/minecraft/unmapped/C_wviludhr;ILnet/minecraft/unmapped/C_ujcaxbhj$C_nppzjygv;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;Ljava/util/Random;)Z
-			ARG 1 manager
-			ARG 2 depth
-			ARG 3 root
-			ARG 4 pos
-			ARG 5 pieces
-			ARG 6 random
-		METHOD m_oyeyjlat init ()V
-	CLASS C_nppzjygv Piece
+	CLASS C_bgonghjx Piece
 		METHOD <init> (Lnet/minecraft/unmapped/C_wviludhr;Ljava/lang/String;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_krilgobm;Z)V
 			ARG 1 manager
 			ARG 2 template
@@ -49,12 +40,21 @@ CLASS net/minecraft/unmapped/C_ujcaxbhj net/minecraft/structure/EndCityGenerator
 		METHOD <init> (Lnet/minecraft/unmapped/C_wviludhr;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 structureManager
 			ARG 2 nbt
-		METHOD m_mdnmuosi getId (Ljava/lang/String;)Lnet/minecraft/unmapped/C_acfwypcn;
-			ARG 0 template
-		METHOD m_nkhpckzy createPlacementData (ZLnet/minecraft/unmapped/C_krilgobm;)Lnet/minecraft/unmapped/C_foxnyhhm;
+		METHOD m_akidunwo createPlacementData (ZLnet/minecraft/unmapped/C_krilgobm;)Lnet/minecraft/unmapped/C_foxnyhhm;
 			ARG 0 includeAir
 			ARG 1 rotation
-		METHOD m_wuulrapa (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_foxnyhhm;
+		METHOD m_iuepyret getId (Ljava/lang/String;)Lnet/minecraft/unmapped/C_acfwypcn;
+			ARG 0 template
+		METHOD m_mdrcmohy (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_foxnyhhm;
 			ARG 1 id
-	CLASS C_wndycafj
-		FIELD f_mxsbflbk shipGenerated Z
+	CLASS C_cetnnvbh
+		FIELD f_jxqzmdpg shipGenerated Z
+	CLASS C_kxslacam Part
+		METHOD m_tmonqgvs create (Lnet/minecraft/unmapped/C_wviludhr;ILnet/minecraft/unmapped/C_ujcaxbhj$C_bgonghjx;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;Ljava/util/Random;)Z
+			ARG 1 manager
+			ARG 2 depth
+			ARG 3 root
+			ARG 4 pos
+			ARG 5 pieces
+			ARG 6 random
+		METHOD m_uywgvlao init ()V

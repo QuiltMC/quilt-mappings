@@ -1,29 +1,42 @@
 CLASS net/minecraft/unmapped/C_hrqhrpay net/minecraft/loot/LootPool
-	FIELD f_adugwknr predicate Ljava/util/function/Predicate;
-	FIELD f_bpgmjodd rolls Lnet/minecraft/unmapped/C_giyfmjai;
-	FIELD f_dpajmfhe javaFunctions Ljava/util/function/BiFunction;
-	FIELD f_pwxrtsca bonusRolls Lnet/minecraft/unmapped/C_giyfmjai;
-	FIELD f_qehigomn conditions [Lnet/minecraft/unmapped/C_vupzckqv;
-	FIELD f_spfedubb entries [Lnet/minecraft/unmapped/C_ytikeqhr;
-	FIELD f_yzjjsrly functions [Lnet/minecraft/unmapped/C_lqkshxmt;
+	FIELD f_fzzqgets functions [Lnet/minecraft/unmapped/C_lqkshxmt;
+	FIELD f_gfbalies rolls Lnet/minecraft/unmapped/C_giyfmjai;
+	FIELD f_gvgbefgw entries [Lnet/minecraft/unmapped/C_ytikeqhr;
+	FIELD f_nxzyraow predicate Ljava/util/function/Predicate;
+	FIELD f_pnmyphlg conditions [Lnet/minecraft/unmapped/C_vupzckqv;
+	FIELD f_xqvlfurz javaFunctions Ljava/util/function/BiFunction;
+	FIELD f_zmflbvkv bonusRolls Lnet/minecraft/unmapped/C_giyfmjai;
 	METHOD <init> ([Lnet/minecraft/unmapped/C_ytikeqhr;[Lnet/minecraft/unmapped/C_vupzckqv;[Lnet/minecraft/unmapped/C_lqkshxmt;Lnet/minecraft/unmapped/C_giyfmjai;Lnet/minecraft/unmapped/C_giyfmjai;)V
 		ARG 1 entries
 		ARG 2 conditions
 		ARG 3 functions
 		ARG 4 rolls
 		ARG 5 bonusRolls
-	METHOD m_lxodbuvt validate (Lnet/minecraft/unmapped/C_pbsgtmue;)V
+	METHOD m_gzeqtcuv validate (Lnet/minecraft/unmapped/C_pbsgtmue;)V
 		ARG 1 reporter
-	METHOD m_nejzymrz builder ()Lnet/minecraft/unmapped/C_hrqhrpay$C_mygtanxr;
-	METHOD m_slpjdbzo supplyOnce (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hgpkykai;)V
-		ARG 1 lootConsumer
-		ARG 2 context
-	METHOD m_whiwfwyo (Lnet/minecraft/unmapped/C_hgpkykai;Ljava/util/List;Lorg/apache/commons/lang3/mutable/MutableInt;Lnet/minecraft/unmapped/C_qstlozoi;)V
+	METHOD m_pmsczptg (Lnet/minecraft/unmapped/C_hgpkykai;Ljava/util/List;Lorg/apache/commons/lang3/mutable/MutableInt;Lnet/minecraft/unmapped/C_qstlozoi;)V
 		ARG 3 choice
-	METHOD m_zovxmwvg addGeneratedLoot (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hgpkykai;)V
+	METHOD m_pwpetlzf supplyOnce (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hgpkykai;)V
 		ARG 1 lootConsumer
 		ARG 2 context
-	CLASS C_bfotdobu Serializer
+	METHOD m_ukmuhftf builder ()Lnet/minecraft/unmapped/C_hrqhrpay$C_pckcmlvu;
+	METHOD m_xuhmrgqm addGeneratedLoot (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hgpkykai;)V
+		ARG 1 lootConsumer
+		ARG 2 context
+	CLASS C_pckcmlvu Builder
+		FIELD f_fzzqgets functions Ljava/util/List;
+		FIELD f_gfbalies rolls Lnet/minecraft/unmapped/C_giyfmjai;
+		FIELD f_gvgbefgw entries Ljava/util/List;
+		FIELD f_pnmyphlg conditions Ljava/util/List;
+		FIELD f_zmflbvkv bonusRollsRange Lnet/minecraft/unmapped/C_giyfmjai;
+		METHOD m_okhvjiin build ()Lnet/minecraft/unmapped/C_hrqhrpay;
+		METHOD m_okwuphgl rolls (Lnet/minecraft/unmapped/C_giyfmjai;)Lnet/minecraft/unmapped/C_hrqhrpay$C_pckcmlvu;
+			ARG 1 rolls
+		METHOD m_rtqfibjh with (Lnet/minecraft/unmapped/C_ytikeqhr$C_pckcmlvu;)Lnet/minecraft/unmapped/C_hrqhrpay$C_pckcmlvu;
+			ARG 1 entry
+		METHOD m_titkewdl bonusRolls (Lnet/minecraft/unmapped/C_giyfmjai;)Lnet/minecraft/unmapped/C_hrqhrpay$C_pckcmlvu;
+			ARG 1 bonusRolls
+	CLASS C_pkmrgtdq Serializer
 		METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 			ARG 1 json
 			ARG 2 unused
@@ -32,16 +45,3 @@ CLASS net/minecraft/unmapped/C_hrqhrpay net/minecraft/loot/LootPool
 			ARG 1 entry
 			ARG 2 unused
 			ARG 3 context
-	CLASS C_mygtanxr Builder
-		FIELD f_gsiogkxb entries Ljava/util/List;
-		FIELD f_manvorao bonusRollsRange Lnet/minecraft/unmapped/C_giyfmjai;
-		FIELD f_njkazeck functions Ljava/util/List;
-		FIELD f_pkramwts rolls Lnet/minecraft/unmapped/C_giyfmjai;
-		FIELD f_qrgpkugw conditions Ljava/util/List;
-		METHOD m_fktjuggr build ()Lnet/minecraft/unmapped/C_hrqhrpay;
-		METHOD m_quhafser bonusRolls (Lnet/minecraft/unmapped/C_giyfmjai;)Lnet/minecraft/unmapped/C_hrqhrpay$C_mygtanxr;
-			ARG 1 bonusRolls
-		METHOD m_sfuyhjzd rolls (Lnet/minecraft/unmapped/C_giyfmjai;)Lnet/minecraft/unmapped/C_hrqhrpay$C_mygtanxr;
-			ARG 1 rolls
-		METHOD m_shfiirgn with (Lnet/minecraft/unmapped/C_ytikeqhr$C_jrcpsegy;)Lnet/minecraft/unmapped/C_hrqhrpay$C_mygtanxr;
-			ARG 1 entry

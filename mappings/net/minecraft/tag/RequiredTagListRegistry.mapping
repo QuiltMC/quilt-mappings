@@ -1,11 +1,26 @@
 CLASS net/minecraft/unmapped/C_hpyglvdz net/minecraft/tag/RequiredTagListRegistry
-	FIELD f_craftsxa REQUIRED_LIST_KEYS Ljava/util/Set;
-	FIELD f_tjzgumfd ALL Ljava/util/List;
-	METHOD m_epsogyrp forEach (Ljava/util/function/Consumer;)V
+	FIELD f_osbgdfcv REQUIRED_LIST_KEYS Ljava/util/Set;
+	FIELD f_setkgprl ALL Ljava/util/List;
+	METHOD m_fcgujsco forEach (Ljava/util/function/Consumer;)V
 		ARG 0 consumer
-	METHOD m_eqryxxkg validateRegistrations ()V
-	METHOD m_jzxlepzv createBuiltinTagManager ()Lnet/minecraft/unmapped/C_foolhgqs;
-	METHOD m_otwabtms register (Lnet/minecraft/unmapped/C_hcaelhhx;Ljava/lang/String;)Lnet/minecraft/unmapped/C_qwjonqge;
+	METHOD m_gdxpfzxy (Lnet/minecraft/unmapped/C_foolhgqs$C_pckcmlvu;Lnet/minecraft/unmapped/C_qwjonqge;)V
+		ARG 1 list
+	METHOD m_gqufdmpp updateTagManager (Lnet/minecraft/unmapped/C_foolhgqs;)V
+		ARG 0 tagManager
+	METHOD m_jydfmdko validate ()V
+		COMMENT Ensures that each key in {@link #REQUIRED_LIST_KEYS} have a corresponding list
+		COMMENT in the return value of {@link #getBuiltinTags()}.
+		COMMENT
+		COMMENT @throws IllegalStateException when the validation fails
+	METHOD m_kgchwkdg clearAllTags ()V
+	METHOD m_ldiibeft getBuiltinTags ()Ljava/util/Set;
+	METHOD m_ogbwsxvo validateRegistrations ()V
+	METHOD m_pismqbfz (Lnet/minecraft/unmapped/C_foolhgqs;Lnet/minecraft/unmapped/C_qwjonqge;)V
+		ARG 1 list
+	METHOD m_uihdjclv (Lcom/google/common/collect/Multimap;Lnet/minecraft/unmapped/C_foolhgqs;Lnet/minecraft/unmapped/C_qwjonqge;)V
+		ARG 2 list
+	METHOD m_vqphtanr createBuiltinTagManager ()Lnet/minecraft/unmapped/C_foolhgqs;
+	METHOD m_vvwqomhv register (Lnet/minecraft/unmapped/C_hcaelhhx;Ljava/lang/String;)Lnet/minecraft/unmapped/C_qwjonqge;
 		COMMENT Creates and registers a required tag list.
 		COMMENT
 		COMMENT <p>The registered tag must be in the set returned by {@link #getBuiltinTags()},
@@ -17,20 +32,5 @@ CLASS net/minecraft/unmapped/C_hpyglvdz net/minecraft/tag/RequiredTagListRegistr
 			COMMENT the key representing the element type of the tags
 		ARG 1 dataType
 			COMMENT the data type, or ID's path prefix, for the tag JSONs in the data pack
-	METHOD m_pdazetmy (Lnet/minecraft/unmapped/C_foolhgqs$C_pddlxsew;Lnet/minecraft/unmapped/C_qwjonqge;)V
-		ARG 1 list
-	METHOD m_pozopbyw getMissingTags (Lnet/minecraft/unmapped/C_foolhgqs;)Lcom/google/common/collect/Multimap;
+	METHOD m_wvwhzvsq getMissingTags (Lnet/minecraft/unmapped/C_foolhgqs;)Lcom/google/common/collect/Multimap;
 		ARG 0 tagManager
-	METHOD m_qbrntwfm (Lnet/minecraft/unmapped/C_foolhgqs;Lnet/minecraft/unmapped/C_qwjonqge;)V
-		ARG 1 list
-	METHOD m_qnxdecyo updateTagManager (Lnet/minecraft/unmapped/C_foolhgqs;)V
-		ARG 0 tagManager
-	METHOD m_sevoloel clearAllTags ()V
-	METHOD m_teagizxc getBuiltinTags ()Ljava/util/Set;
-	METHOD m_wgjluqts validate ()V
-		COMMENT Ensures that each key in {@link #REQUIRED_LIST_KEYS} have a corresponding list
-		COMMENT in the return value of {@link #getBuiltinTags()}.
-		COMMENT
-		COMMENT @throws IllegalStateException when the validation fails
-	METHOD m_yohthdqd (Lcom/google/common/collect/Multimap;Lnet/minecraft/unmapped/C_foolhgqs;Lnet/minecraft/unmapped/C_qwjonqge;)V
-		ARG 2 list

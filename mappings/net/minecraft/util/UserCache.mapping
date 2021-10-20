@@ -1,75 +1,75 @@
 CLASS net/minecraft/unmapped/C_eilswqyj net/minecraft/util/UserCache
-	FIELD f_cdmwhnfe byName Ljava/util/Map;
-	FIELD f_ekdckswh profileRepository Lcom/mojang/authlib/GameProfileRepository;
-	FIELD f_fllqymko useRemote Z
-	FIELD f_fxlqyvdb byUuid Ljava/util/Map;
-	FIELD f_grakkeav cacheFile Ljava/io/File;
-	FIELD f_hstfhise LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_pdbviick pendingRequests Ljava/util/Map;
-	FIELD f_rvgjkgkz MAX_SAVED_ENTRIES I
-	FIELD f_tlwxqcwh gson Lcom/google/gson/Gson;
-	FIELD f_vueoiivs accessCount Ljava/util/concurrent/atomic/AtomicLong;
-	FIELD f_wqmbrphk executor Ljava/util/concurrent/Executor;
+	FIELD f_bogcitta executor Ljava/util/concurrent/Executor;
+	FIELD f_cavwrady gson Lcom/google/gson/Gson;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_cegcbsag pendingRequests Ljava/util/Map;
+	FIELD f_eadseklz cacheFile Ljava/io/File;
+	FIELD f_kvtwesft accessCount Ljava/util/concurrent/atomic/AtomicLong;
+	FIELD f_lpiwqcvd byUuid Ljava/util/Map;
+	FIELD f_olnezndl byName Ljava/util/Map;
+	FIELD f_vqplhzts profileRepository Lcom/mojang/authlib/GameProfileRepository;
+	FIELD f_wmpohnyb useRemote Z
+	FIELD f_xphkfysm MAX_SAVED_ENTRIES I
 	METHOD <init> (Lcom/mojang/authlib/GameProfileRepository;Ljava/io/File;)V
 		ARG 1 profileRepository
 		ARG 2 cacheFile
-	METHOD m_ahgjltvf add (Lnet/minecraft/unmapped/C_eilswqyj$C_pfmseurq;)V
-		ARG 1 entry
-	METHOD m_cmdtyjyx entryToJson (Lnet/minecraft/unmapped/C_eilswqyj$C_pfmseurq;Ljava/text/DateFormat;)Lcom/google/gson/JsonElement;
-		ARG 0 entry
-		ARG 1 dateFormat
-	METHOD m_cnpcdhwl (Ljava/lang/String;Ljava/util/Optional;Ljava/lang/Throwable;)V
-		ARG 2 profile
-		ARG 3 throwable
-	METHOD m_czrdxwuh (Ljava/text/DateFormat;Ljava/util/List;Lcom/google/gson/JsonElement;)V
+	METHOD m_chdbrkub (Ljava/text/DateFormat;Ljava/util/List;Lcom/google/gson/JsonElement;)V
 		ARG 2 json
-	METHOD m_dcloosqw (Ljava/util/function/Consumer;Ljava/util/Optional;Ljava/lang/Throwable;)V
+	METHOD m_djfsurod (Ljava/util/function/Consumer;Ljava/util/Optional;Ljava/lang/Throwable;)V
 		ARG 1 profile
 		ARG 2 throwable
-	METHOD m_duvtuxka getDateFormat ()Ljava/text/DateFormat;
-	METHOD m_ggisdqod (Lcom/google/gson/JsonArray;Ljava/text/DateFormat;Lnet/minecraft/unmapped/C_eilswqyj$C_pfmseurq;)V
-		ARG 2 entry
-	METHOD m_hdyceeiu findByName (Ljava/lang/String;)Ljava/util/Optional;
+	METHOD m_fdbjanua save ()V
+	METHOD m_iiqknvxs findByName (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 name
-	METHOD m_hnxsfaos add (Lcom/mojang/authlib/GameProfile;)V
-		ARG 1 profile
-	METHOD m_jepdkeez (Ljava/util/function/Consumer;Ljava/util/Optional;Ljava/lang/Throwable;)V
-		ARG 1 profile
-		ARG 2 throwable
-	METHOD m_jzocvkhm shouldUseRemote ()Z
-	METHOD m_kmnedtzn entryFromJson (Lcom/google/gson/JsonElement;Ljava/text/DateFormat;)Ljava/util/Optional;
-		ARG 0 json
-		ARG 1 dateFormat
-	METHOD m_llksbnbi getByUuid (Ljava/util/UUID;)Ljava/util/Optional;
+	METHOD m_iiqknvxs getByUuid (Ljava/util/UUID;)Ljava/util/Optional;
 		ARG 1 uuid
-	METHOD m_myufosce incrementAndGetAccessCount ()J
-	METHOD m_qlswvblv setUseRemote (Z)V
+	METHOD m_jqpnokan setUseRemote (Z)V
 		ARG 0 value
-	METHOD m_rifvqufv getLastAccessedEntries (I)Ljava/util/stream/Stream;
-		ARG 1 limit
-	METHOD m_usymmmsw findByNameAsync (Ljava/lang/String;Ljava/util/function/Consumer;)V
+	METHOD m_kuahaoyl findByNameAsync (Ljava/lang/String;Ljava/util/function/Consumer;)V
 		ARG 1 username
 		ARG 2 consumer
-	METHOD m_wfiyvnou load ()Ljava/util/List;
-	METHOD m_wzvhfgcq findProfileByName (Lcom/mojang/authlib/GameProfileRepository;Ljava/lang/String;)Ljava/util/Optional;
+	METHOD m_ljhgvdwz getDateFormat ()Ljava/text/DateFormat;
+	METHOD m_ppyuifga getLastAccessedEntries (I)Ljava/util/stream/Stream;
+		ARG 1 limit
+	METHOD m_qbieelic setExecutor (Ljava/util/concurrent/Executor;)V
+		ARG 1 executor
+	METHOD m_qljqanqu findProfileByName (Lcom/mojang/authlib/GameProfileRepository;Ljava/lang/String;)Ljava/util/Optional;
 		ARG 0 repository
 		ARG 1 name
-	METHOD m_xjlnylcb save ()V
-	METHOD m_yvxuwjwc setExecutor (Ljava/util/concurrent/Executor;)V
-		ARG 1 executor
-	CLASS C_pfmseurq Entry
-		FIELD f_jpyibfxl profile Lcom/mojang/authlib/GameProfile;
-		FIELD f_loxknntq lastAccessed J
-		FIELD f_tuzdekfl expirationDate Ljava/util/Date;
+	METHOD m_qqyovxdk load ()Ljava/util/List;
+	METHOD m_qxawovwu entryToJson (Lnet/minecraft/unmapped/C_eilswqyj$C_qpjvjepk;Ljava/text/DateFormat;)Lcom/google/gson/JsonElement;
+		ARG 0 entry
+		ARG 1 dateFormat
+	METHOD m_rkayflpe (Lcom/google/gson/JsonArray;Ljava/text/DateFormat;Lnet/minecraft/unmapped/C_eilswqyj$C_qpjvjepk;)V
+		ARG 2 entry
+	METHOD m_rmjtzghc incrementAndGetAccessCount ()J
+	METHOD m_rtqfibjh add (Lcom/mojang/authlib/GameProfile;)V
+		ARG 1 profile
+	METHOD m_vcaokiug entryFromJson (Lcom/google/gson/JsonElement;Ljava/text/DateFormat;)Ljava/util/Optional;
+		ARG 0 json
+		ARG 1 dateFormat
+	METHOD m_whmqahcj add (Lnet/minecraft/unmapped/C_eilswqyj$C_qpjvjepk;)V
+		ARG 1 entry
+	METHOD m_wmpohnyb shouldUseRemote ()Z
+	METHOD m_xnfvqbyn (Ljava/util/function/Consumer;Ljava/util/Optional;Ljava/lang/Throwable;)V
+		ARG 1 profile
+		ARG 2 throwable
+	METHOD m_zlrjwagu (Ljava/lang/String;Ljava/util/Optional;Ljava/lang/Throwable;)V
+		ARG 2 profile
+		ARG 3 throwable
+	CLASS C_qpjvjepk Entry
+		FIELD f_wgkwginy expirationDate Ljava/util/Date;
+		FIELD f_xvtwfhpv lastAccessed J
+		FIELD f_yofrpvlm profile Lcom/mojang/authlib/GameProfile;
 		METHOD <init> (Lcom/mojang/authlib/GameProfile;Ljava/util/Date;)V
 			ARG 1 profile
 			ARG 2 expirationDate
-		METHOD m_kmltpibb getExpirationDate ()Ljava/util/Date;
-		METHOD m_qmriwcfg setLastAccessed (J)V
+		METHOD m_ldotzmtj setLastAccessed (J)V
 			ARG 1 lastAccessed
-		METHOD m_wuxtqhkk getProfile ()Lcom/mojang/authlib/GameProfile;
-		METHOD m_xmjelhoh getLastAccessed ()J
-	CLASS C_rthiknyf
+		METHOD m_nlowxnbs getExpirationDate ()Ljava/util/Date;
+		METHOD m_sxukzxlr getProfile ()Lcom/mojang/authlib/GameProfile;
+		METHOD m_zhfdorti getLastAccessed ()J
+	CLASS C_zdraaygv
 		METHOD onProfileLookupFailed (Lcom/mojang/authlib/GameProfile;Ljava/lang/Exception;)V
 			ARG 1 profile
 			ARG 2 exception

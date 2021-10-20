@@ -1,14 +1,14 @@
 CLASS net/minecraft/unmapped/C_nqjohhwo net/minecraft/util/profiler/Sampler
-	FIELD f_cqgdtvda startAction Ljava/lang/Runnable;
-	FIELD f_emcrxgeg type Lnet/minecraft/unmapped/C_xjekgsqo;
-	FIELD f_gmflisbw retriever Ljava/util/function/DoubleSupplier;
-	FIELD f_jirlwdqr ticksBuffer Lio/netty/buffer/ByteBuf;
-	FIELD f_pcjmjpno name Ljava/lang/String;
-	FIELD f_xbehmbgf deviationChecker Lnet/minecraft/unmapped/C_nqjohhwo$C_acojruun;
-	FIELD f_xmkwhmcw valueBuffer Lio/netty/buffer/ByteBuf;
-	FIELD f_zexdsrcb currentSample D
-	FIELD f_zmqndnop active Z
-	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/util/function/DoubleSupplier;Ljava/lang/Runnable;Lnet/minecraft/unmapped/C_nqjohhwo$C_acojruun;)V
+	FIELD f_brndcaux valueBuffer Lio/netty/buffer/ByteBuf;
+	FIELD f_dwpuioaf ticksBuffer Lio/netty/buffer/ByteBuf;
+	FIELD f_fopawqva retriever Ljava/util/function/DoubleSupplier;
+	FIELD f_iawmrvot type Lnet/minecraft/unmapped/C_xjekgsqo;
+	FIELD f_jrpadsgy name Ljava/lang/String;
+	FIELD f_kerqyfzp currentSample D
+	FIELD f_qcpppjix active Z
+	FIELD f_smczmanc startAction Ljava/lang/Runnable;
+	FIELD f_zpjgidkp deviationChecker Lnet/minecraft/unmapped/C_nqjohhwo$C_ruejgcqr;
+	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/util/function/DoubleSupplier;Ljava/lang/Runnable;Lnet/minecraft/unmapped/C_nqjohhwo$C_ruejgcqr;)V
 		ARG 1 name
 		ARG 2 type
 		ARG 3 retriever
@@ -16,64 +16,64 @@ CLASS net/minecraft/unmapped/C_nqjohhwo net/minecraft/util/profiler/Sampler
 		ARG 5 deviationChecker
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_czyzkdpz getType ()Lnet/minecraft/unmapped/C_xjekgsqo;
-	METHOD m_dunxbzah start ()V
-	METHOD m_hbtindhj collectData ()Lnet/minecraft/unmapped/C_nqjohhwo$C_jnhaimqo;
-	METHOD m_hmygidfm sample (I)V
+	METHOD m_cfpobsgb start ()V
+	METHOD m_dkztlqbr sample (I)V
 		ARG 1 tick
-	METHOD m_kcmzhpmx create (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/util/function/DoubleSupplier;)Lnet/minecraft/unmapped/C_nqjohhwo;
-		ARG 0 name
-		ARG 1 type
-		ARG 2 retriever
-	METHOD m_rmwkzait ensureActive ()V
-	METHOD m_sedngzkb hasDeviated ()Z
-	METHOD m_segxxxjl getName ()Ljava/lang/String;
-	METHOD m_vgimtypj getRetriever ()Ljava/util/function/DoubleSupplier;
-	METHOD m_vxbxmdcz builder (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/util/function/ToDoubleFunction;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_nqjohhwo$C_rlwpovtw;
+	METHOD m_fdzphgrd hasDeviated ()Z
+	METHOD m_fyxvhgjr getRetriever ()Ljava/util/function/DoubleSupplier;
+	METHOD m_gvlwjsjf getName ()Ljava/lang/String;
+	METHOD m_ibvfsmlm collectData ()Lnet/minecraft/unmapped/C_nqjohhwo$C_uqoxcfpy;
+	METHOD m_ilhplqfi builder (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/util/function/ToDoubleFunction;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_nqjohhwo$C_iihynoof;
 		ARG 0 name
 		ARG 1 type
 		ARG 2 retriever
 		ARG 3 context
-	METHOD m_wlulwnuu stop ()V
-	METHOD m_ysnreibw create (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/lang/Object;Ljava/util/function/ToDoubleFunction;)Lnet/minecraft/unmapped/C_nqjohhwo;
+	METHOD m_qhsuitnw ensureActive ()V
+	METHOD m_vpgavedv stop ()V
+	METHOD m_vvwqomhv create (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/lang/Object;Ljava/util/function/ToDoubleFunction;)Lnet/minecraft/unmapped/C_nqjohhwo;
 		ARG 0 name
 		ARG 1 type
 		ARG 2 context
 		ARG 3 retriever
-	CLASS C_acojruun DeviationChecker
-		METHOD m_kfylpegk check (D)Z
-			ARG 1 value
-	CLASS C_jnhaimqo Data
-		FIELD f_acirvbfp values Lit/unimi/dsi/fastutil/ints/Int2DoubleMap;
-		FIELD f_diwvrocc startTick I
-		FIELD f_okmuvwzf endTick I
-		METHOD <init> (IILit/unimi/dsi/fastutil/ints/Int2DoubleMap;)V
-			ARG 1 startTick
-			ARG 2 endTick
-			ARG 3 values
-		METHOD m_beoiauyh getStartTick ()I
-		METHOD m_czplaxxz getValue (I)D
-			ARG 1 tick
-		METHOD m_rfiwnfep getEndTick ()I
-	CLASS C_rlwpovtw Builder
-		FIELD f_cglyzgpm timeGetter Ljava/util/function/DoubleSupplier;
-		FIELD f_iclakcbe name Ljava/lang/String;
-		FIELD f_nrkzlvny type Lnet/minecraft/unmapped/C_xjekgsqo;
-		FIELD f_qlfhcdrr deviationChecker Lnet/minecraft/unmapped/C_nqjohhwo$C_acojruun;
-		FIELD f_tlwybmdd context Ljava/lang/Object;
-		FIELD f_wxygwjkw startAction Ljava/lang/Runnable;
+	METHOD m_vvwqomhv create (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/util/function/DoubleSupplier;)Lnet/minecraft/unmapped/C_nqjohhwo;
+		ARG 0 name
+		ARG 1 type
+		ARG 2 retriever
+	METHOD m_xvlwsdhj getType ()Lnet/minecraft/unmapped/C_xjekgsqo;
+	CLASS C_iihynoof Builder
+		FIELD f_fopawqva timeGetter Ljava/util/function/DoubleSupplier;
+		FIELD f_iawmrvot type Lnet/minecraft/unmapped/C_xjekgsqo;
+		FIELD f_jrpadsgy name Ljava/lang/String;
+		FIELD f_smczmanc startAction Ljava/lang/Runnable;
+		FIELD f_ytzyjnvq context Ljava/lang/Object;
+		FIELD f_zpjgidkp deviationChecker Lnet/minecraft/unmapped/C_nqjohhwo$C_ruejgcqr;
 		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_xjekgsqo;Ljava/util/function/ToDoubleFunction;Ljava/lang/Object;)V
 			ARG 1 name
 			ARG 2 type
 			ARG 3 timeFunction
 			ARG 4 context
-		METHOD m_afqqlzog deviationChecker (Lnet/minecraft/unmapped/C_nqjohhwo$C_acojruun;)Lnet/minecraft/unmapped/C_nqjohhwo$C_rlwpovtw;
-			ARG 1 deviationChecker
-		METHOD m_qclcyrop startAction (Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_nqjohhwo$C_rlwpovtw;
+		METHOD m_klwbibrq startAction (Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_nqjohhwo$C_iihynoof;
 			ARG 1 action
-		METHOD m_xekczdwq build ()Lnet/minecraft/unmapped/C_nqjohhwo;
-	CLASS C_wfkwlxqw RatioDeviationChecker
-		FIELD f_hpjljmmm lastValue D
-		FIELD f_imgpclsl threshold F
+		METHOD m_lvtydmqn deviationChecker (Lnet/minecraft/unmapped/C_nqjohhwo$C_ruejgcqr;)Lnet/minecraft/unmapped/C_nqjohhwo$C_iihynoof;
+			ARG 1 deviationChecker
+		METHOD m_okhvjiin build ()Lnet/minecraft/unmapped/C_nqjohhwo;
+	CLASS C_ruejgcqr DeviationChecker
+		METHOD test check (D)Z
+			ARG 1 value
+	CLASS C_uqoxcfpy Data
+		FIELD f_evcxcgva values Lit/unimi/dsi/fastutil/ints/Int2DoubleMap;
+		FIELD f_ngpddpkl startTick I
+		FIELD f_txwsktjb endTick I
+		METHOD <init> (IILit/unimi/dsi/fastutil/ints/Int2DoubleMap;)V
+			ARG 1 startTick
+			ARG 2 endTick
+			ARG 3 values
+		METHOD m_rywgcywu getEndTick ()I
+		METHOD m_tmsgvoqf getValue (I)D
+			ARG 1 tick
+		METHOD m_yamheagt getStartTick ()I
+	CLASS C_ymmgqewt RatioDeviationChecker
+		FIELD f_oggsrouy threshold F
+		FIELD f_wghwtadl lastValue D
 		METHOD <init> (F)V
 			ARG 1 threshold

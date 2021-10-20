@@ -1,14 +1,14 @@
 CLASS net/minecraft/unmapped/C_ufyrwgra net/minecraft/village/TradeOffer
-	FIELD f_fchklagm maxUses I
-	FIELD f_kczogfzi priceMultiplier F
-	FIELD f_kmypgkdl uses I
-	FIELD f_ruvaawws specialPrice I
-	FIELD f_rwzvxlha secondBuyItem Lnet/minecraft/unmapped/C_kywxadds;
-	FIELD f_sgneidhe sellItem Lnet/minecraft/unmapped/C_kywxadds;
-	FIELD f_tctkzvgl demandBonus I
-	FIELD f_tqszyrro merchantExperience I
-	FIELD f_vncwzpcv rewardingPlayerExperience Z
-	FIELD f_vsjfjwif firstBuyItem Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_bvmghbid firstBuyItem Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_ibvfsmlm sellItem Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_jevzjvdi secondBuyItem Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_kdpksskq priceMultiplier F
+	FIELD f_mbqzbilb merchantExperience I
+	FIELD f_mucuveqq maxUses I
+	FIELD f_rnohosyv rewardingPlayerExperience Z
+	FIELD f_rzlrwkge specialPrice I
+	FIELD f_wcakjluy demandBonus I
+	FIELD f_ytjrargn uses I
 	METHOD <init> (Lnet/minecraft/unmapped/C_hincwlhh;)V
 		ARG 1 nbt
 	METHOD <init> (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;IIF)V
@@ -41,45 +41,51 @@ CLASS net/minecraft/unmapped/C_ufyrwgra net/minecraft/village/TradeOffer
 		ARG 6 merchantExperience
 		ARG 7 priceMultiplier
 		ARG 8 demandBonus
-	METHOD m_aexzjqhz getOriginalFirstBuyItem ()Lnet/minecraft/unmapped/C_kywxadds;
-		COMMENT Returns the first buy item of this trade offer.
-	METHOD m_alkubifm getSellItem ()Lnet/minecraft/unmapped/C_kywxadds;
+	METHOD m_chpheinn updateDemandBonus ()V
+		COMMENT Updates the demand bonus of this trade offer depending on its
+		COMMENT previous demand bonus, the number of times it has been used and
+		COMMENT its remaining uses.
+	METHOD m_cmphuran getSellItem ()Lnet/minecraft/unmapped/C_kywxadds;
 		COMMENT Returns the sell item of this trade offer.
-	METHOD m_etqtmldb toNbt ()Lnet/minecraft/unmapped/C_hincwlhh;
-	METHOD m_gfhgpgsi getSecondBuyItem ()Lnet/minecraft/unmapped/C_kywxadds;
-		COMMENT Returns the second buy item of this trade offer.
-		COMMENT
-		COMMENT <p>If there is no second buy item, this returns the {@linkplain ItemStack#EMPTY empty
-		COMMENT item stack}.
-	METHOD m_ghdjhuhg clearSpecialPrice ()V
-		COMMENT Resets the special price of this trade offer.
-	METHOD m_hafnfwkl increaseSpecialPrice (I)V
+	METHOD m_dzmimxuf increaseSpecialPrice (I)V
 		COMMENT Increases the special price of this trade offer by {@code increment}.
 		COMMENT
 		COMMENT <p>A negative {@code increment} value will decrease the special price.
 		ARG 1 increment
-	METHOD m_jmutngsm getMaxUses ()I
-		COMMENT Returns the maximum number of times this trade offer can be used.
-	METHOD m_kktsdten acceptsBuy (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
+	METHOD m_fafiaril hasBeenUsed ()Z
+		COMMENT Returns whether this trade offer has already been used.
+		COMMENT
+		COMMENT <p>Checks if the number of times this trade offer has been used
+		COMMENT is greater than 0.
+	METHOD m_fbxrgxed acceptsBuy (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 1 given
 		ARG 2 sample
-	METHOD m_kvguhdgr getUses ()I
-		COMMENT Returns the number of times this trade offer has been used.
-	METHOD m_oasshspr matchesBuyItems (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
+	METHOD m_igzzigll matchesBuyItems (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 1 first
 		ARG 2 second
-	METHOD m_oxqacyka getMerchantExperience ()I
-		COMMENT Returns the amount of experience that will be given to a merchant
-		COMMENT after this trade offer has been used.
-	METHOD m_pcrwzprj depleteBuyItems (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
+	METHOD m_jsguuxbz getPriceMultiplier ()F
+		COMMENT Returns the price multiplier of this trade offer. It is used to
+		COMMENT adjust the price of its first buy item.
+	METHOD m_kpvvnxfv depleteBuyItems (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 1 firstBuyStack
 		ARG 2 secondBuyStack
-	METHOD m_piymrsvr getSpecialPrice ()I
-		COMMENT Returns the special price of this trade offer. It is used to
-		COMMENT adjust the price of its first buy item.
+	METHOD m_kuailwsx getMerchantExperience ()I
+		COMMENT Returns the amount of experience that will be given to a merchant
+		COMMENT after this trade offer has been used.
+	METHOD m_lkaxzrnt toNbt ()Lnet/minecraft/unmapped/C_hincwlhh;
+	METHOD m_lrdpvjjo getSecondBuyItem ()Lnet/minecraft/unmapped/C_kywxadds;
+		COMMENT Returns the second buy item of this trade offer.
 		COMMENT
-		COMMENT <p>The less the special price is, the more the price will be low.
-	METHOD m_rjgtneam getDemandBonus ()I
+		COMMENT <p>If there is no second buy item, this returns the {@linkplain ItemStack#EMPTY empty
+		COMMENT item stack}.
+	METHOD m_lsmbvksh isDisabled ()Z
+		COMMENT Returns whether this trade offer is disabled.
+		COMMENT
+		COMMENT <p>Checks if the number of times this trade offer has been used
+		COMMENT is greater or equal to its maximum uses.
+	METHOD m_mznsullf copySellItem ()Lnet/minecraft/unmapped/C_kywxadds;
+		COMMENT Returns a copy of the sell item of this trade offer.
+	METHOD m_nuaueorz getDemandBonus ()I
 		COMMENT Returns the demand bonus of this trade offer. It is used to
 		COMMENT adjust the price of its first buy item.
 		COMMENT
@@ -88,39 +94,33 @@ CLASS net/minecraft/unmapped/C_ufyrwgra net/minecraft/village/TradeOffer
 		COMMENT <p>It is updated when a villager restocks.
 		COMMENT
 		COMMENT @see #updateDemandBonus()
-	METHOD m_sbsggysa shouldRewardPlayerExperience ()Z
-		COMMENT Returns whether experience should be given to a player when
-		COMMENT they use this trade offer.
-	METHOD m_uglpbvav isDisabled ()Z
-		COMMENT Returns whether this trade offer is disabled.
-		COMMENT
-		COMMENT <p>Checks if the number of times this trade offer has been used
-		COMMENT is greater or equal to its maximum uses.
-	METHOD m_umpttwdd resetUses ()V
-		COMMENT Resets the number of times this trade offer has been used.
-	METHOD m_wmnginmf getPriceMultiplier ()F
-		COMMENT Returns the price multiplier of this trade offer. It is used to
-		COMMENT adjust the price of its first buy item.
-	METHOD m_xgasmvdu hasBeenUsed ()Z
-		COMMENT Returns whether this trade offer has already been used.
-		COMMENT
-		COMMENT <p>Checks if the number of times this trade offer has been used
-		COMMENT is greater than 0.
-	METHOD m_xhszlkpg copySellItem ()Lnet/minecraft/unmapped/C_kywxadds;
-		COMMENT Returns a copy of the sell item of this trade offer.
-	METHOD m_ycunhvat getAdjustedFirstBuyItem ()Lnet/minecraft/unmapped/C_kywxadds;
+	METHOD m_nwevzpiw getMaxUses ()I
+		COMMENT Returns the maximum number of times this trade offer can be used.
+	METHOD m_psbaktqd getOriginalFirstBuyItem ()Lnet/minecraft/unmapped/C_kywxadds;
+		COMMENT Returns the first buy item of this trade offer.
+	METHOD m_rfglncln getAdjustedFirstBuyItem ()Lnet/minecraft/unmapped/C_kywxadds;
 		COMMENT Returns a copy of the first buy item of this trade offer,
 		COMMENT with its price adjusted depending on the demand bonus, the
 		COMMENT special price and the price multiplier.
-	METHOD m_yvxovlnr setSpecialPrice (I)V
+	METHOD m_slzygwiq use ()V
+		COMMENT Increments the number of times this trade offer has been used.
+	METHOD m_towhsqdt clearSpecialPrice ()V
+		COMMENT Resets the special price of this trade offer.
+	METHOD m_vzrrnkue setSpecialPrice (I)V
 		COMMENT Sets the special price of this trade offer to {@code specialPrice}.
 		ARG 1 specialPrice
-	METHOD m_ywsrmwcz disable ()V
+	METHOD m_wzuqynut getSpecialPrice ()I
+		COMMENT Returns the special price of this trade offer. It is used to
+		COMMENT adjust the price of its first buy item.
+		COMMENT
+		COMMENT <p>The less the special price is, the more the price will be low.
+	METHOD m_xxtiublu disable ()V
 		COMMENT Sets the number of times this trade offer has been used to
 		COMMENT its maximum uses, making it disabled.
-	METHOD m_zpkxwtkk updateDemandBonus ()V
-		COMMENT Updates the demand bonus of this trade offer depending on its
-		COMMENT previous demand bonus, the number of times it has been used and
-		COMMENT its remaining uses.
-	METHOD m_zwqwgcfr use ()V
-		COMMENT Increments the number of times this trade offer has been used.
+	METHOD m_yvcejntk resetUses ()V
+		COMMENT Resets the number of times this trade offer has been used.
+	METHOD m_zbdyvbot shouldRewardPlayerExperience ()Z
+		COMMENT Returns whether experience should be given to a player when
+		COMMENT they use this trade offer.
+	METHOD m_zvllotlg getUses ()I
+		COMMENT Returns the number of times this trade offer has been used.

@@ -14,171 +14,162 @@ CLASS net/minecraft/unmapped/C_qodpmxmm net/minecraft/block/Block
 	COMMENT #getTranslationKey}.
 	COMMENT
 	COMMENT @see <a href="https://minecraft.fandom.com/wiki/Model">Model - Official Minecraft Wiki</a>
-	FIELD f_baklvfyh FORCE_STATE I
-		COMMENT Bypass virtual block state changes and forces the passed state to be stored as-is.
-	FIELD f_fvzlffgb translationKey Ljava/lang/String;
-	FIELD f_fyxzvcnh defaultState Lnet/minecraft/unmapped/C_pmeibtxt;
-	FIELD f_iwmsppgv cachedItem Lnet/minecraft/unmapped/C_xanddrov;
-	FIELD f_mdlimqjx SKIP_DROPS I
-		COMMENT Prevents the previous block (container) from dropping items when destroyed.
-	FIELD f_npzbmytu REDRAW_ON_MAIN_THREAD I
-		COMMENT Forces a synchronous redraw on clients.
-	FIELD f_plieexen stateManager Lnet/minecraft/unmapped/C_qakiefze;
-	FIELD f_qdltwyko STATE_IDS Lnet/minecraft/unmapped/C_wvjdaiwl;
-	FIELD f_qdrhltgn FULL_CUBE_SHAPE_CACHE Lcom/google/common/cache/LoadingCache;
-	FIELD f_qqgcnfqs LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_qwvodssb SKIP_LIGHTING_UPDATES I
+	FIELD f_ainofwic SKIP_LIGHTING_UPDATES I
 		COMMENT Signals that lighting updates should be skipped.
-	FIELD f_sfpuevez NO_REDRAW I
-		COMMENT Used in conjunction with {@link #NOTIFY_LISTENERS} to suppress the render pass on clients.
-	FIELD f_tfogkkmf MOVED I
-		COMMENT Signals that the current block is being moved to a different location, usually because of a piston.
-	FIELD f_ujtuowjb NOTIFY_LISTENERS I
-		COMMENT Notifies listeners and clients who need to react when the block changes.
-	FIELD f_wdqfjlxx NOTIFY_NEIGHBORS I
-		COMMENT Sends a neighbor update event to surrounding blocks.
-	FIELD f_xpyyvbte FACE_CULL_MAP Ljava/lang/ThreadLocal;
-	FIELD f_ykaumbdf NOTIFY_ALL I
+	FIELD f_bubhkmrz NOTIFY_ALL I
 		COMMENT The default setBlockState behavior. Same as {@code NOTIFY_NEIGHBORS | NOTIFY_LISTENERS}.
-	METHOD m_aihmepcf afterBreak (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_kywxadds;)V
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_hahkypdc cachedItem Lnet/minecraft/unmapped/C_xanddrov;
+	FIELD f_jnlngovi defaultState Lnet/minecraft/unmapped/C_pmeibtxt;
+	FIELD f_jzgexowa STATE_IDS Lnet/minecraft/unmapped/C_wvjdaiwl;
+	FIELD f_khogqnyn translationKey Ljava/lang/String;
+	FIELD f_kpmotbik FULL_CUBE_SHAPE_CACHE Lcom/google/common/cache/LoadingCache;
+	FIELD f_kseefrvt FORCE_STATE I
+		COMMENT Bypass virtual block state changes and forces the passed state to be stored as-is.
+	FIELD f_kwuujqhq NOTIFY_LISTENERS I
+		COMMENT Notifies listeners and clients who need to react when the block changes.
+	FIELD f_kwyraiqy NO_REDRAW I
+		COMMENT Used in conjunction with {@link #NOTIFY_LISTENERS} to suppress the render pass on clients.
+	FIELD f_sqpsqoys FACE_CULL_MAP Ljava/lang/ThreadLocal;
+	FIELD f_tfxtgtdu REDRAW_ON_MAIN_THREAD I
+		COMMENT Forces a synchronous redraw on clients.
+	FIELD f_wrgbwtct stateManager Lnet/minecraft/unmapped/C_qakiefze;
+	FIELD f_ybczrept MOVED I
+		COMMENT Signals that the current block is being moved to a different location, usually because of a piston.
+	FIELD f_yvrmdbte NOTIFY_NEIGHBORS I
+		COMMENT Sends a neighbor update event to surrounding blocks.
+	FIELD f_zyoiujhz SKIP_DROPS I
+		COMMENT Prevents the previous block (container) from dropping items when destroyed.
+	METHOD m_aemdagup getBlastResistance ()F
+	METHOD m_axgjtyzm getStateManager ()Lnet/minecraft/unmapped/C_qakiefze;
+	METHOD m_baesqvsz onBreak (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_oqcyprzj;)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 state
+		ARG 4 player
+	METHOD m_bcarqxym getSoundGroup (Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_xetnivea;
+		ARG 1 state
+	METHOD m_daarhmms getTranslationKey ()Ljava/lang/String;
+		COMMENT {@return the translation key for the name of this block}
+		COMMENT
+		COMMENT <p>By default, it returns {@code block.namespace.path} where {@code
+		COMMENT namespace} and {@code path} are of the identifier used for registering
+		COMMENT this block, but {@code /} in {@code path} is replaced with {@code .}.
+		COMMENT If the block is not registered, it returns {@code block.unregistered_sadface}.
+	METHOD m_datjmdrk afterBreak (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_kywxadds;)V
 		ARG 1 world
 		ARG 2 player
 		ARG 3 pos
 		ARG 4 state
 		ARG 5 blockEntity
 		ARG 6 stack
-	METHOD m_atfdpwcf appendStacks (Lnet/minecraft/unmapped/C_dyackonl;Lnet/minecraft/unmapped/C_eztffrnr;)V
-		COMMENT Appends the stacks of this block shown in the item group to the list.
-		COMMENT
-		COMMENT @see net.minecraft.item.BlockItem#appendStacks(ItemGroup, DefaultedList)
-		ARG 1 group
-		ARG 2 stacks
-	METHOD m_cbxivsxt spawnBreakParticles (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;)V
-		ARG 1 world
-		ARG 2 player
+	METHOD m_dxcmgpvn setDefaultState (Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 1 state
+	METHOD m_eaiekufw dropStack (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 direction
+		ARG 3 stack
+	METHOD m_eferovpr pushEntitiesUpBeforeBlockChange (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 0 from
+		ARG 1 to
+		ARG 2 world
 		ARG 3 pos
-		ARG 4 state
-	METHOD m_crnnuuwc cannotConnect (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
+	METHOD m_elqvqyyp getDroppedStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;)Ljava/util/List;
 		ARG 0 state
-	METHOD m_cwfomwkv getSlipperiness ()F
-	METHOD m_cxyizqmg getPickStack (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_kywxadds;
 		ARG 1 world
 		ARG 2 pos
-		ARG 3 state
-	METHOD m_ddriwaee dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_hgpkykai$C_bvqtlydx;)V
+		ARG 3 blockEntity
+	METHOD m_elqvqyyp getDroppedStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_kywxadds;)Ljava/util/List;
 		ARG 0 state
-		ARG 1 lootContext
-	METHOD m_dovgxlqt onLandedUpon (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_srenftsa;F)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 blockEntity
+		ARG 4 entity
+		ARG 5 stack
+	METHOD m_ewxlpofp getShapesForStates (Ljava/util/function/Function;)Lcom/google/common/collect/ImmutableMap;
+	METHOD m_gjhgxfcf onLandedUpon (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_srenftsa;F)V
 		ARG 1 world
 		ARG 2 state
 		ARG 3 pos
 		ARG 4 entity
 		ARG 5 fallDistance
-	METHOD m_dqeovacm appendProperties (Lnet/minecraft/unmapped/C_qakiefze$C_whxmsnfm;)V
-		ARG 1 builder
-	METHOD m_erfcbpyb onBreak (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_oqcyprzj;)V
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 state
-		ARG 4 player
-	METHOD m_fceycxjo shouldDropItemsOnExplosion (Lnet/minecraft/unmapped/C_fpzrhhaa;)Z
-		ARG 1 explosion
-	METHOD m_fckkzlss dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;)V
+	METHOD m_gommtfuy dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;)V
 		ARG 0 state
 		ARG 1 world
 		ARG 2 pos
 		ARG 3 blockEntity
-	METHOD m_fnzapjbc getBlockFromItem (Lnet/minecraft/unmapped/C_xanddrov;)Lnet/minecraft/unmapped/C_qodpmxmm;
-		ARG 0 item
-	METHOD m_gomqzqej (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 2 stack
-	METHOD m_hmqxruyy onSteppedOn (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_srenftsa;)V
-		COMMENT Called when an entity steps on this block.
+	METHOD m_gommtfuy dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_hgpkykai$C_pckcmlvu;)V
+		ARG 0 state
+		ARG 1 lootContext
+	METHOD m_gommtfuy dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)V
+		ARG 0 state
 		ARG 1 world
 		ARG 2 pos
-		ARG 3 state
-		ARG 4 entity
-	METHOD m_hvslsldb getStateManager ()Lnet/minecraft/unmapped/C_qakiefze;
-	METHOD m_hzriwibt onEntityLand (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_srenftsa;)V
-		ARG 1 world
-		ARG 2 entity
-	METHOD m_iawbkbdl setDefaultState (Lnet/minecraft/unmapped/C_pmeibtxt;)V
-		ARG 1 state
-	METHOD m_ioyujkmx precipitationTick (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_sfepklro$C_aexzylwx;)V
-		ARG 1 state
-		ARG 2 world
-		ARG 3 pos
-		ARG 4 precipitation
-	METHOD m_jfiatxax isFaceFullSquare (Lnet/minecraft/unmapped/C_dbwhvcsz;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
-		ARG 0 shape
-		ARG 1 side
-	METHOD m_kuanlune dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_kywxadds;)V
+	METHOD m_gommtfuy dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_kywxadds;)V
 		ARG 0 state
 		ARG 1 world
 		ARG 2 pos
 		ARG 3 blockEntity
 		ARG 4 entity
 		ARG 5 stack
-	METHOD m_ljdbaiht getDefaultState ()Lnet/minecraft/unmapped/C_pmeibtxt;
-	METHOD m_mvtjbboy getJumpVelocityMultiplier ()F
-	METHOD m_nnpakxjj (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 2 stack
-	METHOD m_osvjdkfh canMobSpawnInside ()Z
-	METHOD m_oywrtzvd getStateFromRawId (I)Lnet/minecraft/unmapped/C_pmeibtxt;
-		ARG 0 stateId
-	METHOD m_pbzvxgsg getName ()Lnet/minecraft/unmapped/C_evienqpn;
-	METHOD m_pgimsgsi onBroken (Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;)V
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 state
-	METHOD m_qmguucna getPlacementState (Lnet/minecraft/unmapped/C_qjltooia;)Lnet/minecraft/unmapped/C_pmeibtxt;
-		ARG 1 ctx
-	METHOD m_qumswddn dropExperience (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;I)V
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 size
-	METHOD m_qvsaikzd onPlaced (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 state
-		ARG 4 placer
-		ARG 5 itemStack
-	METHOD m_rbeettgf hasDynamicBounds ()Z
-	METHOD m_rklvcvmm getSoundGroup (Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_xetnivea;
-		ARG 1 state
-	METHOD m_rmeemafl hasTopRim (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+	METHOD m_gtibjxpm hasTopRim (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
 		ARG 0 world
 		ARG 1 pos
-	METHOD m_sgrtclse (Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 2 stack
-	METHOD m_shlglnpz shouldDrawSide (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+	METHOD m_gvlwjsjf getName ()Lnet/minecraft/unmapped/C_evienqpn;
+	METHOD m_hungcvpk cannotConnect (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
 		ARG 0 state
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 side
-	METHOD m_sjfsgdrg postProcessState (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_pmeibtxt;
-		ARG 0 state
-		ARG 1 world
-		ARG 2 pos
-	METHOD m_srilldah appendTooltip (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_qobevaep;Ljava/util/List;Lnet/minecraft/unmapped/C_wdtrbeat;)V
+	METHOD m_hxuxrmls isFaceFullSquare (Lnet/minecraft/unmapped/C_dbwhvcsz;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
+		ARG 0 shape
+		ARG 1 side
+	METHOD m_ifkpadjh appendTooltip (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_qobevaep;Ljava/util/List;Lnet/minecraft/unmapped/C_wdtrbeat;)V
 		ARG 1 stack
 		ARG 2 world
 		ARG 3 tooltip
 		ARG 4 options
-	METHOD m_tcygyfov randomDisplayTick (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)V
+	METHOD m_jddzgyjm getRawIdFromState (Lnet/minecraft/unmapped/C_pmeibtxt;)I
+		ARG 0 state
+	METHOD m_jnlngovi getDefaultState ()Lnet/minecraft/unmapped/C_pmeibtxt;
+	METHOD m_khornkgv getStateFromRawId (I)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 0 stateId
+	METHOD m_lmfwzupo hasRandomTicks (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
+		ARG 1 state
+	METHOD m_lteikipk precipitationTick (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_sfepklro$C_ugfyvfck;)V
+		ARG 1 state
+		ARG 2 world
+		ARG 3 pos
+		ARG 4 precipitation
+	METHOD m_luqtonxl onDestroyedByExplosion (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fpzrhhaa;)V
+		COMMENT Called when this block is destroyed by an explosion.
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 explosion
+	METHOD m_mfbdyyuk onBroken (Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 state
+	METHOD m_nnhiqjxq isShapeFullCube (Lnet/minecraft/unmapped/C_dbwhvcsz;)Z
+		ARG 0 shape
+	METHOD m_nnzrwhio (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 2 stack
+	METHOD m_oawdbalo sideCoversSmallSquare (Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 side
+	METHOD m_obnhbomn dropStack (Lnet/minecraft/unmapped/C_nbzftcdc;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 0 world
+		ARG 1 itemEntitySupplier
+		ARG 2 stack
+	METHOD m_obnhbomn dropStack (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 stack
+	METHOD m_onlimuww randomDisplayTick (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)V
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 random
-	METHOD m_tjztdyvr getDroppedStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_kywxadds;)Ljava/util/List;
-		ARG 0 state
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 blockEntity
-		ARG 4 entity
-		ARG 5 stack
-	METHOD m_tldrrkgj getBlastResistance ()F
-	METHOD m_uhobknhp replace (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;I)V
+	METHOD m_ozbaegrf replace (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;I)V
 		COMMENT Replaces the {@code state} with the {@code newState} at the {@code pos}.
 		COMMENT
 		COMMENT <p>If the two state objects are identical, this method does nothing.
@@ -195,76 +186,7 @@ CLASS net/minecraft/unmapped/C_qodpmxmm net/minecraft/block/Block
 			COMMENT the position of the replaced block state
 		ARG 4 flags
 			COMMENT the bitwise flags for {@link net.minecraft.world.ModifiableWorld#setBlockState(BlockPos, BlockState, int, int)}
-	METHOD m_uommwtml dropStack (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 direction
-		ARG 3 stack
-	METHOD m_urifctzb getDroppedStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hmfagevk;)Ljava/util/List;
-		ARG 0 state
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 blockEntity
-	METHOD m_vegpbgip hasRandomTicks (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
-		ARG 1 state
-	METHOD m_vsuuamvi isTranslucent (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 1 state
-		ARG 2 world
-		ARG 3 pos
-	METHOD m_weiwmdfs pushEntitiesUpBeforeBlockChange (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_pmeibtxt;
-		ARG 0 from
-		ARG 1 to
-		ARG 2 world
-		ARG 3 pos
-	METHOD m_wfihrfnm dropStack (Lnet/minecraft/unmapped/C_nbzftcdc;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 0 world
-		ARG 1 itemEntitySupplier
-		ARG 2 stack
-	METHOD m_wfiwuzuu getRawIdFromState (Lnet/minecraft/unmapped/C_pmeibtxt;)I
-		ARG 0 state
-	METHOD m_wftvezdp copyProperty (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_wyutzlzv;)Lnet/minecraft/unmapped/C_pmeibtxt;
-		ARG 0 source
-		ARG 1 target
-		ARG 2 property
-	METHOD m_wokritlg getTranslationKey ()Ljava/lang/String;
-		COMMENT {@return the translation key for the name of this block}
-		COMMENT
-		COMMENT <p>By default, it returns {@code block.namespace.path} where {@code
-		COMMENT namespace} and {@code path} are of the identifier used for registering
-		COMMENT this block, but {@code /} in {@code path} is replaced with {@code .}.
-		COMMENT If the block is not registered, it returns {@code block.unregistered_sadface}.
-	METHOD m_wptpowza isShapeFullCube (Lnet/minecraft/unmapped/C_dbwhvcsz;)Z
-		ARG 0 shape
-	METHOD m_wslygawy dropStack (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 stack
-	METHOD m_wteazysk dropStacks (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 0 state
-		ARG 1 world
-		ARG 2 pos
-	METHOD m_xhfnjcqu getShapesForStates (Ljava/util/function/Function;)Lcom/google/common/collect/ImmutableMap;
-	METHOD m_ymwrszzb onDestroyedByExplosion (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fpzrhhaa;)V
-		COMMENT Called when this block is destroyed by an explosion.
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 explosion
-	METHOD m_ynqllpii createCuboidShape (DDDDDD)Lnet/minecraft/unmapped/C_dbwhvcsz;
-		ARG 0 minX
-		ARG 2 minY
-		ARG 4 minZ
-		ARG 6 maxX
-		ARG 8 maxY
-		ARG 10 maxZ
-	METHOD m_yzzdpjaj sideCoversSmallSquare (Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 side
-	METHOD m_zepkgtgw getStateWithProperties (Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_pmeibtxt;
-		COMMENT Gets a block state with all properties that both this block and the source block state have.
-		ARG 1 state
-	METHOD m_zhxfpwnq getVelocityMultiplier ()F
-	METHOD m_zlsbpyco replace (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;II)V
+	METHOD m_ozbaegrf replace (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;II)V
 		COMMENT Replaces the {@code state} with the {@code newState} at the {@code pos}.
 		COMMENT
 		COMMENT <p>If the two state objects are identical, this method does nothing.
@@ -283,16 +205,94 @@ CLASS net/minecraft/unmapped/C_qodpmxmm net/minecraft/block/Block
 			COMMENT the bitwise flags for {@link net.minecraft.world.ModifiableWorld#setBlockState(BlockPos, BlockState, int, int)}
 		ARG 5 maxUpdateDepth
 			COMMENT the limit for the cascading block updates
-	CLASS C_krkstisy NeighborGroup
-		FIELD f_hwercrvo other Lnet/minecraft/unmapped/C_pmeibtxt;
-		FIELD f_thfzthus self Lnet/minecraft/unmapped/C_pmeibtxt;
-		FIELD f_zuchteui facing Lnet/minecraft/unmapped/C_fxhiuupx;
+	METHOD m_pbqtaenx dropExperience (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;I)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 size
+	METHOD m_qakebkhv shouldDrawSide (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 side
+	METHOD m_qesqgxsf getPlacementState (Lnet/minecraft/unmapped/C_qjltooia;)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 1 ctx
+	METHOD m_qnjibpqs (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 2 stack
+	METHOD m_qotqbuay appendProperties (Lnet/minecraft/unmapped/C_qakiefze$C_pckcmlvu;)V
+		ARG 1 builder
+	METHOD m_qsoqmhzv (Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 2 stack
+	METHOD m_rauvfepq getVelocityMultiplier ()F
+	METHOD m_rmansrhf onEntityLand (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_srenftsa;)V
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_rwasegde getBlockFromItem (Lnet/minecraft/unmapped/C_xanddrov;)Lnet/minecraft/unmapped/C_qodpmxmm;
+		ARG 0 item
+	METHOD m_sbqqlaaq onPlaced (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 state
+		ARG 4 placer
+		ARG 5 itemStack
+	METHOD m_swmmngzy createCuboidShape (DDDDDD)Lnet/minecraft/unmapped/C_dbwhvcsz;
+		ARG 0 minX
+		ARG 2 minY
+		ARG 4 minZ
+		ARG 6 maxX
+		ARG 8 maxY
+		ARG 10 maxZ
+	METHOD m_uakpodyf postProcessState (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+	METHOD m_ulpybvfb copyProperty (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_wyutzlzv;)Lnet/minecraft/unmapped/C_pmeibtxt;
+		ARG 0 source
+		ARG 1 target
+		ARG 2 property
+	METHOD m_vdeplsqs spawnBreakParticles (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+		ARG 1 world
+		ARG 2 player
+		ARG 3 pos
+		ARG 4 state
+	METHOD m_virauifx isTranslucent (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		ARG 1 state
+		ARG 2 world
+		ARG 3 pos
+	METHOD m_vsbmntku getStateWithProperties (Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_pmeibtxt;
+		COMMENT Gets a block state with all properties that both this block and the source block state have.
+		ARG 1 state
+	METHOD m_wgleqjar getSlipperiness ()F
+	METHOD m_wxowxvwn shouldDropItemsOnExplosion (Lnet/minecraft/unmapped/C_fpzrhhaa;)Z
+		ARG 1 explosion
+	METHOD m_wxxqidqq onSteppedOn (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_srenftsa;)V
+		COMMENT Called when an entity steps on this block.
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 state
+		ARG 4 entity
+	METHOD m_yowjbkzc getJumpVelocityMultiplier ()F
+	METHOD m_ytwdxtvc hasDynamicBounds ()Z
+	METHOD m_ywlumrrp getPickStack (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_kywxadds;
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 state
+	METHOD m_zercknrv appendStacks (Lnet/minecraft/unmapped/C_dyackonl;Lnet/minecraft/unmapped/C_eztffrnr;)V
+		COMMENT Appends the stacks of this block shown in the item group to the list.
+		COMMENT
+		COMMENT @see net.minecraft.item.BlockItem#appendStacks(ItemGroup, DefaultedList)
+		ARG 1 group
+		ARG 2 stacks
+	METHOD m_zufbanmi canMobSpawnInside ()Z
+	CLASS C_zdraaygv
+		METHOD load (Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 shape
+	CLASS C_zesmdbzl NeighborGroup
+		FIELD f_ehjnualq facing Lnet/minecraft/unmapped/C_fxhiuupx;
+		FIELD f_gjrwkyun self Lnet/minecraft/unmapped/C_pmeibtxt;
+		FIELD f_ohwryebj other Lnet/minecraft/unmapped/C_pmeibtxt;
 		METHOD <init> (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 self
 			ARG 2 other
 			ARG 3 facing
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
-	CLASS C_qedgaiim
-		METHOD load (Ljava/lang/Object;)Ljava/lang/Object;
-			ARG 1 shape
