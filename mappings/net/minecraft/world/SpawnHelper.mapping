@@ -1,16 +1,19 @@
 CLASS net/minecraft/unmapped/C_ddogyfvr net/minecraft/world/SpawnHelper
-	FIELD f_bcnnygdw MIN_SPAWN_DISTANCE I
-	FIELD f_bjxbznvg LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_hyheghds CHUNK_AREA I
-	FIELD f_zeuymyjp SPAWNABLE_GROUPS [Lnet/minecraft/unmapped/C_icxdqmro;
-	METHOD m_bhpfjfxq pickRandomSpawnEntry (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_icxdqmro;Ljava/util/Random;Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/Optional;
+	FIELD f_bqatczld CHUNK_AREA I
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_iixfctmb SPAWNABLE_GROUPS [Lnet/minecraft/unmapped/C_icxdqmro;
+	FIELD f_rijlihud MIN_SPAWN_DISTANCE I
+	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_icxdqmro;)Z
+		ARG 0 spawnGroup
+	METHOD m_bwzwdoox isValidSpawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zlwsfkxd;D)Z
 		ARG 0 world
-		ARG 1 structureAccessor
-		ARG 2 chunkGenerator
-		ARG 3 spawnGroup
-		ARG 4 random
-		ARG 5 pos
-	METHOD m_butctlrr canSpawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_zmxhfgpy$C_hidgqamj;Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;D)Z
+		ARG 1 entity
+		ARG 2 squaredDistance
+	METHOD m_bzuetywr setupSpawn (ILjava/lang/Iterable;Lnet/minecraft/unmapped/C_ddogyfvr$C_wjzayrfj;)Lnet/minecraft/unmapped/C_ddogyfvr$C_ugzpumba;
+		ARG 0 spawningChunkCount
+		ARG 1 entities
+		ARG 2 chunkSource
+	METHOD m_cxuhdtkb canSpawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_zmxhfgpy$C_shdjrkkv;Lnet/minecraft/unmapped/C_kkdaznyh$C_koyyvhhw;D)Z
 		ARG 0 world
 		ARG 1 group
 		ARG 2 structureAccessor
@@ -18,133 +21,130 @@ CLASS net/minecraft/unmapped/C_ddogyfvr net/minecraft/world/SpawnHelper
 		ARG 4 spawnEntry
 		ARG 5 pos
 		ARG 6 squaredDistance
-	METHOD m_crtxukwv containsSpawnEntry (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_zmxhfgpy$C_hidgqamj;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 0 world
-		ARG 1 structureAccessor
-		ARG 2 chunkGenerator
-		ARG 3 spawnGroup
-		ARG 4 spawnEntry
-		ARG 5 pos
-	METHOD m_dskasamt (Lnet/minecraft/unmapped/C_zlwsfkxd;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
-		ARG 0 entity
-		ARG 1 chunk
-	METHOD m_ghdohwmo canSpawn (Lnet/minecraft/unmapped/C_zvhpcspb$C_chsfngfo;Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rbvsvago;)Z
-		ARG 0 location
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 entityType
-	METHOD m_jjayopez spawnEntitiesInChunk (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_ddogyfvr$C_hwcsmark;Lnet/minecraft/unmapped/C_ddogyfvr$C_zkqghbsh;)V
-		ARG 0 group
-		ARG 1 world
-		ARG 2 chunk
-		ARG 3 pos
-		ARG 4 checker
-		ARG 5 runner
-	METHOD m_lkrhezqw createMob (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_rbvsvago;)Lnet/minecraft/unmapped/C_zlwsfkxd;
-		ARG 0 world
-		ARG 1 type
-	METHOD m_mqwrfxez (Lnet/minecraft/unmapped/C_icxdqmro;)Z
-		ARG 0 spawnGroup
-	METHOD m_nxdxojkf getBiomeDirectly (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Lnet/minecraft/unmapped/C_sfepklro;
-		ARG 0 pos
-		ARG 1 chunk
-	METHOD m_oenyrolv getEntitySpawnPos (Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_rbvsvago;II)Lnet/minecraft/unmapped/C_kkdaznyh;
-		ARG 0 world
-		ARG 1 entityType
-		ARG 2 x
-		ARG 3 z
-	METHOD m_okeeudnf populateEntities (Lnet/minecraft/unmapped/C_dcylznmj;Lnet/minecraft/unmapped/C_sfepklro;Lnet/minecraft/unmapped/C_utrzsrny;Ljava/util/Random;)V
-		ARG 0 world
-		ARG 1 biome
-		ARG 2 chunkPos
-		ARG 3 random
-	METHOD m_raucpwis getSpawnPos (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_qklvsdrh;)Lnet/minecraft/unmapped/C_kkdaznyh;
-		ARG 0 world
-		ARG 1 chunk
-	METHOD m_rdpncspe spawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_ddogyfvr$C_jixqfgst;ZZZ)V
+	METHOD m_dyuxiisw spawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_ddogyfvr$C_ugzpumba;ZZZ)V
 		ARG 0 world
 		ARG 1 chunk
 		ARG 2 info
 		ARG 3 spawnAnimals
 		ARG 4 spawnMonsters
 		ARG 5 rareSpawn
-	METHOD m_rotlmskj isClearForSpawn (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fuitekqx;Lnet/minecraft/unmapped/C_rbvsvago;)Z
-		ARG 0 blockView
-		ARG 1 pos
-		ARG 2 state
-		ARG 3 fluidState
-		ARG 4 entityType
-	METHOD m_sxtyiafy setupSpawn (ILjava/lang/Iterable;Lnet/minecraft/unmapped/C_ddogyfvr$C_kdpputyo;)Lnet/minecraft/unmapped/C_ddogyfvr$C_jixqfgst;
-		ARG 0 spawningChunkCount
-		ARG 1 entities
-		ARG 2 chunkSource
-	METHOD m_sxyyxdgy isValidSpawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zlwsfkxd;D)Z
+	METHOD m_enjhboow getEntitySpawnPos (Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_rbvsvago;II)Lnet/minecraft/unmapped/C_kkdaznyh;
 		ARG 0 world
-		ARG 1 entity
-		ARG 2 squaredDistance
-	METHOD m_ugwkmfyr spawnEntitiesInChunk (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;)V
+		ARG 1 entityType
+		ARG 2 x
+		ARG 3 z
+	METHOD m_hjhugogi createMob (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_rbvsvago;)Lnet/minecraft/unmapped/C_zlwsfkxd;
+		ARG 0 world
+		ARG 1 type
+	METHOD m_hxmmxgut isAcceptableSpawnPosition (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_kkdaznyh$C_koyyvhhw;D)Z
+		ARG 0 world
+		ARG 1 chunk
+		ARG 2 pos
+		ARG 3 squaredDistance
+	METHOD m_icectwvb (Lnet/minecraft/unmapped/C_zlwsfkxd;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
+		ARG 0 entity
+		ARG 1 chunk
+	METHOD m_kexbtkyn canSpawn (Lnet/minecraft/unmapped/C_zvhpcspb$C_gbzmuyje;Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rbvsvago;)Z
+		ARG 0 location
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 entityType
+	METHOD m_mlyhjnwz spawnEntitiesInChunk (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;)V
 		ARG 0 group
 		ARG 1 world
 		ARG 2 pos
-	METHOD m_wjroxwzy spawnEntitiesInChunk (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_ddogyfvr$C_hwcsmark;Lnet/minecraft/unmapped/C_ddogyfvr$C_zkqghbsh;)V
+	METHOD m_mlyhjnwz spawnEntitiesInChunk (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_ddogyfvr$C_gtznlhud;Lnet/minecraft/unmapped/C_ddogyfvr$C_qsdgyypd;)V
+		ARG 0 group
+		ARG 1 world
+		ARG 2 chunk
+		ARG 3 pos
+		ARG 4 checker
+		ARG 5 runner
+	METHOD m_mzecycsz spawnEntitiesInChunk (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_ddogyfvr$C_gtznlhud;Lnet/minecraft/unmapped/C_ddogyfvr$C_qsdgyypd;)V
 		ARG 0 group
 		ARG 1 world
 		ARG 2 chunk
 		ARG 3 checker
 		ARG 4 runner
-	METHOD m_wytbfrlm isAcceptableSpawnPosition (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;D)Z
+	METHOD m_noeqdmfx pickRandomSpawnEntry (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_icxdqmro;Ljava/util/Random;Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/Optional;
 		ARG 0 world
-		ARG 1 chunk
-		ARG 2 pos
-		ARG 3 squaredDistance
-	METHOD m_xyjodkrg (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
-		ARG 0 type
-		ARG 1 pos
-		ARG 2 chunk
-	METHOD m_ywmixwse getSpawnEntries (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_sfepklro;)Lnet/minecraft/unmapped/C_vhgtymyu;
+		ARG 1 structureAccessor
+		ARG 2 chunkGenerator
+		ARG 3 spawnGroup
+		ARG 4 random
+		ARG 5 pos
+	METHOD m_sgbjuymc populateEntities (Lnet/minecraft/unmapped/C_dcylznmj;Lnet/minecraft/unmapped/C_sfepklro;Lnet/minecraft/unmapped/C_utrzsrny;Ljava/util/Random;)V
+		ARG 0 world
+		ARG 1 biome
+		ARG 2 chunkPos
+		ARG 3 random
+	METHOD m_umnuufkr getSpawnEntries (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_sfepklro;)Lnet/minecraft/unmapped/C_vhgtymyu;
 		ARG 0 world
 		ARG 1 structureAccessor
 		ARG 2 chunkGenerator
 		ARG 3 spawnGroup
 		ARG 4 pos
 		ARG 5 biome
-	METHOD m_zohhbibb (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_vrfbsuyf;Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_qklvsdrh;)V
+	METHOD m_urmvlvcz getBiomeDirectly (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Lnet/minecraft/unmapped/C_sfepklro;
+		ARG 0 pos
+		ARG 1 chunk
+	METHOD m_uuzbrwrr (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
+		ARG 0 type
+		ARG 1 pos
+		ARG 2 chunk
+	METHOD m_wfukanga isClearForSpawn (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fuitekqx;Lnet/minecraft/unmapped/C_rbvsvago;)Z
+		ARG 0 blockView
+		ARG 1 pos
+		ARG 2 state
+		ARG 3 fluidState
+		ARG 4 entityType
+	METHOD m_wxtanizz containsSpawnEntry (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_zmxhfgpy$C_shdjrkkv;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		ARG 0 world
+		ARG 1 structureAccessor
+		ARG 2 chunkGenerator
+		ARG 3 spawnGroup
+		ARG 4 spawnEntry
+		ARG 5 pos
+	METHOD m_zlanohkj getSpawnPos (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_qklvsdrh;)Lnet/minecraft/unmapped/C_kkdaznyh;
+		ARG 0 world
+		ARG 1 chunk
+	METHOD m_zqfnszkd (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_vrfbsuyf;Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_qklvsdrh;)V
 		ARG 5 chunk
-	CLASS C_hwcsmark Checker
-		METHOD m_zouiudvu test (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
+	CLASS C_gtznlhud Checker
+		METHOD test test (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
 			ARG 1 type
 			ARG 2 pos
 			ARG 3 chunk
-	CLASS C_jixqfgst Info
-		FIELD f_bvcyoqif densityField Lnet/minecraft/unmapped/C_vrfbsuyf;
-		FIELD f_dqopvocz groupToCountView Lit/unimi/dsi/fastutil/objects/Object2IntMap;
-		FIELD f_kztklkao cachedPos Lnet/minecraft/unmapped/C_kkdaznyh;
-		FIELD f_mozfrchk spawningChunkCount I
-		FIELD f_mzjucrts cachedDensityMass D
-		FIELD f_phmaduba groupToCount Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;
-		FIELD f_qeparumv cachedEntityType Lnet/minecraft/unmapped/C_rbvsvago;
+	CLASS C_qsdgyypd Runner
+		METHOD run run (Lnet/minecraft/unmapped/C_zlwsfkxd;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
+			ARG 1 entity
+			ARG 2 chunk
+	CLASS C_ugzpumba Info
+		FIELD f_chesbpzg densityField Lnet/minecraft/unmapped/C_vrfbsuyf;
+		FIELD f_damakkqy groupToCount Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;
+		FIELD f_enlhjgzo cachedPos Lnet/minecraft/unmapped/C_kkdaznyh;
+		FIELD f_gcjsbecw spawningChunkCount I
+		FIELD f_sfmjoahc groupToCountView Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		FIELD f_wukoerew cachedEntityType Lnet/minecraft/unmapped/C_rbvsvago;
+		FIELD f_zraclgkt cachedDensityMass D
 		METHOD <init> (ILit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;Lnet/minecraft/unmapped/C_vrfbsuyf;)V
 			ARG 1 spawningChunkCount
 			ARG 2 groupToCount
 			ARG 3 densityField
-		METHOD m_eujpzrbx getGroupToCount ()Lit/unimi/dsi/fastutil/objects/Object2IntMap;
-		METHOD m_jfihmoat run (Lnet/minecraft/unmapped/C_zlwsfkxd;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
+		METHOD m_iqfoemia run (Lnet/minecraft/unmapped/C_zlwsfkxd;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
 			COMMENT @see SpawnHelper.Runner#run(MobEntity, Chunk)
 			ARG 1 entity
 			ARG 2 chunk
-		METHOD m_lxayfglr getSpawningChunkCount ()I
-		METHOD m_ppxnguok isBelowCap (Lnet/minecraft/unmapped/C_icxdqmro;)Z
-			ARG 1 group
-		METHOD m_zbrikbpm test (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
+		METHOD m_lggzfiij getGroupToCount ()Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		METHOD m_spxrnhpw test (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_rqmmmzwl;)Z
 			COMMENT @see SpawnHelper.Checker#test(EntityType, BlockPos, Chunk)
 			ARG 1 type
 			ARG 2 pos
 			ARG 3 chunk
-	CLASS C_kdpputyo ChunkSource
-		METHOD m_smjmgiuy query (JLjava/util/function/Consumer;)V
+		METHOD m_uwikudkd isBelowCap (Lnet/minecraft/unmapped/C_icxdqmro;)Z
+			ARG 1 group
+		METHOD m_ytqbefhx getSpawningChunkCount ()I
+	CLASS C_wjzayrfj ChunkSource
+		METHOD query query (JLjava/util/function/Consumer;)V
 			ARG 1 pos
 			ARG 3 chunkConsumer
-	CLASS C_zkqghbsh Runner
-		METHOD m_asopvggx run (Lnet/minecraft/unmapped/C_zlwsfkxd;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
-			ARG 1 entity
-			ARG 2 chunk

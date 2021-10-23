@@ -1,15 +1,13 @@
 CLASS net/minecraft/unmapped/C_fawcbmgb net/minecraft/block/entity/EndGatewayBlockEntity
-	FIELD f_dnocixdw teleportCooldown I
-	FIELD f_dpglosrr LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_llclznnz exitPortalPos Lnet/minecraft/unmapped/C_kkdaznyh;
-	FIELD f_weqrdxyl exactTeleport Z
-	FIELD f_wogoeubh age J
-	METHOD m_ardugqsd clientTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fawcbmgb;)V
-		ARG 0 world
+	FIELD f_ahvtbvfq exactTeleport Z
+	FIELD f_avakatuq teleportCooldown I
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_flsaegaq age J
+	FIELD f_jddprltv exitPortalPos Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_eizgrtky setExitPortalPos (Lnet/minecraft/unmapped/C_kkdaznyh;Z)V
 		ARG 1 pos
-		ARG 2 state
-		ARG 3 blockEntity
-	METHOD m_becamkkt setupExitPortalLocation (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_kkdaznyh;
+		ARG 2 exactTeleport
+	METHOD m_htmjflht setupExitPortalLocation (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_kkdaznyh;
 		COMMENT Finds teleport location and creates an island to teleport to (if there is none).
 		COMMENT
 		COMMENT <p>This does not create an exit portal.
@@ -17,54 +15,56 @@ CLASS net/minecraft/unmapped/C_fawcbmgb net/minecraft/block/entity/EndGatewayBlo
 		COMMENT @return the position of the exit portal
 		ARG 0 world
 		ARG 1 pos
-	METHOD m_bfxooobi serverTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fawcbmgb;)V
+	METHOD m_iabzvvcq findBestPortalExitPos (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_kkdaznyh;
 		ARG 0 world
 		ARG 1 pos
-		ARG 2 state
-		ARG 3 blockEntity
-	METHOD m_dzmfshxy startTeleportCooldown (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fawcbmgb;)V
+	METHOD m_incfwyez findExitPortalPos (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;IZ)Lnet/minecraft/unmapped/C_kkdaznyh;
 		ARG 0 world
 		ARG 1 pos
-		ARG 2 state
-		ARG 3 blockEntity
-	METHOD m_eqljxwea findPortalPosition (Lnet/minecraft/unmapped/C_qklvsdrh;)Lnet/minecraft/unmapped/C_kkdaznyh;
-		ARG 0 chunk
-	METHOD m_eyzbnuqs canTeleport (Lnet/minecraft/unmapped/C_srenftsa;)Z
+		ARG 2 searchRadius
+		ARG 3 force
+	METHOD m_izdfzkjs canTeleport (Lnet/minecraft/unmapped/C_srenftsa;)Z
 		ARG 0 entity
-	METHOD m_htwtfdth findTeleportLocation (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_xxfpupgv;
+	METHOD m_jjnjmkkl getChunk (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_xxfpupgv;)Lnet/minecraft/unmapped/C_qklvsdrh;
 		ARG 0 world
 		ARG 1 pos
-	METHOD m_koupajtz isRecentlyGenerated ()Z
-	METHOD m_loxnpqmr setExitPortalPos (Lnet/minecraft/unmapped/C_kkdaznyh;Z)V
-		ARG 1 pos
-		ARG 2 exactTeleport
-	METHOD m_lrchuzah findBestPortalExitPos (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_nhusnjix serverTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fawcbmgb;)V
 		ARG 0 world
 		ARG 1 pos
-	METHOD m_lsxfjvqy getChunk (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_xxfpupgv;)Lnet/minecraft/unmapped/C_qklvsdrh;
+		ARG 2 state
+		ARG 3 blockEntity
+	METHOD m_obxkvqge clientTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fawcbmgb;)V
 		ARG 0 world
 		ARG 1 pos
-	METHOD m_mvxmvrsw createPortal (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_adoysndv;)V
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 config
-	METHOD m_mweecbuz isChunkEmpty (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_xxfpupgv;)Z
-		ARG 0 world
-		ARG 1 pos
-	METHOD m_poxfmccc getDrawnSidesCount ()I
-	METHOD m_pqoevamf needsCooldownBeforeTeleporting ()Z
-	METHOD m_qshjfety tryTeleportingEntity (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_fawcbmgb;)V
+		ARG 2 state
+		ARG 3 blockEntity
+	METHOD m_ovitudoy isRecentlyGenerated ()Z
+	METHOD m_owskoutf tryTeleportingEntity (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_fawcbmgb;)V
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 state
 		ARG 3 entity
 		ARG 4 blockEntity
-	METHOD m_ujmaigtp getRecentlyGeneratedBeamHeight (F)F
-		ARG 1 tickDelta
-	METHOD m_vrwwzfgq findExitPortalPos (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;IZ)Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_qekadodo isChunkEmpty (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_xxfpupgv;)Z
 		ARG 0 world
 		ARG 1 pos
-		ARG 2 searchRadius
-		ARG 3 force
-	METHOD m_zegxanwi getCooldownBeamHeight (F)F
+	METHOD m_qhtnlqrw needsCooldownBeforeTeleporting ()Z
+	METHOD m_tcaqztkj startTeleportCooldown (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fawcbmgb;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+		ARG 3 blockEntity
+	METHOD m_ujnexewl getCooldownBeamHeight (F)F
 		ARG 1 tickDelta
+	METHOD m_vstvvtcr getDrawnSidesCount ()I
+	METHOD m_xplljlxy createPortal (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_adoysndv;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 config
+	METHOD m_ympgfobf findPortalPosition (Lnet/minecraft/unmapped/C_qklvsdrh;)Lnet/minecraft/unmapped/C_kkdaznyh;
+		ARG 0 chunk
+	METHOD m_yzgtbyfh getRecentlyGeneratedBeamHeight (F)F
+		ARG 1 tickDelta
+	METHOD m_znqyjsum findTeleportLocation (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_xxfpupgv;
+		ARG 0 world
+		ARG 1 pos

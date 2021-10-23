@@ -1,25 +1,25 @@
 CLASS net/minecraft/unmapped/C_srdwpjyw net/minecraft/datafixer/fix/LeavesFix
-	FIELD f_ioqyzlbo LOGS_MAP Ljava/util/Set;
-	FIELD f_jronqsjq LEAVES_MAP Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+	FIELD f_agzdzhta LEAVES_MAP Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+	FIELD f_cjxzinzo LOGS_MAP Ljava/util/Set;
 	METHOD <init> (Lcom/mojang/datafixers/schemas/Schema;Z)V
 		ARG 1 outputSchema
 		ARG 2 changesType
-	CLASS C_aurhxwgf ListFixer
-		FIELD f_bxjserit properties Ljava/util/List;
-		FIELD f_rhitcnrl blockStateMap Lnet/minecraft/unmapped/C_banbiqsh;
-		METHOD m_brljkdqb isFixed ()Z
-		METHOD m_fuyrgiul computeFlags (Ljava/lang/String;ZI)I
+	CLASS C_ndlurumb LeavesLogFixer
+		FIELD f_omluappj leafStates Lit/unimi/dsi/fastutil/ints/Int2IntMap;
+		FIELD f_qobgvsgp leafIndices Lit/unimi/dsi/fastutil/ints/IntSet;
+		FIELD f_zserjyeo logIndices Lit/unimi/dsi/fastutil/ints/IntSet;
+		METHOD m_cjtpjlyo computeLeafStates (III)V
+		METHOD m_lmpyiyjc createLeafProperties (Lcom/mojang/serialization/Dynamic;Ljava/lang/String;ZI)Lcom/mojang/serialization/Dynamic;
+		METHOD m_pmxvihis isLog (I)Z
+		METHOD m_wcvjhapo getDistanceToLog (I)I
+		METHOD m_xkfpbvqw isLeaf (I)Z
+	CLASS C_ymhzhlof ListFixer
+		FIELD f_dvnsdrln properties Ljava/util/List;
+		FIELD f_rtylqebf blockStateMap Lnet/minecraft/unmapped/C_banbiqsh;
+		METHOD m_caxucobq isFixed ()Z
+		METHOD m_dqdgcwfi computeFlags (Ljava/lang/String;ZI)I
 			ARG 1 leafBlockName
 			ARG 2 persistent
-		METHOD m_kllhmvdz needsFix (I)I
-		METHOD m_mykspnim needsFix ()Z
-		METHOD m_vrsrnvey computeFixableBlockStates (Lcom/mojang/serialization/Dynamic;)V
-	CLASS C_ldnjztnb LeavesLogFixer
-		FIELD f_apgwdkzd leafIndices Lit/unimi/dsi/fastutil/ints/IntSet;
-		FIELD f_sybtrkae logIndices Lit/unimi/dsi/fastutil/ints/IntSet;
-		FIELD f_wbviboso leafStates Lit/unimi/dsi/fastutil/ints/Int2IntMap;
-		METHOD m_ggdmvmtz createLeafProperties (Lcom/mojang/serialization/Dynamic;Ljava/lang/String;ZI)Lcom/mojang/serialization/Dynamic;
-		METHOD m_gnqeablj getDistanceToLog (I)I
-		METHOD m_kvgngmcz isLeaf (I)Z
-		METHOD m_pfhecqol computeLeafStates (III)V
-		METHOD m_yjmafcbb isLog (I)Z
+		METHOD m_ndluxlod needsFix (I)I
+		METHOD m_plwmqrjh computeFixableBlockStates (Lcom/mojang/serialization/Dynamic;)V
+		METHOD m_ruublezp needsFix ()Z

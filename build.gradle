@@ -224,13 +224,13 @@ task downloadMcJars(dependsOn: downloadWantedVersionManifest) {
 
 task downloadHashedMojmap(type: Download) {
 	group = buildMappingGroup
-	def url = "https://maven.quiltmc.org/repository/release/org/quiltmc/hashed-mojmap/${minecraft_version}/hashed-mojmap-${minecraft_version}.jar"
+	def url = "https://maven.quiltmc.org/repository/release/org/quiltmc/hashed/${minecraft_version}/hashed-mojmap-${minecraft_version}.jar"
 	if (USE_SNAPSHOT_HASHES) {
-		def xml = new URL("https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/maven-metadata.xml").text
+		def xml = new URL("https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed/${minecraft_version}-SNAPSHOT/maven-metadata.xml").text
 		def metadata = new XmlSlurper().parseText(xml)
 		def version = metadata.versioning.snapshot;
 		def snapshotVersion = "${minecraft_version}-${version.timestamp}-${version.buildNumber}"
-		url = "https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed-mojmap/${minecraft_version}-SNAPSHOT/hashed-mojmap-${snapshotVersion}.jar"
+		url = "https://maven.quiltmc.org/repository/snapshot/org/quiltmc/hashed/${minecraft_version}-SNAPSHOT/hashed-${snapshotVersion}.jar"
 	}
 
 	src com.google.common.net.UrlEscapers.urlFragmentEscaper().escape(url)

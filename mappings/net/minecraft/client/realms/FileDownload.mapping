@@ -1,58 +1,58 @@
 CLASS net/minecraft/unmapped/C_plcatlzb net/minecraft/client/realms/FileDownload
-	FIELD f_aboqvyjm LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_clyxsqae httpRequest Lorg/apache/http/client/methods/HttpGet;
-	FIELD f_ekkdhwnv extracting Z
-	FIELD f_gqtidevx INVALID_FILE_NAMES [Ljava/lang/String;
-	FIELD f_jzgqmwiy currentThread Ljava/lang/Thread;
-	FIELD f_leaansrf requestConfig Lorg/apache/http/client/config/RequestConfig;
-	FIELD f_lqksfrgv resourcePackPath Ljava/io/File;
-	FIELD f_pocbwkpx cancelled Z
-	FIELD f_saofivdy backupFile Ljava/io/File;
-	FIELD f_wicknvxl error Z
-	FIELD f_xkwdjnng finished Z
-	METHOD m_btcporru contentLength (Ljava/lang/String;)J
+	FIELD f_bpzavjej cancelled Z
+	FIELD f_bwcvzbvs resourcePackPath Ljava/io/File;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_hgemyrth INVALID_FILE_NAMES [Ljava/lang/String;
+	FIELD f_ihekpqer error Z
+	FIELD f_lojzpcbo backupFile Ljava/io/File;
+	FIELD f_pzmgpwia requestConfig Lorg/apache/http/client/config/RequestConfig;
+	FIELD f_rhmurzuk httpRequest Lorg/apache/http/client/methods/HttpGet;
+	FIELD f_rljmpwkm extracting Z
+	FIELD f_wxggldpv currentThread Ljava/lang/Thread;
+	FIELD f_zekysnnh finished Z
+	METHOD m_brvhguqr isError ()Z
+	METHOD m_bzzvfyrx readNbtFile (Ljava/io/File;)V
+		ARG 0 file
+	METHOD m_gvzeosqw untarGzipArchive (Ljava/lang/String;Ljava/io/File;Lnet/minecraft/unmapped/C_tingawpb;)V
+		ARG 1 name
+		ARG 2 archive
+		ARG 3 storage
+	METHOD m_mateetlt contentLength (Ljava/lang/String;)J
 		ARG 1 downloadLink
-	METHOD m_djzfbkmb isError ()Z
-	METHOD m_fvlgxoey isFinished ()Z
-	METHOD m_nivzqovy isExtracting ()Z
-	METHOD m_nsgsnscr downloadWorld (Lnet/minecraft/unmapped/C_tmcpyzlf;Ljava/lang/String;Lnet/minecraft/unmapped/C_stgfhfkg$C_uclgxbtk;Lnet/minecraft/unmapped/C_tingawpb;)V
+	METHOD m_mzuzoktp isExtracting ()Z
+	METHOD m_pteusjwp isFinished ()Z
+	METHOD m_tlebnwyy cancel ()V
+	METHOD m_xwbvsrua downloadWorld (Lnet/minecraft/unmapped/C_tmcpyzlf;Ljava/lang/String;Lnet/minecraft/unmapped/C_stgfhfkg$C_kxndtnwa;Lnet/minecraft/unmapped/C_tingawpb;)V
 		ARG 1 download
 		ARG 2 message
 		ARG 3 status
 		ARG 4 storage
-	METHOD m_uklsbgtb untarGzipArchive (Ljava/lang/String;Ljava/io/File;Lnet/minecraft/unmapped/C_tingawpb;)V
-		ARG 1 name
-		ARG 2 archive
-		ARG 3 storage
-	METHOD m_unzqdfpr findAvailableFolderName (Ljava/lang/String;)Ljava/lang/String;
+	METHOD m_xyjebcye findAvailableFolderName (Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 folder
-	METHOD m_vrjjfkjc cancel ()V
-	METHOD m_zfqggpqp readNbtFile (Ljava/io/File;)V
-		ARG 0 file
-	CLASS C_arjnldsk DownloadCountingOutputStream
-		FIELD f_xyetvilc listener Ljava/awt/event/ActionListener;
-		METHOD <init> (Lnet/minecraft/unmapped/C_plcatlzb;Ljava/io/OutputStream;)V
-			ARG 2 out
-		METHOD afterWrite (I)V
-			ARG 1 n
-		METHOD m_swxfbxxj setListener (Ljava/awt/event/ActionListener;)V
-			ARG 1 listener
-	CLASS C_czhitbwb ResourcePackProgressListener
-		FIELD f_exwzdgps tempFile Ljava/io/File;
-		FIELD f_hhlzosrj worldDownload Lnet/minecraft/unmapped/C_tmcpyzlf;
-		FIELD f_nijdwnrn downloadStatus Lnet/minecraft/unmapped/C_stgfhfkg$C_uclgxbtk;
-		METHOD <init> (Lnet/minecraft/unmapped/C_plcatlzb;Ljava/io/File;Lnet/minecraft/unmapped/C_stgfhfkg$C_uclgxbtk;Lnet/minecraft/unmapped/C_tmcpyzlf;)V
+	CLASS C_amfzduaf ResourcePackProgressListener
+		FIELD f_lojzpcbo tempFile Ljava/io/File;
+		FIELD f_omxvtbnp downloadStatus Lnet/minecraft/unmapped/C_stgfhfkg$C_kxndtnwa;
+		FIELD f_vcxkxkoq worldDownload Lnet/minecraft/unmapped/C_tmcpyzlf;
+		METHOD <init> (Lnet/minecraft/unmapped/C_plcatlzb;Ljava/io/File;Lnet/minecraft/unmapped/C_stgfhfkg$C_kxndtnwa;Lnet/minecraft/unmapped/C_tmcpyzlf;)V
 			ARG 2 tempFile
 			ARG 3 downloadStatus
 			ARG 4 worldDownload
 		METHOD actionPerformed (Ljava/awt/event/ActionEvent;)V
 			ARG 1 e
-	CLASS C_ffuxbneb ProgressListener
-		FIELD f_bdmuazpf worldName Ljava/lang/String;
-		FIELD f_liikbyqm tempFile Ljava/io/File;
-		FIELD f_ujfllayh levelStorageSource Lnet/minecraft/unmapped/C_tingawpb;
-		FIELD f_zogyflly downloadStatus Lnet/minecraft/unmapped/C_stgfhfkg$C_uclgxbtk;
-		METHOD <init> (Lnet/minecraft/unmapped/C_plcatlzb;Ljava/lang/String;Ljava/io/File;Lnet/minecraft/unmapped/C_tingawpb;Lnet/minecraft/unmapped/C_stgfhfkg$C_uclgxbtk;)V
+	CLASS C_bhszfwlz DownloadCountingOutputStream
+		FIELD f_plavvaux listener Ljava/awt/event/ActionListener;
+		METHOD <init> (Lnet/minecraft/unmapped/C_plcatlzb;Ljava/io/OutputStream;)V
+			ARG 2 out
+		METHOD afterWrite (I)V
+			ARG 1 n
+		METHOD m_cwnlyurw setListener (Ljava/awt/event/ActionListener;)V
+			ARG 1 listener
+	CLASS C_fcncqzzq ProgressListener
+		FIELD f_bxjeyoru levelStorageSource Lnet/minecraft/unmapped/C_tingawpb;
+		FIELD f_gnaroizf worldName Ljava/lang/String;
+		FIELD f_lojzpcbo tempFile Ljava/io/File;
+		FIELD f_omxvtbnp downloadStatus Lnet/minecraft/unmapped/C_stgfhfkg$C_kxndtnwa;
+		METHOD <init> (Lnet/minecraft/unmapped/C_plcatlzb;Ljava/lang/String;Ljava/io/File;Lnet/minecraft/unmapped/C_tingawpb;Lnet/minecraft/unmapped/C_stgfhfkg$C_kxndtnwa;)V
 			ARG 2 worldName
 			ARG 3 tempFile
 			ARG 4 levelStorageSource

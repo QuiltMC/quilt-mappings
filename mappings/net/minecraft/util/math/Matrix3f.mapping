@@ -1,19 +1,19 @@
 CLASS net/minecraft/unmapped/C_ffukturc net/minecraft/util/math/Matrix3f
-	FIELD f_atpwbdhd COS_PI_OVER_EIGHT F
-	FIELD f_ekjozvxl SIN_PI_OVER_EIGHT F
-	FIELD f_grxwtwuz a02 F
-	FIELD f_irmbjdfy a20 F
-	FIELD f_jrjgniil a22 F
-	FIELD f_kjkuoloh a10 F
-	FIELD f_nakmfvbd a00 F
-	FIELD f_pfmmmzgp ORDER I
+	FIELD f_ayrrabwr a20 F
+	FIELD f_ayunmlgk a10 F
+	FIELD f_dbsajuhi SIN_PI_OVER_EIGHT F
+	FIELD f_dgltgaqq a02 F
+	FIELD f_dpwqills a21 F
+	FIELD f_mnydyrlv a11 F
+	FIELD f_nxxvznlr ORDER I
 		COMMENT The number of rows and columns ({@value}) this matrix has.
-	FIELD f_piezfuav a01 F
-	FIELD f_uigixrbp a12 F
-	FIELD f_uuiikprm SQRT_HALF F
-	FIELD f_xffsodvl a21 F
-	FIELD f_yncvpqah THREE_PLUS_TWO_SQRT_TWO F
-	FIELD f_zfjmtmkc a11 F
+	FIELD f_rqrwafbq a22 F
+	FIELD f_rvzafebq COS_PI_OVER_EIGHT F
+	FIELD f_shwqwvjk a01 F
+	FIELD f_suvifdjt a00 F
+	FIELD f_ulrxpesa SQRT_HALF F
+	FIELD f_xxfdwpop a12 F
+	FIELD f_xyhwnnjm THREE_PLUS_TWO_SQRT_TWO F
 	METHOD <init> (Lnet/minecraft/unmapped/C_bijddvxg;)V
 		ARG 1 matrix
 	METHOD <init> (Lnet/minecraft/unmapped/C_exsttxvr;)V
@@ -22,48 +22,41 @@ CLASS net/minecraft/unmapped/C_ffukturc net/minecraft/util/math/Matrix3f
 		ARG 1 source
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_asnpwjdg multiply (F)V
+	METHOD m_aihmnmuw trace ()F
+		COMMENT Returns the sum of the elements on the main diagonal.
+	METHOD m_bzgmdvpq getSinAndCosOfRotation (FFF)Lcom/mojang/datafixers/util/Pair;
+		ARG 0 upperLeft
+		ARG 1 diagonalAverage
+		ARG 2 lowerRight
+	METHOD m_gaaxmhpg transpose ()V
+	METHOD m_hzlvebty determinant ()F
+	METHOD m_kbdawgyy subtract (Lnet/minecraft/unmapped/C_ffukturc;)V
+		ARG 1 matrix
+	METHOD m_klmaauaa multiply (F)V
 		ARG 1 scalar
-	METHOD m_bmzeedal determinant ()F
-	METHOD m_fpxnqnbo invert ()Z
-	METHOD m_gddkadre scale (FFF)Lnet/minecraft/unmapped/C_ffukturc;
-		ARG 0 x
-		ARG 1 y
-		ARG 2 z
-	METHOD m_glhuumxu readColumnMajor (Ljava/nio/FloatBuffer;)V
-		COMMENT Reads a matrix from the buffer in column-major order.
-		COMMENT
-		COMMENT @see #readRowMajor(FloatBuffer)
-		COMMENT @see #read(FloatBuffer, boolean)
-		ARG 1 buf
-	METHOD m_hjezegnw readRowMajor (Ljava/nio/FloatBuffer;)V
-		COMMENT Reads a matrix from the buffer in row-major order.
-		COMMENT
-		COMMENT @see #readColumnMajor(FloatBuffer)
-		COMMENT @see #read(FloatBuffer, boolean)
-		ARG 1 buf
-	METHOD m_irobvpir loadIdentity ()V
-	METHOD m_izsuxwog writeRowMajor (Ljava/nio/FloatBuffer;)V
+	METHOD m_klmaauaa multiply (Lnet/minecraft/unmapped/C_exsttxvr;)V
+		ARG 1 quaternion
+	METHOD m_klmaauaa multiply (Lnet/minecraft/unmapped/C_ffukturc;)V
+		ARG 1 other
+	METHOD m_kmzkuuzs (Lnet/minecraft/unmapped/C_ffukturc;Lnet/minecraft/unmapped/C_exsttxvr;)V
+		ARG 0 matrix
+		ARG 1 quaternion
+	METHOD m_lduuethd writeRowMajor (Ljava/nio/FloatBuffer;)V
 		COMMENT Writes this matrix to the buffer in row-major order.
 		COMMENT
 		COMMENT @see #writeColumnMajor(FloatBuffer)
 		COMMENT @see #write(FloatBuffer, boolean)
 		ARG 1 buf
-	METHOD m_jdnetyjq transpose ()V
-	METHOD m_jvoalrnr trace ()F
-		COMMENT Returns the sum of the elements on the main diagonal.
-	METHOD m_jyahnani add (Lnet/minecraft/unmapped/C_ffukturc;)V
-		ARG 1 matrix
-	METHOD m_kniicnlp writeColumnMajor (Ljava/nio/FloatBuffer;)V
-		COMMENT Writes this matrix to the buffer in column-major order.
+	METHOD m_nvyaasbh determinantAndAdjugate ()F
+	METHOD m_ppajxzfq copy ()Lnet/minecraft/unmapped/C_ffukturc;
+	METHOD m_qibeuxbq loadIdentity ()V
+	METHOD m_qqyovxdk readColumnMajor (Ljava/nio/FloatBuffer;)V
+		COMMENT Reads a matrix from the buffer in column-major order.
 		COMMENT
-		COMMENT @see #writeRowMajor(FloatBuffer)
-		COMMENT @see #write(FloatBuffer, boolean)
+		COMMENT @see #readRowMajor(FloatBuffer)
+		COMMENT @see #read(FloatBuffer, boolean)
 		ARG 1 buf
-	METHOD m_kodbgbaf multiply (Lnet/minecraft/unmapped/C_exsttxvr;)V
-		ARG 1 quaternion
-	METHOD m_ljsvsrsj decomposeLinearTransformation ()Lorg/apache/commons/lang3/tuple/Triple;
-	METHOD m_mjdchypj read (Ljava/nio/FloatBuffer;Z)V
+	METHOD m_qqyovxdk read (Ljava/nio/FloatBuffer;Z)V
 		COMMENT Reads a matrix from the buffer.
 		COMMENT
 		COMMENT @see #readRowMajor(FloatBuffer)
@@ -72,20 +65,30 @@ CLASS net/minecraft/unmapped/C_ffukturc net/minecraft/util/math/Matrix3f
 		ARG 2 rowMajor
 			COMMENT {@code true} to read in row-major order; {@code false} to read in
 			COMMENT column-major order
-	METHOD m_nhzhomqv (Lnet/minecraft/unmapped/C_ffukturc;)Lnet/minecraft/unmapped/C_exsttxvr;
-		ARG 0 matrix
-	METHOD m_pyrajayh determinantAndAdjugate ()F
-	METHOD m_qrxcapxi copy ()Lnet/minecraft/unmapped/C_ffukturc;
-	METHOD m_ugrxfsya getSinAndCosOfRotation (FFF)Lcom/mojang/datafixers/util/Pair;
-		ARG 0 upperLeft
-		ARG 1 diagonalAverage
-		ARG 2 lowerRight
-	METHOD m_uhcephoo subtract (Lnet/minecraft/unmapped/C_ffukturc;)V
+	METHOD m_qqyovxdk load (Lnet/minecraft/unmapped/C_ffukturc;)V
+		ARG 1 source
+	METHOD m_rtqfibjh add (Lnet/minecraft/unmapped/C_ffukturc;)V
 		ARG 1 matrix
-	METHOD m_uxjhyrcz pack (II)I
+	METHOD m_tbjxzgmo (Lnet/minecraft/unmapped/C_ffukturc;)Lnet/minecraft/unmapped/C_exsttxvr;
+		ARG 0 matrix
+	METHOD m_tdzdfpex decomposeLinearTransformation ()Lorg/apache/commons/lang3/tuple/Triple;
+	METHOD m_vmftvrxs pack (II)I
 		ARG 0 x
 		ARG 1 y
-	METHOD m_vixvbjdx write (Ljava/nio/FloatBuffer;Z)V
+	METHOD m_vukcogkl invert ()Z
+	METHOD m_yubwtdry readRowMajor (Ljava/nio/FloatBuffer;)V
+		COMMENT Reads a matrix from the buffer in row-major order.
+		COMMENT
+		COMMENT @see #readColumnMajor(FloatBuffer)
+		COMMENT @see #read(FloatBuffer, boolean)
+		ARG 1 buf
+	METHOD m_zgkokmkl writeColumnMajor (Ljava/nio/FloatBuffer;)V
+		COMMENT Writes this matrix to the buffer in column-major order.
+		COMMENT
+		COMMENT @see #writeRowMajor(FloatBuffer)
+		COMMENT @see #write(FloatBuffer, boolean)
+		ARG 1 buf
+	METHOD m_zgkokmkl write (Ljava/nio/FloatBuffer;Z)V
 		COMMENT Writes this matrix to the buffer.
 		COMMENT
 		COMMENT @see #writeRowMajor(FloatBuffer)
@@ -94,14 +97,11 @@ CLASS net/minecraft/unmapped/C_ffukturc net/minecraft/util/math/Matrix3f
 		ARG 2 rowMajor
 			COMMENT {@code true} to write in row-major order; {@code false} to write in
 			COMMENT column-major order
-	METHOD m_xeaqnoah set (IIF)V
+	METHOD m_znqvfbjj set (IIF)V
 		ARG 1 x
 		ARG 2 y
 		ARG 3 value
-	METHOD m_ybnhzcyu multiply (Lnet/minecraft/unmapped/C_ffukturc;)V
-		ARG 1 other
-	METHOD m_zulaqzrx load (Lnet/minecraft/unmapped/C_ffukturc;)V
-		ARG 1 source
-	METHOD m_zwaitbkz (Lnet/minecraft/unmapped/C_ffukturc;Lnet/minecraft/unmapped/C_exsttxvr;)V
-		ARG 0 matrix
-		ARG 1 quaternion
+	METHOD m_zrkasncd scale (FFF)Lnet/minecraft/unmapped/C_ffukturc;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z

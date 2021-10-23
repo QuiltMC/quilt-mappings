@@ -1,20 +1,19 @@
 CLASS net/minecraft/unmapped/C_qiixbyae net/minecraft/world/gen/chunk/StructureConfig
 	COMMENT Contains parameters for placement of a single type of {@link net.minecraft.world.gen.feature.StructureFeature} during chunk
 	COMMENT generation.
-	FIELD f_jkjuxnew spacing I
+	FIELD f_dsorgufj salt I
+		COMMENT Used together with the world seed and a grid cell's x,y coordinates to seed the RNG when deciding
+		COMMENT whether a structure should really be placed in a grid cell or not.
+		COMMENT This is used to avoid that two types of structures that have the same spacing always occur
+		COMMENT in the same chunks of their placement grid, and thus in the same world chunk.
+	FIELD f_rmjtrooj spacing I
 		COMMENT Defines the width and height of a cell in the structure placement grid in chunks.
 		COMMENT <p>
 		COMMENT For each cell in the grid, the chunk generator will attempt to place the start of a structure.
 		COMMENT <p>
 		COMMENT Minimum is 1, which means the structure will potentially be placed in every chunk.
 		COMMENT 2 leads to one structure per 2x2 chunks, and so on.
-	FIELD f_jlkevrjz CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_lxxgqdym salt I
-		COMMENT Used together with the world seed and a grid cell's x,y coordinates to seed the RNG when deciding
-		COMMENT whether a structure should really be placed in a grid cell or not.
-		COMMENT This is used to avoid that two types of structures that have the same spacing always occur
-		COMMENT in the same chunks of their placement grid, and thus in the same world chunk.
-	FIELD f_mghazmjx separation I
+	FIELD f_tidrbknl separation I
 		COMMENT Defines the margin of each cell in the placement grid, which leads to guaranteeing
 		COMMENT a certain minimum distance between each placed structure.
 		COMMENT <p>
@@ -29,20 +28,21 @@ CLASS net/minecraft/unmapped/C_qiixbyae net/minecraft/world/gen/chunk/StructureC
 		COMMENT chunk at 0,0 of the grid cell.
 		COMMENT <p>
 		COMMENT This value must be between 0 and {@link #spacing} - 1, and is expressed in chunks.
+	FIELD f_vngqsybi CODEC Lcom/mojang/serialization/Codec;
 	METHOD <init> (III)V
 		ARG 1 spacing
 		ARG 2 separation
 		ARG 3 salt
-	METHOD m_conqbjri getSpacing ()I
-	METHOD m_engglbfn (Lnet/minecraft/unmapped/C_qiixbyae;)Ljava/lang/Integer;
+	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_qiixbyae;)Ljava/lang/Integer;
 		ARG 0 config
-	METHOD m_jgyzipti (Lnet/minecraft/unmapped/C_qiixbyae;)Lcom/mojang/serialization/DataResult;
+	METHOD m_dlksntey (Lnet/minecraft/unmapped/C_qiixbyae;)Ljava/lang/Integer;
 		ARG 0 config
-	METHOD m_jtkyrnar getSeparation ()I
-	METHOD m_lmsozhxp (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+	METHOD m_dsorgufj getSalt ()I
+	METHOD m_rmjtrooj getSpacing ()I
+	METHOD m_tcxyumud (Lnet/minecraft/unmapped/C_qiixbyae;)Ljava/lang/Integer;
+		ARG 0 config
+	METHOD m_tidrbknl getSeparation ()I
+	METHOD m_xdgffetk (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
-	METHOD m_pvjuybkz (Lnet/minecraft/unmapped/C_qiixbyae;)Ljava/lang/Integer;
-		ARG 0 config
-	METHOD m_yuecxoso getSalt ()I
-	METHOD m_zrvlklwl (Lnet/minecraft/unmapped/C_qiixbyae;)Ljava/lang/Integer;
+	METHOD m_xglryrgu (Lnet/minecraft/unmapped/C_qiixbyae;)Lcom/mojang/serialization/DataResult;
 		ARG 0 config

@@ -1,64 +1,45 @@
 CLASS net/minecraft/unmapped/C_uaaogayn net/minecraft/recipe/RecipeMatcher
 	COMMENT Matching class that matches a recipe to its required resources.
 	COMMENT This specifically does not check patterns (See {@link ShapedRecipe} for that).
-	FIELD f_uqktcuxc inputs Lit/unimi/dsi/fastutil/ints/Int2IntMap;
-	METHOD m_amiwnrzh countCrafts (Lnet/minecraft/unmapped/C_dqwdmrwa;Lit/unimi/dsi/fastutil/ints/IntList;)I
-		COMMENT Determines the number of crafts that can be produced for a recipe using the
-		COMMENT collected resources available to this crafter.
-		ARG 1 recipe
-			COMMENT the recipe to match against
-		ARG 2 output
-			COMMENT optional output list of item ids that were matched whilst evaluating the recipe conditions
-	METHOD m_cdggjjqx countCrafts (Lnet/minecraft/unmapped/C_dqwdmrwa;ILit/unimi/dsi/fastutil/ints/IntList;)I
-		COMMENT Determines the number of crafts that can be produced for a recipe using the
-		COMMENT collected resources available to this crafter.
-		ARG 1 recipe
-			COMMENT the recipe to match against
-		ARG 2 limit
-		ARG 3 output
-			COMMENT optional output list of item ids that were matched whilst evaluating the recipe conditions
-	METHOD m_ftbgcmli clear ()V
-	METHOD m_givqipsm contains (I)Z
+	FIELD f_ckmjwouc inputs Lit/unimi/dsi/fastutil/ints/Int2IntMap;
+	METHOD m_ebdgxheo clear ()V
+	METHOD m_fsupaulw addUnenchantedInput (Lnet/minecraft/unmapped/C_kywxadds;)V
+		COMMENT Adds a full item stack to the pool of available resources.
+		COMMENT
+		COMMENT <p>This is equivalent to calling {@code addInput(stack, Item.DEFAULT_MAX_COUNT)}.</p>
+		ARG 1 stack
+	METHOD m_gaxuugcq addInput (II)V
+		COMMENT Adds an input to be used for recipe matching.
+		ARG 1 itemId
+			COMMENT the raw ID of the item to match
+		ARG 2 count
+			COMMENT the item's count
+	METHOD m_kpvvnxfv consume (II)I
+		COMMENT Consumes a resource from the pool of available items.
+		ARG 1 itemId
+			COMMENT the raw id of the item being consumed
+		ARG 2 count
+			COMMENT the number of times that item must be consumed
+	METHOD m_ldxxbiuh contains (I)Z
 		COMMENT Determines whether a raw item id is present in the pool of crafting resources.
 		ARG 1 itemId
-	METHOD m_kabdbrgi addInput (Lnet/minecraft/unmapped/C_kywxadds;I)V
+	METHOD m_mbgayaof addInput (Lnet/minecraft/unmapped/C_kywxadds;)V
+		COMMENT Adds a full item stack to the pool of available resources.
+		COMMENT
+		COMMENT <p>This is equivalent to calling {@code addInput(stack, Item.DEFAULT_MAX_COUNT)}.</p>
+		ARG 1 stack
+	METHOD m_mbgayaof addInput (Lnet/minecraft/unmapped/C_kywxadds;I)V
 		COMMENT Adds an item stack to the pool of available resources.
 		ARG 1 stack
 		ARG 2 maxCount
-	METHOD m_kllgpvcz getItemId (Lnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 0 stack
-	METHOD m_pbqewanb match (Lnet/minecraft/unmapped/C_dqwdmrwa;Lit/unimi/dsi/fastutil/ints/IntList;)Z
+	METHOD m_nerqriyc match (Lnet/minecraft/unmapped/C_dqwdmrwa;Lit/unimi/dsi/fastutil/ints/IntList;)Z
 		COMMENT Attempts to match the recipe against the collected inputs.
 		COMMENT Assumes only one output is required.
 		ARG 1 recipe
 			COMMENT the recipe to match against
 		ARG 2 output
 			COMMENT optional output list of item ids that were matched whilst evaluating the recipe conditions
-	METHOD m_pbzvwrkw addInput (II)V
-		COMMENT Adds an input to be used for recipe matching.
-		ARG 1 itemId
-			COMMENT the raw ID of the item to match
-		ARG 2 count
-			COMMENT the item's count
-	METHOD m_qlziehko consume (II)I
-		COMMENT Consumes a resource from the pool of available items.
-		ARG 1 itemId
-			COMMENT the raw id of the item being consumed
-		ARG 2 count
-			COMMENT the number of times that item must be consumed
-	METHOD m_uqhbqjdg addUnenchantedInput (Lnet/minecraft/unmapped/C_kywxadds;)V
-		COMMENT Adds a full item stack to the pool of available resources.
-		COMMENT
-		COMMENT <p>This is equivalent to calling {@code addInput(stack, Item.DEFAULT_MAX_COUNT)}.</p>
-		ARG 1 stack
-	METHOD m_wjxiuigy addInput (Lnet/minecraft/unmapped/C_kywxadds;)V
-		COMMENT Adds a full item stack to the pool of available resources.
-		COMMENT
-		COMMENT <p>This is equivalent to calling {@code addInput(stack, Item.DEFAULT_MAX_COUNT)}.</p>
-		ARG 1 stack
-	METHOD m_ykufjlzg getStackFromId (I)Lnet/minecraft/unmapped/C_kywxadds;
-		ARG 0 itemId
-	METHOD m_yveianxi match (Lnet/minecraft/unmapped/C_dqwdmrwa;Lit/unimi/dsi/fastutil/ints/IntList;I)Z
+	METHOD m_nerqriyc match (Lnet/minecraft/unmapped/C_dqwdmrwa;Lit/unimi/dsi/fastutil/ints/IntList;I)Z
 		COMMENT Attempts to match the recipe against the collected inputs. Will only succeed if there has been enough
 		COMMENT resources gathered to produce the requested number of outputs.
 		ARG 1 recipe
@@ -67,54 +48,73 @@ CLASS net/minecraft/unmapped/C_uaaogayn net/minecraft/recipe/RecipeMatcher
 			COMMENT optional output list of item ids that were matched whilst evaluating the recipe conditions
 		ARG 3 multiplier
 			COMMENT the number of expected outputs
-	CLASS C_chcrqjvt Matcher
-		FIELD f_bokoeztc requirementsMatrix Ljava/util/BitSet;
-		FIELD f_cworsikw ingredientItemLookup Lit/unimi/dsi/fastutil/ints/IntList;
-		FIELD f_nnivnjsc requiredItems [I
-		FIELD f_oqkepefr recipe Lnet/minecraft/unmapped/C_dqwdmrwa;
-		FIELD f_pbfbofiu ingredients Ljava/util/List;
-		FIELD f_upimylck totalRequiredItems I
-		FIELD f_wdxgnsjb totalIngredients I
+	METHOD m_tpmzsvcd countCrafts (Lnet/minecraft/unmapped/C_dqwdmrwa;ILit/unimi/dsi/fastutil/ints/IntList;)I
+		COMMENT Determines the number of crafts that can be produced for a recipe using the
+		COMMENT collected resources available to this crafter.
+		ARG 1 recipe
+			COMMENT the recipe to match against
+		ARG 2 limit
+		ARG 3 output
+			COMMENT optional output list of item ids that were matched whilst evaluating the recipe conditions
+	METHOD m_tpmzsvcd countCrafts (Lnet/minecraft/unmapped/C_dqwdmrwa;Lit/unimi/dsi/fastutil/ints/IntList;)I
+		COMMENT Determines the number of crafts that can be produced for a recipe using the
+		COMMENT collected resources available to this crafter.
+		ARG 1 recipe
+			COMMENT the recipe to match against
+		ARG 2 output
+			COMMENT optional output list of item ids that were matched whilst evaluating the recipe conditions
+	METHOD m_ubwuirjm getItemId (Lnet/minecraft/unmapped/C_kywxadds;)I
+		ARG 0 stack
+	METHOD m_uddjmfid getStackFromId (I)Lnet/minecraft/unmapped/C_kywxadds;
+		ARG 0 itemId
+	CLASS C_liunzxew Matcher
+		FIELD f_bgfbmbed totalRequiredItems I
+		FIELD f_cvbwpxqs requiredItems [I
+		FIELD f_dpftgkdu ingredientItemLookup Lit/unimi/dsi/fastutil/ints/IntList;
+		FIELD f_lmdcsvlz ingredients Ljava/util/List;
+		FIELD f_mbsatbea recipe Lnet/minecraft/unmapped/C_dqwdmrwa;
+		FIELD f_xamcenja requirementsMatrix Ljava/util/BitSet;
+		FIELD f_zmcatmsq totalIngredients I
 		METHOD <init> (Lnet/minecraft/unmapped/C_uaaogayn;Lnet/minecraft/unmapped/C_dqwdmrwa;)V
 			ARG 1 recipe
-		METHOD m_ambcvmto createItemRequirementList ()[I
-		METHOD m_apsecsjb match (ILit/unimi/dsi/fastutil/ints/IntList;)Z
+		METHOD m_atmqjsnk needsRequirement (ZII)Z
+			ARG 1 reversed
+			ARG 2 itemIndex
+			ARG 3 ingredientIndex
+		METHOD m_bpdiqxgp createItemRequirementList ()[I
+		METHOD m_cchjguhw addRequirement (ZI)V
+			ARG 1 reversed
+			ARG 2 itemId
+		METHOD m_cfqeopio getRequirementIndex (ZII)I
+			ARG 1 reversed
+			ARG 2 itemIndex
+			ARG 3 ingredientIndex
+		METHOD m_ctigisyy getRequirement (I)Z
+			ARG 1 itemId
+		METHOD m_eqbqmjsn flipRequirement (ZII)V
+			ARG 1 reversed
+			ARG 2 itemIndex
+			ARG 3 ingredientIndex
+		METHOD m_fscxxbts checkRequirements (I)Z
 			ARG 1 multiplier
-			ARG 2 output
-		METHOD m_bmmcjlkr addRequirement (ZI)V
-			ARG 1 reversed
-			ARG 2 itemId
-		METHOD m_bqxyragp checkRequirement (ZII)Z
-			ARG 1 reversed
-			ARG 2 itemIndex
-			ARG 3 ingredientIndex
-		METHOD m_bsgkurxo needsRequirement (ZII)Z
-			ARG 1 reversed
-			ARG 2 itemIndex
-			ARG 3 ingredientIndex
-		METHOD m_dccczlfs flipRequirement (ZII)V
-			ARG 1 reversed
-			ARG 2 itemIndex
-			ARG 3 ingredientIndex
-		METHOD m_fizhmhdf getRequirementIndex (ZI)I
-			ARG 1 reversed
-			ARG 2 itemId
-		METHOD m_frroeelz getRequirementIndex (I)I
+		METHOD m_htkvoywy getRequirementIndex (I)I
 			ARG 1 itemId
-		METHOD m_geyvyqyw getMaximumCrafts ()I
-		METHOD m_gqgytsml unfulfillRequirement (I)V
-			ARG 1 itemId
-		METHOD m_ijgqjhsu countCrafts (ILit/unimi/dsi/fastutil/ints/IntList;)I
+		METHOD m_invxihdl countCrafts (ILit/unimi/dsi/fastutil/ints/IntList;)I
 			ARG 1 minimum
 			ARG 2 output
-		METHOD m_ilizcbzx getRequirement (I)Z
-			ARG 1 itemId
-		METHOD m_qjbgbnsm checkRequirements (I)Z
-			ARG 1 multiplier
-		METHOD m_vvitkval isRequirementUnfulfilled (ZI)Z
-			ARG 1 reversed
-			ARG 2 itemId
-		METHOD m_zwdskoxz getRequirementIndex (ZII)I
+		METHOD m_pcwkzdzb checkRequirement (ZII)Z
 			ARG 1 reversed
 			ARG 2 itemIndex
 			ARG 3 ingredientIndex
+		METHOD m_pfdndvmt match (ILit/unimi/dsi/fastutil/ints/IntList;)Z
+			ARG 1 multiplier
+			ARG 2 output
+		METHOD m_szymrlsy getMaximumCrafts ()I
+		METHOD m_uolmfjgp getRequirementIndex (ZI)I
+			ARG 1 reversed
+			ARG 2 itemId
+		METHOD m_wnaefife isRequirementUnfulfilled (ZI)Z
+			ARG 1 reversed
+			ARG 2 itemId
+		METHOD m_xrrgtgqs unfulfillRequirement (I)V
+			ARG 1 itemId

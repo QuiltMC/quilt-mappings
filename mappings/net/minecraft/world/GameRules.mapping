@@ -1,19 +1,32 @@
 CLASS net/minecraft/unmapped/C_tsmudlmx net/minecraft/world/GameRules
-	FIELD f_bfthxchx ANNOUNCE_ADVANCEMENTS Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
-		COMMENT A {@linkplain Rule game rule} which regulates whether a player's advancements should be announced in chat.
-	FIELD f_dtxbpmuz MAX_ENTITY_CRAMMING Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
-		COMMENT A {@linkplain Rule game rule} which regulates the number of entities that can be crammed into a block space before they incur cramming damage.
-	FIELD f_gaydovuh DO_TILE_DROPS Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
+	FIELD f_aposurjw RULE_TYPES Ljava/util/Map;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_cgugxmyr REDUCED_DEBUG_INFO Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
+		COMMENT A {@linkplain Rule game rule} which regulates whether clients' {@linkplain net.minecraft.client.gui.hud.DebugHud debug HUD}s show reduced information.
+		COMMENT
+		COMMENT <p>When the value of this rule is changed, all connected clients will be notified to update their display.
+		COMMENT In vanilla, this includes the visibility of coordinates on the clients' debug HUDs.
+	FIELD f_czyspaix DEFAULT_RANDOM_TICK_SPEED I
+	FIELD f_ejmksxtw KEEP_INVENTORY Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
+		COMMENT A {@linkplain Rule game rule} which regulates whether player inventories should be persist through respawning.
+	FIELD f_lhipghjc DO_TILE_DROPS Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
 		COMMENT A {@linkplain Rule game rule} which regulates whether blocks should drop their items when broken.
-	FIELD f_hzrssmiv DO_MOB_LOOT Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
-		COMMENT A {@linkplain Rule game rule} which regulates whether mobs should drop loot on death.
-	FIELD f_iygmbcaq DISABLE_RAIDS Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
+	FIELD f_nubxftqs DISABLE_RAIDS Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
 		COMMENT A {@linkplain Rule game rule} which regulates whether raids should occur.
 		COMMENT
 		COMMENT <p>If this rule is set to {@code true} while raids are occurring, the raids will be stopped.
-	FIELD f_lqqkrajd DO_IMMEDIATE_RESPAWN Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
+	FIELD f_nuhtyrud MAX_ENTITY_CRAMMING Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
+		COMMENT A {@linkplain Rule game rule} which regulates the number of entities that can be crammed into a block space before they incur cramming damage.
+	FIELD f_obxiamis DO_MOB_LOOT Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
+		COMMENT A {@linkplain Rule game rule} which regulates whether mobs should drop loot on death.
+	FIELD f_sztvyjov rules Ljava/util/Map;
+	FIELD f_tnpieyej DO_MOB_SPAWNING Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
+		COMMENT A {@linkplain Rule game rule} which regulates whether mobs can spawn naturally.
+	FIELD f_ukorhevp ANNOUNCE_ADVANCEMENTS Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
+		COMMENT A {@linkplain Rule game rule} which regulates whether a player's advancements should be announced in chat.
+	FIELD f_wrxnalyu DO_IMMEDIATE_RESPAWN Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
 		COMMENT A {@linkplain Rule game rule} which regulates whether a player should immediately respawn upon death.
-	FIELD f_mmiyknqn DO_MOB_GRIEFING Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
+	FIELD f_yodmmmjn DO_MOB_GRIEFING Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
 		COMMENT A {@linkplain Rule game rule} which regulates whether mobs can modify the world.
 		COMMENT
 		COMMENT <p>Generally one is expected to test this rule before an entity modifies the world.
@@ -24,189 +37,176 @@ CLASS net/minecraft/unmapped/C_tsmudlmx net/minecraft/world/GameRules
 		COMMENT <li>Whether a zombie can break down a door
 		COMMENT <li>Whether a wither killing an entity will place or drop a wither rose
 		COMMENT </ul>
-	FIELD f_nwkwcbqa rules Ljava/util/Map;
-	FIELD f_pjusapfx REDUCED_DEBUG_INFO Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
-		COMMENT A {@linkplain Rule game rule} which regulates whether clients' {@linkplain net.minecraft.client.gui.hud.DebugHud debug HUD}s show reduced information.
-		COMMENT
-		COMMENT <p>When the value of this rule is changed, all connected clients will be notified to update their display.
-		COMMENT In vanilla, this includes the visibility of coordinates on the clients' debug HUDs.
-	FIELD f_pwrtuksf RULE_TYPES Ljava/util/Map;
-	FIELD f_rywatupt DO_MOB_SPAWNING Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
-		COMMENT A {@linkplain Rule game rule} which regulates whether mobs can spawn naturally.
-	FIELD f_udzxgsyh KEEP_INVENTORY Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
-		COMMENT A {@linkplain Rule game rule} which regulates whether player inventories should be persist through respawning.
-	FIELD f_wncrkszk LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_xfqwpkeb DEFAULT_RANDOM_TICK_SPEED I
 	METHOD <init> (Ljava/util/Map;)V
 		ARG 1 rules
-	METHOD m_anjyonrf (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;)V
-		ARG 1 key
-		ARG 2 rule
-	METHOD m_bktoqhat (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;
-		ARG 0 e
-	METHOD m_cfzbnnna setAllValues (Lnet/minecraft/unmapped/C_tsmudlmx;Lnet/minecraft/server/MinecraftServer;)V
-		ARG 1 rules
-		ARG 2 server
-	METHOD m_cnakrjqw accept (Lnet/minecraft/unmapped/C_tsmudlmx$C_garqtova;Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)V
-		ARG 0 consumer
-		ARG 1 key
-		ARG 2 type
-	METHOD m_ignlppvd (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;)Ljava/lang/String;
+	METHOD m_aievsjih getBoolean (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;)Z
+		ARG 1 rule
+	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;)Ljava/lang/String;
 		ARG 0 key
-	METHOD m_inagjaye (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_iakyzzuj;)V
+	METHOD m_chrajczl load (Lcom/mojang/serialization/DynamicLike;)V
+	METHOD m_dlksntey (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_bijijmxy;)V
 		ARG 0 server
 		ARG 1 rule
-	METHOD m_jjgolkdg accept (Lnet/minecraft/unmapped/C_tsmudlmx$C_garqtova;)V
+	METHOD m_enidtyua (Lnet/minecraft/unmapped/C_tsmudlmx;Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;)V
+		ARG 3 key
+	METHOD m_fxewjvjb accept (Lnet/minecraft/unmapped/C_tsmudlmx$C_ejdmlxgn;)V
 		COMMENT Make the visitor visit all registered game rules.
 		COMMENT
 		COMMENT <p>The visitation involves calling both {@link Visitor#visit(GameRules.Key, GameRules.Type)} and {@code visitX} for every game rule, where X is the current rule's concrete type such as a boolean.
 		ARG 0 visitor
-	METHOD m_kwbrxjim get (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;)Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;
-		ARG 1 key
-	METHOD m_lcayliwv (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_iakyzzuj;)V
-		ARG 0 server
+	METHOD m_grpmznxo getInt (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;)I
 		ARG 1 rule
-	METHOD m_lkhsslrs setValue (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx;Lnet/minecraft/server/MinecraftServer;)V
-		ARG 1 key
-		ARG 2 rules
-		ARG 3 server
-	METHOD m_nxyprspd getInt (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;)I
-		ARG 1 rule
-	METHOD m_nzrfvgkv getBoolean (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;)Z
-		ARG 1 rule
-	METHOD m_oichdvkk copy ()Lnet/minecraft/unmapped/C_tsmudlmx;
-	METHOD m_oisbebhk toNbt ()Lnet/minecraft/unmapped/C_hincwlhh;
-	METHOD m_psljcqhr (Lnet/minecraft/unmapped/C_tsmudlmx$C_garqtova;Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)V
-		ARG 1 key
-		ARG 2 type
-	METHOD m_suonlsoq (Lcom/mojang/serialization/DynamicLike;Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;)V
-		ARG 1 key
-		ARG 2 rule
-	METHOD m_tppbduuz register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tsmudlmx$C_jmsqoqkv;Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;
+	METHOD m_iefnzsxq register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tsmudlmx$C_mkttxiug;Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;
 		ARG 0 name
 		ARG 1 category
 		ARG 2 type
-	METHOD m_ugiivcef (Lnet/minecraft/unmapped/C_tsmudlmx;Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;)V
-		ARG 3 key
-	METHOD m_ymttbgam load (Lcom/mojang/serialization/DynamicLike;)V
-	CLASS C_eeqhjadt IntRule
-		FIELD f_xioltkrm value I
-		METHOD <init> (Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;I)V
-			ARG 1 rule
+	METHOD m_iixtpohu get (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;)Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;
+		ARG 1 key
+	METHOD m_lkaxzrnt toNbt ()Lnet/minecraft/unmapped/C_hincwlhh;
+	METHOD m_mfaabeex (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;
+		ARG 0 e
+	METHOD m_oroimdpt setValue (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx;Lnet/minecraft/server/MinecraftServer;)V
+		ARG 1 key
+		ARG 2 rules
+		ARG 3 server
+	METHOD m_ppajxzfq copy ()Lnet/minecraft/unmapped/C_tsmudlmx;
+	METHOD m_qcvehpks setAllValues (Lnet/minecraft/unmapped/C_tsmudlmx;Lnet/minecraft/server/MinecraftServer;)V
+		ARG 1 rules
+		ARG 2 server
+	METHOD m_tasvbwfd (Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;)V
+		ARG 1 key
+		ARG 2 rule
+	METHOD m_tcxyumud (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_bijijmxy;)V
+		ARG 0 server
+		ARG 1 rule
+	METHOD m_tpblwlat accept (Lnet/minecraft/unmapped/C_tsmudlmx$C_ejdmlxgn;Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)V
+		ARG 0 consumer
+		ARG 1 key
+		ARG 2 type
+	METHOD m_yndugtsr (Lcom/mojang/serialization/DynamicLike;Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;)V
+		ARG 1 key
+		ARG 2 rule
+	METHOD m_zyreusjg (Lnet/minecraft/unmapped/C_tsmudlmx$C_ejdmlxgn;Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)V
+		ARG 1 key
+		ARG 2 type
+	CLASS C_bijijmxy BooleanRule
+		FIELD f_jfplzcbr value Z
+		METHOD <init> (Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;Z)V
+			ARG 1 type
 			ARG 2 initialValue
-		METHOD m_chwyszet create (ILjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;
+		METHOD m_iiqknvxs get ()Z
+		METHOD m_rnenogop (ZLnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)Lnet/minecraft/unmapped/C_tsmudlmx$C_bijijmxy;
+			ARG 1 type
+		METHOD m_vvwqomhv create (Z)Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;
+			ARG 0 initialValue
+		METHOD m_vvwqomhv create (ZLjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;
 			ARG 0 initialValue
 			ARG 1 changeCallback
-		METHOD m_diicknfq create (I)Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;
-			ARG 0 initialValue
-		METHOD m_duvadgfb (ILnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)Lnet/minecraft/unmapped/C_tsmudlmx$C_eeqhjadt;
-			ARG 1 type
-		METHOD m_ftchmqcn validate (Ljava/lang/String;)Z
-			COMMENT Validates that an input is valid for this rule.
-			ARG 1 input
-		METHOD m_hozvuwtt get ()I
-		METHOD m_myaywumx parseInt (Ljava/lang/String;)I
-			ARG 0 input
-		METHOD m_mzqhnknc set (ILnet/minecraft/server/MinecraftServer;)V
-			ARG 1 value
-			ARG 2 server
-		METHOD m_ncjtyphg (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_eeqhjadt;)V
+		METHOD m_wxwovvhm (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_bijijmxy;)V
 			ARG 0 server
 			ARG 1 rule
-	CLASS C_garqtova Visitor
+		METHOD m_znqvfbjj set (ZLnet/minecraft/server/MinecraftServer;)V
+			ARG 1 value
+			ARG 2 server
+	CLASS C_ddcyjbva Acceptor
+		METHOD call call (Lnet/minecraft/unmapped/C_tsmudlmx$C_ejdmlxgn;Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)V
+			ARG 1 consumer
+			ARG 2 key
+			ARG 3 type
+	CLASS C_ejdmlxgn Visitor
 		COMMENT A visitor used to visit all game rules.
-		METHOD m_mymkdosh visitBoolean (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)V
-			COMMENT Visit a boolean rule.
-			COMMENT
-			COMMENT <p>Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
-			ARG 1 key
-			ARG 2 type
-		METHOD m_ofvnnhcu visit (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)V
-			COMMENT Visit a game rule.
-			COMMENT
-			COMMENT <p>It is expected all game rules regardless of type will be visited using this method.
-			ARG 1 key
-			ARG 2 type
-		METHOD m_uadozetv visitInt (Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)V
+		METHOD m_apelcaio visitInt (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)V
 			COMMENT Visit an integer rule.
 			COMMENT
 			COMMENT <p>Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
 			ARG 1 key
 			ARG 2 type
-	CLASS C_iakyzzuj BooleanRule
-		FIELD f_sdvgugex value Z
-		METHOD <init> (Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;Z)V
-			ARG 1 type
-			ARG 2 initialValue
-		METHOD m_etarfaqh get ()Z
-		METHOD m_htkdqpwn create (ZLjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;
-			ARG 0 initialValue
-			ARG 1 changeCallback
-		METHOD m_lcmafquh create (Z)Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;
-			ARG 0 initialValue
-		METHOD m_vrqtgvph set (ZLnet/minecraft/server/MinecraftServer;)V
-			ARG 1 value
-			ARG 2 server
-		METHOD m_xuypveox (ZLnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)Lnet/minecraft/unmapped/C_tsmudlmx$C_iakyzzuj;
-			ARG 1 type
-		METHOD m_zzbwvppm (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_iakyzzuj;)V
-			ARG 0 server
-			ARG 1 rule
-	CLASS C_jmsqoqkv Category
-		FIELD f_qspojupf category Ljava/lang/String;
-		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
-			ARG 3 category
-		METHOD m_qqdunmvj getCategory ()Ljava/lang/String;
-	CLASS C_kqizzsbu Rule
-		FIELD f_pqkaapde type Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;
-		METHOD <init> (Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)V
-			ARG 1 type
-		METHOD m_glfsygtn set (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
-			ARG 1 context
-			ARG 2 name
-		METHOD m_nnrklhag serialize ()Ljava/lang/String;
-		METHOD m_nogekyrm getThis ()Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;
-		METHOD m_tldsqfzn setFromArgument (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
-			ARG 1 context
-			ARG 2 name
-		METHOD m_tuufgyvw deserialize (Ljava/lang/String;)V
-			ARG 1 value
-		METHOD m_wewqubtx copy ()Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;
-		METHOD m_wtocwnfl setValue (Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;Lnet/minecraft/server/MinecraftServer;)V
-			ARG 1 rule
-			ARG 2 server
-		METHOD m_xpykaucb changed (Lnet/minecraft/server/MinecraftServer;)V
-			ARG 1 server
-		METHOD m_zutibtme getCommandResult ()I
-	CLASS C_rtnwftcb Acceptor
-		METHOD m_wishfzvq call (Lnet/minecraft/unmapped/C_tsmudlmx$C_garqtova;Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;Lnet/minecraft/unmapped/C_tsmudlmx$C_uoulgmym;)V
-			ARG 1 consumer
-			ARG 2 key
-			ARG 3 type
-	CLASS C_uoulgmym Type
-		FIELD f_hywwhxzo ruleFactory Ljava/util/function/Function;
-		FIELD f_lusayczp ruleAcceptor Lnet/minecraft/unmapped/C_tsmudlmx$C_rtnwftcb;
-		FIELD f_veqzznpt changeCallback Ljava/util/function/BiConsumer;
-		FIELD f_vnwjsrnh argumentType Ljava/util/function/Supplier;
-		METHOD <init> (Ljava/util/function/Supplier;Ljava/util/function/Function;Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_tsmudlmx$C_rtnwftcb;)V
-			ARG 1 argumentType
-			ARG 2 ruleFactory
-			ARG 3 changeCallback
-			ARG 4 ruleAcceptor
-		METHOD m_hnaoodkw createRule ()Lnet/minecraft/unmapped/C_tsmudlmx$C_kqizzsbu;
-		METHOD m_kqjrrdkq accept (Lnet/minecraft/unmapped/C_tsmudlmx$C_garqtova;Lnet/minecraft/unmapped/C_tsmudlmx$C_wxxdeaui;)V
-			ARG 1 consumer
-			ARG 2 key
-		METHOD m_rwylfdaz argument (Ljava/lang/String;)Lcom/mojang/brigadier/builder/RequiredArgumentBuilder;
-			ARG 1 name
-	CLASS C_wxxdeaui Key
-		FIELD f_oqovlscv name Ljava/lang/String;
-		FIELD f_tqgcaier category Lnet/minecraft/unmapped/C_tsmudlmx$C_jmsqoqkv;
-		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_tsmudlmx$C_jmsqoqkv;)V
+		METHOD m_cchjguhw visit (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)V
+			COMMENT Visit a game rule.
+			COMMENT
+			COMMENT <p>It is expected all game rules regardless of type will be visited using this method.
+			ARG 1 key
+			ARG 2 type
+		METHOD m_itjcbyjr visitBoolean (Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)V
+			COMMENT Visit a boolean rule.
+			COMMENT
+			COMMENT <p>Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
+			ARG 1 key
+			ARG 2 type
+	CLASS C_ettbbxop Key
+		FIELD f_bzipntej name Ljava/lang/String;
+		FIELD f_iawmrvot category Lnet/minecraft/unmapped/C_tsmudlmx$C_mkttxiug;
+		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_tsmudlmx$C_mkttxiug;)V
 			ARG 1 name
 			ARG 2 category
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
-		METHOD m_hcatcpvm getTranslationKey ()Ljava/lang/String;
-		METHOD m_hlleaecs getName ()Ljava/lang/String;
-		METHOD m_mhzjtmed getCategory ()Lnet/minecraft/unmapped/C_tsmudlmx$C_jmsqoqkv;
+		METHOD m_daarhmms getTranslationKey ()Ljava/lang/String;
+		METHOD m_jddzgyjm getName ()Ljava/lang/String;
+		METHOD m_xvlwsdhj getCategory ()Lnet/minecraft/unmapped/C_tsmudlmx$C_mkttxiug;
+	CLASS C_gbzmuyje Type
+		FIELD f_ffqyfbqq argumentType Ljava/util/function/Supplier;
+		FIELD f_kmwggpxy ruleAcceptor Lnet/minecraft/unmapped/C_tsmudlmx$C_ddcyjbva;
+		FIELD f_okluuypg ruleFactory Ljava/util/function/Function;
+		FIELD f_zswvrelj changeCallback Ljava/util/function/BiConsumer;
+		METHOD <init> (Ljava/util/function/Supplier;Ljava/util/function/Function;Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_tsmudlmx$C_ddcyjbva;)V
+			ARG 1 argumentType
+			ARG 2 ruleFactory
+			ARG 3 changeCallback
+			ARG 4 ruleAcceptor
+		METHOD m_augmesjt argument (Ljava/lang/String;)Lcom/mojang/brigadier/builder/RequiredArgumentBuilder;
+			ARG 1 name
+		METHOD m_sxqugqey accept (Lnet/minecraft/unmapped/C_tsmudlmx$C_ejdmlxgn;Lnet/minecraft/unmapped/C_tsmudlmx$C_ettbbxop;)V
+			ARG 1 consumer
+			ARG 2 key
+		METHOD m_symggajq createRule ()Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;
+	CLASS C_jjgaaxew IntRule
+		FIELD f_jfplzcbr value I
+		METHOD <init> (Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;I)V
+			ARG 1 rule
+			ARG 2 initialValue
+		METHOD m_cmkjdjxz validate (Ljava/lang/String;)Z
+			COMMENT Validates that an input is valid for this rule.
+			ARG 1 input
+		METHOD m_iiqknvxs get ()I
+		METHOD m_rnenogop (ILnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)Lnet/minecraft/unmapped/C_tsmudlmx$C_jjgaaxew;
+			ARG 1 type
+		METHOD m_vnlivqoc parseInt (Ljava/lang/String;)I
+			ARG 0 input
+		METHOD m_vvwqomhv create (I)Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;
+			ARG 0 initialValue
+		METHOD m_vvwqomhv create (ILjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;
+			ARG 0 initialValue
+			ARG 1 changeCallback
+		METHOD m_wxwovvhm (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_tsmudlmx$C_jjgaaxew;)V
+			ARG 0 server
+			ARG 1 rule
+		METHOD m_znqvfbjj set (ILnet/minecraft/server/MinecraftServer;)V
+			ARG 1 value
+			ARG 2 server
+	CLASS C_mczcdluf Rule
+		FIELD f_kpdwhrng type Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;
+		METHOD <init> (Lnet/minecraft/unmapped/C_tsmudlmx$C_gbzmuyje;)V
+			ARG 1 type
+		METHOD m_avmbgbsf getThis ()Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;
+		METHOD m_cdybbzse set (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
+			ARG 1 context
+			ARG 2 name
+		METHOD m_cvkpwkgq setValue (Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;Lnet/minecraft/server/MinecraftServer;)V
+			ARG 1 rule
+			ARG 2 server
+		METHOD m_fdhzyrwg setFromArgument (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
+			ARG 1 context
+			ARG 2 name
+		METHOD m_gkpwxlag changed (Lnet/minecraft/server/MinecraftServer;)V
+			ARG 1 server
+		METHOD m_hvnhjrlh serialize ()Ljava/lang/String;
+		METHOD m_ppajxzfq copy ()Lnet/minecraft/unmapped/C_tsmudlmx$C_mczcdluf;
+		METHOD m_rdkzaqrn deserialize (Ljava/lang/String;)V
+			ARG 1 value
+		METHOD m_rhgadqnp getCommandResult ()I
+	CLASS C_mkttxiug Category
+		FIELD f_khogqnyn category Ljava/lang/String;
+		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
+			ARG 3 category
+		METHOD m_daarhmms getCategory ()Ljava/lang/String;

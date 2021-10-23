@@ -1,27 +1,27 @@
 CLASS net/minecraft/unmapped/C_phijlalr net/minecraft/world/chunk/light/SkyLightStorage
-	FIELD f_evoskjzz LIGHT_REDUCTION_DIRECTIONS [Lnet/minecraft/unmapped/C_fxhiuupx;
-	FIELD f_kepqixhz sectionsToRemove Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_phdtlrpj enabledColumns Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_vkyzscsl sectionsToUpdate Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_zaerzhkj hasUpdates Z
+	FIELD f_afutnuua LIGHT_REDUCTION_DIRECTIONS [Lnet/minecraft/unmapped/C_fxhiuupx;
+	FIELD f_amhstdkj enabledColumns Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_cgsypbtl sectionsToUpdate Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_hytltswk sectionsToRemove Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_otlxdqsj hasUpdates Z
 	METHOD <init> (Lnet/minecraft/unmapped/C_yvvvsshj;)V
 		ARG 1 chunkProvider
-	METHOD m_anszttgl isAboveMinHeight (I)Z
+	METHOD m_axevedor enqueueRemoveSection (J)V
+		ARG 1 sectionPos
+	METHOD m_ccgotaur isAtOrAboveTopmostSection (J)Z
+		ARG 1 sectionPos
+	METHOD m_lluzzqmz isAboveMinHeight (I)Z
 		ARG 1 sectionY
-	METHOD m_ddmyspab copy (Lnet/minecraft/unmapped/C_gxdxaenc;)Lnet/minecraft/unmapped/C_gxdxaenc;
+	METHOD m_lvcpzoxb enqueueAddSection (J)V
+		ARG 1 sectionPos
+	METHOD m_nvpxjwwo isSectionEnabled (J)Z
+		ARG 1 sectionPos
+	METHOD m_uocuvmbt copy (Lnet/minecraft/unmapped/C_gxdxaenc;)Lnet/minecraft/unmapped/C_gxdxaenc;
 		ARG 0 source
-	METHOD m_gcagdruk enqueueAddSection (J)V
-		ARG 1 sectionPos
-	METHOD m_ilbigdfq checkForUpdates ()V
-	METHOD m_mtijeklh isAtOrAboveTopmostSection (J)Z
-		ARG 1 sectionPos
-	METHOD m_uqsbktsu isSectionEnabled (J)Z
-		ARG 1 sectionPos
-	METHOD m_ywulcnau enqueueRemoveSection (J)V
-		ARG 1 sectionPos
-	CLASS C_uksmcqur Data
-		FIELD f_fiwajxid columnToTopSection Lit/unimi/dsi/fastutil/longs/Long2IntOpenHashMap;
-		FIELD f_iyildivd minSectionY I
+	METHOD m_zwyaowol checkForUpdates ()V
+	CLASS C_wjmjlzzj Data
+		FIELD f_axncugcv minSectionY I
+		FIELD f_pntyykns columnToTopSection Lit/unimi/dsi/fastutil/longs/Long2IntOpenHashMap;
 		METHOD <init> (Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;Lit/unimi/dsi/fastutil/longs/Long2IntOpenHashMap;I)V
 			ARG 1 arrays
 			ARG 2 columnToTopSection

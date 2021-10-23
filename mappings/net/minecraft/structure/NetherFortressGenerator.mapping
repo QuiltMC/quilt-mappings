@@ -1,7 +1,7 @@
 CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGenerator
-	FIELD f_milpydci ALL_BRIDGE_PIECES [Lnet/minecraft/unmapped/C_wjbnroob$C_rqztndwi;
-	FIELD f_wnedoogr ALL_CORRIDOR_PIECES [Lnet/minecraft/unmapped/C_wjbnroob$C_rqztndwi;
-	METHOD m_qehuwbgq createPiece (Lnet/minecraft/unmapped/C_wjbnroob$C_rqztndwi;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_mdhbqcji;
+	FIELD f_hrsmefwi ALL_BRIDGE_PIECES [Lnet/minecraft/unmapped/C_wjbnroob$C_enozksev;
+	FIELD f_loukxtkl ALL_CORRIDOR_PIECES [Lnet/minecraft/unmapped/C_wjbnroob$C_enozksev;
+	METHOD m_sxedpnll createPiece (Lnet/minecraft/unmapped/C_wjbnroob$C_enozksev;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_lxhyutsn;
 		ARG 0 pieceData
 		ARG 2 random
 		ARG 3 x
@@ -9,10 +9,27 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		ARG 5 z
 		ARG 6 orientation
 		ARG 7 chainLength
-	CLASS C_aqrpbnmy CorridorExit
-		FIELD f_ssjakbiu SIZE_Y I
-		FIELD f_uwzhqade SIZE_X I
-		FIELD f_zelldfxi SIZE_Z I
+	CLASS C_cwoffeyz BridgeStairs
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
+		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
+			ARG 1 chainLength
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
+			ARG 1 world
+			ARG 2 nbt
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIIILnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_wjbnroob$C_cwoffeyz;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 chainlength
+			ARG 5 orientation
+	CLASS C_efvmspjs CorridorExit
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILjava/util/Random;Lnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 random
@@ -21,17 +38,35 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_rpuoneqq create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_aqrpbnmy;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_efvmspjs;
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
 			ARG 4 z
 			ARG 5 orientation
 			ARG 6 chainLength
-	CLASS C_btuaezzj CorridorCrossing
-		FIELD f_dbbqvubf SIZE_Z I
-		FIELD f_hltorqvk SIZE_Y I
-		FIELD f_pfxljbws SIZE_X I
+	CLASS C_enozksev PieceData
+		FIELD f_dhbeiqll limit I
+		FIELD f_ihzgqrup generatedCount I
+		FIELD f_mdvxicab pieceType Ljava/lang/Class;
+		FIELD f_vwwfolqg repeatable Z
+		FIELD f_wsbwrgcc weight I
+		METHOD <init> (Ljava/lang/Class;II)V
+			ARG 1 pieceType
+			ARG 2 weight
+			ARG 3 limit
+		METHOD <init> (Ljava/lang/Class;IIZ)V
+			ARG 1 pieceType
+			ARG 2 weight
+			ARG 3 limit
+			ARG 4 repeatable
+		METHOD m_trnrhszc canGenerate ()Z
+		METHOD m_zymvnwjh canGenerate (I)Z
+			ARG 1 chainLength
+	CLASS C_fcaotdtp BridgeSmallCrossing
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 boundingBox
@@ -39,17 +74,42 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_tscahmxf create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_btuaezzj;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_fcaotdtp;
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
 			ARG 4 orientation
 			ARG 5 chainLength
-	CLASS C_cowimrfy CorridorLeftTurn
-		FIELD f_cfzdrrou SIZE_Y I
-		FIELD f_mdtfeqfj SIZE_Z I
-		FIELD f_wyyqawqi containsChest Z
-		FIELD f_zsmfesma SIZE_X I
+	CLASS C_gekirlmt Start
+		FIELD f_aqhvkbfs lastPiece Lnet/minecraft/unmapped/C_wjbnroob$C_enozksev;
+		FIELD f_ocdfjovd bridgePieces Ljava/util/List;
+		FIELD f_qivvrhrx corridorPieces Ljava/util/List;
+		FIELD f_ylwrrpme pieces Ljava/util/List;
+		METHOD <init> (Ljava/util/Random;II)V
+			ARG 1 random
+			ARG 2 x
+			ARG 3 z
+	CLASS C_gjbqwlyr CorridorBalcony
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
+		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
+			ARG 1 chainLength
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
+			ARG 1 world
+			ARG 2 nbt
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_gjbqwlyr;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 chainLength
+	CLASS C_gynmzwmn Bridge
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILjava/util/Random;Lnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 random
@@ -58,17 +118,17 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_gczkkeyg create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_cowimrfy;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_gynmzwmn;
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
 			ARG 4 z
 			ARG 5 orientation
 			ARG 6 chainLength
-	CLASS C_hmfzffwi CorridorStairs
-		FIELD f_mawflefx SIZE_Z I
-		FIELD f_nhehaalu SIZE_X I
-		FIELD f_uobdsqnt SIZE_Y I
+	CLASS C_hanbbxya CorridorNetherWartsRoom
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 boundingBox
@@ -76,17 +136,17 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_hqscrpvv create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_hmfzffwi;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_hanbbxya;
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
 			ARG 4 orientation
-			ARG 5 chainLength
-	CLASS C_ihqdzmll BridgeEnd
-		FIELD f_jprzmbyb SIZE_Y I
-		FIELD f_weuzfuda SIZE_Z I
-		FIELD f_zisnzqgq seed I
-		FIELD f_zivcsmmo SIZE_X I
+			ARG 5 chainlength
+	CLASS C_irzwlkra CorridorRightTurn
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_hsxnozlj containsChest Z
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILjava/util/Random;Lnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 random
@@ -95,111 +155,17 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_xfpkadkk create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_ihqdzmll;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_irzwlkra;
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
 			ARG 4 z
 			ARG 5 orientation
 			ARG 6 chainLength
-	CLASS C_iidpgaed BridgeSmallCrossing
-		FIELD f_iztpobqn SIZE_Z I
-		FIELD f_rbkloccq SIZE_Y I
-		FIELD f_vjfkqdrz SIZE_X I
-		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
-			ARG 1 chainLength
-			ARG 2 boundingBox
-			ARG 3 orientation
-		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
-			ARG 1 world
-			ARG 2 nbt
-		METHOD m_zqmpeatc create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_iidpgaed;
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
-			ARG 4 orientation
-			ARG 5 chainLength
-	CLASS C_ktuwwgbg CorridorBalcony
-		FIELD f_cjqkswlt SIZE_X I
-		FIELD f_upfowlay SIZE_Z I
-		FIELD f_vbuooipk SIZE_Y I
-		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
-			ARG 1 chainLength
-			ARG 2 boundingBox
-			ARG 3 orientation
-		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
-			ARG 1 world
-			ARG 2 nbt
-		METHOD m_pqhuqylo create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_ktuwwgbg;
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
-			ARG 4 orientation
-			ARG 5 chainLength
-	CLASS C_lqttvahg Bridge
-		FIELD f_gasvcpzq SIZE_X I
-		FIELD f_jhnuagac SIZE_Y I
-		FIELD f_ujjgnoya SIZE_Z I
-		METHOD <init> (ILjava/util/Random;Lnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
-			ARG 1 chainLength
-			ARG 2 random
-			ARG 3 boundingBox
-			ARG 4 orientation
-		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
-			ARG 1 world
-			ARG 2 nbt
-		METHOD m_illcqkpm create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_lqttvahg;
-			ARG 1 random
-			ARG 2 x
-			ARG 3 y
-			ARG 4 z
-			ARG 5 orientation
-			ARG 6 chainLength
-	CLASS C_mdhbqcji Piece
-		METHOD m_ahazjlxt pieceGenerator (Lnet/minecraft/unmapped/C_wjbnroob$C_uaaizsua;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;IZ)Lnet/minecraft/unmapped/C_yiqopooc;
-			ARG 1 start
-			ARG 3 random
-			ARG 4 x
-			ARG 5 y
-			ARG 6 z
-			ARG 7 orientation
-			ARG 8 chainLength
-			ARG 9 inside
-		METHOD m_bnvlsbdb fillForwardOpening (Lnet/minecraft/unmapped/C_wjbnroob$C_uaaizsua;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIZ)Lnet/minecraft/unmapped/C_yiqopooc;
-			ARG 1 start
-			ARG 3 random
-			ARG 4 leftRightOffset
-			ARG 5 heightOffset
-			ARG 6 inside
-		METHOD m_dxjnecpq isInBounds (Lnet/minecraft/unmapped/C_zzqpyqmh;)Z
-			ARG 0 boundingBox
-		METHOD m_pcbhsqxm pickPiece (Lnet/minecraft/unmapped/C_wjbnroob$C_uaaizsua;Ljava/util/List;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_mdhbqcji;
-			ARG 1 start
-			ARG 2 possiblePieces
-			ARG 4 random
-			ARG 5 x
-			ARG 6 y
-			ARG 7 z
-			ARG 8 orientation
-			ARG 9 chainLength
-		METHOD m_udgjsudk checkRemainingPieces (Ljava/util/List;)I
-			ARG 1 possiblePieces
-		METHOD m_xndgdxpv fillNWOpening (Lnet/minecraft/unmapped/C_wjbnroob$C_uaaizsua;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIZ)Lnet/minecraft/unmapped/C_yiqopooc;
-			ARG 1 start
-			ARG 3 random
-			ARG 4 heightOffset
-			ARG 5 leftRightOffset
-			ARG 6 inside
-		METHOD m_ztyguuka fillSEOpening (Lnet/minecraft/unmapped/C_wjbnroob$C_uaaizsua;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIZ)Lnet/minecraft/unmapped/C_yiqopooc;
-			ARG 1 start
-			ARG 3 random
-			ARG 4 heightOffset
-			ARG 5 leftRightOffset
-			ARG 6 inside
-	CLASS C_ogswfftu BridgeCrossing
-		FIELD f_fxpdusat SIZE_Y I
-		FIELD f_hgxepkpm SIZE_Z I
-		FIELD f_yzsjzucr SIZE_X I
+	CLASS C_jlpwelxe BridgeCrossing
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (IILnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 x
 			ARG 2 z
@@ -211,44 +177,52 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_sghduhbt create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_ogswfftu;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_jlpwelxe;
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
 			ARG 4 orientation
 			ARG 5 chainLength
-	CLASS C_rqztndwi PieceData
-		FIELD f_efofadhn pieceType Ljava/lang/Class;
-		FIELD f_elskikls limit I
-		FIELD f_jqhprrcc generatedCount I
-		FIELD f_lswwqunl weight I
-		FIELD f_ltyjlvpk repeatable Z
-		METHOD <init> (Ljava/lang/Class;II)V
-			ARG 1 pieceType
-			ARG 2 weight
-			ARG 3 limit
-		METHOD <init> (Ljava/lang/Class;IIZ)V
-			ARG 1 pieceType
-			ARG 2 weight
-			ARG 3 limit
-			ARG 4 repeatable
-		METHOD m_ahqsnonj canGenerate (I)Z
+	CLASS C_kvxctpoi CorridorStairs
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
+		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
-		METHOD m_mctkihrz canGenerate ()Z
-	CLASS C_uaaizsua Start
-		FIELD f_anveueqc corridorPieces Ljava/util/List;
-		FIELD f_cvrmgzof pieces Ljava/util/List;
-		FIELD f_kebxmlzy lastPiece Lnet/minecraft/unmapped/C_wjbnroob$C_rqztndwi;
-		FIELD f_szxzodim bridgePieces Ljava/util/List;
-		METHOD <init> (Ljava/util/Random;II)V
-			ARG 1 random
-			ARG 2 x
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
+			ARG 1 world
+			ARG 2 nbt
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_kvxctpoi;
+			ARG 1 x
+			ARG 2 y
 			ARG 3 z
-	CLASS C_ufkscvla CorridorRightTurn
-		FIELD f_uohalqgo SIZE_X I
-		FIELD f_uprqybpa containsChest Z
-		FIELD f_wolppewn SIZE_Z I
-		FIELD f_ycseaqgs SIZE_Y I
+			ARG 4 orientation
+			ARG 5 chainLength
+	CLASS C_kzswnwhk BridgePlatform
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_unhuwkiw hasBlazeSpawner Z
+		FIELD f_zhauppad SIZE_X I
+		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
+			ARG 1 chainLength
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
+			ARG 1 world
+			ARG 2 nbt
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIIILnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_wjbnroob$C_kzswnwhk;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 chainLength
+			ARG 5 orientation
+	CLASS C_lfilnqde BridgeEnd
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_oxeiblco seed I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILjava/util/Random;Lnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 random
@@ -257,17 +231,58 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_ppqorpil create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_ufkscvla;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_lfilnqde;
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
 			ARG 4 z
 			ARG 5 orientation
 			ARG 6 chainLength
-	CLASS C_wfpgluga CorridorNetherWartsRoom
-		FIELD f_buxkkbrw SIZE_Z I
-		FIELD f_oidhlbrw SIZE_Y I
-		FIELD f_vfxwqzam SIZE_X I
+	CLASS C_lxhyutsn Piece
+		METHOD m_axrxrwxs pickPiece (Lnet/minecraft/unmapped/C_wjbnroob$C_gekirlmt;Ljava/util/List;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_lxhyutsn;
+			ARG 1 start
+			ARG 2 possiblePieces
+			ARG 4 random
+			ARG 5 x
+			ARG 6 y
+			ARG 7 z
+			ARG 8 orientation
+			ARG 9 chainLength
+		METHOD m_doxxketl checkRemainingPieces (Ljava/util/List;)I
+			ARG 1 possiblePieces
+		METHOD m_iuoozjil isInBounds (Lnet/minecraft/unmapped/C_zzqpyqmh;)Z
+			ARG 0 boundingBox
+		METHOD m_oeyjlcca pieceGenerator (Lnet/minecraft/unmapped/C_wjbnroob$C_gekirlmt;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;IZ)Lnet/minecraft/unmapped/C_yiqopooc;
+			ARG 1 start
+			ARG 3 random
+			ARG 4 x
+			ARG 5 y
+			ARG 6 z
+			ARG 7 orientation
+			ARG 8 chainLength
+			ARG 9 inside
+		METHOD m_rqqxczhq fillForwardOpening (Lnet/minecraft/unmapped/C_wjbnroob$C_gekirlmt;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIZ)Lnet/minecraft/unmapped/C_yiqopooc;
+			ARG 1 start
+			ARG 3 random
+			ARG 4 leftRightOffset
+			ARG 5 heightOffset
+			ARG 6 inside
+		METHOD m_wrbsatqf fillSEOpening (Lnet/minecraft/unmapped/C_wjbnroob$C_gekirlmt;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIZ)Lnet/minecraft/unmapped/C_yiqopooc;
+			ARG 1 start
+			ARG 3 random
+			ARG 4 heightOffset
+			ARG 5 leftRightOffset
+			ARG 6 inside
+		METHOD m_zglxexqc fillNWOpening (Lnet/minecraft/unmapped/C_wjbnroob$C_gekirlmt;Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIZ)Lnet/minecraft/unmapped/C_yiqopooc;
+			ARG 1 start
+			ARG 3 random
+			ARG 4 heightOffset
+			ARG 5 leftRightOffset
+			ARG 6 inside
+	CLASS C_msyluxtx SmallCorridor
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 boundingBox
@@ -275,33 +290,36 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_ddekfgld create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_wfpgluga;
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
-			ARG 4 orientation
-			ARG 5 chainlength
-	CLASS C_wpmceujb SmallCorridor
-		FIELD f_anhaasmo SIZE_X I
-		FIELD f_lcpvrsvs SIZE_Y I
-		FIELD f_qluqfhto SIZE_Z I
-		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
-			ARG 1 chainLength
-			ARG 2 boundingBox
-			ARG 3 orientation
-		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
-			ARG 1 world
-			ARG 2 nbt
-		METHOD m_gcanuyaf create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_wpmceujb;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_msyluxtx;
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
 			ARG 4 orientation
 			ARG 5 chainLength
-	CLASS C_wsrudffi BridgeStairs
-		FIELD f_kwsjiriu SIZE_Y I
-		FIELD f_sydnrjrq SIZE_Z I
-		FIELD f_yqdcmweh SIZE_X I
+	CLASS C_nuefbdtn CorridorLeftTurn
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_hsxnozlj containsChest Z
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
+		METHOD <init> (ILjava/util/Random;Lnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
+			ARG 1 chainLength
+			ARG 2 random
+			ARG 3 boundingBox
+			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
+			ARG 1 world
+			ARG 2 nbt
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;Ljava/util/Random;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_nuefbdtn;
+			ARG 1 random
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
+			ARG 5 orientation
+			ARG 6 chainLength
+	CLASS C_pwzuakgd CorridorCrossing
+		FIELD f_engejldg SIZE_Z I
+		FIELD f_nymlcaes SIZE_Y I
+		FIELD f_zhauppad SIZE_X I
 		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
 			ARG 1 chainLength
 			ARG 2 boundingBox
@@ -309,27 +327,9 @@ CLASS net/minecraft/unmapped/C_wjbnroob net/minecraft/structure/NetherFortressGe
 		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
 			ARG 1 world
 			ARG 2 nbt
-		METHOD m_xycpxlnr create (Lnet/minecraft/unmapped/C_wrckypwv;IIIILnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_wjbnroob$C_wsrudffi;
+		METHOD m_ddvycotx create (Lnet/minecraft/unmapped/C_wrckypwv;IIILnet/minecraft/unmapped/C_fxhiuupx;I)Lnet/minecraft/unmapped/C_wjbnroob$C_pwzuakgd;
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
-			ARG 4 chainlength
-			ARG 5 orientation
-	CLASS C_wuzxqpli BridgePlatform
-		FIELD f_gfbufxjs hasBlazeSpawner Z
-		FIELD f_gvulvwmz SIZE_Z I
-		FIELD f_kavzdnkh SIZE_X I
-		FIELD f_qipyivop SIZE_Y I
-		METHOD <init> (ILnet/minecraft/unmapped/C_zzqpyqmh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
-			ARG 1 chainLength
-			ARG 2 boundingBox
-			ARG 3 orientation
-		METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_hincwlhh;)V
-			ARG 1 world
-			ARG 2 nbt
-		METHOD m_yjbqmfga create (Lnet/minecraft/unmapped/C_wrckypwv;IIIILnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_wjbnroob$C_wuzxqpli;
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
-			ARG 4 chainLength
-			ARG 5 orientation
+			ARG 4 orientation
+			ARG 5 chainLength

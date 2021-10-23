@@ -1,30 +1,66 @@
 CLASS net/minecraft/unmapped/C_zmxhfgpy net/minecraft/world/biome/SpawnSettings
-	FIELD f_btfbfkvd spawnCosts Ljava/util/Map;
-	FIELD f_fnvkowlq INSTANCE Lnet/minecraft/unmapped/C_zmxhfgpy;
-	FIELD f_hmgvpumi CODEC Lcom/mojang/serialization/MapCodec;
-	FIELD f_nvdkunlm spawners Ljava/util/Map;
-	FIELD f_odnlhfgh LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_thpjmppa creatureSpawnProbability F
-	FIELD f_vlgjpwhs EMPTY_ENTRY_POOL Lnet/minecraft/unmapped/C_vhgtymyu;
-	FIELD f_xvwllwpw playerSpawnFriendly Z
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_kkyablbj creatureSpawnProbability F
+	FIELD f_nohpwhmk EMPTY_ENTRY_POOL Lnet/minecraft/unmapped/C_vhgtymyu;
+	FIELD f_onrvpxen INSTANCE Lnet/minecraft/unmapped/C_zmxhfgpy;
+	FIELD f_qjanbjhn playerSpawnFriendly Z
+	FIELD f_vngqsybi CODEC Lcom/mojang/serialization/MapCodec;
+	FIELD f_wfjculqo spawnCosts Ljava/util/Map;
+	FIELD f_ybtyrbqq spawners Ljava/util/Map;
 	METHOD <init> (FLjava/util/Map;Ljava/util/Map;Z)V
 		ARG 1 creatureSpawnProbability
 		ARG 2 spawners
 		ARG 3 spawnCosts
 		ARG 4 playerSpawnFriendly
-	METHOD m_cbzeiaro getSpawnEntries (Lnet/minecraft/unmapped/C_icxdqmro;)Lnet/minecraft/unmapped/C_vhgtymyu;
-		ARG 1 spawnGroup
-	METHOD m_jlivlkiq getSpawnDensity (Lnet/minecraft/unmapped/C_rbvsvago;)Lnet/minecraft/unmapped/C_zmxhfgpy$C_mjrbmjbv;
+	METHOD m_ldokgyfy getCreatureSpawnProbability ()F
+	METHOD m_qjanbjhn isPlayerSpawnFriendly ()Z
+	METHOD m_rywqsenz getSpawnDensity (Lnet/minecraft/unmapped/C_rbvsvago;)Lnet/minecraft/unmapped/C_zmxhfgpy$C_lziprdam;
 		ARG 1 entityType
-	METHOD m_nsnqvmfu isPlayerSpawnFriendly ()Z
-	METHOD m_ocbczsjb (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+	METHOD m_shndgsni getSpawnEntries (Lnet/minecraft/unmapped/C_icxdqmro;)Lnet/minecraft/unmapped/C_vhgtymyu;
+		ARG 1 spawnGroup
+	METHOD m_tnydyvmt (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
-	METHOD m_vklumzhx getCreatureSpawnProbability ()F
-	CLASS C_hidgqamj SpawnEntry
-		FIELD f_drkwzvsq minGroupSize I
-		FIELD f_evgjvoyb CODEC Lcom/mojang/serialization/Codec;
-		FIELD f_hdmcmoww type Lnet/minecraft/unmapped/C_rbvsvago;
-		FIELD f_jgpifoep maxGroupSize I
+	CLASS C_lziprdam SpawnDensity
+		COMMENT Embodies the density limit information of a type of entity in entity
+		COMMENT spawning logic. The density field is generated for all entities spawned
+		COMMENT than a specific type of entity.
+		FIELD f_izcryxbo gravityLimit D
+		FIELD f_syrfnkng mass D
+		FIELD f_vngqsybi CODEC Lcom/mojang/serialization/Codec;
+		METHOD <init> (DD)V
+			ARG 1 gravityLimit
+			ARG 3 mass
+		METHOD m_bpclciwa getGravityLimit ()D
+			COMMENT Represents the cap of gravity as in {@link
+			COMMENT net.minecraft.util.math.GravityField#calculate(BlockPos, double)} for
+			COMMENT entity spawning. If the cap is exceeded, the entity spawning attempt
+			COMMENT will skip.
+		METHOD m_dlksntey (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_vrpbaecd getMass ()D
+			COMMENT Represents the mass of each entity spawned. Will affect gravity
+			COMMENT calculation.
+	CLASS C_pckcmlvu Builder
+		FIELD f_fnmxpzig playerSpawnFriendly Z
+		FIELD f_kkyablbj creatureSpawnProbability F
+		FIELD f_wfjculqo spawnCosts Ljava/util/Map;
+		FIELD f_ybtyrbqq spawners Ljava/util/Map;
+		METHOD m_kkyablbj creatureSpawnProbability (F)Lnet/minecraft/unmapped/C_zmxhfgpy$C_pckcmlvu;
+			ARG 1 probability
+		METHOD m_okhvjiin build ()Lnet/minecraft/unmapped/C_zmxhfgpy;
+		METHOD m_oxgyyepk playerSpawnFriendly ()Lnet/minecraft/unmapped/C_zmxhfgpy$C_pckcmlvu;
+		METHOD m_pjwltjuk spawnCost (Lnet/minecraft/unmapped/C_rbvsvago;DD)Lnet/minecraft/unmapped/C_zmxhfgpy$C_pckcmlvu;
+			ARG 1 entityType
+			ARG 2 mass
+			ARG 4 gravityLimit
+		METHOD m_uagidolf spawn (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_zmxhfgpy$C_shdjrkkv;)Lnet/minecraft/unmapped/C_zmxhfgpy$C_pckcmlvu;
+			ARG 1 spawnGroup
+			ARG 2 spawnEntry
+	CLASS C_shdjrkkv SpawnEntry
+		FIELD f_kpdwhrng type Lnet/minecraft/unmapped/C_rbvsvago;
+		FIELD f_tphqbxbf minGroupSize I
+		FIELD f_vngqsybi CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_wfqqbsmx maxGroupSize I
 		METHOD <init> (Lnet/minecraft/unmapped/C_rbvsvago;III)V
 			ARG 1 type
 			ARG 2 weight
@@ -35,41 +71,5 @@ CLASS net/minecraft/unmapped/C_zmxhfgpy net/minecraft/world/biome/SpawnSettings
 			ARG 2 weight
 			ARG 3 minGroupSize
 			ARG 4 maxGroupSize
-		METHOD m_fzykbfyn (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		METHOD m_xdgffetk (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
-	CLASS C_mjrbmjbv SpawnDensity
-		COMMENT Embodies the density limit information of a type of entity in entity
-		COMMENT spawning logic. The density field is generated for all entities spawned
-		COMMENT than a specific type of entity.
-		FIELD f_bbdqkjlf gravityLimit D
-		FIELD f_gxsmvapb CODEC Lcom/mojang/serialization/Codec;
-		FIELD f_jazihhjt mass D
-		METHOD <init> (DD)V
-			ARG 1 gravityLimit
-			ARG 3 mass
-		METHOD m_fgmmmwyj getMass ()D
-			COMMENT Represents the mass of each entity spawned. Will affect gravity
-			COMMENT calculation.
-		METHOD m_okfcclcw getGravityLimit ()D
-			COMMENT Represents the cap of gravity as in {@link
-			COMMENT net.minecraft.util.math.GravityField#calculate(BlockPos, double)} for
-			COMMENT entity spawning. If the cap is exceeded, the entity spawning attempt
-			COMMENT will skip.
-		METHOD m_xbulcrkt (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-			ARG 0 instance
-	CLASS C_oqwkayoo Builder
-		FIELD f_aqcgzzhi spawnCosts Ljava/util/Map;
-		FIELD f_eevqnooe playerSpawnFriendly Z
-		FIELD f_ovcwjyzc spawners Ljava/util/Map;
-		FIELD f_ppwqmcop creatureSpawnProbability F
-		METHOD m_gsgnugzr spawn (Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_zmxhfgpy$C_hidgqamj;)Lnet/minecraft/unmapped/C_zmxhfgpy$C_oqwkayoo;
-			ARG 1 spawnGroup
-			ARG 2 spawnEntry
-		METHOD m_mebspkyn spawnCost (Lnet/minecraft/unmapped/C_rbvsvago;DD)Lnet/minecraft/unmapped/C_zmxhfgpy$C_oqwkayoo;
-			ARG 1 entityType
-			ARG 2 mass
-			ARG 4 gravityLimit
-		METHOD m_qjsylinc build ()Lnet/minecraft/unmapped/C_zmxhfgpy;
-		METHOD m_tecougqk playerSpawnFriendly ()Lnet/minecraft/unmapped/C_zmxhfgpy$C_oqwkayoo;
-		METHOD m_tgjususs creatureSpawnProbability (F)Lnet/minecraft/unmapped/C_zmxhfgpy$C_oqwkayoo;
-			ARG 1 probability

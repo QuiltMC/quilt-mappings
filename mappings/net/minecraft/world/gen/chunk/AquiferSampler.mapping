@@ -1,12 +1,15 @@
 CLASS net/minecraft/unmapped/C_cxzdhgpj net/minecraft/world/gen/chunk/AquiferSampler
-	METHOD m_abdgxqja needsFluidTick ()Z
-	METHOD m_hwvtrftw apply (Lnet/minecraft/unmapped/C_gkzilmui;IIID)Lnet/minecraft/unmapped/C_pmeibtxt;
+	METHOD m_rrdpsndv needsFluidTick ()Z
+	METHOD m_vljudttn apply (Lnet/minecraft/unmapped/C_gkzilmui;IIID)Lnet/minecraft/unmapped/C_pmeibtxt;
 		ARG 1 source
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
 		ARG 5 weight
-	METHOD m_kuiiebwc aquifer (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_stihfpwl;Lnet/minecraft/unmapped/C_wgwzecpu;II)Lnet/minecraft/unmapped/C_cxzdhgpj;
+	METHOD m_vmbfvtrx seaLevel (ILnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_cxzdhgpj;
+		ARG 0 seaLevel
+		ARG 1 state
+	METHOD m_vvwqomhv aquifer (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_stihfpwl;Lnet/minecraft/unmapped/C_wgwzecpu;II)Lnet/minecraft/unmapped/C_cxzdhgpj;
 		ARG 0 pos
 		ARG 1 edgeDensityNoise
 		ARG 2 fluidLevelNoise
@@ -15,23 +18,20 @@ CLASS net/minecraft/unmapped/C_cxzdhgpj net/minecraft/world/gen/chunk/AquiferSam
 		ARG 5 columnSampler
 		ARG 6 startY
 		ARG 7 deltaY
-	METHOD m_zqxalbes seaLevel (ILnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_cxzdhgpj;
-		ARG 0 seaLevel
-		ARG 1 state
-	CLASS C_dzwubutf Impl
-		FIELD f_aqqiougf startY I
-		FIELD f_auhlolco fluidTypeNoise Lnet/minecraft/unmapped/C_trjftrxr;
-		FIELD f_avfgmywm columnSampler Lnet/minecraft/unmapped/C_wgwzecpu;
-		FIELD f_bzobntvn blockPositions [J
-		FIELD f_gamhoils waterLevels [Lnet/minecraft/unmapped/C_cxzdhgpj$C_dzwubutf$C_hksutxvo;
-		FIELD f_kswiqhcd settings Lnet/minecraft/unmapped/C_stihfpwl;
-		FIELD f_kterkupt fluidLevelNoise Lnet/minecraft/unmapped/C_trjftrxr;
-		FIELD f_mkjdbxog sizeZ I
-		FIELD f_rhsorkim edgeDensityNoise Lnet/minecraft/unmapped/C_trjftrxr;
-		FIELD f_soycwwjn startZ I
-		FIELD f_tqhvoevs sizeX I
-		FIELD f_vifhvvsu startX I
-		FIELD f_wzydtyea needsFluidTick Z
+	CLASS C_utpzljzg Impl
+		FIELD f_fopawqva columnSampler Lnet/minecraft/unmapped/C_wgwzecpu;
+		FIELD f_higtwljv startX I
+		FIELD f_kwegvzmw sizeX I
+		FIELD f_npwjaznz settings Lnet/minecraft/unmapped/C_stihfpwl;
+		FIELD f_pzuifjjg sizeZ I
+		FIELD f_qbqkitcg edgeDensityNoise Lnet/minecraft/unmapped/C_trjftrxr;
+		FIELD f_qtfqpnfh fluidTypeNoise Lnet/minecraft/unmapped/C_trjftrxr;
+		FIELD f_rrdpsndv needsFluidTick Z
+		FIELD f_tplcybgv startY I
+		FIELD f_vsczyheg startZ I
+		FIELD f_wqbbcnrb fluidLevelNoise Lnet/minecraft/unmapped/C_trjftrxr;
+		FIELD f_xehdfbhn waterLevels [Lnet/minecraft/unmapped/C_cxzdhgpj$C_utpzljzg$C_xsbrdpwq;
+		FIELD f_zsitrfll blockPositions [J
 		METHOD <init> (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_trjftrxr;Lnet/minecraft/unmapped/C_stihfpwl;Lnet/minecraft/unmapped/C_wgwzecpu;II)V
 			ARG 1 pos
 			ARG 2 edgeDensityNoise
@@ -41,35 +41,35 @@ CLASS net/minecraft/unmapped/C_cxzdhgpj net/minecraft/world/gen/chunk/AquiferSam
 			ARG 6 columnSampler
 			ARG 7 startY
 			ARG 8 deltaY
-		METHOD m_dkukrkdp getLocalY (I)I
+		METHOD m_brskdtjc getWaterLevel (J)Lnet/minecraft/unmapped/C_cxzdhgpj$C_utpzljzg$C_xsbrdpwq;
+			ARG 1 pos
+		METHOD m_cfqeopio index (III)I
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+		METHOD m_fbzerioj shouldBeLava (I)Z
 			ARG 1 y
-		METHOD m_evscfpwd getLocalZ (I)I
-			ARG 1 z
-		METHOD m_fyrmnmge calculateDensity (IDLnet/minecraft/unmapped/C_cxzdhgpj$C_dzwubutf$C_hksutxvo;Lnet/minecraft/unmapped/C_cxzdhgpj$C_dzwubutf$C_hksutxvo;)D
+		METHOD m_hwgcgiox calculateDensity (IDLnet/minecraft/unmapped/C_cxzdhgpj$C_utpzljzg$C_xsbrdpwq;Lnet/minecraft/unmapped/C_cxzdhgpj$C_utpzljzg$C_xsbrdpwq;)D
 			ARG 1 y
 			ARG 2 noise
 			ARG 4 first
 			ARG 5 second
-		METHOD m_iiuhibtn index (III)I
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
-		METHOD m_jeitrcro shouldBeLava (I)Z
-			ARG 1 y
-		METHOD m_kyaozqfn getLocalX (I)I
-			ARG 1 x
-		METHOD m_qznpiywu maxDistance (II)D
+		METHOD m_kznqjktm getLocalZ (I)I
+			ARG 1 z
+		METHOD m_lbspeknf maxDistance (II)D
 			ARG 1 a
 			ARG 2 b
-		METHOD m_tdfbaeoy getFluidLevel (III)Lnet/minecraft/unmapped/C_cxzdhgpj$C_dzwubutf$C_hksutxvo;
+		METHOD m_sftahpkk getLocalY (I)I
+			ARG 1 y
+		METHOD m_wssdveku getFluidLevel (III)Lnet/minecraft/unmapped/C_cxzdhgpj$C_utpzljzg$C_xsbrdpwq;
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
-		METHOD m_xyfzvqum getWaterLevel (J)Lnet/minecraft/unmapped/C_cxzdhgpj$C_dzwubutf$C_hksutxvo;
-			ARG 1 pos
-		CLASS C_hksutxvo FluidLevel
-			FIELD f_eqdjskaz state Lnet/minecraft/unmapped/C_pmeibtxt;
-			FIELD f_thdiyhsf y I
+		METHOD m_zlmdkkay getLocalX (I)I
+			ARG 1 x
+		CLASS C_xsbrdpwq FluidLevel
+			FIELD f_xfsqiiux y I
+			FIELD f_yboowymn state Lnet/minecraft/unmapped/C_pmeibtxt;
 			METHOD <init> (ILnet/minecraft/unmapped/C_pmeibtxt;)V
 				ARG 1 y
 				ARG 2 state

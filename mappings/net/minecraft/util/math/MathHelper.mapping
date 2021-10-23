@@ -1,53 +1,38 @@
 CLASS net/minecraft/unmapped/C_zixxccpz net/minecraft/util/math/MathHelper
-	FIELD f_ehawsicb DEGREES_TO_SINE_TABLE_INDEX F
-	FIELD f_gknzoihd DEGREES_PER_RADIAN F
-	FIELD f_jgfdoouv SMALLEST_FRACTION_FREE_DOUBLE D
-	FIELD f_jqojqmoa RADIANS_PER_DEGREE F
-	FIELD f_kpvrqdna ARCSINE_TABLE [D
-	FIELD f_ogyasilk EPSILON F
-	FIELD f_pddivrbg RANDOM Ljava/util/Random;
-	FIELD f_qppskcgs COSINE_TABLE [D
-	FIELD f_rocxgwlc HALF_PI_RADIANS_SINE_TABLE_INDEX J
-	FIELD f_rwbftoub SINE_TABLE [F
-	FIELD f_shuagpbf HALF_PI F
-	FIELD f_tgcodvtl TAU F
+	FIELD f_aagynfpl HALF_PI F
+	FIELD f_ahheqpek COSINE_TABLE [D
+	FIELD f_bbjrhpni SINE_TABLE [F
+	FIELD f_cgkhmabm TAU F
 		COMMENT Tau is equal to {@code 2 * PI}.
-	FIELD f_zbbhrlsl SQUARE_ROOT_OF_TWO F
-	FIELD f_zerbfwup MULTIPLY_DE_BRUIJN_BIT_POSITION [I
-	FIELD f_zudqgwgp PI F
-	METHOD m_aoduxlxh fastInverseSqrt (D)D
-		ARG 0 x
-	METHOD m_aonrkagw idealHash (I)I
-		ARG 0 value
-	METHOD m_bpizngpf magnitude (IDI)D
-		ARG 0 x
-		ARG 1 y
-		ARG 3 z
-	METHOD m_bxnkvoad randomUuid (Ljava/util/Random;)Ljava/util/UUID;
-		ARG 0 random
-	METHOD m_ccwjguyt binarySearch (IILjava/util/function/IntPredicate;)I
+	FIELD f_epdlalic SQUARE_ROOT_OF_TWO F
+	FIELD f_fjonprbm DEGREES_PER_RADIAN F
+	FIELD f_guljspkd HALF_PI_RADIANS_SINE_TABLE_INDEX J
+	FIELD f_hfvbnwgz PI F
+	FIELD f_jqanuoui RADIANS_PER_DEGREE F
+	FIELD f_mxcnpunf RANDOM Ljava/util/Random;
+	FIELD f_mxnykavc ARCSINE_TABLE [D
+	FIELD f_oakzbdjq DEGREES_TO_SINE_TABLE_INDEX F
+	FIELD f_sfgcztyi SMALLEST_FRACTION_FREE_DOUBLE D
+	FIELD f_tkznoipn EPSILON F
+	FIELD f_vtrgxqkk MULTIPLY_DE_BRUIJN_BIT_POSITION [I
+	METHOD m_adgwrpyb clampedLerp (DDD)D
+		ARG 0 start
+		ARG 2 end
+		ARG 4 delta
+	METHOD m_adgwrpyb clampedLerp (FFF)F
 		ARG 0 start
 		ARG 1 end
-		ARG 2 leftPredicate
-	METHOD m_clsfbtqr lerp (DDD)D
-		ARG 0 delta
-		ARG 2 start
-		ARG 4 end
-	METHOD m_cpkhfwuq angleBetween (FF)F
-		ARG 0 first
-		ARG 1 second
-	METHOD m_cyasubty fastFloor (D)I
-		ARG 0 value
-	METHOD m_ddqfvqgj square (I)I
-		ARG 0 n
-	METHOD m_dioalfzc stepUnwrappedAngleTowards (FFF)F
-		COMMENT Steps from {@code from} degrees towards {@code to} degrees, changing the value by at most {@code step} degrees.
-		COMMENT
-		COMMENT <p>This method does not wrap the resulting angle, so {@link #stepAngleTowards(float, float, float)} should be used in preference.
-		ARG 0 from
-		ARG 1 to
-		ARG 2 step
-	METHOD m_drekravq lerp3 (DDDDDDDDDDD)D
+		ARG 2 delta
+	METHOD m_aiwjwbjb ([F)V
+		ARG 0 sineTable
+	METHOD m_amokznoe hsvToRgb (FFF)I
+		ARG 0 hue
+		ARG 1 saturation
+		ARG 2 value
+	METHOD m_arnaasad absMax (DD)D
+		ARG 0 a
+		ARG 2 b
+	METHOD m_awhmzviq lerp3 (DDDDDDDDDDD)D
 		COMMENT A three-dimensional lerp between values on the 8 corners of the unit cube. Arbitrary values are specified for the corners and the output is interpolated between them.
 		ARG 0 deltaX
 			COMMENT the x-coordinate on the unit cube
@@ -71,10 +56,101 @@ CLASS net/minecraft/unmapped/C_zixxccpz net/minecraft/util/math/MathHelper
 			COMMENT the output if {@code deltaX} is 0, {@code deltaY} is 1 and {@code deltaZ} is 1
 		ARG 20 x1y1z1
 			COMMENT the output if {@code deltaX} is 1, {@code deltaY} is 1 and {@code deltaZ} is 1
-	METHOD m_epiypfdy approximatelyEquals (DD)Z
+	METHOD m_bxflejye wrap (FF)F
+		ARG 0 value
+		ARG 1 maxDeviation
+	METHOD m_cfepseci log2DeBruijn (I)I
+		ARG 0 value
+	METHOD m_clwijhqh lerpFromProgress (DDDDD)D
+		ARG 0 lerpValue
+		ARG 2 lerpStart
+		ARG 4 lerpEnd
+		ARG 6 start
+		ARG 8 end
+	METHOD m_csyxcbqr nextDouble (Ljava/util/Random;DD)D
+		ARG 0 random
+		ARG 1 min
+		ARG 3 max
+	METHOD m_dguetump average ([J)D
+		ARG 0 array
+	METHOD m_dnhnhecd clamp (BBB)B
+		ARG 0 value
+		ARG 1 min
+		ARG 2 max
+	METHOD m_dnhnhecd clamp (DDD)D
+		ARG 0 value
+		ARG 2 min
+		ARG 4 max
+	METHOD m_dnhnhecd clamp (FFF)F
+		ARG 0 value
+		ARG 1 min
+		ARG 2 max
+	METHOD m_dnhnhecd clamp (III)I
+		ARG 0 value
+		ARG 1 min
+		ARG 2 max
+	METHOD m_dnhnhecd clamp (JJJ)J
+		ARG 0 value
+		ARG 2 min
+		ARG 4 max
+	METHOD m_dnujxdgk lfloor (D)J
+		ARG 0 value
+	METHOD m_dzlziarc atan2 (DD)D
+		ARG 0 y
+		ARG 2 x
+	METHOD m_ecbfmbxm absFloor (D)I
+		ARG 0 value
+	METHOD m_evtwqdpg floor (D)I
+		ARG 0 value
+	METHOD m_evtwqdpg floor (F)I
+		ARG 0 value
+	METHOD m_fqsbjgzu lerpAngleDegrees (FFF)F
+		ARG 0 delta
+		ARG 1 start
+		ARG 2 end
+	METHOD m_gamssdup getCumulativeDistribution ([D)[D
+		ARG 0 values
+	METHOD m_ggfzwusm packRgb (FFF)I
+		ARG 0 r
+		ARG 1 g
+		ARG 2 b
+	METHOD m_ggfzwusm packRgb (III)I
+		ARG 0 r
+		ARG 1 g
+		ARG 2 b
+	METHOD m_goyvqnju fwrapDegrees (D)F
+		ARG 0 degrees
+	METHOD m_grpmznxo parseInt (Ljava/lang/String;I)I
+		ARG 0 string
+		ARG 1 fallback
+	METHOD m_grpmznxo parseInt (Ljava/lang/String;II)I
+		ARG 0 string
+		ARG 1 fallback
+		ARG 2 min
+	METHOD m_guzqoxaq cos (F)F
+		ARG 0 value
+	METHOD m_hljeodsc approximatelyEquals (DD)Z
 		ARG 0 a
 		ARG 2 b
-	METHOD m_eqxrgvus nextBetween (Ljava/util/Random;II)I
+	METHOD m_hljeodsc approximatelyEquals (FF)Z
+		ARG 0 a
+		ARG 1 b
+	METHOD m_hrgzwebk ceil (D)I
+		ARG 0 value
+	METHOD m_hrgzwebk ceil (F)I
+		ARG 0 value
+	METHOD m_hzvlllcu floorDiv (II)I
+		ARG 0 dividend
+		ARG 1 divisor
+	METHOD m_ijghmmqg lerp (DDD)D
+		ARG 0 delta
+		ARG 2 start
+		ARG 4 end
+	METHOD m_ijghmmqg lerp (FFF)F
+		ARG 0 delta
+		ARG 1 start
+		ARG 2 end
+	METHOD m_iorqbgnr nextBetween (Ljava/util/Random;II)I
 		COMMENT {@return a random, uniformly distributed integer value in {@code
 		COMMENT [min, max]}}
 		COMMENT
@@ -85,98 +161,39 @@ CLASS net/minecraft/unmapped/C_zixxccpz net/minecraft/util/math/MathHelper
 			COMMENT the minimum value, inclusive
 		ARG 2 max
 			COMMENT the maximum value, inclusive
-	METHOD m_fddmxkhs ([F)V
-		ARG 0 sineTable
-	METHOD m_fnxwpxwe floorMod (FF)F
-		ARG 0 dividend
-		ARG 1 divisor
-	METHOD m_ftabpyed hashCode (III)J
+	METHOD m_jgchzcvg fastInverseCbrt (F)F
+		ARG 0 x
+	METHOD m_jqhdefgx magnitude (IDI)D
 		ARG 0 x
 		ARG 1 y
-		ARG 2 z
-	METHOD m_gktluwvd packRgb (FFF)I
-		ARG 0 r
-		ARG 1 g
-		ARG 2 b
-	METHOD m_groeofwo wrapDegrees (F)F
+		ARG 3 z
+	METHOD m_kjwfbjst isPowerOfTwo (I)Z
+		ARG 0 value
+	METHOD m_kufvvyme subtractAngles (FF)F
+		ARG 0 start
+		ARG 1 end
+	METHOD m_lcsypdrr log2 (I)I
+		ARG 0 value
+	METHOD m_okrtatla wrapDegrees (D)D
 		COMMENT Wraps an angle in degrees to the interval {@code [-180, 180)}.
 		ARG 0 degrees
-	METHOD m_gxbajsns abs (I)I
+	METHOD m_okrtatla wrapDegrees (F)F
+		COMMENT Wraps an angle in degrees to the interval {@code [-180, 180)}.
+		ARG 0 degrees
+	METHOD m_okrtatla wrapDegrees (I)I
+		COMMENT Wraps an angle in degrees to the interval {@code [-180, 180)}.
+		ARG 0 degrees
+	METHOD m_omenzxei abs (F)F
 		ARG 0 value
-	METHOD m_hesfhmkk square (F)F
-		ARG 0 n
-	METHOD m_hhfyuvdf lerpAngleDegrees (FFF)F
-		ARG 0 delta
-		ARG 1 start
-		ARG 2 end
-	METHOD m_ibsecxbn perlinFade (D)D
+	METHOD m_omenzxei abs (I)I
 		ARG 0 value
-	METHOD m_icmpaghk sqrt (F)F
-		ARG 0 value
-	METHOD m_iftoegwj randomUuid ()Ljava/util/UUID;
-	METHOD m_iirzntzn hsvToRgb (FFF)I
-		ARG 0 hue
-		ARG 1 saturation
-		ARG 2 value
-	METHOD m_ineernha packRgb (III)I
-		ARG 0 r
-		ARG 1 g
-		ARG 2 b
-	METHOD m_iuxsoctw clamp (JJJ)J
-		ARG 0 value
-		ARG 2 min
-		ARG 4 max
-	METHOD m_jtswjtta square (D)D
-		ARG 0 n
-	METHOD m_jzdyzkog nextFloat (Ljava/util/Random;FF)F
-		ARG 0 random
-		ARG 1 min
-		ARG 2 max
-	METHOD m_kavwrsfu wrap (FF)F
-		ARG 0 value
-		ARG 1 maxDeviation
-	METHOD m_kgqoxwsz floor (F)I
-		ARG 0 value
-	METHOD m_ldzhzppe smallestEncompassingPowerOfTwo (I)I
-		ARG 0 value
-	METHOD m_majxzsci floorMod (DD)D
-		ARG 0 dividend
-		ARG 2 divisor
-	METHOD m_mqbvusyc isPowerOfTwo (I)Z
-		ARG 0 value
-	METHOD m_myhhzlhz ceil (D)I
-		ARG 0 value
-	METHOD m_mzezmdau nextDouble (Ljava/util/Random;DD)D
-		ARG 0 random
-		ARG 1 min
-		ARG 3 max
-	METHOD m_nkovxbwf clampedLerpFromProgress (DDDDD)D
+	METHOD m_pcbpiqro clampedLerpFromProgress (DDDDD)D
 		ARG 0 lerpValue
 		ARG 2 lerpStart
 		ARG 4 lerpEnd
 		ARG 6 start
 		ARG 8 end
-	METHOD m_nnbrnkip ceil (F)I
-		ARG 0 value
-	METHOD m_nrcqkxrm stepAngleTowards (FFF)F
-		COMMENT Steps from {@code from} degrees towards {@code to} degrees, changing the value by at most {@code step} degrees.
-		ARG 0 from
-		ARG 1 to
-		ARG 2 step
-	METHOD m_ntzjvoxd hashCode (Lnet/minecraft/unmapped/C_hhqtviec;)J
-		ARG 0 vec
-	METHOD m_nyoxtlmb average ([J)D
-		ARG 0 array
-	METHOD m_oaxdbhji murmurHash (J)J
-		ARG 0 value
-	METHOD m_ojfktjrt cos (F)F
-		ARG 0 value
-	METHOD m_oqfymexn fractionalPart (D)D
-		ARG 0 value
-	METHOD m_pdjkmczk floorMod (II)I
-		ARG 0 dividend
-		ARG 1 divisor
-	METHOD m_pngnairp nextInt (Ljava/util/Random;II)I
+	METHOD m_pemgkpus nextInt (Ljava/util/Random;II)I
 		COMMENT {@return a random, uniformly distributed integer value in {@code
 		COMMENT [min, max]} If the range is empty (i.e. {@code max < min}), it
 		COMMENT returns {@code min}.}
@@ -185,98 +202,108 @@ CLASS net/minecraft/unmapped/C_zixxccpz net/minecraft/util/math/MathHelper
 			COMMENT the minimum value, inclusive
 		ARG 2 max
 			COMMENT the maximum value, inclusive
-	METHOD m_qbdyaztj atan2 (DD)D
-		ARG 0 y
-		ARG 2 x
-	METHOD m_qfvrjnki fastInverseCbrt (F)F
-		ARG 0 x
-	METHOD m_qiyhegan clamp (III)I
+	METHOD m_ppwmlvvd perlinFade (D)D
 		ARG 0 value
+	METHOD m_qdgzhywt nextFloat (Ljava/util/Random;FF)F
+		ARG 0 random
 		ARG 1 min
 		ARG 2 max
-	METHOD m_qrqqrure clamp (DDD)D
+	METHOD m_rkpilzxw sin (F)F
 		ARG 0 value
-		ARG 2 min
-		ARG 4 max
-	METHOD m_qruvrnkj parseInt (Ljava/lang/String;I)I
-		ARG 0 string
-		ARG 1 fallback
-	METHOD m_rbgkyskj lerpAngle (FFF)F
+	METHOD m_rmmvfwbr randomUuid ()Ljava/util/UUID;
+	METHOD m_rmmvfwbr randomUuid (Ljava/util/Random;)Ljava/util/UUID;
+		ARG 0 random
+	METHOD m_rzlcfjhk hashCode (III)J
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD m_rzlcfjhk hashCode (Lnet/minecraft/unmapped/C_hhqtviec;)J
+		ARG 0 vec
+	METHOD m_suusolky nextGaussian (Ljava/util/Random;FF)F
+		ARG 0 random
+		ARG 1 mean
+		ARG 2 deviation
+	METHOD m_svmbzdot stepAngleTowards (FFF)F
+		COMMENT Steps from {@code from} degrees towards {@code to} degrees, changing the value by at most {@code step} degrees.
+		ARG 0 from
+		ARG 1 to
+		ARG 2 step
+	METHOD m_tuuxznei sqrt (F)F
+		ARG 0 value
+	METHOD m_tyjbmlzw binarySearch (IILjava/util/function/IntPredicate;)I
+		ARG 0 start
+		ARG 1 end
+		ARG 2 leftPredicate
+	METHOD m_uiilhlvh floorMod (DD)D
+		ARG 0 dividend
+		ARG 2 divisor
+	METHOD m_uiilhlvh floorMod (FF)F
+		ARG 0 dividend
+		ARG 1 divisor
+	METHOD m_uiilhlvh floorMod (II)I
+		ARG 0 dividend
+		ARG 1 divisor
+	METHOD m_uijcwisa roundUpToMultiple (II)I
+		COMMENT Returns a value farther than or as far as {@code value} from zero that
+		COMMENT is a multiple of {@code divisor}.
+		ARG 0 value
+		ARG 1 divisor
+	METHOD m_ulhsyzvp square (D)D
+		ARG 0 n
+	METHOD m_ulhsyzvp square (F)F
+		ARG 0 n
+	METHOD m_ulhsyzvp square (I)I
+		ARG 0 n
+	METHOD m_uluxtcnq angleBetween (FF)F
+		ARG 0 first
+		ARG 1 second
+	METHOD m_vodtdfqq nextBetween (Ljava/util/Random;FF)F
+		ARG 0 random
+		ARG 1 min
+		ARG 2 max
+	METHOD m_vogsgplz lerpAngle (FFF)F
 		ARG 0 start
 		ARG 1 end
 		ARG 2 delta
-	METHOD m_rbrehhcb abs (F)F
+	METHOD m_vtkaxkdt idealHash (I)I
 		ARG 0 value
-	METHOD m_rlefahop absMax (DD)D
-		ARG 0 a
-		ARG 2 b
-	METHOD m_rmfbgiup approximatelyEquals (FF)Z
-		ARG 0 a
-		ARG 1 b
-	METHOD m_rmokhkeu lfloor (D)J
+	METHOD m_vtkaxkdt murmurHash (J)J
 		ARG 0 value
-	METHOD m_rqqidfac fwrapDegrees (D)F
-		ARG 0 degrees
-	METHOD m_rrkspcno lerpFromProgress (DDDDD)D
-		ARG 0 lerpValue
-		ARG 2 lerpStart
-		ARG 4 lerpEnd
-		ARG 6 start
-		ARG 8 end
-	METHOD m_rrqlugin log2DeBruijn (I)I
+	METHOD m_vykvssuw perlinFadeDerivative (D)D
 		ARG 0 value
-	METHOD m_rtxyleyz multiplyColors (IFFF)I
+	METHOD m_wgdtbyif multiplyColors (IFFF)I
 		ARG 0 color
 		ARG 1 r
 		ARG 2 g
 		ARG 3 b
-	METHOD m_rvrufxgl multiplyColors (II)I
+	METHOD m_wgdtbyif multiplyColors (II)I
 		ARG 0 a
 		ARG 1 b
-	METHOD m_sbhmpdfp getCumulativeDistribution ([D)[D
-		ARG 0 values
-	METHOD m_scddprsp wrapDegrees (I)I
-		COMMENT Wraps an angle in degrees to the interval {@code [-180, 180)}.
-		ARG 0 degrees
-	METHOD m_sdretbbw floor (D)I
+	METHOD m_wiyoqmog sign (D)I
 		ARG 0 value
-	METHOD m_smbfgrkq wrapDegrees (D)D
-		COMMENT Wraps an angle in degrees to the interval {@code [-180, 180)}.
-		ARG 0 degrees
-	METHOD m_srckgaen absFloor (D)I
-		ARG 0 value
-	METHOD m_sutpzjyr parseDouble (Ljava/lang/String;DD)D
+	METHOD m_wjkaqwzw parseDouble (Ljava/lang/String;D)D
+		ARG 0 string
+		ARG 1 fallback
+	METHOD m_wjkaqwzw parseDouble (Ljava/lang/String;DD)D
 		ARG 0 string
 		ARG 1 fallback
 		ARG 3 min
-	METHOD m_tetewuxz lerp (FFF)F
-		ARG 0 delta
-		ARG 1 start
-		ARG 2 end
-	METHOD m_tkhbyrkc clampedLerp (FFF)F
-		ARG 0 start
-		ARG 1 end
-		ARG 2 delta
-	METHOD m_tppjcokm clampedLerp (DDD)D
-		ARG 0 start
-		ARG 2 end
-		ARG 4 delta
-	METHOD m_trukvsru sign (D)I
-		ARG 0 value
-	METHOD m_udgvwowz perlinFadeDerivative (D)D
-		ARG 0 value
-	METHOD m_ufygmqle fractionalPart (F)F
-		ARG 0 value
-	METHOD m_umcvyjdo fastInverseSqrt (F)F
+	METHOD m_wqazxhkq fastInverseSqrt (D)D
 		ARG 0 x
-	METHOD m_umnyzyms floorDiv (II)I
-		ARG 0 dividend
-		ARG 1 divisor
-	METHOD m_vapjhlah clamp (FFF)F
+	METHOD m_wqazxhkq fastInverseSqrt (F)F
+		ARG 0 x
+	METHOD m_wqbnrjbk fastFloor (D)I
 		ARG 0 value
-		ARG 1 min
-		ARG 2 max
-	METHOD m_vsbrrnag lerp2 (DDDDDD)D
+	METHOD m_xhhvsgis stepTowards (FFF)F
+		COMMENT Steps from {@code from} towards {@code to}, changing the value by at most {@code step}.
+		ARG 0 from
+		ARG 1 to
+		ARG 2 step
+	METHOD m_xnzzxwqh fractionalPart (D)D
+		ARG 0 value
+	METHOD m_xnzzxwqh fractionalPart (F)F
+		ARG 0 value
+	METHOD m_yldobatm lerp2 (DDDDDD)D
 		COMMENT A two-dimensional lerp between values on the 4 corners of the unit square. Arbitrary values are specified for the corners and the output is interpolated between them.
 		ARG 0 deltaX
 			COMMENT the x-coordinate on the unit square
@@ -290,43 +317,7 @@ CLASS net/minecraft/unmapped/C_zixxccpz net/minecraft/util/math/MathHelper
 			COMMENT the output if {@code deltaX} is 0 and {@code deltaY} is 1
 		ARG 10 x1y1
 			COMMENT the output if {@code deltaX} is 1 and {@code deltaY} is 1
-	METHOD m_vvbrvina parseDouble (Ljava/lang/String;D)D
-		ARG 0 string
-		ARG 1 fallback
-	METHOD m_vznejxsk nextBetween (Ljava/util/Random;FF)F
-		ARG 0 random
-		ARG 1 min
-		ARG 2 max
-	METHOD m_xburxwsl log2 (I)I
-		ARG 0 value
-	METHOD m_xixckibh nextGaussian (Ljava/util/Random;FF)F
-		ARG 0 random
-		ARG 1 mean
-		ARG 2 deviation
-	METHOD m_xtfevccc subtractAngles (FF)F
-		ARG 0 start
-		ARG 1 end
-	METHOD m_ygwczftd parseInt (Ljava/lang/String;II)I
-		ARG 0 string
-		ARG 1 fallback
-		ARG 2 min
-	METHOD m_ypygasys sin (F)F
-		ARG 0 value
-	METHOD m_zdzkpleh stepTowards (FFF)F
-		COMMENT Steps from {@code from} towards {@code to}, changing the value by at most {@code step}.
-		ARG 0 from
-		ARG 1 to
-		ARG 2 step
-	METHOD m_zgktylmx clamp (BBB)B
-		ARG 0 value
-		ARG 1 min
-		ARG 2 max
-	METHOD m_zlifdekl roundUpToMultiple (II)I
-		COMMENT Returns a value farther than or as far as {@code value} from zero that
-		COMMENT is a multiple of {@code divisor}.
-		ARG 0 value
-		ARG 1 divisor
-	METHOD m_zvmndxhc getLerpProgress (DDD)D
+	METHOD m_yxjbjbfz getLerpProgress (DDD)D
 		COMMENT Gets the fraction of the way that {@code value} is between {@code start} and {@code end}.
 		COMMENT This is the delta value needed to lerp between {@code start} and {@code end} to get {@code value}.
 		COMMENT In other words, {@code getLerpProgress(lerp(delta, start, end), start, end) == delta}.
@@ -336,3 +327,12 @@ CLASS net/minecraft/unmapped/C_zixxccpz net/minecraft/util/math/MathHelper
 			COMMENT the value interpolated from
 		ARG 4 end
 			COMMENT the value interpolated to
+	METHOD m_zbiysqfs smallestEncompassingPowerOfTwo (I)I
+		ARG 0 value
+	METHOD m_znnaxjjr stepUnwrappedAngleTowards (FFF)F
+		COMMENT Steps from {@code from} degrees towards {@code to} degrees, changing the value by at most {@code step} degrees.
+		COMMENT
+		COMMENT <p>This method does not wrap the resulting angle, so {@link #stepAngleTowards(float, float, float)} should be used in preference.
+		ARG 0 from
+		ARG 1 to
+		ARG 2 step

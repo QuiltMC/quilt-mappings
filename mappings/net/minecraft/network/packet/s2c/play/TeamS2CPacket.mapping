@@ -1,27 +1,27 @@
 CLASS net/minecraft/unmapped/C_vgvxooxy net/minecraft/network/packet/s2c/play/TeamS2CPacket
-	FIELD f_dxstwjfu UPDATE I
+	FIELD f_bzxkmtbi playerNames Ljava/util/Collection;
+	FIELD f_izljhmcj UPDATE I
 		COMMENT The {@link #packetType} that updates a team's information. Has value {@value}.
-	FIELD f_dymhtbvi playerNames Ljava/util/Collection;
-	FIELD f_nhkacuol packetType I
-		COMMENT Indicates the type of this packet. Is one of {@link #ADD}, {@link #REMOVE},
-		COMMENT {@link #UPDATE}, {@link #ADD_PLAYERS}, or {@link #REMOVE_PLAYERS}.
-	FIELD f_qokwnend FIRST_MAX_VISIBILITY_OR_COLLISION_RULE_LENGTH I
+	FIELD f_jrpadsgy teamName Ljava/lang/String;
+	FIELD f_mdmeoytu SECOND_MAX_VISIBILITY_OR_COLLISION_RULE_LENGTH I
 		COMMENT One of the name tag visibility rule or collision rule strings' max length.
 		COMMENT Has value {@value}.
-	FIELD f_sepoksbu ADD_PLAYERS I
-		COMMENT The {@link #packetType} that adds a few players to a team. Has value {@value}.
-	FIELD f_tjupniga teamName Ljava/lang/String;
-	FIELD f_vgyvvjpb REMOVE_PLAYERS I
-		COMMENT The {@link #packetType} that removes a few players from a team. Has value {@value}.
-	FIELD f_xdzauqdc REMOVE I
+	FIELD f_nllklvsb REMOVE I
 		COMMENT The {@link #packetType} that removes a team. Has value {@value}.
-	FIELD f_ygspmtvc team Ljava/util/Optional;
-	FIELD f_yqjszogl SECOND_MAX_VISIBILITY_OR_COLLISION_RULE_LENGTH I
+	FIELD f_potqbwye FIRST_MAX_VISIBILITY_OR_COLLISION_RULE_LENGTH I
 		COMMENT One of the name tag visibility rule or collision rule strings' max length.
 		COMMENT Has value {@value}.
-	FIELD f_zxmtpeev ADD I
+	FIELD f_pswsqyfr team Ljava/util/Optional;
+	FIELD f_qrtdvtqb ADD I
 		COMMENT The {@link #packetType} that creates a new team with a few players. Has value
 		COMMENT {@value}.
+	FIELD f_rxtkhdyx packetType I
+		COMMENT Indicates the type of this packet. Is one of {@link #ADD}, {@link #REMOVE},
+		COMMENT {@link #UPDATE}, {@link #ADD_PLAYERS}, or {@link #REMOVE_PLAYERS}.
+	FIELD f_spybbfrb ADD_PLAYERS I
+		COMMENT The {@link #packetType} that adds a few players to a team. Has value {@value}.
+	FIELD f_urdkgfnu REMOVE_PLAYERS I
+		COMMENT The {@link #packetType} that removes a few players from a team. Has value {@value}.
 	METHOD <init> (Ljava/lang/String;ILjava/util/Optional;Ljava/util/Collection;)V
 		ARG 1 teamName
 		ARG 2 packetType
@@ -29,43 +29,43 @@ CLASS net/minecraft/unmapped/C_vgvxooxy net/minecraft/network/packet/s2c/play/Te
 		ARG 4 playerNames
 	METHOD <init> (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
 		ARG 1 buf
-	METHOD m_dbafecpb containsPlayers (I)Z
+	METHOD m_clyqzzdw getTeamOperation ()Lnet/minecraft/unmapped/C_vgvxooxy$C_etplmjaf;
+	METHOD m_elcjulbx containsTeamInfo (I)Z
 		ARG 0 packetType
-	METHOD m_mcmdxksr getPlayerNames ()Ljava/util/Collection;
-	METHOD m_nfnwuzci getTeam ()Ljava/util/Optional;
-	METHOD m_otpnctvp updateRemovedTeam (Lnet/minecraft/unmapped/C_wxbmwkvd;)Lnet/minecraft/unmapped/C_vgvxooxy;
+	METHOD m_gvlwjsjf getTeamName ()Ljava/lang/String;
+	METHOD m_hqesrvjp updateTeam (Lnet/minecraft/unmapped/C_wxbmwkvd;Z)Lnet/minecraft/unmapped/C_vgvxooxy;
 		ARG 0 team
-	METHOD m_qyexduoz getTeamName ()Ljava/lang/String;
-	METHOD m_uwjqvfeq getPlayerListOperation ()Lnet/minecraft/unmapped/C_vgvxooxy$C_ajdeuvme;
-	METHOD m_wyvvwnft changePlayerTeam (Lnet/minecraft/unmapped/C_wxbmwkvd;Ljava/lang/String;Lnet/minecraft/unmapped/C_vgvxooxy$C_ajdeuvme;)Lnet/minecraft/unmapped/C_vgvxooxy;
+		ARG 1 updatePlayers
+	METHOD m_ihtcykrc updateRemovedTeam (Lnet/minecraft/unmapped/C_wxbmwkvd;)Lnet/minecraft/unmapped/C_vgvxooxy;
+		ARG 0 team
+	METHOD m_kwgncyap getTeam ()Ljava/util/Optional;
+	METHOD m_mndhelmh getPlayerListOperation ()Lnet/minecraft/unmapped/C_vgvxooxy$C_etplmjaf;
+	METHOD m_ocfuwwtp containsPlayers (I)Z
+		ARG 0 packetType
+	METHOD m_rytqlqks changePlayerTeam (Lnet/minecraft/unmapped/C_wxbmwkvd;Ljava/lang/String;Lnet/minecraft/unmapped/C_vgvxooxy$C_etplmjaf;)Lnet/minecraft/unmapped/C_vgvxooxy;
 		ARG 0 team
 		ARG 1 playerName
 		ARG 2 operation
-	METHOD m_xrfrfdqe getTeamOperation ()Lnet/minecraft/unmapped/C_vgvxooxy$C_ajdeuvme;
-	METHOD m_yllbvuyq updateTeam (Lnet/minecraft/unmapped/C_wxbmwkvd;Z)Lnet/minecraft/unmapped/C_vgvxooxy;
-		ARG 0 team
-		ARG 1 updatePlayers
-	METHOD m_zselvzlj containsTeamInfo (I)Z
-		ARG 0 packetType
-	CLASS C_ajdeuvme Operation
-	CLASS C_kdjdpcfj SerializableTeam
-		FIELD f_dufknayq color Lnet/minecraft/unmapped/C_hvlazent;
-		FIELD f_fitiuqmf prefix Lnet/minecraft/unmapped/C_tdwiqadr;
-		FIELD f_fqdamntv collisionRule Ljava/lang/String;
-		FIELD f_qhyizzfs displayName Lnet/minecraft/unmapped/C_tdwiqadr;
-		FIELD f_vqtekmlx nameTagVisibilityRule Ljava/lang/String;
-		FIELD f_vzppqcuh friendlyFlags I
-		FIELD f_zshmalhl suffix Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_vrmjhrmb getPlayerNames ()Ljava/util/Collection;
+	CLASS C_bkiashef SerializableTeam
+		FIELD f_fzalpkes collisionRule Ljava/lang/String;
+		FIELD f_ggfzwusm color Lnet/minecraft/unmapped/C_hvlazent;
+		FIELD f_rycsjkex displayName Lnet/minecraft/unmapped/C_tdwiqadr;
+		FIELD f_tdvncsos suffix Lnet/minecraft/unmapped/C_tdwiqadr;
+		FIELD f_tfktigiu prefix Lnet/minecraft/unmapped/C_tdwiqadr;
+		FIELD f_vmvmwwzy nameTagVisibilityRule Ljava/lang/String;
+		FIELD f_yvswqwja friendlyFlags I
 		METHOD <init> (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
 			ARG 1 buf
 		METHOD <init> (Lnet/minecraft/unmapped/C_wxbmwkvd;)V
 			ARG 1 team
-		METHOD m_czagmrdp getFriendlyFlagsBitwise ()I
-		METHOD m_huyhftcn getNameTagVisibilityRule ()Ljava/lang/String;
-		METHOD m_jfqqtoba getDisplayName ()Lnet/minecraft/unmapped/C_tdwiqadr;
-		METHOD m_lpdsxmwe write (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
+		METHOD m_auwemajm getCollisionRule ()Ljava/lang/String;
+		METHOD m_eggkzfkn getColor ()Lnet/minecraft/unmapped/C_hvlazent;
+		METHOD m_khqidarh getDisplayName ()Lnet/minecraft/unmapped/C_tdwiqadr;
+		METHOD m_oechtunn getSuffix ()Lnet/minecraft/unmapped/C_tdwiqadr;
+		METHOD m_oyimimqw getFriendlyFlagsBitwise ()I
+		METHOD m_snautvfc getNameTagVisibilityRule ()Ljava/lang/String;
+		METHOD m_vcomqsjr getPrefix ()Lnet/minecraft/unmapped/C_tdwiqadr;
+		METHOD m_vhivbqoy write (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
 			ARG 1 buf
-		METHOD m_qrutalrq getSuffix ()Lnet/minecraft/unmapped/C_tdwiqadr;
-		METHOD m_qvbqjamy getColor ()Lnet/minecraft/unmapped/C_hvlazent;
-		METHOD m_rqwnsfqc getCollisionRule ()Ljava/lang/String;
-		METHOD m_yvhcowex getPrefix ()Lnet/minecraft/unmapped/C_tdwiqadr;
+	CLASS C_etplmjaf Operation
