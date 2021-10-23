@@ -15,10 +15,10 @@ public class FileConstants {
     public FileConstants(Project project) {
         cacheFilesMinecraft = project.file(".gradle/minecraft");
         tempDir = project.file(".gradle/temp");
+        libraries = new File(cacheFilesMinecraft, "libraries");
+
         hashedMojmapJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar");
         unpickedJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar");
         namedJar = project.file(Constants.MINECRAFT_VERSION + "-named.jar");
-
-        libraries = new File(cacheFilesMinecraft, "libraries");
     }
 }
