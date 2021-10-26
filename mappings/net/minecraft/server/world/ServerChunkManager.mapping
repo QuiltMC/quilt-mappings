@@ -14,6 +14,20 @@ CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkMa
 	FIELD f_vzyvkdey lastMobSpawningTime J
 	FIELD f_wzhvttqh spawnInfo Lnet/minecraft/unmapped/C_ddogyfvr$C_ugzpumba;
 	FIELD f_ygoqtkew persistentStateManager Lnet/minecraft/unmapped/C_zvphpdsh;
+	FIELD f_yjtkabom CACHE_SIZE I
+	METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_tingawpb$C_ytnhjsfa;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_wviludhr;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_miblafgk;IIZLnet/minecraft/unmapped/C_dgwlcfnj;Lnet/minecraft/unmapped/C_ebkfdntg;Ljava/util/function/Supplier;)V
+		ARG 1 world
+		ARG 2 session
+		ARG 3 dataFixer
+		ARG 4 structureManager
+		ARG 5 workerExecutor
+		ARG 6 chunkGenerator
+		ARG 7 viewDistance
+		ARG 8 simulationDistance
+		ARG 9 dsync
+		ARG 10 worldGenerationProgressListener
+		ARG 11 chunkStatusChangeListener
+		ARG 12 persistentStateManagerFactory
 	METHOD m_bkrqdlph updatePosition (Lnet/minecraft/unmapped/C_ggsborxm;)V
 		COMMENT Updates the chunk section position of the {@code player}. This can either be a
 		COMMENT result of the player's movement or its camera entity's movement.
@@ -21,6 +35,8 @@ CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkMa
 		COMMENT <p>This updates the section position player's client is currently watching and
 		COMMENT the player's position in its entity tracker.
 		ARG 1 player
+	METHOD m_bptonrxv (Lnet/minecraft/unmapped/C_rqmmmzwl;)Lnet/minecraft/unmapped/C_rqmmmzwl;
+		ARG 0 chunk
 	METHOD m_clhikwjz getPersistentStateManager ()Lnet/minecraft/unmapped/C_zvphpdsh;
 	METHOD m_csjaxbfm getPointOfInterestStorage ()Lnet/minecraft/unmapped/C_tvigwgeu;
 	METHOD m_cwxhzdas getPendingTasks ()I
@@ -56,6 +72,8 @@ CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkMa
 	METHOD m_pvczaelt sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_lrjrtjyz;)V
 		ARG 1 entity
 		ARG 2 packet
+	METHOD m_qklhpidf (ZLnet/minecraft/unmapped/C_ojdredkg$C_iumuykft;)Lnet/minecraft/unmapped/C_rqmmmzwl;
+		ARG 1 chunk
 	METHOD m_qnrsqayc getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_utrzsrny;)Ljava/lang/String;
 		ARG 1 pos
 	METHOD m_ruxpzqko ifChunkLoaded (JLjava/util/function/Consumer;)V
@@ -69,6 +87,8 @@ CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkMa
 	METHOD m_skvddxtr executeQueuedTasks ()Z
 	METHOD m_tgeqapoo loadEntity (Lnet/minecraft/unmapped/C_srenftsa;)V
 		ARG 1 entity
+	METHOD m_tumbkzyg applySimulationDistance (I)V
+		ARG 1 simulationDistance
 	METHOD m_vbqjkanq getTotalChunksLoadedCount ()I
 	METHOD m_wdrerign addTicket (Lnet/minecraft/unmapped/C_nlvrhxuc;Lnet/minecraft/unmapped/C_utrzsrny;ILjava/lang/Object;)V
 		COMMENT Adds a chunk ticket to the ticket manager.
@@ -89,6 +109,16 @@ CLASS net/minecraft/unmapped/C_jwjvmcbe net/minecraft/server/world/ServerChunkMa
 	METHOD m_zkmipoqa isMissingForLevel (Lnet/minecraft/unmapped/C_ojdredkg;I)Z
 		ARG 1 holder
 		ARG 2 maxLevel
+	CLASS C_fpuytdrq ChunkWithHolder
+		FIELD f_njgzrnjw holder Lnet/minecraft/unmapped/C_ojdredkg;
+		FIELD f_rldknpej chunk Lnet/minecraft/unmapped/C_qklvsdrh;
+		METHOD <init> (Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_ojdredkg;)V
+			ARG 1 chunk
+			ARG 2 holder
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_njgzrnjw holder ()Lnet/minecraft/unmapped/C_ojdredkg;
+		METHOD m_rldknpej chunk ()Lnet/minecraft/unmapped/C_qklvsdrh;
 	CLASS C_lnnezosx MainThreadExecutor
 		METHOD <init> (Lnet/minecraft/unmapped/C_jwjvmcbe;Lnet/minecraft/unmapped/C_nbzftcdc;)V
 			ARG 2 world
