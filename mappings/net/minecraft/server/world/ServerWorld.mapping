@@ -2,7 +2,7 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 	FIELD f_arcdmbom chunkManager Lnet/minecraft/unmapped/C_jwjvmcbe;
 	FIELD f_ayrgteki sleepManager Lnet/minecraft/unmapped/C_bsbxtqkp;
 	FIELD f_bfzitbwu inBlockTick Z
-	FIELD f_bjpsobpo blockTickScheduler Lnet/minecraft/unmapped/C_lqjxiiqw;
+	FIELD f_bjpsobpo blockTickScheduler Lnet/minecraft/unmapped/C_qicbporc;
 	FIELD f_bzxkmtbi players Ljava/util/List;
 	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD f_clgiphdh entityManager Lnet/minecraft/unmapped/C_zxtchbdj;
@@ -11,7 +11,6 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 	FIELD f_hxogpmev syncedBlockEventQueue Lit/unimi/dsi/fastutil/objects/ObjectLinkedOpenHashSet;
 	FIELD f_ihtylris structureAccessor Lnet/minecraft/unmapped/C_zpzevjii;
 	FIELD f_lzvgwelp raidManager Lnet/minecraft/unmapped/C_pdrotlyg;
-	FIELD f_mpqzitoi fluidTickScheduler Lnet/minecraft/unmapped/C_lqjxiiqw;
 	FIELD f_rjvghifg idleTimeout I
 	FIELD f_sesihgup spawners Ljava/util/List;
 	FIELD f_uggdcsia portalForcer Lnet/minecraft/unmapped/C_mvwwtead;
@@ -44,14 +43,11 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 	METHOD m_akmqnqlo isInBlockTick ()Z
 	METHOD m_attodtee getForcedChunks ()Lit/unimi/dsi/fastutil/longs/LongSet;
 	METHOD m_bptxrlmf wakeSleepingPlayers ()V
-	METHOD m_bxlhueln tickBlock (Lnet/minecraft/unmapped/C_bbnwrofv;)V
-		ARG 1 tick
+	METHOD m_bxlhueln tickBlock (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_qodpmxmm;)V
 	METHOD m_clhikwjz getPersistentStateManager ()Lnet/minecraft/unmapped/C_zvphpdsh;
 	METHOD m_csjaxbfm getPointOfInterestStorage ()Lnet/minecraft/unmapped/C_tvigwgeu;
 	METHOD m_ctsjnpxh hasRaidAt (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
 		ARG 1 pos
-	METHOD m_dcutkaxd tickFluid (Lnet/minecraft/unmapped/C_bbnwrofv;)V
-		ARG 1 tick
 	METHOD m_duzaenmw updateSleepingPlayers ()V
 	METHOD m_dybvlonf processBlockEvent (Lnet/minecraft/unmapped/C_btjbqmnd;)Z
 		ARG 1 event
@@ -135,8 +131,6 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 	METHOD m_qujtrcfm tryLoadEntity (Lnet/minecraft/unmapped/C_srenftsa;)Z
 		ARG 1 entity
 	METHOD m_rrcrrqqa saveLevel ()V
-	METHOD m_rtnsldfc (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-		ARG 1 entity
 	METHOD m_rvfpydmv getLightningRodPos (Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/Optional;
 		ARG 1 pos
 	METHOD m_sdjdxcsq tickSpawners (ZZ)V
@@ -148,8 +142,6 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 	METHOD m_sktdgisx clearUpdatesInArea (Lnet/minecraft/unmapped/C_zzqpyqmh;)V
 		ARG 1 box
 	METHOD m_sqiumfxz getAliveEnderDragons ()Ljava/util/List;
-	METHOD m_tdjksdkr (Lnet/minecraft/unmapped/C_qsfbclse;Lnet/minecraft/unmapped/C_srenftsa;)V
-		ARG 2 entity
 	METHOD m_tgeqapoo addEntity (Lnet/minecraft/unmapped/C_srenftsa;)Z
 		ARG 1 entity
 	METHOD m_tksrntnq getEntity (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_srenftsa;
@@ -160,10 +152,6 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 		ARG 3 radius
 		ARG 4 skipExistingChunks
 	METHOD m_tytwjsbt resetWeather ()V
-	METHOD m_udfdcxgx (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_venbuqpg;Lnet/minecraft/unmapped/C_ggsborxm;)V
-		ARG 3 player
-	METHOD m_ufjccjja (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_kkdaznyh;
-		ARG 0 pos
 	METHOD m_upanovlw spawnParticles (Lnet/minecraft/unmapped/C_ggsborxm;Lnet/minecraft/unmapped/C_tchocuqn;ZDDDIDDDD)Z
 		ARG 1 viewer
 		ARG 2 particle
@@ -201,8 +189,6 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 	METHOD m_uvuvbyrw tickTime ()V
 	METHOD m_vfhrofde onPlayerConnected (Lnet/minecraft/unmapped/C_ggsborxm;)V
 		ARG 1 player
-	METHOD m_vlhpiaid (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 1 pos
 	METHOD m_vovmerra createEndSpawnPlatform (Lnet/minecraft/unmapped/C_uihwnwdb;)V
 		ARG 0 world
 	METHOD m_vrmjhrmb getPlayers (Ljava/util/function/Predicate;)Ljava/util/List;
@@ -219,10 +205,7 @@ CLASS net/minecraft/unmapped/C_uihwnwdb net/minecraft/server/world/ServerWorld
 	METHOD m_wmaosrbq onPlayerRespawned (Lnet/minecraft/unmapped/C_ggsborxm;)V
 		ARG 1 player
 	METHOD m_wmbpoqay getSpawnAngle ()F
-	METHOD m_wwfjgvvx (Lnet/minecraft/unmapped/C_ggsborxm;)V
-		ARG 0 player
-	METHOD m_xgsuhofg (Lnet/minecraft/unmapped/C_grcdtzov;)Z
-		ARG 0 poiType
+	METHOD m_xgsuhofg (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_kkdaznyh;
 	METHOD m_xxraimye addEntities (Ljava/util/stream/Stream;)V
 		ARG 1 entities
 	METHOD m_xydabiyp getPortalForcer ()Lnet/minecraft/unmapped/C_mvwwtead;
