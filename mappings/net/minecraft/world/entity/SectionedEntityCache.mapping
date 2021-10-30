@@ -2,44 +2,44 @@ CLASS net/minecraft/unmapped/C_zhlbdtcp net/minecraft/world/entity/SectionedEnti
 	COMMENT Stores entities with the chunk sections they are in.
 	COMMENT
 	COMMENT @see EntityTrackingSection
-	FIELD f_achmkwvp trackingSections Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
-	FIELD f_nhllseme trackedPositions Lit/unimi/dsi/fastutil/longs/LongSortedSet;
-	FIELD f_poujmcqj posToStatus Lit/unimi/dsi/fastutil/longs/Long2ObjectFunction;
-	FIELD f_ypftemmx entityClass Ljava/lang/Class;
+	FIELD f_ddfglvxn posToStatus Lit/unimi/dsi/fastutil/longs/Long2ObjectFunction;
+	FIELD f_jrqiyzkg trackingSections Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_pmedygcb trackedPositions Lit/unimi/dsi/fastutil/longs/LongSortedSet;
+	FIELD f_vibvrrsj entityClass Ljava/lang/Class;
 	METHOD <init> (Ljava/lang/Class;Lit/unimi/dsi/fastutil/longs/Long2ObjectFunction;)V
 		ARG 1 entityClass
 		ARG 2 chunkStatusDiscriminator
-	METHOD m_aamjcsbi forEachInBox (Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Consumer;)V
-		COMMENT Runs the given action on each collection of entities in the chunk sections within the given box.
+	METHOD m_afeapzli getSections (J)Ljava/util/stream/LongStream;
+		ARG 1 chunkPos
+	METHOD m_aqyepaxr findTrackingSection (J)Lnet/minecraft/unmapped/C_iyhynnmk;
+		ARG 1 sectionPos
+	METHOD m_bbfjncyn getTrackingSections (J)Ljava/util/stream/Stream;
+		ARG 1 chunkPos
+	METHOD m_dexywukf chunkPosFromSectionPos (J)J
+		ARG 0 sectionPos
+	METHOD m_exrpnqeu forEachIntersects (Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Consumer;)V
 		ARG 1 box
 		ARG 2 action
-	METHOD m_afdxrtds getSections (II)Lit/unimi/dsi/fastutil/longs/LongSortedSet;
-		ARG 1 chunkX
-		ARG 2 chunkZ
-	METHOD m_cepnikib addSection (J)Lnet/minecraft/unmapped/C_iyhynnmk;
-		ARG 1 sectionPos
-	METHOD m_cnvxceya forEachIntersects (Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Consumer;)V
-		ARG 1 box
-		ARG 2 action
-	METHOD m_disudmvy removeSection (J)V
-		ARG 1 sectionPos
-	METHOD m_evzrsfjf intersecting (Lnet/minecraft/unmapped/C_eogzjcbh;)Ljava/util/function/Predicate;
-		ARG 0 box
-	METHOD m_hwwhmrgo getChunkPositions ()Lit/unimi/dsi/fastutil/longs/LongSet;
-	METHOD m_ihzsiujz getTrackingSections (J)Ljava/util/stream/Stream;
-		ARG 1 chunkPos
-	METHOD m_kvketrmm (Lit/unimi/dsi/fastutil/longs/LongSet;J)V
-		ARG 1 sectionPos
-	METHOD m_qctvntng getSections (J)Ljava/util/stream/LongStream;
-		ARG 1 chunkPos
-	METHOD m_vlwqtayo findTrackingSection (J)Lnet/minecraft/unmapped/C_iyhynnmk;
-		ARG 1 sectionPos
-	METHOD m_xckxjnqs forEachIntersects (Lnet/minecraft/unmapped/C_haadlpco;Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Consumer;)V
+	METHOD m_exrpnqeu forEachIntersects (Lnet/minecraft/unmapped/C_haadlpco;Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Consumer;)V
 		ARG 1 filter
 		ARG 2 box
 		ARG 3 action
-	METHOD m_ydbtzowk chunkPosFromSectionPos (J)J
-		ARG 0 sectionPos
-	METHOD m_yicmrrmp sectionCount ()I
-	METHOD m_yqmoeggk getTrackingSection (J)Lnet/minecraft/unmapped/C_iyhynnmk;
+	METHOD m_gbrynflc removeSection (J)V
 		ARG 1 sectionPos
+	METHOD m_hhhhkmvi forEachInBox (Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Consumer;)V
+		COMMENT Runs the given action on each collection of entities in the chunk sections within the given box.
+		ARG 1 box
+		ARG 2 action
+	METHOD m_irpybwuy getSections (II)Lit/unimi/dsi/fastutil/longs/LongSortedSet;
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD m_nrjvhxli sectionCount ()I
+	METHOD m_pcpkkoje addSection (J)Lnet/minecraft/unmapped/C_iyhynnmk;
+		ARG 1 sectionPos
+	METHOD m_plwzhbgc intersecting (Lnet/minecraft/unmapped/C_eogzjcbh;)Ljava/util/function/Predicate;
+		ARG 0 box
+	METHOD m_swedbpbd getTrackingSection (J)Lnet/minecraft/unmapped/C_iyhynnmk;
+		ARG 1 sectionPos
+	METHOD m_woshmyqh (Lit/unimi/dsi/fastutil/longs/LongSet;J)V
+		ARG 1 sectionPos
+	METHOD m_zauoqebx getChunkPositions ()Lit/unimi/dsi/fastutil/longs/LongSet;

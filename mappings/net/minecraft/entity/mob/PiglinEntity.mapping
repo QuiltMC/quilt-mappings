@@ -1,34 +1,41 @@
 CLASS net/minecraft/unmapped/C_bndnqhkl net/minecraft/entity/mob/PiglinEntity
-	FIELD f_arjcrlrg cannotHunt Z
-	FIELD f_blitkumq MAX_HEALTH I
-	FIELD f_buirwtni BABY_SPEED_BOOST_ID Ljava/util/UUID;
-	FIELD f_gsyuvhcj ARMOR_ITEM_CHANCE F
-	FIELD f_gvatnltx BABY_SPEED_BOOST Lnet/minecraft/unmapped/C_msqsqbdh;
-	FIELD f_gyehpwwd BABY_EYE_HEIGHT_ADJUSTMENT F
-	FIELD f_hatklxow SPAWN_WITH_CROSSBOW_PROBABILITY D
-	FIELD f_iceyliqx inventory Lnet/minecraft/unmapped/C_xzwiolsr;
-	FIELD f_jkvvxmvd SINGLE_HOGLIN_MAX_PASSENGERS I
-	FIELD f_lgyoxqls ATTACK_DAMAGE I
-	FIELD f_qjziyzri BABY Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_sbrruzql SENSOR_TYPES Lcom/google/common/collect/ImmutableList;
-	FIELD f_tsicljct CROSSBOW_POWER F
-	FIELD f_ukwpueoy MEMORY_MODULE_TYPES Lcom/google/common/collect/ImmutableList;
-	FIELD f_vjnqnmna BABY_SPAWN_PROBABILITY F
-	FIELD f_xqnmgxvi FIGHTING_MOVEMENT_SPEED F
-	FIELD f_ylossnyv CHARGING Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_yvfsqcid DANCING Lnet/minecraft/unmapped/C_yxacmnir;
-	METHOD m_abrkrmtj addItem (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_bpqjpcer inventory Lnet/minecraft/unmapped/C_xzwiolsr;
+	FIELD f_esxptupu BABY Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_hsqfryxm DANCING Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_mrhovpjq CHARGING Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_rnotfalo cannotHunt Z
+	FIELD f_smgsqdxt BABY_SPEED_BOOST Lnet/minecraft/unmapped/C_msqsqbdh;
+	FIELD f_tejltula SENSOR_TYPES Lcom/google/common/collect/ImmutableList;
+	FIELD f_uqfluxog BABY_SPEED_BOOST_ID Ljava/util/UUID;
+	FIELD f_zttbnvcq MEMORY_MODULE_TYPES Lcom/google/common/collect/ImmutableList;
+	METHOD m_aykzoiqz canInsertIntoInventory (Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 1 stack
-	METHOD m_bxwpxfww makeInitialWeapon ()Lnet/minecraft/unmapped/C_kywxadds;
-	METHOD m_ejbcdmod equipToOffHand (Lnet/minecraft/unmapped/C_kywxadds;)V
+	METHOD m_cweezlzo playSound (Lnet/minecraft/unmapped/C_yazovava;)V
+		ARG 1 sound
+	METHOD m_dvtzjkzx createPiglinAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_pckcmlvu;
+	METHOD m_erzngzam canEquipStack (Lnet/minecraft/unmapped/C_kywxadds;)Z
+		COMMENT Returns whether this piglin can equip into or replace current equipment slot.
 		ARG 1 stack
-	METHOD m_emijtwwo isCharging ()Z
-	METHOD m_grwjmsic canInsertIntoInventory (Lnet/minecraft/unmapped/C_kywxadds;)Z
+	METHOD m_jgzhgwwp canSpawn (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)Z
+		ARG 0 type
+		ARG 1 world
+		ARG 2 spawnReason
+		ARG 3 pos
+		ARG 4 random
+	METHOD m_kfvwbndn isDancing ()Z
+	METHOD m_kihhwcfs isCharging ()Z
+	METHOD m_knciymyc equipToOffHand (Lnet/minecraft/unmapped/C_kywxadds;)V
 		ARG 1 stack
-	METHOD m_gzfqnnuf equipAtChance (Lnet/minecraft/unmapped/C_bheocyuy;Lnet/minecraft/unmapped/C_kywxadds;)V
+	METHOD m_lzxenszv setCannotHunt (Z)V
+		ARG 1 cannotHunt
+	METHOD m_mvpllsvl equipAtChance (Lnet/minecraft/unmapped/C_bheocyuy;Lnet/minecraft/unmapped/C_kywxadds;)V
 		ARG 1 slot
 		ARG 2 stack
-	METHOD m_jxclcfsc getTopMostPassenger (Lnet/minecraft/unmapped/C_srenftsa;I)Lnet/minecraft/unmapped/C_srenftsa;
+	METHOD m_pjpxuizs setDancing (Z)V
+		ARG 1 dancing
+	METHOD m_qsvozwhx equipToMainHand (Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 stack
+	METHOD m_rblqixhx getTopMostPassenger (Lnet/minecraft/unmapped/C_srenftsa;I)Lnet/minecraft/unmapped/C_srenftsa;
 		COMMENT Returns the passenger entity at {@code maxLevel} in a stacked riding (riding on
 		COMMENT an entity that is riding on another entity, etc).
 		COMMENT
@@ -36,22 +43,6 @@ CLASS net/minecraft/unmapped/C_bndnqhkl net/minecraft/entity/mob/PiglinEntity
 		COMMENT top most passenger entity.
 		ARG 1 entity
 		ARG 2 maxLevel
-	METHOD m_kautqeei setDancing (Z)V
-		ARG 1 dancing
-	METHOD m_klzpsdci canSpawn (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)Z
-		ARG 0 type
-		ARG 1 world
-		ARG 2 spawnReason
-		ARG 3 pos
-		ARG 4 random
-	METHOD m_lhxletsz canEquipStack (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		COMMENT Returns whether this piglin can equip into or replace current equipment slot.
+	METHOD m_tdangcop makeInitialWeapon ()Lnet/minecraft/unmapped/C_kywxadds;
+	METHOD m_vskvtlua addItem (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_kywxadds;
 		ARG 1 stack
-	METHOD m_mffkdthn isDancing ()Z
-	METHOD m_xplfmcqv equipToMainHand (Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 stack
-	METHOD m_yviijiqf setCannotHunt (Z)V
-		ARG 1 cannotHunt
-	METHOD m_zucewjpi playSound (Lnet/minecraft/unmapped/C_yazovava;)V
-		ARG 1 sound
-	METHOD m_zzfboafu createPiglinAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_sujrwhet;

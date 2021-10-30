@@ -1,15 +1,6 @@
 CLASS net/minecraft/unmapped/C_fsaprnmt net/minecraft/resource/ResourceManager
 	COMMENT Provides resource loading capabilities to Minecraft.
-	METHOD m_kqxezqdi getAllNamespaces ()Ljava/util/Set;
-		COMMENT Gets a set of all namespaces offered by the resource packs loaded by this manager.
-	METHOD m_vchecrmf containsResource (Lnet/minecraft/unmapped/C_acfwypcn;)Z
-		COMMENT Checks whether any of the currently-loaded resource packs contain an entry for the given id.
-		COMMENT
-		COMMENT <p>Starts by querying the resource pack with the highest priority to lowest until it finds one that
-		COMMENT responds to the requested identifier.
-		ARG 1 id
-			COMMENT the resource identifier to search for
-	METHOD m_vhtzwdlq getAllResources (Lnet/minecraft/unmapped/C_acfwypcn;)Ljava/util/List;
+	METHOD m_fgitwgzn getAllResources (Lnet/minecraft/unmapped/C_acfwypcn;)Ljava/util/List;
 		COMMENT Gets all of the available resources to the corresponding resource identifier.
 		COMMENT
 		COMMENT <p>Resources are returned in load order, or ascending order of priority, so the last element in the returned
@@ -21,7 +12,18 @@ CLASS net/minecraft/unmapped/C_fsaprnmt net/minecraft/resource/ResourceManager
 		COMMENT @throws IOException if resources were found, but any one of them could not be opened to be read.
 		ARG 1 id
 			COMMENT the resource identifier to search for
-	METHOD m_vizjgjkx findResources (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Collection;
+	METHOD m_isoctuxm containsResource (Lnet/minecraft/unmapped/C_acfwypcn;)Z
+		COMMENT Checks whether any of the currently-loaded resource packs contain an entry for the given id.
+		COMMENT
+		COMMENT <p>Starts by querying the resource pack with the highest priority to lowest until it finds one that
+		COMMENT responds to the requested identifier.
+		ARG 1 id
+			COMMENT the resource identifier to search for
+	METHOD m_kuunikrz getAllNamespaces ()Ljava/util/Set;
+		COMMENT Gets a set of all namespaces offered by the resource packs loaded by this manager.
+	METHOD m_pfhxfwxa streamResourcePacks ()Ljava/util/stream/Stream;
+		COMMENT Gets a stream of loaded resource packs in increasing order of priority.
+	METHOD m_skqycjly findResources (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Collection;
 		COMMENT Returns a sorted list of identifiers matching a path predicate.
 		COMMENT
 		COMMENT <p>Scanning begins in {@code startingPath} and each candidate file present under that directory
@@ -35,6 +37,4 @@ CLASS net/minecraft/unmapped/C_fsaprnmt net/minecraft/resource/ResourceManager
 			COMMENT the starting path to begin scanning from
 		ARG 2 pathPredicate
 			COMMENT a predicate to determine whether a path should be included or not
-	METHOD m_wtfeyjow streamResourcePacks ()Ljava/util/stream/Stream;
-		COMMENT Gets a stream of loaded resource packs in increasing order of priority.
-	CLASS C_rrotfscw Empty
+	CLASS C_viymrsaa Empty

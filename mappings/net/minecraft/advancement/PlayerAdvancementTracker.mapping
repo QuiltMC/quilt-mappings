@@ -1,59 +1,59 @@
 CLASS net/minecraft/unmapped/C_xvgtqeyh net/minecraft/advancement/PlayerAdvancementTracker
-	FIELD f_bihxvxjt progressUpdates Ljava/util/Set;
-	FIELD f_gdknbcls visibleAdvancements Ljava/util/Set;
-	FIELD f_kmypjkis dirty Z
-	FIELD f_ogswpfzv visibilityUpdates Ljava/util/Set;
-	FIELD f_povqxxjg LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_qofvmccp advancementToProgress Ljava/util/Map;
-	FIELD f_qwphsata advancementFile Ljava/io/File;
-	FIELD f_ujneiqeh playerManager Lnet/minecraft/unmapped/C_wxtgmgid;
-	FIELD f_uwsdofox MAX_VISIBLE_CHILDREN I
-	FIELD f_uznzkfmt currentDisplayTab Lnet/minecraft/unmapped/C_bdhuywdk;
-	FIELD f_vmwdoklo JSON_TYPE Lcom/google/gson/reflect/TypeToken;
-	FIELD f_ybzbnzri owner Lnet/minecraft/unmapped/C_ggsborxm;
-	FIELD f_ycyrtwbi dataFixer Lcom/mojang/datafixers/DataFixer;
-	FIELD f_zdmlmxoc GSON Lcom/google/gson/Gson;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_cxqubblp dataFixer Lcom/mojang/datafixers/DataFixer;
+	FIELD f_eadseklz advancementFile Ljava/io/File;
+	FIELD f_gawriofa progressUpdates Ljava/util/Set;
+	FIELD f_gnoqzbwt MAX_VISIBLE_CHILDREN I
+	FIELD f_gusniucb owner Lnet/minecraft/unmapped/C_ggsborxm;
+	FIELD f_heyovkna playerManager Lnet/minecraft/unmapped/C_wxtgmgid;
+	FIELD f_ielufaxw advancementToProgress Ljava/util/Map;
+	FIELD f_qquqqwsu GSON Lcom/google/gson/Gson;
+	FIELD f_rbdxpecy visibilityUpdates Ljava/util/Set;
+	FIELD f_tetddjhr visibleAdvancements Ljava/util/Set;
+	FIELD f_wihesxgs dirty Z
+	FIELD f_ymsvynta currentDisplayTab Lnet/minecraft/unmapped/C_bdhuywdk;
+	FIELD f_ztfpyctg JSON_TYPE Lcom/google/gson/reflect/TypeToken;
 	METHOD <init> (Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_wxtgmgid;Lnet/minecraft/unmapped/C_tpuyotkf;Ljava/io/File;Lnet/minecraft/unmapped/C_ggsborxm;)V
 		ARG 1 dataFixer
 		ARG 2 playerManager
 		ARG 3 advancementLoader
 		ARG 4 advancementFile
 		ARG 5 owner
-	METHOD m_bfulqajy beginTrackingAllAdvancements (Lnet/minecraft/unmapped/C_tpuyotkf;)V
-		ARG 1 advancementLoader
-	METHOD m_bvwayscl setOwner (Lnet/minecraft/unmapped/C_ggsborxm;)V
-		ARG 1 owner
-	METHOD m_fexgswiq beginTracking (Lnet/minecraft/unmapped/C_bdhuywdk;)V
+	METHOD m_eeeecgfq canSee (Lnet/minecraft/unmapped/C_bdhuywdk;)Z
 		ARG 1 advancement
-	METHOD m_hpzvncub endTrackingCompleted (Lnet/minecraft/unmapped/C_bdhuywdk;)V
-		ARG 1 advancement
-	METHOD m_ipcjhfwy grantCriterion (Lnet/minecraft/unmapped/C_bdhuywdk;Ljava/lang/String;)Z
+	METHOD m_esoelbro grantCriterion (Lnet/minecraft/unmapped/C_bdhuywdk;Ljava/lang/String;)Z
 		ARG 1 advancement
 		ARG 2 criterionName
-	METHOD m_jlebkgsr load (Lnet/minecraft/unmapped/C_tpuyotkf;)V
+	METHOD m_fdbjanua save ()V
+	METHOD m_fngyzmih updateCompleted ()V
+	METHOD m_lewnjkcy getProgress (Lnet/minecraft/unmapped/C_bdhuywdk;)Lnet/minecraft/unmapped/C_pxnkbzpr;
+		ARG 1 advancement
+	METHOD m_nzqmprgp endTrackingCompleted (Lnet/minecraft/unmapped/C_bdhuywdk;)V
+		ARG 1 advancement
+	METHOD m_oivxlije updateDisplay (Lnet/minecraft/unmapped/C_bdhuywdk;)V
+		ARG 1 advancement
+	METHOD m_oljumbyy rewardEmptyAdvancements (Lnet/minecraft/unmapped/C_tpuyotkf;)V
 		ARG 1 advancementLoader
-	METHOD m_ktulmeug rewardEmptyAdvancements (Lnet/minecraft/unmapped/C_tpuyotkf;)V
-		ARG 1 advancementLoader
-	METHOD m_ogtuiiwa revokeCriterion (Lnet/minecraft/unmapped/C_bdhuywdk;Ljava/lang/String;)Z
+	METHOD m_pkncvbkd revokeCriterion (Lnet/minecraft/unmapped/C_bdhuywdk;Ljava/lang/String;)Z
 		ARG 1 advancement
 		ARG 2 criterionName
-	METHOD m_qiakhqlb clearCriteria ()V
-	METHOD m_qobwhzfp initProgress (Lnet/minecraft/unmapped/C_bdhuywdk;Lnet/minecraft/unmapped/C_pxnkbzpr;)V
+	METHOD m_pmxxsluy setDisplayTab (Lnet/minecraft/unmapped/C_bdhuywdk;)V
+		ARG 1 advancement
+	METHOD m_qqyovxdk load (Lnet/minecraft/unmapped/C_tpuyotkf;)V
+		ARG 1 advancementLoader
+	METHOD m_qrtkmkzs hasChildrenDone (Lnet/minecraft/unmapped/C_bdhuywdk;)Z
+		ARG 1 advancement
+	METHOD m_rqabened clearCriteria ()V
+	METHOD m_tdtspvdv sendUpdate (Lnet/minecraft/unmapped/C_ggsborxm;)V
+		ARG 1 player
+	METHOD m_uvhygjoe beginTracking (Lnet/minecraft/unmapped/C_bdhuywdk;)V
+		ARG 1 advancement
+	METHOD m_uvhygjoe beginTrackingAllAdvancements (Lnet/minecraft/unmapped/C_tpuyotkf;)V
+		ARG 1 advancementLoader
+	METHOD m_xfmhnccr initProgress (Lnet/minecraft/unmapped/C_bdhuywdk;Lnet/minecraft/unmapped/C_pxnkbzpr;)V
 		ARG 1 advancement
 		ARG 2 progress
-	METHOD m_qrmwejtm canSee (Lnet/minecraft/unmapped/C_bdhuywdk;)Z
-		ARG 1 advancement
-	METHOD m_rizcgzhz hasChildrenDone (Lnet/minecraft/unmapped/C_bdhuywdk;)Z
-		ARG 1 advancement
-	METHOD m_uhzasdql updateDisplay (Lnet/minecraft/unmapped/C_bdhuywdk;)V
-		ARG 1 advancement
-	METHOD m_umsumueb setDisplayTab (Lnet/minecraft/unmapped/C_bdhuywdk;)V
-		ARG 1 advancement
-	METHOD m_vhmrsvce sendUpdate (Lnet/minecraft/unmapped/C_ggsborxm;)V
-		ARG 1 player
-	METHOD m_wilchagj reload (Lnet/minecraft/unmapped/C_tpuyotkf;)V
+	METHOD m_xxnyyuxw reload (Lnet/minecraft/unmapped/C_tpuyotkf;)V
 		ARG 1 advancementLoader
-	METHOD m_wlcuhnrz save ()V
-	METHOD m_wvemapgk getProgress (Lnet/minecraft/unmapped/C_bdhuywdk;)Lnet/minecraft/unmapped/C_pxnkbzpr;
-		ARG 1 advancement
-	METHOD m_xgdijfrx updateCompleted ()V
+	METHOD m_xzhdllgo setOwner (Lnet/minecraft/unmapped/C_ggsborxm;)V
+		ARG 1 owner

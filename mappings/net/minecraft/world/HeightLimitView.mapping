@@ -1,57 +1,6 @@
 CLASS net/minecraft/unmapped/C_byoninpq net/minecraft/world/HeightLimitView
 	COMMENT A view with a height limit specification.
-	METHOD m_ezugltji getSectionIndex (I)I
-		COMMENT Returns a zero-based section index to which the {@code y} level belongs.
-		COMMENT
-		COMMENT @return a zero-based index
-		ARG 1 y
-	METHOD m_ftpkfsol getBottomSectionCoord ()I
-		COMMENT Returns the bottom section coordinate, inclusive, of this view.
-		COMMENT
-		COMMENT @implNote This implementation passes the {@linkplain #getBottomY() bottom Y}
-		COMMENT through {@link net.minecraft.util.math.ChunkSectionPos#getSectionCoord(int)}.
-		COMMENT
-		COMMENT @return the bottom section coordinate
-		COMMENT @see #getTopSectionCoord()
-		COMMENT @see #getBottomY()
-	METHOD m_guxhbxzu getTopY ()I
-		COMMENT Returns the top Y level, or height, exclusive, of this view.
-		COMMENT
-		COMMENT @implNote This implementation sums up the bottom Y and the height.
-		COMMENT @see #getBottomY()
-		COMMENT @see #getHeight()
-	METHOD m_hptgafkr isOutOfHeightLimit (I)Z
-		COMMENT Checks if {@code y} is out of the height limit of this view.
-		COMMENT
-		COMMENT <p>{@code y} is out of bounds if it's lower than the {@linkplain #getBottomY
-		COMMENT bottom} or higher than or equal to the {@linkplain #getTopY() top}.
-		COMMENT
-		COMMENT @return {@code true} if {@code y} is out of bounds, {@code false} otherwise.
-		ARG 1 y
-			COMMENT the Y level to check
-	METHOD m_ilzcxwnt countVerticalSections ()I
-		COMMENT Returns the number of sections, vertically, within this view.
-		COMMENT
-		COMMENT @return the number of sections
-		COMMENT @see #getTopSectionCoord()
-		COMMENT @see #getBottomSectionCoord()
-	METHOD m_iopttdhc getTopSectionCoord ()I
-		COMMENT Returns the top section coordinate, exclusive, of this view.
-		COMMENT
-		COMMENT @implNote This implementation passes the {@linkplain #getTopY() top Y}
-		COMMENT through {@link net.minecraft.util.math.ChunkSectionPos#getSectionCoord(int)}.
-		COMMENT
-		COMMENT @return the top section coordinate
-		COMMENT @see #getBottomSectionCoord()
-		COMMENT @see #getTopY()
-	METHOD m_jjqhrwjd sectionIndexToCoord (I)I
-		COMMENT Converts a zero-based section index to a section coordinate.
-		COMMENT
-		COMMENT @return a section coordinate
-		COMMENT @see #sectionCoordToIndex(int) the inverse operation <code>sectionCoordToIndex</code>
-		ARG 1 index
-			COMMENT the zero-based section index
-	METHOD m_lymyarmr getHeight ()I
+	METHOD m_creidnep getHeight ()I
 		COMMENT Returns the difference in the {@linkplain #getBottomY() minimum} and
 		COMMENT {@linkplain #getTopY() maximum} height.
 		COMMENT
@@ -61,22 +10,73 @@ CLASS net/minecraft/unmapped/C_byoninpq net/minecraft/world/HeightLimitView
 		COMMENT @return the difference in the minimum and maximum height
 		COMMENT @see #getBottomY()
 		COMMENT @see #getTopY()
-	METHOD m_ruzoymub isOutOfHeightLimit (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		COMMENT Checks if {@code pos} is out of the height limit of this view.
+	METHOD m_eihfpwwx getTopY ()I
+		COMMENT Returns the top Y level, or height, exclusive, of this view.
 		COMMENT
-		COMMENT @return {@code true} if {@code pos} is out of bounds, {@code false} otherwise.
-		COMMENT @see #isOutOfHeightLimit(int)
-		ARG 1 pos
-			COMMENT the position to check
-	METHOD m_sbbdpufg getBottomY ()I
-		COMMENT Returns the bottom Y level, or height, inclusive, of this view.
-		COMMENT
-		COMMENT @see #getTopY()
+		COMMENT @implNote This implementation sums up the bottom Y and the height.
+		COMMENT @see #getBottomY()
 		COMMENT @see #getHeight()
-	METHOD m_zllkeoox sectionCoordToIndex (I)I
+	METHOD m_jjfljdew countVerticalSections ()I
+		COMMENT Returns the number of sections, vertically, within this view.
+		COMMENT
+		COMMENT @return the number of sections
+		COMMENT @see #getTopSectionCoord()
+		COMMENT @see #getBottomSectionCoord()
+	METHOD m_pytefmxk sectionCoordToIndex (I)I
 		COMMENT Converts a section coordinate to a zero-based section index.
 		COMMENT
 		COMMENT @return a zero-based index
 		COMMENT @see #sectionIndexToCoord(int) the inverse operation <code>sectionIndexToCoord</code>
 		ARG 1 coord
 			COMMENT the section coordinate
+	METHOD m_svxpchut getSectionIndex (I)I
+		COMMENT Returns a zero-based section index to which the {@code y} level belongs.
+		COMMENT
+		COMMENT @return a zero-based index
+		ARG 1 y
+	METHOD m_vhmcubkq isOutOfHeightLimit (I)Z
+		COMMENT Checks if {@code y} is out of the height limit of this view.
+		COMMENT
+		COMMENT <p>{@code y} is out of bounds if it's lower than the {@linkplain #getBottomY
+		COMMENT bottom} or higher than or equal to the {@linkplain #getTopY() top}.
+		COMMENT
+		COMMENT @return {@code true} if {@code y} is out of bounds, {@code false} otherwise.
+		ARG 1 y
+			COMMENT the Y level to check
+	METHOD m_vhmcubkq isOutOfHeightLimit (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		COMMENT Checks if {@code pos} is out of the height limit of this view.
+		COMMENT
+		COMMENT @return {@code true} if {@code pos} is out of bounds, {@code false} otherwise.
+		COMMENT @see #isOutOfHeightLimit(int)
+		ARG 1 pos
+			COMMENT the position to check
+	METHOD m_wnnsysuh sectionIndexToCoord (I)I
+		COMMENT Converts a zero-based section index to a section coordinate.
+		COMMENT
+		COMMENT @return a section coordinate
+		COMMENT @see #sectionCoordToIndex(int) the inverse operation <code>sectionCoordToIndex</code>
+		ARG 1 index
+			COMMENT the zero-based section index
+	METHOD m_xgnezmcp getBottomSectionCoord ()I
+		COMMENT Returns the bottom section coordinate, inclusive, of this view.
+		COMMENT
+		COMMENT @implNote This implementation passes the {@linkplain #getBottomY() bottom Y}
+		COMMENT through {@link net.minecraft.util.math.ChunkSectionPos#getSectionCoord(int)}.
+		COMMENT
+		COMMENT @return the bottom section coordinate
+		COMMENT @see #getTopSectionCoord()
+		COMMENT @see #getBottomY()
+	METHOD m_yklxusml getBottomY ()I
+		COMMENT Returns the bottom Y level, or height, inclusive, of this view.
+		COMMENT
+		COMMENT @see #getTopY()
+		COMMENT @see #getHeight()
+	METHOD m_zejxtaxg getTopSectionCoord ()I
+		COMMENT Returns the top section coordinate, exclusive, of this view.
+		COMMENT
+		COMMENT @implNote This implementation passes the {@linkplain #getTopY() top Y}
+		COMMENT through {@link net.minecraft.util.math.ChunkSectionPos#getSectionCoord(int)}.
+		COMMENT
+		COMMENT @return the top section coordinate
+		COMMENT @see #getBottomSectionCoord()
+		COMMENT @see #getTopY()

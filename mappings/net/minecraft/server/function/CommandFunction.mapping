@@ -1,10 +1,10 @@
 CLASS net/minecraft/unmapped/C_wneopios net/minecraft/server/function/CommandFunction
-	FIELD f_skmttezq id Lnet/minecraft/unmapped/C_acfwypcn;
-	FIELD f_xtqshzve elements [Lnet/minecraft/unmapped/C_wneopios$C_jhtidtgw;
-	METHOD <init> (Lnet/minecraft/unmapped/C_acfwypcn;[Lnet/minecraft/unmapped/C_wneopios$C_jhtidtgw;)V
+	FIELD f_bzipntej id Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_gvgbefgw elements [Lnet/minecraft/unmapped/C_wneopios$C_xpfqzgyu;
+	METHOD <init> (Lnet/minecraft/unmapped/C_acfwypcn;[Lnet/minecraft/unmapped/C_wneopios$C_xpfqzgyu;)V
 		ARG 1 id
 		ARG 2 elements
-	METHOD m_blxbsmlo create (Lnet/minecraft/unmapped/C_acfwypcn;Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/unmapped/C_krlbnnep;Ljava/util/List;)Lnet/minecraft/unmapped/C_wneopios;
+	METHOD m_fkgeclen create (Lnet/minecraft/unmapped/C_acfwypcn;Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/unmapped/C_krlbnnep;Ljava/util/List;)Lnet/minecraft/unmapped/C_wneopios;
 		COMMENT Parses a function in the context of {@code source}.
 		COMMENT
 		COMMENT <p>Any syntax errors, such as improper comment lines or unknown commands, will be thrown at this point.
@@ -13,49 +13,49 @@ CLASS net/minecraft/unmapped/C_wneopios net/minecraft/server/function/CommandFun
 		ARG 2 source
 		ARG 3 lines
 			COMMENT the raw lines (including comments) read from a function file
-	METHOD m_eqsugxli getElements ()[Lnet/minecraft/unmapped/C_wneopios$C_jhtidtgw;
-	METHOD m_izpntooj getId ()Lnet/minecraft/unmapped/C_acfwypcn;
-	CLASS C_ggoivdji FunctionElement
+	METHOD m_jddzgyjm getId ()Lnet/minecraft/unmapped/C_acfwypcn;
+	METHOD m_zlyqbwax getElements ()[Lnet/minecraft/unmapped/C_wneopios$C_xpfqzgyu;
+	CLASS C_mocboccq FunctionElement
 		COMMENT A synthetic element to be stored in a {@link CommandFunctionManager.Entry}.
 		COMMENT This is not present as parts of command functions, but created by {@link
 		COMMENT net.minecraft.server.function.CommandFunctionManager.Execution#recursiveRun}.
-		FIELD f_ibepuivc function Lnet/minecraft/unmapped/C_wneopios$C_ijtsgakr;
+		FIELD f_skcxfdyx function Lnet/minecraft/unmapped/C_wneopios$C_vxfyrzxu;
 		METHOD <init> (Lnet/minecraft/unmapped/C_wneopios;)V
 			ARG 1 function
-		METHOD m_jxvdxsvc (Lnet/minecraft/unmapped/C_wnkocwbn$C_slnwodhi;IILjava/util/Deque;Lnet/minecraft/unmapped/C_krlbnnep;Lnet/minecraft/unmapped/C_wneopios;)V
+		METHOD m_rcljwnwu (Lnet/minecraft/unmapped/C_wnkocwbn$C_ybrmmeqa;IILjava/util/Deque;Lnet/minecraft/unmapped/C_krlbnnep;Lnet/minecraft/unmapped/C_wneopios;)V
 			ARG 5 f
-	CLASS C_ijtsgakr LazyContainer
+	CLASS C_ouapbwcf CommandElement
+		COMMENT A standard element of a command function. Functions created by {@link
+		COMMENT CommandFunction#create} will only contain these elements.
+		FIELD f_iaesibim parsed Lcom/mojang/brigadier/ParseResults;
+		METHOD <init> (Lcom/mojang/brigadier/ParseResults;)V
+			ARG 1 parsed
+		METHOD m_ygzwjqsf execute (Lnet/minecraft/unmapped/C_wnkocwbn;Lnet/minecraft/unmapped/C_krlbnnep;)I
+			ARG 1 manager
+			ARG 2 source
+	CLASS C_vxfyrzxu LazyContainer
 		COMMENT A lazy reference to another command function that may or may not exist.
 		COMMENT
 		COMMENT <p>Notice that such an instance does not refresh upon reloads and may become
 		COMMENT invalid.
-		FIELD f_qevxbyms id Lnet/minecraft/unmapped/C_acfwypcn;
-		FIELD f_smttgafz EMPTY Lnet/minecraft/unmapped/C_wneopios$C_ijtsgakr;
-		FIELD f_veifccaa initialized Z
-		FIELD f_zebanptk function Ljava/util/Optional;
+		FIELD f_bzipntej id Lnet/minecraft/unmapped/C_acfwypcn;
+		FIELD f_skcxfdyx function Ljava/util/Optional;
+		FIELD f_udpdmwwg initialized Z
+		FIELD f_zjhklgvz EMPTY Lnet/minecraft/unmapped/C_wneopios$C_vxfyrzxu;
 		METHOD <init> (Lnet/minecraft/unmapped/C_acfwypcn;)V
 			ARG 1 id
 		METHOD <init> (Lnet/minecraft/unmapped/C_wneopios;)V
 			ARG 1 function
-		METHOD m_rgymrouk (Lnet/minecraft/unmapped/C_wneopios;)Lnet/minecraft/unmapped/C_acfwypcn;
-			ARG 0 f
-		METHOD m_sztfvftw getId ()Lnet/minecraft/unmapped/C_acfwypcn;
-		METHOD m_ufgdlcqh get (Lnet/minecraft/unmapped/C_wnkocwbn;)Ljava/util/Optional;
+		METHOD m_iiqknvxs get (Lnet/minecraft/unmapped/C_wnkocwbn;)Ljava/util/Optional;
 			ARG 1 manager
-	CLASS C_jhtidtgw Element
-		METHOD m_zibrxqhq execute (Lnet/minecraft/unmapped/C_wnkocwbn;Lnet/minecraft/unmapped/C_krlbnnep;Ljava/util/Deque;IILnet/minecraft/unmapped/C_wnkocwbn$C_slnwodhi;)V
+		METHOD m_jddzgyjm getId ()Lnet/minecraft/unmapped/C_acfwypcn;
+		METHOD m_olycxhqw (Lnet/minecraft/unmapped/C_wneopios;)Lnet/minecraft/unmapped/C_acfwypcn;
+			ARG 0 f
+	CLASS C_xpfqzgyu Element
+		METHOD execute execute (Lnet/minecraft/unmapped/C_wnkocwbn;Lnet/minecraft/unmapped/C_krlbnnep;Ljava/util/Deque;IILnet/minecraft/unmapped/C_wnkocwbn$C_ybrmmeqa;)V
 			ARG 1 manager
 			ARG 2 source
 			ARG 3 entries
 			ARG 4 maxChainLength
 			ARG 5 depth
 			ARG 6 tracer
-	CLASS C_pbionoqk CommandElement
-		COMMENT A standard element of a command function. Functions created by {@link
-		COMMENT CommandFunction#create} will only contain these elements.
-		FIELD f_bpoazckb parsed Lcom/mojang/brigadier/ParseResults;
-		METHOD <init> (Lcom/mojang/brigadier/ParseResults;)V
-			ARG 1 parsed
-		METHOD m_llsmwrnb execute (Lnet/minecraft/unmapped/C_wnkocwbn;Lnet/minecraft/unmapped/C_krlbnnep;)I
-			ARG 1 manager
-			ARG 2 source

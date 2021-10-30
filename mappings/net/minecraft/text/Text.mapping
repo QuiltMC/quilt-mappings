@@ -9,32 +9,31 @@ CLASS net/minecraft/unmapped/C_tdwiqadr net/minecraft/text/Text
 	COMMENT refer to {@link MutableText}.
 	COMMENT
 	COMMENT @see MutableText
-	METHOD m_bvsigmbz asTruncatedString (I)Ljava/lang/String;
+	METHOD m_ckzwjbhg (ILjava/lang/StringBuilder;Ljava/lang/String;)Ljava/util/Optional;
+		ARG 2 string
+	METHOD m_eeevpmbb getSiblings ()Ljava/util/List;
+		COMMENT Returns the siblings of this text.
+	METHOD m_efgtsaqr of (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		COMMENT Creates a literal text with the given string as content.
+		ARG 0 string
+	METHOD m_gjysrwcq asTruncatedString (I)Ljava/lang/String;
 		COMMENT Returns the full string representation of this text, truncated beyond
 		COMMENT the supplied {@code length}.
 		ARG 1 length
 			COMMENT the max length allowed for the string representation of the text
-	METHOD m_dhdrxdow copy ()Lnet/minecraft/unmapped/C_evienqpn;
-		COMMENT Copies the text itself, excluding the styles or siblings.
-	METHOD m_exrhmjyo getStyle ()Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns the style of this text.
-	METHOD m_hzvxzamd (ILjava/lang/StringBuilder;Ljava/lang/String;)Ljava/util/Optional;
-		ARG 2 string
-	METHOD m_imnwuiaf visitSelf (Lnet/minecraft/unmapped/C_ctevlazx$C_zjnnqled;)Ljava/util/Optional;
-		COMMENT Visits the text itself.
-		COMMENT
-		COMMENT @see #visit(Visitor)
-		COMMENT @return the visitor's return value
-		ARG 1 visitor
-			COMMENT the visitor
-	METHOD m_jiqsogwo asString ()Ljava/lang/String;
-		COMMENT Returns the string representation of this text itself, excluding siblings.
-	METHOD m_knvixqie getSiblings ()Ljava/util/List;
-		COMMENT Returns the siblings of this text.
-	METHOD m_ocdqfqnp getWithStyle (Lnet/minecraft/unmapped/C_msihnwpc;)Ljava/util/List;
+	METHOD m_liizenqh getWithStyle (Lnet/minecraft/unmapped/C_msihnwpc;)Ljava/util/List;
 		ARG 1 style
-	METHOD m_phplvamd asOrderedText ()Lnet/minecraft/unmapped/C_iywgkvpa;
-	METHOD m_pqdisavx visitSelf (Lnet/minecraft/unmapped/C_ctevlazx$C_wnspgsnr;Lnet/minecraft/unmapped/C_msihnwpc;)Ljava/util/Optional;
+	METHOD m_miniszox (Ljava/util/List;Lnet/minecraft/unmapped/C_msihnwpc;Ljava/lang/String;)Ljava/util/Optional;
+		ARG 1 styleOverride
+		ARG 2 text
+	METHOD m_pizvuxmu asOrderedText ()Lnet/minecraft/unmapped/C_iywgkvpa;
+	METHOD m_ppajxzfq shallowCopy ()Lnet/minecraft/unmapped/C_evienqpn;
+		COMMENT Copies the text itself, the style, and the siblings.
+		COMMENT
+		COMMENT <p>A shallow copy is made for the siblings.
+	METHOD m_qduxfgny getStyle ()Lnet/minecraft/unmapped/C_msihnwpc;
+		COMMENT Returns the style of this text.
+	METHOD m_qgzilcmn visitSelf (Lnet/minecraft/unmapped/C_ctevlazx$C_ezrrnoom;Lnet/minecraft/unmapped/C_msihnwpc;)Ljava/util/Optional;
 		COMMENT Visits the text itself.
 		COMMENT
 		COMMENT @see #visit(StyledVisitor, Style)
@@ -43,53 +42,54 @@ CLASS net/minecraft/unmapped/C_tdwiqadr net/minecraft/text/Text
 			COMMENT the visitor
 		ARG 2 style
 			COMMENT the current style
-	METHOD m_qgqjxpcu (Ljava/util/List;Lnet/minecraft/unmapped/C_msihnwpc;Ljava/lang/String;)Ljava/util/Optional;
-		ARG 1 styleOverride
-		ARG 2 text
-	METHOD m_xhhoqczt of (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tdwiqadr;
-		COMMENT Creates a literal text with the given string as content.
-		ARG 0 string
-	METHOD m_zkscixxr shallowCopy ()Lnet/minecraft/unmapped/C_evienqpn;
-		COMMENT Copies the text itself, the style, and the siblings.
+	METHOD m_qgzilcmn visitSelf (Lnet/minecraft/unmapped/C_ctevlazx$C_nstyymmp;)Ljava/util/Optional;
+		COMMENT Visits the text itself.
 		COMMENT
-		COMMENT <p>A shallow copy is made for the siblings.
-	CLASS C_uyxrjiyi Serializer
+		COMMENT @see #visit(Visitor)
+		COMMENT @return the visitor's return value
+		ARG 1 visitor
+			COMMENT the visitor
+	METHOD m_xjtsrcyy copy ()Lnet/minecraft/unmapped/C_evienqpn;
+		COMMENT Copies the text itself, excluding the styles or siblings.
+	METHOD m_xvkuexha asString ()Ljava/lang/String;
+		COMMENT Returns the string representation of this text itself, excluding siblings.
+	CLASS C_pkmrgtdq Serializer
 		COMMENT A JSON serializer for {@link Text}.
-		FIELD f_bfccxuva GSON Lcom/google/gson/Gson;
-		FIELD f_dqdkfwot JSON_READER_LINE_START Ljava/lang/reflect/Field;
-		FIELD f_oueeqwyt JSON_READER_POS Ljava/lang/reflect/Field;
+		FIELD f_mrhnmrek JSON_READER_POS Ljava/lang/reflect/Field;
+		FIELD f_qquqqwsu GSON Lcom/google/gson/Gson;
+		FIELD f_twsdtlyp JSON_READER_LINE_START Ljava/lang/reflect/Field;
 		METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 			ARG 1 json
 			ARG 2 type
 			ARG 3 context
-		METHOD m_ahrukmxy fromJson (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_evienqpn;
+		METHOD m_amdvybik fromJson (Lcom/google/gson/JsonElement;)Lnet/minecraft/unmapped/C_evienqpn;
+			ARG 0 json
+		METHOD m_amdvybik fromJson (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_evienqpn;
 			ARG 0 reader
-		METHOD m_jiewhiap (Lcom/google/gson/JsonObject;Lcom/google/gson/JsonSerializationContext;Lnet/minecraft/unmapped/C_tdwiqadr;)V
+		METHOD m_amdvybik fromJson (Ljava/lang/String;)Lnet/minecraft/unmapped/C_evienqpn;
+			ARG 0 json
+		METHOD m_avsypfga (Lcom/google/gson/JsonObject;Lcom/google/gson/JsonSerializationContext;Lnet/minecraft/unmapped/C_tdwiqadr;)V
 			ARG 3 separator
-		METHOD m_jwpbcydq getSeparator (Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Ljava/util/Optional;
+		METHOD m_czqtadwz getSeparator (Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Ljava/util/Optional;
 			ARG 1 type
 			ARG 2 context
 			ARG 3 json
-		METHOD m_ksznwroe toJson (Lnet/minecraft/unmapped/C_tdwiqadr;)Ljava/lang/String;
+		METHOD m_ehsfkqpv fromLenientJson (Ljava/lang/String;)Lnet/minecraft/unmapped/C_evienqpn;
+			ARG 0 json
+		METHOD m_fecqstqj toJsonTree (Lnet/minecraft/unmapped/C_tdwiqadr;)Lcom/google/gson/JsonElement;
 			ARG 0 text
-		METHOD m_mljulvva fromLenientJson (Ljava/lang/String;)Lnet/minecraft/unmapped/C_evienqpn;
-			ARG 0 json
-		METHOD m_njqwsghi getPosition (Lcom/google/gson/stream/JsonReader;)I
-			ARG 0 reader
-		METHOD m_oummdyxz addStyle (Lnet/minecraft/unmapped/C_msihnwpc;Lcom/google/gson/JsonObject;Lcom/google/gson/JsonSerializationContext;)V
-			ARG 1 style
-			ARG 2 json
-			ARG 3 context
-		METHOD m_ujflfgiy fromJson (Lcom/google/gson/JsonElement;)Lnet/minecraft/unmapped/C_evienqpn;
-			ARG 0 json
-		METHOD m_xxqjdpsu addSeparator (Lcom/google/gson/JsonSerializationContext;Lcom/google/gson/JsonObject;Ljava/util/Optional;)V
+		METHOD m_fupbiwnq addSeparator (Lcom/google/gson/JsonSerializationContext;Lcom/google/gson/JsonObject;Ljava/util/Optional;)V
 			ARG 1 context
 			ARG 2 json
 			ARG 3 separator
-		METHOD m_yemxhmro toJsonTree (Lnet/minecraft/unmapped/C_tdwiqadr;)Lcom/google/gson/JsonElement;
+		METHOD m_iqigpybz addStyle (Lnet/minecraft/unmapped/C_msihnwpc;Lcom/google/gson/JsonObject;Lcom/google/gson/JsonSerializationContext;)V
+			ARG 1 style
+			ARG 2 json
+			ARG 3 context
+		METHOD m_yxnlgxsy toJson (Lnet/minecraft/unmapped/C_tdwiqadr;)Ljava/lang/String;
 			ARG 0 text
-		METHOD m_zrriuxku fromJson (Ljava/lang/String;)Lnet/minecraft/unmapped/C_evienqpn;
-			ARG 0 json
+		METHOD m_zforfvyp getPosition (Lcom/google/gson/stream/JsonReader;)I
+			ARG 0 reader
 		METHOD serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 			ARG 1 text
 			ARG 2 type

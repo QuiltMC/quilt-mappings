@@ -1,57 +1,59 @@
 CLASS net/minecraft/unmapped/C_xanddrov net/minecraft/item/Item
-	FIELD f_bemdejao ATTACK_SPEED_MODIFIER_ID Ljava/util/UUID;
-	FIELD f_cgbwqeou DEFAULT_MAX_COUNT I
-	FIELD f_cmulsuro maxDamage I
-	FIELD f_djxlssoo foodComponent Lnet/minecraft/unmapped/C_tcaukigc;
-	FIELD f_fimfrogv fireproof Z
-	FIELD f_gzbiyhpj LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_hjloqofl recipeRemainder Lnet/minecraft/unmapped/C_xanddrov;
-	FIELD f_iywksqwe ATTACK_DAMAGE_MODIFIER_ID Ljava/util/UUID;
-	FIELD f_ktpznded group Lnet/minecraft/unmapped/C_dyackonl;
-	FIELD f_qbfcdeeh rarity Lnet/minecraft/unmapped/C_mskximqm;
-	FIELD f_rkvdemvn maxCount I
-	FIELD f_rxdzqmdk translationKey Ljava/lang/String;
-	FIELD f_sgwteyba BLOCK_ITEMS Ljava/util/Map;
-	METHOD <init> (Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;)V
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_eanxremr BLOCK_ITEMS Ljava/util/Map;
+	FIELD f_hcbnxjps recipeRemainder Lnet/minecraft/unmapped/C_xanddrov;
+	FIELD f_iawmrvot group Lnet/minecraft/unmapped/C_dyackonl;
+	FIELD f_ipixvose maxCount I
+	FIELD f_jghigkys foodComponent Lnet/minecraft/unmapped/C_tcaukigc;
+	FIELD f_khogqnyn translationKey Ljava/lang/String;
+	FIELD f_mmpobase maxDamage I
+	FIELD f_qyidqvcy rarity Lnet/minecraft/unmapped/C_mskximqm;
+	FIELD f_rnyibmzs DEFAULT_MAX_COUNT I
+	FIELD f_rsoucooa ATTACK_SPEED_MODIFIER_ID Ljava/util/UUID;
+	FIELD f_ukgeaouz ATTACK_DAMAGE_MODIFIER_ID Ljava/util/UUID;
+	FIELD f_wulkopbs fireproof Z
+	METHOD <init> (Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;)V
 		ARG 1 settings
-	METHOD m_atbcotjm canRepair (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 1 stack
-		ARG 2 ingredient
-	METHOD m_bvekmagb appendStacks (Lnet/minecraft/unmapped/C_dyackonl;Lnet/minecraft/unmapped/C_eztffrnr;)V
-		COMMENT Appends the stacks of this item shown in the item group to the list.
-		COMMENT
-		COMMENT @see #isIn(ItemGroup)
-		ARG 1 group
-		ARG 2 stacks
-	METHOD m_cdlogwfp onStackClicked (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_mhietucq;Lnet/minecraft/unmapped/C_oqcyprzj;)Z
+	METHOD m_adtftxwh onStackClicked (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_mhietucq;Lnet/minecraft/unmapped/C_oqcyprzj;)Z
 		ARG 1 stack
 		ARG 2 slot
 		ARG 3 clickType
 		ARG 4 player
-	METHOD m_dovnunca isFireproof ()Z
-		COMMENT {@return whether this item is immune to fire and lava damage}
-	METHOD m_dvzyvpkk hasGlint (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		COMMENT Checks if the glint effect should be applied when the item is rendered.
-		COMMENT
-		COMMENT <p>By default, returns true if the item has enchantments.
+	METHOD m_balelzwa getName ()Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_bmncivsc usageTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_kywxadds;I)V
+		ARG 1 world
+		ARG 2 user
+		ARG 3 stack
+		ARG 4 remainingUseTicks
+	METHOD m_buyymsth getTooltipData (Lnet/minecraft/unmapped/C_kywxadds;)Ljava/util/Optional;
 		ARG 1 stack
-	METHOD m_edjngfwn getEnchantability ()I
-		COMMENT Gets the enchantability of an item.
-		COMMENT This specifies the ability of an item to receive enchantments when enchanted using an enchanting table.
-		COMMENT As the value increases, the amount and level of enchantments applied increase.
-		COMMENT
-		COMMENT <p>If the value of this method is 0, the item cannot be enchanted using an enchanting table.
-	METHOD m_erdggquu getRawId (Lnet/minecraft/unmapped/C_xanddrov;)I
-		ARG 0 item
-	METHOD m_fhechlld postMine (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+	METHOD m_clmipmjw onClicked (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_mhietucq;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kvynpkkx;)Z
+		ARG 1 stack
+		ARG 2 otherStack
+		ARG 3 slot
+		ARG 4 clickType
+		ARG 5 player
+		ARG 6 cursorStackReference
+	METHOD m_daarhmms getTranslationKey ()Ljava/lang/String;
+		COMMENT Gets the translation key of this item.
+	METHOD m_daarhmms getTranslationKey (Lnet/minecraft/unmapped/C_kywxadds;)Ljava/lang/String;
+		COMMENT Gets the translation key of this item using the provided item stack for context.
+		ARG 1 stack
+	METHOD m_daqeimvk getMaxCount ()I
+		COMMENT {@return the maximum stack count of any ItemStack with this item} Can be configured through {@link Item.Settings#maxCount(int) settings.maxCount()}.
+	METHOD m_enexrgfn getRecipeRemainder ()Lnet/minecraft/unmapped/C_xanddrov;
+		COMMENT Gets the remainder item that should be left behind when this item is used as a crafting ingredient.
+	METHOD m_euwyedba postHit (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 1 stack
+		ARG 2 target
+		ARG 3 attacker
+	METHOD m_eypvimxi inventoryTick (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_srenftsa;IZ)V
 		ARG 1 stack
 		ARG 2 world
-		ARG 3 state
-		ARG 4 pos
-		ARG 5 miner
-	METHOD m_fptzbkqc getTooltipData (Lnet/minecraft/unmapped/C_kywxadds;)Ljava/util/Optional;
-		ARG 1 stack
-	METHOD m_gcvxwgdv getRarity (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_mskximqm;
+		ARG 3 entity
+		ARG 4 slot
+		ARG 5 selected
+	METHOD m_fdhxvwmd getRarity (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_mskximqm;
 		COMMENT {@return this item's rarity, which changes the color of its name}
 		COMMENT
 		COMMENT <p>By default, if an item has an enchantment, its rarity is modified:
@@ -60,21 +62,38 @@ CLASS net/minecraft/unmapped/C_xanddrov net/minecraft/item/Item
 		COMMENT \t<li>Rare -> Epic
 		COMMENT </ul>
 		ARG 1 stack
-	METHOD m_gxxvfctg isNetworkSynced ()Z
-	METHOD m_hjtddnye getDefaultStack ()Lnet/minecraft/unmapped/C_kywxadds;
-	METHOD m_hkidvjzc getMiningSpeedMultiplier (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_pmeibtxt;)F
+	METHOD m_ffkzjqay canRepair (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 1 stack
-		ARG 2 state
-	METHOD m_idszeaqy onStoppedUsing (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_ndyxaxsu;I)V
-		ARG 1 stack
-		ARG 2 world
-		ARG 3 user
-		ARG 4 remainingUseTicks
-	METHOD m_iolytlkv raycast (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_vzwqkiyu$C_wtuvrdrk;)Lnet/minecraft/unmapped/C_smttkadj;
+		ARG 2 ingredient
+	METHOD m_fmebppng raycast (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_vzwqkiyu$C_ymruyhxr;)Lnet/minecraft/unmapped/C_smttkadj;
 		ARG 0 world
 		ARG 1 player
 		ARG 2 fluidHandling
-	METHOD m_jfsqechh use (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_ruyhivpu;
+	METHOD m_gvlwjsjf getName (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 1 stack
+	METHOD m_hlixtekt getAttributeModifiers (Lnet/minecraft/unmapped/C_bheocyuy;)Lcom/google/common/collect/Multimap;
+		ARG 1 slot
+	METHOD m_ifkpadjh appendTooltip (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Ljava/util/List;Lnet/minecraft/unmapped/C_wdtrbeat;)V
+		ARG 1 stack
+		ARG 2 world
+		ARG 3 tooltip
+		ARG 4 context
+	METHOD m_jddzgyjm getRawId (Lnet/minecraft/unmapped/C_xanddrov;)I
+		ARG 0 item
+	METHOD m_jvtuoesg getDefaultStack ()Lnet/minecraft/unmapped/C_kywxadds;
+	METHOD m_jxkiyoln postMine (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 1 stack
+		ARG 2 world
+		ARG 3 state
+		ARG 4 pos
+		ARG 5 miner
+	METHOD m_kffdwknf canBeNested ()Z
+		COMMENT @return true if the item can be placed inside of shulker boxes or bundles.
+	METHOD m_kuhdolwd isNbtSynced ()Z
+		COMMENT Checks if an item should have its NBT data stored in {@link ItemStack#nbt} sent to the client.
+		COMMENT
+		COMMENT <p>If an item is damageable, this method is ignored and data is always synced to client.
+	METHOD m_lrjrrldc use (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_ruyhivpu;
 		COMMENT Called when an item is used by a player.
 		COMMENT The use action, by default, is bound to the right mouse button.
 		COMMENT
@@ -89,10 +108,61 @@ CLASS net/minecraft/unmapped/C_xanddrov net/minecraft/item/Item
 			COMMENT the player who used the item
 		ARG 3 hand
 			COMMENT the hand used
-	METHOD m_jimssdgd fromBlock (Lnet/minecraft/unmapped/C_qodpmxmm;)Lnet/minecraft/unmapped/C_xanddrov;
-		COMMENT @deprecated Please use {@link Block#asItem}
-		ARG 0 block
-	METHOD m_jnziikwz useOnBlock (Lnet/minecraft/unmapped/C_emizlkyy;)Lnet/minecraft/unmapped/C_jybpeuzo;
+	METHOD m_mquylxop isDamageable ()Z
+		COMMENT {@return whether this item can lose durability}
+	METHOD m_muitebcp isUsedOnRelease (Lnet/minecraft/unmapped/C_kywxadds;)Z
+		ARG 1 stack
+	METHOD m_mxidbemq getMaxDamage ()I
+		COMMENT {@return the maximum durability of this item} Can be configured through {@link Item.Settings#maxDamage(int) settings.maxDamage()}.
+	METHOD m_nhrfkmta getOrCreateTranslationKey ()Ljava/lang/String;
+	METHOD m_nlgcnrow isNetworkSynced ()Z
+	METHOD m_nnoeckxx isEnchantable (Lnet/minecraft/unmapped/C_kywxadds;)Z
+		COMMENT {@return whether the given {@link ItemStack} is enchantable}
+		COMMENT
+		COMMENT <p>By default, ItemStacks are enchantable if their max stack count is 1 and they can be damaged.
+		ARG 1 stack
+	METHOD m_ojwlimel getUseAction (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_tfcgwmlo;
+		ARG 1 stack
+	METHOD m_otyrrorc hasRecipeRemainder ()Z
+		COMMENT Checks if this item has a remainder item that is left behind when used as a crafting ingredient.
+	METHOD m_pwlzwqxl onItemEntityDestroyed (Lnet/minecraft/unmapped/C_gnjizpqu;)V
+		ARG 1 entity
+	METHOD m_qriwwtlr damage (Lnet/minecraft/unmapped/C_vypkfxbs;)Z
+		COMMENT {@return whether this item can be damaged by the given {@link DamageSource source}}
+		ARG 1 source
+	METHOD m_qspshlub canMine (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_oqcyprzj;)Z
+		COMMENT Checks if a player can break a block while holding the item.
+		ARG 1 state
+		ARG 2 world
+		ARG 3 pos
+		ARG 4 miner
+	METHOD m_rbjoruxu onCraft (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;)V
+		COMMENT Called when a player acquires the item by crafting, smelting, smithing, etc.
+		ARG 1 stack
+		ARG 2 world
+		ARG 3 player
+	METHOD m_reufjadq isIn (Lnet/minecraft/unmapped/C_dyackonl;)Z
+		COMMENT Checks whether this item should appear in a specified item group.
+		COMMENT
+		COMMENT @return true if the item is in the specified item group or the item group is {@link net.minecraft.item.ItemGroup#SEARCH}.
+		ARG 1 group
+	METHOD m_rkqzwpnp getGroup ()Lnet/minecraft/unmapped/C_dyackonl;
+	METHOD m_rtddxevy hasGlint (Lnet/minecraft/unmapped/C_kywxadds;)Z
+		COMMENT Checks if the glint effect should be applied when the item is rendered.
+		COMMENT
+		COMMENT <p>By default, returns true if the item has enchantments.
+		ARG 1 stack
+	METHOD m_rwkssaqj getFoodComponent ()Lnet/minecraft/unmapped/C_tcaukigc;
+		COMMENT {@return this item's {@link #foodComponent FoodComponent}, or {@code null} if none was set}
+	METHOD m_spawinlh useOnEntity (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
+		ARG 1 stack
+		ARG 2 user
+		ARG 3 entity
+		ARG 4 hand
+	METHOD m_tetjxegi getItemBarStep (Lnet/minecraft/unmapped/C_kywxadds;)I
+		ARG 1 stack
+	METHOD m_thhqtqxw getEquipSound ()Lnet/minecraft/unmapped/C_yazovava;
+	METHOD m_ubhppofk useOnBlock (Lnet/minecraft/unmapped/C_emizlkyy;)Lnet/minecraft/unmapped/C_jybpeuzo;
 		COMMENT Called when an item is used on a block.
 		COMMENT
 		COMMENT <p>This method is called on both the logical client and logical server, so take caution when using this method.
@@ -101,42 +171,7 @@ CLASS net/minecraft/unmapped/C_xanddrov net/minecraft/item/Item
 		COMMENT @return an action result that specifies if using the item on a block was successful.
 		ARG 1 context
 			COMMENT the usage context
-	METHOD m_jpzdvkpq getTranslationKey (Lnet/minecraft/unmapped/C_kywxadds;)Ljava/lang/String;
-		COMMENT Gets the translation key of this item using the provided item stack for context.
-		ARG 1 stack
-	METHOD m_kuxczfzd isItemBarVisible (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 1 stack
-	METHOD m_kwruwgfw isFood ()Z
-		COMMENT Checks if this item is food and therefore is edible.
-	METHOD m_lhmmyjrv onCraft (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_oqcyprzj;)V
-		COMMENT Called when a player acquires the item by crafting, smelting, smithing, etc.
-		ARG 1 stack
-		ARG 2 world
-		ARG 3 player
-	METHOD m_mozfkqhc getMaxDamage ()I
-		COMMENT {@return the maximum durability of this item} Can be configured through {@link Item.Settings#maxDamage(int) settings.maxDamage()}.
-	METHOD m_mtupqabw getMaxUseTime (Lnet/minecraft/unmapped/C_kywxadds;)I
-		COMMENT {@return the maximum use (right-click) time of this item, in ticks}
-		COMMENT Once a player has used an item for said number of ticks, they stop using it, and {@link Item#finishUsing} is called.
-		ARG 1 stack
-	METHOD m_ngzxvuvm usageTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_kywxadds;I)V
-		ARG 1 world
-		ARG 2 user
-		ARG 3 stack
-		ARG 4 remainingUseTicks
-	METHOD m_nhgaidyz getGroup ()Lnet/minecraft/unmapped/C_dyackonl;
-	METHOD m_odleszcn canBeNested ()Z
-		COMMENT @return true if the item can be placed inside of shulker boxes or bundles.
-	METHOD m_oejhvydv postProcessNbt (Lnet/minecraft/unmapped/C_hincwlhh;)V
-		ARG 1 nbt
-	METHOD m_oqgjogvv finishUsing (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_ndyxaxsu;)Lnet/minecraft/unmapped/C_kywxadds;
-		ARG 1 stack
-		ARG 2 world
-		ARG 3 user
-	METHOD m_psxymevi getEatSound ()Lnet/minecraft/unmapped/C_yazovava;
-	METHOD m_puvhyyzd getItemBarStep (Lnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 1 stack
-	METHOD m_pvbaknnu isSuitableFor (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
+	METHOD m_uyznbeqc isSuitableFor (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
 		COMMENT Determines whether this item can be used as a suitable tool for mining the specified block.
 		COMMENT Depending on block implementation, when combined together, the correct item and block may achieve a better mining speed and yield
 		COMMENT drops that would not be obtained when mining otherwise.
@@ -145,95 +180,72 @@ CLASS net/minecraft/unmapped/C_xanddrov net/minecraft/item/Item
 		COMMENT Other items, such as shears on string, may use their own logic
 		COMMENT and calls to this method might not return a value consistent to this rule for those items.
 		ARG 1 state
-	METHOD m_qbgeqavz getName (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_viunfmut isItemBarVisible (Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 1 stack
-	METHOD m_qhcydfof hasRecipeRemainder ()Z
-		COMMENT Checks if this item has a remainder item that is left behind when used as a crafting ingredient.
-	METHOD m_qpbndwma isDamageable ()Z
-		COMMENT {@return whether this item can lose durability}
-	METHOD m_rodrkhha useOnEntity (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
-		ARG 1 stack
-		ARG 2 user
-		ARG 3 entity
-		ARG 4 hand
-	METHOD m_rrtiwxdr getRecipeRemainder ()Lnet/minecraft/unmapped/C_xanddrov;
-		COMMENT Gets the remainder item that should be left behind when this item is used as a crafting ingredient.
-	METHOD m_rsmdgtpv getDrinkSound ()Lnet/minecraft/unmapped/C_yazovava;
-	METHOD m_ruffutce onItemEntityDestroyed (Lnet/minecraft/unmapped/C_gnjizpqu;)V
-		ARG 1 entity
-	METHOD m_ruzwrwcu byRawId (I)Lnet/minecraft/unmapped/C_xanddrov;
+	METHOD m_vlmqoviy fromBlock (Lnet/minecraft/unmapped/C_qodpmxmm;)Lnet/minecraft/unmapped/C_xanddrov;
+		COMMENT @deprecated Please use {@link Block#asItem}
+		ARG 0 block
+	METHOD m_vqpyoiug postProcessNbt (Lnet/minecraft/unmapped/C_hincwlhh;)V
+		ARG 1 nbt
+	METHOD m_vvexycaj byRawId (I)Lnet/minecraft/unmapped/C_xanddrov;
 		ARG 0 id
-	METHOD m_sgclrway canMine (Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_oqcyprzj;)Z
-		COMMENT Checks if a player can break a block while holding the item.
-		ARG 1 state
-		ARG 2 world
-		ARG 3 pos
-		ARG 4 miner
-	METHOD m_sugmqjxd isEnchantable (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		COMMENT {@return whether the given {@link ItemStack} is enchantable}
+	METHOD m_vxcgvoiv getEatSound ()Lnet/minecraft/unmapped/C_yazovava;
+	METHOD m_vzbycyuh getEnchantability ()I
+		COMMENT Gets the enchantability of an item.
+		COMMENT This specifies the ability of an item to receive enchantments when enchanted using an enchanting table.
+		COMMENT As the value increases, the amount and level of enchantments applied increase.
 		COMMENT
-		COMMENT <p>By default, ItemStacks are enchantable if their max stack count is 1 and they can be damaged.
-		ARG 1 stack
-	METHOD m_uejtmlow getItemBarColor (Lnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 1 stack
-	METHOD m_uihqunaw isUsedOnRelease (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 1 stack
-	METHOD m_urwkbzpw getTranslationKey ()Ljava/lang/String;
-		COMMENT Gets the translation key of this item.
-	METHOD m_utsijwgd getMaxCount ()I
-		COMMENT {@return the maximum stack count of any ItemStack with this item} Can be configured through {@link Item.Settings#maxCount(int) settings.maxCount()}.
-	METHOD m_vbcmysdb getName ()Lnet/minecraft/unmapped/C_tdwiqadr;
-	METHOD m_vbhjtuvo getUseAction (Lnet/minecraft/unmapped/C_kywxadds;)Lnet/minecraft/unmapped/C_tfcgwmlo;
-		ARG 1 stack
-	METHOD m_vdofkfzx getFoodComponent ()Lnet/minecraft/unmapped/C_tcaukigc;
-		COMMENT {@return this item's {@link #foodComponent FoodComponent}, or {@code null} if none was set}
-	METHOD m_vewrpxmp getAttributeModifiers (Lnet/minecraft/unmapped/C_bheocyuy;)Lcom/google/common/collect/Multimap;
-		ARG 1 slot
-	METHOD m_vezensqv appendTooltip (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Ljava/util/List;Lnet/minecraft/unmapped/C_wdtrbeat;)V
+		COMMENT <p>If the value of this method is 0, the item cannot be enchanted using an enchanting table.
+	METHOD m_wrthqoke finishUsing (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_ndyxaxsu;)Lnet/minecraft/unmapped/C_kywxadds;
 		ARG 1 stack
 		ARG 2 world
-		ARG 3 tooltip
-		ARG 4 context
-	METHOD m_wmsuxlax postHit (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 3 user
+	METHOD m_wulkopbs isFireproof ()Z
+		COMMENT {@return whether this item is immune to fire and lava damage}
+	METHOD m_wwthjnnz getMiningSpeedMultiplier (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_pmeibtxt;)F
 		ARG 1 stack
-		ARG 2 target
-		ARG 3 attacker
-	METHOD m_woosnswi isIn (Lnet/minecraft/unmapped/C_dyackonl;)Z
-		COMMENT Checks whether this item should appear in a specified item group.
+		ARG 2 state
+	METHOD m_xkemaomf isFood ()Z
+		COMMENT Checks if this item is food and therefore is edible.
+	METHOD m_xuyuoako getDrinkSound ()Lnet/minecraft/unmapped/C_yazovava;
+	METHOD m_yftlbrlg getItemBarColor (Lnet/minecraft/unmapped/C_kywxadds;)I
+		ARG 1 stack
+	METHOD m_yfywomoy getMaxUseTime (Lnet/minecraft/unmapped/C_kywxadds;)I
+		COMMENT {@return the maximum use (right-click) time of this item, in ticks}
+		COMMENT Once a player has used an item for said number of ticks, they stop using it, and {@link Item#finishUsing} is called.
+		ARG 1 stack
+	METHOD m_zercknrv appendStacks (Lnet/minecraft/unmapped/C_dyackonl;Lnet/minecraft/unmapped/C_eztffrnr;)V
+		COMMENT Appends the stacks of this item shown in the item group to the list.
 		COMMENT
-		COMMENT @return true if the item is in the specified item group or the item group is {@link net.minecraft.item.ItemGroup#SEARCH}.
+		COMMENT @see #isIn(ItemGroup)
 		ARG 1 group
-	METHOD m_xbjshhnw getEquipSound ()Lnet/minecraft/unmapped/C_yazovava;
-	METHOD m_xdsdyhwm inventoryTick (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_srenftsa;IZ)V
+		ARG 2 stacks
+	METHOD m_zpmdjguw onStoppedUsing (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_ndyxaxsu;I)V
 		ARG 1 stack
 		ARG 2 world
-		ARG 3 entity
-		ARG 4 slot
-		ARG 5 selected
-	METHOD m_xtvlztkp onClicked (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_dfffqvhn;Lnet/minecraft/unmapped/C_mhietucq;Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_kvynpkkx;)Z
-		ARG 1 stack
-		ARG 2 otherStack
-		ARG 3 slot
-		ARG 4 clickType
-		ARG 5 player
-		ARG 6 cursorStackReference
-	METHOD m_ytchvxtp getOrCreateTranslationKey ()Ljava/lang/String;
-	METHOD m_ytrhncbo damage (Lnet/minecraft/unmapped/C_vypkfxbs;)Z
-		COMMENT {@return whether this item can be damaged by the given {@link DamageSource source}}
-		ARG 1 source
-	METHOD m_zmrqdqav isNbtSynced ()Z
-		COMMENT Checks if an item should have its NBT data stored in {@link ItemStack#nbt} sent to the client.
-		COMMENT
-		COMMENT <p>If an item is damageable, this method is ignored and data is always synced to client.
-	CLASS C_ldptyrfb Settings
-		FIELD f_aypbmikq maxDamage I
-		FIELD f_fuwczgey foodComponent Lnet/minecraft/unmapped/C_tcaukigc;
-		FIELD f_nljdvsdg group Lnet/minecraft/unmapped/C_dyackonl;
-		FIELD f_pkcnlime recipeRemainder Lnet/minecraft/unmapped/C_xanddrov;
-		FIELD f_tllorczk rarity Lnet/minecraft/unmapped/C_mskximqm;
-		FIELD f_ujtesbwk fireproof Z
-		FIELD f_vcwuliyo maxCount I
-		METHOD m_expewlgz rarity (Lnet/minecraft/unmapped/C_mskximqm;)Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
+		ARG 3 user
+		ARG 4 remainingUseTicks
+	CLASS C_jcamzfvp Settings
+		FIELD f_hcbnxjps recipeRemainder Lnet/minecraft/unmapped/C_xanddrov;
+		FIELD f_iawmrvot group Lnet/minecraft/unmapped/C_dyackonl;
+		FIELD f_ipixvose maxCount I
+		FIELD f_jghigkys foodComponent Lnet/minecraft/unmapped/C_tcaukigc;
+		FIELD f_mmpobase maxDamage I
+		FIELD f_qyidqvcy rarity Lnet/minecraft/unmapped/C_mskximqm;
+		FIELD f_wulkopbs fireproof Z
+		METHOD m_exdgzjcp group (Lnet/minecraft/unmapped/C_dyackonl;)Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
+			COMMENT Sets the ItemGroup of any item using this Settings instance. ItemGroups represent tabs in the creative inventory.
+			COMMENT
+			COMMENT @return this instance
+			ARG 1 group
+				COMMENT {@link ItemGroup itemGroup} to use
+		METHOD m_qmzlsnoo recipeRemainder (Lnet/minecraft/unmapped/C_xanddrov;)Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
+			COMMENT Sets the recipe remainder for any item configured with this Settings instance.
+			COMMENT When an item with a recipe remainder is used in a crafting recipe, the remainder is left in the table or returned to the player.
+			COMMENT
+			COMMENT @return this instance
+			ARG 1 recipeRemainder
+		METHOD m_qyidqvcy rarity (Lnet/minecraft/unmapped/C_mskximqm;)Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
 			COMMENT Sets the {@link Rarity} of any item configured with this Settings instance, which changes the color of its name.
 			COMMENT
 			COMMENT <p>An item's rarity defaults to {@link Rarity#COMMON}.
@@ -241,7 +253,33 @@ CLASS net/minecraft/unmapped/C_xanddrov net/minecraft/item/Item
 			COMMENT @return this instance
 			ARG 1 rarity
 				COMMENT rarity to apply to items using this Settings instance
-		METHOD m_fhvzafdg maxCount (I)Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
+		METHOD m_rjcgamtu maxDamage (I)Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
+			COMMENT Sets the maximum durability of any item configured with this Settings instance.
+			COMMENT
+			COMMENT <p>Note that max stack count is set to 1 when this method is called.
+			COMMENT
+			COMMENT @return this instance
+			ARG 1 maxDamage
+				COMMENT maximum durability of an ItemStack using an item with this Item.Settings instance
+		METHOD m_taxpujct maxDamageIfAbsent (I)Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
+			COMMENT Calls {@link Item.Settings#maxDamage} If this Settings instance has not already set max damage (or if max damage is the default value, 0).
+			COMMENT
+			COMMENT <p>Note that max stack count is set to 1 when maxDamage is called.
+			COMMENT
+			COMMENT @return this instance
+			ARG 1 maxDamage
+				COMMENT maximum durability of an ItemStack using an item with this Item.Settings instance
+		METHOD m_wsvxcquf fireproof ()Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
+			COMMENT If called, any item with this Settings instance is immune to fire and lava damage.
+			COMMENT
+			COMMENT @return this instance
+		METHOD m_xhzochdm food (Lnet/minecraft/unmapped/C_tcaukigc;)Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
+			COMMENT When set, any item configured with this Settings instance will be edible based on the provided {@link FoodComponent}.
+			COMMENT
+			COMMENT @return this instance
+			ARG 1 foodComponent
+				COMMENT configured food properties for any item using this Settings instance
+		METHOD m_yvhjyfmm maxCount (I)Lnet/minecraft/unmapped/C_xanddrov$C_jcamzfvp;
 			COMMENT Sets the maximum stack count of any ItemStack with an Item using this Settings instance.
 			COMMENT
 			COMMENT <p>Note that a count over 64 leads to unreliable behavior in GUIs.
@@ -252,41 +290,3 @@ CLASS net/minecraft/unmapped/C_xanddrov net/minecraft/item/Item
 			COMMENT @return this instance
 			ARG 1 maxCount
 				COMMENT maximum stack count of any ItemStack with an item using this Settings instance
-		METHOD m_rfdttwuw food (Lnet/minecraft/unmapped/C_tcaukigc;)Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
-			COMMENT When set, any item configured with this Settings instance will be edible based on the provided {@link FoodComponent}.
-			COMMENT
-			COMMENT @return this instance
-			ARG 1 foodComponent
-				COMMENT configured food properties for any item using this Settings instance
-		METHOD m_uqdlaucc maxDamageIfAbsent (I)Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
-			COMMENT Calls {@link Item.Settings#maxDamage} If this Settings instance has not already set max damage (or if max damage is the default value, 0).
-			COMMENT
-			COMMENT <p>Note that max stack count is set to 1 when maxDamage is called.
-			COMMENT
-			COMMENT @return this instance
-			ARG 1 maxDamage
-				COMMENT maximum durability of an ItemStack using an item with this Item.Settings instance
-		METHOD m_vkntcqrr group (Lnet/minecraft/unmapped/C_dyackonl;)Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
-			COMMENT Sets the ItemGroup of any item using this Settings instance. ItemGroups represent tabs in the creative inventory.
-			COMMENT
-			COMMENT @return this instance
-			ARG 1 group
-				COMMENT {@link ItemGroup itemGroup} to use
-		METHOD m_vrpddbor maxDamage (I)Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
-			COMMENT Sets the maximum durability of any item configured with this Settings instance.
-			COMMENT
-			COMMENT <p>Note that max stack count is set to 1 when this method is called.
-			COMMENT
-			COMMENT @return this instance
-			ARG 1 maxDamage
-				COMMENT maximum durability of an ItemStack using an item with this Item.Settings instance
-		METHOD m_yabtcwun recipeRemainder (Lnet/minecraft/unmapped/C_xanddrov;)Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
-			COMMENT Sets the recipe remainder for any item configured with this Settings instance.
-			COMMENT When an item with a recipe remainder is used in a crafting recipe, the remainder is left in the table or returned to the player.
-			COMMENT
-			COMMENT @return this instance
-			ARG 1 recipeRemainder
-		METHOD m_zsmyxymh fireproof ()Lnet/minecraft/unmapped/C_xanddrov$C_ldptyrfb;
-			COMMENT If called, any item with this Settings instance is immune to fire and lava damage.
-			COMMENT
-			COMMENT @return this instance

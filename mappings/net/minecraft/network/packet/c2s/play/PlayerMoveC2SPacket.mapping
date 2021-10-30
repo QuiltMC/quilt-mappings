@@ -1,12 +1,12 @@
 CLASS net/minecraft/unmapped/C_hjxsaqpp net/minecraft/network/packet/c2s/play/PlayerMoveC2SPacket
-	FIELD f_bbpqlccb yaw F
-	FIELD f_bivckiom onGround Z
-	FIELD f_nhxytaxx z D
-	FIELD f_rgeasdyd x D
-	FIELD f_svjbtkur pitch F
-	FIELD f_vjyhnrqe changePosition Z
-	FIELD f_zjqfpfyy y D
-	FIELD f_zntktfag changeLook Z
+	FIELD f_cyrefykf yaw F
+	FIELD f_ecidewuh y D
+	FIELD f_hpfqwfzz x D
+	FIELD f_ieapjhsx changeLook Z
+	FIELD f_kssgrnyh z D
+	FIELD f_mcjiayze changePosition Z
+	FIELD f_xferhhvg onGround Z
+	FIELD f_yjtmtvyy pitch F
 	METHOD <init> (DDDFFZZZ)V
 		ARG 1 x
 		ARG 3 y
@@ -16,28 +16,41 @@ CLASS net/minecraft/unmapped/C_hjxsaqpp net/minecraft/network/packet/c2s/play/Pl
 		ARG 9 onGround
 		ARG 10 changePosition
 		ARG 11 changeLook
-	METHOD m_codedgzu getYaw (F)F
-		ARG 1 currentYaw
-	METHOD m_gwalwvrw getY (D)D
-		ARG 1 currentY
-	METHOD m_hgionoip getZ (D)D
-		ARG 1 currentZ
-	METHOD m_iqrxnwkk changesPosition ()Z
-	METHOD m_lgawfyhw getX (D)D
-		ARG 1 currentX
-	METHOD m_nkukozgb changesLook ()Z
-	METHOD m_ulfojryg getPitch (F)F
+	METHOD m_folyzdwk getPitch (F)F
 		ARG 1 currentPitch
-	METHOD m_xxpfenwo apply (Lnet/minecraft/unmapped/C_txhdctee;)V
-	METHOD m_ymudwxlx isOnGround ()Z
-	CLASS C_qrhmltfc LookAndOnGround
+	METHOD m_fyvfckji changesPosition ()Z
+	METHOD m_jcviyjfq getZ (D)D
+		ARG 1 currentZ
+	METHOD m_nmnsntff getX (D)D
+		ARG 1 currentX
+	METHOD m_olvhpimr apply (Lnet/minecraft/unmapped/C_txhdctee;)V
+	METHOD m_rskswgnx getY (D)D
+		ARG 1 currentY
+	METHOD m_ruqljjqj isOnGround ()Z
+	METHOD m_uknzlkxy getYaw (F)F
+		ARG 1 currentYaw
+	METHOD m_zdhudyxi changesLook ()Z
+	CLASS C_frudzueh PositionAndOnGround
+		METHOD <init> (DDDZ)V
+			ARG 1 x
+			ARG 3 y
+			ARG 5 z
+			ARG 7 onGround
+		METHOD m_rqbgmrwm read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_frudzueh;
+			ARG 0 buf
+	CLASS C_scsgfzzd LookAndOnGround
 		METHOD <init> (FFZ)V
 			ARG 1 yaw
 			ARG 2 pitch
 			ARG 3 onGround
-		METHOD m_keewhhtv read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_qrhmltfc;
+		METHOD m_rqbgmrwm read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_scsgfzzd;
 			ARG 0 buf
-	CLASS C_qtmhzjev Full
+	CLASS C_sqogmuxv OnGroundOnly
+		METHOD <init> (Z)V
+			ARG 1 onGround
+		METHOD m_rqbgmrwm read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_sqogmuxv;
+			ARG 0 buf
+	CLASS C_vuyintzz Full
 		METHOD <init> (DDDFFZ)V
 			ARG 1 x
 			ARG 3 y
@@ -45,18 +58,5 @@ CLASS net/minecraft/unmapped/C_hjxsaqpp net/minecraft/network/packet/c2s/play/Pl
 			ARG 7 yaw
 			ARG 8 pitch
 			ARG 9 onGround
-		METHOD m_kuamiidi read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_qtmhzjev;
-			ARG 0 buf
-	CLASS C_tktgnopw OnGroundOnly
-		METHOD <init> (Z)V
-			ARG 1 onGround
-		METHOD m_okgzpepj read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_tktgnopw;
-			ARG 0 buf
-	CLASS C_wqasvvsv PositionAndOnGround
-		METHOD <init> (DDDZ)V
-			ARG 1 x
-			ARG 3 y
-			ARG 5 z
-			ARG 7 onGround
-		METHOD m_pkqtvcld read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_wqasvvsv;
+		METHOD m_rqbgmrwm read (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_hjxsaqpp$C_vuyintzz;
 			ARG 0 buf

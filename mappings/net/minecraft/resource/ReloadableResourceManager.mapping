@@ -7,25 +7,7 @@ CLASS net/minecraft/unmapped/C_jrdglcdw net/minecraft/resource/ReloadableResourc
 	COMMENT their {@linkplain ResourceReloader#reload reload} called.
 	COMMENT
 	COMMENT @see ResourceReloader
-	METHOD m_acdyrmmt reload (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/List;Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletableFuture;
-		COMMENT Performs a reload. This returns a future that is completed when the
-		COMMENT reload is completed.
-		COMMENT
-		COMMENT @return the future of the reload
-		COMMENT @see #reload(Executor, Executor, CompletableFuture, List)
-		ARG 1 prepareExecutor
-			COMMENT an executor for the prepare stage
-		ARG 2 applyExecutor
-			COMMENT an executor for the apply stage
-		ARG 3 packs
-			COMMENT a list of resource packs providing resources
-		ARG 4 initialStage
-			COMMENT a completable future to be completed before this reload
-	METHOD m_mjdxkasx registerReloader (Lnet/minecraft/unmapped/C_jgozwqsm;)V
-		COMMENT Registers a resource reloader to this manager.
-		ARG 1 reloader
-			COMMENT the reloader
-	METHOD m_wkudpjki reload (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;Ljava/util/List;)Lnet/minecraft/unmapped/C_koeacezd;
+	METHOD m_csmalhtf reload (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;Ljava/util/List;)Lnet/minecraft/unmapped/C_koeacezd;
 		COMMENT Performs a reload. Returns an object that yields some insights to the
 		COMMENT reload.
 		COMMENT
@@ -44,3 +26,21 @@ CLASS net/minecraft/unmapped/C_jrdglcdw net/minecraft/resource/ReloadableResourc
 			COMMENT a completable future to be completed before this reload
 		ARG 4 packs
 			COMMENT a list of resource packs providing resources
+	METHOD m_gehlwiaq registerReloader (Lnet/minecraft/unmapped/C_jgozwqsm;)V
+		COMMENT Registers a resource reloader to this manager.
+		ARG 1 reloader
+			COMMENT the reloader
+	METHOD m_xxnyyuxw reload (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/List;Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletableFuture;
+		COMMENT Performs a reload. This returns a future that is completed when the
+		COMMENT reload is completed.
+		COMMENT
+		COMMENT @return the future of the reload
+		COMMENT @see #reload(Executor, Executor, CompletableFuture, List)
+		ARG 1 prepareExecutor
+			COMMENT an executor for the prepare stage
+		ARG 2 applyExecutor
+			COMMENT an executor for the apply stage
+		ARG 3 packs
+			COMMENT a list of resource packs providing resources
+		ARG 4 initialStage
+			COMMENT a completable future to be completed before this reload

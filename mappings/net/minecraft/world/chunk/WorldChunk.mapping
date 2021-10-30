@@ -1,73 +1,71 @@
 CLASS net/minecraft/unmapped/C_qklvsdrh net/minecraft/world/chunk/WorldChunk
-	FIELD f_fdtrxpqh LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_ivjfpamu EMPTY_BLOCK_ENTITY_TICKER Lnet/minecraft/unmapped/C_xhzcfnzq;
-	FIELD f_oexwzjrl gameEventDispatchers Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-	FIELD f_qbkvzkni levelTypeProvider Ljava/util/function/Supplier;
-	FIELD f_rlxphshq world Lnet/minecraft/unmapped/C_nbzftcdc;
-	FIELD f_sqsgjhiy blockEntityTickers Ljava/util/Map;
-	FIELD f_uqeyfadr loadedToWorld Z
-	FIELD f_vihaisfu loadToWorldConsumer Ljava/util/function/Consumer;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_jtjfctky gameEventDispatchers Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+	FIELD f_oftvgbcf levelTypeProvider Ljava/util/function/Supplier;
+	FIELD f_okfulwkr world Lnet/minecraft/unmapped/C_nbzftcdc;
+	FIELD f_tbyjwwxr loadToWorldConsumer Ljava/util/function/Consumer;
+	FIELD f_tqakdlob loadedToWorld Z
+	FIELD f_whiwhhfs EMPTY_BLOCK_ENTITY_TICKER Lnet/minecraft/unmapped/C_xhzcfnzq;
+	FIELD f_wuzljoqc blockEntityTickers Ljava/util/Map;
 	METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_raegxbez;Ljava/util/function/Consumer;)V
 		ARG 2 protoChunk
-	METHOD m_ahylfril canTickBlockEntities ()Z
-	METHOD m_bwajcupw addBlockEntity (Lnet/minecraft/unmapped/C_hmfagevk;)V
-		ARG 1 blockEntity
-	METHOD m_curbiofh updateGameEventListener (Lnet/minecraft/unmapped/C_hmfagevk;)V
-		ARG 1 blockEntity
-	METHOD m_dvaigewf canTickBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+	METHOD m_aocmkjzo createBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_hmfagevk;
 		ARG 1 pos
-	METHOD m_euznbrox removeGameEventListener (Lnet/minecraft/unmapped/C_hmfagevk;)V
-		ARG 1 blockEntity
-	METHOD m_evuyeigd updateAllBlockEntities ()V
-	METHOD m_frigyxhs enableTickSchedulers (Lnet/minecraft/unmapped/C_uihwnwdb;)V
-		ARG 1 world
-	METHOD m_fyknncpo getBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_qklvsdrh$C_fmnmglwp;)Lnet/minecraft/unmapped/C_hmfagevk;
+	METHOD m_aycrmpdr removeBlockEntityTicker (Lnet/minecraft/unmapped/C_kkdaznyh;)V
 		ARG 1 pos
-		ARG 2 creationType
-	METHOD m_hxomugxh wrapTicker (Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_jvtyzdeh;)Lnet/minecraft/unmapped/C_xhzcfnzq;
+	METHOD m_czvixsnh canTickBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		ARG 1 pos
+	METHOD m_dckdsvrk updateTicker (Lnet/minecraft/unmapped/C_hmfagevk;)V
+		ARG 1 blockEntity
+	METHOD m_dvksrnpd canTickBlockEntities ()Z
+	METHOD m_excujjhq isEmpty ()Z
+	METHOD m_fkgvbyqu loadFromPacket (Lnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_hincwlhh;Ljava/util/function/Consumer;)V
+		ARG 1 buf
+		ARG 2 nbt
+	METHOD m_fxsxgzbt getWorld ()Lnet/minecraft/unmapped/C_nbzftcdc;
+	METHOD m_iclosugc setLevelTypeProvider (Ljava/util/function/Supplier;)V
+		ARG 1 levelTypeProvider
+	METHOD m_jrrnxzam setLoadedToWorld (Z)V
+		ARG 1 loaded
+	METHOD m_lbtlnwwu runPostProcessing ()V
+	METHOD m_mklgqwwk addBlockEntity (Lnet/minecraft/unmapped/C_hmfagevk;)V
+		ARG 1 blockEntity
+	METHOD m_mxpmxfqg loadToWorld ()V
+	METHOD m_qdywzuzu wrapTicker (Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_jvtyzdeh;)Lnet/minecraft/unmapped/C_xhzcfnzq;
 		ARG 1 blockEntity
 		ARG 2 blockEntityTicker
-	METHOD m_jjsrwyko setLoadedToWorld (Z)V
-		ARG 1 loaded
-	METHOD m_jsijgtlh runPostProcessing ()V
-	METHOD m_lnpdivwa removeBlockEntityTicker (Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 1 pos
-	METHOD m_mjozrcvy getLevelType ()Lnet/minecraft/unmapped/C_ojdredkg$C_iukhkdzy;
-	METHOD m_nwyytdxt disableTickSchedulers ()V
-	METHOD m_ptsthkza getFluidState (III)Lnet/minecraft/unmapped/C_fuitekqx;
+	METHOD m_taowllau getFluidState (III)Lnet/minecraft/unmapped/C_fuitekqx;
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
-	METHOD m_qzkphwly loadBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_hmfagevk;
+	METHOD m_tbcwwyqc getBlockEntities ()Ljava/util/Map;
+	METHOD m_tlqjhopw getBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_qklvsdrh$C_bhvqdbbl;)Lnet/minecraft/unmapped/C_hmfagevk;
 		ARG 1 pos
-		ARG 2 nbt
-	METHOD m_segfrxoc isEmpty ()Z
-	METHOD m_shudlxgy updateTicker (Lnet/minecraft/unmapped/C_hmfagevk;)V
+		ARG 2 creationType
+	METHOD m_tvtoiguz updateAllBlockEntities ()V
+	METHOD m_umkyjkvl updateGameEventListener (Lnet/minecraft/unmapped/C_hmfagevk;)V
 		ARG 1 blockEntity
-	METHOD m_spbtogrv createBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_hmfagevk;
-		ARG 1 pos
-	METHOD m_tusiszeg getWorld ()Lnet/minecraft/unmapped/C_nbzftcdc;
-	METHOD m_uufmlsdr (I)Lnet/minecraft/unmapped/C_iqpbbmct;
+	METHOD m_vchhehke (I)Lnet/minecraft/unmapped/C_iqpbbmct;
 		ARG 1 sectionCoord
-	METHOD m_vrphhpxa setLevelTypeProvider (Ljava/util/function/Supplier;)V
-		ARG 1 levelTypeProvider
-	METHOD m_wisclzwb getBlockEntities ()Ljava/util/Map;
-	METHOD m_wixphmld loadToWorld ()V
-	METHOD m_wmotgyrx loadFromPacket (Lnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_hincwlhh;Ljava/util/function/Consumer;)V
-		ARG 1 buf
+	METHOD m_vowicsrd removeGameEventListener (Lnet/minecraft/unmapped/C_hmfagevk;)V
+		ARG 1 blockEntity
+	METHOD m_xvpgujnl loadBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_hmfagevk;
+		ARG 1 pos
 		ARG 2 nbt
-	CLASS C_fmnmglwp CreationType
-	CLASS C_mbvszwhu DirectBlockEntityTickInvoker
-		FIELD f_bcaezxiu ticker Lnet/minecraft/unmapped/C_jvtyzdeh;
-		FIELD f_kstapovh blockEntity Lnet/minecraft/unmapped/C_hmfagevk;
-		FIELD f_lwaadgwp hasWarned Z
-		FIELD f_lznqbyvj worldChunk Lnet/minecraft/unmapped/C_qklvsdrh;
+	METHOD m_zfjzjwot getLevelType ()Lnet/minecraft/unmapped/C_ojdredkg$C_qvuacqhw;
+	METHOD m_zwygzmli disableTickSchedulers (J)V
+	CLASS C_bhvqdbbl CreationType
+	CLASS C_qtwnslma WrappedBlockEntityTickInvoker
+		FIELD f_gnxzqker wrapped Lnet/minecraft/unmapped/C_xhzcfnzq;
+		METHOD <init> (Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_xhzcfnzq;)V
+			ARG 2 wrapped
+		METHOD m_lvhgymjm setWrapped (Lnet/minecraft/unmapped/C_xhzcfnzq;)V
+			ARG 1 wrapped
+	CLASS C_xjdslqwt DirectBlockEntityTickInvoker
+		FIELD f_dsfbomzg worldChunk Lnet/minecraft/unmapped/C_qklvsdrh;
+		FIELD f_gctmjgbk hasWarned Z
+		FIELD f_gnxzqker ticker Lnet/minecraft/unmapped/C_jvtyzdeh;
+		FIELD f_lbgucgki blockEntity Lnet/minecraft/unmapped/C_hmfagevk;
 		METHOD <init> (Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_hmfagevk;Lnet/minecraft/unmapped/C_jvtyzdeh;)V
 			ARG 2 blockEntity
 			ARG 3 ticker
-	CLASS C_oanaqnrh WrappedBlockEntityTickInvoker
-		FIELD f_szqwrolg wrapped Lnet/minecraft/unmapped/C_xhzcfnzq;
-		METHOD <init> (Lnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_xhzcfnzq;)V
-			ARG 2 wrapped
-		METHOD m_xcdwjjwz setWrapped (Lnet/minecraft/unmapped/C_xhzcfnzq;)V
-			ARG 1 wrapped

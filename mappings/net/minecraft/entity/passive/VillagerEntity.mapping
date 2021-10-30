@@ -1,120 +1,105 @@
 CLASS net/minecraft/unmapped/C_etbdktdp net/minecraft/entity/passive/VillagerEntity
-	FIELD f_bxbkkqhf TIME_SINCE_SLEEPING_FOR_GOLEM_SPAWNING J
-	FIELD f_cumdgnha MEMORY_MODULES Lcom/google/common/collect/ImmutableList;
-	FIELD f_dkzljqoa gossipStartTime J
-	FIELD f_etkvwhus lastRestockCheckTime J
-	FIELD f_fhctxura TRADE_OFFERS_PER_LEVEL I
-	FIELD f_heknllpo SPEED_MODIFIER F
-	FIELD f_hxcvpdua lastRestockTime J
-	FIELD f_inzuxjqm POINTS_OF_INTEREST Ljava/util/Map;
-	FIELD f_iwuxfkzd GOLEM_COMUNICATION_DISTANCE I
-		COMMENT How far away the villager should "talk" about golems with other villagers.
-	FIELD f_jvixwubx lastCustomer Lnet/minecraft/unmapped/C_oqcyprzj;
-	FIELD f_liscujfh SENSORS Lcom/google/common/collect/ImmutableList;
-	FIELD f_lycwlgjq GOSSIP_DECAY_INTERVAL I
-	FIELD f_mfkejalq levelingUp Z
-	FIELD f_oehgyohj ITEM_FOOD_VALUES Ljava/util/Map;
-	FIELD f_pciijhkl MAX_GOSSIP_TOPICS I
-	FIELD f_pgwtjfrx REPUTATION_CHANGE_PER_EVENT I
-	FIELD f_rztkipor GATHERABLE_ITEMS Ljava/util/Set;
-	FIELD f_spyrdfat levelUpTimer I
-	FIELD f_ttvfrkxg foodLevel B
-	FIELD f_vavdbabs lastGossipDecayTime J
-	FIELD f_vqtjxsix VILLAGER_DATA Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_wnyoalkg GOLEM_SPAWN_REQUIRED_AGREEING_VILLAGERS I
-		COMMENT How many villagers should agree for a golem to be spawned.
-	FIELD f_wxmedmsu GOSSIP_COOLDOWN I
-	FIELD f_xlolrpnm chasing Z
-	FIELD f_xwoehcpe BREEDING_FOOD_REQUIRED I
-	FIELD f_yakoqnuo restocksToday I
-	FIELD f_ybyolewa experience I
-	FIELD f_ycxdmtuy gossip Lnet/minecraft/unmapped/C_vtagjako;
-	FIELD f_zkmfrefb natural Z
+	FIELD f_ajxqvfcw lastGossipDecayTime J
+	FIELD f_buldqrow ITEM_FOOD_VALUES Ljava/util/Map;
+	FIELD f_fxzlnzob levelingUp Z
+	FIELD f_godxqihz foodLevel B
+	FIELD f_hfjxwxmi gossipStartTime J
+	FIELD f_husfmqdc natural Z
+	FIELD f_iqnyhgsa lastCustomer Lnet/minecraft/unmapped/C_oqcyprzj;
+	FIELD f_jzymtuba GATHERABLE_ITEMS Ljava/util/Set;
+	FIELD f_mxpcybbc lastRestockTime J
+	FIELD f_nsvjnijv gossip Lnet/minecraft/unmapped/C_vtagjako;
+	FIELD f_pwmlqhwj levelUpTimer I
+	FIELD f_rnmascnx VILLAGER_DATA Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_srqdypwf experience I
+	FIELD f_tdcxjuty restocksToday I
+	FIELD f_tejltula SENSORS Lcom/google/common/collect/ImmutableList;
+	FIELD f_wmwevlan POINTS_OF_INTEREST Ljava/util/Map;
+	FIELD f_zdjywyaw lastRestockCheckTime J
+	FIELD f_zttbnvcq MEMORY_MODULES Lcom/google/common/collect/ImmutableList;
 	METHOD <init> (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_adtzfphv;)V
 		ARG 1 entityType
 		ARG 2 world
 		ARG 3 type
-	METHOD m_aknxudjm isNatural ()Z
-	METHOD m_bmnjgtfr needsRestock ()Z
-		COMMENT Returns whether this villager needs restock.
-		COMMENT
-		COMMENT <p>Checks if at least one of its trade offers has been used.
-	METHOD m_cetwrand clearSpecialPrices ()V
-		COMMENT Resets the special price of all the trade offers of this villager.
-	METHOD m_cjruafhn hasSeedToPlant ()Z
-	METHOD m_duluzvuy decayGossip ()V
-	METHOD m_ehqraund depleteFood (I)V
-		ARG 1 amount
-	METHOD m_envpeytv canBreed ()Z
-	METHOD m_ewrpatpw releaseAllTickets ()V
-	METHOD m_hfxrpqdx restockAndUpdateDemandBonus ()V
-	METHOD m_hgvypinh setOffers (Lnet/minecraft/unmapped/C_mgfjsgye;)V
-		ARG 1 offers
-	METHOD m_hhncermu getHighestOpenPositionOnOffset (Lnet/minecraft/unmapped/C_kkdaznyh;DD)Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_aefyhhqg (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 2 entity
+	METHOD m_aisouvro canBreed ()Z
+	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
+		ARG 0 villager
+		ARG 1 poiType
+	METHOD m_bfutlsgn canRestock ()Z
+	METHOD m_cbtsqgjb getGossip ()Lnet/minecraft/unmapped/C_vtagjako;
+	METHOD m_chpheinn updateDemandBonus ()V
+		COMMENT Updates the demand bonus of all the trade offers of this villager.
+	METHOD m_cthugaab restock ()V
+	METHOD m_dkmeaynk playWorkSound ()V
+	METHOD m_dlksntey (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
+		ARG 0 villager
+		ARG 1 poiType
+	METHOD m_dvtzjkzx createVillagerAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_pckcmlvu;
+	METHOD m_dyqgljwr getHighestOpenPositionOnOffset (Lnet/minecraft/unmapped/C_kkdaznyh;DD)Lnet/minecraft/unmapped/C_kkdaznyh;
 		ARG 1 pos
 		ARG 2 x
 		ARG 4 z
-	METHOD m_isxucwjj playWorkSound ()V
-	METHOD m_jjxgtawc restock ()V
-	METHOD m_jpgxwhgz shouldRestock ()Z
-	METHOD m_jxuueryu consumeAvailableFood ()V
-	METHOD m_jzvmteds isChasing ()Z
-	METHOD m_kksmmopy initBrain (Lnet/minecraft/unmapped/C_fexajqjr;)V
-		ARG 1 brain
-	METHOD m_krsvkhip (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
-		ARG 0 villager
-		ARG 1 poiType
-	METHOD m_lirswada eatForBreeding ()V
-	METHOD m_mqlqntgx readGossipDataNbt (Lnet/minecraft/unmapped/C_dkoravkb;)V
-		ARG 1 nbt
-	METHOD m_mumqjipw prepareOffersFor (Lnet/minecraft/unmapped/C_oqcyprzj;)V
-		ARG 1 player
-	METHOD m_mxvgdeah setExperience (I)V
-		ARG 1 amount
-	METHOD m_ovwmgola (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
-		ARG 0 villager
-		ARG 1 poiType
-	METHOD m_pevjufnz sayNo ()V
-	METHOD m_pstcotvc hasRecentlySlept (J)Z
+	METHOD m_eakrully sayNo ()V
+	METHOD m_fasewals hasRecentlySlept (J)Z
 		ARG 1 worldTime
-	METHOD m_qksxttuz beginTradeWith (Lnet/minecraft/unmapped/C_oqcyprzj;)V
+	METHOD m_fkyhmrhi beginTradeWith (Lnet/minecraft/unmapped/C_oqcyprzj;)V
 		ARG 1 customer
-	METHOD m_rpheswat wantsToStartBreeding ()Z
-	METHOD m_rtubhaja spawnIronGolem (Lnet/minecraft/unmapped/C_uihwnwdb;)Lnet/minecraft/unmapped/C_ykxmtusc;
+	METHOD m_gdptmihw hasSeedToPlant ()Z
+	METHOD m_getqeaam depleteFood (I)V
+		ARG 1 amount
+	METHOD m_gopvfpxp prepareOffersFor (Lnet/minecraft/unmapped/C_oqcyprzj;)V
+		ARG 1 player
+	METHOD m_hehkmgao releaseAllTickets ()V
+	METHOD m_hoavhyfe releaseTicketFor (Lnet/minecraft/unmapped/C_wyqoybbv;)V
+	METHOD m_husfmqdc isNatural ()Z
+	METHOD m_huyfmanq clearSpecialPrices ()V
+		COMMENT Resets the special price of all the trade offers of this villager.
+	METHOD m_ivgbpvwh reinitializeBrain (Lnet/minecraft/unmapped/C_uihwnwdb;)V
 		ARG 1 world
-	METHOD m_rupeynqk canRestock ()Z
-	METHOD m_sunfhbel getGossip ()Lnet/minecraft/unmapped/C_vtagjako;
-	METHOD m_tdhrwxho clearDailyRestockCount ()V
-	METHOD m_tuvyuwae (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
-		ARG 0 villager
-		ARG 1 poiType
-	METHOD m_ujamjrll levelUp ()V
-	METHOD m_upgonaeo summonGolem (Lnet/minecraft/unmapped/C_uihwnwdb;JI)V
-		ARG 1 world
-		ARG 2 time
-		ARG 4 requiredCount
-	METHOD m_vaxyvckc talkWithVillager (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_etbdktdp;J)V
+	METHOD m_juyfavmb talkWithVillager (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_etbdktdp;J)V
 		ARG 1 world
 		ARG 2 villager
 		ARG 3 time
-	METHOD m_vpgxezto notifyDeath (Lnet/minecraft/unmapped/C_srenftsa;)V
+	METHOD m_kiskkjxr wantsToStartBreeding ()Z
+	METHOD m_lmmsnyfi shouldRestock ()Z
+	METHOD m_lqdrypvr levelUp ()V
+	METHOD m_lwtewpje clearDailyRestockCount ()V
+	METHOD m_mgxcfkbo setOffers (Lnet/minecraft/unmapped/C_mgfjsgye;)V
+		ARG 1 offers
+	METHOD m_mhqdhkoa canSummonGolem (J)Z
+		ARG 1 time
+	METHOD m_nasqbomf restockAndUpdateDemandBonus ()V
+	METHOD m_nqaqzmji notifyDeath (Lnet/minecraft/unmapped/C_srenftsa;)V
 		ARG 1 killer
-	METHOD m_vshlbppw (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
+	METHOD m_okagndda decayGossip ()V
+	METHOD m_onyqkaqw initBrain (Lnet/minecraft/unmapped/C_fexajqjr;)V
+		ARG 1 brain
+	METHOD m_orbyxuuf canLevelUp ()Z
+	METHOD m_pluqxclg setExperience (I)V
+		ARG 1 amount
+	METHOD m_qkrkgkea eatForBreeding ()V
+	METHOD m_rofjvtxu summonGolem (Lnet/minecraft/unmapped/C_uihwnwdb;JI)V
+		ARG 1 world
+		ARG 2 time
+		ARG 4 requiredCount
+	METHOD m_rrvdwsgh getReputation (Lnet/minecraft/unmapped/C_oqcyprzj;)I
+		ARG 1 player
+	METHOD m_rsdchnou spawnIronGolem (Lnet/minecraft/unmapped/C_uihwnwdb;)Lnet/minecraft/unmapped/C_ykxmtusc;
+		ARG 1 world
+	METHOD m_snxjstnz lacksFood ()Z
+	METHOD m_tcxyumud (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
 		ARG 0 villager
 		ARG 1 poiType
-	METHOD m_wbdofnms setChasing (Z)V
-		ARG 1 chasing
-	METHOD m_xivdvfxn reinitializeBrain (Lnet/minecraft/unmapped/C_uihwnwdb;)V
-		ARG 1 world
-	METHOD m_xvnbtkvv getReputation (Lnet/minecraft/unmapped/C_oqcyprzj;)I
-		ARG 1 player
-	METHOD m_ydbfgwxn canSummonGolem (J)Z
-		ARG 1 time
-	METHOD m_yfibaxpm updateDemandBonus ()V
-		COMMENT Updates the demand bonus of all the trade offers of this villager.
-	METHOD m_ynnyuwdh createVillagerAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_sujrwhet;
-	METHOD m_yqzljilc canLevelUp ()Z
-	METHOD m_zbwdboik releaseTicketFor (Lnet/minecraft/unmapped/C_wyqoybbv;)V
-		ARG 1 memoryType
-	METHOD m_zccekgap getAvailableFood ()I
-	METHOD m_zventcwp lacksFood ()Z
+	METHOD m_urnsrwyl getAvailableFood ()I
+	METHOD m_wbvjsuky needsRestock ()Z
+		COMMENT Returns whether this villager needs restock.
+		COMMENT
+		COMMENT <p>Checks if at least one of its trade offers has been used.
+	METHOD m_xdgffetk (Lnet/minecraft/unmapped/C_etbdktdp;Lnet/minecraft/unmapped/C_grcdtzov;)Z
+		ARG 0 villager
+		ARG 1 poiType
+	METHOD m_yqeanpkb readGossipDataNbt (Lnet/minecraft/unmapped/C_dkoravkb;)V
+		ARG 1 nbt
+	METHOD m_zgctzseu consumeAvailableFood ()V

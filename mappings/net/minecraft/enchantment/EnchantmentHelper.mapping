@@ -1,25 +1,24 @@
 CLASS net/minecraft/unmapped/C_sipprkaj net/minecraft/enchantment/EnchantmentHelper
-	FIELD f_puqztmoy LEVEL_KEY Ljava/lang/String;
-	FIELD f_xpvipplr ID_KEY Ljava/lang/String;
-	METHOD m_aagdgkxt getDepthStrider (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
+	FIELD f_hujprzlx LEVEL_KEY Ljava/lang/String;
+	FIELD f_khfquepi ID_KEY Ljava/lang/String;
+	METHOD m_babcpjig isCompatible (Ljava/util/Collection;Lnet/minecraft/unmapped/C_huburtxj;)Z
+		COMMENT {@return whether the {@code candidate} enchantment is compatible with the
+		COMMENT {@code existing} enchantments}
+		ARG 0 existing
+		ARG 1 candidate
+	METHOD m_dbvvpivt getKnockback (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
 		ARG 0 entity
-	METHOD m_afrfuzwc hasFrostWalker (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+	METHOD m_dquuojbv getLooting (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
 		ARG 0 entity
-	METHOD m_aknykqea hasChanneling (Lnet/minecraft/unmapped/C_kywxadds;)Z
+	METHOD m_dwymmvhn getIdFromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_acfwypcn;
+		ARG 0 nbt
+	METHOD m_dwymmvhn getEnchantmentId (Lnet/minecraft/unmapped/C_huburtxj;)Lnet/minecraft/unmapped/C_acfwypcn;
+		ARG 0 enchantment
+	METHOD m_edrksahs getFireAspect (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
+		ARG 0 entity
+	METHOD m_fdlfjqvs (Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 0 stack
-	METHOD m_aquuhbvr (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_huburtxj;I)V
-		ARG 2 enchantment
-		ARG 3 level
-	METHOD m_atuptanm forEachEnchantment (Lnet/minecraft/unmapped/C_sipprkaj$C_nxvixhdj;Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 0 consumer
-		ARG 1 stack
-	METHOD m_azeqcfdu generateEnchantments (Ljava/util/Random;Lnet/minecraft/unmapped/C_kywxadds;IZ)Ljava/util/List;
-		COMMENT Generate the enchantments for enchanting the {@code stack}.
-		ARG 0 random
-		ARG 1 stack
-		ARG 2 level
-		ARG 3 treasureAllowed
-	METHOD m_bmuqlean enchant (Ljava/util/Random;Lnet/minecraft/unmapped/C_kywxadds;IZ)Lnet/minecraft/unmapped/C_kywxadds;
+	METHOD m_fmkodrxk enchant (Ljava/util/Random;Lnet/minecraft/unmapped/C_kywxadds;IZ)Lnet/minecraft/unmapped/C_kywxadds;
 		COMMENT Enchants the {@code target} item stack and returns it.
 		ARG 0 random
 			COMMENT the seed
@@ -29,11 +28,18 @@ CLASS net/minecraft/unmapped/C_sipprkaj net/minecraft/enchantment/EnchantmentHel
 			COMMENT the experience level
 		ARG 3 treasureAllowed
 			COMMENT whether treasure enchantments may appear
-	METHOD m_chesojyb getLevel (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_kywxadds;)I
-		COMMENT Gets the level of an enchantment on an item stack.
-		ARG 0 enchantment
-		ARG 1 stack
-	METHOD m_ezfjonvn get (Lnet/minecraft/unmapped/C_kywxadds;)Ljava/util/Map;
+	METHOD m_gcfspxfu getSweepingMultiplier (Lnet/minecraft/unmapped/C_ndyxaxsu;)F
+		ARG 0 entity
+	METHOD m_gwhhjwld (Lorg/apache/commons/lang3/mutable/MutableFloat;Lnet/minecraft/unmapped/C_kyxlunma;Lnet/minecraft/unmapped/C_huburtxj;I)V
+		ARG 2 enchantment
+		ARG 3 level
+	METHOD m_hcoszvkq getLoyalty (Lnet/minecraft/unmapped/C_kywxadds;)I
+		ARG 0 stack
+	METHOD m_hzxwgyiy hasAquaAffinity (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 0 entity
+	METHOD m_ihtrlbec hasSoulSpeed (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 0 entity
+	METHOD m_ikizyluv get (Lnet/minecraft/unmapped/C_kywxadds;)Ljava/util/Map;
 		COMMENT Gets the enchantments on an item stack.
 		COMMENT
 		COMMENT <p>For enchanted books, it retrieves from the item stack's stored than
@@ -42,25 +48,69 @@ CLASS net/minecraft/unmapped/C_sipprkaj net/minecraft/enchantment/EnchantmentHel
 		COMMENT @see ItemStack#getEnchantments()
 		COMMENT @see net.minecraft.item.EnchantedBookItem#getEnchantmentNbt(ItemStack)
 		ARG 0 stack
-	METHOD m_fgqlamfg onUserDamaged (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;)V
+	METHOD m_izmbahbn getLevelFromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)I
+		ARG 0 nbt
+	METHOD m_izmbahbn getEquipmentLevel (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_ndyxaxsu;)I
+		COMMENT {@return the highest level of the passed enchantment in the enchantment's
+		COMMENT applicable equipment slots' item stacks}
+		ARG 0 enchantment
+			COMMENT the enchantment
+		ARG 1 entity
+			COMMENT the entity whose equipment slots are checked
+	METHOD m_jygyltwx getProtectionAmount (Ljava/lang/Iterable;Lnet/minecraft/unmapped/C_vypkfxbs;)I
+		ARG 0 equipment
+		ARG 1 source
+	METHOD m_ketqkuhe getRespiration (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
+		ARG 0 entity
+	METHOD m_licurmft onTargetDamaged (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;)V
 		ARG 0 user
-		ARG 1 attacker
-	METHOD m_fvgyhyhq getLuckOfTheSea (Lnet/minecraft/unmapped/C_kywxadds;)I
+		ARG 1 target
+	METHOD m_lyxunsqo hasFrostWalker (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 0 entity
+	METHOD m_mkczngzv getDepthStrider (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
+		ARG 0 entity
+	METHOD m_mxmqxqwt getRiptide (Lnet/minecraft/unmapped/C_kywxadds;)I
 		ARG 0 stack
-	METHOD m_fwjvnldp removeConflicts (Ljava/util/List;Lnet/minecraft/unmapped/C_crukknsg;)V
-		COMMENT Remove entries conflicting with the picked entry from the possible
-		COMMENT entries.
-		ARG 0 possibleEntries
-			COMMENT the possible entries
-		ARG 1 pickedEntry
-			COMMENT the picked entry
-	METHOD m_gjqagyni (Lorg/apache/commons/lang3/mutable/MutableFloat;Lnet/minecraft/unmapped/C_kyxlunma;Lnet/minecraft/unmapped/C_huburtxj;I)V
+	METHOD m_myvilqnc getPossibleEntries (ILnet/minecraft/unmapped/C_kywxadds;Z)Ljava/util/List;
+		COMMENT Gets all the possible entries for enchanting the {@code stack} at the
+		COMMENT given {@code power}.
+		ARG 0 power
+		ARG 1 stack
+		ARG 2 treasureAllowed
+	METHOD m_ntsrjpew (Ljava/util/Map;Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_huburtxj;)V
 		ARG 2 enchantment
-		ARG 3 level
-	METHOD m_gmpsiwej forEachEnchantment (Lnet/minecraft/unmapped/C_sipprkaj$C_nxvixhdj;Ljava/lang/Iterable;)V
+	METHOD m_oatsxtvg createNbt (Lnet/minecraft/unmapped/C_acfwypcn;I)Lnet/minecraft/unmapped/C_hincwlhh;
+		ARG 0 id
+		ARG 1 lvl
+	METHOD m_pkoxvyfu getLuckOfTheSea (Lnet/minecraft/unmapped/C_kywxadds;)I
+		ARG 0 stack
+	METHOD m_qabazqin hasChanneling (Lnet/minecraft/unmapped/C_kywxadds;)Z
+		ARG 0 stack
+	METHOD m_qbqcydqv forEachEnchantment (Lnet/minecraft/unmapped/C_sipprkaj$C_qottourg;Ljava/lang/Iterable;)V
 		ARG 0 consumer
 		ARG 1 stacks
-	METHOD m_gnprnucp calculateRequiredExperienceLevel (Ljava/util/Random;IILnet/minecraft/unmapped/C_kywxadds;)I
+	METHOD m_qyxgyhzu hasVanishingCurse (Lnet/minecraft/unmapped/C_kywxadds;)Z
+		ARG 0 stack
+	METHOD m_rnojmvmi fromNbt (Lnet/minecraft/unmapped/C_rlwfthqh;)Ljava/util/Map;
+		COMMENT Loads enchantments from an NBT list.
+		ARG 0 list
+	METHOD m_rplvysbe (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_huburtxj;I)V
+		ARG 2 enchantment
+		ARG 3 level
+	METHOD m_ryvipowz writeLevelToNbt (Lnet/minecraft/unmapped/C_hincwlhh;I)V
+		ARG 0 nbt
+		ARG 1 lvl
+	METHOD m_tkghrgiu onUserDamaged (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;)V
+		ARG 0 user
+		ARG 1 attacker
+	METHOD m_ugwjjfoi (Lnet/minecraft/unmapped/C_sipprkaj$C_qottourg;Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_huburtxj;)V
+		ARG 2 enchantment
+	METHOD m_uwtwgcqf (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_huburtxj;I)V
+		ARG 2 enchantment
+		ARG 3 level
+	METHOD m_vbmbhpav getEfficiency (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
+		ARG 0 entity
+	METHOD m_vgawyxdx calculateRequiredExperienceLevel (Ljava/util/Random;IILnet/minecraft/unmapped/C_kywxadds;)I
 		COMMENT {@return the required experience level for an enchanting option in the
 		COMMENT enchanting table's screen, or the enchantment screen}
 		ARG 0 random
@@ -71,7 +121,47 @@ CLASS net/minecraft/unmapped/C_sipprkaj net/minecraft/enchantment/EnchantmentHel
 			COMMENT the number of bookshelves
 		ARG 3 stack
 			COMMENT the item stack to enchant
-	METHOD m_hvuhpamy chooseEquipmentWith (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_ndyxaxsu;)Ljava/util/Map$Entry;
+	METHOD m_vgonlhea (Lorg/apache/commons/lang3/mutable/MutableInt;Lnet/minecraft/unmapped/C_vypkfxbs;Lnet/minecraft/unmapped/C_huburtxj;I)V
+		ARG 2 enchantment
+		ARG 3 level
+	METHOD m_vqogzqdx set (Ljava/util/Map;Lnet/minecraft/unmapped/C_kywxadds;)V
+		COMMENT Sets the enchantments on an item stack.
+		COMMENT
+		COMMENT <p>For enchanted books, it sets the enchantments to the item stack's
+		COMMENT stored enchantments than regular enchantments.
+		COMMENT
+		COMMENT @see ItemStack#getEnchantments()
+		COMMENT @see net.minecraft.item.EnchantedBookItem#getEnchantmentNbt(ItemStack)
+		ARG 0 enchantments
+		ARG 1 stack
+	METHOD m_wdbtoayv hasBindingCurse (Lnet/minecraft/unmapped/C_kywxadds;)Z
+		ARG 0 stack
+	METHOD m_wndyzroy getLevel (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_kywxadds;)I
+		COMMENT Gets the level of an enchantment on an item stack.
+		ARG 0 enchantment
+		ARG 1 stack
+	METHOD m_xbbpgfme getAttackDamage (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kyxlunma;)F
+		ARG 0 stack
+		ARG 1 group
+	METHOD m_xhminkzx getLure (Lnet/minecraft/unmapped/C_kywxadds;)I
+		ARG 0 stack
+	METHOD m_xrhxhbnv forEachEnchantment (Lnet/minecraft/unmapped/C_sipprkaj$C_qottourg;Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 0 consumer
+		ARG 1 stack
+	METHOD m_yxpolfxx generateEnchantments (Ljava/util/Random;Lnet/minecraft/unmapped/C_kywxadds;IZ)Ljava/util/List;
+		COMMENT Generate the enchantments for enchanting the {@code stack}.
+		ARG 0 random
+		ARG 1 stack
+		ARG 2 level
+		ARG 3 treasureAllowed
+	METHOD m_zchlglsx removeConflicts (Ljava/util/List;Lnet/minecraft/unmapped/C_crukknsg;)V
+		COMMENT Remove entries conflicting with the picked entry from the possible
+		COMMENT entries.
+		ARG 0 possibleEntries
+			COMMENT the possible entries
+		ARG 1 pickedEntry
+			COMMENT the picked entry
+	METHOD m_zxzdyoia chooseEquipmentWith (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_ndyxaxsu;)Ljava/util/Map$Entry;
 		COMMENT {@return a pair of an equipment slot and the item stack in the supplied
 		COMMENT entity's slot} It indicates the item stack has the enchantment supplied.
 		COMMENT
@@ -81,7 +171,7 @@ CLASS net/minecraft/unmapped/C_sipprkaj net/minecraft/enchantment/EnchantmentHel
 			COMMENT the enchantment the equipped item stack must have
 		ARG 1 entity
 			COMMENT the entity to choose equipments from
-	METHOD m_iwhweeim chooseEquipmentWith (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_ndyxaxsu;Ljava/util/function/Predicate;)Ljava/util/Map$Entry;
+	METHOD m_zxzdyoia chooseEquipmentWith (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_ndyxaxsu;Ljava/util/function/Predicate;)Ljava/util/Map$Entry;
 		COMMENT {@return a pair of an equipment slot and the item stack in the supplied
 		COMMENT entity's slot} It indicates the item stack has the enchantment supplied
 		COMMENT and fulfills the extra condition.
@@ -94,97 +184,7 @@ CLASS net/minecraft/unmapped/C_sipprkaj net/minecraft/enchantment/EnchantmentHel
 			COMMENT the entity to choose equipments from
 		ARG 2 condition
 			COMMENT extra conditions for the item stack to pass for selection
-	METHOD m_jjsxfxsy onTargetDamaged (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;)V
-		ARG 0 user
-		ARG 1 target
-	METHOD m_keoaqwli getIdFromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_acfwypcn;
-		ARG 0 nbt
-	METHOD m_ktedhjmk (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 0 stack
-	METHOD m_lhknsqsv (Lnet/minecraft/unmapped/C_sipprkaj$C_nxvixhdj;Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_huburtxj;)V
-		ARG 2 enchantment
-	METHOD m_lnhzopch (Lorg/apache/commons/lang3/mutable/MutableInt;Lnet/minecraft/unmapped/C_vypkfxbs;Lnet/minecraft/unmapped/C_huburtxj;I)V
-		ARG 2 enchantment
-		ARG 3 level
-	METHOD m_lxucmhml getEquipmentLevel (Lnet/minecraft/unmapped/C_huburtxj;Lnet/minecraft/unmapped/C_ndyxaxsu;)I
-		COMMENT {@return the highest level of the passed enchantment in the enchantment's
-		COMMENT applicable equipment slots' item stacks}
-		ARG 0 enchantment
-			COMMENT the enchantment
-		ARG 1 entity
-			COMMENT the entity whose equipment slots are checked
-	METHOD m_mhdmvyiu fromNbt (Lnet/minecraft/unmapped/C_rlwfthqh;)Ljava/util/Map;
-		COMMENT Loads enchantments from an NBT list.
-		ARG 0 list
-	METHOD m_myepnenk getFireAspect (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
-		ARG 0 entity
-	METHOD m_onfumika createNbt (Lnet/minecraft/unmapped/C_acfwypcn;I)Lnet/minecraft/unmapped/C_hincwlhh;
-		ARG 0 id
-		ARG 1 lvl
-	METHOD m_pdlaycbe getLoyalty (Lnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 0 stack
-	METHOD m_pftapsai getRespiration (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
-		ARG 0 entity
-	METHOD m_pgchbhhq (Ljava/util/Map;Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_huburtxj;)V
-		ARG 2 enchantment
-	METHOD m_qhfzonov hasSoulSpeed (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-		ARG 0 entity
-	METHOD m_qklpuapz hasAquaAffinity (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-		ARG 0 entity
-	METHOD m_qlypuwkz getLevelFromNbt (Lnet/minecraft/unmapped/C_hincwlhh;)I
-		ARG 0 nbt
-	METHOD m_rbpvtngo getRiptide (Lnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 0 stack
-	METHOD m_rroqhmkk hasVanishingCurse (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 0 stack
-	METHOD m_sewmqdjd (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_huburtxj;I)V
-		ARG 2 enchantment
-		ARG 3 level
-	METHOD m_teaszukc writeLevelToNbt (Lnet/minecraft/unmapped/C_hincwlhh;I)V
-		ARG 0 nbt
-		ARG 1 lvl
-	METHOD m_tkwerklq getEfficiency (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
-		ARG 0 entity
-	METHOD m_uixwgxce isCompatible (Ljava/util/Collection;Lnet/minecraft/unmapped/C_huburtxj;)Z
-		COMMENT {@return whether the {@code candidate} enchantment is compatible with the
-		COMMENT {@code existing} enchantments}
-		ARG 0 existing
-		ARG 1 candidate
-	METHOD m_uqjzjzwb getEnchantmentId (Lnet/minecraft/unmapped/C_huburtxj;)Lnet/minecraft/unmapped/C_acfwypcn;
-		ARG 0 enchantment
-	METHOD m_uqvecnoj getSweepingMultiplier (Lnet/minecraft/unmapped/C_ndyxaxsu;)F
-		ARG 0 entity
-	METHOD m_vepcsufk getLure (Lnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 0 stack
-	METHOD m_vmmbzfmn hasBindingCurse (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 0 stack
-	METHOD m_vqwtxhby set (Ljava/util/Map;Lnet/minecraft/unmapped/C_kywxadds;)V
-		COMMENT Sets the enchantments on an item stack.
-		COMMENT
-		COMMENT <p>For enchanted books, it sets the enchantments to the item stack's
-		COMMENT stored enchantments than regular enchantments.
-		COMMENT
-		COMMENT @see ItemStack#getEnchantments()
-		COMMENT @see net.minecraft.item.EnchantedBookItem#getEnchantmentNbt(ItemStack)
-		ARG 0 enchantments
-		ARG 1 stack
-	METHOD m_whrnognp getPossibleEntries (ILnet/minecraft/unmapped/C_kywxadds;Z)Ljava/util/List;
-		COMMENT Gets all the possible entries for enchanting the {@code stack} at the
-		COMMENT given {@code power}.
-		ARG 0 power
-		ARG 1 stack
-		ARG 2 treasureAllowed
-	METHOD m_wludzpdp getAttackDamage (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kyxlunma;)F
-		ARG 0 stack
-		ARG 1 group
-	METHOD m_xryaszfj getLooting (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
-		ARG 0 entity
-	METHOD m_xtwzqvtk getKnockback (Lnet/minecraft/unmapped/C_ndyxaxsu;)I
-		ARG 0 entity
-	METHOD m_zcwsibfj getProtectionAmount (Ljava/lang/Iterable;Lnet/minecraft/unmapped/C_vypkfxbs;)I
-		ARG 0 equipment
-		ARG 1 source
-	CLASS C_nxvixhdj Consumer
-		METHOD m_fcgalbsr accept (Lnet/minecraft/unmapped/C_huburtxj;I)V
+	CLASS C_qottourg Consumer
+		METHOD accept accept (Lnet/minecraft/unmapped/C_huburtxj;I)V
 			ARG 1 enchantment
 			ARG 2 level

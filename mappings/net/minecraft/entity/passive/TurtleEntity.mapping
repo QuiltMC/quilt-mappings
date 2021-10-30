@@ -1,88 +1,79 @@
 CLASS net/minecraft/unmapped/C_asfohrss net/minecraft/entity/passive/TurtleEntity
-	FIELD f_bbxjpuox BREEDING_ITEM Lnet/minecraft/unmapped/C_vrdyspct;
-	FIELD f_dumigtsz LAND_BOUND Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_ibeshsbq BABY_TURTLE_ON_LAND_FILTER Ljava/util/function/Predicate;
-	FIELD f_keluklez TRAVEL_POS Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_nbtcpwit HAS_EGG Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_nleljphu HOME_POS Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_rnfgwcbg ACTIVELY_TRAVELLING Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_tormxdrh sandDiggingCounter I
-	FIELD f_yrlzcivd DIGGING_SAND Lnet/minecraft/unmapped/C_yxacmnir;
-	METHOD m_abqerkfe isLandBound ()Z
-	METHOD m_duqxrhde setDiggingSand (Z)V
+	FIELD f_cpyaquwq TRAVEL_POS Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_gbkwxngr BABY_TURTLE_ON_LAND_FILTER Ljava/util/function/Predicate;
+	FIELD f_kgemxzqx BREEDING_ITEM Lnet/minecraft/unmapped/C_vrdyspct;
+	FIELD f_mqwgqoxz sandDiggingCounter I
+	FIELD f_ncjmuecm DIGGING_SAND Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_ppzpkvsp HAS_EGG Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_psgxglwe ACTIVELY_TRAVELLING Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_snitxybv LAND_BOUND Lnet/minecraft/unmapped/C_yxacmnir;
+	FIELD f_xnibuxsa HOME_POS Lnet/minecraft/unmapped/C_yxacmnir;
+	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 0 entity
+	METHOD m_dgjhqsog getHomePos ()Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_dqyuezph setHomePos (Lnet/minecraft/unmapped/C_kkdaznyh;)V
+		ARG 1 pos
+	METHOD m_dvtzjkzx createTurtleAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_pckcmlvu;
+	METHOD m_eulyiogp isDiggingSand ()Z
+	METHOD m_fgunymtk isActivelyTravelling ()Z
+	METHOD m_giymbmwo setDiggingSand (Z)V
 		ARG 1 diggingSand
-	METHOD m_fuwphybm setActivelyTravelling (Z)V
-		ARG 1 travelling
-	METHOD m_gxkqbvum createTurtleAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_sujrwhet;
-	METHOD m_hsjjxkui hasEgg ()Z
-	METHOD m_hxacjbxx isActivelyTravelling ()Z
-	METHOD m_lcimenhy setTravelPos (Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 1 pos
-	METHOD m_lwfedukt getHomePos ()Lnet/minecraft/unmapped/C_kkdaznyh;
-	METHOD m_mqtzgebl isDiggingSand ()Z
-	METHOD m_ontjmvuu setHasEgg (Z)V
+	METHOD m_hjsrbhqq setHasEgg (Z)V
 		ARG 1 hasEgg
-	METHOD m_skpdoims getTravelPos ()Lnet/minecraft/unmapped/C_kkdaznyh;
-	METHOD m_tnexpeyk setHomePos (Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 1 pos
-	METHOD m_wqhsatki canSpawn (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)Z
+	METHOD m_hkyyvzsr hasEgg ()Z
+	METHOD m_koveonkz isLandBound ()Z
+	METHOD m_ludujqro canSpawn (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)Z
 		ARG 0 type
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
 		ARG 4 random
-	METHOD m_zjuuwdzk (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-		ARG 0 entity
-	METHOD m_zylsoiol setLandBound (Z)V
+	METHOD m_lwisnodu getTravelPos ()Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_msywwolg setLandBound (Z)V
 		ARG 1 landBound
-	CLASS C_bfahwpch WanderOnLandGoal
-		FIELD f_tkewfrru turtle Lnet/minecraft/unmapped/C_asfohrss;
-		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;DI)V
-			ARG 1 turtle
-			ARG 2 speed
-			ARG 4 chance
-	CLASS C_cxwzydiz TurtleMoveControl
-		FIELD f_axaedymm turtle Lnet/minecraft/unmapped/C_asfohrss;
-		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;)V
-			ARG 1 turtle
-		METHOD m_wpkuwfia updateVelocity ()V
-	CLASS C_hxaqucvg LayEggGoal
-		FIELD f_ivzynlgz turtle Lnet/minecraft/unmapped/C_asfohrss;
-		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
-			ARG 1 turtle
-			ARG 2 speed
-	CLASS C_ligrujox TravelGoal
-		FIELD f_bjpbihpy speed D
-		FIELD f_dlfrogia noPath Z
-		FIELD f_zulszljb turtle Lnet/minecraft/unmapped/C_asfohrss;
-		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
-			ARG 1 turtle
-			ARG 2 speed
-	CLASS C_rfkczguv MateGoal
-		FIELD f_zbzvygcy turtle Lnet/minecraft/unmapped/C_asfohrss;
-		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
-			ARG 1 turtle
-			ARG 2 speed
-	CLASS C_ruvzrijr TurtleSwimNavigation
+	METHOD m_pqdcjkol setTravelPos (Lnet/minecraft/unmapped/C_kkdaznyh;)V
+		ARG 1 pos
+	METHOD m_ysphbovf setActivelyTravelling (Z)V
+		ARG 1 travelling
+	CLASS C_cbjywyqw WanderInWaterGoal
+		FIELD f_zdbrnvre turtle Lnet/minecraft/unmapped/C_asfohrss;
+	CLASS C_ciptrbyj TurtleSwimNavigation
 		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;Lnet/minecraft/unmapped/C_nbzftcdc;)V
 			ARG 1 owner
 			ARG 2 world
-	CLASS C_sndlmkmg GoHomeGoal
-		FIELD f_aoxpjrzv homeReachingTryTicks I
-		FIELD f_prhvrmrk GIVE_UP_TICKS I
-		FIELD f_rttwnlku noPath Z
-		FIELD f_sudqatxv turtle Lnet/minecraft/unmapped/C_asfohrss;
-		FIELD f_tyhdjkse speed D
+	CLASS C_kerlmmuu MateGoal
+		FIELD f_zdbrnvre turtle Lnet/minecraft/unmapped/C_asfohrss;
 		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
 			ARG 1 turtle
 			ARG 2 speed
-	CLASS C_vczipwcm TurtleEscapeDangerGoal
+	CLASS C_minqhxpu TravelGoal
+		FIELD f_vijitczk speed D
+		FIELD f_wvjxgxuo noPath Z
+		FIELD f_zdbrnvre turtle Lnet/minecraft/unmapped/C_asfohrss;
 		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
 			ARG 1 turtle
 			ARG 2 speed
-	CLASS C_xcjwumhg WanderInWaterGoal
-		FIELD f_qaqewezk GIVE_UP_TICKS I
-		FIELD f_ynzsildy turtle Lnet/minecraft/unmapped/C_asfohrss;
+	CLASS C_phjpxttw WanderOnLandGoal
+		FIELD f_zdbrnvre turtle Lnet/minecraft/unmapped/C_asfohrss;
+	CLASS C_tckjncgf TurtleEscapeDangerGoal
 		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
 			ARG 1 turtle
 			ARG 2 speed
+	CLASS C_txszpipk GoHomeGoal
+		FIELD f_rwfeuolq homeReachingTryTicks I
+		FIELD f_vijitczk speed D
+		FIELD f_wvjxgxuo noPath Z
+		FIELD f_zdbrnvre turtle Lnet/minecraft/unmapped/C_asfohrss;
+		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
+			ARG 1 turtle
+			ARG 2 speed
+	CLASS C_usiskzkw LayEggGoal
+		FIELD f_zdbrnvre turtle Lnet/minecraft/unmapped/C_asfohrss;
+		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;D)V
+			ARG 1 turtle
+			ARG 2 speed
+	CLASS C_zhhfeybz TurtleMoveControl
+		FIELD f_zdbrnvre turtle Lnet/minecraft/unmapped/C_asfohrss;
+		METHOD <init> (Lnet/minecraft/unmapped/C_asfohrss;)V
+			ARG 1 turtle
+		METHOD m_jnqodydx updateVelocity ()V
