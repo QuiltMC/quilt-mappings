@@ -1,14 +1,45 @@
 CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
+	FIELD f_ayaiikpa REPELLENT_DETECTION_RANGE_VERTICAL I
 	FIELD f_bykpcatk HUNT_MEMORY_DURATION Lnet/minecraft/unmapped/C_ivtmlivh;
+	FIELD f_byzxlsll DANCING_SPEED_MULTIPLIER F
+	FIELD f_chhwohpi AVOIDING_SPEED_MULTIPLIER F
+	FIELD f_coziaoco CANT_REACH_ITEM_DISABLE_ADMIRE_WALKING_TIME I
+	FIELD f_gruuihju MOUNTING_SPEED_MULTIPLIER F
+	FIELD f_hercspme REPELLENT_DETECTION_RANGE_HORIZONTAL I
+	FIELD f_hplohtwf CELEBRATION_TIME I
 	FIELD f_irmqvovd BARTERING_ITEM Lnet/minecraft/unmapped/C_xanddrov;
+	FIELD f_iswcdxov RETREATING_SPEED_MULTIPLIER F
+	FIELD f_jmbtzdfk HIT_BY_PLAYER_MEMORY_TIMEOUT I
+	FIELD f_jxekmooh GOING_TO_CELEBRATE_LOCATION_SPEED_MULTIPLIER F
+	FIELD f_kddjhoti START_RIDING_MAX_WALK_DISTANCE I
+	FIELD f_mpdlkpvm ADMIRE_DURATION I
+	FIELD f_msursabh CELEBRATION_DANCE_PROBABILITY F
+	FIELD f_pbgfvach PLAYER_ANGER_RANGE I
+	FIELD f_psdijhfu DESIRED_DISTANCE_FROM_ENTITY_WHEN_AVOIDING I
+	FIELD f_pyiyshcs MELEE_ATTACK_COOLDOWN I
+	FIELD f_qoxjfekz HOLDING_CROSSBOW_MIN_DISTANCE_FROM_TARGET I
 	FIELD f_sovcwpdr GO_TO_ZOMBIFIED_MEMORY_DURATION Lnet/minecraft/unmapped/C_ivtmlivh;
+	FIELD f_syxzsfme GOING_TO_WANTED_ITEM_SPEED_MULTIPLIER F
+	FIELD f_urzmnoep PLAYER_HOLDING_LIKED_ITEM_MAX_LOOK_DISTANCE I
+	FIELD f_usoumkku INTERACTION_RANGE I
+	FIELD f_viuahkdp EAT_COOLDOWN I
+	FIELD f_wexnmkde MAX_LOOK_DISTANCE I
+	FIELD f_wllpllsa WALK_TO_ITEM_MAX_TIME I
+	FIELD f_wwxlbdpp STRAFING_BACK_FROM_TARGET_SPEED F
+	FIELD f_xjvobzyb ANGER_DURATION I
+	FIELD f_yapptfqk BABY_FLEE_DURATION_AFTER_GETTING_HIT I
 	FIELD f_yfycmrec AVOID_MEMORY_DURATION Lnet/minecraft/unmapped/C_ivtmlivh;
 	FIELD f_yikqndkp RIDE_TARGET_MEMORY_DURATION Lnet/minecraft/unmapped/C_ivtmlivh;
+	FIELD f_ynwcjyqp IDLING_SPEED_MULTIPLIER F
+	FIELD f_yqczovcj ZOMBIFIED_PIGLINS_DESIRED_DISTANCE I
+	FIELD f_zdetssvu WALK_TO_ITEM_MAX_DISTANCE I
 	FIELD f_zunukwir MEMORY_TRANSFER_TASK_DURATION Lnet/minecraft/unmapped/C_ivtmlivh;
 	FIELD f_zvzbhclo GO_TO_NEMESIS_MEMORY_DURATION Lnet/minecraft/unmapped/C_ivtmlivh;
 	METHOD m_abjlgxxo angerAtIfCloser (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
 		ARG 0 piglin
 		ARG 1 target
+	METHOD m_berdtrle hasPlayerHoldingWantedItemNearby (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
+		ARG 0 piglin
 	METHOD m_bgdufvou tickActivities (Lnet/minecraft/unmapped/C_bndnqhkl;)V
 		ARG 0 piglin
 	METHOD m_bwfrnmsk hasTargetToAvoid (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
@@ -17,9 +48,13 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 		ARG 0 piglin
 		ARG 1 barter
 	METHOD m_cgbbcmkc makeGoToSoulFireTask ()Lnet/minecraft/unmapped/C_tpobmyth;
+	METHOD m_chxfghob (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 1 entity
 	METHOD m_ctpbvgbg addFightActivities (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_fexajqjr;)V
 		ARG 0 piglin
 		ARG 1 brain
+	METHOD m_dhdhkowi (Lnet/minecraft/unmapped/C_fxohddmi;)V
+		ARG 0 piglinEntity
 	METHOD m_dmxmhcuz isPreferredAttackTarget (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
 		ARG 0 piglin
 		ARG 1 target
@@ -34,6 +69,8 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 	METHOD m_eludfazz loot (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_gnjizpqu;)V
 		ARG 0 piglin
 		ARG 1 drop
+	METHOD m_emqrejdc (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_oqcyprzj;)V
+		ARG 1 player
 	METHOD m_epoptxmm becomeAngryWithPlayer (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
 		ARG 0 piglin
 		ARG 1 player
@@ -46,12 +83,16 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 		ARG 0 piglin
 	METHOD m_fribycum hasSoulFireNearby (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
 		ARG 0 piglin
+	METHOD m_ftzvfgia (Lnet/minecraft/unmapped/C_fxohddmi;)Z
+		ARG 0 piglinEntity
 	METHOD m_gcbcpuhd isGoldHoldingPlayer (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
 		ARG 0 target
 	METHOD m_gentdkzr haveHuntedHoglinsRecently (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
 		ARG 0 piglin
 	METHOD m_gogozsos getAngryAt (Lnet/minecraft/unmapped/C_fxohddmi;)Ljava/util/Optional;
 		ARG 0 piglin
+	METHOD m_gyjxacyn (Lnet/minecraft/unmapped/C_fxohddmi;)Z
+		ARG 0 abstractPiglinEntity
 	METHOD m_hailykgo hasBeenHitByPlayer (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
 		ARG 0 piglin
 	METHOD m_hbsdadfx canRideHoglin (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
@@ -80,6 +121,7 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 		ARG 0 brain
 	METHOD m_lrkaydom drop (Lnet/minecraft/unmapped/C_bndnqhkl;Ljava/util/List;Lnet/minecraft/unmapped/C_xxfpupgv;)V
 		ARG 0 piglin
+		ARG 1 items
 	METHOD m_ltsxwmnw runAwayFrom (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
 		ARG 0 piglin
 		ARG 1 target
@@ -92,10 +134,14 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 		ARG 0 piglin
 	METHOD m_nesbifee dropBarteredItem (Lnet/minecraft/unmapped/C_bndnqhkl;Ljava/util/List;)V
 		ARG 0 piglin
+		ARG 1 items
+	METHOD m_nizfjzvu (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_fexajqjr;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 2 entity
 	METHOD m_nsabcczu pickupItemWithOffHand (Lnet/minecraft/unmapped/C_bndnqhkl;)V
 		ARG 0 piglin
 	METHOD m_nvsxlnxo doBarter (Lnet/minecraft/unmapped/C_bndnqhkl;Ljava/util/List;)V
 		ARG 0 piglin
+		ARG 1 items
 	METHOD m_ohkwazxa acceptsForBarter (Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 0 stack
 	METHOD m_oshrcvrv canRide (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_srenftsa;)Z
@@ -121,6 +167,8 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 	METHOD m_qoubdzvx swapItemWithOffHand (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_kywxadds;)V
 		ARG 0 piglin
 		ARG 1 stack
+	METHOD m_qrxrxwjq (ZLnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_bndnqhkl;)Z
+		ARG 2 piglin
 	METHOD m_qvvxqkuh isFood (Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 0 stack
 	METHOD m_qwdfmfsg create (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_fexajqjr;)Lnet/minecraft/unmapped/C_fexajqjr;
@@ -164,9 +212,15 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 	METHOD m_vdxcnnil groupRunAwayFrom (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
 		ARG 0 piglin
 		ARG 1 target
+	METHOD m_vezccpsj (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_wlxgpmqg;)Lnet/minecraft/unmapped/C_yazovava;
+		ARG 1 activity
 	METHOD m_vurzcfvb hasBeenHurt (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
 		ARG 0 piglin
+	METHOD m_vxkmbefs (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 1 entity
 	METHOD m_whjsutkx makeRandomWanderTask ()Lnet/minecraft/unmapped/C_gnvsxrjn;
+	METHOD m_wuwjrvmd (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
+		ARG 0 piglin
 	METHOD m_xbzujxyb isZombified (Lnet/minecraft/unmapped/C_rbvsvago;)Z
 		ARG 0 entityType
 	METHOD m_xdxfcxar hasIdleActivity (Lnet/minecraft/unmapped/C_fxohddmi;)Z
@@ -176,6 +230,8 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 	METHOD m_xjxxtnnh tryRevenge (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
 		ARG 0 piglin
 		ARG 1 target
+	METHOD m_xrlslrou (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_fxohddmi;)V
+		ARG 1 piglinEntity
 	METHOD m_xzwlnvtn isHoldingCrossbow (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
 		ARG 0 piglin
 	METHOD m_yrahxdhm hasAteRecently (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
@@ -191,5 +247,6 @@ CLASS net/minecraft/unmapped/C_ckloepxm net/minecraft/entity/mob/PiglinBrain
 	METHOD m_ztldqoln dropBarteredItem (Lnet/minecraft/unmapped/C_bndnqhkl;Lnet/minecraft/unmapped/C_oqcyprzj;Ljava/util/List;)V
 		ARG 0 piglin
 		ARG 1 player
+		ARG 2 items
 	METHOD m_zxjekijs getNearestZombifiedPiglin (Lnet/minecraft/unmapped/C_bndnqhkl;)Z
 		ARG 0 piglin

@@ -1,13 +1,17 @@
 CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEntity
+	FIELD f_afmztglq INVENTORY_SLOT_OFFSET I
 	FIELD f_ayvnxuzu EATING_GRASS_FLAG I
 	FIELD f_bpqjpcer items Lnet/minecraft/unmapped/C_xzwiolsr;
 	FIELD f_ckmxxcqy eatingAnimationProgress F
+	FIELD f_dcycavbg CHEST_SLOT_OFFSET I
 	FIELD f_egrjbvjv temper I
+	FIELD f_emxcsset sprintCounter I
 	FIELD f_esxkkyjl HORSE_FLAGS Lnet/minecraft/unmapped/C_yxacmnir;
 	FIELD f_fnclrfba tailWagTicks I
 	FIELD f_fuavveju playExtraHorseSounds Z
 	FIELD f_ggeihkvn BRED_FLAG I
 	FIELD f_gseidbzv TAMED_FLAG I
+	FIELD f_igunohtq SADDLE_INVENTORY_SLOT I
 	FIELD f_ikploywc OWNER_UUID Lnet/minecraft/unmapped/C_yxacmnir;
 	FIELD f_iykcvesh IS_BRED_HORSE Ljava/util/function/Predicate;
 	FIELD f_jqctnmns eatingGrassTicks I
@@ -16,6 +20,7 @@ CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEn
 	FIELD f_knvssdtz soundTicks I
 	FIELD f_lwnlttit SADDLED_FLAG I
 	FIELD f_lzrmcjpv eatingGrassAnimationProgress F
+	FIELD f_phpygaqu ARMOR_INVENTORY_SLOT I
 	FIELD f_ppvwivqc EATING_FLAG I
 	FIELD f_psryinvy lastEatingGrassAnimationProgress F
 	FIELD f_qddzeaew lastEatingAnimationProgress F
@@ -24,6 +29,7 @@ CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEn
 	FIELD f_sccwrmoe PARENT_HORSE_PREDICATE Lnet/minecraft/unmapped/C_hnihytjc;
 	FIELD f_sjnshvoq angryAnimationProgress F
 	FIELD f_tvvncwou jumping Z
+	FIELD f_vwhkjhke INVENTORY_BASE_SIZE I
 	FIELD f_wpsogbqs angryTicks I
 	FIELD f_xdbwnktm eatingTicks I
 	FIELD f_xzslhnng inAir Z
@@ -101,6 +107,8 @@ CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEn
 		COMMENT
 		COMMENT <p>This is used by horse armors and llama carpets, but can be
 		COMMENT refitted to any purpose.
+	METHOD m_ttaqnhqz isDifferentInventory (Lnet/minecraft/unmapped/C_qojtstjp;)Z
+		ARG 1 inventory
 	METHOD m_ufohukta bondWithPlayer (Lnet/minecraft/unmapped/C_oqcyprzj;)Z
 		ARG 1 player
 	METHOD m_ukbbiwau playAngrySound ()V
@@ -130,3 +138,6 @@ CLASS net/minecraft/unmapped/C_jahynztk net/minecraft/entity/passive/HorseBaseEn
 		COMMENT Whether this horse already has an item stack in its horse armor slot.
 		COMMENT
 		COMMENT @see #hasArmorSlot()
+	METHOD m_zxhshbhk getDismountLocation (Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_ndyxaxsu;)Lnet/minecraft/unmapped/C_xxfpupgv;
+		ARG 1 dismountDirection
+		ARG 2 passenger
