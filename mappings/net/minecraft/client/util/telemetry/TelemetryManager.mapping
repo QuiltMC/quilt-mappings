@@ -1,0 +1,44 @@
+CLASS net/minecraft/unmapped/C_wwbyxkgc net/minecraft/client/util/telemetry/TelemetryManager
+	FIELD f_dgegipht session Lcom/mojang/authlib/minecraft/TelemetrySession;
+	FIELD f_dkujvsyq client Lnet/minecraft/unmapped/C_diboefya;
+	FIELD f_egikwkbj TELEMETRY_SENDER_COUNTER Ljava/util/concurrent/atomic/AtomicInteger;
+	FIELD f_igtmozun gameModeData Lnet/minecraft/unmapped/C_wwbyxkgc$C_fsjxjpon;
+	FIELD f_qmsnnjid serverBrand Ljava/lang/String;
+	FIELD f_qpilocfm sent Z
+	FIELD f_ywwymtzy TELEMETRY_SENDER_EXECUTOR Ljava/util/concurrent/Executor;
+	METHOD <init> (Lnet/minecraft/unmapped/C_diboefya;Lcom/mojang/authlib/minecraft/UserApiService;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/UUID;)V
+		ARG 1 client
+		ARG 2 userApiService
+		ARG 3 userId
+		ARG 4 clientId
+		ARG 5 deviceSessionId
+	METHOD m_aiwjwbjb (Ljava/lang/Runnable;)Ljava/lang/Thread;
+		ARG 0 action
+	METHOD m_ajbqkwpi setServerBrandAndSend (Ljava/lang/String;)V
+		ARG 1 serverBrand
+	METHOD m_bshxffst getServerType ()Ljava/lang/String;
+	METHOD m_ejajndgj setGameModeAndSend (Lnet/minecraft/unmapped/C_lvypchgl;Z)V
+		ARG 1 gameMode
+		ARG 2 hardcore
+	METHOD m_keocvfsv addProperty (Ljava/lang/String;Ljava/util/Optional;Lcom/mojang/authlib/minecraft/TelemetryPropertyContainer;)V
+		ARG 0 key
+		ARG 1 possibleValue
+		ARG 2 container
+	METHOD m_meaogvwf send (Lnet/minecraft/unmapped/C_wwbyxkgc$C_fsjxjpon;)V
+		ARG 1 gameModeData
+	METHOD m_mgubduio send ()V
+	METHOD m_yjzklmde (Lcom/mojang/authlib/minecraft/TelemetryPropertyContainer;)V
+		ARG 0 container
+	METHOD m_zhrfmrti (Lcom/mojang/authlib/minecraft/TelemetryPropertyContainer;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 2 value
+	CLASS C_fsjxjpon GameModeData
+		FIELD f_jmqhyqbh gameMode Lnet/minecraft/unmapped/C_lvypchgl;
+		FIELD f_spktxlli hardcore Z
+		METHOD <init> (Lnet/minecraft/unmapped/C_lvypchgl;Z)V
+			ARG 1 gameMode
+			ARG 2 hardcore
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_jmqhyqbh gameMode ()Lnet/minecraft/unmapped/C_lvypchgl;
+		METHOD m_nvskssql toId ()I
+		METHOD m_spktxlli hardcore ()Z
