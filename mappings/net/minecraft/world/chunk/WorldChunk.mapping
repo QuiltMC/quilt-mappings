@@ -1,5 +1,7 @@
 CLASS net/minecraft/unmapped/C_qklvsdrh net/minecraft/world/chunk/WorldChunk
+	FIELD f_bjpsobpo blockTickScheduler Lnet/minecraft/unmapped/C_ejuwkzzv;
 	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_dswngtwk fluidTickScheduler Lnet/minecraft/unmapped/C_ejuwkzzv;
 	FIELD f_jtjfctky gameEventDispatchers Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	FIELD f_oftvgbcf levelTypeProvider Ljava/util/function/Supplier;
 	FIELD f_okfulwkr world Lnet/minecraft/unmapped/C_nbzftcdc;
@@ -7,8 +9,22 @@ CLASS net/minecraft/unmapped/C_qklvsdrh net/minecraft/world/chunk/WorldChunk
 	FIELD f_tqakdlob loadedToWorld Z
 	FIELD f_whiwhhfs EMPTY_BLOCK_ENTITY_TICKER Lnet/minecraft/unmapped/C_xhzcfnzq;
 	FIELD f_wuzljoqc blockEntityTickers Ljava/util/Map;
+	METHOD <init> (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_utrzsrny;)V
+		ARG 1 world
+		ARG 2 pos
+	METHOD <init> (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_nxvgvirj;Lnet/minecraft/unmapped/C_ejuwkzzv;Lnet/minecraft/unmapped/C_ejuwkzzv;J[Lnet/minecraft/unmapped/C_fgfsorua;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_avyoogzg;)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 upgradeData
+		ARG 4 blockTickScheduler
+		ARG 5 fluidTickScheduler
+		ARG 6 inhabitedTime
+		ARG 8 sectionArrayInitializer
+		ARG 9 loadToWorldConsumer
 	METHOD <init> (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_raegxbez;Ljava/util/function/Consumer;)V
+		ARG 1 world
 		ARG 2 protoChunk
+		ARG 3 loadToWorldConsumer
 	METHOD m_aocmkjzo createBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_hmfagevk;
 		ARG 1 pos
 	METHOD m_aycrmpdr removeBlockEntityTicker (Lnet/minecraft/unmapped/C_kkdaznyh;)V

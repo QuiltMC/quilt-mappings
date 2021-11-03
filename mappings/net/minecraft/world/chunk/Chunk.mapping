@@ -1,22 +1,90 @@
 CLASS net/minecraft/unmapped/C_rqmmmzwl net/minecraft/world/chunk/Chunk
 	COMMENT Represents a scoped, modifiable view of biomes, block states, fluid states and block entities.
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_cguovbdk heightLimitView Lnet/minecraft/unmapped/C_byoninpq;
+	FIELD f_fgmuxjac structureStarts Ljava/util/Map;
+	FIELD f_hgryubbb pos Lnet/minecraft/unmapped/C_utrzsrny;
+	FIELD f_hiqoschn heightmaps Ljava/util/Map;
+	FIELD f_jrqiyzkg sectionArray [Lnet/minecraft/unmapped/C_fgfsorua;
+	FIELD f_mhygzcvw needsSaving Z
+	FIELD f_mvixdfqd blockEntityNbts Ljava/util/Map;
+	FIELD f_olwjivix chunkNoiseSampler Lnet/minecraft/unmapped/C_unqwyjvr;
+	FIELD f_rmimlers postProcessingLists [Lit/unimi/dsi/fastutil/shorts/ShortList;
+	FIELD f_rsernlie biome Lnet/minecraft/unmapped/C_sfepklro;
+	FIELD f_rvlhqwpq inhabitedTime J
+	FIELD f_scysbhie upgradeData Lnet/minecraft/unmapped/C_nxvgvirj;
+	FIELD f_uozzyfkb structureReferences Ljava/util/Map;
+	FIELD f_vdncpeue blockEntities Ljava/util/Map;
+	FIELD f_wfyutqqi lightCorrect Z
+	METHOD <init> (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_nxvgvirj;Lnet/minecraft/unmapped/C_byoninpq;Lnet/minecraft/unmapped/C_ksqjyxqt;J[Lnet/minecraft/unmapped/C_fgfsorua;Lnet/minecraft/unmapped/C_avyoogzg;)V
+		ARG 1 pos
+		ARG 2 upgradeData
+		ARG 3 heightLimitView
+		ARG 4 biomeRegistry
+		ARG 5 inhabitedTime
+		ARG 7 sectionArrayInitializer
 	METHOD m_anadxegs areSectionsEmptyBetween (II)Z
 		ARG 1 lowerHeight
 		ARG 2 upperHeight
+	METHOD m_aqyepaxr getSection (I)Lnet/minecraft/unmapped/C_fgfsorua;
+		ARG 1 section
+	METHOD m_creidnep sampleHeightmap (Lnet/minecraft/unmapped/C_ckeotzby$C_ghoiecox;II)I
+		ARG 1 type
+		ARG 2 x
+		ARG 3 z
+	METHOD m_cxucppnl getSectionArray ()[Lnet/minecraft/unmapped/C_fgfsorua;
+	METHOD m_eclbqtmb getInhabitedTime ()J
+	METHOD m_eliiejjt getHeightmaps ()Ljava/util/Collection;
+	METHOD m_exzwrvwt getHeightmap (Lnet/minecraft/unmapped/C_ckeotzby$C_ghoiecox;)Lnet/minecraft/unmapped/C_ckeotzby;
+		ARG 1 type
+	METHOD m_fmkcqqyj setInhabitedTime (J)V
+		ARG 1 inhabitedTime
+	METHOD m_ftdrcweb isOldNoise ()Z
 	METHOD m_gfkfoiov setBlockEntity (Lnet/minecraft/unmapped/C_hmfagevk;)V
 		ARG 1 blockEntity
+	METHOD m_gqxhhbzv getBlockEntityNbt (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_hincwlhh;
+		ARG 1 pos
+	METHOD m_hkrlodmb getPostProcessingLists ()[Lit/unimi/dsi/fastutil/shorts/ShortList;
+	METHOD m_ibedbznd needsSaving ()Z
 	METHOD m_iostgvmp markBlockForPostProcessing (SI)V
 		ARG 1 packedPos
 		ARG 2 index
+	METHOD m_jhiybzsu hasStructureReferences ()Z
 	METHOD m_jiposhhh setHeightmap (Lnet/minecraft/unmapped/C_ckeotzby$C_ghoiecox;[J)V
 		ARG 1 type
 		ARG 2 heightmap
+	METHOD m_josqtarg setLightCorrect (Z)V
+		ARG 1 lightCorrect
 	METHOD m_jqotwkps getList ([Lit/unimi/dsi/fastutil/shorts/ShortList;I)Lit/unimi/dsi/fastutil/shorts/ShortList;
 		ARG 0 lists
 		ARG 1 index
+	METHOD m_kgmnyuut sampleMaxHeightmap (Lnet/minecraft/unmapped/C_ckeotzby$C_ghoiecox;)Lnet/minecraft/unmapped/C_kkdaznyh;
+		ARG 1 type
+	METHOD m_lknqxavn setStructureStarts (Ljava/util/Map;)V
+		ARG 1 structureStarts
+	METHOD m_lsagbfhw (Lnet/minecraft/unmapped/C_fpbotmvv;)Lit/unimi/dsi/fastutil/longs/LongSet;
+		ARG 0 structureFeature
+	METHOD m_lsqzmoyu getFluidTickScheduler ()Lnet/minecraft/unmapped/C_uyypmwcn;
+	METHOD m_lxzjeqyh setNeedsSaving (Z)V
+		ARG 1 needsSaving
+	METHOD m_mgwvadjr setBlockEntityNbt (Lnet/minecraft/unmapped/C_hincwlhh;)V
+		ARG 1 nbt
+	METHOD m_nejcipvd getUpgradeData ()Lnet/minecraft/unmapped/C_nxvgvirj;
+	METHOD m_nflenswe (Lnet/minecraft/unmapped/C_ckeotzby$C_ghoiecox;)Lnet/minecraft/unmapped/C_ckeotzby;
+		ARG 1 heightmapType
+	METHOD m_nplthvok (Lnet/minecraft/unmapped/C_fpbotmvv;)Lit/unimi/dsi/fastutil/longs/LongSet;
+		ARG 0 structureFeature
+	METHOD m_nziezmbw getStructureStarts ()Ljava/util/Map;
+	METHOD m_olwjivix getOrCreateChunkNoiseSampler (IIIIIILnet/minecraft/unmapped/C_wgwzecpu;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_cxzdhgpj$C_urbbntvy;Lnet/minecraft/unmapped/C_ulszoqfp;)Lnet/minecraft/unmapped/C_unqwyjvr;
+	METHOD m_oxqqkhup setBiomesFromNoise (Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_ygdawqho$C_veuekhcq;)V
+		ARG 1 biomeSource
+		ARG 2 sampler
 	METHOD m_pgwjxezf getStatus ()Lnet/minecraft/unmapped/C_tzhztgok;
 	METHOD m_rmczngby removeBlockEntity (Lnet/minecraft/unmapped/C_kkdaznyh;)V
 		ARG 1 pos
+	METHOD m_rsernlie getOrCreateBiome (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_sfepklro;
+		ARG 1 biomeFactory
+	METHOD m_srrjjook getBlockTickScheduler ()Lnet/minecraft/unmapped/C_uyypmwcn;
 	METHOD m_texlrioo markBlockForPostProcessing (Lnet/minecraft/unmapped/C_kkdaznyh;)V
 		ARG 1 pos
 	METHOD m_tgeqapoo addEntity (Lnet/minecraft/unmapped/C_srenftsa;)V
@@ -26,9 +94,30 @@ CLASS net/minecraft/unmapped/C_rqmmmzwl net/minecraft/world/chunk/Chunk
 		ARG 2 state
 		ARG 3 moved
 	METHOD m_tycihtst getHighestNonEmptySection ()Lnet/minecraft/unmapped/C_fgfsorua;
+	METHOD m_uleogbpg increaseInhabitedTime (J)V
+		ARG 1 delta
 	METHOD m_vjsltdjm getLightSourcesStream ()Ljava/util/stream/Stream;
 	METHOD m_vufekrop getPackedBlockEntityNbt (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_hincwlhh;
 		ARG 1 pos
+	METHOD m_wfyutqqi isLightCorrect ()Z
+	METHOD m_wtcjfbvh getBlockEntityPositions ()Ljava/util/Set;
+	METHOD m_xdpdggqc fillSectionArray (Lnet/minecraft/unmapped/C_byoninpq;Lnet/minecraft/unmapped/C_ksqjyxqt;[Lnet/minecraft/unmapped/C_fgfsorua;)V
+		ARG 0 world
+		ARG 1 biomeRegistry
+		ARG 2 sectionArray
+	METHOD m_xonlebrs hasHeightmap (Lnet/minecraft/unmapped/C_ckeotzby$C_ghoiecox;)Z
+		ARG 1 type
 	METHOD m_xxcfhyih getHighestNonEmptySectionYOffset ()I
 	METHOD m_xzptxecb getGameEventDispatcher (I)Lnet/minecraft/unmapped/C_iqpbbmct;
 		ARG 1 ySectionCoord
+	METHOD m_zforfvyp getPos ()Lnet/minecraft/unmapped/C_utrzsrny;
+	CLASS C_yekwamlq
+		FIELD f_dmtcwqct blocks Lnet/minecraft/unmapped/C_lipwvxeh;
+		FIELD f_egqphbob fluids Lnet/minecraft/unmapped/C_lipwvxeh;
+		METHOD <init> (Lnet/minecraft/unmapped/C_lipwvxeh;Lnet/minecraft/unmapped/C_lipwvxeh;)V
+			ARG 1 blocks
+			ARG 2 fluids
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_dmtcwqct blocks ()Lnet/minecraft/unmapped/C_lipwvxeh;
+		METHOD m_egqphbob fluids ()Lnet/minecraft/unmapped/C_lipwvxeh;
