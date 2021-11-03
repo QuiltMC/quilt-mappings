@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_ynfzljez net/minecraft/entity/passive/RabbitEntity
 	FIELD f_amstxzns moreCarrotTicks I
+	FIELD f_bpeyuyax KILLER_BUNNY_ATTACK_POWER I
 	FIELD f_bzowfaxz jumpDuration I
 	FIELD f_cqsjmifb RABBIT_TYPE Lnet/minecraft/unmapped/C_yxacmnir;
 	FIELD f_fqbqiehu WHITE_TYPE I
@@ -7,11 +8,17 @@ CLASS net/minecraft/unmapped/C_ynfzljez net/minecraft/entity/passive/RabbitEntit
 	FIELD f_jnttacfk ticksUntilJump I
 	FIELD f_lmhrfjqk jumpTicks I
 	FIELD f_mgvxwvfu GOLD_TYPE I
+	FIELD f_mmgcenhv BREEDING_SPEED_MODIFIER D
 	FIELD f_pbczipki lastOnGround Z
+	FIELD f_pztxnysk MORE_CARROTS_DELAY I
 	FIELD f_qlzrngoz KILLER_BUNNY Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_rkijxyat STROLL_SPEED_MODIFIER D
 	FIELD f_rntybpxt ESCAPE_SPEED D
 	FIELD f_scnjemuo WHITE_SPOTTED_TYPE I
+	FIELD f_swgjalnx KILLER_BUNNY_ARMOR I
 	FIELD f_vaucpzov BROWN_TYPE I
+	FIELD f_vcuttrwi FOLLOWING_SPEED_MODIFIER D
+	FIELD f_xpbvuidx ATTACK_SPEED_MODIFIER D
 	FIELD f_xqfzeszj BLACK_TYPE I
 	FIELD f_yjgobqzh SALT_TYPE I
 	METHOD m_aisouvro wantsCarrots ()Z
@@ -23,8 +30,10 @@ CLASS net/minecraft/unmapped/C_ynfzljez net/minecraft/entity/passive/RabbitEntit
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
+		ARG 4 random
 	METHOD m_grcuvmnn setRabbitType (I)V
 		ARG 1 rabbitType
+	METHOD m_hdxdaunp enableJumpControl ()V
 	METHOD m_iicyrrqw getJumpSound ()Lnet/minecraft/unmapped/C_yazovava;
 	METHOD m_lzxgmwhm chooseType (Lnet/minecraft/unmapped/C_elysbvdv;)I
 		ARG 1 world
@@ -37,6 +46,7 @@ CLASS net/minecraft/unmapped/C_ynfzljez net/minecraft/entity/passive/RabbitEntit
 	METHOD m_slxzyjdk isTempting (Lnet/minecraft/unmapped/C_kywxadds;)Z
 		ARG 0 stack
 	METHOD m_tgfqjukr scheduleJump ()V
+	METHOD m_uwzhlzsm disableJumpControl ()V
 	METHOD m_ywcqwsnd setSpeed (D)V
 		ARG 1 speed
 	CLASS C_ewnhihua EatCarrotCropGoal
@@ -46,8 +56,14 @@ CLASS net/minecraft/unmapped/C_ynfzljez net/minecraft/entity/passive/RabbitEntit
 		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;)V
 			ARG 1 rabbit
 	CLASS C_fvpflisf RabbitJumpControl
+		FIELD f_kapzuzgf enabled Z
 		FIELD f_nxjvflbu rabbit Lnet/minecraft/unmapped/C_ynfzljez;
+		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;)V
+			ARG 1 rabbit
+		METHOD m_fclfbuxf setEnabled (Z)V
+			ARG 1 enabled
 		METHOD m_hrvtyomb isActive ()Z
+		METHOD m_kapzuzgf isEnabled ()Z
 	CLASS C_imunocfy FleeGoal
 		FIELD f_nxjvflbu rabbit Lnet/minecraft/unmapped/C_ynfzljez;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;Ljava/lang/Class;FDD)V

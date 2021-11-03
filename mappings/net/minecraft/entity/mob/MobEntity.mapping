@@ -1,8 +1,10 @@
 CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	FIELD f_bbffxoxc holdingEntityId I
+	FIELD f_bwieqqjy MAX_ENCHANTED_ARMOR_PROBABILITY F
 	FIELD f_cdysgqlq navigation Lnet/minecraft/unmapped/C_iwjfvbta;
 	FIELD f_ciotucts DEFAULT_DROP_CHANCE F
 	FIELD f_cnfzqtrn AI_DISABLED_FLAG I
+	FIELD f_cugilxhh MAX_ENCHANTED_WEAPON_PROBABILITY F
 	FIELD f_eaehhanh target Lnet/minecraft/unmapped/C_ndyxaxsu;
 	FIELD f_eguxkfle handDropChances [F
 	FIELD f_fwkguipd ambientSoundChance I
@@ -12,6 +14,7 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	FIELD f_hwbeurzt visibilityCache Lnet/minecraft/unmapped/C_zqbyfeyv;
 	FIELD f_keoxfpvz persistent Z
 	FIELD f_laombqzr jumpControl Lnet/minecraft/unmapped/C_witoudmt;
+	FIELD f_mpxennpq MAX_WEAR_ARMOR_PROBABILITY F
 	FIELD f_mzxehcer lookControl Lnet/minecraft/unmapped/C_frcpfugl;
 	FIELD f_nevubogd positionTarget Lnet/minecraft/unmapped/C_kkdaznyh;
 	FIELD f_nzfvtqry LEFT_HANDED_FLAG I
@@ -21,8 +24,11 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	FIELD f_qgbarrzl lootTable Lnet/minecraft/unmapped/C_acfwypcn;
 	FIELD f_qkvcedgi experiencePoints I
 	FIELD f_qrbpkgzw LEASH_KEY Ljava/lang/String;
+	FIELD f_rgfownzm MAX_PICKUP_LOOT_PROBABILITY F
 	FIELD f_sldkrurp moveControl Lnet/minecraft/unmapped/C_mbekvhza;
+	FIELD f_sqdznsjk PICKUP_REACH I
 	FIELD f_sspljqcw pickUpLoot Z
+	FIELD f_ujjdvwdd GOAL_SELECTOR_UPDATE_INTERVAL I
 	FIELD f_ukmhmbzl MOB_FLAGS Lnet/minecraft/unmapped/C_yxacmnir;
 	FIELD f_wibxpqcu leashNbt Lnet/minecraft/unmapped/C_hincwlhh;
 	FIELD f_wqmxllap positionTargetRange F
@@ -41,6 +47,8 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	METHOD m_avfhgwzt canSpawn (Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;)Z
 		ARG 1 world
 		ARG 2 spawnReason
+	METHOD m_bdyzwyde (Ljava/lang/String;)Z
+		ARG 0 key
 	METHOD m_bjfcqefn detachLeash (ZZ)V
 		ARG 1 sendPacket
 		ARG 2 dropItem
@@ -86,10 +94,14 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	METHOD m_hefvunsr isAiDisabled ()Z
 	METHOD m_hilthkap getDropChance (Lnet/minecraft/unmapped/C_bheocyuy;)F
 		ARG 1 slot
+	METHOD m_hkvywcqy (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_zlwsfkxd;)V
+		ARG 2 entity
 	METHOD m_hpcpeigw setBaby (Z)V
 		ARG 1 baby
 	METHOD m_hrisejsj mobTick ()V
 	METHOD m_hssabyor createBodyControl ()Lnet/minecraft/unmapped/C_vgfmyfov;
+	METHOD m_hupcwdwr (Ljava/lang/String;)Z
+		ARG 0 key
 	METHOD m_ilvvaima getVisibilityCache ()Lnet/minecraft/unmapped/C_zqbyfeyv;
 	METHOD m_ixugldsd sendAiDebugData ()V
 	METHOD m_jexcqqop updateDropChances (Lnet/minecraft/unmapped/C_bheocyuy;)V
@@ -120,6 +132,7 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 		ARG 2 maxYawChange
 		ARG 3 maxPitchChange
 	METHOD m_mkeusvbe getNavigation ()Lnet/minecraft/unmapped/C_iwjfvbta;
+	METHOD m_mldyspwm clearPositionTarget ()V
 	METHOD m_mnalfvjr setAttacking (Z)V
 		ARG 1 attacking
 	METHOD m_myhcuqba isAttacking ()Z
@@ -199,6 +212,8 @@ CLASS net/minecraft/unmapped/C_zlwsfkxd net/minecraft/entity/mob/MobEntity
 	METHOD m_wzojegds initGoals ()V
 	METHOD m_wzoyyyki getAmbientSound ()Lnet/minecraft/unmapped/C_yazovava;
 	METHOD m_xhhirdts isAffectedByDaylight ()Z
+	METHOD m_xrjjpqyl createNavigation (Lnet/minecraft/unmapped/C_nbzftcdc;)Lnet/minecraft/unmapped/C_iwjfvbta;
+		ARG 1 world
 	METHOD m_xxhovrjv squaredAttackRange (Lnet/minecraft/unmapped/C_ndyxaxsu;)D
 		ARG 1 target
 	METHOD m_ykiqeptw tryEquip (Lnet/minecraft/unmapped/C_kywxadds;)Z
