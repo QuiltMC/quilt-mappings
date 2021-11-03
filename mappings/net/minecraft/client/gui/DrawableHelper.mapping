@@ -1,24 +1,77 @@
-CLASS net/minecraft/unmapped/C_xmxezpms net/minecraft/client/gui/DrawableHelper
-	FIELD f_bqshgcwv zOffset I
-		COMMENT The z offset used by {@link DrawableHelper}.
-	FIELD f_dzahywuz OPTIONS_BACKGROUND_TEXTURE Lnet/minecraft/unmapped/C_acfwypcn;
-		COMMENT The texture used by options for background.
-	FIELD f_twcpcsgj STATS_ICON_TEXTURE Lnet/minecraft/unmapped/C_acfwypcn;
-		COMMENT The texture of icons used in the stats screen.
-	FIELD f_uwysyctt GUI_ICONS_TEXTURE Lnet/minecraft/unmapped/C_acfwypcn;
+CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
+	FIELD f_andzmyho GUI_ICONS_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 		COMMENT The texture of various icons and widgets used for rendering ingame indicators.
-	METHOD m_aqlhpdwb drawTexturedQuad (Lnet/minecraft/unmapped/C_bijddvxg;IIIIIFFFF)V
+	FIELD f_bifgnyaq zOffset I
+		COMMENT The z offset used by {@link DrawableHelper}.
+	FIELD f_rlwncfgj STATS_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+		COMMENT The texture of icons used in the stats screen.
+	FIELD f_xgwmiebw OPTIONS_BACKGROUND_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+		COMMENT The texture used by options for background.
+	METHOD m_banbuzwe fillGradient (Lnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_nxnqmnng;IIIIIII)V
 		ARG 0 matrix
-		ARG 1 x0
+		ARG 2 startX
+		ARG 3 startY
+		ARG 4 endX
+		ARG 5 endY
+		ARG 6 z
+		ARG 7 colorStart
+		ARG 8 colorEnd
+	METHOD m_cvgclbev fill (Lnet/minecraft/unmapped/C_gxvddjib;IIIII)V
+		ARG 0 matrix
+		ARG 1 x1
+		ARG 2 y1
+		ARG 3 x2
+		ARG 4 y2
+		ARG 5 color
+	METHOD m_dffnychy getZOffset ()I
+	METHOD m_esgmbimb drawHorizontalLine (Lnet/minecraft/unmapped/C_cnszsxvd;IIII)V
+		ARG 1 matrices
 		ARG 2 x1
-		ARG 3 y0
-		ARG 4 y1
-		ARG 5 z
-		ARG 6 u0
-		ARG 7 u1
-		ARG 8 v0
-		ARG 9 v1
-	METHOD m_aqlhpdwb drawTexture (Lnet/minecraft/unmapped/C_dvxszsnc;IIIIIIIFFII)V
+		ARG 3 x2
+		ARG 4 y
+		ARG 5 color
+	METHOD m_frfhkmeu drawWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_apvkgwyi;III)V
+		ARG 0 matrices
+		ARG 1 textRenderer
+		ARG 2 text
+		ARG 3 x
+		ARG 4 y
+		ARG 5 color
+	METHOD m_fxwiyddr setZOffset (I)V
+		ARG 1 zOffset
+	METHOD m_gbhvqotp fillGradient (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIII)V
+		ARG 1 matrices
+		ARG 2 startX
+		ARG 3 startY
+		ARG 4 endX
+		ARG 5 endY
+		ARG 6 colorStart
+		ARG 7 colorEnd
+	METHOD m_ghwynfmz drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIFFIIII)V
+		COMMENT Draws a textured rectangle from a region in a texture.
+		ARG 0 matrices
+			COMMENT the matrix stack used for rendering
+		ARG 1 x
+			COMMENT the X coordinate of the rectangle
+		ARG 2 y
+			COMMENT the Y coordinate of the rectangle
+		ARG 3 width
+			COMMENT the width of the rectangle
+		ARG 4 height
+			COMMENT the height of the rectangle
+		ARG 5 u
+			COMMENT the left-most coordinate of the texture region
+		ARG 6 v
+			COMMENT the top-most coordinate of the texture region
+		ARG 7 regionWidth
+			COMMENT the width of the texture region
+		ARG 8 regionHeight
+			COMMENT the height of the texture region
+		ARG 9 textureWidth
+			COMMENT the width of the entire texture
+		ARG 10 textureHeight
+			COMMENT the height of the entire texture
+	METHOD m_hhivzfxa drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIIFFII)V
 		ARG 0 matrices
 		ARG 1 x0
 		ARG 2 x1
@@ -31,77 +84,12 @@ CLASS net/minecraft/unmapped/C_xmxezpms net/minecraft/client/gui/DrawableHelper
 		ARG 9 v
 		ARG 10 textureWidth
 		ARG 11 textureHeight
-	METHOD m_awellcje drawVerticalLine (Lnet/minecraft/unmapped/C_dvxszsnc;IIII)V
-		ARG 1 matrices
-		ARG 2 x
-		ARG 3 y1
-		ARG 4 y2
-		ARG 5 color
-	METHOD m_jtquhjeb drawStringWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_ppmzovam;Ljava/lang/String;III)V
-		ARG 0 matrices
-		ARG 1 textRenderer
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 color
-	METHOD m_jtquhjeb drawWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_ppmzovam;Lnet/minecraft/unmapped/C_iywgkvpa;III)V
-		ARG 0 matrices
-		ARG 1 textRenderer
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 color
-	METHOD m_jtquhjeb drawTextWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_ppmzovam;Lnet/minecraft/unmapped/C_tdwiqadr;III)V
-		ARG 0 matrices
-		ARG 1 textRenderer
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 color
-	METHOD m_olmkltiv fill (Lnet/minecraft/unmapped/C_bijddvxg;IIIII)V
-		ARG 0 matrix
-		ARG 1 x1
-		ARG 2 y1
-		ARG 3 x2
-		ARG 4 y2
-		ARG 5 color
-	METHOD m_pdnrhmta fill (Lnet/minecraft/unmapped/C_dvxszsnc;IIIII)V
-		ARG 0 matrices
-		ARG 1 x1
-		ARG 2 y1
-		ARG 3 x2
-		ARG 4 y2
-		ARG 5 color
-	METHOD m_qwfebjtk setZOffset (I)V
-		ARG 1 zOffset
-	METHOD m_txfuraid getZOffset ()I
-	METHOD m_uernogcr drawCenteredText (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_ppmzovam;Ljava/lang/String;III)V
-		ARG 0 matrices
-		ARG 1 textRenderer
-		ARG 2 text
-		ARG 3 centerX
-		ARG 4 y
-		ARG 5 color
-	METHOD m_uernogcr drawCenteredTextWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_ppmzovam;Lnet/minecraft/unmapped/C_iywgkvpa;III)V
-		ARG 0 matrices
-		ARG 1 textRenderer
-		ARG 2 text
-		ARG 3 centerX
-		ARG 4 y
-		ARG 5 color
-	METHOD m_uernogcr drawCenteredText (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_ppmzovam;Lnet/minecraft/unmapped/C_tdwiqadr;III)V
-		ARG 0 matrices
-		ARG 1 textRenderer
-		ARG 2 text
-		ARG 3 centerX
-		ARG 4 y
-		ARG 5 color
-	METHOD m_uiwkccni drawWithOutline (IILjava/util/function/BiConsumer;)V
+	METHOD m_idhozqhe drawWithOutline (IILjava/util/function/BiConsumer;)V
 		ARG 1 x
 		ARG 2 y
 		ARG 3 renderAction
 			COMMENT the action to render both the content and the outline, taking x and y positions as input
-	METHOD m_usnbitxr drawTexture (Lnet/minecraft/unmapped/C_dvxszsnc;IIFFIIII)V
+	METHOD m_iedzbynb drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIFFIIII)V
 		COMMENT Draws a textured rectangle from a region in a texture.
 		COMMENT
 		COMMENT <p>The width and height of the region are the same as
@@ -124,7 +112,32 @@ CLASS net/minecraft/unmapped/C_xmxezpms net/minecraft/client/gui/DrawableHelper
 			COMMENT the width of the entire texture
 		ARG 8 textureHeight
 			COMMENT the height of the entire texture
-	METHOD m_usnbitxr drawTexture (Lnet/minecraft/unmapped/C_dvxszsnc;IIIFFIIII)V
+	METHOD m_jbomfpob drawVerticalLine (Lnet/minecraft/unmapped/C_cnszsxvd;IIII)V
+		ARG 1 matrices
+		ARG 2 x
+		ARG 3 y1
+		ARG 4 y2
+		ARG 5 color
+	METHOD m_majnrhmv drawTexturedQuad (Lnet/minecraft/unmapped/C_gxvddjib;IIIIIFFFF)V
+		ARG 0 matrix
+		ARG 1 x0
+		ARG 2 x1
+		ARG 3 y0
+		ARG 4 y1
+		ARG 5 z
+		ARG 6 u0
+		ARG 7 u1
+		ARG 8 v0
+		ARG 9 v1
+	METHOD m_nmhsgmhu drawSprite (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIILnet/minecraft/unmapped/C_uflrwbwt;)V
+		ARG 0 matrices
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 width
+		ARG 5 height
+		ARG 6 sprite
+	METHOD m_phbojpjg drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIIFFIIII)V
 		COMMENT Draws a textured rectangle from a region in a texture.
 		COMMENT
 		COMMENT <p>The width and height of the region are the same as
@@ -149,31 +162,14 @@ CLASS net/minecraft/unmapped/C_xmxezpms net/minecraft/client/gui/DrawableHelper
 			COMMENT the height of the entire texture
 		ARG 9 textureWidth
 			COMMENT the width of the entire texture
-	METHOD m_usnbitxr drawTexture (Lnet/minecraft/unmapped/C_dvxszsnc;IIIIFFIIII)V
-		COMMENT Draws a textured rectangle from a region in a texture.
+	METHOD m_plqcylla drawTextWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_rdaqiwdt;III)V
 		ARG 0 matrices
-			COMMENT the matrix stack used for rendering
-		ARG 1 x
-			COMMENT the X coordinate of the rectangle
-		ARG 2 y
-			COMMENT the Y coordinate of the rectangle
-		ARG 3 width
-			COMMENT the width of the rectangle
-		ARG 4 height
-			COMMENT the height of the rectangle
-		ARG 5 u
-			COMMENT the left-most coordinate of the texture region
-		ARG 6 v
-			COMMENT the top-most coordinate of the texture region
-		ARG 7 regionWidth
-			COMMENT the width of the texture region
-		ARG 8 regionHeight
-			COMMENT the height of the texture region
-		ARG 9 textureWidth
-			COMMENT the width of the entire texture
-		ARG 10 textureHeight
-			COMMENT the height of the entire texture
-	METHOD m_usnbitxr drawTexture (Lnet/minecraft/unmapped/C_dvxszsnc;IIIIII)V
+		ARG 1 textRenderer
+		ARG 2 text
+		ARG 3 x
+		ARG 4 y
+		ARG 5 color
+	METHOD m_pntbvely drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIII)V
 		COMMENT Draws a textured rectangle from a region in a 256x256 texture.
 		COMMENT
 		COMMENT <p>The Z coordinate of the rectangle is {@link #zOffset}.
@@ -194,32 +190,42 @@ CLASS net/minecraft/unmapped/C_xmxezpms net/minecraft/client/gui/DrawableHelper
 			COMMENT the width
 		ARG 7 height
 			COMMENT the height
-	METHOD m_usnbitxr drawSprite (Lnet/minecraft/unmapped/C_dvxszsnc;IIIIILnet/minecraft/unmapped/C_twbwrlfu;)V
+	METHOD m_scgexxgq drawStringWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Ljava/lang/String;III)V
 		ARG 0 matrices
-		ARG 1 x
-		ARG 2 y
-		ARG 3 z
-		ARG 4 width
-		ARG 5 height
-		ARG 6 sprite
-	METHOD m_vzshmvoe fillGradient (Lnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_gnnmqnxn;IIIIIII)V
-		ARG 0 matrix
-		ARG 2 startX
-		ARG 3 startY
-		ARG 4 endX
-		ARG 5 endY
-		ARG 6 z
-		ARG 7 colorStart
-		ARG 8 colorEnd
-	METHOD m_vzshmvoe fillGradient (Lnet/minecraft/unmapped/C_dvxszsnc;IIIIII)V
-		ARG 1 matrices
-		ARG 2 startX
-		ARG 3 startY
-		ARG 4 endX
-		ARG 5 endY
-		ARG 6 colorStart
-		ARG 7 colorEnd
-	METHOD m_vzshmvoe fillGradient (Lnet/minecraft/unmapped/C_dvxszsnc;IIIIIII)V
+		ARG 1 textRenderer
+		ARG 2 text
+		ARG 3 x
+		ARG 4 y
+		ARG 5 color
+	METHOD m_txqewwzf fill (Lnet/minecraft/unmapped/C_cnszsxvd;IIIII)V
+		ARG 0 matrices
+		ARG 1 x1
+		ARG 2 y1
+		ARG 3 x2
+		ARG 4 y2
+		ARG 5 color
+	METHOD m_wzwzaodu drawCenteredText (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_rdaqiwdt;III)V
+		ARG 0 matrices
+		ARG 1 textRenderer
+		ARG 2 text
+		ARG 3 centerX
+		ARG 4 y
+		ARG 5 color
+	METHOD m_xywfifzm drawCenteredTextWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_apvkgwyi;III)V
+		ARG 0 matrices
+		ARG 1 textRenderer
+		ARG 2 text
+		ARG 3 centerX
+		ARG 4 y
+		ARG 5 color
+	METHOD m_yfjhvnxw drawCenteredText (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Ljava/lang/String;III)V
+		ARG 0 matrices
+		ARG 1 textRenderer
+		ARG 2 text
+		ARG 3 centerX
+		ARG 4 y
+		ARG 5 color
+	METHOD m_zjkpzsze fillGradient (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIII)V
 		ARG 0 matrices
 		ARG 1 startX
 		ARG 2 startY
@@ -228,9 +234,3 @@ CLASS net/minecraft/unmapped/C_xmxezpms net/minecraft/client/gui/DrawableHelper
 		ARG 5 colorStart
 		ARG 6 colorEnd
 		ARG 7 z
-	METHOD m_xktkzpwa drawHorizontalLine (Lnet/minecraft/unmapped/C_dvxszsnc;IIII)V
-		ARG 1 matrices
-		ARG 2 x1
-		ARG 3 x2
-		ARG 4 y
-		ARG 5 color

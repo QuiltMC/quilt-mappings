@@ -1,37 +1,37 @@
-CLASS net/minecraft/unmapped/C_cyzhdzdb net/minecraft/server/world/ServerLightingProvider
-	FIELD f_bgbwvrog pendingTasks Lit/unimi/dsi/fastutil/objects/ObjectList;
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_ksdtenmp chunkStorage Lnet/minecraft/unmapped/C_ccazprxg;
-	FIELD f_mmtibioh taskBatchSize I
-	FIELD f_ninosbay ticking Ljava/util/concurrent/atomic/AtomicBoolean;
-	FIELD f_tywfujec processor Lnet/minecraft/unmapped/C_agydwuhb;
-	FIELD f_vsayrwci executor Lnet/minecraft/unmapped/C_ppugczrb;
-	METHOD <init> (Lnet/minecraft/unmapped/C_yvvvsshj;Lnet/minecraft/unmapped/C_ccazprxg;ZLnet/minecraft/unmapped/C_agydwuhb;Lnet/minecraft/unmapped/C_ppugczrb;)V
+CLASS net/minecraft/unmapped/C_bdzdhzyc net/minecraft/server/world/ServerLightingProvider
+	FIELD f_bmwopehy LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_bxscsrlv processor Lnet/minecraft/unmapped/C_bhuwdyga;
+	FIELD f_fqfdxccd chunkStorage Lnet/minecraft/unmapped/C_gxrpzacc;
+	FIELD f_ihvgapic pendingTasks Lit/unimi/dsi/fastutil/objects/ObjectList;
+	FIELD f_iwvpqbpz executor Lnet/minecraft/unmapped/C_brzcgupp;
+	FIELD f_mdmcaerx ticking Ljava/util/concurrent/atomic/AtomicBoolean;
+	FIELD f_tgwktggy taskBatchSize I
+	METHOD <init> (Lnet/minecraft/unmapped/C_jhssvvvy;Lnet/minecraft/unmapped/C_gxrpzacc;ZLnet/minecraft/unmapped/C_bhuwdyga;Lnet/minecraft/unmapped/C_brzcgupp;)V
 		ARG 1 chunkProvider
 		ARG 2 chunkStorage
 		ARG 3 hasBlockLight
 		ARG 4 processor
 		ARG 5 executor
-	METHOD m_bkydvpyz light (Lnet/minecraft/unmapped/C_rqmmmzwl;Z)Ljava/util/concurrent/CompletableFuture;
-		ARG 1 chunk
-		ARG 2 excludeBlocks
-	METHOD m_ejllxrdw (Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 2 pos
-	METHOD m_ezzrfyar updateChunkStatus (Lnet/minecraft/unmapped/C_utrzsrny;)V
-		ARG 1 pos
-	METHOD m_hvmarmnr setTaskBatchSize (I)V
+	METHOD m_akucajjc tick ()V
+	METHOD m_dfdmqeol setTaskBatchSize (I)V
 		ARG 1 taskBatchSize
-	METHOD m_ooaabonk enqueue (IILjava/util/function/IntSupplier;Lnet/minecraft/unmapped/C_cyzhdzdb$C_fbkafnwd;Ljava/lang/Runnable;)V
+	METHOD m_hgykdbsz updateChunkStatus (Lnet/minecraft/unmapped/C_ynrszrtu;)V
+		ARG 1 pos
+	METHOD m_kgblywpv (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 2 pos
+	METHOD m_qftmhnaq enqueue (IILnet/minecraft/unmapped/C_bdzdhzyc$C_xljyfoew;Ljava/lang/Runnable;)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 stage
+		ARG 4 task
+	METHOD m_vrhouamw enqueue (IILjava/util/function/IntSupplier;Lnet/minecraft/unmapped/C_bdzdhzyc$C_xljyfoew;Ljava/lang/Runnable;)V
 		ARG 1 x
 		ARG 2 z
 		ARG 3 completedLevelSupplier
 		ARG 4 stage
 		ARG 5 task
-	METHOD m_ooaabonk enqueue (IILnet/minecraft/unmapped/C_cyzhdzdb$C_fbkafnwd;Ljava/lang/Runnable;)V
-		ARG 1 x
-		ARG 2 z
-		ARG 3 stage
-		ARG 4 task
-	METHOD m_ponbmspk tick ()V
-	METHOD m_ucxpmxsy runTasks ()V
-	CLASS C_fbkafnwd Stage
+	METHOD m_zoawoczj runTasks ()V
+	METHOD m_ztqcmqpm light (Lnet/minecraft/unmapped/C_lwzmmmqr;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 chunk
+		ARG 2 excludeBlocks
+	CLASS C_xljyfoew Stage

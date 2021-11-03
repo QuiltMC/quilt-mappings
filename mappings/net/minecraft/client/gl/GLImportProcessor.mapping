@@ -1,33 +1,33 @@
-CLASS net/minecraft/unmapped/C_lsgymooz net/minecraft/client/gl/GLImportProcessor
+CLASS net/minecraft/unmapped/C_zoomygsl net/minecraft/client/gl/GLImportProcessor
 	COMMENT Handles the flattening of "moj_" import strings in the loaded GLSL shader file.
 	COMMENT Instances of an import are replaced by the contents of the referenced file
 	COMMENT prefixed by a comment describing the line position and original file location
 	COMMENT of the import.
-	FIELD f_babmshnq IMPORT_VERSION_PATTERN Ljava/util/regex/Pattern;
-	FIELD f_exlyisoi MOJ_IMPORT_PATTERN Ljava/util/regex/Pattern;
-	METHOD m_fnhyvlxh readSource (Ljava/lang/String;)Ljava/util/List;
+	FIELD f_ghormybb MOJ_IMPORT_PATTERN Ljava/util/regex/Pattern;
+	FIELD f_zziopucr IMPORT_VERSION_PATTERN Ljava/util/regex/Pattern;
+	METHOD m_dwmitkff readImport (Ljava/lang/String;I)Ljava/lang/String;
+		ARG 1 line
+		ARG 2 start
+	METHOD m_ezyxcmuh extractVersion (Ljava/lang/String;Lnet/minecraft/unmapped/C_zoomygsl$C_ctvnulwe;)Ljava/lang/String;
+		COMMENT Converts a line known to contain an import into a fully-qualified
+		COMMENT version of itself for insertion as a comment.
+		ARG 1 line
+		ARG 2 context
+	METHOD m_jeewqfbu parseImports (Ljava/lang/String;Lnet/minecraft/unmapped/C_zoomygsl$C_ctvnulwe;Ljava/lang/String;)Ljava/util/List;
+		ARG 1 source
+		ARG 2 context
+		ARG 3 path
+	METHOD m_oiptzbor loadImport (ZLjava/lang/String;)Ljava/lang/String;
+		COMMENT Called to load an import reference's source code.
+		ARG 1 inline
+		ARG 2 name
+	METHOD m_zkksxvxz readSource (Ljava/lang/String;)Ljava/util/List;
 		COMMENT Reads the source code supplied into a list of lines suitable for uploading to
 		COMMENT the GL Shader cache.
 		COMMENT
 		COMMENT <p>Imports are processed as per the description of this class.
 		ARG 1 source
-	METHOD m_ilfjsaca extractVersion (Ljava/lang/String;Lnet/minecraft/unmapped/C_lsgymooz$C_culgpczc;)Ljava/lang/String;
-		COMMENT Converts a line known to contain an import into a fully-qualified
-		COMMENT version of itself for insertion as a comment.
-		ARG 1 line
-		ARG 2 context
-	METHOD m_rbpkohhs loadImport (ZLjava/lang/String;)Ljava/lang/String;
-		COMMENT Called to load an import reference's source code.
-		ARG 1 inline
-		ARG 2 name
-	METHOD m_tbhhtsrd parseImports (Ljava/lang/String;Lnet/minecraft/unmapped/C_lsgymooz$C_culgpczc;Ljava/lang/String;)Ljava/util/List;
-		ARG 1 source
-		ARG 2 context
-		ARG 3 path
-	METHOD m_zeshywuv readImport (Ljava/lang/String;I)Ljava/lang/String;
-		ARG 1 line
-		ARG 2 start
-	CLASS C_culgpczc Context
+	CLASS C_ctvnulwe Context
 		COMMENT A context for the parser to keep track of its current line and caret position in the file.
-		FIELD f_egquuelx column I
-		FIELD f_nphxylcx line I
+		FIELD f_egulnbvh line I
+		FIELD f_rdhlpblz column I

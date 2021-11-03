@@ -1,80 +1,80 @@
-CLASS net/minecraft/unmapped/C_ebddbmvy net/minecraft/server/ServerConfigHandler
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_fpztifew WHITE_LIST_FILE Ljava/io/File;
-	FIELD f_hsjhkwcb BANNED_PLAYERS_FILE Ljava/io/File;
-	FIELD f_oflzqevn BANNED_IPS_FILE Ljava/io/File;
-	FIELD f_ypfzgnzo OPERATORS_FILE Ljava/io/File;
-	METHOD m_aijdcuij checkPlayerConversionSuccess (Lnet/minecraft/server/MinecraftServer;)Z
+CLASS net/minecraft/unmapped/C_yvmbddbe net/minecraft/server/ServerConfigHandler
+	FIELD f_cvuxcshd BANNED_IPS_FILE Ljava/io/File;
+	FIELD f_fbnknoih LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_fxtoleap BANNED_PLAYERS_FILE Ljava/io/File;
+	FIELD f_kwppnohy WHITE_LIST_FILE Ljava/io/File;
+	FIELD f_yodyypyk OPERATORS_FILE Ljava/io/File;
+	METHOD m_aiyxaucv markFileConverted (Ljava/io/File;)V
+		ARG 0 file
+	METHOD m_bjjmhowi processSimpleListFile (Ljava/io/File;Ljava/util/Map;)Ljava/util/List;
+		ARG 0 file
+		ARG 1 valueMap
+	METHOD m_cftacvug createDirectory (Ljava/io/File;)V
+		ARG 0 directory
+	METHOD m_cgcjnwuf convertOperators (Lnet/minecraft/server/MinecraftServer;)Z
 		ARG 0 server
-	METHOD m_aopbvdkx lookupProfile (Lnet/minecraft/server/MinecraftServer;Ljava/util/Collection;Lcom/mojang/authlib/ProfileLookupCallback;)V
+	METHOD m_czpfisgw lookupProfile (Lnet/minecraft/server/MinecraftServer;Ljava/util/Collection;Lcom/mojang/authlib/ProfileLookupCallback;)V
 		ARG 0 server
 		ARG 1 bannedPlayers
 		ARG 2 callback
-	METHOD m_euwestcj parseDate (Ljava/lang/String;Ljava/util/Date;)Ljava/util/Date;
-		ARG 0 dateString
-		ARG 1 fallback
-	METHOD m_hnmoxury convertOperators (Lnet/minecraft/server/MinecraftServer;)Z
+	METHOD m_dwwjgqgh checkSuccess (Lnet/minecraft/server/MinecraftServer;)Z
 		ARG 0 server
-	METHOD m_ivdzpajt convertPlayerFiles (Lnet/minecraft/unmapped/C_wutqiaub;)Z
-		ARG 0 minecraftServer
-	METHOD m_ocmahrlf checkListConversionSuccess ()Z
-	METHOD m_oerkvjrq getPlayerUuidByName (Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)Ljava/util/UUID;
+	METHOD m_hihsitgl convertBannedPlayers (Lnet/minecraft/server/MinecraftServer;)Z
+		ARG 0 server
+	METHOD m_hkupshmc convertWhitelist (Lnet/minecraft/server/MinecraftServer;)Z
+		ARG 0 server
+	METHOD m_kfcdxjpu getPlayerUuidByName (Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)Ljava/util/UUID;
 		ARG 0 server
 		ARG 1 name
-	METHOD m_qeysdywf createDirectory (Ljava/io/File;)V
-		ARG 0 directory
-	METHOD m_ssmtetip convertBannedIps (Lnet/minecraft/server/MinecraftServer;)Z
+	METHOD m_nkhokdvq convertPlayerFiles (Lnet/minecraft/unmapped/C_buaiqtuw;)Z
+		ARG 0 minecraftServer
+	METHOD m_nntbhtqa checkPlayerConversionSuccess (Lnet/minecraft/server/MinecraftServer;)Z
 		ARG 0 server
-	METHOD m_strbvwna convertWhitelist (Lnet/minecraft/server/MinecraftServer;)Z
+	METHOD m_tujavzly convertBannedIps (Lnet/minecraft/server/MinecraftServer;)Z
 		ARG 0 server
-	METHOD m_teamhafi getLevelPlayersFolder (Lnet/minecraft/server/MinecraftServer;)Ljava/io/File;
+	METHOD m_uhyslthx getLevelPlayersFolder (Lnet/minecraft/server/MinecraftServer;)Ljava/io/File;
 		ARG 0 server
-	METHOD m_ulqopfvq checkSuccess (Lnet/minecraft/server/MinecraftServer;)Z
-		ARG 0 server
-	METHOD m_ycxpxhkb convertBannedPlayers (Lnet/minecraft/server/MinecraftServer;)Z
-		ARG 0 server
-	METHOD m_zxuoznku markFileConverted (Ljava/io/File;)V
-		ARG 0 file
-	METHOD m_zzfsbplo processSimpleListFile (Ljava/io/File;Ljava/util/Map;)Ljava/util/List;
-		ARG 0 file
-		ARG 1 valueMap
-	CLASS C_cetnnvbh
+	METHOD m_xakzfjdd checkListConversionSuccess ()Z
+	METHOD m_xrzzsfag parseDate (Ljava/lang/String;Ljava/util/Date;)Ljava/util/Date;
+		ARG 0 dateString
+		ARG 1 fallback
+	CLASS C_jkqklaev
 		METHOD onProfileLookupFailed (Lcom/mojang/authlib/GameProfile;Ljava/lang/Exception;)V
 			ARG 1 profile
 			ARG 2 exception
 		METHOD onProfileLookupSucceeded (Lcom/mojang/authlib/GameProfile;)V
 			ARG 1 profile
-	CLASS C_guzjpljb
-		METHOD onProfileLookupFailed (Lcom/mojang/authlib/GameProfile;Ljava/lang/Exception;)V
-			ARG 1 profile
-			ARG 2 exception
-		METHOD onProfileLookupSucceeded (Lcom/mojang/authlib/GameProfile;)V
-			ARG 1 profile
-	CLASS C_vjhhmjwh
-		METHOD m_krulxtyp getPlayerFileName (Lcom/mojang/authlib/GameProfile;)Ljava/lang/String;
-			ARG 1 profile
-		METHOD m_leztwhju convertPlayerFile (Ljava/io/File;Ljava/lang/String;Ljava/lang/String;)V
+	CLASS C_ppqnjomk
+		METHOD m_nrycxala convertPlayerFile (Ljava/io/File;Ljava/lang/String;Ljava/lang/String;)V
 			ARG 1 playerDataFolder
 			ARG 2 fileName
 			ARG 3 uuid
+		METHOD m_wnpgicbw getPlayerFileName (Lcom/mojang/authlib/GameProfile;)Ljava/lang/String;
+			ARG 1 profile
 		METHOD onProfileLookupFailed (Lcom/mojang/authlib/GameProfile;Ljava/lang/Exception;)V
 			ARG 1 profile
 			ARG 2 exception
 		METHOD onProfileLookupSucceeded (Lcom/mojang/authlib/GameProfile;)V
 			ARG 1 profile
-	CLASS C_xpfzantx ServerConfigException
+	CLASS C_pwiyaamt ServerConfigException
 		METHOD <init> (Ljava/lang/String;)V
 			ARG 1 title
 		METHOD <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
 			ARG 1 title
 			ARG 2 other
-	CLASS C_zdraaygv
+	CLASS C_seafqwjq
 		METHOD onProfileLookupFailed (Lcom/mojang/authlib/GameProfile;Ljava/lang/Exception;)V
 			ARG 1 profile
 			ARG 2 exception
 		METHOD onProfileLookupSucceeded (Lcom/mojang/authlib/GameProfile;)V
 			ARG 1 profile
-	CLASS C_zdthasiy
+	CLASS C_vhqrrbew
+		METHOD onProfileLookupFailed (Lcom/mojang/authlib/GameProfile;Ljava/lang/Exception;)V
+			ARG 1 profile
+			ARG 2 exception
+		METHOD onProfileLookupSucceeded (Lcom/mojang/authlib/GameProfile;)V
+			ARG 1 profile
+	CLASS C_ykwcpsgk
 		METHOD onProfileLookupFailed (Lcom/mojang/authlib/GameProfile;Ljava/lang/Exception;)V
 			ARG 1 profile
 			ARG 2 exception

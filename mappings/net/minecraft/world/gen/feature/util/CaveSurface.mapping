@@ -1,6 +1,16 @@
-CLASS net/minecraft/unmapped/C_pbvigpze net/minecraft/world/gen/feature/util/CaveSurface
-	METHOD m_creidnep getOptionalHeight ()Ljava/util/OptionalInt;
-	METHOD m_ebaamzld getCaveSurface (Lnet/minecraft/unmapped/C_bmckusga;ILjava/util/function/Predicate;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_kkdaznyh$C_koyyvhhw;ILnet/minecraft/unmapped/C_fxhiuupx;)Ljava/util/OptionalInt;
+CLASS net/minecraft/unmapped/C_ezpgivbp net/minecraft/world/gen/feature/util/CaveSurface
+	METHOD m_ccgiwewk withCeiling (Ljava/util/OptionalInt;)Lnet/minecraft/unmapped/C_ezpgivbp;
+		ARG 1 ceiling
+	METHOD m_dipytejr createHalfWithFloor (I)Lnet/minecraft/unmapped/C_ezpgivbp;
+		ARG 0 floor
+	METHOD m_embecqbo create (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_hynzadkk;ILjava/util/function/Predicate;Ljava/util/function/Predicate;)Ljava/util/Optional;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 height
+		ARG 3 canGenerate
+		ARG 4 canReplace
+	METHOD m_ghwrdxoa createEmpty ()Lnet/minecraft/unmapped/C_ezpgivbp;
+	METHOD m_gqxoohro getCaveSurface (Lnet/minecraft/unmapped/C_agsukcmb;ILjava/util/function/Predicate;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;ILnet/minecraft/unmapped/C_xpuuihxf;)Ljava/util/OptionalInt;
 		ARG 0 world
 		ARG 1 height
 		ARG 2 canGenerate
@@ -8,43 +18,33 @@ CLASS net/minecraft/unmapped/C_pbvigpze net/minecraft/world/gen/feature/util/Cav
 		ARG 4 mutablePos
 		ARG 5 y
 		ARG 6 direction
-	METHOD m_fptftqvi getCeilingHeight ()Ljava/util/OptionalInt;
-	METHOD m_gkobvaeo create (Lnet/minecraft/unmapped/C_bmckusga;Lnet/minecraft/unmapped/C_kkdaznyh;ILjava/util/function/Predicate;Ljava/util/function/Predicate;)Ljava/util/Optional;
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 height
-		ARG 3 canGenerate
-		ARG 4 canReplace
-	METHOD m_hhmqtvpu createHalfWithFloor (I)Lnet/minecraft/unmapped/C_pbvigpze;
-		ARG 0 floor
-	METHOD m_immecoco createEmpty ()Lnet/minecraft/unmapped/C_pbvigpze;
-	METHOD m_mxycajnt createBounded (II)Lnet/minecraft/unmapped/C_pbvigpze$C_hcdhabzg;
-		ARG 0 floor
-		ARG 1 ceiling
-	METHOD m_otucdekl withCeiling (Ljava/util/OptionalInt;)Lnet/minecraft/unmapped/C_pbvigpze;
-		ARG 1 ceiling
-	METHOD m_qrkvthxj withFloor (Ljava/util/OptionalInt;)Lnet/minecraft/unmapped/C_pbvigpze;
+	METHOD m_ljtcbdxx withFloor (Ljava/util/OptionalInt;)Lnet/minecraft/unmapped/C_ezpgivbp;
 		ARG 1 floor
-	METHOD m_tywvkpfw getFloorHeight ()Ljava/util/OptionalInt;
-	METHOD m_vvwqomhv create (Ljava/util/OptionalInt;Ljava/util/OptionalInt;)Lnet/minecraft/unmapped/C_pbvigpze;
+	METHOD m_maiyzlyh getOptionalHeight ()Ljava/util/OptionalInt;
+	METHOD m_nwipltif createBounded (II)Lnet/minecraft/unmapped/C_ezpgivbp$C_uklyucxi;
+		ARG 0 floor
+		ARG 1 ceiling
+	METHOD m_thetohvr create (Ljava/util/OptionalInt;Ljava/util/OptionalInt;)Lnet/minecraft/unmapped/C_ezpgivbp;
 		ARG 0 ceilingHeight
 		ARG 1 floorHeight
-	METHOD m_xgwwysry createHalfWithCeiling (I)Lnet/minecraft/unmapped/C_pbvigpze;
+	METHOD m_vrbamtip getCeilingHeight ()Ljava/util/OptionalInt;
+	METHOD m_whuvnbxx createHalfWithCeiling (I)Lnet/minecraft/unmapped/C_ezpgivbp;
 		ARG 0 ceiling
-	CLASS C_ckrsrvrv Half
-		FIELD f_gnepyhcy floor Z
-		FIELD f_sarufrky height I
+	METHOD m_xzgqdopm getFloorHeight ()Ljava/util/OptionalInt;
+	CLASS C_ffmougro Empty
+		FIELD f_zkvccyak INSTANCE Lnet/minecraft/unmapped/C_ezpgivbp$C_ffmougro;
+	CLASS C_jljzfjib Half
+		FIELD f_pvevdfhk height I
+		FIELD f_xszsooyy floor Z
 		METHOD <init> (IZ)V
 			ARG 1 height
 			ARG 2 floor
-	CLASS C_hcdhabzg Bounded
-		FIELD f_evtwqdpg floor I
-		FIELD f_yzpilqex ceiling I
+	CLASS C_uklyucxi Bounded
+		FIELD f_pxmlqtux floor I
+		FIELD f_trvukkwa ceiling I
 		METHOD <init> (II)V
 			ARG 1 floor
 			ARG 2 ceiling
-		METHOD m_evtwqdpg getFloor ()I
-		METHOD m_nkoheunf getHeight ()I
-		METHOD m_yzpilqex getCeiling ()I
-	CLASS C_kemklzpz Empty
-		FIELD f_wkwzddbp INSTANCE Lnet/minecraft/unmapped/C_pbvigpze$C_kemklzpz;
+		METHOD m_cinrmjim getFloor ()I
+		METHOD m_panzkcux getHeight ()I
+		METHOD m_yewwcfbb getCeiling ()I

@@ -1,42 +1,19 @@
-CLASS net/minecraft/unmapped/C_hcaelhhx net/minecraft/util/registry/RegistryKey
+CLASS net/minecraft/unmapped/C_xhhleach net/minecraft/util/registry/RegistryKey
 	COMMENT Represents a key for a value in a registry in a context where a
 	COMMENT root registry is available.
 	COMMENT
 	COMMENT @param <T> the type of the value
 	COMMENT @see Registry#ROOT
-	FIELD f_hqjnvstc INSTANCES Ljava/util/Map;
-		COMMENT A cache of all registry keys ever created.
-	FIELD f_ohuoyzmw value Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_jevzsdmx value Lnet/minecraft/unmapped/C_ncpywfca;
 		COMMENT The identifier of the value in the registry specified by {@link #registry}.
-	FIELD f_xhggvkpd registry Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_nlfborlo INSTANCES Ljava/util/Map;
+		COMMENT A cache of all registry keys ever created.
+	FIELD f_olufpthr registry Lnet/minecraft/unmapped/C_ncpywfca;
 		COMMENT The identifier of the registry in the root registry.
-	METHOD <init> (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_acfwypcn;)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 registry
 		ARG 2 value
-	METHOD m_eutfvbyj isOf (Lnet/minecraft/unmapped/C_hcaelhhx;)Z
-		COMMENT Returns whether this registry key belongs to the given registry (according to its type, not whether the registry actually contains this key).
-		ARG 1 registry
-			COMMENT the key of the registry that this registry key should be inside
-	METHOD m_fmhtcfmf ofRegistry (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_hcaelhhx;
-		COMMENT Creates a registry key for a registry in the root registry (registry of
-		COMMENT all registries) with an identifier for the registry.
-		COMMENT
-		COMMENT <p>You can call it like {@code RegistryKey.of(new Identifier("block"))}
-		COMMENT to create a registry key for the block registry.
-		COMMENT
-		COMMENT @param <T> the element type of the registry
-		ARG 0 registry
-			COMMENT the identifier of the registry
-	METHOD m_gjsaffzs createKeyFactory (Lnet/minecraft/unmapped/C_hcaelhhx;)Ljava/util/function/Function;
-		COMMENT Creates a function that converts an identifier to a registry key for the
-		COMMENT registry that {@code registry} refers to in the root registry.
-		ARG 0 registry
-			COMMENT the reference to the value-holding registry in the root registry
-	METHOD m_ohuoyzmw getValue ()Lnet/minecraft/unmapped/C_acfwypcn;
-	METHOD m_vvwqomhv of (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_hcaelhhx;
-		ARG 0 registry
-		ARG 1 value
-	METHOD m_vvwqomhv of (Lnet/minecraft/unmapped/C_hcaelhhx;Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_hcaelhhx;
+	METHOD m_fvrtwzrl of (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_xhhleach;
 		COMMENT Creates a registry key for a value in a registry with a registry key for
 		COMMENT the value-holding registry in the root registry and an identifier of the
 		COMMENT value.
@@ -49,3 +26,26 @@ CLASS net/minecraft/unmapped/C_hcaelhhx net/minecraft/util/registry/RegistryKey
 			COMMENT the registry key of the registry in the root registry
 		ARG 1 value
 			COMMENT the identifier of the value
+	METHOD m_gzfvlawi of (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_xhhleach;
+		ARG 0 registry
+		ARG 1 value
+	METHOD m_jjvdnjyc getValue ()Lnet/minecraft/unmapped/C_ncpywfca;
+	METHOD m_lvytbcjv createKeyFactory (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/function/Function;
+		COMMENT Creates a function that converts an identifier to a registry key for the
+		COMMENT registry that {@code registry} refers to in the root registry.
+		ARG 0 registry
+			COMMENT the reference to the value-holding registry in the root registry
+	METHOD m_odeqnmwq isOf (Lnet/minecraft/unmapped/C_xhhleach;)Z
+		COMMENT Returns whether this registry key belongs to the given registry (according to its type, not whether the registry actually contains this key).
+		ARG 1 registry
+			COMMENT the key of the registry that this registry key should be inside
+	METHOD m_puwkoaeq ofRegistry (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_xhhleach;
+		COMMENT Creates a registry key for a registry in the root registry (registry of
+		COMMENT all registries) with an identifier for the registry.
+		COMMENT
+		COMMENT <p>You can call it like {@code RegistryKey.of(new Identifier("block"))}
+		COMMENT to create a registry key for the block registry.
+		COMMENT
+		COMMENT @param <T> the element type of the registry
+		ARG 0 registry
+			COMMENT the identifier of the registry

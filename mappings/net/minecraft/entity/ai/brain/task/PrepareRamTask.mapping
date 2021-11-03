@@ -1,19 +1,19 @@
-CLASS net/minecraft/unmapped/C_ipmxxxfe net/minecraft/entity/ai/brain/task/PrepareRamTask
+CLASS net/minecraft/unmapped/C_efxxxmpi net/minecraft/entity/ai/brain/task/PrepareRamTask
 	COMMENT The task where an entity finds a target, a place to start its ram, and wait to
 	COMMENT start its ram.
 	COMMENT
 	COMMENT @param <E> the task owner, usually a goat
-	FIELD f_cagobagv soundFactory Ljava/util/function/Function;
-	FIELD f_ciqkutep targetPredicate Lnet/minecraft/unmapped/C_hnihytjc;
-	FIELD f_gxxlixbp maxRamDistance I
-	FIELD f_hbstvrrl minRamDistance I
-	FIELD f_jdhoinnq prepareStartTime Ljava/util/Optional;
-	FIELD f_olyfpsxg speed F
-	FIELD f_saslkwod RUN_TIME I
-	FIELD f_sfrshvmm cooldownFactory Ljava/util/function/ToIntFunction;
-	FIELD f_uekivbcr prepareTime I
-	FIELD f_uytiizuk ram Ljava/util/Optional;
-	METHOD <init> (Ljava/util/function/ToIntFunction;IIFLnet/minecraft/unmapped/C_hnihytjc;ILjava/util/function/Function;)V
+	FIELD f_cbwankhz cooldownFactory Ljava/util/function/ToIntFunction;
+	FIELD f_flneuefi targetPredicate Lnet/minecraft/unmapped/C_cjtyhinh;
+	FIELD f_kuorbmlx RUN_TIME I
+	FIELD f_nwophvqq speed F
+	FIELD f_pquwdtmr maxRamDistance I
+	FIELD f_psdwehxs soundFactory Ljava/util/function/Function;
+	FIELD f_puwdgtrt ram Ljava/util/Optional;
+	FIELD f_ukzigqtj prepareTime I
+	FIELD f_xgkhixvm prepareStartTime Ljava/util/Optional;
+	FIELD f_zbbmikya minRamDistance I
+	METHOD <init> (Ljava/util/function/ToIntFunction;IIFLnet/minecraft/unmapped/C_cjtyhinh;ILjava/util/function/Function;)V
 		COMMENT Creates a ram preparation task. It has a fixed run time of {@value #RUN_TIME}.
 		ARG 1 cooldownFactory
 			COMMENT the factory for the cooldown, in ticks, of the ram task, given the entity
@@ -30,36 +30,36 @@ CLASS net/minecraft/unmapped/C_ipmxxxfe net/minecraft/entity/ai/brain/task/Prepa
 			COMMENT start position and the start of the ram
 		ARG 7 soundFactory
 			COMMENT the factory of the ram prepare sound given the entity
-	METHOD m_hbfxqlhe (Lnet/minecraft/unmapped/C_hbiyadqh;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-		ARG 2 mob
-	METHOD m_nyliaure findRamStart (Lnet/minecraft/unmapped/C_hbiyadqh;Lnet/minecraft/unmapped/C_ndyxaxsu;)Ljava/util/Optional;
+	METHOD m_egozrfmc findRam (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 entity
 		ARG 2 target
-	METHOD m_ocsuvaca findRam (Lnet/minecraft/unmapped/C_hbiyadqh;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 1 entity
-		ARG 2 target
-	METHOD m_piioieus (Lnet/minecraft/unmapped/C_hbiyadqh;Lnet/minecraft/unmapped/C_wbpfvzfb;)Ljava/util/Optional;
-	METHOD m_pxpkvaxd (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_ipmxxxfe$C_nuudvpvv;
-		ARG 1 start
-	METHOD m_qeqslwju canReach (Lnet/minecraft/unmapped/C_hbiyadqh;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 1 entity
-		ARG 2 target
-	METHOD m_ruusxtjw (Lnet/minecraft/unmapped/C_iwjfvbta;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 1 start
-	METHOD m_tolysffb (Lnet/minecraft/unmapped/C_hbiyadqh;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 2 mob
-	METHOD m_zzcopujp calculateRamTarget (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_xxfpupgv;
+	METHOD m_jejctbcm calculateRamTarget (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 start
 		ARG 2 end
-	CLASS C_nuudvpvv Ram
+	METHOD m_npcumvhb (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_efxxxmpi$C_ridujtjn;
+		ARG 1 start
+	METHOD m_ofglimlw (Lnet/minecraft/unmapped/C_atbvfjwi;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 1 start
+	METHOD m_qpyulvml (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_usxaxydn;)V
+		ARG 2 mob
+	METHOD m_tamhuoqp findRamStart (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_usxaxydn;)Ljava/util/Optional;
+		ARG 1 entity
+		ARG 2 target
+	METHOD m_tfmdxwnn canReach (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 1 entity
+		ARG 2 target
+	METHOD m_vjrsvfqv (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		ARG 2 mob
+	METHOD m_zmeizdsl (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_bfzvfpbw;)Ljava/util/Optional;
+	CLASS C_ridujtjn Ram
 		COMMENT A ram chosen during the preparation.
-		FIELD f_eaehhanh entity Lnet/minecraft/unmapped/C_ndyxaxsu;
-		FIELD f_llguvzin start Lnet/minecraft/unmapped/C_kkdaznyh;
-		FIELD f_vcazkrdx end Lnet/minecraft/unmapped/C_kkdaznyh;
-		METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		FIELD f_evyqbdfq end Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_thwotgzb start Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_wyhhgitb entity Lnet/minecraft/unmapped/C_usxaxydn;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_usxaxydn;)V
 			ARG 1 start
 			ARG 2 end
 			ARG 3 entity
-		METHOD m_akwkbmco getEntity ()Lnet/minecraft/unmapped/C_ndyxaxsu;
-		METHOD m_gzlyrirn getStart ()Lnet/minecraft/unmapped/C_kkdaznyh;
-		METHOD m_iyyuviim getEnd ()Lnet/minecraft/unmapped/C_kkdaznyh;
+		METHOD m_atyumtfm getEnd ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_prgitnei getStart ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_tflfitqg getEntity ()Lnet/minecraft/unmapped/C_usxaxydn;

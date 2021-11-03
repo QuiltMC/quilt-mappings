@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_jgozwqsm net/minecraft/resource/ResourceReloader
+CLASS net/minecraft/unmapped/C_msqwzogj net/minecraft/resource/ResourceReloader
 	COMMENT A resource reloader performs actual reloading in its {@linkplain #reload
 	COMMENT reload} in a reloadable resource manager it is registered to.
 	COMMENT
@@ -7,9 +7,7 @@ CLASS net/minecraft/unmapped/C_jgozwqsm net/minecraft/resource/ResourceReloader
 	COMMENT (completes preparation in one method)
 	COMMENT @see SynchronousResourceReloader SynchronousResourceReloader
 	COMMENT (performs all reloading in the apply executor)
-	METHOD m_gvlwjsjf getName ()Ljava/lang/String;
-		COMMENT Returns a user-friendly name for logging.
-	METHOD m_xxnyyuxw reload (Lnet/minecraft/unmapped/C_jgozwqsm$C_tqmqfqco;Lnet/minecraft/unmapped/C_fsaprnmt;Lnet/minecraft/unmapped/C_qsfbclse;Lnet/minecraft/unmapped/C_qsfbclse;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_vbnuicfd reload (Lnet/minecraft/unmapped/C_msqwzogj$C_yodorvdw;Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_eslcbfsq;Lnet/minecraft/unmapped/C_eslcbfsq;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Performs a reload. Returns a future that is completed when the reload
 		COMMENT is completed.
 		COMMENT
@@ -41,11 +39,13 @@ CLASS net/minecraft/unmapped/C_jgozwqsm net/minecraft/resource/ResourceReloader
 			COMMENT the executor for prepare stage
 		ARG 6 applyExecutor
 			COMMENT the executor for apply stage
-	CLASS C_tqmqfqco Synchronizer
+	METHOD m_xcuczpmx getName ()Ljava/lang/String;
+		COMMENT Returns a user-friendly name for logging.
+	CLASS C_yodorvdw Synchronizer
 		COMMENT A synchronizer to indicate completion of a reloader's prepare stage and
 		COMMENT to allow start of the apply stage only if all reloaders have finished
 		COMMENT the prepare stage.
-		METHOD m_kiigoxdf whenPrepared (Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
+		METHOD m_zhlyxiun whenPrepared (Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
 			COMMENT Indicates, to the ongoing reload, that this reloader has finished its
 			COMMENT preparation stage with the {@code preparedObject} as its result.
 			COMMENT

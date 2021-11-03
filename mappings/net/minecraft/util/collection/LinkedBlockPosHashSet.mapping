@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_tgodeund net/minecraft/util/collection/LinkedBlockPosHashSet
+CLASS net/minecraft/unmapped/C_dnuedogt net/minecraft/util/collection/LinkedBlockPosHashSet
 	COMMENT Represents a set of block positions (long representation).
 	COMMENT <p>
 	COMMENT Uses a {@link Long2LongLinkedOpenHashMap} as its internal storage medium
@@ -13,7 +13,7 @@ CLASS net/minecraft/unmapped/C_tgodeund net/minecraft/util/collection/LinkedBloc
 	COMMENT <li>A larger number of positions can be comprised together into one long allowing for a smaller memory footprint.</li>
 	COMMENT </ol>
 	COMMENT @see net.minecraft.world.chunk.light.LevelPropagator
-	FIELD f_clwijhqh buffer Lnet/minecraft/unmapped/C_tgodeund$C_xwtzuajo;
+	FIELD f_hjetyojz buffer Lnet/minecraft/unmapped/C_dnuedogt$C_ckcancib;
 	METHOD <init> (IF)V
 		ARG 1 expectedSize
 		ARG 2 loadFactor
@@ -31,46 +31,40 @@ CLASS net/minecraft/unmapped/C_tgodeund net/minecraft/util/collection/LinkedBloc
 		COMMENT Pops first block position off of this set.
 	METHOD size ()I
 		COMMENT @throws UnsupportedOperationException
-	CLASS C_xwtzuajo Storage
+	CLASS C_ckcancib Storage
 		COMMENT Represents a three-dimensional mapping from a block position to a bitset
 		COMMENT of values set at that position.
-		FIELD f_amljafca Y_BIT_OFFSET I
-		FIELD f_bsdckoug lastWrittenIndex I
-		FIELD f_djzwxgum X_BIT_OFFSET I
-		FIELD f_ecmggigs FIELD_SPACING I
-		FIELD f_lucojvbo expectedSize I
-		FIELD f_mmcrfhck lastWrittenKey J
-		FIELD f_nmrndtzi STARTING_OFFSET I
-		FIELD f_rvrxjlix MAX_POSITION J
-		FIELD f_wmthdlza HORIZONTAL_COLUMN_BIT_SEPARATION I
-		FIELD f_zukjxqao Z_BIT_OFFSET I
+		FIELD f_cbqgyiqx STARTING_OFFSET I
+		FIELD f_ezcgejes lastWrittenKey J
+		FIELD f_fluvsftu MAX_POSITION J
+		FIELD f_fpgeijku HORIZONTAL_COLUMN_BIT_SEPARATION I
+		FIELD f_gbpqfwnd expectedSize I
+		FIELD f_ifxpvxjd Y_BIT_OFFSET I
+		FIELD f_qcaqcdpf FIELD_SPACING I
+		FIELD f_qinmuxie X_BIT_OFFSET I
+		FIELD f_tgnekakm Z_BIT_OFFSET I
+		FIELD f_uaokwxvh lastWrittenIndex I
 		METHOD <init> (IF)V
 			ARG 1 expectedSize
 			ARG 2 loadFactor
-		METHOD m_auxuxtlk unsetBits (J)Z
+		METHOD m_bynqpjls unsetBits (J)Z
 			COMMENT Unsets flags within the last 2x cubed region contained within this map.
 			COMMENT <p>
 			COMMENT This is equivalent to the call {@code unsetBitsAt(this.n, mask)}
 			COMMENT
 			COMMENT @return {@code true} if the collection was changed as a result of this call
 			ARG 1 mask
-		METHOD m_coloqlcf getBlockOffset (J)I
-			COMMENT Gets a position's index relative to its containing 2x cube region
-			ARG 0 posLong
-		METHOD m_dzlfuxim unsetBitsAt (IJ)Z
-			COMMENT Unsets flags within a specific 2x cubed region contained within this map.
-			COMMENT
-			COMMENT @return {@code true} if the collection was changed as a result of this call
-			ARG 1 index
-			ARG 2 mask
-		METHOD m_haonrsul getBlockPosLong (JI)J
-			ARG 0 key
-			ARG 2 valueLength
-		METHOD m_jvipcacx rem (J)Z
+		METHOD m_dnuucbes rem (J)Z
 			COMMENT Removes a block position from this map.
 			ARG 1 posLong
-		METHOD m_okdfwqmz removeFirstLong ()J
-		METHOD m_otxqoeid setBits (IJ)Z
+		METHOD m_faahreks getBlockPosLong (JI)J
+			ARG 0 key
+			ARG 2 valueLength
+		METHOD m_flkaytff getKey (J)J
+			COMMENT Converts a individual position into a key
+			COMMENT representing the 2x cube region containing that position.
+			ARG 0 posLong
+		METHOD m_lrmipdlk setBits (IJ)Z
 			COMMENT Sets flags within a specific 2x cubed region represented by {@code index}.
 			COMMENT
 			COMMENT @return {@code true} if the map already contained set bits for the indicated mask
@@ -79,14 +73,20 @@ CLASS net/minecraft/unmapped/C_tgodeund net/minecraft/util/collection/LinkedBloc
 				COMMENT zero-based index of a 2x cubed area
 			ARG 2 mask
 				COMMENT mask of bits to set
-		METHOD m_ovwgbzob getKey (J)J
-			COMMENT Converts a individual position into a key
-			COMMENT representing the 2x cube region containing that position.
-			ARG 0 posLong
-		METHOD m_xmimbbuo add (J)Z
+		METHOD m_nbpdpwes removeFirstLong ()J
+		METHOD m_nzicqiwo add (J)Z
 			COMMENT Ensures that this collection contains the specified element (optional operation).
 			COMMENT
 			COMMENT @see java.util.Collection#add(Object)
 			ARG 1 posLong
+		METHOD m_qmervhmj unsetBitsAt (IJ)Z
+			COMMENT Unsets flags within a specific 2x cubed region contained within this map.
+			COMMENT
+			COMMENT @return {@code true} if the collection was changed as a result of this call
+			ARG 1 index
+			ARG 2 mask
+		METHOD m_ujzqxngp getBlockOffset (J)I
+			COMMENT Gets a position's index relative to its containing 2x cube region
+			ARG 0 posLong
 		METHOD rehash (I)V
 			ARG 1 newN

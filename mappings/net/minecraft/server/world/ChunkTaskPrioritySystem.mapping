@@ -1,80 +1,80 @@
-CLASS net/minecraft/unmapped/C_uefrhcxg net/minecraft/server/world/ChunkTaskPrioritySystem
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_clrbrulg queues Ljava/util/Map;
-	FIELD f_nyhaonqm idleActors Ljava/util/Set;
-	FIELD f_wyauniej controlActor Lnet/minecraft/unmapped/C_agydwuhb;
+CLASS net/minecraft/unmapped/C_gxchrfeu net/minecraft/server/world/ChunkTaskPrioritySystem
+	FIELD f_ljtohtlz LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_qkjtewbe controlActor Lnet/minecraft/unmapped/C_bhuwdyga;
+	FIELD f_riwndrax queues Ljava/util/Map;
+	FIELD f_zwdlmxvd idleActors Ljava/util/Set;
 	METHOD <init> (Ljava/util/List;Ljava/util/concurrent/Executor;I)V
 		ARG 1 actors
 		ARG 2 executor
 		ARG 3 maxQueues
-	METHOD m_byecpmae (Lnet/minecraft/unmapped/C_ppugczrb;Lnet/minecraft/unmapped/C_ppugczrb;)Lnet/minecraft/unmapped/C_bflngrsp$C_hrltadwd;
-		ARG 2 yield
-	METHOD m_bzlttvrh createUnblockingExecutor (Lnet/minecraft/unmapped/C_ppugczrb;)Lnet/minecraft/unmapped/C_ppugczrb;
-		ARG 1 executor
-	METHOD m_husreohv createUnblockingMessage (Ljava/lang/Runnable;JZ)Lnet/minecraft/unmapped/C_uefrhcxg$C_qilspnin;
+	METHOD m_ameltmwc createMessage (Ljava/lang/Runnable;JLjava/util/function/IntSupplier;)Lnet/minecraft/unmapped/C_gxchrfeu$C_rdobogxw;
 		ARG 0 task
 		ARG 1 pos
-		ARG 3 removeTask
-	METHOD m_husreohv removeChunk (Lnet/minecraft/unmapped/C_ppugczrb;JLjava/lang/Runnable;Z)V
+		ARG 3 lastLevelUpdatedToProvider
+	METHOD m_atnraosj createMessage (Lnet/minecraft/unmapped/C_gkderdjo;Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_gxchrfeu$C_rdobogxw;
+		ARG 0 holder
+		ARG 1 task
+	METHOD m_bormxpbd (Lnet/minecraft/unmapped/C_brzcgupp;Lnet/minecraft/unmapped/C_brzcgupp;)Lnet/minecraft/unmapped/C_psrgnlfb$C_kbkjdbow;
+		ARG 2 yield
+	METHOD m_cyzndlou (Lnet/minecraft/unmapped/C_brzcgupp;Lcom/mojang/datafixers/util/Either;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 executeOrAddBlocking
+	METHOD m_dsbbvche removeChunk (Lnet/minecraft/unmapped/C_brzcgupp;JLjava/lang/Runnable;Z)V
 		ARG 1 actor
 		ARG 2 chunkPos
 		ARG 4 callback
 		ARG 5 clearTask
-	METHOD m_kutrnmam (Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
-		ARG 0 addBlocking
-	METHOD m_lakhcmaj (Ljava/lang/Runnable;Lnet/minecraft/unmapped/C_ppugczrb;)Ljava/lang/Runnable;
-		ARG 1 yield
-	METHOD m_lqvlouzi getQueue (Lnet/minecraft/unmapped/C_ppugczrb;)Lnet/minecraft/unmapped/C_jzngtxrr;
-		ARG 1 actor
-	METHOD m_mdrcmohy (ILnet/minecraft/unmapped/C_ppugczrb;)Lnet/minecraft/unmapped/C_jzngtxrr;
-		ARG 1 actor
-	METHOD m_nfbhmkzy getDebugString ()Ljava/lang/String;
-	METHOD m_ovcdgsey (Ljava/util/Map$Entry;)Ljava/lang/String;
-		ARG 0 entry
-	METHOD m_skvddxtr enqueueExecution (Lnet/minecraft/unmapped/C_jzngtxrr;Lnet/minecraft/unmapped/C_ppugczrb;)V
-		ARG 1 queue
-		ARG 2 actor
-	METHOD m_tzvhsfhp (ILnet/minecraft/unmapped/C_utrzsrny;ILnet/minecraft/unmapped/C_jzngtxrr;)V
-		ARG 3 queue
-	METHOD m_ulrxtsse createExecutor (Lnet/minecraft/unmapped/C_ppugczrb;Z)Lnet/minecraft/unmapped/C_ppugczrb;
+	METHOD m_flztjyku getDebugString ()Ljava/lang/String;
+	METHOD m_foettvts createExecutor (Lnet/minecraft/unmapped/C_brzcgupp;Z)Lnet/minecraft/unmapped/C_brzcgupp;
 		ARG 1 executor
 		ARG 2 addBlocker
-	METHOD m_vhupwprj createMessage (Ljava/lang/Runnable;JLjava/util/function/IntSupplier;)Lnet/minecraft/unmapped/C_uefrhcxg$C_vwsvtciv;
+	METHOD m_ifjddrwt (Lnet/minecraft/unmapped/C_brzcgupp;ZLnet/minecraft/unmapped/C_brzcgupp;)Lnet/minecraft/unmapped/C_psrgnlfb$C_kbkjdbow;
+		ARG 3 yield
+	METHOD m_jntswjpq createUnblockingMessage (Ljava/lang/Runnable;JZ)Lnet/minecraft/unmapped/C_gxchrfeu$C_pognwdrp;
 		ARG 0 task
 		ARG 1 pos
-		ARG 3 lastLevelUpdatedToProvider
-	METHOD m_vhupwprj createTask (Ljava/util/function/Function;JLjava/util/function/IntSupplier;)Lnet/minecraft/unmapped/C_uefrhcxg$C_vwsvtciv;
-		ARG 0 taskFunction
-		ARG 1 pos
-		ARG 3 lastLevelUpdatedToProvider
-	METHOD m_vhupwprj createMessage (Lnet/minecraft/unmapped/C_ojdredkg;Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_uefrhcxg$C_vwsvtciv;
-		ARG 0 holder
-		ARG 1 task
-	METHOD m_vhupwprj createTask (Lnet/minecraft/unmapped/C_ojdredkg;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_uefrhcxg$C_vwsvtciv;
-		ARG 0 holder
-		ARG 1 taskFunction
-	METHOD m_wenjyayb enqueueChunk (Lnet/minecraft/unmapped/C_ppugczrb;Ljava/util/function/Function;JLjava/util/function/IntSupplier;Z)V
+		ARG 3 removeTask
+	METHOD m_jolejomh createUnblockingExecutor (Lnet/minecraft/unmapped/C_brzcgupp;)Lnet/minecraft/unmapped/C_brzcgupp;
+		ARG 1 executor
+	METHOD m_jqtptrbr enqueueExecution (Lnet/minecraft/unmapped/C_rrxtgnzj;Lnet/minecraft/unmapped/C_brzcgupp;)V
+		ARG 1 queue
+		ARG 2 actor
+	METHOD m_jvauhyuw (ILnet/minecraft/unmapped/C_brzcgupp;)Lnet/minecraft/unmapped/C_rrxtgnzj;
+		ARG 1 actor
+	METHOD m_lkqxroqx (ILnet/minecraft/unmapped/C_ynrszrtu;ILnet/minecraft/unmapped/C_rrxtgnzj;)V
+		ARG 3 queue
+	METHOD m_mwkjnnbh getQueue (Lnet/minecraft/unmapped/C_brzcgupp;)Lnet/minecraft/unmapped/C_rrxtgnzj;
+		ARG 1 actor
+	METHOD m_opulkykf enqueueChunk (Lnet/minecraft/unmapped/C_brzcgupp;Ljava/util/function/Function;JLjava/util/function/IntSupplier;Z)V
 		ARG 1 actor
 		ARG 2 task
 		ARG 3 chunkPos
 		ARG 5 lastLevelUpdatedToProvider
 		ARG 6 addBlocker
-	METHOD m_wtsqnbxn (Lnet/minecraft/unmapped/C_ppugczrb;Lcom/mojang/datafixers/util/Either;)Ljava/util/concurrent/CompletableFuture;
-		ARG 1 executeOrAddBlocking
-	METHOD m_zdftcrgj (Lnet/minecraft/unmapped/C_ppugczrb;ZLnet/minecraft/unmapped/C_ppugczrb;)Lnet/minecraft/unmapped/C_bflngrsp$C_hrltadwd;
-		ARG 3 yield
-	CLASS C_qilspnin UnblockingMessage
-		FIELD f_dyazrhxw callback Ljava/lang/Runnable;
-		FIELD f_kwdccbhu removeTask Z
-		FIELD f_vqvifgax pos J
+	METHOD m_qbadkuvc (Ljava/util/Map$Entry;)Ljava/lang/String;
+		ARG 0 entry
+	METHOD m_qtxwslel createTask (Ljava/util/function/Function;JLjava/util/function/IntSupplier;)Lnet/minecraft/unmapped/C_gxchrfeu$C_rdobogxw;
+		ARG 0 taskFunction
+		ARG 1 pos
+		ARG 3 lastLevelUpdatedToProvider
+	METHOD m_ruhinkig (Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 addBlocking
+	METHOD m_wgiirgzc createTask (Lnet/minecraft/unmapped/C_gkderdjo;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_gxchrfeu$C_rdobogxw;
+		ARG 0 holder
+		ARG 1 taskFunction
+	METHOD m_wwqujwgz (Ljava/lang/Runnable;Lnet/minecraft/unmapped/C_brzcgupp;)Ljava/lang/Runnable;
+		ARG 1 yield
+	CLASS C_pognwdrp UnblockingMessage
+		FIELD f_hjehgime removeTask Z
+		FIELD f_hsmxvnqi callback Ljava/lang/Runnable;
+		FIELD f_kglcwzgx pos J
 		METHOD <init> (Ljava/lang/Runnable;JZ)V
 			ARG 1 callback
 			ARG 2 pos
 			ARG 4 removeTask
-	CLASS C_vwsvtciv Task
-		FIELD f_dyazrhxw taskFunction Ljava/util/function/Function;
-		FIELD f_okfulwkr lastLevelUpdatedToProvider Ljava/util/function/IntSupplier;
-		FIELD f_vqvifgax pos J
+	CLASS C_rdobogxw Task
+		FIELD f_etteeotl pos J
+		FIELD f_fosviiuw taskFunction Ljava/util/function/Function;
+		FIELD f_vqyzxwhe lastLevelUpdatedToProvider Ljava/util/function/IntSupplier;
 		METHOD <init> (Ljava/util/function/Function;JLjava/util/function/IntSupplier;)V
 			ARG 1 taskFunction
 			ARG 2 pos

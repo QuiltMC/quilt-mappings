@@ -1,25 +1,25 @@
-CLASS net/minecraft/unmapped/C_msihnwpc net/minecraft/text/Style
+CLASS net/minecraft/unmapped/C_cpwnhism net/minecraft/text/Style
 	COMMENT The style of a {@link Text}, representing cosmetic attributes. It includes
 	COMMENT font, formatting, click/hover events (actions), color, etc.
 	COMMENT
 	COMMENT <p>A style is immutable.
 	COMMENT
 	COMMENT @see Text
-	FIELD f_cbaetxcw font Lnet/minecraft/unmapped/C_acfwypcn;
-	FIELD f_epwqbnio underlined Ljava/lang/Boolean;
-	FIELD f_fsdrhrmn DEFAULT_FONT_ID Lnet/minecraft/unmapped/C_acfwypcn;
-		COMMENT The identifier for the default font of a style.
-	FIELD f_ggfzwusm color Lnet/minecraft/unmapped/C_libwbsvw;
-	FIELD f_gqnkcxlz strikethrough Ljava/lang/Boolean;
-	FIELD f_krphohtn clickEvent Lnet/minecraft/unmapped/C_embfwyjd;
-	FIELD f_onrvpxen EMPTY Lnet/minecraft/unmapped/C_msihnwpc;
+	FIELD f_akgqrpsz color Lnet/minecraft/unmapped/C_wvsbwbil;
+	FIELD f_asegqccv clickEvent Lnet/minecraft/unmapped/C_djywfbme;
+	FIELD f_ccdlxlro underlined Ljava/lang/Boolean;
+	FIELD f_ivadppyn font Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_lyfnndrz EMPTY Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT An empty style.
-	FIELD f_pyftuuqs bold Ljava/lang/Boolean;
-	FIELD f_uotzivkz insertion Ljava/lang/String;
-	FIELD f_xixkojbu obfuscated Ljava/lang/Boolean;
-	FIELD f_ytxstftx hoverEvent Lnet/minecraft/unmapped/C_pcrrnrhq;
-	FIELD f_ziplgaaa italic Ljava/lang/Boolean;
-	METHOD <init> (Lnet/minecraft/unmapped/C_libwbsvw;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Lnet/minecraft/unmapped/C_embfwyjd;Lnet/minecraft/unmapped/C_pcrrnrhq;Ljava/lang/String;Lnet/minecraft/unmapped/C_acfwypcn;)V
+	FIELD f_mchdivkw strikethrough Ljava/lang/Boolean;
+	FIELD f_mcvftdup bold Ljava/lang/Boolean;
+	FIELD f_qhlslkgi hoverEvent Lnet/minecraft/unmapped/C_qhrnrrcp;
+	FIELD f_rjkvqmvf DEFAULT_FONT_ID Lnet/minecraft/unmapped/C_ncpywfca;
+		COMMENT The identifier for the default font of a style.
+	FIELD f_shbyrpex insertion Ljava/lang/String;
+	FIELD f_uorxvlwb italic Ljava/lang/Boolean;
+	FIELD f_wxbzpcki obfuscated Ljava/lang/Boolean;
+	METHOD <init> (Lnet/minecraft/unmapped/C_wvsbwbil;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Lnet/minecraft/unmapped/C_djywfbme;Lnet/minecraft/unmapped/C_qhrnrrcp;Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 color
 		ARG 2 bold
 		ARG 3 italic
@@ -32,7 +32,74 @@ CLASS net/minecraft/unmapped/C_msihnwpc net/minecraft/text/Style
 		ARG 10 font
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_aygeqjhr withExclusiveFormatting (Lnet/minecraft/unmapped/C_hvlazent;)Lnet/minecraft/unmapped/C_msihnwpc;
+	METHOD m_bfmbgava getFont ()Lnet/minecraft/unmapped/C_ncpywfca;
+		COMMENT Returns the font of this style.
+	METHOD m_bqpchnnx isStrikethrough ()Z
+		COMMENT Returns whether the style has strikethrough formatting.
+		COMMENT
+		COMMENT @see Formatting#STRIKETHROUGH
+	METHOD m_bvsibhlv getClickEvent ()Lnet/minecraft/unmapped/C_djywfbme;
+		COMMENT Returns the click event of this style.
+	METHOD m_ckuyqkid withClickEvent (Lnet/minecraft/unmapped/C_djywfbme;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the click event provided and all other
+		COMMENT attributes of this style.
+		ARG 1 clickEvent
+			COMMENT the new click event
+	METHOD m_ecpsptfx obfuscated (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 obfuscated
+	METHOD m_fnvclztz isItalic ()Z
+		COMMENT Returns whether the style has italic formatting.
+		COMMENT
+		COMMENT @see Formatting#ITALIC
+	METHOD m_fykamqvm withStrikethrough (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 strikethrough
+	METHOD m_hqnkcfpf getHoverEvent ()Lnet/minecraft/unmapped/C_qhrnrrcp;
+		COMMENT Returns the hover event of this style.
+	METHOD m_ikeeyrch withFormatting (Lnet/minecraft/unmapped/C_tnezalvh;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the formatting provided and all other
+		COMMENT attributes of this style.
+		ARG 1 formatting
+			COMMENT the new formatting
+	METHOD m_nroewwrx withHoverEvent (Lnet/minecraft/unmapped/C_qhrnrrcp;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the hover event provided and all other
+		COMMENT attributes of this style.
+		ARG 1 hoverEvent
+			COMMENT the new hover event
+	METHOD m_nxurtnrm isBold ()Z
+		COMMENT Returns whether the style has bold formatting.
+		COMMENT
+		COMMENT @see Formatting#BOLD
+	METHOD m_prhsgphy withUnderline (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the underline attribute provided and all other
+		COMMENT attributes of this style.
+		ARG 1 underline
+	METHOD m_qcmwadxl isObfuscated ()Z
+		COMMENT Returns whether the style has obfuscated formatting.
+		COMMENT
+		COMMENT @see Formatting#OBFUSCATED
+	METHOD m_qgxaajxs withColor (Lnet/minecraft/unmapped/C_wvsbwbil;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the color provided and all other attributes of
+		COMMENT this style.
+		ARG 1 color
+			COMMENT the new color
+	METHOD m_snapumsc withItalic (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the italic attribute provided and all other
+		COMMENT attributes of this style.
+		ARG 1 italic
+			COMMENT the new italic property
+	METHOD m_ubifhpoy withColor (I)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 rgbColor
+	METHOD m_urugkexy withInsertion (Ljava/lang/String;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the insertion provided and all other
+		COMMENT attributes of this style.
+		ARG 1 insertion
+			COMMENT the new insertion string
+	METHOD m_uugzmwcj withColor (Lnet/minecraft/unmapped/C_tnezalvh;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the color provided and all other attributes of
+		COMMENT this style.
+		ARG 1 color
+			COMMENT the new color
+	METHOD m_uzghvhdp withExclusiveFormatting (Lnet/minecraft/unmapped/C_tnezalvh;)Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT Returns a new style with the formatting provided and some applicable
 		COMMENT attributes of this style.
 		COMMENT
@@ -41,126 +108,59 @@ CLASS net/minecraft/unmapped/C_msihnwpc net/minecraft/text/Style
 		COMMENT obfuscated, are all removed.
 		ARG 1 formatting
 			COMMENT the new formatting
-	METHOD m_bailtmwx withParent (Lnet/minecraft/unmapped/C_msihnwpc;)Lnet/minecraft/unmapped/C_msihnwpc;
+	METHOD m_vhdzgrho withParent (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT Returns a new style with the undefined attributes of this style filled
 		COMMENT by the {@code parent} style.
 		ARG 1 parent
 			COMMENT the parent style
-	METHOD m_bwcioqzj withStrikethrough (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_msihnwpc;
-		ARG 1 strikethrough
-	METHOD m_czwdexdh isBold ()Z
-		COMMENT Returns whether the style has bold formatting.
-		COMMENT
-		COMMENT @see Formatting#BOLD
-	METHOD m_eggkzfkn getColor ()Lnet/minecraft/unmapped/C_libwbsvw;
+	METHOD m_vsxfmets getColor ()Lnet/minecraft/unmapped/C_wvsbwbil;
 		COMMENT Returns the color of this style.
-	METHOD m_excujjhq isEmpty ()Z
+	METHOD m_wacqbihg isUnderlined ()Z
+		COMMENT Returns whether the style has underline formatting.
+		COMMENT
+		COMMENT @see Formatting#UNDERLINE
+	METHOD m_zefghcpx isEmpty ()Z
 		COMMENT Returns if this is the empty style.
 		COMMENT
 		COMMENT @see #EMPTY
-	METHOD m_hdpwufwb withClickEvent (Lnet/minecraft/unmapped/C_embfwyjd;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the click event provided and all other
-		COMMENT attributes of this style.
-		ARG 1 clickEvent
-			COMMENT the new click event
-	METHOD m_hdxjldqx withItalic (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the italic attribute provided and all other
-		COMMENT attributes of this style.
-		ARG 1 italic
-			COMMENT the new italic property
-	METHOD m_hxvexabd withBold (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the bold attribute provided and all other
-		COMMENT attributes of this style.
-		ARG 1 bold
-			COMMENT the new bold property
-	METHOD m_idywqstu isStrikethrough ()Z
-		COMMENT Returns whether the style has strikethrough formatting.
-		COMMENT
-		COMMENT @see Formatting#STRIKETHROUGH
-	METHOD m_knjugobx withUnderline (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the underline attribute provided and all other
-		COMMENT attributes of this style.
-		ARG 1 underline
-	METHOD m_lnmmmaqt withFont (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_msihnwpc;
+	METHOD m_zmfsfvfi withFont (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT Returns a new style with the font provided and all other
 		COMMENT attributes of this style.
 		ARG 1 font
 			COMMENT the new font
-	METHOD m_mvvstejl isUnderlined ()Z
-		COMMENT Returns whether the style has underline formatting.
-		COMMENT
-		COMMENT @see Formatting#UNDERLINE
-	METHOD m_nehsgtip withFormatting ([Lnet/minecraft/unmapped/C_hvlazent;)Lnet/minecraft/unmapped/C_msihnwpc;
+	METHOD m_zmnznmyq withBold (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_cpwnhism;
+		COMMENT Returns a new style with the bold attribute provided and all other
+		COMMENT attributes of this style.
+		ARG 1 bold
+			COMMENT the new bold property
+	METHOD m_zspjdzlp withFormatting ([Lnet/minecraft/unmapped/C_tnezalvh;)Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT Returns a new style with the formattings provided and all other
 		COMMENT attributes of this style.
 		ARG 1 formattings
 			COMMENT an array of new formattings
-	METHOD m_ngzjcuis getHoverEvent ()Lnet/minecraft/unmapped/C_pcrrnrhq;
-		COMMENT Returns the hover event of this style.
-	METHOD m_prezvran withColor (I)Lnet/minecraft/unmapped/C_msihnwpc;
-		ARG 1 rgbColor
-	METHOD m_prezvran withColor (Lnet/minecraft/unmapped/C_hvlazent;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the color provided and all other attributes of
-		COMMENT this style.
-		ARG 1 color
-			COMMENT the new color
-	METHOD m_prezvran withColor (Lnet/minecraft/unmapped/C_libwbsvw;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the color provided and all other attributes of
-		COMMENT this style.
-		ARG 1 color
-			COMMENT the new color
-	METHOD m_rnrfyqdl getFont ()Lnet/minecraft/unmapped/C_acfwypcn;
-		COMMENT Returns the font of this style.
-	METHOD m_slrdkuag obfuscated (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_msihnwpc;
-		ARG 1 obfuscated
-	METHOD m_tmbzcpzp isObfuscated ()Z
-		COMMENT Returns whether the style has obfuscated formatting.
-		COMMENT
-		COMMENT @see Formatting#OBFUSCATED
-	METHOD m_udzaqigf getInsertion ()Ljava/lang/String;
+	METHOD m_zvemalqw getInsertion ()Ljava/lang/String;
 		COMMENT Returns the insertion text of the style.
 		COMMENT
 		COMMENT <p>An insertion is inserted when a piece of text clicked while shift key
 		COMMENT is down in the chat HUD.
-	METHOD m_uiigmfsi withHoverEvent (Lnet/minecraft/unmapped/C_pcrrnrhq;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the hover event provided and all other
-		COMMENT attributes of this style.
-		ARG 1 hoverEvent
-			COMMENT the new hover event
-	METHOD m_ulvvddfg getClickEvent ()Lnet/minecraft/unmapped/C_embfwyjd;
-		COMMENT Returns the click event of this style.
-	METHOD m_zsthkbhm isItalic ()Z
-		COMMENT Returns whether the style has italic formatting.
-		COMMENT
-		COMMENT @see Formatting#ITALIC
-	METHOD m_zuyegbku withFormatting (Lnet/minecraft/unmapped/C_hvlazent;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the formatting provided and all other
-		COMMENT attributes of this style.
-		ARG 1 formatting
-			COMMENT the new formatting
-	METHOD m_zvlmysht withInsertion (Ljava/lang/String;)Lnet/minecraft/unmapped/C_msihnwpc;
-		COMMENT Returns a new style with the insertion provided and all other
-		COMMENT attributes of this style.
-		ARG 1 insertion
-			COMMENT the new insertion string
-	CLASS C_pkmrgtdq Serializer
+	CLASS C_esbikpbl Serializer
 		COMMENT A JSON serializer for {@link Style}.
 		METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 			ARG 1 json
 			ARG 2 type
 			ARG 3 context
-		METHOD m_llzqcwql parseNullableBoolean (Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/Boolean;
+		METHOD m_ahungtww parseColor (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_wvsbwbil;
+			ARG 0 root
+		METHOD m_ddcwgffm parseNullableBoolean (Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/Boolean;
 			ARG 0 root
 			ARG 1 key
-		METHOD m_lrwapcmf parseColor (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_libwbsvw;
+		METHOD m_dvioyqxy parseInsertion (Lcom/google/gson/JsonObject;)Ljava/lang/String;
 			ARG 0 root
-		METHOD m_ngzjcuis getHoverEvent (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_pcrrnrhq;
+		METHOD m_ftrwvjsb getHoverEvent (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_qhrnrrcp;
 			ARG 0 root
-		METHOD m_rnrfyqdl getFont (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_acfwypcn;
+		METHOD m_fuznxmkp getFont (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_ncpywfca;
 			ARG 0 root
-		METHOD m_udzaqigf parseInsertion (Lcom/google/gson/JsonObject;)Ljava/lang/String;
-			ARG 0 root
-		METHOD m_ulvvddfg getClickEvent (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_embfwyjd;
+		METHOD m_macotzqq getClickEvent (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_djywfbme;
 			ARG 0 root
 		METHOD serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 			ARG 1 style
