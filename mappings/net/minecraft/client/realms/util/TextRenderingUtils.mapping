@@ -1,22 +1,30 @@
-CLASS net/minecraft/unmapped/C_jdapkfqd net/minecraft/client/realms/util/TextRenderingUtils
-	METHOD m_qgswcbmm insertLinks (Ljava/util/List;Ljava/util/List;)Ljava/util/List;
+CLASS net/minecraft/unmapped/C_dqfkpadj net/minecraft/client/realms/util/TextRenderingUtils
+	METHOD m_dcuanzxh lineBreak (Ljava/lang/String;)Ljava/util/List;
+		ARG 0 text
+	METHOD m_eigkiqht decompose (Ljava/lang/String;[Lnet/minecraft/unmapped/C_dqfkpadj$C_ybeakzky;)Ljava/util/List;
+		ARG 0 text
+		ARG 1 links
+	METHOD m_phqlfath decompose (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+		ARG 0 text
+		ARG 1 links
+	METHOD m_sypsosxr insertLinks (Ljava/util/List;Ljava/util/List;)Ljava/util/List;
 		ARG 0 lines
 		ARG 1 links
-	METHOD m_vrnjxava decompose (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
-		ARG 0 text
-		ARG 1 links
-	METHOD m_vrnjxava decompose (Ljava/lang/String;[Lnet/minecraft/unmapped/C_jdapkfqd$C_fyjoarji;)Ljava/util/List;
-		ARG 0 text
-		ARG 1 links
-	METHOD m_weozvcee split (Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+	METHOD m_wlmsuclq split (Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
 		ARG 0 line
 		ARG 1 delimiter
-	METHOD m_ykogrrzy lineBreak (Ljava/lang/String;)Ljava/util/List;
-		ARG 0 text
-	CLASS C_fyjoarji LineSegment
-		FIELD f_feznpmfp linkTitle Ljava/lang/String;
-		FIELD f_moxmdhie linkUrl Ljava/lang/String;
-		FIELD f_queysuqd fullText Ljava/lang/String;
+	CLASS C_mqrbwwre Line
+		FIELD f_sioncljj segments Ljava/util/List;
+		METHOD <init> (Ljava/util/List;)V
+			ARG 1 segments
+		METHOD <init> ([Lnet/minecraft/unmapped/C_dqfkpadj$C_ybeakzky;)V
+			ARG 1 segments
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+	CLASS C_ybeakzky LineSegment
+		FIELD f_bghtcybc fullText Ljava/lang/String;
+		FIELD f_fnzqizvn linkTitle Ljava/lang/String;
+		FIELD f_tkcgrdxa linkUrl Ljava/lang/String;
 		METHOD <init> (Ljava/lang/String;)V
 			ARG 1 fullText
 		METHOD <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
@@ -25,19 +33,11 @@ CLASS net/minecraft/unmapped/C_jdapkfqd net/minecraft/client/realms/util/TextRen
 			ARG 3 linkUrl
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
-		METHOD m_cpyrseck isLink ()Z
-		METHOD m_ejuhpoel link (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_jdapkfqd$C_fyjoarji;
+		METHOD m_fxicfppj isLink ()Z
+		METHOD m_grgiahjn renderedText ()Ljava/lang/String;
+		METHOD m_kqnghnqo link (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_dqfkpadj$C_ybeakzky;
 			ARG 0 linkTitle
 			ARG 1 linkUrl
-		METHOD m_fdozxaei renderedText ()Ljava/lang/String;
-		METHOD m_ifqvzrnd getLinkUrl ()Ljava/lang/String;
-		METHOD m_jrfsqrhb text (Ljava/lang/String;)Lnet/minecraft/unmapped/C_jdapkfqd$C_fyjoarji;
+		METHOD m_uvvbmmyz text (Ljava/lang/String;)Lnet/minecraft/unmapped/C_dqfkpadj$C_ybeakzky;
 			ARG 0 fullText
-	CLASS C_kemklzpz Line
-		FIELD f_zwwsegco segments Ljava/util/List;
-		METHOD <init> (Ljava/util/List;)V
-			ARG 1 segments
-		METHOD <init> ([Lnet/minecraft/unmapped/C_jdapkfqd$C_fyjoarji;)V
-			ARG 1 segments
-		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
+		METHOD m_zndcudlg getLinkUrl ()Ljava/lang/String;

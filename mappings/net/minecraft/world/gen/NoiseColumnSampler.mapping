@@ -1,24 +1,24 @@
-CLASS net/minecraft/unmapped/C_wgwzecpu net/minecraft/world/gen/NoiseColumnSampler
+CLASS net/minecraft/unmapped/C_upcezwgw net/minecraft/world/gen/NoiseColumnSampler
 	COMMENT Samples noise values for use in chunk generation.
-	FIELD f_arkvgtsw config Lnet/minecraft/unmapped/C_ixdagvlu;
-	FIELD f_atzbexim topSlideSize D
-	FIELD f_fdhcctzq bottomSlideSize D
-	FIELD f_gpivlgun islandNoise Lnet/minecraft/unmapped/C_pkstvmnm;
-	FIELD f_idkhncet topSlideOffset D
-	FIELD f_iqlndjww biomeSource Lnet/minecraft/unmapped/C_aywougja;
-	FIELD f_jngniuho verticalNoiseResolution I
-	FIELD f_lcnmvmou densityNoise Lnet/minecraft/unmapped/C_loypvish;
-	FIELD f_owmtanhy noiseSizeY I
-	FIELD f_pplmdxbg densityFactor D
-	FIELD f_pwnbkkha bottomSlideOffset D
-	FIELD f_qeqsxbuy BIOME_WEIGHT_TABLE [F
+	FIELD f_bxakwxbi topSlideSize D
+	FIELD f_dosalnob bottomSlideSize D
+	FIELD f_dwdzijwg horizontalNoiseResolution I
+	FIELD f_fbfmrjry islandNoise Lnet/minecraft/unmapped/C_mnmvtskp;
+	FIELD f_fhasjyar bottomSlideOffset D
+	FIELD f_ijossuzc bottomSlideTarget D
+	FIELD f_ipahfeas densityNoise Lnet/minecraft/unmapped/C_hsivpyol;
+	FIELD f_jgptfern noise Lnet/minecraft/unmapped/C_uuzbvycz;
+	FIELD f_liqedjym densityOffset D
+	FIELD f_nmfkaxkv BIOME_WEIGHT_TABLE [F
 		COMMENT Table of weights used to weight faraway biomes less than nearby biomes.
-	FIELD f_qrfiyfkx horizontalNoiseResolution I
-	FIELD f_rrlmwzdp bottomSlideTarget D
-	FIELD f_uzwcsedp densityOffset D
-	FIELD f_vnzrbzpr topSlideTarget D
-	FIELD f_yyblrgok noise Lnet/minecraft/unmapped/C_zcyvbzuu;
-	METHOD <init> (Lnet/minecraft/unmapped/C_aywougja;IIILnet/minecraft/unmapped/C_ixdagvlu;Lnet/minecraft/unmapped/C_zcyvbzuu;Lnet/minecraft/unmapped/C_pkstvmnm;Lnet/minecraft/unmapped/C_loypvish;Lnet/minecraft/unmapped/C_oyoyetkt;)V
+	FIELD f_npoticoj noiseSizeY I
+	FIELD f_owhxpmqu topSlideTarget D
+	FIELD f_pwioedsh topSlideOffset D
+	FIELD f_qivpyboo biomeSource Lnet/minecraft/unmapped/C_ajguowya;
+	FIELD f_skohimac config Lnet/minecraft/unmapped/C_ulvgadxi;
+	FIELD f_smxijvcu verticalNoiseResolution I
+	FIELD f_xsrrokfr densityFactor D
+	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;IIILnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_uuzbvycz;Lnet/minecraft/unmapped/C_mnmvtskp;Lnet/minecraft/unmapped/C_hsivpyol;Lnet/minecraft/unmapped/C_tkteyoyo;)V
 		ARG 1 biomeSource
 		ARG 2 horizontalNoiseResolution
 		ARG 3 verticalNoiseResolution
@@ -27,20 +27,7 @@ CLASS net/minecraft/unmapped/C_wgwzecpu net/minecraft/world/gen/NoiseColumnSampl
 		ARG 6 noise
 		ARG 7 islandNoise
 		ARG 8 densityNoise
-	METHOD m_aiwjwbjb ([F)V
-		ARG 0 array
-	METHOD m_iroyqqgl getOffset (IDDD)D
-		COMMENT Calculates an offset for the noise.
-		COMMENT <p>For example in the overworld, this makes lower y values solid while making higher y values air.
-		ARG 1 y
-		ARG 2 depth
-		ARG 4 scale
-		ARG 6 randomDensityOffset
-	METHOD m_kyocbrfm applySlides (DI)D
-		COMMENT Interpolates the noise at the top and bottom of the world.
-		ARG 1 noise
-		ARG 3 y
-	METHOD m_pchqdpuq sampleNoiseColumn ([DIILnet/minecraft/unmapped/C_ixdagvlu;III)V
+	METHOD m_anrmkmmu sampleNoiseColumn ([DIILnet/minecraft/unmapped/C_ulvgadxi;III)V
 		COMMENT Samples the noise for the given column and stores it in the buffer parameter.
 		ARG 1 buffer
 		ARG 2 x
@@ -49,7 +36,20 @@ CLASS net/minecraft/unmapped/C_wgwzecpu net/minecraft/world/gen/NoiseColumnSampl
 		ARG 5 seaLevel
 		ARG 6 minY
 		ARG 7 noiseSizeY
-	METHOD m_udtuboih getDensityNoise (II)D
+	METHOD m_njhaclur getOffset (IDDD)D
+		COMMENT Calculates an offset for the noise.
+		COMMENT <p>For example in the overworld, this makes lower y values solid while making higher y values air.
+		ARG 1 y
+		ARG 2 depth
+		ARG 4 scale
+		ARG 6 randomDensityOffset
+	METHOD m_tbiwonmb getDensityNoise (II)D
 		COMMENT Applies a random change to the density to subtly vary the height of the terrain.
 		ARG 1 x
 		ARG 2 z
+	METHOD m_thpakxpj ([F)V
+		ARG 0 array
+	METHOD m_ugvwkvqt applySlides (DI)D
+		COMMENT Interpolates the noise at the top and bottom of the world.
+		ARG 1 noise
+		ARG 3 y

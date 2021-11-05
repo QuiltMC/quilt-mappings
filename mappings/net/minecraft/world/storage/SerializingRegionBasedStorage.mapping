@@ -1,14 +1,14 @@
-CLASS net/minecraft/unmapped/C_grzuaaus net/minecraft/world/storage/SerializingRegionBasedStorage
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_cguovbdk world Lnet/minecraft/unmapped/C_byoninpq;
-	FIELD f_eozawbhy worker Lnet/minecraft/unmapped/C_hnkasgff;
-	FIELD f_gocqpnsy codecFactory Ljava/util/function/Function;
-	FIELD f_kpdwhrng dataFixTypes Lnet/minecraft/unmapped/C_jqafrrcc;
-	FIELD f_lsmuprgz dataFixer Lcom/mojang/datafixers/DataFixer;
-	FIELD f_rkdnmhcx unsavedElements Lit/unimi/dsi/fastutil/longs/LongLinkedOpenHashSet;
-	FIELD f_rtylqebf loadedElements Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
-	FIELD f_vqdagpia factory Ljava/util/function/Function;
-	METHOD <init> (Ljava/io/File;Ljava/util/function/Function;Ljava/util/function/Function;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_jqafrrcc;ZLnet/minecraft/unmapped/C_byoninpq;)V
+CLASS net/minecraft/unmapped/C_suaauzrg net/minecraft/world/storage/SerializingRegionBasedStorage
+	FIELD f_bmqpxoca codecFactory Ljava/util/function/Function;
+	FIELD f_falkxrva dataFixer Lcom/mojang/datafixers/DataFixer;
+	FIELD f_fivzsmwg factory Ljava/util/function/Function;
+	FIELD f_fonmahly loadedElements Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_hkdspeev LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_lmgjqjdd dataFixTypes Lnet/minecraft/unmapped/C_ccrrfaqj;
+	FIELD f_lzyscepg unsavedElements Lit/unimi/dsi/fastutil/longs/LongLinkedOpenHashSet;
+	FIELD f_watghctx world Lnet/minecraft/unmapped/C_qpninoyb;
+	FIELD f_wvxclayq worker Lnet/minecraft/unmapped/C_ffgsaknh;
+	METHOD <init> (Ljava/io/File;Ljava/util/function/Function;Ljava/util/function/Function;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_ccrrfaqj;ZLnet/minecraft/unmapped/C_qpninoyb;)V
 		ARG 1 directory
 		ARG 2 codecFactory
 		ARG 3 factory
@@ -16,27 +16,27 @@ CLASS net/minecraft/unmapped/C_grzuaaus net/minecraft/world/storage/SerializingR
 		ARG 5 dataFixTypes
 		ARG 6 dsync
 		ARG 7 world
-	METHOD m_fmksemad getDataVersion (Lcom/mojang/serialization/Dynamic;)I
-	METHOD m_hcwjnrpt get (J)Ljava/util/Optional;
-		ARG 1 pos
-	METHOD m_hrvudlgy save (Lnet/minecraft/unmapped/C_utrzsrny;)V
-	METHOD m_iiqknvxs getIfLoaded (J)Ljava/util/Optional;
-		ARG 1 pos
-	METHOD m_knqjfrwa onLoad (J)V
-		ARG 1 pos
-	METHOD m_msbwpscs loadDataAt (Lnet/minecraft/unmapped/C_utrzsrny;)V
+	METHOD m_baelplcn loadDataAt (Lnet/minecraft/unmapped/C_ynrszrtu;)V
 		ARG 1 chunkPos
-	METHOD m_msbwpscs update (Lnet/minecraft/unmapped/C_utrzsrny;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)V
+	METHOD m_ebhrilfy onUpdate (J)V
+		ARG 1 pos
+	METHOD m_ejbrptcm getOrCreate (J)Ljava/lang/Object;
+		ARG 1 pos
+	METHOD m_emvuwkbz tick (Ljava/util/function/BooleanSupplier;)V
+		ARG 1 shouldKeepTicking
+	METHOD m_ikyichfy isPosInvalid (J)Z
+	METHOD m_iyehricr onLoad (J)V
+		ARG 1 pos
+	METHOD m_jsxrwbak getDataVersion (Lcom/mojang/serialization/Dynamic;)I
+	METHOD m_lxzqfara loadNbt (Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 1 pos
+	METHOD m_okusviuh update (Lnet/minecraft/unmapped/C_ynrszrtu;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)V
 		ARG 1 pos
 		ARG 3 data
-	METHOD m_nzncuwof tick (Ljava/util/function/BooleanSupplier;)V
-		ARG 1 shouldKeepTicking
-	METHOD m_odvzcwoc getOrCreate (J)Ljava/lang/Object;
+	METHOD m_oynlrnhu getIfLoaded (J)Ljava/util/Optional;
 		ARG 1 pos
-	METHOD m_pjnrsfwg loadNbt (Lnet/minecraft/unmapped/C_utrzsrny;)Lnet/minecraft/unmapped/C_hincwlhh;
+	METHOD m_ptpihsyj save (Lnet/minecraft/unmapped/C_ynrszrtu;)V
+	METHOD m_yvchsmco get (J)Ljava/util/Optional;
 		ARG 1 pos
-	METHOD m_rhwoxozx isPosInvalid (J)Z
-	METHOD m_serljykp saveChunk (Lnet/minecraft/unmapped/C_utrzsrny;)V
-		ARG 1 pos
-	METHOD m_zckzmjeg onUpdate (J)V
+	METHOD m_zedncrpm saveChunk (Lnet/minecraft/unmapped/C_ynrszrtu;)V
 		ARG 1 pos

@@ -1,41 +1,8 @@
-CLASS net/minecraft/unmapped/C_gxmecroz net/minecraft/world/gen/ChunkRandom
-	FIELD f_nrjvhxli sampleCount I
+CLASS net/minecraft/unmapped/C_zorcemxg net/minecraft/world/gen/ChunkRandom
+	FIELD f_ystrqpxh sampleCount I
 	METHOD <init> (J)V
 		ARG 1 seed
-	METHOD m_aigwjefs setRegionSeed (JIII)J
-		COMMENT Seeds the randomizer to determine the start position of structure features such as
-		COMMENT temples, monuments and buried treasures within a region.
-		COMMENT
-		COMMENT <p>The region coordinates pair corresponds to the coordinates of the region the seeded
-		COMMENT chunk lies in. For example, a swamp hut region is 32 by 32 chunks meaning that all
-		COMMENT chunks that lie within that region get seeded the same way.
-		COMMENT
-		COMMENT <p>Similarly, the upper 16 bits of world seed also do not affect the region seed because
-		COMMENT they get truncated in the setSeed() call.
-		ARG 1 worldSeed
-		ARG 3 regionX
-		ARG 4 regionZ
-		ARG 5 salt
-	METHOD m_ebzbnuwu setCarverSeed (JII)J
-		COMMENT Seeds the randomizer to generate larger features such as caves, ravines, mineshafts
-		COMMENT and strongholds. It is also used to initiate structure start behavior such as rotation.
-		COMMENT
-		COMMENT <p>Similar to the population seed, only the 48 lowest bits of the world seed affect the
-		COMMENT output since it the upper 16 bits are truncated in the setSeed() call.
-		ARG 1 worldSeed
-		ARG 3 chunkX
-		ARG 4 chunkZ
-	METHOD m_ietmlmxh setDeepslateSeed (JIII)J
-		ARG 1 worldSeed
-		ARG 3 x
-		ARG 4 y
-		ARG 5 z
-	METHOD m_iwycsujd getSlimeRandom (IIJJ)Ljava/util/Random;
-		ARG 0 chunkX
-		ARG 1 chunkZ
-		ARG 2 worldSeed
-		ARG 4 scrambler
-	METHOD m_pjpkaylq setPopulationSeed (JII)J
+	METHOD m_gbivfhmb setPopulationSeed (JII)J
 		COMMENT Seeds the randomizer to create population features such as decorators and animals.
 		COMMENT
 		COMMENT <p>This method takes in the world seed and the negative-most block coordinates of the
@@ -50,8 +17,7 @@ CLASS net/minecraft/unmapped/C_gxmecroz net/minecraft/world/gen/ChunkRandom
 		ARG 1 worldSeed
 		ARG 3 blockX
 		ARG 4 blockZ
-	METHOD m_scxynpew getSampleCount ()I
-	METHOD m_siuttvnd setTerrainSeed (II)J
+	METHOD m_hccxltqt setTerrainSeed (II)J
 		COMMENT Seeds the randomizer to generate the surface terrain blocks (such as grass, sand, etc.)
 		COMMENT and the bedrock patterns.
 		COMMENT
@@ -59,7 +25,41 @@ CLASS net/minecraft/unmapped/C_gxmecroz net/minecraft/world/gen/ChunkRandom
 		COMMENT chunk coordinates.
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD m_unuwnapq setDecoratorSeed (JII)J
+	METHOD m_jzzsygpp getSampleCount ()I
+	METHOD m_kmxvnysp setDeepslateSeed (JIII)J
+		ARG 1 worldSeed
+		ARG 3 x
+		ARG 4 y
+		ARG 5 z
+	METHOD m_kqsbqpyh setRegionSeed (JIII)J
+		COMMENT Seeds the randomizer to determine the start position of structure features such as
+		COMMENT temples, monuments and buried treasures within a region.
+		COMMENT
+		COMMENT <p>The region coordinates pair corresponds to the coordinates of the region the seeded
+		COMMENT chunk lies in. For example, a swamp hut region is 32 by 32 chunks meaning that all
+		COMMENT chunks that lie within that region get seeded the same way.
+		COMMENT
+		COMMENT <p>Similarly, the upper 16 bits of world seed also do not affect the region seed because
+		COMMENT they get truncated in the setSeed() call.
+		ARG 1 worldSeed
+		ARG 3 regionX
+		ARG 4 regionZ
+		ARG 5 salt
+	METHOD m_lwmvfqsf getSlimeRandom (IIJJ)Ljava/util/Random;
+		ARG 0 chunkX
+		ARG 1 chunkZ
+		ARG 2 worldSeed
+		ARG 4 scrambler
+	METHOD m_nvexbmvp setCarverSeed (JII)J
+		COMMENT Seeds the randomizer to generate larger features such as caves, ravines, mineshafts
+		COMMENT and strongholds. It is also used to initiate structure start behavior such as rotation.
+		COMMENT
+		COMMENT <p>Similar to the population seed, only the 48 lowest bits of the world seed affect the
+		COMMENT output since it the upper 16 bits are truncated in the setSeed() call.
+		ARG 1 worldSeed
+		ARG 3 chunkX
+		ARG 4 chunkZ
+	METHOD m_pmazpwoq setDecoratorSeed (JII)J
 		COMMENT Seeds the randomizer to generate a given feature.
 		COMMENT
 		COMMENT The salt, in the form of {@code index + 10000 * step} assures that each feature is seeded

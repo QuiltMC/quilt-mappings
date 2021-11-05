@@ -1,32 +1,30 @@
-CLASS net/minecraft/unmapped/C_sjlsskox net/minecraft/entity/passive/WolfEntity
-	FIELD f_dhpkpjbg targetUuid Ljava/util/UUID;
-	FIELD f_dzevotup lastShakeProgress F
-	FIELD f_eijumrmj ANGER_TIME_RANGE Lnet/minecraft/unmapped/C_ivtmlivh;
-	FIELD f_fdegeddu begAnimationProgress F
-	FIELD f_fmmyltzp lastBegAnimationProgress F
-	FIELD f_lxwrabri FOLLOW_TAMED_PREDICATE Ljava/util/function/Predicate;
-	FIELD f_modlkyxv ANGER_TIME Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_nbqxgugx shakeProgress F
-	FIELD f_ndivhsux BEGGING Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_snejupii canShakeWaterOff Z
-	FIELD f_sszajsrd WILD_MAX_HEALTH F
-	FIELD f_ujexdjup TAMED_MAX_HEALTH F
-	FIELD f_uvfasiso COLLAR_COLOR Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_wjtmvyob furWet Z
-	METHOD m_aiwjwbjb (Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-		ARG 0 entity
-	METHOD m_auwzyzuk getCollarColor ()Lnet/minecraft/unmapped/C_eaqgllra;
-	METHOD m_dvtzjkzx createWolfAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_pckcmlvu;
-	METHOD m_gmhrkiyx getBegAnimationProgress (F)F
+CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
+	FIELD f_aftpehwe ANGER_TIME Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_bgdwgbfu lastShakeProgress F
+	FIELD f_bhmevkqm COLLAR_COLOR Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_glkqojhp furWet Z
+	FIELD f_lcbuuhzu WILD_MAX_HEALTH F
+	FIELD f_ocxdlcyn canShakeWaterOff Z
+	FIELD f_opennbir lastBegAnimationProgress F
+	FIELD f_oyucjpiv FOLLOW_TAMED_PREDICATE Ljava/util/function/Predicate;
+	FIELD f_rqsgdixb targetUuid Ljava/util/UUID;
+	FIELD f_svqisfdy BEGGING Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_thwpaxgq shakeProgress F
+	FIELD f_uuhetxwo ANGER_TIME_RANGE Lnet/minecraft/unmapped/C_hvilmtvi;
+	FIELD f_wjmkqevm begAnimationProgress F
+	FIELD f_ycekgyxv TAMED_MAX_HEALTH F
+	METHOD m_aliqaiom getTailAngle ()F
+	METHOD m_dnvpayop setCollarColor (Lnet/minecraft/unmapped/C_arllgqae;)V
+		ARG 1 color
+	METHOD m_fpigwena isFurWet ()Z
+		COMMENT Returns whether this wolf's fur is wet.
+		COMMENT <p>
+		COMMENT The wolf's fur will remain wet until the wolf shakes.
+	METHOD m_gvyvpuqi getBegAnimationProgress (F)F
 		ARG 1 tickDelta
-	METHOD m_lvoqatob resetShake ()V
-	METHOD m_pmcnjuom isBegging ()Z
-	METHOD m_qjlahfsj getShakeAnimationProgress (FF)F
+	METHOD m_jknxzpwn getShakeAnimationProgress (FF)F
 		ARG 1 tickDelta
-	METHOD m_rdzrpgdo getTailAngle ()F
-	METHOD m_rgmfbcls setBegging (Z)V
-		ARG 1 begging
-	METHOD m_rudxyesb getFurWetBrightnessMultiplier (F)F
+	METHOD m_mbvjvzbc getFurWetBrightnessMultiplier (F)F
 		COMMENT Returns this wolf's brightness multiplier based on the fur wetness.
 		COMMENT <p>
 		COMMENT The brightness multiplier represents how much darker the wolf gets while its fur is wet. The multiplier changes (from 0.75 to 1.0 incrementally) when a wolf shakes.
@@ -35,19 +33,21 @@ CLASS net/minecraft/unmapped/C_sjlsskox net/minecraft/entity/passive/WolfEntity
 		COMMENT @see net.minecraft.client.render.entity.model.TintableAnimalModel#setColorMultiplier(float, float, float)
 		ARG 1 tickDelta
 			COMMENT progress for linearly interpolating between the previous and current game state
-	METHOD m_urjecuwr setCollarColor (Lnet/minecraft/unmapped/C_eaqgllra;)V
-		ARG 1 color
-	METHOD m_wjtmvyob isFurWet ()Z
-		COMMENT Returns whether this wolf's fur is wet.
-		COMMENT <p>
-		COMMENT The wolf's fur will remain wet until the wolf shakes.
-	CLASS C_fkfpttgg AvoidLlamaGoal
-		FIELD f_scztiuxa wolf Lnet/minecraft/unmapped/C_sjlsskox;
-		METHOD <init> (Lnet/minecraft/unmapped/C_sjlsskox;Lnet/minecraft/unmapped/C_sjlsskox;Ljava/lang/Class;FDD)V
+	METHOD m_netinndt getCollarColor ()Lnet/minecraft/unmapped/C_arllgqae;
+	METHOD m_pcjygden setBegging (Z)V
+		ARG 1 begging
+	METHOD m_ptczuqbl resetShake ()V
+	METHOD m_qflbjcwd isBegging ()Z
+	METHOD m_siguawkr createWolfAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_xtssqhma (Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		ARG 0 entity
+	CLASS C_swdzamwe AvoidLlamaGoal
+		FIELD f_wpeusgad wolf Lnet/minecraft/unmapped/C_xokssljs;
+		METHOD <init> (Lnet/minecraft/unmapped/C_xokssljs;Lnet/minecraft/unmapped/C_xokssljs;Ljava/lang/Class;FDD)V
 			ARG 2 wolf
 			ARG 3 fleeFromType
 			ARG 4 distance
 			ARG 5 slowSpeed
 			ARG 7 fastSpeed
-		METHOD m_dpftwdrx isScaredOf (Lnet/minecraft/unmapped/C_jymkmrzj;)Z
+		METHOD m_ebuhmslq isScaredOf (Lnet/minecraft/unmapped/C_jzrmkmyj;)Z
 			ARG 1 llama

@@ -1,34 +1,34 @@
-CLASS net/minecraft/unmapped/C_ffluoezv net/minecraft/network/packet/s2c/play/CommandTreeS2CPacket
-	FIELD f_copbmahh commandTree Lcom/mojang/brigadier/tree/RootCommandNode;
+CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/CommandTreeS2CPacket
+	FIELD f_tujfcwiq commandTree Lcom/mojang/brigadier/tree/RootCommandNode;
 	METHOD <init> (Lcom/mojang/brigadier/tree/RootCommandNode;)V
 		ARG 1 commandTree
-	METHOD <init> (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
 		ARG 1 buf
-	METHOD m_bmpmwtmz collectNodes (Lit/unimi/dsi/fastutil/objects/Object2IntMap;)Ljava/util/List;
+	METHOD m_bcbvzanh collectNodes (Lit/unimi/dsi/fastutil/objects/Object2IntMap;)Ljava/util/List;
 		ARG 0 nodes
-	METHOD m_cvunvnyl (Ljava/util/List;Lnet/minecraft/unmapped/C_ffluoezv$C_xpfqzgyu;)Z
+	METHOD m_fdazuywm (Ljava/util/List;Lnet/minecraft/unmapped/C_vzeoulff$C_irxeyhvf;)Z
 		ARG 1 nodeData
-	METHOD m_gcyvthym traverse (Lcom/mojang/brigadier/tree/RootCommandNode;)Lit/unimi/dsi/fastutil/objects/Object2IntMap;
-		ARG 0 commandTree
-	METHOD m_hrixvvbd writeNode (Lnet/minecraft/unmapped/C_ocwdyfdi;Lcom/mojang/brigadier/tree/CommandNode;Ljava/util/Map;)V
+	METHOD m_gbsitdvl readArgumentBuilder (Lnet/minecraft/unmapped/C_idfydwco;B)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+		ARG 0 buf
+	METHOD m_ikzbbwwg writeNode (Lnet/minecraft/unmapped/C_idfydwco;Lcom/mojang/brigadier/tree/CommandNode;Ljava/util/Map;)V
 		ARG 0 buf
 		ARG 1 node
 		ARG 2 nodeToIndex
-	METHOD m_iarvbddg build (Ljava/util/List;)V
-		ARG 0 nodeDatas
-	METHOD m_jcsufmkw (Lit/unimi/dsi/fastutil/objects/Object2IntMap;Lnet/minecraft/unmapped/C_ocwdyfdi;Lcom/mojang/brigadier/tree/CommandNode;)V
+	METHOD m_jebnlxkj readCommandNode (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_vzeoulff$C_irxeyhvf;
+		ARG 0 buf
+	METHOD m_kyfvkrqc getCommandTree ()Lcom/mojang/brigadier/tree/RootCommandNode;
+	METHOD m_qlyjkgkv traverse (Lcom/mojang/brigadier/tree/RootCommandNode;)Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		ARG 0 commandTree
+	METHOD m_udbndlky (Lit/unimi/dsi/fastutil/objects/Object2IntMap;Lnet/minecraft/unmapped/C_idfydwco;Lcom/mojang/brigadier/tree/CommandNode;)V
 		ARG 2 node
-	METHOD m_nsjljcag readCommandNode (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_ffluoezv$C_xpfqzgyu;
-		ARG 0 buf
-	METHOD m_wxugsvft readArgumentBuilder (Lnet/minecraft/unmapped/C_ocwdyfdi;B)Lcom/mojang/brigadier/builder/ArgumentBuilder;
-		ARG 0 buf
-	METHOD m_zbfmlmls getCommandTree ()Lcom/mojang/brigadier/tree/RootCommandNode;
-	CLASS C_xpfqzgyu CommandNodeData
-		FIELD f_eqihjczn childNodeIndices [I
-		FIELD f_gjnthyzp flags B
-		FIELD f_ilhplqfi argumentBuilder Lcom/mojang/brigadier/builder/ArgumentBuilder;
-		FIELD f_smhpcqyt redirectNodeIndex I
-		FIELD f_wiqwvlgw node Lcom/mojang/brigadier/tree/CommandNode;
-		METHOD m_bigwxkzn (Lcom/mojang/brigadier/context/CommandContext;)I
+	METHOD m_uhygzszz build (Ljava/util/List;)V
+		ARG 0 nodeDatas
+	CLASS C_irxeyhvf CommandNodeData
+		FIELD f_eckdjrcz childNodeIndices [I
+		FIELD f_gtvbkazw node Lcom/mojang/brigadier/tree/CommandNode;
+		FIELD f_qpjpppzr argumentBuilder Lcom/mojang/brigadier/builder/ArgumentBuilder;
+		FIELD f_rzrsdnmn flags B
+		FIELD f_xofhrgkq redirectNodeIndex I
+		METHOD m_dxtflhip build (Ljava/util/List;)Z
+		METHOD m_lbobpjta (Lcom/mojang/brigadier/context/CommandContext;)I
 			ARG 0 context
-		METHOD m_okhvjiin build (Ljava/util/List;)Z

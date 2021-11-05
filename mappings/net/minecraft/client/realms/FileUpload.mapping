@@ -1,19 +1,19 @@
-CLASS net/minecraft/unmapped/C_xukanljc net/minecraft/client/realms/FileUpload
-	FIELD f_bpzavjej cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_cmcksctq sessionId Ljava/lang/String;
-	FIELD f_dzsfcauw clientVersion Ljava/lang/String;
-	FIELD f_eadseklz file Ljava/io/File;
-	FIELD f_edcpvqmp worldId J
-	FIELD f_fxbwgxai UPLOAD_ENDPOINT Ljava/lang/String;
-	FIELD f_iepqcwjn uploadStatus Lnet/minecraft/unmapped/C_azowqrkn;
-	FIELD f_iwencatg MAX_ATTEMPTS I
-	FIELD f_kuxowgxu slotId I
-	FIELD f_mvhevual uploadTask Ljava/util/concurrent/CompletableFuture;
-	FIELD f_pzmgpwia requestConfig Lorg/apache/http/client/config/RequestConfig;
-	FIELD f_vbjgsbxz username Ljava/lang/String;
-	FIELD f_whxpenml uploadInfo Lnet/minecraft/unmapped/C_kvyzdlem;
-	METHOD <init> (Ljava/io/File;JILnet/minecraft/unmapped/C_kvyzdlem;Lnet/minecraft/unmapped/C_bnczifwc;Ljava/lang/String;Lnet/minecraft/unmapped/C_azowqrkn;)V
+CLASS net/minecraft/unmapped/C_cjlnakux net/minecraft/client/realms/FileUpload
+	FIELD f_apczzlzf sessionId Ljava/lang/String;
+	FIELD f_bkwmqqxo uploadTask Ljava/util/concurrent/CompletableFuture;
+	FIELD f_cjxnftwz worldId J
+	FIELD f_cyqrtddi uploadInfo Lnet/minecraft/unmapped/C_meldzyvk;
+	FIELD f_frgzxjxc slotId I
+	FIELD f_ltvqndjl clientVersion Ljava/lang/String;
+	FIELD f_oaiwqonc uploadStatus Lnet/minecraft/unmapped/C_nkrqwoza;
+	FIELD f_poxvgblv file Ljava/io/File;
+	FIELD f_qfgarwjq cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
+	FIELD f_rwpxjxot username Ljava/lang/String;
+	FIELD f_tnzyaied MAX_ATTEMPTS I
+	FIELD f_vszuwgok UPLOAD_ENDPOINT Ljava/lang/String;
+	FIELD f_ythefnsx LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_zqwqhdvl requestConfig Lorg/apache/http/client/config/RequestConfig;
+	METHOD <init> (Ljava/io/File;JILnet/minecraft/unmapped/C_meldzyvk;Lnet/minecraft/unmapped/C_cwfizcnb;Ljava/lang/String;Lnet/minecraft/unmapped/C_nkrqwoza;)V
 		ARG 1 file
 		ARG 2 worldId
 		ARG 4 slotId
@@ -21,33 +21,33 @@ CLASS net/minecraft/unmapped/C_xukanljc net/minecraft/client/realms/FileUpload
 		ARG 6 session
 		ARG 7 clientVersion
 		ARG 8 uploadStatus
-	METHOD m_icosbqzi setupRequest (Lorg/apache/http/client/methods/HttpPost;)V
+	METHOD m_cocnoabb setupRequest (Lorg/apache/http/client/methods/HttpPost;)V
 		ARG 1 request
-	METHOD m_inawxjxd retryUploadAfter (JI)Lnet/minecraft/unmapped/C_wrjkoulq;
-		ARG 1 retryDelaySeconds
-		ARG 3 currentAttempt
-	METHOD m_jwruopsd cleanup (Lorg/apache/http/client/methods/HttpPost;Lorg/apache/http/impl/client/CloseableHttpClient;)V
+	METHOD m_dxurjnkg getRetryDelaySeconds (Lorg/apache/http/HttpResponse;)J
+		ARG 1 response
+	METHOD m_esqzaqgw requestUpload (I)Lnet/minecraft/unmapped/C_qluokjrw;
+		ARG 1 currentAttempt
+	METHOD m_fhxphjaf cancel ()V
+	METHOD m_gpaczded cleanup (Lorg/apache/http/client/methods/HttpPost;Lorg/apache/http/impl/client/CloseableHttpClient;)V
 		ARG 1 request
 		ARG 2 client
-	METHOD m_loesdtlk requestUpload (I)Lnet/minecraft/unmapped/C_wrjkoulq;
-		ARG 1 currentAttempt
-	METHOD m_nxlfxecl upload (Ljava/util/function/Consumer;)V
-		ARG 1 callback
-	METHOD m_pteusjwp isFinished ()Z
-	METHOD m_rkzvwind getRetryDelaySeconds (Lorg/apache/http/HttpResponse;)J
-		ARG 1 response
-	METHOD m_suqgxttk shouldRetry (JI)Z
+	METHOD m_ntliyoww shouldRetry (JI)Z
 		ARG 1 retryDelaySeconds
 		ARG 3 currentAttempt
-	METHOD m_tlebnwyy cancel ()V
-	METHOD m_xkxkgfeu handleResponse (Lorg/apache/http/HttpResponse;Lnet/minecraft/unmapped/C_wrjkoulq$C_pckcmlvu;)V
+	METHOD m_tukzdzbg retryUploadAfter (JI)Lnet/minecraft/unmapped/C_qluokjrw;
+		ARG 1 retryDelaySeconds
+		ARG 3 currentAttempt
+	METHOD m_ugcmscxs isFinished ()Z
+	METHOD m_uhwbmyhd upload (Ljava/util/function/Consumer;)V
+		ARG 1 callback
+	METHOD m_zbzadmzu handleResponse (Lorg/apache/http/HttpResponse;Lnet/minecraft/unmapped/C_qluokjrw$C_ydrwdzxi;)V
 		ARG 1 response
 		ARG 2 uploadResultBuilder
-	CLASS C_emntpfkw CustomInputStreamEntity
-		FIELD f_hhpsydfd content Ljava/io/InputStream;
-		FIELD f_iepqcwjn uploadStatus Lnet/minecraft/unmapped/C_azowqrkn;
-		FIELD f_jqhdefgx length J
-		METHOD <init> (Ljava/io/InputStream;JLnet/minecraft/unmapped/C_azowqrkn;)V
+	CLASS C_tdltackf CustomInputStreamEntity
+		FIELD f_qlggsryz content Ljava/io/InputStream;
+		FIELD f_vthwjpap uploadStatus Lnet/minecraft/unmapped/C_nkrqwoza;
+		FIELD f_wnhqkxqf length J
+		METHOD <init> (Ljava/io/InputStream;JLnet/minecraft/unmapped/C_nkrqwoza;)V
 			ARG 1 content
 			ARG 2 length
 			ARG 4 uploadStatus

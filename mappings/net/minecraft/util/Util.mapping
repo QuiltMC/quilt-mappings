@@ -1,49 +1,65 @@
-CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_fuwiuswm NEXT_WORKER_ID Ljava/util/concurrent/atomic/AtomicInteger;
-	FIELD f_izlfblcj IO_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
-	FIELD f_nvqmqcoe NIL_UUID Ljava/util/UUID;
-	FIELD f_nwrceaio nanoTimeSupplier Ljava/util/function/LongSupplier;
-	FIELD f_stoxhwly MAIN_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
-	FIELD f_uykinhop JAR_FILE_SYSTEM_PROVIDER Ljava/nio/file/spi/FileSystemProvider;
-	FIELD f_xdztdbld BOOTSTRAP_EXECUTOR Ljava/util/concurrent/ExecutorService;
-	METHOD m_aiwjwbjb (Ljava/nio/file/spi/FileSystemProvider;)Z
-		ARG 0 fileSystemProvider
-	METHOD m_asbujimj getRandom (Ljava/util/List;Ljava/util/Random;)Ljava/lang/Object;
+CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
+	FIELD f_ahvemmlp NIL_UUID Ljava/util/UUID;
+	FIELD f_faeenrac LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_gshsyyvs NEXT_WORKER_ID Ljava/util/concurrent/atomic/AtomicInteger;
+	FIELD f_kmtdmvfj IO_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
+	FIELD f_mwatldea BOOTSTRAP_EXECUTOR Ljava/util/concurrent/ExecutorService;
+	FIELD f_pshbhhha JAR_FILE_SYSTEM_PROVIDER Ljava/nio/file/spi/FileSystemProvider;
+	FIELD f_qqybtqnr nanoTimeSupplier Ljava/util/function/LongSupplier;
+	FIELD f_zimcxepj MAIN_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
+	METHOD m_aidzvymm existenceCheckTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
+		ARG 0 path
+	METHOD m_awkdanrv toArray (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
-		ARG 1 random
-	METHOD m_asbujimj getRandom ([ILjava/util/Random;)I
-		ARG 0 array
-		ARG 1 random
-	METHOD m_asbujimj getRandom ([Ljava/lang/Object;Ljava/util/Random;)Ljava/lang/Object;
-		ARG 0 array
-		ARG 1 random
-	METHOD m_blwgjesi backupAndReplace (Ljava/io/File;Ljava/io/File;Ljava/io/File;)V
+		ARG 1 length
+	METHOD m_cclbyaoh getChoiceTypeInternal (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
+		ARG 0 typeReference
+		ARG 1 id
+	METHOD m_drhjlchv toArray (Ljava/util/stream/IntStream;I)Lcom/mojang/serialization/DataResult;
+		ARG 0 stream
+		ARG 1 length
+	METHOD m_dxqrqrhx pause ()V
+	METHOD m_ecvsiggs memoize (Ljava/util/function/BiFunction;)Ljava/util/function/BiFunction;
+		ARG 0 biFunction
+	METHOD m_eguhqvxr throwOrPause (Ljava/lang/Throwable;)Ljava/lang/Throwable;
+		ARG 0 t
+	METHOD m_elihuwxg getEpochTimeMs ()J
+	METHOD m_eprinqay uncaughtExceptionHandler (Ljava/lang/Thread;Ljava/lang/Throwable;)V
+		ARG 0 thread
+		ARG 1 t
+	METHOD m_ewfqjfze make (Ljava/lang/Object;Ljava/util/function/Consumer;)Ljava/lang/Object;
+		ARG 0 object
+		ARG 1 initializer
+	METHOD m_fbmfyyez (Ljava/lang/String;)Z
+		ARG 0 runtimeArg
+	METHOD m_fppetslt getJVMFlags ()Ljava/util/stream/Stream;
+	METHOD m_ftciccth toMap ()Ljava/util/stream/Collector;
+	METHOD m_gatbnpas getIoWorkerExecutor ()Ljava/util/concurrent/Executor;
+	METHOD m_gdspwjqr memoize (Ljava/util/function/Function;)Ljava/util/function/Function;
+		ARG 0 function
+	METHOD m_gteslhvq backupAndReplace (Ljava/io/File;Ljava/io/File;Ljava/io/File;)V
 		ARG 0 current
 		ARG 1 newFile
 		ARG 2 backup
-	METHOD m_blwgjesi backupAndReplace (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
-		COMMENT Copies {@code current} to {@code backup} and then replaces {@code current} with {@code newPath}
-		ARG 0 current
-		ARG 1 newPath
-		ARG 2 backup
-	METHOD m_bxmsdjmd createWorker (Ljava/lang/String;)Ljava/util/concurrent/ExecutorService;
-		ARG 0 name
-	METHOD m_cxqxnpzy toArray (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
+	METHOD m_gxlhducm getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
+		ARG 0 t
+	METHOD m_hlfyewqw stream (Ljava/util/Optional;)Ljava/util/stream/Stream;
+		ARG 0 optional
+	METHOD m_hnnezaif getMainWorkerExecutor ()Ljava/util/concurrent/Executor;
+	METHOD m_ipuwuhri (Ljava/util/concurrent/CompletableFuture;Ljava/util/List;ILjava/lang/Object;Ljava/lang/Throwable;)V
+		ARG 3 object
+		ARG 4 throwable
+	METHOD m_ivgzgwtf (Ljava/util/List;[Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;)V
+		ARG 3 future
+	METHOD m_jnoofuig debugRunnable (Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Runnable;
+		ARG 0 activeThreadName
+		ARG 1 task
+	METHOD m_jzncpgce getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
-		ARG 1 length
-	METHOD m_cxqxnpzy toArray (Ljava/util/stream/IntStream;I)Lcom/mojang/serialization/DataResult;
-		ARG 0 stream
-		ARG 1 length
-	METHOD m_eadxydtb createTranslationKey (Ljava/lang/String;Lnet/minecraft/unmapped/C_acfwypcn;)Ljava/lang/String;
-		ARG 0 type
-		ARG 1 id
-	METHOD m_efspjjhd getLast (Ljava/util/List;)Ljava/lang/Object;
-		ARG 0 list
-	METHOD m_fnbrwqxk getValueAsString (Lnet/minecraft/unmapped/C_wyutzlzv;Ljava/lang/Object;)Ljava/lang/String;
-		ARG 0 property
-		ARG 1 value
-	METHOD m_fphblpdu combineSafe (Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_kbwjpgkm deleteTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
+		ARG 0 path
+	METHOD m_kcnenfvs shutdownExecutors ()V
+	METHOD m_kpixdiyc combineSafe (Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Combines a list of {@code futures} into one future that holds a list
 		COMMENT of their results.
 		COMMENT
@@ -54,17 +70,74 @@ CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
 		COMMENT @see #combine(List)
 		ARG 0 futures
 			COMMENT the completable futures to combine
-	METHOD m_fwnntntf replaceInvalidChars (Ljava/lang/String;Lnet/minecraft/unmapped/C_rhbkwupz;)Ljava/lang/String;
+	METHOD m_lbsfwkrf identityHashStrategy ()Lit/unimi/dsi/fastutil/Hash$Strategy;
+	METHOD m_lgfbfuzz replaceInvalidChars (Ljava/lang/String;Lnet/minecraft/unmapped/C_zpuwkbhr;)Ljava/lang/String;
 		ARG 0 string
 		ARG 1 predicate
-	METHOD m_gedlzqey identityHashStrategy ()Lit/unimi/dsi/fastutil/Hash$Strategy;
-	METHOD m_gitokded getEpochTimeMs ()J
-	METHOD m_gqadlhif deletionVerifyTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
-		ARG 0 path
-	METHOD m_guhgxxfq shutdownExecutors ()V
-	METHOD m_higvahwx attemptShutdown (Ljava/util/concurrent/ExecutorService;)V
+	METHOD m_lyrrqjlr renameTask (Ljava/nio/file/Path;Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
+		ARG 0 src
+		ARG 1 dest
+	METHOD m_mytcolvj createWorker (Ljava/lang/String;)Ljava/util/concurrent/ExecutorService;
+		ARG 0 name
+	METHOD m_nshqaczo next (Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 iterable
+		ARG 1 object
+	METHOD m_oaamqqhk attemptShutdown (Ljava/util/concurrent/ExecutorService;)V
 		ARG 0 service
-	METHOD m_hijowvze combine (Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_oigccakw startTimerHack ()V
+	METHOD m_ojxnbsee (Ljava/lang/Runnable;)Ljava/lang/Thread;
+		ARG 0 runnable
+	METHOD m_poeexonq getRandom ([ILjava/util/Random;)I
+		ARG 0 array
+		ARG 1 random
+	METHOD m_qfufoqzt backupAndReplace (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+		COMMENT Copies {@code current} to {@code backup} and then replaces {@code current} with {@code newPath}
+		ARG 0 current
+		ARG 1 newPath
+		ARG 2 backup
+	METHOD m_qjjrrmre getMeasuringTimeMs ()J
+	METHOD m_qlmfgfui error (Ljava/lang/String;)V
+		ARG 0 message
+	METHOD m_qorgbpoj (Ljava/lang/String;Ljava/util/concurrent/ForkJoinPool;)Ljava/util/concurrent/ForkJoinWorkerThread;
+		ARG 1 forkJoinPool
+	METHOD m_qpdauvpg ifPresentOrElse (Ljava/util/Optional;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ljava/util/Optional;
+		ARG 0 optional
+		ARG 1 presentAction
+		ARG 2 elseAction
+	METHOD m_rjgutuoq (Ljava/nio/file/spi/FileSystemProvider;)Z
+		ARG 0 fileSystemProvider
+	METHOD m_rmfqlirq getOperatingSystem ()Lnet/minecraft/unmapped/C_lvarvugc$C_fqjbnqwz;
+	METHOD m_skylxoye debugRunnable (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
+		ARG 0 runnable
+		ARG 1 messageSupplier
+	METHOD m_teucbfzd deletionVerifyTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
+		ARG 0 path
+	METHOD m_uduxgasu attemptTasks ([Ljava/util/function/BooleanSupplier;)Z
+		ARG 0 tasks
+	METHOD m_vcjnmiex previous (Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 iterable
+		ARG 1 object
+	METHOD m_vgcxoqmg throwUnchecked (Ljava/lang/Throwable;)V
+		ARG 0 t
+	METHOD m_vgutcxlm getValueAsString (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Object;)Ljava/lang/String;
+		ARG 0 property
+		ARG 1 value
+	METHOD m_vmhdtbqg getRandom (Ljava/util/List;Ljava/util/Random;)Ljava/lang/Object;
+		ARG 0 list
+		ARG 1 random
+	METHOD m_vnbplpcd (Ljava/util/function/Consumer;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 2 string
+	METHOD m_vwigcqkp moveCursor (Ljava/lang/String;II)I
+		COMMENT Moves the {@code cursor} in the {@code string} by a {@code delta} amount.
+		COMMENT Skips surrogate characters.
+		ARG 0 string
+		ARG 1 cursor
+		ARG 2 delta
+	METHOD m_vyeltxpm getRandom ([Ljava/lang/Object;Ljava/util/Random;)Ljava/lang/Object;
+		ARG 0 array
+		ARG 1 random
+	METHOD m_wbsjgjfk getBootstrapExecutor ()Ljava/util/concurrent/Executor;
+	METHOD m_wbwlvhhn combine (Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Combines a list of {@code futures} into one future that holds a list
 		COMMENT of their results.
 		COMMENT
@@ -76,119 +149,46 @@ CLASS net/minecraft/unmapped/C_cguvravl net/minecraft/util/Util
 		COMMENT @see #combineSafe(List)
 		ARG 0 futures
 			COMMENT the completable futures to combine
-	METHOD m_idqktvyq stream (Ljava/util/Optional;)Ljava/util/stream/Stream;
-		ARG 0 optional
-	METHOD m_illwicak getBootstrapExecutor ()Ljava/util/concurrent/Executor;
-	METHOD m_imzgqsix getMeasuringTimeNano ()J
-	METHOD m_jlckzguv getOperatingSystem ()Lnet/minecraft/unmapped/C_cguvravl$C_gelsmwmv;
-	METHOD m_jmanriyb ifPresentOrElse (Ljava/util/Optional;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ljava/util/Optional;
-		ARG 0 optional
-		ARG 1 presentAction
-		ARG 2 elseAction
-	METHOD m_jndtonyr debugRunnable (Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Runnable;
-		ARG 0 activeThreadName
-		ARG 1 task
-	METHOD m_joumscjv deleteTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
-		ARG 0 path
-	METHOD m_jpcxbalv getJVMFlags ()Ljava/util/stream/Stream;
-	METHOD m_jrpadsgy debugRunnable (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
-		ARG 0 runnable
-		ARG 1 messageSupplier
-	METHOD m_jwsnkcme previous (Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;
-		ARG 0 iterable
-		ARG 1 object
-	METHOD m_kpuliozj uncaughtExceptionHandler (Ljava/lang/Thread;Ljava/lang/Throwable;)V
-		ARG 0 thread
-		ARG 1 t
-	METHOD m_lfezsuiy getChoiceType (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
-		ARG 0 typeReference
-		ARG 1 id
-	METHOD m_lqgakxql toMap ()Ljava/util/stream/Collector;
-	METHOD m_mnncvoli moveCursor (Ljava/lang/String;II)I
-		COMMENT Moves the {@code cursor} in the {@code string} by a {@code delta} amount.
-		COMMENT Skips surrogate characters.
-		ARG 0 string
-		ARG 1 cursor
-		ARG 2 delta
-	METHOD m_mrdrbhew getMainWorkerExecutor ()Ljava/util/concurrent/Executor;
-	METHOD m_mvzxwarx startTimerHack ()V
-	METHOD m_ndjpbqum make (Ljava/lang/Object;Ljava/util/function/Consumer;)Ljava/lang/Object;
-		ARG 0 object
-		ARG 1 initializer
-	METHOD m_ndjpbqum make (Ljava/util/function/Supplier;)Ljava/lang/Object;
-		ARG 0 factory
-	METHOD m_nshkamau memoize (Ljava/util/function/BiFunction;)Ljava/util/function/BiFunction;
-		ARG 0 biFunction
-	METHOD m_nshkamau memoize (Ljava/util/function/Function;)Ljava/util/function/Function;
-		ARG 0 function
-	METHOD m_nspfzxrw createIoWorker ()Ljava/util/concurrent/ExecutorService;
-	METHOD m_ofmxtvtg throwOrPause (Ljava/lang/Throwable;)Ljava/lang/Throwable;
-		ARG 0 t
-	METHOD m_onlrabfx getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
-		ARG 0 t
-	METHOD m_pbqqmuac existenceCheckTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
-		ARG 0 path
-	METHOD m_qamiqsrn (Ljava/util/function/Consumer;Ljava/lang/String;Ljava/lang/String;)V
-		ARG 2 string
-	METHOD m_qhhwlylz (Ljava/util/List;[Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;)V
-		ARG 3 future
-	METHOD m_qtffzdek attemptTasks (ILjava/lang/String;[Ljava/util/function/BooleanSupplier;)Z
-		ARG 0 retries
-		ARG 1 taskName
-		ARG 2 tasks
-	METHOD m_qyaireoi (Ljava/lang/String;)Z
-		ARG 0 runtimeArg
-	METHOD m_rihcptyf completeExceptionally (Ljava/lang/Throwable;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_wgykosui completeExceptionally (Ljava/lang/Throwable;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 throwable
-	METHOD m_spglxqxr (Ljava/lang/Runnable;)Ljava/lang/Thread;
-		ARG 0 runnable
-	METHOD m_tpkgcjpn relativeCopy (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+	METHOD m_wkoofosm createIoWorker ()Ljava/util/concurrent/ExecutorService;
+	METHOD m_wpeqdapc createTranslationKey (Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/lang/String;
+		ARG 0 type
+		ARG 1 id
+	METHOD m_wpgsfqzf addPrefix (Ljava/lang/String;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
+		ARG 0 prefix
+		ARG 1 consumer
+	METHOD m_wwakmmib make (Ljava/util/function/Supplier;)Ljava/lang/Object;
+		ARG 0 factory
+	METHOD m_xtrebjef getMeasuringTimeNano ()J
+	METHOD m_ydhyxwlc relativeCopy (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		COMMENT Copies a file contained in the folder {@code src} to the folder {@code dest}.
 		COMMENT This will replicate any path structure that may exist between {@code src} and {@code toCopy}.
 		ARG 0 src
 		ARG 1 dest
 		ARG 2 toCopy
-	METHOD m_tumhyqiy throwUnchecked (Ljava/lang/Throwable;)V
-		ARG 0 t
-	METHOD m_tzlvrokz pause ()V
-	METHOD m_ueghyixq error (Ljava/lang/String;)V
-		ARG 0 message
-	METHOD m_ufglyidw (Ljava/util/concurrent/CompletableFuture;Ljava/util/List;ILjava/lang/Object;Ljava/lang/Throwable;)V
-		ARG 3 object
-		ARG 4 throwable
-	METHOD m_uuhyuuhq (Ljava/lang/String;Ljava/util/concurrent/ForkJoinPool;)Ljava/util/concurrent/ForkJoinWorkerThread;
-		ARG 1 forkJoinPool
-	METHOD m_uvzhxnot getIoWorkerExecutor ()Ljava/util/concurrent/Executor;
-	METHOD m_uxizduid (Lnet/minecraft/unmapped/C_rhbkwupz;I)Ljava/lang/String;
+	METHOD m_yqtteyqj (Lnet/minecraft/unmapped/C_zpuwkbhr;I)Ljava/lang/String;
 		ARG 1 charCode
-	METHOD m_vyjcomfd renameTask (Ljava/nio/file/Path;Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
-		ARG 0 src
-		ARG 1 dest
-	METHOD m_wrdpxqax addPrefix (Ljava/lang/String;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
-		ARG 0 prefix
-		ARG 1 consumer
-	METHOD m_xcbfyuba next (Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;
-		ARG 0 iterable
-		ARG 1 object
-	METHOD m_xnfayber getMeasuringTimeMs ()J
-	METHOD m_yfnbrdgb attemptTasks ([Ljava/util/function/BooleanSupplier;)Z
-		ARG 0 tasks
-	METHOD m_zsqqqzwm getChoiceTypeInternal (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
+	METHOD m_yrtzlgsc attemptTasks (ILjava/lang/String;[Ljava/util/function/BooleanSupplier;)Z
+		ARG 0 retries
+		ARG 1 taskName
+		ARG 2 tasks
+	METHOD m_yvfdsqix getChoiceType (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
 		ARG 0 typeReference
 		ARG 1 id
-	CLASS C_diqcyyjl
-		FIELD f_jayrtvbc cache Ljava/util/Map;
-	CLASS C_gelsmwmv OperatingSystem
-		METHOD m_oyynkyku open (Ljava/net/URL;)V
+	CLASS C_cyqlwwzq
+		FIELD f_lvrqksev cache Ljava/util/Map;
+	CLASS C_fqjbnqwz OperatingSystem
+		METHOD m_crymcshe open (Ljava/net/URL;)V
 			ARG 1 url
-		METHOD m_twarrxfa open (Ljava/io/File;)V
+		METHOD m_iybzrqrr getURLOpenCommand (Ljava/net/URL;)[Ljava/lang/String;
+			ARG 1 url
+		METHOD m_sgnbfxds open (Ljava/net/URI;)V
+			ARG 1 uri
+		METHOD m_ukwepfnn open (Ljava/lang/String;)V
+			ARG 1 uri
+		METHOD m_zghwojcz open (Ljava/io/File;)V
 			ARG 1 file
-		METHOD m_xabkvqdp open (Ljava/lang/String;)V
-			ARG 1 uri
-		METHOD m_xabkvqdp open (Ljava/net/URI;)V
-			ARG 1 uri
-		METHOD m_zegcvzpt getURLOpenCommand (Ljava/net/URL;)[Ljava/lang/String;
-			ARG 1 url
-	CLASS C_hmsgohxw
-		FIELD f_jayrtvbc cache Ljava/util/Map;
-	CLASS C_ouabqihl IdentityHashStrategy
+	CLASS C_uzjrvfhh IdentityHashStrategy
+	CLASS C_vroykftd
+		FIELD f_gbmaeoqg cache Ljava/util/Map;

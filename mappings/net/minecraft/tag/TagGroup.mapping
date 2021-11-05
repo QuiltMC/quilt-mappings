@@ -1,37 +1,40 @@
-CLASS net/minecraft/unmapped/C_iftcfuru net/minecraft/tag/TagGroup
+CLASS net/minecraft/unmapped/C_urufctfi net/minecraft/tag/TagGroup
 	COMMENT Contains the set of tags all of the same type.
-	METHOD m_cmhbjgir getTagOrEmpty (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_vxhkekom;
-		ARG 1 id
-	METHOD m_crqbqwzv create (Ljava/util/Map;)Lnet/minecraft/unmapped/C_iftcfuru;
+	METHOD m_bhewgcra getTags ()Ljava/util/Map;
+	METHOD m_bjoqyaez serialize (Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_urufctfi$C_gancptep;
+		COMMENT Serializes this tag group.
+		ARG 1 registry
+	METHOD m_cglkcstq create (Ljava/util/Map;)Lnet/minecraft/unmapped/C_urufctfi;
 		ARG 0 tags
-	METHOD m_dfypjwmb (Lnet/minecraft/unmapped/C_ksqjyxqt;Ljava/util/Map;Lnet/minecraft/unmapped/C_acfwypcn;Lit/unimi/dsi/fastutil/ints/IntList;)V
+	METHOD m_dzbsmrlr getUncheckedTagId (Lnet/minecraft/unmapped/C_mokekhxv;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 tag
+	METHOD m_elfqfila createEmpty ()Lnet/minecraft/unmapped/C_urufctfi;
+	METHOD m_evzslwyj (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/Map;Lnet/minecraft/unmapped/C_ncpywfca;Lit/unimi/dsi/fastutil/ints/IntList;)V
 		ARG 2 id
 		ARG 3 entries
-	METHOD m_essddpzs contains (Lnet/minecraft/unmapped/C_acfwypcn;)Z
-		ARG 1 id
-	METHOD m_guxfwwmt (Lnet/minecraft/unmapped/C_ksqjyxqt;Ljava/util/Map;Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_vxhkekom;)V
+	METHOD m_fkxqwpgl (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/Map;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_mokekhxv;)V
 		ARG 2 id
 		ARG 3 tag
-	METHOD m_hrlmkcqx createEmpty ()Lnet/minecraft/unmapped/C_iftcfuru;
-	METHOD m_iinptwzt deserialize (Lnet/minecraft/unmapped/C_iftcfuru$C_hleuxaqt;Lnet/minecraft/unmapped/C_ksqjyxqt;)Lnet/minecraft/unmapped/C_iftcfuru;
+	METHOD m_hfbthgwi getTagsFor (Ljava/lang/Object;)Ljava/util/Collection;
+		COMMENT Gets the identifiers of all tags an object is applicable to.
+		ARG 1 object
+	METHOD m_hjxyregz getTagIds ()Ljava/util/Collection;
+	METHOD m_nhzcgpmn getId (Lnet/minecraft/unmapped/C_mokekhxv$C_zungmwoh;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 tag
+	METHOD m_omhxhpwf getTag (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_mokekhxv;
+		ARG 1 id
+	METHOD m_rvrbcenn getTagOrEmpty (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_mokekhxv;
+		ARG 1 id
+	METHOD m_sakizjxs deserialize (Lnet/minecraft/unmapped/C_urufctfi$C_gancptep;Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_urufctfi;
 		COMMENT Deserializes a serialized tag group.
 		ARG 0 serialized
 		ARG 1 registry
-	METHOD m_jddzgyjm getId (Lnet/minecraft/unmapped/C_vxhkekom$C_mqlkgrmo;)Lnet/minecraft/unmapped/C_acfwypcn;
-		ARG 1 tag
-	METHOD m_jddzgyjm getUncheckedTagId (Lnet/minecraft/unmapped/C_vxhkekom;)Lnet/minecraft/unmapped/C_acfwypcn;
-		ARG 1 tag
-	METHOD m_mnrqjmpf getTagsFor (Ljava/lang/Object;)Ljava/util/Collection;
-		COMMENT Gets the identifiers of all tags an object is applicable to.
-		ARG 1 object
-	METHOD m_otepxrfn getTag (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_vxhkekom;
+	METHOD m_vynxankh contains (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
-	METHOD m_rptllidt serialize (Lnet/minecraft/unmapped/C_ksqjyxqt;)Lnet/minecraft/unmapped/C_iftcfuru$C_hleuxaqt;
-		COMMENT Serializes this tag group.
-		ARG 1 registry
-	METHOD m_vriuhudi getTags ()Ljava/util/Map;
-	METHOD m_zvhqderl getTagIds ()Ljava/util/Collection;
-	CLASS C_hleuxaqt Serialized
+	CLASS C_edijcwme
+		FIELD f_apfachnw tags Lcom/google/common/collect/BiMap;
+		FIELD f_eckdqamx emptyTag Lnet/minecraft/unmapped/C_mokekhxv;
+	CLASS C_gancptep Serialized
 		COMMENT A serialization-friendly POJO representation of a {@linkplain
 		COMMENT TagGroup tag group}. This allows easy transport of tag groups
 		COMMENT over Minecraft network protocol.
@@ -40,13 +43,10 @@ CLASS net/minecraft/unmapped/C_iftcfuru net/minecraft/tag/TagGroup
 		COMMENT for raw ID access to {@linkplain TagGroup#serialize(Registry) serialize}
 		COMMENT or {@linkplain TagGroup#deserialize(TagGroup.Serialized, Registry)
 		COMMENT deserialize} tag groups.
-		FIELD f_fcykeuwq contents Ljava/util/Map;
+		FIELD f_slnblrld contents Ljava/util/Map;
 		METHOD <init> (Ljava/util/Map;)V
 			ARG 1 contents
-		METHOD m_rqbgmrwm fromBuf (Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_iftcfuru$C_hleuxaqt;
+		METHOD m_boigonuy fromBuf (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_urufctfi$C_gancptep;
 			ARG 0 buf
-		METHOD m_vhivbqoy writeBuf (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
+		METHOD m_wcbjaywr writeBuf (Lnet/minecraft/unmapped/C_idfydwco;)V
 			ARG 1 buf
-	CLASS C_zdraaygv
-		FIELD f_arvcwese tags Lcom/google/common/collect/BiMap;
-		FIELD f_hrlmkcqx emptyTag Lnet/minecraft/unmapped/C_vxhkekom;

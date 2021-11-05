@@ -1,18 +1,18 @@
-CLASS net/minecraft/unmapped/C_eetcsvye net/minecraft/client/search/SuffixArray
+CLASS net/minecraft/unmapped/C_eyvsctee net/minecraft/client/search/SuffixArray
 	COMMENT Provides an efficient way to search for a text in multiple texts.
-	FIELD f_bhzlknet characters Lit/unimi/dsi/fastutil/ints/IntList;
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_lejrzxlu objects Ljava/util/List;
-	FIELD f_naerxbiq offsetInText Lit/unimi/dsi/fastutil/ints/IntList;
-	FIELD f_nlkcljxz maxTextLength I
-	FIELD f_pnmepaue suffixIndexToObjectIndex Lit/unimi/dsi/fastutil/ints/IntList;
-	FIELD f_qelxgrpz PRINT_COMPARISONS Z
-	FIELD f_rjciasoe PRINT_ARRAY Z
-	FIELD f_zmeksnab textStarts Lit/unimi/dsi/fastutil/ints/IntList;
-	METHOD m_gjyrioxa printArray ()V
-	METHOD m_gjysrwcq getDebugString (I)Ljava/lang/String;
-		ARG 1 suffixIndex
-	METHOD m_jjvkixdj findAll (Ljava/lang/String;)Ljava/util/List;
+	FIELD f_avhqcbry PRINT_ARRAY Z
+	FIELD f_bmogyeag characters Lit/unimi/dsi/fastutil/ints/IntList;
+	FIELD f_cychayfy suffixIndexToObjectIndex Lit/unimi/dsi/fastutil/ints/IntList;
+	FIELD f_eslvuboh textStarts Lit/unimi/dsi/fastutil/ints/IntList;
+	FIELD f_ppyxywmu maxTextLength I
+	FIELD f_twqblugo PRINT_COMPARISONS Z
+	FIELD f_uejdsmhd LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_xnvfzsfq objects Ljava/util/List;
+	FIELD f_yrokcqzm offsetInText Lit/unimi/dsi/fastutil/ints/IntList;
+	METHOD m_aiakunfx compare (Ljava/lang/String;I)I
+		ARG 1 string
+		ARG 2 suffixIndex
+	METHOD m_dbyafjwq findAll (Ljava/lang/String;)Ljava/util/List;
 		COMMENT Retrieves all objects of which corresponding texts contain {@code text}.
 		COMMENT
 		COMMENT <p>You have to call {@link #build()} method before calling this method.
@@ -22,10 +22,15 @@ CLASS net/minecraft/unmapped/C_eetcsvye net/minecraft/client/search/SuffixArray
 		COMMENT objects into a list where X is the number of occurrences of {@code text} in all
 		COMMENT texts added, and Y is the number of found objects.
 		ARG 1 text
-	METHOD m_nobrowmc ([I[I[III)V
-		ARG 3 i
-		ARG 4 j
-	METHOD m_rtqfibjh add (Ljava/lang/Object;Ljava/lang/String;)V
+	METHOD m_gmnjmpms build ()V
+		COMMENT Builds a suffix array with added texts.
+		COMMENT
+		COMMENT <p>You are not allowed to call this method multiple times.
+		COMMENT
+		COMMENT <p>Takes O(N * log N * log M) time on average where N is the sum of all text
+		COMMENT length added, and M is the maximum text length added.
+	METHOD m_kbfrkrwy printArray ()V
+	METHOD m_kgforyou add (Ljava/lang/Object;Ljava/lang/String;)V
 		COMMENT Adds a text with the corresponding object.
 		COMMENT
 		COMMENT <p>You are not allowed to call this method after calling {@link #build()} method.
@@ -33,17 +38,12 @@ CLASS net/minecraft/unmapped/C_eetcsvye net/minecraft/client/search/SuffixArray
 		COMMENT <p>Takes O({@code text.length()}) time.
 		ARG 1 object
 		ARG 2 text
-	METHOD m_sflqxxjc compare (Ljava/lang/String;I)I
-		ARG 1 string
-		ARG 2 suffixIndex
-	METHOD m_tmonqgvs build ()V
-		COMMENT Builds a suffix array with added texts.
-		COMMENT
-		COMMENT <p>You are not allowed to call this method multiple times.
-		COMMENT
-		COMMENT <p>Takes O(N * log N * log M) time on average where N is the sum of all text
-		COMMENT length added, and M is the maximum text length added.
-	CLASS C_zdraaygv
+	METHOD m_pexussdc ([I[I[III)V
+		ARG 3 i
+		ARG 4 j
+	METHOD m_qihquwey getDebugString (I)Ljava/lang/String;
+		ARG 1 suffixIndex
+	CLASS C_dxidfysb
 		METHOD compare (II)I
 			ARG 1 i
 			ARG 2 j

@@ -1,23 +1,35 @@
-CLASS net/minecraft/unmapped/C_ckpufvtg net/minecraft/world/ModifiableWorld
+CLASS net/minecraft/unmapped/C_gtvfupkc net/minecraft/world/ModifiableWorld
 	COMMENT Represents a modifiable world where block states can be changed and entities spawned.
-	METHOD m_cvwqvxaw removeBlock (Lnet/minecraft/unmapped/C_kkdaznyh;Z)Z
+	METHOD m_dpplkeue breakBlock (Lnet/minecraft/unmapped/C_hynzadkk;Z)Z
+		ARG 1 pos
+		ARG 2 drop
+	METHOD m_fkgielag spawnEntity (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 entity
+	METHOD m_htquvoam setBlockState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;II)Z
+		COMMENT Updates the block state at a position, calling appropriate callbacks.
+		COMMENT
+		COMMENT <p>When called on the server, the new block state is stored and propagated to clients and listeners as dictated
+		COMMENT by the supplied flags. Note that calling this on the client will update the world locally, but may not see the
+		COMMENT change persisted across loads. It's recommended to check whether this world is client before
+		COMMENT interacting with the world in this way.
+		COMMENT
+		COMMENT <p>See {@link #setBlockState(BlockPos, BlockState, int)} for a list of accepted flags.
+		ARG 1 pos
+			COMMENT the target position
+		ARG 2 state
+			COMMENT the block state to set
+		ARG 3 flags
+			COMMENT the bitwise flag combination, as described above
+		ARG 4 maxUpdateDepth
+			COMMENT the limit for the cascading block updates
+	METHOD m_pdmglasn breakBlock (Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 pos
+		ARG 2 drop
+		ARG 3 breakingEntity
+	METHOD m_qqxrgwdx removeBlock (Lnet/minecraft/unmapped/C_hynzadkk;Z)Z
 		ARG 1 pos
 		ARG 2 move
-	METHOD m_fzeiwerf spawnEntity (Lnet/minecraft/unmapped/C_srenftsa;)Z
-		ARG 1 entity
-	METHOD m_gcgjgyzp breakBlock (Lnet/minecraft/unmapped/C_kkdaznyh;Z)Z
-		ARG 1 pos
-		ARG 2 drop
-	METHOD m_gcgjgyzp breakBlock (Lnet/minecraft/unmapped/C_kkdaznyh;ZLnet/minecraft/unmapped/C_srenftsa;)Z
-		ARG 1 pos
-		ARG 2 drop
-		ARG 3 breakingEntity
-	METHOD m_gcgjgyzp breakBlock (Lnet/minecraft/unmapped/C_kkdaznyh;ZLnet/minecraft/unmapped/C_srenftsa;I)Z
-		ARG 1 pos
-		ARG 2 drop
-		ARG 3 breakingEntity
-		ARG 4 maxUpdateDepth
-	METHOD m_kukfstrq setBlockState (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;I)Z
+	METHOD m_tvibraom setBlockState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;I)Z
 		COMMENT Updates the block state at a position, calling appropriate callbacks.
 		COMMENT
 		COMMENT <p>When called on the server, the new block state is stored and propagated to clients and listeners as dictated
@@ -45,20 +57,8 @@ CLASS net/minecraft/unmapped/C_ckpufvtg net/minecraft/world/ModifiableWorld
 			COMMENT the block state to set
 		ARG 3 flags
 			COMMENT the bitwise flag combination, as described above
-	METHOD m_kukfstrq setBlockState (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;II)Z
-		COMMENT Updates the block state at a position, calling appropriate callbacks.
-		COMMENT
-		COMMENT <p>When called on the server, the new block state is stored and propagated to clients and listeners as dictated
-		COMMENT by the supplied flags. Note that calling this on the client will update the world locally, but may not see the
-		COMMENT change persisted across loads. It's recommended to check whether this world is client before
-		COMMENT interacting with the world in this way.
-		COMMENT
-		COMMENT <p>See {@link #setBlockState(BlockPos, BlockState, int)} for a list of accepted flags.
+	METHOD m_vwwmkysb breakBlock (Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_astfners;I)Z
 		ARG 1 pos
-			COMMENT the target position
-		ARG 2 state
-			COMMENT the block state to set
-		ARG 3 flags
-			COMMENT the bitwise flag combination, as described above
+		ARG 2 drop
+		ARG 3 breakingEntity
 		ARG 4 maxUpdateDepth
-			COMMENT the limit for the cascading block updates

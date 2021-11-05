@@ -1,31 +1,37 @@
-CLASS net/minecraft/unmapped/C_zxtchbdj net/minecraft/server/world/ServerEntityManager
+CLASS net/minecraft/unmapped/C_jdbhctxz net/minecraft/server/world/ServerEntityManager
 	COMMENT An entity manager for a server environment.
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_fchucimy managedStatuses Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
-	FIELD f_fsvdbatc trackingStatuses Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
-	FIELD f_fxfhtvhk cache Lnet/minecraft/unmapped/C_zhlbdtcp;
-	FIELD f_izvwdvio dataAccess Lnet/minecraft/unmapped/C_lwzcajbh;
-	FIELD f_lopjpwam loadingQueue Ljava/util/Queue;
-	FIELD f_ongwoouh entityUuids Ljava/util/Set;
-	FIELD f_rhjstwyb lookup Lnet/minecraft/unmapped/C_aixdrgmm;
-	FIELD f_scyodmih index Lnet/minecraft/unmapped/C_uywtdreo;
-	FIELD f_ugbstgaz handler Lnet/minecraft/unmapped/C_almucstx;
-	FIELD f_vaudgumj pendingUnloads Lit/unimi/dsi/fastutil/longs/LongSet;
-	METHOD <init> (Ljava/lang/Class;Lnet/minecraft/unmapped/C_almucstx;Lnet/minecraft/unmapped/C_lwzcajbh;)V
+	FIELD f_abjrqcrg entityUuids Ljava/util/Set;
+	FIELD f_diewhmbw LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_estuhvio handler Lnet/minecraft/unmapped/C_xtscumla;
+	FIELD f_jyyozchw dataAccess Lnet/minecraft/unmapped/C_hbjaczwl;
+	FIELD f_nmekxqpg cache Lnet/minecraft/unmapped/C_pctdblhz;
+	FIELD f_oqidhiag pendingUnloads Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_orppfqjr trackingStatuses Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_qudcokdm lookup Lnet/minecraft/unmapped/C_mmgrdxia;
+	FIELD f_rgylyrkq loadingQueue Ljava/util/Queue;
+	FIELD f_tjczwahe managedStatuses Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_yubftinj index Lnet/minecraft/unmapped/C_oerdtwyu;
+	METHOD <init> (Ljava/lang/Class;Lnet/minecraft/unmapped/C_xtscumla;Lnet/minecraft/unmapped/C_hbjaczwl;)V
 		ARG 1 entityClass
 		ARG 2 handler
 		ARG 3 dataAccess
-	METHOD m_abnzpadi addEntity (Lnet/minecraft/unmapped/C_gqkevcns;)Z
+	METHOD m_bxydndmv loadChunks ()V
+	METHOD m_cgklqzuy addEntity (Lnet/minecraft/unmapped/C_sncvekqg;)Z
 		COMMENT Adds a newly created entity to this manager.
 		COMMENT
 		COMMENT @return if the entity was added
 		ARG 1 entity
 			COMMENT the newly created entity
-	METHOD m_bawwgdnm (Lnet/minecraft/unmapped/C_vkngzpyr;J)V
-		ARG 2 chunkPos
-	METHOD m_cakoykfq getLoadedChunks ()Lit/unimi/dsi/fastutil/longs/LongSet;
-	METHOD m_crxdtnyi flush ()V
-	METHOD m_etkbnaxw trySave (JLjava/util/function/Consumer;)Z
+	METHOD m_ednsyasl unloadChunks ()V
+	METHOD m_ewrzwpim unload (J)Z
+		ARG 1 chunkPos
+	METHOD m_gguqlrrj getNeededLoadStatus (Lnet/minecraft/unmapped/C_sncvekqg;Lnet/minecraft/unmapped/C_blgonjzp;)Lnet/minecraft/unmapped/C_blgonjzp;
+		ARG 0 entity
+		ARG 1 current
+	METHOD m_gpewtxwc entityLeftSection (JLnet/minecraft/unmapped/C_kmnnyhyi;)V
+		ARG 1 sectionPos
+		ARG 3 section
+	METHOD m_hstguevf trySave (JLjava/util/function/Consumer;)Z
 		COMMENT Tries to save entities in a chunk and performs an {@code action} on each
 		COMMENT saved entity if successful.
 		COMMENT
@@ -36,7 +42,27 @@ CLASS net/minecraft/unmapped/C_zxtchbdj net/minecraft/server/world/ServerEntityM
 		ARG 1 chunkPos
 		ARG 3 action
 			COMMENT action performed on each saved entity if saving is successful
-	METHOD m_ezzrfyar updateTrackingStatus (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_ojdredkg$C_qvuacqhw;)V
+	METHOD m_jcgdkmhs (J)Z
+		ARG 1 pos
+	METHOD m_krwfnctz unload (Lnet/minecraft/unmapped/C_sncvekqg;)V
+		ARG 1 entity
+	METHOD m_luqarebk startTicking (Lnet/minecraft/unmapped/C_sncvekqg;)V
+		ARG 1 entity
+	METHOD m_mehcaqrk addEntities (Ljava/util/stream/Stream;)V
+		COMMENT Adds a few newly created entities to this manager.
+		ARG 1 entities
+	METHOD m_mntmlaiv getLoadedChunks ()Lit/unimi/dsi/fastutil/longs/LongSet;
+	METHOD m_nvtktudx (J)V
+		ARG 1 pos
+	METHOD m_oqwcqrpd stopTicking (Lnet/minecraft/unmapped/C_sncvekqg;)V
+		ARG 1 entity
+	METHOD m_pdxmjlek has (Ljava/util/UUID;)Z
+		ARG 1 uuid
+	METHOD m_pmkgmadj stopTracking (Lnet/minecraft/unmapped/C_sncvekqg;)V
+		ARG 1 entity
+	METHOD m_psgpvmew scheduleRead (J)V
+		ARG 1 chunkPos
+	METHOD m_qocaipzt updateTrackingStatus (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_gkderdjo$C_yzdkhkui;)V
 		COMMENT Updates the tracking status of tracking sections in a chunk at {@code
 		COMMENT chunkPos} given the {@code levelType}.
 		COMMENT
@@ -45,42 +71,7 @@ CLASS net/minecraft/unmapped/C_zxtchbdj net/minecraft/server/world/ServerEntityM
 			COMMENT the chunk to update
 		ARG 2 levelType
 			COMMENT the updated level type of the chunk
-	METHOD m_ezzrfyar updateTrackingStatus (Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_pzjnoglb;)V
-		COMMENT Updates the {@code trackingStatus} of tracking sections in a chunk
-		COMMENT at {@code chunkPos}.
-		ARG 1 chunkPos
-			COMMENT the chunk to update
-		ARG 2 trackingStatus
-			COMMENT the updated section tracking status
-	METHOD m_fhsgvxpu getNeededLoadStatus (Lnet/minecraft/unmapped/C_gqkevcns;Lnet/minecraft/unmapped/C_pzjnoglb;)Lnet/minecraft/unmapped/C_pzjnoglb;
-		ARG 0 entity
-		ARG 1 current
-	METHOD m_fypmlppc (Lnet/minecraft/unmapped/C_gqkevcns;)V
-		ARG 1 entity
-	METHOD m_gaxoognc scheduleRead (J)V
-		ARG 1 chunkPos
-	METHOD m_hiwwetcv loadChunks ()V
-	METHOD m_iwivztkr loadEntities (Ljava/util/stream/Stream;)V
-		COMMENT Loads a few entities from disk to this manager.
-		ARG 1 entities
-	METHOD m_jbhjystk (Lnet/minecraft/unmapped/C_vkngzpyr;Lnet/minecraft/unmapped/C_zxtchbdj$C_ucbltgjt;J)V
-		ARG 3 sectionPos
-	METHOD m_jgjveebu startTracking (Lnet/minecraft/unmapped/C_gqkevcns;)V
-		ARG 1 entity
-	METHOD m_mueervnc (Lnet/minecraft/unmapped/C_pzjnoglb;Lnet/minecraft/unmapped/C_iyhynnmk;)V
-		ARG 2 group
-	METHOD m_ndyofizo getLookup ()Lnet/minecraft/unmapped/C_aixdrgmm;
-	METHOD m_njaqwndo (J)Z
-		ARG 1 pos
-	METHOD m_nsamlvfe (Lnet/minecraft/unmapped/C_gqkevcns;)V
-		ARG 1 entity
-	METHOD m_nzncuwof tick ()V
-	METHOD m_oyudvluf dump (Ljava/io/Writer;)V
-		ARG 1 writer
-	METHOD m_sgzooxjx save ()V
-	METHOD m_snvhyzmz (J)Z
-		ARG 1 pos
-	METHOD m_tgeqapoo addEntity (Lnet/minecraft/unmapped/C_gqkevcns;Z)Z
+	METHOD m_qqvwphac addEntity (Lnet/minecraft/unmapped/C_sncvekqg;Z)Z
 		COMMENT Loads or adds an entity to this manager.
 		COMMENT
 		COMMENT @return if the entity was loaded or added
@@ -88,41 +79,50 @@ CLASS net/minecraft/unmapped/C_zxtchbdj net/minecraft/server/world/ServerEntityM
 			COMMENT the entity
 		ARG 2 existing
 			COMMENT whether this entity is loaded from the map than created anew
-	METHOD m_usmpqedr stopTicking (Lnet/minecraft/unmapped/C_gqkevcns;)V
+	METHOD m_quvdwpcr addEntityUuid (Lnet/minecraft/unmapped/C_sncvekqg;)Z
 		ARG 1 entity
-	METHOD m_uvlzaolk getDebugString ()Ljava/lang/String;
-	METHOD m_uwhggprg unloadChunks ()V
-	METHOD m_vgvcvbkc startTicking (Lnet/minecraft/unmapped/C_gqkevcns;)V
+	METHOD m_qyzdfper (Lnet/minecraft/unmapped/C_sncvekqg;)V
 		ARG 1 entity
-	METHOD m_vqlxunzo unload (Lnet/minecraft/unmapped/C_gqkevcns;)V
-		ARG 1 entity
-	METHOD m_wlwadbvf has (Ljava/util/UUID;)Z
-		ARG 1 uuid
-	METHOD m_xewiocuj addEntityUuid (Lnet/minecraft/unmapped/C_gqkevcns;)Z
-		ARG 1 entity
-	METHOD m_xkkkuiin entityLeftSection (JLnet/minecraft/unmapped/C_iyhynnmk;)V
-		ARG 1 sectionPos
-		ARG 3 section
-	METHOD m_xmfitnex stopTracking (Lnet/minecraft/unmapped/C_gqkevcns;)V
-		ARG 1 entity
-	METHOD m_xxraimye addEntities (Ljava/util/stream/Stream;)V
-		COMMENT Adds a few newly created entities to this manager.
-		ARG 1 entities
-	METHOD m_ylghgkfk readIfFresh (J)V
-		ARG 1 chunkPos
-	METHOD m_zcyvlqib (Lnet/minecraft/unmapped/C_gqkevcns;)V
-		ARG 1 entity
-	METHOD m_zhclwohi (J)V
+	METHOD m_qzxrpkkf tick ()V
+	METHOD m_rddhigij save ()V
+	METHOD m_rnfibgje (J)Z
 		ARG 1 pos
-	METHOD m_zkrwhtpo unload (J)Z
+	METHOD m_sjqubzkk dump (Ljava/io/Writer;)V
+		ARG 1 writer
+	METHOD m_spsjkhlb (Lnet/minecraft/unmapped/C_sncvekqg;)V
+		ARG 1 entity
+	METHOD m_srrueovk getDebugString ()Ljava/lang/String;
+	METHOD m_tqicuzto startTracking (Lnet/minecraft/unmapped/C_sncvekqg;)V
+		ARG 1 entity
+	METHOD m_vnymsiap getLookup ()Lnet/minecraft/unmapped/C_mmgrdxia;
+	METHOD m_vznrdydi (Lnet/minecraft/unmapped/C_rypzgnkv;Lnet/minecraft/unmapped/C_jdbhctxz$C_gsdfwncs;J)V
+		ARG 3 sectionPos
+	METHOD m_wefnsylf flush ()V
+	METHOD m_wtrvgsac (Lnet/minecraft/unmapped/C_rypzgnkv;J)V
+		ARG 2 chunkPos
+	METHOD m_wvophozb (Lnet/minecraft/unmapped/C_sncvekqg;)V
+		ARG 1 entity
+	METHOD m_yrlpmtwi loadEntities (Ljava/util/stream/Stream;)V
+		COMMENT Loads a few entities from disk to this manager.
+		ARG 1 entities
+	METHOD m_yukibllm readIfFresh (J)V
 		ARG 1 chunkPos
-	CLASS C_eipbflak Listener
-		FIELD f_ajvashxb sectionPos J
-		FIELD f_dsfbomzg manager Lnet/minecraft/unmapped/C_zxtchbdj;
-		FIELD f_dsvvxhol section Lnet/minecraft/unmapped/C_iyhynnmk;
-		FIELD f_whmmnime entity Lnet/minecraft/unmapped/C_gqkevcns;
-		METHOD m_hkehxdiq updateLoadStatus (Lnet/minecraft/unmapped/C_pzjnoglb;Lnet/minecraft/unmapped/C_pzjnoglb;)V
+	METHOD m_zamsnjdu updateTrackingStatus (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_blgonjzp;)V
+		COMMENT Updates the {@code trackingStatus} of tracking sections in a chunk
+		COMMENT at {@code chunkPos}.
+		ARG 1 chunkPos
+			COMMENT the chunk to update
+		ARG 2 trackingStatus
+			COMMENT the updated section tracking status
+	METHOD m_zpnwzmju (Lnet/minecraft/unmapped/C_blgonjzp;Lnet/minecraft/unmapped/C_kmnnyhyi;)V
+		ARG 2 group
+	CLASS C_gsdfwncs Status
+		COMMENT The status of chunks within a server entity manager.
+	CLASS C_iponftyn Listener
+		FIELD f_bhbozzmn section Lnet/minecraft/unmapped/C_kmnnyhyi;
+		FIELD f_lbbnmedo manager Lnet/minecraft/unmapped/C_jdbhctxz;
+		FIELD f_vohujvjy entity Lnet/minecraft/unmapped/C_sncvekqg;
+		FIELD f_zwlwhnti sectionPos J
+		METHOD m_rhgpchyf updateLoadStatus (Lnet/minecraft/unmapped/C_blgonjzp;Lnet/minecraft/unmapped/C_blgonjzp;)V
 			ARG 1 oldStatus
 			ARG 2 newStatus
-	CLASS C_ucbltgjt Status
-		COMMENT The status of chunks within a server entity manager.

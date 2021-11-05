@@ -1,12 +1,45 @@
-CLASS net/minecraft/unmapped/C_ycjfeuwi net/minecraft/world/gen/foliage/FoliagePlacer
-	FIELD f_mtdzqddk radius Lnet/minecraft/unmapped/C_gbjefcam;
-	FIELD f_tqoacpgj offset Lnet/minecraft/unmapped/C_gbjefcam;
-	FIELD f_vngqsybi TYPE_CODEC Lcom/mojang/serialization/Codec;
-	METHOD <init> (Lnet/minecraft/unmapped/C_gbjefcam;Lnet/minecraft/unmapped/C_gbjefcam;)V
+CLASS net/minecraft/unmapped/C_iwuefjcy net/minecraft/world/gen/foliage/FoliagePlacer
+	FIELD f_czfpnkai radius Lnet/minecraft/unmapped/C_macfejbg;
+	FIELD f_denqqplx offset Lnet/minecraft/unmapped/C_macfejbg;
+	FIELD f_zzosassw TYPE_CODEC Lcom/mojang/serialization/Codec;
+	METHOD <init> (Lnet/minecraft/unmapped/C_macfejbg;Lnet/minecraft/unmapped/C_macfejbg;)V
 		ARG 1 radius
 		ARG 2 offset
-	METHOD m_awnpnzsi fillFoliagePlacerFields (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P2;
-	METHOD m_bhonttvs generate (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_dtkdyhtz;ILnet/minecraft/unmapped/C_ycjfeuwi$C_vgjetzth;II)V
+	METHOD m_alwthvdq isPositionInvalid (Ljava/util/Random;IIIIZ)Z
+		COMMENT Normalizes x and z coords before checking if they are invalid.
+		ARG 1 random
+		ARG 2 dx
+		ARG 3 y
+		ARG 4 dz
+		ARG 5 radius
+		ARG 6 giantTrunk
+	METHOD m_cwekonud placeFoliageBlock (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_zthydktd;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 0 world
+		ARG 1 replacer
+		ARG 2 random
+		ARG 3 config
+		ARG 4 pos
+	METHOD m_gnnnomut getRandomOffset (Ljava/util/Random;)I
+		ARG 1 random
+	METHOD m_hjzzwqgw getRandomHeight (Ljava/util/Random;ILnet/minecraft/unmapped/C_zthydktd;)I
+		ARG 1 random
+		ARG 2 trunkHeight
+		ARG 3 config
+	METHOD m_jhbkooww generateSquare (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_zthydktd;Lnet/minecraft/unmapped/C_hynzadkk;IIZ)V
+		COMMENT Generates a square of leaves with the given radius. Sub-classes can use the method {@code isInvalidForLeaves} to exclude certain positions, such as corners.
+		ARG 1 world
+		ARG 2 replacer
+		ARG 3 random
+		ARG 4 config
+		ARG 5 centerPos
+		ARG 6 radius
+		ARG 7 y
+		ARG 8 giantTrunk
+	METHOD m_kfjixvcn fillFoliagePlacerFields (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P2;
+	METHOD m_lenjfbah getRandomRadius (Ljava/util/Random;I)I
+		ARG 1 random
+		ARG 2 baseHeight
+	METHOD m_liwxllkk generate (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_zthydktd;ILnet/minecraft/unmapped/C_iwuefjcy$C_uditupge;II)V
 		ARG 1 world
 		ARG 2 replacer
 		ARG 3 random
@@ -15,7 +48,20 @@ CLASS net/minecraft/unmapped/C_ycjfeuwi net/minecraft/world/gen/foliage/FoliageP
 		ARG 6 treeNode
 		ARG 7 foliageHeight
 		ARG 8 radius
-	METHOD m_bhonttvs generate (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_dtkdyhtz;ILnet/minecraft/unmapped/C_ycjfeuwi$C_vgjetzth;III)V
+	METHOD m_lnntehfe getType ()Lnet/minecraft/unmapped/C_nqbkkupl;
+	METHOD m_nstjonfo (Lnet/minecraft/unmapped/C_iwuefjcy;)Lnet/minecraft/unmapped/C_macfejbg;
+		ARG 0 placer
+	METHOD m_uogkmekr (Lnet/minecraft/unmapped/C_iwuefjcy;)Lnet/minecraft/unmapped/C_macfejbg;
+		ARG 0 placer
+	METHOD m_uuoemfyq isInvalidForLeaves (Ljava/util/Random;IIIIZ)Z
+		COMMENT Used to exclude certain positions such as corners when creating a square of leaves.
+		ARG 1 random
+		ARG 2 dx
+		ARG 3 y
+		ARG 4 dz
+		ARG 5 radius
+		ARG 6 giantTrunk
+	METHOD m_ybfvvnvk generate (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_zthydktd;ILnet/minecraft/unmapped/C_iwuefjcy$C_uditupge;III)V
 		COMMENT This is the main method used to generate foliage.
 		ARG 1 world
 		ARG 2 replacer
@@ -26,62 +72,16 @@ CLASS net/minecraft/unmapped/C_ycjfeuwi net/minecraft/world/gen/foliage/FoliageP
 		ARG 7 foliageHeight
 		ARG 8 radius
 		ARG 9 offset
-	METHOD m_futhjyvq getRandomHeight (Ljava/util/Random;ILnet/minecraft/unmapped/C_dtkdyhtz;)I
-		ARG 1 random
-		ARG 2 trunkHeight
-		ARG 3 config
-	METHOD m_gtaytjcw (Lnet/minecraft/unmapped/C_ycjfeuwi;)Lnet/minecraft/unmapped/C_gbjefcam;
-		ARG 0 placer
-	METHOD m_ihkhupbb (Lnet/minecraft/unmapped/C_ycjfeuwi;)Lnet/minecraft/unmapped/C_gbjefcam;
-		ARG 0 placer
-	METHOD m_kcwiqvir getRandomRadius (Ljava/util/Random;I)I
-		ARG 1 random
-		ARG 2 baseHeight
-	METHOD m_kpdwhrng getType ()Lnet/minecraft/unmapped/C_lpukkbqn;
-	METHOD m_kselslqv placeFoliageBlock (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_dtkdyhtz;Lnet/minecraft/unmapped/C_kkdaznyh;)V
-		ARG 0 world
-		ARG 1 replacer
-		ARG 2 random
-		ARG 3 config
-		ARG 4 pos
-	METHOD m_nwsqtmkq generateSquare (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_dtkdyhtz;Lnet/minecraft/unmapped/C_kkdaznyh;IIZ)V
-		COMMENT Generates a square of leaves with the given radius. Sub-classes can use the method {@code isInvalidForLeaves} to exclude certain positions, such as corners.
-		ARG 1 world
-		ARG 2 replacer
-		ARG 3 random
-		ARG 4 config
-		ARG 5 centerPos
-		ARG 6 radius
-		ARG 7 y
-		ARG 8 giantTrunk
-	METHOD m_tqoacpgj getRandomOffset (Ljava/util/Random;)I
-		ARG 1 random
-	METHOD m_wchgcjxd isInvalidForLeaves (Ljava/util/Random;IIIIZ)Z
-		COMMENT Used to exclude certain positions such as corners when creating a square of leaves.
-		ARG 1 random
-		ARG 2 dx
-		ARG 3 y
-		ARG 4 dz
-		ARG 5 radius
-		ARG 6 giantTrunk
-	METHOD m_yjjwgbsf isPositionInvalid (Ljava/util/Random;IIIIZ)Z
-		COMMENT Normalizes x and z coords before checking if they are invalid.
-		ARG 1 random
-		ARG 2 dx
-		ARG 3 y
-		ARG 4 dz
-		ARG 5 radius
-		ARG 6 giantTrunk
-	CLASS C_vgjetzth TreeNode
+	CLASS C_uditupge TreeNode
 		COMMENT A point on a tree to generate foliage around
-		FIELD f_gtayorjd giantTrunk Z
-		FIELD f_vqvifgax center Lnet/minecraft/unmapped/C_kkdaznyh;
-		FIELD f_yeebgvvx foliageRadius I
-		METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;IZ)V
+		FIELD f_hmmybfiv center Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_lsfnejho giantTrunk Z
+		FIELD f_sybneqjl foliageRadius I
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;IZ)V
 			ARG 1 center
 			ARG 2 foliageRadius
 			ARG 3 giantTrunk
-		METHOD m_gtayorjd isGiantTrunk ()Z
+		METHOD m_hdvmajpe getCenter ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_kedrtxka getFoliageRadius ()I
+		METHOD m_rqodtzaw isGiantTrunk ()Z
 			COMMENT Whether this node is the top of a giant (2x2 block) trunk
-		METHOD m_vqvifgax getCenter ()Lnet/minecraft/unmapped/C_kkdaznyh;
-		METHOD m_yeebgvvx getFoliageRadius ()I

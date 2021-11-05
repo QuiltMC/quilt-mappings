@@ -1,6 +1,12 @@
-CLASS net/minecraft/unmapped/C_ctyadtwn net/minecraft/util/collection/PackedIntegerArray
-	FIELD f_ccjsmhyc elementBits I
-	FIELD f_kdhzegmu INDEX_PARAMETERS [I
+CLASS net/minecraft/unmapped/C_nwtdaytc net/minecraft/util/collection/PackedIntegerArray
+	FIELD f_ezaawboj indexOffset I
+	FIELD f_foruzxcm indexShift I
+	FIELD f_gjkyepdk size I
+	FIELD f_naaklbli elementBits I
+	FIELD f_scprargr indexScale I
+	FIELD f_uplcdlwf elementsPerLong I
+	FIELD f_wlwknzkq storage [J
+	FIELD f_xbmsukww INDEX_PARAMETERS [I
 		COMMENT Magic constants for faster integer division by a constant.
 		COMMENT
 		COMMENT <p>This is computed as {@code (n * scale + offset) >> (32 + shift)}. For a divisor n,
@@ -11,13 +17,7 @@ CLASS net/minecraft/unmapped/C_ctyadtwn net/minecraft/util/collection/PackedInte
 		COMMENT <li>offset at 3 * (n - 1) + 1</li>
 		COMMENT <li>shift at 3 * (n - 1) + 2</li>
 		COMMENT </ul>
-	FIELD f_mzoprptt size I
-	FIELD f_ttihqkpp indexScale I
-	FIELD f_txgrdprk indexShift I
-	FIELD f_xamcenja storage [J
-	FIELD f_xlefppxj elementsPerLong I
-	FIELD f_xlhrvrnw indexOffset I
-	FIELD f_ztjkbnpu maxValue J
+	FIELD f_yuxdzfyk maxValue J
 	METHOD <init> (II)V
 		ARG 1 elementBits
 		ARG 2 size
@@ -25,18 +25,18 @@ CLASS net/minecraft/unmapped/C_ctyadtwn net/minecraft/util/collection/PackedInte
 		ARG 1 elementBits
 		ARG 2 size
 		ARG 3 storage
-	METHOD m_bldbaqsx getElementBits ()I
-	METHOD m_iictsmwv setAndGetOldValue (II)I
+	METHOD m_fzeaoezy set (II)V
 		ARG 1 index
 		ARG 2 value
-	METHOD m_iiqknvxs get (I)I
+	METHOD m_jpxerbtm setAndGetOldValue (II)I
 		ARG 1 index
-	METHOD m_pqwckzmh getStorage ()[J
-	METHOD m_rbvyeisi forEach (Ljava/util/function/IntConsumer;)V
+		ARG 2 value
+	METHOD m_kczzizpr forEach (Ljava/util/function/IntConsumer;)V
 		ARG 1 consumer
-	METHOD m_rzotgpha getStorageIndex (I)I
+	METHOD m_ktqbarmx get (I)I
 		ARG 1 index
-	METHOD m_vxrbdgzg getSize ()I
-	METHOD m_znqvfbjj set (II)V
+	METHOD m_nbqrmzxl getSize ()I
+	METHOD m_owofhzhq getStorage ()[J
+	METHOD m_ykodrjjb getElementBits ()I
+	METHOD m_zkipujhj getStorageIndex (I)I
 		ARG 1 index
-		ARG 2 value

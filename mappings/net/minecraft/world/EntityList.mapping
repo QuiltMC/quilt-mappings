@@ -1,15 +1,19 @@
-CLASS net/minecraft/unmapped/C_uthmydtr net/minecraft/world/EntityList
+CLASS net/minecraft/unmapped/C_rtdymhtu net/minecraft/world/EntityList
 	COMMENT A storage of entities that supports modification during iteration.
 	COMMENT
 	COMMENT <p>The entities are stored by their network IDs.
 	COMMENT
 	COMMENT @see EntityList#forEach(Consumer)
-	FIELD f_bwwetfwk entities Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-	FIELD f_qcutngvr iterating Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-	FIELD f_tgpbrhus temp Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-	METHOD m_gbrynflc remove (Lnet/minecraft/unmapped/C_srenftsa;)V
+	FIELD f_acjyqrhk temp Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+	FIELD f_gigkzsif iterating Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+	FIELD f_laeunaza entities Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+	METHOD m_dskdaecg ensureSafe ()V
+		COMMENT Ensures that the modified {@code entities} map is not currently iterated.
+		COMMENT If {@code entities} is iterated, this moves its value to {@code temp} so
+		COMMENT modification to {@code entities} is safe.
+	METHOD m_godrofyk add (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
-	METHOD m_miwmkndu forEach (Ljava/util/function/Consumer;)V
+	METHOD m_jhjetggp forEach (Ljava/util/function/Consumer;)V
 		COMMENT Runs an {@code action} on every entity in this storage.
 		COMMENT
 		COMMENT <p>If this storage is updated during the iteration, the iteration will
@@ -20,11 +24,7 @@ CLASS net/minecraft/unmapped/C_uthmydtr net/minecraft/world/EntityList
 		COMMENT @throws UnsupportedOperationException if this is called before an iteration
 		COMMENT has finished, such as within the {@code action} or from another thread
 		ARG 1 action
-	METHOD m_rgvdtnib ensureSafe ()V
-		COMMENT Ensures that the modified {@code entities} map is not currently iterated.
-		COMMENT If {@code entities} is iterated, this moves its value to {@code temp} so
-		COMMENT modification to {@code entities} is safe.
-	METHOD m_rtqfibjh add (Lnet/minecraft/unmapped/C_srenftsa;)V
+	METHOD m_kbxuzxoy remove (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
-	METHOD m_ztvmqpmw has (Lnet/minecraft/unmapped/C_srenftsa;)Z
+	METHOD m_vwtquwty has (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
