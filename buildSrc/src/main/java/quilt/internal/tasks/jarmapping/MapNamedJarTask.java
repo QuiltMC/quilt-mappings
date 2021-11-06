@@ -6,8 +6,8 @@ import java.util.Map;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.tasks.build.DownloadPerVersionMappingsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.util.JarRemapper;
 
@@ -20,7 +20,7 @@ public class MapNamedJarTask extends DefaultMappingsTask {
         getInputs().files(getTaskByName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
         getOutputs().file(this.fileConstants.namedJar);
 
-        this.dependsOn("mergeV2", "unpickHashedJar");
+        this.dependsOn("mergeTinyV2", "unpickHashedJar");
 
         outputsNeverUpToDate();
     }

@@ -1,4 +1,4 @@
-package quilt.internal.tasks.build;
+package quilt.internal.tasks.setup;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class DownloadPerVersionMappingsTask extends DefaultMappingsTask {
     public File tinyFile = new File(fileConstants.cacheFilesMinecraft, String.format("%s-%s.tiny", Constants.MINECRAFT_VERSION, Constants.PER_VERSION_MAPPINGS_NAME));
 
     public DownloadPerVersionMappingsTask() {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        super(Constants.Groups.SETUP_GROUP);
     }
 
     @TaskAction

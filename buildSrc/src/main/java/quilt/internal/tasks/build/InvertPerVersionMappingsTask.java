@@ -6,6 +6,7 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
 
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 

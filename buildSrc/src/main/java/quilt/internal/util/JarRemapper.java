@@ -8,7 +8,7 @@ import org.gradle.api.Action;
 
 import net.fabricmc.tinyremapper.OutputConsumerPath;
 import net.fabricmc.tinyremapper.TinyRemapper;
-import net.fabricmc.tinyremapper.TinyUtils;
+import net.fabricmc.tinyremapper.TinyRemapperConfiguration;
 
 public class JarRemapper {
     public static void mapJar(File output, File input, File mappings, File libraries, String from, String to, @Nullable Action<TinyRemapper.Builder> action) {
@@ -17,11 +17,7 @@ public class JarRemapper {
         }
 
         TinyRemapper.Builder remapperBuilder = TinyRemapper.newRemapper()
-                .withMappings(TinyUtils.createTinyMappingProvider(mappings.toPath(), from, to))
-                .renameInvalidLocals(true)
-                .rebuildSourceFilenames(true)
-                .ignoreConflicts(true)
-                .invalidLvNamePattern(Pattern.compile("\\$\\$\\d+")); // Current LVT name starting in 21w37a
+                .configuration(new TinyRemapperConfiguration(false, false, false, false, false, true, false, true, Pattern.compile("\\$\\$\\d+|c_[a-z]{8}"), false));
 
         if (action != null) {
             action.execute(remapperBuilder);

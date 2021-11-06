@@ -4,7 +4,6 @@ buildscript {
 			name 'Quilt Releases'
 			url 'https://maven.quiltmc.org/repository/release/'
 		}
-		mavenCentral()
 		maven {
 			name "Fabric Repository"
 			url 'https://maven.fabricmc.net'
@@ -301,9 +300,9 @@ javadoc {
 		// lazy setting
 		options {
 			tagletPath configurations.mappingPoet.files.toList()
-			header mappingPoetJar.get().filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
 			// cannot include line breaks
 			addFileOption "-add-stylesheet", mappingPoetJar.get().filter { it.name == 'forms.css' }.singleFile
+			header mappingPoetJar.get().filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
 		}
 	}
 }
@@ -364,7 +363,7 @@ publishing {
 		}
 	}
 	repositories {
-		if (ENV.MAVEN_URL && !USE_SNAPSHOT_HASHES) {
+		if (ENV.MAVEN_URL) {
 			maven {
 				url ENV.MAVEN_URL
 				credentials {
@@ -372,7 +371,7 @@ publishing {
 					password ENV.MAVEN_PASSWORD
 				}
 			}
-		} else if (USE_SNAPSHOT_HASHES || ENV.SNAPSHOTS_URL) {
+		} else if (USE_SNAPSHOT_HASHES && ENV.SNAPSHOTS_URL) {
 			maven {
 				url = ENV.SNAPSHOTS_URL
 

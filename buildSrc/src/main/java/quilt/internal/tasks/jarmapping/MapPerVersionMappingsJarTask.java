@@ -5,8 +5,8 @@ import java.io.File;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.tasks.build.DownloadPerVersionMappingsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.util.JarRemapper;
 

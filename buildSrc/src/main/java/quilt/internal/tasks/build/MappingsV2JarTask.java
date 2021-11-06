@@ -23,7 +23,7 @@ public class MappingsV2JarTask extends Jar implements AbstractMappingsTask {
         File unpickMetaFile = getProject().file("unpick-definitions/unpick.json");
         from(unpickMetaFile, copySpec -> {
             copySpec.expand(Map.of("version", getProject().property("unpick_version")));
-            copySpec.rename(unpickMetaFile.getName(), "extras/definitions.unpick");
+            copySpec.rename(unpickMetaFile.getName(), "extras/unpick.json");
         });
 
         RegularFileProperty combineUnpickDefinitions = getTaskByType(CombineUnpickDefinitionsTask.class).getOutput();
@@ -32,17 +32,16 @@ public class MappingsV2JarTask extends Jar implements AbstractMappingsTask {
         });
 
         mappings = getObjectFactory().fileProperty();
+
+        from(mappings, copySpec -> {
+            copySpec.rename((originalName) -> "mappings/mappings.tiny");
+        });
+
     }
 
     public RegularFileProperty getMappings() {
         return mappings;
     }
 
-    @Override
-    public void copy() {
-        from(mappings, copySpec -> {
-            copySpec.rename(mappings.get().getAsFile().getName(), "mappings/mappings.tiny");
-        });
-        super.copy();
-    }
+
 }
