@@ -52,6 +52,9 @@ time to type thanks to IDE autocompletion. Common abbreviations you should use a
 Treat acronyms as single words rather than capitalizing every letter. This improves readability (compare `JsonObject` and
 `JSONObject`) and it's consistent with Mojang naming (a known name is `NbtIo`).
 
+Abbreviations you shouldn't use are:
+- "loc" for "location"
+
 ## Packages
 
 Package names should always be singular to respect Java conventions. Try to respect the Mojang package structure to avoid
