@@ -7,12 +7,11 @@ import java.nio.charset.StandardCharsets;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
-import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.util.json.VersionFile;
 
 public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadMinecraftJars";
@@ -22,7 +21,7 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
     @OutputFile
     private final File serverBootstrapJar;
 
-    private VersionFile file;
+    private Version file;
 
     public DownloadMinecraftJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
@@ -35,8 +34,8 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
         getOutputs().upToDateWhen(_input -> {
             try {
                 return clientJar.exists() && serverBootstrapJar.exists()
-                        && validateChecksum(clientJar, getVersionFile().clientJar().sha1())
-                        && validateChecksum(serverBootstrapJar, getVersionFile().serverJar().sha1());
+                       && validateChecksum(clientJar, getVersionFile().getDownloads().getClient().getSha1())
+                       && validateChecksum(serverBootstrapJar, getVersionFile().getDownloads().getServer().get().getSha1());
             } catch (Exception e) {
                 return false;
             }
@@ -48,13 +47,13 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
         getLogger().lifecycle(":downloading minecraft jars");
 
         startDownload()
-                .src(getVersionFile().clientJar().url())
+                .src(getVersionFile().getDownloads().getClient().getUrl())
                 .dest(clientJar)
                 .overwrite(false)
                 .download();
 
         startDownload()
-                .src(getVersionFile().serverJar().url())
+                .src(getVersionFile().getDownloads().getServer().get().getUrl())
                 .dest(serverBootstrapJar)
                 .overwrite(false)
                 .download();
@@ -73,9 +72,9 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
         return false;
     }
 
-    private VersionFile getVersionFile() throws IOException {
+    private Version getVersionFile() throws IOException {
         if (file == null) {
-            file = VersionFile.fromJson(FileUtils.readFileToString(getTaskByType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
+            file = Version.fromReader(java.nio.file.Files.newBufferedReader(getTaskByType(DownloadWantedVersionManifestTask.class).getVersionFile().toPath(), StandardCharsets.UTF_8));
         }
 
         return file;

@@ -3,9 +3,7 @@ package quilt.internal.tasks.setup;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
-import com.google.gson.Gson;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
@@ -36,5 +34,4 @@ public class DownloadVersionsManifestTask extends DefaultMappingsTask {
     public File getManifestFile() {
         return manifestFile;
     }
-
 }

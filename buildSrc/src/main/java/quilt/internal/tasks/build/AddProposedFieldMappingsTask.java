@@ -47,9 +47,8 @@ public class AddProposedFieldMappingsTask extends DefaultMappingsTask {
         return outputMappings;
     }
 
-    public AddProposedFieldMappingsTask setOutputMappings(File outputMappings) {
+    public void setOutputMappings(File outputMappings) {
         this.outputMappings = outputMappings;
-        return this;
     }
 
     public Property<File> getInputJar() {

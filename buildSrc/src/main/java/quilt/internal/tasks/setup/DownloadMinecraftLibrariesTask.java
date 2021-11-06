@@ -7,9 +7,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
+import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.util.json.VersionFile;
 
 public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadMinecraftLibraries";
@@ -24,7 +24,7 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
 
     @TaskAction
     public void downloadMinecraftLibrariesTask() throws IOException {
-        VersionFile file = VersionFile.fromJson(FileUtils.readFileToString(getTaskByType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
+        Version file = Version.fromString(FileUtils.readFileToString(getTaskByType(DownloadWantedVersionManifestTask.class).getVersionFile(), StandardCharsets.UTF_8));
 
         getLogger().lifecycle(":downloading minecraft libraries");
 
@@ -36,11 +36,12 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
 
         Object lock = new Object();
 
-        file.libraries().parallelStream().forEach(library -> {
+        file.getLibraries().parallelStream().forEach(library -> {
             try {
+                String url = library.getDownloads().getArtifact().get().getUrl();
                 startDownload()
-                        .src(library.url())
-                        .dest(new File(fileConstants.libraries, library.url().substring(library.url().lastIndexOf("/") + 1)))
+                        .src(url)
+                        .dest(new File(fileConstants.libraries, url.substring(url.lastIndexOf("/") + 1)))
                         .overwrite(false)
                         .download();
             } catch (IOException e) {
@@ -48,7 +49,7 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
                 e.printStackTrace();
             }
             synchronized (lock) {
-                getProject().getDependencies().add("decompileClasspath", library.name());
+                getProject().getDependencies().add("decompileClasspath", library.getName());
             }
         });
 
