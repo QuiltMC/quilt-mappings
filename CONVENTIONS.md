@@ -3,7 +3,8 @@
 ## General
 
 Use `UpperCamelCase` for class names. Use `lowerCamelCase` for method names, variable names, and names of fields that are not
-both static and final. Use `UPPER_SNAKE_CASE` for names of fields that are both static and final.
+both static and final. Use `UPPER_SNAKE_CASE` for names of fields that are both static and final, excluding atomics like
+`AtomicInteger`, `AtomicBoolean` or `AtomicReference`.
 
 Method names should generally be verb phrases (`tick`, `getCarversForStep`), except for "withX", "toX", "fromX", "of" and
 builder methods. Class names and non-boolean field and variable names should be noun phrases (`ChunkRegion`, `color`).
@@ -46,6 +47,7 @@ time to type thanks to IDE autocompletion. Common abbreviations you should use a
  - "min"/"max" for "minimum"/"maximum"
  - Any abbreviations used by Java or libraries ("json", "html", etc.)
  - "o" for the parameter of `equals(Ljava/lang/Object;)Z` methods
+ - "prev" for "previous"
 
 Treat acronyms as single words rather than capitalizing every letter. This improves readability (compare `JsonObject` and
 `JSONObject`) and it's consistent with Mojang naming (a known name is `NbtIo`).
