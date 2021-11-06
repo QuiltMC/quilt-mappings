@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_oxncoebj net/minecraft/world/chunk/light/LightStorage
+CLASS net/minecraft/unmapped/C_jbeocnxo net/minecraft/world/chunk/light/LightStorage
 	COMMENT LightStorage handles the access, storage and propagation of a specific kind of light within the world.
 	COMMENT For example, separate instances will be used to store block light as opposed to sky light.
 	COMMENT
@@ -10,71 +10,71 @@ CLASS net/minecraft/unmapped/C_oxncoebj net/minecraft/world/chunk/light/LightSto
 	COMMENT
 	COMMENT @see SkyLightStorage
 	COMMENT @see BlockLightStorage
-	FIELD f_dsuzqfui hasLightUpdates Z
-	FIELD f_dyelxjsm dirtySections Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_egpllgen readySections Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_enrrkkwq queuedSections Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
-	FIELD f_kxynhjfl markedReadySections Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_ncbacvou DIRECTIONS [Lnet/minecraft/unmapped/C_fxhiuupx;
-	FIELD f_nywvxibi markedNotReadySections Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_peimaqeq EMPTY Lnet/minecraft/unmapped/C_gxdxaenc;
-	FIELD f_shfidsem lightType Lnet/minecraft/unmapped/C_wtqmlvhf;
-	FIELD f_slbbbuun columnsToRetain Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_sstwxtrt sectionsToRemove Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_uucdqwvp notifySections Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_uvnururz chunkProvider Lnet/minecraft/unmapped/C_yvvvsshj;
-	FIELD f_vyqmblks uncachedStorage Lnet/minecraft/unmapped/C_vbmnzzdj;
-	FIELD f_wswgdlgv queuedEdgeSections Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_yedivfbl storage Lnet/minecraft/unmapped/C_vbmnzzdj;
-	METHOD <init> (Lnet/minecraft/unmapped/C_wtqmlvhf;Lnet/minecraft/unmapped/C_yvvvsshj;Lnet/minecraft/unmapped/C_vbmnzzdj;)V
+	FIELD f_ibixvwyn markedNotReadySections Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_iufqzusd hasLightUpdates Z
+	FIELD f_lbfvidey storage Lnet/minecraft/unmapped/C_jdzznmbv;
+	FIELD f_lfjhnyxk markedReadySections Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_mesdifhs lightType Lnet/minecraft/unmapped/C_fhvlmqtw;
+	FIELD f_msjxleyd dirtySections Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_negllpge readySections Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_nuubbbls columnsToRetain Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_pvwqdcuu notifySections Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_qeqamiep EMPTY Lnet/minecraft/unmapped/C_cneaxdxg;
+	FIELD f_qwkkrrne queuedSections Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_sklbmqyv uncachedStorage Lnet/minecraft/unmapped/C_jdzznmbv;
+	FIELD f_trtxwtss sectionsToRemove Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_uovcabcn DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
+	FIELD f_vgldgwsw queuedEdgeSections Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_zrurunvu chunkProvider Lnet/minecraft/unmapped/C_jhssvvvy;
+	METHOD <init> (Lnet/minecraft/unmapped/C_fhvlmqtw;Lnet/minecraft/unmapped/C_jhssvvvy;Lnet/minecraft/unmapped/C_jdzznmbv;)V
 		ARG 1 lightType
 		ARG 2 chunkProvider
 		ARG 3 lightData
-	METHOD m_acfzaufo notifyChanges ()V
-	METHOD m_behjcvhm get (J)I
-		ARG 1 blockPos
-	METHOD m_fixmuflf onLoadSection (J)V
-		ARG 1 sectionPos
-	METHOD m_ihhqihqh set (JI)V
-		ARG 1 blockPos
-		ARG 3 value
-	METHOD m_jqeqliqf updateAll ()V
-	METHOD m_kkilgthw setColumnEnabled (JZ)V
-		ARG 1 columnPos
-		ARG 3 enabled
-	METHOD m_kzhfhcqe removeSection (Lnet/minecraft/unmapped/C_blxzsalj;J)V
-		ARG 1 storage
-		ARG 2 sectionPos
-	METHOD m_lyqqgbxh onUnloadSection (J)V
-		ARG 1 sectionPos
-	METHOD m_mageiddk enqueueSectionData (JLnet/minecraft/unmapped/C_gxdxaenc;Z)V
-		ARG 1 sectionPos
-		ARG 3 array
-	METHOD m_nizqdmre updateSection (Lnet/minecraft/unmapped/C_blxzsalj;J)V
-		ARG 1 lightProvider
-		ARG 2 sectionPos
-	METHOD m_nmnvbsfx getLightSection (J)Lnet/minecraft/unmapped/C_gxdxaenc;
-		ARG 1 sectionPos
-	METHOD m_nvudcevp getLightSection (Lnet/minecraft/unmapped/C_vbmnzzdj;J)Lnet/minecraft/unmapped/C_gxdxaenc;
-		ARG 1 storage
-		ARG 2 sectionPos
-	METHOD m_qbqbukmk createSection (J)Lnet/minecraft/unmapped/C_gxdxaenc;
-		ARG 1 sectionPos
-	METHOD m_rmxfmsqd setRetainColumn (JZ)V
+	METHOD m_dqsmfxmr setRetainColumn (JZ)V
 		ARG 1 sectionPos
 		ARG 3 retain
-	METHOD m_spjetelu getLight (J)I
-		ARG 1 blockPos
-	METHOD m_ucivnvhv getLightSection (JZ)Lnet/minecraft/unmapped/C_gxdxaenc;
+	METHOD m_eiakvigx hasSection (J)Z
 		ARG 1 sectionPos
-		ARG 3 cached
-	METHOD m_wxnhecbz setSectionStatus (JZ)V
-		ARG 1 sectionPos
-		ARG 3 notReady
-	METHOD m_xgivkaie hasSection (J)Z
-		ARG 1 sectionPos
-	METHOD m_xwatpgfx hasLightUpdates ()Z
-	METHOD m_xybzgsdb updateLight (Lnet/minecraft/unmapped/C_blxzsalj;ZZ)V
+	METHOD m_eqchfhzk removeSection (Lnet/minecraft/unmapped/C_jlaszxlb;J)V
+		ARG 1 storage
+		ARG 2 sectionPos
+	METHOD m_ermdqzin updateSection (Lnet/minecraft/unmapped/C_jlaszxlb;J)V
+		ARG 1 lightProvider
+		ARG 2 sectionPos
+	METHOD m_fqilqeqj updateAll ()V
+	METHOD m_fqmrtdms updateLight (Lnet/minecraft/unmapped/C_jlaszxlb;ZZ)V
 		ARG 1 lightProvider
 		ARG 2 doSkylight
 		ARG 3 skipEdgeLightPropagation
+	METHOD m_fruwkmyc setColumnEnabled (JZ)V
+		ARG 1 columnPos
+		ARG 3 enabled
+	METHOD m_hjzphppe onLoadSection (J)V
+		ARG 1 sectionPos
+	METHOD m_hqhiqhhi set (JI)V
+		ARG 1 blockPos
+		ARG 3 value
+	METHOD m_kddiegam enqueueSectionData (JLnet/minecraft/unmapped/C_cneaxdxg;Z)V
+		ARG 1 sectionPos
+		ARG 3 array
+	METHOD m_mhvcjheb get (J)I
+		ARG 1 blockPos
+	METHOD m_ofuazfca notifyChanges ()V
+	METHOD m_pvecduvn getLightSection (Lnet/minecraft/unmapped/C_jdzznmbv;J)Lnet/minecraft/unmapped/C_cneaxdxg;
+		ARG 1 storage
+		ARG 2 sectionPos
+	METHOD m_rxafiwiu getLight (J)I
+		ARG 1 blockPos
+	METHOD m_vhvnvicu getLightSection (JZ)Lnet/minecraft/unmapped/C_cneaxdxg;
+		ARG 1 sectionPos
+		ARG 3 cached
+	METHOD m_xfsbvnmn getLightSection (J)Lnet/minecraft/unmapped/C_cneaxdxg;
+		ARG 1 sectionPos
+	METHOD m_xjzllulu createSection (J)Lnet/minecraft/unmapped/C_cneaxdxg;
+		ARG 1 sectionPos
+	METHOD m_yxjtjbvt onUnloadSection (J)V
+		ARG 1 sectionPos
+	METHOD m_zbcehnxw setSectionStatus (JZ)V
+		ARG 1 sectionPos
+		ARG 3 notReady
+	METHOD m_zxaouzke hasLightUpdates ()Z

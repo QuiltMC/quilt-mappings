@@ -1,62 +1,86 @@
-CLASS net/minecraft/unmapped/C_ivxrfoun net/minecraft/client/network/ClientPlayNetworkHandler
-	FIELD f_aeqlbldj registryManager Lnet/minecraft/unmapped/C_qdzvmxqw;
-	FIELD f_apwiuaru worldProperties Lnet/minecraft/unmapped/C_wrrlndhg$C_qiiouown;
-	FIELD f_dpfhicso world Lnet/minecraft/unmapped/C_wrrlndhg;
-	FIELD f_hlkrgbhb positionLookSetup Z
-	FIELD f_iecazrtv chunkLoadDistance I
-	FIELD f_ldpkclwp commandDispatcher Lcom/mojang/brigadier/CommandDispatcher;
-	FIELD f_nawbzbrh advancementHandler Lnet/minecraft/unmapped/C_vxpsljow;
-	FIELD f_qbgpxkjf DISCONNECT_LOST_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
-	FIELD f_rgxyhfgn connection Lnet/minecraft/unmapped/C_kkccmsao;
-	FIELD f_settvsgn commandSource Lnet/minecraft/unmapped/C_evrpqqvv;
-	FIELD f_ueilkcmf LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_uvkradax random Ljava/util/Random;
-	FIELD f_uwpkcupa sessionId Ljava/util/UUID;
-	FIELD f_uxqxtyeb dataQueryHandler Lnet/minecraft/unmapped/C_scptmoik;
-	FIELD f_vseqmqak recipeManager Lnet/minecraft/unmapped/C_brsuesjh;
-	FIELD f_vzzfruib worldKeys Ljava/util/Set;
-	FIELD f_wiajcwpb profile Lcom/mojang/authlib/GameProfile;
-	FIELD f_xfjtcwxc client Lnet/minecraft/unmapped/C_diboefya;
-	FIELD f_xhxhcihi loginScreen Lnet/minecraft/unmapped/C_xqwltmrw;
-	FIELD f_zqdsqaky tagManager Lnet/minecraft/unmapped/C_foolhgqs;
-	FIELD f_zqvhvohm playerListEntries Ljava/util/Map;
-	METHOD m_aapueiuq getProfile ()Lcom/mojang/authlib/GameProfile;
-	METHOD m_cgfpteiz getSessionId ()Ljava/util/UUID;
-	METHOD m_cszlijyo updateLighting (IILnet/minecraft/unmapped/C_bsksopsk;Lnet/minecraft/unmapped/C_wtqmlvhf;Ljava/util/BitSet;Ljava/util/BitSet;Ljava/util/Iterator;Z)V
+CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayNetworkHandler
+	FIELD f_apuckpwu sessionId Ljava/util/UUID;
+	FIELD f_beytxqxu dataQueryHandler Lnet/minecraft/unmapped/C_kiomtpcs;
+	FIELD f_bhbgrklh positionLookSetup Z
+	FIELD f_biurfzzv worldKeys Ljava/util/Set;
+	FIELD f_bpwcjaiw profile Lcom/mojang/authlib/GameProfile;
+	FIELD f_cxwctjfx client Lnet/minecraft/unmapped/C_ayfeobid;
+	FIELD f_fjkxpgbq DISCONNECT_LOST_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_fmcklieu LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_hdjhrskx simulationDistance I
+	FIELD f_hrbzbwan advancementHandler Lnet/minecraft/unmapped/C_wojlspxv;
+	FIELD f_ihichxhx loginScreen Lnet/minecraft/unmapped/C_wrmtlwqx;
+	FIELD f_jdlblqea registryManager Lnet/minecraft/unmapped/C_wqxmvzdq;
+	FIELD f_kaqmqesv recipeManager Lnet/minecraft/unmapped/C_hjseusrb;
+	FIELD f_mhovhvqz playerListEntries Ljava/util/Map;
+	FIELD f_ngfhyxgr connection Lnet/minecraft/unmapped/C_oasmcckk;
+	FIELD f_ngsvttes commandSource Lnet/minecraft/unmapped/C_vvqqprve;
+	FIELD f_oscihfpd world Lnet/minecraft/unmapped/C_ghdnlrrw;
+	FIELD f_pwlckpdl commandDispatcher Lcom/mojang/brigadier/CommandDispatcher;
+	FIELD f_qghvqlmq telemetryManager Lnet/minecraft/unmapped/C_cgkxybww;
+	FIELD f_urauiwpa worldProperties Lnet/minecraft/unmapped/C_ghdnlrrw$C_nwouoiiq;
+	FIELD f_vtrzacei chunkLoadDistance I
+	FIELD f_xadarkvu random Ljava/util/Random;
+	FIELD f_ykaqsdqz tagManager Lnet/minecraft/unmapped/C_sqghloof;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_oasmcckk;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_cgkxybww;)V
+		ARG 1 client
+		ARG 2 screen
+		ARG 3 connection
+		ARG 4 profile
+		ARG 5 telemetryManager
+	METHOD m_aonyrtkr (I)V
+		ARG 1 entityId
+	METHOD m_aublwqmk getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq;
+	METHOD m_coppxivl getWorldKeys ()Ljava/util/Set;
+	METHOD m_cxcqcpnf getRecipeManager ()Lnet/minecraft/unmapped/C_hjseusrb;
+	METHOD m_dqvlgrdr clearWorld ()V
+	METHOD m_etfgyihv getPlayerUuids ()Ljava/util/Collection;
+	METHOD m_fiijclem sendPacket (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
+		COMMENT Sends a packet to the server.
+		ARG 1 packet
+			COMMENT the packet to send
+	METHOD m_gjtvlxzl queueLightUpdate (IILnet/minecraft/unmapped/C_qeldjmur;)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 data
+	METHOD m_hqntbneu getWorld ()Lnet/minecraft/unmapped/C_ghdnlrrw;
+	METHOD m_iekwcyew validateResourcePackUrl (Ljava/lang/String;)Z
+		ARG 1 url
+	METHOD m_jubodvkq getServerResourcePackPrompt (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 defaultPrompt
+		ARG 1 customPrompt
+	METHOD m_jxraxjjg feedbackAfterDownload (Ljava/util/concurrent/CompletableFuture;)V
+		ARG 1 downloadFuture
+	METHOD m_kktwaxkp getActiveTotemOfUndying (Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 player
+	METHOD m_krkrcsmq getDataQueryHandler ()Lnet/minecraft/unmapped/C_kiomtpcs;
+	METHOD m_lublfrgy readLightData (IILnet/minecraft/unmapped/C_qeldjmur;)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 data
+	METHOD m_lwefkjzy getTagManager ()Lnet/minecraft/unmapped/C_sqghloof;
+	METHOD m_nnthzfll getCommandDispatcher ()Lcom/mojang/brigadier/CommandDispatcher;
+	METHOD m_owpxqxbm getPlayerListEntry (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdnfmxue;
+		ARG 1 profileName
+	METHOD m_oyjilzsc updateLighting (IILnet/minecraft/unmapped/C_ksposksb;Lnet/minecraft/unmapped/C_fhvlmqtw;Ljava/util/BitSet;Ljava/util/BitSet;Ljava/util/Iterator;Z)V
 		ARG 1 chunkX
 		ARG 2 chunkZ
 		ARG 3 provider
 		ARG 4 type
-	METHOD m_dthicqwt getPlayerList ()Ljava/util/Collection;
-	METHOD m_dzrloxkw getAdvancementHandler ()Lnet/minecraft/unmapped/C_vxpsljow;
-	METHOD m_ehlbpqez getCommandSource ()Lnet/minecraft/unmapped/C_evrpqqvv;
-	METHOD m_fnpcqcxc getRecipeManager ()Lnet/minecraft/unmapped/C_brsuesjh;
-	METHOD m_gjjxarxj feedbackAfterDownload (Ljava/util/concurrent/CompletableFuture;)V
-		ARG 1 downloadFuture
-	METHOD m_iijmnarx getPlayerListEntry (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_euxmfndr;
-		ARG 1 uuid
-	METHOD m_kmqwlbua getRegistryManager ()Lnet/minecraft/unmapped/C_qdzvmxqw;
-	METHOD m_llfzhtnn getCommandDispatcher ()Lcom/mojang/brigadier/CommandDispatcher;
-	METHOD m_lvixppoc getWorldKeys ()Ljava/util/Set;
-	METHOD m_mbxqxpwo getPlayerListEntry (Ljava/lang/String;)Lnet/minecraft/unmapped/C_euxmfndr;
-		ARG 1 profileName
-	METHOD m_melcjiif sendPacket (Lnet/minecraft/unmapped/C_lrjrtjyz;)V
-		COMMENT Sends a packet to the server.
-		ARG 1 packet
-			COMMENT the packet to send
-	METHOD m_pkxawtkk getActiveTotemOfUndying (Lnet/minecraft/unmapped/C_oqcyprzj;)Lnet/minecraft/unmapped/C_kywxadds;
-		ARG 0 player
-	METHOD m_qkvdobuj getServerResourcePackPrompt (Lnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_tdwiqadr;)Lnet/minecraft/unmapped/C_tdwiqadr;
-		ARG 0 defaultPrompt
-		ARG 1 customPrompt
-	METHOD m_qmscrkrk getDataQueryHandler ()Lnet/minecraft/unmapped/C_scptmoik;
-	METHOD m_rdrglvqd clearWorld ()V
-	METHOD m_rktrynoa (I)V
-		ARG 1 entityId
-	METHOD m_uenbtnqh getWorld ()Lnet/minecraft/unmapped/C_wrrlndhg;
-	METHOD m_vhiygfte getPlayerUuids ()Ljava/util/Collection;
-	METHOD m_vitjrmnv sendResourcePackStatus (Lnet/minecraft/unmapped/C_ruczfitg$C_aolaulev;)V
+	METHOD m_quieupaa getProfile ()Lcom/mojang/authlib/GameProfile;
+	METHOD m_twqcihtd getPlayerList ()Ljava/util/Collection;
+	METHOD m_ugyspzmn (Lnet/minecraft/unmapped/C_hrdsvlkq;II)V
+		ARG 1 chunk
+		ARG 2 x
+		ARG 3 z
+	METHOD m_vnmrjtiv sendResourcePackStatus (Lnet/minecraft/unmapped/C_gtifzcur$C_velualoa;)V
 		ARG 1 packStatus
-	METHOD m_weycwkei validateResourcePackUrl (Ljava/lang/String;)Z
-		ARG 1 url
-	METHOD m_yzjkfewl getTagManager ()Lnet/minecraft/unmapped/C_foolhgqs;
+	METHOD m_wkxolrzd getAdvancementHandler ()Lnet/minecraft/unmapped/C_wojlspxv;
+	METHOD m_xranmjii getPlayerListEntry (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_rdnfmxue;
+		ARG 1 uuid
+	METHOD m_zdvdjxqm updateWorldChunk (IILnet/minecraft/unmapped/C_tilplatb;)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 data
+	METHOD m_zeqpblhe getCommandSource ()Lnet/minecraft/unmapped/C_vvqqprve;
+	METHOD m_zietpfgc getSessionId ()Ljava/util/UUID;

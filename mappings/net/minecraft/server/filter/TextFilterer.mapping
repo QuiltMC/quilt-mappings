@@ -1,70 +1,70 @@
-CLASS net/minecraft/unmapped/C_drxtstdl net/minecraft/server/filter/TextFilterer
-	FIELD f_bkqdczyc THREAD_FACTORY Ljava/util/concurrent/ThreadFactory;
-	FIELD f_gueybddn chatEndpoint Ljava/net/URL;
-	FIELD f_hozcftdd ignorer Lnet/minecraft/unmapped/C_drxtstdl$C_tcxfgzdv;
-	FIELD f_lvbxqtif leaveEndpoint Ljava/net/URL;
-	FIELD f_pxrbfhgs ruleId I
-	FIELD f_ssrwwtjz apiKey Ljava/lang/String;
-	FIELD f_urbiyzqx executor Ljava/util/concurrent/ExecutorService;
-	FIELD f_vaslznnr serverId Ljava/lang/String;
-	FIELD f_vipprmtr NEXT_WORKER_ID Ljava/util/concurrent/atomic/AtomicInteger;
-	FIELD f_wcjwvesj LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_ypjgyhgm joinEndpoint Ljava/net/URL;
-	METHOD <init> (Ljava/net/URI;Ljava/lang/String;ILjava/lang/String;Lnet/minecraft/unmapped/C_drxtstdl$C_tcxfgzdv;I)V
+CLASS net/minecraft/unmapped/C_ldtstxrd net/minecraft/server/filter/TextFilterer
+	FIELD f_cyzcdqkb THREAD_FACTORY Ljava/util/concurrent/ThreadFactory;
+	FIELD f_ddtfczoh ignorer Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;
+	FIELD f_fitqxbvl leaveEndpoint Ljava/net/URL;
+	FIELD f_jsevwjcw LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_mghygjpy joinEndpoint Ljava/net/URL;
+	FIELD f_nddbyeug chatEndpoint Ljava/net/URL;
+	FIELD f_rnnzlsav serverId Ljava/lang/String;
+	FIELD f_rtmrppiv NEXT_WORKER_ID Ljava/util/concurrent/atomic/AtomicInteger;
+	FIELD f_sghfbrxp ruleId I
+	FIELD f_xqzyibru executor Ljava/util/concurrent/ExecutorService;
+	FIELD f_zjtwwrss apiKey Ljava/lang/String;
+	METHOD <init> (Ljava/net/URI;Ljava/lang/String;ILjava/lang/String;Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;I)V
 		ARG 1 apiUrl
 		ARG 2 apiKey
 		ARG 3 ruleId
 		ARG 4 serverId
 		ARG 5 ignorer
 		ARG 6 threadsNumber
-	METHOD m_cbdhutvd createFilterer (Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_kywuycbi;
-		ARG 1 gameProfile
-	METHOD m_eqfppuhb consumeFully (Ljava/io/InputStream;)V
+	METHOD m_bhuppfqe consumeFully (Ljava/io/InputStream;)V
 		ARG 1 inputStream
-	METHOD m_ihqyjbki sendJsonRequest (Lcom/google/gson/JsonObject;Ljava/net/URL;)Lcom/google/gson/JsonObject;
+	METHOD m_cualkgar load (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ldtstxrd;
+		ARG 0 config
+	METHOD m_djraggvy sendRequest (Lcom/google/gson/JsonObject;Ljava/net/URL;)V
 		ARG 1 payload
 		ARG 2 endpoint
-	METHOD m_owphnuuj filterMessage (Lcom/mojang/authlib/GameProfile;Ljava/lang/String;Lnet/minecraft/unmapped/C_drxtstdl$C_tcxfgzdv;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_dvtuhdbc createFilterer (Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_ibcyuwyk;
+		ARG 1 gameProfile
+	METHOD m_gnleevgx sendJoinOrLeaveRequest (Lcom/mojang/authlib/GameProfile;Ljava/net/URL;Ljava/util/concurrent/Executor;)V
+		ARG 1 gameProfile
+		ARG 2 endpoint
+		ARG 3 executor
+	METHOD m_ikbjyqhi sendJsonRequest (Lcom/google/gson/JsonObject;Ljava/net/URL;)Lcom/google/gson/JsonObject;
+		ARG 1 payload
+		ARG 2 endpoint
+	METHOD m_juunhpwo filterMessage (Lcom/mojang/authlib/GameProfile;Ljava/lang/String;Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 gameProfile
 		ARG 2 message
 		ARG 3 ignorer
 		ARG 4 executor
-	METHOD m_qfmwigxq createConnection (Lcom/google/gson/JsonObject;Ljava/net/URL;)Ljava/net/HttpURLConnection;
+	METHOD m_qxgiwmfq createConnection (Lcom/google/gson/JsonObject;Ljava/net/URL;)Ljava/net/HttpURLConnection;
 		ARG 1 payload
 		ARG 2 endpoint
-	METHOD m_ragklauc load (Ljava/lang/String;)Lnet/minecraft/unmapped/C_drxtstdl;
-		ARG 0 config
-	METHOD m_xgveelng sendJoinOrLeaveRequest (Lcom/mojang/authlib/GameProfile;Ljava/net/URL;Ljava/util/concurrent/Executor;)V
-		ARG 1 gameProfile
-		ARG 2 endpoint
-		ARG 3 executor
-	METHOD m_yvggarjd sendRequest (Lcom/google/gson/JsonObject;Ljava/net/URL;)V
-		ARG 1 payload
-		ARG 2 endpoint
-	CLASS C_cdmaletj FailedHttpRequestException
+	CLASS C_jtelamdc FailedHttpRequestException
 		METHOD <init> (Ljava/lang/String;)V
 			ARG 1 message
-	CLASS C_hrtqrfgm Impl
-		FIELD f_lewcjtxg executor Ljava/util/concurrent/Executor;
-		FIELD f_sbbjlftw gameProfile Lcom/mojang/authlib/GameProfile;
-		METHOD <init> (Lnet/minecraft/unmapped/C_drxtstdl;Lcom/mojang/authlib/GameProfile;)V
+	CLASS C_mgfrqtrh Impl
+		FIELD f_gxtjcwel executor Ljava/util/concurrent/Executor;
+		FIELD f_wtfljbbs gameProfile Lcom/mojang/authlib/GameProfile;
+		METHOD <init> (Lnet/minecraft/unmapped/C_ldtstxrd;Lcom/mojang/authlib/GameProfile;)V
 			ARG 2 gameProfile
-	CLASS C_tcxfgzdv HashIgnorer
-		FIELD f_dyxbyivt IGNORE_IF_MATCHES_ALL Lnet/minecraft/unmapped/C_drxtstdl$C_tcxfgzdv;
-		FIELD f_pmupqoyy NEVER_IGNORE Lnet/minecraft/unmapped/C_drxtstdl$C_tcxfgzdv;
-		METHOD m_arvvsabf shouldIgnore (Ljava/lang/String;I)Z
+	CLASS C_vdzgfxct HashIgnorer
+		FIELD f_tviybxyd IGNORE_IF_MATCHES_ALL Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;
+		FIELD f_yyoqpump NEVER_IGNORE Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;
+		METHOD ignoreOverThreshold internalDropHashes (I)Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;
+			ARG 0 hashesToDrop
+		METHOD m_hwbggvls (ILjava/lang/String;I)Z
 			ARG 1 hashes
 			ARG 2 hashesSize
-		METHOD m_gvilaofm dropHashes (I)Lnet/minecraft/unmapped/C_drxtstdl$C_tcxfgzdv;
+		METHOD m_kkghkbws (Ljava/lang/String;I)Z
+			ARG 0 hashes
+			ARG 1 hashesSize
+		METHOD m_taqfdbyz (Ljava/lang/String;I)Z
+			ARG 0 hashes
+			ARG 1 hashesSize
+		METHOD select dropHashes (I)Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;
 			ARG 0 hashesToDrop
-		METHOD m_rztwefhp internalDropHashes (I)Lnet/minecraft/unmapped/C_drxtstdl$C_tcxfgzdv;
-			ARG 0 hashesToDrop
-		METHOD m_slvggbwh (ILjava/lang/String;I)Z
+		METHOD shouldIgnore shouldIgnore (Ljava/lang/String;I)Z
 			ARG 1 hashes
 			ARG 2 hashesSize
-		METHOD m_swbkhgkk (Ljava/lang/String;I)Z
-			ARG 0 hashes
-			ARG 1 hashesSize
-		METHOD m_zybdfqat (Ljava/lang/String;I)Z
-			ARG 0 hashes
-			ARG 1 hashesSize

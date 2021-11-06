@@ -1,75 +1,91 @@
-CLASS net/minecraft/unmapped/C_ynfzljez net/minecraft/entity/passive/RabbitEntity
-	FIELD f_amgskivh BROWN_TYPE I
-	FIELD f_eukjfseo moreCarrotTicks I
-	FIELD f_fcxffxsh ESCAPE_SPEED D
-	FIELD f_femphadm GOLD_TYPE I
-	FIELD f_hswjczcd jumpTicks I
-	FIELD f_ixrdshvs WHITE_SPOTTED_TYPE I
-	FIELD f_jwvufsho jumpDuration I
-	FIELD f_mzqqeckz lastOnGround Z
-	FIELD f_nazvmjno SALT_TYPE I
-	FIELD f_nogfbqbk KILLER_BUNNY_TYPE I
-	FIELD f_tezpcknn RABBIT_TYPE Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_uifdsoeq BLACK_TYPE I
-	FIELD f_woyouplj KILLER_BUNNY Lnet/minecraft/unmapped/C_acfwypcn;
-	FIELD f_xfaxzwio ticksUntilJump I
-	FIELD f_xkgxsthr WHITE_TYPE I
-	METHOD m_aumhfqwd wantsCarrots ()Z
-	METHOD m_btcvctxm chooseType (Lnet/minecraft/unmapped/C_elysbvdv;)I
+CLASS net/minecraft/unmapped/C_zejlzfny net/minecraft/entity/passive/RabbitEntity
+	FIELD f_asjhuors STROLL_SPEED_MODIFIER D
+	FIELD f_crzkcenn FOLLOWING_SPEED_MODIFIER D
+	FIELD f_dczcjwsh jumpTicks I
+	FIELD f_fsojhcku KILLER_BUNNY_ARMOR I
+	FIELD f_hsxffxcf ESCAPE_SPEED D
+	FIELD f_htyiulmz BREEDING_SPEED_MODIFIER D
+	FIELD f_hviksgma BROWN_TYPE I
+	FIELD f_jlpuoyow KILLER_BUNNY Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_kbqbfgon KILLER_BUNNY_TYPE I
+	FIELD f_mdahpmef GOLD_TYPE I
+	FIELD f_nnkcpzet RABBIT_TYPE Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_oesfjkue moreCarrotTicks I
+	FIELD f_ohsfuvwj jumpDuration I
+	FIELD f_oiwzxafx ticksUntilJump I
+	FIELD f_onjmvzan SALT_TYPE I
+	FIELD f_pnfxqusz MORE_CARROTS_DELAY I
+	FIELD f_qeosdfiu BLACK_TYPE I
+	FIELD f_rhtsxgkx WHITE_TYPE I
+	FIELD f_svhsdrxi WHITE_SPOTTED_TYPE I
+	FIELD f_tariwbdb ATTACK_SPEED_MODIFIER D
+	FIELD f_tptcprey KILLER_BUNNY_ATTACK_POWER I
+	FIELD f_zkceqqzm lastOnGround Z
+	METHOD m_bvzjfuac getRabbitType ()I
+	METHOD m_dwqfhmua wantsCarrots ()Z
+	METHOD m_dzvjvurg disableJumpControl ()V
+	METHOD m_ffcancvv getJumpProgress (F)F
+		ARG 1 delta
+	METHOD m_fgnzeipk enableJumpControl ()V
+	METHOD m_hfwslrsw startJump ()V
+	METHOD m_mxtcvctb chooseType (Lnet/minecraft/unmapped/C_vdvbsyle;)I
 		ARG 1 world
-	METHOD m_caufjzvb getRabbitType ()I
-	METHOD m_evfqfdhp createRabbitAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_sujrwhet;
-	METHOD m_gpexqwqs canSpawn (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)Z
+	METHOD m_nefdqaox setRabbitType (I)V
+		ARG 1 rabbitType
+	METHOD m_oibnanmr lookTowards (DD)V
+		ARG 1 x
+		ARG 3 z
+	METHOD m_phdfqfve createRabbitAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_pomcljmh doScheduleJump ()V
+	METHOD m_ptbdhqbw scheduleJump ()V
+	METHOD m_qjsdbvop isTempting (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 0 stack
+	METHOD m_sqwqxepg canSpawn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_uzzvxofv;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/Random;)Z
 		ARG 0 entity
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
-	METHOD m_hmjlcmop doScheduleJump ()V
-	METHOD m_hwkcxlzy getJumpSound ()Lnet/minecraft/unmapped/C_yazovava;
-	METHOD m_iecobgnw setSpeed (D)V
+		ARG 4 random
+	METHOD m_wngbocei setSpeed (D)V
 		ARG 1 speed
-	METHOD m_povbdsjq isTempting (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 0 stack
-	METHOD m_rmnanbio lookTowards (DD)V
-		ARG 1 x
-		ARG 3 z
-	METHOD m_vvcnacff getJumpProgress (F)F
-		ARG 1 delta
-	METHOD m_wbqhdbtp scheduleJump ()V
-	METHOD m_wsrlswfh startJump ()V
-	METHOD m_xoaqdfen setRabbitType (I)V
-		ARG 1 rabbitType
-	CLASS C_aoyvojfa RabbitJumpControl
-		FIELD f_frsyjlyv rabbit Lnet/minecraft/unmapped/C_ynfzljez;
-		METHOD m_rfqopozg isActive ()Z
-	CLASS C_cmrulqak FleeGoal
-		FIELD f_whlnqtxv rabbit Lnet/minecraft/unmapped/C_ynfzljez;
-		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;Ljava/lang/Class;FDD)V
+	METHOD m_yzlxckwh getJumpSound ()Lnet/minecraft/unmapped/C_avavozay;
+	CLASS C_afjovyoa RabbitJumpControl
+		FIELD f_lipxcmkp enabled Z
+		FIELD f_vyljysrf rabbit Lnet/minecraft/unmapped/C_zejlzfny;
+		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;)V
+			ARG 1 rabbit
+		METHOD m_gzopoqfr isActive ()Z
+		METHOD m_hzglvuoz isEnabled ()Z
+		METHOD m_lwwiaioy setEnabled (Z)V
+			ARG 1 enabled
+	CLASS C_bvvmvikj RabbitAttackGoal
+		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;)V
+			ARG 1 rabbit
+	CLASS C_jhwsykew EatCarrotCropGoal
+		FIELD f_iniddatz rabbit Lnet/minecraft/unmapped/C_zejlzfny;
+		FIELD f_swoqfjot hasTarget Z
+		FIELD f_twnxgbmc wantsCarrots Z
+		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;)V
+			ARG 1 rabbit
+	CLASS C_kaqlurmc FleeGoal
+		FIELD f_vxtqnlhw rabbit Lnet/minecraft/unmapped/C_zejlzfny;
+		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;Ljava/lang/Class;FDD)V
 			ARG 1 rabbit
 			ARG 2 fleeFromType
 			ARG 3 distance
 			ARG 4 slowSpeed
 			ARG 6 fastSpeed
-	CLASS C_fbgooojs EscapeDangerGoal
-		FIELD f_jhrpxyar rabbit Lnet/minecraft/unmapped/C_ynfzljez;
-		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;D)V
-			ARG 1 rabbit
-			ARG 2 speed
-	CLASS C_jkivmvvb RabbitAttackGoal
-		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;)V
-			ARG 1 rabbit
-	CLASS C_ktlslrip RabbitData
-		FIELD f_tylazavi type I
+	CLASS C_nfmvvftt RabbitMoveControl
+		FIELD f_cbfxanoz rabbit Lnet/minecraft/unmapped/C_zejlzfny;
+		FIELD f_ttbsilqd rabbitSpeed D
+		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;)V
+			ARG 1 owner
+	CLASS C_pirlsltk RabbitData
+		FIELD f_ivazalyt type I
 		METHOD <init> (I)V
 			ARG 1 type
-	CLASS C_ttfvvmfn RabbitMoveControl
-		FIELD f_dqlisbtt rabbitSpeed D
-		FIELD f_zonaxfbc rabbit Lnet/minecraft/unmapped/C_ynfzljez;
-		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;)V
-			ARG 1 owner
-	CLASS C_wekyswhj EatCarrotCropGoal
-		FIELD f_cmbgxnwt wantsCarrots Z
-		FIELD f_tojfqows hasTarget Z
-		FIELD f_ztaddini rabbit Lnet/minecraft/unmapped/C_ynfzljez;
-		METHOD <init> (Lnet/minecraft/unmapped/C_ynfzljez;)V
+	CLASS C_sjooogbf EscapeDangerGoal
+		FIELD f_rayxprhj rabbit Lnet/minecraft/unmapped/C_zejlzfny;
+		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;D)V
 			ARG 1 rabbit
+			ARG 2 speed

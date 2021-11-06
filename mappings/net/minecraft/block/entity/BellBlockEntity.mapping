@@ -1,60 +1,60 @@
-CLASS net/minecraft/unmapped/C_fdpeukxl net/minecraft/block/entity/BellBlockEntity
-	FIELD f_bwyfmwrw lastSideHit Lnet/minecraft/unmapped/C_fxhiuupx;
-	FIELD f_crdqmryh ringTicks I
-	FIELD f_fdsxlwcc hearingEntities Ljava/util/List;
-	FIELD f_latkhkmm resonating Z
-	FIELD f_ovltzncp lastRingTime J
-	FIELD f_pymgjgga ringing Z
-	FIELD f_twahmzmu resonateTime I
-	METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;)V
+CLASS net/minecraft/unmapped/C_lxkuepdf net/minecraft/block/entity/BellBlockEntity
+	FIELD f_aggjgmyp ringing Z
+	FIELD f_ccwlxsdf hearingEntities Ljava/util/List;
+	FIELD f_hyrmqdrc ringTicks I
+	FIELD f_mmkhktal resonating Z
+	FIELD f_pcnztlvo lastRingTime J
+	FIELD f_umzmhawt resonateTime I
+	FIELD f_wrwmfywb lastSideHit Lnet/minecraft/unmapped/C_xpuuihxf;
+	METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 pos
 		ARG 2 state
-	METHOD m_bsirvgsb applyGlowToRaiders (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;)V
+	METHOD m_bsgvrisb applyGlowToRaiders (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/List;)V
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 hearingEntities
-	METHOD m_bxbifypq activate (Lnet/minecraft/unmapped/C_fxhiuupx;)V
-		COMMENT Rings the bell in a given direction.
-		ARG 1 direction
-	METHOD m_elisqtvw notifyMemoriesOfBell ()V
-		COMMENT Makes living entities within 48 blocks remember that they heard a bell at the current world time.
-	METHOD m_hntjqhnm clientTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fdpeukxl;)V
+	METHOD m_giipxkzw applyParticlesToRaiders (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/List;)V
+		COMMENT Spawns {@link net.minecraft.particle.ParticleTypes#ENTITY_EFFECT} particles around raiders within 48 blocks.
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 hearingEntities
+	METHOD m_lommhfms isRaiderEntity (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		COMMENT Determines whether the given entity is in the {@link net.minecraft.tag.EntityTypeTags#RAIDERS} entity type tag and within 48 blocks of the given position.
+		ARG 0 pos
+		ARG 1 entity
+	METHOD m_mnhqjtnh clientTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_lxkuepdf;)V
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 state
 		ARG 3 blockEntity
-	METHOD m_meyrdkom applyGlowToEntity (Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+	METHOD m_mokdryem applyGlowToEntity (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		COMMENT Gives the {@link net.minecraft.entity.effect.StatusEffects#GLOWING} status effect to the given entity for 3 seconds (60 ticks).
 		ARG 0 entity
-	METHOD m_ojhldwxy raidersHearBell (Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;)Z
+	METHOD m_qpyfibxb activate (Lnet/minecraft/unmapped/C_xpuuihxf;)V
+		COMMENT Rings the bell in a given direction.
+		ARG 1 direction
+	METHOD m_wgkdgvjq serverTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_lxkuepdf;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+		ARG 3 blockEntity
+	METHOD m_wpnzaumy tick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_lxkuepdf;Lnet/minecraft/unmapped/C_lxkuepdf$C_ptangjtm;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+		ARG 3 blockEntity
+		ARG 4 bellEffect
+	METHOD m_wvtqsile notifyMemoriesOfBell ()V
+		COMMENT Makes living entities within 48 blocks remember that they heard a bell at the current world time.
+	METHOD m_yxwdlhjo raidersHearBell (Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/List;)Z
 		COMMENT Determines whether at least one of the given entities would be affected by the bell.
 		COMMENT
 		COMMENT <p>This determines whether the bell resonates.
 		COMMENT For some reason, despite affected by the bell, entities more than 32 blocks away will not count as hearing the bell.
 		ARG 0 pos
 		ARG 1 hearingEntities
-	METHOD m_qjvgdkgw serverTick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fdpeukxl;)V
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 state
-		ARG 3 blockEntity
-	METHOD m_smfhmmol isRaiderEntity (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-		COMMENT Determines whether the given entity is in the {@link net.minecraft.tag.EntityTypeTags#RAIDERS} entity type tag and within 48 blocks of the given position.
-		ARG 0 pos
-		ARG 1 entity
-	METHOD m_wzkxpiig applyParticlesToRaiders (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;)V
-		COMMENT Spawns {@link net.minecraft.particle.ParticleTypes#ENTITY_EFFECT} particles around raiders within 48 blocks.
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 hearingEntities
-	METHOD m_ymuaznpw tick (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_fdpeukxl;Lnet/minecraft/unmapped/C_fdpeukxl$C_mtjgnatp;)V
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 state
-		ARG 3 blockEntity
-		ARG 4 bellEffect
-	CLASS C_mtjgnatp Effect
-		METHOD m_kcxncajh run (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/List;)V
+	CLASS C_ptangjtm Effect
+		METHOD run run (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/List;)V
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 hearingEntities

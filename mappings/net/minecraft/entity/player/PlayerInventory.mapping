@@ -1,101 +1,101 @@
-CLASS net/minecraft/unmapped/C_mrcoqzxs net/minecraft/entity/player/PlayerInventory
-	FIELD f_axzqpuil HELMET_SLOTS [I
-	FIELD f_idugsmpt HOTBAR_SIZE I
-		COMMENT The number of columns ({@value}) in the inventory.
-		COMMENT
-		COMMENT <p>The same value dictates the size of the player's hotbar, excluding the offhand slot.</p>
-	FIELD f_inbvfium player Lnet/minecraft/unmapped/C_oqcyprzj;
-	FIELD f_nsffvivr combinedInventory Ljava/util/List;
-	FIELD f_purklxhh selectedSlot I
-	FIELD f_smvcspts armor Lnet/minecraft/unmapped/C_eztffrnr;
-	FIELD f_sxajueab ARMOR_SLOTS [I
-	FIELD f_tgykivmq ITEM_USAGE_COOLDOWN I
-		COMMENT The maximum cooldown ({@value} ticks) applied to timed use items such as the Eye of Ender.
-	FIELD f_tqdcltvq offHand Lnet/minecraft/unmapped/C_eztffrnr;
-	FIELD f_uubxbldd MAIN_SIZE I
+CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInventory
+	FIELD f_atsclqcy main Lnet/minecraft/unmapped/C_rnrfftze;
+	FIELD f_baeujaxs ARMOR_SLOTS [I
+	FIELD f_ddlbxbuu MAIN_SIZE I
 		COMMENT The number of slots ({@value}) in the main (non-hotbar) section of the inventory.
-	FIELD f_xgptgjfe NOT_FOUND I
+	FIELD f_efjgtpgx NOT_FOUND I
 		COMMENT The slot index ({@value}) used to indicate no result
 		COMMENT (item not present / no available space) when querying the inventory's contents
 		COMMENT or to indicate no preference when inserting an item into the inventory.
-	FIELD f_ycqlcsta main Lnet/minecraft/unmapped/C_eztffrnr;
-	FIELD f_ypaijqxr OFF_HAND_SLOT I
+	FIELD f_hhxlkrup selectedSlot I
+	FIELD f_liupqzxa HELMET_SLOTS [I
+	FIELD f_muifvbni player Lnet/minecraft/unmapped/C_jzrpycqo;
+	FIELD f_qmvikygt ITEM_USAGE_COOLDOWN I
+		COMMENT The maximum cooldown ({@value} ticks) applied to timed use items such as the Eye of Ender.
+	FIELD f_qvtlcdqt offHand Lnet/minecraft/unmapped/C_rnrfftze;
+	FIELD f_rvivffsn combinedInventory Ljava/util/List;
+	FIELD f_rxqjiapy OFF_HAND_SLOT I
 		COMMENT Zero-based index of the offhand slot.
 		COMMENT
 		COMMENT <p>This value is the result of the sum {@code MAIN_SIZE (36) + ARMOR_SIZE (4)}.</p>
-	FIELD f_ysfzsahz changeCount I
-	METHOD <init> (Lnet/minecraft/unmapped/C_oqcyprzj;)V
+	FIELD f_stpscvms armor Lnet/minecraft/unmapped/C_rnrfftze;
+	FIELD f_tpmsgudi HOTBAR_SIZE I
+		COMMENT The number of columns ({@value}) in the inventory.
+		COMMENT
+		COMMENT <p>The same value dictates the size of the player's hotbar, excluding the offhand slot.</p>
+	FIELD f_zhaszfsy changeCount I
+	METHOD <init> (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 player
-	METHOD m_auwqayfw getHotbarSize ()I
-	METHOD m_bylrvxoj insertStack (ILnet/minecraft/unmapped/C_kywxadds;)Z
+	METHOD m_attrqiui insertStack (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 stack
+	METHOD m_bsuceyru removeOne (Lnet/minecraft/unmapped/C_sddaxwyk;)V
+		ARG 1 stack
+	METHOD m_cbuksxzb getSwappableHotbarSlot ()I
+	METHOD m_cpwlhjly populateRecipeFinder (Lnet/minecraft/unmapped/C_nyagoaau;)V
+		ARG 1 finder
+	METHOD m_cwfzntkt clone (Lnet/minecraft/unmapped/C_sxzqocrm;)V
+		ARG 1 other
+	METHOD m_foznfroj getEmptySlot ()I
+	METHOD m_gdvykakf addStack (ILnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 1 slot
 		ARG 2 stack
-	METHOD m_bzxskubc getSwappableHotbarSlot ()I
-	METHOD m_caewljzw damageArmor (Lnet/minecraft/unmapped/C_vypkfxbs;F[I)V
-		ARG 1 damageSource
-		ARG 2 amount
-		ARG 3 slots
-	METHOD m_dvrlnlgy getArmorStack (I)Lnet/minecraft/unmapped/C_kywxadds;
-		ARG 1 slot
-	METHOD m_dzsxgjtw dropAll ()V
-	METHOD m_etkbsudz addPickBlock (Lnet/minecraft/unmapped/C_kywxadds;)V
+	METHOD m_giwgaubz dropSelectedItem (Z)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 1 entireStack
+	METHOD m_gkniurqx contains (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
-	METHOD m_fkakyvdg addStack (ILnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 1 slot
-		ARG 2 stack
-	METHOD m_foezdffs canStackAddMore (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 1 existingStack
-		ARG 2 stack
-	METHOD m_frcfeaqm getOccupiedSlotWithRoomForStack (Lnet/minecraft/unmapped/C_kywxadds;)I
+	METHOD m_hjszshmr offerOrDrop (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 stack
-	METHOD m_gezgihlp contains (Lnet/minecraft/unmapped/C_vxhkekom;)Z
-		ARG 1 tag
-	METHOD m_hrmzrxai getMainHandStack ()Lnet/minecraft/unmapped/C_kywxadds;
-	METHOD m_ipfamooo getBlockBreakingSpeed (Lnet/minecraft/unmapped/C_pmeibtxt;)F
-		ARG 1 block
-	METHOD m_iuiqrtta insertStack (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 1 stack
-	METHOD m_jorfnzof getEmptySlot ()I
-	METHOD m_kdkwudbx isValidHotbarIndex (I)Z
-		ARG 0 slot
-	METHOD m_lrhadyio (ILnet/minecraft/unmapped/C_oqcyprzj;)V
-		ARG 1 player
-	METHOD m_ptzeiyxw offer (Lnet/minecraft/unmapped/C_kywxadds;Z)V
-		ARG 1 stack
-		ARG 2 notifiesClient
-	METHOD m_rmhszsjh offerOrDrop (Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 stack
-	METHOD m_tkmbnhwi remove (Ljava/util/function/Predicate;ILnet/minecraft/unmapped/C_qojtstjp;)I
+	METHOD m_iaxrzmrh getMainHandStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_idztfwtx updateItems ()V
+	METHOD m_iwhnbmkt remove (Ljava/util/function/Predicate;ILnet/minecraft/unmapped/C_pjtstjoq;)I
 		ARG 1 shouldRemove
 		ARG 2 maxCount
 		ARG 3 craftingInventory
-	METHOD m_tktnzfwc clone (Lnet/minecraft/unmapped/C_mrcoqzxs;)V
-		ARG 1 other
-	METHOD m_tljcsshy scrollInHotbar (D)V
+	METHOD m_joxvrlyb insertStack (ILnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 slot
+		ARG 2 stack
+	METHOD m_julzohay writeNbt (Lnet/minecraft/unmapped/C_hqhtfwlr;)Lnet/minecraft/unmapped/C_hqhtfwlr;
+		ARG 1 nbtList
+	METHOD m_mqaefcrf getOccupiedSlotWithRoomForStack (Lnet/minecraft/unmapped/C_sddaxwyk;)I
+		ARG 1 stack
+	METHOD m_oiydahrl (ILnet/minecraft/unmapped/C_jzrpycqo;)V
+		ARG 1 player
+	METHOD m_ooomafpi getBlockBreakingSpeed (Lnet/minecraft/unmapped/C_txtbiemp;)F
+		ARG 1 block
+	METHOD m_owslrmqz swapSlotWithHotbar (I)V
+		ARG 1 slot
+	METHOD m_plhigzeg contains (Lnet/minecraft/unmapped/C_mokekhxv;)Z
+		ARG 1 tag
+	METHOD m_sffdzeof canStackAddMore (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 existingStack
+		ARG 2 stack
+	METHOD m_sqstcgyz getSlotWithStack (Lnet/minecraft/unmapped/C_sddaxwyk;)I
+		ARG 1 stack
+	METHOD m_upysxszu getChangeCount ()I
+	METHOD m_wfyaqwua getHotbarSize ()I
+	METHOD m_wisvsnby readNbt (Lnet/minecraft/unmapped/C_hqhtfwlr;)V
+		ARG 1 nbtList
+	METHOD m_wtjgxszd dropAll ()V
+	METHOD m_wxyieztp offer (Lnet/minecraft/unmapped/C_sddaxwyk;Z)V
+		ARG 1 stack
+		ARG 2 notifiesClient
+	METHOD m_wzjlweac damageArmor (Lnet/minecraft/unmapped/C_sbxfkpyv;F[I)V
+		ARG 1 damageSource
+		ARG 2 amount
+		ARG 3 slots
+	METHOD m_xbduwkdk isValidHotbarIndex (I)Z
+		ARG 0 slot
+	METHOD m_xukgmrex addStack (Lnet/minecraft/unmapped/C_sddaxwyk;)I
+		ARG 1 stack
+	METHOD m_yglnlrvd getArmorStack (I)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 1 slot
+	METHOD m_yhsscjlt scrollInHotbar (D)V
 		ARG 1 scrollAmount
-	METHOD m_uryecusb removeOne (Lnet/minecraft/unmapped/C_kywxadds;)V
+	METHOD m_zdusbkte addPickBlock (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 stack
-	METHOD m_uzsxsypu getChangeCount ()I
-	METHOD m_xermgkux addStack (Lnet/minecraft/unmapped/C_kywxadds;)I
-		ARG 1 stack
-	METHOD m_xqruinkg contains (Lnet/minecraft/unmapped/C_kywxadds;)Z
-		ARG 1 stack
-	METHOD m_xtwftzdi updateItems ()V
-	METHOD m_xxhowdqz indexOf (Lnet/minecraft/unmapped/C_kywxadds;)I
+	METHOD m_zqdwohxx indexOf (Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		COMMENT Given the item stack to search for, returns the equivalent slot index with a matching stack that is all of:
 		COMMENT not damaged, not enchanted, and not renamed.
 		COMMENT
 		COMMENT @return the index where a matching stack was found, or {@value #NOT_FOUND}
-		ARG 1 stack
-	METHOD m_yahozluj writeNbt (Lnet/minecraft/unmapped/C_rlwfthqh;)Lnet/minecraft/unmapped/C_rlwfthqh;
-		ARG 1 nbtList
-	METHOD m_ybnsvsiw readNbt (Lnet/minecraft/unmapped/C_rlwfthqh;)V
-		ARG 1 nbtList
-	METHOD m_yljhlwpc populateRecipeFinder (Lnet/minecraft/unmapped/C_uaaogayn;)V
-		ARG 1 finder
-	METHOD m_zbuagwig dropSelectedItem (Z)Lnet/minecraft/unmapped/C_kywxadds;
-		ARG 1 entireStack
-	METHOD m_zqmrlswo swapSlotWithHotbar (I)V
-		ARG 1 slot
-	METHOD m_zygctsqs getSlotWithStack (Lnet/minecraft/unmapped/C_kywxadds;)I
 		ARG 1 stack

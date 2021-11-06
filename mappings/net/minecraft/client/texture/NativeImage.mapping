@@ -1,43 +1,34 @@
-CLASS net/minecraft/unmapped/C_axhukiya net/minecraft/client/texture/NativeImage
-	FIELD f_cesvsikp height I
-	FIELD f_erbezmjb width I
-	FIELD f_fcxkwjuq LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_jrcyfhfe isStbImage Z
-	FIELD f_mzecggeh sizeBytes J
-	FIELD f_nbzrwuqf pointer J
-	FIELD f_ohwiujgl format Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;
-	FIELD f_vtlrjppd WRITE_TO_FILE_OPEN_OPTIONS Ljava/util/Set;
+CLASS net/minecraft/unmapped/C_ayikuhxa net/minecraft/client/texture/NativeImage
+	FIELD f_bjmzebre width I
+	FIELD f_dppjrltv WRITE_TO_FILE_OPEN_OPTIONS Ljava/util/Set;
+	FIELD f_efhfycrj isStbImage Z
+	FIELD f_fquwrzbn pointer J
+	FIELD f_heggcezm sizeBytes J
+	FIELD f_lgjuiwho format Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;
+	FIELD f_pkisvsec height I
+	FIELD f_qujwkxcf LOGGER Lorg/apache/logging/log4j/Logger;
 	METHOD <init> (IIZ)V
 		ARG 1 width
 		ARG 2 height
 		ARG 3 useStb
-	METHOD <init> (Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;IIZ)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;IIZ)V
 		ARG 1 format
 		ARG 2 width
 		ARG 3 height
 		ARG 4 useStb
-	METHOD <init> (Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;IIZJ)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;IIZJ)V
 		ARG 1 format
 		ARG 2 width
 		ARG 3 height
 		ARG 4 useStb
 		ARG 5 pointer
-	METHOD m_alqbwzlg getBytes ()[B
-	METHOD m_aslqfamp read (Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;Ljava/io/InputStream;)Lnet/minecraft/unmapped/C_axhukiya;
-		ARG 0 format
-	METHOD m_btpkxqgx getGreen (II)B
+	METHOD m_albcwptm getPixelOpacity (II)B
 		ARG 1 x
 		ARG 2 y
-	METHOD m_chmxvrdp copyRect (IIIIIIZZ)V
-		ARG 1 x
-		ARG 2 y
-		ARG 3 translateX
-		ARG 4 translateY
-		ARG 5 width
-		ARG 6 height
-		ARG 7 flipX
-		ARG 8 flipY
-	METHOD m_clefouhb setPixelColor (III)V
+	METHOD m_ayyycohu setTextureFilter (ZZ)V
+		ARG 0 blur
+		ARG 1 mipmap
+	METHOD m_bhuofelc setPixelColor (III)V
 		COMMENT Sets the color of a pixel on this native image.
 		COMMENT The color to be set using this method should be in a ABGR format.
 		COMMENT
@@ -45,43 +36,52 @@ CLASS net/minecraft/unmapped/C_axhukiya net/minecraft/client/texture/NativeImage
 		ARG 1 x
 		ARG 2 y
 		ARG 3 color
-	METHOD m_cntmmcjf setPixelLuminance (IIB)V
+	METHOD m_blncqcno read (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ayikuhxa;
+		ARG 0 dataUri
+	METHOD m_bzftrusx resizeSubRectTo (IIIILnet/minecraft/unmapped/C_ayikuhxa;)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 width
+		ARG 4 height
+		ARG 5 targetImage
+	METHOD m_cgugswop getAlpha (I)I
+		ARG 0 color
+	METHOD m_csziyqyg fillRect (IIIII)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 width
+		ARG 4 height
+		ARG 5 color
+	METHOD m_fctnexbk getWidth ()I
+	METHOD m_fjcmmtnc setPixelLuminance (IIB)V
 		ARG 1 x
 		ARG 2 y
 		ARG 3 luminance
-	METHOD m_dkfylpem read (Ljava/nio/ByteBuffer;)Lnet/minecraft/unmapped/C_axhukiya;
-	METHOD m_ecxeuuwl isOutOfBounds (II)Z
+	METHOD m_fsgxhjcv getBlue (II)B
 		ARG 1 x
 		ARG 2 y
-	METHOD m_fasgtcll upload (IIIIIIIZZZZ)V
-		ARG 1 level
-		ARG 2 offsetX
-		ARG 3 offsetY
-		ARG 4 unpackSkipPixels
-		ARG 5 unpackSkipRows
-		ARG 6 width
-		ARG 7 height
-		ARG 8 blur
-		ARG 9 clamp
-		ARG 10 mipmap
-		ARG 11 close
-	METHOD m_fcacezil getRed (I)I
-		ARG 0 color
-	METHOD m_fwfjwang getPixelColor (II)I
+	METHOD m_glbegijr getAbgrColor (IIII)I
+		COMMENT The resulting color of this operation is stored as least to most significant bits.
+		ARG 0 alpha
+		ARG 1 blue
+		ARG 2 green
+		ARG 3 red
+	METHOD m_glzwbqla getBytes ()[B
+	METHOD m_gnawjfwf getPixelColor (II)I
 		COMMENT Gets the color of a pixel on this native image.
 		COMMENT The color returned by this method will be in a ABGR format.
 		COMMENT
 		COMMENT <p>This is only supported when this native image's format is {@link NativeImage.Format#ABGR ABGR}.
 		ARG 1 x
 		ARG 2 y
-	METHOD m_gtpdoxbr getFormat ()Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;
-	METHOD m_gyqyizsc fillRect (IIIII)V
+	METHOD m_grhlefuk blendPixel (III)V
 		ARG 1 x
 		ARG 2 y
-		ARG 3 width
-		ARG 4 height
-		ARG 5 color
-	METHOD m_jglgriqh uploadInternal (IIIIIIIZZZZ)V
+		ARG 3 color
+	METHOD m_guvwjisj getRed (II)B
+		ARG 1 x
+		ARG 2 y
+	METHOD m_hqirglgj uploadInternal (IIIIIIIZZZZ)V
 		ARG 1 level
 		ARG 2 offsetX
 		ARG 3 offsetY
@@ -93,29 +93,41 @@ CLASS net/minecraft/unmapped/C_axhukiya net/minecraft/client/texture/NativeImage
 		ARG 9 clamp
 		ARG 10 mipmap
 		ARG 11 close
-	METHOD m_jsijwvug getRed (II)B
-		ARG 1 x
-		ARG 2 y
-	METHOD m_kbxentcf getWidth ()I
-	METHOD m_kufelhrg blendPixel (III)V
-		ARG 1 x
-		ARG 2 y
-		ARG 3 color
-	METHOD m_lbajznow getBlue (I)I
-		ARG 0 color
-	METHOD m_maiehaxj writeFile (Ljava/nio/file/Path;)V
-		ARG 1 path
-	METHOD m_mtpwcbla getPixelOpacity (II)B
-		ARG 1 x
-		ARG 2 y
-	METHOD m_olhskiqt upload (IIIZ)V
+	METHOD m_iwimness upload (IIIIIIIZZ)V
 		ARG 1 level
 		ARG 2 offsetX
 		ARG 3 offsetY
-		ARG 4 close
-	METHOD m_oncqcnlb read (Ljava/lang/String;)Lnet/minecraft/unmapped/C_axhukiya;
-		ARG 0 dataUri
-	METHOD m_onskgvjn makeGlyphBitmapSubpixel (Lorg/lwjgl/stb/STBTTFontinfo;IIIFFFFII)V
+		ARG 4 unpackSkipPixels
+		ARG 5 unpackSkipRows
+		ARG 6 width
+		ARG 7 height
+		ARG 8 mipmap
+		ARG 9 close
+	METHOD m_jamgysmq makePixelArray ()[I
+	METHOD m_jxaheiam writeFile (Ljava/nio/file/Path;)V
+		ARG 1 path
+	METHOD m_krelntjt getGreen (I)I
+		ARG 0 color
+	METHOD m_lizecacf getRed (I)I
+		ARG 0 color
+	METHOD m_llctgsaf upload (IIIIIIIZZZZ)V
+		ARG 1 level
+		ARG 2 offsetX
+		ARG 3 offsetY
+		ARG 4 unpackSkipPixels
+		ARG 5 unpackSkipRows
+		ARG 6 width
+		ARG 7 height
+		ARG 8 blur
+		ARG 9 clamp
+		ARG 10 mipmap
+		ARG 11 close
+	METHOD m_lwuuexce isOutOfBounds (II)Z
+		ARG 1 x
+		ARG 2 y
+	METHOD m_meplyfkd read (Ljava/nio/ByteBuffer;)Lnet/minecraft/unmapped/C_ayikuhxa;
+	METHOD m_mtdfbkkq read (Ljava/io/InputStream;)Lnet/minecraft/unmapped/C_ayikuhxa;
+	METHOD m_njvgksno makeGlyphBitmapSubpixel (Lorg/lwjgl/stb/STBTTFontinfo;IIIFFFFII)V
 		ARG 1 fontInfo
 		ARG 2 glyphIndex
 		ARG 3 width
@@ -126,69 +138,57 @@ CLASS net/minecraft/unmapped/C_axhukiya net/minecraft/client/texture/NativeImage
 		ARG 8 shiftY
 		ARG 9 startX
 		ARG 10 startY
-	METHOD m_powsgugc getAlpha (I)I
-		ARG 0 color
-	METHOD m_qkkbfdtm read (Ljava/io/InputStream;)Lnet/minecraft/unmapped/C_axhukiya;
-	METHOD m_qmsygmaj makePixelArray ()[I
-	METHOD m_rjdtypot write (Ljava/nio/channels/WritableByteChannel;)Z
-	METHOD m_rjigeblg getAbgrColor (IIII)I
-		COMMENT The resulting color of this operation is stored as least to most significant bits.
-		ARG 0 alpha
-		ARG 1 blue
-		ARG 2 green
-		ARG 3 red
-	METHOD m_shqgeoht mirrorVertically ()V
-	METHOD m_ssenmiwi upload (IIIIIIIZZ)V
+	METHOD m_nseursry loadFromTextureImage (IZ)V
+		ARG 1 level
+		ARG 2 removeAlpha
+	METHOD m_obmuolrt checkAllocated ()V
+	METHOD m_oyjcjnbx untrack ()V
+	METHOD m_pdrvxmhc copyRect (IIIIIIZZ)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 translateX
+		ARG 4 translateY
+		ARG 5 width
+		ARG 6 height
+		ARG 7 flipX
+		ARG 8 flipY
+	METHOD m_pmafqlsa read (Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;Ljava/io/InputStream;)Lnet/minecraft/unmapped/C_ayikuhxa;
+		ARG 0 format
+	METHOD m_pmrtzukt read (Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;Ljava/nio/ByteBuffer;)Lnet/minecraft/unmapped/C_ayikuhxa;
+		ARG 0 format
+	METHOD m_rbxodptg getFormat ()Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;
+	METHOD m_thoegqhs mirrorVertically ()V
+	METHOD m_topytdjr write (Ljava/nio/channels/WritableByteChannel;)Z
+	METHOD m_tqikshlo upload (IIIZ)V
 		ARG 1 level
 		ARG 2 offsetX
 		ARG 3 offsetY
-		ARG 4 unpackSkipPixels
-		ARG 5 unpackSkipRows
-		ARG 6 width
-		ARG 7 height
-		ARG 8 mipmap
-		ARG 9 close
-	METHOD m_tjtnlerk getGreen (I)I
-		ARG 0 color
-	METHOD m_tkuztrmp read (Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;Ljava/nio/ByteBuffer;)Lnet/minecraft/unmapped/C_axhukiya;
-		ARG 0 format
-	METHOD m_tphaofru copyFrom (Lnet/minecraft/unmapped/C_axhukiya;)V
+		ARG 4 close
+	METHOD m_urfoahpt copyFrom (Lnet/minecraft/unmapped/C_ayikuhxa;)V
 		ARG 1 image
-	METHOD m_trloumbo checkAllocated ()V
-	METHOD m_uhocyyya setTextureFilter (ZZ)V
-		ARG 0 blur
-		ARG 1 mipmap
-	METHOD m_ujcvcxrz writeFile (Ljava/io/File;)V
-	METHOD m_vcjhxgsf getBlue (II)B
+	METHOD m_wonzjabl getBlue (I)I
+		ARG 0 color
+	METHOD m_xgqxkptb getGreen (II)B
 		ARG 1 x
 		ARG 2 y
-	METHOD m_xbnjcjyo untrack ()V
-	METHOD m_xsurtfzb resizeSubRectTo (IIIILnet/minecraft/unmapped/C_axhukiya;)V
-		ARG 1 x
-		ARG 2 y
-		ARG 3 width
-		ARG 4 height
-		ARG 5 targetImage
-	METHOD m_yrsruesn loadFromTextureImage (IZ)V
-		ARG 1 level
-		ARG 2 removeAlpha
-	METHOD m_zoqvgjqx getHeight ()I
-	CLASS C_ftqcizfp Format
-		FIELD f_bzqaxwnk hasLuminance Z
-		FIELD f_dphwukdf channelCount I
-		FIELD f_ejzhhcqb hasBlue Z
-		FIELD f_fftetzna writeable Z
-		FIELD f_isazphdt ABGR Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;
-		FIELD f_jmfqnxzb pixelDataFormat I
-		FIELD f_jtijrmap redOffset I
-		FIELD f_mreznnrr luminanceChannelOffset I
-		FIELD f_pedfgimy BGR Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;
-		FIELD f_pgvimzyc greenOffset I
-		FIELD f_qcdjofwa alphaChannelOffset I
-		FIELD f_twrmruqr blueOffset I
-		FIELD f_tzpzqley hasAlpha Z
-		FIELD f_wntwuphr hasGreen Z
-		FIELD f_zjokdgcp hasRed Z
+	METHOD m_xqjgvqoz getHeight ()I
+	METHOD m_zrxcvcju writeFile (Ljava/io/File;)V
+	CLASS C_pfzicqtf Format
+		FIELD f_anztetff writeable Z
+		FIELD f_awfojdcq alphaChannelOffset I
+		FIELD f_bqchhzje hasBlue Z
+		FIELD f_bzxnqfmj pixelDataFormat I
+		FIELD f_cyzmivgp greenOffset I
+		FIELD f_fdkuwhpd channelCount I
+		FIELD f_knwxaqzb hasLuminance Z
+		FIELD f_pamrjitj redOffset I
+		FIELD f_pcgdkojz hasRed Z
+		FIELD f_rhpuwtnw hasGreen Z
+		FIELD f_rqurmrwt blueOffset I
+		FIELD f_rrnnzerm luminanceChannelOffset I
+		FIELD f_tdhpzasi ABGR Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;
+		FIELD f_yelqzpzt hasAlpha Z
+		FIELD f_ymigfdep BGR Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;
 		METHOD <init> (Ljava/lang/String;IIIZZZZZIIIIIZ)V
 			ARG 3 channels
 			ARG 4 glFormat
@@ -203,43 +203,43 @@ CLASS net/minecraft/unmapped/C_axhukiya net/minecraft/client/texture/NativeImage
 			ARG 13 luminanceOffset
 			ARG 14 alphaOffset
 			ARG 15 writeable
-		METHOD m_abeteyws hasRed ()Z
-		METHOD m_bxgwrfcd getGreenOrLuminanceOffset ()I
-		METHOD m_byiiccit getAlphaChannelOffset ()I
-		METHOD m_cammijzf isWriteable ()Z
-		METHOD m_ebrktalt hasBlueChannel ()Z
-		METHOD m_gqhhxtno getPixelDataFormat ()I
-		METHOD m_hpyokift getBlueOrLuminanceOffset ()I
-		METHOD m_hymvqqyb setUnpackAlignment ()V
-		METHOD m_ijnbjdfo getRedOrLuminanceOffset ()I
-		METHOD m_ipchauab hasOpacityChannel ()Z
-		METHOD m_iwyziqfk hasRedChannel ()Z
-		METHOD m_izjctotp hasAlphaChannel ()Z
-		METHOD m_jbtutkrw getGreenOffset ()I
-		METHOD m_jckciroh hasLuminance ()Z
-		METHOD m_kbhugkej getFormat (I)Lnet/minecraft/unmapped/C_axhukiya$C_ftqcizfp;
+		METHOD m_bauahcpi hasOpacityChannel ()Z
+		METHOD m_byqqvmyh setUnpackAlignment ()V
+		METHOD m_dcfrwgxb getGreenOrLuminanceOffset ()I
+		METHOD m_egngbwal getChannelCount ()I
+		METHOD m_fzjimmac isWriteable ()Z
+		METHOD m_horickcj hasLuminance ()Z
+		METHOD m_jekguhbk getFormat (I)Lnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;
 			ARG 0 glFormat
-		METHOD m_lawbgnge getChannelCount ()I
-		METHOD m_nvoqqbwo getLuminanceChannelOffset ()I
-		METHOD m_ohmlymvl hasGreen ()Z
-		METHOD m_oyylisrz setPackAlignment ()V
-		METHOD m_smyanscn hasBlue ()Z
-		METHOD m_tmcjasos getRedOffset ()I
-		METHOD m_xwbfcbpj hasGreenChannel ()Z
-		METHOD m_yhkicmiz getBlueOffset ()I
-		METHOD m_yhxeyuls getOpacityOffset ()I
-	CLASS C_pwmgewcq WriteCallback
-		FIELD f_iaevymlf channel Ljava/nio/channels/WritableByteChannel;
-		FIELD f_mbjzpxdq exception Ljava/io/IOException;
+		METHOD m_jpbcfbwx hasGreenChannel ()Z
+		METHOD m_kfqizywi hasRedChannel ()Z
+		METHOD m_lvmylmho hasGreen ()Z
+		METHOD m_ncsnayms hasBlue ()Z
+		METHOD m_ofdjbnji getRedOrLuminanceOffset ()I
+		METHOD m_ontxhhqg getPixelDataFormat ()I
+		METHOD m_owbqqovn getLuminanceChannelOffset ()I
+		METHOD m_ptotcjzi hasAlphaChannel ()Z
+		METHOD m_sluyexhy getOpacityOffset ()I
+		METHOD m_sosajcmt getRedOffset ()I
+		METHOD m_swyeteba hasRed ()Z
+		METHOD m_tfikoyph getBlueOrLuminanceOffset ()I
+		METHOD m_ticciiyb getAlphaChannelOffset ()I
+		METHOD m_tlatkrbe hasBlueChannel ()Z
+		METHOD m_wrktutbj getGreenOffset ()I
+		METHOD m_zimcikhy getBlueOffset ()I
+		METHOD m_zrsilyyo setPackAlignment ()V
+	CLASS C_povfxtzr GLFormat
+		FIELD f_poxsdsfl BGR Lnet/minecraft/unmapped/C_ayikuhxa$C_povfxtzr;
+		FIELD f_qveyckyr ABGR Lnet/minecraft/unmapped/C_ayikuhxa$C_povfxtzr;
+		FIELD f_zalfcdhg glConstant I
+		METHOD <init> (Ljava/lang/String;II)V
+			ARG 3 glConstant
+		METHOD m_rafhnrof getGlConstant ()I
+	CLASS C_qcwegmwp WriteCallback
+		FIELD f_flmyveai channel Ljava/nio/channels/WritableByteChannel;
+		FIELD f_qdxpzjbm exception Ljava/io/IOException;
 		METHOD invoke (JJI)V
 			ARG 1 context
 			ARG 3 data
 			ARG 5 size
-		METHOD m_ssckvafs throwStoredException ()V
-	CLASS C_rztxfvop GLFormat
-		FIELD f_ghdcflaz glConstant I
-		FIELD f_lfsdsxop BGR Lnet/minecraft/unmapped/C_axhukiya$C_rztxfvop;
-		FIELD f_rykcyevq ABGR Lnet/minecraft/unmapped/C_axhukiya$C_rztxfvop;
-		METHOD <init> (Ljava/lang/String;II)V
-			ARG 3 glConstant
-		METHOD m_fornhfar getGlConstant ()I
+		METHOD m_sfavkcss throwStoredException ()V

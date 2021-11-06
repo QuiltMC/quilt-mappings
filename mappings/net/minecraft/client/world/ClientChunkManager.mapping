@@ -1,54 +1,54 @@
-CLASS net/minecraft/unmapped/C_vubfebxr net/minecraft/client/world/ClientChunkManager
-	FIELD f_eofoujdq LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_ibbplfjc lightingProvider Lnet/minecraft/unmapped/C_bsksopsk;
-	FIELD f_kpweuocd emptyChunk Lnet/minecraft/unmapped/C_qklvsdrh;
-	FIELD f_vwitelvv world Lnet/minecraft/unmapped/C_wrrlndhg;
-	FIELD f_zdgglcwj chunks Lnet/minecraft/unmapped/C_vubfebxr$C_ioblocft;
-	METHOD <init> (Lnet/minecraft/unmapped/C_wrrlndhg;I)V
+CLASS net/minecraft/unmapped/C_rxbefbuv net/minecraft/client/world/ClientChunkManager
+	FIELD f_cjflpbbi lightingProvider Lnet/minecraft/unmapped/C_ksposksb;
+	FIELD f_dcouewpk emptyChunk Lnet/minecraft/unmapped/C_hrdsvlkq;
+	FIELD f_jwclggdz chunks Lnet/minecraft/unmapped/C_rxbefbuv$C_tfcolboi;
+	FIELD f_qdjuofoe LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_vvletiwv world Lnet/minecraft/unmapped/C_ghdnlrrw;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ghdnlrrw;I)V
 		ARG 1 world
 		ARG 2 loadDistance
-	METHOD m_cxrvgtth positionEquals (Lnet/minecraft/unmapped/C_qklvsdrh;II)Z
+	METHOD m_bmjwofge unload (II)V
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD m_gauepjav updateLoadDistance (I)V
+		ARG 1 loadDistance
+	METHOD m_httgvrxc positionEquals (Lnet/minecraft/unmapped/C_hrdsvlkq;II)Z
 		ARG 0 chunk
 		ARG 1 x
 		ARG 2 z
-	METHOD m_egfowjmb unload (II)V
-		ARG 1 chunkX
-		ARG 2 chunkZ
-	METHOD m_faddsjuw setChunkMapCenter (II)V
+	METHOD m_sizngzij getChunkMapRadius (I)I
+		ARG 0 loadDistance
+	METHOD m_wujsddaf setChunkMapCenter (II)V
 		ARG 1 x
 		ARG 2 z
-	METHOD m_jizgnzis getChunkMapRadius (I)I
-		ARG 0 loadDistance
-	METHOD m_pbrtrdyx loadChunkFromPacket (IILnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_hincwlhh;Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_qklvsdrh;
+	METHOD m_xydrtrbp loadChunkFromPacket (IILnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_hrdsvlkq;
 		ARG 1 x
 		ARG 2 z
 		ARG 3 buf
 		ARG 4 nbt
-	METHOD m_vajpeuag updateLoadDistance (I)V
-		ARG 1 loadDistance
-	CLASS C_ioblocft ClientChunkMap
-		FIELD f_baoayofw diameter I
-		FIELD f_bdnorqeb centerChunkX I
-		FIELD f_icsqcbxs loadedChunkCount I
-		FIELD f_llpxbnqv centerChunkZ I
-		FIELD f_ozkrvcbk chunks Ljava/util/concurrent/atomic/AtomicReferenceArray;
-		FIELD f_vjgequui radius I
-		METHOD <init> (Lnet/minecraft/unmapped/C_vubfebxr;I)V
+	CLASS C_tfcolboi ClientChunkMap
+		FIELD f_beqrondb centerChunkX I
+		FIELD f_iuuqegjv radius I
+		FIELD f_kbcvrkzo chunks Ljava/util/concurrent/atomic/AtomicReferenceArray;
+		FIELD f_sxbcqsci loadedChunkCount I
+		FIELD f_vqnbxpll centerChunkZ I
+		FIELD f_wfoyaoab diameter I
+		METHOD <init> (Lnet/minecraft/unmapped/C_rxbefbuv;I)V
 			ARG 2 radius
-		METHOD m_boppiicp getIndex (II)I
+		METHOD m_dpjpfdqy isInRadius (II)Z
 			ARG 1 chunkX
 			ARG 2 chunkZ
-		METHOD m_cnpjrnms set (ILnet/minecraft/unmapped/C_qklvsdrh;)V
+		METHOD m_pciippob getIndex (II)I
+			ARG 1 chunkX
+			ARG 2 chunkZ
+		METHOD m_qqdzgquf writePositions (Ljava/lang/String;)V
+			ARG 1 fileName
+		METHOD m_smnrjpnc set (ILnet/minecraft/unmapped/C_hrdsvlkq;)V
 			ARG 1 index
 			ARG 2 chunk
-		METHOD m_ehvzsegu compareAndSet (ILnet/minecraft/unmapped/C_qklvsdrh;Lnet/minecraft/unmapped/C_qklvsdrh;)Lnet/minecraft/unmapped/C_qklvsdrh;
+		METHOD m_ugeszvhe compareAndSet (ILnet/minecraft/unmapped/C_hrdsvlkq;Lnet/minecraft/unmapped/C_hrdsvlkq;)Lnet/minecraft/unmapped/C_hrdsvlkq;
 			ARG 1 index
 			ARG 2 expect
 			ARG 3 update
-		METHOD m_fuqgzdqq writePositions (Ljava/lang/String;)V
-			ARG 1 fileName
-		METHOD m_undawolv getChunk (I)Lnet/minecraft/unmapped/C_qklvsdrh;
+		METHOD m_vlowadnu getChunk (I)Lnet/minecraft/unmapped/C_hrdsvlkq;
 			ARG 1 index
-		METHOD m_yqdfpjpd isInRadius (II)Z
-			ARG 1 chunkX
-			ARG 2 chunkZ

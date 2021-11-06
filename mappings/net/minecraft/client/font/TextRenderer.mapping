@@ -1,70 +1,117 @@
-CLASS net/minecraft/unmapped/C_ppmzovam net/minecraft/client/font/TextRenderer
+CLASS net/minecraft/unmapped/C_mavozmpp net/minecraft/client/font/TextRenderer
 	COMMENT Manages the rendering of text.
 	COMMENT
 	COMMENT <p>The current instance used by the client can be obtained by
 	COMMENT {@code MinecraftClient.getInstance().textRenderer}.
 	COMMENT
 	COMMENT @see net.minecraft.client.MinecraftClient#textRenderer
-	FIELD f_dbxyoujd fontStorageAccessor Ljava/util/function/Function;
-	FIELD f_hhgvbfpk FORWARD_SHIFT Lnet/minecraft/unmapped/C_fgwfwivz;
-	FIELD f_ivjyswee random Ljava/util/Random;
-	FIELD f_jraeludg handler Lnet/minecraft/unmapped/C_hlaurqtw;
-	FIELD f_yrsziwlt fontHeight I
+	FIELD f_djuoyxbd fontStorageAccessor Ljava/util/function/Function;
+	FIELD f_eewsyjvi random Ljava/util/Random;
+	FIELD f_gdulearj handler Lnet/minecraft/unmapped/C_wtqrualh;
+	FIELD f_kpfbvghh FORWARD_SHIFT Lnet/minecraft/unmapped/C_zviwfwgf;
+	FIELD f_tlwizsry fontHeight I
 		COMMENT The font height of the text that is rendered by the text renderer.
 	METHOD <init> (Ljava/util/function/Function;)V
 		ARG 1 fontStorageAccessor
-	METHOD m_aqcflkbm trimToWidth (Lnet/minecraft/unmapped/C_ctevlazx;I)Lnet/minecraft/unmapped/C_ctevlazx;
-		COMMENT Trims a string to be at most {@code maxWidth} wide.
-		COMMENT
-		COMMENT @return the text
-		COMMENT @see TextHandler#trimToWidth(StringVisitable, int, Style)
-		ARG 1 text
-		ARG 2 width
-	METHOD m_cigazakg drawLayer (Lnet/minecraft/unmapped/C_iywgkvpa;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZII)F
-		ARG 1 text
-		ARG 2 x
-		ARG 3 y
-		ARG 4 color
-		ARG 5 shadow
-		ARG 6 matrix
-		ARG 7 vertexConsumerProvider
-		ARG 8 seeThrough
-		ARG 9 underlineColor
-		ARG 10 light
-	METHOD m_cjvsohzq getWidth (Ljava/lang/String;)I
-		COMMENT Gets the width of some text when rendered.
-		ARG 1 text
-			COMMENT the text
-	METHOD m_cpmpyywi drawLayer (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZII)F
+	METHOD m_adetgpyq draw (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/lang/String;FFI)I
+		ARG 1 matrices
+		ARG 2 text
+		ARG 3 x
+		ARG 4 y
+		ARG 5 color
+			COMMENT the text color in the 0xAARRGGBB format
+	METHOD m_bahodgns tweakTransparency (I)I
+		ARG 0 argb
+	METHOD m_bbfppwhn draw (Ljava/lang/String;FFILnet/minecraft/unmapped/C_gxvddjib;ZZ)I
 		ARG 1 text
 		ARG 2 x
 		ARG 3 y
 		ARG 4 color
-		ARG 5 shadow
-		ARG 6 matrix
-		ARG 7 vertexConsumerProvider
-		ARG 8 seeThrough
-		ARG 9 underlineColor
-		ARG 10 light
-	METHOD m_divyesyu drawInternal (Lnet/minecraft/unmapped/C_iywgkvpa;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZII)I
+		ARG 5 matrix
+		ARG 6 shadow
+		ARG 7 mirror
+	METHOD m_byguqyzl drawWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_rdaqiwdt;FFI)I
+		ARG 1 matrices
+		ARG 2 text
+		ARG 3 x
+		ARG 4 y
+		ARG 5 color
+			COMMENT the text color in the 0xAARRGGBB format
+	METHOD m_cfcbxpjn draw (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZII)I
 		ARG 1 text
 		ARG 2 x
 		ARG 3 y
 		ARG 4 color
+			COMMENT the text color in the 0xAARRGGBB format
 		ARG 5 shadow
 		ARG 6 matrix
-		ARG 7 vertexConsumerProvider
+		ARG 7 vertexConsumers
 		ARG 8 seeThrough
 		ARG 9 backgroundColor
 		ARG 10 light
-	METHOD m_dxbgdlnp drawTrimmed (Lnet/minecraft/unmapped/C_ctevlazx;IIII)V
+	METHOD m_dybvwpoz draw (Lnet/minecraft/unmapped/C_apvkgwyi;FFILnet/minecraft/unmapped/C_gxvddjib;Z)I
 		ARG 1 text
 		ARG 2 x
 		ARG 3 y
-		ARG 4 maxWidth
-		ARG 5 color
+		ARG 4 color
+		ARG 5 matrix
+		ARG 6 shadow
+	METHOD m_eetxmakr getTextHandler ()Lnet/minecraft/unmapped/C_wtqrualh;
+	METHOD m_gdvbssbn draw (Lnet/minecraft/unmapped/C_apvkgwyi;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZII)I
+		ARG 1 text
+		ARG 2 x
+		ARG 3 y
+		ARG 4 color
 			COMMENT the text color in the 0xAARRGGBB format
-	METHOD m_epgcxsuk drawGlyph (Lnet/minecraft/unmapped/C_zzoxtqrw;ZZFFFLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_xuzdhtgi;FFFFI)V
+		ARG 5 shadow
+		ARG 6 matrix
+		ARG 7 vertexConsumers
+		ARG 8 seeThrough
+		ARG 9 backgroundColor
+		ARG 10 light
+	METHOD m_gkazagic drawLayer (Lnet/minecraft/unmapped/C_apvkgwyi;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZII)F
+		ARG 1 text
+		ARG 2 x
+		ARG 3 y
+		ARG 4 color
+		ARG 5 shadow
+		ARG 6 matrix
+		ARG 7 vertexConsumerProvider
+		ARG 8 seeThrough
+		ARG 9 underlineColor
+		ARG 10 light
+	METHOD m_gqprpuum getWrappedLinesHeight (Ljava/lang/String;I)I
+		COMMENT Gets the height of the text when it has been wrapped.
+		COMMENT
+		COMMENT @return the height of the wrapped text
+		COMMENT @see TextRenderer#wrapLines(StringVisitable, int)
+		ARG 1 text
+		ARG 2 maxWidth
+	METHOD m_iwyypmpc drawLayer (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZII)F
+		ARG 1 text
+		ARG 2 x
+		ARG 3 y
+		ARG 4 color
+		ARG 5 shadow
+		ARG 6 matrix
+		ARG 7 vertexConsumerProvider
+		ARG 8 seeThrough
+		ARG 9 underlineColor
+		ARG 10 light
+	METHOD m_kacxmmhx getFontStorage (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zhhoxunt;
+		ARG 1 id
+	METHOD m_kocfwjow drawWithOutline (Lnet/minecraft/unmapped/C_apvkgwyi;FFIILnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;I)V
+		ARG 1 text
+		ARG 2 x
+		ARG 3 y
+		ARG 4 color
+			COMMENT the text color in 0xAARRGGBB
+		ARG 5 outlineColor
+			COMMENT the outline color in 0xAARRGGBB
+		ARG 6 matrix
+		ARG 7 vertexConsumers
+		ARG 8 light
+	METHOD m_kusxcgpe drawGlyph (Lnet/minecraft/unmapped/C_wrqtxozz;ZZFFFLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igthdzux;FFFFI)V
 		ARG 1 glyphRenderer
 		ARG 2 bold
 		ARG 3 italic
@@ -78,89 +125,39 @@ CLASS net/minecraft/unmapped/C_ppmzovam net/minecraft/client/font/TextRenderer
 		ARG 11 blue
 		ARG 12 alpha
 		ARG 13 light
-	METHOD m_gcntexxn drawWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_iywgkvpa;FFI)I
-		ARG 1 matrices
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 color
-			COMMENT the text color in the 0xAARRGGBB format
-	METHOD m_iwmbmfdo getWidth (Lnet/minecraft/unmapped/C_ctevlazx;)I
-		COMMENT Gets the width of some text when rendered.
+	METHOD m_mbklfcqa trimToWidth (Lnet/minecraft/unmapped/C_xzalvetc;I)Lnet/minecraft/unmapped/C_xzalvetc;
+		COMMENT Trims a string to be at most {@code maxWidth} wide.
+		COMMENT
+		COMMENT @return the text
+		COMMENT @see TextHandler#trimToWidth(StringVisitable, int, Style)
 		ARG 1 text
-			COMMENT the text
-	METHOD m_klilivnt drawWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Ljava/lang/String;FFI)I
-		ARG 1 matrices
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 color
-			COMMENT the text color in the 0xAARRGGBB format
-	METHOD m_lzyqugyb drawWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_tdwiqadr;FFI)I
-		ARG 1 matrices
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 color
-			COMMENT the text color in the 0xAARRGGBB format
-	METHOD m_mcmyekur isRightToLeft ()Z
-		COMMENT Checks if the currently set language uses right to left writing.
-	METHOD m_mhkfakvm trimToWidth (Ljava/lang/String;IZ)Ljava/lang/String;
+		ARG 2 width
+	METHOD m_mvkafkhm trimToWidth (Ljava/lang/String;IZ)Ljava/lang/String;
 		COMMENT Trims a string to be at most {@code maxWidth} wide.
 		COMMENT
 		COMMENT @return the trimmed string
 		ARG 1 text
 		ARG 2 maxWidth
 		ARG 3 backwards
-	METHOD m_mmxljimt draw (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_tdwiqadr;FFI)I
+	METHOD m_nxxetncg drawWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_apvkgwyi;FFI)I
 		ARG 1 matrices
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
 		ARG 5 color
 			COMMENT the text color in the 0xAARRGGBB format
-	METHOD m_muuprpqg getWrappedLinesHeight (Ljava/lang/String;I)I
-		COMMENT Gets the height of the text when it has been wrapped.
-		COMMENT
-		COMMENT @return the height of the wrapped text
-		COMMENT @see TextRenderer#wrapLines(StringVisitable, int)
+	METHOD m_odfmbmwi getWidth (Lnet/minecraft/unmapped/C_xzalvetc;)I
+		COMMENT Gets the width of some text when rendered.
 		ARG 1 text
-		ARG 2 maxWidth
-	METHOD m_nbssbvdg draw (Lnet/minecraft/unmapped/C_iywgkvpa;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZII)I
+			COMMENT the text
+	METHOD m_pnldgbxd drawTrimmed (Lnet/minecraft/unmapped/C_xzalvetc;IIII)V
 		ARG 1 text
 		ARG 2 x
 		ARG 3 y
-		ARG 4 color
+		ARG 4 maxWidth
+		ARG 5 color
 			COMMENT the text color in the 0xAARRGGBB format
-		ARG 5 shadow
-		ARG 6 matrix
-		ARG 7 vertexConsumers
-		ARG 8 seeThrough
-		ARG 9 backgroundColor
-		ARG 10 light
-	METHOD m_nhwppfbb draw (Ljava/lang/String;FFILnet/minecraft/unmapped/C_bijddvxg;ZZ)I
-		ARG 1 text
-		ARG 2 x
-		ARG 3 y
-		ARG 4 color
-		ARG 5 matrix
-		ARG 6 shadow
-		ARG 7 mirror
-	METHOD m_njpxbcfc draw (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZII)I
-		ARG 1 text
-		ARG 2 x
-		ARG 3 y
-		ARG 4 color
-			COMMENT the text color in the 0xAARRGGBB format
-		ARG 5 shadow
-		ARG 6 matrix
-		ARG 7 vertexConsumers
-		ARG 8 seeThrough
-		ARG 9 backgroundColor
-		ARG 10 light
-	METHOD m_ntfmajrw mirror (Ljava/lang/String;)Ljava/lang/String;
-		ARG 1 text
-	METHOD m_pvvgxqup drawWithShadow (Lnet/minecraft/unmapped/C_dvxszsnc;Ljava/lang/String;FFIZ)I
+	METHOD m_puqxgvvp drawWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/lang/String;FFIZ)I
 		ARG 1 matrices
 		ARG 2 text
 		ARG 3 x
@@ -168,22 +165,55 @@ CLASS net/minecraft/unmapped/C_ppmzovam net/minecraft/client/font/TextRenderer
 		ARG 5 color
 			COMMENT the text color in the 0xAARRGGBB format
 		ARG 6 rightToLeft
-	METHOD m_qrrfuqyw trimToWidth (Ljava/lang/String;I)Ljava/lang/String;
-		COMMENT Trims a string to be at most {@code maxWidth} wide.
-		COMMENT
-		COMMENT @return the trimmed string
-		COMMENT @see TextHandler#trimToWidth(String, int, Style)
+	METHOD m_qzhosvjc getWidth (Ljava/lang/String;)I
+		COMMENT Gets the width of some text when rendered.
 		ARG 1 text
-		ARG 2 maxWidth
-	METHOD m_qypgteda draw (Lnet/minecraft/unmapped/C_dvxszsnc;Ljava/lang/String;FFI)I
+			COMMENT the text
+	METHOD m_rukeymcm isRightToLeft ()Z
+		COMMENT Checks if the currently set language uses right to left writing.
+	METHOD m_snrwpsju draw (Lnet/minecraft/unmapped/C_rdaqiwdt;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZII)I
+		ARG 1 text
+		ARG 2 x
+		ARG 3 y
+		ARG 4 color
+			COMMENT the text color in the 0xAARRGGBB format
+		ARG 5 shadow
+		ARG 6 matrix
+		ARG 7 vertexConsumers
+		ARG 8 seeThrough
+		ARG 9 backgroundColor
+		ARG 10 light
+	METHOD m_tmijlxmm draw (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_rdaqiwdt;FFI)I
 		ARG 1 matrices
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
 		ARG 5 color
 			COMMENT the text color in the 0xAARRGGBB format
-	METHOD m_rkamxtee getTextHandler ()Lnet/minecraft/unmapped/C_hlaurqtw;
-	METHOD m_rnyfflgw drawInternal (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZIIZ)I
+	METHOD m_tnvililk drawWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/lang/String;FFI)I
+		ARG 1 matrices
+		ARG 2 text
+		ARG 3 x
+		ARG 4 y
+		ARG 5 color
+			COMMENT the text color in the 0xAARRGGBB format
+	METHOD m_uyseyvid drawInternal (Lnet/minecraft/unmapped/C_apvkgwyi;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZII)I
+		ARG 1 text
+		ARG 2 x
+		ARG 3 y
+		ARG 4 color
+		ARG 5 shadow
+		ARG 6 matrix
+		ARG 7 vertexConsumerProvider
+		ARG 8 seeThrough
+		ARG 9 backgroundColor
+		ARG 10 light
+	METHOD m_vafykqut (ILnet/minecraft/unmapped/C_cpwnhism;)F
+		ARG 2 style
+	METHOD m_vyutimmy getWidth (Lnet/minecraft/unmapped/C_apvkgwyi;)I
+		COMMENT Gets the width of some text when rendered.
+		ARG 1 text
+	METHOD m_wglffynr drawInternal (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZIIZ)I
 		ARG 1 text
 		ARG 2 x
 		ARG 3 y
@@ -195,52 +225,22 @@ CLASS net/minecraft/unmapped/C_ppmzovam net/minecraft/client/font/TextRenderer
 		ARG 9 backgroundColor
 		ARG 10 light
 		ARG 11 mirror
-	METHOD m_sngdohab tweakTransparency (I)I
-		ARG 0 argb
-	METHOD m_szqhnaxx draw (Lnet/minecraft/unmapped/C_dvxszsnc;Lnet/minecraft/unmapped/C_iywgkvpa;FFI)I
-		ARG 1 matrices
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 color
-			COMMENT the text color in the 0xAARRGGBB format
-	METHOD m_tuqkyfav (ILnet/minecraft/unmapped/C_msihnwpc;)F
-		ARG 2 style
-	METHOD m_ujspwrns draw (Lnet/minecraft/unmapped/C_tdwiqadr;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZII)I
+	METHOD m_wrjamftn mirror (Ljava/lang/String;)Ljava/lang/String;
 		ARG 1 text
-		ARG 2 x
-		ARG 3 y
-		ARG 4 color
-			COMMENT the text color in the 0xAARRGGBB format
-		ARG 5 shadow
-		ARG 6 matrix
-		ARG 7 vertexConsumers
-		ARG 8 seeThrough
-		ARG 9 backgroundColor
-		ARG 10 light
-	METHOD m_wbjpicbx wrapLines (Lnet/minecraft/unmapped/C_ctevlazx;I)Ljava/util/List;
+	METHOD m_wyqufrrq trimToWidth (Ljava/lang/String;I)Ljava/lang/String;
+		COMMENT Trims a string to be at most {@code maxWidth} wide.
+		COMMENT
+		COMMENT @return the trimmed string
+		COMMENT @see TextHandler#trimToWidth(String, int, Style)
+		ARG 1 text
+		ARG 2 maxWidth
+	METHOD m_xbcipjbw wrapLines (Lnet/minecraft/unmapped/C_xzalvetc;I)Ljava/util/List;
 		COMMENT Wraps text when the rendered width of text exceeds the {@code width}.
 		COMMENT
 		COMMENT @return a list of ordered text which has been wrapped
 		ARG 1 text
 		ARG 2 width
-	METHOD m_wojwfcok drawWithOutline (Lnet/minecraft/unmapped/C_iywgkvpa;FFIILnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;I)V
-		ARG 1 text
-		ARG 2 x
-		ARG 3 y
-		ARG 4 color
-			COMMENT the text color in 0xAARRGGBB
-		ARG 5 outlineColor
-			COMMENT the outline color in 0xAARRGGBB
-		ARG 6 matrix
-		ARG 7 vertexConsumers
-		ARG 8 light
-	METHOD m_xhmmxcak getFontStorage (Lnet/minecraft/unmapped/C_acfwypcn;)Lnet/minecraft/unmapped/C_tnuxohhz;
-		ARG 1 id
-	METHOD m_ymmituyv getWidth (Lnet/minecraft/unmapped/C_iywgkvpa;)I
-		COMMENT Gets the width of some text when rendered.
-		ARG 1 text
-	METHOD m_ywjioblx draw (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_effegrgi;ZIIZ)I
+	METHOD m_xlboijwy draw (Ljava/lang/String;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_igrgeffe;ZIIZ)I
 		ARG 1 text
 		ARG 2 x
 		ARG 3 y
@@ -253,29 +253,29 @@ CLASS net/minecraft/unmapped/C_ppmzovam net/minecraft/client/font/TextRenderer
 		ARG 9 backgroundColor
 		ARG 10 light
 		ARG 11 rightToLeft
-	METHOD m_zopwvbyd draw (Lnet/minecraft/unmapped/C_iywgkvpa;FFILnet/minecraft/unmapped/C_bijddvxg;Z)I
-		ARG 1 text
-		ARG 2 x
-		ARG 3 y
-		ARG 4 color
-		ARG 5 matrix
-		ARG 6 shadow
-	CLASS C_kngiadco TextLayerType
-	CLASS C_vqnipoyu Drawer
-		FIELD f_bualuowj vertexConsumers Lnet/minecraft/unmapped/C_effegrgi;
-		FIELD f_colordii layerType Lnet/minecraft/unmapped/C_ppmzovam$C_kngiadco;
-		FIELD f_efgayjbv x F
-		FIELD f_lndtefwp light I
-		FIELD f_lquzdroh red F
-		FIELD f_luplfcso shadow Z
-		FIELD f_lycaytvd blue F
-		FIELD f_obxfdgpa alpha F
-		FIELD f_tygyggig y F
-		FIELD f_uvlrzrrj green F
-		FIELD f_woajmlpc brightnessMultiplier F
-		FIELD f_wtqxpqrp matrix Lnet/minecraft/unmapped/C_bijddvxg;
-		FIELD f_xeobepfn rectangles Ljava/util/List;
-		METHOD <init> (Lnet/minecraft/unmapped/C_ppmzovam;Lnet/minecraft/unmapped/C_effegrgi;FFIZLnet/minecraft/unmapped/C_bijddvxg;Lnet/minecraft/unmapped/C_ppmzovam$C_kngiadco;I)V
+	METHOD m_xxanhqzs draw (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_apvkgwyi;FFI)I
+		ARG 1 matrices
+		ARG 2 text
+		ARG 3 x
+		ARG 4 y
+		ARG 5 color
+			COMMENT the text color in the 0xAARRGGBB format
+	CLASS C_ocdaignk TextLayerType
+	CLASS C_uyopinqv Drawer
+		FIELD f_apgdfxbo alpha F
+		FIELD f_cplmjaow brightnessMultiplier F
+		FIELD f_dvtyacyl blue F
+		FIELD f_giggygyt y F
+		FIELD f_hordzuql red F
+		FIELD f_iidroloc layerType Lnet/minecraft/unmapped/C_mavozmpp$C_ocdaignk;
+		FIELD f_jrrzrlvu green F
+		FIELD f_jwoulaub vertexConsumers Lnet/minecraft/unmapped/C_igrgeffe;
+		FIELD f_nfpeboex rectangles Ljava/util/List;
+		FIELD f_oscflpul shadow Z
+		FIELD f_prqpxqtw matrix Lnet/minecraft/unmapped/C_gxvddjib;
+		FIELD f_pwfetdnl light I
+		FIELD f_vbjyagfe x F
+		METHOD <init> (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_igrgeffe;FFIZLnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_mavozmpp$C_ocdaignk;I)V
 			ARG 2 vertexConsumers
 			ARG 3 x
 			ARG 4 y
@@ -284,7 +284,7 @@ CLASS net/minecraft/unmapped/C_ppmzovam net/minecraft/client/font/TextRenderer
 			ARG 7 matrix
 			ARG 8 layerType
 			ARG 9 light
-		METHOD <init> (Lnet/minecraft/unmapped/C_ppmzovam;Lnet/minecraft/unmapped/C_effegrgi;FFIZLnet/minecraft/unmapped/C_bijddvxg;ZI)V
+		METHOD <init> (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_igrgeffe;FFIZLnet/minecraft/unmapped/C_gxvddjib;ZI)V
 			ARG 2 vertexConsumers
 			ARG 3 x
 			ARG 4 y
@@ -293,8 +293,8 @@ CLASS net/minecraft/unmapped/C_ppmzovam net/minecraft/client/font/TextRenderer
 			ARG 7 matrix
 			ARG 8 seeThrough
 			ARG 9 light
-		METHOD m_cojmyumj addRectangle (Lnet/minecraft/unmapped/C_zzoxtqrw$C_dmawhifl;)V
-			ARG 1 rectangle
-		METHOD m_fdxnbutg drawLayer (IF)F
+		METHOD m_gtubnxdf drawLayer (IF)F
 			ARG 1 underlineColor
 			ARG 2 x
+		METHOD m_jmuymjoc addRectangle (Lnet/minecraft/unmapped/C_wrqtxozz$C_lfihwamd;)V
+			ARG 1 rectangle

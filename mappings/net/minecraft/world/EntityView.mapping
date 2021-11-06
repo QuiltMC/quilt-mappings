@@ -1,5 +1,5 @@
-CLASS net/minecraft/unmapped/C_auimkcyn net/minecraft/world/EntityView
-	METHOD m_caoowqvp getOtherEntities (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Predicate;)Ljava/util/List;
+CLASS net/minecraft/unmapped/C_nyckmiua net/minecraft/world/EntityView
+	METHOD m_bvadoixo getOtherEntities (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Predicate;)Ljava/util/List;
 		COMMENT Computes a list of entities within some box, excluding the given entity, that satisfy the given predicate.
 		COMMENT
 		COMMENT @return a list of entities within a box, excluding the given entity, all satisfying the given predicate
@@ -9,15 +9,63 @@ CLASS net/minecraft/unmapped/C_auimkcyn net/minecraft/world/EntityView
 			COMMENT the box in which to search for entities
 		ARG 3 predicate
 			COMMENT a predicate which entities must satisfy in order to be included in the returned list
-	METHOD m_cifbkxmb getEntityCollisions (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+	METHOD m_cndkfikg isPlayerInRange (DDDD)Z
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+		ARG 7 range
+	METHOD m_fwgspwco getClosestEntity (Ljava/util/List;Lnet/minecraft/unmapped/C_cjtyhinh;Lnet/minecraft/unmapped/C_usxaxydn;DDD)Lnet/minecraft/unmapped/C_usxaxydn;
+		ARG 1 entityList
+		ARG 2 targetPredicate
+		ARG 3 entity
+		ARG 4 x
+		ARG 6 y
+		ARG 8 z
+	METHOD m_gqhfqwis getClosestPlayer (DDDDLjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_jzrpycqo;
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+		ARG 7 maxDistance
+		ARG 9 targetPredicate
+	METHOD m_ifamkxqr getClosestPlayer (Lnet/minecraft/unmapped/C_astfners;D)Lnet/minecraft/unmapped/C_jzrpycqo;
+		ARG 1 entity
+		ARG 2 maxDistance
+	METHOD m_keuhwtge getPlayers ()Ljava/util/List;
+	METHOD m_ldfmmnsw getPlayerByUuid (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_jzrpycqo;
+		ARG 1 uuid
+	METHOD m_lrisnbsp getEntityCollisions (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/List;
 		ARG 1 entity
 		ARG 2 box
-		ARG 3 predicate
-	METHOD m_esrqfrpb getEntitiesByType (Lnet/minecraft/unmapped/C_haadlpco;Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Predicate;)Ljava/util/List;
+	METHOD m_nsbrdruy getTargets (Ljava/lang/Class;Lnet/minecraft/unmapped/C_cjtyhinh;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/List;
+		ARG 1 entityClass
+		ARG 2 targetPredicate
+		ARG 3 targetingEntity
+		ARG 4 box
+	METHOD m_pnylhfuu getClosestPlayer (Lnet/minecraft/unmapped/C_cjtyhinh;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_jzrpycqo;
+		ARG 1 targetPredicate
+		ARG 2 entity
+	METHOD m_qjlfgvfs getNonSpectatingEntities (Ljava/lang/Class;Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/List;
+		ARG 1 entityClass
+		ARG 2 box
+	METHOD m_svchvujj getEntitiesByType (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Predicate;)Ljava/util/List;
 		ARG 1 filter
 		ARG 2 box
 		ARG 3 predicate
-	METHOD m_fmtihmft getClosestEntity (Ljava/lang/Class;Lnet/minecraft/unmapped/C_hnihytjc;Lnet/minecraft/unmapped/C_ndyxaxsu;DDDLnet/minecraft/unmapped/C_eogzjcbh;)Lnet/minecraft/unmapped/C_ndyxaxsu;
+	METHOD m_swfiobrv intersectsEntities (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zscvhwbd;)Z
+		ARG 1 entity
+		ARG 2 shape
+	METHOD m_swlfbyal getClosestPlayer (DDDDZ)Lnet/minecraft/unmapped/C_jzrpycqo;
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+		ARG 7 maxDistance
+		ARG 9 ignoreCreative
+	METHOD m_swwqphpg getClosestPlayer (Lnet/minecraft/unmapped/C_cjtyhinh;DDD)Lnet/minecraft/unmapped/C_jzrpycqo;
+		ARG 1 targetPredicate
+		ARG 2 x
+		ARG 4 y
+		ARG 6 z
+	METHOD m_tfmhitmf getClosestEntity (Ljava/lang/Class;Lnet/minecraft/unmapped/C_cjtyhinh;Lnet/minecraft/unmapped/C_usxaxydn;DDDLnet/minecraft/unmapped/C_hbcjzgoe;)Lnet/minecraft/unmapped/C_usxaxydn;
 		ARG 1 entityClass
 		ARG 2 targetPredicate
 		ARG 3 entity
@@ -25,50 +73,17 @@ CLASS net/minecraft/unmapped/C_auimkcyn net/minecraft/world/EntityView
 		ARG 6 y
 		ARG 8 z
 		ARG 10 box
-	METHOD m_gkifkdnc isPlayerInRange (DDDD)Z
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-		ARG 7 range
-	METHOD m_gphpqwws getClosestPlayer (Lnet/minecraft/unmapped/C_hnihytjc;DDD)Lnet/minecraft/unmapped/C_oqcyprzj;
-		ARG 1 targetPredicate
-		ARG 2 x
-		ARG 4 y
-		ARG 6 z
-	METHOD m_laybflws getClosestPlayer (DDDDZ)Lnet/minecraft/unmapped/C_oqcyprzj;
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-		ARG 7 maxDistance
-		ARG 9 ignoreCreative
-	METHOD m_mqrzvian getClosestPlayer (DDDDLjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_oqcyprzj;
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-		ARG 7 maxDistance
-		ARG 9 targetPredicate
-	METHOD m_ocwpsgwf getClosestEntity (Ljava/util/List;Lnet/minecraft/unmapped/C_hnihytjc;Lnet/minecraft/unmapped/C_ndyxaxsu;DDD)Lnet/minecraft/unmapped/C_ndyxaxsu;
-		ARG 1 entityList
-		ARG 2 targetPredicate
-		ARG 3 entity
-		ARG 4 x
-		ARG 6 y
-		ARG 8 z
-	METHOD m_rqxkmafi getClosestPlayer (Lnet/minecraft/unmapped/C_srenftsa;D)Lnet/minecraft/unmapped/C_oqcyprzj;
-		ARG 1 entity
-		ARG 2 maxDistance
-	METHOD m_sfvgfljq getNonSpectatingEntities (Ljava/lang/Class;Lnet/minecraft/unmapped/C_eogzjcbh;)Ljava/util/List;
-		ARG 1 entityClass
-		ARG 2 box
-	METHOD m_ssidjxrj (Lnet/minecraft/unmapped/C_eogzjcbh;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_srenftsa;)Z
-		ARG 1 e
-	METHOD m_uavkdghv getClosestPlayer (Lnet/minecraft/unmapped/C_hnihytjc;Lnet/minecraft/unmapped/C_ndyxaxsu;DDD)Lnet/minecraft/unmapped/C_oqcyprzj;
+	METHOD m_vhgdkvau getClosestPlayer (Lnet/minecraft/unmapped/C_cjtyhinh;Lnet/minecraft/unmapped/C_usxaxydn;DDD)Lnet/minecraft/unmapped/C_jzrpycqo;
 		ARG 1 targetPredicate
 		ARG 2 entity
 		ARG 3 x
 		ARG 5 y
 		ARG 7 z
-	METHOD m_udukvitv getOtherEntities (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_eogzjcbh;)Ljava/util/List;
+	METHOD m_vhyxpegx getPlayers (Lnet/minecraft/unmapped/C_cjtyhinh;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/List;
+		ARG 1 targetPredicate
+		ARG 2 entity
+		ARG 3 box
+	METHOD m_vtivkudu getOtherEntities (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/List;
 		COMMENT Computes a list of entities within some box, excluding the given entity, that are not spectators.
 		COMMENT
 		COMMENT @return a list of entities within a box, excluding the given entity
@@ -78,10 +93,7 @@ CLASS net/minecraft/unmapped/C_auimkcyn net/minecraft/world/EntityView
 			COMMENT the entity the box logically surrounds; this entity is ignored if it is inside the box
 		ARG 2 box
 			COMMENT the box in which to search for entities
-	METHOD m_uufhlynp getClosestPlayer (Lnet/minecraft/unmapped/C_hnihytjc;Lnet/minecraft/unmapped/C_ndyxaxsu;)Lnet/minecraft/unmapped/C_oqcyprzj;
-		ARG 1 targetPredicate
-		ARG 2 entity
-	METHOD m_vejreczx getEntitiesByClass (Ljava/lang/Class;Lnet/minecraft/unmapped/C_eogzjcbh;Ljava/util/function/Predicate;)Ljava/util/List;
+	METHOD m_xzcerjev getEntitiesByClass (Ljava/lang/Class;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Predicate;)Ljava/util/List;
 		COMMENT Computes a list of entities within some box whose runtime Java class is the same as or is
 		COMMENT a subclass of the given class.
 		COMMENT
@@ -92,18 +104,3 @@ CLASS net/minecraft/unmapped/C_auimkcyn net/minecraft/world/EntityView
 			COMMENT the box in which to search for entities
 		ARG 3 predicate
 			COMMENT a predicate which entities must satisfy in order to be included in the returned list
-	METHOD m_vjrhtttk intersectsEntities (Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_dbwhvcsz;)Z
-		ARG 1 entity
-		ARG 2 shape
-	METHOD m_wsnmmfdl getPlayerByUuid (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_oqcyprzj;
-		ARG 1 uuid
-	METHOD m_wyezqary getPlayers ()Ljava/util/List;
-	METHOD m_xgepxyhv getPlayers (Lnet/minecraft/unmapped/C_hnihytjc;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_eogzjcbh;)Ljava/util/List;
-		ARG 1 targetPredicate
-		ARG 2 entity
-		ARG 3 box
-	METHOD m_yurdrbsn getTargets (Ljava/lang/Class;Lnet/minecraft/unmapped/C_hnihytjc;Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_eogzjcbh;)Ljava/util/List;
-		ARG 1 entityClass
-		ARG 2 targetPredicate
-		ARG 3 targetingEntity
-		ARG 4 box

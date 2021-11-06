@@ -1,38 +1,41 @@
-CLASS net/minecraft/unmapped/C_xnfwxqgh net/minecraft/entity/passive/SquidEntity
-	FIELD f_cdthhbou prevTentacleAngle F
-	FIELD f_cseyixoy thrustTimerSpeed F
-	FIELD f_dtleplke prevThrustTimer F
+CLASS net/minecraft/unmapped/C_hgqxwfnx net/minecraft/entity/passive/SquidEntity
+	FIELD f_auisvqvg prevRollAngle F
+	FIELD f_bsjlptoo swimX F
+	FIELD f_bxofzapx tiltAngle F
+	FIELD f_egsockdi turningSpeed F
+	FIELD f_eklpeltd prevThrustTimer F
 		COMMENT This serves no real purpose.
-	FIELD f_gvqvsiua prevRollAngle F
-	FIELD f_idkcosge turningSpeed F
-	FIELD f_kaglbxlz swimY F
-	FIELD f_lykjbjrq rollAngle F
-	FIELD f_ootpljsb swimX F
-	FIELD f_oswyvhkt swimZ F
-	FIELD f_pzvddnse prevTiltAngle F
-	FIELD f_svrnynmu swimVelocityScale F
+	FIELD f_esnddvzp prevTiltAngle F
+	FIELD f_malgwzfv thrustTimer F
+		COMMENT Timer between thrusts as the squid swims. Represented as an angle from 0 to 2PI.
+	FIELD f_mhlysgcz tentacleAngle F
+	FIELD f_qrjbjkyl rollAngle F
+	FIELD f_tkhvywso swimZ F
+	FIELD f_umnynrvs swimVelocityScale F
 		COMMENT A scale factor for the squid's swimming speed.
 		COMMENT
 		COMMENT Gets reset to 1 at the beginning of each thrust and gradually decreases to make the squid lurch around.
-	FIELD f_vfzwglam thrustTimer F
-		COMMENT Timer between thrusts as the squid swims. Represented as an angle from 0 to 2PI.
-	FIELD f_xpazfoxb tiltAngle F
-	FIELD f_zcgsylhm tentacleAngle F
-	METHOD m_bredwbra setSwimmingVector (FFF)V
+	FIELD f_uobhhtdc prevTentacleAngle F
+	FIELD f_yoxiyesc thrustTimerSpeed F
+	FIELD f_zlxblgak swimY F
+	METHOD m_arbwderb setSwimmingVector (FFF)V
 		COMMENT Sets the direction and velocity the squid must go when fleeing an enemy. Only has an effect when in the water.
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
-	METHOD m_bxonxvuo createSquidAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_sujrwhet;
-	METHOD m_ekmyklms hasSwimmingVector ()Z
-	METHOD m_hkgazewg applyBodyRotations (Lnet/minecraft/unmapped/C_xxfpupgv;)Lnet/minecraft/unmapped/C_xxfpupgv;
+	METHOD m_egabxoso getInkParticle ()Lnet/minecraft/unmapped/C_nqucohct;
+	METHOD m_gwezagkh applyBodyRotations (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 shootVector
-	METHOD m_livqlmgj squirt ()V
-	METHOD m_osoxbage getInkParticle ()Lnet/minecraft/unmapped/C_tchocuqn;
-	METHOD m_wvdudlgj getSquirtSound ()Lnet/minecraft/unmapped/C_yazovava;
-	CLASS C_okmgtxrk EscapeAttackerGoal
-		FIELD f_ewempohd timer I
-	CLASS C_sniyisjo SwimGoal
-		FIELD f_jutbptmw squid Lnet/minecraft/unmapped/C_xnfwxqgh;
-		METHOD <init> (Lnet/minecraft/unmapped/C_xnfwxqgh;Lnet/minecraft/unmapped/C_xnfwxqgh;)V
+	METHOD m_jgldudvw getSquirtSound ()Lnet/minecraft/unmapped/C_avavozay;
+	METHOD m_jgmlqvil squirt ()V
+	METHOD m_ouvxnoxb createSquidAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_smlkymke hasSwimmingVector ()Z
+	CLASS C_krxtgmko EscapeAttackerGoal
+		FIELD f_beyuibly MAX_DISTANCE F
+		FIELD f_dhopmewe timer I
+		FIELD f_oyrixfdz SPEED_MULTIPLIER F
+		FIELD f_rkajhlxq MIN_DISTANCE F
+	CLASS C_ojsiyins SwimGoal
+		FIELD f_wmtpbtuj squid Lnet/minecraft/unmapped/C_hgqxwfnx;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hgqxwfnx;Lnet/minecraft/unmapped/C_hgqxwfnx;)V
 			ARG 2 squid

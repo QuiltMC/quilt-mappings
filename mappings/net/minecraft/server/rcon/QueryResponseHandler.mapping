@@ -1,56 +1,56 @@
-CLASS net/minecraft/unmapped/C_vddwdrfh net/minecraft/server/rcon/QueryResponseHandler
-	FIELD f_broqyxun socket Ljava/net/DatagramSocket;
-	FIELD f_drwczgaa lastResponseTime J
-	FIELD f_iabanzcf GAME_ID Ljava/lang/String;
-	FIELD f_mmzcbenf packetBuffer [B
-	FIELD f_opjguhpk CLEAN_UP_THRESHOLD J
-	FIELD f_pbrstipc queryPort I
-	FIELD f_pmthsfvr motd Ljava/lang/String;
-	FIELD f_qbfwmljs server Lnet/minecraft/unmapped/C_jbqlgvam;
-	FIELD f_qqxcbtox data Lnet/minecraft/unmapped/C_mfludkia;
-	FIELD f_tkfjlkfq ip Ljava/lang/String;
-	FIELD f_uqjwmbxo GAME_TYPE Ljava/lang/String;
-	FIELD f_wduervtb queries Ljava/util/Map;
-	FIELD f_wwdzpjzd levelName Ljava/lang/String;
-	FIELD f_ydbznbxn maxPlayerCount I
-	FIELD f_yhseuwaf port I
-	FIELD f_yjkidqwr lastQueryTime J
-	FIELD f_zckuhegx hostname Ljava/lang/String;
-	METHOD <init> (Lnet/minecraft/unmapped/C_jbqlgvam;I)V
+CLASS net/minecraft/unmapped/C_hfrdwddv net/minecraft/server/rcon/QueryResponseHandler
+	FIELD f_aagzcwrd lastResponseTime J
+	FIELD f_btvreudw queries Ljava/util/Map;
+	FIELD f_cpitsrbp queryPort I
+	FIELD f_dzjpzdww levelName Ljava/lang/String;
+	FIELD f_fawueshy port I
+	FIELD f_fcznabai GAME_ID Ljava/lang/String;
+	FIELD f_fnebczmm packetBuffer [B
+	FIELD f_kphugjpo CLEAN_UP_THRESHOLD J
+	FIELD f_nuxyqorb socket Ljava/net/DatagramSocket;
+	FIELD f_nxbnzbdy maxPlayerCount I
+	FIELD f_oxbmwjqu GAME_TYPE Ljava/lang/String;
+	FIELD f_qfkljfkt ip Ljava/lang/String;
+	FIELD f_rvfshtmp motd Ljava/lang/String;
+	FIELD f_rwqdikjy lastQueryTime J
+	FIELD f_sjlmwfbq server Lnet/minecraft/unmapped/C_mavglqbj;
+	FIELD f_xgehukcz hostname Ljava/lang/String;
+	FIELD f_xotbcxqq data Lnet/minecraft/unmapped/C_aikdulfm;
+	METHOD <init> (Lnet/minecraft/unmapped/C_mavglqbj;I)V
 		ARG 1 server
 		ARG 2 queryPort
-	METHOD m_corlhzxx getMessageBytes (Ljava/net/SocketAddress;)[B
-		ARG 1 address
-	METHOD m_hhszvozn handle (Ljava/net/DatagramPacket;)Z
-		ARG 1 packet
-	METHOD m_hizpvgyu isValidQuery (Ljava/net/DatagramPacket;)Ljava/lang/Boolean;
-		ARG 1 packet
-	METHOD m_igvnitxq cleanUp ()V
-	METHOD m_ijmnreyk handleIoException (Ljava/lang/Exception;)V
+	METHOD m_hnelwtwl initialize ()Z
+	METHOD m_kyernmji handleIoException (Ljava/lang/Exception;)V
 		ARG 1 e
-	METHOD m_koddfftp reply ([BLjava/net/DatagramPacket;)V
+	METHOD m_nzovzshh handle (Ljava/net/DatagramPacket;)Z
+		ARG 1 packet
+	METHOD m_osbnemdv createQuery (Ljava/net/DatagramPacket;)V
+		ARG 1 packet
+	METHOD m_ptffddok reply ([BLjava/net/DatagramPacket;)V
 		ARG 1 buf
 		ARG 2 packet
-	METHOD m_lwtwlenh initialize ()Z
-	METHOD m_stpdixos create (Lnet/minecraft/unmapped/C_jbqlgvam;)Lnet/minecraft/unmapped/C_vddwdrfh;
+	METHOD m_qivtjacv createRulesReply (Ljava/net/DatagramPacket;)[B
+		ARG 1 packet
+	METHOD m_qxtinvgi cleanUp ()V
+	METHOD m_soxidpts create (Lnet/minecraft/unmapped/C_mavglqbj;)Lnet/minecraft/unmapped/C_hfrdwddv;
 		ARG 0 server
-	METHOD m_vcajtviq createRulesReply (Ljava/net/DatagramPacket;)[B
+	METHOD m_uygvpzih isValidQuery (Ljava/net/DatagramPacket;)Ljava/lang/Boolean;
 		ARG 1 packet
-	METHOD m_vdmenbso createQuery (Ljava/net/DatagramPacket;)V
-		ARG 1 packet
-	METHOD m_xbgxzsrw (JLnet/minecraft/unmapped/C_vddwdrfh$C_vqegxfjd;)Z
+	METHOD m_wrszxgbx (JLnet/minecraft/unmapped/C_hfrdwddv$C_djfxgeqv;)Z
 		ARG 2 query
-	CLASS C_vqegxfjd Query
-		FIELD f_lwdwprov message Ljava/lang/String;
-		FIELD f_udpyfyrd replyBuf [B
-		FIELD f_wmetevks messageBytes [B
-		FIELD f_yijtncvd startTime J
-		FIELD f_zqfkjhrw id I
+	METHOD m_xxzhlroc getMessageBytes (Ljava/net/SocketAddress;)[B
+		ARG 1 address
+	CLASS C_djfxgeqv Query
+		FIELD f_dryfypdu replyBuf [B
+		FIELD f_dvcntjiy startTime J
+		FIELD f_skvetemw messageBytes [B
+		FIELD f_vorpwdwl message Ljava/lang/String;
+		FIELD f_wrhjkfqz id I
 		METHOD <init> (Ljava/net/DatagramPacket;)V
 			ARG 1 packet
-		METHOD m_aeivunxj getMessage ()Ljava/lang/String;
-		METHOD m_elkcuejk getId ()I
-		METHOD m_obnekdul getMessageBytes ()[B
-		METHOD m_rlghazad startedBefore (J)Ljava/lang/Boolean;
+		METHOD m_dazahglr startedBefore (J)Ljava/lang/Boolean;
 			ARG 1 lastQueryTime
-		METHOD m_ynlvajey getReplyBuf ()[B
+		METHOD m_jxnuviea getMessage ()Ljava/lang/String;
+		METHOD m_kjeuckle getId ()I
+		METHOD m_ludkenbo getMessageBytes ()[B
+		METHOD m_yejavlny getReplyBuf ()[B

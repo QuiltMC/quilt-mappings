@@ -1,53 +1,53 @@
-CLASS net/minecraft/unmapped/C_jlooaoyp net/minecraft/entity/data/DataTracker
-	FIELD f_ddjmofvj TRACKED_ENTITIES Lit/unimi/dsi/fastutil/objects/Object2IntMap;
-	FIELD f_egbwkmvz empty Z
-	FIELD f_llgotpfq trackedEntity Lnet/minecraft/unmapped/C_srenftsa;
-	FIELD f_pvnijfwp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_qtebbicv lock Ljava/util/concurrent/locks/ReadWriteLock;
-	FIELD f_trwffbvk dirty Z
-	FIELD f_zroeiqpy entries Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-	METHOD <init> (Lnet/minecraft/unmapped/C_srenftsa;)V
+CLASS net/minecraft/unmapped/C_pyoaoolj net/minecraft/entity/data/DataTracker
+	FIELD f_jvfomjdd TRACKED_ENTITIES Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+	FIELD f_kvbffwrt dirty Z
+	FIELD f_pwfjinvp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_qfptogll trackedEntity Lnet/minecraft/unmapped/C_astfners;
+	FIELD f_vcibbetq lock Ljava/util/concurrent/locks/ReadWriteLock;
+	FIELD f_ypqieorz entries Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+	FIELD f_zvmkwbge empty Z
+	METHOD <init> (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 trackedEntity
-	METHOD m_baoadyto getEntry (Lnet/minecraft/unmapped/C_yxacmnir;)Lnet/minecraft/unmapped/C_jlooaoyp$C_hrbkrgtw;
-	METHOD m_btxrgsln set (Lnet/minecraft/unmapped/C_yxacmnir;Ljava/lang/Object;)V
+	METHOD m_coqixnxf deserializePacket (Lnet/minecraft/unmapped/C_idfydwco;)Ljava/util/List;
+		ARG 0 buf
+	METHOD m_fgmvphsl isEmpty ()Z
+	METHOD m_irpjuiwi clearDirty ()V
+	METHOD m_jnyljhzp get (Lnet/minecraft/unmapped/C_rinmcaxy;)Ljava/lang/Object;
+		ARG 1 data
+	METHOD m_jwgormpp isDirty ()Z
+	METHOD m_kfshrjvp getAllEntries ()Ljava/util/List;
+	METHOD m_lnfpmygi copyToFrom (Lnet/minecraft/unmapped/C_pyoaoolj$C_wtgrkbrh;Lnet/minecraft/unmapped/C_pyoaoolj$C_wtgrkbrh;)V
+	METHOD m_nlsgrxtb set (Lnet/minecraft/unmapped/C_rinmcaxy;Ljava/lang/Object;)V
 		ARG 1 key
 		ARG 2 value
-	METHOD m_dbsbxtir entryFromPacket (Lnet/minecraft/unmapped/C_ocwdyfdi;ILnet/minecraft/unmapped/C_gbzxqzrx;)Lnet/minecraft/unmapped/C_jlooaoyp$C_hrbkrgtw;
-		ARG 0 buf
-	METHOD m_emvaltnx getDirtyEntries ()Ljava/util/List;
-	METHOD m_fxnxiqoc deserializePacket (Lnet/minecraft/unmapped/C_ocwdyfdi;)Ljava/util/List;
-		ARG 0 buf
-	METHOD m_hituqlzv writeEntryToPacket (Lnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_jlooaoyp$C_hrbkrgtw;)V
-		ARG 0 buf
-		ARG 1 entry
-	METHOD m_igympfnl copyToFrom (Lnet/minecraft/unmapped/C_jlooaoyp$C_hrbkrgtw;Lnet/minecraft/unmapped/C_jlooaoyp$C_hrbkrgtw;)V
-	METHOD m_iwiujpri clearDirty ()V
-	METHOD m_lshpvmgf isEmpty ()Z
-	METHOD m_ppmrogwj isDirty ()Z
-	METHOD m_pumhswsx writeUpdatedEntries (Ljava/util/List;)V
-	METHOD m_pvjrhsfk getAllEntries ()Ljava/util/List;
-	METHOD m_pzhjlynj get (Lnet/minecraft/unmapped/C_yxacmnir;)Ljava/lang/Object;
-		ARG 1 data
-	METHOD m_rebtybqr entriesToPacket (Ljava/util/List;Lnet/minecraft/unmapped/C_ocwdyfdi;)V
-	METHOD m_tsssfvao startTracking (Lnet/minecraft/unmapped/C_yxacmnir;Ljava/lang/Object;)V
+	METHOD m_oavfssst startTracking (Lnet/minecraft/unmapped/C_rinmcaxy;Ljava/lang/Object;)V
 		ARG 1 key
 		ARG 2 initialValue
-	METHOD m_uuypkdku registerData (Ljava/lang/Class;Lnet/minecraft/unmapped/C_gbzxqzrx;)Lnet/minecraft/unmapped/C_yxacmnir;
+	METHOD m_otydaoab getEntry (Lnet/minecraft/unmapped/C_rinmcaxy;)Lnet/minecraft/unmapped/C_pyoaoolj$C_wtgrkbrh;
+	METHOD m_ritxbsbd entryFromPacket (Lnet/minecraft/unmapped/C_idfydwco;ILnet/minecraft/unmapped/C_xrzqxzbg;)Lnet/minecraft/unmapped/C_pyoaoolj$C_wtgrkbrh;
+		ARG 0 buf
+	METHOD m_rqbytber entriesToPacket (Ljava/util/List;Lnet/minecraft/unmapped/C_idfydwco;)V
+	METHOD m_tmhalfev addTrackedData (Lnet/minecraft/unmapped/C_rinmcaxy;Ljava/lang/Object;)V
+	METHOD m_ukdkpyuu registerData (Ljava/lang/Class;Lnet/minecraft/unmapped/C_xrzqxzbg;)Lnet/minecraft/unmapped/C_rinmcaxy;
 		ARG 0 entityClass
 		ARG 1 dataHandler
-	METHOD m_veflahmt addTrackedData (Lnet/minecraft/unmapped/C_yxacmnir;Ljava/lang/Object;)V
-	CLASS C_hrbkrgtw Entry
-		FIELD f_ednfjzej value Ljava/lang/Object;
-		FIELD f_kqbgpwye data Lnet/minecraft/unmapped/C_yxacmnir;
-		FIELD f_npbmleir dirty Z
-		METHOD <init> (Lnet/minecraft/unmapped/C_yxacmnir;Ljava/lang/Object;)V
+	METHOD m_vzlqutih writeEntryToPacket (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_pyoaoolj$C_wtgrkbrh;)V
+		ARG 0 buf
+		ARG 1 entry
+	METHOD m_xntlavme getDirtyEntries ()Ljava/util/List;
+	METHOD m_xswshmup writeUpdatedEntries (Ljava/util/List;)V
+	CLASS C_wtgrkbrh Entry
+		FIELD f_eywpgbqk data Lnet/minecraft/unmapped/C_rinmcaxy;
+		FIELD f_jezjfnde value Ljava/lang/Object;
+		FIELD f_rielmbpn dirty Z
+		METHOD <init> (Lnet/minecraft/unmapped/C_rinmcaxy;Ljava/lang/Object;)V
 			ARG 1 data
 			ARG 2 value
-		METHOD m_bnkeftzj isDirty ()Z
-		METHOD m_ggakfhgc copy ()Lnet/minecraft/unmapped/C_jlooaoyp$C_hrbkrgtw;
-		METHOD m_jvhuiycf setDirty (Z)V
+		METHOD m_cghfkagg copy ()Lnet/minecraft/unmapped/C_pyoaoolj$C_wtgrkbrh;
+		METHOD m_fcyiuhvj setDirty (Z)V
 			ARG 1 dirty
-		METHOD m_ngovgluz getData ()Lnet/minecraft/unmapped/C_yxacmnir;
-		METHOD m_ryuhhuqx set (Ljava/lang/Object;)V
+		METHOD m_hbfpzwat get ()Ljava/lang/Object;
+		METHOD m_jztfeknb isDirty ()Z
+		METHOD m_xquhhuyr set (Ljava/lang/Object;)V
 			ARG 1 value
-		METHOD m_tawzpfbh get ()Ljava/lang/Object;
+		METHOD m_zulgvogn getData ()Lnet/minecraft/unmapped/C_rinmcaxy;

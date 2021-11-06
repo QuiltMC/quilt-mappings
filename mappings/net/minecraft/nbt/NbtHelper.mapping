@@ -1,9 +1,61 @@
-CLASS net/minecraft/unmapped/C_zmxrpncs net/minecraft/nbt/NbtHelper
-	FIELD f_ekpnxkor COMMA_SPLITTER Lcom/google/common/base/Splitter;
-	FIELD f_mnznltkj LOGGER Lorg/apache/logging/log4j/Logger;
-	METHOD m_abkptkwq (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_hincwlhh;
+CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
+	FIELD f_jktlnznm LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_rokxnpke COMMA_SPLITTER Lcom/google/common/base/Splitter;
+	METHOD m_encokmig toGameProfile (Lnet/minecraft/unmapped/C_hhlwcnih;)Lcom/mojang/authlib/GameProfile;
 		ARG 0 compound
-	METHOD m_aipyjnqx update (Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_jqafrrcc;Lnet/minecraft/unmapped/C_hincwlhh;II)Lnet/minecraft/unmapped/C_hincwlhh;
+	METHOD m_fhefxmke withProperty (Lnet/minecraft/unmapped/C_jccsnmmo;Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/String;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_jccsnmmo;
+		ARG 0 state
+		ARG 1 property
+		ARG 2 key
+		ARG 3 properties
+		ARG 4 root
+	METHOD m_fzlwqgip writeGameProfile (Lnet/minecraft/unmapped/C_hhlwcnih;Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 compound
+		ARG 1 profile
+	METHOD m_gvvozwih (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/lang/String;
+		ARG 0 compound
+	METHOD m_nvmuisif toUuid (Lnet/minecraft/unmapped/C_bkvarokd;)Ljava/util/UUID;
+		COMMENT Deserializes an NBT element into a {@link UUID}.
+		COMMENT The NBT element's data must have the same structure as the output of {@link #fromUuid}.
+		COMMENT
+		COMMENT @throws IllegalArgumentException if {@code element} is not a valid representation of a UUID
+		COMMENT @since 20w10a
+		ARG 0 element
+	METHOD m_owyzwhdz nameValue (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Comparable;)Ljava/lang/String;
+		ARG 0 property
+		ARG 1 value
+	METHOD m_pxvpkbfz fromUuid (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_qkxiqejc;
+		COMMENT Serializes a {@link UUID} into its equivalent NBT representation.
+		COMMENT
+		COMMENT @since 20w10a
+		ARG 0 uuid
+	METHOD m_qgchuptq fromBlockState (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 state
+	METHOD m_qwktpkba (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 compound
+	METHOD m_rawecpam toPrettyPrintedText (Lnet/minecraft/unmapped/C_bkvarokd;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 element
+	METHOD m_skmtimil toBlockPos (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 0 compound
+	METHOD m_tlmpthxr toBlockState (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 0 compound
+	METHOD m_ujuerqlv update (Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_ccrrfaqj;Lnet/minecraft/unmapped/C_hhlwcnih;I)Lnet/minecraft/unmapped/C_hhlwcnih;
+		COMMENT Uses the data fixer to update an NBT compound object to the latest data version.
+		ARG 0 fixer
+			COMMENT the data fixer
+		ARG 1 fixTypes
+			COMMENT the fix types
+		ARG 2 compound
+			COMMENT the NBT compound object to fix
+		ARG 3 oldVersion
+			COMMENT the data version of the NBT compound object
+	METHOD m_vqnuasws (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 compound
+	METHOD m_wqklvkdy matches (Lnet/minecraft/unmapped/C_bkvarokd;Lnet/minecraft/unmapped/C_bkvarokd;Z)Z
+		ARG 0 standard
+		ARG 1 subject
+		ARG 2 equalValue
+	METHOD m_xqnjypia update (Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_ccrrfaqj;Lnet/minecraft/unmapped/C_hhlwcnih;II)Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT Uses the data fixer to update an NBT compound object.
 		ARG 0 fixer
 			COMMENT the data fixer
@@ -15,59 +67,7 @@ CLASS net/minecraft/unmapped/C_zmxrpncs net/minecraft/nbt/NbtHelper
 			COMMENT the data version of the NBT compound object
 		ARG 4 targetVersion
 			COMMENT the data version to update the NBT compound object to
-	METHOD m_cvrwxkvz toPrettyPrintedString (Lnet/minecraft/unmapped/C_hincwlhh;)Ljava/lang/String;
-		ARG 0 compound
-	METHOD m_ekmxfehf withProperty (Lnet/minecraft/unmapped/C_ommnsccj;Lnet/minecraft/unmapped/C_wyutzlzv;Ljava/lang/String;Lnet/minecraft/unmapped/C_hincwlhh;Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_ommnsccj;
-		ARG 0 state
-		ARG 1 property
-		ARG 2 key
-		ARG 3 properties
-		ARG 4 root
-	METHOD m_fisiumvn toUuid (Lnet/minecraft/unmapped/C_dkoravkb;)Ljava/util/UUID;
-		COMMENT Deserializes an NBT element into a {@link UUID}.
-		COMMENT The NBT element's data must have the same structure as the output of {@link #fromUuid}.
-		COMMENT
-		COMMENT @throws IllegalArgumentException if {@code element} is not a valid representation of a UUID
-		COMMENT @since 20w10a
-		ARG 0 element
-	METHOD m_gimkocne toGameProfile (Lnet/minecraft/unmapped/C_hincwlhh;)Lcom/mojang/authlib/GameProfile;
-		ARG 0 compound
-	METHOD m_hiwzovvg (Lnet/minecraft/unmapped/C_hincwlhh;)Ljava/lang/String;
-		ARG 0 compound
-	METHOD m_limitmks toBlockPos (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_kkdaznyh;
-		ARG 0 compound
-	METHOD m_mapcewar toPrettyPrintedText (Lnet/minecraft/unmapped/C_dkoravkb;)Lnet/minecraft/unmapped/C_tdwiqadr;
-		ARG 0 element
-	METHOD m_pigqwlzf writeGameProfile (Lnet/minecraft/unmapped/C_hincwlhh;Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_hincwlhh;
-		ARG 0 compound
-		ARG 1 profile
-	METHOD m_qtpuhcgq fromBlockState (Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_hincwlhh;
-		ARG 0 state
-	METHOD m_rrmstgky fromBlockPos (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_hincwlhh;
+	METHOD m_ykgtsmrr fromBlockPos (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 pos
-	METHOD m_rxhtpmlt toBlockState (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_pmeibtxt;
+	METHOD m_zvkxwrvc toPrettyPrintedString (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/lang/String;
 		ARG 0 compound
-	METHOD m_swsaunqv (Lnet/minecraft/unmapped/C_hincwlhh;)Lnet/minecraft/unmapped/C_hincwlhh;
-		ARG 0 compound
-	METHOD m_vlqreuju update (Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_jqafrrcc;Lnet/minecraft/unmapped/C_hincwlhh;I)Lnet/minecraft/unmapped/C_hincwlhh;
-		COMMENT Uses the data fixer to update an NBT compound object to the latest data version.
-		ARG 0 fixer
-			COMMENT the data fixer
-		ARG 1 fixTypes
-			COMMENT the fix types
-		ARG 2 compound
-			COMMENT the NBT compound object to fix
-		ARG 3 oldVersion
-			COMMENT the data version of the NBT compound object
-	METHOD m_ydkvlkqw matches (Lnet/minecraft/unmapped/C_dkoravkb;Lnet/minecraft/unmapped/C_dkoravkb;Z)Z
-		ARG 0 standard
-		ARG 1 subject
-		ARG 2 equalValue
-	METHOD m_zdhwzywo nameValue (Lnet/minecraft/unmapped/C_wyutzlzv;Ljava/lang/Comparable;)Ljava/lang/String;
-		ARG 0 property
-		ARG 1 value
-	METHOD m_zfbkpvxp fromUuid (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_cjeqixkq;
-		COMMENT Serializes a {@link UUID} into its equivalent NBT representation.
-		COMMENT
-		COMMENT @since 20w10a
-		ARG 0 uuid

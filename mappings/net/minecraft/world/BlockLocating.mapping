@@ -1,6 +1,6 @@
-CLASS net/minecraft/unmapped/C_qaothuaw net/minecraft/world/BlockLocating
+CLASS net/minecraft/unmapped/C_wauhtoaq net/minecraft/world/BlockLocating
 	COMMENT A few utilities to find block positions matching certain conditions.
-	METHOD m_eiafejua findColumnEnd (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_qodpmxmm;Lnet/minecraft/unmapped/C_fxhiuupx;Lnet/minecraft/unmapped/C_qodpmxmm;)Ljava/util/Optional;
+	METHOD m_aujefaie findColumnEnd (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_mmxmpdoq;)Ljava/util/Optional;
 		COMMENT Finds an end to a block column starting from {@code pos} extending in {@code
 		COMMENT direction}. Within the column, the block states must be of {@code intermediateBlock}
 		COMMENT and the ending block state, whose position is returned, must be of {@code endBlock}.
@@ -17,21 +17,7 @@ CLASS net/minecraft/unmapped/C_qaothuaw net/minecraft/world/BlockLocating
 			COMMENT the direction which the column extends to
 		ARG 4 endBlock
 			COMMENT the ending block of the column
-	METHOD m_enepvizr getLargestRectangle (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx$C_zouofpmr;ILnet/minecraft/unmapped/C_fxhiuupx$C_zouofpmr;ILjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_qaothuaw$C_tijnpyqt;
-		COMMENT Gets the largest rectangle of blocks along two axes for which all blocks meet a predicate.
-		COMMENT Used for getting rectangles of Nether portal blocks.
-		ARG 0 center
-		ARG 1 primaryAxis
-		ARG 2 primaryMaxBlocks
-		ARG 3 secondaryAxis
-		ARG 4 secondaryMaxBlocks
-		ARG 5 predicate
-	METHOD m_ftjytliz moveWhile (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_kkdaznyh$C_kjdtiqge;Lnet/minecraft/unmapped/C_fxhiuupx;I)I
-		ARG 0 predicate
-		ARG 1 pos
-		ARG 2 direction
-		ARG 3 max
-	METHOD m_zmksjcnd findLargestRectangle ([I)Lcom/mojang/datafixers/util/Pair;
+	METHOD m_dncjskmz findLargestRectangle ([I)Lcom/mojang/datafixers/util/Pair;
 		COMMENT Finds the largest rectangle within a histogram, where the vertical bars each have
 		COMMENT width 1 and height specified in {@code heights}.
 		COMMENT
@@ -52,17 +38,31 @@ CLASS net/minecraft/unmapped/C_qaothuaw net/minecraft/world/BlockLocating
 		COMMENT Rectangle in Histogram - LeetCode</a>
 		ARG 0 heights
 			COMMENT the heights of bars in the histogram
-	CLASS C_avtycfpl IntBounds
-		FIELD f_bpbkqapg max I
-		FIELD f_qwssyvqv min I
+	METHOD m_rzivpene getLargestRectangle (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;ILnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;ILjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_wauhtoaq$C_tqypnjit;
+		COMMENT Gets the largest rectangle of blocks along two axes for which all blocks meet a predicate.
+		COMMENT Used for getting rectangles of Nether portal blocks.
+		ARG 0 center
+		ARG 1 primaryAxis
+		ARG 2 primaryMaxBlocks
+		ARG 3 secondaryAxis
+		ARG 4 secondaryMaxBlocks
+		ARG 5 predicate
+	METHOD m_ziltyjtf moveWhile (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;Lnet/minecraft/unmapped/C_xpuuihxf;I)I
+		ARG 0 predicate
+		ARG 1 pos
+		ARG 2 direction
+		ARG 3 max
+	CLASS C_lpfcytva IntBounds
+		FIELD f_gpaqkbpb max I
+		FIELD f_vqvysswq min I
 		METHOD <init> (II)V
 			ARG 1 min
 			ARG 2 max
-	CLASS C_tijnpyqt Rectangle
-		FIELD f_dyrrzkqw width I
-		FIELD f_fxbsjbeu height I
-		FIELD f_sdviafti lowerLeft Lnet/minecraft/unmapped/C_kkdaznyh;
-		METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;II)V
+	CLASS C_tqypnjit Rectangle
+		FIELD f_itfaivds lowerLeft Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_uebjsbxf height I
+		FIELD f_wqkzrryd width I
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;II)V
 			ARG 1 lowerLeft
 			ARG 2 width
 			ARG 3 height

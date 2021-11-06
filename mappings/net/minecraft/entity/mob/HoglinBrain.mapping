@@ -1,69 +1,84 @@
-CLASS net/minecraft/unmapped/C_wsvciddh net/minecraft/entity/mob/HoglinBrain
-	FIELD f_loqntyau AVOID_MEMORY_DURATION Lnet/minecraft/unmapped/C_ivtmlivh;
-	FIELD f_waygdspl WALK_TOWARD_CLOSEST_ADULT_RANGE Lnet/minecraft/unmapped/C_ivtmlivh;
-	METHOD m_ccoavomf getSoundEvent (Lnet/minecraft/unmapped/C_kddkyznf;)Ljava/util/Optional;
+CLASS net/minecraft/unmapped/C_hddicvsw net/minecraft/entity/mob/HoglinBrain
+	FIELD f_abhubnmo ATTACK_DURATION I
+	FIELD f_brshwtmc REPELLENT_DETECTION_RANGE_HORIZONTAL I
+	FIELD f_cdczbdtc REPELLENT_PACIFY_TIME I
+	FIELD f_dbuhuxvh RETREATING_SPEED F
+	FIELD f_fenowlan IDLING_SPEED F
+	FIELD f_fzdphbqr ATTACK_INTERVAL I
+	FIELD f_gpfyxxoe BABY_ATTACK_INTERVAL I
+	FIELD f_gsdoniak AVOIDING_REPELLENT_SPEED F
+	FIELD f_gsrdxmhn FOLLOWING_ADULT_SPEED F
+	FIELD f_imulgzfi IDLING_DESIRED_DISTANCE_FROM_PIGLIN I
+	FIELD f_jlebypzb BREEDING_SPEED F
+	FIELD f_kxyezpvj RETIRING_DESIRED_DISTANCE_FROM_PIGLIN I
+	FIELD f_lpsdgyaw WALK_TOWARD_CLOSEST_ADULT_RANGE Lnet/minecraft/unmapped/C_hvilmtvi;
+	FIELD f_skwqlnwc REPELLENT_DETECTION_RANGE_VERTICAL I
+	FIELD f_uaytnqol AVOID_MEMORY_DURATION Lnet/minecraft/unmapped/C_hvilmtvi;
+	METHOD m_bbqnkojq getNearestVisibleTargetablePlayer (Lnet/minecraft/unmapped/C_fnzykddk;)Ljava/util/Optional;
 		ARG 0 hoglin
-	METHOD m_cxxaobxq avoid (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 0 hoglin
-		ARG 1 target
-	METHOD m_fnyimvcp setAttackTargetIfCloser (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 0 hoglin
-		ARG 1 targetCandidate
-	METHOD m_ghcrskzm hasMoreHoglinsAround (Lnet/minecraft/unmapped/C_kddkyznf;)Z
-		ARG 0 hoglin
-	METHOD m_hlyvzqhd getSoundEvent (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_wlxgpmqg;)Lnet/minecraft/unmapped/C_yazovava;
+	METHOD m_cmdxnhhp (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_fnzykddk;)V
+		ARG 1 hoglin
+	METHOD m_dhqzvylh getSoundEvent (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_gqmpgxlw;)Lnet/minecraft/unmapped/C_avavozay;
 		ARG 0 hoglin
 		ARG 1 activity
-	METHOD m_ianwmfns setAttackTarget (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+	METHOD m_elhufzgz (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_gqmpgxlw;)Lnet/minecraft/unmapped/C_avavozay;
+		ARG 1 activity
+	METHOD m_ezizisnp create (Lnet/minecraft/unmapped/C_rjqjaxef;)Lnet/minecraft/unmapped/C_rjqjaxef;
+		ARG 0 brain
+	METHOD m_fmovaocc getSoundEvent (Lnet/minecraft/unmapped/C_fnzykddk;)Ljava/util/Optional;
+		ARG 0 hoglin
+	METHOD m_frheotbl refreshActivities (Lnet/minecraft/unmapped/C_fnzykddk;)V
+		ARG 0 hoglin
+	METHOD m_hlhnbzhl (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_fnzykddk;)V
+		ARG 1 hoglin
+	METHOD m_htccihys askAdultsForHelp (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 0 hoglin
 		ARG 1 target
-	METHOD m_jjckfmur isLoneAdult (Lnet/minecraft/unmapped/C_kddkyznf;)Z
+	METHOD m_ihdzlscz avoidEnemy (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 0 hoglin
-	METHOD m_kiauxlgy isWarpedFungusAround (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		ARG 1 target
+	METHOD m_ihgmfrdt onAttacking (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 0 hoglin
-		ARG 1 pos
-	METHOD m_lbtoehrf refreshActivities (Lnet/minecraft/unmapped/C_kddkyznf;)V
-		ARG 0 hoglin
-	METHOD m_lhzbnhlh (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_kddkyznf;)V
-		ARG 1 hoglin
-	METHOD m_lsmmkzuv addFightTasks (Lnet/minecraft/unmapped/C_fexajqjr;)V
+		ARG 1 target
+	METHOD m_lcbfttnu addAvoidTasks (Lnet/minecraft/unmapped/C_rjqjaxef;)V
 		ARG 0 brain
-	METHOD m_lxgavabt getAdultHoglinsAround (Lnet/minecraft/unmapped/C_kddkyznf;)Ljava/util/List;
+	METHOD m_mthihmit addIdleTasks (Lnet/minecraft/unmapped/C_rjqjaxef;)V
+		ARG 0 brain
+	METHOD m_mzksrchg hasMoreHoglinsAround (Lnet/minecraft/unmapped/C_fnzykddk;)Z
 		ARG 0 hoglin
-	METHOD m_mxhajejn isNearPlayer (Lnet/minecraft/unmapped/C_kddkyznf;)Z
+	METHOD m_ngaavviz targetEnemy (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 0 hoglin
-	METHOD m_noxpynir onAttacked (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 1 target
+	METHOD m_njejahxm isNearPlayer (Lnet/minecraft/unmapped/C_fnzykddk;)Z
+		ARG 0 hoglin
+	METHOD m_pcvmiynf setAttackTargetIfCloser (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
+		ARG 0 hoglin
+		ARG 1 targetCandidate
+	METHOD m_pnegeuit addCoreTasks (Lnet/minecraft/unmapped/C_rjqjaxef;)V
+		ARG 0 brain
+	METHOD m_qxboaxxc avoid (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
+		ARG 0 hoglin
+		ARG 1 target
+	METHOD m_rinypxon onAttacked (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 0 hoglin
 		ARG 1 attacker
-	METHOD m_phhnxdmc (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_kddkyznf;)V
-		ARG 1 hoglin
-	METHOD m_plmevhts hasNearestRepellent (Lnet/minecraft/unmapped/C_kddkyznf;)Z
+	METHOD m_rumfkcjj isLoneAdult (Lnet/minecraft/unmapped/C_fnzykddk;)Z
 		ARG 0 hoglin
-	METHOD m_pnsizize create (Lnet/minecraft/unmapped/C_fexajqjr;)Lnet/minecraft/unmapped/C_fexajqjr;
+	METHOD m_sdhiaqrx askAdultsToAvoid (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
+		ARG 0 hoglin
+		ARG 1 target
+	METHOD m_snfmwnai setAttackTarget (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_usxaxydn;)V
+		ARG 0 hoglin
+		ARG 1 target
+	METHOD m_sthvemlp hasNearestRepellent (Lnet/minecraft/unmapped/C_fnzykddk;)Z
+		ARG 0 hoglin
+	METHOD m_tbavagxl getAdultHoglinsAround (Lnet/minecraft/unmapped/C_fnzykddk;)Ljava/util/List;
+		ARG 0 hoglin
+	METHOD m_vuzkmmsl addFightTasks (Lnet/minecraft/unmapped/C_rjqjaxef;)V
 		ARG 0 brain
-	METHOD m_qjoknqbb getNearestVisibleTargetablePlayer (Lnet/minecraft/unmapped/C_kddkyznf;)Ljava/util/Optional;
+	METHOD m_vzopmavw hasBreedTarget (Lnet/minecraft/unmapped/C_fnzykddk;)Z
 		ARG 0 hoglin
-	METHOD m_syhiccth askAdultsForHelp (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+	METHOD m_wlvgbjiu makeRandomWalkTask ()Lnet/minecraft/unmapped/C_njrxsvng;
+	METHOD m_yglxuaik isWarpedFungusAround (Lnet/minecraft/unmapped/C_fnzykddk;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 0 hoglin
-		ARG 1 target
-	METHOD m_tdrfmghi onAttacking (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 0 hoglin
-		ARG 1 target
-	METHOD m_timhihtm addIdleTasks (Lnet/minecraft/unmapped/C_fexajqjr;)V
-		ARG 0 brain
-	METHOD m_tiuegenp addCoreTasks (Lnet/minecraft/unmapped/C_fexajqjr;)V
-		ARG 0 brain
-	METHOD m_uijbgvlw makeRandomWalkTask ()Lnet/minecraft/unmapped/C_gnvsxrjn;
-	METHOD m_unttfbcl addAvoidTasks (Lnet/minecraft/unmapped/C_fexajqjr;)V
-		ARG 0 brain
-	METHOD m_wvampozv hasBreedTarget (Lnet/minecraft/unmapped/C_kddkyznf;)Z
-		ARG 0 hoglin
-	METHOD m_xrqaihds askAdultsToAvoid (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 0 hoglin
-		ARG 1 target
-	METHOD m_zcslzdhi avoidEnemy (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 0 hoglin
-		ARG 1 target
-	METHOD m_zivvaagn targetEnemy (Lnet/minecraft/unmapped/C_kddkyznf;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
-		ARG 0 hoglin
-		ARG 1 target
+		ARG 1 pos

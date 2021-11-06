@@ -1,11 +1,20 @@
-CLASS net/minecraft/unmapped/C_bsbxtqkp net/minecraft/server/world/SleepManager
+CLASS net/minecraft/unmapped/C_pkqtxbsb net/minecraft/server/world/SleepManager
 	COMMENT A sleep manager allows easy tracking of whether nights should be skipped
 	COMMENT on a {@linkplain ServerWorld server world}.
-	FIELD f_aadloeyh sleeping I
+	FIELD f_hyeoldaa sleeping I
 		COMMENT The number of players sleeping in a server world.
-	FIELD f_magroghy total I
+	FIELD f_yhgorgam total I
 		COMMENT The total number of players in a server world.
-	METHOD m_bgswvzhj canResetTime (ILjava/util/List;)Z
+	METHOD m_dcarqurf clearSleeping ()V
+		COMMENT Resets the number of sleeping players to 0.
+	METHOD m_ipzkuask update (Ljava/util/List;)Z
+		COMMENT Updates the sleeping player and total player counts.
+		COMMENT
+		COMMENT @return {@code true} if the sleeping players or total players have
+		COMMENT changed
+		ARG 1 players
+			COMMENT the list of all players in a server world
+	METHOD m_jhzvwsgb canResetTime (ILjava/util/List;)Z
 		COMMENT Returns if the night can actually be skipped at the tick this is called.
 		COMMENT
 		COMMENT <p>This is usually tested after {@linkplain #canSkipNight(int) canSkipNight},
@@ -14,21 +23,14 @@ CLASS net/minecraft/unmapped/C_bsbxtqkp net/minecraft/server/world/SleepManager
 			COMMENT the percentage of players required, as obtained from the game rule
 		ARG 2 players
 			COMMENT the list of all players in a world where the night would be skipped
-	METHOD m_eipwcmjk getNightSkippingRequirement (I)I
+	METHOD m_kjmcwpie getNightSkippingRequirement (I)I
 		COMMENT Returns {@linkplain #sleeping the number of sleepers} needed to skip
 		COMMENT a night with the given {@code percentage}.
 		ARG 1 percentage
 			COMMENT the percentage of players required, as obtained from the game rule
-	METHOD m_fruqracd clearSleeping ()V
-		COMMENT Resets the number of sleeping players to 0.
-	METHOD m_ksaukzpi update (Ljava/util/List;)Z
-		COMMENT Updates the sleeping player and total player counts.
-		COMMENT
-		COMMENT @return {@code true} if the sleeping players or total players have
-		COMMENT changed
-		ARG 1 players
-			COMMENT the list of all players in a server world
-	METHOD m_ugweglyv canSkipNight (I)Z
+	METHOD m_sfmyeepv getSleeping ()I
+		COMMENT Returns the number of sleeping players.
+	METHOD m_vylgewgu canSkipNight (I)Z
 		COMMENT Returns if the number of sleeping players has reached a {@code percentage}
 		COMMENT out of all players.
 		COMMENT
@@ -37,5 +39,3 @@ CLASS net/minecraft/unmapped/C_bsbxtqkp net/minecraft/server/world/SleepManager
 		COMMENT #canResetTime(int, List) canResetTime}) to actually skip the night.
 		ARG 1 percentage
 			COMMENT the percentage of players required, as obtained from the game rule
-	METHOD m_vpeeymfs getSleeping ()I
-		COMMENT Returns the number of sleeping players.

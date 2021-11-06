@@ -1,13 +1,26 @@
-CLASS net/minecraft/unmapped/C_ctevlazx net/minecraft/text/StringVisitable
+CLASS net/minecraft/unmapped/C_xzalvetc net/minecraft/text/StringVisitable
 	COMMENT An object that can supply strings to a visitor,
 	COMMENT with or without a style context.
-	FIELD f_ikcqgude EMPTY Lnet/minecraft/unmapped/C_ctevlazx;
-		COMMENT An empty visitable that does not call the visitors.
-	FIELD f_skjhhnrd TERMINATE_VISIT Ljava/util/Optional;
+	FIELD f_drnhhjks TERMINATE_VISIT Ljava/util/Optional;
 		COMMENT Convenience object indicating the termination of a string visit.
-	METHOD m_nrqatlgp (Ljava/lang/StringBuilder;Ljava/lang/String;)Ljava/util/Optional;
-		ARG 1 string
-	METHOD m_osvoibyt visit (Lnet/minecraft/unmapped/C_ctevlazx$C_wnspgsnr;Lnet/minecraft/unmapped/C_msihnwpc;)Ljava/util/Optional;
+	FIELD f_edugqcki EMPTY Lnet/minecraft/unmapped/C_xzalvetc;
+		COMMENT An empty visitable that does not call the visitors.
+	METHOD m_aoqmhbpi visit (Lnet/minecraft/unmapped/C_xzalvetc$C_delqnnjz;)Ljava/util/Optional;
+		COMMENT Supplies this visitable's literal content to the visitor.
+		COMMENT
+		COMMENT @return {@code Optional.empty()} if the visit finished, or a terminating
+		COMMENT result from the {@code visitor}
+		ARG 1 visitor
+			COMMENT the visitor
+	METHOD m_ccdfdfwq concat (Ljava/util/List;)Lnet/minecraft/unmapped/C_xzalvetc;
+		COMMENT Concats multiple string visitables by the order they appear in the list.
+		ARG 0 visitables
+			COMMENT a list of visitables
+	METHOD m_ewtvxapp concat ([Lnet/minecraft/unmapped/C_xzalvetc;)Lnet/minecraft/unmapped/C_xzalvetc;
+		COMMENT Concats multiple string visitables by the order they appear in the array.
+		ARG 0 visitables
+			COMMENT an array or varargs of visitables
+	METHOD m_kijcyusu visit (Lnet/minecraft/unmapped/C_xzalvetc$C_rnsgpsnw;Lnet/minecraft/unmapped/C_cpwnhism;)Ljava/util/Optional;
 		COMMENT Supplies this visitable's literal content and contextual style to
 		COMMENT the visitor.
 		COMMENT
@@ -17,34 +30,33 @@ CLASS net/minecraft/unmapped/C_ctevlazx net/minecraft/text/StringVisitable
 			COMMENT the visitor
 		ARG 2 style
 			COMMENT the contextual style
-	METHOD m_ppaxvtwe concat ([Lnet/minecraft/unmapped/C_ctevlazx;)Lnet/minecraft/unmapped/C_ctevlazx;
-		COMMENT Concats multiple string visitables by the order they appear in the array.
-		ARG 0 visitables
-			COMMENT an array or varargs of visitables
-	METHOD m_qwfdfdcc concat (Ljava/util/List;)Lnet/minecraft/unmapped/C_ctevlazx;
-		COMMENT Concats multiple string visitables by the order they appear in the list.
-		ARG 0 visitables
-			COMMENT a list of visitables
-	METHOD m_sqhzknwu visit (Lnet/minecraft/unmapped/C_ctevlazx$C_zjnnqled;)Ljava/util/Optional;
-		COMMENT Supplies this visitable's literal content to the visitor.
-		COMMENT
-		COMMENT @return {@code Optional.empty()} if the visit finished, or a terminating
-		COMMENT result from the {@code visitor}
-		ARG 1 visitor
-			COMMENT the visitor
-	METHOD m_ujpnozdp styled (Ljava/lang/String;Lnet/minecraft/unmapped/C_msihnwpc;)Lnet/minecraft/unmapped/C_ctevlazx;
+	METHOD m_pdzonpju styled (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_xzalvetc;
 		COMMENT Creates a visitable from a plain string and a root style.
 		ARG 0 string
 			COMMENT the plain string
 		ARG 1 style
 			COMMENT the root style
-	METHOD m_yyajlypq plain (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ctevlazx;
+	METHOD m_pgltaqrn (Ljava/lang/StringBuilder;Ljava/lang/String;)Ljava/util/Optional;
+		ARG 1 string
+	METHOD m_qpyljayy plain (Ljava/lang/String;)Lnet/minecraft/unmapped/C_xzalvetc;
 		COMMENT Creates a visitable from a plain string.
 		ARG 0 string
 			COMMENT the plain string
-	CLASS C_wnspgsnr StyledVisitor
+	CLASS C_delqnnjz Visitor
+		COMMENT A visitor for string content.
+		METHOD accept accept (Ljava/lang/String;)Ljava/util/Optional;
+			COMMENT Visits a literal string.
+			COMMENT
+			COMMENT <p>When a {@link Optional#isPresent() present optional} is returned,
+			COMMENT the visit is terminated before visiting all text. Can return {@link
+			COMMENT StringVisitable#TERMINATE_VISIT} for convenience.
+			COMMENT
+			COMMENT @return {@code Optional.empty()} to continue, a non-empty result to terminate
+			ARG 1 asString
+				COMMENT the literal string
+	CLASS C_rnsgpsnw StyledVisitor
 		COMMENT A visitor for string content and a contextual {@link Style}.
-		METHOD m_clpncfha accept (Lnet/minecraft/unmapped/C_msihnwpc;Ljava/lang/String;)Ljava/util/Optional;
+		METHOD accept accept (Lnet/minecraft/unmapped/C_cpwnhism;Ljava/lang/String;)Ljava/util/Optional;
 			COMMENT Visits a string's content with a contextual style.
 			COMMENT
 			COMMENT <p>A contextual style is obtained by calling {@link Style#withParent(Style)}
@@ -59,16 +71,4 @@ CLASS net/minecraft/unmapped/C_ctevlazx net/minecraft/text/StringVisitable
 			ARG 1 style
 				COMMENT the current style
 			ARG 2 asString
-				COMMENT the literal string
-	CLASS C_zjnnqled Visitor
-		COMMENT A visitor for string content.
-		METHOD m_qwojwcoa accept (Ljava/lang/String;)Ljava/util/Optional;
-			COMMENT Visits a literal string.
-			COMMENT
-			COMMENT <p>When a {@link Optional#isPresent() present optional} is returned,
-			COMMENT the visit is terminated before visiting all text. Can return {@link
-			COMMENT StringVisitable#TERMINATE_VISIT} for convenience.
-			COMMENT
-			COMMENT @return {@code Optional.empty()} to continue, a non-empty result to terminate
-			ARG 1 asString
 				COMMENT the literal string

@@ -1,22 +1,8 @@
-CLASS net/minecraft/unmapped/C_bridrspq net/minecraft/client/font/TextVisitFactory
+CLASS net/minecraft/unmapped/C_qpsrdirb net/minecraft/client/font/TextVisitFactory
 	COMMENT A utility class for visiting the characters of strings, handling surrogate
 	COMMENT code points and formatting codes.
-	FIELD f_vepiublo VISIT_TERMINATED Ljava/util/Optional;
-	METHOD m_awqtincl visitFormatted (Lnet/minecraft/unmapped/C_ctevlazx;Lnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_mdzwvxek;)Z
-		COMMENT Visits the code points for every literal string and the formatting codes
-		COMMENT supplied by the renderable.
-		COMMENT
-		COMMENT <p>The visit is in forward direction.
-		COMMENT
-		COMMENT @return {@code true} if the full string was visited, or {@code false} indicating
-		COMMENT the {@code visitor} terminated half-way
-		COMMENT @see StringVisitable#visit(StringVisitable.StyledVisitor, Style)
-		ARG 0 text
-		ARG 1 style
-		ARG 2 visitor
-	METHOD m_cqxlastb removeFormattingCodes (Lnet/minecraft/unmapped/C_ctevlazx;)Ljava/lang/String;
-		ARG 0 text
-	METHOD m_cxmnszqa visitForwards (Ljava/lang/String;Lnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_mdzwvxek;)Z
+	FIELD f_olbuipev VISIT_TERMINATED Ljava/util/Optional;
+	METHOD m_aqzsnmxc visitForwards (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string in forward (left to right) direction.
 		COMMENT
 		COMMENT @return {@code true} if the full string was visited, or {@code false} indicating
@@ -27,7 +13,9 @@ CLASS net/minecraft/unmapped/C_bridrspq net/minecraft/client/font/TextVisitFacto
 			COMMENT the style of the string
 		ARG 2 visitor
 			COMMENT the visitor of characters
-	METHOD m_oxbjhpub visitFormatted (Ljava/lang/String;ILnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_mdzwvxek;)Z
+	METHOD m_btsalxqc removeFormattingCodes (Lnet/minecraft/unmapped/C_xzalvetc;)Ljava/lang/String;
+		ARG 0 text
+	METHOD m_buphjbxo visitFormatted (Ljava/lang/String;ILnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string, applying the formatting codes within.
 		COMMENT
 		COMMENT <p>The visit is in forward direction.
@@ -41,7 +29,7 @@ CLASS net/minecraft/unmapped/C_bridrspq net/minecraft/client/font/TextVisitFacto
 		ARG 2 style
 			COMMENT the style of the string
 		ARG 3 visitor
-	METHOD m_uxcgmbvc visitBackwards (Ljava/lang/String;Lnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_mdzwvxek;)Z
+	METHOD m_cvbmgcxu visitBackwards (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string in backward (right to left) direction.
 		COMMENT
 		COMMENT @return {@code true} if the full string was visited, or {@code false} indicating
@@ -52,7 +40,7 @@ CLASS net/minecraft/unmapped/C_bridrspq net/minecraft/client/font/TextVisitFacto
 			COMMENT the style of the string
 		ARG 2 visitor
 			COMMENT the visitor
-	METHOD m_vapwhlhd visitFormatted (Ljava/lang/String;ILnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_mdzwvxek;)Z
+	METHOD m_dhlhwpav visitFormatted (Ljava/lang/String;ILnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string, applying the formatting codes within.
 		COMMENT
 		COMMENT <p>The visit is in forward direction.
@@ -69,17 +57,7 @@ CLASS net/minecraft/unmapped/C_bridrspq net/minecraft/client/font/TextVisitFacto
 			COMMENT the style to reset to when a {@code §r} formatting code is encountered
 		ARG 4 visitor
 			COMMENT the visitor
-	METHOD m_vxfftbay validateSurrogates (Ljava/lang/String;)Ljava/lang/String;
-		COMMENT {@return a new string that has all surrogate characters within}
-		COMMENT The characters are validated from an original string {@code text}.
-		ARG 0 text
-			COMMENT the original string
-	METHOD m_xrksochv visitRegularCharacter (Lnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_mdzwvxek;IC)Z
-		ARG 0 style
-		ARG 1 visitor
-		ARG 2 index
-		ARG 3 c
-	METHOD m_zgjwtkci visitFormatted (Ljava/lang/String;Lnet/minecraft/unmapped/C_msihnwpc;Lnet/minecraft/unmapped/C_mdzwvxek;)Z
+	METHOD m_icktwjgz visitFormatted (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string, applying the formatting codes within.
 		COMMENT
 		COMMENT <p>The visit is in forward direction.
@@ -92,3 +70,25 @@ CLASS net/minecraft/unmapped/C_bridrspq net/minecraft/client/font/TextVisitFacto
 			COMMENT the style of the string
 		ARG 2 visitor
 			COMMENT the visitor
+	METHOD m_lcnitqwa visitFormatted (Lnet/minecraft/unmapped/C_xzalvetc;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
+		COMMENT Visits the code points for every literal string and the formatting codes
+		COMMENT supplied by the renderable.
+		COMMENT
+		COMMENT <p>The visit is in forward direction.
+		COMMENT
+		COMMENT @return {@code true} if the full string was visited, or {@code false} indicating
+		COMMENT the {@code visitor} terminated half-way
+		COMMENT @see StringVisitable#visit(StringVisitable.StyledVisitor, Style)
+		ARG 0 text
+		ARG 1 style
+		ARG 2 visitor
+	METHOD m_vhcoskrx visitRegularCharacter (Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;IC)Z
+		ARG 0 style
+		ARG 1 visitor
+		ARG 2 index
+		ARG 3 c
+	METHOD m_yabtffxv validateSurrogates (Ljava/lang/String;)Ljava/lang/String;
+		COMMENT {@return a new string that has all surrogate characters within}
+		COMMENT The characters are validated from an original string {@code text}.
+		ARG 0 text
+			COMMENT the original string

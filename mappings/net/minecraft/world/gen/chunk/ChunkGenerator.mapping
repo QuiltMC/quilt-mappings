@@ -1,61 +1,59 @@
-CLASS net/minecraft/unmapped/C_miblafgk net/minecraft/world/gen/chunk/ChunkGenerator
+CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGenerator
 	COMMENT In charge of shaping, adding biome specific surface blocks, and carving chunks,
 	COMMENT as well as populating the generated chunks with {@linkplain net.minecraft.world.gen.feature.Feature features} and {@linkplain net.minecraft.entity.Entity entities}.
 	COMMENT Biome placement starts here, however all vanilla and most modded chunk generators delegate this to a {@linkplain net.minecraft.world.biome.source.BiomeSource biome source}.
-	FIELD f_kgicefca populationSource Lnet/minecraft/unmapped/C_aywougja;
+	FIELD f_acfecigk populationSource Lnet/minecraft/unmapped/C_ajguowya;
 		COMMENT Used to control the population step without replacing the actual biome that comes from the original {@link #biomeSource}.
 		COMMENT
 		COMMENT <p>This is used by {@link FlatChunkGenerator} to overwrite biome properties like whether lakes generate, while preserving the original biome ID.
-	FIELD f_kupwsezv CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_mcwxzcai strongholds Ljava/util/List;
-	FIELD f_plhwnfil worldSeed J
-	FIELD f_wtaxpzrd biomeSource Lnet/minecraft/unmapped/C_aywougja;
-	FIELD f_zyispspy structuresConfig Lnet/minecraft/unmapped/C_ooznwmuz;
-	METHOD <init> (Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_ooznwmuz;J)V
+	FIELD f_drzpxatw biomeSource Lnet/minecraft/unmapped/C_ajguowya;
+	FIELD f_iaczxwcm strongholds Ljava/util/List;
+	FIELD f_lifnwhlp worldSeed J
+	FIELD f_vzeswpuk CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_ypspsiyz structuresConfig Lnet/minecraft/unmapped/C_zumwnzoo;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_zumwnzoo;J)V
 		ARG 1 populationSource
 		ARG 2 biomeSource
 		ARG 3 structuresConfig
 		ARG 4 worldSeed
-	METHOD <init> (Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_ooznwmuz;)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_zumwnzoo;)V
 		ARG 1 biomeSource
 		ARG 2 structuresConfig
-	METHOD m_brlbqtqm getSpawnHeight (Lnet/minecraft/unmapped/C_byoninpq;)I
-		ARG 1 world
-	METHOD m_bzjfnqmf isStrongholdStartingChunk (Lnet/minecraft/unmapped/C_utrzsrny;)Z
-		ARG 1 pos
-	METHOD m_dbafvzbu getCodec ()Lcom/mojang/serialization/Codec;
-	METHOD m_dmnqmuja getBiomeSource ()Lnet/minecraft/unmapped/C_aywougja;
-	METHOD m_fxztkubj getHeightOnGround (IILnet/minecraft/unmapped/C_ckeotzby$C_nbzqedkw;Lnet/minecraft/unmapped/C_byoninpq;)I
-		ARG 1 x
-		ARG 2 z
-		ARG 3 heightmap
-		ARG 4 world
-	METHOD m_gkhnclvp addStructureReferences (Lnet/minecraft/unmapped/C_rbthpkdl;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_rqmmmzwl;)V
-		COMMENT Finds all structures that the given chunk intersects, and adds references to their starting chunks to it.
-		COMMENT A radius of 8 chunks around the given chunk will be searched for structure starts.
-		ARG 1 world
-		ARG 2 accessor
-		ARG 3 chunk
-	METHOD m_glafleyw generateFeatures (Lnet/minecraft/unmapped/C_rbthpkdl;Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_zpzevjii;)V
-		ARG 3 accessor
-	METHOD m_gxzsdjbb setStructureStarts (Lnet/minecraft/unmapped/C_qdzvmxqw;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_rqmmmzwl;Lnet/minecraft/unmapped/C_wviludhr;J)V
+	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
+	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;J)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
 		ARG 1 registryManager
 		ARG 2 accessor
 		ARG 3 chunk
 		ARG 4 structureManager
 		ARG 5 worldSeed
-	METHOD m_iskndyvw getStructuresConfig ()Lnet/minecraft/unmapped/C_ooznwmuz;
-	METHOD m_julrgmyu generateStrongholdPositions ()V
-	METHOD m_khdxazwn populateEntities (Lnet/minecraft/unmapped/C_yefcmyze;)V
-		ARG 1 region
-	METHOD m_knbdrjws getWorldHeight ()I
-	METHOD m_mbvjtqpn getColumnSample (IILnet/minecraft/unmapped/C_byoninpq;)Lnet/minecraft/unmapped/C_vkmvpdyl;
+	METHOD m_blqkvkse getCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_dmhpibgx getColumnSample (IILnet/minecraft/unmapped/C_qpninoyb;)Lnet/minecraft/unmapped/C_lydpvmkv;
 		COMMENT Returns a sample of all the block states in a column for use in structure generation.
 		ARG 1 x
 		ARG 2 z
 		ARG 3 world
-	METHOD m_mopuqten locateStructure (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_fpbotmvv;Lnet/minecraft/unmapped/C_kkdaznyh;IZ)Lnet/minecraft/unmapped/C_kkdaznyh;
+	METHOD m_evqkkueh populateNoise (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
+		COMMENT Generates the base shape of the chunk out of the basic block states as decided by this chunk generator's config.
+		ARG 1 executor
+		ARG 3 accessor
+		ARG 4 chunk
+	METHOD m_eyzuuexw getHeight (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
+		COMMENT Returns the raw noise height of a column for use in structure generation.
+		ARG 1 x
+		ARG 2 z
+		ARG 3 heightmap
+		ARG 4 world
+	METHOD m_ffmeoonw generateFeatures (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_iijvezpz;)V
+		ARG 3 accessor
+	METHOD m_fmqnfjzb isStrongholdStartingChunk (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
+		ARG 1 pos
+	METHOD m_jbuktzxf getHeightOnGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
+		ARG 1 x
+		ARG 2 z
+		ARG 3 heightmap
+		ARG 4 world
+	METHOD m_netqupom locateStructure (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_hynzadkk;IZ)Lnet/minecraft/unmapped/C_hynzadkk;
 		COMMENT Tries to find the closest structure of a given type near a given block.
 		COMMENT <p>
 		COMMENT New chunks will only be generated up to the {@link net.minecraft.world.chunk.ChunkStatus#STRUCTURE_STARTS} phase by this method.
@@ -70,28 +68,30 @@ CLASS net/minecraft/unmapped/C_miblafgk net/minecraft/world/gen/chunk/ChunkGener
 			COMMENT the search radius in chunks around the chunk the given block position is in; a radius of 0 will only search in the given chunk
 		ARG 5 skipExistingChunks
 			COMMENT whether only structures that are not referenced by generated chunks (chunks past the STRUCTURE_STARTS stage) are returned, excluding strongholds
-	METHOD m_nmzkpqto getEntitySpawnList (Lnet/minecraft/unmapped/C_sfepklro;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_icxdqmro;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_vhgtymyu;
+	METHOD m_pbnzyeke withSeed (J)Lnet/minecraft/unmapped/C_kgfalbim;
+		ARG 1 seed
+	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_orlkpefs;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
 		ARG 1 biome
 		ARG 2 accessor
 		ARG 3 group
 		ARG 4 pos
-	METHOD m_ogcpucky getSeaLevel ()I
-	METHOD m_orzflafi withSeed (J)Lnet/minecraft/unmapped/C_miblafgk;
-		ARG 1 seed
-	METHOD m_ovehgach getHeight (IILnet/minecraft/unmapped/C_ckeotzby$C_nbzqedkw;Lnet/minecraft/unmapped/C_byoninpq;)I
-		COMMENT Returns the raw noise height of a column for use in structure generation.
-		ARG 1 x
-		ARG 2 z
-		ARG 3 heightmap
-		ARG 4 world
-	METHOD m_soolpyzw populateNoise (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_rqmmmzwl;)Ljava/util/concurrent/CompletableFuture;
-		COMMENT Generates the base shape of the chunk out of the basic block states as decided by this chunk generator's config.
-		ARG 1 executor
+	METHOD m_pvlcnhkg addStructureReferences (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
+		COMMENT Finds all structures that the given chunk intersects, and adds references to their starting chunks to it.
+		COMMENT A radius of 8 chunks around the given chunk will be searched for structure starts.
+		ARG 1 world
 		ARG 2 accessor
 		ARG 3 chunk
-	METHOD m_xerbljqk getMinimumY ()I
-	METHOD m_xxbxucow getHeightInGround (IILnet/minecraft/unmapped/C_ckeotzby$C_nbzqedkw;Lnet/minecraft/unmapped/C_byoninpq;)I
+	METHOD m_ruxnirnc getWorldHeight ()I
+	METHOD m_taborzul getSeaLevel ()I
+	METHOD m_uymgrluj generateStrongholdPositions ()V
+	METHOD m_wocuxbxx getHeightInGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
 		ARG 1 x
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
+	METHOD m_wvydnksi getStructuresConfig ()Lnet/minecraft/unmapped/C_zumwnzoo;
+	METHOD m_xoblypwv populateEntities (Lnet/minecraft/unmapped/C_ezymcfey;)V
+		ARG 1 region
+	METHOD m_xuesqjcb getMinimumY ()I
+	METHOD m_yhwflvjc getSpawnHeight (Lnet/minecraft/unmapped/C_qpninoyb;)I
+		ARG 1 world

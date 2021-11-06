@@ -1,38 +1,43 @@
-CLASS net/minecraft/unmapped/C_mrmbodxk net/minecraft/network/NetworkState
-	FIELD f_csaqxcpj HANDLER_STATE_MAP Ljava/util/Map;
-	FIELD f_gaueskjv stateId I
-	FIELD f_izmzjumc NULL_PACKET_ID_OR_MIN_STATE_ID I
-	FIELD f_jyctzwts packetHandlers Ljava/util/Map;
-	FIELD f_mfgebkkb STATES [Lnet/minecraft/unmapped/C_mrmbodxk;
-	FIELD f_wpcrezwh MAX_STATE_ID I
-	METHOD <init> (Ljava/lang/String;IILnet/minecraft/unmapped/C_mrmbodxk$C_sqmrxteg;)V
+CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
+	FIELD f_bkkbegfm STATES [Lnet/minecraft/unmapped/C_kxdobmrm;
+	FIELD f_cmujzmzi NULL_PACKET_ID_OR_MIN_STATE_ID I
+	FIELD f_hwzercpw MAX_STATE_ID I
+	FIELD f_jpcxqasc HANDLER_STATE_MAP Ljava/util/Map;
+	FIELD f_stwztcyj packetHandlers Ljava/util/Map;
+	FIELD f_vjkseuag stateId I
+	METHOD <init> (Ljava/lang/String;IILnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;)V
 		ARG 3 id
-	METHOD m_bamnpjxg getPacketHandlerState (Lnet/minecraft/unmapped/C_lrjrtjyz;)Lnet/minecraft/unmapped/C_mrmbodxk;
+		ARG 4 packetHandlerInitializer
+	METHOD m_gepqzzad getId ()I
+	METHOD m_gfhkubdw (Lnet/minecraft/unmapped/C_kxdobmrm;Ljava/lang/Class;)V
+	METHOD m_gxjpnmab getPacketHandlerState (Lnet/minecraft/unmapped/C_zyjtrjrl;)Lnet/minecraft/unmapped/C_kxdobmrm;
 		ARG 0 handler
-	METHOD m_dazzqpeg getId ()I
-	METHOD m_gheuwtxk getPacketId (Lnet/minecraft/unmapped/C_ddqxqexe;Lnet/minecraft/unmapped/C_lrjrtjyz;)Ljava/lang/Integer;
+	METHOD m_kxtwuehg getPacketId (Lnet/minecraft/unmapped/C_exeqxqdd;Lnet/minecraft/unmapped/C_zyjtrjrl;)Ljava/lang/Integer;
 		ARG 1 side
 		ARG 2 packet
-	METHOD m_lneruxov byId (I)Lnet/minecraft/unmapped/C_mrmbodxk;
+	METHOD m_mjjmcqbn createPacketHandlerInitializer ()Lnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;
+	METHOD m_voxurenl byId (I)Lnet/minecraft/unmapped/C_kxdobmrm;
 		ARG 0 id
-	METHOD m_nbqcmjjm createPacketHandlerInitializer ()Lnet/minecraft/unmapped/C_mrmbodxk$C_sqmrxteg;
-	METHOD m_oefrddxy getPacketHandler (Lnet/minecraft/unmapped/C_ddqxqexe;ILnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_lrjrtjyz;
+	METHOD m_yxddrfeo getPacketHandler (Lnet/minecraft/unmapped/C_exeqxqdd;ILnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_zyjtrjrl;
 		ARG 1 side
 		ARG 2 packetId
 		ARG 3 buf
-	CLASS C_sqmrxteg PacketHandlerInitializer
-		FIELD f_xcngcuaq packetHandlers Ljava/util/Map;
-		METHOD m_xzimymyt setup (Lnet/minecraft/unmapped/C_ddqxqexe;Lnet/minecraft/unmapped/C_mrmbodxk$C_zqqpjmml;)Lnet/minecraft/unmapped/C_mrmbodxk$C_sqmrxteg;
+	CLASS C_getxrmqs PacketHandlerInitializer
+		FIELD f_qaucgncx packetHandlers Ljava/util/Map;
+		METHOD m_tymymizx setup (Lnet/minecraft/unmapped/C_exeqxqdd;Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;)Lnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;
 			ARG 1 side
 			ARG 2 handler
-	CLASS C_zqqpjmml PacketHandler
-		FIELD f_dpzspuzb packetFactories Ljava/util/List;
-		FIELD f_sjzlhuef packetIds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
-		METHOD m_osvctifk register (Ljava/lang/Class;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_mrmbodxk$C_zqqpjmml;
+	CLASS C_lmmjpqqz PacketHandler
+		FIELD f_bzupszpd packetFactories Ljava/util/List;
+		FIELD f_feuhlzjs packetIds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		METHOD m_kfitcvso register (Ljava/lang/Class;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;
 			ARG 1 type
-		METHOD m_uowdoajr createPacket (ILnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_lrjrtjyz;
+			ARG 2 packetFactory
+		METHOD m_rjaodwou createPacket (ILnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_zyjtrjrl;
 			ARG 1 id
 			ARG 2 buf
-		METHOD m_vrafwyrt getId (Ljava/lang/Class;)Ljava/lang/Integer;
+		METHOD m_trywfarv getId (Ljava/lang/Class;)Ljava/lang/Integer;
 			ARG 1 packet
-		METHOD m_yhjgfjhv getPacketTypes ()Ljava/lang/Iterable;
+		METHOD m_vhjfgjhy getPacketTypes ()Ljava/lang/Iterable;
+		METHOD m_wfwlobvc (Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;)V
+			ARG 0 map

@@ -1,10 +1,14 @@
-CLASS net/minecraft/unmapped/C_gqkevcns net/minecraft/world/entity/EntityLike
+CLASS net/minecraft/unmapped/C_sncvekqg net/minecraft/world/entity/EntityLike
 	COMMENT A prototype of entity that's suitable for entity manager to handle.
-	METHOD m_awhpbnlj getBlockPos ()Lnet/minecraft/unmapped/C_kkdaznyh;
-	METHOD m_ciwehhaj isPlayer ()Z
-	METHOD m_eumplubf setRemoved (Lnet/minecraft/unmapped/C_srenftsa$C_udnhomme;)V
+	METHOD m_bjqxzvbg isPlayer ()Z
+	METHOD m_fbulpmue setRemoved (Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
 		ARG 1 reason
-	METHOD m_eysxymak streamPassengersAndSelf ()Ljava/util/stream/Stream;
+	METHOD m_ibdrkofs setListener (Lnet/minecraft/unmapped/C_ylpvpknw;)V
+		ARG 1 listener
+	METHOD m_idziptjx getBoundingBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
+	METHOD m_jklfpglz getUuid ()Ljava/util/UUID;
+	METHOD m_jlnbphwa getBlockPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_kamyxsye streamPassengersAndSelf ()Ljava/util/stream/Stream;
 		COMMENT Returns a stream consisting of this entity and its passengers in which
 		COMMENT this entity's passengers are iterated before this entity.
 		COMMENT
@@ -16,7 +20,15 @@ CLASS net/minecraft/unmapped/C_gqkevcns net/minecraft/world/entity/EntityLike
 		COMMENT @implNote The default implementation is very costly.
 		COMMENT
 		COMMENT @see #streamSelfAndPassengers()
-	METHOD m_kdwravlt streamSelfAndPassengers ()Ljava/util/stream/Stream;
+	METHOD m_msyenvzg shouldSave ()Z
+	METHOD m_pwvaqrpl getId ()I
+		COMMENT {@return the network ID of this entity}
+		COMMENT
+		COMMENT <p>Compared to the {@linkplain #getUuid() UUID}, the integer network ID is
+		COMMENT significantly smaller and more suitable for network transportation. However, it
+		COMMENT is not persistent across game runs. For persistent purposes such as commands
+		COMMENT or game data, use the UUID.
+	METHOD m_tlvarwdk streamSelfAndPassengers ()Ljava/util/stream/Stream;
 		COMMENT Returns a stream consisting of this entity and its passengers recursively.
 		COMMENT Each entity will appear before any of its passengers.
 		COMMENT
@@ -27,15 +39,3 @@ CLASS net/minecraft/unmapped/C_gqkevcns net/minecraft/world/entity/EntityLike
 		COMMENT @implNote The default implementation is not very efficient.
 		COMMENT
 		COMMENT @see #streamPassengersAndSelf()
-	METHOD m_lnbwuyrb shouldSave ()Z
-	METHOD m_lprqavwp getId ()I
-		COMMENT {@return the network ID of this entity}
-		COMMENT
-		COMMENT <p>Compared to the {@linkplain #getUuid() UUID}, the integer network ID is
-		COMMENT significantly smaller and more suitable for network transportation. However, it
-		COMMENT is not persistent across game runs. For persistent purposes such as commands
-		COMMENT or game data, use the UUID.
-	METHOD m_sfokrdbi setListener (Lnet/minecraft/unmapped/C_wnkpvply;)V
-		ARG 1 listener
-	METHOD m_xjtpizdi getBoundingBox ()Lnet/minecraft/unmapped/C_eogzjcbh;
-	METHOD m_zlgpflkj getUuid ()Ljava/util/UUID;

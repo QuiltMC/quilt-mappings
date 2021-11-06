@@ -1,59 +1,61 @@
-CLASS net/minecraft/unmapped/C_xstqqjuq net/minecraft/entity/mob/EndermanEntity
-	FIELD f_bnawbdwc ageWhenTargetSet I
-	FIELD f_bpwmthci ATTACKING_SPEED_BOOST Lnet/minecraft/unmapped/C_msqsqbdh;
-	FIELD f_iksjuasb ANGRY Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_ixmtdyew ATTACKING_SPEED_BOOST_ID Ljava/util/UUID;
-	FIELD f_jbhxgsgh targetUuid Ljava/util/UUID;
-	FIELD f_nqgcxacv CARRIED_BLOCK Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_rqzztpao ANGER_TIME_RANGE Lnet/minecraft/unmapped/C_ivtmlivh;
-	FIELD f_scqjallz lastAngrySoundAge I
-	FIELD f_towjhuvu angerTime I
-	FIELD f_ynodgsyp PROVOKED Lnet/minecraft/unmapped/C_yxacmnir;
-	METHOD m_amtsoccd playAngrySound ()V
-	METHOD m_ewavqjkq isProvoked ()Z
-	METHOD m_gfbokufb teleportTo (Lnet/minecraft/unmapped/C_srenftsa;)Z
+CLASS net/minecraft/unmapped/C_qujqqtsx net/minecraft/entity/mob/EndermanEntity
+	FIELD f_bsaujski ANGRY Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_ctosbzlf CREEPY_STARE_SOUND_DELAY I
+	FIELD f_cwdbwanb ageWhenTargetSet I
+	FIELD f_hgsgxhbj targetUuid Ljava/util/UUID;
+	FIELD f_ichtmwpb ATTACKING_SPEED_BOOST Lnet/minecraft/unmapped/C_hdbqsqsm;
+	FIELD f_oaptzzqr ANGER_TIME_RANGE Lnet/minecraft/unmapped/C_hvilmtvi;
+	FIELD f_pysgdony PROVOKED Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_ueojapuk MIN_ANGER_LOSS_TIME I
+	FIELD f_uvuhjwot angerTime I
+	FIELD f_vcaxcgqn CARRIED_BLOCK Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_weydtmxi ATTACKING_SPEED_BOOST_ID Ljava/util/UUID;
+	FIELD f_zllajqcs lastAngrySoundAge I
+	METHOD m_bfukobfg teleportTo (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
-	METHOD m_iehcjzos createEndermanAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_sujrwhet;
-	METHOD m_nkixdser isPlayerStaring (Lnet/minecraft/unmapped/C_oqcyprzj;)Z
+	METHOD m_brngeofr setProvoked ()V
+	METHOD m_csjlfysw teleportRandomly ()Z
+	METHOD m_dccostma playAngrySound ()V
+	METHOD m_jfjftevp isAngry ()Z
+	METHOD m_qkjqvawe isProvoked ()Z
+	METHOD m_resdxikn isPlayerStaring (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		ARG 1 player
-	METHOD m_pubedewz getCarriedBlock ()Lnet/minecraft/unmapped/C_pmeibtxt;
-	METHOD m_pvetfjfj isAngry ()Z
-	METHOD m_rfoegnrb setProvoked ()V
-	METHOD m_uwbifzqs teleportTo (DDD)Z
+	METHOD m_sozjchei createEndermanAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_sqzfibwu teleportTo (DDD)Z
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
-	METHOD m_vvvatxvs setCarriedBlock (Lnet/minecraft/unmapped/C_pmeibtxt;)V
+	METHOD m_svxtavvv setCarriedBlock (Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 state
-	METHOD m_wsyfljsc teleportRandomly ()Z
-	CLASS C_gjejoknh PickUpBlockGoal
-		FIELD f_quliloti enderman Lnet/minecraft/unmapped/C_xstqqjuq;
-		METHOD <init> (Lnet/minecraft/unmapped/C_xstqqjuq;)V
+	METHOD m_zwedebup getCarriedBlock ()Lnet/minecraft/unmapped/C_txtbiemp;
+	CLASS C_coxwnrgt TeleportTowardsPlayerGoal
+		FIELD f_ayptoett validTargetPredicate Lnet/minecraft/unmapped/C_cjtyhinh;
+		FIELD f_ocwaenwu enderman Lnet/minecraft/unmapped/C_qujqqtsx;
+		FIELD f_odfgpzyi ticksSinceUnseenTeleport I
+		FIELD f_vspzcmwx targetPlayer Lnet/minecraft/unmapped/C_jzrpycqo;
+		FIELD f_wnlqjvgd lookAtPlayerWarmup I
+		FIELD f_ygfmfvor staringPlayerPredicate Lnet/minecraft/unmapped/C_cjtyhinh;
+		METHOD <init> (Lnet/minecraft/unmapped/C_qujqqtsx;Ljava/util/function/Predicate;)V
 			ARG 1 enderman
-	CLASS C_jbermudy ChasePlayerGoal
-		FIELD f_fxvkupki target Lnet/minecraft/unmapped/C_ndyxaxsu;
-		FIELD f_sxmyvxkj enderman Lnet/minecraft/unmapped/C_xstqqjuq;
-		METHOD <init> (Lnet/minecraft/unmapped/C_xstqqjuq;)V
+		METHOD m_wjodlnnr (Lnet/minecraft/unmapped/C_qujqqtsx;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+			ARG 1 playerEntity
+	CLASS C_hnkojejg PickUpBlockGoal
+		FIELD f_itoliluq enderman Lnet/minecraft/unmapped/C_qujqqtsx;
+		METHOD <init> (Lnet/minecraft/unmapped/C_qujqqtsx;)V
 			ARG 1 enderman
-	CLASS C_mdkhrxsx PlaceBlockGoal
-		FIELD f_mohhuqhj enderman Lnet/minecraft/unmapped/C_xstqqjuq;
-		METHOD <init> (Lnet/minecraft/unmapped/C_xstqqjuq;)V
+	CLASS C_xsxrhkdm PlaceBlockGoal
+		FIELD f_jhquhhom enderman Lnet/minecraft/unmapped/C_qujqqtsx;
+		METHOD <init> (Lnet/minecraft/unmapped/C_qujqqtsx;)V
 			ARG 1 enderman
-		METHOD m_cneraism canPlaceOn (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+		METHOD m_msiarenc canPlaceOn (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 1 world
 			ARG 2 posAbove
 			ARG 3 carriedState
 			ARG 4 stateAbove
 			ARG 5 state
 			ARG 6 pos
-	CLASS C_tgrnwxoc TeleportTowardsPlayerGoal
-		FIELD f_dgvjqlnw lookAtPlayerWarmup I
-		FIELD f_iyzpgfdo ticksSinceUnseenTeleport I
-		FIELD f_rovfmfgy staringPlayerPredicate Lnet/minecraft/unmapped/C_hnihytjc;
-		FIELD f_tteotpya validTargetPredicate Lnet/minecraft/unmapped/C_hnihytjc;
-		FIELD f_uwneawco enderman Lnet/minecraft/unmapped/C_xstqqjuq;
-		FIELD f_xwmczpsv targetPlayer Lnet/minecraft/unmapped/C_oqcyprzj;
-		METHOD <init> (Lnet/minecraft/unmapped/C_xstqqjuq;Ljava/util/function/Predicate;)V
+	CLASS C_ydumrebj ChasePlayerGoal
+		FIELD f_ikpukvxf target Lnet/minecraft/unmapped/C_usxaxydn;
+		FIELD f_jkxvymxs enderman Lnet/minecraft/unmapped/C_qujqqtsx;
+		METHOD <init> (Lnet/minecraft/unmapped/C_qujqqtsx;)V
 			ARG 1 enderman
-		METHOD m_rnnldojw (Lnet/minecraft/unmapped/C_xstqqjuq;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
-			ARG 1 playerEntity

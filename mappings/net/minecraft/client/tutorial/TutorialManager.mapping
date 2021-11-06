@@ -1,21 +1,31 @@
-CLASS net/minecraft/unmapped/C_fcjosoqe net/minecraft/client/tutorial/TutorialManager
-	FIELD f_cznxakjz currentHandler Lnet/minecraft/unmapped/C_dludwtgm;
-	FIELD f_mgphohvy entries Ljava/util/List;
-	FIELD f_rzwyorrs bundleTutorial Lnet/minecraft/unmapped/C_ygtgtzzw;
-	FIELD f_ynscerhw client Lnet/minecraft/unmapped/C_diboefya;
-	METHOD <init> (Lnet/minecraft/unmapped/C_diboefya;Lnet/minecraft/unmapped/C_nhbtpcsl;)V
+CLASS net/minecraft/unmapped/C_eqosojcf net/minecraft/client/tutorial/TutorialManager
+	FIELD f_srroywzr bundleTutorial Lnet/minecraft/unmapped/C_wzztgtgy;
+	FIELD f_whrecsny client Lnet/minecraft/unmapped/C_ayfeobid;
+	FIELD f_yvhohpgm entries Ljava/util/List;
+	FIELD f_zjkaxnzc currentHandler Lnet/minecraft/unmapped/C_mgtwduld;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_lscptbhn;)V
 		ARG 1 client
 		ARG 2 options
-	METHOD m_afmzqunk getClient ()Lnet/minecraft/unmapped/C_diboefya;
-	METHOD m_ckdpvmdm onInventoryOpened ()V
-	METHOD m_eabeniuh add (Lnet/minecraft/unmapped/C_dnsopzbf;I)V
+	METHOD m_cbtsjrjj (Lnet/minecraft/unmapped/C_fbzposnd;Lnet/minecraft/unmapped/C_eqosojcf$C_qnzwndri;)Z
+		ARG 1 entry
+	METHOD m_cxsctafw createHandler ()V
+	METHOD m_gdoijmnu onUpdateMouse (DD)V
+		ARG 1 deltaX
+		ARG 3 deltaY
+	METHOD m_gdrypffj destroyHandler ()V
+	METHOD m_huinebae add (Lnet/minecraft/unmapped/C_fbzposnd;I)V
 		COMMENT Adds an active tutorial entry to this manager and the corresponding toast
 		COMMENT to the client's toast manager.
 		ARG 1 toast
 			COMMENT the tutorial toast
 		ARG 2 ticks
 			COMMENT the time the toast will last, in client ticks
-	METHOD m_fqaubmqm onPickupSlotClick (Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_kywxadds;Lnet/minecraft/unmapped/C_mhietucq;)V
+	METHOD m_iidgujyx setStep (Lnet/minecraft/unmapped/C_goqonutr;)V
+		ARG 1 step
+	METHOD m_kcytucru tick ()V
+	METHOD m_knuqzmfa getClient ()Lnet/minecraft/unmapped/C_ayfeobid;
+	METHOD m_mdmvpdkc onInventoryOpened ()V
+	METHOD m_mqmbuaqf onPickupSlotClick (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_qcuteihm;)V
 		COMMENT Called when a player performs a {@link net.minecraft.screen.slot.SlotActionType#PICKUP
 		COMMENT pickup slot action} in a screen handler. Used to trigger the bundle tutorial.
 		COMMENT
@@ -23,45 +33,35 @@ CLASS net/minecraft/unmapped/C_fcjosoqe net/minecraft/client/tutorial/TutorialMa
 		ARG 1 cursorStack
 		ARG 2 slotStack
 		ARG 3 clickType
-	METHOD m_jffpyrdg destroyHandler ()V
-	METHOD m_jjrjstbc (Lnet/minecraft/unmapped/C_dnsopzbf;Lnet/minecraft/unmapped/C_fcjosoqe$C_irdnwznq;)Z
-		ARG 1 entry
-	METHOD m_jyrpmvso onSlotUpdate (Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 stack
-	METHOD m_kjjbsvvn tick (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_nzgeotee;)V
+	METHOD m_nvvsbjjk tick (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_eetoegzn;)V
 		ARG 1 world
 		ARG 2 hitResult
-	METHOD m_lvshnnnz onBlockBreaking (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;F)V
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 state
-		ARG 4 progress
-	METHOD m_pyfwikzt onMovement (Lnet/minecraft/unmapped/C_spamearg;)V
-		ARG 1 input
-	METHOD m_uhwraxdq keyToText (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tdwiqadr;
-		ARG 0 name
-	METHOD m_unmjiodg onUpdateMouse (DD)V
-		ARG 1 deltaX
-		ARG 3 deltaY
-	METHOD m_urcutyck tick ()V
-	METHOD m_wfatcsxc createHandler ()V
-	METHOD m_wvmtjcmo isInSurvival ()Z
+	METHOD m_omcjtmvw isInSurvival ()Z
 		COMMENT {@return whether the current game mode of the client is {@linkplain net.minecraft.world.GameMode#SURVIVAL survival}}
-	METHOD m_xyjugdii setStep (Lnet/minecraft/unmapped/C_rtunoqog;)V
-		ARG 1 step
-	METHOD m_zuiudpxq remove (Lnet/minecraft/unmapped/C_dnsopzbf;)V
+	METHOD m_osvmpryj onSlotUpdate (Lnet/minecraft/unmapped/C_sddaxwyk;)V
+		ARG 1 stack
+	METHOD m_qdxarwhu keyToText (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 name
+	METHOD m_qxpduiuz remove (Lnet/minecraft/unmapped/C_fbzposnd;)V
 		COMMENT Removes an active tutorial from this manager if it's present and hides
 		COMMENT the toast.
 		ARG 1 toast
 			COMMENT the tutorial toast
-	CLASS C_irdnwznq Entry
-		FIELD f_mgyvsooo age I
-		FIELD f_mneqpgof expiry I
-		FIELD f_orjoeaid toast Lnet/minecraft/unmapped/C_dnsopzbf;
-		METHOD <init> (Lnet/minecraft/unmapped/C_dnsopzbf;I)V
+	METHOD m_tzkiwfyp onMovement (Lnet/minecraft/unmapped/C_graemaps;)V
+		ARG 1 input
+	METHOD m_znnnhsvl onBlockBreaking (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;F)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 state
+		ARG 4 progress
+	CLASS C_qnzwndri Entry
+		FIELD f_diaeojro toast Lnet/minecraft/unmapped/C_fbzposnd;
+		FIELD f_fogpqenm expiry I
+		FIELD f_ooosvygm age I
+		METHOD <init> (Lnet/minecraft/unmapped/C_fbzposnd;I)V
 			ARG 1 toast
 			ARG 2 expiry
-		METHOD m_wcisbzqr tick ()Z
+		METHOD m_rqzbsicw tick ()Z
 			COMMENT Ticks this entry on a client tick.
 			COMMENT
 			COMMENT @return {@code true} if this entry should no longer tick

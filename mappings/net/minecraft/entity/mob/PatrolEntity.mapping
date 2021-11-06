@@ -1,35 +1,38 @@
-CLASS net/minecraft/unmapped/C_oqchhwyl net/minecraft/entity/mob/PatrolEntity
-	FIELD f_cyexjbag patrolLeader Z
-	FIELD f_oprztaom patrolling Z
-	FIELD f_tgvxaagq patrolTarget Lnet/minecraft/unmapped/C_kkdaznyh;
-	METHOD m_ahzzgbiv isRaidCenterSet ()Z
-	METHOD m_fxadzcys hasPatrolTarget ()Z
-	METHOD m_pdamgodc setPatrolling (Z)V
+CLASS net/minecraft/unmapped/C_lywhhcqo net/minecraft/entity/mob/PatrolEntity
+	FIELD f_gabjxeyc patrolLeader Z
+	FIELD f_moatzrpo patrolling Z
+	FIELD f_qgaaxvgt patrolTarget Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_adxqfnwy getPatrolTarget ()Lnet/minecraft/unmapped/C_hynzadkk;
+		COMMENT Returns the position this patrol entity is walking to.
+	METHOD m_cdogmadp setPatrolling (Z)V
 		ARG 1 patrolling
-	METHOD m_pgffudbi setPatrolLeader (Z)V
+	METHOD m_ibduffgp setPatrolLeader (Z)V
 		ARG 1 patrolLeader
-	METHOD m_qinpikzi isPatrolLeader ()Z
-	METHOD m_ttmdotwy canLead ()Z
-	METHOD m_uwxptsqs canSpawn (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)Z
+	METHOD m_izkipniq isPatrolLeader ()Z
+	METHOD m_lbnwsucw hasNoRaid ()Z
+	METHOD m_qoyleckx setRandomPatrolTarget ()V
+	METHOD m_sqstpxwu canSpawn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_uzzvxofv;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/Random;)Z
 		ARG 0 type
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
 		ARG 4 random
-	METHOD m_xkcelyoq setRandomPatrolTarget ()V
-	METHOD m_yelomgmu hasNoRaid ()Z
-	METHOD m_ywnfqxda getPatrolTarget ()Lnet/minecraft/unmapped/C_kkdaznyh;
-		COMMENT Returns the position this patrol entity is walking to.
-	METHOD m_yzzremow setPatrolTarget (Lnet/minecraft/unmapped/C_kkdaznyh;)V
+	METHOD m_syczdaxf hasPatrolTarget ()Z
+	METHOD m_vibgzzha isRaidCenterSet ()Z
+	METHOD m_womerzzy setPatrolTarget (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 targetPos
-	CLASS C_jxnjkhai PatrolGoal
-		FIELD f_bmzccudr followSpeed D
-		FIELD f_gsaeugym leaderSpeed D
-		FIELD f_htoatpvi entity Lnet/minecraft/unmapped/C_oqchhwyl;
-		FIELD f_kppjosvh nextPatrolSearchTime J
-		METHOD <init> (Lnet/minecraft/unmapped/C_oqchhwyl;DD)V
+	METHOD m_zmfgqqak canLead ()Z
+	CLASS C_iahkjnxj PatrolGoal
+		FIELD f_hvsojppk nextPatrolSearchTime J
+		FIELD f_ivptaoth entity Lnet/minecraft/unmapped/C_lywhhcqo;
+		FIELD f_mygueasg leaderSpeed D
+		FIELD f_rducczmb followSpeed D
+		FIELD f_usnfitjk FAILED_NAVIGATION_COOLDOWN I
+		METHOD <init> (Lnet/minecraft/unmapped/C_lywhhcqo;DD)V
 			ARG 1 entity
 			ARG 2 leaderSpeed
 			ARG 4 followSpeed
-		METHOD m_aajudxyr wander ()Z
-		METHOD m_pljlwysw findPatrolTargets ()Ljava/util/List;
+		METHOD m_eihitsev (Lnet/minecraft/unmapped/C_lywhhcqo;)Z
+			ARG 1 entity
+		METHOD m_ryxdujaa wander ()Z
+		METHOD m_wsywljlp findPatrolTargets ()Ljava/util/List;

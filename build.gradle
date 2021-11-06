@@ -1,10 +1,10 @@
 buildscript {
 	repositories {
-		mavenCentral()
 		maven {
-			name "Quilt Repositiory"
-			url "https://maven.quiltmc.org/repository/release"
+			name 'Quilt Releases'
+			url 'https://maven.quiltmc.org/repository/release/'
 		}
+		mavenCentral()
 		maven {
 			name "Fabric Repository"
 			url 'https://maven.fabricmc.net'
@@ -16,7 +16,7 @@ buildscript {
 		classpath "net.fabricmc:stitch:${project.stitch_version}"
 		classpath "commons-io:commons-io:2.8.0"
 		classpath 'de.undercouch:gradle-download-task:4.1.1'
-		classpath 'net.fabricmc:tiny-remapper:0.6.0'
+		classpath 'org.quiltmc:tiny-remapper:0.7.1'
 		classpath "net.fabricmc.unpick:unpick:${project.unpick_version}"
 		classpath "net.fabricmc.unpick:unpick-format-utils:${project.unpick_version}"
 	}
@@ -34,7 +34,7 @@ plugins {
 
 def USE_SNAPSHOT_HASHES = true
 
-def minecraft_version = "21w41a"
+def minecraft_version = "21w44a"
 
 def ENV = System.getenv()
 // Fetch build number from Github Actions

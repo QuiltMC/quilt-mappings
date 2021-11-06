@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_zzqpyqmh net/minecraft/util/math/BlockBox
+CLASS net/minecraft/unmapped/C_hmqypqzz net/minecraft/util/math/BlockBox
 	COMMENT A mutable box with integer coordinates. The box is axis-aligned and the
 	COMMENT coordinates are inclusive.
 	COMMENT
@@ -7,17 +7,17 @@ CLASS net/minecraft/unmapped/C_zzqpyqmh net/minecraft/util/math/BlockBox
 	COMMENT they are not modified.
 	COMMENT
 	COMMENT @see Box
-	FIELD f_cxrpjppk minZ I
-	FIELD f_gugkrlnl maxZ I
-	FIELD f_howzmcav maxY I
-	FIELD f_jevfirmn minX I
-	FIELD f_kxwjwzzr minY I
-	FIELD f_tunizqev LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_wafdubys CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_kppjprxc minZ I
+	FIELD f_lnlrkgug maxZ I
+	FIELD f_nmrifvej minX I
+	FIELD f_rbwpmglx maxX I
+	FIELD f_rzzwjwxk minY I
+	FIELD f_sybudfaw CODEC Lcom/mojang/serialization/Codec;
 		COMMENT A codec that stores a block box as an int array. In the serialized array,
 		COMMENT the ordered elements are {@link #minX}, {@link #minY}, {@link #minZ},
 		COMMENT {@link #maxX}, {@link #maxY}, {@link #maxZ}.
-	FIELD f_xlgmpwbr maxX I
+	FIELD f_vacmzwoh maxY I
+	FIELD f_veqzinut LOGGER Lorg/apache/logging/log4j/Logger;
 	METHOD <init> (IIIIII)V
 		ARG 1 minX
 		ARG 2 minY
@@ -25,37 +25,38 @@ CLASS net/minecraft/unmapped/C_zzqpyqmh net/minecraft/util/math/BlockBox
 		ARG 4 maxX
 		ARG 5 maxY
 		ARG 6 maxZ
-	METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		COMMENT Creates a box enclosing only {@code pos}.
 		ARG 1 pos
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_bjejrotm getMaxZ ()I
-	METHOD m_cqrdcwbi getMinX ()I
-	METHOD m_craaqlft intersects (Lnet/minecraft/unmapped/C_zzqpyqmh;)Z
-		ARG 1 other
-	METHOD m_ewusalfx getMinY ()I
-	METHOD m_ihhdvnbe (Ljava/util/stream/IntStream;)Lcom/mojang/serialization/DataResult;
+	METHOD m_akaemkyq getBlockCountZ ()I
+	METHOD m_bmwsfrdw contains (Lnet/minecraft/unmapped/C_ceivtqhh;)Z
+		ARG 1 vec
+	METHOD m_cjnoampu move (Lnet/minecraft/unmapped/C_ceivtqhh;)Lnet/minecraft/unmapped/C_hmqypqzz;
+		ARG 1 vec
+	METHOD m_ebnvdhhi (Ljava/util/stream/IntStream;)Lcom/mojang/serialization/DataResult;
 		ARG 0 values
-	METHOD m_iouiozij ([I)Lnet/minecraft/unmapped/C_zzqpyqmh;
-		ARG 0 array
-	METHOD m_ixnydefe create (Lnet/minecraft/unmapped/C_hhqtviec;Lnet/minecraft/unmapped/C_hhqtviec;)Lnet/minecraft/unmapped/C_zzqpyqmh;
+	METHOD m_efedynxi create (Lnet/minecraft/unmapped/C_ceivtqhh;Lnet/minecraft/unmapped/C_ceivtqhh;)Lnet/minecraft/unmapped/C_hmqypqzz;
 		ARG 0 first
 		ARG 1 second
-	METHOD m_kayahmun forEachVertex (Ljava/util/function/Consumer;)V
-		ARG 1 consumer
-	METHOD m_ksfzoock getCenter ()Lnet/minecraft/unmapped/C_kkdaznyh;
-		COMMENT @implNote Biased toward the minimum bound corner of the box.
-	METHOD m_ntdkzhdn encompass (Lnet/minecraft/unmapped/C_zzqpyqmh;)Lnet/minecraft/unmapped/C_zzqpyqmh;
-		ARG 1 box
-	METHOD m_oxvvkqcv getDimensions ()Lnet/minecraft/unmapped/C_hhqtviec;
-	METHOD m_ptkflnvf encompass (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_zzqpyqmh;
+	METHOD m_emghvznq offset (III)Lnet/minecraft/unmapped/C_hmqypqzz;
+		COMMENT Creates a new box that is translated by {@code x}, {@code y}, {@code z}
+		COMMENT on each axis from this box.
+		COMMENT
+		COMMENT @return the new box created
+		COMMENT @see #move(int, int, int)
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_ftgzbosu getMaxX ()I
+	METHOD m_fvnlfktp encompass (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hmqypqzz;
 		COMMENT Expands this box to encompass the {@code pos}.
 		COMMENT
 		COMMENT @return this box, for chaining
 		ARG 1 pos
 			COMMENT the pos to encompass
-	METHOD m_qnejtjgg rotated (IIIIIIIIILnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_zzqpyqmh;
+	METHOD m_ggjtjenq rotated (IIIIIIIIILnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_hmqypqzz;
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
@@ -66,39 +67,38 @@ CLASS net/minecraft/unmapped/C_zzqpyqmh net/minecraft/util/math/BlockBox
 		ARG 7 sizeY
 		ARG 8 sizeZ
 		ARG 9 facing
-	METHOD m_qnzvhgme offset (III)Lnet/minecraft/unmapped/C_zzqpyqmh;
-		COMMENT Creates a new box that is translated by {@code x}, {@code y}, {@code z}
-		COMMENT on each axis from this box.
-		COMMENT
-		COMMENT @return the new box created
-		COMMENT @see #move(int, int, int)
-		ARG 1 x
-		ARG 2 y
-		ARG 3 z
-	METHOD m_qvcqkrwq getBlockCountY ()I
-	METHOD m_qykmeaka getBlockCountZ ()I
-	METHOD m_sodzfvwi (Lnet/minecraft/unmapped/C_zzqpyqmh;)Ljava/util/stream/IntStream;
+	METHOD m_gsadqihu getMinZ ()I
+	METHOD m_ibwcdrqc getMinX ()I
+	METHOD m_iwvfzdos (Lnet/minecraft/unmapped/C_hmqypqzz;)Ljava/util/stream/IntStream;
 		ARG 0 box
-	METHOD m_tcvxqftw move (III)Lnet/minecraft/unmapped/C_zzqpyqmh;
-		ARG 1 dx
-		ARG 2 dy
-		ARG 3 dz
-	METHOD m_trtbfwhp getBlockCountX ()I
-	METHOD m_uhiqdasg getMinZ ()I
-	METHOD m_umzjpkiy encompass (Ljava/lang/Iterable;)Ljava/util/Optional;
-		ARG 0 boxes
-	METHOD m_upmaonjc move (Lnet/minecraft/unmapped/C_hhqtviec;)Lnet/minecraft/unmapped/C_zzqpyqmh;
-		ARG 1 vec
-	METHOD m_usobzgtf getMaxX ()I
-	METHOD m_uuxkmsxu encompassPositions (Ljava/lang/Iterable;)Ljava/util/Optional;
-		ARG 0 positions
-	METHOD m_vdsoixgk infinite ()Lnet/minecraft/unmapped/C_zzqpyqmh;
-		COMMENT Creates an all-encompassing, infinite box.
-	METHOD m_wcywtckj intersectsXZ (IIII)Z
+	METHOD m_jizoiuoi ([I)Lnet/minecraft/unmapped/C_hmqypqzz;
+		ARG 0 array
+	METHOD m_jkctwycw intersectsXZ (IIII)Z
 		ARG 1 minX
 		ARG 2 minZ
 		ARG 3 maxX
 		ARG 4 maxZ
-	METHOD m_wdrfswmb contains (Lnet/minecraft/unmapped/C_hhqtviec;)Z
-		ARG 1 vec
-	METHOD m_xmdngzwn getMaxY ()I
+	METHOD m_kcoozfsk getCenter ()Lnet/minecraft/unmapped/C_hynzadkk;
+		COMMENT @implNote Biased toward the minimum bound corner of the box.
+	METHOD m_kgxiosdv infinite ()Lnet/minecraft/unmapped/C_hmqypqzz;
+		COMMENT Creates an all-encompassing, infinite box.
+	METHOD m_mtorjejb getMaxZ ()I
+	METHOD m_ndhzkdtn encompass (Lnet/minecraft/unmapped/C_hmqypqzz;)Lnet/minecraft/unmapped/C_hmqypqzz;
+		ARG 1 box
+	METHOD m_numhayak forEachVertex (Ljava/util/function/Consumer;)V
+		ARG 1 consumer
+	METHOD m_nwzgndmx getMaxY ()I
+	METHOD m_phwfbtrt getBlockCountX ()I
+	METHOD m_qwrkqcvq getBlockCountY ()I
+	METHOD m_tflqaarc intersects (Lnet/minecraft/unmapped/C_hmqypqzz;)Z
+		ARG 1 other
+	METHOD m_uxsmkxuu encompassPositions (Ljava/lang/Iterable;)Ljava/util/Optional;
+		ARG 0 positions
+	METHOD m_vcqkvvxo getDimensions ()Lnet/minecraft/unmapped/C_ceivtqhh;
+	METHOD m_wtfqxvct move (III)Lnet/minecraft/unmapped/C_hmqypqzz;
+		ARG 1 dx
+		ARG 2 dy
+		ARG 3 dz
+	METHOD m_xflasuwe getMinY ()I
+	METHOD m_yikpjzmu encompass (Ljava/lang/Iterable;)Ljava/util/Optional;
+		ARG 0 boxes

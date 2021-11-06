@@ -1,16 +1,9 @@
-CLASS net/minecraft/unmapped/C_ahjcfmsg net/minecraft/screen/ScreenHandlerContext
+CLASS net/minecraft/unmapped/C_gsmfcjha net/minecraft/screen/ScreenHandlerContext
 	COMMENT Screen handler contexts allow screen handlers to interact with the
 	COMMENT logical server's world safely.
-	FIELD f_uloqshpq EMPTY Lnet/minecraft/unmapped/C_ahjcfmsg;
+	FIELD f_qphsqolu EMPTY Lnet/minecraft/unmapped/C_gsmfcjha;
 		COMMENT The dummy screen handler context for clientside screen handlers.
-	METHOD m_aflvgmgs (Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Ljava/util/Optional;
-		ARG 1 world
-		ARG 2 pos
-	METHOD m_mmvghtyj create (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_ahjcfmsg;
-		COMMENT Returns an active screen handler context. Used on the logical server.
-		ARG 0 world
-		ARG 1 pos
-	METHOD m_phwzhnve get (Ljava/util/function/BiFunction;Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD m_evnhzwhp get (Ljava/util/function/BiFunction;Ljava/lang/Object;)Ljava/lang/Object;
 		COMMENT Gets a value from this context's world and position
 		COMMENT with a {@link BiFunction} getter.
 		COMMENT
@@ -20,7 +13,18 @@ CLASS net/minecraft/unmapped/C_ahjcfmsg net/minecraft/screen/ScreenHandlerContex
 			COMMENT a function that gets a non-null value from this context's world and position
 		ARG 2 defaultValue
 			COMMENT a fallback default value, used if this context is empty
-	METHOD m_pnsiwvpz get (Ljava/util/function/BiFunction;)Ljava/util/Optional;
+	METHOD m_jythgvmm create (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_gsmfcjha;
+		COMMENT Returns an active screen handler context. Used on the logical server.
+		ARG 0 world
+		ARG 1 pos
+	METHOD m_nsmrddaz run (Ljava/util/function/BiConsumer;)V
+		COMMENT Runs a {@link BiConsumer} with this context's world and position
+		COMMENT if this context is active.
+		ARG 1 function
+	METHOD m_sgmgvlfa (Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
+		ARG 1 world
+		ARG 2 pos
+	METHOD m_zpvwisnp get (Ljava/util/function/BiFunction;)Ljava/util/Optional;
 		COMMENT Gets an optional value from this context's world and position
 		COMMENT with a {@link BiFunction} getter.
 		COMMENT
@@ -28,7 +32,3 @@ CLASS net/minecraft/unmapped/C_ahjcfmsg net/minecraft/screen/ScreenHandlerContex
 		COMMENT         or {@link Optional#empty()} if this context is empty
 		ARG 1 getter
 			COMMENT a function that gets a non-null value from this context's world and position
-	METHOD m_zaddrmsn run (Ljava/util/function/BiConsumer;)V
-		COMMENT Runs a {@link BiConsumer} with this context's world and position
-		COMMENT if this context is active.
-		ARG 1 function

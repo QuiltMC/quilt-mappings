@@ -1,25 +1,26 @@
-CLASS net/minecraft/unmapped/C_yyierdsh net/minecraft/client/render/model/json/ModelVariantMap
-	FIELD f_irjqdphx multipartModel Lnet/minecraft/unmapped/C_zosvggtk;
-	FIELD f_zfwcmsgy variantMap Ljava/util/Map;
+CLASS net/minecraft/unmapped/C_hsdreiyy net/minecraft/client/render/model/json/ModelVariantMap
+	FIELD f_xhpdqjri multipartModel Lnet/minecraft/unmapped/C_ktggvsoz;
+	FIELD f_ygsmcwfz variantMap Ljava/util/Map;
 	METHOD <init> (Ljava/util/List;)V
 		ARG 1 variantMapList
-	METHOD <init> (Ljava/util/Map;Lnet/minecraft/unmapped/C_zosvggtk;)V
+	METHOD <init> (Ljava/util/Map;Lnet/minecraft/unmapped/C_ktggvsoz;)V
 		ARG 1 variantMap
 		ARG 2 multipartModel
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_empumpyz getAllModels ()Ljava/util/Set;
-	METHOD m_jmbpnxya containsVariant (Ljava/lang/String;)Z
+	METHOD m_ayxnpbmj containsVariant (Ljava/lang/String;)Z
 		COMMENT Checks if there's a variant under the {@code key} in this map.
 		COMMENT
 		COMMENT @return {@code true} if the {@code key} has a variant, {@code false} otherwise
 		ARG 1 key
 			COMMENT the variant's key
-	METHOD m_mrzbwden getVariantMap ()Ljava/util/Map;
-	METHOD m_nrgosjtj fromJson (Lnet/minecraft/unmapped/C_yyierdsh$C_hqdugtxa;Ljava/io/Reader;)Lnet/minecraft/unmapped/C_yyierdsh;
+	METHOD m_chnfmqsx getMultipartModel ()Lnet/minecraft/unmapped/C_ktggvsoz;
+	METHOD m_jtjsogrn fromJson (Lnet/minecraft/unmapped/C_hsdreiyy$C_axtgudqh;Ljava/io/Reader;)Lnet/minecraft/unmapped/C_hsdreiyy;
 		ARG 0 context
 		ARG 1 reader
-	METHOD m_nuxqgpas getVariant (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ngeebdfb;
+	METHOD m_nedwbzrm getVariantMap ()Ljava/util/Map;
+	METHOD m_rtwybmuq hasMultipartModel ()Z
+	METHOD m_sapgqxun getVariant (Ljava/lang/String;)Lnet/minecraft/unmapped/C_bfdbeegn;
 		COMMENT Finds and returns the definition of the variant under the {@code key}. If the
 		COMMENT {@code key} does not {@linkplain #containsVariant(String) exist}, this throws
 		COMMENT an exception.
@@ -28,24 +29,23 @@ CLASS net/minecraft/unmapped/C_yyierdsh net/minecraft/client/render/model/json/M
 		COMMENT @throws VariantAbsentException if no variant with the given {@code key} exists
 		ARG 1 key
 			COMMENT the variant's key
-	METHOD m_qumbywtr hasMultipartModel ()Z
-	METHOD m_xsqmfnhc getMultipartModel ()Lnet/minecraft/unmapped/C_zosvggtk;
-	CLASS C_hqdugtxa DeserializationContext
-		FIELD f_rlriowat stateFactory Lnet/minecraft/unmapped/C_qakiefze;
-		FIELD f_vmvoheyf gson Lcom/google/gson/Gson;
-		METHOD m_kjdpwvff getStateFactory ()Lnet/minecraft/unmapped/C_qakiefze;
-		METHOD m_pqqfzhuh setStateFactory (Lnet/minecraft/unmapped/C_qakiefze;)V
+	METHOD m_zypmupme getAllModels ()Ljava/util/Set;
+	CLASS C_axtgudqh DeserializationContext
+		FIELD f_fyehovmv gson Lcom/google/gson/Gson;
+		FIELD f_tawoirlr stateFactory Lnet/minecraft/unmapped/C_ezfeikaq;
+		METHOD m_ffvwpdjk getStateFactory ()Lnet/minecraft/unmapped/C_ezfeikaq;
+		METHOD m_huhzfqqp setStateFactory (Lnet/minecraft/unmapped/C_ezfeikaq;)V
 			ARG 1 stateFactory
-	CLASS C_kfbxuunh VariantAbsentException
+	CLASS C_hnuuxbfk VariantAbsentException
 		COMMENT An unchecked exception indicating a variant is not found with a string key.
-	CLASS C_tixafkej Deserializer
+	CLASS C_jekfaxit Deserializer
 		METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 			ARG 1 functionJson
 			ARG 2 unused
 			ARG 3 context
-		METHOD m_ncncjjlt multipartFromJson (Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_zosvggtk;
+		METHOD m_rcnwsdnv variantsFromJson (Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Ljava/util/Map;
 			ARG 1 context
 			ARG 2 object
-		METHOD m_vndswncr variantsFromJson (Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Ljava/util/Map;
+		METHOD m_tljjcncn multipartFromJson (Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_ktggvsoz;
 			ARG 1 context
 			ARG 2 object
