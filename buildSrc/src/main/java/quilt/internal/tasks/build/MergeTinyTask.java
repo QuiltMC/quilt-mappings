@@ -2,56 +2,16 @@ package quilt.internal.tasks.build;
 
 import java.io.File;
 
-import org.gradle.api.tasks.OutputFile;
-import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants;
-import quilt.internal.tasks.DefaultMappingsTask;
-
-import net.fabricmc.stitch.commands.tinyv2.CommandMergeTinyV2;
-import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
-
-public class MergeTinyTask extends DefaultMappingsTask {
+public class MergeTinyTask extends AbstractTinyMergeTask {
     public static final String TASK_NAME = "mergeTiny";
 
-    @OutputFile
-    public File mergedTiny = new File(fileConstants.tempDir, "mappings.tiny");
-
     public MergeTinyTask() {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        outputsNeverUpToDate();
-        getOutputs().file(mergedTiny);
+        super("mappings.tiny");
         dependsOn(InvertPerVersionMappingsTask.TASK_NAME, BuildMappingsTinyTask.TASK_NAME);
     }
 
-    @TaskAction
-    public void mergeMappings() throws Exception {
-        File mappingsTinyInput = this.getTaskByType(BuildMappingsTinyTask.class).getOutputMappings();
-        File hashedTinyInput = this.getTaskByType(InvertPerVersionMappingsTask.class).getInvertedTinyFile();
-
-        File unorderedResultMappings = new File(fileConstants.tempDir, "mappings-unordered.tiny");
-
-        getLogger().lifecycle(":merging {} and {}", Constants.MAPPINGS_NAME, Constants.PER_VERSION_MAPPINGS_NAME);
-        String[] args = {
-                hashedTinyInput.getAbsolutePath(),
-                mappingsTinyInput.getAbsolutePath(),
-                unorderedResultMappings.getAbsolutePath(),
-                Constants.PER_VERSION_MAPPINGS_NAME,
-                "official"
-        };
-
-        new CommandMergeTinyV2().run(args);
-
-        getLogger().lifecycle(":reordering merged {}", Constants.PER_VERSION_MAPPINGS_NAME);
-        String[] args2 = {
-                unorderedResultMappings.getAbsolutePath(),
-                mergedTiny.getAbsolutePath(),
-                "official", Constants.PER_VERSION_MAPPINGS_NAME, "named"
-        };
-
-        new CommandReorderTinyV2().run(args2);
-    }
-
-    public File getMergedTiny() {
-        return mergedTiny;
+    @Override
+    public File getInputTinyFile() {
+        return this.getTaskByType(BuildMappingsTinyTask.class).getOutputMappings();
     }
 }

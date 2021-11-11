@@ -31,7 +31,7 @@ public class MapNamedJarTask extends DefaultMappingsTask {
                 "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
                 "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
         );
-        JarRemapper.mapJar(fileConstants.namedJar, fileConstants.unpickedJar, getTaskByType(MergeTinyV2Task.class).getMerged(), fileConstants.libraries, Constants.PER_VERSION_MAPPINGS_NAME, "named", builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
+        JarRemapper.mapJar(fileConstants.namedJar, fileConstants.unpickedJar, getTaskByType(MergeTinyV2Task.class).getOutputMappings(), fileConstants.libraries, Constants.PER_VERSION_MAPPINGS_NAME, "named", builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
     }
 }
 
