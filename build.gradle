@@ -92,8 +92,6 @@ configurations {
 	hashed
 }
 
-def unpickMetaFile = file("unpick-definitions/unpick.json")
-
 dependencies {
 	enigmaRuntime "cuchaz:enigma-swing:${project.enigma_version}"
 	enigmaRuntime "net.fabricmc:stitch:${project.stitch_version}"
@@ -105,7 +103,6 @@ dependencies {
 	unpick "net.fabricmc.unpick:unpick-cli:${project.unpick_version}"
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
-
 
 import quilt.internal.tasks.build.AddProposedFieldMappingsTask
 import quilt.internal.tasks.build.MappingsV2JarTask
@@ -179,7 +176,7 @@ task unpickHashedJar(type: UnpickJarTask) {
 }
 
 task mappingsUnpicked(type: MappingsTask, dependsOn: unpickHashedJar) {
-	jarToMap = unpickHashedJar.outputFile.get().asFile
+	jarToMap = unpickHashedJar.outputFile.get()
 }
 
 task mappings(type: MappingsTask, dependsOn: "mapHashedMojmapJar") {
@@ -227,7 +224,7 @@ task decompileCFR(type: JavaExec, dependsOn: [mapNamedJar]) {
 }
 
 javadoc {
-	dependsOn genFakeSource
+//	dependsOn genFakeSource
 	dependsOn downloadMinecraftLibraries
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
@@ -285,7 +282,7 @@ javadoc {
 		addBooleanOption 'Xdoclint:reference', true
 		addBooleanOption 'Xdoclint:accessibility', true
 	}
-	source fileTree(fakeSourceDir) + sourceSets.constants.allJava + sourceSets.packageDocs.allJava
+	source /*fileTree(fakeSourceDir) +*/ sourceSets.constants.allJava + sourceSets.packageDocs.allJava
 	classpath = configurations.javadocClasspath.plus downloadMinecraftLibraries.outputs.files.asFileTree
 
 	doLast {
@@ -300,9 +297,9 @@ javadoc {
 		// lazy setting
 		options {
 			tagletPath configurations.mappingPoet.files.toList()
+			header mappingPoetJar.get().filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
 			// cannot include line breaks
 			addFileOption "-add-stylesheet", mappingPoetJar.get().filter { it.name == 'forms.css' }.singleFile
-			header mappingPoetJar.get().filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
 		}
 	}
 }

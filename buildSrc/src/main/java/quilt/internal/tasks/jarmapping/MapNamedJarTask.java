@@ -1,14 +1,12 @@
 package quilt.internal.tasks.jarmapping;
 
-import java.io.File;
 import java.util.Map;
 
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
-import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
-import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.util.JarRemapper;
 
 public class MapNamedJarTask extends DefaultMappingsTask {
@@ -28,13 +26,12 @@ public class MapNamedJarTask extends DefaultMappingsTask {
     @TaskAction
     public void mapPerVersionMappingJar() {
         getLogger().lifecycle(":mapping minecraft to named");
-        File tinyInput = getTaskByType(DownloadPerVersionMappingsTask.class).getTinyFile();
         Map<String, String> jsrToJetbrains = Map.of(
                 "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
                 "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
                 "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
         );
-        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskByType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
+        JarRemapper.mapJar(fileConstants.namedJar, fileConstants.unpickedJar, getTaskByType(MergeTinyV2Task.class).getMerged(), fileConstants.libraries, Constants.PER_VERSION_MAPPINGS_NAME, "named", builder -> builder.withMappings(out -> jsrToJetbrains.forEach(out::acceptClass)));
     }
 }
 
