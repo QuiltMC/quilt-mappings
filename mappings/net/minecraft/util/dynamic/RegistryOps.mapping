@@ -1,15 +1,8 @@
 CLASS net/minecraft/unmapped/C_udwrczdh net/minecraft/util/dynamic/RegistryOps
 	FIELD f_bdfrgrbl valueHolders Ljava/util/Map;
 	FIELD f_exxsxahw registryManager Lnet/minecraft/unmapped/C_wqxmvzdq;
-	FIELD f_fkssglig JSON_FILE_EXTENSION Ljava/lang/String;
-	FIELD f_qjtxaaqw entryLoader Lnet/minecraft/unmapped/C_udwrczdh$C_gmhnjmcx;
-	FIELD f_szxkvmxd LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_qjtxaaqw entryLoader Lnet/minecraft/unmapped/C_nyvkclsy;
 	FIELD f_vytoohpr entryOps Lnet/minecraft/unmapped/C_udwrczdh;
-	METHOD <init> (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_udwrczdh$C_gmhnjmcx;Lnet/minecraft/unmapped/C_wqxmvzdq;Ljava/util/IdentityHashMap;)V
-		ARG 1 delegate
-		ARG 2 entryLoader
-		ARG 3 registryManager
-		ARG 4 valueHolders
 	METHOD m_cjiolydj decodeOrId (Ljava/lang/Object;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Codec;Z)Lcom/mojang/serialization/DataResult;
 		COMMENT Encode an id for a registry element than a full object if possible.
 		COMMENT
@@ -22,16 +15,15 @@ CLASS net/minecraft/unmapped/C_udwrczdh net/minecraft/util/dynamic/RegistryOps
 		ARG 4 allowInlineDefinitions
 	METHOD m_ezvmzsgh ofLoaded (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_udwrczdh;
 		ARG 2 registryManager
-	METHOD m_iuwpoebf readSupplier (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_eexxncvi;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ncpywfca;)Lcom/mojang/serialization/DataResult;
+	METHOD m_lpqvvscg getValueHolder (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_udwrczdh$C_wlzreysy;
+		ARG 1 registryRef
+	METHOD m_iuwpoebf readSupplier (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_eexxncvi;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/DataResult;
 		COMMENT Reads a supplier for a registry element.
 		COMMENT
 		COMMENT <p>This logic is used by both {@code decodeOrId} and {@code loadToRegistry}.
 		ARG 1 key
 		ARG 2 registry
 		ARG 3 codec
-		ARG 4 elementId
-	METHOD m_lpqvvscg getValueHolder (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_udwrczdh$C_wlzreysy;
-		ARG 1 registryRef
 	METHOD m_oahfbjzp loadToRegistry (Lnet/minecraft/unmapped/C_secmvxxe;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/DataResult;
 		COMMENT Loads elements into a registry just loaded from a decoder.
 		ARG 1 registry
@@ -39,38 +31,9 @@ CLASS net/minecraft/unmapped/C_udwrczdh net/minecraft/util/dynamic/RegistryOps
 		ARG 3 codec
 	METHOD m_oteihaak getRegistry (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/DataResult;
 		ARG 1 key
-	METHOD m_rjxnlcgd of (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_udwrczdh$C_gmhnjmcx;Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_udwrczdh;
-		ARG 0 delegate
-		ARG 1 entryLoader
-		ARG 2 registryManager
-	METHOD m_rkyeqmko ofLoaded (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_udwrczdh$C_gmhnjmcx;Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_udwrczdh;
-		ARG 2 registryManager
 	METHOD m_tvallxfl of (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_udwrczdh;
 		ARG 0 delegate
 		ARG 1 resourceManager
 		ARG 2 registryManager
-	CLASS C_gmhnjmcx EntryLoader
-		METHOD m_onhuzpmr load (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Decoder;)Ljava/util/Optional;
-			ARG 2 registryId
-			ARG 3 entryId
-		METHOD m_qzqaxmnt getKnownEntryPaths (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Collection;
-			COMMENT @return A collection of file Identifiers of all known entries of the given registry.
-			COMMENT Note that these are file Identifiers for use in a resource manager, not the logical names of the entries.
-			ARG 1 key
-		METHOD m_yrvaytzm resourceBacked (Lnet/minecraft/unmapped/C_tmnrpasf;)Lnet/minecraft/unmapped/C_udwrczdh$C_gmhnjmcx;
-			ARG 0 resourceManager
-		CLASS C_cdbmehqg Impl
-			FIELD f_fxzbwmun values Ljava/util/Map;
-			FIELD f_qbodzxhr entryToLifecycle Ljava/util/Map;
-			FIELD f_ytrekfhk entryToRawId Lit/unimi/dsi/fastutil/objects/Object2IntMap;
-			METHOD m_zstbcwqa add (Lnet/minecraft/unmapped/C_wqxmvzdq$C_olezqsef;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Encoder;ILjava/lang/Object;Lcom/mojang/serialization/Lifecycle;)V
-				ARG 1 registryManager
-				ARG 2 key
-				ARG 4 rawId
-				ARG 5 entry
-				ARG 6 lifecycle
-		CLASS C_eoorupya
-			METHOD m_ylckszpb (Ljava/lang/String;)Z
-				ARG 0 name
 	CLASS C_wlzreysy ValueHolder
 		FIELD f_ckjssycu values Ljava/util/Map;
