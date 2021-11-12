@@ -40,6 +40,7 @@ public class DownloadMinecraftJarsTask extends DefaultMappingsTask {
                 return false;
             }
         });
+        this.finalizedBy(ExtractServerJarTask.TASK_NAME);
     }
 
     @TaskAction
