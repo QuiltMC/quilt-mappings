@@ -35,18 +35,15 @@ public class JarRemapper {
             action.execute(remapperBuilder);
         }
 
-        TinyRemapper remapper = remapperBuilder
-                .build();
+        TinyRemapper remapper = remapperBuilder.build();
 
-        try {
-            OutputConsumerPath outputConsumer = new OutputConsumerPath.Builder(output.toPath()).build();
+        try (OutputConsumerPath outputConsumer = new OutputConsumerPath.Builder(output.toPath()).build()) {
             outputConsumer.addNonClassFiles(input.toPath());
             remapper.readInputs(input.toPath());
 
             remapper.readClassPath(libraries.toPath());
 
             remapper.apply(outputConsumer);
-            outputConsumer.close();
             remapper.finish();
         } catch (Exception e) {
             remapper.finish();

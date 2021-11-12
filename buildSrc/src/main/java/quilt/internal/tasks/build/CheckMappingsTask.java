@@ -23,7 +23,7 @@ public class CheckMappingsTask extends DefaultMappingsTask {
         getLogger().lifecycle(":checking mappings");
 
         String[] args = new String[]{
-                fileConstants.hashedMojmapJar.getAbsolutePath(),
+                fileConstants.perVersionMappingsJar.getAbsolutePath(),
                 mappings.getAbsolutePath()
         };
 

@@ -10,10 +10,10 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.JavaExec;
 import quilt.internal.Constants;
-import quilt.internal.tasks.AbstractMappingsTask;
+import quilt.internal.tasks.MappingsTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 
-public class UnpickJarTask extends JavaExec implements AbstractMappingsTask {
+public class UnpickJarTask extends JavaExec implements MappingsTask {
     private final RegularFileProperty inputFile;
     private final Property<File> outputFile;
     private final RegularFileProperty unpickDefinition;

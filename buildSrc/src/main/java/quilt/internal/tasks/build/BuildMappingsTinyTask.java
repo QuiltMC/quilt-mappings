@@ -31,7 +31,7 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
         getLogger().lifecycle(":generating tiny mappings");
 
         new MapSpecializedMethodsCommand().run(
-                fileConstants.hashedMojmapJar.getAbsolutePath(),
+                fileConstants.perVersionMappingsJar.getAbsolutePath(),
                 "enigma",
                 mappings.getAbsolutePath(),
                 String.format("tinyv2:%s:named", Constants.PER_VERSION_MAPPINGS_NAME),

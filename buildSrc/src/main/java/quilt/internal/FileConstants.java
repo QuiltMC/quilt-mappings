@@ -7,7 +7,7 @@ import org.gradle.api.Project;
 public class FileConstants {
     public final File cacheFilesMinecraft;
     public final File tempDir;
-    public final File hashedMojmapJar;
+    public final File perVersionMappingsJar;
     public final File unpickedJar;
     public final File namedJar;
     public final File libraries;
@@ -17,7 +17,7 @@ public class FileConstants {
         tempDir = project.file(".gradle/temp");
         libraries = new File(cacheFilesMinecraft, "libraries");
 
-        hashedMojmapJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar");
+        perVersionMappingsJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar");
         unpickedJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar");
         namedJar = project.file(Constants.MINECRAFT_VERSION + "-named.jar");
     }

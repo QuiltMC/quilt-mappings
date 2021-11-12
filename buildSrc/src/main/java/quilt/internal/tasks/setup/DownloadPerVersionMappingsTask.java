@@ -10,7 +10,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public class DownloadPerVersionMappingsTask extends DefaultMappingsTask {
-    public static final String TASK_NAME = "downloadHashedMojmap";
+    public static final String TASK_NAME = "downloadPerVersionMappings";
 
     @OutputFile
     public File jarFile = new File(fileConstants.cacheFilesMinecraft, String.format("%s-%s.jar", Constants.MINECRAFT_VERSION, Constants.PER_VERSION_MAPPINGS_NAME));

@@ -11,13 +11,13 @@ import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.util.JarRemapper;
 
 public class MapPerVersionMappingsJarTask extends DefaultMappingsTask {
-    public static final String TASK_NAME = "mapHashedMojmapJar";
+    public static final String TASK_NAME = "mapPerVersionMappingsJar";
 
     public MapPerVersionMappingsJarTask() {
         super(Constants.Groups.MAP_JAR_GROUP);
 
         getInputs().files(getTaskByName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
-        getOutputs().file(this.fileConstants.hashedMojmapJar);
+        getOutputs().file(this.fileConstants.perVersionMappingsJar);
 
         this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadPerVersionMappingsTask.TASK_NAME, MergeJarsTask.TASK_NAME);
 
@@ -28,6 +28,6 @@ public class MapPerVersionMappingsJarTask extends DefaultMappingsTask {
     public void mapPerVersionMappingJar() {
         getLogger().lifecycle(":mapping minecraft to {}", Constants.PER_VERSION_MAPPINGS_NAME);
         File tinyInput = getTaskByType(DownloadPerVersionMappingsTask.class).getTinyFile();
-        JarRemapper.mapJar(fileConstants.hashedMojmapJar, getTaskByType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
+        JarRemapper.mapJar(fileConstants.perVersionMappingsJar, getTaskByType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
     }
 }

@@ -21,7 +21,6 @@ import quilt.internal.tasks.setup.ExtractServerJarTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 
 public class MappingsPlugin implements Plugin<Project> {
-
     @Override
     public void apply(Project target) {
         target.getExtensions().add("mappings", new MappingsExtension(target));
