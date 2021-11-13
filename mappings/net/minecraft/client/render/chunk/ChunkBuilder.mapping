@@ -5,20 +5,13 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 	FIELD f_ksvptrrx threadBuffers Ljava/util/Queue;
 	FIELD f_niojdltb buffers Lnet/minecraft/unmapped/C_wblirdjw;
 	FIELD f_olhadgcd LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_qnkuhlkk rebuildQueue Ljava/util/PriorityQueue;
 	FIELD f_resqsqni POSITION_COLOR_TEXTURE_LIGHT_NORMAL Lnet/minecraft/unmapped/C_epdvdlnr;
 	FIELD f_tdmobllv executor Ljava/util/concurrent/Executor;
 	FIELD f_vzapgtmr worldRenderer Lnet/minecraft/unmapped/C_xhbakkfs;
 	FIELD f_wdkwldxr bufferCount I
 	FIELD f_xkbskhhs MAX_WORKER_THREADS_FOR_32_BIT_SYSTEMS I
-	FIELD f_xkcitlln world Lnet/minecraft/unmapped/C_nbzftcdc;
+	FIELD f_xkcitlln world Lnet/minecraft/unmapped/C_wrrlndhg;
 	FIELD f_zxntukzo cameraPosition Lnet/minecraft/unmapped/C_xxfpupgv;
-	METHOD <init> (Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_xhbakkfs;Ljava/util/concurrent/Executor;ZLnet/minecraft/unmapped/C_wblirdjw;)V
-		ARG 1 world
-		ARG 2 worldRenderer
-		ARG 3 executor
-		ARG 4 is64Bits
-		ARG 5 buffers
 	METHOD m_adxdfdom send (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_wnhmotna;)V
 		ARG 1 task
 	METHOD m_ckxfvfnd getCameraPosition ()Lnet/minecraft/unmapped/C_xxfpupgv;
@@ -45,9 +38,8 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 	METHOD m_syvfdlnc isEmpty ()Z
 	METHOD m_szemqbol scheduleRunTasks ()V
 	METHOD m_wslxnwyp upload ()V
-	METHOD m_wvwiytdu setWorld (Lnet/minecraft/unmapped/C_nbzftcdc;)V
-		ARG 1 world
 	METHOD m_xorlakyn getToBatchCount ()I
+	METHOD m_wvwiytdu setWorld (Lnet/minecraft/unmapped/C_wrrlndhg;)V
 	METHOD m_ynakaovh getFreeBufferCount ()I
 	METHOD m_ynsnuhhl (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl$C_wnhmotna;Lnet/minecraft/unmapped/C_wblirdjw;Ljava/lang/Void;)Ljava/util/concurrent/CompletionStage;
 		ARG 2 _void
@@ -99,7 +91,7 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 		METHOD m_jsbuiick (Lnet/minecraft/unmapped/C_vnnwlzit;)Lnet/minecraft/unmapped/C_vnnwlzit;
 			ARG 0 renderLayer
 		METHOD m_ldzcygqu getData ()Lnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;
-		METHOD m_lfpzsybq cancel ()V
+		METHOD m_lfpzsybq cancel ()Z
 		METHOD m_neilzsft isChunkNonEmpty (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
 			ARG 1 pos
 		METHOD m_nmjgxqbz getNeighborPosition (Lnet/minecraft/unmapped/C_fxhiuupx;)Lnet/minecraft/unmapped/C_kkdaznyh;
@@ -136,8 +128,6 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 		CLASS C_wnhmotna Task
 			FIELD f_rsbkicla distance D
 			FIELD f_xtxprkid cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
-			METHOD <init> (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl;D)V
-				ARG 2 distance
 			METHOD compareTo (Ljava/lang/Object;)I
 				ARG 1 other
 			METHOD m_arggedda run (Lnet/minecraft/unmapped/C_wblirdjw;)Ljava/util/concurrent/CompletableFuture;
@@ -145,9 +135,6 @@ CLASS net/minecraft/unmapped/C_dxiaofic net/minecraft/client/render/chunk/ChunkB
 			METHOD m_cmqhkmnk cancel ()V
 		CLASS C_xfytfqma RebuildTask
 			FIELD f_rbflolvk region Lnet/minecraft/unmapped/C_unirasnp;
-			METHOD <init> (Lnet/minecraft/unmapped/C_dxiaofic$C_wxagbycl;DLnet/minecraft/unmapped/C_unirasnp;)V
-				ARG 2 distance
-				ARG 4 region
 			METHOD m_fchwgkum render (FFFLnet/minecraft/unmapped/C_dxiaofic$C_aglcjoqz;Lnet/minecraft/unmapped/C_wblirdjw;)Ljava/util/Set;
 				ARG 1 cameraX
 				ARG 2 cameraY
