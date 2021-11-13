@@ -136,10 +136,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 boundingBox
 	METHOD m_bqujtsnz isSubmergedInWater ()Z
 		COMMENT Returns whether this entity's hitbox is fully submerged in water.
-	METHOD m_bvfopfeo (Lnet/minecraft/unmapped/C_sszpscpo;Lnet/minecraft/unmapped/C_vgpupfxx;)V
-		ARG 2 pos
-	METHOD m_bynvyahs (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
-		ARG 1 style
 	METHOD m_bzrtaquy getVehicle ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_bzveerey collides ()Z
 	METHOD m_cckfyxyf fall (DZLnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)V
@@ -155,10 +151,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 yaw
 		ARG 3 pitch
 	METHOD m_chpxygjr shouldSpawnSprintingParticles ()Z
-	METHOD m_civqfczo adjustMovementForCollisions (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_znwsewzf;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_civqfczo adjustMovementForCollisions (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/List;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 movement
 		ARG 1 entityBoundingBox
-		ARG 2 collisions
 	METHOD m_cizdqdzz addVelocity (DDD)V
 		ARG 1 deltaX
 		ARG 3 deltaY
@@ -268,8 +263,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 8 pitch
 		ARG 9 interpolationSteps
 		ARG 10 interpolate
-	METHOD m_fesyylro (Lnet/minecraft/unmapped/C_astfners;)Z
-		ARG 0 entity
 	METHOD m_fgmpibkk setId (I)V
 		COMMENT Sets the network ID of this entity.
 		COMMENT
@@ -288,8 +281,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 4 passengerYaw
 	METHOD m_flzueuli populateCrashReport (Lnet/minecraft/unmapped/C_qympisds;)V
 		ARG 1 section
-	METHOD m_fnnhwnwi (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_wauhtoaq$C_tqypnjit;)Lnet/minecraft/unmapped/C_iicnuxxd;
-		ARG 2 rect
 	METHOD m_foapnmxd detach ()V
 		COMMENT Removes all the passengers and removes this entity from any vehicles it is riding.
 	METHOD m_foqrqvze shouldRender (D)Z
@@ -354,8 +345,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_hnozxzms getLandingPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_hpsqosvu setVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 velocity
-	METHOD m_htzprnzn (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_txtbiemp;)Z
-		ARG 3 state
 	METHOD m_hundseou getFlag (I)Z
 		ARG 1 index
 	METHOD m_hupbgksc getOppositeRotationVector (F)Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -417,8 +406,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_kdyskdlf updateTrackedPosition (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 pos
 	METHOD m_kfwdpcql getHeightOffset ()D
-	METHOD m_khihzqvl (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)Z
-		ARG 1 entity
 	METHOD m_kkieextx handleStatus (B)V
 		ARG 1 status
 	METHOD m_kkphuyzb getMountedHeightOffset ()D
@@ -446,8 +433,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_lgmmhwrc hasPassenger (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 passenger
 	METHOD m_livkcpbq onSwimmingStart ()V
-	METHOD m_llkxzvhm (Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 0 entity
 	METHOD m_lmmpfjyz bypassesLandingEffects ()Z
 	METHOD m_lmrknzic (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 0 state
@@ -536,7 +521,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_nstmjlot setAir (I)V
 		ARG 1 air
 	METHOD m_nuxuxoem getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
-	METHOD m_nxekaost getPortalRect (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Z)Ljava/util/Optional;
+	METHOD m_nxekaost getPortalRect (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_pneibfez;)Ljava/util/Optional;
 		ARG 1 destWorld
 		ARG 2 destPos
 		ARG 3 destIsNether
@@ -606,13 +591,12 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_psnzmttx getVelocity ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_pvbcngmg getMinFreezeDamageTicks ()I
 	METHOD m_pxtokmcp unsetRemoved ()V
-	METHOD m_pxzhpgjw adjustMovementForCollisions (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_pbfjvesm;Lnet/minecraft/unmapped/C_znwsewzf;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_pxzhpgjw adjustMovementForCollisions (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_pbfjvesm;Ljava/util/List;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 entity
 		ARG 1 movement
 		ARG 2 entityBoundingBox
 		ARG 3 world
 		ARG 4 context
-		ARG 5 collisions
 	METHOD m_qbuogctw getPose ()Lnet/minecraft/unmapped/C_ufdjspmk;
 	METHOD m_qchceppc tickRiding ()V
 	METHOD m_qesgssdn entityDataRequiresOperator ()Z
@@ -752,12 +736,11 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT
 		COMMENT @return the entity in the other world
 		ARG 1 destination
-	METHOD m_vbxcqznf adjustSingleAxisMovementForCollisions (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_pbfjvesm;Lnet/minecraft/unmapped/C_znwsewzf;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_vbxcqznf adjustSingleAxisMovementForCollisions (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_pbfjvesm;Ljava/util/List;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 movement
 		ARG 1 entityBoundingBox
 		ARG 2 world
 		ARG 3 context
-		ARG 4 collisions
 	METHOD m_vcfvpihz checkDespawn ()V
 	METHOD m_vddvkdnu saveNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
 		ARG 1 nbt
