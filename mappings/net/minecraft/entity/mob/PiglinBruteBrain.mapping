@@ -1,30 +1,55 @@
 CLASS net/minecraft/unmapped/C_voricxgd net/minecraft/entity/mob/PiglinBruteBrain
-	METHOD m_bgdufvou (Lnet/minecraft/unmapped/C_nonpuopm;)V
+	FIELD f_egjwwocr HOME_STROLL_AROUND_DISTANCE I
+	FIELD f_heebmyrp HOME_TOO_FAR_DISTANCE I
+	FIELD f_iwgyweun TARGETING_RANGE D
+	FIELD f_pyiyshcs MELEE_ATTACK_COOLDOWN I
+	FIELD f_tkprjqoy HOME_CLOSE_ENOUGH_DISTANCE I
+	FIELD f_usoumkku INTERACTION_RANGE I
+	FIELD f_vodpuhba ACTIVITY_SOUND_PROBABILITY D
+	FIELD f_wexnmkde MAX_LOOK_DISTANCE I
+	FIELD f_xjvobzyb ANGER_DURATION I
+	FIELD f_ynwcjyqp IDLING_SPEED F
+	METHOD m_avatodxw (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_wlxgpmqg;)V
+		ARG 1 activity
+	METHOD m_bgdufvou updateActivity (Lnet/minecraft/unmapped/C_nonpuopm;)V
 		ARG 0 piglinBrute
 	METHOD m_ctpbvgbg addFightActivities (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_fexajqjr;)V
 		ARG 0 piglinBrute
 		ARG 1 brain
-	METHOD m_dmxmhcuz (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+	METHOD m_dmxmhcuz isNearestAttackableTarget (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
 		ARG 0 piglin
+		ARG 1 entity
+	METHOD m_hqlngbvs createIdleLookTask ()Lnet/minecraft/unmapped/C_gnvsxrjn;
 	METHOD m_isguechl addIdleActivities (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_fexajqjr;)V
 		ARG 0 piglinBrute
 		ARG 1 brain
-	METHOD m_mdwvgueh (Lnet/minecraft/unmapped/C_fxohddmi;)Ljava/util/Optional;
+	METHOD m_kfqlvvpd (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 1 entity
+	METHOD m_mdwvgueh findNearestAttackableTarget (Lnet/minecraft/unmapped/C_fxohddmi;)Ljava/util/Optional;
 		ARG 0 piglin
-	METHOD m_qsyhcpsu (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_wyqoybbv;)Ljava/util/Optional;
+	METHOD m_qsyhcpsu findRememberedEntityInRange (Lnet/minecraft/unmapped/C_fxohddmi;Lnet/minecraft/unmapped/C_wyqoybbv;)Ljava/util/Optional;
 		ARG 0 piglin
+		ARG 1 memoryType
 	METHOD m_qwdfmfsg create (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_fexajqjr;)Lnet/minecraft/unmapped/C_fexajqjr;
 		ARG 0 piglinBrute
 		ARG 1 brain
 	METHOD m_rpnjiztj addCoreActivities (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_fexajqjr;)V
 		ARG 0 piglinBrute
 		ARG 1 brain
-	METHOD m_rpxsypal (Lnet/minecraft/unmapped/C_nonpuopm;)V
+	METHOD m_rpxsypal randomlyPlayAngrySoundIfFighting (Lnet/minecraft/unmapped/C_nonpuopm;)V
 		ARG 0 piglinBrute
+	METHOD m_sbwumkxe setAngryAt (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
+		ARG 0 piglinBrute
+		ARG 1 entity
 	METHOD m_sovmhvcq tryRevenge (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_ndyxaxsu;)V
 		ARG 0 piglinBrute
 		ARG 1 target
-	METHOD m_vipqskqu (Lnet/minecraft/unmapped/C_nonpuopm;)V
+	METHOD m_vipqskqu playAngrySoundIfFighting (Lnet/minecraft/unmapped/C_nonpuopm;)V
 		ARG 0 piglinBrute
+	METHOD m_vxkmbefs (Lnet/minecraft/unmapped/C_nonpuopm;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 1 entity
+	METHOD m_whjsutkx createIdleMovementTask ()Lnet/minecraft/unmapped/C_gnvsxrjn;
 	METHOD m_zcqtbrxa setCurrentPosAsHome (Lnet/minecraft/unmapped/C_nonpuopm;)V
 		ARG 0 piglinBrute
+	METHOD m_zqnxnakm (Lnet/minecraft/unmapped/C_ndyxaxsu;Lnet/minecraft/unmapped/C_ndyxaxsu;)Z
+		ARG 1 entity2

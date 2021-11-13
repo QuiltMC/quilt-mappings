@@ -7,6 +7,7 @@ CLASS net/minecraft/unmapped/C_ivxrfoun net/minecraft/client/network/ClientPlayN
 	FIELD f_dkujvsyq client Lnet/minecraft/unmapped/C_diboefya;
 	FIELD f_fcykeuwq tagManager Lnet/minecraft/unmapped/C_foolhgqs;
 	FIELD f_fywrjwbo connection Lnet/minecraft/unmapped/C_kkccmsao;
+	FIELD f_grlitioh simulationDistance I
 	FIELD f_gvwhjcfr worldProperties Lnet/minecraft/unmapped/C_wrrlndhg$C_pjjqpfrg;
 	FIELD f_hfcvaofn commandDispatcher Lcom/mojang/brigadier/CommandDispatcher;
 	FIELD f_hiyirhem random Ljava/util/Random;
@@ -20,6 +21,17 @@ CLASS net/minecraft/unmapped/C_ivxrfoun net/minecraft/client/network/ClientPlayN
 	FIELD f_tgsyjvlg registryManager Lnet/minecraft/unmapped/C_qdzvmxqw;
 	FIELD f_uorodzec playerListEntries Ljava/util/Map;
 	FIELD f_wrixlkcl positionLookSetup Z
+	FIELD f_xjwduudn telemetryManager Lnet/minecraft/unmapped/C_wwbyxkgc;
+	METHOD <init> (Lnet/minecraft/unmapped/C_diboefya;Lnet/minecraft/unmapped/C_xqwltmrw;Lnet/minecraft/unmapped/C_kkccmsao;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_wwbyxkgc;)V
+		ARG 1 client
+		ARG 2 screen
+		ARG 3 connection
+		ARG 4 profile
+		ARG 5 telemetryManager
+	METHOD m_aavhmgbd readLightData (IILnet/minecraft/unmapped/C_rumjdleq;)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 data
 	METHOD m_acebbftz getPlayerListEntry (Ljava/lang/String;)Lnet/minecraft/unmapped/C_euxmfndr;
 		ARG 1 profileName
 	METHOD m_acebbftz getPlayerListEntry (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_euxmfndr;
@@ -29,6 +41,14 @@ CLASS net/minecraft/unmapped/C_ivxrfoun net/minecraft/client/network/ClientPlayN
 	METHOD m_cpzijaks getProfile ()Lcom/mojang/authlib/GameProfile;
 	METHOD m_fxsxgzbt getWorld ()Lnet/minecraft/unmapped/C_wrrlndhg;
 	METHOD m_gipqbjnh getAdvancementHandler ()Lnet/minecraft/unmapped/C_vxpsljow;
+	METHOD m_gwzniwnd queueLightUpdate (IILnet/minecraft/unmapped/C_rumjdleq;)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 data
+	METHOD m_hemwxfeo updateWorldChunk (IILnet/minecraft/unmapped/C_btalplit;)V
+		ARG 1 x
+		ARG 2 z
+		ARG 3 data
 	METHOD m_jddzgyjm getSessionId ()Ljava/util/UUID;
 	METHOD m_jpzfrjcn updateLighting (IILnet/minecraft/unmapped/C_bsksopsk;Lnet/minecraft/unmapped/C_wtqmlvhf;Ljava/util/BitSet;Ljava/util/BitSet;Ljava/util/Iterator;Z)V
 		ARG 1 chunkX
@@ -55,6 +75,10 @@ CLASS net/minecraft/unmapped/C_ivxrfoun net/minecraft/client/network/ClientPlayN
 	METHOD m_tgsyjvlg getRegistryManager ()Lnet/minecraft/unmapped/C_qdzvmxqw;
 	METHOD m_txszkrpy (I)V
 		ARG 1 entityId
+	METHOD m_vbonulrs (Lnet/minecraft/unmapped/C_qklvsdrh;II)V
+		ARG 1 chunk
+		ARG 2 x
+		ARG 3 z
 	METHOD m_vdrjimiw getTagManager ()Lnet/minecraft/unmapped/C_foolhgqs;
 	METHOD m_vixfyitv getActiveTotemOfUndying (Lnet/minecraft/unmapped/C_oqcyprzj;)Lnet/minecraft/unmapped/C_kywxadds;
 		ARG 0 player

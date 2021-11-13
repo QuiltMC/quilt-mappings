@@ -11,7 +11,7 @@ buildscript {
 		classpath "net.fabricmc:stitch:${project.stitch_version}"
 		classpath "commons-io:commons-io:2.8.0"
 		classpath 'de.undercouch:gradle-download-task:4.1.1'
-		classpath 'net.fabricmc:tiny-remapper:0.6.0'
+		classpath 'org.quiltmc:tiny-remapper:0.7.1'
 		classpath "net.fabricmc.unpick:unpick:${project.unpick_version}"
 		classpath "net.fabricmc.unpick:unpick-format-utils:${project.unpick_version}"
 	}
@@ -28,7 +28,7 @@ plugins {
 
 def USE_SNAPSHOT_HASHES = true
 
-def minecraft_version = "21w41a"
+def minecraft_version = "21w43a"
 
 def ENV = System.getenv()
 // Fetch build number from Github Actions
@@ -128,6 +128,7 @@ import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2
 import net.fabricmc.stitch.merge.JarMerger
 import net.fabricmc.tinyremapper.OutputConsumerPath
 import net.fabricmc.tinyremapper.TinyRemapper
+import net.fabricmc.tinyremapper.TinyRemapperConfiguration
 import net.fabricmc.tinyremapper.TinyUtils
 import org.apache.commons.io.FileUtils
 
@@ -969,9 +970,7 @@ static void mapJar(File output, File input, File mappings, File libraries, Strin
 
 	def remapperBuilder = TinyRemapper.newRemapper()
 			.withMappings(TinyUtils.createTinyMappingProvider(mappings.toPath(), from, to))
-			.renameInvalidLocals(true)
-			.rebuildSourceFilenames(true)
-			.invalidLvNamePattern(Pattern.compile(/\$\$\d+/))
+			.configuration(new TinyRemapperConfiguration(false, false, false, false, false, true, false, true, Pattern.compile(/\$\$\d+|c_[a-z]{8}/), false))
 	action.execute(remapperBuilder)
 	def remapper = remapperBuilder
 			.build()

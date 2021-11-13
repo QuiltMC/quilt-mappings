@@ -1,13 +1,27 @@
 CLASS net/minecraft/unmapped/C_fgfsorua net/minecraft/world/chunk/ChunkSection
-	FIELD f_dyznncyn container Lnet/minecraft/unmapped/C_wzriihea;
+	FIELD f_dyznncyn blockStateContainer Lnet/minecraft/unmapped/C_wzriihea;
+	FIELD f_euiefzbh biomeContainer Lnet/minecraft/unmapped/C_wzriihea;
 	FIELD f_fjqmqzkt randomTickableBlockCount S
+	FIELD f_gedldmbj SECTION_SIZE I
+	FIELD f_jldgsajy SECTION_HEIGHT I
+	FIELD f_qzqjqnla BIOME_CONTAINER_BITS I
 	FIELD f_rdgowacs nonEmptyBlockCount S
+	FIELD f_rznzxksj SECTION_WIDTH I
 	FIELD f_tkjqpnky nonEmptyFluidCount S
 	FIELD f_venjevle yOffset I
+	METHOD <init> (ILnet/minecraft/unmapped/C_ksqjyxqt;)V
+		ARG 1 yOffset
+		ARG 2 biomeRegistry
+	METHOD <init> (ILnet/minecraft/unmapped/C_wzriihea;Lnet/minecraft/unmapped/C_wzriihea;)V
+		ARG 1 yOffset
+		ARG 2 blockStateContainer
+		ARG 3 biomeContainer
+	METHOD m_dzkoatpm getBiomeContainer ()Lnet/minecraft/unmapped/C_wzriihea;
 	METHOD m_eluefuwl calculateCounts ()V
 	METHOD m_flogmnfp (Lnet/minecraft/unmapped/C_pmeibtxt;I)V
 		ARG 1 state
 		ARG 2 count
+	METHOD m_hnmmzzls isEmpty ()Z
 	METHOD m_hovfkstn getBlockState (III)Lnet/minecraft/unmapped/C_pmeibtxt;
 		ARG 1 x
 		ARG 2 y
@@ -17,6 +31,11 @@ CLASS net/minecraft/unmapped/C_fgfsorua net/minecraft/world/chunk/ChunkSection
 	METHOD m_lmfwzupo hasRandomTicks ()Z
 	METHOD m_olwomvfb hasAny (Ljava/util/function/Predicate;)Z
 		ARG 1 predicate
+	METHOD m_oxqqkhup (Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_ygdawqho$C_veuekhcq;II)V
+		ARG 1 source
+		ARG 2 sampler
+		ARG 3 x
+		ARG 4 z
 	METHOD m_pxntjefo hasRandomFluidTicks ()Z
 	METHOD m_qbeiraoq blockCoordFromChunkCoord (I)I
 		ARG 0 chunkPos
@@ -42,4 +61,8 @@ CLASS net/minecraft/unmapped/C_fgfsorua net/minecraft/world/chunk/ChunkSection
 		ARG 1 buf
 	METHOD m_wiepkxki lock ()V
 	METHOD m_wwtrtmcz getContainer ()Lnet/minecraft/unmapped/C_wzriihea;
+	METHOD m_ycjgnafv getBiome (III)Lnet/minecraft/unmapped/C_sfepklro;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
 	METHOD m_yroqotlz getPacketSize ()I
