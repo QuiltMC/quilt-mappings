@@ -1,4 +1,27 @@
 CLASS com/mojang/blaze3d/systems/RenderSystem
+	METHOD _setShaderColor (FFFF)V
+		ARG 0 r
+		ARG 1 g
+		ARG 2 b
+		ARG 3 a
+	METHOD _setShaderFogColor (FFFF)V
+		ARG 0 r
+		ARG 1 g
+		ARG 2 b
+		ARG 3 a
+	METHOD _setShaderFogEnd (F)V
+		ARG 0 fogEnd
+	METHOD _setShaderFogStart (F)V
+		ARG 0 fogStart
+	METHOD _setShaderLights (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
+		ARG 0 light0
+		ARG 1 light1
+	METHOD _setShaderTexture (II)V
+		ARG 0 location
+		ARG 1 textureId
+	METHOD _setShaderTexture (ILnet/minecraft/unmapped/C_ncpywfca;)V
+		ARG 0 location
+		ARG 1 texture
 	METHOD activeTexture (I)V
 		ARG 0 texture
 	METHOD bindTexture (I)V
@@ -33,6 +56,8 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 3 alpha
 	METHOD clearDepth (D)V
 		ARG 0 depth
+	METHOD clearStencil (I)V
+		ARG 0 stencil
 	METHOD colorMask (ZZZZ)V
 		ARG 0 red
 		ARG 1 green
@@ -55,17 +80,33 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 3 height
 	METHOD flipFrame (J)V
 		ARG 0 window
+	METHOD getSequentialBuffer (Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;I)Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
+		ARG 0 drawMode
+		ARG 1 initialSize
+	METHOD getShaderTexture (I)I
+		ARG 0 location
 	METHOD getString (ILjava/util/function/Consumer;)V
 		ARG 0 name
 		ARG 1 consumer
+	METHOD getTextureId (I)I
+		ARG 0 internalId
+	METHOD glBindBuffer (ILjava/util/function/IntSupplier;)V
+		ARG 0 target
+		ARG 1 buffer
+	METHOD glBindVertexArray (Ljava/util/function/Supplier;)V
+		ARG 0 vertexArray
 	METHOD glBufferData (ILjava/nio/ByteBuffer;I)V
 		ARG 0 target
 		ARG 1 data
 		ARG 2 usage
 	METHOD glDeleteBuffers (I)V
 		ARG 0 buffer
+	METHOD glDeleteVertexArrays (I)V
+		ARG 0 vertexArray
 	METHOD glGenBuffers (Ljava/util/function/Consumer;)V
 		ARG 0 consumer
+	METHOD glGenVertexArrays (Ljava/util/function/Consumer;)V
+		ARG 0 vertexArrayConsumer
 	METHOD glUniform1 (ILjava/nio/FloatBuffer;)V
 		ARG 0 location
 		ARG 1 value
@@ -110,6 +151,12 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	METHOD initRenderer (IZ)V
 		ARG 0 debugVerbosity
 		ARG 1 debugSync
+	METHOD lambda$static$0 (Lit/unimi/dsi/fastutil/ints/IntConsumer;I)V
+		ARG 0 indexBuilder
+		ARG 1 primativeId
+	METHOD lambda$static$1 (Lit/unimi/dsi/fastutil/ints/IntConsumer;I)V
+		ARG 0 indexBuilder
+		ARG 1 primativeId
 	METHOD limitDisplayFPS (I)V
 		ARG 0 fps
 	METHOD lineWidth (F)V
@@ -139,14 +186,62 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 size
 	METHOD setErrorCallback (Lorg/lwjgl/glfw/GLFWErrorCallbackI;)V
 		ARG 0 callback
+	METHOD setProjectionMatrix (Lnet/minecraft/unmapped/C_gxvddjib;)V
+		ARG 0 projectionMatrix
+	METHOD setShader (Ljava/util/function/Supplier;)V
+		ARG 0 shader
+	METHOD setShaderColor (FFFF)V
+		ARG 0 r
+		ARG 1 g
+		ARG 2 b
+		ARG 3 a
+	METHOD setShaderFogColor (FFF)V
+		ARG 0 r
+		ARG 1 g
+		ARG 2 b
+	METHOD setShaderFogColor (FFFF)V
+		ARG 0 r
+		ARG 1 g
+		ARG 2 b
+		ARG 3 a
+	METHOD setShaderFogEnd (F)V
+		ARG 0 fogEnd
+	METHOD setShaderFogStart (F)V
+		ARG 0 fogStart
+	METHOD setShaderGameTime (JF)V
+		ARG 0 ticks
+		ARG 2 tickDelta
+	METHOD setShaderLights (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
+		ARG 0 light0
+		ARG 1 light1
+	METHOD setShaderTexture (II)V
+		ARG 0 location
+		ARG 1 textureId
+	METHOD setShaderTexture (ILnet/minecraft/unmapped/C_ncpywfca;)V
+		ARG 0 location
+		ARG 1 texture
+	METHOD setTextureMatrix (Lnet/minecraft/unmapped/C_gxvddjib;)V
+		ARG 0 textureMatrix
 	METHOD setupDefaultState (IIII)V
 		ARG 0 x
 		ARG 1 y
 		ARG 2 width
 		ARG 3 height
+	METHOD setupGui3DDiffuseLighting (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
+		ARG 0 light0
+		ARG 1 light1
+	METHOD setupGuiFlatDiffuseLighting (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
+		ARG 0 light0
+		ARG 1 light1
+	METHOD setupLevelDiffuseLighting (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_gxvddjib;)V
+		ARG 0 light0
+		ARG 1 light1
+		ARG 2 modelMatrix
 	METHOD setupOverlayColor (Ljava/util/function/IntSupplier;I)V
 		ARG 0 texture
 		ARG 1 size
+	METHOD setupShaderLights (Lnet/minecraft/unmapped/C_alllhitb;)V
+		ARG 0 shader
 	METHOD stencilFunc (III)V
 		ARG 0 func
 		ARG 1 ref
@@ -173,9 +268,17 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		FIELD f_khtmeuze size I
 		FIELD f_vqhrykhm elementFormat Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
 		FIELD f_yixkagdr indexMapper Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt$C_ynqmiuux;
+		METHOD <init> (IILcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt$C_ynqmiuux;)V
+			ARG 1 sizeMultiplier
+			ARG 2 increment
+			ARG 3 indexMapper
 		METHOD m_budzqjyz getElementFormat ()Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
 		METHOD m_jnsltcot getIndexConsumer (Ljava/nio/ByteBuffer;)Lit/unimi/dsi/fastutil/ints/IntConsumer;
 			ARG 1 indicesBuffer
+		METHOD m_kbunuitp (Ljava/nio/ByteBuffer;I)V
+			ARG 1 index
+		METHOD m_nnutkgoz (Ljava/nio/ByteBuffer;I)V
+			ARG 1 index
 		METHOD m_wsrymsnk grow (I)V
 			ARG 1 newSize
 		METHOD m_xnfxzwoi getId ()I
