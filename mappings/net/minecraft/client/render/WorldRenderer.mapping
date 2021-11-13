@@ -8,10 +8,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_crrssrby lightSkyBuffer Lnet/minecraft/unmapped/C_lhjdxjis;
 	FIELD f_cvmkpnxb chunkUpdateSmoother Lnet/minecraft/unmapped/C_zsqmrrjp;
 	FIELD f_dprzqrwh frustum Lnet/minecraft/unmapped/C_jwzjqevg;
-	FIELD f_dqbralkn visibleChunks Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 	FIELD f_dqbrmnkm lastCameraYaw D
 	FIELD f_dscsgzsp rainSizeZ [F
-	FIELD f_ekluhgww frame I
 	FIELD f_fkfkkpvn entityOutlinesFramebuffer Lnet/minecraft/unmapped/C_xxwgvelc;
 	FIELD f_fpgxhitd blockEntityRenderDispatcher Lnet/minecraft/unmapped/C_sicqxpzm;
 	FIELD f_frghdqwd SIZE_HALF_CHUNK I
@@ -22,7 +20,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_gnmkbmxx lastCameraZ D
 	FIELD f_gpltvhzk atomicBuiltChunkStorage Ljava/util/concurrent/atomic/AtomicReference;
 	FIELD f_hgjgxstw lastCameraX D
-	FIELD f_hnssniwx MAX_CHUNKS_WIDTH I
 	FIELD f_ivihlszs SNOW Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_izxsabgg MOON_PHASES Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_jpospzcg MINIMUM_FOG_DISTANCE I
@@ -69,7 +66,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_xdfdxugn lastFullBuiltChunkUpdate Ljava/util/concurrent/Future;
 	FIELD f_xqyukndo client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_xxmoghib regularEntityCount I
-	FIELD f_yeiisosa MAX_CHUNKS_AREA I
 	FIELD f_yievaftc RAIN Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_yikkuozy viewDistance I
 	FIELD f_yokwymuo HALF_SECOND_MILLIS I
@@ -202,13 +198,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 0 world
 		ARG 1 pos
 	METHOD m_hwnneikb renderStars ()V
-	METHOD m_iaxcipbi (Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_cnszsxvd$C_pqokfevb;DDDFFFFDDDDDD)V
-		ARG 12 minX
-		ARG 14 minY
-		ARG 16 minZ
-		ARG 18 maxX
-		ARG 20 maxY
-		ARG 22 maxZ
 	METHOD m_ikfmnwkn getEntityOutlinesFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_iqlxizqg isTerrainRenderComplete ()Z
 	METHOD m_iykjkqzv getEntitiesDebugString ()Ljava/lang/String;
@@ -303,12 +292,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 0 world
 		ARG 1 state
 		ARG 2 pos
-	METHOD m_nvloirpe updateRenderableChunks (Lnet/minecraft/unmapped/C_jwzjqevg;IZLnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;ILnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 frustrum
-		ARG 4 vec3dd
-		ARG 5 blockPos
-		ARG 6 builtChunk
-		ARG 8 blockPos2
 	METHOD m_olbxkwmx scheduleBlockRenders (IIIIII)V
 		ARG 1 minX
 		ARG 2 minY
@@ -331,8 +314,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 2 projectionMatrix
 		ARG 4 preStep
 	METHOD m_qypseyuy getWeatherFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
-	METHOD m_realmdbo (Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_tizlwnnv;)Lnet/minecraft/unmapped/C_igthdzux;
-		ARG 2 overlayVertexConsumer
 	METHOD m_rieppqrq renderEntity (Lnet/minecraft/unmapped/C_astfners;DDDFLnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;)V
 		ARG 1 entity
 		ARG 2 cameraX
@@ -376,8 +357,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
-	METHOD m_vilsfpqh (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sfkkabhx$C_iujdkhwk;)D
-		ARG 1 chunkInfo
 	METHOD m_vnssyyxd setWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
 		ARG 1 world
 	METHOD m_vpyxycyh tickRainSplashing (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
