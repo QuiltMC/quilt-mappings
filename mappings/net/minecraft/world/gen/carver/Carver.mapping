@@ -1,33 +1,53 @@
-CLASS net/minecraft/unmapped/C_xqlnnlwf net/minecraft/world/gen/carver/Carver
-	FIELD f_asvizikx alwaysCarvableBlocks Ljava/util/Set;
-	FIELD f_ddtmjrtz CAVE_AIR Lnet/minecraft/unmapped/C_pmeibtxt;
-	FIELD f_dmsjjnhj LAVA Lnet/minecraft/unmapped/C_fuitekqx;
-	FIELD f_kdlvkzbm AIR Lnet/minecraft/unmapped/C_pmeibtxt;
-	FIELD f_qkcervwi carvableFluids Ljava/util/Set;
-	FIELD f_yakwncxk codec Lcom/mojang/serialization/Codec;
-	FIELD f_ylduwsfx RAVINE Lnet/minecraft/unmapped/C_xqlnnlwf;
-	FIELD f_yrlcwhqc WATER Lnet/minecraft/unmapped/C_fuitekqx;
+CLASS net/minecraft/unmapped/C_fwlnnlqx net/minecraft/world/gen/carver/Carver
+	FIELD f_derwzwfp WATER Lnet/minecraft/unmapped/C_xqketiuf;
+	FIELD f_hgftjxmo RAVINE Lnet/minecraft/unmapped/C_fwlnnlqx;
+	FIELD f_jnkiuwfj codec Lcom/mojang/serialization/Codec;
+	FIELD f_piliktvj AIR Lnet/minecraft/unmapped/C_txtbiemp;
+	FIELD f_tdpwxkzo CAVE_AIR Lnet/minecraft/unmapped/C_txtbiemp;
+	FIELD f_vfkvsqsp alwaysCarvableBlocks Ljava/util/Set;
+	FIELD f_wfuqktpp LAVA Lnet/minecraft/unmapped/C_xqketiuf;
+	FIELD f_zepbight carvableFluids Ljava/util/Set;
 	METHOD <init> (Lcom/mojang/serialization/Codec;)V
 		ARG 1 configCodec
-	METHOD m_iefnzsxq register (Ljava/lang/String;Lnet/minecraft/unmapped/C_xqlnnlwf;)Lnet/minecraft/unmapped/C_xqlnnlwf;
+	METHOD m_feeyhvhh register (Ljava/lang/String;Lnet/minecraft/unmapped/C_fwlnnlqx;)Lnet/minecraft/unmapped/C_fwlnnlqx;
 		ARG 0 name
 		ARG 1 carver
-	METHOD m_iwgbinui isDebug (Lnet/minecraft/unmapped/C_txyetzmk;)Z
-		ARG 0 config
-	METHOD m_jaqrmexy shouldCarve (Lnet/minecraft/unmapped/C_txyetzmk;Ljava/util/Random;)Z
+	METHOD m_ibvykjzo carve (Lnet/minecraft/unmapped/C_kklqkmyc;Lnet/minecraft/unmapped/C_kmzteyxt;Lnet/minecraft/unmapped/C_lwzmmmqr;Ljava/util/function/Function;Ljava/util/Random;Lnet/minecraft/unmapped/C_jpghdzxc;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_nrynfjsf;)Z
+		ARG 1 context
+		ARG 2 config
+		ARG 3 chunk
+		ARG 4 posToBiome
+		ARG 5 random
+		ARG 7 pos
+	METHOD m_lxcegymh getCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_ntzbeuzy configure (Lnet/minecraft/unmapped/C_kmzteyxt;)Lnet/minecraft/unmapped/C_tgebytdh;
+		ARG 1 config
+	METHOD m_nvpnnkyk getBranchFactor ()I
+	METHOD m_pjiwanpe shouldCarve (Lnet/minecraft/unmapped/C_kmzteyxt;Ljava/util/Random;)Z
 		ARG 1 config
 		ARG 2 random
-	METHOD m_jqhtzbbb getBranchFactor ()I
-	METHOD m_lmdlwfva isOnBoundary (IIIIII)Z
-		ARG 0 x
-		ARG 1 z
-		ARG 2 minX
-		ARG 3 maxX
-		ARG 4 minZ
-		ARG 5 maxZ
-	METHOD m_mmuxaojv configure (Lnet/minecraft/unmapped/C_txyetzmk;)Lnet/minecraft/unmapped/C_hdtybegt;
-		ARG 1 config
-	METHOD m_npuatyow carveRegion (Lnet/minecraft/unmapped/C_cymkqlkk;Lnet/minecraft/unmapped/C_txyetzmk;Lnet/minecraft/unmapped/C_rqmmmzwl;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_cxzdhgpj;DDDDDLnet/minecraft/unmapped/C_fsjfnyrn;Lnet/minecraft/unmapped/C_xqlnnlwf$C_xixcqoyh;)Z
+	METHOD m_qtntwzbf canCarveBranch (Lnet/minecraft/unmapped/C_ynrszrtu;DDIIF)Z
+		ARG 0 pos
+		ARG 1 x
+		ARG 3 z
+		ARG 5 branchIndex
+		ARG 6 branchCount
+		ARG 7 baseWidth
+	METHOD m_rirunnlh getState (Lnet/minecraft/unmapped/C_kklqkmyc;Lnet/minecraft/unmapped/C_kmzteyxt;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jpghdzxc;)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 1 context
+		ARG 2 config
+		ARG 3 pos
+		ARG 4 sampler
+	METHOD m_sgqbrgyz carveAtPoint (Lnet/minecraft/unmapped/C_kklqkmyc;Lnet/minecraft/unmapped/C_kmzteyxt;Lnet/minecraft/unmapped/C_lwzmmmqr;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_nrynfjsf;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;Lnet/minecraft/unmapped/C_jpghdzxc;Lorg/apache/commons/lang3/mutable/MutableBoolean;)Z
+		ARG 1 context
+		ARG 2 config
+		ARG 3 chunk
+		ARG 4 posToBiome
+		ARG 6 pos
+		ARG 7 downPos
+		ARG 8 sampler
+		ARG 9 foundSurface
+	METHOD m_umndhlen carveRegion (Lnet/minecraft/unmapped/C_kklqkmyc;Lnet/minecraft/unmapped/C_kmzteyxt;Lnet/minecraft/unmapped/C_lwzmmmqr;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_jpghdzxc;DDDDDLnet/minecraft/unmapped/C_nrynfjsf;Lnet/minecraft/unmapped/C_fwlnnlqx$C_uxsoiwwh;)Z
 		ARG 1 context
 		ARG 2 config
 		ARG 4 posToBiome
@@ -38,40 +58,20 @@ CLASS net/minecraft/unmapped/C_xqlnnlwf net/minecraft/world/gen/carver/Carver
 		ARG 12 horizontalScale
 		ARG 14 verticalScale
 		ARG 17 skipPredicate
-	METHOD m_odmbahte carve (Lnet/minecraft/unmapped/C_cymkqlkk;Lnet/minecraft/unmapped/C_txyetzmk;Lnet/minecraft/unmapped/C_rqmmmzwl;Ljava/util/function/Function;Ljava/util/Random;Lnet/minecraft/unmapped/C_cxzdhgpj;Lnet/minecraft/unmapped/C_utrzsrny;Lnet/minecraft/unmapped/C_fsjfnyrn;)Z
-		ARG 1 context
-		ARG 2 config
-		ARG 3 chunk
-		ARG 4 posToBiome
-		ARG 5 random
-		ARG 7 pos
-	METHOD m_ofybfstg getDebugState (Lnet/minecraft/unmapped/C_txyetzmk;Lnet/minecraft/unmapped/C_pmeibtxt;)Lnet/minecraft/unmapped/C_pmeibtxt;
+	METHOD m_vegdakvl isOnBoundary (IIIIII)Z
+		ARG 0 x
+		ARG 1 z
+		ARG 2 minX
+		ARG 3 maxX
+		ARG 4 minZ
+		ARG 5 maxZ
+	METHOD m_yndxqyid getDebugState (Lnet/minecraft/unmapped/C_kmzteyxt;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 0 config
 		ARG 1 state
-	METHOD m_pvnaalct canCarveBranch (Lnet/minecraft/unmapped/C_utrzsrny;DDIIF)Z
-		ARG 0 pos
-		ARG 1 x
-		ARG 3 z
-		ARG 5 branchIndex
-		ARG 6 branchCount
-		ARG 7 baseWidth
-	METHOD m_smjuzcqm getState (Lnet/minecraft/unmapped/C_cymkqlkk;Lnet/minecraft/unmapped/C_txyetzmk;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_cxzdhgpj;)Lnet/minecraft/unmapped/C_pmeibtxt;
-		ARG 1 context
-		ARG 2 config
-		ARG 3 pos
-		ARG 4 sampler
-	METHOD m_vwtklmjr carveAtPoint (Lnet/minecraft/unmapped/C_cymkqlkk;Lnet/minecraft/unmapped/C_txyetzmk;Lnet/minecraft/unmapped/C_rqmmmzwl;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_fsjfnyrn;Lnet/minecraft/unmapped/C_kkdaznyh$C_koyyvhhw;Lnet/minecraft/unmapped/C_kkdaznyh$C_koyyvhhw;Lnet/minecraft/unmapped/C_cxzdhgpj;Lorg/apache/commons/lang3/mutable/MutableBoolean;)Z
-		ARG 1 context
-		ARG 2 config
-		ARG 3 chunk
-		ARG 4 posToBiome
-		ARG 6 pos
-		ARG 7 downPos
-		ARG 8 sampler
-		ARG 9 foundSurface
-	METHOD m_yakwncxk getCodec ()Lcom/mojang/serialization/Codec;
-	CLASS C_xixcqoyh SkipPredicate
-		METHOD shouldSkip shouldSkip (Lnet/minecraft/unmapped/C_cymkqlkk;DDDI)Z
+	METHOD m_yrhbfqlr isDebug (Lnet/minecraft/unmapped/C_kmzteyxt;)Z
+		ARG 0 config
+	CLASS C_uxsoiwwh SkipPredicate
+		METHOD shouldSkip shouldSkip (Lnet/minecraft/unmapped/C_kklqkmyc;DDDI)Z
 			ARG 1 context
 			ARG 2 scaledRelativeX
 			ARG 4 scaledRelativeY

@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_eogzjcbh net/minecraft/util/math/Box
+CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 	COMMENT An immutable box with double-valued coordinates. The box is axis-aligned
 	COMMENT and the coordinates are minimum inclusive and maximum exclusive.
 	COMMENT
@@ -6,13 +6,13 @@ CLASS net/minecraft/unmapped/C_eogzjcbh net/minecraft/util/math/Box
 	COMMENT implementations and can be used as a map key.
 	COMMENT
 	COMMENT @see BlockBox
-	FIELD f_afmxvlpp minZ D
-	FIELD f_gryapdnx maxX D
-	FIELD f_jgxedgsf minY D
-	FIELD f_rpdpkqyc minX D
-	FIELD f_skgdidbe maxY D
-	FIELD f_tkznoipn EPSILON D
-	FIELD f_vhooapia maxZ D
+	FIELD f_cucdtdeo EPSILON D
+	FIELD f_evumypfq minY D
+	FIELD f_fctnermx minX D
+	FIELD f_iybynzsq maxX D
+	FIELD f_mxwrflwm minZ D
+	FIELD f_qebzdlbe maxZ D
+	FIELD f_ruenhmyd maxY D
 	METHOD <init> (DDDDDD)V
 		COMMENT Creates a box of the given positions as corners.
 		ARG 1 x1
@@ -21,44 +21,27 @@ CLASS net/minecraft/unmapped/C_eogzjcbh net/minecraft/util/math/Box
 		ARG 7 x2
 		ARG 9 y2
 		ARG 11 z2
-	METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		COMMENT Creates a box that only contains the given block position.
 		ARG 1 pos
-	METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_kkdaznyh;)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		COMMENT Creates a box of the given positions as corners.
 		ARG 1 pos1
 		ARG 2 pos2
-	METHOD <init> (Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_xxfpupgv;)V
+	METHOD <init> (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		COMMENT Creates a box of the given positions as corners.
 		ARG 1 pos1
 		ARG 2 pos2
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_bkrqdlph offset (DDD)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates a box that is translated by {@code x}, {@code y}, {@code z} on
-		COMMENT each axis from this box.
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-	METHOD m_bkrqdlph offset (Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates a box that is translated by {@code blockPos.getX()}, {@code
-		COMMENT blockPos.getY()}, {@code blockPos.getZ()} on each axis from this box.
-		COMMENT
-		COMMENT @see #offset(double, double, double)
-		ARG 1 blockPos
-	METHOD m_bkrqdlph offset (Lnet/minecraft/unmapped/C_xxfpupgv;)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates a box that is translated by {@code vec.x}, {@code vec.y}, {@code
-		COMMENT vec.z} on each axis from this box.
-		COMMENT
-		COMMENT @see #offset(double, double, double)
-		ARG 1 vec
-	METHOD m_bqroibrv shrink (DDD)Lnet/minecraft/unmapped/C_eogzjcbh;
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-	METHOD m_crqbqwzv from (Lnet/minecraft/unmapped/C_zzqpyqmh;)Lnet/minecraft/unmapped/C_eogzjcbh;
-		ARG 0 mutable
-	METHOD m_cxbcgsrr traceCollisionSide (Lnet/minecraft/unmapped/C_eogzjcbh;Lnet/minecraft/unmapped/C_xxfpupgv;[DLnet/minecraft/unmapped/C_fxhiuupx;DDD)Lnet/minecraft/unmapped/C_fxhiuupx;
+	METHOD m_armyzcig getZLength ()D
+	METHOD m_earezljt getAverageSideLength ()D
+	METHOD m_emgqmgbh raycast (Ljava/lang/Iterable;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_jdakttms;
+		ARG 0 boxes
+		ARG 1 from
+		ARG 2 to
+		ARG 3 pos
+	METHOD m_fxctodjh traceCollisionSide (Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_vgpupfxx;[DLnet/minecraft/unmapped/C_xpuuihxf;DDD)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 box
 		ARG 1 intersectingVector
 		ARG 2 traceDistanceResult
@@ -66,25 +49,57 @@ CLASS net/minecraft/unmapped/C_eogzjcbh net/minecraft/util/math/Box
 		ARG 4 deltaX
 		ARG 6 deltaY
 		ARG 8 deltaZ
-	METHOD m_djivhwvb getMin (Lnet/minecraft/unmapped/C_fxhiuupx$C_gltxchpd;)D
-		ARG 1 axis
-	METHOD m_epbxaoww intersection (Lnet/minecraft/unmapped/C_eogzjcbh;)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates the maximum box that this box and the given box contain.
-		ARG 1 box
-	METHOD m_kfgppbnq withMinX (D)Lnet/minecraft/unmapped/C_eogzjcbh;
+	METHOD m_hagzytre from (Lnet/minecraft/unmapped/C_hmqypqzz;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		ARG 0 mutable
+	METHOD m_hwfgvpmt contract (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT @see #expand(double)
+		ARG 1 value
+	METHOD m_icqbqiis contract (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT @see #expand(double, double, double)
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+	METHOD m_ihtgrjhm offset (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box that is translated by {@code blockPos.getX()}, {@code
+		COMMENT blockPos.getY()}, {@code blockPos.getZ()} on each axis from this box.
+		COMMENT
+		COMMENT @see #offset(double, double, double)
+		ARG 1 blockPos
+	METHOD m_iigjxfsp stretch (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		ARG 1 scale
+	METHOD m_itihbbap withMinX (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT Creates a box with the minimum X provided and all other coordinates
 		COMMENT of this box.
 		ARG 1 minX
-	METHOD m_msazywzm withMaxZ (D)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates a box with the maximum Z provided and all other coordinates
+	METHOD m_iwqlsdyo intersects (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
+		COMMENT Checks if this box intersects the given box.
+		ARG 1 box
+	METHOD m_iwszzbul contains (DDD)Z
+		COMMENT Checks if the given position is in this box.
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+	METHOD m_jaxcobme shrink (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+	METHOD m_jnmfrlwx getXLength ()D
+	METHOD m_mhprjdid stretch (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+	METHOD m_ndhcdxfs raycast (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Ljava/util/Optional;
+		ARG 1 min
+		ARG 2 max
+	METHOD m_nsxhcdwg from (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		ARG 0 pos
+	METHOD m_nwfyjcmj withMinY (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with the minimum Y provided and all other coordinates
 		COMMENT of this box.
-		ARG 1 maxZ
-	METHOD m_mxhhhhjk isValid ()Z
-		COMMENT Checks if any of the coordinates of this box is {@linkplain
-		COMMENT Double#isNaN(double) not a number}.
-	METHOD m_mzmimnkn getCenter ()Lnet/minecraft/unmapped/C_xxfpupgv;
+		ARG 1 minY
+	METHOD m_nwrxvqdn getCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT Returns the center position of this box.
-	METHOD m_njxfsagj traceCollisionSide ([DLnet/minecraft/unmapped/C_fxhiuupx;DDDDDDDDLnet/minecraft/unmapped/C_fxhiuupx;DDD)Lnet/minecraft/unmapped/C_fxhiuupx;
+	METHOD m_oatsaswm traceCollisionSide ([DLnet/minecraft/unmapped/C_xpuuihxf;DDDDDDDDLnet/minecraft/unmapped/C_xpuuihxf;DDD)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 traceDistanceResult
 		ARG 1 approachDirection
 		ARG 2 deltaX
@@ -99,15 +114,51 @@ CLASS net/minecraft/unmapped/C_eogzjcbh net/minecraft/util/math/Box
 		ARG 19 startX
 		ARG 21 startY
 		ARG 23 startZ
-	METHOD m_oypchmto contract (D)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT @see #expand(double)
-		ARG 1 value
-	METHOD m_oypchmto contract (DDD)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT @see #expand(double, double, double)
+	METHOD m_owcynrzk intersection (Lnet/minecraft/unmapped/C_hbcjzgoe;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates the maximum box that this box and the given box contain.
+		ARG 1 box
+	METHOD m_piuslcxm offset (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box that is translated by {@code vec.x}, {@code vec.y}, {@code
+		COMMENT vec.z} on each axis from this box.
+		COMMENT
+		COMMENT @see #offset(double, double, double)
+		ARG 1 vec
+	METHOD m_prkoqhgl isValid ()Z
+		COMMENT Checks if any of the coordinates of this box is {@linkplain
+		COMMENT Double#isNaN(double) not a number}.
+	METHOD m_pzvscshx expand (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT @see #contract(double, double, double)
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
-	METHOD m_pjwubmhw intersects (DDDDDD)Z
+	METHOD m_qawrpvjc contains (Lnet/minecraft/unmapped/C_vgpupfxx;)Z
+		COMMENT Checks if the given position is in this box.
+		ARG 1 pos
+	METHOD m_rkqksbvs getMin (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)D
+		ARG 1 axis
+	METHOD m_rptaaemx of (Lnet/minecraft/unmapped/C_vgpupfxx;DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		ARG 0 center
+		ARG 1 dx
+		ARG 3 dy
+		ARG 5 dz
+	METHOD m_rsxzjhuz getYLength ()D
+	METHOD m_sknarvql union (Lnet/minecraft/unmapped/C_hbcjzgoe;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates the minimum box that contains this box and the given box.
+		ARG 1 box
+	METHOD m_tpawmwje intersects (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Z
+		COMMENT Checks if this box intersects the box of the given positions as
+		COMMENT corners.
+		ARG 1 pos1
+		ARG 2 pos2
+	METHOD m_uegujhig withMinZ (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with the minimum Z provided and all other coordinates
+		COMMENT of this box.
+		ARG 1 minZ
+	METHOD m_uzekxbgu withMaxX (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with the maximum X provided and all other coordinates
+		COMMENT of this box.
+		ARG 1 maxX
+	METHOD m_vikdnbet intersects (DDDDDD)Z
 		COMMENT Checks if this box intersects the box of the given coordinates.
 		ARG 1 minX
 		ARG 3 minY
@@ -115,73 +166,22 @@ CLASS net/minecraft/unmapped/C_eogzjcbh net/minecraft/util/math/Box
 		ARG 7 maxX
 		ARG 9 maxY
 		ARG 11 maxZ
-	METHOD m_pjwubmhw intersects (Lnet/minecraft/unmapped/C_eogzjcbh;)Z
-		COMMENT Checks if this box intersects the given box.
-		ARG 1 box
-	METHOD m_pjwubmhw intersects (Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_xxfpupgv;)Z
-		COMMENT Checks if this box intersects the box of the given positions as
-		COMMENT corners.
-		ARG 1 pos1
-		ARG 2 pos2
-	METHOD m_qkupibqd withMinY (D)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates a box with the minimum Y provided and all other coordinates
+	METHOD m_vwkxxtka withMaxZ (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with the maximum Z provided and all other coordinates
 		COMMENT of this box.
-		ARG 1 minY
-	METHOD m_qsvlhevi getYLength ()D
-	METHOD m_qwqecfgt expand (D)Lnet/minecraft/unmapped/C_eogzjcbh;
+		ARG 1 maxZ
+	METHOD m_wsmxurzz expand (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT @see #contract(double)
 		ARG 1 value
-	METHOD m_qwqecfgt expand (DDD)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT @see #contract(double, double, double)
+	METHOD m_xejolzay offset (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box that is translated by {@code x}, {@code y}, {@code z} on
+		COMMENT each axis from this box.
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
-	METHOD m_sdzhpvyt getMax (Lnet/minecraft/unmapped/C_fxhiuupx$C_gltxchpd;)D
-		ARG 1 axis
-	METHOD m_txgxiaxg of (Lnet/minecraft/unmapped/C_xxfpupgv;DDD)Lnet/minecraft/unmapped/C_eogzjcbh;
-		ARG 0 center
-		ARG 1 dx
-		ARG 3 dy
-		ARG 5 dz
-	METHOD m_vquvutiv withMaxY (D)Lnet/minecraft/unmapped/C_eogzjcbh;
+	METHOD m_yyzqthxa withMaxY (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT Creates a box with the maximum Y provided and all other coordinates
 		COMMENT of this box.
 		ARG 1 maxY
-	METHOD m_vxcqvaew from (Lnet/minecraft/unmapped/C_xxfpupgv;)Lnet/minecraft/unmapped/C_eogzjcbh;
-		ARG 0 pos
-	METHOD m_vxrbdgzg getAverageSideLength ()D
-	METHOD m_vxwavxvp getXLength ()D
-	METHOD m_vyqzagom raycast (Ljava/lang/Iterable;Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_kkdaznyh;)Lnet/minecraft/unmapped/C_smttkadj;
-		ARG 0 boxes
-		ARG 1 from
-		ARG 2 to
-		ARG 3 pos
-	METHOD m_vyqzagom raycast (Lnet/minecraft/unmapped/C_xxfpupgv;Lnet/minecraft/unmapped/C_xxfpupgv;)Ljava/util/Optional;
-		ARG 1 min
-		ARG 2 max
-	METHOD m_xejzywis getZLength ()D
-	METHOD m_xfzqfsqr withMinZ (D)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates a box with the minimum Z provided and all other coordinates
-		COMMENT of this box.
-		ARG 1 minZ
-	METHOD m_xqedxlau union (Lnet/minecraft/unmapped/C_eogzjcbh;)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates the minimum box that contains this box and the given box.
-		ARG 1 box
-	METHOD m_yytbjtoq withMaxX (D)Lnet/minecraft/unmapped/C_eogzjcbh;
-		COMMENT Creates a box with the maximum X provided and all other coordinates
-		COMMENT of this box.
-		ARG 1 maxX
-	METHOD m_ztvmqpmw contains (DDD)Z
-		COMMENT Checks if the given position is in this box.
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-	METHOD m_ztvmqpmw contains (Lnet/minecraft/unmapped/C_xxfpupgv;)Z
-		COMMENT Checks if the given position is in this box.
-		ARG 1 pos
-	METHOD m_zwxwytbx stretch (DDD)Lnet/minecraft/unmapped/C_eogzjcbh;
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-	METHOD m_zwxwytbx stretch (Lnet/minecraft/unmapped/C_xxfpupgv;)Lnet/minecraft/unmapped/C_eogzjcbh;
-		ARG 1 scale
+	METHOD m_zmkdorxa getMax (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)D
+		ARG 1 axis

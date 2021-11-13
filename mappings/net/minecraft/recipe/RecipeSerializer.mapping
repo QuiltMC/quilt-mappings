@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_tjzkrxfx net/minecraft/recipe/RecipeSerializer
+CLASS net/minecraft/unmapped/C_xfxrkzjt net/minecraft/recipe/RecipeSerializer
 	COMMENT The recipe serializer controls the serialization and deserialization of
 	COMMENT recipe content. The caller should handle the serialization of recipes' IDs.
 	COMMENT
@@ -10,26 +10,51 @@ CLASS net/minecraft/unmapped/C_tjzkrxfx net/minecraft/recipe/RecipeSerializer
 	COMMENT client, the client will disconnect upon receiving the recipe; if a
 	COMMENT recipe JSON intended for an absent recipe serializer is read, it is
 	COMMENT skipped.
-	FIELD f_azbfcymz BLASTING Lnet/minecraft/unmapped/C_yvghmvun;
-	FIELD f_brorvpfg REPAIR_ITEM Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_frenwstw BOOK_CLONING Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_fscjcsbi FIREWORK_STAR Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_iwbtbljp MAP_EXTENDING Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_izhpccjv TIPPED_ARROW Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_lyxohnaj SHAPELESS Lnet/minecraft/unmapped/C_tjzkrxfx;
-	FIELD f_lzflqcnv ARMOR_DYE Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_mshqjfyf SHIELD_DECORATION Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_otpkqxeh SMOKING Lnet/minecraft/unmapped/C_yvghmvun;
-	FIELD f_smgysglu SHAPED Lnet/minecraft/unmapped/C_tjzkrxfx;
-	FIELD f_thxmjbjd SUSPICIOUS_STEW Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_usbcvprt SHULKER_BOX Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_xbzeltcz BANNER_DUPLICATE Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_xvsoitfi MAP_CLONING Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_yhprrytj FIREWORK_STAR_FADE Lnet/minecraft/unmapped/C_qqkwmvkz;
-	FIELD f_yofgakuz CAMPFIRE_COOKING Lnet/minecraft/unmapped/C_yvghmvun;
-	FIELD f_yrzbrtut SMELTING Lnet/minecraft/unmapped/C_yvghmvun;
-	FIELD f_znkiwkxf FIREWORK_ROCKET Lnet/minecraft/unmapped/C_qqkwmvkz;
-	METHOD m_amdvybik read (Lnet/minecraft/unmapped/C_acfwypcn;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_dqwdmrwa;
+	FIELD f_bsymyacx MAP_EXTENDING Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_duqeqorh TIPPED_ARROW Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_ehotoanp BOOK_CLONING Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_etzbwufu FIREWORK_STAR Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_fjcfrsjs BANNER_DUPLICATE Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_fwjzmvde CAMPFIRE_COOKING Lnet/minecraft/unmapped/C_nuvmhgvy;
+	FIELD f_hgungvdh SHIELD_DECORATION Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_nrmanffs SHULKER_BOX Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_odewtenn REPAIR_ITEM Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_ontpqekw SHAPED Lnet/minecraft/unmapped/C_xfxrkzjt;
+	FIELD f_otifawjk SMELTING Lnet/minecraft/unmapped/C_nuvmhgvy;
+	FIELD f_pqlkqgfg MAP_CLONING Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_prvtpzbd SMOKING Lnet/minecraft/unmapped/C_nuvmhgvy;
+	FIELD f_qmqmsgad BLASTING Lnet/minecraft/unmapped/C_nuvmhgvy;
+	FIELD f_rgjlthcc ARMOR_DYE Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_rnagbeoj SHAPELESS Lnet/minecraft/unmapped/C_xfxrkzjt;
+	FIELD f_vcnwilza FIREWORK_STAR_FADE Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_wgumktsg FIREWORK_ROCKET Lnet/minecraft/unmapped/C_zkvmwkqq;
+	FIELD f_wtqevgus SUSPICIOUS_STEW Lnet/minecraft/unmapped/C_zkvmwkqq;
+	METHOD m_alfbnzgr write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_awrmdwqd;)V
+		COMMENT Writes a recipe to a packet byte buf, usually on the server.
+		COMMENT
+		COMMENT <p>The recipe's ID is already written into the buf when this is called.
+		COMMENT
+		COMMENT <p>This can throw whatever exception the packet byte buf throws. This may be
+		COMMENT called in the netty event loop than the server game engine thread.
+		ARG 1 buf
+			COMMENT the recipe buf
+		ARG 2 recipe
+			COMMENT the recipe
+	METHOD m_bkscqwta read (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_awrmdwqd;
+		COMMENT Reads a recipe from a packet byte buf, usually on the client.
+		COMMENT
+		COMMENT <p>This can throw whatever exception the packet byte buf throws. This may be
+		COMMENT called in the netty event loop than the client game engine thread.
+		COMMENT
+		COMMENT @return the read recipe
+		ARG 1 id
+			COMMENT the recipe's ID
+		ARG 2 buf
+			COMMENT the recipe buf
+	METHOD m_bmlvpapu register (Ljava/lang/String;Lnet/minecraft/unmapped/C_xfxrkzjt;)Lnet/minecraft/unmapped/C_xfxrkzjt;
+		ARG 0 id
+		ARG 1 serializer
+	METHOD m_cwkkfreh read (Lnet/minecraft/unmapped/C_ncpywfca;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_awrmdwqd;
 		COMMENT Reads a recipe from a JSON object.
 		COMMENT
 		COMMENT @implNote If this throws any exception besides {@link com.google.gson.JsonParseException}
@@ -42,28 +67,3 @@ CLASS net/minecraft/unmapped/C_tjzkrxfx net/minecraft/recipe/RecipeSerializer
 			COMMENT the recipe's ID
 		ARG 2 json
 			COMMENT the recipe JSON
-	METHOD m_fwyohacg write (Lnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_dqwdmrwa;)V
-		COMMENT Writes a recipe to a packet byte buf, usually on the server.
-		COMMENT
-		COMMENT <p>The recipe's ID is already written into the buf when this is called.
-		COMMENT
-		COMMENT <p>This can throw whatever exception the packet byte buf throws. This may be
-		COMMENT called in the netty event loop than the server game engine thread.
-		ARG 1 buf
-			COMMENT the recipe buf
-		ARG 2 recipe
-			COMMENT the recipe
-	METHOD m_iefnzsxq register (Ljava/lang/String;Lnet/minecraft/unmapped/C_tjzkrxfx;)Lnet/minecraft/unmapped/C_tjzkrxfx;
-		ARG 0 id
-		ARG 1 serializer
-	METHOD m_nkkswjap read (Lnet/minecraft/unmapped/C_acfwypcn;Lnet/minecraft/unmapped/C_ocwdyfdi;)Lnet/minecraft/unmapped/C_dqwdmrwa;
-		COMMENT Reads a recipe from a packet byte buf, usually on the client.
-		COMMENT
-		COMMENT <p>This can throw whatever exception the packet byte buf throws. This may be
-		COMMENT called in the netty event loop than the client game engine thread.
-		COMMENT
-		COMMENT @return the read recipe
-		ARG 1 id
-			COMMENT the recipe's ID
-		ARG 2 buf
-			COMMENT the recipe buf

@@ -1,19 +1,47 @@
-CLASS net/minecraft/unmapped/C_ddhohjor net/minecraft/world/gen/trunk/TrunkPlacer
-	FIELD f_avuqeilb MAX_BASE_HEIGHT I
-	FIELD f_ihjdsezz MAX_RANDOM_HEIGHT I
-	FIELD f_qvbexqbt baseHeight I
-	FIELD f_rycizzra firstRandomHeight I
-	FIELD f_vngqsybi TYPE_CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_xnvrgmrp secondRandomHeight I
+CLASS net/minecraft/unmapped/C_rojhohdd net/minecraft/world/gen/trunk/TrunkPlacer
+	FIELD f_abhxfqww baseHeight I
+	FIELD f_gcyymejm MAX_RANDOM_HEIGHT I
+	FIELD f_mkqgyfge firstRandomHeight I
+	FIELD f_oqmfjlgl MAX_BASE_HEIGHT I
+	FIELD f_skzuxwwp TYPE_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_xgekxsic secondRandomHeight I
 	METHOD <init> (III)V
 		ARG 1 baseHeight
 		ARG 2 firstRandomHeight
 		ARG 3 secondRandomHeight
-	METHOD m_aamaemfp (Lnet/minecraft/unmapped/C_pmeibtxt;)Z
+	METHOD m_dpwmgxqd (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 0 state
-	METHOD m_bzeasooq (Lnet/minecraft/unmapped/C_ddhohjor;)Ljava/lang/Integer;
+	METHOD m_enresfep (Lnet/minecraft/unmapped/C_rojhohdd;)Ljava/lang/Integer;
 		ARG 0 placer
-	METHOD m_cwtoetbl generate (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;ILnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_dtkdyhtz;)Ljava/util/List;
+	METHOD m_ensuiaqn getHeight (Ljava/util/Random;)I
+		ARG 1 random
+	METHOD m_fhiywlzl (Lnet/minecraft/unmapped/C_rojhohdd;)Ljava/lang/Integer;
+		ARG 0 placer
+	METHOD m_gkukhgzw getAndSetState (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_zthydktd;Ljava/util/function/Function;)Z
+		ARG 0 world
+		ARG 1 replacer
+		ARG 2 random
+		ARG 3 pos
+		ARG 4 config
+		ARG 5 stateProvider
+	METHOD m_gwxnywdv getAndSetState (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_zthydktd;)Z
+		ARG 0 world
+		ARG 1 replacer
+		ARG 2 random
+		ARG 3 pos
+		ARG 4 config
+	METHOD m_kwohbugv canGenerate (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 0 world
+		ARG 1 pos
+	METHOD m_ozvnumml trySetState (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;Lnet/minecraft/unmapped/C_zthydktd;)V
+		ARG 0 world
+		ARG 1 replacer
+		ARG 2 random
+		ARG 3 pos
+		ARG 4 config
+	METHOD m_snjdvlfw (Lnet/minecraft/unmapped/C_rojhohdd;)Ljava/lang/Integer;
+		ARG 0 placer
+	METHOD m_ttadazwj generate (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;ILnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_zthydktd;)Ljava/util/List;
 		COMMENT Generates the trunk blocks and return a list of tree nodes to place foliage around
 		ARG 1 world
 		ARG 2 replacer
@@ -21,40 +49,12 @@ CLASS net/minecraft/unmapped/C_ddhohjor net/minecraft/world/gen/trunk/TrunkPlace
 		ARG 4 height
 		ARG 5 startPos
 		ARG 6 config
-	METHOD m_iprsaysh canGenerate (Lnet/minecraft/unmapped/C_bmckusga;Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 0 world
-		ARG 1 pos
-	METHOD m_kkkhzwzr setToDirt (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_dtkdyhtz;)V
+	METHOD m_unyewomb setToDirt (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_zthydktd;)V
 		ARG 0 world
 		ARG 1 replacer
 		ARG 2 random
 		ARG 3 pos
 		ARG 4 config
-	METHOD m_kpdwhrng getType ()Lnet/minecraft/unmapped/C_dtflvnnd;
-	METHOD m_oxlgfvln (Lnet/minecraft/unmapped/C_ddhohjor;)Ljava/lang/Integer;
-		ARG 0 placer
-	METHOD m_qytszphi fillTrunkPlacerFields (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P3;
+	METHOD m_zmfglcmb fillTrunkPlacerFields (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P3;
 		ARG 0 instance
-	METHOD m_ruuwietc getAndSetState (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_dtkdyhtz;)Z
-		ARG 0 world
-		ARG 1 replacer
-		ARG 2 random
-		ARG 3 pos
-		ARG 4 config
-	METHOD m_ruuwietc getAndSetState (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_dtkdyhtz;Ljava/util/function/Function;)Z
-		ARG 0 world
-		ARG 1 replacer
-		ARG 2 random
-		ARG 3 pos
-		ARG 4 config
-		ARG 5 stateProvider
-	METHOD m_sjyvkyaj (Lnet/minecraft/unmapped/C_ddhohjor;)Ljava/lang/Integer;
-		ARG 0 placer
-	METHOD m_zmouaxrw trySetState (Lnet/minecraft/unmapped/C_bmckusga;Ljava/util/function/BiConsumer;Ljava/util/Random;Lnet/minecraft/unmapped/C_kkdaznyh$C_koyyvhhw;Lnet/minecraft/unmapped/C_dtkdyhtz;)V
-		ARG 0 world
-		ARG 1 replacer
-		ARG 2 random
-		ARG 3 pos
-		ARG 4 config
-	METHOD m_znmdwqdr getHeight (Ljava/util/Random;)I
-		ARG 1 random
+	METHOD m_ztpkjmfe getType ()Lnet/minecraft/unmapped/C_dnnvlftd;

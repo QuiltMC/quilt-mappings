@@ -1,14 +1,14 @@
-CLASS net/minecraft/unmapped/C_wxqpqarc net/minecraft/client/util/ScreenshotRecorder
+CLASS net/minecraft/unmapped/C_craqpqxw net/minecraft/client/util/ScreenshotRecorder
 	COMMENT A screenshot recorder takes screenshots and saves them into tga file format. It also
 	COMMENT holds a few utility methods for other types of screenshots.
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_eadseklz file Ljava/io/File;
-	FIELD f_fwktszbj width I
-	FIELD f_nkoheunf height I
-	FIELD f_oarjbvxg DATE_FORMAT Ljava/text/DateFormat;
-	FIELD f_xwebmwyr unitHeight I
-	FIELD f_xzibszyj buffer [B
-	FIELD f_zmfihpam stream Ljava/io/DataOutputStream;
+	FIELD f_fjxqmfdq stream Ljava/io/DataOutputStream;
+	FIELD f_kknqipme height I
+	FIELD f_kmvvfwwz unitHeight I
+	FIELD f_odhezoam buffer [B
+	FIELD f_qbsyukhj file Ljava/io/File;
+	FIELD f_thmnivov LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_tylxgoqa DATE_FORMAT Ljava/text/DateFormat;
+	FIELD f_zsbdrwes width I
 	METHOD <init> (Ljava/io/File;III)V
 		COMMENT Creates a screenshot recorder for huge screenshots.
 		COMMENT
@@ -17,34 +17,34 @@ CLASS net/minecraft/unmapped/C_wxqpqarc net/minecraft/client/util/ScreenshotReco
 		ARG 2 width
 		ARG 3 height
 		ARG 4 unitHeight
-	METHOD m_cpocgxxb saveScreenshot (Ljava/io/File;Ljava/lang/String;Lnet/minecraft/unmapped/C_clevgwxx;Ljava/util/function/Consumer;)V
-		ARG 0 gameDirectory
-		ARG 1 fileName
-		ARG 2 framebuffer
-		ARG 3 messageReceiver
-	METHOD m_cpocgxxb saveScreenshot (Ljava/io/File;Lnet/minecraft/unmapped/C_clevgwxx;Ljava/util/function/Consumer;)V
+	METHOD m_cyvkwkpf saveScreenshot (Ljava/io/File;Lnet/minecraft/unmapped/C_xxwgvelc;Ljava/util/function/Consumer;)V
 		ARG 0 gameDirectory
 		ARG 1 framebuffer
 		ARG 2 messageReceiver
-	METHOD m_flnuwcju saveScreenshotInner (Ljava/io/File;Ljava/lang/String;Lnet/minecraft/unmapped/C_clevgwxx;Ljava/util/function/Consumer;)V
+	METHOD m_gexubpeu finish ()Ljava/io/File;
+		COMMENT Finish taking the screenshot and return the complete tga file.
+		COMMENT
+		COMMENT @return the tga file
+	METHOD m_kfcodylb writeToStream ()V
+		COMMENT Writes the contents in the {@link #buffer} into the {@link #stream}.
+	METHOD m_miusxoey saveScreenshotInner (Ljava/io/File;Ljava/lang/String;Lnet/minecraft/unmapped/C_xxwgvelc;Ljava/util/function/Consumer;)V
 		ARG 0 gameDirectory
 		ARG 1 fileName
 		ARG 2 framebuffer
 		ARG 3 messageReceiver
-	METHOD m_ktbkzthv getScreenshotFilename (Ljava/io/File;)Ljava/io/File;
-		ARG 0 directory
-	METHOD m_sjfdaemx takeScreenshot (Lnet/minecraft/unmapped/C_clevgwxx;)Lnet/minecraft/unmapped/C_axhukiya;
+	METHOD m_oiwzfmgc takeScreenshot (Lnet/minecraft/unmapped/C_xxwgvelc;)Lnet/minecraft/unmapped/C_ayikuhxa;
 		ARG 0 framebuffer
-	METHOD m_yfzxofan finish ()Ljava/io/File;
-		COMMENT Finish taking the screenshot and return the complete tga file.
-		COMMENT
-		COMMENT @return the tga file
-	METHOD m_ykbmrtny getIntoBuffer (Ljava/nio/ByteBuffer;IIII)V
+	METHOD m_prypveve saveScreenshot (Ljava/io/File;Ljava/lang/String;Lnet/minecraft/unmapped/C_xxwgvelc;Ljava/util/function/Consumer;)V
+		ARG 0 gameDirectory
+		ARG 1 fileName
+		ARG 2 framebuffer
+		ARG 3 messageReceiver
+	METHOD m_qfjmbcrt getScreenshotFilename (Ljava/io/File;)Ljava/io/File;
+		ARG 0 directory
+	METHOD m_zjtfwjtu getIntoBuffer (Ljava/nio/ByteBuffer;IIII)V
 		COMMENT Transports image data from {@code data} into {@link #buffer}.
 		ARG 1 data
 		ARG 2 startWidth
 		ARG 3 startHeight
 		ARG 4 unitWidth
 		ARG 5 unitHeight
-	METHOD m_zmglkfuk writeToStream ()V
-		COMMENT Writes the contents in the {@link #buffer} into the {@link #stream}.

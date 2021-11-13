@@ -1,18 +1,18 @@
-CLASS net/minecraft/unmapped/C_rljfrbct net/minecraft/client/network/LanServerQueryManager
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_tjsivuos THREAD_ID Ljava/util/concurrent/atomic/AtomicInteger;
-	CLASS C_cvseidxx LanServerEntryList
-		FIELD f_kjqrsrvd dirty Z
-		FIELD f_ltzfhoqr serverEntries Ljava/util/List;
-		METHOD m_cthlzvnm getServers ()Ljava/util/List;
-		METHOD m_kjqrsrvd needsUpdate ()Z
-		METHOD m_nlpoticl markClean ()V
-		METHOD m_tahxoahc addServer (Ljava/lang/String;Ljava/net/InetAddress;)V
+CLASS net/minecraft/unmapped/C_tcbrfjlr net/minecraft/client/network/LanServerQueryManager
+	FIELD f_fzclloft LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_jvqvyxso THREAD_ID Ljava/util/concurrent/atomic/AtomicInteger;
+	CLASS C_edppsgzk LanServerDetector
+		FIELD f_pvcjziny multicastAddress Ljava/net/InetAddress;
+		FIELD f_swfnftro entryList Lnet/minecraft/unmapped/C_tcbrfjlr$C_lsiifklm;
+		FIELD f_vahsrsfb socket Ljava/net/MulticastSocket;
+		METHOD <init> (Lnet/minecraft/unmapped/C_tcbrfjlr$C_lsiifklm;)V
+			ARG 1 entryList
+	CLASS C_lsiifklm LanServerEntryList
+		FIELD f_amfggyqa dirty Z
+		FIELD f_uafvttzi serverEntries Ljava/util/List;
+		METHOD m_meelfyyo needsUpdate ()Z
+		METHOD m_nhbwmydh addServer (Ljava/lang/String;Ljava/net/InetAddress;)V
 			ARG 1 announcement
 			ARG 2 address
-	CLASS C_zablhtcj LanServerDetector
-		FIELD f_elfnuusc multicastAddress Ljava/net/InetAddress;
-		FIELD f_jxdqefxy socket Ljava/net/MulticastSocket;
-		FIELD f_xbuvrsse entryList Lnet/minecraft/unmapped/C_rljfrbct$C_cvseidxx;
-		METHOD <init> (Lnet/minecraft/unmapped/C_rljfrbct$C_cvseidxx;)V
-			ARG 1 entryList
+		METHOD m_qifuvboe markClean ()V
+		METHOD m_waivzles getServers ()Ljava/util/List;

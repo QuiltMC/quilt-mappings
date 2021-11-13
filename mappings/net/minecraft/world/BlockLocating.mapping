@@ -1,6 +1,23 @@
-CLASS net/minecraft/unmapped/C_qaothuaw net/minecraft/world/BlockLocating
+CLASS net/minecraft/unmapped/C_wauhtoaq net/minecraft/world/BlockLocating
 	COMMENT A few utilities to find block positions matching certain conditions.
-	METHOD m_iehbkvao findLargestRectangle ([I)Lcom/mojang/datafixers/util/Pair;
+	METHOD m_aujefaie findColumnEnd (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_mmxmpdoq;)Ljava/util/Optional;
+		COMMENT Finds an end to a block column starting from {@code pos} extending in {@code
+		COMMENT direction}. Within the column, the block states must be of {@code intermediateBlock}
+		COMMENT and the ending block state, whose position is returned, must be of {@code endBlock}.
+		COMMENT
+		COMMENT @return the end position of the block column where a {@code endBlock} lays, or
+		COMMENT an empty optional if no such column exists
+		ARG 0 world
+			COMMENT the world the column is in
+		ARG 1 pos
+			COMMENT the starting position of the column
+		ARG 2 intermediateBlock
+			COMMENT the blocks that the column must be of, excluding the end
+		ARG 3 direction
+			COMMENT the direction which the column extends to
+		ARG 4 endBlock
+			COMMENT the ending block of the column
+	METHOD m_dncjskmz findLargestRectangle ([I)Lcom/mojang/datafixers/util/Pair;
 		COMMENT Finds the largest rectangle within a histogram, where the vertical bars each have
 		COMMENT width 1 and height specified in {@code heights}.
 		COMMENT
@@ -21,7 +38,7 @@ CLASS net/minecraft/unmapped/C_qaothuaw net/minecraft/world/BlockLocating
 		COMMENT Rectangle in Histogram - LeetCode</a>
 		ARG 0 heights
 			COMMENT the heights of bars in the histogram
-	METHOD m_meocqpbe getLargestRectangle (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx$C_gltxchpd;ILnet/minecraft/unmapped/C_fxhiuupx$C_gltxchpd;ILjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_qaothuaw$C_colhyqxu;
+	METHOD m_rzivpene getLargestRectangle (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;ILnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;ILjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_wauhtoaq$C_tqypnjit;
 		COMMENT Gets the largest rectangle of blocks along two axes for which all blocks meet a predicate.
 		COMMENT Used for getting rectangles of Nether portal blocks.
 		ARG 0 center
@@ -30,39 +47,22 @@ CLASS net/minecraft/unmapped/C_qaothuaw net/minecraft/world/BlockLocating
 		ARG 3 secondaryAxis
 		ARG 4 secondaryMaxBlocks
 		ARG 5 predicate
-	METHOD m_sjuevtwc findColumnEnd (Lnet/minecraft/unmapped/C_qobevaep;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_qodpmxmm;Lnet/minecraft/unmapped/C_fxhiuupx;Lnet/minecraft/unmapped/C_qodpmxmm;)Ljava/util/Optional;
-		COMMENT Finds an end to a block column starting from {@code pos} extending in {@code
-		COMMENT direction}. Within the column, the block states must be of {@code intermediateBlock}
-		COMMENT and the ending block state, whose position is returned, must be of {@code endBlock}.
-		COMMENT
-		COMMENT @return the end position of the block column where a {@code endBlock} lays, or
-		COMMENT an empty optional if no such column exists
-		ARG 0 world
-			COMMENT the world the column is in
-		ARG 1 pos
-			COMMENT the starting position of the column
-		ARG 2 intermediateBlock
-			COMMENT the blocks that the column must be of, excluding the end
-		ARG 3 direction
-			COMMENT the direction which the column extends to
-		ARG 4 endBlock
-			COMMENT the ending block of the column
-	METHOD m_zuguqnwb moveWhile (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_kkdaznyh$C_koyyvhhw;Lnet/minecraft/unmapped/C_fxhiuupx;I)I
+	METHOD m_ziltyjtf moveWhile (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;Lnet/minecraft/unmapped/C_xpuuihxf;I)I
 		ARG 0 predicate
 		ARG 1 pos
 		ARG 2 direction
 		ARG 3 max
-	CLASS C_colhyqxu Rectangle
-		FIELD f_gknwjkcy lowerLeft Lnet/minecraft/unmapped/C_kkdaznyh;
-		FIELD f_pitrhupb width I
-		FIELD f_tvjwsylv height I
-		METHOD <init> (Lnet/minecraft/unmapped/C_kkdaznyh;II)V
-			ARG 1 lowerLeft
-			ARG 2 width
-			ARG 3 height
-	CLASS C_mkxevudf IntBounds
-		FIELD f_djivhwvb min I
-		FIELD f_sdzhpvyt max I
+	CLASS C_lpfcytva IntBounds
+		FIELD f_gpaqkbpb max I
+		FIELD f_vqvysswq min I
 		METHOD <init> (II)V
 			ARG 1 min
 			ARG 2 max
+	CLASS C_tqypnjit Rectangle
+		FIELD f_itfaivds lowerLeft Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_uebjsbxf height I
+		FIELD f_wqkzrryd width I
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;II)V
+			ARG 1 lowerLeft
+			ARG 2 width
+			ARG 3 height

@@ -1,13 +1,21 @@
-CLASS net/minecraft/unmapped/C_ygdawqho net/minecraft/world/biome/source/util/MultiNoiseUtil
-	FIELD f_mzjipqpi HYPERCUBE_DIMENSION I
-	METHOD m_eaehhanh createNoiseValuePoint (FFFFFF)Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;
+CLASS net/minecraft/unmapped/C_ohqwadgy net/minecraft/world/biome/source/util/MultiNoiseUtil
+	FIELD f_vgcalaka HYPERCUBE_DIMENSION I
+	METHOD m_lwabrkgg createNoiseHypercube (FFFFFFF)Lnet/minecraft/unmapped/C_ohqwadgy$C_mssdhkan;
+		ARG 0 temperature
+		ARG 1 humidity
+		ARG 2 continentalness
+		ARG 3 erosion
+		ARG 4 depth
+		ARG 5 weirdness
+		ARG 6 offset
+	METHOD m_ufdjcnwq createNoiseValuePoint (FFFFFF)Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;
 		ARG 0 temperatureNoise
 		ARG 1 humidityNoise
 		ARG 2 continentalnessNoise
 		ARG 3 erosionNoise
 		ARG 4 depth
 		ARG 5 weirdnessNoise
-	METHOD m_pswsqyfr createNoiseHypercube (FFFFFFF)Lnet/minecraft/unmapped/C_ygdawqho$C_cmxcekvc;
+	METHOD m_wjsybkmq createNoiseHypercube (Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;F)Lnet/minecraft/unmapped/C_ohqwadgy$C_mssdhkan;
 		ARG 0 temperature
 		ARG 1 humidity
 		ARG 2 continentalness
@@ -15,40 +23,67 @@ CLASS net/minecraft/unmapped/C_ygdawqho net/minecraft/world/biome/source/util/Mu
 		ARG 4 depth
 		ARG 5 weirdness
 		ARG 6 offset
-	METHOD m_pswsqyfr createNoiseHypercube (Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;F)Lnet/minecraft/unmapped/C_ygdawqho$C_cmxcekvc;
-		ARG 0 temperature
-		ARG 1 humidity
-		ARG 2 continentalness
-		ARG 3 erosion
-		ARG 4 depth
-		ARG 5 weirdness
-		ARG 6 offset
-	CLASS C_cmxcekvc NoiseHypercube
+	CLASS C_dytvikps NoiseValuePoint
+		FIELD f_bwtpnbul temperatureNoise J
+		FIELD f_jlbwhtmg continentalnessNoise J
+		FIELD f_mjgniidr erosionNoise J
+		FIELD f_pynwiezu humidityNoise J
+		FIELD f_qbcqupge weirdnessNoise J
+		FIELD f_qmthixxf depth J
+		METHOD m_dqkqdkrn humidity ()J
+		METHOD m_euirmpcr depth ()J
+		METHOD m_mftjfbxi continentalness ()J
+		METHOD m_omtwecpu getNoiseValueList ()[J
+		METHOD m_uipdckxs weirdness ()J
+		METHOD m_vbzyajde temperature ()J
+		METHOD m_vcbfjgyv erosion ()J
+	CLASS C_ftigwvun Entries
+		FIELD f_hoxnkrsb entries Ljava/util/List;
+		FIELD f_jutozncr tree Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg;
+		METHOD <init> (Ljava/util/List;)V
+			ARG 1 entries
+		METHOD m_cfysggwd getValue (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;Ljava/util/function/Supplier;)Ljava/lang/Object;
+			ARG 1 point
+			ARG 2 defaultValue
+		METHOD m_fkseftcs getValueSimple (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;Ljava/util/function/Supplier;)Ljava/lang/Object;
+			ARG 1 point
+			ARG 2 defaultValue
+		METHOD m_hbnwtqif getEntries ()Ljava/util/List;
+		METHOD m_myakquxf getValue (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;Lnet/minecraft/unmapped/C_ohqwadgy$C_nnadhegj;)Ljava/lang/Object;
+			ARG 1 point
+			ARG 2 distanceFunction
+		METHOD m_ovuzvtvy getValue (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;)Ljava/lang/Object;
+			ARG 1 point
+	CLASS C_mssdhkan NoiseHypercube
 		COMMENT Represents a hypercube in a multi-dimensional cartesian plane.
 		COMMENT The multi-noise biome source picks the closest noise hypercube
 		COMMENT from its selected point and chooses the biome associated to it.
-		FIELD f_dkznkrmw weirdness Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		FIELD f_dofjrgjg temperature Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		FIELD f_eeozvcah depth Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		FIELD f_exzlruri humidity Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		FIELD f_sbjezubb continentalness Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		FIELD f_tqgxpfnp erosion Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		FIELD f_tqoacpgj offset J
+		FIELD f_bsjcwipi erosion Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		FIELD f_jmaqakam depth Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		FIELD f_ljdobnqb CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_nyhxmoea offset J
 			COMMENT This value works differently from the other parameters, in that it is
 			COMMENT always {@code 0} during biome generation and does not use noise.
 			COMMENT
 			COMMENT <p>This means that setting it to a non-null number will make the biome smaller.
 			COMMENT The farther {@code offset} is from {@code 0}, the smaller the biome will be.
 			COMMENT For this, it does not matter whether {@code offset} is positive or negative.
-		FIELD f_vngqsybi CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_rhcpxgzi humidity Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		FIELD f_tpdrpisz temperature Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		FIELD f_uxnlltjj continentalness Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		FIELD f_wbtprigm weirdness Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
-		METHOD m_dkznkrmw weirdness ()Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		METHOD m_dofjrgjg temperature ()Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		METHOD m_eeozvcah depth ()Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		METHOD m_exzlruri humidity ()Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		METHOD m_iridifqo parameters ()Ljava/util/List;
-		METHOD m_ncimhpah getSquaredDistance (Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;)J
+		METHOD m_baacvuuz temperature ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		METHOD m_cckofhog depth ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		METHOD m_hytqfuep erosion ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		METHOD m_lsjojzbf (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_nfpodyhl weirdness ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		METHOD m_ovpkefuo humidity ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		METHOD m_rwzucafl continentalness ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+		METHOD m_tdtipvgp offset ()J
+		METHOD m_udbwguua getSquaredDistance (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;)J
 			COMMENT Calculates the distance from this noise point to another one. The
 			COMMENT distance is a squared distance in a multi-dimensional cartesian plane
 			COMMENT from a mathematical point of view, with a special parameter that
@@ -62,40 +97,22 @@ CLASS net/minecraft/unmapped/C_ygdawqho net/minecraft/world/biome/source/util/Mu
 			COMMENT layer source calculates an arbitrary noise point, and selects the
 			COMMENT biome that offers a closest point to its arbitrary point.
 			ARG 1 point
-		METHOD m_sbjezubb continentalness ()Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		METHOD m_tqgxpfnp erosion ()Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-		METHOD m_tqoacpgj offset ()J
-		METHOD m_wvsywtfb (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-			ARG 0 instance
-	CLASS C_ixmoxvjs NoiseValuePoint
-		FIELD f_dkznkrmw weirdnessNoise J
-		FIELD f_dofjrgjg temperatureNoise J
-		FIELD f_eeozvcah depth J
-		FIELD f_exzlruri humidityNoise J
-		FIELD f_sbjezubb continentalnessNoise J
-		FIELD f_tqgxpfnp erosionNoise J
-		METHOD m_dkznkrmw weirdness ()J
-		METHOD m_dofjrgjg temperature ()J
-		METHOD m_eeozvcah depth ()J
-		METHOD m_exzlruri humidity ()J
-		METHOD m_sbjezubb continentalness ()J
-		METHOD m_tqgxpfnp erosion ()J
-		METHOD m_xetpadjq getNoiseValueList ()[J
-	CLASS C_qadvhudh ParameterRange
-		FIELD f_djivhwvb min J
-		FIELD f_sdzhpvyt max J
-		FIELD f_vngqsybi CODEC Lcom/mojang/serialization/Codec;
+		METHOD m_ukyndapu parameters ()Ljava/util/List;
+	CLASS C_nnadhegj NoiseDistanceFunction
+		METHOD distance getDistance (Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;[J)J
+			ARG 1 node
+	CLASS C_pigoipju MultiNoiseSampler
+		METHOD sample sample (III)Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+	CLASS C_pmcopbbm ParameterRange
+		FIELD f_njbpwzob min J
+		FIELD f_pwiicpcd CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_utzwrjmy max J
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
-		METHOD m_aiwjwbjb (Ljava/lang/Float;Ljava/lang/Float;)Lcom/mojang/serialization/DataResult;
-			ARG 0 min
-			ARG 1 max
-		METHOD m_cnzbqusr of (FF)Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-			ARG 0 min
-			ARG 1 max
-		METHOD m_cnzbqusr combine (Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;)Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
-			ARG 1 other
-		METHOD m_cnzbqusr combine (Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;)Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
+		METHOD m_cxcwmnvs combine (Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;)Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
 			COMMENT Creates a new {@link MultiNoiseUtil.ParameterRange} that combines the parameters.
 			COMMENT
 			COMMENT @return the created parameter range
@@ -103,86 +120,69 @@ CLASS net/minecraft/unmapped/C_ygdawqho net/minecraft/world/biome/source/util/Mu
 				COMMENT the range that will be used for the created range's minimum value
 			ARG 1 max
 				COMMENT the range that will be used for the created range's maximum value
-		METHOD m_djivhwvb min ()J
-		METHOD m_sdzhpvyt max ()J
-		METHOD m_yktficwd of (F)Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
+		METHOD m_diimliud combine (Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;)Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+			ARG 1 other
+		METHOD m_hosflyqp (Ljava/lang/Float;Ljava/lang/Float;)Lcom/mojang/serialization/DataResult;
+			ARG 0 min
+			ARG 1 max
+		METHOD m_rlusextr max ()J
+		METHOD m_sncmghym min ()J
+		METHOD m_vjrnteeh of (F)Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
 			ARG 0 value
-	CLASS C_tknzjgpf Entries
-		FIELD f_ahqqftdz tree Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci;
-		FIELD f_euiefzbh entries Ljava/util/List;
-		METHOD <init> (Ljava/util/List;)V
-			ARG 1 entries
-		METHOD m_euiefzbh getEntries ()Ljava/util/List;
-		METHOD m_fljyouwr getValueSimple (Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;Ljava/util/function/Supplier;)Ljava/lang/Object;
-			ARG 1 point
-			ARG 2 defaultValue
-		METHOD m_jjazcdoh getValue (Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;)Ljava/lang/Object;
-			ARG 1 point
-		METHOD m_jjazcdoh getValue (Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;Lnet/minecraft/unmapped/C_ygdawqho$C_traxxjxg;)Ljava/lang/Object;
-			ARG 1 point
-			ARG 2 distanceFunction
-		METHOD m_vyupnhce getValue (Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;Ljava/util/function/Supplier;)Ljava/lang/Object;
-			ARG 1 point
-			ARG 2 defaultValue
-	CLASS C_traxxjxg NoiseDistanceFunction
-		METHOD distance getDistance (Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;[J)J
-			ARG 1 node
-	CLASS C_veuekhcq MultiNoiseSampler
-		METHOD sample sample (III)Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
-	CLASS C_xtyipvci SearchTree
-		FIELD f_copbmahh firstNode Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;
-		FIELD f_hlcqgcik MAX_NODES_FOR_SIMPLE_TREE I
-		FIELD f_nszjbjtv previousResultNode Ljava/lang/ThreadLocal;
-		METHOD <init> (Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;)V
+		METHOD m_vkehidss of (FF)Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
+			ARG 0 min
+			ARG 1 max
+	CLASS C_svnvfttg SearchTree
+		FIELD f_elipoxfx MAX_NODES_FOR_SIMPLE_TREE I
+		FIELD f_kkvholts firstNode Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;
+		FIELD f_vzwnplpv previousResultNode Ljava/lang/ThreadLocal;
+		METHOD <init> (Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;)V
 			ARG 1 firstNode
-		METHOD m_azyfilxh (IZLnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;)J
-			ARG 2 node
-		METHOD m_iavuklfx getRangeLengthSum ([Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;)J
+		METHOD m_fbtauytv getRangeLengthSum ([Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;)J
 			ARG 0 parameters
-		METHOD m_ixweulzy (ILnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_ohgjfygi;)Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;
-			ARG 1 entry
-		METHOD m_jjvkixdj get (Lnet/minecraft/unmapped/C_ygdawqho$C_ixmoxvjs;Lnet/minecraft/unmapped/C_ygdawqho$C_traxxjxg;)Ljava/lang/Object;
+		METHOD m_fhrlrgmy getBatchedTree (Ljava/util/List;)Ljava/util/List;
+			ARG 0 nodes
+		METHOD m_figsderc (IZLnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;)J
+			ARG 2 node
+		METHOD m_kzawejxs createNode (ILjava/util/List;)Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;
+			ARG 0 paremeterNumber
+			ARG 1 subTree
+		METHOD m_ngrdagzo get (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;Lnet/minecraft/unmapped/C_ohqwadgy$C_nnadhegj;)Ljava/lang/Object;
 			ARG 1 point
 			ARG 2 distanceFunction
-		METHOD m_lphprrau getEnclosingParameters (Ljava/util/List;)Ljava/util/List;
+		METHOD m_nmqwkkgy (ILnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_vzitznoc;)Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;
+			ARG 1 entry
+		METHOD m_rlvivpot (ILnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;)J
+			ARG 1 entry
+		METHOD m_rohwayuk create (Ljava/util/List;)Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg;
+			ARG 0 entries
+		METHOD m_txwwgfkb createNodeComparator (IZ)Ljava/util/Comparator;
+			ARG 0 currentParameter
+			ARG 1 abs
+		METHOD m_vdfztsig getEnclosingParameters (Ljava/util/List;)Ljava/util/List;
 			ARG 0 subTree
-		METHOD m_mczgihsu sortTree (Ljava/util/List;IIZ)V
+		METHOD m_vymsqgmn sortTree (Ljava/util/List;IIZ)V
 			ARG 0 subTree
 			ARG 1 parameterNumber
 			ARG 2 currentParameter
 			ARG 3 abs
-		METHOD m_okhvjiin createNode (ILjava/util/List;)Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;
-			ARG 0 paremeterNumber
-			ARG 1 subTree
-		METHOD m_pmojtohg createNodeComparator (IZ)Ljava/util/Comparator;
-			ARG 0 currentParameter
-			ARG 1 abs
-		METHOD m_rnenogop (Lcom/mojang/datafixers/util/Pair;)Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_qpmnwmay;
+		METHOD m_zuazasbw (Lcom/mojang/datafixers/util/Pair;)Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_akrlkudd;
 			ARG 0 entry
-		METHOD m_tnotqick (ILnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;)J
-			ARG 1 entry
-		METHOD m_vlmlauew getBatchedTree (Ljava/util/List;)Ljava/util/List;
-			ARG 0 nodes
-		METHOD m_vvwqomhv create (Ljava/util/List;)Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci;
-			ARG 0 entries
-		CLASS C_ohgjfygi TreeBranchNode
-			FIELD f_eqihjczn subTree [Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_omdswzfd;
+		CLASS C_akrlkudd TreeLeafNode
+			FIELD f_tbiwthxz valueSupplier Ljava/util/function/Supplier;
+			METHOD <init> (Lnet/minecraft/unmapped/C_ohqwadgy$C_mssdhkan;Ljava/util/function/Supplier;)V
+				ARG 1 parameters
+				ARG 2 valueSupplier
+		CLASS C_vzitznoc TreeBranchNode
+			FIELD f_supkwoie subTree [Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_xlopokcr;
 			METHOD <init> (Ljava/util/List;Ljava/util/List;)V
 				ARG 1 parameters
 				ARG 2 subTree
-		CLASS C_omdswzfd TreeNode
-			FIELD f_iridifqo parameters [Lnet/minecraft/unmapped/C_ygdawqho$C_qadvhudh;
+		CLASS C_xlopokcr TreeNode
+			FIELD f_srmouiau parameters [Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;
 			METHOD <init> (Ljava/util/List;)V
 				ARG 1 subTree
-			METHOD m_fmswewaa getSquaredDistance ([J)J
-			METHOD m_jjvkixdj getResultingNode ([JLnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_qpmnwmay;Lnet/minecraft/unmapped/C_ygdawqho$C_traxxjxg;)Lnet/minecraft/unmapped/C_ygdawqho$C_xtyipvci$C_qpmnwmay;
+			METHOD m_oymzcjxu getSquaredDistance ([J)J
+			METHOD m_wcvmaick getResultingNode ([JLnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_akrlkudd;Lnet/minecraft/unmapped/C_ohqwadgy$C_nnadhegj;)Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg$C_akrlkudd;
 				ARG 2 alternative
 				ARG 3 distanceFunction
-		CLASS C_qpmnwmay TreeLeafNode
-			FIELD f_hhnfbjzm valueSupplier Ljava/util/function/Supplier;
-			METHOD <init> (Lnet/minecraft/unmapped/C_ygdawqho$C_cmxcekvc;Ljava/util/function/Supplier;)V
-				ARG 1 parameters
-				ARG 2 valueSupplier

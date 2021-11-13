@@ -1,24 +1,30 @@
-CLASS net/minecraft/unmapped/C_qneiiegc net/minecraft/client/render/model/json/ItemModelGenerator
-	FIELD f_gwesormf LAYERS Ljava/util/List;
-	FIELD f_lwjkqauv MIN_Z F
-	FIELD f_wuijzofw MAX_Z F
-	METHOD m_dypzsvtt isPixelTransparent (Lnet/minecraft/unmapped/C_twbwrlfu;IIIII)Z
+CLASS net/minecraft/unmapped/C_cgeiienq net/minecraft/client/render/model/json/ItemModelGenerator
+	FIELD f_hkwmkpyv MAX_Z F
+	FIELD f_lwdxxxvh MIN_Z F
+	FIELD f_vfvwhfwe LAYERS Ljava/util/List;
+	METHOD m_aqabxusz getFrames (Lnet/minecraft/unmapped/C_uflrwbwt;)Ljava/util/List;
+		ARG 1 sprite
+	METHOD m_dyibbjyn addLayerElements (ILjava/lang/String;Lnet/minecraft/unmapped/C_uflrwbwt;)Ljava/util/List;
+		ARG 1 layer
+		ARG 2 key
+		ARG 3 sprite
+	METHOD m_mpjevgkw (IILnet/minecraft/unmapped/C_uflrwbwt;Ljava/util/List;I)V
+		ARG 5 frame
+	METHOD m_nimwirgv create (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_wmxrezbu;)Lnet/minecraft/unmapped/C_wmxrezbu;
+		ARG 1 textureGetter
+		ARG 2 blockModel
+	METHOD m_oshsjjjp isPixelTransparent (Lnet/minecraft/unmapped/C_uflrwbwt;IIIII)Z
 		ARG 1 sprite
 		ARG 2 frame
 		ARG 3 x
 		ARG 4 y
 		ARG 5 width
 		ARG 6 height
-	METHOD m_eofbgtua addSubComponents (Lnet/minecraft/unmapped/C_twbwrlfu;Ljava/lang/String;I)Ljava/util/List;
+	METHOD m_vovwfmsb addSubComponents (Lnet/minecraft/unmapped/C_uflrwbwt;Ljava/lang/String;I)Ljava/util/List;
 		ARG 1 sprite
 		ARG 2 key
 		ARG 3 layer
-	METHOD m_gqbewjsc createOrExpandCurrentCube (Ljava/util/List;Lnet/minecraft/unmapped/C_qneiiegc$C_zxjfsfhr;II)V
-		ARG 1 cubes
-		ARG 2 side
-		ARG 3 x
-		ARG 4 y
-	METHOD m_iivwlypa extendModelBackward (Lnet/minecraft/unmapped/C_qneiiegc$C_zxjfsfhr;Ljava/util/List;Lnet/minecraft/unmapped/C_twbwrlfu;IIIIIZ)V
+	METHOD m_wayfirew extendModelBackward (Lnet/minecraft/unmapped/C_cgeiienq$C_mtvcbwvo;Ljava/util/List;Lnet/minecraft/unmapped/C_uflrwbwt;IIIIIZ)V
 		ARG 1 side
 		ARG 2 cubes
 		ARG 3 sprite
@@ -28,43 +34,37 @@ CLASS net/minecraft/unmapped/C_qneiiegc net/minecraft/client/render/model/json/I
 		ARG 7 width
 		ARG 8 height
 		ARG 9 currentPixelIsTransparent
-	METHOD m_mphtzfmp (IILnet/minecraft/unmapped/C_twbwrlfu;Ljava/util/List;I)V
-		ARG 5 frame
-	METHOD m_oqheivul addLayerElements (ILjava/lang/String;Lnet/minecraft/unmapped/C_twbwrlfu;)Ljava/util/List;
-		ARG 1 layer
-		ARG 2 key
-		ARG 3 sprite
-	METHOD m_rzpsxlzu create (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ubzerxmw;)Lnet/minecraft/unmapped/C_ubzerxmw;
-		ARG 1 textureGetter
-		ARG 2 blockModel
-	METHOD m_wtdpqrjh getFrames (Lnet/minecraft/unmapped/C_twbwrlfu;)Ljava/util/List;
-		ARG 1 sprite
-	CLASS C_lfwuihvt Frame
-		FIELD f_djivhwvb min I
-		FIELD f_nbifzmjg side Lnet/minecraft/unmapped/C_qneiiegc$C_zxjfsfhr;
-		FIELD f_raxcfxmi level I
-		FIELD f_sdzhpvyt max I
-		METHOD <init> (Lnet/minecraft/unmapped/C_qneiiegc$C_zxjfsfhr;II)V
+	METHOD m_xccvrrlv createOrExpandCurrentCube (Ljava/util/List;Lnet/minecraft/unmapped/C_cgeiienq$C_mtvcbwvo;II)V
+		ARG 1 cubes
+		ARG 2 side
+		ARG 3 x
+		ARG 4 y
+	CLASS C_ihkekmio Frame
+		FIELD f_jtswbsal side Lnet/minecraft/unmapped/C_cgeiienq$C_mtvcbwvo;
+		FIELD f_nvffnzit level I
+		FIELD f_rjfjqbkc max I
+		FIELD f_suupndif min I
+		METHOD <init> (Lnet/minecraft/unmapped/C_cgeiienq$C_mtvcbwvo;II)V
 			ARG 1 side
 			ARG 2 width
 			ARG 3 depth
-		METHOD m_iwbvkikr expand (I)V
+		METHOD m_bxklxseo getLevel ()I
+		METHOD m_gyvlngyf getSide ()Lnet/minecraft/unmapped/C_cgeiienq$C_mtvcbwvo;
+		METHOD m_oiinbzvw getMin ()I
+		METHOD m_soifpzko getMax ()I
+		METHOD m_umcidcps expand (I)V
 			ARG 1 newValue
-		METHOD m_kuypbyqq getMax ()I
-		METHOD m_vqzxarev getLevel ()I
-		METHOD m_wfgqutoq getSide ()Lnet/minecraft/unmapped/C_qneiiegc$C_zxjfsfhr;
-		METHOD m_yprvolqy getMin ()I
-	CLASS C_zxjfsfhr Side
-		FIELD f_ambidgcp offsetX I
-		FIELD f_ehjnualq direction Lnet/minecraft/unmapped/C_fxhiuupx;
-		FIELD f_jeumbwvq offsetY I
-		FIELD f_ncmzisct $VALUES [Lnet/minecraft/unmapped/C_qneiiegc$C_zxjfsfhr;
-		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_fxhiuupx;II)V
+	CLASS C_mtvcbwvo Side
+		FIELD f_ecidjyqe offsetX I
+		FIELD f_kgjyazhf direction Lnet/minecraft/unmapped/C_xpuuihxf;
+		FIELD f_waltzfoh offsetY I
+		FIELD f_ymjfamwf $VALUES [Lnet/minecraft/unmapped/C_cgeiienq$C_mtvcbwvo;
+		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_xpuuihxf;II)V
 			ARG 3 direction
 			ARG 4 offsetX
 			ARG 5 offsetY
-		METHOD m_cxbcgsrr getDirection ()Lnet/minecraft/unmapped/C_fxhiuupx;
-		METHOD m_kwqgmbhv $values ()[Lnet/minecraft/unmapped/C_qneiiegc$C_zxjfsfhr;
-		METHOD m_pbiwmlti getOffsetX ()I
-		METHOD m_pxvurxck getOffsetY ()I
-		METHOD m_rmplbwwl isVertical ()Z
+		METHOD m_cvntptwa getOffsetY ()I
+		METHOD m_fmvubqsp $values ()[Lnet/minecraft/unmapped/C_cgeiienq$C_mtvcbwvo;
+		METHOD m_kytxtokq getDirection ()Lnet/minecraft/unmapped/C_xpuuihxf;
+		METHOD m_ppyxiwqr isVertical ()Z
+		METHOD m_suauikpr getOffsetX ()I

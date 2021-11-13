@@ -1,51 +1,51 @@
-CLASS net/minecraft/unmapped/C_istadcik net/minecraft/entity/mob/GuardianEntity
-	FIELD f_gmmpapft tailAngle F
-	FIELD f_hnwidfqs prevTailAngle F
-	FIELD f_jqdgtyub WARMUP_TIME I
-	FIELD f_nalivqcr BEAM_TARGET_ID Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_onlomgpe spikesExtensionRate F
-	FIELD f_phrvwxlk prevSpikesExtension F
-	FIELD f_pkqdoini cachedBeamTarget Lnet/minecraft/unmapped/C_ndyxaxsu;
-	FIELD f_qoxzbegx wanderGoal Lnet/minecraft/unmapped/C_ykcwhlck;
-	FIELD f_tcdhbayv flopping Z
-	FIELD f_wanmcodk SPIKES_RETRACTED Lnet/minecraft/unmapped/C_yxacmnir;
-	FIELD f_wdmvhqtk beamTicks I
-	FIELD f_zmohdkhk spikesExtension F
-	METHOD m_ccfleomf getTailAngle (F)F
+CLASS net/minecraft/unmapped/C_kicdatsi net/minecraft/entity/mob/GuardianEntity
+	FIELD f_bhcbsboy spikesExtensionRate F
+	FIELD f_bzfgeyqr beamTicks I
+	FIELD f_fudimhsf BEAM_TARGET_ID Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_nlzdkgvn WARMUP_TIME I
+	FIELD f_okkahlor flopping Z
+	FIELD f_qkvwvycp tailAngle F
+	FIELD f_qzfxfiav prevTailAngle F
+	FIELD f_uqzwwegr spikesExtension F
+	FIELD f_vaificwq SPIKES_RETRACTED Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_vcjehzxd cachedBeamTarget Lnet/minecraft/unmapped/C_usxaxydn;
+	FIELD f_vewledpc prevSpikesExtension F
+	FIELD f_wdojupio wanderGoal Lnet/minecraft/unmapped/C_kclhwcky;
+	METHOD m_cqciwimz getTailAngle (F)F
 		ARG 1 tickDelta
-	METHOD m_dvtzjkzx createGuardianAttributes ()Lnet/minecraft/unmapped/C_zrzuujds$C_pckcmlvu;
-	METHOD m_lrjspisj setSpikesRetracted (Z)V
-		ARG 1 retracted
-	METHOD m_mqwifwsb getWarmupTime ()I
-	METHOD m_qdksxfiq getFlopSound ()Lnet/minecraft/unmapped/C_yazovava;
-	METHOD m_qteawjlk areSpikesRetracted ()Z
-	METHOD m_qvofminc canSpawn (Lnet/minecraft/unmapped/C_rbvsvago;Lnet/minecraft/unmapped/C_elysbvdv;Lnet/minecraft/unmapped/C_vfoxvzzu;Lnet/minecraft/unmapped/C_kkdaznyh;Ljava/util/Random;)Z
+	METHOD m_dqfzwykz getBeamTarget ()Lnet/minecraft/unmapped/C_usxaxydn;
+	METHOD m_jlcpmuhp getWarmupTime ()I
+	METHOD m_ltthhsde getFlopSound ()Lnet/minecraft/unmapped/C_avavozay;
+	METHOD m_lzfkagbb getSpikesExtension (F)F
+		ARG 1 tickDelta
+	METHOD m_mumoiqus createGuardianAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_reigibud canSpawn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_uzzvxofv;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/Random;)Z
 		ARG 0 type
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
 		ARG 4 random
-	METHOD m_rvaiymdk hasBeamTarget ()Z
-	METHOD m_rxespjte getBeamProgress (F)F
-		ARG 1 tickDelta
-	METHOD m_vxsnrdbs setBeamTarget (I)V
+	METHOD m_usuegexj setSpikesRetracted (Z)V
+		ARG 1 retracted
+	METHOD m_wczerzis hasBeamTarget ()Z
+	METHOD m_xscxmwfs areSpikesRetracted ()Z
+	METHOD m_xyfnhluw setBeamTarget (I)V
 		ARG 1 entityId
-	METHOD m_xsgrvjsk getBeamTarget ()Lnet/minecraft/unmapped/C_ndyxaxsu;
-	METHOD m_ybojxgyd getSpikesExtension (F)F
+	METHOD m_yiwgvges getBeamProgress (F)F
 		ARG 1 tickDelta
-	CLASS C_efgakfyt GuardianTargetPredicate
-		FIELD f_sicftszw owner Lnet/minecraft/unmapped/C_istadcik;
-		METHOD <init> (Lnet/minecraft/unmapped/C_istadcik;)V
+	CLASS C_kifwnjxj GuardianMoveControl
+		FIELD f_olmcdkno guardian Lnet/minecraft/unmapped/C_kicdatsi;
+		METHOD <init> (Lnet/minecraft/unmapped/C_kicdatsi;)V
+			ARG 1 guardian
+	CLASS C_morshecb GuardianTargetPredicate
+		FIELD f_iwjjscxr owner Lnet/minecraft/unmapped/C_kicdatsi;
+		METHOD <init> (Lnet/minecraft/unmapped/C_kicdatsi;)V
 			ARG 1 owner
 		METHOD test (Ljava/lang/Object;)Z
 			ARG 1 context
-	CLASS C_jiuemvno FireBeamGoal
-		FIELD f_cxfbdsqx beamTicks I
-		FIELD f_eimbyawp elder Z
-		FIELD f_sicftszw guardian Lnet/minecraft/unmapped/C_istadcik;
-		METHOD <init> (Lnet/minecraft/unmapped/C_istadcik;)V
-			ARG 1 guardian
-	CLASS C_xffwdwee GuardianMoveControl
-		FIELD f_sicftszw guardian Lnet/minecraft/unmapped/C_istadcik;
-		METHOD <init> (Lnet/minecraft/unmapped/C_istadcik;)V
+	CLASS C_njpgvkgr FireBeamGoal
+		FIELD f_dbwbpovs beamTicks I
+		FIELD f_ooolfyil elder Z
+		FIELD f_wkpibopx guardian Lnet/minecraft/unmapped/C_kicdatsi;
+		METHOD <init> (Lnet/minecraft/unmapped/C_kicdatsi;)V
 			ARG 1 guardian

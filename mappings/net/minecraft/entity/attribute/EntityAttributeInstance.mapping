@@ -1,35 +1,42 @@
-CLASS net/minecraft/unmapped/C_xpvakuzl net/minecraft/entity/attribute/EntityAttributeInstance
+CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAttributeInstance
 	COMMENT A double-valued attribute.
-	FIELD f_kojbctkv baseValue D
-	FIELD f_nywdciiu persistentModifiers Ljava/util/Set;
-	FIELD f_pwolvhlg idToModifiers Ljava/util/Map;
-	FIELD f_qzczuijw value D
-	FIELD f_rkdnmhcx dirty Z
-	FIELD f_stvtrooh type Lnet/minecraft/unmapped/C_ysbbfzpp;
-	FIELD f_tkelwqzt operationToModifiers Ljava/util/Map;
-	FIELD f_vektyhtk updateCallback Ljava/util/function/Consumer;
-	METHOD <init> (Lnet/minecraft/unmapped/C_ysbbfzpp;Ljava/util/function/Consumer;)V
+	FIELD f_aekcslxq baseValue D
+	FIELD f_axpfwlpj idToModifiers Ljava/util/Map;
+	FIELD f_hbhcmses value D
+	FIELD f_kbiwugqb persistentModifiers Ljava/util/Set;
+	FIELD f_liwslfna dirty Z
+	FIELD f_mlqjboam type Lnet/minecraft/unmapped/C_ppzfbbsy;
+	FIELD f_obppmvpj updateCallback Ljava/util/function/Consumer;
+	FIELD f_ybqmfnir operationToModifiers Ljava/util/Map;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ppzfbbsy;Ljava/util/function/Consumer;)V
 		ARG 1 type
 		ARG 2 updateCallback
-	METHOD m_beydyyax getModifiers ()Ljava/util/Set;
-	METHOD m_beydyyax getModifiers (Lnet/minecraft/unmapped/C_msqsqbdh$C_qhabnpqv;)Ljava/util/Set;
-		ARG 1 operation
-	METHOD m_cemkjbwg hasModifier (Lnet/minecraft/unmapped/C_msqsqbdh;)Z
-		ARG 1 modifier
-	METHOD m_drrhxkrt addTemporaryModifier (Lnet/minecraft/unmapped/C_msqsqbdh;)V
-		COMMENT Adds a temporary attribute modifier.
-		COMMENT The modifier will not be serialized.
-		ARG 1 modifier
-	METHOD m_fdbjanua toNbt ()Lnet/minecraft/unmapped/C_hincwlhh;
-	METHOD m_gmdpbnhh clearModifiers ()V
-	METHOD m_jioirpib tryRemoveModifier (Ljava/util/UUID;)Z
-		ARG 1 uuid
-	METHOD m_jpharave getModifiersByOperation (Lnet/minecraft/unmapped/C_msqsqbdh$C_qhabnpqv;)Ljava/util/Collection;
-		ARG 1 operation
-	METHOD m_jtmbuwhn (Lnet/minecraft/unmapped/C_msqsqbdh$C_qhabnpqv;Ljava/util/Set;)V
+	METHOD m_ardmyaxt toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
+	METHOD m_bsifaddn (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;Ljava/util/Set;)V
 		ARG 1 operation
 		ARG 2 modifiers
-	METHOD m_kybutuxk computeValue ()D
+	METHOD m_butflrhp tryRemoveModifier (Ljava/util/UUID;)Z
+		ARG 1 uuid
+	METHOD m_gbtcpwti hasModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)Z
+		ARG 1 modifier
+	METHOD m_gtfjwrju readNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+		ARG 1 nbt
+	METHOD m_hzjnirrj getModifiers ()Ljava/util/Set;
+	METHOD m_ibcsuctz setBaseValue (D)V
+		ARG 1 baseValue
+	METHOD m_iztvbwpj removeModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		ARG 1 modifier
+	METHOD m_jivcejqw onUpdate ()V
+	METHOD m_jtbrfpgz getBaseValue ()D
+		COMMENT Gets the base value of this attribute instance.
+		COMMENT This is the value before any attribute modifiers are applied.
+	METHOD m_kinpuhoz getModifiers (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Set;
+		ARG 1 operation
+	METHOD m_ljjavjgr addPersistentModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		ARG 1 modifier
+	METHOD m_mgkvtsyq clearModifiers ()V
+	METHOD m_mxlwhbkp getAttribute ()Lnet/minecraft/unmapped/C_ppzfbbsy;
+	METHOD m_oczhaipt computeValue ()D
 		COMMENT Computes this attribute's value, taking modifiers into account.
 		COMMENT
 		COMMENT <p>Attribute modifiers are applied in order by operation:
@@ -37,30 +44,23 @@ CLASS net/minecraft/unmapped/C_xpvakuzl net/minecraft/entity/attribute/EntityAtt
 		COMMENT <li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#MULTIPLY_BASE MULTIPLY_BASE} // Multiplies the value of the modifier to the attributes base value, and then adds it to the total value.</li>
 		COMMENT <li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#MULTIPLY_TOTAL MULTIPLY_TOTAL} // Adds 1 to the value of the attribute modifier. Then multiplies the attribute's value by the total value of the attribute after addition and multiplication of the base value occur.</li>
 		COMMENT </ul>
-	METHOD m_lwxudepc addPersistentModifier (Lnet/minecraft/unmapped/C_msqsqbdh;)V
+	METHOD m_ojdeprdt getModifiersByOperation (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Collection;
+		ARG 1 operation
+	METHOD m_rhfwxbjf addTemporaryModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		COMMENT Adds a temporary attribute modifier.
+		COMMENT The modifier will not be serialized.
 		ARG 1 modifier
-	METHOD m_mhdrfdzq setFrom (Lnet/minecraft/unmapped/C_xpvakuzl;)V
+	METHOD m_rissyeel setFrom (Lnet/minecraft/unmapped/C_lzukavpx;)V
 		COMMENT Copies the values of an attribute to this attribute.
 		COMMENT
 		COMMENT <p>Temporary modifiers are copied when using the operation.
 		ARG 1 other
-	METHOD m_pdqdyjjz getAttribute ()Lnet/minecraft/unmapped/C_ysbbfzpp;
-	METHOD m_qkvlgrqj getValue ()D
-	METHOD m_qqyovxdk readNbt (Lnet/minecraft/unmapped/C_hincwlhh;)V
-		ARG 1 nbt
-	METHOD m_tiyusqey setBaseValue (D)V
-		ARG 1 baseValue
-	METHOD m_ugnvzfgz (Lnet/minecraft/unmapped/C_msqsqbdh$C_qhabnpqv;)Ljava/util/Set;
+	METHOD m_rtwvskho getModifier (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_hdbqsqsm;
+		ARG 1 uuid
+	METHOD m_tunrypxo addModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		ARG 1 modifier
+	METHOD m_vvbgjynt removeModifier (Ljava/util/UUID;)V
+		ARG 1 uuid
+	METHOD m_xdafakih (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Set;
 		ARG 0 operation
-	METHOD m_xroalgnk addModifier (Lnet/minecraft/unmapped/C_msqsqbdh;)V
-		ARG 1 modifier
-	METHOD m_xuhgrjsi removeModifier (Ljava/util/UUID;)V
-		ARG 1 uuid
-	METHOD m_xuhgrjsi removeModifier (Lnet/minecraft/unmapped/C_msqsqbdh;)V
-		ARG 1 modifier
-	METHOD m_ygsvizib getModifier (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_msqsqbdh;
-		ARG 1 uuid
-	METHOD m_yibjtpce getBaseValue ()D
-		COMMENT Gets the base value of this attribute instance.
-		COMMENT This is the value before any attribute modifiers are applied.
-	METHOD m_zckzmjeg onUpdate ()V
+	METHOD m_zxnpgjts getValue ()D

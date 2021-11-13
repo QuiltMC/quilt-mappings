@@ -1,54 +1,54 @@
-CLASS net/minecraft/unmapped/C_btalplit net/minecraft/network/packet/s2c/play/ChunkData
-	FIELD f_cmcjfuwm sectionsData [B
-	FIELD f_drdtfoqg blockEntities Ljava/util/List;
-	FIELD f_hiqoschn nbt Lnet/minecraft/unmapped/C_hincwlhh;
-	FIELD f_vgxxagvo MAX_SECTIONS_DATA_SIZE I
-	METHOD <init> (Lnet/minecraft/unmapped/C_ocwdyfdi;II)V
+CLASS net/minecraft/unmapped/C_tilplatb net/minecraft/network/packet/s2c/play/ChunkData
+	FIELD f_hdtuevvn MAX_SECTIONS_DATA_SIZE I
+	FIELD f_jxwowsyf nbt Lnet/minecraft/unmapped/C_hhlwcnih;
+	FIELD f_kxodazrr sectionsData [B
+	FIELD f_xvurpbls blockEntities Ljava/util/List;
+	METHOD <init> (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+		ARG 1 chunk
+	METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;II)V
 		ARG 1 buf
 		ARG 2 x
 		ARG 3 z
-	METHOD <init> (Lnet/minecraft/unmapped/C_qklvsdrh;)V
-		ARG 1 chunk
-	METHOD m_dgfmzrhm writeSections (Lnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_qklvsdrh;)V
-		ARG 0 buf
-		ARG 1 chunk
-	METHOD m_ebstqnzf (IILnet/minecraft/unmapped/C_btalplit$C_oxglozxl;)V
-		ARG 3 blockEntityVisitor
-	METHOD m_eliiejjt getNbt ()Lnet/minecraft/unmapped/C_hincwlhh;
-	METHOD m_gjhejtzt getBlockEntities (II)Ljava/util/function/Consumer;
+	METHOD m_asdqqjuk getNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
+	METHOD m_dkgszjgl getBlockEntities (II)Ljava/util/function/Consumer;
 		ARG 1 x
 		ARG 2 z
-	METHOD m_jcsufmkw (Lnet/minecraft/unmapped/C_ocwdyfdi;Lnet/minecraft/unmapped/C_btalplit$C_glscxzxw;)V
-		ARG 0 byteBuf
-		ARG 1 blockEntity
-	METHOD m_pdsgxphy toPacketByteBuf ()Lnet/minecraft/unmapped/C_ocwdyfdi;
-	METHOD m_sdxbxgid getWritableSectionsDataBuf ()Lio/netty/buffer/ByteBuf;
-	METHOD m_vhivbqoy write (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
-		ARG 1 buf
-	METHOD m_zpjvmlcm getTotalSize (Lnet/minecraft/unmapped/C_qklvsdrh;)I
+	METHOD m_ekivofsj toPacketByteBuf ()Lnet/minecraft/unmapped/C_idfydwco;
+	METHOD m_iqtiqcbr getTotalSize (Lnet/minecraft/unmapped/C_hrdsvlkq;)I
 		ARG 0 chunk
-	METHOD m_zpypcyqd iterateBlockEntities (Lnet/minecraft/unmapped/C_btalplit$C_oxglozxl;II)V
+	METHOD m_mcpjkulj iterateBlockEntities (Lnet/minecraft/unmapped/C_tilplatb$C_arplkwav;II)V
 		ARG 1 consumer
 		ARG 2 x
 		ARG 3 z
-	CLASS C_glscxzxw BlockEntityData
-		FIELD f_ecidewuh y I
-		FIELD f_giegwrvp horizontalLocalCoordinates I
-		FIELD f_kpdwhrng blockEntityType Lnet/minecraft/unmapped/C_sudovqgw;
-		FIELD f_qouimylz nbt Lnet/minecraft/unmapped/C_hincwlhh;
-		METHOD <init> (IILnet/minecraft/unmapped/C_sudovqgw;Lnet/minecraft/unmapped/C_hincwlhh;)V
+	METHOD m_qhzdrikc (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_tilplatb$C_ubenoidp;)V
+		ARG 0 byteBuf
+		ARG 1 blockEntity
+	METHOD m_rjkmvpss (IILnet/minecraft/unmapped/C_tilplatb$C_arplkwav;)V
+		ARG 3 blockEntityVisitor
+	METHOD m_wtvgjejt writeSections (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+		ARG 0 buf
+		ARG 1 chunk
+	METHOD m_zlqpdpfk getWritableSectionsDataBuf ()Lio/netty/buffer/ByteBuf;
+	METHOD m_zoqfkkkm write (Lnet/minecraft/unmapped/C_idfydwco;)V
+		ARG 1 buf
+	CLASS C_arplkwav BlockEntityVisitor
+		METHOD accept (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_wgqvodus;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 pos
+			ARG 2 blockEntity
+			ARG 3 nbt
+	CLASS C_ubenoidp BlockEntityData
+		FIELD f_epsjxgfg nbt Lnet/minecraft/unmapped/C_hhlwcnih;
+		FIELD f_ezgboeqt horizontalLocalCoordinates I
+		FIELD f_nephopyt y I
+		FIELD f_qqqgwhpa blockEntityType Lnet/minecraft/unmapped/C_wgqvodus;
+		METHOD <init> (IILnet/minecraft/unmapped/C_wgqvodus;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 			ARG 1 horizontalLocalCoordinates
 			ARG 2 y
 			ARG 3 blockEntityType
 			ARG 4 nbt
-		METHOD <init> (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
+		METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
 			ARG 1 buf
-		METHOD m_vhivbqoy write (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
-			ARG 1 buf
-		METHOD m_vvwqomhv fromBlockEntity (Lnet/minecraft/unmapped/C_hmfagevk;)Lnet/minecraft/unmapped/C_btalplit$C_glscxzxw;
+		METHOD m_apgfuaxc fromBlockEntity (Lnet/minecraft/unmapped/C_kvegafmh;)Lnet/minecraft/unmapped/C_tilplatb$C_ubenoidp;
 			ARG 0 blockEntity
-	CLASS C_oxglozxl BlockEntityVisitor
-		METHOD accept (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_sudovqgw;Lnet/minecraft/unmapped/C_hincwlhh;)V
-			ARG 1 pos
-			ARG 2 blockEntity
-			ARG 3 nbt
+		METHOD m_yjocsfkb write (Lnet/minecraft/unmapped/C_idfydwco;)V
+			ARG 1 buf

@@ -1,14 +1,15 @@
-CLASS net/minecraft/unmapped/C_fpbotmvv net/minecraft/world/gen/feature/StructureFeature
-	FIELD f_caidhdjo SWAMP_HUT Lnet/minecraft/unmapped/C_fpbotmvv;
-	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_pclmutop codec Lcom/mojang/serialization/Codec;
-	FIELD f_psfdvrqg LAND_MODIFYING_STRUCTURES Ljava/util/List;
-	FIELD f_rdsevtew STRUCTURE_TO_GENERATION_STEP Ljava/util/Map;
-	FIELD f_rnswycad STRUCTURES Lcom/google/common/collect/BiMap;
-	METHOD m_cmgdpdvy getGenerationStep ()Lnet/minecraft/unmapped/C_wybemrdr$C_kybntylx;
-		COMMENT Gets the step during which this structure will participate in world generation.
-		COMMENT Structures will generate before other features in the same generation step.
-	METHOD m_ddejvgxp locateStructure (Lnet/minecraft/unmapped/C_ibhpzmee;Lnet/minecraft/unmapped/C_zpzevjii;Lnet/minecraft/unmapped/C_kkdaznyh;IZJLnet/minecraft/unmapped/C_qiixbyae;)Lnet/minecraft/unmapped/C_kkdaznyh;
+CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/StructureFeature
+	FIELD f_lsfsrihv STRUCTURE_TO_GENERATION_STEP Ljava/util/Map;
+	FIELD f_qyedxhax SWAMP_HUT Lnet/minecraft/unmapped/C_vvmtobpf;
+	FIELD f_tpqwkoch codec Lcom/mojang/serialization/Codec;
+	FIELD f_yctoxrat STRUCTURES Lcom/google/common/collect/BiMap;
+	FIELD f_zalymdqm LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_zcxcnywk LAND_MODIFYING_STRUCTURES Ljava/util/List;
+	METHOD m_aovapzws readStructureStart (Lnet/minecraft/unmapped/C_ywyzxrzo;Lnet/minecraft/unmapped/C_hhlwcnih;J)Lnet/minecraft/unmapped/C_efiavfys;
+		ARG 1 nbt
+		ARG 2 worldSeed
+	METHOD m_cxwivmzi init ()V
+	METHOD m_dbaiwpdf locateStructure (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_hynzadkk;IZJLnet/minecraft/unmapped/C_eaybxiiq;)Lnet/minecraft/unmapped/C_hynzadkk;
 		COMMENT Tries to find the closest structure of this type near a given block.
 		COMMENT <p>
 		COMMENT This method relies on the given world generation settings (seed and placement configuration)
@@ -25,20 +26,14 @@ CLASS net/minecraft/unmapped/C_fpbotmvv net/minecraft/world/gen/feature/Structur
 		ARG 5 skipExistingChunks
 		ARG 6 worldSeed
 		ARG 8 config
-	METHOD m_iefnzsxq register (Ljava/lang/String;Lnet/minecraft/unmapped/C_fpbotmvv;Lnet/minecraft/unmapped/C_wybemrdr$C_kybntylx;)Lnet/minecraft/unmapped/C_fpbotmvv;
-		ARG 0 name
-		ARG 1 structureFeature
-		ARG 2 step
-	METHOD m_kmfgfyvh getName ()Ljava/lang/String;
-	METHOD m_mmuxaojv configure (Lnet/minecraft/unmapped/C_fxgwenpj;)Lnet/minecraft/unmapped/C_vqyngcil;
-		ARG 1 config
-	METHOD m_ohekhuwo init ()V
-	METHOD m_pclmutop getCodec ()Lcom/mojang/serialization/Codec;
-	METHOD m_qnxbixrc isUniformDistribution ()Z
+	METHOD m_hnmlakfx getGenerationStep ()Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
+		COMMENT Gets the step during which this structure will participate in world generation.
+		COMMENT Structures will generate before other features in the same generation step.
+	METHOD m_kwghhryf isUniformDistribution ()Z
 		COMMENT If true, this structure's start position will be uniformly distributed within
 		COMMENT a placement grid cell. If false, the structure's starting point will be biased
 		COMMENT towards the center of the cell.
-	METHOD m_tmonqgvs tryPlaceStart (Lnet/minecraft/unmapped/C_qdzvmxqw;Lnet/minecraft/unmapped/C_miblafgk;Lnet/minecraft/unmapped/C_aywougja;Lnet/minecraft/unmapped/C_wviludhr;JLnet/minecraft/unmapped/C_utrzsrny;ILnet/minecraft/unmapped/C_gxmecroz;Lnet/minecraft/unmapped/C_qiixbyae;Lnet/minecraft/unmapped/C_fxgwenpj;Lnet/minecraft/unmapped/C_byoninpq;Ljava/util/function/Predicate;)Lnet/minecraft/unmapped/C_syfvaife;
+	METHOD m_ljchpsfx tryPlaceStart (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_rhdulivw;JLnet/minecraft/unmapped/C_ynrszrtu;ILnet/minecraft/unmapped/C_zorcemxg;Lnet/minecraft/unmapped/C_eaybxiiq;Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)Lnet/minecraft/unmapped/C_efiavfys;
 		COMMENT Tries to place a starting point for this type of structure in the given chunk.
 		COMMENT <p>
 		COMMENT If this structure doesn't have a starting point in the chunk, {@link StructureStart#DEFAULT}
@@ -53,7 +48,8 @@ CLASS net/minecraft/unmapped/C_fpbotmvv net/minecraft/world/gen/feature/Structur
 		ARG 10 structureConfig
 		ARG 11 config
 		ARG 12 world
-	METHOD m_tvmrskcm getStartChunk (Lnet/minecraft/unmapped/C_qiixbyae;JLnet/minecraft/unmapped/C_gxmecroz;II)Lnet/minecraft/unmapped/C_utrzsrny;
+	METHOD m_naklggtc getName ()Ljava/lang/String;
+	METHOD m_svbzmrlp getStartChunk (Lnet/minecraft/unmapped/C_eaybxiiq;JLnet/minecraft/unmapped/C_zorcemxg;II)Lnet/minecraft/unmapped/C_ynrszrtu;
 		COMMENT Determines the cell of the structure placement grid a chunk belongs to, and
 		COMMENT returns the chunk within that cell, that this structure will actually be placed at.
 		COMMENT <p>
@@ -68,6 +64,10 @@ CLASS net/minecraft/unmapped/C_fpbotmvv net/minecraft/world/gen/feature/Structur
 		ARG 4 placementRandom
 		ARG 5 chunkX
 		ARG 6 chunkY
-	METHOD m_urlgxkvd readStructureStart (Lnet/minecraft/unmapped/C_ozrxzywy;Lnet/minecraft/unmapped/C_hincwlhh;J)Lnet/minecraft/unmapped/C_syfvaife;
-		ARG 1 nbt
-		ARG 2 worldSeed
+	METHOD m_wgtscimf configure (Lnet/minecraft/unmapped/C_jpnewgxf;)Lnet/minecraft/unmapped/C_licgnyqv;
+		ARG 1 config
+	METHOD m_xnhhytsz register (Ljava/lang/String;Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;)Lnet/minecraft/unmapped/C_vvmtobpf;
+		ARG 0 name
+		ARG 1 structureFeature
+		ARG 2 step
+	METHOD m_ywspjwtx getCodec ()Lcom/mojang/serialization/Codec;

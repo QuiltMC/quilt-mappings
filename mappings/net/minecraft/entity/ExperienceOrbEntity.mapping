@@ -1,54 +1,54 @@
-CLASS net/minecraft/unmapped/C_ojfoilcv net/minecraft/entity/ExperienceOrbEntity
-	FIELD f_flsaegaq orbAge I
-	FIELD f_gbofjbwh EXPENSIVE_UPDATE_INTERVAL I
-	FIELD f_ibzxfiir target Lnet/minecraft/unmapped/C_oqcyprzj;
-	FIELD f_jfplzcbr amount I
-	FIELD f_nrjvhxli pickingCount I
-	FIELD f_sqddjqig health I
-	FIELD f_zsbsshkl DESPAWN_AGE I
-	METHOD <init> (Lnet/minecraft/unmapped/C_nbzftcdc;DDDI)V
+CLASS net/minecraft/unmapped/C_vcliofjo net/minecraft/entity/ExperienceOrbEntity
+	FIELD f_dojhsajr DESPAWN_AGE I
+	FIELD f_jaoaqxhp pickingCount I
+	FIELD f_qhfswrfw target Lnet/minecraft/unmapped/C_jzrpycqo;
+	FIELD f_rhztlcbw EXPENSIVE_UPDATE_INTERVAL I
+	FIELD f_skkiboqw orbAge I
+	FIELD f_uxkxfmvf health I
+	FIELD f_ycatdvtx amount I
+	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;DDDI)V
 		ARG 1 world
 		ARG 2 x
 		ARG 4 y
 		ARG 6 z
 		ARG 8 amount
-	METHOD m_esoelbro spawn (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_xxfpupgv;I)V
+	METHOD m_aatvaora spawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_vgpupfxx;I)V
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 amount
-	METHOD m_fmgmepej getMendingRepairCost (I)I
-		ARG 1 repairAmount
-	METHOD m_fucwpdlw roundToOrbSize (I)I
-		ARG 0 value
-	METHOD m_ihnlgbvc merge (Lnet/minecraft/unmapped/C_ojfoilcv;)V
-		ARG 1 other
-	METHOD m_kxlnbxqv isMergeable (Lnet/minecraft/unmapped/C_ojfoilcv;)Z
-		ARG 1 other
-	METHOD m_kxlnbxqv isMergeable (Lnet/minecraft/unmapped/C_ojfoilcv;II)Z
-		ARG 0 orb
-		ARG 1 seed
-		ARG 2 amount
-	METHOD m_lwssrxjv repairPlayerGears (Lnet/minecraft/unmapped/C_oqcyprzj;I)I
+	METHOD m_aqllcbet repairPlayerGears (Lnet/minecraft/unmapped/C_jzrpycqo;I)I
 		COMMENT Repairs a player's gears using the experience recursively, until the experience is
 		COMMENT all used or all gears are repaired.
 		COMMENT
 		COMMENT @return the amount of leftover experience
 		ARG 1 player
 		ARG 2 amount
-	METHOD m_nltvsudm expensiveUpdate ()V
+	METHOD m_bdfuzmlr wasMergedIntoExistingOrb (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_vgpupfxx;I)Z
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 amount
+	METHOD m_bsjymiql roundToOrbSize (I)I
+		ARG 0 value
+	METHOD m_cfcnumhs (IILnet/minecraft/unmapped/C_vcliofjo;)Z
+		ARG 2 orb
+	METHOD m_ghsyhojn merge (Lnet/minecraft/unmapped/C_vcliofjo;)V
+		ARG 1 other
+	METHOD m_inbhfcha getMendingRepairAmount (I)I
+		ARG 1 experienceAmount
+	METHOD m_kareqjyw getExperienceAmount ()I
+	METHOD m_ncnlpwky isMergeable (Lnet/minecraft/unmapped/C_vcliofjo;II)Z
+		ARG 0 orb
+		ARG 1 seed
+		ARG 2 amount
+	METHOD m_sbxgljxn getMendingRepairCost (I)I
+		ARG 1 repairAmount
+	METHOD m_ufkamssg getOrbSize ()I
+	METHOD m_vzzamwiu applyWaterMovement ()V
+	METHOD m_xhapgojt isMergeable (Lnet/minecraft/unmapped/C_vcliofjo;)Z
+		ARG 1 other
+	METHOD m_yeujdkih expensiveUpdate ()V
 		COMMENT Performs an expensive update.
 		COMMENT
 		COMMENT @implSpec Called every second (every {@link #EXPENSIVE_UPDATE_INTERVAL} ticks).
 		COMMENT This method first checks if the orb still has a nearby {@link #target},
 		COMMENT and assigns a new target if there is none. It then tries to merge nearby experience orbs.
-	METHOD m_pgebzzab applyWaterMovement ()V
-	METHOD m_qkvlgrqj getExperienceAmount ()I
-	METHOD m_quwewsmq getMendingRepairAmount (I)I
-		ARG 1 experienceAmount
-	METHOD m_tpmdcing wasMergedIntoExistingOrb (Lnet/minecraft/unmapped/C_uihwnwdb;Lnet/minecraft/unmapped/C_xxfpupgv;I)Z
-		ARG 0 world
-		ARG 1 pos
-		ARG 2 amount
-	METHOD m_trtoheca (IILnet/minecraft/unmapped/C_ojfoilcv;)Z
-		ARG 2 orb
-	METHOD m_wrmvxlin getOrbSize ()I
