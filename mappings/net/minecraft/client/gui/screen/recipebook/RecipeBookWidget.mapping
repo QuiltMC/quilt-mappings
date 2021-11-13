@@ -1,30 +1,61 @@
 CLASS net/minecraft/unmapped/C_zwvmbyax net/minecraft/client/gui/screen/recipebook/RecipeBookWidget
-	FIELD f_bncsikzd parentWidth I
-	FIELD f_byuzdczq craftingScreenHandler Lnet/minecraft/unmapped/C_pfvwvgum;
-	FIELD f_ctvstqbk cachedInvChangeCount I
-	FIELD f_evtvlmvy parentHeight I
-	FIELD f_fvfkcaiu tabButtons Ljava/util/List;
-	FIELD f_gftuanyi searchField Lnet/minecraft/unmapped/C_fhnczpov;
-	FIELD f_gmdwdvlf toggleCraftableButton Lnet/minecraft/unmapped/C_jxfmgsaz;
-	FIELD f_gxsjzthb SEARCH_HINT_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
-	FIELD f_igyeukck narrow Z
-	FIELD f_jpebydca currentTab Lnet/minecraft/unmapped/C_opklnklc;
-	FIELD f_lrftcsch leftOffset I
-	FIELD f_nfykdzmj searchText Ljava/lang/String;
-	FIELD f_nitfenyl client Lnet/minecraft/unmapped/C_diboefya;
-	FIELD f_njwoczsy ghostSlots Lnet/minecraft/unmapped/C_nkugkoco;
-	FIELD f_pqgzuoiy TOGGLE_CRAFTABLE_RECIPES_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
-	FIELD f_rtovjhhw recipesArea Lnet/minecraft/unmapped/C_kcuytybh;
-	FIELD f_umxthmqv open Z
-	FIELD f_urlfptgx TOGGLE_ALL_RECIPES_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
-	FIELD f_xpgainxz recipeFinder Lnet/minecraft/unmapped/C_uaaogayn;
-	FIELD f_xqhatvaw TEXTURE Lnet/minecraft/unmapped/C_acfwypcn;
-	FIELD f_ystdrpkb recipeBook Lnet/minecraft/unmapped/C_dfpgfljs;
-	FIELD f_zfznqhyj searching Z
-	METHOD m_amchsras (Lnet/minecraft/unmapped/C_qhfzammy;)Z
+	FIELD f_ambidgcp leftOffset I
+	FIELD f_dkujvsyq client Lnet/minecraft/unmapped/C_diboefya;
+	FIELD f_exmsouje TOGGLE_ALL_RECIPES_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_fayrzome toggleCraftableButton Lnet/minecraft/unmapped/C_jxfmgsaz;
+	FIELD f_flwegzgt searching Z
+	FIELD f_fwktszbj parentWidth I
+	FIELD f_gzesuukm SEARCH_HINT_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_hizqikfg narrow Z
+	FIELD f_lnwtrczt TEXTURE Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_nkoheunf parentHeight I
+	FIELD f_nlilcaiy searchText Ljava/lang/String;
+	FIELD f_pketgyju recipesArea Lnet/minecraft/unmapped/C_kcuytybh;
+	FIELD f_pwjytufn searchField Lnet/minecraft/unmapped/C_fhnczpov;
+	FIELD f_qjfptzyp recipeBook Lnet/minecraft/unmapped/C_dfpgfljs;
+	FIELD f_rbovjyob recipeFinder Lnet/minecraft/unmapped/C_uaaogayn;
+	FIELD f_rwcgmuuw craftingScreenHandler Lnet/minecraft/unmapped/C_pfvwvgum;
+	FIELD f_tetddjhr open Z
+	FIELD f_tnijumhp TOGGLE_CRAFTABLE_RECIPES_TEXT Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_tofrhjjn currentTab Lnet/minecraft/unmapped/C_opklnklc;
+	FIELD f_vapikkwr cachedInvChangeCount I
+	FIELD f_ztgjtxuv tabButtons Ljava/util/List;
+	FIELD f_ztujepjp ghostSlots Lnet/minecraft/unmapped/C_nkugkoco;
+	METHOD m_aeqqwjzr (Lnet/minecraft/unmapped/C_qhfzammy;)V
+		ARG 1 resultCollection
+	METHOD m_bzmutxfd (Lnet/minecraft/unmapped/C_qhfzammy;)Z
 		ARG 0 resultCollection
-	METHOD m_dvuddllk sendBookDataPacket ()V
-	METHOD m_erwlrwgo isClickOutsideBounds (DDIIIII)Z
+	METHOD m_bzujbmrh isOpen ()Z
+	METHOD m_dbkqpqdx showGhostRecipe (Lnet/minecraft/unmapped/C_dqwdmrwa;Ljava/util/List;)V
+		ARG 1 recipe
+		ARG 2 slots
+	METHOD m_fmffxkin setOpen (Z)V
+		ARG 1 opened
+	METHOD m_fonitmcq getCraftableButtonText ()Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_gedqmbon isWide ()Z
+	METHOD m_ibvunobs toggleOpen ()V
+	METHOD m_iqswvscr sendBookDataPacket ()V
+	METHOD m_iygtnkro (Lnet/minecraft/unmapped/C_qhfzammy;)Z
+		ARG 0 resultCollection
+	METHOD m_jwluccax triggerPirateSpeakEasterEgg (Ljava/lang/String;)V
+		ARG 1 search
+	METHOD m_kfhwmoif setBookButtonTexture ()V
+	METHOD m_ktbumecl (Lit/unimi/dsi/fastutil/objects/ObjectSet;Lnet/minecraft/unmapped/C_qhfzammy;)Z
+		ARG 0 resultCollection
+	METHOD m_lblvypqu (Ljava/util/List;Lnet/minecraft/unmapped/C_pkmxuvpk;)V
+		ARG 1 button
+	METHOD m_lysyvmuf (Lnet/minecraft/unmapped/C_opklnklc;)Z
+		ARG 1 button
+	METHOD m_nzncuwof update ()V
+	METHOD m_ogorsubs (Lnet/minecraft/unmapped/C_qhfzammy;)Z
+		ARG 0 resultCollection
+	METHOD m_olyaqkxa drawGhostSlotTooltip (Lnet/minecraft/unmapped/C_dvxszsnc;IIII)V
+		ARG 1 matrices
+		ARG 2 x
+		ARG 3 y
+		ARG 4 mouseX
+		ARG 5 mouseY
+	METHOD m_pbqzbndz isClickOutsideBounds (DDIIIII)Z
 		ARG 1 mouseX
 		ARG 3 mouseY
 		ARG 5 x
@@ -32,67 +63,36 @@ CLASS net/minecraft/unmapped/C_zwvmbyax net/minecraft/client/gui/screen/recipebo
 		ARG 7 backgroundWidth
 		ARG 8 backgroundHeight
 		ARG 9 button
-	METHOD m_frfiissb drawGhostSlotTooltip (Lnet/minecraft/unmapped/C_dvxszsnc;IIII)V
+	METHOD m_pyxuaqqq isGuiOpen ()Z
+	METHOD m_skrlsasm toggleFilteringCraftable ()Z
+	METHOD m_sxryzgdm slotClicked (Lnet/minecraft/unmapped/C_dfffqvhn;)V
+		ARG 1 slot
+	METHOD m_trupdxdv refreshResults (Z)V
+		ARG 1 resetCurrentPage
+	METHOD m_truxhozt drawTooltip (Lnet/minecraft/unmapped/C_dvxszsnc;IIII)V
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
 		ARG 4 mouseX
 		ARG 5 mouseY
-	METHOD m_fyfxvnae slotClicked (Lnet/minecraft/unmapped/C_dfffqvhn;)V
-		ARG 1 slot
-	METHOD m_gikbakoo refreshInputs ()V
-	METHOD m_gtlmpcpb toggleFilteringCraftable ()Z
-	METHOD m_htovhjrf (Lit/unimi/dsi/fastutil/objects/ObjectSet;Lnet/minecraft/unmapped/C_qhfzammy;)Z
-		ARG 0 resultCollection
-	METHOD m_iuvokpoe isOpen ()Z
-	METHOD m_jduwoous refreshTabButtons ()V
-	METHOD m_jkothdtp setOpen (Z)V
-		ARG 1 opened
-	METHOD m_kbcascwv update ()V
-	METHOD m_ktjjipot findLeftEdge (II)I
+	METHOD m_txhzfqqv findLeftEdge (II)I
 		ARG 1 width
 		ARG 2 backgroundWidth
-	METHOD m_mhyyhusy drawTooltip (Lnet/minecraft/unmapped/C_dvxszsnc;IIII)V
-		ARG 1 matrices
-		ARG 2 x
-		ARG 3 y
-		ARG 4 mouseX
-		ARG 5 mouseY
-	METHOD m_modxefaq triggerPirateSpeakEasterEgg (Ljava/lang/String;)V
-		ARG 1 search
-	METHOD m_ncogxxzj initialize (IILnet/minecraft/unmapped/C_diboefya;ZLnet/minecraft/unmapped/C_pfvwvgum;)V
+	METHOD m_uqwfpfsu refreshTabButtons ()V
+	METHOD m_urmslxry reset ()V
+	METHOD m_uywgvlao initialize (IILnet/minecraft/unmapped/C_diboefya;ZLnet/minecraft/unmapped/C_pfvwvgum;)V
 		ARG 1 parentWidth
 		ARG 2 parentHeight
 		ARG 3 client
 		ARG 4 narrow
 		ARG 5 craftingScreenHandler
-	METHOD m_otoffbwt refreshResults (Z)V
-		ARG 1 resetCurrentPage
-	METHOD m_qhtthscz close ()V
-	METHOD m_qvzilgeq refreshSearchResults ()V
-	METHOD m_rqhqnxca (Lnet/minecraft/unmapped/C_opklnklc;)Z
-		ARG 1 button
-	METHOD m_smnmocxw setBookButtonTexture ()V
-	METHOD m_tjsasjlw (Lnet/minecraft/unmapped/C_qhfzammy;)Z
-		ARG 0 resultCollection
-	METHOD m_tnqaekpd getToggleCraftableButtonText ()Lnet/minecraft/unmapped/C_tdwiqadr;
-	METHOD m_udjbeggr toggleOpen ()V
-	METHOD m_uioedzyw (Lnet/minecraft/unmapped/C_qhfzammy;)V
-		ARG 1 resultCollection
-	METHOD m_ujmqtnjy getCraftableButtonText ()Lnet/minecraft/unmapped/C_tdwiqadr;
-	METHOD m_upxairby showGhostRecipe (Lnet/minecraft/unmapped/C_dqwdmrwa;Ljava/util/List;)V
-		ARG 1 recipe
-		ARG 2 slots
-	METHOD m_wsphxjpz reset ()V
-	METHOD m_wsubzmtl drawGhostSlots (Lnet/minecraft/unmapped/C_dvxszsnc;IIZF)V
+	METHOD m_whfldakm close ()V
+	METHOD m_wltfvdya refreshSearchResults ()V
+	METHOD m_ykukzgdi refresh ()V
+	METHOD m_zdlrlpnv getToggleCraftableButtonText ()Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_zrvithdo refreshInputs ()V
+	METHOD m_zzeleube drawGhostSlots (Lnet/minecraft/unmapped/C_dvxszsnc;IIZF)V
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
 		ARG 5 delta
-	METHOD m_wyjxaktz refresh ()V
-	METHOD m_xbitsdye (Ljava/util/List;Lnet/minecraft/unmapped/C_pkmxuvpk;)V
-		ARG 1 button
-	METHOD m_xexzmkxi (Lnet/minecraft/unmapped/C_qhfzammy;)Z
-		ARG 0 resultCollection
-	METHOD m_xfrorwmm isGuiOpen ()Z
-	METHOD m_ymoqkoot isWide ()Z

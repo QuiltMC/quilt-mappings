@@ -12,27 +12,36 @@ CLASS net/minecraft/unmapped/C_yfyistkr net/minecraft/server/network/ServerLogin
 	COMMENT UUID conflicts), it will accept the player by sending a login success
 	COMMENT packet and then transitions the connection's packet listener to a {@link
 	COMMENT ServerPlayNetworkHandler}.
-	FIELD f_azejkpkc server Lnet/minecraft/server/MinecraftServer;
-	FIELD f_bevebonr connection Lnet/minecraft/unmapped/C_kkccmsao;
-	FIELD f_cuzaigbw state Lnet/minecraft/unmapped/C_yfyistkr$C_zjoivkmb;
-	FIELD f_eueczork NEXT_AUTHENTICATOR_THREAD_ID Ljava/util/concurrent/atomic/AtomicInteger;
-	FIELD f_mgvbbsod loginTicks I
-	FIELD f_ntjmiazh nonce [B
-	FIELD f_pahazxuk delayedPlayer Lnet/minecraft/unmapped/C_ggsborxm;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_fywrjwbo connection Lnet/minecraft/unmapped/C_kkccmsao;
+	FIELD f_gftavawx nonce [B
+	FIELD f_grlmhwah server Lnet/minecraft/server/MinecraftServer;
+	FIELD f_jgsywmhf delayedPlayer Lnet/minecraft/unmapped/C_ggsborxm;
 		COMMENT The delayed player, waiting to join the server once the existing player
 		COMMENT with the same UUID is gone.
 		COMMENT
 		COMMENT <p>This will only be non-{@code null} if the state is delay-accept, and is reset
 		COMMENT to {@code null} once the player is accepted.
-	FIELD f_qjkguotj RANDOM Ljava/util/Random;
-	FIELD f_sggibcpv LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_syfycuqq profile Lcom/mojang/authlib/GameProfile;
-	FIELD f_wiaoknak serverId Ljava/lang/String;
-	FIELD f_xhgowacq TIMEOUT_TICKS I
+	FIELD f_mxcnpunf RANDOM Ljava/util/Random;
+	FIELD f_nzncuwof loginTicks I
+	FIELD f_oysbarag state Lnet/minecraft/unmapped/C_yfyistkr$C_ecfnlpkn;
+	FIELD f_tfgctvpr serverId Ljava/lang/String;
+	FIELD f_tjsivuos NEXT_AUTHENTICATOR_THREAD_ID Ljava/util/concurrent/atomic/AtomicInteger;
+	FIELD f_yakfyhua profile Lcom/mojang/authlib/GameProfile;
+	FIELD f_zvvavhrx TIMEOUT_TICKS I
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_kkccmsao;)V
 		ARG 1 server
 		ARG 2 connection
-	METHOD m_bhnmxzoi tick ()V
+	METHOD m_fwjbdxlf toOfflineProfile (Lcom/mojang/authlib/GameProfile;)Lcom/mojang/authlib/GameProfile;
+		ARG 1 profile
+	METHOD m_kfoyknnv acceptPlayer ()V
+		COMMENT Creates the player to be added to the server and adds it to the server.
+		COMMENT
+		COMMENT <p>If a player with the same UUID is in the world, it will create the
+		COMMENT player and transition to the delay accept state.
+		COMMENT
+		COMMENT @apiNote This method should only be called on the server thread.
+	METHOD m_nzncuwof tick ()V
 		COMMENT Ticks this login network handler.
 		COMMENT
 		COMMENT <p>This accepts the player to the server if ready. If the state is delay
@@ -40,20 +49,11 @@ CLASS net/minecraft/unmapped/C_yfyistkr net/minecraft/server/network/ServerLogin
 		COMMENT admits the player.
 		COMMENT
 		COMMENT @apiNote This should only be called on the server thread.
-	METHOD m_ioqxboie toOfflineProfile (Lcom/mojang/authlib/GameProfile;)Lcom/mojang/authlib/GameProfile;
-		ARG 1 profile
-	METHOD m_rypskhxz addToServer (Lnet/minecraft/unmapped/C_ggsborxm;)V
-		ARG 1 player
-	METHOD m_tjwthaht acceptPlayer ()V
-		COMMENT Creates the player to be added to the server and adds it to the server.
-		COMMENT
-		COMMENT <p>If a player with the same UUID is in the world, it will create the
-		COMMENT player and transition to the delay accept state.
-		COMMENT
-		COMMENT @apiNote This method should only be called on the server thread.
-	METHOD m_tssgemfm disconnect (Lnet/minecraft/unmapped/C_tdwiqadr;)V
+	METHOD m_ornjftqw disconnect (Lnet/minecraft/unmapped/C_tdwiqadr;)V
 		ARG 1 reason
-	METHOD m_yxhjsyor getConnectionInfo ()Ljava/lang/String;
-	CLASS C_xecoxitr
-		METHOD m_qkkjfrbk getClientAddress ()Ljava/net/InetAddress;
-	CLASS C_zjoivkmb State
+	METHOD m_ranssqjg addToServer (Lnet/minecraft/unmapped/C_ggsborxm;)V
+		ARG 1 player
+	METHOD m_ynekitfx getConnectionInfo ()Ljava/lang/String;
+	CLASS C_ecfnlpkn State
+	CLASS C_zdraaygv
+		METHOD m_avvfnsrs getClientAddress ()Ljava/net/InetAddress;

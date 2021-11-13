@@ -1,16 +1,16 @@
 CLASS net/minecraft/unmapped/C_fkkpvfki net/minecraft/client/gui/widget/CyclingButtonWidget
-	FIELD f_coqhxtrj tooltipFactory Lnet/minecraft/unmapped/C_fkkpvfki$C_pqkldafk;
-	FIELD f_fwhvddye narrationMessageFactory Ljava/util/function/Function;
-	FIELD f_hfkdicbu values Lnet/minecraft/unmapped/C_fkkpvfki$C_svbjmyjq;
-	FIELD f_ipqnvibi value Ljava/lang/Object;
-	FIELD f_izsdfnrd BOOLEAN_VALUES Ljava/util/List;
-	FIELD f_kyihehkp HAS_ALT_DOWN Ljava/util/function/BooleanSupplier;
-	FIELD f_olholxdm valueToText Ljava/util/function/Function;
-	FIELD f_rnvlhxub callback Lnet/minecraft/unmapped/C_fkkpvfki$C_vifrkzmh;
-	FIELD f_seonejbn optionTextOmitted Z
-	FIELD f_ypigiruc optionText Lnet/minecraft/unmapped/C_tdwiqadr;
-	FIELD f_yxqefyks index I
-	METHOD <init> (IIIILnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_tdwiqadr;ILjava/lang/Object;Lnet/minecraft/unmapped/C_fkkpvfki$C_svbjmyjq;Ljava/util/function/Function;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_fkkpvfki$C_vifrkzmh;Lnet/minecraft/unmapped/C_fkkpvfki$C_pqkldafk;Z)V
+	FIELD f_acgrwytd valueToText Ljava/util/function/Function;
+	FIELD f_ahqqftdz index I
+	FIELD f_brndcaux values Lnet/minecraft/unmapped/C_fkkpvfki$C_pktbcnkc;
+	FIELD f_dpagwvmt narrationMessageFactory Ljava/util/function/Function;
+	FIELD f_fbukkscy callback Lnet/minecraft/unmapped/C_fkkpvfki$C_bfinnhde;
+	FIELD f_jfplzcbr value Ljava/lang/Object;
+	FIELD f_jrpadsgy optionText Lnet/minecraft/unmapped/C_tdwiqadr;
+	FIELD f_pdccorjs tooltipFactory Lnet/minecraft/unmapped/C_fkkpvfki$C_drfwkhgv;
+	FIELD f_tdbsyqje optionTextOmitted Z
+	FIELD f_xiktvygk HAS_ALT_DOWN Ljava/util/function/BooleanSupplier;
+	FIELD f_zqodvukz BOOLEAN_VALUES Ljava/util/List;
+	METHOD <init> (IIIILnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_tdwiqadr;ILjava/lang/Object;Lnet/minecraft/unmapped/C_fkkpvfki$C_pktbcnkc;Ljava/util/function/Function;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_fkkpvfki$C_bfinnhde;Lnet/minecraft/unmapped/C_fkkpvfki$C_drfwkhgv;Z)V
 		ARG 1 x
 		ARG 2 y
 		ARG 3 width
@@ -25,53 +25,58 @@ CLASS net/minecraft/unmapped/C_fkkpvfki net/minecraft/client/gui/widget/CyclingB
 		ARG 12 callback
 		ARG 13 tooltipFactory
 		ARG 14 optionTextOmitted
-	METHOD m_bbpltgdv internalSetValue (Ljava/lang/Object;)V
+	METHOD m_acjltjas internalSetValue (Ljava/lang/Object;)V
 		ARG 1 value
-	METHOD m_bkjlzdqc composeText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_tdwiqadr;
+	METHOD m_cfcydnmg (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 0 value
+	METHOD m_cwitcuuz composeGenericOptionText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_evienqpn;
 		ARG 1 value
-	METHOD m_jgbqmgsj onOffBuilder (Z)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
+	METHOD m_hfkwchpy onOffBuilder ()Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
+		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
+		COMMENT and {@linkplain Boolean#FALSE} values. It displays
+		COMMENT {@link net.minecraft.client.gui.screen.ScreenTexts#ON} for {@code true} and
+		COMMENT {@link net.minecraft.client.gui.screen.ScreenTexts#OFF} for {@code false}.
+		COMMENT Its current initial value is {@code true}.
+	METHOD m_hfkwchpy onOffBuilder (Z)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
 		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
 		COMMENT and {@linkplain Boolean#FALSE} values. It displays
 		COMMENT {@link net.minecraft.client.gui.screen.ScreenTexts#ON} for {@code true} and
 		COMMENT {@link net.minecraft.client.gui.screen.ScreenTexts#OFF} for {@code false}.
 		COMMENT Its current initial value is set to {@code initialValue}.
 		ARG 0 initialValue
-	METHOD m_jilnoqyv getGenericNarrationMessage ()Lnet/minecraft/unmapped/C_evienqpn;
+	METHOD m_hywitrox cycle (I)V
+		ARG 1 amount
+	METHOD m_ilhplqfi builder (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
+		COMMENT Creates a new builder for a cycling button widget.
+		ARG 0 valueToText
+	METHOD m_mogblifd setValue (Ljava/lang/Object;)V
+		ARG 1 value
+	METHOD m_oyqegkxk composeText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 1 value
+	METHOD m_pmouhgih (Lnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_tdwiqadr;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tdwiqadr;
+		ARG 2 value
+	METHOD m_qkvlgrqj getValue ()Ljava/lang/Object;
+	METHOD m_txnjmduj getGenericNarrationMessage ()Lnet/minecraft/unmapped/C_evienqpn;
 		COMMENT {@return a generic narration message for this button}
 		COMMENT
 		COMMENT <p>If the button omits the option text in rendering, such as showing only
 		COMMENT "Value", this narration message will still read out the option like
 		COMMENT "Option: Value".
-	METHOD m_jjvedpln cycle (I)V
-		ARG 1 amount
-	METHOD m_kbrjtddr builder (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
-		COMMENT Creates a new builder for a cycling button widget.
-		ARG 0 valueToText
-	METHOD m_kxebguxm getValue (I)Ljava/lang/Object;
+	METHOD m_xrxukcln getValue (I)Ljava/lang/Object;
 		ARG 1 offset
-	METHOD m_muwdlsbz (Lnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_tdwiqadr;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tdwiqadr;
-		ARG 2 value
-	METHOD m_psklcbhb (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tdwiqadr;
-		ARG 0 value
-	METHOD m_qhkzynaw setValue (Ljava/lang/Object;)V
-		ARG 1 value
-	METHOD m_wexsfmyw onOffBuilder ()Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
-		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
-		COMMENT and {@linkplain Boolean#FALSE} values. It displays
-		COMMENT {@link net.minecraft.client.gui.screen.ScreenTexts#ON} for {@code true} and
-		COMMENT {@link net.minecraft.client.gui.screen.ScreenTexts#OFF} for {@code false}.
-		COMMENT Its current initial value is {@code true}.
-	METHOD m_wsrpltkj onOffBuilder (Lnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_tdwiqadr;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
+	METHOD m_zkmoawiv onOffBuilder (Lnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_tdwiqadr;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
 		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
 		COMMENT and {@linkplain Boolean#FALSE} values. It displays
 		COMMENT {@code on} for {@code true} and {@code off} for {@code false}.
 		COMMENT Its current initial value is {@code true}.
 		ARG 0 on
 		ARG 1 off
-	METHOD m_wwwuujjz getValue ()Ljava/lang/Object;
-	METHOD m_wzoinrwj composeGenericOptionText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_evienqpn;
-		ARG 1 value
-	CLASS C_euypbnjd Builder
+	CLASS C_bfinnhde UpdateCallback
+		METHOD onValueChange onValueChange (Lnet/minecraft/unmapped/C_fkkpvfki;Ljava/lang/Object;)V
+			ARG 1 button
+			ARG 2 value
+	CLASS C_drfwkhgv TooltipFactory
+	CLASS C_pckcmlvu Builder
 		COMMENT A builder to easily create cycling button widgets.
 		COMMENT
 		COMMENT Each builder must have at least one of its {@code values} methods called
@@ -79,19 +84,19 @@ CLASS net/minecraft/unmapped/C_fkkpvfki net/minecraft/client/gui/widget/CyclingB
 		COMMENT building.
 		COMMENT
 		COMMENT @see CyclingButtonWidget#builder(Function)
-		FIELD f_apkymkcy values Lnet/minecraft/unmapped/C_fkkpvfki$C_svbjmyjq;
-		FIELD f_bhaxgdmg value Ljava/lang/Object;
-		FIELD f_ebfyfuqp valueToText Ljava/util/function/Function;
-		FIELD f_fouaczkc optionTextOmitted Z
-		FIELD f_nkxbylzq narrationMessageFactory Ljava/util/function/Function;
-		FIELD f_txvojtng initialIndex I
-		FIELD f_zjuopdnn tooltipFactory Lnet/minecraft/unmapped/C_fkkpvfki$C_pqkldafk;
+		FIELD f_acgrwytd valueToText Ljava/util/function/Function;
+		FIELD f_brndcaux values Lnet/minecraft/unmapped/C_fkkpvfki$C_pktbcnkc;
+		FIELD f_dpagwvmt narrationMessageFactory Ljava/util/function/Function;
+		FIELD f_pdccorjs tooltipFactory Lnet/minecraft/unmapped/C_fkkpvfki$C_drfwkhgv;
+		FIELD f_tdbsyqje optionTextOmitted Z
+		FIELD f_xolwxaxk initialIndex I
+		FIELD f_zcufwksa value Ljava/lang/Object;
 		METHOD <init> (Ljava/util/function/Function;)V
 			COMMENT Creates a builder.
 			COMMENT
 			COMMENT @see CyclingButtonWidget#builder(Function)
 			ARG 1 valueToText
-		METHOD m_aatvppij initially (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
+		METHOD m_dejadfia initially (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
 			COMMENT Sets the initial value of this button widget.
 			COMMENT
 			COMMENT <p>This is not effective if {@code value} is not in the default
@@ -100,7 +105,18 @@ CLASS net/minecraft/unmapped/C_fkkpvfki net/minecraft/client/gui/widget/CyclingB
 			COMMENT <p>If this is not called, the initial value defaults to the first
 			COMMENT value in the values list supplied.
 			ARG 1 value
-		METHOD m_afxhrcls values (Ljava/util/function/BooleanSupplier;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
+		METHOD m_dwwrakft values (Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
+			COMMENT Sets the option values for this button.
+			ARG 1 values
+		METHOD m_dwwrakft values (Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
+			COMMENT Sets the option values for this button.
+			COMMENT
+			COMMENT <p>When the user presses the ALT key, the {@code alternatives} values
+			COMMENT will be iterated; otherwise the {@code defaults} values will be iterated
+			COMMENT when clicking the built button.
+			ARG 1 defaults
+			ARG 2 alternatives
+		METHOD m_dwwrakft values (Ljava/util/function/BooleanSupplier;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
 			COMMENT Sets the option values for this button.
 			COMMENT
 			COMMENT <p>When {@code alternativeToggle} {@linkplain BooleanSupplier#getAsBoolean()
@@ -110,47 +126,33 @@ CLASS net/minecraft/unmapped/C_fkkpvfki net/minecraft/client/gui/widget/CyclingB
 			ARG 1 alternativeToggle
 			ARG 2 defaults
 			ARG 3 alternatives
-		METHOD m_iftgixko narration (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
+		METHOD m_dwwrakft values ([Ljava/lang/Object;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
+			COMMENT Sets the option values for this button.
+			ARG 1 values
+		METHOD m_ghcphxcd narration (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
 			COMMENT Overrides the narration message of the button to build.
 			COMMENT
 			COMMENT <p>If this is not called, the button will use
 			COMMENT {@link CyclingButtonWidget#getGenericNarrationMessage()} for narration
 			COMMENT messages.
 			ARG 1 narrationMessageFactory
-		METHOD m_miziyubo build (IIIILnet/minecraft/unmapped/C_tdwiqadr;)Lnet/minecraft/unmapped/C_fkkpvfki;
+		METHOD m_mdrcmohy (Ljava/lang/Object;)Ljava/util/List;
+			ARG 0 value
+		METHOD m_tdbsyqje omitKeyText ()Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
+			COMMENT Makes the built button omit the option and only display the current value
+			COMMENT for its text, such as showing "Jump Mode" than "Mode: Jump Mode".
+		METHOD m_unzrgofs tooltip (Lnet/minecraft/unmapped/C_fkkpvfki$C_drfwkhgv;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pckcmlvu;
+			COMMENT Sets the tooltip factory that provides tooltips for any of the values.
+			COMMENT
+			COMMENT <p>If this is not called, the values simply won't have tooltips.
+			ARG 1 tooltipFactory
+		METHOD m_vvwqomhv build (IIIILnet/minecraft/unmapped/C_tdwiqadr;)Lnet/minecraft/unmapped/C_fkkpvfki;
 			ARG 1 x
 			ARG 2 y
 			ARG 3 width
 			ARG 4 height
 			ARG 5 optionText
-		METHOD m_msfyucca (Ljava/lang/Object;)Ljava/util/List;
-			ARG 0 value
-		METHOD m_nekzwogp tooltip (Lnet/minecraft/unmapped/C_fkkpvfki$C_pqkldafk;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
-			COMMENT Sets the tooltip factory that provides tooltips for any of the values.
-			COMMENT
-			COMMENT <p>If this is not called, the values simply won't have tooltips.
-			ARG 1 tooltipFactory
-		METHOD m_nixyohav values ([Ljava/lang/Object;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
-			COMMENT Sets the option values for this button.
-			ARG 1 values
-		METHOD m_qjchdwpr values (Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
-			COMMENT Sets the option values for this button.
-			ARG 1 values
-		METHOD m_sidjduhp values (Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
-			COMMENT Sets the option values for this button.
-			COMMENT
-			COMMENT <p>When the user presses the ALT key, the {@code alternatives} values
-			COMMENT will be iterated; otherwise the {@code defaults} values will be iterated
-			COMMENT when clicking the built button.
-			ARG 1 defaults
-			ARG 2 alternatives
-		METHOD m_svfrobin omitKeyText ()Lnet/minecraft/unmapped/C_fkkpvfki$C_euypbnjd;
-			COMMENT Makes the built button omit the option and only display the current value
-			COMMENT for its text, such as showing "Jump Mode" than "Mode: Jump Mode".
-		METHOD m_xmyvveeo (Lnet/minecraft/unmapped/C_fkkpvfki;Ljava/lang/Object;)V
-			ARG 0 button
-			ARG 1 value
-		METHOD m_yncjehjm build (IIIILnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_fkkpvfki$C_vifrkzmh;)Lnet/minecraft/unmapped/C_fkkpvfki;
+		METHOD m_vvwqomhv build (IIIILnet/minecraft/unmapped/C_tdwiqadr;Lnet/minecraft/unmapped/C_fkkpvfki$C_bfinnhde;)Lnet/minecraft/unmapped/C_fkkpvfki;
 			COMMENT Builds a cycling button widget.
 			COMMENT
 			COMMENT @throws IllegalStateException if no {@code values} call is made, or the
@@ -161,17 +163,15 @@ CLASS net/minecraft/unmapped/C_fkkpvfki net/minecraft/client/gui/widget/CyclingB
 			ARG 4 height
 			ARG 5 optionText
 			ARG 6 callback
-	CLASS C_pqkldafk TooltipFactory
-	CLASS C_svbjmyjq Values
-		METHOD m_bqymbubx getCurrent ()Ljava/util/List;
-		METHOD m_iomxxgqd of (Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_svbjmyjq;
+		METHOD m_wxwovvhm (Lnet/minecraft/unmapped/C_fkkpvfki;Ljava/lang/Object;)V
+			ARG 0 button
+			ARG 1 value
+	CLASS C_pktbcnkc Values
+		METHOD m_okmtfikm getCurrent ()Ljava/util/List;
+		METHOD m_oljbujqk getDefaults ()Ljava/util/List;
+		METHOD m_vvwqomhv of (Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pktbcnkc;
 			ARG 0 values
-		METHOD m_rrrniwrs of (Ljava/util/function/BooleanSupplier;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_svbjmyjq;
+		METHOD m_vvwqomhv of (Ljava/util/function/BooleanSupplier;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_fkkpvfki$C_pktbcnkc;
 			ARG 0 alternativeToggle
 			ARG 1 defaults
 			ARG 2 alternatives
-		METHOD m_tzqyxgzi getDefaults ()Ljava/util/List;
-	CLASS C_vifrkzmh UpdateCallback
-		METHOD m_vwwqoxzo onValueChange (Lnet/minecraft/unmapped/C_fkkpvfki;Ljava/lang/Object;)V
-			ARG 1 button
-			ARG 2 value

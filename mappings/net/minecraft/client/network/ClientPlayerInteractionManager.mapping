@@ -1,113 +1,113 @@
 CLASS net/minecraft/unmapped/C_jcbdybxu net/minecraft/client/network/ClientPlayerInteractionManager
-	FIELD f_cuquwijy previousGameMode Lnet/minecraft/unmapped/C_lvypchgl;
-	FIELD f_dsrfbqxd unacknowledgedPlayerActions Lit/unimi/dsi/fastutil/objects/Object2ObjectLinkedOpenHashMap;
-	FIELD f_extktxgv currentBreakingPos Lnet/minecraft/unmapped/C_kkdaznyh;
-	FIELD f_hpmgzuxn breakingBlock Z
-	FIELD f_lwxcbeyq LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_mnerzfhg MAX_UNACKNOWLEDGED_PLAYER_ACTIONS I
-	FIELD f_mvdjrgkt gameMode Lnet/minecraft/unmapped/C_lvypchgl;
-	FIELD f_pwhhkzpo networkHandler Lnet/minecraft/unmapped/C_ivxrfoun;
-	FIELD f_tinbyqsw lastSelectedSlot I
-	FIELD f_tzmlbmjv currentBreakingProgress F
-	FIELD f_ubifhdyd blockBreakingSoundCooldown F
-	FIELD f_uieprvfd selectedStack Lnet/minecraft/unmapped/C_kywxadds;
-	FIELD f_wrpifpch client Lnet/minecraft/unmapped/C_diboefya;
-	FIELD f_xpwjbdae blockBreakingCooldown I
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_dkujvsyq client Lnet/minecraft/unmapped/C_diboefya;
+	FIELD f_estsckyb selectedStack Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_exetzcwt MAX_UNACKNOWLEDGED_PLAYER_ACTIONS I
+	FIELD f_fxeuxsia blockBreakingCooldown I
+	FIELD f_fywrjwbo networkHandler Lnet/minecraft/unmapped/C_ivxrfoun;
+	FIELD f_khyyqyux previousGameMode Lnet/minecraft/unmapped/C_lvypchgl;
+	FIELD f_lvehkwju lastSelectedSlot I
+	FIELD f_nxeswbzx currentBreakingProgress F
+	FIELD f_ozxbxcje breakingBlock Z
+	FIELD f_txcewwcb blockBreakingSoundCooldown F
+	FIELD f_xltwzipz gameMode Lnet/minecraft/unmapped/C_lvypchgl;
+	FIELD f_yubhrjpx currentBreakingPos Lnet/minecraft/unmapped/C_kkdaznyh;
+	FIELD f_ztxcyjra unacknowledgedPlayerActions Lit/unimi/dsi/fastutil/objects/Object2ObjectLinkedOpenHashMap;
 	METHOD <init> (Lnet/minecraft/unmapped/C_diboefya;Lnet/minecraft/unmapped/C_ivxrfoun;)V
 		ARG 1 client
 		ARG 2 networkHandler
-	METHOD m_axlsrsrl getReachDistance ()F
-	METHOD m_bkwiuojl createPlayer (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_axsmcjdu;Lnet/minecraft/unmapped/C_dfpgfljs;)Lnet/minecraft/unmapped/C_iefmpolj;
+	METHOD m_akafdovg processPlayerActionResponse (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_dtfhgvbc$C_etplmjaf;Z)V
 		ARG 1 world
-		ARG 2 statHandler
-		ARG 3 recipeBook
-	METHOD m_boxxonxt syncSelectedSlot ()V
-	METHOD m_chvegems clickButton (II)V
-		ARG 1 syncId
-		ARG 2 buttonId
-	METHOD m_cvuqmfsw clickRecipe (ILnet/minecraft/unmapped/C_dqwdmrwa;Z)V
-		ARG 1 syncId
-		ARG 2 recipe
-		ARG 3 craftAll
-	METHOD m_dirzyprh interactBlock (Lnet/minecraft/unmapped/C_iefmpolj;Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_sqozmxal;Lnet/minecraft/unmapped/C_smttkadj;)Lnet/minecraft/unmapped/C_jybpeuzo;
-		ARG 1 player
-		ARG 2 world
-		ARG 3 hand
-		ARG 4 hitResult
-	METHOD m_frbcwfmp hasExtendedReach ()Z
-	METHOD m_gviasusq hasLimitedAttackSpeed ()Z
-	METHOD m_hslrthdi getCurrentGameMode ()Lnet/minecraft/unmapped/C_lvypchgl;
-	METHOD m_iwrhavuz setGameModes (Lnet/minecraft/unmapped/C_lvypchgl;Lnet/minecraft/unmapped/C_lvypchgl;)V
-		ARG 1 gameMode
-		ARG 2 previousGameMode
-	METHOD m_jcmodqhy stopUsingItem (Lnet/minecraft/unmapped/C_oqcyprzj;)V
-		ARG 1 player
-	METHOD m_jugdscja createPlayer (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_axsmcjdu;Lnet/minecraft/unmapped/C_dfpgfljs;ZZ)Lnet/minecraft/unmapped/C_iefmpolj;
-		ARG 1 world
-		ARG 2 statHandler
-		ARG 3 recipeBook
-		ARG 4 lastSneaking
-		ARG 5 lastSprinting
-	METHOD m_kinlqkmn getPreviousGameMode ()Lnet/minecraft/unmapped/C_lvypchgl;
-	METHOD m_kkymrduk cancelBlockBreaking ()V
-	METHOD m_lzyoqvac interactEntity (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
+		ARG 2 pos
+		ARG 3 state
+		ARG 4 action
+		ARG 5 approved
+	METHOD m_dhjaxrzo sendPlayerAction (Lnet/minecraft/unmapped/C_dtfhgvbc$C_etplmjaf;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
+		ARG 1 action
+		ARG 2 pos
+		ARG 3 direction
+	METHOD m_dlhrbqhv hasExtendedReach ()Z
+	METHOD m_eimgpjii attackBlock (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
+		ARG 1 pos
+		ARG 2 direction
+	METHOD m_fmxjgcgr updateBlockBreakingProgress (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
+		ARG 1 pos
+		ARG 2 direction
+	METHOD m_fodgtujr interactEntity (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
 		ARG 1 player
 		ARG 2 entity
 		ARG 3 hand
-	METHOD m_mdankrek dropCreativeStack (Lnet/minecraft/unmapped/C_kywxadds;)V
-		ARG 1 stack
-	METHOD m_mngsvqqv isCurrentlyBreaking (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
+	METHOD m_gcgjgyzp breakBlock (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
 		ARG 1 pos
-	METHOD m_oorwwlfw hasRidingInventory ()Z
-	METHOD m_pixeaekb hasExperienceBar ()Z
-	METHOD m_pzsvroum tick ()V
-	METHOD m_quyrkulj clickSlot (IIILnet/minecraft/unmapped/C_evueruiv;Lnet/minecraft/unmapped/C_oqcyprzj;)V
+	METHOD m_gwfxtxzt interactItem (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
+		ARG 1 player
+		ARG 2 world
+		ARG 3 hand
+	METHOD m_gysievga pickFromInventory (I)V
+		ARG 1 slot
+	METHOD m_hypbczas syncSelectedSlot ()V
+	METHOD m_imrxaejj clickSlot (IIILnet/minecraft/unmapped/C_evueruiv;Lnet/minecraft/unmapped/C_oqcyprzj;)V
 		COMMENT @see net.minecraft.screen.ScreenHandler#onSlotClick(int, int, net.minecraft.screen.slot.SlotActionType, net.minecraft.entity.player.PlayerEntity)
 		ARG 1 syncId
 		ARG 2 slotId
 		ARG 3 button
 		ARG 4 actionType
 		ARG 5 player
-	METHOD m_rxqhcyym clickCreativeStack (Lnet/minecraft/unmapped/C_kywxadds;I)V
+	METHOD m_jcgnlhbg hasStatusBars ()Z
+	METHOD m_khwagibe attackEntity (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_srenftsa;)V
+		ARG 1 player
+		ARG 2 target
+	METHOD m_kjfajmxh clickRecipe (ILnet/minecraft/unmapped/C_dqwdmrwa;Z)V
+		ARG 1 syncId
+		ARG 2 recipe
+		ARG 3 craftAll
+	METHOD m_lckignxp hasExperienceBar ()Z
+	METHOD m_nmfogoah hasLimitedAttackSpeed ()Z
+	METHOD m_nnpeiezk getPreviousGameMode ()Lnet/minecraft/unmapped/C_lvypchgl;
+	METHOD m_nvayjltc clickButton (II)V
+		ARG 1 syncId
+		ARG 2 buttonId
+	METHOD m_nzncuwof tick ()V
+	METHOD m_ojsxrlii createPlayer (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_axsmcjdu;Lnet/minecraft/unmapped/C_dfpgfljs;)Lnet/minecraft/unmapped/C_iefmpolj;
+		ARG 1 world
+		ARG 2 statHandler
+		ARG 3 recipeBook
+	METHOD m_ojsxrlii createPlayer (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_axsmcjdu;Lnet/minecraft/unmapped/C_dfpgfljs;ZZ)Lnet/minecraft/unmapped/C_iefmpolj;
+		ARG 1 world
+		ARG 2 statHandler
+		ARG 3 recipeBook
+		ARG 4 lastSneaking
+		ARG 5 lastSprinting
+	METHOD m_olpwfoju isFlyingLocked ()Z
+	METHOD m_oxhglvyk clickCreativeStack (Lnet/minecraft/unmapped/C_kywxadds;I)V
 		ARG 1 stack
 		ARG 2 slotId
-	METHOD m_smzciyht interactEntityAtLocation (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_jnyhbkow;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
+	METHOD m_ozxbxcje isBreakingBlock ()Z
+	METHOD m_qqmaaxbj getReachDistance ()F
+	METHOD m_qsewxdmg interactEntityAtLocation (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_srenftsa;Lnet/minecraft/unmapped/C_jnyhbkow;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
 		ARG 1 player
 		ARG 2 entity
 		ARG 3 hitResult
 		ARG 4 hand
-	METHOD m_tbjuyrdk pickFromInventory (I)V
-		ARG 1 slot
-	METHOD m_tfgzffhz breakBlock (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
-		ARG 1 pos
-	METHOD m_thlzbhsq hasCreativeInventory ()Z
-	METHOD m_tjmkhyxz sendPlayerAction (Lnet/minecraft/unmapped/C_dtfhgvbc$C_skrgtwod;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)V
-		ARG 1 action
-		ARG 2 pos
-		ARG 3 direction
-	METHOD m_uperbtyh setGameMode (Lnet/minecraft/unmapped/C_lvypchgl;)V
+	METHOD m_rryhkwlb hasCreativeInventory ()Z
+	METHOD m_svcrkqic setGameMode (Lnet/minecraft/unmapped/C_lvypchgl;)V
 		ARG 1 gameMode
-	METHOD m_upyuowch attackBlock (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
-		ARG 1 pos
-		ARG 2 direction
-	METHOD m_utaryxnk copyAbilities (Lnet/minecraft/unmapped/C_oqcyprzj;)V
+	METHOD m_svcrkqic setGameModes (Lnet/minecraft/unmapped/C_lvypchgl;Lnet/minecraft/unmapped/C_lvypchgl;)V
+		ARG 1 gameMode
+		ARG 2 previousGameMode
+	METHOD m_sxlddxtw copyAbilities (Lnet/minecraft/unmapped/C_oqcyprzj;)V
 		ARG 1 player
-	METHOD m_vbwrqpev processPlayerActionResponse (Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_pmeibtxt;Lnet/minecraft/unmapped/C_dtfhgvbc$C_skrgtwod;Z)V
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 state
-		ARG 4 action
-		ARG 5 approved
-	METHOD m_wagptoth attackEntity (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_srenftsa;)V
+	METHOD m_vvyoxuhy cancelBlockBreaking ()V
+	METHOD m_wzjnvyem dropCreativeStack (Lnet/minecraft/unmapped/C_kywxadds;)V
+		ARG 1 stack
+	METHOD m_xjficmkq stopUsingItem (Lnet/minecraft/unmapped/C_oqcyprzj;)V
 		ARG 1 player
-		ARG 2 target
-	METHOD m_wbafwhsp interactItem (Lnet/minecraft/unmapped/C_oqcyprzj;Lnet/minecraft/unmapped/C_nbzftcdc;Lnet/minecraft/unmapped/C_sqozmxal;)Lnet/minecraft/unmapped/C_jybpeuzo;
+	METHOD m_xuwdmywg interactBlock (Lnet/minecraft/unmapped/C_iefmpolj;Lnet/minecraft/unmapped/C_wrrlndhg;Lnet/minecraft/unmapped/C_sqozmxal;Lnet/minecraft/unmapped/C_smttkadj;)Lnet/minecraft/unmapped/C_jybpeuzo;
 		ARG 1 player
 		ARG 2 world
 		ARG 3 hand
-	METHOD m_yavfcmlw isBreakingBlock ()Z
-	METHOD m_yynvalyq hasStatusBars ()Z
-	METHOD m_zbzqgzbm isFlyingLocked ()Z
-	METHOD m_zqwwuwsr updateBlockBreakingProgress (Lnet/minecraft/unmapped/C_kkdaznyh;Lnet/minecraft/unmapped/C_fxhiuupx;)Z
+		ARG 4 hitResult
+	METHOD m_xvkptndq isCurrentlyBreaking (Lnet/minecraft/unmapped/C_kkdaznyh;)Z
 		ARG 1 pos
-		ARG 2 direction
+	METHOD m_ylnnfbin hasRidingInventory ()Z
+	METHOD m_zzaxqjfk getCurrentGameMode ()Lnet/minecraft/unmapped/C_lvypchgl;

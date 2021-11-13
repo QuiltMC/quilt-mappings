@@ -1,10 +1,10 @@
 CLASS net/minecraft/unmapped/C_cmdbvdvs net/minecraft/recipe/ShapedRecipe
-	FIELD f_cwlbmfgc width I
-	FIELD f_ecadloto input Lnet/minecraft/unmapped/C_eztffrnr;
-	FIELD f_ocxaargv output Lnet/minecraft/unmapped/C_kywxadds;
-	FIELD f_rjmlpudr height I
-	FIELD f_rkbuexdy id Lnet/minecraft/unmapped/C_acfwypcn;
-	FIELD f_suqlqulk group Ljava/lang/String;
+	FIELD f_bzipntej id Lnet/minecraft/unmapped/C_acfwypcn;
+	FIELD f_dsucbnbl group Ljava/lang/String;
+	FIELD f_fwktszbj width I
+	FIELD f_ibvfsmlm output Lnet/minecraft/unmapped/C_kywxadds;
+	FIELD f_nkoheunf height I
+	FIELD f_pyztzxtl input Lnet/minecraft/unmapped/C_eztffrnr;
 	METHOD <init> (Lnet/minecraft/unmapped/C_acfwypcn;Ljava/lang/String;IILnet/minecraft/unmapped/C_eztffrnr;Lnet/minecraft/unmapped/C_kywxadds;)V
 		ARG 1 id
 		ARG 2 group
@@ -12,8 +12,22 @@ CLASS net/minecraft/unmapped/C_cmdbvdvs net/minecraft/recipe/ShapedRecipe
 		ARG 4 height
 		ARG 5 input
 		ARG 6 output
-	METHOD m_cfqvgicx getWidth ()I
-	METHOD m_dodthadf removePadding ([Ljava/lang/String;)[Ljava/lang/String;
+	METHOD m_aqncyulv findFirstSymbol (Ljava/lang/String;)I
+		ARG 0 line
+	METHOD m_ckagpsna getPattern (Lcom/google/gson/JsonArray;)[Ljava/lang/String;
+		ARG 0 json
+	METHOD m_clmupaji createPatternMatrix ([Ljava/lang/String;Ljava/util/Map;II)Lnet/minecraft/unmapped/C_eztffrnr;
+		COMMENT Compiles a pattern and series of symbols into a list of ingredients (the matrix) suitable for matching
+		COMMENT against a crafting grid.
+		ARG 0 pattern
+		ARG 1 symbols
+		ARG 2 width
+		ARG 3 height
+	METHOD m_creidnep getHeight ()I
+	METHOD m_dxhmtdlg getWidth ()I
+	METHOD m_edlkwvvt (Lnet/minecraft/unmapped/C_vrdyspct;)Z
+		ARG 0 ingredient
+	METHOD m_gucloaev removePadding ([Ljava/lang/String;)[Ljava/lang/String;
 		COMMENT Removes empty space from around the recipe pattern.
 		COMMENT
 		COMMENT <p>Turns patterns such as:</p>
@@ -34,36 +48,22 @@ CLASS net/minecraft/unmapped/C_cmdbvdvs net/minecraft/recipe/ShapedRecipe
 		COMMENT
 		COMMENT @return a new recipe pattern with all leading and trailing empty rows/columns removed
 		ARG 0 pattern
-	METHOD m_ersdwway (Lnet/minecraft/unmapped/C_vrdyspct;)Z
-		ARG 0 ingredient
-	METHOD m_etyowoih outputFromJson (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_kywxadds;
-		ARG 0 json
-	METHOD m_ezkgdxea getItem (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_xanddrov;
-		ARG 0 json
-	METHOD m_flabvlao readSymbols (Lcom/google/gson/JsonObject;)Ljava/util/Map;
-		COMMENT Reads the pattern symbols.
-		COMMENT
-		COMMENT @return a mapping from a symbol to the ingredient it represents
-		ARG 0 json
-	METHOD m_hojhazfi getPattern (Lcom/google/gson/JsonArray;)[Ljava/lang/String;
-		ARG 0 json
-	METHOD m_hwjjqjxk getHeight ()I
-	METHOD m_lgotccin matchesPattern (Lnet/minecraft/unmapped/C_qlvjwvcf;IIZ)Z
+	METHOD m_guvndmps matchesPattern (Lnet/minecraft/unmapped/C_qlvjwvcf;IIZ)Z
 		ARG 1 inv
 		ARG 2 offsetX
 		ARG 3 offsetY
 		ARG 4 flipped
-	METHOD m_lvvqdrqj createPatternMatrix ([Ljava/lang/String;Ljava/util/Map;II)Lnet/minecraft/unmapped/C_eztffrnr;
-		COMMENT Compiles a pattern and series of symbols into a list of ingredients (the matrix) suitable for matching
-		COMMENT against a crafting grid.
+	METHOD m_jdlpjmvc outputFromJson (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_kywxadds;
+		ARG 0 json
+	METHOD m_jnryxtcr findLastSymbol (Ljava/lang/String;)I
 		ARG 0 pattern
-		ARG 1 symbols
-		ARG 2 width
-		ARG 3 height
-	METHOD m_nybyndhc (Lnet/minecraft/unmapped/C_vrdyspct;)Z
+	METHOD m_lsstiulb readSymbols (Lcom/google/gson/JsonObject;)Ljava/util/Map;
+		COMMENT Reads the pattern symbols.
+		COMMENT
+		COMMENT @return a mapping from a symbol to the ingredient it represents
+		ARG 0 json
+	METHOD m_zicricxn getItem (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_xanddrov;
+		ARG 0 json
+	METHOD m_ziqbmvsr (Lnet/minecraft/unmapped/C_vrdyspct;)Z
 		ARG 0 ingredient
-	METHOD m_qrnxpyfc findLastSymbol (Ljava/lang/String;)I
-		ARG 0 pattern
-	METHOD m_umxfunav findFirstSymbol (Ljava/lang/String;)I
-		ARG 0 line
-	CLASS C_zavwxbsd Serializer
+	CLASS C_pkmrgtdq Serializer

@@ -1,15 +1,25 @@
 CLASS net/minecraft/unmapped/C_crpeilne net/minecraft/world/WorldDataVersion
 	COMMENT The version components of Minecraft that is used for identification in saves.
-	FIELD f_bcqobonv dataVersion I
-	FIELD f_kbrepupo MAIN_SERIES Ljava/lang/String;
+	FIELD f_eurxekic dataVersion I
+	FIELD f_kysuebbu MAIN_SERIES Ljava/lang/String;
 		COMMENT The default series of a version, {@value}, if a series is not specified.
-	FIELD f_pkpxeqrf seriesId Ljava/lang/String;
+	FIELD f_updgqcol seriesId Ljava/lang/String;
 	METHOD <init> (I)V
 		ARG 1 dataVersion
 	METHOD <init> (ILjava/lang/String;)V
 		ARG 1 dataVersion
 		ARG 2 seriesId
-	METHOD m_cdlfxufx getSeries ()Ljava/lang/String;
+	METHOD m_fmksemad getDataVersion ()I
+	METHOD m_jmoyfmto isCompatible (Lnet/minecraft/unmapped/C_crpeilne;)Z
+		COMMENT Returns whether or not this world version is compatible with the given world version.
+		COMMENT
+		COMMENT @return {@code true} if the world versions are compatible, else {@code false}
+		ARG 1 other
+	METHOD m_ldheehoz isUnstable ()Z
+		COMMENT Returns whether this world data version is "unstable", as-in it's not in the main series.
+		COMMENT
+		COMMENT @return {@code true} if this world data version is unstable, else {@code false}
+	METHOD m_vabrvmqa getSeries ()Ljava/lang/String;
 		COMMENT Returns the series of this version.
 		COMMENT
 		COMMENT <p>This is stored in the {@code Series} field within {@code level.dat} files.
@@ -18,13 +28,3 @@ CLASS net/minecraft/unmapped/C_crpeilne net/minecraft/world/WorldDataVersion
 		COMMENT and {@code ccpreview} for the caves and cliffs experimental snapshots.
 		COMMENT
 		COMMENT @return the series of this version
-	METHOD m_qaqefizn isUnstable ()Z
-		COMMENT Returns whether this world data version is "unstable", as-in it's not in the main series.
-		COMMENT
-		COMMENT @return {@code true} if this world data version is unstable, else {@code false}
-	METHOD m_rxnidfmv isCompatible (Lnet/minecraft/unmapped/C_crpeilne;)Z
-		COMMENT Returns whether or not this world version is compatible with the given world version.
-		COMMENT
-		COMMENT @return {@code true} if the world versions are compatible, else {@code false}
-		ARG 1 other
-	METHOD m_xsrqwrvz getDataVersion ()I

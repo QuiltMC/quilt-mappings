@@ -1,11 +1,11 @@
 CLASS net/minecraft/unmapped/C_tvmpcaxg net/minecraft/network/packet/s2c/play/ChunkDeltaUpdateS2CPacket
-	FIELD f_lqhugsug positions [S
+	FIELD f_bbehmcne noLightingUpdates Z
+	FIELD f_dyznncyn blockStates [Lnet/minecraft/unmapped/C_pmeibtxt;
+	FIELD f_fybqndwt positions [S
 		COMMENT The packed local positions for each entry in {@link #blockStates}.
 		COMMENT
 		COMMENT @see ChunkSectionPos#packLocal(BlockPos)
-	FIELD f_nerzklnt blockStates [Lnet/minecraft/unmapped/C_pmeibtxt;
-	FIELD f_olkqidku sectionPos Lnet/minecraft/unmapped/C_eyemvbuz;
-	FIELD f_xguvnjnj noLightingUpdates Z
+	FIELD f_pfgcophl sectionPos Lnet/minecraft/unmapped/C_eyemvbuz;
 	METHOD <init> (Lnet/minecraft/unmapped/C_eyemvbuz;Lit/unimi/dsi/fastutil/shorts/ShortSet;Lnet/minecraft/unmapped/C_fgfsorua;Z)V
 		ARG 1 sectionPos
 			COMMENT the position of the given chunk section that will be sent to the client
@@ -14,6 +14,6 @@ CLASS net/minecraft/unmapped/C_tvmpcaxg net/minecraft/network/packet/s2c/play/Ch
 		ARG 4 noLightingUpdates
 	METHOD <init> (Lnet/minecraft/unmapped/C_ocwdyfdi;)V
 		ARG 1 buf
-	METHOD m_hpcqyvug visitUpdates (Ljava/util/function/BiConsumer;)V
+	METHOD m_kecrzmoy visitUpdates (Ljava/util/function/BiConsumer;)V
 		COMMENT Calls the given consumer for each pair of block position and block state contained in this packet.
-	METHOD m_vqqggvls shouldSkipLightingUpdates ()Z
+	METHOD m_zltwqmem shouldSkipLightingUpdates ()Z

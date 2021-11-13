@@ -1,18 +1,18 @@
 CLASS net/minecraft/unmapped/C_xukanljc net/minecraft/client/realms/FileUpload
-	FIELD f_cnoqwiao uploadStatus Lnet/minecraft/unmapped/C_azowqrkn;
-	FIELD f_cxjxzgrf slotId I
-	FIELD f_deiayznt MAX_ATTEMPTS I
-	FIELD f_fzlzzcpa sessionId Ljava/lang/String;
-	FIELD f_iddtrqyc uploadInfo Lnet/minecraft/unmapped/C_kvyzdlem;
-	FIELD f_kogwuzsv UPLOAD_ENDPOINT Ljava/lang/String;
-	FIELD f_ljdnqvtl clientVersion Ljava/lang/String;
-	FIELD f_lvdhqwqz requestConfig Lorg/apache/http/client/config/RequestConfig;
-	FIELD f_oxqqmwkb uploadTask Ljava/util/concurrent/CompletableFuture;
-	FIELD f_qjwragfq cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
-	FIELD f_toxjxpwr username Ljava/lang/String;
-	FIELD f_vlbgvxop file Ljava/io/File;
-	FIELD f_xsnfehty LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_zwtfnxjc worldId J
+	FIELD f_bpzavjej cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_cmcksctq sessionId Ljava/lang/String;
+	FIELD f_dzsfcauw clientVersion Ljava/lang/String;
+	FIELD f_eadseklz file Ljava/io/File;
+	FIELD f_edcpvqmp worldId J
+	FIELD f_fxbwgxai UPLOAD_ENDPOINT Ljava/lang/String;
+	FIELD f_iepqcwjn uploadStatus Lnet/minecraft/unmapped/C_azowqrkn;
+	FIELD f_iwencatg MAX_ATTEMPTS I
+	FIELD f_kuxowgxu slotId I
+	FIELD f_mvhevual uploadTask Ljava/util/concurrent/CompletableFuture;
+	FIELD f_pzmgpwia requestConfig Lorg/apache/http/client/config/RequestConfig;
+	FIELD f_vbjgsbxz username Ljava/lang/String;
+	FIELD f_whxpenml uploadInfo Lnet/minecraft/unmapped/C_kvyzdlem;
 	METHOD <init> (Ljava/io/File;JILnet/minecraft/unmapped/C_kvyzdlem;Lnet/minecraft/unmapped/C_bnczifwc;Ljava/lang/String;Lnet/minecraft/unmapped/C_azowqrkn;)V
 		ARG 1 file
 		ARG 2 worldId
@@ -21,32 +21,32 @@ CLASS net/minecraft/unmapped/C_xukanljc net/minecraft/client/realms/FileUpload
 		ARG 6 session
 		ARG 7 clientVersion
 		ARG 8 uploadStatus
-	METHOD m_bbaoncoc setupRequest (Lorg/apache/http/client/methods/HttpPost;)V
+	METHOD m_icosbqzi setupRequest (Lorg/apache/http/client/methods/HttpPost;)V
 		ARG 1 request
-	METHOD m_dedzcapg cleanup (Lorg/apache/http/client/methods/HttpPost;Lorg/apache/http/impl/client/CloseableHttpClient;)V
+	METHOD m_inawxjxd retryUploadAfter (JI)Lnet/minecraft/unmapped/C_wrjkoulq;
+		ARG 1 retryDelaySeconds
+		ARG 3 currentAttempt
+	METHOD m_jwruopsd cleanup (Lorg/apache/http/client/methods/HttpPost;Lorg/apache/http/impl/client/CloseableHttpClient;)V
 		ARG 1 request
 		ARG 2 client
-	METHOD m_dhymbwhu upload (Ljava/util/function/Consumer;)V
+	METHOD m_loesdtlk requestUpload (I)Lnet/minecraft/unmapped/C_wrjkoulq;
+		ARG 1 currentAttempt
+	METHOD m_nxlfxecl upload (Ljava/util/function/Consumer;)V
 		ARG 1 callback
-	METHOD m_fajhpxhf cancel ()V
-	METHOD m_gbzdzkut retryUploadAfter (JI)Lnet/minecraft/unmapped/C_wrjkoulq;
+	METHOD m_pteusjwp isFinished ()Z
+	METHOD m_rkzvwind getRetryDelaySeconds (Lorg/apache/http/HttpResponse;)J
+		ARG 1 response
+	METHOD m_suqgxttk shouldRetry (JI)Z
 		ARG 1 retryDelaySeconds
 		ARG 3 currentAttempt
-	METHOD m_gknjruxd getRetryDelaySeconds (Lorg/apache/http/HttpResponse;)J
-		ARG 1 response
-	METHOD m_sxcsmcgu isFinished ()Z
-	METHOD m_uzmdazbz handleResponse (Lorg/apache/http/HttpResponse;Lnet/minecraft/unmapped/C_wrjkoulq$C_ixzdwrdy;)V
+	METHOD m_tlebnwyy cancel ()V
+	METHOD m_xkxkgfeu handleResponse (Lorg/apache/http/HttpResponse;Lnet/minecraft/unmapped/C_wrjkoulq$C_pckcmlvu;)V
 		ARG 1 response
 		ARG 2 uploadResultBuilder
-	METHOD m_wgqazqse requestUpload (I)Lnet/minecraft/unmapped/C_wrjkoulq;
-		ARG 1 currentAttempt
-	METHOD m_wwoyiltn shouldRetry (JI)Z
-		ARG 1 retryDelaySeconds
-		ARG 3 currentAttempt
-	CLASS C_fkcatldt CustomInputStreamEntity
-		FIELD f_fqxkqhnw length J
-		FIELD f_papjwhtv uploadStatus Lnet/minecraft/unmapped/C_azowqrkn;
-		FIELD f_zyrsgglq content Ljava/io/InputStream;
+	CLASS C_emntpfkw CustomInputStreamEntity
+		FIELD f_hhpsydfd content Ljava/io/InputStream;
+		FIELD f_iepqcwjn uploadStatus Lnet/minecraft/unmapped/C_azowqrkn;
+		FIELD f_jqhdefgx length J
 		METHOD <init> (Ljava/io/InputStream;JLnet/minecraft/unmapped/C_azowqrkn;)V
 			ARG 1 content
 			ARG 2 length

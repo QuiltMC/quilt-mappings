@@ -2,23 +2,21 @@ CLASS net/minecraft/unmapped/C_qwrwqcvv net/minecraft/server/LanServerPinger
 	COMMENT Used to send UDP multicasts to notify other clients of a local game on the same network.
 	COMMENT
 	COMMENT <p>These multicasts will always be sent to {@code 224.0.2.60:4445} where other clients can listen for local games.
-	FIELD f_fiqiyzvz PING_ADDRESS Ljava/lang/String;
-	FIELD f_nuxzutwa addressPort Ljava/lang/String;
-	FIELD f_onfdxhks running Z
-	FIELD f_qawrpqdr PING_INTERVAL J
-	FIELD f_tbqmcknf motd Ljava/lang/String;
-	FIELD f_ubrsozmw LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD f_wblzjxog PING_PORT I
-	FIELD f_xaymsgaz THREAD_ID Ljava/util/concurrent/atomic/AtomicInteger;
-	FIELD f_zfrosyjb socket Ljava/net/DatagramSocket;
+	FIELD f_cdurihdp LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_jxdqefxy socket Ljava/net/DatagramSocket;
+	FIELD f_mzrrxgaf PING_INTERVAL J
+	FIELD f_qcpppjix running Z
+	FIELD f_qxxakwjy PING_PORT I
+	FIELD f_srvdyual addressPort Ljava/lang/String;
+	FIELD f_tjsivuos THREAD_ID Ljava/util/concurrent/atomic/AtomicInteger;
+	FIELD f_trzmfsqm PING_ADDRESS Ljava/lang/String;
+	FIELD f_wiritdun motd Ljava/lang/String;
 	METHOD <init> (Ljava/lang/String;Ljava/lang/String;)V
 		ARG 1 motd
 		ARG 2 addressPort
-	METHOD m_fxupdgvl parseAnnouncementAddressPort (Ljava/lang/String;)Ljava/lang/String;
+	METHOD m_ielvoiid parseAnnouncementMotd (Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 announcement
-	METHOD m_hzxcfezs parseAnnouncementMotd (Ljava/lang/String;)Ljava/lang/String;
-		ARG 0 announcement
-	METHOD m_wqyaampp createAnnouncement (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	METHOD m_sxdzakpp createAnnouncement (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 		COMMENT Creates a server announcement.
 		COMMENT
 		COMMENT <pre>
@@ -36,3 +34,5 @@ CLASS net/minecraft/unmapped/C_qwrwqcvv net/minecraft/server/LanServerPinger
 			COMMENT the message of the day
 		ARG 1 addressPort
 			COMMENT the address of the server including the IP address and port
+	METHOD m_uvevidks parseAnnouncementAddressPort (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 announcement
