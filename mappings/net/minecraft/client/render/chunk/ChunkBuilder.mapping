@@ -3,15 +3,25 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 	FIELD f_bwqkxojd queuedTaskCount I
 	FIELD f_dcgdahlo LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD f_dlijlhna uploadQueue Ljava/util/Queue;
+	FIELD f_fzsfhpbo chunksToBuild Ljava/util/Queue;
 	FIELD f_inqsqser POSITION_COLOR_TEXTURE_LIGHT_NORMAL Lnet/minecraft/unmapped/C_rnldvdpe;
 	FIELD f_nlltickx world Lnet/minecraft/unmapped/C_ghdnlrrw;
 	FIELD f_ozkutnxz cameraPosition Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_qrrzdkwd mailbox Lnet/minecraft/unmapped/C_bhuwdyga;
+	FIELD f_rgwkezae highPriorityQuota I
 	FIELD f_rmtgpazv worldRenderer Lnet/minecraft/unmapped/C_sfkkabhx;
 	FIELD f_rxdlwkdw bufferCount I
 	FIELD f_shhksbkx MAX_WORKER_THREADS_FOR_32_BIT_SYSTEMS I
+	FIELD f_vjkdtrzu highPriorityChunksToBuild Ljava/util/PriorityQueue;
 	FIELD f_vllbomdt executor Ljava/util/concurrent/Executor;
+	FIELD f_vluvkkeg MAX_HIGH_PRIORITY_QUOTA I
 	FIELD f_xrrtpvsk threadBuffers Ljava/util/Queue;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_sfkkabhx;Ljava/util/concurrent/Executor;ZLnet/minecraft/unmapped/C_wjdrilbw;)V
+		ARG 1 world
+		ARG 2 worldRenderer
+		ARG 3 executor
+		ARG 4 useMaxThreads
+		ARG 5 buffers
 	METHOD m_cnldfvys isEmpty ()Z
 	METHOD m_dnfvfxkc getCameraPosition ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_hpnaxevd (Lnet/minecraft/unmapped/C_nxnqmnng;Lnet/minecraft/unmapped/C_lhjdxjis;Ljava/lang/Void;)Ljava/util/concurrent/CompletionStage;
@@ -20,6 +30,8 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 	METHOD m_itbyrwdr stop ()V
 	METHOD m_jnvatbgf getDebugString ()Ljava/lang/String;
 	METHOD m_jswdxiko getChunksToUpload ()I
+	METHOD m_lhhunsny (Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletionStage;
+		ARG 0 future
 	METHOD m_lobqmezs scheduleRunTasks ()V
 	METHOD m_modfdxda send (Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw$C_antomhnw;)V
 		ARG 1 task
@@ -30,10 +42,12 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 	METHOD m_qnvuifrs (Lnet/minecraft/unmapped/C_wjdrilbw;Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;Ljava/lang/Throwable;)V
 		ARG 2 result
 		ARG 3 throwable
+	METHOD m_qtqvfusi pollTask ()Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw$C_antomhnw;
 	METHOD m_rhnryngl scheduleUpload (Lnet/minecraft/unmapped/C_nxnqmnng;Lnet/minecraft/unmapped/C_lhjdxjis;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 buffer
 		ARG 2 glBuffer
 	METHOD m_udtyiwvw setWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
+		ARG 1 world
 	METHOD m_uqlbdpbi upload (Lnet/minecraft/unmapped/C_nxnqmnng;Lnet/minecraft/unmapped/C_lhjdxjis;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 buffer
 		ARG 2 glBuffer
@@ -97,6 +111,10 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 			ARG 1 direction
 		CLASS C_amqftyfx RebuildTask
 			FIELD f_kvlolfbr region Lnet/minecraft/unmapped/C_pnsarinu;
+			METHOD <init> (Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;DLnet/minecraft/unmapped/C_pnsarinu;Z)V
+				ARG 2 distance
+				ARG 4 region
+				ARG 5 highPriority
 			METHOD m_awluitfj addBlockEntity (Lnet/minecraft/unmapped/C_cifoaixd$C_zqojclga;Ljava/util/Set;Lnet/minecraft/unmapped/C_kvegafmh;)V
 				ARG 1 data
 				ARG 2 blockEntities
@@ -115,11 +133,16 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 		CLASS C_antomhnw Task
 			FIELD f_alcikbsr distance D
 			FIELD f_dikrpxtx cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
-			METHOD compareTo (Ljava/lang/Object;)I
+			FIELD f_dykianxa highPriority Z
+			METHOD <init> (Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;DZ)V
+				ARG 2 distance
+				ARG 4 highPriority
+			METHOD compareTo compareTo (Ljava/lang/Object;)I
 				ARG 1 other
 			METHOD m_cgxbmlli run (Lnet/minecraft/unmapped/C_wjdrilbw;)Ljava/util/concurrent/CompletableFuture;
 				ARG 1 buffers
 			METHOD m_kroauyfq cancel ()V
+			METHOD m_ozqmlvff name ()Ljava/lang/String;
 		CLASS C_temnlrwc SortTask
 			FIELD f_azrwybej data Lnet/minecraft/unmapped/C_cifoaixd$C_zqojclga;
 			METHOD <init> (Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;DLnet/minecraft/unmapped/C_cifoaixd$C_zqojclga;)V
