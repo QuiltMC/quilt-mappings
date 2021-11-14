@@ -1,4 +1,4 @@
-CLASS com/mojang/blaze3d/platform/GlStateManager
+CLASS com/mojang/blaze3d/platform/GlStateManager com/mojang/blaze3d/platform/GlStateManager
 	METHOD _activeTexture (I)V
 		ARG 0 texture
 	METHOD _bindTexture (I)V
@@ -38,14 +38,14 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 0 func
 	METHOD _depthMask (Z)V
 		ARG 0 mask
-	METHOD _disableVertexAttribArray (I)V
+	METHOD _disableVertexAttribArray _disableVertexAttribArray (I)V
 		ARG 0 index
 	METHOD _drawElements (IIIJ)V
 		ARG 0 mode
 		ARG 1 first
 		ARG 2 type
 		ARG 3 indices
-	METHOD _enableVertexAttribArray (I)V
+	METHOD _enableVertexAttribArray _enableVertexAttribArray (I)V
 		ARG 0 index
 	METHOD _genTextures ([I)V
 		ARG 0 ids
@@ -133,6 +133,8 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 2 textureTarget
 		ARG 3 texture
 		ARG 4 level
+	METHOD _glGenBuffers _glGenBuffers ()I
+	METHOD _glGenVertexArrays _glGenVertexArrays ()I
 	METHOD _glGetAttribLocation (ILjava/lang/CharSequence;)I
 		ARG 0 program
 		ARG 1 name
@@ -260,13 +262,13 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 6 format
 		ARG 7 type
 		ARG 8 pixels
-	METHOD _vertexAttribIPointer (IIIIJ)V
+	METHOD _vertexAttribIPointer _vertexAttribIPointer (IIIIJ)V
 		ARG 0 index
 		ARG 1 size
 		ARG 2 type
 		ARG 3 stride
 		ARG 4 pointer
-	METHOD _vertexAttribPointer (IIIZIJ)V
+	METHOD _vertexAttribPointer _vertexAttribPointer (IIIZIJ)V
 		ARG 0 index
 		ARG 1 size
 		ARG 2 type
@@ -390,9 +392,9 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		FIELD f_rqwqahpv srcFactorRGB I
 		FIELD f_sdyyvzqb capState Lcom/mojang/blaze3d/platform/GlStateManager$C_rfswymsl;
 		FIELD f_yedzzjzb dstFactorAlpha I
-	CLASS DestFactor
+	CLASS DestFactor DestFactor
 		METHOD <init> (Ljava/lang/String;II)V
 			ARG 3 value
-	CLASS SourceFactor
+	CLASS SourceFactor SourceFactor
 		METHOD <init> (Ljava/lang/String;II)V
 			ARG 3 value

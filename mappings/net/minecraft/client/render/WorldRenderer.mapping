@@ -10,6 +10,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_dprzqrwh frustum Lnet/minecraft/unmapped/C_jwzjqevg;
 	FIELD f_dqbrmnkm lastCameraYaw D
 	FIELD f_dscsgzsp rainSizeZ [F
+	FIELD f_ebpbvmth needsFullBuiltChunkUpdate Z
 	FIELD f_fkfkkpvn entityOutlinesFramebuffer Lnet/minecraft/unmapped/C_xxwgvelc;
 	FIELD f_fpgxhitd blockEntityRenderDispatcher Lnet/minecraft/unmapped/C_sicqxpzm;
 	FIELD f_frghdqwd SIZE_HALF_CHUNK I
@@ -41,6 +42,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_nzjnfkiz lastCameraChunkUpdateY D
 	FIELD f_ofkpyvlk DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_ouqnhuws starsBuffer Lnet/minecraft/unmapped/C_lhjdxjis;
+	FIELD f_owrzndaa nextFullUpdateMilliseconds Ljava/util/concurrent/atomic/AtomicLong;
 	FIELD f_pgcyttka entityFramebuffer Lnet/minecraft/unmapped/C_xxwgvelc;
 	FIELD f_pixymagk lastCameraChunkUpdateX D
 	FIELD f_psrqwipd lastCloudsBlockZ I
@@ -48,6 +50,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_rohlvoee lastCameraChunkUpdateZ D
 	FIELD f_sjzgaoej RAIN_RENDER_RADIUS I
 	FIELD f_spqqrrlb entityOutlineShader Lnet/minecraft/unmapped/C_pdhhdxwe;
+	FIELD f_thqgfvbk needsFrustrumUpdate Ljava/util/concurrent/atomic/AtomicBoolean;
 	FIELD f_tkobpdri capturedFrustumPosition Lnet/minecraft/unmapped/C_gpjfnwjq;
 	FIELD f_tonhowha lastCloudsColor Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_tvxrpomv cameraChunkZ I
@@ -81,6 +84,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_dfmwjguw;)V
 		ARG 1 client
 		ARG 2 bufferBuilders
+	METHOD close close ()V
 	METHOD m_aafpllmc drawBox (Lnet/minecraft/unmapped/C_igthdzux;DDDDDDFFFF)V
 		ARG 0 consumer
 		ARG 1 x1
@@ -124,8 +128,12 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_cqjwluwx onResized (II)V
 		ARG 1 width
 		ARG 2 height
+	METHOD m_cubkhurg (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sfkkabhx$C_iujdkhwk;)D
+		ARG 1 chunkInfo
 	METHOD m_czdwifqx getChunkBuilder ()Lnet/minecraft/unmapped/C_cifoaixd;
 	METHOD m_czgfbaid renderLightSky ()V
+	METHOD m_dlpoweww (J)J
+		ARG 1 milliseconds
 	METHOD m_dwuopuwx updateNoCullingBlockEntities (Ljava/util/Collection;Ljava/util/Collection;)V
 		ARG 1 removed
 		ARG 2 added
@@ -146,6 +154,15 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 9 velocityX
 		ARG 11 velocityY
 		ARG 13 velocityZ
+	METHOD m_eodsvxyc addChunksToBuild (Lnet/minecraft/unmapped/C_dcmtgrvm;Ljava/util/Queue;)V
+		ARG 1 camera
+		ARG 2 chunkInfoQueue
+	METHOD m_epriolvn updateBuiltChunks (Ljava/util/LinkedHashSet;Lnet/minecraft/unmapped/C_sfkkabhx$C_oaefdpgi;Lnet/minecraft/unmapped/C_vgpupfxx;Ljava/util/Queue;Z)V
+		ARG 1 builtChunks
+		ARG 2 builtChunkMap
+		ARG 3 cameraPos
+		ARG 4 chunksToBuild
+		ARG 5 chunkCullingEnabled
 	METHOD m_euimsinz drawBox (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igthdzux;DDDDDDFFFFFFF)V
 		COMMENT Draws a box spanning from [x1,y1,z1] to [x2,y2,z2].
 		COMMENT The 3 axes centered at [x1,y1,z1] may be colored differently using xAxisRed, yAxisGreen, and zAxisBlue.
@@ -179,6 +196,10 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 12 alpha
 	METHOD m_fwtznfwa renderWeather (Lnet/minecraft/unmapped/C_grwstqbm;FDDD)V
 		ARG 1 manager
+		ARG 2 tickDelta
+		ARG 3 cameraX
+		ARG 5 cameraY
+		ARG 7 cameraZ
 	METHOD m_gtfdkthn addParticle (Lnet/minecraft/unmapped/C_nqucohct;ZDDDDDD)V
 		ARG 1 parameters
 		ARG 2 shouldAlwaysSpawn
@@ -299,6 +320,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 4 maxX
 		ARG 5 maxY
 		ARG 6 maxZ
+	METHOD m_oqixhvkl (Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_tizlwnnv;)Lnet/minecraft/unmapped/C_igthdzux;
+		ARG 2 renderLayer
 	METHOD m_owgocfxp createSkyBuffer (Lnet/minecraft/unmapped/C_nxnqmnng;F)V
 		ARG 0 buffer
 		ARG 1 y
@@ -312,6 +335,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_qwqxlbnd renderSky (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_gxvddjib;FLjava/lang/Runnable;)V
 		ARG 1 matrices
 		ARG 2 projectionMatrix
+		ARG 3 tickDelta
 		ARG 4 preStep
 	METHOD m_qypseyuy getWeatherFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_rieppqrq renderEntity (Lnet/minecraft/unmapped/C_astfners;DDDFLnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;)V
@@ -335,6 +359,9 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 1 matrices
 		ARG 2 projectionMatrix
 		ARG 3 tickDelta
+		ARG 4 cameraX
+		ARG 6 cameraY
+		ARG 8 cameraZ
 	METHOD m_spvbauuv drawVoxelShapeWithOutline (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_zscvhwbd;DDDFFFF)V
 		ARG 0 matrices
 		ARG 1 consumer
@@ -342,7 +369,20 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 3 x
 		ARG 5 y
 		ARG 7 z
+		ARG 9 red
+		ARG 10 green
+		ARG 11 blue
+		ARG 12 alpha
+	METHOD m_sqoukvbj (Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_cnszsxvd$C_pqokfevb;DDDFFFFDDDDDD)V
+		ARG 12 minX
+		ARG 14 minY
+		ARG 16 minZ
+		ARG 18 maxX
+		ARG 20 maxY
+		ARG 22 maxZ
 	METHOD m_tbgywtxm reload ()V
+	METHOD m_tfuvksba addBuiltChunk (Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;)V
+		ARG 1 builtChunk
 	METHOD m_tgxmzbib getParticlesFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_tidaqmvt renderDarkSky ()V
 	METHOD m_tltbttqw captureFrustum (Lnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_gxvddjib;DDDLnet/minecraft/unmapped/C_jwzjqevg;)V
@@ -361,6 +401,11 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 1 world
 	METHOD m_vpyxycyh tickRainSplashing (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
 		ARG 1 camera
+	METHOD m_vznbfahy applyFrustrum (Lnet/minecraft/unmapped/C_jwzjqevg;)V
+		ARG 1 frustrum
+	METHOD m_wfbjotxb isChunkNearMaxViewDistance (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;)Z
+		ARG 1 blockPos
+		ARG 2 builtChunk
 	METHOD m_wmezckfg addQuadFromFrustrum (Lnet/minecraft/unmapped/C_igthdzux;IIIIIII)V
 		ARG 1 consumer
 		ARG 2 frustrumIndex1
@@ -373,6 +418,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_wrounzjs processGlobalEvent (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 		ARG 1 eventId
 		ARG 2 pos
+		ARG 3 data
 	METHOD m_xuzbjwzg canDrawEntityOutlines ()Z
 	METHOD m_xzqucjte scheduleChunkRender (IIIZ)V
 		ARG 1 x
@@ -397,6 +443,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 16 blue
 		ARG 17 alpha
 	METHOD m_ypwknjzq getCloudsFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
+	METHOD m_yvtmnktd findChunksToRebuild (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
+		ARG 1 camera
 	METHOD m_zkzjfytg renderClouds (Lnet/minecraft/unmapped/C_nxnqmnng;DDDLnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 builder
 		ARG 2 x
@@ -410,6 +458,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 5 sortY
 		ARG 7 sortZ
 		ARG 9 projectionMatrix
+	METHOD m_zqvxazzt (J)Ljava/util/SortedSet;
+		ARG 0 posLong
 	METHOD m_zygfvwlp getCompletedChunkCount ()I
 	CLASS C_iujdkhwk ChunkInfo
 		FIELD f_cvwzlhtx propagationLevel I
@@ -420,6 +470,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 			ARG 1 chunk
 			ARG 2 direction
 			ARG 3 propagationLevel
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 object
 		METHOD m_andcwzuo hasAnyDirection ()Z
 		METHOD m_eozztjmc updateCullingState (BLnet/minecraft/unmapped/C_xpuuihxf;)V
 			ARG 1 parentCullingState
@@ -430,7 +482,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 			ARG 1 direction
 		METHOD m_whsegwcl canCull (Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 			ARG 1 from
-	CLASS C_oaefdpgi ChunkInfoList
+	CLASS C_oaefdpgi ChunkInfoListMap
 		FIELD f_nqkclbdo current [Lnet/minecraft/unmapped/C_sfkkabhx$C_iujdkhwk;
 		METHOD <init> (I)V
 			ARG 1 size
@@ -444,3 +496,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 			ARG 1 message
 			ARG 2 cause
 	CLASS C_xvowdhps BuiltChunkStorage
+		FIELD f_blluzvls builtChunks Ljava/util/LinkedHashSet;
+		FIELD f_vgcafqnh builtChunkMap Lnet/minecraft/unmapped/C_sfkkabhx$C_oaefdpgi;
+		METHOD <init> (I)V
+			ARG 1 size
