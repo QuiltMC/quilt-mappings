@@ -7,14 +7,15 @@ CLASS net/minecraft/unmapped/C_yzoxmlsd net/minecraft/client/render/MapRenderer
 	FIELD f_vbyqqtva mapTextures Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	METHOD <init> (Lnet/minecraft/unmapped/C_rglkduer;)V
 		ARG 1 textureManager
+	METHOD close close ()V
 	METHOD m_cttnjzdc (Lnet/minecraft/unmapped/C_nvpllgmg;Ljava/lang/Integer;Lnet/minecraft/unmapped/C_yzoxmlsd$C_gvzlcncw;)Lnet/minecraft/unmapped/C_yzoxmlsd$C_gvzlcncw;
 		ARG 2 id
 		ARG 3 mapTexutre
-	METHOD m_gxjlvray clearStateTextures ()V
-	METHOD m_lnhkslft getMapTexture (ILnet/minecraft/unmapped/C_nvpllgmg;)Lnet/minecraft/unmapped/C_yzoxmlsd$C_gvzlcncw;
+	METHOD m_gxjlvray clearTextures ()V
+	METHOD m_lnhkslft getOrCreateMapTexture (ILnet/minecraft/unmapped/C_nvpllgmg;)Lnet/minecraft/unmapped/C_yzoxmlsd$C_gvzlcncw;
 		ARG 1 id
 		ARG 2 state
-	METHOD m_oieajmss draw (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;ILnet/minecraft/unmapped/C_nvpllgmg;ZI)V
+	METHOD m_oieajmss render (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;ILnet/minecraft/unmapped/C_nvpllgmg;ZI)V
 		ARG 1 matrices
 		ARG 2 vertexConsumers
 		ARG 3 id
@@ -32,10 +33,11 @@ CLASS net/minecraft/unmapped/C_yzoxmlsd net/minecraft/client/render/MapRenderer
 		METHOD <init> (Lnet/minecraft/unmapped/C_yzoxmlsd;ILnet/minecraft/unmapped/C_nvpllgmg;)V
 			ARG 2 id
 			ARG 3 state
-		METHOD m_axmqugix setNeedsUpdate ()V
+		METHOD close close ()V
+		METHOD m_axmqugix needsUpdate ()V
 		METHOD m_eehvulmy setState (Lnet/minecraft/unmapped/C_nvpllgmg;)V
 			ARG 1 state
-		METHOD m_rwmlnvtp draw (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;ZI)V
+		METHOD m_rwmlnvtp render (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;ZI)V
 			ARG 1 matrices
 			ARG 2 vertexConsumers
 			ARG 3 hidePlayerIcons
