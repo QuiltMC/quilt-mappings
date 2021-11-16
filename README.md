@@ -48,8 +48,10 @@ Builds a deobfuscated jar with Quilt mappings and automapped fields (enums, etc.
 ### `decompileCFR`
 Decompile the mapped source code. **Note:** This is not designed to be recompiled.
 
-### `download`
+### `downloadMinecraftJars`
 Downloads the client and server Minecraft jars for the current Minecraft version to `.gradle/minecraft`
 
 ### `mergeJars`
-Merges the client and server jars into one merged jar, located at `VERSION-merged.jar` in the mappings directory where `VERSION` is the current Minecraft version.
+
+Merges the client and server jars into one merged jar, located at `VERSION-merged.jar` in the project directory
+where `VERSION` is the current Minecraft version.
