@@ -1,7 +1,8 @@
 name: Publish
 on: [push]
 jobs:
-  build:
+  publish:
+    if: ${{ github.repository_owner == 'QuiltMC' }}
     runs-on: ubuntu-20.04
     container:
       image: openjdk:17-jdk
