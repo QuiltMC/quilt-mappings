@@ -15,44 +15,61 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 		ARG 0 id
 	METHOD m_fecfwekl getRarity ()Lnet/minecraft/unmapped/C_jxtrubuh$C_dnkiztld;
 	METHOD m_glfcpyqa getMaxLevel ()I
+		COMMENT Sets the maximum number of levels the enchantment has. Default: 1
 	METHOD m_igxrorrr getMinLevel ()I
+		COMMENT Sets the minimum number of levels the enchantment has. Default: 1
 	METHOD m_jtamscxb canCombine (Lnet/minecraft/unmapped/C_jxtrubuh;)Z
 		COMMENT {@return whether this enchantment can exist on an item stack with the
 		COMMENT {@code other} enchantment and the {@code other} enchantment can exist
 		COMMENT with this enchantment}
 		ARG 1 other
 	METHOD m_khmhdqpw isAcceptableItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		COMMENT {@return the type of item ({@code stack}) that can have this applied to it}
 		ARG 1 stack
 	METHOD m_kzbinilx getAttackDamage (ILnet/minecraft/unmapped/C_amnulxyk;)F
+		COMMENT {@return the amount of extra damage to apply to the entity group specified with {@code group}.}
 		ARG 1 level
 		ARG 2 group
 	METHOD m_lkqpuckl isTreasure ()Z
+		COMMENT {@return wheather this enchantment will appear in the enchantment table and loot chests or loot chests only. E.G Mending}
 	METHOD m_phdcatdd onTargetDamaged (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;I)V
+		COMMENT This method is called when an Entity ({@code target}) is hit by the Player ({@code user}) with an Item that has this enchantment on it
 		ARG 1 user
 		ARG 2 target
 		ARG 3 level
 	METHOD m_rtwmhoyh getMinPower (I)I
+		COMMENT {@return the minimum level required to by the player for the enchantment to be shown in the enchantment table.}
+		COMMENT It is not a 1:1 ratio. The majority of enchantments return something similar to `10 * level`, often with different scales depending on the maximum level and rarity of the enchantment.
 		ARG 1 level
 	METHOD m_smaihzzt isAvailableForEnchantedBookOffer ()Z
 		COMMENT {@return whether this enchantment will appear in the enchanted book trade
 		COMMENT offers of librarian villagers}
 	METHOD m_sufqbdfo isCursed ()Z
+		COMMENT {@return weather the enchantment is a curse. E.G: Curse of Binding}
 	METHOD m_sxyjtpkf onUserDamaged (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;I)V
+		COMMENT This method is called when the Player ({@code user}), who is wearing something that contains the enchantment, is attacked by another Entity ({@code attacker})}
 		ARG 1 user
 		ARG 2 attacker
 		ARG 3 level
 	METHOD m_tiaspbpv getEquipment (Lnet/minecraft/unmapped/C_usxaxydn;)Ljava/util/Map;
 		ARG 1 entity
 	METHOD m_vfhytrxr getOrCreateTranslationKey ()Ljava/lang/String;
+		COMMENT {@return the translation key or create one if there isn't one}
 	METHOD m_vssdpxdz getTranslationKey ()Ljava/lang/String;
+		COMMENT {@return gets key for translating this in the lang files}
 	METHOD m_zfqdifee getName (I)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		COMMENT {@return a translation key that is formatted to a specific color}
+		COMMENT By defualt it changes enchantments that {@return true} in {@code isCursed()} to have red names.
 		ARG 1 level
 	METHOD m_ztiddpby isAvailableForRandomSelection ()Z
 		COMMENT {@return whether this enchantment will appear in the enchanting table or
 		COMMENT loots with random enchant function}
 	METHOD m_ztycenho getMaxPower (I)I
+		COMMENT {@return the maximum level a Player is allowed before the enchant is not shown in the enchantment table}
+		COMMENT The default return is the minimum power level + 5
 		ARG 1 level
 	METHOD m_zxuhlvyz getProtectionAmount (ILnet/minecraft/unmapped/C_sbxfkpyv;)I
+		COMMENT {@return the amount of extra protection to apply to the Entity wearing something that has the enchantment, if the damage comes from a specific source specified with {@code source}}
 		ARG 1 level
 		ARG 2 source
 	CLASS C_dnkiztld Rarity
