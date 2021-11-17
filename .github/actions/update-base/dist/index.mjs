@@ -8425,6 +8425,7 @@ async function main() {
 
     if (!labels.has(updateLabel)) {
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info('Nothing to do, the pr ' + pull_number + ' does not have the label ' + updateLabel);
+        return;
     }
 
     labels.delete(updateLabel);
