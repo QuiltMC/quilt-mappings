@@ -903,6 +903,15 @@ publishing {
 			}
 			artifact sourcesJar
 			artifact javadocJar
+
+			pom.withXml {
+				def hashedDep = it.asNode().appendNode('dependencies').appendNode('dependency')
+				hashedDep.appendNode('groupId', 'org.quiltmc')
+				hashedDep.appendNode('artifactId', 'hashed')
+
+				// Quick fix as this has been changed with PR #7
+				hashedDep.appendNode('version', "1.17.1-20211105.170702-2")
+			}
 		}
 
 	}
