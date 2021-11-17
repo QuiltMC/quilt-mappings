@@ -1,5 +1,7 @@
 package quilt.internal.decompile.javadoc;
 
 public interface ClassJavadocProvider {
-    String provide(String className, int access);
+    ClassJavadocProvider EMPTY = (className, isRecord) -> null;
+
+    String provide(String className, boolean isRecord);
 }

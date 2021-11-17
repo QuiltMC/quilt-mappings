@@ -1,4 +1,4 @@
-package quilt.internal.decompile;
+package quilt.internal.decompile.cfr;
 
 import org.benf.cfr.reader.api.CfrDriver;
 import org.benf.cfr.reader.api.ClassFileSource;
@@ -8,6 +8,10 @@ import org.benf.cfr.reader.bytecode.analysis.parse.utils.Pair;
 import org.benf.cfr.reader.util.getopt.Options;
 import org.benf.cfr.reader.util.getopt.OptionsImpl;
 import org.gradle.api.Project;
+import quilt.internal.decompile.AbstractDecompiler;
+import quilt.internal.decompile.javadoc.ClassJavadocProvider;
+import quilt.internal.decompile.javadoc.FieldJavadocProvider;
+import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +29,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class CfrDecompiler extends AbstractDecompiler {
+    private ClassJavadocProvider classJavadocProvider;
+    private FieldJavadocProvider fieldJavadocProvider;
+    private MethodJavadocProvider methodJavadocProvider;
+
     public CfrDecompiler(Project project) {
         super(project);
     }
@@ -67,7 +75,7 @@ public class CfrDecompiler extends AbstractDecompiler {
                 }
 
                 @Override
-                public Pair<byte[], String> getClassFileContent(String path) throws IOException {
+                public Pair<byte[], String> getClassFileContent(String path) {
                     if (classFiles.containsKey(path)) {
                         return new Pair<>(classFiles.get(path), path);
                     }
@@ -80,6 +88,7 @@ public class CfrDecompiler extends AbstractDecompiler {
             }
             classFileSource.addJar(file.getAbsolutePath());
 
+            // TODO: Replace this with something that allows using a DCCommonState
             CfrDriver driver = new CfrDriver.Builder()
                     .withBuiltOptions(options)
                     .withClassFileSource(classFileSource)
@@ -112,6 +121,25 @@ public class CfrDecompiler extends AbstractDecompiler {
         } catch (IOException e) {
             throw new RuntimeException("Failed to decompile " + file, e);
         }
+    }
+
+    private boolean hasMemberJavadocProvider() {
+        return this.classJavadocProvider != null || this.fieldJavadocProvider != null || this.methodJavadocProvider != null;
+    }
+
+    @Override
+    public void withClassJavadocProvider(ClassJavadocProvider javadocProvider) {
+        this.classJavadocProvider = javadocProvider;
+    }
+
+    @Override
+    public void withFieldJavadocProvider(FieldJavadocProvider javadocProvider) {
+        this.fieldJavadocProvider = javadocProvider;
+    }
+
+    @Override
+    public void withMethodJavadocProvider(MethodJavadocProvider javadocProvider) {
+        this.methodJavadocProvider = javadocProvider;
     }
 
     private void writeDecompiled(SinkReturns.Decompiled decompiled, File outputDir) {

@@ -1,5 +1,8 @@
 package quilt.internal.decompile;
 
+import quilt.internal.decompile.cfr.CfrDecompiler;
+import quilt.internal.decompile.quiltflower.QuiltflowerDecompiler;
+
 public enum Decompilers {
     CFR(CfrDecompiler::new),
     QUILTFLOWER(QuiltflowerDecompiler::new);

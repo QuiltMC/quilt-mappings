@@ -1,4 +1,4 @@
-package quilt.internal.decompile;
+package quilt.internal.decompile.quiltflower;
 
 import net.fabricmc.fernflower.api.IFabricJavadocProvider;
 import org.gradle.api.Project;
@@ -10,6 +10,7 @@ import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 import org.jetbrains.java.decompiler.struct.StructClass;
 import org.jetbrains.java.decompiler.struct.StructField;
 import org.jetbrains.java.decompiler.struct.StructMethod;
+import quilt.internal.decompile.AbstractDecompiler;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;
 import quilt.internal.decompile.javadoc.FieldJavadocProvider;
 import quilt.internal.decompile.javadoc.MethodJavadocProvider;
@@ -49,7 +50,8 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
                 @Override
                 public String getClassDoc(StructClass structClass) {
                     if (classJavadocProvider != null) {
-                        return classJavadocProvider.provide(structClass.qualifiedName, structClass.getAccessFlags());
+                        boolean isRecord = (structClass.getAccessFlags() & 0x10000) != 0;
+                        return classJavadocProvider.provide(structClass.qualifiedName, isRecord);
                     }
 
                     return null;
@@ -58,7 +60,7 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
                 @Override
                 public String getFieldDoc(StructClass structClass, StructField structField) {
                     if (fieldJavadocProvider != null) {
-                        return fieldJavadocProvider.provide(structField.getName(), structField.getDescriptor(), structClass.qualifiedName, structField.getAccessFlags());
+                        return fieldJavadocProvider.provide(structField.getName(), structField.getDescriptor(), structClass.qualifiedName);
                     }
 
                     return null;
@@ -67,7 +69,7 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
                 @Override
                 public String getMethodDoc(StructClass structClass, StructMethod structMethod) {
                     if (methodJavadocProvider != null) {
-                        return methodJavadocProvider.provide(structMethod.getName(), structMethod.getDescriptor(), structClass.qualifiedName, structMethod.getAccessFlags());
+                        return methodJavadocProvider.provide(structMethod.getName(), structMethod.getDescriptor(), structClass.qualifiedName);
                     }
 
                     return null;
