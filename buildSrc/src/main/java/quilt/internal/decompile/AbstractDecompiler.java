@@ -1,6 +1,9 @@
 package quilt.internal.decompile;
 
 import org.gradle.api.Project;
+import quilt.internal.decompile.javadoc.ClassJavadocProvider;
+import quilt.internal.decompile.javadoc.FieldJavadocProvider;
+import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -22,5 +25,14 @@ public abstract class AbstractDecompiler {
 
     protected Project getProject() {
         return project;
+    }
+
+    public void withClassJavadocProvider(ClassJavadocProvider javadocProvider) {
+    }
+
+    public void withFieldJavadocProvider(FieldJavadocProvider javadocProvider) {
+    }
+
+    public void withMethodJavadocProvider(MethodJavadocProvider javadocProvider) {
     }
 }
