@@ -7,9 +7,6 @@ import org.jetbrains.java.decompiler.main.decompiler.BaseDecompiler;
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
-import org.jetbrains.java.decompiler.struct.StructClass;
-import org.jetbrains.java.decompiler.struct.StructField;
-import org.jetbrains.java.decompiler.struct.StructMethod;
 import quilt.internal.decompile.AbstractDecompiler;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;
 import quilt.internal.decompile.javadoc.FieldJavadocProvider;
@@ -20,11 +17,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
-import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -46,93 +41,14 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
         if (this.javadocProvider != null) {
             javadocProvider = this.javadocProvider;
         } else if (hasMemberJavadocProvider()) {
-            javadocProvider = new IFabricJavadocProvider() {
-                @Override
-                public String getClassDoc(StructClass structClass) {
-                    if (classJavadocProvider != null) {
-                        boolean isRecord = (structClass.getAccessFlags() & 0x10000) != 0;
-                        return classJavadocProvider.provide(structClass.qualifiedName, isRecord);
-                    }
-
-                    return null;
-                }
-
-                @Override
-                public String getFieldDoc(StructClass structClass, StructField structField) {
-                    if (fieldJavadocProvider != null) {
-                        return fieldJavadocProvider.provide(structField.getName(), structField.getDescriptor(), structClass.qualifiedName);
-                    }
-
-                    return null;
-                }
-
-                @Override
-                public String getMethodDoc(StructClass structClass, StructMethod structMethod) {
-                    if (methodJavadocProvider != null) {
-                        return methodJavadocProvider.provide(structMethod.getName(), structMethod.getDescriptor(), structClass.qualifiedName);
-                    }
-
-                    return null;
-                }
-            };
+            javadocProvider = new QuiltflowerJavadocProvider(this.classJavadocProvider, this.fieldJavadocProvider, this.methodJavadocProvider);
         }
 
         if (javadocProvider != null) {
             options.put(IFabricJavadocProvider.PROPERTY_NAME, javadocProvider);
         }
 
-        IResultSaver resultSaver = new IResultSaver() {
-            @Override
-            public void saveFolder(String path) {
-                Path folder = outputPath.resolve(path);
-                if (!Files.exists(folder)) {
-                    try {
-                        Files.createDirectories(folder);
-                    } catch (IOException e) {
-                        throw new RuntimeException("Failed to create directory " + folder, e);
-                    }
-                }
-            }
-
-            @Override
-            public void copyFile(String source, String path, String entryName) {
-            }
-
-            @Override
-            public void saveClassFile(String path, String qualifiedName, String entryName, String content, int[] mapping) {
-                Path file = outputPath.resolve(path).resolve(entryName);
-                try {
-                    if (!Files.exists(file.getParent())) {
-                        Files.createDirectories(file.getParent());
-                    }
-
-                    Files.writeString(file, content);
-                } catch (IOException e) {
-                    throw new RuntimeException("Failed to write class file " + file, e);
-                }
-            }
-
-            @Override
-            public void createArchive(String path, String archiveName, Manifest manifest) {
-            }
-
-            @Override
-            public void saveDirEntry(String path, String archiveName, String entryName) {
-            }
-
-            @Override
-            public void copyEntry(String source, String path, String archiveName, String entry) {
-            }
-
-            @Override
-            public void saveClassEntry(String path, String archiveName, String qualifiedName, String entryName, String content) {
-                saveClassFile(path, qualifiedName, entryName, content, null);
-            }
-
-            @Override
-            public void closeArchive(String path, String archiveName) {
-            }
-        };
+        IResultSaver resultSaver = new QuiltflowerResultSaver(outputPath);
 
         BaseDecompiler decompiler = new BaseDecompiler(this, resultSaver, options, new LoggerImpl());
 
