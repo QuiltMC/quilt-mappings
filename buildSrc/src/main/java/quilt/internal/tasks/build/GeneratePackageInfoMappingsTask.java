@@ -9,6 +9,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
 
 import java.io.File;
@@ -32,7 +33,7 @@ public class GeneratePackageInfoMappingsTask extends DefaultMappingsTask {
 
     public GeneratePackageInfoMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        this.dependsOn(DownloadPerVersionMappingsTask.TASK_NAME);
+        this.dependsOn(MapPerVersionMappingsJarTask.TASK_NAME);
     }
 
     @Input
