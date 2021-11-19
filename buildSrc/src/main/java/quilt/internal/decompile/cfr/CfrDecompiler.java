@@ -1,6 +1,6 @@
 package quilt.internal.decompile.cfr;
 
-import org.benf.cfr.reader.Main;
+import org.benf.cfr.reader.Driver;
 import org.benf.cfr.reader.state.ClassFileSourceImpl;
 import org.benf.cfr.reader.state.DCCommonState;
 import org.benf.cfr.reader.util.AnalysisType;
@@ -43,13 +43,14 @@ public class CfrDecompiler extends AbstractDecompiler {
         DCCommonState state = new DCCommonState(options, classFileSource);
 
         if (hasMemberJavadocProvider()) {
-            state = new DCCommonState(state, new CfrObfuscationMapping(this.classJavadocProvider, this.fieldJavadocProvider, this.methodJavadocProvider));
+            CfrObfuscationMapping obfuscationMapping = new CfrObfuscationMapping(this.classJavadocProvider, this.fieldJavadocProvider, this.methodJavadocProvider);
+            state = new DCCommonState(state, obfuscationMapping);
         }
 
         CfrSinkFactory sinkFactory = new CfrSinkFactory(outputDir, getProject().getLogger());
         SinkDumperFactory sinkDumperFactory = new SinkDumperFactory(sinkFactory, options);
 
-        Main.doJar(state, file.getAbsolutePath(), sinkDumperFactory);
+        Driver.doJar(state, file.getAbsolutePath(), AnalysisType.JAR, sinkDumperFactory);
     }
 
     private boolean hasMemberJavadocProvider() {
