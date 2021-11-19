@@ -8,8 +8,7 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.jvm.tasks.Jar;
 import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
-
-import net.fabricmc.filament.task.CombineUnpickDefinitionsTask;
+import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 
 public class MappingsV2JarTask extends Jar implements MappingsTask {
     @InputFile
