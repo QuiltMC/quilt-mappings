@@ -9,6 +9,7 @@ jobs:
     if: ${{ github.event.label.name == 'update-base' }}
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/actions/update-base/
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
