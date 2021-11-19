@@ -1,9 +1,14 @@
 CLASS net/minecraft/unmapped/C_lydyahfn net/minecraft/client/sound/SoundEngine
 	FIELD f_dstglquj staticSources Lnet/minecraft/unmapped/C_lydyahfn$C_kxhgkdgv;
 	FIELD f_hhvvdnsp contextPointer J
+	FIELD f_ijaqdplc DEFAULT_CHANNEL_COUNT I
 	FIELD f_kukhbjol EMPTY_SOURCE_SET Lnet/minecraft/unmapped/C_lydyahfn$C_kxhgkdgv;
+	FIELD f_lfplamdv deviceSpecifier Ljava/lang/String;
+	FIELD f_qjhuwzxo disconnectExtensionPresent Z
+	FIELD f_qsbwurpo NO_DEVICE I
 	FIELD f_sgcudbbj listener Lnet/minecraft/unmapped/C_buxdflif;
 	FIELD f_tlgalbrf LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_zinkkpns devicePointer J
 	FIELD f_ztiwybty streamingSources Lnet/minecraft/unmapped/C_lydyahfn$C_kxhgkdgv;
 	METHOD m_atoiblad getDebugString ()Ljava/lang/String;
 	METHOD m_baevzqlz init (Ljava/lang/String;)V
@@ -14,12 +19,16 @@ CLASS net/minecraft/unmapped/C_lydyahfn net/minecraft/client/sound/SoundEngine
 	METHOD m_mysosekn release (Lnet/minecraft/unmapped/C_tbrlnjsy;)V
 		ARG 1 source
 	METHOD m_omijypci getAudioDevices ()Ljava/util/List;
+	METHOD m_pdlvctbt findAvailableDeviceSpecifier ()Ljava/lang/String;
 	METHOD m_pjrewbxc useDevice (Ljava/lang/String;)J
 		ARG 0 deviceName
+	METHOD m_unzpkwoh updateDeviceSpecifier ()Z
+	METHOD m_vxnkkyeu getCurrentDeviceName ()Ljava/lang/String;
 	METHOD m_whfxfgla createSource (Lnet/minecraft/unmapped/C_lydyahfn$C_wsdwifio;)Lnet/minecraft/unmapped/C_tbrlnjsy;
 		ARG 1 mode
 	METHOD m_xydhkqlr openDevice (Ljava/lang/String;)Ljava/util/OptionalLong;
 		ARG 0 deviceName
+	METHOD m_ymyetiej isDeviceUnavailable ()Z
 	CLASS C_kxhgkdgv SourceSet
 		METHOD m_dtoinuen getSourceCount ()I
 		METHOD m_ewqzqzmk createSource ()Lnet/minecraft/unmapped/C_tbrlnjsy;
