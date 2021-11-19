@@ -12,6 +12,9 @@ import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.decompile.AbstractDecompiler;
 import quilt.internal.decompile.Decompilers;
+import quilt.internal.decompile.javadoc.ClassJavadocProvider;
+import quilt.internal.decompile.javadoc.FieldJavadocProvider;
+import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 import java.io.File;
@@ -26,6 +29,9 @@ public class DecompileTask extends DefaultMappingsTask {
     private final RegularFileProperty input;
     private final RegularFileProperty output;
     private final Property<FileCollection> libraries;
+    private ClassJavadocProvider classJavadocProvider;
+    private FieldJavadocProvider fieldJavadocProvider;
+    private MethodJavadocProvider methodJavadocProvider;
 
     public DecompileTask() {
         super(Constants.Groups.DECOMPILE_GROUP);
@@ -39,7 +45,20 @@ public class DecompileTask extends DefaultMappingsTask {
     public void decompile() {
         Map<String, Object> options = decompilerOptions == null ? new HashMap<>() : decompilerOptions;
         Collection<File> libraries = this.libraries.getOrNull() == null ? Collections.emptyList() : this.libraries.get().getFiles();
-        getAbstractDecompiler().decompile(getInput().getAsFile().get(), getOutput().getAsFile().get(), options, libraries);
+
+        AbstractDecompiler decompiler = getAbstractDecompiler();
+
+        if (classJavadocProvider != null) {
+            decompiler.withClassJavadocProvider(classJavadocProvider);
+        }
+        if (fieldJavadocProvider != null) {
+            decompiler.withFieldJavadocProvider(fieldJavadocProvider);
+        }
+        if (methodJavadocProvider != null) {
+            decompiler.withMethodJavadocProvider(methodJavadocProvider);
+        }
+
+        decompiler.decompile(getInput().getAsFile().get(), getOutput().getAsFile().get(), options, libraries);
     }
 
     @Internal
@@ -76,5 +95,17 @@ public class DecompileTask extends DefaultMappingsTask {
     @OutputDirectory
     public RegularFileProperty getOutput() {
         return output;
+    }
+
+    public void classJavadocProvider(ClassJavadocProvider provider) {
+        classJavadocProvider = provider;
+    }
+
+    public void fieldJavadocProvider(FieldJavadocProvider provider) {
+        fieldJavadocProvider = provider;
+    }
+
+    public void methodJavadocProvider(MethodJavadocProvider provider) {
+        methodJavadocProvider = provider;
     }
 }
