@@ -2,6 +2,7 @@ package quilt.internal.tasks.lint;
 
 import cuchaz.enigma.translation.mapping.EntryMapping;
 import cuchaz.enigma.translation.representation.AccessFlags;
+import cuchaz.enigma.translation.representation.TypeDescriptor;
 import cuchaz.enigma.translation.representation.entry.Entry;
 import cuchaz.enigma.translation.representation.entry.FieldEntry;
 
@@ -17,7 +18,8 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
 
         AccessFlags access = accessProvider.apply(entry);
 
-        boolean isAtomic = entry.getDesc().getTypeEntry().toString().toLowerCase(Locale.ROOT).contains("atomic");
+        TypeDescriptor descriptor = entry.getDesc();
+        boolean isAtomic = descriptor.isType() && descriptor.getTypeEntry().getFullName().toLowerCase(Locale.ROOT).contains("atomic");
         if (isAtomic) {
             if (startsWithUppercase(mapping.targetName())) {
                 errorReporter.warning("atomic field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");

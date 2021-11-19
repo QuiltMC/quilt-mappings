@@ -299,7 +299,9 @@ generatePackageInfoMappings {
 }
 
 mappingLint {
+	dependsOn mapPerVersionMappingsJar
 	mappingDirectory = file("mappings")
+	jarFile = mappings.fileConstants.perVersionMappingsJar
 }
 
 check.dependsOn mappingLint

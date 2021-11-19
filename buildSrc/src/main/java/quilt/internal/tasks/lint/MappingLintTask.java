@@ -84,7 +84,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
         WorkQueue workQueue = getWorkerExecutor().noIsolation();
 
         workQueue.submit(LintAction.class, parameters -> {
-            parameters.getGameJar().set(getJarFile());
+            parameters.getJarFile().set(getJarFile());
             parameters.getCheckers().set(getCheckers());
 
             for (FileChange change : changes.getFileChanges(getMappingDirectory())) {
@@ -122,7 +122,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
 
     public interface LintParameters extends WorkParameters {
         ConfigurableFileCollection getMappingFiles();
-        RegularFileProperty getGameJar();
+        RegularFileProperty getJarFile();
         SetProperty<Checker<Entry<?>>> getCheckers();
     }
 
@@ -142,7 +142,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
 
                 // Set up Enigma
                 Enigma enigma = Enigma.create();
-                EnigmaProject project = enigma.openJar(params.getGameJar().get().getAsFile().toPath(), new ClasspathClassProvider(), ProgressListener.none());
+                EnigmaProject project = enigma.openJar(params.getJarFile().get().getAsFile().toPath(), new ClasspathClassProvider(), ProgressListener.none());
                 EntryTree<EntryMapping> mappings = readMappings(getParameters().getMappingFiles());
                 project.setMappings(mappings);
                 Function<Entry<?>, AccessFlags> accessProvider = entry -> {
