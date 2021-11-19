@@ -6,12 +6,14 @@ import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.tasks.build.BuildMappingsTinyTask;
 import quilt.internal.tasks.build.CheckMappingsTask;
 import quilt.internal.tasks.build.CompressTinyTask;
+import quilt.internal.tasks.build.GeneratePackageInfoMappingsTask;
 import quilt.internal.tasks.build.InvertPerVersionMappingsTask;
 import quilt.internal.tasks.build.MergeTinyTask;
 import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
+import quilt.internal.tasks.lint.JavadocLintTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
@@ -19,6 +21,8 @@ import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
 import quilt.internal.tasks.setup.DownloadWantedVersionManifestTask;
 import quilt.internal.tasks.setup.ExtractServerJarTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
+import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
+import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask;
 
 public class MappingsPlugin implements Plugin<Project> {
     @Override
@@ -44,6 +48,11 @@ public class MappingsPlugin implements Plugin<Project> {
 
         tasks.create(MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class);
         tasks.create(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class);
+
+        tasks.create(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class);
+        tasks.create(RemapUnpickDefinitionsTask.TASK_NAME, RemapUnpickDefinitionsTask.class);
+        tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
+        tasks.create(JavadocLintTask.TASK_NAME, JavadocLintTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {
