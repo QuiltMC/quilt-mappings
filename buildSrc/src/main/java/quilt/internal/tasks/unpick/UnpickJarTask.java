@@ -28,7 +28,7 @@ public class UnpickJarTask extends JavaExec implements MappingsTask {
         classpath(getProject().getConfigurations().getByName("unpick"));
         systemProperty("java.util.logging.config.file", getProject().file("unpick-logging.properties"));
 
-        dependsOn(MapPerVersionMappingsJarTask.TASK_NAME, "constantsJar", getTaskByName("remapUnpickDefinitionsIntermediary"));
+        dependsOn(MapPerVersionMappingsJarTask.TASK_NAME, "constantsJar", getTaskByName(RemapUnpickDefinitionsTask.TASK_NAME));
 
         ObjectFactory objectFactory = getProject().getObjects();
         inputFile = objectFactory.fileProperty();

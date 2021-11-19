@@ -1,19 +1,29 @@
 CLASS net/minecraft/unmapped/C_stgbrlun net/minecraft/client/sound/SoundSystem
 	FIELD f_aivobbjv preloadedSounds Ljava/util/List;
 	FIELD f_bpeeuaei soundEndTicks Ljava/util/Map;
+	FIELD f_bsrkfnhp OPENAL_SOFT_ON Ljava/lang/String;
 	FIELD f_bvozlott LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD f_chiplauj taskQueue Lnet/minecraft/unmapped/C_gkaiywat;
 	FIELD f_dhtfppaq MARKER Lorg/apache/logging/log4j/Marker;
 	FIELD f_fkxmefiu tickingSounds Ljava/util/List;
 	FIELD f_fzisjasd sounds Lcom/google/common/collect/Multimap;
 	FIELD f_hcluncyw started Z
+	FIELD f_httkpnqy MIN_VOLUME F
+	FIELD f_htyqlajt deviceCheckState Ljava/util/concurrent/atomic/AtomicReference;
+	FIELD f_hvmdhnqu MAX_VOLUME F
+	FIELD f_iqgrnhfd DEFAULT_DEVICE_CHECK_INTERVAL J
+	FIELD f_iupymkcp MIN_PITCH F
+	FIELD f_jntcvmkp OPENAL_SOFT_ON_LENGTH I
 	FIELD f_lehdzrjy sources Ljava/util/Map;
 	FIELD f_mkjqvrng UNKNOWN_SOUNDS Ljava/util/Set;
 	FIELD f_muoapcbp ticks I
+	FIELD f_ooqqrapa MIN_SOURCE_LIFETIME I
 	FIELD f_qertiuyw listeners Ljava/util/List;
 	FIELD f_qqehthct settings Lnet/minecraft/unmapped/C_lscptbhn;
 	FIELD f_ramdambm loader Lnet/minecraft/unmapped/C_hfmtwavd;
+	FIELD f_swvwyqfl MAX_PITCH F
 	FIELD f_uasoxudm FOR_THE_DEBUG Ljava/lang/String;
+	FIELD f_vasmsjsr lastSoundDeviceCheckTime J
 	FIELD f_vqxjsweb listener Lnet/minecraft/unmapped/C_buxdflif;
 	FIELD f_vrwtqkmw channel Lnet/minecraft/unmapped/C_slwdcyeu;
 	FIELD f_wmnnuihj startTicks Ljava/util/Map;
@@ -27,7 +37,11 @@ CLASS net/minecraft/unmapped/C_stgbrlun net/minecraft/client/sound/SoundSystem
 	METHOD m_bfdcchfs getAudioDevices ()Ljava/util/List;
 	METHOD m_bnkwmywr tick ()V
 	METHOD m_chxkzpva reloadSounds ()V
+	METHOD m_citmbmge (Lnet/minecraft/unmapped/C_mtatuyxn;Lnet/minecraft/unmapped/C_tbrlnjsy;)V
+		ARG 1 source
 	METHOD m_cqcstdxx pauseAll ()V
+	METHOD m_cqyysulr (Ljava/util/stream/Stream;)V
+		ARG 0 sources
 	METHOD m_dfprwycu registerListener (Lnet/minecraft/unmapped/C_jptxtfxt;)V
 		ARG 1 listener
 	METHOD m_dgwnjibb updateListenerPosition (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
@@ -60,15 +74,23 @@ CLASS net/minecraft/unmapped/C_stgbrlun net/minecraft/client/sound/SoundSystem
 		ARG 1 sound
 	METHOD m_qgmmxigz canRepeatInstantly (Lnet/minecraft/unmapped/C_uoilbcii;)Z
 		ARG 0 sound
+	METHOD m_qhxtlnka (Ljava/util/stream/Stream;)V
+		ARG 0 sources
+	METHOD m_stzwvent (FFLnet/minecraft/unmapped/C_uoilbcii$C_reaoezqq;FZZLnet/minecraft/unmapped/C_vgpupfxx;ZLnet/minecraft/unmapped/C_tbrlnjsy;)V
+		ARG 8 source
 	METHOD m_tpsbqimn getAdjustedPitch (Lnet/minecraft/unmapped/C_uoilbcii;)F
 		ARG 1 sound
 	METHOD m_upybahcb isPlaying (Lnet/minecraft/unmapped/C_uoilbcii;)Z
+		ARG 1 sound
+	METHOD m_uyzzwien (Lnet/minecraft/unmapped/C_slwdcyeu$C_eqiaujuq;Lnet/minecraft/unmapped/C_mtatuyxn;)V
 		ARG 1 sound
 	METHOD m_voywkswh stop (Lnet/minecraft/unmapped/C_uoilbcii;)V
 		ARG 1 sound
 	METHOD m_vpwbrjgp (Lnet/minecraft/unmapped/C_uoilbcii;Lnet/minecraft/unmapped/C_slwdcyeu$C_eqiaujuq;)V
 		ARG 1 source
 		ARG 2 sourceManager
+	METHOD m_wrhcffsm (Lnet/minecraft/unmapped/C_slwdcyeu$C_eqiaujuq;Lnet/minecraft/unmapped/C_hbqhblkz;)V
+		ARG 1 stream
 	METHOD m_xdilvuqd updateSoundVolume (Lnet/minecraft/unmapped/C_pqzizukq;F)V
 		ARG 1 category
 		ARG 2 volume
@@ -77,4 +99,8 @@ CLASS net/minecraft/unmapped/C_stgbrlun net/minecraft/client/sound/SoundSystem
 	METHOD m_xznierhu stopAll ()V
 	METHOD m_ynizwdma play (Lnet/minecraft/unmapped/C_uoilbcii;)V
 		ARG 1 sound
+	METHOD m_yqwjwmsu shouldReloadSounds ()Z
 	METHOD m_zgejpfhq tick (Z)V
+	METHOD m_zqminmap (Lnet/minecraft/unmapped/C_hbqhblkz;Lnet/minecraft/unmapped/C_tbrlnjsy;)V
+		ARG 1 source
+	CLASS C_izpijtdq DEVICE_CHECK_STATE
