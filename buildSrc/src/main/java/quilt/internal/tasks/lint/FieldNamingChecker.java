@@ -5,19 +5,29 @@ import cuchaz.enigma.translation.representation.AccessFlags;
 import cuchaz.enigma.translation.representation.entry.Entry;
 import cuchaz.enigma.translation.representation.entry.FieldEntry;
 
+import java.util.Locale;
 import java.util.function.Function;
 
 public final class FieldNamingChecker implements Checker<FieldEntry> {
     @Override
     public void check(FieldEntry entry, EntryMapping mapping, Function<Entry<?>, AccessFlags> accessProvider, ErrorReporter errorReporter) {
+        if (mapping.targetName() == null) {
+            return;
+        }
+
         AccessFlags access = accessProvider.apply(entry);
 
-        if (access.isStatic() && access.isFinal()) {
-            if (mapping.targetName() != null && !isConstantCase(mapping.targetName())) {
+        boolean isAtomic = entry.getDesc().getTypeEntry().toString().toLowerCase(Locale.ROOT).contains("atomic");
+        if (isAtomic) {
+            if (startsWithUppercase(mapping.targetName())) {
+                errorReporter.warning("atomic field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
+            }
+        } else if (access.isStatic() && access.isFinal()) {
+            if (!isConstantCase(mapping.targetName())) {
                 errorReporter.error("static final field is not in CONSTANT_CASE");
             }
         } else {
-            if (mapping.targetName() != null && startsWithUppercase(mapping.targetName())) {
+            if (startsWithUppercase(mapping.targetName())) {
                 errorReporter.warning("non-static or non-final field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
             }
         }

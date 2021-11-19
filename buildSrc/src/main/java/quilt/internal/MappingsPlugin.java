@@ -13,7 +13,6 @@ import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
-import quilt.internal.tasks.lint.Checker;
 import quilt.internal.tasks.lint.MappingLintTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
