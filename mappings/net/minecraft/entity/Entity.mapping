@@ -22,6 +22,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_csywjyej velocityModified Z
 	FIELD f_ctqyfogx renderDistanceMultiplier D
 	FIELD f_czyqvinj wasOnFire Z
+	FIELD f_dirooojo chunkPos Lnet/minecraft/unmapped/C_ynrszrtu;
 	FIELD f_doofwhhb pos Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_euemepwt FALL_FLYING_FLAG_INDEX I
 	FIELD f_ewpmuavf timeUntilRegen I
@@ -61,6 +62,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_naslivlb lastRenderY D
 	FIELD f_nexrnbri wasInPowderSnow Z
 	FIELD f_nzehfinv dimensions Lnet/minecraft/unmapped/C_sszpscpo;
+	FIELD f_ocqvsaqw collisionBlockState Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_oysssbsf ridingCooldown I
 	FIELD f_paqudcks UUID_KEY Ljava/lang/String;
 	FIELD f_pebbtyzx NO_GRAVITY Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -136,6 +138,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 boundingBox
 	METHOD m_bqujtsnz isSubmergedInWater ()Z
 		COMMENT Returns whether this entity's hitbox is fully submerged in water.
+		COMMENT
+		COMMENT @return {@code true} if this entity's hitbox is fully submerged in water, otherwise {@code false}
 	METHOD m_bzrtaquy getVehicle ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_bzveerey collides ()Z
 	METHOD m_cckfyxyf fall (DZLnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)V
@@ -187,6 +191,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 entity
 		ARG 3 pos
 	METHOD m_dgesbqpr calculateDimensions ()V
+	METHOD m_dggmledz serverWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
 	METHOD m_dlbtwwww occludeVibrationSignals ()Z
 	METHOD m_dmqmmjta getWidth ()F
 	METHOD m_dofvpclc positionInPortal (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;Lnet/minecraft/unmapped/C_wauhtoaq$C_tqypnjit;)Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -248,7 +253,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_fafpthyt getPassengersDeep ()Ljava/lang/Iterable;
 	METHOD m_fccepfav onSpawnPacket (Lnet/minecraft/unmapped/C_qdqrqwvy;)V
 		ARG 1 packet
-	METHOD m_fcumyzkt getType ()Lnet/minecraft/unmapped/C_ogavsvbr;
+	METHOD m_fcumyzkt type ()Lnet/minecraft/unmapped/C_ogavsvbr;
 	METHOD m_fdhoudpd interact (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		COMMENT Called when a player interacts with this entity.
 		ARG 1 player
@@ -386,6 +391,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 fallDistance
 		ARG 2 damageMultiplier
 		ARG 3 damageSource
+	METHOD m_jjorggkg (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 0 passenger
 	METHOD m_jjzcqljk setYaw (F)V
 		ARG 1 yaw
 	METHOD m_jlyguhnu setInvulnerable (Z)V
@@ -459,6 +466,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_lqtbefmj shouldLeaveSwimmingPose ()Z
 	METHOD m_lqwqqugl isInsideWaterOrBubbleColumn ()Z
 	METHOD m_lrfrrwvd getVelocityAffectingPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_lsaraprt (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 passenger
 	METHOD m_lvimckng getDefaultNetherPortalCooldown ()I
 	METHOD m_lvnfpsmt baseTick ()V
 	METHOD m_lvnmxdmg calculatePistonMovementFactor (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;D)D
@@ -498,8 +507,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 pitch
 		ARG 2 yaw
 	METHOD m_njhqnjqp isWet ()Z
-		COMMENT Returns whether this entity is touching water, or is being rained on, or is inside a bubble column...
+		COMMENT Returns whether this entity is touching water, or is being rained on, or is inside a bubble column.
 		COMMENT
+		COMMENT @return {@code true} if this entity is considered wet, otherwise {@code false}
 		COMMENT @see net.minecraft.entity.Entity#isTouchingWater()
 		COMMENT @see net.minecraft.entity.Entity#isBeingRainedOn()
 		COMMENT @see net.minecraft.entity.Entity#isInsideBubbleColumn()
@@ -525,6 +535,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 destWorld
 		ARG 2 destPos
 		ARG 3 destIsNether
+		ARG 4 worldBorder
 	METHOD m_oavmpfqe getAir ()I
 	METHOD m_obkzfysl readCustomDataFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
@@ -580,6 +591,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 world
 		ARG 2 other
 	METHOD m_plmkvbcv streamIntoPassengers ()Ljava/util/stream/Stream;
+	METHOD m_pluddtge (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 other
 	METHOD m_pnapxqoc updatePassengerPosition (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
 	METHOD m_pnccinpe requestTeleport (DDD)V
@@ -599,6 +612,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 4 context
 	METHOD m_qbuogctw getPose ()Lnet/minecraft/unmapped/C_ufdjspmk;
 	METHOD m_qchceppc tickRiding ()V
+	METHOD m_qdulsikq (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 passenger
 	METHOD m_qesgssdn entityDataRequiresOperator ()Z
 	METHOD m_qiicvjap isAlive ()Z
 	METHOD m_qmsqmnke doesRenderOnFire ()Z
@@ -653,7 +668,10 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_slmahvbo getItemsHand ()Ljava/lang/Iterable;
 	METHOD m_smbujbsa discard ()V
 	METHOD m_spboarji isTouchingWater ()Z
-		COMMENT Returns whether this entity's hitbox is touching water fluid.
+		COMMENT Returns whether this entity's hitbox is touching water.
+		COMMENT
+		COMMENT @return {@code true} if this entity's hitbox is touching water, otherwise {@code false}
+	METHOD m_spnjhgke onLanding ()V
 	METHOD m_spvlxclq setFrozenTicks (I)V
 		ARG 1 frozenTicks
 	METHOD m_srumsdfc setInvisible (Z)V
@@ -832,7 +850,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 yaw
 	METHOD m_yhvbjlmg setPosition (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 pos
-	METHOD m_ykrmhbpu getEntityWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
+	METHOD m_ykrmhbpu world ()Lnet/minecraft/unmapped/C_cdctfzbn;
 	METHOD m_yljnwzbr getHeadYaw ()F
 	METHOD m_ymnjzyng onPassengerLookAround (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
@@ -855,6 +873,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 sprinting
 	METHOD m_zhfwaekn getBlockX ()I
 	METHOD m_zhtbdonc isGlowingLocal ()Z
+	METHOD m_ziqjvkiq (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 3 state
 	METHOD m_zjgainuo updateTrackedHeadRotation (FI)V
 		ARG 1 yaw
 		ARG 2 interpolationSteps
