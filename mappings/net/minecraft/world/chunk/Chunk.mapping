@@ -5,6 +5,7 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 	FIELD f_eflzqkft heightLimitView Lnet/minecraft/unmapped/C_qpninoyb;
 	FIELD f_enzfbrzj chunkNoiseSampler Lnet/minecraft/unmapped/C_rvjywqnu;
 	FIELD f_exnoqcnn needsSaving Z
+	FIELD f_fqheruhs blendingData Lnet/minecraft/unmapped/C_jfjllmkc;
 	FIELD f_hyppsjnp inhabitedTime J
 	FIELD f_insxllog postProcessingLists [Lit/unimi/dsi/fastutil/shorts/ShortList;
 	FIELD f_lmynvwzp sectionArray [Lnet/minecraft/unmapped/C_aurosfgf;
@@ -16,10 +17,21 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 	FIELD f_uubjectd structureReferences Ljava/util/Map;
 	FIELD f_vjmuaqdt lightCorrect Z
 	FIELD f_zemxxetf upgradeData Lnet/minecraft/unmapped/C_jrivgvxn;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_jrivgvxn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_tqxyjqsk;J[Lnet/minecraft/unmapped/C_aurosfgf;Lnet/minecraft/unmapped/C_jfjllmkc;)V
+		ARG 1 pos
+		ARG 2 upgradeData
+		ARG 3 heightLimitView
+		ARG 4 biomeRegistry
+		ARG 5 inhabitedTime
+		ARG 7 sectionArrayInitializer
+		ARG 8 blendingData
 	METHOD m_alxritfm increaseInhabitedTime (J)V
 		ARG 1 delta
+	METHOD m_bbupaysr setBlendingData (Lnet/minecraft/unmapped/C_jfjllmkc;)V
+		ARG 1 blendingData
 	METHOD m_blkwaqtb addEntity (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_cebllhal getBlendingData ()Lnet/minecraft/unmapped/C_jfjllmkc;
 	METHOD m_coitboyr getSectionArray ()[Lnet/minecraft/unmapped/C_aurosfgf;
 	METHOD m_comrxvzs getGameEventDispatcher (I)Lnet/minecraft/unmapped/C_tcmbbpqi;
 		ARG 1 ySectionCoord
@@ -45,10 +57,14 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 	METHOD m_itzisycv getStructureStarts ()Ljava/util/Map;
 	METHOD m_jcgsgwwo setNeedsSaving (Z)V
 		ARG 1 needsSaving
+	METHOD m_jnwohgqe getHeightLimitView ()Lnet/minecraft/unmapped/C_qpninoyb;
 	METHOD m_lbczmzpt getBlockEntityPositions ()Ljava/util/Set;
 	METHOD m_lfyhukpm (Lnet/minecraft/unmapped/C_vvmtobpf;)Lit/unimi/dsi/fastutil/longs/LongSet;
 		ARG 0 structureFeature
 	METHOD m_mrvpghin getHighestNonEmptySection ()Lnet/minecraft/unmapped/C_aurosfgf;
+	METHOD m_ntljehgr getOrCreateChunkNoiseSampler (Lnet/minecraft/unmapped/C_upcezwgw;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)Lnet/minecraft/unmapped/C_rvjywqnu;
+		ARG 1 noiseColumnSampler
+		ARG 5 blender
 	METHOD m_oeshvinu getPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 	METHOD m_pmdbdcxs getHeightmap (Lnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;)Lnet/minecraft/unmapped/C_ybztoekc;
 		ARG 1 type
@@ -68,10 +84,10 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 2 state
 		ARG 3 moved
 	METHOD m_qkpdcbbf getStatus ()Lnet/minecraft/unmapped/C_kogtzhzt;
-	METHOD m_rirvxrfe setStructureStarts (Ljava/util/Map;)V
-		ARG 1 structureStarts
 	METHOD m_rgzeprey setBiomesFromNoise (Lnet/minecraft/unmapped/C_nhlknxak;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)V
 		ARG 2 sampler
+	METHOD m_rirvxrfe setStructureStarts (Ljava/util/Map;)V
+		ARG 1 structureStarts
 	METHOD m_rqpedvcc getSection (I)Lnet/minecraft/unmapped/C_aurosfgf;
 		ARG 1 section
 	METHOD m_rxqzlewx markBlockForPostProcessing (Lnet/minecraft/unmapped/C_hynzadkk;)V

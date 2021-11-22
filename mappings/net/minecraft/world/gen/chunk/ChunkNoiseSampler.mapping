@@ -1,0 +1,92 @@
+CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoiseSampler
+	FIELD f_bfinfxyb initialNoiseBlockStateSampler Lnet/minecraft/unmapped/C_rvjywqnu$C_ajscwoop;
+	FIELD f_diwfyabf interpolators Ljava/util/List;
+	FIELD f_ewqpqzws firstCellX I
+	FIELD f_fyvpnnop oreVeinSampler Lnet/minecraft/unmapped/C_rvjywqnu$C_ajscwoop;
+	FIELD f_gobowyuo aquiferSampler Lnet/minecraft/unmapped/C_jpghdzxc;
+	FIELD f_hpkitmdp minimumY I
+	FIELD f_lsmppxmv sampler Lnet/minecraft/unmapped/C_upcezwgw;
+	FIELD f_lzcdiirr height I
+	FIELD f_nhocwnvj firstNoiseX I
+	FIELD f_nzwfsmwa horizontalSize I
+	FIELD f_opnkrroc blender Lnet/minecraft/unmapped/C_pfqozslu;
+	FIELD f_rrobeaxe generationShapeConfig Lnet/minecraft/unmapped/C_ulvgadxi;
+	FIELD f_tupstqfc firstCellZ I
+	FIELD f_ycdqwwen firstNoiseZ I
+	METHOD <init> (IIILnet/minecraft/unmapped/C_upcezwgw;IILnet/minecraft/unmapped/C_rvjywqnu$C_ekqrmkds;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)V
+		ARG 1 horizontalSize
+		ARG 2 height
+		ARG 3 minimumY
+		ARG 4 sampler
+		ARG 5 x
+		ARG 6 z
+		ARG 10 blender
+	METHOD m_bfhxedds create (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_upcezwgw;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)Lnet/minecraft/unmapped/C_rvjywqnu;
+		ARG 0 chunk
+		ARG 1 sampler
+		ARG 5 blender
+	METHOD m_enjlfhkh create (IIIILnet/minecraft/unmapped/C_upcezwgw;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;)Lnet/minecraft/unmapped/C_rvjywqnu;
+		ARG 0 x
+		ARG 1 z
+		ARG 2 minimumY
+		ARG 3 height
+		ARG 4 sampler
+	METHOD m_gdnpcvmg (III)D
+		ARG 0 x2
+		ARG 1 y
+		ARG 2 z2
+	METHOD m_omkscbiv sampleInitialNoise (III)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_ovoyijhs getBlender ()Lnet/minecraft/unmapped/C_pfqozslu;
+	METHOD m_rfsfjiny getAquiferSampler ()Lnet/minecraft/unmapped/C_jpghdzxc;
+	METHOD m_upedlbpb sampleOreVeins (III)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_ykqynayx createNoiseInterpolator (Lnet/minecraft/unmapped/C_rvjywqnu$C_ekqrmkds;)Lnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;
+		ARG 1 columnSampler
+	CLASS C_ajscwoop BlockStateSampler
+		METHOD calculate calculate (III)Lnet/minecraft/unmapped/C_txtbiemp;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+	CLASS C_ekqrmkds ColumnSampler
+		METHOD calculateNoise calculateNoise (III)D
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+	CLASS C_fzdxentu NoiseInterpolator
+		FIELD f_bbtfpbth z1 D
+		FIELD f_beujemfs endNoiseBuffer [[D
+		FIELD f_bpsfpjem startNoiseBuffer [[D
+		FIELD f_cuhxvtzl x1y0z0 D
+		FIELD f_dhokevdp x1y1z1 D
+		FIELD f_ecpmmlsi z0 D
+		FIELD f_hapfvyup x0y0z1 D
+		FIELD f_hrobiljz x1z0 D
+		FIELD f_jkutiigy x1y0z1 D
+		FIELD f_kijwsclm x0z1 D
+		FIELD f_lluroftn x0y0z0 D
+		FIELD f_nwvqbwea x0y1z1 D
+		FIELD f_pbyssmci columnSampler Lnet/minecraft/unmapped/C_rvjywqnu$C_ekqrmkds;
+		FIELD f_rkjgnhbb x0y1z0 D
+		FIELD f_rpseqtcm value D
+		FIELD f_wxqnjuek x0z0 D
+		FIELD f_xzxncpps x1z1 D
+		FIELD f_zjikobig x1y1z0 D
+		METHOD <init> (Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_rvjywqnu$C_ekqrmkds;)V
+			ARG 2 columnSampler
+		METHOD m_wotsbejw sampleNoise ([[DI)V
+			ARG 1 buffer
+			ARG 2 noiseX
+		METHOD m_xktzaxwl createBuffer (II)[[D
+			ARG 1 sizeZ
+			ARG 2 sizeX
+		METHOD m_yonrghoc swapBuffers ()V
+	CLASS C_konsplmd Sampler
+		METHOD sample sample ()D
+	CLASS C_tlamxojz SamplerFactory
+		METHOD instantiate instantiate (Lnet/minecraft/unmapped/C_rvjywqnu;)Lnet/minecraft/unmapped/C_rvjywqnu$C_konsplmd;
+			ARG 1 chunkNoiseSampler
