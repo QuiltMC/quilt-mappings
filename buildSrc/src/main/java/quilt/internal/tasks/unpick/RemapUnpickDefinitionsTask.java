@@ -18,6 +18,7 @@ import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.util.UnpickUtil;
 
 import javax.inject.Inject;
 import java.io.BufferedReader;
@@ -125,7 +126,7 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
                 try (UnpickV2Reader reader = new UnpickV2Reader(Files.newInputStream(getParameters().getInput().getAsFile().get().toPath()))) {
                     UnpickV2Writer writer = new UnpickV2Writer();
                     reader.accept(new UnpickV2Remapper(classMappings, methodMappings, fieldMappings, writer));
-                    Files.writeString(output, writer.toString());
+                    Files.writeString(output, UnpickUtil.getLfOutput(writer));
                 }
             } catch (IOException e) {
                 throw new UncheckedIOException(e);

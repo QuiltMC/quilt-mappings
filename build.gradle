@@ -311,11 +311,13 @@ generatePackageInfoMappings {
 	packageName = "net/minecraft/unused/packageinfo/"
 }
 
-javadocLint {
+mappingLint {
+	dependsOn mapPerVersionMappingsJar
 	mappingDirectory = file("mappings")
+	jarFile = mappings.fileConstants.perVersionMappingsJar
 }
 
-check.dependsOn javadocLint
+check.dependsOn mappingLint
 
 publishing {
 	publications {

@@ -1,5 +1,5 @@
-import * as core from '@actions/core';
-import { context, getOctokit } from '@actions/github';
+const core = require('@actions/core');
+const { context, getOctokit } = require('@actions/github');
 
 const updateLabel = 'update-base';
 const outdatedLabel = 'outdated';
