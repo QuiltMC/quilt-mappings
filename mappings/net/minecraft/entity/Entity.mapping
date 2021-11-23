@@ -22,6 +22,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_csywjyej velocityModified Z
 	FIELD f_ctqyfogx renderDistanceMultiplier D
 	FIELD f_czyqvinj wasOnFire Z
+	FIELD f_dirooojo chunkPos Lnet/minecraft/unmapped/C_ynrszrtu;
 	FIELD f_doofwhhb pos Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_euemepwt FALL_FLYING_FLAG_INDEX I
 	FIELD f_ewpmuavf timeUntilRegen I
@@ -61,6 +62,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_naslivlb lastRenderY D
 	FIELD f_nexrnbri wasInPowderSnow Z
 	FIELD f_nzehfinv dimensions Lnet/minecraft/unmapped/C_sszpscpo;
+	FIELD f_ocqvsaqw collisionBlockState Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_oysssbsf ridingCooldown I
 	FIELD f_paqudcks UUID_KEY Ljava/lang/String;
 	FIELD f_pebbtyzx NO_GRAVITY Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -135,7 +137,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_bmjmwuig setBoundingBox (Lnet/minecraft/unmapped/C_hbcjzgoe;)V
 		ARG 1 boundingBox
 	METHOD m_bqujtsnz isSubmergedInWater ()Z
-		COMMENT Returns whether this entity's hitbox is fully submerged in water.
+		COMMENT {@return whether this entity's hitbox is fully submerged in water}
 	METHOD m_bzrtaquy getVehicle ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_bzveerey collides ()Z
 	METHOD m_cckfyxyf fall (DZLnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)V
@@ -184,6 +186,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 entity
 		ARG 3 pos
 	METHOD m_dgesbqpr calculateDimensions ()V
+	METHOD m_dggmledz getWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
 	METHOD m_dlbtwwww occludeVibrationSignals ()Z
 	METHOD m_dmqmmjta getWidth ()F
 	METHOD m_dofvpclc positionInPortal (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;Lnet/minecraft/unmapped/C_wauhtoaq$C_tqypnjit;)Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -204,7 +207,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_dwotjukl toNbtList ([D)Lnet/minecraft/unmapped/C_hqhtfwlr;
 		ARG 1 values
 	METHOD m_dxohridw getMoveEffect ()Lnet/minecraft/unmapped/C_astfners$C_tcfxsqwc;
-		COMMENT Returns the possible effect(s) of an entity moving.
+		COMMENT {@return the possible effect(s) of an entity moving}
 		COMMENT
 		COMMENT @implNote If an entity does not emit game events or play move sounds, this
 		COMMENT method should be overridden as returning a value other than
@@ -238,8 +241,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_exebbkmr addAirTravelEffects ()V
 		COMMENT Adds the effects of this entity when it travels in air, usually to the
 		COMMENT world the entity is in.
-		COMMENT
-		COMMENT <p>This is only called when the entity {@linkplain #getMoveEffect() has
+		COMMENT <p>
+		COMMENT This is only called when the entity {@linkplain #getMoveEffect() has
 		COMMENT any move effect}, from {@link #move(MovementType, Vec3d)}
 	METHOD m_eyjjblao isSneaking ()Z
 	METHOD m_fafpthyt getPassengersDeep ()Ljava/lang/Iterable;
@@ -356,6 +359,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_hvxlsjsw getFrozenTicks ()I
 	METHOD m_hxboixtd isInsideBubbleColumn ()Z
 	METHOD m_iadcwgxh updateWaterState ()Z
+	METHOD m_iaklbvrk (Lnet/minecraft/unmapped/C_sszpscpo;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 2 pos
 	METHOD m_ibtokcff setSilent (Z)V
 		ARG 1 silent
 	METHOD m_idibotas setNoGravity (Z)V
@@ -383,6 +388,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 fallDistance
 		ARG 2 damageMultiplier
 		ARG 3 damageSource
+	METHOD m_jjorggkg (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 0 passenger
 	METHOD m_jjzcqljk setYaw (F)V
 		ARG 1 yaw
 	METHOD m_jlyguhnu setInvulnerable (Z)V
@@ -456,6 +463,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_lqtbefmj shouldLeaveSwimmingPose ()Z
 	METHOD m_lqwqqugl isInsideWaterOrBubbleColumn ()Z
 	METHOD m_lrfrrwvd getVelocityAffectingPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_lsaraprt (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 passenger
 	METHOD m_lvimckng getDefaultNetherPortalCooldown ()I
 	METHOD m_lvnfpsmt baseTick ()V
 	METHOD m_lvnmxdmg calculatePistonMovementFactor (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;D)D
@@ -495,7 +504,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 pitch
 		ARG 2 yaw
 	METHOD m_njhqnjqp isWet ()Z
-		COMMENT Returns whether this entity is touching water, or is being rained on, or is inside a bubble column...
+		COMMENT {@return whether this entity is touching water, or is being rained on, or is inside a bubble column}
 		COMMENT
 		COMMENT @see net.minecraft.entity.Entity#isTouchingWater()
 		COMMENT @see net.minecraft.entity.Entity#isBeingRainedOn()
@@ -522,6 +531,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 destWorld
 		ARG 2 destPos
 		ARG 3 destIsNether
+		ARG 4 worldBorder
 	METHOD m_oavmpfqe getAir ()I
 	METHOD m_obkzfysl readCustomDataFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
@@ -532,13 +542,13 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 3 y
 		ARG 5 z
 	METHOD m_oqgpazne isInSneakingPose ()Z
-		COMMENT Returns whether the entity is in a crouching pose.
-		COMMENT
-		COMMENT <p>Compared to {@link #isSneaking()}, it only makes the entity appear
+		COMMENT {@return whether the entity is in a crouching pose}
+		COMMENT <p>
+		COMMENT Compared to {@link #isSneaking()}, it only makes the entity appear
 		COMMENT crouching and does not bring other effects of sneaking, such as no less
 		COMMENT obvious name label rendering, no dismounting while riding, etc.
-		COMMENT
-		COMMENT <p>This is used by vanilla for non-player entities to crouch, such as
+		COMMENT <p>
+		COMMENT This is used by vanilla for non-player entities to crouch, such as
 		COMMENT for foxes and cats.
 	METHOD m_oqjzpmsb setSwimming (Z)V
 		ARG 1 swimming
@@ -577,6 +587,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 world
 		ARG 2 other
 	METHOD m_plmkvbcv streamIntoPassengers ()Ljava/util/stream/Stream;
+	METHOD m_pluddtge (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 other
 	METHOD m_pnapxqoc updatePassengerPosition (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
 	METHOD m_pnccinpe requestTeleport (DDD)V
@@ -590,6 +602,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_pxtokmcp unsetRemoved ()V
 	METHOD m_qbuogctw getPose ()Lnet/minecraft/unmapped/C_ufdjspmk;
 	METHOD m_qchceppc tickRiding ()V
+	METHOD m_qdulsikq (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 passenger
 	METHOD m_qesgssdn entityDataRequiresOperator ()Z
 	METHOD m_qiicvjap isAlive ()Z
 	METHOD m_qmsqmnke doesRenderOnFire ()Z
@@ -600,8 +614,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 item
 	METHOD m_qulyjbql getGameEventHandler ()Lnet/minecraft/unmapped/C_vwjlxvsp;
 		COMMENT Returns the game event handler for this entity.
-		COMMENT
-		COMMENT <p>Subclasses interested in listening to game events as an entity should return a
+		COMMENT <p>
+		COMMENT Subclasses interested in listening to game events as an entity should return a
 		COMMENT handler so the {@link net.minecraft.world.event.listener.GameEventListener listener}
 		COMMENT used to receive game events can be registered to the correct dispatchers.
 		COMMENT
@@ -644,7 +658,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_slmahvbo getItemsHand ()Ljava/lang/Iterable;
 	METHOD m_smbujbsa discard ()V
 	METHOD m_spboarji isTouchingWater ()Z
-		COMMENT Returns whether this entity's hitbox is touching water fluid.
+		COMMENT {@return whether this entity's hitbox is touching water}
+	METHOD m_spnjhgke onLanding ()V
 	METHOD m_spvlxclq setFrozenTicks (I)V
 		ARG 1 frozenTicks
 	METHOD m_srumsdfc setInvisible (Z)V
@@ -661,13 +676,15 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_thnmjffg addFlapEffects ()V
 		COMMENT Adds the effects of this entity flapping, usually to the world the entity
 		COMMENT is in.
-		COMMENT
-		COMMENT <p>The actual flapping logic should be done in {@link #tick()} instead.
-		COMMENT
-		COMMENT <p>This is only called when the entity {@linkplain #hasWings() has wings}
+		COMMENT <p>
+		COMMENT The actual flapping logic should be done in {@link #tick()} instead.
+		COMMENT <p>
+		COMMENT This is only called when the entity {@linkplain #hasWings() has wings}
 		COMMENT and the entity {@linkplain #getMoveEffect() has any move effect}, from
 		COMMENT {@link #addAirTravelEffects()}.
 	METHOD m_tjhbdkij isBeingRainedOn ()Z
+	METHOD m_tnxbmbyf (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 0 entity
 	METHOD m_tsseievl resetPosition ()V
 	METHOD m_ttjwufim getY ()D
 	METHOD m_ttlohclp isGlowing ()Z
@@ -676,8 +693,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 headYaw
 	METHOD m_twbetumi tickInVoid ()V
 		COMMENT Called when the entity is 64 blocks below the world's {@linkplain net.minecraft.world.HeightLimitView#getBottomY() minimum Y position}.
-		COMMENT
-		COMMENT <p>{@linkplain LivingEntity Living entities} use this to deal {@linkplain net.minecraft.entity.damage.DamageSource#OUT_OF_WORLD out of world damage}.
+		COMMENT <p>
+		COMMENT {@linkplain LivingEntity Living entities} use this to deal {@linkplain net.minecraft.entity.damage.DamageSource#OUT_OF_WORLD out of world damage}.
 	METHOD m_ubqkaspo getHighSpeedSplashSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_ucpbtirx changeLookDirection (DD)V
 		ARG 1 cursorDeltaX
@@ -722,14 +739,17 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_uvuwhjxr getMaxNetherPortalTime ()I
 	METHOD m_uwdepeht moveToWorld (Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_astfners;
 		COMMENT Moves this entity to another world.
-		COMMENT
-		COMMENT <p>Note all entities except server player entities are completely recreated at the destination.
+		COMMENT <p>
+		COMMENT Note all entities except server player entities are completely recreated at the destination.
 		COMMENT
 		COMMENT @return the entity in the other world
 		ARG 1 destination
 	METHOD m_vbxcqznf adjustSingleAxisMovementForCollisions (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_cdctfzbn;Ljava/util/List;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 0 entity
 		ARG 1 movement
 		ARG 2 entityBoundingBox
+		ARG 3 world
+		ARG 4 shapes
 	METHOD m_vcfvpihz checkDespawn ()V
 	METHOD m_vddvkdnu saveNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
 		ARG 1 nbt
@@ -763,7 +783,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 hitPos
 		ARG 3 hand
 	METHOD m_vxgatcdr isConnectedThroughVehicle (Lnet/minecraft/unmapped/C_astfners;)Z
-		COMMENT Checks if this entity and another entity share the same root vehicle.
+		COMMENT {@return whether this entity and another entity share the same root vehicle}
 		ARG 1 entity
 			COMMENT the other entity
 	METHOD m_vxtgbqxt getVelocityMultiplier ()F
@@ -821,7 +841,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 yaw
 	METHOD m_yhvbjlmg setPosition (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 pos
-	METHOD m_ykrmhbpu getEntityWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
+	METHOD m_yjvnxlqe getPistonBehavior ()Lnet/minecraft/unmapped/C_mojvzhua;
+	METHOD m_ykrmhbpu getCommandSenderWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
 	METHOD m_yljnwzbr getHeadYaw ()F
 	METHOD m_ymnjzyng onPassengerLookAround (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
@@ -844,11 +865,15 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 sprinting
 	METHOD m_zhfwaekn getBlockX ()I
 	METHOD m_zhtbdonc isGlowingLocal ()Z
+	METHOD m_ziqjvkiq (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 3 state
 	METHOD m_zjgainuo updateTrackedHeadRotation (FI)V
 		ARG 1 yaw
 		ARG 2 interpolationSteps
 	METHOD m_zlfbgvdy getCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
 		COMMENT Creates a command source which represents this entity.
+		COMMENT
+		COMMENT @return the created command source
 	METHOD m_zrismnrd checkWaterState ()V
 	METHOD m_zyewjzgd getEntityName ()Ljava/lang/String;
 	CLASS C_aobkcgmf PositionUpdater
