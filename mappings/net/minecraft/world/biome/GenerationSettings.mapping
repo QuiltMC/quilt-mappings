@@ -5,20 +5,38 @@ CLASS net/minecraft/unmapped/C_qbjpvmph net/minecraft/world/biome/GenerationSett
 	FIELD f_touhcpne features Ljava/util/List;
 	FIELD f_uacyaysx flowerFeatures Ljava/util/List;
 	FIELD f_wdheksec LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_ztoizotg allowedFeatures Ljava/util/Set;
+	METHOD <init> (Ljava/util/Map;Ljava/util/List;)V
+		ARG 1 carvers
+		ARG 2 features
+	METHOD m_bkbrdgoq (Lnet/minecraft/unmapped/C_qbjpvmph;)Ljava/util/List;
+		ARG 0 settings
+	METHOD m_bqvoursw isFeatureAllowed (Lnet/minecraft/unmapped/C_jewbaoib;)Z
+		ARG 1 feature
+	METHOD m_cdkxnkuu (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_cmqhhsuo getFlowerFeatures ()Ljava/util/List;
+	METHOD m_pnggzxzm (Lnet/minecraft/unmapped/C_stwyylfs;)Z
+		ARG 0 configuredFeature
 	METHOD m_vupjajhg getCarversForStep (Lnet/minecraft/unmapped/C_rdrmebyw$C_smrpgmrn;)Ljava/util/List;
 		ARG 1 carverStep
 	METHOD m_xdoxdwzp getFeatures ()Ljava/util/List;
 		COMMENT Returns the lists of features configured for each {@link net.minecraft.world.gen.GenerationStep.Feature feature generation step}, up to the highest step that has a configured feature.
 		COMMENT Entries are guaranteed to not be null, but may be empty lists if an earlier step has no features, but a later step does.
+	METHOD m_yztnozcz (Lnet/minecraft/unmapped/C_qbjpvmph;)Ljava/util/Map;
+		ARG 0 settings
 	CLASS C_bwxzcdhs Builder
 		FIELD f_coitftkz features Ljava/util/List;
 		FIELD f_ljjaxyfj carvers Ljava/util/Map;
+		METHOD m_flzigpdu (Ljava/util/Map$Entry;)Ljava/util/List;
+			ARG 0 entry
 		METHOD m_jtwrhufd carver (Lnet/minecraft/unmapped/C_rdrmebyw$C_smrpgmrn;Lnet/minecraft/unmapped/C_tgebytdh;)Lnet/minecraft/unmapped/C_qbjpvmph$C_bwxzcdhs;
 			ARG 1 carverStep
 			ARG 2 carver
 		METHOD m_smhpxsgf build ()Lnet/minecraft/unmapped/C_qbjpvmph;
 		METHOD m_utbmkznw feature (Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;Lnet/minecraft/unmapped/C_jewbaoib;)Lnet/minecraft/unmapped/C_qbjpvmph$C_bwxzcdhs;
+			ARG 1 featureStep
+			ARG 2 feature
 		METHOD m_vkecwzgg addFeatureStep (I)V
 			ARG 1 stepIndex
 		METHOD m_xckrtfaj feature (ILjava/util/function/Supplier;)Lnet/minecraft/unmapped/C_qbjpvmph$C_bwxzcdhs;
