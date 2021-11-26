@@ -1,5 +1,26 @@
 CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 	METHOD m_gfkqahlc getDebugString ()Ljava/lang/String;
+	METHOD m_jvpzciqy codec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+		ARG 0 codec
+	METHOD m_kstxsohn (Lnet/minecraft/unmapped/C_cjntsjzo$C_lqwqjkzu;I)Lnet/minecraft/unmapped/C_cjntsjzo$C_tehldayn;
+		ARG 1 i
+	METHOD m_ndhpocem (Lnet/minecraft/unmapped/C_cjntsjzo$C_lqwqjkzu;)Ljava/util/List;
+		ARG 0 multipoint
+	METHOD m_nxtizxnr (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 2 instance
+	METHOD m_qlralnyl (Lnet/minecraft/unmapped/C_oqsszdfo;Ljava/util/List;)Lnet/minecraft/unmapped/C_cjntsjzo$C_lqwqjkzu;
+		ARG 0 coordinate
+		ARG 1 points
+	METHOD m_qmyesuhl createFixedFloatFunction (F)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 0 value
+	METHOD m_sdtakuza (Lnet/minecraft/unmapped/C_cjntsjzo;)Lcom/mojang/datafixers/util/Either;
+		ARG 0 spline
+	METHOD m_tzkhhrfn builder (Lnet/minecraft/unmapped/C_oqsszdfo;Lnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
+		ARG 0 locationFunction
+	METHOD m_wlvktaal (Lorg/apache/commons/lang3/mutable/MutableObject;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 1 instance
+	METHOD m_yawegmjs builder (Lnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
+		ARG 0 locationFunction
 	CLASS C_ehccgxyt Builder
 		FIELD f_lkmsjwrm locationFunction Lnet/minecraft/unmapped/C_oqsszdfo;
 		FIELD f_nhjtnoqx derivatives Lit/unimi/dsi/fastutil/floats/FloatList;
@@ -7,7 +28,11 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 		FIELD f_szcewusp locations Lit/unimi/dsi/fastutil/floats/FloatList;
 		METHOD <init> (Lnet/minecraft/unmapped/C_oqsszdfo;)V
 			ARG 1 locationFunction
+		METHOD <init> (Lnet/minecraft/unmapped/C_oqsszdfo;Lnet/minecraft/unmapped/C_oqsszdfo;)V
+			ARG 1 locationFunction
 		METHOD m_feujvioi build ()Lnet/minecraft/unmapped/C_cjntsjzo;
+		METHOD m_fmtwovta (Ljava/lang/Float;)F
+			ARG 0 f
 		METHOD m_jswahrpi add (FLnet/minecraft/unmapped/C_cjntsjzo;F)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
 			ARG 1 location
 			ARG 2 value
@@ -16,7 +41,7 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 			ARG 1 location
 			ARG 2 value
 			ARG 3 derivative
-	CLASS C_lqwqjkzu
+	CLASS C_lqwqjkzu Multipoint
 		FIELD f_ivhtjacg derivatives [F
 		FIELD f_ozvnesch values Ljava/util/List;
 		FIELD f_qyyujczb coordinate Lnet/minecraft/unmapped/C_oqsszdfo;
@@ -32,6 +57,8 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 		METHOD m_cpnccmvr floatArrayToString ([F)Ljava/lang/String;
 			ARG 1 floats
 		METHOD m_dyabikck derivatives ()[F
+		METHOD m_jqvxeicm (FI)Z
+			ARG 2 i
 		METHOD m_ulugzisy locations ()[F
 		METHOD m_vxyikhyn ([FI)D
 			ARG 1 i
@@ -45,7 +72,7 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_azeuvvht value ()F
-	CLASS C_tehldayn
+	CLASS C_tehldayn Point
 		FIELD f_dexqoqlc location F
 		FIELD f_elcyjwne value Lnet/minecraft/unmapped/C_cjntsjzo;
 		FIELD f_khzkvjwf derivative F
