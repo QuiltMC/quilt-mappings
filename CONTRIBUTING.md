@@ -23,6 +23,8 @@ complexity of the pull request. The numbers for each category are listed below.
 
 GitHub PR labels should be used to indicate which category a PR belongs to.
 
+---
+
 ### New Mappings
 **Required Approvals**: 3
 - At least 2 from Mappings Triage and 1 from the Mappings Team.
@@ -35,6 +37,7 @@ GitHub PR labels should be used to indicate which category a PR belongs to.
 
 ### Mapping Refactors
 Typo fixes are not considered as refactor.
+
 **Required Approvals**: 4
 - At least 2 from Mappings Triage and 2 from the Mappings Team
 - Approvals from the Mappings Team are counted as 2 from Mappings Triage, so 2 approvals from the Mappings Team is
@@ -44,6 +47,7 @@ Typo fixes are not considered as refactor.
 
 ### Minor Toolchain Changes
 Updates to dependencies, trivial fixes, and minor changes to the buildscript are all considered minor changes.
+
 **Required Approvals**: 1
 - Must be from the Mappings Team
 
@@ -51,6 +55,7 @@ Updates to dependencies, trivial fixes, and minor changes to the buildscript are
 
 ### Toolchain Changes
 Gradle task rewrites and new features in the toolchain are considered toolchain changes.
+
 **Required Approvals**: 2
 - Must be from the Mappings Team
 
@@ -58,11 +63,14 @@ Gradle task rewrites and new features in the toolchain are considered toolchain 
 
 ### Major Toolchain Refactor
 Refactors that require significant changes to the toolchain are considered major toolchain changes.
+
 **Required Approvals**: 3
 - Must be from the Mappings Team
 
 **Final Comment Period**: 7 days
 - If the PR contains a controversial change, the FCP may be extended beyond 7 days.
+
+---
 
 This is only a summary of the process. The exact rules are defined in [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md)
 
