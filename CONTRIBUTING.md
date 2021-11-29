@@ -21,54 +21,82 @@ complexity of the pull request. The numbers for each category are listed below.
 
 > **Minor changes such as typo fixes may bypass the process.**
 
-GitHub PR labels should be used to indicate which category a PR belongs to.
+### Classifications
+PRs can be classified by the type of the changes (e.g. new mappings, toolchain updates, mappings refactor, documentation),
+by the type of Minecraft version they target (`release` or `snapshot`), and by their size. This classification is
+done by the Mappings Team and Mappings Triage, and is used to determine the number of reviews needed and the length of
+the FCP. GitHub PR labels should be used to indicate which category a PR belongs to.
 
----
+#### Change type
+Note that for the required reviews, approvals from members of the Mappings Team may be considered as Triage reviews.
 
-### New Mappings
-**Required Approvals**: 3
-- At least 2 from Mappings Triage and 1 from the Mappings Team.
-- Approvals from the Mappings Team are counted as 2 from Mappings Triage, so 2 approvals from the Mappings Team is
-  enough.
+##### New mappings
+- Small PR
+  - **Required Approvals: 2**, at least 1 from the Mappings Team and 1 from Mappings Triage
+  - **Final Comment Period:**
+    - Snapshots: 1 day
+    - Releases: 3 days
+- Large PR
+  - **Required Approvals: 3**, at least 1 from the Mappings Team and 2 from Mappings Triage
+  - **Final Comment Period:**
+    - Snapshots: 3 days
+    - Releases: 7 days
 
-**Final Comment Period**: May vary depending on the complexity of the PR and the type of version it targets.
-- Releases: 2 to 5 days
-- Snapshots: 12 hours to 3 days, may be longer if the PR is large.
+##### Mapping refactors
+Typo fixes are *not* considered refactor changes.
 
-### Mapping Refactors
-Typo fixes are not considered as refactor.
+- Small PR
+  - **Required Approvals: 3**, at least 2 from the Mappings Team and 1 from Mappings Triage
+  - **Final Comment Period:**
+    - Snapshots: 5 days
+    - Releases: 7 days
+- Large PR
+  - **Required Approvals: 4**, at least 2 from the Mappings Team and 2 from Mappings Triage
+  - **Final Comment Period:**
+    - Snapshots: 7 days
+    - Releases: 10 days
 
-**Required Approvals**: 4
-- At least 2 from Mappings Triage and 2 from the Mappings Team
-- Approvals from the Mappings Team are counted as 2 from Mappings Triage, so 2 approvals from the Mappings Team is
-  enough.
+##### Toolchain changes
+Changes to the buildscript, build system, or other tools used in QM are considered toolchain changes.
 
-**Final Comment Period**: From 7 to 10 days
+- Small PR
+  - **Required Approvals: 1**, from the Mappings Team
+  - **Final Comment Period:**
+    - Snapshots: 2 days
+    - Releases: 4 days
+- Large PR
+  - **Required Approvals: 3**, from the Mappings Team
+  - **Final Comment Period:**
+    - Snapshots: 7 days
+    - Releases: 10 days
 
-### Minor Toolchain Changes
-Updates to dependencies, trivial fixes, and minor changes to the buildscript are all considered minor changes.
+##### Documentation
+- Small PR
+  - **Required Approvals: 2**, at least 1 from the Mappings Team and 1 from Mappings Triage
+  - **Final Comment Period:**
+    - Snapshots: 3 days
+    - Releases: 7 days
+- Large PR
+  - **Required Approvals: 3**, at least 1 from the Mappings Team and 2 from Mappings Triage
+  - **Final Comment Period:**
+    - Snapshots: 6 days
+    - Releases: 10 days
 
-**Required Approvals**: 1
-- Must be from the Mappings Team
+#### Target version
+Affects only the length of the FCP.
+- Release PRs are those that target a release of Minecraft, such as `1.17`, `1.17.1` or `1.18`
+- Snapshot PRs are those that target a snapshot of Minecraft, such as `21w44a`, `1.17.1-pre1` or `1.18-rc4`
 
-**Final Comment Period**: 2 days
-
-### Toolchain Changes
-Gradle task rewrites and new features in the toolchain are considered toolchain changes.
-
-**Required Approvals**: 2
-- Must be from the Mappings Team
-
-**Final Comment Period**: 5 days
-
-### Major Toolchain Refactor
-Refactors that require significant changes to the toolchain are considered major toolchain changes.
-
-**Required Approvals**: 3
-- Must be from the Mappings Team
-
-**Final Comment Period**: 7 days
-- If the PR contains a controversial change, the FCP may be extended beyond 7 days.
+#### Size
+- Small PRs are those that are focused on a single mapping, mapping set, or toolchain feature, and are not large enough
+  to warrant a separate PR for each of the changes.
+  - Examples include: a PR mapping all constants in a class, documenting a few methods in class; cleaning up a few
+    lines of code in the buildscript, or refactoring the mappings of some methods.
+- Large PRs are those that are focused on a large number of mappings, mapping sets, or toolchain, and *could* be
+  separated into multiple, smaller PRs.
+  - Examples include: a PR to map all the unmapped classes, refactoring many mappings
+    across different classes, or refactoring the buildscript in a major scale (which was the case in
+    [#7](https://github.com/QuiltMC/quilt-mappings/pull/7)).
 
 ---
 
