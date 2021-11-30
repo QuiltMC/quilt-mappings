@@ -91,8 +91,10 @@ dependencies {
 import quilt.internal.Constants
 import quilt.internal.tasks.build.AddProposedFieldMappingsTask
 import quilt.internal.tasks.build.MappingsV2JarTask
+import quilt.internal.decompile.Decompilers
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
+import quilt.internal.tasks.decompile.DecompileTask
 
 clean.doFirst {
 	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft
@@ -193,14 +195,25 @@ task genFakeSource(type: JavaExec, dependsOn: ["mergeTinyV2", "mapNamedJar"]) {
 	}
 }
 
-task decompileCFR(type: JavaExec, dependsOn: [mapNamedJar]) {
-	mainClass = "org.benf.cfr.reader.Main"
-
-	args mappings.fileConstants.namedJar.getAbsolutePath(), "--outputdir", file("namedSrc").absolutePath
+task decompileCFR(type: DecompileTask, dependsOn: [mapNamedJar]) {
+	input.set mappings.fileConstants.namedJar
+	output.set file("namedSrc")
+	decompiler = Decompilers.CFR
+	libraries = configurations.decompileClasspath
 
 	doFirst {
 		file("namedSrc").deleteDir()
-		classpath = configurations.decompileClasspath
+	}
+}
+
+task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
+	input.set mappings.fileConstants.namedJar
+	output.set file("namedSrc")
+	decompiler = Decompilers.QUILTFLOWER
+	libraries = configurations.decompileClasspath
+
+	doFirst {
+		file("namedSrc").deleteDir()
 	}
 }
 
@@ -298,11 +311,13 @@ generatePackageInfoMappings {
 	packageName = "net/minecraft/unused/packageinfo/"
 }
 
-javadocLint {
+mappingLint {
+	dependsOn mapPerVersionMappingsJar
 	mappingDirectory = file("mappings")
+	jarFile = mappings.fileConstants.perVersionMappingsJar
 }
 
-check.dependsOn javadocLint
+check.dependsOn mappingLint
 
 publishing {
 	publications {

@@ -1,0 +1,57 @@
+CLASS net/minecraft/unmapped/C_nyvkclsy net/minecraft/util/registry/RegistryResourceAccess
+	METHOD m_imreyhip parseElement (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Decoder;)Ljava/util/Optional;
+		ARG 1 ops
+		ARG 2 parentKey
+		ARG 3 registryKey
+		ARG 4 decoder
+	METHOD m_pguxvcsr forResourceManager (Lnet/minecraft/unmapped/C_tmnrpasf;)Lnet/minecraft/unmapped/C_nyvkclsy;
+		ARG 0 resourceManager
+	METHOD m_pobbokmd listResources (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Collection;
+		ARG 1 parentKey
+	CLASS C_dxgwghhk InMemoryStorage
+		FIELD f_alenzwoq entries Ljava/util/Map;
+		FIELD f_zcgnytxp LOGGER Lorg/apache/logging/log4j/Logger;
+		METHOD m_jxopatrk (Lnet/minecraft/unmapped/C_wqxmvzdq$C_olezqsef;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Encoder;ILjava/lang/Object;Lcom/mojang/serialization/Lifecycle;)V
+			ARG 1 registryManager
+			ARG 3 encoder
+		METHOD m_ocndafbj (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/stream/Stream;
+			ARG 1 key
+		CLASS C_wjyewjgq Entry
+			FIELD f_nbfeojgc id I
+			FIELD f_qjmyrjrm data Lcom/google/gson/JsonElement;
+			FIELD f_vqbtifdu lifecycle Lcom/mojang/serialization/Lifecycle;
+			METHOD <init> (Lcom/google/gson/JsonElement;ILcom/mojang/serialization/Lifecycle;)V
+				ARG 1 data
+				ARG 2 id
+				ARG 3 lifecycle
+			METHOD equals (Ljava/lang/Object;)Z
+				ARG 1 o
+			METHOD m_knfkipba id ()I
+			METHOD m_nhbzuxgg data ()Lcom/google/gson/JsonElement;
+			METHOD m_uttvipza lifecycle ()Lcom/mojang/serialization/Lifecycle;
+	CLASS C_rcqgptir ParsedEntry
+		FIELD f_mltoydba fixedId Ljava/util/OptionalInt;
+		FIELD f_yjqahsxc value Ljava/lang/Object;
+		METHOD <init> (Ljava/lang/Object;Ljava/util/OptionalInt;)V
+			ARG 1 value
+			ARG 2 fixedId
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_ooslbwrc fixedId ()Ljava/util/OptionalInt;
+		METHOD m_pmyswjeu of (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_nyvkclsy$C_rcqgptir;
+			ARG 0 value
+		METHOD m_rbqogdzh of (Ljava/lang/Object;I)Lnet/minecraft/unmapped/C_nyvkclsy$C_rcqgptir;
+			ARG 0 value
+			ARG 1 id
+		METHOD m_yxefbkia value ()Ljava/lang/Object;
+	CLASS C_tkvjgrmn
+		FIELD f_najpkodl EXTENSION Ljava/lang/String;
+		METHOD m_gszqxngw (Ljava/lang/String;Ljava/util/Set;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_ncpywfca;)V
+			ARG 3 resource
+		METHOD m_knqrkdjc composeIdentifier (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_ncpywfca;
+			ARG 0 parentKey
+			ARG 1 registryKey
+		METHOD m_pbzfkjhw (Ljava/lang/String;)Z
+			ARG 0 path
+		METHOD m_xxrdwuxo getValuePath (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/String;
+			ARG 0 registryKey

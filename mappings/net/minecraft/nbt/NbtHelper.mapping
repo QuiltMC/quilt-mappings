@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
+	FIELD f_jdttbsso KEY_VALUE_SPLITTER Lcom/google/common/base/Splitter;
 	FIELD f_jktlnznm LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD f_rokxnpke COMMA_SPLITTER Lcom/google/common/base/Splitter;
 	METHOD m_encokmig toGameProfile (Lnet/minecraft/unmapped/C_hhlwcnih;)Lcom/mojang/authlib/GameProfile;
@@ -12,8 +13,12 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 	METHOD m_fzlwqgip writeGameProfile (Lnet/minecraft/unmapped/C_hhlwcnih;Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 compound
 		ARG 1 profile
-	METHOD m_gvvozwih (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/lang/String;
-		ARG 0 compound
+	METHOD m_gvvozwih blockStateNbtToString (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/lang/String;
+		ARG 0 nbt
+	METHOD m_hsglylsh blockStateStringToNbt (Ljava/lang/String;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 blockStateString
+	METHOD m_jbtqgxda (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;)Ljava/lang/String;
+		ARG 1 key
 	METHOD m_nvmuisif toUuid (Lnet/minecraft/unmapped/C_bkvarokd;)Ljava/util/UUID;
 		COMMENT Deserializes an NBT element into a {@link UUID}.
 		COMMENT The NBT element's data must have the same structure as the output of {@link #fromUuid}.
@@ -21,9 +26,13 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 		COMMENT @throws IllegalArgumentException if {@code element} is not a valid representation of a UUID
 		COMMENT @since 20w10a
 		ARG 0 element
+	METHOD m_oifycahn (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 2 property
 	METHOD m_owyzwhdz nameValue (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Comparable;)Ljava/lang/String;
 		ARG 0 property
 		ARG 1 value
+	METHOD m_pblkkiox fromSnbt (Ljava/lang/String;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 snbt
 	METHOD m_pxvpkbfz fromUuid (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_qkxiqejc;
 		COMMENT Serializes a {@link UUID} into its equivalent NBT representation.
 		COMMENT
@@ -32,7 +41,7 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 	METHOD m_qgchuptq fromBlockState (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 state
 	METHOD m_qwktpkba (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		ARG 0 compound
+		ARG 0 nbt
 	METHOD m_rawecpam toPrettyPrintedText (Lnet/minecraft/unmapped/C_bkvarokd;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 element
 	METHOD m_skmtimil toBlockPos (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hynzadkk;
@@ -50,7 +59,9 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 		ARG 3 oldVersion
 			COMMENT the data version of the NBT compound object
 	METHOD m_vqnuasws (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		ARG 0 compound
+		ARG 0 nbt
+	METHOD m_wcjizhwl fromFluidState (Lnet/minecraft/unmapped/C_xqketiuf;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 state
 	METHOD m_wqklvkdy matches (Lnet/minecraft/unmapped/C_bkvarokd;Lnet/minecraft/unmapped/C_bkvarokd;Z)Z
 		ARG 0 standard
 		ARG 1 subject
@@ -70,4 +81,4 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 	METHOD m_ykgtsmrr fromBlockPos (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 pos
 	METHOD m_zvkxwrvc toPrettyPrintedString (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/lang/String;
-		ARG 0 compound
+		ARG 0 nbt

@@ -13,7 +13,7 @@ import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
-import quilt.internal.tasks.lint.JavadocLintTask;
+import quilt.internal.tasks.lint.MappingLintTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
@@ -52,7 +52,7 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class);
         tasks.create(RemapUnpickDefinitionsTask.TASK_NAME, RemapUnpickDefinitionsTask.class);
         tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
-        tasks.create(JavadocLintTask.TASK_NAME, JavadocLintTask.class);
+        tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {
