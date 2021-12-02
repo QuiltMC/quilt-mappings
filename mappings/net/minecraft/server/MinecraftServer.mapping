@@ -174,12 +174,12 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_hlglehvn save (ZZZ)Z
 		COMMENT Saves both the server data and the player data to the data storage device.
 		COMMENT
-		COMMENT @return whether saving was successful
+		COMMENT @return {@code true} if saving was successful, otherwise {@code false}
 		ARG 1 suppressLogs
 		ARG 2 flush
 			COMMENT if it should immediately write all data to storage device
 		ARG 3 force
-			COMMENT when set to true, all the {@link ServerWorld}s will be saved even if {@link ServerWorld#savingDisabled} is set to true
+			COMMENT when set to {@code true}, all the {@link ServerWorld}s will be saved even if {@link ServerWorld#savingDisabled} is set to true
 	METHOD m_hqlvsdst getSavePath (Lnet/minecraft/unmapped/C_ldtdvgrs;)Ljava/nio/file/Path;
 		ARG 1 worldSavePath
 	METHOD m_hrqzcsgt dumpThreads (Ljava/nio/file/Path;)V
@@ -373,10 +373,10 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_wyhqhpek getPlayerIdleTimeout ()I
 	METHOD m_xchalxdt saveAllWorlds (ZZZ)Z
 		COMMENT Saves the server to the data storage device.
-		COMMENT
+		COMMENT <p>
 		COMMENT To store the player data in addition to server data, call {@link #save} instead.
 		COMMENT
-		COMMENT @return whether saving was successful
+		COMMENT @return {@code true} if saving was successful, otherwise {@code false}
 		ARG 1 suppressLogs
 		ARG 2 flush
 			COMMENT if it should immediately write all data to storage device
