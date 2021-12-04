@@ -1,0 +1,85 @@
+CLASS net/minecraft/unmapped/C_avcaqucb net/minecraft/nbt/scanner/NbtScanner
+	COMMENT An NBT scanner may reduce unnecessary data parsing to allow finding
+	COMMENT desired information in an NBT structure as fast as possible.
+	COMMENT <p>
+	COMMENT Call format: start -> VisitBody
+	COMMENT <br>
+	COMMENT VisitBody:<br>
+	COMMENT { visitNull | visitString | visitByte | visitShort | visitInt<br>
+	COMMENT  | visitLong | visitFloat | visitDouble | visitByteArray<br>
+	COMMENT  | visitIntArray | visitLongArray<br>
+	COMMENT  | visitListMeta -> [startListItem -> VisitBody]* -> endNested<br>
+	COMMENT  | [visitSubNbtType -> startSubNbt -> VisitBody]* -> endNested<br>
+	COMMENT }
+	COMMENT <p>
+	COMMENT The visit order is depth-first.
+	METHOD m_apaktqwn visitIntArray ([I)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_ckcqjymk startListItem (Lnet/minecraft/unmapped/C_ueidorcc;I)Lnet/minecraft/unmapped/C_avcaqucb$C_bucfodok;
+		COMMENT Starts a visit to an NBT structure in an element of a list NBT.
+		COMMENT
+		COMMENT @see #startSubNbt
+		COMMENT @see #start
+		ARG 1 type
+		ARG 2 index
+	METHOD m_cpvkzvrq visitLong (J)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_djgcjkpx endNested ()Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		COMMENT Ends a nested visit.
+		COMMENT <p>
+		COMMENT This is guaranteed to be called once for each call to {@link #start},
+		COMMENT {@link #visitSubNbtType}, and {@link #startListItem} where the list or
+		COMMENT the compound NBT type is passed, unless the visit is halted.
+	METHOD m_dmwshram visitListMeta (Lnet/minecraft/unmapped/C_ueidorcc;I)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 entryType
+		ARG 2 length
+	METHOD m_egdjbtus visitNull ()Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+	METHOD m_hjuyybjw visitShort (S)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_jhuviuuu visitByte (B)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_jipyfehb visitLongArray ([J)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_juncwaki visitSubNbtType (Lnet/minecraft/unmapped/C_ueidorcc;)Lnet/minecraft/unmapped/C_avcaqucb$C_bucfodok;
+		ARG 1 type
+	METHOD m_niueuvdr visitInt (I)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_okyxwgkd visitString (Ljava/lang/String;)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_olkhfwkh visitDouble (D)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_waduuipu startSubNbt (Lnet/minecraft/unmapped/C_ueidorcc;Ljava/lang/String;)Lnet/minecraft/unmapped/C_avcaqucb$C_bucfodok;
+		COMMENT Starts a visit to an NBT structure in the sub NBT of a compound NBT.
+		COMMENT
+		COMMENT @see #start
+		COMMENT @see #startListItem
+		ARG 1 type
+		ARG 2 key
+	METHOD m_wbprlpay visitFloat (F)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_ymjshdyo visitByteArray ([B)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		ARG 1 value
+	METHOD m_zjnkdjso start (Lnet/minecraft/unmapped/C_ueidorcc;)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		COMMENT Starts a visit to an NBT structure.
+		COMMENT
+		COMMENT @see #startSubNbt
+		COMMENT @see #startListItem
+		ARG 1 type
+	CLASS C_bucfodok NestedResult
+		FIELD f_dolvioxu Lnet/minecraft/unmapped/C_avcaqucb$C_bucfodok;
+			COMMENT Proceeds to visit more data of this element, or to enter this element.
+			COMMENT This element is either a list element or a sub NBT.
+		FIELD f_lpjmwtad Lnet/minecraft/unmapped/C_avcaqucb$C_bucfodok;
+			COMMENT Skips this element and visit the next list element or sub NBT.
+		FIELD f_pkgsxrgf Lnet/minecraft/unmapped/C_avcaqucb$C_bucfodok;
+			COMMENT Halts the whole scanning completely.
+		FIELD f_qhflrpze Lnet/minecraft/unmapped/C_avcaqucb$C_bucfodok;
+			COMMENT Skips the whole list or compound NBT currently under scan.
+			COMMENT Will make a call to {@link NbtScanner#endNested()}.
+	CLASS C_ysedvtle Result
+		FIELD f_drwmzuin Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+			COMMENT Proceed to visit more data of this element.
+		FIELD f_irsnidyo Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+			COMMENT Skips the current element under scan.
+		FIELD f_kpjgfhsy Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+			COMMENT Halts the whole scanning completely.
