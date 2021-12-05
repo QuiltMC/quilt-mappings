@@ -1,0 +1,77 @@
+CLASS net/minecraft/unmapped/C_cropbciq net/minecraft/world/tick/WorldTickScheduler
+	FIELD f_duvyjqsr chunkTickSchedulers Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_dxznqiir chunkScheduleUpdater Ljava/util/function/BiConsumer;
+	FIELD f_dyoozhkl tickableChunkTickSchedulers Ljava/util/Queue;
+	FIELD f_gcvwqutn tickableTicksSet Ljava/util/Set;
+	FIELD f_kyfxxkam alreadyTickedTicks Ljava/util/List;
+	FIELD f_nialqvxh nextTickByChunkPos Lit/unimi/dsi/fastutil/longs/Long2LongMap;
+	FIELD f_sikbusov tickableTicks Ljava/util/Queue;
+	FIELD f_uefcjhha profiler Ljava/util/function/Supplier;
+	FIELD f_yocvhxug tickCheckPredicate Ljava/util/function/LongPredicate;
+	METHOD <init> (Ljava/util/function/LongPredicate;Ljava/util/function/Supplier;)V
+		ARG 1 tickCheckPredicate
+		ARG 2 profiler
+	METHOD m_artlbdzf collectTicks (JILnet/minecraft/unmapped/C_eslcbfsq;)V
+		ARG 1 time
+		ARG 3 maxTicks
+		ARG 4 profiler
+	METHOD m_etctsxlj scheduleTicks (Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_ceivtqhh;)V
+		ARG 1 area
+		ARG 2 offset
+	METHOD m_evthuywv (Lnet/minecraft/unmapped/C_vzzkwuje;Lnet/minecraft/unmapped/C_bokjrzyn;)V
+		ARG 1 chunkTickScheduler
+		ARG 2 tick
+	METHOD m_eydezffo (Lit/unimi/dsi/fastutil/longs/Long2LongOpenHashMap;)V
+		ARG 0 map
+	METHOD m_gnhzbdvm schedule (Lnet/minecraft/unmapped/C_bokjrzyn;)V
+		ARG 1 rick
+	METHOD m_gpdcrqnv (Lnet/minecraft/unmapped/C_vzzkwuje;Lnet/minecraft/unmapped/C_vzzkwuje;)I
+		ARG 0 chunkTickScheduler
+		ARG 1 chunkTickScheduler2
+	METHOD m_huwosxon (Ljava/util/List;JLnet/minecraft/unmapped/C_vzzkwuje;)V
+		ARG 1 chunkPos
+		ARG 3 chunkTickScheduler
+	METHOD m_ivauxqhk clearNextTicksInArea (Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		ARG 1 area
+	METHOD m_kbqdobwk addChunkTickScheduler (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_vzzkwuje;)V
+		ARG 1 pos
+		ARG 2 chunkTickScheduler
+	METHOD m_lodesjul removeChunkTickScheduler (Lnet/minecraft/unmapped/C_ynrszrtu;)V
+		ARG 1 pos
+	METHOD m_mpiwjtfs delayAllTicks ()V
+	METHOD m_mxvuxgia clear ()V
+	METHOD m_oeewtkni visitChunks (Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_cropbciq$C_bruemznp;)V
+		ARG 1 area
+		ARG 2 visitor
+	METHOD m_ojdselff tick (JILjava/util/function/BiConsumer;)V
+		ARG 1 time
+		ARG 3 maxTicks
+		ARG 4 ticker
+	METHOD m_owggwntl addTickableTick (Lnet/minecraft/unmapped/C_bokjrzyn;)V
+		ARG 1 tick
+	METHOD m_qnihjvcl tick (Ljava/util/function/BiConsumer;)V
+		ARG 1 ticker
+	METHOD m_qrnqiohl (Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_bokjrzyn;)Z
+		ARG 1 tick
+	METHOD m_qrrlhfwv addTickableTicks (Ljava/util/Queue;Lnet/minecraft/unmapped/C_vzzkwuje;JI)V
+		ARG 1 tickableChunkTickSchedulers
+		ARG 2 chunkTickScheduler
+		ARG 3 time
+		ARG 5 maxTicks
+	METHOD m_qtgueepu collectTickableChunkTickSchedulers (J)V
+		ARG 1 time
+	METHOD m_rbxugozc (Lnet/minecraft/unmapped/C_ceivtqhh;JJLnet/minecraft/unmapped/C_bokjrzyn;)V
+		ARG 6 tick
+	METHOD m_twpciapk addTickableTicks (JI)V
+		ARG 1 time
+		ARG 3 maxTicks
+	METHOD m_txmpppgy canScheduleMoreTicks (I)Z
+		ARG 1 maxTicks
+	METHOD m_uopbsucb copyTickableTicksList ()V
+	METHOD m_vfnqqqmz (Ljava/util/function/Predicate;JLnet/minecraft/unmapped/C_vzzkwuje;)V
+		ARG 2 chunkPos
+		ARG 4 chunkTickScheduler
+	CLASS C_bruemznp ChunkVisitor
+		METHOD accept accept (JLnet/minecraft/unmapped/C_vzzkwuje;)V
+			ARG 1 chunkPos
+			ARG 3 chunkTickScheduler
