@@ -5,6 +5,14 @@ CLASS net/minecraft/unmapped/C_eslcbfsq net/minecraft/util/profiler/Profiler
 	METHOD m_jjmwsbti swap (Ljava/lang/String;)V
 		ARG 1 location
 	METHOD m_kztfmexz endTick ()V
+	METHOD m_nzpjxjnd visit (Ljava/lang/String;I)V
+		COMMENT Increment the visit count for a marker.
+		COMMENT
+		COMMENT <p>
+		COMMENT This is useful to keep track of number of calls made to performance-
+		COMMENT wise expensive methods.
+		ARG 1 marker
+			COMMENT a unique marker
 	METHOD m_ppktxxru startTick ()V
 	METHOD m_qgopqkdg pop ()V
 	METHOD m_rifejyps visit (Ljava/lang/String;)V
@@ -33,3 +41,15 @@ CLASS net/minecraft/unmapped/C_eslcbfsq net/minecraft/util/profiler/Profiler
 		ARG 1 locationGetter
 	METHOD m_yoqjygir push (Ljava/lang/String;)V
 		ARG 1 location
+	METHOD m_zqflletf visit (Ljava/util/function/Supplier;I)V
+		COMMENT Increment the visit count for a marker.
+		COMMENT
+		COMMENT <p>
+		COMMENT This is useful to keep track of number of calls made to performance-
+		COMMENT wise expensive methods.
+		COMMENT
+		COMMENT <p>
+		COMMENT This method is preferred if getting the marker is costly; the
+		COMMENT supplier won't be called if the profiler is disabled.
+		ARG 1 markerGetter
+			COMMENT the getter for a unique marker

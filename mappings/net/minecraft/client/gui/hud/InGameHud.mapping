@@ -22,6 +22,7 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/InGameHud
 	FIELD f_ltmotklr playerListHud Lnet/minecraft/unmapped/C_lybmfibg;
 	FIELD f_mbfhxemn lastHealthValue I
 	FIELD f_molrisjm SPYGLASS_SCOPE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_mzeltiyn AUTOSAVE_INDICATOR_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ocktlbdn WIDGETS_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_olhanlzw random Ljava/util/Random;
 	FIELD f_orrhdflv POWDER_SNOW_OUTLINE Lnet/minecraft/unmapped/C_ncpywfca;
@@ -38,7 +39,9 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/InGameHud
 	FIELD f_wdxanqli listeners Ljava/util/Map;
 	FIELD f_xcfkuvos spectatorHud Lnet/minecraft/unmapped/C_ybztcyiy;
 	FIELD f_xlbbyvwz renderHealthValue I
+	FIELD f_xpbfsavr lastAutosaveIndicatorAlpha F
 	FIELD f_yinxfbln scaledWidth I
+	FIELD f_yjiesqbj autosaveIndicatorAlpha F
 	FIELD f_yqesrjzr spyglassScale F
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;)V
 		ARG 1 client
@@ -87,6 +90,8 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/InGameHud
 		ARG 3 yOffset
 		ARG 4 width
 		ARG 5 color
+	METHOD m_koznghsj renderAutosaveIndicator (Lnet/minecraft/unmapped/C_cnszsxvd;)V
+		ARG 1 matrices
 	METHOD m_kukerlrn setTitleTicks (III)V
 		ARG 1 fadeInTicks
 		ARG 2 remainTicks
@@ -106,6 +111,8 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/InGameHud
 	METHOD m_oxmnnwnm renderMountJumpBar (Lnet/minecraft/unmapped/C_cnszsxvd;I)V
 		ARG 1 matrices
 		ARG 2 x
+	METHOD m_oyrilkmm tick (Z)V
+		ARG 1 paused
 	METHOD m_pjslufig renderHotbarItem (IIFLnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;I)V
 		ARG 1 x
 		ARG 2 y
@@ -140,10 +147,11 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/InGameHud
 	METHOD m_weqpgdfy clear ()V
 	METHOD m_wfsubjse setTitle (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 title
-	METHOD m_wjrmovwk tick ()V
+	METHOD m_wjrmovwk tickPausable ()V
 	METHOD m_wkdzfhws setDefaultTitleFade ()V
 	METHOD m_wwnerxsu renderMountHealth (Lnet/minecraft/unmapped/C_cnszsxvd;)V
 		ARG 1 matrices
+	METHOD m_xgoqlosf tickAutosaveIndicator ()V
 	METHOD m_xqvrdrrt getHeartRows (I)I
 		ARG 1 heartCount
 	METHOD m_yswmdqqp getTicks ()I
