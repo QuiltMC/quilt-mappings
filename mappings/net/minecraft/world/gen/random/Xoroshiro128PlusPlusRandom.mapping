@@ -1,0 +1,27 @@
+CLASS net/minecraft/unmapped/C_ecgonqaw net/minecraft/world/gen/random/Xoroshiro128PlusPlusRandom
+	COMMENT Xoroshiro128++ based pseudo random number generator.
+	COMMENT
+	COMMENT @implNote The actual implementation can be found on {@link Xoroshiro128PlusPlusRandomImpl}.
+	FIELD f_efmuvozv DOUBLE_UNIT D
+	FIELD f_iumgqdkk FLOAT_UNIT F
+	FIELD f_kbkfqrdy gaussianGenerator Lnet/minecraft/unmapped/C_wteivtqp;
+	FIELD f_ovlpndar implementation Lnet/minecraft/unmapped/C_ywtymkjq;
+	METHOD <init> (J)V
+		ARG 1 seed
+	METHOD <init> (JJ)V
+		ARG 1 seedLo
+		ARG 3 seedHi
+	METHOD m_whhjkmse nextBits (I)J
+		COMMENT {@return {@code bits} upper bits of random value}
+		COMMENT
+		COMMENT @implNote In Xoroshiro128++, the lower bits have to be discarded in order
+		COMMENT to ensure proper randomness. For example, to obtain a double, the upper 53
+		COMMENT bits, instead of the lower 53 bits.
+		ARG 1 bits
+	CLASS C_oqpdjbii XoroshiroPositionalRandomFactory
+		FIELD f_itxklrst MD5_HASHER Lcom/google/common/hash/HashFunction;
+		FIELD f_snogoaxt seedHi J
+		FIELD f_vdgmzmhs seedLo J
+		METHOD <init> (JJ)V
+			ARG 1 seedLo
+			ARG 3 seedHi
