@@ -1,15 +1,19 @@
 CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/StructureFeature
+	FIELD f_jdkvzjyf piecesGenerator Lnet/minecraft/unmapped/C_ukcqthce;
 	FIELD f_lsfsrihv STRUCTURE_TO_GENERATION_STEP Ljava/util/Map;
 	FIELD f_nefdqwhz MAX_STRUCTURE_RANGE I
-	FIELD f_qyedxhax SWAMP_HUT Lnet/minecraft/unmapped/C_vvmtobpf;
 	FIELD f_tpqwkoch codec Lcom/mojang/serialization/Codec;
 	FIELD f_yctoxrat STRUCTURES Lcom/google/common/collect/BiMap;
 	FIELD f_zalymdqm LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD f_zcxcnywk LAND_MODIFYING_STRUCTURES Ljava/util/List;
+	FIELD f_zzcuzwlv postPlacementProcessor Lnet/minecraft/unmapped/C_kgyvgadg;
 	METHOD <init> (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ukcqthce;)V
 		ARG 1 codec
+		ARG 2 piecesGenerator
 	METHOD <init> (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ukcqthce;Lnet/minecraft/unmapped/C_kgyvgadg;)V
 		ARG 1 codec
+		ARG 2 piecesGenerator
+		ARG 3 postPlacementProcessor
 	METHOD m_aovapzws readStructureStart (Lnet/minecraft/unmapped/C_ywyzxrzo;Lnet/minecraft/unmapped/C_hhlwcnih;J)Lnet/minecraft/unmapped/C_efiavfys;
 		ARG 0 context
 		ARG 1 nbt
@@ -46,6 +50,7 @@ CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/Structur
 		COMMENT <p>
 		COMMENT If this structure doesn't have a starting point in the chunk, {@link StructureStart#DEFAULT}
 		COMMENT will be returned.
+		ARG 1 registryManager
 		ARG 2 generator
 		ARG 3 biomeSource
 		ARG 4 manager
@@ -55,9 +60,14 @@ CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/Structur
 		ARG 9 structureConfig
 		ARG 10 config
 		ARG 11 world
+		ARG 12 validBiomePredicate
 	METHOD m_mvmoeepg (Lnet/minecraft/unmapped/C_licgnyqv;)Lnet/minecraft/unmapped/C_jpnewgxf;
 		ARG 0 feature
 	METHOD m_naklggtc getName ()Ljava/lang/String;
+	METHOD m_pzalezec getPostPlacementProcessor ()Lnet/minecraft/unmapped/C_kgyvgadg;
+	METHOD m_rcmdjavw getLocatedPos (Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_hynzadkk;
+		COMMENT {@return a block position for feature location}
+		ARG 1 chunkPos
 	METHOD m_svbzmrlp getStartChunk (Lnet/minecraft/unmapped/C_eaybxiiq;JII)Lnet/minecraft/unmapped/C_ynrszrtu;
 		COMMENT Determines the cell of the structure placement grid a chunk belongs to, and
 		COMMENT returns the chunk within that cell, that this structure will actually be placed at.
@@ -72,10 +82,22 @@ CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/Structur
 		ARG 2 worldSeed
 		ARG 4 chunkX
 		ARG 5 chunkY
+	METHOD m_titzgnss canGenerate (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_rhdulivw;JLnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)Z
+		ARG 1 registrymanager
+		ARG 2 chunkGenerator
+		ARG 3 biomeSource
+		ARG 4 structureManager
+		ARG 5 seed
+		ARG 7 chunkPos
+		ARG 8 config
+		ARG 9 heightLimitView
+		ARG 10 validBiomePredicate
 	METHOD m_wgtscimf configure (Lnet/minecraft/unmapped/C_jpnewgxf;)Lnet/minecraft/unmapped/C_licgnyqv;
 		ARG 1 config
 	METHOD m_xnhhytsz register (Ljava/lang/String;Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;)Lnet/minecraft/unmapped/C_vvmtobpf;
 		ARG 0 name
 		ARG 1 structureFeature
 		ARG 2 step
+	METHOD m_ytkcoysw adjustBoundingBox (Lnet/minecraft/unmapped/C_hmqypqzz;)Lnet/minecraft/unmapped/C_hmqypqzz;
+		ARG 1 box
 	METHOD m_ywspjwtx getCodec ()Lcom/mojang/serialization/Codec;
