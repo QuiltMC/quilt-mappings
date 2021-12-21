@@ -90,11 +90,13 @@ dependencies {
 
 import quilt.internal.Constants
 import quilt.internal.tasks.build.AddProposedFieldMappingsTask
+import quilt.internal.tasks.build.EraseBytecodeTask
 import quilt.internal.tasks.build.MappingsV2JarTask
 import quilt.internal.decompile.Decompilers
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
 import quilt.internal.tasks.decompile.DecompileTask
+import quilt.internal.util.MappingsJavadocProvider
 
 clean.doFirst {
 	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft
@@ -123,12 +125,12 @@ remapUnpickDefinitions {
 	mappings = buildTinyWithEnum.outputMappings
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-	it.options.release = 16
+	it.options.release = 17
 }
 
 sourceSets {
@@ -180,16 +182,36 @@ task v2MergedMappingsJar(dependsOn: ["mergeTinyV2"], type: MappingsV2JarTask) {
 	mappings = mergeTinyV2.outputMappings
 }
 
+task eraseBytecode(type: EraseBytecodeTask, dependsOn: mapNamedJar) {
+	jarFile = mappings.fileConstants.namedJar
+	output = file(".gradle/temp/erased-classes/")
+}
+
+task zipErasedBytecode(type: Zip, dependsOn: eraseBytecode) {
+	from eraseBytecode.output
+	archiveName = "erased-classes.jar"
+	destinationDirectory = mappings.fileConstants.tempDir
+}
+
 def fakeSourceDir = file(".gradle/temp/fakeSource")
-task genFakeSource(type: JavaExec, dependsOn: ["mergeTinyV2", "mapNamedJar"]) {
-	group = "javadoc generation"
-	outputs.upToDateWhen { false }
+task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, zipErasedBytecode]) {
+	input = zipErasedBytecode.outputs.getFiles().getSingleFile()
+	output = fakeSourceDir
+	decompiler = Decompilers.QUILTFLOWER
+	libraries = files(mappings.fileConstants.libraries)
+	decompilerOptions = [
+			"rsy": "1", // remove synthetics
+			"pll": "99999" // pll (Preferred Line Length) is length for line wrapping
+	]
 
-	mainClass = "org.quiltmc.mappingpoet.Main"
-	classpath configurations.mappingPoet
-	// use merged v2 so we have all namespaces in jd
-	args mergeTinyV2.outputMappings.getAbsolutePath(), mappings.fileConstants.namedJar.getAbsolutePath(), fakeSourceDir.getAbsolutePath(), mappings.fileConstants.libraries.getAbsolutePath()
+	def jdProvider = new MappingsJavadocProvider(mergeTinyV2.outputMappings, "named")
+	classJavadocProvider(jdProvider)
+	fieldJavadocProvider(jdProvider)
+	methodJavadocProvider(jdProvider)
 
+	doFirst {
+		fakeSourceDir.deleteDir()
+	}
 	doLast {
 		logger.lifecycle ":Fake source generated"
 	}
@@ -218,17 +240,10 @@ task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 }
 
 javadoc {
-//	dependsOn genFakeSource
+	dependsOn genFakeSource
 	dependsOn downloadMinecraftLibraries
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
-
-	if (ENV.CI) {
-		// Java 17 is provided on CI to build the javadocs with, see https://github.com/FabricMC/yarn/issues/2429
-		javadocTool = javaToolchains.javadocToolFor {
-			languageVersion = JavaLanguageVersion.of(17)
-		}
-	}
 
 	def mappingPoetJar = project.provider { zipTree configurations.mappingPoetJar.singleFile }
 
@@ -238,7 +253,7 @@ javadoc {
 	// verbose = true // enable to debug
 	options {
 		// verbose() // enable to debug
-		source = "16"
+		source = "17"
 		encoding = 'UTF-8'
 		charSet = 'UTF-8'
 		memberLevel = JavadocMemberLevel.PRIVATE
@@ -268,15 +283,15 @@ javadoc {
 				'https://commons.apache.org/proper/commons-codec/archives/1.10/apidocs',
 				'https://commons.apache.org/proper/commons-compress/javadocs/api-1.8.1/',
 				"https://maven.fabricmc.net/docs/fabric-loader-${project.fabric_loader_version}/",
-				"https://docs.oracle.com/en/java/javase/16/docs/api/"
+				"https://docs.oracle.com/en/java/javase/17/docs/api/"
 		)
-		// https://docs.oracle.com/en/java/javase/16/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
+		// https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
 		addBooleanOption 'Xdoclint:html', true
 		addBooleanOption 'Xdoclint:syntax', true
 		addBooleanOption 'Xdoclint:reference', true
 		addBooleanOption 'Xdoclint:accessibility', true
 	}
-	source /*fileTree(fakeSourceDir) +*/ sourceSets.constants.allJava + sourceSets.packageDocs.allJava
+	source fileTree(fakeSourceDir) + sourceSets.constants.allJava + sourceSets.packageDocs.allJava
 	classpath = configurations.javadocClasspath.plus downloadMinecraftLibraries.outputs.files.asFileTree
 
 	doLast {
