@@ -1,24 +1,25 @@
 CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
-	FIELD f_axzzilwx KEYS_BY_ID Ljava/util/Map;
+	FIELD f_axzzilwx KEY_BIND_BY_ID Ljava/util/Map;
 	FIELD f_dabvqpsd translationKey Ljava/lang/String;
 	FIELD f_dynqxsuy timesPressed I
-	FIELD f_frtwuquy CATEGORY_ORDER_MAP Ljava/util/Map;
+	FIELD f_frtwuquy ORDER_BY_CATEGORIES Ljava/util/Map;
 	FIELD f_isrvhtqu MOVEMENT_CATEGORY Ljava/lang/String;
 	FIELD f_kcphxfdy GAMEPLAY_CATEGORY Ljava/lang/String;
-	FIELD f_khpbnlde KEY_TO_BIND Ljava/util/Map;
+	FIELD f_khpbnlde KEY_BIND_BY_KEY Ljava/util/Map;
 	FIELD f_lmswahcj boundKey Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;
 	FIELD f_lzdjizfk MISC_CATEGORY Ljava/lang/String;
 	FIELD f_mcjktbbz defaultKey Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;
-	FIELD f_nayvtjco UI_CATEGORY Ljava/lang/String;
-	FIELD f_ppynlrbj KEY_CATEGORIES Ljava/util/Set;
+	FIELD f_nayvtjco GAME_INTERFACE_CATEGORY Ljava/lang/String;
+		COMMENT This key bind category is unused on Minecraft. Please use either {@link MISC_CATEGORY} or a custom key bind category
+	FIELD f_ppynlrbj KEY_BIND_CATEGORIES Ljava/util/Set;
 	FIELD f_pseqyjfw category Ljava/lang/String;
 	FIELD f_svgjbnwm INVENTORY_CATEGORY Ljava/lang/String;
 	FIELD f_zbyhbkzm MULTIPLAYER_CATEGORY Ljava/lang/String;
 	FIELD f_zfcgiyqi pressed Z
-	FIELD f_zhfqtbav CREATIVE_CATEGORY Ljava/lang/String;
+	FIELD f_zhfqtbav CREATIVE_MODE_CATEGORY Ljava/lang/String;
 	METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
 		ARG 1 translationKey
-		ARG 2 code
+		ARG 2 keyCode
 		ARG 3 category
 	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_vdmgqzcl$C_uocctrrt;ILjava/lang/String;)V
 		ARG 1 translationKey
@@ -27,8 +28,8 @@ CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
 		ARG 4 category
 	METHOD compareTo (Ljava/lang/Object;)I
 		ARG 1 other
-	METHOD m_blqmdugx matchesMouse (I)Z
-		ARG 1 code
+	METHOD m_blqmdugx matchesMouseButton (I)Z
+		ARG 1 button
 	METHOD m_dvvrqcxa reset ()V
 	METHOD m_fmzpyagn isDefault ()Z
 	METHOD m_gaavbsyf getBoundKeyTranslationKey ()Ljava/lang/String;
@@ -46,7 +47,7 @@ CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
 	METHOD m_hfuhalee setPressed (Z)V
 		ARG 1 pressed
 	METHOD m_isuoshsj getDefaultKey ()Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;
-	METHOD m_jmbdmqyl updateKeysByCode ()V
+	METHOD m_jmbdmqyl updateKeyBindByKey ()V
 	METHOD m_ktykqjqb getBoundKeyLocalizedText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_nbuirqvv updatePressedStates ()V
 	METHOD m_oicaydpw getLocalizedName (Ljava/lang/String;)Ljava/util/function/Supplier;
@@ -61,14 +62,14 @@ CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
 	METHOD m_vnukpaip wasPressed ()Z
 		COMMENT {@return if the key was pressed}
 		COMMENT
-		COMMENT <p>A key binding counts the number of times the key is pressed. This
+		COMMENT <p>A key bind counts the number of times the key is pressed. This
 		COMMENT method "consumes" it and returns {@code true} as many times as the key
 		COMMENT is pressed.
 		COMMENT
 		COMMENT <p>To consume all remaining key presses, while-loop idiom can be used:
 		COMMENT <pre>
 		COMMENT {@code
-		COMMENT while(keyBinding.wasPressed()) {
+		COMMENT while(keyBind.wasPressed()) {
 		COMMENT   // do your action
 		COMMENT }
 		COMMENT }
