@@ -33,7 +33,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	FIELD f_eximcoup LOOT_NBT_PROVIDER_TYPE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_eyuijikl MATERIAL_RULE_WORLDGEN Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_ezhwzxqi MENU_KEY Lnet/minecraft/unmapped/C_xhhleach;
-	FIELD f_fdfmzecx LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_fdfmzecx LOGGER Lorg/slf4j/Logger;
 	FIELD f_flecaadj registryKey Lnet/minecraft/unmapped/C_xhhleach;
 		COMMENT The key representing the type of elements held by this registry. It is also the
 		COMMENT key of this registry within the root registry.
@@ -80,7 +80,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	FIELD f_oypcdtin SENSOR_TYPE_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_pedoxkfv FEATURE_SIZE_TYPE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_plrstgsi STRUCTURE_PIECE_KEY Lnet/minecraft/unmapped/C_xhhleach;
-	FIELD f_pvhvmowj DEFAULT_ENTRIES Ljava/util/Map;
+	FIELD f_pvhvmowj LOADERS Ljava/util/Map;
 	FIELD f_qhlwawsd BIOME_SOURCE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_qmywhemi TREE_DECORATOR_TYPE_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_qprkrvgq FEATURE_KEY Lnet/minecraft/unmapped/C_xhhleach;
@@ -146,6 +146,8 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	METHOD <init> (Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Lifecycle;)V
 		ARG 1 key
 		ARG 2 lifecycle
+	METHOD keys keys (Lcom/mojang/serialization/DynamicOps;)Ljava/util/stream/Stream;
+		ARG 1 dynamicOps
 	METHOD m_agebnisp getLifecycle ()Lcom/mojang/serialization/Lifecycle;
 	METHOD m_akxosniq getKey ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_bbjbdpdr validate (Lnet/minecraft/unmapped/C_eexxncvi;)V
@@ -155,6 +157,9 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 1 registry
 		ARG 2 defaultEntry
 		ARG 3 lifecycle
+	METHOD m_cbxstfnr (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/function/Supplier;)V
+		ARG 0 registry
+		ARG 1 loader
 	METHOD m_cjwbheqc getKey (Ljava/lang/Object;)Ljava/util/Optional;
 		ARG 1 entry
 	METHOD m_gyctnnhx create (Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/String;Lcom/mojang/serialization/Lifecycle;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_zogerkic;
@@ -188,6 +193,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 1 id
 		ARG 2 entry
 	METHOD m_nqoydeav getEntries ()Ljava/util/Set;
+	METHOD m_pvyfqcdo getCodec ()Lcom/mojang/serialization/Codec;
 	METHOD m_qomglfhh getOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/Object;
 		COMMENT Gets an entry from the registry.
 		COMMENT
@@ -195,11 +201,19 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 1 key
 	METHOD m_slujyvbt containsId (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
+	METHOD m_tqttdjye (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/lang/Object;
+		ARG 1 id
 	METHOD m_tuivosjn getIds ()Ljava/util/Set;
 	METHOD m_ueokaqte contains (Lnet/minecraft/unmapped/C_xhhleach;)Z
 		ARG 1 key
+	METHOD m_uxkpijua (Lnet/minecraft/unmapped/C_eexxncvi;Lnet/minecraft/unmapped/C_eexxncvi;)V
+		ARG 1 registry2
 	METHOD m_uxrzxmkr getRandom (Ljava/util/Random;)Ljava/lang/Object;
 		ARG 1 random
+	METHOD m_vctomypu register (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 registry
+		ARG 1 key
+		ARG 2 entry
 	METHOD m_vnyaisgo getOrEmpty (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
 		ARG 1 id
 	METHOD m_vqpjfuha getId (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ncpywfca;

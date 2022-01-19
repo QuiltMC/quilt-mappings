@@ -67,9 +67,10 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_rdiwmllx debugStart Lnet/minecraft/server/MinecraftServer$C_rfqdsgps;
 	FIELD f_rveeicnt recorderDumpConsumer Ljava/util/function/Consumer;
 	FIELD f_sdzgycyv enforceWhitelist Z
-	FIELD f_tcqyqsco LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f_tcqyqsco LOGGER Lorg/slf4j/Logger;
 	FIELD f_tlfkjive worlds Ljava/util/Map;
 	FIELD f_tvqgbnok ticks I
+	FIELD f_tyymbfil saving Z
 	FIELD f_ucujdczf tickTime F
 	FIELD f_uftadmvp timeReference J
 	FIELD f_undezdps profiler Lnet/minecraft/unmapped/C_eslcbfsq;
@@ -170,6 +171,15 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_haucxujx getKeyPair ()Ljava/security/KeyPair;
 	METHOD m_hbetnrcp isNetherAllowed ()Z
 	METHOD m_hfghaotl getNetworkIo ()Lnet/minecraft/unmapped/C_mitbewqx;
+	METHOD m_hlglehvn save (ZZZ)Z
+		COMMENT Saves both the server data and the player data to the data storage device.
+		COMMENT
+		COMMENT @return {@code true} if saving was successful, otherwise {@code false}
+		ARG 1 suppressLogs
+		ARG 2 flush
+			COMMENT if it should immediately write all data to storage device
+		ARG 3 force
+			COMMENT when set to {@code true}, all the {@link ServerWorld}s will be saved even if {@link ServerWorld#savingDisabled} is set to true
 	METHOD m_hqlvsdst getSavePath (Lnet/minecraft/unmapped/C_ldtdvgrs;)Ljava/nio/file/Path;
 		ARG 1 worldSavePath
 	METHOD m_hrqzcsgt dumpThreads (Ljava/nio/file/Path;)V
@@ -333,6 +343,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_udgarlbd getAdvancementLoader ()Lnet/minecraft/unmapped/C_fktoyupt;
 	METHOD m_uduxadhs getPredicateManager ()Lnet/minecraft/unmapped/C_gztbwabg;
 	METHOD m_ufupjokg getProfiler ()Lnet/minecraft/unmapped/C_eslcbfsq;
+	METHOD m_ugiwpfro isSaving ()Z
 	METHOD m_ujrjhmlu isSpawnProtected (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		ARG 1 world
 		ARG 2 pos
@@ -360,12 +371,12 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_wtjbvmza isFlightEnabled ()Z
 	METHOD m_wuxtoyee getGameRules ()Lnet/minecraft/unmapped/C_xmldumst;
 	METHOD m_wyhqhpek getPlayerIdleTimeout ()I
-	METHOD m_xchalxdt save (ZZZ)Z
+	METHOD m_xchalxdt saveAllWorlds (ZZZ)Z
 		COMMENT Saves the server to the data storage device.
+		COMMENT <p>
+		COMMENT To store the player data in addition to server data, call {@link #save} instead.
 		COMMENT
-		COMMENT To store the player data in addition to server data, call {@link PlayerManager#saveAllPlayerData()}.
-		COMMENT
-		COMMENT @return whether saving was successful
+		COMMENT @return {@code true} if saving was successful, otherwise {@code false}
 		ARG 1 suppressLogs
 		ARG 2 flush
 			COMMENT if it should immediately write all data to storage device

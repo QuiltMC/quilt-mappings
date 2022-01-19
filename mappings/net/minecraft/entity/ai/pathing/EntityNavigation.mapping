@@ -32,6 +32,8 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 	METHOD m_cuxkitjz isIdle ()Z
 	METHOD m_cxhpxjch resetNode ()V
 	METHOD m_czkjkeeb isInLiquid ()Z
+	METHOD m_ectlsmwl checkTimeouts (Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 currentPos
 	METHOD m_eetwccfi isFollowingPath ()Z
 	METHOD m_efjuxjgy startMovingAlong (Lnet/minecraft/unmapped/C_motipebf;D)Z
 		ARG 1 path
@@ -53,8 +55,7 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 		ARG 7 speed
 	METHOD m_ifpmpvgl resetRangeMultiplier ()V
 	METHOD m_ikygleej canSwim ()Z
-	METHOD m_jgfkkhsm onBlockChanged (Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 pos
+	METHOD m_imryvweo continueFollowingPath ()V
 	METHOD m_kgklaorz findPathTo (Lnet/minecraft/unmapped/C_hynzadkk;I)Lnet/minecraft/unmapped/C_motipebf;
 		ARG 1 target
 		ARG 2 distance
@@ -72,6 +73,8 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 		ARG 2 range
 		ARG 3 useHeadPos
 		ARG 4 distance
+	METHOD m_mvysdvtn shouldRecalculatePath (Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 1 pos
 	METHOD m_nchaaiut resetNodeAndStop ()V
 	METHOD m_njwmwegi findPathToAny (Ljava/util/stream/Stream;I)Lnet/minecraft/unmapped/C_motipebf;
 		ARG 1 positions
@@ -88,13 +91,12 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 	METHOD m_qkbmchty stop ()V
 	METHOD m_rhavjrcm createPathNodeNavigator (I)Lnet/minecraft/unmapped/C_jjtdffgj;
 		ARG 1 range
-	METHOD m_rrehjdwn shouldRecalculatePath ()Z
 	METHOD m_shecbiuf shouldJumpToNextNode (Lnet/minecraft/unmapped/C_vgpupfxx;)Z
 		ARG 1 currentPos
+	METHOD m_ttwslddf recalculatePath ()V
 	METHOD m_tzgadsdi getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT The position to act as if the entity is at for pathfinding purposes
 	METHOD m_udhoaois getNodeReachProximity ()F
-	METHOD m_udzoaaun recalculatePath ()V
 	METHOD m_wuqknepy findPathTo (Lnet/minecraft/unmapped/C_astfners;I)Lnet/minecraft/unmapped/C_motipebf;
 		ARG 1 entity
 		ARG 2 distance
@@ -103,5 +105,8 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 		ARG 1 target
 		ARG 2 minDistance
 		ARG 3 maxDistance
+	METHOD m_yvxtcmyo tick ()V
 	METHOD m_zndcxdyx setCanSwim (Z)V
 		ARG 1 canSwim
+	METHOD m_zsklzyvc adjustTargetY (Lnet/minecraft/unmapped/C_vgpupfxx;)D
+		ARG 1 pos

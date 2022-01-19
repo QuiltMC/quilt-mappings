@@ -5,14 +5,26 @@ CLASS net/minecraft/unmapped/C_lmrhoxpe net/minecraft/client/gui/screen/advancem
 	FIELD f_dsxxwcrn client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_dzrngjja display Lnet/minecraft/unmapped/C_bvqakncm;
 	FIELD f_eacglclw title Lnet/minecraft/unmapped/C_apvkgwyi;
+	FIELD f_ehbdeigs HEIGHT I
 	FIELD f_fmshxxol progress Lnet/minecraft/unmapped/C_rpzbknxp;
 	FIELD f_fmwfweeo parent Lnet/minecraft/unmapped/C_lmrhoxpe;
 	FIELD f_jstfnbbj advancement Lnet/minecraft/unmapped/C_kdwyuhdb;
+	FIELD f_mmqbmmjz FRAME_WIDTH I
+	FIELD f_mokjrvzd ICON_X_OFFSET I
+	FIELD f_mpbvozvt BOX_WIDTH I
+	FIELD f_ojjnsgwg BOX_X I
+	FIELD f_ouoxkdgw TITLE_X_OFFSET I
 	FIELD f_qhquetmm WIDGETS_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_qiyiacpr tab Lnet/minecraft/unmapped/C_jijouocm;
 	FIELD f_qqxcossd SPLIT_OFFSET_CANDIDATES [I
+	FIELD f_rhhfudkl ICON_WIDTH I
 	FIELD f_tecxmtqe x I
+	FIELD f_tnrmhbxt TITLE_Y_OFFSET I
 	FIELD f_vtigxpaz y I
+	FIELD f_vtpqmedl MAX_TITLE_WIDTH I
+	FIELD f_vwvltlxj ICON_Y_OFFSET I
+	FIELD f_wjfjwokh TITLE_LEFT_PADDING I
+	FIELD f_zemiqgbx TITLE_RIGHT_PADDING I
 	METHOD <init> (Lnet/minecraft/unmapped/C_jijouocm;Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_kdwyuhdb;Lnet/minecraft/unmapped/C_bvqakncm;)V
 		ARG 1 tab
 		ARG 2 client
@@ -32,10 +44,18 @@ CLASS net/minecraft/unmapped/C_lmrhoxpe net/minecraft/client/gui/screen/advancem
 		ARG 3 y
 	METHOD m_hmjsicbn getParent (Lnet/minecraft/unmapped/C_kdwyuhdb;)Lnet/minecraft/unmapped/C_lmrhoxpe;
 		ARG 1 advancement
-	METHOD m_jdhinbis (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIII)V
+	METHOD m_jdhinbis drawTextureRepeatedly (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIII)V
+		COMMENT Draws a textured rectangle repeatedly to cover the area of {@code
+		COMMENT width} and {@code height}. The last texture is clipped to fit the area.
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
+		ARG 4 width
+		ARG 5 height
+		ARG 6 u
+		ARG 7 v
+		ARG 8 textureWidth
+		ARG 9 textureHeight
 	METHOD m_picsjjkh setProgress (Lnet/minecraft/unmapped/C_rpzbknxp;)V
 		ARG 1 progress
 	METHOD m_rqblqdxc addChild (Lnet/minecraft/unmapped/C_lmrhoxpe;)V
@@ -53,12 +73,24 @@ CLASS net/minecraft/unmapped/C_lmrhoxpe net/minecraft/client/gui/screen/advancem
 		ARG 4 alpha
 		ARG 5 x
 		ARG 6 y
-	METHOD m_wjxljhbv (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIIII)V
+	METHOD m_wjxljhbv renderDescriptionBackground (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIIII)V
+		COMMENT Renders the description background.
+		COMMENT
+		COMMENT @implNote This splits the area into 9 parts (4 corners, 4 edges and 1
+		COMMENT central box) and draws each of them.
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
+		ARG 4 width
+		ARG 5 height
+		ARG 6 cornerSize
+		ARG 7 textureWidth
+		ARG 8 textureHeight
+		ARG 9 u
+		ARG 10 v
 	METHOD m_zkxcpxme getWidth ()I
 	METHOD m_znvszxjv renderLines (Lnet/minecraft/unmapped/C_cnszsxvd;IIZ)V
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
+		ARG 4 border
