@@ -1,13 +1,13 @@
 package quilt.internal.tasks.lint;
 
+import java.util.Locale;
+import java.util.function.Function;
+
 import cuchaz.enigma.translation.mapping.EntryMapping;
 import cuchaz.enigma.translation.representation.AccessFlags;
 import cuchaz.enigma.translation.representation.TypeDescriptor;
 import cuchaz.enigma.translation.representation.entry.Entry;
 import cuchaz.enigma.translation.representation.entry.FieldEntry;
-
-import java.util.Locale;
-import java.util.function.Function;
 
 public final class FieldNamingChecker implements Checker<FieldEntry> {
     @Override
@@ -24,9 +24,13 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
             if (startsWithUppercase(mapping.targetName())) {
                 errorReporter.warning("atomic field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
             }
-        } else if (access.isStatic() && access.isFinal()) {
+        } else if (access != null && access.isStatic() && access.isFinal()) {
             if (!isConstantCase(mapping.targetName())) {
-                errorReporter.error("static final field is not in CONSTANT_CASE");
+                if (entry.getDesc().isArray()) {
+                    errorReporter.warning("static final array field is not in CONSTANT_CASE");
+                } else {
+                    errorReporter.error("static final field is not in CONSTANT_CASE");
+                }
             }
         } else {
             if (startsWithUppercase(mapping.targetName())) {
