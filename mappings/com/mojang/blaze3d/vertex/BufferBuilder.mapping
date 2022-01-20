@@ -1,21 +1,21 @@
 CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 	FIELD f_asuspqsp drawMode Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
-	FIELD f_bxxncawi nextDrawStart I
+	FIELD f_bxxncawi totalBytes I
 	FIELD f_cfhrurco format Lnet/minecraft/unmapped/C_rnldvdpe;
 	FIELD f_dfgpkdqh textured Z
-	FIELD f_djjufmoz currentElementId I
+	FIELD f_djjufmoz elementIndex I
 	FIELD f_fevtuyep elementOffset I
 	FIELD f_fhtpopwx hasOverlay Z
-	FIELD f_hbdpmeiy cameraOffset Z
+	FIELD f_hbdpmeiy indexOnly Z
 	FIELD f_hvaetcwp lastParameterIndex I
-	FIELD f_ibpzlmrc cameraX F
+	FIELD f_ibpzlmrc sortX F
 	FIELD f_iirxrekw LOGGER Lorg/slf4j/Logger;
-	FIELD f_iukfzdwt currentParameters [Lnet/minecraft/unmapped/C_zviwfwgf;
-	FIELD f_izkjbhil buildStart I
+	FIELD f_iukfzdwt sortingPoints [Lnet/minecraft/unmapped/C_zviwfwgf;
+	FIELD f_izkjbhil totalRenderBytes I
 	FIELD f_ltvrvvts vertexCount I
-	FIELD f_ohovwnfg cameraZ F
-	FIELD f_oqvmtoia cameraY F
-	FIELD f_owtoyaja MAX_BUFFER_SIZE I
+	FIELD f_ohovwnfg sortZ F
+	FIELD f_oqvmtoia sortY F
+	FIELD f_owtoyaja GROWTH_SIZE I
 	FIELD f_qxmawqzf currentElement Lnet/minecraft/unmapped/C_gmhefnuu;
 	FIELD f_wyaejrdq building Z
 	FIELD f_xkduvski buffer Ljava/nio/ByteBuffer;
@@ -23,12 +23,12 @@ CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 	METHOD <init> (I)V
 		ARG 1 initialCapacity
 	METHOD m_acxqcgfk end ()V
-	METHOD m_afabcjea writeCameraOffset (Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;)V
-		ARG 1 elementFormat
-	METHOD m_bxhlqbcc setCameraPosition (FFF)V
-		ARG 1 cameraX
-		ARG 2 cameraY
-		ARG 3 cameraZ
+	METHOD m_afabcjea putSortedIndices (Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;)V
+		ARG 1 indexType
+	METHOD m_bxhlqbcc setSortOrigin (FFF)V
+		ARG 1 sortX
+		ARG 2 sortY
+		ARG 3 sortZ
 	METHOD m_elqwttpw ([FII)I
 		ARG 1 indexA
 		ARG 2 indexB
@@ -40,11 +40,11 @@ CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 	METHOD m_lzpzpbmk (I)V
 		ARG 1 value
 	METHOD m_mnhlbdhh reset ()V
-	METHOD m_ohwhccqe buildParameterVector ()[Lnet/minecraft/unmapped/C_zviwfwgf;
+	METHOD m_ohwhccqe makeSortingPoints ()[Lnet/minecraft/unmapped/C_zviwfwgf;
 	METHOD m_peudonzi (I)V
 		ARG 1 value
 	METHOD m_rmhuetro createConsumer (Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;)Lit/unimi/dsi/fastutil/ints/IntConsumer;
-		ARG 1 elementFormat
+		ARG 1 indexType
 	METHOD m_srxxjvcm roundBufferSize (I)I
 		ARG 0 amount
 	METHOD m_tsfjiqbz isBuilding ()Z
@@ -59,42 +59,42 @@ CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 	METHOD m_yvtxqaxg setFormat (Lnet/minecraft/unmapped/C_rnldvdpe;)V
 		ARG 1 format
 	CLASS C_nsjmxzos DrawArrayParameters
-		FIELD f_itgpxloc cameraOffset Z
+		FIELD f_itgpxloc indexOnly Z
 		FIELD f_nniinvwt mode Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
-		FIELD f_qcblecxu count I
-		FIELD f_qwllusxu elementFormat Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
+		FIELD f_qcblecxu vertexCount I
+		FIELD f_qwllusxu indexType Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
 		FIELD f_stnurdsp textured Z
-		FIELD f_xcbnufcg vertexCount I
+		FIELD f_xcbnufcg indexCount I
 		FIELD f_yekxfqum vertexFormat Lnet/minecraft/unmapped/C_rnldvdpe;
 		METHOD <init> (Lnet/minecraft/unmapped/C_rnldvdpe;IILnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;ZZ)V
 			ARG 1 vertexFormat
-			ARG 2 count
-			ARG 3 vertexCount
+			ARG 2 vertexCount
+			ARG 3 indexCount
 			ARG 4 mode
 			ARG 5 elementFormat
-			ARG 6 cameraOffset
+			ARG 6 indexOnly
 			ARG 7 textured
-		METHOD m_evacdorr getLimit ()I
-		METHOD m_hqbbgvxw getElementFormat ()Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
-		METHOD m_jowxujxw getDrawStart ()I
-		METHOD m_redejcvr isCameraOffset ()Z
+		METHOD m_evacdorr getVertexBufferSize ()I
+		METHOD m_hqbbgvxw getIndexType ()Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
+		METHOD m_jowxujxw getTotalBufferSize ()I
+		METHOD m_redejcvr getIndexOnly ()Z
 		METHOD m_shlfcpie getMode ()Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
 		METHOD m_vgbfjnpj getVertexFormat ()Lnet/minecraft/unmapped/C_rnldvdpe;
-		METHOD m_vlifnbqm getVertexCount ()I
+		METHOD m_vlifnbqm getIndexCount ()I
 		METHOD m_wseilctu isTextured ()Z
-		METHOD m_xowysvpf getCount ()I
-		METHOD m_ytughzur getDrawLength ()I
-	CLASS C_pmijkrpz State
-		FIELD f_aqefjlpn cameraX F
+		METHOD m_xowysvpf getVertexCount ()I
+		METHOD m_ytughzur getIndexBufferSize ()I
+	CLASS C_pmijkrpz SortState
+		FIELD f_aqefjlpn sortX F
 		FIELD f_bxfakbtz vertexCount I
 		FIELD f_defntsap drawMode Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
-		FIELD f_gnajymgr currentParameters [Lnet/minecraft/unmapped/C_zviwfwgf;
-		FIELD f_knvyutbs cameraY F
-		FIELD f_ktgzrhuz cameraZ F
+		FIELD f_gnajymgr sortingPoints [Lnet/minecraft/unmapped/C_zviwfwgf;
+		FIELD f_knvyutbs sortY F
+		FIELD f_ktgzrhuz sortZ F
 		METHOD <init> (Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;I[Lnet/minecraft/unmapped/C_zviwfwgf;FFF)V
 			ARG 1 drawMode
 			ARG 2 vertexCount
-			ARG 3 currentParameters
-			ARG 4 cameraX
-			ARG 5 cameraY
-			ARG 6 cameraZ
+			ARG 3 sortingPoints
+			ARG 4 sortX
+			ARG 5 sortY
+			ARG 6 sortZ

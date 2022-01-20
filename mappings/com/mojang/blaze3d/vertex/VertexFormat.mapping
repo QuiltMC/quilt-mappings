@@ -21,18 +21,18 @@ CLASS net/minecraft/unmapped/C_rnldvdpe com/mojang/blaze3d/vertex/VertexFormat
 	METHOD m_utrwokva getVertexBuffer ()I
 	METHOD m_ximwvywi getElements ()Lcom/google/common/collect/ImmutableList;
 	METHOD m_xqvnddix getVertexSize ()I
-	CLASS C_pmanqvls IntType
-		FIELD f_edqjhrlc size I
-		FIELD f_escpcqoj count I
+	CLASS C_pmanqvls IndexType
+		FIELD f_edqjhrlc bytes I
+		FIELD f_escpcqoj glType I
 		METHOD <init> (Ljava/lang/String;III)V
-			ARG 3 count
-			ARG 4 size
-		METHOD m_jdmminiz getSmallestTypeFor (I)Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
-			COMMENT Gets the smallest type in which the given number fits.
+			ARG 3 glType
+			ARG 4 bytes
+		METHOD m_jdmminiz getSmallestIndexType (I)Lnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;
+			COMMENT Gets the smallest index type in which the given count requires.
 			COMMENT
 			COMMENT @return the smallest type
-			ARG 0 number
-				COMMENT a number from 8 to 32 bits of memory
+			ARG 0 count
+				COMMENT a count for the size in elements of a buffer
 	CLASS C_ptsbsfse DrawMode
 		FIELD f_eszcwfvg mode I
 		FIELD f_hbchzmhb $VALUES [Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
