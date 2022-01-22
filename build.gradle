@@ -65,13 +65,6 @@ configurations {
 	enigmaRuntime
 	javadocClasspath
 	decompileClasspath
-	mappingPoetJar {
-		transitive = false
-	}
-	mappingPoet {
-		extendsFrom mappingPoetJar
-		transitive = true
-	}
 	unpick
 	hashed
 }
@@ -83,7 +76,6 @@ dependencies {
 	javadocClasspath "org.jetbrains:annotations:${project.jetbrains_annotations_version}"
 	javadocClasspath "com.google.code.findbugs:jsr305:3.0.2" // for some other jsr annotations
 	decompileClasspath "net.fabricmc:cfr:${project.cfr_version}"
-	mappingPoetJar "org.quiltmc:mapping-poet:${project.mapping_poet_version}"
 	unpick "net.fabricmc.unpick:unpick-cli:${project.unpick_version}"
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
@@ -139,6 +131,7 @@ tasks.withType(JavaCompile).configureEach {
 sourceSets {
 	constants
 	packageDocs // package info files
+	doclet
 }
 
 license {
@@ -269,7 +262,7 @@ javadoc {
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
 
-	def mappingPoetJar = project.provider { zipTree configurations.mappingPoetJar.singleFile }
+	def docletResources = sourceSets.doclet.resources.asFileTree
 
 	failOnError = false
 	maxMemory = '2G'
@@ -287,7 +280,7 @@ javadoc {
 				'implSpec:a:Implementation Requirements:',
 				'implNote:a:Implementation Note:'
 		)
-		taglets "org.quiltmc.mappingpoet.jd.MappingTaglet"
+		// taglets "quilt.internal.taglet.MappingTaglet" // TODO: Do we need a namespace table?
 		// taglet path, header, extra stylesheet settings deferred
 		it.use()
 
@@ -320,7 +313,7 @@ javadoc {
 
 	doLast {
 		project.copy {
-			from mappingPoetJar
+			from docletResources
 			include "copy_on_click.js"
 			into javadoc.outputDirectory
 		}
@@ -329,10 +322,9 @@ javadoc {
 	doFirst {
 		// lazy setting
 		options {
-			tagletPath configurations.mappingPoet.files.toList()
-			header mappingPoetJar.get().filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
-			// cannot include line breaks
-			addFileOption "-add-stylesheet", mappingPoetJar.get().filter { it.name == 'forms.css' }.singleFile
+			// tagletPath sourceSets.doclet.output.classesDirs.files.toList()
+			header docletResources.filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
+			addFileOption "-add-stylesheet", docletResources.filter { it.name == 'style.css' }.singleFile
 		}
 	}
 }
