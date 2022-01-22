@@ -1,3 +1,6 @@
+/*
+ * This file is free for everyone to use under the Creative Commons Zero license.
+ */
 package quilt.internal.taglet;
 
 import com.sun.source.doctree.DocTree;
