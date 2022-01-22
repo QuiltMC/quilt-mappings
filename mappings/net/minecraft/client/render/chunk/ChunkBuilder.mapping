@@ -12,7 +12,7 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 	FIELD f_rmtgpazv worldRenderer Lnet/minecraft/unmapped/C_sfkkabhx;
 	FIELD f_rxdlwkdw bufferCount I
 	FIELD f_shhksbkx MAX_WORKER_THREADS_FOR_32_BIT_SYSTEMS I
-	FIELD f_vjkdtrzu highPriorityChunksToBuild Ljava/util/PriorityQueue;
+	FIELD f_vjkdtrzu highPriorityChunksToBuild Ljava/util/concurrent/PriorityBlockingQueue;
 	FIELD f_vllbomdt executor Ljava/util/concurrent/Executor;
 	FIELD f_vluvkkeg MAX_HIGH_PRIORITY_QUOTA I
 	FIELD f_xrrtpvsk threadBuffers Ljava/util/Queue;
@@ -24,8 +24,6 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 		ARG 5 buffers
 	METHOD m_cnldfvys isEmpty ()Z
 	METHOD m_dnfvfxkc getCameraPosition ()Lnet/minecraft/unmapped/C_vgpupfxx;
-	METHOD m_hpnaxevd (Lnet/minecraft/unmapped/C_nxnqmnng;Lnet/minecraft/unmapped/C_lhjdxjis;Ljava/lang/Void;)Ljava/util/concurrent/CompletionStage;
-		ARG 3 _void
 	METHOD m_hvoakany getFreeBufferCount ()I
 	METHOD m_itbyrwdr stop ()V
 	METHOD m_jnvatbgf getDebugString ()Ljava/lang/String;
@@ -37,6 +35,7 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 		ARG 1 task
 	METHOD m_nfeynybq rebuild (Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;Lnet/minecraft/unmapped/C_blaazowi;)V
 		ARG 1 chunk
+		ARG 2 chunkRenderRegionCache
 	METHOD m_nykalrox getToBatchCount ()I
 	METHOD m_pywnxlsw upload ()V
 	METHOD m_qnvuifrs (Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;Lnet/minecraft/unmapped/C_wjdrilbw;)V
@@ -131,9 +130,6 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 				ARG 1 data
 				ARG 2 blockEntities
 				ARG 3 blockEntity
-			METHOD m_dafqpozr (Lnet/minecraft/unmapped/C_cifoaixd$C_zqojclga;Ljava/util/List;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;
-				ARG 2 list
-				ARG 3 throwable
 			METHOD m_mukgwhcf render (FFFLnet/minecraft/unmapped/C_cifoaixd$C_zqojclga;Lnet/minecraft/unmapped/C_wjdrilbw;)Ljava/util/Set;
 				ARG 1 cameraX
 				ARG 2 cameraY
@@ -165,9 +161,6 @@ CLASS net/minecraft/unmapped/C_cifoaixd net/minecraft/client/render/chunk/ChunkB
 				ARG 4 data
 			METHOD m_kypvdxan (Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;
 				ARG 1 unused
-				ARG 2 throwable
-			METHOD m_mozabtuv (Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;
-				ARG 1 result
 				ARG 2 throwable
 			METHOD m_yxqdtvdq (Ljava/lang/Void;)Lnet/minecraft/unmapped/C_cifoaixd$C_sqcamqys;
 				ARG 0 _void
