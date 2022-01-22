@@ -4,8 +4,10 @@ import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputDirectory;
-import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
 import org.quiltmc.draftsman.asm.DraftsmanClassTransformer;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +24,12 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class EraseBytecodeTask extends DefaultMappingsTask {
+public class TransformJarClassesTask extends DefaultMappingsTask {
     private final RegularFileProperty jarFile;
     private final DirectoryProperty output;
+    private final List<VisitorFactory> visitorFactories = new ArrayList<>();
 
-    public EraseBytecodeTask() {
+    public TransformJarClassesTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
         jarFile = getProject().getObjects().fileProperty();
         output = getProject().getObjects().directoryProperty();
@@ -41,8 +45,12 @@ public class EraseBytecodeTask extends DefaultMappingsTask {
         return output;
     }
 
+    public void visitor(VisitorFactory visitorFactory) {
+        visitorFactories.add(visitorFactory);
+    }
+
     @TaskAction
-    public void erase() throws IOException {
+    public void transform() throws IOException {
         Map<String, byte[]> classFiles = new HashMap<>();
         try (ZipFile zipFile = new ZipFile(jarFile.getAsFile().get())) {
             List<? extends ZipEntry> entries = Collections.list(zipFile.entries());
@@ -58,9 +66,15 @@ public class EraseBytecodeTask extends DefaultMappingsTask {
 
         Map<String, byte[]> transformedClassFiles = new HashMap<>();
         for (String name : classFiles.keySet()) {
-            DraftsmanClassTransformer transformer = new DraftsmanClassTransformer(classFiles.get(name), false);
-            byte[] transformed = transformer.transform();
-            transformedClassFiles.put(name, transformed);
+            ClassReader reader = new ClassReader(classFiles.get(name));
+            ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
+            ClassVisitor visitor = writer;
+            for (VisitorFactory visitorFactory : visitorFactories) {
+                visitor = visitorFactory.create(visitor);
+            }
+
+            reader.accept(visitor, 0);
+            transformedClassFiles.put(name, writer.toByteArray());
         }
 
         for (String name : transformedClassFiles.keySet()) {
@@ -71,5 +85,9 @@ public class EraseBytecodeTask extends DefaultMappingsTask {
 
             Files.write(path, transformedClassFiles.get(name));
         }
+    }
+
+    interface VisitorFactory {
+        ClassVisitor create(ClassVisitor visitor);
     }
 }

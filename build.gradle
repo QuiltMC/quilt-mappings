@@ -88,11 +88,14 @@ dependencies {
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
 
+import org.objectweb.asm.ClassVisitor
+import org.objectweb.asm.Opcodes
+import org.quiltmc.draftsman.asm.visitor.DraftsmanClassVisitor
 import quilt.internal.Constants
 import quilt.internal.tasks.build.AddProposedFieldMappingsTask
-import quilt.internal.tasks.build.EraseBytecodeTask
 import quilt.internal.tasks.build.MappingsV2JarTask
 import quilt.internal.decompile.Decompilers
+import quilt.internal.tasks.build.TransformJarClassesTask
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
 import quilt.internal.tasks.decompile.DecompileTask
@@ -182,9 +185,30 @@ task v2MergedMappingsJar(dependsOn: ["mergeTinyV2"], type: MappingsV2JarTask) {
 	mappings = mergeTinyV2.outputMappings
 }
 
-task eraseBytecode(type: EraseBytecodeTask, dependsOn: mapNamedJar) {
+task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	jarFile = mappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
+	visitor(DraftsmanClassVisitor::new)
+	// Set protected/package-private classes to public so that we don't have any access compile errors.
+	visitor { new ClassVisitor(Opcodes.ASM9, it) {
+		private int toPublicAccess(int access) {
+			if ((access & Opcodes.ACC_PROTECTED) != 0 || ((access & Opcodes.ACC_PRIVATE) == 0 && (access & Opcodes.ACC_PUBLIC) == 0)) {
+				access = access & ~Opcodes.ACC_PROTECTED
+				access = access | Opcodes.ACC_PUBLIC
+			}
+			return access
+		}
+
+		@Override
+		void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+			super.visit(version, toPublicAccess(access), name, signature, superName, interfaces)
+		}
+
+		@Override
+		void visitInnerClass(String name, String outerName, String innerName, int access) {
+			super.visitInnerClass(name, outerName, innerName, toPublicAccess(access))
+		}
+	} }
 }
 
 task zipErasedBytecode(type: Zip, dependsOn: eraseBytecode) {
@@ -201,18 +225,18 @@ task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, zipErasedByteco
 	libraries = files(mappings.fileConstants.libraries)
 	decompilerOptions = [
 			"rsy": "1", // remove synthetics
+			"dgs": "1", // decompile generic signatures
 			"pll": "99999" // pll (Preferred Line Length) is length for line wrapping
 	]
-
-	def jdProvider = new MappingsJavadocProvider(mergeTinyV2.outputMappings, "named")
-	classJavadocProvider(jdProvider)
-	fieldJavadocProvider(jdProvider)
-	methodJavadocProvider(jdProvider)
 
 	doFirst {
 		fakeSourceDir.deleteDir()
 	}
 	doLast {
+		def jdProvider = new MappingsJavadocProvider(mergeTinyV2.outputMappings, "named")
+		classJavadocProvider(jdProvider)
+		fieldJavadocProvider(jdProvider)
+		methodJavadocProvider(jdProvider)
 		logger.lifecycle ":Fake source generated"
 	}
 }
