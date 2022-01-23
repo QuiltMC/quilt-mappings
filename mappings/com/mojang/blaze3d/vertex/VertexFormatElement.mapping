@@ -16,7 +16,7 @@ CLASS net/minecraft/unmapped/C_gmhefnuu com/mojang/blaze3d/vertex/VertexFormatEl
 		ARG 4 count
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_gxxdrrba startDrawing (IJI)V
+	METHOD m_gxxdrrba setupAttribState (IJI)V
 		ARG 1 elementIndex
 		ARG 2 pointer
 		ARG 4 stride
@@ -29,7 +29,7 @@ CLASS net/minecraft/unmapped/C_gmhefnuu com/mojang/blaze3d/vertex/VertexFormatEl
 	METHOD m_tsgfebbg getTextureIndex ()I
 	METHOD m_vlkxcpfb getCount ()I
 	METHOD m_vnwlcgzv getType ()Lnet/minecraft/unmapped/C_gmhefnuu$C_kjyxhofn;
-	METHOD m_ygoxzgfw endDrawing (I)V
+	METHOD m_ygoxzgfw clearAttribState (I)V
 		ARG 1 elementIndex
 	CLASS C_kjyxhofn Type
 		FIELD f_chkjqunq starter Lnet/minecraft/unmapped/C_gmhefnuu$C_kjyxhofn$C_jenloete;
@@ -80,7 +80,7 @@ CLASS net/minecraft/unmapped/C_gmhefnuu com/mojang/blaze3d/vertex/VertexFormatEl
 			ARG 0 textureIndex
 			ARG 1 elementIndex
 		METHOD m_rqvqssdg getName ()Ljava/lang/String;
-		METHOD m_ullmvgzo startDrawing (IIIJII)V
+		METHOD m_ullmvgzo setupAttribState (IIIJII)V
 			ARG 1 size
 			ARG 2 type
 			ARG 3 stride
@@ -100,7 +100,7 @@ CLASS net/minecraft/unmapped/C_gmhefnuu com/mojang/blaze3d/vertex/VertexFormatEl
 		METHOD m_xdgnhcms (II)V
 			ARG 0 textureIndex
 			ARG 1 elementIndex
-		METHOD m_ytyrkayg endDrawing (II)V
+		METHOD m_ytyrkayg clearAttribState (II)V
 			ARG 1 textureIndex
 			ARG 2 elementIndex
 		METHOD m_zyuwtbpb (IIIJII)V
@@ -110,16 +110,16 @@ CLASS net/minecraft/unmapped/C_gmhefnuu com/mojang/blaze3d/vertex/VertexFormatEl
 			ARG 3 pointer
 			ARG 5 textureIndex
 			ARG 6 elementIndex
-		CLASS C_jenloete Starter
-			METHOD setupBufferState setupBufferState (IIIJII)V
+		CLASS C_jenloete Begin
+			METHOD setupBufferState setupAttribState (IIIJII)V
 				ARG 1 size
 				ARG 2 type
 				ARG 3 stride
 				ARG 4 pointer
 				ARG 6 textureIndex
 				ARG 7 elementIndex
-		CLASS C_mogfdttt Finisher
-			METHOD clearBufferState clearBufferState (II)V
+		CLASS C_mogfdttt End
+			METHOD clearBufferState clearAttribState (II)V
 				ARG 1 textureIndex
 				ARG 2 elementIndex
 	CLASS C_vbjzjwyy DataType
