@@ -26,8 +26,20 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
     @Override
     public String provideClassJavadoc(String className, boolean isRecord) {
         MappingTree.ClassMapping mapping = tree.getClass(className, namespaceId);
-        if (mapping != null) {
-            return mapping.getComment();
+        if (mapping != null && mapping.getComment() != null) {
+            StringBuilder javadoc = new StringBuilder(mapping.getComment());
+            javadoc.append("\n");
+
+            // Add mapping info
+            for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
+                String namespace = tree.getNamespaceName(i);
+                String name = mapping.getName(namespace);
+                javadoc.append("@mapping {@literal ");
+                javadoc.append(namespace).append(" ").append(name).append("}");
+                javadoc.append("\n");
+            }
+
+            return javadoc.toString();
         }
 
         return null;
@@ -38,8 +50,20 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
         MappingTree.ClassMapping ownerMapping = tree.getClass(owner, namespaceId);
         if (ownerMapping != null) {
             MappingTree.FieldMapping fieldMapping = ownerMapping.getField(fieldName, descriptor, namespaceId);
-            if (fieldMapping != null) {
-                return fieldMapping.getComment();
+            if (fieldMapping != null && fieldMapping.getComment() != null) {
+                StringBuilder javadoc = new StringBuilder(fieldMapping.getComment());
+                javadoc.append("\n");
+
+                // Add mapping info
+                for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
+                    String namespace = tree.getNamespaceName(i);
+                    String name = fieldMapping.getName(namespace);
+                    javadoc.append("@mapping {@literal ");
+                    javadoc.append(namespace).append(" ").append(name).append("}");
+                    javadoc.append("\n");
+                }
+
+                return javadoc.toString();
             }
         }
 
@@ -51,7 +75,10 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
         MappingTree.ClassMapping ownerMapping = tree.getClass(owner, namespaceId);
         if (ownerMapping != null) {
             MappingTree.MethodMapping methodMapping = ownerMapping.getMethod(methodName, descriptor, namespaceId);
-            if (methodMapping != null) {
+            if (methodMapping != null && methodMapping.getComment() != null) {
+                StringBuilder javadoc = new StringBuilder(methodMapping.getComment());
+
+                // Generate @param tags
                 StringBuilder argComments = new StringBuilder();
                 for (MappingTree.MethodArgMapping argMapping : methodMapping.getArgs()) {
                     if (argMapping.getComment() != null) {
@@ -61,10 +88,22 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 }
 
                 if (!argComments.isEmpty()) {
-                    return methodMapping.getComment() + "\n" + argComments;
+                    javadoc.append("\n");
+                    javadoc.append(argComments);
                 }
 
-                return methodMapping.getComment();
+                javadoc.append("\n");
+
+                // Add mapping info
+                for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
+                    String namespace = tree.getNamespaceName(i);
+                    String name = methodMapping.getName(namespace);
+                    javadoc.append("@mapping {@literal ");
+                    javadoc.append(namespace).append(" ").append(name).append("}");
+                    javadoc.append("\n");
+                }
+
+                return javadoc.toString();
             }
         }
 

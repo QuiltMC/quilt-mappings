@@ -18,6 +18,7 @@ public class InvertPerVersionMappingsTask extends DefaultMappingsTask {
 
     public InvertPerVersionMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        dependsOn(DownloadPerVersionMappingsTask.TASK_NAME);
 
         outputsNeverUpToDate();
     }

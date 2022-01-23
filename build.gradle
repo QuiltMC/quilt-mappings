@@ -224,8 +224,7 @@ task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, zipErasedByteco
 
 	doFirst {
 		fakeSourceDir.deleteDir()
-	}
-	doLast {
+
 		def jdProvider = new MappingsJavadocProvider(mergeTinyV2.outputMappings, "named")
 		classJavadocProvider(jdProvider)
 		fieldJavadocProvider(jdProvider)
@@ -259,6 +258,7 @@ task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 javadoc {
 	dependsOn genFakeSource
 	dependsOn downloadMinecraftLibraries
+	dependsOn docletClasses // Needed for javadoc to find the doclet classes.
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
 
@@ -280,7 +280,7 @@ javadoc {
 				'implSpec:a:Implementation Requirements:',
 				'implNote:a:Implementation Note:'
 		)
-		// taglets "quilt.internal.taglet.MappingTaglet" // TODO: Do we need a namespace table?
+		taglets "quilt.internal.taglet.MappingTaglet"
 		// taglet path, header, extra stylesheet settings deferred
 		it.use()
 
@@ -322,7 +322,7 @@ javadoc {
 	doFirst {
 		// lazy setting
 		options {
-			// tagletPath sourceSets.doclet.output.classesDirs.files.toList()
+			tagletPath sourceSets.doclet.output.classesDirs.files.toList()
 			header docletResources.filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
 			addFileOption "-add-stylesheet", docletResources.filter { it.name == 'style.css' }.singleFile
 		}
