@@ -183,6 +183,7 @@ task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	output = file(".gradle/temp/erased-classes/")
 	visitor(DraftsmanClassVisitor::new)
 	// Set protected/package-private classes to public so that we don't have any access compile errors.
+	// TODO: Fix this by putting the classes in the same package. Javadoc shows the modifier
 	visitor { new ClassVisitor(Opcodes.ASM9, it) {
 		private int toPublicAccess(int access) {
 			if ((access & Opcodes.ACC_PROTECTED) != 0 || ((access & Opcodes.ACC_PRIVATE) == 0 && (access & Opcodes.ACC_PUBLIC) == 0)) {

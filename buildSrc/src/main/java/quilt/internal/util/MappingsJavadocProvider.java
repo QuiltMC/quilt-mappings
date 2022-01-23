@@ -58,8 +58,9 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
                     String namespace = tree.getNamespaceName(i);
                     String name = fieldMapping.getName(namespace);
+                    String selector = "L" + ownerMapping.getName(namespace) + ";" + name + ":" + fieldMapping.getDesc(namespace);
                     javadoc.append("@mapping {@literal ");
-                    javadoc.append(namespace).append(" ").append(name).append("}");
+                    javadoc.append(namespace).append(" ").append(name).append(" ").append(selector).append("}");
                     javadoc.append("\n");
                 }
 
@@ -98,8 +99,9 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
                     String namespace = tree.getNamespaceName(i);
                     String name = methodMapping.getName(namespace);
+                    String selector = "L" + ownerMapping.getName(namespace) + ";" + name + methodMapping.getDesc(namespace);
                     javadoc.append("@mapping {@literal ");
-                    javadoc.append(namespace).append(" ").append(name).append("}");
+                    javadoc.append(namespace).append(" ").append(name).append(" ").append(selector).append("}");
                     javadoc.append("\n");
                 }
 
