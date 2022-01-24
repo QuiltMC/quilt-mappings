@@ -27,8 +27,13 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
     public String provideClassJavadoc(String className, boolean isRecord) {
         MappingTree.ClassMapping mapping = tree.getClass(className, namespaceId);
         if (mapping != null && mapping.getComment() != null) {
-            StringBuilder javadoc = new StringBuilder(mapping.getComment());
-            javadoc.append("\n");
+            StringBuilder javadoc;
+            if (mapping.getComment() != null) {
+                javadoc = new StringBuilder(mapping.getComment());
+                javadoc.append("\n");
+            } else {
+                javadoc = new StringBuilder();
+            }
 
             // Add mapping info
             for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
@@ -42,7 +47,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
             return javadoc.toString();
         }
 
-        return null;
+        return "Mapping not found";
     }
 
     @Override
@@ -50,9 +55,14 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
         MappingTree.ClassMapping ownerMapping = tree.getClass(owner, namespaceId);
         if (ownerMapping != null) {
             MappingTree.FieldMapping fieldMapping = ownerMapping.getField(fieldName, descriptor, namespaceId);
-            if (fieldMapping != null && fieldMapping.getComment() != null) {
-                StringBuilder javadoc = new StringBuilder(fieldMapping.getComment());
-                javadoc.append("\n");
+            if (fieldMapping != null) {
+                StringBuilder javadoc;
+                if (fieldMapping.getComment() != null) {
+                    javadoc = new StringBuilder(fieldMapping.getComment());
+                    javadoc.append("\n");
+                } else {
+                    javadoc = new StringBuilder();
+                }
 
                 // Add mapping info
                 for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
@@ -68,7 +78,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
             }
         }
 
-        return null;
+        return "Mapping not found";
     }
 
     @Override
@@ -76,8 +86,13 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
         MappingTree.ClassMapping ownerMapping = tree.getClass(owner, namespaceId);
         if (ownerMapping != null) {
             MappingTree.MethodMapping methodMapping = ownerMapping.getMethod(methodName, descriptor, namespaceId);
-            if (methodMapping != null && methodMapping.getComment() != null) {
-                StringBuilder javadoc = new StringBuilder(methodMapping.getComment());
+            if (methodMapping != null) {
+                StringBuilder javadoc;
+                if (methodMapping.getComment() != null) {
+                    javadoc = new StringBuilder(methodMapping.getComment());
+                } else {
+                    javadoc = new StringBuilder();
+                }
 
                 // Generate @param tags
                 StringBuilder argComments = new StringBuilder();
@@ -109,6 +124,6 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
             }
         }
 
-        return null;
+        return "Mapping not found";
     }
 }
