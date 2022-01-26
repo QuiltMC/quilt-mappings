@@ -88,13 +88,14 @@ dependencies {
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
 
+
 import quilt.internal.Constants
+import quilt.internal.decompile.Decompilers
 import quilt.internal.tasks.build.AddProposedFieldMappingsTask
 import quilt.internal.tasks.build.MappingsV2JarTask
-import quilt.internal.decompile.Decompilers
+import quilt.internal.tasks.decompile.DecompileTask
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
-import quilt.internal.tasks.decompile.DecompileTask
 
 clean.doFirst {
 	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft
@@ -218,7 +219,6 @@ task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 }
 
 javadoc {
-//	dependsOn genFakeSource
 	dependsOn downloadMinecraftLibraries
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
@@ -276,8 +276,8 @@ javadoc {
 		addBooleanOption 'Xdoclint:reference', true
 		addBooleanOption 'Xdoclint:accessibility', true
 	}
-	source /*fileTree(fakeSourceDir) +*/ sourceSets.constants.allJava + sourceSets.packageDocs.allJava
-	classpath = configurations.javadocClasspath.plus downloadMinecraftLibraries.outputs.files.asFileTree
+	source sourceSets.constants.allJava + sourceSets.packageDocs.allJava
+	classpath = configurations.javadocClasspath + downloadMinecraftLibraries.outputs.files.asFileTree + mapNamedJar.outputs.files.asFileTree
 
 	doLast {
 		project.copy {
