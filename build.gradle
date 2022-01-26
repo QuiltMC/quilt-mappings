@@ -5,6 +5,10 @@ buildscript {
 			url 'https://maven.quiltmc.org/repository/release/'
 		}
 		maven {
+			name 'Quilt Snapshots'
+			url 'https://maven.quiltmc.org/repository/snapshot/'
+		}
+		maven {
 			name "Fabric Repository"
 			url 'https://maven.fabricmc.net'
 		}
@@ -52,12 +56,9 @@ repositories {
 		name "Mojang"
 		url 'https://libraries.minecraft.net/'
 	}
-	mavenLocal()
-	if (USE_SNAPSHOT_HASHES) {
-		maven {
-			name "Quilt Snapshot Repositiory"
-			url "https://maven.quiltmc.org/repository/snapshot"
-		}
+	maven {
+		name "Quilt Snapshot Repositiory"
+		url "https://maven.quiltmc.org/repository/snapshot"
 	}
 }
 
@@ -88,13 +89,14 @@ dependencies {
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
 
+
 import quilt.internal.Constants
+import quilt.internal.decompile.Decompilers
 import quilt.internal.tasks.build.AddProposedFieldMappingsTask
 import quilt.internal.tasks.build.MappingsV2JarTask
-import quilt.internal.decompile.Decompilers
+import quilt.internal.tasks.decompile.DecompileTask
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
-import quilt.internal.tasks.decompile.DecompileTask
 
 clean.doFirst {
 	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft
