@@ -30,6 +30,7 @@ public class DownloadWantedVersionManifestTask extends DefaultMappingsTask {
         manifestFile = this.<DownloadVersionsManifestTask>getTaskByName(DownloadVersionsManifestTask.TASK_NAME).getManifestFile();
         manifestVersion = getManifestVersion(manifestFile);
 
+        getInputs().property("versionsManifest", manifestFile);
         //have to grab the release time as there's a current timestamp on each element?!
         getInputs().property("releaseTime", manifestVersion.isPresent() ? manifestVersion.get().getReleaseTime() : -1);
         versionFile = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + ".json");
