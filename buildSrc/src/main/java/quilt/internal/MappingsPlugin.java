@@ -24,6 +24,7 @@ import quilt.internal.tasks.setup.ExtractServerJarTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask;
+import quilt.internal.tasks.unpick.gen.OpenGlConstantUnpickGenerator;
 
 public class MappingsPlugin implements Plugin<Project> {
     @Override
@@ -53,6 +54,8 @@ public class MappingsPlugin implements Plugin<Project> {
 
         tasks.create(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class);
         tasks.create(RemapUnpickDefinitionsTask.TASK_NAME, RemapUnpickDefinitionsTask.class);
+        tasks.create(OpenGlConstantUnpickGenerator.TASK_NAME, OpenGlConstantUnpickGenerator.class);
+
         tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
         tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
     }

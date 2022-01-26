@@ -26,6 +26,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 
 public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implements UnpickGen {
+    public static final String TASK_NAME = "openGlUnpickGen";
     public static final String OPEN_GL_REGISTRY = "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/xml/gl.xml";
     public static final String GL_STATE_MANAGER_CLASS = "com/mojang/blaze3d/platform/GlStateManager";
 
@@ -81,7 +82,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         Map<String, List<String>> constantToDefiningVersions = new HashMap<>();
         Map<String, Map<String, List<String>>> functionToSignatureToDefiningVersions = new HashMap<>();
         ZipFile zip = new ZipFile(getProject().file(".gradle/minecraft/libraries/lwjgl-opengl-3.2.2.jar"));
-        OPEN_GL_VERSIONS.stream().forEach(version -> {
+        OPEN_GL_VERSIONS.forEach(version -> {
             try {
                 ZipEntry e = zip.getEntry("org/lwjgl/opengl/GL" + version + ".class");
                 ClassReader reader = new ClassReader(zip.getInputStream(e).readAllBytes());
