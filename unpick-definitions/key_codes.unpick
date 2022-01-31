@@ -134,6 +134,8 @@ target_method com/mojang/blaze3d/platform/InputUtil isKeyPressed (JI)Z
 	param 1 key_codes
 target_method com/mojang/blaze3d/platform/InputUtil fromKeyCode (II)Lcom/mojang/blaze3d/platform/InputUtil$Key;
 	param 0 key_codes
+target_method com/mojang/blaze3d/platform/InputUtil setCursorParameters (JIDD)V
+	param 1 cursor_codes
 target_method com/mojang/blaze3d/platform/InputUtil$Type mapKey (Lcom/mojang/blaze3d/platform/InputUtil$Type;Ljava/lang/String;I)V
 	param 2 key_codes
 target_method com/mojang/blaze3d/platform/InputUtil$Type createFromKeyCode (I)Lcom/mojang/blaze3d/platform/InputUtil$Key;
@@ -201,6 +203,8 @@ target_method net/minecraft/client/option/KeyBind matchesMouseButton (I)Z
 
 target_method net/minecraft/client/Mouse onMouseButton (JIII)V
 	param 1 mouse_buttons
+	param 2 actions
+	param 3 modifiers
 
 target_method net/minecraft/client/gui/Element mouseClicked (DDI)Z
 	param 2 mouse_buttons
@@ -251,5 +255,16 @@ constant cursor_codes org/lwjgl/glfw/GLFW GLFW_CURSOR
 constant cursor_codes org/lwjgl/glfw/GLFW GLFW_CURSOR_DISABLED
 constant cursor_codes org/lwjgl/glfw/GLFW GLFW_CURSOR_NORMAL
 
-target_method org/lwjgl/glfw/GLFW glfwSetInputPos (JII)V
-	param 2 cursor_codes
+target_method org/lwjgl/glfw/GLFW glfwSetInputMode (JII)V
+	param 1 cursor_codes
+
+flag modifiers org/lwjgl/glfw/GLFW GLFW_MOD_SHIFT
+flag modifiers org/lwjgl/glfw/GLFW GLFW_MOD_CONTROL
+flag modifiers org/lwjgl/glfw/GLFW GLFW_MOD_ALT
+flag modifiers org/lwjgl/glfw/GLFW GLFW_MOD_SUPER
+flag modifiers org/lwjgl/glfw/GLFW GLFW_MOD_CAPS_LOCK
+flag modifiers org/lwjgl/glfw/GLFW GLFW_MOD_NUM_LOCK
+
+constant actions org/lwjgl/glfw/GLFW GLFW_MOD_PRESS
+constant actions org/lwjgl/glfw/GLFW GLFW_MOD_RELEASE
+constant actions org/lwjgl/glfw/GLFW GLFW_MOD_REPEAT

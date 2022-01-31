@@ -4,19 +4,19 @@ CLASS net/minecraft/unmapped/C_zgebrxop net/minecraft/client/Mouse
 	FIELD f_etrfhaoj x D
 	FIELD f_etyaqouj glfwTime D
 	FIELD f_jyymxfnt cursorXSmoother Lnet/minecraft/unmapped/C_wnbyzpdi;
-	FIELD f_lazttkdj leftButtonClicked Z
+	FIELD f_lazttkdj leftClicked Z
 	FIELD f_mrhqmiqv y D
 	FIELD f_ooacsdpr activeButton I
-	FIELD f_pdoxoshr rightButtonClicked Z
+	FIELD f_pdoxoshr rightClicked Z
 	FIELD f_pobldenb cursorLocked Z
-	FIELD f_qnxgfpgl hasResolutionChanged Z
+	FIELD f_qnxgfpgl ignorePastPos Z
 	FIELD f_urvgkvpt tapTicks I
-	FIELD f_vqrnspgs middleButtonClicked Z
+	FIELD f_vqrnspgs middleClicked Z
 	FIELD f_vykvmmai cursorDeltaX D
 	FIELD f_vzaksxwz cursorDeltaY D
 	FIELD f_wdhjzxra client Lnet/minecraft/unmapped/C_ayfeobid;
-	FIELD f_wlskouwv eventDeltaWheel D
-	FIELD f_xfscmtpv controlLeftTicks I
+	FIELD f_wlskouwv scrollDelta D
+	FIELD f_xfscmtpv rightClickSimulationTicks I
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;)V
 		ARG 1 client
 	METHOD m_buxkqufv getX ()D
@@ -34,30 +34,30 @@ CLASS net/minecraft/unmapped/C_zgebrxop net/minecraft/client/Mouse
 		COMMENT Called when a mouse is used to scroll.
 		ARG 1 window
 			COMMENT the window handle
-		ARG 3 horizontal
+		ARG 3 scrollDeltaX
 			COMMENT the horizontal scroll distance
-		ARG 5 vertical
+		ARG 5 scrollDeltaY
 			COMMENT the vertical scroll distance
-	METHOD m_iinagrxf wasRightButtonClicked ()Z
+	METHOD m_iinagrxf hasRightClicked ()Z
 	METHOD m_prqrcker (JIJ)V
 		ARG 1 window
 		ARG 3 count
 		ARG 4 names
 	METHOD m_qkmypnyd isCursorLocked ()Z
-	METHOD m_rfgltetm updateMouse ()V
+	METHOD m_rfgltetm updateLookDirection ()V
 	METHOD m_ryeoqosd (JDD)V
 		ARG 1 window
 		ARG 3 offsetX
 		ARG 5 offsetY
-	METHOD m_toprjgrj setResolutionChanged ()V
+	METHOD m_toprjgrj onCursorEnterChanged ()V
 	METHOD m_vjkgfetl getY ()D
-	METHOD m_whwtpxld onResolutionChanged ()V
+	METHOD m_whwtpxld ignorePastPos ()V
 	METHOD m_xqiszlkm (JDD)V
 		ARG 1 window
 		ARG 3 x
 		ARG 5 y
-	METHOD m_xuzvjzlh wasMiddleButtonClicked ()Z
-	METHOD m_yensjbwe wasLeftButtonClicked ()Z
+	METHOD m_xuzvjzlh hasMiddleClicked ()Z
+	METHOD m_yensjbwe hasLeftClicked ()Z
 	METHOD m_yngpfhsm onCursorPos (JDD)V
 		ARG 1 window
 		ARG 3 x
