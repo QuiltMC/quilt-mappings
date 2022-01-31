@@ -108,11 +108,11 @@ constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_TAB
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_LEFT_ALT
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_LEFT_CONTROL
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_LEFT_SHIFT
-constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_LEFT_WIN
+constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_LEFT_SUPER
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_RIGHT_ALT
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_RIGHT_CONTROL
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_RIGHT_SHIFT
-constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_RIGHT_WIN
+constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_RIGHT_SUPER
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_ENTER
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_ESCAPE
 constant key_codes org/lwjgl/glfw/GLFW GLFW_KEY_BACKSPACE
@@ -136,11 +136,11 @@ target_method com/mojang/blaze3d/platform/InputUtil fromKeyCode (II)Lcom/mojang/
 	param 0 key_codes
 target_method com/mojang/blaze3d/platform/InputUtil$Type mapKey (Lcom/mojang/blaze3d/platform/InputUtil$Type;Ljava/lang/String;I)V
 	param 2 key_codes
-target_method com/mojang/blaze3d/platform/InputUtil$Type createFromCode (I)Lcom/mojang/blaze3d/platform/InputUtil$Key;
+target_method com/mojang/blaze3d/platform/InputUtil$Type createFromKeyCode (I)Lcom/mojang/blaze3d/platform/InputUtil$Key;
 	param 0 key_codes
 target_method com/mojang/blaze3d/platform/InputUtil$Key <init> (Ljava/lang/String;Lcom/mojang/blaze3d/platform/InputUtil$Type;I)V
 	param 2 key_codes
-target_method com/mojang/blaze3d/platform/InputUtil$Key getCode ()I
+target_method com/mojang/blaze3d/platform/InputUtil$Key getKeyCode ()I
 	return key_codes
 
 target_method net/minecraft/client/option/KeyBind <init> (Ljava/lang/String;ILjava/lang/String;)V
@@ -161,6 +161,8 @@ target_method net/minecraft/client/gui/Element keyReleased (III)Z
 target_method net/minecraft/client/Keyboard onKey (JIIII)V
 	param 1 key_codes
 target_method net/minecraft/client/Keyboard processF3 (I)Z
+	param 0 key_codes
+target_method net/minecraft/client/Keyboard processDebugKeys (I)Z
 	param 0 key_codes
 
 target_method net/minecraft/client/gui/screen/Screen isCut (I)Z
@@ -244,3 +246,10 @@ target_method net/minecraft/screen/ScreenHandler onSlotClick (IILnet/minecraft/s
 	param 1 mouse_buttons
 target_method net/minecraft/screen/ScreenHandler internalOnSlotClick (IILnet/minecraft/screen/slot/SlotActionType;Lnet/minecraft/entity/player/PlayerEntity;)V
 	param 1 mouse_buttons
+
+constant cursor_codes org/lwjgl/glfw/GLFW GLFW_CURSOR
+constant cursor_codes org/lwjgl/glfw/GLFW GLFW_CURSOR_DISABLED
+constant cursor_codes org/lwjgl/glfw/GLFW GLFW_CURSOR_NORMAL
+
+target_method org/lwjgl/glfw/GLFW glfwSetInputPos (JII)V
+	param 2 cursor_codes

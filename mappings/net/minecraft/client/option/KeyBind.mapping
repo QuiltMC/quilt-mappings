@@ -1,17 +1,17 @@
 CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
-	FIELD f_axzzilwx KEY_BIND_BY_ID Ljava/util/Map;
+	FIELD f_axzzilwx KEY_BINDS Ljava/util/Map;
 	FIELD f_dabvqpsd translationKey Ljava/lang/String;
 	FIELD f_dynqxsuy timesPressed I
 	FIELD f_frtwuquy ORDER_BY_CATEGORIES Ljava/util/Map;
 	FIELD f_isrvhtqu MOVEMENT_CATEGORY Ljava/lang/String;
 	FIELD f_kcphxfdy GAMEPLAY_CATEGORY Ljava/lang/String;
-	FIELD f_khpbnlde KEY_BIND_BY_KEY Ljava/util/Map;
+	FIELD f_khpbnlde KEY_BINDS_BY_KEY Ljava/util/Map;
 	FIELD f_lmswahcj boundKey Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;
 	FIELD f_lzdjizfk MISC_CATEGORY Ljava/lang/String;
 	FIELD f_mcjktbbz defaultKey Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;
 	FIELD f_nayvtjco GAME_INTERFACE_CATEGORY Ljava/lang/String;
 		COMMENT This key bind category is unused on Minecraft. Please use either {@link MISC_CATEGORY} or a custom key bind category
-	FIELD f_ppynlrbj KEY_BIND_CATEGORIES Ljava/util/Set;
+	FIELD f_ppynlrbj CATEGORIES Ljava/util/Set;
 	FIELD f_pseqyjfw category Ljava/lang/String;
 	FIELD f_svgjbnwm INVENTORY_CATEGORY Ljava/lang/String;
 	FIELD f_zbyhbkzm MULTIPLAYER_CATEGORY Ljava/lang/String;
@@ -24,7 +24,7 @@ CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
 	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_vdmgqzcl$C_uocctrrt;ILjava/lang/String;)V
 		ARG 1 translationKey
 		ARG 2 type
-		ARG 3 code
+		ARG 3 keyCode
 		ARG 4 category
 	METHOD compareTo (Ljava/lang/Object;)I
 		ARG 1 other
@@ -32,7 +32,7 @@ CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
 		ARG 1 button
 	METHOD m_dvvrqcxa reset ()V
 	METHOD m_fmzpyagn isDefault ()Z
-	METHOD m_gaavbsyf getBoundKeyTranslationKey ()Ljava/lang/String;
+	METHOD m_gaavbsyf getKeyTranslationKey ()Ljava/lang/String;
 	METHOD m_getjkdwe isPressed ()Z
 		COMMENT {@return if the key is being held down}
 		COMMENT
@@ -47,12 +47,12 @@ CLASS net/minecraft/unmapped/C_sygikzty net/minecraft/client/option/KeyBind
 	METHOD m_hfuhalee setPressed (Z)V
 		ARG 1 pressed
 	METHOD m_isuoshsj getDefaultKey ()Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;
-	METHOD m_jmbdmqyl updateKeyBindByKey ()V
-	METHOD m_ktykqjqb getBoundKeyLocalizedText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_jmbdmqyl updateKeyBindsByKey ()V
+	METHOD m_ktykqjqb getKeyName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_nbuirqvv updatePressedStates ()V
-	METHOD m_oicaydpw getLocalizedName (Ljava/lang/String;)Ljava/util/function/Supplier;
+	METHOD m_oicaydpw getKeyBindTextSupplier (Ljava/lang/String;)Ljava/util/function/Supplier;
 		ARG 0 id
-	METHOD m_qfyzbven equals (Lnet/minecraft/unmapped/C_sygikzty;)Z
+	METHOD m_qfyzbven keyEquals (Lnet/minecraft/unmapped/C_sygikzty;)Z
 		ARG 1 other
 	METHOD m_tffyxrzc setBoundKey (Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;)V
 		ARG 1 boundKey
