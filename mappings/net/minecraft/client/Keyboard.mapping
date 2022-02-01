@@ -4,7 +4,7 @@ CLASS net/minecraft/unmapped/C_csolnszv net/minecraft/client/Keyboard
 	FIELD f_mlfhdzba debugCrashLastLogTime J
 	FIELD f_qthnoorn clipboard Lnet/minecraft/unmapped/C_jxfepigu;
 	FIELD f_rxxwakvk client Lnet/minecraft/unmapped/C_ayfeobid;
-	FIELD f_ujnisqmp switchF3State Z
+	FIELD f_ujnisqmp hasToggledDebug Z
 	FIELD f_yddbbdkl debugCrashStartTime J
 	FIELD f_yenlydbs DEBUG_CRASH_WAIT_TIME I
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;)V
@@ -20,7 +20,7 @@ CLASS net/minecraft/unmapped/C_csolnszv net/minecraft/client/Keyboard
 	METHOD m_epfmotfw debugError (Ljava/lang/String;[Ljava/lang/Object;)V
 		ARG 1 key
 		ARG 2 args
-	METHOD m_fwmuraoy processF3 (I)Z
+	METHOD m_fwmuraoy processDebugKeys (I)Z
 		ARG 1 keyCode
 	METHOD m_fxckybwk (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 message
@@ -30,7 +30,7 @@ CLASS net/minecraft/unmapped/C_csolnszv net/minecraft/client/Keyboard
 	METHOD m_jceimuqp debugFormattedLog (Ljava/lang/String;[Ljava/lang/Object;)V
 		ARG 1 pattern
 		ARG 2 args
-	METHOD m_jsparvua copyLookAt (ZZ)V
+	METHOD m_jsparvua copyLocationFromTarget (ZZ)V
 		ARG 1 hasQueryPermission
 		ARG 2 queryServer
 	METHOD m_kfgttphb getClipboard ()Ljava/lang/String;
@@ -42,11 +42,11 @@ CLASS net/minecraft/unmapped/C_csolnszv net/minecraft/client/Keyboard
 		ARG 4 scancode
 		ARG 5 action
 		ARG 6 modifiers
-	METHOD m_lvncgvcw copyBlock (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+	METHOD m_lvncgvcw copyBlockLocation (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 state
 		ARG 2 pos
 		ARG 3 nbt
-	METHOD m_mcwepslt processDebugKeys (I)Z
+	METHOD m_mcwepslt processChunkDebugKeys (I)Z
 		ARG 1 keyCode
 	METHOD m_mdnsctzg addDebugMessage (Lnet/minecraft/unmapped/C_tnezalvh;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 formatting
@@ -69,7 +69,7 @@ CLASS net/minecraft/unmapped/C_csolnszv net/minecraft/client/Keyboard
 		ARG 4 scancode
 		ARG 5 action
 		ARG 6 modifiers
-	METHOD m_tllljcxo copyEntity (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+	METHOD m_tllljcxo copyEntityLocation (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 id
 		ARG 2 pos
 		ARG 3 nbt
