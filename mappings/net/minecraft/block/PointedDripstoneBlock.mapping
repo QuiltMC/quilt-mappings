@@ -1,0 +1,171 @@
+CLASS net/minecraft/unmapped/C_mqztguph net/minecraft/block/PointedDripstoneBlock
+	FIELD f_cizsryow STALACTITE_FLOOR_SEARCH_RANGE I
+	FIELD f_cttqfcoe BASE_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
+	FIELD f_elvssjrw MAX_SEARCH_LENGTH_BETWEEN_STALACTITE_TIP_AND_CAULDRON I
+	FIELD f_fafmlqec MAX_SEARCH_LENGTH_WHEN_CHECKING_DRIP_TYPE I
+	FIELD f_fbahmvfg STALACTITE_DRIP_START_PIXEL F
+	FIELD f_geyyeqmy DELAY_BEFORE_FALLING I
+	FIELD f_gllsmtmr MAX_HORIZONTAL_OFFSET F
+	FIELD f_gxticsyy TIP_MERGE_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
+	FIELD f_igqmwyaf WATERLOGGED Lnet/minecraft/unmapped/C_xhwijdsd;
+	FIELD f_ijopvefq FRUSTUM_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
+	FIELD f_ipkmpdju THICKNESS Lnet/minecraft/unmapped/C_cgckxfsw;
+	FIELD f_jddhgoav LAVA_CAULDRON_FILL_CHANCE_PER_RANDOM_TICK F
+	FIELD f_jgybmyto STALACTITE_DAMAGE_PER_FALL_DISTANCE_AND_SIZE F
+	FIELD f_jwzgoxfc STALAGMITE_FALL_DISTANCE_OFFSET F
+	FIELD f_kdusyxft MAX_STALACTITE_HEIGHT_FOR_DAMAGE_CALCULATION I
+	FIELD f_kgtqoixj STALAGMITE_FALL_DAMAGE_MODIFIER I
+	FIELD f_knqnihnn MIDDLE_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
+	FIELD f_lerhamqv MAX_SEARCH_LENGTH_WHEN_LOOKING_FOR_TIP_OF_FALLING_STALACTITE I
+	FIELD f_mqxlhtea WATER_CAULDRON_FILL_CHANCE_PER_RANDOM_TICK F
+	FIELD f_pijjnopm MIN_TRIDENT_VELOCITY_TO_BREAK_DRIPSTONE D
+	FIELD f_piwwbynr VERTICAL_DIRECTION Lnet/minecraft/unmapped/C_tcujuvjb;
+	FIELD f_qmkauocb AVERAGE_DAYS_PER_GROWTH F
+	FIELD f_rhbkldyw DRIP_CHANCE_PER_TICK F
+	FIELD f_rlxeozar STALACTITE_MAX_DAMAGE I
+	FIELD f_vqnaabdz MAX_STALACTITE_GROWTH I
+	FIELD f_vtjyruic UP_TIP_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
+	FIELD f_wncudmpi DOWN_TIP_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
+	FIELD f_xcfwthdp DRIP_CHANCE_PER_TICK_UNDER_LIQUID_SOURCE F
+	FIELD f_xtosjmrf REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK Lnet/minecraft/unmapped/C_zscvhwbd;
+	FIELD f_yfrcxgww GROWTH_PROBABILITY_PER_RANDOM_TICK F
+	METHOD m_auhhxpgo getFluid (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Ljava/util/Optional;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+	METHOD m_bohvfles getDripPos (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 0 world
+		ARG 1 pos
+	METHOD m_dflnvkxy canGrow (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 0 dripstoneBlockState
+		ARG 1 waterState
+	METHOD m_dqpxfaso getStalactiteSize (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;I)I
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 range
+	METHOD m_eeknnuxr (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 2 state
+	METHOD m_eniothsn getTipPos (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;IZ)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 range
+		ARG 4 allowMerged
+	METHOD m_gbxuezng isTip (Lnet/minecraft/unmapped/C_txtbiemp;Z)Z
+		ARG 0 state
+		ARG 1 allowMerged
+	METHOD m_gpzjtoli isHeldByPointedDripstone (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+	METHOD m_gqocpmbe growMerged (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+	METHOD m_gvgnsqzm (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_rxhyurmy;)V
+		ARG 3 fluid
+	METHOD m_gxoyulwl searchInDirection (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;Ljava/util/function/BiPredicate;Ljava/util/function/Predicate;I)Ljava/util/Optional;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 direction
+		ARG 4 continuePredicate
+		ARG 5 range
+	METHOD m_hwsvyuds spawnFallingBlock (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+	METHOD m_ioubzvri place (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_kfpkaqag;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 direction
+		ARG 3 thickness
+	METHOD m_jazkjipy (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 2 state
+	METHOD m_jgotfubi createParticle (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_rxhyurmy;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+		ARG 3 fluid
+	METHOD m_jjoyjvyc isPointingUp (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 0 state
+	METHOD m_jskepere isFluidLiquid (Lnet/minecraft/unmapped/C_rxhyurmy;)Z
+		COMMENT {@return whether the provided {@code fluid} is liquid, namely lava or water}
+		ARG 0 fluid
+	METHOD m_jyuhsbds isPointedDripstoneFacingDirection (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		ARG 0 state
+		ARG 1 direction
+	METHOD m_ltrxnjef scheduleFall (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 1 state
+		ARG 2 world
+		ARG 3 pos
+	METHOD m_mawaxdxh tryGrow (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 direction
+	METHOD m_mvikrtjs getDripFluid (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_rxhyurmy;)Lnet/minecraft/unmapped/C_rxhyurmy;
+		ARG 0 world
+		ARG 1 fluid
+	METHOD m_nalfbbwg isTip (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		ARG 0 state
+		ARG 1 direction
+	METHOD m_nxmhibqn canDripThrough (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_nytzblne getDripFluid (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_rxhyurmy;
+		ARG 0 world
+		ARG 1 pos
+	METHOD m_ovvlmlpw getDirectionToPlaceAt (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 direction
+	METHOD m_pdcnzwat canGrow (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+	METHOD m_pkurhybf (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_rxhyurmy;)V
+		ARG 3 fluid
+	METHOD m_rzhingug getSupportingPos (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;I)Ljava/util/Optional;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+		ARG 3 range
+	METHOD m_scsrnhoj canPlaceAtWithDirection (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 direction
+	METHOD m_sssorpbh tryGrow (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/Random;)V
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 random
+	METHOD m_tqbjkiyc (FLnet/minecraft/unmapped/C_rxhyurmy;)Z
+		ARG 1 fluid
+	METHOD m_urgsclfk getCauldronPos (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rxhyurmy;)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 fluid
+	METHOD m_vkorptoq (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 0 state
+	METHOD m_vqfkjipo getThickness (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Z)Lnet/minecraft/unmapped/C_kfpkaqag;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 direction
+		ARG 3 tryMerge
+	METHOD m_wtdnbtnk dripTick (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;F)V
+		ARG 0 state
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 dripChance
+	METHOD m_xgzpasaq isPointingDown (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 0 state
+	METHOD m_xmfpdwwe tryGrowStalagmite (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 0 world
+		ARG 1 pos
+	METHOD m_ymstbyiq (ZLnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 1 state
+	METHOD m_ywbyzxgi createParticle (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+	METHOD m_yytauoir (Lnet/minecraft/unmapped/C_rxhyurmy;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 1 state
+	METHOD m_zebmbyne canDrip (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 0 state
