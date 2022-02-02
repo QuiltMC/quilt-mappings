@@ -1,15 +1,38 @@
 CLASS net/minecraft/unmapped/C_yjuvgdyy net/minecraft/world/gen/chunk/NoiseChunkGenerator
 	FIELD f_cmnhdfbc settings Ljava/util/function/Supplier;
+	FIELD f_eeoimoki CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_fmgnpjoj seed J
 	FIELD f_hqqwnbgt EMPTY [Lnet/minecraft/unmapped/C_txtbiemp;
+	FIELD f_isagfakn noiseRegistry Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_llqxqltq AIR Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_sjakwlva defaultBlock Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_vzbfamyj noiseColumnSampler Lnet/minecraft/unmapped/C_upcezwgw;
+	FIELD f_wccljhjg surfaceBuilder Lnet/minecraft/unmapped/C_isfalfco;
+	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ajguowya;JLjava/util/function/Supplier;)V
+		ARG 1 noiseRegistry
+		ARG 3 seed
+		ARG 5 settings
+	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_ajguowya;JLjava/util/function/Supplier;)V
+		ARG 1 noiseRegistry
+		ARG 4 seed
+		ARG 6 settings
 	METHOD m_fgfdhdyh populateNoise (Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;II)Lnet/minecraft/unmapped/C_lwzmmmqr;
+		ARG 1 blender
 		ARG 2 accessor
 		ARG 3 chunk
 		ARG 4 startY
 		ARG 5 noiseSizeY
+	METHOD m_fiejkiba (Lnet/minecraft/unmapped/C_yjuvgdyy;)Ljava/util/function/Supplier;
+		ARG 0 generator
+	METHOD m_fydoaiaj populateBiomes (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
+		ARG 1 biomeRegistry
+		ARG 2 blender
+		ARG 3 structureAccessor
+		ARG 4 chunk
+	METHOD m_gmkezvqm (Lnet/minecraft/unmapped/C_yjuvgdyy;)Lnet/minecraft/unmapped/C_ajguowya;
+		ARG 0 generator
+	METHOD m_jztzqcmd (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_licniwcb sampleHeightmap (II[Lnet/minecraft/unmapped/C_txtbiemp;Ljava/util/function/Predicate;II)Ljava/util/OptionalInt;
 		ARG 1 x
 		ARG 2 z
@@ -20,3 +43,13 @@ CLASS net/minecraft/unmapped/C_yjuvgdyy net/minecraft/world/gen/chunk/NoiseChunk
 	METHOD m_trsjtggx matchesSettings (JLnet/minecraft/unmapped/C_xhhleach;)Z
 		ARG 1 seed
 		ARG 3 settingsKey
+	METHOD m_xuzbsymn applyMaterialRule (Lnet/minecraft/unmapped/C_kklqkmyc;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_hynzadkk;Z)Ljava/util/Optional;
+		ARG 1 context
+		ARG 2 posToBiome
+		ARG 3 chunk
+		ARG 4 chunkNoiseSampler
+		ARG 5 pos
+	METHOD m_xvwjastd (Lnet/minecraft/unmapped/C_yjuvgdyy;)Ljava/lang/Long;
+		ARG 0 generator
+	METHOD m_ydbpkmiz (Lnet/minecraft/unmapped/C_yjuvgdyy;)Lnet/minecraft/unmapped/C_tqxyjqsk;
+		ARG 0 generator

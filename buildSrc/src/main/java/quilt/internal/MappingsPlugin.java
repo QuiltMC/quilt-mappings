@@ -6,6 +6,7 @@ import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.tasks.build.BuildMappingsTinyTask;
 import quilt.internal.tasks.build.CheckMappingsTask;
 import quilt.internal.tasks.build.CompressTinyTask;
+import quilt.internal.tasks.build.DropInvalidMappingsTask;
 import quilt.internal.tasks.build.GeneratePackageInfoMappingsTask;
 import quilt.internal.tasks.build.InvertPerVersionMappingsTask;
 import quilt.internal.tasks.build.MergeTinyTask;
@@ -45,6 +46,7 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class);
         tasks.create(TinyJarTask.TASK_NAME, TinyJarTask.class);
         tasks.create(CompressTinyTask.TASK_NAME, CompressTinyTask.class);
+        tasks.create(DropInvalidMappingsTask.TASK_NAME, DropInvalidMappingsTask.class);
 
         tasks.create(MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class);
         tasks.create(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class);
