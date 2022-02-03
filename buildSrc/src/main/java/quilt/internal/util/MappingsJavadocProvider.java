@@ -30,7 +30,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
             StringBuilder javadoc;
             if (mapping.getComment() != null) {
                 javadoc = new StringBuilder(mapping.getComment());
-                javadoc.append("\n");
+                javadoc.append("\n\n");
             } else {
                 javadoc = new StringBuilder();
             }
@@ -44,7 +44,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 javadoc.append("\n");
             }
 
-            return javadoc.toString();
+            return javadoc.toString().trim();
         }
 
         return "Mapping not found";
@@ -59,7 +59,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 StringBuilder javadoc;
                 if (fieldMapping.getComment() != null) {
                     javadoc = new StringBuilder(fieldMapping.getComment());
-                    javadoc.append("\n");
+                    javadoc.append("\n\n");
                 } else {
                     javadoc = new StringBuilder();
                 }
@@ -74,7 +74,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                     javadoc.append("\n");
                 }
 
-                return javadoc.toString();
+                return javadoc.toString().trim();
             }
         }
 
@@ -90,6 +90,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 StringBuilder javadoc;
                 if (methodMapping.getComment() != null) {
                     javadoc = new StringBuilder(methodMapping.getComment());
+                    javadoc.append("\n\n");
                 } else {
                     javadoc = new StringBuilder();
                 }
@@ -104,11 +105,9 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 }
 
                 if (!argComments.isEmpty()) {
-                    javadoc.append("\n");
                     javadoc.append(argComments);
+                    javadoc.append("\n");
                 }
-
-                javadoc.append("\n");
 
                 // Add mapping info
                 for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
@@ -120,7 +119,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                     javadoc.append("\n");
                 }
 
-                return javadoc.toString();
+                return javadoc.toString().trim();
             }
         }
 
