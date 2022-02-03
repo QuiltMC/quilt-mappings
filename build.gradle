@@ -230,6 +230,8 @@ task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, zipErasedByteco
 		classJavadocProvider(jdProvider)
 		fieldJavadocProvider(jdProvider)
 		methodJavadocProvider(jdProvider)
+	}
+	doLast {
 		logger.lifecycle ":Fake source generated"
 	}
 }
@@ -310,7 +312,7 @@ javadoc {
 		addBooleanOption 'Xdoclint:accessibility', true
 	}
 	source fileTree(fakeSourceDir) + sourceSets.constants.allJava + sourceSets.packageDocs.allJava
-	classpath = configurations.javadocClasspath.plus downloadMinecraftLibraries.outputs.files.asFileTree
+	classpath = configurations.javadocClasspath + downloadMinecraftLibraries.outputs.files.asFileTree + mapNamedJar.outputs.files.asFileTree
 
 	doLast {
 		project.copy {
