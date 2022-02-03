@@ -26,7 +26,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
     @Override
     public String provideClassJavadoc(String className, boolean isRecord) {
         MappingTree.ClassMapping mapping = tree.getClass(className, namespaceId);
-        if (mapping != null && mapping.getComment() != null) {
+        if (mapping != null) {
             StringBuilder javadoc;
             if (mapping.getComment() != null) {
                 javadoc = new StringBuilder(mapping.getComment());
