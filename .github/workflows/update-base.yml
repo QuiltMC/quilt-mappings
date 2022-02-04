@@ -24,6 +24,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       # The container image openjdk:17 doesn't have git installed
       - uses: actions/setup-java@v2
         with:
@@ -33,7 +35,6 @@ jobs:
         run: ./gradlew dropInvalidMappings --stacktrace
       - name: Commit changes
         run: |
-          git checkout ${{ github.head_ref }}
           git status
           git config user.name "GitHub"
           git config user.email "noreply@github.com"
