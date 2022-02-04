@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/update-base/
+        id: update-base
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pull-number: ${{ github.event.number }}
+      - run: echo "Result '${{ steps.update-base.outputs.result }}'"
+      - run: echo "Successful"
+        if: ${{ steps.update-base.outputs.result == 'success' }}
