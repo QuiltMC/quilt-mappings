@@ -1,0 +1,76 @@
+CLASS net/minecraft/unmapped/C_jydrhkzs net/minecraft/world/gen/StructureChecker
+	FIELD f_cmqxwyiu world Lnet/minecraft/unmapped/C_qpninoyb;
+	FIELD f_dctyjbna chunkGenerator Lnet/minecraft/unmapped/C_kgfalbim;
+	FIELD f_dweozhqq chunkIoWorker Lnet/minecraft/unmapped/C_mxmjmfvn;
+	FIELD f_gfeivwbw structureManager Lnet/minecraft/unmapped/C_rhdulivw;
+	FIELD f_hroaxnir generationPossibilityByFeature Ljava/util/Map;
+	FIELD f_hrvxxqyn registryManager Lnet/minecraft/unmapped/C_wqxmvzdq;
+	FIELD f_ltxhdpgr biomeRegistry Lnet/minecraft/unmapped/C_tqxyjqsk;
+	FIELD f_mawgvjuc LOGGER Lorg/slf4j/Logger;
+	FIELD f_mbivgcat biomeSource Lnet/minecraft/unmapped/C_ajguowya;
+	FIELD f_pjfaosaj NO_STRUCTURE I
+	FIELD f_pzrmbxbn cachedStructuresByChunkPos Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+	FIELD f_tlivpies worldKey Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_vdpsraoe seed J
+	FIELD f_wyeozkcm dataFixer Lcom/mojang/datafixers/DataFixer;
+	METHOD <init> (Lnet/minecraft/unmapped/C_mxmjmfvn;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_ajguowya;JLcom/mojang/datafixers/DataFixer;)V
+		ARG 1 chunkIoWorker
+		ARG 2 registryManager
+		ARG 3 structureManager
+		ARG 4 worldKey
+		ARG 5 chunkGenerator
+		ARG 6 world
+		ARG 7 biomeSource
+		ARG 8 seed
+		ARG 10 dataFixer
+	METHOD m_blfpempu checkStart (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_vvmtobpf;Z)Lnet/minecraft/unmapped/C_vfmaswmt;
+		ARG 1 chunkPos
+		ARG 2 structure
+		ARG 3 skipExistingChunks
+	METHOD m_cvvjuque deduplicateEmptyMap (Lit/unimi/dsi/fastutil/objects/Object2IntMap;)Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		ARG 0 map
+	METHOD m_cvzlvybw tryLoadFromStorage (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_vvmtobpf;ZJ)Lnet/minecraft/unmapped/C_vfmaswmt;
+		ARG 1 chunkPos
+		ARG 2 structure
+		ARG 3 skipExistingChunks
+		ARG 4 chunkPosLong
+	METHOD m_ebxjzvtj storeResults (JLit/unimi/dsi/fastutil/objects/Object2IntMap;)V
+		ARG 1 chunkPos
+		ARG 3 structureReferences
+	METHOD m_fjmtntvg checkStructureInfo (Lit/unimi/dsi/fastutil/objects/Object2IntMap;Lnet/minecraft/unmapped/C_vvmtobpf;Z)Lnet/minecraft/unmapped/C_vfmaswmt;
+		ARG 1 structureReferences
+		ARG 2 structure
+		ARG 3 skipExistingChunks
+	METHOD m_fnwafren (Lit/unimi/dsi/fastutil/objects/Object2IntMap;Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_efiavfys;)V
+		ARG 1 structure
+		ARG 2 start
+	METHOD m_nibldbpu incrementReferences (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_vvmtobpf;)V
+		ARG 1 chunkPos
+		ARG 2 structure
+	METHOD m_ohhccjcs (Lnet/minecraft/unmapped/C_vvmtobpf;Ljava/lang/Integer;)Ljava/lang/Integer;
+		ARG 0 structure
+		ARG 1 references
+	METHOD m_qoehppjm isGenerationPossible (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_licgnyqv;Ljava/util/Collection;)Z
+		COMMENT {@return whether {@code feature} is able to generate in {@code pos}}
+		COMMENT
+		COMMENT <p>This method only performs simple checks like biomes.
+		ARG 1 pos
+		ARG 2 feature
+		ARG 3 allowedBiomes
+			COMMENT the list of biomes where the {@code feature} can generate
+	METHOD m_tkrqpfjt (Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_ynrszrtu;J)Z
+		ARG 3 chunkPosLong
+	METHOD m_ullxepai onStructureLoad (Lnet/minecraft/unmapped/C_ynrszrtu;Ljava/util/Map;)V
+		ARG 1 pos
+		ARG 2 structureStarts
+	METHOD m_uprpoebd (Lnet/minecraft/unmapped/C_vvmtobpf;)Lit/unimi/dsi/fastutil/longs/Long2BooleanMap;
+		ARG 0 structure
+	METHOD m_wwhepuia (JLit/unimi/dsi/fastutil/longs/Long2BooleanMap;)V
+		ARG 2 possibilityByChunk
+	METHOD m_wxonrjft (Lnet/minecraft/unmapped/C_vvmtobpf;Ljava/lang/Long;Lit/unimi/dsi/fastutil/objects/Object2IntMap;)Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		ARG 1 chunkPosLong
+		ARG 2 structureReferences
+	METHOD m_xiinkdwv (Ljava/util/Collection;Lnet/minecraft/unmapped/C_orlkpefs;)Z
+		ARG 2 biome
+	METHOD m_zffyubcl loadStructures (Lnet/minecraft/unmapped/C_hhlwcnih;)Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		ARG 1 nbt
