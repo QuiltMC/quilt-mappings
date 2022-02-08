@@ -1,8 +1,15 @@
 CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/SurfaceRules
 	FIELD f_buxwpbgc UNDER_FLOOR Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
 	FIELD f_oemhkmjb UNDER_CEILING Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
+	FIELD f_rgnrkvqz DEEP_UNDER_FLOOR Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
 	FIELD f_rwakgupc ON_CEILING Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
 	FIELD f_uofupvny ON_FLOOR Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
+	FIELD f_usgtpwrh VERY_DEEP_UNDER_FLOOR Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
+	METHOD m_bdzletuo stoneDepth (IZILnet/minecraft/unmapped/C_bscnovss;)Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
+		ARG 0 offset
+		ARG 1 addSurfaceDepth
+		ARG 2 secondaryDepthRange
+		ARG 3 surfaceType
 	METHOD m_enxtqexu block (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_flergppe$C_dggoeuwn;
 		ARG 0 state
 	METHOD m_fxklqnpr hole ()Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
@@ -32,6 +39,10 @@ CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/S
 		ARG 3 maxThreshold
 	METHOD m_rpkgejrc biome ([Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
 		ARG 0 biome
+	METHOD m_rxeswqzz stoneDepth (IZLnet/minecraft/unmapped/C_bscnovss;)Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
+		ARG 0 offset
+		ARG 1 addSurfaceDepth
+		ARG 2 surfaceType
 	METHOD m_sklkqugv waterWithStoneDepth (II)Lnet/minecraft/unmapped/C_flergppe$C_mecsxqth;
 		ARG 0 offset
 		ARG 1 surfaceDepthMultiplier
@@ -78,11 +89,13 @@ CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/S
 		FIELD f_knsaxicl preliminarySurfaceCache [I
 		FIELD f_koxwamhv minSurfaceLevel I
 		FIELD f_lvzwbbpb temperatureCondition Lnet/minecraft/unmapped/C_flergppe$C_vjorfddw;
+		FIELD f_ngmzwvpj HOW_FAR_BELOW_PRELIMINARY_SURFACE_LEVEL_TO_BUILD_SURFACE I
 		FIELD f_nhrftckm lastSurfaceSecondaryDepthUpdate J
 		FIELD f_ourqedeu chunkNoiseSampler Lnet/minecraft/unmapped/C_rvjywqnu;
 		FIELD f_qjtsffeh y I
 		FIELD f_qtjfahjz posToBiome Ljava/util/function/Function;
 		FIELD f_qugfcvvh x I
+		FIELD f_qvechvnc surfaceSecondary D
 		FIELD f_qzljfxys holeCondition Lnet/minecraft/unmapped/C_flergppe$C_vjorfddw;
 		FIELD f_relufswd z I
 		FIELD f_rndrhjai lastUpdateVertical J
@@ -96,6 +109,7 @@ CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/S
 		FIELD f_uzodkiij biome Ljava/util/function/Supplier;
 		FIELD f_vumnpzqq pos Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 		FIELD f_wgttrquc SURFACE_CELL_BITS I
+		FIELD f_zqteoxfk lastPreliminarySurfaceCellOrigin J
 		FIELD f_zstmpnis SURFACE_CELL_SIZE I
 		METHOD <init> (Lnet/minecraft/unmapped/C_isfalfco;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rvjywqnu;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_zzjngnnx;)V
 			ARG 1 surfaceBuilder
@@ -105,9 +119,12 @@ CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/S
 			ARG 5 biomeRegistry
 			ARG 6 heightContext
 		METHOD m_bgmaggvu getMinSurfaceLevel ()I
+		METHOD m_dgelrfgw getOrComputeSurfaceSecondary ()D
 		METHOD m_ibujkmil updateHorizontalContext (II)V
 			ARG 1 x
 			ARG 2 z
+		METHOD m_ntlmoytt blockCoordToSurfaceCell (I)I
+			ARG 0 coord
 		METHOD m_xczmztpk updateVerticalContext (IIIIII)V
 			ARG 1 stoneDepthAbove
 			ARG 2 stoneDepthBelow
@@ -115,6 +132,8 @@ CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/S
 			ARG 4 x
 			ARG 5 y
 			ARG 6 z
+		METHOD m_zctbumnm surfaceCellToBlockCoord (I)I
+			ARG 0 coord
 		CLASS C_cmlvlmfd AbovePreliminarySurfaceCondition
 		CLASS C_ggxmurzr HoleCondition
 		CLASS C_ppsqnyrq TemperatureCondition
@@ -274,6 +293,12 @@ CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/S
 		FIELD f_ejvedbbh CONDITION_CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_fyrbnycq addSurfaceDepth Z
 		FIELD f_fzjvuovv surfaceType Lnet/minecraft/unmapped/C_bscnovss;
+		FIELD f_qwslpyxl secondaryDepthRange I
+		METHOD <init> (IZILnet/minecraft/unmapped/C_bscnovss;)V
+			ARG 1 offset
+			ARG 2 addSurfaceDepth
+			ARG 3 secondaryDepthRange
+			ARG 4 surfaceType
 		METHOD apply apply (Ljava/lang/Object;)Ljava/lang/Object;
 			ARG 1 context
 		METHOD equals (Ljava/lang/Object;)Z
@@ -283,6 +308,7 @@ CLASS net/minecraft/unmapped/C_flergppe net/minecraft/world/gen/surfacebuilder/S
 		METHOD m_kgfltfhz (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
 		METHOD m_lpqrdghs offset ()I
+		METHOD m_tvdzjwlj secondaryDepthRange ()I
 		CLASS C_gfyzssyy StoneDepthCondition
 	CLASS C_xfulhrba NotMaterialCondition
 		FIELD f_fiuxfcfj CONDITION_CODEC Lcom/mojang/serialization/Codec;
