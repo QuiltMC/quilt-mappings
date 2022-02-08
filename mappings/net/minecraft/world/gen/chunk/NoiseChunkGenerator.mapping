@@ -8,12 +8,16 @@ CLASS net/minecraft/unmapped/C_yjuvgdyy net/minecraft/world/gen/chunk/NoiseChunk
 	FIELD f_sjakwlva defaultBlock Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_vzbfamyj noiseColumnSampler Lnet/minecraft/unmapped/C_upcezwgw;
 	FIELD f_wccljhjg surfaceBuilder Lnet/minecraft/unmapped/C_isfalfco;
+	FIELD f_xrrnpwqn aquiferFluidPicker Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;
 	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ajguowya;JLjava/util/function/Supplier;)V
 		ARG 1 noiseRegistry
+		ARG 2 biomeSource
 		ARG 3 seed
 		ARG 5 settings
 	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_ajguowya;JLjava/util/function/Supplier;)V
 		ARG 1 noiseRegistry
+		ARG 2 populationSource
+		ARG 3 biomeSource
 		ARG 4 seed
 		ARG 6 settings
 	METHOD m_fgfdhdyh populateNoise (Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;II)Lnet/minecraft/unmapped/C_lwzmmmqr;
@@ -31,6 +35,16 @@ CLASS net/minecraft/unmapped/C_yjuvgdyy net/minecraft/world/gen/chunk/NoiseChunk
 		ARG 4 chunk
 	METHOD m_gmkezvqm (Lnet/minecraft/unmapped/C_yjuvgdyy;)Lnet/minecraft/unmapped/C_ajguowya;
 		ARG 0 generator
+	METHOD m_hfhrpedc getDebugPreliminarySurfaceLevelBlockState (Lnet/minecraft/unmapped/C_rvjywqnu;IIILnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 1 sampler
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+		ARG 5 defaultState
+	METHOD m_idtuwfvr (III)Lnet/minecraft/unmapped/C_orlkpefs;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
 	METHOD m_jztzqcmd (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
 	METHOD m_licniwcb sampleHeightmap (II[Lnet/minecraft/unmapped/C_txtbiemp;Ljava/util/function/Predicate;II)Ljava/util/OptionalInt;
@@ -40,6 +54,14 @@ CLASS net/minecraft/unmapped/C_yjuvgdyy net/minecraft/world/gen/chunk/NoiseChunk
 		ARG 4 predicate
 		ARG 5 minY
 		ARG 6 noiseSizeY
+	METHOD m_ngiowbrm (Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;ILnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;III)Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;
+		ARG 4 x
+		ARG 5 y
+		ARG 6 z
+	METHOD m_trceofdq (Lnet/minecraft/unmapped/C_rvjywqnu;III)Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
 	METHOD m_trsjtggx matchesSettings (JLnet/minecraft/unmapped/C_xhhleach;)Z
 		ARG 1 seed
 		ARG 3 settingsKey
