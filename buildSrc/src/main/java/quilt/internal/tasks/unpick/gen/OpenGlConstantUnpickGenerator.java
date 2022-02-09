@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -36,8 +38,8 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         super(Constants.Groups.UNPICK_GEN);
         this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME);
 
-        this.onlyIf(_task -> !_task.getProject().file("unpick-definitions/unpick_gl.unpick").exists() ||
-                             !_task.getProject().file("unpick-definitions/unpick_glstatemanager.unpick").exists());
+//        this.onlyIf(_task -> !_task.getProject().file("unpick-definitions/unpick_gl.unpick").exists() ||
+//                             !_task.getProject().file("unpick-definitions/unpick_glstatemanager.unpick").exists());
     }
 
     @TaskAction
@@ -80,7 +82,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         });
 
         Map<String, List<String>> constantToDefiningVersions = new HashMap<>();
-        Map<String, Map<String, List<String>>> functionToSignatureToDefiningVersions = new HashMap<>();
+        Map<String, Map<Signature, List<String>>> functionToSignatureToDefiningVersions = new HashMap<>();
         ZipFile zip = new ZipFile(getProject().file(".gradle/minecraft/libraries/lwjgl-opengl-3.2.2.jar"));
         OPEN_GL_VERSIONS.forEach(version -> {
             try {
@@ -100,7 +102,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
 
                     @Override
                     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                        functionToSignatureToDefiningVersions.computeIfAbsent(name, n -> new HashMap<>()).computeIfAbsent(descriptor, d -> new ArrayList<>()).add(version);
+                        functionToSignatureToDefiningVersions.computeIfAbsent(name, n -> new HashMap<>()).computeIfAbsent(Signature.from(descriptor), d -> new ArrayList<>()).add(version);
                         return super.visitMethod(access, name, descriptor, signature, exceptions);
                     }
                 }, 1);
@@ -119,7 +121,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
                     @Override
                     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
                         // We want to unpick all the methods
-                        functionToSignatureToDefiningVersions.computeIfAbsent(name, n -> new HashMap<>()).computeIfAbsent(descriptor, d -> new ArrayList<>()).add(version + "C");
+                        functionToSignatureToDefiningVersions.computeIfAbsent(name, n -> new HashMap<>()).computeIfAbsent(Signature.from(descriptor), d -> new ArrayList<>()).add(version + "C");
                         return super.visitMethod(access, name, descriptor, signature, exceptions);
                     }
                 }, 1);
@@ -162,15 +164,15 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
                     functionToSignatureToDefiningVersions.getOrDefault(func.name, new HashMap<>())
                             .forEach((signature, versions) -> {
                                 versions.forEach(version -> {
-                                    out.println("target_method org/lwjgl/opengl/GL" + version + " " + func.name + " " + signature);
-                                    printParams(isBitmask, out, func, false);
+                                    out.println("target_method org/lwjgl/opengl/GL" + version + " " + func.name + " " + signature.signature);
+                                    printParams(isBitmask, out, func, false, signature);
                                 });
                             });
                     functionToSignatureToDefiningVersions.getOrDefault("n" + func.name, new HashMap<>())
                             .forEach((signature, versions) -> {
                                 versions.forEach(version -> {
-                                    out.println("target_method org/lwjgl/opengl/GL" + version + " n" + func.name + " " + signature);
-                                    printParams(isBitmask, out, func, true);
+                                    out.println("target_method org/lwjgl/opengl/GL" + version + " n" + func.name + " " + signature.signature);
+                                    printParams(isBitmask, out, func, true, signature);
                                 });
                             });
                     if (functionToSignatureToDefiningVersions.containsKey(func.name)) {
@@ -188,14 +190,14 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
             PrintStream out = new PrintStream(new FileOutputStream(unpickGlStateManager));
             out.println("v2\n# This file was automatically generated, do not modify it\n");
 
-            Map<String, List<String>> methodToSignature = new HashMap<>();
+            Map<String, List<Signature>> methodToSignature = new HashMap<>();
             ZipFile minecraftJar = new ZipFile(getProject().file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar"));
             ClassReader reader = new ClassReader(minecraftJar.getInputStream(minecraftJar.getEntry(GL_STATE_MANAGER_CLASS + ".class")).readAllBytes());
 
             reader.accept(new ClassVisitor(Opcodes.ASM9) {
                 @Override
                 public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                    methodToSignature.computeIfAbsent(name, n -> new ArrayList<>()).add(descriptor);
+                    methodToSignature.computeIfAbsent(name, n -> new ArrayList<>()).add(Signature.from(descriptor));
                     return super.visitMethod(access, name, descriptor, signature, exceptions);
                 }
             }, 1);
@@ -220,8 +222,8 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
                 boolean shouldGenerate = func.parameters.stream().anyMatch(param -> isBitmask.containsKey(param.group));
                 if (shouldGenerate) {
                     signatures.forEach(signature -> {
-                        out.println("target_method " + GL_STATE_MANAGER_CLASS + " " + method + " " + signature);
-                        printParams(isBitmask, out, func, false);
+                        out.println("target_method " + GL_STATE_MANAGER_CLASS + " " + method + " " + signature.signature);
+                        printParams(isBitmask, out, func, false, signature);
                     });
                     out.println();
                 }
@@ -229,7 +231,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         }
     }
 
-    private void printParams(Map<String, Boolean> isBitmask, PrintStream out, GlFunc func, boolean isUnsafe) {
+    private void printParams(Map<String, Boolean> isBitmask, PrintStream out, GlFunc func, boolean isUnsafe, Signature signature) {
         for (int i = 0; i < func.parameters.size(); i++) {
             GlParam param = func.parameters.get(i);
             if (isBitmask.containsKey(param.group)) {
@@ -239,7 +241,9 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
                         continue;
                     }
                 }
-                out.println("\tparam " + i + " " + param.group);
+                if (signature.isInt(i)) {
+                    out.println("\tparam " + i + " " + param.group);
+                }
             }
         }
     }
@@ -265,6 +269,22 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         @Override
         public String toString() {
             return String.format("%s %s", ptype, name) + (group.isEmpty() ? "" : "(" + group + ")");
+        }
+    }
+
+    private record Signature(String signature, List<String> types) {
+        private static Signature from(String signature) {
+            String trimmed = signature.substring(1, signature.length() - 2);
+            Matcher matcher = Pattern.compile("(L.+?;|.)").matcher(trimmed);
+            matcher.find();
+            return new Signature(signature, matcher.results().map(matchResult -> matchResult.group(1)).toList());
+        }
+
+        private boolean isInt(int index) {
+            if (index >= types.size()) {
+                return false;
+            }
+            return types.get(index).equals("I");
         }
     }
 }
