@@ -22,8 +22,6 @@ public class UnpickJarTask extends JavaExec implements MappingsTask {
     public UnpickJarTask() {
         this.setGroup(Constants.Groups.UNPICK);
 
-        outputsNeverUpToDate();
-
         this.getMainClass().set("daomephsta.unpick.cli.Main");
         classpath(getProject().getConfigurations().getByName("unpick"));
         systemProperty("java.util.logging.config.file", getProject().file("unpick-logging.properties"));

@@ -22,16 +22,16 @@ public class QuiltflowerJavadocProvider implements IFabricJavadocProvider {
     @Override
     public String getClassDoc(StructClass structClass) {
         boolean isRecord = (structClass.getAccessFlags() & 0x10000) != 0; // ACC_RECORD
-        return classJavadocProvider.provide(structClass.qualifiedName, isRecord);
+        return classJavadocProvider.provideClassJavadoc(structClass.qualifiedName, isRecord);
     }
 
     @Override
     public String getFieldDoc(StructClass structClass, StructField structField) {
-        return fieldJavadocProvider.provide(structField.getName(), structField.getDescriptor(), structClass.qualifiedName);
+        return fieldJavadocProvider.provideFieldJavadoc(structField.getName(), structField.getDescriptor(), structClass.qualifiedName);
     }
 
     @Override
     public String getMethodDoc(StructClass structClass, StructMethod structMethod) {
-        return methodJavadocProvider.provide(structMethod.getName(), structMethod.getDescriptor(), structClass.qualifiedName);
+        return methodJavadocProvider.provideMethodJavadoc(structMethod.getName(), structMethod.getDescriptor(), structClass.qualifiedName);
     }
 }

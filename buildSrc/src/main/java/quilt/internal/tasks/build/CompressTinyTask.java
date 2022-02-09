@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPOutputStream;
 
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
@@ -17,11 +19,16 @@ public class CompressTinyTask extends DefaultMappingsTask {
     @OutputFile
     public File compressedTiny = new File(getProject().file("build/libs/"), String.format("%s-tiny-%s.gz", Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION));
 
+    @InputFile
+    private final RegularFileProperty mappings;
+
     public CompressTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
         dependsOn(TinyJarTask.TASK_NAME, MergeTinyTask.TASK_NAME);
         getOutputs().file(compressedTiny);
-        outputsNeverUpToDate();
+
+        mappings = getProject().getObjects().fileProperty();
+        mappings.convention(this.getTaskByType(MergeTinyTask.class)::getOutputMappings);
     }
 
     @TaskAction
@@ -31,7 +38,7 @@ public class CompressTinyTask extends DefaultMappingsTask {
         byte[] buffer = new byte[1024];
         FileOutputStream fileOutputStream = new FileOutputStream(compressedTiny);
         GZIPOutputStream outputStream = new GZIPOutputStream(fileOutputStream);
-        FileInputStream fileInputStream = new FileInputStream(this.getTaskByType(MergeTinyTask.class).getOutputMappings());
+        FileInputStream fileInputStream = new FileInputStream(mappings.get().getAsFile());
 
         int length;
         while ((length = fileInputStream.read(buffer)) > 0) {
@@ -45,5 +52,9 @@ public class CompressTinyTask extends DefaultMappingsTask {
 
     public File getCompressedTiny() {
         return compressedTiny;
+    }
+
+    public RegularFileProperty getMappings() {
+        return mappings;
     }
 }
