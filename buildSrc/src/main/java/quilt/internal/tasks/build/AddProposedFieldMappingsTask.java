@@ -24,7 +24,6 @@ public class AddProposedFieldMappingsTask extends DefaultMappingsTask {
     public AddProposedFieldMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
         outputMappings = new File(fileConstants.tempDir, getName() + "-with-enum.tiny");
-        outputsNeverUpToDate();
         inputJar = getProject().getObjects().property(File.class);
         inputMappings = getProject().getObjects().property(File.class);
     }
