@@ -10,6 +10,7 @@ CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/util/registry/DynamicRegis
 	COMMENT class serves as an immutable implementation of any particular collection
 	COMMENT or configuration of dynamic registries.
 	FIELD f_pgyjimoz INFOS Ljava/util/Map;
+	FIELD f_wvcxtgsi BUILTIN Ljava/util/function/Supplier;
 	FIELD f_zcsxlkxx LOGGER Lorg/slf4j/Logger;
 	METHOD m_asrzufgj getOptional (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		ARG 1 key
@@ -24,6 +25,17 @@ CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/util/registry/DynamicRegis
 		COMMENT
 		COMMENT @throws IllegalStateException if the registry does not exist
 		ARG 1 key
+	METHOD m_kagwftqy getMutable (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_tqxyjqsk;
+		ARG 1 key
+	METHOD m_lbyadhxv load (Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yftyvswu;)V
+		COMMENT Loads a dynamic registry manager from the resource manager's data files.
+	METHOD m_nnjsvctt load (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yftyvswu$C_ogvxrsre;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
+		COMMENT Loads elements from the {@code ops} into the registry specified by {@code
+		COMMENT info} within the {@code manager}. Note that the resource manager instance
+		COMMENT is kept within the {@code ops}.
+		ARG 2 info
+	METHOD m_physpezp (Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;Lnet/minecraft/unmapped/C_nyvkclsy$C_dxgwghhk;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
+		ARG 2 info
 	METHOD m_pquswexb getOptionalMutable (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		COMMENT Retrieves a registry optionally from this manager.
 		ARG 1 key
