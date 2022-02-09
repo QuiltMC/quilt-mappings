@@ -65,13 +65,6 @@ configurations {
 	enigmaRuntime
 	javadocClasspath
 	decompileClasspath
-	mappingPoetJar {
-		transitive = false
-	}
-	mappingPoet {
-		extendsFrom mappingPoetJar
-		transitive = true
-	}
 	unpick
 	hashed
 }
@@ -83,19 +76,23 @@ dependencies {
 	javadocClasspath "org.jetbrains:annotations:${project.jetbrains_annotations_version}"
 	javadocClasspath "com.google.code.findbugs:jsr305:3.0.2" // for some other jsr annotations
 	decompileClasspath "net.fabricmc:cfr:${project.cfr_version}"
-	mappingPoetJar "org.quiltmc:mapping-poet:${project.mapping_poet_version}"
 	unpick "net.fabricmc.unpick:unpick-cli:${project.unpick_version}"
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 }
 
-
+import org.objectweb.asm.ClassVisitor
+import org.objectweb.asm.Opcodes
+import org.quiltmc.draftsman.asm.visitor.DraftsmanClassVisitor
 import quilt.internal.Constants
 import quilt.internal.decompile.Decompilers
 import quilt.internal.tasks.build.AddProposedFieldMappingsTask
 import quilt.internal.tasks.build.MappingsV2JarTask
+import quilt.internal.decompile.Decompilers
+import quilt.internal.tasks.build.TransformJarClassesTask
 import quilt.internal.tasks.decompile.DecompileTask
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
+import quilt.internal.util.MappingsJavadocProvider
 
 clean.doFirst {
 	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft
@@ -124,17 +121,18 @@ remapUnpickDefinitions {
 	mappings = buildTinyWithEnum.outputMappings
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-	it.options.release = 16
+	it.options.release = 17
 }
 
 sourceSets {
 	constants
 	packageDocs // package info files
+	doclet
 }
 
 license {
@@ -181,16 +179,59 @@ task v2MergedMappingsJar(dependsOn: ["mergeTinyV2"], type: MappingsV2JarTask) {
 	mappings = mergeTinyV2.outputMappings
 }
 
+task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
+	jarFile = mappings.fileConstants.namedJar
+	output = file(".gradle/temp/erased-classes/")
+	visitor(DraftsmanClassVisitor::new)
+	// Set protected/package-private classes to public so that we don't have any access compile errors.
+	// TODO: Fix this by putting the classes in the same package. Javadoc shows the modifier
+	visitor { new ClassVisitor(Opcodes.ASM9, it) {
+		private int toPublicAccess(int access) {
+			if ((access & Opcodes.ACC_PROTECTED) != 0 || ((access & Opcodes.ACC_PRIVATE) == 0 && (access & Opcodes.ACC_PUBLIC) == 0)) {
+				access = access & ~Opcodes.ACC_PROTECTED
+				access = access | Opcodes.ACC_PUBLIC
+			}
+			return access
+		}
+
+		@Override
+		void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+			super.visit(version, toPublicAccess(access), name, signature, superName, interfaces)
+		}
+
+		@Override
+		void visitInnerClass(String name, String outerName, String innerName, int access) {
+			super.visitInnerClass(name, outerName, innerName, toPublicAccess(access))
+		}
+	} }
+}
+
+task zipErasedBytecode(type: Zip, dependsOn: eraseBytecode) {
+	from eraseBytecode.output
+	archiveName = "erased-classes.jar"
+	destinationDirectory = mappings.fileConstants.tempDir
+}
+
 def fakeSourceDir = file(".gradle/temp/fakeSource")
-task genFakeSource(type: JavaExec, dependsOn: ["mergeTinyV2", "mapNamedJar"]) {
-	group = "javadoc generation"
-	outputs.upToDateWhen { false }
+task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, zipErasedBytecode]) {
+	input = zipErasedBytecode.outputs.getFiles().getSingleFile()
+	output = fakeSourceDir
+	decompiler = Decompilers.QUILTFLOWER
+	libraries = files(mappings.fileConstants.libraries)
+	decompilerOptions = [
+			"rsy": "1", // remove synthetics
+			"dgs": "1", // decompile generic signatures
+			"pll": "99999" // pll (Preferred Line Length) is length for line wrapping
+	]
 
-	mainClass = "org.quiltmc.mappingpoet.Main"
-	classpath configurations.mappingPoet
-	// use merged v2 so we have all namespaces in jd
-	args mergeTinyV2.outputMappings.getAbsolutePath(), mappings.fileConstants.namedJar.getAbsolutePath(), fakeSourceDir.getAbsolutePath(), mappings.fileConstants.libraries.getAbsolutePath()
+	doFirst {
+		fakeSourceDir.deleteDir()
 
+		def jdProvider = new MappingsJavadocProvider(mergeTinyV2.outputMappings, "named")
+		classJavadocProvider(jdProvider)
+		fieldJavadocProvider(jdProvider)
+		methodJavadocProvider(jdProvider)
+	}
 	doLast {
 		logger.lifecycle ":Fake source generated"
 	}
@@ -219,18 +260,13 @@ task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 }
 
 javadoc {
+	dependsOn genFakeSource
 	dependsOn downloadMinecraftLibraries
+	dependsOn docletClasses // Needed for javadoc to find the doclet classes.
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
 
-	if (ENV.CI) {
-		// Java 17 is provided on CI to build the javadocs with, see https://github.com/FabricMC/yarn/issues/2429
-		javadocTool = javaToolchains.javadocToolFor {
-			languageVersion = JavaLanguageVersion.of(17)
-		}
-	}
-
-	def mappingPoetJar = project.provider { zipTree configurations.mappingPoetJar.singleFile }
+	def docletResources = sourceSets.doclet.resources.asFileTree
 
 	failOnError = false
 	maxMemory = '2G'
@@ -238,7 +274,7 @@ javadoc {
 	// verbose = true // enable to debug
 	options {
 		// verbose() // enable to debug
-		source = "16"
+		source = "17"
 		encoding = 'UTF-8'
 		charSet = 'UTF-8'
 		memberLevel = JavadocMemberLevel.PRIVATE
@@ -248,7 +284,7 @@ javadoc {
 				'implSpec:a:Implementation Requirements:',
 				'implNote:a:Implementation Note:'
 		)
-		taglets "org.quiltmc.mappingpoet.jd.MappingTaglet"
+		taglets "quilt.internal.taglet.MappingTaglet"
 		// taglet path, header, extra stylesheet settings deferred
 		it.use()
 
@@ -268,20 +304,20 @@ javadoc {
 				'https://commons.apache.org/proper/commons-codec/archives/1.10/apidocs',
 				'https://commons.apache.org/proper/commons-compress/javadocs/api-1.8.1/',
 				"https://maven.fabricmc.net/docs/fabric-loader-${project.fabric_loader_version}/",
-				"https://docs.oracle.com/en/java/javase/16/docs/api/"
+				"https://docs.oracle.com/en/java/javase/17/docs/api/"
 		)
-		// https://docs.oracle.com/en/java/javase/16/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
+		// https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
 		addBooleanOption 'Xdoclint:html', true
 		addBooleanOption 'Xdoclint:syntax', true
 		addBooleanOption 'Xdoclint:reference', true
 		addBooleanOption 'Xdoclint:accessibility', true
 	}
-	source sourceSets.constants.allJava + sourceSets.packageDocs.allJava
+	source fileTree(fakeSourceDir) + sourceSets.constants.allJava + sourceSets.packageDocs.allJava
 	classpath = configurations.javadocClasspath + downloadMinecraftLibraries.outputs.files.asFileTree + mapNamedJar.outputs.files.asFileTree
 
 	doLast {
 		project.copy {
-			from mappingPoetJar
+			from docletResources
 			include "copy_on_click.js"
 			into javadoc.outputDirectory
 		}
@@ -290,10 +326,9 @@ javadoc {
 	doFirst {
 		// lazy setting
 		options {
-			tagletPath configurations.mappingPoet.files.toList()
-			header mappingPoetJar.get().filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
-			// cannot include line breaks
-			addFileOption "-add-stylesheet", mappingPoetJar.get().filter { it.name == 'forms.css' }.singleFile
+			tagletPath sourceSets.doclet.output.classesDirs.files.toList()
+			header docletResources.filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
+			addFileOption "-add-stylesheet", docletResources.filter { it.name == 'style.css' }.singleFile
 		}
 	}
 }
