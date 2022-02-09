@@ -28,10 +28,6 @@ public class EnigmaMappingsTask extends JavaExec implements MappingsTask {
     @InputFile
     private final RegularFileProperty jarToMap;
 
-//    public void setJarToMap(File jarToMap) {
-//        this.jarToMap.set(jarToMap);
-//    }
-
     public RegularFileProperty getJarToMap() {
         return jarToMap;
     }

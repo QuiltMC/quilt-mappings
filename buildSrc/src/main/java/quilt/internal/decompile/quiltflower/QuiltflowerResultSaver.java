@@ -5,6 +5,7 @@ import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.jar.Manifest;
 
 public class QuiltflowerResultSaver implements IResultSaver {
@@ -32,6 +33,10 @@ public class QuiltflowerResultSaver implements IResultSaver {
 
     @Override
     public void saveClassFile(String path, String qualifiedName, String entryName, String content, int[] mapping) {
+        if (content == null) {
+            return;
+        }
+
         Path file = outputPath.resolve(path).resolve(entryName);
         try {
             if (!Files.exists(file.getParent())) {

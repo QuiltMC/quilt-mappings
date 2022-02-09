@@ -2,7 +2,8 @@ package quilt.internal.tasks.build;
 
 import java.io.File;
 
-import org.gradle.api.tasks.Internal;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
@@ -12,20 +13,24 @@ import net.fabricmc.stitch.commands.tinyv2.CommandMergeTinyV2;
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 
 public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
+    @InputFile
+    protected final RegularFileProperty input;
+
     @OutputFile
     public File outputMappings;
 
     public AbstractTinyMergeTask(String outputMappings) {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        outputsNeverUpToDate();
         this.outputMappings = new File(fileConstants.tempDir, outputMappings);
         getOutputs().file(this.outputMappings);
+
+        input = getProject().getObjects().fileProperty();
     }
 
     @TaskAction
     public void mergeMappings() throws Exception {
         File hashedTinyInput = this.getTaskByType(InvertPerVersionMappingsTask.class).getInvertedTinyFile();
-        File mappingsTinyInput = getInputTinyFile();
+        File mappingsTinyInput = input.get().getAsFile();
 
         File temporaryResultMappings = new File(fileConstants.tempDir, "mappings-" + getName() + ".tiny");
 
@@ -50,8 +55,9 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         new CommandReorderTinyV2().run(args2);
     }
 
-    @Internal
-    public abstract File getInputTinyFile();
+    public RegularFileProperty getInput() {
+        return input;
+    }
 
     public File getOutputMappings() {
         return outputMappings;
