@@ -138,7 +138,7 @@ Since enigma format does not support `package-info.java` file creation, Quilt Ma
 
 ### Tooling
 
-Quilt-hosted Javadocs are generated using [JDK 16 Standard Doclet](https://docs.oracle.com/en/java/javase/16/docs/specs/javadoc/doc-comment-spec.html) and can use any feature it supports. For example, it has a [list of supported tags](https://docs.oracle.com/en/java/javase/16/docs/specs/javadoc/doc-comment-spec.html#where-tags-can-be-used). You can personally build the documentation with a newer Java version. See [the 'Checking Javadoc' section](#checking-javadoc) for how to build the documentation locally.
+Quilt-hosted Javadocs are generated using [JDK 17 Standard Doclet](https://docs.oracle.com/en/java/javase/17/docs/specs/javadoc/doc-comment-spec.html) and can use any feature it supports. For example, it has a [list of supported tags](https://docs.oracle.com/en/java/javase/17/docs/specs/javadoc/doc-comment-spec.html#where-tags-can-be-used). You can personally build the documentation with a newer Java version. See [the 'Checking Javadoc' section](#checking-javadoc) for how to build the documentation locally.
 
 ### Custom tags
 
@@ -160,9 +160,9 @@ A class is assumed to be imported in the following scenarios:
 
 - If it is from the `java.lang` package
 - If it is from the same package as the currently documented class
-- If it is used as part of its API, such as in the signature of the class or its members (methods and fields). See Javadoc's definition of "use" in its [`-use` command line option specification](https://docs.oracle.com/en/java/javase/16/docs/specs/man/javadoc.html#options-for-javadoc).
+- If it is used as part of its API, such as in the signature of the class or its members (methods and fields). See Javadoc's definition of "use" in its [`-use` command line option specification](https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#options-for-javadoc).
 
-If it does not fulfill one of these scenarios, use the [full binary name](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/ClassLoader.html#binary-name), such as `com.google.common.collect.Lists` rather than simply `Lists`. Unlike class naming in enigma, do not use `/` to separate packages; use `.` instead.
+If it does not fulfill one of these scenarios, use the [full binary name](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ClassLoader.html#binary-name), such as `com.google.common.collect.Lists` rather than simply `Lists`. Unlike class naming in enigma, do not use `/` to separate packages; use `.` instead.
 
 Use Quilt Mappings when referencing Minecraft members, such as `net.minecraft.server.world.ThreadedAnvilChunkStorage` rather than `net.minecraft.unmapped.C_ccazprxg`. The Javadoc task will warn if some links no longer work after a rename.
 

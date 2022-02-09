@@ -10,12 +10,11 @@ CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/util/registry/DynamicRegis
 	COMMENT class serves as an immutable implementation of any particular collection
 	COMMENT or configuration of dynamic registries.
 	FIELD f_pgyjimoz INFOS Ljava/util/Map;
-	FIELD f_wvcxtgsi BUILTIN Lnet/minecraft/unmapped/C_wqxmvzdq$C_olezqsef;
+	FIELD f_wvcxtgsi BUILTIN Ljava/util/function/Supplier;
 	FIELD f_zcsxlkxx LOGGER Lorg/slf4j/Logger;
 	METHOD m_asrzufgj getOptional (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		ARG 1 key
-	METHOD m_avyujipe (Lcom/mojang/serialization/DataResult$PartialResult;)V
-		ARG 0 partial
+	METHOD m_avvkgvxl getKnownRegistries ()Ljava/lang/Iterable;
 	METHOD m_bfnxdyki register (Lcom/google/common/collect/ImmutableMap$Builder;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Codec;)V
 		ARG 0 infosBuilder
 		ARG 1 registryRef
@@ -26,56 +25,25 @@ CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/util/registry/DynamicRegis
 		COMMENT
 		COMMENT @throws IllegalStateException if the registry does not exist
 		ARG 1 key
-	METHOD m_jaszmazb create ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_olezqsef;
-		COMMENT Creates a default dynamic registry manager.
-	METHOD m_kagwftqy getMutable (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_eexxncvi;
+	METHOD m_kagwftqy getMutable (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_tqxyjqsk;
 		ARG 1 key
-	METHOD m_lbyadhxv load (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_udwrczdh;)V
+	METHOD m_lbyadhxv load (Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yftyvswu;)V
 		COMMENT Loads a dynamic registry manager from the resource manager's data files.
-		ARG 0 manager
-		ARG 1 ops
-	METHOD m_mcrxckfi addBuiltinEntries (Lnet/minecraft/unmapped/C_wqxmvzdq$C_olezqsef;Lnet/minecraft/unmapped/C_tqxyjqsk;)V
-		COMMENT Add all entries of the {@code registry} to the corresponding registry
-		COMMENT within this manager.
-		ARG 0 manager
-		ARG 1 registry
-	METHOD m_nnjsvctt load (Lnet/minecraft/unmapped/C_udwrczdh;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
+	METHOD m_nnjsvctt load (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yftyvswu$C_ogvxrsre;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
 		COMMENT Loads elements from the {@code ops} into the registry specified by {@code
 		COMMENT info} within the {@code manager}. Note that the resource manager instance
 		COMMENT is kept within the {@code ops}.
-		ARG 0 ops
-		ARG 1 manager
 		ARG 2 info
-	METHOD m_physpezp (Lnet/minecraft/unmapped/C_wqxmvzdq$C_olezqsef;Lnet/minecraft/unmapped/C_nyvkclsy$C_dxgwghhk;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
-		ARG 0 manager
+	METHOD m_physpezp (Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;Lnet/minecraft/unmapped/C_nyvkclsy$C_dxgwghhk;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
 		ARG 2 info
 	METHOD m_pquswexb getOptionalMutable (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		COMMENT Retrieves a registry optionally from this manager.
 		ARG 1 key
-	METHOD m_scufwdcp copyFromBuiltin (Lnet/minecraft/unmapped/C_wqxmvzdq$C_olezqsef;Lnet/minecraft/unmapped/C_xhhleach;)V
-		COMMENT Add all entries of the registry referred by {@code registryRef} to the
-		COMMENT corresponding registry within this manager.
-		ARG 0 manager
-		ARG 1 registryRef
 	METHOD m_zbdqwvdm register (Lcom/google/common/collect/ImmutableMap$Builder;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)V
 		ARG 0 infosBuilder
 		ARG 1 registryRef
 		ARG 2 entryCodec
 		ARG 3 networkEntryCodec
-	CLASS C_olezqsef Impl
-		COMMENT An immutable implementation of the dynamic registry manager, representing
-		COMMENT a specialized configuration of registries. It has a codec that allows
-		COMMENT conversion from and to data pack JSON or packet NBT.
-		FIELD f_crxahhcy CODEC Lcom/mojang/serialization/Codec;
-		FIELD f_qdbdsfzj registries Ljava/util/Map;
-		METHOD <init> (Ljava/util/Map;)V
-			ARG 1 registries
-		METHOD m_jdlabgxv setupCodec ()Lcom/mojang/serialization/Codec;
-		METHOD m_nucebtev getDataResultForCodec (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/DataResult;
-			ARG 0 registryRef
-		METHOD m_rmitkbht fromRegistryCodecs (Lcom/mojang/serialization/codecs/UnboundedMapCodec;)Lcom/mojang/serialization/Codec;
-		METHOD m_sjfoxfna createRegistry (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_secmvxxe;
-			ARG 0 registryRef
 	CLASS C_ydhbsuwm Info
 		COMMENT Represents the serialization behavior of the registries, including the
 		COMMENT id of the registry, the codec for its elements, and whether the registry

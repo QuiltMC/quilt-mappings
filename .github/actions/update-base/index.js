@@ -26,6 +26,7 @@ async function main() {
 
     if (!labels.has(updateLabel)) {
         core.info('Nothing to do, the pr ' + pull_number + ' does not have the label ' + updateLabel);
+        core.setOutput('result', 'skipped');
         return;
     }
 
@@ -37,18 +38,24 @@ async function main() {
     const pullData = (await github.pulls.get({ ...baseParameters, pull_number })).data;
     if (pullData.base.ref == base) {
         await createComment('🚨 Target branch is already set to ' + base);
+        core.setOutput('result', 'already-set');
     } else {
+        // Update base branch to repo default branch
         await github.pulls.update({ ...baseParameters, pull_number, base });
         await createComment('🚀 Target branch has been updated to ' + base);
 
         try {
+            // Merge the base branch into the pull request branch
             await github.pulls.updateBranch({ ...baseParameters, pull_number });
+            core.setOutput('result', 'success');
         } catch (error) {
             // 422 is returned when there is a merge conflict
             if (error.status === 422) {
                 await createComment('🚨 Please fix merge conflicts before this can be merged' );
                 labels.add(outdatedLabel);
+                core.setOutput('result', 'outdated');
             } else {
+                core.setOutput('result', 'error');
                 throw error;
             }
         }

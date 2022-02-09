@@ -1,7 +1,7 @@
 package quilt.internal.tasks.jarmapping;
 
-import java.io.File;
-
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
@@ -13,21 +13,37 @@ import quilt.internal.util.JarRemapper;
 public class MapPerVersionMappingsJarTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "mapPerVersionMappingsJar";
 
+    @InputFile
+    private final RegularFileProperty mergedJar;
+
+    @InputFile
+    private final RegularFileProperty perVersionMappingsFile;
+
     public MapPerVersionMappingsJarTask() {
         super(Constants.Groups.MAP_JAR_GROUP);
-
-        getInputs().files(getTaskByName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
-        getOutputs().file(this.fileConstants.perVersionMappingsJar);
-
         this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadPerVersionMappingsTask.TASK_NAME, MergeJarsTask.TASK_NAME);
 
-        outputsNeverUpToDate();
+        mergedJar = getProject().getObjects().fileProperty();
+        perVersionMappingsFile = getProject().getObjects().fileProperty();
+
+        mergedJar.convention(getTaskByType(MergeJarsTask.class)::getMergedFile);
+        perVersionMappingsFile.convention(getTaskByType(DownloadPerVersionMappingsTask.class)::getTinyFile);
+
+        getInputs().files(fileConstants.libraries);
+        getOutputs().file(this.fileConstants.perVersionMappingsJar);
     }
 
     @TaskAction
     public void mapPerVersionMappingJar() {
         getLogger().lifecycle(":mapping minecraft to {}", Constants.PER_VERSION_MAPPINGS_NAME);
-        File tinyInput = getTaskByType(DownloadPerVersionMappingsTask.class).getTinyFile();
-        JarRemapper.mapJar(fileConstants.perVersionMappingsJar, getTaskByType(MergeJarsTask.class).getMergedFile(), tinyInput, fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
+        JarRemapper.mapJar(fileConstants.perVersionMappingsJar, mergedJar.get().getAsFile(), perVersionMappingsFile.get().getAsFile(), fileConstants.libraries, "official", Constants.PER_VERSION_MAPPINGS_NAME, null);
+    }
+
+    public RegularFileProperty getMergedJar() {
+        return mergedJar;
+    }
+
+    public RegularFileProperty getPerVersionMappingsFile() {
+        return perVersionMappingsFile;
     }
 }
