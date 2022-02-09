@@ -29,7 +29,6 @@ public class MapNamedJarTask extends DefaultMappingsTask {
         jar = getProject().getObjects().fileProperty();
         mappings = getProject().getObjects().fileProperty();
 
-        // fileConstants.unpickedJar
 
         jar.convention(() -> fileConstants.unpickedJar);
         mappings.convention(getTaskByType(MergeTinyV2Task.class)::getOutputMappings);
