@@ -17,61 +17,12 @@ CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/Structur
 	METHOD m_auawqaic (Lnet/minecraft/unmapped/C_jpnewgxf;)Lnet/minecraft/unmapped/C_licgnyqv;
 		ARG 1 featureConfig
 	METHOD m_cxwivmzi init ()V
-	METHOD m_dbaiwpdf locateStructure (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_hynzadkk;IZJLnet/minecraft/unmapped/C_eaybxiiq;)Lnet/minecraft/unmapped/C_hynzadkk;
-		COMMENT Tries to find the closest structure of this type near a given block.
-		COMMENT <p>
-		COMMENT This method relies on the given world generation settings (seed and placement configuration)
-		COMMENT to match the time at which the structure was generated, otherwise it will not be found.
-		COMMENT <p>
-		COMMENT New chunks will only be generated up to the {@link net.minecraft.world.chunk.ChunkStatus#STRUCTURE_STARTS} phase by this method.
-		COMMENT
-		COMMENT @return {@code null} if no structure could be found within the given search radius
-		ARG 1 world
-		ARG 2 structureAccessor
-		ARG 3 searchStartPos
-		ARG 4 searchRadius
-			COMMENT the search radius in chunks around the chunk the given block position is in; a radius of 0 will only search in the given chunk
-		ARG 5 skipExistingChunks
-		ARG 6 worldSeed
-		ARG 8 config
 	METHOD m_hnmlakfx getGenerationStep ()Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
 		COMMENT Gets the step during which this structure will participate in world generation.
 		COMMENT Structures will generate before other features in the same generation step.
-	METHOD m_kwghhryf isUniformDistribution ()Z
-		COMMENT If true, this structure's start position will be uniformly distributed within
-		COMMENT a placement grid cell. If false, the structure's starting point will be biased
-		COMMENT towards the center of the cell.
-	METHOD m_ljchpsfx tryPlaceStart (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_rhdulivw;JLnet/minecraft/unmapped/C_ynrszrtu;ILnet/minecraft/unmapped/C_eaybxiiq;Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)Lnet/minecraft/unmapped/C_efiavfys;
-		COMMENT Tries to place a starting point for this type of structure in the given chunk.
-		COMMENT <p>
-		COMMENT If this structure doesn't have a starting point in the chunk, {@link StructureStart#DEFAULT}
-		COMMENT will be returned.
-		ARG 2 generator
-		ARG 3 biomeSource
-		ARG 4 manager
-		ARG 5 worldSeed
-		ARG 7 pos
-		ARG 8 referenceCount
-		ARG 9 structureConfig
-		ARG 10 config
-		ARG 11 world
 	METHOD m_mvmoeepg (Lnet/minecraft/unmapped/C_licgnyqv;)Lnet/minecraft/unmapped/C_jpnewgxf;
 		ARG 0 feature
 	METHOD m_naklggtc getName ()Ljava/lang/String;
-	METHOD m_svbzmrlp getStartChunk (Lnet/minecraft/unmapped/C_eaybxiiq;JII)Lnet/minecraft/unmapped/C_ynrszrtu;
-		COMMENT Determines the cell of the structure placement grid a chunk belongs to, and
-		COMMENT returns the chunk within that cell, that this structure will actually be placed at.
-		COMMENT <p>
-		COMMENT If the {@link StructureConfig} uses a separation setting greater than 0, the
-		COMMENT placement will be constrained to [0, spacing - separation] within the grid cell.
-		COMMENT If a non-uniform distribution is used for placement, then this also moves
-		COMMENT the center towards the origin.
-		COMMENT
-		COMMENT @see #isUniformDistribution()
-		ARG 1 config
-		ARG 2 worldSeed
-		ARG 4 chunkX
-		ARG 5 chunkY
 	METHOD m_wgtscimf configure (Lnet/minecraft/unmapped/C_jpnewgxf;)Lnet/minecraft/unmapped/C_licgnyqv;
 		ARG 1 config
 	METHOD m_xnhhytsz register (Ljava/lang/String;Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;)Lnet/minecraft/unmapped/C_vvmtobpf;
