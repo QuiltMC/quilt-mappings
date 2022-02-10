@@ -25,8 +25,8 @@ jobs:
     steps:
       - name: Print context
         run: |
-          echo ${{ github }}
-          echo ${{ env }}
+          echo ${{ toJson(github) }}
+          echo ${{ toJson(env) }}
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
