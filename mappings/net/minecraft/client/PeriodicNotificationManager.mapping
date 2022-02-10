@@ -7,7 +7,7 @@ CLASS net/minecraft/unmapped/C_bianxjxy net/minecraft/client/PeriodicNotificatio
 	FIELD f_twnzglcs notificationTask Lnet/minecraft/unmapped/C_bianxjxy$C_fvgacjvq;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;Lit/unimi/dsi/fastutil/objects/Object2BooleanFunction;)V
 		ARG 1 identifier
-		ARG 2 object2BooleanFunction
+		ARG 2 selector
 	METHOD close close ()V
 	METHOD m_gwgfdxny calculateInitialDelay (Ljava/util/List;)J
 	METHOD m_rocjzhkk stopTimer ()V
@@ -16,7 +16,11 @@ CLASS net/minecraft/unmapped/C_bianxjxy net/minecraft/client/PeriodicNotificatio
 		FIELD f_jnnycmjg client Lnet/minecraft/unmapped/C_ayfeobid;
 		FIELD f_lifjeken notifications Ljava/util/List;
 		FIELD f_oirwnkjq period J
-		FIELD f_shihovkr elapsed Ljava/util/concurrent/atomic/AtomicLong;
+		FIELD f_shihovkr elapsedTime Ljava/util/concurrent/atomic/AtomicLong;
+		METHOD <init> (Ljava/util/List;JJ)V
+			ARG 1 notifications
+			ARG 2 elapsedTime
+			ARG 4 period
 		METHOD m_eczutovu reset (Ljava/util/List;J)Lnet/minecraft/unmapped/C_bianxjxy$C_fvgacjvq;
 		METHOD run run ()V
 	CLASS C_puurieil Notification
@@ -24,6 +28,13 @@ CLASS net/minecraft/unmapped/C_bianxjxy net/minecraft/client/PeriodicNotificatio
 		FIELD f_puguivkl title Ljava/lang/String;
 		FIELD f_utxcpgki period J
 		FIELD f_xxztxlma description Ljava/lang/String;
+		METHOD <init> (JJLjava/lang/String;Ljava/lang/String;)V
+			ARG 1 delay
+			ARG 3 period
+			ARG 5 title
+			ARG 6 description
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
 		METHOD m_dknecsso delay ()J
 		METHOD m_elylcgcd description ()Ljava/lang/String;
 		METHOD m_ofcmdcrf title ()Ljava/lang/String;
