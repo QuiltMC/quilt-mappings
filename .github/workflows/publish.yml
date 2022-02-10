@@ -38,3 +38,8 @@ jobs:
           SNAPSHOTS_USERNAME: ${{ secrets.SNAPSHOTS_USERNAME }}
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
+      - name: Refresh Meta
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: ${{ secrets.META_UPDATE_URL }}
+          method: 'GET'
