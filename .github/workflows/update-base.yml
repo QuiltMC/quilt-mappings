@@ -23,14 +23,15 @@ jobs:
     if: ${{ needs.update.outputs.result == 'success' }}
     runs-on: ubuntu-20.04
     steps:
-      - name: Print context
-        run: |
-          echo '${{ toJson(github) }}'
-          echo '${{ toJson(env) }}'
-          echo '${{ toJson(github.pull_request) }}'
+#      - name: Print context
+#        run: |
+#          echo '${{ toJson(github) }}'
+#          echo '${{ toJson(env) }}'
+#          echo '${{ toJson(github.pull_request) }}'
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       # The container image openjdk:17 doesn't have git installed
       - uses: actions/setup-java@v2
         with:
