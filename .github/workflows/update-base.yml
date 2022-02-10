@@ -35,6 +35,9 @@ jobs:
         run: ./gradlew dropInvalidMappings --stacktrace
       - name: Commit changes
         run: |
+          git status
+          git remote
+
           git config user.name "actions-user"
           git config user.email "action@github.com"
           git add mappings/
