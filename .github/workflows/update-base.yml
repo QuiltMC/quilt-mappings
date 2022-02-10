@@ -23,6 +23,10 @@ jobs:
     if: ${{ needs.update.outputs.result == 'success' }}
     runs-on: ubuntu-20.04
     steps:
+      - name: Print context
+        run: |
+          echo ${{ github }}
+          echo ${{ env }}
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
