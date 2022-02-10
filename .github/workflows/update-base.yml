@@ -25,8 +25,9 @@ jobs:
     steps:
       - name: Print context
         run: |
-          echo ${{ toJson(github) }}
-          echo ${{ toJson(env) }}
+          echo '${{ toJson(github) }}'
+          echo '${{ toJson(env) }}'
+          echo '${{ toJson(github.pull_request) }}'
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
