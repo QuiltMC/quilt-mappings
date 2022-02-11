@@ -2,7 +2,6 @@ package quilt.internal.tasks.setup;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
@@ -16,7 +15,6 @@ public class DownloadVersionsManifestTask extends DefaultMappingsTask {
 
     public DownloadVersionsManifestTask() {
         super(Constants.Groups.SETUP_GROUP);
-        this.getInputs().property("currenttime", new Date());
 
         manifestFile = new File(fileConstants.cacheFilesMinecraft, "version_manifest_v2.json");
     }

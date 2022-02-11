@@ -5,22 +5,37 @@ CLASS net/minecraft/unmapped/C_xwzlokzl net/minecraft/client/render/block/FluidR
 	METHOD m_ctwyygou isSideCovered (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_xpuuihxf;FLnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 0 world
 		ARG 1 direction
+		ARG 2 maxDeviation
 		ARG 3 pos
 		ARG 4 state
 	METHOD m_dwkqlvll getLight (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 1 world
 		ARG 2 pos
+	METHOD m_fhsjscyb getHeight (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_rxhyurmy;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xqketiuf;)F
+		ARG 1 world
+		ARG 2 fluid
+		ARG 3 pos
+		ARG 4 blockState
+		ARG 5 state
 	METHOD m_fxvwhkgt isSameFluid (Lnet/minecraft/unmapped/C_xqketiuf;Lnet/minecraft/unmapped/C_xqketiuf;)Z
 		ARG 0 state
+		ARG 1 otherState
 	METHOD m_hapevsyt isOppositeSideCovered (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 state
 		ARG 3 direction
+	METHOD m_lotxoxpy ([FF)V
+		ARG 2 height
+	METHOD m_lrnrmesr getHeight (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_rxhyurmy;Lnet/minecraft/unmapped/C_hynzadkk;)F
+		ARG 1 world
+		ARG 2 fluid
+		ARG 3 blockState
 	METHOD m_mupdvpjh render (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xqketiuf;)Z
 		ARG 1 world
 		ARG 2 pos
 		ARG 3 vertexConsumer
+		ARG 4 blockState
 		ARG 5 state
 	METHOD m_ohmcuuxy vertex (Lnet/minecraft/unmapped/C_igthdzux;DDDFFFFFI)V
 		ARG 1 vertexConsumer
@@ -33,14 +48,24 @@ CLASS net/minecraft/unmapped/C_xwzlokzl net/minecraft/client/render/block/FluidR
 		ARG 11 u
 		ARG 12 v
 		ARG 13 light
-	METHOD m_owcucpmd (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xqketiuf;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xqketiuf;)Z
+	METHOD m_owcucpmd shouldRenderSide (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xqketiuf;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xqketiuf;)Z
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 state
 		ARG 3 blockState
+		ARG 4 direction
+		ARG 5 adjacentFluidState
+	METHOD m_qmxgaxxe getAverageHeight (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_rxhyurmy;FFFLnet/minecraft/unmapped/C_hynzadkk;)F
+		ARG 1 world
+		ARG 2 fluid
+		ARG 3 height
+		ARG 4 adjacentHeightA
+		ARG 5 adjacentHeightB
+		ARG 6 fluidPos
 	METHOD m_sucbspgh isSideCovered (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;FLnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 direction
 		ARG 3 maxDeviation
+		ARG 4 state
 	METHOD m_wofbeisu onResourceReload ()V

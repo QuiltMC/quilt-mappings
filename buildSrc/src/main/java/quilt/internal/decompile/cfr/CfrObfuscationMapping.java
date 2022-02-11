@@ -35,7 +35,7 @@ public class CfrObfuscationMapping extends NullMapping {
 
         @Override
         public Dumper dumpClassDoc(JavaTypeInstance owner) {
-            String javadoc = classJavadocProvider.provide(owner.getRawName(), isRecord(owner));
+            String javadoc = classJavadocProvider.provideClassJavadoc(owner.getRawName(), isRecord(owner));
             if (javadoc != null) {
                 dumpJavadoc(javadoc);
             }
@@ -45,7 +45,7 @@ public class CfrObfuscationMapping extends NullMapping {
 
         @Override
         public Dumper dumpMethodDoc(MethodPrototype method) {
-            String javadoc = methodJavadocProvider.provide(method.getName(), method.getOriginalDescriptor(), method.getOwner().getRawName());
+            String javadoc = methodJavadocProvider.provideMethodJavadoc(method.getName(), method.getOriginalDescriptor(), method.getOwner().getRawName());
             if (javadoc != null) {
                 dumpJavadoc(javadoc);
             }
@@ -55,7 +55,7 @@ public class CfrObfuscationMapping extends NullMapping {
 
         @Override
         public Dumper dumpFieldDoc(Field field, JavaTypeInstance owner) {
-            String javadoc = fieldJavadocProvider.provide(field.getFieldName(), field.getDescriptor(), owner.getRawName());
+            String javadoc = fieldJavadocProvider.provideFieldJavadoc(field.getFieldName(), field.getDescriptor(), owner.getRawName());
             if (javadoc != null) {
                 dumpJavadoc(javadoc);
             }

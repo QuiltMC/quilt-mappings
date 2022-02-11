@@ -1,8 +1,5 @@
 CLASS net/minecraft/unmapped/C_zumwnzoo net/minecraft/world/gen/chunk/StructuresConfig
 	COMMENT Contains the configuration for placement of each structure type during chunk generation.
-	FIELD f_brxwedzl stronghold Lnet/minecraft/unmapped/C_yrqyryiu;
-		COMMENT Placement settings for the stronghold for this particular combination of settings,
-		COMMENT may be null to disable placement of strongholds.
 	FIELD f_hpjudrhd DEFAULT_STRUCTURES Lcom/google/common/collect/ImmutableMap;
 		COMMENT Default placement settings for each known structure type.
 		COMMENT At startup, Minecraft validates that each registered structure has a default
@@ -11,15 +8,9 @@ CLASS net/minecraft/unmapped/C_zumwnzoo net/minecraft/world/gen/chunk/Structures
 		COMMENT bad default configuration will be used instead (see below).
 	FIELD f_ldnqqfub CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_pblxerpw configuredStructures Lcom/google/common/collect/ImmutableMap;
-	FIELD f_pzxnaqbn DEFAULT_STRONGHOLD Lnet/minecraft/unmapped/C_yrqyryiu;
+	FIELD f_pzxnaqbn DEFAULT_STRONGHOLD Lnet/minecraft/unmapped/C_pwqsutzz;
 		COMMENT Default placement settings for the stronghold.
 	FIELD f_xdksuqxk structures Ljava/util/Map;
-	METHOD <init> (Ljava/util/Map;Lnet/minecraft/unmapped/C_yrqyryiu;)V
-		ARG 1 structures
-		ARG 2 stronghold
-	METHOD <init> (Ljava/util/Optional;Ljava/util/Map;)V
-		ARG 1 stronghold
-		ARG 2 structures
 	METHOD <init> (Z)V
 		COMMENT Creates a new structure placement configuration with default values.
 		ARG 1 withStronghold
@@ -27,19 +18,9 @@ CLASS net/minecraft/unmapped/C_zumwnzoo net/minecraft/world/gen/chunk/Structures
 	METHOD m_eugntbzc getStructures ()Ljava/util/Map;
 	METHOD m_hvktanuh getConfiguredStructureFeature (Lnet/minecraft/unmapped/C_vvmtobpf;)Lcom/google/common/collect/ImmutableMultimap;
 		ARG 1 feature
-	METHOD m_nfpjjazu (Ljava/util/Map$Entry;)Lcom/google/common/collect/ImmutableMultimap;
-		ARG 0 entry
-	METHOD m_olxpkmwi (Ljava/util/HashMap;Lnet/minecraft/unmapped/C_licgnyqv;Lnet/minecraft/unmapped/C_xhhleach;)V
-		ARG 1 feature
-		ARG 2 biome
-	METHOD m_omjacaqn (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
-	METHOD m_qlgutohm getForType (Lnet/minecraft/unmapped/C_vvmtobpf;)Lnet/minecraft/unmapped/C_eaybxiiq;
+	METHOD m_qlgutohm getForType (Lnet/minecraft/unmapped/C_vvmtobpf;)Lnet/minecraft/unmapped/C_dzcnonip;
 		COMMENT Gets the placement configuration for a specific structure type, or
 		COMMENT a default placement if placement for the structure was not explicitly configured.
 		ARG 1 structureType
-	METHOD m_rsdfnhbu getStronghold ()Lnet/minecraft/unmapped/C_yrqyryiu;
-	METHOD m_thutrnqg (Lnet/minecraft/unmapped/C_zumwnzoo;)Ljava/util/Map;
-		ARG 0 config
-	METHOD m_vozgibpa (Lnet/minecraft/unmapped/C_zumwnzoo;)Ljava/util/Optional;
+	METHOD m_vozgibpa (Lnet/minecraft/unmapped/C_zumwnzoo;)Ljava/util/Map;
 		ARG 0 config
