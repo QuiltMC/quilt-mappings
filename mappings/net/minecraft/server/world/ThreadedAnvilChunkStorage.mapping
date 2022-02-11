@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedAnvilChunkStorage
 	FIELD f_carfuwla worldGenerationProgressListener Lnet/minecraft/unmapped/C_jnfclwgd;
 	FIELD f_cdallcyb LOGGER Lorg/slf4j/Logger;
+	FIELD f_cqzzgluy CHUNKS_SAVED_EAGERLY_PER_TICK I
 	FIELD f_dklgoyoo playerChunkWatchingManager Lnet/minecraft/unmapped/C_xqwearey;
 	FIELD f_dltbfmui persistentStateManagerFactory Ljava/util/function/Supplier;
 	FIELD f_ecpxvotf structureManager Lnet/minecraft/unmapped/C_rhdulivw;
@@ -8,6 +9,8 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedAnvil
 	FIELD f_epwhnhgx pointOfInterestStorage Lnet/minecraft/unmapped/C_uegwgivt;
 	FIELD f_fjgdpyoz chunkGenerator Lnet/minecraft/unmapped/C_kgfalbim;
 	FIELD f_forzslne storageName Ljava/lang/String;
+	FIELD f_gsztossn EAGER_CHUNK_SAVE_COOLDOWN_MS I
+	FIELD f_gwftgvse chunkSaveCooldowns Lit/unimi/dsi/fastutil/longs/Long2LongMap;
 	FIELD f_hfrcctzs MAX_LEVEL I
 		COMMENT Specifies the maximum ticket level a chunk can be before a chunk's {@link net.minecraft.server.world.ChunkHolder.LevelType} is {@link net.minecraft.server.world.ChunkHolder.LevelType#BORDER}.
 	FIELD f_jfmuzcmt ticketManager Lnet/minecraft/unmapped/C_gxrpzacc$C_hwdtawcb;
@@ -16,17 +19,23 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedAnvil
 	FIELD f_mgqaxntn chunksToUnload Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
 	FIELD f_nmusqjon chunkToType Lit/unimi/dsi/fastutil/longs/Long2ByteMap;
 	FIELD f_ofyplwmc chunkTaskPrioritySystem Lnet/minecraft/unmapped/C_gxchrfeu;
+	FIELD f_ogfasnyn PROTO_CHUNK B
 	FIELD f_oratkgdp chunkHolderListDirty Z
 	FIELD f_pogbjqww loadedChunks Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_ptdjlogf unloadTaskQueue Ljava/util/Queue;
+	FIELD f_qgyepzej LEVEL_CHUNK B
 	FIELD f_qmxmwuww world Lnet/minecraft/unmapped/C_bdwnwhiu;
 	FIELD f_rdwkfvxr totalChunksLoadedCount Ljava/util/concurrent/atomic/AtomicInteger;
+	FIELD f_seaevrfq UNKNOWN_CHUNK B
 	FIELD f_sycrtqtt currentChunkHolders Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
 	FIELD f_vgnrawec entityTrackers Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	FIELD f_vjrivreq lightingProvider Lnet/minecraft/unmapped/C_bdzdhzyc;
+	FIELD f_vpvrwdlb CHUNKS_SAVED_PER_TICK I
 	FIELD f_vsotkvla chunkHolders Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
+	FIELD f_wkxccjzz MIN_VIEW_DISTANCE I
 	FIELD f_xkqgszkv mainExecutor Lnet/minecraft/unmapped/C_brzcgupp;
 	FIELD f_xsjvoadn worldGenExecutor Lnet/minecraft/unmapped/C_brzcgupp;
+	FIELD f_ykigofgc MAX_VIEW_DISTANCE I
 	FIELD f_znaioqim watchDistance I
 	METHOD <init> (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_rhdulivw;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_wfxvpelc;Lnet/minecraft/unmapped/C_jhssvvvy;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_jnfclwgd;Lnet/minecraft/unmapped/C_gtndfkbe;Ljava/util/function/Supplier;IZ)V
 		ARG 1 world
@@ -61,6 +70,10 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedAnvil
 		ARG 1 entity
 	METHOD m_ftzrbjoo loadChunk (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 pos
+	METHOD m_fypcngse (Lnet/minecraft/unmapped/C_kgfalbim;)V
+		ARG 1 chunkGenerator
+	METHOD m_gfwkkrdp (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
+		ARG 0 element
 	METHOD m_gknwalsf tickEntityMovement ()V
 		COMMENT Ticks and updates the tracked status of each tracker.
 		COMMENT
@@ -92,6 +105,7 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedAnvil
 		ARG 1 pos
 	METHOD m_jtcoqmih tick (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
+	METHOD m_jyhtxlyw reloadChunkGenerator ()V
 	METHOD m_lwnasrxx getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/lang/String;
 		ARG 1 chunkPos
 	METHOD m_lxukttpf dump (Ljava/io/Writer;)V

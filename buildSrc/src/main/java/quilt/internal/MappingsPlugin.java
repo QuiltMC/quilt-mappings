@@ -4,7 +4,6 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.tasks.build.BuildMappingsTinyTask;
-import quilt.internal.tasks.build.CheckMappingsTask;
 import quilt.internal.tasks.build.CompressTinyTask;
 import quilt.internal.tasks.build.DropInvalidMappingsTask;
 import quilt.internal.tasks.build.GeneratePackageInfoMappingsTask;
@@ -38,7 +37,6 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(MergeJarsTask.TASK_NAME, MergeJarsTask.class);
         tasks.create(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class);
 
-        tasks.create(CheckMappingsTask.TASK_NAME, CheckMappingsTask.class);
         tasks.create(DownloadPerVersionMappingsTask.TASK_NAME, DownloadPerVersionMappingsTask.class);
         tasks.create(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class);
         tasks.create(BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class);

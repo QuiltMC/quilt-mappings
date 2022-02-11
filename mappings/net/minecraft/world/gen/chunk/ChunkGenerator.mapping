@@ -7,8 +7,6 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		COMMENT
 		COMMENT <p>This is used by {@link FlatChunkGenerator} to overwrite biome properties like whether lakes generate, while preserving the original biome ID.
 	FIELD f_drzpxatw biomeSource Lnet/minecraft/unmapped/C_ajguowya;
-	FIELD f_iaczxwcm strongholds Ljava/util/List;
-	FIELD f_lifnwhlp worldSeed J
 	FIELD f_vzeswpuk CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_ypspsiyz structuresConfig Lnet/minecraft/unmapped/C_zumwnzoo;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_zumwnzoo;J)V
@@ -20,8 +18,6 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 biomeSource
 		ARG 2 structuresConfig
 	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
-	METHOD m_apcokxin canPlaceStrongholdInBiome (Lnet/minecraft/unmapped/C_orlkpefs;)Z
-		ARG 0 biome
 	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;J)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
 		ARG 1 registryManager
@@ -51,8 +47,6 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 world
 		ARG 2 chunk
 		ARG 3 structureAccessor
-	METHOD m_fmqnfjzb isStrongholdStartingChunk (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
-		ARG 1 pos
 	METHOD m_gobnuobv getStructureReferences (Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_vvmtobpf;)I
 		ARG 0 structureAccessor
 		ARG 1 chunk
@@ -85,12 +79,7 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 			COMMENT whether only structures that are not referenced by generated chunks (chunks past the STRUCTURE_STARTS stage) are returned, excluding strongholds
 	METHOD m_pbnzyeke withSeed (J)Lnet/minecraft/unmapped/C_kgfalbim;
 		ARG 1 seed
-	METHOD m_pisravvj testBiomeByKey (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_orlkpefs;)Z
-		ARG 1 biomeRegistry
-		ARG 2 condition
-		ARG 3 biome
-	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_orlkpefs;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
-		ARG 1 biome
+	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
 		ARG 2 accessor
 		ARG 3 group
 		ARG 4 pos
@@ -102,8 +91,6 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 world
 		ARG 2 accessor
 		ARG 3 chunk
-	METHOD m_rufvbbur (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_orlkpefs;)Ljava/util/stream/Stream;
-		ARG 1 biome
 	METHOD m_ruxnirnc getWorldHeight ()I
 	METHOD m_taborzul getSeaLevel ()I
 	METHOD m_tyxhijnz getMultiNoiseSampler ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;
@@ -115,7 +102,6 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 5 structureAccessor
 		ARG 6 chunk
 		ARG 7 generationStep
-	METHOD m_uymgrluj generateStrongholdPositions ()V
 	METHOD m_wocuxbxx getHeightInGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
 		ARG 1 x
 		ARG 2 z

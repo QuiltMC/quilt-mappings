@@ -8,9 +8,36 @@ jobs:
   update:
     if: ${{ github.event.label.name == 'update-base' }}
     runs-on: ubuntu-20.04
+    outputs:
+      result: ${{ steps.update-base.outputs.result }}
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/update-base/
+        id: update-base
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pull-number: ${{ github.event.number }}
+
+  drop-invalid-mappings:
+    needs: update
+    if: ${{ needs.update.outputs.result == 'success' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      # The container image openjdk:17 doesn't have git installed
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Drop invalid mappings
+        run: ./gradlew dropInvalidMappings --stacktrace
+      - name: Commit changes
+        run: |
+          git config user.name "actions-user"
+          git config user.email "action@github.com"
+          git add mappings/
+          git commit -m "Drop invalid mappings"
+          git push

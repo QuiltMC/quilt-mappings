@@ -1,7 +1,7 @@
 CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ablxonpa horizontalCollision Z
 	FIELD f_ajffyhwa blockPos Lnet/minecraft/unmapped/C_hynzadkk;
-	FIELD f_apbfelpo submergedFluidTag Lnet/minecraft/unmapped/C_mokekhxv;
+	FIELD f_apbfelpo submergedFluidTag Ljava/util/Set;
 	FIELD f_bgvyxbvq distanceTraveled F
 	FIELD f_bjvpodux passengerList Lcom/google/common/collect/ImmutableList;
 	FIELD f_bygzgscd id I
@@ -222,8 +222,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_eiskdvlm resetNetherPortalCooldown ()V
 	METHOD m_ejhzkfsp addPassenger (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
-	METHOD m_elzzvnlh isSubmergedIn (Lnet/minecraft/unmapped/C_mokekhxv;)Z
-		ARG 1 fluidTag
+	METHOD m_elzzvnlh isSubmergedIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 	METHOD m_emaabkqn equipStack (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 		ARG 2 stack
@@ -326,7 +325,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 pos
 	METHOD m_gxhwoqaa getTeamColorValue ()I
 	METHOD m_hbtgnbjd getItemsEquipped ()Ljava/lang/Iterable;
-	METHOD m_hehkhdfc isFreezing ()Z
+	METHOD m_hehkhdfc isFrozen ()Z
 	METHOD m_hhwoykag calculateNextStepSoundDistance ()F
 	METHOD m_hjjjfrzw getScoreboardTeam ()Lnet/minecraft/unmapped/C_qgtzypup;
 	METHOD m_hklyvsue raycast (DFZ)Lnet/minecraft/unmapped/C_eetoegzn;
@@ -340,8 +339,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_hmduabhp dropItem (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_uqpzijng;
 		ARG 1 item
 		ARG 2 yOffset
-	METHOD m_hnfpqqwz getFluidHeight (Lnet/minecraft/unmapped/C_mokekhxv;)D
-		ARG 1 fluid
+	METHOD m_hnfpqqwz getFluidHeight (Lnet/minecraft/unmapped/C_ednuhnnn;)D
 	METHOD m_hnozxzms getLandingPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_hpsqosvu setVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 velocity
@@ -567,8 +565,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT @see net.minecraft.command.argument.ItemSlotArgumentType
 		ARG 1 mappedIndex
 			COMMENT the mapped index as given by the item slot argument
-	METHOD m_ozpbkkuu updateMovementInFluid (Lnet/minecraft/unmapped/C_mokekhxv;D)Z
-		ARG 1 tag
+	METHOD m_ozpbkkuu updateMovementInFluid (Lnet/minecraft/unmapped/C_ednuhnnn;D)Z
 	METHOD m_paxmjcli movementInputToVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;FF)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 movementInput
 		ARG 1 speed
@@ -695,6 +692,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT Called when the entity is 64 blocks below the world's {@linkplain net.minecraft.world.HeightLimitView#getBottomY() minimum Y position}.
 		COMMENT <p>
 		COMMENT {@linkplain LivingEntity Living entities} use this to deal {@linkplain net.minecraft.entity.damage.DamageSource#OUT_OF_WORLD out of world damage}.
+	METHOD m_txdckygw isFreezing ()Z
 	METHOD m_ubqkaspo getHighSpeedSplashSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_ucpbtirx changeLookDirection (DD)V
 		ARG 1 cursorDeltaX
