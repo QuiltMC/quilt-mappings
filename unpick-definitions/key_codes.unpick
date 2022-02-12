@@ -147,8 +147,10 @@ target_method com/mojang/blaze3d/platform/InputUtil$Key getKeyCode ()I
 
 target_method net/minecraft/client/option/KeyBind <init> (Ljava/lang/String;ILjava/lang/String;)V
 	param 1 key_codes
+	param 2 key_bind_categories
 target_method net/minecraft/client/option/KeyBind <init> (Ljava/lang/String;Lcom/mojang/blaze3d/platform/InputUtil$Type;ILjava/lang/String;)V
 	param 2 key_codes
+	param 3 key_bind_categories
 target_method net/minecraft/client/option/KeyBind matchesKey (II)Z
 	param 0 key_codes
 
@@ -268,3 +270,11 @@ flag modifiers org/lwjgl/glfw/GLFW GLFW_MOD_NUM_LOCK
 constant actions org/lwjgl/glfw/GLFW GLFW_MOD_PRESS
 constant actions org/lwjgl/glfw/GLFW GLFW_MOD_RELEASE
 constant actions org/lwjgl/glfw/GLFW GLFW_MOD_REPEAT
+
+# TODO - Split this section to a separate unpick file once Unpick is updated
+constant key_bind_categories net/minecraft/client/option/KeyBind MOVEMENT_CATEGORY
+constant key_bind_categories net/minecraft/client/option/KeyBind MISC_CATEGORY
+constant key_bind_categories net/minecraft/client/option/KeyBind MULTIPLAYER_CATEGORY
+constant key_bind_categories net/minecraft/client/option/KeyBind GAMEPLAY_CATEGORY
+constant key_bind_categories net/minecraft/client/option/KeyBind INVENTORY_CATEGORY
+constant key_bind_categories net/minecraft/client/option/KeyBind CREATIVE_MODE_CATEGORY
