@@ -14,9 +14,12 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 y
 		ARG 3 z
 	METHOD m_bkazxwlu markFinalCause ()V
-	METHOD m_bogdvsjt (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_bogdvsjt succeedWhenEntityNotPresent (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 type
 		ARG 2 pos
+	METHOD m_buhjvmkl assertAtTickContainerContents (JLnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 1 tick
+		ARG 3 pos
 	METHOD m_buklrgod killAllEntities ()V
 	METHOD m_cfsmdbhv complete ()V
 	METHOD m_ciyzewjg spawnMob (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_dxkfswlz;
@@ -40,9 +43,10 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 correctStatePos
 	METHOD m_dszcogek getBlockState (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 1 pos
-	METHOD m_egavxzhi (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_hynzadkk;F)Lnet/minecraft/unmapped/C_slbbddbd;
+	METHOD m_egavxzhi walkTo (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_hynzadkk;F)Lnet/minecraft/unmapped/C_slbbddbd;
 		ARG 1 entity
 		ARG 2 pos
+		ARG 3 speed
 	METHOD m_ekmpgzfr (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
 	METHOD m_exkyxbtk addFinalTask (Ljava/lang/Runnable;)V
@@ -74,12 +78,16 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 pos
 		ARG 2 item
 	METHOD m_gtojqzaf getTick ()J
+	METHOD m_gufdcbtu assertAtTickContainerContents (JLnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_vorddnax;)V
+		ARG 1 tick
+		ARG 3 pos
+		ARG 4 item
 	METHOD m_gwhaqtld spawnEntity (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 type
 		ARG 2 pos
 	METHOD m_gyonhgej (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 entity
-	METHOD m_hofxilao (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_hofxilao succeedWhenEntityPresent (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 type
 		ARG 2 pos
 	METHOD m_hrtmjavr (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Comparable;Lnet/minecraft/unmapped/C_txtbiemp;)Z
@@ -98,6 +106,11 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 property
 		ARG 3 predicate
 		ARG 4 errorMessage
+	METHOD m_ljtglfiu failIf (Ljava/lang/Runnable;)V
+		ARG 1 task
+	METHOD m_mdidoddl failIfEver (Ljava/lang/Runnable;)V
+		ARG 1 task
+	METHOD m_mencztqs assertEntityProperty (Lnet/minecraft/unmapped/C_astfners;Ljava/util/function/Function;Ljava/lang/String;Ljava/lang/Object;)V
 	METHOD m_mfjsfrfk dontExpectEntityAt (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 type
 		ARG 2 pos
@@ -123,6 +136,11 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 pos
 	METHOD m_ocafvsoi removeBlock (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
+	METHOD m_ohxjpyru succeedWhenEntityData (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;Ljava/util/function/Function;Ljava/lang/Object;)V
+		ARG 1 pos
+		ARG 2 type
+		ARG 3 entityDataGetter
+		ARG 4 data
 	METHOD m_oiohxsat expectItemsAt (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_hynzadkk;DI)V
 		ARG 1 item
 		ARG 2 pos
@@ -149,6 +167,8 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 pos
 	METHOD m_plshvnao addInstantFinalTask (Ljava/lang/Runnable;)V
 		ARG 1 runnable
+	METHOD m_pnwfnpgr onEachTick (Ljava/lang/Runnable;)V
+		ARG 1 task
 	METHOD m_pwjisoih expectEntityToTouch (Lnet/minecraft/unmapped/C_ogavsvbr;DDD)V
 		ARG 1 type
 		ARG 2 x
@@ -171,7 +191,8 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 4 z
 	METHOD m_qladvkvd forceRandomTick (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
-	METHOD m_qsgsebgj (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_usxaxydn;
+	METHOD m_qqoqozya forEachBlockInStructure (Ljava/util/function/Consumer;)V
+	METHOD m_qsgsebgj setToDrown (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_usxaxydn;
 		ARG 1 entity
 	METHOD m_qwmxlmwq spawnEntity (Lnet/minecraft/unmapped/C_ogavsvbr;III)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 type
@@ -185,6 +206,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 y
 		ARG 3 z
 		ARG 4 state
+	METHOD m_shpmfisv assertEntityProperty (Lnet/minecraft/unmapped/C_astfners;Ljava/util/function/Predicate;Ljava/lang/String;)V
 	METHOD m_sicjnrjb createMockPlayer ()Lnet/minecraft/unmapped/C_jzrpycqo;
 	METHOD m_slklpxwi toggleLever (III)V
 		ARG 1 x
@@ -206,7 +228,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_uakshunm spawnEntity (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 type
 		ARG 2 pos
-	METHOD m_ujuutnza (Lnet/minecraft/unmapped/C_ogavsvbr;III)V
+	METHOD m_ujuutnza succeedWhenEntityPresent (Lnet/minecraft/unmapped/C_ogavsvbr;III)V
 		ARG 1 type
 		ARG 2 x
 		ARG 3 y
@@ -250,7 +272,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_xayeypny putAndRemoveRedstoneBlock (Lnet/minecraft/unmapped/C_hynzadkk;J)V
 		ARG 1 pos
 		ARG 2 delay
-	METHOD m_xlrmphsv (Lnet/minecraft/unmapped/C_ogavsvbr;III)V
+	METHOD m_xlrmphsv succeedWhenEntityNotPresent (Lnet/minecraft/unmapped/C_ogavsvbr;III)V
 		ARG 1 type
 		ARG 2 x
 		ARG 3 y
@@ -268,3 +290,4 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 x
 		ARG 4 y
 		ARG 6 z
+	METHOD m_zwilfbyq getRelativeBounds ()Lnet/minecraft/unmapped/C_hbcjzgoe;

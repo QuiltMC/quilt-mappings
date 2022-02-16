@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 	FIELD f_ewqpqzws firstCellX I
 	FIELD f_fyvpnnop oreVeinSampler Lnet/minecraft/unmapped/C_rvjywqnu$C_ajscwoop;
 	FIELD f_gobowyuo aquiferSampler Lnet/minecraft/unmapped/C_jpghdzxc;
+	FIELD f_gqkzwagv noiseData [[Lnet/minecraft/unmapped/C_upcezwgw$C_paryrljs;
 	FIELD f_hpkitmdp minimumY I
 	FIELD f_lsmppxmv sampler Lnet/minecraft/unmapped/C_upcezwgw;
 	FIELD f_lzcdiirr height I
@@ -12,6 +13,7 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 	FIELD f_opnkrroc blender Lnet/minecraft/unmapped/C_pfqozslu;
 	FIELD f_rrobeaxe generationShapeConfig Lnet/minecraft/unmapped/C_ulvgadxi;
 	FIELD f_tupstqfc firstCellZ I
+	FIELD f_xflyvvkc preliminarySurfaceLevel Lit/unimi/dsi/fastutil/longs/Long2IntMap;
 	FIELD f_ycdqwwen firstNoiseZ I
 	METHOD <init> (IIILnet/minecraft/unmapped/C_upcezwgw;IILnet/minecraft/unmapped/C_rvjywqnu$C_ekqrmkds;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)V
 		ARG 1 horizontalSize
@@ -20,11 +22,16 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 		ARG 4 sampler
 		ARG 5 x
 		ARG 6 z
+		ARG 7 noiseFiller
 		ARG 8 settings
+		ARG 9 aquiferFluidPicker
 		ARG 10 blender
 	METHOD m_bfhxedds create (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_upcezwgw;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)Lnet/minecraft/unmapped/C_rvjywqnu;
 		ARG 0 chunk
 		ARG 1 sampler
+		ARG 2 noiseFiller
+		ARG 3 settings
+		ARG 4 aquiferFluidPicker
 		ARG 5 blender
 	METHOD m_bjhbvgiq sampleNoiseCorners (II)V
 		ARG 1 noiseY
@@ -36,6 +43,8 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 		ARG 2 minimumY
 		ARG 3 height
 		ARG 4 sampler
+		ARG 5 settings
+		ARG 6 aquiferFluidPicker
 	METHOD m_gdnpcvmg (III)D
 		ARG 0 x2
 		ARG 1 y
@@ -67,12 +76,20 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
+	METHOD m_vjyupqdl getOrComputePreliminarySurfaceLevel (II)I
+		ARG 1 x
+		ARG 2 z
 	METHOD m_wfszbuga (DLnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
 		ARG 2 interpolator
+	METHOD m_wldloquu m_wldloquu (J)I
+		ARG 1 chunkPos
 	METHOD m_yfrqsolm (Lnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
 		ARG 0 interpolator
 	METHOD m_ykqynayx createNoiseInterpolator (Lnet/minecraft/unmapped/C_rvjywqnu$C_ekqrmkds;)Lnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;
 		ARG 1 columnSampler
+	METHOD m_zfflviye getNoiseData (II)Lnet/minecraft/unmapped/C_upcezwgw$C_paryrljs;
+		ARG 1 x
+		ARG 2 z
 	CLASS C_ajscwoop BlockStateSampler
 		METHOD calculate calculate (III)Lnet/minecraft/unmapped/C_txtbiemp;
 			ARG 1 x
