@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_migzkpst net/minecraft/server/ServerReloadableResources
+	COMMENT Represents the server reloadable resources.
 	FIELD f_bqclfysi LOGGER Lorg/slf4j/Logger;
 	FIELD f_cqvnljsk recipes Lnet/minecraft/unmapped/C_hjseusrb;
 	FIELD f_izcsyrwb functions Lnet/minecraft/unmapped/C_coevuhwv;
@@ -9,18 +10,34 @@ CLASS net/minecraft/unmapped/C_migzkpst net/minecraft/server/ServerReloadableRes
 	FIELD f_xgqmoaaw INITIAL_DATA_RELOAD_TASK Ljava/util/concurrent/CompletableFuture;
 	FIELD f_xpwimqwt lootConditions Lnet/minecraft/unmapped/C_gztbwabg;
 	FIELD f_zdhwgzem lootFunctions Lnet/minecraft/unmapped/C_wqgroktp;
+	METHOD <init> (Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lnet/minecraft/unmapped/C_rieemtgi$C_vypaxkxj;I)V
+		ARG 2 environment
+		ARG 3 level
 	METHOD m_arswxfre getCommands ()Lnet/minecraft/unmapped/C_rieemtgi;
 	METHOD m_bjfjrecc updateRegistryTags (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_urxtamub$C_rbziadam;)V
+		ARG 0 dynamicRegistryManager
+		ARG 1 loadResult
 	METHOD m_hsxolvbj getAdvancements ()Lnet/minecraft/unmapped/C_fktoyupt;
-	METHOD m_qobkrmhz listeners ()Ljava/util/List;
+	METHOD m_ilcrzaxc (Lnet/minecraft/unmapped/C_migzkpst;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_migzkpst;
+		ARG 1 o
+	METHOD m_phzgjlfn (Ljava/util/Map$Entry;)Ljava/util/List;
+		ARG 0 entry
+	METHOD m_qobkrmhz getReloaders ()Ljava/util/List;
+		COMMENT {@return the server-specific resource reloaders}
 	METHOD m_qpiprbld getLootFunctions ()Lnet/minecraft/unmapped/C_wqgroktp;
 	METHOD m_qzzzeens getRecipes ()Lnet/minecraft/unmapped/C_hjseusrb;
 	METHOD m_ravmxbhg updateRegistryTags (Lnet/minecraft/unmapped/C_wqxmvzdq;)V
+		ARG 1 dynamicRegistryManager
 	METHOD m_txfqcvol getLootConditions ()Lnet/minecraft/unmapped/C_gztbwabg;
+	METHOD m_vvohvplh (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_urxtamub$C_rbziadam;)V
+		ARG 1 result
 	METHOD m_xlzbyznn loadResources (Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lnet/minecraft/unmapped/C_rieemtgi$C_vypaxkxj;ILjava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 resources
 		ARG 2 environment
+		ARG 3 level
 		ARG 4 prepareExecutor
 		ARG 5 applyExecutor
 	METHOD m_ygmlfrda getLootTables ()Lnet/minecraft/unmapped/C_chzdbgdx;
 	METHOD m_zxbtczuz getFunctions ()Lnet/minecraft/unmapped/C_coevuhwv;
+	METHOD m_zzwmkgxh (Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_ednuhnnn;
+		ARG 1 entry
