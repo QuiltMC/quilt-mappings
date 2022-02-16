@@ -38,6 +38,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 	FIELD f_lszpdnkq REALMS_DATA_FETCHER Lnet/minecraft/unmapped/C_yyprjalz;
 	FIELD f_mtpkqtzr CONFIGURE_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_mvjerbuc PENDING_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_nsyypakr realmsSelectionListAdded Z
 	FIELD f_obtmnkgu rateLimiter Lcom/google/common/util/concurrent/RateLimiter;
 	FIELD f_ojljjxsg dontSetConnectedToRealms Z
 	FIELD f_okyvzqtg showingPopup Z
@@ -111,6 +112,8 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 		ARG 0 manager
 	METHOD m_dhsyuxzy saveListScrollPosition ()V
 	METHOD m_dulqbyyz onClosePopup ()V
+	METHOD m_dvgldznx setTooltip ([Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 tooltip
 	METHOD m_dwgqymls renderStage (Lnet/minecraft/unmapped/C_cnszsxvd;)V
 		ARG 1 matrices
 	METHOD m_dxubphcm (Lnet/minecraft/unmapped/C_buwziidm;)V
@@ -177,6 +180,9 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 	METHOD m_nmglyjfv (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_nykjkgxr onRenew (Lnet/minecraft/unmapped/C_pwmwypfb;)V
+		ARG 1 server
+	METHOD m_oblqfrjg (Lnet/minecraft/unmapped/C_pwmwypfb;Z)V
+		ARG 2 confirmed
 	METHOD m_ocjozbve isOutsidePopup (DD)Z
 		ARG 1 xm
 		ARG 3 ym
@@ -188,25 +194,35 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 	METHOD m_pjbgdgsc checkClientCompatibility ()V
 	METHOD m_qbrpgnib leaveServer (ZLnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 confirmed
+		ARG 2 server
 	METHOD m_qqxernao shouldShowPopup ()Z
 	METHOD m_qtbirqby (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
+	METHOD m_qwotghsi (CLnet/minecraft/unmapped/C_yneyuazp;)V
+		ARG 1 combo
 	METHOD m_qwpakray drawClose (Lnet/minecraft/unmapped/C_cnszsxvd;IIII)V
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
 		ARG 4 mouseX
 		ARG 5 mouseY
+	METHOD m_qxeecuql (Ljava/lang/String;)Z
+		ARG 0 path
 	METHOD m_ronctttb addButtons ()V
+	METHOD m_smcbxygf (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_uncfwjlr$C_hsrdmghw;)Z
+		ARG 1 child
 	METHOD m_sswwcikq drawOpen (Lnet/minecraft/unmapped/C_cnszsxvd;IIII)V
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
 		ARG 4 mouseX
 		ARG 5 mouseY
+	METHOD m_suxyugra getSelectedServer ()Lnet/minecraft/unmapped/C_pwmwypfb;
 	METHOD m_sykyugui popupX0 ()I
 	METHOD m_tmeuwwcu shouldConfigureButtonBeVisible (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 server
+	METHOD m_txrwdiqc (Lnet/minecraft/unmapped/C_ncpywfca;)Z
+		ARG 0 id
 	METHOD m_tzbcjmer checkParentalConsent ()V
 	METHOD m_uhzbwrji openPendingInvitesScreen (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
@@ -223,6 +239,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 		ARG 1 selectedServer
 	METHOD m_ytletlev shouldPlayButtonBeActive (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 server
+	METHOD m_zdaeiqos removeSelection ()V
 	METHOD m_zhnmblqy shouldShowMessageInList ()Z
 	METHOD m_zmaszeby drawConfigure (Lnet/minecraft/unmapped/C_cnszsxvd;IIII)V
 		ARG 1 matrices
@@ -235,6 +252,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 		METHOD m_wftzswar (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_buwziidm;)V
 			ARG 1 button
 	CLASS C_hsrdmghw Entry
+		METHOD m_vhbxjoqn getServer ()Lnet/minecraft/unmapped/C_pwmwypfb;
 	CLASS C_naogreer RealmSelectionListTrialEntry
 		METHOD m_argpatja renderTrialItem (Lnet/minecraft/unmapped/C_cnszsxvd;IIIII)V
 			ARG 1 matrices
@@ -244,7 +262,16 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 			ARG 5 mouseX
 			ARG 6 mouseY
 	CLASS C_nwsdpuom RealmSelectionList
+	CLASS C_pioridqz
+		METHOD run run ()V
+	CLASS C_qxliwsqr
+		METHOD run run ()V
+	CLASS C_sapdoxes
+		METHOD run run ()V
+	CLASS C_ulzgilkw
+		METHOD run run ()V
 	CLASS C_vvkxoqra RealmSelectionListEntry
+		FIELD f_jfvtejrc SKIN_HEAD_LARGE_WIDTH I
 		FIELD f_qpfilxjr mServerData Lnet/minecraft/unmapped/C_pwmwypfb;
 		METHOD <init> (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_pwmwypfb;)V
 			ARG 2 serverData
@@ -268,5 +295,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/realms/gui/screen/R
 	CLASS C_xfdmbpib ShowPopupButton
 		METHOD m_kchzyebg (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_buwziidm;)V
 			ARG 1 button
+	CLASS C_xxrzcqwc
+		METHOD run run ()V
 	CLASS C_ynjgwqnr PendingInvitesButton
 		METHOD m_wizolhpg updatePendingText ()V
