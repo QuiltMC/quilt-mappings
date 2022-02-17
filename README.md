@@ -23,6 +23,7 @@ pluginManagement {
 ```groovy
 plugins {
   // ...
+  // Check the Quilt Mappings on Loom README for the correct version to use
   id "org.quiltmc.quilt-mappings-on-loom" version "QMoL_VERSION"
 }
 
@@ -34,11 +35,8 @@ dependencies {
    })
 }
 ```
-Replace `QMoL_VERSION` in `build.gradle` with the version corresponding to the version of Loom being used:
-| Loom Version | QMoL Version |
-| - | - |
-| 0.10 | 3.1.2 |
-| 0.11 | 4.0.0 |
+See [here](https://github.com/quiltmc/quilt-mappings-on-loom/blob/master/README.md#qmol-versions) for the correct `QMoL_VERSION` to use.
+
 ### Something else
 To obtain a deobfuscated Minecraft jar, [`./gradlew mapNamedJar`](#mapNamedJar) will generate a jar named like `<minecraft version>-named.jar`, which can be sent to a decompiler for deobfuscated code.
 
