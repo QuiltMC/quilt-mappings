@@ -10,10 +10,14 @@ CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/util/registry/DynamicRegis
 	COMMENT class serves as an immutable implementation of any particular collection
 	COMMENT or configuration of dynamic registries.
 	FIELD f_pgyjimoz INFOS Ljava/util/Map;
+	FIELD f_vhipwojv NETWORK_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_wvcxtgsi BUILTIN Ljava/util/function/Supplier;
 	FIELD f_zcsxlkxx LOGGER Lorg/slf4j/Logger;
+	METHOD m_aeirjrci getNetworkCodec (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/DataResult;
+		ARG 0 key
 	METHOD m_asrzufgj getOptional (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_athwjwwb ownedRegistries ()Ljava/util/stream/Stream;
 	METHOD m_avvkgvxl getKnownRegistries ()Ljava/lang/Iterable;
 	METHOD m_bfnxdyki register (Lcom/google/common/collect/ImmutableMap$Builder;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Codec;)V
 		ARG 0 infosBuilder
@@ -25,26 +29,83 @@ CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/util/registry/DynamicRegis
 		COMMENT
 		COMMENT @throws IllegalStateException if the registry does not exist
 		ARG 1 key
+	METHOD m_eznbkdss isIdentityCopy (Lnet/minecraft/unmapped/C_xhhleach;)Z
+		ARG 0 key
+	METHOD m_fpwtdfne ownedNetworkableRegistries ()Ljava/util/stream/Stream;
+	METHOD m_jffdyfoo retreiveRegistry (Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_tqxyjqsk;
+		ARG 0 key
 	METHOD m_kagwftqy getMutable (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_tqxyjqsk;
 		ARG 1 key
 	METHOD m_lbyadhxv load (Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yftyvswu;)V
 		COMMENT Loads a dynamic registry manager from the resource manager's data files.
+		ARG 0 writable
+		ARG 2 loader
+	METHOD m_lheqxlni blankWritable ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;
+	METHOD m_lxobzcah fromRegistryOfRegistries (Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+		ARG 0 key
+	METHOD m_matjkzip captureMap (Lcom/mojang/serialization/codecs/UnboundedMapCodec;)Lcom/mojang/serialization/Codec;
 	METHOD m_nnjsvctt load (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yftyvswu$C_ogvxrsre;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
 		COMMENT Loads elements from the {@code ops} into the registry specified by {@code
 		COMMENT info} within the {@code manager}. Note that the resource manager instance
 		COMMENT is kept within the {@code ops}.
+		ARG 1 bound
 		ARG 2 info
-	METHOD m_physpezp (Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;Lnet/minecraft/unmapped/C_nyvkclsy$C_dxgwghhk;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
+	METHOD m_physpezp addBuildInElements (Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;Lnet/minecraft/unmapped/C_nyvkclsy$C_dxgwghhk;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ydhbsuwm;)V
+		ARG 0 writable
+		ARG 1 inMemoryStorage
 		ARG 2 info
+	METHOD m_pkyudotx networkSafeRegistries ()Ljava/util/stream/Stream;
 	METHOD m_pquswexb getOptionalMutable (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		COMMENT Retrieves a registry optionally from this manager.
 		ARG 1 key
+	METHOD m_qepmomyf makeNetworkCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_qfxecdvh globalRegistries ()Ljava/util/stream/Stream;
+	METHOD m_sloxobqt freeze ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
 	METHOD m_tcjkywtj builtInCopy ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_qndozwiw;
+	METHOD m_uezzwhkz createRegistry (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_eexxncvi;
+		ARG 0 key
+	METHOD m_vutgtdyk registries ()Ljava/util/stream/Stream;
+	METHOD m_xnavlkkh createFreshRegistries ()Ljava/util/Map;
 	METHOD m_zbdqwvdm register (Lcom/google/common/collect/ImmutableMap$Builder;Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)V
 		ARG 0 infosBuilder
 		ARG 1 registryRef
 		ARG 2 entryCodec
 		ARG 3 networkEntryCodec
+	METHOD m_zygzorae readFromDisk (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_wqxmvzdq;
+	CLASS C_ggmzysrd Frozen
+	CLASS C_gmaxoias ImmutableRegistryAccess
+		FIELD f_mekoridj registries Ljava/util/Map;
+		METHOD <init> (Ljava/util/Map;)V
+			ARG 1 registries
+		METHOD <init> (Ljava/util/stream/Stream;)V
+			ARG 1 registries
+	CLASS C_qndozwiw Writable
+		METHOD m_evnkypur ownedWritableRegistryOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_eexxncvi;
+			ARG 1 key
+		METHOD m_xlpgwlgu ownedWritableRegistry (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+			ARG 1 key
+	CLASS C_qsyihpvr WritableRegistryManager
+		FIELD f_ntmfgncm registries Ljava/util/Map;
+		METHOD <init> (Ljava/util/Map;)V
+			ARG 1 registries
+	CLASS C_rsrqqoeq RegistryEntry
+		FIELD f_bkvlkpdm key Lnet/minecraft/unmapped/C_xhhleach;
+		FIELD f_jvqgwfmk value Lnet/minecraft/unmapped/C_tqxyjqsk;
+		METHOD <init> (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_tqxyjqsk;)V
+			ARG 1 key
+			ARG 2 value
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_dgxdmeeo fromMapEntry (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;
+			ARG 0 key
+		METHOD m_eytxsluw key ()Lnet/minecraft/unmapped/C_xhhleach;
+		METHOD m_fufppgac fromKey (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;
+			ARG 0 key
+			ARG 1 value
+		METHOD m_mvcdyxok fromHolder (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;
+			ARG 0 key
+		METHOD m_rlkulyrv freeze ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;
+		METHOD m_sxejvdpz value ()Lnet/minecraft/unmapped/C_tqxyjqsk;
 	CLASS C_ydhbsuwm Info
 		COMMENT Represents the serialization behavior of the registries, including the
 		COMMENT id of the registry, the codec for its elements, and whether the registry
@@ -56,6 +117,8 @@ CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/util/registry/DynamicRegis
 			ARG 1 registry
 			ARG 2 entryCodec
 			ARG 3 networkEntryCodec
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
 		METHOD m_lbactbzg getRegistry ()Lnet/minecraft/unmapped/C_xhhleach;
 		METHOD m_lwxvxfnu getNetworkEntryCodec ()Lcom/mojang/serialization/Codec;
 		METHOD m_nemjwaxp getEntryCodec ()Lcom/mojang/serialization/Codec;
