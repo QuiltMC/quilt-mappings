@@ -34,7 +34,7 @@ dependencies {
    })
 }
 ```
-Replace `QMoL_VERSION` with the version corresponding to the version of Loom being used:
+Replace `QMoL_VERSION` in `build.gradle` with the version corresponding to the version of Loom being used:
 | Loom Version | QMoL Version |
 | - | - |
 | 0.10 | 3.1.2 |
