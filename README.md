@@ -3,11 +3,43 @@
 Quilt Mappings is a set of open, unencumbered Minecraft mappings, free for everyone to use under the Creative Commons Zero license. The intention is to let 
 everyone mod Minecraft freely and openly, while also being able to innovate and process the mappings as they see fit.
 
+Unlike previous mapping sets, Quilt Mappings allows referencing the official Mojang mappings, which speeds up creating new mappings for Minecraft, and improves name quality and accuracy.
+
 To see the current version being targeted, check the branch name!
 
 ## Usage
-To use Quilt Mappings-deobfuscated Minecraft for Minecraft modding or as a dependency in a Java project, you can use [quilt-gradle](https://github.com/quiltmc/quilt-gradle) Gradle plugin. See [fabric wiki tutorial](https://fabricmc.net/wiki/tutorial:setup) for more information.
+### A Minecraft mod using Loom
+To use Quilt Mappings in a Fabric or Quilt mod, use the official [Quilt Mappings on Loom](https://github.com/QuiltMC/quilt-mappings-on-loom) Gradle plugin.
 
+`settings.gradle`:
+```groovy
+pluginManagement {
+    repositories {
+        maven { url = "https://maven.quiltmc.org/repository/release" }
+    }
+}
+```
+`build.gradle`:
+```groovy
+plugins {
+  // ...
+  id "org.quiltmc.quilt-mappings-on-loom" version "QMoL_VERSION"
+}
+
+// ...
+
+dependencies {
+   mappings(loom.layered {
+      addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${minecraft_version}+build.${project.quilt_mappings}:v2"))
+   })
+}
+```
+Replace `QMoL_VERSION` with the version corresponding to the version of Loom being used:
+| Loom Version | QMoL Version |
+| - | - |
+| 0.10 | 3.1.2 |
+| 0.11 | 4.0.0 |
+### Something else
 To obtain a deobfuscated Minecraft jar, [`./gradlew mapNamedJar`](#mapNamedJar) will generate a jar named like `<minecraft version>-named.jar`, which can be sent to a decompiler for deobfuscated code.
 
 Please note to run the Quilt Mappings build script **Java 17** or higher is required!
