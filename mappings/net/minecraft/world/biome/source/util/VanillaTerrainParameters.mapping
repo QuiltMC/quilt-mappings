@@ -3,21 +3,62 @@ CLASS net/minecraft/unmapped/C_vtphaipm net/minecraft/world/biome/source/util/Va
 	FIELD f_lzfscfwv CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_nbpisubo GLOBAL_OFFSET F
 	FIELD f_vsidgzvf SPLINE_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_wgilnbpy NO_TRANSFORM_FUNCTION Lnet/minecraft/unmapped/C_oqsszdfo;
 	FIELD f_wnivazcp jaggedness Lnet/minecraft/unmapped/C_cjntsjzo;
 	FIELD f_xggrdyai factor Lnet/minecraft/unmapped/C_cjntsjzo;
 	METHOD <init> (Lnet/minecraft/unmapped/C_cjntsjzo;Lnet/minecraft/unmapped/C_cjntsjzo;Lnet/minecraft/unmapped/C_cjntsjzo;)V
 		ARG 1 offset
 		ARG 2 factor
 		ARG 3 jaggedness
+	METHOD m_bznxzqmc buildErosionJaggednessSpline (FFFFLnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 4 valueTransformer
+	METHOD m_dxecsmso buildErosionOffsetSpline (FFFFFFZZLnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 8 valueTransformer
+	METHOD m_ffzeiruy getFactor (Lnet/minecraft/unmapped/C_vtphaipm$C_wfilltqw;)F
+		ARG 1 point
+	METHOD m_hfnzwxim getOffset (Lnet/minecraft/unmapped/C_vtphaipm$C_wfilltqw;)F
+		ARG 1 point
+	METHOD m_hsxbmunf getNormalizedWeirdness (F)F
+		ARG 0 weirdness
+	METHOD m_htxzicvn calculateSlope (FFFF)F
+	METHOD m_jgcvxkpg getMountainContinentalness (FFF)F
+	METHOD m_jnxinyiv addDebugBiomes (Ljava/util/function/Consumer;)V
+		ARG 1 biomeConsumer
+	METHOD m_jxrdpzae getAmplifiedFactor (F)F
+		ARG 0 value
 	METHOD m_kmquksxd (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
+	METHOD m_lcvhxzqu createNoisePoint (FFF)Lnet/minecraft/unmapped/C_vtphaipm$C_wfilltqw;
+		ARG 1 continents
+		ARG 2 erosion
+		ARG 3 weirdness
+	METHOD m_llenczfj createRidgeSpline (FFFFFFLnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 6 valueTransformer
 	METHOD m_lnxesmqs createOverworldParameters (Z)Lnet/minecraft/unmapped/C_vtphaipm;
 		ARG 0 amplified
+	METHOD m_ndqlgjgb getJaggedness (Lnet/minecraft/unmapped/C_vtphaipm$C_wfilltqw;)F
+		ARG 1 point
+	METHOD m_njyshjbe calculateMountainRidgeZeroContinentalnessPoint (F)F
+	METHOD m_ntawgoaa (Ljava/lang/Float;)F
+		ARG 0 value
 	METHOD m_oehwfonn (Lnet/minecraft/unmapped/C_vtphaipm;)Lnet/minecraft/unmapped/C_cjntsjzo;
 		ARG 0 parameters
 	METHOD m_outhqois offset ()Lnet/minecraft/unmapped/C_cjntsjzo;
+	METHOD m_qreuzgbh buildWeirdnessJaggednessSpline (FLnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 0 valueFactor
+		ARG 1 valueTransformer
+	METHOD m_shvltene getAmplifiedJaggedness (F)F
+		ARG 0 value
 	METHOD m_udnprhnj jaggedness ()Lnet/minecraft/unmapped/C_cjntsjzo;
+	METHOD m_uwmutbwx buildRidgeJaggednessSpline (FFLnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 2 valueTransformer
+	METHOD m_uztpodak getAmplifiedOffset (F)F
+		ARG 0 value
 	METHOD m_wnzlcpvy factor ()Lnet/minecraft/unmapped/C_cjntsjzo;
+	METHOD m_ynhpunza getErosionFactor (FZLnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 2 factorFunction
+	METHOD m_zjctgcug buildMountainRidgeSplineWithPoints (FZLnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 2 valueTransformer
 	CLASS C_rggyfdrb CoordinateResolver
 		FIELD f_qcddckuj name Ljava/lang/String;
 		FIELD f_qmurtwqc BY_NAME Ljava/util/Map;
