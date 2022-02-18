@@ -34,14 +34,15 @@ public class EntryNamingChecker implements Checker<Entry<?>> {
                 errorReporter.error("class name does not start with uppercase character");
             }
         } else {
-            if (startsWithUppercase(name)) {
-                errorReporter.error("non-class entry name starts with uppercase character");
-            } else if (entry instanceof MethodEntry) {
+            if (entry instanceof MethodEntry) {
                 if (entry.getName().equals("<init>") || entry.getName().equals("<clinit>")) {
                     errorReporter.error("constructor method has a name");
-                } else if (access.isSynthetic()) {
-                    errorReporter.warning("synthetic method has a name");
+                    return;
                 }
+            }
+
+            if (startsWithUppercase(name)) {
+                errorReporter.error("non-class entry name starts with uppercase character");
             }
         }
 
