@@ -3,7 +3,7 @@
 Quilt Mappings is a set of open, unencumbered Minecraft mappings, free for everyone to use under the Creative Commons Zero license. The intention is to let 
 everyone mod Minecraft freely and openly, while also being able to innovate and process the mappings as they see fit.
 
-Unlike previous mapping sets, Quilt Mappings allows referencing the official Mojang mappings, which speeds up creating new mappings for Minecraft, and improves name quality and accuracy.
+Unlike previous mapping sets, Quilt Mappings allows referencing the official Mojang mappings, which speeds up creating new mappings for Minecraft and improves name quality and accuracy.
 
 To see the current version being targeted, check the branch name!
 
