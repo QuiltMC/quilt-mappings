@@ -39,6 +39,10 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 world
 		ARG 2 chunk
 		ARG 3 structureAccessor
+	METHOD m_gobnuobv getStructureReferences (Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_licgnyqv;)I
+		ARG 0 structureAccessor
+		ARG 1 chunk
+		ARG 2 sectionPos
 	METHOD m_jbuktzxf getHeightOnGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
 		ARG 1 x
 		ARG 2 z
@@ -50,6 +54,20 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 3 blender
 		ARG 4 structureAccessor
 		ARG 5 chunk
+	METHOD m_netqupom locateStructure (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_odfnijdo;Lnet/minecraft/unmapped/C_hynzadkk;IZ)Lcom/mojang/datafixers/util/Pair;
+		COMMENT Tries to find the closest structure of a given type near a given block.
+		COMMENT <p>
+		COMMENT New chunks will only be generated up to the {@link net.minecraft.world.chunk.ChunkStatus#STRUCTURE_STARTS} phase by this method.
+		COMMENT <p>
+		COMMENT The radius is ignored for strongholds.
+		COMMENT
+		COMMENT @return {@code null} if no structure could be found within the given search radius
+		ARG 1 world
+		ARG 3 center
+		ARG 4 radius
+			COMMENT the search radius in chunks around the chunk the given block position is in; a radius of 0 will only search in the given chunk
+		ARG 5 skipExistingChunks
+			COMMENT whether only structures that are not referenced by generated chunks (chunks past the STRUCTURE_STARTS stage) are returned, excluding strongholds
 	METHOD m_pbnzyeke withSeed (J)Lnet/minecraft/unmapped/C_kgfalbim;
 		ARG 1 seed
 	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
