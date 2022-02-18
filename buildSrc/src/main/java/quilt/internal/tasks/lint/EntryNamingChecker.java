@@ -29,6 +29,7 @@ public class EntryNamingChecker implements Checker<Entry<?>> {
         }
 
         if (entry instanceof ClassEntry) {
+            name = name.substring(name.lastIndexOf('/') + 1);
             if (!startsWithUppercase(name)) {
                 errorReporter.error("class name does not start with uppercase character");
             }
