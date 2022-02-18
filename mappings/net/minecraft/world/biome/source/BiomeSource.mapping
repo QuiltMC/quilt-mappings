@@ -1,12 +1,44 @@
 CLASS net/minecraft/unmapped/C_ajguowya net/minecraft/world/biome/source/BiomeSource
 	FIELD f_lmxlygmz CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_rjrfvryn featuresStepData Ljava/util/function/Supplier;
 	FIELD f_ympbsozp biomes Ljava/util/Set;
 	METHOD <init> (Ljava/util/List;)V
 		ARG 1 biomes
 	METHOD <init> (Ljava/util/stream/Stream;)V
 		ARG 1 biomes
+	METHOD m_cxfuckwe createFeatureStepData (Ljava/util/List;Z)Ljava/util/List;
+		ARG 1 biomes
+	METHOD m_dsvhgcri (Lorg/apache/commons/lang3/mutable/MutableInt;Ljava/lang/Object;)I
+		ARG 1 object
+	METHOD m_dupxusbd (ILnet/minecraft/unmapped/C_ajguowya$C_xvjbyzhe;)Z
+		ARG 1 data
+	METHOD m_hsagconz addDebugInfo (Ljava/util/List;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)V
+		ARG 1 info
+		ARG 2 pos
+		ARG 3 sampler
+	METHOD m_kmwoxorx (Ljava/util/Comparator;Lnet/minecraft/unmapped/C_ajguowya$C_xvjbyzhe;)Ljava/util/Set;
+		ARG 1 data
 	METHOD m_kpxgxnfg withSeed (J)Lnet/minecraft/unmapped/C_ajguowya;
 		ARG 1 seed
+	METHOD m_plmkpccj getFeaturesStepData ()Ljava/util/List;
+	METHOD m_qtxfkduc locateBiome (IIIILjava/util/function/Predicate;Ljava/util/Random;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 radius
+		ARG 5 predicate
+		ARG 6 random
+		ARG 7 noiseSampler
+	METHOD m_queesojl locateBiome (IIIIILjava/util/function/Predicate;Ljava/util/Random;ZLnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 radius
+		ARG 5 stepPerIteration
+		ARG 6 predicate
+		ARG 7 random
+		ARG 8 outwardsSearch
+		ARG 9 noiseSampler
 	METHOD m_qutqwcbq getCodec ()Lcom/mojang/serialization/Codec;
 	METHOD m_swiafcco getBiomes ()Ljava/util/Set;
 	METHOD m_ycmulzaq getBiomesInArea (IIIILnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Ljava/util/Set;
@@ -15,7 +47,7 @@ CLASS net/minecraft/unmapped/C_ajguowya net/minecraft/world/biome/source/BiomeSo
 		ARG 3 z
 		ARG 4 radius
 		ARG 5 noiseSampler
-	CLASS C_xvjbyzhe
+	CLASS C_xvjbyzhe FeatureData
 		FIELD f_cebglbmd step I
 		FIELD f_djprvwsw featureIndex I
 		FIELD f_nlwwpvwg feature Lnet/minecraft/unmapped/C_jewbaoib;
@@ -28,7 +60,7 @@ CLASS net/minecraft/unmapped/C_ajguowya net/minecraft/world/biome/source/BiomeSo
 		METHOD m_rtpjcpki feature ()Lnet/minecraft/unmapped/C_jewbaoib;
 		METHOD m_tkvymauo featureIndex ()I
 		METHOD m_xznrnmil step ()I
-	CLASS C_zbhlxvzx
+	CLASS C_zbhlxvzx FeatureStepData
 		FIELD f_kcbgsffw features Ljava/util/List;
 		FIELD f_rpoggytn indexMapping Ljava/util/function/ToIntFunction;
 		METHOD <init> (Ljava/util/List;Ljava/util/function/ToIntFunction;)V
