@@ -315,13 +315,17 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 			ARG 3 entity
 		METHOD m_fuqgdrck isOf (Lnet/minecraft/unmapped/C_mmxmpdoq;)Z
+			COMMENT {@return whether this block state is an instance of the given block}
 			ARG 1 block
+				COMMENT the block instance to match
 		METHOD m_gosfbjut neighborUpdate (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 block
 			ARG 4 posFrom
 			ARG 5 notify
+		METHOD m_hnwtgjio streamTags ()Ljava/util/stream/Stream;
+			COMMENT {@return a stream of tag keys this block is in}
 		METHOD m_hupzkros shouldSuffocate (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 1 world
 			ARG 2 pos
@@ -351,6 +355,12 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 			ARG 3 flags
 			ARG 4 maxUpdateDepth
+		METHOD m_lyoypzum isInAndMatch (Lnet/minecraft/unmapped/C_ednuhnnn;Ljava/util/function/Predicate;)Z
+			COMMENT {@return whether this block is in the specified tag and matches the given predicate}
+			ARG 1 tag
+				COMMENT the tag key
+			ARG 2 blockStatePredicate
+				COMMENT the block state predicate to match against
 		METHOD m_meigdamn getDroppedStacks (Lnet/minecraft/unmapped/C_iakykpgh$C_xdyltqvb;)Ljava/util/List;
 			ARG 1 builder
 		METHOD m_mheuwasn scheduledTick (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/Random;)V
@@ -416,10 +426,15 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 3 context
 		METHOD m_uiiilpvn getRenderType ()Lnet/minecraft/unmapped/C_obvqhpgv;
 		METHOD m_ujrzeftd hasBlockEntity ()Z
+			COMMENT {@return whether this block has an associated entity}
 		METHOD m_ulazwqqp onEntityCollision (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;)V
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 entity
+		METHOD m_umxslqzf isIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
+			COMMENT {@return whether this block is in the specified tag}
+			ARG 1 tag
+				COMMENT the tag key
 		METHOD m_uwpuhtkq isSideSolid (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_bermjtpm;)Z
 			ARG 1 world
 			ARG 2 pos
