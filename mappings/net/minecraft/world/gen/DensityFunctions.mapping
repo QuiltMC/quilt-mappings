@@ -107,12 +107,12 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 		FIELD f_zrnhfgsw CODEC Lcom/mojang/serialization/Codec;
 	CLASS C_ihcxcncj MultiplyOrAdd
 		FIELD f_axuyyfjb argument D
-		FIELD f_bbjjjkwr type Lnet/minecraft/unmapped/C_mdkmcezi$C_ihcxcncj$C_oasfbkwq;
+		FIELD f_bbjjjkwr operationType Lnet/minecraft/unmapped/C_mdkmcezi$C_ihcxcncj$C_oasfbkwq;
 		FIELD f_lotenpvv input Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_ltmwezav maxValue D
 		FIELD f_nfrfpmxe minValue D
 		METHOD <init> (Lnet/minecraft/unmapped/C_mdkmcezi$C_ihcxcncj$C_oasfbkwq;Lnet/minecraft/unmapped/C_kzwapyud;DDD)V
-			ARG 1 type
+			ARG 1 operationType
 			ARG 2 input
 			ARG 3 minValue
 			ARG 5 maxValue
@@ -120,10 +120,12 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_acrcrutr argument ()D
+		METHOD m_saupsjal operationType ()Lnet/minecraft/unmapped/C_mdkmcezi$C_ihcxcncj$C_oasfbkwq;
 		CLASS C_oasfbkwq Type
 	CLASS C_iixtwqxj Slide
 		FIELD f_jkrmeymm settings Lnet/minecraft/unmapped/C_ulvgadxi;
 		FIELD f_uzkeupev input Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_xyufqzlz CODEC Lcom/mojang/serialization/Codec;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_kzwapyud;)V
 			ARG 1 settings
 			ARG 2 input
@@ -155,6 +157,7 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 			ARG 1 o
 	CLASS C_lhdfeucz EndIslandDensityFunction
 		FIELD f_fmwzwyui islandNoise Lnet/minecraft/unmapped/C_mnmvtskp;
+		FIELD f_kemeiodl CODEC Lcom/mojang/serialization/Codec;
 		METHOD <init> (J)V
 			ARG 1 random
 	CLASS C_lrntbvay BlendDensity
@@ -178,19 +181,38 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 		METHOD m_pfwzshyn transform (D)D
 			ARG 1 input
 	CLASS C_mnzzrhuq ShiftedNoise
+		FIELD f_avowqyvt CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_bcadgxmk horizontalScale D
 		FIELD f_dwdlsbft shiftX Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_gvxrmfix verticalScale D
 		FIELD f_imqwcqvy shiftZ Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_lycqzbok noise Lnet/minecraft/unmapped/C_rxrtfjrt;
 		FIELD f_tfrxfeei shiftY Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_xfkrjbqk DATA_CODEC Lcom/mojang/serialization/MapCodec;
+		FIELD f_xoccqhrp noiseData Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD <init> (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;DDLnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rxrtfjrt;)V
+			ARG 1 shiftX
+			ARG 2 shiftY
+			ARG 3 shiftZ
+			ARG 4 horizontalScale
+			ARG 6 verticalScale
+			ARG 8 noiseData
+			ARG 9 noise
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_eaemishu horizontalScale ()D
+		METHOD m_ebnaiicx createUnseeded (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;DDLnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_mdkmcezi$C_mnzzrhuq;
+			ARG 0 shiftX
+			ARG 1 shiftY
+			ARG 2 shiftZ
+			ARG 3 horizontalScale
+			ARG 5 verticalScale
+			ARG 7 noiseData
 		METHOD m_ectegnfr noise ()Lnet/minecraft/unmapped/C_rxrtfjrt;
 		METHOD m_etkmvjar shiftY ()Lnet/minecraft/unmapped/C_kzwapyud;
 		METHOD m_llovzvih verticalScale ()D
 		METHOD m_nbtngjbv shiftZ ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_swdjbmva nosieData ()Lnet/minecraft/unmapped/C_cjzoxshv;
 		METHOD m_uzggzava shiftX ()Lnet/minecraft/unmapped/C_kzwapyud;
 	CLASS C_neaittdk TransformerWithContext
 		METHOD m_ibixqdwp input ()Lnet/minecraft/unmapped/C_kzwapyud;
@@ -198,16 +220,35 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 			ARG 1 functionContext
 	CLASS C_onodflli Noise
 		FIELD f_guemmvit noise Lnet/minecraft/unmapped/C_rxrtfjrt;
+		FIELD f_jwvphzby DATA_CODEC Lcom/mojang/serialization/MapCodec;
 		FIELD f_mumgkjpp verticalScale D
 		FIELD f_wimimxkc horizontalScale D
+		FIELD f_zgzskmsv noiseData Lnet/minecraft/unmapped/C_cjzoxshv;
+		FIELD f_ziarbjkx CODEC Lcom/mojang/serialization/Codec;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rxrtfjrt;DD)V
+			ARG 1 noiseData
+			ARG 2 noise
+			ARG 3 horizontalScale
+			ARG 5 verticalScale
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_blelxzrr noise ()Lnet/minecraft/unmapped/C_rxrtfjrt;
+		METHOD m_okqdqmzl createUnseeded (Lnet/minecraft/unmapped/C_cjzoxshv;DD)Lnet/minecraft/unmapped/C_mdkmcezi$C_onodflli;
+			ARG 0 noiseData
+			ARG 1 horizontalScale
+			ARG 3 verticalScale
+		METHOD m_oqyhwtko noiseData ()Lnet/minecraft/unmapped/C_cjzoxshv;
 		METHOD m_qmdpomly verticalScale ()D
 		METHOD m_vpcdieih horizontalScale ()D
 	CLASS C_oosxmyxk BlendOffset
+		FIELD f_zlflptle CODEC Lcom/mojang/serialization/Codec;
 	CLASS C_ozjfswew ShiftB
+		FIELD f_egmarlwv CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_jhnpsfqk offsetNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
+		FIELD f_vbqqvgit noiseData Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rxrtfjrt;)V
+			ARG 1 noiseData
+			ARG 2 offsetNoise
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 	CLASS C_pzgsokuu ShiftNoise
@@ -229,9 +270,26 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 			ARG 1 o
 		METHOD m_emwydmgl value ()D
 	CLASS C_reffwscv Spline
+		FIELD f_billgkqm DATA_CODEC Lcom/mojang/serialization/MapCodec;
+		FIELD f_cdtfwlwb CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_ggruurho minValue D
+		FIELD f_odxkbvmu maxValue D
+		FIELD f_qwfptbmn spline Lnet/minecraft/unmapped/C_cjntsjzo;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjntsjzo;DD)V
+			ARG 1 spline
+			ARG 2 minValue
+			ARG 4 maxValue
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 p
+		METHOD m_cczezeyt spline ()Lnet/minecraft/unmapped/C_cjntsjzo;
 	CLASS C_syfuckkz BeardifierMarker
 	CLASS C_tqzpquta ShiftA
+		FIELD f_irttrein noiseData Lnet/minecraft/unmapped/C_cjzoxshv;
 		FIELD f_kmzucvpo offsetNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
+		FIELD f_kptqnpkm CODEC Lcom/mojang/serialization/Codec;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rxrtfjrt;)V
+			ARG 1 noiseData
+			ARG 2 offsetNoise
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 	CLASS C_ucbebgzr Mapped
@@ -246,30 +304,87 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 			ARG 5 maxValue
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
+		METHOD m_cikyzzae create (Lnet/minecraft/unmapped/C_mdkmcezi$C_ucbebgzr$C_vgrinicv;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_mdkmcezi$C_ucbebgzr;
+			ARG 0 type
+			ARG 1 input
 		METHOD m_sndsxsxu type ()Lnet/minecraft/unmapped/C_mdkmcezi$C_ucbebgzr$C_vgrinicv;
 		METHOD m_ziaqmozi transform (Lnet/minecraft/unmapped/C_mdkmcezi$C_ucbebgzr$C_vgrinicv;D)D
 			ARG 0 type
 		CLASS C_vgrinicv Type
+			FIELD f_iibkkzpc type Ljava/lang/String;
+			FIELD f_psehmnjv CODEC Lcom/mojang/serialization/Codec;
+			METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
+				ARG 3 type
 	CLASS C_uejbabyt TerrainShaperSpline
 		FIELD f_couttipo minValue D
 		FIELD f_fdrkczzm weirdness Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_orhidocr continentalness Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_qkotroyl erosion Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_rwddrqlh CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_slwhvyqg shaper Lnet/minecraft/unmapped/C_vtphaipm;
+		FIELD f_uwkevgsb DATA_CODEC Lcom/mojang/serialization/MapCodec;
+		FIELD f_xowsyxbb spline Lnet/minecraft/unmapped/C_mdkmcezi$C_uejbabyt$C_zlreguhf;
 		FIELD f_zkrldmgq maxValue D
+		METHOD <init> (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_vtphaipm;Lnet/minecraft/unmapped/C_mdkmcezi$C_uejbabyt$C_zlreguhf;DD)V
+			ARG 1 continentalness
+			ARG 2 erosion
+			ARG 3 weirdness
+			ARG 4 shaper
+			ARG 5 spline
+			ARG 6 minValue
+			ARG 8 maxValue
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_ddztpegs erosion ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_ilcdavkn createUnseeded (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_mdkmcezi$C_uejbabyt$C_zlreguhf;DD)Lnet/minecraft/unmapped/C_mdkmcezi$C_uejbabyt;
+			ARG 0 continentalness
+			ARG 1 erosion
+			ARG 2 weirdness
+			ARG 3 spline
+			ARG 4 minValue
+			ARG 6 maxValue
 		METHOD m_ncjdwzpl weirdness ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_rhusmglq spline ()Lnet/minecraft/unmapped/C_mdkmcezi$C_uejbabyt$C_zlreguhf;
+		METHOD m_sxtwqolz shaper ()Lnet/minecraft/unmapped/C_vtphaipm;
 		METHOD m_uwowgrpw continentalness ()Lnet/minecraft/unmapped/C_kzwapyud;
+		CLASS C_gooqqxmh
+			METHOD apply apply (Lnet/minecraft/unmapped/C_vtphaipm;Lnet/minecraft/unmapped/C_vtphaipm$C_wfilltqw;)F
+		CLASS C_zlreguhf Type
+			FIELD f_ovnzrvtd CODEC Lcom/mojang/serialization/Codec;
+			FIELD f_uecpyigc type Ljava/lang/String;
+			METHOD <init> (Ljava/lang/String;ILjava/lang/String;Lnet/minecraft/unmapped/C_mdkmcezi$C_uejbabyt$C_gooqqxmh;)V
+				ARG 3 type
 	CLASS C_ufxlyrzf WeirdScaledSampler
 		FIELD f_bgfgqhdk input Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_lcvlminl noiseData Lnet/minecraft/unmapped/C_cjzoxshv;
+		FIELD f_spincsyf CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_tfqmetif noise Lnet/minecraft/unmapped/C_rxrtfjrt;
+		FIELD f_vkgxqwyx rarityMapper Lnet/minecraft/unmapped/C_mdkmcezi$C_ufxlyrzf$C_edgplzwm;
+		FIELD f_zgnjzonn DATA_CODEC Lcom/mojang/serialization/MapCodec;
+		METHOD <init> (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rxrtfjrt;Lnet/minecraft/unmapped/C_mdkmcezi$C_ufxlyrzf$C_edgplzwm;)V
+			ARG 1 input
+			ARG 2 noiseData
+			ARG 3 noise
+			ARG 4 rarityMapper
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
+		METHOD m_astgbggx createUnseeded (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_mdkmcezi$C_ufxlyrzf$C_edgplzwm;)Lnet/minecraft/unmapped/C_mdkmcezi$C_ufxlyrzf;
+			ARG 0 input
+			ARG 1 noiseData
+			ARG 2 rarityMapper
 		METHOD m_lheavxto noise ()Lnet/minecraft/unmapped/C_rxrtfjrt;
+		METHOD m_nhparupd rarityMapper ()Lnet/minecraft/unmapped/C_mdkmcezi$C_ufxlyrzf$C_edgplzwm;
+		METHOD m_xmgcvzhq noiseData ()Lnet/minecraft/unmapped/C_cjzoxshv;
+		CLASS C_edgplzwm Type
+			FIELD f_bknlxpxb type Ljava/lang/String;
+			FIELD f_pslonplh CODEC Lcom/mojang/serialization/Codec;
+			METHOD <init> (Ljava/lang/String;ILjava/lang/String;Lit/unimi/dsi/fastutil/doubles/Double2DoubleFunction;D)V
+				ARG 3 type
 	CLASS C_vbvgjlqq Clamp
 		FIELD f_bcukjvej minValue D
+		FIELD f_lmwrlosq DATA_CODEC Lcom/mojang/serialization/MapCodec;
 		FIELD f_ofoibhfv input Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_relqvmbd CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_ziljolra maxValue D
 		METHOD <init> (Lnet/minecraft/unmapped/C_kzwapyud;DD)V
 			ARG 1 input
@@ -279,18 +394,25 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 			ARG 1 o
 	CLASS C_vjpiwxow Marker
 		FIELD f_widhemml type Lnet/minecraft/unmapped/C_mdkmcezi$C_vjpiwxow$C_nfzjnguy;
+		FIELD f_zkuprrhz function Lnet/minecraft/unmapped/C_kzwapyud;
 		METHOD <init> (Lnet/minecraft/unmapped/C_mdkmcezi$C_vjpiwxow$C_nfzjnguy;Lnet/minecraft/unmapped/C_kzwapyud;)V
 			ARG 1 type
 			ARG 2 function
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		CLASS C_nfzjnguy Type
+			FIELD f_pkyiggak type Ljava/lang/String;
+			FIELD f_rrcysynx CODEC Lcom/mojang/serialization/Codec;
+			METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
+				ARG 3 type
 	CLASS C_wbktmrab RangeChoice
 		FIELD f_aryqzkgl input Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_fxoojcfn minInclusive D
 		FIELD f_iidivrgj whenInRange Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_kilzcasp maxInclusive D
+		FIELD f_xduytwuk DATA_CODEC Lcom/mojang/serialization/MapCodec;
 		FIELD f_xpxvbgth whenOutOfrange Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_zrmllxhd CODEC Lcom/mojang/serialization/Codec;
 		METHOD <init> (Lnet/minecraft/unmapped/C_kzwapyud;DDLnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;)V
 			ARG 1 input
 			ARG 2 minInclusive
@@ -309,6 +431,10 @@ CLASS net/minecraft/unmapped/C_mdkmcezi net/minecraft/world/gen/DensityFunctions
 		METHOD m_buobufnn type ()Lnet/minecraft/unmapped/C_mdkmcezi$C_xtxhyvmj$C_aittffza;
 		METHOD m_kkdphmsf argument1 ()Lnet/minecraft/unmapped/C_kzwapyud;
 		METHOD m_szoanxll argument2 ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_xdihtqmi create (Lnet/minecraft/unmapped/C_mdkmcezi$C_xtxhyvmj$C_aittffza;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_mdkmcezi$C_xtxhyvmj;
+			ARG 0 type
+			ARG 1 function1
+			ARG 2 function2
 		CLASS C_aittffza Type
 			FIELD f_pzfodjuo CODEC Lcom/mojang/serialization/Codec;
 			FIELD f_wmcfzwnf type Ljava/lang/String;
