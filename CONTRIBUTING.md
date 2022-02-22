@@ -42,6 +42,11 @@ Note that for the required reviews, approvals from members of the Mappings Team 
     - Snapshots: 3 days
     - Releases: 7 days
 
+- Special cases
+  - New mappings needed for QSL
+    - **Final Comment Period:**
+      - Snapshots & releases: 12 hours
+
 ##### Mapping refactors
 Typo fixes are *not* considered refactor changes.
 
