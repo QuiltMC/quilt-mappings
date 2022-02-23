@@ -1,13 +1,17 @@
 CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/StructureFeature
+	FIELD f_jdkvzjyf pieceGenerator Lnet/minecraft/unmapped/C_ukcqthce;
 	FIELD f_lsfsrihv STRUCTURE_TO_GENERATION_STEP Ljava/util/Map;
 	FIELD f_nefdqwhz MAX_STRUCTURE_RANGE I
 	FIELD f_qyedxhax SWAMP_HUT Lnet/minecraft/unmapped/C_vvmtobpf;
 	FIELD f_tpqwkoch codec Lcom/mojang/serialization/Codec;
 	FIELD f_zalymdqm LOGGER Lorg/slf4j/Logger;
+	FIELD f_zzcuzwlv postPlacementProcessor Lnet/minecraft/unmapped/C_kgyvgadg;
 	METHOD <init> (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ukcqthce;)V
 		ARG 1 codec
 	METHOD <init> (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ukcqthce;Lnet/minecraft/unmapped/C_kgyvgadg;)V
 		ARG 1 codec
+		ARG 2 pieceGenerator
+		ARG 3 postPlacementProcessor
 	METHOD m_aovapzws readStructureStart (Lnet/minecraft/unmapped/C_ywyzxrzo;Lnet/minecraft/unmapped/C_hhlwcnih;J)Lnet/minecraft/unmapped/C_efiavfys;
 		ARG 0 context
 		ARG 1 nbt
@@ -16,8 +20,16 @@ CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/Structur
 	METHOD m_hnmlakfx getGenerationStep ()Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
 		COMMENT Gets the step during which this structure will participate in world generation.
 		COMMENT Structures will generate before other features in the same generation step.
+	METHOD m_pzalezec getPostPlacementProcessor ()Lnet/minecraft/unmapped/C_kgyvgadg;
+	METHOD m_rcmdjavw getBlockPos (Lnet/minecraft/unmapped/C_cznbjngb;Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_tacqusyg configured (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;ZLjava/util/Map;)Lnet/minecraft/unmapped/C_licgnyqv;
+	METHOD m_tiobtmtl configured (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;Z)Lnet/minecraft/unmapped/C_licgnyqv;
+	METHOD m_titzgnss canGenerate (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_rhdulivw;JLnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)Z
+	METHOD m_utcfbjyw configured (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;Ljava/util/Map;)Lnet/minecraft/unmapped/C_licgnyqv;
+	METHOD m_vfjkdycf getPieceGenerator ()Lnet/minecraft/unmapped/C_ukcqthce;
 	METHOD m_xnhhytsz register (Ljava/lang/String;Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;)Lnet/minecraft/unmapped/C_vvmtobpf;
 		ARG 0 name
 		ARG 1 structureFeature
 		ARG 2 step
 	METHOD m_ywspjwtx getCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_zlyoxgdd confirgured (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;)Lnet/minecraft/unmapped/C_licgnyqv;
