@@ -1,23 +1,72 @@
 CLASS net/minecraft/unmapped/C_vvmtobpf net/minecraft/world/gen/feature/StructureFeature
+	FIELD f_jdkvzjyf piecesGenerator Lnet/minecraft/unmapped/C_ukcqthce;
 	FIELD f_lsfsrihv STRUCTURE_TO_GENERATION_STEP Ljava/util/Map;
 	FIELD f_nefdqwhz MAX_STRUCTURE_RANGE I
-	FIELD f_qyedxhax SWAMP_HUT Lnet/minecraft/unmapped/C_vvmtobpf;
 	FIELD f_tpqwkoch codec Lcom/mojang/serialization/Codec;
 	FIELD f_zalymdqm LOGGER Lorg/slf4j/Logger;
+	FIELD f_zzcuzwlv postPlacementProcessor Lnet/minecraft/unmapped/C_kgyvgadg;
 	METHOD <init> (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ukcqthce;)V
 		ARG 1 codec
+		ARG 2 piecesGenerator
 	METHOD <init> (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ukcqthce;Lnet/minecraft/unmapped/C_kgyvgadg;)V
 		ARG 1 codec
+		ARG 2 piecesGenerator
+		ARG 3 postPlacementProcessor
+	METHOD m_aiulcocx (Lnet/minecraft/unmapped/C_licgnyqv;)Ljava/util/Map;
+		ARG 0 feature
 	METHOD m_aovapzws readStructureStart (Lnet/minecraft/unmapped/C_ywyzxrzo;Lnet/minecraft/unmapped/C_hhlwcnih;J)Lnet/minecraft/unmapped/C_efiavfys;
 		ARG 0 context
 		ARG 1 nbt
 		ARG 2 worldSeed
+	METHOD m_auawqaic (Lnet/minecraft/unmapped/C_licgnyqv;)Lnet/minecraft/unmapped/C_jpnewgxf;
+		ARG 0 feature
 	METHOD m_cxwivmzi init ()V
+	METHOD m_dcbnjzdt (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_odfnijdo;Ljava/lang/Boolean;Ljava/util/Map;)Lnet/minecraft/unmapped/C_licgnyqv;
+		ARG 1 config
+		ARG 2 biomes
+		ARG 3 adaptNoise
+		ARG 4 spawnOverrides
 	METHOD m_hnmlakfx getGenerationStep ()Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
 		COMMENT Gets the step during which this structure will participate in world generation.
 		COMMENT Structures will generate before other features in the same generation step.
+	METHOD m_iclvkjhf (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 2 instance
+	METHOD m_mvmoeepg (Lnet/minecraft/unmapped/C_licgnyqv;)Ljava/lang/Boolean;
+		ARG 0 feature
+	METHOD m_pzalezec getPostPlacementProcessor ()Lnet/minecraft/unmapped/C_kgyvgadg;
+	METHOD m_rcmdjavw getLocatedPos (Lnet/minecraft/unmapped/C_cznbjngb;Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_hynzadkk;
+		COMMENT {@return a block position for feature location}
+		ARG 0 placement
+		ARG 1 chunkPos
+	METHOD m_tacqusyg configure (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;ZLjava/util/Map;)Lnet/minecraft/unmapped/C_licgnyqv;
+		ARG 1 config
+		ARG 2 biomes
+		ARG 3 adaptNoise
+		ARG 4 spawnOverrides
+	METHOD m_tiobtmtl configure (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;Z)Lnet/minecraft/unmapped/C_licgnyqv;
+		ARG 1 config
+		ARG 2 biomes
+		ARG 3 adaptNoise
+	METHOD m_titzgnss canGenerate (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_rhdulivw;JLnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)Z
+		ARG 1 registryManager
+		ARG 2 chunkGenerator
+		ARG 3 biomeSource
+		ARG 4 structureManager
+		ARG 5 seed
+		ARG 7 chunkPos
+		ARG 8 config
+		ARG 9 world
+		ARG 10 validBiomePredicate
+	METHOD m_utcfbjyw configure (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;Ljava/util/Map;)Lnet/minecraft/unmapped/C_licgnyqv;
+		ARG 1 config
+		ARG 2 biomes
+		ARG 3 spawnOverrides
+	METHOD m_vfjkdycf getPiecesGenerator ()Lnet/minecraft/unmapped/C_ukcqthce;
 	METHOD m_xnhhytsz register (Ljava/lang/String;Lnet/minecraft/unmapped/C_vvmtobpf;Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;)Lnet/minecraft/unmapped/C_vvmtobpf;
 		ARG 0 name
 		ARG 1 structureFeature
 		ARG 2 step
 	METHOD m_ywspjwtx getCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_zlyoxgdd configure (Lnet/minecraft/unmapped/C_jpnewgxf;Lnet/minecraft/unmapped/C_ednuhnnn;)Lnet/minecraft/unmapped/C_licgnyqv;
+		ARG 1 config
+		ARG 2 biomes
