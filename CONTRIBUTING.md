@@ -9,101 +9,100 @@ projects.
 We recommend discussing your contribution with other members of the community - either directly in your pull request,
 or in our other community spaces. We're always happy to help if you need us!
 
-Please have a look at the [naming conventions](/CONVENTIONS.md) before submitting mappings.
+## Guide: Pull Requests
 
-## Pull Request Process
-To get a pull request merged into Quilt Mappings, it must get a certain number of approvals from the maintainers,
-and then it will enter a Final Comment Period. If the pull request passes the final comment period without opposition,
-the PR will be merged. Otherwise, the PR will return to being in review.
+1. ### Look at the conventions
+    Before you start changing or adding mappings, please have a look at the [naming conventions](/CONVENTIONS.md);
+    you don't have to memorize them, and you can always review them at any time, but you should apply them when 
+    possible. Be sure to talk to us about any questions you might have (either through an issue or on
+    [Discord](https://discord.quiltmc.org/toolchain)).
+3. ### Open your PR and wait for reviews
+    Once you have forked QSL and opened a pull request, you need to wait for people to review it. When you get reviews, 
+    try to thoughtfully address any concerns other people have. If you get confused, be sure to ask questions!
+4. ### Entering a Final Comment Period
+    Once your PR has no "changes requested" reviews, the minimum number of approvals for its
+    [triage category](#guide-triage-categories), and nobody has their review requested, it is eligible to enter a 
+    Final Comment Period (FCP). An FCP is a last call for any reviewers to look at your PR before it is merged.
+    The minimum length of your PR's FCP is determined by its triage category, but if any further changes are
+    requested, the FCP might be lengthened, or if the concerns are significant, the FCP cancelled until the concerns
+    are addressed and resolved.
+5. ### Request a merge!
+    Once the minimum time on the Final Comment Period has passed, and you have resolved any concerns reviewers have
+    raised during that time, leave a comment on your PR requesting for it to be merged. A Mappings team member will
+    take a final look over your PR, and, if everything looks good, merge it!
 
-The exact number of reviews needed, and the length of the Final Comment Period, varies depending on the scope and
-complexity of the pull request. The numbers for each category are listed below.
+## Guide: Triage Categories
 
-> **Minor changes such as typo fixes may bypass the process.**
+Triage categories ensure that important, but small PRs--like bugfixes--are merged quickly, while large changes--like
+a naming refactor--are throughly reviewed before they are merged.
 
-### Classifications
-PRs can be classified by the type of the changes (e.g. new mappings, toolchain updates, mappings refactor, documentation),
-by the type of Minecraft version they target (`release` or `snapshot`), and by their size. This classification is
-done by the Mappings Team and Mappings Triage, and is used to determine the number of reviews needed and the length of
-the FCP. GitHub PR labels should be used to indicate which category a PR belongs to.
+Aside from the main triage categories, QM also divides its PRs by the type of Minecraft version they target:
+releases and snapshots, with the former having longer review times and aiming for more stability.
 
-#### Change type
-Note that for the required reviews, approvals from members of the Mappings Team may be considered as Triage reviews.
-
-##### New mappings
-- Small PR
-  - **Required Approvals: 2**, at least 1 from the Mappings Team and 1 from Mappings Triage
-  - **Final Comment Period:**
-    - Snapshots: 1 day
-    - Releases: 3 days
-- Large PR
-  - **Required Approvals: 3**, at least 1 from the Mappings Team and 2 from Mappings Triage
-  - **Final Comment Period:**
-    - Snapshots: 3 days
-    - Releases: 7 days
-
-- Special cases
-  - New mappings needed for QSL
-    - **Final Comment Period:**
-      - Snapshots & releases: 12 hours
-
-##### Mapping refactors
-Typo fixes are *not* considered refactor changes.
-
-- Small PR
-  - **Required Approvals: 3**, at least 2 from the Mappings Team and 1 from Mappings Triage
-  - **Final Comment Period:**
-    - Snapshots: 5 days
-    - Releases: 7 days
-- Large PR
-  - **Required Approvals: 4**, at least 2 from the Mappings Team and 2 from Mappings Triage
-  - **Final Comment Period:**
-    - Snapshots: 7 days
-    - Releases: 10 days
-
-##### Toolchain changes
-Changes to the buildscript, build system, or other tools used in QM are considered toolchain changes.
-
-- Small PR
-  - **Required Approvals: 1**, from the Mappings Team
-  - **Final Comment Period:**
-    - Snapshots: 2 days
-    - Releases: 4 days
-- Large PR
-  - **Required Approvals: 3**, from the Mappings Team
-  - **Final Comment Period:**
-    - Snapshots: 7 days
-    - Releases: 10 days
-
-##### Documentation
-- Small PR
-  - **Required Approvals: 2**, at least 1 from the Mappings Team and 1 from Mappings Triage
-  - **Final Comment Period:**
-    - Snapshots: 3 days
-    - Releases: 7 days
-- Large PR
-  - **Required Approvals: 3**, at least 1 from the Mappings Team and 2 from Mappings Triage
-  - **Final Comment Period:**
-    - Snapshots: 6 days
-    - Releases: 10 days
-
-#### Target version
-Affects only the length of the FCP.
 - Release PRs are those that target a release of Minecraft, such as `1.17`, `1.17.1` or `1.18`
 - Snapshot PRs are those that target a snapshot of Minecraft, such as `21w44a`, `1.17.1-pre1` or `1.18-rc4`
 
-#### Size
-- Small PRs are those that are focused on a single mapping, mapping set, or toolchain feature, and are not large enough
-  to warrant a separate PR for each of the changes.
-  - Examples include: a PR mapping all constants in a class, documenting a few methods in class; cleaning up a few
-    lines of code in the buildscript, or refactoring the mappings of some methods.
-- Large PRs are those that are focused on a large number of mappings, mapping sets, or toolchain, and *could* be
-  separated into multiple, smaller PRs.
-  - Examples include: a PR to map all the unmapped classes, refactoring many mappings
-    across different classes, or refactoring the buildscript in a major scale (which was the case in
-    [#7](https://github.com/QuiltMC/quilt-mappings/pull/7)).
+## PR Policy definitions
+Everything within this section is the definitions for the actual PR policy followed by the Mappings team, in accordance
+with [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md)
 
----
+### `T: new mappings`
 
-This is only a summary of the process. The exact rules are defined in [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md)
+**Description**: Used for pull requests that focus mainly on adding new mappings.
 
+**Required Approvals**: 2
+- At least 1 approval must come directly from a Mappings team member, and the other one should come from a Mappings
+Triage member.
+
+**Final Comment Period**:
+- Snapshots: 1 day
+- Releases: 4 days
+
+**Special cases**:
+- If the PR adds new mappings needed by QSL, the Final Comment Period is shortened to 12 hours.
+
+### `T: refactor`
+
+**Description**: Used for pull request that focus mainly on changing the names of existing mappings.
+
+**Required Approvals**: 3
+- At least 2 approvals must come directly from a Mappings team member, and the other one should come from a Mappings
+Triage member.
+
+**Final Comment Period**:
+- Snapshots: 4 days
+- Releases: 8 days
+
+### `T: documentation`
+
+**Description**: Used for pull requests that focus mainly on adding or changing documentation.
+
+**Required Approvals**: 2
+- At least 1 approval must come directly from a Mappings team member, and the other one should come from a Mappings
+
+**Final Comment Period**:
+- Snapshots: 3 days
+- Releases: 7 days
+
+### `T: toolchain changes`
+
+**Description**: Used for pull requests that focus mainly on changes to the QM toolchain, including the buildscript,
+and/or tools used.
+
+**Required Approvals**: 1
+- At least 1 approval must come directly from a Mappings team member
+
+**Final Comment Period**:
+- Snapshots: 1 day
+- Releases: 3 days
+
+### Other
+Trivial fixes that do not require review (e.g. typos) are exempt from this policy. Mappings team members should
+double-check with other members of the team on Discord before pushing a commit or merging a PR without going
+through this process.
+
+PRs that do not fit under any of these categories but are not "trivial fixes" are merged at the consensus of the
+Mappings team, using whatever criteria they determine to be appropriate.
+
+*This is only a summary of QM's PR process and an explanation of QM-specific exceptions to it. For exact definitions
+and more information, see [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md).*
