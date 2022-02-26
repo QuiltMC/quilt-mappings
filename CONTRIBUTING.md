@@ -17,7 +17,7 @@ or in our other community spaces. We're always happy to help if you need us!
     possible. Be sure to talk to us about any questions you might have (either through an issue or on
     [Discord](https://discord.quiltmc.org/toolchain)).
 3. ### Open your PR and wait for reviews
-    Once you have forked QSL and opened a pull request, you need to wait for people to review it. When you get reviews, 
+    Once you have forked QM and opened a pull request, you need to wait for people to review it. When you get reviews, 
     try to thoughtfully address any concerns other people have. If you get confused, be sure to ask questions!
 4. ### Entering a Final Comment Period
     Once your PR has no "changes requested" reviews, the minimum number of approvals for its
@@ -79,6 +79,7 @@ Triage member.
 
 **Required Approvals**: 2
 - At least 1 approval must come directly from a Mappings team member, and the other one should come from a Mappings
+Triage member.
 
 **Final Comment Period**:
 - Snapshots: 3 days
