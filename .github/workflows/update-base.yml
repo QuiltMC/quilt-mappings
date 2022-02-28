@@ -34,7 +34,19 @@ jobs:
           java-version: '17'
       - name: Drop invalid mappings
         run: ./gradlew dropInvalidMappings --stacktrace
+      - name: Check for changes in the mappings directory
+        id: check-mappings-dir
+        run: |
+          if output=$(git status --porcelain) && [ -z "$output" ]; then
+            echo "No changes in the mappings directory"
+            echo "::set-output name=result::clean"
+          else
+            echo "There are changes in the mappings directory"
+            echo "::set-output name=result::dirty"
+          fi
+
       - name: Commit changes
+        if: ${{ steps.check-mappings-dir.outputs.result == 'dirty' }}
         run: |
           git config user.name "actions-user"
           git config user.email "action@github.com"
