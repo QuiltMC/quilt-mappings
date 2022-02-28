@@ -6,10 +6,23 @@ CLASS net/minecraft/unmapped/C_ypgfhxmz net/minecraft/world/biome/SpawnSettings
 	FIELD f_mlnukdvn spawners Ljava/util/Map;
 	FIELD f_qlwokvnf INSTANCE Lnet/minecraft/unmapped/C_ypgfhxmz;
 	FIELD f_shwpjglv EMPTY_ENTRY_POOL Lnet/minecraft/unmapped/C_uymytghv;
+	FIELD f_xkkxjfky DEFAULT_CREATURE_SPAWN_PROBABILITY F
+	METHOD <init> (FLjava/util/Map;Ljava/util/Map;)V
+		ARG 1 creatureSpawnProbability
+		ARG 2 spawners
+		ARG 3 spawnCosts
+	METHOD m_bpqtette (Lnet/minecraft/unmapped/C_ypgfhxmz;)Ljava/util/Map;
+		ARG 0 settings
+	METHOD m_geebqngq (Lnet/minecraft/unmapped/C_ypgfhxmz;)Ljava/util/Map;
+		ARG 0 settings
+	METHOD m_iqdwzcry (Lnet/minecraft/unmapped/C_ypgfhxmz;)Ljava/lang/Float;
+		ARG 0 settings
 	METHOD m_oraiezbc getSpawnEntries (Lnet/minecraft/unmapped/C_ormqdxci;)Lnet/minecraft/unmapped/C_uymytghv;
 		ARG 1 spawnGroup
 	METHOD m_qiklvilj getSpawnDensity (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_ypgfhxmz$C_vbjmbrjm;
 		ARG 1 entityType
+	METHOD m_wvkbwmgd (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_xhzmulkv getCreatureSpawnProbability ()F
 	CLASS C_jmaqgdih SpawnEntry
 		FIELD f_byovjgve CODEC Lcom/mojang/serialization/Codec;
@@ -33,15 +46,21 @@ CLASS net/minecraft/unmapped/C_ypgfhxmz net/minecraft/world/biome/SpawnSettings
 		FIELD f_ihzzgcqa spawnCosts Ljava/util/Map;
 		FIELD f_pocmqwpp creatureSpawnProbability F
 		METHOD m_cnilysjq build ()Lnet/minecraft/unmapped/C_ypgfhxmz;
+		METHOD m_lgbjyewe (Lnet/minecraft/unmapped/C_ormqdxci;)Ljava/util/List;
+			ARG 0 group
 		METHOD m_nykpsbem spawnCost (Lnet/minecraft/unmapped/C_ogavsvbr;DD)Lnet/minecraft/unmapped/C_ypgfhxmz$C_ooyakwqo;
 			ARG 1 entityType
 			ARG 2 mass
 			ARG 4 gravityLimit
+		METHOD m_phwwtaip (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_uymytghv;
+			ARG 0 entry
 		METHOD m_rzgungsg spawn (Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_ypgfhxmz$C_jmaqgdih;)Lnet/minecraft/unmapped/C_ypgfhxmz$C_ooyakwqo;
 			ARG 1 spawnGroup
 			ARG 2 spawnEntry
 		METHOD m_ssusujgt creatureSpawnProbability (F)Lnet/minecraft/unmapped/C_ypgfhxmz$C_ooyakwqo;
 			ARG 1 probability
+		METHOD m_xyeatwtx (Lnet/minecraft/unmapped/C_ormqdxci;)Lnet/minecraft/unmapped/C_ormqdxci;
+			ARG 0 group
 	CLASS C_vbjmbrjm SpawnDensity
 		COMMENT Embodies the density limit information of a type of entity in entity
 		COMMENT spawning logic. The density field is generated for all entities spawned
