@@ -1,8 +1,14 @@
 CLASS net/minecraft/unmapped/C_ohqwadgy net/minecraft/world/biome/source/util/MultiNoiseUtil
+	FIELD f_luwgultl QUANTIZATION_FACTOR F
 	FIELD f_lzndvahp SLOW_BIOME_SEARCH Z
 	FIELD f_vgcalaka HYPERCUBE_DIMENSION I
+	METHOD m_cjvcqxaa quantizeCoord (F)J
+		ARG 0 coord
+	METHOD m_friziluu unquantizeCoord (J)F
+		ARG 0 coord
 	METHOD m_lkprxpyv findFittestPosition (Ljava/util/List;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 0 noises
+		ARG 1 sampler
 	METHOD m_lwabrkgg createNoiseHypercube (FFFFFFF)Lnet/minecraft/unmapped/C_ohqwadgy$C_mssdhkan;
 		ARG 0 temperature
 		ARG 1 humidity
@@ -18,6 +24,7 @@ CLASS net/minecraft/unmapped/C_ohqwadgy net/minecraft/world/biome/source/util/Mu
 		ARG 3 erosionNoise
 		ARG 4 depth
 		ARG 5 weirdnessNoise
+	METHOD m_uhzxfvuo createEmptySampler ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;
 	METHOD m_wjsybkmq createNoiseHypercube (Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;Lnet/minecraft/unmapped/C_ohqwadgy$C_pmcopbbm;F)Lnet/minecraft/unmapped/C_ohqwadgy$C_mssdhkan;
 		ARG 0 temperature
 		ARG 1 humidity
@@ -49,12 +56,21 @@ CLASS net/minecraft/unmapped/C_ohqwadgy net/minecraft/world/biome/source/util/Mu
 		METHOD m_uipdckxs weirdnessNoise ()J
 		METHOD m_vbzyajde temperatureNoise ()J
 		METHOD m_vcbfjgyv erosionNoise ()J
-	CLASS C_ftigwvun Entries
+	CLASS C_ftigwvun ParameterRangeList
 		FIELD f_jutozncr tree Lnet/minecraft/unmapped/C_ohqwadgy$C_svnvfttg;
 		FIELD f_komffvwp entries Ljava/util/List;
 		METHOD <init> (Ljava/util/List;)V
 			ARG 1 entries
+		METHOD m_ajgpjkzi findValueUsingTree (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;Lnet/minecraft/unmapped/C_ohqwadgy$C_nnadhegj;)Ljava/lang/Object;
+			ARG 1 point
+			ARG 2 distanceFunction
+		METHOD m_gpicvkfv findValue (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;)Ljava/lang/Object;
+			ARG 1 point
 		METHOD m_isbhmmtf getEntries ()Ljava/util/List;
+		METHOD m_outtfyey findValueUsingTree (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;)Ljava/lang/Object;
+			ARG 1 point
+		METHOD m_ybidbzcm findValueUsingBruteForce (Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;)Ljava/lang/Object;
+			ARG 1 point
 	CLASS C_hsyxjoow FittestPositionFinder
 		FIELD f_nxggsrpc result Lnet/minecraft/unmapped/C_ohqwadgy$C_hsyxjoow$C_cibxxgvd;
 		METHOD m_aeovdxfs calculateFitness (Ljava/util/List;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;II)Lnet/minecraft/unmapped/C_ohqwadgy$C_hsyxjoow$C_cibxxgvd;
@@ -132,7 +148,35 @@ CLASS net/minecraft/unmapped/C_ohqwadgy net/minecraft/world/biome/source/util/Mu
 			ARG 1 node
 			ARG 2 parameters
 	CLASS C_pigoipju MultiNoiseSampler
+		FIELD f_caceksyk temperature Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_fxfpsrtl erosion Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_jlihveeg spawnTarget Ljava/util/List;
+		FIELD f_qamvjbjt weirdness Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_ulooosgd humidity Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_unzkmapd depth Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_wylfdmqb continentalness Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD <init> (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;Ljava/util/List;)V
+			ARG 1 temperature
+			ARG 2 humidity
+			ARG 3 continentalness
+			ARG 4 erosion
+			ARG 5 depth
+			ARG 6 weirdness
+			ARG 7 spawnTarget
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_avcfehue sample (III)Lnet/minecraft/unmapped/C_ohqwadgy$C_dytvikps;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+		METHOD m_cgywbryp erosion ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_fecmptdy weirdness ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_hegpsqta depth ()Lnet/minecraft/unmapped/C_kzwapyud;
 		METHOD m_taflsxih findSpawnPosition ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_umelueju spawnTarget ()Ljava/util/List;
+		METHOD m_vhjtxurb humidity ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_vjpnvvtn continentalness ()Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD m_zbkavoea temperature ()Lnet/minecraft/unmapped/C_kzwapyud;
 	CLASS C_pmcopbbm ParameterRange
 		FIELD f_njbpwzob min J
 		FIELD f_pwiicpcd CODEC Lcom/mojang/serialization/Codec;
