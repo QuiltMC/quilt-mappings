@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
 	FIELD f_dgguujmb EMPTY Lnet/minecraft/unmapped/C_pfqozslu;
+	FIELD f_gwvdmuwj blendingDataForDensityBlending Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;
 	FIELD f_hwvkcntf DENSITY_BLENDING_RANGE_CHUNKS I
 	FIELD f_jhzgfobi DENSITY_BLENDING_RANGE_CELLS I
 	FIELD f_ngiqjzuy SHIFT_NOISE Lnet/minecraft/unmapped/C_rxrtfjrt;
@@ -8,9 +9,20 @@ CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
 	FIELD f_phpnetae HEIGHT_BLENDING_RANGE_CELLS I
 	FIELD f_qstndhje OLD_CHUNK_HORIZONTAL_RADIUS D
 	FIELD f_sqwbcifk HEIGHT_BLENDING_RANGE_CHUNKS I
+	FIELD f_xdxpwefo blendingData Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;
+	METHOD <init> (Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;)V
+		ARG 1 blendingData
+		ARG 2 blendingDataForDensityBlending
 	METHOD m_aicyryxs createOldChunkDistanceProvider (ZLjava/util/Set;)Lnet/minecraft/unmapped/C_pfqozslu$C_adfrewea;
 		ARG 0 oldNoise
 		ARG 1 adjacentOldNoiseChunkDirections
+	METHOD m_bpwodtxk (Ljava/util/List;Lnet/minecraft/unmapped/C_qjdfuoud;)V
+		ARG 1 direction
+	METHOD m_bskbymmx getBlendingDataValue (IIILnet/minecraft/unmapped/C_pfqozslu$C_oputthuz;)D
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 cellValueProvider
 	METHOD m_czdzpgaa distanceToPoint (DDDDDD)D
 		ARG 0 x
 		ARG 2 y
@@ -20,14 +32,43 @@ CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
 		ARG 10 startZ
 	METHOD m_dmtrgwbz getBlender (Lnet/minecraft/unmapped/C_ezymcfey;)Lnet/minecraft/unmapped/C_pfqozslu;
 		ARG 0 region
+	METHOD m_iflcqbrq (Lnet/minecraft/unmapped/C_nrynfjsf$C_uavkwagl;Lnet/minecraft/unmapped/C_nrynfjsf;)V
+		ARG 1 mask
 	METHOD m_ikgldbtv heightToOffset (D)D
 		ARG 0 height
+	METHOD m_isjgkuun (Lnet/minecraft/unmapped/C_pfqozslu$C_adfrewea;III)Z
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
 	METHOD m_jehovcew tickLeavesAndFluids (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 0 chunk
 		ARG 1 pos
+	METHOD m_laapoitt getBlendingDataValue (Lnet/minecraft/unmapped/C_pfqozslu$C_oputthuz;IIIII)D
+		ARG 1 cellValueProvider
+		ARG 2 chunkX
+		ARG 3 chunkZ
+		ARG 4 x
+		ARG 5 y
+		ARG 6 z
+	METHOD m_ogyqdxkq (DDDDD)D
+		ARG 4 x
+		ARG 6 y
+		ARG 8 z
 	METHOD m_oyroclmg createOffsetOldChunkDistanceProvider (Lnet/minecraft/unmapped/C_qjdfuoud;)Lnet/minecraft/unmapped/C_pfqozslu$C_adfrewea;
 		ARG 0 direction
-	METHOD m_rqwqylva (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_zebxgear;)V
+	METHOD m_pyxfjdtw (Ljava/util/List;DDD)D
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+	METHOD m_qmjmvbbi (Lnet/minecraft/unmapped/C_nhlknxak;IIILnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Lnet/minecraft/unmapped/C_cjzoxshv;
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+		ARG 5 sampler
+	METHOD m_rcoyvvbx (DDLorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableObject;Ljava/lang/Long;Lnet/minecraft/unmapped/C_jfjllmkc;)V
+		ARG 6 chunkPos
+		ARG 7 data
+	METHOD m_rqwqylva addCarvingMaskFilterAroundOldChunks (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_zebxgear;)V
 		ARG 0 world
 		ARG 1 chunk
 	METHOD m_tqddpvsg empty ()Lnet/minecraft/unmapped/C_pfqozslu;
@@ -37,9 +78,16 @@ CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
 	METHOD m_vfcqfiqd getBiomeSupplier (Lnet/minecraft/unmapped/C_nhlknxak;)Lnet/minecraft/unmapped/C_nhlknxak;
 		ARG 1 biomeSupplier
 	METHOD m_wzxwomov blendDensity (Lnet/minecraft/unmapped/C_kzwapyud$C_rbrbrmhy;D)D
+		ARG 1 context
 	METHOD m_xexlpadl tickLeavesAndFluids (Lnet/minecraft/unmapped/C_ezymcfey;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 		ARG 0 region
 		ARG 1 chunk
+	METHOD m_yjnszrdw blendOffsetAndFactor (II)Lnet/minecraft/unmapped/C_pfqozslu$C_yxwnprkr;
+		ARG 1 x
+		ARG 2 z
+	METHOD m_yjytuaog (IIILorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;Ljava/lang/Long;Lnet/minecraft/unmapped/C_jfjllmkc;)V
+		ARG 6 chunkPos
+		ARG 7 data
 	CLASS C_adfrewea DistanceProvider
 		METHOD getDistance getDistance (DDD)D
 			ARG 1 x
@@ -48,3 +96,16 @@ CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
 	CLASS C_oputthuz CellValueProvider
 		METHOD get get (Lnet/minecraft/unmapped/C_jfjllmkc;III)D
 			ARG 1 data
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
+	CLASS C_yxwnprkr BlendingOutput
+		FIELD f_vpjripcn blendingOffset D
+		FIELD f_ymdyvtlh alpha D
+		METHOD <init> (DD)V
+			ARG 1 alpha
+			ARG 3 blendingOffset
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_ppewpckb alpha ()D
+		METHOD m_qqjkyqzq blendingOffset ()D
