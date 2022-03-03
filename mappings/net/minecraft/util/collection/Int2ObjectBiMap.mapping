@@ -1,12 +1,21 @@
 CLASS net/minecraft/unmapped/C_pkvohekg net/minecraft/util/collection/Int2ObjectBiMap
+	FIELD f_fcagvbpf LOAD_FACTOR F
 	FIELD f_hgbaphoc ids [I
 	FIELD f_hiidchjc EMPTY Ljava/lang/Object;
 	FIELD f_jotgoigl idToValues [Ljava/lang/Object;
 	FIELD f_lgvkwzhs size I
 	FIELD f_poqcloyh values [Ljava/lang/Object;
+	FIELD f_rfzzrczr NOT_FOUND I
 	FIELD f_yyvhlamv nextId I
 	METHOD <init> (I)V
 		ARG 1 size
+	METHOD <init> ([Ljava/lang/Object;[I[Ljava/lang/Object;II)V
+		ARG 1 values
+		ARG 2 ids
+		ARG 3 idToValues
+		ARG 4 nextId
+		ARG 5 size
+	METHOD iterator iterator ()Ljava/util/Iterator;
 	METHOD m_datjjjvk findFree (I)I
 		ARG 1 size
 	METHOD m_dfwinwoq contains (Ljava/lang/Object;)Z
@@ -16,6 +25,7 @@ CLASS net/minecraft/unmapped/C_pkvohekg net/minecraft/util/collection/Int2Object
 		ARG 2 id
 	METHOD m_hgmugffs resize (I)V
 		ARG 1 newSize
+	METHOD m_hmdwxvat copy ()Lnet/minecraft/unmapped/C_pkvohekg;
 	METHOD m_ikdmdgfp getIdealIndex (Ljava/lang/Object;)I
 		ARG 1 value
 	METHOD m_jphlyrmo containsKey (I)Z
@@ -26,6 +36,8 @@ CLASS net/minecraft/unmapped/C_pkvohekg net/minecraft/util/collection/Int2Object
 	METHOD m_teibidmz put (Ljava/lang/Object;I)V
 		ARG 1 value
 		ARG 2 id
+	METHOD m_wfqfkxvc create (I)Lnet/minecraft/unmapped/C_pkvohekg;
+		ARG 0 expectedSize
 	METHOD m_wvvsojki getIdFromIndex (I)I
 		ARG 1 index
 	METHOD m_yxrknaqb clear ()V
