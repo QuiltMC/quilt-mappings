@@ -5,6 +5,8 @@ CLASS net/minecraft/unmapped/C_dizzctht net/minecraft/structure/WoodlandMansionG
 		ARG 2 rotation
 		ARG 3 pieces
 		ARG 4 random
+	METHOD m_usozcmcb main ([Ljava/lang/String;)V
+		ARG 0 args
 	CLASS C_eetbftmg ThirdFloorRoomPool
 	CLASS C_merrrdld RoomPool
 		METHOD m_evmzqnck getSmallRoom (Ljava/util/Random;)Ljava/lang/String;
@@ -51,13 +53,65 @@ CLASS net/minecraft/unmapped/C_dizzctht net/minecraft/structure/WoodlandMansionG
 			ARG 0 identifier
 	CLASS C_qhxyqjoa SecondFloorRoomPool
 	CLASS C_qibwxtzr MansionParameters
+		FIELD f_bgopczqz CLEAR I
+		FIELD f_dxpgjrzl CORRIDOR I
+		FIELD f_ezfergxv SMALL_ROOM I
+		FIELD f_foedbhvp DEFAULT_SIZE I
+		FIELD f_hnranhwu ROOM I
+		FIELD f_juqqncwt TEST_ROOM I
+		FIELD f_lsczgoeh ROOM_TYPE_MASK I
+		FIELD f_malzawrq baseGrid Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;
+		FIELD f_nqyndotx entranceX I
+		FIELD f_qstvkutq floorRooms [Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;
+		FIELD f_rnxowxlr ROOM_DOOR_FLAG I
+		FIELD f_sggsychp START_ROOM I
+		FIELD f_szericam BLOCKED I
 		FIELD f_tleqldof random Ljava/util/Random;
+		FIELD f_tqoyaxyh thirdFloorGrid Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;
+		FIELD f_uztkcqmc ROOM_ID_MASK I
+		FIELD f_vitigruj BIG_ROOM I
+		FIELD f_wjafdcao entranceY I
+		FIELD f_wzcbahjq ROOM_STAIRS_FLAG I
+		FIELD f_xcyteffn ROOM_CORRIDOR_FLAG I
+		FIELD f_xhfkwtxf ROOM_ORIGIN_FLAG I
+		FIELD f_ybsozukq MEDIUM_ROOM I
 		METHOD <init> (Ljava/util/Random;)V
 			ARG 1 random
+		METHOD m_eeaoofpk isRoomOrCorridor (Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;II)Z
+			ARG 0 grid
+			ARG 1 x
+			ARG 2 y
+		METHOD m_evxmeddg setupThirdFloor ()V
+		METHOD m_fsirgrsq print ()V
+		METHOD m_qyxvqxgb generateCorridorRecursive (Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;IILnet/minecraft/unmapped/C_xpuuihxf;I)V
+			ARG 1 grid
+			ARG 2 x
+			ARG 3 y
+			ARG 4 direction
+			ARG 5 recursions
+		METHOD m_ucdlrxop identifyRooms (Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;)V
+			ARG 1 baseRooms
+			ARG 2 floorRooms
+		METHOD m_xlvzyxce findAdjacentRoomWithId (Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;IIII)Lnet/minecraft/unmapped/C_xpuuihxf;
+			ARG 1 grid
+			ARG 2 x
+			ARG 3 y
+			ARG 4 floor
+			ARG 5 id
+		METHOD m_ycwqbxoy roomMatchesId (Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;IIII)Z
+			ARG 1 grid
+			ARG 2 x
+			ARG 3 y
+			ARG 4 floor
+			ARG 5 id
+		METHOD m_zgjwbtxc clearEdges (Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;)Z
+			ARG 1 grid
 	CLASS C_rmakesqi FirstFloorRoomPool
 	CLASS C_sunbhtyz LayoutGenerator
+		FIELD f_putmnnho startX I
 		FIELD f_qwwxskuj manager Lnet/minecraft/unmapped/C_rhdulivw;
 		FIELD f_tbgvrjhm random Ljava/util/Random;
+		FIELD f_zgflloie startY I
 		METHOD <init> (Lnet/minecraft/unmapped/C_rhdulivw;Ljava/util/Random;)V
 			ARG 1 manager
 			ARG 2 random
@@ -65,16 +119,39 @@ CLASS net/minecraft/unmapped/C_dizzctht net/minecraft/structure/WoodlandMansionG
 			ARG 1 pieces
 			ARG 2 pos
 			ARG 3 rotation
+			ARG 5 roomPool
 		METHOD m_cxkkkrmn addBigSecretRoom (Ljava/util/List;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Lnet/minecraft/unmapped/C_dizzctht$C_merrrdld;)V
+			ARG 1 pieces
 		METHOD m_djdjomvu addEntrance (Ljava/util/List;Lnet/minecraft/unmapped/C_dizzctht$C_msvoqoxg;)V
 			ARG 1 pieces
-		METHOD m_izprjyyf addRoof (Ljava/util/List;Lnet/minecraft/unmapped/C_dizzctht$C_msvoqoxg;Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;Lnet/minecraft/unmapped/C_xpuuihxf;IIII)V
+			ARG 2 wallPiece
+		METHOD m_eqgtliri traverseTurn (Ljava/util/List;Lnet/minecraft/unmapped/C_dizzctht$C_msvoqoxg;)V
 			ARG 1 pieces
+			ARG 2 wallPiece
+		METHOD m_halpdvrj traverseWallPiece (Ljava/util/List;Lnet/minecraft/unmapped/C_dizzctht$C_msvoqoxg;)V
+			ARG 1 pieces
+			ARG 2 piece
+		METHOD m_izprjyyf traverseOuterWalls (Ljava/util/List;Lnet/minecraft/unmapped/C_dizzctht$C_msvoqoxg;Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;Lnet/minecraft/unmapped/C_xpuuihxf;IIII)V
+			ARG 1 pieces
+			ARG 2 wallPiece
+			ARG 3 baseGrid
+			ARG 4 direction
+			ARG 5 startX
+			ARG 6 startY
+			ARG 7 endX
+			ARG 8 endY
+		METHOD m_jtknlver createRoof (Ljava/util/List;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;Lnet/minecraft/unmapped/C_dizzctht$C_umspqkwa;)V
+			ARG 1 pieces
+			ARG 3 rotation
 		METHOD m_kiwhxiys addMediumRoom (Ljava/util/List;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_dizzctht$C_merrrdld;Z)V
 			ARG 1 pieces
 			ARG 2 pos
 			ARG 3 rotation
+			ARG 6 roomPool
 			ARG 7 staircase
+		METHOD m_msijcgmp traverseInnerTurn (Ljava/util/List;Lnet/minecraft/unmapped/C_dizzctht$C_msvoqoxg;)V
+			ARG 1 pieces
+			ARG 2 wallPiece
 		METHOD m_namazmnb generate (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Ljava/util/List;Lnet/minecraft/unmapped/C_dizzctht$C_qibwxtzr;)V
 			ARG 1 pos
 			ARG 2 rotation
@@ -84,34 +161,35 @@ CLASS net/minecraft/unmapped/C_dizzctht net/minecraft/structure/WoodlandMansionG
 			ARG 1 pieces
 			ARG 2 pos
 			ARG 3 rotation
-	CLASS C_umspqkwa FlagMatrix
-		FIELD f_anayjmzm m I
+			ARG 6 roomPool
+	CLASS C_umspqkwa SimpleGrid
+		FIELD f_anayjmzm height I
 		FIELD f_izeokgjz fallback I
-		FIELD f_qesvztzi array [[I
-		FIELD f_vdnppdpt n I
+		FIELD f_qesvztzi grid [[I
+		FIELD f_vdnppdpt width I
 		METHOD <init> (III)V
-			ARG 1 n
-			ARG 2 m
+			ARG 1 width
+			ARG 2 height
 			ARG 3 fallback
 		METHOD m_gnwvkhnx update (IIII)V
-			ARG 1 i
-			ARG 2 j
+			ARG 1 x
+			ARG 2 y
 			ARG 3 expected
 			ARG 4 newValue
 		METHOD m_lcqmdecp set (III)V
-			ARG 1 i
-			ARG 2 j
+			ARG 1 x
+			ARG 2 y
 			ARG 3 value
 		METHOD m_qilbyjtl anyMatchAround (III)Z
-			ARG 1 i
-			ARG 2 j
+			ARG 1 x
+			ARG 2 y
 			ARG 3 value
 		METHOD m_rsagenzf fill (IIIII)V
-			ARG 1 i0
-			ARG 2 j0
-			ARG 3 i1
-			ARG 4 j1
+			ARG 1 startX
+			ARG 2 startY
+			ARG 3 endX
+			ARG 4 endY
 			ARG 5 value
 		METHOD m_yrqznlwn get (II)I
-			ARG 1 i
-			ARG 2 j
+			ARG 1 x
+			ARG 2 y

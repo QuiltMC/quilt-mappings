@@ -1,7 +1,15 @@
 CLASS net/minecraft/unmapped/C_gsksrcmt net/minecraft/structure/MineshaftGenerator
+	FIELD f_bafpniii DEFAULT_SHAFT_WIDTH I
+	FIELD f_dggwxkfn DEFAULT_SHAFT_LENGTH I
+	FIELD f_flitmnzo MAX_PILLAR_HEIGHT I
+	FIELD f_iabelxqd MAX_DEPTH I
+	FIELD f_iepgfwco MAX_CHAIN_HEIGHT I
+	FIELD f_ntogliti MAGIC_START_Y I
+	FIELD f_ttssrirv DEFAULT_SHAFT_HEIGHT I
 	FIELD f_vnrocuef LOGGER Lorg/slf4j/Logger;
 	METHOD m_utjqszpw pieceGenerator (Lnet/minecraft/unmapped/C_coopoqiy;Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_gsksrcmt$C_omrtcsee;
 		ARG 0 start
+		ARG 1 pieces
 		ARG 2 random
 		ARG 3 x
 		ARG 4 y
@@ -9,6 +17,7 @@ CLASS net/minecraft/unmapped/C_gsksrcmt net/minecraft/structure/MineshaftGenerat
 		ARG 6 orientation
 		ARG 7 chainLength
 	METHOD m_zkkfylbl pickPiece (Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;ILnet/minecraft/unmapped/C_hfwggqdu$C_bpsapikh;)Lnet/minecraft/unmapped/C_gsksrcmt$C_omrtcsee;
+		ARG 0 pieces
 		ARG 1 random
 		ARG 2 x
 		ARG 3 y
@@ -22,7 +31,10 @@ CLASS net/minecraft/unmapped/C_gsksrcmt net/minecraft/structure/MineshaftGenerat
 			ARG 2 boundingBox
 			ARG 3 orientation
 			ARG 4 type
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD m_pydyypqb getBoundingBox (Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_hmqypqzz;
+			ARG 0 pieces
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
@@ -59,14 +71,14 @@ CLASS net/minecraft/unmapped/C_gsksrcmt net/minecraft/structure/MineshaftGenerat
 			ARG 2 chainLength
 			ARG 3 type
 			ARG 4 box
-		METHOD m_dmbglqzq (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_txtbiemp;III)V
+		METHOD m_dmbglqzq setPlanksBlock (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_txtbiemp;III)V
 			ARG 1 world
 			ARG 2 box
 			ARG 3 state
 			ARG 4 x
 			ARG 5 y
 			ARG 6 z
-		METHOD m_onqwkfgd (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hmqypqzz;)Z
+		METHOD m_onqwkfgd edgesLiquid (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hmqypqzz;)Z
 			ARG 1 world
 			ARG 2 box
 		METHOD m_uuecyzgr isSolidCeiling (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hmqypqzz;IIII)Z
@@ -84,6 +96,8 @@ CLASS net/minecraft/unmapped/C_gsksrcmt net/minecraft/structure/MineshaftGenerat
 			ARG 3 x
 			ARG 4 z
 			ARG 5 type
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 	CLASS C_sxxhrnmw MineshaftCorridor
 		FIELD f_dbcunzfm hasSpawner Z
 		FIELD f_egfuyccn hasCobwebs Z
@@ -109,7 +123,7 @@ CLASS net/minecraft/unmapped/C_gsksrcmt net/minecraft/structure/MineshaftGenerat
 			ARG 2 pos
 			ARG 3 startY
 			ARG 4 endY
-		METHOD m_dmsaligv (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_txtbiemp;IIILnet/minecraft/unmapped/C_hmqypqzz;)V
+		METHOD m_dmsaligv fillPillarDownOrChainUp (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_txtbiemp;IIILnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 world
 			ARG 2 state
 			ARG 3 x
@@ -129,7 +143,7 @@ CLASS net/minecraft/unmapped/C_gsksrcmt net/minecraft/structure/MineshaftGenerat
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 state
-		METHOD m_kdbuljky (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_hmqypqzz;IIII)Z
+		METHOD m_kdbuljky hasSolidFullSquareSidedNeighbors (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_hmqypqzz;IIII)Z
 			ARG 1 world
 			ARG 2 box
 			ARG 3 x

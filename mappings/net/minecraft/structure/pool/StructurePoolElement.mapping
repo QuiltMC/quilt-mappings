@@ -3,12 +3,17 @@ CLASS net/minecraft/unmapped/C_eyvbcijq net/minecraft/structure/pool/StructurePo
 	FIELD f_zuhozimr projection Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;
 	METHOD <init> (Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)V
 		ARG 1 projection
+	METHOD m_azhcvfkb (Ljava/lang/String;Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_leqwpfac;
+		ARG 1 projection
+	METHOD m_chyoardf (Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_eyvbcijq;
+		ARG 1 function
 	METHOD m_cjhhmmdk generate (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Lnet/minecraft/unmapped/C_hmqypqzz;Ljava/util/Random;Z)Z
 		ARG 1 structureManager
 		ARG 2 world
 		ARG 3 structureAccessor
 		ARG 4 chunkGenerator
 		ARG 5 pos
+		ARG 6 pivot
 		ARG 7 rotation
 		ARG 8 box
 		ARG 9 random
@@ -16,6 +21,9 @@ CLASS net/minecraft/unmapped/C_eyvbcijq net/minecraft/structure/pool/StructurePo
 	METHOD m_cqjwraeh setProjection (Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_eyvbcijq;
 		ARG 1 projection
 	METHOD m_dongslfh getProjection ()Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;
+	METHOD m_eeyabaub ofProcessedSingle (Ljava/lang/String;Lnet/minecraft/unmapped/C_cjzoxshv;)Ljava/util/function/Function;
+		ARG 0 id
+		ARG 1 processors
 	METHOD m_exwigivq ofSingle (Ljava/lang/String;)Ljava/util/function/Function;
 		ARG 0 id
 	METHOD m_ggivkqgs getStructureBlockInfos (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Ljava/util/Random;)Ljava/util/List;
@@ -24,20 +32,41 @@ CLASS net/minecraft/unmapped/C_eyvbcijq net/minecraft/structure/pool/StructurePo
 		ARG 3 rotation
 		ARG 4 random
 	METHOD m_guwwzbja ofFeature (Lnet/minecraft/unmapped/C_cjzoxshv;)Ljava/util/function/Function;
+		ARG 0 feature
+	METHOD m_jprvmrbj (Ljava/lang/String;Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_sehucrek;
+		ARG 1 projection
+	METHOD m_ktbxdock (Ljava/util/List;Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_ctoamrhy;
+		ARG 1 projection
+	METHOD m_lrmdjhzq handleDataMarker (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_abvlwuej$C_vmcrhozi;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Ljava/util/Random;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		ARG 1 world
+		ARG 2 structureBlockInfo
+		ARG 3 pos
+		ARG 4 rotation
+		ARG 5 random
+		ARG 6 box
 	METHOD m_monpzpjf (Ljava/lang/String;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_sehucrek;
 		ARG 2 projection
 	METHOD m_myrdxrtk (Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_gpztpzbu;
 		ARG 0 projection
+	METHOD m_oxgaczqj (Ljava/lang/String;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_leqwpfac;
+		ARG 2 projection
 	METHOD m_pbwbwipj getStart (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_ceivtqhh;
 		ARG 1 structureManager
 		ARG 2 rotation
 	METHOD m_psgtmkun ofList (Ljava/util/List;)Ljava/util/function/Function;
+		ARG 0 elements
 	METHOD m_pxizbril getBoundingBox (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_hmqypqzz;
 		ARG 1 structureManager
 		ARG 2 pos
 		ARG 3 rotation
+	METHOD m_rzktqnch projectionCodec ()Lcom/mojang/serialization/codecs/RecordCodecBuilder;
 	METHOD m_sgzbkgpl ofLegacySingle (Ljava/lang/String;)Ljava/util/function/Function;
 		ARG 0 id
+	METHOD m_vjjesaec (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_dglscyab$C_wgewfdlk;)Lnet/minecraft/unmapped/C_ncyztqkg;
+		ARG 1 projection
 	METHOD m_vnrepkxw getGroundLevelDelta ()I
 	METHOD m_vtvnklwg ofEmpty ()Ljava/util/function/Function;
+	METHOD m_yvdaqafv ofProcessedLegacySingle (Ljava/lang/String;Lnet/minecraft/unmapped/C_cjzoxshv;)Ljava/util/function/Function;
+		ARG 0 id
+		ARG 1 processors
 	METHOD m_zokmyohw getType ()Lnet/minecraft/unmapped/C_nbrkgwhw;

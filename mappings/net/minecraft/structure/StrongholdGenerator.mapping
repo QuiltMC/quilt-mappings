@@ -1,12 +1,19 @@
 CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenerator
 	FIELD f_fhubyvrj activePieceType Ljava/lang/Class;
 	FIELD f_fzgysexx STONE_BRICK_RANDOMIZER Lnet/minecraft/unmapped/C_zxumomxn$C_mbudwgcw;
+	FIELD f_jcnjmckg MAX_DEPTH I
+	FIELD f_kplqfusj CHECK_AIR Z
 	FIELD f_mjfiqvxr possiblePieces Ljava/util/List;
+	FIELD f_nywscwvr MAGIC_START_Y I
+	FIELD f_obsgtipu SMALL_DOOR_WIDTH I
+	FIELD f_rywlahon LOWEST_Y_POSITION I
 	FIELD f_vrtwwwyj totalWeight I
+	FIELD f_wlhzcxiu SMALL_DOOR_HEIGHT I
 	FIELD f_zqrktxca ALL_PIECES [Lnet/minecraft/unmapped/C_zxumomxn$C_lwkmosww;
 	METHOD m_dszdahrg checkRemainingPieces ()Z
 	METHOD m_hmnewzcp pickPiece (Lnet/minecraft/unmapped/C_zxumomxn$C_qudnrzal;Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_zxumomxn$C_khazfygv;
 		ARG 0 start
+		ARG 1 pieces
 		ARG 2 random
 		ARG 3 x
 		ARG 4 y
@@ -16,6 +23,7 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 	METHOD m_locuhpxo init ()V
 	METHOD m_ogggysmx pieceGenerator (Lnet/minecraft/unmapped/C_zxumomxn$C_qudnrzal;Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_coopoqiy;
 		ARG 0 start
+		ARG 1 pieces
 		ARG 2 random
 		ARG 3 x
 		ARG 4 y
@@ -24,6 +32,7 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 		ARG 7 chainLength
 	METHOD m_raibdczr createPiece (Ljava/lang/Class;Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_zxumomxn$C_khazfygv;
 		ARG 0 pieceType
+		ARG 1 pieces
 		ARG 2 random
 		ARG 3 x
 		ARG 4 y
@@ -178,7 +187,10 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 			ARG 2 random
 			ARG 3 boundingBox
 			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD m_zkylndwq create (Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_zxumomxn$C_lgqguqgi;
+			ARG 0 pieces
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
@@ -204,7 +216,10 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 			ARG 2 random
 			ARG 3 boundingBox
 			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD m_vvxsjefv create (Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_zxumomxn$C_nfpjhiwr;
+			ARG 0 pieces
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
@@ -235,6 +250,8 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 		FIELD f_zfhwlqux lastPiece Lnet/minecraft/unmapped/C_zxumomxn$C_lwkmosww;
 		METHOD <init> (Ljava/util/Random;II)V
 			ARG 1 random
+			ARG 2 x
+			ARG 3 z
 	CLASS C_rjtmamer ChestCorridor
 		FIELD f_cochtdvx SIZE_Z I
 		FIELD f_dtujijbr chestGenerated Z
@@ -256,10 +273,11 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 			ARG 5 orientation
 			ARG 6 chainlength
 	CLASS C_soqenazm Library
-		FIELD f_auyhzmhq SIZE_Y I
-		FIELD f_flfuaoag SIZE_X I
+		FIELD f_auyhzmhq TALL_HEIGHT I
+		FIELD f_flfuaoag WDITH I
 		FIELD f_hzccyhob tall Z
-		FIELD f_uilaxrjg SIZE_Z I
+		FIELD f_nztmlcgx HEIGHT I
+		FIELD f_uilaxrjg DEPTH I
 		METHOD <init> (ILjava/util/Random;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
 			ARG 1 chainLength
 			ARG 2 random
@@ -284,7 +302,10 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 			ARG 2 random
 			ARG 3 boundingBox
 			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD m_yhcieyzz create (Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_zxumomxn$C_vklvpytg;
+			ARG 0 pieces
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
@@ -300,7 +321,10 @@ CLASS net/minecraft/unmapped/C_zxumomxn net/minecraft/structure/StrongholdGenera
 			ARG 2 random
 			ARG 3 boundingBox
 			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD m_totyvuxp create (Lnet/minecraft/unmapped/C_vwpykcrw;Ljava/util/Random;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_zxumomxn$C_wadmxicl;
+			ARG 0 pieces
 			ARG 1 random
 			ARG 2 x
 			ARG 3 y
