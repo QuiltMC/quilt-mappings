@@ -31,7 +31,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_eyfbjeig horizontalSpeed F
 	FIELD f_eyihyrff pistonMovementDelta [D
 	FIELD f_fbrwyrto inNetherPortal Z
-	FIELD f_fhrqlvrj DELTA_AFFECTED_BLOCKS_BELOW D
+	FIELD f_fhrqlvrj VELOCITY_AFFECTING_POS_Y_OFFSET D
 	FIELD f_fngqrxks standingEyeHeight F
 	FIELD f_gpwlbvdc lastNetherPortalPosition Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_gzzxrhqg BOARDING_COOLDOWN I
@@ -40,7 +40,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_hfjnvwdf inanimate Z
 	FIELD f_hgjnrumf random Ljava/util/Random;
 	FIELD f_hkohmlix ID_KEY Ljava/lang/String;
-	FIELD f_hmqhtisa FAST_LAVA_FLOW_SCALE D
+	FIELD f_hmqhtisa FAST_LAVA_FLOW_SPEED_FACTOR D
 	FIELD f_hxkuahwe minorHorizontalCollision Z
 	FIELD f_hyixntpo submergedInWater Z
 	FIELD f_hzlmaqrc removalReason Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
@@ -49,7 +49,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_iskwetjb CUSTOM_NAME Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_jaoyzanc netherPortalTime I
 	FIELD f_jhbyfben ignoreCameraFrustum Z
-	FIELD f_jijbnlgf SLOW_LAVA_FLOW_SCALE D
+	FIELD f_jijbnlgf SLOW_LAVA_FLOW_SPEED_FACTOR D
 	FIELD f_jncusoxk touchingWater Z
 	FIELD f_jxhcznzh world Lnet/minecraft/unmapped/C_cdctfzbn;
 	FIELD f_kbrdyccj netherPortalCooldown I
@@ -58,7 +58,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_kpcimogu uuid Ljava/util/UUID;
 	FIELD f_krxlkweq type Lnet/minecraft/unmapped/C_ogavsvbr;
 	FIELD f_kvjscloo BREATHING_DISTANCE_BELOW_EYES F
-	FIELD f_lblxmmno FREEZE_HURT_FREQUENCY I
+	FIELD f_lblxmmno FREEZE_DAMAGE_FREQUENCY I
 	FIELD f_llpiaiql fireTicks I
 	FIELD f_lnfbdcex firstUpdate Z
 	FIELD f_ltxgrrxv noClip Z
@@ -82,17 +82,17 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_qriixkyh SWIMMING_FLAG_INDEX I
 	FIELD f_qxfvmjxc lastRenderX D
 	FIELD f_qxqqtzyy NAME_VISIBLE Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_rbybyzcg flyDist F
+	FIELD f_rbybyzcg flyDistance F
 	FIELD f_rilctjct dataTracker Lnet/minecraft/unmapped/C_pyoaoolj;
 	FIELD f_rkfixhau verticalCollisionBelow Z
-	FIELD f_rnuwpthh WATER_FLOW_SCALE D
+	FIELD f_rnuwpthh WATER_FLOW_SPEED_FACTOR D
 	FIELD f_scozqngs invulnerable Z
 	FIELD f_sfjnvyan movementMultiplier Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_skorbhua lastChimeAge I
 	FIELD f_smuuqtsj FROZEN_TICKS Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_srfebjdd DEFAULT_SHAPE_HEIGHT F
+	FIELD f_srfebjdd DEFAULT_BOUNDING_BOX_HEIGHT F
 	FIELD f_ssljujsr LOGGER Lorg/slf4j/Logger;
-	FIELD f_tigrjjuw DEFAULT_SHAPE_WIDTH F
+	FIELD f_tigrjjuw DEFAULT_BOUNDING_BOX_WIDTH F
 	FIELD f_tklhtpht entityChangeListener Lnet/minecraft/unmapped/C_ylpvpknw;
 	FIELD f_tmgwwmbu prevHorizontalSpeed F
 	FIELD f_tshkckso EMPTY_STACK_LIST Ljava/util/List;
@@ -326,7 +326,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_gqpbdhma emitGameEvent (Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 event
 		ARG 2 entity
-	METHOD m_grytvnwh getRopeHoldPosition (F)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_grytvnwh getLeashHoldPosition (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 delta
 	METHOD m_gtyitted getLerpedPos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 delta
