@@ -18,6 +18,15 @@ CLASS net/minecraft/unmapped/C_bwttende net/minecraft/server/ServerMetadata
 		ARG 1 version
 	METHOD m_wkxexwvm setDescription (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 description
+	CLASS C_cslkkyll ServerMetadataSerializer
+		METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
+			ARG 1 element
+			ARG 2 type
+			ARG 3 deserializationContext
+		METHOD serialize serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+			ARG 1 metadata
+			ARG 2 type
+			ARG 3 serializationContext
 	CLASS C_efprixkh Version
 		FIELD f_tpjvogro gameVersion Ljava/lang/String;
 		FIELD f_xnjrabgh protocolVersion I
@@ -27,10 +36,11 @@ CLASS net/minecraft/unmapped/C_bwttende net/minecraft/server/ServerMetadata
 		METHOD m_nbonsdeq getGameVersion ()Ljava/lang/String;
 		METHOD m_ylgmhmcd getProtocolVersion ()I
 		CLASS C_gkcnnnqz Serializer
-			METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
+			METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 				ARG 1 json
+				ARG 2 type
 				ARG 3 context
-			METHOD serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+			METHOD serialize serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 				ARG 1 entry
 				ARG 2 unused
 				ARG 3 context
@@ -47,9 +57,11 @@ CLASS net/minecraft/unmapped/C_bwttende net/minecraft/server/ServerMetadata
 		METHOD m_gxeobiyp getSample ()[Lcom/mojang/authlib/GameProfile;
 		METHOD m_jvjhzktb getOnlinePlayerCount ()I
 		CLASS C_dmwbfyrz Deserializer
-			METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
+			METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 				ARG 1 json
-			METHOD serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+				ARG 2 type
+				ARG 3 deserializationContext
+			METHOD serialize serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 				ARG 1 entry
 				ARG 2 unused
 				ARG 3 context

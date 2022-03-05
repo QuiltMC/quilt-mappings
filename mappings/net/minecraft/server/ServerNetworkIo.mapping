@@ -15,6 +15,7 @@ CLASS net/minecraft/unmapped/C_mitbewqx net/minecraft/server/ServerNetworkIo
 	METHOD m_lfhzqvjj getServer ()Lnet/minecraft/server/MinecraftServer;
 	METHOD m_nsoubgbt bindLocal ()Ljava/net/SocketAddress;
 	METHOD m_shzlmfgv tick ()V
+	METHOD m_thaevyvq getConnections ()Ljava/util/List;
 	CLASS C_hmgzipxx DelayingChannelInboundHandler
 		COMMENT A channel in-bound handler that only forwards received messages to the next
 		COMMENT channel in-bound handler in the channel pipeline after a random delay between
@@ -28,7 +29,7 @@ CLASS net/minecraft/unmapped/C_mitbewqx net/minecraft/server/ServerNetworkIo
 		METHOD <init> (II)V
 			ARG 1 baseDelay
 			ARG 2 extraDelay
-		METHOD channelRead (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
+		METHOD channelRead channelRead (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
 			ARG 1 ctx
 			ARG 2 msg
 		METHOD m_bdpqkajb forward (Lio/netty/util/Timeout;)V
@@ -43,8 +44,8 @@ CLASS net/minecraft/unmapped/C_mitbewqx net/minecraft/server/ServerNetworkIo
 				ARG 1 context
 				ARG 2 message
 	CLASS C_izwremgs
-		METHOD initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
 	CLASS C_nbluewha
-		METHOD initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
