@@ -1,12 +1,17 @@
 CLASS net/minecraft/unmapped/C_wpearmnv net/minecraft/block/entity/PistonBlockEntity
 	COMMENT A piston block entity represents the block being pushed by a piston.
+	FIELD f_arjyvzgo TICK_MOVEMENT D
 	FIELD f_ejhvuroq lastProgress F
 	FIELD f_jmavxxxf savedWorldTime J
+	FIELD f_kqmwaqkf deathTicks I
 	FIELD f_kuqnpbhp progress F
+	FIELD f_nljvvfry NO_CLIP Ljava/lang/ThreadLocal;
+	FIELD f_quxysgyu TICKS_TO_EXTEND I
 	FIELD f_qviclatw source Z
 	FIELD f_rbuxpdya facing Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_rvkdkxam pushedBlock Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_wpwkhlxx extending Z
+	FIELD f_xadmeyxn PUSH_OFFSET D
 	METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 pos
 		ARG 2 state
@@ -23,7 +28,10 @@ CLASS net/minecraft/unmapped/C_wpearmnv net/minecraft/block/entity/PistonBlockEn
 		ARG 2 direction
 		ARG 3 amount
 	METHOD m_cnjlnveg moveEntity (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_astfners;DLnet/minecraft/unmapped/C_xpuuihxf;)V
+		ARG 0 noClipDirection
 		ARG 1 entity
+		ARG 2 amount
+		ARG 4 direction
 	METHOD m_dsbevonu getSavedWorldTime ()J
 	METHOD m_eoastxgq pushEntities (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;FLnet/minecraft/unmapped/C_wpearmnv;)V
 		ARG 0 world
