@@ -111,8 +111,147 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT parent} buf.
 		ARG 1 parent
 			COMMENT the parent, or delegate, buf
+	METHOD alloc alloc ()Lio/netty/buffer/ByteBufAllocator;
+	METHOD array array ()[B
+	METHOD arrayOffset arrayOffset ()I
+	METHOD asReadOnly asReadOnly ()Lio/netty/buffer/ByteBuf;
+	METHOD bytesBefore bytesBefore (B)I
+		ARG 1 value
+	METHOD bytesBefore bytesBefore (IB)I
+		ARG 1 index
+		ARG 2 value
+	METHOD bytesBefore bytesBefore (IIB)I
+		ARG 1 index
+		ARG 2 length
+		ARG 3 value
+	METHOD capacity capacity ()I
+	METHOD capacity capacity (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 capacity
+	METHOD clear clear ()Lio/netty/buffer/ByteBuf;
+	METHOD compareTo compareTo (Ljava/lang/Object;)I
+		ARG 1 buffer
+	METHOD copy copy ()Lio/netty/buffer/ByteBuf;
+	METHOD copy copy (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 length
+	METHOD discardReadBytes discardReadBytes ()Lio/netty/buffer/ByteBuf;
+	METHOD discardSomeReadBytes discardSomeReadBytes ()Lio/netty/buffer/ByteBuf;
+	METHOD duplicate duplicate ()Lio/netty/buffer/ByteBuf;
+	METHOD ensureWritable ensureWritable (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+	METHOD ensureWritable ensureWritable (IZ)I
+		ARG 1 index
+		ARG 2 force
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
+	METHOD forEachByte forEachByte (IILio/netty/util/ByteProcessor;)I
+		ARG 1 index
+		ARG 2 length
+		ARG 3 byteProcessor
+	METHOD forEachByte forEachByte (Lio/netty/util/ByteProcessor;)I
+		ARG 1 byteProcessor
+	METHOD forEachByteDesc forEachByteDesc (IILio/netty/util/ByteProcessor;)I
+		ARG 1 index
+		ARG 2 length
+		ARG 3 byteProcessor
+	METHOD forEachByteDesc forEachByteDesc (Lio/netty/util/ByteProcessor;)I
+		ARG 1 byteProcessor
+	METHOD getBoolean getBoolean (I)Z
+		ARG 1 index
+	METHOD getByte getByte (I)B
+		ARG 1 index
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+		ARG 3 length
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+		ARG 3 destinationIndex
+		ARG 4 length
+	METHOD getBytes getBytes (ILjava/io/OutputStream;I)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 outputStream
+		ARG 3 length
+	METHOD getBytes getBytes (ILjava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+	METHOD getBytes getBytes (ILjava/nio/channels/FileChannel;JI)I
+		ARG 1 index
+		ARG 2 fileChannel
+		ARG 3 position
+		ARG 5 length
+	METHOD getBytes getBytes (ILjava/nio/channels/GatheringByteChannel;I)I
+		ARG 1 index
+		ARG 2 gatheringByteChannel
+		ARG 3 length
+	METHOD getBytes getBytes (I[B)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 destination
+	METHOD getBytes getBytes (I[BII)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 destination
+		ARG 3 destinationindex
+		ARG 4 length
+	METHOD getChar getChar (I)C
+		ARG 1 index
+	METHOD getCharSequence getCharSequence (IILjava/nio/charset/Charset;)Ljava/lang/CharSequence;
+		ARG 1 index
+		ARG 2 length
+		ARG 3 charset
+	METHOD getDouble getDouble (I)D
+		ARG 1 index
+	METHOD getFloat getFloat (I)F
+		ARG 1 index
+	METHOD getInt getInt (I)I
+		ARG 1 index
+	METHOD getIntLE getIntLE (I)I
+		ARG 1 index
+	METHOD getLong getLong (I)J
+		ARG 1 index
+	METHOD getLongLE getLongLE (I)J
+		ARG 1 index
+	METHOD getMedium getMedium (I)I
+		ARG 1 index
+	METHOD getMediumLE getMediumLE (I)I
+		ARG 1 index
+	METHOD getShort getShort (I)S
+		ARG 1 index
+	METHOD getShortLE getShortLE (I)S
+		ARG 1 index
+	METHOD getUnsignedByte getUnsignedByte (I)S
+		ARG 1 index
+	METHOD getUnsignedInt getUnsignedInt (I)J
+		ARG 1 index
+	METHOD getUnsignedIntLE getUnsignedIntLE (I)J
+		ARG 1 index
+	METHOD getUnsignedMedium getUnsignedMedium (I)I
+		ARG 1 index
+	METHOD getUnsignedMediumLE getUnsignedMediumLE (I)I
+		ARG 1 index
+	METHOD getUnsignedShort getUnsignedShort (I)I
+		ARG 1 index
+	METHOD getUnsignedShortLE getUnsignedShortLE (I)I
+		ARG 1 index
+	METHOD hasArray hasArray ()Z
+	METHOD hasMemoryAddress hasMemoryAddress ()Z
+	METHOD indexOf indexOf (IIB)I
+		ARG 1 fromIndex
+		ARG 2 toIndex
+		ARG 3 value
+	METHOD internalNioBuffer internalNioBuffer (II)Ljava/nio/ByteBuffer;
+		ARG 1 index
+		ARG 2 length
+	METHOD isDirect isDirect ()Z
+	METHOD isReadOnly isReadOnly ()Z
+	METHOD isReadable isReadable ()Z
+	METHOD isReadable isReadable (I)Z
+		ARG 1 index
+	METHOD isWritable isWritable ()Z
+	METHOD isWritable isWritable (I)Z
 	METHOD m_alotuvgi writeOptional (Ljava/util/Optional;Ljava/util/function/BiConsumer;)V
 		COMMENT Writes an optional value to this buf. An optional value is represented by
 		COMMENT a boolean indicating if the value is present, followed by the value only if
@@ -707,3 +846,257 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readByteArray(int)
 		COMMENT @see #writeByteArray(byte[])
 		COMMENT @return the read byte array
+	METHOD markReaderIndex markReaderIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD markWriterIndex markWriterIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD maxCapacity maxCapacity ()I
+	METHOD maxWritableBytes maxWritableBytes ()I
+	METHOD memoryAddress memoryAddress ()J
+	METHOD nioBuffer nioBuffer ()Ljava/nio/ByteBuffer;
+	METHOD nioBuffer nioBuffer (II)Ljava/nio/ByteBuffer;
+		ARG 1 index
+		ARG 2 length
+	METHOD nioBufferCount nioBufferCount ()I
+	METHOD nioBuffers nioBuffers ()[Ljava/nio/ByteBuffer;
+	METHOD nioBuffers nioBuffers (II)[Ljava/nio/ByteBuffer;
+		ARG 1 index
+		ARG 2 length
+	METHOD order order ()Ljava/nio/ByteOrder;
+	METHOD order order (Ljava/nio/ByteOrder;)Lio/netty/buffer/ByteBuf;
+		ARG 1 byteOrder
+	METHOD readBoolean readBoolean ()Z
+	METHOD readByte readByte ()B
+	METHOD readBytes readBytes (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 length
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+		ARG 1 buffer
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+		ARG 1 buffer
+		ARG 2 length
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+		ARG 1 buffer
+		ARG 2 index
+		ARG 3 length
+	METHOD readBytes readBytes (Ljava/io/OutputStream;I)Lio/netty/buffer/ByteBuf;
+		ARG 1 outputStream
+		ARG 2 length
+	METHOD readBytes readBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+		ARG 1 buffer
+	METHOD readBytes readBytes (Ljava/nio/channels/FileChannel;JI)I
+		ARG 1 fileChannel
+		ARG 2 index
+		ARG 4 length
+	METHOD readBytes readBytes (Ljava/nio/channels/GatheringByteChannel;I)I
+		ARG 1 gatheringByteChannel
+		ARG 2 length
+	METHOD readBytes readBytes ([B)Lio/netty/buffer/ByteBuf;
+		ARG 1 bytes
+	METHOD readBytes readBytes ([BII)Lio/netty/buffer/ByteBuf;
+		ARG 1 bytes
+		ARG 2 index
+		ARG 3 length
+	METHOD readChar readChar ()C
+	METHOD readCharSequence readCharSequence (ILjava/nio/charset/Charset;)Ljava/lang/CharSequence;
+		ARG 1 length
+		ARG 2 charset
+	METHOD readDouble readDouble ()D
+	METHOD readFloat readFloat ()F
+	METHOD readInt readInt ()I
+	METHOD readIntLE readIntLE ()I
+	METHOD readLong readLong ()J
+	METHOD readLongLE readLongLE ()J
+	METHOD readMedium readMedium ()I
+	METHOD readMediumLE readMediumLE ()I
+	METHOD readRetainedSlice readRetainedSlice (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 length
+	METHOD readShort readShort ()S
+	METHOD readShortLE readShortLE ()S
+	METHOD readSlice readSlice (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 length
+	METHOD readUnsignedByte readUnsignedByte ()S
+	METHOD readUnsignedInt readUnsignedInt ()J
+	METHOD readUnsignedIntLE readUnsignedIntLE ()J
+	METHOD readUnsignedMedium readUnsignedMedium ()I
+	METHOD readUnsignedMediumLE readUnsignedMediumLE ()I
+	METHOD readUnsignedShort readUnsignedShort ()I
+	METHOD readUnsignedShortLE readUnsignedShortLE ()I
+	METHOD readableBytes readableBytes ()I
+	METHOD readerIndex readerIndex ()I
+	METHOD readerIndex readerIndex (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 i
+	METHOD refCnt refCnt ()I
+	METHOD release release ()Z
+	METHOD release release (I)Z
+		ARG 1 decrement
+	METHOD resetReaderIndex resetReaderIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD resetWriterIndex resetWriterIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD retain retain ()Lio/netty/util/ReferenceCounted;
+	METHOD retain retain (I)Lio/netty/util/ReferenceCounted;
+		ARG 1 increment
+	METHOD retainedDuplicate retainedDuplicate ()Lio/netty/buffer/ByteBuf;
+	METHOD retainedSlice retainedSlice ()Lio/netty/buffer/ByteBuf;
+	METHOD retainedSlice retainedSlice (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 length
+	METHOD setBoolean setBoolean (IZ)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setByte setByte (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+		ARG 3 length
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+		ARG 3 sourceIndex
+		ARG 4 length
+	METHOD setBytes setBytes (ILjava/io/InputStream;I)I
+		ARG 1 index
+		ARG 2 inputStream
+		ARG 3 length
+	METHOD setBytes setBytes (ILjava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 buffer
+	METHOD setBytes setBytes (ILjava/nio/channels/FileChannel;JI)I
+		ARG 1 index
+		ARG 2 fileChannel
+		ARG 3 position
+		ARG 5 length
+	METHOD setBytes setBytes (ILjava/nio/channels/ScatteringByteChannel;I)I
+		ARG 1 index
+		ARG 2 scatteringByteChannel
+		ARG 3 length
+	METHOD setBytes setBytes (I[B)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 bytes
+	METHOD setBytes setBytes (I[BII)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 bytes
+		ARG 3 sourceIndex
+		ARG 4 length
+	METHOD setChar setChar (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setCharSequence setCharSequence (ILjava/lang/CharSequence;Ljava/nio/charset/Charset;)I
+		ARG 1 index
+		ARG 2 charSequence
+		ARG 3 charset
+	METHOD setDouble setDouble (ID)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setFloat setFloat (IF)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setIndex setIndex (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 oldIndex
+		ARG 2 newIndex
+	METHOD setInt setInt (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setIntLE setIntLE (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setLong setLong (IJ)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setLongLE setLongLE (IJ)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setMedium setMedium (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setMediumLE setMediumLE (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setShort setShort (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setShortLE setShortLE (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 value
+	METHOD setZero setZero (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 length
+	METHOD skipBytes skipBytes (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 length
+	METHOD slice slice ()Lio/netty/buffer/ByteBuf;
+	METHOD slice slice (II)Lio/netty/buffer/ByteBuf;
+		ARG 1 index
+		ARG 2 length
+	METHOD toString toString (IILjava/nio/charset/Charset;)Ljava/lang/String;
+		ARG 1 index
+		ARG 2 length
+		ARG 3 charset
+	METHOD toString toString (Ljava/nio/charset/Charset;)Ljava/lang/String;
+		ARG 1 charset
+	METHOD touch touch ()Lio/netty/util/ReferenceCounted;
+	METHOD touch touch (Ljava/lang/Object;)Lio/netty/util/ReferenceCounted;
+		ARG 1 o
+	METHOD unwrap unwrap ()Lio/netty/buffer/ByteBuf;
+	METHOD writableBytes writableBytes ()I
+	METHOD writeBoolean writeBoolean (Z)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeByte writeByte (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+		ARG 1 buffer
+		ARG 2 value
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+		ARG 1 buffer
+		ARG 2 sourceIndex
+		ARG 3 length
+	METHOD writeBytes writeBytes (Ljava/io/InputStream;I)I
+		ARG 1 inputStream
+		ARG 2 length
+	METHOD writeBytes writeBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+		ARG 1 buffer
+	METHOD writeBytes writeBytes (Ljava/nio/channels/FileChannel;JI)I
+		ARG 1 fileChannel
+		ARG 2 position
+		ARG 4 length
+	METHOD writeBytes writeBytes (Ljava/nio/channels/ScatteringByteChannel;I)I
+		ARG 1 scatteringByteChannel
+		ARG 2 length
+	METHOD writeBytes writeBytes ([B)Lio/netty/buffer/ByteBuf;
+		ARG 1 bytes
+	METHOD writeBytes writeBytes ([BII)Lio/netty/buffer/ByteBuf;
+		ARG 1 bytes
+		ARG 2 sourceIndex
+		ARG 3 length
+	METHOD writeChar writeChar (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeCharSequence writeCharSequence (Ljava/lang/CharSequence;Ljava/nio/charset/Charset;)I
+		ARG 1 charSequence
+		ARG 2 charset
+	METHOD writeDouble writeDouble (D)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeFloat writeFloat (F)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeInt writeInt (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeIntLE writeIntLE (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeLong writeLong (J)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeLongLE writeLongLE (J)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeMedium writeMedium (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeMediumLE writeMediumLE (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeShort writeShort (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeShortLE writeShortLE (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 value
+	METHOD writeZero writeZero (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 zero
+	METHOD writerIndex writerIndex ()I
+	METHOD writerIndex writerIndex (I)Lio/netty/buffer/ByteBuf;
+		ARG 1 i

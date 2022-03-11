@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	COMMENT A connection backed by a netty channel. It can be one to a client on the
 	COMMENT server or one to a server on a client.
+	FIELD f_arvbntbf PACKET_RECEIVED_MARKER Lorg/slf4j/Marker;
 	FIELD f_bcutours ticks I
 	FIELD f_bgaglckf packetQueue Ljava/util/Queue;
 	FIELD f_daxqlowt address Ljava/net/SocketAddress;
@@ -18,6 +19,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_kawdlrjp channel Lio/netty/channel/Channel;
 	FIELD f_lspmidtv LOGGER Lorg/slf4j/Logger;
 	FIELD f_mamtuefi packetsReceivedCounter I
+	FIELD f_nqkzlzra PACKET_SENT_MARKER Lorg/slf4j/Marker;
 	FIELD f_pdctspiv EPOLL_CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_oabgzozl;
 	FIELD f_sjhnumre averagePacketsReceived F
 	FIELD f_ucdtbtsq packetListener Lnet/minecraft/unmapped/C_tkgdawqw;
@@ -34,14 +36,14 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_zrkidnxu packetsSentCounter I
 	METHOD <init> (Lnet/minecraft/unmapped/C_exeqxqdd;)V
 		ARG 1 side
-	METHOD channelActive (Lio/netty/channel/ChannelHandlerContext;)V
+	METHOD channelActive channelActive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 1 context
-	METHOD channelInactive (Lio/netty/channel/ChannelHandlerContext;)V
+	METHOD channelInactive channelInactive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 1 context
-	METHOD channelRead0 (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
+	METHOD channelRead0 channelRead (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
 		ARG 1 context
 		ARG 2 packet
-	METHOD exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
+	METHOD exceptionCaught exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
 		ARG 1 context
 		ARG 2 ex
 	METHOD m_akpgjfcu sendQueuedPackets ()V
@@ -49,6 +51,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 packet
 		ARG 2 callback
 	METHOD m_bhwloxoc getPacketListener ()Lnet/minecraft/unmapped/C_tkgdawqw;
+	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
+		ARG 0 marker
 	METHOD m_bnpqdudq hasChannel ()Z
 	METHOD m_bywquzql getDisconnectReason ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_cxygpyan disableAutoRead ()V
@@ -61,6 +65,10 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_fgmkpwtg send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/util/concurrent/GenericFutureListener;)V
 		ARG 1 packet
 		ARG 2 callback
+	METHOD m_gqjiabqt (Lnet/minecraft/unmapped/C_rdaqiwdt;Lio/netty/util/concurrent/Future;)V
+		ARG 2 future
+	METHOD m_honyjhko (Lorg/slf4j/Marker;)V
+		ARG 0 marker
 	METHOD m_igiszgub getState ()Lnet/minecraft/unmapped/C_kxdobmrm;
 		COMMENT Returns the current network state of this connection.
 	METHOD m_jitsmihi getAveragePacketsReceived ()F
@@ -106,17 +114,21 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/util/concurrent/GenericFutureListener;Lnet/minecraft/unmapped/C_kxdobmrm;Lnet/minecraft/unmapped/C_kxdobmrm;)V
 		ARG 1 packet
 		ARG 2 callback
+		ARG 3 newNetworkState
+		ARG 4 currentNetworkState
 	METHOD m_wlmhzfek handleDisconnection ()V
 	METHOD m_wrxqepoa isLocal ()Z
+	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
+		ARG 0 marker
 	METHOD m_xphjmqxa isOpen ()Z
 	METHOD m_ziivfjpb getSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT Returns the side of this connection, or the direction of the packets received
 		COMMENT by this connection.
 	CLASS C_eizoucfg
-		METHOD initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
 	CLASS C_qurkirxp
-		METHOD initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
 	CLASS C_zhxqmkfq QueuedPacket
 		FIELD f_ogqzkbuy callback Lio/netty/util/concurrent/GenericFutureListener;
