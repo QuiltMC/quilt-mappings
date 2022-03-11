@@ -6,6 +6,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	FIELD f_ciwixdmd MAX_Y I
 	FIELD f_crftnqmt lcgBlockSeedIncrement I
 	FIELD f_csbozmqi rainGradientPrev F
+	FIELD f_dwvdsrbg dimensionType Lnet/minecraft/unmapped/C_cjzoxshv;
 	FIELD f_dxefaeyr blockEntityTickers Ljava/util/List;
 	FIELD f_flkepbnh biomeAccess Lnet/minecraft/unmapped/C_txmmiamu;
 	FIELD f_fzftbvmv MAX_UPDATE_DEPTH I
@@ -14,9 +15,12 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	FIELD f_jpwdiojf END Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_kgwrxhxy random Ljava/util/Random;
 	FIELD f_khmymmmr thread Ljava/lang/Thread;
+	FIELD f_khwqfnyv DAY_TICK_COUNT I
+	FIELD f_kzmsvqir MAX_GAMMA I
 	FIELD f_lmvypcus CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_ltnvvkbh MIN_Y I
 	FIELD f_nagworhh dimension Lnet/minecraft/unmapped/C_oxijnccf;
+	FIELD f_oturqgfy subOrderTick J
 	FIELD f_oxotuivf NETHER Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_phyzsxpf ambientDarkness I
 	FIELD f_qyjyicxt isClient Z
@@ -28,6 +32,15 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	FIELD f_xiulbyck lcgBlockSeed I
 	FIELD f_xzcshioj border Lnet/minecraft/unmapped/C_pneibfez;
 	FIELD f_zqqsxjfb rainGradient F
+	METHOD <init> (Lnet/minecraft/unmapped/C_cnrrksvm;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_cjzoxshv;Ljava/util/function/Supplier;ZZJ)V
+		ARG 1 properties
+		ARG 2 registryKey
+		ARG 3 dimensionType
+		ARG 4 profiler
+		ARG 5 isClient
+		ARG 6 debugWorld
+		ARG 7 seed
+	METHOD close closeChunkManager ()V
 	METHOD m_aaumwgbp getRainGradient (F)F
 		ARG 1 delta
 	METHOD m_aggbfygi playSoundFromEntity (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FF)V
@@ -40,6 +53,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 6 pitch
 	METHOD m_aitngayn isInvalidVertically (I)Z
 		ARG 0 y
+	METHOD m_aoyyyffm getDimensionType ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_arweyhee getRecipeManager ()Lnet/minecraft/unmapped/C_hjseusrb;
 	METHOD m_bbirufyx disconnect ()V
 	METHOD m_bwleesdb getReceivedStrongRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)I
@@ -69,6 +83,8 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 2 oldState
 		ARG 3 newState
 		ARG 4 flags
+	METHOD m_dpwyfaqh (Lnet/minecraft/unmapped/C_astfners;Ljava/util/function/Predicate;Ljava/util/List;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 3 entity
 	METHOD m_edhsfymk getProfiler ()Lnet/minecraft/unmapped/C_eslcbfsq;
 	METHOD m_efjguyjg setRainGradient (F)V
 		ARG 1 rainGradient
@@ -76,6 +92,8 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 1 pos
 		ARG 2 old
 		ARG 3 updated
+	METHOD m_ejbgumac shouldTickDeath (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 entity
 	METHOD m_eoeuakuf isSavingDisabled ()Z
 	METHOD m_fammcwty getRandomPosInChunk (IIII)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 x
@@ -238,6 +256,8 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_uhrnzysl tickEntity (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 tickConsumer
 		ARG 2 entity
+	METHOD m_uwclrbrk shouldTick (J)Z
+		ARG 1 chunkPos
 	METHOD m_vtkdplrr updateNeighborsAlways (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 pos
 		ARG 2 block
