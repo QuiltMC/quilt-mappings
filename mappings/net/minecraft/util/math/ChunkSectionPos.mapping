@@ -1,4 +1,21 @@
 CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
+	FIELD f_bjsdpwew RELATIVE_Y_SHIFT I
+	FIELD f_cqgtokpq MAX_SECTION_INDEX I
+	FIELD f_eoyrzvyc X_OFFSET I
+	FIELD f_fwsnubvp SECTION_MASK I
+	FIELD f_fzqcsxyo PACKED_Y_MASK J
+	FIELD f_gfwenlbk PACKED_Z_MASK J
+	FIELD f_gpddrzic HALF_SECTION_SIZE I
+	FIELD f_jebajewa PACKED_Y_LENGTH I
+	FIELD f_lawbwqyo SECTION_BITS I
+	FIELD f_lftpupvs Z_OFFSET I
+	FIELD f_mfbblaef RELATIVE_Z_SHIFT I
+	FIELD f_rcpkxjlw PACKED_X_MASK J
+	FIELD f_thivmymk Y_OFFSET I
+	FIELD f_tveaiutl PACKED_Z_LENGTH I
+	FIELD f_uaekbwbg RELATIVE_X_SHIFT I
+	FIELD f_ykeryhkq SECTION_SIZE I
+	FIELD f_zopreimk PACKED_X_LENGTH I
 	METHOD m_ayjgiuwf getSectionZ ()I
 	METHOD m_behpcyaa from (Lnet/minecraft/unmapped/C_ynrszrtu;I)Lnet/minecraft/unmapped/C_zubvmeye;
 		COMMENT Creates a chunk section position from a chunk position and the y-coordinate of the vertical section.
@@ -58,6 +75,9 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD m_jihwywxb forEachSectionAround (JLit/unimi/dsi/fastutil/longs/LongConsumer;)V
+		ARG 0 blockPos
+		ARG 2 consumer
 	METHOD m_kadfilnt from (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_zubvmeye;
 		ARG 0 entity
 	METHOD m_kysdlczn getBlockCoord (I)I
@@ -73,6 +93,9 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 		ARG 1 radius
 		ARG 2 minY
 		ARG 3 maxY
+	METHOD m_ndxvbslr forEachSectionAround (Lnet/minecraft/unmapped/C_hynzadkk;Lit/unimi/dsi/fastutil/longs/LongConsumer;)V
+		ARG 0 pos
+		ARG 1 consumer
 	METHOD m_nhjbcsit streamBlocks ()Ljava/util/stream/Stream;
 	METHOD m_oihieqfn getMaxY ()I
 	METHOD m_otinxjnk unpackLocalZ (S)I
@@ -127,6 +150,11 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 		COMMENT @see #packLocal
 		ARG 1 packedLocalPos
 	METHOD m_wgttobnw getMinY ()I
+	METHOD m_xmrsyyyw forEachSectionAround (IIILit/unimi/dsi/fastutil/longs/LongConsumer;)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+		ARG 3 consumer
 	METHOD m_xrajktfq getCenterPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_zfizougv unpackBlockY (S)I
 		COMMENT Gets the world y-coordinate of the given local position within this chunk section.
@@ -138,5 +166,5 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 		ARG 0 packedLocalPos
 	CLASS C_zvlgcnlm
 		FIELD f_doedtnpy iterator Lnet/minecraft/unmapped/C_bgckbvai;
-		METHOD tryAdvance (Ljava/util/function/Consumer;)Z
+		METHOD tryAdvance tryAdvance (Ljava/util/function/Consumer;)Z
 			ARG 1 consumer

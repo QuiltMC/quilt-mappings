@@ -1,10 +1,15 @@
 CLASS net/minecraft/unmapped/C_rxrtfjrt net/minecraft/util/math/noise/DoublePerlinNoiseSampler
 	FIELD f_baiqygce maxValue D
+	FIELD f_lwogixar parameters Lnet/minecraft/unmapped/C_rxrtfjrt$C_aldnfufr;
 	FIELD f_mpopnmrt TARGET_DEVIATION D
 	FIELD f_perpuxym secondSampler Lnet/minecraft/unmapped/C_hsivpyol;
 	FIELD f_rhejgjxs firstSampler Lnet/minecraft/unmapped/C_hsivpyol;
 	FIELD f_rzzxvvbq DOMAIN_SCALE D
 	FIELD f_ybnaamri amplitude D
+	METHOD <init> (Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_rxrtfjrt$C_aldnfufr;Z)V
+		ARG 1 random
+		ARG 2 parameters
+		ARG 3 useXoroshiro128PlusPlus
 	METHOD m_ahgohmkw create (Lnet/minecraft/unmapped/C_rlomrsco;I[D)Lnet/minecraft/unmapped/C_rxrtfjrt;
 		ARG 0 random
 		ARG 1 offset
@@ -34,10 +39,17 @@ CLASS net/minecraft/unmapped/C_rxrtfjrt net/minecraft/util/math/noise/DoublePerl
 			ARG 1 firstOctave
 			ARG 2 firstAmplitude
 			ARG 4 amplitudes
+		METHOD <init> (ILit/unimi/dsi/fastutil/doubles/DoubleList;)V
+			ARG 1 firstOctave
+			ARG 2 amplitudes
 		METHOD <init> (ILjava/util/List;)V
 			ARG 1 firstOctave
 			ARG 2 amplitudes
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
 		METHOD m_bswwoehp firstOctave ()I
 		METHOD m_dsjqefhk amplitudes ()Lit/unimi/dsi/fastutil/doubles/DoubleList;
 		METHOD m_ukytrjbb (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
+		METHOD m_yuhfjgce (DLit/unimi/dsi/fastutil/doubles/DoubleArrayList;)V
+			ARG 2 amplitudes
