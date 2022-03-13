@@ -7,23 +7,38 @@ CLASS net/minecraft/unmapped/C_zepvvune net/minecraft/command/argument/ArgumentT
 	METHOD m_buzodsqt (Ljava/util/Set;Ljava/util/Set;Lcom/mojang/brigadier/tree/CommandNode;)V
 		ARG 2 node
 	METHOD m_cgukacta toJson (Lcom/mojang/brigadier/CommandDispatcher;Lcom/mojang/brigadier/tree/CommandNode;)Lcom/google/gson/JsonObject;
+		ARG 0 dispatcher
+		ARG 1 commandNode
 	METHOD m_dgjcgghs toJson (Lcom/google/gson/JsonObject;Lcom/mojang/brigadier/arguments/ArgumentType;)V
+		ARG 0 json
+		ARG 1 type
 	METHOD m_fsexqokd register (Ljava/lang/String;Ljava/lang/Class;Lnet/minecraft/unmapped/C_mryaqsqc;)V
 		COMMENT Registers an argument type's serializer.
 		ARG 0 id
 			COMMENT the id of the argument type
+		ARG 1 clazz
+		ARG 2 serializer
 	METHOD m_gxytgpii getAllArgumentTypes (Lcom/mojang/brigadier/tree/CommandNode;Ljava/util/Set;Ljava/util/Set;)V
 		ARG 0 node
 		ARG 1 argumentTypes
 		ARG 2 ignoredNodes
 	METHOD m_jytzzzhg byClass (Lcom/mojang/brigadier/arguments/ArgumentType;)Lnet/minecraft/unmapped/C_zepvvune$C_dvcgmaca;
+		ARG 0 type
 	METHOD m_owawyirp fromPacket (Lnet/minecraft/unmapped/C_idfydwco;)Lcom/mojang/brigadier/arguments/ArgumentType;
 		ARG 0 buf
 	METHOD m_qowlclse getAllArgumentTypes (Lcom/mojang/brigadier/tree/CommandNode;)Ljava/util/Set;
 		ARG 0 node
 	METHOD m_tvxsnfvg toPacket (Lnet/minecraft/unmapped/C_idfydwco;Lcom/mojang/brigadier/arguments/ArgumentType;)V
+		ARG 0 buf
+		ARG 1 type
+	METHOD m_vpipfgib fixClassType (Ljava/lang/Class;)Ljava/lang/Class;
+		ARG 0 clazz
 	METHOD m_vrzctoau hasClass (Lcom/mojang/brigadier/arguments/ArgumentType;)Z
+		ARG 0 type
 	METHOD m_xcprymde register ()V
 	CLASS C_dvcgmaca Entry
 		FIELD f_snnvmwww serializer Lnet/minecraft/unmapped/C_mryaqsqc;
 		FIELD f_xeljhymi id Lnet/minecraft/unmapped/C_ncpywfca;
+		METHOD <init> (Lnet/minecraft/unmapped/C_mryaqsqc;Lnet/minecraft/unmapped/C_ncpywfca;)V
+			ARG 1 serializer
+			ARG 2 id
