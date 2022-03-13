@@ -51,8 +51,8 @@ with [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-poli
 **Description**: Used for pull requests that focus mainly on adding new mappings.
 
 **Required Approvals**: 2
-- At least 1 approval must come directly from a Mappings team member, and the other one should come from a Mappings
-Triage member.
+- At least 1 approval must come directly from a Mappings team member, and the other one can come from a Mappings
+Triage member or another Mappings Team member.
 
 **Final Comment Period**:
 - Snapshots: 1 day
@@ -66,8 +66,8 @@ Triage member.
 **Description**: Used for pull request that focus mainly on changing the names of existing mappings.
 
 **Required Approvals**: 3
-- At least 2 approvals must come directly from a Mappings team member, and the other one should come from a Mappings
-Triage member.
+- At least 2 approvals must come directly from a Mappings team member, and the other one can come from a Mappings
+Triage member or another Mappings Team member.
 
 **Final Comment Period**:
 - Snapshots: 4 days
@@ -78,8 +78,8 @@ Triage member.
 **Description**: Used for pull requests that focus mainly on adding or changing documentation.
 
 **Required Approvals**: 2
-- At least 1 approval must come directly from a Mappings team member, and the other one should come from a Mappings
-Triage member.
+- At least 1 approval must come directly from a Mappings team member, and the other one can come from a Mappings
+Triage member or another Mappings Team member.
 
 **Final Comment Period**:
 - Snapshots: 3 days
