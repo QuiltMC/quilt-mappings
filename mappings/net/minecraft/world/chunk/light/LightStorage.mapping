@@ -10,6 +10,8 @@ CLASS net/minecraft/unmapped/C_jbeocnxo net/minecraft/world/chunk/light/LightSto
 	COMMENT
 	COMMENT @see SkyLightStorage
 	COMMENT @see BlockLightStorage
+	FIELD f_cuqdnwfy EMPTY I
+	FIELD f_gyaiqoyd LIGHT_ONLY I
 	FIELD f_ibixvwyn markedNotReadySections Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_iufqzusd hasLightUpdates Z
 	FIELD f_lbfvidey storage Lnet/minecraft/unmapped/C_jdzznmbv;
@@ -19,10 +21,11 @@ CLASS net/minecraft/unmapped/C_jbeocnxo net/minecraft/world/chunk/light/LightSto
 	FIELD f_negllpge readySections Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_nuubbbls columnsToRetain Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_pvwqdcuu notifySections Lit/unimi/dsi/fastutil/longs/LongSet;
-	FIELD f_qeqamiep EMPTY Lnet/minecraft/unmapped/C_cneaxdxg;
+	FIELD f_qeqamiep EMPTY_DATA Lnet/minecraft/unmapped/C_cneaxdxg;
 	FIELD f_qwkkrrne queuedSections Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
 	FIELD f_sklbmqyv uncachedStorage Lnet/minecraft/unmapped/C_jdzznmbv;
 	FIELD f_trtxwtss sectionsToRemove Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_uecdfsep LIGHT_AND_DATA I
 	FIELD f_uovcabcn DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_vgldgwsw queuedEdgeSections Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_zrurunvu chunkProvider Lnet/minecraft/unmapped/C_jhssvvvy;
@@ -57,6 +60,7 @@ CLASS net/minecraft/unmapped/C_jbeocnxo net/minecraft/world/chunk/light/LightSto
 	METHOD m_kddiegam enqueueSectionData (JLnet/minecraft/unmapped/C_cneaxdxg;Z)V
 		ARG 1 sectionPos
 		ARG 3 array
+		ARG 4 enqueueEdgeSections
 	METHOD m_mhvcjheb get (J)I
 		ARG 1 blockPos
 	METHOD m_ofuazfca notifyChanges ()V
