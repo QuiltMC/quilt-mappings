@@ -18,11 +18,31 @@ CLASS net/minecraft/unmapped/C_hyurdhty net/minecraft/util/profiling/jfr/JfrStat
 	METHOD m_dfsfobyc toStatsResult ()Lnet/minecraft/unmapped/C_ohlgrsme;
 	METHOD m_fnnfpmpa readEventStream (Ljava/util/stream/Stream;)V
 		ARG 1 eventStream
+	METHOD m_hakqnvlp collectPacketStats (Ljava/time/Duration;Ljava/util/Map;)Lnet/minecraft/unmapped/C_olefuomi;
+		ARG 0 duration
+		ARG 1 packetCounters
+	METHOD m_jwhvvzhv addPacket (Ljdk/jfr/consumer/RecordedEvent;ILjava/util/Map;)V
+		ARG 1 event
+		ARG 2 bytes
+		ARG 3 packetCounters
 	METHOD m_njeqqndf readStatsResultFrom (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_ohlgrsme;
 		ARG 0 path
 	METHOD m_nsxbjjvi addToFileIo (Ljdk/jfr/consumer/RecordedEvent;Ljava/util/List;Ljava/lang/String;)V
 		ARG 1 event
 		ARG 2 list
 		ARG 3 bytesKey
+	METHOD m_scghczsw (Lnet/minecraft/unmapped/C_olefuomi$C_royzrend;)Lnet/minecraft/unmapped/C_hyurdhty$C_vhmnxjua;
+		ARG 0 packet
 	METHOD m_xbtvdaxc (Ljdk/jfr/consumer/RecordedEvent;)V
 		ARG 1 event
+	METHOD m_ywfjgfiz (Ljava/util/Map$Entry;)Lcom/mojang/datafixers/util/Pair;
+		ARG 0 entry
+	CLASS C_ghrtcvot
+		METHOD hasNext hasNext ()Z
+		METHOD next next ()Ljava/lang/Object;
+	CLASS C_vhmnxjua PacketCounter
+		FIELD f_uenqfvib totalSize J
+		FIELD f_unbdfmnw totalCount J
+		METHOD m_addmmahh toCountAndSize ()Lnet/minecraft/unmapped/C_olefuomi$C_teflgjgv;
+		METHOD m_dthmmuqf add (I)V
+			ARG 1 bytes

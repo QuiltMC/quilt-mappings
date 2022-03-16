@@ -1,0 +1,29 @@
+CLASS net/minecraft/util/profiling/jfr/event/NetworkSummaryEvent net/minecraft/util/profiling/jfr/event/NetworkSummaryEvent
+	FIELD EVENT_NAME EVENT_NAME Ljava/lang/String;
+	FIELD TYPE TYPE Ljdk/jfr/EventType;
+	FIELD receivedBytes receivedBytes J
+	FIELD receivedPackets receivedPackets I
+	FIELD remoteAddress remoteAddress Ljava/lang/String;
+	FIELD sentBytes sentBytes J
+	FIELD sentPackets sentPackets I
+	METHOD <init> (Ljava/lang/String;)V
+		ARG 1 remoteAddress
+	CLASS C_gnwyvkth EventFields
+		FIELD f_pphaviqp REMOTE_ADDRESS Ljava/lang/String;
+		FIELD f_prmeqbvr SENT_BYTES Ljava/lang/String;
+		FIELD f_rollaklj RECEIVED_PACKETS Ljava/lang/String;
+		FIELD f_ucqhgagu SENT_PACKETS Ljava/lang/String;
+		FIELD f_zqpldxfd RECEIVED_BYTES Ljava/lang/String;
+	CLASS C_yxoelhgu Recorder
+		FIELD f_dqbkixgt sentBytes Ljava/util/concurrent/atomic/AtomicLong;
+		FIELD f_gplfgfjc event Lnet/minecraft/util/profiling/jfr/event/NetworkSummaryEvent;
+		FIELD f_vtcnefaf sentPackets Ljava/util/concurrent/atomic/AtomicInteger;
+		FIELD f_wacavxnb receivedBytes Ljava/util/concurrent/atomic/AtomicLong;
+		FIELD f_yyrvodpo receivedPackets Ljava/util/concurrent/atomic/AtomicInteger;
+		METHOD <init> (Ljava/lang/String;)V
+			ARG 1 remoteAddress
+		METHOD m_gqgnqhny commit ()V
+		METHOD m_hovklxdl addSentPacket (I)V
+			ARG 1 bytes
+		METHOD m_xbaaquju addReceivedPacket (I)V
+			ARG 1 bytes

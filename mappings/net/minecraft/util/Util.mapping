@@ -2,23 +2,29 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	FIELD f_ahvemmlp NIL_UUID Ljava/util/UUID;
 	FIELD f_faeenrac LOGGER Lorg/slf4j/Logger;
 	FIELD f_gshsyyvs NEXT_WORKER_ID Ljava/util/concurrent/atomic/AtomicInteger;
+	FIELD f_gsxvektl TICKER Lcom/google/common/base/Ticker;
 	FIELD f_kmtdmvfj IO_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
+	FIELD f_lamtvexk MAX_THREADS_SYSTEM_PROPERTY Ljava/lang/String;
 	FIELD f_mwatldea BOOTSTRAP_EXECUTOR Ljava/util/concurrent/ExecutorService;
 	FIELD f_pshbhhha JAR_FILE_SYSTEM_PROVIDER Ljava/nio/file/spi/FileSystemProvider;
 	FIELD f_qqybtqnr nanoTimeSupplier Ljava/util/function/LongSupplier;
+	FIELD f_taiaktna DEFAULT_MAX_THREADS I
+	FIELD f_wikbskzx breakpointPauser Ljava/util/function/Consumer;
 	FIELD f_zimcxepj MAIN_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
 	METHOD m_aidzvymm existenceCheckTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 path
-	METHOD m_awkdanrv toArray (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
+	METHOD m_awkdanrv fixedSizeList (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
 		ARG 1 length
 	METHOD m_cclbyaoh getChoiceTypeInternal (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
 		ARG 0 typeReference
 		ARG 1 id
-	METHOD m_drhjlchv toArray (Ljava/util/stream/IntStream;I)Lcom/mojang/serialization/DataResult;
+	METHOD m_chvwiayy getMaxBackgroundThreads ()I
+	METHOD m_drhjlchv fixedSizeList (Ljava/util/stream/IntStream;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 stream
 		ARG 1 length
 	METHOD m_dxqrqrhx pause (Ljava/lang/String;)V
+		ARG 0 message
 	METHOD m_ecvsiggs memoize (Ljava/util/function/BiFunction;)Ljava/util/function/BiFunction;
 		ARG 0 biFunction
 	METHOD m_eguhqvxr throwOrPause (Ljava/lang/Throwable;)Ljava/lang/Throwable;
@@ -33,6 +39,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_ewfqjfze make (Ljava/lang/Object;Ljava/util/function/Consumer;)Ljava/lang/Object;
 		ARG 0 object
 		ARG 1 initializer
+	METHOD m_ffmggoki setBreakpointPauser (Ljava/util/function/Consumer;)V
+		ARG 0 breakpointPauser
 	METHOD m_fppetslt getJVMFlags ()Ljava/util/stream/Stream;
 	METHOD m_ftciccth toMap ()Ljava/util/stream/Collector;
 	METHOD m_fzpfxeqv (Ljava/lang/String;)Z
@@ -47,6 +55,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_gxlhducm getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
 		ARG 0 t
 	METHOD m_hnnezaif getMainWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
+	METHOD m_imrjgdfd (Lnet/minecraft/unmapped/C_zpuwkbhr;I)Ljava/lang/String;
+		ARG 1 c
 	METHOD m_jzncpgce getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
 	METHOD m_kbwjpgkm deleteTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
@@ -73,6 +83,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_lyrrqjlr renameTask (Ljava/nio/file/Path;Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 src
 		ARG 1 dest
+	METHOD m_mjreuqky (Ljava/util/function/Consumer;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 2 string
 	METHOD m_mytcolvj createWorker (Ljava/lang/String;)Ljava/util/concurrent/ExecutorService;
 		ARG 0 name
 	METHOD m_ngxcbtrh logAndPause (Ljava/lang/String;Ljava/lang/Throwable;)V
@@ -100,9 +112,18 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_rjgutuoq (Ljava/nio/file/spi/FileSystemProvider;)Z
 		ARG 0 fileSystemProvider
 	METHOD m_rmfqlirq getOperatingSystem ()Lnet/minecraft/unmapped/C_lvarvugc$C_fqjbnqwz;
-	METHOD m_skylxoye debugRunnable (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
-		ARG 0 runnable
-		ARG 1 messageSupplier
+	METHOD m_royqyqxg backupAndReplace (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;Z)V
+		ARG 0 current
+		ARG 1 newPath
+		ARG 2 backup
+		ARG 3 discardOnFail
+	METHOD m_rucymwoq (Ljava/lang/String;)V
+		ARG 0 string
+	METHOD m_tcuyutyn backupAndReplace (Ljava/io/File;Ljava/io/File;Ljava/io/File;Z)V
+		ARG 0 current
+		ARG 1 newFile
+		ARG 2 backup
+		ARG 3 discardOnFail
 	METHOD m_teucbfzd deletionVerifyTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 path
 	METHOD m_ucqgdvxm debugRunnable (Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Runnable;
@@ -170,8 +191,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_yvfdsqix getChoiceType (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
 		ARG 0 typeReference
 		ARG 1 id
-	CLASS C_cyqlwwzq
-		FIELD f_lvrqksev cache Ljava/util/Map;
+	CLASS C_etnademe
+		METHOD read read ()J
 	CLASS C_fqjbnqwz OperatingSystem
 		FIELD f_vamwfmdr name Ljava/lang/String;
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
@@ -187,4 +208,12 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 			ARG 1 uri
 		METHOD m_zghwojcz open (Ljava/io/File;)V
 			ARG 1 file
+	CLASS C_kvgfzrtq
+		METHOD getAsBoolean getAsBoolean ()Z
+	CLASS C_lsulyfwg
+		METHOD getAsBoolean getAsBoolean ()Z
+	CLASS C_qgeblktr
+		METHOD getAsBoolean getAsBoolean ()Z
+	CLASS C_tceggguc
+		FIELD f_boyitqoh cache Ljava/util/Map;
 	CLASS C_uzjrvfhh IdentityHashStrategy

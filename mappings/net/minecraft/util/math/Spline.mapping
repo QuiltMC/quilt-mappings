@@ -1,10 +1,8 @@
 CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
-	METHOD m_cwbbfsmp max ()F
 	METHOD m_exszxhsu (Lnet/minecraft/unmapped/C_cjntsjzo$C_lqwqjkzu;)Ljava/lang/Record;
 		ARG 0 function
 	METHOD m_fhaxaece (Lcom/mojang/datafixers/util/Either;)Lnet/minecraft/unmapped/C_cjntsjzo;
 		ARG 0 either
-	METHOD m_fvojctor min ()F
 	METHOD m_gfkqahlc getDebugString ()Ljava/lang/String;
 	METHOD m_jvpzciqy codec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		ARG 0 codec
@@ -25,6 +23,8 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 		ARG 0 location
 		ARG 1 value
 		ARG 2 derivative
+	METHOD m_srjaaord mapAll (Lnet/minecraft/unmapped/C_cjntsjzo$C_qkrrahuh;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 1 coordinateVisitor
 	METHOD m_tzkhhrfn builder (Lnet/minecraft/unmapped/C_oqsszdfo;Lnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
 		ARG 0 locationFunction
 		ARG 1 valueTransformer
@@ -44,8 +44,6 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 			ARG 1 locationFunction
 			ARG 2 valueTransformer
 		METHOD m_feujvioi build ()Lnet/minecraft/unmapped/C_cjntsjzo;
-		METHOD m_fmtwovta (Ljava/lang/Float;)F
-			ARG 0 f
 		METHOD m_jswahrpi add (FLnet/minecraft/unmapped/C_cjntsjzo;F)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
 			ARG 1 location
 			ARG 2 value
@@ -59,25 +57,19 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 		FIELD f_ozvnesch values Ljava/util/List;
 		FIELD f_qyyujczb coordinate Lnet/minecraft/unmapped/C_oqsszdfo;
 		FIELD f_yhosvmdy locations [F
-		METHOD <init> (Lnet/minecraft/unmapped/C_oqsszdfo;[FLjava/util/List;[F)V
-			ARG 1 coordinate
-			ARG 2 locations
-			ARG 3 values
-			ARG 4 derivatives
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_bobkwyxi coordinate ()Lnet/minecraft/unmapped/C_oqsszdfo;
 		METHOD m_cpnccmvr floatArrayToString ([F)Ljava/lang/String;
 			ARG 1 floats
 		METHOD m_dyabikck derivatives ()[F
-		METHOD m_jqvxeicm (FI)Z
-			ARG 2 i
 		METHOD m_ulugzisy locations ()[F
 		METHOD m_vxyikhyn ([FI)D
 			ARG 1 i
 		METHOD m_xqthrdpz (D)Ljava/lang/String;
 			ARG 0 d
 		METHOD m_xwsszjde values ()Ljava/util/List;
+	CLASS C_qkrrahuh CoordinateVisitor
 	CLASS C_rvhsfgpe FixedFloatFunction
 		FIELD f_ybflqycv value F
 		METHOD <init> (F)V
