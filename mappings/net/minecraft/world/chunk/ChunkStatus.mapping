@@ -23,12 +23,6 @@ CLASS net/minecraft/unmapped/C_kogtzhzt net/minecraft/world/chunk/ChunkStatus
 		ARG 7 loadTask
 	METHOD m_brihrkwf getId ()Ljava/lang/String;
 	METHOD m_cpvbhfym createOrderedList ()Ljava/util/List;
-	METHOD m_cyfvgftu (Lnet/minecraft/unmapped/C_kogtzhzt;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_bdzdhzyc;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
-		ARG 0 targetStatus
-		ARG 1 world
-		ARG 2 structureManager
-		ARG 3 lightingProvider
-		ARG 5 chunk
 	METHOD m_dqzobgwa byDistanceFromFull (I)Lnet/minecraft/unmapped/C_kogtzhzt;
 		ARG 0 level
 	METHOD m_gcnipypa getHeightmapTypes ()Ljava/util/EnumSet;
@@ -40,10 +34,6 @@ CLASS net/minecraft/unmapped/C_kogtzhzt net/minecraft/world/chunk/ChunkStatus
 		ARG 0 status
 		ARG 1 chunk
 	METHOD m_niqletlf getTaskMargin ()I
-	METHOD m_ortmmcxy runGenerationTask (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_bdzdhzyc;Ljava/util/function/Function;Ljava/util/List;Z)Ljava/util/concurrent/CompletableFuture;
-		ARG 2 world
-		ARG 4 structureManager
-		ARG 5 lightingProvider
 	METHOD m_snneclsk register (Ljava/lang/String;Lnet/minecraft/unmapped/C_kogtzhzt;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_kogtzhzt$C_lcffkbeg;Lnet/minecraft/unmapped/C_kogtzhzt$C_wratqrbq;Lnet/minecraft/unmapped/C_kogtzhzt$C_sldnkxjm;)Lnet/minecraft/unmapped/C_kogtzhzt;
 		ARG 0 id
 		ARG 1 previous
@@ -52,11 +42,6 @@ CLASS net/minecraft/unmapped/C_kogtzhzt net/minecraft/world/chunk/ChunkStatus
 		ARG 4 chunkType
 		ARG 5 task
 		ARG 6 loadTask
-	METHOD m_snproilc runLoadTask (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_bdzdhzyc;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
-		ARG 1 world
-		ARG 2 structureManager
-		ARG 3 lightingProvider
-		ARG 5 chunk
 	METHOD m_trcddfwc getIndex ()I
 	METHOD m_undfzxta register (Ljava/lang/String;Lnet/minecraft/unmapped/C_kogtzhzt;ILjava/util/EnumSet;Lnet/minecraft/unmapped/C_kogtzhzt$C_lcffkbeg;Lnet/minecraft/unmapped/C_kogtzhzt$C_wratqrbq;)Lnet/minecraft/unmapped/C_kogtzhzt;
 		ARG 0 id
@@ -89,14 +74,6 @@ CLASS net/minecraft/unmapped/C_kogtzhzt net/minecraft/world/chunk/ChunkStatus
 			COMMENT A chunk which is incomplete and not loaded to the world yet.
 	CLASS C_sldnkxjm LoadTask
 		COMMENT A task called when a chunk is loaded but does not need to be generated.
-		METHOD doWork doWork (Lnet/minecraft/unmapped/C_kogtzhzt;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_bdzdhzyc;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
-			ARG 1 targetStatus
-			ARG 2 world
-			ARG 3 structureManager
-			ARG 4 lightingProvider
-			ARG 5 convertCallback
-				COMMENT will be invoked by statuses which have some special convert logic (e.g. the FULL status to convert the chunk to a full chunk)
-			ARG 6 chunk
 	CLASS C_wpsejfkz SimpleGenerationTask
 		METHOD doWork doWork (Lnet/minecraft/unmapped/C_kogtzhzt;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_kgfalbim;Ljava/util/List;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 			ARG 1 targetStatus

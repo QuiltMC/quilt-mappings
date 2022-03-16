@@ -2,32 +2,6 @@ CLASS net/minecraft/unmapped/C_tmnrpasf net/minecraft/resource/ResourceManager
 	COMMENT Provides resource loading capabilities to Minecraft.
 	METHOD m_esahrnwm streamResourcePacks ()Ljava/util/stream/Stream;
 		COMMENT Gets a stream of loaded resource packs in increasing order of priority.
-	METHOD m_gcahcamt findResources (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Collection;
-		COMMENT Returns a sorted list of identifiers matching a path predicate.
-		COMMENT
-		COMMENT <p>Scanning begins in {@code startingPath} and each candidate file present under that directory
-		COMMENT will be offered up to the predicate to decide whether it should be included or not.
-		COMMENT
-		COMMENT <p>Elements in the returned list may not, necessarily be unique. Additional effort is advised to ensure that
-		COMMENT duplicates in the returned list are discarded before loading.
-		COMMENT
-		COMMENT @return the list matching identifiers
-		ARG 1 startingPath
-			COMMENT the starting path to begin scanning from
-		ARG 2 pathPredicate
-			COMMENT a predicate to determine whether a path should be included or not
-	METHOD m_hnoenfld getAllResources (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/List;
-		COMMENT Gets all of the available resources to the corresponding resource identifier.
-		COMMENT
-		COMMENT <p>Resources are returned in load order, or ascending order of priority, so the last element in the returned
-		COMMENT list is what would be returned normally by {@link #getResource}
-		COMMENT
-		COMMENT <p>Each resource in this returned list must be closed to avoid resource leaks.
-		COMMENT
-		COMMENT @throws java.io.FileNotFoundException if no matching resources could be found (i.e. if the list would be empty)
-		COMMENT @throws IOException if resources were found, but any one of them could not be opened to be read.
-		ARG 1 id
-			COMMENT the resource identifier to search for
 	METHOD m_qukezord containsResource (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		COMMENT Checks whether any of the currently-loaded resource packs contain an entry for the given id.
 		COMMENT
