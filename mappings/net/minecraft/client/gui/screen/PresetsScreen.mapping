@@ -12,7 +12,6 @@ CLASS net/minecraft/unmapped/C_gxqtmdxu net/minecraft/client/gui/screen/PresetsS
 	FIELD f_jkdlmafb ICON_TEXTURE_SIZE I
 	FIELD f_lxvxamun ICON_BACKGROUND_OFFSET_X I
 	FIELD f_optmhchj LOGGER Lorg/slf4j/Logger;
-	FIELD f_tvnsoewc PRESETS Ljava/util/List;
 	FIELD f_vunblwfw ICON_BACKGROUND_SIZE I
 	FIELD f_wmqqtusp ICON_BACKGROUND_OFFSET_Y I
 	FIELD f_yhuoxeaz parent Lnet/minecraft/unmapped/C_czonpkpc;
@@ -30,13 +29,6 @@ CLASS net/minecraft/unmapped/C_gxqtmdxu net/minecraft/client/gui/screen/PresetsS
 		COMMENT Parse a string like {@code "minecraft:bedrock,3*minecraft:dirt,minecraft:grass_block"}
 		COMMENT to a list of {@link FlatChunkGeneratorLayer}.
 		ARG 0 layers
-	METHOD m_jtncmbth addPreset (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/Set;ZZ[Lnet/minecraft/unmapped/C_mbigakvk;)V
-		ARG 0 presetName
-		ARG 1 icon
-		ARG 2 presetBiome
-		ARG 4 generateStronghold
-		ARG 5 generateFeatures
-		ARG 6 layers
 	METHOD m_nihughga (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_nthuyyhv updateSelectButton (Z)V
@@ -47,9 +39,7 @@ CLASS net/minecraft/unmapped/C_gxqtmdxu net/minecraft/client/gui/screen/PresetsS
 		ARG 3 generatorConfig
 	CLASS C_tilzitfx SuperflatPresetsListWidget
 		CLASS C_lmqsurdw SuperflatPresetEntry
-			FIELD f_gcesvwut preset Lnet/minecraft/unmapped/C_gxqtmdxu$C_uwdxwswc;
-			METHOD <init> (Lnet/minecraft/unmapped/C_gxqtmdxu$C_tilzitfx;Lnet/minecraft/unmapped/C_gxqtmdxu$C_uwdxwswc;)V
-				ARG 2 preset
+			FIELD f_gcesvwut preset Lnet/minecraft/unmapped/C_nwhikqzo;
 			METHOD m_auafxjcm renderIcon (Lnet/minecraft/unmapped/C_cnszsxvd;IILnet/minecraft/unmapped/C_vorddnax;)V
 				ARG 1 matrices
 				ARG 2 x
@@ -60,12 +50,3 @@ CLASS net/minecraft/unmapped/C_gxqtmdxu net/minecraft/client/gui/screen/PresetsS
 				ARG 1 matrices
 				ARG 2 x
 				ARG 3 y
-	CLASS C_uwdxwswc SuperflatPreset
-		FIELD f_bbckfoza name Lnet/minecraft/unmapped/C_rdaqiwdt;
-		FIELD f_jhdqtxvh generatorConfigProvider Ljava/util/function/Function;
-		FIELD f_jxntqjtj icon Lnet/minecraft/unmapped/C_vorddnax;
-		METHOD <init> (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/function/Function;)V
-			ARG 1 icon
-			ARG 2 name
-			ARG 3 generatorConfigProvider
-		METHOD m_qorfsrjh getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
