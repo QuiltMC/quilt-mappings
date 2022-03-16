@@ -170,7 +170,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 			COMMENT the item instance to match
 	METHOD m_fdjdvcpt getMaxDamage ()I
 	METHOD m_fggiijyg getMaxUseTime ()I
-	METHOD m_ftxvvifo (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_npqneive;
 	METHOD m_fzdiygap hasNbt ()Z
 		COMMENT {@return whether this item stack has custom NBT}
 		COMMENT
@@ -221,6 +220,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 amount
 		ARG 2 random
 		ARG 3 player
+	METHOD m_kshgvahz matches (Ljava/util/function/Predicate;)Z
+		ARG 1 predicate
 	METHOD m_kvzdqphw getHideFlags ()I
 	METHOD m_lgonwtuo isEqual (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
@@ -262,6 +263,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_poxxatoa postHit (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 target
 		ARG 2 attacker
+	METHOD m_pqebapbo getHolder ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_puozqtwx (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/lang/Integer;
 		ARG 0 stack
 	METHOD m_pwfafzwz getCooldown ()I
@@ -297,6 +299,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 right
 	METHOD m_sxojkkcd setCustomName (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 name
+	METHOD m_sxworkis is (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
+		ARG 1 holder
 	METHOD m_tcgbrtym isInFrame ()Z
 	METHOD m_uglewown getCount ()I
 		COMMENT {@return the count of items in this item stack}
@@ -363,13 +367,12 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_xqyyeqdc setHolder (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 holder
 	METHOD m_xvzvtufo getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-	METHOD m_yawcimjo getHolder ()Lnet/minecraft/unmapped/C_astfners;
+	METHOD m_yawcimjo getEntityHolder ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_ycpnizyd addHideFlag (Lnet/minecraft/unmapped/C_sddaxwyk$C_xgjxqlij;)V
 		ARG 1 tooltipSection
 	METHOD m_yfrwvxps areItemsEqualIgnoreDamage (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 left
 		ARG 1 right
-	METHOD m_ymmefjsj (Lnet/minecraft/unmapped/C_byxnvdet$C_lhnnvezv;)Ljava/util/List;
 	METHOD m_yrbtnzbt getRarity ()Lnet/minecraft/unmapped/C_mqmixksm;
 	METHOD m_yswksecz (Ljava/util/List;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_jxtrubuh;)V
 		ARG 2 e
