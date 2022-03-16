@@ -1,6 +1,11 @@
 CLASS net/minecraft/unmapped/C_mbsokxus net/minecraft/datafixer/fix/ChunkPalettedStorageFix
 	FIELD f_aqfxrlzc SKULL Ljava/util/Map;
 	FIELD f_bztqzvgm PODZOL Lcom/mojang/serialization/Dynamic;
+	FIELD f_cgszghux WEST_MASK I
+	FIELD f_cxhekuir NORTH_MASK I
+	FIELD f_dqwvgvtt NORTH_EAST_MASK I
+	FIELD f_egeylwol SOUTH_MASK I
+	FIELD f_etajtgai EAST_MASK I
 	FIELD f_evosuxcn AIR Lcom/mojang/serialization/Dynamic;
 	FIELD f_gpopnhow COLORS Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	FIELD f_hjgbffbx SUNFLOWER_UPPER Lcom/mojang/serialization/Dynamic;
@@ -8,11 +13,15 @@ CLASS net/minecraft/unmapped/C_mbsokxus net/minecraft/datafixer/fix/ChunkPalette
 	FIELD f_jgxtnfis SNOWY_MYCELIUM Lcom/mojang/serialization/Dynamic;
 	FIELD f_jigtknvk FERN_UPPER Lcom/mojang/serialization/Dynamic;
 	FIELD f_kjbzprkd BANNER Ljava/util/Map;
+	FIELD f_lpdpltdn SOUTH_WEST_MASK I
 	FIELD f_lxcjreby FLOWER_POT Ljava/util/Map;
 	FIELD f_ngdlulal LOGGER Lorg/slf4j/Logger;
+	FIELD f_nmggjvyd NORTH_WEST_MASK I
 	FIELD f_ovpbnvsa BLOCKS_NEEDING_IN_PLACE_UPDATE Ljava/util/BitSet;
 	FIELD f_peoqajhx BLOCKS_NEEDING_SIDE_UPDATE Ljava/util/BitSet;
 	FIELD f_qaiugnhm PUMPKIN Lcom/mojang/serialization/Dynamic;
+	FIELD f_qtliwrmx SOUTH_EAST_MASK I
+	FIELD f_rhisfiyv SIZE I
 	FIELD f_rsvvxhhs DOOR Ljava/util/Map;
 	FIELD f_tiqnownm SNOWY_GRASS Lcom/mojang/serialization/Dynamic;
 	FIELD f_trqycrov ROSE_UPPER Lcom/mojang/serialization/Dynamic;
@@ -59,6 +68,7 @@ CLASS net/minecraft/unmapped/C_mbsokxus net/minecraft/datafixer/fix/ChunkPalette
 		ARG 2 color
 	METHOD m_zvrahswv (Ljava/util/HashMap;)V
 		ARG 0 map
+	METHOD makeRule makeRule ()Lcom/mojang/datafixers/TypeRewriteRule;
 	CLASS C_bixukokr Section
 		FIELD f_aebrtopx y I
 		FIELD f_fzusmmsi innerPositions Lit/unimi/dsi/fastutil/ints/IntList;
@@ -80,12 +90,17 @@ CLASS net/minecraft/unmapped/C_mbsokxus net/minecraft/datafixer/fix/ChunkPalette
 			ARG 1 section
 			ARG 2 index
 	CLASS C_iluspdfz ChunkNibbleArray
+		FIELD f_fsszetow NIBBLE_SIZE I
 		FIELD f_jwyhsuqr contents [B
+		FIELD f_mhlswqby SIZE I
+		METHOD <init> ([B)V
+			ARG 1 contents
 		METHOD m_ckxbafqf usesLowNibble (I)Z
 			ARG 1 index
 		METHOD m_qwzcjmwr get (III)I
 			ARG 1 x
 			ARG 2 y
+			ARG 3 z
 		METHOD m_ryzywmov getRawIndex (I)I
 			ARG 1 index
 	CLASS C_tkxekzbc Level
@@ -108,9 +123,12 @@ CLASS net/minecraft/unmapped/C_mbsokxus net/minecraft/datafixer/fix/ChunkPalette
 		FIELD f_zjyenlxm direction Lnet/minecraft/unmapped/C_mbsokxus$C_tyqbsaiq$C_emjxkqki;
 		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_mbsokxus$C_tyqbsaiq$C_emjxkqki;Lnet/minecraft/unmapped/C_mbsokxus$C_tyqbsaiq$C_bgslmrob;)V
 			ARG 3 direction
+			ARG 4 axis
 		METHOD m_ltikgtog getAxis ()Lnet/minecraft/unmapped/C_mbsokxus$C_tyqbsaiq$C_bgslmrob;
 		METHOD m_tyhonenj getDirection ()Lnet/minecraft/unmapped/C_mbsokxus$C_tyqbsaiq$C_emjxkqki;
 		CLASS C_bgslmrob Axis
 		CLASS C_emjxkqki Direction
 			FIELD f_eshoznsi offset I
+			METHOD <init> (Ljava/lang/String;II)V
+				ARG 3 offset
 			METHOD m_anhwiati getOffset ()I

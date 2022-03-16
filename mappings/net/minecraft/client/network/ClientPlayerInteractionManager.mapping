@@ -1,9 +1,7 @@
 CLASS net/minecraft/unmapped/C_uxbydbcj net/minecraft/client/network/ClientPlayerInteractionManager
 	FIELD f_dfvrpeiu selectedStack Lnet/minecraft/unmapped/C_sddaxwyk;
-	FIELD f_dxqbfrsd unacknowledgedPlayerActions Lit/unimi/dsi/fastutil/objects/Object2ObjectLinkedOpenHashMap;
 	FIELD f_dydhfibu blockBreakingSoundCooldown F
 	FIELD f_eadbjwpx blockBreakingCooldown I
-	FIELD f_ghfzrenm MAX_UNACKNOWLEDGED_PLAYER_ACTIONS I
 	FIELD f_hcpfiprw client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_nxuzgmph breakingBlock Z
 	FIELD f_opzkhhwp networkHandler Lnet/minecraft/unmapped/C_nuofrxvi;
@@ -30,11 +28,10 @@ CLASS net/minecraft/unmapped/C_uxbydbcj net/minecraft/client/network/ClientPlaye
 	METHOD m_hcwouypu attackBlock (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 1 pos
 		ARG 2 direction
-	METHOD m_hrpyzrid interactBlock (Lnet/minecraft/unmapped/C_jlopmfei;Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
+	METHOD m_hrpyzrid interactBlock (Lnet/minecraft/unmapped/C_jlopmfei;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 player
-		ARG 2 world
-		ARG 3 hand
-		ARG 4 hitResult
+		ARG 2 hand
+		ARG 3 hitResult
 	METHOD m_htotpgaw attackEntity (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 player
 		ARG 2 target
@@ -67,10 +64,9 @@ CLASS net/minecraft/unmapped/C_uxbydbcj net/minecraft/client/network/ClientPlaye
 		ARG 2 slotId
 	METHOD m_nmkqlnik getPreviousGameMode ()Lnet/minecraft/unmapped/C_lghcpyvl;
 	METHOD m_pmfwcbrf hasExtendedReach ()Z
-	METHOD m_pshwfabw interactItem (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
+	METHOD m_pshwfabw interactItem (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 player
-		ARG 2 world
-		ARG 3 hand
+		ARG 2 hand
 	METHOD m_qshbzlht hasCreativeInventory ()Z
 	METHOD m_qsusaivg hasLimitedAttackSpeed ()Z
 	METHOD m_qylavnyy hasStatusBars ()Z
@@ -86,12 +82,6 @@ CLASS net/minecraft/unmapped/C_uxbydbcj net/minecraft/client/network/ClientPlaye
 		ARG 3 hitResult
 		ARG 4 hand
 	METHOD m_txnoxxob syncSelectedSlot ()V
-	METHOD m_vepqrwbv processPlayerActionResponse (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cbvghftd$C_dowtgrks;Z)V
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 state
-		ARG 4 action
-		ARG 5 approved
 	METHOD m_vqqvsgnm isCurrentlyBreaking (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
 	METHOD m_wflwwroo hasRidingInventory ()Z
@@ -107,7 +97,3 @@ CLASS net/minecraft/unmapped/C_uxbydbcj net/minecraft/client/network/ClientPlaye
 	METHOD m_zuvahrwi setGameModes (Lnet/minecraft/unmapped/C_lghcpyvl;Lnet/minecraft/unmapped/C_lghcpyvl;)V
 		ARG 1 gameMode
 		ARG 2 previousGameMode
-	METHOD m_zxyhkmjt sendPlayerAction (Lnet/minecraft/unmapped/C_cbvghftd$C_dowtgrks;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)V
-		ARG 1 action
-		ARG 2 pos
-		ARG 3 direction

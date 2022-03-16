@@ -9,99 +9,73 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	FIELD f_drzpxatw biomeSource Lnet/minecraft/unmapped/C_ajguowya;
 	FIELD f_vzeswpuk CODEC Lcom/mojang/serialization/Codec;
 	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
-	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;J)V
+	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zxhjfyir;J)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
 		ARG 1 registryManager
-		ARG 2 accessor
-		ARG 3 chunk
-		ARG 4 structureManager
-		ARG 5 worldSeed
+		ARG 3 structureManager
+		ARG 4 chunk
+		ARG 6 worldSeed
 	METHOD m_blqkvkse getCodec ()Lcom/mojang/serialization/Codec;
-	METHOD m_dmhpibgx getColumnSample (IILnet/minecraft/unmapped/C_qpninoyb;)Lnet/minecraft/unmapped/C_lydpvmkv;
+	METHOD m_dmhpibgx getColumnSample (IILnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)Lnet/minecraft/unmapped/C_lydpvmkv;
 		COMMENT Returns a sample of all the block states in a column for use in structure generation.
 		ARG 1 x
 		ARG 2 z
 		ARG 3 world
-	METHOD m_evqkkueh populateNoise (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_evqkkueh populateNoise (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Generates the base shape of the chunk out of the basic block states as decided by this chunk generator's config.
 		ARG 1 executor
 		ARG 2 blender
-		ARG 3 accessor
-		ARG 4 chunk
-	METHOD m_eyzuuexw getHeight (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
+		ARG 5 chunk
+	METHOD m_eyzuuexw getHeight (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		COMMENT Returns the raw noise height of a column for use in structure generation.
 		ARG 1 x
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
-	METHOD m_ffmeoonw generateFeatures (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_iijvezpz;)V
+	METHOD m_ffmeoonw generateFeatures (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;)V
 		ARG 1 world
 		ARG 2 chunk
-		ARG 3 structureAccessor
-	METHOD m_gobnuobv getStructureReferences (Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_licgnyqv;)I
-		ARG 0 structureAccessor
+	METHOD m_gobnuobv getStructureReferences (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_quklzgtb;)I
 		ARG 1 chunk
 		ARG 2 sectionPos
-	METHOD m_jbuktzxf getHeightOnGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
+	METHOD m_jbuktzxf getHeightOnGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		ARG 1 x
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
-	METHOD m_jkzsezwm populateBiomes (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_jkzsezwm populateBiomes (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 biomeRegistry
 		ARG 2 executor
-		ARG 3 blender
-		ARG 4 structureAccessor
-		ARG 5 chunk
-	METHOD m_netqupom locateStructure (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_odfnijdo;Lnet/minecraft/unmapped/C_hynzadkk;IZ)Lcom/mojang/datafixers/util/Pair;
-		COMMENT Tries to find the closest structure of a given type near a given block.
-		COMMENT <p>
-		COMMENT New chunks will only be generated up to the {@link net.minecraft.world.chunk.ChunkStatus#STRUCTURE_STARTS} phase by this method.
-		COMMENT <p>
-		COMMENT The radius is ignored for strongholds.
-		COMMENT
-		COMMENT @return {@code null} if no structure could be found within the given search radius
-		ARG 1 world
-		ARG 3 center
-		ARG 4 radius
-			COMMENT the search radius in chunks around the chunk the given block position is in; a radius of 0 will only search in the given chunk
-		ARG 5 skipExistingChunks
-			COMMENT whether only structures that are not referenced by generated chunks (chunks past the STRUCTURE_STARTS stage) are returned, excluding strongholds
-	METHOD m_pbnzyeke withSeed (J)Lnet/minecraft/unmapped/C_kgfalbim;
-		ARG 1 seed
-	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
-		ARG 2 accessor
+		ARG 4 blender
+		ARG 6 chunk
+	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
 		ARG 3 group
 		ARG 4 pos
 	METHOD m_pvcvuoch getBlockBoxForChunk (Lnet/minecraft/unmapped/C_lwzmmmqr;)Lnet/minecraft/unmapped/C_hmqypqzz;
 		ARG 0 chunk
-	METHOD m_pvlcnhkg addStructureReferences (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
+	METHOD m_pvlcnhkg addStructureReferences (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 		COMMENT Finds all structures that the given chunk intersects, and adds references to their starting chunks to it.
 		COMMENT A radius of 8 chunks around the given chunk will be searched for structure starts.
 		ARG 1 world
-		ARG 2 accessor
 		ARG 3 chunk
 	METHOD m_ruxnirnc getWorldHeight ()I
 	METHOD m_taborzul getSeaLevel ()I
-	METHOD m_tyxhijnz getMultiNoiseSampler ()Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;
-	METHOD m_ufytgbmf carve (Lnet/minecraft/unmapped/C_ezymcfey;JLnet/minecraft/unmapped/C_txmmiamu;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rdrmebyw$C_smrpgmrn;)V
+	METHOD m_ufytgbmf carve (Lnet/minecraft/unmapped/C_ezymcfey;JLnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_txmmiamu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rdrmebyw$C_smrpgmrn;)V
 		COMMENT Generates caves for the given chunk.
 		ARG 1 chunkRegion
 		ARG 2 seed
-		ARG 4 biomeAccess
-		ARG 5 structureAccessor
-		ARG 6 chunk
-		ARG 7 generationStep
-	METHOD m_wocuxbxx getHeightInGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;)I
+		ARG 5 biomeAccess
+		ARG 7 chunk
+		ARG 8 generationStep
+	METHOD m_wocuxbxx getHeightInGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		ARG 1 x
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
-	METHOD m_woetbmqo buildSurface (Lnet/minecraft/unmapped/C_ezymcfey;Lnet/minecraft/unmapped/C_iijvezpz;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
+	METHOD m_woetbmqo buildSurface (Lnet/minecraft/unmapped/C_ezymcfey;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 		COMMENT Places the surface blocks of the biomes after the noise has been generated.
 		ARG 1 region
-		ARG 2 structureAccessor
-		ARG 3 chunk
+		ARG 4 chunk
 	METHOD m_wzarohnq getCodecKey ()Ljava/util/Optional;
 	METHOD m_xoblypwv populateEntities (Lnet/minecraft/unmapped/C_ezymcfey;)V
 		ARG 1 region

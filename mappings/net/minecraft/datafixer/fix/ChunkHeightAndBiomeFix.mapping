@@ -1,5 +1,42 @@
 CLASS net/minecraft/unmapped/C_vixveote net/minecraft/datafixer/fix/ChunkHeightAndBiomeFix
+	FIELD f_azzzsqmh HEIGHTMAP_MASK J
+	FIELD f_brnpnash BLOCKS_BEFORE_FEATURE_STATUS Ljava/util/Set;
 	FIELD f_dlzdlwog PLAINS_ID Ljava/lang/String;
+	FIELD f_eppuxwfz BIOME_CONTAINER_SIZE I
+	FIELD f_eykeedrx BIOME_CONTAINER_TOP_LAYER_OFFSET I
+	FIELD f_fcqxofdu OLD_SECTIONS_PER_CHUNK I
+	FIELD f_jpejcyxh NAME Ljava/lang/String;
+	FIELD f_nenynevo HEIGHTMAP_OFFSET I
+	FIELD f_ocuxmout LONGS_PER_SECTION I
+	FIELD f_pdusnprk BIOME_CONTAINER_LAYER_SIZE I
+	FIELD f_qdowqctr STATUS_IS_OR_AFTER_SURFACE Ljava/util/Set;
+	FIELD f_qfzxnvzh NEW_SECTIONS_PER_CHUNK I
+	FIELD f_qmfhwsua NEW_MIN_CHUNK_SECTION_Y I
+	FIELD f_tppgdazm HEIGHTMAP_TYPES [Ljava/lang/String;
+	FIELD f_vaxgklzp CONTEXT_TAG Ljava/lang/String;
+	FIELD f_vrhhwczj BLOCKS_PER_SECTION I
+	FIELD f_vsdzyudk HEIGHTMAP_BITS I
+	FIELD f_wcqgsbna STATUS_IS_OR_AFTER_NOISE Ljava/util/Set;
 	FIELD f_zgshzgjp RAW_BIOME_IDS Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	METHOD <init> (Lcom/mojang/datafixers/schemas/Schema;)V
 		ARG 1 schema
+	METHOD m_behypcpu ceilLog2 (I)I
+		ARG 0 value
+	METHOD m_eiqkbwwj updateHeightmaps (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_gjgcgypj updateChunkTag (Lcom/mojang/serialization/Dynamic;ZZZLjava/util/function/Supplier;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_gqnkferc predictChunkStatusBeforeSurface (Lcom/mojang/serialization/Dynamic;Ljava/util/Set;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_iczggqwx updateCarvingMasks (Lcom/mojang/serialization/Dynamic;II)Lcom/mojang/serialization/Dynamic;
+	METHOD m_ioefdnre fixHeightmap (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_jsgzpkef getOldBiomeId ([II)I
+		ARG 0 biomes
+	METHOD m_mefnutdc createPalettedContainer (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_nivduoxv padPaletteEntries (Lcom/mojang/serialization/Dynamic;Lcom/mojang/serialization/Dynamic;Ljava/util/List;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_okecuaga createPalettedContainer (Lcom/mojang/serialization/Dynamic;Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_omndifrq addPaddingEntries (Lcom/mojang/serialization/Dynamic;Ljava/lang/String;)Lcom/mojang/serialization/Dynamic;
+		ARG 1 key
+	METHOD m_tbqhkxol createOptimizedPalettedContainer (Lcom/mojang/serialization/Dynamic;Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_vhkegrfg createBiomeContainer (Lcom/mojang/serialization/Dynamic;Lit/unimi/dsi/fastutil/ints/Int2IntFunction;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_zkmdzafb shiftUpgradeData (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+	METHOD m_zlioptox getBiomeContainers (Lcom/mojang/serialization/Dynamic;ZILorg/apache/commons/lang3/mutable/MutableBoolean;)[Lcom/mojang/serialization/Dynamic;
+		ARG 1 isOverworld
+	METHOD makeRule makeRule ()Lcom/mojang/datafixers/TypeRewriteRule;
