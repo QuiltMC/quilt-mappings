@@ -1,7 +1,8 @@
 CLASS net/minecraft/unmapped/C_oicjkagd net/minecraft/command/argument/BlockPredicateArgumentType
 	FIELD f_itovjjiy UNKNOWN_TAG_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_ndyimhty EXAMPLES Ljava/util/Collection;
-	METHOD listSuggestions (Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+	METHOD getExamples getExamples ()Ljava/util/Collection;
+	METHOD listSuggestions listSuggestions (Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 context
 		ARG 2 builder
 	METHOD m_gkoehnny (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
@@ -16,7 +17,11 @@ CLASS net/minecraft/unmapped/C_oicjkagd net/minecraft/command/argument/BlockPred
 		FIELD f_csitnfnh nbt Lnet/minecraft/unmapped/C_hhlwcnih;
 		FIELD f_fffayybk tag Lnet/minecraft/unmapped/C_ednuhnnn;
 		FIELD f_iprjdudh properties Ljava/util/Map;
-		METHOD test (Ljava/lang/Object;)Z
+		METHOD <init> (Lnet/minecraft/unmapped/C_ednuhnnn;Ljava/util/Map;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 tag
+			ARG 2 properties
+			ARG 3 nbt
+		METHOD test test (Ljava/lang/Object;)Z
 			ARG 1 context
 	CLASS C_mswiyqqa StatePredicate
 		FIELD f_allytlij nbt Lnet/minecraft/unmapped/C_hhlwcnih;
@@ -26,8 +31,10 @@ CLASS net/minecraft/unmapped/C_oicjkagd net/minecraft/command/argument/BlockPred
 			ARG 1 state
 			ARG 2 properties
 			ARG 3 nbt
-		METHOD test (Ljava/lang/Object;)Z
+		METHOD m_xxqbczye hasNbt ()Z
+		METHOD test test (Ljava/lang/Object;)Z
 			ARG 1 context
 	CLASS C_pnwlksbt BlockPredicate
 		METHOD m_lvluhvzt create (Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/function/Predicate;
+			ARG 1 blockRegistry
 		METHOD m_psgusntk requiresNbt ()Z

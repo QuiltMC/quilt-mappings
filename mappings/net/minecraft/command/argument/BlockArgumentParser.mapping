@@ -1,13 +1,17 @@
 CLASS net/minecraft/unmapped/C_byxnvdet net/minecraft/command/argument/BlockArgumentParser
+	FIELD f_aepsuehd PROPERTY_SEPARATOR C
 	FIELD f_cjhjbswa blockId Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_cpprinvq reader Lcom/mojang/brigadier/StringReader;
 	FIELD f_cvoqhxbz DUPLICATE_PROPERTY_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
 	FIELD f_dnhrjtrg INVALID_BLOCK_ID_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
+	FIELD f_dxmzxkbl PROPERTIES_CLOSING C
 	FIELD f_frcmfegl SUGGEST_DEFAULT Ljava/util/function/BiFunction;
+	FIELD f_hucgnvir PROPERTIES_OPENING C
 	FIELD f_kgowavap data Lnet/minecraft/unmapped/C_hhlwcnih;
 	FIELD f_kqielfyp cursorPos I
 	FIELD f_labuxzvk INVALID_PROPERTY_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic3CommandExceptionType;
 	FIELD f_octvggph EMPTY_PROPERTY_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
+	FIELD f_oggzvuey NBT_OPENING C
 	FIELD f_qovbljha UNCLOSED_PROPERTIES_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_rgyqanti suggestions Ljava/util/function/BiFunction;
 	FIELD f_tecijenj allowTag Z
@@ -17,37 +21,100 @@ CLASS net/minecraft/unmapped/C_byxnvdet net/minecraft/command/argument/BlockArgu
 	FIELD f_vmupzakk DISALLOWED_TAG_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_wpqdltcz tagId Lnet/minecraft/unmapped/C_ednuhnnn;
 	FIELD f_xddtavks tagProperties Ljava/util/Map;
+	FIELD f_xmojkqxl TAG_PREFIX C
+	FIELD f_yxmqvjdm PROPERTY_DEFINER C
 	FIELD f_yzbucctp blockProperties Ljava/util/Map;
 	METHOD <init> (Lcom/mojang/brigadier/StringReader;Z)V
 		ARG 1 reader
 		ARG 2 allowTag
+	METHOD m_alfdibcr (Ljava/lang/String;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 2 builder
+		ARG 3 blockRegistry
 	METHOD m_arwtwfiw parse (Z)Lnet/minecraft/unmapped/C_byxnvdet;
 		ARG 1 allowNbt
 	METHOD m_bhfnnfhg suggestEqualsCharacter (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_bniujfgd parseTagId ()V
 	METHOD m_bxuqhpql getProperties ()Ljava/util/Map;
 	METHOD m_crokfhgu getTagId ()Lnet/minecraft/unmapped/C_ednuhnnn;
 	METHOD m_dlstjpnd getBlockProperties ()Ljava/util/Map;
 	METHOD m_dyhvhjit hasBlockEntity (Lnet/minecraft/unmapped/C_tqxyjqsk;)Z
+		ARG 1 blockRegistry
+	METHOD m_dyuipzyw (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 propertyName
+		ARG 1 blockName
 	METHOD m_eyfmgkbq suggestSnbtOrBlockProperties (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_fifmyvas parseBlockId ()V
 	METHOD m_fuzzmwbi suggestSnbtOrTagProperties (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_hcyotcvk suggestBlockOrTagId (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
+	METHOD m_hjtqfzqz (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 blockName
+		ARG 1 propertyName
+	METHOD m_hxyhhmqx (Lnet/minecraft/unmapped/C_vzlztuyw;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
+	METHOD m_ieljsska (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 id
 	METHOD m_iztvcqfg suggestCommaOrEnd (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_kobunqqp getBlockState ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_kzqobqcr getSuggestions (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
+	METHOD m_mamhprer (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 blockName
+		ARG 1 propertyName
 	METHOD m_mlcaqcva suggestIdentifiers (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
+	METHOD m_msqhxrlj (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 blockName
+		ARG 1 propertyValue
+		ARG 2 propertyName
 	METHOD m_mywhommc parsePropertyValue (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/String;I)V
+		ARG 1 property
+		ARG 2 value
+		ARG 3 cursor
 	METHOD m_nftrjbtm suggestSnbt (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_ngpdcbjf suggestBlockProperties (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_ngulfgen suggestTagPropertiesOrEnd (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_odbeqkxi stringifyProperty (Ljava/lang/StringBuilder;Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Comparable;)V
+		ARG 0 builder
+		ARG 1 property
+		ARG 2 value
 	METHOD m_oqehrwbe suggestTagProperties (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_pwimgspe suggestTagPropertyValues (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/lang/String;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
+		ARG 3 property
 	METHOD m_qgrihmzm parseTagProperties ()V
 	METHOD m_qpkdkbts suggestBlockPropertiesOrEnd (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+		ARG 2 blockRegistry
 	METHOD m_qrwykyna suggestPropertyValues (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_vzlztuyw;)Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;
+		ARG 0 builder
+		ARG 1 property
 	METHOD m_sznyfwfy stringifyBlockState (Lnet/minecraft/unmapped/C_txtbiemp;)Ljava/lang/String;
+		ARG 0 state
 	METHOD m_uvwgetsl parseBlockProperties ()V
 	METHOD m_vxrxnuan getNbtData ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_xqczamak parseSnbt ()V
+	METHOD m_yaumfvdf (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 builder
+		ARG 1 blockRegistry
