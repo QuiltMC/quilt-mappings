@@ -8,10 +8,10 @@ CLASS net/minecraft/unmapped/C_coopoqiy net/minecraft/structure/piece/StructureP
 	FIELD f_szghkttt boundingBox Lnet/minecraft/unmapped/C_hmqypqzz;
 	FIELD f_ughfxnho facing Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_wcsdhfub AIR Lnet/minecraft/unmapped/C_txtbiemp;
-	FIELD f_xbmxhcdw chainLength I
+	FIELD f_xbmxhcdw generationDepth I
 	METHOD <init> (Lnet/minecraft/unmapped/C_etqvykma;ILnet/minecraft/unmapped/C_hmqypqzz;)V
 		ARG 1 type
-		ARG 2 length
+		ARG 2 generationDepth
 		ARG 3 boundingBox
 	METHOD <init> (Lnet/minecraft/unmapped/C_etqvykma;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 type
@@ -50,6 +50,8 @@ CLASS net/minecraft/unmapped/C_coopoqiy net/minecraft/structure/piece/StructureP
 		ARG 4 y
 		ARG 5 z
 		ARG 6 box
+	METHOD m_iacbleeq (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_bkvarokd;)V
+		ARG 1 nbt
 	METHOD m_ipyahbus getEncompassingBoundingBox (Ljava/util/stream/Stream;)Lnet/minecraft/unmapped/C_hmqypqzz;
 		ARG 0 pieceStream
 	METHOD m_jyctiurm getCenter ()Lnet/minecraft/unmapped/C_hynzadkk;
@@ -154,15 +156,19 @@ CLASS net/minecraft/unmapped/C_coopoqiy net/minecraft/structure/piece/StructureP
 		ARG 1 pos
 		ARG 2 state
 	METHOD m_rjkqnwkp getBoundingBox ()Lnet/minecraft/unmapped/C_hmqypqzz;
+	METHOD m_rnldjisv getWeightType ()Lnet/minecraft/unmapped/C_emhuookr;
 	METHOD m_rpeffiql intersectsChunk (Lnet/minecraft/unmapped/C_ynrszrtu;I)Z
 		ARG 1 pos
 		ARG 2 offset
+	METHOD m_rqxzlpnk setGenerationDepth (I)V
+		ARG 1 generationDepth
 	METHOD m_tqwbycjt getFacing ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_vgzsotjb toNbt (Lnet/minecraft/unmapped/C_ywyzxrzo;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 context
-	METHOD m_vlgyasya getChainLength ()I
+	METHOD m_vlgyasya getGenerationDepth ()I
 	METHOD m_vtoyspel generate (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_kgfalbim;Ljava/util/Random;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 world
+		ARG 2 structureManager
 		ARG 3 chunkGenerator
 		ARG 4 random
 		ARG 5 boundingBox
