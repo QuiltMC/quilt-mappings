@@ -5,13 +5,10 @@ CLASS net/minecraft/unmapped/C_isfalfco net/minecraft/world/gen/surfacebuilder/S
 	FIELD f_fnospmqx surfaceSecondaryNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
 	FIELD f_fovjavgv ORANGE_TERRACOTTA Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_gkaslwml seaLevel I
-	FIELD f_hllscgxc randomFactory Lnet/minecraft/unmapped/C_coqzjjrt;
 	FIELD f_isdfomyg icebergSurfaceNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
 	FIELD f_jzvyyrqe surfaceNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
 	FIELD f_lyvqeyll SNOW_BLOCK Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_ozffujnq LIGHT_GRAY_TERRACOTTA Lnet/minecraft/unmapped/C_txtbiemp;
-	FIELD f_ozpcjcew noiseParameters Lnet/minecraft/unmapped/C_tqxyjqsk;
-	FIELD f_pbslxlii positionalRandoms Ljava/util/Map;
 	FIELD f_polrahce defaultBlock Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_sjwrtpba PACKED_ICE Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_skkzwrzs YELLOW_TERRACOTTA Lnet/minecraft/unmapped/C_txtbiemp;
@@ -22,14 +19,7 @@ CLASS net/minecraft/unmapped/C_isfalfco net/minecraft/world/gen/surfacebuilder/S
 	FIELD f_wnswntga badlandsSurfaceNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
 	FIELD f_wroinkcp terracottaBands [Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_xeftqaos badlandsPillarRootNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
-	FIELD f_yofeziwe noiseSamplers Ljava/util/Map;
 	FIELD f_zkzuhrlv icebergPillarRoofNoise Lnet/minecraft/unmapped/C_rxrtfjrt;
-	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_txtbiemp;IJLnet/minecraft/unmapped/C_zorcemxg$C_ybxxvwvk;)V
-		ARG 1 noiseParameters
-		ARG 2 defaultBlock
-		ARG 3 seaLevel
-		ARG 4 seed
-		ARG 6 randomProvider
 	METHOD m_bosrzrpe getSurfaceDepth (II)I
 		ARG 1 x
 		ARG 2 z
@@ -47,26 +37,20 @@ CLASS net/minecraft/unmapped/C_isfalfco net/minecraft/world/gen/surfacebuilder/S
 	METHOD m_hlvwvadu sampleSurfaceSecondary (II)D
 		ARG 1 x
 		ARG 2 z
-	METHOD m_iqqwrycc getOrCreateNoiseSampler (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_rxrtfjrt;
-		ARG 1 noise
 	METHOD m_juabnosz getTerracottaBand (III)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
 	METHOD m_ldnlpnug createTerracottaBands (Lnet/minecraft/unmapped/C_rlomrsco;)[Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 0 random
-	METHOD m_lzjvlmik (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_coqzjjrt;
-		ARG 2 id2
-	METHOD m_panngkas buildSurface (Lnet/minecraft/unmapped/C_txmmiamu;Lnet/minecraft/unmapped/C_tqxyjqsk;ZLnet/minecraft/unmapped/C_zzjngnnx;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_flergppe$C_dggoeuwn;)V
-		ARG 1 biomeAccess
-		ARG 2 biomeRegistry
-		ARG 3 useLegacyRandom
-		ARG 4 context
-		ARG 5 chunk
-		ARG 6 chunkNoiseSampler
-		ARG 7 surfaceRule
-	METHOD m_pffixmfl getOrCreateRandomFactory (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_coqzjjrt;
-		ARG 1 id
+	METHOD m_panngkas buildSurface (Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_txmmiamu;Lnet/minecraft/unmapped/C_tqxyjqsk;ZLnet/minecraft/unmapped/C_zzjngnnx;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_flergppe$C_dggoeuwn;)V
+		ARG 2 biomeAccess
+		ARG 3 biomeRegistry
+		ARG 4 useLegacyRandom
+		ARG 5 context
+		ARG 6 chunk
+		ARG 7 chunkNoiseSampler
+		ARG 8 surfaceRule
 	METHOD m_rlbnvglz buildFrozenOceanSpecificSurface (ILnet/minecraft/unmapped/C_orlkpefs;Lnet/minecraft/unmapped/C_knrmqekq;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;III)V
 		ARG 1 minSurfaceLevel
 		ARG 2 biome
@@ -84,5 +68,3 @@ CLASS net/minecraft/unmapped/C_isfalfco net/minecraft/world/gen/surfacebuilder/S
 		ARG 6 pos
 	METHOD m_wqobhzmr isDefaultBlock (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
-	METHOD m_yebbcaka (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_rxrtfjrt;
-		ARG 2 noise2

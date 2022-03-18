@@ -1,49 +1,91 @@
 CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoiseSampler
+	FIELD f_aawrolef initialDensityNoJaggedness Lnet/minecraft/unmapped/C_kzwapyud;
+	FIELD f_bcyccope lastBlendingDataPos J
+	FIELD f_bjvcfzxn blendOffset Lnet/minecraft/unmapped/C_rvjywqnu$C_grihyezd;
+	FIELD f_bnlcotdm blendAlpha Lnet/minecraft/unmapped/C_rvjywqnu$C_grihyezd;
 	FIELD f_diwfyabf interpolators Ljava/util/List;
 	FIELD f_ewqpqzws firstCellX I
+	FIELD f_eyzzurrd inCellZ I
+	FIELD f_gaxmjyen inCellX I
 	FIELD f_gobowyuo aquiferSampler Lnet/minecraft/unmapped/C_jpghdzxc;
+	FIELD f_gypptqpi interpolationCounter J
 	FIELD f_hpkitmdp minimumY I
+	FIELD f_jfccovif arrayInterpolationCounter J
+	FIELD f_jypoqcac interpolating Z
+	FIELD f_koytdfzc structureWeightSampler Lnet/minecraft/unmapped/C_mdkmcezi$C_dsnmcorv;
+	FIELD f_lybnddyv lastBlendingOutput Lnet/minecraft/unmapped/C_pfqozslu$C_yxwnprkr;
 	FIELD f_lzcdiirr height I
+	FIELD f_mllomflm cellStartBlockY I
 	FIELD f_nhocwnvj firstNoiseX I
+	FIELD f_npznmllm fillingCell Z
 	FIELD f_nzwfsmwa horizontalSize I
+	FIELD f_ofarltkb sliceFillingContextProvider Lnet/minecraft/unmapped/C_kzwapyud$C_rznisoqn;
+	FIELD f_oomddtek cellWidth I
 	FIELD f_opnkrroc blender Lnet/minecraft/unmapped/C_pfqozslu;
+	FIELD f_otraapow blockStateSampler Lnet/minecraft/unmapped/C_rvjywqnu$C_ajscwoop;
+	FIELD f_rqqrsgbo cellHeight I
 	FIELD f_rrobeaxe generationShapeConfig Lnet/minecraft/unmapped/C_ulvgadxi;
+	FIELD f_ryartltr horizontalNoiseSize I
+	FIELD f_shocempi wrappedFunctions Ljava/util/Map;
 	FIELD f_tupstqfc firstCellZ I
+	FIELD f_ubegzncu cellStartBlockX I
+	FIELD f_vjvtctpr cellCaches Ljava/util/List;
+	FIELD f_wkuelxms cellStartBlockZ I
+	FIELD f_woxkktfj inCellY I
 	FIELD f_xflyvvkc preliminarySurfaceLevel Lit/unimi/dsi/fastutil/longs/Long2IntMap;
+	FIELD f_xsdqyyrr arrayIndex I
 	FIELD f_ycdqwwen firstNoiseZ I
-	METHOD m_bfhxedds create (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_fpiyqmft;Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)Lnet/minecraft/unmapped/C_rvjywqnu;
+	METHOD m_bfhxedds create (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_fpiyqmft;Lnet/minecraft/unmapped/C_mdkmcezi$C_dsnmcorv;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_coqzjjrt;Lnet/minecraft/unmapped/C_coqzjjrt;)Lnet/minecraft/unmapped/C_rvjywqnu;
 		ARG 0 chunk
-		ARG 2 noiseFiller
+		ARG 1 noiseRouter
 		ARG 3 settings
 		ARG 4 aquiferFluidPicker
 		ARG 5 blender
 	METHOD m_bjhbvgiq sampleNoiseCorners (II)V
 		ARG 1 noiseY
 		ARG 2 noiseZ
+	METHOD m_bpkwbbvo sampleBlockState ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_crjbklqh sampleStartNoise ()V
-	METHOD m_enjlfhkh create (IIIILnet/minecraft/unmapped/C_fpiyqmft;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;)Lnet/minecraft/unmapped/C_rvjywqnu;
-		ARG 0 x
-		ARG 1 z
-		ARG 2 minimumY
-		ARG 3 height
-		ARG 5 settings
-		ARG 6 aquiferFluidPicker
+	METHOD m_dofytsxx (DLnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
+		ARG 2 interpolator
+	METHOD m_epzpiuug fillSlice (ZI)V
+		ARG 1 useStartNoiseBuffer
+		ARG 2 x
+	METHOD m_huxgfpyn (IILnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
+		ARG 2 interpolator
 	METHOD m_kitscoaj sampleNoiseX (ID)V
 		ARG 2 deltaX
 	METHOD m_kpsxdmhr swapBuffers ()V
+	METHOD m_lxfwjrvk stopInterpolation ()V
 	METHOD m_nqipgozp sampleEndNoise (I)V
 		ARG 1 x
 	METHOD m_nqqcrsfw sampleNoiseY (ID)V
 		ARG 2 deltaY
 	METHOD m_pqgmcdgo sampleNoiseZ (ID)V
 		ARG 2 deltaZ
+	METHOD m_pxlayuiw getWrappedFunction (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+		ARG 1 function
+	METHOD m_qusmmqcn (DLnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
+		ARG 2 interpolator
 	METHOD m_rfsfjiny getAquiferSampler ()Lnet/minecraft/unmapped/C_jpghdzxc;
-	METHOD m_vjyupqdl getOrComputePreliminarySurfaceLevel (II)I
+	METHOD m_sbkkjxgb (DLnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
+		ARG 2 interpolator
+	METHOD m_vjyupqdl getPreliminarySurfaceLevel (II)I
 		ARG 1 x
 		ARG 2 z
-	METHOD m_wldloquu m_wldloquu (J)I
+	METHOD m_wldloquu computePreliminarySurfaceLevel (J)I
 		ARG 1 chunkPos
+	METHOD m_xbxtgxve getBlendingOutput (II)Lnet/minecraft/unmapped/C_pfqozslu$C_yxwnprkr;
+		ARG 1 x
+		ARG 2 z
+	METHOD m_yggwbhmi wrapFunction (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+		ARG 1 function
+	METHOD m_yymcddlc createMultiNoiseSampler (Lnet/minecraft/unmapped/C_fpiyqmft;Ljava/util/List;)Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;
+		ARG 1 noiseRouter
 	CLASS C_ajscwoop BlockStateSampler
+		METHOD calculate calculate (Lnet/minecraft/unmapped/C_kzwapyud$C_rbrbrmhy;)Lnet/minecraft/unmapped/C_txtbiemp;
+			ARG 1 context
+	CLASS C_eyxueuhc BlendOffset
 	CLASS C_fzdxentu NoiseInterpolator
 		FIELD f_bbtfpbth z1 D
 		FIELD f_beujemfs endNoiseBuffer [[D
@@ -57,12 +99,14 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 		FIELD f_kijwsclm x0z1 D
 		FIELD f_lluroftn x0y0z0 D
 		FIELD f_nwvqbwea x0y1z1 D
-		FIELD f_pbyssmci columnSampler Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_pbyssmci noiseFiller Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_rkjgnhbb x0y1z0 D
 		FIELD f_rpseqtcm value D
 		FIELD f_wxqnjuek x0z0 D
 		FIELD f_xzxncpps x1z1 D
 		FIELD f_zjikobig x1y1z0 D
+		METHOD <init> (Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_kzwapyud;)V
+			ARG 2 noiseFiller
 		METHOD m_glvzudzb sampleNoiseZ (D)V
 			ARG 1 deltaZ
 		METHOD m_kahqprvj sampleNoiseCorners (II)V
@@ -76,3 +120,31 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 			ARG 1 sizeZ
 			ARG 2 sizeX
 		METHOD m_yonrghoc swapBuffers ()V
+	CLASS C_grihyezd FlatCache
+		FIELD f_ibvbggvz values [[D
+		FIELD f_yfzfugks noiseFiller Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD <init> (Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_kzwapyud;Z)V
+			ARG 2 noiseFiller
+			ARG 3 preComputeValues
+	CLASS C_hufvsqnz CacheAllInCell
+		FIELD f_ejhsdhvi values [D
+		FIELD f_errodjng noiseFiller Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD <init> (Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_kzwapyud;)V
+			ARG 2 noiseFiller
+	CLASS C_mkkhokpx BlendAlpha
+	CLASS C_rwfksotk ChunkNoiseSamplerDensityFunction
+		METHOD m_tzhnycxn wrapped ()Lnet/minecraft/unmapped/C_kzwapyud;
+	CLASS C_ryfizfei CachedOnce
+		FIELD f_fpnankup lastArrayCounter J
+		FIELD f_iuqgzpnv function Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_lhavnbky lastValue D
+		FIELD f_rbitwuyu lastCounter J
+		FIELD f_zgrcfdwt lastArray [D
+		METHOD <init> (Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_kzwapyud;)V
+			ARG 2 function
+	CLASS C_zropjwnb Cache2d
+		FIELD f_gftbklwd function Lnet/minecraft/unmapped/C_kzwapyud;
+		FIELD f_gwbbyizn lastValue D
+		FIELD f_waggevhm lastPos2d J
+		METHOD <init> (Lnet/minecraft/unmapped/C_kzwapyud;)V
+			ARG 1 function
