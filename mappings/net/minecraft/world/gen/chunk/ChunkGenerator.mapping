@@ -7,8 +7,23 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		COMMENT
 		COMMENT <p>This is used by {@link FlatChunkGenerator} to overwrite biome properties like whether lakes generate, while preserving the original biome ID.
 	FIELD f_drzpxatw biomeSource Lnet/minecraft/unmapped/C_ajguowya;
+	FIELD f_eqichmxi structureSetRegistry Lnet/minecraft/unmapped/C_tqxyjqsk;
+	FIELD f_gtbeeirb LOGGER Lorg/slf4j/Logger;
+	FIELD f_qlvfpgoz MAX_STRUCTURE_RANGE I
 	FIELD f_vzeswpuk CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_yqqqfvcy structureOverrides Ljava/util/Optional;
+	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/Optional;Lnet/minecraft/unmapped/C_ajguowya;)V
+		ARG 1 structureSetRegistry
+		ARG 2 structureOverrides
+		ARG 3 biomeSource
+	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/Optional;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_ajguowya;)V
+		ARG 1 structureSetRegistry
+		ARG 2 structureOverrides
+		ARG 3 populationSource
+		ARG 4 biomeSource
 	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
+	METHOD m_asjkihmg commonCodec (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P1;
+		ARG 0 instance
 	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zxhjfyir;J)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
 		ARG 1 registryManager
@@ -67,6 +82,9 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 5 biomeAccess
 		ARG 7 chunk
 		ARG 8 generationStep
+	METHOD m_vwuuyhwu (Lnet/minecraft/unmapped/C_kgfalbim;)Lnet/minecraft/unmapped/C_tqxyjqsk;
+		ARG 0 generator
+	METHOD m_wbcamyqw streamStructureSets ()Ljava/util/stream/Stream;
 	METHOD m_wocuxbxx getHeightInGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		ARG 1 x
 		ARG 2 z

@@ -1,10 +1,13 @@
 CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRouterData
 	FIELD f_craftepc VEIN_FREQUENCY D
+	FIELD f_fsvqkvhj ISLAND_CHUNK_DISTANCE I
 	FIELD f_hfbhqfdm ORE_THICKNESS F
 	FIELD f_ljabpota BLENDING_JAGGEDNESS Lnet/minecraft/unmapped/C_kzwapyud;
+	FIELD f_lpgnzvtc ISLAND_CHUNK_DISTANCE_SQUARED J
 	FIELD f_skugmypg BLENDING_FACTOR Lnet/minecraft/unmapped/C_kzwapyud;
 	FIELD f_sywrklcc NOODLE_SPACING_AND_STRAIGHTNESS D
 	FIELD f_tqarabvz SURFACE_DENSITY_THRESHOLD D
+	FIELD f_wrrkzqmx GLOBAL_OFFSET F
 	METHOD m_bxikrtou noodleCave ()Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_duxzadwj spaghettiCaveRoughness ()Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_dwhlqlwh getNoise (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv;
@@ -14,24 +17,50 @@ CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRoute
 	METHOD m_eaqwqgkd createNoiseRouter (Lnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_fpiyqmft;Lnet/minecraft/unmapped/C_ybniprpd;)Lnet/minecraft/unmapped/C_fpiyqmft;
 		ARG 0 config
 		ARG 1 noiseRegistry
+		ARG 2 router
+		ARG 3 legacySupportRandom
+	METHOD m_evbfpbex (Lnet/minecraft/unmapped/C_kryzafwp$C_izmcyjmd;)I
+		ARG 0 type
+	METHOD m_eweubntl registerTerrainNoises (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Z)V
+		ARG 0 jaggedNoise
+		ARG 1 continents
+		ARG 2 erosion
+		ARG 3 offsetKey
+		ARG 4 factorKey
+		ARG 5 jaggednessKey
+		ARG 6 depthKey
+		ARG 7 slopedCheeseKey
+		ARG 8 amplified
 	METHOD m_gkzjvtdp yLimitedInterpolatable (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;III)Lnet/minecraft/unmapped/C_kzwapyud;
 		ARG 0 input
 		ARG 1 whenInRange
 		ARG 2 minInclusive
 		ARG 3 maxInclusive
 		ARG 4 maxRange
+	METHOD m_hckpmulw createPeaksAndValleysFunction (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+		ARG 0 ridges
 	METHOD m_hyletaic noNewCaves (Lnet/minecraft/unmapped/C_ulvgadxi;)Lnet/minecraft/unmapped/C_fpiyqmft;
+		ARG 0 generationShapeConfig
 	METHOD m_kwmcquxy spaghettiCave2D ()Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_ltqwczpj entrances ()Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_mbcetmcb postProcess (Lnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+		ARG 0 generationShapeConfig
+		ARG 1 input
+	METHOD m_mfsfdqcd calculatePeaksAndValleys (F)F
+		ARG 0 value
 	METHOD m_ocqxmfnt underground (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
 		ARG 0 function
 	METHOD m_olkmcnsh register (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_cjzoxshv;
 		ARG 0 key
 		ARG 1 function
+	METHOD m_pkjtpogk registerAndWrap (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+		ARG 0 key
+		ARG 1 function
 	METHOD m_qrbzdxqj createNether (Lnet/minecraft/unmapped/C_ulvgadxi;)Lnet/minecraft/unmapped/C_fpiyqmft;
 		ARG 0 config
 	METHOD m_qykodgjz noiseGradientDensity (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+	METHOD m_rdevfboq (Lnet/minecraft/unmapped/C_kryzafwp$C_izmcyjmd;)I
+		ARG 0 type
 	METHOD m_rdpadvfg getFunction (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_kzwapyud;
 		ARG 0 key
 	METHOD m_rssemtmy createKey (Ljava/lang/String;)Lnet/minecraft/unmapped/C_xhhleach;
@@ -39,7 +68,8 @@ CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRoute
 	METHOD m_udwriwdx computePreliminarySurfaceScanning (Lnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_kzwapyud;II)D
 	METHOD m_uhvxossd overworld (Lnet/minecraft/unmapped/C_ulvgadxi;ZZ)Lnet/minecraft/unmapped/C_fpiyqmft;
 		ARG 0 shapeConfig
-		ARG 1 largeBiome
+		ARG 1 largeBiomes
+		ARG 2 amplified
 	METHOD m_uiozfuzd applySlide (Lnet/minecraft/unmapped/C_ulvgadxi;DD)D
 		ARG 0 settings
 	METHOD m_vinarvin splineWithBlending (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
@@ -49,6 +79,16 @@ CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRoute
 		ARG 1 noiseRegistry
 		ARG 2 noiseHolder
 	METHOD m_ybgzbrlt bootstrap ()Lnet/minecraft/unmapped/C_cjzoxshv;
+	METHOD m_zaglzone floatingIslands (Lnet/minecraft/unmapped/C_ulvgadxi;)Lnet/minecraft/unmapped/C_fpiyqmft;
+		ARG 0 generationShapeConfig
+	METHOD m_zifycqqm caves (Lnet/minecraft/unmapped/C_ulvgadxi;)Lnet/minecraft/unmapped/C_fpiyqmft;
+		ARG 0 generationShapeConfig
+	CLASS C_wsshxznv NoiseWiringHelper
+		FIELD f_znhgrabk wrapped Ljava/util/Map;
+		METHOD apply apply (Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 function
+		METHOD m_vjpneffy wrap (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+			ARG 1 function
 	CLASS C_yzherlpl QuantizedSpaghettiRarity
 		METHOD m_iniekgif getSpaghettiRarity3D (D)D
 			ARG 0 rarity

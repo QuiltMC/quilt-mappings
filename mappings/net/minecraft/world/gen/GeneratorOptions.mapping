@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_oxnufhsj net/minecraft/world/gen/GeneratorOptions
 	FIELD f_fspemwwp seed J
+	FIELD f_iaytplvo generateStructures Z
 	FIELD f_sbdkbpdu legacyCustomOptions Ljava/util/Optional;
 	FIELD f_tmfdxbwu bonusChest Z
 	FIELD f_ujragqqq CODEC Lcom/mojang/serialization/Codec;
@@ -19,6 +20,9 @@ CLASS net/minecraft/unmapped/C_oxnufhsj net/minecraft/world/gen/GeneratorOptions
 		ARG 0 seedString
 	METHOD m_cpndkmxk toggleBonusChest ()Lnet/minecraft/unmapped/C_oxnufhsj;
 	METHOD m_cqmzxmrg hasBonusChest ()Z
+	METHOD m_flgblxuv (Lnet/minecraft/unmapped/C_oxnufhsj;)Ljava/util/Optional;
+		ARG 0 options
+	METHOD m_hpoiqhol withStructuresToggled ()Lnet/minecraft/unmapped/C_oxnufhsj;
 	METHOD m_icqesokm toWorldKey (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_xhhleach;
 		ARG 0 dimensionOptionsKey
 	METHOD m_imrgysar isFlatWorld ()Z
@@ -27,17 +31,23 @@ CLASS net/minecraft/unmapped/C_oxnufhsj net/minecraft/world/gen/GeneratorOptions
 	METHOD m_oixkohgx getWorlds ()Lcom/google/common/collect/ImmutableSet;
 	METHOD m_pjdldtkh getRegistryWithReplacedOverworld (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_kgfalbim;)Lnet/minecraft/unmapped/C_tqxyjqsk;
 		ARG 0 dimensionTypeRegistry
+		ARG 1 dimensionType
 		ARG 2 chunkGenerator
 	METHOD m_pouxcvdg withBonusChest ()Lnet/minecraft/unmapped/C_oxnufhsj;
 	METHOD m_rvgxqtqs (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
 	METHOD m_smtjtqti getDimensions ()Lnet/minecraft/unmapped/C_tqxyjqsk;
+	METHOD m_tkpsewut shouldGenerateStructures ()Z
 	METHOD m_tmawifvv getChunkGenerator ()Lnet/minecraft/unmapped/C_kgfalbim;
 	METHOD m_tyakllza toDimensionOptionsKey (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_xhhleach;
 		ARG 0 worldKey
 	METHOD m_vowwbqhw getRegistryWithReplacedOverworldGenerator (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_kgfalbim;)Lnet/minecraft/unmapped/C_tqxyjqsk;
 		ARG 0 dimensionTypeRegistry
 		ARG 1 dimensionOptionsRegistry
+		ARG 2 chunkGenerator
+	METHOD m_voyjsmwp (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_oxnufhsj;Lnet/minecraft/unmapped/C_kgfalbim;)Lnet/minecraft/unmapped/C_oxnufhsj;
+		ARG 0 registryManager
+		ARG 1 options
 		ARG 2 chunkGenerator
 	METHOD m_xlbuhhze validate ()Lcom/mojang/serialization/DataResult;
 	METHOD m_xxhdubmz withHardcore (ZLjava/util/OptionalLong;)Lnet/minecraft/unmapped/C_oxnufhsj;
