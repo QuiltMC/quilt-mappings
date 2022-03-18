@@ -1,9 +1,29 @@
 CLASS net/minecraft/unmapped/C_yhwtbjhx net/minecraft/structure/pool/StructurePoolBasedGenerator
 	FIELD f_xxmuzwnp LOGGER Lorg/slf4j/Logger;
 	METHOD m_kaksroec addPieces (Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;Lnet/minecraft/unmapped/C_cjzoxshv;ILnet/minecraft/unmapped/C_yhwtbjhx$C_fgglsdfi;Lnet/minecraft/unmapped/C_hynzadkk;ZLjava/util/Optional;)Ljava/util/Optional;
+		ARG 0 context
+		ARG 1 pool
+	METHOD m_prglxshy addPieces (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_paeomyma;ILnet/minecraft/unmapped/C_yhwtbjhx$C_fgglsdfi;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_zxhjfyir;Ljava/util/List;Ljava/util/Random;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)V
+		ARG 0 registryManager
+		ARG 1 piece
+		ARG 2 maxDepth
+		ARG 3 pieceFactory
+		ARG 4 chunkGenerator
+		ARG 5 structureTemplateManager
+		ARG 6 pieces
+		ARG 7 random
+		ARG 8 world
+		ARG 9 randomState
 	METHOD m_zigloucq (Lnet/minecraft/unmapped/C_paeomyma;IIIILnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_yhwtbjhx$C_fgglsdfi;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_zorcemxg;Lnet/minecraft/unmapped/C_hmqypqzz;ZLnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;Lnet/minecraft/unmapped/C_jieseoeb;)V
 		ARG 14 collector
 	CLASS C_fgglsdfi PieceFactory
+		METHOD create create (Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_eyvbcijq;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_mboglirk;Lnet/minecraft/unmapped/C_hmqypqzz;)Lnet/minecraft/unmapped/C_paeomyma;
+			ARG 1 structureTemplateManager
+			ARG 2 poolElement
+			ARG 3 pos
+			ARG 4 groundLevelOffset
+			ARG 5 rotation
+			ARG 6 elementBoundingBox
 	CLASS C_roatxjjj ShapedPoolStructurePiece
 		FIELD f_ocrkgqln currentSize I
 		FIELD f_otauwzvb pieceShape Lorg/apache/commons/lang3/mutable/MutableObject;
@@ -13,6 +33,7 @@ CLASS net/minecraft/unmapped/C_yhwtbjhx net/minecraft/structure/pool/StructurePo
 			ARG 2 pieceShape
 			ARG 3 currentSize
 	CLASS C_sfjueuwz StructurePoolGenerator
+		FIELD f_cwyyspyz structureTemplateManager Lnet/minecraft/unmapped/C_zxhjfyir;
 		FIELD f_cxowchxt maxSize I
 		FIELD f_krsibeda structurePieces Ljava/util/Deque;
 		FIELD f_kwosasrf pieceFactory Lnet/minecraft/unmapped/C_yhwtbjhx$C_fgglsdfi;
@@ -20,9 +41,18 @@ CLASS net/minecraft/unmapped/C_yhwtbjhx net/minecraft/structure/pool/StructurePo
 		FIELD f_ohqzvbqa children Ljava/util/List;
 		FIELD f_ovzniplr registry Lnet/minecraft/unmapped/C_tqxyjqsk;
 		FIELD f_qvggotgv random Ljava/util/Random;
+		METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;ILnet/minecraft/unmapped/C_yhwtbjhx$C_fgglsdfi;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_zxhjfyir;Ljava/util/List;Ljava/util/Random;)V
+			ARG 1 registry
+			ARG 2 maxSize
+			ARG 3 pieceFactory
+			ARG 4 chunkGenerator
+			ARG 5 structureTemplateManager
+			ARG 6 pieces
+			ARG 7 random
 		METHOD m_qihirchk generatePiece (Lnet/minecraft/unmapped/C_paeomyma;Lorg/apache/commons/lang3/mutable/MutableObject;IZLnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)V
 			ARG 1 piece
 			ARG 2 pieceShape
 			ARG 3 minY
 			ARG 4 modifyBoundingBox
 			ARG 5 world
+			ARG 6 randomState

@@ -13,6 +13,7 @@ CLASS net/minecraft/unmapped/C_abvlwuej net/minecraft/structure/Structure
 	FIELD f_ocgjnwmo entities Ljava/util/List;
 	FIELD f_sdnxyaov ENTITIES_POS_KEY Ljava/lang/String;
 	FIELD f_txlboyjq ENTITIES_BLOCK_POS_KEY Ljava/lang/String;
+	FIELD f_xhqnycuv CHUNK_SIZE I
 	FIELD f_znssuxga BLOCKS_POS_KEY Ljava/lang/String;
 	METHOD m_audqbiwk place (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mhhynxof;Ljava/util/Random;I)Z
 		ARG 1 world
@@ -20,6 +21,14 @@ CLASS net/minecraft/unmapped/C_abvlwuej net/minecraft/structure/Structure
 		ARG 3 pivot
 		ARG 4 placementData
 		ARG 5 random
+		ARG 6 flags
+	METHOD m_bkroueyv (Lnet/minecraft/unmapped/C_abvlwuej$C_vmcrhozi;)I
+		ARG 0 blockInfo
+	METHOD m_bzblyzyp categorizeBlockInfo (Lnet/minecraft/unmapped/C_abvlwuej$C_vmcrhozi;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+		ARG 0 blockInfo
+		ARG 1 fullBlocks
+		ARG 2 blocksWithNbt
+		ARG 3 otherBlocks
 	METHOD m_cazmvhne getInfosForBlock (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mhhynxof;Lnet/minecraft/unmapped/C_mmxmpdoq;Z)Ljava/util/List;
 		ARG 1 pos
 		ARG 2 placementData
@@ -27,6 +36,8 @@ CLASS net/minecraft/unmapped/C_abvlwuej net/minecraft/structure/Structure
 		ARG 4 transformed
 	METHOD m_cimaglbn createNbtDoubleList ([D)Lnet/minecraft/unmapped/C_hqhtfwlr;
 		ARG 1 doubles
+	METHOD m_dqqznhdr (Lnet/minecraft/unmapped/C_abvlwuej$C_vmcrhozi;)I
+		ARG 0 blockInfo
 	METHOD m_fnotvttv writeNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 nbt
 	METHOD m_gonoxegh (Lnet/minecraft/unmapped/C_astfners;)Z
@@ -49,6 +60,7 @@ CLASS net/minecraft/unmapped/C_abvlwuej net/minecraft/structure/Structure
 		ARG 1 pos
 		ARG 2 pivot
 		ARG 3 placementData
+		ARG 4 blockInfo
 	METHOD m_kooxtyzq loadPalettedBlockInfo (Lnet/minecraft/unmapped/C_hqhtfwlr;Lnet/minecraft/unmapped/C_hqhtfwlr;)V
 		ARG 1 paletteNbt
 		ARG 2 blocksNbt
@@ -86,11 +98,17 @@ CLASS net/minecraft/unmapped/C_abvlwuej net/minecraft/structure/Structure
 		ARG 4 offsetZ
 	METHOD m_rbgwgkgy getRotatedSize (Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_ceivtqhh;
 		ARG 1 rotation
+	METHOD m_rquydehk (Lnet/minecraft/unmapped/C_abvlwuej$C_vmcrhozi;)I
+		ARG 0 blockInfo
 	METHOD m_tazjccrg transformAround (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_qomzaqud;Lnet/minecraft/unmapped/C_mboglirk;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 point
 		ARG 1 mirror
 		ARG 2 rotation
 		ARG 3 pivot
+	METHOD m_wewiirru sortAndCombine (Ljava/util/List;Ljava/util/List;Ljava/util/List;)Ljava/util/List;
+		ARG 0 fullBlocks
+		ARG 1 blocksWithNbt
+		ARG 2 otherBlocks
 	METHOD m_wvzkxjeh getSize ()Lnet/minecraft/unmapped/C_ceivtqhh;
 	METHOD m_wwirjdyt getEntity (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/util/Optional;
 		ARG 0 world
@@ -125,6 +143,7 @@ CLASS net/minecraft/unmapped/C_abvlwuej net/minecraft/structure/Structure
 		FIELD f_nsbovcli currentIndex I
 		FIELD f_sherqzsu ids Lnet/minecraft/unmapped/C_lwiadjvw;
 		FIELD f_yfxmprke AIR Lnet/minecraft/unmapped/C_txtbiemp;
+		METHOD iterator iterator ()Ljava/util/Iterator;
 		METHOD m_fbwrwddf set (Lnet/minecraft/unmapped/C_txtbiemp;I)V
 			ARG 1 state
 			ARG 2 id
@@ -139,7 +158,11 @@ CLASS net/minecraft/unmapped/C_abvlwuej net/minecraft/structure/Structure
 			ARG 1 infos
 		METHOD m_asyobjvf getAllOf (Lnet/minecraft/unmapped/C_mmxmpdoq;)Ljava/util/List;
 			ARG 1 block
+		METHOD m_bgccdzmv (Lnet/minecraft/unmapped/C_mmxmpdoq;)Ljava/util/List;
+			ARG 1 block
 		METHOD m_brxdnrgu getAll ()Ljava/util/List;
+		METHOD m_pdtbjbsn (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_abvlwuej$C_vmcrhozi;)Z
+			ARG 1 info
 	CLASS C_ovblqhtc StructureEntityInfo
 		FIELD f_opzhzhpr nbt Lnet/minecraft/unmapped/C_hhlwcnih;
 		FIELD f_oqoctzai blockPos Lnet/minecraft/unmapped/C_hynzadkk;
