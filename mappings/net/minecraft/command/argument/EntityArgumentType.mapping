@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_msbpycfh net/minecraft/command/argument/EntityArgumentType
 	FIELD f_dmuphiad TOO_MANY_ENTITIES_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_gbnkclid PLAYER_NOT_FOUND_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
+	FIELD f_lpzsfrtn PLAYERS_ONLY_FLAG B
 	FIELD f_oeahghjc playersOnly Z
 	FIELD f_pcbrprfu PLAYER_SELECTOR_HAS_ENTITIES_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_pmpvzlxj EXAMPLES Ljava/util/Collection;
@@ -8,10 +9,12 @@ CLASS net/minecraft/unmapped/C_msbpycfh net/minecraft/command/argument/EntityArg
 	FIELD f_qvekzwbw ENTITY_NOT_FOUND_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_tkaucouc singleTarget Z
 	FIELD f_uqfbemzk NOT_ALLOWED_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
+	FIELD f_yvoeqjqa SINGLE_TARGET_FLAG B
 	METHOD <init> (ZZ)V
 		ARG 1 singleTarget
 		ARG 2 playersOnly
-	METHOD listSuggestions (Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+	METHOD getExamples getExamples ()Ljava/util/Collection;
+	METHOD listSuggestions listSuggestions (Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 context
 		ARG 2 builder
 	METHOD m_drkqbfzm getOptionalEntities (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/util/Collection;
@@ -38,6 +41,6 @@ CLASS net/minecraft/unmapped/C_msbpycfh net/minecraft/command/argument/EntityArg
 		ARG 1 name
 	METHOD m_zmafzhgj (Lnet/minecraft/unmapped/C_sasfholk;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)V
 		ARG 2 builder
-	METHOD parse (Lcom/mojang/brigadier/StringReader;)Ljava/lang/Object;
+	METHOD parse parse (Lcom/mojang/brigadier/StringReader;)Ljava/lang/Object;
 		ARG 1 reader
 	CLASS C_mwfummfv Serializer
