@@ -1,5 +1,10 @@
 CLASS net/minecraft/unmapped/C_tmnrpasf net/minecraft/resource/ResourceManager
 	COMMENT Provides resource loading capabilities to Minecraft.
+	METHOD m_bdnlykma getAllResources (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/List;
+		ARG 1 id
+	METHOD m_cctjvulo findAllResources (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Map;
+		ARG 1 startingPath
+		ARG 2 pathFilter
 	METHOD m_esahrnwm streamResourcePacks ()Ljava/util/stream/Stream;
 		COMMENT Gets a stream of loaded resource packs in increasing order of priority.
 	METHOD m_gcahcamt findResources (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Map;
@@ -14,8 +19,7 @@ CLASS net/minecraft/unmapped/C_tmnrpasf net/minecraft/resource/ResourceManager
 		COMMENT @return the list matching identifiers
 		ARG 1 startingPath
 			COMMENT the starting path to begin scanning from
-		ARG 2 pathPredicate
-			COMMENT a predicate to determine whether a path should be included or not
+		ARG 2 pathFilter
 	METHOD m_qukezord containsResource (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		COMMENT Checks whether any of the currently-loaded resource packs contain an entry for the given id.
 		COMMENT
