@@ -1,26 +1,13 @@
 CLASS net/minecraft/unmapped/C_ldtstxrd net/minecraft/server/filter/TextFilterer
-	FIELD f_adfrnynp roomId Ljava/lang/String;
 	FIELD f_cyzcdqkb THREAD_FACTORY Ljava/util/concurrent/ThreadFactory;
 	FIELD f_ddtfczoh ignorer Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;
 	FIELD f_fitqxbvl leaveEndpoint Ljava/net/URL;
 	FIELD f_jsevwjcw LOGGER Lorg/slf4j/Logger;
 	FIELD f_mghygjpy joinEndpoint Ljava/net/URL;
 	FIELD f_nddbyeug chatEndpoint Ljava/net/URL;
-	FIELD f_rnnzlsav serverId Ljava/lang/String;
 	FIELD f_rtmrppiv NEXT_WORKER_ID Ljava/util/concurrent/atomic/AtomicInteger;
-	FIELD f_sghfbrxp ruleId I
 	FIELD f_xqzyibru executor Ljava/util/concurrent/ExecutorService;
 	FIELD f_zjtwwrss apiKey Ljava/lang/String;
-	METHOD <init> (Ljava/net/URL;Ljava/net/URL;Ljava/net/URL;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;I)V
-		ARG 1 chatEndpoint
-		ARG 2 joinEndpoint
-		ARG 3 leaveEndpoint
-		ARG 4 apiKey
-		ARG 5 ruleId
-		ARG 6 serverId
-		ARG 7 roomId
-		ARG 8 ignorer
-		ARG 9 threadCount
 	METHOD close close ()V
 	METHOD m_bhuppfqe consumeFully (Ljava/io/InputStream;)V
 		ARG 1 inputStream
@@ -31,10 +18,10 @@ CLASS net/minecraft/unmapped/C_ldtstxrd net/minecraft/server/filter/TextFilterer
 		ARG 2 endpoint
 	METHOD m_dvtuhdbc createFilterer (Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_ibcyuwyk;
 		ARG 1 gameProfile
-	METHOD m_gnleevgx sendJoinOrLeaveRequest (Lcom/mojang/authlib/GameProfile;Ljava/net/URL;Ljava/util/concurrent/Executor;)V
+	METHOD m_gnleevgx sendJoinOrLeaveRequest (Lcom/mojang/authlib/GameProfile;Ljava/net/URL;Lnet/minecraft/unmapped/C_ldtstxrd$C_iwcgeyhu;Ljava/util/concurrent/Executor;)V
 		ARG 1 gameProfile
 		ARG 2 endpoint
-		ARG 3 executor
+		ARG 4 executor
 	METHOD m_ikbjyqhi sendJsonRequest (Lcom/google/gson/JsonObject;Ljava/net/URL;)Lcom/google/gson/JsonObject;
 		ARG 1 payload
 		ARG 2 endpoint

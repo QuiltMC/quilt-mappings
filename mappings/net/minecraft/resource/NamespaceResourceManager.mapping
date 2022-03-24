@@ -1,5 +1,5 @@
 CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResourceManager
-	FIELD f_govyslen packList Ljava/util/List;
+	FIELD f_govyslen packs Ljava/util/List;
 	FIELD f_htppxffx namespace Ljava/lang/String;
 	FIELD f_kjauerau LOGGER Lorg/slf4j/Logger;
 	FIELD f_osjnoqaz type Lnet/minecraft/unmapped/C_abwutbbk;
@@ -8,13 +8,82 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 		ARG 2 namespace
 	METHOD m_aycxhzro getMetadataPath (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 0 id
+	METHOD m_dyzgrmts addPack (Lnet/minecraft/unmapped/C_tguinuvn;Ljava/util/function/Predicate;)V
+		ARG 1 pack
+		ARG 2 filter
+	METHOD m_hkrcaact addPack (Lnet/minecraft/unmapped/C_tguinuvn;)V
+		ARG 1 pack
+	METHOD m_hntltsni findResourcesOf (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;Ljava/lang/String;Ljava/util/function/Predicate;Ljava/util/Map;)V
+		ARG 1 pack
+		ARG 2 startingPath
+		ARG 3 pathFilter
+		ARG 4 resources
+	METHOD m_lwyafeiu (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_aejwawvo$C_ffuwstjy;
+		ARG 1 _id
 	METHOD m_mclnoqyz isPathAbsolute (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
 	METHOD m_mvbteulu open (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_tguinuvn;)Ljava/io/InputStream;
 		ARG 1 id
 		ARG 2 pack
+	METHOD m_qenaqzow addPack (Ljava/lang/String;Lnet/minecraft/unmapped/C_tguinuvn;Ljava/util/function/Predicate;)V
+		ARG 1 name
+		ARG 2 pack
+		ARG 3 filter
+	METHOD m_qgiogzsf addPack (Ljava/lang/String;Ljava/util/function/Predicate;)V
+		ARG 1 name
+		ARG 2 filter
+	METHOD m_wouyhykl applyResourceFiltersToResources (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;Ljava/util/Map;)V
+		ARG 0 pack
+		ARG 1 resources
+	METHOD m_yagvfsnt (Ljava/util/TreeMap;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_aejwawvo$C_ffuwstjy;)V
+		ARG 1 id
+		ARG 2 resources
 	METHOD m_yhuhwnfy validate (Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 id
+	METHOD m_ykowrqja (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;)Lnet/minecraft/unmapped/C_tguinuvn;
+		ARG 0 entry
+	CLASS C_ffuwstjy ResourceEntries
+		FIELD f_hswqupjo entries Ljava/util/List;
+		FIELD f_yfdzmjku metadataId Lnet/minecraft/unmapped/C_ncpywfca;
+		METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/List;)V
+			ARG 1 metadataId
+			ARG 2 entries
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_nouicouv entries ()Ljava/util/List;
+		METHOD m_pjhuyvag metadataId ()Lnet/minecraft/unmapped/C_ncpywfca;
+		METHOD m_pmrxzfzb getResources ()Ljava/util/List;
+	CLASS C_jcwnuhnp ResourceEntry
+		FIELD f_hqbehism hasMetadata Z
+		FIELD f_ilahudsg source Lnet/minecraft/unmapped/C_tguinuvn;
+		FIELD f_meomfdaf id Lnet/minecraft/unmapped/C_ncpywfca;
+		FIELD f_qpaxekdr metadataId Lnet/minecraft/unmapped/C_ncpywfca;
+		METHOD <init> (Lnet/minecraft/unmapped/C_aejwawvo;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_tguinuvn;)V
+			ARG 2 id
+			ARG 3 metadataId
+			ARG 4 source
+		METHOD m_bbqrtayo markMetadataAsAbsent ()V
+		METHOD m_nhaeyzxx asResource ()Lnet/minecraft/unmapped/C_wgqtsvjd;
+	CLASS C_vpsqfwkd PackEntry
+		FIELD f_bmuebumu pack Lnet/minecraft/unmapped/C_tguinuvn;
+		FIELD f_fzxpfzpi name Ljava/lang/String;
+		FIELD f_ynrgygde filter Ljava/util/function/Predicate;
+		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_tguinuvn;Ljava/util/function/Predicate;)V
+			ARG 1 name
+			ARG 2 pack
+			ARG 3 filter
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_cglcipmy filter ()Ljava/util/function/Predicate;
+		METHOD m_kgqizoht name ()Ljava/lang/String;
+		METHOD m_ngdvfyth isExcludedFromLowerPriority (Lnet/minecraft/unmapped/C_ncpywfca;)Z
+			ARG 1 id
+		METHOD m_nuumnyiv pack ()Lnet/minecraft/unmapped/C_tguinuvn;
+		METHOD m_qavznufk removeUsingFilter (Ljava/util/Collection;)V
+			ARG 1 identifiers
+		METHOD m_qmxlaprd containsResource (Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_ncpywfca;)Z
+			ARG 1 type
+			ARG 2 id
 	CLASS C_zusngepg DebugInputStream
 		FIELD f_nhczuyli leakMessage Ljava/lang/String;
 		FIELD f_yfxuyqty closed Z

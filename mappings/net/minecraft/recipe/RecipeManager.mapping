@@ -22,8 +22,8 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 		COMMENT {@return a recipe with the given {@code id}, or empty if there is no such recipe}
 		ARG 1 id
 			COMMENT the ID of the desired recipe
-	METHOD m_eehhyejo (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/stream/Stream;
-		ARG 3 recipe
+	METHOD m_eehhyejo (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_awrmdwqd;)Z
+		ARG 2 recipe
 	METHOD m_hcqenhtt deserialize (Lnet/minecraft/unmapped/C_ncpywfca;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_awrmdwqd;
 		COMMENT Reads a recipe from a JSON object.
 		COMMENT
@@ -39,8 +39,8 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 			COMMENT the recipe's ID
 		ARG 1 json
 			COMMENT the recipe JSON
-	METHOD m_hkuirusm (Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/lang/String;
-		ARG 0 recipe
+	METHOD m_hkuirusm (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_awrmdwqd;)Z
+		ARG 2 recipe
 	METHOD m_hrukhdkd getAllMatches (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/List;
 		COMMENT Creates a list of all recipes of the given {@code type} that match the
 		COMMENT given {@code inventory} and {@code world}. The list is ordered by the
@@ -56,8 +56,6 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 			COMMENT the input inventory
 		ARG 3 world
 			COMMENT the input world
-	METHOD m_nfknkrms (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/stream/Stream;
-		ARG 3 recipe
 	METHOD m_pgjmabyy getRemainingStacks (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_rnrfftze;
 		COMMENT {@return the remainder of a recipe of the given {@code type} that match
 		COMMENT the given {@code inventory} and {@code world}, or a shallow copy of the
@@ -68,19 +66,6 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 		COMMENT getFirstMatch(type, inventory, world)} if the match exists.
 		COMMENT
 		COMMENT @see Recipe#getRemainder(Inventory)
-		ARG 1 type
-			COMMENT the desired recipe type
-		ARG 2 inventory
-			COMMENT the input inventory
-		ARG 3 world
-			COMMENT the input world
-	METHOD m_sycfpgte getFirstMatch (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/Optional;
-		COMMENT {@return a recipe of the given {@code type} that match the given
-		COMMENT {@code inventory} and {@code world}}
-		COMMENT
-		COMMENT <p>If there are multiple matching recipes, the result is arbitrary,
-		COMMENT but this method will return the same result unless the recipes in this
-		COMMENT manager are updated.
 		ARG 1 type
 			COMMENT the desired recipe type
 		ARG 2 inventory
@@ -100,8 +85,6 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 		COMMENT side recipes.
 		ARG 1 recipes
 			COMMENT the recipes to set
-	METHOD m_uraaoapk (Lnet/minecraft/unmapped/C_awrmdwqd;)Lnet/minecraft/unmapped/C_awrmdwqd;
-		ARG 0 recipe
 	METHOD m_vrjdrstk values ()Ljava/util/Collection;
 		COMMENT {@return all recipes in this manager}
 		COMMENT

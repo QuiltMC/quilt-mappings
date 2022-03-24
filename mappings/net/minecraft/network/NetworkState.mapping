@@ -8,7 +8,12 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 	METHOD <init> (Ljava/lang/String;IILnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;)V
 		ARG 3 id
 		ARG 4 packetHandlerInitializer
+	METHOD m_ayasbnmb (Lnet/minecraft/unmapped/C_kxdobmrm;Lnet/minecraft/unmapped/C_exeqxqdd;Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;)V
+		ARG 1 networkState
+		ARG 2 handler
 	METHOD m_gepqzzad getId ()I
+	METHOD m_gfhkubdw (Lnet/minecraft/unmapped/C_kxdobmrm;Ljava/lang/Class;)V
+		ARG 1 packet
 	METHOD m_gxjpnmab getPacketHandlerState (Lnet/minecraft/unmapped/C_zyjtrjrl;)Lnet/minecraft/unmapped/C_kxdobmrm;
 		ARG 0 handler
 	METHOD m_kxtwuehg getPacketId (Lnet/minecraft/unmapped/C_exeqxqdd;Lnet/minecraft/unmapped/C_zyjtrjrl;)Ljava/lang/Integer;
@@ -16,6 +21,10 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 		ARG 2 packet
 	METHOD m_mjjmcqbn createPacketHandlerInitializer ()Lnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;
 	METHOD m_ophzsavx getPacketsByIds (Lnet/minecraft/unmapped/C_exeqxqdd;)Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+		ARG 1 networkSide
+	METHOD m_voxhkwad (Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;Ljava/lang/Class;Ljava/lang/Integer;)V
+		ARG 1 packet
+		ARG 2 id
 	METHOD m_voxurenl byId (I)Lnet/minecraft/unmapped/C_kxdobmrm;
 		ARG 0 id
 	METHOD m_yxddrfeo getPacketHandler (Lnet/minecraft/unmapped/C_exeqxqdd;ILnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_zyjtrjrl;
@@ -30,6 +39,7 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 	CLASS C_lmmjpqqz PacketHandler
 		FIELD f_bzupszpd packetFactories Ljava/util/List;
 		FIELD f_feuhlzjs packetIds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		FIELD f_mseaveor LOGGER Lorg/slf4j/Logger;
 		METHOD m_kfitcvso register (Ljava/lang/Class;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;
 			ARG 1 type
 			ARG 2 packetFactory
