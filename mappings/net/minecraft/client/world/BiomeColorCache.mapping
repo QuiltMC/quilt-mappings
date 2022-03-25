@@ -1,7 +1,11 @@
 CLASS net/minecraft/unmapped/C_smjkwnuy net/minecraft/client/world/BiomeColorCache
 	FIELD f_bfjnytlw lock Ljava/util/concurrent/locks/ReentrantReadWriteLock;
 	FIELD f_ckjwtyoa colors Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
+	FIELD f_irbdnefs colorSource Ljava/util/function/ToIntFunction;
 	FIELD f_jbbcalau last Ljava/lang/ThreadLocal;
+	FIELD f_zfiphbcj MAX_CACHE_ENTRIES I
+	METHOD <init> (Ljava/util/function/ToIntFunction;)V
+		ARG 1 colorSource
 	METHOD m_hoqnqsor reset (II)V
 		ARG 1 chunkX
 		ARG 2 chunkZ
@@ -11,6 +15,15 @@ CLASS net/minecraft/unmapped/C_smjkwnuy net/minecraft/client/world/BiomeColorCac
 	METHOD m_yynxbvwi getColorArray (II)Lnet/minecraft/unmapped/C_smjkwnuy$C_mvcdfszq;
 		ARG 1 chunkX
 		ARG 2 chunkZ
+	CLASS C_mvcdfszq CacheData
+		FIELD f_amaaqhiv lock Ljava/util/concurrent/locks/ReentrantReadWriteLock;
+		FIELD f_lksszdvv BLOCKS_PER_LAYER I
+		FIELD f_owsvqpnj cache Lit/unimi/dsi/fastutil/ints/Int2ObjectArrayMap;
+		METHOD m_ceghnyma (I)[I
+			ARG 1 i
+		METHOD m_hapyegwf getLayer (I)[I
+			ARG 1 layer
+		METHOD m_ncnnyqos allocateLayer ()[I
 	CLASS C_yrpnnhlj Last
 		FIELD f_kytvbwqr x I
 		FIELD f_sckoqjzg z I
