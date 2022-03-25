@@ -1,3 +1,101 @@
 CLASS net/minecraft/unmapped/C_dzcnonip net/minecraft/structure/StructurePlacement
+	FIELD f_dgusoyhh RANDOM_SALT I
+	FIELD f_eahqxmbz frecuency F
 	FIELD f_kxfcknke CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_oorujwkt exclusionZone Ljava/util/Optional;
+	FIELD f_sfsvsnbr salt I
+	FIELD f_wkdyvwzn frecuencyReducionMethod Lnet/minecraft/unmapped/C_dzcnonip$C_sofsdiex;
+	FIELD f_wxaplaju locateOffset Lnet/minecraft/unmapped/C_ceivtqhh;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ceivtqhh;Lnet/minecraft/unmapped/C_dzcnonip$C_sofsdiex;FILjava/util/Optional;)V
+		ARG 1 locateOffset
+		ARG 2 frecuencyReductionMethod
+		ARG 3 frecuency
+		ARG 4 salt
+		ARG 5 exclusionZone
+	METHOD m_bcoykdyb isPlacementChunk (Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_edfiqifk;JII)Z
+		ARG 1 chunkGenerator
+		ARG 2 randomState
+		ARG 3 seed
+		ARG 5 x
+		ARG 6 z
+	METHOD m_buezqkly legacyFrecuencyReducerWithDouble (JIIIF)Z
+		ARG 0 seed
+		ARG 2 salt
+		ARG 3 x
+		ARG 4 z
+		ARG 5 frecuency
+	METHOD m_ckmnujaj getSalt ()I
+	METHOD m_czumdukv legacyPillagerOutpostFrecuencyReducer (JIIIF)Z
+		ARG 0 seed
+		ARG 2 salt
+		ARG 3 x
+		ARG 4 z
+		ARG 5 frecuency
+	METHOD m_ifxfdxky getLocatePos (Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 1 chunkPos
+	METHOD m_jkdmfdcj placementCodec (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P5;
+		ARG 0 instance
+	METHOD m_nnxnqcxe isStructureChunk (Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_edfiqifk;JII)Z
+		ARG 1 chunkGenerator
+		ARG 2 randomState
+		ARG 3 seed
+		ARG 5 x
+		ARG 6 z
+	METHOD m_ptflrtuv getExclusionZone ()Ljava/util/Optional;
+	METHOD m_qwwedmus getLocateOffset ()Lnet/minecraft/unmapped/C_ceivtqhh;
+	METHOD m_sinhinpe getFrecuencyReductionMethod ()Lnet/minecraft/unmapped/C_dzcnonip$C_sofsdiex;
+	METHOD m_xohmwbuz getFrequency ()F
+	METHOD m_xsfgcgdv legacyArbitrarySaltFrecuencyReducer (JIIIF)Z
+		ARG 0 seed
+		ARG 2 salt
+		ARG 3 x
+		ARG 4 z
+		ARG 5 frecuency
+	METHOD m_yxstdjwj frecuencyReducer (JIIIF)Z
+		ARG 0 seed
+		ARG 2 salt
+		ARG 3 x
+		ARG 4 z
+		ARG 5 frecuency
 	METHOD m_yzmhznzg type ()Lnet/minecraft/unmapped/C_enyckgji;
+	CLASS C_chjuskar ExclusionZone
+		FIELD f_akhuskal CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_jouyfxta chunkCount I
+		FIELD f_tnxuljpa otherSet Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;I)V
+			ARG 1 otherSet
+			ARG 2 chunkCount
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_eppecfke chunkCount ()I
+		METHOD m_lllcpmcv shouldNotPlace (Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_edfiqifk;JII)Z
+			ARG 1 chunkGenerator
+			ARG 2 randomState
+			ARG 3 seed
+			ARG 5 x
+			ARG 6 z
+		METHOD m_souizhwv otherSet ()Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD m_uihyzxye (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+	CLASS C_mbxanaxq FrecuencyReducer
+		METHOD shouldGenerate shouldGenerate (JIIIF)Z
+			ARG 1 seed
+			ARG 3 salt
+			ARG 4 x
+			ARG 5 z
+			ARG 6 frecuency
+	CLASS C_sofsdiex FrecuencyReductionMethod
+		FIELD f_rkwsojjz reducer Lnet/minecraft/unmapped/C_dzcnonip$C_mbxanaxq;
+		FIELD f_uxeoxisl CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_wkrzwfar name Ljava/lang/String;
+		METHOD <init> (Ljava/lang/String;ILjava/lang/String;Lnet/minecraft/unmapped/C_dzcnonip$C_mbxanaxq;)V
+			ARG 3 name
+			ARG 4 reducer
+		METHOD m_brdztesf byName (Ljava/lang/String;)Lnet/minecraft/unmapped/C_dzcnonip$C_sofsdiex;
+			ARG 0 name
+		METHOD m_laedbltj shouldGenerate (JIIIF)Z
+			ARG 1 seed
+			ARG 3 salt
+			ARG 4 x
+			ARG 5 z
+			ARG 6 frecuency
