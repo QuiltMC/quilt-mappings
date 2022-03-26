@@ -20,8 +20,30 @@ CLASS net/minecraft/unmapped/C_kzwapyud net/minecraft/world/gen/DensityFunction
 		ARG 1 visitor
 	METHOD m_tttpbozk square ()Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_ugbzkmol abs ()Lnet/minecraft/unmapped/C_kzwapyud;
+	METHOD m_xaedpolv (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_cjzoxshv;
+		ARG 0 function
 	METHOD m_zkfncqhs codec ()Lnet/minecraft/unmapped/C_ircwepir;
 	CLASS C_fntlxgzz SimpleFunction
+	CLASS C_jnszknql NoiseHolder
+		FIELD f_ldkomniq CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_rvosyeov noise Lnet/minecraft/unmapped/C_rxrtfjrt;
+		FIELD f_wxwlkzzz noiseData Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;)V
+			ARG 1 noiseData
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rxrtfjrt;)V
+			ARG 1 noiseData
+			ARG 2 noise
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_byyxqkiw noise ()Lnet/minecraft/unmapped/C_rxrtfjrt;
+		METHOD m_cfmoddog noiseData ()Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD m_chveaqmm (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_kzwapyud$C_jnszknql;
+			ARG 0 noiseData
+		METHOD m_cnnuqxta getValue (DDD)D
+			ARG 1 x
+			ARG 3 y
+			ARG 5 z
+		METHOD m_ddevyukk getMaxValue ()D
 	CLASS C_pjhchjte SinglePointContext
 		FIELD f_eftyxnne blockX I
 		FIELD f_enkxvvqh blockZ I
@@ -44,3 +66,7 @@ CLASS net/minecraft/unmapped/C_kzwapyud net/minecraft/world/gen/DensityFunction
 			ARG 1 array
 			ARG 2 density
 	CLASS C_zdlfgpyk Visitor
+		METHOD apply apply (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+			ARG 1 function
+		METHOD m_ivzzknqa visitNoise (Lnet/minecraft/unmapped/C_kzwapyud$C_jnszknql;)Lnet/minecraft/unmapped/C_kzwapyud$C_jnszknql;
+			ARG 1 noiseHolder

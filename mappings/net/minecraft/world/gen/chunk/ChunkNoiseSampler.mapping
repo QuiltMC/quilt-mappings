@@ -35,17 +35,20 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 	FIELD f_xflyvvkc preliminarySurfaceLevel Lit/unimi/dsi/fastutil/longs/Long2IntMap;
 	FIELD f_xsdqyyrr arrayIndex I
 	FIELD f_ycdqwwen firstNoiseZ I
-	METHOD <init> (ILnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_fpiyqmft;IILnet/minecraft/unmapped/C_mdkmcezi$C_dsnmcorv;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_coqzjjrt;Lnet/minecraft/unmapped/C_coqzjjrt;)V
+	METHOD <init> (ILnet/minecraft/unmapped/C_edfiqifk;IILnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_mdkmcezi$C_dsnmcorv;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)V
 		ARG 1 horizontalSize
-		ARG 2 heightLimitView
-		ARG 3 router
-		ARG 4 x
-		ARG 5 z
+		ARG 2 randomState
+		ARG 3 x
+		ARG 4 z
+		ARG 5 generationShapeConfig
 		ARG 6 structureWeightSampler
 		ARG 7 chunkGeneratorSettings
+		ARG 8 aquiferFluidPicker
 		ARG 9 blender
 	METHOD m_bfhxedds create (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_mdkmcezi$C_dsnmcorv;Lnet/minecraft/unmapped/C_lwpfhits;Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;Lnet/minecraft/unmapped/C_pfqozslu;)Lnet/minecraft/unmapped/C_rvjywqnu;
 		ARG 0 chunk
+		ARG 1 randomState
+		ARG 2 structureWeightSampler
 		ARG 3 settings
 		ARG 4 aquiferFluidPicker
 		ARG 5 blender
@@ -65,10 +68,12 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 		ARG 2 deltaX
 	METHOD m_kpsxdmhr swapBuffers ()V
 	METHOD m_lxfwjrvk stopInterpolation ()V
+	METHOD m_nppeugtb getCellWidth ()I
 	METHOD m_nqipgozp sampleEndNoise (I)V
 		ARG 1 x
 	METHOD m_nqqcrsfw sampleNoiseY (ID)V
 		ARG 2 deltaY
+	METHOD m_ohdfpbxl getCellHeight ()I
 	METHOD m_pqgmcdgo sampleNoiseZ (ID)V
 		ARG 2 deltaZ
 	METHOD m_pxlayuiw getWrappedFunction (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
@@ -76,6 +81,8 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 	METHOD m_qusmmqcn (DLnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
 		ARG 2 interpolator
 	METHOD m_rfsfjiny getAquiferSampler ()Lnet/minecraft/unmapped/C_jpghdzxc;
+	METHOD m_saizjwqg (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud$C_rbrbrmhy;)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 2 context
 	METHOD m_sbkkjxgb (DLnet/minecraft/unmapped/C_rvjywqnu$C_fzdxentu;)V
 		ARG 2 interpolator
 	METHOD m_vjyupqdl getPreliminarySurfaceLevel (II)I
@@ -90,6 +97,7 @@ CLASS net/minecraft/unmapped/C_rvjywqnu net/minecraft/world/gen/chunk/ChunkNoise
 		ARG 1 function
 	METHOD m_yymcddlc createMultiNoiseSampler (Lnet/minecraft/unmapped/C_fpiyqmft;Ljava/util/List;)Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;
 		ARG 1 noiseRouter
+		ARG 2 spawnTarget
 	CLASS C_ajscwoop BlockStateSampler
 		METHOD calculate calculate (Lnet/minecraft/unmapped/C_kzwapyud$C_rbrbrmhy;)Lnet/minecraft/unmapped/C_txtbiemp;
 			ARG 1 context

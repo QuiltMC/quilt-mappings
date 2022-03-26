@@ -13,11 +13,6 @@ CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRoute
 	METHOD m_dwhlqlwh getNoise (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv;
 		ARG 0 key
 	METHOD m_eaewznor createEnd ()Lnet/minecraft/unmapped/C_fpiyqmft;
-	METHOD m_eaqwqgkd createNoiseRouter (Lnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_fpiyqmft;Lnet/minecraft/unmapped/C_ybniprpd;)Lnet/minecraft/unmapped/C_fpiyqmft;
-		ARG 0 config
-		ARG 1 noiseRegistry
-		ARG 2 router
-		ARG 3 legacySupportRandom
 	METHOD m_evbfpbex (Lnet/minecraft/unmapped/C_kryzafwp$C_izmcyjmd;)I
 		ARG 0 type
 	METHOD m_eweubntl registerTerrainNoises (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_xhhleach;Z)V
@@ -30,6 +25,7 @@ CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRoute
 		ARG 6 depthKey
 		ARG 7 slopedCheeseKey
 		ARG 8 amplified
+	METHOD m_fjpurmdj slideEndLike (Lnet/minecraft/unmapped/C_kzwapyud;II)Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_gkzjvtdp yLimitedInterpolatable (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;III)Lnet/minecraft/unmapped/C_kzwapyud;
 		ARG 0 input
 		ARG 1 whenInRange
@@ -55,6 +51,7 @@ CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRoute
 	METHOD m_pkjtpogk registerAndWrap (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
 		ARG 0 key
 		ARG 1 function
+	METHOD m_psfarald slideNetherLike (II)Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_qrbzdxqj createNether ()Lnet/minecraft/unmapped/C_fpiyqmft;
 	METHOD m_qykodgjz noiseGradientDensity (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_rdevfboq (Lnet/minecraft/unmapped/C_kryzafwp$C_izmcyjmd;)I
@@ -63,26 +60,14 @@ CLASS net/minecraft/unmapped/C_ronqvany net/minecraft/world/gen/noise/NoiseRoute
 		ARG 0 key
 	METHOD m_rssemtmy createKey (Ljava/lang/String;)Lnet/minecraft/unmapped/C_xhhleach;
 		ARG 0 id
-	METHOD m_udwriwdx computePreliminarySurfaceScanning (Lnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_kzwapyud;II)D
-	METHOD m_uhvxossd overworld (Lnet/minecraft/unmapped/C_ulvgadxi;ZZ)Lnet/minecraft/unmapped/C_fpiyqmft;
-		ARG 0 shapeConfig
-		ARG 1 largeBiomes
-		ARG 2 amplified
-	METHOD m_uiozfuzd applySlide (Lnet/minecraft/unmapped/C_ulvgadxi;DD)D
-		ARG 0 settings
+	METHOD m_sirtdbjl slideOverworld (ZLnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
+		ARG 0 largeBiomes
+	METHOD m_ukeuyaqw slideEnd (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_vinarvin splineWithBlending (Lnet/minecraft/unmapped/C_kzwapyud;Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_wkklxnko pillars ()Lnet/minecraft/unmapped/C_kzwapyud;
 	METHOD m_ybgzbrlt bootstrap ()Lnet/minecraft/unmapped/C_cjzoxshv;
-	METHOD m_zaglzone floatingIslands (Lnet/minecraft/unmapped/C_ulvgadxi;)Lnet/minecraft/unmapped/C_fpiyqmft;
-		ARG 0 generationShapeConfig
-	METHOD m_zifycqqm caves (Lnet/minecraft/unmapped/C_ulvgadxi;)Lnet/minecraft/unmapped/C_fpiyqmft;
-		ARG 0 generationShapeConfig
-	CLASS C_wsshxznv NoiseWiringHelper
-		FIELD f_znhgrabk wrapped Ljava/util/Map;
-		METHOD apply apply (Ljava/lang/Object;)Ljava/lang/Object;
-			ARG 1 function
-		METHOD m_vjpneffy wrap (Lnet/minecraft/unmapped/C_kzwapyud;)Lnet/minecraft/unmapped/C_kzwapyud;
-			ARG 1 function
+	METHOD m_zaglzone createFloatingIslands ()Lnet/minecraft/unmapped/C_fpiyqmft;
+	METHOD m_zifycqqm createCaves ()Lnet/minecraft/unmapped/C_fpiyqmft;
 	CLASS C_yzherlpl QuantizedSpaghettiRarity
 		METHOD m_iniekgif getSpaghettiRarity3D (D)D
 			ARG 0 rarity

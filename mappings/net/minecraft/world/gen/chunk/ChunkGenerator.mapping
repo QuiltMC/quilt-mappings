@@ -36,6 +36,7 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 x
 		ARG 2 z
 		ARG 3 world
+		ARG 4 randomState
 	METHOD m_evqkkueh populateNoise (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Generates the base shape of the chunk out of the basic block states as decided by this chunk generator's config.
 		ARG 1 executor
@@ -47,12 +48,15 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
+		ARG 5 randomState
 	METHOD m_ffmeoonw generateFeatures (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;)V
 		ARG 1 world
 		ARG 2 chunk
 	METHOD m_gobnuobv getStructureReferences (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_quklzgtb;)I
 		ARG 1 chunk
 		ARG 2 sectionPos
+	METHOD m_hfetlfug (Ljava/util/List;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 2 randomState
 	METHOD m_jbuktzxf getHeightOnGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		ARG 1 x
 		ARG 2 z
@@ -61,7 +65,9 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_jkzsezwm populateBiomes (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 biomeRegistry
 		ARG 2 executor
+		ARG 3 randomState
 		ARG 4 blender
+		ARG 5 structureManager
 		ARG 6 chunk
 	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
 		ARG 3 group
@@ -93,6 +99,8 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_woetbmqo buildSurface (Lnet/minecraft/unmapped/C_ezymcfey;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 		COMMENT Places the surface blocks of the biomes after the noise has been generated.
 		ARG 1 region
+		ARG 2 structureManager
+		ARG 3 randomState
 		ARG 4 chunk
 	METHOD m_wzarohnq getCodecKey ()Ljava/util/Optional;
 	METHOD m_xoblypwv populateEntities (Lnet/minecraft/unmapped/C_ezymcfey;)V
