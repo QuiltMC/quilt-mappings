@@ -1,37 +1,66 @@
 CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 	FIELD f_behrbwkd scoreboard Lnet/minecraft/unmapped/C_ymwyplge;
+	FIELD f_cuktzbkx NORMAL_LIGHT_UPDATES_PER_FRAME I
+	FIELD f_fcmyqkjf MARKER_PARTICLE_ITEMS Ljava/util/Set;
+	FIELD f_fzkgfjky LIGHT_UPDATE_QUEUE_SIZE_THRESHOLD I
 	FIELD f_hmoyeysf colorCache Lit/unimi/dsi/fastutil/objects/Object2ObjectArrayMap;
 	FIELD f_hxjcfoiw players Ljava/util/List;
 	FIELD f_iwrrfcmo lightningTicksLeft I
 	FIELD f_jddlzroz clientWorldProperties Lnet/minecraft/unmapped/C_ghdnlrrw$C_nwouoiiq;
 	FIELD f_jjipfgoy netHandler Lnet/minecraft/unmapped/C_nuofrxvi;
 	FIELD f_nmavfaky skyProperties Lnet/minecraft/unmapped/C_bxlqmlyr;
+	FIELD f_nuueemoe lightUpdateQueue Ljava/util/Deque;
 	FIELD f_qfyujzsr client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_rjdbtzbv chunkManager Lnet/minecraft/unmapped/C_rxbefbuv;
+	FIELD f_thzurjgh simulationDistance I
 	FIELD f_viuufxgz PARTICLE_Y_OFFSET D
 		COMMENT A minor offset applied when spawning particles.
+	FIELD f_vjffukyr CLOUD_COLOR J
 	FIELD f_vketyvfj mapStates Ljava/util/Map;
 	FIELD f_vwrlovng entityManager Lnet/minecraft/unmapped/C_xuynuyjo;
 	FIELD f_wzsnmiyr entityList Lnet/minecraft/unmapped/C_rtdymhtu;
 	FIELD f_xsrdqdyy worldRenderer Lnet/minecraft/unmapped/C_sfkkabhx;
+	METHOD <init> (Lnet/minecraft/unmapped/C_nuofrxvi;Lnet/minecraft/unmapped/C_ghdnlrrw$C_nwouoiiq;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_cjzoxshv;IILjava/util/function/Supplier;Lnet/minecraft/unmapped/C_sfkkabhx;ZJ)V
+		ARG 1 netHandler
+		ARG 2 clientWorldProperties
+		ARG 3 registryKey
+		ARG 4 dimensionType
+		ARG 5 chunkManager
+		ARG 6 simulationDistance
+		ARG 7 profiler
+		ARG 8 worldRenderer
+		ARG 9 debugWorld
+		ARG 10 seed
 	METHOD m_aggcbwxt setTime (J)V
 		ARG 1 time
+	METHOD m_alvumyoa getSkyColor (Lnet/minecraft/unmapped/C_vgpupfxx;F)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 cameraPosition
+		ARG 2 tickDelta
+	METHOD m_bmqpmbrd (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		ARG 1 pos
 	METHOD m_btpmymzu getSkyProperties ()Lnet/minecraft/unmapped/C_bxlqmlyr;
 	METHOD m_cdizatbl addEntity (ILnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 id
 		ARG 2 entity
+	METHOD m_ciclaowm isLightUpdateQueueEmpty ()Z
 	METHOD m_ckmpyiha getRegularEntityCount ()I
 	METHOD m_cmotnzls removeEntity (ILnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
 		ARG 1 entityId
 		ARG 2 removalReason
 	METHOD m_fbbmqzbb tickEntities ()V
 	METHOD m_fjiizmmf getSpawnPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_fsnivgsu (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		ARG 1 pos
+	METHOD m_futjdoxn getStarBrightness (F)F
+		ARG 1 tickDelta
 	METHOD m_giiosqzp getEntities ()Ljava/lang/Iterable;
 	METHOD m_gnwqzacx addParticle (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_zscvhwbd;D)V
 		ARG 1 pos
 		ARG 2 parameters
 		ARG 3 shape
 		ARG 4 y
+	METHOD m_hirkzvtd (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		ARG 1 pos
 	METHOD m_hoqetuzo putMapStates (Ljava/util/Map;)V
 		ARG 1 mapStates
 	METHOD m_hxaplopj unloadBlockEntities (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
@@ -41,6 +70,12 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 	METHOD m_jijellmt setSpawnPos (Lnet/minecraft/unmapped/C_hynzadkk;F)V
 		ARG 1 pos
 		ARG 2 angle
+	METHOD m_jipfbqfw queueLightUpdate (Ljava/lang/Runnable;)V
+		ARG 1 lightUpdate
+	METHOD m_jpwsagkx (Lnet/minecraft/unmapped/C_txmmiamu;III)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
 	METHOD m_kgjixdvu playSound (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FFZ)V
 		ARG 1 pos
 		ARG 2 sound
@@ -52,8 +87,19 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 		ARG 1 centerX
 		ARG 2 centerY
 		ARG 3 centerZ
+	METHOD m_knadkphx runQueuedLightUpdates ()V
+	METHOD m_kokxxpdc setSimulationDistance (I)V
+		ARG 1 simulationDistance
 	METHOD m_kutvaluc tickTime ()V
+	METHOD m_ofmlapxi (Lit/unimi/dsi/fastutil/objects/Object2ObjectArrayMap;)V
+		ARG 1 map
+	METHOD m_oinafdjj (II)V
+		ARG 1 x
+		ARG 2 z
 	METHOD m_ondfgyqt getMapStates ()Ljava/util/Map;
+	METHOD m_phlrcjyk getSkyDarken (F)F
+		ARG 1 tickDelta
+	METHOD m_pncjbhyv getMarkerParticleTarget ()Lnet/minecraft/unmapped/C_mmxmpdoq;
 	METHOD m_pvimnyov addParticle (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_nqucohct;Z)V
 		ARG 1 pos
 		ARG 2 state
@@ -70,11 +116,13 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 		ARG 3 centerZ
 		ARG 4 radius
 		ARG 5 random
+		ARG 6 block
 		ARG 7 pos
 	METHOD m_svjzxinu tick (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
 	METHOD m_tafkdnvg getCloudsColor (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 tickDelta
+	METHOD m_trjjwams getSimulationDistance ()I
 	METHOD m_uanzgghj addParticle (DDDDDLnet/minecraft/unmapped/C_nqucohct;)V
 		ARG 1 minX
 		ARG 3 maxX
@@ -100,6 +148,8 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 	METHOD m_yywouerb setScoreboard (Lnet/minecraft/unmapped/C_ymwyplge;)V
 		ARG 1 scoreboard
 	METHOD m_zomikpqg getSpawnAngle ()F
+	METHOD m_zpusyvft (Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;Lnet/minecraft/unmapped/C_uukjsnep;)V
+		ARG 2 particleConfig
 	CLASS C_nwouoiiq Properties
 		FIELD f_abonbtjj raining Z
 		FIELD f_bvdbfgjv spawnZ I

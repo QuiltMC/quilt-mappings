@@ -70,3 +70,5 @@
  */
 
 package net.minecraft.resource;
+
+import net.minecraft.resource.pack.*;
