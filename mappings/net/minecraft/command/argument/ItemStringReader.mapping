@@ -4,11 +4,27 @@ CLASS net/minecraft/unmapped/C_aggscjva net/minecraft/command/argument/ItemStrin
 	FIELD f_hxfugzgd NBT_SUGGESTION_PROVIDER Ljava/util/function/Function;
 	FIELD f_mtuhuqda TAG_DISALLOWED_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_nhjeovde LEFT_CURLY_BRACKET C
+	FIELD f_qmjmakhc items Lnet/minecraft/unmapped/C_vtbxyypo;
+	FIELD f_tdveyqwj result Lcom/mojang/datafixers/util/Either;
 	FIELD f_uvxmhrao nbt Lnet/minecraft/unmapped/C_hhlwcnih;
+	FIELD f_uyesugtr UNKNOWN_TAG_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_vcqhzezg reader Lcom/mojang/brigadier/StringReader;
+	FIELD f_vsudypqk allowTags Z
 	FIELD f_wmpcwecy HASH_SIGN C
+	METHOD <init> (Lnet/minecraft/unmapped/C_vtbxyypo;Lcom/mojang/brigadier/StringReader;Z)V
+		ARG 1 items
+		ARG 2 reader
+		ARG 3 allowTags
 	METHOD m_cmbjfufc suggestTag (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 builder
+	METHOD m_ffzklorr (Lnet/minecraft/unmapped/C_aggscjva;Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_aggscjva$C_rktfpfda;
+		ARG 1 item
+	METHOD m_jgvdgnci parseForTesting (Lnet/minecraft/unmapped/C_vtbxyypo;Lcom/mojang/brigadier/StringReader;)Lcom/mojang/datafixers/util/Either;
+		ARG 0 items
+		ARG 1 reader
+	METHOD m_koanxfku parseForItem (Lnet/minecraft/unmapped/C_vtbxyypo;Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_aggscjva$C_rktfpfda;
+		ARG 0 items
+		ARG 1 reader
 	METHOD m_lgepeugi suggestItem (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 builder
 	METHOD m_lryorlry readItem ()V
@@ -16,8 +32,32 @@ CLASS net/minecraft/unmapped/C_aggscjva net/minecraft/command/argument/ItemStrin
 		ARG 0 id
 	METHOD m_roenujng readNbt ()V
 	METHOD m_seifydji getSuggestions (Lnet/minecraft/unmapped/C_vtbxyypo;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 items
 		ARG 1 builder
+		ARG 2 allowTags
 	METHOD m_vltzzlbs suggestAny (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 builder
+	METHOD m_vnduoitn suggestItems (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 builder
 	METHOD m_xboesavj consume ()V
 	METHOD m_ygxjfoak readTag ()V
+	CLASS C_rktfpfda ItemResult
+		FIELD f_kifdjwlo nbt Lnet/minecraft/unmapped/C_hhlwcnih;
+		FIELD f_vwmvrpsk item Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 item
+			ARG 2 nbt
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_feznkgdg item ()Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD m_jbbwatuv nbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
+	CLASS C_xiputnku TagResult
+		FIELD f_hrnacnya nbt Lnet/minecraft/unmapped/C_hhlwcnih;
+		FIELD f_skujkwpf tag Lnet/minecraft/unmapped/C_odfnijdo;
+		METHOD <init> (Lnet/minecraft/unmapped/C_odfnijdo;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 tag
+			ARG 2 nbt
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_ftuxfhnd tag ()Lnet/minecraft/unmapped/C_odfnijdo;
+		METHOD m_wiybosqa nbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
