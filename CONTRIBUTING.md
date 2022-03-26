@@ -46,6 +46,9 @@ releases and snapshots, with the former having longer review times and aiming fo
 Everything within this section is the definitions for the actual PR policy followed by the Mappings team, in accordance
 with [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md)
 
+To avoid conflicts and make the process faster, the FCP may be ended early when a new Minecraft version is released and
+QM is updated.
+
 ### `T: new mappings`
 
 **Description**: Used for pull requests that focus mainly on adding new mappings.
