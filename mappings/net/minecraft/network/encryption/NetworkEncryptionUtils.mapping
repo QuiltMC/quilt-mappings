@@ -1,9 +1,16 @@
 CLASS net/minecraft/unmapped/C_mgrgevhd net/minecraft/network/encryption/NetworkEncryptionUtils
+	FIELD f_dxeyvkhd SYMMETRIC_ALGORITHM Ljava/lang/String;
+	FIELD f_fgftihvv SYMMETRIC_BITS I
+	FIELD f_qpxngoxu HASH_ALGORITHM Ljava/lang/String;
+	FIELD f_vioyxcpe BYTE_ENCODING Ljava/lang/String;
+	FIELD f_xdivgily ASYMMETRIC_ALGORITHM Ljava/lang/String;
+	FIELD f_yvmvdgcc ASYMMETRIC_BITS I
 	METHOD m_eezxcrdq generateServerKeyPair ()Ljava/security/KeyPair;
 	METHOD m_fkkgwpuy cipherFromKey (ILjava/security/Key;)Ljavax/crypto/Cipher;
 		ARG 0 opMode
 		ARG 1 key
 	METHOD m_gbrlcsng hash ([[B)[B
+		ARG 0 bytes
 	METHOD m_gpvfwbnr crypt (ILjava/lang/String;Ljava/security/Key;)Ljavax/crypto/Cipher;
 		ARG 0 opMode
 		ARG 1 algorithm
@@ -27,3 +34,4 @@ CLASS net/minecraft/unmapped/C_mgrgevhd net/minecraft/network/encryption/Network
 		ARG 0 key
 		ARG 1 data
 	METHOD m_ypsrdyom readEncodedPublicKey ([B)Ljava/security/PublicKey;
+		ARG 0 bytes
