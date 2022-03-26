@@ -16,6 +16,8 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 	FIELD f_uaekbwbg RELATIVE_X_SHIFT I
 	FIELD f_ykeryhkq SECTION_SIZE I
 	FIELD f_zopreimk PACKED_X_LENGTH I
+	METHOD m_atwoyxdz getBlockSectionCoord (D)I
+		ARG 0 coord
 	METHOD m_ayjgiuwf getSectionZ ()I
 	METHOD m_behpcyaa from (Lnet/minecraft/unmapped/C_ynrszrtu;I)Lnet/minecraft/unmapped/C_zubvmeye;
 		COMMENT Creates a chunk section position from a chunk position and the y-coordinate of the vertical section.
@@ -47,6 +49,8 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 	METHOD m_epaqvcki getMinPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_eqoatwik getSectionCoord (D)I
 		ARG 0 coord
+	METHOD m_evmyvguv from (Lnet/minecraft/unmapped/C_sncvekqg;)Lnet/minecraft/unmapped/C_zubvmeye;
+		ARG 0 entity
 	METHOD m_fayhmctf asLong ()J
 	METHOD m_fffengfv unpackLocalY (S)I
 		COMMENT Gets the local y-coordinate from the given packed local position.
@@ -62,6 +66,11 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 	METHOD m_guwqxjof stream (Lnet/minecraft/unmapped/C_zubvmeye;I)Ljava/util/stream/Stream;
 		ARG 0 center
 		ARG 1 radius
+	METHOD m_hodqxlhm getSectionCoord (I)I
+		COMMENT Converts a world coordinate to the corresponding chunk-section coordinate.
+		COMMENT
+		COMMENT @implNote This implementation returns {@code coord >> 4}.
+		ARG 0 coord
 	METHOD m_hsdtylou toChunkPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 	METHOD m_icvqgcye offset (JIII)J
 		COMMENT Offsets a packed chunk section position by the given offsets.
@@ -78,8 +87,6 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 	METHOD m_jihwywxb forEachSectionAround (JLit/unimi/dsi/fastutil/longs/LongConsumer;)V
 		ARG 0 blockPos
 		ARG 2 consumer
-	METHOD m_kadfilnt from (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_zubvmeye;
-		ARG 0 entity
 	METHOD m_kysdlczn getBlockCoord (I)I
 		COMMENT Converts the given chunk section coordinate to the world coordinate system.
 		COMMENT The returned coordinate will always be at the origin of the chunk section in world space.
@@ -102,17 +109,14 @@ CLASS net/minecraft/unmapped/C_zubvmeye net/minecraft/util/math/ChunkSectionPos
 		COMMENT Gets the local z-coordinate from the given packed local position.
 		COMMENT @see #packLocal
 		ARG 0 packedLocalPos
-	METHOD m_pbjcrthj getSectionCoord (I)I
-		COMMENT Converts a world coordinate to the corresponding chunk-section coordinate.
-		COMMENT
-		COMMENT @implNote This implementation returns {@code coord / 16}.
-		ARG 0 coord
 	METHOD m_pqrvhujc toLong (Lnet/minecraft/unmapped/C_hynzadkk;)J
 		ARG 0 pos
 	METHOD m_qsobicuc from (J)Lnet/minecraft/unmapped/C_zubvmeye;
 		COMMENT Creates a chunk section position from its packed representation.
 		COMMENT @see #asLong
 		ARG 0 packed
+	METHOD m_ramiwwjc from (Lnet/minecraft/unmapped/C_ogbhoqwb;)Lnet/minecraft/unmapped/C_zubvmeye;
+		ARG 0 pos
 	METHOD m_rfzysagn unpackY (J)I
 		COMMENT Gets the chunk section y-coordinate from the given packed chunk section coordinate.
 		COMMENT @see #asLong
