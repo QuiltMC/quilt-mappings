@@ -25,6 +25,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	FIELD f_pdtvjcrk DIRECT_GLINT Lnet/minecraft/unmapped/C_tizlwnnv;
 	FIELD f_pjmzjvqo ENTITY_TRANSLUCENT_CULL Ljava/util/function/Function;
 	FIELD f_ravpjrir SOLID_BUFFER_SIZE I
+	FIELD f_raykxjlp ENTITY_TRANSLUCENT_EMISSIVE Ljava/util/function/BiFunction;
 	FIELD f_rsckelaz ENTITY_SHADOW Ljava/util/function/Function;
 	FIELD f_tcehiawj ENTITY_SMOOTH_CUTOUT Ljava/util/function/Function;
 	FIELD f_vomsagsw ENTITY_CUTOUT_NO_CULL_Z_OFFSET Ljava/util/function/BiFunction;
@@ -62,6 +63,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		ARG 0 texture
 	METHOD m_cvypuzhr (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+		ARG 1 affectsOutline
 	METHOD m_czsaqgmb (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_dhsztxnu getEntityTranslucent (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -84,6 +86,8 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_fdssmrcg (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_frpzifgs getDirectGlint ()Lnet/minecraft/unmapped/C_tizlwnnv;
+	METHOD m_fxbluinj getEntityTranslucentEmissive (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
+		ARG 0 texture
 	METHOD m_ggmyrrtc getTextIntensitySeeThrough (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_gmswhtfe getTripwirePhaseData ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
@@ -148,6 +152,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		ARG 0 texture
 	METHOD m_rrhgkutf (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+		ARG 1 affectsOutline
 	METHOD m_rvenkyyo getTextPolygonOffset (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_sjwcihft getBeaconBeam (Lnet/minecraft/unmapped/C_ncpywfca;Z)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -189,6 +194,9 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_xhxmgsuq getItemEntityTranslucentCull (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_xmhnzmof getCutout ()Lnet/minecraft/unmapped/C_tizlwnnv;
+	METHOD m_xniglxhn getEntityTranslucentEmissive (Lnet/minecraft/unmapped/C_ncpywfca;Z)Lnet/minecraft/unmapped/C_tizlwnnv;
+		ARG 0 texture
+		ARG 1 affectsOutline
 	METHOD m_xoxzykme getEntityCutoutNoCull (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_xwmgnbtp getTextSeeThrough (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
