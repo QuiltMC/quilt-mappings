@@ -6,13 +6,12 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 	FIELD f_jqokexui idOpposite I
 	FIELD f_midvwggr VALUES [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_nogydkkd VECTOR_TO_DIRECTION Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
-	FIELD f_nxxmoaxm NAME_MAP Ljava/util/Map;
 	FIELD f_qmkvdeuo direction Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;
 	FIELD f_wytgjiez idHorizontal I
 	FIELD f_xneestkm ALL [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_xnopevsr id I
 	FIELD f_yxdvzmgt vector Lnet/minecraft/unmapped/C_ceivtqhh;
-	FIELD f_zbhygcbw CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_zbhygcbw CODEC Lnet/minecraft/unmapped/C_lgkqzafw$C_nxwenkbc;
 	METHOD <init> (Ljava/lang/String;IIIILjava/lang/String;Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;Lnet/minecraft/unmapped/C_ceivtqhh;)V
 		ARG 3 id
 		ARG 4 idOpposite
@@ -50,13 +49,8 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		ARG 1 y
 		ARG 2 z
 	METHOD m_lxrgvhbm getOffsetY ()I
-	METHOD m_merhikkx (Lnet/minecraft/unmapped/C_xpuuihxf;)I
+	METHOD m_mjymxzbd (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 direction
-	METHOD m_mjymxzbd (Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
-		ARG 0 direction
-	METHOD m_mtbghuyk (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
-		ARG 0 direction1
-		ARG 1 direction2
 	METHOD m_nyqvqnqv transform (Lnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 matrix
 		ARG 1 direction
@@ -69,10 +63,10 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		ARG 0 first
 		ARG 1 second
 		ARG 2 third
-	METHOD m_pgdxriyi (Lnet/minecraft/unmapped/C_xpuuihxf;)Ljava/lang/Long;
+	METHOD m_pgdxriyi (Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 direction
 	METHOD m_qkgkwquv rotateZCounterclockwise ()Lnet/minecraft/unmapped/C_xpuuihxf;
-	METHOD m_qmmcdijv (Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
+	METHOD m_qmmcdijv (Lnet/minecraft/unmapped/C_xpuuihxf;)I
 		ARG 0 direction
 	METHOD m_qnbvkhac getLookDirectionForAxis (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 entity
@@ -96,10 +90,8 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		COMMENT
 		COMMENT <p>This always returns {@code false} for vertical directions.
 		ARG 1 yaw
-	METHOD m_vkdqfatl (Lnet/minecraft/unmapped/C_xpuuihxf;)I
-		ARG 0 direction
 	METHOD m_vyhskrab getOffsetZ ()I
-	METHOD m_wstyzrap (Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+	METHOD m_wstyzrap (Lnet/minecraft/unmapped/C_xpuuihxf;)I
 		ARG 0 direction
 	METHOD m_xwgdebbi getRotationQuaternion ()Lnet/minecraft/unmapped/C_rvxttsxe;
 	METHOD m_ydwhfihm rotateClockwise (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf;
@@ -124,10 +116,9 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		METHOD m_kszuosmd getOpposite ()Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;
 		METHOD m_tgamfeqr offset ()I
 	CLASS C_rmpfouoz Axis
-		FIELD f_fpqfqffn CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_fpqfqffn CODEC Lnet/minecraft/unmapped/C_lgkqzafw$C_nxwenkbc;
 		FIELD f_peolenrj name Ljava/lang/String;
 		FIELD f_qzffmhel VALUES [Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
-		FIELD f_woobkgrp BY_NAME Ljava/util/Map;
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
 			ARG 3 name
 		METHOD m_avmpldsj choose (DDD)D
@@ -137,8 +128,6 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		METHOD m_hfqxfgee fromName (Ljava/lang/String;)Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
 			ARG 0 name
 		METHOD m_jwnubmio isVertical ()Z
-		METHOD m_ntbnhpbm (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
-			ARG 0 axis
 		METHOD m_qewftacv getName ()Ljava/lang/String;
 		METHOD m_vfobospg choose (III)I
 			ARG 1 x
