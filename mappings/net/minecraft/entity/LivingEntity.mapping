@@ -2,7 +2,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	COMMENT Represents an entity which has a health value and can receive damage.
 	FIELD f_asrrjfdz attributes Lnet/minecraft/unmapped/C_cohbwqne;
 	FIELD f_atqwrmrh lastDamageTaken F
-	FIELD f_avsswxpi FREE_FALL_TICKS_PER_ELYTRA_DAMAGE I
+	FIELD f_avsswxpi ELYTRA_DAMAGE_PER_FREE_FALL_TICKS I
 	FIELD f_azizbgcr SOUL_SPEED_BOOST_ID Ljava/util/UUID;
 	FIELD f_bklsspnh lastLimbDistance F
 	FIELD f_bwbjmspv DAMAGE_SOURCE_TIMEOUT I
@@ -51,6 +51,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_mcoacjpn SWING_DURATION I
 	FIELD f_mcoihohf itemUseTimeLeft I
 	FIELD f_mfltnpor effectsChanged Z
+	FIELD f_mikwhxdg skipExperienceDrop Z
 	FIELD f_mlsykvgi absorptionAmount F
 	FIELD f_naybbqec ITEM_USE_INTERVAL I
 	FIELD f_noitvgvb LARGE_HAT_RENDER_CULLING_SIZE F
@@ -205,6 +206,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_epkzhkqg deserializeBrain (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_rjqjaxef;
 		ARG 1 dynamic
 	METHOD m_exbsyzzv markEffectsDirty ()V
+	METHOD m_exhdcppw getSkipExperienceDrop ()Z
 	METHOD m_eydqxqbv getRecentDamageSource ()Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_eyfojjsq canHaveStatusEffect (Lnet/minecraft/unmapped/C_wpfizwve;)Z
 		ARG 1 effect
@@ -305,6 +307,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 effect
 	METHOD m_jhvcxqlb canEquip (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
+	METHOD m_jjznttvl skipExperienceDrop ()V
 	METHOD m_jrnbkpuc spawnConsumptionEffects (Lnet/minecraft/unmapped/C_sddaxwyk;I)V
 		ARG 1 stack
 		ARG 2 particleCount
@@ -327,6 +330,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 tag
 	METHOD m_lagxpcmk onStatusEffectRemoved (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 effect
+	METHOD m_ldeqpsrz canDisableShield ()Z
 	METHOD m_lgbjnvrh applyMovementEffects (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	METHOD m_lhliifdm getArmor ()I
