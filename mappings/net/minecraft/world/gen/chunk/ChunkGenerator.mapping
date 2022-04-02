@@ -6,9 +6,12 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		COMMENT Used to control the population step without replacing the actual biome that comes from the original {@link #biomeSource}.
 		COMMENT
 		COMMENT <p>This is used by {@link FlatChunkGenerator} to overwrite biome properties like whether lakes generate, while preserving the original biome ID.
+	FIELD f_auwpxwhw hasGeneratedPositions Z
 	FIELD f_drzpxatw biomeSource Lnet/minecraft/unmapped/C_ajguowya;
+	FIELD f_duzufgyq structurePlacements Ljava/util/Map;
 	FIELD f_eqichmxi structureSetRegistry Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_gtbeeirb LOGGER Lorg/slf4j/Logger;
+	FIELD f_jihordee ringPositions Ljava/util/Map;
 	FIELD f_vzeswpuk CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_yqqqfvcy structureOverrides Ljava/util/Optional;
 	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/Optional;Lnet/minecraft/unmapped/C_ajguowya;)V
@@ -36,10 +39,16 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 2 z
 		ARG 3 world
 		ARG 4 randomState
+	METHOD m_dxqctoom generateRingPositions (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_pwqsutzz;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 structureSet
+		ARG 2 randomState
+		ARG 3 placement
 	METHOD m_evqkkueh populateNoise (Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Generates the base shape of the chunk out of the basic block states as decided by this chunk generator's config.
 		ARG 1 executor
 		ARG 2 blender
+		ARG 3 randomState
+		ARG 4 structureManager
 		ARG 5 chunk
 	METHOD m_eyzuuexw getHeight (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		COMMENT Returns the raw noise height of a column for use in structure generation.
@@ -51,16 +60,23 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_ffmeoonw generateFeatures (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;)V
 		ARG 1 world
 		ARG 2 chunk
+	METHOD m_girnrekg generatePositions (Lnet/minecraft/unmapped/C_edfiqifk;)V
+		ARG 1 randomState
 	METHOD m_gobnuobv getStructureReferences (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_quklzgtb;)I
+		ARG 0 structureManager
 		ARG 1 chunk
 		ARG 2 sectionPos
-	METHOD m_hfetlfug (Ljava/util/List;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 3 structure
+	METHOD m_hfetlfug addDebugHudInfo (Ljava/util/List;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 1 info
 		ARG 2 randomState
+		ARG 3 pos
 	METHOD m_jbuktzxf getHeightOnGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		ARG 1 x
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
+		ARG 5 randomState
 	METHOD m_jkzsezwm populateBiomes (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 biomeRegistry
 		ARG 2 executor
@@ -68,6 +84,13 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 4 blender
 		ARG 5 structureManager
 		ARG 6 chunk
+	METHOD m_jnrbhhio locateStructure (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_odfnijdo;Lnet/minecraft/unmapped/C_hynzadkk;IZ)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 world
+		ARG 2 structures
+	METHOD m_mbleggmj generatePositionsIfNeeded (Lnet/minecraft/unmapped/C_edfiqifk;)V
+		ARG 1 randomState
+	METHOD m_mzmhnqwh (Lnet/minecraft/unmapped/C_cjzoxshv;)Ljava/util/stream/Stream;
+		ARG 0 structure
 	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
 		ARG 3 group
 		ARG 4 pos
@@ -77,14 +100,24 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		COMMENT Finds all structures that the given chunk intersects, and adds references to their starting chunks to it.
 		COMMENT A radius of 8 chunks around the given chunk will be searched for structure starts.
 		ARG 1 world
+		ARG 2 structureManager
 		ARG 3 chunk
 	METHOD m_ruxnirnc getWorldHeight ()I
+	METHOD m_szgdwhkg getPlacementRingPositions (Lnet/minecraft/unmapped/C_pwqsutzz;Lnet/minecraft/unmapped/C_edfiqifk;)Ljava/util/List;
+		ARG 1 placement
+		ARG 2 randomState
 	METHOD m_taborzul getSeaLevel ()I
+	METHOD m_tmoujqoo (Ljava/util/Set;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 3 structureSet
+	METHOD m_tuhxtkdi adjustBiome (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_cjzoxshv;
+		ARG 1 biome
 	METHOD m_ufytgbmf carve (Lnet/minecraft/unmapped/C_ezymcfey;JLnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_txmmiamu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rdrmebyw$C_smrpgmrn;)V
 		COMMENT Generates caves for the given chunk.
 		ARG 1 chunkRegion
 		ARG 2 seed
+		ARG 4 randomState
 		ARG 5 biomeAccess
+		ARG 6 structureManager
 		ARG 7 chunk
 		ARG 8 generationStep
 	METHOD m_vwuuyhwu (Lnet/minecraft/unmapped/C_kgfalbim;)Lnet/minecraft/unmapped/C_tqxyjqsk;
@@ -95,12 +128,16 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 2 z
 		ARG 3 heightmap
 		ARG 4 world
+		ARG 5 randomState
 	METHOD m_woetbmqo buildSurface (Lnet/minecraft/unmapped/C_ezymcfey;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 		COMMENT Places the surface blocks of the biomes after the noise has been generated.
 		ARG 1 region
 		ARG 2 structureManager
 		ARG 3 randomState
 		ARG 4 chunk
+	METHOD m_wozjtsiz getPlacementsForStructure (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_edfiqifk;)Ljava/util/List;
+		ARG 1 structure
+		ARG 2 randomState
 	METHOD m_wzarohnq getCodecKey ()Ljava/util/Optional;
 	METHOD m_xoblypwv populateEntities (Lnet/minecraft/unmapped/C_ezymcfey;)V
 		ARG 1 region
