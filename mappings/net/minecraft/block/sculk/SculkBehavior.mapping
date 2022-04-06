@@ -1,0 +1,107 @@
+CLASS net/minecraft/unmapped/C_eprlufrn net/minecraft/block/sculk/SculkBehavior
+	FIELD f_ehabkjla LOGGER Lorg/slf4j/Logger;
+	FIELD f_fozckfxo SHRIEKER_PLACEMENT_RATE I
+	FIELD f_gzgdwxbc additionalDecayRate I
+	FIELD f_jlcibacz MAX_CURSORS I
+	FIELD f_lxsuulcx noGrowthRadius I
+	FIELD f_mhblotep MAX_DECAY_FACTOR F
+	FIELD f_orqlitbn MAX_CHARGE I
+	FIELD f_tphhhdsw replaceableBlocks Lnet/minecraft/unmapped/C_ednuhnnn;
+	FIELD f_uhwdahqn MAX_SPREAD_RADIUS I
+	FIELD f_vhndakud cursors Ljava/util/List;
+	FIELD f_vjhoitlg growthSpawnCost I
+	FIELD f_zchdwcxf isWorldGen Z
+	FIELD f_zlhmnckc chargeDecayRate I
+	METHOD <init> (ZLnet/minecraft/unmapped/C_ednuhnnn;IIII)V
+		ARG 1 isWorldGen
+		ARG 2 replaceableBlocks
+		ARG 3 growthSpawnCost
+		ARG 4 noGrowthRadius
+		ARG 5 chargeDecayRate
+		ARG 6 additionalDecayRate
+	METHOD m_bcwomgdc getGrowthSpawnCost ()I
+	METHOD m_dzmfluxz clearCursors ()V
+	METHOD m_fokozgqm getChargeDecayRate ()I
+	METHOD m_gczfyreu getReplaceableBlocks ()Lnet/minecraft/unmapped/C_ednuhnnn;
+	METHOD m_hjcfdkkb addCharge (Lnet/minecraft/unmapped/C_hynzadkk;I)V
+		ARG 1 pos
+		ARG 2 charge
+	METHOD m_hkzpgmab getCursors ()Ljava/util/List;
+	METHOD m_ofvtwvio write (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+		ARG 1 nbt
+	METHOD m_oriomfed createWorldGenBehavior ()Lnet/minecraft/unmapped/C_eprlufrn;
+	METHOD m_qexekxvj read (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+		ARG 1 nbt
+	METHOD m_soqcxfmg (Lnet/minecraft/unmapped/C_eprlufrn$C_gzpsastu;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/lang/Integer;)Ljava/lang/Integer;
+		ARG 1 cursorPos
+		ARG 2 i
+	METHOD m_uclrpgkw createBehavior ()Lnet/minecraft/unmapped/C_eprlufrn;
+	METHOD m_ujfthohn getAdditionalDecayRate ()I
+	METHOD m_uvpxfkrm getNoGrowthRadius ()I
+	METHOD m_wkyhdfdi addCursor (Lnet/minecraft/unmapped/C_eprlufrn$C_gzpsastu;)V
+		ARG 1 cursor
+	METHOD m_zbumjhdm updateCharges (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;Z)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 4 spread
+	METHOD m_zfutxknx isWorldGen ()Z
+	CLASS C_gzpsastu ChargeCursor
+		FIELD f_betzmkvz CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_efejlank decayDelay I
+		FIELD f_efmzmidb DEFAULT_DECAY_DELAY I
+		FIELD f_fgbghwvp directions Ljava/util/Set;
+		FIELD f_hxpkqddt updateDelay I
+		FIELD f_jduisyxg SPREAD_DIRECTIONS Ljava/util/List;
+		FIELD f_mmjccwml pos Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_mtqbdtbs DIRECTION_CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_pcyymfub charge I
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;I)V
+			ARG 1 pos
+			ARG 2 charge
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;IIILjava/util/Optional;)V
+			ARG 1 pos
+			ARG 2 charge
+			ARG 3 decayDelay
+			ARG 4 updateDepay
+			ARG 5 optionalDirections
+		METHOD m_cawfvtez getDecayDelay ()I
+		METHOD m_caworksm (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_dsubxcty getPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_edbrbqxs update (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_eprlufrn;Z)V
+			ARG 1 world
+			ARG 2 pos
+			ARG 4 behavior
+			ARG 5 spread
+		METHOD m_ekmjjzjq (Ljava/util/List;)Ljava/util/Set;
+			ARG 0 list
+		METHOD m_hdlqyvdo mergeCursor (Lnet/minecraft/unmapped/C_eprlufrn$C_gzpsastu;)V
+			ARG 1 other
+		METHOD m_lhjnsuzn canSpreadTo (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+			ARG 0 world
+			ARG 1 startPos
+			ARG 2 spreadPos
+		METHOD m_ljlofwsf (Lnet/minecraft/unmapped/C_hynzadkk;)Z
+			ARG 0 pos
+		METHOD m_obzbqurs (Lnet/minecraft/unmapped/C_eprlufrn$C_gzpsastu;)Ljava/lang/Integer;
+			ARG 0 arg
+		METHOD m_qhrumuao shouldUpdate (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Z)Z
+			ARG 1 world
+			ARG 2 pos
+			ARG 3 forceUpdate
+		METHOD m_qjqwrgss getDirections ()Ljava/util/Set;
+		METHOD m_tvkgrthy getShuffledDirections (Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
+		METHOD m_wdwijcpm getVienSpreaderForState (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_uevszakc;
+			ARG 0 state
+		METHOD m_xbmqmrfs getCharge ()I
+		METHOD m_yiyeoclc getMovementPosition (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_hynzadkk;
+			ARG 0 world
+			ARG 1 pos
+		METHOD m_yojzllus canSpreadInDirection (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+			ARG 0 world
+			ARG 1 startPos
+			ARG 2 dir
+		METHOD m_yozebfot (Lnet/minecraft/unmapped/C_eprlufrn$C_gzpsastu;)Ljava/util/Optional;
+			ARG 0 getDirections
+		METHOD m_ywswnryg (Ljava/util/ArrayList;)V
+			ARG 0 list

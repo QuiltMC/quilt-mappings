@@ -5,19 +5,71 @@ CLASS net/minecraft/unmapped/C_thoxkfuv net/minecraft/world/event/listener/Sculk
 	FIELD f_mhohlxsl callback Lnet/minecraft/unmapped/C_thoxkfuv$C_fmfdwaoj;
 	FIELD f_osffoqbc positionSource Lnet/minecraft/unmapped/C_duzerrml;
 	FIELD f_xeepxwwz range I
+	METHOD <init> (Lnet/minecraft/unmapped/C_duzerrml;ILnet/minecraft/unmapped/C_thoxkfuv$C_fmfdwaoj;Lnet/minecraft/unmapped/C_thoxkfuv$C_dewmvmbw;II)V
+		ARG 1 positionSource
+		ARG 2 range
+		ARG 3 callback
+		ARG 4 event
+		ARG 5 distance
+		ARG 6 delay
 	METHOD m_dfgyxazm tick (Lnet/minecraft/unmapped/C_cdctfzbn;)V
 		ARG 1 world
+	METHOD m_dxfrwlll (Lnet/minecraft/unmapped/C_thoxkfuv;)Ljava/lang/Integer;
+		ARG 0 arg
+	METHOD m_gwzumgru (Lnet/minecraft/unmapped/C_thoxkfuv$C_fmfdwaoj;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 1 instance
+	METHOD m_jsomwihs (Lnet/minecraft/unmapped/C_thoxkfuv;)Lnet/minecraft/unmapped/C_duzerrml;
+		ARG 0 arg
+	METHOD m_kfeubbdk (Lnet/minecraft/unmapped/C_thoxkfuv;)Ljava/lang/Integer;
+		ARG 0 arg
+	METHOD m_vrhsndhn codec (Lnet/minecraft/unmapped/C_thoxkfuv$C_fmfdwaoj;)Lcom/mojang/serialization/Codec;
+		ARG 0 calback
 	METHOD m_xlamdawt isOccluded (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Z
 		ARG 0 world
+		ARG 1 posA
+		ARG 2 posB
+	METHOD m_yvftnvau (Lnet/minecraft/unmapped/C_thoxkfuv;)Ljava/util/Optional;
+		ARG 0 arg
+	METHOD m_zvuacjos (Lnet/minecraft/unmapped/C_thoxkfuv;)Ljava/lang/Integer;
+		ARG 0 arg
+	CLASS C_dewmvmbw RecievedEvent
+		FIELD f_eylrltqv source Ljava/util/UUID;
+		FIELD f_ffjjmhxx pos Lnet/minecraft/unmapped/C_vgpupfxx;
+		FIELD f_ffjqelcs entity Lnet/minecraft/unmapped/C_astfners;
+		FIELD f_glzfhmwf distance I
+		FIELD f_wzsfwzqx gameEvent Lnet/minecraft/unmapped/C_cgkchrmc;
+		FIELD f_yxxzxvje CODEC Lcom/mojang/serialization/Codec;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cgkchrmc;ILnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;)V
+			ARG 1 event
+			ARG 2 distance
+			ARG 3 pos
+			ARG 4 entity
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_bgscbkoi source ()Ljava/util/UUID;
+		METHOD m_bmagjmvj gameEvent ()Lnet/minecraft/unmapped/C_cgkchrmc;
+		METHOD m_cgnrhirq distance ()I
+		METHOD m_dryyrwnd getEntity (Lnet/minecraft/unmapped/C_bdwnwhiu;)Ljava/util/Optional;
+			ARG 1 world
+		METHOD m_jnqhrcgo pos ()Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_lenoaloj entity ()Lnet/minecraft/unmapped/C_astfners;
 	CLASS C_fmfdwaoj Callback
 		METHOD m_gypllihv accept (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbgxqpya;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;I)V
 			COMMENT Accepts a game event after delay.
-			ARG 2 listener
-			ARG 4 event
-			ARG 7 distance
-		METHOD m_hcgopkrg accepts (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbgxqpya;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;)Z
-			COMMENT Returns whether the callback wants to accept this event.
+			ARG 1 world
 			ARG 2 listener
 			ARG 3 pos
 			ARG 4 event
 			ARG 5 entity
+			ARG 7 distance
+		METHOD m_hcgopkrg accepts (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbgxqpya;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;)Z
+			COMMENT Returns whether the callback wants to accept this event.
+			ARG 1 world
+			ARG 2 listener
+			ARG 3 pos
+			ARG 4 event
+			ARG 5 entity
+		METHOD m_hxyizqhc getTag ()Lnet/minecraft/unmapped/C_ednuhnnn;
+		METHOD m_liywttdz isValid (Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;)Z
+			ARG 1 event
+			ARG 2 entity
