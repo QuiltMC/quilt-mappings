@@ -5,12 +5,46 @@ CLASS net/minecraft/unmapped/C_iwuefjcy net/minecraft/world/gen/foliage/FoliageP
 	METHOD <init> (Lnet/minecraft/unmapped/C_macfejbg;Lnet/minecraft/unmapped/C_macfejbg;)V
 		ARG 1 radius
 		ARG 2 offset
+	METHOD m_alwthvdq isPositionInvalid (Lnet/minecraft/unmapped/C_rlomrsco;IIIIZ)Z
+		COMMENT Normalizes x and z coords before checking if they are invalid.
+		ARG 2 dx
+		ARG 3 y
+		ARG 4 dz
+		ARG 5 radius
+		ARG 6 giantTrunk
+	METHOD m_cwekonud placeFoliageBlock (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 0 world
+		ARG 1 replacer
+		ARG 3 config
+		ARG 4 pos
+	METHOD m_gnnnomut getRandomOffset (Lnet/minecraft/unmapped/C_rlomrsco;)I
+	METHOD m_hjzzwqgw getRandomHeight (Lnet/minecraft/unmapped/C_rlomrsco;ILnet/minecraft/unmapped/C_zthydktd;)I
+		ARG 2 trunkHeight
+		ARG 3 config
+	METHOD m_jhbkooww generateSquare (Lnet/minecraft/unmapped/C_agsukcmb;Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;Lnet/minecraft/unmapped/C_hynzadkk;IIZ)V
+		COMMENT Generates a square of leaves with the given radius. Sub-classes can use the method {@code isInvalidForLeaves} to exclude certain positions, such as corners.
+		ARG 1 world
+		ARG 2 replacer
+		ARG 4 config
+		ARG 5 centerPos
+		ARG 6 radius
+		ARG 7 y
+		ARG 8 giantTrunk
 	METHOD m_kfjixvcn fillFoliagePlacerFields (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P2;
+	METHOD m_lenjfbah getRandomRadius (Lnet/minecraft/unmapped/C_rlomrsco;I)I
+		ARG 2 baseHeight
 	METHOD m_lnntehfe getType ()Lnet/minecraft/unmapped/C_nqbkkupl;
 	METHOD m_nstjonfo (Lnet/minecraft/unmapped/C_iwuefjcy;)Lnet/minecraft/unmapped/C_macfejbg;
 		ARG 0 placer
 	METHOD m_uogkmekr (Lnet/minecraft/unmapped/C_iwuefjcy;)Lnet/minecraft/unmapped/C_macfejbg;
 		ARG 0 placer
+	METHOD m_uuoemfyq isInvalidForLeaves (Lnet/minecraft/unmapped/C_rlomrsco;IIIIZ)Z
+		COMMENT Used to exclude certain positions such as corners when creating a square of leaves.
+		ARG 2 dx
+		ARG 3 y
+		ARG 4 dz
+		ARG 5 radius
+		ARG 6 giantTrunk
 	CLASS C_uditupge TreeNode
 		COMMENT A point on a tree to generate foliage around
 		FIELD f_hmmybfiv center Lnet/minecraft/unmapped/C_hynzadkk;
