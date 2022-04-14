@@ -1,0 +1,343 @@
+CLASS net/minecraft/unmapped/C_vknkwpng net/minecraft/structure/NetherFortressGenerator
+	FIELD f_cmnyirld MAGIC_START_Y I
+	FIELD f_gujxwjwm BRIDGE_PIECE_WEIGHTS [Lnet/minecraft/unmapped/C_vknkwpng$C_dqhqctdr;
+	FIELD f_iozwexqk MAX_DEPTH I
+	FIELD f_snsbaowu LOWEST_Y_POSITION I
+	FIELD f_zyjefrif CORRIDOR_PIECE_WEIGHTS [Lnet/minecraft/unmapped/C_vknkwpng$C_dqhqctdr;
+	METHOD m_yprfvwlm createPiece (Lnet/minecraft/unmapped/C_vknkwpng$C_dqhqctdr;Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_ljegjnii;
+		ARG 0 pieceData
+		ARG 1 pieces
+		ARG 2 random
+		ARG 3 x
+		ARG 4 y
+		ARG 5 z
+		ARG 6 orientation
+		ARG 7 generationDepth
+	CLASS C_bsfyqxww SmallCorridor
+		FIELD f_cjubmmit WIDTH I
+		FIELD f_cxqaoern HEIGHT I
+		FIELD f_egallczr DEPTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_pfqyyneh create (Lnet/minecraft/unmapped/C_vwpykcrw;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_bsfyqxww;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 generationDepth
+	CLASS C_dqhqctdr PieceData
+		FIELD f_arlsdmdk weight I
+		FIELD f_raflrwwr pieceType Ljava/lang/Class;
+		FIELD f_vorsgvie repeatable Z
+		FIELD f_wchnrdfe limit I
+		FIELD f_zgukgmlx generatedCount I
+		METHOD <init> (Ljava/lang/Class;II)V
+			ARG 1 pieceType
+			ARG 2 weight
+			ARG 3 limit
+		METHOD <init> (Ljava/lang/Class;IIZ)V
+			ARG 1 pieceType
+			ARG 2 weight
+			ARG 3 limit
+			ARG 4 repeatable
+		METHOD m_ccoigjpn canGenerate (I)Z
+		METHOD m_zcgpcjoa canGenerate ()Z
+	CLASS C_egoevymp BridgeCrossing
+		FIELD f_bsqlskvd HEIGHT I
+		FIELD f_jkumxjrg WIDTH I
+		FIELD f_vjlphsyh DEPTH I
+		METHOD <init> (IILnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 x
+			ARG 2 z
+			ARG 3 orientation
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_cgeaauhw create (Lnet/minecraft/unmapped/C_vwpykcrw;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_egoevymp;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 generationDepth
+	CLASS C_ehpyzivp CorridorEntrance
+		FIELD f_dffikeko HEIGHT I
+		FIELD f_jzdpbbnz DEPTH I
+		FIELD f_zprybybe WIDTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 random
+			ARG 3 boundingBox
+			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_ecfarvji create (Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_ehpyzivp;
+			ARG 0 pieces
+			ARG 1 random
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
+			ARG 5 orientation
+			ARG 6 generationDepth
+	CLASS C_fjdbxwty CorridorStairs
+		FIELD f_kknfalor DEPTH I
+		FIELD f_uwqbwxzu HEIGHT I
+		FIELD f_xhxufelg WIDTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_ovuyjddf create (Lnet/minecraft/unmapped/C_vwpykcrw;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_fjdbxwty;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 generationDepth
+	CLASS C_gexlkpoq Bridge
+		FIELD f_exynnvst DEPTH I
+		FIELD f_ghxhgrgi HEIGHT I
+		FIELD f_mfezciwo WIDTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 random
+			ARG 3 boundingBox
+			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_edjmbmal create (Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_gexlkpoq;
+			ARG 0 pieces
+			ARG 1 random
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
+			ARG 5 orientation
+			ARG 6 generationdepth
+	CLASS C_iczmknua Start
+		FIELD f_nqxyxhuw children Ljava/util/List;
+		FIELD f_rnoabyri previousPiece Lnet/minecraft/unmapped/C_vknkwpng$C_dqhqctdr;
+		FIELD f_sqxulaex bridgePieces Ljava/util/List;
+		FIELD f_xfxhgpmk corridorPieces Ljava/util/List;
+		METHOD <init> (Lnet/minecraft/unmapped/C_rlomrsco;II)V
+			ARG 1 random
+			ARG 2 x
+			ARG 3 z
+	CLASS C_ljegjnii Piece
+		METHOD m_bpjdkojg pickPiece (Lnet/minecraft/unmapped/C_vknkwpng$C_iczmknua;Ljava/util/List;Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_ljegjnii;
+			ARG 1 startPiece
+			ARG 2 children
+			ARG 3 pieces
+			ARG 4 random
+			ARG 5 x
+			ARG 6 y
+			ARG 7 z
+			ARG 8 orientation
+			ARG 9 generationDepth
+		METHOD m_hllmtacn isBoundingBoxValid (Lnet/minecraft/unmapped/C_hmqypqzz;)Z
+			ARG 0 box
+		METHOD m_qkmhzwhq generateRightChild (Lnet/minecraft/unmapped/C_vknkwpng$C_iczmknua;Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIZ)Lnet/minecraft/unmapped/C_coopoqiy;
+			ARG 1 startPiece
+			ARG 2 pieces
+			ARG 3 random
+			ARG 4 heightOffset
+			ARG 5 sidewaysOffset
+			ARG 6 generateCorridor
+		METHOD m_qljpsojz getRemainingPiecesWeight (Ljava/util/List;)I
+			ARG 1 pieces
+		METHOD m_vqntebhv generateLeftChild (Lnet/minecraft/unmapped/C_vknkwpng$C_iczmknua;Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIZ)Lnet/minecraft/unmapped/C_coopoqiy;
+			ARG 1 startPiece
+			ARG 2 pieces
+			ARG 3 random
+			ARG 4 heightOffset
+			ARG 5 sidewaysOffset
+			ARG 6 generateCorridor
+		METHOD m_vqyznvrk generateAndAddPiece (Lnet/minecraft/unmapped/C_vknkwpng$C_iczmknua;Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;IZ)Lnet/minecraft/unmapped/C_coopoqiy;
+			ARG 1 startPiece
+			ARG 2 pieces
+			ARG 3 random
+			ARG 4 x
+			ARG 5 y
+			ARG 6 z
+			ARG 7 orientation
+			ARG 8 generationDepth
+			ARG 9 generateCorridor
+		METHOD m_wbripsnd generateForwardChild (Lnet/minecraft/unmapped/C_vknkwpng$C_iczmknua;Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIZ)Lnet/minecraft/unmapped/C_coopoqiy;
+			ARG 1 startPiece
+			ARG 2 pieces
+			ARG 3 random
+			ARG 4 sidewaysOffset
+			ARG 5 heightOffset
+			ARG 6 generateCorridor
+	CLASS C_nivzmmal CorridorNetherWartsRoom
+		FIELD f_ejtsjvjv DEPTH I
+		FIELD f_iqqqnzwf WIDTH I
+		FIELD f_ntbkksfq HEIGHT I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_gtntnfqg create (Lnet/minecraft/unmapped/C_vwpykcrw;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_nivzmmal;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 generationDepth
+	CLASS C_nluxpbdo SmallCorridorRightTurn
+		FIELD f_gdnrvanj DEPTH I
+		FIELD f_ltpkhlib HEIGHT I
+		FIELD f_nfcsrnxo hasChest Z
+		FIELD f_vdjulcyc WIDTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 random
+			ARG 3 boundingBox
+			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_rhehlkzy create (Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_nluxpbdo;
+			ARG 0 pieces
+			ARG 1 random
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
+			ARG 5 orientation
+			ARG 6 generationDepth
+	CLASS C_pagssjyy RoomCrossing
+		FIELD f_mjatappw HEIGHT I
+		FIELD f_qvufdmjf WIDTH I
+		FIELD f_zmwziuka DEPTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_juyoczdh create (Lnet/minecraft/unmapped/C_vwpykcrw;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_pagssjyy;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 generationDepth
+	CLASS C_qafaukwt CorridorBalcony
+		FIELD f_jkkedyxi WIDTH I
+		FIELD f_qlczozmo HEIGHT I
+		FIELD f_syszribf DEPTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_ndbekblm create (Lnet/minecraft/unmapped/C_vwpykcrw;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_qafaukwt;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 generationDepth
+	CLASS C_rtwrvaye SmallCorridorCrossing
+		FIELD f_fqywyqhy WIDTH I
+		FIELD f_qzgwsujj DEPTH I
+		FIELD f_tfmpgtre HEIGHT I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_qqpsvomn create (Lnet/minecraft/unmapped/C_vwpykcrw;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_rtwrvaye;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 orientation
+			ARG 5 generationDepth
+	CLASS C_vsqkkbgu BridgePlatform
+		FIELD f_exqgltem HEIGHT I
+		FIELD f_fkddoewe hasBlazeSpawner Z
+		FIELD f_jihfqmbb WIDTH I
+		FIELD f_nmzdefci DEPTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_aydwnjmx create (Lnet/minecraft/unmapped/C_vwpykcrw;IIIILnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_vknkwpng$C_vsqkkbgu;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 generationDepth
+			ARG 5 orientation
+	CLASS C_wgqfaxtd BridgeEnd
+		FIELD f_fikxtrbv HEIGHT I
+		FIELD f_wblrqsgl seed I
+		FIELD f_whebppeb DEPTH I
+		FIELD f_zuqptgga WIDTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 random
+			ARG 3 boundingBox
+			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_kzgqweiy create (Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_wgqfaxtd;
+			ARG 0 pieces
+			ARG 1 random
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
+			ARG 5 orientation
+			ARG 6 generationDepth
+	CLASS C_wnejekfw SmallCorridorLeftTurn
+		FIELD f_izooqtbp DEPTH I
+		FIELD f_ldtnsnkr hasChest Z
+		FIELD f_npgytmtd WIDTH I
+		FIELD f_vqzqvdat HEIGHT I
+		METHOD <init> (ILnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 random
+			ARG 3 boundingBox
+			ARG 4 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_zisymehj create (Lnet/minecraft/unmapped/C_vwpykcrw;Lnet/minecraft/unmapped/C_rlomrsco;IIILnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_vknkwpng$C_wnejekfw;
+			ARG 0 pieces
+			ARG 1 random
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
+			ARG 5 orientation
+			ARG 6 generationDepth
+	CLASS C_wwylmvzg StairsRoom
+		FIELD f_gddjsnwr DEPTH I
+		FIELD f_gfkysraq HEIGHT I
+		FIELD f_uiqhdter WIDTH I
+		METHOD <init> (ILnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 generationDepth
+			ARG 2 boundingBox
+			ARG 3 orientation
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD m_imwhuyrp create (Lnet/minecraft/unmapped/C_vwpykcrw;IIIILnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_vknkwpng$C_wwylmvzg;
+			ARG 0 pieces
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 generationDepth
+			ARG 5 orientation

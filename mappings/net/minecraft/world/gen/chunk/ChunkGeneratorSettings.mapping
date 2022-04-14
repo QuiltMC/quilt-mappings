@@ -5,17 +5,36 @@ CLASS net/minecraft/unmapped/C_lwpfhits net/minecraft/world/gen/chunk/ChunkGener
 	FIELD f_ccxxaepy LARGE_BIOMES Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_ddxnrmmj generationShapeConfig Lnet/minecraft/unmapped/C_ulvgadxi;
 	FIELD f_fjroqrca OVERWORLD Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_fpddiewa useLegacyRandomGenerator Z
 	FIELD f_gqrsusan NETHER Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_henwwdcs REGISTRY_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_hlykgnmg FLOATING_ISLANDS Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_lxeovodx CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_mkicirvk surfaceRule Lnet/minecraft/unmapped/C_flergppe$C_dggoeuwn;
-	FIELD f_npqvrfsb oreVeins Z
+	FIELD f_npqvrfsb oreVeinsEnabled Z
+	FIELD f_rmvtddod noiseRouter Lnet/minecraft/unmapped/C_fpiyqmft;
 	FIELD f_spuhoizm seaLevel I
 	FIELD f_tmwzkncp AMPLIFIED Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_vvygzxtc CAVES Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_wisbjvhc spawnTarget Ljava/util/List;
 	FIELD f_wygtkmhl defaultFluid Lnet/minecraft/unmapped/C_txtbiemp;
-	FIELD f_yrztsyls aquifers Z
+	FIELD f_yrztsyls aquifersEnabled Z
+	METHOD <init> (Lnet/minecraft/unmapped/C_ulvgadxi;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_fpiyqmft;Lnet/minecraft/unmapped/C_flergppe$C_dggoeuwn;Ljava/util/List;IZZZZ)V
+		ARG 1 generationShapeConfig
+		ARG 2 defaultBlock
+		ARG 3 defaultFluid
+		ARG 4 noiseRouter
+		ARG 5 surfaceRule
+		ARG 6 spawnTarget
+		ARG 7 seaLevel
+		ARG 8 mobGenerationDisabled
+		ARG 9 aquifersEnabled
+		ARG 10 oreVeinsEnabled
+		ARG 11 useLegacyRandomGenerator
+	METHOD equals (Ljava/lang/Object;)Z
+		ARG 1 o
+	METHOD m_afxojkck oreVeinsEnabled ()Z
+	METHOD m_andppfam defaultBlock ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_axvaaxiz hasLegacyRandomProvider ()Z
 	METHOD m_bioegmua createEndSettings ()Lnet/minecraft/unmapped/C_lwpfhits;
 	METHOD m_fluwqqyx bootstrap ()Lnet/minecraft/unmapped/C_cjzoxshv;
@@ -28,14 +47,18 @@ CLASS net/minecraft/unmapped/C_lwpfhits net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 settings
 	METHOD m_iwjacgsp (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
-	METHOD m_ljmocmyr getSurfaceRule ()Lnet/minecraft/unmapped/C_flergppe$C_dggoeuwn;
+	METHOD m_ljmocmyr surfaceRule ()Lnet/minecraft/unmapped/C_flergppe$C_dggoeuwn;
+	METHOD m_ljrijjvh spawnTarget ()Ljava/util/List;
 	METHOD m_lztqjfkv getRandomProvider ()Lnet/minecraft/unmapped/C_zorcemxg$C_ybxxvwvk;
 	METHOD m_mksbojhe createCavesSettings ()Lnet/minecraft/unmapped/C_lwpfhits;
 	METHOD m_najuwbnk createNetherSettings ()Lnet/minecraft/unmapped/C_lwpfhits;
 	METHOD m_rhreuwma hasAquifers ()Z
-	METHOD m_uckaqpbt getSeaLevel ()I
-	METHOD m_utlfjqxl isMobGenerationDisabled ()Z
+	METHOD m_rkakugao defaultFluid ()Lnet/minecraft/unmapped/C_txtbiemp;
+	METHOD m_uckaqpbt seaLevel ()I
+	METHOD m_utlfjqxl mobGenerationDisabled ()Z
 		COMMENT Whether entities will be generated during chunk population.
 		COMMENT
 		COMMENT <p>It does not control whether spawns will occur during gameplay.
-	METHOD m_znwljrxu getGenerationShapeConfig ()Lnet/minecraft/unmapped/C_ulvgadxi;
+	METHOD m_ynmwhcth aquifersEnabled ()Z
+	METHOD m_znwljrxu generationShapeConfig ()Lnet/minecraft/unmapped/C_ulvgadxi;
+	METHOD m_zpaprfti noiseRouter ()Lnet/minecraft/unmapped/C_fpiyqmft;

@@ -1,58 +1,108 @@
 CLASS net/minecraft/unmapped/C_rbvfwmfa net/minecraft/structure/OceanMonumentGenerator
 	CLASS C_aedpzuvy SimpleRoom
+		FIELD f_dwqwcgqo mainDesign I
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;Lnet/minecraft/unmapped/C_rlomrsco;)V
+			ARG 1 orientation
+			ARG 2 settings
+			ARG 3 random
 	CLASS C_arnouzpa CoreRoom
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings
 	CLASS C_awvgxpmh DoubleYRoom
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings
 	CLASS C_cezcewsr Base
-		METHOD m_budapbil (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		FIELD f_frbpoina HEIGHT I
+		FIELD f_hhdfvfij BIOME_RANGE_CHECK I
+		FIELD f_jjomndur DEPTH I
+		FIELD f_nidyaahf sourceRoom Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;
+		FIELD f_pqqfcodf TOP_POSITION I
+		FIELD f_qembfxrd WIDTH I
+		FIELD f_srnhkynk coreRoom Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;
+		FIELD f_yzikzklp childPieces Ljava/util/List;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
+		METHOD <init> (Lnet/minecraft/unmapped/C_rlomrsco;IILnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 random
+			ARG 2 x
+			ARG 3 z
+			ARG 4 orientation
+		METHOD m_budapbil generateMiddleWall (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 world
+			ARG 2 random
 			ARG 3 box
-		METHOD m_cthmklbf (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		METHOD m_cthmklbf generateEntranceArchs (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 world
+			ARG 2 random
 			ARG 3 box
-		METHOD m_cxamvggr (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		METHOD m_cxamvggr generateRoofPiece (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 world
+			ARG 2 random
 			ARG 3 box
-		METHOD m_fegnywjf (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		METHOD m_fegnywjf generateLowerWall (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 world
+			ARG 2 random
 			ARG 3 box
-		METHOD m_hayyelwh (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		METHOD m_hayyelwh generateEntranceWall (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 world
+			ARG 2 random
 			ARG 3 box
-		METHOD m_odvoseie (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		METHOD m_odvoseie generateUpperWall (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 world
+			ARG 2 random
 			ARG 3 box
-		METHOD m_qgpcbfef (ZILnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
+		METHOD m_qgpcbfef generateWing (ZILnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 3 world
+			ARG 4 random
 			ARG 5 box
+		METHOD m_vlxldfnu generatePieceGraph (Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
+			ARG 1 random
 	CLASS C_dlopcpih DoubleXRoomFactory
 	CLASS C_gqvpeitd DoubleXRoom
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings
 	CLASS C_ihehvcle PieceFactory
 		METHOD m_ikcaaiie generate (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_rbvfwmfa$C_jxqmpred;
 			ARG 1 direction
-			ARG 2 setting
+			ARG 2 settings
+			ARG 3 random
 		METHOD m_ngaywsde canGenerate (Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)Z
-			ARG 1 setting
+			ARG 1 settings
 	CLASS C_jdndocac SimpleRoomFactory
 	CLASS C_jupaaikv DoubleZRoomFactory
 	CLASS C_jxqmpred Piece
+		FIELD f_aijkfqws DO_FILL Z
+		FIELD f_ajkuxlzc PENTHOUSE_INDEX I
+		FIELD f_bterrncm LEFT_WING_INDEX I
+		FIELD f_eqzpnldq GRID_ROOM_HEIGHT I
 		FIELD f_inyspcho WATER Lnet/minecraft/unmapped/C_txtbiemp;
-		FIELD f_rbhfjxqw setting Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;
+		FIELD f_iqbgbcqo GRID_FLOOR_COUNT I
+		FIELD f_oernhovq GRID_ROOM_DEPTH I
+		FIELD f_owyghjpu GRID_HEIGHT I
+		FIELD f_rbhfjxqw settings Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;
 		FIELD f_rhygsncb ZERO_ONE_ZERO_INDEX I
 		FIELD f_rlevxkoz PRISMARINE Lnet/minecraft/unmapped/C_txtbiemp;
 		FIELD f_spsldeca TWO_TWO_ZERO_INDEX I
 		FIELD f_tuvckeci ALSO_PRISMARINE_BRICKS Lnet/minecraft/unmapped/C_txtbiemp;
+		FIELD f_twkuxddb GRID_ROOM_WIDTH I
+		FIELD f_urknagpu GRID_DEPTH I
+		FIELD f_vaoxlpwq GRID_WIDTH I
+		FIELD f_wafvvkyu RIGHT_WING_INDEX I
 		FIELD f_weccgblz DARK_PRISMARINE Lnet/minecraft/unmapped/C_txtbiemp;
 		FIELD f_xmbyxzxz ICE_BLOCKS Ljava/util/Set;
 		FIELD f_xmkdrito TWO_ZERO_ZERO_INDEX I
+		FIELD f_xymjnxii GRID_SIZE I
 		FIELD f_yfllxdhn SEA_LANTERN Lnet/minecraft/unmapped/C_txtbiemp;
 		FIELD f_yrojcqkm PRISMARINE_BRICKS Lnet/minecraft/unmapped/C_txtbiemp;
 		FIELD f_zjqxyblp FOUR_ONE_ZERO_INDEX I
@@ -60,7 +110,10 @@ CLASS net/minecraft/unmapped/C_rbvfwmfa net/minecraft/structure/OceanMonumentGen
 			ARG 1 type
 			ARG 2 length
 			ARG 3 orientation
-			ARG 4 setting
+			ARG 4 settings
+			ARG 5 width
+			ARG 6 height
+			ARG 7 depth
 		METHOD <init> (Lnet/minecraft/unmapped/C_etqvykma;Lnet/minecraft/unmapped/C_xpuuihxf;ILnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 type
 			ARG 2 orientation
@@ -79,7 +132,7 @@ CLASS net/minecraft/unmapped/C_rbvfwmfa net/minecraft/structure/OceanMonumentGen
 			ARG 6 width
 			ARG 7 height
 			ARG 8 depth
-		METHOD m_doofngma (Lnet/minecraft/unmapped/C_hmqypqzz;IIII)Z
+		METHOD m_doofngma intersects (Lnet/minecraft/unmapped/C_hmqypqzz;IIII)Z
 			ARG 1 box
 			ARG 2 x
 			ARG 4 z
@@ -99,40 +152,58 @@ CLASS net/minecraft/unmapped/C_rbvfwmfa net/minecraft/structure/OceanMonumentGen
 			ARG 3 x
 			ARG 4 y
 			ARG 5 z
-		METHOD m_vpkwqlfv (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_hmqypqzz;IIZ)V
+		METHOD m_vpkwqlfv generateDefaultFloor (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_hmqypqzz;IIZ)V
 			ARG 1 world
 			ARG 2 box
 			ARG 3 x
 			ARG 4 z
+			ARG 5 generateHole
 		METHOD m_wfsyydim createBox (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;III)Lnet/minecraft/unmapped/C_hmqypqzz;
 			ARG 0 orientation
-			ARG 1 setting
+			ARG 1 settings
+			ARG 2 width
+			ARG 3 height
+			ARG 4 depth
 	CLASS C_kfcqojvs DoubleXYRoom
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings
 	CLASS C_khjxonjo SimpleRoomTopFactory
 	CLASS C_krtjixwz WingRoom
+		FIELD f_wygcpsix mainDesign I
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hmqypqzz;I)V
 			ARG 1 orientation
 			ARG 2 box
+			ARG 3 mainDesign
 	CLASS C_lbopiezn DoubleYRoomFactory
 	CLASS C_lturmibt DoubleZRoom
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings
 	CLASS C_mhyebjus Entry
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings
 	CLASS C_rlhrrdqs DoubleYZRoomFactory
 	CLASS C_rplxrbtr DoubleXYRoomFactory
 	CLASS C_tvrrranw SimpleRoomTop
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
-	CLASS C_wgwlchaw PieceSetting
+			ARG 2 settings
+	CLASS C_wgwlchaw PieceSettings
+		FIELD f_krwfgrpl scanIndex I
 		FIELD f_ngglcjyl neighborPresences [Z
+		FIELD f_ozmgpisn isSource Z
 		FIELD f_qswmzbls neighbors [Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;
 		FIELD f_vxxlavyf roomIndex I
 		FIELD f_yojgjphk used Z
@@ -143,12 +214,18 @@ CLASS net/minecraft/unmapped/C_rbvfwmfa net/minecraft/structure/OceanMonumentGen
 		METHOD m_xcxbljgf countNeighbors ()I
 		METHOD m_yetahohd setNeighbor (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings
+		METHOD m_zplfzjxq findSource (I)Z
+			ARG 1 scanIndex
 	CLASS C_whonflsw Penthouse
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hmqypqzz;)V
 			ARG 1 orientation
 			ARG 2 box
 	CLASS C_xajgwkqv DoubleYZRoom
+		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 nbt
 		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_rbvfwmfa$C_wgwlchaw;)V
 			ARG 1 orientation
-			ARG 2 setting
+			ARG 2 settings

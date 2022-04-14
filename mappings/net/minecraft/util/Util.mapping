@@ -13,6 +13,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	FIELD f_zimcxepj MAIN_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
 	METHOD m_aidzvymm existenceCheckTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 path
+	METHOD m_akgydyyc shuffle (Lit/unimi/dsi/fastutil/objects/ObjectArrayList;Lnet/minecraft/unmapped/C_rlomrsco;)V
+		ARG 0 values
+		ARG 1 random
 	METHOD m_awkdanrv fixedSizeList (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
 		ARG 1 length
@@ -77,13 +80,17 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_lgfbfuzz replaceInvalidChars (Ljava/lang/String;Lnet/minecraft/unmapped/C_zpuwkbhr;)Ljava/lang/String;
 		ARG 0 string
 		ARG 1 predicate
-	METHOD m_liaesfeu getRandom (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/Optional;
+	METHOD m_liaesfeu getRandomOrEmpty (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/Optional;
 		ARG 0 list
+		ARG 1 random
 	METHOD m_lyrrqjlr renameTask (Ljava/nio/file/Path;Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 src
 		ARG 1 dest
 	METHOD m_mjreuqky (Ljava/util/function/Consumer;Ljava/lang/String;Ljava/lang/String;)V
 		ARG 2 string
+	METHOD m_muatoqew copyShuffled ([Ljava/lang/Object;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
+		ARG 0 values
+		ARG 1 random
 	METHOD m_mytcolvj createWorker (Ljava/lang/String;)Ljava/util/concurrent/ExecutorService;
 		ARG 0 name
 	METHOD m_ngxcbtrh logAndPause (Ljava/lang/String;Ljava/lang/Throwable;)V
@@ -115,6 +122,12 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 3 discardOnFail
 	METHOD m_rucymwoq (Ljava/lang/String;)V
 		ARG 0 string
+	METHOD m_saniutqg getRandom (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/lang/Object;
+		ARG 0 list
+		ARG 1 random
+	METHOD m_swonhjpb toShuffledList (Ljava/util/stream/IntStream;Lnet/minecraft/unmapped/C_rlomrsco;)Lit/unimi/dsi/fastutil/ints/IntArrayList;
+		ARG 0 values
+		ARG 1 random
 	METHOD m_tcuyutyn backupAndReplace (Ljava/io/File;Ljava/io/File;Ljava/io/File;Z)V
 		ARG 0 current
 		ARG 1 newFile
@@ -125,6 +138,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_ucqgdvxm debugRunnable (Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Runnable;
 		ARG 0 activeThreadName
 		ARG 1 runnable
+	METHOD m_ucywpxge getRandom ([ILnet/minecraft/unmapped/C_rlomrsco;)I
+		ARG 0 array
+		ARG 1 random
 	METHOD m_uduxgasu attemptTasks ([Ljava/util/function/BooleanSupplier;)Z
 		ARG 0 tasks
 	METHOD m_uocsgxgb logAndPause (Ljava/lang/String;)V
@@ -156,6 +172,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		COMMENT @see #combineSafe(List)
 		ARG 0 futures
 			COMMENT the completable futures to combine
+	METHOD m_wciquilx toShuffledList (Ljava/util/stream/Stream;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
+		ARG 0 values
+		ARG 1 random
 	METHOD m_wgykosui completeExceptionally (Ljava/lang/Throwable;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 throwable
 	METHOD m_wkoofosm createIoWorker ()Ljava/util/concurrent/ExecutorService;
@@ -167,6 +186,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 1 consumer
 	METHOD m_wwakmmib make (Ljava/util/function/Supplier;)Ljava/lang/Object;
 		ARG 0 factory
+	METHOD m_wznbpzed copyShuffled (Lit/unimi/dsi/fastutil/objects/ObjectArrayList;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
+		ARG 0 values
+		ARG 1 random
 	METHOD m_xtrebjef getMeasuringTimeNano ()J
 	METHOD m_ydhyxwlc relativeCopy (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		COMMENT Copies a file contained in the folder {@code src} to the folder {@code dest}.
@@ -181,6 +203,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_yvfdsqix getChoiceType (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
 		ARG 0 typeReference
 		ARG 1 id
+	METHOD m_zxlwmobp getRandom ([Ljava/lang/Object;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/lang/Object;
+		ARG 0 array
+		ARG 1 random
 	CLASS C_etnademe
 		METHOD read read ()J
 	CLASS C_fqjbnqwz OperatingSystem
@@ -202,8 +227,12 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		METHOD getAsBoolean getAsBoolean ()Z
 	CLASS C_lsulyfwg
 		METHOD getAsBoolean getAsBoolean ()Z
+	CLASS C_nkazyyip
+		FIELD f_dixhweqx cache Ljava/util/Map;
+		METHOD apply apply (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 	CLASS C_qgeblktr
 		METHOD getAsBoolean getAsBoolean ()Z
 	CLASS C_tceggguc
 		FIELD f_boyitqoh cache Ljava/util/Map;
+		METHOD apply apply (Ljava/lang/Object;)Ljava/lang/Object;
 	CLASS C_uzjrvfhh IdentityHashStrategy
