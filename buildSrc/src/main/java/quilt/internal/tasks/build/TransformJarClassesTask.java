@@ -1,5 +1,6 @@
 package quilt.internal.tasks.build;
 
+import org.apache.commons.io.FileUtils;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
@@ -8,10 +9,10 @@ import org.gradle.api.tasks.TaskAction;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.quiltmc.draftsman.asm.DraftsmanClassTransformer;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -77,8 +78,13 @@ public class TransformJarClassesTask extends DefaultMappingsTask {
             transformedClassFiles.put(name, writer.toByteArray());
         }
 
+        // Ensure the output directory is empty
+        File outputFile = output.getAsFile().get();
+        FileUtils.deleteDirectory(outputFile);
+        Path outputPath = outputFile.toPath();
+
         for (String name : transformedClassFiles.keySet()) {
-            Path path = output.getAsFile().get().toPath().resolve(name);
+            Path path = outputPath.resolve(name);
             if (!Files.exists(path.getParent())) {
                 Files.createDirectories(path.getParent());
             }
