@@ -206,15 +206,9 @@ task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	} }
 }
 
-task zipErasedBytecode(type: Zip, dependsOn: eraseBytecode) {
-	from eraseBytecode.output
-	archiveName = "erased-classes.jar"
-	destinationDirectory = mappings.fileConstants.tempDir
-}
-
 def fakeSourceDir = file(".gradle/temp/fakeSource")
-task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, zipErasedBytecode]) {
-	input = zipErasedBytecode.outputs.getFiles().getSingleFile()
+task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode]) {
+	input = eraseBytecode.output.asFile.get()
 	output = fakeSourceDir
 	decompiler = Decompilers.QUILTFLOWER
 	libraries = files(mappings.fileConstants.libraries)
