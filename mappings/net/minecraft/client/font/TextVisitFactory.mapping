@@ -1,7 +1,7 @@
 CLASS net/minecraft/unmapped/C_qpsrdirb net/minecraft/client/font/TextVisitFactory
 	COMMENT A utility class for visiting the characters of strings, handling surrogate
 	COMMENT code points and formatting codes.
-	FIELD f_hmffdysq REPLACEMENT_CHARACTER C
+	FIELD f_hmffdysq INVALID_CHAR_REPLACEMENT C
 	FIELD f_olbuipev VISIT_TERMINATED Ljava/util/Optional;
 	METHOD m_aqzsnmxc visitForwards (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string in forward (left to right) direction.
@@ -41,6 +41,10 @@ CLASS net/minecraft/unmapped/C_qpsrdirb net/minecraft/client/font/TextVisitFacto
 			COMMENT the style of the string
 		ARG 2 visitor
 			COMMENT the visitor
+	METHOD m_ddgynvgv (Ljava/lang/StringBuilder;ILnet/minecraft/unmapped/C_cpwnhism;I)Z
+		ARG 1 index
+		ARG 2 style
+		ARG 3 codePoint
 	METHOD m_dhlhwpav visitFormatted (Ljava/lang/String;ILnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string, applying the formatting codes within.
 		COMMENT
@@ -58,6 +62,10 @@ CLASS net/minecraft/unmapped/C_qpsrdirb net/minecraft/client/font/TextVisitFacto
 			COMMENT the style to reset to when a {@code §r} formatting code is encountered
 		ARG 4 visitor
 			COMMENT the visitor
+	METHOD m_edairgbx (Ljava/lang/StringBuilder;ILnet/minecraft/unmapped/C_cpwnhism;I)Z
+		ARG 1 index
+		ARG 2 style
+		ARG 3 codePoint
 	METHOD m_icktwjgz visitFormatted (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;)Z
 		COMMENT Visits the code points of a string, applying the formatting codes within.
 		COMMENT
@@ -83,6 +91,9 @@ CLASS net/minecraft/unmapped/C_qpsrdirb net/minecraft/client/font/TextVisitFacto
 		ARG 0 text
 		ARG 1 style
 		ARG 2 visitor
+	METHOD m_onlbntrw (Lnet/minecraft/unmapped/C_kexvwzdm;Lnet/minecraft/unmapped/C_cpwnhism;Ljava/lang/String;)Ljava/util/Optional;
+		ARG 1 _style
+		ARG 2 string
 	METHOD m_vhcoskrx visitRegularCharacter (Lnet/minecraft/unmapped/C_cpwnhism;Lnet/minecraft/unmapped/C_kexvwzdm;IC)Z
 		ARG 0 style
 		ARG 1 visitor
