@@ -2,7 +2,7 @@ CLASS net/minecraft/unmapped/C_lorklvui net/minecraft/entity/ai/brain/task/LongJ
 	FIELD f_bkvdywub RUN_TIME I
 	FIELD f_cnpnjwkj targets Ljava/util/List;
 	FIELD f_cyuyrmqv TARGET_RETAIN_TIME I
-	FIELD f_eohuokio jumpSoundGetter Ljava/util/function/Function;
+	FIELD f_eohuokio jumpSound Ljava/util/function/Function;
 	FIELD f_ezfoxhnc MAX_COOLDOWN I
 	FIELD f_icwavajr cooldown I
 	FIELD f_kbvylemg maxRange F
@@ -13,12 +13,28 @@ CLASS net/minecraft/unmapped/C_lorklvui net/minecraft/entity/ai/brain/task/LongJ
 	FIELD f_tpdxyctz horizontalRange I
 	FIELD f_voltlwnj lastTarget Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_xesapfpq verticalRange I
+	FIELD f_xfiuyopv RAMMING_VELOCITIES Ljava/util/List;
 	METHOD <init> (Lnet/minecraft/unmapped/C_hvilmtvi;IIFLjava/util/function/Function;)V
 		ARG 1 cooldownRange
 		ARG 2 verticalRange
 		ARG 3 horizontalRange
 		ARG 4 maxRange
 		ARG 5 jumpSoundGetter
+	METHOD <init> (Lnet/minecraft/unmapped/C_hvilmtvi;IIFLjava/util/function/Function;Ljava/util/function/Predicate;)V
+		ARG 1 cooldownRange
+		ARG 2 verticalRange
+		ARG 3 horizontalRange
+		ARG 4 maxRange
+		ARG 5 jumpSound
+	METHOD m_aqmuqzze (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 1 world
+		ARG 2 entity
+		ARG 3 pos
+	METHOD m_bxvlvnid (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_dxkfswlz;J)V
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_lhfkbmlb (Lnet/minecraft/unmapped/C_bdwnwhiu;)Ljava/util/Optional;
+		ARG 1 world
 	METHOD m_lopqoeza getRammingVelocity (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_vgpupfxx;I)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 entity
 		ARG 2 pos
@@ -32,4 +48,7 @@ CLASS net/minecraft/unmapped/C_lorklvui net/minecraft/entity/ai/brain/task/LongJ
 		ARG 2 pos
 	CLASS C_egstzubu Target
 		FIELD f_puddulzt pos Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;I)V
+			ARG 1 pos
+			ARG 2 weight
 		METHOD m_iidtipmz getPos ()Lnet/minecraft/unmapped/C_hynzadkk;
