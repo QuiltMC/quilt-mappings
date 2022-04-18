@@ -4,7 +4,7 @@ import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
@@ -87,7 +87,7 @@ public class DecompileTask extends DefaultMappingsTask {
         this.decompilerOptions = decompilerOptions;
     }
 
-    @InputFile
+    @InputFiles
     public RegularFileProperty getInput() {
         return input;
     }
