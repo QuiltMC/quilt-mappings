@@ -5,6 +5,10 @@ buildscript {
 			url 'https://maven.quiltmc.org/repository/release/'
 		}
 		maven {
+			name 'Quilt Snapshot Repository'
+			url 'https://maven.quiltmc.org/repository/snapshot/'
+		}
+		maven {
 			name "Fabric Repository"
 			url 'https://maven.fabricmc.net'
 		}
@@ -52,12 +56,9 @@ repositories {
 		name "Mojang"
 		url 'https://libraries.minecraft.net/'
 	}
-	mavenLocal()
-	if (USE_SNAPSHOT_HASHES) {
-		maven {
-			name "Quilt Snapshot Repositiory"
-			url "https://maven.quiltmc.org/repository/snapshot"
-		}
+	maven {
+		name "Quilt Snapshot Repositiory"
+		url "https://maven.quiltmc.org/repository/snapshot"
 	}
 }
 

@@ -17,5 +17,6 @@ public class Constants {
         public static final String DECOMPILE_GROUP = "decompile";
         public static final String UNPICK = "unpick";
         public static final String LINT_GROUP = "lint";
+        public static final String UNPICK_GEN = "unpick gen";
     }
 }
