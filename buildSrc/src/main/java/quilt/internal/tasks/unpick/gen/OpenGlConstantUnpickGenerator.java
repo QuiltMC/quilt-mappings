@@ -38,8 +38,8 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         super(Constants.Groups.UNPICK_GEN);
         this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME);
 
-//        this.onlyIf(_task -> !_task.getProject().file("unpick-definitions/unpick_gl.unpick").exists() ||
-//                             !_task.getProject().file("unpick-definitions/unpick_glstatemanager.unpick").exists());
+        this.onlyIf(_task -> !_task.getProject().file("unpick-definitions/unpick_gl.unpick").exists() ||
+                             !_task.getProject().file("unpick-definitions/unpick_glstatemanager.unpick").exists());
     }
 
     @TaskAction
@@ -83,7 +83,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
 
         Map<String, List<String>> constantToDefiningVersions = new HashMap<>();
         Map<String, Map<Signature, List<String>>> functionToSignatureToDefiningVersions = new HashMap<>();
-        ZipFile zip = new ZipFile(getProject().file(".gradle/minecraft/libraries/lwjgl-opengl-3.2.2.jar"));
+        ZipFile zip = new ZipFile(getProject().file(".gradle/minecraft/libraries/lwjgl-opengl-3.3.1.jar"));
         OPEN_GL_VERSIONS.forEach(version -> {
             try {
                 ZipEntry e = zip.getEntry("org/lwjgl/opengl/GL" + version + ".class");
