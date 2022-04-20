@@ -2,6 +2,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ablxonpa horizontalCollision Z
 	FIELD f_ajffyhwa blockPos Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_apbfelpo submergedFluidTag Ljava/util/Set;
+	FIELD f_bejbcamf MAX_ENTITY_TAG_COUNT I
 	FIELD f_bgvyxbvq distanceTraveled F
 	FIELD f_bjvpodux passengerList Lcom/google/common/collect/ImmutableList;
 	FIELD f_bygzgscd id I
@@ -30,13 +31,17 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_eyfbjeig horizontalSpeed F
 	FIELD f_eyihyrff pistonMovementDelta [D
 	FIELD f_fbrwyrto inNetherPortal Z
+	FIELD f_fhrqlvrj VELOCITY_POS_Y_OFFSET D
 	FIELD f_fngqrxks standingEyeHeight F
 	FIELD f_gpwlbvdc lastNetherPortalPosition Lnet/minecraft/unmapped/C_hynzadkk;
+	FIELD f_gzzxrhqg RIDING_COOLDOWN I
 	FIELD f_habutjjj scoreboardTags Ljava/util/Set;
 	FIELD f_hefasmoa inPowderSnow Z
 	FIELD f_hfjnvwdf inanimate Z
 	FIELD f_hgjnrumf random Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_hkohmlix ID_KEY Ljava/lang/String;
+	FIELD f_hmqhtisa FAST_LAVA_SPEED_FACTOR D
+	FIELD f_hxkuahwe minorHorizontalCollision Z
 	FIELD f_hyixntpo submergedInWater Z
 	FIELD f_hzlmaqrc removalReason Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
 	FIELD f_ihpdejin prevY D
@@ -44,6 +49,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_iskwetjb CUSTOM_NAME Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_jaoyzanc netherPortalTime I
 	FIELD f_jhbyfben ignoreCameraFrustum Z
+	FIELD f_jijbnlgf SLOW_LAVA_SPEED_FACTOR D
 	FIELD f_jncusoxk touchingWater Z
 	FIELD f_jxhcznzh world Lnet/minecraft/unmapped/C_cdctfzbn;
 	FIELD f_kbrdyccj netherPortalCooldown I
@@ -51,6 +57,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_kksaxutc stepHeight F
 	FIELD f_kpcimogu uuid Ljava/util/UUID;
 	FIELD f_krxlkweq type Lnet/minecraft/unmapped/C_ogavsvbr;
+	FIELD f_kvjscloo BREATHING_DISTANCE_BELOW_EYES F
+	FIELD f_lblxmmno FREEZE_DAMAGE_FREQUENCY I
 	FIELD f_llpiaiql fireTicks I
 	FIELD f_lnfbdcex firstUpdate Z
 	FIELD f_ltxgrrxv noClip Z
@@ -62,21 +70,29 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_naslivlb lastRenderY D
 	FIELD f_nexrnbri wasInPowderSnow Z
 	FIELD f_nzehfinv dimensions Lnet/minecraft/unmapped/C_sszpscpo;
+	FIELD f_oanvevib TOTAL_AIR_SUPPLY I
 	FIELD f_ocqvsaqw collisionBlockState Lnet/minecraft/unmapped/C_txtbiemp;
+	FIELD f_oritxgsn crystalSoundIntensity F
 	FIELD f_oysssbsf ridingCooldown I
 	FIELD f_paqudcks UUID_KEY Ljava/lang/String;
 	FIELD f_pebbtyzx NO_GRAVITY Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_pfezymmj prevYaw F
+	FIELD f_pfgaedzm MIN_TICKS_TO_FREEZE I
 	FIELD f_qazqhmfv SNEAKING_FLAG_INDEX I
 	FIELD f_qriixkyh SWIMMING_FLAG_INDEX I
 	FIELD f_qxfvmjxc lastRenderX D
 	FIELD f_qxqqtzyy NAME_VISIBLE Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_rbybyzcg flyDistance F
 	FIELD f_rilctjct dataTracker Lnet/minecraft/unmapped/C_pyoaoolj;
+	FIELD f_rkfixhau verticalCollisionBelow Z
+	FIELD f_rnuwpthh WATER_SPEED_FACTOR D
 	FIELD f_scozqngs invulnerable Z
 	FIELD f_sfjnvyan movementMultiplier Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_skorbhua lastChimeAge I
 	FIELD f_smuuqtsj FROZEN_TICKS Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_srfebjdd DEFAULT_BOUNDING_BOX_HEIGHT F
 	FIELD f_ssljujsr LOGGER Lorg/slf4j/Logger;
+	FIELD f_tigrjjuw DEFAULT_BOUNDING_BOX_WIDTH F
 	FIELD f_tklhtpht entityChangeListener Lnet/minecraft/unmapped/C_ylpvpknw;
 	FIELD f_tmgwwmbu prevHorizontalSpeed F
 	FIELD f_tshkckso EMPTY_STACK_LIST Ljava/util/List;
@@ -217,6 +233,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 passenger
 	METHOD m_elbjzlaw isRemoved ()Z
 	METHOD m_elzzvnlh isSubmergedIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
+		ARG 1 key
 	METHOD m_emaabkqn equipStack (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 		ARG 2 stack
@@ -303,6 +320,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_gqpbdhma emitGameEvent (Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 event
 		ARG 2 entity
+	METHOD m_grytvnwh getLeashHoldPosition (F)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 delta
 	METHOD m_gtyitted getLerpedPos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 delta
 	METHOD m_gwopyrde dismountVehicle ()V
@@ -462,6 +481,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 axis
 		ARG 2 offsetFactor
 	METHOD m_lwugwlsw initDataTracker ()V
+	METHOD m_lygmgdif getHoldingItemAngle (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 item
 	METHOD m_lyxnmous getPickBlockStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_lzpwoeto updateSwimming ()V
 	METHOD m_mbesepaz isInvisibleTo (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
@@ -557,6 +578,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 volume
 		ARG 3 pitch
 	METHOD m_ozpbkkuu updateMovementInFluid (Lnet/minecraft/unmapped/C_ednuhnnn;D)Z
+		ARG 1 key
 	METHOD m_paxmjcli movementInputToVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;FF)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 movementInput
 		ARG 1 speed
@@ -829,6 +851,10 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_yoauovfn playExtinguishSound ()V
 	METHOD m_ysnccdty pushAwayFrom (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_ysprxwsv collideWithShapes (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/List;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 0 movement
+		ARG 1 entityBoundingBox
+		ARG 2 shapes
 	METHOD m_ysuhpnbf getPassengerList ()Ljava/util/List;
 	METHOD m_yuckcotc squaredDistanceTo (Lnet/minecraft/unmapped/C_astfners;)D
 		ARG 1 entity
@@ -843,6 +869,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 sprinting
 	METHOD m_zhfwaekn getBlockX ()I
 	METHOD m_zhtbdonc isGlowingLocal ()Z
+	METHOD m_ziqjvkiq (Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 2 state
 	METHOD m_zjgainuo updateTrackedHeadRotation (FI)V
 		ARG 1 yaw
 		ARG 2 interpolationSteps

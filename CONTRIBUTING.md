@@ -34,7 +34,7 @@ or in our other community spaces. We're always happy to help if you need us!
 ## Guide: Triage Categories
 
 Triage categories ensure that important, but small PRs--like bugfixes--are merged quickly, while large changes--like
-a naming refactor--are throughly reviewed before they are merged.
+a naming refactor--are thoroughly reviewed before they are merged.
 
 Aside from the main triage categories, QM also divides its PRs by the type of Minecraft version they target:
 releases and snapshots, with the former having longer review times and aiming for more stability.
