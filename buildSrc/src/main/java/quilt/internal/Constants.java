@@ -1,7 +1,7 @@
 package quilt.internal;
 
 public class Constants {
-    public static final String MINECRAFT_VERSION = "22w15a";
+    public static final String MINECRAFT_VERSION = "22w16b";
 
     public static final String MAPPINGS_NAME = "quilt-mappings";
 
@@ -17,5 +17,6 @@ public class Constants {
         public static final String DECOMPILE_GROUP = "decompile";
         public static final String UNPICK = "unpick";
         public static final String LINT_GROUP = "lint";
+        public static final String UNPICK_GEN = "unpick gen";
     }
 }
