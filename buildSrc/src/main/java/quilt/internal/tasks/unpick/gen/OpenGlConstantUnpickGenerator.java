@@ -83,7 +83,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
 
         Map<String, List<String>> constantToDefiningVersions = new HashMap<>();
         Map<String, Map<Signature, List<String>>> functionToSignatureToDefiningVersions = new HashMap<>();
-        ZipFile zip = new ZipFile(getProject().file(".gradle/minecraft/libraries/lwjgl-opengl-3.2.2.jar"));
+        ZipFile zip = new ZipFile(getProject().file(".gradle/minecraft/libraries/lwjgl-opengl-3.3.1.jar"));
         OPEN_GL_VERSIONS.forEach(version -> {
             try {
                 ZipEntry e = zip.getEntry("org/lwjgl/opengl/GL" + version + ".class");
