@@ -3,27 +3,32 @@ CLASS net/minecraft/unmapped/C_wepsgefi net/minecraft/entity/mob/ShulkerEntity
 	FIELD f_eoeowyqr COVERED_ARMOR_BONUS_ID Ljava/util/UUID;
 	FIELD f_faxfphpy NO_COLOR B
 	FIELD f_fwpmtaxc MAX_TELEPORT_DISTANCE I
+	FIELD f_gvaaancy PEEK_CHANCE_PER_TICK F
 	FIELD f_hlyfzsza teleportLerpTimer I
 	FIELD f_hxfmsvrp TELEPORT_STEPS I
 	FIELD f_kdytjkmi ATTACHED_FACE Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_nhqhcoaz OTHER_SHULKER_SCAN_RADIUS I
+	FIELD f_nhqhcoaz NEARBY_SHULKER_SCAN_RADIUS I
 	FIELD f_odaehnvp prevAttachedBlock Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_qyhdlubn PEEK_AMOUNT Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_rhlsurhw FORWARD Lnet/minecraft/unmapped/C_zviwfwgf;
 	FIELD f_sxhxgvpw DEFAULT_COLOR B
 	FIELD f_tdqqxmxs openProgress F
 	FIELD f_twtbkvow COLOR Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_yecffwtx COVERED_ARMOR_BONUS Lnet/minecraft/unmapped/C_hdbqsqsm;
-	FIELD f_yejiwmfa OTHER_SHULKER_LIMIT I
+	FIELD f_yejiwmfa MAX_NEARBY_SHULKERS_FOR_REPRODUCTION I
+	FIELD f_zdllrwfz MAX_SHELL_OPEN_DISTANCE F
 	METHOD m_afxezjrh setColor (Lnet/minecraft/unmapped/C_arllgqae;)V
 		ARG 1 color
 	METHOD m_agmrwfit createShulkerAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
-	METHOD m_aipehzdv (Lnet/minecraft/unmapped/C_xpuuihxf;FF)Lnet/minecraft/unmapped/C_hbcjzgoe;
+	METHOD m_aipehzdv getOpeningDeltaBoundingBox (Lnet/minecraft/unmapped/C_xpuuihxf;FF)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		ARG 0 direction
 	METHOD m_bcbqzxod getAttachedFace ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_bzwsabfi spawnNewShulker ()V
 	METHOD m_cuftthil findAttachSide (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 1 pos
-	METHOD m_hqsastbf (Lnet/minecraft/unmapped/C_xpuuihxf;F)Lnet/minecraft/unmapped/C_hbcjzgoe;
+	METHOD m_ghizitzm getPhysicalPeak (F)F
+		ARG 0 openProgress
+	METHOD m_hqsastbf getOpeningBoundingBox (Lnet/minecraft/unmapped/C_xpuuihxf;F)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		ARG 0 direction
 	METHOD m_jcmqjrtu setAttachedFace (Lnet/minecraft/unmapped/C_xpuuihxf;)V
 		ARG 1 face
@@ -31,6 +36,7 @@ CLASS net/minecraft/unmapped/C_wepsgefi net/minecraft/entity/mob/ShulkerEntity
 		ARG 1 peekAmount
 	METHOD m_lmhywaga tryAttachOrTeleport ()V
 	METHOD m_munteupc tickOpenProgress ()Z
+	METHOD m_nbdtojoo getRenderPosition (F)Ljava/util/Optional;
 	METHOD m_nnaejkue getColor ()Lnet/minecraft/unmapped/C_arllgqae;
 	METHOD m_nqxiwxry isPosBlocked (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos

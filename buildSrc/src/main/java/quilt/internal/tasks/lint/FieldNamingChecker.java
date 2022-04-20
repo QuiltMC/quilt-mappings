@@ -1,13 +1,13 @@
 package quilt.internal.tasks.lint;
 
+import java.util.Locale;
+import java.util.function.Function;
+
 import cuchaz.enigma.translation.mapping.EntryMapping;
 import cuchaz.enigma.translation.representation.AccessFlags;
 import cuchaz.enigma.translation.representation.TypeDescriptor;
 import cuchaz.enigma.translation.representation.entry.Entry;
 import cuchaz.enigma.translation.representation.entry.FieldEntry;
-
-import java.util.Locale;
-import java.util.function.Function;
 
 public final class FieldNamingChecker implements Checker<FieldEntry> {
     @Override
@@ -18,6 +18,10 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
 
         AccessFlags access = accessProvider.apply(entry);
 
+        if (access == null) {
+            throw new RuntimeException("Invalid mappings detected. Please run './gradlew dropInvalidMappings'.");
+        }
+
         TypeDescriptor descriptor = entry.getDesc();
         boolean isAtomic = descriptor.isType() && descriptor.getTypeEntry().getFullName().toLowerCase(Locale.ROOT).contains("atomic");
         if (isAtomic) {
@@ -26,7 +30,11 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
             }
         } else if (access.isStatic() && access.isFinal()) {
             if (!isConstantCase(mapping.targetName())) {
-                errorReporter.error("static final field is not in CONSTANT_CASE");
+                if (entry.getDesc().isArray()) {
+                    errorReporter.warning("static final array field is not in CONSTANT_CASE");
+                } else {
+                    errorReporter.error("static final field is not in CONSTANT_CASE");
+                }
             }
         } else {
             if (startsWithUppercase(mapping.targetName())) {
