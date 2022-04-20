@@ -7,10 +7,10 @@ CLASS net/minecraft/unmapped/C_mpfuowct net/minecraft/entity/vehicle/BoatEntity
 	FIELD f_cqovsjfd pressingLeft Z
 	FIELD f_cswmhrlg pressingBack Z
 	FIELD f_dnfabqzz DAMAGE_WOBBLE_SIDE Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_drmmjgbq PADDLE_SOUND_DURATION D
+	FIELD f_drmmjgbq PADDLE_SOUND_SECONDS D
 	FIELD f_evvwmvpm PADDLE_SPEED F
 	FIELD f_fabcisfn x D
-	FIELD f_fgsbhyeb BUBBLE_TIME I
+	FIELD f_fgsbhyeb BUBBLE_TIME_TICKS I
 	FIELD f_fordbbty pressingForward Z
 	FIELD f_gbhslpfh DAMAGE_WOBBLE_STRENGTH Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_hhiptjho yawVelocity F
@@ -23,7 +23,7 @@ CLASS net/minecraft/unmapped/C_mpfuowct net/minecraft/entity/vehicle/BoatEntity
 	FIELD f_nshqodnw landFriction F
 	FIELD f_odtguolr boatYaw D
 	FIELD f_rspsbzff fallVelocity D
-	FIELD f_sbrsivqn TIME_TO_EJECT I
+	FIELD f_sbrsivqn TIME_TO_EJECT_TICKS I
 	FIELD f_unahukdz lastLocation Lnet/minecraft/unmapped/C_mpfuowct$C_tdpqooxn;
 	FIELD f_vhymeias velocityDecay F
 	FIELD f_vlxvyqxt lerpSteps I
@@ -41,6 +41,7 @@ CLASS net/minecraft/unmapped/C_mpfuowct net/minecraft/entity/vehicle/BoatEntity
 		ARG 2 x
 		ARG 4 y
 		ARG 6 z
+	METHOD m_anvxehoq getMaxPassengers ()I
 	METHOD m_cjzujthp handleBubbleColumn ()V
 	METHOD m_ecdvyvts getPaddleSoundEvent ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_erwgiiba setBubbleWobbleTicks (I)V
@@ -62,6 +63,8 @@ CLASS net/minecraft/unmapped/C_mpfuowct net/minecraft/entity/vehicle/BoatEntity
 	METHOD m_nijfolhc copyEntityData (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
 	METHOD m_nolednfg getDamageWobbleStrength ()F
+	METHOD m_oecwpwmm dropItems (Lnet/minecraft/unmapped/C_sbxfkpyv;)V
+		ARG 1 damageSource
 	METHOD m_pejxhjyx getBoatType ()Lnet/minecraft/unmapped/C_mpfuowct$C_jyahrrif;
 	METHOD m_pkbdfjnn setDamageWobbleTicks (I)V
 		ARG 1 wobbleTicks
@@ -72,18 +75,19 @@ CLASS net/minecraft/unmapped/C_mpfuowct net/minecraft/entity/vehicle/BoatEntity
 	METHOD m_ttullqty canCollide (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 entity
 		ARG 1 other
-	METHOD m_txptnqba tickLerp ()V
+	METHOD m_txptnqba lerpTick ()V
 	METHOD m_txvphllp setInputs (ZZZZ)V
 		ARG 1 pressingLeft
 		ARG 2 pressingRight
 		ARG 3 pressingForward
 		ARG 4 pressingBack
-	METHOD m_ukuqkstu getAboveWaterLevel ()F
+	METHOD m_ukuqkstu getWaterLevelAbove ()F
 	METHOD m_vojylmpn getGroundFriction ()F
 	METHOD m_vvcxeafh interpolatePaddlePhase (IF)F
 		ARG 1 paddle
 		ARG 2 tickDelta
 	METHOD m_wchoyhkz getUnderWaterLocation ()Lnet/minecraft/unmapped/C_mpfuowct$C_tdpqooxn;
+	METHOD m_wimbgplz getSinglePassengerXOffset ()F
 	METHOD m_wovjkrir (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 entity
 	METHOD m_xwvweinm checkLocation ()Lnet/minecraft/unmapped/C_mpfuowct$C_tdpqooxn;
