@@ -1,18 +1,59 @@
 CLASS net/minecraft/unmapped/C_pdccygbj net/minecraft/client/render/BackgroundRenderer
 	FIELD f_dfpsklbj blue F
+	FIELD f_gkvccaki FOG_TRANSITION_TIME_MS F
 	FIELD f_kknyrdzc red F
 	FIELD f_kwzpurug waterFogColor I
+	FIELD f_nrtempcu DEFAULT_WATER_FOG_DISTANCE I
 	FIELD f_peldbxgs nextWaterFogColor I
 	FIELD f_qpqnsmzp green F
 	FIELD f_svbbancb lastWaterFogColorUpdateTime J
+	FIELD f_uqlxroos FOG_EFFECTS Ljava/util/List;
 	METHOD m_abobmbws applyFog (Lnet/minecraft/unmapped/C_dcmtgrvm;Lnet/minecraft/unmapped/C_pdccygbj$C_rqhfgdnc;FZF)V
 		ARG 0 camera
 		ARG 1 fogType
 		ARG 2 viewDistance
 		ARG 3 thickFog
+		ARG 4 tickDelta
+	METHOD m_agkumsrg (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_txmmiamu;FIII)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 3 x
+		ARG 4 y
+		ARG 5 z
 	METHOD m_fehofhpl render (Lnet/minecraft/unmapped/C_dcmtgrvm;FLnet/minecraft/unmapped/C_ghdnlrrw;IF)V
 		ARG 0 camera
 		ARG 1 tickDelta
 		ARG 2 world
-	METHOD m_hbkyxfwt setFogBlack ()V
+		ARG 3 viewDistance
+		ARG 4 skyDarkness
+	METHOD m_hbkyxfwt setShaderFogColor ()V
+	METHOD m_mwbzsblu (Lnet/minecraft/unmapped/C_usxaxydn;FLnet/minecraft/unmapped/C_pdccygbj$C_xwmtwrrx;)Z
+		ARG 2 effect
+	METHOD m_rbiksvub clearFog ()V
+	METHOD m_umyyhvkb findFogEffect (Lnet/minecraft/unmapped/C_astfners;F)Lnet/minecraft/unmapped/C_pdccygbj$C_xwmtwrrx;
+		ARG 0 entity
+		ARG 1 tickDelta
+	CLASS C_avnpbdde BlindnessFogEffect
+	CLASS C_ofhbgwbc FogParameters
+		FIELD f_flxlflub shape Lnet/minecraft/unmapped/C_jlqrymlp;
+		FIELD f_jigvbzpu fogType Lnet/minecraft/unmapped/C_pdccygbj$C_rqhfgdnc;
+		FIELD f_mucwnepw fogStart F
+		FIELD f_uhfmcjlq fogEnd F
+		METHOD <init> (Lnet/minecraft/unmapped/C_pdccygbj$C_rqhfgdnc;)V
+			ARG 1 fogType
 	CLASS C_rqhfgdnc FogType
+	CLASS C_urxijdrx DarknessFogEffect
+	CLASS C_xwmtwrrx FogEffect
+		METHOD m_noybxlgi applyFogEffects (Lnet/minecraft/unmapped/C_pdccygbj$C_ofhbgwbc;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_wpfizwve;FF)V
+			ARG 1 parameters
+			ARG 2 entity
+			ARG 3 effect
+			ARG 4 viewDistance
+			ARG 5 tickDelta
+		METHOD m_nssufckx canApply (Lnet/minecraft/unmapped/C_usxaxydn;F)Z
+			ARG 1 entity
+			ARG 2 tickDelta
+		METHOD m_wjsuijrz fadeAsEffectWearsOff (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_wpfizwve;FF)F
+			ARG 1 entity
+			ARG 2 effect
+			ARG 3 horizonShading
+			ARG 4 tickDelta
+		METHOD m_xxsnqvwh getStatusEffect ()Lnet/minecraft/unmapped/C_jaqasomh;

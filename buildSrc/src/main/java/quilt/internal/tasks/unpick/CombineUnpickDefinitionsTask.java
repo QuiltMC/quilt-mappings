@@ -1,22 +1,5 @@
 package quilt.internal.tasks.unpick;
 
-import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Reader;
-import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Writer;
-import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputDirectory;
-import org.gradle.api.tasks.OutputFile;
-import org.gradle.api.tasks.TaskAction;
-import org.gradle.workers.WorkAction;
-import org.gradle.workers.WorkParameters;
-import org.gradle.workers.WorkQueue;
-import org.gradle.workers.WorkerExecutor;
-import quilt.internal.Constants;
-import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.util.UnpickUtil;
-
-import javax.inject.Inject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,6 +10,23 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Reader;
+import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Writer;
+import javax.inject.Inject;
+import org.gradle.api.file.DirectoryProperty;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputDirectory;
+import org.gradle.api.tasks.OutputFile;
+import org.gradle.api.tasks.TaskAction;
+import org.gradle.workers.WorkAction;
+import org.gradle.workers.WorkParameters;
+import org.gradle.workers.WorkQueue;
+import org.gradle.workers.WorkerExecutor;
+import quilt.internal.Constants;
+import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.unpick.gen.UnpickGen;
+import quilt.internal.util.UnpickUtil;
+
 public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "combineUnpickDefinitions";
     private final DirectoryProperty input;
@@ -36,6 +36,8 @@ public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
         super(Constants.Groups.UNPICK);
         input = getProject().getObjects().directoryProperty();
         output = getProject().getObjects().fileProperty();
+
+        this.dependsOn(getProject().getTasks().withType(UnpickGen.class));
     }
 
     @InputDirectory
