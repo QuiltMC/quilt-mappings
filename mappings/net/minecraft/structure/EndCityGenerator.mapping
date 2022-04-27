@@ -2,7 +2,13 @@ CLASS net/minecraft/unmapped/C_jhbxacju net/minecraft/structure/EndCityGenerator
 	FIELD f_bzutuoep BUILDING Lnet/minecraft/unmapped/C_jhbxacju$C_llayhnle;
 	FIELD f_eailoawv SMALL_TOWER_BRIDGE_ATTACHMENTS Ljava/util/List;
 	FIELD f_efujjhuy SMALL_TOWER Lnet/minecraft/unmapped/C_jhbxacju$C_llayhnle;
-	FIELD f_gimmsqqu MAX_DEPTH I
+	FIELD f_gimmsqqu MAX_GENERATION_DEPTH I
+		COMMENT The maximum generation depth for pieces.
+		COMMENT
+		COMMENT <p>
+		COMMENT Used in {@link #createPart(StructureTemplateManager, Part, int, Piece, BlockPos, List, RandomGenerator)}.
+		COMMENT
+		COMMENT @see StructurePiece#generationDepth
 	FIELD f_onktwyco BRIDGE_PIECE Lnet/minecraft/unmapped/C_jhbxacju$C_llayhnle;
 	FIELD f_thlhsscc FAT_TOWER_BRIDGE_ATTACHMENTS Ljava/util/List;
 	FIELD f_ykrtonvq FAT_TOWER Lnet/minecraft/unmapped/C_jhbxacju$C_llayhnle;
@@ -10,31 +16,47 @@ CLASS net/minecraft/unmapped/C_jhbxacju net/minecraft/structure/EndCityGenerator
 		ARG 0 pieces
 		ARG 1 piece
 	METHOD m_josxuiyi createPart (Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_jhbxacju$C_llayhnle;ILnet/minecraft/unmapped/C_jhbxacju$C_vgyjzppn;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)Z
+		ARG 0 structureTemplateManager
 		ARG 1 piece
 		ARG 2 depth
 		ARG 3 parent
 		ARG 4 pos
 		ARG 5 pieces
+		ARG 6 random
 	METHOD m_sswfoadz createPiece (Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_jhbxacju$C_vgyjzppn;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/lang/String;Lnet/minecraft/unmapped/C_mboglirk;Z)Lnet/minecraft/unmapped/C_jhbxacju$C_vgyjzppn;
+		ARG 0 random
 		ARG 1 lastPiece
 		ARG 2 relativePosition
 		ARG 3 template
 		ARG 4 rotation
-		ARG 5 ignoreAir
+		ARG 5 includeAir
 	METHOD m_xafvxtry addPieces (Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)V
+		ARG 0 structureTemplateManager
 		ARG 1 pos
 		ARG 2 rotation
 		ARG 3 pieces
+		ARG 4 random
 	CLASS C_jfacydnw
 		FIELD f_kblfbsxm shipGenerated Z
 	CLASS C_llayhnle Part
 		METHOD m_axxzouqd create (Lnet/minecraft/unmapped/C_zxhjfyir;ILnet/minecraft/unmapped/C_jhbxacju$C_vgyjzppn;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)Z
+			ARG 1 structureTemplateManager
 			ARG 2 depth
 			ARG 3 root
 			ARG 4 pos
 			ARG 5 pieces
+			ARG 6 random
 		METHOD m_taljyeyo init ()V
 	CLASS C_vgyjzppn Piece
+		METHOD <init> (Lnet/minecraft/unmapped/C_zxhjfyir;Ljava/lang/String;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mboglirk;Z)V
+			ARG 1 structureTemplateManager
+			ARG 2 id
+			ARG 3 pos
+			ARG 4 rotation
+			ARG 5 includeAir
+		METHOD <init> (Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+			ARG 1 structureTemplateManager
+			ARG 2 nbt
 		METHOD m_aparluuw (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_mhhynxof;
 			ARG 1 id
 		METHOD m_isoumndm getId (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
