@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_lgkqzafw net/minecraft/util/StringIdentifiable
+	FIELD f_sqyqiitd PRE_BUILT_MAP_THRESHOLD I
 	METHOD m_dxbrenur asString ()Ljava/lang/String;
 	METHOD m_tywixflk toKeyable ([Lnet/minecraft/unmapped/C_lgkqzafw;)Lcom/mojang/serialization/Keyable;
 		ARG 0 values
@@ -7,3 +8,24 @@ CLASS net/minecraft/unmapped/C_lgkqzafw net/minecraft/util/StringIdentifiable
 		COMMENT using its ordinals (when compressed) or using its {@link #asString()} method
 		COMMENT and a given decode function.
 		ARG 0 enumValues
+	CLASS C_dhlgmkzt
+		METHOD keys keys (Lcom/mojang/serialization/DynamicOps;)Ljava/util/stream/Stream;
+			ARG 1 ops
+	CLASS C_nxwenkbc EnumCodec
+		FIELD f_wzwwpoge resolver Ljava/util/function/Function;
+		FIELD f_yqanbtam base Lcom/mojang/serialization/Codec;
+		METHOD <init> ([Ljava/lang/Enum;Ljava/util/function/Function;)V
+			ARG 1 values
+			ARG 2 resolver
+		METHOD decode decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 ops
+		METHOD encode encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 2 ops
+		METHOD m_hsieshvy (Ljava/lang/Object;)Ljava/lang/String;
+			ARG 0 value
+		METHOD m_ifteaqvv ([Ljava/lang/Enum;I)Ljava/lang/Enum;
+			ARG 1 i
+		METHOD m_ipqxcdls (Ljava/lang/Object;)I
+			ARG 0 value
+		METHOD m_leiahkma resolve (Ljava/lang/String;)Ljava/lang/Enum;
+			ARG 1 id
