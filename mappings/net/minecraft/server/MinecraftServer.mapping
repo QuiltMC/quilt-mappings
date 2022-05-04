@@ -16,9 +16,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	COMMENT @see net.minecraft.server.dedicated.MinecraftDedicatedServer
 	COMMENT @see net.minecraft.server.integrated.IntegratedServer
 	FIELD f_ajapxocy registryManager Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
-	FIELD f_bckvxxfv singlePlayerName Ljava/lang/String;
 	FIELD f_cprjvpov playerManager Lnet/minecraft/unmapped/C_digmgtxw;
-	FIELD f_cuyxnsyl resourcePackHash Ljava/lang/String;
 	FIELD f_cyhowiqj pvpEnabled Z
 	FIELD f_dsjdzrap PLAYER_SAMPLE_UPDATE_INTERVAL J
 	FIELD f_emdhztny saveHandler Lnet/minecraft/unmapped/C_wnawwdpy;
@@ -57,7 +55,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_pcoxooyw serverIp Ljava/lang/String;
 	FIELD f_piadzews scoreboard Lnet/minecraft/unmapped/C_orszeavg;
 	FIELD f_pjqvnnxv bossBarManager Lnet/minecraft/unmapped/C_xtwgkoiw;
-	FIELD f_qbuvdhsr resourcePackUrl Ljava/lang/String;
 	FIELD f_qhvtahcc nextTickTimestamp J
 	FIELD f_qtwsjtfk lastTimeReference J
 	FIELD f_qtxubclb stopped Z
@@ -211,7 +208,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_jgzzempi areCommandBlocksEnabled ()Z
 		COMMENT Specifies whether command blocks can execute commands on the server.
 	METHOD m_jrvdpjat getLootManager ()Lnet/minecraft/unmapped/C_chzdbgdx;
-	METHOD m_jsnrfzbc getResourcePackUrl ()Ljava/lang/String;
 	METHOD m_kbcfaaja tickWorlds (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
 	METHOD m_kgrbsjbe dumpProperties (Ljava/nio/file/Path;)V
@@ -227,7 +223,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 playerManager
 	METHOD m_lhntuhvs getSpawnRadius (Lnet/minecraft/unmapped/C_bdwnwhiu;)I
 		ARG 1 world
-	METHOD m_ljpatxea getResourcePackPrompt ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_lprqwxbm setServerId (Ljava/lang/String;)V
 		ARG 1 serverId
 	METHOD m_magpcgdt getWorldRegistryKeys ()Ljava/util/Set;
@@ -263,31 +258,9 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 worldProperties
 		ARG 2 bonusChest
 		ARG 3 debugWorld
-	METHOD m_ojqyhhzb setSinglePlayerName (Ljava/lang/String;)V
-		COMMENT Sets the name of the single player of this server.
-		COMMENT
-		COMMENT <p>This is called by vanilla when setting up this server. The
-		COMMENT {@code singlePlayerName} is the client's player name for integrated
-		COMMENT servers and specified by the {@code --singleplayer <singlePlayerName>}
-		COMMENT command-line argument or {@code null} for dedicated servers.
-		COMMENT
-		COMMENT @see #getSinglePlayerName()
-		COMMENT @see #isSingleplayer()
-		ARG 1 singlePlayerName
-			COMMENT the single player's name, or {@code null} for non-singleplayer servers
-	METHOD m_omcikfua getSinglePlayerName ()Ljava/lang/String;
-		COMMENT {@return the name of the single player of this server} This may be
-		COMMENT {@code null} for non-singleplayer servers.
-		COMMENT
-		COMMENT <p>In vanilla, outside of integrated servers, this is used to
-		COMMENT determine to whom the {@code Player} NBT from {@code level.dat} applies.
-		COMMENT
-		COMMENT @see #setSinglePlayerName(String)
-		COMMENT @see #isSingleplayer()
 	METHOD m_opevzklp getDataFixer ()Lcom/mojang/datafixers/DataFixer;
 	METHOD m_opjlzrwc getDataPackManager ()Lnet/minecraft/unmapped/C_dqfyacfy;
 	METHOD m_ouowsdpz getIconFile ()Ljava/util/Optional;
-	METHOD m_oxokrhpz getResourcePackHash ()Ljava/lang/String;
 	METHOD m_pfadtdtk updateDifficulty ()V
 	METHOD m_pktszzyz getMaxPlayerCount ()I
 	METHOD m_pomxcfam setServerPort (I)V
@@ -396,9 +369,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 player
 	METHOD m_xwbfzczq addSystemDetails (Lnet/minecraft/unmapped/C_fprbxnfr;)Lnet/minecraft/unmapped/C_fprbxnfr;
 		ARG 1 details
-	METHOD m_xzceinsb setResourcePack (Ljava/lang/String;Ljava/lang/String;)V
-		ARG 1 url
-		ARG 2 hash
 	METHOD m_ykrfoxdw getFile (Ljava/lang/String;)Ljava/io/File;
 		ARG 1 path
 			COMMENT relative path from the run directory
