@@ -252,6 +252,13 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 index
 	METHOD isWritable isWritable ()Z
 	METHOD isWritable isWritable (I)Z
+	METHOD m_alotuvgi writeOptional (Ljava/util/Optional;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;)V
+		COMMENT Writes an optional value to this buf. An optional value is represented by
+		COMMENT a boolean indicating if the value is present, followed by the value only if
+		COMMENT the value is present.
+		COMMENT
+		COMMENT @see #readOptional(Function)
+		ARG 1 value
 	METHOD m_bczcqhop writeString (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a string to this buf. A string is represented by a byte array of
 		COMMENT its UTF-8 data. That byte array can have a maximum length of
@@ -304,6 +311,12 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return this buf, for chaining
 		ARG 1 array
 			COMMENT the array to write
+	METHOD m_dhyxvfyk readList (Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Ljava/util/List;
+		COMMENT Reads a collection from this buf as an array list.
+		COMMENT
+		COMMENT @param <T> the list's entry type
+		COMMENT @return the read list
+		COMMENT @see #readCollection(IntFunction, Function)
 	METHOD m_dukrkwvb getWrittenBytes ()[B
 		COMMENT Returns an array of bytes of contents in this buf between index {@code 0} and
 		COMMENT the {@link #writerIndex()}.
@@ -555,6 +568,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readItemStack()
 		ARG 1 stack
 			COMMENT the stack to write
+	METHOD m_qhulbylm (Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Ljava/lang/Object;Ljava/lang/Object;)V
+		ARG 3 key
+		ARG 4 value
 	METHOD m_qpcrbjwf readIntArray (I)[I
 		COMMENT Reads an array of primitive ints from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the var int entries. The array
@@ -583,6 +599,18 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return the number of bytes a var long {@code value} uses
 		ARG 0 value
 			COMMENT the value to encode
+	METHOD m_sevbbzdm readCollection (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Ljava/util/Collection;
+		COMMENT Reads a collection from this buf. The collection is stored as a leading
+		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
+		COMMENT sequentially.
+		COMMENT
+		COMMENT @param <T> the collection's entry type
+		COMMENT @param <C> the collection's type
+		COMMENT @return the read collection
+		COMMENT @see #writeCollection(Collection, BiConsumer)
+		COMMENT @see #readList(Function)
+		ARG 1 collectionFactory
+			COMMENT a factory that creates a collection with a given size
 	METHOD m_smxlihso readLongArray ()[J
 		COMMENT Reads an array of primitive longs from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the regular long (not var
@@ -613,6 +641,13 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readUnlimitedNbt()
 		COMMENT @see #readNbt(NbtTagSizeTracker)
 		COMMENT @see #MAX_READ_NBT_SIZE
+	METHOD m_sxbdiyar readOptional (Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Ljava/util/Optional;
+		COMMENT Reads an optional value from this buf. An optional value is represented by
+		COMMENT a boolean indicating if the value is present, followed by the value only if
+		COMMENT the value is present.
+		COMMENT
+		COMMENT @return the read optional value
+		COMMENT @see #writeOptional(Optional, BiConsumer)
 	METHOD m_tbiclwdt forEachInCollection (Ljava/util/function/Consumer;)V
 		COMMENT Iterates a collection from this buf. The collection is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} {@code size} followed by the entries
@@ -704,11 +739,30 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_wjpiukbv writeId (Lnet/minecraft/unmapped/C_feaetnaz;Ljava/lang/Object;)V
 		ARG 1 idMap
 		ARG 2 object
+	METHOD m_wqpnnsca writeCollection (Ljava/util/Collection;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;)V
+		COMMENT Writes a collection to this buf. The collection is stored as a leading
+		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
+		COMMENT sequentially.
+		COMMENT
+		COMMENT @param <T> the list's entry type
+		COMMENT @see #readCollection(IntFunction, Function)
+		ARG 1 collection
+			COMMENT the collection to write
 	METHOD m_wxfnqbwh readVarInt ()I
 		COMMENT Reads a single var int from this buf.
 		COMMENT
 		COMMENT @return the value read
 		COMMENT @see #writeVarInt(int)
+	METHOD m_xzxnbdko writeMap (Ljava/util/Map;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;)V
+		COMMENT Writes a map to this buf. The map is stored as a leading
+		COMMENT {@linkplain #readVarInt() var int} size followed by each key and value
+		COMMENT pair.
+		COMMENT
+		COMMENT @param <K> the key type
+		COMMENT @param <V> the value type
+		COMMENT @see #readMap(IntFunction, Function, Function)
+		ARG 1 map
+			COMMENT the map to write
 	METHOD m_ywhbyyvb readChunkPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 		COMMENT Reads a chunk position from this buf. A chunk position is represented by
 		COMMENT a regular long.
