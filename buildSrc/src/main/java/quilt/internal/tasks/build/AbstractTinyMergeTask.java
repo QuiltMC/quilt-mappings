@@ -1,16 +1,21 @@
 package quilt.internal.tasks.build;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.nio.file.Files;
 
+import net.fabricmc.mappingio.MappingReader;
+import net.fabricmc.mappingio.MappingWriter;
+import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
+import net.fabricmc.mappingio.format.MappingFormat;
+import net.fabricmc.mappingio.format.Tiny2Writer;
+import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-
-import net.fabricmc.stitch.commands.tinyv2.CommandMergeTinyV2;
-import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 
 public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     @InputFile
@@ -32,27 +37,13 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         File hashedTinyInput = this.getTaskByType(InvertPerVersionMappingsTask.class).getInvertedTinyFile();
         File mappingsTinyInput = input.get().getAsFile();
 
-        File temporaryResultMappings = new File(fileConstants.tempDir, "mappings-" + getName() + ".tiny");
-
         getLogger().lifecycle(":merging {} and {}", Constants.MAPPINGS_NAME, Constants.PER_VERSION_MAPPINGS_NAME);
-        String[] args = {
-                hashedTinyInput.getAbsolutePath(),
-                mappingsTinyInput.getAbsolutePath(),
-                temporaryResultMappings.getAbsolutePath(),
-                Constants.PER_VERSION_MAPPINGS_NAME,
-                "official"
-        };
-
-        new CommandMergeTinyV2().run(args);
-
-        getLogger().lifecycle(":reordering merged {}", Constants.PER_VERSION_MAPPINGS_NAME);
-        String[] args2 = {
-                temporaryResultMappings.getAbsolutePath(),
-                outputMappings.getAbsolutePath(),
-                "official", Constants.PER_VERSION_MAPPINGS_NAME, "named"
-        };
-
-        new CommandReorderTinyV2().run(args2);
+        MemoryMappingTree tree = new MemoryMappingTree(false); // hashed is the src namespace
+        MappingReader.read(hashedTinyInput.toPath(), MappingFormat.TINY_2, tree);
+        MappingReader.read(mappingsTinyInput.toPath(), MappingFormat.TINY_2, tree);
+        try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings.toPath()), false)) {
+            tree.accept(new MappingSourceNsSwitch(w, "official", /*Drop methods not in hashed*/ true));
+        }
     }
 
     public RegularFileProperty getInput() {
