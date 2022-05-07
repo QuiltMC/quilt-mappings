@@ -31,7 +31,7 @@ plugins {
 
 dependencies {
    mappings(loom.layered {
-      addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${minecraft_version}+build.${project.quilt_mappings}:v2"))
+      addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${project.minecraft_version}+build.${project.quilt_mappings}:v2"))
    })
 }
 ```
