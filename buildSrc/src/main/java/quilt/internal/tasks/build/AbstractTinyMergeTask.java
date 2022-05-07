@@ -3,9 +3,11 @@ package quilt.internal.tasks.build;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Collections;
 
 import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.MappingWriter;
+import net.fabricmc.mappingio.adapter.MappingNsCompleter;
 import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
 import net.fabricmc.mappingio.format.MappingFormat;
 import net.fabricmc.mappingio.format.Tiny2Writer;
@@ -42,7 +44,13 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         MappingReader.read(hashedTinyInput.toPath(), MappingFormat.TINY_2, tree);
         MappingReader.read(mappingsTinyInput.toPath(), MappingFormat.TINY_2, tree);
         try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings.toPath()), false)) {
-            tree.accept(new MappingSourceNsSwitch(w, "official", /*Drop methods not in hashed*/ true));
+            tree.accept(
+                new MappingNsCompleter(
+                    new MappingSourceNsSwitch(w, "official", /*Drop methods not in hashed*/ true),
+                    Collections.singletonMap("named", "hashed"), // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
+                    false
+                )
+            );
         }
     }
 
