@@ -9,7 +9,10 @@ To see the current version being targeted, check the branch name!
 
 ## Usage
 ### A Minecraft mod using Loom
-To use Quilt Mappings in a Fabric or Quilt mod, use the official [Quilt Mappings on Loom](https://github.com/QuiltMC/quilt-mappings-on-loom) Gradle plugin.
+To use Quilt Mappings in a Fabric or Quilt mod use the official [Quilt Mappings on Loom](https://github.com/QuiltMC/quilt-mappings-on-loom) (QMoL) Gradle plugin.
+
+### Fabric-Loom support
+This extra code is only needed if you are using Fabric Loom; the QMoL plugin is applied by default on Quilt.
 
 `settings.gradle`:
 ```groovy
@@ -26,16 +29,18 @@ plugins {
   // Check the Quilt Mappings on Loom README for the correct version to use
   id "org.quiltmc.quilt-mappings-on-loom" version "QMoL_VERSION"
 }
-
-// ...
-
+```
+See [here](https://github.com/quiltmc/quilt-mappings-on-loom/blob/master/README.md#qmol-versions) for the correct `QMoL_VERSION` to use.
+### Common code
+This code is added to your buildscript regardless of if you are using Fabric or Quilt Loom.
+```groovy
 dependencies {
    mappings(loom.layered {
       addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${project.minecraft_version}+build.${project.quilt_mappings}:v2"))
    })
 }
 ```
-See [here](https://github.com/quiltmc/quilt-mappings-on-loom/blob/master/README.md#qmol-versions) for the correct `QMoL_VERSION` to use.
+
 
 ### Something else
 To obtain a deobfuscated Minecraft jar, [`./gradlew mapNamedJar`](#mapNamedJar) will generate a jar named like `<minecraft version>-named.jar`, which can be sent to a decompiler for deobfuscated code.
