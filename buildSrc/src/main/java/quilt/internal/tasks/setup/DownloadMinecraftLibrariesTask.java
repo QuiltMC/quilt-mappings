@@ -3,6 +3,7 @@ package quilt.internal.tasks.setup;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.io.FileUtils;
@@ -57,7 +58,10 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
             } catch (IOException e) {
                 failed.set(true);
                 e.printStackTrace();
+            } catch (NoSuchElementException e) {
+                new RuntimeException("Unable to find artifact for " + library.getName(), e).printStackTrace();
             }
+
             synchronized (lock) {
                 getProject().getDependencies().add("decompileClasspath", library.getName());
             }
