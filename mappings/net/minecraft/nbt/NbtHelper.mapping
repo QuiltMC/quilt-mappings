@@ -34,6 +34,12 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 		ARG 0 nbt
 	METHOD m_naeztwhq (Lnet/minecraft/unmapped/C_hqhtfwlr;)D
 		ARG 0 nbt
+	METHOD m_nvmuisif toUuid (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/UUID;
+		COMMENT Deserializes an NBT element into a {@link UUID}.
+		COMMENT The NBT element's data must have the same structure as the output of {@link #fromUuid}.
+		COMMENT
+		COMMENT @throws IllegalArgumentException if {@code element} is not a valid representation of a UUID
+		COMMENT @since 20w10a
 	METHOD m_oifycahn (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;Ljava/lang/String;)V
 		ARG 2 property
 	METHOD m_owyzwhdz nameValue (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Comparable;)Ljava/lang/String;
@@ -43,6 +49,11 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 		ARG 0 nbt
 	METHOD m_pblkkiox fromSnbt (Ljava/lang/String;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 snbt
+	METHOD m_phkofnda toFormattedString (Lnet/minecraft/unmapped/C_oivssbvb;Z)Ljava/lang/String;
+		COMMENT {@return the human-readable, non-deserializable representation of {@code nbt}}
+		ARG 1 withArrayContents
+			COMMENT {@code true} if the contents of {@link NbtByteArray}, {@link NbtIntArray}
+			COMMENT and {@link NbtLongArray} should be included, otherwise {@code false}
 	METHOD m_pxvpkbfz fromUuid (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_qkxiqejc;
 		COMMENT Serializes a {@link UUID} into its equivalent NBT representation.
 		COMMENT
@@ -54,6 +65,7 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 		ARG 0 state
 	METHOD m_qwktpkba unpackStructureTemplate (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 nbt
+	METHOD m_rawecpam toPrettyPrintedText (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_sgsulrja (Lnet/minecraft/unmapped/C_hqhtfwlr;)D
 		ARG 0 nbt
 	METHOD m_skmtimil toBlockPos (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hynzadkk;
@@ -74,6 +86,17 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 		ARG 0 nbt
 	METHOD m_wcjizhwl fromFluidState (Lnet/minecraft/unmapped/C_xqketiuf;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 state
+	METHOD m_wqklvkdy matches (Lnet/minecraft/unmapped/C_oivssbvb;Lnet/minecraft/unmapped/C_oivssbvb;Z)Z
+		ARG 2 equalValue
+	METHOD m_xcadefud toFormattedString (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/lang/String;
+		COMMENT {@return the human-readable, non-deserializable representation of {@code nbt}}
+		COMMENT <p>
+		COMMENT This does not include contents of {@link NbtByteArray}, {@link NbtIntArray},
+		COMMENT and {@link NbtLongArray}.
+		COMMENT To include them, call {@link #toFormattedString(NbtElement, boolean)}
+		COMMENT with {@code withArrayContents} parameter set to {@code true}.
+		COMMENT
+		COMMENT @see #toFormattedString(NbtElement, boolean)
 	METHOD m_xqnjypia update (Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_ccrrfaqj;Lnet/minecraft/unmapped/C_hhlwcnih;II)Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT Uses the data fixer to update an NBT compound object.
 		ARG 0 fixer
@@ -91,5 +114,9 @@ CLASS net/minecraft/unmapped/C_scnprxmz net/minecraft/nbt/NbtHelper
 		ARG 1 builder
 	METHOD m_ykgtsmrr fromBlockPos (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 pos
+	METHOD m_zhfgfedi appendFormattedString (Ljava/lang/StringBuilder;Lnet/minecraft/unmapped/C_oivssbvb;IZ)Ljava/lang/StringBuilder;
+		ARG 0 builder
+		ARG 2 depth
+		ARG 3 withArrayContents
 	METHOD m_zvkxwrvc toPrettyPrintedString (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/lang/String;
 		ARG 0 nbt
