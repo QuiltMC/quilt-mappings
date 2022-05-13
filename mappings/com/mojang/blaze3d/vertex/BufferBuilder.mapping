@@ -9,7 +9,9 @@ CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 	FIELD f_ibpzlmrc sortX F
 	FIELD f_iirxrekw LOGGER Lorg/slf4j/Logger;
 	FIELD f_iukfzdwt sortingPoints [Lnet/minecraft/unmapped/C_zviwfwgf;
+	FIELD f_leftmlzx renderedBufferPointer I
 	FIELD f_ltvrvvts vertexCount I
+	FIELD f_lyiiurbq renderedBufferCount I
 	FIELD f_ohovwnfg sortZ F
 	FIELD f_oqvmtoia sortY F
 	FIELD f_owtoyaja GROWTH_SIZE I
@@ -32,19 +34,29 @@ CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 		ARG 2 value
 	METHOD m_ljhmvndi restoreState (Lnet/minecraft/unmapped/C_nxnqmnng$C_pmijkrpz;)V
 		ARG 1 state
+	METHOD m_ltxabftk isCurrentBatchEmpty ()Z
+	METHOD m_lvzcyelp getBuffer (II)Ljava/nio/ByteBuffer;
+		ARG 1 start
+		ARG 2 end
 	METHOD m_lzpzpbmk (Lorg/apache/commons/lang3/mutable/MutableInt;I)V
 		ARG 2 value
-	METHOD m_mnhlbdhh reset ()V
+	METHOD m_mchwthuw reset ()V
+	METHOD m_mnhlbdhh discard ()V
 	METHOD m_ohwhccqe createSortingPoints ()[Lnet/minecraft/unmapped/C_zviwfwgf;
 	METHOD m_peudonzi (Lorg/apache/commons/lang3/mutable/MutableInt;I)V
 		ARG 2 value
+	METHOD m_qosobzjl buildBatchParameters ()Lnet/minecraft/unmapped/C_nxnqmnng$C_xzjaxrha;
 	METHOD m_rmhuetro createConsumer (ILnet/minecraft/unmapped/C_rnldvdpe$C_pmanqvls;)Lit/unimi/dsi/fastutil/ints/IntConsumer;
+		ARG 1 i
 		ARG 2 indexType
 	METHOD m_srxxjvcm roundBufferSize (I)I
 		ARG 0 amount
 	METHOD m_tsfjiqbz isBuilding ()Z
+	METHOD m_tsiboenc popBatch ()V
+	METHOD m_tygucxqs endOrDiscard ()Lnet/minecraft/unmapped/C_nxnqmnng$C_xzjaxrha;
 	METHOD m_vyrrpgbv popState ()Lnet/minecraft/unmapped/C_nxnqmnng$C_pmijkrpz;
 	METHOD m_wiunipsh clear ()V
+	METHOD m_xgtimktl ensureDrawing ()V
 	METHOD m_xuazlftk begin (Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;Lnet/minecraft/unmapped/C_rnldvdpe;)V
 		ARG 1 drawMode
 		ARG 2 format
@@ -69,6 +81,8 @@ CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 			ARG 5 indexType
 			ARG 6 indexOnly
 			ARG 7 textured
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
 		METHOD m_buxcatnm getVertexBufferEnd ()I
 		METHOD m_evacdorr getVertexBufferSize ()I
 		METHOD m_gcxyqark getIndexBufferStart ()I
@@ -97,3 +111,15 @@ CLASS net/minecraft/unmapped/C_nxnqmnng com/mojang/blaze3d/vertex/BufferBuilder
 			ARG 4 sortX
 			ARG 5 sortY
 			ARG 6 sortZ
+	CLASS C_xzjaxrha RenderedBuffer
+		FIELD f_aqtwdbqw pointer I
+		FIELD f_ctybqgmm parameters Lnet/minecraft/unmapped/C_nxnqmnng$C_nsjmxzos;
+		FIELD f_udyllrby released Z
+		METHOD <init> (Lnet/minecraft/unmapped/C_nxnqmnng;ILnet/minecraft/unmapped/C_nxnqmnng$C_nsjmxzos;)V
+			ARG 2 pointer
+			ARG 3 parameters
+		METHOD m_ikfqdgfz getVertexBuffer ()Ljava/nio/ByteBuffer;
+		METHOD m_ixzwgcss release ()V
+		METHOD m_jzuwowfu isEmpty ()Z
+		METHOD m_oxgwnvbr getIndexBuffer ()Ljava/nio/ByteBuffer;
+		METHOD m_vtlbyown getParameters ()Lnet/minecraft/unmapped/C_nxnqmnng$C_nsjmxzos;
