@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_thoxkfuv net/minecraft/world/event/listener/SculkSensorListener
 	FIELD f_gucsexva event Lnet/minecraft/unmapped/C_thoxkfuv$C_dewmvmbw;
 	FIELD f_lddfjvgl delay I
+	FIELD f_mguvqjfo distance F
 	FIELD f_mhohlxsl callback Lnet/minecraft/unmapped/C_thoxkfuv$C_fmfdwaoj;
 	FIELD f_osffoqbc positionSource Lnet/minecraft/unmapped/C_duzerrml;
 	FIELD f_xeepxwwz range I
@@ -22,10 +23,13 @@ CLASS net/minecraft/unmapped/C_thoxkfuv net/minecraft/world/event/listener/Sculk
 		ARG 2 posB
 	METHOD m_yvftnvau (Lnet/minecraft/unmapped/C_thoxkfuv;)Ljava/util/Optional;
 		ARG 0 arg
+	METHOD m_zvuacjos (Lnet/minecraft/unmapped/C_thoxkfuv;)Ljava/lang/Float;
+		ARG 0 arg
 	CLASS C_dewmvmbw RecievedEvent
 		FIELD f_eylrltqv source Ljava/util/UUID;
 		FIELD f_ffjjmhxx pos Lnet/minecraft/unmapped/C_vgpupfxx;
 		FIELD f_ffjqelcs entity Lnet/minecraft/unmapped/C_astfners;
+		FIELD f_glzfhmwf distance F
 		FIELD f_wzsfwzqx gameEvent Lnet/minecraft/unmapped/C_cgkchrmc;
 		FIELD f_yxxzxvje CODEC Lcom/mojang/serialization/Codec;
 		METHOD equals (Ljava/lang/Object;)Z
@@ -34,9 +38,17 @@ CLASS net/minecraft/unmapped/C_thoxkfuv net/minecraft/world/event/listener/Sculk
 		METHOD m_bmagjmvj gameEvent ()Lnet/minecraft/unmapped/C_cgkchrmc;
 		METHOD m_dryyrwnd getEntity (Lnet/minecraft/unmapped/C_bdwnwhiu;)Ljava/util/Optional;
 			ARG 1 world
+		METHOD m_cgnrhirq distance ()F
 		METHOD m_jnqhrcgo pos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 		METHOD m_lenoaloj entity ()Lnet/minecraft/unmapped/C_astfners;
 	CLASS C_fmfdwaoj Callback
+		METHOD m_gypllihv accept (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbgxqpya;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;F)V
+			COMMENT Accepts a game event after delay.
+			ARG 1 world
+			ARG 2 listener
+			ARG 3 pos
+			ARG 4 event
+			ARG 5 entity
 		METHOD m_hcgopkrg accepts (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbgxqpya;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;)Z
 			COMMENT Returns whether the callback wants to accept this event.
 			ARG 1 world
