@@ -221,6 +221,9 @@ task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode])
 			"pll": "99999" // pll (Preferred Line Length) is length for line wrapping
 	]
 
+	// Tell gradle not to skip if the mappings file changed
+	inputs.file(mergeTinyV2.outputMappings)
+
 	doFirst {
 		fakeSourceDir.deleteDir()
 
