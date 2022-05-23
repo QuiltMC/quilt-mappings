@@ -1,10 +1,28 @@
 CLASS net/minecraft/unmapped/C_mgrgevhd net/minecraft/network/encryption/NetworkEncryptionUtils
+	FIELD f_aqouffre PRIVATE_KEY_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_crwvlcbl LINEBREAK Ljava/lang/String;
 	FIELD f_dxeyvkhd SYMMETRIC_ALGORITHM Ljava/lang/String;
 	FIELD f_fgftihvv SYMMETRIC_BITS I
+	FIELD f_hseazmns RSA_PUBLIC_KEY_FOOTER Ljava/lang/String;
+	FIELD f_imuhfzhh RSA_PRIVATE_KEY_FOOTER Ljava/lang/String;
+	FIELD f_lgyrmjsh RSA_PUBLIC_KEY_HEADER Ljava/lang/String;
+	FIELD f_nckzrocc PUBLIC_KEY_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_qpxngoxu HASH_ALGORITHM Ljava/lang/String;
+	FIELD f_qsukxgoo BASE64_ENCODER Ljava/util/Base64$Encoder;
+	FIELD f_swkungrq SIGNING_ALGORITHM Ljava/lang/String;
 	FIELD f_vioyxcpe BYTE_ENCODING Ljava/lang/String;
 	FIELD f_xdivgily ASYMMETRIC_ALGORITHM Ljava/lang/String;
 	FIELD f_yvmvdgcc ASYMMETRIC_BITS I
+	FIELD f_zmddhtcx RSA_PRIVATE_KEY_HEADER Ljava/lang/String;
+	METHOD m_axmsffrz decodePem (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_mgrgevhd$C_rgihytsz;)Ljava/security/Key;
+		ARG 0 key
+		ARG 1 header
+		ARG 2 footer
+		ARG 3 decoder
+	METHOD m_ddccllru readEncodedPrivateKey ([B)Ljava/security/PrivateKey;
+		ARG 0 key
+	METHOD m_diyouuze encodeRsaPrivateKey (Ljava/security/PrivateKey;)Ljava/lang/String;
+		ARG 0 privateKey
 	METHOD m_eezxcrdq generateServerKeyPair ()Ljava/security/KeyPair;
 	METHOD m_fkkgwpuy cipherFromKey (ILjava/security/Key;)Ljavax/crypto/Cipher;
 		ARG 0 opMode
@@ -26,12 +44,46 @@ CLASS net/minecraft/unmapped/C_mgrgevhd net/minecraft/network/encryption/Network
 	METHOD m_jfloogah decrypt (Ljava/security/Key;[B)[B
 		ARG 0 key
 		ARG 1 data
+	METHOD m_nmohpzrk encodeRsaPublicKey (Ljava/security/PublicKey;)Ljava/lang/String;
+		ARG 0 publicKey
+	METHOD m_rebtwskh (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 keyPem
+	METHOD m_tnwvnyev decodeRsaPrivateKeyPem (Ljava/lang/String;)Ljava/security/PrivateKey;
+		ARG 0 key
+	METHOD m_tqtywdmq (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 keyPem
 	METHOD m_upcfcxwt decryptSecretKey (Ljava/security/PrivateKey;[B)Ljavax/crypto/SecretKey;
 		ARG 0 privateKey
 		ARG 1 encryptedSecretKey
 	METHOD m_uznsqkdw generateKey ()Ljavax/crypto/SecretKey;
+	METHOD m_vamsmykn decodeRsaPublicKeyPem (Ljava/lang/String;)Ljava/security/PublicKey;
+		ARG 0 key
 	METHOD m_xxkmkrfu encrypt (Ljava/security/Key;[B)[B
 		ARG 0 key
 		ARG 1 data
 	METHOD m_ypsrdyom readEncodedPublicKey ([B)Ljava/security/PublicKey;
 		ARG 0 bytes
+	CLASS C_fzutuybr SaltSupplier
+		FIELD f_xrxzwplb SECURE_RANDOM Ljava/security/SecureRandom;
+		METHOD m_jylgfzyu nextLong ()J
+	CLASS C_gwzcggho SignaturePair
+		FIELD f_qsefrier EMPTY Lnet/minecraft/unmapped/C_mgrgevhd$C_gwzcggho;
+		FIELD f_tqsnrqzb signature [B
+		FIELD f_yyjxxcmg salt J
+		METHOD <init> (J[B)V
+			ARG 1 salt
+			ARG 3 signature
+		METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
+			ARG 1 buf
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_ahoyvfva signature ()[B
+		METHOD m_bvamwmfv write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_mgrgevhd$C_gwzcggho;)V
+			ARG 0 buf
+			ARG 1 signaturePair
+		METHOD m_mghakrvz getSaltAsByteArray ()[B
+		METHOD m_qwwryimn salt ()J
+		METHOD m_uaoycnys isValid ()Z
+	CLASS C_rgihytsz KeyDecoder
+		METHOD apply apply ([B)Ljava/security/Key;
+			ARG 1 key
