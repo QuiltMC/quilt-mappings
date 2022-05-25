@@ -46,8 +46,15 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	FIELD f_xvlfpipb playerScreenHandler Lnet/minecraft/unmapped/C_wgehrbdx;
 	FIELD f_yavwtotq POSE_DIMENSIONS Ljava/util/Map;
 	FIELD f_yivtgyhl LOGGER Lorg/slf4j/Logger;
+	FIELD f_ypebxhan publicKey Lnet/minecraft/unmapped/C_psbzgaqf;
 	FIELD f_ywdzyesv DEFAULT_EYE_HEIGHT F
 	FIELD f_zmjqpvqo lastPlayedLevelUpSoundTime I
+	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;FLcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_psbzgaqf;)V
+		ARG 1 world
+		ARG 2 pos
+		ARG 3 yaw
+		ARG 4 gameProfile
+		ARG 5 publicKey
 	METHOD m_arduainz isCreativeLevelTwoOp ()Z
 	METHOD m_aubfsqlm setReducedDebugInfo (Z)V
 		ARG 1 reducedDebugInfo
@@ -66,6 +73,7 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 3 volume
 		ARG 4 pitch
 	METHOD m_ccuymcth checkFallFlying ()Z
+	METHOD m_cewwxzmg getPublicKey ()Lnet/minecraft/unmapped/C_psbzgaqf;
 	METHOD m_cvlwevdb addExperienceLevels (I)V
 		ARG 1 levels
 	METHOD m_cxsmkgul addExhaustion (F)V
@@ -193,6 +201,9 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 score
 	METHOD m_qesbiptv doesNotSuffocate (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
+	METHOD m_qkqqfigv getLastDeathPos ()Ljava/util/Optional;
+	METHOD m_qrdqjnhr (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 entity
 	METHOD m_qtitwlfy openHandledScreen (Lnet/minecraft/unmapped/C_soxpxdhu;)Ljava/util/OptionalInt;
 		ARG 1 factory
 	METHOD m_qupqytdv dropShoulderEntity (Lnet/minecraft/unmapped/C_hhlwcnih;)V
@@ -258,6 +269,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_xjswonqp resetStat (Lnet/minecraft/unmapped/C_sibrxbfy;)V
 		ARG 1 stat
 	METHOD m_xnugqgdd getHungerManager ()Lnet/minecraft/unmapped/C_lvaukqjj;
+	METHOD m_xuqwdmei setLastDeathPos (Ljava/util/Optional;)V
+		ARG 1 lastDeathPos
 	METHOD m_xxoyxruf updatePose ()V
 	METHOD m_yhpkrzzv openCommandBlockScreen (Lnet/minecraft/unmapped/C_qpgfeghp;)V
 		ARG 1 commandBlock
@@ -269,6 +282,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_yscaqmsb addCritParticles (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 target
 	METHOD m_zkeljpmf isAboveGround ()Z
+	METHOD m_zlochbyi (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 2 style
 	METHOD m_zlrabaci getScore ()I
 	METHOD m_znrmlhap shouldCancelInteraction ()Z
 	CLASS C_wdhcnmsn SleepFailureReason

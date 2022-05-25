@@ -1,0 +1,41 @@
+CLASS net/minecraft/unmapped/C_psbzgaqf net/minecraft/network/encryption/PlayerPublicKey
+	FIELD f_csciuhel data Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;
+	FIELD f_swbppbsx CODEC Lcom/mojang/serialization/Codec;
+	METHOD <init> (Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;)V
+		ARG 1 data
+	METHOD equals (Ljava/lang/Object;)Z
+		ARG 1 o
+	METHOD m_ehferiya (Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;)Lcom/mojang/serialization/DataResult;
+		ARG 0 data
+	METHOD m_ixkjimrx createSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
+	METHOD m_jatolsed createValidated (Lnet/minecraft/unmapped/C_yvuwcvkm;Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;)Lnet/minecraft/unmapped/C_psbzgaqf;
+		ARG 0 signatureValidator
+		ARG 1 data
+	METHOD m_jvekcafy create (Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;)Lnet/minecraft/unmapped/C_psbzgaqf;
+		ARG 0 data
+	METHOD m_ljjblmai data ()Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;
+	CLASS C_aheynfty Data
+		FIELD f_bmbstads CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_bppwfylm keySignature [B
+		FIELD f_gnqcuxji key Ljava/security/PublicKey;
+		FIELD f_ojjevcjl expiresAt Ljava/time/Instant;
+		FIELD f_qykyaxzk MAX_KEY_SIGNATURE_SIZE I
+		METHOD <init> (Ljava/time/Instant;Ljava/security/PublicKey;[B)V
+			ARG 1 expiresAt
+			ARG 2 key
+			ARG 3 keySignature
+		METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
+			ARG 1 buf
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_aiphyyve write (Lnet/minecraft/unmapped/C_idfydwco;)V
+			ARG 1 buf
+		METHOD m_chmdcvdc (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_dxruekpc key ()Ljava/security/PublicKey;
+		METHOD m_hwdlwspy expiresAt ()Ljava/time/Instant;
+		METHOD m_jzfxvfbv validateSignature (Lnet/minecraft/unmapped/C_yvuwcvkm;)Z
+			ARG 1 validator
+		METHOD m_ohegqsra hasExpired ()Z
+		METHOD m_okjpdkns toSerializedString ()Ljava/lang/String;
+		METHOD m_uqwfmden keySignature ()[B
