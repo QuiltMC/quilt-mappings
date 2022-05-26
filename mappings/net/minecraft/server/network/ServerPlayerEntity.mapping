@@ -3,6 +3,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	FIELD f_ancsmfuf lastExperienceScore I
 	FIELD f_awxwtkbc lastLevelScore I
 	FIELD f_capnwlvs levitationStartPos Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_cfahbfba fallStartPos Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_czcwatdw lastAirScore I
 	FIELD f_eahsbljj screenHandlerSyncHandler Lnet/minecraft/unmapped/C_ccogdvwm;
 	FIELD f_ecegdczc notInAnyWorld Z
@@ -30,6 +31,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	FIELD f_onahzxmm interactionManager Lnet/minecraft/unmapped/C_egnasquq;
 	FIELD f_ouqztuux pingMilliseconds I
 	FIELD f_oxxbizze syncedExperience I
+	FIELD f_qcackqxh enteredLavaOnVehiclePos Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_qrxvbodj clientChatVisibility Lnet/minecraft/unmapped/C_wafwmsvb;
 	FIELD f_selmotls lastArmorScore I
 	FIELD f_slrxmizd server Lnet/minecraft/server/MinecraftServer;
@@ -46,6 +48,11 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	FIELD f_ynglkbif filterText Z
 	FIELD f_zkfgljmz lastHealthScore F
 	FIELD f_zwmomqsu cameraEntity Lnet/minecraft/unmapped/C_astfners;
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_bdwnwhiu;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_psbzgaqf;)V
+		ARG 1 server
+		ARG 2 world
+		ARG 3 gameProfile
+		ARG 4 publicKey
 	METHOD m_akgkagnq forgiveMobAnger ()V
 	METHOD m_ausyrzvm setWatchedSection (Lnet/minecraft/unmapped/C_zubvmeye;)V
 		COMMENT Sets the chunk section position the player's client is currently watching
@@ -80,9 +87,15 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 3 criterions
 	METHOD m_cicbiveh markHealthDirty ()V
 	METHOD m_ctvsftwy getTextStream ()Lnet/minecraft/unmapped/C_ibcyuwyk;
+	METHOD m_dchndymu (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 spawnDimension
+	METHOD m_dsyzpxul (Lnet/minecraft/unmapped/C_dxkfswlz;)V
+		ARG 1 angerableMob
 	METHOD m_dzllwyda copyFrom (Lnet/minecraft/unmapped/C_mxrobsgg;Z)V
 		ARG 1 oldPlayer
 		ARG 2 alive
+	METHOD m_eenhzbrz sendServerMetadata (Lnet/minecraft/unmapped/C_bwttende;)V
+		ARG 1 metadata
 	METHOD m_esetupfd playerTick ()V
 	METHOD m_fafsmqxt getSpawnPointDimension ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_fawxnykw setGameMode (Lnet/minecraft/unmapped/C_hhlwcnih;)V
@@ -94,6 +107,8 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_gynondrt handleFall (DZ)V
 		ARG 1 heightDifference
 		ARG 3 onGround
+	METHOD m_hdgpnznl (Lnet/minecraft/unmapped/C_sxzqocrm;I)V
+		ARG 2 slotIndex
 	METHOD m_hivycasr dropSelectedItem (Z)Z
 		ARG 1 entireStack
 	METHOD m_hkfogoxu getWatchedSection ()Lnet/minecraft/unmapped/C_zubvmeye;
@@ -109,6 +124,8 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_hmjyuwow getClientChatVisibility ()Lnet/minecraft/unmapped/C_wafwmsvb;
 	METHOD m_hoiwaxpe onTeleportationDone ()V
 	METHOD m_hqkczyuk updateLastActionTime ()V
+	METHOD m_hruzvpmr (Lnet/minecraft/unmapped/C_dxkfswlz;)Z
+		ARG 0 mob
 	METHOD m_hvmlttqw moveToSpawn (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 1 world
 	METHOD m_ibtoqgyc getLastActionTime ()J
@@ -117,6 +134,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_imlvdcbp onSpawn ()V
 	METHOD m_itdwcvgj worldChanged (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 1 origin
+	METHOD m_juidebgy tickFallStartPos ()V
 	METHOD m_jzshaolk teleport (Lnet/minecraft/unmapped/C_bdwnwhiu;DDDFF)V
 		ARG 1 targetWorld
 		ARG 2 x
@@ -129,14 +147,19 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_krzsingq setExperiencePoints (I)V
 		ARG 1 points
 	METHOD m_lmerldlu isDisconnected ()Z
+	METHOD m_loksqxfd getMessageTypeRawId (Lnet/minecraft/unmapped/C_xhhleach;)I
+		ARG 1 messageType
 	METHOD m_lqkpgilk updateInput (FFZZ)V
 		ARG 1 sidewaysSpeed
 		ARG 2 forwardSpeed
 		ARG 3 jumping
 		ARG 4 sneaking
+	METHOD m_nalssqqm tickEnteredLavaOnVehiclePos ()V
 	METHOD m_nimkyysp sendInitialChunkPackets (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 chunkPos
 		ARG 2 chunkDataPacket
+	METHOD m_nmjsiwjs (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_nrvwlsdb isBedObstructed (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 1 pos
 		ARG 2 direction
@@ -145,6 +168,9 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_obnaqvtb getStatHandler ()Lnet/minecraft/unmapped/C_cakpthuz;
 	METHOD m_ppkclwkr isBedTooFarAway (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
+	METHOD m_przsjcgp sendMessageDeliverError (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 message
+		ARG 2 messageType
 	METHOD m_pyfbhche setSpawnPoint (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_hynzadkk;FZZ)V
 		ARG 1 dimension
 		ARG 2 pos
@@ -168,7 +194,10 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_taedfzyx shouldFilterMessagesSentTo (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
 		ARG 1 player
 	METHOD m_thdoemcs acceptsMessage (Lnet/minecraft/unmapped/C_xhhleach;)Z
+		ARG 1 messageType
 	METHOD m_tsbczhxe isInTeleportationState ()Z
+	METHOD m_ttfujhny (Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_tzcijmwg;Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 3 messageType
 	METHOD m_ujyxsuep onDisconnect ()V
 	METHOD m_ulcuzxzs updateScores (Lnet/minecraft/unmapped/C_adsgsrpw;I)V
 		ARG 1 criterion
@@ -190,6 +219,9 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_yhuimfko gameModeFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;)Lnet/minecraft/unmapped/C_lghcpyvl;
 		ARG 0 nbt
 		ARG 1 key
+	METHOD m_ypqoxxtj sendMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 message
+		ARG 2 messageType
 	METHOD m_zetenaml createEndSpawnPlatform (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 world
 		ARG 2 centerPos
