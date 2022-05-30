@@ -64,6 +64,8 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_ggqroajp isWhitelistEnabled ()Z
 	METHOD m_gzunbvqs savePlayerData (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
+	METHOD m_hcmcjqky (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 1 player
 	METHOD m_hgihvlst getPlayerNames ()[Ljava/lang/String;
 	METHOD m_hhzxvoqt getPlayer (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_mxrobsgg;
 		ARG 1 uuid
@@ -76,6 +78,8 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 8 distance
 		ARG 10 worldKey
 		ARG 11 packet
+	METHOD m_ilyrgghf (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 0 entity
 	METHOD m_kculnifq getUserBanList ()Lnet/minecraft/unmapped/C_dtxlpdok;
 	METHOD m_khebdxma setViewDistance (I)V
 		ARG 1 viewDistance
@@ -84,13 +88,25 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_lcqhthnk getWhitelistedNames ()[Ljava/lang/String;
 	METHOD m_mddxogwe addToOperators (Lcom/mojang/authlib/GameProfile;)V
 		ARG 1 profile
+	METHOD m_mjqfucaf addWorldBorderListener (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
+		ARG 1 world
+	METHOD m_mlvqnrqj sendSystemMessageToTeam (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 player
+		ARG 2 message
 	METHOD m_mqvtmcqp sendCommandTree (Lnet/minecraft/unmapped/C_mxrobsgg;I)V
 		ARG 1 player
 		ARG 2 permissionLevel
 	METHOD m_ngykykkq onPlayerConnect (Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 connection
 		ARG 2 player
+	METHOD m_nljcteom (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_astfners;
+		ARG 1 entity
 	METHOD m_oepngqek updatePlayerLatency ()V
+	METHOD m_oqpuylzn sendSystemMessageToOtherTeams (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 player
+		ARG 2 message
+	METHOD m_oxhfxqwr (Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/server/MinecraftServer$C_qhjevvjt;)V
+		ARG 1 resourcePackProperties
 	METHOD m_ozuvgfaa getViewDistance ()I
 	METHOD m_prjtwknp loadPlayerData (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 player
@@ -101,6 +117,9 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 1 scoreboard
 		ARG 2 player
 	METHOD m_sgocqqbl getOpList ()Lnet/minecraft/unmapped/C_bkrwbmlh;
+	METHOD m_sgyvrggh broadcastSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 message
+		ARG 2 messageType
 	METHOD m_tgcbcjpj setCheatsAllowed (Z)V
 		ARG 1 cheatsAllowed
 	METHOD m_thaovauz canBypassPlayerLimit (Lcom/mojang/authlib/GameProfile;)Z
@@ -115,10 +134,15 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 1 player
 	METHOD m_vtwdwatn createPlayer (Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_psbzgaqf;)Lnet/minecraft/unmapped/C_mxrobsgg;
 		ARG 1 profile
+		ARG 2 playerPublicKey
 	METHOD m_xpjsflmx isOperator (Lcom/mojang/authlib/GameProfile;)Z
 		ARG 1 profile
 	METHOD m_xwjxxowe remove (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
+	METHOD m_yddvgkmi broadcastSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 message
+		ARG 2 playerMessageFactory
+		ARG 3 messageType
 	METHOD m_ydtkhmcs setSimulationDistance (I)V
 		ARG 1 simulationDistance
 	METHOD m_yhbprtvy getSimulationDistance ()I
