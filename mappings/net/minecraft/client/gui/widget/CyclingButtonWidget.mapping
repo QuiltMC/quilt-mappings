@@ -10,6 +10,21 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/CyclingB
 	FIELD f_pkhehiyk HAS_ALT_DOWN Ljava/util/function/BooleanSupplier;
 	FIELD f_skyfeqxy index I
 	FIELD f_ubcidkfh values Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
+	METHOD <init> (IIIILnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;ILjava/lang/Object;Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;Ljava/util/function/Function;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ikfvpkkf$C_hmzkrfiv;Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;Z)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 width
+		ARG 4 height
+		ARG 5 message
+		ARG 6 optionText
+		ARG 7 index
+		ARG 8 value
+		ARG 9 values
+		ARG 10 valueToText
+		ARG 11 narrationMessageFactory
+		ARG 12 callback
+		ARG 13 tooltipFactory
+		ARG 14 optionTextOmitted
 	METHOD m_bhbclksp (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 value
 	METHOD m_cqdzljkb composeText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -67,7 +82,7 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/CyclingB
 		FIELD f_ckzcauof optionTextOmitted Z
 		FIELD f_gmdgxahb value Ljava/lang/Object;
 		FIELD f_gntjovxt initialIndex I
-		FIELD f_nndpoujz tooltipFactory Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;
+		FIELD f_nndpoujz tooltipSupplier Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;
 		FIELD f_pqufyfbe valueToText Ljava/util/function/Function;
 		FIELD f_qzlybxkn narrationMessageFactory Ljava/util/function/Function;
 		FIELD f_yckmykpa values Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
@@ -78,6 +93,8 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/CyclingB
 			ARG 1 valueToText
 		METHOD m_accuyfsm (Ljava/lang/Object;)Ljava/util/List;
 			ARG 0 value
+		METHOD m_alxxamyn values (Ljava/util/Collection;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
+			ARG 1 values
 		METHOD m_jippvtaa initially (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 			COMMENT Sets the initial value of this button widget.
 			COMMENT
@@ -121,6 +138,7 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/CyclingB
 			COMMENT Sets the tooltip factory that provides tooltips for any of the values.
 			COMMENT
 			COMMENT <p>If this is not called, the values simply won't have tooltips.
+			ARG 1 tooltipSupplier
 		METHOD m_phudjdis values (Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 			COMMENT Sets the option values for this button.
 			COMMENT
@@ -142,11 +160,16 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/CyclingB
 		METHOD m_vahoyxin values ([Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 			COMMENT Sets the option values for this button.
 			ARG 1 values
+		METHOD m_zrnvdsew values (Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
+			COMMENT Sets the option values for this button.
+			ARG 1 values
 	CLASS C_hmzkrfiv UpdateCallback
 		METHOD onValueChange onValueChange (Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Object;)V
 			ARG 1 button
 			ARG 2 value
 	CLASS C_qjymjbvs Values
+		METHOD m_btluuors of (Ljava/util/Collection;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
+			ARG 0 values
 		METHOD m_izgxyqzt getDefaults ()Ljava/util/List;
 		METHOD m_srwinrrr of (Ljava/util/function/BooleanSupplier;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
 			ARG 0 alternativeToggle
