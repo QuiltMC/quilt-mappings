@@ -64,14 +64,16 @@ CLASS net/minecraft/unmapped/C_rdaqiwdt net/minecraft/text/Text
 		ARG 1 style
 	METHOD m_pwvegngp asComponent ()Lnet/minecraft/unmapped/C_hhxmszuy;
 		COMMENT {@return a component representation of this text}
-	METHOD m_rxxicskz shallowCopy ()Lnet/minecraft/unmapped/C_npqneive;
-		COMMENT Copies the text itself, the style, and the siblings.
+	METHOD m_rxxicskz copy ()Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Copies the text's content, the style, and the siblings.
 		COMMENT <p>
-		COMMENT A shallow copy is made for the siblings.
-	METHOD m_tsfcehif copy ()Lnet/minecraft/unmapped/C_npqneive;
-		COMMENT Copies the text itself, excluding the styles or siblings.
+		COMMENT The same copy is made for the siblings.
 		COMMENT
-		COMMENT @see #shallowCopy()
+		COMMENT @see #copyContentOnly()
+	METHOD m_tsfcehif copyContentOnly ()Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Copies the text's content only, excluding the styles or siblings.
+		COMMENT
+		COMMENT @see #copy()
 	METHOD m_tzcqohhx of (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		COMMENT Creates a new immutable literal text with the given string as content.
 		COMMENT <p>
