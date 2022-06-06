@@ -3,10 +3,14 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	COMMENT as well as populating the generated chunks with {@linkplain net.minecraft.world.gen.feature.Feature features} and {@linkplain net.minecraft.entity.Entity entities}.
 	COMMENT Biome placement starts here, however all vanilla and most modded chunk generators delegate this to a {@linkplain net.minecraft.world.biome.source.BiomeSource biome source}.
 	FIELD f_acfecigk populationSource Lnet/minecraft/unmapped/C_ajguowya;
-		COMMENT Used to control the population step without replacing the actual biome that comes from the original {@link #biomeSource}.
-		COMMENT
-		COMMENT <p>This is used by {@link FlatChunkGenerator} to overwrite biome properties like whether lakes generate, while preserving the original biome ID.
+		COMMENT Used to control the population step without replacing the actual biome that comes from the original {@link BiomeSource}.
+		COMMENT <p>
+		COMMENT This is used by {@link FlatChunkGenerator} to overwrite biome properties like whether lakes generate,
+		COMMENT while preserving the original biome identifier.
+	FIELD f_gtbeeirb LOGGER Lorg/slf4j/Logger;
 	FIELD f_vzeswpuk CODEC Lcom/mojang/serialization/Codec;
+	METHOD <init> (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/util/Optional;Lnet/minecraft/unmapped/C_ajguowya;Ljava/util/function/Function;)V
+		ARG 3 populationSource
 	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
 	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zxhjfyir;J)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
