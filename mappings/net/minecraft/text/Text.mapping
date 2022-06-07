@@ -1,56 +1,105 @@
 CLASS net/minecraft/unmapped/C_rdaqiwdt net/minecraft/text/Text
 	COMMENT A text. Can be converted to and from JSON format.
-	COMMENT
-	COMMENT <p>Each text has a tree structure, embodying all its {@link
+	COMMENT <p>
+	COMMENT Each text has a tree structure, embodying all its {@link
 	COMMENT #getSiblings() siblings}. To iterate contents in the text and all
 	COMMENT its siblings, call {@code visit} methods.
-	COMMENT
-	COMMENT <p>This interface does not expose mutation operations. For mutation,
+	COMMENT <p>
+	COMMENT This interface does not expose mutation operations. For mutation,
 	COMMENT refer to {@link MutableText}.
 	COMMENT
 	COMMENT @see MutableText
+	COMMENT @see Text#literal(String)
+	COMMENT @see Text#empty()
+	COMMENT @see Text#of(String)
+	COMMENT @see Text#translatable(String)
+	COMMENT @see Text#translatable(String, Object...)
+	COMMENT @see Text#keyBind(String)
+	COMMENT @see Text#nbt(String, boolean, Optional, TextData)
+	COMMENT @see Text#score(String, String)
+	COMMENT @see Text#selector(String, Optional)
 	METHOD m_dmavlphp asOrderedText ()Lnet/minecraft/unmapped/C_apvkgwyi;
 	METHOD m_dmazxvzh (ILjava/lang/StringBuilder;Ljava/lang/String;)Ljava/util/Optional;
 		ARG 2 string
-	METHOD m_dztmuipa createFormatted (Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/unmapped/C_npqneive;
-		ARG 0 text
+	METHOD m_dztmuipa translatable (Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Creates a new mutable translatable text.
+		COMMENT
+		COMMENT @return the new mutable translatable text
+		COMMENT @see #translatable(String)
+		ARG 0 translationKey
+			COMMENT the translation key
 		ARG 1 args
+			COMMENT the arguments the translation may take
 	METHOD m_eiqxivnk getSiblings ()Ljava/util/List;
-		COMMENT Returns the siblings of this text.
-	METHOD m_iktyeyef createFormatted (Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
-		ARG 0 text
-	METHOD m_kuqyhsxe createSelector (Ljava/lang/String;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_npqneive;
-		ARG 0 name
+		COMMENT {@return the siblings of this text}
+	METHOD m_iktyeyef translatable (Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Creates a new mutable translatable text.
+		COMMENT
+		COMMENT @return the new mutable translatable text
+		COMMENT @see #translatable(String, Object...)
+		ARG 0 translationKey
+			COMMENT the translation key
+	METHOD m_kuqyhsxe selector (Ljava/lang/String;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Creates a new mutable text of a resolveable entity selector.
+		COMMENT
+		COMMENT @return the new mutable selector text
+		ARG 0 selector
+			COMMENT the selector
 		ARG 1 separator
-	METHOD m_nxgujqbg createKeybind (Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
-		ARG 0 text
+			COMMENT the optional seperator if there's multiple matches issued from the selector
+	METHOD m_nxgujqbg keyBind (Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Creates a new mutable text of a key bind.
+		COMMENT
+		COMMENT @return the new mutable key bind text
+		ARG 0 key
+			COMMENT the key of the key bind
 	METHOD m_oamaavje empty ()Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Creates a new mutable empty text.
+		COMMENT
+		COMMENT @return the new mutable empty text
+		COMMENT @see net.minecraft.text.ScreenTexts#EMPTY for a constant equivalent
 	METHOD m_oyjmhrxe getStyle ()Lnet/minecraft/unmapped/C_cpwnhism;
-		COMMENT Returns the style of this text.
+		COMMENT {@return the style of this text}
 	METHOD m_pnqfqdco getWithStyle (Lnet/minecraft/unmapped/C_cpwnhism;)Ljava/util/List;
 		ARG 1 style
 	METHOD m_pwvegngp asComponent ()Lnet/minecraft/unmapped/C_hhxmszuy;
-		COMMENT Returns a component representation of this text.
-	METHOD m_rxxicskz shallowCopy ()Lnet/minecraft/unmapped/C_npqneive;
-		COMMENT Copies the text itself, the style, and the siblings.
+		COMMENT {@return a component representation of this text}
+	METHOD m_rxxicskz copy ()Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Copies the text's content, the style, and the siblings.
+		COMMENT <p>
+		COMMENT The same copy is made for the siblings.
 		COMMENT
-		COMMENT <p>A shallow copy is made for the siblings.
-	METHOD m_tsfcehif copy ()Lnet/minecraft/unmapped/C_npqneive;
-		COMMENT Copies the text itself, excluding the styles or siblings.
+		COMMENT @see #copyContentOnly()
+	METHOD m_tsfcehif copyContentOnly ()Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Copies the text's content only, excluding the styles or siblings.
+		COMMENT
+		COMMENT @see #copy()
 	METHOD m_tzcqohhx of (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdaqiwdt;
-		COMMENT Creates a literal text with the given string as content.
-		ARG 0 string
+		COMMENT Creates a new immutable literal text with the given string as content.
+		COMMENT <p>
+		COMMENT The given string may be {@code null}, in this case a constant empty text will be returned.
+		COMMENT
+		COMMENT @return the new immutable literal text
+		ARG 0 text
+			COMMENT the content of the text, may be {@code null}
 	METHOD m_ucpxjqgq (Ljava/util/List;Lnet/minecraft/unmapped/C_cpwnhism;Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 styleOverride
 		ARG 2 text
-	METHOD m_uysfrnzl create (Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
+	METHOD m_uysfrnzl literal (Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Creates a new mutable literal text.
+		COMMENT
+		COMMENT @return the new mutable literal text
 		ARG 0 text
-	METHOD m_vwzgcgyh createNbt (Ljava/lang/String;ZLjava/util/Optional;Lnet/minecraft/unmapped/C_pfocmsrt;)Lnet/minecraft/unmapped/C_npqneive;
-		ARG 0 text
+			COMMENT the content of the text
+	METHOD m_vwzgcgyh nbt (Ljava/lang/String;ZLjava/util/Optional;Lnet/minecraft/unmapped/C_pfocmsrt;)Lnet/minecraft/unmapped/C_npqneive;
+		ARG 0 pathPattern
 		ARG 1 interpreting
 		ARG 2 separator
 		ARG 3 nbt
-	METHOD m_ywgmjpns createScore (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
+	METHOD m_ywgmjpns score (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_npqneive;
+		COMMENT Creates a new mutable text of a score.
+		COMMENT
+		COMMENT @return the new mutable score text
 		ARG 0 name
 		ARG 1 objective
 	METHOD m_zbmgisvb asTruncatedString (I)Ljava/lang/String;
@@ -59,7 +108,7 @@ CLASS net/minecraft/unmapped/C_rdaqiwdt net/minecraft/text/Text
 		ARG 1 length
 			COMMENT the max length allowed for the string representation of the text
 	CLASS C_iyijrxyu Serializer
-		COMMENT A JSON serializer for {@link Text}.
+		COMMENT Represents a JSON serializer for {@link Text}.
 		FIELD f_avuxccfb GSON Lcom/google/gson/Gson;
 		FIELD f_towfkdqd JSON_READER_LINE_START Ljava/lang/reflect/Field;
 		FIELD f_tywqeeuo JSON_READER_POS Ljava/lang/reflect/Field;
