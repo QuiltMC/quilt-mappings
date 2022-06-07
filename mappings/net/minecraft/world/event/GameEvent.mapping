@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_cgkchrmc net/minecraft/world/event/GameEvent
 	FIELD f_avfgajqb id Ljava/lang/String;
+	FIELD f_hxrfpfjx registryHolder Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 	FIELD f_ldneacia DEFAULT_RANGE I
 	FIELD f_lwzuzvdn range I
 	METHOD <init> (Ljava/lang/String;I)V
@@ -8,7 +9,45 @@ CLASS net/minecraft/unmapped/C_cgkchrmc net/minecraft/world/event/GameEvent
 	METHOD m_ambbvcos register (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_cgkchrmc;
 		ARG 0 id
 		ARG 1 range
+	METHOD m_jttyxbxm isIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
+		ARG 1 tag
+	METHOD m_omfngosv getRegistryHolder ()Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 	METHOD m_teipriwe register (Ljava/lang/String;)Lnet/minecraft/unmapped/C_cgkchrmc;
 		ARG 0 id
 	METHOD m_yjdoczpb getId ()Ljava/lang/String;
 	METHOD m_ysvjcfpb getRange ()I
+	CLASS C_cjhidzon Context
+		FIELD f_qmegmqsi sourceEntity Lnet/minecraft/unmapped/C_astfners;
+		FIELD f_rzuicbpo affectedState Lnet/minecraft/unmapped/C_txtbiemp;
+		METHOD <init> (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_txtbiemp;)V
+			ARG 1 sourceEntity
+			ARG 2 affectedState
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_lnaipuey create (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;
+			ARG 0 affectedState
+		METHOD m_ngdxwzdf create (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;
+			ARG 0 sourceEntity
+		METHOD m_nvylezsp create (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;
+			ARG 0 sourceEntity
+			ARG 1 affectedState
+		METHOD m_tzesjtpo sourceEntity ()Lnet/minecraft/unmapped/C_astfners;
+		METHOD m_yyfkbbbj affectedState ()Lnet/minecraft/unmapped/C_txtbiemp;
+	CLASS C_ddjwavki Message
+		FIELD f_bkdadjag distanceToListener D
+		FIELD f_slhvhxqg event Lnet/minecraft/unmapped/C_cgkchrmc;
+		FIELD f_tmrzoous sourcePos Lnet/minecraft/unmapped/C_vgpupfxx;
+		FIELD f_uhtocvsu listener Lnet/minecraft/unmapped/C_sbgxqpya;
+		FIELD f_zraxnpqa context Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;
+		METHOD <init> (Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;Lnet/minecraft/unmapped/C_sbgxqpya;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+			ARG 1 event
+			ARG 2 sourcePos
+			ARG 3 context
+			ARG 4 listener
+			ARG 5 listenerPos
+		METHOD compareTo compareTo (Ljava/lang/Object;)I
+			ARG 1 o
+		METHOD m_bdyffsex getSourcePos ()Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_czmejzwf getEvent ()Lnet/minecraft/unmapped/C_cgkchrmc;
+		METHOD m_oexivtik getListener ()Lnet/minecraft/unmapped/C_sbgxqpya;
+		METHOD m_uxnuwqux getContext ()Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;
