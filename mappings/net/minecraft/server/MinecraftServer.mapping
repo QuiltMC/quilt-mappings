@@ -265,19 +265,20 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_oamptiyg setEnforceWhitelist (Z)V
 		ARG 1 whitelistEnabled
 	METHOD m_oavtxzbi isSingleplayer ()Z
-		COMMENT {@return whether this server is a singleplayer server} A {@index singleplayer}
-		COMMENT server has a "single player" to whom the player data in the {@code level.dat}
-		COMMENT applies. Otherwise, the player data is not applied to anyone. Hence, it is
+		COMMENT {@return whether this server is a single-player server}
+		COMMENT A {@index singleplayer} server has a "single player" to whom the player data
+		COMMENT in the {@code level.dat} applies.
+		COMMENT Otherwise, the player data is not applied to anyone. Hence, it is
 		COMMENT necessary to properly load some single-player save games.
-		COMMENT
-		COMMENT <p>All vanilla integrated servers and dedicated servers launched with the argument
-		COMMENT {@code --singleplayer <singlePlayerName>} are singleplayer servers.
-		COMMENT
-		COMMENT <p>A dedicated singleplayer server always turns online mode off, regardless of the
+		COMMENT <p>
+		COMMENT All Vanilla integrated servers and dedicated servers launched with the argument
+		COMMENT {@code --singleplayer <singlePlayerName>} are single-player servers.
+		COMMENT <p>
+		COMMENT A dedicated single-player server always turns online mode off, regardless of the
 		COMMENT content of {@code server.properties}.
 		COMMENT
-		COMMENT @see #getSinglePlayerName
-		COMMENT @see #setSinglePlayerName
+		COMMENT @see #getHostProfile()
+		COMMENT @see #setHostProfile(GameProfile)
 	METHOD m_ocdvptth getTimeReference ()J
 	METHOD m_odqgvsye isHardcore ()Z
 	METHOD m_ogbnhrls setupSpawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_gjwbvqct;ZZ)V
@@ -308,6 +309,15 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_qjvaquxt getWorlds ()Ljava/lang/Iterable;
 	METHOD m_quqvcwgc isRemote ()Z
 	METHOD m_qwvotguk setHostProfile (Lcom/mojang/authlib/GameProfile;)V
+		COMMENT Sets the game profile of the single-player host of this server.
+		COMMENT <p>
+		COMMENT This is called by Vanilla when setting up this server.
+		COMMENT The {@code hostProfile} is this client's game profile for integrated servers
+		COMMENT and specified by the {@code --singleplayer} command-line argument,
+		COMMENT or {@code null} for dedicated servers.
+		COMMENT
+		COMMENT @see #getHostProfile()
+		COMMENT @see #isSingleplayer()
 		ARG 1 hostProfile
 	METHOD m_rganmsov startTickMetrics ()V
 	METHOD m_rgjgaqvc setServerIp (Ljava/lang/String;)V
@@ -374,6 +384,14 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 worldGenerationProgressListener
 	METHOD m_wcoicbji runTasksTillTickEnd ()V
 	METHOD m_whhpkgqi getHostProfile ()Lcom/mojang/authlib/GameProfile;
+		COMMENT {@return the game profile of the single-player host of this server}
+		COMMENT May be {@code null} for non-single-player servers.
+		COMMENT <p>
+		COMMENT In Vanilla, outside of integrated servers, this is used to determine
+		COMMENT to whom the {@link PlayerEntity} NBT from {@code level.dat} applies.
+		COMMENT
+		COMMENT @see #setHostProfile(GameProfile)
+		COMMENT @see #isSingleplayer()
 	METHOD m_wktlzxaq exit ()V
 	METHOD m_wpevisnw getModdedStatusMessage ()Lnet/minecraft/unmapped/C_wlkuksof;
 	METHOD m_wrebfxpg getItemModifierManager ()Lnet/minecraft/unmapped/C_wqgroktp;

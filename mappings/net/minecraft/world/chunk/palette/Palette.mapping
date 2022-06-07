@@ -1,9 +1,9 @@
 CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palette
 	COMMENT A palette maps objects from and to small integer IDs that uses less
 	COMMENT number of bits to make storage smaller.
-	COMMENT
-	COMMENT <p>While the objects palettes handle are already represented by integer
-	COMMENT IDs, shrinking IDs in cases where only a few appear can further reduce
+	COMMENT <p>
+	COMMENT While the objects palettes handle are already represented by integer identifiers,
+	COMMENT shrinking identifiers in cases where only a few appear can further reduce
 	COMMENT storage space and network traffic volume.
 	COMMENT
 	COMMENT @see PalettedContainer
@@ -12,9 +12,9 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 		COMMENT predicate}}
 		ARG 1 predicate
 	METHOD m_frsswtag getId (Ljava/lang/Object;)I
-		COMMENT {@return the ID of an object in this palette}
-		COMMENT
-		COMMENT <p>If the object does not yet exist in this palette, this palette will
+		COMMENT {@return the identifier of an object in this palette}
+		COMMENT <p>
+		COMMENT If the object does not yet exist in this palette, this palette will
 		COMMENT register the object. If the palette is too small to include this object,
 		COMMENT a {@linkplain PaletteResizeListener resize listener} will be called and
 		COMMENT this palette may be discarded.
@@ -23,9 +23,9 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 	METHOD m_gholllny getEntry (I)Ljava/lang/Object;
 		COMMENT {@return the object associated with the given {@code id}}
 		COMMENT
-		COMMENT @throws EntryMissingException if this ID does not exist in this palette
+		COMMENT @throws MissingPaletteEntryException if this identifier does not exist in this palette
 		ARG 1 id
-			COMMENT the ID to look up
+			COMMENT the identifier to look up
 	METHOD m_hrjyiuxt copy ()Lnet/minecraft/unmapped/C_peoxnqbd;
 	METHOD m_ljtxzsdf getPacketSize ()I
 		COMMENT {@return the serialized size of this palette in a byte buf, in bytes}
@@ -34,8 +34,8 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 		ARG 1 buf
 			COMMENT the packet byte buffer
 	METHOD m_osqhbwdc read (Lnet/minecraft/unmapped/C_idfydwco;)V
-		COMMENT Initializes this palette from the {@code buf}. Clears the preexisting
-		COMMENT data in this palette.
+		COMMENT Initializes this palette from the {@code buf}.
+		COMMENT Clears the preexisting data in this palette.
 		ARG 1 buf
 			COMMENT the packet byte buffer
 	METHOD m_yfzgggar size ()I
@@ -49,7 +49,7 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 			ARG 1 bits
 				COMMENT the number of bits each entry uses in the storage
 			ARG 2 idList
-				COMMENT the indices of possible palette entries and their full integer IDs;
+				COMMENT the indices of possible palette entries and their full integer identifiers;
 				COMMENT useful for palette serialization
 			ARG 3 listener
 				COMMENT the resize listener, called when this palette runs out of capacity when
