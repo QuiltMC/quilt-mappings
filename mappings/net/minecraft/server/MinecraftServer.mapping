@@ -19,15 +19,18 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_cprjvpov playerManager Lnet/minecraft/unmapped/C_digmgtxw;
 	FIELD f_cyhowiqj pvpEnabled Z
 	FIELD f_dsjdzrap PLAYER_SAMPLE_UPDATE_INTERVAL J
+	FIELD f_dzhyipcc MAX_STATUS_PLAYER_SAMPLE I
 	FIELD f_emdhztny saveHandler Lnet/minecraft/unmapped/C_wnawwdpy;
+	FIELD f_esvodfwj OVERLOADED_THRESHOLD I
 	FIELD f_fabfcdrs lastPlayerSampleUpdate J
 	FIELD f_fbididar recorder Lnet/minecraft/unmapped/C_owhdirgj;
 	FIELD f_fdsdqzpj serverGuiTickables Ljava/util/List;
 	FIELD f_fluzdawl onlineMode Z
 	FIELD f_foqkzzmj DEMO_LEVEL_INFO Lnet/minecraft/unmapped/C_tmnkpzlg;
 	FIELD f_fwfwzdtg worldGenerationProgressListenerFactory Lnet/minecraft/unmapped/C_lausdaxu;
-	FIELD f_hjzxwjkh sessionService Lcom/mojang/authlib/minecraft/MinecraftSessionService;
+	FIELD f_gievdvxf MAX_TICK_LATENCY I
 	FIELD f_hpkazkoy motd Ljava/lang/String;
+	FIELD f_hzvkdwzv TICK_STATS_SPAN I
 	FIELD f_iajreeug running Z
 	FIELD f_iwlcwdqu needsDebugSetup Z
 	FIELD f_iyplpobq flightEnabled Z
@@ -39,6 +42,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_kcxvwygd dataCommandStorage Lnet/minecraft/unmapped/C_hrsnudrk;
 	FIELD f_kjvvxrfe MAX_WORLD_BORDER_RADIUS I
 	FIELD f_kobephmh random Lnet/minecraft/unmapped/C_rlomrsco;
+	FIELD f_kprntweg AVERAGE_TICK_TIME_SMOOTHING F
+	FIELD f_kzloyzgf OVERLOADED_WARNING_INTERVAL I
 	FIELD f_lcymwmat needsRecorderSetup Z
 	FIELD f_lhjjpisf saveProperties Lnet/minecraft/unmapped/C_jkevluio;
 	FIELD f_ljukkmyt VANILLA_BRAND Ljava/lang/String;
@@ -47,14 +52,15 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_mdgbzxcp serverResourceManager Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;
 	FIELD f_mjgajucj lastTickLengths [J
 	FIELD f_mkwvxikt dataPackManager Lnet/minecraft/unmapped/C_dqfyacfy;
+	FIELD f_mzgxeppu hostProfile Lcom/mojang/authlib/GameProfile;
 	FIELD f_nobqkcyz preventProxyConnections Z
 	FIELD f_nqkjmudj keyPair Ljava/security/KeyPair;
 	FIELD f_optqvchp START_TICKET_CHUNK_RADIUS I
 	FIELD f_oskywuqs START_TICKET_CHUNKS I
-	FIELD f_otjedmkk USER_CACHE_FILE Ljava/io/File;
 	FIELD f_pcoxooyw serverIp Ljava/lang/String;
 	FIELD f_piadzews scoreboard Lnet/minecraft/unmapped/C_orszeavg;
 	FIELD f_pjqvnnxv bossBarManager Lnet/minecraft/unmapped/C_xtwgkoiw;
+	FIELD f_psutxvxr AUTOSAVE_INTERVAL I
 	FIELD f_qhvtahcc nextTickTimestamp J
 	FIELD f_qtwsjtfk lastTimeReference J
 	FIELD f_qtxubclb stopped Z
@@ -69,9 +75,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_ucujdczf tickTime F
 	FIELD f_uftadmvp timeReference J
 	FIELD f_undezdps profiler Lnet/minecraft/unmapped/C_eslcbfsq;
-	FIELD f_usehgrsg gameProfileRepo Lcom/mojang/authlib/GameProfileRepository;
 	FIELD f_voqveisr metadata Lnet/minecraft/unmapped/C_bwttende;
-	FIELD f_vwftcnac userCache Lnet/minecraft/unmapped/C_jyqwslie;
+	FIELD f_vxfcywbl structureTemplateManager Lnet/minecraft/unmapped/C_zxhjfyir;
 	FIELD f_vzvmmomx proxy Ljava/net/Proxy;
 	FIELD f_wmdvdqlf serverId Ljava/lang/String;
 	FIELD f_wsnekgbx serverPort I
@@ -81,15 +86,20 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_ydhbqcwa ANONYMOUS_GAME_PROFILE Lcom/mojang/authlib/GameProfile;
 	FIELD f_yqwhnmdp demo Z
 	FIELD f_zehgtxec dataFixer Lcom/mojang/datafixers/DataFixer;
+	FIELD f_zknekmqa services Lnet/minecraft/unmapped/C_vmxvaoqe;
 	FIELD f_zsibtikt playerIdleTimeout I
-	METHOD <init> (Ljava/lang/Thread;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/unmapped/C_jyqwslie;Lnet/minecraft/unmapped/C_lausdaxu;)V
-		ARG 1 thread
+	METHOD <init> (Ljava/lang/Thread;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_vmxvaoqe;Lnet/minecraft/unmapped/C_lausdaxu;)V
+		ARG 1 serverThread
 		ARG 2 session
-		ARG 3 resourcePackManager
+		ARG 3 dataPackManager
 		ARG 4 worldStem
 		ARG 5 proxy
 		ARG 6 dataFixer
-		ARG 7 minecraftSessionService
+		ARG 7 services
+		ARG 8 worldGenerationProgressListenerFactory
+	METHOD getServerModName getServerModName ()Ljava/lang/String;
+	METHOD m_aaqnapek (Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lcom/google/common/collect/ImmutableList;)Ljava/util/concurrent/CompletionStage;
+		ARG 2 resourcePacks
 	METHOD m_aazpmrxf getServerPort ()I
 	METHOD m_abjphurm getSpawnProtectionRadius ()I
 	METHOD m_abpffcdv setFlightEnabled (Z)V
@@ -97,6 +107,9 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_aefyjgaj adjustTrackingDistance (I)I
 		ARG 1 initialDistance
 	METHOD m_ahatwois acceptsStatusQuery ()Z
+	METHOD m_avjryznz (Ljava/lang/Thread;Ljava/lang/Throwable;)V
+		ARG 0 thread
+		ARG 1 throwable
 	METHOD m_bchwkzcc addExtraSystemDetails (Lnet/minecraft/unmapped/C_fprbxnfr;)Lnet/minecraft/unmapped/C_fprbxnfr;
 		ARG 1 details
 	METHOD m_bdnrtaut isDemo ()Z
@@ -118,6 +131,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_cuuhdoqu syncChunkWrites ()Z
 	METHOD m_dajeggfi getResourceManager ()Lnet/minecraft/unmapped/C_tmnrpasf;
 	METHOD m_dbtaxkzj updateMobSpawnOptions ()V
+	METHOD m_ddlaxvao getServerResourcePackProperties ()Ljava/util/Optional;
 	METHOD m_depxxcmu initScoreboard (Lnet/minecraft/unmapped/C_hsdphpvz;)V
 		ARG 1 persistentStateManager
 	METHOD m_dilbuqhf isUsingNativeTransport ()Z
@@ -127,6 +141,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_dvprmwek (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_dzczqjri;)V
 		ARG 2 profileResult
 	METHOD m_eaqrsmuh getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+	METHOD m_ekyjsxub dumpNativeModules (Ljava/nio/file/Path;)V
+		ARG 1 path
 	METHOD m_emlhrtdf getMaxWorldBorderRadius ()I
 	METHOD m_evmiwdop dump (Ljava/nio/file/Path;)V
 		ARG 1 path
@@ -150,6 +166,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_fuwmcsdc generateKeyPair ()V
 	METHOD m_fwiwddfp stopDebug ()Lnet/minecraft/unmapped/C_dzczqjri;
 	METHOD m_fwlyhgio getNetworkCompressionThreshold ()I
+	METHOD m_gattkafj createCrashReport (Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_bkefkbum;
+		ARG 0 throwable
 	METHOD m_gbtvfmwc dumpClasspath (Ljava/nio/file/Path;)V
 		ARG 1 path
 	METHOD m_gchupyrg getTickTime ()F
@@ -167,7 +185,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_hlglehvn save (ZZZ)Z
 		COMMENT Saves both the server data and the player data to the data storage device.
 		COMMENT
-		COMMENT @return {@code true} if saving was successful, otherwise {@code false}
+		COMMENT @return {@code true} if saving was successful, or {@code false} otherwise
 		ARG 1 suppressLogs
 		ARG 2 flush
 			COMMENT if it should immediately write all data to storage device
@@ -193,6 +211,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 			COMMENT the port to open up to LAN connections
 	METHOD m_idbbmdin setPreventProxyConnections (Z)V
 		ARG 1 preventProxyConnections
+	METHOD m_ifhxnzvz getMaxChainedNeighborUpdates ()I
 	METHOD m_ihifcryt dumpGamerules (Ljava/nio/file/Path;)V
 		ARG 1 path
 	METHOD m_ihpdtrms setDifficultyLocked (Z)V
@@ -212,6 +231,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 shouldKeepTicking
 	METHOD m_kgrbsjbe dumpProperties (Ljava/nio/file/Path;)V
 		ARG 1 file
+	METHOD m_kkmyaeqx (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;)Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;
+		ARG 1 resources
 	METHOD m_klzymbhx getRunDirectory ()Ljava/io/File;
 	METHOD m_kpuwgkkc createFilterer (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_ibcyuwyk;
 		ARG 1 player
@@ -223,6 +244,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 playerManager
 	METHOD m_lhntuhvs getSpawnRadius (Lnet/minecraft/unmapped/C_bdwnwhiu;)I
 		ARG 1 world
+	METHOD m_ljdofyaz (Ljava/util/Collection;Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;)V
+		ARG 2 resourceManager
 	METHOD m_lprqwxbm setServerId (Ljava/lang/String;)V
 		ARG 1 serverId
 	METHOD m_magpcgdt getWorldRegistryKeys ()Ljava/util/Set;
@@ -235,22 +258,25 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_nouspmoz isRunning ()Z
 	METHOD m_nzaslqis getForcedGameMode ()Lnet/minecraft/unmapped/C_lghcpyvl;
 		COMMENT Returns the game mode a player should be set to when connecting to the server, or {@code null} if none is set.
+	METHOD m_oadvwzrx (Lnet/minecraft/unmapped/C_bwttende;Ljava/io/File;)V
+		ARG 1 favicon
 	METHOD m_oamptiyg setEnforceWhitelist (Z)V
 		ARG 1 whitelistEnabled
 	METHOD m_oavtxzbi isSingleplayer ()Z
-		COMMENT {@return whether this server is a singleplayer server} A {@index singleplayer}
-		COMMENT server has a "single player" to whom the player data in the {@code level.dat}
-		COMMENT applies. Otherwise, the player data is not applied to anyone. Hence, it is
+		COMMENT {@return whether this server is a single-player server}
+		COMMENT A {@index singleplayer} server has a "single player" to whom the player data
+		COMMENT in the {@code level.dat} applies.
+		COMMENT Otherwise, the player data is not applied to anyone. Hence, it is
 		COMMENT necessary to properly load some single-player save games.
-		COMMENT
-		COMMENT <p>All vanilla integrated servers and dedicated servers launched with the argument
-		COMMENT {@code --singleplayer <singlePlayerName>} are singleplayer servers.
-		COMMENT
-		COMMENT <p>A dedicated singleplayer server always turns online mode off, regardless of the
+		COMMENT <p>
+		COMMENT All Vanilla integrated servers and dedicated servers launched with the argument
+		COMMENT {@code --singleplayer <singlePlayerName>} are single-player servers.
+		COMMENT <p>
+		COMMENT A dedicated single-player server always turns online mode off, regardless of the
 		COMMENT content of {@code server.properties}.
 		COMMENT
-		COMMENT @see #getSinglePlayerName
-		COMMENT @see #setSinglePlayerName
+		COMMENT @see #getHostProfile()
+		COMMENT @see #setHostProfile(GameProfile)
 	METHOD m_ocdvptth getTimeReference ()J
 	METHOD m_odqgvsye isHardcore ()Z
 	METHOD m_ogbnhrls setupSpawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_gjwbvqct;ZZ)V
@@ -275,8 +301,22 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 datapacks
 			COMMENT a collection of datapacks to reload with
 	METHOD m_qekqyjho shouldBroadcastRconToOps ()Z
+	METHOD m_qjmlhoou (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Ljava/lang/Throwable;)V
+		ARG 1 resources
+		ARG 2 throwable
 	METHOD m_qjvaquxt getWorlds ()Ljava/lang/Iterable;
 	METHOD m_quqvcwgc isRemote ()Z
+	METHOD m_qwvotguk setHostProfile (Lcom/mojang/authlib/GameProfile;)V
+		COMMENT Sets the game profile of the single-player host of this server.
+		COMMENT <p>
+		COMMENT This is called by Vanilla when setting up this server.
+		COMMENT The {@code hostProfile} is this client's game profile for integrated servers
+		COMMENT and specified by the {@code --singleplayer} command-line argument,
+		COMMENT or {@code null} for dedicated servers.
+		COMMENT
+		COMMENT @see #getHostProfile()
+		COMMENT @see #isSingleplayer()
+		ARG 1 hostProfile
 	METHOD m_rganmsov startTickMetrics ()V
 	METHOD m_rgjgaqvc setServerIp (Ljava/lang/String;)V
 		ARG 1 serverIp
@@ -287,6 +327,9 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_scyblcyi setDemo (Z)V
 		ARG 1 demo
 	METHOD m_sdgenhxw isDebugRunning ()Z
+	METHOD m_sdxfrxgg (Lnet/minecraft/unmapped/C_frwmzmms$C_vohzovso;)Ljava/lang/String;
+		ARG 0 module
+	METHOD m_siswdodq forceStopRecorder ()V
 	METHOD m_spfqqear isRecorderActive ()Z
 	METHOD m_spqoqjba addServerGuiTickable (Ljava/lang/Runnable;)V
 		ARG 1 tickable
@@ -329,6 +372,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_vdtdrqyt sendDifficulty (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_veqmzcfr hasGui ()Z
+	METHOD m_vfwcplyx shouldEnforceSecureProfile ()Z
 	METHOD m_vnajegce getGameProfileRepo ()Lcom/mojang/authlib/GameProfileRepository;
 	METHOD m_vrzrtalf runServer ()V
 	METHOD m_vwhonaog getServerMetadata ()Lnet/minecraft/unmapped/C_bwttende;
@@ -337,6 +381,15 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_wcdfzsgy prepareStartRegion (Lnet/minecraft/unmapped/C_jnfclwgd;)V
 		ARG 1 worldGenerationProgressListener
 	METHOD m_wcoicbji runTasksTillTickEnd ()V
+	METHOD m_whhpkgqi getHostProfile ()Lcom/mojang/authlib/GameProfile;
+		COMMENT {@return the game profile of the single-player host of this server}
+		COMMENT May be {@code null} for non-single-player servers.
+		COMMENT <p>
+		COMMENT In Vanilla, outside of integrated servers, this is used to determine
+		COMMENT to whom the {@link PlayerEntity} NBT from {@code level.dat} applies.
+		COMMENT
+		COMMENT @see #setHostProfile(GameProfile)
+		COMMENT @see #isSingleplayer()
 	METHOD m_wktlzxaq exit ()V
 	METHOD m_wpevisnw getModdedStatusMessage ()Lnet/minecraft/unmapped/C_wlkuksof;
 	METHOD m_wrebfxpg getItemModifierManager ()Lnet/minecraft/unmapped/C_wqgroktp;
@@ -348,7 +401,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT <p>
 		COMMENT To store the player data in addition to server data, call {@link #save} instead.
 		COMMENT
-		COMMENT @return {@code true} if saving was successful, otherwise {@code false}
+		COMMENT @return {@code true} if saving was successful, or {@code false} otherwise
 		ARG 1 suppressLogs
 		ARG 2 flush
 			COMMENT if it should immediately write all data to storage device
@@ -357,6 +410,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_xejmgtcd setupRecorder (Ljava/util/function/Consumer;Ljava/util/function/Consumer;)V
 		ARG 1 resultConsumer
 		ARG 2 dumpConsumer
+	METHOD m_xenqirja (Ljava/util/Collection;Ljava/lang/String;)Z
+		ARG 1 dataPackName
 	METHOD m_xnhvxxzw (Ljava/nio/file/Path;)V
 		ARG 1 path
 	METHOD m_xpcjqhdz isDedicated ()Z
@@ -382,10 +437,12 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 properties
 	METHOD m_yvsocvtk resetRecorder ()V
 	METHOD m_zopvbxou getSaveProperties ()Lnet/minecraft/unmapped/C_jkevluio;
+	METHOD m_zpbigysr getSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
 	METHOD m_zprgpanc startDebug ()V
 	METHOD m_zsmhozky getCurrentPlayerCount ()I
 	METHOD m_zsxirona getServerIp ()Ljava/lang/String;
 	METHOD m_zvxfodpo runOneTask ()Z
+	METHOD m_zzqrecve shouldPreviewChat ()Z
 	CLASS C_eaujwdwn ResourceManagerHolder
 		FIELD f_nnwzxwwj resources Lnet/minecraft/unmapped/C_migzkpst;
 		FIELD f_scqzsofq resourceManager Lnet/minecraft/unmapped/C_carvbxzj;
@@ -397,6 +454,22 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 			ARG 1 o
 		METHOD m_eleegnzj resourceManager ()Lnet/minecraft/unmapped/C_carvbxzj;
 		METHOD m_qjfjejzw resources ()Lnet/minecraft/unmapped/C_migzkpst;
+	CLASS C_qhjevvjt ServerResourcePackProperties
+		FIELD f_jbhmjxid prompt Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_kcqlqhpu url Ljava/lang/String;
+		FIELD f_qgrulebc hash Ljava/lang/String;
+		FIELD f_zgeqzvlo isRequired Z
+		METHOD <init> (Ljava/lang/String;Ljava/lang/String;ZLnet/minecraft/unmapped/C_rdaqiwdt;)V
+			ARG 1 url
+			ARG 2 hash
+			ARG 3 isRequired
+			ARG 4 prompt
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_ekewhndq prompt ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_lejoovgu hash ()Ljava/lang/String;
+		METHOD m_ulllxjgk isRequired ()Z
+		METHOD m_uohobxmw url ()Ljava/lang/String;
 	CLASS C_rfqdsgps DebugStart
 		FIELD f_ggyrakcw time J
 		FIELD f_vheedmcz tick I

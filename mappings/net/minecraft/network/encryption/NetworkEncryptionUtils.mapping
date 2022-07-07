@@ -1,37 +1,211 @@
 CLASS net/minecraft/unmapped/C_mgrgevhd net/minecraft/network/encryption/NetworkEncryptionUtils
+	COMMENT Utilities for encryption, decryption, signing, and hashing of data.
+	COMMENT
+	COMMENT @apiNote Methods in this class usually throw {@link NetworkEncryptionException}
+	COMMENT when the operation fails. This is a checked exception and thus must be caught
+	COMMENT when using the methods.
+	FIELD f_aqouffre PRIVATE_KEY_CODEC Lcom/mojang/serialization/Codec;
+		COMMENT The codec for RSA public keys.
+		COMMENT
+		COMMENT @implNote The key is encoded using the PEM format.
+		COMMENT
+		COMMENT @see #decodeRsaPrivateKeyPem(String)
+		COMMENT @see #encodeRsaPrivateKey(PrivateKey)
+	FIELD f_crwvlcbl LINEBREAK Ljava/lang/String;
 	FIELD f_dxeyvkhd SYMMETRIC_ALGORITHM Ljava/lang/String;
 	FIELD f_fgftihvv SYMMETRIC_BITS I
+	FIELD f_hseazmns RSA_PUBLIC_KEY_FOOTER Ljava/lang/String;
+	FIELD f_imuhfzhh RSA_PRIVATE_KEY_FOOTER Ljava/lang/String;
+	FIELD f_lgyrmjsh RSA_PUBLIC_KEY_HEADER Ljava/lang/String;
+	FIELD f_nckzrocc PUBLIC_KEY_CODEC Lcom/mojang/serialization/Codec;
+		COMMENT The codec for RSA public keys.
+		COMMENT
+		COMMENT @implNote The key is encoded using the PEM format.
+		COMMENT
+		COMMENT @see #decodeRsaPublicKeyPem(String)
+		COMMENT @see #encodeRsaPublicKey(PublicKey)
 	FIELD f_qpxngoxu HASH_ALGORITHM Ljava/lang/String;
+	FIELD f_qsukxgoo BASE64_ENCODER Ljava/util/Base64$Encoder;
+	FIELD f_swkungrq SIGNING_ALGORITHM Ljava/lang/String;
 	FIELD f_vioyxcpe BYTE_ENCODING Ljava/lang/String;
 	FIELD f_xdivgily ASYMMETRIC_ALGORITHM Ljava/lang/String;
 	FIELD f_yvmvdgcc ASYMMETRIC_BITS I
+	FIELD f_zmddhtcx RSA_PRIVATE_KEY_HEADER Ljava/lang/String;
+	METHOD m_axmsffrz decodePem (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_mgrgevhd$C_rgihytsz;)Ljava/security/Key;
+		COMMENT Decodes a PEM-formatted string key.
+		COMMENT
+		COMMENT <p>
+		COMMENT A PEM-formatted key is {@code header}, followed by Base64 encoded key,
+		COMMENT followed by {@code footer}. Note that this method also allows Base64 encoded
+		COMMENT keys that have neither the header nor the footer.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when the {@code decoder} throws, e.g. due to
+		COMMENT invalid key content
+		ARG 0 key
+		ARG 1 header
+		ARG 2 footer
+		ARG 3 decoder
+	METHOD m_ddccllru decodeEncodedRsaPrivateKey ([B)Ljava/security/PrivateKey;
+		COMMENT Decodes a PCKS #8-encoded RSA private key.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when the key is malformed
+		COMMENT
+		COMMENT @see #decodeRsaPrivateKeyPem(String)
+		COMMENT @see #decodeEncodedRsaPublicKey(byte[])
+		ARG 0 key
+	METHOD m_diyouuze encodeRsaPrivateKey (Ljava/security/PrivateKey;)Ljava/lang/String;
+		COMMENT Encodes an RSA private {@code key} to a PEM-formatted key string.
+		COMMENT
+		COMMENT <p>
+		COMMENT A PEM-formatted RSA private key is {@value #RSA_PRIVATE_KEY_HEADER}, followed
+		COMMENT by Base64 encoded PCKS #8-encoded key, followed by {@value #RSA_PRIVATE_KEY_FOOTER}.
+		COMMENT
+		COMMENT @throws IllegalArgumentException when non-RSA key is passed
+		COMMENT
+		COMMENT @see #encodeRsaPublicKey(PublicKey)
+		COMMENT @see #decodeRsaPrivateKeyPem(String)
+		COMMENT @see #decodeRsaPublicKeyPem(String)
+		ARG 0 key
 	METHOD m_eezxcrdq generateServerKeyPair ()Ljava/security/KeyPair;
+		COMMENT {@return a new {@value #ASYMMETRIC_BITS} bit RSA public/private key pair}
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when generation fails
 	METHOD m_fkkgwpuy cipherFromKey (ILjava/security/Key;)Ljavax/crypto/Cipher;
+		COMMENT Creates an AES cipher from the key.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when creation fails, e.g. due to invalid key
 		ARG 0 opMode
 		ARG 1 key
+			COMMENT the AES secret key
 	METHOD m_gbrlcsng hash ([[B)[B
+		COMMENT {@return the SHA-1 hash of {@code bytes}}
 		ARG 0 bytes
-	METHOD m_gpvfwbnr crypt (ILjava/lang/String;Ljava/security/Key;)Ljavax/crypto/Cipher;
+	METHOD m_gpvfwbnr createCipher (ILjava/lang/String;Ljava/security/Key;)Ljavax/crypto/Cipher;
+		COMMENT Creates a cipher to perform encryption or decryption operation.
 		ARG 0 opMode
 		ARG 1 algorithm
 		ARG 2 key
-	METHOD m_iyunimoy generateServerId (Ljava/lang/String;Ljava/security/PublicKey;Ljavax/crypto/SecretKey;)[B
+	METHOD m_iyunimoy computeServerId (Ljava/lang/String;Ljava/security/PublicKey;Ljavax/crypto/SecretKey;)[B
+		COMMENT {@return the computed server ID}
+		COMMENT
+		COMMENT @implNote The server ID is a SHA-1 hash of ISO-8859-1 encoded {@code baseServerId},
+		COMMENT {@code publicKey}, and {@code secretKey}.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when computation fails
 		ARG 0 baseServerId
 		ARG 1 publicKey
 		ARG 2 secretKey
 	METHOD m_izwrjupx crypt (ILjava/security/Key;[B)[B
+		COMMENT Low-level API to perform encryption or decryption operation.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when the operation fails
 		ARG 0 opMode
 		ARG 1 key
 		ARG 2 data
 	METHOD m_jfloogah decrypt (Ljava/security/Key;[B)[B
+		COMMENT Decrypts encrypted data. The algorithm is determined from the key used.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when decryption fails, e.g. due to invalid key
+		COMMENT
+		COMMENT @see #encrypt(Key, byte[])
 		ARG 0 key
+			COMMENT decryption key (e.g. AES secret key or RSA private key)
 		ARG 1 data
+	METHOD m_nmohpzrk encodeRsaPublicKey (Ljava/security/PublicKey;)Ljava/lang/String;
+		COMMENT Encodes an RSA public {@code key} to a PEM-formatted key string.
+		COMMENT
+		COMMENT <p>
+		COMMENT A PEM-formatted RSA public key is {@value #RSA_PUBLIC_KEY_HEADER}, followed
+		COMMENT by Base64 encoded X.509-encoded key, followed by {@value #RSA_PUBLIC_KEY_FOOTER}.
+		COMMENT
+		COMMENT @throws IllegalArgumentException when non-RSA key is passed
+		COMMENT
+		COMMENT @see #encodeRsaPrivateKey(PrivateKey)
+		COMMENT @see #decodeRsaPrivateKeyPem(String)
+		COMMENT @see #decodeRsaPublicKeyPem(String)
+		ARG 0 key
+	METHOD m_rebtwskh (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 keyPem
+	METHOD m_tnwvnyev decodeRsaPrivateKeyPem (Ljava/lang/String;)Ljava/security/PrivateKey;
+		COMMENT Decodes a PEM-formatted RSA private key.
+		COMMENT
+		COMMENT <p>
+		COMMENT A PEM-formatted RSA private key is {@value #RSA_PRIVATE_KEY_HEADER}, followed
+		COMMENT by Base64 encoded PCKS #8-encoded key, followed by {@value #RSA_PRIVATE_KEY_FOOTER}.
+		COMMENT Note that this method also allows Base64 encoded keys that have neither the header
+		COMMENT nor the footer.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when the key is malformed
+		COMMENT
+		COMMENT @see #encodeRsaPrivateKey(PrivateKey)
+		COMMENT @see #encodeRsaPublicKey(PublicKey)
+		COMMENT @see #decodeRsaPrivateKeyPem(String)
+		ARG 0 key
+	METHOD m_tqtywdmq (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 keyPem
 	METHOD m_upcfcxwt decryptSecretKey (Ljava/security/PrivateKey;[B)Ljavax/crypto/SecretKey;
+		COMMENT Decrypts RSA-encrypted AES secret key.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when the secret key is malformed
 		ARG 0 privateKey
 		ARG 1 encryptedSecretKey
-	METHOD m_uznsqkdw generateKey ()Ljavax/crypto/SecretKey;
-	METHOD m_xxkmkrfu encrypt (Ljava/security/Key;[B)[B
+	METHOD m_uznsqkdw generateSecretKey ()Ljavax/crypto/SecretKey;
+		COMMENT {@return a new {@value #SYMMETRIC_BITS} bit AES secret key}
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when generation fails
+	METHOD m_vamsmykn decodeRsaPublicKeyPem (Ljava/lang/String;)Ljava/security/PublicKey;
+		COMMENT Decodes a PEM-formatted RSA public key.
+		COMMENT
+		COMMENT <p>
+		COMMENT A PEM-formatted RSA public key is {@value #RSA_PUBLIC_KEY_HEADER}, followed
+		COMMENT by Base64 encoded X.509-encoded key, followed by {@value #RSA_PUBLIC_KEY_FOOTER}.
+		COMMENT Note that this method also allows Base64 encoded keys that have neither the header
+		COMMENT nor the footer.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when the key is malformed
+		COMMENT
+		COMMENT @see #encodeRsaPublicKey(PublicKey)
+		COMMENT @see #encodeRsaPrivateKey(PrivateKey)
+		COMMENT @see #decodeRsaPublicKeyPem(String)
 		ARG 0 key
+	METHOD m_xxkmkrfu encrypt (Ljava/security/Key;[B)[B
+		COMMENT Encrypts data. The algorithm is determined from the key used.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when encryption fails, e.g. due to invalid key
+		COMMENT
+		COMMENT @see #decrypt(Key, byte[])
+		ARG 0 key
+			COMMENT encryption key (e.g. AES secret key or RSA public key)
 		ARG 1 data
-	METHOD m_ypsrdyom readEncodedPublicKey ([B)Ljava/security/PublicKey;
+	METHOD m_ypsrdyom decodeEncodedRsaPublicKey ([B)Ljava/security/PublicKey;
+		COMMENT Decodes a X.509-encoded RSA public key.
+		COMMENT
+		COMMENT @throws NetworkEncryptionException when the key is malformed
+		COMMENT
+		COMMENT @see #decodeRsaPublicKeyPem(String)
+		COMMENT @see #decodeEncodedRsaPrivateKey(byte[])
 		ARG 0 bytes
+	CLASS C_fzutuybr SaltSupplier
+		FIELD f_xrxzwplb SECURE_RANDOM Ljava/security/SecureRandom;
+		METHOD m_jylgfzyu nextLong ()J
+	CLASS C_gwzcggho SignaturePair
+		FIELD f_qsefrier EMPTY Lnet/minecraft/unmapped/C_mgrgevhd$C_gwzcggho;
+		FIELD f_tqsnrqzb signature [B
+		FIELD f_yyjxxcmg salt J
+		METHOD <init> (J[B)V
+			ARG 1 salt
+			ARG 3 signature
+		METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
+			ARG 1 buf
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_ahoyvfva signature ()[B
+		METHOD m_bvamwmfv write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_mgrgevhd$C_gwzcggho;)V
+			ARG 0 buf
+			ARG 1 signaturePair
+		METHOD m_mghakrvz getSaltAsByteArray ()[B
+		METHOD m_qwwryimn salt ()J
+		METHOD m_uaoycnys isValid ()Z
+	CLASS C_rgihytsz KeyDecoder
+		METHOD apply apply ([B)Ljava/security/Key;
+			ARG 1 key

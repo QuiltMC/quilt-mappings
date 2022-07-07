@@ -23,7 +23,7 @@ public class DownloadVersionsManifestTask extends DefaultMappingsTask {
     public void downloadVersionsManifestTask() throws IOException {
         getLogger().lifecycle(":downloading minecraft versions manifest");
         startDownload()
-                .src("https://launchermeta.mojang.com/mc/game/version_manifest_v2.json")
+                .src("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
                 .dest(manifestFile)
                 .overwrite(true)
                 .download();

@@ -3,7 +3,9 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 	FIELD f_auingpij functionPermissionLevel I
 	FIELD f_ayqsndpx enableCommandBlock Z
 	FIELD f_ayugpqvq allowFlight Z
+	FIELD f_azzzwuax SHA1_PATTERN Ljava/util/regex/Pattern;
 	FIELD f_bezzjgzv maxWorldSize I
+	FIELD f_bivnuaot enforceSecureProfile Z
 	FIELD f_cnxqeqiz serverIp Ljava/lang/String;
 	FIELD f_ddvmftwb broadcastConsoleToOps Z
 	FIELD f_dpghfhgr rconPort I
@@ -17,11 +19,15 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 	FIELD f_jtrlpeyi maxPlayers I
 	FIELD f_kzyqcmed rateLimit I
 	FIELD f_mhxhsogk forceGameMode Z
+	FIELD f_mirqjnjs LOGGER Lorg/slf4j/Logger;
 	FIELD f_nmbkkxms announcePlayerAchievements Ljava/lang/Boolean;
 	FIELD f_noiykogp spawnProtection I
 	FIELD f_obbgjkxk enableStatus Z
 	FIELD f_oczjtzol opPermissionLevel I
 	FIELD f_oqrkpyaw hideOnlinePlayers Z
+	FIELD f_pdkbvwea maxChainedNeighborUpdates I
+	FIELD f_pdzdrdnr serverResourcePackProperties Ljava/util/Optional;
+	FIELD f_qafrvvww previewsChat Z
 	FIELD f_qrsrzudt rconPassword Ljava/lang/String;
 	FIELD f_quewwsrv serverPort I
 	FIELD f_quxqcqzt whiteList Lnet/minecraft/unmapped/C_hataibgy$C_mggqivce;
@@ -46,10 +52,22 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 	FIELD f_yuowuapf hardcore Z
 	FIELD f_zfgropea enableRcon Z
 	FIELD f_zxeilkts difficulty Lnet/minecraft/unmapped/C_mpbjgxic;
+	METHOD m_gzwrofvx getServerResourcePackProperties (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)Ljava/util/Optional;
+		ARG 0 url
+		ARG 1 hash
+		ARG 2 sha1
+		ARG 3 isRequired
+		ARG 4 prompt
 	METHOD m_moewmdkm (Ljava/lang/Integer;)Ljava/lang/Integer;
 		ARG 0 maxWorldSize
+	METHOD m_ninkryga (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 worldType
+	METHOD m_qfjdvosx parseResourcePackPrompt (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 prompt
 	METHOD m_rkjqubss (Ljava/lang/Integer;)Ljava/lang/Integer;
 		ARG 0 percentage
+	METHOD m_ujdlyyag (Ljava/lang/String;)Lcom/google/gson/JsonObject;
+		ARG 0 generatorSettings
 	METHOD m_vcawwowm load (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_kefepfwh;
 		ARG 0 path
 	METHOD m_xxhdqysd getGeneratorOptions (Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_oxnufhsj;
@@ -58,6 +76,7 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 		FIELD f_hsgwowdc seed Ljava/lang/String;
 		FIELD f_kbscfzuf generationSettings Lcom/google/gson/JsonObject;
 		FIELD f_lupnzgbk worldType Ljava/lang/String;
+		FIELD f_vojcjsxu GENERATOR_TYPES Ljava/util/Map;
 		FIELD f_zdbkpgmx generateStructures Z
 		METHOD <init> (Ljava/lang/String;Lcom/google/gson/JsonObject;ZLjava/lang/String;)V
 			ARG 1 seed
@@ -67,6 +86,12 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_dgpgrrdu worldType ()Ljava/lang/String;
+		METHOD m_feeageql createGeneratorOptions (Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_oxnufhsj;
+			ARG 1 registryManager
+		METHOD m_fettuctf (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_xhhleach;
+			ARG 0 worldType
 		METHOD m_ljbucokn generateStructures ()Z
+		METHOD m_luatalkc (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/String;
+			ARG 0 key
 		METHOD m_qqbdodly seed ()Ljava/lang/String;
 		METHOD m_wvokldht generationSettings ()Lcom/google/gson/JsonObject;

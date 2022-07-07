@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.quiltmc.launchermeta.version.v1.DownloadableFile;
 import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
@@ -48,8 +50,13 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
         Object lock = new Object();
 
         file.getLibraries().parallelStream().forEach(library -> {
+            Optional<DownloadableFile.PathDownload> artifact = library.getDownloads().getArtifact();
+            if (artifact.isEmpty()) {
+                return;
+            }
+
             try {
-                String url = library.getDownloads().getArtifact().get().getUrl();
+                String url = artifact.get().getUrl();
                 startDownload()
                         .src(url)
                         .dest(new File(fileConstants.libraries, url.substring(url.lastIndexOf("/") + 1)))
