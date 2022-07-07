@@ -85,6 +85,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_rilctjct dataTracker Lnet/minecraft/unmapped/C_pyoaoolj;
 	FIELD f_rkfixhau verticalCollisionBelow Z
 	FIELD f_rnuwpthh WATER_SPEED_FACTOR D
+	FIELD f_rucrpdxa packetPositionCodec Lnet/minecraft/unmapped/C_kfofqpqr;
 	FIELD f_scozqngs invulnerable Z
 	FIELD f_sfjnvyan movementMultiplier Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_skorbhua lastChimeAge I
@@ -205,6 +206,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 sneaking
 	METHOD m_dsagprus getRotationVector ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_dsjrxsps spawnSprintingParticles ()V
+	METHOD m_dsstyxuj asChatSEnder ()Lnet/minecraft/unmapped/C_tzcijmwg;
 	METHOD m_dsukauvx updateSubmergedInWaterState ()V
 	METHOD m_dtzgxqjr setRenderDistanceMultiplier (D)V
 		ARG 0 value
@@ -220,6 +222,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT method should be overridden as returning a value other than
 		COMMENT {@linkplain Entity.MoveEffect#ALL ALL} allows skipping some movement logic
 		COMMENT and boost ticking performance.
+	METHOD m_dzhivofg getOnPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_dziryrcm getJumpVelocityMultiplier ()F
 	METHOD m_ecfubkpz isTouchingWaterOrRain ()Z
 	METHOD m_edsbhryk playAmethystChimeSound (Lnet/minecraft/unmapped/C_txtbiemp;)V
@@ -366,6 +369,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 sound
 	METHOD m_hvxlsjsw getFrozenTicks ()I
 	METHOD m_hxboixtd isInsideBubbleColumn ()Z
+	METHOD m_hzdsqmkj getOnPosLegacy ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_iadcwgxh updateWaterState ()Z
 	METHOD m_iaklbvrk (Lnet/minecraft/unmapped/C_sszpscpo;Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 2 pos
@@ -396,6 +400,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 fallDistance
 		ARG 2 damageMultiplier
 		ARG 3 damageSource
+	METHOD m_jfqciigr isHorizontalCollisionMinor (Lnet/minecraft/unmapped/C_vgpupfxx;)Z
 	METHOD m_jjhhwbds updateDynamicGameEventListener (Ljava/util/function/BiConsumer;)V
 		ARG 1 updater
 	METHOD m_jjorggkg (Lnet/minecraft/unmapped/C_astfners;)V
@@ -474,6 +479,10 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_lrfrrwvd getVelocityAffectingPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_lsaraprt (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 passenger
+	METHOD m_lstmmenj syncPacketPositionCodec (DDD)V
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
 	METHOD m_lvimckng getDefaultNetherPortalCooldown ()I
 	METHOD m_lvnfpsmt baseTick ()V
 	METHOD m_lvnmxdmg calculatePistonMovementFactor (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;D)D
@@ -546,6 +555,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
+	METHOD m_onrjdopp getYawDegrees ()F
 	METHOD m_oqgpazne isInSneakingPose ()Z
 		COMMENT {@return whether the entity is in a crouching pose}
 		COMMENT <p>
@@ -625,6 +635,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
+	METHOD m_qzemwoox hasControllingPassenger ()Z
 	METHOD m_rjumlnsh getTargetingMargin ()F
 	METHOD m_rkfskqtn getRandomBodyY ()D
 	METHOD m_rnkadjyo shouldRenderName ()Z
@@ -645,9 +656,12 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 cameraX
 		ARG 3 cameraY
 		ARG 5 cameraZ
+	METHOD m_rykuwyoq getOnPos (F)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 1 pos
 	METHOD m_rypxvnpp toNbtList ([F)Lnet/minecraft/unmapped/C_hqhtfwlr;
 		ARG 1 values
 	METHOD m_sciubbmh getStandingEyeHeight ()F
+	METHOD m_sdtijuxq getPacketPositionCodec ()Lnet/minecraft/unmapped/C_kfofqpqr;
 	METHOD m_sfrpnqnb hasPermissionLevel (I)Z
 		ARG 1 permissionLevel
 	METHOD m_shlbgxdt saveSelfNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
@@ -752,6 +766,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 3 world
 		ARG 4 shapes
 	METHOD m_vcfvpihz checkDespawn ()V
+	METHOD m_vcplipih getLightLevelDependentMagicValue ()F
 	METHOD m_vddvkdnu saveNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
 		ARG 1 nbt
 	METHOD m_vewkkvlv isFireImmune ()Z
@@ -823,6 +838,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 pos
 	METHOD m_xpuekaoa setUuid (Ljava/util/UUID;)V
 		ARG 1 uuid
+	METHOD m_xrvghdnl getLandingBlockStateLegacy ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_xthhawdp onStartedTrackingBy (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_xujkzfqh offsetZ (D)D
