@@ -9,6 +9,7 @@ CLASS net/minecraft/unmapped/C_tcccilzh net/minecraft/util/registry/BuiltinRegis
 	COMMENT @see net.minecraft.client.network.ClientPlayNetworkHandler#getRegistryManager()
 	COMMENT @see net.minecraft.util.registry.DynamicRegistryManager#get(RegistryKey)
 	FIELD f_adafzlar BIOME Lnet/minecraft/unmapped/C_tqxyjqsk;
+	FIELD f_afzcbkuc DIMENSION_TYPE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_brfnhadh LOGGER Lorg/slf4j/Logger;
 	FIELD f_bvyzccjl CONFIGURED_CARVER Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_celjxphk STRUCTURE_POOL Lnet/minecraft/unmapped/C_tqxyjqsk;
@@ -25,6 +26,7 @@ CLASS net/minecraft/unmapped/C_tcccilzh net/minecraft/util/registry/BuiltinRegis
 	FIELD f_wfztgdue ROOT Lnet/minecraft/unmapped/C_eexxncvi;
 	FIELD f_xdrongic MANAGER Lnet/minecraft/unmapped/C_wqxmvzdq;
 	FIELD f_xjtnquon STRUCTURE Lnet/minecraft/unmapped/C_tqxyjqsk;
+	FIELD f_ygeidqac MESSAGE_TYPE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_zlpsenax STRUCTURE_PROCESSOR_LIST Lnet/minecraft/unmapped/C_tqxyjqsk;
 	METHOD m_ajtlbhqo registerExact (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv;
 		ARG 0 type
@@ -34,16 +36,34 @@ CLASS net/minecraft/unmapped/C_tcccilzh net/minecraft/util/registry/BuiltinRegis
 		ARG 0 type
 		ARG 1 name
 		ARG 2 value
+	METHOD m_escpaohs (Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_cjzoxshv;
+		ARG 0 reigstry
+	METHOD m_ftmcdime addRegistry (Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Lifecycle;Lnet/minecraft/unmapped/C_tcccilzh$C_ywvznkgs;)Lnet/minecraft/unmapped/C_tqxyjqsk;
+		ARG 0 registryRef
+		ARG 1 lifecycle
+		ARG 2 bootstrap
 	METHOD m_gefiajzm register (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv;
 		ARG 0 type
 		ARG 1 key
 		ARG 2 value
+	METHOD m_ibutiyef addRegistry (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_tcccilzh$C_ywvznkgs;)Lnet/minecraft/unmapped/C_tqxyjqsk;
+		ARG 0 registryRef
+		ARG 1 bootstrap
 	METHOD m_lqypnsar init ()V
 	METHOD m_pdtzrgzv addRegistry (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_eexxncvi;Lnet/minecraft/unmapped/C_tcccilzh$C_ywvznkgs;Lcom/mojang/serialization/Lifecycle;)Lnet/minecraft/unmapped/C_eexxncvi;
 		ARG 0 registryRef
 		ARG 1 registry
+		ARG 2 bootstrap
 		ARG 3 lifecycle
+	METHOD m_tvqpkeik (Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_cjzoxshv;
+		ARG 0 registry
 	METHOD m_xcdqqnrd register (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv;
 		ARG 0 type
 		ARG 1 id
 		ARG 2 value
+	METHOD m_zefkhrkj (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/function/Supplier;)V
+		ARG 0 id
+		ARG 1 bootstrap
+	CLASS C_ywvznkgs RegistryBootstrap
+		METHOD run run (Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_cjzoxshv;
+			ARG 1 registry

@@ -14,6 +14,9 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 	METHOD m_bujjigza hasJsonObject (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
 		ARG 0 object
 		ARG 1 element
+	METHOD m_bwjqrevf sort (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/util/Collection;
+		ARG 0 entries
+		ARG 1 comparator
 	METHOD m_bwvzekgq asBigDecimal (Lcom/google/gson/JsonElement;Ljava/lang/String;)Ljava/math/BigDecimal;
 		ARG 0 element
 		ARG 1 name
@@ -36,6 +39,8 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 	METHOD m_dxwqqoae hasNumber (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
 		ARG 0 object
 		ARG 1 element
+	METHOD m_eencpxkp deserializeArray (Ljava/lang/String;)Lcom/google/gson/JsonArray;
+		ARG 0 content
 	METHOD m_eiubygrc asFloat (Lcom/google/gson/JsonElement;Ljava/lang/String;)F
 		ARG 0 element
 		ARG 1 name
@@ -64,15 +69,25 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 0 object
 		ARG 1 element
 	METHOD m_gxzjkqmg deserialize (Lcom/google/gson/Gson;Ljava/lang/String;Ljava/lang/Class;Z)Ljava/lang/Object;
+		ARG 0 gson
 		ARG 1 content
+		ARG 2 type
 		ARG 3 lenient
 	METHOD m_hgukrpjq deserialize (Lcom/google/gson/Gson;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+		ARG 0 gson
 		ARG 1 content
+		ARG 2 type
+	METHOD m_hktljbgx writeValue (Lcom/google/gson/stream/JsonWriter;Lcom/google/gson/JsonElement;Ljava/util/Comparator;)V
+		ARG 0 writer
+		ARG 1 json
+		ARG 2 comparator
 	METHOD m_hpjxnsbn asDouble (Lcom/google/gson/JsonElement;Ljava/lang/String;)D
 		ARG 0 object
 		ARG 1 name
 	METHOD m_ihbhpkhx deserialize (Lcom/google/gson/Gson;Ljava/lang/String;Lcom/google/gson/reflect/TypeToken;)Ljava/lang/Object;
+		ARG 0 gson
 		ARG 1 content
+		ARG 2 typeToken
 	METHOD m_iyryfnmt getFloat (Lcom/google/gson/JsonObject;Ljava/lang/String;F)F
 		ARG 0 object
 		ARG 1 element
@@ -81,6 +96,8 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 0 object
 		ARG 1 element
 	METHOD m_jkhcuofu deserialize (Lcom/google/gson/Gson;Ljava/io/Reader;Ljava/lang/Class;Z)Ljava/lang/Object;
+		ARG 0 gson
+		ARG 1 reader
 		ARG 2 type
 		ARG 3 lenient
 	METHOD m_jzyhjxkq hasString (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
@@ -94,6 +111,8 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 0 object
 	METHOD m_mjzgyrmh getType (Lcom/google/gson/JsonElement;)Ljava/lang/String;
 		ARG 0 element
+	METHOD m_mpzgwusn toSortedString (Lcom/google/gson/JsonElement;)Ljava/lang/String;
+		ARG 0 json
 	METHOD m_mxvcvxjb asByte (Lcom/google/gson/JsonElement;Ljava/lang/String;)B
 		ARG 0 element
 		ARG 1 name
@@ -101,6 +120,9 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 0 object
 		ARG 1 element
 	METHOD m_ogqxkuar deserialize (Lcom/google/gson/Gson;Ljava/io/Reader;Ljava/lang/Class;)Ljava/lang/Object;
+		ARG 0 gson
+		ARG 1 reader
+		ARG 2 type
 	METHOD m_omztuprv getBigInteger (Lcom/google/gson/JsonObject;Ljava/lang/String;Ljava/math/BigInteger;)Ljava/math/BigInteger;
 		ARG 0 object
 		ARG 1 element
@@ -132,6 +154,7 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 1 element
 		ARG 2 defaultStr
 	METHOD m_qwxgcpuj deserialize (Ljava/io/Reader;)Lcom/google/gson/JsonObject;
+		ARG 0 reader
 	METHOD m_rgtvzxgc deserialize (Lcom/google/gson/JsonObject;Ljava/lang/String;Lcom/google/gson/JsonDeserializationContext;Ljava/lang/Class;)Ljava/lang/Object;
 		ARG 0 object
 		ARG 1 element
@@ -145,11 +168,18 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 1 element
 		ARG 2 defaultByte
 	METHOD m_smcppbnl deserialize (Lcom/google/gson/Gson;Ljava/io/Reader;Lcom/google/gson/reflect/TypeToken;)Ljava/lang/Object;
+		ARG 0 gson
+		ARG 1 reader
+		ARG 2 typeToken
+	METHOD m_suhdbcdg deserializeArray (Ljava/io/Reader;)Lcom/google/gson/JsonArray;
+		ARG 0 reader
 	METHOD m_tbjzuigu getByte (Lcom/google/gson/JsonObject;Ljava/lang/String;)B
 		ARG 0 object
 		ARG 1 element
 	METHOD m_tfnjyyyd deserialize (Lcom/google/gson/Gson;Ljava/lang/String;Lcom/google/gson/reflect/TypeToken;Z)Ljava/lang/Object;
+		ARG 0 gson
 		ARG 1 content
+		ARG 2 typeToken
 		ARG 3 lenient
 	METHOD m_uanchcjl getInt (Lcom/google/gson/JsonObject;Ljava/lang/String;)I
 		ARG 0 object
@@ -184,6 +214,7 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 0 element
 		ARG 1 name
 	METHOD m_xnpajmkj deserialize (Ljava/io/Reader;Z)Lcom/google/gson/JsonObject;
+		ARG 0 reader
 		ARG 1 lenient
 	METHOD m_xtjihmpb hasElement (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
 		ARG 0 object
@@ -202,6 +233,9 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 1 element
 		ARG 2 defaultChar
 	METHOD m_zcuoqvbg deserialize (Lcom/google/gson/Gson;Ljava/io/Reader;Lcom/google/gson/reflect/TypeToken;Z)Ljava/lang/Object;
+		ARG 0 gson
+		ARG 1 reader
+		ARG 2 typeToken
 		ARG 3 lenient
 	METHOD m_zhoxqhjm getBoolean (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
 		ARG 0 object
