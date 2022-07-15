@@ -9,20 +9,32 @@ CLASS net/minecraft/unmapped/C_hdurmsnk net/minecraft/world/poi/PointOfInterestS
 	METHOD <init> (Ljava/lang/Runnable;ZLjava/util/List;)V
 		ARG 1 updateListener
 		ARG 2 valid
+		ARG 3 pointsOfInterest
 	METHOD m_auljnzhv getType (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
 		ARG 1 pos
 	METHOD m_awzlpame remove (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	METHOD m_bsihjbks (Lnet/minecraft/unmapped/C_hdurmsnk;)Ljava/util/List;
 		ARG 0 poiSet
+	METHOD m_dpbdpjso (Ljava/util/Map$Entry;)Ljava/util/stream/Stream;
+		ARG 0 entry
+	METHOD m_ejltkrbp add (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 1 pos
+		ARG 2 type
+	METHOD m_frcfizlk (Ljava/util/function/Predicate;Ljava/util/Map$Entry;)Z
+		ARG 1 entry
+	METHOD m_fyptibde (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/String;
+		ARG 0 key
 	METHOD m_gmemdztd clear ()V
 	METHOD m_hgiwmccq (Lnet/minecraft/unmapped/C_hdurmsnk;)Ljava/lang/Boolean;
 		ARG 0 poiSet
 	METHOD m_jkfckwqu get (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/stream/Stream;
+		ARG 1 typePredicate
 		ARG 2 occupationStatus
 	METHOD m_jynfjuan createCodec (Ljava/lang/Runnable;)Lcom/mojang/serialization/Codec;
 		ARG 0 updateListener
 	METHOD m_oadrqxun updatePointsOfInterest (Ljava/util/function/Consumer;)V
+		ARG 1 updater
 	METHOD m_ooqpwuhy add (Lnet/minecraft/unmapped/C_xhhbfljz;)Z
 		ARG 1 poi
 	METHOD m_pvlulhhd releaseTicket (Lnet/minecraft/unmapped/C_hynzadkk;)Z
@@ -32,6 +44,10 @@ CLASS net/minecraft/unmapped/C_hdurmsnk net/minecraft/world/poi/PointOfInterestS
 	METHOD m_wvycrlap test (Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/function/Predicate;)Z
 		ARG 1 pos
 		ARG 2 predicate
+	METHOD m_xezdhyvj (Lnet/minecraft/unmapped/C_cjzoxshv;)Ljava/util/Set;
+		ARG 0 type
 	METHOD m_xlalihkb get (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
 		ARG 1 pos
 	METHOD m_yraklmmf isValid ()Z
+	METHOD m_zrqylmkv getFreeTicketsAt (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		ARG 1 pos
