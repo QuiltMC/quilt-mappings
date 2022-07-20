@@ -365,6 +365,11 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 entity
 		ARG 2 force
 	METHOD m_hvrxcdhf playSound (Lnet/minecraft/unmapped/C_avavozay;)V
+		COMMENT Plays a given sound coming from this entity, if this entity is not silent
+		COMMENT
+		COMMENT @param sound the sound to play
+		COMMENT @see #isSilent()
+		COMMENT @see #playSound(SoundEvent, float, float)
 		ARG 1 sound
 	METHOD m_hvxlsjsw getFrozenTicks ()I
 	METHOD m_hxboixtd isInsideBubbleColumn ()Z
@@ -583,11 +588,13 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 mappedIndex
 			COMMENT the mapped index as given by the item slot argument
 	METHOD m_ozexriib playSound (Lnet/minecraft/unmapped/C_avavozay;FF)V
-		COMMENT Plays a given sound coming from this entity if this entity is not silent.
+		COMMENT Plays a given sound coming from this entity, if this entity is not silent.
 		COMMENT
 		COMMENT @param sound the sound to play
+		COMMENT @param volume the volume to play the sound at
+		COMMENT @param pitch the pitch to play the sound at
 		COMMENT @see #isSilent()
-		COMMENT @see #playSound()
+		COMMENT @see #playSound(SoundEvent)
 		ARG 1 sound
 		ARG 2 volume
 		ARG 3 pitch
