@@ -1,58 +1,64 @@
 CLASS net/minecraft/unmapped/C_oxijnccf net/minecraft/world/dimension/DimensionType
-	FIELD f_bcecvbdh bedWorks Z
 	FIELD f_cdpesyot REGISTRY_CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_ckygwuem ambientLight F
-	FIELD f_exnsbfbw MIN_HEIGHT I
-	FIELD f_eyjygtak MAX_COLUMN_HEIGHT I
-	FIELD f_hmvxmnvw MIN_SECTION I
-	FIELD f_iilfmdxv MAX_HEIGHT I
+	FIELD f_exnsbfbw MIN_Y I
+	FIELD f_eyjygtak MAX_Y I
+	FIELD f_hmvxmnvw FAR_BELOW_MIN_Y I
+	FIELD f_iilfmdxv Y_SIZE I
 	FIELD f_iulsvlis CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_ivuvsukm logicalHeight I
-	FIELD f_jlzhdrnp minimumY I
-	FIELD f_ktrqqmye hasCeiling Z
 	FIELD f_lxemnxqx SIZE_BITS_Y I
-	FIELD f_nirqrruq coordinateScale D
-	FIELD f_ocwuqzjl ultraWarm Z
-	FIELD f_oslxdjvx fixedTime Ljava/util/OptionalLong;
-	FIELD f_rykbxwzz respawnAnchorWorks Z
-	FIELD f_sntuajfu hasSkyLight Z
-	FIELD f_vrlzepdd natural Z
+	FIELD f_mfsbixmi MOON_PHASES I
+	FIELD f_qnycowon MIN_HEIGHT I
 	FIELD f_wcytkhzw MOON_SIZES [F
-	FIELD f_woerqpsf effectsId Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_xbhtvssb height I
-	FIELD f_zxepzgfy infiniburn Lnet/minecraft/unmapped/C_ednuhnnn;
+	FIELD f_yopgdmky FAR_ABOVE_MAX_Y I
+	METHOD <init> (Ljava/util/OptionalLong;ZZZZDZZIIILnet/minecraft/unmapped/C_ednuhnnn;Lnet/minecraft/unmapped/C_ncpywfca;FLnet/minecraft/unmapped/C_oxijnccf$C_jdzxbkcc;)V
+		ARG 1 fixedTime
+		ARG 2 hasSkyLight
+		ARG 3 hasCeiling
+		ARG 4 ultraWarm
+		ARG 5 natural
+		ARG 6 coordinateScale
+		ARG 8 bedWorks
+		ARG 9 respawnAnchorWorks
+		ARG 10 minimumY
+		ARG 11 height
+		ARG 12 logicalHeight
+		ARG 13 infiniburn
+		ARG 14 effectsId
+		ARG 15 ambientLight
+		ARG 16 monsterSettings
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
+	METHOD m_beszounv (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_bvmwwece getMoonPhase (J)I
 		COMMENT Gets the moon phase index of Minecraft's moon.
 		COMMENT
 		COMMENT <p>This is typically used to determine the size of the moon that should be rendered.
 		ARG 1 time
 			COMMENT the time to calculate the index from
-	METHOD m_eitmaoto coordinateScale ()D
-	METHOD m_ejhwgict respawnAnchorWorks ()Z
 	METHOD m_fcjfwdgg hasRaids ()Z
-	METHOD m_fttmuzhe effectsId ()Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_hfwhfkji getSaveDirectory (Lnet/minecraft/unmapped/C_xhhleach;Ljava/nio/file/Path;)Ljava/nio/file/Path;
 		ARG 0 worldRef
 		ARG 1 worldDirectory
-	METHOD m_hqnnzwft hasCeiling ()Z
-	METHOD m_kphkolwt fixedTime ()Ljava/util/OptionalLong;
-	METHOD m_ktijzmbk ambientLight ()F
-	METHOD m_lcjwyybs minimumY ()I
-	METHOD m_meojxnac ultraWarm ()Z
-	METHOD m_qivvzltf bedWorks ()Z
+	METHOD m_kphcfmrd getMonsterSpawnLightLevel ()Lnet/minecraft/unmapped/C_macfejbg;
+	METHOD m_qgqulile getMonsterSpawnBlockLightLimit ()I
 	METHOD m_raqrpdsz worldFromDimensionNbt (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/DataResult;
 		ARG 0 nbt
-	METHOD m_rtgbuliy natural ()Z
-	METHOD m_rucgsjun height ()I
 	METHOD m_svtdnzmm hasFixedTime ()Z
-	METHOD m_tvbmsqde infiniburn ()Lnet/minecraft/unmapped/C_ednuhnnn;
 	METHOD m_txmcpmrx getCoordinateScaleFactor (Lnet/minecraft/unmapped/C_oxijnccf;Lnet/minecraft/unmapped/C_oxijnccf;)D
 		ARG 0 fromDimension
 		ARG 1 toDimension
-	METHOD m_umhfeubo hasSkyLight ()Z
 	METHOD m_uvdjounx getSkyAngle (J)F
 		ARG 1 time
-	METHOD m_vzorrwuq piglinSafe ()Z
-	METHOD m_zjkwbydw logicalHeight ()I
+	METHOD m_vzorrwuq isPiglinSafe ()Z
+	CLASS C_jdzxbkcc MonsterSettings
+		FIELD f_bmgwtbns CODEC Lcom/mojang/serialization/MapCodec;
+		METHOD <init> (ZZLnet/minecraft/unmapped/C_macfejbg;I)V
+			ARG 1 piglinSafe
+			ARG 2 hasRaids
+			ARG 3 monsterSpawnLightLevel
+			ARG 4 monsterSpawnBlockLightLimit
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_fzhzldnr (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
