@@ -49,6 +49,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_bcynorao server Lnet/minecraft/unmapped/C_mxzbwazq;
 	FIELD f_beylhheg sessionPropertyMap Lcom/mojang/authlib/properties/PropertyMap;
 	FIELD f_bjcsaqmm socialInteractionsToast Lnet/minecraft/unmapped/C_fbzposnd;
+	FIELD f_bwktqbao playerKeyPairManager Lnet/minecraft/unmapped/C_huqpbmju;
 	FIELD f_bzlzxgjd tutorialManager Lnet/minecraft/unmapped/C_eqosojcf;
 	FIELD f_ccoiwmig runDirectory Ljava/io/File;
 		COMMENT The directory that stores options, worlds, resource packs, logs, etc.
@@ -124,6 +125,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_ofpfrevi mouse Lnet/minecraft/unmapped/C_zgebrxop;
 	FIELD f_orovtsue socialInteractionsManager Lnet/minecraft/unmapped/C_rhqhwtoq;
 	FIELD f_ozfimbyq integratedServerRunning Z
+	FIELD f_pahcaadr gpuUtilization D
 	FIELD f_pbscqbnp resourceReloadFuture Ljava/util/concurrent/CompletableFuture;
 	FIELD f_pwhibjtl IS_SYSTEM_MAC Z
 	FIELD f_qhzgfpco ALT_TEXT_RENDERER_ID Lnet/minecraft/unmapped/C_ncpywfca;
@@ -141,7 +143,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_udhptfsg keyboard Lnet/minecraft/unmapped/C_csolnszv;
 	FIELD f_ujkvfbva isDemo Z
 	FIELD f_ukgauwzj REGIONAL_COMPLIANCIES_ID Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_urgnuqvs signatureValidation Lnet/minecraft/unmapped/C_yvuwcvkm;
+	FIELD f_urgnuqvs signatureValidator Lnet/minecraft/unmapped/C_yvuwcvkm;
+	FIELD f_uzadprdw realms32BitWarningChecker Lnet/minecraft/unmapped/C_iempwoli;
 	FIELD f_vcpgzrce languageManager Lnet/minecraft/unmapped/C_dahbfdem;
 	FIELD f_vobwechq lastMetricsSampleTime J
 	FIELD f_vstmqzvt openProfilerSection Ljava/lang/String;
@@ -184,6 +187,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_aislcqal setConnectedToRealms (Z)V
 		ARG 1 connectedToRealms
 	METHOD m_aqvwoqjd forcesUnicodeFont ()Z
+	METHOD m_araskisn getGpuUtilization ()D
 	METHOD m_atlzxpuj getFramerateLimit ()I
 	METHOD m_awiobpey getFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_ayrxztdp setWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
@@ -197,8 +201,10 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_bteytekh render (Z)V
 		ARG 1 tick
 	METHOD m_bzxkzdli getGame ()Lnet/minecraft/unmapped/C_vakgxuad;
+	METHOD m_cfvjiijv cancelRecorder ()V
 	METHOD m_crapepyd getEntityModelLoader ()Lnet/minecraft/unmapped/C_qncyfzro;
 	METHOD m_denzhwko getStatusEffectSpriteManager ()Lnet/minecraft/unmapped/C_ucgueons;
+	METHOD m_dggraqpi getSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
 	METHOD m_dkarkawy isAmbientOcclusionEnabled ()Z
 	METHOD m_dqshwyyu disconnect (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 1 screen
@@ -279,6 +285,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_jytpvdsa countryEqualsISO3 (Ljava/lang/Object;)Z
 		ARG 0 o
 	METHOD m_kclqbfew cleanUpAfterCrash ()V
+	METHOD m_kgcwnyog setCrashReportRaw (Lnet/minecraft/unmapped/C_bkefkbum;)V
+		ARG 1 crashReport
 	METHOD m_kjzoybfi getCreativeHotbarStorage ()Lnet/minecraft/unmapped/C_twtdhnqb;
 	METHOD m_kqqsfyyw getSession ()Lnet/minecraft/unmapped/C_cwfizcnb;
 	METHOD m_kuckpnkp getTickDelta ()F
@@ -300,6 +308,11 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_mmruqhcv scheduleStop ()V
 	METHOD m_mqdbnddk handleInputEvents ()V
 	METHOD m_mwwbovfc isConnectedToRealms ()Z
+	METHOD m_ngtmdbml startIntegratedServer (Ljava/lang/String;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;)V
+		ARG 1 worldId
+		ARG 2 session
+		ARG 3 resourcePackManager
+		ARG 4 worldStem
 	METHOD m_nibdztri isIntegratedServerRunning ()Z
 	METHOD m_njnkxxki getWindowTitle ()Ljava/lang/String;
 	METHOD m_njtkwlge getSearchableContainer (Lnet/minecraft/unmapped/C_zqzigdge$C_gvofkqkn;)Lnet/minecraft/unmapped/C_inuoeylq;
@@ -316,6 +329,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 0 report
 	METHOD m_omcqclml openPauseMenu (Z)V
 		ARG 1 pause
+	METHOD m_onpgsiax getRealms32BitWarningChecker ()Lnet/minecraft/unmapped/C_iempwoli;
 	METHOD m_oxcbqety getSocialInteractionsManager ()Lnet/minecraft/unmapped/C_rhqhwtoq;
 	METHOD m_oxhdduqg addSystemDetailsToCrashReport (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_dahbfdem;Ljava/lang/String;Lnet/minecraft/unmapped/C_lscptbhn;Lnet/minecraft/unmapped/C_bkefkbum;)V
 		ARG 0 client
@@ -327,6 +341,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_ppqcqqyo stopRecorder ()V
 	METHOD m_ptakjikv getOverlay ()Lnet/minecraft/unmapped/C_gtnnbmai;
 	METHOD m_ptzdxqzt shouldFilterText ()Z
+	METHOD m_qemisroj getPlayerKeyPairManager ()Lnet/minecraft/unmapped/C_huqpbmju;
 	METHOD m_qflkyikk getSplashTextLoader ()Lnet/minecraft/unmapped/C_iyhcmfwn;
 	METHOD m_qgbmplum takeHugeScreenshot (Ljava/io/File;IIII)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		COMMENT Takes a huge screenshot in the tga file format.
@@ -356,8 +371,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_rzmoptef doItemPick ()V
 	METHOD m_sbqagrpz getBanDetails ()Lcom/mojang/authlib/minecraft/BanDetails;
 	METHOD m_sgsxylrl getItemRenderer ()Lnet/minecraft/unmapped/C_xjqetogb;
-	METHOD m_shzoxmnd (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/stream/Stream;
-		ARG 0 stack
 	METHOD m_skbwigbs doItemUse ()V
 	METHOD m_slhezzjr reloadResources (Z)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 force
@@ -366,6 +379,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_stbazwpo initFont (Z)V
 		ARG 1 forcesUnicode
 	METHOD m_syjvubih setCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)V
+		ARG 1 crashReport
 	METHOD m_thxytytq onResourceReloadFailure (Ljava/lang/Throwable;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 exception
 		ARG 2 resourceName
