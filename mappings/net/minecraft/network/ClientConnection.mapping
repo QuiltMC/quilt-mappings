@@ -47,9 +47,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 context
 		ARG 2 ex
 	METHOD m_akpgjfcu sendQueuedPackets ()V
-	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/util/concurrent/GenericFutureListener;)V
+	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
 		ARG 1 packet
-		ARG 2 callback
 	METHOD m_bhwloxoc getPacketListener ()Lnet/minecraft/unmapped/C_tkgdawqw;
 	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
 		ARG 0 marker
@@ -62,11 +61,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_egofcujr send (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 packet
 	METHOD m_eiltuozj updateStats ()V
-	METHOD m_fgmkpwtg send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/util/concurrent/GenericFutureListener;)V
-		ARG 1 packet
-		ARG 2 callback
-	METHOD m_gqjiabqt (Lnet/minecraft/unmapped/C_rdaqiwdt;Lio/netty/util/concurrent/Future;)V
-		ARG 2 future
 	METHOD m_honyjhko (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_igiszgub getState ()Lnet/minecraft/unmapped/C_kxdobmrm;
@@ -111,9 +105,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_vkqagjgi connect (Ljava/net/InetSocketAddress;Z)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
 		ARG 1 useEpoll
-	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/util/concurrent/GenericFutureListener;Lnet/minecraft/unmapped/C_kxdobmrm;Lnet/minecraft/unmapped/C_kxdobmrm;)V
+	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Lnet/minecraft/unmapped/C_kxdobmrm;Lnet/minecraft/unmapped/C_kxdobmrm;)V
 		ARG 1 packet
-		ARG 2 callback
 		ARG 3 newNetworkState
 		ARG 4 currentNetworkState
 	METHOD m_wlmhzfek handleDisconnection ()V
@@ -131,8 +124,5 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
 	CLASS C_zhxqmkfq QueuedPacket
-		FIELD f_ogqzkbuy callback Lio/netty/util/concurrent/GenericFutureListener;
+		FIELD f_ogqzkbuy callback Lnet/minecraft/unmapped/C_zddpfpkk;
 		FIELD f_qjiczabl packet Lnet/minecraft/unmapped/C_zyjtrjrl;
-		METHOD <init> (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/util/concurrent/GenericFutureListener;)V
-			ARG 1 packet
-			ARG 2 callback
