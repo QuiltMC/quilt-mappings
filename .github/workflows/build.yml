@@ -4,17 +4,22 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [17-jdk]
-    runs-on: ubuntu-20.04
+        java: [17, 18]
+    runs-on: ubuntu-latest
     container:
       image: openjdk:${{ matrix.java }}
       options: --user root
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: temurin
       - uses: gradle/wrapper-validation-action@v1
       - run: ./gradlew build javadocJar --stacktrace
       - name: Build artifacts
-        if: ${{ matrix.java == '17-jdk' }}
+        if: ${{ matrix.java == 17 }}
         continue-on-error: true
         uses: actions/upload-artifact@v2
         with:
