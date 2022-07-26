@@ -6,6 +6,9 @@ CLASS net/minecraft/unmapped/C_zhhoxunt net/minecraft/client/font/FontStorage
 	FIELD f_rzdttaxr blankGlyphRenderer Lnet/minecraft/unmapped/C_wrqtxozz;
 	FIELD f_tehtajjp glyphAtlases Ljava/util/List;
 	FIELD f_whiqfyvx charactersByWidth Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+	FIELD f_wrcgchkf MAX_GLYPH_ADVANCE F
+		COMMENT The maximum advance allowed for a glyph before it being considered malicious,
+		COMMENT whose value is {@value}.
 	FIELD f_wszhfshh id Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_wzaqlovb whiteRectangleGlyphRenderer Lnet/minecraft/unmapped/C_wrqtxozz;
 	FIELD f_zzorrupa textureManager Lnet/minecraft/unmapped/C_rglkduer;
@@ -15,9 +18,12 @@ CLASS net/minecraft/unmapped/C_zhhoxunt net/minecraft/client/font/FontStorage
 	METHOD close close ()V
 	METHOD m_abmbjzev getGlyph (IZ)Lnet/minecraft/unmapped/C_sxmfadan;
 		ARG 1 codePoint
+		ARG 2 filterFishyGlyphs
 	METHOD m_eiqitttg bakeGlyph (I)Lnet/minecraft/unmapped/C_wrqtxozz;
 		ARG 1 codePoint
 	METHOD m_fgqbwuuf closeFonts ()V
+	METHOD m_jyqartmo isGlyphFishy (Lnet/minecraft/unmapped/C_sxmfadan;)Z
+		ARG 0 glyph
 	METHOD m_nclahpgg getRectangleRenderer ()Lnet/minecraft/unmapped/C_wrqtxozz;
 	METHOD m_prqyajrl getObfuscatedGlyphRenderer (Lnet/minecraft/unmapped/C_sxmfadan;)Lnet/minecraft/unmapped/C_wrqtxozz;
 		ARG 1 glyph
@@ -32,3 +38,7 @@ CLASS net/minecraft/unmapped/C_zhhoxunt net/minecraft/client/font/FontStorage
 		ARG 3 i
 	METHOD m_xoqfcpqv findGlyph (I)Lnet/minecraft/unmapped/C_zhhoxunt$C_kklzxalg;
 		ARG 1 codePoint
+	CLASS C_kklzxalg GlyphInfoFilter
+		FIELD f_vkvmtfqr MISSING Lnet/minecraft/unmapped/C_zhhoxunt$C_kklzxalg;
+		METHOD m_wfudztfw select (Z)Lnet/minecraft/unmapped/C_sxmfadan;
+			ARG 1 filerFishyGlyphs
