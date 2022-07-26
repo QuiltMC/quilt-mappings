@@ -20,10 +20,13 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 		COMMENT @see #createAntiFishyTextRenderer
 	METHOD m_rsldpzgj getResourceReloadListener ()Lnet/minecraft/unmapped/C_msqwzogj;
 	METHOD m_ufulkvsb createAntiFishyTextRenderer ()Lnet/minecraft/unmapped/C_mavozmpp;
-		COMMENT Creates a new safe (anti-fishy) text renderer.
+		COMMENT Creates an anti-malicious text renderer.
 		COMMENT <p>
-		COMMENT The text renderer disallows some fishy glyphs advances to, for example,
-		COMMENT avoid 3rd-parties hiding text that an user is writing
+		COMMENT Disallows some malicious (fishy) glyphs advances to, for example,
+		COMMENT avoid 3rd-parties hiding text that an user is writing.
+		COMMENT <p>
+		COMMENT Malicious glyphs are defined as having a negative advance
+		COMMENT or having an advance greater than {@value net.minecraft.client.font.FontStorage#MAX_GLYPH_ADVANCE}.
 		COMMENT
 		COMMENT @see #createTextRenderer
 	METHOD m_wraffzbu (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zhhoxunt;

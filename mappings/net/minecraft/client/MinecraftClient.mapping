@@ -57,10 +57,13 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_cfebutjv videoWarningManager Lnet/minecraft/unmapped/C_giiyufuh;
 	FIELD f_cfilflga sessionService Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	FIELD f_cgwjrlry antiFishyTextRenderer Lnet/minecraft/unmapped/C_mavozmpp;
-		COMMENT Represents the safe (anti-fishy) text renderer.
+		COMMENT Represents the anti-malicious text renderer.
 		COMMENT <p>
-		COMMENT Disallows some fishy glyphs advances to, for example,
-		COMMENT avoid 3rd-parties hiding text that an user is writing
+		COMMENT Disallows some malicious (fishy) glyphs advances to, for example,
+		COMMENT avoid 3rd-parties hiding text that an user is writing.
+		COMMENT <p>
+		COMMENT Malicious glyphs are defined as having a negative advance
+		COMMENT or having an advance greater than {@value net.minecraft.client.font.FontStorage#MAX_GLYPH_ADVANCE}.
 		COMMENT
 		COMMENT @see #textRenderer
 	FIELD f_cipivcjw particleManager Lnet/minecraft/unmapped/C_ttbvlsde;
