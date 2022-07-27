@@ -49,6 +49,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_akpgjfcu sendQueuedPackets ()V
 	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
 		ARG 1 packet
+		ARG 2 listener
 	METHOD m_bhwloxoc getPacketListener ()Lnet/minecraft/unmapped/C_tkgdawqw;
 	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
 		ARG 0 marker
@@ -85,6 +86,9 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_rgronykr handlePacket (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 0 packet
 		ARG 1 listener
+	METHOD m_rsirbonf send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
+		ARG 1 packet
+		ARG 2 listener
 	METHOD m_sigcqeza getAddress ()Ljava/net/SocketAddress;
 	METHOD m_tulexlec tick ()V
 	METHOD m_uhgukhmf getAveragePacketsSent ()F
@@ -107,9 +111,12 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 useEpoll
 	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Lnet/minecraft/unmapped/C_kxdobmrm;Lnet/minecraft/unmapped/C_kxdobmrm;)V
 		ARG 1 packet
+		ARG 2 listener
 		ARG 3 newNetworkState
 		ARG 4 currentNetworkState
 	METHOD m_wlmhzfek handleDisconnection ()V
+	METHOD m_wrnibrta (Lnet/minecraft/unmapped/C_zddpfpkk;Lio/netty/util/concurrent/Future;)V
+		ARG 2 future
 	METHOD m_wrxqepoa isLocal ()Z
 	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
 		ARG 0 marker

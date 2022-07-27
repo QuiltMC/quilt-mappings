@@ -1,0 +1,13 @@
+CLASS net/minecraft/unmapped/C_zddpfpkk net/minecraft/network/PacketSendListener
+	COMMENT Represents a listener of packets queued for sending.
+	METHOD m_fmiahmzw getFailurePacket ()Lnet/minecraft/unmapped/C_zyjtrjrl;
+		COMMENT {@return the packet to send on failure, or {@code null} if there is none}
+	METHOD m_gmgcztoy alwaysRun (Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_zddpfpkk;
+		COMMENT {@return a listener that always runs the given {@code runnable} no matter the outcome}
+		ARG 0 runnable
+	METHOD m_hbxtgwlb onSuccess ()V
+		COMMENT Called when a packet is sent successfully.
+	METHOD m_kqiwzqbq toSendIfFailed (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_zddpfpkk;
+		COMMENT {@return a listener that sends the supplied packet when failed}
+		ARG 0 failurePacketSupplier
+			COMMENT the supplier of the packet to send in case of a failure
