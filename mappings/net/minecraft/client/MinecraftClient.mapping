@@ -81,7 +81,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_dufhrfcz toastManager Lnet/minecraft/unmapped/C_eqfjupcc;
 	FIELD f_duzlzhpe regionalComplianciesManager Lnet/minecraft/unmapped/C_bianxjxy;
 	FIELD f_eaotxiqe overlay Lnet/minecraft/unmapped/C_gtnnbmai;
-	FIELD f_edxzgzxk authenticationService Lcom/mojang/authlib/yggdrasil/YggdrasilAuthenticationService;
+	FIELD f_edxzgzxk authService Lcom/mojang/authlib/yggdrasil/YggdrasilAuthenticationService;
 	FIELD f_egnlsdyo userApiService Lcom/mojang/authlib/minecraft/UserApiService;
 	FIELD f_eiqlfvow gameRenderer Lnet/minecraft/unmapped/C_sktkdoun;
 	FIELD f_ejyvfwpb recorder Lnet/minecraft/unmapped/C_owhdirgj;
@@ -158,7 +158,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_udhptfsg keyboard Lnet/minecraft/unmapped/C_csolnszv;
 	FIELD f_ujkvfbva isDemo Z
 	FIELD f_ukgauwzj REGIONAL_COMPLIANCIES_ID Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_urgnuqvs serviceSignatureValidator Lnet/minecraft/unmapped/C_yvuwcvkm;
+	FIELD f_urgnuqvs signatureValidator Lnet/minecraft/unmapped/C_yvuwcvkm;
 	FIELD f_uzadprdw realms32BitWarningChecker Lnet/minecraft/unmapped/C_iempwoli;
 	FIELD f_vcpgzrce languageManager Lnet/minecraft/unmapped/C_dahbfdem;
 	FIELD f_vobwechq lastMetricsSampleTime J
@@ -383,6 +383,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 3 height
 	METHOD m_rzjpaaju doAttack ()Z
 	METHOD m_rzmoptef doItemPick ()V
+	METHOD m_sbqagrpz getBanDetails ()Lcom/mojang/authlib/minecraft/BanDetails;
 	METHOD m_sgsxylrl getItemRenderer ()Lnet/minecraft/unmapped/C_xjqetogb;
 	METHOD m_skbwigbs doItemUse ()V
 	METHOD m_slhezzjr reloadResources (Z)Ljava/util/concurrent/CompletableFuture;
@@ -442,6 +443,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT
 		COMMENT @see MinecraftClient#getChatRestriction()
 		FIELD f_hlrendft description Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_nyccyvkd CHAT_DISABLED Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_xjfmdijt ACCOUNT_SETTINGS_URL Ljava/lang/String;
 		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_rdaqiwdt;)V
 			ARG 3 description
 		METHOD m_sravahpt getDescription ()Lnet/minecraft/unmapped/C_rdaqiwdt;
