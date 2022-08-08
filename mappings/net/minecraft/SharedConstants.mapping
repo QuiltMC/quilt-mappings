@@ -111,14 +111,14 @@ CLASS net/minecraft/unmapped/C_otltijcb net/minecraft/SharedConstants
 		COMMENT else {@code (1 << {@link #SNAPSHOT_PROTOCOL_VERSION_EXTRA_BITS}) + {@link #SNAPSHOT_PROTOCOL_VERSION}}}
 	METHOD m_ltryxeto setGameVersion (Lnet/minecraft/unmapped/C_xyxorzsk;)V
 		ARG 0 gameVersion
-	METHOD m_mnjwgyqe stripInvalidChars (Ljava/lang/String;)Ljava/lang/String;
+	METHOD m_mnjwgyqe stripInvalidCharacters (Ljava/lang/String;)Ljava/lang/String;
 		COMMENT {@return {@code text} with all {@linkplain #isValidChar invalid characters} stripped}
 		COMMENT <p>
 		COMMENT LF (linebreak; U+000A) is an invalid character and therefore stripped.
 		COMMENT Use {@linkplain #stripInvalidChars(String, boolean)} to keep linebreaks.
 		COMMENT
 		COMMENT @see #isValidChar(char)
-		COMMENT @see #stripInvalidChars(String, boolean)
+		COMMENT @see #stripInvalidCharacters(String, boolean)
 		ARG 0 text
 	METHOD m_pfbdxkbd isValidChar (C)Z
 		COMMENT {@return {@code true} if the character is not
@@ -129,20 +129,20 @@ CLASS net/minecraft/unmapped/C_otltijcb net/minecraft/SharedConstants
 		COMMENT
 		COMMENT @apiNote This method is used to determine if the server should
 		COMMENT accept a chat message sent from client.
-		COMMENT @see net.minecraft.server.network.ServerPlayNetworkHandler#hasInvalidCharacters(char)
+		COMMENT @see net.minecraft.server.network.ServerPlayNetworkHandler#hasInvalidCharacters(String)
 		ARG 0 chr
 	METHOD m_redqmfkb isVoidTerrain (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
 		ARG 0 chunkPos
 	METHOD m_rugsknyf getGameVersion ()Lnet/minecraft/unmapped/C_xyxorzsk;
 	METHOD m_shiahrfj enableDataFixerOptimizations ()V
-	METHOD m_xcyumsii stripInvalidChars (Ljava/lang/String;Z)Ljava/lang/String;
+	METHOD m_xcyumsii stripInvalidCharacters (Ljava/lang/String;Z)Ljava/lang/String;
 		COMMENT {@return {@code text} with {@linkplain #isValidChar invalid characters} stripped}
 		COMMENT <p>
 		COMMENT LF (linebreak; U+000A) may or may not be stripped depending on the passed
 		COMMENT {@code allowLinebreaks} value.
 		COMMENT
 		COMMENT @see #isValidChar(char)
-		COMMENT @see #stripInvalidChars(String)
+		COMMENT @see #stripInvalidCharacters(String)
 		ARG 0 text
 			COMMENT the text to filter
 		ARG 1 allowLineBreaks
