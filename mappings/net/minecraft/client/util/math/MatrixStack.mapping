@@ -1,26 +1,54 @@
 CLASS net/minecraft/unmapped/C_cnszsxvd net/minecraft/client/util/math/MatrixStack
+	COMMENT Represents a stack of matrices.
+	COMMENT <p>
+	COMMENT You can {@link MatrixStack#push() push} and {@link MatrixStack#pop() pop} matrices onto the stack.
+	COMMENT <p>
+	COMMENT All other operations happen on the last matrix pushed onto the stack.
+	COMMENT Those operations can be: translation, scaling, rotation, multiplication with other matrices, etc.
+	COMMENT Popping a matrix will have the effect to revert all the changes made to it.
 	FIELD f_mjeyhcmt stack Ljava/util/Deque;
 	METHOD m_bdztuoiy pop ()V
+		COMMENT Pops the current matrices from the stack.
 	METHOD m_bswsfipx multiply (Lnet/minecraft/unmapped/C_rvxttsxe;)V
 		ARG 1 quaternion
 	METHOD m_cavdvhuq scale (FFF)V
+		COMMENT Scales the current model and normal matrices.
 		ARG 1 x
+			COMMENT the scaling factor on the X axis
 		ARG 2 y
+			COMMENT the scaling factor on the Y axis
 		ARG 3 z
+			COMMENT the scaling factor on the Z axis
 	METHOD m_cuidhnrp push ()V
+		COMMENT Pushes a new model and normal matrix onto the stack.
 	METHOD m_eivfzczb multiplyMatrix (Lnet/minecraft/unmapped/C_gxvddjib;)V
+		COMMENT Multiplies the current model matrix with another matrix.
 		ARG 1 matrix
+			COMMENT the matrix to multiply the model matrix with
 	METHOD m_hebgtdra (Ljava/util/ArrayDeque;)V
 		ARG 0 stack
 	METHOD m_hgtlvmvp translate (DDD)V
+		COMMENT Translates the model.
 		ARG 1 x
+			COMMENT the translation amount on the X axis
 		ARG 3 y
+			COMMENT the translation amount on the Y axis
 		ARG 5 z
+			COMMENT the translation amount on the Z axis
 	METHOD m_lbogovnu peek ()Lnet/minecraft/unmapped/C_cnszsxvd$C_pqokfevb;
+		COMMENT {@return the current set of model and normal matrices that are being manipulated from the stack}
 	METHOD m_uomcjjca isEmpty ()Z
+		COMMENT {@return {@code true} if the matrix stack is empty, or {@code false} otherwise}
 	METHOD m_xeddsamb loadIdentity ()V
+		COMMENT Loads the identity matrix for the current model and normal matrices.
 	CLASS C_pqokfevb Entry
 		FIELD f_jfjsqzmb normalMatrix Lnet/minecraft/unmapped/C_crutkuff;
-		FIELD f_qmkzpkwl positionMatrix Lnet/minecraft/unmapped/C_gxvddjib;
+		FIELD f_qmkzpkwl modelMatrix Lnet/minecraft/unmapped/C_gxvddjib;
+		METHOD <init> (Lnet/minecraft/unmapped/C_gxvddjib;Lnet/minecraft/unmapped/C_crutkuff;)V
+			ARG 1 modelMatrix
+			ARG 2 normalMatrix
 		METHOD m_hmmszgvl getNormal ()Lnet/minecraft/unmapped/C_crutkuff;
-		METHOD m_sgddbcul getPosition ()Lnet/minecraft/unmapped/C_gxvddjib;
+		METHOD m_sgddbcul getModel ()Lnet/minecraft/unmapped/C_gxvddjib;
+			COMMENT {@return the model matrix}
+			COMMENT <p>
+			COMMENT The model matrix contains position and rotation data for a model to render.
