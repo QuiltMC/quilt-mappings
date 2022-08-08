@@ -1,1 +1,45 @@
 CLASS net/minecraft/unmapped/C_djvyunwn net/minecraft/client/gui/widget/ScrollableWidget
+	COMMENT A widget that can be focused and vertically scrolled.
+	FIELD f_awqtdtsd UNFOCUSED_BORDER_COLOR I
+	FIELD f_dbzjuacb scrollbarDragged Z
+	FIELD f_djpqddjv BOX_BACKGROUND_COLOR I
+	FIELD f_kciammnc scrollAmount D
+	FIELD f_mtmzekuk FOCUSED_BORDER_COLOR I
+	FIELD f_uajaeyqh INNER_PADDING I
+	METHOD m_arnarrjg getTotalInnerPadding ()I
+	METHOD m_eucbjkoi renderContents (Lnet/minecraft/unmapped/C_cnszsxvd;IIF)V
+		COMMENT Renders the scrolled contents.
+		COMMENT Subclasses must override this.
+		COMMENT <p>
+		COMMENT The rendered contents may overflow and will be automatically be trimmed.
+		ARG 2 mouseX
+		ARG 3 mouseY
+		ARG 4 delta
+	METHOD m_eyjlocli isWithinBounds (DD)Z
+		ARG 1 x
+		ARG 3 y
+	METHOD m_fbsebolr drawBox (Lnet/minecraft/unmapped/C_cnszsxvd;)V
+		COMMENT Draws the box that the contents are rendered over, including its borders.
+			COMMENT the matrix stack
+	METHOD m_gnwzkabs isOverflowing ()Z
+	METHOD m_jvwdsnyd getContentHeightWithPadding ()I
+	METHOD m_odlloobg getContentHeight ()I
+	METHOD m_orkuxhay drawDecorations (Lnet/minecraft/unmapped/C_cnszsxvd;)V
+		COMMENT Renders decorations that are not scrolled but part of the widget.
+		COMMENT <p>
+		COMMENT This renders the scrollbar by default.
+		COMMENT Subclasses can override this to render other decorations,
+		COMMENT but {@code super} call is necessary to make sure the scrollbar
+		COMMENT renders when it should.
+			COMMENT the matrix stack
+	METHOD m_qscejzkt getInnerPadding ()I
+	METHOD m_sccesvrq getScrollRate ()D
+	METHOD m_uckdbohy getScrollAmount ()D
+	METHOD m_uqjganvv isContentVisible (II)Z
+		ARG 1 top
+		ARG 2 bottom
+	METHOD m_vrczsiht getScrollBarHeight ()I
+	METHOD m_vtahmpjd drawScrollbar ()V
+	METHOD m_yavatojw setScrollAmount (D)V
+		ARG 1 scrollAmount
+	METHOD m_ydbiuuxf getMaxScrollAmount ()I
