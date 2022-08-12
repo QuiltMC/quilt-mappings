@@ -196,8 +196,10 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT @return the custom NBT of this item stack
 		COMMENT
 		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-	METHOD m_hmrpegvi onStackClicked (Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
-		ARG 1 slot
+	METHOD m_hmrpegvi onThisClickedOnStack (Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
+		COMMENT Called when the stack is placed on another {@link ItemStack} in a slot.
+		COMMENT {@return whether an action was performed.}
+		ARG 1 otherSlot
 		ARG 2 clickType
 		ARG 3 player
 	METHOD m_iadyttua usageTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;I)V
@@ -288,6 +290,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 nbt
 			COMMENT the NBT compound to write to
 	METHOD m_qxfxfsuy getItem ()Lnet/minecraft/unmapped/C_vorddnax;
+		COMMENT Called when another {@link ItemStack} is placed on this stack.
 	METHOD m_rdrbrcjp addAttributeModifier (Lnet/minecraft/unmapped/C_ppzfbbsy;Lnet/minecraft/unmapped/C_hdbqsqsm;Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 1 attribute
 		ARG 2 modifier
@@ -313,9 +316,11 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_tcgbrtym isInFrame ()Z
 	METHOD m_uglewown getCount ()I
 		COMMENT {@return the count of items in this item stack}
-	METHOD m_uhghycli onClicked (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
-		ARG 1 stack
-		ARG 2 slot
+	METHOD m_uhghycli onStackClickedOnThis (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
+		COMMENT Called when another {@link ItemStack} is placed on this stack.
+		COMMENT {@return whether an action was performed.}
+		ARG 1 otherStack
+		ARG 2 thisSlot
 		ARG 3 clickType
 		ARG 4 player
 		ARG 5 cursorStackReference
