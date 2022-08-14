@@ -35,12 +35,9 @@ public class MappingsV2JarTask extends Jar implements MappingsTask {
         from(mappings, copySpec -> {
             copySpec.rename((originalName) -> "mappings/mappings.tiny");
         });
-
     }
 
     public RegularFileProperty getMappings() {
         return mappings;
     }
-
-
 }

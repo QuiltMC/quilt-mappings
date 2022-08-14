@@ -25,6 +25,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 
 public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implements UnpickGen {
@@ -36,7 +37,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
 
     public OpenGlConstantUnpickGenerator() {
         super(Constants.Groups.UNPICK_GEN);
-        this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME);
+        this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME, MapPerVersionMappingsJarTask.TASK_NAME);
 
         this.onlyIf(_task -> !_task.getProject().file("unpick-definitions/unpick_gl.unpick").exists() ||
                              !_task.getProject().file("unpick-definitions/unpick_glstatemanager.unpick").exists());
@@ -191,6 +192,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
             out.println("v2\n# This file was automatically generated, do not modify it\n");
 
             Map<String, List<Signature>> methodToSignature = new HashMap<>();
+            // Why isn't this just FileConstants#perVersionMappingsJar?
             ZipFile minecraftJar = new ZipFile(getProject().file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar"));
             ClassReader reader = new ClassReader(minecraftJar.getInputStream(minecraftJar.getEntry(GL_STATE_MANAGER_CLASS + ".class")).readAllBytes());
 
