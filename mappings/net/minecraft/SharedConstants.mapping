@@ -57,7 +57,7 @@ CLASS net/minecraft/unmapped/C_otltijcb net/minecraft/SharedConstants
 	FIELD f_nhntnupz USE_NEW_RENDER_SYSTEM Z
 	FIELD f_nmxvsvns ENABLE_BLOCK_SOLID_FACE_DEBUGGER Z
 	FIELD f_obibejmb FAKE_MS_LATENCY I
-	FIELD f_oiqrmsrn RESOURCE_LEAK_DETECTOR_DISABLED Lio/netty/util/ResourceLeakDetector$Level;
+	FIELD f_oiqrmsrn RESOURCE_LEAK_DETECTOR Lio/netty/util/ResourceLeakDetector$Level;
 	FIELD f_ojxncvih CAVES_AND_CLIFFS_PART_2_ITEMS_AND_BLOCKS Z
 	FIELD f_olshzpfe DEFAULT_PORT I
 	FIELD f_oprapnda MAX_TICK_TIME_NANOS J
@@ -121,11 +121,15 @@ CLASS net/minecraft/unmapped/C_otltijcb net/minecraft/SharedConstants
 		COMMENT @see #stripInvalidCharacters(String, boolean)
 		ARG 0 text
 	METHOD m_pfbdxkbd isValidChar (C)Z
-		COMMENT {@return {@code true} if the character is not
-		COMMENT {@linkplain net.minecraft.util.Formatting#FORMATTING_CODE_PREFIX the formatting code prefix}
-		COMMENT (&bsol;u00a7),
-		COMMENT C0 control code (&bsol;u0000 to &bsol;u001f) or delete (&bsol;u007f),
-		COMMENT or {@code false} otherwise}
+		COMMENT {@return {@code true} if the character is a valid one, or {@code false} otherwise}
+		COMMENT <p>
+		COMMENT Invalid characters are:
+		COMMENT <ul>
+		COMMENT \t<li>{@linkplain net.minecraft.util.Formatting#FORMATTING_CODE_PREFIX the formatting code prefix}
+		COMMENT (&bsol;u00a7),</li>
+		COMMENT \t<li>C0 control code (&bsol;u0000 to &bsol;u001f),</li>
+		COMMENT \t<li>delete (&bsol;u007f).</li>
+		COMMENT </ul>
 		COMMENT
 		COMMENT @apiNote This method is used to determine if the server should
 		COMMENT accept a chat message sent from client.
