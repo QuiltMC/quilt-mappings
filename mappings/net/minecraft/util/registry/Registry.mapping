@@ -37,8 +37,8 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	FIELD f_ezhwzxqi MENU_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_fdfmzecx LOGGER Lorg/slf4j/Logger;
 	FIELD f_flecaadj registryKey Lnet/minecraft/unmapped/C_xhhleach;
-		COMMENT The key representing the type of elements held by this registry. It is also the
-		COMMENT key of this registry within the root registry.
+		COMMENT The key representing the type of elements held by this registry.
+		COMMENT It is also the key of this registry within the root registry.
 	FIELD f_fnlgqfnl STRUCTURE_PIECE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_fozcxzey ENCHANTMENT Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_fpuwozuq ATTRIBUTE Lnet/minecraft/unmapped/C_tqxyjqsk;
@@ -171,7 +171,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 0 key
 		ARG 1 bootstrap
 	METHOD m_bbjbdpdr validate (Lnet/minecraft/unmapped/C_tqxyjqsk;)V
-		ARG 0 registry
+		ARG 0 registries
 	METHOD m_bzjmmhvn create (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_eexxncvi;Lnet/minecraft/unmapped/C_tqxyjqsk$C_umlcfeib;Lcom/mojang/serialization/Lifecycle;)Lnet/minecraft/unmapped/C_eexxncvi;
 		ARG 0 key
 		ARG 1 registry
@@ -179,6 +179,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 3 lifecycle
 	METHOD m_cjwbheqc getKey (Ljava/lang/Object;)Ljava/util/Optional;
 		ARG 1 entry
+	METHOD m_ckzkjowv getKeys ()Ljava/util/Set;
 	METHOD m_dixnzblu createIntrusiveHolder (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 1 holder
 	METHOD m_eovqcbhp getHolderOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv;
@@ -240,6 +241,8 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	METHOD m_ojrrpohi getTagKeys ()Ljava/util/stream/Stream;
 	METHOD m_poqnljkr getLifeCylce ()Lcom/mojang/serialization/Lifecycle;
 	METHOD m_pquqhkot holderByNameCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_pselvvxn getOrCreateHolderOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv;
+		ARG 1 key
 	METHOD m_pvyfqcdo getCodec ()Lcom/mojang/serialization/Codec;
 	METHOD m_qeyctvgm asHolderIdMap ()Lnet/minecraft/unmapped/C_feaetnaz;
 	METHOD m_qomglfhh getOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/Object;
@@ -255,6 +258,8 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	METHOD m_tuivosjn getIds ()Ljava/util/Set;
 	METHOD m_ueokaqte contains (Lnet/minecraft/unmapped/C_xhhleach;)Z
 		ARG 1 key
+	METHOD m_uxkpijua (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_tqxyjqsk;)V
+		ARG 1 registry
 	METHOD m_uxrzxmkr getRandom (Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/Optional;
 	METHOD m_vctomypu register (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 registry
