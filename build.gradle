@@ -68,6 +68,7 @@ configurations {
 	decompileClasspath
 	unpick
 	hashed
+	intermediary
 }
 
 dependencies {
@@ -79,6 +80,7 @@ dependencies {
 	decompileClasspath "net.fabricmc:cfr:${project.cfr_version}"
 	unpick "org.quiltmc.unpick:unpick-cli:${project.unpick_version}"
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
+	intermediary "net.fabricmc:intermediary:${minecraft_version}:v2"
 }
 
 
@@ -180,6 +182,11 @@ task v2UnmergedMappingsJar(type: MappingsV2JarTask, dependsOn: [insertAutoGenera
 task v2MergedMappingsJar(dependsOn: ["mergeTinyV2"], type: MappingsV2JarTask) {
 	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-mergedv2.jar"
 	mappings = mergeTinyV2.outputMappings
+}
+
+task intermediaryV2MappingsJar(dependsOn: ["mergeIntermediary"], type: MappingsV2JarTask) {
+	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediaryv2.jar"
+	mappings = mergeIntermediary.outputMappings
 }
 
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
@@ -371,6 +378,9 @@ publishing {
 			}
 			artifact(v2MergedMappingsJar) {
 				classifier "mergedv2"
+			}
+			artifact(intermediaryV2MappingsJar) {
+				classifier "intermediaryv2"
 			}
 			artifact(constantsJar) {
 				classifier "constants"

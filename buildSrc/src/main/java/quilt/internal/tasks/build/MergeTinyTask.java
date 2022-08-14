@@ -1,6 +1,6 @@
 package quilt.internal.tasks.build;
 
-public class MergeTinyTask extends AbstractTinyMergeTask {
+public class MergeTinyTask extends AbstractHashedMergeTask {
     public static final String TASK_NAME = "mergeTiny";
 
     public MergeTinyTask() {
