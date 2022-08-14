@@ -47,6 +47,7 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class);
         tasks.create(InvertIntermediaryMappingsTask.TASK_NAME, InvertIntermediaryMappingsTask.class);
         tasks.create(MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class);
+        tasks.create(RemoveIntermediaryTask.TASK_NAME, RemoveIntermediaryTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.util.Collections;
 
 import net.fabricmc.mappingio.MappingReader;
+import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingNsCompleter;
 import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
 import net.fabricmc.mappingio.format.MappingFormat;
@@ -49,12 +50,16 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings.toPath()), false)) {
             tree.accept(
                 new MappingNsCompleter(
-                    new MappingSourceNsSwitch(w, "official", /*Drop methods not in hashed*/ true),
+                    new MappingSourceNsSwitch(getPreWriteVisitor(w), "official", /*Drop methods not in hashed*/ true),
                     Collections.singletonMap("named", this.mergeName), // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
                     false
                 )
             );
         }
+    }
+
+    protected MappingVisitor getPreWriteVisitor(MappingVisitor writer) {
+        return writer;
     }
 
     public RegularFileProperty getInput() {

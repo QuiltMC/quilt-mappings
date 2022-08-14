@@ -184,8 +184,13 @@ task v2MergedMappingsJar(dependsOn: ["mergeTinyV2"], type: MappingsV2JarTask) {
 	mappings = mergeTinyV2.outputMappings
 }
 
-task intermediaryV2MappingsJar(dependsOn: ["mergeIntermediary"], type: MappingsV2JarTask) {
-	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediaryv2.jar"
+task intermediaryV2MappingsJar(dependsOn: ["removeIntermediary"], type: MappingsV2JarTask) {
+	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediary-v2.jar"
+	mappings = removeIntermediary.outputMappings
+}
+
+task intermediaryV2MergedMappingsJar(dependsOn: ["mergeIntermediary"], type: MappingsV2JarTask) {
+	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediary-mergedv2.jar"
 	mappings = mergeIntermediary.outputMappings
 }
 
@@ -380,7 +385,10 @@ publishing {
 				classifier "mergedv2"
 			}
 			artifact(intermediaryV2MappingsJar) {
-				classifier "intermediaryv2"
+				classifier "intermediary-v2"
+			}
+			artifact(intermediaryV2MergedMappingsJar) {
+				classifier "intermediary-mergedv2"
 			}
 			artifact(constantsJar) {
 				classifier "constants"
