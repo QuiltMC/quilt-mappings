@@ -44,6 +44,7 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
         tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
 
+        tasks.create(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class);
         tasks.create(DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class);
         tasks.create(InvertIntermediaryMappingsTask.TASK_NAME, InvertIntermediaryMappingsTask.class);
         tasks.create(MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class);

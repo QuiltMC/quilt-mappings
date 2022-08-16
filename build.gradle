@@ -187,11 +187,19 @@ task v2MergedMappingsJar(dependsOn: ["mergeTinyV2"], type: MappingsV2JarTask) {
 task intermediaryV2MappingsJar(dependsOn: ["removeIntermediary"], type: MappingsV2JarTask) {
 	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediary-v2.jar"
 	mappings = removeIntermediary.outputMappings
+
+	onlyIf {
+		return checkIntermediaryMappings.isPresent()
+	}
 }
 
 task intermediaryV2MergedMappingsJar(dependsOn: ["mergeIntermediary"], type: MappingsV2JarTask) {
 	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediary-mergedv2.jar"
 	mappings = mergeIntermediary.outputMappings
+
+	onlyIf {
+		return checkIntermediaryMappings.isPresent()
+	}
 }
 
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
@@ -384,12 +392,6 @@ publishing {
 			artifact(v2MergedMappingsJar) {
 				classifier "mergedv2"
 			}
-			artifact(intermediaryV2MappingsJar) {
-				classifier "intermediary-v2"
-			}
-			artifact(intermediaryV2MergedMappingsJar) {
-				classifier "intermediary-mergedv2"
-			}
 			artifact(constantsJar) {
 				classifier "constants"
 			}
@@ -428,5 +430,22 @@ publishing {
 			}
 		}
 		mavenLocal()
+	}
+}
+
+tasks.withType(AbstractPublishToMaven).all { AbstractPublishToMaven t ->
+	// Won't run if checkIntermediaryMappings returns false
+	dependsOn intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar
+
+	doFirst {
+		if (checkIntermediaryMappings.isPresent()) {
+			var p = it.publication
+			p.artifact(intermediaryV2MappingsJar) {
+				classifier "intermediary-v2"
+			}
+			p.artifact(intermediaryV2MergedMappingsJar) {
+				classifier "intermediary-mergedv2"
+			}
+		}
 	}
 }

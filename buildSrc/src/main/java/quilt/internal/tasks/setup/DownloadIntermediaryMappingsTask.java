@@ -5,5 +5,7 @@ public class DownloadIntermediaryMappingsTask extends AbstractDownloadMappingsTa
 
     public DownloadIntermediaryMappingsTask() {
         super("intermediary");
+        dependsOn(CheckIntermediaryMappingsTask.TASK_NAME);
+        onlyIf(task -> getTaskByType(CheckIntermediaryMappingsTask.class).isPresent());
     }
 }
