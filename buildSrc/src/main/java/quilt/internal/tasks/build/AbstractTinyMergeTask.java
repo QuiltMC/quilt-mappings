@@ -25,9 +25,14 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     @OutputFile
     public File outputMappings;
 
-    private final String mergeName;
+    protected final String mergeName;
+    protected final String fillName;
 
     public AbstractTinyMergeTask(String outputMappings, String mergeName) {
+        this(outputMappings, mergeName, mergeName);
+    }
+
+    public AbstractTinyMergeTask(String outputMappings, String mergeName, String fillName) {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
         this.outputMappings = new File(fileConstants.tempDir, outputMappings);
         getOutputs().file(this.outputMappings);
@@ -35,6 +40,7 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         input = getProject().getObjects().fileProperty();
 
         this.mergeName = mergeName;
+        this.fillName = fillName;
     }
 
     @TaskAction
@@ -48,14 +54,18 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         MappingReader.read(mergeTinyInput.toPath(), MappingFormat.TINY_2, tree);
         MappingReader.read(mappingsTinyInput.toPath(), MappingFormat.TINY_2, tree);
         try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings.toPath()), false)) {
-            tree.accept(
+            tree.accept(getFirstVisitor(
                 new MappingNsCompleter(
                     new MappingSourceNsSwitch(getPreWriteVisitor(w), "official", /*Drop methods not in hashed*/ true),
-                    Collections.singletonMap("named", this.mergeName), // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
+                    Collections.singletonMap("named", this.fillName), // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
                     false
                 )
-            );
+            ));
         }
+    }
+
+    protected MappingVisitor getFirstVisitor(MappingVisitor next) {
+        return next;
     }
 
     protected MappingVisitor getPreWriteVisitor(MappingVisitor writer) {
