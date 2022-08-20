@@ -33,6 +33,9 @@ CLASS net/minecraft/unmapped/C_jyxtrlhr net/minecraft/client/gui/screen/CommandS
 		ARG 9 chatScreenSized
 		ARG 10 color
 	METHOD m_aidxlsjb getNarration ()Ljava/lang/String;
+	METHOD m_bkimanqp renderWindow (Lnet/minecraft/unmapped/C_cnszsxvd;II)Z
+		ARG 2 mouseX
+		ARG 3 mouseY
 	METHOD m_egnvndmf mouseClicked (DDI)Z
 		ARG 1 mouseX
 		ARG 3 mouseY
@@ -43,12 +46,14 @@ CLASS net/minecraft/unmapped/C_jyxtrlhr net/minecraft/client/gui/screen/CommandS
 		ARG 3 modifiers
 	METHOD m_jxxkmohx showSuggestions (Z)V
 		ARG 1 narrateFirstSuggestion
+	METHOD m_nkclczjf renderUsage (Lnet/minecraft/unmapped/C_cnszsxvd;)V
 	METHOD m_nrdzjegr provideRenderText (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_apvkgwyi;
 		ARG 1 original
 		ARG 2 firstCharacterIndex
 	METHOD m_pbbjqmoq buildNodes (ILcom/mojang/brigadier/context/CommandContextBuilder;)Lcom/mojang/brigadier/tree/CommandNode;
 		ARG 0 cursor
 		ARG 1 builder
+	METHOD m_pjsacurt resetWindow ()V
 	METHOD m_pjurbkfn parseFromCursor (I)Lcom/mojang/brigadier/tree/CommandNode;
 		ARG 1 cursor
 	METHOD m_qceilxyd show ()V
@@ -71,6 +76,7 @@ CLASS net/minecraft/unmapped/C_jyxtrlhr net/minecraft/client/gui/screen/CommandS
 		ARG 0 exception
 	METHOD m_thgbmlty setWindowActive (Z)V
 		ARG 1 windowActive
+	METHOD m_tkfgmumy getParse ()Lcom/mojang/brigadier/ParseResults;
 	METHOD m_wgavwrmh getSuggestionSuffix (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 original
 		ARG 1 suggestion
@@ -85,6 +91,12 @@ CLASS net/minecraft/unmapped/C_jyxtrlhr net/minecraft/client/gui/screen/CommandS
 		FIELD f_rvtxspur inWindowIndex I
 		FIELD f_ungauxjw area Lnet/minecraft/unmapped/C_zccuaobs;
 		FIELD f_wukqeiza typedText Ljava/lang/String;
+		METHOD <init> (Lnet/minecraft/unmapped/C_jyxtrlhr;IIILjava/util/List;Z)V
+			ARG 2 x
+			ARG 3 y
+			ARG 4 width
+			ARG 5 suggestions
+			ARG 6 narrateFirstSuggestion
 		METHOD m_aggkbxzu getNarration ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 		METHOD m_apgjkarg select (I)V
 			ARG 1 index
