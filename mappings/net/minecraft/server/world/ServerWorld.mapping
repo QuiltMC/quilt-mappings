@@ -11,6 +11,8 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	FIELD f_kmgtbgrd players Ljava/util/List;
 	FIELD f_limvtnaq idleTimeout I
 	FIELD f_ockdexkx portalForcer Lnet/minecraft/unmapped/C_daetwwvm;
+	FIELD f_ocsgirly fluidTickScheduler Lnet/minecraft/unmapped/C_cropbciq;
+	FIELD f_orgkwkdj structureChecker Lnet/minecraft/unmapped/C_jydrhkzs;
 	FIELD f_rfnywfgx loadedMobs Ljava/util/Set;
 	FIELD f_rjtvtwmg SERVER_IDLE_COOLDOWN I
 		COMMENT The number of ticks ({@value}) the world will continue to tick entities after
@@ -25,13 +27,22 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	FIELD f_xunoqjxj structureManager Lnet/minecraft/unmapped/C_rhdulivw;
 	FIELD f_xxncbrtq enderDragonFight Lnet/minecraft/unmapped/C_hxzjzvro;
 	FIELD f_zwskxqrh inBlockTick Z
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_gjwbvqct;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_alziuayn;Lnet/minecraft/unmapped/C_jnfclwgd;ZJLjava/util/List;Z)V
+		ARG 1 server
+		ARG 4 worldProperties
+		ARG 6 dimensionOptions
+		ARG 11 spawners
 	METHOD m_acuodrlx getLightningRodPos (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
 		ARG 1 pos
+	METHOD m_amuecdtw (Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		ARG 1 entity
 	METHOD m_aonmqwml onPlayerRespawned (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_aosomwse shouldCancelSpawn (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
 	METHOD m_bbslyzvv processSyncedBlockEvents ()V
+	METHOD m_bdnimjhn (Lnet/minecraft/unmapped/C_mxrobsgg;)V
+		ARG 0 player
 	METHOD m_behijzhe getStructureManager ()Lnet/minecraft/unmapped/C_rhdulivw;
 	METHOD m_bkrelajn isNearOccupiedPointOfInterest (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
@@ -91,8 +102,13 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	METHOD m_ibggsfql isFlat ()Z
 	METHOD m_ifmpzfaa clearUpdatesInArea (Lnet/minecraft/unmapped/C_hmqypqzz;)V
 		ARG 1 box
+	METHOD m_immceocf (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
+		ARG 1 pos
+	METHOD m_inadgslt tickWeather ()V
 	METHOD m_inzidthk shouldCreateNewEntityWithPassenger (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
+	METHOD m_jaadksjy tickFluid (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rxhyurmy;)V
+		ARG 2 fluid
 	METHOD m_jbfuckmf save (Lnet/minecraft/unmapped/C_qzzqcncf;ZZ)V
 		ARG 1 progressListener
 		ARG 2 flush
@@ -112,6 +128,8 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	METHOD m_mnsqmupw tickTime ()V
 	METHOD m_mvfbcepu addEntities (Ljava/util/stream/Stream;)V
 		ARG 1 entities
+	METHOD m_nolhpgre (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+		ARG 1 chunk
 	METHOD m_odekrajn spawnParticles (Lnet/minecraft/unmapped/C_nqucohct;DDDIDDDD)I
 		ARG 1 particle
 		ARG 2 x
@@ -160,6 +178,8 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	METHOD m_rhtvnoke tickPassenger (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 vehicle
 		ARG 2 passenger
+	METHOD m_rysxhccr (Lnet/minecraft/unmapped/C_eslcbfsq;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 2 entity
 	METHOD m_senvvkks tickChunk (Lnet/minecraft/unmapped/C_hrdsvlkq;I)V
 		ARG 1 chunk
 		ARG 2 randomTickSpeed
@@ -174,6 +194,8 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	METHOD m_tqvywirw getDragonPart (I)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 id
 	METHOD m_tzlitazt sendSleepingStatus ()V
+	METHOD m_uwauhnel (Lnet/minecraft/unmapped/C_lwzmmmqr;)V
+		ARG 1 chunk
 	METHOD m_vgbceyje resetIdleTimeout ()V
 	METHOD m_wtlcknkv getTopFive (Ljava/lang/Iterable;Ljava/util/function/Function;)Ljava/lang/String;
 		COMMENT Categories {@code items} with the {@code classifier} and reports a message
@@ -182,6 +204,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 			COMMENT the items to classify
 		ARG 1 classifier
 			COMMENT the classifier that determines the category of any item
+	METHOD m_xdcituba resetWeather ()V
 	METHOD m_xjwwchqw unloadEntities (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
 		ARG 1 chunk
 	METHOD m_xxybxutd setTimeOfDay (J)V
