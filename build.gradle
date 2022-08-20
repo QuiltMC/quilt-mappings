@@ -203,6 +203,14 @@ task intermediaryV2MergedMappingsJar(dependsOn: ["mergeIntermediary"], type: Map
 	}
 }
 
+task buildIntermediary {
+	dependsOn intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar
+
+	onlyIf {
+		return checkIntermediaryMappings.isPresent()
+	}
+}
+
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	jarFile = mappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
@@ -438,7 +446,7 @@ publishing {
 
 tasks.withType(AbstractPublishToMaven).all { AbstractPublishToMaven t ->
 	// Won't run if checkIntermediaryMappings returns false
-	dependsOn intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar
+	dependsOn buildIntermediary
 
 	doFirst {
 		if (checkIntermediaryMappings.isPresent()) {

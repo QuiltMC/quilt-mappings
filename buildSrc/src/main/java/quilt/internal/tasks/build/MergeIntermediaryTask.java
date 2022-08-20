@@ -5,26 +5,33 @@ import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import net.fabricmc.mappingio.adapter.MappingNsCompleter;
 import quilt.internal.Constants;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
+import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     public static final String TASK_NAME = "mergeIntermediary";
 
     public MergeIntermediaryTask() {
         super("mergedIntermediary.tiny", "intermediary", Constants.PER_VERSION_MAPPINGS_NAME);
-        dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, InvertIntermediaryMappingsTask.TASK_NAME, MergeTinyV2Task.TASK_NAME);
+        dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.TASK_NAME, MergeTinyV2Task.TASK_NAME);
         onlyIf(task -> getTaskByType(CheckIntermediaryMappingsTask.class).isPresent());
 
-        input.convention(getTaskByType(MergeTinyV2Task.class)::getOutputMappings);
+        input.convention(getTaskByType(DownloadIntermediaryMappingsTask.class)::getTinyFile);
     }
 
     @Override
     public void mergeMappings() throws Exception {
-        File intermediaryTinyInput = this.getTaskByType(InvertIntermediaryMappingsTask.class).getInvertedTinyFile();
-        mergeMappings(intermediaryTinyInput);
+        File tinyInput = this.getTaskByType(MergeTinyV2Task.class).getOutputMappings();
+        mergeMappings(tinyInput);
+    }
+
+    @Override
+    protected Map<String, String> getNameAlternatives() {
+        return Collections.singletonMap("intermediary", Constants.PER_VERSION_MAPPINGS_NAME); // Add <init>s to intermediary
     }
 
     @Override

@@ -3,6 +3,7 @@ package quilt.internal.tasks.build;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Collections;
+import java.util.Map;
 
 import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.MappingVisitor;
@@ -13,6 +14,7 @@ import net.fabricmc.mappingio.format.Tiny2Writer;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
@@ -57,11 +59,19 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
             tree.accept(getFirstVisitor(
                 new MappingNsCompleter(
                     new MappingSourceNsSwitch(getPreWriteVisitor(w), "official", /*Drop methods not in hashed*/ true),
-                    Collections.singletonMap("named", this.fillName), // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
+                    getNameAlternatives(),
                     false
                 )
             ));
         }
+    }
+
+    @Internal
+    protected Map<String, String> getNameAlternatives() {
+        return Map.of(
+                "named", this.fillName, // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
+                "official", Constants.PER_VERSION_MAPPINGS_NAME // Add <init>s to official
+        );
     }
 
     protected MappingVisitor getFirstVisitor(MappingVisitor next) {
