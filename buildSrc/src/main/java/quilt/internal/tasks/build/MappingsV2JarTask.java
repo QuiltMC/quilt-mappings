@@ -19,7 +19,7 @@ public class MappingsV2JarTask extends Jar implements MappingsTask {
         this.outputsNeverUpToDate();
         getDestinationDirectory().set(getProject().file("build/libs"));
 
-        File unpickMetaFile = getProject().file("unpick-definitions/unpick.json");
+        File unpickMetaFile = mappingsExt().getFileConstants().unpickMeta;
         from(unpickMetaFile, copySpec -> {
             copySpec.expand(Map.of("version", getProject().property("unpick_version")));
             copySpec.rename(unpickMetaFile.getName(), "extras/unpick.json");

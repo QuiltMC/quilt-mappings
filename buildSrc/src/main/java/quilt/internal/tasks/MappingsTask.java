@@ -1,6 +1,8 @@
 package quilt.internal.tasks;
 
 import org.gradle.api.Task;
+import quilt.internal.MappingsExtension;
+import quilt.internal.MappingsPlugin;
 import quilt.internal.util.DownloadImmediate;
 
 public interface MappingsTask extends Task {
@@ -19,5 +21,9 @@ public interface MappingsTask extends Task {
 
     default void outputsNeverUpToDate() {
         this.getOutputs().upToDateWhen(task -> false);
+    }
+
+    default MappingsExtension mappingsExt() {
+        return MappingsPlugin.getExtension(getProject());
     }
 }

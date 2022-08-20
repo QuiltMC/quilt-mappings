@@ -39,8 +39,8 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         super(Constants.Groups.UNPICK_GEN);
         this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME, MapPerVersionMappingsJarTask.TASK_NAME);
 
-        this.onlyIf(_task -> !_task.getProject().file("unpick-definitions/unpick_gl.unpick").exists() ||
-                             !_task.getProject().file("unpick-definitions/unpick_glstatemanager.unpick").exists());
+        this.onlyIf(_task -> !this.fileConstants.unpickGlDefinitions.exists() ||
+                !this.fileConstants.unpickGlStateManagerDefinitions.exists());
     }
 
     @TaskAction
@@ -132,7 +132,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         });
 
         {
-            File unpickGl = getProject().file("unpick-definitions/unpick_gl.unpick");
+            File unpickGl = this.fileConstants.unpickGlDefinitions;
             unpickGl.delete();
             unpickGl.createNewFile();
 
@@ -184,7 +184,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         }
 
         {
-            File unpickGlStateManager = getProject().file("unpick-definitions/unpick_glstatemanager.unpick");
+            File unpickGlStateManager = this.fileConstants.unpickGlStateManagerDefinitions;
             unpickGlStateManager.delete();
             unpickGlStateManager.createNewFile();
 
