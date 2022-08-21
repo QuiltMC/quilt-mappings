@@ -36,7 +36,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
     public AddProposedMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        outputMappings = new File(fileConstants.tempDir, getName() + "-with-enum.tiny");
+        outputMappings = new File(fileConstants.tempDir, getName() + ".tiny");
         inputJar = getProject().getObjects().property(File.class);
         inputMappings = getProject().getObjects().property(File.class);
         profile = getProject().getObjects().property(File.class);

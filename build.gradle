@@ -86,7 +86,7 @@ dependencies {
 
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.Opcodes
-import org.quiltmc.draftsman.asm.visitor.DraftsmanClassVisitor
+import org.quiltmc.draftsman.asm.visitor.DraftsmanAdapterClassVisitor
 import quilt.internal.Constants
 import quilt.internal.decompile.Decompilers
 import quilt.internal.tasks.build.AddProposedMappingsTask
@@ -214,7 +214,7 @@ task buildIntermediary {
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	jarFile = mappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
-	visitor(DraftsmanClassVisitor::new)
+	visitor(DraftsmanAdapterClassVisitor::new)
 	// Set protected/package-private classes to public so that we don't have any access compile errors.
 	// TODO: Fix this by putting the classes in the same package. Javadoc shows the modifier
 	visitor { new ClassVisitor(Opcodes.ASM9, it) {
