@@ -1,0 +1,164 @@
+CLASS net/minecraft/unmapped/C_krhsyzys net/minecraft/client/gui/MultilineTextField
+	COMMENT A multiline text field with support for basic keyboard shortcuts.
+	COMMENT
+	COMMENT <p>
+	COMMENT This should not be used directly; {@link net.minecraft.client.gui.widget.EditBoxWidget}
+	COMMENT provides the GUI for the edit box.
+	FIELD f_burfhmzf displayLines Ljava/util/List;
+	FIELD f_enhzgdct cursor I
+	FIELD f_fwmsxqxf UNLIMITED_LENGTH I
+		COMMENT A constant denoting that the text field accepts an unlimited amount of text.
+		COMMENT <p>
+		COMMENT Edit box widgets with such text fields do not show the current text length indicator.
+	FIELD f_ifbtgjss CURSOR_WIDTH I
+	FIELD f_lfsvsgee selectionEnd I
+	FIELD f_llwocfvd selecting Z
+	FIELD f_qgvgvylv text Ljava/lang/String;
+	FIELD f_srcnjbvv changeListener Ljava/util/function/Consumer;
+	FIELD f_vgvoinsh cursorChangeListener Ljava/lang/Runnable;
+	FIELD f_xrmbhutf maxWidth I
+	FIELD f_zcjwhirv maxLength I
+	METHOD <init> (Lnet/minecraft/unmapped/C_mavozmpp;I)V
+		ARG 2 maxWidth
+	METHOD m_aaieuflj setChangeListener (Ljava/util/function/Consumer;)V
+		COMMENT Sets the change listener that is called every time the text changes.
+		ARG 1 listener
+			COMMENT the listener that takes the new text of this text field
+	METHOD m_aeleahst getText ()Ljava/lang/String;
+		COMMENT {@return the text of this text field}
+	METHOD m_bjsskcwq getNextWordAtCursor ()Lnet/minecraft/unmapped/C_krhsyzys$C_ugdorfqq;
+		COMMENT {@return the substring of a word whose start position is after the cursor}
+		COMMENT <p>
+		COMMENT A word is a string consisting entirely of non-whitespace characters.
+		COMMENT If the cursor is in the middle of a word, the start position is that of the first word
+		COMMENT after the cursor; if not, the start position is that of the next word.
+		COMMENT
+		COMMENT @see #getPreviousWordAtCursor()
+	METHOD m_cpqvtsxt truncateFullText (Ljava/lang/String;)Ljava/lang/String;
+		ARG 1 text
+	METHOD m_eimodopl setText (Ljava/lang/String;)V
+		COMMENT Sets the text of this text field and moves the cursor to the end.
+		ARG 1 text
+			COMMENT the text
+	METHOD m_gfzwtmzm getSelection ()Lnet/minecraft/unmapped/C_krhsyzys$C_ugdorfqq;
+	METHOD m_gwqmzqpf insertText (Ljava/lang/String;)V
+		ARG 1 text
+	METHOD m_hdroibsh deleteText (I)V
+		COMMENT Deletes the selected text, or {@code length} characters of text from the cursor position if there is no selection.
+		COMMENT <p>
+		COMMENT If the length is negative, the characters before the cursor will be removed, and vice versa.
+		ARG 1 length
+	METHOD m_jvpnsyqh moveCursorLine (I)V
+		COMMENT Moves the cursor by {@code offset} lines.
+		COMMENT <p>
+		COMMENT This method attempts to keep the relative position within the line the same.
+		COMMENT Does nothing if {@code offset} is {@code 0}.
+		ARG 1 offset
+			COMMENT the amount of lines to move the cursor from
+	METHOD m_lbeblyle setMaxLength (I)V
+		COMMENT Sets the maximum length of this text field in characters.
+		COMMENT <p>
+		COMMENT If the set {@code maxLength} equals {@link #UNLIMITED_LENGTH}, the text field will not have a length limit.
+		COMMENT Edit box widgets with such text fields do not show the current text length indicator.
+		COMMENT
+		COMMENT @throws IllegalArgumentException if {@code maxLength} is negative
+		COMMENT @see #getMaxLength()
+		COMMENT @see #hasMaxLength()
+		ARG 1 maxLength
+	METHOD m_lqcozpuk handleSpecialKey (I)Z
+		COMMENT Handles the special keys, such as copy, cut, linebreak, and cursor movements.
+		ARG 1 keyCode
+			COMMENT the key code to handle
+	METHOD m_lttufteo getLineCount ()I
+	METHOD m_mbgonxgy getSelectionText ()Ljava/lang/String;
+	METHOD m_mevmgzdh getCurrentLine ()Lnet/minecraft/unmapped/C_krhsyzys$C_ugdorfqq;
+		COMMENT {@return the line that the cursor is located at}
+		COMMENT
+		COMMENT @see #getOffsetLine(int)
+	METHOD m_mfzpzsee moveCursor (DD)V
+		COMMENT Moves the cursor to the specified position relative to this text field.
+		ARG 1 x
+			COMMENT the X position of the cursor
+		ARG 3 y
+			COMMENT the Y position of the cursor
+	METHOD m_mskqtlqf (Ljava/lang/String;)V
+		ARG 0 text
+	METHOD m_opbgamoe getLines ()Ljava/lang/Iterable;
+		COMMENT {@return the lines of this text field's text}
+	METHOD m_qgrxeglv setSelecting (Z)V
+		COMMENT Sets whether this text field is currently selecting.
+		COMMENT <p>
+		COMMENT If using the widget, this is done by dragging or holding down Shift and clicking.
+		ARG 1 selecting
+			COMMENT {@code true} if this text field is currently selecting, or {@code false} otherwise
+	METHOD m_qlrljnzk getCursor ()I
+	METHOD m_satfxbxr getPreviousWordAtCursor ()Lnet/minecraft/unmapped/C_krhsyzys$C_ugdorfqq;
+		COMMENT {@return the substring of a word whose start position is before the cursor}
+		COMMENT <p>
+		COMMENT A word is a string consisting entirely of non-whitespace characters.
+		COMMENT If the cursor is in the middle of a word, the start position is that of the word;
+		COMMENT if not, the start position is that of the first word before the cursor.
+		COMMENT
+		COMMENT @see #getNextWordAtCursor()
+	METHOD m_sbsgitud getLine (I)Lnet/minecraft/unmapped/C_krhsyzys$C_ugdorfqq;
+		COMMENT {@return the line with index {@code index}}
+		ARG 1 index
+			COMMENT the line index
+	METHOD m_sebfshwr (Lnet/minecraft/unmapped/C_cpwnhism;II)V
+		ARG 1 text
+		ARG 2 start
+		ARG 3 end
+	METHOD m_snbipear getCurrentLineIndex ()I
+	METHOD m_tzncxvou moveCursor (Lnet/minecraft/unmapped/C_rvckgptc;I)V
+		COMMENT Moves the cursor by {@code amount} characters.
+		COMMENT
+		COMMENT @apiNote See {@link CursorMovement} for the types of the movement.
+		ARG 1 movement
+			COMMENT the movement of the cursor
+		ARG 2 amount
+	METHOD m_uecuspsi setCursorMoveListener (Ljava/lang/Runnable;)V
+		COMMENT Sets the cursor move listener that is called every time the cursor position changes.
+		ARG 1 listener
+			COMMENT the listener that runs when the cursor position changes
+	METHOD m_uhklhrmz hasSelection ()Z
+	METHOD m_uwuewaqs rewrap ()V
+	METHOD m_vuhkjybg getMaxLength ()I
+		COMMENT {@return the maximum length of this text field in characters}
+		COMMENT <p>
+		COMMENT If this equals {@link #UNLIMITED_LENGTH}, the text field does not have a length limit.
+		COMMENT Edit box widgets with such text fields do not show the current text length indicator.
+		COMMENT
+		COMMENT @see #setMaxLength(int)
+		COMMENT @see #hasMaxLength()
+	METHOD m_wbcaxtdn truncate (Ljava/lang/String;)Ljava/lang/String;
+		ARG 1 text
+	METHOD m_wtqoabei getWordEndIndex (I)I
+		COMMENT {@return the end index of the word starting at {@code startIndex}}
+		COMMENT <p>
+		COMMENT A word is a string consisting entirely of non-whitespace characters.
+		COMMENT Therefore, the end index is the index of the character whose succeeding character
+		COMMENT is the first whitespace since {@code startIndex}.
+		ARG 1 startIndex
+			COMMENT the index where the word starts
+	METHOD m_xwekzcbx onChange ()V
+	METHOD m_zabiisny hasMaxLength ()Z
+		COMMENT {@return {@code true} if this text field has a maximum length, or {@code false} otherwise}
+		COMMENT <p>
+		COMMENT Edit box widgets with text fields without a length limit do not show the current text length indicator.
+		COMMENT
+		COMMENT @see #getMaxLength()
+		COMMENT @see #setMaxLength(int)
+	METHOD m_zhdliovu getOffsetLine (I)Lnet/minecraft/unmapped/C_krhsyzys$C_ugdorfqq;
+		COMMENT {@return the line offset by {@code offset} from the cursor's line}
+		COMMENT
+		COMMENT @see #getCurrentLine()
+		ARG 1 offset
+			COMMENT offset from the current line
+	CLASS C_ugdorfqq Substring
+		COMMENT A substring of an edit box's text, specified using the indices of the
+		COMMENT start and the end. This can indicate selections, lines, words, etc.
+		COMMENT <p>
+		COMMENT This does not contain the string itself; to obtain the string, get the text
+		COMMENT first, then call {@link String#substring}.
+		FIELD f_nnrcatkf EMPTY Lnet/minecraft/unmapped/C_krhsyzys$C_ugdorfqq;
+			COMMENT An empty substring.
