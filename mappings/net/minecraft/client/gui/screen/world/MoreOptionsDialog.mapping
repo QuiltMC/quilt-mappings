@@ -2,7 +2,7 @@ CLASS net/minecraft/unmapped/C_hfrhzuud net/minecraft/client/gui/screen/world/Mo
 	FIELD f_dedzgzwh amplifiedInfoText Lnet/minecraft/unmapped/C_ogfbkizf;
 	FIELD f_dzricakb MAP_FEATURES_INFO_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ftjvsato seed Ljava/util/OptionalLong;
-	FIELD f_iqpyuism generatorOptions Lnet/minecraft/unmapped/C_njsjipmy;
+	FIELD f_iqpyuism worldCreationContext Lnet/minecraft/unmapped/C_njsjipmy;
 	FIELD f_kvcyqiod unchangeableMapTypeButton Lnet/minecraft/unmapped/C_buwziidm;
 	FIELD f_kvvgtxri seedTextField Lnet/minecraft/unmapped/C_vopzcnhf;
 	FIELD f_lssjmjxl mapFeaturesButton Lnet/minecraft/unmapped/C_ikfvpkkf;
@@ -18,11 +18,13 @@ CLASS net/minecraft/unmapped/C_hfrhzuud net/minecraft/client/gui/screen/world/Mo
 	FIELD f_vqabkzjc generatorType Ljava/util/Optional;
 	FIELD f_xycarvog AMPLIFIED_INFO_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD <init> (Lnet/minecraft/unmapped/C_njsjipmy;Ljava/util/Optional;Ljava/util/OptionalLong;)V
-		ARG 1 generatorOptions
+		ARG 1 worldCreationContext
 		ARG 2 generatorType
 		ARG 3 seed
 	METHOD m_bgxufcoz (Lnet/minecraft/unmapped/C_ikfvpkkf;)Lnet/minecraft/unmapped/C_npqneive;
 		ARG 0 button
+	METHOD m_dklerval createFinalContext (Z)Lnet/minecraft/unmapped/C_njsjipmy;
+		ARG 1 hardcore
 	METHOD m_ebwurwjx tickSeedTextField ()V
 	METHOD m_ekgyybcm init (Lnet/minecraft/unmapped/C_ibkofvzc;Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_mavozmpp;)V
 		ARG 1 parent
@@ -32,19 +34,27 @@ CLASS net/minecraft/unmapped/C_hfrhzuud net/minecraft/client/gui/screen/world/Mo
 		ARG 1 generatorOptions
 	METHOD m_ganmvlib isDebugWorld ()Z
 	METHOD m_ghiutaeh enableBonusItems ()V
+	METHOD m_glsxutqd modifyGeneratorOptions (Lnet/minecraft/unmapped/C_njsjipmy$C_gcbpbmkn;)V
+		ARG 1 modifier
 	METHOD m_gxuprmto (Lnet/minecraft/unmapped/C_ikfvpkkf;)Lnet/minecraft/unmapped/C_npqneive;
 		ARG 0 button
 	METHOD m_hpxyzodu (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 0 button
+	METHOD m_ikfomavd (ZLjava/util/OptionalLong;Lnet/minecraft/unmapped/C_oxnufhsj;)Lnet/minecraft/unmapped/C_oxnufhsj;
+		ARG 2 generatorOptions
+	METHOD m_jukbxlhs setWorldCreationContext (Lnet/minecraft/unmapped/C_njsjipmy;)V
+		ARG 1 context
 	METHOD m_kbamhhge seedToString (Ljava/util/OptionalLong;)Ljava/lang/String;
 		ARG 0 seed
 	METHOD m_kkppsbmh (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_ibkofvzc;Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 3 button
 	METHOD m_kndghhql m_kndghhql (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_ibkofvzc;Lcom/mojang/serialization/Lifecycle;Lnet/minecraft/unmapped/C_oxnufhsj;)V
 		ARG 1 client
+	METHOD m_mhpnzmox getWorldCreationContext ()Lnet/minecraft/unmapped/C_njsjipmy;
 	METHOD m_rekekxfd setVisible (Z)V
 		ARG 1 visible
 	METHOD m_rqibeybz (Lnet/minecraft/unmapped/C_njsjipmy;Ljava/util/Optional;)Ljava/util/Optional;
+		ARG 0 context
 		ARG 1 generatorType
 	METHOD m_tqappycl disableBonusItems ()V
 	METHOD m_tricwiqi (Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Boolean;)V
@@ -54,3 +64,5 @@ CLASS net/minecraft/unmapped/C_hfrhzuud net/minecraft/client/gui/screen/world/Mo
 	METHOD m_wvxalcmt setMapTypeButtonVisible (Z)V
 		ARG 1 visible
 	METHOD m_xnqyasuv getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq;
+	METHOD m_ztaipkpu modifyGeneratorOptions (Lnet/minecraft/unmapped/C_njsjipmy$C_jpeipwae;)V
+		ARG 1 modifier
