@@ -30,11 +30,6 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     }
 
     @Override
-    protected Map<String, String> getNameAlternatives() {
-        return Collections.singletonMap("intermediary", Constants.PER_VERSION_MAPPINGS_NAME); // Add <init>s to intermediary
-    }
-
-    @Override
     protected MappingVisitor getFirstVisitor(MappingVisitor next) {
         // Fill missing hashed names with their corresponding unobfuscated official name
         // Ran first for unnamed classes to also be filled with those names

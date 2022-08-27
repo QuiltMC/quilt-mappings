@@ -18,6 +18,7 @@ import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
+import quilt.internal.mappingio.CompleteInitializersVisitor;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
@@ -57,10 +58,12 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         MappingReader.read(mappingsTinyInput.toPath(), MappingFormat.TINY_2, tree);
         try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings.toPath()), false)) {
             tree.accept(getFirstVisitor(
-                new MappingNsCompleter(
-                    new MappingSourceNsSwitch(getPreWriteVisitor(w), "official", /*Drop methods not in hashed*/ true),
-                    getNameAlternatives(),
-                    false
+                new CompleteInitializersVisitor(
+                    new MappingNsCompleter(
+                        new MappingSourceNsSwitch(getPreWriteVisitor(w), "official", /*Drop methods not in hashed*/ true),
+                        getNameAlternatives(),
+                        false
+                    )
                 )
             ));
         }
@@ -68,10 +71,7 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
 
     @Internal
     protected Map<String, String> getNameAlternatives() {
-        return Map.of(
-                "named", this.fillName, // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
-                "official", Constants.PER_VERSION_MAPPINGS_NAME // Add <init>s to official
-        );
+        return Collections.singletonMap("named", this.fillName); // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
     }
 
     protected MappingVisitor getFirstVisitor(MappingVisitor next) {
