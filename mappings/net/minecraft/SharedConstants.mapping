@@ -50,13 +50,14 @@ CLASS net/minecraft/unmapped/C_otltijcb net/minecraft/SharedConstants
 	FIELD f_lwojokdf SMALL_SPAWN Z
 	FIELD f_mflsgynx ENABLE_CHUNKS_DEBUGGER Z
 	FIELD f_mtbiptss TNT_DUPLICATION_FIX Z
+	FIELD f_muvweuzx DEBUG_SOCIAL_INTERACTIONS Z
 	FIELD f_mxuvvcjk IGNORE_LOCAL_MOB_CAP Z
 	FIELD f_ncguflho ENABLE_LIGHT_DEBUGGER Z
 	FIELD f_nhajgbnh DATA_PACK_FORMAT I
 	FIELD f_nhntnupz USE_NEW_RENDER_SYSTEM Z
 	FIELD f_nmxvsvns ENABLE_BLOCK_SOLID_FACE_DEBUGGER Z
 	FIELD f_obibejmb FAKE_MS_LATENCY I
-	FIELD f_oiqrmsrn RESOURCE_LEAK_DETECTOR_DISABLED Lio/netty/util/ResourceLeakDetector$Level;
+	FIELD f_oiqrmsrn RESOURCE_LEAK_DETECTOR Lio/netty/util/ResourceLeakDetector$Level;
 	FIELD f_ojxncvih CAVES_AND_CLIFFS_PART_2_ITEMS_AND_BLOCKS Z
 	FIELD f_olshzpfe DEFAULT_PORT I
 	FIELD f_oprapnda MAX_TICK_TIME_NANOS J
@@ -66,6 +67,7 @@ CLASS net/minecraft/unmapped/C_otltijcb net/minecraft/SharedConstants
 	FIELD f_pvntieka ENABLE_BEES_DEBUGGER Z
 	FIELD f_qjkiotbb DISABLE_CARVERS Z
 	FIELD f_qmeasuwi ENABLE_DEBUG_FEATURES Z
+	FIELD f_qnvoitvp MAX_RENDER_DISTANCE I
 	FIELD f_qqnsqrjy CHAT_MAX_LENGTH I
 	FIELD f_qyuhlvzn COMMAND_MAX_LENGTH I
 	FIELD f_reucnxmd WORLD_VERSION I
@@ -109,9 +111,43 @@ CLASS net/minecraft/unmapped/C_otltijcb net/minecraft/SharedConstants
 		COMMENT else {@code (1 << {@link #SNAPSHOT_PROTOCOL_VERSION_EXTRA_BITS}) + {@link #SNAPSHOT_PROTOCOL_VERSION}}}
 	METHOD m_ltryxeto setGameVersion (Lnet/minecraft/unmapped/C_xyxorzsk;)V
 		ARG 0 gameVersion
+	METHOD m_mnjwgyqe stripInvalidCharacters (Ljava/lang/String;)Ljava/lang/String;
+		COMMENT {@return {@code text} with all {@linkplain #isValidChar invalid characters} stripped}
+		COMMENT <p>
+		COMMENT LF (linebreak; U+000A) is an invalid character and therefore stripped.
+		COMMENT Use {@linkplain #stripInvalidCharacters(String, boolean)} to keep linebreaks.
+		COMMENT
+		COMMENT @see #isValidChar(char)
+		COMMENT @see #stripInvalidCharacters(String, boolean)
+		ARG 0 text
 	METHOD m_pfbdxkbd isValidChar (C)Z
+		COMMENT {@return {@code true} if the character is a valid one, or {@code false} otherwise}
+		COMMENT <p>
+		COMMENT Invalid characters are:
+		COMMENT <ul>
+		COMMENT \t<li>{@linkplain net.minecraft.util.Formatting#FORMATTING_CODE_PREFIX the formatting code prefix}
+		COMMENT (&bsol;u00a7),</li>
+		COMMENT \t<li>C0 control code (&bsol;u0000 to &bsol;u001f),</li>
+		COMMENT \t<li>delete (&bsol;u007f).</li>
+		COMMENT </ul>
+		COMMENT
+		COMMENT @apiNote This method is used to determine if the server should
+		COMMENT accept a chat message sent from client.
+		COMMENT @see net.minecraft.server.network.ServerPlayNetworkHandler#hasInvalidCharacters(String)
 		ARG 0 chr
 	METHOD m_redqmfkb isVoidTerrain (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
 		ARG 0 chunkPos
 	METHOD m_rugsknyf getGameVersion ()Lnet/minecraft/unmapped/C_xyxorzsk;
 	METHOD m_shiahrfj enableDataFixerOptimizations ()V
+	METHOD m_xcyumsii stripInvalidCharacters (Ljava/lang/String;Z)Ljava/lang/String;
+		COMMENT {@return {@code text} with {@linkplain #isValidChar invalid characters} stripped}
+		COMMENT <p>
+		COMMENT LF (linebreak; U+000A) may or may not be stripped depending on the passed
+		COMMENT {@code allowLineBreaks} value.
+		COMMENT
+		COMMENT @see #isValidChar(char)
+		COMMENT @see #stripInvalidCharacters(String)
+		ARG 0 text
+			COMMENT the text to filter
+		ARG 1 allowLineBreaks
+			COMMENT {@code true} if LF (linebreak; U+000A) characters should be kept, or {@code false} otherwise

@@ -1,0 +1,18 @@
+CLASS net/minecraft/unmapped/C_clhywcor net/minecraft/client/multiplayer/report/AbuseReportSender
+	METHOD m_bnhkbnrn isReportable ()Z
+	METHOD m_lhqhclgu getReportLimits ()Lcom/mojang/authlib/minecraft/report/AbuseReportLimits;
+	METHOD m_naasavwz send (Ljava/util/UUID;Lcom/mojang/authlib/minecraft/report/AbuseReport;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 uuid
+		ARG 2 report
+	METHOD m_xaeqlcdr create (Lnet/minecraft/unmapped/C_vbiguolf;Lcom/mojang/authlib/minecraft/UserApiService;)Lnet/minecraft/unmapped/C_clhywcor;
+		ARG 0 environment
+		ARG 1 userApiService
+	CLASS C_abseehhu Impl
+		FIELD f_cvpdidvt SERVICE_UNAVAILABLE_ERROR_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_jphtxasn JSON_ERROR_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_muimquhb HTTP_ERROR_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_qukpkwdr getErrorText (Lcom/mojang/authlib/exceptions/MinecraftClientException;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+			ARG 1 exception
+		METHOD m_stmhkfct getErrorText (Lcom/mojang/authlib/exceptions/MinecraftClientHttpException;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+			ARG 1 exception
+	CLASS C_tlwodtsz SendException
