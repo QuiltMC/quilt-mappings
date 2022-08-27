@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_uedmlrsy net/minecraft/client/gui/hud/ChatHud
 	FIELD f_dgprkgir hasUnreadNewMessages Z
+	FIELD f_dylsigso MESSAGE_TAB_MARGIN_LEFT I
 	FIELD f_edmrgtdf visibleMessages Ljava/util/List;
 	FIELD f_flzicggg LOGGER Lorg/slf4j/Logger;
 	FIELD f_kfrgulue scrolledLines I
@@ -7,6 +8,8 @@ CLASS net/minecraft/unmapped/C_uedmlrsy net/minecraft/client/gui/hud/ChatHud
 	FIELD f_ruaftuqz messages Ljava/util/List;
 	FIELD f_saexzcqr client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_sxhfbwpu messageHistory Ljava/util/List;
+	FIELD f_wkmmzcuu MESSAGE_INDENT I
+	FIELD f_yzdqkixl MESSAGE_NOT_FOUND I
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;)V
 		ARG 1 client
 	METHOD m_aewdlzft getChatScale ()D
@@ -19,28 +22,63 @@ CLASS net/minecraft/unmapped/C_uedmlrsy net/minecraft/client/gui/hud/ChatHud
 		ARG 2 tickDelta
 	METHOD m_bzentyiw addMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 message
+	METHOD m_dslipgxb hasSelectedMessageTag (DLnet/minecraft/unmapped/C_skejqrts$C_ozgyzxme;Lnet/minecraft/unmapped/C_bzcwstys;)Z
+		ARG 1 x
+		ARG 3 line
+		ARG 4 tag
+	METHOD m_edltpzmv drawMessageTagIcon (Lnet/minecraft/unmapped/C_cnszsxvd;IILnet/minecraft/unmapped/C_bzcwstys$C_owixgtsg;)V
+		ARG 2 x
+		ARG 3 y
+		ARG 4 icon
 	METHOD m_eegluqkz isChatHidden ()Z
 	METHOD m_frnwzibh clear (Z)V
 		ARG 1 clearHistory
 	METHOD m_fzoayvji addToMessageHistory (Ljava/lang/String;)V
 		ARG 1 message
+	METHOD m_itcpovxa toChatLineX (D)D
+		ARG 1 x
+	METHOD m_jfhtimrs resetVisibleMessages ()V
 	METHOD m_mrpbvdcd scroll (I)V
+		ARG 1 lines
 	METHOD m_nvzrqfsc getWidth ()I
 	METHOD m_oamuucay getChatScreen ()Lnet/minecraft/unmapped/C_isjusjcr;
 	METHOD m_obfjxduv getStyleAt (DD)Lnet/minecraft/unmapped/C_cpwnhism;
 		ARG 1 x
 		ARG 3 y
 	METHOD m_ojscejmv getHeight ()I
+	METHOD m_pkvxcieo getLineHeight ()I
 	METHOD m_qdpfumin getVisibleLineCount ()I
 	METHOD m_qvpgttyb getMessageOpacityMultiplier (I)D
 		ARG 0 age
 	METHOD m_rejamyax getWidth (D)I
 		ARG 0 widthOption
+	METHOD m_rlhqypho logChatMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_bzcwstys;)V
+		ARG 1 message
+		ARG 2 tag
+	METHOD m_sklddpff toChatLineY (D)D
+		ARG 1 y
+	METHOD m_tornqfrt hideMessage (Lnet/minecraft/unmapped/C_shphkjbi;)V
+		ARG 1 signature
 	METHOD m_tseluwfe getHeight (D)I
 		ARG 0 heightOption
-	METHOD m_usnmhaga (DD)Lnet/minecraft/unmapped/C_bzcwstys;
+	METHOD m_ubvivzdz addMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_shphkjbi;Lnet/minecraft/unmapped/C_bzcwstys;)V
+		ARG 1 message
+		ARG 2 signature
+		ARG 3 tag
+	METHOD m_usnmhaga getMessageTagAt (DD)Lnet/minecraft/unmapped/C_bzcwstys;
 		ARG 1 mouseX
 		ARG 3 mouseY
+	METHOD m_vpiseufd getMessageIndexAt (D)I
+		ARG 1 y
+	METHOD m_vrcazman getDefaultUnfocusedHeight ()D
 	METHOD m_xjlchviy resetScroll ()V
 	METHOD m_xykvvmbu reset ()V
+	METHOD m_xytjwquz getMessageTagX (Lnet/minecraft/unmapped/C_skejqrts$C_ozgyzxme;)I
+		ARG 1 line
 	METHOD m_yddhorfj getMessageHistory ()Ljava/util/List;
+	METHOD m_zgzqdynp addMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_shphkjbi;ILnet/minecraft/unmapped/C_bzcwstys;Z)V
+		ARG 1 message
+		ARG 2 signature
+		ARG 3 ticks
+		ARG 4 tag
+		ARG 5 refresh
