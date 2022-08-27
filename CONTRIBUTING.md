@@ -59,7 +59,7 @@ Triage member or another Mappings Team member.
 
 **Final Comment Period**:
 - Snapshots: 1 day
-- Releases: 3 days
+- Releases: 2 days
 
 **Special cases**:
 - If the PR adds new mappings needed by QSL, the Final Comment Period is shortened to 12 hours.
@@ -85,8 +85,8 @@ Triage member or another Mappings Team member.
 Triage member or another Mappings Team member.
 
 **Final Comment Period**:
-- Snapshots: 3 days
-- Releases: 5 days
+- Snapshots: 2 days
+- Releases: 4 days
 
 ### `T: toolchain changes`
 
