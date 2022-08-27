@@ -16,7 +16,7 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     public static final String TASK_NAME = "mergeIntermediary";
 
     public MergeIntermediaryTask() {
-        super("mergedIntermediary.tiny", "intermediary", Constants.PER_VERSION_MAPPINGS_NAME);
+        super("mappings-intermediaryMerged.tiny", "intermediary", Constants.PER_VERSION_MAPPINGS_NAME);
         dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.TASK_NAME, MergeTinyV2Task.TASK_NAME);
         onlyIf(task -> getTaskByType(CheckIntermediaryMappingsTask.class).isPresent());
 

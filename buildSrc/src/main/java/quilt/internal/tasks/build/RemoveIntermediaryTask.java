@@ -32,7 +32,7 @@ public class RemoveIntermediaryTask extends DefaultMappingsTask {
         dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, MergeIntermediaryTask.TASK_NAME);
         onlyIf(task -> getTaskByType(CheckIntermediaryMappingsTask.class).isPresent());
 
-        this.outputMappings = new File(fileConstants.tempDir, "intermediary.tiny");
+        this.outputMappings = new File(fileConstants.tempDir, "mappings-intermediary.tiny");
         getOutputs().file(this.outputMappings);
 
         input = getProject().getObjects().fileProperty();
