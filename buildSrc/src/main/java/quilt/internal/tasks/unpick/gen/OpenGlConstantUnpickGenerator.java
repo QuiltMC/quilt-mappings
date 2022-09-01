@@ -43,7 +43,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
 
     public static final List<String> OPEN_GL_VERSIONS = List.of("11", "12", "13", "14", "15", "20", "21", "30", "31", "32");
 
-    private static final Predicate<String> LWJGL_LIBRARY_PREDICATE = Pattern.compile("^org\\.lwjgl:lwjgl-opengl:([^:]*)").asPredicate();
+    private static final Predicate<String> LWJGL_LIBRARY_PREDICATE = Pattern.compile("^org\\.lwjgl:lwjgl-opengl:([^:]*)$").asMatchPredicate();
 
     @InputFile
     private final RegularFileProperty versionFile;
