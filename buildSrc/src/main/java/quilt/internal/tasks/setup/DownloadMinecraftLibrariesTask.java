@@ -11,6 +11,7 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
+import quilt.internal.FileConstants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
@@ -51,7 +52,7 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
                 String url = library.getDownloads().getArtifact().get().getUrl();
                 startDownload()
                         .src(url)
-                        .dest(new File(fileConstants.libraries, url.substring(url.lastIndexOf("/") + 1)))
+                        .dest(getArtifactFile(fileConstants, url))
                         .overwrite(false)
                         .download();
             } catch (IOException e) {
@@ -66,6 +67,10 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
         if (failed.get()) {
             throw new RuntimeException("Unable to download libraries for specified minecraft version.");
         }
+    }
+
+    public static File getArtifactFile(FileConstants fileConstants, String url) {
+        return new File(fileConstants.libraries, url.substring(url.lastIndexOf("/") + 1));
     }
 
     public RegularFileProperty getVersionFile() {
