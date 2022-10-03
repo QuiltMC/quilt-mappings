@@ -439,13 +439,17 @@ tasks.withType(AbstractPublishToMaven).all { AbstractPublishToMaven t ->
 
 	doFirst {
 		if (checkIntermediaryMappings.isPresent()) {
-			var p = it.publication
-			p.artifact(intermediaryV2MappingsJar) {
-				classifier "intermediary-v2"
+			MavenPublication p = it.publication
+			def addArtifact = { Task task, String artifactClassifier ->
+				if (p.getArtifacts().findAll {a -> a.getClassifier() == artifactClassifier }.isEmpty()) {
+					p.artifact(task) {
+						classifier artifactClassifier
+					}
+				}
 			}
-			p.artifact(intermediaryV2MergedMappingsJar) {
-				classifier "intermediary-mergedv2"
-			}
+
+			addArtifact(intermediaryV2MappingsJar, "intermediary-v2")
+			addArtifact(intermediaryV2MergedMappingsJar, "intermediary-mergedv2")
 		}
 	}
 }
