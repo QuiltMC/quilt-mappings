@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -17,14 +19,21 @@ import java.util.zip.ZipFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.apache.commons.io.FileUtils;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.quiltmc.launchermeta.version.v1.DownloadableFile;
+import org.quiltmc.launchermeta.version.v1.Library;
+import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 
 public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implements UnpickGen {
@@ -34,12 +43,26 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
 
     public static final List<String> OPEN_GL_VERSIONS = List.of("11", "12", "13", "14", "15", "20", "21", "30", "31", "32");
 
+    private static final Predicate<String> LWJGL_LIBRARY_PREDICATE = Pattern.compile("^org\\.lwjgl:lwjgl-opengl:([^:]*)$").asMatchPredicate();
+
+    @InputFile
+    private final RegularFileProperty versionFile;
+
     public OpenGlConstantUnpickGenerator() {
         super(Constants.Groups.UNPICK_GEN);
-        this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME);
+        this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME, MapPerVersionMappingsJarTask.TASK_NAME);
 
-        this.onlyIf(_task -> !_task.getProject().file("unpick-definitions/unpick_gl.unpick").exists() ||
-                             !_task.getProject().file("unpick-definitions/unpick_glstatemanager.unpick").exists());
+        this.onlyIf(_task -> !this.fileConstants.unpickGlDefinitions.exists() ||
+                !this.fileConstants.unpickGlStateManagerDefinitions.exists());
+
+        versionFile = getProject().getObjects().fileProperty();
+        versionFile.convention(() -> getTaskByType(DownloadMinecraftLibrariesTask.class).getVersionFile().getAsFile().get());
+
+        getInputs().file(versionFile);
+    }
+
+    public RegularFileProperty getVersionFile() {
+        return versionFile;
     }
 
     @TaskAction
@@ -81,9 +104,19 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
             }
         });
 
+        // Resolve lwjgl jar file
+        Version metaVersion = Version.fromString(FileUtils.readFileToString(versionFile.get().getAsFile(), StandardCharsets.UTF_8));
+        String lwjglUrl = metaVersion.getLibraries().stream().filter(l -> LWJGL_LIBRARY_PREDICATE.test(l.getName()))
+                .findFirst()
+                .map(Library::getDownloads)
+                .flatMap(Library.LibraryDownloads::getArtifact)
+                .map(DownloadableFile.PathDownload::getUrl)
+                .orElseThrow(() -> new IllegalStateException("Could not find lwjgl in version meta"));
+        File lwjglFile = DownloadMinecraftLibrariesTask.getArtifactFile(fileConstants, lwjglUrl);
+
         Map<String, List<String>> constantToDefiningVersions = new HashMap<>();
         Map<String, Map<Signature, List<String>>> functionToSignatureToDefiningVersions = new HashMap<>();
-        ZipFile zip = new ZipFile(getProject().file(".gradle/minecraft/libraries/lwjgl-opengl-3.3.1.jar"));
+        ZipFile zip = new ZipFile(lwjglFile);
         OPEN_GL_VERSIONS.forEach(version -> {
             try {
                 ZipEntry e = zip.getEntry("org/lwjgl/opengl/GL" + version + ".class");
@@ -131,7 +164,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         });
 
         {
-            File unpickGl = getProject().file("unpick-definitions/unpick_gl.unpick");
+            File unpickGl = this.fileConstants.unpickGlDefinitions;
             unpickGl.delete();
             unpickGl.createNewFile();
 
@@ -183,7 +216,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
         }
 
         {
-            File unpickGlStateManager = getProject().file("unpick-definitions/unpick_glstatemanager.unpick");
+            File unpickGlStateManager = this.fileConstants.unpickGlStateManagerDefinitions;
             unpickGlStateManager.delete();
             unpickGlStateManager.createNewFile();
 
@@ -191,7 +224,7 @@ public class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implement
             out.println("v2\n# This file was automatically generated, do not modify it\n");
 
             Map<String, List<Signature>> methodToSignature = new HashMap<>();
-            ZipFile minecraftJar = new ZipFile(getProject().file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar"));
+            ZipFile minecraftJar = new ZipFile(this.fileConstants.perVersionMappingsJar);
             ClassReader reader = new ClassReader(minecraftJar.getInputStream(minecraftJar.getEntry(GL_STATE_MANAGER_CLASS + ".class")).readAllBytes());
 
             reader.accept(new ClassVisitor(Opcodes.ASM9) {

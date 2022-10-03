@@ -18,3 +18,8 @@ if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
 }
 
 rootProject.name = "quilt-mappings"
+
+var localSettings = file("local.settings.gradle")
+if (localSettings.exists()) {
+	apply(from: localSettings)
+}
