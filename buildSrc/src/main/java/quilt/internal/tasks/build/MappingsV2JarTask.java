@@ -8,11 +8,13 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.jvm.tasks.Jar;
 import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
-import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 
 public class MappingsV2JarTask extends Jar implements MappingsTask {
     @InputFile
     private final RegularFileProperty mappings;
+
+    @InputFile
+    private final RegularFileProperty unpickFile;
 
     public MappingsV2JarTask() {
         this.setGroup(Constants.Groups.BUILD_MAPPINGS_GROUP);
@@ -25,19 +27,19 @@ public class MappingsV2JarTask extends Jar implements MappingsTask {
             copySpec.rename(unpickMetaFile.getName(), "extras/unpick.json");
         });
 
-        RegularFileProperty combineUnpickDefinitions = getTaskByType(CombineUnpickDefinitionsTask.class).getOutput();
-        from(combineUnpickDefinitions, copySpec -> {
-            copySpec.rename(combineUnpickDefinitions.get().getAsFile().getName(), "extras/definitions.unpick");
-        });
+        this.unpickFile = getObjectFactory().fileProperty();
+        from(this.unpickFile, copySpec -> copySpec.rename(name -> "extras/definitions.unpick"));
 
-        mappings = getObjectFactory().fileProperty();
-
-        from(mappings, copySpec -> {
-            copySpec.rename((originalName) -> "mappings/mappings.tiny");
-        });
+        this.mappings = getObjectFactory().fileProperty();
+        from(this.mappings, copySpec -> copySpec.rename(name -> "mappings/mappings.tiny"));
     }
 
     public RegularFileProperty getMappings() {
-        return mappings;
+        return this.mappings;
+    }
+
+
+    public RegularFileProperty getUnpickFile() {
+        return this.unpickFile;
     }
 }
