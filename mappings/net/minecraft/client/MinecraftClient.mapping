@@ -102,7 +102,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_ftridntq windowFocused Z
 	FIELD f_gddmsbwv running Z
 	FIELD f_gjykgqkk session Lnet/minecraft/unmapped/C_cwfizcnb;
-	FIELD f_gmrpxwoj currentServerEntry Lnet/minecraft/unmapped/C_xotldzgg;
 	FIELD f_gwedfcgs itemColors Lnet/minecraft/unmapped/C_bvzkhshe;
 	FIELD f_gxkjpkqc multiplayerEnabled Z
 	FIELD f_hedmckqb trackingTick I
@@ -119,7 +118,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_juejclec levelStorage Lnet/minecraft/unmapped/C_bpwagnit;
 	FIELD f_jztrpgfi metricsData Lnet/minecraft/unmapped/C_hqvvtxmh;
 	FIELD f_kgwygzao COMPLETED_UNIT_FUTURE Ljava/util/concurrent/CompletableFuture;
-	FIELD f_kknqnaxx resourcePackDir Ljava/io/File;
+	FIELD f_kknqnaxx resourcePackDir Ljava/nio/file/Path;
 	FIELD f_kxvfpczt paused Z
 	FIELD f_kznawzdr world Lnet/minecraft/unmapped/C_ghdnlrrw;
 		COMMENT Represents the world the client is currently viewing.
@@ -149,7 +148,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT Represents the client's own player.
 		COMMENT This field is not null when in game.
 	FIELD f_smmzzjzi chunkCullingEnabled Z
-	FIELD f_stzaywfn builtinPackProvider Lnet/minecraft/unmapped/C_tbwfpyke;
 	FIELD f_svhgkmyf window Lnet/minecraft/unmapped/C_snosbckc;
 	FIELD f_svhtflji worldRenderer Lnet/minecraft/unmapped/C_sfkkabhx;
 	FIELD f_swbnzydi creativeHotbarStorage Lnet/minecraft/unmapped/C_twtdhnqb;
@@ -192,8 +190,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 args
 	METHOD m_aaltpyph (Ljava/util/Optional;)V
 		ARG 1 optional
-	METHOD m_abpebclq createV4ResourcePackFactory (Ljava/util/function/Supplier;)Ljava/util/function/Supplier;
-		ARG 0 packFactory
 	METHOD m_abvhsfhz isInSingleplayer ()Z
 	METHOD m_adlanxiy getSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD m_aehcbacb getLevelStorage ()Lnet/minecraft/unmapped/C_bpwagnit;
@@ -207,8 +203,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_ayrxztdp setWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
 		ARG 1 world
 	METHOD m_bhnqqnmz getChatRestriction ()Lnet/minecraft/unmapped/C_ayfeobid$C_xucqfcml;
-	METHOD m_bnwpybdw createV3ResourcePackFactory (Ljava/util/function/Supplier;)Ljava/util/function/Supplier;
-		ARG 0 packFactory
 	METHOD m_bpwoykoi startMonitor (ZLnet/minecraft/unmapped/C_vuxtoiqa;)Lnet/minecraft/unmapped/C_eslcbfsq;
 		ARG 1 active
 		ARG 2 monitor
@@ -256,7 +250,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 chatMessageSender
 	METHOD m_fnnphfvj getEntityRenderDispatcher ()Lnet/minecraft/unmapped/C_gmkqxljo;
 	METHOD m_fquuldng isPaused ()Z
-	METHOD m_fsvbdqcr getResourcePackDir ()Ljava/io/File;
+	METHOD m_fsvbdqcr getResourcePackDir ()Ljava/nio/file/Path;
 	METHOD m_futlsgwc getWorldGenerationProgressTracker ()Lnet/minecraft/unmapped/C_qtaaqxsg;
 	METHOD m_fvpjtpsc updateWindowTitle ()V
 	METHOD m_gbdqzmqi getGameVersion ()Ljava/lang/String;
@@ -288,14 +282,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT
 		COMMENT <p>The integrated server is only present when a local single player world is open.
 	METHOD m_jtfycguy getVersionType ()Ljava/lang/String;
-	METHOD m_jtmjrjfi createResourcePackProfile (Ljava/lang/String;Lnet/minecraft/unmapped/C_rdaqiwdt;ZLjava/util/function/Supplier;Lnet/minecraft/unmapped/C_jyhxjfdl;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;Lnet/minecraft/unmapped/C_evnnymfu;)Lnet/minecraft/unmapped/C_lvnjxuwi;
-		ARG 0 name
-		ARG 1 displayName
-		ARG 2 alwaysEnabled
-		ARG 3 packFactory
-		ARG 4 metadata
-		ARG 5 insertionPosition
-		ARG 6 source
 	METHOD m_jytpvdsa countryEqualsISO3 (Ljava/lang/Object;)Z
 		ARG 0 o
 	METHOD m_kclqbfew cleanUpAfterCrash ()V
@@ -409,7 +395,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_uexoibsx endMonitor (ZLnet/minecraft/unmapped/C_vuxtoiqa;)V
 		ARG 1 active
 		ARG 2 monitor
-	METHOD m_uhbojajb getResourcePackProvider ()Lnet/minecraft/unmapped/C_tbwfpyke;
 	METHOD m_uhuiglxr isHudEnabled ()Z
 	METHOD m_upqckqnd getBakedModelManager ()Lnet/minecraft/unmapped/C_wosoicga;
 	METHOD m_usvofotc getCameraEntity ()Lnet/minecraft/unmapped/C_astfners;

@@ -15,13 +15,10 @@ CLASS net/minecraft/unmapped/C_lybmfibg net/minecraft/client/gui/hud/PlayerListH
 	FIELD f_gxlxtfhf BLINKING_HALF_HEART_U I
 	FIELD f_ivcfwzlg HALF_HEART_U I
 	FIELD f_jivanvnx BLINKING_HEART_U I
-	FIELD f_mbmyeysh showTime J
-		COMMENT The time, in milliseconds, when this HUD was last set to visible.
 	FIELD f_mzpxxguo MAX_ROWS I
 	FIELD f_rawrkdoa visible Z
 	FIELD f_smwibbex HALF_GOLDEN_HEART_U I
 	FIELD f_yxtxfrdr header Lnet/minecraft/unmapped/C_rdaqiwdt;
-	FIELD f_zrartmer ENTRY_ORDERING Lcom/google/common/collect/Ordering;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_nepwsmgw;)V
 		ARG 1 client
 		ARG 2 inGameHud
@@ -36,13 +33,12 @@ CLASS net/minecraft/unmapped/C_lybmfibg net/minecraft/client/gui/hud/PlayerListH
 	METHOD m_kyffpcde getPlayerName (Lnet/minecraft/unmapped/C_rdnfmxue;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		COMMENT {@return the player name rendered by this HUD}
 		ARG 1 entry
-	METHOD m_qkiaiqtl renderScoreboardObjective (Lnet/minecraft/unmapped/C_tlhwodcf;ILjava/lang/String;IILnet/minecraft/unmapped/C_rdnfmxue;Lnet/minecraft/unmapped/C_cnszsxvd;)V
+	METHOD m_qkiaiqtl renderScoreboardObjective (Lnet/minecraft/unmapped/C_tlhwodcf;ILjava/lang/String;IILjava/util/UUID;Lnet/minecraft/unmapped/C_cnszsxvd;)V
 		ARG 1 objective
 		ARG 2 y
 		ARG 3 player
 		ARG 4 startX
 		ARG 5 endX
-		ARG 6 entry
 		ARG 7 matrices
 	METHOD m_rdwisheo renderLatencyIcon (Lnet/minecraft/unmapped/C_cnszsxvd;IIILnet/minecraft/unmapped/C_rdnfmxue;)V
 		ARG 1 matrices
@@ -59,7 +55,3 @@ CLASS net/minecraft/unmapped/C_lybmfibg net/minecraft/client/gui/hud/PlayerListH
 		ARG 1 footer
 	METHOD m_xynqlahi setHeader (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 header
-	CLASS C_qqtogfdt EntryOrderComparator
-		METHOD compare (Ljava/lang/Object;Ljava/lang/Object;)I
-			ARG 1 a
-			ARG 2 b

@@ -16,27 +16,7 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePack
 	FIELD f_ihzpbdrq pinned Z
 	FIELD f_mbbqdjod position Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;
 	FIELD f_sdbibrem description Lnet/minecraft/unmapped/C_rdaqiwdt;
-	FIELD f_sukcqkmm packFactory Ljava/util/function/Supplier;
 	FIELD f_vyonutte LOGGER Lorg/slf4j/Logger;
-	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_rdaqiwdt;ZLjava/util/function/Supplier;Lnet/minecraft/unmapped/C_jyhxjfdl;Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;Lnet/minecraft/unmapped/C_evnnymfu;)V
-		ARG 1 name
-		ARG 2 displayName
-		ARG 3 alwaysEnabled
-		ARG 4 packFactory
-		ARG 5 metadata
-		ARG 6 type
-		ARG 7 direction
-		ARG 8 source
-	METHOD <init> (Ljava/lang/String;ZLjava/util/function/Supplier;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_pchdyjmm;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;ZLnet/minecraft/unmapped/C_evnnymfu;)V
-		ARG 1 name
-		ARG 2 alwaysEnabled
-		ARG 3 packFactory
-		ARG 4 displayName
-		ARG 5 description
-		ARG 6 compatibility
-		ARG 7 direction
-		ARG 8 pinned
-		ARG 9 source
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
 	METHOD m_apkmogas getInitialPosition ()Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;
@@ -52,7 +32,7 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePack
 		ARG 1 enabled
 	METHOD m_udfnquim getDisplayName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_vmckdhaa isAlwaysEnabled ()Z
-	METHOD m_ywpwwmpj of (Ljava/lang/String;ZLjava/util/function/Supplier;Lnet/minecraft/unmapped/C_lvnjxuwi$C_xtimkgms;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;Lnet/minecraft/unmapped/C_evnnymfu;)Lnet/minecraft/unmapped/C_lvnjxuwi;
+	METHOD m_ywpwwmpj of (Ljava/lang/String;Lnet/minecraft/unmapped/C_rdaqiwdt;ZLnet/minecraft/unmapped/C_lvnjxuwi$C_dwhnbqlk;Lnet/minecraft/unmapped/C_lvnjxuwi$C_mowpzosc;Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;ZLnet/minecraft/unmapped/C_evnnymfu;)Lnet/minecraft/unmapped/C_lvnjxuwi;
 		COMMENT Creates a resource pack profile from the given parameters.
 		COMMENT
 		COMMENT <p>Compared to calling the factory directly, this utility method obtains the
@@ -62,11 +42,9 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePack
 		COMMENT
 		COMMENT @return the created profile, or {@code null} if missing metadata
 		ARG 0 name
-		ARG 1 alwaysEnabled
-		ARG 2 packFactory
-		ARG 3 profileFactory
-		ARG 4 insertionPosition
-		ARG 5 packSource
+		ARG 2 alwaysEnabled
+		ARG 6 insertionPosition
+		ARG 8 packSource
 	CLASS C_vcyazcku InsertionPosition
 		METHOD m_blrbakor insert (Ljava/util/List;Ljava/lang/Object;Ljava/util/function/Function;Z)I
 			ARG 1 items
@@ -74,19 +52,3 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePack
 			ARG 3 profileGetter
 			ARG 4 listInverted
 		METHOD m_ingablvm inverse ()Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;
-	CLASS C_xtimkgms Factory
-		COMMENT A factory for resource pack profiles, somewhat resembling the constructor
-		COMMENT of {@link ResourcePackProfile} but allowing more customization.
-		METHOD create create (Ljava/lang/String;Lnet/minecraft/unmapped/C_rdaqiwdt;ZLjava/util/function/Supplier;Lnet/minecraft/unmapped/C_jyhxjfdl;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;Lnet/minecraft/unmapped/C_evnnymfu;)Lnet/minecraft/unmapped/C_lvnjxuwi;
-			COMMENT Creates a proper resource pack profile from the given parameters.
-			COMMENT
-			COMMENT @apiNote Instead of calling this method, users usually call {@link
-			COMMENT ResourcePackProfile#of}, which fills some of the parameters for a call to this
-			COMMENT method.
-			ARG 1 name
-			ARG 2 displayName
-			ARG 3 alwaysEnabled
-			ARG 4 packFactory
-			ARG 5 metadata
-			ARG 6 initialPosition
-			ARG 7 source
