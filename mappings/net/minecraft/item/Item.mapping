@@ -2,7 +2,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	FIELD f_abyetwgs BLOCK_ITEMS Ljava/util/Map;
 	FIELD f_aztyznjt EAT_DURATION I
 	FIELD f_bkclyjsj MAX_DURABILITY_BAR_WIDTH I
-	FIELD f_dednzptk group Lnet/minecraft/unmapped/C_lnokcayd;
 	FIELD f_ewqskwyi ATTACK_DAMAGE_MODIFIER_ID Ljava/util/UUID;
 	FIELD f_heedcfbq rarity Lnet/minecraft/unmapped/C_mqmixksm;
 	FIELD f_jphyibzg LOGGER Lorg/slf4j/Logger;
@@ -59,8 +58,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 stack
 	METHOD m_ectuffur onItemEntityDestroyed (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 entity
-	METHOD m_emzaramw isInGroup (Lnet/minecraft/unmapped/C_lnokcayd;)Z
-		ARG 1 group
 	METHOD m_fdjkxleb postProcessNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
 	METHOD m_fofdychq hasRecipeRemainder ()Z
@@ -203,12 +200,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 3 tooltip
 		ARG 4 context
 	METHOD m_vptgdmsr getDrinkSound ()Lnet/minecraft/unmapped/C_avavozay;
-	METHOD m_vsywafjh appendStacks (Lnet/minecraft/unmapped/C_lnokcayd;Lnet/minecraft/unmapped/C_rnrfftze;)V
-		COMMENT Appends the stacks of this item shown in the item group to the list.
-		COMMENT
-		COMMENT @see #isInGroup(ItemGroup)
-		ARG 1 group
-		ARG 2 stacks
 	METHOD m_wanuqhiu isUsedOnRelease (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
 	METHOD m_wfgwurwk isFood ()Z
@@ -237,10 +228,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT the player who used the item
 		ARG 3 hand
 			COMMENT the hand used
-	METHOD m_zydiaghn getGroup ()Lnet/minecraft/unmapped/C_lnokcayd;
 	CLASS C_bfrytpdl Settings
 		FIELD f_emilnckp recipeRemainder Lnet/minecraft/unmapped/C_vorddnax;
-		FIELD f_gdsvdjln group Lnet/minecraft/unmapped/C_lnokcayd;
 		FIELD f_kwbsetju fireproof Z
 		FIELD f_kzcrollt rarity Lnet/minecraft/unmapped/C_mqmixksm;
 		FIELD f_oyiluwcv maxCount I
@@ -283,12 +272,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT @return this instance
 			ARG 1 maxDamage
 				COMMENT maximum durability of an ItemStack using an item with this Item.Settings instance
-		METHOD m_rrqctnkv group (Lnet/minecraft/unmapped/C_lnokcayd;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
-			COMMENT Sets the ItemGroup of any item using this Settings instance. ItemGroups represent tabs in the creative inventory.
-			COMMENT
-			COMMENT @return this instance
-			ARG 1 group
-				COMMENT {@link ItemGroup itemGroup} to use
 		METHOD m_wuwttdfr food (Lnet/minecraft/unmapped/C_cgikuact;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT When set, any item configured with this Settings instance will be edible based on the provided {@link FoodComponent}.
 			COMMENT

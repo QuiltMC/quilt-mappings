@@ -13,19 +13,13 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 	METHOD m_acbaanbr create (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_bpwagnit;
 		ARG 0 path
 	METHOD m_ddtuooji getLevelList ()Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;
-	METHOD m_debloqwb (Ljava/nio/file/Path;)Z
-		ARG 0 path
+	METHOD m_debloqwb (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;)Z
 	METHOD m_dekygopt createLevelDataParser (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Z)Ljava/util/function/BiFunction;
 		ARG 1 directory
 		ARG 2 locked
-	METHOD m_dugbwxzi createLevelDataParser (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_tjllhmjy;Lcom/mojang/serialization/Lifecycle;)Ljava/util/function/BiFunction;
+	METHOD m_dugbwxzi createLevelDataParser (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Ljava/util/function/BiFunction;
 		ARG 0 ops
-		ARG 1 dataPackSettings
-		ARG 2 lifecycle
-	METHOD m_eixpqjce parseDataPackSettings (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_tjllhmjy;
-	METHOD m_gnclgumu (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;ZLjava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lnet/minecraft/unmapped/C_wfuumzdp;
-		ARG 3 path
-		ARG 4 dataFixer
+		ARG 3 lifecycle
 	METHOD m_kbwceymw loadCompactLevelData (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 0 path
 	METHOD m_kqxywods readLevelProperties (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Ljava/util/function/BiFunction;)Ljava/lang/Object;
@@ -39,22 +33,14 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 	METHOD m_pxqlqsgm getBackupsDirectory ()Ljava/nio/file/Path;
 	METHOD m_tcjbtdab isLevelNameValid (Ljava/lang/String;)Z
 		ARG 1 name
-	METHOD m_vjixqrgs readDataPackSettings (Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lnet/minecraft/unmapped/C_tjllhmjy;
-		ARG 0 path
-		ARG 1 dataFixer
-	METHOD m_wegrclwo readGeneratorProperties (Lcom/mojang/serialization/Dynamic;Lcom/mojang/datafixers/DataFixer;I)Lcom/mojang/datafixers/util/Pair;
+	METHOD m_wegrclwo readGeneratorProperties (Lcom/mojang/serialization/Dynamic;Lcom/mojang/datafixers/DataFixer;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 levelData
 		ARG 1 dataFixer
 		ARG 2 version
 	METHOD m_wewggpif getSavesDirectory ()Ljava/nio/file/Path;
-	METHOD m_wljqooar (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_tjllhmjy;Lcom/mojang/serialization/Lifecycle;Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lnet/minecraft/unmapped/C_jmmczzpb;
-		ARG 3 path
-		ARG 4 dataFixer
 	METHOD m_wspekgur loadSummaries (Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 levels
 	METHOD m_xvdymvqq getFormatName ()Ljava/lang/String;
-	METHOD m_yitrotqh (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;)Z
-		ARG 0 directory
 	CLASS C_aynhbbal LevelList
 		FIELD f_yifrugyf levels Ljava/util/List;
 		METHOD <init> (Ljava/util/List;)V
@@ -74,17 +60,15 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 		METHOD close close ()V
 		METHOD m_amukkubj checkValid ()V
 		METHOD m_bripcmby createSaveHandler ()Lnet/minecraft/unmapped/C_wnawwdpy;
-		METHOD m_cvcntfeb getDataPackSettings ()Lnet/minecraft/unmapped/C_tjllhmjy;
 		METHOD m_frlakpac getIconFile ()Ljava/util/Optional;
 		METHOD m_gdygeqrw getDirectory (Lnet/minecraft/unmapped/C_ldtdvgrs;)Ljava/nio/file/Path;
 			ARG 1 savePath
 		METHOD m_kytlqtwd getDirectoryName ()Ljava/lang/String;
 		METHOD m_ltpgwzhg save (Ljava/lang/String;)V
 			ARG 1 name
-		METHOD m_nhieafsm readLevelProperties (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_tjllhmjy;Lcom/mojang/serialization/Lifecycle;)Lnet/minecraft/unmapped/C_jkevluio;
+		METHOD m_nhieafsm readLevelProperties (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Lcom/mojang/datafixers/util/Pair;
 			ARG 1 ops
-			ARG 2 dataPackSettings
-			ARG 3 lifecycle
+			ARG 4 lifecycle
 		METHOD m_nrokxxpv createBackup ()J
 		METHOD m_nywumhbl backupLevelDataFile (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jkevluio;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 			ARG 1 registryManager
