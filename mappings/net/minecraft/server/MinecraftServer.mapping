@@ -15,7 +15,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	COMMENT
 	COMMENT @see net.minecraft.server.dedicated.MinecraftDedicatedServer
 	COMMENT @see net.minecraft.server.integrated.IntegratedServer
-	FIELD f_ajapxocy registryManager Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
 	FIELD f_cprjvpov playerManager Lnet/minecraft/unmapped/C_digmgtxw;
 	FIELD f_cyhowiqj pvpEnabled Z
 	FIELD f_dsjdzrap PLAYER_SAMPLE_UPDATE_INTERVAL J
@@ -98,8 +97,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 7 services
 		ARG 8 worldGenerationProgressListenerFactory
 	METHOD getServerModName getServerModName ()Ljava/lang/String;
-	METHOD m_aaqnapek (Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lcom/google/common/collect/ImmutableList;)Ljava/util/concurrent/CompletionStage;
-		ARG 2 resourcePacks
 	METHOD m_aazpmrxf getServerPort ()I
 	METHOD m_abjphurm getSpawnProtectionRadius ()I
 	METHOD m_abpffcdv setFlightEnabled (Z)V
@@ -138,8 +135,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_dowerpcm getFunctionPermissionLevel ()I
 	METHOD m_dqicdgka setFavicon (Lnet/minecraft/unmapped/C_bwttende;)V
 		ARG 1 metadata
-	METHOD m_dvprmwek (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_dzczqjri;)V
-		ARG 2 profileResult
 	METHOD m_eaqrsmuh getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
 	METHOD m_ekyjsxub dumpNativeModules (Ljava/nio/file/Path;)V
 		ARG 1 path
@@ -231,8 +226,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 shouldKeepTicking
 	METHOD m_kgrbsjbe dumpProperties (Ljava/nio/file/Path;)V
 		ARG 1 file
-	METHOD m_kkmyaeqx (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;)Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;
-		ARG 1 resources
 	METHOD m_klzymbhx getRunDirectory ()Ljava/io/File;
 	METHOD m_kpuwgkkc createFilterer (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_ibcyuwyk;
 		ARG 1 player
@@ -244,8 +237,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 playerManager
 	METHOD m_lhntuhvs getSpawnRadius (Lnet/minecraft/unmapped/C_bdwnwhiu;)I
 		ARG 1 world
-	METHOD m_ljdofyaz (Ljava/util/Collection;Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;)V
-		ARG 2 resourceManager
 	METHOD m_lprqwxbm setServerId (Ljava/lang/String;)V
 		ARG 1 serverId
 	METHOD m_magpcgdt getWorldRegistryKeys ()Ljava/util/Set;
@@ -301,9 +292,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 datapacks
 			COMMENT a collection of datapacks to reload with
 	METHOD m_qekqyjho shouldBroadcastRconToOps ()Z
-	METHOD m_qjmlhoou (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Ljava/lang/Throwable;)V
-		ARG 1 resources
-		ARG 2 throwable
 	METHOD m_qjvaquxt getWorlds ()Ljava/lang/Iterable;
 	METHOD m_quqvcwgc isRemote ()Z
 	METHOD m_qwvotguk setHostProfile (Lcom/mojang/authlib/GameProfile;)V
@@ -327,8 +315,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_scyblcyi setDemo (Z)V
 		ARG 1 demo
 	METHOD m_sdgenhxw isDebugRunning ()Z
-	METHOD m_sdxfrxgg (Lnet/minecraft/unmapped/C_frwmzmms$C_vohzovso;)Ljava/lang/String;
-		ARG 0 module
 	METHOD m_siswdodq forceStopRecorder ()V
 	METHOD m_spfqqear isRecorderActive ()Z
 	METHOD m_spqoqjba addServerGuiTickable (Ljava/lang/Runnable;)V
@@ -348,10 +334,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT @return true if the Minecraft server was successfully setup, false if the server failed to be setup.
 	METHOD m_thodqaod getPermissionLevel (Lcom/mojang/authlib/GameProfile;)I
 		ARG 1 profile
-	METHOD m_tnfyjhlb loadDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tjllhmjy;Z)Lnet/minecraft/unmapped/C_tjllhmjy;
-		ARG 0 resourcePackManager
-		ARG 1 dataPackSettings
-		ARG 2 safeMode
 	METHOD m_tnvwblvm getOpPermissionLevel ()I
 	METHOD m_tozcksne getPlayerManager ()Lnet/minecraft/unmapped/C_digmgtxw;
 	METHOD m_ttqfvxjp isHost (Lcom/mojang/authlib/GameProfile;)Z
@@ -410,10 +392,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_xejmgtcd setupRecorder (Ljava/util/function/Consumer;Ljava/util/function/Consumer;)V
 		ARG 1 resultConsumer
 		ARG 2 dumpConsumer
-	METHOD m_xenqirja (Ljava/util/Collection;Ljava/lang/String;)Z
-		ARG 1 dataPackName
-	METHOD m_xnhvxxzw (Ljava/nio/file/Path;)V
-		ARG 1 path
 	METHOD m_xpcjqhdz isDedicated ()Z
 		COMMENT Checks whether this server is a dedicated server.
 		COMMENT
@@ -442,7 +420,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_zsmhozky getCurrentPlayerCount ()I
 	METHOD m_zsxirona getServerIp ()Ljava/lang/String;
 	METHOD m_zvxfodpo runOneTask ()Z
-	METHOD m_zzqrecve shouldPreviewChat ()Z
 	CLASS C_eaujwdwn ResourceManagerHolder
 		FIELD f_nnwzxwwj resources Lnet/minecraft/unmapped/C_migzkpst;
 		FIELD f_scqzsofq resourceManager Lnet/minecraft/unmapped/C_carvbxzj;

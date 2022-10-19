@@ -132,7 +132,6 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	FIELD f_xmkpzbxy CONFIGURED_CARVER_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_xozaxjvq CHUNK_GENERATOR_SETTINGS_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_xqbirjbn NOISE_KEY Lnet/minecraft/unmapped/C_xhhleach;
-	FIELD f_xvnxehhy lifecycle Lcom/mojang/serialization/Lifecycle;
 	FIELD f_xwxfugyg WORLD_KEY Lnet/minecraft/unmapped/C_xhhleach;
 		COMMENT A registry key representing the {@link World} type. Can be used to obtain
 		COMMENT registry keys with the {@link World} type, such as that for the overworld.
@@ -182,13 +181,6 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	METHOD m_ckzkjowv getKeys ()Ljava/util/Set;
 	METHOD m_dixnzblu createIntrusiveHolder (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 1 holder
-	METHOD m_eovqcbhp getHolderOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv;
-		ARG 1 holder
-	METHOD m_etpsfofh registerSimple (Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Lifecycle;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_tqxyjqsk$C_umlcfeib;)Lnet/minecraft/unmapped/C_tqxyjqsk;
-		ARG 0 key
-		ARG 1 lifecycle
-		ARG 2 holderReference
-		ARG 3 bootstrap
 	METHOD m_fiunuwfp freeze ()Lnet/minecraft/unmapped/C_tqxyjqsk;
 	METHOD m_hcgrzopp bindTags (Ljava/util/Map;)V
 		ARG 1 tags
@@ -209,29 +201,15 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 3 entry
 	METHOD m_keyttxmd getTagOrEmpty (Lnet/minecraft/unmapped/C_ednuhnnn;)Ljava/lang/Iterable;
 		ARG 1 tag
-	METHOD m_kvmoilvz registerDefaulted (Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/String;Lcom/mojang/serialization/Lifecycle;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_tqxyjqsk$C_umlcfeib;)Lnet/minecraft/unmapped/C_zogerkic;
-		ARG 0 key
-		ARG 1 id
-		ARG 2 lifecycle
-		ARG 3 holderReference
-		ARG 4 bootstrap
 	METHOD m_leajtcub stream ()Ljava/util/stream/Stream;
 	METHOD m_lmydvkkg isKnownTag (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 		ARG 1 tag
 	METHOD m_mazpxlja get (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/lang/Object;
 		ARG 1 id
-	METHOD m_mfexjqmi getEntryLifecycle (Ljava/lang/Object;)Lcom/mojang/serialization/Lifecycle;
-		COMMENT Gets the lifecycle of a registry entry.
-		ARG 1 entry
 	METHOD m_mqvnokhq registerDefaulted (Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/String;Lcom/mojang/serialization/Lifecycle;Lnet/minecraft/unmapped/C_tqxyjqsk$C_umlcfeib;)Lnet/minecraft/unmapped/C_zogerkic;
 		ARG 0 key
 		ARG 1 id
 		ARG 2 lifecycle
-		ARG 3 bootstrap
-	METHOD m_mtwfmygo registerDefaulted (Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/String;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_tqxyjqsk$C_umlcfeib;)Lnet/minecraft/unmapped/C_zogerkic;
-		ARG 0 key
-		ARG 1 id
-		ARG 2 holderReference
 		ARG 3 bootstrap
 	METHOD m_nqhcjajy register (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 registry
@@ -239,10 +217,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 2 entry
 	METHOD m_nqoydeav getEntries ()Ljava/util/Set;
 	METHOD m_ojrrpohi getTagKeys ()Ljava/util/stream/Stream;
-	METHOD m_poqnljkr getLifeCylce ()Lcom/mojang/serialization/Lifecycle;
 	METHOD m_pquqhkot holderByNameCodec ()Lcom/mojang/serialization/Codec;
-	METHOD m_pselvvxn getOrCreateHolderOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv;
-		ARG 1 key
 	METHOD m_pvyfqcdo getCodec ()Lcom/mojang/serialization/Codec;
 	METHOD m_qeyctvgm asHolderIdMap ()Lnet/minecraft/unmapped/C_feaetnaz;
 	METHOD m_qomglfhh getOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/Object;

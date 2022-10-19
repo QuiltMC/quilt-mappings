@@ -2,9 +2,7 @@ CLASS net/minecraft/unmapped/C_xotldzgg net/minecraft/client/network/ServerInfo
 	COMMENT The information of a server entry in the list of servers available in
 	COMMENT the multiplayer screen from the menu. The list of these servers is
 	COMMENT stored in the {@code servers.dat} file within the client game directory.
-	FIELD f_cjubyndq chatPreview Lnet/minecraft/unmapped/C_xotldzgg$C_raxcnsqc;
 	FIELD f_eerbpgkv icon Ljava/lang/String;
-	FIELD f_ghfwwyeu chatPreviewEnabled Z
 	FIELD f_mdiurrlz playerListSummary Ljava/util/List;
 	FIELD f_mhqyygsj label Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_mwumxqyg ping J
@@ -15,22 +13,15 @@ CLASS net/minecraft/unmapped/C_xotldzgg net/minecraft/client/network/ServerInfo
 	FIELD f_sodyeuzw resourcePackPolicy Lnet/minecraft/unmapped/C_xotldzgg$C_jaeepxbv;
 	FIELD f_szafvlvu online Z
 	FIELD f_uyqyzmzi name Ljava/lang/String;
-	FIELD f_ycdzuckt LOGGER Lorg/slf4j/Logger;
 	FIELD f_zcrddhkf playerCountLabel Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD <init> (Ljava/lang/String;Ljava/lang/String;Z)V
 		ARG 1 name
 		ARG 2 address
 		ARG 3 local
-	METHOD m_aadirjls setChatPreviewEnabled (Z)V
-		ARG 1 chatPreviewEnabled
-	METHOD m_cspwwdgp getChatPreview ()Lnet/minecraft/unmapped/C_xotldzgg$C_raxcnsqc;
 	METHOD m_ladsvdvf getIcon ()Ljava/lang/String;
 	METHOD m_mdoomuzo setIcon (Ljava/lang/String;)V
 		ARG 1 icon
-	METHOD m_mfshuvbs (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
-		ARG 1 _chatPreview
 	METHOD m_mgdrmoly toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
-	METHOD m_mipnrigf hasChatPreview ()Z
 	METHOD m_ntjhtcjm copyWithSettingsFrom (Lnet/minecraft/unmapped/C_xotldzgg;)V
 		ARG 1 serverInfo
 	METHOD m_oaggwrmi parseFavicon (Ljava/lang/String;)Ljava/lang/String;
@@ -42,16 +33,12 @@ CLASS net/minecraft/unmapped/C_xotldzgg net/minecraft/client/network/ServerInfo
 		COMMENT accept server resource packs from this server in the future.
 		ARG 1 policy
 	METHOD m_vlebsryp isLocal ()Z
-	METHOD m_wouivfoz setPreviewsChat (Z)V
-		ARG 1 previewsChat
 	METHOD m_wtyyxnwz fromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_xotldzgg;
 		ARG 0 root
 	METHOD m_zimwwqts copyFrom (Lnet/minecraft/unmapped/C_xotldzgg;)V
 		ARG 1 serverInfo
 	METHOD m_zkpawdmx getResourcePackPolicy ()Lnet/minecraft/unmapped/C_xotldzgg$C_jaeepxbv;
 		COMMENT {@return the policy on resource packs sent by this server}
-	METHOD m_zwajbdhb (Lnet/minecraft/unmapped/C_xotldzgg;Lnet/minecraft/unmapped/C_xotldzgg$C_raxcnsqc;)V
-		ARG 1 chatPreview
 	CLASS C_jaeepxbv ResourcePackPolicy
 		COMMENT The policy of the client when this server sends a {@linkplain
 		COMMENT net.minecraft.network.packet.s2c.play.ResourcePackSendS2CPacket server
@@ -70,20 +57,3 @@ CLASS net/minecraft/unmapped/C_xotldzgg net/minecraft/client/network/ServerInfo
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
 			ARG 3 name
 		METHOD m_wccufzll getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-	CLASS C_raxcnsqc ChatPreview
-		FIELD f_idfecsfh toastShown Z
-		FIELD f_lyfntuky CODEC Lcom/mojang/serialization/Codec;
-		FIELD f_ouubrvii acknowledged Z
-		METHOD <init> (ZZ)V
-			ARG 1 acknowledge
-			ARG 2 toastShown
-		METHOD m_aheaqfwd (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-			ARG 0 instance
-		METHOD m_dvxcpvsl (Lnet/minecraft/unmapped/C_xotldzgg$C_raxcnsqc;)Ljava/lang/Boolean;
-			ARG 0 preview
-		METHOD m_gcbnwowp showToast ()Z
-		METHOD m_jyuhusut copy ()Lnet/minecraft/unmapped/C_xotldzgg$C_raxcnsqc;
-		METHOD m_uiqytskk setAcknowledged ()V
-		METHOD m_ukurqqrd (Lnet/minecraft/unmapped/C_xotldzgg$C_raxcnsqc;)Ljava/lang/Boolean;
-			ARG 0 preview
-		METHOD m_ynflmkkq isAcknowledged ()Z
