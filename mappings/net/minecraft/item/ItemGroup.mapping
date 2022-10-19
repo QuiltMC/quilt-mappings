@@ -1,11 +1,21 @@
 CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
+	FIELD f_dutzqtyc visibleInTab Lnet/minecraft/unmapped/C_voakmxnc;
 	FIELD f_eftpytbk icon Lnet/minecraft/unmapped/C_sddaxwyk;
+	FIELD f_fhtvcyky visibleInSearch Lnet/minecraft/unmapped/C_voakmxnc;
 	FIELD f_miirnahq translationKey Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ncvkfasf texture Ljava/lang/String;
 	FIELD f_sfwfnelq scrollbar Z
 	FIELD f_xkfcdxhm index I
 	FIELD f_ypvwgfta renderName Z
+	METHOD <init> (ILnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 index
+		ARG 2 translationKey
 	METHOD m_bvcnuvet isSpecial ()Z
+	METHOD m_bwauoqmb containsInSearch (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 set
+	METHOD m_cfeptysp getStacks (Lnet/minecraft/unmapped/C_czxxrbcp;Z)Lnet/minecraft/unmapped/C_voakmxnc;
+		ARG 1 set
+		ARG 2 inSearch
 	METHOD m_dmxzmcbi createIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_dnbejvnn hasScrollbar ()Z
 	METHOD m_frfpcrqq isTopRow ()Z
@@ -15,11 +25,44 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		COMMENT <p>The name is rendered below the top row of item groups and above the inventory.
 	METHOD m_iwnppnlh setTexture (Ljava/lang/String;)Lnet/minecraft/unmapped/C_lnokcayd;
 		ARG 1 texture
+	METHOD m_mziozlja clear ()V
+	METHOD m_npmupqba fill (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_lnokcayd$C_wnogvxsu;)V
+		ARG 1 flags
+		ARG 2 collector
+	METHOD m_nsgpxdxb getStacksInSearch (Lnet/minecraft/unmapped/C_czxxrbcp;)Lnet/minecraft/unmapped/C_voakmxnc;
+		ARG 1 set
 	METHOD m_ojgukxpb setNoScrollbar ()Lnet/minecraft/unmapped/C_lnokcayd;
 	METHOD m_oxvpyaqs getTexture ()Ljava/lang/String;
+	METHOD m_qngoqhkn getStacksInTab (Lnet/minecraft/unmapped/C_czxxrbcp;)Lnet/minecraft/unmapped/C_voakmxnc;
+		ARG 1 set
 	METHOD m_qsfftnyy hideName ()Lnet/minecraft/unmapped/C_lnokcayd;
 		COMMENT Specifies that when this item group is selected, the name of the item group should not be rendered.
 	METHOD m_tcbipafs getTranslationKey ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_tkahlerj getColumn ()I
 	METHOD m_uprbbsoi getIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_uribjksx getIndex ()I
+	CLASS C_qjyuivjw GatedItemCollector
+		FIELD f_alfldgtl requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
+		FIELD f_ewkqlato visibleInSearch Lnet/minecraft/unmapped/C_voakmxnc;
+		FIELD f_gynphoyu visibleInParent Lnet/minecraft/unmapped/C_voakmxnc;
+		FIELD f_tufxymik owner Lnet/minecraft/unmapped/C_lnokcayd;
+		METHOD <init> (Lnet/minecraft/unmapped/C_lnokcayd;Lnet/minecraft/unmapped/C_czxxrbcp;)V
+			ARG 1 owner
+			ARG 2 requiredFlags
+		METHOD m_fxchunju getVisibleInSearch ()Lnet/minecraft/unmapped/C_voakmxnc;
+		METHOD m_zlibfjti getVisibleInParent ()Lnet/minecraft/unmapped/C_voakmxnc;
+	CLASS C_tndlmady ItemVisibility
+	CLASS C_wnogvxsu ItemCollector
+		METHOD m_cgfqmabm addAll (Ljava/util/Collection;)V
+			ARG 1 stacks
+		METHOD m_hohqtcue add (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
+			ARG 1 item
+			ARG 2 visibility
+		METHOD m_jghywfri add (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
+			ARG 2 visibility
+		METHOD m_jljrlzid addAll (Ljava/util/Collection;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
+			ARG 1 stacks
+			ARG 2 visibility
+		METHOD m_lhspmles add (Lnet/minecraft/unmapped/C_sddaxwyk;)V
+		METHOD m_rgrwuewj add (Lnet/minecraft/unmapped/C_gmbqjnle;)V
+			ARG 1 item
