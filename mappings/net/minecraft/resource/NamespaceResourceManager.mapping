@@ -8,9 +8,15 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 		ARG 2 namespace
 	METHOD m_aycxhzro getMetadataPath (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 0 id
+	METHOD m_cnowmawm getReadSupplier (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_zccdhhqk;
+		ARG 0 id
+		ARG 2 original
 	METHOD m_dyzgrmts addPack (Lnet/minecraft/unmapped/C_tguinuvn;Ljava/util/function/Predicate;)V
 		ARG 1 pack
 		ARG 2 filter
+	METHOD m_fnnnviyo (Ljava/util/function/Predicate;Ljava/util/Map;Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_zccdhhqk;)V
+		ARG 3 path
+		ARG 4 readSupplier
 	METHOD m_hkrcaact addPack (Lnet/minecraft/unmapped/C_tguinuvn;)V
 		ARG 1 pack
 	METHOD m_hntltsni findResourcesOf (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;Ljava/lang/String;Ljava/util/function/Predicate;Ljava/util/Map;)V
@@ -18,6 +24,15 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 		ARG 2 startingPath
 		ARG 3 pathFilter
 		ARG 4 resources
+	METHOD m_iicutfno getResourcePathFromMetadataPath (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 0 id
+	METHOD m_kcnkkzsn (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;)Lnet/minecraft/unmapped/C_tguinuvn;
+		ARG 0 pack
+	METHOD m_kxyhinjf (Ljava/util/function/Predicate;Ljava/util/Map;Lnet/minecraft/unmapped/C_tguinuvn;ILjava/util/Map;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_zccdhhqk;)V
+		ARG 5 path
+		ARG 6 readSupplier
+	METHOD m_lqmmqomr getResourceMetadataSupplier (Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_zccdhhqk;
+		ARG 0 readSupplier
 	METHOD m_pbwncwwu getMetadataReader (Lnet/minecraft/unmapped/C_ncpywfca;I)Lnet/minecraft/unmapped/C_zccdhhqk;
 		ARG 1 path
 		ARG 2 packIndex
@@ -28,14 +43,41 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 	METHOD m_qgiogzsf addPack (Ljava/lang/String;Ljava/util/function/Predicate;)V
 		ARG 1 name
 		ARG 2 filter
+	METHOD m_rxfgyxkj (Ljava/util/Map;Ljava/util/Map;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_aejwawvo$C_tiygmwnw;)V
+		ARG 2 path
+		ARG 3 entry
+	METHOD m_siazzzxz getResourceMetadataFromInputStream (Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_bzrwskbr;
+		ARG 0 readSupplier
+	METHOD m_uhymwqrl createResource (Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_zccdhhqk;Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_tuynegco;
+		ARG 1 id
+		ARG 2 readSupplier
+		ARG 3 metadataSupplier
 	METHOD m_wouyhykl applyResourceFiltersToResources (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;Ljava/util/Map;)V
 		ARG 0 pack
 		ARG 1 resources
+	METHOD m_zilcqyqm isMetadataPath (Lnet/minecraft/unmapped/C_ncpywfca;)Z
+		ARG 0 id
 	CLASS C_ffuwstjy ResourceEntries
+		FIELD f_fvbbqyhn metadataSources Ljava/util/Map;
+		FIELD f_kzegmwcm path Lnet/minecraft/unmapped/C_ncpywfca;
 		FIELD f_yfdzmjku metadataId Lnet/minecraft/unmapped/C_ncpywfca;
+		METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;)V
+			ARG 1 path
+		METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/List;Ljava/util/Map;)V
+			ARG 1 path
+			ARG 2 metadataId
+			ARG 4 metadataSources
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
+		METHOD m_mxxgyemx metadataSources ()Ljava/util/Map;
+		METHOD m_ocfiwyje path ()Lnet/minecraft/unmapped/C_ncpywfca;
 		METHOD m_pjhuyvag metadataId ()Lnet/minecraft/unmapped/C_ncpywfca;
+	CLASS C_shzbvflf ResourceEntry
+	CLASS C_tiygmwnw FindResourceEntry
+		FIELD f_hpaxoaof resourcePack Lnet/minecraft/unmapped/C_tguinuvn;
+		METHOD <init> (Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_zccdhhqk;I)V
+			ARG 1 resourcePack
+		METHOD m_xnqxqxba resourcePack ()Lnet/minecraft/unmapped/C_tguinuvn;
 	CLASS C_vpsqfwkd PackEntry
 		FIELD f_bmuebumu pack Lnet/minecraft/unmapped/C_tguinuvn;
 		FIELD f_fzxpfzpi name Ljava/lang/String;
