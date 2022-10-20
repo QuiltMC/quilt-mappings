@@ -3,8 +3,8 @@ const { context, getOctokit } = require('@actions/github');
 
 const updateLabel = 'update-base';
 const outdatedLabel = 'outdated';
-const releaseLabel = 'release';
-const snapshotLabel = 'snapshot';
+const releaseLabel = 'v: release';
+const snapshotLabel = 'v: snapshot';
 
 async function main() {
     const token = core.getInput('github-token', { required: true });
