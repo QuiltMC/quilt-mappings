@@ -1,0 +1,94 @@
+CLASS net/minecraft/unmapped/C_yxnjfniw net/minecraft/client/texture/SpriteContents
+	FIELD f_dhiznymr height I
+	FIELD f_dmhnfqby width I
+	FIELD f_izzfdnbx frames Lnet/minecraft/unmapped/C_yxnjfniw$C_jdjmjndn;
+	FIELD f_paosgjng image Lnet/minecraft/unmapped/C_ayikuhxa;
+	FIELD f_ziyojtxg mipImages [Lnet/minecraft/unmapped/C_ayikuhxa;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_nrllqdla;Lnet/minecraft/unmapped/C_ayikuhxa;Lnet/minecraft/unmapped/C_upzqjtby;)V
+		ARG 2 frameSize
+		ARG 3 image
+		ARG 4 metadata
+	METHOD close close ()V
+	METHOD m_dtpczaij frameCount ()I
+	METHOD m_fhczwgcl generateMips (I)V
+		ARG 1 mipLevels
+	METHOD m_gqsorzmb createAnimatedTexture (Lnet/minecraft/unmapped/C_nrllqdla;IILnet/minecraft/unmapped/C_upzqjtby;)Lnet/minecraft/unmapped/C_yxnjfniw$C_jdjmjndn;
+		ARG 1 frameSize
+		ARG 2 width
+		ARG 3 height
+		ARG 4 metadata
+	METHOD m_ijqftzlu isTransparent (III)Z
+		ARG 1 index
+		ARG 2 x
+		ARG 3 y
+	METHOD m_jqpiedvv (Lit/unimi/dsi/fastutil/ints/IntSet;I)Z
+		ARG 0 index
+		ARG 1 i
+	METHOD m_lztfhodf (Ljava/util/List;II)V
+		ARG 1 index
+		ARG 2 info
+	METHOD m_rvsqzxsk uploadFirstFrame (II)V
+		ARG 1 offsetX
+		ARG 2 offsetY
+	METHOD m_rweengxi getSpriteTicker ()Lnet/minecraft/unmapped/C_ebwngygj;
+	METHOD m_sbqpqrht upload (IIII[Lnet/minecraft/unmapped/C_ayikuhxa;)V
+		ARG 1 offsetX
+		ARG 2 offsetY
+		ARG 3 unpackSkipPixels
+		ARG 4 unpackSkipRows
+		ARG 5 frames
+	METHOD m_tzztdspz getUniqueFrames ()Ljava/util/stream/IntStream;
+	CLASS C_jdjmjndn AnimatedTexture
+		FIELD f_isebilaf shouldInterpolate Z
+		FIELD f_rsfaceqs frameRowSize I
+		FIELD f_uxhtcigu frameInfos Ljava/util/List;
+		METHOD <init> (Lnet/minecraft/unmapped/C_yxnjfniw;Ljava/util/List;IZ)V
+			ARG 2 frameInfo
+			ARG 3 frameRowSize
+			ARG 4 shouldInterpolate
+		METHOD m_hvjndqzs uploadFrame (III)V
+			ARG 1 offsetX
+			ARG 2 offsetY
+			ARG 3 index
+		METHOD m_pptkmkyo getFrameY (I)I
+			ARG 1 index
+		METHOD m_qtfmsvma getSpriteTicker ()Lnet/minecraft/unmapped/C_ebwngygj;
+		METHOD m_txotpzsm getUniqueFrames ()Ljava/util/stream/IntStream;
+		METHOD m_wcsatvjr getFrameX (I)I
+			ARG 1 index
+		METHOD m_xfcahmqf (Lnet/minecraft/unmapped/C_yxnjfniw$C_oqohpiom;)I
+			ARG 0 info
+		METHOD m_zxxnnief uploadFirstFrame (II)V
+			ARG 1 offsetX
+			ARG 2 offsetY
+	CLASS C_oqohpiom FrameInfo
+		FIELD f_bsadgahu index I
+		FIELD f_ukvpfeqf time I
+		METHOD <init> FrameInfo (II)V
+			ARG 1 index
+			ARG 2 time
+	CLASS C_qhotanqa InterpolatedFrameTicker
+		FIELD f_sqhnnzti frameIndex I
+		FIELD f_tgpqdsxm animatedTexture Lnet/minecraft/unmapped/C_yxnjfniw$C_jdjmjndn;
+		FIELD f_xolnzcgu interpolator Lnet/minecraft/unmapped/C_yxnjfniw$C_thgmdldj;
+		FIELD f_zprnyxqt nextFrameIndex I
+		METHOD <init> (Lnet/minecraft/unmapped/C_yxnjfniw;Lnet/minecraft/unmapped/C_yxnjfniw$C_jdjmjndn;Lnet/minecraft/unmapped/C_yxnjfniw$C_thgmdldj;)V
+			ARG 2 animatedTexure
+			ARG 3 interpolator
+	CLASS C_thgmdldj FrameInterpolator
+		FIELD f_gddrvoox images [Lnet/minecraft/unmapped/C_ayikuhxa;
+		METHOD close close ()V
+		METHOD m_ofvsfruh interpolate (DII)I
+			ARG 1 level
+			ARG 3 a
+			ARG 4 b
+		METHOD m_qkemdian getPixel (Lnet/minecraft/unmapped/C_yxnjfniw$C_jdjmjndn;IIII)I
+			ARG 1 texture
+			ARG 2 frame
+			ARG 3 mipLevel
+			ARG 4 x
+			ARG 5 y
+		METHOD m_tkyhctwu uploadInterpolatedFrame (IILnet/minecraft/unmapped/C_yxnjfniw$C_qhotanqa;)V
+			ARG 1 offsetX
+			ARG 2 offsetY
+			ARG 3 ticker

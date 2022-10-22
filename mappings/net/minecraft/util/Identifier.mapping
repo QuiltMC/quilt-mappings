@@ -16,6 +16,10 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 	METHOD <init> (Ljava/lang/String;Ljava/lang/String;)V
 		ARG 1 namespace
 		ARG 2 path
+	METHOD <init> (Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca$C_fasvqmvy;)V
+		ARG 1 namespace
+		ARG 2 path
+		ARG 3 dummy
 	METHOD <init> ([Ljava/lang/String;)V
 		ARG 1 id
 	METHOD compareTo (Ljava/lang/Object;)I
@@ -27,6 +31,8 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 		ARG 1 delimiter
 	METHOD m_bkdtomxa isPathCharacterValid (C)Z
 		ARG 0 character
+	METHOD m_busiuktr prependPath (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 predend
 	METHOD m_hokecmdu isPathValid (Ljava/lang/String;)Z
 		ARG 0 path
 	METHOD m_hwomsdhy isNamespaceCharacterValid (C)Z
@@ -35,8 +41,13 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 		ARG 0 c
 	METHOD m_kwahahgw fromCommandInput (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 0 reader
+	METHOD m_lxrliuax isPathValid (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 namespace
+		ARG 1 path
 	METHOD m_mtmkuzyt isNamespaceValid (Ljava/lang/String;)Z
 		ARG 0 namespace
+	METHOD m_mtmyhkca withPath (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 newPath
 	METHOD m_nhmrvcba split (Ljava/lang/String;C)[Ljava/lang/String;
 		ARG 0 id
 		ARG 1 delimiter
@@ -51,7 +62,15 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 		COMMENT Takes a string of the form {@code <namespace>:<path>}, for example {@code minecraft:iron_ingot}.
 		COMMENT @return resulting identifier, or {@code null} if the string couldn't be parsed as an identifier
 		ARG 0 id
+	METHOD m_ymfwdjmq isNamespaceValid (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 namespace
+		ARG 1 path
 	METHOD m_yyrvqafp getPath ()Ljava/lang/String;
+	METHOD m_yzofquyk withPath (Ljava/util/function/UnaryOperator;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 pathOperator
+	METHOD m_zcrfpfxe createMaybeInvalid (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 0 namespace
+		ARG 1 path
 	CLASS C_duwyvzzl Serializer
 		METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 			ARG 1 json
@@ -61,3 +80,4 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 			ARG 1 id
 			ARG 2 type
 			ARG 3 context
+	CLASS C_fasvqmvy CreateWithNoChecks
