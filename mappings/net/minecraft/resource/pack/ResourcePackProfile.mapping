@@ -1,13 +1,13 @@
 CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePackProfile
 	COMMENT Represents a resource pack in a {@link ResourcePackManager}.
-	COMMENT
-	COMMENT <p>Compared to a single-use {@link ResourcePack}, a profile is persistent
+	COMMENT <p>
+	COMMENT Compared to a single-use {@link ResourcePack}, a profile is persistent
 	COMMENT and serves as {@linkplain #createResourcePack a factory} for the single-use
 	COMMENT packs. It also contains user-friendly information about resource packs.
-	COMMENT
-	COMMENT <p>The profiles are registered by {@link ResourcePackProvider}s.
-	COMMENT
-	COMMENT <p>Closing the profile doesn't have any effect.
+	COMMENT <p>
+	COMMENT The profiles are registered by {@link ResourcePackProvider}s.
+	COMMENT <p>
+	COMMENT Closing the profile doesn't have any effect.
 	FIELD f_cuhyvwqg source Lnet/minecraft/unmapped/C_evnnymfu;
 	FIELD f_dlfeftlm compatibility Lnet/minecraft/unmapped/C_pchdyjmm;
 	FIELD f_duevtuyb alwaysEnabled Z
@@ -38,8 +38,18 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePack
 	METHOD m_imaaowzj createResourcePack ()Lnet/minecraft/unmapped/C_tguinuvn;
 	METHOD m_jvtuqqod getCompatibility ()Lnet/minecraft/unmapped/C_pchdyjmm;
 	METHOD m_jzttceef of (Ljava/lang/String;Lnet/minecraft/unmapped/C_rdaqiwdt;ZLnet/minecraft/unmapped/C_lvnjxuwi$C_dwhnbqlk;Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;Lnet/minecraft/unmapped/C_evnnymfu;)Lnet/minecraft/unmapped/C_lvnjxuwi;
+		COMMENT Creates a resource pack profile from the given parameters.
+		COMMENT <p>
+		COMMENT Compared to calling the other {@code of} method, this utility method obtains the
+		COMMENT pack's metadata information from the pack created by the {@code packFactory}.
+		COMMENT If the created pack doesn't have metadata information, this method returns
+		COMMENT {@code null}.
+		COMMENT
+		COMMENT @return the created profile, or {@code null} if missing metadata
 		ARG 0 name
+			COMMENT the resource pack name
 		ARG 1 displayName
+			COMMENT the resource pack display name
 		ARG 2 alwaysEnabled
 		ARG 3 packFactory
 		ARG 4 type
@@ -59,14 +69,11 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePack
 	METHOD m_ywpwwmpj of (Ljava/lang/String;Lnet/minecraft/unmapped/C_rdaqiwdt;ZLnet/minecraft/unmapped/C_lvnjxuwi$C_dwhnbqlk;Lnet/minecraft/unmapped/C_lvnjxuwi$C_mowpzosc;Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_lvnjxuwi$C_vcyazcku;ZLnet/minecraft/unmapped/C_evnnymfu;)Lnet/minecraft/unmapped/C_lvnjxuwi;
 		COMMENT Creates a resource pack profile from the given parameters.
 		COMMENT
-		COMMENT <p>Compared to calling the factory directly, this utility method obtains the
-		COMMENT pack's metadata information from the pack created by the {@code packFactory}.
-		COMMENT If the created pack doesn't have metadata information, this method returns
-		COMMENT {@code null}.
-		COMMENT
-		COMMENT @return the created profile, or {@code null} if missing metadata
+		COMMENT @return the created profile
 		ARG 0 name
+			COMMENT the resource pack name
 		ARG 1 displayName
+			COMMENT the resource pack display name
 		ARG 2 alwaysEnabled
 		ARG 3 packFactory
 		ARG 4 info
@@ -75,7 +82,7 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/ResourcePack
 		ARG 7 pinned
 		ARG 8 source
 	CLASS C_dwhnbqlk ResourcePackFactory
-		METHOD open open (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tguinuvn;
+		METHOD open create (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tguinuvn;
 			ARG 1 name
 	CLASS C_mowpzosc Info
 		METHOD m_scojbpqu getCompatibility (Lnet/minecraft/unmapped/C_abwutbbk;)Lnet/minecraft/unmapped/C_pchdyjmm;
