@@ -8,6 +8,7 @@ CLASS net/minecraft/unmapped/C_mavozmpp net/minecraft/client/font/TextRenderer
 	FIELD f_djuoyxbd fontStorageAccessor Ljava/util/function/Function;
 	FIELD f_eewsyjvi random Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_gdulearj handler Lnet/minecraft/unmapped/C_wtqrualh;
+	FIELD f_kpfbvghh FORWARD_SHIFT Lorg/joml/Vector3f;
 	FIELD f_neyverfp filterFishyGlyphs Z
 	FIELD f_pslhooyu STYLE_Z_DEPTH F
 	FIELD f_tlwizsry fontHeight I
@@ -39,6 +40,29 @@ CLASS net/minecraft/unmapped/C_mavozmpp net/minecraft/client/font/TextRenderer
 		ARG 9 codePoint
 	METHOD m_kacxmmhx getFontStorage (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zhhoxunt;
 		ARG 1 id
+	METHOD m_kocfwjow drawWithOutline (Lnet/minecraft/unmapped/C_apvkgwyi;FFIILorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_igrgeffe;I)V
+		ARG 1 text
+		ARG 2 x
+		ARG 3 y
+		ARG 4 color
+			COMMENT the text color in 0xAARRGGBB
+		ARG 5 outlineColor
+			COMMENT the outline color in 0xAARRGGBB
+		ARG 7 vertexConsumers
+		ARG 8 light
+	METHOD m_kusxcgpe drawGlyph (Lnet/minecraft/unmapped/C_wrqtxozz;ZZFFFLorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_igthdzux;FFFFI)V
+		ARG 1 glyphRenderer
+		ARG 2 bold
+		ARG 3 italic
+		ARG 4 weight
+		ARG 5 x
+		ARG 6 y
+		ARG 8 vertexConsumer
+		ARG 9 red
+		ARG 10 green
+		ARG 11 blue
+		ARG 12 alpha
+		ARG 13 light
 	METHOD m_mbklfcqa trimToWidth (Lnet/minecraft/unmapped/C_xzalvetc;I)Lnet/minecraft/unmapped/C_xzalvetc;
 		COMMENT Trims a string to be at most {@code maxWidth} wide.
 		COMMENT
@@ -139,6 +163,7 @@ CLASS net/minecraft/unmapped/C_mavozmpp net/minecraft/client/font/TextRenderer
 		FIELD f_jwoulaub vertexConsumers Lnet/minecraft/unmapped/C_igrgeffe;
 		FIELD f_nfpeboex rectangles Ljava/util/List;
 		FIELD f_oscflpul shadow Z
+		FIELD f_prqpxqtw matrix Lorg/joml/Matrix4f;
 		FIELD f_pwfetdnl light I
 		FIELD f_vbjyagfe x F
 		METHOD m_gtubnxdf drawLayer (IF)F
