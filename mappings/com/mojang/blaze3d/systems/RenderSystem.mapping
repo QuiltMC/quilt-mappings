@@ -5,30 +5,24 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	FIELD RENDER_THREAD_TESSELATOR RENDER_THREAD_TESSELATOR Lnet/minecraft/unmapped/C_hiiunyvh;
 	FIELD apiDescription apiDescription Ljava/lang/String;
 	FIELD gameThread gameThread Ljava/lang/Thread;
-	FIELD inverseViewRotationMatrix inverseViewRotationMatrix Lnet/minecraft/unmapped/C_crutkuff;
 	FIELD isInInit isInInit Z
 	FIELD isReplayingQueue isReplayingQueue Z
 	FIELD lastDrawTime lastDrawTime D
-	FIELD modelViewMatrix modelViewMatrix Lnet/minecraft/unmapped/C_gxvddjib;
-	FIELD modelViewStack modelViewStack Lnet/minecraft/unmapped/C_cnszsxvd;
-	FIELD projectionMatrix projectionMatrix Lnet/minecraft/unmapped/C_gxvddjib;
+	FIELD modelViewStack MODEL_VIEW_STACK Lnet/minecraft/unmapped/C_cnszsxvd;
 	FIELD recordingQueue RECORDING_QUEUE Ljava/util/concurrent/ConcurrentLinkedQueue;
 	FIELD renderThread renderThread Ljava/lang/Thread;
-	FIELD savedProjectionMatrix savedProjectionMatrix Lnet/minecraft/unmapped/C_gxvddjib;
 	FIELD shaderColor shaderColor [F
 	FIELD shaderFogColor shaderFogColor [F
 	FIELD shaderFogEnd shaderFogEnd F
 	FIELD shaderFogShape shaderFogShape Lnet/minecraft/unmapped/C_jlqrymlp;
 	FIELD shaderFogStart shaderFogStart F
 	FIELD shaderGameTime shaderGameTime F
-	FIELD shaderLightDirections shaderLightDirections [Lnet/minecraft/unmapped/C_zviwfwgf;
 	FIELD shaderLineWidth shaderLineWidth F
 	FIELD shader shader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD shaderTextures shaderTextures [I
 	FIELD sharedSequential SHARED_SEQUENTIAL Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 	FIELD sharedSequentialLines SHARED_SEQUENTIAL_LINES Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 	FIELD sharedSequentialQuad SHARED_SEQUENTIAL_QUAD Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
-	FIELD textureMatrix textureMatrix Lnet/minecraft/unmapped/C_gxvddjib;
 	METHOD _backupProjectionMatrix _backupProjectionMatrix ()V
 	METHOD _restoreProjectionMatrix _restoreProjectionMatrix ()V
 	METHOD _setShaderColor _setShaderColor (FFFF)V
@@ -47,9 +41,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 0 shape
 	METHOD _setShaderFogStart _setShaderFogStart (F)V
 		ARG 0 fogStart
-	METHOD _setShaderLights _setShaderLights (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
-		ARG 0 light0
-		ARG 1 light1
 	METHOD _setShaderTexture _setShaderTexture (II)V
 		ARG 0 location
 		ARG 1 textureId
@@ -141,10 +132,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD getApiDescription getApiDescription ()Ljava/lang/String;
 	METHOD getBackendDescription getBackendDescription ()Ljava/lang/String;
 	METHOD getCapsString getCapsString ()Ljava/lang/String;
-	METHOD getInverseViewRotationMatrix getInverseViewRotationMatrix ()Lnet/minecraft/unmapped/C_crutkuff;
-	METHOD getModelViewMatrix getModelViewMatrix ()Lnet/minecraft/unmapped/C_gxvddjib;
 	METHOD getModelViewStack getModelViewStack ()Lnet/minecraft/unmapped/C_cnszsxvd;
-	METHOD getProjectionMatrix getProjectionMatrix ()Lnet/minecraft/unmapped/C_gxvddjib;
 	METHOD getSequentialBuffer getSequentialBuffer (Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;)Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 	METHOD getShader getShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD getShaderColor getShaderColor ()[F
@@ -161,7 +149,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 1 consumer
 	METHOD getTextureId getTextureId (I)I
 		ARG 0 internalId
-	METHOD getTextureMatrix getTextureMatrix ()Lnet/minecraft/unmapped/C_gxvddjib;
 	METHOD glBindBuffer glBindBuffer (ILjava/util/function/IntSupplier;)V
 		ARG 0 target
 		ARG 1 buffer
@@ -270,10 +257,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 0 runnable
 	METHOD setErrorCallback setErrorCallback (Lorg/lwjgl/glfw/GLFWErrorCallbackI;)V
 		ARG 0 callback
-	METHOD setInverseViewRotationMatrix setInverseViewRotationMatrix (Lnet/minecraft/unmapped/C_crutkuff;)V
-		ARG 0 inverseViewRotationMatrix
-	METHOD setProjectionMatrix setProjectionMatrix (Lnet/minecraft/unmapped/C_gxvddjib;)V
-		ARG 0 projectionMatrix
 	METHOD setShader setShader (Ljava/util/function/Supplier;)V
 		ARG 0 shader
 	METHOD setShaderColor setShaderColor (FFFF)V
@@ -299,32 +282,17 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD setShaderGameTime setShaderGameTime (JF)V
 		ARG 0 ticks
 		ARG 2 tickDelta
-	METHOD setShaderLights setShaderLights (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
-		ARG 0 light0
-		ARG 1 light1
 	METHOD setShaderTexture setShaderTexture (II)V
 		ARG 0 location
 		ARG 1 textureId
 	METHOD setShaderTexture setShaderTexture (ILnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 0 location
 		ARG 1 texture
-	METHOD setTextureMatrix setTextureMatrix (Lnet/minecraft/unmapped/C_gxvddjib;)V
-		ARG 0 textureMatrix
 	METHOD setupDefaultState setupDefaultState (IIII)V
 		ARG 0 x
 		ARG 1 y
 		ARG 2 width
 		ARG 3 height
-	METHOD setupGui3DDiffuseLighting setupGui3DDiffuseLighting (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
-		ARG 0 light0
-		ARG 1 light1
-	METHOD setupGuiFlatDiffuseLighting setupGuiFlatDiffuseLighting (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;)V
-		ARG 0 light0
-		ARG 1 light1
-	METHOD setupLevelDiffuseLighting setupLevelDiffuseLighting (Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_zviwfwgf;Lnet/minecraft/unmapped/C_gxvddjib;)V
-		ARG 0 light0
-		ARG 1 light1
-		ARG 2 modelMatrix
 	METHOD setupOverlayColor setupOverlayColor (Ljava/util/function/IntSupplier;I)V
 		ARG 0 texture
 		ARG 1 size

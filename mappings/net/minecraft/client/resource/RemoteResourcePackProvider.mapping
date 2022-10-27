@@ -1,0 +1,37 @@
+CLASS net/minecraft/unmapped/C_aqwrwsxs net/minecraft/client/resource/RemoteResourcePackProvider
+	FIELD f_amjzhjsb SHA1_PATTERN Ljava/util/regex/Pattern;
+	FIELD f_bklyozof MAX_PACK_SIZE_BYTES I
+		COMMENT Represents the maximum size in bytes a resource pack can be, which is {@value}b.
+	FIELD f_gygrqtbq serverContainer Lnet/minecraft/unmapped/C_lvnjxuwi;
+	FIELD f_hojwdqoj downloadTask Ljava/util/concurrent/CompletableFuture;
+	FIELD f_pxmzissv APPLYING_PACK_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_xjoztjwf SERVER_ID Ljava/lang/String;
+	FIELD f_xvmkwkwi MAX_SAVED_PACKS I
+	FIELD f_yicgvnrh SERVER_RESOURCE_PACK_DESCRIPTION_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_zuomnfit serverPacksRoot Ljava/io/File;
+	FIELD f_zuzcepht lock Ljava/util/concurrent/locks/ReentrantLock;
+	METHOD <init> (Ljava/io/File;)V
+		ARG 1 serverPacksRoot
+	METHOD m_dozzrhtx deleteOldServerPack ()V
+	METHOD m_gdakhqum (Ljava/io/File;Ljava/lang/String;)Lnet/minecraft/unmapped/C_tguinuvn;
+		ARG 1 name
+	METHOD m_hzqxgbrv clear ()Ljava/util/concurrent/CompletableFuture;
+	METHOD m_juzrysmq delete (Ljava/io/File;)V
+		ARG 0 file
+	METHOD m_okqmdxtq download (Ljava/net/URL;Ljava/lang/String;Z)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 url
+		ARG 2 sha1
+		ARG 3 closeAfterDownload
+	METHOD m_rbhjxntf getDownloadHeaders ()Ljava/util/Map;
+	METHOD m_tpajneba loadServerPack (Ljava/io/File;Lnet/minecraft/unmapped/C_evnnymfu;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 packZip
+		ARG 2 packSource
+	METHOD m_vrhniskz loadServerPack (Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 storageSession
+	METHOD m_xukvvvxw verifyFile (Ljava/lang/String;Ljava/io/File;)Z
+		ARG 1 expectedSha1
+		ARG 2 file
+	METHOD m_xuyxusil (Ljava/io/File;Lnet/minecraft/unmapped/C_ayfeobid;Ljava/lang/Throwable;)Ljava/util/concurrent/CompletionStage;
+		ARG 3 error
+	METHOD m_ylpxtxjl (Lnet/minecraft/unmapped/C_ayfeobid;Z)V
+		ARG 1 confirmed
