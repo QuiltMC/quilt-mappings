@@ -10,6 +10,7 @@ CLASS net/minecraft/unmapped/C_cnszsxvd net/minecraft/client/util/math/MatrixSta
 	METHOD m_bdztuoiy pop ()V
 		COMMENT Pops the current matrices from the stack.
 	METHOD m_bswsfipx multiply (Lorg/joml/Quaternionf;)V
+		ARG 1 quaternion
 	METHOD m_cavdvhuq scale (FFF)V
 		COMMENT Scales the current model and normal matrices.
 		ARG 1 x
@@ -22,17 +23,37 @@ CLASS net/minecraft/unmapped/C_cnszsxvd net/minecraft/client/util/math/MatrixSta
 		COMMENT Pushes a new model and normal matrix onto the stack.
 	METHOD m_eivfzczb multiplyMatrix (Lorg/joml/Matrix4f;)V
 		COMMENT Multiplies the current model matrix with another matrix.
+		ARG 1 matrix
 	METHOD m_hebgtdra (Ljava/util/ArrayDeque;)V
 		ARG 0 stack
 	METHOD m_lbogovnu peek ()Lnet/minecraft/unmapped/C_cnszsxvd$C_pqokfevb;
 		COMMENT {@return the current set of model and normal matrices that are being manipulated from the stack}
+	METHOD m_qjhrkdrd translate (FFF)V
+		COMMENT Translates the model.
+		ARG 1 x
+			COMMENT the translation amount on the X axis
+		ARG 2 y
+			COMMENT the translation amount on the Y axis
+		ARG 3 z
+			COMMENT the translation amount on the Z axis
 	METHOD m_uomcjjca isEmpty ()Z
 		COMMENT {@return {@code true} if the matrix stack is empty, or {@code false} otherwise}
+	METHOD m_wkzmzfvs translate (DDD)V
+		COMMENT Translates the model.
+		ARG 1 x
+			COMMENT the translation amount on the X axis
+		ARG 3 y
+			COMMENT the translation amount on the Y axis
+		ARG 5 z
+			COMMENT the translation amount on the Z axis
 	METHOD m_xeddsamb loadIdentity ()V
 		COMMENT Loads the identity matrix for the current model and normal matrices.
 	CLASS C_pqokfevb Entry
 		FIELD f_jfjsqzmb normalMatrix Lorg/joml/Matrix3f;
 		FIELD f_qmkzpkwl modelMatrix Lorg/joml/Matrix4f;
+		METHOD <init> (Lorg/joml/Matrix4f;Lorg/joml/Matrix3f;)V
+			ARG 1 modelMatrix
+			ARG 2 normalMatrix
 		METHOD m_hmmszgvl getNormal ()Lorg/joml/Matrix3f;
 		METHOD m_sgddbcul getModel ()Lorg/joml/Matrix4f;
 			COMMENT {@return the model matrix}
