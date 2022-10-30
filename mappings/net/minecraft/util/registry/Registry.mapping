@@ -19,6 +19,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	FIELD f_bygzrtfj LOOT_SCORE_PROVIDER_TYPE_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_ccwxqhpp LOOT_SCORE_PROVIDER_TYPE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_cglmraed RECIPE_SERIALIZER_KEY Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_cigckaps lifecycle Lcom/mojang/serialization/Lifecycle;
 	FIELD f_ckofyjpi GAME_EVENT_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_ckqtjowg PARTICLE_TYPE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_cvojzhhs ITEM_KEY Lnet/minecraft/unmapped/C_xhhleach;
@@ -179,6 +180,10 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	METHOD m_cjwbheqc getKey (Ljava/lang/Object;)Ljava/util/Optional;
 		ARG 1 entry
 	METHOD m_ckzkjowv getKeys ()Ljava/util/Set;
+	METHOD m_dersuqlp registerDefaultedWithIntrusiveHolders (Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/String;Lnet/minecraft/unmapped/C_tqxyjqsk$C_umlcfeib;)Lnet/minecraft/unmapped/C_zogerkic;
+		ARG 0 key
+		ARG 1 id
+		ARG 2 bootstrap
 	METHOD m_dixnzblu createIntrusiveHolder (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 1 holder
 	METHOD m_eovqcbhp getHolderOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
@@ -192,6 +197,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 1 key
 	METHOD m_ippzrckq createRegistryKey (Ljava/lang/String;)Lnet/minecraft/unmapped/C_xhhleach;
 		ARG 0 registryId
+	METHOD m_jedfcemh getDimensionOptionsForWorld (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_jouyrjiz get (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/Object;
 		ARG 1 key
 	METHOD m_jrpizpyt getHolder (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
@@ -222,7 +228,13 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	METHOD m_pquqhkot holderByNameCodec ()Lcom/mojang/serialization/Codec;
 	METHOD m_pselvvxn getOrCreateHolderOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 1 key
+	METHOD m_pvtgoofr registerDefaultedWithIntrusiveHolders (Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/String;Lcom/mojang/serialization/Lifecycle;Lnet/minecraft/unmapped/C_tqxyjqsk$C_umlcfeib;)Lnet/minecraft/unmapped/C_zogerkic;
+		ARG 0 key
+		ARG 1 id
+		ARG 2 lifecycle
+		ARG 3 bootstrap
 	METHOD m_pvyfqcdo getCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_pwxtfggs getWorldForDimensionOptions (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_qeyctvgm asHolderIdMap ()Lnet/minecraft/unmapped/C_feaetnaz;
 	METHOD m_qomglfhh getOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/Object;
 		COMMENT Gets an entry from the registry.
@@ -232,6 +244,8 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	METHOD m_quxwuwip getOrCreateHolder (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/DataResult;
 		ARG 1 key
 	METHOD m_rpcsjdnz resetTags ()V
+	METHOD m_sefrrypp getEntryLifecycle (Ljava/lang/Object;)Lcom/mojang/serialization/Lifecycle;
+		ARG 1 entry
 	METHOD m_slujyvbt containsId (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
 	METHOD m_tuivosjn getIds ()Ljava/util/Set;

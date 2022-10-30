@@ -236,6 +236,8 @@ task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 			super.visitInnerClass(name, outerName, innerName, toPublicAccess(access))
 		}
 	} }
+
+	filter({ it.outerClass == null }) // filter out anonymous classes
 }
 
 def fakeSourceDir = file(".gradle/temp/fakeSource")
