@@ -14,6 +14,13 @@ CLASS net/minecraft/unmapped/C_jtheqbzk net/minecraft/command/argument/ScoreHold
 	METHOD m_hivkcutg (Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)V
 		ARG 1 builder
 	METHOD m_imaxcwoj getScoreHolders (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/util/Collection;
+		COMMENT {@return names of all score holders selected by the given argument}.
+		COMMENT Additionally disallows use of the wildcard symbol {@code *}.
+		COMMENT
+		COMMENT @param context context of the command to retrieve the argument from
+		COMMENT @param name name of the argument to retrieve
+		COMMENT
+		COMMENT @throw CommandSyntaxException if no entities were matched by the argument value selector or wildcard was used
 		ARG 0 context
 		ARG 1 name
 	METHOD m_jeblrdpp (Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
@@ -22,10 +29,23 @@ CLASS net/minecraft/unmapped/C_jtheqbzk net/minecraft/command/argument/ScoreHold
 	METHOD m_jghjaqcj (Ljava/util/Collection;Lnet/minecraft/unmapped/C_pennblrk;Ljava/util/function/Supplier;)Ljava/util/Collection;
 		ARG 1 source
 	METHOD m_qvsvyhiv getScoreHolders (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;Ljava/util/function/Supplier;)Ljava/util/Collection;
+		COMMENT {@return names of all score holders selected by the given argument}.
+		COMMENT
+		COMMENT @param wildcardValue names to return if the argument value was a wildcard ({@code *})}
+		COMMENT @param context context of the command to retrieve the argument from
+		COMMENT @param name name of the argument to retrieve
+		COMMENT
+		COMMENT @throw CommandSyntaxException if no entities were matched by the argument value selector or wildcard was used and {@code wildcardValue} was empty
 		ARG 0 context
 		ARG 1 name
-		ARG 2 players
-	METHOD m_xnumnlaa getScoreboardScoreHolders (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/util/Collection;
+		ARG 2 wildcardResult
+	METHOD m_xnumnlaa getScoreHoldersWithGlobalWildcard (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/util/Collection;
+		COMMENT {@return names of all score holders selected by the given argument, or all known players if wildcard symbol {@code *} was used}.
+		COMMENT
+		COMMENT @param context context of the command to retrieve the argument from
+		COMMENT @param name name of the argument to retrieve
+		COMMENT
+		COMMENT @throw CommandSyntaxException if no entities were matched by the argument value selector
 		ARG 0 context
 		ARG 1 name
 	METHOD m_yswlqmbz (Lnet/minecraft/unmapped/C_pennblrk;Ljava/util/function/Supplier;)Ljava/util/Collection;
