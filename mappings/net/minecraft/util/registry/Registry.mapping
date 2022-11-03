@@ -64,6 +64,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 	FIELD f_jqvriejf ITEM Lnet/minecraft/unmapped/C_zogerkic;
 	FIELD f_jxjldngh POTION Lnet/minecraft/unmapped/C_zogerkic;
 	FIELD f_klihklvc STRUCTURE_POOL_ELEMENT_KEY Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_knamtwhm holderLookup Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 	FIELD f_lwunaeya DIMENSION_TYPE_KEY Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_mezktrgm BLOCK_STATE_PROVIDER_TYPE Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_mfaglfnc ENTITY_TYPE Lnet/minecraft/unmapped/C_zogerkic;
@@ -186,6 +187,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 2 bootstrap
 	METHOD m_dixnzblu createIntrusiveHolder (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 1 holder
+	METHOD m_ecfgtygn asLookup ()Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 	METHOD m_eovqcbhp getHolderOrThrow (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 1 holder
 	METHOD m_fiunuwfp freeze ()Lnet/minecraft/unmapped/C_tqxyjqsk;
@@ -244,6 +246,8 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 1 entry
 	METHOD m_slujyvbt containsId (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
+	METHOD m_svlciefa (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_tqxyjqsk;)V
+		ARG 1 registry
 	METHOD m_tuivosjn getIds ()Ljava/util/Set;
 	METHOD m_ueokaqte contains (Lnet/minecraft/unmapped/C_xhhleach;)Z
 		ARG 1 key
@@ -254,9 +258,13 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 2 entry
 	METHOD m_vnyaisgo getOrEmpty (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
 		ARG 1 id
+	METHOD m_vnzovfum asTagAwareLookup ()Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 	METHOD m_vqpjfuha getId (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 entry
 	METHOD m_wicxsqqn getTags ()Ljava/util/stream/Stream;
+	METHOD m_xdpkysvi (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/function/Supplier;)V
+		ARG 0 registryId
+		ARG 1 boostrap
 	METHOD m_xsnzalbm freezeBuiltins ()V
 	METHOD m_xyrkdyzg register (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 registry
@@ -270,6 +278,11 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/util/registry/Registry
 		ARG 2 bootstrap
 	METHOD m_zmzcglcp getTag (Lnet/minecraft/unmapped/C_ednuhnnn;)Ljava/util/Optional;
 		ARG 1 tag
+	METHOD m_zyikfshi asHolderOwner ()Lnet/minecraft/unmapped/C_hkebgttw;
+	CLASS C_mehszygp
+		METHOD iterator iterator ()Ljava/util/Iterator;
+		METHOD m_baofkidz (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Lnet/minecraft/unmapped/C_cjzoxshv;
+			ARG 0 holder
 	CLASS C_umlcfeib RegistryBootstrap
 		METHOD run run (Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/lang/Object;
 			ARG 1 registry
