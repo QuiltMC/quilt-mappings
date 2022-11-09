@@ -2,7 +2,10 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 	COMMENT A clickable widget is a GUI element that has many methods to handle different
 	COMMENT mouse actions. In addition, it allows a message to be rendered on the widget
 	COMMENT and narrated when the widget is selected.
+	FIELD f_cjsmmjyb tooltip Lnet/minecraft/unmapped/C_skehaijy;
+	FIELD f_dzpdyfdx tooltipDelayMs I
 	FIELD f_fjktqkgd active Z
+	FIELD f_iwvrdmpf hoverOrFocusedStartTime J
 	FIELD f_kjkcnurp width I
 	FIELD f_ndumutmu visible Z
 	FIELD f_olrwingn WIDGETS_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
@@ -11,6 +14,7 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 	FIELD f_prgrzmyd alpha F
 	FIELD f_qqnmwoid x I
 	FIELD f_vevzmidc message Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_wxstegmf wasHoveredOrFocused Z
 	FIELD f_xzcbpput focused Z
 	FIELD f_zzvmffin hovered Z
 	METHOD <init> (IIIILnet/minecraft/unmapped/C_rdaqiwdt;)V
@@ -19,6 +23,8 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 		ARG 3 width
 		ARG 4 height
 		ARG 5 message
+	METHOD m_acsoyrbk updateWidgetNaration (Lnet/minecraft/unmapped/C_pofrkllk;)V
+		ARG 1 builder
 	METHOD m_awnoxrls onFocusedChanged (Z)V
 		ARG 1 newFocused
 	METHOD m_bhvsucly appendDefaultNarrations (Lnet/minecraft/unmapped/C_pofrkllk;)V
@@ -71,10 +77,15 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 		ARG 7 deltaY
 	METHOD m_runhgobh getX ()I
 	METHOD m_sjpjzqmc getNarrationMessage ()Lnet/minecraft/unmapped/C_npqneive;
+	METHOD m_tgibvaaa setTooltip (Lnet/minecraft/unmapped/C_skehaijy;)V
+		ARG 1 tooltip
 	METHOD m_ueskwfzt getY ()I
 	METHOD m_xaqgdxna playDownSound (Lnet/minecraft/unmapped/C_hfmtwavd;)V
 		ARG 1 soundManager
+	METHOD m_xuhmsncd setTooltipDelayMs (I)V
+		ARG 1 ms
 	METHOD m_yttfswob getNarrationMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_npqneive;
 		ARG 0 message
+	METHOD m_yxnhowjp updateTooltip ()V
 	METHOD m_zawcanxc isHoveredOrFocused ()Z
 	METHOD m_zqcmyqwx getMessage ()Lnet/minecraft/unmapped/C_rdaqiwdt;
