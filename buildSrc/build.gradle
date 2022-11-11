@@ -24,25 +24,26 @@ repositories {
 }
 
 dependencies {
-	implementation("commons-io:commons-io:${project.commons_io}")
-	implementation("de.undercouch:gradle-download-task:${project.gradle_download}")
-	implementation("net.fabricmc:stitch:${project.stitch}")
-	implementation("org.quiltmc:quilt-enigma-plugin:${project.enigma_plugin}")
-	implementation("org.quiltmc:tiny-remapper:${project.tiny_remapper}")
-	implementation("org.quiltmc:launchermeta-parser:${project.launchermeta_parser}")
-	implementation("com.google.guava:guava:${project.guava}")
-	implementation("cuchaz:enigma-cli:${project.enigma}")
-	implementation("cuchaz:enigma:${project.enigma}")
-	implementation("org.quiltmc.unpick:unpick:${project.unpick_version}")
-	implementation("org.quiltmc.unpick:unpick-format-utils:${project.unpick_version}")
-	implementation("org.quiltmc.unpick:unpick-cli:${project.unpick_version}")
-	implementation("net.fabricmc:mapping-io:${project.mapping_io}")
-	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${project.jackson_dataformat}")
-	implementation("org.quiltmc:javadoc-draftsman:${project.javadoc_draftsman}")
+	implementation(libs.commons.io)
+	implementation(libs.download.task)
+	implementation(libs.guava)
+	implementation(libs.jackson.xml)
+	implementation(libs.launchermeta.parser)
+
+	implementation(libs.enigma)
+	implementation(libs.enigma.cli)
+	implementation(libs.enigma.plugin)
+	implementation(libs.tiny.remapper)
+	implementation(libs.stitch)
+	implementation(libs.unpick)
+	implementation(libs.unpick.cli)
+	implementation(libs.unpick.format.utils)
+	implementation(libs.mapping.io)
+	implementation(libs.javadoc.draftsman)
 
 	// Decompilers
-	implementation("net.fabricmc:cfr:${project.cfr}")
-	implementation("org.quiltmc:quiltflower:${project.quiltflower}")
+	implementation(libs.cfr)
+	implementation(libs.quiltflower)
 }
 
 gradlePlugin {
