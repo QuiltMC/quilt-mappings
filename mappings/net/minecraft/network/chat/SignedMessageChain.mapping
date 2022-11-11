@@ -1,0 +1,33 @@
+CLASS net/minecraft/unmapped/C_bwznvpye net/minecraft/network/chat/SignedMessageChain
+	FIELD f_fypefjgo nextLink Lnet/minecraft/unmapped/C_nhazyfnx;
+	METHOD <init> (Ljava/util/UUID;Ljava/util/UUID;)V
+		ARG 1 sender
+		ARG 2 sessionId
+	METHOD m_awtyzevq (Lnet/minecraft/unmapped/C_nhazyfnx;Lnet/minecraft/unmapped/C_ogacucnf;Lnet/minecraft/unmapped/C_bfuzddzp$C_zbgybelf;)V
+		ARG 2 output
+	METHOD m_gocmhvqt decoder (Lnet/minecraft/unmapped/C_psbzgaqf;)Lnet/minecraft/unmapped/C_bwznvpye$C_wefdvhmx;
+		ARG 1 publicKey
+	METHOD m_qrlxxxtj encoder (Lnet/minecraft/unmapped/C_lzhmpsgc;)Lnet/minecraft/unmapped/C_bwznvpye$C_oabvskvt;
+		ARG 1 signer
+	METHOD m_vcspllvu advanceLink ()Lnet/minecraft/unmapped/C_nhazyfnx;
+	METHOD m_xsczjzhz (Lnet/minecraft/unmapped/C_lzhmpsgc;Lnet/minecraft/unmapped/C_ogacucnf;)Lnet/minecraft/unmapped/C_shphkjbi;
+		ARG 2 body
+	METHOD m_yjdwtavq (Lnet/minecraft/unmapped/C_psbzgaqf;Lnet/minecraft/unmapped/C_yvuwcvkm;Lnet/minecraft/unmapped/C_shphkjbi;Lnet/minecraft/unmapped/C_ogacucnf;)Lnet/minecraft/unmapped/C_zzdolisx;
+		ARG 3 signature
+		ARG 4 signedBody
+	CLASS C_cbfqzsjn DecodeException
+		FIELD f_xrhijmnw shouldDisconnect Z
+		METHOD <init> (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
+			ARG 1 text
+			ARG 2 shouldDisconnect
+		METHOD m_mnizuxqp getShouldDisconnect ()Z
+	CLASS C_oabvskvt Encoder
+		FIELD f_atquvwgq UNSIGNED Lnet/minecraft/unmapped/C_bwznvpye$C_oabvskvt;
+		METHOD pack pack (Lnet/minecraft/unmapped/C_ogacucnf;)Lnet/minecraft/unmapped/C_shphkjbi;
+			ARG 1 body
+	CLASS C_wefdvhmx Decode
+		FIELD f_wabqlywb REJECT_ALL Lnet/minecraft/unmapped/C_bwznvpye$C_wefdvhmx;
+		METHOD unpack (Lnet/minecraft/unmapped/C_shphkjbi;Lnet/minecraft/unmapped/C_ogacucnf;)Lnet/minecraft/unmapped/C_zzdolisx;
+			ARG 1 signature
+			ARG 2 body
+		METHOD unsigned unsigned (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_bwznvpye$C_wefdvhmx;
