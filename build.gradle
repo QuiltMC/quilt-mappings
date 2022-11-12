@@ -15,8 +15,8 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath "org.quiltmc.unpick:unpick:${project.unpick_version}"
-		classpath "org.quiltmc.unpick:unpick-format-utils:${project.unpick_version}"
+		classpath(libs.unpick)
+		classpath(libs.unpick.format.utils)
 	}
 }
 
@@ -72,13 +72,13 @@ configurations {
 }
 
 dependencies {
-	enigmaRuntime "cuchaz:enigma-swing:${project.enigma}"
-	enigmaRuntime "org.quiltmc:quilt-enigma-plugin:${project.enigma_plugin}"
-	javadocClasspath "net.fabricmc:fabric-loader:${project.fabric_loader}"
-	javadocClasspath "org.jetbrains:annotations:${project.jetbrains_annotations}"
-	javadocClasspath "com.google.code.findbugs:jsr305:${project.jsr305}" // for some other jsr annotations
-	decompileClasspath "net.fabricmc:cfr:${project.cfr}"
-	unpick "org.quiltmc.unpick:unpick-cli:${project.unpick_version}"
+	enigmaRuntime(libs.enigma.swing)
+	enigmaRuntime(libs.enigma.plugin)
+	javadocClasspath(libs.fabric.loader)
+	javadocClasspath(libs.jetbrains.annotations)
+	javadocClasspath(libs.jsr305) // for some other jsr annotations
+	decompileClasspath(libs.cfr)
+	unpick(libs.unpick.cli)
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 	intermediary "net.fabricmc:intermediary:${minecraft_version}:v2"
 }
@@ -321,20 +321,20 @@ javadoc {
 
 		addBooleanOption "-allow-script-in-comments", true
 		links(
-				"https://guava.dev/releases/${project.guava}/api/docs/",
-				"https://www.javadoc.io/doc/com.google.code.gson/gson/${project.gson}/",
+				"https://guava.dev/releases/${libs.versions.guava.get()}/api/docs/",
+				"https://javadoc.io/doc/com.google.code.gson/gson/${project.gson}/",
 				'https://logging.apache.org/log4j/2.x/log4j-api/apidocs/',
-				"https://javadoc.io/doc/org.jetbrains/annotations/${project.jetbrains_annotations}/",
-				"https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/${project.jsr305}/",
+				"https://javadoc.io/doc/org.jetbrains/annotations/${libs.versions.jetbrains.annotations.get()}/",
+				"https://javadoc.io/doc/com.google.code.findbugs/jsr305/${libs.versions.jsr305.get()}/",
 				'https://javadoc.lwjgl.org/',
 				'https://fastutil.di.unimi.it/docs/',
 				"https://netty.io/${project.netty}/api/",
-				"https://commons.apache.org/proper/commons-logging/javadocs/api-${project.commons_logging}/",
-				"https://commons.apache.org/proper/commons-lang/javadocs/api-${project.commons_lang}/",
-				"https://commons.apache.org/proper/commons-io/javadocs/api-${project.commons_io}/",
+				"https://commons.apache.org/proper/commons-logging/javadocs/api-release/",
+				"https://commons.apache.org/proper/commons-lang/javadocs/api-release/",
+				"https://commons.apache.org/proper/commons-io/apidocs/",
 				"https://commons.apache.org/proper/commons-codec/archives/${project.commons_codec}/apidocs/",
 				"https://javadoc.io/doc/org.apache.commons/commons-compress/${project.commons_compress}/",
-				"https://maven.fabricmc.net/docs/fabric-loader-${project.fabric_loader}/",
+				"https://maven.fabricmc.net/docs/fabric-loader-${libs.versions.fabric.loader.get()}/",
 				"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
 		)
 		// https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
