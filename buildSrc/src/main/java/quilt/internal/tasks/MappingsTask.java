@@ -1,6 +1,8 @@
 package quilt.internal.tasks;
 
 import org.gradle.api.Task;
+import org.gradle.api.artifacts.VersionCatalog;
+import org.gradle.api.artifacts.VersionCatalogsExtension;
 import quilt.internal.MappingsExtension;
 import quilt.internal.MappingsPlugin;
 import quilt.internal.util.DownloadImmediate;
@@ -25,5 +27,13 @@ public interface MappingsTask extends Task {
 
     default MappingsExtension mappingsExt() {
         return MappingsPlugin.getExtension(getProject());
+    }
+
+    default VersionCatalogsExtension versionCatalogs() {
+        return getProject().getExtensions().getByType(VersionCatalogsExtension.class);
+    }
+
+    default VersionCatalog libs() {
+        return versionCatalogs().named("libs");
     }
 }

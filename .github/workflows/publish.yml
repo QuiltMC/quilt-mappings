@@ -3,12 +3,12 @@ on: [push]
 jobs:
   publish:
     if: ${{ github.repository_owner == 'QuiltMC' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
-      image: openjdk:17-jdk
+      image: eclipse-temurin:17
       options: --user root
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: gradle/wrapper-validation-action@v1
 
       # Ensure that releases are not ran in parallel, this ensures that the latest commit is the latest release

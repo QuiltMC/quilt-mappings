@@ -7,7 +7,7 @@ jobs:
         java: [17, 18]
     runs-on: ubuntu-latest
     container:
-      image: openjdk:${{ matrix.java }}
+      image: eclipse-temurin:${{ matrix.java }}
       options: --user root
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
       - name: Build artifacts
         if: ${{ matrix.java == 17 }}
         continue-on-error: true
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Artifacts
           path: build/libs/

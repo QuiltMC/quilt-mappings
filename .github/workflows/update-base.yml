@@ -7,11 +7,11 @@ on:
 jobs:
   update:
     if: ${{ github.event.label.name == 'update-base' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.update-base.outputs.result }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/update-base/
         id: update-base
         with:
@@ -21,14 +21,14 @@ jobs:
   drop-invalid-mappings:
     needs: update
     if: ${{ needs.update.outputs.result == 'success' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
       # The container image openjdk:17 doesn't have git installed
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
