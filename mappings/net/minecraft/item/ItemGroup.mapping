@@ -1,25 +1,35 @@
 CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
+	FIELD f_dutzqtyc cachedTabStacks Ljava/util/Collection;
 	FIELD f_eftpytbk icon Lnet/minecraft/unmapped/C_sddaxwyk;
-	FIELD f_miirnahq translationKey Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_fhtvcyky cachedSearchStacks Ljava/util/Set;
+	FIELD f_miirnahq name Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ncvkfasf texture Ljava/lang/String;
 	FIELD f_sfwfnelq scrollbar Z
-	FIELD f_xkfcdxhm index I
 	FIELD f_ypvwgfta renderName Z
 	METHOD m_bvcnuvet isSpecial ()Z
-	METHOD m_dmxzmcbi createIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_bwauoqmb searchContains (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_dnbejvnn hasScrollbar ()Z
-	METHOD m_frfpcrqq isTopRow ()Z
 	METHOD m_idoyaxck shouldRenderName ()Z
 		COMMENT Checks if this item group should render its name.
 		COMMENT
 		COMMENT <p>The name is rendered below the top row of item groups and above the inventory.
-	METHOD m_iwnppnlh setTexture (Ljava/lang/String;)Lnet/minecraft/unmapped/C_lnokcayd;
-		ARG 1 texture
-	METHOD m_ojgukxpb setNoScrollbar ()Lnet/minecraft/unmapped/C_lnokcayd;
+	METHOD m_nsgpxdxb getOrInitSearchStacks ()Ljava/util/Collection;
 	METHOD m_oxvpyaqs getTexture ()Ljava/lang/String;
-	METHOD m_qsfftnyy hideName ()Lnet/minecraft/unmapped/C_lnokcayd;
-		COMMENT Specifies that when this item group is selected, the name of the item group should not be rendered.
-	METHOD m_tcbipafs getTranslationKey ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-	METHOD m_tkahlerj getColumn ()I
+	METHOD m_qngoqhkn getOrInitTabStacks ()Ljava/util/Collection;
+	METHOD m_tcbipafs getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_uprbbsoi getIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
-	METHOD m_uribjksx getIndex ()I
+	CLASS C_qjyuivjw GatedStackCollector
+		FIELD f_ewkqlato searchStacks Ljava/util/Set;
+		FIELD f_gynphoyu tabStacks Ljava/util/Collection;
+	CLASS C_tndlmady Visibility
+	CLASS C_wnogvxsu ItemStackCollector
+		METHOD m_cgfqmabm addStacks (Ljava/util/Collection;)V
+			ARG 1 stacks
+		METHOD m_hohqtcue addItem (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
+			ARG 1 item
+		METHOD m_jghywfri addStack (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
+		METHOD m_jljrlzid addStacks (Ljava/util/Collection;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
+			ARG 1 stacks
+		METHOD m_lhspmles addStack (Lnet/minecraft/unmapped/C_sddaxwyk;)V
+		METHOD m_rgrwuewj addItem (Lnet/minecraft/unmapped/C_gmbqjnle;)V
+			ARG 1 item

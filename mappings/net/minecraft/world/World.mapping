@@ -19,6 +19,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	FIELD f_oxotuivf NETHER Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_phyzsxpf ambientDarkness I
 	FIELD f_qyjyicxt isClient Z
+	FIELD f_syvvohtr unsafeRandom Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_uvswajab properties Lnet/minecraft/unmapped/C_cnrrksvm;
 	FIELD f_vioqbhue debugWorld Z
 	FIELD f_vypaqpci DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
@@ -48,6 +49,12 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 1 pos
 		ARG 2 entity
 		ARG 3 direction
+	METHOD m_cibeiktq playSound (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FF)V
+		ARG 1 entity
+		ARG 3 sound
+		ARG 4 category
+		ARG 5 volume
+		ARG 6 pitch
 	METHOD m_cnpexxbj setLightningTicksLeft (I)V
 		ARG 1 lightningTicksLeft
 	METHOD m_cosjeaoq isEmittingRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
@@ -65,6 +72,14 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 3 data
 	METHOD m_dhgnxris getReceivedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 1 pos
+	METHOD m_dmodcllo playSoundFromEntity (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FFJ)V
+		ARG 1 player
+		ARG 2 entity
+		ARG 3 sound
+		ARG 4 category
+		ARG 5 volume
+		ARG 6 pitch
+		ARG 7 seed
 	METHOD m_dmpgcjnl updateListeners (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;I)V
 		ARG 1 pos
 		ARG 2 oldState
@@ -113,6 +128,16 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 9 velocityX
 		ARG 11 velocityY
 		ARG 13 velocityZ
+	METHOD m_jkoskdvw playSound (Lnet/minecraft/unmapped/C_jzrpycqo;DDDLnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FFJ)V
+		ARG 1 except
+		ARG 2 x
+		ARG 4 y
+		ARG 6 z
+		ARG 8 sound
+		ARG 9 category
+		ARG 10 volume
+		ARG 11 pitch
+		ARG 12 seed
 	METHOD m_jmpgqbuj calculateAmbientDarkness ()V
 	METHOD m_kvxjplzd setBlockBreakingInfo (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 		ARG 1 entityId
@@ -130,8 +155,8 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_lrfooggi setMobSpawnOptions (ZZ)V
 		ARG 1 spawnMonsters
 		ARG 2 spawnAnimals
-	METHOD m_mbvohlyp (Ljava/util/function/Predicate;Ljava/util/List;Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 3 entity
+	METHOD m_mbvohlyp (Ljava/util/function/Predicate;Ljava/util/List;ILnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_gibrwunu$C_ulnnautc;
+		ARG 4 entity
 	METHOD m_mgrwyqko playSound (Lnet/minecraft/unmapped/C_jzrpycqo;DDDLnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FF)V
 		ARG 1 except
 			COMMENT the player that should not receive the sound, or {@code null}
@@ -186,13 +211,6 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_qsuwatgh updateComparators (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 pos
 		ARG 2 block
-	METHOD m_qxzfupzv createExplosion (Lnet/minecraft/unmapped/C_astfners;DDDFLnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;)Lnet/minecraft/unmapped/C_aahhrzpf;
-		ARG 1 entity
-		ARG 2 x
-		ARG 4 y
-		ARG 6 z
-		ARG 8 power
-		ARG 9 destructionType
 	METHOD m_rbciwyji getEmittedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)I
 		ARG 1 pos
 		ARG 2 direction
@@ -210,14 +228,6 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 1 pos
 	METHOD m_rsnbcuug getWorldChunk (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hrdsvlkq;
 		ARG 1 pos
-	METHOD m_sgnhafwb createExplosion (Lnet/minecraft/unmapped/C_astfners;DDDFZLnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;)Lnet/minecraft/unmapped/C_aahhrzpf;
-		ARG 1 entity
-		ARG 2 x
-		ARG 4 y
-		ARG 6 z
-		ARG 8 power
-		ARG 9 createFire
-		ARG 10 destructionType
 	METHOD m_thuraolg isTopSolid (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 pos
 		ARG 2 entity
@@ -250,13 +260,3 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_zlmwnihs sendEntityStatus (Lnet/minecraft/unmapped/C_astfners;B)V
 		ARG 1 entity
 		ARG 2 status
-	METHOD m_ztuprenl createExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;DDDFZLnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;)Lnet/minecraft/unmapped/C_aahhrzpf;
-		ARG 1 entity
-		ARG 2 damageSource
-		ARG 3 behavior
-		ARG 4 x
-		ARG 6 y
-		ARG 8 z
-		ARG 10 power
-		ARG 11 createFire
-		ARG 12 destructionType
