@@ -12,14 +12,7 @@ CLASS net/minecraft/unmapped/C_vbibxkxv net/minecraft/client/option/Option
 	FIELD f_qlmnnace valueToText Ljava/util/function/Function;
 	FIELD f_uzoiiqnr LOGGER Lorg/slf4j/Logger;
 	FIELD f_ymhbwdmy tooltip Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;
-	METHOD m_akdeyqph createButton (Lnet/minecraft/unmapped/C_lscptbhn;III)Lnet/minecraft/unmapped/C_kpvuxmkp;
-		ARG 1 options
-		ARG 2 x
-		ARG 3 y
-		ARG 4 width
 	METHOD m_bwrczfzy emptyTooltip ()Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;
-	METHOD m_bytnpyal (Ljava/lang/Boolean;)V
-		ARG 0 value
 	METHOD m_gdmjalon set (Ljava/lang/Object;)V
 		ARG 1 value
 	METHOD m_ihkotpvm ofBoolean (Ljava/lang/String;ZLjava/util/function/Consumer;)Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -30,9 +23,8 @@ CLASS net/minecraft/unmapped/C_vbibxkxv net/minecraft/client/option/Option
 	METHOD m_limrmpqe (Lnet/minecraft/unmapped/C_vbibxkxv$C_tunipivd;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 2 value
 	METHOD m_lotxbajv getValues ()Lnet/minecraft/unmapped/C_vbibxkxv$C_wevbfulp;
-	METHOD m_mtzljdir (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_rdaqiwdt;
-		ARG 0 optionText
-		ARG 1 value
+	METHOD m_mtzljdir (Ljava/lang/Boolean;)V
+		ARG 0 value
 	METHOD m_ocjknhzx optionEnumText ()Lnet/minecraft/unmapped/C_vbibxkxv$C_tunipivd;
 	METHOD m_qbzovuqo (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_skehaijy;
 		ARG 0 optionValue
@@ -102,8 +94,8 @@ CLASS net/minecraft/unmapped/C_vbibxkxv net/minecraft/client/option/Option
 	CLASS C_sgdlplhb TypeChangeableValueSet
 		METHOD m_igahleoi isCycling ()Z
 	CLASS C_toahngcz SliderValueSet
-		METHOD m_gsvxcgji (Lnet/minecraft/unmapped/C_lscptbhn;IIILnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;Lnet/minecraft/unmapped/C_vbibxkxv;)Lnet/minecraft/unmapped/C_kpvuxmkp;
-			ARG 6 option
+		METHOD m_gsvxcgji (Lnet/minecraft/unmapped/C_lscptbhn;IIILnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_vbibxkxv;)Lnet/minecraft/unmapped/C_kpvuxmkp;
+			ARG 7 option
 		METHOD m_igxxjncj toSliderValue (Ljava/lang/Object;)D
 			ARG 1 value
 		METHOD m_vseovyai fromSliderValue (D)Ljava/lang/Object;
@@ -115,15 +107,6 @@ CLASS net/minecraft/unmapped/C_vbibxkxv net/minecraft/client/option/Option
 	CLASS C_tusaesum OptionSliderWidgetImpl
 		FIELD f_avlgoznu option Lnet/minecraft/unmapped/C_vbibxkxv;
 		FIELD f_iwfbrwzs values Lnet/minecraft/unmapped/C_vbibxkxv$C_toahngcz;
-		METHOD <init> (Lnet/minecraft/unmapped/C_lscptbhn;IIIILnet/minecraft/unmapped/C_vbibxkxv;Lnet/minecraft/unmapped/C_vbibxkxv$C_toahngcz;Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;)V
-			ARG 1 options
-			ARG 2 x
-			ARG 3 y
-			ARG 4 width
-			ARG 5 height
-			ARG 6 option
-			ARG 7 values
-			ARG 8 tooltipSupplier
 	CLASS C_utmexptx LazyEnumValueSet
 		FIELD f_acxnfyzk codec Lcom/mojang/serialization/Codec;
 		FIELD f_gvnqdfkt values Ljava/util/function/Supplier;
@@ -139,7 +122,7 @@ CLASS net/minecraft/unmapped/C_vbibxkxv net/minecraft/client/option/Option
 	CLASS C_wevbfulp ValueSet
 		METHOD m_bmvtorxy validate (Ljava/lang/Object;)Ljava/util/Optional;
 			ARG 1 value
-		METHOD m_fbfakwpx getButtonCreator (Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;Lnet/minecraft/unmapped/C_lscptbhn;III)Ljava/util/function/Function;
+		METHOD m_fbfakwpx getButtonCreator (Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;Lnet/minecraft/unmapped/C_lscptbhn;IIILjava/util/function/Consumer;)Ljava/util/function/Function;
 			ARG 1 tooltipSupplier
 			ARG 2 options
 			ARG 3 x
@@ -155,13 +138,13 @@ CLASS net/minecraft/unmapped/C_vbibxkxv net/minecraft/client/option/Option
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 	CLASS C_yenlvukb CyclingValueSet
-		METHOD m_foxlpccp (Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;IIILnet/minecraft/unmapped/C_lscptbhn;Lnet/minecraft/unmapped/C_vbibxkxv;)Lnet/minecraft/unmapped/C_kpvuxmkp;
-			ARG 6 option
+		METHOD m_foxlpccp (Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;IIILnet/minecraft/unmapped/C_lscptbhn;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_vbibxkxv;)Lnet/minecraft/unmapped/C_kpvuxmkp;
+			ARG 7 option
 		METHOD m_qvcpsfqf getValues ()Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
 		METHOD m_rxloisqk valueSetter ()Lnet/minecraft/unmapped/C_vbibxkxv$C_yenlvukb$C_bfmhexey;
-		METHOD m_tmegldwf (Lnet/minecraft/unmapped/C_vbibxkxv;Lnet/minecraft/unmapped/C_lscptbhn;Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Object;)V
-			ARG 3 button
-			ARG 4 value
+		METHOD m_tmegldwf (Lnet/minecraft/unmapped/C_vbibxkxv;Lnet/minecraft/unmapped/C_lscptbhn;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Object;)V
+			ARG 4 button
+			ARG 5 value
 		CLASS C_bfmhexey ValueSetter
 			METHOD set set (Lnet/minecraft/unmapped/C_vbibxkxv;Ljava/lang/Object;)V
 				ARG 1 option
