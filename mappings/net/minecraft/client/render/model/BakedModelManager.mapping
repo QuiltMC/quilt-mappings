@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_wosoicga net/minecraft/client/render/model/BakedModelManager
+	FIELD f_hwjaieki ALTAS_RESOURCES Ljava/util/Map;
 	FIELD f_jvpdwspc missingModel Lnet/minecraft/unmapped/C_nnhmhkbv;
 	FIELD f_mvvepmdz atlasManager Lnet/minecraft/unmapped/C_pzkdqusv;
 	FIELD f_sreekxlq stateLookup Lit/unimi/dsi/fastutil/objects/Object2IntMap;
@@ -11,14 +12,25 @@ CLASS net/minecraft/unmapped/C_wosoicga net/minecraft/client/render/model/BakedM
 		ARG 2 colorMap
 		ARG 3 mipmap
 	METHOD close close ()V
+	METHOD m_ewpgilcu loadBlockModels (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 executor
 	METHOD m_fdknnkhy getModel (Lnet/minecraft/unmapped/C_jcudnsmp;)Lnet/minecraft/unmapped/C_nnhmhkbv;
 		ARG 1 id
+	METHOD m_hpgvneki loadModels (Lnet/minecraft/unmapped/C_eslcbfsq;Ljava/util/Map;Lnet/minecraft/unmapped/C_gjnplkfz;)Lnet/minecraft/unmapped/C_wosoicga$C_mogtdkcx;
+		ARG 2 atlases
+		ARG 3 modelLoader
 	METHOD m_ijhjurnk setMipmapLevels (I)V
 		ARG 1 mipmapLevels
+	METHOD m_jxdqxolx loadBlockStates (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 executor
 	METHOD m_lwjqxwnu getMissingModel ()Lnet/minecraft/unmapped/C_nnhmhkbv;
 	METHOD m_mpabbjcv getBlockModels ()Lnet/minecraft/unmapped/C_ovutgaod;
 	METHOD m_nrawhhyn shouldRerender (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 from
 		ARG 2 to
+	METHOD m_pfipxvmw apply (Lnet/minecraft/unmapped/C_wosoicga$C_mogtdkcx;Lnet/minecraft/unmapped/C_eslcbfsq;)V
+		ARG 1 reloadSTate
 	METHOD m_xzgzhjbz getAtlas (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_qwirmgcf;
 		ARG 1 id
+	CLASS C_mogtdkcx ReloadState
+		METHOD <init> (Lnet/minecraft/unmapped/C_gjnplkfz;Lnet/minecraft/unmapped/C_nnhmhkbv;Ljava/util/Map;Ljava/util/Map;Ljava/util/concurrent/CompletableFuture;)V
