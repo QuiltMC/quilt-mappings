@@ -120,6 +120,14 @@ front of the coordinate (`velocityX`, not `xVelocity`).
 
 Name screen coordinates `x` and `y`, rather than `left` and `top`.
 
+### Entities - Type vs Variant
+
+Entities will occasionally have different appearances based on their properties - for example, cats can have different fur colours.
+
+When dealing with things like this, use `Variant` for cosmetic-only distinctions while using `Type` is used when there is behavior associated with the appearance change.
+A general rule for this is to check if the different types are stored in a registry.
+If they are, you should be using `Type` over `Variant`.
+
 ## Javadocs
 
 Write sentences for class, method and field javadocs, starting with an uppercase and ending with a period. Start method docs with verbs, like `Gets` or `Called`. Use HTML tags such as `<p>` if the docs have several paragraphs, as line wraps are converted to spaces in the generated documentation. Feel free to start a new line whenever you feel the current line is too long.
