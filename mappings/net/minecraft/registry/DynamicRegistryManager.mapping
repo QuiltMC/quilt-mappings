@@ -1,0 +1,45 @@
+CLASS net/minecraft/unmapped/C_wqxmvzdq net/minecraft/registry/DynamicRegistryManager
+	COMMENT A manager of dynamic registries. It allows users to access non-hardcoded
+	COMMENT registries reliably.
+	COMMENT
+	COMMENT <p>Each Minecraft server has a dynamic registry manager for file-loaded
+	COMMENT registries, while each client play network handler has a dynamic registry
+	COMMENT manager for server-sent dynamic registries.
+	FIELD f_zcsxlkxx LOGGER Lorg/slf4j/Logger;
+	FIELD f_zgajrtqd EMPTY Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+	METHOD m_asrzufgj getOptional (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+		ARG 1 key
+	METHOD m_budagsyd get (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_tqxyjqsk;
+		COMMENT Retrieves a registry from this manager, or throws an exception when the
+		COMMENT registry does not exist.
+		COMMENT
+		COMMENT @throws IllegalStateException if the registry does not exist
+		ARG 1 key
+	METHOD m_lxobzcah fromRegistryOfRegistries (Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+		ARG 0 key
+	METHOD m_sloxobqt freeze ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+	METHOD m_vutgtdyk registries ()Ljava/util/stream/Stream;
+	METHOD m_xcyamnji getLifecycleForAllRegistries ()Lcom/mojang/serialization/Lifecycle;
+	CLASS C_ggmzysrd Frozen
+	CLASS C_gmaxoias ImmutableRegistryManager
+		FIELD f_mekoridj registries Ljava/util/Map;
+		METHOD <init> (Ljava/util/Map;)V
+			ARG 1 registries
+		METHOD <init> (Ljava/util/stream/Stream;)V
+			ARG 1 registries
+	CLASS C_rsrqqoeq RegistryEntry
+		FIELD f_bkvlkpdm key Lnet/minecraft/unmapped/C_xhhleach;
+		FIELD f_jvqgwfmk value Lnet/minecraft/unmapped/C_tqxyjqsk;
+		METHOD <init> (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_tqxyjqsk;)V
+			ARG 1 key
+			ARG 2 value
+		METHOD equals (Ljava/lang/Object;)Z
+			ARG 1 o
+		METHOD m_dgxdmeeo fromMapEntry (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;
+			ARG 0 key
+		METHOD m_eytxsluw key ()Lnet/minecraft/unmapped/C_xhhleach;
+		METHOD m_fufppgac fromKey (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_tqxyjqsk;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;
+			ARG 0 key
+			ARG 1 value
+		METHOD m_rlkulyrv freeze ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;
+		METHOD m_sxejvdpz value ()Lnet/minecraft/unmapped/C_tqxyjqsk;
