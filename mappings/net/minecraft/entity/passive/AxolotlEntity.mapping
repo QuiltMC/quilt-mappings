@@ -29,13 +29,13 @@ CLASS net/minecraft/unmapped/C_dkiorddu net/minecraft/entity/passive/AxolotlEnti
 	COMMENT   <td>Navigation</td><td>{@link net.minecraft.entity.ai.pathing.AmphibiousNavigation}</td>
 	COMMENT </tr>
 	COMMENT <tr>
-	COMMENT   <td>Types</td><td>{@link Type}</td>
+	COMMENT   <td>Variants</td><td>{@link Variant}</td>
 	COMMENT </tr>
 	COMMENT </table>
 	COMMENT </div>
 	FIELD f_afwjrehn LOGGER Lorg/slf4j/Logger;
 	FIELD f_bfduqviv BUFF_BASE_DURATION I
-	FIELD f_eksmjxve TYPE_KEY Ljava/lang/String;
+	FIELD f_eksmjxve VARIANT_KEY Ljava/lang/String;
 	FIELD f_gqlcvdoy MAX_AIR I
 	FIELD f_hdavxpsd PLAYING_DEAD Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_hoeimypz BLUE_BABY_CHANCE I
@@ -44,11 +44,11 @@ CLASS net/minecraft/unmapped/C_dkiorddu net/minecraft/entity/passive/AxolotlEnti
 	FIELD f_nvryroyc MEMORY_MODULES Lcom/google/common/collect/ImmutableList;
 	FIELD f_pkxjhfey POTION_HYDRATION I
 	FIELD f_sgbckvjh FROM_BUCKET Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_udgpdxdv TYPE Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_udgpdxdv VARIANT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_udkoqrte SENSORS Lcom/google/common/collect/ImmutableList;
 	FIELD f_vfvanicn BUFF_RANGE D
 	FIELD f_zkddedcq PLAY_DEAD_TICKS I
-	METHOD m_aolwvczv getAxolotlType ()Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
+	METHOD m_aolwvczv getVariant ()Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
 	METHOD m_bhbdygsg buffPlayer (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 player
 	METHOD m_eoqtlnrq canSpawnOn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_uzzvxofv;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)Z
@@ -58,8 +58,8 @@ CLASS net/minecraft/unmapped/C_dkiorddu net/minecraft/entity/passive/AxolotlEnti
 		ARG 3 spawnPos
 		ARG 4 random
 	METHOD m_gclxaxzc hydrateFromPotion ()V
-	METHOD m_jkknmuyr setAxolotlType (Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;)V
-		ARG 1 type
+	METHOD m_jkknmuyr setVariant (Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;)V
+		ARG 1 variant
 	METHOD m_jpcgntvj setPlayingDead (Z)V
 		ARG 1 playingDead
 	METHOD m_kqyzdscz appreciatePlayer (Lnet/minecraft/unmapped/C_dkiorddu;Lnet/minecraft/unmapped/C_usxaxydn;)V
@@ -76,19 +76,19 @@ CLASS net/minecraft/unmapped/C_dkiorddu net/minecraft/entity/passive/AxolotlEnti
 		METHOD <init> (Lnet/minecraft/unmapped/C_dkiorddu;)V
 			ARG 1 axolotl
 	CLASS C_dqobxknz AxolotlData
-		FIELD f_enoclqcg types [Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
+		FIELD f_enoclqcg variants [Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
 		METHOD <init> ([Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;)V
-			ARG 1 types
-		METHOD m_vldseqkj getRandomType (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
+			ARG 1 variants
+		METHOD m_vldseqkj getRandomVariant (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
 			ARG 1 random
 	CLASS C_oacesbpf AxolotlLookControl
 		METHOD <init> (Lnet/minecraft/unmapped/C_dkiorddu;Lnet/minecraft/unmapped/C_dkiorddu;I)V
 			ARG 2 axolotl
 			ARG 3 maxYawDifference
-	CLASS C_wibhmvyi Type
+	CLASS C_wibhmvyi Variant
 		FIELD f_bsgarvwt id I
 		FIELD f_hxixfkzl name Ljava/lang/String;
-		FIELD f_ujjymvcq TYPES [Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
+		FIELD f_ujjymvcq VARIANTS [Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
 		FIELD f_ykasltgf natural Z
 		METHOD <init> (Ljava/lang/String;IILjava/lang/String;Z)V
 			ARG 3 id
@@ -97,7 +97,7 @@ CLASS net/minecraft/unmapped/C_dkiorddu net/minecraft/entity/passive/AxolotlEnti
 		METHOD m_biatcobk getRandomNatural (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
 			ARG 0 random
 		METHOD m_kkakmjcc (ZLnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;)Z
-			ARG 1 type
+			ARG 1 variant
 		METHOD m_mfptbgae getId ()I
 		METHOD m_rccogdrt getRandom (Lnet/minecraft/unmapped/C_rlomrsco;Z)Lnet/minecraft/unmapped/C_dkiorddu$C_wibhmvyi;
 			ARG 0 random
