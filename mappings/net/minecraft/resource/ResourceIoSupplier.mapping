@@ -1,7 +1,17 @@
 CLASS net/minecraft/unmapped/C_zccdhhqk net/minecraft/resource/ResourceIoSupplier
+	COMMENT Represents a supplier of resource I/O.
 	METHOD create create (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_zccdhhqk;
+		COMMENT {@return an input stream supplier of the file at the given path}
 		ARG 0 path
+			COMMENT the path of the file
 	METHOD create create (Ljava/util/zip/ZipFile;Ljava/util/zip/ZipEntry;)Lnet/minecraft/unmapped/C_zccdhhqk;
+		COMMENT {@return an input stream supplier of the given ZIP file's entry}
 		ARG 0 zip
+			COMMENT the zip file
 		ARG 1 entry
+			COMMENT the entry to open in the zip file
 	METHOD get get ()Ljava/lang/Object;
+		COMMENT Supplies the resource.
+		COMMENT
+		COMMENT @return the resource
+		COMMENT @throws IOException if supplying the resource failed
