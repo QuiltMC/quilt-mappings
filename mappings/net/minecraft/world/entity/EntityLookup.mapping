@@ -4,10 +4,12 @@ CLASS net/minecraft/unmapped/C_mmgrdxia net/minecraft/world/entity/EntityLookup
 	COMMENT <p>It supports iteration, unfiltered or via intersection with boxes and/or type filtration, and accessing by ID.
 	COMMENT
 	COMMENT @param <T> the type of indexed entity
-	METHOD m_hcbcytkb forEachIntersects (Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Consumer;)V
+	METHOD m_hcbcytkb forEachIntersecting (Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Consumer;)V
+		COMMENT Runs the supplied consumer over every cached entity that intersects with the provided box.
 		ARG 1 box
 		ARG 2 action
-	METHOD m_jinuyjwx forEachIntersects (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_gibrwunu;)V
+	METHOD m_jinuyjwx forEachIntersecting (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_gibrwunu;)V
+		COMMENT Runs the supplied consumer over every cached entity that matches the provided type filter as well as intersects with the provided box.
 		ARG 1 filter
 		ARG 2 box
 		ARG 3 consumer
@@ -17,6 +19,7 @@ CLASS net/minecraft/unmapped/C_mmgrdxia net/minecraft/world/entity/EntityLookup
 		COMMENT Returns an entity by its network ID, or {@code null} if none is found.
 		ARG 1 id
 	METHOD m_wpuibyad forEach (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_gibrwunu;)V
+		COMMENT Runs the supplied consumer over every cached entity that matches the provided type filter.
 		ARG 1 filter
 		ARG 2 consumer
 	METHOD m_yibysghy get (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_sncvekqg;
