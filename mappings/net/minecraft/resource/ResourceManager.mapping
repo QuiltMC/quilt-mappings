@@ -12,6 +12,12 @@ CLASS net/minecraft/unmapped/C_tmnrpasf net/minecraft/resource/ResourceManager
 		ARG 1 id
 			COMMENT the resource identifier to search for
 	METHOD m_cctjvulo findAllResources (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Map;
+		COMMENT Returns a map of identifiers and lists of all the matched resources from every resource pack.
+		COMMENT <p>
+		COMMENT Scanning begins in {@code startingPath} and each candidate file present under that directory
+		COMMENT will be offered up to the predicate to decide whether it should be included or not.
+		COMMENT
+		COMMENT @return the map matching identifiers and lists of all the matched resources}
 		ARG 1 startingPath
 			COMMENT the starting path to begin scanning from
 		ARG 2 pathFilter
@@ -34,3 +40,4 @@ CLASS net/minecraft/unmapped/C_tmnrpasf net/minecraft/resource/ResourceManager
 	METHOD m_sqceqlye getAllNamespaces ()Ljava/util/Set;
 		COMMENT Gets a set of all namespaces offered by the resource packs loaded by this manager.
 	CLASS C_wcsftorr Empty
+		COMMENT Represents a resource manager that does not hold any resources.
