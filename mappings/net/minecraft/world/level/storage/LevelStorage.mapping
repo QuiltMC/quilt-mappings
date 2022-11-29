@@ -19,11 +19,13 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 	METHOD m_dugbwxzi createLevelDataParser (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Ljava/util/function/BiFunction;
 		ARG 0 ops
 		ARG 3 lifecycle
+	METHOD m_hqcuaqjn getEnabledFeatures (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_czxxrbcp;
 	METHOD m_kbwceymw loadCompactLevelData (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 0 path
 	METHOD m_kqxywods readLevelProperties (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Ljava/util/function/BiFunction;)Ljava/lang/Object;
 		ARG 1 directory
 		ARG 2 levelDataParser
+	METHOD m_luaijwph parseFeatureAndDataSetttings (Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lnet/minecraft/unmapped/C_yknpgzdr;
 	METHOD m_mglixzcz createSession (Ljava/lang/String;)Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;
 		ARG 1 directoryName
 	METHOD m_nieswrje levelExists (Ljava/lang/String;)Z
@@ -39,6 +41,7 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 	METHOD m_wewggpif getSavesDirectory ()Ljava/nio/file/Path;
 	METHOD m_wspekgur loadSummaries (Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 levels
+	METHOD m_xbutxuca parseFeatureAndDataSettings (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_yknpgzdr;
 	METHOD m_xvdymvqq getFormatName ()Ljava/lang/String;
 	CLASS C_aynhbbal LevelList
 		FIELD f_yifrugyf levels Ljava/util/List;
@@ -67,6 +70,7 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 			ARG 1 name
 		METHOD m_nhieafsm readLevelProperties (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Lcom/mojang/datafixers/util/Pair;
 			ARG 1 ops
+			ARG 2 settings
 			ARG 4 lifecycle
 		METHOD m_nrokxxpv createBackup ()J
 		METHOD m_nywumhbl backupLevelDataFile (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jkevluio;Lnet/minecraft/unmapped/C_hhlwcnih;)V
