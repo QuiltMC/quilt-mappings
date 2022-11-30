@@ -120,6 +120,13 @@ front of the coordinate (`velocityX`, not `xVelocity`).
 
 Name screen coordinates `x` and `y`, rather than `left` and `top`.
 
+### Network Packets
+
+Always suffix packet names with `S2CPacket` (server to client) or `C2SPacket` (client to server).
+
+Packet names should be in the form of `NounVerbed`: `ResourcePackSentS2CPacket`, `BlockUpdatedS2CPacket`, `PlayerMovedC2SPacket`, etc.
+
+
 ## Javadocs
 
 Write sentences for class, method and field javadocs, starting with an uppercase and ending with a period. Start method docs with verbs, like `Gets` or `Called`. Use HTML tags such as `<p>` if the docs have several paragraphs, as line wraps are converted to spaces in the generated documentation. Feel free to start a new line whenever you feel the current line is too long.
