@@ -6,16 +6,20 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	FIELD f_ciwixdmd MAX_Y I
 	FIELD f_crftnqmt lcgBlockSeedIncrement I
 	FIELD f_csbozmqi rainGradientPrev F
+	FIELD f_dwvdsrbg dimension Lnet/minecraft/unmapped/C_cjzoxshv;
 	FIELD f_dxefaeyr blockEntityTickers Ljava/util/List;
 	FIELD f_flkepbnh biomeAccess Lnet/minecraft/unmapped/C_txmmiamu;
 	FIELD f_fzftbvmv MAX_UPDATE_DEPTH I
 	FIELD f_hfugkrtt thunderGradient F
+	FIELD f_hxaproob dimensionKey Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_ifvsmesg iteratingTickingBlockEntities Z
 	FIELD f_jpwdiojf END Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_kgwrxhxy random Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_khmymmmr thread Ljava/lang/Thread;
 	FIELD f_lmvypcus CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_ltnvvkbh MIN_Y I
+	FIELD f_nbddkahl neighborUpdater Lnet/minecraft/unmapped/C_rwmwglbe;
+	FIELD f_oturqgfy tickOrder J
 	FIELD f_oxotuivf NETHER Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_phyzsxpf ambientDarkness I
 	FIELD f_qyjyicxt isClient Z
@@ -35,6 +39,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 5 isClient
 		ARG 6 debugWorld
 		ARG 7 seed
+		ARG 9 maxNeighborUpdateChainDepth
 	METHOD close close ()V
 	METHOD m_aaumwgbp getRainGradient (F)F
 		ARG 1 delta
@@ -48,6 +53,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 6 pitch
 	METHOD m_aitngayn isInvalidVertically (I)Z
 		ARG 0 y
+	METHOD m_aoyyyffm getDimensionHolder ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_arweyhee getRecipeManager ()Lnet/minecraft/unmapped/C_hjseusrb;
 	METHOD m_asiupuuh updateNeighbor (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
@@ -83,14 +89,6 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 3 data
 	METHOD m_dhgnxris getReceivedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 1 pos
-	METHOD m_dmodcllo playSoundFromEntity (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FFJ)V
-		ARG 1 player
-		ARG 2 entity
-		ARG 3 sound
-		ARG 4 category
-		ARG 5 volume
-		ARG 6 pitch
-		ARG 7 seed
 	METHOD m_dmpgcjnl updateListeners (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;I)V
 		ARG 1 pos
 		ARG 2 oldState
@@ -106,6 +104,8 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 1 pos
 		ARG 2 old
 		ARG 3 updated
+	METHOD m_ejbgumac shouldUpdatePostDeath (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 entity
 	METHOD m_eoeuakuf isSavingDisabled ()Z
 	METHOD m_fammcwty getRandomPosInChunk (IIII)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 x
@@ -113,6 +113,11 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 3 z
 	METHOD m_fjhzbigq addBlockEntityTicker (Lnet/minecraft/unmapped/C_qznfczhx;)V
 		ARG 1 ticker
+	METHOD m_fzgkmzuh getDimensionKey ()Lnet/minecraft/unmapped/C_xhhleach;
+	METHOD m_fzwactzm getDestructionType (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Lnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;
+		ARG 1 dropDecayRule
+	METHOD m_glgjrdin shouldTickBlocksAt (Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 1 pos
 	METHOD m_hqnvlben isThundering ()Z
 	METHOD m_idhpmqoa tickBlockEntities ()V
 	METHOD m_idywdbzo isDay ()Z
@@ -150,6 +155,15 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 11 pitch
 		ARG 12 seed
 	METHOD m_jmpgqbuj calculateAmbientDarkness ()V
+	METHOD m_kmoarvta playSound (DDDLnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FFZ)V
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+		ARG 7 sound
+		ARG 8 category
+		ARG 9 volume
+		ARG 10 pitch
+		ARG 11 delay
 	METHOD m_kvxjplzd setBlockBreakingInfo (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 		ARG 1 entityId
 		ARG 2 pos
@@ -225,6 +239,17 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_rbciwyji getEmittedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)I
 		ARG 1 pos
 		ARG 2 direction
+	METHOD m_rlsuyrel createExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;DDDFZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;Z)Lnet/minecraft/unmapped/C_aahhrzpf;
+		ARG 1 entity
+		ARG 2 source
+		ARG 3 behaviour
+		ARG 4 x
+		ARG 6 y
+		ARG 8 z
+		ARG 10 power
+		ARG 11 createFire
+		ARG 12 sourceType
+		ARG 13 particles
 	METHOD m_rlypwwxo getProfilerSupplier ()Ljava/util/function/Supplier;
 	METHOD m_rojxhffu addImportantParticle (Lnet/minecraft/unmapped/C_nqucohct;ZDDDDDD)V
 		ARG 1 parameters
@@ -240,29 +265,82 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_rsnbcuug getWorldChunk (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hrdsvlkq;
 		ARG 1 pos
 	METHOD m_seprkevn updateNeighbor (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
+		ARG 1 state
 		ARG 2 pos
 		ARG 3 fromBlock
 		ARG 4 fromPos
 		ARG 5 notify
+	METHOD m_sskjdjng playSound (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FFZ)V
+		ARG 2 sound
+		ARG 3 category
+		ARG 4 volume
+		ARG 5 pitch
+		ARG 6 delay
 	METHOD m_thuraolg isTopSolid (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 pos
 		ARG 2 entity
+	METHOD m_trdkawsg createExplosion (Lnet/minecraft/unmapped/C_astfners;DDDFZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)Lnet/minecraft/unmapped/C_aahhrzpf;
+		ARG 1 entity
+		ARG 2 x
+		ARG 4 y
+		ARG 6 z
+		ARG 8 power
+		ARG 9 createFire
+		ARG 10 sourceType
 	METHOD m_uhrnzysl tickEntity (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 tickConsumer
 		ARG 2 entity
+	METHOD m_ukwlvkwt createExplosion (Lnet/minecraft/unmapped/C_astfners;DDDFLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)Lnet/minecraft/unmapped/C_aahhrzpf;
+		ARG 1 entity
+		ARG 2 x
+		ARG 4 y
+		ARG 6 z
+		ARG 8 power
+		ARG 9 sourceType
 	METHOD m_vtkdplrr updateNeighborsAlways (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 pos
 		ARG 2 block
+	METHOD m_wapcarkl collectEntities (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Predicate;Ljava/util/List;)V
+		ARG 1 filter
+		ARG 2 box
+		ARG 3 predicate
+		ARG 4 collection
 	METHOD m_wxreehgi hasHighHumidity (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
 	METHOD m_wziyyyom addBlockEntity (Lnet/minecraft/unmapped/C_kvegafmh;)V
 		ARG 1 blockEntity
+	METHOD m_xggntttw collectEntities (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Predicate;Ljava/util/List;I)V
+		ARG 1 filter
+		ARG 2 box
+		ARG 3 predicate
+		ARG 4 collection
+		ARG 5 maxEntities
 	METHOD m_xkszqtiq getTime ()J
 	METHOD m_xlotwvuk getThunderGradient (F)F
 		ARG 1 delta
+	METHOD m_xqjsvbxs createExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;DDDFZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)Lnet/minecraft/unmapped/C_aahhrzpf;
+		ARG 1 entity
+		ARG 2 source
+		ARG 3 behaviour
+		ARG 4 x
+		ARG 6 y
+		ARG 8 z
+		ARG 10 power
+		ARG 11 createFire
+		ARG 12 sourceType
 	METHOD m_yihsckhz isNight ()Z
+	METHOD m_yjpgenqy shouldTickBlocksInChunk (J)Z
+		ARG 1 chunkPos
 	METHOD m_ysqwrcop isValid (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 0 pos
+	METHOD m_zceyhlgo createExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;Lnet/minecraft/unmapped/C_vgpupfxx;FZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)Lnet/minecraft/unmapped/C_aahhrzpf;
+		ARG 1 entity
+		ARG 2 source
+		ARG 3 behaviour
+		ARG 4 pos
+		ARG 5 power
+		ARG 6 createFire
+		ARG 7 sourceType
 	METHOD m_zeanzqdx addDetailsToCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)Lnet/minecraft/unmapped/C_qympisds;
 		ARG 1 report
 	METHOD m_zelqnisf addImportantParticle (Lnet/minecraft/unmapped/C_nqucohct;DDDDDD)V
@@ -276,3 +354,4 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_zlmwnihs sendEntityStatus (Lnet/minecraft/unmapped/C_astfners;B)V
 		ARG 1 entity
 		ARG 2 status
+	CLASS C_dlzvrbnu ExplosionSourceType

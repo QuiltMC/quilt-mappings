@@ -9,6 +9,9 @@ CLASS net/minecraft/unmapped/C_sboqtqtk net/minecraft/world/timer/Timer
 	FIELD f_ymnhndya eventsByName Lcom/google/common/collect/Table;
 	METHOD <init> (Lnet/minecraft/unmapped/C_wxduvmwl;)V
 		ARG 1 timerCallbackSerializer
+	METHOD <init> (Lnet/minecraft/unmapped/C_wxduvmwl;Ljava/util/stream/Stream;)V
+		ARG 1 callback
+		ARG 2 events
 	METHOD m_aoznuufu processEvents (Ljava/lang/Object;J)V
 		ARG 1 server
 		ARG 2 time
@@ -16,6 +19,9 @@ CLASS net/minecraft/unmapped/C_sboqtqtk net/minecraft/world/timer/Timer
 		ARG 1 event
 	METHOD m_cwdhrtax addEvent (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
+	METHOD m_lmvytjit removeRow (Ljava/lang/String;)I
+		ARG 1 rowKey
+	METHOD m_okshciob getOccupiedRowKeys ()Ljava/util/Set;
 	METHOD m_uqguxpwb setEvent (Ljava/lang/String;JLnet/minecraft/unmapped/C_kjeqrobd;)V
 		ARG 1 name
 		ARG 2 triggerTime
@@ -27,3 +33,8 @@ CLASS net/minecraft/unmapped/C_sboqtqtk net/minecraft/world/timer/Timer
 		FIELD f_fbubnymg callback Lnet/minecraft/unmapped/C_kjeqrobd;
 		FIELD f_qbxzkjdg id Lcom/google/common/primitives/UnsignedLong;
 		FIELD f_rcinpmgc name Ljava/lang/String;
+		METHOD <init> (JLcom/google/common/primitives/UnsignedLong;Ljava/lang/String;Lnet/minecraft/unmapped/C_kjeqrobd;)V
+			ARG 1 triggerTime
+			ARG 3 id
+			ARG 4 name
+			ARG 5 callback

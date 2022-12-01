@@ -1,0 +1,71 @@
+CLASS net/minecraft/unmapped/C_wipyzkrd net/minecraft/world/ChainedNeighborUpdater
+	FIELD f_aignokcb LOGGER Lorg/slf4j/Logger;
+	FIELD f_aylhqgxo updateQueue Ljava/util/ArrayDeque;
+	FIELD f_clmgyged maxChainedUpdates I
+	FIELD f_fvmyfbdt pendingUpdates Ljava/util/List;
+	FIELD f_shziyqtt world Lnet/minecraft/unmapped/C_cdctfzbn;
+	FIELD f_uyalpcfc currentChainDepth I
+	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;I)V
+		ARG 1 world
+		ARG 2 maxChainedUpdates
+	METHOD m_pyffdcvb runQueuedUpdates ()V
+	METHOD m_vrfsomko queueUpdate (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_wipyzkrd$C_eqnuxltf;)V
+		ARG 1 pos
+		ARG 2 entry
+	CLASS C_enrbbuer AllDirectionUpdate
+		FIELD f_cwbwhgyz pos Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_kwdccuvg excluded Lnet/minecraft/unmapped/C_xpuuihxf;
+		FIELD f_ppecfgso currentDirectionIndex I
+		FIELD f_xwcaysdh block Lnet/minecraft/unmapped/C_mmxmpdoq;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_xpuuihxf;)V
+			ARG 1 pos
+			ARG 2 block
+			ARG 3 excluded
+	CLASS C_eqnuxltf Update
+		METHOD m_fvfjaiku update (Lnet/minecraft/unmapped/C_cdctfzbn;)Z
+			ARG 1 world
+	CLASS C_ujbdzsio StateReplacementUpdate
+		FIELD f_ifcogqnb neighborPos Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_jhbxfhxx flags I
+		FIELD f_tgpufela state Lnet/minecraft/unmapped/C_txtbiemp;
+		FIELD f_yglsoail direction Lnet/minecraft/unmapped/C_xpuuihxf;
+		FIELD f_yojbkywa pos Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD <init> (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;I)V
+			ARG 1 direction
+			ARG 2 state
+			ARG 3 pos
+			ARG 4 neighborPos
+			ARG 5 flags
+		METHOD m_locjngse state ()Lnet/minecraft/unmapped/C_txtbiemp;
+		METHOD m_prqxiqqs flags ()I
+		METHOD m_qsftrrcq direction ()Lnet/minecraft/unmapped/C_xpuuihxf;
+		METHOD m_rpyblsno neighborPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_vlocvyyt pos ()Lnet/minecraft/unmapped/C_hynzadkk;
+	CLASS C_vmamknko SimpleUpdate
+		FIELD f_lhoxadvd neighborPos Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_tdczhxfp pos Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_tdhsslaf block Lnet/minecraft/unmapped/C_mmxmpdoq;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;)V
+			ARG 1 pos
+			ARG 2 block
+			ARG 3 neighborPos
+		METHOD m_pzunohtx neighborPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_xovhpulp pos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_xvlcgksv block ()Lnet/minecraft/unmapped/C_mmxmpdoq;
+	CLASS C_zfpsxyhk StateStoringUpdate
+		FIELD f_cnsnnffc movedByPiston Z
+		FIELD f_iswfnqze block Lnet/minecraft/unmapped/C_mmxmpdoq;
+		FIELD f_nswnnbbc state Lnet/minecraft/unmapped/C_txtbiemp;
+		FIELD f_skveeiah neighborPos Lnet/minecraft/unmapped/C_hynzadkk;
+		FIELD f_ydsskqwm pos Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD <init> (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
+			ARG 1 state
+			ARG 2 pos
+			ARG 3 block
+			ARG 4 neighborPos
+			ARG 5 movedByPiston
+		METHOD m_bjkfszqu state ()Lnet/minecraft/unmapped/C_txtbiemp;
+		METHOD m_cohbngtp pos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_lsykmvof neighborPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_nfujqjpw movedByPiston ()Z
+		METHOD m_vderzmes block ()Lnet/minecraft/unmapped/C_mmxmpdoq;
