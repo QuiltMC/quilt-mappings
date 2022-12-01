@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelStorage
+CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveStorage
 	FIELD f_jpohltpc DATA_KEY Ljava/lang/String;
 	FIELD f_lplhvbwf dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_obbylhph GENERATOR_OPTION_KEYS Lcom/google/common/collect/ImmutableList;
@@ -12,27 +12,28 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 		ARG 3 dataFixer
 	METHOD m_acbaanbr create (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_bpwagnit;
 		ARG 0 path
-	METHOD m_ddtuooji getLevelList ()Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;
-	METHOD m_dekygopt createLevelDataParser (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Z)Ljava/util/function/BiFunction;
+	METHOD m_ddtuooji getWorldSaveList ()Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;
+	METHOD m_dekygopt createWorldDataParser (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Z)Ljava/util/function/BiFunction;
 		ARG 1 directory
 		ARG 2 locked
-	METHOD m_dugbwxzi createLevelDataParser (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Ljava/util/function/BiFunction;
+	METHOD m_dugbwxzi createWorldDataParser (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Ljava/util/function/BiFunction;
 		ARG 0 ops
 		ARG 3 lifecycle
 	METHOD m_hqcuaqjn getEnabledFeatures (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_czxxrbcp;
-	METHOD m_kbwceymw loadCompactLevelData (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_oivssbvb;
+	METHOD m_kbwceymw loadCompactWorldData (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 0 path
-	METHOD m_kqxywods readLevelProperties (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Ljava/util/function/BiFunction;)Ljava/lang/Object;
+	METHOD m_kqxywods readWorldSaveProperties (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Ljava/util/function/BiFunction;)Ljava/lang/Object;
 		ARG 1 directory
 		ARG 2 levelDataParser
 	METHOD m_luaijwph parseFeatureAndDataSetttings (Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lnet/minecraft/unmapped/C_yknpgzdr;
+		ARG 0 path
 	METHOD m_mglixzcz createSession (Ljava/lang/String;)Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;
 		ARG 1 directoryName
-	METHOD m_nieswrje levelExists (Ljava/lang/String;)Z
+	METHOD m_nieswrje worldSaveExists (Ljava/lang/String;)Z
 		ARG 1 name
 	METHOD m_ovbzmrty getCurrentVersion ()I
 	METHOD m_pxqlqsgm getBackupsDirectory ()Ljava/nio/file/Path;
-	METHOD m_tcjbtdab isLevelNameValid (Ljava/lang/String;)Z
+	METHOD m_tcjbtdab isWorldNameValid (Ljava/lang/String;)Z
 		ARG 1 name
 	METHOD m_wegrclwo readGeneratorProperties (Lcom/mojang/serialization/Dynamic;Lcom/mojang/datafixers/DataFixer;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 levelData
@@ -40,18 +41,18 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 		ARG 2 version
 	METHOD m_wewggpif getSavesDirectory ()Ljava/nio/file/Path;
 	METHOD m_wspekgur loadSummaries (Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;)Ljava/util/concurrent/CompletableFuture;
-		ARG 1 levels
+		ARG 1 worldSaves
 	METHOD m_xbutxuca parseFeatureAndDataSettings (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_yknpgzdr;
 	METHOD m_xvdymvqq getFormatName ()Ljava/lang/String;
-	CLASS C_aynhbbal LevelList
-		FIELD f_yifrugyf levels Ljava/util/List;
+	CLASS C_aynhbbal WorldList
+		FIELD f_yifrugyf worldSaves Ljava/util/List;
 		METHOD <init> (Ljava/util/List;)V
-			ARG 1 levels
+			ARG 1 worldSaves
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD iterator iterator ()Ljava/util/Iterator;
 		METHOD m_pvchedat isEmpty ()Z
-		METHOD m_xlkbgwka levels ()Ljava/util/List;
+		METHOD m_xlkbgwka worldSaves ()Ljava/util/List;
 	CLASS C_unecclfw Session
 		FIELD f_imwffmfo directoryName Ljava/lang/String;
 		FIELD f_itqzdvso directory Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;
@@ -68,7 +69,7 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 		METHOD m_kytlqtwd getDirectoryName ()Ljava/lang/String;
 		METHOD m_ltpgwzhg save (Ljava/lang/String;)V
 			ARG 1 name
-		METHOD m_nhieafsm readLevelProperties (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Lcom/mojang/datafixers/util/Pair;
+		METHOD m_nhieafsm readWorldSaveProperties (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Lcom/mojang/datafixers/util/Pair;
 			ARG 1 ops
 			ARG 2 settings
 			ARG 4 lifecycle
@@ -80,8 +81,9 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 		METHOD m_pxtbpyav backupLevelDataFile (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jkevluio;)V
 			ARG 1 registryManager
 			ARG 2 saveProperties
-		METHOD m_qlhjzadq getLevelSummary ()Lnet/minecraft/unmapped/C_wfuumzdp;
+		METHOD m_qlhjzadq getWorldSaveSummary ()Lnet/minecraft/unmapped/C_wfuumzdp;
 		METHOD m_tymqntik deleteSessionLock ()V
+		METHOD m_ummbmyxa getFeatureAndDataSettings ()Lnet/minecraft/unmapped/C_yknpgzdr;
 		METHOD m_vbnwdyms getWorldDirectory (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/nio/file/Path;
 			ARG 1 key
 		CLASS C_broyznts
@@ -89,19 +91,19 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/level/storage/LevelS
 			METHOD visitFile visitFile (Ljava/lang/Object;Ljava/nio/file/attribute/BasicFileAttributes;)Ljava/nio/file/FileVisitResult;
 		CLASS C_zvjetysm
 			METHOD visitFile visitFile (Ljava/lang/Object;Ljava/nio/file/attribute/BasicFileAttributes;)Ljava/nio/file/FileVisitResult;
-	CLASS C_wxntpspm LevelDirectory
+	CLASS C_wxntpspm WorldDirectory
 		FIELD f_iapirmxc path Ljava/nio/file/Path;
 		METHOD <init> (Ljava/nio/file/Path;)V
 			ARG 1 path
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_awnmrrfa getName ()Ljava/lang/String;
-		METHOD m_bvgoafsy getOldLevelDatPath ()Ljava/nio/file/Path;
+		METHOD m_bvgoafsy getOldWorldDatPath ()Ljava/nio/file/Path;
 		METHOD m_iwqadtww path ()Ljava/nio/file/Path;
-		METHOD m_kefjmyjb getLevelDatPath ()Ljava/nio/file/Path;
+		METHOD m_kefjmyjb getWorldDatPath ()Ljava/nio/file/Path;
 		METHOD m_lwcfihgf getIconPath ()Ljava/nio/file/Path;
 		METHOD m_mcfvmigw getPath (Lnet/minecraft/unmapped/C_ldtdvgrs;)Ljava/nio/file/Path;
 			ARG 1 savePath
 		METHOD m_odyagkgd getSessionLockPath ()Ljava/nio/file/Path;
-		METHOD m_xrwcocfp getCorruptedLevelDatPath (Ljava/time/LocalDateTime;)Ljava/nio/file/Path;
+		METHOD m_xrwcocfp getCorruptedWorldDatPath (Ljava/time/LocalDateTime;)Ljava/nio/file/Path;
 			ARG 1 dateTime
