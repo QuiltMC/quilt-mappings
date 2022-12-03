@@ -125,6 +125,7 @@ Name screen coordinates `x` and `y`, rather than `left` and `top`.
 Always suffix packet names with `S2CPacket` (server to client) or `C2SPacket` (client to server).
 
 Packet names should be in the form of `NounVerbed`: `ResourcePackSentS2CPacket`, `BlockUpdatedS2CPacket`, `PlayerMovedC2SPacket`, etc.
+In some cases, the suffix `WithX` can come after the verb. This is to prevent situations where an awkward `And` must be inserted, such as `PlayerAndEntityInteractedC2SPacket`, over `PlayerInteractedWithEntityC2SPacket`.
 
 
 ## Javadocs
