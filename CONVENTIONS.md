@@ -127,6 +127,8 @@ Always suffix packet names with `S2CPacket` (server to client) or `C2SPacket` (c
 Packet names should be in the form of `NounVerbed`: `ResourcePackSentS2CPacket`, `BlockUpdatedS2CPacket`, `PlayerMovedC2SPacket`, etc.
 In some cases, the suffix `WithX` can come after the verb. This is to prevent situations where an awkward `And` must be inserted, such as `PlayerAndEntityInteractedC2SPacket`, over `PlayerInteractedWithEntityC2SPacket`.
 
+Sometimes, a packet is purely data and does not have an action associated. In this case the packet name should simply be `NounSentS2CPacket` or `NounSentC2SPacket`.
+The listener (found in the `net.minecraft.network.listener` package) should be oppositely named: `onNounReceived`.
 
 ## Javadocs
 
