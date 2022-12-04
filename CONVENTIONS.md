@@ -124,11 +124,11 @@ Name screen coordinates `x` and `y`, rather than `left` and `top`.
 
 Always suffix packet names with `S2CPacket` (server to client) or `C2SPacket` (client to server).
 
-Packet names should be in the form of `NounVerbed`: `ResourcePackSentS2CPacket`, `BlockUpdatedS2CPacket`, `PlayerMovedC2SPacket`, etc.
-In some cases, the suffix `WithX` can come after the verb. This is to prevent situations where an awkward `And` must be inserted, such as `PlayerAndEntityInteractedC2SPacket`, over `PlayerInteractedWithEntityC2SPacket`.
+Packet names should be in the form of `[Noun][Verbed]`: `ResourcePackSentS2CPacket`, `BlockUpdatedS2CPacket`, `PlayerMovedC2SPacket`, etc.
+In some cases, the suffix `WithX` can come after the verb. This is to prevent situations where an awkward `And` would be inserted, avoiding `PlayerAndEntityInteractedC2SPacket`, in favor of `PlayerInteractedWithEntityC2SPacket`.
 
-Sometimes, a packet is purely data and does not have an action associated. In this case the packet name should simply be `NounSentS2CPacket` or `NounSentC2SPacket`.
-The listener (found in the `net.minecraft.network.listener` package) should be oppositely named: `onNounReceived`.
+Sometimes, a packet is purely data and does not have an action associated. In this case the packet name should simply be `[Noun]SentS2CPacket` or `[Noun]SentC2SPacket`.
+The listener (found in the `net.minecraft.network.listener` package) should be oppositely named: `on[Noun]Received`.
 
 Often, Minecraft will have a packet that manipulates a piece of data in various different ways. For example, it could be one packet devoted to adding a player to the server, removing a player from the server, or updating that player's data.
 In this case, the verb used is `Updated`. This makes our example package name `PlayerUpdatedS2CPacket`.
