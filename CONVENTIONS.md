@@ -130,6 +130,11 @@ In some cases, the suffix `WithX` can come after the verb. This is to prevent si
 Sometimes, a packet is purely data and does not have an action associated. In this case the packet name should simply be `NounSentS2CPacket` or `NounSentC2SPacket`.
 The listener (found in the `net.minecraft.network.listener` package) should be oppositely named: `onNounReceived`.
 
+Often, Minecraft will have a packet that manipulates a piece of data in various different ways. For example, it could be one packet devoted to adding a player to the server, removing a player from the server, or updating that player's data.
+In this case, the verb used is `Updated`. This makes our example package name `PlayerUpdatedS2CPacket`.
+
+Another convention is to use the `Occurred` verb for a package that defines an ambiguous event, such as `PlayerActionOccurredC2SPacket` or `BlockEventOccurredS2CPacket`.
+
 ## Javadocs
 
 Write sentences for class, method and field javadocs, starting with an uppercase and ending with a period. Start method docs with verbs, like `Gets` or `Called`. Use HTML tags such as `<p>` if the docs have several paragraphs, as line wraps are converted to spaces in the generated documentation. Feel free to start a new line whenever you feel the current line is too long.
