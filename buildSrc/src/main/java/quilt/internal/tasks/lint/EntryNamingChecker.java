@@ -10,6 +10,8 @@ import cuchaz.enigma.translation.representation.entry.MethodEntry;
 import java.util.function.Function;
 
 public class EntryNamingChecker implements Checker<Entry<?>> {
+    private static final String UNMAPPED_CLASS_PACKAGE = "net/minecraft/unmapped/";
+
     @Override
     public void check(Entry<?> entry, EntryMapping mapping, Function<Entry<?>, AccessFlags> accessProvider, ErrorReporter errorReporter) {
         if (mapping.targetName() == null) {
@@ -29,9 +31,13 @@ public class EntryNamingChecker implements Checker<Entry<?>> {
         }
 
         if (entry instanceof ClassEntry) {
-            name = name.substring(name.lastIndexOf('/') + 1);
-            if (!startsWithUppercase(name)) {
-                errorReporter.error("class name does not start with uppercase character");
+            if (name.startsWith(UNMAPPED_CLASS_PACKAGE)) {
+                errorReporter.error("named class in unmapped classes package");
+            } else {
+                name = name.substring(name.lastIndexOf('/') + 1);
+                if (!startsWithUppercase(name)) {
+                    errorReporter.error("class name does not start with uppercase character");
+                }
             }
         } else {
             if (entry instanceof MethodEntry) {
