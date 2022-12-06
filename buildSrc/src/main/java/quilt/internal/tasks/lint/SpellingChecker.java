@@ -28,7 +28,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
             Set<String> englishWords = getLines(url.openStream());
             ALLOWED_WORDS.addAll(englishWords);
         } catch (Exception e) {
-            throw new RuntimeException("failed to download and read english word file for spell check in mapping lint task!\n" + e);
+            throw new RuntimeException("failed to download and read english word file for spell check in mapping lint task!", e);
         }
 
         // collect minecraft words
