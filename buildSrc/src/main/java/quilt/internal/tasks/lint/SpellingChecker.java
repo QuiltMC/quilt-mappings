@@ -25,7 +25,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
         URL url;
         try {
             url = new URL("https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/main/allowed_english_words.txt");
-            Set<String> englishWords = new java.util.Scanner(url.openStream()).useDelimiter("\\A").next().lines().collect(Collectors.toSet());
+            Set<String> englishWords = getLines(url.openStream());
             ALLOWED_WORDS.addAll(englishWords);
         } catch (Exception e) {
             throw new RuntimeException("failed to download and read english word file for spell check in mapping lint task!\n" + e);
