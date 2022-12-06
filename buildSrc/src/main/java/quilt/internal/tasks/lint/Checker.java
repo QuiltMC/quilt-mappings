@@ -22,6 +22,7 @@ public interface Checker<E extends Entry<?>> extends Serializable {
     Set<Checker<Entry<?>>> DEFAULT_CHECKERS = Set.of(
             new JavadocChecker(),
             new EntryNamingChecker(),
+            new SpellingChecker(),
             new FieldNamingChecker().withTypeGuard(FieldEntry.class)
     );
 
