@@ -10,6 +10,15 @@ CLASS net/minecraft/unmapped/C_izhcfpjy net/minecraft/util/FileNameUtil
 		ARG 0 pathSegment
 	METHOD m_fxhongpi isNormal (Ljava/nio/file/Path;)Z
 		ARG 0 path
+	METHOD m_gjmuclbd createDirectoriesAndFollowSymlinks (Ljava/nio/file/Path;)V
+		COMMENT Calls {@link java.nio.file.Files#createDirectories(Path,java.nio.file.attribute.FileAttribute[])} while making sure that the given path is a real path.
+		COMMENT <p>
+		COMMENT If the given path is a symlink, the real path will be gathered
+		COMMENT and the directories creation will run on the real path.
+		COMMENT <p>
+		COMMENT If the directories exist already then nothing happens.
+		ARG 0 path
+			COMMENT the path where the directories should be created
 	METHOD m_gryyrvdi decomposePath (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
 		ARG 0 path
 	METHOD m_inixmyie validatePath ([Ljava/lang/String;)V
