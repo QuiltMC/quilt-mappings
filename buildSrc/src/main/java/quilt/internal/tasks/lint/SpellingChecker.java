@@ -6,13 +6,12 @@ import cuchaz.enigma.translation.representation.entry.ClassEntry;
 import cuchaz.enigma.translation.representation.entry.Entry;
 import cuchaz.enigma.translation.representation.entry.MethodEntry;
 
-import java.io.IOException;
+import java.io.BufferedReader;
 import java.io.InputStream;
-import java.net.MalformedURLException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -29,7 +28,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
             Set<String> englishWords = new java.util.Scanner(url.openStream()).useDelimiter("\\A").next().lines().collect(Collectors.toSet());
             ALLOWED_WORDS.addAll(englishWords);
         } catch (Exception e) {
-            throw new RuntimeException("failed to download and read english word file for spell check in mapping lint task!");
+            throw new RuntimeException("failed to download and read english word file for spell check in mapping lint task!\n" + e);
         }
 
         // collect minecraft words
@@ -39,19 +38,11 @@ public class SpellingChecker implements Checker<Entry<?>> {
         }
 
         Set<String> minecraftWords = getLines(parsedFile);
-        // ignore comments and empty lines
-        Set<String> minecraftWordsCopy = Set.copyOf(minecraftWords);
-        for (String word : minecraftWordsCopy) {
-            if (word.isEmpty() || word.startsWith("//")) {
-                minecraftWords.remove(word);
-            }
-        }
-
         ALLOWED_WORDS.addAll(minecraftWords);
     }
 
     private static Set<String> getLines(InputStream stream) {
-        return new java.util.Scanner(stream).useDelimiter("\\A").next().lines().collect(Collectors.toSet());
+        return new BufferedReader(new InputStreamReader(stream)).lines().filter(line -> !line.isBlank() && !line.startsWith("//")).collect(Collectors.toSet());
     }
 
     @Override
@@ -72,8 +63,9 @@ public class SpellingChecker implements Checker<Entry<?>> {
                 // split by underscores
                 String[] underscoreSeparatedWords = word.split("_");
                 for (String underscoreSeparatedWord : underscoreSeparatedWords) {
-                    // split by uppercase characters and preserve
-                    words.addAll(List.of(Arrays.stream(underscoreSeparatedWord.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")).map(String::toLowerCase).toArray(String[]::new)));
+                    // split by uppercase characters and numbers and preserve
+                    String[] splitWords = underscoreSeparatedWord.split("(?<!(^|[A-Z0-9]))(?=[A-Z0-9])|(?<!^)(?=[A-Z0-9][a-z])");
+                    words.addAll(Arrays.stream(splitWords).map(String::toLowerCase).toList());
                 }
             }
 
