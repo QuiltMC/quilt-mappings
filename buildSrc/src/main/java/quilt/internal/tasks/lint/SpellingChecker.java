@@ -93,8 +93,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
 
     private void checkWord(String word, ErrorReporter reporter) {
         if (!word.isEmpty() && !ALLOWED_WORDS.contains(word)) {
-            // fixme we're only warning now so that gh actions will give us a rough estimate of the performance hit
-            reporter.warning("entry name contains unknown/misspelled word: " + word);
+            reporter.error("entry name contains unknown/misspelled word: " + word);
         }
     }
 }
