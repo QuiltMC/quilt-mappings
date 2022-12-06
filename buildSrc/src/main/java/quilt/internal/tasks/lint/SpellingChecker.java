@@ -15,6 +15,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SpellingChecker implements Checker<Entry<?>> {
+    private static final String PACKAGE_INFO_CLASS_PACKAGE = "net/minecraft/unused/packageinfo/";
+
     private static final Set<String> ALLOWED_WORDS = new HashSet<>();
     static {
         // collect allowed words
@@ -47,7 +49,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
         String name = mapping.targetName();
 
         if (name != null
-                && !name.startsWith("net/minecraft/unused/packageinfo/")
+                && !name.startsWith(PACKAGE_INFO_CLASS_PACKAGE)
                 // ignore unmapped methods and classes
                 && !(entry instanceof MethodEntry && name.startsWith("m_"))
                 && !(entry instanceof ClassEntry && name.startsWith("C_"))) {
