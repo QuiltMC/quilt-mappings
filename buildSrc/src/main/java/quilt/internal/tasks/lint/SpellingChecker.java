@@ -6,7 +6,10 @@ import cuchaz.enigma.translation.representation.entry.ClassEntry;
 import cuchaz.enigma.translation.representation.entry.Entry;
 import cuchaz.enigma.translation.representation.entry.MethodEntry;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -20,10 +23,22 @@ public class SpellingChecker implements Checker<Entry<?>> {
     private static final Set<String> ALLOWED_WORDS = new HashSet<>();
     static {
         // collect allowed words
-        Set<String> englishWords = getLines("allowed_english_words.txt");
-        ALLOWED_WORDS.addAll(englishWords);
+        URL url;
+        try {
+            url = new URL("https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/main/allowed_english_words.txt");
+            Set<String> englishWords = new java.util.Scanner(url.openStream()).useDelimiter("\\A").next().lines().collect(Collectors.toSet());
+            ALLOWED_WORDS.addAll(englishWords);
+        } catch (Exception e) {
+            throw new RuntimeException("failed to download and read english word file for spell check in mapping lint task!");
+        }
 
-        Set<String> minecraftWords = getLines("minecraft_specific_words.txt");
+        // collect minecraft words
+        InputStream parsedFile = SpellingChecker.class.getClassLoader().getResourceAsStream("minecraft_specific_words.txt");
+        if (parsedFile == null) {
+            throw new RuntimeException("could not find minecraft word file for spelling check in mapping lint task!");
+        }
+
+        Set<String> minecraftWords = getLines(parsedFile);
         // ignore comments and empty lines
         Set<String> minecraftWordsCopy = Set.copyOf(minecraftWords);
         for (String word : minecraftWordsCopy) {
@@ -35,13 +50,8 @@ public class SpellingChecker implements Checker<Entry<?>> {
         ALLOWED_WORDS.addAll(minecraftWords);
     }
 
-    private static Set<String> getLines(String filename) {
-        InputStream parsedFile = SpellingChecker.class.getClassLoader().getResourceAsStream(filename);
-        if (parsedFile == null) {
-            throw new RuntimeException("could not find" + filename + "for spelling check in mapping lint task");
-        }
-
-        return new java.util.Scanner(parsedFile).useDelimiter("\\A").next().lines().collect(Collectors.toSet());
+    private static Set<String> getLines(InputStream stream) {
+        return new java.util.Scanner(stream).useDelimiter("\\A").next().lines().collect(Collectors.toSet());
     }
 
     @Override
