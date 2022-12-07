@@ -10,8 +10,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -54,24 +56,37 @@ public class SpellingChecker implements Checker<Entry<?>> {
                 // ignore unmapped methods and classes
                 && !(entry instanceof MethodEntry && name.startsWith("m_"))
                 && !(entry instanceof ClassEntry && name.startsWith("C_"))) {
-            Set<String> words = new HashSet<>();
+            List<String> namesToSplit = new ArrayList<>();
 
-            // fixme optimise!
-            // split by slashes
-            String[] slashSeparatedWords = name.split("/");
-            for (String word : slashSeparatedWords) {
-                // split by underscores
-                String[] underscoreSeparatedWords = word.split("_");
-                for (String underscoreSeparatedWord : underscoreSeparatedWords) {
-                    // split by uppercase characters and numbers and preserve
-                    String[] splitWords = underscoreSeparatedWord.split("(?<!(^|[A-Z0-9]))(?=[A-Z0-9])|(?<!^)(?=[A-Z0-9][a-z])");
-                    words.addAll(Arrays.stream(splitWords).map(String::toLowerCase).toList());
+            // a contains check is necessary here because inner classes do not have package data
+            if (entry instanceof ClassEntry && name.contains("/")) {
+                // add class name - we don't have to handle underscores
+                namesToSplit.add(name.substring(name.lastIndexOf('/') + 1));
+                // add package names and handle underscores
+                String[] packageNames = name.substring(0, name.lastIndexOf('/')).split("/");
+                for (String packageName : packageNames) {
+                    String[] split = packageName.split("_");
+                    namesToSplit.addAll(List.of(split));
                 }
+            } else {
+                // handle underscores
+                String[] split = name.split("_");
+                namesToSplit.addAll(List.of(split));
             }
 
-            for (String word : words) {
+            // split by uppercase characters and numbers and preserve
+            List<String> splitNames = new ArrayList<>();
+            for (String nameToSplit : namesToSplit) {
+                // split by uppercase letters and preserve them in the split strings
+                // also map to all lowercase
+                List<String> split = Arrays.stream(nameToSplit.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")).map(String::toLowerCase).toList();
+                splitNames.addAll(split);
+            }
+
+            for (String word : splitNames) {
                 // ignore numbers
-                // fixme this is a terrible way of doing this!
+                // this requires special handling since we can't use the same regex we use for uppercase characters
+                // that way it would preserve the numbers, and we'd have to strip them anyway
                 boolean containsInts = false;
                 for (char c : word.toCharArray()) {
                     if (Character.isDigit(c)) {
@@ -80,7 +95,6 @@ public class SpellingChecker implements Checker<Entry<?>> {
                     }
                 }
 
-                // fixme this also probably a terrible way of doing this!
                 if (containsInts) {
                     String[] splitWords = word.split("\\d");
                     for (String splitWord : splitWords) {
