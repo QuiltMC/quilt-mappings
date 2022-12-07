@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
 
 public class SpellingChecker implements Checker<Entry<?>> {
     private static final String PACKAGE_INFO_CLASS_PACKAGE = "net/minecraft/unused/packageinfo/";
+    private static final String METHOD_PREFIX = "m_";
+    private static final String CLASS_PREFIX = "C_";
+    private static final char PACKAGE_SEPARATOR = '/';
 
     private static final Set<String> ALLOWED_WORDS = new HashSet<>();
     static {
@@ -54,16 +57,16 @@ public class SpellingChecker implements Checker<Entry<?>> {
         if (name != null
                 && !name.startsWith(PACKAGE_INFO_CLASS_PACKAGE)
                 // ignore unmapped methods and classes
-                && !(entry instanceof MethodEntry && name.startsWith("m_"))
-                && !(entry instanceof ClassEntry && name.startsWith("C_"))) {
+                && !(entry instanceof MethodEntry && name.startsWith(METHOD_PREFIX))
+                && !(entry instanceof ClassEntry && name.startsWith(CLASS_PREFIX))) {
             List<String> namesToSplit = new ArrayList<>();
 
             // a contains check is necessary here because inner classes do not have package data
-            if (entry instanceof ClassEntry && name.contains("/")) {
+            if (entry instanceof ClassEntry && name.contains(String.valueOf(PACKAGE_SEPARATOR))) {
                 // add class name - we don't have to handle underscores
-                namesToSplit.add(name.substring(name.lastIndexOf('/') + 1));
+                namesToSplit.add(name.substring(name.lastIndexOf(PACKAGE_SEPARATOR) + 1));
                 // add package names and handle underscores
-                String[] packageNames = name.substring(0, name.lastIndexOf('/')).split("/");
+                String[] packageNames = name.substring(0, name.lastIndexOf(PACKAGE_SEPARATOR)).split(String.valueOf(PACKAGE_SEPARATOR));
                 for (String packageName : packageNames) {
                     String[] split = packageName.split("_");
                     namesToSplit.addAll(List.of(split));
