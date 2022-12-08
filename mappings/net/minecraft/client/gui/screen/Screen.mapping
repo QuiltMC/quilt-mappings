@@ -6,6 +6,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	FIELD f_enzwkzjs selected Lnet/minecraft/unmapped/C_womhzmwc;
 	FIELD f_fnsnmohs LOGGER Lorg/slf4j/Logger;
 	FIELD f_htifmqlv title Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_jcgjfjni deferredTooltip Lnet/minecraft/unmapped/C_wrmtlwqx$C_umjfmsln;
 	FIELD f_kmcqeiie width I
 	FIELD f_kreiluct children Ljava/util/List;
 	FIELD f_lpsgbjcj SPACE_AFTER_FIRST_TOOLTIP_LINE I
@@ -38,7 +39,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 			COMMENT an offset applied to the V coordinate of the background texture
 	METHOD m_awpofqnh removed ()V
 	METHOD m_bdijjzsm applyNarratorModeChangeDelay ()V
-	METHOD m_czlkqoel renderOrderedTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;II)V
+	METHOD m_czlkqoel renderTextTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;II)V
 		ARG 1 matrices
 		ARG 2 lines
 		ARG 3 x
@@ -91,7 +92,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_iytoanop applyMouseMoveNarratorDelay ()V
 	METHOD m_klvwxtca addScreenNarrations (Lnet/minecraft/unmapped/C_pofrkllk;)V
 		ARG 1 builder
-	METHOD m_krbfbnvv renderTooltipFromComponents (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;II)V
+	METHOD m_krbfbnvv renderTooltipFromComponents (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;IILnet/minecraft/unmapped/C_imjripdz;)V
 		ARG 1 matrices
 		ARG 2 components
 		ARG 3 x
@@ -119,6 +120,17 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_pfjlkadm applyKeyPressNarratorDelay ()V
 	METHOD m_pfmszspr confirmLink (Z)V
 		ARG 1 open
+	METHOD m_pfwvzdim renderWithTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;IIF)V
+		COMMENT Renders this screen along with deferred text tooltip,
+		COMMENT ensuring the tooltip is rendered on top.
+		ARG 1 matrices
+			COMMENT the matrix stack
+		ARG 2 mouseX
+			COMMENT the mouse X-coordinate on the screen
+		ARG 3 mouseY
+			COMMENT the mouse Y-coordinate on the screen
+		ARG 4 delta
+			COMMENT the delta since the last tick
 	METHOD m_pgbqqklr hasAltDown ()Z
 	METHOD m_qrphnkdt findSelectedElementData (Ljava/util/List;Lnet/minecraft/unmapped/C_womhzmwc;)Lnet/minecraft/unmapped/C_wrmtlwqx$C_xlpahkfz;
 		ARG 0 selectables
@@ -157,7 +169,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		COMMENT <p>If the client is in a world, renders the translucent background gradient.
 		COMMENT Otherwise {@linkplain #renderBackgroundTexture(int) renders the background texture}.
 		ARG 1 matrices
-	METHOD m_wjyrnuws addDrawable (Lnet/minecraft/unmapped/C_bwuahlyh;)Lnet/minecraft/unmapped/C_bwuahlyh;
+	METHOD m_wjyrnuws addDrawable (Lnet/minecraft/unmapped/C_dtfldood;)Lnet/minecraft/unmapped/C_dtfldood;
 		ARG 1 drawable
 	METHOD m_xaqeivsh init ()V
 		COMMENT Called when a screen should be initialized.
@@ -165,8 +177,13 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		COMMENT <p>This method is called when this screen is {@linkplain net.minecraft.client.MinecraftClient#setScreen(Screen) opened} or resized.
 	METHOD m_yikydyxb clearAndInit ()V
 	METHOD m_zatdgejs clearChildren ()V
+	METHOD m_zjbuteqk renderDeferredTextTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_wrmtlwqx$C_umjfmsln;II)V
+		ARG 2 textTooltip
+		ARG 3 mouseX
+		ARG 4 mouseY
 	METHOD m_zycsispl narrateScreenIfNarrationEnabled (Z)V
 		ARG 1 useTranslationsCache
+	CLASS C_umjfmsln DeferredTextTooltip
 	CLASS C_xlpahkfz SelectedElementNarrationData
 		FIELD f_eaddwvvk selectType Lnet/minecraft/unmapped/C_womhzmwc$C_gfpnbsjt;
 		FIELD f_foukflut selectable Lnet/minecraft/unmapped/C_womhzmwc;

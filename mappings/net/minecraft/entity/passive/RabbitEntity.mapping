@@ -5,33 +5,21 @@ CLASS net/minecraft/unmapped/C_zejlzfny net/minecraft/entity/passive/RabbitEntit
 	FIELD f_fsojhcku KILLER_BUNNY_ARMOR I
 	FIELD f_hsxffxcf ESCAPE_SPEED D
 	FIELD f_htyiulmz BREEDING_SPEED_MODIFIER D
-	FIELD f_hviksgma BROWN_TYPE I
 	FIELD f_jlpuoyow KILLER_BUNNY Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_kbqbfgon KILLER_BUNNY_TYPE I
-	FIELD f_mdahpmef GOLD_TYPE I
 	FIELD f_nnkcpzet RABBIT_TYPE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_oesfjkue moreCarrotTicks I
 	FIELD f_ohsfuvwj jumpDuration I
 	FIELD f_oiwzxafx ticksUntilJump I
-	FIELD f_onjmvzan SALT_TYPE I
 	FIELD f_pnfxqusz MORE_CARROTS_DELAY I
-	FIELD f_qeosdfiu BLACK_TYPE I
-	FIELD f_rhtsxgkx WHITE_TYPE I
-	FIELD f_svhsdrxi WHITE_SPOTTED_TYPE I
 	FIELD f_tariwbdb ATTACK_SPEED_MODIFIER D
 	FIELD f_tptcprey KILLER_BUNNY_ATTACK_POWER I
 	FIELD f_zkceqqzm lastOnGround Z
-	METHOD m_bvzjfuac getRabbitType ()I
 	METHOD m_dwqfhmua wantsCarrots ()Z
 	METHOD m_dzvjvurg disableJumpControl ()V
 	METHOD m_ffcancvv getJumpProgress (F)F
 		ARG 1 delta
 	METHOD m_fgnzeipk enableJumpControl ()V
 	METHOD m_hfwslrsw startJump ()V
-	METHOD m_mxtcvctb chooseType (Lnet/minecraft/unmapped/C_vdvbsyle;)I
-		ARG 1 world
-	METHOD m_nefdqaox setRabbitType (I)V
-		ARG 1 rabbitType
 	METHOD m_oibnanmr lookTowards (DD)V
 		ARG 1 x
 		ARG 3 z
@@ -45,6 +33,8 @@ CLASS net/minecraft/unmapped/C_zejlzfny net/minecraft/entity/passive/RabbitEntit
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
+	METHOD m_texxbhbe getRandomVariant (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_zejlzfny$C_hyrbilka;
+		ARG 0 world
 	METHOD m_wngbocei setSpeed (D)V
 		ARG 1 speed
 	METHOD m_yzlxckwh getJumpSound ()Lnet/minecraft/unmapped/C_avavozay;
@@ -60,6 +50,16 @@ CLASS net/minecraft/unmapped/C_zejlzfny net/minecraft/entity/passive/RabbitEntit
 	CLASS C_bvvmvikj RabbitAttackGoal
 		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;)V
 			ARG 1 rabbit
+	CLASS C_hyrbilka Variant
+		FIELD f_jvhahmvu id I
+		FIELD f_smlixbbp key Ljava/lang/String;
+		FIELD f_zavpujzk VARIANTS Ljava/util/function/IntFunction;
+		METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
+			ARG 3 id
+			ARG 4 key
+		METHOD m_ioegbnty id ()I
+		METHOD m_lkrovrna get (I)Lnet/minecraft/unmapped/C_zejlzfny$C_hyrbilka;
+			ARG 0 id
 	CLASS C_jhwsykew EatCarrotCropGoal
 		FIELD f_iniddatz rabbit Lnet/minecraft/unmapped/C_zejlzfny;
 		FIELD f_swoqfjot hasTarget Z
@@ -80,9 +80,9 @@ CLASS net/minecraft/unmapped/C_zejlzfny net/minecraft/entity/passive/RabbitEntit
 		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;)V
 			ARG 1 owner
 	CLASS C_pirlsltk RabbitData
-		FIELD f_ivazalyt type I
-		METHOD <init> (I)V
-			ARG 1 type
+		FIELD f_wwjtgasj variant Lnet/minecraft/unmapped/C_zejlzfny$C_hyrbilka;
+		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny$C_hyrbilka;)V
+			ARG 1 variant
 	CLASS C_sjooogbf EscapeDangerGoal
 		FIELD f_rayxprhj rabbit Lnet/minecraft/unmapped/C_zejlzfny;
 		METHOD <init> (Lnet/minecraft/unmapped/C_zejlzfny;D)V

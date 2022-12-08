@@ -1,14 +1,38 @@
 CLASS net/minecraft/unmapped/C_tuynegco net/minecraft/resource/Resource
 	COMMENT A resource of binary data.
-	COMMENT
-	COMMENT <p>The resource must be closed before disposal to avoid resource leaks.
+	COMMENT <p>
+	COMMENT The resource must be closed before disposal to avoid resource leaks.
 	COMMENT
 	COMMENT @see ResourceFactory#getResource(Identifier)
 	COMMENT @see ResourceManager#getAllResources(Identifier)
 	FIELD f_amvvzssa cachedMetadata Lnet/minecraft/unmapped/C_bzrwskbr;
+	FIELD f_hxyciisv resourcePack Lnet/minecraft/unmapped/C_tguinuvn;
 	FIELD f_lxmdqylr readSupplier Lnet/minecraft/unmapped/C_zccdhhqk;
 	FIELD f_uqkymrej metadataSupplier Lnet/minecraft/unmapped/C_zccdhhqk;
+	METHOD <init> (Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_zccdhhqk;)V
+		ARG 2 readSupplier
+	METHOD <init> (Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_zccdhhqk;Lnet/minecraft/unmapped/C_zccdhhqk;)V
+		ARG 2 readSupplier
+		ARG 3 metadataSupplier
+	METHOD m_afcddlaf isBuiltin ()Z
+		COMMENT {@return {@code true} if this resource comes from a built-in resource pack, or {@code false} otherwise}
 	METHOD m_cdfzshua openBufferedReader ()Ljava/io/BufferedReader;
+		COMMENT Opens a new buffered reader to read this resource.
+		COMMENT
+		COMMENT @return a buffered reader of this resource
+		COMMENT @throws IOException if opening this resource failed
+		COMMENT @see #open()
 	METHOD m_dzfzltqe getSourceName ()Ljava/lang/String;
+		COMMENT {@return the name of the resource pack this resource comes from}
+	METHOD m_jzvjphjj getResourcePack ()Lnet/minecraft/unmapped/C_tguinuvn;
+		COMMENT {@return the resource pack this resource comes from}
 	METHOD m_urezrran open ()Ljava/io/InputStream;
+		COMMENT Opens a new input stream to read this resource.
+		COMMENT
+		COMMENT @return an input stream of this resource
+		COMMENT @throws IOException if opening this resource failed
+		COMMENT @see #openBufferedReader()
 	METHOD m_ynwyuood getMetadata ()Lnet/minecraft/unmapped/C_bzrwskbr;
+		COMMENT {@return the metadata of this resource}
+		COMMENT
+		COMMENT @throws IOException if reading the metadata failed

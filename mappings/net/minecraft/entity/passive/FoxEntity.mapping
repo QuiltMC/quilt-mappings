@@ -36,8 +36,6 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 	METHOD m_dgdyhgoz getTrustedUuids ()Ljava/util/List;
 	METHOD m_entdqhly getHeadRoll (F)F
 		ARG 1 tickDelta
-	METHOD m_gvhqtctk setType (Lnet/minecraft/unmapped/C_axinhusn$C_qecgztkz;)V
-		ARG 1 type
 	METHOD m_hgjltjvv isFullyCrouched ()Z
 	METHOD m_hklcoapa (Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 0 entity
@@ -91,7 +89,6 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 		ARG 1 mask
 		ARG 2 value
 	METHOD m_yhanyshv isRollingHead ()Z
-	METHOD m_yimbufhe getFoxType ()Lnet/minecraft/unmapped/C_axinhusn$C_qecgztkz;
 	METHOD m_znqnotjf wantsToPickupItem ()Z
 	METHOD m_zosfjimu canEat (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
@@ -156,18 +153,21 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 	CLASS C_oqqulucz MateGoal
 		METHOD <init> (Lnet/minecraft/unmapped/C_axinhusn;D)V
 			ARG 2 chance
-	CLASS C_qecgztkz Type
+	CLASS C_qecgztkz Variant
 		FIELD f_bxpylffo id I
-		FIELD f_kbrphrzk TYPES [Lnet/minecraft/unmapped/C_axinhusn$C_qecgztkz;
-		FIELD f_ttohlrky NAME_TYPE_MAP Ljava/util/Map;
+		FIELD f_kbrphrzk VARIANTS Ljava/util/function/IntFunction;
+		FIELD f_nominicp CODEC Lnet/minecraft/unmapped/C_lgkqzafw$C_nxwenkbc;
 		FIELD f_urgveasv key Ljava/lang/String;
+		METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
+			ARG 3 id
+			ARG 4 key
 		METHOD m_ctthuzef byName (Ljava/lang/String;)Lnet/minecraft/unmapped/C_axinhusn$C_qecgztkz;
 			ARG 0 name
 		METHOD m_ewvkjtwd getId ()I
-		METHOD m_tjiyhbmu fromId (I)Lnet/minecraft/unmapped/C_axinhusn$C_qecgztkz;
+		METHOD m_tjiyhbmu get (I)Lnet/minecraft/unmapped/C_axinhusn$C_qecgztkz;
 			ARG 0 id
-		METHOD m_vppprqxu getKey ()Ljava/lang/String;
 		METHOD m_xpfnsyaf fromBiome (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_axinhusn$C_qecgztkz;
+			ARG 0 biome
 	CLASS C_qzrtkgez AttackGoal
 		METHOD <init> (Lnet/minecraft/unmapped/C_axinhusn;DZ)V
 			ARG 2 speed

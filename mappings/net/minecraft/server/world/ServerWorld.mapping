@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	FIELD f_atwjstul blockTickScheduler Lnet/minecraft/unmapped/C_cropbciq;
 	FIELD f_bfzmdzwe entityManager Lnet/minecraft/unmapped/C_jdbhctxz;
 	FIELD f_cpeuzhki raidManager Lnet/minecraft/unmapped/C_gyltordp;
+	FIELD f_gfhsuipm gameEventDispatcher Lnet/minecraft/unmapped/C_tcmbbpqi;
 	FIELD f_hzsuzwuz savingDisabled Z
 	FIELD f_japyenfx chunkManager Lnet/minecraft/unmapped/C_ebcmvjwj;
 	FIELD f_jzicyqgy worldProperties Lnet/minecraft/unmapped/C_gjwbvqct;
@@ -29,9 +30,15 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	FIELD f_zwskxqrh inBlockTick Z
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_gjwbvqct;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_alziuayn;Lnet/minecraft/unmapped/C_jnfclwgd;ZJLjava/util/List;Z)V
 		ARG 1 server
+		ARG 2 executor
+		ARG 3 session
 		ARG 4 worldProperties
 		ARG 6 dimensionOptions
+		ARG 7 genProgressListener
+		ARG 8 debugWorld
+		ARG 9 seed
 		ARG 11 spawners
+		ARG 12 shouldTickTime
 	METHOD m_acuodrlx getLightningRodPos (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
 		ARG 1 pos
 	METHOD m_amuecdtw (Lnet/minecraft/unmapped/C_usxaxydn;)Z
@@ -40,6 +47,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 		ARG 1 player
 	METHOD m_aosomwse shouldCancelSpawn (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
+	METHOD m_aqoiocut getLogicalHeight ()I
 	METHOD m_bbslyzvv processSyncedBlockEvents ()V
 	METHOD m_bdnimjhn (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 0 player
@@ -74,8 +82,6 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 		ARG 1 entity
 	METHOD m_etqgghww dump (Ljava/nio/file/Path;)V
 		ARG 1 path
-	METHOD m_fmlhygmp getPlayers (Ljava/util/function/Predicate;)Ljava/util/List;
-		ARG 1 predicate
 	METHOD m_ghlhwjgw sendToPlayerIfNearby (Lnet/minecraft/unmapped/C_mxrobsgg;ZDDDLnet/minecraft/unmapped/C_zyjtrjrl;)Z
 		ARG 1 player
 		ARG 2 force
@@ -112,6 +118,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	METHOD m_jbfuckmf save (Lnet/minecraft/unmapped/C_qzzqcncf;ZZ)V
 		ARG 1 progressListener
 		ARG 2 flush
+		ARG 3 savingDisabled
 	METHOD m_jhwkhqgo isNearOccupiedPointOfInterest (Lnet/minecraft/unmapped/C_hynzadkk;I)Z
 		ARG 1 pos
 		ARG 2 maxDistance
@@ -183,7 +190,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	METHOD m_senvvkks tickChunk (Lnet/minecraft/unmapped/C_hrdsvlkq;I)V
 		ARG 1 chunk
 		ARG 2 randomTickSpeed
-	METHOD m_sigubjbg saveLevel ()V
+	METHOD m_sigubjbg saveWorld ()V
 	METHOD m_tfrswowf setWeather (IIZZ)V
 		ARG 1 clearDuration
 		ARG 2 rainDuration

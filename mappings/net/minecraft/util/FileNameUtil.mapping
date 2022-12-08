@@ -1,9 +1,28 @@
 CLASS net/minecraft/unmapped/C_izhcfpjy net/minecraft/util/FileNameUtil
 	FIELD f_rfpfhsix FILE_NAME_WITH_COUNT Ljava/util/regex/Pattern;
+	FIELD f_tudwtued STRICT_PATH_SEGMENT_PATTERN Ljava/util/regex/Pattern;
 	FIELD f_ucztmgnl RESERVED_WINDOWS_NAMES Ljava/util/regex/Pattern;
 	FIELD f_ztnmshso MAX_NAME_LENGTH I
+	METHOD m_dnipaeyx resolvePath (Ljava/nio/file/Path;Ljava/util/List;)Ljava/nio/file/Path;
+		ARG 0 basePath
+		ARG 1 followingSegments
+	METHOD m_dtiidwhs isValidStrictPathSegment (Ljava/lang/String;)Z
+		ARG 0 pathSegment
 	METHOD m_fxhongpi isNormal (Ljava/nio/file/Path;)Z
 		ARG 0 path
+	METHOD m_gjmuclbd createDirectoriesAndFollowSymlinks (Ljava/nio/file/Path;)V
+		COMMENT Calls {@link java.nio.file.Files#createDirectories(Path,java.nio.file.attribute.FileAttribute[])} while making sure that the given path is a real path.
+		COMMENT <p>
+		COMMENT If the given path is a symlink, the real path will be gathered
+		COMMENT and the directories creation will run on the real path.
+		COMMENT <p>
+		COMMENT If the directories exist already then nothing happens.
+		ARG 0 path
+			COMMENT the path where the directories should be created
+	METHOD m_gryyrvdi decomposePath (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 path
+	METHOD m_inixmyie validatePath ([Ljava/lang/String;)V
+		ARG 0 pathSegments
 	METHOD m_oxxrxsnf getNextUniqueName (Ljava/nio/file/Path;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 path
 		ARG 1 name

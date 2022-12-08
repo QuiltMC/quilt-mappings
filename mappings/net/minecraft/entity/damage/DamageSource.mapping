@@ -2,11 +2,9 @@ CLASS net/minecraft/unmapped/C_sbxfkpyv net/minecraft/entity/damage/DamageSource
 	FIELD f_acagufxr CACTUS Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_asnflmdq FALL Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_beyxzsip DRAGON_BREATH Lnet/minecraft/unmapped/C_sbxfkpyv;
-	FIELD f_bhbwfumo ANVIL Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_bnbhyfbm IN_WALL Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_bnyjcdak outOfWorld Z
 	FIELD f_dvouymrx WITHER Lnet/minecraft/unmapped/C_sbxfkpyv;
-	FIELD f_eajhjlvj FALLING_BLOCK Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_euqippln exhaustion F
 	FIELD f_fpdzppwb STALAGMITE Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_frdxyriv HOT_FLOOR Lnet/minecraft/unmapped/C_sbxfkpyv;
@@ -14,7 +12,6 @@ CLASS net/minecraft/unmapped/C_sbxfkpyv net/minecraft/entity/damage/DamageSource
 	FIELD f_hhdsnpxp OUT_OF_WORLD Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_ibpeyvzi bypassesArmor Z
 	FIELD f_iqwyoabj ON_FIRE Lnet/minecraft/unmapped/C_sbxfkpyv;
-	FIELD f_jemgoxee FALLING_STALACTITE Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_kityaujk GENERIC Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_kjlwqhiw projectile Z
 	FIELD f_lhdwllwo MAGIC Lnet/minecraft/unmapped/C_sbxfkpyv;
@@ -34,6 +31,7 @@ CLASS net/minecraft/unmapped/C_sbxfkpyv net/minecraft/entity/damage/DamageSource
 		COMMENT to be called.
 	FIELD f_ufcbgsmg DROWN Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_vfcbizbp LIGHTNING_BOLT Lnet/minecraft/unmapped/C_sbxfkpyv;
+	FIELD f_wvuujgkg ignoresProtection Z
 	FIELD f_wybfmsxl unblockable Z
 	FIELD f_xasmgxdc fromFalling Z
 	FIELD f_xrjapufb DRYOUT Lnet/minecraft/unmapped/C_sbxfkpyv;
@@ -57,15 +55,17 @@ CLASS net/minecraft/unmapped/C_sbxfkpyv net/minecraft/entity/damage/DamageSource
 	METHOD m_fauskiwn isNeutral ()Z
 	METHOD m_gbxedcoz setBypassesArmor ()Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_gitjyyur getExhaustion ()F
-	METHOD m_gywgjvyd explosion (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sbxfkpyv;
-		ARG 0 attacker
 	METHOD m_hekgwbew mob (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 		ARG 0 attacker
 	METHOD m_hzcbboyy setUsesMagic ()Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_iqixryso sting (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 		ARG 0 attacker
+	METHOD m_joqmhmwp sonicBoom (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
+		ARG 0 attacker
 	METHOD m_kfwdxrel getPosition ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_kunhooiu isFire ()Z
+	METHOD m_mchdrriw anvil (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
+		ARG 0 attacker
 	METHOD m_nzzjkqtj magic (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 		ARG 0 magic
 		ARG 1 attacker
@@ -77,8 +77,10 @@ CLASS net/minecraft/unmapped/C_sbxfkpyv net/minecraft/entity/damage/DamageSource
 	METHOD m_plzuatal getName ()Ljava/lang/String;
 	METHOD m_ppchabei isFallingBlock ()Z
 	METHOD m_ptucnpmv isFromFalling ()Z
-	METHOD m_qchoewsw badRespawnPoint ()Lnet/minecraft/unmapped/C_sbxfkpyv;
+	METHOD m_qchoewsw badRespawnPoint (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_qlknncwi getAttacker ()Lnet/minecraft/unmapped/C_astfners;
+	METHOD m_qnxgwikn ignoresProtection ()Z
+	METHOD m_qzucwhaj setIgnoresProtection ()Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_rdrwvsuv firework (Lnet/minecraft/unmapped/C_huldsolp;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 		ARG 0 firework
 		ARG 1 attacker
@@ -99,10 +101,17 @@ CLASS net/minecraft/unmapped/C_sbxfkpyv net/minecraft/entity/damage/DamageSource
 	METHOD m_thuwabxf witherSkull (Lnet/minecraft/unmapped/C_vzureqzt;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 		ARG 0 witherSkull
 		ARG 1 attacker
+	METHOD m_tsssbkti fallingStalactite (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
+		ARG 0 attacker
 	METHOD m_vabctkze bypassesArmor ()Z
 	METHOD m_vbtifkwg setFire ()Lnet/minecraft/unmapped/C_sbxfkpyv;
+	METHOD m_xelpaopx fallingBlock (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
+		ARG 0 attacker
 	METHOD m_xginmroq mobProjectile (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 		ARG 0 projectile
+		ARG 1 attacker
+	METHOD m_xmfsnudd explosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
+		ARG 0 explosion
 		ARG 1 attacker
 	METHOD m_ydpojizq isMagic ()Z
 	METHOD m_ygucvxej explosion (Lnet/minecraft/unmapped/C_aahhrzpf;)Lnet/minecraft/unmapped/C_sbxfkpyv;

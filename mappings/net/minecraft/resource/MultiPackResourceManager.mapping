@@ -1,4 +1,8 @@
 CLASS net/minecraft/unmapped/C_xzrqjrss net/minecraft/resource/MultiPackResourceManager
+	COMMENT Represents a {@link ResourceManager} which acts on multiple resource packs.
+	COMMENT <p>
+	COMMENT The resource manager can be closed, in turn closing every resource packs it has,
+	COMMENT which may close the file descriptors if they're file-based resource packs.
 	FIELD f_evajxkxi LOGGER Lorg/slf4j/Logger;
 	FIELD f_haylgaaj packs Ljava/util/List;
 	FIELD f_srpgcayr namespaceManagers Ljava/util/Map;
@@ -7,6 +11,8 @@ CLASS net/minecraft/unmapped/C_xzrqjrss net/minecraft/resource/MultiPackResource
 		ARG 2 packs
 	METHOD m_gkkrdnrr (Lnet/minecraft/unmapped/C_yxyotkoe;Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
+	METHOD m_jghhvnxk checkTrailingDirectoryPath (Ljava/lang/String;)V
+		ARG 0 path
 	METHOD m_mtieuijn getFilter (Lnet/minecraft/unmapped/C_tguinuvn;)Lnet/minecraft/unmapped/C_yxyotkoe;
 		ARG 1 pack
 	METHOD m_qcmpqhkl (Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_tguinuvn;)Ljava/util/stream/Stream;

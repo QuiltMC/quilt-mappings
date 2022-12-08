@@ -3,6 +3,7 @@ package quilt.internal.tasks.build;
 import java.io.File;
 import java.util.Map;
 
+import org.gradle.api.artifacts.VersionConstraint;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.jvm.tasks.Jar;
@@ -20,8 +21,9 @@ public class MappingsV2JarTask extends Jar implements MappingsTask {
         getDestinationDirectory().set(getProject().file("build/libs"));
 
         File unpickMetaFile = mappingsExt().getFileConstants().unpickMeta;
+        String version = libs().findVersion("unpick").map(VersionConstraint::getRequiredVersion).orElseThrow(() -> new RuntimeException("Could not find unpick version"));
         from(unpickMetaFile, copySpec -> {
-            copySpec.expand(Map.of("version", getProject().property("unpick_version")));
+            copySpec.expand(Map.of("version", version));
             copySpec.rename(unpickMetaFile.getName(), "extras/unpick.json");
         });
 

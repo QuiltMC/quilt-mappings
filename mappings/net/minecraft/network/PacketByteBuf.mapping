@@ -477,8 +477,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @throws io.netty.handler.codec.DecoderException if the identifier's
 		COMMENT string form is longer than {@value #DEFAULT_MAX_STRING_LENGTH}
 		COMMENT @see #writeIdentifier(Identifier)
-	METHOD m_htwizfmu readById (Lnet/minecraft/unmapped/C_feaetnaz;)Ljava/lang/Object;
-		ARG 1 idMap
 	METHOD m_hudsjtrd writeVarLong (J)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a single var long to this buf.
 		COMMENT
@@ -500,8 +498,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeIntArray(int[])
 		ARG 1 list
 			COMMENT the list to write
-	METHOD m_icznxsji (Ljava/lang/Object;Lcom/mojang/serialization/DataResult$PartialResult;)V
-		ARG 1 error
 	METHOD m_itwwddfn writeNullable (Ljava/lang/Object;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;)V
 		COMMENT Writes a nullable value to this buf. A nullable value is represented by a
 		COMMENT boolean indicating if the value is present, followed by the value only if
@@ -890,9 +886,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readIdentifier()
 		ARG 1 id
 			COMMENT the identifier to write
-	METHOD m_wjpiukbv writeId (Lnet/minecraft/unmapped/C_feaetnaz;Ljava/lang/Object;)V
-		ARG 1 idMap
-		ARG 2 object
 	METHOD m_wqpnnsca writeCollection (Ljava/util/Collection;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;)V
 		COMMENT Writes a collection to this buf. The collection is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
@@ -986,8 +979,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readByteArray(int)
 		COMMENT @see #writeByteArray(byte[])
 		COMMENT @return the read byte array
-	METHOD m_zwzghkkq (Lnet/minecraft/unmapped/C_hhlwcnih;Lcom/mojang/serialization/DataResult$PartialResult;)V
-		ARG 1 error
 	METHOD markReaderIndex markReaderIndex ()Lio/netty/buffer/ByteBuf;
 	METHOD markWriterIndex markWriterIndex ()Lio/netty/buffer/ByteBuf;
 	METHOD maxCapacity maxCapacity ()I
