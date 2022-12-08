@@ -1,16 +1,30 @@
 CLASS net/minecraft/unmapped/C_jwzjqevg net/minecraft/client/render/Frustum
 	FIELD f_cxjswvfn x D
+	FIELD f_ekwhmesn intersection Lorg/joml/FrustumIntersection;
+	FIELD f_faxawgxf matrix Lorg/joml/Matrix4f;
 	FIELD f_fgxvzkrg OFFSET_STEP I
 	FIELD f_ssovdjtr z D
 	FIELD f_tgvhcbau view Lorg/joml/Vector4f;
 	FIELD f_zpasgjlh y D
 	METHOD <init> (Lnet/minecraft/unmapped/C_jwzjqevg;)V
 		ARG 1 frustrum
+	METHOD <init> (Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V
+		ARG 1 modelViewMatrix
+		ARG 2 projectionMatrix
 	METHOD m_fsdaswmf isVisible (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
 		ARG 1 box
 	METHOD m_fzvuuyma init (Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V
+		ARG 1 view
+		ARG 2 projection
 	METHOD m_gthtrhnt offsetToIncludeCamera (I)Lnet/minecraft/unmapped/C_jwzjqevg;
 		ARG 1 offset
+	METHOD m_vzmlhobi isCubeInFrustrum (DDDDDD)Z
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
+		ARG 7 width
+		ARG 9 height
+		ARG 11 depth
 	METHOD m_ynncevaj setPosition (DDD)V
 		ARG 1 cameraX
 		ARG 3 cameraY
