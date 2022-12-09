@@ -41,7 +41,7 @@ There are two main reasons the build may fail on your pull request:
     2. #### Your word is not misspelled, but the build fails anyway!
         This can happen in a few cases.  
         The most common is that the word is a valid word in the context of Minecraft, but is not in the normal english dictionary, such as "prismarine".
-        In this case, you can add the word to [QM's Minecraft dictionary](`buildSrc/src/main/resources/minecraft_specific_words.txt`) under the corresponding category, which in this case would be `items`.  
+        In this case, you can add the word to [QM's Minecraft dictionary](buildSrc/src/main/resources/minecraft_specific_words.txt) under the corresponding category, which in this case would be `items`.  
         Another possibility is that you have written the word in British English, which is invalid since QM uses American English exclusively.
         Here, just change the word to its American English equivalent.  
       
