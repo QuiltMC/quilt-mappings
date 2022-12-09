@@ -31,6 +31,27 @@ or in our other community spaces. We're always happy to help if you need us!
     raised during that time, leave a comment on your PR requesting for it to be merged. A Mappings team member will
     take a final look over your PR, and, if everything looks good, merge it!
 
+## Guide: Fixing Failing Builds
+There are two main reasons the build may fail on your pull request:
+
+1. ### Spellcheck Failure
+    A spellcheck failure gives the error `entry name contains unknown/misspelled word: YourEntryName`. There are two ways to fix this:
+    1. #### Your word is misspelled
+        If your word is misspelled, you can simply fix the error.
+    2. #### Your word is not misspelled, but the build fails anyway!
+        This can happen in a few cases.  
+        The most common is that the word is a valid word in the context of Minecraft, but is not in the normal english dictionary, such as "prismarine".
+        In this case, you can add the word to [QM's Minecraft dictionary](`buildSrc/src/main/resources/minecraft_specific_words.txt`) under the corresponding category, which in this case would be `items`.  
+        Another possibility is that you have written the word in British English, which is invalid since QM uses American English exclusively.
+        Here, just change the word to its American English equivalent.  
+      
+    After performing any of these fixes, run `./gradlew mappingLint` to check that the error is fixed.
+2. ### Javadoc Failure
+   A javadoc failure will occur when you rename a class or method that a piece of javadoc points to.
+   It gives the error `error: reference not found * {@link TheOldName}`.
+   To fix this, you need to change the javadoc to point to the new name. Simple!
+   Run `./gradlew build javadocJar` to check your new mapping. 
+
 ## Guide: Triage Categories
 
 Triage categories ensure that important, but small PRs--like bugfixes--are merged quickly, while large changes--like
