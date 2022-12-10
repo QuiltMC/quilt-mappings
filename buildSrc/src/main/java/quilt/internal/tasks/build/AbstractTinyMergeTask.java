@@ -71,7 +71,7 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
 
     @Internal
     protected Map<String, String> getNameAlternatives() {
-        return Collections.singletonMap("named", this.fillName); // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
+        return Collections.emptyMap();
     }
 
     protected MappingVisitor getFirstVisitor(MappingVisitor next) {
