@@ -41,8 +41,9 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 1 profile
 	METHOD m_bekbcbkv getAdvancementTracker (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_hyeqtgvx;
 		ARG 1 player
-	METHOD m_bgctehjy (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
+	METHOD m_bgctehjy broadcastSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
 		ARG 1 message
+		ARG 2 overlay
 	METHOD m_bjqkotds sendToDimension (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_xhhleach;)V
 		ARG 1 packet
 		ARG 2 dimension
@@ -123,8 +124,11 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_ozuvgfaa getViewDistance ()I
 	METHOD m_prjtwknp loadPlayerData (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 player
-	METHOD m_qcclojnk (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/function/Function;Z)V
+	METHOD m_qcclojnk broadcastSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/function/Function;Z)V
 		ARG 1 message
+		ARG 2 toTextFunction
+			COMMENT A function that takes the player being sent to as input, and returns the text that should be sent to them. If the player should not receive the message, this function returns null.
+		ARG 3 overlay
 	METHOD m_qslhodxf getWhitelist ()Lnet/minecraft/unmapped/C_indzsqqb;
 	METHOD m_rlvfbvcj createStatHandler (Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_cakpthuz;
 		ARG 1 player
