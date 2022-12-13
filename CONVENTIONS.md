@@ -125,6 +125,7 @@ Name screen coordinates `x` and `y`, rather than `left` and `top`.
 Always suffix packet names with `S2CPacket` (server to client) or `C2SPacket` (client to server).
 
 Packet names should be in the form of `[Noun][Verb]`: `BlockUpdateS2CPacket`, `PlayerMoveC2SPacket`, etc., with the verb conjugated in the infinitive form.
+This convention is applied loosely, and some packets may not follow it. Use your own discretion on whether to apply it when naming packets.
 In some cases, the suffix `WithX` can come after the verb. This is to prevent situations where an awkward `And` would be inserted, avoiding `PlayerAndEntityInteractionC2SPacket`, in favor of `PlayerInteractionWithEntityC2SPacket`.
 
 Sometimes, a packet is purely data and does not have an action associated. In this case the packet name can simply be `[Noun]`, such as with `ChunkDataS2CPacket`.
