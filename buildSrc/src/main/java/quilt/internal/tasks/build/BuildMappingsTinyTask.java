@@ -2,6 +2,7 @@ package quilt.internal.tasks.build;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import cuchaz.enigma.command.MapSpecializedMethodsCommand;
 import cuchaz.enigma.translation.mapping.serde.MappingParseException;
@@ -29,15 +30,23 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
     }
 
     @TaskAction
-    public void buildMappingsTiny() throws IOException, MappingParseException {
+    public void execute() throws IOException, MappingParseException {
         getLogger().lifecycle(":generating tiny mappings");
 
-        new MapSpecializedMethodsCommand().run(
-                fileConstants.perVersionMappingsJar.getAbsolutePath(),
+        buildMappingsTiny(
+                fileConstants.perVersionMappingsJar.toPath(),
+                mappings.get().getAsFile().toPath(),
+                outputMappings.toPath()
+        );
+    }
+
+    public static void buildMappingsTiny(Path perVersionMappingsJar, Path mappings, Path outputMappings) throws IOException, MappingParseException {
+        MapSpecializedMethodsCommand.run(
+                perVersionMappingsJar,
                 "enigma",
-                mappings.get().getAsFile().getAbsolutePath(),
+                mappings,
                 String.format("tinyv2:%s:named", Constants.PER_VERSION_MAPPINGS_NAME),
-                outputMappings.getAbsolutePath()
+                outputMappings
         );
     }
 
