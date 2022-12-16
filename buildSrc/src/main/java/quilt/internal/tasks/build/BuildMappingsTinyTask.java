@@ -10,6 +10,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
@@ -40,6 +41,7 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
         );
     }
 
+    @VisibleForTesting
     public static void buildMappingsTiny(Path perVersionMappingsJar, Path mappings, Path outputMappings) throws IOException, MappingParseException {
         MapSpecializedMethodsCommand.run(
                 perVersionMappingsJar,

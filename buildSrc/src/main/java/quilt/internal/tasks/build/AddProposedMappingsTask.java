@@ -18,6 +18,7 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
@@ -43,13 +44,22 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
     }
 
     @TaskAction
-    public void addProposedFieldMappings() throws Exception {
+    public void addProposedMappings() throws Exception {
         getLogger().lifecycle(":seeking auto-mappable entries");
 
         Path input = inputMappings.get().toPath();
         Path output = outputMappings.toPath();
         Path jar = inputJar.get().toPath();
         Path profilePath = profile.map(File::toPath).get();
+
+        addProposedMappings(input, output, jar, profilePath);
+    }
+
+    @VisibleForTesting
+    public static void addProposedMappings(Path input, Path output, Path jar, Path profilePath) throws Exception {
+        String name = output.getFileName().toString();
+        Path preprocessedMappings = output.getParent().resolve(name.replace(".tiny", "-preprocessed.tiny"));
+        Path processedMappings = output.getParent().resolve(name.replace(".tiny", "-processed.tiny"));
 
         List<String> namespaces;
         try (Reader reader = Files.newBufferedReader(input, StandardCharsets.UTF_8)) {
@@ -60,15 +70,14 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
             throw new IllegalArgumentException("Input mappings must contain the named namespace");
         }
 
-        Path preprocessedMappings = preprocessFile(input);
-        Path processedMappings = fileConstants.tempDir.toPath().resolve(getName() + "-processed.tiny");
+        preprocessFile(input, preprocessedMappings);
 
-        new InsertProposedMappingsCommand().run(jar,
-                preprocessedMappings,
-                processedMappings,
-                String.format("tinyv2:%s:named", namespaces.get(0)),
-                profilePath,
-                null);
+        InsertProposedMappingsCommand.run(jar,
+            preprocessedMappings,
+            processedMappings,
+            String.format("tinyv2:%s:named", namespaces.get(0)),
+            profilePath,
+            null);
 
         MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
         try (MappingWriter writer = MappingWriter.create(output, MappingFormat.TINY_2)) {
@@ -78,7 +87,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
     // Reorder dst namespaces to `<src-namespace> named [others...]`
     // Enigma doesn't support multiple dst namespaces, and just uses the first one
-    private Path preprocessFile(Path inputMappings) throws Exception {
+    private static void preprocessFile(Path inputMappings, Path output) throws Exception {
         MemoryMappingTree inputTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(inputMappings, StandardCharsets.UTF_8)) {
             Tiny2Reader.read(reader, inputTree);
@@ -95,16 +104,13 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
             inputTree.accept(new MappingDstNsReorder(outputTree, dstNamespaces));
         }
 
-        Path output = fileConstants.tempDir.toPath().resolve(getName() + "-preprocessed.tiny");
         try (MappingWriter mappingWriter = MappingWriter.create(output, MappingFormat.TINY_2)) {
             outputTree.accept(mappingWriter);
         }
-
-        return output;
     }
 
     // Merge input mappings with the proposed mappings to restore the lost namespaces
-    private MemoryMappingTree postProcessTree(Path inputMappings, Path processedMappings) throws Exception {
+    private static MemoryMappingTree postProcessTree(Path inputMappings, Path processedMappings) throws Exception {
         MemoryMappingTree inputTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(inputMappings, StandardCharsets.UTF_8)) {
             Tiny2Reader.read(reader, inputTree);

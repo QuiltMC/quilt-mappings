@@ -1,8 +1,11 @@
 package quilt.internal;
 
+import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.MappingVisitor;
+import net.fabricmc.mappingio.MappingWriter;
 import net.fabricmc.mappingio.format.EnigmaReader;
 import net.fabricmc.mappingio.format.EnigmaWriter;
+import net.fabricmc.mappingio.format.MappingFormat;
 import net.fabricmc.mappingio.format.Tiny2Reader;
 import net.fabricmc.mappingio.format.Tiny2Writer;
 import net.fabricmc.mappingio.tree.MappingTree;
@@ -17,52 +20,36 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class TestUtil {
-    private static MemoryMappingTree readTree(Path path, MappingFormatReader formatReader) throws IOException {
+    private static MemoryMappingTree readTree(Path path, MappingFormat format) throws IOException {
         MemoryMappingTree tree = new MemoryMappingTree();
-
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            formatReader.read(reader, tree);
-        }
-
+        MappingReader.read(path, format, tree);
         return tree;
     }
 
-    private static void writeTree(Path path, MappingTree tree, MappingFormatWriter formatWriter) throws IOException {
+    private static void writeTree(Path path, MappingTree tree, MappingFormat format) throws IOException {
         Path abs = path.toAbsolutePath();
         if (abs.getParent() != null && !Files.exists(abs.getParent())) {
             Files.createDirectories(abs.getParent());
         }
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-            tree.accept(formatWriter.getWriter(writer));
+            tree.accept(MappingWriter.create(writer, format));
         }
     }
 
     public static MemoryMappingTree readTinyV2(Path path) throws IOException {
-        return readTree(path, Tiny2Reader::read);
+        return readTree(path, MappingFormat.TINY_2);
     }
 
     public static void writeTinyV2(Path path, MappingTree tree) throws IOException {
-        writeTree(path, tree, writer -> new Tiny2Writer(writer, false));
+        writeTree(path, tree, MappingFormat.TINY_2);
     }
 
     public static MemoryMappingTree readEnigma(Path path) throws IOException {
-        MemoryMappingTree tree = new MemoryMappingTree();
-        EnigmaReader.read(path, tree);
-        return tree;
+        return readTree(path, MappingFormat.ENIGMA);
     }
 
     public static void writeEnigma(Path path, MappingTree tree) throws IOException {
-        tree.accept(new EnigmaWriter(path, true));
-    }
-
-    @FunctionalInterface
-    public interface MappingFormatReader {
-        void read(Reader reader, MappingVisitor visitor) throws IOException;
-    }
-
-    @FunctionalInterface
-    public interface MappingFormatWriter {
-        MappingVisitor getWriter(Writer writer) throws IOException;
+        writeTree(path, tree, MappingFormat.ENIGMA);
     }
 }

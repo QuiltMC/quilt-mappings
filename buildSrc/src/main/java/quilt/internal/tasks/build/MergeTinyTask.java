@@ -1,5 +1,13 @@
 package quilt.internal.tasks.build;
 
+import org.jetbrains.annotations.VisibleForTesting;
+import quilt.internal.Constants;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Map;
+import java.util.function.Function;
+
 public class MergeTinyTask extends AbstractHashedMergeTask {
     public static final String TASK_NAME = "mergeTiny";
 
@@ -8,5 +16,11 @@ public class MergeTinyTask extends AbstractHashedMergeTask {
         dependsOn(InvertPerVersionMappingsTask.TASK_NAME, BuildMappingsTinyTask.TASK_NAME);
 
         input.convention(getTaskByType(BuildMappingsTinyTask.class)::getOutputMappings);
+    }
+
+    @VisibleForTesting
+    public static void mergeMappings(Path buildMappingsTiny, Path invertedPerVersionsMappings, Path outputMappings) throws IOException {
+        AbstractTinyMergeTask.mergeMappings(buildMappingsTiny, invertedPerVersionsMappings, outputMappings,
+            Function.identity(), Function.identity(), Map.of("named", Constants.PER_VERSION_MAPPINGS_NAME));
     }
 }
