@@ -24,24 +24,38 @@ CLASS net/minecraft/unmapped/C_vneqepda net/minecraft/fluid/FlowableFluid
 		ARG 6 fromState
 	METHOD m_easmhmhd getStill ()Lnet/minecraft/unmapped/C_rxhyurmy;
 	METHOD m_ejtzmuvf getUpdatedState (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_xqketiuf;
+		ARG 1 world
 		ARG 2 pos
 		ARG 3 state
-	METHOD m_elhudbgf (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lit/unimi/dsi/fastutil/shorts/Short2ObjectMap;Lit/unimi/dsi/fastutil/shorts/Short2BooleanMap;)I
+	METHOD m_elhudbgf getFlowSpeedBetween (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lit/unimi/dsi/fastutil/shorts/Short2ObjectMap;Lit/unimi/dsi/fastutil/shorts/Short2BooleanMap;)I
 		ARG 1 world
+		ARG 2 pos
+		ARG 3 downFlowSpeed
+		ARG 4 direction
+		ARG 5 state
+		ARG 6 targetPos
+		ARG 7 stateCache
+		ARG 8 downFlowCandidateCache
 	METHOD m_flkcyrdx isMatchingAndStill (Lnet/minecraft/unmapped/C_xqketiuf;)Z
 		ARG 1 state
 	METHOD m_gnukxuqv tryFlow (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xqketiuf;)V
+		ARG 1 world
 		ARG 2 fluidPos
 		ARG 3 state
 	METHOD m_hjsfccmf getBlockStateLevel (Lnet/minecraft/unmapped/C_xqketiuf;)I
 		ARG 0 state
-	METHOD m_hyyevjfk (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xqketiuf;Lnet/minecraft/unmapped/C_txtbiemp;)V
+	METHOD m_hpatzdqg getCacheKey (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)S
+		ARG 0 pos
+		ARG 1 targetPos
+	METHOD m_hyyevjfk flowToSides (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xqketiuf;Lnet/minecraft/unmapped/C_txtbiemp;)V
+		ARG 1 world
 		ARG 2 pos
 		ARG 3 fluidState
 		ARG 4 blockState
-	METHOD m_innettlj (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+	METHOD m_innettlj preventsFlow (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 1 world
 		ARG 2 pos
+		ARG 3 direction
 	METHOD m_isezvdok getNextTickDelay (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xqketiuf;Lnet/minecraft/unmapped/C_xqketiuf;)I
 		ARG 1 world
 		ARG 2 pos
@@ -51,6 +65,7 @@ CLASS net/minecraft/unmapped/C_vneqepda net/minecraft/fluid/FlowableFluid
 	METHOD m_kgmkgxcd getFlowSpeed (Lnet/minecraft/unmapped/C_eemzphbi;)I
 		ARG 1 world
 	METHOD m_lcoiqlct getSpread (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Ljava/util/Map;
+		ARG 1 world
 		ARG 2 pos
 		ARG 3 state
 	METHOD m_lngltdkk getLevelDecreasePerBlock (Lnet/minecraft/unmapped/C_eemzphbi;)I
@@ -65,10 +80,11 @@ CLASS net/minecraft/unmapped/C_vneqepda net/minecraft/fluid/FlowableFluid
 		ARG 3 state
 		ARG 4 direction
 		ARG 5 fluidState
-	METHOD m_piqgrpvh (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;)I
+	METHOD m_piqgrpvh neighboringSourceCount (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 1 world
 		ARG 2 pos
 	METHOD m_qipgcscg isInfinite (Lnet/minecraft/unmapped/C_cdctfzbn;)Z
+		ARG 1 world
 	METHOD m_rjtwfflw canFill (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_rxhyurmy;)Z
 		ARG 1 world
 		ARG 2 pos
@@ -91,7 +107,7 @@ CLASS net/minecraft/unmapped/C_vneqepda net/minecraft/fluid/FlowableFluid
 		ARG 2 pos
 	METHOD m_vpoeivwu isEmptyOrThis (Lnet/minecraft/unmapped/C_xqketiuf;)Z
 		ARG 1 state
-	METHOD m_yyzlptcq (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_rxhyurmy;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_yyzlptcq canFlowDownTo (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_rxhyurmy;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 world
 		ARG 2 fluid
 		ARG 3 pos
