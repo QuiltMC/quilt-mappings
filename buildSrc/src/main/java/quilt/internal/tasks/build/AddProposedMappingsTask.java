@@ -70,24 +70,28 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
             throw new IllegalArgumentException("Input mappings must contain the named namespace");
         }
 
-        preprocessFile(input, preprocessedMappings);
+        boolean extraProcessing = preprocessFile(input, preprocessedMappings);
+        Path commandInput = extraProcessing ? preprocessedMappings : input;
+        Path commandOutput = extraProcessing ? processedMappings : output;
 
         InsertProposedMappingsCommand.run(jar,
-            preprocessedMappings,
-            processedMappings,
+            commandInput,
+            commandOutput,
             String.format("tinyv2:%s:named", namespaces.get(0)),
             profilePath,
             null);
 
-        MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
-        try (MappingWriter writer = MappingWriter.create(output, MappingFormat.TINY_2)) {
-            outputTree.accept(writer);
+        if (extraProcessing) {
+            MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
+            try (MappingWriter writer = MappingWriter.create(output, MappingFormat.TINY_2)) {
+                outputTree.accept(writer);
+            }
         }
     }
 
     // Reorder dst namespaces to `<src-namespace> named [others...]`
     // Enigma doesn't support multiple dst namespaces, and just uses the first one
-    private static void preprocessFile(Path inputMappings, Path output) throws Exception {
+    private static boolean preprocessFile(Path inputMappings, Path output) throws Exception {
         MemoryMappingTree inputTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(inputMappings, StandardCharsets.UTF_8)) {
             Tiny2Reader.read(reader, inputTree);
@@ -95,18 +99,21 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
         // Reorder destination namespaces to put the named namespace first
         List<String> dstNamespaces = new ArrayList<>(inputTree.getDstNamespaces());
-        MemoryMappingTree outputTree = inputTree;
         if (!dstNamespaces.get(0).equals("named")) {
-            outputTree = new MemoryMappingTree();
+            MemoryMappingTree outputTree = new MemoryMappingTree();
             int i = dstNamespaces.indexOf("named");
             dstNamespaces.set(i, dstNamespaces.get(0));
             dstNamespaces.set(0, "named");
             inputTree.accept(new MappingDstNsReorder(outputTree, dstNamespaces));
+
+            try (MappingWriter mappingWriter = MappingWriter.create(output, MappingFormat.TINY_2)) {
+                outputTree.accept(mappingWriter);
+            }
+
+            return true;
         }
 
-        try (MappingWriter mappingWriter = MappingWriter.create(output, MappingFormat.TINY_2)) {
-            outputTree.accept(mappingWriter);
-        }
+        return false;
     }
 
     // Merge input mappings with the proposed mappings to restore the lost namespaces
