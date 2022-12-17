@@ -41,11 +41,10 @@ public class SpellingChecker implements Checker<Entry<?>> {
         return new BufferedReader(new InputStreamReader(stream)).lines().filter(line -> !line.isBlank() && !line.startsWith("//")).collect(Collectors.toSet());
     }
 
-    public Set<String> words = new HashSet<>();
+    private static final Set<String> words = new HashSet<>();
 
     @Override
     public void update(MappingLintTask.LintParameters parameters) {
-        words = new HashSet<>();
         words.addAll(MINECRAFT_WORDS);
 
         try {
@@ -113,15 +112,16 @@ public class SpellingChecker implements Checker<Entry<?>> {
 
     private void checkWord(String word, ErrorReporter reporter) {
         if (!word.isEmpty() && !words.contains(word)) {
-            if (word.endsWith("s")) { // Maybe a plural word
-                if (isPlural(word)) return;
+            // ignore plural versions of words
+            if (word.endsWith("s") && checkPlural(word)) {
+                return;
             }
 
             reporter.error("entry name contains unknown/misspelled word: " + word);
         }
     }
 
-    private boolean isPlural(String word) {
+    private boolean checkPlural(String word) {
         String nonPlural;
         if (word.endsWith("ies")) { // berries -> berry
             nonPlural = word.substring(word.length() - 3) + "y";
@@ -130,6 +130,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
             if (!words.contains(nonPlural)) { // knives -> knife
                 nonPlural = word.substring(word.length() - 3) + "fe";
             } else {
+                // word has been found, we can skip the next contains check
                 return true;
             }
         } else if (word.endsWith("ses")) { // glasses -> glass
