@@ -41,6 +41,9 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 0 shape
 	METHOD _setShaderFogStart _setShaderFogStart (F)V
 		ARG 0 fogStart
+	METHOD _setShaderLights (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+		ARG 0 light0
+		ARG 1 light1
 	METHOD _setShaderTexture _setShaderTexture (II)V
 		ARG 0 location
 		ARG 1 textureId
@@ -257,6 +260,10 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 0 runnable
 	METHOD setErrorCallback setErrorCallback (Lorg/lwjgl/glfw/GLFWErrorCallbackI;)V
 		ARG 0 callback
+	METHOD setInverseViewRotationMatrix (Lorg/joml/Matrix3f;)V
+		ARG 0 inverseViewRotationMatrix
+	METHOD setProjectionMatrix (Lorg/joml/Matrix4f;)V
+		ARG 0 projectionMatrix
 	METHOD setShader setShader (Ljava/util/function/Supplier;)V
 		ARG 0 shader
 	METHOD setShaderColor setShaderColor (FFFF)V
@@ -282,17 +289,32 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD setShaderGameTime setShaderGameTime (JF)V
 		ARG 0 ticks
 		ARG 2 tickDelta
+	METHOD setShaderLights (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+		ARG 0 light0
+		ARG 1 light1
 	METHOD setShaderTexture setShaderTexture (II)V
 		ARG 0 location
 		ARG 1 textureId
 	METHOD setShaderTexture setShaderTexture (ILnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 0 location
 		ARG 1 texture
+	METHOD setTextureMatrix (Lorg/joml/Matrix4f;)V
+		ARG 0 textureMatrix
 	METHOD setupDefaultState setupDefaultState (IIII)V
 		ARG 0 x
 		ARG 1 y
 		ARG 2 width
 		ARG 3 height
+	METHOD setupGui3DDiffuseLighting (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+		ARG 0 light0
+		ARG 1 light1
+	METHOD setupGuiFlatDiffuseLighting (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+		ARG 0 light0
+		ARG 1 light1
+	METHOD setupLevelDiffuseLighting setupWorldDiffuseLighting (Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Matrix4f;)V
+		ARG 0 light0
+		ARG 1 light1
+		ARG 2 modelMatrix
 	METHOD setupOverlayColor setupOverlayColor (Ljava/util/function/IntSupplier;I)V
 		ARG 0 texture
 		ARG 1 size
