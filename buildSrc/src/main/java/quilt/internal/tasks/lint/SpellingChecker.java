@@ -1,15 +1,10 @@
 package quilt.internal.tasks.lint;
 
-import cuchaz.enigma.translation.mapping.EntryMapping;
-import cuchaz.enigma.translation.representation.AccessFlags;
-import cuchaz.enigma.translation.representation.entry.ClassEntry;
-import cuchaz.enigma.translation.representation.entry.Entry;
-import cuchaz.enigma.translation.representation.entry.MethodEntry;
-
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,24 +13,20 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import cuchaz.enigma.translation.mapping.EntryMapping;
+import cuchaz.enigma.translation.representation.AccessFlags;
+import cuchaz.enigma.translation.representation.entry.ClassEntry;
+import cuchaz.enigma.translation.representation.entry.Entry;
+import cuchaz.enigma.translation.representation.entry.MethodEntry;
+
 public class SpellingChecker implements Checker<Entry<?>> {
     private static final String PACKAGE_INFO_CLASS_PACKAGE = "net/minecraft/unused/packageinfo/";
     private static final String METHOD_PREFIX = "m_";
     private static final String CLASS_PREFIX = "C_";
     private static final char PACKAGE_SEPARATOR = '/';
 
-    private static final Set<String> ALLOWED_WORDS = new HashSet<>();
+    private static final Set<String> MINECRAFT_WORDS = new HashSet<>();
     static {
-        // collect allowed words
-        URL url;
-        try {
-            url = new URL("https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/main/allowed_english_words.txt");
-            Set<String> englishWords = getLines(url.openStream());
-            ALLOWED_WORDS.addAll(englishWords);
-        } catch (Exception e) {
-            throw new RuntimeException("failed to download and read english word file for spell check in mapping lint task!", e);
-        }
-
         // collect minecraft words
         InputStream parsedFile = SpellingChecker.class.getClassLoader().getResourceAsStream("minecraft_specific_words.txt");
         if (parsedFile == null) {
@@ -43,11 +34,27 @@ public class SpellingChecker implements Checker<Entry<?>> {
         }
 
         Set<String> minecraftWords = getLines(parsedFile);
-        ALLOWED_WORDS.addAll(minecraftWords);
+        MINECRAFT_WORDS.addAll(minecraftWords);
     }
 
     private static Set<String> getLines(InputStream stream) {
         return new BufferedReader(new InputStreamReader(stream)).lines().filter(line -> !line.isBlank() && !line.startsWith("//")).collect(Collectors.toSet());
+    }
+
+    public Set<String> words = new HashSet<>();
+
+    @Override
+    public void update(MappingLintTask.LintParameters parameters) {
+        words = new HashSet<>();
+        words.addAll(MINECRAFT_WORDS);
+
+        try {
+            FileInputStream spellingFile = new FileInputStream(parameters.getSpellingFile().get().getAsFile());
+            Set<String> spellingWords = getLines(spellingFile);
+            words.addAll(spellingWords);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Unable to find spelling file!");
+        }
     }
 
     @Override
@@ -55,10 +62,10 @@ public class SpellingChecker implements Checker<Entry<?>> {
         String name = mapping.targetName();
 
         if (name != null
-                && !name.startsWith(PACKAGE_INFO_CLASS_PACKAGE)
-                // ignore unmapped methods and classes
-                && !(entry instanceof MethodEntry && name.startsWith(METHOD_PREFIX))
-                && !(entry instanceof ClassEntry && name.startsWith(CLASS_PREFIX))) {
+            && !name.startsWith(PACKAGE_INFO_CLASS_PACKAGE)
+            // ignore unmapped methods and classes
+            && !(entry instanceof MethodEntry && name.startsWith(METHOD_PREFIX))
+            && !(entry instanceof ClassEntry && name.startsWith(CLASS_PREFIX))) {
             List<String> namesToSplit = new ArrayList<>();
 
             // a contains check is necessary here because inner classes do not have package data
@@ -90,13 +97,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
                 // ignore numbers
                 // this requires special handling since we can't use the same regex we use for uppercase characters
                 // that way it would preserve the numbers, and we'd have to strip them anyway
-                boolean containsInts = false;
-                for (char c : word.toCharArray()) {
-                    if (Character.isDigit(c)) {
-                        containsInts = true;
-                        break;
-                    }
-                }
+                boolean containsInts = word.chars().anyMatch(Character::isDigit);
 
                 if (containsInts) {
                     String[] splitWords = word.split("\\d");
@@ -111,8 +112,32 @@ public class SpellingChecker implements Checker<Entry<?>> {
     }
 
     private void checkWord(String word, ErrorReporter reporter) {
-        if (!word.isEmpty() && !ALLOWED_WORDS.contains(word)) {
+        if (!word.isEmpty() && !words.contains(word)) {
+            if (word.endsWith("s")) { // Maybe a plural word
+                if (isPlural(word)) return;
+            }
+
             reporter.error("entry name contains unknown/misspelled word: " + word);
         }
+    }
+
+    private boolean isPlural(String word) {
+        String nonPlural;
+        if (word.endsWith("ies")) { // berries -> berry
+            nonPlural = word.substring(word.length() - 3) + "y";
+        } else if (word.endsWith("ves")) { // leaves -> leaf
+            nonPlural = word.substring(word.length() - 3) + "f";
+            if (!words.contains(nonPlural)) { // knives -> knife
+                nonPlural = word.substring(word.length() - 3) + "fe";
+            } else {
+                return true;
+            }
+        } else if (word.endsWith("ses")) { // glasses -> glass
+            nonPlural = word.substring(word.length() - 2);
+        } else { // ones -> one
+            nonPlural = word.substring(word.length() - 1);
+        }
+
+        return words.contains(nonPlural);
     }
 }

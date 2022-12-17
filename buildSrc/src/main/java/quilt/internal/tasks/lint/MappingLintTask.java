@@ -1,5 +1,16 @@
 package quilt.internal.tasks.lint;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+
 import cuchaz.enigma.Enigma;
 import cuchaz.enigma.EnigmaProject;
 import cuchaz.enigma.ProgressListener;
@@ -13,6 +24,7 @@ import cuchaz.enigma.translation.representation.AccessFlags;
 import cuchaz.enigma.translation.representation.entry.ClassEntry;
 import cuchaz.enigma.translation.representation.entry.Entry;
 import cuchaz.enigma.translation.representation.entry.MethodEntry;
+import javax.inject.Inject;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.DirectoryProperty;
@@ -21,6 +33,7 @@ import org.gradle.api.file.FileType;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
+import org.gradle.api.plugins.ExtensionAware;
 import org.gradle.api.provider.SetProperty;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputDirectory;
@@ -37,18 +50,6 @@ import org.gradle.workers.WorkerExecutor;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-import javax.inject.Inject;
-import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
-
 public abstract class MappingLintTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "mappingLint";
     private final DirectoryProperty mappingDirectory = getProject().getObjects().directoryProperty();
@@ -56,6 +57,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
 
     public MappingLintTask() {
         super(Constants.Groups.LINT_GROUP);
+        this.dependsOn(DownloadSpellingFileTask.TASK_NAME);
         // Ignore outputs for up-to-date checks as there aren't any (so only inputs are checked)
         getOutputs().upToDateWhen(task -> true);
         jarFile = getProject().getObjects().fileProperty();
@@ -86,6 +88,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
         workQueue.submit(LintAction.class, parameters -> {
             parameters.getJarFile().set(getJarFile());
             parameters.getCheckers().set(getCheckers());
+            parameters.getSpellingFile().set(this.mappingsExt().getFileConstants().spellingFile);
 
             for (FileChange change : changes.getFileChanges(getMappingDirectory())) {
                 if (change.getChangeType() != ChangeType.REMOVED && change.getFileType() == FileType.FILE) {
@@ -120,9 +123,13 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
         return name;
     }
 
-    public interface LintParameters extends WorkParameters {
+    public interface LintParameters extends WorkParameters, ExtensionAware {
         ConfigurableFileCollection getMappingFiles();
+
         RegularFileProperty getJarFile();
+
+        RegularFileProperty getSpellingFile();
+
         SetProperty<Checker<Entry<?>>> getCheckers();
     }
 
@@ -138,6 +145,9 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
             try {
                 LintParameters params = getParameters();
                 Set<Checker<Entry<?>>> checkers = getParameters().getCheckers().get();
+
+                checkers.forEach(checker -> checker.update(getParameters()));
+
                 Map<Severity, List<String>> messagesBySeverity = new EnumMap<>(Severity.class);
 
                 // Set up Enigma
