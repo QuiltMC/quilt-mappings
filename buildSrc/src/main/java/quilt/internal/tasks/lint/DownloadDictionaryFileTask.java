@@ -10,23 +10,23 @@ import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public class DownloadSpellingFileTask extends DefaultMappingsTask {
+public class DownloadDictionaryFileTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadSpellingFile";
 
-    public static final String DEFAULT_SPELLING_FILE = "https://github.com/dwyl/english-words/blob/a77cb15f4f5beb59c15b945f2415328a6b33c3b0/words_alpha.txt?raw=true";
+    public static final String DEFAULT_DICTIONARY_FILE = "https://github.com/dwyl/english-words/blob/a77cb15f4f5beb59c15b945f2415328a6b33c3b0/words_alpha.txt?raw=true";
     @OutputFile
     private final File output;
 
     @Input
     public final Property<String> url;
 
-    public DownloadSpellingFileTask() {
+    public DownloadDictionaryFileTask() {
         super(Constants.Groups.LINT_GROUP);
 
-        output = this.mappingsExt().getFileConstants().spellingFile;
+        output = this.mappingsExt().getFileConstants().dictionaryFile;
 
         url = getProject().getObjects().property(String.class);
-        url.convention(DEFAULT_SPELLING_FILE);
+        url.convention(DEFAULT_DICTIONARY_FILE);
     }
 
     @TaskAction

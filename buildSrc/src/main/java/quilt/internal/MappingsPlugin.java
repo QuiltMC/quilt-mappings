@@ -15,7 +15,7 @@ import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
-import quilt.internal.tasks.lint.DownloadSpellingFileTask;
+import quilt.internal.tasks.lint.DownloadDictionaryFileTask;
 import quilt.internal.tasks.lint.MappingLintTask;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
@@ -60,7 +60,7 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(OpenGlConstantUnpickGenerator.TASK_NAME, OpenGlConstantUnpickGenerator.class);
 
         tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
-        tasks.create(DownloadSpellingFileTask.TASK_NAME, DownloadSpellingFileTask.class);
+        tasks.create(DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class);
         tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
 
         tasks.create(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class);

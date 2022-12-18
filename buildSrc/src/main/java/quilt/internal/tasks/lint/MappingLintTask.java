@@ -57,7 +57,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
 
     public MappingLintTask() {
         super(Constants.Groups.LINT_GROUP);
-        this.dependsOn(DownloadSpellingFileTask.TASK_NAME);
+        this.dependsOn(DownloadDictionaryFileTask.TASK_NAME);
         // Ignore outputs for up-to-date checks as there aren't any (so only inputs are checked)
         getOutputs().upToDateWhen(task -> true);
         jarFile = getProject().getObjects().fileProperty();
@@ -88,7 +88,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
         workQueue.submit(LintAction.class, parameters -> {
             parameters.getJarFile().set(getJarFile());
             parameters.getCheckers().set(getCheckers());
-            parameters.getSpellingFile().set(this.mappingsExt().getFileConstants().spellingFile);
+            parameters.getSpellingFile().set(this.mappingsExt().getFileConstants().dictionaryFile);
 
             for (FileChange change : changes.getFileChanges(getMappingDirectory())) {
                 if (change.getChangeType() != ChangeType.REMOVED && change.getFileType() == FileType.FILE) {
