@@ -75,7 +75,8 @@ public class SpellingChecker implements Checker<Entry<?>> {
     private static void checkJavadoc(String javadoc, ErrorReporter errorReporter) {
         if (javadoc != null && !javadoc.isEmpty()) {
             // in this case we just have to run the world's slowest regex, there's no clever optimisations based on type to be had
-            List<String> splitJavadoc = splitWords(List.of(javadoc), word -> true, "[0-9_\\[\\]\\-\\.\\{\\}\\(\\)@#/\":; ,<>\n=\\*\\|\\+%`§&!]");
+            // note: this regex does not exclude dashes, we cannot handle every single "x-like" scattered around
+            List<String> splitJavadoc = splitWords(List.of(javadoc), word -> true, "[^A-Za-z']");
             for (String word : splitJavadoc) {
                 if (!word.isBlank()) {
                     checkWord(word.toLowerCase(), word, errorReporter, MappingType.JAVADOC);
