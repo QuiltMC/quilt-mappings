@@ -50,6 +50,7 @@ There are two main reasons the build may fail on your pull request:
    A javadoc failure will occur when you rename a class or method that a piece of javadoc points to.
    It gives the error `error: reference not found * {@link TheOldName}`.
    To fix this, you need to change the javadoc to point to the new name. Simple!
+   You can open the javadoc editor in Enigma by right-clicking the entry and selecting the `Edit Javadoc` option, or by pressing `Ctrl + D` by default.
    Run `./gradlew build javadocJar` to check your new mapping. 
 
 ## Guide: Triage Categories
