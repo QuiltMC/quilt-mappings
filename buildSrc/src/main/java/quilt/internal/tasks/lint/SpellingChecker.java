@@ -78,7 +78,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
             List<String> splitJavadoc = splitWords(List.of(javadoc), word -> true, "[0-9_\\[\\]\\-\\.\\{\\}\\(\\)@#/\":; ,<>\n=\\*\\|\\+%`§&!]");
             for (String word : splitJavadoc) {
                 if (!word.isBlank()) {
-                    checkWord(word.toLowerCase(), errorReporter, "javadoc");
+                    checkWord(word.toLowerCase(), word, errorReporter, MappingType.JAVADOC);
                 }
             }
         }
@@ -107,7 +107,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
 
         // check
         for (String word : splitNames) {
-            checkWord(word, errorReporter, "entry name");
+            checkWord(word, word, errorReporter, MappingType.ENTRY);
         }
     }
 
@@ -145,7 +145,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
         return splitWords;
     }
 
-    private static void checkWord(String word, ErrorReporter reporter, String type) {
+    private static void checkWord(String word, String reportedWord, ErrorReporter reporter, MappingType type) {
         if (!word.isBlank() && !words.contains(word)) {
             // ignore words that end with '
             // this is to avoid things like "classes'" throwing an error, as it's a perfectly valid usage
@@ -161,7 +161,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
 
             // single characters are always allowed
             if (word.length() > 1) {
-                reporter.error(type + " contains unknown/misspelled word: \"" + word + "\"");
+                reporter.error(type + " contains unknown/misspelled word: \"" + reportedWord + "\"");
             }
         }
     }
@@ -186,5 +186,25 @@ public class SpellingChecker implements Checker<Entry<?>> {
         }
 
         return words.contains(nonPlural);
+    }
+
+    private enum MappingType {
+        JAVADOC("javadoc"),
+        ENTRY("entry name");
+
+        private final String name;
+
+        MappingType(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.getName();
+        }
     }
 }
