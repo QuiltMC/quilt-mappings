@@ -13,7 +13,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 public class DownloadDictionaryFileTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadDictionaryFile";
 
-    public static final String DEFAULT_DICTIONARY_FILE = "https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/2ab38ea58ccbd9b998eaa537cf07650d02ecb659/allowed_english_words.txt";
+    public static final String DEFAULT_DICTIONARY_FILE = "https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/d0b8985d2f0da0f678e035b547f026a0b3cf35d6/allowed_english_words.txt";
     @OutputFile
     private final File output;
 

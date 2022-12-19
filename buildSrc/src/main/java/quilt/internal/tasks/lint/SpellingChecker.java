@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import cuchaz.enigma.translation.mapping.EntryMapping;
@@ -65,70 +66,115 @@ public class SpellingChecker implements Checker<Entry<?>> {
             // ignore unmapped methods and classes
             && !(entry instanceof MethodEntry && name.startsWith(METHOD_PREFIX))
             && !(entry instanceof ClassEntry && name.startsWith(CLASS_PREFIX))) {
-            List<String> namesToSplit = new ArrayList<>();
 
-            // a contains check is necessary here because inner classes do not have package data
-            if (entry instanceof ClassEntry && name.contains(String.valueOf(PACKAGE_SEPARATOR))) {
-                // add class name - we don't have to handle underscores
-                namesToSplit.add(name.substring(name.lastIndexOf(PACKAGE_SEPARATOR) + 1));
-                // add package names and handle underscores
-                String[] packageNames = name.substring(0, name.lastIndexOf(PACKAGE_SEPARATOR)).split(String.valueOf(PACKAGE_SEPARATOR));
-                for (String packageName : packageNames) {
-                    String[] split = packageName.split("_");
-                    namesToSplit.addAll(List.of(split));
-                }
-            } else {
-                // handle underscores
-                String[] split = name.split("_");
-                namesToSplit.addAll(List.of(split));
-            }
+            checkMapping(entry, name, errorReporter);
+            checkJavadoc(mapping.javadoc(), errorReporter);
+        }
+    }
 
-            // split by uppercase characters and numbers and preserve
-            List<String> splitNames = new ArrayList<>();
-            for (String nameToSplit : namesToSplit) {
-                // split by uppercase letters and preserve them in the split strings
-                // also map to all lowercase
-                List<String> split = Arrays.stream(nameToSplit.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")).map(String::toLowerCase).toList();
-                splitNames.addAll(split);
-            }
-
-            for (String word : splitNames) {
-                // ignore numbers
-                // this requires special handling since we can't use the same regex we use for uppercase characters
-                // that way it would preserve the numbers, and we'd have to strip them anyway
-                boolean containsInts = word.chars().anyMatch(Character::isDigit);
-
-                if (containsInts) {
-                    String[] splitWords = word.split("\\d");
-                    for (String splitWord : splitWords) {
-                        checkWord(splitWord, errorReporter);
-                    }
-                } else {
-                    checkWord(word, errorReporter);
+    private static void checkJavadoc(String javadoc, ErrorReporter errorReporter) {
+        if (javadoc != null && !javadoc.isEmpty()) {
+            // in this case we just have to run the world's slowest regex, there's no clever optimisations based on type to be had
+            List<String> splitJavadoc = splitWords(List.of(javadoc), word -> true, "[0-9_\\[\\]\\-\\.\\{\\}\\(\\)@#/\":; ,<>\n=\\*\\|\\+%`§&!]");
+            for (String word : splitJavadoc) {
+                if (!word.isBlank()) {
+                    checkWord(word.toLowerCase(), errorReporter, "javadoc");
                 }
             }
         }
     }
 
-    private void checkWord(String word, ErrorReporter reporter) {
-        if (!word.isEmpty() && !words.contains(word)) {
+    private static void checkMapping(Entry<?> entry, String name, ErrorReporter errorReporter) {
+        List<String> namesToSplit = new ArrayList<>();
+
+        // a contains check is necessary here because inner classes do not have package data
+        if (entry instanceof ClassEntry && name.contains(String.valueOf(PACKAGE_SEPARATOR))) {
+            // add class name - we don't have to handle underscores
+            namesToSplit.add(name.substring(name.lastIndexOf(PACKAGE_SEPARATOR) + 1));
+            // add package names and handle underscores
+            String[] packageNames = name.substring(0, name.lastIndexOf(PACKAGE_SEPARATOR)).split(String.valueOf(PACKAGE_SEPARATOR));
+            for (String packageName : packageNames) {
+                String[] split = packageName.split("_");
+                namesToSplit.addAll(Set.of(split));
+            }
+        } else {
+            // handle underscores
+            String[] split = name.split("_");
+            namesToSplit.addAll(List.of(split));
+        }
+
+        List<String> splitNames = splitWords(namesToSplit, word -> word.chars().anyMatch(Character::isDigit), "\\d");
+
+        // check
+        for (String word : splitNames) {
+            checkWord(word, errorReporter, "entry name");
+        }
+    }
+
+    /**
+     * Splits provided words by camelCase, then proceeds to split them by the provided regex if the stripping check succeeds
+     * @param words the words to split
+     * @param strippingCheck a check to run before splitting via the regex
+     * @param strippingRegex a regex to split words by
+     * @return a list of split words
+     */
+    private static List<String> splitWords(List<String> words, Predicate<String> strippingCheck, String strippingRegex) {
+        // split by uppercase characters and numbers and preserve
+        List<String> splitNames = new ArrayList<>();
+        for (String nameToSplit : words) {
+            // split by uppercase letters and preserve them in the split strings
+            // also map to all lowercase
+            Set<String> split = Arrays.stream(nameToSplit.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")).map(String::toLowerCase).collect(Collectors.toSet());
+            splitNames.addAll(split);
+        }
+
+        List<String> splitWords = new ArrayList<>();
+
+        for (String word : splitNames) {
+            // ignore numbers
+            // this requires special handling since we can't use the same regex we use for uppercase characters
+            // that way it would preserve the numbers, and we'd have to strip them anyway
+            if (strippingCheck.test(word)) {
+                String[] splitByInts = word.split(strippingRegex);
+                splitWords.addAll(Arrays.asList(splitByInts));
+            } else {
+                splitWords.add(word);
+            }
+        }
+
+        return splitWords;
+    }
+
+    private static void checkWord(String word, ErrorReporter reporter, String type) {
+        if (!word.isBlank() && !words.contains(word)) {
+            // ignore words that end with '
+            // this is to avoid things like "classes'" throwing an error, as it's a perfectly valid usage
+            if (word.endsWith("'")) {
+                // the word still needs to be run through the plural check, so we validate
+                word = word.substring(word.length() - 1);
+            }
+
             // ignore plural versions of words
             if (word.endsWith("s") && checkPlural(word)) {
                 return;
             }
 
-            reporter.error("entry name contains unknown/misspelled word: " + word);
+            // single characters are always allowed
+            if (word.length() > 1) {
+                reporter.error(type + " contains unknown/misspelled word: \"" + word + "\"");
+            }
         }
     }
 
-    private boolean checkPlural(String word) {
+    private static boolean checkPlural(String word) {
         String nonPlural;
         if (word.endsWith("ies")) { // berries -> berry
             nonPlural = word.substring(word.length() - 3) + "y";
         } else if (word.endsWith("ves")) { // leaves -> leaf
-            nonPlural = word.substring(word.length() - 3) + "f";
+            String substring = word.substring(word.length() - 3);
+            nonPlural = substring + "f";
             if (!words.contains(nonPlural)) { // knives -> knife
-                nonPlural = word.substring(word.length() - 3) + "fe";
+                nonPlural = substring + "fe";
             } else {
                 // word has been found, we can skip the next contains check
                 return true;
