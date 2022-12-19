@@ -32,7 +32,8 @@ or in our other community spaces. We're always happy to help if you need us!
     take a final look over your PR, and, if everything looks good, merge it!
 
 ## Guide: Fixing Failing Builds
-There are two main reasons the build may fail on your pull request:
+There are two main reasons the build may fail on your pull request, which are listed here.
+If you have another issue you don't understand, feel free to ask the QM team for help, either on your pull request or through [Discord](https://discord.quiltmc.org/toolchain).
 
 1. ### Spellcheck Failure
     A spellcheck failure gives the error `entry name contains unknown/misspelled word: YourEntryName`. There are two ways to fix this:
