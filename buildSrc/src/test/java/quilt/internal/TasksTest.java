@@ -67,7 +67,7 @@ public class TasksTest {
     @BeforeAll
     public static void setup() throws Exception {
         // DEBUG
-        System.out.println("Setting up test project at " + testProjectDir.toAbsolutePath());
+        // System.out.println("Setting up test project at " + testProjectDir.toAbsolutePath());
         Path source = getResource("/testProject");
 
         try (Stream<Path> files = Files.walk(source)) {
