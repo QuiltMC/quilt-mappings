@@ -1,9 +1,12 @@
 package quilt.internal.tasks.build;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Map;
+import java.util.function.Function;
 
 import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.MappingVisitor;
@@ -17,6 +20,7 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.mappingio.CompleteInitializersVisitor;
 import quilt.internal.tasks.DefaultMappingsTask;
@@ -53,15 +57,24 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         File mappingsTinyInput = input.get().getAsFile();
 
         getLogger().lifecycle(":merging {} and {}", Constants.MAPPINGS_NAME, this.mergeName);
+        mergeMappings(mappingsTinyInput.toPath(), mergeTinyInput.toPath(), outputMappings.toPath(),
+            this::getFirstVisitor, this::getPreWriteVisitor, getNameAlternatives());
+    }
+
+    @VisibleForTesting
+    public static void mergeMappings(Path mappingsTinyInput, Path mergeTinyInput, Path outputMappings,
+                                     Function<MappingVisitor, MappingVisitor> firstVisitor,
+                                     Function<MappingVisitor, MappingVisitor> preWriteVisitor,
+                                     Map<String, String> nameAlternatives) throws IOException {
         MemoryMappingTree tree = new MemoryMappingTree(false); // hashed is the src namespace
-        MappingReader.read(mergeTinyInput.toPath(), MappingFormat.TINY_2, tree);
-        MappingReader.read(mappingsTinyInput.toPath(), MappingFormat.TINY_2, tree);
-        try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings.toPath()), false)) {
-            tree.accept(getFirstVisitor(
+        MappingReader.read(mergeTinyInput, MappingFormat.TINY_2, tree);
+        MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2, tree);
+        try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings), false)) {
+            tree.accept(firstVisitor.apply(
                 new CompleteInitializersVisitor(
                     new MappingNsCompleter(
-                        new MappingSourceNsSwitch(getPreWriteVisitor(w), "official", /*Drop methods not in hashed*/ true),
-                        getNameAlternatives(),
+                        new MappingSourceNsSwitch(preWriteVisitor.apply(w), "official", /*Drop methods not in hashed*/ true),
+                        nameAlternatives,
                         false
                     )
                 )

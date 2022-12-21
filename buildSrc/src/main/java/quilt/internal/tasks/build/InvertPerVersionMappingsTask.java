@@ -6,6 +6,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
@@ -33,10 +34,14 @@ public class InvertPerVersionMappingsTask extends DefaultMappingsTask {
     public void invertPerVersionMappings() throws Exception {
         getLogger().lifecycle(":building inverted {}", Constants.PER_VERSION_MAPPINGS_NAME);
 
+        invertMappings(input.get().getAsFile(), invertedTinyFile);
+    }
 
+    @VisibleForTesting
+    public static void invertMappings(File input, File output) throws Exception {
         String[] args = {
-                input.get().getAsFile().getAbsolutePath(),
-                invertedTinyFile.getAbsolutePath(),
+                input.getAbsolutePath(),
+                output.getAbsolutePath(),
                 Constants.PER_VERSION_MAPPINGS_NAME, "official"
         };
 

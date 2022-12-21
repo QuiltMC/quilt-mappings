@@ -16,6 +16,7 @@ import org.gradle.workers.WorkAction;
 import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
+import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
@@ -72,6 +73,50 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
         });
     }
 
+    @VisibleForTesting
+    public static void remapUnpickDefinitions(Path input, Path mappings, Path output) {
+        try {
+            Files.deleteIfExists(output);
+
+            Map<String, String> classMappings = new HashMap<>();
+            Map<MethodKey, String> methodMappings = new HashMap<>();
+            Map<FieldKey, String> fieldMappings = new HashMap<>();
+            String fromM = "named";
+            String toM = Constants.PER_VERSION_MAPPINGS_NAME;
+
+            try (BufferedReader reader = Files.newBufferedReader(mappings)) {
+                MemoryMappingTree mappingTree = new MemoryMappingTree();
+                Tiny2Reader.read(reader, mappingTree);
+
+                for (MappingTree.ClassMapping classMapping : mappingTree.getClasses()) {
+                    classMappings.put(classMapping.getName(fromM), classMapping.getName(toM));
+
+                    for (MappingTree.MethodMapping methodMapping : classMapping.getMethods()) {
+                        methodMappings.put(
+                            new MethodKey(classMapping.getName(fromM), methodMapping.getName(fromM), methodMapping.getDesc(fromM)),
+                            methodMapping.getName(toM)
+                        );
+                    }
+
+                    for (MappingTree.FieldMapping fieldMapping : classMapping.getFields()) {
+                        fieldMappings.put(
+                            new FieldKey(classMapping.getName(fromM), fieldMapping.getName(fromM)),
+                            fieldMapping.getName(toM)
+                        );
+                    }
+                }
+            }
+
+            try (UnpickV2Reader reader = new UnpickV2Reader(Files.newInputStream(input))) {
+                UnpickV2Writer writer = new UnpickV2Writer();
+                reader.accept(new UnpickV2Remapper(classMappings, methodMappings, fieldMappings, writer));
+                Files.writeString(output, UnpickUtil.getLfOutput(writer));
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
     public interface RemapParameters extends WorkParameters {
         @InputFile
         RegularFileProperty getInput();
@@ -90,47 +135,10 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
 
         @Override
         public void execute() {
-            try {
-                Path output = getParameters().getOutput().getAsFile().get().toPath();
-                Files.deleteIfExists(output);
-
-                Map<String, String> classMappings = new HashMap<>();
-                Map<MethodKey, String> methodMappings = new HashMap<>();
-                Map<FieldKey, String> fieldMappings = new HashMap<>();
-                String fromM = "named";
-                String toM = Constants.PER_VERSION_MAPPINGS_NAME;
-
-                try (BufferedReader reader = Files.newBufferedReader(getParameters().getMappings().getAsFile().get().toPath())) {
-                    MemoryMappingTree mappingTree = new MemoryMappingTree();
-                    Tiny2Reader.read(reader, mappingTree);
-
-                    for (MappingTree.ClassMapping classMapping : mappingTree.getClasses()) {
-                        classMappings.put(classMapping.getName(fromM), classMapping.getName(toM));
-
-                        for (MappingTree.MethodMapping methodMapping : classMapping.getMethods()) {
-                            methodMappings.put(
-                                    new MethodKey(classMapping.getName(fromM), methodMapping.getName(fromM), methodMapping.getDesc(fromM)),
-                                    methodMapping.getName(toM)
-                            );
-                        }
-
-                        for (MappingTree.FieldMapping fieldMapping : classMapping.getFields()) {
-                            fieldMappings.put(
-                                    new FieldKey(classMapping.getName(fromM), fieldMapping.getName(fromM)),
-                                    fieldMapping.getName(toM)
-                            );
-                        }
-                    }
-                }
-
-                try (UnpickV2Reader reader = new UnpickV2Reader(Files.newInputStream(getParameters().getInput().getAsFile().get().toPath()))) {
-                    UnpickV2Writer writer = new UnpickV2Writer();
-                    reader.accept(new UnpickV2Remapper(classMappings, methodMappings, fieldMappings, writer));
-                    Files.writeString(output, UnpickUtil.getLfOutput(writer));
-                }
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
+            Path input = getParameters().getInput().getAsFile().get().toPath();
+            Path mappings = getParameters().getMappings().getAsFile().get().toPath();
+            Path output = getParameters().getOutput().getAsFile().get().toPath();
+            remapUnpickDefinitions(input, mappings, output);
         }
     }
 }

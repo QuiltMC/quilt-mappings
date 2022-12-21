@@ -23,26 +23,56 @@ repositories {
 	}
 }
 
+configurations {
+	proGuard
+}
+
 dependencies {
-	implementation("commons-io:commons-io:2.11.0")
-	implementation("de.undercouch:gradle-download-task:4.1.1")
-	implementation("net.fabricmc:stitch:${project.stitch_version}")
-	implementation("org.quiltmc:quilt-enigma-plugin:${project.enigma_plugin_version}")
-	implementation('org.quiltmc:tiny-remapper:0.7.2')
-	implementation('org.quiltmc:launchermeta-parser:1.0.0')
-	implementation("com.google.guava:guava:30.1.1-jre")
-	implementation("cuchaz:enigma-cli:${project.enigma_version}")
-	implementation("cuchaz:enigma:${project.enigma_version}")
-	implementation("org.quiltmc.unpick:unpick:${project.unpick_version}")
-	implementation("org.quiltmc.unpick:unpick-format-utils:${project.unpick_version}")
-	implementation("org.quiltmc.unpick:unpick-cli:${project.unpick_version}")
-	implementation("net.fabricmc:mapping-io:0.3.0")
-	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0")
-	implementation("org.quiltmc:javadoc-draftsman:1.2.1")
+	implementation(libs.commons.io)
+	implementation(libs.download.task)
+	implementation(libs.guava)
+	implementation(libs.jackson.xml)
+	implementation(libs.launchermeta.parser)
+
+	implementation(libs.bundles.enigma.full)
+	implementation(libs.tiny.remapper)
+	implementation(libs.stitch)
+	implementation(libs.bundles.unpick.full)
+	implementation(libs.mapping.io)
+	implementation(libs.javadoc.draftsman)
 
 	// Decompilers
-	implementation("net.fabricmc:cfr:${project.cfr_version}")
-	implementation("org.quiltmc:quiltflower:${project.quiltflower_version}")
+	implementation(libs.cfr)
+	implementation(libs.quiltflower)
+
+	// Testing
+	testImplementation(libs.junit)
+	proGuard(libs.proguard)
+}
+
+tasks.register("inputTestJar", Jar.class) {
+	from(sourceSets.test.output) {
+		include 'quilt/internal/input/**/*.class'
+	}
+
+	archiveFileName = 'test-input.jar'
+}
+
+tasks.register("inputTestObf", JavaExec.class) {
+	dependsOn 'inputTestJar'
+	mainClass = 'proguard.ProGuard'
+	classpath configurations.proGuard
+
+	args '@src/test/resources/proguard-test.conf', '-injars', inputTestJar.archiveFile.get(),
+			'-libraryjars', '<java.home>/jmods',
+			'-outjars', file('build/libs/test-input-obf.jar'),
+			'-printmapping', file('build/resources/test/obf-mapping.txt')
+}
+
+test {
+	dependsOn inputTestObf
+	useJUnitPlatform()
+	enableAssertions = false
 }
 
 gradlePlugin {
