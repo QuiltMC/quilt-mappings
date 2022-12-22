@@ -6,6 +6,7 @@ import org.gradle.api.logging.LogLevel;
 import org.jetbrains.java.decompiler.main.decompiler.BaseDecompiler;
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
+import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 import quilt.internal.decompile.AbstractDecompiler;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;
@@ -36,6 +37,10 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
     @Override
     public void decompile(File file, File outputDir, Map<String, Object> options, Collection<File> libraries) {
         Path outputPath = outputDir.toPath();
+
+        // disable "inconsistent inner class" warning due to spam in the logs
+        options.put(IFernflowerPreferences.WARN_INCONSISTENT_INNER_CLASSES, "0");
+        // note: "inconsistent generic signature" warnings should also be suppressed, but that isn't currently option in quiltflower
 
         IFabricJavadocProvider javadocProvider = null;
         if (this.javadocProvider != null) {
