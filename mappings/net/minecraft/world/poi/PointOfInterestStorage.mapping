@@ -3,6 +3,9 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 	FIELD f_bwcnjgqz preloadedChunks Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_kjhqnjbr MAX_VILLAGE_DISTANCE I
 	FIELD f_zaepnyld VILLAGE_SECTION_SIZE I
+	METHOD <init> (Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;ZLnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_qpninoyb;)V
+		ARG 1 directory
+		ARG 3 dsync
 	METHOD m_agkornyv getType (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
 		ARG 1 pos
 	METHOD m_dsxxnxyk getInCircle (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/stream/Stream;
@@ -22,6 +25,9 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 		ARG 2 chunkPos
 		ARG 3 occupationStatus
 	METHOD m_hlfacbyy scanAndPopulate (Lnet/minecraft/unmapped/C_aurosfgf;Lnet/minecraft/unmapped/C_zubvmeye;Ljava/util/function/BiConsumer;)V
+		ARG 1 section
+		ARG 2 sectionPos
+		ARG 3 populator
 	METHOD m_hmjectje getInSquare (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/stream/Stream;
 		ARG 1 typePredicate
 		ARG 2 pos
@@ -49,6 +55,8 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 		ARG 4 radius
 		ARG 5 occupationStatus
 	METHOD m_nnrgqcxo initForPalette (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_aurosfgf;)V
+		ARG 1 pos
+		ARG 2 section
 	METHOD m_owscuzvh preloadChunks (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;I)V
 		COMMENT Preloads chunks in a square area with the given radius. Loads the chunks with {@code ChunkStatus.EMPTY}.
 		ARG 1 world
@@ -58,6 +66,7 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 	METHOD m_qvdigcdn remove (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	METHOD m_safkagzh shouldScan (Lnet/minecraft/unmapped/C_aurosfgf;)Z
+		ARG 0 section
 	METHOD m_ssqvzvty hasTypeAt (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 2 pos
 	METHOD m_tjmtajvw getPosition (Ljava/util/function/Predicate;Ljava/util/function/BiPredicate;Lnet/minecraft/unmapped/C_hynzadkk;I)Ljava/util/Optional;

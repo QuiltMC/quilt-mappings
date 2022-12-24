@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_mrjqexcd net/minecraft/server/world/ChunkTicketMa
 	FIELD f_dlfrrpuw levelUpdateListener Lnet/minecraft/unmapped/C_gxchrfeu;
 	FIELD f_dznqcely playerTicketThrottler Lnet/minecraft/unmapped/C_brzcgupp;
 	FIELD f_eqtfbgdj playerTicketThrottlerUnblocker Lnet/minecraft/unmapped/C_brzcgupp;
+	FIELD f_etfumpbb simulationDistance I
 	FIELD f_iegrnkfv NEARBY_PLAYER_TICKET_LEVEL I
 	FIELD f_kacgfmjt playersByChunkPos Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
 	FIELD f_nmajryqc distanceFromTicketTracker Lnet/minecraft/unmapped/C_mrjqexcd$C_ttwlzxmm;
@@ -13,16 +14,19 @@ CLASS net/minecraft/unmapped/C_mrjqexcd net/minecraft/server/world/ChunkTicketMa
 	FIELD f_tdkfworo mainThreadExecutor Ljava/util/concurrent/Executor;
 	FIELD f_uhuxgctz age J
 	FIELD f_yboexyoa distanceFromNearestPlayerTracker Lnet/minecraft/unmapped/C_mrjqexcd$C_fqqccsvo;
+	FIELD f_znxdrwsz tickTracker Lnet/minecraft/unmapped/C_dnmsfwrb;
 	METHOD <init> (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)V
 		ARG 1 workerExecutor
 		ARG 2 mainThreadExecutor
 	METHOD m_apoaqwuw setWatchDistance (I)V
 		ARG 1 viewDistance
+	METHOD m_bwjcolud getTickTracker ()Lnet/minecraft/unmapped/C_dnmsfwrb;
 	METHOD m_ckinnuph getTicket (J)Ljava/lang/String;
 		ARG 1 pos
 	METHOD m_cnlluvdn setChunkForced (Lnet/minecraft/unmapped/C_ynrszrtu;Z)V
 		ARG 1 pos
 		ARG 2 forced
+	METHOD m_coocdjno requiresUpdates ()Z
 	METHOD m_djuofpqq removeTicketWithLevel (Lnet/minecraft/unmapped/C_cuxhrvln;Lnet/minecraft/unmapped/C_ynrszrtu;ILjava/lang/Object;)V
 		ARG 1 type
 		ARG 2 pos
@@ -42,12 +46,16 @@ CLASS net/minecraft/unmapped/C_mrjqexcd net/minecraft/server/world/ChunkTicketMa
 		ARG 2 pos
 		ARG 3 radius
 		ARG 4 argument
+	METHOD m_myrifyxp dumpTickets (Ljava/lang/String;)V
+		ARG 1 filePath
 	METHOD m_nnsrksai tick (Lnet/minecraft/unmapped/C_gxrpzacc;)Z
 		ARG 1 chunkStorage
 	METHOD m_nysntiui setLevel (JILnet/minecraft/unmapped/C_gkderdjo;I)Lnet/minecraft/unmapped/C_gkderdjo;
 		ARG 1 pos
 		ARG 3 level
 		ARG 4 holder
+	METHOD m_pgfkvuhq (J)Z
+		ARG 1 chunkPos
 	METHOD m_pivkvkrp getTicketSet (J)Lnet/minecraft/unmapped/C_ikcbcxix;
 		ARG 1 position
 	METHOD m_pklmcqrj addTicketWithLevel (Lnet/minecraft/unmapped/C_cuxhrvln;Lnet/minecraft/unmapped/C_ynrszrtu;ILjava/lang/Object;)V
@@ -59,6 +67,7 @@ CLASS net/minecraft/unmapped/C_mrjqexcd net/minecraft/server/world/ChunkTicketMa
 		ARG 1 pos
 		ARG 3 ticket
 	METHOD m_qyzimyzy setSimulationDistance (I)V
+		ARG 1 distance
 	METHOD m_swihwqzz removeTicket (Lnet/minecraft/unmapped/C_cuxhrvln;Lnet/minecraft/unmapped/C_ynrszrtu;ILjava/lang/Object;)V
 		ARG 1 type
 		ARG 2 pos
@@ -72,6 +81,8 @@ CLASS net/minecraft/unmapped/C_mrjqexcd net/minecraft/server/world/ChunkTicketMa
 		ARG 2 player
 	METHOD m_uwetgvxd isUnloaded (J)Z
 		ARG 1 pos
+	METHOD m_vasauzvg (J)Z
+		ARG 1 chunkPos
 	METHOD m_ytrysmmj toDumpString ()Ljava/lang/String;
 	CLASS C_fqqccsvo DistanceFromNearestPlayerTracker
 		FIELD f_dhbpxhsh distanceFromNearestPlayer Lit/unimi/dsi/fastutil/longs/Long2ByteMap;
@@ -84,6 +95,8 @@ CLASS net/minecraft/unmapped/C_mrjqexcd net/minecraft/server/world/ChunkTicketMa
 			ARG 1 pos
 			ARG 3 oldDistance
 			ARG 4 distance
+		METHOD m_tkrkinow dumpChunks (Ljava/lang/String;)V
+			ARG 1 filePath
 		METHOD m_vksaslur updateLevels ()V
 	CLASS C_gnotuxja NearbyChunkTicketUpdater
 		FIELD f_nzujespd positionsAffected Lit/unimi/dsi/fastutil/longs/LongSet;
