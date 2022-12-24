@@ -23,6 +23,10 @@ repositories {
 	}
 }
 
+configurations {
+	proGuard
+}
+
 dependencies {
 	implementation(libs.commons.io)
 	implementation(libs.download.task)
@@ -40,6 +44,35 @@ dependencies {
 	// Decompilers
 	implementation(libs.cfr)
 	implementation(libs.quiltflower)
+
+	// Testing
+	testImplementation(libs.junit)
+	proGuard(libs.proguard)
+}
+
+tasks.register("inputTestJar", Jar.class) {
+	from(sourceSets.test.output) {
+		include 'quilt/internal/input/**/*.class'
+	}
+
+	archiveFileName = 'test-input.jar'
+}
+
+tasks.register("inputTestObf", JavaExec.class) {
+	dependsOn 'inputTestJar'
+	mainClass = 'proguard.ProGuard'
+	classpath configurations.proGuard
+
+	args '@src/test/resources/proguard-test.conf', '-injars', inputTestJar.archiveFile.get(),
+			'-libraryjars', '<java.home>/jmods',
+			'-outjars', file('build/libs/test-input-obf.jar'),
+			'-printmapping', file('build/resources/test/obf-mapping.txt')
+}
+
+test {
+	dependsOn inputTestObf
+	useJUnitPlatform()
+	enableAssertions = false
 }
 
 gradlePlugin {
