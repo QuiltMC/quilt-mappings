@@ -12,6 +12,7 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;)V
 		ARG 1 biomeSource
 	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;Ljava/util/function/Function;)V
+		ARG 1 populationSource
 		ARG 2 generationSettingsGetter
 	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
 	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jibygqpu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zxhjfyir;)V
@@ -21,6 +22,18 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 4 chunk
 		ARG 5 templateManager
 	METHOD m_blqkvkse getCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_caesvqvr (Lnet/minecraft/unmapped/C_vtbxyypo;Lnet/minecraft/unmapped/C_edfiqifk;J)Lnet/minecraft/unmapped/C_jibygqpu;
+		ARG 2 randomState
+	METHOD m_dbfhxbvh tryGenerateStructure (Lnet/minecraft/unmapped/C_nmlisvai$C_gmatxzeb;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;JLnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_zubvmeye;)Z
+		ARG 1 structureSelectionEntry
+		ARG 2 structureManager
+		ARG 3 registryManager
+		ARG 4 randomState
+		ARG 5 structureTemplateManager
+		ARG 6 seed
+		ARG 8 chunk
+		ARG 9 pos
+		ARG 10 sectionPos
 	METHOD m_dmhpibgx getColumnSample (IILnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)Lnet/minecraft/unmapped/C_lydpvmkv;
 		COMMENT Returns a sample of all the block states in a column for use in structure generation.
 		ARG 1 x
@@ -46,12 +59,15 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_ffmeoonw generateFeatures (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;)V
 		ARG 1 world
 		ARG 2 chunk
+		ARG 3 structureManager
 	METHOD m_fwnuhyem (Lnet/minecraft/unmapped/C_ldkphtbr;Ljava/util/Set;Lnet/minecraft/unmapped/C_ynrszrtu;)V
 		ARG 0 worldAccess
 		ARG 2 pos
 	METHOD m_gobnuobv getStructureReferences (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_quklzgtb;)I
+		ARG 0 structureManager
 		ARG 1 chunk
 		ARG 2 sectionPos
+		ARG 3 feature
 	METHOD m_gvpevbgi checkNotReferenced (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_efiavfys;)Z
 		ARG 0 structureManager
 		ARG 1 start
