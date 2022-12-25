@@ -2,12 +2,21 @@ CLASS net/minecraft/unmapped/C_hzmyuskp net/minecraft/world/storage/VersionedChu
 	FIELD f_aklywswt featureUpdater Lnet/minecraft/unmapped/C_qpbbnpoq;
 	FIELD f_jnzhwftu dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_rmprhtbt worker Lnet/minecraft/unmapped/C_ffgsaknh;
+	METHOD <init> (Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;Z)V
+		ARG 1 directory
+		ARG 2 dataFixer
+		ARG 3 dsync
 	METHOD m_izrlgwnw setNbt (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 chunkPos
 		ARG 2 nbt
+	METHOD m_nxrgomie getChunkNbtScanner ()Lnet/minecraft/unmapped/C_mxmjmfvn;
 	METHOD m_ooblxajk getDataVersion (Lnet/minecraft/unmapped/C_hhlwcnih;)I
+		COMMENT @return the data version contained in the provided NBT, or -1 if not found.
 		ARG 0 nbt
 	METHOD m_pfntgatl completeAll ()V
 	METHOD m_raundbec injectDatafixingContext (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/Optional;)V
+		ARG 0 nbt
+		ARG 1 dimension
+		ARG 2 generator
 	METHOD m_vladgjrx getNbt (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 chunkPos
