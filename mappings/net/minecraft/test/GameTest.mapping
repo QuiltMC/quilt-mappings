@@ -3,10 +3,20 @@ CLASS net/minecraft/unmapped/C_qanvkdqp net/minecraft/test/GameTest
 	COMMENT
 	COMMENT <p>{@code GameTest} methods must take 1 parameter of {@link net.minecraft.test.TestContext}
 	METHOD m_balpyuta batchId ()Ljava/lang/String;
+		COMMENT The id of the batch this test should belong to
 	METHOD m_hdcufkgx required ()Z
+		COMMENT Whether this test must succeed for the whole test sequence to succeed
 	METHOD m_hxdvfvrg structureName ()Ljava/lang/String;
+		COMMENT An Identifier describing the location of the structure file to load for this test
+		COMMENT
+		COMMENT <p>The actual path for the file depends on the current test framework, but usually gets resolved as {@code "<namespace>:gametest/structures/<location>.nbt"}
 	METHOD m_mpjcinpl maxAttempts ()I
-	METHOD m_nntnqpde duration ()J
+		COMMENT How many times the test can be restarted
+	METHOD m_nntnqpde startDelay ()J
+		COMMENT The number of ticks to wait between loading the structure and starting the test
 	METHOD m_rkpcwgbd requiredSuccesses ()I
+		COMMENT The minimum number of successes - out of all attempts - for this test to be considered successful
 	METHOD m_vbmxhczv rotation ()I
+		COMMENT The ordinal of a {@link net.minecraft.util.BlockRotation} value for the rotation of the test structure
 	METHOD m_vohmfpmn tickLimit ()I
+		COMMENT The number of ticks after which the test automatically fails if not already completed
