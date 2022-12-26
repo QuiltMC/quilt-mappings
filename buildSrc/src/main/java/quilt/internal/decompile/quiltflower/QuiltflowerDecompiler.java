@@ -40,7 +40,6 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
 
         // disable "inconsistent inner class" warning due to spam in the logs
         options.put(IFernflowerPreferences.WARN_INCONSISTENT_INNER_CLASSES, "0");
-        // note: "inconsistent generic signature" warnings should also be suppressed, but that isn't currently option in quiltflower
 
         IFabricJavadocProvider javadocProvider = null;
         if (this.javadocProvider != null) {
