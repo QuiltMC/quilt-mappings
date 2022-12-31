@@ -8,7 +8,15 @@ CLASS net/minecraft/unmapped/C_ldtstxrd net/minecraft/server/filter/TextFilterer
 	FIELD f_rtmrppiv NEXT_WORKER_ID Ljava/util/concurrent/atomic/AtomicInteger;
 	FIELD f_xqzyibru executor Ljava/util/concurrent/ExecutorService;
 	FIELD f_zjtwwrss apiKey Ljava/lang/String;
+	METHOD <init> (Ljava/net/URL;Lnet/minecraft/unmapped/C_ldtstxrd$C_dphkzwcn;Ljava/net/URL;Lnet/minecraft/unmapped/C_ldtstxrd$C_iwcgeyhu;Ljava/net/URL;Lnet/minecraft/unmapped/C_ldtstxrd$C_iwcgeyhu;Ljava/lang/String;Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;I)V
+		ARG 1 chatEndpoint
+		ARG 3 joinEndpoint
+		ARG 5 leaveEndpoint
+		ARG 7 apiKey
+		ARG 8 ignorer
 	METHOD close close ()V
+	METHOD m_bfeesdgs (Ljava/lang/String;Lcom/google/gson/JsonArray;Lnet/minecraft/unmapped/C_ldtstxrd$C_vdzgfxct;)Lnet/minecraft/unmapped/C_bowvajrs;
+		ARG 3 hashIgnorer
 	METHOD m_bhuppfqe consumeFully (Ljava/io/InputStream;)V
 		ARG 1 inputStream
 	METHOD m_cualkgar load (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ldtstxrd;
@@ -21,6 +29,7 @@ CLASS net/minecraft/unmapped/C_ldtstxrd net/minecraft/server/filter/TextFilterer
 	METHOD m_gnleevgx sendJoinOrLeaveRequest (Lcom/mojang/authlib/GameProfile;Ljava/net/URL;Lnet/minecraft/unmapped/C_ldtstxrd$C_iwcgeyhu;Ljava/util/concurrent/Executor;)V
 		ARG 1 gameProfile
 		ARG 2 endpoint
+		ARG 3 profileEncoder
 		ARG 4 executor
 	METHOD m_ikbjyqhi sendJsonRequest (Lcom/google/gson/JsonObject;Ljava/net/URL;)Lcom/google/gson/JsonObject;
 		ARG 1 payload
@@ -40,6 +49,13 @@ CLASS net/minecraft/unmapped/C_ldtstxrd net/minecraft/server/filter/TextFilterer
 		ARG 3 fallback
 	METHOD m_vuzhrpdg (Ljava/lang/Runnable;)Ljava/lang/Thread;
 		ARG 0 runnable
+	METHOD m_xwedpxrn getString (Lcom/google/gson/JsonObject;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 object
+		ARG 1 element
+		ARG 2 defaultString
+	CLASS C_iwcgeyhu GameProfileEncoder
+		METHOD encode encode (Lcom/mojang/authlib/GameProfile;)Lcom/google/gson/JsonObject;
+			ARG 1 profile
 	CLASS C_jtelamdc FailedHttpRequestException
 		METHOD <init> (Ljava/lang/String;)V
 			ARG 1 message
