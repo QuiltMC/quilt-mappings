@@ -11,12 +11,14 @@ CLASS net/minecraft/unmapped/C_qanvkdqp net/minecraft/test/GameTest
 		COMMENT
 		COMMENT <p>The actual path for the file depends on the current test framework, but usually gets resolved as {@code "<namespace>:gametest/structures/<location>.nbt"}
 	METHOD m_mpjcinpl maxAttempts ()I
-		COMMENT How many times the test can be restarted
+		COMMENT The maximum amount of times this test may run
+		COMMENT
+		COMMENT When this number is above one, the annotated test method may be called again once the previous run has completed (successfully or not) if the number of {@link #requiredSuccesses} has not been not reached.
 	METHOD m_nntnqpde startDelay ()J
 		COMMENT The number of ticks to wait between loading the structure and starting the test
 	METHOD m_rkpcwgbd requiredSuccesses ()I
 		COMMENT The minimum number of successes - out of all attempts - for this test to be considered successful
 	METHOD m_vbmxhczv rotation ()I
 		COMMENT The ordinal of a {@link net.minecraft.util.BlockRotation} value for the rotation of the test structure
-	METHOD m_vohmfpmn tickLimit ()I
+	METHOD m_vohmfpmn timeout ()I
 		COMMENT The number of ticks after which the test automatically fails if it has not yet completed
