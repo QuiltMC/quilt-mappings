@@ -2,18 +2,16 @@ package quilt.internal.tasks.build;
 
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
-import net.fabricmc.mappingio.adapter.MappingNsCompleter;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
+import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     public static final String TASK_NAME = "mergeIntermediary";
@@ -38,9 +36,8 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     }
 
     private static MappingVisitor firstVisitor(MappingVisitor next) {
-        // Fill missing hashed names with their corresponding unobfuscated official name
-        // Ran first for unnamed classes to also be filled with those names
-        return new MappingNsCompleter(next, Collections.singletonMap(Constants.PER_VERSION_MAPPINGS_NAME, "official"));
+        // Copy unobfuscated names to the named namespace, since intermediary would override them
+        return new DoubleNsCompleterVisitor(next, "named", Constants.PER_VERSION_MAPPINGS_NAME, "official");
     }
 
     @Override
@@ -56,7 +53,7 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     public static void mergeMappings(Path intermediaryMappings, Path mergeTinyV2Output, Path outputMappings) throws IOException {
         AbstractTinyMergeTask.mergeMappings(intermediaryMappings, mergeTinyV2Output, outputMappings,
             MergeIntermediaryTask::firstVisitor,
-            MergeIntermediaryTask::preWriteVisitor,
-            Map.of("named", Constants.PER_VERSION_MAPPINGS_NAME));
+            MergeIntermediaryTask::preWriteVisitor
+        );
     }
 }

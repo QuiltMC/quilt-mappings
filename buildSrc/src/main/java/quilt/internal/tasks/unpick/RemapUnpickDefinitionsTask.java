@@ -5,6 +5,8 @@ import daomephsta.unpick.constantmappers.datadriven.parser.MethodKey;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Reader;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Remapper;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Writer;
+import net.fabricmc.mappingio.MappingVisitor;
+import net.fabricmc.mappingio.adapter.MappingNsCompleter;
 import net.fabricmc.mappingio.format.Tiny2Reader;
 import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
@@ -18,6 +20,7 @@ import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
+import quilt.internal.mappingio.CompleteInitializersVisitor;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
@@ -27,6 +30,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,7 +90,9 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
 
             try (BufferedReader reader = Files.newBufferedReader(mappings)) {
                 MemoryMappingTree mappingTree = new MemoryMappingTree();
-                Tiny2Reader.read(reader, mappingTree);
+                // Use target namespace as fallback to source namespace
+                MappingVisitor visitor = new MappingNsCompleter(mappingTree, Collections.singletonMap(fromM, toM));
+                Tiny2Reader.read(reader, visitor);
 
                 for (MappingTree.ClassMapping classMapping : mappingTree.getClasses()) {
                     classMappings.put(classMapping.getName(fromM), classMapping.getName(toM));
