@@ -281,15 +281,47 @@ public class TasksTest {
         assertEquals("named", tree.getDstNamespaces().get(1));
         testMergedTree(tree, "intermediary");
 
-        MappingTree.ClassMapping kClass = tree.getClass("quilt/internal/input/KClass");
-        assertEquals(kClass.getName("official"), kClass.getName("intermediary"));
-        assertNull(kClass.getName("named"));
-        MappingTree.ClassMapping kClass1 = tree.getClass("quilt/internal/input/KClass$1");
-        assertEquals(kClass1.getName("official"), kClass1.getName("intermediary"));
-        assertNull(kClass1.getName("named"));
-        MappingTree.ClassMapping kClass2 = tree.getClass("quilt/internal/input/KClass$2");
-        assertNull(kClass2.getName("intermediary"));
-        assertEquals(kClass2.getName("official"), kClass2.getName("named"));
+        MappingTree.ClassMapping keep = tree.getClass("quilt/internal/input/Keep");
+        assertEquals(keep.getName("official"), keep.getName("intermediary"));
+        assertNull(keep.getName("named"));
+        MappingTree.ClassMapping keep1 = tree.getClass("quilt/internal/input/Keep$1");
+        assertEquals(keep1.getName("official"), keep1.getName("intermediary"));
+        assertNull(keep1.getName("named"));
+        MappingTree.ClassMapping keep2 = tree.getClass("quilt/internal/input/Keep$2");
+        assertNull(keep2.getName("intermediary"));
+        assertEquals(keep2.getName("official"), keep2.getName("named"));
+
+        // TODO: Is mapping specialized methods really necessary?
+        // MappingTree.ClassMapping jClass = tree.getClass("j");
+        // assertEquals("com/example/class_011", jClass.getName("intermediary"));
+        // assertNull(jClass.getName("named"));
+        // assertNull(jClass.getMethod("a", "(Ljava/util/Collection;)V").getName("named"));
+        // assertNull(jClass.getMethod("b", "()Ljava/util/Collection;").getName("named"));
+
+        MappingTree.ClassMapping kClass = tree.getClass("k");
+        assertEquals("com/example/class_012", kClass.getName("intermediary"));
+        // There's no way to fix this as far as I can tell, since inner classes need their parents to have matching in the same namespaces
+        assertEquals("com/example/u/C_012", kClass.getName("named"));
+        MappingTree.ClassMapping kInnerClass = tree.getClass("k$a");
+        assertEquals("com/example/class_012$class_013", kInnerClass.getName("intermediary"));
+        assertEquals("com/example/u/C_012$AInner", kInnerClass.getName("named"));
+        MappingTree.ClassMapping kInnerInnerClass = tree.getClass("k$a$a");
+        assertEquals("com/example/class_012$class_013$class_014", kInnerInnerClass.getName("intermediary"));
+        // assertNull(kInnerInnerClass.getName("named"));
+
+        MappingTree.FieldMapping f032 = tree.getField("k", "a", "Ljava/lang/String;");
+        assertEquals("f1", f032.getComment());
+        // assertNull(f032.getName("named"));
+        MappingTree.MethodMapping m029 = tree.getMethod("k", "a", "(Ljava/lang/String;)V");
+        assertEquals("s", m029.getArg(-1, 1, null).getName("named"));
+        // assertNull(m029.getName("named"));
+        MappingTree.MethodMapping m030 = tree.getMethod("k", "a", "()I");
+        assertEquals("m2", m030.getComment());
+        // assertNull(m030.getName("named"));
+        MappingTree.MethodMapping m031 = tree.getMethod("k$a", "a", "(Ljava/lang/String;)I");
+        assertEquals("m3", m031.getComment());
+        // assertNull(m031.getName("named"));
+        assertEquals("s", m031.getArg(-1, 1, null).getName("named"));
     }
 
     @Test
@@ -306,7 +338,7 @@ public class TasksTest {
         // com/example/class_003$class_004 field_011 NORMAL
         assertEquals("NORMAL", tree.getField("com/example/class_003$class_004", "field_011", "Lcom/example/class_003$class_004;").getName("named"));
 
-        MappingTree.ClassMapping kClass2 = tree.getClass("quilt/internal/input/KClass$2");
-        assertEquals("quilt/internal/input/KClass$2", kClass2.getName("named"));
+        MappingTree.ClassMapping keep2 = tree.getClass("quilt/internal/input/Keep$2");
+        assertEquals("quilt/internal/input/Keep$2", keep2.getName("named"));
     }
 }

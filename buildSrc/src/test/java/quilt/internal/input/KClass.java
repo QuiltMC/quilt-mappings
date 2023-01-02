@@ -1,24 +1,24 @@
 package quilt.internal.input;
 
 public class KClass {
-    public static void main(String[] args) {
-        Object o1 = new Object() {
-            private String m1() {
-                return "o1";
-            }
+    public static final String f1 = "Hello world";
 
-            @Override
-            public String toString() {
-                return this.m1();
+    public void m1(String s) {
+    }
+
+    public int m2() {
+        return 1;
+    }
+
+    public static class AInner {
+        public int m3(String s) {
+            return s.hashCode() * 31;
+        }
+
+        public class AInnerInner {
+            public int m4(String s) {
+                return AInner.this.m3(s) << 24 | 0xFF;
             }
-        };
-        Object o2 = new Object() {
-            @Override
-            public String toString() {
-                return "o2";
-            }
-        };
-        System.out.println(o1);
-        System.out.println(o2);
+        }
     }
 }
