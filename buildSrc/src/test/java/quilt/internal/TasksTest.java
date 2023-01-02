@@ -18,6 +18,7 @@ import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask;
 import quilt.internal.util.JarRemapper;
+import quilt.internal.util.MappingAssertions;
 import quilt.internal.util.UnpickFile;
 
 import java.io.File;
@@ -32,7 +33,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TasksTest {
+public class TasksTest extends MappingAssertions {
     private static final String PER_VERSION_NAMESPACE = Constants.PER_VERSION_MAPPINGS_NAME;
     private static final Path OBF_JAR = Path.of("build/libs/test-input-obf.jar").toAbsolutePath();
 
@@ -108,10 +109,9 @@ public class TasksTest {
         );
 
         MappingTree tree = TestUtil.readTinyV2(output);
-        assertEquals(PER_VERSION_NAMESPACE, tree.getSrcNamespace());
-        assertEquals("named", tree.getDstNamespaces().get(0));
-        assertNotNull(tree.getClass("com/example/u/C_001"));
-        assertEquals("com/example/AClass", tree.getClass("com/example/u/C_001").getName("named"));
+        assertSrcNamespace(PER_VERSION_NAMESPACE, tree);
+        assertDstNamespace("named", tree, 0);
+        assertMapping("com/example/AClass", tree.getClass("com/example/u/C_001"), "named");
     }
 
     @Test
@@ -123,27 +123,27 @@ public class TasksTest {
 
         MappingTree inputTree = TestUtil.readTinyV2(perVersionMappings);
         MappingTree outputTree = TestUtil.readTinyV2(output);
-        assertEquals(inputTree.getSrcNamespace(), outputTree.getDstNamespaces().get(0));
-        assertEquals(inputTree.getDstNamespaces().get(0), outputTree.getSrcNamespace());
-        assertEquals(inputTree.getClass("com/example/u/C_001", 0).getName(-1), outputTree.getClass("com/example/u/C_001").getName(0));
+        assertDstNamespace(inputTree.getSrcNamespace(), outputTree, 0);
+        assertSrcNamespace(inputTree.getDstNamespaces().get(0), outputTree);
+        assertMapping(inputTree.getClass("com/example/u/C_001", 0).getName(-1), outputTree.getClass("com/example/u/C_001"), 0);
     }
 
     private void testMergedTree(MappingTree tree, String intermediateNamespace) {
-        assertEquals("official", tree.getSrcNamespace());
-        assertIterableEquals(List.of(intermediateNamespace, "named"), tree.getDstNamespaces());
+        assertSrcNamespace("official", tree);
+        assertDstNamespaces(List.of(intermediateNamespace, "named"), tree);
         assertNotNull(tree.getClass("com/example/AClass", 1));
-        assertFalse(tree.getClass("b").getName("named").isEmpty());
-        assertNotNull(tree.getClass("c"));
-        assertFalse(tree.getClass("c").getName(0).isEmpty()); // Should always have a per-version name
-        assertNotNull(tree.getClass("c$a"));
-        assertFalse(tree.getClass("c$a").getName(0).isEmpty());
+        assertMappingNotEmpty(tree.getClass("b"), "named");
+        assertMappingNotEmpty(tree.getClass("c"), 0); // Should always have a per-version name
+        assertMappingNotEmpty(tree.getClass("c$a"), 0);
         // Unmapped methods should not have a `named` name
-        assertNull(tree.getMethod("c$a", "a", "()[Lc$a;").getName("named"));
+        assertMappingEmpty(tree.getMethod("c$a", "a", "()[Lc$a;"), "named");
 
         assertNotNull(tree.getClass("h"));
         // Unobfuscated methods should either not have a mapping, or be remapped to the original name in the named namespace
         MappingTree.MethodMapping unobfMethod = tree.getMethod("h", "get", "(I)I");
-        assertTrue(unobfMethod == null || unobfMethod.getName("named").equals("get"));
+        if (unobfMethod != null) {
+            assertMapping("get", unobfMethod, "named");
+        }
     }
 
     @Test
@@ -165,41 +165,37 @@ public class TasksTest {
 
         MappingTree tree = TestUtil.readTinyV2(output);
         MappingTree inputTree = TestUtil.readTinyV2(buildMappingsTinyOutput);
-        assertEquals(inputTree.getSrcNamespace(), tree.getSrcNamespace());
-        assertEquals(inputTree.getDstNamespaces(), tree.getDstNamespaces());
+        assertSrcNamespace(inputTree.getSrcNamespace(), tree);
+        assertDstNamespaces(inputTree.getDstNamespaces(), tree);
 
-        assertEquals("com/example/AClass", tree.getClass("com/example/u/C_001").getName("named"));
-        assertEquals("com/example/BEnum", tree.getClass("com/example/u/C_002").getName("named"));
+        assertMapping("com/example/AClass", tree.getClass("com/example/u/C_001"), "named");
+        assertMapping("com/example/BEnum", tree.getClass("com/example/u/C_002"), "named");
 
         // f_004 FIRST
         MappingTree.FieldMapping insertedField = tree.getField("com/example/u/C_002", "f_004", "Lcom/example/u/C_002;");
-        assertNotNull(insertedField);
-        assertEquals("FIRST", insertedField.getName("named"));
+        assertMapping("FIRST", insertedField, "named");
         MappingTree.FieldMapping prevMapping = inputTree.getField("com/example/u/C_002", "f_004", "Lcom/example/u/C_002;");
         assertNull(prevMapping);
 
         // f_011 NORMAL
         MappingTree.FieldMapping insertedField2 = tree.getField("com/example/u/C_003$C_004", "f_011", "Lcom/example/u/C_003$C_004;");
-        assertNotNull(insertedField2);
-        assertEquals("NORMAL", insertedField2.getName("named"));
+        assertMapping("NORMAL", insertedField2, "named");
 
         // f_015 left
         MappingTree.FieldMapping insertedField3 = tree.getField("com/example/u/C_005", "f_015", "Ljava/lang/Object;");
-        assertNotNull(insertedField3);
-        assertEquals("left", insertedField3.getName("named"));
+        assertMapping("left", insertedField3, "named");
         // m_013 right
         MappingTree.MethodMapping insertedMethod = tree.getMethod("com/example/u/C_005", "m_013", "()Ljava/lang/Object;");
-        assertNotNull(insertedMethod);
-        assertEquals("right", insertedMethod.getName("named"));
+        assertMapping("right", insertedMethod, "named");
 
         MappingTree.MethodMapping insertedMethod2 = tree.getMethod("com/example/u/C_005", "equals", "(Ljava/lang/Object;)Z");
         assertNotNull(insertedMethod2);
-        assertEquals("o", insertedMethod2.getArg(-1, 1, null).getName("named"));
+        assertMapping("o", insertedMethod2.getArg(-1, 1, null), "named");
 
         MappingTree.MethodMapping insertedMethod3 = tree.getMethod("com/example/u/C_005", "<init>", "(Ljava/lang/Object;Ljava/lang/Object;)V");
         assertNotNull(insertedMethod3);
-        assertEquals("left", insertedMethod3.getArg(-1, 1, null).getName("named"));
-        assertEquals("right", insertedMethod3.getArg(-1, 2, null).getName("named"));
+        assertMapping("left", insertedMethod3.getArg(-1, 1, null), "named");
+        assertMapping("right", insertedMethod3.getArg(-1, 2, null), "named");
     }
 
     @Test
@@ -212,9 +208,9 @@ public class TasksTest {
         MappingTree tree = TestUtil.readTinyV2(output);
         testMergedTree(tree, PER_VERSION_NAMESPACE);
         // com/example/u/C_002 f_004 FIRST
-        assertEquals("FIRST", tree.getField("b", "a", "Lb;").getName("named"));
+        assertMapping("FIRST", tree.getField("b", "a", "Lb;"), "named");
         // com/example/u/C_003$C_004 f_011 NORMAL
-        assertEquals("NORMAL", tree.getField("c$a", "a", "Lc$a;").getName("named"));
+        assertMapping("NORMAL", tree.getField("c$a", "a", "Lc$a;"), "named");
     }
 
     private void mapNamedJar() {
@@ -276,52 +272,52 @@ public class TasksTest {
         MergeIntermediaryTask.mergeMappings(intermediaryMappings, mergeTinyV2Output, output);
 
         MappingTree tree = TestUtil.readTinyV2(output);
-        assertEquals("official", tree.getSrcNamespace());
-        assertEquals("intermediary", tree.getDstNamespaces().get(0));
-        assertEquals("named", tree.getDstNamespaces().get(1));
+        assertSrcNamespace("official", tree);
+        assertDstNamespace("intermediary", tree, 0);
+        assertDstNamespace("named", tree, 1);
         testMergedTree(tree, "intermediary");
 
         MappingTree.ClassMapping keep = tree.getClass("quilt/internal/input/Keep");
-        assertEquals(keep.getName("official"), keep.getName("intermediary"));
-        assertNull(keep.getName("named"));
+        assertMapping(keep.getName("official"), keep, "intermediary");
+        assertMappingEmpty(keep, "named");
         MappingTree.ClassMapping keep1 = tree.getClass("quilt/internal/input/Keep$1");
-        assertEquals(keep1.getName("official"), keep1.getName("intermediary"));
-        assertNull(keep1.getName("named"));
+        assertMapping(keep1.getName("official"), keep1, "intermediary");
+        assertMappingEmpty(keep1, "named");
         MappingTree.ClassMapping keep2 = tree.getClass("quilt/internal/input/Keep$2");
-        assertNull(keep2.getName("intermediary"));
-        assertEquals(keep2.getName("official"), keep2.getName("named"));
+        assertMappingEmpty(keep2, "intermediary");
+        assertMapping(keep2.getName("official"), keep2, "named");
 
         // TODO: Is mapping specialized methods really necessary?
         // MappingTree.ClassMapping jClass = tree.getClass("j");
-        // assertEquals("com/example/class_011", jClass.getName("intermediary"));
-        // assertNull(jClass.getName("named"));
-        // assertNull(jClass.getMethod("a", "(Ljava/util/Collection;)V").getName("named"));
-        // assertNull(jClass.getMethod("b", "()Ljava/util/Collection;").getName("named"));
+        // assertMapping("com/example/class_011", jClass, "intermediary");
+        // assertMappingEmpty(jClass, "named");
+        // assertMappingEmpty(jClass.getMethod("a", "(Ljava/util/Collection;)V"), "named");
+        // assertMappingEmpty(jClass.getMethod("b", "()Ljava/util/Collection;"), "named");
 
         MappingTree.ClassMapping kClass = tree.getClass("k");
-        assertEquals("com/example/class_012", kClass.getName("intermediary"));
+        assertMapping("com/example/class_012", kClass, "intermediary");
         // There's no way to fix this as far as I can tell, since inner classes need their parents to have matching in the same namespaces
-        assertEquals("com/example/u/C_012", kClass.getName("named"));
+        assertMapping("com/example/u/C_012", kClass, "named");
         MappingTree.ClassMapping kInnerClass = tree.getClass("k$a");
-        assertEquals("com/example/class_012$class_013", kInnerClass.getName("intermediary"));
-        assertEquals("com/example/u/C_012$AInner", kInnerClass.getName("named"));
+        assertMapping("com/example/class_012$class_013", kInnerClass, "intermediary");
+        assertMapping("com/example/u/C_012$AInner", kInnerClass, "named");
         MappingTree.ClassMapping kInnerInnerClass = tree.getClass("k$a$a");
-        assertEquals("com/example/class_012$class_013$class_014", kInnerInnerClass.getName("intermediary"));
-        // assertNull(kInnerInnerClass.getName("named"));
+        assertMapping("com/example/class_012$class_013$class_014", kInnerInnerClass, "intermediary");
+        // assertMappingEmpty(kInnerInnerClass, "named");
 
         MappingTree.FieldMapping f032 = tree.getField("k", "a", "Ljava/lang/String;");
-        assertEquals("f1", f032.getComment());
-        // assertNull(f032.getName("named"));
+        assertComment("f1", f032);
+        // assertMappingEmpty(f032, "named");
         MappingTree.MethodMapping m029 = tree.getMethod("k", "a", "(Ljava/lang/String;)V");
-        assertEquals("s", m029.getArg(-1, 1, null).getName("named"));
-        // assertNull(m029.getName("named"));
+        assertMapping("s", m029.getArg(-1, 1, null), "named");
+        // assertMappingEmpty(m029, "named");
         MappingTree.MethodMapping m030 = tree.getMethod("k", "a", "()I");
-        assertEquals("m2", m030.getComment());
-        // assertNull(m030.getName("named"));
+        assertComment("m2", m030);
+        // assertMappingEmpty(m030, "named");
         MappingTree.MethodMapping m031 = tree.getMethod("k$a", "a", "(Ljava/lang/String;)I");
-        assertEquals("m3", m031.getComment());
-        // assertNull(m031.getName("named"));
-        assertEquals("s", m031.getArg(-1, 1, null).getName("named"));
+        assertComment("m3", m031);
+        // assertMappingEmpty(m031, "named");
+        assertMapping("s", m031.getArg(-1, 1, null), "named");
     }
 
     @Test
@@ -331,14 +327,14 @@ public class TasksTest {
         RemoveIntermediaryTask.removeIntermediary(mergeIntermediaryOutput, output);
 
         MappingTree tree = TestUtil.readTinyV2(output);
-        assertEquals("intermediary", tree.getSrcNamespace());
-        assertEquals("named", tree.getDstNamespaces().get(0));
+        assertSrcNamespace("intermediary", tree);
+        assertDstNamespace("named", tree, 0);
         // com/example/class_002 field_004 FIRST
-        assertEquals("FIRST", tree.getField("com/example/class_002", "field_004", "Lcom/example/class_002;").getName("named"));
+        assertMapping("FIRST", tree.getField("com/example/class_002", "field_004", "Lcom/example/class_002;"), "named");
         // com/example/class_003$class_004 field_011 NORMAL
-        assertEquals("NORMAL", tree.getField("com/example/class_003$class_004", "field_011", "Lcom/example/class_003$class_004;").getName("named"));
+        assertMapping("NORMAL", tree.getField("com/example/class_003$class_004", "field_011", "Lcom/example/class_003$class_004;"), "named");
 
         MappingTree.ClassMapping keep2 = tree.getClass("quilt/internal/input/Keep$2");
-        assertEquals("quilt/internal/input/Keep$2", keep2.getName("named"));
+        assertMapping("quilt/internal/input/Keep$2", keep2, "named");
     }
 }
