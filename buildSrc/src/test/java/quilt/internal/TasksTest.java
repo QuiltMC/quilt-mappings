@@ -280,6 +280,16 @@ public class TasksTest {
         assertEquals("intermediary", tree.getDstNamespaces().get(0));
         assertEquals("named", tree.getDstNamespaces().get(1));
         testMergedTree(tree, "intermediary");
+
+        MappingTree.ClassMapping kClass = tree.getClass("quilt/internal/input/KClass");
+        assertEquals(kClass.getName("official"), kClass.getName("intermediary"));
+        assertNull(kClass.getName("named"));
+        MappingTree.ClassMapping kClass1 = tree.getClass("quilt/internal/input/KClass$1");
+        assertEquals(kClass1.getName("official"), kClass1.getName("intermediary"));
+        assertNull(kClass1.getName("named"));
+        MappingTree.ClassMapping kClass2 = tree.getClass("quilt/internal/input/KClass$2");
+        assertNull(kClass2.getName("intermediary"));
+        assertEquals(kClass2.getName("official"), kClass2.getName("named"));
     }
 
     @Test
@@ -295,5 +305,8 @@ public class TasksTest {
         assertEquals("FIRST", tree.getField("com/example/class_002", "field_004", "Lcom/example/class_002;").getName("named"));
         // com/example/class_003$class_004 field_011 NORMAL
         assertEquals("NORMAL", tree.getField("com/example/class_003$class_004", "field_011", "Lcom/example/class_003$class_004;").getName("named"));
+
+        MappingTree.ClassMapping kClass2 = tree.getClass("quilt/internal/input/KClass$2");
+        assertEquals("quilt/internal/input/KClass$2", kClass2.getName("named"));
     }
 }

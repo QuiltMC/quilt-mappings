@@ -37,7 +37,13 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
 
     private static MappingVisitor firstVisitor(MappingVisitor next) {
         // Copy unobfuscated names to the named namespace, since intermediary would override them
-        return new DoubleNsCompleterVisitor(next, "named", Constants.PER_VERSION_MAPPINGS_NAME, "official");
+        return new DoubleNsCompleterVisitor(
+                // Fix bug when intermediary doesn't have a mapping but hashed does (i.e. `net/minecraft/client/main/Main$2`)
+                new DoubleNsCompleterVisitor(next, "named", "intermediary", "official"),
+                "named",
+                Constants.PER_VERSION_MAPPINGS_NAME,
+                "official"
+        );
     }
 
     @Override
