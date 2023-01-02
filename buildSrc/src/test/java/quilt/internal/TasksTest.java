@@ -307,16 +307,16 @@ public class TasksTest extends MappingAssertions {
 
         MappingTree.FieldMapping f032 = tree.getField("k", "a", "Ljava/lang/String;");
         assertComment("f1", f032);
-        // assertMappingEmpty(f032, "named");
+        assertMappingEmpty(f032, "named");
         MappingTree.MethodMapping m029 = tree.getMethod("k", "a", "(Ljava/lang/String;)V");
         assertMapping("s", m029.getArg(-1, 1, null), "named");
-        // assertMappingEmpty(m029, "named");
+        assertMappingEmpty(m029, "named");
         MappingTree.MethodMapping m030 = tree.getMethod("k", "a", "()I");
         assertComment("m2", m030);
-        // assertMappingEmpty(m030, "named");
+        assertMappingEmpty(m030, "named");
         MappingTree.MethodMapping m031 = tree.getMethod("k$a", "a", "(Ljava/lang/String;)I");
         assertComment("m3", m031);
-        // assertMappingEmpty(m031, "named");
+        assertMappingEmpty(m031, "named");
         assertMapping("s", m031.getArg(-1, 1, null), "named");
     }
 

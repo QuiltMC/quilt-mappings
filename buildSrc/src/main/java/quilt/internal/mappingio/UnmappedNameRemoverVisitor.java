@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiPredicate;
 
 public class UnmappedNameRemoverVisitor extends ForwardingMappingVisitor {
     private final String targetNamespace;
     private final String unmappedNamespace;
+    private final BiPredicate<MappedElementKind, String> unmappedPredicate;
 
     private boolean superVisitHeader;
     private String[] dstNames;
@@ -21,9 +23,19 @@ public class UnmappedNameRemoverVisitor extends ForwardingMappingVisitor {
     private String srcName;
 
     public UnmappedNameRemoverVisitor(MappingVisitor next, String targetNamespace, String unmappedNamespace) {
+        this(next, targetNamespace, unmappedNamespace, (kind, name) -> switch (kind) {
+            case CLASS -> name.substring(Math.max(name.lastIndexOf('/'), name.lastIndexOf('$'))).startsWith("C_");
+            case FIELD -> name.startsWith("f_");
+            case METHOD -> name.startsWith("m_");
+            default -> name == null;
+        });
+    }
+
+    public UnmappedNameRemoverVisitor(MappingVisitor next, String targetNamespace, String unmappedNamespace, BiPredicate<MappedElementKind, String> unmappedPredicate) {
         super(next);
         this.targetNamespace = targetNamespace;
         this.unmappedNamespace = unmappedNamespace;
+        this.unmappedPredicate = unmappedPredicate;
     }
 
     @Override
@@ -124,7 +136,7 @@ public class UnmappedNameRemoverVisitor extends ForwardingMappingVisitor {
             String name = this.dstNames[this.targetNs];
             String unmappedName = this.unmappedNs == -1 ? this.srcName : this.dstNames[this.unmappedNs];
 
-            if (!Objects.equals(unmappedName, name)) {
+            if (!Objects.equals(unmappedName, name) || !this.unmappedPredicate.test(targetKind, name)) {
                 super.visitDstName(targetKind, this.targetNs, name);
             }
         }

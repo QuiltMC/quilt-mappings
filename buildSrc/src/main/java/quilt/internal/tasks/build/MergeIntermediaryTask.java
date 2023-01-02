@@ -5,6 +5,7 @@ import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
+import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
 
@@ -39,7 +40,12 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
         // Copy unobfuscated names to the named namespace, since intermediary would override them
         return new DoubleNsCompleterVisitor(
                 // Fix bug when intermediary doesn't have a mapping but hashed does (i.e. `net/minecraft/client/main/Main$2`)
-                new DoubleNsCompleterVisitor(next, "named", "intermediary", "official"),
+                new DoubleNsCompleterVisitor(
+                        new UnmappedNameRemoverVisitor(next, "named", Constants.PER_VERSION_MAPPINGS_NAME),
+                        "named",
+                        "intermediary",
+                        "official"
+                ),
                 "named",
                 Constants.PER_VERSION_MAPPINGS_NAME,
                 "official"
