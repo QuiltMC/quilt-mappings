@@ -1,8 +1,9 @@
-CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/CommandTreeUpdateS2CPacket
+CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/CommandTreeS2CPacket
 	FIELD f_cybsakfx TYPE_ROOT B
 	FIELD f_efqgydcd FLAG_CUSTOM_SUGGESTIONS B
 	FIELD f_etdwrupj FLAG_EXECUTABLE B
 	FIELD f_fyxlmjfl TYPE_ARGUMENT B
+	FIELD f_lavymsnb commandNodeData Ljava/util/List;
 	FIELD f_osyryepo FLAG_REDIRECT B
 	FIELD f_shvoqtem TYPE_LITERAL B
 	FIELD f_whpewcll MASK B
@@ -10,6 +11,8 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 		ARG 1 commandTree
 	METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
 		ARG 1 buf
+	METHOD m_dcigsfhx (Ljava/util/List;Ljava/util/function/BiPredicate;)V
+		ARG 0 commandNodeData
 	METHOD m_jebnlxkj readCommandNode (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_vzeoulff$C_irxeyhvf;
 		ARG 0 buf
 	METHOD m_kyfvkrqc getCommandTree (Lnet/minecraft/unmapped/C_bprdujxm;)Lcom/mojang/brigadier/tree/RootCommandNode;
@@ -19,3 +22,7 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 		FIELD f_eckdjrcz childNodeIndices [I
 		FIELD f_rzrsdnmn flags I
 		FIELD f_xofhrgkq redirectNodeIndex I
+		METHOD <init> (Lnet/minecraft/unmapped/C_vzeoulff$C_oiqqdfah;II[I)V
+			ARG 2 flags
+			ARG 3 redirectNodeIndex
+			ARG 4 childNodeIndices

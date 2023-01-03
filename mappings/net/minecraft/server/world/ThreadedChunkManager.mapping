@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedAnvilChunkStorage
+CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunkManager
 	FIELD f_carfuwla worldGenerationProgressListener Lnet/minecraft/unmapped/C_jnfclwgd;
 	FIELD f_cdallcyb LOGGER Lorg/slf4j/Logger;
 	FIELD f_cqzzgluy CHUNKS_SAVED_EAGERLY_PER_TICK I
@@ -168,14 +168,14 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedAnvil
 		COMMENT tracker corresponds to one entity in a server world and is mapped from the
 		COMMENT entity's network ID.
 		COMMENT
-		COMMENT @see ThreadedAnvilChunkStorage#entityTrackers
+		COMMENT @see ThreadedChunkManager#entityTrackers
 		FIELD f_ahfpwude entity Lnet/minecraft/unmapped/C_astfners;
 		FIELD f_cqgkhynw listeners Ljava/util/Set;
 		FIELD f_dxgjztvf maxDistance I
 		FIELD f_gtsdnhft entry Lnet/minecraft/unmapped/C_yagtbmmk;
 		FIELD f_zffiydzi trackedSection Lnet/minecraft/unmapped/C_zubvmeye;
 			COMMENT The chunk section position of the tracked entity, may be outdated as an entity
-			COMMENT ticks. This is used by {@link ThreadedAnvilChunkStorage#tickEntityMovement()
+			COMMENT ticks. This is used by {@link ThreadedChunkManager#tickEntityMovement()
 			COMMENT tickEntityMovement()} to bypass unnecessary status updates before calling
 			COMMENT {@link #updateTrackedStatus(ServerPlayerEntity) updateTrackedStatus()}.
 		METHOD <init> (Lnet/minecraft/unmapped/C_gxrpzacc;Lnet/minecraft/unmapped/C_astfners;IIZ)V

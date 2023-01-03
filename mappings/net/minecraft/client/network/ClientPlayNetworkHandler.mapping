@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayNetworkHandler
+	FIELD f_agjjhdpo CHAT_VALIDATION_FAILED_DISCONNECT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_apuckpwu sessionId Ljava/util/UUID;
 	FIELD f_arosbicd serverInfo Lnet/minecraft/unmapped/C_xotldzgg;
 	FIELD f_beytxqxu dataQueryHandler Lnet/minecraft/unmapped/C_kiomtpcs;
@@ -6,8 +7,10 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	FIELD f_bpwcjaiw profile Lcom/mojang/authlib/GameProfile;
 	FIELD f_bsnhfuqe enabledFlags Lnet/minecraft/unmapped/C_czxxrbcp;
 	FIELD f_cxwctjfx client Lnet/minecraft/unmapped/C_ayfeobid;
-	FIELD f_fjkxpgbq DISCONNECT_LOST_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_fjkxpgbq DISCONNECT_LOST Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_fmcklieu LOGGER Lorg/slf4j/Logger;
+	FIELD f_fsupztfx INVALID_PACKET_DISCONNECT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_gevefomu messageSignatureStorage Lnet/minecraft/unmapped/C_avoeygij;
 	FIELD f_hdjhrskx simulationDistance I
 	FIELD f_hrbzbwan advancementHandler Lnet/minecraft/unmapped/C_wojlspxv;
 	FIELD f_ihichxhx loginScreen Lnet/minecraft/unmapped/C_wrmtlwqx;
@@ -16,15 +19,28 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	FIELD f_mhovhvqz playerListEntries Ljava/util/Map;
 	FIELD f_ngfhyxgr connection Lnet/minecraft/unmapped/C_oasmcckk;
 	FIELD f_ngsvttes commandSource Lnet/minecraft/unmapped/C_vvqqprve;
+	FIELD f_okhxbsay UNSECURE_SERVER_TOAST_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_oscihfpd world Lnet/minecraft/unmapped/C_ghdnlrrw;
 	FIELD f_pwlckpdl commandDispatcher Lcom/mojang/brigadier/CommandDispatcher;
 	FIELD f_qghvqlmq telemetryManager Lnet/minecraft/unmapped/C_bfepxqwf;
+	FIELD f_sjbnncsn lastSeenMessageTracker Lnet/minecraft/unmapped/C_zwzonavy;
+	FIELD f_uqhgsszo UNSECURE_SERVER_TOAST Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_urauiwpa worldProperties Lnet/minecraft/unmapped/C_ghdnlrrw$C_nwouoiiq;
 	FIELD f_vtrzacei chunkLoadDistance I
 	FIELD f_xadarkvu random Lnet/minecraft/unmapped/C_rlomrsco;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_xotldzgg;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_bfepxqwf;)V
+		ARG 1 client
+		ARG 2 loginScreen
+		ARG 3 connection
+		ARG 4 serverInfo
+		ARG 5 profile
+		ARG 6 telemetryManager
 	METHOD m_aublwqmk getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq;
 	METHOD m_coppxivl getWorldKeys ()Ljava/util/Set;
 	METHOD m_cxcqcpnf getRecipeManager ()Lnet/minecraft/unmapped/C_hjseusrb;
+	METHOD m_dnjjlbrj (Lnet/minecraft/unmapped/C_zzdolisx;Z)V
+		ARG 1 message
+		ARG 2 setSignature
 	METHOD m_dzcnzspe playEntitySpawnSound (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
 	METHOD m_etfgyihv getPlayerUuids ()Ljava/util/Collection;
@@ -36,6 +52,7 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 1 x
 		ARG 2 z
 		ARG 3 data
+	METHOD m_hluamyrn disconnect ()V
 	METHOD m_hqntbneu getWorld ()Lnet/minecraft/unmapped/C_ghdnlrrw;
 	METHOD m_jubodvkq getServerResourcePackPrompt (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 defaultPrompt

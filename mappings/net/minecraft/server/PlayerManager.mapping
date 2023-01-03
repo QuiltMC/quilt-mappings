@@ -1,7 +1,7 @@
 CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	FIELD f_ayexdrvx cheatsAllowed Z
 	FIELD f_bxoeykzo viewDistance I
-	FIELD f_dnhmytgl CHAT_FULL_FILTERED Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_dnhmytgl FILTERED_FULL Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ebdxpvna OPERATORS_FILE Ljava/io/File;
 	FIELD f_fwuwscug LOGGER Lorg/slf4j/Logger;
 	FIELD f_gdrylkjs latencyUpdateTimer I
@@ -11,6 +11,7 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	FIELD f_jdcrxyqk maxPlayers I
 	FIELD f_jkcqzwfc LATENCY_UPDATE_INTERVAL I
 	FIELD f_knmbusbu saveHandler Lnet/minecraft/unmapped/C_wnawwdpy;
+	FIELD f_korxyseb syncedRegistryManager Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
 	FIELD f_kxdchaxd DATE_FORMATTER Ljava/text/SimpleDateFormat;
 	FIELD f_ladlooyy registryManager Lnet/minecraft/unmapped/C_bcpxdrik;
 	FIELD f_mlodcdjn BANNED_PLAYERS_FILE Ljava/io/File;
@@ -40,6 +41,9 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 1 profile
 	METHOD m_bekbcbkv getAdvancementTracker (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_hyeqtgvx;
 		ARG 1 player
+	METHOD m_bgctehjy broadcastSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
+		ARG 1 message
+		ARG 2 overlay
 	METHOD m_bjqkotds sendToDimension (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_xhhleach;)V
 		ARG 1 packet
 		ARG 2 dimension
@@ -62,6 +66,10 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_fsqemhrr getOpNames ()[Ljava/lang/String;
 	METHOD m_fxavyisj getPlayersByIp (Ljava/lang/String;)Ljava/util/List;
 		ARG 1 ip
+	METHOD m_geqbawgl sendSignedMessage (Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 commandSource
+		ARG 3 parameters
 	METHOD m_ggqroajp isWhitelistEnabled ()Z
 	METHOD m_gzunbvqs savePlayerData (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
@@ -81,6 +89,11 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 11 packet
 	METHOD m_ilyrgghf (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 0 entity
+	METHOD m_jovrkrdr sendChatMessage (Lnet/minecraft/unmapped/C_zzdolisx;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 shouldFilter
+		ARG 3 sender
+		ARG 4 parameters
 	METHOD m_kculnifq getUserBanList ()Lnet/minecraft/unmapped/C_dtxlpdok;
 	METHOD m_khebdxma setViewDistance (I)V
 		ARG 1 viewDistance
@@ -111,6 +124,11 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_ozuvgfaa getViewDistance ()I
 	METHOD m_prjtwknp loadPlayerData (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 player
+	METHOD m_qcclojnk broadcastSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/function/Function;Z)V
+		ARG 1 message
+		ARG 2 toTextFunction
+			COMMENT a function that takes the player being sent to as input, and returns the text that should be sent to them. If the player should not receive the message, this function returns null
+		ARG 3 overlay
 	METHOD m_qslhodxf getWhitelist ()Lnet/minecraft/unmapped/C_indzsqqb;
 	METHOD m_rlvfbvcj createStatHandler (Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_cakpthuz;
 		ARG 1 player
@@ -132,6 +150,8 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 1 player
 	METHOD m_vtwdwatn createPlayer (Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_mxrobsgg;
 		ARG 1 profile
+	METHOD m_xievpzlg isSecure (Lnet/minecraft/unmapped/C_zzdolisx;)Z
+		ARG 1 message
 	METHOD m_xpjsflmx isOperator (Lcom/mojang/authlib/GameProfile;)Z
 		ARG 1 profile
 	METHOD m_xwjxxowe remove (Lnet/minecraft/unmapped/C_mxrobsgg;)V
@@ -139,6 +159,10 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_ydtkhmcs setSimulationDistance (I)V
 		ARG 1 simulationDistance
 	METHOD m_yhbprtvy getSimulationDistance ()I
+	METHOD m_yscvixbs sendChatMessage (Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 sender
+		ARG 3 parameters
 	METHOD m_zcgujvnk checkCanJoin (Ljava/net/SocketAddress;Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 1 address
 		ARG 2 profile
