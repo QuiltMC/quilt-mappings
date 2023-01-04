@@ -35,6 +35,7 @@ jobs:
       - name: Create diff
         if: steps.can-create-diff.outputs.files_exists == 'true'
         run: diff -bur namedTargetSrc/ namedSrc/ > target.diff
+        shell: bash
       - name: Upload diff
         if: steps.can-create-diff.outputs.files_exists == 'true'
         uses: actions/upload-artifact@v3
