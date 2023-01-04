@@ -25,3 +25,18 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+      - run: ./gradlew decompileQuiltflower decompileTargetQuiltflower --stacktrace
+      - name: Check Target Decompiled
+        id: can-create-diff
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "namedSrc/net/minecraft/client/main/Main.java"
+      - name: Create diff
+        if: steps.can-create-diff.outputs.files_exists == 'true'
+        run: diff -bur namedTargetSrc/ namedSrc/ > target.diff
+      - name: Upload diff
+        if: steps.can-create-diff.outputs.files_exists == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: Diff
+          path: target.diff

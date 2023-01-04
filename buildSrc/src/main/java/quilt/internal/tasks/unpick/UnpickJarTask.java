@@ -11,7 +11,6 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.JavaExec;
 import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
-import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 
 public class UnpickJarTask extends JavaExec implements MappingsTask {
     private final RegularFileProperty inputFile;
@@ -24,8 +23,6 @@ public class UnpickJarTask extends JavaExec implements MappingsTask {
 
         this.getMainClass().set("daomephsta.unpick.cli.Main");
         classpath(getProject().getConfigurations().getByName("unpick"));
-
-        dependsOn(MapPerVersionMappingsJarTask.TASK_NAME, "constantsJar", getTaskByName(RemapUnpickDefinitionsTask.TASK_NAME));
 
         ObjectFactory objectFactory = getProject().getObjects();
         inputFile = objectFactory.fileProperty();

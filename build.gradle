@@ -93,6 +93,7 @@ import quilt.internal.tasks.build.AddProposedMappingsTask
 import quilt.internal.tasks.build.MappingsV2JarTask
 import quilt.internal.tasks.build.TransformJarClassesTask
 import quilt.internal.tasks.decompile.DecompileTask
+import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
 import quilt.internal.util.MappingsJavadocProvider
@@ -161,6 +162,8 @@ task unpickHashedJar(type: UnpickJarTask) {
 	outputFile.set mappings.fileConstants.unpickedJar
 	unpickDefinition.set remapUnpickDefinitions.output.get()
 	unpickConstantsJar.set constantsJar.archiveFile
+
+	dependsOn MapPerVersionMappingsJarTask.TASK_NAME, "constantsJar", remapUnpickDefinitions
 }
 
 task mappingsUnpicked(type: EnigmaMappingsTask, dependsOn: unpickHashedJar) {
@@ -287,6 +290,34 @@ task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 
 	doFirst {
 		file("namedSrc").deleteDir()
+	}
+}
+
+task unpickTargetJar(type: UnpickJarTask) {
+	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries"
+
+	inputFile.set remapTargetMinecraftJar.outputJar
+	outputFile.set file(Constants.MINECRAFT_VERSION + "-target-named.jar")
+	unpickDefinition.set downloadTargetMappingsJar.targetUnpickDefinitionsFile
+	unpickConstantsJar.set downloadTargetMappingsJar.targetUnpickConstantsFile
+
+	onlyIf {
+		checkUnpickVersionsMatch.match
+	}
+}
+
+task decompileTargetQuiltflower(type: DecompileTask, dependsOn: [unpickTargetJar]) {
+	input.set file(Constants.MINECRAFT_VERSION + "-target-named.jar")
+	output.set file("namedTargetSrc")
+	decompiler = Decompilers.QUILTFLOWER
+	libraries = configurations.decompileClasspath
+
+	doFirst {
+		file("namedTargetSrc").deleteDir()
+	}
+
+	onlyIf {
+		checkUnpickVersionsMatch.match
 	}
 }
 
