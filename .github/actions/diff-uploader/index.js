@@ -24,13 +24,14 @@ async function main() {
             });
         }
     } else if (context.eventName === "pull_request") {
-        comment = async function (comment) {
-            return github.issues.createComment({
-                ...baseParameters,
-                issue_number: context.payload.number,
-                body: comment
-            });
-        }
+        // TODO: is there a way to make a pr comment from a fork action?
+        // comment = async function (comment) {
+        //     return github.issues.createComment({
+        //         ...baseParameters,
+        //         issue_number: context.payload.number,
+        //         body: comment
+        //     });
+        // }
     }
 
     try {
@@ -45,7 +46,7 @@ async function main() {
             let changed_files = (diff.match(new RegExp("^\\+\\+\\+", "gm")) || []).length;
 
             core.setOutput("result", "success");
-            await comment(`With commit ${context.sha}, ${changed_files} file(s) where updated and ${changed_lines} line(s) were modified. \n\n\<details\>\n\<summary\>View the diff here:\</summary\> \n\<br\>\n\n\`\`\`diff\n${diff}\`\`\`\n\</details\>`)
+            await comment(`With commit ${context.sha}, ${changed_files} file(s) were updated and ${changed_lines} line(s) were modified compared to the latest Quilt Mappings version. \n\n\<details\>\n\<summary\>View the diff here:\</summary\> \n\<br\>\n\n\`\`\`diff\n${diff}\`\`\`\n\</details\>`)
         }
     } catch (err) {
         console.error(err);
