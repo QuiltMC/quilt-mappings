@@ -10174,14 +10174,14 @@
                 comment = async function (comment) {
                     return github.issues.createComment({
                         ...baseParameters,
-                        issue_number: context.event.number,
+                        issue_number: context.payload.number,
                         body: comment
                     });
                 }
             }
 
             try {
-                const diff_buffer = fs.readFileSync("../../../target.diff");
+                const diff_buffer = fs.readFileSync("target.diff");
                 const diff = diff_buffer.toString();
 
                 if (diff === "") {
