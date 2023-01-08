@@ -38,9 +38,9 @@ jobs:
         continue-on-error: true
       - name: Create diff comment
         uses: ./.github/actions/diff-uploader/
-          id: diff-uploader
-          with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+        id: diff-uploader
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload diff
         if: steps.diff-uploader.outputs.result == "
         uses: actions/upload-artifact@v3
