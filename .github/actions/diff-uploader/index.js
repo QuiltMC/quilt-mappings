@@ -48,7 +48,8 @@ async function main() {
             await comment(`With commit ${context.sha}, ${changed_files} file(s) where updated and ${changed_lines} line(s) were modified. \n\n\<details\>\n\<summary\>View the diff here:\</summary\> \n\<br\>\n\n\`\`\`diff\n${diff}\`\`\`\n\</details\>`)
         }
     } catch (err) {
-        await comment(`No diff file generated:\nError ${err}`);
+        console.error(err);
+        await comment(`No diff file generated:\n${err}`);
         core.setOutput("result", "failed");
     }
 }
