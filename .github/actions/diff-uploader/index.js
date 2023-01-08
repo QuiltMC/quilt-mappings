@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const {context, getOctokit} = require('@actions/github');
-const fs = require("fs/promises");
+const fs = require("fs");
 
 async function main() {
     const token = core.getInput('github-token', {required: true});
@@ -34,7 +34,7 @@ async function main() {
     }
 
     try {
-        const diff_buffer = await fs.readFile("../../../target.diff");
+        const diff_buffer = fs.readFileSync("../../../target.diff");
         const diff = diff_buffer.toString();
 
         if (diff === "") {

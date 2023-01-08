@@ -9976,15 +9976,6 @@
             /***/
         }),
 
-        /***/ 3292:
-        /***/ ((module) => {
-
-            "use strict";
-            module.exports = require("fs/promises");
-
-            /***/
-        }),
-
         /***/ 3685:
         /***/ ((module) => {
 
@@ -10156,7 +10147,7 @@
     (() => {
         const core = __nccwpck_require__(2186);
         const {context, getOctokit} = __nccwpck_require__(5438);
-        const fs = __nccwpck_require__(3292);
+        const fs = __nccwpck_require__(7147);
 
         async function main() {
             const token = core.getInput('github-token', {required: true});
@@ -10190,7 +10181,7 @@
             }
 
             try {
-                const diff_buffer = await fs.readFile("../../../target.diff");
+                const diff_buffer = fs.readFileSync("../../../target.diff");
                 const diff = diff_buffer.toString();
 
                 if (diff === "") {
