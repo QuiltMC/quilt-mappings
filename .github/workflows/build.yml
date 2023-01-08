@@ -25,6 +25,11 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
       - run: ./gradlew decompileQuiltflower decompileTargetQuiltflower --stacktrace
         if: ${{ matrix.java == 17 }}
       - name: Check Target Decompiled
