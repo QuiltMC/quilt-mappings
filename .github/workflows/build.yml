@@ -38,6 +38,7 @@ jobs:
         continue-on-error: true
       - name: Create diff comment
         uses: ./.github/actions/diff-uploader/
+        if: ${{ matrix.java == 17 }}
         id: diff-uploader
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
