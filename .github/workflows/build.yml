@@ -42,6 +42,7 @@ jobs:
         id: diff-uploader
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          target-src-exists: steps.can-create-diff.outputs.files_exists == 'true'
       - name: Upload diff
         if: steps.diff-uploader.outputs.result == 'success'
         uses: actions/upload-artifact@v3

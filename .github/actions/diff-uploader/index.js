@@ -6,14 +6,15 @@ async function main() {
     const token = core.getInput('github-token', {required: true});
     const octokit = getOctokit(token);
     const github = octokit.rest;
-
     const repo = context.repo.repo;
+
     const owner = context.repo.owner;
     const baseParameters = {owner, repo};
-
     let comment = async function (comment) {
         return console.log(comment);
     }
+
+    const targetSrcExists = core.getInput('target-src-exists', {required: true}) === "true";
 
     if (context.eventName === "push") {
         comment = async function (comment) {
@@ -34,6 +35,12 @@ async function main() {
         // }
     }
 
+    if (!targetSrcExists) {
+        await comment(`No diff file generated.`);
+        core.setOutput("result", "skip");
+        return;
+    }
+
     try {
         const diff_buffer = fs.readFileSync("target.diff");
         const diff = diff_buffer.toString();
@@ -50,8 +57,8 @@ async function main() {
         }
     } catch (err) {
         console.error(err);
-        await comment(`No diff file generated:\n${err}`);
-        core.setOutput("result", "failed");
+        await comment(`Error reading diff:\n${err}`);
+        core.setOutput("result", "fail");
     }
 }
 

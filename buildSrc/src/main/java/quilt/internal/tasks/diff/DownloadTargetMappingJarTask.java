@@ -48,7 +48,7 @@ public class DownloadTargetMappingJarTask extends DefaultMappingsTask {
     public void downloadTargetMappings() throws IOException {
         String targetVersion = this.getTaskByType(CheckTargetVersionExistsTask.class).getTargetVersion().get();
 
-        File targetMappingsJar = getProject().file(TARGET_MAPPINGS + "/quilt-mappings-" + targetVersion + ".jar");
+        File targetMappingsJar = getProject().file(TARGET_MAPPINGS + "/quilt-mappings-" + targetVersion + "-v2.jar");
         this.startDownload()
                 .src("https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-mappings/" + targetVersion + "/quilt-mappings-" + targetVersion + "-v2.jar")
                 .dest(targetMappingsJar)
