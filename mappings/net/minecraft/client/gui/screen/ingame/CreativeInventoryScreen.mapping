@@ -6,7 +6,7 @@ CLASS net/minecraft/unmapped/C_hvozqtyu net/minecraft/client/gui/screen/ingame/C
 	FIELD f_fhdscrnc scrollPosition F
 	FIELD f_fqbnezqa searchResultTags Ljava/util/Set;
 	FIELD f_fvxwoenl deleteItemSlot Lnet/minecraft/unmapped/C_nhvqfffd;
-	FIELD f_gekrvvan operatorItemTab Z
+	FIELD f_gekrvvan operatorItemsTab Z
 	FIELD f_hwnlopma lastClickOutsideBounds Z
 	FIELD f_icnzgvuz selectedTab Lnet/minecraft/unmapped/C_lnokcayd;
 	FIELD f_jgrbhdbj WHITE I
@@ -25,7 +25,7 @@ CLASS net/minecraft/unmapped/C_hvozqtyu net/minecraft/client/gui/screen/ingame/C
 	METHOD <init> (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_czxxrbcp;Z)V
 		ARG 1 player
 		ARG 2 flags
-		ARG 3 operatorItemTab
+		ARG 3 operatorItemsTab
 	METHOD m_ansdiarz hasScrollbar ()Z
 	METHOD m_bnstafyz isCreativeInventorySlot (Lnet/minecraft/unmapped/C_nhvqfffd;)Z
 		ARG 1 slot
@@ -39,14 +39,22 @@ CLASS net/minecraft/unmapped/C_hvozqtyu net/minecraft/client/gui/screen/ingame/C
 		ARG 2 group
 		ARG 3 mouseX
 		ARG 4 mouseY
+	METHOD m_ekaqskih (Ljava/util/Collection;)V
+		ARG 1 stacks
 	METHOD m_fvrwtwop search ()V
 	METHOD m_hasgvbjj (Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
+	METHOD m_hwhpfqna getTabX (Lnet/minecraft/unmapped/C_lnokcayd;)I
+		ARG 1 group
 	METHOD m_jaknfdet renderTabIcon (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_lnokcayd;)V
 		ARG 1 matrices
 		ARG 2 group
+	METHOD m_jpgnxwuj shouldShowOperatorItems (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
+		ARG 1 player
 	METHOD m_kplwwjej (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 		ARG 1 tag
+	METHOD m_ltasutff getTabY (Lnet/minecraft/unmapped/C_lnokcayd;)I
+		ARG 1 group
 	METHOD m_pftdpphq isClickInTab (Lnet/minecraft/unmapped/C_lnokcayd;DD)Z
 		ARG 1 group
 		ARG 2 mouseX
@@ -60,11 +68,19 @@ CLASS net/minecraft/unmapped/C_hvozqtyu net/minecraft/client/gui/screen/ingame/C
 		ARG 1 group
 	METHOD m_yjlvippo searchForTags (Ljava/lang/String;)V
 		ARG 1 id
+	METHOD m_zqfbkfzl isInventoryOpen ()Z
 	CLASS C_gllrhxly CreativeScreenHandler
 		FIELD f_kruqbfoi parent Lnet/minecraft/unmapped/C_mkrkudpa;
 		FIELD f_sohaimps itemList Lnet/minecraft/unmapped/C_rnrfftze;
 		METHOD <init> (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 			ARG 1 player
+		METHOD m_hrxebtoa adjustScrollChange (FD)F
+			ARG 1 scrollPosition
+			ARG 2 scrollAmount
+		METHOD m_qgfqhikc adjustScrollForResize (I)F
+		METHOD m_uwqinavf calculateExtraRows ()I
+		METHOD m_vupffkwj getRowOffset (F)I
+			ARG 1 scrollPosition
 		METHOD m_whbnqoam scrollItems (F)V
 			ARG 1 position
 		METHOD m_zyqznlqb shouldShowScrollbar ()Z
