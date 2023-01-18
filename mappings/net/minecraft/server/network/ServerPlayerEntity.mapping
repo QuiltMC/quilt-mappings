@@ -40,6 +40,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	FIELD f_tlemovvv clientChatColorsEnabled Z
 	FIELD f_tmepkkvu textStream Lnet/minecraft/unmapped/C_ibcyuwyk;
 	FIELD f_ubsujncj spawnAngle F
+	FIELD f_uitrvqbw chatSession Lnet/minecraft/unmapped/C_sdodhjzp;
 	FIELD f_uwtmzxbb joinInvulnerabilityTicks I
 	FIELD f_vwkdgomt spawnPointDimension Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_vwyacvpk allowsListing Z
@@ -48,6 +49,10 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	FIELD f_ynglkbif filterText Z
 	FIELD f_zkfgljmz lastHealthScore F
 	FIELD f_zwmomqsu cameraEntity Lnet/minecraft/unmapped/C_astfners;
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_bdwnwhiu;Lcom/mojang/authlib/GameProfile;)V
+		ARG 1 server
+		ARG 2 world
+		ARG 3 profile
 	METHOD m_akgkagnq forgiveMobAnger ()V
 	METHOD m_ausyrzvm setWatchedSection (Lnet/minecraft/unmapped/C_zubvmeye;)V
 		COMMENT Sets the chunk section position the player's client is currently watching
@@ -91,9 +96,13 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_fafsmqxt getSpawnPointDimension ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_fawxnykw setGameMode (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
+	METHOD m_fkikpiwx (ILnet/minecraft/unmapped/C_jmgxjonl;)V
+		ARG 1 playerScore
 	METHOD m_fwokftay allowsListing ()Z
 	METHOD m_gpxjnfrv sendUnloadChunkPacket (Lnet/minecraft/unmapped/C_ynrszrtu;)V
 		ARG 1 chunkPos
+	METHOD m_gtxxzowf (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_gynondrt handleFall (DZ)V
 		ARG 1 heightDifference
 		ARG 3 onGround
@@ -111,11 +120,14 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_hkspsypv getPlayerListName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_hmjyuwow getClientChatVisibility ()Lnet/minecraft/unmapped/C_wafwmsvb;
 	METHOD m_hoiwaxpe onTeleportationDone ()V
+	METHOD m_honfdohw acceptsChatMessages ()Z
 	METHOD m_hqkczyuk updateLastActionTime ()V
 	METHOD m_hvmlttqw moveToSpawn (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 1 world
 	METHOD m_ibtoqgyc getLastActionTime ()J
 	METHOD m_imlvdcbp onSpawn ()V
+	METHOD m_ipsguink acceptsSystemMessages (Z)Z
+		ARG 1 overlay
 	METHOD m_itdwcvgj worldChanged (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 1 origin
 	METHOD m_juidebgy tickFallStartPos ()V
@@ -136,6 +148,9 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 2 forwardSpeed
 		ARG 3 jumping
 		ARG 4 sneaking
+	METHOD m_mmpafyms sendSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
+		ARG 1 message
+		ARG 2 overlay
 	METHOD m_nalssqqm tickEnteredLavaOnVehiclePos ()V
 	METHOD m_nimkyysp sendInitialChunkPackets (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 chunkPos
@@ -171,6 +186,10 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_taedfzyx shouldFilterMessagesSentTo (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
 		ARG 1 player
 	METHOD m_tsbczhxe isInTeleportationState ()Z
+	METHOD m_ttfujhny sendChatMessage (Lnet/minecraft/unmapped/C_glgnifxw;ZLnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 filterMaskEnabled
+		ARG 3 parameters
 	METHOD m_ujyxsuep onDisconnect ()V
 	METHOD m_ulcuzxzs updateScores (Lnet/minecraft/unmapped/C_adsgsrpw;I)V
 		ARG 1 criterion

@@ -1,6 +1,9 @@
 CLASS net/minecraft/unmapped/C_psbzgaqf net/minecraft/network/encryption/PlayerPublicKey
 	FIELD f_csciuhel data Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;
+	FIELD f_jrynjaxg EXPIRATION_GRACE_PERIOD Ljava/time/Duration;
+	FIELD f_qydjivjd INVALID_PUBLIC_KEY_SIGNATURE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_swbppbsx CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_yqvavlri EXPIRED_PUBLIC_KEY Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD <init> (Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;)V
 		ARG 1 data
 	METHOD equals (Ljava/lang/Object;)Z
@@ -9,6 +12,7 @@ CLASS net/minecraft/unmapped/C_psbzgaqf net/minecraft/network/encryption/PlayerP
 	METHOD m_jatolsed createValidated (Lnet/minecraft/unmapped/C_yvuwcvkm;Ljava/util/UUID;Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;Ljava/time/Duration;)Lnet/minecraft/unmapped/C_psbzgaqf;
 		ARG 0 signatureValidator
 		ARG 2 data
+		ARG 3 duration
 	METHOD m_ljjblmai data ()Lnet/minecraft/unmapped/C_psbzgaqf$C_aheynfty;
 	CLASS C_aheynfty Data
 		FIELD f_bmbstads CODEC Lcom/mojang/serialization/Codec;
@@ -29,8 +33,14 @@ CLASS net/minecraft/unmapped/C_psbzgaqf net/minecraft/network/encryption/PlayerP
 		METHOD m_chmdcvdc (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
 		METHOD m_dxruekpc key ()Ljava/security/PublicKey;
+		METHOD m_hanucrty willBeExpiredAfter (Ljava/time/Duration;)Z
+			ARG 1 duration
 		METHOD m_hwdlwspy expiresAt ()Ljava/time/Instant;
 		METHOD m_jzfxvfbv validateSignature (Lnet/minecraft/unmapped/C_yvuwcvkm;Ljava/util/UUID;)Z
 			ARG 1 validator
+			ARG 2 uuid
 		METHOD m_okjpdkns toSerializedString (Ljava/util/UUID;)[B
+			ARG 1 uuid
+		METHOD m_qkavevah isExpired ()Z
 		METHOD m_uqwfmden keySignature ()[B
+	CLASS C_cpchmwst ValidationException

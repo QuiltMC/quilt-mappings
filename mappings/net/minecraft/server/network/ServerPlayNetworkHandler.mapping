@@ -3,6 +3,7 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 	FIELD f_alyyezsp teleportRequestTick I
 	FIELD f_bragqdfw blockChangeSequence I
 	FIELD f_burxyzoz connection Lnet/minecraft/unmapped/C_oasmcckk;
+	FIELD f_cpyejxjp messageSignatureStorage Lnet/minecraft/unmapped/C_avoeygij;
 	FIELD f_dmpkwvhc creativeItemDropThreshold I
 	FIELD f_dnooktbx lastTickRiddenX D
 	FIELD f_dpgelbgj requestedTeleportId I
@@ -11,11 +12,14 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 	FIELD f_fahrnrny lastTickY D
 	FIELD f_fqgecwdp lastTickRiddenY D
 	FIELD f_gaddmbxt updatedX D
+	FIELD f_gffpssne messageChainUnpacker Lnet/minecraft/unmapped/C_bwznvpye$C_wefdvhmx;
+	FIELD f_gjyfbrkg chatSession Lnet/minecraft/unmapped/C_sdodhjzp;
 	FIELD f_hspdmdgp LOGGER Lorg/slf4j/Logger;
 	FIELD f_ikmujisz server Lnet/minecraft/server/MinecraftServer;
 	FIELD f_ilqwwukv lastTickZ D
 	FIELD f_jupioeup player Lnet/minecraft/unmapped/C_mxrobsgg;
 	FIELD f_jyjuwlws updatedY D
+	FIELD f_mbejhksc messageAcknowledgmentValidator Lnet/minecraft/unmapped/C_fodhltfi;
 	FIELD f_mbuhnldv ticks I
 	FIELD f_meycanua MAX_INTERACTION_DISTANCE D
 	FIELD f_mitimcny updatedRiddenX D
@@ -47,22 +51,38 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 		ARG 8 pitch
 		ARG 9 flags
 		ARG 10 shouldDismount
+	METHOD m_cgoqlzes validateAcknowledgment (Lnet/minecraft/unmapped/C_mofgmouu$C_afrzjbhr;)Ljava/util/Optional;
+		ARG 1 acknowledgment
+	METHOD m_csymlmvj addMessageForValidation (Lnet/minecraft/unmapped/C_zzdolisx;)V
+		ARG 1 message
 	METHOD m_foztbvnb setTextToBook (Ljava/util/List;Ljava/util/function/UnaryOperator;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 messages
 		ARG 2 postProcessor
 		ARG 3 book
 	METHOD m_fpnoyqhv addBook (Lnet/minecraft/unmapped/C_yjdbpemn;Ljava/util/List;I)V
+		ARG 1 title
 		ARG 2 pages
 		ARG 3 slotId
+	METHOD m_hdqexjul unpack (Lnet/minecraft/unmapped/C_emczwapr;Lnet/minecraft/unmapped/C_mofgmouu;)Lnet/minecraft/unmapped/C_zzdolisx;
+		ARG 1 messagePacket
+		ARG 2 signatureList
 	METHOD m_heqmrpot requestTeleport (DDDFF)V
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
 		ARG 7 yaw
 		ARG 8 pitch
+	METHOD m_hezgjyfd sendPacket (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
+		ARG 1 packet
+		ARG 2 listener
 	METHOD m_ixrswtwl updateBookContent (Ljava/util/List;I)V
 		ARG 1 pages
 		ARG 2 slotId
+	METHOD m_ktyhohne (Ljava/lang/String;Ljava/time/Instant;Lnet/minecraft/unmapped/C_mofgmouu$C_afrzjbhr;)Ljava/util/Optional;
+		ARG 3 acknowledgment
+	METHOD m_lseobmtm (Lnet/minecraft/unmapped/C_ahusqrxm;Lnet/minecraft/unmapped/C_mofgmouu;)V
+		ARG 1 commandPacket
+		ARG 2 signatureList
 	METHOD m_lwcarbez isPlayerNotCollidingWithBlocks (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
 		ARG 1 world
 		ARG 2 box
@@ -94,8 +114,18 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 		ARG 7 yaw
 		ARG 8 pitch
 		ARG 9 flags
+	METHOD m_qjvmzizh sendChatMessage (Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 parameters
+	METHOD m_qxviznww sendChatMessage (Lnet/minecraft/unmapped/C_zzdolisx;)V
+		ARG 1 message
 	METHOD m_rpjisoud updateBlockChangeSequence (I)V
 		ARG 1 blockChangeSequence
+	METHOD m_sngnytec sendProfileIndependentMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 parameters
+	METHOD m_sphjavll handleDecodingException (Lnet/minecraft/unmapped/C_bwznvpye$C_cbfqzsjn;)V
+		ARG 1 exception
 	METHOD m_sworheig clampVertical (D)D
 		ARG 0 d
 	METHOD m_tklkmeyc canPlace (Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
@@ -115,6 +145,11 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 		ARG 5 z
 		ARG 7 yaw
 		ARG 8 pitch
+	METHOD m_zlylfblp setChatSession (Lnet/minecraft/unmapped/C_sdodhjzp;)V
+		ARG 1 chatSession
+	METHOD m_zqahozcp (Lnet/minecraft/unmapped/C_ahusqrxm;Lnet/minecraft/unmapped/C_wdcbkyfy;Lnet/minecraft/unmapped/C_mofgmouu;)Ljava/util/Map;
+		ARG 1 commandPacket
+		ARG 3 signatures
 	CLASS C_svuahxut Interaction
 		METHOD run run (Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 			ARG 1 player
