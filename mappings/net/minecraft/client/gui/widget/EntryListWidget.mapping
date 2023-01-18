@@ -25,8 +25,6 @@ CLASS net/minecraft/unmapped/C_nmdfcqgq net/minecraft/client/gui/widget/EntryLis
 		ARG 4 top
 		ARG 5 bottom
 		ARG 6 itemHeight
-	METHOD m_bnmyjspy moveSelection (Lnet/minecraft/unmapped/C_nmdfcqgq$C_utnagwff;)V
-		ARG 1 direction
 	METHOD m_bwaibmbs getMaxPosition ()I
 	METHOD m_bxfstjnj getScrollBottom ()I
 	METHOD m_bzxbqbad getHoveredEntry ()Lnet/minecraft/unmapped/C_nmdfcqgq$C_rzayyeiy;
@@ -38,7 +36,6 @@ CLASS net/minecraft/unmapped/C_nmdfcqgq net/minecraft/client/gui/widget/EntryLis
 	METHOD m_dnwrfyzv getRowRight ()I
 	METHOD m_efccelql setSelected (Lnet/minecraft/unmapped/C_nmdfcqgq$C_rzayyeiy;)V
 		ARG 1 entry
-	METHOD m_eggeubrx ensureSelectedEntryVisible ()V
 	METHOD m_enzpxkzi renderEntry (Lnet/minecraft/unmapped/C_cnszsxvd;IIFIIIII)V
 		ARG 2 mouseX
 		ARG 3 mouseY
@@ -63,8 +60,6 @@ CLASS net/minecraft/unmapped/C_nmdfcqgq net/minecraft/client/gui/widget/EntryLis
 		ARG 1 entry
 	METHOD m_honkwktf renderBackground (Lnet/minecraft/unmapped/C_cnszsxvd;)V
 		ARG 1 matrices
-	METHOD m_iepmmrlx (Lnet/minecraft/unmapped/C_nmdfcqgq$C_rzayyeiy;)Z
-		ARG 0 entry
 	METHOD m_jbupitjk addEntry (Lnet/minecraft/unmapped/C_nmdfcqgq$C_rzayyeiy;)I
 		ARG 1 entry
 	METHOD m_jpuncqsm getSelectedOrNull ()Lnet/minecraft/unmapped/C_nmdfcqgq$C_rzayyeiy;
@@ -100,11 +95,10 @@ CLASS net/minecraft/unmapped/C_nmdfcqgq net/minecraft/client/gui/widget/EntryLis
 		ARG 2 height
 		ARG 3 top
 		ARG 4 bottom
-	METHOD m_tcbvwdif renderHeader (Lnet/minecraft/unmapped/C_cnszsxvd;IILnet/minecraft/unmapped/C_hiiunyvh;)V
+	METHOD m_tcbvwdif renderHeader (Lnet/minecraft/unmapped/C_cnszsxvd;II)V
 		ARG 1 matrices
 		ARG 2 x
 		ARG 3 y
-		ARG 4 tessellator
 	METHOD m_tfybcihy setRenderHorizontalShadows (Z)V
 		ARG 1 renderHorizontalShadows
 	METHOD m_ugejzjin drawEntrySelectionHighlight (Lnet/minecraft/unmapped/C_cnszsxvd;IIIII)V
@@ -118,7 +112,6 @@ CLASS net/minecraft/unmapped/C_nmdfcqgq net/minecraft/client/gui/widget/EntryLis
 		ARG 3 y
 	METHOD m_uwcwkhhb setScrollAmount (D)V
 		ARG 1 amount
-	METHOD m_vfsktiim isFocused ()Z
 	METHOD m_wfpeolts replaceEntries (Ljava/util/Collection;)V
 		ARG 1 newEntries
 	METHOD m_wgvvktvl setRenderHeader (ZI)V
@@ -135,9 +128,6 @@ CLASS net/minecraft/unmapped/C_nmdfcqgq net/minecraft/client/gui/widget/EntryLis
 		ARG 2 y
 	METHOD m_yqoydelm setEntryParentList (Lnet/minecraft/unmapped/C_nmdfcqgq$C_rzayyeiy;)V
 		ARG 1 entry
-	METHOD m_yuellzsx moveSelection (Lnet/minecraft/unmapped/C_nmdfcqgq$C_utnagwff;Ljava/util/function/Predicate;)Z
-		ARG 1 direction
-		ARG 2 predicate
 	METHOD m_zxlevqds getRowLeft ()I
 	CLASS C_gvpiqisq Entries
 		FIELD f_inmrsxsg entries Ljava/util/List;
@@ -175,7 +165,3 @@ CLASS net/minecraft/unmapped/C_nmdfcqgq net/minecraft/client/gui/widget/EntryLis
 			ARG 9 hovered
 				COMMENT whether the mouse is hovering over the entry
 			ARG 10 tickDelta
-	CLASS C_utnagwff MoveDirection
-		COMMENT Represents the direction in which the selection is moved.
-		FIELD f_shhdvxzn UP Lnet/minecraft/unmapped/C_nmdfcqgq$C_utnagwff;
-		FIELD f_wfhkksky DOWN Lnet/minecraft/unmapped/C_nmdfcqgq$C_utnagwff;

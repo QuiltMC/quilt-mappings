@@ -4,9 +4,9 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	FIELD f_skffsjnx CONDITIONAL_FAIL_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_tqpfgfbv MAX_BLOCKS I
 	FIELD f_uaposjsm BINARY_RESULT_CONSUMER Ljava/util/function/BinaryOperator;
-	FIELD f_ymyzptua BLOCKS_TOOBIG_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
-	METHOD m_atedeeqs (ZLcom/mojang/brigadier/context/CommandContext;)I
-		ARG 1 context
+	FIELD f_ymyzptua BLOCKS_TOO_BIG_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
+	METHOD m_atedeeqs (ZZLcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 2 context
 	METHOD m_bdfuvckm (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 2 context
 	METHOD m_cekuvydj testScoreMatch (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;)Z
@@ -21,7 +21,7 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 3 requestResult
 	METHOD m_cpoefjmm (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 2 context
-	METHOD m_dqlgxiqs (Lcom/mojang/brigadier/context/CommandContext;)I
+	METHOD m_dqlgxiqs (Lcom/mojang/brigadier/context/CommandContext;)Z
 		ARG 0 context
 	METHOD m_eahasdsy (Lcom/mojang/brigadier/tree/LiteralCommandNode;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 3 builder
@@ -31,19 +31,19 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 4 context
 		ARG 5 success
 		ARG 6 result
-	METHOD m_evfbvlyk (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)I
-		ARG 1 context
+	METHOD m_evfbvlyk (Lcom/mojang/brigadier/context/CommandContext;)Z
+		ARG 0 context
 	METHOD m_ewvcyhgj testBlocksCondition (Lcom/mojang/brigadier/context/CommandContext;Z)Ljava/util/OptionalInt;
 		ARG 0 context
 		ARG 1 masked
-	METHOD m_fluswpsr (ZLcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
-		ARG 1 context
+	METHOD m_fluswpsr (Lcom/mojang/brigadier/context/CommandContext;)Z
+		ARG 0 context
 	METHOD m_gujhdlxt (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 2 context
 	METHOD m_gynapbbg (Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 0 context
-	METHOD m_gzcnwguk (ZLnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
-		ARG 2 context
+	METHOD m_gzcnwguk (Lcom/mojang/brigadier/context/CommandContext;)I
+		ARG 0 context
 	METHOD m_hdzajyhq (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 count
 	METHOD m_hljxncru getSourceOrEmptyForConditionFork (Lcom/mojang/brigadier/context/CommandContext;ZZ)Ljava/util/Collection;
@@ -64,10 +64,6 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	METHOD m_jxinubkg getExistsConditionExecute (ZLnet/minecraft/unmapped/C_advrsyux$C_teviyeeu;)Lcom/mojang/brigadier/Command;
 		ARG 0 positive
 		ARG 1 condition
-	METHOD m_laqjpwwi (Lcom/mojang/brigadier/context/CommandContext;)Z
-		ARG 0 context
-	METHOD m_lbzezkzb (ZLnet/minecraft/unmapped/C_advrsyux$C_mxgpijan;Lcom/mojang/brigadier/context/CommandContext;)I
-		ARG 2 context
 	METHOD m_lctwntnf addStoreArguments (Lcom/mojang/brigadier/tree/LiteralCommandNode;Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;Z)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 0 node
 		ARG 1 builder
@@ -84,10 +80,6 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 1 context
 	METHOD m_obbukava (Lcom/mojang/brigadier/context/CommandContext;I)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 result
-	METHOD m_obliwacz (Lnet/minecraft/unmapped/C_advrsyux$C_teviyeeu;Lcom/mojang/brigadier/context/CommandContext;)I
-		ARG 1 context
-	METHOD m_ohkvpzrl (ZLcom/mojang/brigadier/context/CommandContext;)I
-		ARG 1 context
 	METHOD m_okupeozh (ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 1 context
 	METHOD m_phucbevz executeStoreBossbar (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_izahjvwf;ZZ)Lnet/minecraft/unmapped/C_pennblrk;
@@ -154,12 +146,12 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	METHOD m_uuzvpufi executeNegativeBlockCondition (Lcom/mojang/brigadier/context/CommandContext;Z)I
 		ARG 0 context
 		ARG 1 masked
-	METHOD m_wnfostga (Lcom/mojang/brigadier/context/CommandContext;)Z
-		ARG 0 context
+	METHOD m_wnfostga (ZLcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 1 context
 	METHOD m_wnxzuifz (Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 0 context
-	METHOD m_xyqwjxeb (Lcom/mojang/brigadier/context/CommandContext;)Z
-		ARG 0 context
+	METHOD m_xyqwjxeb (ZLcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 1 context
 	METHOD m_yipcxrua addBlocksConditionLogic (Lcom/mojang/brigadier/tree/CommandNode;Lcom/mojang/brigadier/builder/ArgumentBuilder;ZZ)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 0 root
 		ARG 1 builder
