@@ -27,15 +27,33 @@ CLASS net/minecraft/unmapped/C_pennblrk net/minecraft/server/command/ServerComma
 		ARG 7 displayName
 		ARG 8 server
 		ARG 9 entity
+	METHOD <init> (Lnet/minecraft/unmapped/C_ngpvhugm;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_krlwdsom;Lnet/minecraft/unmapped/C_bdwnwhiu;ILjava/lang/String;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_astfners;ZLcom/mojang/brigadier/ResultConsumer;Lnet/minecraft/unmapped/C_xzznbkxo$C_vqytrhtw;Lnet/minecraft/unmapped/C_gbgdqure;Lnet/minecraft/unmapped/C_omvuxixf;)V
+		ARG 1 output
+		ARG 2 position
+		ARG 3 rotation
+		ARG 4 world
+		ARG 5 level
+		ARG 6 name
+		ARG 7 displayName
+		ARG 8 server
+		ARG 9 entity
+		ARG 10 silent
+		ARG 11 resultConsumer
+		ARG 12 entityAnchor
+	METHOD m_bjpnvosg isPlayer ()Z
 	METHOD m_cafzqgph getDisplayName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_djocmkpt getEntityOrThrow ()Lnet/minecraft/unmapped/C_astfners;
 		COMMENT Gets the entity from this command source or throws a command syntax exception if this command source is not an entity.
+	METHOD m_dvpisqob sendSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 message
 	METHOD m_eacbkqvv sendFeedback (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
 		ARG 1 message
 		ARG 2 broadcastToOps
 	METHOD m_epyayyjl getEntityAnchor ()Lnet/minecraft/unmapped/C_xzznbkxo$C_vqytrhtw;
 	METHOD m_ezimijzj withLevel (I)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 1 level
+	METHOD m_fcdgmgjp getFilterText (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
+		ARG 1 player
 	METHOD m_fnufpobp withOutput (Lnet/minecraft/unmapped/C_ngpvhugm;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 1 output
 	METHOD m_iokujiqe getRotation ()Lnet/minecraft/unmapped/C_krlwdsom;
@@ -53,6 +71,7 @@ CLASS net/minecraft/unmapped/C_pennblrk net/minecraft/server/command/ServerComma
 		ARG 1 consumer
 	METHOD m_mjeflcil withMaxLevel (I)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 1 level
+	METHOD m_ozupobtn getPlayer ()Lnet/minecraft/unmapped/C_mxrobsgg;
 	METHOD m_qcqaxvij getWorld ()Lnet/minecraft/unmapped/C_bdwnwhiu;
 	METHOD m_qutkdoff withLookingAt (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 1 position
@@ -78,7 +97,11 @@ CLASS net/minecraft/unmapped/C_pennblrk net/minecraft/server/command/ServerComma
 	METHOD m_vqdaxyes (Lnet/minecraft/unmapped/C_sasfholk$C_yjlyniph;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/unmapped/C_tqxyjqsk;)Ljava/util/concurrent/CompletableFuture;
 		ARG 3 registry
 	METHOD m_vuuhcdeb getName ()Ljava/lang/String;
-	METHOD m_ytnipjhs getPlayer ()Lnet/minecraft/unmapped/C_mxrobsgg;
+	METHOD m_xbyhnovt sendMessage (Lnet/minecraft/unmapped/C_glgnifxw;ZLnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 filterMaskEnabled
+		ARG 3 parameters
+	METHOD m_ytnipjhs getPlayerOrThrow ()Lnet/minecraft/unmapped/C_mxrobsgg;
 		COMMENT Gets the player from this command source or throws a command syntax exception if this command source is not a player.
 	METHOD m_zdiolfqs getPosition ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_zsmnixwg getServer ()Lnet/minecraft/server/MinecraftServer;
