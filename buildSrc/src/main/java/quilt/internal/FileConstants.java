@@ -12,6 +12,8 @@ public class FileConstants {
     public final File namedJar;
     public final File libraries;
 
+    public final File dictionaryFile;
+
     public final File unpickDefinitions;
     public final File unpickMeta;
     public final File unpickGlDefinitions;
@@ -25,6 +27,8 @@ public class FileConstants {
         perVersionMappingsJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar");
         unpickedJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar");
         namedJar = project.file(Constants.MINECRAFT_VERSION + "-named.jar");
+
+        dictionaryFile = project.file(".gradle/lint/dictionary.txt");
 
         unpickDefinitions = project.file("unpick-definitions");
         unpickMeta = new File(unpickDefinitions, "unpick.json");
