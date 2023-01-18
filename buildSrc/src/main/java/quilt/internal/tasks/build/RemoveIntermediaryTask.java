@@ -10,12 +10,15 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 
 public class RemoveIntermediaryTask extends DefaultMappingsTask {
@@ -41,12 +44,18 @@ public class RemoveIntermediaryTask extends DefaultMappingsTask {
 
     @TaskAction
     public void removeIntermediary() throws Exception {
-        File mappingsTinyInput = input.get().getAsFile();
+        Path mappingsTinyInput = input.get().getAsFile().toPath();
+        Path output = outputMappings.toPath();
 
         getLogger().lifecycle(":removing intermediary");
+        removeIntermediary(mappingsTinyInput, output);
+    }
+
+    @VisibleForTesting
+    public static void removeIntermediary(Path mappingsTinyInput, Path output) throws IOException {
         MemoryMappingTree tree = new MemoryMappingTree(false);
-        MappingReader.read(mappingsTinyInput.toPath(), MappingFormat.TINY_2, tree);
-        try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings.toPath()), false)) {
+        MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2, tree);
+        try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(output), false)) {
             tree.accept(
                 new MappingSourceNsSwitch(
                     new MappingDstNsReorder(w, Collections.singletonList("named")), // Remove official namespace

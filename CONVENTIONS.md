@@ -164,7 +164,7 @@ A class is assumed to be imported in the following scenarios:
 
 If it does not fulfill one of these scenarios, use the [full binary name](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ClassLoader.html#binary-name), such as `com.google.common.collect.Lists` rather than simply `Lists`. Unlike class naming in enigma, do not use `/` to separate packages; use `.` instead.
 
-Use Quilt Mappings when referencing Minecraft members, such as `net.minecraft.server.world.ThreadedAnvilChunkStorage` rather than `net.minecraft.unmapped.C_ccazprxg`. The Javadoc task will warn if some links no longer work after a rename.
+Use Quilt Mappings when referencing Minecraft members, such as `net.minecraft.server.world.ThreadedChunkManager` rather than `net.minecraft.unmapped.C_ccazprxg`. The Javadoc task will warn if some links no longer work after a rename.
 
 <details>
 <summary>
