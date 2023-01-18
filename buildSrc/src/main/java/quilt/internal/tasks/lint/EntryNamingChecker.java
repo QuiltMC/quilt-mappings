@@ -51,7 +51,6 @@ public class EntryNamingChecker implements Checker<Entry<?>> {
                 errorReporter.error("non-class entry name starts with uppercase character");
             }
         }
-
     }
 
     private static boolean startsWithUppercase(String s) {
