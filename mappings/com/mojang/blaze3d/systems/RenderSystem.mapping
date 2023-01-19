@@ -2,7 +2,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	FIELD LOGGER LOGGER Lorg/slf4j/Logger;
 	FIELD MAX_SUPPORTED_TEXTURE_SIZE MAX_SUPPORTED_TEXTURE_SIZE I
 	FIELD MINIMUM_ATLAS_TEXTURE_SIZE MINIMUM_ATLAS_TEXTURE_SIZE I
-	FIELD RENDER_THREAD_TESSELATOR RENDER_THREAD_TESSELATOR Lnet/minecraft/unmapped/C_hiiunyvh;
+	FIELD RENDER_THREAD_TESSELATOR RENDER_THREAD_TESSELLATOR Lnet/minecraft/unmapped/C_hiiunyvh;
 	FIELD apiDescription apiDescription Ljava/lang/String;
 	FIELD gameThread gameThread Ljava/lang/Thread;
 	FIELD isInInit isInInit Z
@@ -113,7 +113,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD disableDepthTest disableDepthTest ()V
 	METHOD disablePolygonOffset disablePolygonOffset ()V
 	METHOD disableScissor disableScissor ()V
-	METHOD disableTexture disableTexture ()V
 	METHOD drawElements drawElements (III)V
 		ARG 0 mode
 		ARG 1 first
@@ -128,7 +127,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 1 y
 		ARG 2 width
 		ARG 3 height
-	METHOD enableTexture enableTexture ()V
 	METHOD finishInitialization finishInitialization ()V
 	METHOD flipFrame flipFrame (J)V
 		ARG 0 window
@@ -150,8 +148,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD getString getString (ILjava/util/function/Consumer;)V
 		ARG 0 name
 		ARG 1 consumer
-	METHOD getTextureId getTextureId (I)I
-		ARG 0 internalId
 	METHOD glBindBuffer glBindBuffer (ILjava/util/function/IntSupplier;)V
 		ARG 0 target
 		ARG 1 buffer
@@ -252,7 +248,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 0 renderCall
 	METHOD renderCrosshair renderCrosshair (I)V
 		ARG 0 size
-	METHOD renderThreadTesselator renderThreadTesselator ()Lnet/minecraft/unmapped/C_hiiunyvh;
+	METHOD renderThreadTesselator renderThreadTessellator ()Lnet/minecraft/unmapped/C_hiiunyvh;
 	METHOD replayQueue replayQueue ()V
 	METHOD resetTextureMatrix resetTextureMatrix ()V
 	METHOD restoreProjectionMatrix restoreProjectionMatrix ()V
