@@ -37,7 +37,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
     public AddProposedMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        outputMappings = new File(fileConstants.tempDir, getName() + ".tiny");
+        outputMappings = new File(fileConstants.buildDir, getName() + ".tiny");
         inputJar = getProject().getObjects().property(File.class);
         inputMappings = getProject().getObjects().property(File.class);
         profile = getProject().getObjects().property(File.class);
@@ -52,14 +52,14 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
         Path jar = inputJar.get().toPath();
         Path profilePath = profile.map(File::toPath).get();
 
-        addProposedMappings(input, output, jar, profilePath);
+        addProposedMappings(input, output, fileConstants.tempDir.toPath(), jar, profilePath);
     }
 
     @VisibleForTesting
-    public static void addProposedMappings(Path input, Path output, Path jar, Path profilePath) throws Exception {
+    public static void addProposedMappings(Path input, Path output, Path tempDir, Path jar, Path profilePath) throws Exception {
         String name = output.getFileName().toString();
-        Path preprocessedMappings = output.getParent().resolve(name.replace(".tiny", "-preprocessed.tiny"));
-        Path processedMappings = output.getParent().resolve(name.replace(".tiny", "-processed.tiny"));
+        Path preprocessedMappings = tempDir.resolve(name.replace(".tiny", "-preprocessed.tiny"));
+        Path processedMappings = tempDir.resolve(name.replace(".tiny", "-processed.tiny"));
 
         List<String> namespaces;
         try (Reader reader = Files.newBufferedReader(input, StandardCharsets.UTF_8)) {
