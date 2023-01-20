@@ -70,6 +70,10 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
             throw new IllegalArgumentException("Input mappings must contain the named namespace");
         }
 
+        if (!Files.exists(tempDir)) {
+            Files.createDirectories(tempDir);
+        }
+
         boolean extraProcessing = preprocessFile(input, preprocessedMappings);
         Path commandInput = extraProcessing ? preprocessedMappings : input;
         Path commandOutput = extraProcessing ? processedMappings : output;
