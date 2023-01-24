@@ -12,7 +12,6 @@ CLASS net/minecraft/unmapped/C_uqpzijng net/minecraft/entity/ItemEntity
 	FIELD f_zdcrlbeo NEVER_DESPAWN_AGE I
 	FIELD f_zenwugbc health I
 	FIELD f_zvxmijjk DESPAWN_AGE I
-	FIELD f_zxccayfv owner Ljava/util/UUID;
 	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;DDDLnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 world
 		ARG 2 x
@@ -61,15 +60,6 @@ CLASS net/minecraft/unmapped/C_uqpzijng net/minecraft/entity/ItemEntity
 		ARG 0 stack1
 		ARG 1 stack2
 		ARG 2 maxCount
-	METHOD m_ohyqhjke getThrower ()Ljava/util/UUID;
-		COMMENT Returns the UUID of the entity which created this item entity
-		COMMENT by throwing an item, or {@code null} if it was created otherwise.
-	METHOD m_ozzyvvbh setOwner (Ljava/util/UUID;)V
-		COMMENT Sets the owner of this item entity to {@code uuid}.
-		COMMENT
-		COMMENT <p>Used when an item is given to an entity, but this entity
-		COMMENT does not have enough space in its inventory.
-		ARG 1 uuid
 	METHOD m_pfxkbxad resetPickupDelay ()V
 		COMMENT Sets the number of ticks before this item entity can be picked up
 		COMMENT to 0.
@@ -101,9 +91,3 @@ CLASS net/minecraft/unmapped/C_uqpzijng net/minecraft/entity/ItemEntity
 	METHOD m_wblcjhub setDespawnImmediately ()V
 	METHOD m_wzgnltnw applyLavaBuoyancy ()V
 	METHOD m_xnvklrqz setCovetedItem ()V
-	METHOD m_xrqvlasg getOwner ()Ljava/util/UUID;
-		COMMENT Returns the UUID of the entity to which belongs this item entity,
-		COMMENT or {@code null} if there is not.
-		COMMENT
-		COMMENT <p>If there is one, the owner is the only entity which can pick
-		COMMENT up this item entity.
