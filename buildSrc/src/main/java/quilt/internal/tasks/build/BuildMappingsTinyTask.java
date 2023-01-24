@@ -21,7 +21,7 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
     private final RegularFileProperty mappings;
 
     @OutputFile
-    public File outputMappings = new File(fileConstants.tempDir, String.format("%s.tiny", Constants.MAPPINGS_NAME));
+    public File outputMappings = new File(fileConstants.buildDir, String.format("%s.tiny", Constants.MAPPINGS_NAME));
 
     public BuildMappingsTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
