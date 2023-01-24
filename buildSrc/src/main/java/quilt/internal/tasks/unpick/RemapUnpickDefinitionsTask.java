@@ -1,14 +1,23 @@
 package quilt.internal.tasks.unpick;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+
 import daomephsta.unpick.constantmappers.datadriven.parser.FieldKey;
 import daomephsta.unpick.constantmappers.datadriven.parser.MethodKey;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Reader;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Remapper;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Writer;
-import net.fabricmc.mappingio.format.Tiny2Reader;
-import net.fabricmc.mappingio.tree.MappingTree;
-import net.fabricmc.mappingio.tree.MemoryMappingTree;
+import javax.inject.Inject;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Property;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
@@ -21,14 +30,9 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
-import javax.inject.Inject;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
+import net.fabricmc.mappingio.format.Tiny2Reader;
+import net.fabricmc.mappingio.tree.MappingTree;
+import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "remapUnpickDefinitions";
@@ -67,9 +71,9 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     public void run() {
         WorkQueue workQueue = getWorkerExecutor().noIsolation();
         workQueue.submit(RemapAction.class, parameters -> {
-            parameters.getInput().set(getInput());
-            parameters.getMappings().set(getMappings());
-            parameters.getOutput().set(getOutput());
+            parameters.getInput().set(getInput().get().getAsFile());
+            parameters.getMappings().set(getMappings().get().getAsFile());
+            parameters.getOutput().set(getOutput().get().getAsFile());
         });
     }
 
@@ -118,14 +122,14 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     }
 
     public interface RemapParameters extends WorkParameters {
-        @InputFile
-        RegularFileProperty getInput();
+        @Input
+        Property<File> getInput();
+
+        @Input
+        Property<File> getMappings();
 
         @OutputFile
-        RegularFileProperty getMappings();
-
-        @OutputFile
-        RegularFileProperty getOutput();
+        Property<File> getOutput();
     }
 
     public abstract static class RemapAction implements WorkAction<RemapParameters> {
@@ -135,9 +139,9 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
 
         @Override
         public void execute() {
-            Path input = getParameters().getInput().getAsFile().get().toPath();
-            Path mappings = getParameters().getMappings().getAsFile().get().toPath();
-            Path output = getParameters().getOutput().getAsFile().get().toPath();
+            Path input = getParameters().getInput().get().toPath();
+            Path mappings = getParameters().getMappings().get().toPath();
+            Path output = getParameters().getOutput().get().toPath();
             remapUnpickDefinitions(input, mappings, output);
         }
     }

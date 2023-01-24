@@ -12,20 +12,18 @@ public class RemapTargetMinecraftJarTask extends MapJarTask {
         super("diff", Constants.PER_VERSION_MAPPINGS_NAME, "named");
 
         CheckTargetVersionExistsTask checkExists = getTaskByType(CheckTargetVersionExistsTask.class);
-        this.onlyIf(task -> checkExists.getTargetVersion().isPresent());
-        this.dependsOn(DownloadTargetMappingJarTask.TASK_NAME);
+        CheckUnpickVersionsMatchTask checkUnpickExists = getTaskByType(CheckUnpickVersionsMatchTask.class);
+
+        this.onlyIf(task -> checkExists.getTargetVersion().isPresent() && checkUnpickExists.isMatch());
+        this.dependsOn(DownloadTargetMappingJarTask.TASK_NAME, "unpickTargetJar");
         DownloadTargetMappingJarTask downloadTarget = getTaskByType(DownloadTargetMappingJarTask.class);
 
-        inputJar.convention(() -> fileConstants.unpickedJar);
+        inputJar.convention(() -> getProject().file(DownloadTargetMappingJarTask.TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "-unpicked.jar"));
         mappingsFile.set(downloadTarget.getTargetMappingsFile());
         outputJar.convention(() -> getProject().file(DownloadTargetMappingJarTask.TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "-named.jar"));
     }
 
     public Map<String, String> getAdditionalMappings() {
-        return Map.of(
-                "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
-                "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
-                "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
-        );
+        return MapJarTask.JAVAX_TO_JETBRAINS;
     }
 }

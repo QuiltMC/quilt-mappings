@@ -10196,11 +10196,12 @@
                     await comment("No difference between head and target.");
                     core.setOutput("result", "skip");
                 } else {
-                    let changed_lines = (diff.match(new RegExp("^\\+[^+]", "gm")) || []).length;
-                    let changed_files = (diff.match(new RegExp("^\\+\\+\\+", "gm")) || []).length;
+                    let added_lines = (diff.match(new RegExp("^\\+[^+]", "gm")) || []).length;
+                    let removed_lines = (diff.match(new RegExp("^-[^-]", "gm")) || []).length;
+                    let modified_files = (diff.match(new RegExp("^\\+\\+\\+", "gm")) || []).length;
 
                     core.setOutput("result", "success");
-                    await comment(`With commit ${context.sha}, ${changed_files} file(s) were updated and ${changed_lines} line(s) were modified compared to the latest Quilt Mappings version. \n\n\<details\>\n\<summary\>View the diff here:\</summary\> \n\<br\>\n\n\`\`\`diff\n${diff}\`\`\`\n\</details\>`)
+                    await comment(`With commit ${context.sha}, ${modified_files} file(s) were updated with ${added_lines} line(s) added and ${removed_lines} removed compared to the latest Quilt Mappings version. \n\n\<details\>\n\<summary\>View the diff here:\</summary\> \n\<br\>\n\n\`\`\`diff\n${diff}\`\`\`\n\</details\>`)
                 }
             } catch (err) {
                 console.error(err);

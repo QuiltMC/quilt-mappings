@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
@@ -21,6 +22,9 @@ public class DownloadTargetMappingJarTask extends DefaultMappingsTask {
     @OutputFile
     private final RegularFileProperty targetUnpickDefinitionsFile;
 
+    @Internal
+    private final RegularFileProperty targetUnpickRemappedDefinitionsFile;
+
     @OutputFile
     private final RegularFileProperty targetUnpickConstantsFile;
 
@@ -37,10 +41,12 @@ public class DownloadTargetMappingJarTask extends DefaultMappingsTask {
         targetMappingsFile = getProject().getObjects().fileProperty();
         targetUnpickFile = getProject().getObjects().fileProperty();
         targetUnpickDefinitionsFile = getProject().getObjects().fileProperty();
+        targetUnpickRemappedDefinitionsFile = getProject().getObjects().fileProperty();
         targetUnpickConstantsFile = getProject().getObjects().fileProperty();
         targetMappingsFile.convention(() -> getProject().file(TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "/mappings/mappings.tiny"));
         targetUnpickFile.convention(() -> getProject().file(TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "/extras/unpick.json"));
         targetUnpickDefinitionsFile.convention(() -> getProject().file(TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "/extras/definitions.unpick"));
+        targetUnpickRemappedDefinitionsFile.convention(() -> getProject().file(TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "remapped-unpick.unpick"));
         targetUnpickConstantsFile.convention(() -> getProject().file(TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "-constants.jar"));
     }
 
@@ -79,5 +85,9 @@ public class DownloadTargetMappingJarTask extends DefaultMappingsTask {
 
     public RegularFileProperty getTargetUnpickDefinitionsFile() {
         return targetUnpickDefinitionsFile;
+    }
+
+    public RegularFileProperty getTargetUnpickRemappedDefinitionsFile() {
+        return targetUnpickRemappedDefinitionsFile;
     }
 }

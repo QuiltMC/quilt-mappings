@@ -22,11 +22,7 @@ public class MapNamedJarTask extends MapJarTask {
     }
 
     public Map<String, String> getAdditionalMappings() {
-        return Map.of(
-                "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
-                "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
-                "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
-        );
+        return JAVAX_TO_JETBRAINS;
     }
 }
 

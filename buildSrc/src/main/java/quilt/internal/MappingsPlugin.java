@@ -74,8 +74,8 @@ public class MappingsPlugin implements Plugin<Project> {
 
         tasks.create(CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class);
         tasks.create(DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class);
-        tasks.create(RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class);
         tasks.create(CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class);
+        tasks.create(RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {

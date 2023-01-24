@@ -11,6 +11,11 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JarRemapper;
 
 public abstract class MapJarTask extends DefaultMappingsTask {
+    public static final Map<String, String> JAVAX_TO_JETBRAINS = Map.of(
+            "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
+            "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
+            "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
+    );
     @InputFile
     protected final RegularFileProperty inputJar;
 

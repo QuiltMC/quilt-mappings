@@ -95,6 +95,7 @@ import quilt.internal.tasks.build.TransformJarClassesTask
 import quilt.internal.tasks.decompile.DecompileTask
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
+import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
 import quilt.internal.util.MappingsJavadocProvider
 
@@ -298,12 +299,23 @@ task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	}
 }
 
-task unpickTargetJar(type: UnpickJarTask) {
-	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries"
+task remapTargetUnpickDefinitions(type: RemapUnpickDefinitionsTask) {
+	dependsOn "checkUnpickVersionsMatch", "downloadTargetMappingsJar"
+	output.set downloadTargetMappingsJar.targetUnpickRemappedDefinitionsFile
+	mappings.set downloadTargetMappingsJar.targetMappingsFile
+	input.set downloadTargetMappingsJar.targetUnpickDefinitionsFile
 
-	inputFile.set remapTargetMinecraftJar.outputJar
-	outputFile.set file(Constants.MINECRAFT_VERSION + "-target-named.jar")
-	unpickDefinition.set downloadTargetMappingsJar.targetUnpickDefinitionsFile
+	onlyIf {
+		checkUnpickVersionsMatch.match
+	}
+}
+
+task unpickTargetJar(type: UnpickJarTask) {
+	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries", "remapTargetUnpickDefinitions"
+
+	inputFile.set mappings.fileConstants.perVersionMappingsJar
+	outputFile.set remapTargetMinecraftJar.inputJar
+	unpickDefinition.set remapTargetUnpickDefinitions.output
 	unpickConstantsJar.set downloadTargetMappingsJar.targetUnpickConstantsFile
 
 	onlyIf {
@@ -311,8 +323,8 @@ task unpickTargetJar(type: UnpickJarTask) {
 	}
 }
 
-task decompileTargetQuiltflower(type: DecompileTask, dependsOn: [unpickTargetJar]) {
-	input.set unpickTargetJar.outputFile
+task decompileTargetQuiltflower(type: DecompileTask, dependsOn: [remapTargetMinecraftJar]) {
+	input.set remapTargetMinecraftJar.outputJar
 	output.set file("namedTargetSrc")
 	decompiler = Decompilers.QUILTFLOWER
 	libraries = configurations.decompileClasspath
