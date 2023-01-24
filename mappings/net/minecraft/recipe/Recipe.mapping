@@ -14,11 +14,11 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		COMMENT {@return the serializer associated with this recipe}
 	METHOD m_ecyxgagp (Lnet/minecraft/unmapped/C_tcpsydrv;)Z
 		ARG 0 ingredient
-	METHOD m_edscftkq getOutput ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_edscftkq getOutput (Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT {@return a preview of the recipe's output}
 		COMMENT
 		COMMENT <p>The returned stack should not be modified. To obtain the actual output,
-		COMMENT call {@link #craft(Inventory)}.
+		COMMENT call {@link #craft(Inventory, DynamicRegistryManager)}.
 	METHOD m_eyyxmyfx getId ()Lnet/minecraft/unmapped/C_ncpywfca;
 		COMMENT {@return the ID of this recipe}
 	METHOD m_jjsxdttb matches (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Z
@@ -62,7 +62,7 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 	METHOD m_qzlhmcik isEmpty ()Z
 		COMMENT {@return whether this recipe has no ingredient or has any empty ingredient}
 		COMMENT The recipe book uses this to ignore recipes for display.
-	METHOD m_tikgmnde craft (Lnet/minecraft/unmapped/C_pjtstjoq;)Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_tikgmnde craft (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT Crafts this recipe.
 		COMMENT
 		COMMENT <p>This method does not perform side effects on the {@code inventory}.
@@ -86,6 +86,6 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		COMMENT cell in the grid of recipes. If the string is empty, this recipe will
 		COMMENT belong to its own cell.
 	METHOD m_vcxbjggo createIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
-		COMMENT {@return an item rendered on the top left of the {@linkplain #getOutput()
+		COMMENT {@return an item rendered on the top left of the {@linkplain #getOutput(DynamicRegistryManager)
 		COMMENT output preview} on the recipe toast when a new recipe is unlocked} This
 		COMMENT can be interpreted as a catalyst for the recipe.
