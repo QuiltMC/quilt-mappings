@@ -41,7 +41,7 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
 
     public AbstractTinyMergeTask(String outputMappings, String mergeName, String fillName) {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        this.outputMappings = new File(fileConstants.tempDir, outputMappings);
+        this.outputMappings = new File(fileConstants.buildDir, outputMappings);
         getOutputs().file(this.outputMappings);
 
         input = getProject().getObjects().fileProperty();
