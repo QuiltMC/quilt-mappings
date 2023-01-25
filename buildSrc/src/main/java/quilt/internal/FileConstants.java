@@ -5,6 +5,7 @@ import java.io.File;
 import org.gradle.api.Project;
 
 public class FileConstants {
+    public final File buildDir;
     public final File cacheFilesMinecraft;
     public final File tempDir;
     public final File perVersionMappingsJar;
@@ -20,6 +21,7 @@ public class FileConstants {
     public final File unpickGlStateManagerDefinitions;
 
     public FileConstants(Project project) {
+        buildDir = project.file("build/mappings");
         cacheFilesMinecraft = project.file(".gradle/minecraft");
         tempDir = project.file(".gradle/temp");
         libraries = new File(cacheFilesMinecraft, "libraries");
