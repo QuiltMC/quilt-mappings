@@ -1,0 +1,15 @@
+name: 'Diff Uploader'
+description: 'Creates a diff between the decompiled Minecraft code of the commit and the latest Quilt Mappings version'
+inputs:
+  github-token:
+    description: 'Github Token'
+    required: true
+  target-src-exists:
+    description: 'If the diff file was generated'
+    required: true
+outputs:
+  result:
+    description: 'Result of the action'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
