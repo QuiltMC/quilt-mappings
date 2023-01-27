@@ -2,6 +2,7 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 	FIELD f_dutzqtyc cachedTabStacks Ljava/util/Collection;
 	FIELD f_eftpytbk icon Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_fhtvcyky cachedSearchStacks Ljava/util/Set;
+	FIELD f_ikvkywiu searchProviderReloader Ljava/util/function/Consumer;
 	FIELD f_kbcibzam iconSupplier Ljava/util/function/Supplier;
 	FIELD f_lghehufb entrySupplier Lnet/minecraft/unmapped/C_lnokcayd$C_lbxcoexd;
 	FIELD f_lyhrvuvn column I
@@ -21,6 +22,7 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		ARG 6 entrySupplier
 	METHOD m_bvcnuvet isSpecial ()Z
 	METHOD m_bwauoqmb searchContains (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 stack
 	METHOD m_dnbejvnn hasScrollbar ()Z
 	METHOD m_dripfdrf builder (Lnet/minecraft/unmapped/C_lnokcayd$C_qwchbyug;I)Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
 		ARG 0 location
@@ -30,6 +32,7 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		COMMENT
 		COMMENT <p>The name is rendered below the top row of item groups and above the inventory.
 	METHOD m_nsgpxdxb getOrInitSearchStacks ()Ljava/util/Collection;
+	METHOD m_obadijvu reloadSearchProvider ()V
 	METHOD m_oibnkrxg getType ()Lnet/minecraft/unmapped/C_lnokcayd$C_ouweheor;
 	METHOD m_owwocajc shouldDisplay ()Z
 	METHOD m_oxvpyaqs getTexture ()Ljava/lang/String;
@@ -42,6 +45,8 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 	METHOD m_tcbipafs getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_tpgpleic getLocation ()Lnet/minecraft/unmapped/C_lnokcayd$C_qwchbyug;
 	METHOD m_uprbbsoi getIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_xdrljsld setSearchProviderReloader (Ljava/util/function/Consumer;)V
+		ARG 1 reloader
 	CLASS C_ggmpmosl Builder
 		FIELD f_bnicdaud name Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_dawilwid special Z
@@ -85,7 +90,9 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		FIELD f_alfldgtl enabledFeatures Lnet/minecraft/unmapped/C_czxxrbcp;
 		FIELD f_ewkqlato searchStacks Ljava/util/Set;
 		FIELD f_gynphoyu tabStacks Ljava/util/Collection;
+		FIELD f_tufxymik group Lnet/minecraft/unmapped/C_lnokcayd;
 		METHOD <init> (Lnet/minecraft/unmapped/C_lnokcayd;Lnet/minecraft/unmapped/C_czxxrbcp;)V
+			ARG 1 group
 			ARG 2 enabledFeatures
 	CLASS C_qwchbyug VerticalPosition
 	CLASS C_tndlmady Visibility
