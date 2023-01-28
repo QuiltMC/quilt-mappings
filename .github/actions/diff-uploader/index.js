@@ -34,7 +34,6 @@ async function main() {
         //     });
         // }
     }
-    
     if (!targetSrcExists) {
         await comment(`No diff file generated.`);
         core.setOutput("result", "skip");
