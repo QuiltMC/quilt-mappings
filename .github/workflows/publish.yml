@@ -38,9 +38,10 @@ jobs:
           SNAPSHOTS_USERNAME: ${{ secrets.SNAPSHOTS_USERNAME }}
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
-      - name: Refresh Meta
-        uses: fjogeleit/http-request-action@master
+
+      - name: Update Quilt Meta
+        uses: quiltmc/update-quilt-meta@main
         with:
-          url: ${{ secrets.META_UPDATE_URL }}
-          method: 'GET'
-          preventFailureOnNoResponse: true
+          b2-key-id: ${{ secrets.META_B2_KEY_ID }}
+          b2-key: ${{ secrets.META_B2_KEY }}
+          cf-key: ${{ secrets.META_CF_KEY }}
