@@ -14,7 +14,7 @@ async function main() {
         return console.log(comment);
     }
 
-    const targetSrcExists = core.getInput('target-src-exists', {required: true}) === "true";
+    const targetSrcExists = core.getInput('target-src-exists', {required: true}) == 'true';
 
     if (context.eventName === "push") {
         comment = async function (comment) {
@@ -34,7 +34,6 @@ async function main() {
         //     });
         // }
     }
-
     if (!targetSrcExists) {
         await comment(`No diff file generated.`);
         core.setOutput("result", "skip");

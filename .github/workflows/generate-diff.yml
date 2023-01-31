@@ -1,0 +1,43 @@
+name: Generate Diff
+on: [push]
+jobs:
+  diff:
+    strategy:
+      matrix:
+        java: [17]
+    runs-on: ubuntu-latest
+    container:
+      image: eclipse-temurin:${{ matrix.java }}
+      options: --user root
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: temurin
+      - uses: gradle/wrapper-validation-action@v1
+      - run: ./gradlew decompileQuiltflower decompileTargetQuiltflower --stacktrace
+        if: ${{ matrix.java == 17 }}
+      - name: Check Target Decompiled
+        id: can-create-diff
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "namedTargetSrc/net/minecraft/client/main/Main.java"
+      - name: Create diff
+        if: ${{ steps.can-create-diff.outputs.files_exists == 'true' }}
+        run: diff -bur namedTargetSrc/ namedSrc/ > target.diff
+        continue-on-error: true
+      - name: Create diff comment
+        uses: ./.github/actions/diff-uploader/
+        if: ${{ matrix.java == 17 }}
+        id: diff-uploader
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          target-src-exists: ${{ steps.can-create-diff.outputs.files_exists }}
+      - name: Upload diff
+        if: steps.diff-uploader.outputs.result == 'success'
+        uses: actions/upload-artifact@v3
+        with:
+          name: Diff
+          path: target.diff
