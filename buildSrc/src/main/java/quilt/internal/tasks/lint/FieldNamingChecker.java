@@ -38,7 +38,8 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
             }
         } else {
             if (startsWithUppercase(mapping.targetName())) {
-                errorReporter.warning("non-static or non-final field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
+                String error = access.isFinal() ? "non-static" : "non-final";
+                errorReporter.warning(error + " field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
             }
         }
     }
