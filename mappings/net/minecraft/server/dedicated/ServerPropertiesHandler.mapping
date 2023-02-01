@@ -24,6 +24,7 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 	FIELD f_noiykogp spawnProtection I
 	FIELD f_obbgjkxk enableStatus Z
 	FIELD f_oczjtzol opPermissionLevel I
+	FIELD f_onvodlrv worldGenerationProperties Lnet/minecraft/unmapped/C_kefepfwh$C_fjprapmv;
 	FIELD f_oqrkpyaw hideOnlinePlayers Z
 	FIELD f_pdkbvwea maxChainedNeighborUpdates I
 	FIELD f_pdzdrdnr serverResourcePackProperties Ljava/util/Optional;
@@ -38,7 +39,9 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 	FIELD f_tinjdiwe viewDistance I
 	FIELD f_tnawxafn enableQuery Z
 	FIELD f_utivltbi entityBroadcastRangePercentage I
+	FIELD f_uuxumvvk COMMA_SPLITTER Lcom/google/common/base/Splitter;
 	FIELD f_vikmfnii maxTickTime J
+	FIELD f_vjgfkxin dataPackSettings Lnet/minecraft/unmapped/C_tjllhmjy;
 	FIELD f_vyudbylb enableJmxMonitoring Z
 	FIELD f_wbvgudte simulationDistance I
 	FIELD f_xpekumsb pvp Z
@@ -49,12 +52,17 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 	FIELD f_yuowuapf hardcore Z
 	FIELD f_zfgropea enableRcon Z
 	FIELD f_zxeilkts difficulty Lnet/minecraft/unmapped/C_mpbjgxic;
+	METHOD m_aokpjpts parseDataPackSettings (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_tjllhmjy;
+		ARG 0 enabledSettings
+		ARG 1 disabledSettings
 	METHOD m_gzwrofvx getServerResourcePackProperties (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)Ljava/util/Optional;
 		ARG 0 url
 		ARG 1 hash
 		ARG 2 sha1
 		ARG 3 isRequired
 		ARG 4 prompt
+	METHOD m_htlumhiu parseFeatureFlags (Ljava/lang/String;)Lnet/minecraft/unmapped/C_czxxrbcp;
+		ARG 0 featureFlagIdentifiers
 	METHOD m_moewmdkm (Ljava/lang/Integer;)Ljava/lang/Integer;
 		ARG 0 maxWorldSize
 	METHOD m_ninkryga (Ljava/lang/String;)Ljava/lang/String;
@@ -67,3 +75,12 @@ CLASS net/minecraft/unmapped/C_kefepfwh net/minecraft/server/dedicated/ServerPro
 		ARG 0 generatorSettings
 	METHOD m_vcawwowm load (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_kefepfwh;
 		ARG 0 path
+	CLASS C_fjprapmv WorldGenerationProperties
+		FIELD f_aihkuvpj generatorSettings Lcom/google/gson/JsonObject;
+		FIELD f_ccusfnyi GENERATOR_TYPE_IDS Ljava/util/Map;
+		FIELD f_rnfidtgc generatorTypeId Ljava/lang/String;
+		METHOD <init> (Lcom/google/gson/JsonObject;Ljava/lang/String;)V
+			ARG 1 generatorSettings
+			ARG 2 generatorTypeId
+		METHOD m_epgkkqdx generatorSettings ()Lcom/google/gson/JsonObject;
+		METHOD m_ixwmuwdq generatorTypeId ()Ljava/lang/String;
