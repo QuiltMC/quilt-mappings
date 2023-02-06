@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvider
 	FIELD f_dkgabfry recipesPathResolver Lnet/minecraft/unmapped/C_ugkmwocs$C_ehniswvc;
 	FIELD f_gkpbaybx advancementsPathResolver Lnet/minecraft/unmapped/C_ugkmwocs$C_ehniswvc;
+	FIELD f_ysgqrakl VARIANT_FACTORIES Ljava/util/Map;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ugkmwocs;)V
 		ARG 1 output
 	METHOD m_acjyothp generateFamily (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_eonlnchv;)V
@@ -22,6 +23,12 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 		ARG 0 exporter
 		ARG 1 output
 		ARG 2 input
+	METHOD m_budigbew offerStonecuttingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;I)V
+		ARG 0 exporter
+		ARG 1 category
+		ARG 2 input
+		ARG 3 output
+		ARG 4 count
 	METHOD m_bwychucx getItemPath (Lnet/minecraft/unmapped/C_gmbqjnle;)Ljava/lang/String;
 		ARG 0 item
 	METHOD m_bzlprwaa offerTerracottaDyeingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
@@ -46,19 +53,46 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 	METHOD m_cxupxdin offerNetheriteUpgradeRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_vorddnax;)V
 		ARG 0 exporter
 		ARG 1 output
+		ARG 2 category
 		ARG 3 input
+	METHOD m_emthpsqy offerReversibleCompactingRecipes (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 exporter
+		ARG 1 baseCategory
+		ARG 2 baseItem
+		ARG 3 compactCategory
+		ARG 4 compactItem
+		ARG 5 compactId
+		ARG 6 compactGroup
+		ARG 7 baseId
+		ARG 8 baseGroup
 	METHOD m_eombplgf offerBannerRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
 		ARG 0 exporter
 		ARG 1 output
 		ARG 2 input
+	METHOD m_fbjadmad offerReversibleCompactingRecipes (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;)V
+		ARG 0 exporter
+		ARG 1 baseCategory
+		ARG 2 baseItem
+		ARG 3 compactCategory
+		ARG 4 compactItem
 	METHOD m_fdhhixrs offerPlanksRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_ednuhnnn;I)V
 		ARG 0 exporter
 		ARG 1 output
 		ARG 2 ingredientTag
 		ARG 3 outputCount
+	METHOD m_fjndvsgp (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
+		ARG 0 output
+		ARG 1 input
+	METHOD m_fwsvwjki (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
+		ARG 0 output
+		ARG 1 input
 	METHOD m_gdnqvign generateRecipes (Ljava/util/function/Consumer;)V
 		ARG 1 exporter
-	METHOD m_gxdbdkxh (Lnet/minecraft/unmapped/C_gmbqjnle;)Ljava/lang/String;
+	METHOD m_gmbjvwxk offerSmithingTemplateCopyingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
+		ARG 0 exporter
+		ARG 1 template
+		ARG 2 resource
+	METHOD m_gxdbdkxh getRecipeName (Lnet/minecraft/unmapped/C_gmbqjnle;)Ljava/lang/String;
 		ARG 0 item
 	METHOD m_gxdqyakv createSignRecipe (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_tcpsydrv;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 output
@@ -76,6 +110,11 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 	METHOD m_hhxbgczj (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 output
 		ARG 1 input
+	METHOD m_himiijil offerLegacyNetheriteUpgradeRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_vorddnax;)V
+		ARG 0 exporter
+		ARG 1 base
+		ARG 2 category
+		ARG 3 result
 	METHOD m_hkpratmi offerConcretePowderDyeingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
 		ARG 0 exporter
 		ARG 1 output
@@ -102,7 +141,9 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 		ARG 1 input
 	METHOD m_idfqbypq offerReversibleCompactingRecipesWithCompactedItemGroup (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Ljava/lang/String;Ljava/lang/String;)V
 		ARG 0 exporter
+		ARG 1 baseCategory
 		ARG 2 compacted
+		ARG 3 compactCategory
 		ARG 4 input
 		ARG 5 compactedItemId
 		ARG 6 compactedItemGroup
@@ -111,7 +152,9 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 		ARG 1 input
 	METHOD m_jgwzllup offerReversibleCompactingRecipesWithInputItemGroup (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Ljava/lang/String;Ljava/lang/String;)V
 		ARG 0 exporter
+		ARG 1 baseCategory
 		ARG 2 input
+		ARG 3 compactCategory
 		ARG 4 compacted
 		ARG 5 inputItemId
 		ARG 6 inputItemGroup
@@ -142,6 +185,9 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 	METHOD m_ktbgwdbs convertBetween (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Ljava/lang/String;
 		ARG 0 from
 		ARG 1 to
+	METHOD m_llhswjzg (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
+		ARG 0 output
+		ARG 1 input
 	METHOD m_lqsnzefz createStairsRecipe (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_tcpsydrv;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 output
 		ARG 1 input
@@ -216,12 +262,25 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 		ARG 0 exporter
 		ARG 1 output
 		ARG 2 input
+	METHOD m_rhqvfhai offerStonecuttingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
+		ARG 0 exporter
+		ARG 1 category
+		ARG 2 input
+		ARG 3 output
 	METHOD m_rioocmvv requireEnteringFluid (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_rvwlswnk$C_fcmyqfbr;
 		ARG 0 block
 	METHOD m_rlhnvyqd offerWaxingRecipes (Ljava/util/function/Consumer;)V
 		ARG 0 exporter
+	METHOD m_rocelnfm offerSmithingTemplateCopyingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_ednuhnnn;)V
+		ARG 0 exporter
+		ARG 1 template
+		ARG 2 resource
+	METHOD m_rtgvxiag (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
+		ARG 0 ouput
+		ARG 1 input
 	METHOD m_swubibgw generateFamilies (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_czxxrbcp;)V
 		ARG 0 exporter
+		ARG 1 featureFlags
 	METHOD m_sxoobkcl (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 output
 		ARG 1 input
@@ -248,6 +307,12 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 		ARG 2 input
 	METHOD m_uvcwjlge (Ljava/util/Set;Ljava/util/List;Lnet/minecraft/unmapped/C_temnquoh;Lnet/minecraft/unmapped/C_qoyuyccf;)V
 		ARG 4 recipe
+	METHOD m_vjjqftpg offerCompactingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;Ljava/lang/String;)V
+		ARG 0 exporter
+		ARG 1 category
+		ARG 2 output
+		ARG 3 input
+		ARG 4 criterionName
 	METHOD m_vpbwsauu offerHangingSignRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
 		ARG 0 exporter
 		ARG 1 output
@@ -263,10 +328,17 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 	METHOD m_waugninb (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 output
 		ARG 1 input
+	METHOD m_wdnyqqas offerTrimSmithingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_vorddnax;)V
+		ARG 0 exporter
+		ARG 1 template
 	METHOD m_wdrevrny createPressurePlateRecipe (Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_tcpsydrv;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 category
 		ARG 1 output
 		ARG 2 input
+	METHOD m_whnryawf saveAdvancement (Lnet/minecraft/unmapped/C_temnquoh;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 writer
+		ARG 2 id
+		ARG 3 advancementTask
 	METHOD m_wjjrsouu createFenceRecipe (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_tcpsydrv;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 output
 		ARG 1 input
@@ -281,9 +353,16 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 	METHOD m_wwtytbho (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_ybcoihxg;
 		ARG 0 output
 		ARG 1 input
+	METHOD m_wyltehpy offerTwoByTwoCompactingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
+		ARG 0 exporter
+		ARG 1 category
+		ARG 2 output
+		ARG 3 input
 	METHOD m_xguoubos offerMultipleOptions (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_xfxrkzjt;Ljava/util/List;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;FILjava/lang/String;Ljava/lang/String;)V
 		ARG 0 exporter
+		ARG 1 serializer
 		ARG 2 inputs
+		ARG 3 category
 		ARG 4 output
 		ARG 5 experience
 		ARG 6 cookingTime
@@ -293,6 +372,11 @@ CLASS net/minecraft/unmapped/C_hwlnmobw net/minecraft/data/server/RecipesProvide
 		ARG 0 output
 		ARG 1 input
 	METHOD m_ycyoipzi offerSlabRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
+		ARG 0 exporter
+		ARG 1 category
+		ARG 2 output
+		ARG 3 input
+	METHOD m_yoexvbcg offerCompactingRecipe (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_ehjomvtz;Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_gmbqjnle;)V
 		ARG 0 exporter
 		ARG 1 category
 		ARG 2 output
