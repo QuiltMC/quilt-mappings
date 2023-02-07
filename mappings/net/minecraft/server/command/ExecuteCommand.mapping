@@ -5,15 +5,22 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	FIELD f_tqpfgfbv MAX_BLOCKS I
 	FIELD f_uaposjsm BINARY_RESULT_CONSUMER Ljava/util/function/BinaryOperator;
 	FIELD f_ymyzptua BLOCKS_TOO_BIG_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
+	METHOD m_asrrcuvx (Ljava/lang/Integer;Ljava/lang/Integer;)Z
+		ARG 0 target
+		ARG 1 source
 	METHOD m_atedeeqs (ZZLcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 2 context
 	METHOD m_bdfuvckm (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
+		ARG 2 context
+	METHOD m_bdystdjq (ZLnet/minecraft/unmapped/C_advrsyux$C_mxgpijan;Lcom/mojang/brigadier/context/CommandContext;)I
 		ARG 2 context
 	METHOD m_cekuvydj testScoreMatch (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;)Z
 		ARG 0 context
 		ARG 1 range
 	METHOD m_cfeeejyv (Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 0 context
+	METHOD m_cjksvsie (Lcom/mojang/brigadier/tree/CommandNode;ZLnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+		ARG 3 builder
 	METHOD m_clwngbmy executeStoreScore (Lnet/minecraft/unmapped/C_pennblrk;Ljava/util/Collection;Lnet/minecraft/unmapped/C_tlhwodcf;Z)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 0 source
 		ARG 1 targets
@@ -21,10 +28,19 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 3 requestResult
 	METHOD m_cpoefjmm (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 2 context
+	METHOD m_czlrsyyb (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/Optional;
+		ARG 0 entity
+	METHOD m_degcedll isLoaded (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+	METHOD m_dfcbplln (ZLnet/minecraft/unmapped/C_advrsyux$C_mxgpijan;Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 2 context
 	METHOD m_dqlgxiqs (Lcom/mojang/brigadier/context/CommandContext;)Z
 		ARG 0 context
 	METHOD m_eahasdsy (Lcom/mojang/brigadier/tree/LiteralCommandNode;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 3 builder
+	METHOD m_ehqladqs (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 entity
+	METHOD m_ejolguwo (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/stream/Stream;
+		ARG 0 entity
 	METHOD m_ekyoxpeq (Lcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 0 context
 	METHOD m_eogfpnln (Ljava/util/Collection;Lnet/minecraft/unmapped/C_ymwyplge;Lnet/minecraft/unmapped/C_tlhwodcf;ZLcom/mojang/brigadier/context/CommandContext;ZI)V
@@ -36,8 +52,21 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	METHOD m_ewvcyhgj testBlocksCondition (Lcom/mojang/brigadier/context/CommandContext;Z)Ljava/util/OptionalInt;
 		ARG 0 context
 		ARG 1 masked
+	METHOD m_eydakttu (Lcom/mojang/brigadier/context/CommandContext;)Z
+		ARG 0 cotext
+	METHOD m_fahrgohm expandOneToOneEntityRelation (Ljava/util/function/Function;)Lcom/mojang/brigadier/RedirectModifier;
+		ARG 0 expander
 	METHOD m_fluswpsr (Lcom/mojang/brigadier/context/CommandContext;)Z
 		ARG 0 context
+	METHOD m_fylsgisa (ZLcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
+	METHOD m_fyolitny createRelations (Lcom/mojang/brigadier/tree/CommandNode;Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;
+		ARG 0 node
+		ARG 1 builder
+	METHOD m_glxogmyk (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/Optional;
+		ARG 0 entity
+	METHOD m_gnreocnu (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/Optional;
+		ARG 0 entity
 	METHOD m_gujhdlxt (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 2 context
 	METHOD m_gynapbbg (Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
@@ -46,6 +75,10 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 0 context
 	METHOD m_hdzajyhq (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 count
+	METHOD m_hfnhhzms (Lcom/mojang/brigadier/context/CommandContext;)Z
+		ARG 0 context
+	METHOD m_hjlznhxw (ZLnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 2 context
 	METHOD m_hljxncru getSourceOrEmptyForConditionFork (Lcom/mojang/brigadier/context/CommandContext;ZZ)Ljava/util/Collection;
 		ARG 0 context
 		ARG 1 positive
@@ -54,6 +87,8 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 0 context
 		ARG 1 masked
 	METHOD m_hzsmzlxd (Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 0 context
+	METHOD m_iaqiliek (Lcom/mojang/brigadier/context/CommandContext;)Z
 		ARG 0 context
 	METHOD m_isbusmrp (Lcom/mojang/brigadier/context/CommandContext;I)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 result
@@ -64,6 +99,13 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	METHOD m_jxinubkg getExistsConditionExecute (ZLnet/minecraft/unmapped/C_advrsyux$C_teviyeeu;)Lcom/mojang/brigadier/Command;
 		ARG 0 positive
 		ARG 1 condition
+	METHOD m_kqzfbprn (Lnet/minecraft/unmapped/C_advrsyux$C_teviyeeu;Lcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
+	METHOD m_laqjpwwi (Ljava/lang/Integer;Ljava/lang/Integer;)Z
+		ARG 0 target
+		ARG 1 source
+	METHOD m_lasfcqte (Lcom/mojang/brigadier/context/CommandContext;)Z
+		ARG 0 context
 	METHOD m_lctwntnf addStoreArguments (Lcom/mojang/brigadier/tree/LiteralCommandNode;Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;Z)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 0 node
 		ARG 1 builder
@@ -72,8 +114,13 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 2 context
 	METHOD m_lgafzwvm (Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 0 context
+	METHOD m_lkhudbpr (Ljava/lang/Integer;Ljava/lang/Integer;)Z
+		ARG 0 target
+		ARG 1 source
 	METHOD m_lofylsrb (Lcom/mojang/brigadier/context/CommandContext;I)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 result
+	METHOD m_mabkftgr (Lcom/mojang/brigadier/context/CommandContext;)Z
+		ARG 0 context
 	METHOD m_nkegmmdn (Lcom/mojang/brigadier/context/CommandContext;I)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 result
 	METHOD m_nycppkkx (ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
@@ -89,6 +136,10 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 3 requestResult
 	METHOD m_piswmnbb (Lcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 0 context
+	METHOD m_ppizvhrm (Lnet/minecraft/unmapped/C_hhiwwgvm;ZLnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;Ljava/util/function/IntFunction;Lcom/mojang/brigadier/context/CommandContext;ZI)V
+		ARG 4 context
+		ARG 5 success
+		ARG 6 result
 	METHOD m_ppumvynt executeStoreData (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_hhiwwgvm;Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;Ljava/util/function/IntFunction;Z)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 0 source
 		ARG 1 object
@@ -110,11 +161,18 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 1 path
 	METHOD m_qpsiqnjj (Lcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 0 context
+	METHOD m_rbhhwyei (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 entity
 	METHOD m_revozynr (Lcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 0 context
+	METHOD m_rgdreomr (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/Optional;
+		ARG 0 entity
 	METHOD m_rlpdhule testScoreCondition (Lcom/mojang/brigadier/context/CommandContext;Ljava/util/function/BiPredicate;)Z
 		ARG 0 context
 		ARG 1 condition
+	METHOD m_rlxeuyly (Ljava/lang/Integer;Ljava/lang/Integer;)Z
+		ARG 0 target
+		ARG 1 source
 	METHOD m_rrqgqlug (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 2 context
 	METHOD m_rykvtrtd (Lcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
@@ -122,6 +180,10 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	METHOD m_rzlqldmb (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 maxCount
 		ARG 1 count
+	METHOD m_scywyikk expandOneToManyEntityRelation (Ljava/util/function/Function;)Lcom/mojang/brigadier/RedirectModifier;
+		ARG 0 expander
+	METHOD m_sgmkmxdb (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/Optional;
+		ARG 0 entity
 	METHOD m_sueozppr (ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 1 context
 	METHOD m_tunvxmxx addConditionLogic (Lcom/mojang/brigadier/tree/CommandNode;Lcom/mojang/brigadier/builder/ArgumentBuilder;ZLnet/minecraft/unmapped/C_advrsyux$C_mxgpijan;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
@@ -143,15 +205,30 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 2 context
 		ARG 3 success
 		ARG 4 result
+	METHOD m_usgeappx (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/Optional;
+		ARG 0 entity
 	METHOD m_uuzvpufi executeNegativeBlockCondition (Lcom/mojang/brigadier/context/CommandContext;Z)I
 		ARG 0 context
 		ARG 1 masked
+	METHOD m_wdkmubpo (Lcom/mojang/brigadier/context/CommandContext;)Z
+		ARG 0 context
+	METHOD m_wkmnggae (Ljava/util/function/Function;Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 1 context
 	METHOD m_wnfostga (ZLcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 1 context
 	METHOD m_wnxzuifz (Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 0 context
+	METHOD m_wwqcooxp (Lcom/mojang/brigadier/ResultConsumer;Lcom/mojang/brigadier/ResultConsumer;)Lcom/mojang/brigadier/ResultConsumer;
+		ARG 0 consumerOne
+		ARG 1 consumerTwo
+	METHOD m_wzndgqqv (Lnet/minecraft/unmapped/C_advrsyux$C_teviyeeu;Lcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
+	METHOD m_xkxewyto (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_astfners;)Ljava/util/List;
+		ARG 1 entity
 	METHOD m_xyqwjxeb (ZLcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
 		ARG 1 context
+	METHOD m_xzyoovea (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/Optional;
+		ARG 0 entity
 	METHOD m_yipcxrua addBlocksConditionLogic (Lcom/mojang/brigadier/tree/CommandNode;Lcom/mojang/brigadier/builder/ArgumentBuilder;ZZ)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 0 root
 		ARG 1 builder
@@ -159,6 +236,8 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 		ARG 3 masked
 	METHOD m_ylmszxgv (Lnet/minecraft/unmapped/C_pennblrk;)Z
 		ARG 0 source
+	METHOD m_ysspanqy (Ljava/util/function/Function;Lcom/mojang/brigadier/context/CommandContext;)Ljava/util/Collection;
+		ARG 1 context
 	METHOD m_ysucjpdv (Lcom/mojang/brigadier/context/CommandContext;I)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 result
 	METHOD m_yxtjgqvv (Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
@@ -167,10 +246,14 @@ CLASS net/minecraft/unmapped/C_advrsyux net/minecraft/server/command/ExecuteComm
 	METHOD m_zbrsbxph testLootCondition (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_vqkczpuv;)Z
 		ARG 0 source
 		ARG 1 condition
+	METHOD m_zgjdkhfs (ZLcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
 	METHOD m_zpmkfkps (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;ZLcom/mojang/brigadier/context/CommandContext;)Lnet/minecraft/unmapped/C_pennblrk;
 		ARG 2 context
 	METHOD m_zvkacreh (Lcom/mojang/brigadier/context/CommandContext;)Z
 		ARG 0 context
+	METHOD m_zzyhdxke (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
 	CLASS C_mxgpijan Condition
 		METHOD test test (Lcom/mojang/brigadier/context/CommandContext;)Z
 			ARG 1 context
