@@ -234,18 +234,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 10 velocityX
 		ARG 12 velocityY
 		ARG 14 velocityZ
-	METHOD m_jqqaldjk drawBox (Lnet/minecraft/unmapped/C_nxnqmnng;DDDDDDFFFF)V
-		ARG 0 buffer
-		ARG 1 x1
-		ARG 3 y1
-		ARG 5 z1
-		ARG 7 x2
-		ARG 9 y2
-		ARG 11 z2
-		ARG 13 red
-		ARG 14 green
-		ARG 15 blue
-		ARG 16 alpha
 	METHOD m_jrnetmpf drawBox (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_hbcjzgoe;FFFF)V
 		COMMENT Draws a box.
 		COMMENT
@@ -268,9 +256,9 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_khytiwdn setupFrustum (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_vgpupfxx;Lorg/joml/Matrix4f;)V
 		ARG 1 matrices
 		ARG 2 pos
-	METHOD m_kkvlftbz addVertexFromFrustum (Lnet/minecraft/unmapped/C_igthdzux;I)V
+	METHOD m_kkvlftbz addVertexFromFrustum (Lnet/minecraft/unmapped/C_igthdzux;Lorg/joml/Matrix4f;I)V
 		ARG 1 consumer
-		ARG 2 frustumIndex
+		ARG 3 frustumIndex
 	METHOD m_ktaqrmtc getAdjacentChunk (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;
 		ARG 1 pos
 		ARG 2 chunk
@@ -349,8 +337,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 3 updated
 	METHOD m_rxbalurb hasSkyBlockingEffect (Lnet/minecraft/unmapped/C_dcmtgrvm;)Z
 		ARG 1 camera
-	METHOD m_sjsmoguw renderChunkDebugInfo (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
-		ARG 1 camera
+	METHOD m_sjsmoguw renderChunkDebugInfo (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;Lnet/minecraft/unmapped/C_dcmtgrvm;)V
+		ARG 3 camera
 	METHOD m_smzlixyx renderClouds (Lnet/minecraft/unmapped/C_cnszsxvd;Lorg/joml/Matrix4f;FDDD)V
 		ARG 1 matrices
 		ARG 3 tickDelta
@@ -387,15 +375,15 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_wfbjotxb isChunkNearMaxViewDistance (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cifoaixd$C_lcybgaxw;)Z
 		ARG 1 blockPos
 		ARG 2 builtChunk
-	METHOD m_wmezckfg addQuadFromFrustum (Lnet/minecraft/unmapped/C_igthdzux;IIIIIII)V
+	METHOD m_wmezckfg addQuadFromFrustum (Lnet/minecraft/unmapped/C_igthdzux;Lorg/joml/Matrix4f;IIIIIII)V
 		ARG 1 consumer
-		ARG 2 frustumIndex1
-		ARG 3 frustumIndex2
-		ARG 4 frustumIndex3
-		ARG 5 frustumIndex4
-		ARG 6 red
-		ARG 7 green
-		ARG 8 blue
+		ARG 3 frustumIndex1
+		ARG 4 frustumIndex2
+		ARG 5 frustumIndex3
+		ARG 6 frustumIndex4
+		ARG 7 red
+		ARG 8 green
+		ARG 9 blue
 	METHOD m_wrounzjs processGlobalEvent (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 		ARG 1 eventId
 		ARG 2 pos
