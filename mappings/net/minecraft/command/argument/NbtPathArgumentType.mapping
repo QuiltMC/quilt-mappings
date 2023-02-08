@@ -1,7 +1,10 @@
 CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathArgumentType
 	FIELD f_beygqtpy RIGHT_CURLY_BRACKET C
+	FIELD f_boksygkd TOO_DEEP_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_hhbmykal LEFT_SQUARE_BRACKET C
+	FIELD f_lraveldk EXPECTED_LIST_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_olurmfbf EXAMPLES Ljava/util/Collection;
+	FIELD f_pbzniepu INVALID_INDEX_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_rekogewg RIGHT_SQUARE_BRACKET C
 	FIELD f_rmxjciqk LEFT_CURLY_BRACKET C
 	FIELD f_tfixjexb DOUBLE_QUOTE C
@@ -14,6 +17,8 @@ CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathAr
 	METHOD m_lywsfpat nbtPath ()Lnet/minecraft/unmapped/C_xondkbcs;
 	METHOD m_muwfcwxe (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 path
+	METHOD m_poptnltc (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 index
 	METHOD m_qfioycxa readName (Lcom/mojang/brigadier/StringReader;)Ljava/lang/String;
 		ARG 0 reader
 	METHOD m_qrbitsnq isNameCharacter (C)Z
@@ -21,6 +26,10 @@ CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathAr
 	METHOD m_stggwydj readCompoundChildNode (Lcom/mojang/brigadier/StringReader;Ljava/lang/String;)Lnet/minecraft/unmapped/C_xondkbcs$C_blxxczzh;
 		ARG 0 reader
 		ARG 1 name
+	METHOD m_tnmfping (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)Z
+		ARG 1 nbt
+	METHOD m_wabhpryj (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 nbt
 	METHOD m_wbdwwacb getPredicate (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/util/function/Predicate;
 		ARG 0 filter
 	METHOD m_yeakpxtc getNbtPath (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;
@@ -89,18 +98,31 @@ CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathAr
 			ARG 1 node
 		METHOD m_dhocbhvt get (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/List;
 			ARG 1 nbt
+		METHOD m_dqinbnvh insert (ILnet/minecraft/unmapped/C_hhlwcnih;Ljava/util/List;)I
+			ARG 1 index
+			ARG 2 nbt
+			ARG 3 elements
+		METHOD m_giykfbxy estimateDepth ()I
+		METHOD m_hkwropai (Lnet/minecraft/unmapped/C_xondkbcs$C_blxxczzh;Lorg/apache/commons/lang3/mutable/MutableBoolean;Lnet/minecraft/unmapped/C_oivssbvb;Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/lang/Integer;
+			ARG 3 element
 		METHOD m_ispygytt getOrInit (Lnet/minecraft/unmapped/C_oivssbvb;Ljava/util/function/Supplier;)Ljava/util/List;
 			ARG 1 nbt
 			ARG 2 source
 		METHOD m_ixmzihyp forEach (Ljava/util/List;Ljava/util/function/Function;)I
 			ARG 0 elements
 			ARG 1 operation
+		METHOD m_kiiborhv isTooDeep (Lnet/minecraft/unmapped/C_oivssbvb;I)Z
+			ARG 0 nbt
+			ARG 1 length
 		METHOD m_mtzmiylk remove (Lnet/minecraft/unmapped/C_oivssbvb;)I
 			ARG 1 nbt
 		METHOD m_ocgwcqsm count (Lnet/minecraft/unmapped/C_oivssbvb;)I
 			ARG 1 nbt
 		METHOD m_rjtxsqqw getTerminals (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/List;
 			ARG 1 nbt
+		METHOD m_soirungq set (Lnet/minecraft/unmapped/C_oivssbvb;Lnet/minecraft/unmapped/C_oivssbvb;)I
+			ARG 1 original
+			ARG 2 replacement
 		METHOD m_tonabrxr (Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;
 			ARG 0 a
 			ARG 1 b
