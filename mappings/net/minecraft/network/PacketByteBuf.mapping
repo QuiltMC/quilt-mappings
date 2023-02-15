@@ -118,6 +118,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #getVarIntLength(int)
 	FIELD f_rwogtoly MAX_PUBLIC_KEY_HEADER_SIZE I
 	FIELD f_tpvysicg MAX_PUBLIC_KEY_LENGTH I
+	FIELD f_uxuuoakx GSON Lcom/google/gson/Gson;
 	FIELD f_vzwzxjqd DEFAULT_MAX_STRING_LENGTH S
 		COMMENT The default max length of strings {@linkplain #readString() read} or {@linkplain
 		COMMENT #writeString(String) written}. This is also the max length of identifiers
@@ -414,6 +415,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the read bit set
 		COMMENT @see #writeBitSet(BitSet)
+	METHOD m_fbzaxftb writeVector3f (Lorg/joml/Vector3f;)V
+		ARG 1 vector
 	METHOD m_fjcnjxnm readString (I)Ljava/lang/String;
 		COMMENT Reads a string from this buf. A string is represented by a byte array of
 		COMMENT its UTF-8 data. The string can have a maximum length of {@code maxLength}.
@@ -694,6 +697,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readItemStack()
 		ARG 1 stack
 			COMMENT the stack to write
+	METHOD m_qnhmgzcf readQuaternionf ()Lorg/joml/Quaternionf;
 	METHOD m_qpcrbjwf readIntArray (I)[I
 		COMMENT Reads an array of primitive ints from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the var int entries. The array
@@ -846,6 +850,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return the read long array
 		ARG 1 toArray
 			COMMENT the array to reuse
+	METHOD m_uxyhsmzb readVector3f ()Lorg/joml/Vector3f;
 	METHOD m_vihbcqeq readIntList ()Lit/unimi/dsi/fastutil/ints/IntList;
 		COMMENT Reads a list of primitive ints from this buf. The ints are stored as var
 		COMMENT ints, with an extra var int in the beginning indicating the size.
@@ -970,6 +975,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeString(String, int)
 		ARG 1 string
 			COMMENT the string to write
+	METHOD m_zfwwtuvs writeQuaternionf (Lorg/joml/Quaternionf;)V
+		ARG 1 quaternion
 	METHOD m_zlshviwe writeText (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a text to this buf. A text is represented by a JSON string with
 		COMMENT max length {@value #MAX_TEXT_LENGTH}.

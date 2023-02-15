@@ -13,6 +13,8 @@ CLASS net/minecraft/unmapped/C_pyoaoolj net/minecraft/entity/data/DataTracker
 		ARG 1 data
 	METHOD m_jwgormpp isDirty ()Z
 	METHOD m_lnfpmygi copyToFrom (Lnet/minecraft/unmapped/C_pyoaoolj$C_wtgrkbrh;Lnet/minecraft/unmapped/C_pyoaoolj$C_ujwzqgsv;)V
+		ARG 1 entry
+		ARG 2 serializedEntry
 	METHOD m_nlsgrxtb set (Lnet/minecraft/unmapped/C_rinmcaxy;Ljava/lang/Object;)V
 		ARG 1 key
 		ARG 2 value
@@ -29,12 +31,28 @@ CLASS net/minecraft/unmapped/C_pyoaoolj net/minecraft/entity/data/DataTracker
 		ARG 1 dataHandler
 	METHOD m_xntlavme getDirtyEntries ()Ljava/util/List;
 	METHOD m_xswshmup writeUpdatedEntries (Ljava/util/List;)V
-	CLASS C_ujwzqgsv
+		ARG 1 serializedEntries
+	CLASS C_ujwzqgsv SerializedEntry
+		FIELD f_nkiawlyg value Ljava/lang/Object;
+		FIELD f_poyredcq id I
+		FIELD f_qevxtagq serializer Lnet/minecraft/unmapped/C_xrzqxzbg;
+		METHOD m_azqpmayr serializer ()Lnet/minecraft/unmapped/C_xrzqxzbg;
+		METHOD m_fwcqixng id ()I
 		METHOD m_gcwpkycf write (Lnet/minecraft/unmapped/C_idfydwco;)V
 			ARG 1 buf
+		METHOD m_kjpzklcn create (Lnet/minecraft/unmapped/C_rinmcaxy;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_pyoaoolj$C_ujwzqgsv;
+			ARG 0 data
+			ARG 1 value
 		METHOD m_kjsanomb read (Lnet/minecraft/unmapped/C_idfydwco;I)Lnet/minecraft/unmapped/C_pyoaoolj$C_ujwzqgsv;
 			ARG 0 buf
+			ARG 1 id
+		METHOD m_vvgabupm value ()Ljava/lang/Object;
+		METHOD m_zvjcsytt create (Lnet/minecraft/unmapped/C_idfydwco;ILnet/minecraft/unmapped/C_xrzqxzbg;)Lnet/minecraft/unmapped/C_pyoaoolj$C_ujwzqgsv;
+			ARG 0 buf
+			ARG 1 id
+			ARG 2 serializer
 	CLASS C_wtgrkbrh Entry
+		FIELD f_dbulotof originalValue Ljava/lang/Object;
 		FIELD f_eywpgbqk data Lnet/minecraft/unmapped/C_rinmcaxy;
 		FIELD f_jezjfnde value Ljava/lang/Object;
 		FIELD f_rielmbpn dirty Z
@@ -45,6 +63,8 @@ CLASS net/minecraft/unmapped/C_pyoaoolj net/minecraft/entity/data/DataTracker
 			ARG 1 dirty
 		METHOD m_hbfpzwat get ()Ljava/lang/Object;
 		METHOD m_jztfeknb isDirty ()Z
+		METHOD m_xfgmozwd serialize ()Lnet/minecraft/unmapped/C_pyoaoolj$C_ujwzqgsv;
 		METHOD m_xquhhuyr set (Ljava/lang/Object;)V
 			ARG 1 value
+		METHOD m_xstykbyi hasOriginalValue ()Z
 		METHOD m_zulgvogn getData ()Lnet/minecraft/unmapped/C_rinmcaxy;
