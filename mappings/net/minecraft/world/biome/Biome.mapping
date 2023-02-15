@@ -24,6 +24,7 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 	METHOD m_ceymkdve canSetSnow (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 world
 		ARG 2 blockPos
+	METHOD m_cgvmxqgd hasPrecipitation ()Z
 	METHOD m_coxkzefd (Lnet/minecraft/unmapped/C_orlkpefs;)Lnet/minecraft/unmapped/C_rkpddiir;
 		ARG 0 biome
 	METHOD m_djiywayc canSetIce (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;)Z
@@ -43,6 +44,7 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 		ARG 1 x
 		ARG 3 z
 	METHOD m_jaxultdc getAdditionsSound ()Ljava/util/Optional;
+	METHOD m_kfrabqcq getPrecipitationAt (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_orlkpefs$C_xwlyzxea;
 	METHOD m_kspyocvf getGenerationSettings ()Lnet/minecraft/unmapped/C_qbjpvmph;
 	METHOD m_ktofobbo getTemperature ()F
 	METHOD m_lmfmdeyy isColdEnoughToSnow (Lnet/minecraft/unmapped/C_hynzadkk;)Z
@@ -69,6 +71,7 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 	CLASS C_eraitncf Weather
 		FIELD f_bkgvvuhz CODEC Lcom/mojang/serialization/MapCodec;
 		FIELD f_hojnlkhr downfall F
+		FIELD f_pbyqgiaa hasPrecipitation Z
 		FIELD f_ucrjjdgt temperature F
 		FIELD f_znocwrog temperatureModifier Lnet/minecraft/unmapped/C_orlkpefs$C_uiiysowk;
 		METHOD m_azzuijhf (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
@@ -81,12 +84,14 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 			ARG 0 weather
 		METHOD m_vfgftyxa (Lnet/minecraft/unmapped/C_orlkpefs$C_eraitncf;)Ljava/lang/Boolean;
 			ARG 0 weather
+		METHOD m_zcmhcrjq hasPrecipitation ()Z
 	CLASS C_nqioeqhs Builder
 		FIELD f_auenpqmk specialEffects Lnet/minecraft/unmapped/C_rkpddiir;
 		FIELD f_emnmolqi temperature Ljava/lang/Float;
 		FIELD f_gfkbncjk downfall Ljava/lang/Float;
 		FIELD f_ncfcnefw temperatureModifier Lnet/minecraft/unmapped/C_orlkpefs$C_uiiysowk;
 		FIELD f_ofhnahow spawnSettings Lnet/minecraft/unmapped/C_ypgfhxmz;
+		FIELD f_tmlmeywy hasPrecipitation Z
 		FIELD f_zeqbkvik generationSettings Lnet/minecraft/unmapped/C_qbjpvmph;
 		METHOD m_agzlcxlu spawnSettings (Lnet/minecraft/unmapped/C_ypgfhxmz;)Lnet/minecraft/unmapped/C_orlkpefs$C_nqioeqhs;
 			ARG 1 spawnSettings
@@ -95,6 +100,8 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 		METHOD m_hhtkyjsd generationSettings (Lnet/minecraft/unmapped/C_qbjpvmph;)Lnet/minecraft/unmapped/C_orlkpefs$C_nqioeqhs;
 			ARG 1 generationSettings
 		METHOD m_jgkpgvao build ()Lnet/minecraft/unmapped/C_orlkpefs;
+		METHOD m_ummwpslu hasPrecipitation (Z)Lnet/minecraft/unmapped/C_orlkpefs$C_nqioeqhs;
+			ARG 1 hasPrecipitation
 		METHOD m_yhqkxwen temperatureModifier (Lnet/minecraft/unmapped/C_orlkpefs$C_uiiysowk;)Lnet/minecraft/unmapped/C_orlkpefs$C_nqioeqhs;
 			ARG 1 temperatureModifier
 		METHOD m_yiwwakqw temperature (F)Lnet/minecraft/unmapped/C_orlkpefs$C_nqioeqhs;
