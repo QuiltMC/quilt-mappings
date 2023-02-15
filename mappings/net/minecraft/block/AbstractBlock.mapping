@@ -245,7 +245,6 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_vifiyewd blockVisionPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_vskisdzk postProcessPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_wknecqnz luminance I
-		FIELD f_wufjmkle offsetType Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;
 		FIELD f_wvbmkgls suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_xwxdktuf hasRandomTicks Z
 		METHOD <init> (Lnet/minecraft/unmapped/C_mmxmpdoq;Lcom/google/common/collect/ImmutableMap;Lcom/mojang/serialization/MapCodec;)V
@@ -281,7 +280,6 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_dhmxbcpf getRaycastShape (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_zscvhwbd;
 			ARG 1 world
 			ARG 2 pos
-		METHOD m_dkbtoknf offsetType ()Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;
 		METHOD m_dmvfoizu getOutlineShape (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_pbfjvesm;)Lnet/minecraft/unmapped/C_zscvhwbd;
 			ARG 1 world
 			ARG 2 pos
@@ -561,7 +559,6 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_lbohsgfq slipperiness F
 		FIELD f_lfwsqmni hardness F
 		FIELD f_lznwhdle requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
-		FIELD f_mpcyvbbz stateToOffsetFunction Ljava/util/function/Function;
 		FIELD f_mpvjzlvv allowsSpawningPredicate Lnet/minecraft/unmapped/C_triydqro$C_knnwryez;
 		FIELD f_mtvcolqn soundGroup Lnet/minecraft/unmapped/C_aevintex;
 		FIELD f_mwpuxldh solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
@@ -584,8 +581,6 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 0 block
 		METHOD m_bzhfzklk emissiveLighting (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
-		METHOD m_ccdwjkad (Lnet/minecraft/unmapped/C_ifcgjcqy;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_ifcgjcqy;
-			ARG 1 state
 		METHOD m_cfcitqhx requiredFlags ([Lnet/minecraft/unmapped/C_kksdgidr;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 flags
 		METHOD m_cfevbjmt (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
@@ -602,8 +597,6 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 state
 			ARG 2 world
 			ARG 3 pos
-		METHOD m_foqzdejl (Lnet/minecraft/unmapped/C_ifcgjcqy;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_ifcgjcqy;
-			ARG 1 state
 		METHOD m_fqzrcagx jumpVelocityMultiplier (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 jumpVelocityMultiplier
 		METHOD m_fybufkhb of (Lnet/minecraft/unmapped/C_ccpykexk;Lnet/minecraft/unmapped/C_arllgqae;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -631,8 +624,6 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT Specifies that a block should drop the same items as a provided block.
 			ARG 1 source
 				COMMENT the block to copy item drops from
-		METHOD m_mgxkjgoz offsetType (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
-			ARG 1 function
 		METHOD m_mkiacirn air ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_nfvnphha allowsSpawning (Lnet/minecraft/unmapped/C_triydqro$C_knnwryez;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			COMMENT Specifies logic that calculates whether an entity can spawn on a block.
@@ -661,12 +652,10 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 world
 			ARG 2 pos
 		METHOD m_shyyftwz requiresTool ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
-		METHOD m_tovaiowf (Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;
-			ARG 1 state
-		METHOD m_tzpskyoo (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;
+		METHOD m_tovaiowf (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
 			ARG 0 state
-		METHOD m_uhhnrryi offsetType (Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
-			ARG 1 offset
+		METHOD m_tzpskyoo (Lnet/minecraft/unmapped/C_ifcgjcqy;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_ifcgjcqy;
+			ARG 1 state
 		METHOD m_umndjpsf resistance (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 resistance
 		METHOD m_voowovbo dropsNothing ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
