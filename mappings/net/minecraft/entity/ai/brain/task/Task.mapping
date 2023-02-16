@@ -1,15 +1,40 @@
-CLASS net/minecraft/unmapped/C_mdnathub net/minecraft/entity/ai/brain/task/Task
-	METHOD m_bmtrtesi stop (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;J)V
+CLASS net/minecraft/unmapped/C_wbtjxfbq net/minecraft/entity/ai/brain/task/Task
+	FIELD f_kbnpijts minRunTime I
+	FIELD f_nutokbfq DEFAULT_RUN_TIME I
+	FIELD f_obmumrdg requiredMemoryStates Ljava/util/Map;
+	FIELD f_rfkjmatw endTime J
+	FIELD f_slgvphcl maxRunTime I
+	FIELD f_tijqdxos status Lnet/minecraft/unmapped/C_wbtjxfbq$C_sqbcjfsz;
+	METHOD <init> (Ljava/util/Map;)V
+		ARG 1 requiredMemoryState
+	METHOD <init> (Ljava/util/Map;I)V
+		ARG 1 requiredMemoryState
+		ARG 2 runTime
+	METHOD <init> (Ljava/util/Map;II)V
+		ARG 1 requiredMemoryState
+		ARG 2 minRunTime
+		ARG 3 maxRunTime
+	METHOD m_copsxmjv finishRunning (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;J)V
 		ARG 1 world
 		ARG 2 entity
 		ARG 3 time
-	METHOD m_lzkdsoun getStatus ()Lnet/minecraft/unmapped/C_wbtjxfbq$C_sqbcjfsz;
-	METHOD m_miheqwub debugString ()Ljava/lang/String;
-	METHOD m_rsxmnjte tick (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;J)V
+	METHOD m_eghfkoeo isTimeLimitExceeded (J)Z
+		ARG 1 time
+	METHOD m_jiotgmjk keepRunning (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;J)V
 		ARG 1 world
 		ARG 2 entity
 		ARG 3 time
-	METHOD m_vipkpuce tryStart (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;J)Z
+	METHOD m_pwowjghk shouldRun (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		ARG 1 world
+		ARG 2 entity
+	METHOD m_thxoqxcz run (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;J)V
 		ARG 1 world
 		ARG 2 entity
 		ARG 3 time
+	METHOD m_tzzxzprb hasRequiredMemoryState (Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		ARG 1 entity
+	METHOD m_xvrvizlg shouldKeepRunning (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;J)Z
+		ARG 1 world
+		ARG 2 entity
+		ARG 3 time
+	CLASS C_sqbcjfsz Status
