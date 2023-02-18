@@ -2,6 +2,7 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 	FIELD f_dutzqtyc cachedTabStacks Ljava/util/Collection;
 	FIELD f_eftpytbk icon Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_fhtvcyky cachedSearchStacks Ljava/util/Set;
+	FIELD f_ikvkywiu searchProviderReloader Ljava/util/function/Consumer;
 	FIELD f_kbcibzam iconSupplier Ljava/util/function/Supplier;
 	FIELD f_lghehufb entrySupplier Lnet/minecraft/unmapped/C_lnokcayd$C_lbxcoexd;
 	FIELD f_lyhrvuvn column I
@@ -30,6 +31,7 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		COMMENT
 		COMMENT <p>The name is rendered below the top row of item groups and above the inventory.
 	METHOD m_nsgpxdxb getOrInitSearchStacks ()Ljava/util/Collection;
+	METHOD m_obadijvu reloadSearch ()V
 	METHOD m_oibnkrxg getType ()Lnet/minecraft/unmapped/C_lnokcayd$C_ouweheor;
 	METHOD m_owwocajc shouldDisplay ()Z
 	METHOD m_oxvpyaqs getTexture ()Ljava/lang/String;
@@ -37,9 +39,12 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 	METHOD m_qngoqhkn getOrInitTabStacks ()Ljava/util/Collection;
 	METHOD m_siywoskl isNotEmpty ()Z
 	METHOD m_svxlqsxb reload (Lnet/minecraft/unmapped/C_lnokcayd$C_yymolfee;)V
+		ARG 1 parameters
 	METHOD m_tcbipafs getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_tpgpleic getLocation ()Lnet/minecraft/unmapped/C_lnokcayd$C_qwchbyug;
 	METHOD m_uprbbsoi getIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_xdrljsld setSearchProviderReloader (Ljava/util/function/Consumer;)V
+		ARG 1 reloader
 	CLASS C_ggmpmosl Builder
 		FIELD f_bnicdaud name Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_dawilwid special Z
@@ -70,6 +75,8 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 			ARG 1 type
 		METHOD m_srpqyhaw hideName ()Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
 	CLASS C_lbxcoexd EntrySupplier
+		METHOD accept accept (Lnet/minecraft/unmapped/C_lnokcayd$C_yymolfee;Lnet/minecraft/unmapped/C_lnokcayd$C_wnogvxsu;)V
+			ARG 1 parameters
 	CLASS C_ouweheor Type
 	CLASS C_qjyuivjw GatedStackCollector
 		FIELD f_alfldgtl enabledFeatures Lnet/minecraft/unmapped/C_czxxrbcp;
@@ -90,3 +97,11 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		METHOD m_lhspmles addStack (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		METHOD m_rgrwuewj addItem (Lnet/minecraft/unmapped/C_gmbqjnle;)V
 			ARG 1 item
+	CLASS C_yymolfee DisplayParameters
+		FIELD f_jpofxukg hasPermissions Z
+		FIELD f_vshdeckq enabledFeatures Lnet/minecraft/unmapped/C_czxxrbcp;
+		FIELD f_ybviqxdq holders Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+		METHOD m_lsmllado doesNotMatch (Lnet/minecraft/unmapped/C_czxxrbcp;ZLnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Z
+			ARG 1 enabledFeature
+			ARG 2 hasPermissions
+			ARG 3 provider
