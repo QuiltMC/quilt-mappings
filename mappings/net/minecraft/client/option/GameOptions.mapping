@@ -19,7 +19,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_cnqkqzfz entityDistanceScaling Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_cpeiozpi textBackgroundOpacity Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_cxkxaksc smoothLighting Lnet/minecraft/unmapped/C_vbibxkxv;
-	FIELD f_daisjzsp heldItemTooltips Z
 	FIELD f_dcnckdal VERY_FAR_RENDER_DISTANCE I
 	FIELD f_ddtthvbj fullscreenKey Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT A key bind for toggling fullscreen.
@@ -128,6 +127,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_oohnvsvi HOLD_KEY_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ooijlban cinematicCamera Z
 	FIELD f_ortsfpzi lastServer Ljava/lang/String;
+	FIELD f_oszcapbu GLINT_SPEED_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ovxcruqy overrideWidth I
 	FIELD f_owpzxvtj enableVsync Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_pcadrmvy mipmapLevels Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -136,6 +136,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_W the W key} by default.
 	FIELD f_pgipbphp mainArm Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_poupdndx monochromeLogo Lnet/minecraft/unmapped/C_vbibxkxv;
+	FIELD f_puhedzsr glintSpeed Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_pwwkeskp panoramaScrollSpeed Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_qentjnpp tutorialStep Lnet/minecraft/unmapped/C_goqonutr;
 	FIELD f_qhiokkbz MONOCHROME_LOGO_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -153,12 +154,14 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_sgwtxuap chatLineSpacing Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_sgzspmlk joinedFirstServer Z
 	FIELD f_siwpavgn telemetry Lnet/minecraft/unmapped/C_vbibxkxv;
+	FIELD f_sjwfwqtc glintStrength Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_sljistuk simulationDistance Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_svquvuvp hotbarKeys [Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT Key binds for selecting hotbar slots.
 		COMMENT Bound to the corresponding number keys (from {@linkplain
 		COMMENT org.lwjgl.glfw.GLFW#GLFW_KEY_1 the 1 key} to {@linkplain
 		COMMENT org.lwjgl.glfw.GLFW#GLFW_KEY_9 the 9 key}) by default.
+	FIELD f_teycsdat GLINT_STRENGTH_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_tfqhqffc directionalAudio Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_tqfzjpmf leftKey Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT A key bind for moving left.
@@ -229,6 +232,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 0 value
 	METHOD m_alcwfqym (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionsText
+		ARG 1 value
 	METHOD m_anzbfquj (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionText
 		ARG 1 value
@@ -261,8 +265,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 1 part
 		ARG 2 enabled
 	METHOD m_efrzvyoq getRealmsNotifications ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_ehbijxjd (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_rdaqiwdt;
-		ARG 1 value
 	METHOD m_eioccyvy isPlayerModelPartEnabled (Lnet/minecraft/unmapped/C_vqnqadci;)Z
 		ARG 1 part
 	METHOD m_ejxbitft getTextBackgroundOpacity (F)F
@@ -429,6 +431,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_scrwtghm setServerViewDistance (I)V
 		ARG 1 serverViewDistance
 	METHOD m_semqtxrp getDiscreteMouseScroll ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_sezpdihw getGlintStrength ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_sjphkxco getGlintSpeed ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_smwasrgf (Ljava/lang/Integer;)I
 		ARG 0 value
 	METHOD m_sonelttg (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_qaetpqjq;
@@ -490,8 +494,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_whpmwwai (Ljava/lang/Double;)V
 		ARG 0 value
 	METHOD m_wlksxdzb getHideLightningFlashes ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_wqqjvlsv (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdaqiwdt;
-		ARG 1 value
 	METHOD m_wvcmjbom (Ljava/lang/Integer;)V
 		ARG 0 value
 	METHOD m_xbkolqpg getFovEffectScale ()Lnet/minecraft/unmapped/C_vbibxkxv;
