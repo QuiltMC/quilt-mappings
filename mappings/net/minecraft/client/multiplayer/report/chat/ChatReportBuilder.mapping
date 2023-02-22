@@ -1,13 +1,18 @@
 CLASS net/minecraft/unmapped/C_uxfdbert net/minecraft/client/multiplayer/report/chat/ChatReportBuilder
 	FIELD f_llcijnta reportLimits Lcom/mojang/authlib/minecraft/report/AbuseReportLimits;
+	FIELD f_twnyckli report Lnet/minecraft/unmapped/C_uxfdbert$C_vpudpcya;
 	METHOD <init> (Ljava/util/UUID;Lcom/mojang/authlib/minecraft/report/AbuseReportLimits;)V
 		ARG 1 offenderUuid
+		ARG 2 reportLimits
+	METHOD <init> (Lnet/minecraft/unmapped/C_uxfdbert$C_vpudpcya;Lcom/mojang/authlib/minecraft/report/AbuseReportLimits;)V
+		ARG 1 report
 		ARG 2 reportLimits
 	METHOD m_abaoyrvk getComments ()Ljava/lang/String;
 	METHOD m_aiedkoha setCategory (Lnet/minecraft/unmapped/C_bwnamvmh;)V
 		ARG 1 category
 	METHOD m_eeuidejm build (Lnet/minecraft/unmapped/C_oxpapezz;)Lcom/mojang/datafixers/util/Either;
 		ARG 1 context
+	METHOD m_goahacqd hasContents ()Z
 	METHOD m_kfqtovuv setComments (Ljava/lang/String;)V
 		ARG 1 comments
 	METHOD m_lvifnuzs toggleMessage (I)V
@@ -15,6 +20,7 @@ CLASS net/minecraft/unmapped/C_uxfdbert net/minecraft/client/multiplayer/report/
 	METHOD m_pdfytvjw getReportEvidence (Lnet/minecraft/unmapped/C_udbfbmhx;)Lcom/mojang/authlib/minecraft/report/ReportEvidence;
 		ARG 1 chatLog
 	METHOD m_pjqachcm copy ()Lnet/minecraft/unmapped/C_uxfdbert;
+	METHOD m_qxsvljmb getReport ()Lnet/minecraft/unmapped/C_uxfdbert$C_vpudpcya;
 	METHOD m_sfyhqjti getCategory ()Lnet/minecraft/unmapped/C_bwnamvmh;
 	METHOD m_trnrqyid getOffenderUuid ()Ljava/util/UUID;
 	METHOD m_ueugmwwo containsMessage (I)Z
@@ -26,4 +32,27 @@ CLASS net/minecraft/unmapped/C_uxfdbert net/minecraft/client/multiplayer/report/
 		FIELD f_eqfhbmrq TOO_MANY_MESSAGES_ERROR Lnet/minecraft/unmapped/C_uxfdbert$C_nbeodwpg;
 		FIELD f_irhpjjjx NO_REPORTED_MESSAGES_ERROR Lnet/minecraft/unmapped/C_uxfdbert$C_nbeodwpg;
 		FIELD f_vqwsaadd NO_REASON_ERROR Lnet/minecraft/unmapped/C_uxfdbert$C_nbeodwpg;
+		FIELD f_zvxxpczh message Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_dxouqsyj message ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	CLASS C_tyqtapae Result
+		FIELD f_bvbzcuek report Lcom/mojang/authlib/minecraft/report/AbuseReport;
+		FIELD f_sgzjjlit id Ljava/util/UUID;
+		METHOD m_budguhdh report ()Lcom/mojang/authlib/minecraft/report/AbuseReport;
+		METHOD m_gabbjqlr id ()Ljava/util/UUID;
+	CLASS C_vpudpcya Report
+		FIELD f_clwomohw id Ljava/util/UUID;
+		FIELD f_eocywwyy reportedPlayerId Ljava/util/UUID;
+		FIELD f_kslkqctd comments Ljava/lang/String;
+		FIELD f_lehzaalg createdAt Ljava/time/Instant;
+		FIELD f_omncpaqr reportedMessages Lit/unimi/dsi/fastutil/ints/IntSet;
+		FIELD f_vklgiahi reason Lnet/minecraft/unmapped/C_bwnamvmh;
+		METHOD <init> (Lnet/minecraft/unmapped/C_uxfdbert;Ljava/util/UUID;Ljava/time/Instant;Ljava/util/UUID;)V
+			ARG 2 id
+			ARG 3 createdAt
+			ARG 4 reportedPlayerId
+		METHOD m_crkipyes copy ()Lnet/minecraft/unmapped/C_uxfdbert$C_vpudpcya;
+		METHOD m_rozsatlh toggleReported (ILcom/mojang/authlib/minecraft/report/AbuseReportLimits;)V
+			ARG 1 index
+			ARG 2 reportLimits
+		METHOD m_xonocsvu isReportedPlayer (Ljava/util/UUID;)Z
+			ARG 1 playedId
