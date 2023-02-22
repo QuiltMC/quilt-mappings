@@ -30,27 +30,19 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 	FIELD f_pbzcsbzn lastChatTimestamp Ljava/util/concurrent/atomic/AtomicReference;
 	FIELD f_qbipuojh movePacketsCount I
 	FIELD f_rqkpyple floating Z
-	FIELD f_sautrezf waitingForKeepAlive Z
+	FIELD f_sautrezf waitingForDisconnect Z
 	FIELD f_uadqjyru updatedZ D
 	FIELD f_vdiwjdct vehicleFloating Z
-	FIELD f_wdobpraf lastKeepAliveTime J
+	FIELD f_wdobpraf lastDisconnectTimeoutId J
 	FIELD f_xhuxormp topmostRiddenEntity Lnet/minecraft/unmapped/C_astfners;
 	FIELD f_xiknadng lastTickX D
-	FIELD f_xsyunelx keepAliveId J
+	FIELD f_xsyunelx disconnectTimeoutId J
 	FIELD f_zrhvuvya vehicleFloatingTicks I
 	FIELD f_zzjqcydo KEEP_ALIVE_INTERVAL I
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 server
 		ARG 2 connection
 		ARG 3 player
-	METHOD m_cemfwgja requestTeleport (DDDFFLjava/util/Set;Z)V
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-		ARG 7 yaw
-		ARG 8 pitch
-		ARG 9 flags
-		ARG 10 shouldDismount
 	METHOD m_cgoqlzes validateAcknowledgment (Lnet/minecraft/unmapped/C_mofgmouu$C_afrzjbhr;)Ljava/util/Optional;
 		ARG 1 acknowledgment
 	METHOD m_csymlmvj addMessageForValidation (Lnet/minecraft/unmapped/C_zzdolisx;)V
@@ -139,12 +131,6 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 		ARG 1 entity
 	METHOD m_vyjxwenc clampHorizontal (D)D
 		ARG 0 d
-	METHOD m_xufenurg requestTeleportAndDismount (DDDFF)V
-		ARG 1 x
-		ARG 3 y
-		ARG 5 z
-		ARG 7 yaw
-		ARG 8 pitch
 	METHOD m_zlylfblp setChatSession (Lnet/minecraft/unmapped/C_sdodhjzp;)V
 		ARG 1 chatSession
 	METHOD m_zqahozcp (Lnet/minecraft/unmapped/C_ahusqrxm;Lnet/minecraft/unmapped/C_wdcbkyfy;Lnet/minecraft/unmapped/C_mofgmouu;)Ljava/util/Map;

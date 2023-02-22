@@ -10,23 +10,23 @@ CLASS net/minecraft/unmapped/C_msqwzogj net/minecraft/resource/ResourceReloader
 	METHOD m_vbnuicfd reload (Lnet/minecraft/unmapped/C_msqwzogj$C_yodorvdw;Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_eslcbfsq;Lnet/minecraft/unmapped/C_eslcbfsq;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Performs a reload. Returns a future that is completed when the reload
 		COMMENT is completed.
-		COMMENT
-		COMMENT <p>In a reload, there is a prepare stage and an apply stage. For the
+		COMMENT <p>
+		COMMENT In a reload, there is a prepare stage and an apply stage. For the
 		COMMENT prepare stage, you should create completable futures with {@linkplain
-		COMMENT CompletableFuture#supplyAsync(Supplier, Executor)
+		COMMENT CompletableFuture#supplyAsync(java.util.function.Supplier, Executor)
 		COMMENT CompletableFuture.supplyAsync(..., prepareExecutor)}
 		COMMENT to ensure the prepare actions are done with the prepare executor. Then,
 		COMMENT you should have a completable future for all the prepared actions, and
-		COMMENT call {@linkplain CompletableFuture#thenCompose(Function)
+		COMMENT call {@linkplain CompletableFuture#thenCompose(java.util.function.Function)
 		COMMENT combinedPrepare.thenCompose(synchronizer::waitFor)}
 		COMMENT to notify the {@code synchronizer}. Finally, you should run {@linkplain
-		COMMENT CompletableFuture#thenAcceptAsync(Consumer, Executor)
+		COMMENT CompletableFuture#thenAcceptAsync(java.util.function.Consumer, Executor)
 		COMMENT CompletableFuture.thenAcceptAsync(..., applyExecutor)} for apply actions.
 		COMMENT In the end, returns the result of {@code thenAcceptAsync}.
 		COMMENT
 		COMMENT @return a future for the reload
 		COMMENT @see ReloadableResourceManager#reload(Executor, Executor,
-		COMMENT CompletableFuture, List)
+		COMMENT CompletableFuture, java.util.List)
 		ARG 1 synchronizer
 			COMMENT the synchronizer
 		ARG 2 manager
@@ -48,17 +48,17 @@ CLASS net/minecraft/unmapped/C_msqwzogj net/minecraft/resource/ResourceReloader
 		METHOD m_zhlyxiun whenPrepared (Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
 			COMMENT Indicates, to the ongoing reload, that this reloader has finished its
 			COMMENT preparation stage with the {@code preparedObject} as its result.
-			COMMENT
-			COMMENT <p>Returns a completable future that the apply stage depends on. This
+			COMMENT <p>
+			COMMENT Returns a completable future that the apply stage depends on. This
 			COMMENT returned future is completed when all the reloaders have completed their
 			COMMENT prepare stages in the reload.
-			COMMENT
-			COMMENT <p>Example:
-			COMMENT {@code
-			COMMENT CompletableFuture<SomeObject> prepareStage = ...;
+			COMMENT <p>
+			COMMENT Example:
+			COMMENT <pre><code>
+			COMMENT CompletableFuture&lt;SomeObject> prepareStage = ...;
 			COMMENT prepareStage.thenCompose(synchronizer::whenPrepared)
 			COMMENT         .thenAcceptAsync(..., applyExecutor);
-			COMMENT }
+			COMMENT </code></pre>
 			COMMENT
 			COMMENT @return a completable future as the precondition for the apply stage
 			ARG 1 preparedObject
