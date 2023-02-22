@@ -71,12 +71,15 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 			COMMENT the input world
 	METHOD m_hxrcxnun (Ljava/util/Map;)Ljava/util/stream/Stream;
 		ARG 0 map
-	METHOD m_iaavqdrh (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
+	METHOD m_iaavqdrh getRecipeFor (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
 		ARG 1 type
 		ARG 2 inventory
 		ARG 3 world
+		ARG 4 id
 	METHOD m_niofrzpv (Ljava/util/Map;)Ljava/util/stream/Stream;
 		ARG 0 map
+	METHOD m_oqvxqpcm createCheck (Lnet/minecraft/unmapped/C_rhnqznys;)Lnet/minecraft/unmapped/C_hjseusrb$C_bvtkxdyi;
+		ARG 0 type
 	METHOD m_pgjmabyy getRemainingStacks (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_rnrfftze;
 		COMMENT {@return the remainder of a recipe of the given {@code type} that match
 		COMMENT the given {@code inventory} and {@code world}, or a shallow copy of the
@@ -122,3 +125,9 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 		ARG 0 type
 	METHOD m_zzptshgo (Ljava/util/Map;Lcom/google/common/collect/ImmutableMap$Builder;Lnet/minecraft/unmapped/C_awrmdwqd;)V
 		ARG 2 recipe
+	CLASS C_bvtkxdyi CachedCheck
+		METHOD m_ltqsvwgf getRecipeFor (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/Optional;
+			ARG 1 inventory
+			ARG 2 world
+	CLASS C_ioxglbpe
+		FIELD f_kspyemsz lastRecipe Lnet/minecraft/unmapped/C_ncpywfca;

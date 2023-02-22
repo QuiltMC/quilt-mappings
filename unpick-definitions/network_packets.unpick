@@ -29,15 +29,24 @@ target_method net/minecraft/network/packet/s2c/play/ScreenHandlerSlotUpdateS2CPa
 target_method net/minecraft/network/packet/s2c/play/ScreenHandlerSlotUpdateS2CPacket getSyncId ()I
 	return s2c_screen_handler_slot_sync_id
 
-constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamS2CPacket ADD
-constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamS2CPacket REMOVE
-constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamS2CPacket UPDATE
-constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamS2CPacket ADD_PLAYERS
-constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamS2CPacket REMOVE_PLAYERS
+constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket ADD
+constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket REMOVE
+constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket UPDATE
+constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket ADD_PLAYERS
+constant s2c_team_packet_type net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket REMOVE_PLAYERS
 
-target_method net/minecraft/network/packet/s2c/play/TeamS2CPacket <init> (Ljava/lang/String;ILjava/util/Optional;Ljava/util/Collection;)V
+target_method net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket <init> (Ljava/lang/String;ILjava/util/Optional;Ljava/util/Collection;)V
 	param 1 s2c_team_packet_type
-target_method net/minecraft/network/packet/s2c/play/TeamS2CPacket containsPlayers (I)Z
+target_method net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket containsPlayers (I)Z
 	param 0 s2c_team_packet_type
-target_method net/minecraft/network/packet/s2c/play/TeamS2CPacket containsTeamInfo (I)Z
+target_method net/minecraft/network/packet/s2c/play/TeamUpdateS2CPacket containsTeamInfo (I)Z
 	param 0 s2c_team_packet_type
+
+constant s2c_player_respawn_packet_type net/minecraft/network/packet/s2c/play/PlayerRespawnS2CPacket KEEP_TRACKED_DATA
+constant s2c_player_respawn_packet_type net/minecraft/network/packet/s2c/play/PlayerRespawnS2CPacket KEEP_ATTRIBUTES
+constant s2c_player_respawn_packet_type net/minecraft/network/packet/s2c/play/PlayerRespawnS2CPacket KEEP_ALL_DATA
+
+target_method net/minecraft/network/packet/s2c/play/PlayerRespawnS2CPacket <init> (Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/registry/RegistryKey;JLnet/minecraft/world/GameMode;Lnet/minecraft/world/GameMode;ZZBLjava/util/Optional;)V
+	param 8 s2c_player_respawn_packet_type
+target_method net/minecraft/network/packet/s2c/play/PlayerRespawnS2CPacket shouldKeep (B)Z
+	param 0 s2c_player_respawn_packet_type

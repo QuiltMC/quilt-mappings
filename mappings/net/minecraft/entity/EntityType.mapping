@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
+	FIELD f_bmzdcexp DISPLAY_TRACKING_RANGE I
 	FIELD f_cmrfiatq ENTITY_TAG_KEY Ljava/lang/String;
 	FIELD f_ebcouolf spawnableFarFromPlayer Z
 	FIELD f_euznhixv maxTrackDistance I
@@ -17,13 +18,29 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 	FIELD f_yohcyxht fireImmune Z
 	FIELD f_zebtzdfg factory Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
 	FIELD f_znyuwmdh LOGGER Lorg/slf4j/Logger;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;Lnet/minecraft/unmapped/C_ormqdxci;ZZZZLcom/google/common/collect/ImmutableSet;Lnet/minecraft/unmapped/C_sszpscpo;IILnet/minecraft/unmapped/C_czxxrbcp;)V
+		ARG 1 factory
+		ARG 2 spawnGroup
+		ARG 3 saveable
+		ARG 4 summonable
+		ARG 5 fireImmune
+		ARG 6 spawnableFarFromPlayer
+		ARG 7 canSpawnInside
+		ARG 8 dimensions
+		ARG 9 maxTrackDistance
+		ARG 10 trackTickInterval
+		ARG 11 requiredFlags
 	METHOD m_aaapctbf getSpawnGroup ()Lnet/minecraft/unmapped/C_ormqdxci;
 	METHOD m_acyrwvoa getBuiltInRegistryHolder ()Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
+	METHOD m_awfmkeiz appendCustomNameSpawnConfig (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/function/Consumer;
+		ARG 0 previous
 	METHOD m_baavaxmk getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_brmtzzoq createSimpleBoundingBox (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		ARG 1 feetX
 		ARG 3 feetY
 		ARG 5 feetZ
+	METHOD m_cehfgyym (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 entity
 	METHOD m_chqybydm isFireImmune ()Z
 	METHOD m_djlonrdm isInvalidSpawn (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		COMMENT Returns whether the EntityType can spawn inside the given block.
@@ -38,13 +55,23 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 0 nbt
 		ARG 1 world
 		ARG 2 entityProcessor
+	METHOD m_dutncfxj (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 3 entity
 	METHOD m_faoepycm getDimensions ()Lnet/minecraft/unmapped/C_sszpscpo;
+	METHOD m_gdkrszjk spawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_uzzvxofv;)Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_gzofggnx getEntityFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/Optional;
 		ARG 0 nbt
 		ARG 1 world
 	METHOD m_hhehahrt loadEntityFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/Optional;
 		ARG 0 nbt
 		ARG 1 world
+	METHOD m_ijebmrdp appendCustomEntityStackSpawnConfig (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)Ljava/util/function/Consumer;
+		ARG 0 previous
+		ARG 3 player
+	METHOD m_ixnkjsoi spawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_uzzvxofv;ZZ)Lnet/minecraft/unmapped/C_astfners;
+		ARG 2 nbt
+		ARG 3 spawnConfig
+		ARG 7 invertY
 	METHOD m_jwcfsqgu isSummonable ()Z
 	METHOD m_kkusvlru isSpawnableFarFromPlayer ()Z
 	METHOD m_lhhmyqhx getOriginY (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_hbcjzgoe;)D
@@ -52,18 +79,31 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 1 pos
 		ARG 2 invertY
 		ARG 3 boundingBox
+	METHOD m_lxrutmjx (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 0 entity
+	METHOD m_mzwuvsgt appendDefaultStackSpawnConfig (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)Ljava/util/function/Consumer;
+		ARG 0 previous
+		ARG 3 player
 	METHOD m_ncqhbjml getHeight ()F
 	METHOD m_njeyrjbp isIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 		ARG 1 key
+	METHOD m_nmpsuzom (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 0 entity
 	METHOD m_nshhmmgl get (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 0 id
+	METHOD m_nuuaqzmd (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 entity
 	METHOD m_nvuzipbi register (Ljava/lang/String;Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;)Lnet/minecraft/unmapped/C_ogavsvbr;
 		ARG 0 id
 		ARG 1 type
 	METHOD m_oqyurndf getWidth ()F
+	METHOD m_pdrebmpm (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_cdctfzbn;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_astfners;
+		ARG 3 entity
 	METHOD m_pebhwwxb getId (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 0 type
 	METHOD m_qprblwyz isSaveable ()Z
+	METHOD m_qwgbrbqg createDefaultStackSpawnConfig (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)Ljava/util/function/Consumer;
+		ARG 2 player
 	METHOD m_qxlrmhco getLootTableId ()Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_rdswxkej streamFromNbt (Ljava/util/List;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/stream/Stream;
 		ARG 0 entityNbtList
@@ -75,8 +115,14 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 3 itemNbt
 	METHOD m_tnzvrnms alwaysUpdateVelocity ()Z
 	METHOD m_trtwdwmq getTrackTickInterval ()I
+	METHOD m_txldkyua create (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_uzzvxofv;ZZ)Lnet/minecraft/unmapped/C_astfners;
+		ARG 2 nbt
+		ARG 3 spawnConfig
+		ARG 7 invertY
 	METHOD m_ugmgmegz create (Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 world
+	METHOD m_ukzhcbld (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_astfners;
+		ARG 1 type
 	METHOD m_wbaqqhrp getMaxTrackDistance ()I
 		COMMENT Returns the tracking distance, <b>in chunks</b>, of this type of entity
 		COMMENT for clients. This will be then modified by the server's tracking
