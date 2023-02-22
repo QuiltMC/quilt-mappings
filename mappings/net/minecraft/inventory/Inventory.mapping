@@ -1,8 +1,13 @@
 CLASS net/minecraft/unmapped/C_pjtstjoq net/minecraft/inventory/Inventory
 	FIELD f_afhsixex MAX_COUNT_PER_STACK I
+	FIELD f_yxpebhng DEFAULT_DISTANCE_LIMIT I
 	METHOD m_akaynoad setStack (ILnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 		ARG 2 stack
+	METHOD m_clwoebyp canPlayerUse (Lnet/minecraft/unmapped/C_kvegafmh;Lnet/minecraft/unmapped/C_jzrpycqo;I)Z
+		ARG 0 blockEntity
+		ARG 1 entity
+		ARG 2 range
 	METHOD m_dmbfvefd size ()I
 	METHOD m_dqmcaiag containsAny (Ljava/util/Set;)Z
 		COMMENT Determines whether this inventory contains any of the given candidate items.
@@ -27,6 +32,9 @@ CLASS net/minecraft/unmapped/C_pjtstjoq net/minecraft/inventory/Inventory
 		ARG 1 slot
 	METHOD m_noresdqq canPlayerUse (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		ARG 1 player
+	METHOD m_ofgoacbo canTransferTo (Lnet/minecraft/unmapped/C_pjtstjoq;ILnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 hopperInventory
+		ARG 2 slot
 	METHOD m_ohnjwggm isEmpty ()Z
 	METHOD m_phlhitmt markDirty ()V
 	METHOD m_ptuvtdms count (Lnet/minecraft/unmapped/C_vorddnax;)I
@@ -46,3 +54,6 @@ CLASS net/minecraft/unmapped/C_pjtstjoq net/minecraft/inventory/Inventory
 	METHOD m_vlqyylgg anyMatch (Ljava/util/function/Predicate;)Z
 		COMMENT Determines whether any {@link ItemStack} in this inventory's slots matches the given predicate.
 		ARG 1 predicate
+	METHOD m_zfgmlilu canPlayerUse (Lnet/minecraft/unmapped/C_kvegafmh;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
+		ARG 0 blockEntity
+		ARG 1 entity
