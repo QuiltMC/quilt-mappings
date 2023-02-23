@@ -13,6 +13,10 @@ import quilt.internal.tasks.build.MergeTinyTask;
 import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.build.TinyJarTask;
+import quilt.internal.tasks.diff.CheckTargetVersionExistsTask;
+import quilt.internal.tasks.diff.CheckUnpickVersionsMatchTask;
+import quilt.internal.tasks.diff.DownloadTargetMappingJarTask;
+import quilt.internal.tasks.diff.RemapTargetMinecraftJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.tasks.lint.DownloadDictionaryFileTask;
@@ -67,6 +71,11 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class);
         tasks.create(MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class);
         tasks.create(RemoveIntermediaryTask.TASK_NAME, RemoveIntermediaryTask.class);
+
+        tasks.create(CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class);
+        tasks.create(DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class);
+        tasks.create(CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class);
+        tasks.create(RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {

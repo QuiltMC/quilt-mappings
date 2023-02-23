@@ -4,7 +4,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_atqwrmrh lastDamageTaken F
 	FIELD f_avsswxpi ELYTRA_DAMAGE_PER_FREE_FALL_TICKS I
 	FIELD f_azizbgcr SOUL_SPEED_BOOST_ID Ljava/util/UUID;
-	FIELD f_bklsspnh lastLimbDistance F
 	FIELD f_bwbjmspv DAMAGE_SOURCE_TIMEOUT I
 	FIELD f_cjfznazm SPRINTING_SPEED_BOOST_ID Ljava/util/UUID;
 	FIELD f_coityhpi jumping Z
@@ -25,13 +24,11 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_gzqrtqlw serverYaw D
 	FIELD f_hdvyydom MAX_VISIBILITY_TEST_RANGE D
 	FIELD f_hhueawxl attackingPlayer Lnet/minecraft/unmapped/C_jzrpycqo;
-	FIELD f_hmixfxre limbAngle F
 	FIELD f_hoaujqhj handSwingTicks I
 	FIELD f_huyhofoo serverY D
 	FIELD f_igcsnvae POTION_SWIRLS_COLOR Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_iiiqnngu SPRINTING_SPEED_BOOST Lnet/minecraft/unmapped/C_hdbqsqsm;
 	FIELD f_ioiczfgs HAND_SLOTS I
-	FIELD f_iripoulf flyingSpeed F
 	FIELD f_isuahutr jumpingCooldown I
 	FIELD f_ivhrrxtj headYaw F
 	FIELD f_ixvzqhhj lastAttackedTime I
@@ -60,7 +57,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_okpxkkwu serverHeadYaw D
 	FIELD f_olsxmkqm PLAYER_DAMAGE_TIME I
 	FIELD f_oqcyctiq DEATH_DURATION I
-	FIELD f_ovdhpumu limbDistance F
 	FIELD f_oyncoeen MIN_MOVEMENT_DISTANCE D
 	FIELD f_phnacmet prevBodyYaw F
 	FIELD f_pjcisjtc stepBobbingAmount F
@@ -190,7 +186,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT
 		COMMENT @apiNote In vanilla, this is exclusively used by the client to set a status
 		COMMENT effect on the player upon {@linkplain
-		COMMENT net.minecraft.client.network.ClientPlayNetworkHandler#onEntityStatusEffect
+		COMMENT net.minecraft.client.network.ClientPlayNetworkHandler#onEntityStatusEffectUpdate
 		COMMENT reception} of the status effect packet.
 		ARG 1 effect
 			COMMENT the effect to set
@@ -343,7 +339,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 hand
 		ARG 2 fromServerPlayer
 	METHOD m_lrhbwltd getActiveItem ()Lnet/minecraft/unmapped/C_sddaxwyk;
-	METHOD m_lthebshd canMoveVoluntarily ()Z
 	METHOD m_lzrgnjjo dropLoot (Lnet/minecraft/unmapped/C_sbxfkpyv;Z)V
 		ARG 1 source
 		ARG 2 causedByPlayer
@@ -493,9 +488,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 stack
 	METHOD m_urjobhnr tickHandSwing ()V
 	METHOD m_uuypiexz isClimbing ()Z
-	METHOD m_uwysofda updateLimbs (Lnet/minecraft/unmapped/C_usxaxydn;Z)V
-		ARG 1 entity
-		ARG 2 flutter
+	METHOD m_uwysofda updateLimbs (Z)V
+		ARG 1 flutter
 	METHOD m_uytukmik isSleeping ()Z
 	METHOD m_uzegxard (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 0 player
@@ -529,8 +523,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_wdgubvdu setSleepingPosition (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	METHOD m_wdmfvspp getMaxHealth ()F
-	METHOD m_weboasqd playEquipSound (Lnet/minecraft/unmapped/C_sddaxwyk;)V
-		ARG 1 stack
 	METHOD m_wehlnhpj getHandSwingProgress (F)F
 		ARG 1 tickDelta
 	METHOD m_whvujbsh dropInventory ()V

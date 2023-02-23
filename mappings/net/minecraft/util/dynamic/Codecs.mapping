@@ -13,11 +13,15 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	FIELD f_ozwtoxnd INSTANT Lcom/mojang/serialization/Codec;
 	FIELD f_pfcngcne PATTERN Lcom/mojang/serialization/Codec;
 	FIELD f_pkhgdcwg BASE64_STRING Lcom/mojang/serialization/Codec;
+	FIELD f_pvdffibb TEXT_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_qgiapsmp JSON_PASSTHROUGH_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_thyofzrm POSITIVE_INT Lcom/mojang/serialization/Codec;
 	METHOD m_ceufsyxl withLifecycle (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 codec
 		ARG 1 applyFunction
 		ARG 2 coApplyFunction
+	METHOD m_cjkdnnjx (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
+		ARG 0 json
 	METHOD m_dujfhivb orElsePartial (Ljava/lang/Object;)Lcom/mojang/serialization/Codec$ResultFunction;
 		ARG 0 partial
 	METHOD m_ihvqsgya retrieveContext (Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
@@ -61,6 +65,8 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 0 codec
 	METHOD m_lybgbxfe createEqualTypeChecker (Ljava/util/function/Function;)Ljava/util/function/Function;
 		ARG 0 typeGetter
+	METHOD m_mcwzjvkz (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lcom/mojang/serialization/DataResult;
+		ARG 0 text
 	METHOD m_nsiytucc withNonEmptyList (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		ARG 0 originalCodec
 	METHOD m_pknstmhl createCodecForPairObject (Lcom/mojang/serialization/Codec;Ljava/lang/String;Ljava/lang/String;Ljava/util/function/BiFunction;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
@@ -77,8 +83,8 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	METHOD m_szwqjlsd createStringResolverCodec (Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 elementToString
 		ARG 1 stringToElement
-	METHOD m_wynmdaxz (Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/Object;)Ljava/util/List;
-		ARG 2 o
+	METHOD m_vlowicum (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/Dynamic;
+		ARG 0 json
 	METHOD m_yxbdjpqp createLazy (Ljava/util/function/Supplier;)Lcom/mojang/serialization/Codec;
 		ARG 0 supplier
 	CLASS C_cuphesbl Xor
@@ -105,8 +111,6 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 			ARG 0 pair
 		METHOD m_ebehnqny (Lcom/mojang/datafixers/util/Pair;)Lcom/mojang/datafixers/util/Pair;
 			ARG 0 pair
-		METHOD m_pocqukzj (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-			ARG 3 left
 		METHOD m_ulkduoar (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
 			ARG 3 right
 	CLASS C_cuqomsnk ContextRetrievalCodec

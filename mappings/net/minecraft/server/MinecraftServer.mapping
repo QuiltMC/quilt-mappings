@@ -69,6 +69,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_sdzgycyv enforceWhitelist Z
 	FIELD f_tcqyqsco LOGGER Lorg/slf4j/Logger;
 	FIELD f_tlfkjive worlds Ljava/util/Map;
+	FIELD f_towfkfih favicon Lnet/minecraft/unmapped/C_bwttende$C_cgekazzo;
 	FIELD f_tvqgbnok ticks I
 	FIELD f_tyymbfil saving Z
 	FIELD f_ucujdczf tickTime F
@@ -83,6 +84,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_xowtolim metricsData Lnet/minecraft/unmapped/C_hqvvtxmh;
 	FIELD f_xpelegwm networkIo Lnet/minecraft/unmapped/C_mitbewqx;
 	FIELD f_ydhbqcwa ANONYMOUS_GAME_PROFILE Lcom/mojang/authlib/GameProfile;
+	FIELD f_ypvxjvas layeredRegistryManager Lnet/minecraft/unmapped/C_bcpxdrik;
 	FIELD f_yqwhnmdp demo Z
 	FIELD f_zehgtxec dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_zknekmqa services Lnet/minecraft/unmapped/C_vmxvaoqe;
@@ -101,6 +103,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_abjphurm getSpawnProtectionRadius ()I
 	METHOD m_abpffcdv setFlightEnabled (Z)V
 		ARG 1 flightEnabled
+	METHOD m_acpovbib createServerMetadata ()Lnet/minecraft/unmapped/C_bwttende;
 	METHOD m_aefyjgaj adjustTrackingDistance (I)I
 		ARG 1 initialDistance
 	METHOD m_ahatwois acceptsStatusQuery ()Z
@@ -110,8 +113,11 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_bchwkzcc addExtraSystemDetails (Lnet/minecraft/unmapped/C_fprbxnfr;)Lnet/minecraft/unmapped/C_fprbxnfr;
 		ARG 1 details
 	METHOD m_bdnrtaut isDemo ()Z
+	METHOD m_blfimkeo getLayeredRegistryManager ()Lnet/minecraft/unmapped/C_bcpxdrik;
 	METHOD m_btuswdlx getProxy ()Ljava/net/Proxy;
 	METHOD m_buftmakz getScoreboard ()Lnet/minecraft/unmapped/C_orszeavg;
+	METHOD m_byfxgwdz (Ljava/nio/file/Path;)Ljava/util/Optional;
+		ARG 0 foundPath
 	METHOD m_cccxtvft forcePlayerSampleUpdate ()V
 	METHOD m_ccqjjrlt getCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
 		COMMENT Creates a command source which represents this Minecraft server instance.
@@ -133,8 +139,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 persistentStateManager
 	METHOD m_dilbuqhf isUsingNativeTransport ()Z
 	METHOD m_dowerpcm getFunctionPermissionLevel ()I
-	METHOD m_dqicdgka setFavicon (Lnet/minecraft/unmapped/C_bwttende;)V
-		ARG 1 metadata
 	METHOD m_eaqrsmuh getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
 	METHOD m_ekyjsxub dumpNativeModules (Ljava/nio/file/Path;)V
 		ARG 1 path
@@ -167,8 +171,12 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 path
 	METHOD m_gchupyrg getTickTime ()F
 	METHOD m_gejlddyg isLoading ()Z
+	METHOD m_gicdpqlb (Ljava/nio/file/Path;)Z
+		ARG 0 path
 	METHOD m_glmgndav getOverworld ()Lnet/minecraft/unmapped/C_bdwnwhiu;
 	METHOD m_gnlqjqtp getServerMotd ()Ljava/lang/String;
+	METHOD m_goropamt (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Ljava/lang/Throwable;)V
+		ARG 2 error
 	METHOD m_gsecpirt shouldKeepTicking ()Z
 	METHOD m_gzgtxora startServer (Ljava/util/function/Function;)Lnet/minecraft/server/MinecraftServer;
 		ARG 0 serverFactory
@@ -218,6 +226,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_ixudjtvq setDefaultGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)V
 		ARG 1 gameMode
 	METHOD m_jaukgymg getVersion ()Ljava/lang/String;
+	METHOD m_jcwgeutk (Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lcom/google/common/collect/ImmutableList;)Ljava/util/concurrent/CompletionStage;
+		ARG 2 packs
 	METHOD m_jgeevbvz getMetricsData ()Lnet/minecraft/unmapped/C_hqvvtxmh;
 	METHOD m_jgzzempi areCommandBlocksEnabled ()Z
 		COMMENT Specifies whether command blocks can execute commands on the server.
@@ -230,6 +240,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_kpuwgkkc createFilterer (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_ibcyuwyk;
 		ARG 1 player
 	METHOD m_ktxbigdk stop (Z)V
+		ARG 1 wait
 	METHOD m_kxzipmze getCommandManager ()Lnet/minecraft/unmapped/C_rieemtgi;
 		COMMENT Gets the server's command manager.
 		COMMENT The command manager is responsible for parsing and dispatching commands.
@@ -240,6 +251,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_lprqwxbm setServerId (Ljava/lang/String;)V
 		ARG 1 serverId
 	METHOD m_magpcgdt getWorldRegistryKeys ()Ljava/util/Set;
+	METHOD m_micghkvm (Ljava/util/Collection;Ljava/lang/String;)Z
+		ARG 1 dataPackName
 	METHOD m_mjweogem getBossBarManager ()Lnet/minecraft/unmapped/C_xtwgkoiw;
 	METHOD m_mnwbpdpc getStructureTemplateManager ()Lnet/minecraft/unmapped/C_zxhjfyir;
 	METHOD m_naezauaw setMotd (Ljava/lang/String;)V
@@ -273,6 +286,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 worldProperties
 		ARG 2 bonusChest
 		ARG 3 debugWorld
+	METHOD m_onxipsum (Ljava/nio/file/Path;)Z
+		ARG 0 path
 	METHOD m_opevzklp getDataFixer ()Lcom/mojang/datafixers/DataFixer;
 	METHOD m_opjlzrwc getDataPackManager ()Lnet/minecraft/unmapped/C_dqfyacfy;
 	METHOD m_ouowsdpz getIconFile ()Ljava/util/Optional;
@@ -310,6 +325,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_rganmsov startTickMetrics ()V
 	METHOD m_rgjgaqvc setServerIp (Ljava/lang/String;)V
 		ARG 1 serverIp
+	METHOD m_rtlqvzih (Ljava/nio/file/Path;)V
+		ARG 1 path
 	METHOD m_ryjguldn tick (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
 	METHOD m_savbqlxo setPlayerIdleTimeout (I)V
@@ -340,6 +357,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 0 resourcePackManager
 		ARG 1 dataPackSettings
 		ARG 2 safeMode
+		ARG 3 featureFlags
 	METHOD m_tnvwblvm getOpPermissionLevel ()I
 	METHOD m_tozcksne getPlayerManager ()Lnet/minecraft/unmapped/C_digmgtxw;
 	METHOD m_ttqfvxjp isHost (Lcom/mojang/authlib/GameProfile;)Z
@@ -362,6 +380,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_veqmzcfr hasGui ()Z
 	METHOD m_vfwcplyx shouldEnforceSecureProfile ()Z
 	METHOD m_vnajegce getGameProfileRepo ()Lcom/mojang/authlib/GameProfileRepository;
+	METHOD m_vnjquyvd createPlayersServerMetadata ()Lnet/minecraft/unmapped/C_bwttende$C_rjrbzqim;
 	METHOD m_vrzrtalf runServer ()V
 	METHOD m_vwhonaog getServerMetadata ()Lnet/minecraft/unmapped/C_bwttende;
 	METHOD m_vwhvrlxk stopRecorder ()V
@@ -404,6 +423,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT
 		COMMENT <p>A dedicated server refers to a Minecraft server implementation which is detached from a parent Minecraft client process.
 		COMMENT A dedicated Minecraft server only accepts remote connections.
+	METHOD m_xpcspnzz (Ljava/util/Collection;Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;)V
+		ARG 2 resourceManager
 	METHOD m_xturscpm getPlayerNames ()[Ljava/lang/String;
 	METHOD m_xvswnjyk getPlayerInteractionManager (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_egnasquq;
 		ARG 1 player
@@ -424,8 +445,11 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_zopvbxou getSaveProperties ()Lnet/minecraft/unmapped/C_jkevluio;
 	METHOD m_zpbigysr getSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
 	METHOD m_zprgpanc startDebug ()V
+	METHOD m_zqrurnwg (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_dzczqjri;)V
+		ARG 2 result
 	METHOD m_zsmhozky getCurrentPlayerCount ()I
 	METHOD m_zsxirona getServerIp ()Ljava/lang/String;
+	METHOD m_zueyhxqi loadFavicon ()Ljava/util/Optional;
 	METHOD m_zvxfodpo runOneTask ()Z
 	CLASS C_eaujwdwn ResourceManagerHolder
 		FIELD f_nnwzxwwj resources Lnet/minecraft/unmapped/C_migzkpst;

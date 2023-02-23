@@ -2,11 +2,15 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 	FIELD f_dutzqtyc cachedTabStacks Ljava/util/Collection;
 	FIELD f_eftpytbk icon Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_fhtvcyky cachedSearchStacks Ljava/util/Set;
+	FIELD f_ikvkywiu searchProviderReloader Ljava/util/function/Consumer;
 	FIELD f_kbcibzam iconSupplier Ljava/util/function/Supplier;
 	FIELD f_lghehufb entrySupplier Lnet/minecraft/unmapped/C_lnokcayd$C_lbxcoexd;
 	FIELD f_lyhrvuvn column I
 	FIELD f_miirnahq name Lnet/minecraft/unmapped/C_rdaqiwdt;
-	FIELD f_ncvkfasf texture Ljava/lang/String;
+	FIELD f_ncvkfasf backgroundTextureName Ljava/lang/String;
+		COMMENT A suffix to the create inventory tab's background texture,
+		COMMENT which can be changed to use a custom background when viewing the tab.
+		COMMENT If changed, the file for the new texture must begin with {@code tab_} and be placed in the directory {@code assets/minecraft/textures/gui/container/creative_inventory}.
 	FIELD f_nndnllkg special Z
 	FIELD f_qwxzxdww type Lnet/minecraft/unmapped/C_lnokcayd$C_ouweheor;
 	FIELD f_sfwfnelq scrollbar Z
@@ -30,17 +34,20 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		COMMENT
 		COMMENT <p>The name is rendered below the top row of item groups and above the inventory.
 	METHOD m_nsgpxdxb getOrInitSearchStacks ()Ljava/util/Collection;
+	METHOD m_obadijvu reloadSearch ()V
 	METHOD m_oibnkrxg getType ()Lnet/minecraft/unmapped/C_lnokcayd$C_ouweheor;
 	METHOD m_owwocajc shouldDisplay ()Z
-	METHOD m_oxvpyaqs getTexture ()Ljava/lang/String;
+	METHOD m_oxvpyaqs getBackgroundTextureName ()Ljava/lang/String;
 	METHOD m_qhxeynxm getColumn ()I
 	METHOD m_qngoqhkn getOrInitTabStacks ()Ljava/util/Collection;
 	METHOD m_siywoskl isNotEmpty ()Z
-	METHOD m_svxlqsxb reload (Lnet/minecraft/unmapped/C_czxxrbcp;Z)V
-		ARG 1 enabledFeatures
+	METHOD m_svxlqsxb reload (Lnet/minecraft/unmapped/C_lnokcayd$C_yymolfee;)V
+		ARG 1 parameters
 	METHOD m_tcbipafs getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_tpgpleic getLocation ()Lnet/minecraft/unmapped/C_lnokcayd$C_qwchbyug;
 	METHOD m_uprbbsoi getIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_xdrljsld setSearchProviderReloader (Ljava/util/function/Consumer;)V
+		ARG 1 reloader
 	CLASS C_ggmpmosl Builder
 		FIELD f_bnicdaud name Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_dawilwid special Z
@@ -50,7 +57,7 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		FIELD f_lromfdpm renderName Z
 		FIELD f_mwlonxnv scrollbar Z
 		FIELD f_ndqdcfyq entrySupplier Lnet/minecraft/unmapped/C_lnokcayd$C_lbxcoexd;
-		FIELD f_pdmgrtff texture Ljava/lang/String;
+		FIELD f_pdmgrtff backgroundTextureName Ljava/lang/String;
 		FIELD f_sgimxzcn location Lnet/minecraft/unmapped/C_lnokcayd$C_qwchbyug;
 		FIELD f_wwuzsnpi type Lnet/minecraft/unmapped/C_lnokcayd$C_ouweheor;
 		METHOD <init> (Lnet/minecraft/unmapped/C_lnokcayd$C_qwchbyug;I)V
@@ -62,10 +69,11 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		METHOD m_fepxguyf build ()Lnet/minecraft/unmapped/C_lnokcayd;
 		METHOD m_gtpxdjib name (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
 			ARG 1 name
-		METHOD m_hazdvwni texture (Ljava/lang/String;)Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
-			ARG 1 texture
-		METHOD m_igeagwnz (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_lnokcayd$C_wnogvxsu;Z)V
-			ARG 0 enabledFeatures
+		METHOD m_hazdvwni backgroundTextureName (Ljava/lang/String;)Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
+			ARG 1 textureName
+		METHOD m_igeagwnz (Lnet/minecraft/unmapped/C_lnokcayd$C_yymolfee;Lnet/minecraft/unmapped/C_lnokcayd$C_wnogvxsu;)V
+			ARG 0 parameters
+			ARG 1 collector
 		METHOD m_kdtuovgn icon (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
 			ARG 1 iconSupplier
 		METHOD m_npibvgpr hideScrollbar ()Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
@@ -73,8 +81,8 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 			ARG 1 type
 		METHOD m_srpqyhaw hideName ()Lnet/minecraft/unmapped/C_lnokcayd$C_ggmpmosl;
 	CLASS C_lbxcoexd EntrySupplier
-		METHOD accept accept (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_lnokcayd$C_wnogvxsu;Z)V
-			ARG 1 enabledFeatures
+		METHOD accept accept (Lnet/minecraft/unmapped/C_lnokcayd$C_yymolfee;Lnet/minecraft/unmapped/C_lnokcayd$C_wnogvxsu;)V
+			ARG 1 parameters
 	CLASS C_ouweheor Type
 	CLASS C_qjyuivjw GatedStackCollector
 		FIELD f_alfldgtl enabledFeatures Lnet/minecraft/unmapped/C_czxxrbcp;
@@ -82,16 +90,29 @@ CLASS net/minecraft/unmapped/C_lnokcayd net/minecraft/item/ItemGroup
 		FIELD f_gynphoyu tabStacks Ljava/util/Collection;
 		METHOD <init> (Lnet/minecraft/unmapped/C_lnokcayd;Lnet/minecraft/unmapped/C_czxxrbcp;)V
 			ARG 2 enabledFeatures
-	CLASS C_qwchbyug Location
+	CLASS C_qwchbyug VerticalPosition
 	CLASS C_tndlmady Visibility
 	CLASS C_wnogvxsu ItemStackCollector
 		METHOD m_cgfqmabm addStacks (Ljava/util/Collection;)V
 			ARG 1 stacks
 		METHOD m_hohqtcue addItem (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
 			ARG 1 item
+			ARG 2 visibility
 		METHOD m_jghywfri addStack (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
+			ARG 1 stack
+			ARG 2 visibility
 		METHOD m_jljrlzid addStacks (Ljava/util/Collection;Lnet/minecraft/unmapped/C_lnokcayd$C_tndlmady;)V
 			ARG 1 stacks
+			ARG 2 visibility
 		METHOD m_lhspmles addStack (Lnet/minecraft/unmapped/C_sddaxwyk;)V
+			ARG 1 stack
 		METHOD m_rgrwuewj addItem (Lnet/minecraft/unmapped/C_gmbqjnle;)V
 			ARG 1 item
+	CLASS C_yymolfee DisplayParameters
+		FIELD f_jpofxukg hasPermissions Z
+		FIELD f_vshdeckq enabledFeatures Lnet/minecraft/unmapped/C_czxxrbcp;
+		FIELD f_ybviqxdq holders Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+		METHOD m_lsmllado doesNotMatch (Lnet/minecraft/unmapped/C_czxxrbcp;ZLnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Z
+			ARG 1 enabledFeature
+			ARG 2 hasPermissions
+			ARG 3 provider

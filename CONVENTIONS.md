@@ -120,6 +120,19 @@ front of the coordinate (`velocityX`, not `xVelocity`).
 
 Name screen coordinates `x` and `y`, rather than `left` and `top`.
 
+### Network Packets
+
+Always suffix packet names with `S2CPacket` (server to client) or `C2SPacket` (client to server).
+
+Packet names should be in the form of `[Noun][Verb]`: `BlockUpdateS2CPacket`, `PlayerMoveC2SPacket`, etc., with the verb conjugated in the infinitive form.
+This convention is applied loosely, and some packets may not follow it. Use your own discretion on whether to apply it when naming packets.
+In some cases, the suffix `WithX` can come after the verb. This is to prevent situations where an awkward `And` would be inserted, avoiding `PlayerAndEntityInteractionC2SPacket`, in favor of `PlayerInteractionWithEntityC2SPacket`.
+
+Sometimes, a packet is purely data and does not have an action associated. In this case the packet name can simply be `[Noun]`, such as with `ChunkDataS2CPacket`.
+
+Often, Minecraft will have a packet that manipulates a piece of data in various different ways. For example, it could be one packet devoted to adding a player to the server, removing a player from the server, or updating that player's data.
+In this case, the verb used is `Update`. This makes our example package name `PlayerUpdateS2CPacket`.
+
 ## Javadocs
 
 Write sentences for class, method and field javadocs, starting with an uppercase and ending with a period. Start method docs with verbs, like `Gets` or `Called`. Use HTML tags such as `<p>` if the docs have several paragraphs, as line wraps are converted to spaces in the generated documentation. Feel free to start a new line whenever you feel the current line is too long.
