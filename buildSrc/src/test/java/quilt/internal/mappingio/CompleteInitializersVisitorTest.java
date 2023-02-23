@@ -1,28 +1,23 @@
 package quilt.internal.mappingio;
 
-import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.tree.MappingTree;
-import net.fabricmc.mappingio.tree.MemoryMappingTree;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import quilt.internal.TestUtil;
 
 import java.nio.file.Path;
 
-public class CompleteInitializersVisitorTest {
-    public static final Path FILE = Path.of("src/test/resources/completeInitializers.tiny");
+public class CompleteInitializersVisitorTest extends MappingVisitorTestBase {
+    public static final Path FILE = file("completeInitializers.tiny");
 
     @Test
     public void test() throws Exception {
-        MemoryMappingTree originalTree = TestUtil.readTinyV2(FILE);
+        MappingTree originalTree = TestUtil.readTinyV2(FILE);
+        MappingTree completeTree = visitTree(originalTree, CompleteInitializersVisitor::new);
 
-        MappingTree completeTree = new MemoryMappingTree();
-        originalTree.accept(new CompleteInitializersVisitor((MappingVisitor) completeTree));
+        assertDstNamespace("test", originalTree, 1);
+        assertMappingEmpty(originalTree.getClass("a").getMethod("<init>", "()V"), 1);
 
-        Assertions.assertEquals(originalTree.getNamespaceName(1), "test");
-        Assertions.assertNull(((MappingTree) originalTree).getClass("a").getMethod("<init>", "()V").getDstName(1));
-
-        Assertions.assertEquals(completeTree.getNamespaceName(1), "test");
-        Assertions.assertEquals(completeTree.getClass("a").getMethod("<init>", "()V").getDstName(1), "<init>");
+        assertDstNamespace("test", completeTree, 1);
+        assertMapping("<init>", completeTree.getClass("a").getMethod("<init>", "()V"), 1);
     }
 }
