@@ -7,23 +7,40 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	FIELD f_bcprdsha FROM_OPTIONAL_LONG Ljava/util/function/Function;
 	FIELD f_bwjbifvs BIT_SET Lcom/mojang/serialization/Codec;
 	FIELD f_dawkqtjs POSITIVE_FLOAT Lcom/mojang/serialization/Codec;
+	FIELD f_gkaqcuyx GAME_PROFILE Lcom/mojang/serialization/Codec;
+	FIELD f_hebpgars QUATERNION_F_COMPONENTS Lcom/mojang/serialization/Codec;
 	FIELD f_iihsofbk NONNEGATIVE_INT Lcom/mojang/serialization/Codec;
+	FIELD f_irpmwmlr PROPERTY_MAP Lcom/mojang/serialization/Codec;
 	FIELD f_kkbuuhjf TAG_ENTRY_ID Lcom/mojang/serialization/Codec;
 	FIELD f_mnhteojj TO_OPTIONAL_LONG Ljava/util/function/Function;
+	FIELD f_mowibqnt QUATERNION_F Lcom/mojang/serialization/Codec;
+	FIELD f_oawolklc PROPERTY Lcom/mojang/serialization/Codec;
 	FIELD f_ozwtoxnd INSTANT Lcom/mojang/serialization/Codec;
 	FIELD f_pfcngcne PATTERN Lcom/mojang/serialization/Codec;
 	FIELD f_pkhgdcwg BASE64_STRING Lcom/mojang/serialization/Codec;
 	FIELD f_pvdffibb TEXT_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_qgiapsmp JSON_PASSTHROUGH_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_thyofzrm POSITIVE_INT Lcom/mojang/serialization/Codec;
+	FIELD f_tppidfcj MATRIX_4F Lcom/mojang/serialization/Codec;
+	FIELD f_wqiemdiy NON_EMPTY_STRING Lcom/mojang/serialization/Codec;
+	FIELD f_xprfobkx AXIS_ANGLE_4F Lcom/mojang/serialization/Codec;
+	FIELD f_zhwzaxnp VECTOR_3F Lcom/mojang/serialization/Codec;
+	METHOD m_brdzjwmi (IILjava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 2 string
 	METHOD m_ceufsyxl withLifecycle (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 codec
 		ARG 1 applyFunction
 		ARG 2 coApplyFunction
 	METHOD m_cjkdnnjx (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
 		ARG 0 json
+	METHOD m_ckffykga (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 0 list
 	METHOD m_dujfhivb orElsePartial (Ljava/lang/Object;)Lcom/mojang/serialization/Codec$ResultFunction;
 		ARG 0 partial
+	METHOD m_ecedeavh (Lnet/minecraft/unmapped/C_odfnijdo;)Lcom/mojang/serialization/DataResult;
+		ARG 0 set
+	METHOD m_fdwgadxq getIdAndName (Lcom/mojang/authlib/GameProfile;)Lcom/mojang/serialization/DataResult;
+		ARG 0 profile
 	METHOD m_ihvqsgya retrieveContext (Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
 		ARG 0 retriever
 	METHOD m_jhjkcspg instant (Ljava/time/format/DateTimeFormatter;)Lcom/mojang/serialization/Codec;
@@ -69,6 +86,11 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 0 text
 	METHOD m_nsiytucc withNonEmptyList (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		ARG 0 originalCodec
+	METHOD m_nuxvjbjt createRangedInt (II)Lcom/mojang/serialization/Codec;
+		ARG 0 min
+		ARG 1 max
+	METHOD m_pgtxotsk createGameProfile (Lcom/mojang/datafixers/util/Pair;)Lcom/mojang/serialization/DataResult;
+		ARG 0 pair
 	METHOD m_pknstmhl createCodecForPairObject (Lcom/mojang/serialization/Codec;Ljava/lang/String;Ljava/lang/String;Ljava/util/function/BiFunction;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 codec
 		ARG 1 leftFieldName
@@ -76,15 +98,27 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 3 combineFunction
 		ARG 4 leftFunction
 		ARG 5 rightFunction
+	METHOD m_riamqqam (IILjava/lang/Integer;)Ljava/lang/String;
+		ARG 2 integer
 	METHOD m_sltnwzrc createRangedFloat (FFLjava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 min
 		ARG 1 max
 		ARG 2 messageFactory
+	METHOD m_slvhriiw (FFLjava/util/function/Function;Ljava/lang/Float;)Lcom/mojang/serialization/DataResult;
+		ARG 3 f
 	METHOD m_szwqjlsd createStringResolverCodec (Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 elementToString
 		ARG 1 stringToElement
+	METHOD m_vcaoiues sizeLimitedString (II)Lcom/mojang/serialization/Codec;
+		ARG 0 minLength
+		ARG 1 maxLength
 	METHOD m_vlowicum (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/Dynamic;
 		ARG 0 json
+	METHOD m_xervxdvx validate (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+		ARG 0 codec
+		ARG 1 validator
+	METHOD m_yugvdtmq (IILjava/util/function/Function;Ljava/lang/Integer;)Lcom/mojang/serialization/DataResult;
+		ARG 3 integer
 	METHOD m_yxbdjpqp createLazy (Ljava/util/function/Supplier;)Lcom/mojang/serialization/Codec;
 		ARG 0 supplier
 	CLASS C_cuphesbl Xor
@@ -116,8 +150,11 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	CLASS C_cuqomsnk ContextRetrievalCodec
 		METHOD decode decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
 			ARG 1 ops
-		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 2 mapLike
+		METHOD encode encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 object
 			ARG 2 ops
+			ARG 3 builder
 		METHOD keys keys (Lcom/mojang/serialization/DynamicOps;)Ljava/util/stream/Stream;
 			ARG 1 ops
 	CLASS C_ltlpgnmp
@@ -134,6 +171,7 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	CLASS C_nxvxcuuo
 		METHOD decode decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
 			ARG 1 ops
+			ARG 2 object
 	CLASS C_pdblrsjv TagEntryId
 		FIELD f_fbymtsno tag Z
 		FIELD f_gbgbiokr id Lnet/minecraft/unmapped/C_ncpywfca;
@@ -161,6 +199,7 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 			ARG 1 ops
 			ARG 2 input
 		METHOD encode encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 object
 			ARG 2 ops
 			ARG 3 input
 		METHOD equals (Ljava/lang/Object;)Z

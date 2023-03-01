@@ -2,12 +2,15 @@ CLASS net/minecraft/unmapped/C_xotldzgg net/minecraft/client/network/ServerInfo
 	COMMENT The information of a server entry in the list of servers available in
 	COMMENT the multiplayer screen from the menu. The list of these servers is
 	COMMENT stored in the {@code servers.dat} file within the client game directory.
+	FIELD f_ccovbjyf players Lnet/minecraft/unmapped/C_bwttende$C_rjrbzqim;
+	FIELD f_hthkucla secureChatEnforced Z
 	FIELD f_mdiurrlz playerListSummary Ljava/util/List;
 	FIELD f_mhqyygsj label Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_mwumxqyg ping J
 	FIELD f_nzgnxtsb protocolVersion I
 	FIELD f_nzwrnsaw address Ljava/lang/String;
 	FIELD f_pjznsmeh local Z
+	FIELD f_rnvkhkil favicon [B
 	FIELD f_sjhcpfte version Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_sodyeuzw resourcePackPolicy Lnet/minecraft/unmapped/C_xotldzgg$C_jaeepxbv;
 	FIELD f_szafvlvu online Z
@@ -17,6 +20,11 @@ CLASS net/minecraft/unmapped/C_xotldzgg net/minecraft/client/network/ServerInfo
 		ARG 1 name
 		ARG 2 address
 		ARG 3 local
+	METHOD m_bdanzkcf setSecureChatEnforced (Z)V
+		ARG 1 enforced
+	METHOD m_ijmgdohe setFavicon ([B)V
+		ARG 1 favicon
+	METHOD m_ktfqzyqf getFavicon ()[B
 	METHOD m_mgdrmoly toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_ntjhtcjm copyWithSettingsFrom (Lnet/minecraft/unmapped/C_xotldzgg;)V
 		ARG 1 serverInfo
@@ -27,6 +35,7 @@ CLASS net/minecraft/unmapped/C_xotldzgg net/minecraft/client/network/ServerInfo
 		COMMENT accept server resource packs from this server in the future.
 		ARG 1 policy
 	METHOD m_vlebsryp isLocal ()Z
+	METHOD m_voadsysa isSecureChatEnforced ()Z
 	METHOD m_wtyyxnwz fromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_xotldzgg;
 		ARG 0 root
 	METHOD m_zimwwqts copyFrom (Lnet/minecraft/unmapped/C_xotldzgg;)V

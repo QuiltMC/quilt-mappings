@@ -1,11 +1,16 @@
 CLASS net/minecraft/unmapped/C_rdnfmxue net/minecraft/client/network/PlayerListEntry
 	FIELD f_aidmuwem model Ljava/lang/String;
 	FIELD f_dhrhqfnz textures Ljava/util/Map;
+	FIELD f_drjagpif messageVerifier Lnet/minecraft/unmapped/C_kwrnipty;
 	FIELD f_gfygecco texturesLoaded Z
 	FIELD f_hnnviwpi gameMode Lnet/minecraft/unmapped/C_lghcpyvl;
+	FIELD f_hrnnauwf chatSession Lnet/minecraft/unmapped/C_sdodhjzp;
 	FIELD f_vllsletq latency I
 	FIELD f_wsqztcun profile Lcom/mojang/authlib/GameProfile;
 	FIELD f_zhmcaiff displayName Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD <init> (Lcom/mojang/authlib/GameProfile;Z)V
+		ARG 1 profile
+		ARG 2 rejectAllMessages
 	METHOD m_aikjdrgv setDisplayName (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 displayName
 	METHOD m_bsspcxcl (Lcom/mojang/authlib/minecraft/MinecraftProfileTexture$Type;Lnet/minecraft/unmapped/C_ncpywfca;Lcom/mojang/authlib/minecraft/MinecraftProfileTexture;)V
@@ -14,10 +19,17 @@ CLASS net/minecraft/unmapped/C_rdnfmxue net/minecraft/client/network/PlayerListE
 		ARG 3 texture
 	METHOD m_bzpvpkyx getScoreboardTeam ()Lnet/minecraft/unmapped/C_dvkwmbxw;
 	METHOD m_cibezlvf getGameMode ()Lnet/minecraft/unmapped/C_lghcpyvl;
+	METHOD m_gedtxkss setChatSession (Lnet/minecraft/unmapped/C_sdodhjzp;)V
+		ARG 1 chatSession
 	METHOD m_gwqcrxck getDisplayName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_ibatzste getSkinTexture ()Lnet/minecraft/unmapped/C_ncpywfca;
+	METHOD m_ibtfyfdo getMessageVerifier ()Lnet/minecraft/unmapped/C_kwrnipty;
+	METHOD m_kamimtck setMessageVerifier (Z)V
+		ARG 1 rejectAll
 	METHOD m_lebvedky getCapeTexture ()Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_lgyzwqij loadTextures ()V
+	METHOD m_ntpxbqia hasChatSession ()Z
+	METHOD m_sgoenlav getChatSession ()Lnet/minecraft/unmapped/C_sdodhjzp;
 	METHOD m_vczgizyo getProfile ()Lcom/mojang/authlib/GameProfile;
 	METHOD m_vmiwxirt getElytraTexture ()Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_xpazibxi getLatency ()I
@@ -30,4 +42,6 @@ CLASS net/minecraft/unmapped/C_rdnfmxue net/minecraft/client/network/PlayerListE
 		COMMENT Checks if the player represented by this entry has a custom skin.
 		COMMENT
 		COMMENT <p>If the player has the default skin, this will return false.
+	METHOD m_ztwfsbrd getVerifier (Z)Lnet/minecraft/unmapped/C_kwrnipty;
+		ARG 0 rejectAll
 	METHOD m_zvbnixwa hasCape ()Z

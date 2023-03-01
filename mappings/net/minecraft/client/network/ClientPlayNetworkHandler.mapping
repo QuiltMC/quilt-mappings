@@ -20,14 +20,17 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	FIELD f_mhovhvqz playerListEntries Ljava/util/Map;
 	FIELD f_ngfhyxgr connection Lnet/minecraft/unmapped/C_oasmcckk;
 	FIELD f_ngsvttes commandSource Lnet/minecraft/unmapped/C_vvqqprve;
+	FIELD f_ocqqytjc chatSession Lnet/minecraft/unmapped/C_ddivjabv;
 	FIELD f_okhxbsay UNSECURE_SERVER_TOAST_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_oscihfpd world Lnet/minecraft/unmapped/C_ghdnlrrw;
 	FIELD f_pwlckpdl commandDispatcher Lcom/mojang/brigadier/CommandDispatcher;
 	FIELD f_qghvqlmq telemetryManager Lnet/minecraft/unmapped/C_bfepxqwf;
 	FIELD f_sjbnncsn lastSeenMessageTracker Lnet/minecraft/unmapped/C_zwzonavy;
+	FIELD f_tscgdfwh queuedPackets Ljava/util/List;
 	FIELD f_uqhgsszo UNSECURE_SERVER_TOAST Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_urauiwpa worldProperties Lnet/minecraft/unmapped/C_ghdnlrrw$C_nwouoiiq;
 	FIELD f_vtrzacei chunkLoadDistance I
+	FIELD f_wptpguga listedPlayers Ljava/util/Set;
 	FIELD f_xadarkvu random Lnet/minecraft/unmapped/C_rlomrsco;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_xotldzgg;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_bfepxqwf;)V
 		ARG 1 client
@@ -78,19 +81,27 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 3 provider
 		ARG 4 type
 	METHOD m_quieupaa getProfile ()Lcom/mojang/authlib/GameProfile;
+	METHOD m_rfxuxjoo isEnabled (Lnet/minecraft/unmapped/C_czxxrbcp;)Z
+		ARG 1 flags
 	METHOD m_twqcihtd getPlayerList ()Ljava/util/Collection;
+	METHOD m_uccwwurs getServerInfo ()Lnet/minecraft/unmapped/C_xotldzgg;
 	METHOD m_ugyspzmn (Lnet/minecraft/unmapped/C_hrdsvlkq;II)V
 		ARG 1 chunk
 		ARG 2 x
 		ARG 3 z
+	METHOD m_uupbuedi setKeyPair (Lnet/minecraft/unmapped/C_dmzoijjt;)V
+		ARG 1 keyPair
 	METHOD m_vnmrjtiv sendResourcePackStatus (Lnet/minecraft/unmapped/C_gtifzcur$C_velualoa;)V
 		ARG 1 packStatus
 	METHOD m_wkxolrzd getAdvancementHandler ()Lnet/minecraft/unmapped/C_wojlspxv;
 	METHOD m_xranmjii getPlayerListEntry (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_rdnfmxue;
 		ARG 1 uuid
+	METHOD m_yszhtlij parse (Ljava/lang/String;)Lcom/mojang/brigadier/ParseResults;
+		ARG 1 command
 	METHOD m_zdvdjxqm updateWorldChunk (IILnet/minecraft/unmapped/C_tilplatb;)V
 		ARG 1 x
 		ARG 2 z
 		ARG 3 data
 	METHOD m_zeqpblhe getCommandSource ()Lnet/minecraft/unmapped/C_vvqqprve;
 	METHOD m_zietpfgc getSessionId ()Ljava/util/UUID;
+	CLASS C_mgiqejbe QueuedPacket
