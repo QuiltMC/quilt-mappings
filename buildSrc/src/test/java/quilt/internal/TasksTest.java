@@ -196,6 +196,20 @@ public class TasksTest {
         assertNotNull(insertedMethod3);
         assertMapping("left", insertedMethod3.getArg(-1, 1, null), "named");
         assertMapping("right", insertedMethod3.getArg(-1, 2, null), "named");
+
+        // Check inner class mappings
+        assertMapping("com/example/LClass", tree.getClass("com/example/u/C_017"), "named");
+        assertMapping("com/example/LClass$C_018", tree.getClass("com/example/u/C_017$C_018"), "named");
+        assertMapping("com/example/LClass$C_019", tree.getClass("com/example/u/C_017$C_019"), "named");
+        assertMapping("com/example/LClass$C_020", tree.getClass("com/example/u/C_017$C_020"), "named");
+
+        // The tree for C_024 is completely unmapped, but it has proposed names which require the class names to be present
+        assertMapping("com/example/u/C_024", tree.getClass("com/example/u/C_024"), "named");
+        assertMapping("com/example/u/C_024$C_025", tree.getClass("com/example/u/C_024$C_025"), "named");
+        assertMapping("com/example/u/C_024$C_026", tree.getClass("com/example/u/C_024$C_026"), "named");
+        assertMapping("com/example/u/C_024$C_027", tree.getClass("com/example/u/C_024$C_027"), "named");
+        assertMapping("com/example/u/C_024$C_027$C_028", tree.getClass("com/example/u/C_024$C_027$C_028"), "named");
+        assertMapping("com/example/u/C_024$C_027$C_029", tree.getClass("com/example/u/C_024$C_027$C_029"), "named");
     }
 
     @Test
@@ -294,7 +308,7 @@ public class TasksTest {
         MappingTree.ClassMapping kClass = tree.getClass("k");
         assertMapping("com/example/class_012", kClass, "intermediary");
         // There's no way to fix this as far as I can tell, since inner classes need their parents to have a matching name in the same namespaces
-        // i.e. `a/b/c$d -> com/example/c_01$c_02 -> com/example/c_01$named` would need `a/b/c -> com/example/c_01 -> com/example/obf`
+        // i.e. `a/b/c$d -> com/example/c_01$c_02 -> com/example/c_01$inner` would need `a/b/c -> com/example/c_01 -> com/example/c_01`
         assertMapping("com/example/u/C_012", kClass, "named");
         MappingTree.ClassMapping kInnerClass = tree.getClass("k$a");
         assertMapping("com/example/class_012$class_013", kInnerClass, "intermediary");
