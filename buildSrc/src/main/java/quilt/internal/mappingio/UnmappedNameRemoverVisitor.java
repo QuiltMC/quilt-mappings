@@ -12,7 +12,7 @@ import java.util.function.BiPredicate;
 
 /**
  * Removes unmapped names from the {@link #targetNamespace target namespace}. Whether a name is unmapped is determined
- * either if it's name on the target namespace is the same as on the {@link #unmappedNamespace unmapped one}, or by {@link #unmappedPredicate}
+ * either if its name on the target namespace is the same as on the {@link #unmappedNamespace unmapped one}, or by {@link #unmappedPredicate}
  */
 public class UnmappedNameRemoverVisitor extends ForwardingMappingVisitor {
     private final String targetNamespace;
