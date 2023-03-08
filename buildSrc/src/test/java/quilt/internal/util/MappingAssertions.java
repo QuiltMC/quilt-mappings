@@ -1,12 +1,13 @@
 package quilt.internal.util;
 
-import net.fabricmc.mappingio.tree.MappingTree;
-import org.junit.jupiter.api.Assertions;
-
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
+
+import net.fabricmc.mappingio.tree.MappingTree;
+
 public abstract class MappingAssertions {
-     public static void assertSrcNamespace(String expected, MappingTree tree) {
+    public static void assertSrcNamespace(String expected, MappingTree tree) {
         Assertions.assertEquals(expected, tree.getSrcNamespace());
     }
 

@@ -4,26 +4,23 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.Map;
 import java.util.function.Function;
 
-import net.fabricmc.mappingio.MappingReader;
-import net.fabricmc.mappingio.MappingVisitor;
-import net.fabricmc.mappingio.adapter.MappingNsCompleter;
-import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
-import net.fabricmc.mappingio.format.MappingFormat;
-import net.fabricmc.mappingio.format.Tiny2Writer;
-import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.mappingio.CompleteInitializersVisitor;
 import quilt.internal.tasks.DefaultMappingsTask;
+
+import net.fabricmc.mappingio.MappingReader;
+import net.fabricmc.mappingio.MappingVisitor;
+import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
+import net.fabricmc.mappingio.format.MappingFormat;
+import net.fabricmc.mappingio.format.Tiny2Writer;
+import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     @InputFile
@@ -58,33 +55,23 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
 
         getLogger().lifecycle(":merging {} and {}", Constants.MAPPINGS_NAME, this.mergeName);
         mergeMappings(mappingsTinyInput.toPath(), mergeTinyInput.toPath(), outputMappings.toPath(),
-            this::getFirstVisitor, this::getPreWriteVisitor, getNameAlternatives());
+                this::getFirstVisitor, this::getPreWriteVisitor);
     }
 
     @VisibleForTesting
     public static void mergeMappings(Path mappingsTinyInput, Path mergeTinyInput, Path outputMappings,
                                      Function<MappingVisitor, MappingVisitor> firstVisitor,
-                                     Function<MappingVisitor, MappingVisitor> preWriteVisitor,
-                                     Map<String, String> nameAlternatives) throws IOException {
+                                     Function<MappingVisitor, MappingVisitor> preWriteVisitor) throws IOException {
         MemoryMappingTree tree = new MemoryMappingTree(false); // hashed is the src namespace
         MappingReader.read(mergeTinyInput, MappingFormat.TINY_2, tree);
         MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2, tree);
         try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings), false)) {
             tree.accept(firstVisitor.apply(
-                new CompleteInitializersVisitor(
-                    new MappingNsCompleter(
-                        new MappingSourceNsSwitch(preWriteVisitor.apply(w), "official", /*Drop methods not in hashed*/ true),
-                        nameAlternatives,
-                        false
+                    new CompleteInitializersVisitor(
+                            new MappingSourceNsSwitch(preWriteVisitor.apply(w), "official", /*Drop methods not in hashed*/ true)
                     )
-                )
             ));
         }
-    }
-
-    @Internal
-    protected Map<String, String> getNameAlternatives() {
-        return Collections.singletonMap("named", this.fillName); // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
     }
 
     protected MappingVisitor getFirstVisitor(MappingVisitor next) {

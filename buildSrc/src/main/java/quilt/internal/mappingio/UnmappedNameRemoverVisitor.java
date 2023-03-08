@@ -1,18 +1,18 @@
 package quilt.internal.mappingio;
 
-import net.fabricmc.mappingio.MappedElementKind;
-import net.fabricmc.mappingio.MappingVisitor;
-import net.fabricmc.mappingio.adapter.ForwardingMappingVisitor;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiPredicate;
 
+import net.fabricmc.mappingio.MappedElementKind;
+import net.fabricmc.mappingio.MappingVisitor;
+import net.fabricmc.mappingio.adapter.ForwardingMappingVisitor;
+
 /**
  * Removes unmapped names from the {@link #targetNamespace target namespace}. Whether a name is unmapped is determined
- * by {@link #unmappedPredicate}
+ * either if its name on the target namespace is the same as on the {@link #unmappedNamespace unmapped one}, or by {@link #unmappedPredicate}
  */
 public class UnmappedNameRemoverVisitor extends ForwardingMappingVisitor {
     private final String targetNamespace;
