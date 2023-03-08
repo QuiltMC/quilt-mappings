@@ -1,13 +1,20 @@
 package quilt.internal.tasks.unpick;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import daomephsta.unpick.constantmappers.datadriven.parser.FieldKey;
 import daomephsta.unpick.constantmappers.datadriven.parser.MethodKey;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Reader;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Remapper;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Writer;
-import net.fabricmc.mappingio.format.Tiny2Reader;
-import net.fabricmc.mappingio.tree.MappingTree;
-import net.fabricmc.mappingio.tree.MemoryMappingTree;
+import javax.inject.Inject;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
@@ -21,14 +28,11 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
-import javax.inject.Inject;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
+import net.fabricmc.mappingio.MappingVisitor;
+import net.fabricmc.mappingio.adapter.MappingNsCompleter;
+import net.fabricmc.mappingio.format.Tiny2Reader;
+import net.fabricmc.mappingio.tree.MappingTree;
+import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "remapUnpickDefinitions";
@@ -86,7 +90,10 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
 
             try (BufferedReader reader = Files.newBufferedReader(mappings)) {
                 MemoryMappingTree mappingTree = new MemoryMappingTree();
-                Tiny2Reader.read(reader, mappingTree);
+                // Use target namespace as fallback to source namespace
+                // Removes the need to add all the mappings to the file
+                MappingVisitor visitor = new MappingNsCompleter(mappingTree, Collections.singletonMap(fromM, toM));
+                Tiny2Reader.read(reader, visitor);
 
                 for (MappingTree.ClassMapping classMapping : mappingTree.getClasses()) {
                     classMappings.put(classMapping.getName(fromM), classMapping.getName(toM));
