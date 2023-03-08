@@ -60,33 +60,23 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
 
         getLogger().lifecycle(":merging {} and {}", Constants.MAPPINGS_NAME, this.mergeName);
         mergeMappings(mappingsTinyInput.toPath(), mergeTinyInput.toPath(), outputMappings.toPath(),
-            this::getFirstVisitor, this::getPreWriteVisitor, getNameAlternatives());
+            this::getFirstVisitor, this::getPreWriteVisitor);
     }
 
     @VisibleForTesting
     public static void mergeMappings(Path mappingsTinyInput, Path mergeTinyInput, Path outputMappings,
                                      Function<MappingVisitor, MappingVisitor> firstVisitor,
-                                     Function<MappingVisitor, MappingVisitor> preWriteVisitor,
-                                     Map<String, String> nameAlternatives) throws IOException {
+                                     Function<MappingVisitor, MappingVisitor> preWriteVisitor) throws IOException {
         MemoryMappingTree tree = new MemoryMappingTree(false); // hashed is the src namespace
         MappingReader.read(mergeTinyInput, MappingFormat.TINY_2, tree);
         MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2, tree);
         try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings), false)) {
             tree.accept(firstVisitor.apply(
                 new CompleteInitializersVisitor(
-                    new MappingNsCompleter(
-                        new MappingSourceNsSwitch(preWriteVisitor.apply(w), "official", /*Drop methods not in hashed*/ true),
-                        nameAlternatives,
-                        false
-                    )
+                    new MappingSourceNsSwitch(preWriteVisitor.apply(w), "official", /*Drop methods not in hashed*/ true)
                 )
             ));
         }
-    }
-
-    @Internal
-    protected Map<String, String> getNameAlternatives() {
-        return Collections.singletonMap("named", this.fillName); // Fill unnamed classes with hashed; Needed for remapUnpickDefinitions and possibly other things
     }
 
     protected MappingVisitor getFirstVisitor(MappingVisitor next) {
