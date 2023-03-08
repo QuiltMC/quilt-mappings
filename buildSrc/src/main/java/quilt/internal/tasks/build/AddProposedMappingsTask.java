@@ -1,5 +1,6 @@
 package quilt.internal.tasks.build;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -7,8 +8,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
+import com.google.common.collect.Streams;
+import cuchaz.enigma.Enigma;
+import cuchaz.enigma.EnigmaProfile;
+import cuchaz.enigma.EnigmaProject;
+import cuchaz.enigma.api.service.NameProposalService;
+import cuchaz.enigma.command.Command;
+import cuchaz.enigma.command.FillClassMappingsCommand;
 import cuchaz.enigma.command.InsertProposedMappingsCommand;
+import cuchaz.enigma.command.MappingCommandsUtil;
+import cuchaz.enigma.translation.mapping.EntryMapping;
+import cuchaz.enigma.translation.mapping.MappingDelta;
+import cuchaz.enigma.translation.mapping.serde.MappingSaveParameters;
+import cuchaz.enigma.translation.mapping.tree.DeltaTrackingTree;
+import cuchaz.enigma.translation.mapping.tree.EntryTree;
+import cuchaz.enigma.utils.Utils;
 import net.fabricmc.mappingio.MappingWriter;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import net.fabricmc.mappingio.format.MappingFormat;
@@ -78,17 +95,51 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
         Path commandInput = extraProcessing ? preprocessedMappings : input;
         Path commandOutput = extraProcessing ? processedMappings : output;
 
-        InsertProposedMappingsCommand.run(jar,
+        runCommands(jar,
             commandInput,
             commandOutput,
             String.format("tinyv2:%s:named", namespaces.get(0)),
-            profilePath,
-            null);
+            profilePath);
 
         if (extraProcessing) {
             MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
             try (MappingWriter writer = MappingWriter.create(output, MappingFormat.TINY_2)) {
                 outputTree.accept(writer);
+            }
+        }
+    }
+
+    private static void runCommands(Path jar, Path input, Path output, String resultFormat, Path profilePath) throws Exception {
+        EnigmaProfile profile = EnigmaProfile.read(profilePath);
+        Enigma enigma = Command.createEnigma(profile);
+
+        EnigmaProject project = Command.openProject(jar, input, enigma);
+        NameProposalService[] nameProposalServices = enigma.getServices().get(NameProposalService.TYPE).toArray(new NameProposalService[0]);
+
+        boolean debug = System.getProperty("qm.addProposedMappings.debug", "false").toLowerCase(Locale.ROOT).equals("true");
+        EntryTree<EntryMapping> withProposals = InsertProposedMappingsCommand.exec(nameProposalServices, project, debug);
+
+        // TODO: Disable fillAll after fixing the tiny v2 writer to avoid adding unnecessary class names
+        EntryTree<EntryMapping> result = FillClassMappingsCommand.exec(project.getJarIndex(), withProposals, true, debug);
+
+        Utils.delete(output);
+        MappingSaveParameters saveParameters = enigma.getProfile().getMappingSaveParameters();
+        MappingCommandsUtil.write(result, resultFormat, output, saveParameters);
+
+        if (debug) {
+            Path debugFile = output.getParent().resolve(output.getFileName().toString() + "-delta.txt");
+            MappingDelta<EntryMapping> proposalsDelta = ((DeltaTrackingTree<EntryMapping>) withProposals).takeDelta();
+            MappingDelta<EntryMapping> fillDelta = ((DeltaTrackingTree<EntryMapping>) result).takeDelta();
+
+            try (BufferedWriter writer = Files.newBufferedWriter(debugFile)) {
+                List<String> content = Streams.concat(proposalsDelta.getChanges().getAllEntries(), fillDelta.getChanges().getAllEntries())
+                        .map(Objects::toString)
+                        .toList();
+
+                for (String s : content) {
+                    writer.write(s);
+                    writer.newLine();
+                }
             }
         }
     }
