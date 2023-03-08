@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import java.util.List;
 
 public abstract class MappingAssertions {
-     public static void assertSrcNamespace(String expected, MappingTree tree) {
+    public static void assertSrcNamespace(String expected, MappingTree tree) {
         Assertions.assertEquals(expected, tree.getSrcNamespace());
     }
 
