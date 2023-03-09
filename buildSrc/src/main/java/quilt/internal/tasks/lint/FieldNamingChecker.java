@@ -26,12 +26,12 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
         boolean isAtomic = descriptor.isType() && descriptor.getTypeEntry().getFullName().toLowerCase(Locale.ROOT).contains("atomic");
         if (isAtomic) {
             if (startsWithUppercase(mapping.targetName())) {
-                errorReporter.warning("atomic field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
+                errorReporter.error("atomic field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
             }
         } else if (access.isStatic() && access.isFinal()) {
             if (!isConstantCase(mapping.targetName())) {
                 if (entry.getDesc().isArray()) {
-                    errorReporter.warning("static final array field is not in CONSTANT_CASE");
+                    errorReporter.error("static final array field is not in CONSTANT_CASE");
                 } else {
                     errorReporter.error("static final field is not in CONSTANT_CASE");
                 }
@@ -39,7 +39,7 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
         } else {
             if (startsWithUppercase(mapping.targetName())) {
                 String error = access.isFinal() ? "non-static" : "non-final";
-                errorReporter.warning(error + " field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
+                errorReporter.error(error + " field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
             }
         }
     }
