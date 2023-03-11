@@ -1,10 +1,18 @@
 CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
 	FIELD f_andzmyho GUI_ICONS_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 		COMMENT The texture of various icons and widgets used for rendering ingame indicators.
+	FIELD f_nxdukrxy screenAreaStack Lnet/minecraft/unmapped/C_smpzexmx$C_jmvjhyns;
 	FIELD f_rlwncfgj STATS_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 		COMMENT The texture of icons used in the stats screen.
+	FIELD f_wwyjxrzh LIGHT_DIRT_BACKGROUND_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_xgwmiebw OPTIONS_BACKGROUND_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 		COMMENT The texture used by options for background.
+	METHOD m_bqerhavv drawTexturedQuad (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIIFFII)V
+		ARG 1 x0
+		ARG 2 x1
+		ARG 3 y0
+		ARG 4 y1
+		ARG 5 z
 	METHOD m_ebgtwbqu fillGradient (Lorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_nxnqmnng;IIIIIII)V
 		ARG 0 matrix
 		ARG 2 startX
@@ -99,6 +107,13 @@ CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
 		ARG 2 y1
 		ARG 3 y2
 		ARG 4 color
+	METHOD m_kpibnkqc changeScissorState (Lnet/minecraft/unmapped/C_erwldarl;)V
+		ARG 0 area
+	METHOD m_ksjujvmg drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIIIII)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 width
+		ARG 4 height
 	METHOD m_nmhsgmhu drawSprite (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIILnet/minecraft/unmapped/C_uflrwbwt;)V
 		ARG 0 matrices
 		ARG 1 x
@@ -165,6 +180,32 @@ CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
 			COMMENT the width
 		ARG 6 height
 			COMMENT the height
+	METHOD m_rfjfnlfp drawTexturedQuad (Lorg/joml/Matrix4f;IIIIIFFFFFFFF)V
+		ARG 0 matrix
+		ARG 1 x0
+		ARG 2 x1
+		ARG 3 y0
+		ARG 4 y1
+		ARG 5 z
+		ARG 6 u0
+		ARG 7 u1
+		ARG 8 v0
+		ARG 9 v1
+		ARG 10 red
+		ARG 11 green
+		ARG 12 blue
+		ARG 13 alpha
+	METHOD m_rzakgxjn drawSprite (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIILnet/minecraft/unmapped/C_uflrwbwt;FFFF)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 width
+		ARG 5 height
+		ARG 6 sprite
+		ARG 7 red
+		ARG 8 green
+		ARG 9 blue
+		ARG 10 alpha
 	METHOD m_scgexxgq drawStringWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Ljava/lang/String;III)V
 		ARG 0 matrices
 		ARG 1 textRenderer
@@ -172,6 +213,7 @@ CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
 		ARG 3 x
 		ARG 4 y
 		ARG 5 color
+	METHOD m_teqwkepu drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIIII)V
 	METHOD m_tkjjzcwb drawTexturedQuad (Lorg/joml/Matrix4f;IIIIIFFFF)V
 		ARG 0 matrix
 		ARG 1 x0
@@ -183,6 +225,12 @@ CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
 		ARG 7 u1
 		ARG 8 v0
 		ARG 9 v1
+	METHOD m_vcgfbigo drawOutline (Lnet/minecraft/unmapped/C_cnszsxvd;IIIII)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 width
+		ARG 4 height
+		ARG 5 color
 	METHOD m_wzwzaodu drawCenteredText (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_rdaqiwdt;III)V
 		ARG 0 matrices
 		ARG 1 textRenderer
@@ -190,6 +238,7 @@ CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
 		ARG 3 centerX
 		ARG 4 y
 		ARG 5 color
+	METHOD m_xlsnqlxk drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;IIIIIIIIIIII)V
 	METHOD m_xywfifzm drawCenteredTextWithShadow (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_apvkgwyi;III)V
 		ARG 0 matrices
 		ARG 1 textRenderer
@@ -219,3 +268,8 @@ CLASS net/minecraft/unmapped/C_smpzexmx net/minecraft/client/gui/DrawableHelper
 		ARG 6 colorEnd
 		ARG 7 z
 	METHOD m_znncqnxs disableScissor ()V
+	CLASS C_jmvjhyns ScreenAreaStack
+		FIELD f_avodinlq scissorStack Ljava/util/Deque;
+		METHOD m_krhhqvaj push (Lnet/minecraft/unmapped/C_erwldarl;)Lnet/minecraft/unmapped/C_erwldarl;
+			ARG 1 area
+		METHOD m_uzrdsxfk peek ()Lnet/minecraft/unmapped/C_erwldarl;

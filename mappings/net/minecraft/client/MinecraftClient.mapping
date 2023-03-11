@@ -157,6 +157,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_svhgkmyf window Lnet/minecraft/unmapped/C_snosbckc;
 	FIELD f_svhtflji worldRenderer Lnet/minecraft/unmapped/C_sfkkabhx;
 	FIELD f_swbnzydi creativeHotbarStorage Lnet/minecraft/unmapped/C_twtdhnqb;
+	FIELD f_tfthtbuv metricsSampleTimeLength J
 	FIELD f_tuotfkjg nextDebugInfoUpdateTime J
 	FIELD f_tygfsvlj realmsDataFetcher Lnet/minecraft/unmapped/C_yyprjalz;
 	FIELD f_udhptfsg keyboard Lnet/minecraft/unmapped/C_csolnszv;
@@ -270,6 +271,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_fsvbdqcr getResourcePackDir ()Ljava/nio/file/Path;
 	METHOD m_futlsgwc getWorldGenerationProgressTracker ()Lnet/minecraft/unmapped/C_qtaaqxsg;
 	METHOD m_fvpjtpsc updateWindowTitle ()V
+	METHOD m_fyfybrkk (ZLjava/util/concurrent/CompletableFuture;Ljava/util/Optional;)V
+		ARG 3 optional
 	METHOD m_gbdqzmqi getGameVersion ()Ljava/lang/String;
 	METHOD m_gjlephcr setCameraEntity (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
@@ -342,8 +345,10 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_njtkwlge getSearchableContainer (Lnet/minecraft/unmapped/C_zqzigdge$C_gvofkqkn;)Lnet/minecraft/unmapped/C_inuoeylq;
 		ARG 1 key
 	METHOD m_nlctjtjt reloadResourcesConcurrently ()Ljava/util/concurrent/CompletableFuture;
+	METHOD m_npnscswp chatReportingContext ()Lnet/minecraft/unmapped/C_oxpapezz;
 	METHOD m_oadmkmvl forceSetScreen (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 1 screen
+	METHOD m_oefzpsnx setChatReportContext (Lnet/minecraft/unmapped/C_vbiguolf;)V
 	METHOD m_offtbgfs joinWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
 		ARG 1 world
 	METHOD m_ogdgxfac addDetailsToCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)Lnet/minecraft/unmapped/C_bkefkbum;
@@ -366,6 +371,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 4 report
 	METHOD m_pfleqtyk getVideoWarningManager ()Lnet/minecraft/unmapped/C_giiyufuh;
 	METHOD m_ppqcqqyo stopRecorder ()V
+	METHOD m_ppypuskf showPackLoadFailure (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 resourceName
 	METHOD m_ptakjikv getOverlay ()Lnet/minecraft/unmapped/C_gtnnbmai;
 	METHOD m_ptzdxqzt shouldFilterText ()Z
 	METHOD m_qemisroj getPlayerKeyPairManager ()Lnet/minecraft/unmapped/C_huqpbmju;
@@ -441,6 +448,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_wipirsgk getInstance ()Lnet/minecraft/unmapped/C_ayfeobid;
 	METHOD m_wkcnjoym isMultiplayerEnabled ()Z
 	METHOD m_wnvdggdb shouldMonitorTickDuration ()Z
+	METHOD m_xlacueca getClientChatListener ()Lnet/minecraft/unmapped/C_bmbrcost;
 	METHOD m_xsnthzsp getNetworkHandler ()Lnet/minecraft/unmapped/C_nuofrxvi;
 	METHOD m_xthkfemp isConnectedToServer ()Z
 	METHOD m_xutfzscx initializeSearchableContainers ()V
