@@ -2,6 +2,7 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 	COMMENT A clickable widget is a GUI element that has many methods to handle different
 	COMMENT mouse actions. In addition, it allows a message to be rendered on the widget
 	COMMENT and narrated when the widget is selected.
+	FIELD f_bfgdavkd tabNavigationOrder I
 	FIELD f_cjsmmjyb tooltip Lnet/minecraft/unmapped/C_skehaijy;
 	FIELD f_dzpdyfdx tooltipDelay I
 	FIELD f_fjktqkgd active Z
@@ -14,7 +15,9 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 	FIELD f_ppowyefj y I
 	FIELD f_prgrzmyd alpha F
 	FIELD f_qqnmwoid x I
+	FIELD f_uqewlwtr TIME_PER_SCROLLED_PIXEL D
 	FIELD f_vevzmidc message Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_vpgwssld MIN_SCROLL_TIME D
 	FIELD f_wxstegmf wasHoveredOrFocused Z
 	FIELD f_xzcbpput focused Z
 	FIELD f_zzvmffin hovered Z
@@ -28,7 +31,10 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 		ARG 1 builder
 	METHOD m_bhvsucly appendDefaultNarrations (Lnet/minecraft/unmapped/C_pofrkllk;)V
 		ARG 1 builder
-	METHOD m_bqqbliac drawMessage (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;II)V
+	METHOD m_bqqbliac drawScrollableText (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;II)V
+		ARG 1 matrices
+		ARG 2 textRenderer
+		ARG 3 xOffset
 		ARG 4 color
 	METHOD m_cwymxoak setMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 message
@@ -43,11 +49,12 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 	METHOD m_hxhlmyqd onClick (DD)V
 		ARG 1 mouseX
 		ARG 3 mouseY
-	METHOD m_igppotkm getTooltipPositioner ()Lnet/minecraft/unmapped/C_imjripdz;
-	METHOD m_mxhoikgj renderButton (Lnet/minecraft/unmapped/C_cnszsxvd;IIF)V
+	METHOD m_igppotkm createTooltipPositioner ()Lnet/minecraft/unmapped/C_imjripdz;
+	METHOD m_mxhoikgj drawWidget (Lnet/minecraft/unmapped/C_cnszsxvd;IIF)V
+		ARG 1 matrices
 		ARG 2 mouseX
 		ARG 3 mouseY
-		ARG 4 tickDelta
+		ARG 4 delta
 	METHOD m_ncxnkkvw isValidClickButton (I)Z
 		ARG 1 button
 	METHOD m_qavvrysx setAlpha (F)V
@@ -58,29 +65,34 @@ CLASS net/minecraft/unmapped/C_kpvuxmkp net/minecraft/client/gui/widget/Clickabl
 		ARG 5 deltaX
 		ARG 7 deltaY
 	METHOD m_sccgwmpk drawTexture (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIIII)V
+		ARG 1 matrices
 		ARG 2 texture
 		ARG 3 x
 		ARG 4 y
 		ARG 5 u
 		ARG 6 v
-		ARG 7 textureHeight
-		ARG 8 regionWidth
-		ARG 9 regionHeight
-		ARG 10 width
-		ARG 11 height
+		ARG 7 hoveredVOffset
+		ARG 8 width
+		ARG 9 height
+		ARG 10 textureWidth
+		ARG 11 textureHeight
 	METHOD m_sjpjzqmc getNarrationMessage ()Lnet/minecraft/unmapped/C_npqneive;
 	METHOD m_tgibvaaa setTooltip (Lnet/minecraft/unmapped/C_skehaijy;)V
 		ARG 1 tooltip
+	METHOD m_ucfyrqss setTabNavigationOrder (I)V
+		ARG 1 order
 	METHOD m_xaqgdxna playDownSound (Lnet/minecraft/unmapped/C_hfmtwavd;)V
 		ARG 1 soundManager
 	METHOD m_xuhmsncd setTooltipDelay (I)V
 		ARG 1 tooltipDelay
-	METHOD m_yqoezvpo drawTextInBounds (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_rdaqiwdt;IIIII)V
+	METHOD m_yqoezvpo drawScrollableText (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_rdaqiwdt;IIIII)V
+		ARG 0 matrices
+		ARG 1 textRenderer
 		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-		ARG 5 x2
-		ARG 6 y2
+		ARG 3 left
+		ARG 4 top
+		ARG 5 right
+		ARG 6 bottom
 		ARG 7 color
 	METHOD m_yttfswob getNarrationMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_npqneive;
 		ARG 0 message
