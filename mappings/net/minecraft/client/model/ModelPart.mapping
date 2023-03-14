@@ -18,6 +18,7 @@ CLASS net/minecraft/unmapped/C_rglqxnbw net/minecraft/client/model/ModelPart
 		ARG 1 cuboids
 		ARG 2 children
 	METHOD m_bahnjxpm rotate (Lorg/joml/Vector3f;)V
+		ARG 1 vec
 	METHOD m_djcbiehj forEachCuboid (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_rglqxnbw$C_qxqapydw;)V
 		ARG 1 matrices
 		ARG 2 consumer
@@ -57,9 +58,11 @@ CLASS net/minecraft/unmapped/C_rglqxnbw net/minecraft/client/model/ModelPart
 		ARG 8 alpha
 	METHOD m_mkbeqlhm getRandomCuboid (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_rglqxnbw$C_pqgerrye;
 	METHOD m_mxpjpupk translate (Lorg/joml/Vector3f;)V
+		ARG 1 vec
 	METHOD m_nbzpcsma copyTransform (Lnet/minecraft/unmapped/C_rglqxnbw;)V
 		ARG 1 part
 	METHOD m_pkfzyekc scale (Lorg/joml/Vector3f;)V
+		ARG 1 vec
 	METHOD m_ptspjwxx resetTransform ()V
 	METHOD m_qmxnkizf isEmpty ()Z
 	METHOD m_sohwfuxk (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_rglqxnbw$C_qxqapydw;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_rglqxnbw;)V
@@ -89,6 +92,10 @@ CLASS net/minecraft/unmapped/C_rglqxnbw net/minecraft/client/model/ModelPart
 			ARG 3 z
 			ARG 4 u
 			ARG 5 v
+		METHOD <init> (Lorg/joml/Vector3f;FF)V
+			ARG 1 pos
+			ARG 2 u
+			ARG 3 v
 		METHOD m_erldikus remap (FF)Lnet/minecraft/unmapped/C_rglqxnbw$C_jrnjoino;
 			ARG 1 u
 			ARG 2 v
@@ -100,6 +107,22 @@ CLASS net/minecraft/unmapped/C_rglqxnbw net/minecraft/client/model/ModelPart
 		FIELD f_lkxdkpkz sides [Lnet/minecraft/unmapped/C_rglqxnbw$C_vvvpvbyh;
 		FIELD f_rsymhmnr minZ F
 		FIELD f_wnnznpfb maxY F
+		METHOD <init> (IIFFFFFFFFFZFFLjava/util/Set;)V
+			ARG 1 textureWidth
+			ARG 2 textureHeight
+			ARG 3 minX
+			ARG 4 minY
+			ARG 5 minZ
+			ARG 6 sizeX
+			ARG 7 sizeY
+			ARG 8 sizeZ
+			ARG 9 radiusX
+			ARG 10 radiusY
+			ARG 11 radiusZ
+			ARG 12 mirror
+			ARG 13 squishU
+			ARG 14 squishV
+			ARG 15 directions
 		METHOD m_cwizgnrf renderCuboid (Lnet/minecraft/unmapped/C_cnszsxvd$C_pqokfevb;Lnet/minecraft/unmapped/C_igthdzux;IIFFFF)V
 			ARG 1 entry
 			ARG 2 vertexConsumer
@@ -133,5 +156,5 @@ CLASS net/minecraft/unmapped/C_rglqxnbw net/minecraft/client/model/ModelPart
 			ARG 5 v2
 			ARG 6 squishU
 			ARG 7 squishV
-			ARG 8 flip
+			ARG 8 mirror
 			ARG 9 direction
