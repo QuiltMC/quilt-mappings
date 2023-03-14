@@ -9,8 +9,10 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 		COMMENT after short-duration high-amplifier effects run out.
 	FIELD f_hvgmvstv showParticles Z
 	FIELD f_ieofirpv ambient Z
+	FIELD f_jlugskdk factorData Ljava/util/Optional;
 	FIELD f_phnnfhqn duration I
 	FIELD f_roivswws type Lnet/minecraft/unmapped/C_jaqasomh;
+	FIELD f_sfiyfhvh INFINITE_DURATION I
 	FIELD f_vciwymjw showIcon Z
 	METHOD <init> (Lnet/minecraft/unmapped/C_jaqasomh;)V
 		ARG 1 type
@@ -42,6 +44,7 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 		ARG 5 showParticles
 		ARG 6 showIcon
 		ARG 7 hiddenEffect
+		ARG 8 factorData
 	METHOD <init> (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 that
 	METHOD compareTo compareTo (Ljava/lang/Object;)I
@@ -49,28 +52,46 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
 	METHOD m_bbjmshxh getAmplifier ()I
+	METHOD m_bpgdokst mapDuration (Lit/unimi/dsi/fastutil/ints/Int2IntFunction;)I
+		ARG 1 mapper
+	METHOD m_cqvpfuqq isInfinite ()Z
 	METHOD m_dzdptdhl getDuration ()I
 	METHOD m_eihqlhtj fromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_wpfizwve;
 		ARG 0 nbt
 	METHOD m_eujryyfr update (Lnet/minecraft/unmapped/C_usxaxydn;Ljava/lang/Runnable;)Z
 		ARG 1 entity
 		ARG 2 overwriteCallback
+	METHOD m_fckfddyy isOngoing ()Z
 	METHOD m_hyaduncp upgrade (Lnet/minecraft/unmapped/C_wpfizwve;)Z
 		ARG 1 that
+	METHOD m_ihxqozqp (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 nbtData
 	METHOD m_iioanxlw writeNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 nbt
+	METHOD m_jiwejrbn getDurationString ()Ljava/lang/String;
 	METHOD m_karaetbk applyUpdateEffect (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 entity
 	METHOD m_kayxpwex getEffectType ()Lnet/minecraft/unmapped/C_jaqasomh;
+	METHOD m_nnlbhbex getFactorData ()Ljava/util/Optional;
 	METHOD m_ohxkuhnm shouldShowIcon ()Z
 	METHOD m_qqtmdstn shouldShowParticles ()Z
+	METHOD m_qxzigndt lastsShorterThan (Lnet/minecraft/unmapped/C_wpfizwve;)Z
+		ARG 1 effect
+	METHOD m_tfzqbofg (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_wpfizwve$C_hsbwmutx;)V
+		ARG 1 data
 	METHOD m_uhzuhbds isAmbient ()Z
 	METHOD m_ukwouxmh fromNbt (Lnet/minecraft/unmapped/C_jaqasomh;Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_wpfizwve;
 		ARG 0 type
 		ARG 1 nbt
+	METHOD m_uptkwtct (I)I
+		ARG 0 ticks
 	METHOD m_xedzspyz getTranslationKey ()Ljava/lang/String;
 	METHOD m_xwkrgskr copyFrom (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 that
+	METHOD m_yxlstbgh (Lnet/minecraft/unmapped/C_wpfizwve$C_hsbwmutx;)V
+		ARG 1 data
+	METHOD m_yxwgbwgv endsWithin (I)Z
+		ARG 1 ticks
 	METHOD m_zhljuajd updateDuration ()I
 	METHOD m_ztseznln writeTypelessNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
@@ -78,6 +99,7 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 		FIELD f_crewncse factorStart F
 		FIELD f_escsidzm CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_fczvaiew paddingDuration I
+		FIELD f_fdycwude ticksActive I
 		FIELD f_iolrdfbx factorCurrent F
 		FIELD f_mviasanq factorTarget F
 		FIELD f_tprodedf hadEffectLastTick Z
@@ -89,7 +111,7 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 			ARG 2 factorStart
 			ARG 3 factorTarget
 			ARG 4 factorCurrent
-			ARG 5 effectChangedTimeStamp
+			ARG 5 ticksActive
 			ARG 6 previousFrameFactor
 			ARG 7 hadEffectLastTick
 		METHOD m_bttkxbnz (Lnet/minecraft/unmapped/C_wpfizwve$C_hsbwmutx;)Ljava/lang/Integer;
@@ -102,6 +124,8 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 			ARG 0 data
 		METHOD m_nmktyxjh (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
+		METHOD m_pbqasdad tick (Lnet/minecraft/unmapped/C_wpfizwve;)V
+			ARG 1 effect
 		METHOD m_soqklgam getFactor (Lnet/minecraft/unmapped/C_usxaxydn;F)F
 			ARG 1 entity
 			ARG 2 delta
