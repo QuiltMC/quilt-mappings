@@ -5,6 +5,7 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 	FIELD f_jpcxqasc HANDLER_STATE_MAP Ljava/util/Map;
 	FIELD f_stwztcyj packetHandlers Ljava/util/Map;
 	FIELD f_vjkseuag stateId I
+	FIELD f_wzyfxkhh NOT_REGISTERED I
 	METHOD <init> (Ljava/lang/String;IILnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;)V
 		ARG 3 id
 		ARG 4 packetHandlerInitializer
@@ -39,7 +40,14 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 	CLASS C_lmmjpqqz PacketHandler
 		FIELD f_bzupszpd packetFactories Ljava/util/List;
 		FIELD f_feuhlzjs packetIds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		FIELD f_kwrnroeo bundlerInfo Lnet/minecraft/unmapped/C_ixirlvvy;
 		FIELD f_mseaveor LOGGER Lorg/slf4j/Logger;
+		FIELD f_obnctdix packetTypes Ljava/util/Set;
+		METHOD m_cpfcrscm forEachPacketType (Ljava/util/function/Consumer;)V
+			ARG 1 consumer
+		METHOD m_kdjwucoq withBundlePacket (Ljava/lang/Class;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;
+			ARG 1 packetType
+			ARG 2 function
 		METHOD m_kfitcvso register (Ljava/lang/Class;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;
 			ARG 1 type
 			ARG 2 packetFactory
@@ -50,3 +58,4 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 			ARG 1 packet
 		METHOD m_wfwlobvc (Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;)V
 			ARG 0 map
+		METHOD m_xcmncpjp getBundlerInfo ()Lnet/minecraft/unmapped/C_ixirlvvy;

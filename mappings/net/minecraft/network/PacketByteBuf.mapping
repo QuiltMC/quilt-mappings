@@ -308,6 +308,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readOptional(Reader)
 		ARG 1 value
 		ARG 2 writer
+	METHOD m_amtujwvt (Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Ljava/lang/Object;)V
+		ARG 2 object
 	METHOD m_axpttudp readNullable (Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Ljava/lang/Object;
 		COMMENT Reads a nullable value from this buf. A nullable value is represented by a
 		COMMENT boolean indicating if the value is present, followed by the value only if
@@ -340,6 +342,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT exceeds {@value #MAX_TEXT_LENGTH} in length
 		COMMENT @see #writeText(Text)
 		COMMENT @see #MAX_TEXT_LENGTH
+	METHOD m_cqyrnsig readJson (Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
+		ARG 1 codec
 	METHOD m_czlbxezf writeChunkPos (Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a chunk position to this buf. A chunk position is represented by
 		COMMENT a regular long.
@@ -594,6 +598,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return the number of bytes a var int {@code value} uses
 		ARG 0 value
 			COMMENT the value to encode
+	METHOD m_lnjgpfbn (Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Ljava/lang/Object;Ljava/lang/Object;)V
+		ARG 3 key
+		ARG 4 value
 	METHOD m_magkpoqu readUnlimitedNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT Reads an NBT compound from this buf. The binary representation of NBT is
 		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If an NBT null is encountered,
@@ -635,6 +642,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the array to write
 	METHOD m_nhmhnzug readBitSet (I)Ljava/util/BitSet;
 		ARG 1 bitSet
+	METHOD m_nhqatmjh writeJson (Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
+		ARG 1 codec
+		ARG 2 object
 	METHOD m_nmqqprrz readNbt (Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT Reads an NBT compound from this buf. The binary representation of NBT is
 		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If an NBT null is encountered,
@@ -655,6 +665,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readPublicKey()
 		COMMENT @see net.minecraft.network.encryption.NetworkEncryptionUtils#decodeEncodedRsaPublicKey(byte[])
 		ARG 1 key
+	METHOD m_okjhfado (ILjava/util/function/IntFunction;I)Ljava/lang/Object;
+		ARG 2 value
 	METHOD m_olpsrdqq getMaxValidator (Ljava/util/function/IntFunction;I)Ljava/util/function/IntFunction;
 		ARG 0 applier
 		ARG 1 max
@@ -835,6 +847,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readBlockHitResult()
 		ARG 1 hitResult
 			COMMENT the block hit result to write
+	METHOD m_tuovdjxm (Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Ljava/lang/Object;)V
+		ARG 2 object
 	METHOD m_uvlqpwrk readLongArray ([J)[J
 		COMMENT Reads an array of primitive longs from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the regular long (not var
@@ -900,6 +914,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readIdentifier()
 		ARG 1 id
 			COMMENT the identifier to write
+	METHOD m_waiabpsw writeEnumSet (Ljava/util/EnumSet;Ljava/lang/Class;)V
+		ARG 1 set
+		ARG 2 enumClass
 	METHOD m_wqpnnsca writeCollection (Ljava/util/Collection;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;)V
 		COMMENT Writes a collection to this buf. The collection is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
@@ -915,6 +932,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the value read
 		COMMENT @see #writeVarInt(int)
+	METHOD m_xfwjnxlt readEnumSet (Ljava/lang/Class;)Ljava/util/EnumSet;
+		ARG 1 enumClass
 	METHOD m_xkrizesk readProperty ()Lcom/mojang/authlib/properties/Property;
 		COMMENT Reads a property from this buf. A property is represented by two strings,
 		COMMENT indicating the key and value, followed by a boolean indicating if a
