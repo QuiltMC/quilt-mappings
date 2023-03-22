@@ -41,24 +41,36 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 6 telemetryManager
 	METHOD m_aljluxvy getListedPlayers ()Ljava/util/Collection;
 	METHOD m_aublwqmk getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq;
+	METHOD m_brihzlku (Ljava/util/Optional;)V
+		ARG 1 keyPair
 	METHOD m_btbbdyot sendCommand (Ljava/lang/String;)Z
+		ARG 1 command
 	METHOD m_coppxivl getWorldKeys ()Ljava/util/Set;
 	METHOD m_cxcqcpnf getRecipeManager ()Lnet/minecraft/unmapped/C_hjseusrb;
-	METHOD m_dnjjlbrj (Lnet/minecraft/unmapped/C_zzdolisx;Z)V
+	METHOD m_dnjjlbrj acknowledge (Lnet/minecraft/unmapped/C_zzdolisx;Z)V
 		ARG 1 message
 		ARG 2 setSignature
 	METHOD m_dzcnzspe playEntitySpawnSound (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_ekwchogv (Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;)V
+		ARG 0 entry
 	METHOD m_etfgyihv getPlayerUuids ()Ljava/util/Collection;
 	METHOD m_fiijclem sendPacket (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		COMMENT Sends a packet to the server.
 		ARG 1 packet
 			COMMENT the packet to send
+	METHOD m_fxqwieyv sendPacket (Lnet/minecraft/unmapped/C_zyjtrjrl;Ljava/util/function/BooleanSupplier;Ljava/time/Duration;)V
+		ARG 1 packet
+		ARG 2 canSend
+		ARG 3 delay
 	METHOD m_fzlgisyq sendChatMessage (Ljava/lang/String;)V
+		ARG 1 message
 	METHOD m_gjtvlxzl queueLightUpdate (IILnet/minecraft/unmapped/C_qeldjmur;)V
 		ARG 1 x
 		ARG 2 z
 		ARG 3 data
+	METHOD m_gkszsvqi sendChatCommand (Ljava/lang/String;)V
+		ARG 1 command
 	METHOD m_hluamyrn disconnect ()V
 	METHOD m_hqntbneu getWorld ()Lnet/minecraft/unmapped/C_ghdnlrrw;
 	METHOD m_jubodvkq getServerResourcePackPrompt (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -69,10 +81,17 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	METHOD m_kktwaxkp getActiveTotemOfUndying (Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 0 player
 	METHOD m_krkrcsmq getDataQueryHandler ()Lnet/minecraft/unmapped/C_kiomtpcs;
+	METHOD m_krmhfhib isSecureChatEnforced ()Z
+	METHOD m_ljecedhv tickQueuedPackets ()V
 	METHOD m_lublfrgy readLightData (IILnet/minecraft/unmapped/C_qeldjmur;)V
 		ARG 1 x
 		ARG 2 z
 		ARG 3 data
+	METHOD m_mkmcdlcg handlePlayerInfoUpdate (Lnet/minecraft/unmapped/C_lmoadlft$C_fbdheuhg;Lnet/minecraft/unmapped/C_lmoadlft$C_ywzccojo;Lnet/minecraft/unmapped/C_rdnfmxue;)V
+		ARG 1 action
+		ARG 2 playerEntry
+		ARG 3 playerListEntry
+	METHOD m_ngcanpet sendMessageAcknowledgment ()V
 	METHOD m_nnthzfll getCommandDispatcher ()Lcom/mojang/brigadier/CommandDispatcher;
 	METHOD m_nziwzrkj getConnection ()Lnet/minecraft/unmapped/C_oasmcckk;
 	METHOD m_ojepywax getEnabledFlags ()Lnet/minecraft/unmapped/C_czxxrbcp;
@@ -83,6 +102,9 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 2 chunkZ
 		ARG 3 provider
 		ARG 4 type
+	METHOD m_qtekilfb setChatSession (Lnet/minecraft/unmapped/C_lmoadlft$C_ywzccojo;Lnet/minecraft/unmapped/C_rdnfmxue;)V
+		ARG 1 playerEntry
+		ARG 2 playerListEntry
 	METHOD m_quieupaa getProfile ()Lcom/mojang/authlib/GameProfile;
 	METHOD m_rfxuxjoo isEnabled (Lnet/minecraft/unmapped/C_czxxrbcp;)Z
 		ARG 1 flags
@@ -94,8 +116,12 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 3 z
 	METHOD m_uupbuedi setKeyPair (Lnet/minecraft/unmapped/C_dmzoijjt;)V
 		ARG 1 keyPair
+	METHOD m_vldchvsw getUrl (Ljava/lang/String;)Ljava/net/URL;
+		ARG 0 address
 	METHOD m_vnmrjtiv sendResourcePackStatus (Lnet/minecraft/unmapped/C_gtifzcur$C_velualoa;)V
 		ARG 1 packStatus
+	METHOD m_wjsdfzoy (I)V
+		ARG 1 id
 	METHOD m_wkxolrzd getAdvancementHandler ()Lnet/minecraft/unmapped/C_wojlspxv;
 	METHOD m_xranmjii getPlayerListEntry (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_rdnfmxue;
 		ARG 1 uuid
