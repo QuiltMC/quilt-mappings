@@ -17,6 +17,7 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	FIELD f_ihichxhx loginScreen Lnet/minecraft/unmapped/C_wrmtlwqx;
 	FIELD f_jdlblqea clientRegistryManager Lnet/minecraft/unmapped/C_bcpxdrik;
 	FIELD f_kaqmqesv recipeManager Lnet/minecraft/unmapped/C_hjseusrb;
+	FIELD f_loanvahw PENDING_OFFSET_THRESHOLD I
 	FIELD f_mhovhvqz playerListEntries Ljava/util/Map;
 	FIELD f_ngfhyxgr connection Lnet/minecraft/unmapped/C_oasmcckk;
 	FIELD f_ngsvttes commandSource Lnet/minecraft/unmapped/C_vvqqprve;
@@ -52,6 +53,10 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 2 setSignature
 	METHOD m_dzcnzspe playEntitySpawnSound (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_eeyulmqo (Lnet/minecraft/unmapped/C_dvkwmbxw;Lnet/minecraft/unmapped/C_yxooxvgv$C_jfcpdjdk;)V
+		ARG 1 team
+	METHOD m_ehvndehm (Ljava/net/URL;Ljava/lang/String;ZZ)V
+		ARG 4 confirmed
 	METHOD m_ekwchogv (Lnet/minecraft/unmapped/C_wqxmvzdq$C_rsrqqoeq;)V
 		ARG 0 entry
 	METHOD m_etfgyihv getPlayerUuids ()Ljava/util/Collection;
@@ -80,8 +85,13 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 1 downloadFuture
 	METHOD m_kktwaxkp getActiveTotemOfUndying (Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 0 player
+	METHOD m_kpbeturh unloadChunk (Lnet/minecraft/unmapped/C_xrpvpfht;)V
+		ARG 1 packet
 	METHOD m_krkrcsmq getDataQueryHandler ()Lnet/minecraft/unmapped/C_kiomtpcs;
 	METHOD m_krmhfhib isSecureChatEnforced ()Z
+	METHOD m_livkqtnb updateTags (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_mnjlaveb$C_mlxyrlwl;)V
+		ARG 1 key
+		ARG 2 payload
 	METHOD m_ljecedhv tickQueuedPackets ()V
 	METHOD m_lublfrgy readLightData (IILnet/minecraft/unmapped/C_qeldjmur;)V
 		ARG 1 x
@@ -95,6 +105,8 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	METHOD m_nnthzfll getCommandDispatcher ()Lcom/mojang/brigadier/CommandDispatcher;
 	METHOD m_nziwzrkj getConnection ()Lnet/minecraft/unmapped/C_oasmcckk;
 	METHOD m_ojepywax getEnabledFlags ()Lnet/minecraft/unmapped/C_czxxrbcp;
+	METHOD m_ooemmvqz (Lnet/minecraft/unmapped/C_mkrkudpa;Lnet/minecraft/unmapped/C_awrmdwqd;)V
+		ARG 2 recipe
 	METHOD m_owpxqxbm getPlayerListEntry (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdnfmxue;
 		ARG 1 profileName
 	METHOD m_oyjilzsc updateLighting (IILnet/minecraft/unmapped/C_ksposksb;Lnet/minecraft/unmapped/C_fhvlmqtw;Ljava/util/BitSet;Ljava/util/BitSet;Ljava/util/Iterator;Z)V
@@ -102,6 +114,8 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 2 chunkZ
 		ARG 3 provider
 		ARG 4 type
+		ARG 7 nibbles
+		ARG 8 nonEdge
 	METHOD m_qtekilfb setChatSession (Lnet/minecraft/unmapped/C_lmoadlft$C_ywzccojo;Lnet/minecraft/unmapped/C_rdnfmxue;)V
 		ARG 1 playerEntry
 		ARG 2 playerListEntry
@@ -110,10 +124,12 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 1 flags
 	METHOD m_twqcihtd getPlayerList ()Ljava/util/Collection;
 	METHOD m_uccwwurs getServerInfo ()Lnet/minecraft/unmapped/C_xotldzgg;
-	METHOD m_ugyspzmn (Lnet/minecraft/unmapped/C_hrdsvlkq;II)V
+	METHOD m_ugyspzmn scheduleChunkRender (Lnet/minecraft/unmapped/C_hrdsvlkq;II)V
 		ARG 1 chunk
 		ARG 2 x
 		ARG 3 z
+	METHOD m_unmfbxko (Lnet/minecraft/unmapped/C_astfners;Lcom/mojang/datafixers/util/Pair;)V
+		ARG 1 pair
 	METHOD m_uupbuedi setKeyPair (Lnet/minecraft/unmapped/C_dmzoijjt;)V
 		ARG 1 keyPair
 	METHOD m_vldchvsw getUrl (Ljava/lang/String;)Ljava/net/URL;
@@ -125,6 +141,8 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	METHOD m_wkxolrzd getAdvancementHandler ()Lnet/minecraft/unmapped/C_wojlspxv;
 	METHOD m_xranmjii getPlayerListEntry (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_rdnfmxue;
 		ARG 1 uuid
+	METHOD m_ygczfind (Lnet/minecraft/unmapped/C_knypsere;Lnet/minecraft/unmapped/C_kvegafmh;)V
+		ARG 2 entity
 	METHOD m_yszhtlij parse (Ljava/lang/String;)Lcom/mojang/brigadier/ParseResults;
 		ARG 1 command
 	METHOD m_zdvdjxqm updateWorldChunk (IILnet/minecraft/unmapped/C_tilplatb;)V
