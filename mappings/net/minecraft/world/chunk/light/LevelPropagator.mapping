@@ -1,7 +1,5 @@
 CLASS net/minecraft/unmapped/C_psydzvcq net/minecraft/world/chunk/light/LevelPropagator
-	FIELD f_ebsnrrot minPendingLevel I
 	FIELD f_gzihvuvd levelCount I
-	FIELD f_mwjbjpwc pendingIdUpdatesByLevel [Lit/unimi/dsi/fastutil/longs/LongLinkedOpenHashSet;
 	FIELD f_nfunmrxz pendingUpdates Lit/unimi/dsi/fastutil/longs/Long2ByteMap;
 	FIELD f_ucijpoih hasPendingUpdates Z
 	FIELD f_xrtgeqfq MAX_LEVEL I
@@ -9,9 +7,6 @@ CLASS net/minecraft/unmapped/C_psydzvcq net/minecraft/world/chunk/light/LevelPro
 		ARG 1 levelCount
 		ARG 2 expectedLevelSize
 		ARG 3 expectedTotalSize
-	METHOD m_apuvuevo minLevel (II)I
-		ARG 1 a
-		ARG 2 b
 	METHOD m_axxplfci hasPendingUpdates ()Z
 	METHOD m_cmnzdzjd setLevel (JI)V
 		ARG 1 chunkPos
@@ -25,13 +20,6 @@ CLASS net/minecraft/unmapped/C_psydzvcq net/minecraft/world/chunk/light/LevelPro
 		ARG 1 sourceId
 		ARG 3 targetId
 		ARG 5 level
-	METHOD m_nkiwpdut increaseMinPendingLevel (I)V
-		ARG 1 maxLevel
-	METHOD m_oitadbqe removePendingUpdate (JIIZ)V
-		ARG 1 id
-		ARG 3 level
-		ARG 4 levelCount
-		ARG 5 removeFully
 	METHOD m_omoixhio updateLevel (JJIIIZ)V
 		ARG 1 sourceId
 		ARG 3 id
@@ -58,10 +46,6 @@ CLASS net/minecraft/unmapped/C_psydzvcq net/minecraft/world/chunk/light/LevelPro
 		ARG 1 id
 	METHOD m_wtixtcsc getLevel (J)I
 		ARG 1 chunkPos
-	METHOD m_xuofxfhn addPendingUpdate (JII)V
-		ARG 1 id
-		ARG 3 level
-		ARG 4 targetLevel
 	METHOD m_yplwuhvd propagateLevel (JJIZ)V
 		ARG 1 sourceId
 		ARG 3 targetId
@@ -69,9 +53,6 @@ CLASS net/minecraft/unmapped/C_psydzvcq net/minecraft/world/chunk/light/LevelPro
 		ARG 6 decrease
 	METHOD m_zhglcvgp applyPendingUpdates (I)I
 		ARG 1 maxSteps
-	CLASS C_qnnaitoz
-		METHOD rehash rehash (I)V
-			ARG 1 newN
 	CLASS C_wgsglvps
 		METHOD rehash rehash (I)V
 			ARG 1 newN
