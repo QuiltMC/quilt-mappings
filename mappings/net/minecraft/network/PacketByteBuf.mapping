@@ -514,19 +514,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readNullable(Reader)
 		ARG 1 value
 		ARG 2 writer
-	METHOD m_jcxllcuk writeNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes an NBT compound to this buf. The binary representation of NBT is
-		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If {@code compound} is {@code
-		COMMENT null}, it is treated as an NBT null.
-		COMMENT
-		COMMENT @return this buf, for chaining
-		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be
-		COMMENT written
-		COMMENT @see #readNbt()
-		COMMENT @see #readUnlimitedNbt()
-		COMMENT @see #readNbt(NbtTagSizeTracker)
-		ARG 1 compound
-			COMMENT the compound to write
 	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 		COMMENT Reads an object from this buf as a compound NBT with the given codec.
 		COMMENT
@@ -635,19 +622,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the array to write
 	METHOD m_nhmhnzug readBitSet (I)Ljava/util/BitSet;
 		ARG 1 bitSet
-	METHOD m_nmqqprrz readNbt (Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		COMMENT Reads an NBT compound from this buf. The binary representation of NBT is
-		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If an NBT null is encountered,
-		COMMENT this method returns {@code null}. The compound can have a maximum size
-		COMMENT controlled by the {@code sizeTracker}.
-		COMMENT
-		COMMENT @return the read compound, may be {@code null}
-		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be read
-		COMMENT @throws RuntimeException if the compound exceeds the allowed maximum size
-		COMMENT @see #writeNbt(NbtCompound)
-		COMMENT @see #readNbt()
-		COMMENT @see #readUnlimitedNbt()
-		ARG 1 sizeTracker
 	METHOD m_odlpvkyf writePublicKey (Ljava/security/PublicKey;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a public key to this buf.
 		COMMENT A public key is represented by at most 512 primitive bytes.
