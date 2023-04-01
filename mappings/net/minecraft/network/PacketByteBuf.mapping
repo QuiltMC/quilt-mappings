@@ -514,6 +514,16 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readNullable(Reader)
 		ARG 1 value
 		ARG 2 writer
+	METHOD m_jcxllcuk writeNbt (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_idfydwco;
+		COMMENT Writes an NBT compound to this buf. The binary representation of NBT is
+		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If {@code compound} is {@code
+		COMMENT null}, it is treated as an NBT null.
+		COMMENT
+		COMMENT @return this buf, for chaining
+		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be
+		COMMENT written
+		COMMENT @see #readNbt()
+		COMMENT @see #readUnlimitedNbt()
 	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 		COMMENT Reads an object from this buf as a compound NBT with the given codec.
 		COMMENT
@@ -593,7 +603,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be read
 		COMMENT @see #writeNbt(NbtCompound)
 		COMMENT @see #readNbt()
-		COMMENT @see #readNbt(NbtTagSizeTracker)
 	METHOD m_minhepob readEither (Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Lcom/mojang/datafixers/util/Either;
 		COMMENT Reads a value of two possible types, either left or right, from this buf.
 		COMMENT An Either value is represented by a boolean indicating whether to use the
@@ -774,7 +783,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @throws RuntimeException if the compound exceeds the allowed maximum size
 		COMMENT @see #writeNbt(NbtCompound)
 		COMMENT @see #readUnlimitedNbt()
-		COMMENT @see #readNbt(NbtTagSizeTracker)
 		COMMENT @see #MAX_READ_NBT_SIZE
 	METHOD m_sxbdiyar readOptional (Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Ljava/util/Optional;
 		COMMENT Reads an optional value from this buf. An optional value is represented by
