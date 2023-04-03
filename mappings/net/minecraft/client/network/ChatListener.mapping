@@ -1,0 +1,59 @@
+CLASS net/minecraft/unmapped/C_bmbrcost net/minecraft/client/network/ChatListener
+	FIELD f_aphmquxt messageDelay J
+	FIELD f_iqktwwic delayedMessages Ljava/util/Deque;
+	FIELD f_mknxirco previousMessageTime J
+	FIELD f_rgntyeme client Lnet/minecraft/unmapped/C_ayfeobid;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;)V
+		ARG 1 client
+	METHOD m_arsrhund setMessageDelay (D)V
+		ARG 1 seconds
+	METHOD m_duamdazj logSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/time/Instant;)V
+		ARG 1 message
+		ARG 2 time
+	METHOD m_dvdnyvxa extractSender (Lnet/minecraft/unmapped/C_rdaqiwdt;)Ljava/util/UUID;
+		ARG 1 message
+	METHOD m_dvumckck logChatMessage (Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_nqzmfynb;)V
+		ARG 1 message
+		ARG 2 parameters
+		ARG 3 profile
+		ARG 4 trustLevel
+	METHOD m_ewbsevgr displayMessage (Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_rdaqiwdt;Lcom/mojang/authlib/GameProfile;ZLjava/time/Instant;)Z
+		ARG 1 parameters
+		ARG 2 message
+		ARG 3 content
+		ARG 4 gameProfile
+		ARG 5 requiresTrust
+		ARG 6 time
+	METHOD m_exwqfeth tick ()V
+	METHOD m_gvfaqzqq handlePlayerMessage (Lnet/minecraft/unmapped/C_zzdolisx;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 gameProfile
+		ARG 3 parameters
+	METHOD m_jytgvbam handleMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
+		ARG 1 message
+		ARG 2 parameters
+	METHOD m_krjmifsf handleNextDelayedMessage ()V
+	METHOD m_moisztfj evaluateTrustLevel (Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/time/Instant;)Lnet/minecraft/unmapped/C_nqzmfynb;
+		ARG 1 message
+		ARG 2 content
+		ARG 3 time
+	METHOD m_pruzlfdn shouldDelay ()Z
+	METHOD m_qvebtjhq handleMessage (Lnet/minecraft/unmapped/C_shphkjbi;Ljava/util/function/BooleanSupplier;)V
+		ARG 1 signature
+		ARG 2 handler
+	METHOD m_rmbstkkm removeDelayedMessage (Lnet/minecraft/unmapped/C_shphkjbi;)Z
+		ARG 1 signature
+	METHOD m_rwluiifz matchesCurrentProfileId (Ljava/util/UUID;)Z
+		ARG 1 uuid
+	METHOD m_tvzofpwk handleSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
+		ARG 1 message
+		ARG 2 overlay
+	METHOD m_upqnrzyb getQueueSize ()J
+	METHOD m_vckxemst handleDelayedMessages ()V
+	METHOD m_xltpgvkh (Lnet/minecraft/unmapped/C_shphkjbi;Lnet/minecraft/unmapped/C_bmbrcost$C_ziqqmfwg;)Z
+		ARG 1 message
+	METHOD m_zvzdgejq narrateMessage (Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 parameters
+		ARG 2 message
+	CLASS C_ziqqmfwg Message
+		METHOD m_januayps accept ()Z
