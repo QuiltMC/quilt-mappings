@@ -24,6 +24,7 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	FIELD f_lvmnsmon strideDistance F
 	FIELD f_mpthcbws SLEEP_DURATION I
 	FIELD f_mwdihiqu prevCapeZ D
+	FIELD f_nvgvtbzg damageTiltStrength F
 	FIELD f_ogxdvcny MAIN_ARM Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_pcimjnvg prevCapeX D
 	FIELD f_pefjkyjf ENDER_CHEST_SLOT_OFFSET I
@@ -49,6 +50,9 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	FIELD f_yivtgyhl LOGGER Lorg/slf4j/Logger;
 	FIELD f_ywdzyesv DEFAULT_EYE_HEIGHT F
 	FIELD f_zmjqpvqo lastPlayedLevelUpSoundTime I
+	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;FLcom/mojang/authlib/GameProfile;)V
+		ARG 3 yaw
+		ARG 4 gameProfile
 	METHOD m_arduainz isCreativeLevelTwoOp ()Z
 	METHOD m_aubfsqlm setReducedDebugInfo (Z)V
 		ARG 1 reducedDebugInfo
@@ -86,6 +90,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 resetSleepTimer
 		ARG 2 updateSleepingPlayers
 	METHOD m_dxttgpbs getShoulderEntityRight ()Lnet/minecraft/unmapped/C_hhlwcnih;
+	METHOD m_dxwrvwbv (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 entity
 	METHOD m_ebadcaln lockRecipes (Ljava/util/Collection;)I
 		ARG 1 recipes
 	METHOD m_ejxhxqyb clipAtLedge ()Z
@@ -99,6 +105,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 ticks
 	METHOD m_gdwvdivl openEditSignScreen (Lnet/minecraft/unmapped/C_axouvzlg;Z)V
 		ARG 1 sign
+	METHOD m_ggtgzpqc (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 nbtElement
 	METHOD m_gmsleptb onPickupSlotClick (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_qcuteihm;)V
 		COMMENT Called when a player performs a {@link net.minecraft.screen.slot.SlotActionType#PICKUP
 		COMMENT pickup slot action} in a screen handler.
@@ -114,6 +122,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 message
 		ARG 2 actionBar
 	METHOD m_gvkpkpeh sendAbilitiesUpdate ()V
+	METHOD m_hemaufgy (Lnet/minecraft/unmapped/C_ogavsvbr;)Z
+		ARG 0 entityType
 	METHOD m_hiqfmqtd collideWithEntity (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
 	METHOD m_hsjkkbpv createCooldownManager ()Lnet/minecraft/unmapped/C_kqeizhow;
@@ -262,6 +272,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_xjswonqp resetStat (Lnet/minecraft/unmapped/C_sibrxbfy;)V
 		ARG 1 stat
 	METHOD m_xnugqgdd getHungerManager ()Lnet/minecraft/unmapped/C_lvaukqjj;
+	METHOD m_xqgqqttg (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 2 style
 	METHOD m_xuqwdmei setLastDeathPos (Ljava/util/Optional;)V
 		ARG 1 lastDeathPos
 	METHOD m_xxoyxruf updatePose ()V
@@ -275,6 +287,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 target
 	METHOD m_yscaqmsb addCritParticles (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 target
+	METHOD m_ytjjtgex (Lnet/minecraft/unmapped/C_ogavsvbr;)V
+		ARG 1 entityType
 	METHOD m_zkeljpmf isAboveGround ()Z
 	METHOD m_zlrabaci getScore ()I
 	METHOD m_znrmlhap shouldCancelInteraction ()Z
