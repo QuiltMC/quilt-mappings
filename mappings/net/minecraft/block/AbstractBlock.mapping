@@ -239,6 +239,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_mkfwgndk solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_nblipctl material Lnet/minecraft/unmapped/C_ccpykexk;
 		FIELD f_nijrkoes emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+		FIELD f_rmobaqut offsetFunction Ljava/util/Optional;
 		FIELD f_roiqhlco toolRequired Z
 		FIELD f_vcrxfhyc shapeCache Lnet/minecraft/unmapped/C_triydqro$C_eibemhky$C_xmxhiejp;
 		FIELD f_vifiyewd blockVisionPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
@@ -325,6 +326,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT {@return whether this block state is an instance of the given block}
 			ARG 1 block
 				COMMENT the block instance to match
+		METHOD m_geunkiif hasModelOffset ()Z
 		METHOD m_gosfbjut neighborUpdate (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
 			ARG 1 world
 			ARG 2 pos
@@ -450,6 +452,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT {@return whether this block is in the specified tag}
 			ARG 1 tag
 				COMMENT the tag key
+		METHOD m_urwakfyu (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_triydqro$C_mlfsdncu;)Lnet/minecraft/unmapped/C_vgpupfxx;
+			ARG 3 offsetFunction
 		METHOD m_uwpuhtkq isSideSolid (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_bermjtpm;)Z
 			ARG 1 world
 			ARG 2 pos
@@ -547,6 +551,11 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 world
 			ARG 3 pos
 			ARG 4 type
+	CLASS C_mlfsdncu OffsetFunction
+		METHOD evaluate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
+			ARG 1 state
+			ARG 2 world
+			ARG 3 pos
 	CLASS C_xnkxsdfy Settings
 		FIELD f_bhzlstcj postProcessPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_birtjrwx resistance F
@@ -565,6 +574,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_mwpuxldh solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_mzsdiveq material Lnet/minecraft/unmapped/C_ccpykexk;
 		FIELD f_obppjqdx opaque Z
+		FIELD f_pgktgiev offsetFunction Ljava/util/Optional;
 		FIELD f_piwzbwkw suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_pxqjcqnw lootTableId Lnet/minecraft/unmapped/C_ncpywfca;
 		FIELD f_snzcmbqu spawnsParticlesOnBreak Z
@@ -594,10 +604,16 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT Specifies that a block should have no collision bounds.
 			COMMENT
 			COMMENT <p>This also marks a block as non-opaque.
+		METHOD m_dmuqiycz (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
+			ARG 0 state
+			ARG 1 world
+			ARG 2 pos
 		METHOD m_dsszzhch pistonBehavior (Lnet/minecraft/unmapped/C_mojvzhua;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 pistonBehavior
 		METHOD m_eajltsia solidBlock (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
+		METHOD m_edlblpmg offsetType (Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 1 offsetType
 		METHOD m_egobildr (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 1 state
 			ARG 2 world
@@ -659,11 +675,14 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_shyyftwz requiresTool ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_tovaiowf (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
 			ARG 0 state
+			ARG 1 world
+			ARG 2 pos
 		METHOD m_tzpskyoo (Lnet/minecraft/unmapped/C_ifcgjcqy;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_ifcgjcqy;
 			ARG 1 state
 		METHOD m_umndjpsf resistance (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 resistance
 		METHOD m_vliybdqv ignitableByLava ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			COMMENT Specifies that a block can be set on fire by lava.
 		METHOD m_voowovbo dropsNothing ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			COMMENT Specifies that a block drops nothing when broken.
 			COMMENT
