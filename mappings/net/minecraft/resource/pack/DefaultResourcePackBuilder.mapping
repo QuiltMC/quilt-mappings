@@ -1,0 +1,71 @@
+CLASS net/minecraft/unmapped/C_vgiowgut net/minecraft/resource/pack/DefaultResourcePackBuilder
+	COMMENT Represents the default resource pack builder.
+	COMMENT <p>
+	COMMENT It allows building a {@link DefaultResourcePack} instance, given a configuration.
+	FIELD f_fkrebssw developmentConfig Ljava/util/function/Consumer;
+	FIELD f_iikipwcl namespaces Ljava/util/Set;
+	FIELD f_khzkukxs rootPaths Ljava/util/Set;
+	FIELD f_mzuxlbrv metadata Lnet/minecraft/unmapped/C_iabfqjlu;
+	FIELD f_rcxcnenb ROOT_PATH_BY_TYPE Ljava/util/Map;
+	FIELD f_tvxrtwpz paths Ljava/util/Map;
+	METHOD m_ajvraqqj (Lnet/minecraft/unmapped/C_abwutbbk;)Ljava/util/Set;
+		ARG 0 p
+	METHOD m_elcvcmgm applyDevelopmentConfig ()Lnet/minecraft/unmapped/C_vgiowgut;
+	METHOD m_frgitsny exists (Ljava/nio/file/Path;)Z
+		ARG 1 path
+	METHOD m_geeqqlvc (Lnet/minecraft/unmapped/C_abwutbbk;Ljava/nio/file/Path;)V
+		ARG 1 resourceType
+		ARG 2 resourcePath
+	METHOD m_mwyuxkmj (Lnet/minecraft/unmapped/C_vgiowgut;)V
+		ARG 0 builder
+	METHOD m_olgvvxwe addRootPath (Ljava/nio/file/Path;)V
+		ARG 1 path
+	METHOD m_pxiijend withPath (Lnet/minecraft/unmapped/C_abwutbbk;Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_vgiowgut;
+		COMMENT Adds a type-specific resource path.
+		COMMENT
+		COMMENT @return {@code this}
+		ARG 1 type
+			COMMENT the resource type of the resource path
+		ARG 2 path
+			COMMENT the path to the resources of the given type
+	METHOD m_pzzcjkwf withMetadata (Lnet/minecraft/unmapped/C_iabfqjlu;)Lnet/minecraft/unmapped/C_vgiowgut;
+		COMMENT Sets the metadata.
+		COMMENT
+		COMMENT @return {@code this}
+		ARG 1 metadata
+			COMMENT the metadata
+	METHOD m_qpitkgzx withNamespaces ([Ljava/lang/String;)Lnet/minecraft/unmapped/C_vgiowgut;
+		COMMENT Adds the given namespaces as existing namespaces in this resource pack.
+		COMMENT
+		COMMENT @return {@code this}
+		ARG 1 namespaces
+			COMMENT the namespaces
+	METHOD m_uzelffqf toPath (Ljava/net/URI;)Ljava/nio/file/Path;
+		ARG 0 uri
+	METHOD m_vdwfqfqv withPaths (Lnet/minecraft/unmapped/C_abwutbbk;Ljava/lang/Class;)Lnet/minecraft/unmapped/C_vgiowgut;
+		COMMENT Adds the resource path of the given resource type from the class loader's given class.
+		COMMENT
+		COMMENT @return {@code this}
+		ARG 1 resourceType
+			COMMENT the resource type
+		ARG 2 classForPath
+			COMMENT the class loaded using the class loader used to find the resources
+	METHOD m_vhghnrfw withRootPath (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_vgiowgut;
+		COMMENT Adds the given root path.
+		COMMENT
+		COMMENT @return {@code this}
+		ARG 1 path
+			COMMENT the root path
+	METHOD m_vjqwsvis copyAndReverse (Ljava/util/Collection;)Ljava/util/List;
+		ARG 0 paths
+	METHOD m_xpfidyew build ()Lnet/minecraft/unmapped/C_qauewsos;
+		COMMENT Builds the default resource pack.
+		COMMENT
+		COMMENT @return the built default resource pack
+	METHOD m_zbxkmftx withDefaultPaths ()Lnet/minecraft/unmapped/C_vgiowgut;
+		COMMENT Adds the default paths, usually from the Minecraft JAR itself.
+		COMMENT
+		COMMENT @return {@code this}
+	METHOD m_zmbnkcdl addPath (Lnet/minecraft/unmapped/C_abwutbbk;Ljava/nio/file/Path;)V
+		ARG 1 type
+		ARG 2 path
