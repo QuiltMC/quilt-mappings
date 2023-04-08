@@ -1,0 +1,44 @@
+CLASS net/minecraft/unmapped/C_gpzjbzcw net/minecraft/world/RedstonePowerView
+	FIELD f_caqhuckp DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
+	METHOD m_dnkvwchb getEmittedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)I
+		COMMENT {@return the redstone power emitted from the given position in the given direction}
+		COMMENT This is the highest value between power emitted by the block itself, and strong redstone power
+		COMMENT received from neighboring blocks if the block is a redstone conductor.
+		COMMENT <p>
+		COMMENT NOTE: directions in redstone power related methods are backwards, so this method
+		COMMENT checks for power in the <i>opposite</i> direction of the one given.
+		ARG 1 pos
+		ARG 2 dir
+	METHOD m_dsckesgu isEmittingRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		COMMENT {@return whether redstone power is emitted from the given position in the given direction}
+		COMMENT <p>
+		COMMENT NOTE: directions in redstone power related methods are backwards, so this method
+		COMMENT checks for power in the <i>opposite</i> direction of the one given.
+		ARG 1 pos
+		ARG 2 dir
+	METHOD m_fwaivkfo isReceivingRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		COMMENT {@return whether the given position receives any redstone power from neighboring blocks}
+		ARG 1 pos
+	METHOD m_hizjdvsd getReceivedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		COMMENT {@return the redstone power the given position receives from neighboring blocks}
+		ARG 1 pos
+	METHOD m_rgxdlzfx getReceivedStrongRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		COMMENT {@return the strong redstone power the given position receives from neighboring blocks}
+		ARG 1 pos
+	METHOD m_uegtusaf getEmittedStrongRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)I
+		COMMENT {@return the strong redstone power emitted from the given position in the given direction}
+		COMMENT <p>
+		COMMENT NOTE: directions in redstone power related methods are backwards, so this method
+		COMMENT checks for power in the <i>opposite</i> direction of the one given.
+		ARG 1 pos
+		ARG 2 dir
+	METHOD m_vjljrkvs getFilteredEmittedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Z)I
+		COMMENT {@return the filtered redstone power emitted from the given position in the given direction}
+		COMMENT In 'strict' mode the filter only allows strong redstone power from redstone diodes (repeaters and comparators),
+		COMMENT while in 'lenient' mode it allows strong redstone power from any block as well as weak redstone power from redstone blocks.
+		COMMENT <p>
+		COMMENT NOTE: directions in redstone power related methods are backwards, so this method
+		COMMENT checks for power in the <i>opposite</i> direction of the one given.
+		ARG 1 pos
+		ARG 2 dir
+		ARG 3 strict
