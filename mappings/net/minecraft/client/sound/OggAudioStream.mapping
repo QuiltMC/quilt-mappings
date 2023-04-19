@@ -6,14 +6,18 @@ CLASS net/minecraft/unmapped/C_kmzalvuj net/minecraft/client/sound/OggAudioStrea
 	FIELD f_zqsxofdx buffer Ljava/nio/ByteBuffer;
 	METHOD <init> (Ljava/io/InputStream;)V
 		ARG 1 inputStream
+	METHOD close close ()V
 	METHOD m_fqupbqiz readOggFile (Lnet/minecraft/unmapped/C_kmzalvuj$C_lwjeqxvp;)Z
 		ARG 1 channels
-	METHOD m_kryxomte readChannels (Ljava/nio/FloatBuffer;Lnet/minecraft/unmapped/C_kmzalvuj$C_lwjeqxvp;)V
+	METHOD m_kryxomte readMonoChannels (Ljava/nio/FloatBuffer;Lnet/minecraft/unmapped/C_kmzalvuj$C_lwjeqxvp;)V
+		ARG 1 buf
 		ARG 2 channels
 	METHOD m_rrrfefqe increaseBufferSize ()V
 	METHOD m_stwvsljz readHeader ()Z
 	METHOD m_wahrpovr getBuffer ()Ljava/nio/ByteBuffer;
-	METHOD m_yshptkee readChannels (Ljava/nio/FloatBuffer;Ljava/nio/FloatBuffer;Lnet/minecraft/unmapped/C_kmzalvuj$C_lwjeqxvp;)V
+	METHOD m_yshptkee readStereoChannels (Ljava/nio/FloatBuffer;Ljava/nio/FloatBuffer;Lnet/minecraft/unmapped/C_kmzalvuj$C_lwjeqxvp;)V
+		ARG 1 leftBuf
+		ARG 2 rightBuf
 		ARG 3 channels
 	CLASS C_lwjeqxvp ChannelList
 		FIELD f_aoiwnzot buffer Ljava/nio/ByteBuffer;
@@ -25,3 +29,4 @@ CLASS net/minecraft/unmapped/C_kmzalvuj net/minecraft/client/sound/OggAudioStrea
 		METHOD m_edwllxaw getBuffer ()Ljava/nio/ByteBuffer;
 		METHOD m_fswkezcs init ()V
 		METHOD m_pijxfomm addChannel (F)V
+			ARG 1 data

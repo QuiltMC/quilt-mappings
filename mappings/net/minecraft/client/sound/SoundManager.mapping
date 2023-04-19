@@ -3,9 +3,15 @@ CLASS net/minecraft/unmapped/C_hfmtwavd net/minecraft/client/sound/SoundManager
 	FIELD f_hhhykjqi MISSING_SOUND Lnet/minecraft/unmapped/C_ranpgzkp;
 	FIELD f_jccmizbj sounds Ljava/util/Map;
 	FIELD f_ogjcdvst LOGGER Lorg/slf4j/Logger;
+	FIELD f_onihgyzn soundCache Ljava/util/Map;
 	FIELD f_qnxjfugd soundSystem Lnet/minecraft/unmapped/C_stgbrlun;
+	FIELD f_rduxssex INTENTIONALLY_EMPTY_SOUND Lnet/minecraft/unmapped/C_ranpgzkp;
 	FIELD f_rhathvjq TYPE Lcom/google/gson/reflect/TypeToken;
 	FIELD f_trlbjhvs SOUNDS_JSON Ljava/lang/String;
+	FIELD f_tylnnyei INTENTIONALLY_EMPTY_SOUND_SET Lnet/minecraft/unmapped/C_rjijmyov;
+	FIELD f_yhgwebxt INTENTIONALLY_EMPTY Lnet/minecraft/unmapped/C_ncpywfca;
+	METHOD <init> (Lnet/minecraft/unmapped/C_lscptbhn;)V
+		ARG 1 options
 	METHOD m_arsfsqit getKeys ()Ljava/util/Collection;
 	METHOD m_cqqjitjf reloadSounds ()V
 	METHOD m_dntrwbto updateSoundVolume (Lnet/minecraft/unmapped/C_pqzizukq;F)V
@@ -19,6 +25,7 @@ CLASS net/minecraft/unmapped/C_hfmtwavd net/minecraft/client/sound/SoundManager
 	METHOD m_lehpooor isSoundResourcePresent (Lnet/minecraft/unmapped/C_ranpgzkp;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_xadhkzfq;)Z
 		ARG 0 sound
 		ARG 1 id
+		ARG 2 factory
 	METHOD m_mgfhyrmt playNextTick (Lnet/minecraft/unmapped/C_juuahjvj;)V
 		ARG 1 sound
 	METHOD m_mkiowrsl isPlaying (Lnet/minecraft/unmapped/C_uoilbcii;)Z
@@ -45,10 +52,14 @@ CLASS net/minecraft/unmapped/C_hfmtwavd net/minecraft/client/sound/SoundManager
 	METHOD m_yasppjdx stop (Lnet/minecraft/unmapped/C_uoilbcii;)V
 		ARG 1 sound
 	CLASS C_cwtdyuyd SoundList
-		FIELD f_cnsnuzeg loadedSounds Ljava/util/Map;
+		FIELD f_cnsnuzeg registry Ljava/util/Map;
+		FIELD f_kkggsvac soundCache Ljava/util/Map;
 		METHOD m_eodvnwnq register (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_srtxooys;)V
 			ARG 1 id
 			ARG 2 entry
 		METHOD m_gocoowrf addTo (Ljava/util/Map;Ljava/util/Map;Lnet/minecraft/unmapped/C_stgbrlun;)V
 			ARG 1 loadedSounds
+			ARG 2 soundCache
 			ARG 3 soundSystem
+		METHOD m_zevnijqk cacheSounds (Lnet/minecraft/unmapped/C_tmnrpasf;)V
+			ARG 1 manager

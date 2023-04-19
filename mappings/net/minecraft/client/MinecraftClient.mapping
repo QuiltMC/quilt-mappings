@@ -54,6 +54,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_bzlzxgjd tutorialManager Lnet/minecraft/unmapped/C_eqosojcf;
 	FIELD f_ccoiwmig runDirectory Ljava/io/File;
 		COMMENT The directory that stores options, worlds, resource packs, logs, etc.
+	FIELD f_cdqbrfrn quickPlayLogger Lnet/minecraft/unmapped/C_plekrknb;
 	FIELD f_cesulxxt textureManager Lnet/minecraft/unmapped/C_rglkduer;
 	FIELD f_cfebutjv videoWarningManager Lnet/minecraft/unmapped/C_giiyufuh;
 	FIELD f_cfilflga sessionService Lcom/mojang/authlib/minecraft/MinecraftSessionService;
@@ -223,6 +224,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_cbjyfsge refreshSearch (Lnet/minecraft/unmapped/C_zqzigdge$C_gvofkqkn;Ljava/util/List;)V
 		ARG 1 key
 		ARG 2 searchables
+	METHOD m_cfkdcloy (Z)V
+		ARG 1 confirmed
 	METHOD m_cfvjiijv cancelRecorder ()V
 	METHOD m_crapepyd getEntityModelLoader ()Lnet/minecraft/unmapped/C_qncyfzro;
 	METHOD m_cwwicafr isSingleplayer ()Z
@@ -261,18 +264,27 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT will be called on it to notify it of the closing.
 		ARG 1 screen
 			COMMENT the new screen, or {@code null} to just close the previous screen
+	METHOD m_egnlfyjl (Ljava/util/List;)Lnet/minecraft/unmapped/C_wvjmuhfo;
+		ARG 0 list
 	METHOD m_egpifpov isOptionalTelemetryEnabled ()Z
+	METHOD m_ejicmrfw (Ljava/lang/String;)Z
+		ARG 0 string
 	METHOD m_exakjteb getSessionProperties ()Lcom/mojang/authlib/properties/PropertyMap;
 	METHOD m_faatluqx (Ljava/util/List;)V
 		ARG 0 stacks
+		ARG 1 list
 	METHOD m_fblebkis getSkinProvider ()Lnet/minecraft/unmapped/C_pyciilvf;
 	METHOD m_fcdeiybw toggleDebugProfiler (Ljava/util/function/Consumer;)Z
 		ARG 1 chatMessageSender
+	METHOD m_fctndloq (Lnet/minecraft/unmapped/C_rdaqiwdt;)Ljava/lang/String;
+		ARG 0 text
 	METHOD m_fnnphfvj getEntityRenderDispatcher ()Lnet/minecraft/unmapped/C_gmkqxljo;
 	METHOD m_fquuldng isPaused ()Z
 	METHOD m_fsvbdqcr getResourcePackDir ()Ljava/nio/file/Path;
 	METHOD m_futlsgwc getWorldGenerationProgressTracker ()Lnet/minecraft/unmapped/C_qtaaqxsg;
 	METHOD m_fvpjtpsc updateWindowTitle ()V
+	METHOD m_fweiciji (ZLjava/util/concurrent/CompletableFuture;Ljava/util/Optional;)V
+		ARG 3 exceptionOptional
 	METHOD m_gbdqzmqi getGameVersion ()Ljava/lang/String;
 	METHOD m_gjlephcr setCameraEntity (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
@@ -301,6 +313,12 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 mipmapLevels
 	METHOD m_imhnyksl getWindow ()Lnet/minecraft/unmapped/C_snosbckc;
 	METHOD m_iuvifafs getDefaultResourcePack ()Lnet/minecraft/unmapped/C_qauewsos;
+	METHOD m_iuyrgzvf (Lnet/minecraft/unmapped/C_ymmazfhq;Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/stream/Stream;
+		ARG 1 recipe
+	METHOD m_ixfyrqov (Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Lnet/minecraft/unmapped/C_vmxvaoqe;Ljava/lang/Thread;)Lnet/minecraft/unmapped/C_mxzbwazq;
+		ARG 5 thread
+	METHOD m_ixydweer (Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletionStage;
+		ARG 0 future
 	METHOD m_jctsnpmo getBlockEntityRenderDispatcher ()Lnet/minecraft/unmapped/C_sicqxpzm;
 	METHOD m_jgfcfpip isOptionalTelemetryAvailable ()Z
 	METHOD m_jiouzlzi getServer ()Lnet/minecraft/unmapped/C_mxzbwazq;
@@ -318,6 +336,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_kuckpnkp getTickDelta ()F
 	METHOD m_kxlqcbtr tick ()V
 	METHOD m_lcfptbuw handleBlockBreaking (Z)V
+		ARG 1 completeBreak
 	METHOD m_leficfia getMusicTracker ()Lnet/minecraft/unmapped/C_bqcuvynv;
 	METHOD m_lleaifgh getLastFrameDuration ()F
 	METHOD m_lmsvuglx addSystemDetailsToCrashReport (Lnet/minecraft/unmapped/C_fprbxnfr;Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_dahbfdem;Ljava/lang/String;Lnet/minecraft/unmapped/C_lscptbhn;)Lnet/minecraft/unmapped/C_fprbxnfr;
@@ -326,6 +345,10 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 2 languageManager
 		ARG 3 version
 		ARG 4 options
+	METHOD m_lojsiqav (Lnet/minecraft/unmapped/C_ymmazfhq;)Ljava/util/stream/Stream;
+		ARG 0 resultCollection
+	METHOD m_lvwgqwxn (Ljava/util/List;)Lnet/minecraft/unmapped/C_wvjmuhfo;
+		ARG 0 list
 	METHOD m_lwpmozmo getNetworkProxy ()Ljava/net/Proxy;
 	METHOD m_mgwfxoza getModStatus ()Lnet/minecraft/unmapped/C_wlkuksof;
 	METHOD m_mkztxxaq getRemoteResourcePackProvider ()Lnet/minecraft/unmapped/C_aqwrwsxs;
@@ -333,6 +356,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 stack
 		ARG 2 blockEntity
 	METHOD m_mmruqhcv scheduleStop ()V
+	METHOD m_modhymrw (ZLjava/lang/Throwable;)V
+		ARG 2 exception
 	METHOD m_mqdbnddk handleInputEvents ()V
 	METHOD m_mwwbovfc isConnectedToRealms ()Z
 	METHOD m_ngtmdbml startIntegratedServer (Ljava/lang/String;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Z)V
@@ -340,6 +365,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 2 session
 		ARG 3 resourcePackManager
 		ARG 4 worldStem
+		ARG 5 isNewWorld
 	METHOD m_nibdztri isIntegratedServerRunning ()Z
 	METHOD m_njnkxxki getWindowTitle ()Ljava/lang/String;
 	METHOD m_njtkwlge getSearchableContainer (Lnet/minecraft/unmapped/C_zqzigdge$C_gvofkqkn;)Lnet/minecraft/unmapped/C_inuoeylq;
@@ -349,6 +375,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_oadmkmvl forceSetScreen (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 1 screen
 	METHOD m_oefzpsnx setChatReportContext (Lnet/minecraft/unmapped/C_vbiguolf;)V
+		ARG 1 environment
 	METHOD m_offtbgfs joinWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
 		ARG 1 world
 	METHOD m_ogdgxfac addDetailsToCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)Lnet/minecraft/unmapped/C_bkefkbum;
@@ -370,6 +397,10 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 3 options
 		ARG 4 report
 	METHOD m_pfleqtyk getVideoWarningManager ()Lnet/minecraft/unmapped/C_giiyufuh;
+	METHOD m_popsxyee (Ljava/lang/String;)Z
+		ARG 0 string
+	METHOD m_potaagxt (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 0 text
 	METHOD m_ppqcqqyo stopRecorder ()V
 	METHOD m_ppypuskf displayPackLoadFailureToast (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 message
@@ -390,6 +421,14 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 3 unitHeight
 		ARG 4 width
 		ARG 5 height
+	METHOD m_qitbpodu (Lnet/minecraft/unmapped/C_rdaqiwdt;)Ljava/lang/String;
+		ARG 0 text
+	METHOD m_qozcjtsz connectQuickPlay (Lnet/minecraft/unmapped/C_ivysvyzf;Lnet/minecraft/unmapped/C_dzecaeok;Lnet/minecraft/unmapped/C_pdsiuywi$C_ztbvorvu;)V
+		ARG 1 realmsClient
+		ARG 2 resourceReload
+		ARG 3 quickPlay
+	METHOD m_qpjbceeh (Ljava/util/List;)Lnet/minecraft/unmapped/C_wvjmuhfo;
+		ARG 0 list
 	METHOD m_qumbuvds getBufferBuilders ()Lnet/minecraft/unmapped/C_dfmwjguw;
 	METHOD m_qzdvutlp getResourceManager ()Lnet/minecraft/unmapped/C_tmnrpasf;
 	METHOD m_reukrcbm getTutorialManager ()Lnet/minecraft/unmapped/C_eqosojcf;
@@ -401,12 +440,17 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 directory
 		ARG 2 width
 		ARG 3 height
+	METHOD m_rofjwsoe getQuickPlayLogger ()Lnet/minecraft/unmapped/C_plekrknb;
+	METHOD m_rsavxtdp (Ljava/io/File;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_rzjpaaju doAttack ()Z
 	METHOD m_rzmoptef doItemPick ()V
 	METHOD m_sbqagrpz getBanDetails ()Lcom/mojang/authlib/minecraft/BanDetails;
 	METHOD m_sgqznkcg getLastInputType ()Lnet/minecraft/unmapped/C_qdenxghm;
 	METHOD m_sgsxylrl getItemRenderer ()Lnet/minecraft/unmapped/C_xjqetogb;
 	METHOD m_skbwigbs doItemUse ()V
+	METHOD m_sklunwdl (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 0 text
 	METHOD m_slhezzjr reloadResources (Z)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Reloads the client's resources.
 		COMMENT
@@ -414,6 +458,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 force
 			COMMENT {@code true} if the resource reloading should be forced, or {@code false} otherwise
 	METHOD m_smodvonk getSoundManager ()Lnet/minecraft/unmapped/C_hfmtwavd;
+	METHOD m_snpfnggq (I)Lnet/minecraft/unmapped/C_jnfclwgd;
+		ARG 1 radius
 	METHOD m_soplzpsv shouldShowBanNotice ()Z
 	METHOD m_ssowzzsw shouldRenderAsync ()Z
 	METHOD m_stbazwpo initFont (Z)V
@@ -425,6 +471,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 2 resourceName
 	METHOD m_tiwzsgum handleResourceReloadException (Ljava/lang/Throwable;)V
 		ARG 1 exception
+	METHOD m_tqtftbvu (Lnet/minecraft/unmapped/C_ivysvyzf;Lnet/minecraft/unmapped/C_dzecaeok;Lnet/minecraft/unmapped/C_pdsiuywi;Z)V
+		ARG 4 confirmed
 	METHOD m_txocaejx startOnlineMode ()V
 	METHOD m_ubufromq getSpriteAtlas (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/function/Function;
 		ARG 1 id
@@ -436,6 +484,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 active
 		ARG 2 monitor
 	METHOD m_uhuiglxr isHudEnabled ()Z
+	METHOD m_uneueilo (Lnet/minecraft/unmapped/C_ymmazfhq;Lnet/minecraft/unmapped/C_awrmdwqd;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 recipe
 	METHOD m_upqckqnd getBakedModelManager ()Lnet/minecraft/unmapped/C_wosoicga;
 	METHOD m_usvofotc getCameraEntity ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_uubvcnee isRunning ()Z
@@ -447,6 +497,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_wgjcxgcz getRealmsDataFetcher ()Lnet/minecraft/unmapped/C_yyprjalz;
 	METHOD m_wipirsgk getInstance ()Lnet/minecraft/unmapped/C_ayfeobid;
 	METHOD m_wkcnjoym isMultiplayerEnabled ()Z
+	METHOD m_wlckrozy (Lnet/minecraft/unmapped/C_ymmazfhq;)Ljava/util/stream/Stream;
+		ARG 0 resultCollection
 	METHOD m_wnvdggdb shouldMonitorTickDuration ()Z
 	METHOD m_xlacueca getChatListener ()Lnet/minecraft/unmapped/C_bmbrcost;
 	METHOD m_xsnthzsp getNetworkHandler ()Lnet/minecraft/unmapped/C_nuofrxvi;
@@ -458,6 +510,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_yyiisqrp isWindowFocused ()Z
 	METHOD m_zdhaikmf isRealmsEnabled ()Z
 	METHOD m_zewjnqja exitToTitleScreen ()V
+	METHOD m_zfxtwhnc (Ljava/io/File;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_zguhyzcv getLanguageManager ()Lnet/minecraft/unmapped/C_dahbfdem;
 	METHOD m_zllnrifa isFancyGraphicsOrBetter ()Z
 	METHOD m_zrwzcbyc getBlockColors ()Lnet/minecraft/unmapped/C_iiyegykq;
