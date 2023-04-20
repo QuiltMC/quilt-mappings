@@ -1,5 +1,4 @@
 CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
-	FIELD f_apspxhly itemRenderer Lnet/minecraft/unmapped/C_xjqetogb;
 	FIELD f_bjnksoor SCREEN_USAGE_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_bpxgxhlg textRenderer Lnet/minecraft/unmapped/C_mavozmpp;
 	FIELD f_cfctryef clickedLink Ljava/net/URI;
@@ -10,9 +9,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	FIELD f_jcgjfjni deferredTooltip Lnet/minecraft/unmapped/C_wrmtlwqx$C_umjfmsln;
 	FIELD f_kmcqeiie width I
 	FIELD f_kreiluct children Ljava/util/List;
-	FIELD f_lpsgbjcj SPACE_AFTER_FIRST_TOOLTIP_LINE I
 	FIELD f_mvugfdtw MOUSE_MOVE_NARRATION_DELAY J
-	FIELD f_nkvwbjdn passEvents Z
 	FIELD f_oeooblbi selectables Ljava/util/List;
 	FIELD f_ofcdwhxy NARRATOR_MODE_CHANGE_DELAY J
 	FIELD f_psnbmvaj client Lnet/minecraft/unmapped/C_ayfeobid;
@@ -28,17 +25,10 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD <init> (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 title
 	METHOD m_acdaclus isPauseScreen ()Z
-	METHOD m_ahiiudoo (Ljava/util/List;Lnet/minecraft/unmapped/C_mzaxvunb;)V
-		ARG 1 data
 	METHOD m_awpofqnh removed ()V
 	METHOD m_bdijjzsm applyNarratorModeChangeDelay ()V
 	METHOD m_ckkbzfqx createTabNavigation (Lnet/minecraft/unmapped/C_veciqgge;)Lnet/minecraft/unmapped/C_ltcpucbp$C_ypmtwpcy;
 		ARG 1 direction
-	METHOD m_czlkqoel renderTextTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;II)V
-		ARG 1 matrices
-		ARG 2 lines
-		ARG 3 x
-		ARG 4 y
 	METHOD m_diqdtrjj init (Lnet/minecraft/unmapped/C_ayfeobid;II)V
 		ARG 1 client
 		ARG 2 width
@@ -60,17 +50,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 1 client
 		ARG 2 width
 		ARG 3 height
-	METHOD m_gakbgcyw renderTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_rdaqiwdt;II)V
-		ARG 1 matrices
-		ARG 2 text
-		ARG 3 x
-		ARG 4 y
-	METHOD m_glyavaut renderTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_sddaxwyk;II)V
-		ARG 1 matrices
-		ARG 2 stack
-		ARG 3 x
-		ARG 4 y
-	METHOD m_gqwpvknz getTooltipFromItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/List;
+	METHOD m_gqwpvknz getTooltipFromItem (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/List;
 		ARG 1 stack
 	METHOD m_gseqedxv isCopy (I)Z
 		ARG 0 keyCode
@@ -87,31 +67,14 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 1 element
 	METHOD m_iugdsrhk narrateScreen (Z)V
 		ARG 1 useTranslationsCache
-	METHOD m_iwofumnc renderTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;Ljava/util/Optional;II)V
-		ARG 1 matrices
-		ARG 2 lines
-		ARG 3 data
-		ARG 4 x
-		ARG 5 y
 	METHOD m_iytoanop applyMouseMoveNarratorDelay ()V
 	METHOD m_keapshqu shouldNarrateNavigation ()Z
 	METHOD m_klvwxtca addScreenNarrations (Lnet/minecraft/unmapped/C_pofrkllk;)V
 		ARG 1 builder
-	METHOD m_krbfbnvv renderTooltipFromComponents (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;IILnet/minecraft/unmapped/C_imjripdz;)V
-		ARG 1 matrices
-		ARG 2 components
-		ARG 3 x
-		ARG 4 y
-		ARG 5 positioner
 	METHOD m_kuxewqdw isNarratorActive ()Z
 	METHOD m_liiadbzl insertText (Ljava/lang/String;Z)V
 		ARG 1 text
 		ARG 2 override
-	METHOD m_ljbngivi renderTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Ljava/util/List;II)V
-		ARG 1 matrices
-		ARG 2 lines
-		ARG 3 x
-		ARG 4 y
 	METHOD m_ljtwkmmk createArrowNavigation ()Lnet/minecraft/unmapped/C_ltcpucbp$C_gplggvaz;
 	METHOD m_lknkyvhl addElementNarrations (Lnet/minecraft/unmapped/C_pofrkllk;)V
 		ARG 1 builder
@@ -129,11 +92,9 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_pfjlkadm applyKeyPressNarratorDelay ()V
 	METHOD m_pfmszspr confirmLink (Z)V
 		ARG 1 open
-	METHOD m_pfwvzdim renderWithTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;IIF)V
+	METHOD m_pfwvzdim renderWithTooltip (Lnet/minecraft/unmapped/C_sedilmty;IIF)V
 		COMMENT Renders this screen along with deferred text tooltip,
 		COMMENT ensuring the tooltip is rendered on top.
-		ARG 1 matrices
-			COMMENT the matrix stack
 		ARG 2 mouseX
 			COMMENT the mouse X-coordinate on the screen
 		ARG 3 mouseY
@@ -141,7 +102,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 4 delta
 			COMMENT the delta since the last tick
 	METHOD m_pgbqqklr hasAltDown ()Z
-	METHOD m_qfxudleh renderBackground (Lnet/minecraft/unmapped/C_cnszsxvd;)V
+	METHOD m_qfxudleh renderBackground (Lnet/minecraft/unmapped/C_sedilmty;)V
 	METHOD m_qrphnkdt findSelectedElementData (Ljava/util/List;Lnet/minecraft/unmapped/C_womhzmwc;)Lnet/minecraft/unmapped/C_wrmtlwqx$C_xlpahkfz;
 		ARG 0 selectables
 		ARG 1 selectable
@@ -157,11 +118,6 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 1 paths
 	METHOD m_snvbpxot shouldCloseOnEsc ()Z
 		COMMENT Checks whether this screen should be closed when the escape key is pressed.
-	METHOD m_syzpbtnw renderTextHoverEffect (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_cpwnhism;II)V
-		ARG 1 matrices
-		ARG 2 style
-		ARG 3 x
-		ARG 4 y
 	METHOD m_tevgoglb closeScreen ()V
 	METHOD m_tvprcwgv remove (Lnet/minecraft/unmapped/C_fxiqpxaf;)V
 		ARG 1 child
@@ -171,8 +127,8 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 3 cursorPos
 	METHOD m_updnfwlh isCut (I)Z
 		ARG 0 keyCode
-	METHOD m_vaathegj renderBackgroundTexture (Lnet/minecraft/unmapped/C_cnszsxvd;)V
-		COMMENT Renders the fullscreen {@linkplain net.minecraft.client.gui.DrawableHelper#OPTIONS_BACKGROUND_TEXTURE background texture} of this screen.
+	METHOD m_vaathegj renderBackgroundTexture (Lnet/minecraft/unmapped/C_sedilmty;)V
+		COMMENT Renders the fullscreen background texture of this screen.
 	METHOD m_vsdrypvi addDrawableChild (Lnet/minecraft/unmapped/C_fxiqpxaf;)Lnet/minecraft/unmapped/C_fxiqpxaf;
 		ARG 1 drawableElement
 	METHOD m_vsopnzlx focusCurrentPath (Lnet/minecraft/unmapped/C_ballifpu;)V
@@ -188,10 +144,6 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		COMMENT <p>This method is called when this screen is {@linkplain net.minecraft.client.MinecraftClient#setScreen(Screen) opened} or resized.
 	METHOD m_yikydyxb clearAndInit ()V
 	METHOD m_zatdgejs clearChildren ()V
-	METHOD m_zjbuteqk renderDeferredTextTooltip (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_wrmtlwqx$C_umjfmsln;II)V
-		ARG 2 textTooltip
-		ARG 3 mouseX
-		ARG 4 mouseY
 	METHOD m_zycsispl narrateScreenIfNarrationEnabled (Z)V
 		ARG 1 useTranslationsCache
 	CLASS C_umjfmsln DeferredTextTooltip
