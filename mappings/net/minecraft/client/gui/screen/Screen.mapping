@@ -50,6 +50,8 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 1 client
 		ARG 2 width
 		ARG 3 height
+	METHOD m_gqwpvknz getTooltipFromItem (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/List;
+		ARG 1 stack
 	METHOD m_gseqedxv isCopy (I)Z
 		ARG 0 keyCode
 	METHOD m_guegvdae isSelectAll (I)Z
@@ -90,7 +92,17 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_pfjlkadm applyKeyPressNarratorDelay ()V
 	METHOD m_pfmszspr confirmLink (Z)V
 		ARG 1 open
+	METHOD m_pfwvzdim renderWithTooltip (Lnet/minecraft/unmapped/C_sedilmty;IIF)V
+		COMMENT Renders this screen along with deferred text tooltip,
+		COMMENT ensuring the tooltip is rendered on top.
+		ARG 2 mouseX
+			COMMENT the mouse X-coordinate on the screen
+		ARG 3 mouseY
+			COMMENT the mouse Y-coordinate on the screen
+		ARG 4 delta
+			COMMENT the delta since the last tick
 	METHOD m_pgbqqklr hasAltDown ()Z
+	METHOD m_qfxudleh renderBackground (Lnet/minecraft/unmapped/C_sedilmty;)V
 	METHOD m_qrphnkdt findSelectedElementData (Ljava/util/List;Lnet/minecraft/unmapped/C_womhzmwc;)Lnet/minecraft/unmapped/C_wrmtlwqx$C_xlpahkfz;
 		ARG 0 selectables
 		ARG 1 selectable
@@ -115,6 +127,8 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 3 cursorPos
 	METHOD m_updnfwlh isCut (I)Z
 		ARG 0 keyCode
+	METHOD m_vaathegj renderBackgroundTexture (Lnet/minecraft/unmapped/C_sedilmty;)V
+		COMMENT Renders the fullscreen background texture of this screen.
 	METHOD m_vsdrypvi addDrawableChild (Lnet/minecraft/unmapped/C_fxiqpxaf;)Lnet/minecraft/unmapped/C_fxiqpxaf;
 		ARG 1 drawableElement
 	METHOD m_vsopnzlx focusCurrentPath (Lnet/minecraft/unmapped/C_ballifpu;)V
