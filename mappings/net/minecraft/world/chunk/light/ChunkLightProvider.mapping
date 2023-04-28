@@ -1,0 +1,136 @@
+CLASS net/minecraft/unmapped/C_upkweuif net/minecraft/world/chunk/light/ChunkLightProvider
+	FIELD f_afxeukbh CACHE_SIZE I
+	FIELD f_arfcwfgy DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
+	FIELD f_cvbmvasy increaseQueue Lit/unimi/dsi/fastutil/longs/LongArrayFIFOQueue;
+	FIELD f_dsknzrus cachedChunks [Lnet/minecraft/unmapped/C_rtgnnfoz;
+	FIELD f_edtaifbh MIN_QUEUE_SIZE I
+	FIELD f_lguzwiso MAX_LEVEL I
+	FIELD f_lrychktf cachedChunkPositions [J
+	FIELD f_lvwsjqtw MIN_OPACITY I
+	FIELD f_mnzbramm decreaseQueue Lit/unimi/dsi/fastutil/longs/LongArrayFIFOQueue;
+	FIELD f_oietxybg chunkProvider Lnet/minecraft/unmapped/C_jhssvvvy;
+	FIELD f_pthtxwge lightStorage Lnet/minecraft/unmapped/C_jbeocnxo;
+	FIELD f_ruzjxnps mutablePos Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
+	FIELD f_vueaucjh blockNodesToCheck Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_xjlhmzmi PULL_LIGHT_IN_ENTRY J
+	METHOD <init> (Lnet/minecraft/unmapped/C_jhssvvvy;Lnet/minecraft/unmapped/C_jbeocnxo;)V
+		ARG 1 chunkProvider
+		ARG 2 lightStorage
+	METHOD m_acljlcls setRetainColumn (Lnet/minecraft/unmapped/C_ynrszrtu;Z)V
+		ARG 1 pos
+		ARG 2 retain
+	METHOD m_ayxicyia propagateIncrease (JJI)V
+		ARG 1 blockPos
+		ARG 3 state
+		ARG 5 lightData
+	METHOD m_dpvvjcdf shapeOccludes (JLnet/minecraft/unmapped/C_txtbiemp;JLnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		ARG 1 sourceId
+		ARG 3 sourceState
+		ARG 4 targetId
+		ARG 6 targetState
+		ARG 7 direction
+	METHOD m_etktdote enqueueIncrease (JJ)V
+		ARG 1 blockPos
+		ARG 3 state
+	METHOD m_fyornymb getOpacity (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)I
+		ARG 1 state
+		ARG 2 pos
+	METHOD m_gvoflnzj checkNode (J)V
+		ARG 1 blockPos
+	METHOD m_iaxlkdhu clearChunkCache ()V
+	METHOD m_ivirmkin enqueueDecrease (JJ)V
+		ARG 1 blockPos
+		ARG 3 state
+	METHOD m_mjqcyboe markSectionAsChecked (J)V
+		ARG 1 sectionPos
+	METHOD m_nqytrssw getType (J)Lnet/minecraft/unmapped/C_jbeocnxo$C_ljdoldct;
+		ARG 1 sectionPos
+	METHOD m_pezdxydv getChunk (II)Lnet/minecraft/unmapped/C_rtgnnfoz;
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD m_phxaiaai getOcclusionShape (Lnet/minecraft/unmapped/C_txtbiemp;JLnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 1 state
+		ARG 2 pos
+		ARG 4 direction
+	METHOD m_plzsbbaz (JJ)Z
+		ARG 2 pos
+	METHOD m_quncefjf propagateDecreases ()I
+	METHOD m_qvdxwyuy isEmptyShape (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 0 state
+	METHOD m_ryzxffeg getLightBlockInto (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;I)I
+		ARG 0 world
+		ARG 1 sourceState
+		ARG 2 sourcePos
+		ARG 3 targetState
+		ARG 4 targetPos
+		ARG 6 defaultValue
+	METHOD m_ucugtqkd getOcclusionShape (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 state
+		ARG 3 direction
+	METHOD m_vffsnuwj propagateIncreases ()I
+	METHOD m_vfxjjknv enqueueSectionData (JLnet/minecraft/unmapped/C_cneaxdxg;)V
+		ARG 1 sectionPos
+		ARG 3 lightArray
+	METHOD m_vxkkvyil getState (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 1 pos
+	METHOD m_vxlgbudj getTypeId (J)Ljava/lang/String;
+		ARG 1 sectionPos
+	METHOD m_wcjydhhg propagateDecrease (JJ)V
+		ARG 1 blockPos
+		ARG 3 state
+	METHOD m_yinhjcxa needsLightUpdate (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 0 world
+		ARG 1 pos
+		ARG 2 oldState
+		ARG 3 newState
+	CLASS C_bbshbbpk QueueEntry
+		FIELD f_gjefnxsn FLAG_INCREASE_FROM_EMISSION J
+		FIELD f_qvkrglrm FLAG_FROM_EMPTY_SHAPE J
+		FIELD f_qwctgdgy FROM_LEVEL_BITS I
+		FIELD f_udjopaao DIRECTIONS_MASK J
+		FIELD f_ugqcqlyi DIRECTION_BITS I
+		FIELD f_wbxmfsvk LEVEL_MASK J
+		METHOD m_avilvcpm increaseSingleDirection (IZLnet/minecraft/unmapped/C_xpuuihxf;)J
+			ARG 0 lightLevel
+			ARG 1 emptyShape
+			ARG 2 direction
+		METHOD m_bafmnwqp isFromEmptyShape (J)Z
+			ARG 0 packed
+		METHOD m_bszvuvrj withLightLevel (JI)J
+			ARG 0 packed
+			ARG 2 lightLevel
+		METHOD m_gpguxllf isIncreaseFromEmission (J)Z
+			ARG 0 packed
+		METHOD m_lvfxqrjl decreaseWithSkippedDirection (ILnet/minecraft/unmapped/C_xpuuihxf;)J
+			ARG 0 lightLevel
+			ARG 1 skipped
+		METHOD m_pbiefprb clearDirection (JLnet/minecraft/unmapped/C_xpuuihxf;)J
+			ARG 0 packed
+			ARG 2 direction
+		METHOD m_ptlbimvx increaseSkySourceForDirections (ZZZZZ)J
+			ARG 0 down
+			ARG 1 north
+			ARG 2 south
+			ARG 3 west
+			ARG 4 east
+		METHOD m_qbtvhgjz decreaseAllDirections (I)J
+			ARG 0 lightLevel
+		METHOD m_qgnnqzhk increaseWithSkippedDirection (IZLnet/minecraft/unmapped/C_xpuuihxf;)J
+			ARG 0 lightLevel
+			ARG 1 emptyShape
+			ARG 2 skipped
+		METHOD m_qrxhmfxp getLightLevel (J)I
+			ARG 0 packed
+		METHOD m_rozbpmfo increaseLightFromEmission (IZ)J
+			ARG 0 lightLevel
+			ARG 1 emptyShape
+		METHOD m_svuqgven withDirection (JLnet/minecraft/unmapped/C_xpuuihxf;)J
+			ARG 0 packed
+			ARG 2 direction
+		METHOD m_xdwnbkte shouldPropagateInDirection (JLnet/minecraft/unmapped/C_xpuuihxf;)Z
+			ARG 0 packed
+	CLASS C_ftiejceo
+		METHOD rehash rehash (I)V
+			ARG 1 i
