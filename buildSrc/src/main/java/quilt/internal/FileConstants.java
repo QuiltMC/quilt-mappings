@@ -3,6 +3,7 @@ package quilt.internal;
 import java.io.File;
 
 import org.gradle.api.Project;
+import quilt.internal.tasks.lint.DownloadDictionaryFileTask;
 
 public class FileConstants {
     public final File buildDir;
@@ -13,6 +14,7 @@ public class FileConstants {
     public final File namedJar;
     public final File libraries;
 
+    public final File dictionaryDir;
     public final File dictionaryFile;
 
     public final File unpickDefinitions;
@@ -30,7 +32,8 @@ public class FileConstants {
         unpickedJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar");
         namedJar = project.file(Constants.MINECRAFT_VERSION + "-named.jar");
 
-        dictionaryFile = project.file(".gradle/lint/dictionary.txt");
+        dictionaryDir = project.file(".gradle/lint/dictionary");
+        dictionaryFile = project.file(dictionaryDir.toPath().resolve(DownloadDictionaryFileTask.REVISION + ".txt"));
 
         unpickDefinitions = project.file("unpick-definitions");
         unpickMeta = new File(unpickDefinitions, "unpick.json");
