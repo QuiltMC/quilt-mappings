@@ -123,10 +123,15 @@ public class SpellingChecker implements Checker<Entry<?>> {
         // split by uppercase characters and numbers and preserve
         List<String> splitNames = new ArrayList<>();
         for (String nameToSplit : words) {
-            // split by uppercase letters and preserve them in the split strings
-            // also map to all lowercase
-            Set<String> split = Arrays.stream(nameToSplit.split("(?<=[a-zA-Z])(?=[A-Z])")).map(String::toLowerCase).collect(Collectors.toSet());
-            splitNames.addAll(split);
+            // skip regex on all uppercase words
+            if (!nameToSplit.matches("[A-Z]+")) {
+                // split by uppercase letters and preserve them in the split strings
+                // also map to all lowercase
+                Set<String> split = Arrays.stream(nameToSplit.split("(?<=[a-zA-Z])(?=[A-Z])")).map(String::toLowerCase).collect(Collectors.toSet());
+                splitNames.addAll(split);
+            } else {
+                splitNames.add(nameToSplit.toLowerCase());
+            }
         }
 
         List<String> splitWords = new ArrayList<>();
