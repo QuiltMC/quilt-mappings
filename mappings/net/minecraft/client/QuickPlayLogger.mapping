@@ -1,0 +1,42 @@
+CLASS net/minecraft/unmapped/C_plekrknb net/minecraft/client/QuickPlayLogger
+	FIELD f_cgvvpavr LOGGER Lorg/slf4j/Logger;
+	FIELD f_jkjblsal path Ljava/nio/file/Path;
+	FIELD f_nwdimmod NO_OP Lnet/minecraft/unmapped/C_plekrknb;
+	FIELD f_svuuyzxk GSON Lcom/google/gson/Gson;
+	FIELD f_tbaxrctp world Lnet/minecraft/unmapped/C_plekrknb$C_acczhokd;
+	METHOD <init> (Ljava/lang/String;)V
+		ARG 1 relativePath
+	METHOD m_bdnmrhcj log (Lnet/minecraft/unmapped/C_ayfeobid;)V
+		ARG 1 client
+	METHOD m_bdtvmptk create (Ljava/lang/String;)Lnet/minecraft/unmapped/C_plekrknb;
+		ARG 0 relativePath
+	METHOD m_kjccfhjj (Lcom/google/gson/JsonElement;)V
+		ARG 1 element
+	METHOD m_uigziyrm setWorld (Lnet/minecraft/unmapped/C_plekrknb$C_nbxzwwry;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 1 connectionType
+		ARG 2 id
+		ARG 3 name
+	CLASS C_acczhokd QuickPlayWorld
+		FIELD f_brbqzvdp CODEC Lcom/mojang/serialization/MapCodec;
+		FIELD f_cmectikw id Ljava/lang/String;
+		FIELD f_ijjlzgxi name Ljava/lang/String;
+		FIELD f_ztjhgnpm type Lnet/minecraft/unmapped/C_plekrknb$C_nbxzwwry;
+		METHOD m_battmsgo name ()Ljava/lang/String;
+		METHOD m_gkdwrxbg (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_umlwbpce id ()Ljava/lang/String;
+		METHOD m_vpwmyqyl type ()Lnet/minecraft/unmapped/C_plekrknb$C_nbxzwwry;
+	CLASS C_gzfjhhek Log
+		FIELD f_hbgmwrqj quickPlayWorld Lnet/minecraft/unmapped/C_plekrknb$C_acczhokd;
+		FIELD f_mabebcfw gameMode Lnet/minecraft/unmapped/C_lghcpyvl;
+		FIELD f_oraxcunf lastPlayedTime Ljava/time/Instant;
+		FIELD f_uouqzpjd CODEC Lcom/mojang/serialization/Codec;
+		METHOD m_esyenfdc gameMode ()Lnet/minecraft/unmapped/C_lghcpyvl;
+		METHOD m_fsektwor (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_lootzjsx lastPlayedTime ()Ljava/time/Instant;
+		METHOD m_qddkdkvp quickPlayWorld ()Lnet/minecraft/unmapped/C_plekrknb$C_acczhokd;
+	CLASS C_nbxzwwry ConnectionType
+		FIELD f_xjikztqv id Ljava/lang/String;
+		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
+			ARG 3 id
