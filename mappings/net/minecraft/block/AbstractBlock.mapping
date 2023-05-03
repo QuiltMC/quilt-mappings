@@ -243,6 +243,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_lpessbtt pistonBehavior Lnet/minecraft/unmapped/C_mojvzhua;
 		FIELD f_mkfwgndk solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_nijrkoes emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+		FIELD f_ochxyzpr solid Z
+		FIELD f_omahusur liquid Z
+		FIELD f_rmmimkow replaceable Z
 		FIELD f_rmobaqut offsetFunction Ljava/util/Optional;
 		FIELD f_roiqhlco toolRequired Z
 		FIELD f_vcrxfhyc shapeCache Lnet/minecraft/unmapped/C_triydqro$C_eibemhky$C_xmxhiejp;
@@ -252,11 +255,14 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_wvbmkgls suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_xwxdktuf hasRandomTicks Z
 		FIELD f_yypdsdkn lavaIgnitable Z
+		FIELD f_zzuoeazs instrument Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD <init> (Lnet/minecraft/unmapped/C_mmxmpdoq;Lcom/google/common/collect/ImmutableMap;Lcom/mojang/serialization/MapCodec;)V
 			ARG 1 block
 			ARG 2 propertyMap
 			ARG 3 codec
+		METHOD m_alvmezvc getInstrument ()Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD m_aoahmjkt getSoundGroup ()Lnet/minecraft/unmapped/C_aevintex;
+		METHOD m_aqzsbzoo checkSolid ()Z
 		METHOD m_arouoixx isSideSolidFullSquare (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 			ARG 1 world
 			ARG 2 pos
@@ -343,6 +349,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 		METHOD m_iaogtews getRenderingSeed (Lnet/minecraft/unmapped/C_hynzadkk;)J
 			ARG 1 pos
+		METHOD m_ikryvqun isSolid ()Z
 		METHOD m_iqyhrmls materialReplaceable ()Z
 		METHOD m_iznnuukl canPathfindThrough (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_kjwlgpfr;)Z
 			ARG 1 world
@@ -392,6 +399,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_mtoyahuu getCollisionShape (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_zscvhwbd;
 			ARG 1 world
 			ARG 2 pos
+		METHOD m_nejozrtz blocksMovement ()Z
 		METHOD m_nvonxvnu getPistonBehavior ()Lnet/minecraft/unmapped/C_mojvzhua;
 		METHOD m_obmfmaxl allowsSpawning (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;)Z
 			ARG 1 world
@@ -517,6 +525,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 direction
+		METHOD m_ynpgqgky isLiquid ()Z
 		METHOD m_yvamjply getBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
 		METHOD m_zntvpiao getLuminance ()I
 			COMMENT {@return the light level emitted by this block state}
@@ -555,7 +564,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 3 pos
 			ARG 4 type
 	CLASS C_mlfsdncu OffsetFunction
-		METHOD evaluate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD evaluate evaluate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
 			ARG 1 state
 			ARG 2 world
 			ARG 3 pos
@@ -566,19 +575,24 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_czlbhsfs dynamicBounds Z
 		FIELD f_ddynwztk velocityMultiplier F
 		FIELD f_dfulysva toolRequired Z
+		FIELD f_gepbjyhg nonSolid Z
 		FIELD f_gljcimhm emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_hgzeyqby randomTicks Z
+		FIELD f_ivzlotoq replaceable Z
+		FIELD f_jysuanmz instrument Lnet/minecraft/unmapped/C_onjtjtsi;
 		FIELD f_lbohsgfq slipperiness F
 		FIELD f_lfwsqmni hardness F
 		FIELD f_lznwhdle requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
 		FIELD f_mpvjzlvv allowsSpawningPredicate Lnet/minecraft/unmapped/C_triydqro$C_knnwryez;
 		FIELD f_mtvcolqn soundGroup Lnet/minecraft/unmapped/C_aevintex;
+		FIELD f_mvryfcer liquid Z
 		FIELD f_mwpuxldh solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_obppjqdx opaque Z
 		FIELD f_pgktgiev offsetFunction Ljava/util/Optional;
 		FIELD f_piwzbwkw suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_pxqjcqnw lootTableId Lnet/minecraft/unmapped/C_ncpywfca;
 		FIELD f_snzcmbqu spawnsParticlesOnBreak Z
+		FIELD f_stojhpmj solid Z
 		FIELD f_vncuqezy luminance Ljava/util/function/ToIntFunction;
 		FIELD f_wlanwnet collidable Z
 		FIELD f_wtgcfacs lavaIgnitable Z
@@ -587,6 +601,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_yebtulna pistonBehavior Lnet/minecraft/unmapped/C_mojvzhua;
 		METHOD m_aaxpakkc copy (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 0 block
+		METHOD m_bwwgnswz solid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_bzhfzklk emissiveLighting (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
 		METHOD m_cfcitqhx requiredFlags ([Lnet/minecraft/unmapped/C_kksdgidr;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -595,6 +610,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 0 state
 			ARG 1 world
 			ARG 2 pos
+		METHOD m_dbqsutun liquid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_dfcscaql noCollision ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			COMMENT Specifies that a block should have no collision bounds.
 			COMMENT
@@ -609,6 +625,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 state
 			ARG 2 world
 			ARG 3 pos
+		METHOD m_etdgbdsz replaceable ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_fqzrcagx jumpVelocityMultiplier (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 jumpVelocityMultiplier
 		METHOD m_gqhpoien strength (FF)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -631,6 +648,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT Specifies that a block should drop the same items as a provided block.
 			ARG 1 source
 				COMMENT the block to copy item drops from
+		METHOD m_mkgblwbl nonSolid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_mkiacirn air ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_nfvnphha allowsSpawning (Lnet/minecraft/unmapped/C_triydqro$C_knnwryez;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			COMMENT Specifies logic that calculates whether an entity can spawn on a block.
@@ -649,6 +667,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 strength
 		METHOD m_qkshfwhp (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_mlrprqox;
 			ARG 0 state
+		METHOD m_riwmybec instrument (Lnet/minecraft/unmapped/C_onjtjtsi;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 1 instrument
 		METHOD m_saqwnthq postProcess (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
 		METHOD m_secizybe (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z

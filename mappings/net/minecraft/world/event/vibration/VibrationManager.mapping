@@ -1,0 +1,111 @@
+CLASS net/minecraft/unmapped/C_ddxrijfx net/minecraft/world/event/vibration/VibrationManager
+	FIELD f_afelhybc FREQUENCIES Ljava/util/function/ToIntFunction;
+	FIELD f_chcearum RESONATION_EVENTS [Lnet/minecraft/unmapped/C_cgkchrmc;
+	METHOD m_bggysyds getResonationEvent (I)Lnet/minecraft/unmapped/C_cgkchrmc;
+		ARG 0 frequency
+	METHOD m_exbfavst getVibrationData ()Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;
+	METHOD m_lnypbegv getFrequency (Lnet/minecraft/unmapped/C_cgkchrmc;)I
+		ARG 0 event
+	METHOD m_mxfpohco (Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;)V
+		ARG 0 map
+	METHOD m_rwxalmkc getVibrationCallback ()Lnet/minecraft/unmapped/C_ddxrijfx$C_vnbbhkol;
+	METHOD m_tprfypfn getSignalStrength (FI)I
+		ARG 0 distance
+		ARG 1 range
+	CLASS C_bbtmyknw Listener
+		FIELD f_uketcssk manager Lnet/minecraft/unmapped/C_ddxrijfx;
+		METHOD <init> (Lnet/minecraft/unmapped/C_ddxrijfx;)V
+			ARG 1 manager
+		METHOD m_adofmdyc forceScheduleVibration (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+			ARG 2 event
+			ARG 3 eventContext
+			ARG 4 listenerPos
+		METHOD m_kfssaoks getDistanceBetweenBlocks (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)F
+			ARG 0 source
+			ARG 1 listenerPos
+		METHOD m_sizihibx (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+			ARG 5 sourcePos
+		METHOD m_xpdrqosq isOccluded (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Z
+			ARG 0 world
+			ARG 1 sourcePos
+			ARG 2 listenerPos
+		METHOD m_zsdnonmr scheduleVibration (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+			ARG 2 data
+			ARG 3 event
+			ARG 4 eventContext
+			ARG 5 sourcePos
+			ARG 6 listenerPos
+	CLASS C_qhpiojal Data
+		FIELD f_docvjpkz codec Lcom/mojang/serialization/Codec;
+		FIELD f_gksdhnrr delay I
+		FIELD f_katicsjo selector Lnet/minecraft/unmapped/C_phguyrob;
+		FIELD f_lphnrjxk LISTENER_NBT_KEY Ljava/lang/String;
+		FIELD f_luvtlykf spawnParticle Z
+		FIELD f_sjyusele info Lnet/minecraft/unmapped/C_xctzkvoy;
+		METHOD <init> (Lnet/minecraft/unmapped/C_xctzkvoy;Lnet/minecraft/unmapped/C_phguyrob;IZ)V
+			ARG 1 info
+			ARG 2 selector
+			ARG 3 delay
+			ARG 4 spawnParticle
+		METHOD m_bvtbwvur setSpawnParticle (Z)V
+			ARG 1 spawnParticle
+		METHOD m_cyttxpug getInfo ()Lnet/minecraft/unmapped/C_xctzkvoy;
+		METHOD m_epmycegk (Ljava/util/Optional;Lnet/minecraft/unmapped/C_phguyrob;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;
+			ARG 0 event
+			ARG 1 selector
+			ARG 2 delay
+		METHOD m_ibdfzcyq setInfo (Lnet/minecraft/unmapped/C_xctzkvoy;)V
+			ARG 1 info
+		METHOD m_jyahvxfg getSelector ()Lnet/minecraft/unmapped/C_phguyrob;
+		METHOD m_kulwcovq (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_wddayrdf getDelay ()I
+		METHOD m_xokzcqty spawnsParticle ()Z
+		METHOD m_ynavsgpz setDelay (I)V
+			ARG 1 delay
+		METHOD m_ysigkkwe (Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;)Ljava/util/Optional;
+			ARG 0 data
+		METHOD m_zdwfgfky tickDelay ()V
+	CLASS C_vnbbhkol Callback
+		METHOD m_bspimwvf getRange ()I
+		METHOD m_dklxlkwy accept (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;F)V
+			ARG 1 world
+			ARG 2 pos
+			ARG 3 event
+			ARG 4 sourceEntity
+			ARG 5 entity
+			ARG 6 distance
+		METHOD m_eostbwyz onDataChanged ()V
+		METHOD m_evpmgeke getDelay (F)I
+			ARG 1 distance
+		METHOD m_kplvqliv getVibrationTag ()Lnet/minecraft/unmapped/C_ednuhnnn;
+		METHOD m_pawjdfag triggersAvoidCriterion ()Z
+		METHOD m_psccpmnp accepts (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;)Z
+			ARG 1 world
+			ARG 2 pos
+			ARG 3 event
+			ARG 4 eventContext
+		METHOD m_xjmfyyvn canAccept (Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_cgkchrmc$C_cjhidzon;)Z
+			ARG 1 event
+			ARG 2 eventContext
+		METHOD m_yhguximb getPositionSource ()Lnet/minecraft/unmapped/C_duzerrml;
+		METHOD m_zsnwtipa requiresTickingAdjacentChunks ()Z
+	CLASS C_wtxaispf Ticker
+		METHOD m_alsfncdv (Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;Lnet/minecraft/unmapped/C_ddxrijfx$C_vnbbhkol;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_xctzkvoy;)V
+			ARG 3 info
+		METHOD m_ausgoypg tryScheduleVibration (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;Lnet/minecraft/unmapped/C_ddxrijfx$C_vnbbhkol;)V
+			ARG 0 world
+			ARG 1 vibrationData
+			ARG 2 callback
+		METHOD m_ejthnrav acceptVibration (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;Lnet/minecraft/unmapped/C_ddxrijfx$C_vnbbhkol;Lnet/minecraft/unmapped/C_xctzkvoy;)Z
+			ARG 1 data
+			ARG 2 callback
+			ARG 3 info
+		METHOD m_fxostmdm tick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;Lnet/minecraft/unmapped/C_ddxrijfx$C_vnbbhkol;)V
+			ARG 1 vibrationData
+			ARG 2 callback
+		METHOD m_nlphucms spawnVibrationParticle (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;Lnet/minecraft/unmapped/C_ddxrijfx$C_vnbbhkol;)V
+			ARG 0 world
+			ARG 1 vibrationData
+			ARG 2 callback
+		METHOD m_qpmiogrx areAdjacentChunksTicking (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Z
