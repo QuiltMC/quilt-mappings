@@ -38,8 +38,6 @@ CLASS net/minecraft/unmapped/C_kvkvpjlm net/minecraft/predicate/entity/EntityPre
 		ARG 11 passenger
 		ARG 12 targetedEntity
 		ARG 13 team
-	METHOD m_betzqpgq fromJson (Lcom/google/gson/JsonElement;)Lnet/minecraft/unmapped/C_kvkvpjlm;
-		ARG 0 json
 	METHOD m_cviarbxt toJson ()Lcom/google/gson/JsonElement;
 	METHOD m_npdomabq test (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 world
@@ -97,40 +95,3 @@ CLASS net/minecraft/unmapped/C_kvkvpjlm net/minecraft/predicate/entity/EntityPre
 		METHOD m_vkqspldb type (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
 			ARG 1 type
 		METHOD m_zrmwluqr create ()Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
-	CLASS C_tthiakui Extended
-		FIELD f_tfznncta EMPTY Lnet/minecraft/unmapped/C_kvkvpjlm$C_tthiakui;
-		FIELD f_xzvgfhmq combinedCondition Ljava/util/function/Predicate;
-		FIELD f_zhqjdmxs conditions [Lnet/minecraft/unmapped/C_vqkczpuv;
-		METHOD <init> ([Lnet/minecraft/unmapped/C_vqkczpuv;)V
-			ARG 1 conditions
-		METHOD m_aqojqoav ofLegacy (Lnet/minecraft/unmapped/C_kvkvpjlm;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_tthiakui;
-			ARG 0 predicate
-		METHOD m_eqciezbg getInJson (Lcom/google/gson/JsonObject;Ljava/lang/String;Lnet/minecraft/unmapped/C_gzewtdot;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_tthiakui;
-			COMMENT Parses an extended entity check in a sub-value in JSON, accepting objects
-			COMMENT as simple entity predicates or array as list of loot conditions.
-			COMMENT
-			COMMENT @see <a href="https://www.minecraft.net/en-us/article/minecraft-snapshot-20w18a">
-			COMMENT Mojang description</a>
-			ARG 0 root
-			ARG 1 key
-			ARG 2 predicateDeserializer
-		METHOD m_eqrmpamo requireInJson (Lcom/google/gson/JsonObject;Ljava/lang/String;Lnet/minecraft/unmapped/C_gzewtdot;)[Lnet/minecraft/unmapped/C_kvkvpjlm$C_tthiakui;
-			COMMENT Parses an extended entity check in a sub-value in JSON. The value must
-			COMMENT be absent, JSON null, or an array, or the parser will error. In other
-			COMMENT words, it does not accept object sub-values.
-			ARG 0 root
-			ARG 1 key
-			ARG 2 predicateDeserializer
-		METHOD m_fprkcljw toPredicatesJsonArray ([Lnet/minecraft/unmapped/C_kvkvpjlm$C_tthiakui;Lnet/minecraft/unmapped/C_cogtomcl;)Lcom/google/gson/JsonElement;
-			ARG 0 predicates
-			ARG 1 predicateSerializer
-		METHOD m_qjvqdsyo fromJson (Ljava/lang/String;Lnet/minecraft/unmapped/C_gzewtdot;Lcom/google/gson/JsonElement;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_tthiakui;
-			ARG 0 key
-			ARG 1 predicateDeserializer
-			ARG 2 json
-		METHOD m_rrqnqlja create ([Lnet/minecraft/unmapped/C_vqkczpuv;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_tthiakui;
-			ARG 0 conditions
-		METHOD m_tlghefcd toJson (Lnet/minecraft/unmapped/C_cogtomcl;)Lcom/google/gson/JsonElement;
-			ARG 1 predicateSerializer
-		METHOD m_wqowlhnx test (Lnet/minecraft/unmapped/C_iakykpgh;)Z
-			ARG 1 context
