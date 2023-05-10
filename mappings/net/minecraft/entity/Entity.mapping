@@ -31,7 +31,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_eyfbjeig horizontalSpeed F
 	FIELD f_eyihyrff pistonMovementDelta [D
 	FIELD f_fbrwyrto inNetherPortal Z
-	FIELD f_fhrqlvrj VELOCITY_POS_Y_OFFSET D
 	FIELD f_fngqrxks standingEyeHeight F
 	FIELD f_gpwlbvdc lastNetherPortalPosition Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_gzzxrhqg RIDING_COOLDOWN I
@@ -232,7 +231,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_edsbhryk playAmethystChimeSound ()V
 	METHOD m_egrevgdy getMovementDirection ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_ehxuiwfs getSafeFallDistance ()I
-	METHOD m_eiskdvlm resetNetherPortalCooldown ()V
 	METHOD m_ejhzkfsp addPassenger (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
 	METHOD m_elbjzlaw isRemoved ()Z
@@ -313,7 +311,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 velocity
 	METHOD m_ghqcprlw onPlayerCollision (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 player
-	METHOD m_giqiglcz (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 	METHOD m_glbnrqjr getFirstPassenger ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_gmlierig setBodyYaw (F)V
 		ARG 1 bodyYaw
@@ -585,8 +582,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_oqjzpmsb setSwimming (Z)V
 		ARG 1 swimming
 	METHOD m_oryyldou isCustomNameVisible ()Z
-	METHOD m_osxvhkkz attemptTickInVoid ()V
-		COMMENT Calls {@link #tickInVoid()} when the entity is 64 blocks below the world's {@linkplain net.minecraft.world.HeightLimitView#getBottomY() minimum Y position}.
 	METHOD m_ounwsonv isInvulnerable ()Z
 	METHOD m_owcsemrf doesNotCollide (DDD)Z
 		ARG 1 offsetX
@@ -725,10 +720,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_tugxrexj createSpawnPacket ()Lnet/minecraft/unmapped/C_zyjtrjrl;
 	METHOD m_tuuhnzwi setHeadYaw (F)V
 		ARG 1 headYaw
-	METHOD m_twbetumi tickInVoid ()V
-		COMMENT Called when the entity is 64 blocks below the world's {@linkplain net.minecraft.world.HeightLimitView#getBottomY() minimum Y position}.
-		COMMENT <p>
-		COMMENT {@linkplain LivingEntity Living entities} use this to deal out of world damage.
 	METHOD m_txdckygw isFreezing ()Z
 	METHOD m_ubqkaspo getHighSpeedSplashSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_ucpbtirx changeLookDirection (DD)V
