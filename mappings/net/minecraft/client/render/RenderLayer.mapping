@@ -56,11 +56,13 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		ARG 1 affectsOutline
 	METHOD m_baqvxxdi getEntitySolid (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+	METHOD m_betbxymq getGuiOverlay ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_bnrgoaxp getDrawMode ()Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
 	METHOD m_bnwgdzyr (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_bqycqpuk draw (Lnet/minecraft/unmapped/C_nxnqmnng;Lnet/minecraft/unmapped/C_onfzhami;)V
 		ARG 1 buffer
+		ARG 2 sorting
 	METHOD m_ceekkdkt getTranslucentMovingBlock ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_cnaalhuy getEntityAlpha (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
@@ -115,6 +117,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		ARG 0 texture
 	METHOD m_kboqswsf of (Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 		ARG 0 shader
+	METHOD m_kjlgxamr getDebugSectionQuads ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_kjsymkok (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_kokhakaq getEntityDecal (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -153,6 +156,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_qpxlnbrf (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_quswzzoz getCutoutMipped ()Lnet/minecraft/unmapped/C_tizlwnnv;
+	METHOD m_rawxeicz getGuiTextHighlight ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_rcijgxej getEntityNoOutline (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_rcydpyau (Ljava/lang/Double;)Lnet/minecraft/unmapped/C_tizlwnnv$C_otpmelyb;
@@ -196,6 +200,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_uyqydjhy getEntityGlint ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_wayaljif getEntityShadow (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+	METHOD m_wdwqsulq getGuiGhostRecipeOverlay ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_widtimmm getSolid ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_wnbqszyf getItemPhaseData ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 	METHOD m_xfopkxca getEyes (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -218,6 +223,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_yaakejdl getEntityTranslucentCull (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_ydueuccx getDebugQuads ()Lnet/minecraft/unmapped/C_tizlwnnv;
+	METHOD m_yghbecxm getGui ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_zffmcgyn getOutline (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_zgxiiomk getEndPortal ()Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -255,12 +261,28 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		FIELD f_ishluadz layering Lnet/minecraft/unmapped/C_yzzfidwp$C_vrnvavuu;
 		FIELD f_ldkxfgjk cull Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;
 		FIELD f_mprlrimm lightmap Lnet/minecraft/unmapped/C_yzzfidwp$C_dpwyhlfm;
+		FIELD f_pnttscew colorLogic Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;
 		FIELD f_qonlkpdj texturing Lnet/minecraft/unmapped/C_yzzfidwp$C_vxvdrdhn;
 		FIELD f_rlqotuxj phases Lcom/google/common/collect/ImmutableList;
 		FIELD f_xjpvdtpw transparency Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;
 		FIELD f_xqgftxqt writeMaskState Lnet/minecraft/unmapped/C_yzzfidwp$C_aognicdc;
 		FIELD f_zltibsec overlay Lnet/minecraft/unmapped/C_yzzfidwp$C_gxsnmcus;
 		FIELD f_zudcbgdn lineWidth Lnet/minecraft/unmapped/C_yzzfidwp$C_zraaemdb;
+		METHOD <init> (Lnet/minecraft/unmapped/C_yzzfidwp$C_nowrkyrj;Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;Lnet/minecraft/unmapped/C_yzzfidwp$C_nkzrqjhs;Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;Lnet/minecraft/unmapped/C_yzzfidwp$C_dpwyhlfm;Lnet/minecraft/unmapped/C_yzzfidwp$C_gxsnmcus;Lnet/minecraft/unmapped/C_yzzfidwp$C_vrnvavuu;Lnet/minecraft/unmapped/C_yzzfidwp$C_uoafqnwi;Lnet/minecraft/unmapped/C_yzzfidwp$C_vxvdrdhn;Lnet/minecraft/unmapped/C_yzzfidwp$C_aognicdc;Lnet/minecraft/unmapped/C_yzzfidwp$C_zraaemdb;Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;Lnet/minecraft/unmapped/C_tizlwnnv$C_mpecwgqi;)V
+			ARG 1 texture
+			ARG 2 shader
+			ARG 3 transparency
+			ARG 4 depthTest
+			ARG 5 cull
+			ARG 6 lightmap
+			ARG 7 overlay
+			ARG 8 layering
+			ARG 9 target
+			ARG 10 texturing
+			ARG 11 writeMaskState
+			ARG 12 lineWidth
+			ARG 13 colorLogic
+			ARG 14 outlineMode
 		METHOD m_bpkykzvd builder ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 		CLASS C_dpvtqibq Builder
 			FIELD f_auluqkwb target Lnet/minecraft/unmapped/C_yzzfidwp$C_uoafqnwi;
@@ -271,6 +293,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 			FIELD f_haknzamj transparency Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;
 			FIELD f_hlhfamgn texturing Lnet/minecraft/unmapped/C_yzzfidwp$C_vxvdrdhn;
 			FIELD f_hnjpmlld texture Lnet/minecraft/unmapped/C_yzzfidwp$C_nowrkyrj;
+			FIELD f_oooilbly colorLogic Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;
 			FIELD f_qgjcipng cull Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;
 			FIELD f_tgxiaydd layering Lnet/minecraft/unmapped/C_yzzfidwp$C_vrnvavuu;
 			FIELD f_tjiudxyg writeMaskState Lnet/minecraft/unmapped/C_yzzfidwp$C_aognicdc;
@@ -287,6 +310,8 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 				ARG 1 writeMaskState
 			METHOD m_ieqnsjal build (Z)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 				ARG 1 affectsOutline
+			METHOD m_jjkjwwbr colorLogic (Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
+				ARG 1 colorLogic
 			METHOD m_jwrisfru lightmap (Lnet/minecraft/unmapped/C_yzzfidwp$C_dpwyhlfm;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 lightmap
 			METHOD m_klolhcic lineWidth (Lnet/minecraft/unmapped/C_yzzfidwp$C_zraaemdb;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;

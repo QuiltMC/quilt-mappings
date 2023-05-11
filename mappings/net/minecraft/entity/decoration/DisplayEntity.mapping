@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayEntity
+	FIELD f_bvuuurdq updateRenderState Z
 	FIELD f_byyhyekh INTERPOLATION_DURATION Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_cgautzna WIDTH_KEY Ljava/lang/String;
 	FIELD f_cugejcbf VIEW_RANGE_KEY Ljava/lang/String;
@@ -12,13 +13,18 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	FIELD f_ifrqygvd SHADOW_STRENGTH Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ifxsoavw TRANSFORMATION_KEY Ljava/lang/String;
 	FIELD f_iygnfrvg BRIGHTNESS_KEY Ljava/lang/String;
+	FIELD f_jmgqgyrg updateStartTick Z
 	FIELD f_krvqjuys SHADOW_RADIUS Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_lkcmbicx renderState Lnet/minecraft/unmapped/C_zdeutotk$C_fdgxcfnt;
+	FIELD f_lutujwhn interpolationDuration I
 	FIELD f_mqyknhdu LEFT_ROTATION Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_oacqzoks START_INTERPOLATION_KEY Ljava/lang/String;
 	FIELD f_odqahmms BILLBOARD_RENDER_CONSTRAINTS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_owzwxrlm GLOW_COLOR_OVERRIDE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_pcqrtoci VIEW_RANGE Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_pebjmjqa updateInterpolationDuration Z
 	FIELD f_qawhpaou HEIGHT Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_qfnokasi interpolationProgress F
 	FIELD f_qxpwolsf SHADOW_RADIUS_KEY Ljava/lang/String;
 	FIELD f_rrozolcg TRANSLATION Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_rvanoawr INTERPOLATION_DURATION_KEY Ljava/lang/String;
@@ -28,11 +34,17 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	FIELD f_uaimxenm BRIGHTNESS_OVERRIDE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_uwuepspo interpolationStart J
 	FIELD f_vayhsclz RIGHT_ROTATION Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_vmgxiagt RENDER_STATE_IDS Lit/unimi/dsi/fastutil/ints/IntSet;
 	FIELD f_wpcewhgi INITIAL_SHADOW_RADIUS F
 	FIELD f_xgnfhngl BILLBOARD_KEY Ljava/lang/String;
 	FIELD f_zlrldkqq LOGGER Lorg/slf4j/Logger;
 	FIELD f_zmedthph HEIGHT_KEY Ljava/lang/String;
 	METHOD m_anrfuahp getViewRange ()F
+	METHOD m_bsyzxojh (Lcom/mojang/datafixers/util/Pair;)V
+		ARG 1 pair
+	METHOD m_cfgjadmn updateRenderData (ZF)V
+		ARG 1 shouldInterpolate
+		ARG 2 interpolationProgress
 	METHOD m_crsnfjzr setGlowColorOverride (I)V
 		ARG 1 override
 	METHOD m_cwcxhojg updateOrientation ()V
@@ -40,11 +52,17 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	METHOD m_esylsrua getBrightnessOverride ()I
 	METHOD m_fkiigefi setViewRange (F)V
 		ARG 1 range
+	METHOD m_fmenhevc getShadowRadius ()F
 	METHOD m_fxcgqqyv (Lcom/mojang/datafixers/util/Pair;)V
 		ARG 1 pair
 	METHOD m_hdkpknje setHeight (F)V
 		ARG 1 height
 	METHOD m_hgdumvpy updateVisibleBoundingBox ()V
+	METHOD m_iyurdyme (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 transformation
+	METHOD m_izunuqws createInterpolatedRenderState (Lnet/minecraft/unmapped/C_zdeutotk$C_fdgxcfnt;F)Lnet/minecraft/unmapped/C_zdeutotk$C_fdgxcfnt;
+		ARG 1 state
+		ARG 2 interpolationProgress
 	METHOD m_kaeyijyt getInterpolationDuration ()I
 	METHOD m_lehpwmeg setBillboardRenderConstraints (Lnet/minecraft/unmapped/C_zdeutotk$C_cozbiatm;)V
 		ARG 1 constaints
@@ -57,22 +75,38 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	METHOD m_mrtvrlhy getStartInterpolation ()I
 	METHOD m_nbotmszd setTransformation (Lnet/minecraft/unmapped/C_qvfggwhk;)V
 		ARG 1 transformation
+	METHOD m_njanchyv setShadowStrength ()F
 	METHOD m_ogmsufqg getInterpolationProgress (F)F
 		ARG 1 delta
 	METHOD m_pjfwuwkx setWidth (F)V
 		ARG 1 width
+	METHOD m_pjprisir setStartInterpolation (I)V
+		ARG 1 time
 	METHOD m_qtgwiuwk setInterpolationDuration (I)V
 		ARG 1 duration
+	METHOD m_tujcjwqq (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 billboard
 	METHOD m_vifcnxkl setBrightnessOverride (Lnet/minecraft/unmapped/C_wzagqsft;)V
 		ARG 1 brightness
+	METHOD m_vowjsskm (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 brightness
+	METHOD m_vwbjjkce getRenderState ()Lnet/minecraft/unmapped/C_zdeutotk$C_fdgxcfnt;
 	METHOD m_xnqmzrtk getHeight ()F
 	METHOD m_xqfovtgz (Lcom/mojang/datafixers/util/Pair;)V
 		ARG 1 pair
+	METHOD m_ybybmjze createRenderState ()Lnet/minecraft/unmapped/C_zdeutotk$C_fdgxcfnt;
 	METHOD m_ykgoueyp setShadowRadius (F)V
 		ARG 1 radius
 	METHOD m_zcpcjmbl getOrientation ()Lorg/joml/Quaternionf;
 	METHOD m_zesirgas getGlowColorOverride ()I
 	CLASS C_aefytrhe AbstractInterpolator
+		METHOD constant constant (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_zdeutotk$C_aefytrhe;
+			ARG 0 value
+		METHOD get get (F)Ljava/lang/Object;
+			ARG 1 value
+		METHOD m_xavndidf (Ljava/lang/Object;F)Ljava/lang/Object;
+			ARG 1 f
+	CLASS C_btdrhauy LinearFloatInterpolator
 	CLASS C_cozbiatm BillboardRenderConstraints
 		FIELD f_afcfxjuf FROM_VALUE Ljava/util/function/IntFunction;
 		FIELD f_mexuxwrp value B
@@ -83,16 +117,35 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 		METHOD m_vyfzsteo getValue ()B
 	CLASS C_cpnhprov BlockDisplayEntity
 		FIELD f_hzopsxjm STATE Lnet/minecraft/unmapped/C_rinmcaxy;
+		FIELD f_uixdfymz renderState Lnet/minecraft/unmapped/C_zdeutotk$C_cpnhprov$C_zhdrruye;
 		FIELD f_ybkuzbyp BLOCK_STATE_KEY Ljava/lang/String;
+		METHOD m_dqyvnlqm getRenderState ()Lnet/minecraft/unmapped/C_zdeutotk$C_cpnhprov$C_zhdrruye;
 		METHOD m_rdoqmyeq setState (Lnet/minecraft/unmapped/C_txtbiemp;)V
 			ARG 1 state
 		METHOD m_tkpbvzbc getState ()Lnet/minecraft/unmapped/C_txtbiemp;
+		CLASS C_zhdrruye BlockRenderState
 	CLASS C_eotnewog IntInterpolator
+		METHOD constant constant (I)Lnet/minecraft/unmapped/C_zdeutotk$C_eotnewog;
+			ARG 0 value
+		METHOD get get (F)I
+			ARG 1 value
+		METHOD m_vtnrumje (IF)I
+			ARG 1 i
+	CLASS C_fdgxcfnt RenderState
 	CLASS C_kalfqsxh ARGB32Interpolator
+	CLASS C_mpyykwwj TransformationInterpolator
 	CLASS C_ncfzfjmg FloatInterpolator
+		METHOD constant constant (F)Lnet/minecraft/unmapped/C_zdeutotk$C_ncfzfjmg;
+			ARG 0 value
+		METHOD get get (F)F
+			ARG 1 value
+		METHOD m_nqtknbun (FF)F
+			ARG 1 f
 	CLASS C_ruprkvfh TextDisplayEntity
+		FIELD f_bzbrolxv renderData Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_mvidrtny;
 		FIELD f_cjxhpagy SEE_THROUGH_FLAG B
 		FIELD f_cxxrvjvt INITIAL_TEXT_OPACITY B
+		FIELD f_gxdsswib RENDER_STATE_IDS Lit/unimi/dsi/fastutil/ints/IntSet;
 		FIELD f_hayvrppa SHADOW_FLAG B
 		FIELD f_hbbphtgj TEXT_OPACITY_KEY Ljava/lang/String;
 		FIELD f_kkqdyres ALIGNMENT_KEY Ljava/lang/String;
@@ -117,17 +170,25 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 			ARG 1 nbt
 			ARG 2 key
 			ARG 3 flag
+		METHOD m_ahvpxiju getTextOpacity ()B
 		METHOD m_bejdgjuh setText (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 			ARG 1 text
 		METHOD m_cyljxyxu getLineWidth ()I
+		METHOD m_ddqfions (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+			ARG 1 alignment
+		METHOD m_etzzcjyz interpolate (Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_mvidrtny;F)Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_mvidrtny;
+			ARG 1 renderData
+			ARG 2 interpolationProgress
 		METHOD m_jiovnchj setLineWidth (I)V
 			ARG 1 width
+		METHOD m_kicrnvir copyRenderData ()Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_mvidrtny;
 		METHOD m_ltndcwrn setBackgroundColor (I)V
 			ARG 1 color
 		METHOD m_ngivqkyw getAlignment (B)Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_aqllscyj;
 			ARG 0 flags
 		METHOD m_qyzsytru cacheLines (Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_stdatsys;)Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_hkiddmgs;
 			ARG 1 splitter
+		METHOD m_rngbclad getBackgroundColor ()I
 		METHOD m_vaihucbm setTextDisplayFlags (B)V
 			ARG 1 flags
 		METHOD m_wfyocyxn writeFlag (BLnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;B)V
@@ -136,6 +197,7 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 			ARG 2 key
 			ARG 3 flag
 		METHOD m_wvavmbnv getTextDisplayFlags ()B
+		METHOD m_xcvzwjbt getRenderData ()Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_mvidrtny;
 		METHOD m_xgyghmyv setTextOpacity (B)V
 			ARG 1 opacity
 		METHOD m_yhhuzqhy getText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -153,11 +215,14 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 			FIELD f_vujdodkx lines Ljava/util/List;
 			METHOD m_csxqcacc lines ()Ljava/util/List;
 			METHOD m_wjjanlea width ()I
+		CLASS C_mvidrtny RenderData
 		CLASS C_stdatsys LineSplitter
 			METHOD split split (Lnet/minecraft/unmapped/C_rdaqiwdt;I)Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_hkiddmgs;
 				ARG 1 text
 				ARG 2 width
+	CLASS C_ukdbitoi LinearIntInterpolator
 	CLASS C_yooamzmm ItemDisplayEntity
+		FIELD f_cbyffnkw renderData Lnet/minecraft/unmapped/C_zdeutotk$C_yooamzmm$C_quljyame;
 		FIELD f_jftbyoht STACK Lnet/minecraft/unmapped/C_rinmcaxy;
 		FIELD f_mmdlscnj reference Lnet/minecraft/unmapped/C_xkkpnyvk;
 		FIELD f_oamxcqmn ITEM_DISPLAY_KEY Ljava/lang/String;
@@ -165,6 +230,7 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 		FIELD f_xnusqarw ITEM_KEY Ljava/lang/String;
 		METHOD m_atxcahxf setTransformationMode (Lnet/minecraft/unmapped/C_byhguelf;)V
 			ARG 1 mode
+		METHOD m_prploryt getRenderData ()Lnet/minecraft/unmapped/C_zdeutotk$C_yooamzmm$C_quljyame;
 		METHOD m_raaxwqjj setStack (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 			ARG 1 stack
 		METHOD m_rshnpnen getStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
@@ -173,3 +239,4 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 		METHOD m_urdsekzt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
 			ARG 1 mode
 		METHOD m_wkguawyu getTransformationMode ()Lnet/minecraft/unmapped/C_byhguelf;
+		CLASS C_quljyame RenderData
