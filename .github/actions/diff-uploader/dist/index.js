@@ -9685,8 +9685,75 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186);
+const { summary } = __nccwpck_require__(1327);
 const {context, getOctokit} = __nccwpck_require__(5438);
 const fs = __nccwpck_require__(7147);
+
+const maxDiffCommentLength = 64000;
+const maxDiffComments = 3;
+
+function splitDiff(diff, depth) {
+    if (diff.length <= maxDiffCommentLength) {
+        return [diff];
+    }
+
+    let lastDiffLiteralIndex = diff.lastIndexOf("\ndiff", maxDiffCommentLength) + 1;
+
+    let resultDiff;
+    let remainingDiff;
+    if (lastDiffLiteralIndex == 0) {
+        let index = diff.lastIndexOf("\n", maxDiffCommentLength) + 1;
+        resultDiff = diff.substring(0, index) + "\nThe diff for this file is not complete!";
+        remainingDiff = "Continuation of the last diff...\n" + diff.substring(index);
+    } else {
+        resultDiff = diff.substring(0, lastDiffLiteralIndex);
+        remainingDiff = diff.substring(lastDiffLiteralIndex);
+    }
+
+
+    if (depth < maxDiffComments - 1) {
+        return [resultDiff].concat(splitDiff(remainingDiff, depth + 1));
+    } else {
+        return [resultDiff + "\n\nThe remaining diff is too long!"];
+    }
+}
+
+async function commentDiff(summary, diff, doComment) {
+    if (diff.length > maxDiffCommentLength) {
+        let diffs = splitDiff(diff, 0);
+        let l = diffs.length;
+        for (let i = 0; i < l; i++) {
+            let iDiff = diffs[i];
+            let pref = i == 0 ? summary + "\n\n" : "";
+
+            // Formatting :pain:
+            await doComment(
+`${pref}\<details\>
+\<summary\>View the diff here (${i + 1}/${l}):\</summary\>
+\<br\>
+
+\`\`\`diff
+${iDiff}
+\`\`\`
+\</details\>`
+);
+        }
+    } else {
+
+        await doComment(
+`${summary}
+
+\<details\>
+\<summary\>View the diff here:\</summary\>
+\<br\>
+
+\`\`\`diff
+${diff}
+\`\`\`
+\</details\>`
+);
+    }
+}
 
 async function main() {
     const token = core.getInput('github-token', {required: true});
@@ -9720,7 +9787,6 @@ async function main() {
         //     });
         // }
     }
-    
     if (!targetSrcExists) {
         await comment(`No diff file generated.`);
         core.setOutput("result", "skip");
@@ -9740,7 +9806,7 @@ async function main() {
             let modified_files = (diff.match(new RegExp("^\\+\\+\\+", "gm")) || []).length;
 
             core.setOutput("result", "success");
-            await comment(`With commit ${context.sha}, ${modified_files} file(s) were updated with ${added_lines} line(s) added and ${removed_lines} removed compared to the latest Quilt Mappings version. \n\n\<details\>\n\<summary\>View the diff here:\</summary\> \n\<br\>\n\n\`\`\`diff\n${diff}\`\`\`\n\</details\>`)
+            await commentDiff(`With commit ${context.sha}, ${modified_files} file(s) were updated with ${added_lines} line(s) added and ${removed_lines} removed compared to the latest Quilt Mappings version.`, diff, comment);
         }
     } catch (err) {
         console.error(err);
