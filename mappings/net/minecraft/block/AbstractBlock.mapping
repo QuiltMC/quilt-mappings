@@ -62,6 +62,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
+	METHOD m_ixssdaxe getDefaultMapColor ()Lnet/minecraft/unmapped/C_mlrprqox;
 	METHOD m_jdegzotw getRaycastShape (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 1 state
 		ARG 2 world
@@ -254,6 +255,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_wvbmkgls suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_xwxdktuf hasRandomTicks Z
 		FIELD f_yypdsdkn lavaIgnitable Z
+		FIELD f_zpvdfobl mapColor Lnet/minecraft/unmapped/C_mlrprqox;
 		FIELD f_zzuoeazs instrument Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD <init> (Lnet/minecraft/unmapped/C_mmxmpdoq;Lcom/google/common/collect/ImmutableMap;Lcom/mojang/serialization/MapCodec;)V
 			ARG 1 block
@@ -576,6 +578,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_gepbjyhg nonSolid Z
 		FIELD f_gljcimhm emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_hgzeyqby randomTicks Z
+		FIELD f_hzpexiar mapColorGetter Ljava/util/function/Function;
 		FIELD f_ivzlotoq replaceable Z
 		FIELD f_jysuanmz instrument Lnet/minecraft/unmapped/C_onjtjtsi;
 		FIELD f_lbohsgfq slipperiness F
@@ -599,6 +602,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_yebtulna pistonBehavior Lnet/minecraft/unmapped/C_mojvzhua;
 		METHOD m_aaxpakkc copy (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 0 block
+		METHOD m_aqwqgicf (Lnet/minecraft/unmapped/C_arllgqae;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_mlrprqox;
+			ARG 1 state
 		METHOD m_bwwgnswz solid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_bzhfzklk emissiveLighting (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
@@ -608,6 +613,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 0 state
 			ARG 1 world
 			ARG 2 pos
+			ARG 3 type
 		METHOD m_dbqsutun liquid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_dfcscaql noCollision ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			COMMENT Specifies that a block should have no collision bounds.
@@ -620,6 +626,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_edlblpmg offsetType (Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 offsetType
 		METHOD m_egobildr (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+			ARG 0 state
 			ARG 1 state
 			ARG 2 world
 			ARG 3 pos
@@ -640,6 +647,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 0 state
 			ARG 1 world
 			ARG 2 pos
+		METHOD m_ksnsduxl create ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+		METHOD m_lmlzohax (Lnet/minecraft/unmapped/C_mlrprqox;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_mlrprqox;
+			ARG 1 state
 		METHOD m_lzknvbog hardness (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 hardness
 		METHOD m_mbjlohca dropsLike (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -648,6 +658,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 				COMMENT the block to copy item drops from
 		METHOD m_mkgblwbl nonSolid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_mkiacirn air ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+		METHOD m_mylnzrvw mapColor (Lnet/minecraft/unmapped/C_mlrprqox;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 1 mapColor
 		METHOD m_nfvnphha allowsSpawning (Lnet/minecraft/unmapped/C_triydqro$C_knnwryez;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			COMMENT Specifies logic that calculates whether an entity can spawn on a block.
 			ARG 1 predicate
@@ -680,6 +692,10 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 		METHOD m_tzpskyoo (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 0 state
+			ARG 1 world
+			ARG 2 pos
+		METHOD m_uggztwlf mapColor (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 1 mapColorGetter
 		METHOD m_umndjpsf resistance (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 resistance
 		METHOD m_vliybdqv lavaIgnitable ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -692,6 +708,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT @return this
 		METHOD m_vuhrtmql (Lnet/minecraft/unmapped/C_txtbiemp;)I
 			ARG 0 state
+		METHOD m_wlqavdtn mapColor (Lnet/minecraft/unmapped/C_arllgqae;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 1 dyeColor
 		METHOD m_wrutkowk blockVision (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
 		METHOD m_yetkcise breakInstantly ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
