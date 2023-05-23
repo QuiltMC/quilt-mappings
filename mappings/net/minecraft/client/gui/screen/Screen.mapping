@@ -20,8 +20,10 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	FIELD f_saroizas ALLOWED_PROTOCOLS Ljava/util/Set;
 	FIELD f_szwvjynq elementNarrationStartTime J
 	FIELD f_vsuqlruk height I
+	FIELD f_xefkwmmw OPTIONS_BACKGROUND_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_xypkugwe screenNarrationStartTime J
 	FIELD f_ywhydtya SCREEN_INIT_NARRATION_DELAY J
+	FIELD f_zjysrtvv screenExecutor Ljava/util/concurrent/Executor;
 	METHOD <init> (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 title
 	METHOD m_acdaclus isPauseScreen ()Z
@@ -51,6 +53,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 2 width
 		ARG 3 height
 	METHOD m_gqwpvknz getTooltipFromItem (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/List;
+		ARG 0 client
 		ARG 1 stack
 	METHOD m_gseqedxv isCopy (I)Z
 		ARG 0 keyCode
@@ -87,6 +90,8 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_ndigxngy tick ()V
 	METHOD m_nmctqrnu setDeferredTooltip (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 text
+	METHOD m_nryxopfr (Ljava/lang/Runnable;)V
+		ARG 1 runnable
 	METHOD m_nuosckio hasControlDown ()Z
 	METHOD m_nvnfplud getNarratedTitle ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_pfjlkadm applyKeyPressNarratorDelay ()V
@@ -95,6 +100,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_pfwvzdim renderWithTooltip (Lnet/minecraft/unmapped/C_sedilmty;IIF)V
 		COMMENT Renders this screen along with deferred text tooltip,
 		COMMENT ensuring the tooltip is rendered on top.
+		ARG 1 graphics
 		ARG 2 mouseX
 			COMMENT the mouse X-coordinate on the screen
 		ARG 3 mouseY
@@ -103,6 +109,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 			COMMENT the delta since the last tick
 	METHOD m_pgbqqklr hasAltDown ()Z
 	METHOD m_qfxudleh renderBackground (Lnet/minecraft/unmapped/C_sedilmty;)V
+		ARG 1 graphics
 	METHOD m_qrphnkdt findSelectedElementData (Ljava/util/List;Lnet/minecraft/unmapped/C_womhzmwc;)Lnet/minecraft/unmapped/C_wrmtlwqx$C_xlpahkfz;
 		ARG 0 selectables
 		ARG 1 selectable
@@ -129,6 +136,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 0 keyCode
 	METHOD m_vaathegj renderBackgroundTexture (Lnet/minecraft/unmapped/C_sedilmty;)V
 		COMMENT Renders the fullscreen background texture of this screen.
+		ARG 1 graphics
 	METHOD m_vsdrypvi addDrawableChild (Lnet/minecraft/unmapped/C_fxiqpxaf;)Lnet/minecraft/unmapped/C_fxiqpxaf;
 		ARG 1 drawableElement
 	METHOD m_vsopnzlx focusCurrentPath (Lnet/minecraft/unmapped/C_ballifpu;)V
