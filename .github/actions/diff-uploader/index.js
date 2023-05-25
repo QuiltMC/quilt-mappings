@@ -24,7 +24,6 @@ function splitDiff(diff, depth) {
         remainingDiff = diff.substring(lastDiffLiteralIndex);
     }
 
-
     if (depth < maxDiffComments - 1) {
         return [resultDiff].concat(splitDiff(remainingDiff, depth + 1));
     } else {
