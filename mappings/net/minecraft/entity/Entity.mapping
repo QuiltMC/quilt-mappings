@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
+	COMMENT Represents an entity. Entities encompass all dynamic, moving objects.
 	FIELD f_ablxonpa horizontalCollision Z
 	FIELD f_ajffyhwa blockPos Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_apbfelpo submergedFluidTag Ljava/util/Set;
@@ -6,18 +7,19 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_bgvyxbvq distanceTraveled F
 	FIELD f_bjvpodux passengerList Lcom/google/common/collect/ImmutableList;
 	FIELD f_bygzgscd id I
-		COMMENT The entity's network ID, used as a reference for synchronization over network.
+		COMMENT The entity's network identifier, used as a reference for synchronization over network.
 		COMMENT This is not persistent across save and loads; use {@link #uuid} to identify
 		COMMENT an entity in those cases.
 		COMMENT
 		COMMENT @see #getId()
+	FIELD f_bzmyuqdb DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5 D
 	FIELD f_cavwkpwd uuidString Ljava/lang/String;
 	FIELD f_cdurbrqe NULL_BOX Lnet/minecraft/unmapped/C_hbcjzgoe;
 	FIELD f_cffdjvfa nextStepSoundDistance F
 	FIELD f_chegcauz onGround Z
 	FIELD f_clzghgmt currentId Ljava/util/concurrent/atomic/AtomicInteger;
-		COMMENT A generator of unique entity {@link #id network IDs}. The generated
-		COMMENT ID for client entities are useless and discarded subsequently through
+		COMMENT A generator of unique entity {@link #id network identifiers}. The generated
+		COMMENT identifier for client entities are useless and discarded subsequently through
 		COMMENT {@link #setId(int)} calls.
 	FIELD f_crrlnxqg age I
 	FIELD f_csywjyej velocityModified Z
@@ -43,6 +45,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_hxkuahwe minorHorizontalCollision Z
 	FIELD f_hyixntpo submergedInWater Z
 	FIELD f_hzlmaqrc removalReason Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
+	FIELD f_idqxcmak DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0 D
 	FIELD f_ihpdejin prevY D
 	FIELD f_ilwbyicy velocity Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_iskwetjb CUSTOM_NAME Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -87,6 +90,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_rucrpdxa packetPositionCodec Lnet/minecraft/unmapped/C_kfofqpqr;
 	FIELD f_rwttyzfv onGroundNoBlocks Z
 	FIELD f_scozqngs invulnerable Z
+	FIELD f_sdtkwmca DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2 F
 	FIELD f_sfjnvyan movementMultiplier Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_skorbhua lastChimeAge I
 	FIELD f_smuuqtsj FROZEN_TICKS Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -213,6 +217,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 seconds
 	METHOD m_dgesbqpr calculateDimensions ()V
 	METHOD m_dmqmmjta getWidth ()F
+		COMMENT {@return the width of this entity}
 	METHOD m_dofvpclc positionInPortal (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;Lnet/minecraft/unmapped/C_wauhtoaq$C_tqypnjit;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 portalAxis
 		ARG 2 portalRect
@@ -244,9 +249,15 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_edsbhryk playAmethystChimeSound ()V
 	METHOD m_egrevgdy getMovementDirection ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_ehxuiwfs getSafeFallDistance ()I
+		COMMENT {@return the fall distance that's safe before this entity takes fall damage}
 	METHOD m_ejhzkfsp addPassenger (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
 	METHOD m_elbjzlaw isRemoved ()Z
+		COMMENT Returns whether this entity has been removed or not.
+		COMMENT <p>
+		COMMENT A removed entity should no longer be used.
+		COMMENT
+		COMMENT @return {@code true} if this entity has been removed, or {@code false} otherwise
 	METHOD m_elzzvnlh isSubmergedIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 		ARG 1 key
 	METHOD m_emaabkqn equipStack (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
@@ -256,6 +267,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_eoaarjeb setPose (Lnet/minecraft/unmapped/C_ufdjspmk;)V
 		ARG 1 pose
 	METHOD m_eoelkgqb isOnGround ()Z
+		COMMENT Returns whether this entity is standing on the ground or not.
+		COMMENT
+		COMMENT @return {@code true} if this entity is on the ground, or {@code false} otherwise
 	METHOD m_eoypgeqt getChunkPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 	METHOD m_eqefuhaz canExplosionDestroyBlock (Lnet/minecraft/unmapped/C_aahhrzpf;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;F)Z
 		ARG 1 explosion
@@ -292,11 +306,11 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_fesyylro (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 passenger
 	METHOD m_fgmpibkk setId (I)V
-		COMMENT Sets the network ID of this entity.
+		COMMENT Sets the network identifier of this entity.
 		COMMENT
 		COMMENT @apiNote This is used by client-side networking logic to set up the network
-		COMMENT ID of entities from the server. This shouldn't be used by server-side logic
-		COMMENT as the network ID is already properly initialized on entity object construction.
+		COMMENT identifier of entities from the server. This shouldn't be used by server-side logic
+		COMMENT as the network identifier is already properly initialized on entity object construction.
 		COMMENT
 		COMMENT @see #getId()
 		ARG 1 id
@@ -318,6 +332,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_fpobayhy hasPassengerType (Ljava/util/function/Predicate;)Z
 		ARG 1 predicate
 	METHOD m_fqqxgvvd getHeight ()F
+		COMMENT {@return the height of this entity}
 	METHOD m_fqsmgmzi setMovementMultiplier (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 state
 		ARG 2 multiplier
@@ -360,6 +375,10 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_gxhwoqaa getTeamColorValue ()I
 	METHOD m_hbtgnbjd getItemsEquipped ()Ljava/lang/Iterable;
 	METHOD m_hehkhdfc isFrozen ()Z
+	METHOD m_heuoaeon getNameTagYOffset ()F
+		COMMENT Gets the name tag Y offset of this entity, relative to its position.
+		COMMENT
+		COMMENT @return the name tag Y offset
 	METHOD m_hhmmivsh tryTickInVoid ()V
 	METHOD m_hhwoykag calculateNextStepSoundDistance ()F
 	METHOD m_hjjjfrzw getScoreboardTeam ()Lnet/minecraft/unmapped/C_qgtzypup;
@@ -474,6 +493,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 3 destY
 		ARG 5 destZ
 	METHOD m_kqxvnqqn getWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
+		COMMENT {@return the world this entity is in}
 	METHOD m_krfnmqpx updateKilledAdvancementCriterion (Lnet/minecraft/unmapped/C_astfners;ILnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 killer
 		ARG 2 score
@@ -639,6 +659,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 yaw
 	METHOD m_pcyynmjj isSilent ()Z
 	METHOD m_pdtybxtp getRemovalReason ()Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
+		COMMENT Gets the removal reason of this entity if it has been removed.
+		COMMENT
+		COMMENT @return the removal reason of this entity if it has been removed, or {@code null} otherwise
 	METHOD m_pedkbecv getParticleZ (D)D
 		ARG 1 widthScale
 	METHOD m_pfpocpag getClientCameraPosVec (F)Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -752,7 +775,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 cursorDeltaX
 		ARG 3 cursorDeltaY
 	METHOD m_ucyctjbx getDimensions (Lnet/minecraft/unmapped/C_ufdjspmk;)Lnet/minecraft/unmapped/C_sszpscpo;
+		COMMENT {@return the dimensions of this entity depending on the given pose}
 		ARG 1 pose
+			COMMENT the entity pose
 	METHOD m_ueufodjy getSwimHeight ()D
 		COMMENT Returns the minimum submerged height of this entity in fluid so that it
 		COMMENT would be affected by fluid physics.
@@ -781,6 +806,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_umvbjaqw getFireTicks ()I
 	METHOD m_uoqfuwph updatePassengerForDismount (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 passenger
+	METHOD m_uoscerfj updateSupportingBlock (ZLnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 onGround
+		ARG 2 movementVector
 	METHOD m_uskzztzx doesNotCollide (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
 		ARG 1 box
 	METHOD m_usxkccap getScoreboardTags ()Ljava/util/Set;
@@ -796,12 +824,17 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT
 		COMMENT @return the entity in the other world
 		ARG 1 destination
+			COMMENT the destination world
 	METHOD m_vbxcqznf adjustSingleAxisMovementForCollisions (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_cdctfzbn;Ljava/util/List;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 entity
 		ARG 1 movement
 		ARG 2 entityBoundingBox
 		ARG 3 world
 		ARG 4 shapes
+	METHOD m_vcemmyqu isOnRailTracks ()Z
+		COMMENT Returns whether this entity is locked onto rail tracks or not.
+		COMMENT
+		COMMENT @return {@code true} if this entity is locked onto rail tracks, or {@code false} otherwise
 	METHOD m_vcfvpihz checkDespawn ()V
 	METHOD m_vcplipih getLightLevelDependentValue ()F
 	METHOD m_vddvkdnu saveNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
@@ -809,6 +842,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_vewkkvlv isFireImmune ()Z
 	METHOD m_vfobpjve getParticleX (D)D
 		ARG 1 widthScale
+	METHOD m_vgljvqju setOnGroundWithMovement (ZLnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 onGround
+		ARG 2 movementVector
 	METHOD m_vhqflgrn refreshPositionAndAngles (DDDFF)V
 		ARG 1 x
 		ARG 3 y
@@ -850,12 +886,16 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_wgzrdnvs hasPassengerDeep (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 passenger
 	METHOD m_whvzamjj setWorld (Lnet/minecraft/unmapped/C_cdctfzbn;)V
+		COMMENT Sets the world this entity is in.
+		ARG 1 world
+			COMMENT the world
 	METHOD m_wiyveous getEyeY ()D
 	METHOD m_wjodonhd isInvisible ()Z
 	METHOD m_wkqvrgdz canAddPassenger (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 passenger
 	METHOD m_wmrqudhe checkBlockCollision ()V
 	METHOD m_wmxlrpiw getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
+		COMMENT {@return the position in the world of this entity}
 	METHOD m_wnmvwdkc playSwimSound ()V
 	METHOD m_wpbbqukl getPitch ()F
 	METHOD m_wqwhgnwv getSavedEntityId ()Ljava/lang/String;
@@ -967,12 +1007,17 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 			ARG 4 y
 			ARG 6 z
 	CLASS C_emmohndu RemovalReason
+		COMMENT Represents the removal reason of an entity.
+		COMMENT <p>
+		COMMENT The removal reason determines whether the entity should be destroyed or not,
+		COMMENT and whether the entity should be saved or not.
 		FIELD f_iyplvxtf save Z
 		FIELD f_mfhxvshm KILLED Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
 			COMMENT The entity is killed.
 		FIELD f_ohrdgcrv CHANGED_DIMENSION Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
 			COMMENT The entity changed dimension.
 		FIELD f_vgvlzpcx DISCARDED Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
+			COMMENT The entity has been discarded, it has been removed from the game without being killed.
 		FIELD f_wghthbky destroy Z
 		FIELD f_xgwqvbsx UNLOADED_TO_CHUNK Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
 			COMMENT The entity is unloaded to chunk.
@@ -986,8 +1031,12 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 			COMMENT Returns whether the entity should be destroyed or not.
 			COMMENT <p>
 			COMMENT If an entity should be destroyed, then the entity should not be re-used and any external data on the entity will be cleared.
+			COMMENT
+			COMMENT @return {@code true} if this entity should be destroyed, or {@code false} otherwise
 		METHOD m_wbwjpgww shouldSave ()Z
 			COMMENT Returns whether the entity should be saved or not.
+			COMMENT
+			COMMENT @return {@code true} if this entity should be saved, or {@code false} otherwise
 	CLASS C_tcfxsqwc MoveEffect
 		COMMENT The move effect represents possible effects of an entity moving, such as
 		COMMENT playing sounds, emitting game events, none, or both.
