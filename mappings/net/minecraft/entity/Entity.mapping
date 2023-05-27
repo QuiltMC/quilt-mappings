@@ -255,9 +255,12 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_elbjzlaw isRemoved ()Z
 		COMMENT Returns whether this entity has been removed or not.
 		COMMENT <p>
-		COMMENT A removed entity should no longer be used.
+		COMMENT A removed entity should no longer be used as it means it has been removed from
+		COMMENT the world it was previously in, and it has been discarded from the game context.
 		COMMENT
 		COMMENT @return {@code true} if this entity has been removed, or {@code false} otherwise
+		COMMENT @see #getRemovalReason()
+		COMMENT @see #setRemoved(RemovalReason)
 	METHOD m_elzzvnlh isSubmergedIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 		ARG 1 key
 	METHOD m_emaabkqn equipStack (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
@@ -660,8 +663,13 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_pcyynmjj isSilent ()Z
 	METHOD m_pdtybxtp getRemovalReason ()Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
 		COMMENT Gets the removal reason of this entity if it has been removed.
+		COMMENT <p>
+		COMMENT If the removal reason is not null, this means the entity has been removed from the
+		COMMENT world it was previously in, and it has been discarded from the game context.
 		COMMENT
 		COMMENT @return the removal reason of this entity if it has been removed, or {@code null} otherwise
+		COMMENT @see #isRemoved()
+		COMMENT @see #setRemoved(RemovalReason)
 	METHOD m_pedkbecv getParticleZ (D)D
 		ARG 1 widthScale
 	METHOD m_pfpocpag getClientCameraPosVec (F)Lnet/minecraft/unmapped/C_vgpupfxx;
