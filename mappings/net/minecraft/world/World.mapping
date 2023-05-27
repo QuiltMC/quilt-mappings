@@ -68,6 +68,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 3 fromPos
 	METHOD m_bbirufyx disconnect ()V
 	METHOD m_bwleesdb getReceivedStrongRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		COMMENT {@return the strong redstone power the given position receives from neighboring blocks}
 		ARG 1 pos
 	METHOD m_cftbxfln isDirectionSolid (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 1 pos
@@ -82,8 +83,12 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_cnpexxbj setLightningTicksLeft (I)V
 		ARG 1 lightningTicksLeft
 	METHOD m_cosjeaoq isEmittingRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		COMMENT {@return whether redstone power is emitted from the given position in the given direction}
+		COMMENT <p>
+		COMMENT NOTE: directions in redstone power related methods are backwards, so this method
+		COMMENT checks for power in the <i>opposite</i> direction of the one given.
 		ARG 1 pos
-		ARG 2 direction
+		ARG 2 dir
 	METHOD m_cpgionsz getRegistryKey ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_cqotfzpd playSound (Lnet/minecraft/unmapped/C_jzrpycqo;DDDLnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_pqzizukq;FFJ)V
 		ARG 1 except
@@ -105,6 +110,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 2 pos
 		ARG 3 data
 	METHOD m_dhgnxris getReceivedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)I
+		COMMENT {@return the redstone power the given position receives from neighboring blocks}
 		ARG 1 pos
 	METHOD m_dmpgcjnl updateListeners (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;I)V
 		ARG 1 pos
@@ -263,8 +269,14 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 2 block
 	METHOD m_qziyykad getDamageSources ()Lnet/minecraft/unmapped/C_lddxcbik;
 	METHOD m_rbciwyji getEmittedRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)I
+		COMMENT {@return the redstone power emitted from the given position in the given direction}
+		COMMENT This is the highest value between power emitted by the block itself, and strong redstone power
+		COMMENT received from neighboring blocks if the block is a redstone conductor.
+		COMMENT <p>
+		COMMENT NOTE: directions in redstone power related methods are backwards, so this method
+		COMMENT checks for power in the <i>opposite</i> direction of the one given.
 		ARG 1 pos
-		ARG 2 direction
+		ARG 2 dir
 	METHOD m_rlsuyrel createExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;DDDFZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;Z)Lnet/minecraft/unmapped/C_aahhrzpf;
 		ARG 1 entity
 		ARG 2 source
@@ -287,6 +299,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 11 velocityY
 		ARG 13 velocityZ
 	METHOD m_rorehhll isReceivingRedstonePower (Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		COMMENT {@return whether the given position receives any redstone power from neighboring blocks}
 		ARG 1 pos
 	METHOD m_rsnbcuug getWorldChunk (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hrdsvlkq;
 		ARG 1 pos
