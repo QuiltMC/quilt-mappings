@@ -72,7 +72,7 @@ with [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-poli
 To avoid conflicts and make the process faster, the FCP may be ended early when a new Minecraft version is released and
 QM is updated.
 
-### `T: new mappings`
+### `T: new`
 
 **Description**: Used for pull requests that focus mainly on adding new mappings.
 
@@ -106,7 +106,7 @@ QM is updated.
 - Snapshots: 2 days (1 day with 3+ approvals)
 - Releases: 2 days
 
-### `T: toolchain changes`
+### `T: toolchain`
 
 **Description**: Used for pull requests that focus mainly on changes to the QM toolchain, including the buildscript,
 and/or tools used.
