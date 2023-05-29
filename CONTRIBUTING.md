@@ -77,39 +77,34 @@ QM is updated.
 **Description**: Used for pull requests that focus mainly on adding new mappings.
 
 **Required Approvals**: 2
-- At least 1 approval must come directly from a Mappings team member, and the other one can come from a Mappings
-Triage member or another Mappings Team member.
+- At least 1 approval must come directly from a Mappings team member.
 
 **Final Comment Period**:
-- Snapshots: 1 day
+- Snapshots: 2 days (1 day with 3+ approvals)
 - Releases: 2 days
 
 **Special cases**:
-- If the PR adds new mappings needed by QSL, the Final Comment Period is shortened to 12 hours.
+- If the PR adds new mappings needed by QSL, the Final Comment Period is shortened to 12 hours, and it can be skipped if it receives 3 approvals or more.
 
 ### `T: refactor`
 
 **Description**: Used for pull request that focus mainly on changing the names of existing mappings.
 
 **Required Approvals**: 3
-- At least 2 approvals must come directly from a Mappings team member, and the other one can come from a Mappings
-Triage member or another Mappings Team member.
+- At least 2 approvals must come directly from a Mappings team member.
 
-**Final Comment Period**:
-- Snapshots: 3 days
-- Releases: 6 days
+**Final Comment Period**: 2 days
 
 ### `T: documentation`
 
 **Description**: Used for pull requests that focus mainly on adding or changing documentation.
 
 **Required Approvals**: 2
-- At least 1 approval must come directly from a Mappings team member, and the other one can come from a Mappings
-Triage member or another Mappings Team member.
+- At least 1 approval must come directly from a Mappings team member.
 
 **Final Comment Period**:
-- Snapshots: 2 days
-- Releases: 4 days
+- Snapshots: 2 days (1 day with 3+ approvals)
+- Releases: 2 days
 
 ### `T: toolchain changes`
 
@@ -117,13 +112,12 @@ Triage member or another Mappings Team member.
 and/or tools used.
 
 **Required Approvals**: 1
-- At least 1 approval must come directly from a Mappings team member
+- Only members of the QSL Core Team count for approvals in PRs targeting the toolchain.
 
-**Final Comment Period**:
-- Snapshots: 1 day
-- Releases: 2 days
+**Final Comment Period**: 2 days
 
 ### Other
+
 Trivial fixes that do not require review (e.g. typos) are exempt from this policy. Mappings team members should
 double-check with other members of the team on Discord before pushing a commit or merging a PR without going
 through this process.
