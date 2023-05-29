@@ -112,7 +112,7 @@ QM is updated.
 and/or tools used.
 
 **Required Approvals**: 1
-- Only members of the QSL Core Team count for approvals in PRs targeting the toolchain.
+- Only members of the Mappings Team count for approvals in PRs targeting the toolchain.
 
 **Final Comment Period**: 2 days
 
