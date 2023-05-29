@@ -111,7 +111,7 @@ QM is updated.
 **Description**: Used for pull requests that focus mainly on changes to the QM toolchain, including the buildscript,
 and/or tools used.
 
-**Required Approvals**: 1
+**Required Approvals**: 2
 - Only members of the Mappings Team count for approvals in PRs targeting the toolchain.
 
 **Final Comment Period**: 2 days
