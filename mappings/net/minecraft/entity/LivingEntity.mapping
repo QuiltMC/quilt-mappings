@@ -51,12 +51,15 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_mlsykvgi absorptionAmount F
 	FIELD f_naybbqec ITEM_USE_INTERVAL I
 	FIELD f_noitvgvb LARGE_HAT_RENDER_CULLING_SIZE F
+	FIELD f_noizhvzb BASE_JUMP_COEFFICIENT F
 	FIELD f_nzjhzxzv prevLookDirection F
 	FIELD f_obgdercz EQUIPMENT_SLOT_OFFSET I
 	FIELD f_oigploen activeItemStack Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_okpxkkwu serverHeadYaw D
 	FIELD f_olsxmkqm PLAYER_DAMAGE_TIME I
 	FIELD f_oqcyctiq DEATH_DURATION I
+		COMMENT Represents the duration in ticks before this entity is removed due to death.
+		COMMENT The value is {@value} ticks.
 	FIELD f_oyncoeen MIN_MOVEMENT_DISTANCE D
 	FIELD f_phnacmet prevBodyYaw F
 	FIELD f_pjcisjtc stepBobbingAmount F
@@ -135,6 +138,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_bkfxmcie damageArmor (Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 		ARG 1 source
 		ARG 2 amount
+	METHOD m_bowysnou applyStatusEffectToPassengers (Lnet/minecraft/unmapped/C_wpfizwve;)V
+		ARG 1 effect
 	METHOD m_bpkuevcy shouldRemoveSoulSpeedBoost (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 landingState
 	METHOD m_bqffyrlc consumeItem ()V
@@ -222,7 +227,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 2 predicate
 	METHOD m_fyloosbv updateGlowing ()V
 	METHOD m_gdlvulbl getAirSpeed ()F
-	METHOD m_gfhvqjeo (DZLnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_gfhvqjeo getFallingInFluidAdjustedMovement (DZLnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 descentSpeed
 		ARG 3 descending
 		ARG 4 velocity
@@ -254,6 +259,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_gvmhasrb getMovementSpeed ()F
 	METHOD m_gwksxurc setMovementSpeed (F)V
 		ARG 1 movementSpeed
+	METHOD m_gxsldibl getLootTableSeed ()J
 	METHOD m_gxxlbgpz getMainHandStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_hbdaqklu canBreatheInWater ()Z
 	METHOD m_hcwncupw setJumping (Z)V
@@ -312,16 +318,28 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 stack
 		ARG 2 particleCount
 	METHOD m_jsddcavv isDead ()Z
+		COMMENT Returns whether this entity is dead or not.
+		COMMENT <p>
+		COMMENT A dead entity may not yet be removed given the {@linkplain #DEATH_DURATION death duration}.
+		COMMENT
+		COMMENT @return {@code true} if this entity is dead, or {@code false} otherwise
 	METHOD m_jshlywah eatFood (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 world
 		ARG 2 stack
 	METHOD m_jumclkqe shouldSpawnConsumptionEffects ()Z
 	METHOD m_khdpfurh setHealth (F)V
+		COMMENT Sets the amount of health this entity has in half-hearts.
+		COMMENT
+		COMMENT @see #heal(float)
 		ARG 1 health
+			COMMENT the amount of health
 	METHOD m_kivskbpm computeFallDamage (FF)I
 		ARG 1 fallDistance
 		ARG 2 damageMultiplier
 	METHOD m_knkzhatw getHealth ()F
+		COMMENT Gets the amount of health this entity has in half-hearts.
+		COMMENT
+		COMMENT @return the amount of health of this entity
 	METHOD m_ktkvypgf enterCombat ()V
 	METHOD m_kwjgylty swimUpward (Lnet/minecraft/unmapped/C_ednuhnnn;)V
 		ARG 1 tag
@@ -393,11 +411,12 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_orkiajsn getActiveStatusEffects ()Ljava/util/Map;
 	METHOD m_orzhhcmg heal (F)V
 		COMMENT Heals this entity by the given {@code amount} of half-hearts.
-		COMMENT
-		COMMENT <p>A dead entity cannot be healed.
+		COMMENT <p>
+		COMMENT A dead entity cannot be healed.
 		COMMENT
 		COMMENT @see #isDead()
 		ARG 1 amount
+			COMMENT the amount of half-hearts to heal
 	METHOD m_orzuenpv isUsingItem ()Z
 	METHOD m_otdsojah tickNewAi ()V
 	METHOD m_ozivsxrd turnHead (FF)F
@@ -441,10 +460,11 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT Returns if this entity should drop experience on death when the {@linkplain
 		COMMENT net.minecraft.world.GameRules#DO_MOB_LOOT doMobLoot} game rule is
 		COMMENT enabled and has been attacked by a player.
-		COMMENT
-		COMMENT <p>If {@link #shouldAlwaysDropXp() shouldAlwaysDropXp()} returns {@code
+		COMMENT <p>
+		COMMENT If {@link #shouldAlwaysDropXp() shouldAlwaysDropXp()} returns {@code
 		COMMENT true}, this check is disregarded.
 		COMMENT
+		COMMENT @return {@code true} if this entity should drop experience on death, or {@code false} otherwise
 		COMMENT @see #dropXp()
 		COMMENT @see #shouldAlwaysDropXp()
 		COMMENT @see #getXpToDrop()
@@ -531,6 +551,14 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_vckvknnt getStackReference (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_xkkpnyvk;
 		ARG 0 entity
 		ARG 1 slot
+	METHOD m_vixrfdxj hasEquipmentChanged (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		COMMENT Returns whether the equipment has changed based on the previous and new values.
+		COMMENT
+		COMMENT @return {@code true} if the equipment has changed, or {@code false} otherwise
+		ARG 1 previousEquipment
+			COMMENT the previous equipment item stack
+		ARG 2 newEquipment
+			COMMENT the new equipment item stack
 	METHOD m_vjmkpqwf getNextAirOnLand (I)I
 		ARG 1 air
 	METHOD m_vlttkmyd addPowderSnowSlowIfNeeded ()V
@@ -573,6 +601,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 hand
 	METHOD m_xjvsabgy createAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
 	METHOD m_xnfqqzkv isMobOrPlayer ()Z
+	METHOD m_xotweprj indicateDamage (DD)V
+		ARG 1 x
+		ARG 3 z
 	METHOD m_xpojueyp getBaseValue (Lnet/minecraft/unmapped/C_ppzfbbsy;)D
 		ARG 1 attribute
 	METHOD m_xuirzakp getEquippedStack (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;

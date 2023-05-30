@@ -43,12 +43,14 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 1 entity
 	METHOD m_chqybydm isFireImmune ()Z
 	METHOD m_djlonrdm isInvalidSpawn (Lnet/minecraft/unmapped/C_txtbiemp;)Z
-		COMMENT Returns whether the EntityType can spawn inside the given block.
-		COMMENT
-		COMMENT <p>By default, non-fire-immune mobs can't spawn in/on blocks dealing fire damage.
+		COMMENT Returns whether this entity type can spawn inside the given block.
+		COMMENT <p>
+		COMMENT By default, non-fire-immune mobs can't spawn in/on blocks dealing fire damage.
 		COMMENT Any mob can't spawn in wither roses, sweet berry bush, or cacti.
+		COMMENT <p>
+		COMMENT This can be overwritten via {@link EntityType.Builder#allowSpawningInside(Block[])}
 		COMMENT
-		COMMENT <p>This can be overwritten via {@link EntityType.Builder#allowSpawningInside(Block[])}
+		COMMENT @return {@code true} if this entity type can spawn inside the given block, or {@code false} otherwise
 		ARG 1 state
 	METHOD m_dlfozvia getUntranslatedName ()Ljava/lang/String;
 	METHOD m_dmtauxma loadEntityWithPassengers (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_cdctfzbn;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_astfners;
