@@ -1,18 +1,34 @@
 CLASS net/minecraft/unmapped/C_sncvekqg net/minecraft/world/entity/EntityLike
-	COMMENT A prototype of entity that's suitable for entity manager to handle.
+	COMMENT Represents a prototype of an entity that's suitable for entity manager to handle.
 	METHOD m_bjqxzvbg isPlayer ()Z
-	METHOD m_fbulpmue setRemoved (Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
-		ARG 1 reason
-	METHOD m_ibdrkofs setListener (Lnet/minecraft/unmapped/C_ylpvpknw;)V
-		ARG 1 listener
-	METHOD m_idziptjx getBoundingBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
-	METHOD m_jklfpglz getUuid ()Ljava/util/UUID;
-	METHOD m_jlnbphwa getBlockPos ()Lnet/minecraft/unmapped/C_hynzadkk;
-	METHOD m_kamyxsye streamPassengersAndSelf ()Ljava/util/stream/Stream;
-		COMMENT Returns a stream consisting of this entity and its passengers in which
-		COMMENT this entity's passengers are iterated before this entity.
+		COMMENT Returns whether this entity is a player or not.
 		COMMENT
-		COMMENT <p>Moreover, this stream guarantees that any entity only appears after
+		COMMENT @return {@code true} if this entity is a player, or {@code false} otherwise
+	METHOD m_fbulpmue setRemoved (Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
+		COMMENT Marks this entity as removed for a given reason.
+		ARG 1 reason
+			COMMENT the removal reason
+	METHOD m_ibdrkofs setChangeListener (Lnet/minecraft/unmapped/C_ylpvpknw;)V
+		COMMENT Sets the listener of this entity's changes associated to saving.
+		ARG 1 listener
+			COMMENT the change listener
+	METHOD m_idziptjx getBoundingBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT {@return the bounding box of this entity}
+	METHOD m_jklfpglz getUuid ()Ljava/util/UUID;
+		COMMENT {@return the persistent unique identifier (UUID) of this entity}
+		COMMENT <p>
+		COMMENT Compared to the {@linkplain #getId() network identifier}, the unique identifier is
+		COMMENT significantly larger and more suitable for persistent storage. For network communication,
+		COMMENT using the network identifier is more suitable as it is much smaller.
+		COMMENT
+		COMMENT @see UUID
+	METHOD m_jlnbphwa getBlockPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		COMMENT {@return the current block position of this entity}
+	METHOD m_kamyxsye streamPassengersAndSelf ()Ljava/util/stream/Stream;
+		COMMENT {@return a stream consisting of this entity and its passengers in which
+		COMMENT this entity's passengers are iterated before this entity}
+		COMMENT <p>
+		COMMENT Moreover, this stream guarantees that any entity only appears after
 		COMMENT all its passengers have appeared in the stream. This is useful for
 		COMMENT certain actions that must be applied on passengers before applying on
 		COMMENT this entity.
@@ -21,18 +37,21 @@ CLASS net/minecraft/unmapped/C_sncvekqg net/minecraft/world/entity/EntityLike
 		COMMENT
 		COMMENT @see #streamSelfAndPassengers()
 	METHOD m_msyenvzg shouldSave ()Z
+		COMMENT Returns whether this entity should be saved on disk in the world or not.
+		COMMENT
+		COMMENT @return {@code true} if this entity should be saved on disk, or {@code false} otherwise
 	METHOD m_pwvaqrpl getId ()I
 		COMMENT {@return the network identifier of this entity}
-		COMMENT
-		COMMENT <p>Compared to the {@linkplain #getUuid() UUID}, the integer network identifier is
+		COMMENT <p>
+		COMMENT Compared to the {@linkplain #getUuid() UUID}, the integer network identifier is
 		COMMENT significantly smaller and more suitable for network transportation. However, it
 		COMMENT is not persistent across game runs. For persistent purposes such as commands
 		COMMENT or game data, use the UUID.
 	METHOD m_tlvarwdk streamSelfAndPassengers ()Ljava/util/stream/Stream;
-		COMMENT Returns a stream consisting of this entity and its passengers recursively.
-		COMMENT Each entity will appear before any of its passengers.
-		COMMENT
-		COMMENT <p>This may be less costly than {@link #streamPassengersAndSelf()} if the
+		COMMENT {@return a stream consisting of this entity and its passengers recursively,
+		COMMENT each entity will appear before any of its passengers}
+		COMMENT <p>
+		COMMENT This may be less costly than {@link #streamPassengersAndSelf()} if the
 		COMMENT stream's iteration would terminates fast, such as finding an arbitrary
 		COMMENT match of entity in the passengers tree.
 		COMMENT
