@@ -79,9 +79,7 @@ QM is updated.
 **Required Approvals**: 2
 - At least 1 approval must come directly from a Mappings team member.
 
-**Final Comment Period**:
-- Snapshots: 2 days (1 day with 3+ approvals)
-- Releases: 2 days
+**Final Comment Period**: 2 days (1 day for snapshots if the PR has 3+ approvals)
 
 **Special cases**:
 - If the PR adds new mappings needed by QSL, the Final Comment Period is shortened to 12 hours, and it can be skipped if it receives 3 approvals or more.
@@ -93,7 +91,10 @@ QM is updated.
 **Required Approvals**: 3
 - At least 2 approvals must come directly from a Mappings team member.
 
-**Final Comment Period**: 2 days
+**Final Comment Period**:
+- `T: small` and below: 2 days
+- `T: medium`: 3 days
+- `T: large` and above: 2 days
 
 ### `T: documentation`
 
@@ -102,9 +103,7 @@ QM is updated.
 **Required Approvals**: 2
 - At least 1 approval must come directly from a Mappings team member.
 
-**Final Comment Period**:
-- Snapshots: 2 days (1 day with 3+ approvals)
-- Releases: 2 days
+**Final Comment Period**: 2 days (1 day for snapshots if the PR has 3+ approvals)
 
 ### `T: toolchain`
 
@@ -118,12 +117,10 @@ and/or tools used.
 
 ### Other
 
-Trivial fixes that do not require review (e.g. typos) are exempt from this policy. Mappings team members should
-double-check with other members of the team on Discord before pushing a commit or merging a PR without going
-through this process.
+If the determined FCP length is judged to be inadequate for one or more PRs, at least three members of the Mappings team may agree to either shorten, extend, or skip them, provided that all Mappings team members had a reasonable chance to respond. This applies to both PRs that are yet to begin its FCP and to PRs whose FCP is already in motion.
 
-PRs that do not fit under any of these categories but are not "trivial fixes" are merged at the consensus of the
-Mappings team, using whatever criteria they determine to be appropriate.
+Trivial fixes that do not require review (e.g. typos) are exempt from this policy. Mappings team members should double-check with other members of the team on Discord before pushing a commit or merging a PR without going through this process.
 
-*This is only a summary of QM's PR process and an explanation of QM-specific exceptions to it. For exact definitions
-and more information, see [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md).*
+PRs that do not fit under any of these categories but are not "trivial fixes" are merged at the consensus of the Mappings team, using whatever criteria they determine to be appropriate.
+
+*This is only a summary of QM's PR process and an explanation of QM-specific exceptions to it. For exact definitions and more information, see [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md).*
