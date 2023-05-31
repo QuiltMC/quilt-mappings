@@ -189,10 +189,10 @@ Assume this is the decompiled content in Enigma, which does not show imports:
 ```java
 /**
  * Assume this class is from the {@code net.example.stuff} package.
- *
- * <p>You can link to {@link Optional} as it's part of the class signature (type parameter bound).
- *
- * <p>You must fully qualify {@link net.example.stuff.basic.BasicStuffUser} when linking as it is not in
+ * <p>
+ * You can link to {@link Optional} as it's part of the class signature (type parameter bound).
+ * <p>
+ * You must fully qualify {@link net.example.stuff.basic.BasicStuffUser} when linking as it is not in
  * any signature and is from a different package.
  */
 public class Stuff<T extends Optional<?>> {
@@ -203,8 +203,8 @@ public class Stuff<T extends Optional<?>> {
 
 	/**
 	 * You can link to {@link List} with the simple name as it's part of a method's signature.
-	 *
-	 * <p>You must fully qualify {@link net.example.util.UtilityClass} when linking because it is not part
+	 * <p>
+	 * You must fully qualify {@link net.example.util.UtilityClass} when linking because it is not part
 	 * of any signature (even though it is used in code) and is from a different package.
 	 */
 	public Stuff(List<Integer> opt) {

@@ -5,8 +5,8 @@
 /**
  * Provides a few classes holding constants that possibly existed for better understanding
  * of the Minecraft codebase.
- *
- * <p><strong>Warning:</strong> These classes are absent at runtime. They are exclusively
+ * <p>
+ * <strong>Warning:</strong> These classes are absent at runtime. They are exclusively
  * for use during compile time, in which the Java Compiler will replace the field references
  * with <a href="{@docRoot}/constant-values.html#org.quiltmc">constant values</a>.
  */

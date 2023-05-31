@@ -4,10 +4,10 @@
 
 /**
  * Provides resources to Minecraft, including resource access and provision.
- *
- * <p>"Data" as in "Data Packs" is considered resource as well.
- *
- * <p>Here is a quick overview on the resource access and provision APIs of Minecraft:
+ * <p>
+ * "Data" as in "Data Packs" is considered resource as well.
+ * <p>
+ * Here is a quick overview on the resource access and provision APIs of Minecraft:
  * <div class="quilt" id="resource-access"><table border=1>
  * <caption>Resource Access APIs</caption>
  * <tr>
@@ -65,8 +65,8 @@
  *     to create {@link ResourcePack}s to send to {@link ReloadableResourceManager}s in each reload.</td>
  * </tr>
  * </table></div>
- *
- * <p>In addition to these APIs, this package includes implementation details of the resource system.
+ * <p>
+ * In addition to these APIs, this package includes implementation details of the resource system.
  */
 
 package net.minecraft.resource;

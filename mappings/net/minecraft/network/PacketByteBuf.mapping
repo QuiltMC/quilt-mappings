@@ -96,14 +96,14 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT  <td>{@link PublicKey}</td><td>{@link #readPublicKey()}</td><td>{@link #writePublicKey(PublicKey)}</td>
 	COMMENT </tr>
 	COMMENT </table></div>
-	COMMENT
-	COMMENT <p>All {@code read} and {@code write} methods throw {@link
+	COMMENT <p>
+	COMMENT All {@code read} and {@code write} methods throw {@link
 	COMMENT IndexOutOfBoundsException} if there is not enough bytes to be read or
 	COMMENT not enough space to write.
 	FIELD f_chgkilns MAX_VAR_LONG_LENGTH I
 		COMMENT The max number of bytes an encoded var long value may use.
-		COMMENT
-		COMMENT <p>Its value is {@value}. A regular long value always use 8 bytes in contrast.
+		COMMENT <p>
+		COMMENT Its value is {@value}. A regular long value always use 8 bytes in contrast.
 		COMMENT
 		COMMENT @see #getVarLongLength(long)
 	FIELD f_lxbttahk parent Lio/netty/buffer/ByteBuf;
@@ -112,8 +112,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT {@link #readNbt()}.
 	FIELD f_plbhivfk MAX_VAR_INT_LENGTH I
 		COMMENT The max number of bytes an encoded var int value may use.
-		COMMENT
-		COMMENT <p>Its value is {@value}. A regular int value always use 4 bytes in contrast.
+		COMMENT <p>
+		COMMENT Its value is {@value}. A regular int value always use 4 bytes in contrast.
 		COMMENT
 		COMMENT @see #getVarIntLength(int)
 	FIELD f_rwogtoly MAX_PUBLIC_KEY_HEADER_SIZE I
@@ -489,8 +489,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeIdentifier(Identifier)
 	METHOD m_hudsjtrd writeVarLong (J)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a single var long to this buf.
-		COMMENT
-		COMMENT <p>Compared to regular longs, var longs may use less bytes when
+		COMMENT <p>
+		COMMENT Compared to regular longs, var longs may use less bytes when
 		COMMENT representing smaller positive numbers.
 		COMMENT
 		COMMENT @return this buf, for chaining
@@ -551,8 +551,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the date to write
 	METHOD m_kggdjvdd writeVarInt (I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a single var int to this buf.
-		COMMENT
-		COMMENT <p>Compared to regular ints, var ints may use less bytes (ranging from 1
+		COMMENT <p>
+		COMMENT Compared to regular ints, var ints may use less bytes (ranging from 1
 		COMMENT to 5, where regular ints use 4) when representing smaller positive
 		COMMENT numbers.
 		COMMENT
@@ -853,8 +853,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT Reads an array of primitive longs from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the regular long (not var
 		COMMENT long) values. The array does not have a length limit.
-		COMMENT
-		COMMENT <p>Only when {@code toArray} is not {@code null} and {@code
+		COMMENT <p>
+		COMMENT Only when {@code toArray} is not {@code null} and {@code
 		COMMENT toArray.length} equals to the length var int read will the {@code
 		COMMENT toArray} be reused and returned; otherwise, a new array
 		COMMENT of proper size is created.
@@ -887,8 +887,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT Reads an array of primitive longs from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the regular long (not var
 		COMMENT long) values. The array has a length limit of {@code maxSize}.
-		COMMENT
-		COMMENT <p>Only when {@code toArray} is not {@code null} and {@code
+		COMMENT <p>
+		COMMENT Only when {@code toArray} is not {@code null} and {@code
 		COMMENT toArray.length} equals to the length var int read will the {@code
 		COMMENT toArray} be reused and returned; otherwise, a new array
 		COMMENT of proper size is created.

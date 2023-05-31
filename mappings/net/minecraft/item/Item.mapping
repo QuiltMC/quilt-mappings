@@ -50,8 +50,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 state
 	METHOD m_dxjqmgus isEnchantable (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		COMMENT {@return whether the given {@link ItemStack} is enchantable}
-		COMMENT
-		COMMENT <p>By default, ItemStacks are enchantable if their max stack count is 1 and they can be damaged.
+		COMMENT <p>
+		COMMENT By default, ItemStacks are enchantable if their max stack count is 1 and they can be damaged.
 		ARG 1 stack
 	METHOD m_dzfzcxuk isItemBarVisible (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
@@ -94,8 +94,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_lthgnjiq getDefaultStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_mtceqnlj useOnBlock (Lnet/minecraft/unmapped/C_yyklzime;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		COMMENT Called when an item is used on a block.
-		COMMENT
-		COMMENT <p>This method is called on both the logical client and logical server, so take caution when using this method.
+		COMMENT <p>
+		COMMENT This method is called on both the logical client and logical server, so take caution when using this method.
 		COMMENT The logical side can be checked using {@link net.minecraft.world.World#isClient() context.getWorld().isClient()}.
 		COMMENT
 		COMMENT @return an action result that specifies if using the item on a block was successful.
@@ -143,8 +143,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 3 attacker
 	METHOD m_pppzvkhc hasGlint (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		COMMENT Checks if the glint effect should be applied when the item is rendered.
-		COMMENT
-		COMMENT <p>By default, returns true if the item has enchantments.
+		COMMENT <p>
+		COMMENT By default, returns true if the item has enchantments.
 		ARG 1 stack
 	METHOD m_ptxvhcty getOrCreateTranslationKey ()Ljava/lang/String;
 	METHOD m_qibylykw getTranslationKey (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/lang/String;
@@ -172,23 +172,23 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		COMMENT Gets the enchantability of an item.
 		COMMENT This specifies the ability of an item to receive enchantments when enchanted using an enchanting table.
 		COMMENT As the value increases, the amount and level of enchantments applied increase.
-		COMMENT
-		COMMENT <p>If the value of this method is 0, the item cannot be enchanted using an enchanting table.
+		COMMENT <p>
+		COMMENT If the value of this method is 0, the item cannot be enchanted using an enchanting table.
 	METHOD m_ucwrwzur byRawId (I)Lnet/minecraft/unmapped/C_vorddnax;
 		ARG 0 id
 	METHOD m_uuqggdre getRawId (Lnet/minecraft/unmapped/C_vorddnax;)I
 		ARG 0 item
 	METHOD m_vaqdqrmz isNbtSynced ()Z
 		COMMENT Checks if an item should have its NBT data stored in {@link ItemStack#nbt} sent to the client.
-		COMMENT
-		COMMENT <p>If an item is damageable, this method is ignored and data is always synced to client.
+		COMMENT <p>
+		COMMENT If an item is damageable, this method is ignored and data is always synced to client.
 	METHOD m_vdgwxvcg getRarity (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_mqmixksm;
 		COMMENT {@return this item's rarity, which changes the color of its name}
-		COMMENT
-		COMMENT <p>By default, if an item has an enchantment, its rarity is modified:
+		COMMENT <p>
+		COMMENT By default, if an item has an enchantment, its rarity is modified:
 		COMMENT <ul>
-		COMMENT \t<li>Common and Uncommon -> Rare
-		COMMENT \t<li>Rare -> Epic
+		COMMENT 	<li>Common and Uncommon -> Rare
+		COMMENT 	<li>Rare -> Epic
 		COMMENT </ul>
 		ARG 1 stack
 	METHOD m_vkltyloi raycast (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_uyikqwzv$C_krdrvutw;)Lnet/minecraft/unmapped/C_jdakttms;
@@ -216,8 +216,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_znsmbimv use (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_upvihyur;
 		COMMENT Called when an item is used by a player.
 		COMMENT The use action, by default, is bound to the right mouse button.
-		COMMENT
-		COMMENT <p>This method is called on both the logical client and logical server, so take caution when overriding this method.
+		COMMENT <p>
+		COMMENT This method is called on both the logical client and logical server, so take caution when overriding this method.
 		COMMENT The logical side can be checked using {@link net.minecraft.world.World#isClient() world.isClient()}.
 		COMMENT
 		COMMENT @return a typed action result that specifies whether using the item was successful.
@@ -238,16 +238,16 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		FIELD f_yegzcwuf foodComponent Lnet/minecraft/unmapped/C_cgikuact;
 		METHOD m_ccualdqu maxDamageIfAbsent (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Calls {@link Item.Settings#maxDamage} If this Settings instance has not already set max damage (or if max damage is the default value, 0).
-			COMMENT
-			COMMENT <p>Note that max stack count is set to 1 when maxDamage is called.
+			COMMENT <p>
+			COMMENT Note that max stack count is set to 1 when maxDamage is called.
 			COMMENT
 			COMMENT @return this instance
 			ARG 1 maxDamage
 				COMMENT maximum durability of an ItemStack using an item with this Item.Settings instance
 		METHOD m_gdfazvhf maxCount (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the maximum stack count of any ItemStack with an Item using this Settings instance.
-			COMMENT
-			COMMENT <p>Note that a count over 64 leads to unreliable behavior in GUIs.
+			COMMENT <p>
+			COMMENT Note that a count over 64 leads to unreliable behavior in GUIs.
 			COMMENT Damageable items can not have a maximum stack count (they default to 1).
 			COMMENT An Item.Settings' max count defaults to 64.
 			COMMENT
@@ -267,8 +267,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			ARG 1 recipeRemainder
 		METHOD m_robddprv maxDamage (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the maximum durability of any item configured with this Settings instance.
-			COMMENT
-			COMMENT <p>Note that max stack count is set to 1 when this method is called.
+			COMMENT <p>
+			COMMENT Note that max stack count is set to 1 when this method is called.
 			COMMENT
 			COMMENT @return this instance
 			ARG 1 maxDamage
@@ -283,8 +283,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 				COMMENT configured food properties for any item using this Settings instance
 		METHOD m_zglwepxe rarity (Lnet/minecraft/unmapped/C_mqmixksm;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the {@link Rarity} of any item configured with this Settings instance, which changes the color of its name.
-			COMMENT
-			COMMENT <p>An item's rarity defaults to {@link Rarity#COMMON}.
+			COMMENT <p>
+			COMMENT An item's rarity defaults to {@link Rarity#COMMON}.
 			COMMENT
 			COMMENT @return this instance
 			ARG 1 rarity

@@ -5,8 +5,8 @@
 /**
  * This and its subpackages make up the brain system used by some modern Minecraft entities,
  * such as villagers, piglins, and axolotls.
- *
- * <p>Compared to {@linkplain net.minecraft.entity.ai.goal the goal system}, the brain system's
+ * <p>
+ * Compared to {@linkplain net.minecraft.entity.ai.goal the goal system}, the brain system's
  * main advantage is that it allows sharing of certain expensive calculation results in the
  * form of memory by the individual tasks.
  */

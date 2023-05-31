@@ -11,27 +11,27 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 	FIELD f_kzskrcnw LOGGER Lorg/slf4j/Logger;
 	FIELD f_nqnkyimm DO_MOB_GRIEFING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain Rule game rule} which regulates whether mobs can modify the world.
-		COMMENT
-		COMMENT <p>Generally one is expected to test this rule before an entity modifies the world.
-		COMMENT
-		COMMENT <p>In vanilla, this includes:
+		COMMENT <p>
+		COMMENT Generally one is expected to test this rule before an entity modifies the world.
+		COMMENT <p>
+		COMMENT In vanilla, this includes:
 		COMMENT <ul>
-		COMMENT <li>Whether creeper explosions destroy blocks
-		COMMENT <li>Whether a zombie can break down a door
-		COMMENT <li>Whether a wither killing an entity will place or drop a wither rose
+		COMMENT 	<li>Whether creeper explosions destroy blocks
+		COMMENT 	<li>Whether a zombie can break down a door
+		COMMENT 	<li>Whether a wither killing an entity will place or drop a wither rose
 		COMMENT </ul>
 	FIELD f_qacbmgyi DISABLE_RAIDS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain Rule game rule} which regulates whether raids should occur.
-		COMMENT
-		COMMENT <p>If this rule is set to {@code true} while raids are occurring, the raids will be stopped.
+		COMMENT <p>
+		COMMENT If this rule is set to {@code true} while raids are occurring, the raids will be stopped.
 	FIELD f_tputawyr DO_MOB_SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain Rule game rule} which regulates whether mobs can spawn naturally.
 	FIELD f_vimssrzh DO_MOB_LOOT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain Rule game rule} which regulates whether mobs should drop loot on death.
 	FIELD f_xfpasujp REDUCED_DEBUG_INFO Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain Rule game rule} which regulates whether clients' {@linkplain net.minecraft.client.gui.hud.DebugHud debug HUD}s show reduced information.
-		COMMENT
-		COMMENT <p>When the value of this rule is changed, all connected clients will be notified to update their display.
+		COMMENT <p>
+		COMMENT When the value of this rule is changed, all connected clients will be notified to update their display.
 		COMMENT In vanilla, this includes the visibility of coordinates on the clients' debug HUDs.
 	FIELD f_xhcxhtfb ANNOUNCE_ADVANCEMENTS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain Rule game rule} which regulates whether a player's advancements should be announced in chat.
@@ -58,8 +58,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 2 rule
 	METHOD m_gdklogjj accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;)V
 		COMMENT Make the visitor visit all registered game rules.
-		COMMENT
-		COMMENT <p>The visitation involves calling both {@link Visitor#visit(GameRules.Key, GameRules.Type)} and {@code visitX} for every game rule, where X is the current rule's concrete type such as a boolean.
+		COMMENT <p>
+		COMMENT The visitation involves calling both {@link Visitor#visit(GameRules.Key, GameRules.Type)} and {@code visitX} for every game rule, where X is the current rule's concrete type such as a boolean.
 		ARG 0 visitor
 	METHOD m_khbebsio toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_kkvdhcio copy ()Lnet/minecraft/unmapped/C_xmldumst;
@@ -96,8 +96,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		COMMENT A visitor used to visit all game rules.
 		METHOD m_hsodkmym visitBoolean (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
 			COMMENT Visit a boolean rule.
-			COMMENT
-			COMMENT <p>Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
+			COMMENT <p>
+			COMMENT Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
 			ARG 1 key
 			ARG 2 type
 		METHOD m_mfrkzoox visit (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
@@ -105,8 +105,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 			ARG 2 type
 		METHOD m_vtezodau visitInt (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
 			COMMENT Visit an integer rule.
-			COMMENT
-			COMMENT <p>Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
+			COMMENT <p>
+			COMMENT Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
 			ARG 1 key
 			ARG 2 type
 	CLASS C_bctfwntr Acceptor
