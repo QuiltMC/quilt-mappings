@@ -94,7 +94,7 @@ QM is updated.
 **Final Comment Period**:
 - `T: small` and below: 2 days
 - `T: medium`: 3 days
-- `T: large` and above: 2 days
+- `T: large` and above: 4 days
 
 ### `T: documentation`
 
