@@ -42,6 +42,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_ewfqjfze make (Ljava/lang/Object;Ljava/util/function/Consumer;)Ljava/lang/Object;
 		ARG 0 object
 		ARG 1 initializer
+	METHOD m_fatyczab (Ljava/util/List;)Ljava/util/function/ToIntFunction;
+		ARG 0 list
 	METHOD m_ffmggoki setBreakpointPauser (Ljava/util/function/Consumer;)V
 		ARG 0 breakpointPauser
 	METHOD m_fppetslt getJVMFlags ()Ljava/util/stream/Stream;
@@ -98,9 +100,13 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_nshqaczo next (Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 iterable
 		ARG 1 object
+	METHOD m_nwbatfgz (Ljava/lang/String;Ljava/util/concurrent/ForkJoinPool;)Ljava/util/concurrent/ForkJoinWorkerThread;
+		ARG 1 forkJoinPool
 	METHOD m_oaamqqhk attemptShutdown (Ljava/util/concurrent/ExecutorService;)V
 		ARG 0 service
 	METHOD m_oigccakw startTimerHack ()V
+	METHOD m_ouznsrgl (Ljava/lang/Runnable;)Ljava/lang/Thread;
+		ARG 0 runnable
 	METHOD m_qfufoqzt backupAndReplace (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		COMMENT Copies {@code current} to {@code backup} and then replaces {@code current} with {@code newPath}
 		ARG 0 current
@@ -234,7 +240,15 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		METHOD apply apply (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 	CLASS C_qgeblktr
 		METHOD getAsBoolean getAsBoolean ()Z
+	CLASS C_qygfqbqw
+		METHOD onTermination onTermination (Ljava/lang/Throwable;)V
+			ARG 1 throwable
 	CLASS C_tceggguc
 		FIELD f_boyitqoh cache Ljava/util/Map;
 		METHOD apply apply (Ljava/lang/Object;)Ljava/lang/Object;
 	CLASS C_uzjrvfhh IdentityHashStrategy
+		METHOD equals equals (Ljava/lang/Object;Ljava/lang/Object;)Z
+			ARG 1 object
+			ARG 2 object2
+		METHOD hashCode hashCode (Ljava/lang/Object;)I
+			ARG 1 object

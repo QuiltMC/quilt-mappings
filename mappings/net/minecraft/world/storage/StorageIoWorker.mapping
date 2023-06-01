@@ -1,5 +1,7 @@
 CLASS net/minecraft/unmapped/C_ffgsaknh net/minecraft/world/storage/StorageIoWorker
+	FIELD f_cmzfptka MAX_SIZE I
 	FIELD f_ebctbref storage Lnet/minecraft/unmapped/C_ivfseflh;
+	FIELD f_eqfuhsox regionCache Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
 	FIELD f_prbotxpi closed Ljava/util/concurrent/atomic/AtomicBoolean;
 	FIELD f_pyjvjyaq results Ljava/util/Map;
 	FIELD f_wtxzpjxm LOGGER Lorg/slf4j/Logger;
@@ -18,7 +20,7 @@ CLASS net/minecraft/unmapped/C_ffgsaknh net/minecraft/world/storage/StorageIoWor
 		ARG 1 pos
 	METHOD m_nghssqns run (Ljava/util/function/Supplier;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 task
-	METHOD m_nwcchuzp (II)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_nwcchuzp buildRegionCache (II)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 regionX
 		ARG 2 regionZ
 	METHOD m_tfcrrgaw writeResult ()V
@@ -26,12 +28,12 @@ CLASS net/minecraft/unmapped/C_ffgsaknh net/minecraft/world/storage/StorageIoWor
 		ARG 1 pos
 		ARG 2 radius
 	METHOD m_wqoqxngx writeRemainingResults ()V
-	METHOD m_yhgjzcrh (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
+	METHOD m_yhgjzcrh isNbtCompoundCompatible (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
 		ARG 1 nbt
 	METHOD m_zosiugiq write (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_ffgsaknh$C_bwprgfor;)V
 		ARG 1 pos
 		ARG 2 result
-	METHOD m_zyiverhw (II)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_zyiverhw scanRegion (II)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 x
 		ARG 2 z
 	CLASS C_bwprgfor Result
