@@ -92,9 +92,9 @@ QM is updated.
 - At least 2 approvals must come directly from a Mappings team member.
 
 **Final Comment Period**:
-- `T: small` and below: 2 days
-- `T: medium`: 3 days
-- `T: large` and above: 4 days
+- `S: small` and below: 2 days
+- `S: medium`: 3 days
+- `S: large` and above: 4 days
 
 ### `T: documentation`
 
