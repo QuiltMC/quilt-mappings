@@ -1,25 +1,46 @@
 CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/CreateWorldScreen
 	FIELD f_bkgndroc ALLOW_COMMANDS_INFO_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_bqfuezdy reopened Z
+	FIELD f_bwrlwywb GROUP_BOTTOM I
 	FIELD f_fyvyzcba PREPARING_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_hqkhcpia header Lnet/minecraft/unmapped/C_mbxnkehf;
 	FIELD f_htfhyyfx packManager Lnet/minecraft/unmapped/C_dqfyacfy;
 	FIELD f_hxpwlzvr ENTER_NAME_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_jlpvoazq FOOTER_SEPARATOR_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_lryffkzq LIGHT_DIRT_BACKGROUND_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_lzdtplvi HEADER_SEPARATOR_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_ntbjtmej TAB_COLUMN_WIDTH I
+	FIELD f_ohynjwms FOOTER_HEIGHT I
 	FIELD f_puiuugkf EXPERIMENTS_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_puwignwj HORIZONTAL_BUTTON_SPACING I
+	FIELD f_rsmdhran worldCreator Lnet/minecraft/unmapped/C_hypraqfe;
 	FIELD f_toffzjsn parent Lnet/minecraft/unmapped/C_wrmtlwqx;
 	FIELD f_trqmzvlv TEMP_DIR_PREFIX Ljava/lang/String;
+	FIELD f_vgcizakt TEXT_INDENT I
 	FIELD f_vqvehnjz LOGGER Lorg/slf4j/Logger;
+	FIELD f_vsdozuic VERTICAL_BUTTON_SPACING I
 	FIELD f_woybhigv dataPackTempDir Ljava/nio/file/Path;
 	FIELD f_wuyzkrbd GAME_MODE_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_xabhnhby grid Lnet/minecraft/unmapped/C_qykucwmu;
+	FIELD f_ztgjtcrr tabManager Lnet/minecraft/unmapped/C_shidhwhk;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_njsjipmy;Ljava/util/Optional;Ljava/util/OptionalLong;)V
 		ARG 2 parent
+		ARG 3 context
+		ARG 4 typeKey
+		ARG 5 seed
 	METHOD m_bmhqnfoo (Lnet/minecraft/unmapped/C_dqfyacfy;)V
 		ARG 1 manager
+	METHOD m_btwtdkmu validateDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;Ljava/util/function/Consumer;)V
+		ARG 1 manager
+		ARG 2 settings
+		ARG 3 consumer
 	METHOD m_bzolzyfh copyDataPack (Ljava/nio/file/Path;Lnet/minecraft/unmapped/C_ayfeobid;)Ljava/nio/file/Path;
 		ARG 0 srcFolder
 		ARG 1 client
 	METHOD m_cmzzexuo createFromExisting (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_tmnkpzlg;Lnet/minecraft/unmapped/C_njsjipmy;Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_ibkofvzc;
 		ARG 1 parent
+		ARG 2 info
+		ARG 3 context
 		ARG 4 path
 	METHOD m_dejxfssq (Lnet/minecraft/unmapped/C_dqfyacfy;)V
 		ARG 1 manager
@@ -27,10 +48,13 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 		ARG 1 settings
 	METHOD m_evhcwytp createDefaultLoadConfig (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;)Lnet/minecraft/unmapped/C_kjxfcecs$C_kculhjuh;
 		ARG 0 resourcePackManager
+		ARG 1 settings
 	METHOD m_ficgwtev createLevelInfo (Z)Lnet/minecraft/unmapped/C_tmnkpzlg;
 		ARG 1 debugWorld
 	METHOD m_fqtykenm clearDataPackTempDir ()V
 	METHOD m_fsncvugn createStorageSession ()Ljava/util/Optional;
+	METHOD m_hmlmjfjy (Lnet/minecraft/unmapped/C_buwziidm;)V
+		ARG 1 button
 	METHOD m_kfiwihuq copyDataPack (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		ARG 0 srcFolder
 		ARG 1 destFolder
@@ -38,7 +62,13 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 	METHOD m_kvlyrphw openExperimentsScreen (Lnet/minecraft/unmapped/C_yknpgzdr;)V
 		ARG 1 settings
 	METHOD m_odrhilcd createNewWorld (Lnet/minecraft/unmapped/C_jmmczzpb$C_ooteyfin;Lnet/minecraft/unmapped/C_bcpxdrik;Lcom/mojang/serialization/Lifecycle;)V
+		ARG 1 type
+		ARG 2 manager
+		ARG 3 lifecycle
 	METHOD m_oitudqud onCloseScreen ()V
+	METHOD m_oopecwxc (Lnet/minecraft/unmapped/C_kpvuxmkp;)V
+		ARG 1 widget
+	METHOD m_pcylhjnh getWorldCreator ()Lnet/minecraft/unmapped/C_hypraqfe;
 	METHOD m_sajvmluy open (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 0 client
 		ARG 1 parent
@@ -46,12 +76,37 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 		ARG 0 client
 		ARG 1 message
 	METHOD m_umnykrgq getScannedPack (Lnet/minecraft/unmapped/C_yknpgzdr;)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 settings
 	METHOD m_xdqbchlc createLevel ()V
 	METHOD m_ycpfvuja getDataPackTempDir ()Ljava/nio/file/Path;
 	METHOD m_zeghowdv applyDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;ZLjava/util/function/Consumer;)V
 		ARG 1 dataPackManager
-	CLASS C_eyotidzo
+		ARG 2 warnForExperimentsIfApplicable
+		ARG 3 consumer
+	METHOD m_znmcttwr (Lnet/minecraft/unmapped/C_buwziidm;)V
+		ARG 1 button
+	CLASS C_dzlctpdf GameTab
+		FIELD f_cdxgyrot nameInput Lnet/minecraft/unmapped/C_vopzcnhf;
+		FIELD f_qwzkbduc GAME_TAB_TITLE_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_uckqwzac ALLOW_COMMANDS_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	CLASS C_emutyvqg WorldTab
+		FIELD f_cobovsbo BONUS_ITEMS_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_glihoeql seedInput Lnet/minecraft/unmapped/C_vopzcnhf;
+		FIELD f_ixnusskg customizeTypeButton Lnet/minecraft/unmapped/C_buwziidm;
+		FIELD f_klvpqniw AMPLIFIED_INFO_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_mkhygczv SEED_INFO_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_nuiyuxeh ENTER_SEED_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_peaoxrzl WORLD_TAB_WIDTH I
+		FIELD f_psebvcie MAP_FEATURES_INFO_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_rrexmrsz WORLD_TAB_TITLE_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_yymywohx MAP_FEATURES_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_awomnjir createWorldTypeSupplier ()Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
+		METHOD m_igcilysz openPresetsScreen ()V
+		METHOD m_yuppgxdl createButtonNarration (Lnet/minecraft/unmapped/C_ikfvpkkf;)Lnet/minecraft/unmapped/C_npqneive;
+			ARG 0 button
+	CLASS C_eyotidzo MoreTab
 		FIELD f_eowlglnv GAME_RULES_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_lhxnvfat DATA_PACKS_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_vuqzvibe MORE_TAB_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_qeuzybrv openGameRulesScreen ()V
 	CLASS C_mxqwwbun WorldCreationSettings
