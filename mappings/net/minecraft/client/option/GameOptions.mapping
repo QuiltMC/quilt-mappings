@@ -138,6 +138,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_W the W key} by default.
 	FIELD f_pgipbphp mainArm Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_poupdndx monochromeLogo Lnet/minecraft/unmapped/C_vbibxkxv;
+	FIELD f_pryrouxn AUTO_GUI_SCALE I
 	FIELD f_puhedzsr glintSpeed Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_pwwkeskp panoramaScrollSpeed Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_qentjnpp tutorialStep Lnet/minecraft/unmapped/C_goqonutr;
@@ -226,6 +227,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_yyjjazne ONLY_SHOW_SECURE_CHAT_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_zjliikqj chatOpacity Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_zmlcorjp particles Lnet/minecraft/unmapped/C_vbibxkxv;
+	FIELD f_zmnjmtvo MAX_GUI_SCALE I
 	FIELD f_zodqaxzp FOV_EFFECT_SCALE_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_zznsxrnc soundVolumeLevels Ljava/util/Map;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Ljava/io/File;)V
@@ -236,6 +238,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 0 value
 	METHOD m_alcwfqym (Ljava/lang/Double;)V
 		ARG 0 value
+	METHOD m_alrelyqe (Lnet/minecraft/unmapped/C_pqzizukq;Ljava/lang/Double;)V
+		ARG 1 value
 	METHOD m_anzbfquj (Ljava/lang/Double;)V
 		ARG 0 value
 	METHOD m_aplmvdrk getGraphicsMode ()Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -312,6 +316,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_hcwbksdl (Ljava/util/EnumMap;)V
 		ARG 1 value
 	METHOD m_heqcqyiz (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 option
 		ARG 1 value
 	METHOD m_hfsamqbt getOperatorItemsTab ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_hkydmiab (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -341,6 +346,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_ipttjvha (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionText
 		ARG 1 value
+	METHOD m_iqjavkit (Ljava/lang/Boolean;)V
+		ARG 0 value
 	METHOD m_ithfgexd setKeyCode (Lnet/minecraft/unmapped/C_sygikzty;Lnet/minecraft/unmapped/C_vdmgqzcl$C_smckmtvp;)V
 		ARG 1 key
 		ARG 2 code
@@ -408,6 +415,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 1 value
 	METHOD m_mnkxarrw isTrue (Ljava/lang/String;)Z
 		ARG 0 value
+	METHOD m_molxpuyp (I)Ljava/lang/Double;
+		ARG 0 i
 	METHOD m_mozmhutf getMonochromeLogo ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_mukwgtgs getToggleableSneak ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_nbbwacqv toMouseWheelSensitivitySliderProgressValue (D)I
@@ -428,6 +437,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_pcyaicvv (Lnet/minecraft/unmapped/C_inrattee;)V
 		ARG 0 value
 	METHOD m_pczumfae getBiomeBlendRadius ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_phjuspfm (Ljava/lang/Double;)Ljava/lang/Integer;
+		ARG 0 doubleValue
 	METHOD m_pifwhlkz (Ljava/lang/Boolean;)V
 		ARG 0 value
 	METHOD m_pkbshpzw getPixelValueText (Lnet/minecraft/unmapped/C_rdaqiwdt;I)Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -436,6 +447,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_plbvmuaz getTextBackgroundOpacity ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_pnnarsvo getTextBackgroundColor (F)I
 		ARG 1 fallbackOpacity
+	METHOD m_pnstqqgm (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;)V
+		ARG 1 line
 	METHOD m_pokgrxum getMouseWheelSensitivity ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_qbojyjaj (Lnet/minecraft/unmapped/C_ekczyczh;)V
 		ARG 1 value
@@ -481,10 +494,15 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_srrrasod (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionText
 		ARG 1 value
+	METHOD m_sssgufqv (Ljava/lang/String;)Lnet/minecraft/unmapped/C_njjnizsa;
+		ARG 0 string
 	METHOD m_syohccsr getShowSubtitles ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_szrsdlej getReducedDebugInfo ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_tcgvhmva (Lnet/minecraft/unmapped/C_njjnizsa;)Ljava/lang/String;
+		ARG 0 value
 		ARG 1 value
+	METHOD m_tdzvvvia (I)Ljava/lang/Double;
+		ARG 0 i
 	METHOD m_tkjpmwcm (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionText
 		ARG 1 value
@@ -525,7 +543,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 1 value
 	METHOD m_wbqggaub (Ljava/lang/Double;)V
 		ARG 0 value
-	METHOD m_wennyfeo createSoundVolumeIOption (Ljava/lang/String;Lnet/minecraft/unmapped/C_pqzizukq;)Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_wennyfeo createSoundVolumeOption (Ljava/lang/String;Lnet/minecraft/unmapped/C_pqzizukq;)Lnet/minecraft/unmapped/C_vbibxkxv;
 		ARG 1 key
 		ARG 2 category
 	METHOD m_whpmwwai (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
