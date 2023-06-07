@@ -10,15 +10,18 @@ CLASS net/minecraft/unmapped/C_lybmfibg net/minecraft/client/gui/hud/PlayerListH
 	FIELD f_bxlmioxe client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_cityxubm GOLDEN_HEART_U I
 	FIELD f_cmilexqs BLINKING_HEART_OUTLINE_U I
+	FIELD f_evcsxnry ICONS_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_execbzoe HEART_OUTLINE_U I
 	FIELD f_ezknoamc inGameHud Lnet/minecraft/unmapped/C_nepwsmgw;
 	FIELD f_gxlxtfhf BLINKING_HALF_HEART_U I
 	FIELD f_ivcfwzlg HALF_HEART_U I
 	FIELD f_jivanvnx BLINKING_HEART_U I
 	FIELD f_mzpxxguo MAX_ROWS I
+	FIELD f_plvwhbqq SORTING_COMPARATOR Ljava/util/Comparator;
 	FIELD f_rawrkdoa visible Z
 	FIELD f_smwibbex HALF_GOLDEN_HEART_U I
 	FIELD f_yxtxfrdr header Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_yyjbokhz healthStates Ljava/util/Map;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_nepwsmgw;)V
 		ARG 1 client
 		ARG 2 inGameHud
@@ -36,9 +39,17 @@ CLASS net/minecraft/unmapped/C_lybmfibg net/minecraft/client/gui/hud/PlayerListH
 		ARG 5 graphics
 		ARG 6 playerScore
 	METHOD m_fmfnthyf clear ()V
+	METHOD m_ggkyrghc (Lnet/minecraft/unmapped/C_rdnfmxue;)Ljava/lang/String;
+		ARG 0 entry
 	METHOD m_kyffpcde getPlayerName (Lnet/minecraft/unmapped/C_rdnfmxue;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		COMMENT {@return the player name rendered by this HUD}
 		ARG 1 entry
+	METHOD m_liqwrxfq (Lnet/minecraft/unmapped/C_rdnfmxue;)Ljava/lang/String;
+		ARG 0 entry
+	METHOD m_lytcfhdw (Lnet/minecraft/unmapped/C_rdnfmxue;)I
+		ARG 0 entry
+	METHOD m_ogcwzynb (Lnet/minecraft/unmapped/C_rdnfmxue;)Ljava/util/UUID;
+		ARG 0 entry
 	METHOD m_qkiaiqtl renderScoreboardObjective (Lnet/minecraft/unmapped/C_tlhwodcf;ILjava/lang/String;IILjava/util/UUID;Lnet/minecraft/unmapped/C_sedilmty;)V
 		ARG 1 objective
 		ARG 2 y
@@ -51,6 +62,7 @@ CLASS net/minecraft/unmapped/C_lybmfibg net/minecraft/client/gui/hud/PlayerListH
 		ARG 3 x
 		ARG 4 y
 		ARG 5 entry
+	METHOD m_teyuiwbq getVisibleEntries ()Ljava/util/List;
 	METHOD m_tyifjnah render (Lnet/minecraft/unmapped/C_sedilmty;ILnet/minecraft/unmapped/C_ymwyplge;Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 2 scaledWindowWidth
 		ARG 3 scoreboard
@@ -59,3 +71,19 @@ CLASS net/minecraft/unmapped/C_lybmfibg net/minecraft/client/gui/hud/PlayerListH
 		ARG 1 footer
 	METHOD m_xynqlahi setHeader (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 header
+	CLASS C_hfngggba PlayerHealthState
+		FIELD f_heoyikdu DECREASE_BLINK_DURATION J
+		FIELD f_iylxcjyr value I
+		FIELD f_jwqaoowr lastValue I
+		FIELD f_nibpfirl lastUpdateTick J
+		FIELD f_niprglim UPDATE_DELAY J
+		FIELD f_pcwzfkye INCREASE_BLINK_DURATION J
+		FIELD f_qojpqiic lastBlinkTick J
+		METHOD <init> (I)V
+			ARG 1 value
+		METHOD m_hfejovaj update (IJ)V
+			ARG 1 value
+			ARG 2 time
+		METHOD m_omdjxzqx isBlinking (J)Z
+			ARG 1 time
+		METHOD m_ydqstbjr getValue ()I
