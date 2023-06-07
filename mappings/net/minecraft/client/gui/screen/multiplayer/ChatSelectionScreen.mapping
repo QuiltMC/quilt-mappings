@@ -1,0 +1,92 @@
+CLASS net/minecraft/unmapped/C_pcqupwtw net/minecraft/client/gui/screen/multiplayer/ChatSelectionScreen
+	FIELD f_eaqwazsp parent Lnet/minecraft/unmapped/C_wrmtlwqx;
+	FIELD f_gbwrphge contextInfo Lnet/minecraft/unmapped/C_ogfbkizf;
+	FIELD f_kleekagl onSelect Ljava/util/function/Consumer;
+	FIELD f_ksgpixsh reportBuilder Lnet/minecraft/unmapped/C_uxfdbert;
+	FIELD f_lndjqmpk selectionList Lnet/minecraft/unmapped/C_pcqupwtw$C_rfvspxnz;
+	FIELD f_nypltklw TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_rgqvlyut logFiller Lnet/minecraft/unmapped/C_ukvesxor;
+	FIELD f_rptsmrws CONTEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_yvvzoyvh reportContext Lnet/minecraft/unmapped/C_oxpapezz;
+	FIELD f_zolzkvup confirmButton Lnet/minecraft/unmapped/C_buwziidm;
+	METHOD <init> (Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_oxpapezz;Lnet/minecraft/unmapped/C_uxfdbert;Ljava/util/function/Consumer;)V
+		ARG 1 parent
+		ARG 2 context
+		ARG 3 reportBuilder
+		ARG 4 onSelect
+	METHOD m_agnryemh updateConfirmButton ()V
+	METHOD m_hjzcmfwn (Lnet/minecraft/unmapped/C_buwziidm;)V
+		ARG 1 button
+	METHOD m_hpivnwmy isMessageFromOffender (Lnet/minecraft/unmapped/C_imppzlcy;)Z
+		ARG 1 message
+	METHOD m_jvlddgof onScrollTopReached ()V
+	METHOD m_lsmchggj loadLog ()V
+	METHOD m_qourzkiz (Lnet/minecraft/unmapped/C_buwziidm;)V
+		ARG 1 button
+	CLASS C_rfvspxnz SelectionList
+		FIELD f_bquehacc heading Lnet/minecraft/unmapped/C_pcqupwtw$C_rfvspxnz$C_qpbfqmkh;
+		METHOD <init> (Lnet/minecraft/unmapped/C_pcqupwtw;Lnet/minecraft/unmapped/C_ayfeobid;I)V
+			ARG 3 footerHeight
+		METHOD m_iuapxxxu getFooterTop ()I
+		METHOD m_xuzzfwkc getMaxVisibleEntries ()I
+		METHOD m_ydqhbgvg updateHeading (Lnet/minecraft/unmapped/C_imppzlcy$C_qvcbzxdr;Z)V
+			ARG 1 chat
+			ARG 2 selected
+		METHOD m_zuuihzdn shouldHighlight (Lnet/minecraft/unmapped/C_pcqupwtw$C_rfvspxnz$C_ygutuzmj;)Z
+			ARG 1 entry
+		CLASS C_idfuzpto PaddingEntry
+		CLASS C_qpbfqmkh Heading
+			METHOD m_cmqesnxi canCombine (Lnet/minecraft/unmapped/C_pcqupwtw$C_rfvspxnz$C_qpbfqmkh;)Z
+				ARG 1 heading
+		CLASS C_tffpoevy DividerEntry
+			FIELD f_nepkothq DIVIDER_TEXT_COLOR I
+			FIELD f_pfqpavtt dividerText Lnet/minecraft/unmapped/C_rdaqiwdt;
+			METHOD <init> (Lnet/minecraft/unmapped/C_pcqupwtw$C_rfvspxnz;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+				ARG 2 dividerText
+		CLASS C_tkhkhrxq MessageEntry
+			FIELD f_brxdrzqj TAG_MARGIN_LEFT I
+			FIELD f_jvreziwt tooltip Ljava/util/List;
+			FIELD f_kcugphiq tagDescription Ljava/util/List;
+			FIELD f_myzuazky canReport Z
+			FIELD f_nxyziquw icon Lnet/minecraft/unmapped/C_bzcwstys$C_owixgtsg;
+			FIELD f_odkegyxr narration Lnet/minecraft/unmapped/C_rdaqiwdt;
+			FIELD f_qqdnngtt message Lnet/minecraft/unmapped/C_xzalvetc;
+			FIELD f_tunedafm isPlayerMessage Z
+			FIELD f_uxwvjwya INDENT I
+			FIELD f_vnmfllyl CHECKMARK_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+			FIELD f_vzorvuqu messageIndex I
+			FIELD f_ytqlrift TAG_ICON_WIDTH I
+			FIELD f_zesbxrlq TAG_ICON_HEIGHT I
+			METHOD <init> (Lnet/minecraft/unmapped/C_pcqupwtw$C_rfvspxnz;ILnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_bzcwstys;ZZ)V
+				ARG 2 messageIndex
+				ARG 3 message
+				ARG 4 narration
+				ARG 5 tag
+				ARG 6 canReport
+				ARG 7 isPlayerMessage
+			METHOD m_cxaqlwvy getMessageWidth ()I
+			METHOD m_eamoulnq drawCheckmark (Lnet/minecraft/unmapped/C_sedilmty;III)V
+				ARG 2 y
+				ARG 3 x
+				ARG 4 entryHeight
+			METHOD m_lebgwztl drawTag (Lnet/minecraft/unmapped/C_sedilmty;IIIII)V
+				ARG 2 x
+				ARG 3 y
+				ARG 4 entryHeight
+				ARG 5 mouseX
+				ARG 6 mouseY
+			METHOD m_lpoiydjv toggleSelected ()Z
+			METHOD m_ofxtubce getTextIndent ()I
+		CLASS C_tnzdhanf HeadingEntry
+			FIELD f_kcyleaof selected Z
+			FIELD f_kraunuxu skinTexture Lnet/minecraft/unmapped/C_ncpywfca;
+			FIELD f_ndjrdsuu HEAD_TEXTURE_SIZE I
+			FIELD f_oiewusfy message Lnet/minecraft/unmapped/C_rdaqiwdt;
+			METHOD <init> (Lnet/minecraft/unmapped/C_pcqupwtw$C_rfvspxnz;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
+				ARG 2 profile
+				ARG 3 message
+				ARG 4 selected
+		CLASS C_ygutuzmj SelectionListEntry
+			METHOD m_dyhupkwx canReport ()Z
+			METHOD m_tifhtkrp isSelected ()Z
+			METHOD m_vbuzalbv canSelect ()Z

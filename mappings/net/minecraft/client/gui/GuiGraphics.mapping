@@ -3,6 +3,9 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 	FIELD f_hjlmdgyx vertexConsumers Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;
 	FIELD f_ivcrjxxr scissorStack Lnet/minecraft/unmapped/C_sedilmty$C_xsuthgpb;
 	FIELD f_kjjmmero client Lnet/minecraft/unmapped/C_ayfeobid;
+	FIELD f_nyndozay managed Z
+	FIELD f_oftqilkq MIN_Z_POS F
+	FIELD f_venmzkqo MAX_Z_POS F
 	FIELD f_zklkrpmc matrices Lnet/minecraft/unmapped/C_cnszsxvd;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;)V
 		ARG 1 client
@@ -29,6 +32,7 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 1 stack
 		ARG 2 x
 		ARG 3 y
+	METHOD m_blepkgzx flushIfManaged ()V
 	METHOD m_byhzvhyx drawTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIFFIIII)V
 		ARG 1 texture
 		ARG 2 x
@@ -51,6 +55,15 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 y
 		ARG 4 seed
 		ARG 5 z
+	METHOD m_cubaaxio fillGradient (Lnet/minecraft/unmapped/C_igthdzux;IIIIIII)V
+		ARG 1 consumer
+		ARG 2 startX
+		ARG 3 startY
+		ARG 4 endX
+		ARG 5 endY
+		ARG 6 z
+		ARG 7 startColor
+		ARG 8 endColor
 	METHOD m_dbqwgzvf drawNineSlicedTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIIIII)V
 		ARG 1 texture
 		ARG 2 x
@@ -95,6 +108,12 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 x
 		ARG 4 y
 		ARG 5 color
+	METHOD m_elwzmupc drawVerticalLine (Lnet/minecraft/unmapped/C_tizlwnnv;IIII)V
+		ARG 1 layer
+		ARG 2 x
+		ARG 3 y
+		ARG 4 width
+		ARG 5 height
 	METHOD m_eqooacma getScaledWindowWidth ()I
 	METHOD m_etqcqghf drawNineSlicedTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIIIIIII)V
 		ARG 1 texture
@@ -122,6 +141,7 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 9 textureHeight
 	METHOD m_fqwgsilk setScissor (Lnet/minecraft/unmapped/C_erwldarl;)V
 		ARG 0 area
+		ARG 1 area
 	METHOD m_fxlefgez drawShadowedText (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/lang/String;III)I
 		ARG 1 renderer
 		ARG 2 text
@@ -138,6 +158,19 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 green
 		ARG 3 blue
 		ARG 4 alpha
+	METHOD m_hkljvrtr fill (Lnet/minecraft/unmapped/C_tizlwnnv;IIIIII)V
+		ARG 1 layer
+		ARG 2 x1
+		ARG 3 y1
+		ARG 4 x2
+		ARG 5 y2
+		ARG 6 z
+		ARG 7 color
+	METHOD m_hqomnrdc drawVerticalLine (IIII)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 width
+		ARG 4 height
 	METHOD m_htkumxha fillGradient (IIIIII)V
 		ARG 1 startX
 		ARG 2 startY
@@ -249,6 +282,7 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 8 centerSliceHeight
 		ARG 9 u
 		ARG 10 v
+	METHOD m_pbbebkzn flushIfUnmanaged ()V
 	METHOD m_pclmmjoi (Ljava/util/List;Lnet/minecraft/unmapped/C_mzaxvunb;)V
 		ARG 1 data
 	METHOD m_pqueyzid drawCenteredShadowedText (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/lang/String;III)V
@@ -272,6 +306,8 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 x2
 		ARG 4 y2
 		ARG 5 color
+	METHOD m_qvynfizy runManaged (Ljava/lang/Runnable;)V
+		ARG 1 run
 	METHOD m_qzfxvtcq drawItem (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sddaxwyk;III)V
 		ARG 1 entity
 		ARG 3 x
@@ -291,6 +327,19 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 x2
 		ARG 4 y2
 	METHOD m_rwheyhxb getVertexConsumers ()Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;
+	METHOD m_sgypgpui fill (Lnet/minecraft/unmapped/C_tizlwnnv;IIIII)V
+		ARG 1 layer
+		ARG 2 x1
+		ARG 3 y1
+		ARG 4 x2
+		ARG 5 y2
+		ARG 6 color
+	METHOD m_sudqwiay drawHorizontalLine (Lnet/minecraft/unmapped/C_tizlwnnv;IIII)V
+		ARG 1 layer
+		ARG 2 x
+		ARG 3 y
+		ARG 4 width
+		ARG 5 height
 	METHOD m_svnmgxlh drawItem (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;III)V
 		ARG 1 entity
 		ARG 4 x
@@ -305,6 +354,11 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 x
 		ARG 4 y
 	METHOD m_ukyvlzma getScaledWindowHeight ()I
+	METHOD m_vbmsyjgc drawHorizontalLine (IIII)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 width
+		ARG 4 height
 	METHOD m_vgucryhb drawTexturedQuad (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIFFFF)V
 		ARG 1 texture
 		ARG 2 x1
@@ -322,6 +376,15 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 x
 		ARG 4 y
 		ARG 5 color
+	METHOD m_vykpaeif fillGradient (Lnet/minecraft/unmapped/C_tizlwnnv;IIIIIII)V
+		ARG 1 layer
+		ARG 2 startX
+		ARG 3 startY
+		ARG 4 endX
+		ARG 5 endY
+		ARG 6 startColor
+		ARG 7 endColor
+		ARG 8 z
 	METHOD m_wwmsrnfi drawSprite (IIIIILnet/minecraft/unmapped/C_uflrwbwt;)V
 		ARG 1 x
 		ARG 2 y
