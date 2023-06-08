@@ -45,7 +45,7 @@ Build a GZip'd archive containing a tiny mapping between official (obfuscated), 
 ### `mapNamedJar`
 Builds a deobfuscated jar with Quilt mappings and automapped fields (enums, etc.). Unmapped names will be filled with [hashed-mojmap](https://github.com/QuiltMC/mappings-hasher) names.
 
-### `decompileCFR`
+### `decompileQuiltflower`
 Decompile the mapped source code. **Note:** This is not designed to be recompiled.
 
 ### `downloadMinecraftJars`
