@@ -72,64 +72,55 @@ with [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-poli
 To avoid conflicts and make the process faster, the FCP may be ended early when a new Minecraft version is released and
 QM is updated.
 
-### `T: new mappings`
+### `T: new`
 
 **Description**: Used for pull requests that focus mainly on adding new mappings.
 
 **Required Approvals**: 2
-- At least 1 approval must come directly from a Mappings team member, and the other one can come from a Mappings
-Triage member or another Mappings Team member.
+- At least 1 approval must come directly from a Mappings team member.
 
-**Final Comment Period**:
-- Snapshots: 1 day
-- Releases: 2 days
+**Final Comment Period**: 2 days (1 day for snapshots if the PR has 3+ approvals)
 
 **Special cases**:
-- If the PR adds new mappings needed by QSL, the Final Comment Period is shortened to 12 hours.
+- If the PR adds new mappings needed by QSL, the Final Comment Period is shortened to 12 hours, and it can be skipped if it receives 3 approvals or more.
 
 ### `T: refactor`
 
 **Description**: Used for pull request that focus mainly on changing the names of existing mappings.
 
 **Required Approvals**: 3
-- At least 2 approvals must come directly from a Mappings team member, and the other one can come from a Mappings
-Triage member or another Mappings Team member.
+- At least 2 approvals must come directly from a Mappings team member.
 
 **Final Comment Period**:
-- Snapshots: 3 days
-- Releases: 6 days
+- `S: small` and below: 2 days
+- `S: medium`: 3 days
+- `S: large` and above: 4 days
 
 ### `T: documentation`
 
 **Description**: Used for pull requests that focus mainly on adding or changing documentation.
 
 **Required Approvals**: 2
-- At least 1 approval must come directly from a Mappings team member, and the other one can come from a Mappings
-Triage member or another Mappings Team member.
+- At least 1 approval must come directly from a Mappings team member.
 
-**Final Comment Period**:
-- Snapshots: 2 days
-- Releases: 4 days
+**Final Comment Period**: 2 days (1 day for snapshots if the PR has 3+ approvals)
 
-### `T: toolchain changes`
+### `T: toolchain`
 
 **Description**: Used for pull requests that focus mainly on changes to the QM toolchain, including the buildscript,
 and/or tools used.
 
-**Required Approvals**: 1
-- At least 1 approval must come directly from a Mappings team member
+**Required Approvals**: 2
+- Only members of the Mappings Team count for approvals in PRs targeting the toolchain.
 
-**Final Comment Period**:
-- Snapshots: 1 day
-- Releases: 2 days
+**Final Comment Period**: 2 days
 
 ### Other
-Trivial fixes that do not require review (e.g. typos) are exempt from this policy. Mappings team members should
-double-check with other members of the team on Discord before pushing a commit or merging a PR without going
-through this process.
 
-PRs that do not fit under any of these categories but are not "trivial fixes" are merged at the consensus of the
-Mappings team, using whatever criteria they determine to be appropriate.
+If the determined FCP length is judged to be inadequate for one or more PRs, at least three members of the Mappings team may agree to either shorten, extend, or skip them, provided that all Mappings team members had a reasonable chance to respond. This applies to both PRs that are yet to begin its FCP and to PRs whose FCP is already in motion.
 
-*This is only a summary of QM's PR process and an explanation of QM-specific exceptions to it. For exact definitions
-and more information, see [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md).*
+Trivial fixes that do not require review (e.g. typos) are exempt from this policy. Mappings team members should double-check with other members of the team on Discord before pushing a commit or merging a PR without going through this process.
+
+PRs that do not fit under any of these categories but are not "trivial fixes" are merged at the consensus of the Mappings team, using whatever criteria they determine to be appropriate.
+
+*This is only a summary of QM's PR process and an explanation of QM-specific exceptions to it. For exact definitions and more information, see [RFC 39](https://github.com/QuiltMC/rfcs/blob/master/structure/0039-pr-policy.md).*
