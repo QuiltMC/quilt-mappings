@@ -13,6 +13,7 @@ CLASS net/minecraft/unmapped/C_gkderdjo net/minecraft/server/world/ChunkHolder
 	FIELD f_nfzawtue completedLevel I
 	FIELD f_omdiodzh level I
 	FIELD f_peybckli lightingProvider Lnet/minecraft/unmapped/C_ksposksb;
+	FIELD f_pjpzhajo INCOMPLETE Lcom/mojang/datafixers/util/Either;
 	FIELD f_pudkanic accessibleFuture Ljava/util/concurrent/CompletableFuture;
 	FIELD f_qfmkgtss blockLightUpdateBits Ljava/util/BitSet;
 	FIELD f_qmgttqzx actionStack Lnet/minecraft/unmapped/C_bqfpbxgr;
@@ -24,6 +25,7 @@ CLASS net/minecraft/unmapped/C_gkderdjo net/minecraft/server/world/ChunkHolder
 		COMMENT Entries for a section are null if the section has no positions marked for update.
 	FIELD f_tbnmoxhy accessible Z
 	FIELD f_tyworwzc lastTickLevel I
+	FIELD f_wuawgnhv pendingLoadStatusConfirmation Ljava/util/concurrent/CompletableFuture;
 	FIELD f_xbnfbbja pendingBlockUpdates Z
 		COMMENT Indicates that {@link #blockUpdatesBySection} contains at least one entry.
 	FIELD f_ynuhroyt playersWatchingChunkProvider Lnet/minecraft/unmapped/C_gkderdjo$C_iqautbcj;
@@ -35,17 +37,34 @@ CLASS net/minecraft/unmapped/C_gkderdjo net/minecraft/server/world/ChunkHolder
 		ARG 4 lightingProvider
 		ARG 5 levelUpdateListener
 		ARG 6 playersWatchingChunkProvider
+	METHOD m_aljpkbpx (Lnet/minecraft/unmapped/C_lwzmmmqr;)Lnet/minecraft/unmapped/C_lwzmmmqr;
+		ARG 0 chunk
 	METHOD m_cddxmksj getCurrentStatus ()Lnet/minecraft/unmapped/C_kogtzhzt;
 	METHOD m_cjbyykuq setLevel (I)V
 		ARG 1 level
 	METHOD m_csdoluin getValidFutureFor (Lnet/minecraft/unmapped/C_kogtzhzt;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 leastStatus
+	METHOD m_djkbnszk scheduleLoadStatusPromotion (Lnet/minecraft/unmapped/C_gxrpzacc;Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_whqcauvq;)V
+		ARG 1 chunkManager
+		ARG 2 postRun
+		ARG 3 executor
+		ARG 4 status
+	METHOD m_etgotkbg (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_gkderdjo$C_mnhcarhk;)Lnet/minecraft/unmapped/C_lwzmmmqr;
+		ARG 1 unloaded
 	METHOD m_feqdkjyf getCurrentChunk ()Lnet/minecraft/unmapped/C_lwzmmmqr;
+	METHOD m_fnpxnlqk addSaveAction (Ljava/lang/String;Ljava/util/concurrent/CompletableFuture;)V
+		ARG 1 description
+		ARG 2 action
 	METHOD m_gavtlnfz getLevel ()I
 	METHOD m_gjochkby getAccessibleFuture ()Ljava/util/concurrent/CompletableFuture;
 	METHOD m_hjqqoeij tick (Lnet/minecraft/unmapped/C_gxrpzacc;Ljava/util/concurrent/Executor;)V
-		ARG 1 chunkStorage
+		ARG 1 chunkManager
+		ARG 2 executor
+	METHOD m_hlzvhktf (Lnet/minecraft/unmapped/C_lwzmmmqr;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_lwzmmmqr;
+		ARG 0 savingResult
+		ARG 1 actionResult
 	METHOD m_hqvrbhfi sendPacketToPlayersWatching (Ljava/util/List;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
+		ARG 1 players
 		ARG 2 packet
 	METHOD m_jckuptku (Ljava/util/List;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 3 pos
@@ -55,6 +74,11 @@ CLASS net/minecraft/unmapped/C_gkderdjo net/minecraft/server/world/ChunkHolder
 	METHOD m_kgzokvvv getTickingFuture ()Ljava/util/concurrent/CompletableFuture;
 	METHOD m_ksnbkgsf setCompletedLevel (I)V
 		ARG 1 level
+	METHOD m_laexjdgk (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_mxrobsgg;)V
+		ARG 1 player
+	METHOD m_lkkgqrre (Lnet/minecraft/unmapped/C_lwzmmmqr;Lcom/mojang/datafixers/util/Either;)Lnet/minecraft/unmapped/C_lwzmmmqr;
+		ARG 0 savingResult
+		ARG 1 thenResult
 	METHOD m_llqjdhut setCompletedChunk (Lnet/minecraft/unmapped/C_riffdstx;)V
 		ARG 1 chunk
 	METHOD m_lqtjurpe getEntityTickingFuture ()Ljava/util/concurrent/CompletableFuture;
@@ -64,16 +88,24 @@ CLASS net/minecraft/unmapped/C_gkderdjo net/minecraft/server/world/ChunkHolder
 			COMMENT chunk section y coordinate
 	METHOD m_oiirrjzd getCompletedLevel ()I
 	METHOD m_pzpckoay getAllFutures ()Ljava/util/List;
+	METHOD m_qjjuiqjg updateStatus (Lnet/minecraft/unmapped/C_gxrpzacc;Lnet/minecraft/unmapped/C_whqcauvq;)V
+		ARG 1 chunkManager
+		ARG 2 status
 	METHOD m_qyvyszic getChunkAt (Lnet/minecraft/unmapped/C_kogtzhzt;Lnet/minecraft/unmapped/C_gxrpzacc;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 targetStatus
 		ARG 2 chunkStorage
 	METHOD m_rllpjhva getWorldChunk ()Lnet/minecraft/unmapped/C_hrdsvlkq;
+	METHOD m_rlyqrsoz (Ljava/util/concurrent/CompletableFuture;Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+		ARG 1 chunk
 	METHOD m_rpqawkcj sendBlockEntityUpdatePacket (Ljava/util/List;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 1 players
 		ARG 2 world
 		ARG 3 pos
+	METHOD m_tltcqrrq getAccessibleChunk ()Lnet/minecraft/unmapped/C_hrdsvlkq;
 	METHOD m_ucfsyfpl flushUpdates (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
 		ARG 1 chunk
 	METHOD m_upbtkato tryUpdateBlockEntityAt (Ljava/util/List;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
+		ARG 1 players
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 state
@@ -85,6 +117,8 @@ CLASS net/minecraft/unmapped/C_gkderdjo net/minecraft/server/world/ChunkHolder
 	METHOD m_wimfsfkf isAccessible ()Z
 	METHOD m_wtdofwbi getSavingFuture ()Ljava/util/concurrent/CompletableFuture;
 	METHOD m_zmvaaivo updateAccessibleStatus ()V
+	METHOD m_znqgvvag (Ljava/util/concurrent/CompletableFuture;Lcom/mojang/datafixers/util/Either;)V
+		ARG 1 either
 	METHOD m_zuqnnazp markForBlockUpdate (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	CLASS C_iqautbcj PlayersWatchingChunkProvider
