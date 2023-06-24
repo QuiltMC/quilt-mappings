@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_migzkpst net/minecraft/server/ServerReloadableResources
 	COMMENT Represents the server reloadable resources.
+	FIELD f_aafiafdg lootManager Lnet/minecraft/unmapped/C_uxsnhxlb;
 	FIELD f_cqvnljsk recipes Lnet/minecraft/unmapped/C_hjseusrb;
 	FIELD f_egatpqbd commandBuildContext Lnet/minecraft/unmapped/C_bprdujxm$C_rguunmyd;
 	FIELD f_izcsyrwb functions Lnet/minecraft/unmapped/C_coevuhwv;
@@ -7,6 +8,11 @@ CLASS net/minecraft/unmapped/C_migzkpst net/minecraft/server/ServerReloadableRes
 	FIELD f_nupmvkrd tagLoader Lnet/minecraft/unmapped/C_urxtamub;
 	FIELD f_tcegvcns advancements Lnet/minecraft/unmapped/C_fktoyupt;
 	FIELD f_xgqmoaaw INITIAL_DATA_RELOAD_TASK Ljava/util/concurrent/CompletableFuture;
+	METHOD <init> (Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_rieemtgi$C_vypaxkxj;I)V
+		ARG 1 registryManager
+		ARG 2 featureFlags
+		ARG 3 environment
+		ARG 4 level
 	METHOD m_arswxfre getCommands ()Lnet/minecraft/unmapped/C_rieemtgi;
 	METHOD m_bjfjrecc updateRegistryTags (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_urxtamub$C_rbziadam;)V
 		ARG 0 registryManager
@@ -21,6 +27,7 @@ CLASS net/minecraft/unmapped/C_migzkpst net/minecraft/server/ServerReloadableRes
 		ARG 0 entry
 	METHOD m_phzgjlfn (Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_ednuhnnn;
 		ARG 1 entry
+	METHOD m_qhooynop getLootManager ()Lnet/minecraft/unmapped/C_uxsnhxlb;
 	METHOD m_qobkrmhz getReloaders ()Ljava/util/List;
 		COMMENT {@return the server-specific resource reloaders}
 	METHOD m_qzzzeens getRecipes ()Lnet/minecraft/unmapped/C_hjseusrb;
@@ -29,6 +36,7 @@ CLASS net/minecraft/unmapped/C_migzkpst net/minecraft/server/ServerReloadableRes
 	METHOD m_xlzbyznn loadResources (Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_rieemtgi$C_vypaxkxj;ILjava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 resources
 		ARG 1 registry
+		ARG 2 featureFlags
 		ARG 3 environment
 		ARG 4 level
 		ARG 5 prepareExecutor

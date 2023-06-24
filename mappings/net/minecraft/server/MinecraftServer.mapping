@@ -122,6 +122,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_ccqjjrlt getCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
 		COMMENT Creates a command source which represents this Minecraft server instance.
 	METHOD m_cddoazwa getSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
+	METHOD m_cjkzikqh sendWorldTimeUpdate (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_cjlzmhmu getDataCommandStorage ()Lnet/minecraft/unmapped/C_hrsnudrk;
 	METHOD m_ckjomijt isOnlineMode ()Z
 		COMMENT {@return whether this Minecraft server authenticates players logging in with the
@@ -132,6 +133,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT @see net.minecraft.server.network.ServerLoginNetworkHandler
 	METHOD m_cpahzimu isStopping ()Z
 	METHOD m_cuuhdoqu syncChunkWrites ()Z
+	METHOD m_cvtpuakg (Lnet/minecraft/unmapped/C_lvnjxuwi;)Ljava/lang/String;
+		ARG 0 profile
 	METHOD m_dajeggfi getResourceManager ()Lnet/minecraft/unmapped/C_tmnrpasf;
 	METHOD m_dbtaxkzj updateMobSpawnOptions ()V
 	METHOD m_ddlaxvao getServerResourcePackProperties ()Ljava/util/Optional;
@@ -223,6 +226,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_iiseoobd kickNonWhitelistedPlayers (Lnet/minecraft/unmapped/C_pennblrk;)V
 		ARG 1 source
 	METHOD m_imunhrtd shouldSpawnAnimals ()Z
+	METHOD m_ioqdmdme createSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
 	METHOD m_iqernmfn requireResourcePack ()Z
 	METHOD m_ixudjtvq setDefaultGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)V
 		ARG 1 gameMode
@@ -290,6 +294,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 0 path
 	METHOD m_opevzklp getDataFixer ()Lcom/mojang/datafixers/DataFixer;
 	METHOD m_opjlzrwc getDataPackManager ()Lnet/minecraft/unmapped/C_dqfyacfy;
+	METHOD m_orlnkvix syncTime ()V
 	METHOD m_ouowsdpz getIconFile ()Ljava/util/Optional;
 	METHOD m_oxkyjubk logChatMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;Ljava/lang/String;)V
 		ARG 1 content
@@ -311,6 +316,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_qekqyjho shouldBroadcastRconToOps ()Z
 	METHOD m_qjvaquxt getWorlds ()Ljava/lang/Iterable;
 	METHOD m_quqvcwgc isRemote ()Z
+	METHOD m_qvjtygrg (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ebcmvjwj;Lnet/minecraft/unmapped/C_gjwbvqct;Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)V
+		ARG 3 bonusChestFeature
 	METHOD m_qwvotguk setHostProfile (Lcom/mojang/authlib/GameProfile;)V
 		COMMENT Sets the game profile of the single-player host of this server.
 		COMMENT <p>
