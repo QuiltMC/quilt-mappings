@@ -1,10 +1,13 @@
 CLASS net/minecraft/unmapped/C_yagtbmmk net/minecraft/server/network/EntityTrackerEntry
 	FIELD f_afmemlns tickInterval I
+	FIELD f_azdezkau positionCodec Lnet/minecraft/unmapped/C_kfofqpqr;
 	FIELD f_etjcgfpa trackingTick I
 	FIELD f_fcnnwugt lastHeadPitch I
 	FIELD f_ghninrwd lastYaw I
 	FIELD f_hfbzwigq receiver Ljava/util/function/Consumer;
+	FIELD f_jsyknaxw ROTATION_TOLERANCE_LEVEL I
 	FIELD f_kqffoygs alwaysUpdateVelocity Z
+	FIELD f_kqnuyquf trackedDataValues Ljava/util/List;
 	FIELD f_ntqyhxlt hadVehicle Z
 	FIELD f_pzmmdjvd lastPitch I
 	FIELD f_rrkfrdzn velocity Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -21,14 +24,22 @@ CLASS net/minecraft/unmapped/C_yagtbmmk net/minecraft/server/network/EntityTrack
 		ARG 4 alwaysUpdateVelocity
 		ARG 5 receiver
 	METHOD m_acqaqxfb sendPackets (Lnet/minecraft/unmapped/C_mxrobsgg;Ljava/util/function/Consumer;)V
+		ARG 1 player
 		ARG 2 sender
 	METHOD m_acwzlrjk sendSyncPacket (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		COMMENT Sends a packet for synchronization with watcher and tracked player (if applicable)
 		ARG 1 packet
 	METHOD m_dlxmtkps syncEntityData ()V
 		COMMENT Synchronizes tracked data and attributes
+	METHOD m_eszryakz getNonUniqueEntries (Ljava/util/List;Ljava/util/List;)Ljava/util/stream/Stream;
+		ARG 0 list1
+		ARG 1 list2
 	METHOD m_mvnvigmx tick ()V
 	METHOD m_njjxygjo stopTracking (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_rkxayulq startTracking (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
+	METHOD m_vkpuoeqj (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 0 entity
+	METHOD m_vwyonfvn (Ljava/util/List;Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 entity
