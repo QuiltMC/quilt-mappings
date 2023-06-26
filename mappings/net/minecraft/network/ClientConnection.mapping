@@ -26,6 +26,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_vcukytvt errored Z
 	FIELD f_wborsynf NETWORK_MARKER Lorg/slf4j/Marker;
 	FIELD f_wdeykuqe disconnected Z
+	FIELD f_wfrrroev pendingDisconnectReason Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_yhdjpmsl CURRENT_PACKET_COUNTER_WEIGHT F
 		COMMENT Represents when the average packet counter is updated, what percent of the
 		COMMENT value of the average counter is set from the current counter.
@@ -47,6 +48,10 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 context
 		ARG 2 ex
 	METHOD m_akpgjfcu sendQueuedPackets ()V
+	METHOD m_apccqkse connect (Ljava/net/InetSocketAddress;ZLnet/minecraft/unmapped/C_oasmcckk;)Lio/netty/channel/ChannelFuture;
+		ARG 0 address
+		ARG 1 useEpoll
+		ARG 2 connection
 	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
 		ARG 1 packet
 		ARG 2 listener
