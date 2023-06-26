@@ -2,6 +2,7 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 	FIELD f_bacblakr SOURCE_OBJECT_TYPES Ljava/util/List;
 	FIELD f_gqntdrbs MERGE_FAILED_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_ijzhchry GET_MULTIPLE_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
+	FIELD f_jyfgqakd MODIFY_INVALID_SUBSTRING_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
 	FIELD f_kfnontvz OBJECT_TYPE_FACTORIES Ljava/util/List;
 	FIELD f_nibntpnd TARGET_OBJECT_TYPES Ljava/util/List;
 	FIELD f_oowlzkev GET_INVALID_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
@@ -73,6 +74,7 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 		ARG 1 type
 	METHOD m_sufmbujz (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lnet/minecraft/unmapped/C_runmekgk$C_ceumtqan;Lcom/mojang/brigadier/context/CommandContext;)I
 		ARG 1 modifyOperation
+		ARG 2 context
 	METHOD m_uqnrtdyf (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 path
 	METHOD m_utjbcvev (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;Ljava/util/List;)I
@@ -105,6 +107,9 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 	CLASS C_dgfqqfje ModifyArgumentCreator
 		METHOD create create (Lnet/minecraft/unmapped/C_runmekgk$C_ceumtqan;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 			ARG 1 modifier
+	CLASS C_gcrgsjks Processor
+		METHOD process process (Ljava/lang/String;)Ljava/lang/String;
+			ARG 1 input
 	CLASS C_zbamutva ObjectType
 		METHOD m_oelajppe addArgumentsToBuilder (Lcom/mojang/brigadier/builder/ArgumentBuilder;Ljava/util/function/Function;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 			ARG 1 argument
