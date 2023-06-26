@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_jmmczzpb net/minecraft/world/WorldSaveProperties
 	FIELD f_cpwcrhlr worldType Lnet/minecraft/unmapped/C_jmmczzpb$C_ooteyfin;
 	FIELD f_ecsjtqgc dataVersion I
+	FIELD f_guunwqfj removedFeatureFlags Ljava/util/Set;
 	FIELD f_iholqjdh clearWeatherTime I
 	FIELD f_ijauhqup spawnY I
 	FIELD f_ijykcegw spawnAngle F
@@ -20,6 +21,7 @@ CLASS net/minecraft/unmapped/C_jmmczzpb net/minecraft/world/WorldSaveProperties
 	FIELD f_pskdtagu scheduledEvents Lnet/minecraft/unmapped/C_sboqtqtk;
 	FIELD f_qqwedtfz spawnZ I
 	FIELD f_rauimzzj serverBrands Ljava/util/Set;
+	FIELD f_rtkplitb dragonFightState Lnet/minecraft/unmapped/C_hxzjzvro$C_tunbvwoo;
 	FIELD f_ryspwxox raining Z
 	FIELD f_tlzpcrwu LOGGER Lorg/slf4j/Logger;
 	FIELD f_urierpec PLAYER_KEY Ljava/lang/String;
@@ -28,11 +30,44 @@ CLASS net/minecraft/unmapped/C_jmmczzpb net/minecraft/world/WorldSaveProperties
 	FIELD f_vsxsobkx timeOfDay J
 	FIELD f_wajebgsy playerData Lnet/minecraft/unmapped/C_hhlwcnih;
 	FIELD f_wkcdalie rainTime I
+	FIELD f_yjrgeypv worldGenOptions Lnet/minecraft/unmapped/C_naismckd;
 	FIELD f_ykdrqhbw customBossEvents Lnet/minecraft/unmapped/C_hhlwcnih;
 	FIELD f_zcocotov levelInfo Lnet/minecraft/unmapped/C_tmnkpzlg;
 	FIELD f_zuihjfvz dataFixer Lcom/mojang/datafixers/DataFixer;
+	METHOD <init> (Lcom/mojang/datafixers/DataFixer;ILnet/minecraft/unmapped/C_hhlwcnih;ZIIIFJJIIIZIZZZLnet/minecraft/unmapped/C_pneibfez$C_koayjdos;IILjava/util/UUID;Ljava/util/Set;Ljava/util/Set;Lnet/minecraft/unmapped/C_sboqtqtk;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_hxzjzvro$C_tunbvwoo;Lnet/minecraft/unmapped/C_tmnkpzlg;Lnet/minecraft/unmapped/C_naismckd;Lnet/minecraft/unmapped/C_jmmczzpb$C_ooteyfin;Lcom/mojang/serialization/Lifecycle;)V
+		ARG 2 dataVersion
+		ARG 3 playerData
+		ARG 4 modded
+		ARG 5 spawnX
+		ARG 6 spawnY
+		ARG 7 spawnZ
+		ARG 8 spawnAngle
+		ARG 9 time
+		ARG 11 timeOfDay
+		ARG 13 version
+		ARG 14 clearWeatherTime
+		ARG 15 rainTime
+		ARG 16 raining
+		ARG 17 thunderTime
+		ARG 18 thundering
+		ARG 19 initialized
+		ARG 20 difficultyLocked
+		ARG 21 worldBorder
+		ARG 22 wanderingTraderSpawnDelay
+		ARG 23 wanderingTraderSpawnChance
+		ARG 24 wanderingTraderId
+		ARG 25 serverBrands
+		ARG 26 removedFeatureFlags
+		ARG 27 scheduledEvents
+		ARG 28 customBossEvents
+		ARG 29 dragonFightState
+		ARG 30 levelInfo
+		ARG 31 worldGenOptions
+		ARG 32 worldTime
+		ARG 33 lifecycle
 	METHOD <init> (Lnet/minecraft/unmapped/C_tmnkpzlg;Lnet/minecraft/unmapped/C_naismckd;Lnet/minecraft/unmapped/C_jmmczzpb$C_ooteyfin;Lcom/mojang/serialization/Lifecycle;)V
 		ARG 1 info
+		ARG 2 worldGenOptions
 		ARG 3 worldType
 		ARG 4 lifecycle
 	METHOD m_jiidkhzg loadPlayerData ()V
@@ -44,7 +79,12 @@ CLASS net/minecraft/unmapped/C_jmmczzpb net/minecraft/world/WorldSaveProperties
 		ARG 4 levelInfo
 		ARG 5 saveVersionInfo
 		ARG 6 worldType
+		ARG 7 worldGenOptions
 		ARG 8 lifecycle
+	METHOD m_qaixgccn withAll (Ljava/util/Set;)Lnet/minecraft/unmapped/C_hqhtfwlr;
+		ARG 0 strings
+	METHOD m_qbtdktse (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 settings
 	METHOD m_xkdnykbi updateProperties (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 registryManager
 		ARG 2 levelNbt

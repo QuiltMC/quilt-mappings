@@ -27,6 +27,8 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	FIELD f_wqiemdiy NON_EMPTY_STRING Lcom/mojang/serialization/Codec;
 	FIELD f_xprfobkx AXISANGLE4F Lcom/mojang/serialization/Codec;
 	FIELD f_zhwzaxnp VECTOR3F Lcom/mojang/serialization/Codec;
+	METHOD m_azdhwdid (IILjava/lang/Integer;)Ljava/lang/String;
+		ARG 2 i
 	METHOD m_ceqposdb (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
 		ARG 0 string
 	METHOD m_ceufsyxl withLifecycle (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
@@ -35,6 +37,8 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 2 coApplyFunction
 	METHOD m_cjkdnnjx (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
 		ARG 0 json
+	METHOD m_dotsxqei (FFLjava/util/function/Function;Ljava/lang/Float;)Lcom/mojang/serialization/DataResult;
+		ARG 3 f
 	METHOD m_dujfhivb orElsePartial (Ljava/lang/Object;)Lcom/mojang/serialization/Codec$ResultFunction;
 		ARG 0 partial
 	METHOD m_fdwgadxq mapProfileToIdName (Lcom/mojang/authlib/GameProfile;)Lcom/mojang/serialization/DataResult;
@@ -76,10 +80,16 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 0 min
 		ARG 1 max
 		ARG 2 messageFactory
+	METHOD m_ljxipwty validate (Lcom/mojang/serialization/MapCodec;Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
+		ARG 0 codec
+		ARG 1 validator
 	METHOD m_lruqlezz asOptionalLong (Lcom/mojang/serialization/MapCodec;)Lcom/mojang/serialization/MapCodec;
 		ARG 0 codec
 	METHOD m_lybgbxfe createEqualTypeChecker (Ljava/util/function/Function;)Ljava/util/function/Function;
 		ARG 0 typeGetter
+	METHOD m_lytzwisw validate (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+		ARG 0 codec
+		ARG 1 validator
 	METHOD m_mcwzjvkz (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lcom/mojang/serialization/DataResult;
 		ARG 0 text
 	METHOD m_mfpnjepb (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
@@ -100,6 +110,10 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 5 rightFunction
 	METHOD m_pqmgxbkr (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lcom/mojang/serialization/DataResult;
 		ARG 0 text
+	METHOD m_pvuukvln (Lnet/minecraft/unmapped/C_odfnijdo;)Lcom/mojang/serialization/DataResult;
+		ARG 0 set
+	METHOD m_qettqsix (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 0 list
 	METHOD m_sltnwzrc createRangedFloat (FFLjava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 min
 		ARG 1 max
@@ -112,8 +126,16 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 1 max
 	METHOD m_vlowicum (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/Dynamic;
 		ARG 0 json
+	METHOD m_wdeaaxop (Ljava/util/function/Function;Ljava/util/Collection;)Lcom/mojang/serialization/DataResult;
+		ARG 1 collection
+	METHOD m_whsvwgtf (Ljava/time/format/DateTimeFormatter;Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 1 string
+	METHOD m_xamlcvip (IILjava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 2 string
 	METHOD m_yxbdjpqp createLazy (Ljava/util/function/Supplier;)Lcom/mojang/serialization/Codec;
 		ARG 0 supplier
+	METHOD m_zpetktsx (IILjava/util/function/Function;Ljava/lang/Integer;)Lcom/mojang/serialization/DataResult;
+		ARG 3 i
 	CLASS C_cuphesbl Xor
 		COMMENT An xor codec that only permits exactly one of the two data choices to be
 		COMMENT present.
