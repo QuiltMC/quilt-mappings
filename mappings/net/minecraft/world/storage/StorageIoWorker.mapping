@@ -1,5 +1,7 @@
 CLASS net/minecraft/unmapped/C_ffgsaknh net/minecraft/world/storage/StorageIoWorker
+	FIELD f_cmzfptka MAX_REGION_CACHE_SIZE I
 	FIELD f_ebctbref storage Lnet/minecraft/unmapped/C_ivfseflh;
+	FIELD f_eqfuhsox blendingStatusCaches Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
 	FIELD f_prbotxpi closed Ljava/util/concurrent/atomic/AtomicBoolean;
 	FIELD f_pyjvjyaq results Ljava/util/Map;
 	FIELD f_wtxzpjxm LOGGER Lorg/slf4j/Logger;
@@ -9,29 +11,45 @@ CLASS net/minecraft/unmapped/C_ffgsaknh net/minecraft/world/storage/StorageIoWor
 		ARG 2 dsync
 		ARG 3 executorName
 	METHOD close close ()V
+	METHOD m_bcdbqcmy (Lnet/minecraft/unmapped/C_ffgsaknh$C_bwprgfor;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 result
+	METHOD m_ehxqxhtz (Ljava/lang/Void;)Ljava/util/concurrent/CompletionStage;
+		ARG 1 v
+	METHOD m_fclorhxg (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_ffgsaknh$C_bwprgfor;
+		ARG 1 key
 	METHOD m_ipwbxzat setResult (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 pos
 		ARG 2 nbt
 	METHOD m_jjukvdrp completeAll (Z)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 sync
+	METHOD m_jsyufhll (I)[Ljava/util/concurrent/CompletableFuture;
+		ARG 0 i
 	METHOD m_msmawqmw readChunkData (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 pos
 	METHOD m_nghssqns run (Ljava/util/function/Supplier;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 task
-	METHOD m_nwcchuzp (II)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_nwcchuzp getOrComputeBlendingStatus (II)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 regionX
 		ARG 2 regionZ
+	METHOD m_nxdpwaav (Ljava/util/BitSet;Lnet/minecraft/unmapped/C_ynrszrtu;)V
+		ARG 2 pos
+	METHOD m_oafscugf (Ljava/lang/Void;)Ljava/util/concurrent/CompletionStage;
+		ARG 1 v
 	METHOD m_tfcrrgaw writeResult ()V
+	METHOD m_ujjvzgne (Lnet/minecraft/unmapped/C_brzcgupp;)Lnet/minecraft/unmapped/C_psrgnlfb$C_kbkjdbow;
+		ARG 0 listener
 	METHOD m_vacywheq isOldChunkAround (Lnet/minecraft/unmapped/C_ynrszrtu;I)Z
 		ARG 1 pos
 		ARG 2 radius
 	METHOD m_wqoqxngx writeRemainingResults ()V
-	METHOD m_yhgjzcrh (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
+	METHOD m_yhgjzcrh needsBlending (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
 		ARG 1 nbt
+	METHOD m_zbdgelks (Ljava/util/function/Supplier;Lnet/minecraft/unmapped/C_brzcgupp;)Lnet/minecraft/unmapped/C_psrgnlfb$C_kbkjdbow;
+		ARG 2 listener
 	METHOD m_zosiugiq write (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_ffgsaknh$C_bwprgfor;)V
 		ARG 1 pos
 		ARG 2 result
-	METHOD m_zyiverhw (II)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_zyiverhw computeRegionBlendingStatus (II)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 x
 		ARG 2 z
 	CLASS C_bwprgfor Result

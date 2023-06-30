@@ -1,12 +1,20 @@
 CLASS net/minecraft/unmapped/C_kykyawqb net/minecraft/world/storage/RegionFile
 	FIELD f_bagqqhlx directory Ljava/nio/file/Path;
 	FIELD f_becwjrwf saveTimes Ljava/nio/IntBuffer;
+	FIELD f_dxhmyvjp CHUNK_NOT_PRESENT I
+	FIELD f_ecfxbygp SECTOR_BYTE_LIMIT I
+	FIELD f_egrpyabe EXTERNAL_CHUNK_THRESHOLD I
 	FIELD f_ewdhvwdr sectors Lnet/minecraft/unmapped/C_vsnirdkc;
-	FIELD f_mmilontz ZERO Ljava/nio/ByteBuffer;
+	FIELD f_knlsaycj EXTERNAL_FILE_EXTENSION Ljava/lang/String;
+	FIELD f_mmilontz PADDING_BUFFER Ljava/nio/ByteBuffer;
 	FIELD f_mvitofjf LOGGER Lorg/slf4j/Logger;
+	FIELD f_pebydogu HEADER_OFFSET I
 	FIELD f_qpqrfiqu header Ljava/nio/ByteBuffer;
 	FIELD f_ramzmnqn channel Ljava/nio/channels/FileChannel;
 	FIELD f_sidnvqle sectorData Ljava/nio/IntBuffer;
+	FIELD f_srhyfbtq SECTOR_INT_LIMIT I
+	FIELD f_torejiiv CHUNK_HEADER_SIZE I
+	FIELD f_uzbltvoa EXTERNAL_STREAM_FLAG I
 	FIELD f_xggxxmgb outputChunkStreamVersion Lnet/minecraft/unmapped/C_jrihwgqn;
 	METHOD <init> (Ljava/nio/file/Path;Ljava/nio/file/Path;Lnet/minecraft/unmapped/C_jrihwgqn;Z)V
 		ARG 1 file
@@ -24,6 +32,8 @@ CLASS net/minecraft/unmapped/C_kykyawqb net/minecraft/world/storage/RegionFile
 		ARG 0 buffer
 		ARG 1 length
 	METHOD m_bsyvgedc writeSafely (Ljava/nio/file/Path;Ljava/nio/ByteBuffer;)Lnet/minecraft/unmapped/C_kykyawqb$C_mbnkvpjn;
+		ARG 1 path
+		ARG 2 buf
 	METHOD m_cdfttreh getSectorCount (I)I
 		ARG 0 byteCount
 	METHOD m_cnrtwxio getIndex (Lnet/minecraft/unmapped/C_ynrszrtu;)I
@@ -31,6 +41,7 @@ CLASS net/minecraft/unmapped/C_kykyawqb net/minecraft/world/storage/RegionFile
 	METHOD m_dzgvhamh getChunkOutputStream (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/io/DataOutputStream;
 		ARG 1 pos
 	METHOD m_fcsdkuxp sync ()V
+	METHOD m_fnnafhpi createHeaderBuf ()Ljava/nio/ByteBuffer;
 	METHOD m_gcsotahz hasChunk (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
 		ARG 1 pos
 	METHOD m_hsrwnhct getSize (I)I
@@ -39,15 +50,28 @@ CLASS net/minecraft/unmapped/C_kykyawqb net/minecraft/world/storage/RegionFile
 		ARG 1 chunkPos
 	METHOD m_jsumbmbn getChunkInputStream (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/io/DataInputStream;
 		ARG 1 pos
+	METHOD m_lyzbhxyo createChunkInputStream (Lnet/minecraft/unmapped/C_ynrszrtu;BLjava/io/InputStream;)Ljava/io/DataInputStream;
+		ARG 1 pos
+		ARG 2 versionId
+		ARG 3 input
 	METHOD m_mzwibicr writeHeader ()V
+	METHOD m_naxlpaqf createExternalChunkInputStream (Lnet/minecraft/unmapped/C_ynrszrtu;B)Ljava/io/DataInputStream;
+		ARG 1 pos
+		ARG 2 versionId
 	METHOD m_nmxbyxnr getChunkStreamVersionId (B)B
+		ARG 0 flags
 	METHOD m_obaxgaxq writeChunk (Lnet/minecraft/unmapped/C_ynrszrtu;Ljava/nio/ByteBuffer;)V
 		ARG 1 pos
+		ARG 2 buf
 	METHOD m_oodaxowl hasChunkStreamVersionId (B)Z
+		ARG 0 flags
 	METHOD m_owsezyim packSectorData (II)I
 		ARG 1 offset
 		ARG 2 size
+	METHOD m_pliiokxw getTimestamp ()I
 	METHOD m_tavymlvz isChunkValid (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
+		ARG 1 pos
+	METHOD m_xintzxzy clear (Lnet/minecraft/unmapped/C_ynrszrtu;)V
 		ARG 1 pos
 	METHOD m_yxcvwlus fillLastSector ()V
 	METHOD m_yzorumxc getOffset (I)I
