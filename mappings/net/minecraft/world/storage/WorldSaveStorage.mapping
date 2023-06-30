@@ -3,34 +3,60 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 	FIELD f_lplhvbwf dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_obbylhph GENERATOR_OPTION_KEYS Lcom/google/common/collect/ImmutableList;
 	FIELD f_rbwrlarm savesDirectory Ljava/nio/file/Path;
+	FIELD f_rcocbkwh ALLOWED_SYMLINKS_FILE_NAME Ljava/lang/String;
+	FIELD f_rhxyetit symlinkValidator Lnet/minecraft/unmapped/C_jgxjjhjn;
 	FIELD f_teudzwdn TIME_FORMATTER Ljava/time/format/DateTimeFormatter;
+	FIELD f_tpniflmb PATH_MATCHER Lnet/minecraft/unmapped/C_dpwvcnei;
 	FIELD f_vrvlqdaz LOGGER Lorg/slf4j/Logger;
 	FIELD f_ygzgrifg backupsDirectory Ljava/nio/file/Path;
+	METHOD <init> (Ljava/nio/file/Path;Ljava/nio/file/Path;Lnet/minecraft/unmapped/C_jgxjjhjn;Lcom/mojang/datafixers/DataFixer;)V
+		ARG 1 savesDirectory
+		ARG 2 backupsDirectory
+		ARG 3 symlinkValidator
+		ARG 4 dataFixer
 	METHOD m_acbaanbr create (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_bpwagnit;
 		ARG 0 path
+	METHOD m_aptjmapa (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;ZLjava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lnet/minecraft/unmapped/C_wfuumzdp;
+		ARG 3 path
+		ARG 4 dataFixer
 	METHOD m_ddtuooji getWorldSaveList ()Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;
+	METHOD m_debloqwb (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;)Z
+		ARG 0 directory
 	METHOD m_dekygopt createWorldDataParser (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Z)Ljava/util/function/BiFunction;
 		ARG 1 directory
 		ARG 2 locked
 	METHOD m_dugbwxzi createWorldDataParser (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;)Ljava/util/function/BiFunction;
 		ARG 0 ops
+		ARG 1 settings
+		ARG 2 dimensionRegistry
 		ARG 3 lifecycle
 	METHOD m_hqcuaqjn getEnabledFeatures (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_czxxrbcp;
+	METHOD m_hzomuijm getSymlinkValidator ()Lnet/minecraft/unmapped/C_jgxjjhjn;
 	METHOD m_kbwceymw loadCompactWorldData (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_oivssbvb;
+		ARG 0 path
+	METHOD m_kedmzysx (Ljava/nio/file/Path;)Z
 		ARG 0 path
 	METHOD m_kqxywods readWorldSaveProperties (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Ljava/util/function/BiFunction;)Ljava/lang/Object;
 		ARG 1 directory
 		ARG 2 levelDataParser
 	METHOD m_luaijwph parseFeatureAndDataSettings (Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lnet/minecraft/unmapped/C_yknpgzdr;
 		ARG 0 path
+		ARG 1 dataFixer
 	METHOD m_mglixzcz createSession (Ljava/lang/String;)Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;
 		ARG 1 directoryName
 	METHOD m_nieswrje worldSaveExists (Ljava/lang/String;)Z
 		ARG 1 name
+	METHOD m_odrohmqb (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_yknpgzdr;Lnet/minecraft/unmapped/C_tqxyjqsk;Lcom/mojang/serialization/Lifecycle;Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lcom/mojang/datafixers/util/Pair;
+		ARG 4 path
+		ARG 5 dataFixer
 	METHOD m_ovbzmrty getCurrentVersion ()I
 	METHOD m_pxqlqsgm getBackupsDirectory ()Ljava/nio/file/Path;
 	METHOD m_tcjbtdab isWorldNameValid (Ljava/lang/String;)Z
 		ARG 1 name
+	METHOD m_vtcefrig createSession (Ljava/lang/String;)Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;
+		ARG 1 name
+	METHOD m_wbpcmbpm (Lnet/minecraft/unmapped/C_ncpywfca;)V
+		ARG 0 id
 	METHOD m_wegrclwo readGeneratorProperties (Lcom/mojang/serialization/Dynamic;Lcom/mojang/datafixers/DataFixer;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 levelData
 		ARG 1 dataFixer
@@ -38,8 +64,14 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 	METHOD m_wewggpif getSavesDirectory ()Ljava/nio/file/Path;
 	METHOD m_wspekgur loadSummaries (Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 worldSaves
+	METHOD m_wzrvnifq (Ljava/util/List;)Ljava/util/List;
+		ARG 0 saves
 	METHOD m_xbutxuca parseFeatureAndDataSettings (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_yknpgzdr;
+	METHOD m_xnikwmwt getSavePath (Ljava/lang/String;)Ljava/nio/file/Path;
+		ARG 1 name
 	METHOD m_xvdymvqq getFormatName ()Ljava/lang/String;
+	METHOD m_yekueuyb getSymlinkValidator (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_jgxjjhjn;
+		ARG 0 file
 	CLASS C_aynhbbal WorldList
 		FIELD f_yifrugyf worldSaves Ljava/util/List;
 		METHOD <init> (Ljava/util/List;)V
@@ -54,6 +86,8 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 		FIELD f_itqzdvso directory Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;
 		FIELD f_ogmhmsly paths Ljava/util/Map;
 		FIELD f_yrytyibs lock Lnet/minecraft/unmapped/C_vhulbkrr;
+		METHOD <init> (Lnet/minecraft/unmapped/C_bpwagnit;Ljava/lang/String;Ljava/nio/file/Path;)V
+			ARG 3 path
 		METHOD close close ()V
 		METHOD m_amukkubj checkValid ()V
 		METHOD m_bripcmby createSaveHandler ()Lnet/minecraft/unmapped/C_wnawwdpy;
@@ -82,9 +116,15 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 			ARG 1 key
 		CLASS C_broyznts
 			METHOD postVisitDirectory postVisitDirectory (Ljava/lang/Object;Ljava/io/IOException;)Ljava/nio/file/FileVisitResult;
+				ARG 1 path
+				ARG 2 exception
 			METHOD visitFile visitFile (Ljava/lang/Object;Ljava/nio/file/attribute/BasicFileAttributes;)Ljava/nio/file/FileVisitResult;
+				ARG 1 path
+				ARG 2 attributes
 		CLASS C_zvjetysm
 			METHOD visitFile visitFile (Ljava/lang/Object;Ljava/nio/file/attribute/BasicFileAttributes;)Ljava/nio/file/FileVisitResult;
+				ARG 1 path
+				ARG 2 attributes
 	CLASS C_wxntpspm WorldDirectory
 		FIELD f_iapirmxc path Ljava/nio/file/Path;
 		METHOD <init> (Ljava/nio/file/Path;)V
