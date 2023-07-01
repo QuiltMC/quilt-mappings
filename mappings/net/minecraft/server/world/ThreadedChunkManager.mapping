@@ -5,6 +5,8 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	FIELD f_cqzzgluy CHUNKS_SAVED_EAGERLY_PER_TICK I
 	FIELD f_dklgoyoo playerChunkWatchingManager Lnet/minecraft/unmapped/C_xqwearey;
 	FIELD f_dltbfmui persistentStateManagerFactory Ljava/util/function/Supplier;
+	FIELD f_doswvonx concentricRingPlacementCalculator Lnet/minecraft/unmapped/C_jibygqpu;
+	FIELD f_egnswwwb FORCED_TICKET_LEVEL I
 	FIELD f_ekyvcymk chunkStatusChangeListener Lnet/minecraft/unmapped/C_gtndfkbe;
 	FIELD f_epwhnhgx pointOfInterestStorage Lnet/minecraft/unmapped/C_uegwgivt;
 	FIELD f_fjgdpyoz chunkGenerator Lnet/minecraft/unmapped/C_kgfalbim;
@@ -48,6 +50,8 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 11 persistentStateManagerFactory
 		ARG 12 viewDistance
 		ARG 13 dsync
+	METHOD m_cbfkjkzy (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
+		ARG 1 pos
 	METHOD m_cuiojals createCrashException (Ljava/lang/IllegalStateException;Ljava/lang/String;)Lnet/minecraft/unmapped/C_zmbivxlv;
 		ARG 1 exception
 		ARG 2 details
@@ -58,6 +62,7 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 player
 	METHOD m_djmbcnos getCurrentChunkHolder (J)Lnet/minecraft/unmapped/C_gkderdjo;
 		ARG 1 pos
+	METHOD m_dtwrvman getConcentricRingPlacementCalculator ()Lnet/minecraft/unmapped/C_jibygqpu;
 	METHOD m_ekbkuyqx getPointOfInterestStorage ()Lnet/minecraft/unmapped/C_uegwgivt;
 	METHOD m_ekgkxdez unloadChunks (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
@@ -82,6 +87,8 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT tracking status of those entities to all players. It then checks if any player
 		COMMENT has changed chunk sections, and updates all entities tracking status to those
 		COMMENT players. This ensures all possible updates are accounted for.
+	METHOD m_gyykgymp (Lnet/minecraft/unmapped/C_hrdsvlkq;)Ljava/lang/Integer;
+		ARG 0 chunk
 	METHOD m_hadjtdih save (Lnet/minecraft/unmapped/C_lwzmmmqr;)Z
 		ARG 1 chunk
 	METHOD m_hhtefbpb isOnDistanceEdge (IIIII)Z
@@ -107,6 +114,8 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_jtcoqmih tick (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
 	METHOD m_jyhtxlyw reloadChunkGenerator ()V
+	METHOD m_jzitwqbq (Lnet/minecraft/unmapped/C_hrdsvlkq;)Ljava/lang/Integer;
+		ARG 0 chunk
 	METHOD m_lwnasrxx getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/lang/String;
 		ARG 1 chunkPos
 	METHOD m_lxukttpf dump (Ljava/io/Writer;)V
@@ -128,7 +137,12 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_nuqnfnbw getChunk (Lnet/minecraft/unmapped/C_gkderdjo;Lnet/minecraft/unmapped/C_kogtzhzt;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 holder
 		ARG 2 requiredStatus
+	METHOD m_oaspnrqg onChunkStatusChange (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_whqcauvq;)V
+		ARG 1 pos
+		ARG 2 newStatus
 	METHOD m_odmvndir getStorageName ()Ljava/lang/String;
+	METHOD m_oizpeloa (Lnet/minecraft/unmapped/C_hrdsvlkq;)Ljava/lang/Integer;
+		ARG 0 chunk
 	METHOD m_pgazppma updatePosition (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		COMMENT Updates the chunk section position of the {@code player}. This updates the player
 		COMMENT position for both entity tracking and chunk loading (watching) logic.
@@ -150,6 +164,7 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 pos
 	METHOD m_tubckkmf getLoadedChunkCount ()I
 	METHOD m_tusokupf getFutureStatus (Ljava/util/concurrent/CompletableFuture;)Ljava/lang/String;
+		ARG 0 future
 	METHOD m_uaxkqmvj doesNotGenerateChunks (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
 		ARG 1 player
 	METHOD m_uchmpocv save (Z)V
@@ -163,6 +178,8 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_vbcydxmf loadEntity (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
 	METHOD m_wczqgwje getTicketManager ()Lnet/minecraft/unmapped/C_mrjqexcd;
+	METHOD m_whtcazsu (Lnet/minecraft/unmapped/C_gkderdjo$C_mnhcarhk;)Ljava/lang/String;
+		ARG 0 unloaded
 	METHOD m_xqsmixbi tryUnloadChunk (JLnet/minecraft/unmapped/C_gkderdjo;)V
 		ARG 1 pos
 		ARG 3 holder
@@ -172,10 +189,13 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 2 distance
 	METHOD m_yizfeevy makeChunkTickable (Lnet/minecraft/unmapped/C_gkderdjo;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 holder
+	METHOD m_zpdmtizw (Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/Optional;
+		ARG 0 chunk
 	CLASS C_hwdtawcb TicketManager
 		METHOD <init> (Lnet/minecraft/unmapped/C_gxrpzacc;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)V
 			ARG 1 workerExecutor
-			ARG 2 mainThreadExecutor
+			ARG 2 workerExecutor
+			ARG 3 mainThreadExecutor
 	CLASS C_vrisxixc EntityTracker
 		COMMENT An entity tracker governs which players' clients can see an entity. Each
 		COMMENT tracker corresponds to one entity in a server world and is mapped from the

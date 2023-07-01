@@ -1,8 +1,14 @@
 CLASS net/minecraft/unmapped/C_kjxfcecs net/minecraft/server/WorldLoader
 	METHOD m_bgqlykde loadRegistryLayer (Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_bcpxdrik;Lnet/minecraft/unmapped/C_tmgtemxc;Ljava/util/List;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+		ARG 1 registryManager
+		ARG 2 registryLayer
+		ARG 3 decodingData
 	METHOD m_duxzwian (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Ljava/lang/Throwable;)V
 		ARG 2 error
 	METHOD m_gudxzsln withLoadedLayer (Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_bcpxdrik;Lnet/minecraft/unmapped/C_tmgtemxc;Ljava/util/List;)Lnet/minecraft/unmapped/C_bcpxdrik;
+		ARG 1 registryManager
+		ARG 2 registryLayer
+		ARG 3 decodingData
 	METHOD m_tsqgbbos load (Lnet/minecraft/unmapped/C_kjxfcecs$C_kculhjuh;Lnet/minecraft/unmapped/C_kjxfcecs$C_ueybpquh;Lnet/minecraft/unmapped/C_kjxfcecs$C_cknyxhnl;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 initConfig
 		ARG 1 loadContextSupplier
@@ -10,6 +16,10 @@ CLASS net/minecraft/unmapped/C_kjxfcecs net/minecraft/server/WorldLoader
 		ARG 3 prepareExecutor
 		ARG 4 applyExecutor
 	CLASS C_cknyxhnl ApplierFactory
+		METHOD create create (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Lnet/minecraft/unmapped/C_bcpxdrik;Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 3 registryManager
+			ARG 4 data
+	CLASS C_hkmknvtj DataLoadContext
 	CLASS C_ijyqofsr DataLoadOutput
 	CLASS C_kculhjuh InitConfig
 		FIELD f_gjusgdae environment Lnet/minecraft/unmapped/C_rieemtgi$C_vypaxkxj;
@@ -25,3 +35,5 @@ CLASS net/minecraft/unmapped/C_kjxfcecs net/minecraft/server/WorldLoader
 			COMMENT @return the updated data-pack settings and the resource manager
 		METHOD m_mifacpek packManager ()Lnet/minecraft/unmapped/C_dqfyacfy;
 	CLASS C_ueybpquh LoadContextSupplier
+		METHOD get get (Lnet/minecraft/unmapped/C_kjxfcecs$C_hkmknvtj;)Lnet/minecraft/unmapped/C_kjxfcecs$C_ijyqofsr;
+			ARG 1 context
