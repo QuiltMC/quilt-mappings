@@ -14,6 +14,7 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 	FIELD f_qgjzftug LOGGER Lorg/slf4j/Logger;
 	FIELD f_rbkdoznl blockEntities Ljava/util/Map;
 	FIELD f_rvokxhzu pos Lnet/minecraft/unmapped/C_ynrszrtu;
+	FIELD f_tvmxdtur skyLightSources Lnet/minecraft/unmapped/C_molcobnw;
 	FIELD f_tzjcpbqq EMPTY_STRUCTURE_REFERENCES Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_uubjectd structureReferences Ljava/util/Map;
 	FIELD f_vjmuaqdt lightCorrect Z
@@ -41,6 +42,7 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 1 type
 		ARG 2 x
 		ARG 3 z
+	METHOD m_edeniyps getHighestChunkStatus ()Lnet/minecraft/unmapped/C_kogtzhzt;
 	METHOD m_ekgzezwt setCarverBiomeIfAbsent (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_qbjpvmph;
 		ARG 1 biomeFactory
 	METHOD m_eoqbertz getPostProcessingLists ()[Lit/unimi/dsi/fastutil/shorts/ShortList;
@@ -59,6 +61,11 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 1 needsSaving
 	METHOD m_jnwohgqe getHeightLimitView ()Lnet/minecraft/unmapped/C_qpninoyb;
 	METHOD m_lbczmzpt getBlockEntityPositions ()Ljava/util/Set;
+	METHOD m_mfgzazfz forEachMatch (Ljava/util/function/Predicate;Ljava/util/function/BiConsumer;)V
+		ARG 1 predicate
+		ARG 2 consumer
+	METHOD m_mjwvwhyy (Lnet/minecraft/unmapped/C_quklzgtb;)Lit/unimi/dsi/fastutil/longs/LongSet;
+		ARG 0 key
 	METHOD m_ntljehgr getOrCreateChunkNoiseSampler (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_rvjywqnu;
 		ARG 1 noiseSamplerCreator
 	METHOD m_oeshvinu getPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
@@ -112,6 +119,7 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 1 heightmapType
 	METHOD m_xkejgfig getHeightmaps ()Ljava/util/Collection;
 	METHOD m_xwsabvci getFluidTickScheduler ()Lnet/minecraft/unmapped/C_ncwmpyyu;
+	METHOD m_ymukudgt fillSkyLightSources ()V
 	METHOD m_yrcpifpe setLightCorrect (Z)V
 		ARG 1 lightCorrect
 	METHOD m_yuipgvpr getInhabitedTime ()J

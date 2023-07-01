@@ -1,11 +1,17 @@
 CLASS net/minecraft/unmapped/C_roraysyx net/minecraft/world/dimension/AreaHelper
+	FIELD f_abcqscxw MAX_SAFE_ENTITY_XY F
 	FIELD f_axvqzzis width I
+	FIELD f_hhtarqlp MAX_VERTICAL_TRAVEL_DELTA D
+	FIELD f_idqfohso MAX_HEIGHT I
 	FIELD f_jjtwimrs world Lnet/minecraft/unmapped/C_vdvbsyle;
 	FIELD f_jrndrlow lowerCorner Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_nwethuet axis Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
+	FIELD f_rmlfmqaw MIN_WIDTH I
 	FIELD f_sxkghobs foundPortalBlocks I
 	FIELD f_ujvdvssv height I
+	FIELD f_yjpwcxth MAX_WIDTH I
 	FIELD f_ystwyyzs IS_VALID_FRAME_BLOCK Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+	FIELD f_zcaohfhf MIN_HEIGHT I
 	FIELD f_zvtnohue negativeDir Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD <init> (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)V
 		ARG 1 world
@@ -14,13 +20,18 @@ CLASS net/minecraft/unmapped/C_roraysyx net/minecraft/world/dimension/AreaHelper
 	METHOD m_ahtuozfx getOrEmpty (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Ljava/util/Optional;
 		ARG 0 world
 		ARG 1 pos
+		ARG 2 predicate
 		ARG 3 axis
+	METHOD m_beqllhzk hasTopFrame (Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;I)Z
+		ARG 2 height
 	METHOD m_cirawvkj createPortal ()V
 	METHOD m_fqfqbwyi getNewPortal (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Ljava/util/Optional;
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 axis
-	METHOD m_jbhuyvuh (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sszpscpo;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_fqjhrxgm getPotentialHeight (Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)I
+	METHOD m_jbhuyvuh findOpenPosition (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sszpscpo;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 0 fallback
 		ARG 2 entity
 		ARG 3 dimensions
 	METHOD m_kxfqgler getNetherTeleportTarget (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_wauhtoaq$C_tqypnjit;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;FF)Lnet/minecraft/unmapped/C_iicnuxxd;
@@ -53,5 +64,9 @@ CLASS net/minecraft/unmapped/C_roraysyx net/minecraft/world/dimension/AreaHelper
 		ARG 2 entityPos
 		ARG 3 entityDimensions
 	METHOD m_wkxzsnxo getWidth ()I
+	METHOD m_wnxyoptt (DLnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 2 pos
+	METHOD m_xqpbepjy (Lnet/minecraft/unmapped/C_roraysyx;)Z
+		ARG 0 helper
 	METHOD m_zanwjosv getHeight ()I
 	METHOD m_zogcrlny wasAlreadyValid ()Z
