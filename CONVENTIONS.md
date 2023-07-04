@@ -58,7 +58,9 @@ Abbreviations you shouldn't use are:
 ## Packages
 
 Package names should always be singular to respect Java conventions. Try to respect the Mojang package structure to avoid
-visibility problems in the future.
+visibility problems in the future. For multiple-word packages, attempt to set up a structure where the words can be separated
+into two packages: for example, recipe book related classes are in `recipe.book`. If this isn't possible, use underscores to separate,
+as used in `feature_flag`.
 
 ## Consistency
 
