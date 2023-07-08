@@ -39,16 +39,21 @@ jobs:
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
       # Javadoc publishing
-      - uses: actions/checkout@v3
+      - name: Install Git
+        run: |
+          apt-get update && apt-get install -y git
+          git --version
+      - name: Clone gh-pages branch
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: 'gh-pages'
           path: 'gh-pages'
-      - run: |
+      - name: Push javadocs to gh-pages
+        run: |
           rm -rf ./gh-pages/${GITHUB_REF##*/}/
           mv ./build/docs/javadoc ./gh-pages/${GITHUB_REF##*/}/
           cd gh-pages
-          apt-get update && apt-get install -y git
           git add .
           git config user.name "Github Actions"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
