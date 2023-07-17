@@ -52,7 +52,7 @@ please see the guide in [CONTRIBUTING.md](CONTRIBUTING.md#guide-pull-requests)!
 QM has a set of helpful Gradle tasks to make mapping easier, including:
 
 ### `mappings`
-Setup and download and launch the latest version of [Enigma](https://github.com/QuiltMC/Enigma) automatically configured to use the merged jar and the mappings.
+Setup, download, and launch the latest version of [Enigma](https://github.com/QuiltMC/Enigma) automatically configured to use the merged jar and the mappings.
 
 Compared to launching Enigma externally, the gradle task adds a name guesser plugin that automatically maps enums and a few constant field names.
 
