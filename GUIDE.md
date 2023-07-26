@@ -3,7 +3,7 @@
 ## Starting up
 
 After running a mappings task (either `mappings` or `mappingsUnpicked` via Gradle), you'll be greeted with this imposing Swing GUI:
-![an image of enigma's main window, devoid of life. the "deobfuscated classes", "obfuscated classes", and "structure" dockers are open on the sides, and nothing is displayed in the centre of the screen.](https://github.com/ix0rai/quilt-mappings/assets/66223394/fc569c2c-7b6e-4d22-9199-dd9b52afd8ca)
+![An image of enigma's main window, devoid of life. The "deobfuscated classes", "obfuscated classes", and "structure" dockers are open on the sides, and nothing is displayed in the centre of the screen.](https://github.com/ix0rai/quilt-mappings/assets/66223394/fc569c2c-7b6e-4d22-9199-dd9b52afd8ca)
 
 The first thing you want to draw your attention to is the left of the screen, where you'll find the "Obfuscated Classes" and "Deobfuscated Classes" dockers.
 Obfuscated Classes will contain classes where the top-level name remains unmapped, and "Deobfuscated Classes" the mapped ones.
@@ -11,9 +11,9 @@ Alternatively, you can use the merged "Classes" docker to view all classes at on
 Dockers can be resized and their titles dragged around so you can find the best setup for you!
 
 All three dockers on the left serve the same purpose: showing you the classes in the project, just like you'd see in your IDE.
-Each class has a little icon to show how well-mapped it is: a green check for done, a yellow dot for in progress, and a red x for untouched.
+Each class has a little icon to show how completely it's mapped: a green check for done, a yellow dot for in progress, and a red x for untouched.
 Double-click on packages and classes to open them. You can also right-click to see a context menu with some shortcuts to help you map faster!
-When you open a class, it will be decompiled and the source code shown in the main view in the centre.
+When you open a class, it will be decompiled and the source code shown in the main view in the center.
 You'll immediately notice a couple things:
 1. Some names, or *tokens*, are highlighted in red, green, or grey. Red means a name isn't mapped, green means it *is* mapped, and grey means it's been
    automatically mapped by our [enigma plugin](https://github.com/QuiltMC/quilt-enigma-plugin). Don't be afraid of editing green or grey names,
@@ -25,7 +25,7 @@ You'll immediately notice a couple things:
 
 The process of naming boils down to four steps:
 1. Read the relevant code. The first step in coming up with a name should always be reading and brainstorming your own names.
-   For every type of token, you can use the "show calls" tool on right-click to find usages if you're lacking in code to assess.
+   For every type of token, you can use the "show calls" tool in the right-click menu to find usages if you're lacking in code to assess.
 2. Reread some code! Taking a look at the code with your name applied will help you get a good idea of the quality of your name.
 3. Cross-reference your name. QM mappers have access to Yarn and Mojmap to compare their names against, using tools like [Linkie](https://linkie.shedaniel.me/mappings)
    and [WagYourTail's mapping viewer](https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App). If any other name contradicts yours, triple-check your name to make
@@ -43,7 +43,7 @@ Use `ctrl + f` to find what you're looking for, and reference the Mojang name si
 
 Class names should come with plenty of deliberation, given that they're the most visible of all.
 Make sure to use the "show inheritance" and "show implementations" tools on right-click to make sure the name you're choosing isn't too granular.
-When considering package, either use an existing one or try to ensure there are 3+ classes that fit the name when creating a new package.
+When considering which package to put a class in, either use an existing one or try to ensure there are 3+ classes that fit the name when creating a new package.
 
 ### Tips: naming methods
 
