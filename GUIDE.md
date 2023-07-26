@@ -53,7 +53,8 @@ Assume that the user knows the return type and the parameters when coming up wit
 
 ### Tips: naming parameters
 
-Parameters can be tough to name, since Mojmap doesn't ship their names for us to reference. Be wary of differences between Yarn and QM making their name incompatible.
+Parameters can be tough to name, since Mojmap doesn't ship their names for us to reference. Be wary of differences between Yarn and QM making their name incompatible:
+if Yarn has a different name for the parameter's class, you can't be inspired by that name and must come up with your own.
 Be sure to look at every reference in its method to make sure you understand it!
 
 ## Docker Guide
