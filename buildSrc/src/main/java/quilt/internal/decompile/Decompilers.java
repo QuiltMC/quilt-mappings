@@ -1,11 +1,11 @@
 package quilt.internal.decompile;
 
 import quilt.internal.decompile.cfr.CfrDecompiler;
-import quilt.internal.decompile.quiltflower.QuiltflowerDecompiler;
+import quilt.internal.decompile.vineflower.VineflowerDecompiler;
 
 public enum Decompilers {
     CFR(CfrDecompiler::new),
-    QUILTFLOWER(QuiltflowerDecompiler::new);
+    VINEFLOWER(VineflowerDecompiler::new);
 
     private final DecompilerProvider provider;
 

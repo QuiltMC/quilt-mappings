@@ -1,17 +1,16 @@
-package quilt.internal.decompile.quiltflower;
+package quilt.internal.decompile.vineflower;
 
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.jar.Manifest;
 
-public class QuiltflowerResultSaver implements IResultSaver {
+public class VineflowerResultSaver implements IResultSaver {
     private final Path outputPath;
 
-    public QuiltflowerResultSaver(Path outputPath) {
+    public VineflowerResultSaver(Path outputPath) {
         this.outputPath = outputPath;
     }
 

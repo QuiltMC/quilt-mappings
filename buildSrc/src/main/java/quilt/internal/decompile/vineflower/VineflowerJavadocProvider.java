@@ -1,4 +1,4 @@
-package quilt.internal.decompile.quiltflower;
+package quilt.internal.decompile.vineflower;
 
 import net.fabricmc.fernflower.api.IFabricJavadocProvider;
 import org.jetbrains.java.decompiler.struct.StructClass;
@@ -8,12 +8,12 @@ import quilt.internal.decompile.javadoc.ClassJavadocProvider;
 import quilt.internal.decompile.javadoc.FieldJavadocProvider;
 import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 
-public class QuiltflowerJavadocProvider implements IFabricJavadocProvider {
+public class VineflowerJavadocProvider implements IFabricJavadocProvider {
     private final ClassJavadocProvider classJavadocProvider;
     private final FieldJavadocProvider fieldJavadocProvider;
     private final MethodJavadocProvider methodJavadocProvider;
 
-    public QuiltflowerJavadocProvider(ClassJavadocProvider classJavadocProvider, FieldJavadocProvider fieldJavadocProvider, MethodJavadocProvider methodJavadocProvider) {
+    public VineflowerJavadocProvider(ClassJavadocProvider classJavadocProvider, FieldJavadocProvider fieldJavadocProvider, MethodJavadocProvider methodJavadocProvider) {
         this.classJavadocProvider = classJavadocProvider != null ? classJavadocProvider : ClassJavadocProvider.EMPTY;
         this.fieldJavadocProvider = fieldJavadocProvider != null ? fieldJavadocProvider : FieldJavadocProvider.EMPTY;
         this.methodJavadocProvider = methodJavadocProvider != null ? methodJavadocProvider : MethodJavadocProvider.EMPTY;

@@ -61,6 +61,10 @@ repositories {
 		name "Quilt Snapshot Repository"
 		url "https://maven.quiltmc.org/repository/snapshot"
 	}
+	maven {
+		// Vineflower snapshots
+		url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+	}
 	mavenLocal()
 }
 
@@ -245,7 +249,7 @@ def fakeSourceDir = file(".gradle/temp/fakeSource")
 task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode]) {
 	input = eraseBytecode.output.asFile.get()
 	output = fakeSourceDir
-	decompiler = Decompilers.QUILTFLOWER
+	decompiler = Decompilers.VINEFLOWER
 	libraries = files(mappings.fileConstants.libraries)
 	decompilerOptions = [
 			"rsy": "1", // remove synthetics
@@ -280,10 +284,10 @@ task decompileCFR(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	}
 }
 
-task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
+task decompileVineflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	input.set mappings.fileConstants.namedJar
 	output.set file("namedSrc")
-	decompiler = Decompilers.QUILTFLOWER
+	decompiler = Decompilers.VINEFLOWER
 	libraries = configurations.decompileClasspath
 
 	doFirst {
@@ -320,10 +324,10 @@ task unpickTargetJar(type: UnpickJarTask) {
 	}
 }
 
-task decompileTargetQuiltflower(type: DecompileTask, dependsOn: [remapTargetMinecraftJar]) {
+task decompileTargetVineflower(type: DecompileTask, dependsOn: [remapTargetMinecraftJar]) {
 	input.set remapTargetMinecraftJar.outputJar
 	output.set file("namedTargetSrc")
-	decompiler = Decompilers.QUILTFLOWER
+	decompiler = Decompilers.VINEFLOWER
 	libraries = configurations.decompileClasspath
 
 	doFirst {
