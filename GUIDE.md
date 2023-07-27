@@ -36,7 +36,7 @@ The process of naming boils down to four steps:
 ### Tips: naming fields
 
 With fields, "show calls" is your best friend. You'll want to run through many of these before finalising your decision.
-Constants will often appear to have no usages, which is misleading: the compilation has inlined its value instead of using a reference.
+Constants (`static final` fields)  will often appear to have no usages, which is misleading: the compilation has inlined its value instead of using a reference.
 Use `ctrl + f` to find what you're looking for, and reference the Mojang name since Yarn will often fail to map these.
 
 ### Tips: naming classes
@@ -99,7 +99,7 @@ The entries in the tree can be double-clicked to navigate to them.
 
 ### Calls
 
-Similarly to the Inheritance docker, the Calls docker shows a tree of found calls when you use the "show calls" tool.
+Similarly to the Inheritance docker, the Calls docker shows a tree of found calls when you use the "show calls" tool. Methods with more than a single call within the same caller method will show a list of the lines where they are, in a panel just below the main calls list
 The entries in the tree can be double-clicked to navigate to them.
 
 ### Implementations
