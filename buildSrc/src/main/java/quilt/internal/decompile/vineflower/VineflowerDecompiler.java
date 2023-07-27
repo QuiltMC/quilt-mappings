@@ -4,7 +4,6 @@ import net.fabricmc.fernflower.api.IFabricJavadocProvider;
 import org.gradle.api.Project;
 import org.gradle.api.logging.LogLevel;
 import org.jetbrains.java.decompiler.main.decompiler.BaseDecompiler;
-import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
@@ -14,17 +13,11 @@ import quilt.internal.decompile.javadoc.FieldJavadocProvider;
 import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
-public class VineflowerDecompiler extends AbstractDecompiler implements IBytecodeProvider {
+public class VineflowerDecompiler extends AbstractDecompiler {
     private IFabricJavadocProvider javadocProvider;
     private ClassJavadocProvider classJavadocProvider;
     private FieldJavadocProvider fieldJavadocProvider;
@@ -54,7 +47,7 @@ public class VineflowerDecompiler extends AbstractDecompiler implements IBytecod
 
         IResultSaver resultSaver = new VineflowerResultSaver(outputPath);
 
-        BaseDecompiler decompiler = new BaseDecompiler(this, resultSaver, options, new LoggerImpl());
+        BaseDecompiler decompiler = new BaseDecompiler(resultSaver, options, new LoggerImpl());
 
         decompiler.addSource(file);
         for (File library : libraries) {
@@ -62,27 +55,6 @@ public class VineflowerDecompiler extends AbstractDecompiler implements IBytecod
         }
 
         decompiler.decompileContext();
-    }
-
-    @Override
-    public byte[] getBytecode(String externalPath, String internalPath) throws IOException {
-        File file = new File(externalPath);
-        if (internalPath == null) {
-            try (InputStream stream = new FileInputStream(file)) {
-                return stream.readAllBytes();
-            }
-        } else {
-            try (ZipFile zipFile = new ZipFile(file)) {
-                ZipEntry entry = zipFile.getEntry(internalPath);
-                if (entry == null) {
-                    throw new FileNotFoundException("Entry " + internalPath + " not found in " + file);
-                }
-
-                try (InputStream stream = zipFile.getInputStream(entry)) {
-                    return stream.readAllBytes();
-                }
-            }
-        }
     }
 
     private boolean hasMemberJavadocProvider() {
