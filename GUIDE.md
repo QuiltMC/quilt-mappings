@@ -43,7 +43,7 @@ Use `ctrl + f` to find what you're looking for, and reference the Mojang name si
 
 Class names should come with plenty of deliberation, given that they're the most visible of all.
 Make sure to use the "show inheritance" and "show implementations" tools on right-click to make sure the name you're choosing is appropriately broad or narrow.
-To quote the example from the [conventions](CONVENTIONS.md), if a block class is only used to disable spawning, but has only one usage and no inheritors, it shouldn't be named `NoSpawningBlock`, it should be named after its usage: `BedrockBlock`.
+To use the example from the [conventions](CONVENTIONS.md), if a block class is only used to disable spawning, but has only one usage and no inheritors, it shouldn't be named `NoSpawningBlock`, it should be named after its usage: `BedrockBlock`.
 When considering which package to put a class in, either use an existing one or try to ensure there are 3+ classes that fit the name when creating a new package.
 
 ### Tips: naming methods
