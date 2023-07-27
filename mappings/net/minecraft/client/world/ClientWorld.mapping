@@ -20,6 +20,7 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 	FIELD f_vwrlovng entityManager Lnet/minecraft/unmapped/C_xuynuyjo;
 	FIELD f_wzsnmiyr entityList Lnet/minecraft/unmapped/C_rtdymhtu;
 	FIELD f_xsrdqdyy worldRenderer Lnet/minecraft/unmapped/C_sfkkabhx;
+	FIELD f_ycswtnpc blockPredictionManager Lnet/minecraft/unmapped/C_czisrdmd;
 	METHOD <init> (Lnet/minecraft/unmapped/C_nuofrxvi;Lnet/minecraft/unmapped/C_ghdnlrrw$C_nwouoiiq;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_cjzoxshv;IILjava/util/function/Supplier;Lnet/minecraft/unmapped/C_sfkkabhx;ZJ)V
 		ARG 1 netHandler
 		ARG 2 clientWorldProperties
@@ -36,6 +37,8 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 	METHOD m_alvumyoa getSkyColor (Lnet/minecraft/unmapped/C_vgpupfxx;F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 cameraPosition
 		ARG 2 tickDelta
+	METHOD m_blplldfx syncBlockState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 3 playerPos
 	METHOD m_bmqpmbrd (Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 1 pos
 	METHOD m_btpmymzu getSkyProperties ()Lnet/minecraft/unmapped/C_bxlqmlyr;
@@ -57,10 +60,13 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 		ARG 10 pitch
 		ARG 11 delay
 		ARG 12 seed
+	METHOD m_emdmfdsn overrideMapState (Ljava/lang/String;Lnet/minecraft/unmapped/C_nvpllgmg;)V
+		ARG 1 id
+		ARG 2 state
 	METHOD m_fbbmqzbb tickEntities ()V
 	METHOD m_fsnivgsu (Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 1 pos
-	METHOD m_ftefeyzd (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;I)V
+	METHOD m_ftefeyzd setVerifiedBlockState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;I)V
 		ARG 3 flags
 	METHOD m_futjdoxn getStarBrightness (F)F
 		ARG 1 tickDelta
@@ -78,6 +84,7 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 		ARG 1 chunk
 	METHOD m_iesewwfc calculateColor (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_qodopjcw;)I
 		ARG 1 pos
+		ARG 2 provider
 	METHOD m_jijellmt setSpawnPos (Lnet/minecraft/unmapped/C_hynzadkk;F)V
 		ARG 1 pos
 		ARG 2 angle
@@ -95,7 +102,9 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 	METHOD m_kokxxpdc setSimulationDistance (I)V
 		ARG 1 simulationDistance
 	METHOD m_kutvaluc tickTime ()V
+	METHOD m_lvsrwztn getBlockPredictionManager ()Lnet/minecraft/unmapped/C_czisrdmd;
 	METHOD m_nsvkfxjo onBlockChangeAcknowledgement (I)V
+		ARG 1 sequence
 	METHOD m_ofmlapxi (Lit/unimi/dsi/fastutil/objects/Object2ObjectArrayMap;)V
 		ARG 1 map
 	METHOD m_ondfgyqt getMapStates ()Ljava/util/Map;
@@ -106,6 +115,7 @@ CLASS net/minecraft/unmapped/C_ghdnlrrw net/minecraft/client/world/ClientWorld
 		ARG 1 pos
 		ARG 2 state
 		ARG 3 parameters
+		ARG 4 solidBelow
 	METHOD m_rfjxxibf setTimeOfDay (J)V
 		ARG 1 timeOfDay
 	METHOD m_rplgnmem tickPassenger (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)V
