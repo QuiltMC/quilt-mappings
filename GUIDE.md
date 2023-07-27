@@ -31,7 +31,7 @@ The process of naming boils down to four steps:
    and [WagYourTail's mapping viewer](https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App). If any other name contradicts yours, triple-check your name to make
    sure you haven't made a mistake! After checking the other names, hybridize, copy, or keep your original name to find the best possible option.
 4. Consider Javadoc. If your name is unclear, and you can't improve it without making it too wordy, throw in some Javadoc to make sure modders know
-   what they're looking at.
+   what they're looking at. You can add Javadoc to an entry via the right-click menu. Make sure to read the [Javadoc conventions](CONVENTIONS.md#javadocs)!
 
 ### Tips: naming fields
 
@@ -99,7 +99,8 @@ The entries in the tree can be double-clicked to navigate to them.
 
 ### Calls
 
-Similarly to the Inheritance docker, the Calls docker shows a tree of found calls when you use the "show calls" tool. Methods with more than a single call within the same caller method will show a list of the lines where they are, in a panel just below the main calls list
+Similarly to the Inheritance docker, the Calls docker shows a tree of found calls when you use the "show calls" tool.
+Methods with more than a single call within the same caller method will show a list of the lines where they're present, in a panel just below the main calls list.
 The entries in the tree can be double-clicked to navigate to them.
 
 ### Implementations
@@ -143,3 +144,8 @@ that don't come with an assignment by default, so be sure to explore!
 
 Enigma supports customising its theme, with a few built-in options. Yes, this includes a dark mode.
 You can change the theme in the menu bar, under `Theme`.
+
+## Found a bug?
+
+Enigma in its current state is a famously broken piece of software, and we're working hard to fix it!
+If you find the slightest bug or have an idea to improve it, please submit it on [our issue tracker](https://github.com/quiltmc/enigma/issues).
