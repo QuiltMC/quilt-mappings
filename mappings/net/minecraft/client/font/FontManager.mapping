@@ -6,16 +6,42 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 	FIELD f_dnbpmges textureManager Lnet/minecraft/unmapped/C_rglkduer;
 	FIELD f_gzybknod fontStorages Ljava/util/Map;
 	FIELD f_lytdbewf MISSING_STORAGE_ID Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_odfjvvnp GSON Lcom/google/gson/Gson;
 	FIELD f_rezugjcx NAMESPACE Lnet/minecraft/unmapped/C_iiomeaxy;
+	FIELD f_rrluaiwx fonts Ljava/util/List;
 	METHOD <init> (Lnet/minecraft/unmapped/C_rglkduer;)V
 		ARG 1 manager
 	METHOD close close ()V
+	METHOD m_aoinyakl (Ljava/util/List;I)V
+		ARG 1 glyph
+	METHOD m_datmnrhc (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/List;)V
+		ARG 1 id
+		ARG 2 fonts
+	METHOD m_ehgvydfj load (Lnet/minecraft/unmapped/C_hoztwset$C_ekydylip;Lnet/minecraft/unmapped/C_gxohhscv$C_dbnueaxr;Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 key
+		ARG 2 loader
+		ARG 4 executor
 	METHOD m_fusljlhu (Lnet/minecraft/unmapped/C_zhhoxunt;)V
 		ARG 0 fontStorage
 	METHOD m_gbjzgnfa createTextRenderer ()Lnet/minecraft/unmapped/C_mavozmpp;
 		COMMENT Creates a new text renderer devoid of any constraint.
 		COMMENT
 		COMMENT @see #createAntiFishyTextRenderer
+	METHOD m_gcwiodjn (Lnet/minecraft/unmapped/C_vnjbukpx;Lnet/minecraft/unmapped/C_hoztwset$C_afyppwxt;)V
+		ARG 1 entry
+	METHOD m_hytsphos (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zhhoxunt;
+		ARG 1 id
+	METHOD m_irffyusm prepare (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+		ARG 2 executor
+	METHOD m_kzlvxpfw (Ljava/util/Map;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_hoztwset$C_afyppwxt;)V
+		ARG 1 id
+		ARG 2 entry
+	METHOD m_mtaxmodw (Lnet/minecraft/unmapped/C_eslcbfsq;Lnet/minecraft/unmapped/C_hoztwset$C_mlohqlpb;)V
+		ARG 2 preparation
+	METHOD m_ryfntqre reload (Lnet/minecraft/unmapped/C_hoztwset$C_mlohqlpb;Lnet/minecraft/unmapped/C_eslcbfsq;)V
+		ARG 1 preparation
+	METHOD m_twzaekdz (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zhhoxunt;
+		ARG 1 id
 	METHOD m_ufulkvsb createAntiFishyTextRenderer ()Lnet/minecraft/unmapped/C_mavozmpp;
 		COMMENT Creates an anti-malicious text renderer.
 		COMMENT <p>
@@ -26,5 +52,41 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 		COMMENT or having an advance greater than {@value net.minecraft.client.font.FontStorage#MAX_GLYPH_ADVANCE}.
 		COMMENT
 		COMMENT @see #createTextRenderer
+	METHOD m_vpphzugm finalizeProviderLoading (Ljava/util/List;Lnet/minecraft/unmapped/C_wywmjnuh;)V
+		ARG 1 fonts
+		ARG 2 font
+	METHOD m_wgtqzrby resolveProviders (Ljava/util/List;)Ljava/util/Map;
+		ARG 1 entries
 	METHOD m_xzzwhxig setIdOverrides (Ljava/util/Map;)V
 		ARG 1 overrides
+	METHOD m_zexdlryp loadFontProviders (Ljava/util/List;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/List;
+		ARG 0 fontResources
+		ARG 1 id
+	METHOD m_zxykceaj getIdOverride (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 id
+	CLASS C_afyppwxt FontEntry
+		METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;)V
+			ARG 1 id
+		METHOD m_cbexdogi resolve (Ljava/util/function/Function;)Ljava/util/Optional;
+			ARG 1 fontLoader
+		METHOD m_fpjthprs addReferenceBuilder (Lnet/minecraft/unmapped/C_hoztwset$C_ekydylip;Lnet/minecraft/unmapped/C_gxohhscv$C_wxrtqmdn;)V
+			ARG 1 key
+			ARG 2 reference
+		METHOD m_jxdpreyk addBuilder (Lnet/minecraft/unmapped/C_hoztwset$C_ekydylip;Ljava/util/concurrent/CompletableFuture;)V
+			ARG 1 key
+			ARG 2 future
+		METHOD m_psbwrwxw listBuilders ()Ljava/util/stream/Stream;
+		METHOD m_uzcfawvk (Lnet/minecraft/unmapped/C_hoztwset$C_chqbefoa;)Ljava/util/stream/Stream;
+			ARG 0 builder
+	CLASS C_chqbefoa Builder
+		METHOD m_rkqzylpa (Ljava/util/concurrent/CompletableFuture;)Ljava/util/Optional;
+			ARG 0 future
+		METHOD m_wtgjetaw build (Ljava/util/function/Function;)Ljava/util/Optional;
+			ARG 1 fontLoader
+		METHOD m_ziwbpczu (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
+			ARG 2 id
+	CLASS C_ekydylip FontKey
+	CLASS C_mlohqlpb Preparation
+	CLASS C_zszljruf FontDefinitionFile
+		METHOD m_clkznvnc (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance

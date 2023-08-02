@@ -1,0 +1,101 @@
+CLASS net/minecraft/unmapped/C_pxvlatlk net/minecraft/client/font/UnihexFont
+	FIELD f_aalvfiji DIGITS_FOR_WIDTH_32 I
+	FIELD f_cqmbuvtj DIGITS_FOR_WIDTH_8 I
+	FIELD f_czsxfznt GLYPH_HEIGHT I
+	FIELD f_eszhmjva DIGITS_PER_BYTE I
+	FIELD f_hrdwqdrl glyphs Lnet/minecraft/unmapped/C_srmdcrvq;
+	FIELD f_otnzlhrf DIGITS_FOR_WIDTH_24 I
+	FIELD f_zhiacafe DIGITS_FOR_WIDTH_16 I
+	METHOD m_bdigcfxw unpackBitsToBytes (Ljava/nio/IntBuffer;III)V
+		ARG 0 output
+		ARG 1 line
+		ARG 2 left
+		ARG 3 right
+	METHOD m_gqunmkkl copyUntil (Ljava/io/InputStream;Lit/unimi/dsi/fastutil/bytes/ByteList;I)Z
+		ARG 0 stream
+		ARG 1 output
+		ARG 2 delimiter
+	METHOD m_mdzxdhkk decodeHex (IB)I
+		ARG 0 lineNumber
+		ARG 1 digit
+	METHOD m_ollbempd readLines (Ljava/io/InputStream;Lnet/minecraft/unmapped/C_pxvlatlk$C_tdeseime;)V
+		ARG 0 stream
+		ARG 1 consumer
+	METHOD m_wzzwopjk unpackBitsToBytes (Ljava/nio/IntBuffer;Lnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;II)V
+		ARG 0 output
+		ARG 1 lineData
+		ARG 2 left
+		ARG 3 right
+	METHOD m_xumypovg decodeHex (ILit/unimi/dsi/fastutil/bytes/ByteList;I)I
+		ARG 0 lineNumber
+		ARG 1 bytes
+		ARG 2 index
+	CLASS C_dcaezoqw IntContents
+		FIELD f_egqbbhxt SIZE_24 I
+		METHOD m_aqeaupjj read32x16 (ILit/unimi/dsi/fastutil/bytes/ByteList;)Lnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;
+			ARG 0 lineNumber
+			ARG 1 data
+		METHOD m_yftnclcv read24x16 (ILit/unimi/dsi/fastutil/bytes/ByteList;)Lnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;
+			ARG 0 lineNumber
+			ARG 1 data
+	CLASS C_fjpswemy ByteContents
+		METHOD m_xvcyduwi read (ILit/unimi/dsi/fastutil/bytes/ByteList;)Lnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;
+			ARG 0 lineNumber
+			ARG 1 data
+	CLASS C_givhcivd Dimensions
+		FIELD f_rfzwpiij MAP_CODEC Lcom/mojang/serialization/MapCodec;
+		METHOD m_aagcmklf (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_ckkutckn pack (II)I
+			ARG 0 left
+			ARG 1 right
+		METHOD m_gcvdrtys getRight (I)I
+			ARG 0 packed
+		METHOD m_srrpgtqw packedValue ()I
+		METHOD m_ykgucezt getLeft (I)I
+			ARG 0 packed
+	CLASS C_hhizqudo Glyph
+		METHOD m_psevlejb width ()I
+	CLASS C_mxikwcxh Definition
+		FIELD f_muggwgfw MAP_CODEC Lcom/mojang/serialization/MapCodec;
+		METHOD m_detgkhox load (Lnet/minecraft/unmapped/C_tmnrpasf;)Lnet/minecraft/unmapped/C_wywmjnuh;
+		METHOD m_kgktjaih loadData (Ljava/io/InputStream;)Lnet/minecraft/unmapped/C_pxvlatlk;
+			ARG 1 stream
+		METHOD m_ngwujfax (I)[Lnet/minecraft/unmapped/C_pxvlatlk$C_hhizqudo;
+			ARG 0 i
+		METHOD m_odzbjufz (I)[[Lnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;
+			ARG 0 i
+		METHOD m_qzcfipuv (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_surhmsmk (Lnet/minecraft/unmapped/C_srmdcrvq;ILnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;)V
+			ARG 1 codePoint
+			ARG 2 lineData
+		METHOD m_vcwuajjw (I)[Lnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;
+			ARG 0 i
+		METHOD m_xbvnjmix (I)[[Lnet/minecraft/unmapped/C_pxvlatlk$C_hhizqudo;
+			ARG 0 i
+		METHOD m_xnctlslv (Lnet/minecraft/unmapped/C_pxvlatlk$C_mxikwcxh;)Lnet/minecraft/unmapped/C_ncpywfca;
+			ARG 0 definition
+		METHOD m_zctahmxs (Lnet/minecraft/unmapped/C_pxvlatlk$C_mxikwcxh;)Ljava/util/List;
+			ARG 0 definition
+	CLASS C_ocwafeua LineData
+		METHOD m_czfvbxoj calculateWidth ()I
+		METHOD m_gffmxonk mask ()I
+		METHOD m_krkuxzli bitWidth ()I
+		METHOD m_zrlfanmm line (I)I
+			ARG 1 y
+	CLASS C_riuqarqu ShortContents
+		METHOD m_rjvnbzuu read (ILit/unimi/dsi/fastutil/bytes/ByteList;)Lnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;
+			ARG 0 lineNumber
+			ARG 1 data
+	CLASS C_ssqqjezl DimensionOverride
+		FIELD f_lsurehab CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_lzodltcs RAW_CODEC Lcom/mojang/serialization/Codec;
+		METHOD m_krrssuam (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
+		METHOD m_rtpjzfjf (Lnet/minecraft/unmapped/C_pxvlatlk$C_ssqqjezl;)Lcom/mojang/serialization/DataResult;
+			ARG 0 override
+	CLASS C_tdeseime LineDataConsumer
+		METHOD accept (ILnet/minecraft/unmapped/C_pxvlatlk$C_ocwafeua;)V
+			ARG 1 codePoint
+			ARG 2 data
