@@ -1,10 +1,9 @@
-package quilt.internal.decompile.quiltflower;
+package quilt.internal.decompile.vineflower;
 
 import net.fabricmc.fernflower.api.IFabricJavadocProvider;
 import org.gradle.api.Project;
 import org.gradle.api.logging.LogLevel;
 import org.jetbrains.java.decompiler.main.decompiler.BaseDecompiler;
-import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
@@ -14,23 +13,17 @@ import quilt.internal.decompile.javadoc.FieldJavadocProvider;
 import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
-public class QuiltflowerDecompiler extends AbstractDecompiler implements IBytecodeProvider {
+public class VineflowerDecompiler extends AbstractDecompiler {
     private IFabricJavadocProvider javadocProvider;
     private ClassJavadocProvider classJavadocProvider;
     private FieldJavadocProvider fieldJavadocProvider;
     private MethodJavadocProvider methodJavadocProvider;
 
-    public QuiltflowerDecompiler(Project project) {
+    public VineflowerDecompiler(Project project) {
         super(project);
     }
 
@@ -45,16 +38,16 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
         if (this.javadocProvider != null) {
             javadocProvider = this.javadocProvider;
         } else if (hasMemberJavadocProvider()) {
-            javadocProvider = new QuiltflowerJavadocProvider(this.classJavadocProvider, this.fieldJavadocProvider, this.methodJavadocProvider);
+            javadocProvider = new VineflowerJavadocProvider(this.classJavadocProvider, this.fieldJavadocProvider, this.methodJavadocProvider);
         }
 
         if (javadocProvider != null) {
             options.put(IFabricJavadocProvider.PROPERTY_NAME, javadocProvider);
         }
 
-        IResultSaver resultSaver = new QuiltflowerResultSaver(outputPath);
+        IResultSaver resultSaver = new VineflowerResultSaver(outputPath);
 
-        BaseDecompiler decompiler = new BaseDecompiler(this, resultSaver, options, new LoggerImpl());
+        BaseDecompiler decompiler = new BaseDecompiler(resultSaver, options, new LoggerImpl());
 
         decompiler.addSource(file);
         for (File library : libraries) {
@@ -62,27 +55,6 @@ public class QuiltflowerDecompiler extends AbstractDecompiler implements IByteco
         }
 
         decompiler.decompileContext();
-    }
-
-    @Override
-    public byte[] getBytecode(String externalPath, String internalPath) throws IOException {
-        File file = new File(externalPath);
-        if (internalPath == null) {
-            try (InputStream stream = new FileInputStream(file)) {
-                return stream.readAllBytes();
-            }
-        } else {
-            try (ZipFile zipFile = new ZipFile(file)) {
-                ZipEntry entry = zipFile.getEntry(internalPath);
-                if (entry == null) {
-                    throw new FileNotFoundException("Entry " + internalPath + " not found in " + file);
-                }
-
-                try (InputStream stream = zipFile.getInputStream(entry)) {
-                    return stream.readAllBytes();
-                }
-            }
-        }
     }
 
     private boolean hasMemberJavadocProvider() {
