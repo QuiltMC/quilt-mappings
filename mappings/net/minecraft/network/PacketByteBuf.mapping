@@ -367,6 +367,17 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return the read list
 		COMMENT @see #readCollection(IntFunction, Reader)
 		ARG 1 entryReader
+	METHOD m_ebprrcum encode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_idfydwco;
+		COMMENT Writes an object to this buf as a compound NBT with the given codec.
+		COMMENT
+		COMMENT @param <T> the encoded object's type
+		COMMENT @throws io.netty.handler.codec.EncoderException if the {@code codec} fails
+		COMMENT to encode the compound NBT
+		COMMENT @see #decode(DynamicOps, Codec)
+		ARG 2 codec
+			COMMENT the codec to encode the object
+		ARG 3 object
+			COMMENT the object to write to this buf
 	METHOD m_ejfqukht readUuid ()Ljava/util/UUID;
 		COMMENT Reads a UUID (universally unique identifier) from this buf. A UUID is
 		COMMENT represented by two regular longs.
@@ -490,6 +501,27 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readNullable(Reader)
 		ARG 1 value
 		ARG 2 writer
+	METHOD m_jcxllcuk writeNbt (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_idfydwco;
+		COMMENT Writes an NBT compound to this buf. The binary representation of NBT is
+		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If {@code compound} is {@code
+		COMMENT null}, it is treated as an NBT null.
+		COMMENT
+		COMMENT @return this buf, for chaining
+		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be
+		COMMENT written
+		COMMENT @see #readNbt()
+		COMMENT @see #readUnlimitedNbt()
+		COMMENT @see #readNbt(NbtTagSizeTracker)
+	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/Object;
+		COMMENT Reads an object from this buf as a compound NBT with the given codec.
+		COMMENT
+		COMMENT @param <T> the decoded object's type
+		COMMENT @return the read object
+		COMMENT @throws io.netty.handler.codec.EncoderException if the {@code codec} fails
+		COMMENT to decode the compound NBT
+		COMMENT @see #encode(DynamicOps, Codec, Object)
+		ARG 2 codec
+			COMMENT the codec to decode the object
 	METHOD m_jyxjrtet writeDate (Ljava/util/Date;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a date to this buf. A date is represented by its time, a regular
 		COMMENT long.

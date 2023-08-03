@@ -5,15 +5,18 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_bcutours ticks I
 	FIELD f_daxqlowt address Ljava/net/SocketAddress;
 	FIELD f_eatlkkxl encrypted Z
+	FIELD f_ewnrqslo LOCAL_CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_gaynmpqg side Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT The side this connection is to.
 	FIELD f_hgoaaoyc disconnectReason Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_howpitdi NETWORK_PACKETS_MARKER Lorg/slf4j/Marker;
+	FIELD f_hudxxxbp CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_jrcdtkyf averagePacketsSent F
 	FIELD f_kawdlrjp channel Lio/netty/channel/Channel;
 	FIELD f_lspmidtv LOGGER Lorg/slf4j/Logger;
 	FIELD f_mamtuefi packetsReceivedCounter I
 	FIELD f_nqkzlzra PACKET_SENT_MARKER Lorg/slf4j/Marker;
+	FIELD f_pdctspiv EPOLL_CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_sjhnumre averagePacketsReceived F
 	FIELD f_ucdtbtsq packetListener Lnet/minecraft/unmapped/C_tkgdawqw;
 	FIELD f_vcukytvt errored Z
@@ -45,6 +48,9 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 0 address
 		ARG 1 useEpoll
 		ARG 2 connection
+	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
+		ARG 1 packet
+		ARG 2 listener
 	METHOD m_bhwloxoc getPacketListener ()Lnet/minecraft/unmapped/C_tkgdawqw;
 	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
 		ARG 0 marker
@@ -103,6 +109,9 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_vkqagjgi connect (Ljava/net/InetSocketAddress;Z)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
 		ARG 1 useEpoll
+	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
+		ARG 1 packet
+		ARG 2 listener
 	METHOD m_wlmhzfek handleDisconnection ()V
 	METHOD m_wrxqepoa isLocal ()Z
 	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
