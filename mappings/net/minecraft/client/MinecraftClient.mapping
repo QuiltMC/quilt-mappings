@@ -127,7 +127,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT Represents the world the client is currently viewing.
 		COMMENT This field is not null when in game.
 	FIELD f_lgunvkff chatListener Lnet/minecraft/unmapped/C_bmbrcost;
-	FIELD f_lhykgozw debugChunkInfo Z
 	FIELD f_lsguuoub renderTaskQueue Ljava/util/Queue;
 	FIELD f_lyhucjkw soundManager Lnet/minecraft/unmapped/C_hfmtwavd;
 	FIELD f_lzdqneej blockEntityRenderDispatcher Lnet/minecraft/unmapped/C_sicqxpzm;
@@ -171,7 +170,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_vzhjrjmq entityRenderDispatcher Lnet/minecraft/unmapped/C_gmkqxljo;
 	FIELD f_wcmiwllx fpsCounter I
 	FIELD f_whquekgj skinProvider Lnet/minecraft/unmapped/C_pyciilvf;
-	FIELD f_wmjnggay debugChunkOcclusion Z
 	FIELD f_wwbdmehi entityModelLoader Lnet/minecraft/unmapped/C_qncyfzro;
 	FIELD f_wyxzvtjk is64Bit Z
 	FIELD f_xhefqypc integratedServerConnection Lnet/minecraft/unmapped/C_oasmcckk;
@@ -201,8 +199,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_adlanxiy getSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD m_aehcbacb getWorldStorage ()Lnet/minecraft/unmapped/C_bpwagnit;
 	METHOD m_afsakunj getCurrentServerEntry ()Lnet/minecraft/unmapped/C_xotldzgg;
-	METHOD m_aislcqal setConnectedToRealms (Z)V
-		ARG 1 connectedToRealms
 	METHOD m_aqvwoqjd forcesUnicodeFont ()Z
 	METHOD m_araskisn getGpuUtilization ()D
 	METHOD m_atlzxpuj getFramerateLimit ()I
@@ -229,14 +225,11 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_cxhattvt createIntegratedServerLoader ()Lnet/minecraft/unmapped/C_phqvxqun;
 	METHOD m_denzhwko getStatusEffectSpriteManager ()Lnet/minecraft/unmapped/C_ucgueons;
 	METHOD m_dkarkawy isAmbientOcclusionEnabled ()Z
-	METHOD m_dqshwyyu disconnect (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
-		ARG 1 screen
 	METHOD m_dyufbawi getTelemetryManager ()Lnet/minecraft/unmapped/C_cgkxybww;
 	METHOD m_dyxefrny reset (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 1 screen
 	METHOD m_dzxsezyn drawProfilerResults (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_dzczqjri;)V
 		ARG 2 profileResult
-	METHOD m_ecadvfew disconnect ()V
 	METHOD m_ecjmvcqf handleProfilerKeyPress (I)V
 		ARG 1 digit
 	METHOD m_eexpmkot shouldBlockMessages (Ljava/util/UUID;)Z
@@ -355,7 +348,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_modhymrw (ZLjava/lang/Throwable;)V
 		ARG 2 exception
 	METHOD m_mqdbnddk handleInputEvents ()V
-	METHOD m_mwwbovfc isConnectedToRealms ()Z
 	METHOD m_ngtmdbml startIntegratedServer (Ljava/lang/String;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Z)V
 		ARG 1 worldId
 		ARG 2 session

@@ -37,7 +37,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	FIELD f_xkqgszkv mainExecutor Lnet/minecraft/unmapped/C_brzcgupp;
 	FIELD f_xsjvoadn worldGenExecutor Lnet/minecraft/unmapped/C_brzcgupp;
 	FIELD f_ykigofgc MAX_VIEW_DISTANCE I
-	FIELD f_znaioqim watchDistance I
 	METHOD <init> (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_zxhjfyir;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_wfxvpelc;Lnet/minecraft/unmapped/C_jhssvvvy;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_jnfclwgd;Lnet/minecraft/unmapped/C_gtndfkbe;Ljava/util/function/Supplier;IZ)V
 		ARG 2 saveStorageSession
 		ARG 4 structureTemplateManager
@@ -56,10 +55,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 exception
 		ARG 2 details
 	METHOD m_cwrhdezz updatesRequired ()Z
-	METHOD m_czcetwxs updateWatchedSection (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_zubvmeye;
-		COMMENT Updates the watched chunk section position for the {@code player}, and sends a
-		COMMENT render distance update packet to the client.
-		ARG 1 player
 	METHOD m_djmbcnos getCurrentChunkHolder (J)Lnet/minecraft/unmapped/C_gkderdjo;
 		ARG 1 pos
 	METHOD m_dtwrvman getConcentricRingPlacementCalculator ()Lnet/minecraft/unmapped/C_jibygqpu;
@@ -87,24 +82,10 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT tracking status of those entities to all players. It then checks if any player
 		COMMENT has changed chunk sections, and updates all entities tracking status to those
 		COMMENT players. This ensures all possible updates are accounted for.
-	METHOD m_gyykgymp (Lnet/minecraft/unmapped/C_hrdsvlkq;)Ljava/lang/Integer;
-		ARG 0 chunk
 	METHOD m_hadjtdih save (Lnet/minecraft/unmapped/C_lwzmmmqr;)Z
 		ARG 1 chunk
-	METHOD m_hhtefbpb isOnDistanceEdge (IIIII)Z
-		ARG 0 x
-		ARG 1 z
-		ARG 2 originX
-		ARG 3 originZ
-		ARG 4 distance
 	METHOD m_hrlvjyna releaseLightTicket (Lnet/minecraft/unmapped/C_ynrszrtu;)V
 		ARG 1 pos
-	METHOD m_jeiihfcf isWithinDistance (IIIII)Z
-		ARG 0 x
-		ARG 1 z
-		ARG 2 originX
-		ARG 3 originZ
-		ARG 4 distance
 	METHOD m_jjidpbzz sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 entity
 		ARG 2 packet
@@ -114,14 +95,10 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_jtcoqmih tick (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
 	METHOD m_jyhtxlyw reloadChunkGenerator ()V
-	METHOD m_jzitwqbq (Lnet/minecraft/unmapped/C_hrdsvlkq;)Ljava/lang/Integer;
-		ARG 0 chunk
 	METHOD m_lwnasrxx getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/lang/String;
 		ARG 1 chunkPos
 	METHOD m_lxukttpf dump (Ljava/io/Writer;)V
 		ARG 1 writer
-	METHOD m_lyrmubsz setViewDistance (I)V
-		ARG 1 watchDistance
 	METHOD m_mlsrnydb getRandomState ()Lnet/minecraft/unmapped/C_edfiqifk;
 	METHOD m_mtihtfpz entryIterator ()Ljava/lang/Iterable;
 	METHOD m_mvnaomen getSquaredDistance (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_astfners;)D
@@ -131,9 +108,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 2 margin
 		ARG 3 distanceToStatus
 	METHOD m_noyandst getTotalChunksLoadedCount ()I
-	METHOD m_ntxmsmwm sendChunkDataPackets (Lnet/minecraft/unmapped/C_mxrobsgg;Lorg/apache/commons/lang3/mutable/MutableObject;Lnet/minecraft/unmapped/C_hrdsvlkq;)V
-		ARG 1 player
-		ARG 3 chunk
 	METHOD m_nuqnfnbw getChunk (Lnet/minecraft/unmapped/C_gkderdjo;Lnet/minecraft/unmapped/C_kogtzhzt;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 holder
 		ARG 2 requiredStatus
@@ -141,8 +115,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 pos
 		ARG 2 newStatus
 	METHOD m_odmvndir getStorageName ()Ljava/lang/String;
-	METHOD m_oizpeloa (Lnet/minecraft/unmapped/C_hrdsvlkq;)Ljava/lang/Integer;
-		ARG 0 chunk
 	METHOD m_pgazppma updatePosition (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		COMMENT Updates the chunk section position of the {@code player}. This updates the player
 		COMMENT position for both entity tracking and chunk loading (watching) logic.
@@ -169,17 +141,10 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 player
 	METHOD m_uchmpocv save (Z)V
 		ARG 1 flush
-	METHOD m_uncqnsbt sendWatchPackets (Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_ynrszrtu;Lorg/apache/commons/lang3/mutable/MutableObject;ZZ)V
-		ARG 1 player
-		ARG 2 pos
-		ARG 4 withinMaxWatchDistance
-		ARG 5 withinViewDistance
 	METHOD m_uzubdbov makeChunkEntitiesTickable (Lnet/minecraft/unmapped/C_gkderdjo;)Ljava/util/concurrent/CompletableFuture;
 	METHOD m_vbcydxmf loadEntity (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
 	METHOD m_wczqgwje getTicketManager ()Lnet/minecraft/unmapped/C_mrjqexcd;
-	METHOD m_whtcazsu (Lnet/minecraft/unmapped/C_gkderdjo$C_mnhcarhk;)Ljava/lang/String;
-		ARG 0 unloaded
 	METHOD m_xqsmixbi tryUnloadChunk (JLnet/minecraft/unmapped/C_gkderdjo;)V
 		ARG 1 pos
 		ARG 3 holder
@@ -189,8 +154,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 2 distance
 	METHOD m_yizfeevy makeChunkTickable (Lnet/minecraft/unmapped/C_gkderdjo;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 holder
-	METHOD m_zpdmtizw (Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/Optional;
-		ARG 0 chunk
 	CLASS C_hwdtawcb TicketManager
 		METHOD <init> (Lnet/minecraft/unmapped/C_gxrpzacc;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)V
 			ARG 1 workerExecutor
