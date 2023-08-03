@@ -219,16 +219,16 @@ task buildIntermediary {
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	jarFile = mappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
-	    // TODO: https://github.com/Vineflower/vineflower/issues/297
-		    visitor { new ClassVisitor(Opcodes.ASM9, it) {
-			        @Override
-			        void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-				           if (superName == "java/lang/Record") {
-					                access |= Opcodes.ACC_RECORD
-					            }
-				            super.visit(version, access, name, signature, superName, interfaces)
-				        }
-			    } }
+	// TODO: https://github.com/Vineflower/vineflower/issues/297
+	visitor { new ClassVisitor(Opcodes.ASM9, it) {
+		@Override
+		void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+			if (superName == "java/lang/Record") {
+				access |= Opcodes.ACC_RECORD
+			}
+			super.visit(version, access, name, signature, superName, interfaces)
+		}
+	} }
 
 	visitor(DraftsmanAdapterClassVisitor::new)
 	// Set protected/package-private classes to public so that we don't have any access compile errors.

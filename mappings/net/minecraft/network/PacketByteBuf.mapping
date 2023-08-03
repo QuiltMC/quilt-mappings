@@ -478,7 +478,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return this buf, for chaining
 		COMMENT @see #readVarLong()
-		COMMENT @see #getVarLongLength(long)
 		ARG 1 value
 			COMMENT the value to write
 	METHOD m_hwjipexh writeIntList (Lit/unimi/dsi/fastutil/ints/IntList;)V
@@ -510,7 +509,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be
 		COMMENT written
 		COMMENT @see #readNbt()
-		COMMENT @see #readUnlimitedNbt()
 		COMMENT @see #readNbt(NbtTagSizeTracker)
 	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/Object;
 		COMMENT Reads an object from this buf as a compound NBT with the given codec.
@@ -539,7 +537,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return this buf, for chaining
 		COMMENT @see #readVarInt()
-		COMMENT @see #getVarIntLength(int)
 		ARG 1 value
 			COMMENT the value to write
 	METHOD m_kooigoir readInstant ()Ljava/time/Instant;
@@ -751,7 +748,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be read
 		COMMENT @throws RuntimeException if the compound exceeds the allowed maximum size
 		COMMENT @see #writeNbt(NbtCompound)
-		COMMENT @see #readUnlimitedNbt()
 		COMMENT @see #readNbt(NbtTagSizeTracker)
 		COMMENT @see #MAX_READ_NBT_SIZE
 	METHOD m_sxbdiyar readOptional (Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Ljava/util/Optional;
@@ -788,6 +784,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the block hit result to write
 	METHOD m_tuovdjxm (Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;Ljava/lang/Object;)V
 		ARG 2 object
+	METHOD m_ucosefkt decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
+	METHOD m_uedohhct readNbt (Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
 	METHOD m_uvlqpwrk readLongArray ([J)[J
 		COMMENT Reads an array of primitive longs from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the regular long (not var
