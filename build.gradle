@@ -80,7 +80,7 @@ configurations {
 dependencies {
 	enigmaRuntime(libs.enigma.swing)
 	enigmaRuntime(libs.enigma.plugin)
-	javadocClasspath(libs.fabric.loader)
+	javadocClasspath(libs.quilt.loader)
 	javadocClasspath(libs.jetbrains.annotations)
 	javadocClasspath(libs.jsr305) // for some other jsr annotations
 	decompileClasspath(libs.cfr)
@@ -350,7 +350,7 @@ javadoc {
 	dependsOn docletClasses // Needed for javadoc to find the doclet classes.
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
-
+	destinationDir = file("${buildDir}/docs/${project.version}")
 	def docletResources = sourceSets.doclet.resources.asFileTree
 
 	failOnError = true // Failing on error is important to ensure that a Javadoc jar is available.
@@ -388,7 +388,7 @@ javadoc {
 				"https://commons.apache.org/proper/commons-lang/javadocs/api-release/",
 				"https://commons.apache.org/proper/commons-io/apidocs/",
 				"https://commons.apache.org/proper/commons-codec/archives/${project.commons_codec}/apidocs/",
-				"https://maven.fabricmc.net/docs/fabric-loader-${libs.versions.fabric.loader.get()}/",
+				"https://javadoc.quiltmc.org/quilt-loader/${libs.versions.quilt.loader.get()}/",
 				"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
 		)
 		// https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
