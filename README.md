@@ -4,7 +4,7 @@ Quilt Mappings is a set of open, accurate, and easy-to-understand Minecraft mapp
 under the Creative Commons Zero license. Quilt Mappings seeks to provide the best of
 both worlds in terms of mapping quality: the accuracy and completeness of Mojang's
 official mappings, and the simplicity and set-in-stone conventions of its basis, the
-[Yarn](https://github.com/fabricmc/yarn) project.
+[Yarn](https://github.com/FabricMC/yarn) project.
 
 Quilt Mappings exists to provide a stable set of mappings for everyone to contribute
 and improve upon. We provide mappings for all versions of Minecraft from 1.17 onwards.
@@ -12,9 +12,9 @@ To see what version is currently being targeted for updates, check the current G
 
 ## Using QM
 
-To use Quilt Mappings in your mod, you can use either [quilt-loom](https://github.com/quiltmc/quilt-loom)
-for Quilt mods or use our Intermediary publication on [Fabric's loom](https://github.com/fabricmc/fabric-loom)
-for Fabric mods. We recommend cloning the [Quilt Template Mod](https://github.com/quiltmc/quilt-template-mod)
+To use Quilt Mappings in your mod, you can use either [quilt-loom](https://github.com/QuiltMC/quilt-loom)
+for Quilt mods or use our Intermediary publication on [Fabric's loom](https://github.com/FabricMC/fabric-loom)
+for Fabric mods. We recommend cloning the [Quilt Template Mod](https://github.com/QuiltMC/quilt-template-mod)
 to start a new mod with QM, and you can also add this block to your `build.gradle` inside the `dependencies` block:
 
 ```groovy
@@ -52,7 +52,7 @@ please see the guide in [CONTRIBUTING.md](CONTRIBUTING.md#guide-pull-requests)!
 QM has a set of helpful Gradle tasks to make mapping easier, including:
 
 ### `mappings`
-Setup, download, and launch the latest version of [Enigma](https://github.com/QuiltMC/Enigma) automatically configured to use the merged jar and the mappings.
+Setup, download, and launch the latest version of [Enigma](https://github.com/QuiltMC/enigma) automatically configured to use the merged jar and the mappings.
 
 Compared to launching Enigma externally, the gradle task adds a name guesser plugin that automatically maps enums and a few constant field names.
 

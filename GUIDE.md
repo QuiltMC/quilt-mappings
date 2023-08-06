@@ -148,4 +148,4 @@ You can change the theme in the menu bar, under `Theme`.
 ## Found a bug?
 
 Enigma in its current state is a famously broken piece of software, and we're working hard to fix it!
-If you find the slightest bug or have an idea to improve it, please submit it on [our issue tracker](https://github.com/quiltmc/enigma/issues).
+If you find the slightest bug or have an idea to improve it, please submit it on [our issue tracker](https://github.com/QuiltMC/enigma/issues).
