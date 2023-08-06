@@ -23,8 +23,6 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	FIELD f_moprpfta AVAILABLE_ENDPOINT Ljava/lang/String;
 	FIELD f_mtjjnkfi TRIAL_ENDPOINT Ljava/lang/String;
 	FIELD f_nudviejx client Lnet/minecraft/unmapped/C_ayfeobid;
-	FIELD f_phxetebg STAGE_AVAILABLE_ENDPOINT Ljava/lang/String;
-	FIELD f_pskterio initialized Z
 	FIELD f_qkryvvlk INVITE_ENDPOINT Ljava/lang/String;
 	FIELD f_rljjnbei NEWS_ENDPOINT Ljava/lang/String;
 	FIELD f_rrqbuegt SUBSCRIPTIONS_ENDPOINT Ljava/lang/String;
@@ -38,7 +36,6 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	FIELD f_vrvngbpj CLIENT_COMPATIBLE_ENDPOINT Ljava/lang/String;
 	FIELD f_vwexrqhj TEMPLATES_ENDPOINT Ljava/lang/String;
 	FIELD f_wdnxeton WORLD_ENDPOINT Ljava/lang/String;
-	FIELD f_wdvbhzwe currentEnvironment Lnet/minecraft/unmapped/C_ivysvyzf$C_eyrdsmnc;
 	FIELD f_xjawxxaz WORLD_SLOT_DOWNLOAD_ENDPOINT Ljava/lang/String;
 	FIELD f_xmvcqtmx ID_ENDPOINT Ljava/lang/String;
 	FIELD f_ybuslmwq WORLD_PROFILE_ENDPOINT Ljava/lang/String;
@@ -63,7 +60,6 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 		ARG 3 type
 	METHOD m_dixjxuin backupsFor (J)Lnet/minecraft/unmapped/C_fyekczdy;
 		ARG 1 worldId
-	METHOD m_dydfwyse mcoEnabled ()Ljava/lang/Boolean;
 	METHOD m_dzzsyobj resetWorldWithTemplate (JLjava/lang/String;)Ljava/lang/Boolean;
 		ARG 1 worldId
 		ARG 3 worldTemplateId
@@ -75,12 +71,10 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	METHOD m_hmtcnocp url (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 		ARG 1 path
 		ARG 2 queryString
-	METHOD m_jaidoetk deop (JLjava/lang/String;)Lnet/minecraft/unmapped/C_okicnizs;
+	METHOD m_jaidoetk deop (JLjava/util/UUID;)Lnet/minecraft/unmapped/C_okicnizs;
 		ARG 1 worldId
-		ARG 3 profileUuid
 	METHOD m_jbobrtkj getPlayerActivities (J)Lnet/minecraft/unmapped/C_ztgtghvc;
 		ARG 1 worldId
-	METHOD m_jmpaofgg switchToStage ()V
 	METHOD m_jtalpdgh url (Ljava/lang/String;)Ljava/lang/String;
 		ARG 1 path
 	METHOD m_jtfpvzap getOwnWorld (J)Lnet/minecraft/unmapped/C_pwmwypfb;
@@ -98,17 +92,13 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 		ARG 0 uuids
 	METHOD m_mywemuad isOwnerBlocked (Lnet/minecraft/unmapped/C_yjveerht;)Z
 		ARG 1 pendingInvite
-	METHOD m_ookmellc op (JLjava/lang/String;)Lnet/minecraft/unmapped/C_okicnizs;
+	METHOD m_ookmellc op (JLjava/util/UUID;)Lnet/minecraft/unmapped/C_okicnizs;
 		ARG 1 worldId
-		ARG 3 profileUuid
-	METHOD m_prcrdgpv uninvite (JLjava/lang/String;)V
+	METHOD m_prcrdgpv uninvite (JLjava/util/UUID;)V
 		ARG 1 worldId
-		ARG 3 profileUuid
 	METHOD m_qbsodxor markNotificationsAsSeen (Ljava/util/List;)V
 		ARG 1 notificationUuids
 	METHOD m_qejvoznd trialAvailable ()Ljava/lang/Boolean;
-	METHOD m_qftdiumg getHttpCodeMessage (I)Ljava/lang/String;
-		ARG 0 code
 	METHOD m_qkheucft close (J)Ljava/lang/Boolean;
 		ARG 1 worldId
 	METHOD m_qooaiutq pendingInvitesCount ()I
@@ -116,7 +106,6 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 		ARG 1 worldId
 		ARG 3 slot
 		ARG 4 options
-	METHOD m_qxslonjo switchToProd ()V
 	METHOD m_rgjyqxep join (J)Lnet/minecraft/unmapped/C_xfnjkegp;
 		ARG 1 worldId
 	METHOD m_rhxgdgrz switchSlot (JI)Z
@@ -126,12 +115,10 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 		ARG 1 invitationId
 	METHOD m_tcxgvniz create (Lnet/minecraft/unmapped/C_ayfeobid;)Lnet/minecraft/unmapped/C_ivysvyzf;
 		ARG 0 client
-	METHOD m_txrnlnpm switchToLocal ()V
 	METHOD m_ubtycpip deleteWorld (J)V
 		ARG 1 worldId
 	METHOD m_usdyjvjv clientCompatible ()Lnet/minecraft/unmapped/C_ivysvyzf$C_ovclqquk;
 	METHOD m_utrgbbtc getNews ()Lnet/minecraft/unmapped/C_gpedgsfu;
-	METHOD m_vbphvsqd stageAvailable ()Ljava/lang/Boolean;
 	METHOD m_vlxwphvq resetWorldWithSeed (JLnet/minecraft/unmapped/C_bsvoqkvb;)Ljava/lang/Boolean;
 		ARG 1 worldId
 		ARG 3 resetWorldInfo
