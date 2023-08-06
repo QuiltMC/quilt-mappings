@@ -1,9 +1,49 @@
 CLASS net/minecraft/unmapped/C_pyciilvf net/minecraft/client/texture/PlayerSkinProvider
+	FIELD f_athindjs skinTextures Lnet/minecraft/unmapped/C_pyciilvf$C_fxbxtitd;
+	FIELD f_qmgnerrz skinCache Lcom/google/common/cache/LoadingCache;
+	FIELD f_tcohfkrk elytraTextures Lnet/minecraft/unmapped/C_pyciilvf$C_fxbxtitd;
 	FIELD f_vxauquex TEXTURES Ljava/lang/String;
+	FIELD f_yqijwlhy capeTextures Lnet/minecraft/unmapped/C_pyciilvf$C_fxbxtitd;
 	METHOD <init> (Lnet/minecraft/unmapped/C_rglkduer;Ljava/nio/file/Path;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Ljava/util/concurrent/Executor;)V
 		ARG 1 textureManager
-	CLASS C_fxbxtitd
+		ARG 2 directory
+		ARG 3 sessionService
+		ARG 4 executor
+	METHOD m_bopsjrvv getSkinSupplier (Lcom/mojang/authlib/GameProfile;)Ljava/util/function/Supplier;
+		ARG 1 gameProfile
+	METHOD m_cgaitjbt getSkin (Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/unmapped/C_idvschhb;
+		ARG 1 gameProfile
+	METHOD m_csautmvh getTextureProperty (Lcom/mojang/authlib/GameProfile;)Lcom/mojang/authlib/properties/Property;
+		ARG 0 gameProfile
+	METHOD m_grixgoty fetchSkin (Lcom/mojang/authlib/GameProfile;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 gameProfile
+	METHOD m_lioqizox (Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;Lnet/minecraft/unmapped/C_idvschhb$C_hdrocqaw;Lnet/minecraft/unmapped/C_pyciilvf$C_ekhyenqt;Ljava/lang/Void;)Lnet/minecraft/unmapped/C_idvschhb;
+		ARG 5 result
+	METHOD m_nmwxeldp registerTextures (Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_pyciilvf$C_ekhyenqt;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 gameProfile
+		ARG 2 textureInfo
+	METHOD m_oolqbfwk hasSecureTextureData (Lcom/mojang/authlib/GameProfile;)Z
+		ARG 1 gameProfile
+	CLASS C_ekhyenqt TextureInfo
+		FIELD f_kjtqmzdt EMPTY Lnet/minecraft/unmapped/C_pyciilvf$C_ekhyenqt;
+		METHOD m_qtdamgyh fromMap (Ljava/util/Map;Z)Lnet/minecraft/unmapped/C_pyciilvf$C_ekhyenqt;
+			ARG 0 textures
+			ARG 1 secure
+	CLASS C_fxbxtitd TextureCache
+		FIELD f_drzmvtab type Lcom/mojang/authlib/minecraft/MinecraftProfileTexture$Type;
+		FIELD f_fqnyageq hashToTexture Ljava/util/Map;
+		FIELD f_jnpqsemr rootDirectory Ljava/nio/file/Path;
 		FIELD f_mwpzboug textureManager Lnet/minecraft/unmapped/C_rglkduer;
+		METHOD m_oeraejhg getTexturePath (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
+			ARG 1 hash
+		METHOD m_qbaarago get (Lcom/mojang/authlib/minecraft/MinecraftProfileTexture;)Ljava/util/concurrent/CompletableFuture;
+			ARG 1 texture
+		METHOD m_qsvnuehi store (Lcom/mojang/authlib/minecraft/MinecraftProfileTexture;)Ljava/util/concurrent/CompletableFuture;
+			ARG 1 texture
+	CLASS C_jrfhnktp CacheKey
+		METHOD m_kbdgbmkm getTexturePropertyValue ()Ljava/lang/String;
 	CLASS C_wbpmwuvo
 		METHOD load (Ljava/lang/Object;)Ljava/lang/Object;
 			ARG 1 s
+		METHOD m_ilfekhgj (Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_pyciilvf$C_ekhyenqt;)Ljava/util/concurrent/CompletionStage;
+			ARG 2 textureInfo
