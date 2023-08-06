@@ -3,24 +3,20 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	COMMENT server or one to a server on a client.
 	FIELD f_arvbntbf PACKET_RECEIVED_MARKER Lorg/slf4j/Marker;
 	FIELD f_bcutours ticks I
-	FIELD f_bgaglckf packetQueue Ljava/util/Queue;
 	FIELD f_daxqlowt address Ljava/net/SocketAddress;
 	FIELD f_eatlkkxl encrypted Z
-	FIELD f_ewnrqslo LOCAL_CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_oabgzozl;
+	FIELD f_ewnrqslo LOCAL_CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_gaynmpqg side Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT The side this connection is to.
-	FIELD f_gecyhplb PROTOCOL_ATTRIBUTE_KEY Lio/netty/util/AttributeKey;
-		COMMENT The attribute key for the current network state of the backing netty
-		COMMENT channel.
 	FIELD f_hgoaaoyc disconnectReason Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_howpitdi NETWORK_PACKETS_MARKER Lorg/slf4j/Marker;
-	FIELD f_hudxxxbp CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_oabgzozl;
+	FIELD f_hudxxxbp CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_jrcdtkyf averagePacketsSent F
 	FIELD f_kawdlrjp channel Lio/netty/channel/Channel;
 	FIELD f_lspmidtv LOGGER Lorg/slf4j/Logger;
 	FIELD f_mamtuefi packetsReceivedCounter I
 	FIELD f_nqkzlzra PACKET_SENT_MARKER Lorg/slf4j/Marker;
-	FIELD f_pdctspiv EPOLL_CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_oabgzozl;
+	FIELD f_pdctspiv EPOLL_CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_sjhnumre averagePacketsReceived F
 	FIELD f_ucdtbtsq packetListener Lnet/minecraft/unmapped/C_tkgdawqw;
 	FIELD f_vcukytvt errored Z
@@ -52,7 +48,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 0 address
 		ARG 1 useEpoll
 		ARG 2 connection
-	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
+	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
 		ARG 1 packet
 		ARG 2 listener
 	METHOD m_bhwloxoc getPacketListener ()Lnet/minecraft/unmapped/C_tkgdawqw;
@@ -72,8 +68,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 side
 	METHOD m_honyjhko (Lorg/slf4j/Marker;)V
 		ARG 0 marker
-	METHOD m_igiszgub getState ()Lnet/minecraft/unmapped/C_kxdobmrm;
-		COMMENT Returns the current network state of this connection.
 	METHOD m_jitsmihi getAveragePacketsReceived ()F
 	METHOD m_kbtplepg disconnect (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 disconnectReason
@@ -82,8 +76,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		COMMENT sent by this connection.
 	METHOD m_lyptmghi connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
-	METHOD m_moawflfe setState (Lnet/minecraft/unmapped/C_kxdobmrm;)V
-		ARG 1 state
 	METHOD m_qqopfmuz setPacketListener (Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		COMMENT Sets the packet listener that will handle oncoming packets, including
 		COMMENT ones that are not yet handled by the current packet listener.
@@ -117,14 +109,10 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_vkqagjgi connect (Ljava/net/InetSocketAddress;Z)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
 		ARG 1 useEpoll
-	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Lnet/minecraft/unmapped/C_kxdobmrm;Lnet/minecraft/unmapped/C_kxdobmrm;)V
+	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
 		ARG 1 packet
 		ARG 2 listener
-		ARG 3 newNetworkState
-		ARG 4 currentNetworkState
 	METHOD m_wlmhzfek handleDisconnection ()V
-	METHOD m_wrnibrta (Lnet/minecraft/unmapped/C_zddpfpkk;Lio/netty/util/concurrent/Future;)V
-		ARG 2 future
 	METHOD m_wrxqepoa isLocal ()Z
 	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
 		ARG 0 marker
@@ -138,9 +126,3 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	CLASS C_qurkirxp
 		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
-	CLASS C_zhxqmkfq QueuedPacket
-		FIELD f_ogqzkbuy callback Lnet/minecraft/unmapped/C_zddpfpkk;
-		FIELD f_qjiczabl packet Lnet/minecraft/unmapped/C_zyjtrjrl;
-		METHOD <init> (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
-			ARG 1 packet
-			ARG 2 sendListener

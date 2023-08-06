@@ -61,6 +61,10 @@ repositories {
 		name "Quilt Snapshot Repository"
 		url "https://maven.quiltmc.org/repository/snapshot"
 	}
+	maven {
+		// Vineflower snapshots
+		url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+	}
 	mavenLocal()
 }
 
@@ -215,6 +219,17 @@ task buildIntermediary {
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	jarFile = mappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
+	// TODO: https://github.com/Vineflower/vineflower/issues/297
+	visitor { new ClassVisitor(Opcodes.ASM9, it) {
+		@Override
+		void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+			if (superName == "java/lang/Record") {
+				access |= Opcodes.ACC_RECORD
+			}
+			super.visit(version, access, name, signature, superName, interfaces)
+		}
+	} }
+
 	visitor(DraftsmanAdapterClassVisitor::new)
 	// Set protected/package-private classes to public so that we don't have any access compile errors.
 	// TODO: Fix this by putting the classes in the same package. Javadoc shows the modifier
@@ -245,7 +260,7 @@ def fakeSourceDir = file(".gradle/temp/fakeSource")
 task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode]) {
 	input = eraseBytecode.output.asFile.get()
 	output = fakeSourceDir
-	decompiler = Decompilers.QUILTFLOWER
+	decompiler = Decompilers.VINEFLOWER
 	libraries = files(mappings.fileConstants.libraries)
 	decompilerOptions = [
 			"rsy": "1", // remove synthetics
@@ -280,10 +295,10 @@ task decompileCFR(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	}
 }
 
-task decompileQuiltflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
+task decompileVineflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	input.set mappings.fileConstants.namedJar
 	output.set file("namedSrc")
-	decompiler = Decompilers.QUILTFLOWER
+	decompiler = Decompilers.VINEFLOWER
 	libraries = configurations.decompileClasspath
 
 	doFirst {
@@ -320,10 +335,10 @@ task unpickTargetJar(type: UnpickJarTask) {
 	}
 }
 
-task decompileTargetQuiltflower(type: DecompileTask, dependsOn: [remapTargetMinecraftJar]) {
+task decompileTargetVineflower(type: DecompileTask, dependsOn: [remapTargetMinecraftJar]) {
 	input.set remapTargetMinecraftJar.outputJar
 	output.set file("namedTargetSrc")
-	decompiler = Decompilers.QUILTFLOWER
+	decompiler = Decompilers.VINEFLOWER
 	libraries = configurations.decompileClasspath
 
 	doFirst {

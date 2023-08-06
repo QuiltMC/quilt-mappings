@@ -1,7 +1,7 @@
 CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFunctionManager
 	COMMENT The command function manager implements execution of functions, like that from
 	COMMENT the {@code function} command.
-	FIELD f_amfffumb NO_TRACE_IN_FUNCTION_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_amfffumb NO_TRACE_IN_FUNCTION Lnet/minecraft/unmapped/C_rdaqiwdt;
 		COMMENT A localized piece of text indicating that calling the debug command to debug
 		COMMENT functions from within a function is not supported.
 	FIELD f_cphekqnd LOAD_TAG_ID Lnet/minecraft/unmapped/C_ncpywfca;
@@ -42,26 +42,6 @@ CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFun
 		ARG 1 loader
 			COMMENT the new loader functions will be taken from
 	METHOD m_kchskzih tick ()V
-	METHOD m_lpxmuptl execute (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_nbwcoknw$C_ihdownls;)I
-		COMMENT Executes a function. This may have two cases: new or recursive.
-		COMMENT
-		COMMENT <p>In a new execution, the {@link #execution execution == null}, and a custom
-		COMMENT {@code tracer} can be specified. The return value indicates the number of
-		COMMENT commands and nested functions ran.
-		COMMENT
-		COMMENT <p>In a recursive execution, {@link #execution execution != null}. It is
-		COMMENT required that {@code tracer == null}, or the execution reports an error and is
-		COMMENT skipped. The return value is {@code 0}.
-		COMMENT
-		COMMENT @return a non-zero value for a new execution, or {@code 0} for a recursive
-		COMMENT execution
-		COMMENT @see #execute(CommandFunction, ServerCommandSource)
-		ARG 1 function
-			COMMENT the function
-		ARG 2 source
-			COMMENT the command source to execute with
-		ARG 3 tracer
-			COMMENT a tracer for a non-recursive function execution
 	METHOD m_mkchebgo getFunctionTags ()Ljava/lang/Iterable;
 	METHOD m_stsralpj executeAll (Ljava/util/Collection;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 functions
@@ -70,14 +50,15 @@ CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFun
 		COMMENT Executes a function.
 		COMMENT
 		COMMENT <p>This is same as calling {@link #execute(CommandFunction, ServerCommandSource,
-		COMMENT Tracer) execute(function, source, null)}.
+		COMMENT Tracer, NbtCompound) execute(function, source, null, null)}.
 		COMMENT
 		COMMENT @return the command output value
-		COMMENT @see #execute(CommandFunction, ServerCommandSource, Tracer)
+		COMMENT @see #execute(CommandFunction, ServerCommandSource, Tracer, NbtCompound)
 		ARG 1 function
 			COMMENT the function
 		ARG 2 source
 			COMMENT the command source to execute with
+	METHOD m_trgeoxeb execute (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_nbwcoknw$C_ihdownls;Lnet/minecraft/unmapped/C_hhlwcnih;)I
 	METHOD m_wcucalqh getTag (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Collection;
 		ARG 1 id
 	CLASS C_hkyyjgwj Entry
@@ -125,7 +106,7 @@ CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFun
 			ARG 1 message
 		METHOD m_jtwxlovt run (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;)I
 			COMMENT Handles a new case in {@link CommandFunctionManager#execute(CommandFunction,
-			COMMENT ServerCommandSource, CommandFunctionManager.Tracer)}.
+			COMMENT ServerCommandSource, CommandFunctionManager.Tracer, NbtCompound)}.
 			COMMENT
 			COMMENT @return a value for the command result
 			ARG 1 function
@@ -134,7 +115,7 @@ CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFun
 				COMMENT the command source
 		METHOD m_pjvwrxbj recursiveRun (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;)V
 			COMMENT Handles a recursive case in {@link CommandFunctionManager#execute(CommandFunction,
-			COMMENT ServerCommandSource, CommandFunctionManager.Tracer)}.
+			COMMENT ServerCommandSource, CommandFunctionManager.Tracer, NbtCompound)}.
 			COMMENT
 			COMMENT <p>This effectively swaps an entry with a command element with {@code /function}
 			COMMENT command at the head of the deque with another entry with a function element
