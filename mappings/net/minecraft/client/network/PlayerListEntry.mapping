@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_rdnfmxue net/minecraft/client/network/PlayerListEntry
+	FIELD f_bixmkpsr skinSupplier Ljava/util/function/Supplier;
 	FIELD f_drjagpif messageVerifier Lnet/minecraft/unmapped/C_kwrnipty;
 	FIELD f_hnnviwpi gameMode Lnet/minecraft/unmapped/C_lghcpyvl;
 	FIELD f_hrnnauwf chatSession Lnet/minecraft/unmapped/C_sdodhjzp;
@@ -8,6 +9,10 @@ CLASS net/minecraft/unmapped/C_rdnfmxue net/minecraft/client/network/PlayerListE
 	METHOD <init> (Lcom/mojang/authlib/GameProfile;Z)V
 		ARG 1 profile
 		ARG 2 rejectAllMessages
+	METHOD m_advxzpiq fetchSkin (Lcom/mojang/authlib/GameProfile;Lnet/minecraft/unmapped/C_pyciilvf;Lcom/mojang/authlib/minecraft/MinecraftSessionService;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 gameProfile
+		ARG 1 skinProvider
+		ARG 2 sessionService
 	METHOD m_aikjdrgv setDisplayName (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 displayName
 	METHOD m_bzpvpkyx getScoreboardTeam ()Lnet/minecraft/unmapped/C_dvkwmbxw;
@@ -15,9 +20,15 @@ CLASS net/minecraft/unmapped/C_rdnfmxue net/minecraft/client/network/PlayerListE
 	METHOD m_gedtxkss setChatSession (Lnet/minecraft/unmapped/C_sdodhjzp;)V
 		ARG 1 chatSession
 	METHOD m_gwqcrxck getDisplayName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_hbtevnmm getSkinSupplier (Lcom/mojang/authlib/GameProfile;)Ljava/util/function/Supplier;
+		ARG 0 gameProfile
 	METHOD m_ibtfyfdo getMessageVerifier ()Lnet/minecraft/unmapped/C_kwrnipty;
 	METHOD m_kamimtck setMessageVerifier (Z)V
 		ARG 1 rejectAll
+	METHOD m_ktxkluwh putSessionProperties (Lcom/mojang/authlib/GameProfile;Lcom/mojang/authlib/minecraft/MinecraftSessionService;)Lcom/mojang/authlib/GameProfile;
+		ARG 0 gameProfile
+		ARG 1 sessionService
+	METHOD m_luhtdkqd getSkin ()Lnet/minecraft/unmapped/C_idvschhb;
 	METHOD m_ntpxbqia hasChatSession ()Z
 	METHOD m_sgoenlav getChatSession ()Lnet/minecraft/unmapped/C_sdodhjzp;
 	METHOD m_vczgizyo getProfile ()Lcom/mojang/authlib/GameProfile;

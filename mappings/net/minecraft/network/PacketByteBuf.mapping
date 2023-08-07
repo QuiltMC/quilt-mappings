@@ -332,6 +332,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #MAX_TEXT_LENGTH
 	METHOD m_cqyrnsig readJson (Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 		ARG 1 codec
+	METHOD m_cwtxzlod writeVec3d (Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 vec3d
 	METHOD m_czlbxezf writeChunkPos (Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a chunk position to this buf. A chunk position is represented by
 		COMMENT a regular long.
@@ -480,6 +482,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readVarLong()
 		ARG 1 value
 			COMMENT the value to write
+	METHOD m_hvqksqbl readVec3d ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_hwjipexh writeIntList (Lit/unimi/dsi/fastutil/ints/IntList;)V
 		COMMENT Writes a list of primitive ints from this buf. The ints are stored as var
 		COMMENT ints, with an extra var int in the beginning indicating the size.
@@ -520,6 +523,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #encode(DynamicOps, Codec, Object)
 		ARG 2 codec
 			COMMENT the codec to decode the object
+		ARG 3 sizeTracker
 	METHOD m_jyxjrtet writeDate (Ljava/util/Date;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a date to this buf. A date is represented by its time, a regular
 		COMMENT long.

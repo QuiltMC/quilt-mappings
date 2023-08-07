@@ -2,20 +2,29 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 	FIELD f_stwztcyj packetHandlers Ljava/util/Map;
 	FIELD f_vjkseuag stateId Ljava/lang/String;
 	FIELD f_wzyfxkhh NOT_REGISTERED I
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;Lnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;)V
+		ARG 4 initializer
+	METHOD m_faxdemrm getStateId ()Ljava/lang/String;
 	METHOD m_mjjmcqbn createPacketHandlerInitializer ()Lnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;
 	METHOD m_ophzsavx getPacketsByIds (Lnet/minecraft/unmapped/C_exeqxqdd;)Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 		ARG 1 networkSide
+	METHOD m_xyqoenxy getHandler (Lnet/minecraft/unmapped/C_exeqxqdd;)Lnet/minecraft/unmapped/C_kxdobmrm$C_zzcdyzpt;
+		ARG 1 side
 	CLASS C_getxrmqs PacketHandlerInitializer
 		FIELD f_qaucgncx packetHandlers Ljava/util/Map;
 		METHOD m_tymymizx setup (Lnet/minecraft/unmapped/C_exeqxqdd;Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;)Lnet/minecraft/unmapped/C_kxdobmrm$C_getxrmqs;
 			ARG 1 side
 			ARG 2 handler
-	CLASS C_lmmjpqqz PacketHandler
+		METHOD m_uthuzqyf createSideToHandlerMap (Lnet/minecraft/unmapped/C_kxdobmrm;)Ljava/util/Map;
+			ARG 1 state
+	CLASS C_lmmjpqqz InternalPacketHandler
 		FIELD f_bzupszpd packetFactories Ljava/util/List;
 		FIELD f_feuhlzjs packetIds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 		FIELD f_kwrnroeo bundlerInfo Lnet/minecraft/unmapped/C_ixirlvvy;
 		FIELD f_mseaveor LOGGER Lorg/slf4j/Logger;
 		FIELD f_obnctdix packetTypes Ljava/util/Set;
+		METHOD m_dsimcctq canHandle (Ljava/lang/Class;)Z
+			ARG 1 packet
 		METHOD m_kdjwucoq withBundlePacket (Ljava/lang/Class;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;
 			ARG 1 packetType
 			ARG 2 function
@@ -30,3 +39,19 @@ CLASS net/minecraft/unmapped/C_kxdobmrm net/minecraft/network/NetworkState
 		METHOD m_wfwlobvc (Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;)V
 			ARG 0 map
 		METHOD m_xcmncpjp getBundlerInfo ()Lnet/minecraft/unmapped/C_ixirlvvy;
+	CLASS C_zzcdyzpt PacketHandler
+		FIELD f_acsbwnzv state Lnet/minecraft/unmapped/C_kxdobmrm;
+		FIELD f_rqcencgq side Lnet/minecraft/unmapped/C_exeqxqdd;
+		FIELD f_shskfgxr backingHandler Lnet/minecraft/unmapped/C_kxdobmrm$C_lmmjpqqz;
+		METHOD m_alixnfrr canHandle (Lnet/minecraft/unmapped/C_zyjtrjrl;)Z
+			ARG 1 packet
+		METHOD m_ejolnocg getId (Lnet/minecraft/unmapped/C_zyjtrjrl;)I
+			ARG 1 packet
+		METHOD m_ivycqkez createPacket (ILnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_zyjtrjrl;
+			ARG 1 id
+		METHOD m_kalukvnq getPacketsByIds ()Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+		METHOD m_qfglzfxi getState ()Lnet/minecraft/unmapped/C_kxdobmrm;
+		METHOD m_trmqqide getSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
+		METHOD m_xzwhjqnm (Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;Ljava/lang/Class;Ljava/lang/Integer;)V
+			ARG 1 packet
+			ARG 2 id

@@ -69,6 +69,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_jewsqngu rightKey Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT A key bind for moving right.
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_D the D key} by default.
+	FIELD f_jfxxipzn STRING_LIST_TYPE Lcom/google/gson/reflect/TypeToken;
 	FIELD f_jgrtiyxs LOGGER Lorg/slf4j/Logger;
 	FIELD f_jifdqecg COLON_SPLITTER Lcom/google/common/base/Splitter;
 	FIELD f_jizzkrys hudHidden Z
@@ -240,6 +241,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_anzbfquj (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 1 value
 	METHOD m_aplmvdrk getGraphicsMode ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_aqdjuews deserializeStringList (Ljava/lang/String;)Ljava/util/List;
+		ARG 0 jsonContent
 	METHOD m_awagofux getAutoJump ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_baffhbde getUnfocusedChatHeight ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_bahvhhci collectProfiledOptions ()Ljava/lang/String;
@@ -266,6 +269,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_epjjsgde getFov ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_erqxoifq getParticles ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_etddkmyc getBobView ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_eukbhyho (Lnet/minecraft/unmapped/C_inrattee;)Z
+		ARG 0 mode
 	METHOD m_ezcngbdl getChatOpacity ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_fejlgsqv toMouseWheelSensitivityValue (I)D
 		ARG 0 value
@@ -304,6 +309,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 0 optionText
 	METHOD m_jkhtyaie getOptionsFile ()Ljava/io/File;
 	METHOD m_jtqqzebv (Lnet/minecraft/unmapped/C_vbibxkxv;Lnet/minecraft/unmapped/C_inrattee;)V
+		ARG 0 option
 		ARG 1 value
 	METHOD m_jxqsgejw getSoundVolumeOption (Lnet/minecraft/unmapped/C_pqzizukq;)Lnet/minecraft/unmapped/C_vbibxkxv;
 		ARG 1 category
@@ -312,6 +318,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 0 value
 		ARG 1 value
 	METHOD m_kbtabcxw getCommandSuggestions ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_kpwlunfx (Lnet/minecraft/unmapped/C_inrattee;)Lnet/minecraft/unmapped/C_skehaijy;
+		ARG 0 graphicsMode
 	METHOD m_kpzvovkp getCloudRenderMode ()Lnet/minecraft/unmapped/C_qaetpqjq;
 	METHOD m_kraoffqu setPlayerModelPart (Lnet/minecraft/unmapped/C_vqnqadci;Z)V
 		ARG 1 part
@@ -406,6 +414,9 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 0 optionText
 		ARG 1 value
 	METHOD m_vdrrucwu getHideMatchedNames ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_vfsnbboi (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_inrattee;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 text
+		ARG 1 graphicsMode
 	METHOD m_vgfsadzm (Ljava/lang/Boolean;)V
 		ARG 0 value
 	METHOD m_vthilnvw (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -438,6 +449,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_ycvnefwl getHighContrast ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_yhjmixqb getRenderClouds ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_yhlumktj getMainArm ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_yjbjmrma (Lnet/minecraft/unmapped/C_qaetpqjq;)V
+		ARG 0 renderMode
 	METHOD m_ykeyyaiw (Ljava/lang/Double;)V
 		ARG 0 value
 	METHOD m_yleaaaqn getEnableVsync ()Lnet/minecraft/unmapped/C_vbibxkxv;
