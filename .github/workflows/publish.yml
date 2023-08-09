@@ -28,7 +28,6 @@ jobs:
         with:
           token: ${{ secrets.github_token }}
           prefix: "build/${{ github.ref }}"
-
       - run: ./gradlew build javadoc javadocJar publish --stacktrace
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
@@ -38,27 +37,16 @@ jobs:
           SNAPSHOTS_USERNAME: ${{ secrets.SNAPSHOTS_USERNAME }}
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
-      # Javadoc publishing
-      - name: Install Git
-        run: |
-          apt-get update && apt-get install -y git
-          git --version
-      - name: Clone gh-pages branch
-        uses: actions/checkout@v3
+      - name: Publish javadoc to javadoc.quiltmc.org
+        uses: shallwefootball/upload-s3-action@v1.3.3
         with:
-          fetch-depth: 0
-          ref: 'gh-pages'
-          path: 'gh-pages'
-      - name: Push javadocs to gh-pages
-        run: |
-          rm -rf ./gh-pages/${GITHUB_REF##*/}/
-          mv ./build/docs/javadoc ./gh-pages/${GITHUB_REF##*/}/
-          cd gh-pages
-          git add .
-          git config user.name "Github Actions"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit --allow-empty -m "Publish javadoc from actions"
-          git push
+          aws_key_id: ${{ secrets.JAVADOC_USERNAME }}
+          aws_secret_access_key: ${{ secrets.JAVADOC_PASSWORD }}
+          aws_bucket: ${{ secrets.JAVADOC_BUCKET }}
+          endpoint: ${{ secrets.JAVADOC_URL }}
+          source_dir: ./build/docs/
+          destination_dir: "quilt-mappings"
+      # Javadoc publishing
       - name: Update Quilt Meta
         uses: quiltmc/update-quilt-meta@main
         with:
