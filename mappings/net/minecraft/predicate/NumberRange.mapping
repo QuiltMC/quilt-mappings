@@ -1,46 +1,17 @@
 CLASS net/minecraft/unmapped/C_nihhkamy net/minecraft/predicate/NumberRange
 	FIELD f_cfxpiscn EXCEPTION_EMPTY Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
-	FIELD f_mhlbxidk min Ljava/lang/Number;
 	FIELD f_ryyerrzl EXCEPTION_SWAPPED Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
-	FIELD f_shapysgh max Ljava/lang/Number;
-	METHOD <init> (Ljava/lang/Number;Ljava/lang/Number;)V
-		ARG 1 min
-		ARG 2 max
-	METHOD m_fcgaoyqo getMax ()Ljava/lang/Number;
-	METHOD m_itcosxqx toJson ()Lcom/google/gson/JsonElement;
-	METHOD m_iydfquwm map (Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
-		ARG 0 object
-		ARG 1 function
 	METHOD m_ltinwfvw parse (Lcom/mojang/brigadier/StringReader;Lnet/minecraft/unmapped/C_nihhkamy$C_jreuzyex;Ljava/util/function/Function;Ljava/util/function/Supplier;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_nihhkamy;
 		ARG 0 commandReader
 		ARG 2 converter
 		ARG 3 exceptionTypeSupplier
 		ARG 4 mapper
-	METHOD m_oimibvqv fromStringReader (Lcom/mojang/brigadier/StringReader;Ljava/util/function/Function;Ljava/util/function/Supplier;)Ljava/lang/Number;
-		ARG 0 reader
-		ARG 1 converter
-		ARG 2 exceptionTypeSupplier
 	METHOD m_ttzchrrm isDummy ()Z
 	METHOD m_xpcbxkqc isNextCharValid (Lcom/mojang/brigadier/StringReader;)Z
 		ARG 0 reader
-	METHOD m_zapppodc getMin ()Ljava/lang/Number;
-	METHOD m_zwzjvmmh fromJson (Lcom/google/gson/JsonElement;Lnet/minecraft/unmapped/C_nihhkamy;Ljava/util/function/BiFunction;Lnet/minecraft/unmapped/C_nihhkamy$C_nfiuvfys;)Lnet/minecraft/unmapped/C_nihhkamy;
-		ARG 0 json
-		ARG 1 fallback
-		ARG 2 asNumber
-		ARG 3 factory
 	CLASS C_jreuzyex CommandFactory
-		METHOD create create (Lcom/mojang/brigadier/StringReader;Ljava/lang/Number;Ljava/lang/Number;)Lnet/minecraft/unmapped/C_nihhkamy;
-			ARG 1 reader
-			ARG 2 min
-			ARG 3 max
 	CLASS C_mujuochb IntRange
-		FIELD f_bgngiydc maxSquared Ljava/lang/Long;
-		FIELD f_fciapavv minSquared Ljava/lang/Long;
 		FIELD f_lqncxgvg ANY Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
-		METHOD <init> (Ljava/lang/Integer;Ljava/lang/Integer;)V
-			ARG 1 min
-			ARG 2 max
 		METHOD m_fdqmwkvp fromStringReader (Lcom/mojang/brigadier/StringReader;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 reader
 			ARG 1 converter
@@ -53,40 +24,20 @@ CLASS net/minecraft/unmapped/C_nihhkamy net/minecraft/predicate/NumberRange
 			ARG 0 value
 		METHOD m_sztoqtmf parse (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 reader
-		METHOD m_tvuukdtv squared (Ljava/lang/Integer;)Ljava/lang/Long;
-			ARG 0 value
 		METHOD m_urmdctrd test (I)Z
 			ARG 1 value
-		METHOD m_zaacvmhk parse (Lcom/mojang/brigadier/StringReader;Ljava/lang/Integer;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
-			ARG 0 reader
-			ARG 1 min
-			ARG 2 max
 		METHOD m_zfjxrqdp atLeast (I)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 value
 		METHOD m_zhpgzufj exactly (I)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 value
 	CLASS C_nfiuvfys Factory
-		METHOD create create (Ljava/lang/Number;Ljava/lang/Number;)Lnet/minecraft/unmapped/C_nihhkamy;
-			ARG 1 min
-			ARG 2 max
 	CLASS C_qatgyzfn FloatRange
-		FIELD f_jwxokqnq squaredMin Ljava/lang/Double;
 		FIELD f_oydeehsg ANY Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
-		FIELD f_viflunmo squaredMax Ljava/lang/Double;
-		METHOD <init> (Ljava/lang/Double;Ljava/lang/Double;)V
-			ARG 1 min
-			ARG 2 max
-		METHOD m_fyonzumn square (Ljava/lang/Double;)Ljava/lang/Double;
-			ARG 0 value
 		METHOD m_giijxnoj parse (Lcom/mojang/brigadier/StringReader;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
 			ARG 0 reader
 			ARG 1 mapper
 		METHOD m_gyocfnro atMost (D)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
 			ARG 0 value
-		METHOD m_keoxrhbh create (Lcom/mojang/brigadier/StringReader;Ljava/lang/Double;Ljava/lang/Double;)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
-			ARG 0 reader
-			ARG 1 min
-			ARG 2 max
 		METHOD m_lrhuesqv test (D)Z
 			ARG 1 value
 		METHOD m_sphipens parse (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
