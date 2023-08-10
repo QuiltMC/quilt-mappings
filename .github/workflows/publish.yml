@@ -37,16 +37,6 @@ jobs:
           SNAPSHOTS_USERNAME: ${{ secrets.SNAPSHOTS_USERNAME }}
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
-      - name: Publish javadoc to javadoc.quiltmc.org
-        uses: shallwefootball/upload-s3-action@v1.3.3
-        with:
-          aws_key_id: ${{ secrets.JAVADOC_USERNAME }}
-          aws_secret_access_key: ${{ secrets.JAVADOC_PASSWORD }}
-          aws_bucket: ${{ secrets.JAVADOC_BUCKET }}
-          endpoint: ${{ secrets.JAVADOC_URL }}
-          source_dir: ./build/docs/
-          destination_dir: "quilt-mappings"
-      # Javadoc publishing
       - name: Update Quilt Meta
         uses: quiltmc/update-quilt-meta@main
         with:

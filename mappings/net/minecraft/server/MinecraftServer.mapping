@@ -81,7 +81,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_wmdvdqlf serverId Ljava/lang/String;
 	FIELD f_wsnekgbx serverPort I
 	FIELD f_xoafdfeu MS_PER_TICK I
-	FIELD f_xowtolim metricsData Lnet/minecraft/unmapped/C_hqvvtxmh;
 	FIELD f_xpelegwm networkIo Lnet/minecraft/unmapped/C_mitbewqx;
 	FIELD f_ydhbqcwa ANONYMOUS_GAME_PROFILE Lcom/mojang/authlib/GameProfile;
 	FIELD f_ypvxjvas layeredRegistryManager Lnet/minecraft/unmapped/C_bcpxdrik;
@@ -133,8 +132,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT @see net.minecraft.server.network.ServerLoginNetworkHandler
 	METHOD m_cpahzimu isStopping ()Z
 	METHOD m_cuuhdoqu syncChunkWrites ()Z
-	METHOD m_cvtpuakg (Lnet/minecraft/unmapped/C_lvnjxuwi;)Ljava/lang/String;
-		ARG 0 profile
 	METHOD m_dajeggfi getResourceManager ()Lnet/minecraft/unmapped/C_tmnrpasf;
 	METHOD m_dbtaxkzj updateMobSpawnOptions ()V
 	METHOD m_ddlaxvao getServerResourcePackProperties ()Ljava/util/Optional;
@@ -178,8 +175,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_gicdpqlb (Ljava/nio/file/Path;)Z
 		ARG 0 path
 	METHOD m_glmgndav getOverworld ()Lnet/minecraft/unmapped/C_bdwnwhiu;
-	METHOD m_goropamt (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Ljava/lang/Throwable;)V
-		ARG 2 error
 	METHOD m_gsecpirt shouldKeepTicking ()Z
 	METHOD m_gzgtxora startServer (Ljava/util/function/Function;)Lnet/minecraft/server/MinecraftServer;
 		ARG 0 serverFactory
@@ -229,9 +224,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_iqernmfn requireResourcePack ()Z
 	METHOD m_ixudjtvq setDefaultGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)V
 		ARG 1 gameMode
-	METHOD m_jcwgeutk (Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;Lcom/google/common/collect/ImmutableList;)Ljava/util/concurrent/CompletionStage;
-		ARG 2 packs
-	METHOD m_jgeevbvz getMetricsData ()Lnet/minecraft/unmapped/C_hqvvtxmh;
 	METHOD m_jgzzempi areCommandBlocksEnabled ()Z
 		COMMENT Specifies whether command blocks can execute commands on the server.
 	METHOD m_kbcfaaja tickWorlds (Ljava/util/function/BooleanSupplier;)V
@@ -253,8 +245,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_lprqwxbm setServerId (Ljava/lang/String;)V
 		ARG 1 serverId
 	METHOD m_magpcgdt getWorldRegistryKeys ()Ljava/util/Set;
-	METHOD m_micghkvm (Ljava/util/Collection;Ljava/lang/String;)Z
-		ARG 1 dataPackName
 	METHOD m_mjweogem getBossBarManager ()Lnet/minecraft/unmapped/C_xtwgkoiw;
 	METHOD m_mnwbpdpc getStructureTemplateManager ()Lnet/minecraft/unmapped/C_zxhjfyir;
 	METHOD m_naezauaw setMotd (Ljava/lang/String;)V
@@ -425,8 +415,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT
 		COMMENT <p>A dedicated server refers to a Minecraft server implementation which is detached from a parent Minecraft client process.
 		COMMENT A dedicated Minecraft server only accepts remote connections.
-	METHOD m_xpcspnzz (Ljava/util/Collection;Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;)V
-		ARG 2 resourceManager
 	METHOD m_xturscpm getPlayerNames ()[Ljava/lang/String;
 	METHOD m_xvswnjyk getPlayerInteractionManager (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_egnasquq;
 		ARG 1 player
@@ -446,8 +434,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_yvsocvtk resetRecorder ()V
 	METHOD m_zopvbxou getSaveProperties ()Lnet/minecraft/unmapped/C_jkevluio;
 	METHOD m_zprgpanc startDebug ()V
-	METHOD m_zqrurnwg (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_dzczqjri;)V
-		ARG 2 result
 	METHOD m_zsxirona getServerIp ()Ljava/lang/String;
 	METHOD m_zueyhxqi loadFavicon ()Ljava/util/Optional;
 	METHOD m_zvxfodpo runOneTask ()Z
