@@ -27,14 +27,10 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	FIELD f_wqiemdiy NON_EMPTY_STRING Lcom/mojang/serialization/Codec;
 	FIELD f_xprfobkx AXISANGLE4F Lcom/mojang/serialization/Codec;
 	FIELD f_zhwzaxnp VECTOR3F Lcom/mojang/serialization/Codec;
-	METHOD m_ceqposdb (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
-		ARG 0 string
 	METHOD m_ceufsyxl withLifecycle (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 codec
 		ARG 1 applyFunction
 		ARG 2 coApplyFunction
-	METHOD m_cjkdnnjx (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
-		ARG 0 json
 	METHOD m_dujfhivb orElsePartial (Ljava/lang/Object;)Lcom/mojang/serialization/Codec$ResultFunction;
 		ARG 0 partial
 	METHOD m_ihvqsgya retrieveContext (Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
@@ -84,8 +80,6 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	METHOD m_lytzwisw validate (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 codec
 		ARG 1 validator
-	METHOD m_mcwzjvkz (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lcom/mojang/serialization/DataResult;
-		ARG 0 text
 	METHOD m_mfpnjepb (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
 		ARG 0 string
 	METHOD m_nsiytucc withNonEmptyList (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
@@ -186,20 +180,6 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 			ARG 1 element
 			ARG 2 ops
 			ARG 3 input
-	CLASS C_shczgrzo Lazy
-		FIELD f_fhlpttkp delegate Ljava/util/function/Supplier;
-		METHOD <init> (Ljava/util/function/Supplier;)V
-			ARG 1 delegate
-		METHOD decode decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-			ARG 1 ops
-			ARG 2 input
-		METHOD encode encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-			ARG 1 object
-			ARG 2 ops
-			ARG 3 input
-		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
-		METHOD m_npuqhxuv delegate ()Ljava/util/function/Supplier;
 	CLASS C_utmdutep EitherCodec
 		FIELD f_nlqguygj right Lcom/mojang/serialization/Codec;
 		FIELD f_okalfhwr left Lcom/mojang/serialization/Codec;
