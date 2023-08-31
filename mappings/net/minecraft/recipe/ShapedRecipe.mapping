@@ -6,31 +6,11 @@ CLASS net/minecraft/unmapped/C_svdvbdmc net/minecraft/recipe/ShapedRecipe
 	FIELD f_otoldace ingredients Lnet/minecraft/unmapped/C_rnrfftze;
 	FIELD f_rduplmjr height I
 	FIELD f_vgraaxco result Lnet/minecraft/unmapped/C_sddaxwyk;
-	FIELD f_ydxeubkr id Lnet/minecraft/unmapped/C_ncpywfca;
-	METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/String;Lnet/minecraft/unmapped/C_aodytokc;IILnet/minecraft/unmapped/C_rnrfftze;Lnet/minecraft/unmapped/C_sddaxwyk;)V
-		ARG 1 id
-		ARG 2 group
-		ARG 3 category
-		ARG 4 width
-		ARG 5 height
-		ARG 6 ingredients
-		ARG 7 result
-	METHOD <init> (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/String;Lnet/minecraft/unmapped/C_aodytokc;IILnet/minecraft/unmapped/C_rnrfftze;Lnet/minecraft/unmapped/C_sddaxwyk;Z)V
-		ARG 1 id
-		ARG 2 group
-		ARG 3 category
-		ARG 4 width
-		ARG 5 height
-		ARG 6 ingredients
-		ARG 7 result
-		ARG 8 showNotification
-	METHOD m_aexdgkze getItem (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_vorddnax;
-		ARG 0 json
 	METHOD m_cfypxnrq findLastSymbol (Ljava/lang/String;)I
 		ARG 0 pattern
 	METHOD m_chdnybyn (Lnet/minecraft/unmapped/C_tcpsydrv;)Z
 		ARG 0 ingredient
-	METHOD m_fdahtdod removePadding ([Ljava/lang/String;)[Ljava/lang/String;
+	METHOD m_fdahtdod removePadding (Ljava/util/List;)[Ljava/lang/String;
 		COMMENT Removes empty space from around the recipe pattern.
 		COMMENT
 		COMMENT <p>Turns patterns such as:</p>
@@ -50,29 +30,12 @@ CLASS net/minecraft/unmapped/C_svdvbdmc net/minecraft/recipe/ShapedRecipe
 		COMMENT </pre>
 		COMMENT
 		COMMENT @return a new recipe pattern with all leading and trailing empty rows/columns removed
-		ARG 0 pattern
-	METHOD m_hiowoyte outputFromJson (Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		ARG 0 json
-	METHOD m_ifzahjoh getPattern (Lcom/google/gson/JsonArray;)[Ljava/lang/String;
-		ARG 0 json
-	METHOD m_jqrdqvvl createPatternMatrix ([Ljava/lang/String;Ljava/util/Map;II)Lnet/minecraft/unmapped/C_rnrfftze;
-		COMMENT Compiles a pattern and series of symbols into a list of ingredients (the matrix) suitable for matching
-		COMMENT against a crafting grid.
-		ARG 0 pattern
-		ARG 1 symbols
-		ARG 2 width
-		ARG 3 height
 	METHOD m_kxjqjjwh getHeight ()I
 	METHOD m_nicctogl matchesPattern (Lnet/minecraft/unmapped/C_fcvwjvlq;IIZ)Z
 		ARG 1 inv
 		ARG 2 offsetX
 		ARG 3 offsetY
 		ARG 4 flipped
-	METHOD m_oalvbalf readSymbols (Lcom/google/gson/JsonObject;)Ljava/util/Map;
-		COMMENT Reads the pattern symbols.
-		COMMENT
-		COMMENT @return a mapping from a symbol to the ingredient it represents
-		ARG 0 json
 	METHOD m_vanufxmu findFirstSymbol (Ljava/lang/String;)I
 		ARG 0 line
 	METHOD m_xcigvqfc getWidth ()I
