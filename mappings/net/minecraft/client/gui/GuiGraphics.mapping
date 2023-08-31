@@ -5,6 +5,7 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 	FIELD f_kjjmmero client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_nyndozay managed Z
 	FIELD f_oftqilkq MIN_Z_POS F
+	FIELD f_pwjfkarr guiAtlasManager Lnet/minecraft/unmapped/C_ihnghycr;
 	FIELD f_venmzkqo MAX_Z_POS F
 	FIELD f_zklkrpmc matrices Lnet/minecraft/unmapped/C_cnszsxvd;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;)V
@@ -64,18 +65,6 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 6 z
 		ARG 7 startColor
 		ARG 8 endColor
-	METHOD m_dbqwgzvf drawNineSlicedTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIIIII)V
-		ARG 1 texture
-		ARG 2 x
-		ARG 3 y
-		ARG 4 width
-		ARG 5 height
-		ARG 6 outerSliceWidth
-		ARG 7 outerSliceHeight
-		ARG 8 centerSliceWidth
-		ARG 9 centerSliceHeight
-		ARG 10 u
-		ARG 11 v
 	METHOD m_drzxcihj drawText (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_apvkgwyi;IIIZ)I
 		ARG 1 renderer
 		ARG 2 text
@@ -115,20 +104,6 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 4 width
 		ARG 5 height
 	METHOD m_eqooacma getScaledWindowWidth ()I
-	METHOD m_etqcqghf drawNineSlicedTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIIIIIII)V
-		ARG 1 texture
-		ARG 2 x
-		ARG 3 y
-		ARG 4 width
-		ARG 5 height
-		ARG 6 leftSliceWidth
-		ARG 7 topSliceHeight
-		ARG 8 rightSliceWidth
-		ARG 9 bottomSliceHeight
-		ARG 10 centerSliceWidth
-		ARG 11 centerSliceHeight
-		ARG 12 u
-		ARG 13 v
 	METHOD m_fndmkqct drawTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIFFIIII)V
 		ARG 1 texture
 		ARG 2 x
@@ -153,6 +128,27 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 tooltip
 		ARG 3 x
 		ARG 4 y
+	METHOD m_gtwewgcz drawGuiTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIII)V
+		ARG 1 texture
+		ARG 2 sliceWidth1
+		ARG 3 sliceHeight1
+		ARG 4 sliceWidth2
+		ARG 5 sliceHeight2
+		ARG 6 x
+		ARG 7 y
+		ARG 8 width
+		ARG 9 height
+	METHOD m_gxfmwcnk drawGuiTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIIII)V
+		ARG 1 texture
+		ARG 2 sliceWidth1
+		ARG 3 sliceHeight1
+		ARG 4 sliceWidth2
+		ARG 5 sliceHeight2
+		ARG 6 x
+		ARG 7 y
+		ARG 8 z
+		ARG 9 width
+		ARG 10 height
 	METHOD m_hffqgjmo setShaderColor (FFFF)V
 		ARG 1 red
 		ARG 2 green
@@ -238,24 +234,24 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 positioner
 		ARG 4 x
 		ARG 5 y
+	METHOD m_mssucndx drawTiledSprite (Lnet/minecraft/unmapped/C_uflrwbwt;IIIIIIIIIII)V
+		ARG 1 sprite
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+		ARG 5 width
+		ARG 6 height
+		ARG 7 sliceWidth2
+		ARG 8 sliceHeight2
+		ARG 9 xStep
+		ARG 10 yStep
+		ARG 11 sliceWidth1
+		ARG 12 sliceHeight1
 	METHOD m_ndbrosea draw ()V
 	METHOD m_nrdsaoow drawTooltip (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_sddaxwyk;II)V
 		ARG 1 textRenderer
 		ARG 3 x
 		ARG 4 y
-	METHOD m_nspwbabk createDivisor (II)Lit/unimi/dsi/fastutil/ints/IntIterator;
-		ARG 0 length
-		ARG 1 textureLength
-	METHOD m_nvadgujq drawRepeatingTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIII)V
-		ARG 1 texture
-		ARG 2 x
-		ARG 3 y
-		ARG 4 width
-		ARG 5 height
-		ARG 6 u
-		ARG 7 v
-		ARG 8 textureWidth
-		ARG 9 textureHeight
 	METHOD m_ogfzqncf drawTexturedQuad (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIFFFFFFFF)V
 		ARG 1 texture
 		ARG 2 x1
@@ -271,17 +267,6 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 12 green
 		ARG 13 blue
 		ARG 14 alpha
-	METHOD m_ougjesud drawNineSlicedTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIIII)V
-		ARG 1 texture
-		ARG 2 x
-		ARG 3 y
-		ARG 4 width
-		ARG 5 height
-		ARG 6 outerSliceSize
-		ARG 7 centerSliceWidth
-		ARG 8 centerSliceHeight
-		ARG 9 u
-		ARG 10 v
 	METHOD m_pbbebkzn flushIfUnmanaged ()V
 	METHOD m_pclmmjoi (Ljava/util/List;Lnet/minecraft/unmapped/C_mzaxvunb;)V
 		ARG 1 data
@@ -300,6 +285,12 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 6 startColor
 		ARG 7 endColor
 	METHOD m_pwihpxdk disableScissor ()V
+	METHOD m_pycordis drawGuiTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIII)V
+		ARG 1 texture
+		ARG 2 x
+		ARG 3 y
+		ARG 4 width
+		ARG 5 height
 	METHOD m_qstrpmyr fill (IIIII)V
 		ARG 1 x1
 		ARG 2 y1
@@ -321,6 +312,13 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 5 v
 		ARG 6 width
 		ARG 7 height
+	METHOD m_rfponljw drawSprite (Lnet/minecraft/unmapped/C_uflrwbwt;IIIII)V
+		ARG 1 sprite
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+		ARG 5 width
+		ARG 6 height
 	METHOD m_roxvdzgq enableScissor (IIII)V
 		ARG 1 x1
 		ARG 2 y1
@@ -345,6 +343,13 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 4 x
 		ARG 5 y
 		ARG 6 seed
+	METHOD m_tfcymekl drawGuiTexture (Lnet/minecraft/unmapped/C_ncpywfca;IIIII)V
+		ARG 1 texture
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+		ARG 5 width
+		ARG 6 height
 	METHOD m_tjsjezzn drawItemWithoutEntity (Lnet/minecraft/unmapped/C_sddaxwyk;II)V
 		ARG 2 x
 		ARG 3 y
@@ -416,6 +421,14 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 width
 		ARG 4 height
 		ARG 5 color
+	METHOD m_yrmetwxg drawNineSlicedSprite (Lnet/minecraft/unmapped/C_uflrwbwt;Lnet/minecraft/unmapped/C_ctosjovs$C_ycdqkkvr;IIIII)V
+		ARG 1 sprite
+		ARG 2 nineSlice
+		ARG 3 x
+		ARG 4 y
+		ARG 5 z
+		ARG 6 width
+		ARG 7 height
 	METHOD m_zpgnewud drawTooltip (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/util/List;IILnet/minecraft/unmapped/C_imjripdz;)V
 		ARG 1 textRenderer
 		ARG 2 tooltip
@@ -427,6 +440,17 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 style
 		ARG 3 x
 		ARG 4 y
+	METHOD m_zxyljofk drawSprite (Lnet/minecraft/unmapped/C_uflrwbwt;IIIIIIIII)V
+		ARG 1 sprite
+		ARG 2 sliceWidth1
+		ARG 3 sliceHeight1
+		ARG 4 sliceWidth2
+		ARG 5 sliceHeight2
+		ARG 6 x
+		ARG 7 y
+		ARG 8 z
+		ARG 9 width
+		ARG 10 height
 	CLASS C_xsuthgpb ScissorStack
 		FIELD f_qblwlwvg stack Ljava/util/Deque;
 		METHOD m_adcpupvd push (Lnet/minecraft/unmapped/C_erwldarl;)Lnet/minecraft/unmapped/C_erwldarl;

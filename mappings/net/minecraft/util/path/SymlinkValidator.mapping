@@ -1,11 +1,28 @@
 CLASS net/minecraft/unmapped/C_jgxjjhjn net/minecraft/util/path/SymlinkValidator
-	FIELD f_svrtftfg pathMatcher Lnet/minecraft/unmapped/C_dpwvcnei;
-	METHOD m_gnwqyyfp validate (Ljava/nio/file/Path;Ljava/util/List;)V
-		ARG 1 path
-		ARG 2 results
-	METHOD m_xbvtudgh validateSave (Ljava/nio/file/Path;Z)Ljava/util/List;
-		ARG 1 path
-		ARG 2 resolveSymlink
+	FIELD f_svrtftfg allowedSymlinkMatcher Ljava/nio/file/PathMatcher;
+	METHOD m_euykifgm validateDirectory (Ljava/nio/file/Path;Z)Ljava/util/List;
+		COMMENT Validates a directory.
+		COMMENT <p>
+		COMMENT If {@code validateContents} is true, then the directory's contents (but not the directory itself!) is inspected
+		COMMENT for forbidden symlinks. Pass {@code true} if you don't care if the passed directory is a symlink elsewhere,
+		COMMENT but do care about the contents of the directory being safe. For example, Minecraft doesn't care if a world
+		COMMENT folder is a symlink elsewhere, but the contents of the world cannot contain forbidden symlinks.
+		COMMENT <p>
+		COMMENT If you only want to verify whether the directory itself is an allowed symlink, pass {@code false}.
+		COMMENT
+		COMMENT @return any forbidden symlinks
+		ARG 1 dir
+			COMMENT the directory to validate
+		ARG 2 validateContents
+			COMMENT whether to validate the contents of the directory, or the directory itself
+	METHOD m_plelqbgv validateSymlink (Ljava/nio/file/Path;Ljava/util/List;)V
+		ARG 1 symlink
+		ARG 2 foundForbiddenLinks
+	METHOD m_wxpdofaa validateDirectoryContents (Ljava/nio/file/Path;Ljava/util/List;)V
+		ARG 1 dir
+		ARG 2 foundForbiddenLinks
+	METHOD m_ztjbybov validateSymlink (Ljava/nio/file/Path;)Ljava/util/List;
+		ARG 1 symlink
 	CLASS C_redzjhyo
 		METHOD m_snezytsc validateSymlink (Ljava/nio/file/Path;Ljava/nio/file/attribute/BasicFileAttributes;)V
 			ARG 1 path

@@ -80,7 +80,7 @@ configurations {
 dependencies {
 	enigmaRuntime(libs.enigma.swing)
 	enigmaRuntime(libs.enigma.plugin)
-	javadocClasspath(libs.fabric.loader)
+	javadocClasspath(libs.quilt.loader)
 	javadocClasspath(libs.jetbrains.annotations)
 	javadocClasspath(libs.jsr305) // for some other jsr annotations
 	decompileClasspath(libs.cfr)
@@ -219,6 +219,17 @@ task buildIntermediary {
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	jarFile = mappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
+	// TODO: https://github.com/Vineflower/vineflower/issues/297
+	visitor { new ClassVisitor(Opcodes.ASM9, it) {
+		@Override
+		void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+			if (superName == "java/lang/Record") {
+				access |= Opcodes.ACC_RECORD
+			}
+			super.visit(version, access, name, signature, superName, interfaces)
+		}
+	} }
+
 	visitor(DraftsmanAdapterClassVisitor::new)
 	// Set protected/package-private classes to public so that we don't have any access compile errors.
 	// TODO: Fix this by putting the classes in the same package. Javadoc shows the modifier
@@ -350,7 +361,7 @@ javadoc {
 	dependsOn docletClasses // Needed for javadoc to find the doclet classes.
 	group = "javadoc generation"
 	outputs.upToDateWhen { false }
-
+	destinationDir = file("${buildDir}/docs/${project.version}")
 	def docletResources = sourceSets.doclet.resources.asFileTree
 
 	failOnError = true // Failing on error is important to ensure that a Javadoc jar is available.
@@ -388,7 +399,7 @@ javadoc {
 				"https://commons.apache.org/proper/commons-lang/javadocs/api-release/",
 				"https://commons.apache.org/proper/commons-io/apidocs/",
 				"https://commons.apache.org/proper/commons-codec/archives/${project.commons_codec}/apidocs/",
-				"https://maven.fabricmc.net/docs/fabric-loader-${libs.versions.fabric.loader.get()}/",
+				"https://javadoc.quiltmc.org/quilt-loader/${libs.versions.quilt.loader.get()}/",
 				"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
 		)
 		// https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet

@@ -3,25 +3,25 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	COMMENT server or one to a server on a client.
 	FIELD f_arvbntbf PACKET_RECEIVED_MARKER Lorg/slf4j/Marker;
 	FIELD f_bcutours ticks I
-	FIELD f_bgaglckf packetQueue Ljava/util/Queue;
 	FIELD f_daxqlowt address Ljava/net/SocketAddress;
 	FIELD f_eatlkkxl encrypted Z
-	FIELD f_ewnrqslo LOCAL_CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_oabgzozl;
+	FIELD f_ewnrqslo LOCAL_CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_gaynmpqg side Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT The side this connection is to.
-	FIELD f_gecyhplb PROTOCOL_ATTRIBUTE_KEY Lio/netty/util/AttributeKey;
-		COMMENT The attribute key for the current network state of the backing netty
-		COMMENT channel.
 	FIELD f_hgoaaoyc disconnectReason Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_howpitdi NETWORK_PACKETS_MARKER Lorg/slf4j/Marker;
-	FIELD f_hudxxxbp CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_oabgzozl;
+	FIELD f_hudxxxbp CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_jrcdtkyf averagePacketsSent F
 	FIELD f_kawdlrjp channel Lio/netty/channel/Channel;
+	FIELD f_lafevvyl queuedTasks Ljava/util/Queue;
 	FIELD f_lspmidtv LOGGER Lorg/slf4j/Logger;
+	FIELD f_ltsvsynv S2C_PROTOCOL_KEY Lio/netty/util/AttributeKey;
 	FIELD f_mamtuefi packetsReceivedCounter I
+	FIELD f_naljjxui disconnectListener Lnet/minecraft/unmapped/C_tkgdawqw;
 	FIELD f_nqkzlzra PACKET_SENT_MARKER Lorg/slf4j/Marker;
-	FIELD f_pdctspiv EPOLL_CLIENT_IO_GROUP Lnet/minecraft/unmapped/C_oabgzozl;
+	FIELD f_pdctspiv EPOLL_CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_sjhnumre averagePacketsReceived F
+	FIELD f_tealfggb C2S_PROTOCOL_KEY Lio/netty/util/AttributeKey;
 	FIELD f_ucdtbtsq packetListener Lnet/minecraft/unmapped/C_tkgdawqw;
 	FIELD f_vcukytvt errored Z
 	FIELD f_wborsynf NETWORK_MARKER Lorg/slf4j/Marker;
@@ -52,38 +52,68 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 0 address
 		ARG 1 useEpoll
 		ARG 2 connection
-	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
+	METHOD m_ayigybdt disableAutoReload ()V
+	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
 		ARG 1 packet
 		ARG 2 listener
+		ARG 3 flush
 	METHOD m_bhwloxoc getPacketListener ()Lnet/minecraft/unmapped/C_tkgdawqw;
 	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_bnpqdudq hasChannel ()Z
 	METHOD m_bywquzql getDisconnectReason ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_cmmddozg setProtocolAttributes (Lio/netty/channel/Channel;)V
+		ARG 0 channel
 	METHOD m_cxygpyan disableAutoRead ()V
+	METHOD m_dinouaaw getProtocolKey (Lnet/minecraft/unmapped/C_exeqxqdd;)Lio/netty/util/AttributeKey;
+		ARG 0 side
+	METHOD m_ebhlhyxr setS2CPacketHandler (Lnet/minecraft/unmapped/C_uxoyljpb;)V
+		ARG 1 intent
 	METHOD m_ebvsfyfg setupEncryption (Ljavax/crypto/Cipher;Ljavax/crypto/Cipher;)V
 		ARG 1 decryptionCipher
 		ARG 2 encryptionCipher
 	METHOD m_egofcujr send (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 packet
 	METHOD m_eiltuozj updateStats ()V
-	METHOD m_ejdecnhl addHandlers (Lio/netty/channel/ChannelPipeline;Lnet/minecraft/unmapped/C_exeqxqdd;)V
+	METHOD m_ejdecnhl addHandlers (Lio/netty/channel/ChannelPipeline;Lnet/minecraft/unmapped/C_exeqxqdd;Lnet/minecraft/unmapped/C_gxhfclcm;)V
 		ARG 0 pipeline
 		ARG 1 side
+	METHOD m_faopouol flushInternal ()V
+	METHOD m_fqnxiapg submit (Ljava/util/function/Consumer;)V
+		ARG 1 task
+	METHOD m_gwpixgaq connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_tkgdawqw;Lnet/minecraft/unmapped/C_uxoyljpb;)V
+		ARG 1 address
+		ARG 2 port
+		ARG 3 listener
+		ARG 4 intent
 	METHOD m_honyjhko (Lorg/slf4j/Marker;)V
 		ARG 0 marker
-	METHOD m_igiszgub getState ()Lnet/minecraft/unmapped/C_kxdobmrm;
-		COMMENT Returns the current network state of this connection.
+	METHOD m_iopaivkv addValidatorInternal (Lio/netty/channel/ChannelPipeline;Lnet/minecraft/unmapped/C_exeqxqdd;)V
+		ARG 0 pipeline
+		ARG 1 side
+	METHOD m_jfnkfhlj addValidator (Lio/netty/channel/ChannelPipeline;Lnet/minecraft/unmapped/C_exeqxqdd;)V
+		ARG 0 pipeline
+		ARG 1 side
 	METHOD m_jitsmihi getAveragePacketsReceived ()F
 	METHOD m_kbtplepg disconnect (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 disconnectReason
 	METHOD m_kqbvmhdm getOppositeSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT Returns the opposite side of this connection, or the direction of the packets
 		COMMENT sent by this connection.
+	METHOD m_kxmmachs setHandshakeListener (Lnet/minecraft/unmapped/C_tkgdawqw;)V
+		ARG 1 listener
 	METHOD m_lyptmghi connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
-	METHOD m_moawflfe setState (Lnet/minecraft/unmapped/C_kxdobmrm;)V
-		ARG 1 state
+	METHOD m_myzbxovj connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_jsvwwjov;)V
+		ARG 1 address
+		ARG 2 port
+		ARG 3 listener
+	METHOD m_oetgkssj (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;ZLnet/minecraft/unmapped/C_oasmcckk;)V
+		ARG 3 connection
+	METHOD m_qoorbrdh connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_nyzvjqyd;)V
+		ARG 1 address
+		ARG 2 port
+		ARG 3 listener
 	METHOD m_qqopfmuz setPacketListener (Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		COMMENT Sets the packet listener that will handle oncoming packets, including
 		COMMENT ones that are not yet handled by the current packet listener.
@@ -97,8 +127,13 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_rsirbonf send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
 		ARG 1 packet
 		ARG 2 listener
+	METHOD m_rvagcspt getLoggableAddress (Z)Ljava/lang/String;
+		ARG 1 logIps
 	METHOD m_sigcqeza getAddress ()Ljava/net/SocketAddress;
+	METHOD m_sprgohsj flush ()V
 	METHOD m_tulexlec tick ()V
+	METHOD m_ufahuesy (Lnet/minecraft/unmapped/C_zddpfpkk;Lio/netty/util/concurrent/Future;)V
+		ARG 2 future
 	METHOD m_uhgukhmf getAveragePacketsSent ()F
 	METHOD m_urabqmij isEncrypted ()Z
 	METHOD m_uyfxzupt setCompressionThreshold (IZ)V
@@ -114,21 +149,23 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 			COMMENT the compression threshold, in number of bytes
 		ARG 2 rejectsBadPackets
 			COMMENT whether this connection may abort if a compressed packet with a bad size is received
-	METHOD m_vkqagjgi connect (Ljava/net/InetSocketAddress;Z)Lnet/minecraft/unmapped/C_oasmcckk;
+	METHOD m_vkqagjgi connect (Ljava/net/InetSocketAddress;ZLnet/minecraft/unmapped/C_fnzofwlw;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
 		ARG 1 useEpoll
-	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Lnet/minecraft/unmapped/C_kxdobmrm;Lnet/minecraft/unmapped/C_kxdobmrm;)V
+	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
 		ARG 1 packet
 		ARG 2 listener
-		ARG 3 newNetworkState
-		ARG 4 currentNetworkState
+		ARG 3 flush
 	METHOD m_wlmhzfek handleDisconnection ()V
-	METHOD m_wrnibrta (Lnet/minecraft/unmapped/C_zddpfpkk;Lio/netty/util/concurrent/Future;)V
-		ARG 2 future
 	METHOD m_wrxqepoa isLocal ()Z
 	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_xphjmqxa isOpen ()Z
+	METHOD m_yimhdukv enableAutoReload ()V
+	METHOD m_zbfykobd send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
+		ARG 1 packet
+		ARG 2 sendListener
+		ARG 3 flush
 	METHOD m_ziivfjpb getSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT Returns the side of this connection, or the direction of the packets received
 		COMMENT by this connection.
@@ -138,9 +175,3 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	CLASS C_qurkirxp
 		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
-	CLASS C_zhxqmkfq QueuedPacket
-		FIELD f_ogqzkbuy callback Lnet/minecraft/unmapped/C_zddpfpkk;
-		FIELD f_qjiczabl packet Lnet/minecraft/unmapped/C_zyjtrjrl;
-		METHOD <init> (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
-			ARG 1 packet
-			ARG 2 sendListener
