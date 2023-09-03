@@ -1,0 +1,33 @@
+CLASS net/minecraft/unmapped/C_canerwqz net/minecraft/server/network/ServerChunkSender
+	FIELD f_biaawkpg desiredChunksPerTick F
+		COMMENT The amount of chunks per tick requested by the client.
+	FIELD f_bqkhyjcq unacknowledgedBatches I
+	FIELD f_cxttpcjd batchQuota F
+		COMMENT The amount of chunks we want to send in the next batch.
+	FIELD f_dneuetoy isLocal Z
+	FIELD f_evbilvrp START_CHUNKS_PER_TICK F
+	FIELD f_hoataogl MAX_CHUNKS_PER_TICK F
+	FIELD f_jwzvbgyp pendingChunks Lit/unimi/dsi/fastutil/longs/LongSet;
+	FIELD f_pzpcijhg maxUnacknowledgedBatches I
+		COMMENT The amount of batches that can be sent before one must be acknowledged with {@code #onChunkBatchAcknowledged(float)}.
+	FIELD f_snpspehh MIN_CHUNKS_PER_TICK F
+	FIELD f_zpinngsh MAX_UNACKNOWLEDGED_BATCHES I
+	METHOD m_krvjoldd sendBatch (Lnet/minecraft/unmapped/C_mxrobsgg;)V
+		ARG 1 player
+	METHOD m_lovbibyf unloadChunk (Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_ynrszrtu;)V
+		COMMENT Drops the chunk from the queue (if not yet sent), otherwise tells the player to unload the chunk via {@link net.minecraft.network.packet.s2c.play.ChunkUnloadS2CPacket}.
+		ARG 1 player
+		ARG 2 pos
+	METHOD m_luffamtr collectChunksToSend (Lnet/minecraft/unmapped/C_gxrpzacc;Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/List;
+		ARG 1 chunkManager
+		ARG 2 pos
+	METHOD m_rsmbjmmj onChunkBatchAcknowledged (F)V
+		ARG 1 desiredChunksPerTick
+	METHOD m_uwdzfiae isChunkPending (J)Z
+		ARG 1 pos
+	METHOD m_wrydxnej addChunk (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+		COMMENT Adds the passed chunk to the queue to be sent to the client.
+		ARG 1 chunk
+	METHOD m_ypecfkqn sendChunk (Lnet/minecraft/unmapped/C_hwbabymg;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+		ARG 0 handler
+		ARG 2 chunk

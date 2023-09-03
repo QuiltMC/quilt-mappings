@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 	FIELD f_alyyezsp teleportRequestTick I
 	FIELD f_bragqdfw blockChangeSequence I
 	FIELD f_cpyejxjp messageSignatureStorage Lnet/minecraft/unmapped/C_avoeygij;
+	FIELD f_cvlglhqu chunkSender Lnet/minecraft/unmapped/C_canerwqz;
 	FIELD f_dmpkwvhc creativeItemDropThreshold I
 	FIELD f_dnooktbx lastTickRiddenX D
 	FIELD f_dpgelbgj requestedTeleportId I
@@ -31,9 +32,14 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 	FIELD f_rqkpyple floating Z
 	FIELD f_uadqjyru updatedZ D
 	FIELD f_vdiwjdct vehicleFloating Z
+	FIELD f_vxseyrmy waitingForConfigSwitch Z
 	FIELD f_xhuxormp topmostRiddenEntity Lnet/minecraft/unmapped/C_astfners;
 	FIELD f_xiknadng lastTickX D
 	FIELD f_zrhvuvya vehicleFloatingTicks I
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_mxrobsgg;I)V
+		ARG 1 server
+		ARG 2 connection
+		ARG 4 latency
 	METHOD m_cgoqlzes validateAcknowledgment (Lnet/minecraft/unmapped/C_mofgmouu$C_afrzjbhr;)Ljava/util/Optional;
 		ARG 1 acknowledgment
 	METHOD m_csymlmvj addMessageForValidation (Lnet/minecraft/unmapped/C_zzdolisx;)V
@@ -46,6 +52,7 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 		ARG 1 title
 		ARG 2 pages
 		ARG 3 slotId
+	METHOD m_ghrpkymk removePlayerFromWorld ()V
 	METHOD m_hdqexjul unpack (Lnet/minecraft/unmapped/C_emczwapr;Lnet/minecraft/unmapped/C_mofgmouu;)Lnet/minecraft/unmapped/C_zzdolisx;
 		ARG 1 messagePacket
 		ARG 2 signatureList
@@ -55,9 +62,11 @@ CLASS net/minecraft/unmapped/C_hwbabymg net/minecraft/server/network/ServerPlayN
 		ARG 5 z
 		ARG 7 yaw
 		ARG 8 pitch
+	METHOD m_hfaorrka switchToConfig ()V
 	METHOD m_ixrswtwl updateBookContent (Ljava/util/List;I)V
 		ARG 1 pages
 		ARG 2 slotId
+	METHOD m_kcobwekx parseCommand (Ljava/lang/String;)Lcom/mojang/brigadier/ParseResults;
 	METHOD m_ktyhohne (Ljava/lang/String;Ljava/time/Instant;Lnet/minecraft/unmapped/C_mofgmouu$C_afrzjbhr;)Ljava/util/Optional;
 		ARG 3 acknowledgment
 	METHOD m_lseobmtm (Lnet/minecraft/unmapped/C_ahusqrxm;Lnet/minecraft/unmapped/C_mofgmouu;)V
