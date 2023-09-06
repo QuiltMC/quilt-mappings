@@ -1,5 +1,5 @@
 CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
-	FIELD f_aqbcwkwn rules Ljava/util/Map;
+	FIELD f_aqbcwkwn gameRules Ljava/util/Map;
 	FIELD f_bekpwqfx DEFAULT_RANDOM_TICK_SPEED I
 	FIELD f_bjonrkyp COMMAND_BLOCK_OUTPUT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_cgocceiq DO_WARDEN_SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
@@ -12,7 +12,7 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 	FIELD f_enlwvizg DO_LIMITED_CRAFTING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_ezxiljsj COMMAND_MODIFICATION_BLOCK_LIMIT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_fhvryuhr UNIVERSAL_ANGER Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-	FIELD f_fskutrwp RULE_TYPES Ljava/util/Map;
+	FIELD f_fskutrwp GAME_RULE_TYPES Ljava/util/Map;
 	FIELD f_gmtiujwd DO_WEATHER_CYCLE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_hlmqygvm LAVA_SOURCE_CONVERSION Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_huvodyag DO_TILE_DROPS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
@@ -73,11 +73,11 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		COMMENT A {@linkplain AbstractGameRule game rule} which regulates the number of entities that can be crammed into a block space before they incur cramming damage.
 	FIELD f_zwlbxxnu GLOBAL_SOUND_EVENTS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	METHOD <init> (Lcom/mojang/serialization/DynamicLike;)V
-		ARG 1 rules
+		ARG 1 gameRules
 	METHOD <init> (Ljava/util/Map;)V
-		ARG 1 rules
+		ARG 1 gameRules
 	METHOD m_annnbzfc setAllValues (Lnet/minecraft/unmapped/C_xmldumst;Lnet/minecraft/server/MinecraftServer;)V
-		ARG 1 rules
+		ARG 1 other
 		ARG 2 server
 	METHOD m_dpsrpyxn getInt (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)I
 		ARG 1 rule
@@ -85,12 +85,12 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 0 key
 	METHOD m_eyajgani (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
 		ARG 0 server
-		ARG 1 rule
+		ARG 1 gameRule
 	METHOD m_fecviigu (Lnet/minecraft/unmapped/C_xmldumst;Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)V
 		ARG 3 key
 	METHOD m_frnoyjna (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;)V
 		ARG 1 key
-		ARG 2 rule
+		ARG 2 gameRule
 	METHOD m_gdklogjj accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;)V
 		COMMENT Make the visitor visit all registered game rules.
 		COMMENT <p>
@@ -101,21 +101,21 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 	METHOD m_khbebsio toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_kkvdhcio copy ()Lnet/minecraft/unmapped/C_xmldumst;
 	METHOD m_magbttmy load (Lcom/mojang/serialization/DynamicLike;)V
-		ARG 1 rules
+		ARG 1 gameRules
 	METHOD m_mijxrbwk get (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
 		ARG 1 key
 	METHOD m_qoslnous (Lcom/mojang/serialization/DynamicLike;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;)V
 		ARG 1 key
-		ARG 2 rule
+		ARG 2 gameRule
 	METHOD m_rhqcjlsp (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
 		ARG 1 key
 		ARG 2 type
 	METHOD m_srlsshkl setValue (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst;Lnet/minecraft/server/MinecraftServer;)V
 		ARG 1 key
-		ARG 2 rules
+		ARG 2 other
 		ARG 3 server
 	METHOD m_tahqotkb (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
-		ARG 0 e
+		ARG 0 entry
 	METHOD m_vkgvfrzn getBoolean (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Z
 		ARG 1 rule
 	METHOD m_vwilyacl (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
@@ -125,6 +125,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 0 consumer
 		ARG 1 key
 		ARG 2 type
+	METHOD m_zerrhast (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
+		ARG 0 entry
 	METHOD m_zuudbppt register (Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		ARG 0 name
 		ARG 1 category
