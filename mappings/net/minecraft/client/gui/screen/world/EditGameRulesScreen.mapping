@@ -1,5 +1,5 @@
 CLASS net/minecraft/unmapped/C_ajacvfls net/minecraft/client/gui/screen/world/EditGameRulesScreen
-	FIELD f_amstfopq ruleListWidget Lnet/minecraft/unmapped/C_ajacvfls$C_ymfbyxcw;
+	FIELD f_amstfopq gameRuleEntryList Lnet/minecraft/unmapped/C_ajacvfls$C_ymfbyxcw;
 	FIELD f_awwsqphe ruleSaver Ljava/util/function/Consumer;
 	FIELD f_chwevqgh tooltip Ljava/util/List;
 	FIELD f_isrywwwb doneButton Lnet/minecraft/unmapped/C_buwziidm;
@@ -19,70 +19,70 @@ CLASS net/minecraft/unmapped/C_ajacvfls net/minecraft/client/gui/screen/world/Ed
 		ARG 1 button
 	METHOD m_ocffiabp markValid (Lnet/minecraft/unmapped/C_ajacvfls$C_vdrulthz;)V
 		ARG 1 ruleWidget
-	CLASS C_fntallks RuleWidgetFactory
+	CLASS C_fntallks GameRuleEntryFactory
 		METHOD create create (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/List;Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;)Lnet/minecraft/unmapped/C_ajacvfls$C_vdrulthz;
 			ARG 1 name
-			ARG 2 description
-			ARG 3 ruleName
+			ARG 2 tooltip
+			ARG 3 description
 			ARG 4 rule
-	CLASS C_lppnmpti NamedRuleWidget
-		FIELD f_ggwwaclx name Ljava/util/List;
+	CLASS C_lppnmpti GameRuleEntry
+		FIELD f_ggwwaclx message Ljava/util/List;
 		FIELD f_nxcbmpxi children Ljava/util/List;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ajacvfls;Ljava/util/List;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
-			ARG 2 description
-			ARG 3 name
-		METHOD m_getgtnya drawName (Lnet/minecraft/unmapped/C_sedilmty;II)V
-			ARG 2 x
-			ARG 3 y
-	CLASS C_nulgdlho RuleCategoryWidget
-		FIELD f_oqcsioxt name Lnet/minecraft/unmapped/C_rdaqiwdt;
+			ARG 2 tooltip
+			ARG 3 message
+		METHOD m_getgtnya drawMessage (Lnet/minecraft/unmapped/C_sedilmty;II)V
+			ARG 2 y
+			ARG 3 x
+	CLASS C_nulgdlho CategoryEntry
+		FIELD f_oqcsioxt title Lnet/minecraft/unmapped/C_rdaqiwdt;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ajacvfls;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
-			ARG 2 text
-	CLASS C_vbuitpof IntRuleWidget
-		FIELD f_rrnlapbl valueWidget Lnet/minecraft/unmapped/C_vopzcnhf;
+			ARG 2 title
+	CLASS C_vbuitpof IntGameRuleEntry
+		FIELD f_rrnlapbl valueField Lnet/minecraft/unmapped/C_vopzcnhf;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ajacvfls;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/List;Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;)V
-			ARG 2 name
-			ARG 3 description
-			ARG 4 ruleName
+			ARG 2 message
+			ARG 3 tooltip
+			ARG 4 description
 			ARG 5 rule
 		METHOD m_yamhjwfu (Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;Ljava/lang/String;)V
 			ARG 2 value
-	CLASS C_vdrulthz AbstractRuleWidget
-		FIELD f_eexekwhn description Ljava/util/List;
+	CLASS C_vdrulthz AbstractEntry
+		FIELD f_eexekwhn tooltip Ljava/util/List;
 		METHOD <init> (Ljava/util/List;)V
-			ARG 1 description
-	CLASS C_xpragfeh BooleanRuleWidget
+			ARG 1 tooltip
+	CLASS C_xpragfeh BooleanGameRuleEntry
 		FIELD f_ofxfnaaa toggleButton Lnet/minecraft/unmapped/C_ikfvpkkf;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ajacvfls;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/List;Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
-			ARG 2 name
-			ARG 3 description
-			ARG 4 ruleName
+			ARG 2 message
+			ARG 3 tooltip
+			ARG 4 description
 			ARG 5 rule
 		METHOD m_wzrvbdmo (Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Boolean;)V
 			ARG 1 button
 			ARG 2 value
 		METHOD m_znouopbs (Ljava/lang/String;Lnet/minecraft/unmapped/C_ikfvpkkf;)Lnet/minecraft/unmapped/C_npqneive;
 			ARG 1 button
-	CLASS C_ymfbyxcw RuleListWidget
+	CLASS C_ymfbyxcw GameRuleEntryListWidget
 		METHOD <init> (Lnet/minecraft/unmapped/C_ajacvfls;Lnet/minecraft/unmapped/C_xmldumst;)V
 			ARG 2 gameRules
 		METHOD m_evugyeiw (Ljava/util/Map$Entry;)V
-			ARG 1 entry
+			ARG 1 categoryMapEntry
 		METHOD m_ffjznduo (Ljava/util/Map$Entry;)V
-			ARG 1 entry
+			ARG 1 gameRuleMapEntry
 		CLASS C_gcpwlttt
 			METHOD m_oeheuegh (Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;)Ljava/util/Map;
 				ARG 0 category
 			METHOD m_ozlaroln (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/List;Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;)Lnet/minecraft/unmapped/C_ajacvfls$C_vdrulthz;
-				ARG 1 name
-				ARG 2 description
-				ARG 3 ruleName
-				ARG 4 rule
-			METHOD m_sdzliaky createRuleWidget (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_ajacvfls$C_fntallks;)V
+				ARG 1 message
+				ARG 2 tooltip
+				ARG 3 description
+				ARG 4 gameRule
+			METHOD m_sdzliaky createGameRuleEntry (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_ajacvfls$C_fntallks;)V
 				ARG 1 key
-				ARG 2 widgetFactory
+				ARG 2 gameRuleEntryFactory
 			METHOD m_wpkknllz (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/List;Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)Lnet/minecraft/unmapped/C_ajacvfls$C_vdrulthz;
-				ARG 1 name
-				ARG 2 description
-				ARG 3 ruleName
-				ARG 4 rule
+				ARG 1 message
+				ARG 2 tooltip
+				ARG 3 description
+				ARG 4 gameRule
