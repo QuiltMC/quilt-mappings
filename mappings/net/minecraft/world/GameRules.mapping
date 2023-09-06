@@ -93,8 +93,10 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 2 rule
 	METHOD m_gdklogjj accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;)V
 		COMMENT Make the visitor visit all registered game rules.
-		COMMENT
-		COMMENT <p>The visitation involves calling both {@link Visitor#visit(GameRules.Key, GameRules.Type)} and {@code visitX} for every game rule, where X is the current rule's concrete type such as a boolean.
+		COMMENT <p>
+		COMMENT The visitation involves calling both {@link Visitor#visitGameRule(GameRules.Key, GameRules.Type)} and
+		COMMENT {@link Visitor#visitBooleanGameRule(GameRules.Key, GameRules.Type)} or {@link Visitor#visitIntGameRule(GameRules.Key, GameRules.Type)},
+		COMMENT depending on whether it is a {@link BooleanGameRule} or a {@link IntGameRule}, for every game rule.
 		ARG 0 visitor
 	METHOD m_khbebsio toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_kkvdhcio copy ()Lnet/minecraft/unmapped/C_xmldumst;
