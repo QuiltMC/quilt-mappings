@@ -5,7 +5,7 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 	FIELD f_fyvyzcba PREPARING Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_hqkhcpia header Lnet/minecraft/unmapped/C_mbxnkehf;
 	FIELD f_htfhyyfx packManager Lnet/minecraft/unmapped/C_dqfyacfy;
-	FIELD f_hxpwlzvr ENTER_NAME Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_hxpwlzvr ENTER_WORLD_NAME Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_jlpvoazq FOOTER_SEPARATOR_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_lryffkzq LIGHT_DIRT_BACKGROUND_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_lzdtplvi HEADER_SEPARATOR_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
@@ -42,30 +42,43 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 		ARG 2 info
 		ARG 3 context
 		ARG 4 path
+	METHOD m_dcetjnbf (Ljava/util/List;Ljava/lang/String;)Z
+		ARG 1 name
 	METHOD m_dejxfssq (Lnet/minecraft/unmapped/C_dqfyacfy;)V
 		ARG 1 manager
-	METHOD m_evbwddxa openPackScreen (Lnet/minecraft/unmapped/C_yknpgzdr;)V
+	METHOD m_evbwddxa openDataPacksScreen (Lnet/minecraft/unmapped/C_yknpgzdr;)V
 		ARG 1 settings
 	METHOD m_evhcwytp createDefaultLoadConfig (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;)Lnet/minecraft/unmapped/C_kjxfcecs$C_kculhjuh;
 		ARG 0 resourcePackManager
 		ARG 1 settings
-	METHOD m_ficgwtev createLevelInfo (Z)Lnet/minecraft/unmapped/C_tmnkpzlg;
+	METHOD m_ficgwtev createWorldInfo (Z)Lnet/minecraft/unmapped/C_tmnkpzlg;
 		ARG 1 debugWorld
+	METHOD m_fiszvdug (Ljava/util/function/Consumer;Ljava/lang/Void;Ljava/lang/Throwable;)Ljava/lang/Object;
+		ARG 2 result
+		ARG 3 exception
 	METHOD m_fqtykenm clearDataPackTempDir ()V
 	METHOD m_fsncvugn createStorageSession ()Ljava/util/Optional;
 	METHOD m_hmlmjfjy (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
+	METHOD m_hpinockj (Ljava/nio/file/Path;Ljava/nio/file/Path;)Z
+		ARG 1 path
+	METHOD m_jygzlswq (Ljava/util/function/Consumer;Z)V
+		ARG 2 confirmed
 	METHOD m_kfiwihuq copyDataPack (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		ARG 0 srcFolder
 		ARG 1 destFolder
 		ARG 2 dataPackFile
 	METHOD m_kvlyrphw openExperimentsScreen (Lnet/minecraft/unmapped/C_yknpgzdr;)V
 		ARG 1 settings
+	METHOD m_lwkgzddp (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;Ljava/util/function/Consumer;Z)V
+		ARG 4 proceed
 	METHOD m_odrhilcd createNewWorld (Lnet/minecraft/unmapped/C_jmmczzpb$C_ooteyfin;Lnet/minecraft/unmapped/C_bcpxdrik;Lcom/mojang/serialization/Lifecycle;)V
 		ARG 1 type
 		ARG 2 manager
 		ARG 3 lifecycle
 	METHOD m_oitudqud onCloseScreen ()V
+	METHOD m_oolkgqdp (Lnet/minecraft/unmapped/C_kjxfcecs$C_hkmknvtj;)Lnet/minecraft/unmapped/C_kjxfcecs$C_ijyqofsr;
+		ARG 1 context
 	METHOD m_oopecwxc (Lnet/minecraft/unmapped/C_kpvuxmkp;)V
 		ARG 1 widget
 	METHOD m_pcylhjnh getWorldCreator ()Lnet/minecraft/unmapped/C_hypraqfe;
@@ -75,9 +88,26 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 	METHOD m_sgacyucm showMessage (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 0 client
 		ARG 1 message
+	METHOD m_sopqrewi (Ljava/nio/file/Path;)Z
+		ARG 1 path
+	METHOD m_spzhhpkv (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Lnet/minecraft/unmapped/C_bcpxdrik;Lnet/minecraft/unmapped/C_ibkofvzc$C_mxqwwbun;)Lnet/minecraft/unmapped/C_njsjipmy;
+		ARG 0 resourceManager
+		ARG 1 resources
+		ARG 2 registryManager
+		ARG 3 worldCreationSettings
+	METHOD m_udkaeyin (Lcom/mojang/serialization/DynamicOps;Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
+		ARG 1 encodedOptions
 	METHOD m_umnykrgq getScannedPack (Lnet/minecraft/unmapped/C_yknpgzdr;)Lcom/mojang/datafixers/util/Pair;
 		ARG 1 settings
-	METHOD m_xdqbchlc createLevel ()V
+	METHOD m_vfaqeuwk (Lnet/minecraft/unmapped/C_ibkofvzc;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
+		ARG 1 widget
+	METHOD m_vflacjtp (Lorg/apache/commons/lang3/mutable/MutableObject;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+		ARG 2 dataPackFile
+	METHOD m_wobxfjlo (Ljava/nio/file/Path;)V
+		ARG 0 path
+	METHOD m_xdqbchlc createWorld ()V
+	METHOD m_xtzltras (Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+		ARG 2 dataPackFile
 	METHOD m_ycpfvuja getDataPackTempDir ()Ljava/nio/file/Path;
 	METHOD m_zeghowdv applyDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;ZLjava/util/function/Consumer;)V
 		ARG 1 dataPackManager
@@ -86,12 +116,35 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 	METHOD m_znmcttwr (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	CLASS C_dzlctpdf GameTab
-		FIELD f_cdxgyrot nameInput Lnet/minecraft/unmapped/C_vopzcnhf;
+		FIELD f_cdxgyrot worldNameField Lnet/minecraft/unmapped/C_vopzcnhf;
 		FIELD f_qwzkbduc GAME_TAB_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_uckqwzac ALLOW_COMMANDS Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_bcjirrvc (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_skehaijy;
+			ARG 0 allowCommandsInfo
+		METHOD m_gfyfwlet (Lnet/minecraft/unmapped/C_hypraqfe$C_ohbtvxdv;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+			ARG 0 gameMode
+		METHOD m_hnuqqiup (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_hypraqfe;)V
+			ARG 1 worldCreator
+		METHOD m_huphbglj (Lnet/minecraft/unmapped/C_hypraqfe;)V
+			ARG 1 worldCreator
+		METHOD m_qbjnnmrx (Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Boolean;)V
+			ARG 1 button
+			ARG 2 cheatsEnabled
+		METHOD m_vwtbiafd (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_mpbjgxic;)V
+			ARG 1 button
+			ARG 2 difficulty
+		METHOD m_wthzkzlp (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_hypraqfe;)V
+			ARG 2 worldCreator
+		METHOD m_yjsbiijn (Lnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 1 button
+		METHOD m_ytdkulul (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_hypraqfe$C_ohbtvxdv;)V
+			ARG 1 button
+			ARG 2 gameMode
+		METHOD m_zfatltbw (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_hypraqfe;)V
+			ARG 2 worldCreator
 	CLASS C_emutyvqg WorldTab
 		FIELD f_cobovsbo BONUS_ITEMS Lnet/minecraft/unmapped/C_rdaqiwdt;
-		FIELD f_glihoeql seedInput Lnet/minecraft/unmapped/C_vopzcnhf;
+		FIELD f_glihoeql seedField Lnet/minecraft/unmapped/C_vopzcnhf;
 		FIELD f_ixnusskg customizeTypeButton Lnet/minecraft/unmapped/C_buwziidm;
 		FIELD f_klvpqniw AMPLIFIED_INFO Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_mkhygczv SEED_INFO Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -101,12 +154,35 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 		FIELD f_rrexmrsz WORLD_TAB_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_yymywohx MAP_FEATURES Lnet/minecraft/unmapped/C_rdaqiwdt;
 		METHOD m_awomnjir createWorldTypeSupplier ()Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
+		METHOD m_bcutemao (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_hypraqfe$C_jbuehfan;)V
+			ARG 1 button
+			ARG 2 worldType
 		METHOD m_igcilysz openPresetsScreen ()V
+		METHOD m_lsbasbdi (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_hypraqfe;)V
+			ARG 2 worldCreator
+		METHOD m_lyzestkz (Lnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 1 button
+		METHOD m_rinurbgd (Ljava/lang/String;)V
+			ARG 1 seed
+		METHOD m_vdchsjiw (Lnet/minecraft/unmapped/C_jskhqate;Lnet/minecraft/unmapped/C_hypraqfe;)V
+			ARG 1 worldCreator
+		METHOD m_wbhktorn (Lnet/minecraft/unmapped/C_qykucwmu$C_iamgoveg;Lnet/minecraft/unmapped/C_dpukplka;)V
+			ARG 1 grid
+		METHOD m_whvqigyv (Lnet/minecraft/unmapped/C_hypraqfe;)V
+			ARG 1 worldCreator
 		METHOD m_yuppgxdl createButtonNarration (Lnet/minecraft/unmapped/C_ikfvpkkf;)Lnet/minecraft/unmapped/C_npqneive;
 			ARG 0 button
 	CLASS C_eyotidzo MoreTab
 		FIELD f_eowlglnv GAME_RULES Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_lhxnvfat DATA_PACKS Lnet/minecraft/unmapped/C_rdaqiwdt;
-		FIELD f_vuqzvibe MORE_TAB_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
-		METHOD m_qeuzybrv openGameRulesScreen ()V
+		FIELD f_vuqzvibe TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_dlifpsxb (Lnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 1 button
+		METHOD m_jtffqjig (Ljava/util/Optional;)V
+			ARG 1 gameRules
+		METHOD m_qeuzybrv openEditGameRulesScreen ()V
+		METHOD m_rbufnqbu (Lnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 1 button
+		METHOD m_woomufvk (Lnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 1 button
 	CLASS C_mxqwwbun WorldCreationSettings
