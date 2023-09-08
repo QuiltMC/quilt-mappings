@@ -241,6 +241,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_jnxtuzdb hardness F
 		FIELD f_jvcpotqu isAir Z
 		FIELD f_lpessbtt pistonBehavior Lnet/minecraft/unmapped/C_mojvzhua;
+		FIELD f_lqzypovm spawnsDustParticles Z
 		FIELD f_mkfwgndk solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_nijrkoes emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_ochxyzpr solid Z
@@ -332,6 +333,10 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 entity
+		METHOD m_fmoychgu isOf (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
+			COMMENT {@return whether this block state is an instance of the given block holder}
+			ARG 1 block
+				COMMENT the block holder to match
 		METHOD m_fuqgdrck isOf (Lnet/minecraft/unmapped/C_mmxmpdoq;)Z
 			COMMENT {@return whether this block state is an instance of the given block}
 			ARG 1 block
@@ -343,6 +348,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 3 block
 			ARG 4 posFrom
 			ARG 5 notify
+		METHOD m_hndkckmc spawnsDustParticles ()Z
 		METHOD m_hnwtgjio streamTags ()Ljava/util/stream/Stream;
 			COMMENT {@return a stream of tag keys this block is in}
 		METHOD m_hupzkros shouldSuffocate (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
@@ -364,7 +370,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_kbrtwnkq isIn (Lnet/minecraft/unmapped/C_odfnijdo;)Z
 			COMMENT {@return whether this block is in the specified holder set}
 			ARG 1 set
-				COMMENT the holder set
+				COMMENT the block holder set
 		METHOD m_kpbacduh onStateReplaced (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Z)V
 			ARG 1 world
 			ARG 2 pos
@@ -593,6 +599,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_piwzbwkw suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_pxqjcqnw lootTableId Lnet/minecraft/unmapped/C_ncpywfca;
 		FIELD f_stojhpmj solid Z
+		FIELD f_vgbjitlh spawnsDustParticles Z
 		FIELD f_vncuqezy luminance Ljava/util/function/ToIntFunction;
 		FIELD f_wlanwnet collidable Z
 		FIELD f_wtgcfacs lavaIgnitable Z
@@ -620,6 +627,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT <p>This also marks a block as non-opaque.
 		METHOD m_dsszzhch pistonBehavior (Lnet/minecraft/unmapped/C_mojvzhua;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 pistonBehavior
+		METHOD m_dyoolquj withoutDustParticles ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_eajltsia solidBlock (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
 		METHOD m_edlblpmg offsetType (Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
