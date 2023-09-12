@@ -1,16 +1,37 @@
 CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
-	FIELD f_aqbcwkwn rules Ljava/util/Map;
+	FIELD f_aqbcwkwn gameRules Ljava/util/Map;
 	FIELD f_bekpwqfx DEFAULT_RANDOM_TICK_SPEED I
+	FIELD f_bjonrkyp COMMAND_BLOCK_OUTPUT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_cgocceiq DO_WARDEN_SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_cinyfujz DO_VINES_SPREAD Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_cpoobbqt SNOW_ACCUMULATION_HEIGHT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_ctprlhvi LOG_ADMIN_COMMANDS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_ddlhpkfi DO_INSOMNIA Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_djarkqql DO_IMMEDIATE_RESPAWN Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether a player should immediately respawn upon death.
-	FIELD f_fskutrwp RULE_TYPES Ljava/util/Map;
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether a player should immediately respawn upon death.
+	FIELD f_enlwvizg DO_LIMITED_CRAFTING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_ezxiljsj COMMAND_MODIFICATION_BLOCK_LIMIT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_fhvryuhr UNIVERSAL_ANGER Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_fskutrwp GAME_RULE_TYPES Ljava/util/Map;
+	FIELD f_gmtiujwd DO_WEATHER_CYCLE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_hlmqygvm LAVA_SOURCE_CONVERSION Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_huvodyag DO_TILE_DROPS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether blocks should drop their items when broken.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether blocks should drop their items when broken.
 	FIELD f_hysgxzdu KEEP_INVENTORY Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether player inventories should be persist through respawning.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether player inventories should be persist through respawning.
+	FIELD f_ifwgdzjz DROWNING_DAMAGE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_ihinqnli DO_FIRE_TICK Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_iteluiic BLOCK_EXPLOSION_DROP_DECAY Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_itxhzqol RANDOM_TICK_SPEED Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_jmfdlcxm DO_ENTITY_DROPS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_jnvebouf SEND_COMMAND_FEEDBACK Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_kjbyjrtx MOB_EXPLOSION_DROP_DECAY Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_knmgnowy FORGIVE_DEAD_PLAYERS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_kwjvqvpl SPECTATORS_GENERATE_CHUNKS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_kzskrcnw LOGGER Lorg/slf4j/Logger;
+	FIELD f_npbkaozn DO_PATROL_SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_nqnkyimm DO_MOB_GRIEFING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether mobs can modify the world.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether mobs can modify the world.
 		COMMENT
 		COMMENT <p>Generally one is expected to test this rule before an entity modifies the world.
 		COMMENT
@@ -20,54 +41,70 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		COMMENT <li>Whether a zombie can break down a door
 		COMMENT <li>Whether a wither killing an entity will place or drop a wither rose
 		COMMENT </ul>
+	FIELD f_ovpdtukz SHOW_DEATH_MESSAGES Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_oxxclhgt DISABLE_ELYTRA_MOVEMENT_CHECK Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_poqilblq FIRE_DAMAGE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_qacbmgyi DISABLE_RAIDS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether raids should occur.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether raids should occur.
 		COMMENT
 		COMMENT <p>If this rule is set to {@code true} while raids are occurring, the raids will be stopped.
+	FIELD f_qerjgogz WATER_SOURCE_CONVERSION Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_rylydcdc TNT_EXPLOSION_DROP_DECAY Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_snezdope SPAWN_RADIUS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_tamllbds DO_TRADER_SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_tnihyttb FREEZE_DAMAGE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_tputawyr DO_MOB_SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether mobs can spawn naturally.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether mobs can spawn naturally.
+	FIELD f_ulkaqxnx DO_DAYLIGHT_CYCLE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_uqgkyhqg FALL_DAMAGE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_uwzhnovj PLAYERS_SLEEPING_PERCENTAGE Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_vimssrzh DO_MOB_LOOT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether mobs should drop loot on death.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether mobs should drop loot on death.
+	FIELD f_vvenpozn MAX_COMMAND_CHAIN_LENGTH Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_wvejngfp NATURAL_REGENERATION Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_xfpasujp REDUCED_DEBUG_INFO Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether clients' {@linkplain net.minecraft.client.gui.hud.DebugHud debug HUD}s show reduced information.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether clients' {@linkplain net.minecraft.client.gui.hud.DebugHud debug HUD}s show reduced information.
 		COMMENT
 		COMMENT <p>When the value of this rule is changed, all connected clients will be notified to update their display.
 		COMMENT In vanilla, this includes the visibility of coordinates on the clients' debug HUDs.
 	FIELD f_xhcxhtfb ANNOUNCE_ADVANCEMENTS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates whether a player's advancements should be announced in chat.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether a player's advancements should be announced in chat.
 	FIELD f_zumpbxtd MAX_ENTITY_CRAMMING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-		COMMENT A {@linkplain Rule game rule} which regulates the number of entities that can be crammed into a block space before they incur cramming damage.
+		COMMENT A {@linkplain AbstractGameRule game rule} which regulates the number of entities that can be crammed into a block space before they incur cramming damage.
+	FIELD f_zwlbxxnu GLOBAL_SOUND_EVENTS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	METHOD <init> (Lcom/mojang/serialization/DynamicLike;)V
-		ARG 1 rules
+		ARG 1 gameRules
 	METHOD <init> (Ljava/util/Map;)V
-		ARG 1 rules
+		ARG 1 gameRules
 	METHOD m_annnbzfc setAllValues (Lnet/minecraft/unmapped/C_xmldumst;Lnet/minecraft/server/MinecraftServer;)V
-		ARG 1 rules
+		ARG 1 other
 		ARG 2 server
-	METHOD m_dpsrpyxn getInt (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)I
-		ARG 1 rule
+	METHOD m_dpsrpyxn getIntValue (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)I
+		ARG 1 gameRule
 	METHOD m_dvpplngi (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Ljava/lang/String;
 		ARG 0 key
 	METHOD m_eyajgani (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
 		ARG 0 server
-		ARG 1 rule
+		ARG 1 gameRule
 	METHOD m_gdklogjj accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;)V
 		COMMENT Make the visitor visit all registered game rules.
-		COMMENT
-		COMMENT <p>The visitation involves calling both {@link Visitor#visit(GameRules.Key, GameRules.Type)} and {@code visitX} for every game rule, where X is the current rule's concrete type such as a boolean.
+		COMMENT <p>
+		COMMENT The visitation involves calling both {@link Visitor#visitGameRule(GameRules.Key, GameRules.Type)} and
+		COMMENT {@link Visitor#visitBooleanGameRule(GameRules.Key, GameRules.Type)} or {@link Visitor#visitIntGameRule(GameRules.Key, GameRules.Type)},
+		COMMENT depending on whether it is a {@link BooleanGameRule} or a {@link IntGameRule}, for every game rule.
 		ARG 0 visitor
 	METHOD m_khbebsio toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_kkvdhcio copy ()Lnet/minecraft/unmapped/C_xmldumst;
 	METHOD m_magbttmy load (Lcom/mojang/serialization/DynamicLike;)V
-		ARG 1 rules
+		ARG 1 gameRules
 	METHOD m_mijxrbwk get (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
 		ARG 1 key
 	METHOD m_srlsshkl setValue (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst;Lnet/minecraft/server/MinecraftServer;)V
 		ARG 1 key
-		ARG 2 rules
+		ARG 2 other
 		ARG 3 server
-	METHOD m_vkgvfrzn getBoolean (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Z
-		ARG 1 rule
+	METHOD m_vkgvfrzn getBooleanValue (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Z
+		ARG 1 gameRule
 	METHOD m_vwilyacl (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
 		ARG 0 server
 		ARG 1 rule
@@ -81,23 +118,23 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 2 type
 	CLASS C_avotqrag Visitor
 		COMMENT A visitor used to visit all game rules.
-		METHOD m_hsodkmym visitBoolean (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
-			COMMENT Visit a boolean rule.
+		METHOD m_hsodkmym visitBooleanGameRule (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
+			COMMENT Visit a boolean game rule.
 			COMMENT
-			COMMENT <p>Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
+			COMMENT <p>Note {@link #visitGameRule(GameRules.Key, GameRules.Type)} will be called before this method.
 			ARG 1 key
 			ARG 2 type
-		METHOD m_mfrkzoox visit (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
+		METHOD m_mfrkzoox visitGameRule (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
 			ARG 1 key
 			ARG 2 type
-		METHOD m_vtezodau visitInt (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
-			COMMENT Visit an integer rule.
+		METHOD m_vtezodau visitIntGameRule (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
+			COMMENT Visit an integer game rule.
 			COMMENT
-			COMMENT <p>Note {@link #visit(GameRules.Key, GameRules.Type)} will be called before this method.
+			COMMENT <p>Note {@link #visitGameRule(GameRules.Key, GameRules.Type)} will be called before this method.
 			ARG 1 key
 			ARG 2 type
 	CLASS C_bctfwntr Acceptor
-		METHOD call call (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
+		METHOD call (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
 			ARG 1 consumer
 			ARG 2 key
 			ARG 3 type
@@ -112,20 +149,23 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		METHOD m_demtjzhm getCategory ()Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
 		METHOD m_mvpctach getTranslationKey ()Ljava/lang/String;
 		METHOD m_sceaellh getName ()Ljava/lang/String;
-	CLASS C_juzzykai BooleanRule
+			COMMENT Returns the name of the game rule, as used in commands.
+			COMMENT <p>
+			COMMENT For example, {@code doDaylightCycle} is a game rule name.
+	CLASS C_juzzykai BooleanGameRule
 		FIELD f_xegugvds value Z
 		METHOD <init> (Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;Z)V
 			ARG 1 type
 			ARG 2 initialValue
-		METHOD m_hpvgtqrv set (ZLnet/minecraft/server/MinecraftServer;)V
+		METHOD m_hpvgtqrv setValue (ZLnet/minecraft/server/MinecraftServer;)V
 			ARG 1 value
 			ARG 2 server
-		METHOD m_hqafrate get ()Z
+		METHOD m_hqafrate getValue ()Z
 		METHOD m_huqfamcl create (Z)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
 			ARG 0 initialValue
 		METHOD m_mppvwbzz (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
 			ARG 0 server
-			ARG 1 rule
+			ARG 1 gameRule
 		METHOD m_nwpqdkth create (ZLjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
 			ARG 0 initialValue
 			ARG 1 changeCallback
@@ -133,33 +173,33 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 			ARG 1 type
 	CLASS C_mymgluou Type
 		FIELD f_hnrsjwnv argumentType Ljava/util/function/Supplier;
-		FIELD f_ozxhwwyh ruleFactory Ljava/util/function/Function;
-		FIELD f_pzcyasul ruleAcceptor Lnet/minecraft/unmapped/C_xmldumst$C_bctfwntr;
+		FIELD f_ozxhwwyh gameRuleFactory Ljava/util/function/Function;
+		FIELD f_pzcyasul gameRuleAcceptor Lnet/minecraft/unmapped/C_xmldumst$C_bctfwntr;
 		FIELD f_tpnzzqev changeCallback Ljava/util/function/BiConsumer;
 		METHOD <init> (Ljava/util/function/Supplier;Ljava/util/function/Function;Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_xmldumst$C_bctfwntr;)V
 			ARG 1 argumentType
-			ARG 2 ruleFactory
+			ARG 2 gameRuleFactory
 			ARG 3 changeCallback
-			ARG 4 ruleAcceptor
+			ARG 4 gameRuleAcceptor
 		METHOD m_qkdrrjqk accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)V
 			ARG 1 consumer
 			ARG 2 key
-		METHOD m_wkdooanh createRule ()Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
+		METHOD m_wkdooanh createGameRule ()Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
 		METHOD m_zadflywr argument (Ljava/lang/String;)Lcom/mojang/brigadier/builder/RequiredArgumentBuilder;
 			ARG 1 name
-	CLASS C_tdajhqee IntRule
+	CLASS C_tdajhqee IntGameRule
 		FIELD f_mrktloix value I
 		METHOD <init> (Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;I)V
-			ARG 1 rule
+			ARG 1 type
 			ARG 2 initialValue
 		METHOD m_bfgdavud (ILnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;
 			ARG 1 type
-		METHOD m_cnknhqzm set (ILnet/minecraft/server/MinecraftServer;)V
+		METHOD m_cnknhqzm setValue (ILnet/minecraft/server/MinecraftServer;)V
 			ARG 1 value
 			ARG 2 server
 		METHOD m_ghpytjcn (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;)V
 			ARG 0 server
-			ARG 1 rule
+			ARG 1 gameRule
 		METHOD m_ncqmhctf validate (Ljava/lang/String;)Z
 			COMMENT Validates that an input is valid for this rule.
 			ARG 1 input
@@ -168,10 +208,10 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		METHOD m_tezsywhc create (ILjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
 			ARG 0 initialValue
 			ARG 1 changeCallback
-		METHOD m_ttwuvzoh get ()I
+		METHOD m_ttwuvzoh getValue ()I
 		METHOD m_xmuwyaym parseInt (Ljava/lang/String;)I
 			ARG 0 input
-	CLASS C_ubszziqk Rule
+	CLASS C_ubszziqk AbstractGameRule
 		FIELD f_edpaakqp type Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
 		METHOD <init> (Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
 			ARG 1 type
@@ -180,20 +220,27 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		METHOD m_emtbituz getCommandResult ()I
 		METHOD m_gahlkrnn serialize ()Ljava/lang/String;
 		METHOD m_lfnwcotw setValue (Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;Lnet/minecraft/server/MinecraftServer;)V
-			ARG 1 rule
+			ARG 1 gameRule
 			ARG 2 server
 		METHOD m_mrykegon getThis ()Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
-		METHOD m_ntgysflg set (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
+		METHOD m_ntgysflg setValue (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
 			ARG 1 context
 			ARG 2 name
-		METHOD m_nzfqsdlt setFromArgument (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
+		METHOD m_nzfqsdlt setValueFromArgument (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
 			ARG 1 context
 			ARG 2 name
 		METHOD m_wvygfuut deserialize (Ljava/lang/String;)V
 			ARG 1 value
 		METHOD m_xtbuqwew copy ()Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
 	CLASS C_vkqoqsmj Category
-		FIELD f_fpujopsq category Ljava/lang/String;
+		FIELD f_fpujopsq translationKey Ljava/lang/String;
+		FIELD f_jfpinryj MISC Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
+		FIELD f_luzzkjmc SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
+		FIELD f_nmzpdafk PLAYER Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
+		FIELD f_pigqmlsp CHAT Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
+		FIELD f_worjjcyc UPDATES Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
+		FIELD f_wtjdyfio DROPS Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
+		FIELD f_xvbpnvab MOBS Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
-			ARG 3 category
-		METHOD m_jvmnudqq getCategory ()Ljava/lang/String;
+			ARG 3 translationKey
+		METHOD m_jvmnudqq getTranslationKey ()Ljava/lang/String;
