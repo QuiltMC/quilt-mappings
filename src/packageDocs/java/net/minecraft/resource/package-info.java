@@ -46,23 +46,23 @@
  * <tr>
  *     <td>{@link ResourcePack}</td>
  *     <td>Provides binary data based on queries.
- *     <br>They are usually single-use, created by {@link ResourcePackManager} and provided
+ *     <br>They are usually single-use, created by {@link PackManager} and provided
  *     to {@link ReloadableResourceManager} in each reload.</td>
  * </tr>
  * <tr>
- *     <td>{@link ResourcePackProfile}</td>
+ *     <td>{@link PackProfile}</td>
  *     <td>A user-friendly, persistent form of {@link ResourcePack}. Used to create resource
  *     packs in reloads.</td>
  * </tr>
  * <tr>
- *     <td>{@link ResourcePackProvider}</td>
- *     <td>Provides {@link ResourcePackProfile}s, so they are taken account of during reloads.
+ *     <td>{@link PackProvider}</td>
+ *     <td>Provides {@link PackProfile}s, so they are taken account of during reloads.
  *     <br><i>This is usually implemented by mods providing resources.</i></td>
  * </tr>
  * <tr>
- *     <td>{@link ResourcePackManager}</td>
- *     <td>Keeps track of {@link ResourcePackProvider}s and uses the profiles from the providers
- *     to create {@link ResourcePack}s to send to {@link ReloadableResourceManager}s in each reload.</td>
+ *     <td>{@link PackManager}</td>
+ *     <td>Keeps track of {@link PackProvider}s and uses the profiles from the providers
+ *     to create {@link Pack}s to send to {@link ReloadableResourceManager}s in each reload.</td>
  * </tr>
  * </table></div>
  *
