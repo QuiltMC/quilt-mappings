@@ -62,7 +62,7 @@
  * <tr>
  *     <td>{@link PackManager}</td>
  *     <td>Keeps track of {@link PackProvider}s and uses the profiles from the providers
- *     to create {@link Pack}s to send to {@link ReloadableResourceManager}s in each reload.</td>
+ *     to create {@link ResourcePack}s to send to {@link ReloadableResourceManager}s in each reload.</td>
  * </tr>
  * </table></div>
  *
