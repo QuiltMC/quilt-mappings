@@ -249,6 +249,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 screen
 			COMMENT the new screen, or {@code null} to just close the previous screen
 	METHOD m_egpifpov isOptionalTelemetryEnabled ()Z
+	METHOD m_evinusyd (Lnet/minecraft/unmapped/C_dzczqjri;)V
+		ARG 0 profileResult
 	METHOD m_fblebkis getSkinProvider ()Lnet/minecraft/unmapped/C_pyciilvf;
 	METHOD m_fcdeiybw toggleDebugProfiler (Ljava/util/function/Consumer;)Z
 		ARG 1 chatMessageSender
@@ -292,6 +294,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT <p>The integrated server is only present when a local single player world is open.
 	METHOD m_jtfycguy getVersionType ()Ljava/lang/String;
 	METHOD m_jvlajuse onGameLoaded (Lnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)V
+	METHOD m_jytofnym (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_dzczqjri;)V
+		ARG 2 profileResult
 	METHOD m_jytpvdsa countryEqualsISO3 (Ljava/lang/Object;)Z
 		ARG 0 o
 	METHOD m_kclqbfew cleanUpAfterCrash ()V
@@ -318,6 +322,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 stack
 		ARG 2 blockEntity
 	METHOD m_mmruqhcv scheduleStop ()V
+	METHOD m_moxkuxcg disconnect ()V
 	METHOD m_mqdbnddk handleInputEvents ()V
 	METHOD m_ngtmdbml startIntegratedServer (Ljava/lang/String;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Z)V
 		ARG 1 worldId
@@ -347,6 +352,10 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_omcqclml openPauseMenu (Z)V
 		ARG 1 pause
 	METHOD m_onpgsiax getRealms32BitWarningChecker ()Lnet/minecraft/unmapped/C_iempwoli;
+	METHOD m_otnidwgo (Lnet/minecraft/unmapped/C_fprbxnfr;Ljava/util/function/Consumer;Ljava/util/List;)V
+		ARG 3 dumps
+	METHOD m_ousbngdi (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_dzczqjri;)V
+		ARG 2 dump
 	METHOD m_oussibsz isTelemetryEnabled ()Z
 	METHOD m_oxcbqety getSocialInteractionsManager ()Lnet/minecraft/unmapped/C_rhqhwtoq;
 	METHOD m_oxhdduqg addSystemDetailsToCrashReport (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_dahbfdem;Ljava/lang/String;Lnet/minecraft/unmapped/C_lscptbhn;Lnet/minecraft/unmapped/C_bkefkbum;)V
@@ -416,18 +425,27 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 active
 		ARG 2 monitor
 	METHOD m_uhuiglxr isHudEnabled ()Z
+	METHOD m_uottczas (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
+		ARG 1 disconnectScreen
 	METHOD m_upqckqnd getBakedModelManager ()Lnet/minecraft/unmapped/C_wosoicga;
 	METHOD m_usvofotc getCameraEntity ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_uubvcnee isRunning ()Z
 	METHOD m_uwrhtvvb getToastManager ()Lnet/minecraft/unmapped/C_eqfjupcc;
 	METHOD m_vbjxrdgk getDataFixer ()Lcom/mojang/datafixers/DataFixer;
 	METHOD m_vgywindm run ()V
+	METHOD m_vokjckmx (Ljava/util/function/Consumer;Ljava/nio/file/Path;)V
+		ARG 2 dump
 	METHOD m_vwmthlxi disconnect (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
+		ARG 1 disconnectScreen
 	METHOD m_vwoqgdbt is64Bit ()Z
 	METHOD m_wdcaieen checkIs64Bit ()Z
 	METHOD m_wgjcxgcz getRealmsDataFetcher ()Lnet/minecraft/unmapped/C_yyprjalz;
+	METHOD m_widwpwjd (Ljava/util/function/Consumer;Ljava/nio/file/Path;)V
+		ARG 1 dump
 	METHOD m_wipirsgk getInstance ()Lnet/minecraft/unmapped/C_ayfeobid;
 	METHOD m_wkcnjoym isMultiplayerEnabled ()Z
+	METHOD m_wmmoabhh (Ljava/nio/file/Path;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_xlacueca getChatListener ()Lnet/minecraft/unmapped/C_bmbrcost;
 	METHOD m_xsnthzsp getNetworkHandler ()Lnet/minecraft/unmapped/C_nuofrxvi;
 	METHOD m_xthkfemp isConnectedToServer ()Z
@@ -435,6 +453,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_yadnzivw isDemo ()Z
 	METHOD m_yknnrfie createSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
 	METHOD m_ymfxsgvs getChatNarratorManager ()Lnet/minecraft/unmapped/C_qwmxzagq;
+	METHOD m_yqabtlyp forcedNameChange ()Z
 	METHOD m_yxvsqbme hasReducedDebugInfo ()Z
 	METHOD m_yyiisqrp isWindowFocused ()Z
 	METHOD m_zdhaikmf isRealmsEnabled ()Z
