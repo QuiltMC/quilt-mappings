@@ -1,0 +1,47 @@
+CLASS net/minecraft/unmapped/C_bkzzefxr net/minecraft/client/gui/hud/debug/AbstractDebugChartRenderer
+	FIELD f_dehsgucw CHART_HEIGHT I
+	FIELD f_kumhtbzz TEXT_COLOR I
+		COMMENT The color of the text used in the chart. {@code e0e0e0} as a hex color code.
+	FIELD f_roauydkh LINE_WIDTH I
+	FIELD f_wmaqprzm sampleLog Lnet/minecraft/unmapped/C_fnzofwlw;
+	METHOD <init> (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_fnzofwlw;)V
+		ARG 2 sampleLog
+	METHOD m_ctbaldbu lineLength (D)I
+		ARG 1 value
+	METHOD m_julaomxm appendUnit (D)Ljava/lang/String;
+		ARG 1 value
+	METHOD m_phxaaunk getWidth (I)I
+		COMMENT Returns the width of the debug chart: {@code width} bounded by a maximum width.
+		ARG 1 width
+	METHOD m_rjcqkpru drawLabel (Lnet/minecraft/unmapped/C_sedilmty;Ljava/lang/String;II)V
+		ARG 2 label
+		ARG 3 x
+		ARG 4 y
+	METHOD m_sdtiatjq renderChart (Lnet/minecraft/unmapped/C_sedilmty;II)V
+		ARG 2 x
+		ARG 3 width
+	METHOD m_srllwucw getSampleColor (DDIDIDI)I
+		COMMENT Gets the color for the sample's line representing its magnitude.
+		COMMENT @param delta The point between the {@code lowColorDelta} and {@code highColorDelta} to interpolate the color of.
+		COMMENT @param lowColorDelta The {@code delta} value below which the interpolated color should be exactly the {@code lowColor}.
+		COMMENT @param lowColor The color representing a low sample value.
+		COMMENT @param mediumColorDelta The {@code delta} value for which the interpolated color should be exactly the {@code mediumColor}.
+		COMMENT @param mediumColor The color representing a medium sample value.
+		COMMENT @param highColorDelta The {@code delta} above which the interpolated color should be exactly the {@code highColor}.
+		COMMENT @param highColor The color representing a high sample value.
+		COMMENT @returns The interpolated color based on the {@code delta}'s relation to the low, medium, and high color deltas.
+		ARG 1 delta
+		ARG 3 lowColorDelta
+		ARG 5 lowColor
+		ARG 6 mediumColorDelta
+		ARG 8 mediumColor
+		ARG 9 highColorDelta
+		ARG 11 highColor
+	METHOD m_tsrwlybb renderExtras (Lnet/minecraft/unmapped/C_sedilmty;III)V
+		COMMENT Renders additional labels and lines, such as labelled thresholds on the chart.
+		ARG 2 x
+		ARG 3 lineWidth
+		ARG 4 y
+	METHOD m_zwpzixsa getSampleColor (J)I
+		COMMENT Gets the color for the sample's line representing its magnitude.
+		ARG 1 sample

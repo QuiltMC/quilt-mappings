@@ -1,9 +1,19 @@
-CLASS net/minecraft/unmapped/C_epxplegp net/minecraft/client/gui/hud/DebugHud
+CLASS net/minecraft/unmapped/C_epxplegp net/minecraft/client/gui/hud/debug/DebugHud
+	FIELD f_ccxylgcn frameRateSampleLog Lnet/minecraft/unmapped/C_fnzofwlw;
+	FIELD f_cdiumrmi pingSampleLog Lnet/minecraft/unmapped/C_fnzofwlw;
 	FIELD f_demcwxlr client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_fjhfdzhz HEIGHT_MAP_TYPES Ljava/util/Map;
 	FIELD f_hdjainem fluidHit Lnet/minecraft/unmapped/C_eetoegzn;
+	FIELD f_jwptaljh showingCharts Z
+	FIELD f_kggcezmz frameRateChartRenderer Lnet/minecraft/unmapped/C_vgifhjob;
+	FIELD f_llewhquv tickRateSampleLog Lnet/minecraft/unmapped/C_fnzofwlw;
+	FIELD f_lmmlpwdr pingChartRenderer Lnet/minecraft/unmapped/C_ftwidtyt;
+	FIELD f_mriubqfx tickRateChartRenderer Lnet/minecraft/unmapped/C_rggqladj;
+	FIELD f_nggbpvpt bandwidthUsageChartRenderer Lnet/minecraft/unmapped/C_zjhfcbxz;
 	FIELD f_nivhpjpa TEXT_COLOR I
 	FIELD f_qympybag allocationRateCalculator Lnet/minecraft/unmapped/C_epxplegp$C_itbnpmom;
+	FIELD f_rhtdusnd bandwidthUsageSampleLog Lnet/minecraft/unmapped/C_fnzofwlw;
+	FIELD f_rlumovzv showProfilerChart Z
 	FIELD f_rmhsdqts MARGIN_LEFT I
 	FIELD f_tekegaef MARGIN_RIGHT I
 	FIELD f_unrhvpxp MARGIN_TOP I
@@ -11,14 +21,22 @@ CLASS net/minecraft/unmapped/C_epxplegp net/minecraft/client/gui/hud/DebugHud
 	FIELD f_vbjupvgy blockHit Lnet/minecraft/unmapped/C_eetoegzn;
 	FIELD f_vmhafjuy chunk Lnet/minecraft/unmapped/C_hrdsvlkq;
 	FIELD f_warxjbak chunkFuture Ljava/util/concurrent/CompletableFuture;
+	FIELD f_xemytmmw showingFpsTpsCharts Z
+	FIELD f_ydlzbbxe showNetworkCharts Z
 	FIELD f_yryzioge textRenderer Lnet/minecraft/unmapped/C_mavozmpp;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;)V
 		ARG 1 client
+	METHOD m_asllhmxy toggleProfilerChart ()V
 	METHOD m_ayfaebbc renderLeftText (Lnet/minecraft/unmapped/C_sedilmty;)V
 		ARG 1 graphics
 	METHOD m_bwbghmzt renderText (Lnet/minecraft/unmapped/C_sedilmty;Ljava/util/List;Z)V
 		ARG 2 lines
 		ARG 3 leftSide
+	METHOD m_cfxfrpvw (Lcom/mojang/datafixers/util/Either;)Lnet/minecraft/unmapped/C_hrdsvlkq;
+		ARG 0 chunk
+	METHOD m_dfwofowe pushTickRateSample (J)V
+		ARG 1 sample
+	METHOD m_dqqzkibu toggleNetworkCharts ()V
 	METHOD m_enweuogg getServerWorld ()Lnet/minecraft/unmapped/C_bdwnwhiu;
 	METHOD m_eouaifzj (Lit/unimi/dsi/fastutil/objects/Object2IntMap;Lnet/minecraft/unmapped/C_ormqdxci;)Ljava/lang/String;
 		ARG 1 group
@@ -26,15 +44,31 @@ CLASS net/minecraft/unmapped/C_epxplegp net/minecraft/client/gui/hud/DebugHud
 		ARG 1 graphics
 	METHOD m_gdvpeupa getClientChunk ()Lnet/minecraft/unmapped/C_hrdsvlkq;
 	METHOD m_iucxvuxr getChunk ()Lnet/minecraft/unmapped/C_hrdsvlkq;
+	METHOD m_jedplmqj getPingSampleLog ()Lnet/minecraft/unmapped/C_fnzofwlw;
 	METHOD m_jfnssvmz toMiB (J)J
 		ARG 0 bytes
 	METHOD m_jlxirjjv resetChunk ()V
+	METHOD m_jlyaywtw reset ()V
+	METHOD m_kaxtdcsl getBandwidthUsageSampleLog ()Lnet/minecraft/unmapped/C_fnzofwlw;
+	METHOD m_kkowleuv networkChartsVisible ()Z
+	METHOD m_kzkpfpca chartsVisible ()Z
 	METHOD m_lausyuql getLeftText ()Ljava/util/List;
+	METHOD m_lqfjmxvr (Lnet/minecraft/unmapped/C_gkderdjo$C_mnhcarhk;)Lnet/minecraft/unmapped/C_hrdsvlkq;
+		ARG 0 unloaded
 	METHOD m_melioxxl getWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
+	METHOD m_mpdpmccw toggleFpsTpsCharts ()V
+	METHOD m_njxnyhua pushFrameRateSample (J)V
+		ARG 1 sample
 	METHOD m_nxmkywlj (Lnet/minecraft/unmapped/C_ednuhnnn;)Ljava/lang/String;
 		ARG 0 tag
+	METHOD m_odvammzy (Lnet/minecraft/unmapped/C_orlkpefs;)Ljava/lang/String;
+		ARG 0 biomeId
 	METHOD m_orhmyoww (Lnet/minecraft/unmapped/C_ednuhnnn;)Ljava/lang/String;
 		ARG 0 tag
+	METHOD m_otwlwigo (Lnet/minecraft/unmapped/C_mxzbwazq;)Ljava/util/Optional;
+		ARG 1 server
+	METHOD m_sdnbavya (Lnet/minecraft/unmapped/C_lwzmmmqr;)Lnet/minecraft/unmapped/C_hrdsvlkq;
+		ARG 0 loaded
 	METHOD m_sgnauvaj getBiomeString (Lnet/minecraft/unmapped/C_cjzoxshv;)Ljava/lang/String;
 		ARG 0 biome
 	METHOD m_shsitysu (Ljava/util/EnumMap;)V
@@ -42,8 +76,10 @@ CLASS net/minecraft/unmapped/C_epxplegp net/minecraft/client/gui/hud/DebugHud
 	METHOD m_tzfwoxxp propertyToString (Ljava/util/Map$Entry;)Ljava/lang/String;
 		ARG 1 propEntry
 	METHOD m_vicpiwox getRightText ()Ljava/util/List;
+	METHOD m_virlydaa profilerChartVisible ()Z
 	METHOD m_vxosarjc render (Lnet/minecraft/unmapped/C_sedilmty;)V
 		ARG 1 graphics
+	METHOD m_wdhtudpa toggleCharts ()V
 	METHOD m_ybfwmubk getServerWorldDebugString ()Ljava/lang/String;
 	CLASS C_itbnpmom AllocationRateCalculator
 		FIELD f_cvnklqra lastRate J
