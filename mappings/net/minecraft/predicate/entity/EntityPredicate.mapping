@@ -13,16 +13,38 @@ CLASS net/minecraft/unmapped/C_kvkvpjlm net/minecraft/predicate/entity/EntityPre
 	FIELD f_ycxvlbvr equipment Ljava/util/Optional;
 	FIELD f_yvrkjogt vehicle Ljava/util/Optional;
 	METHOD m_cviarbxt toJson ()Lcom/google/gson/JsonElement;
+	METHOD m_lenpszae fromBuilder (Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;)Lnet/minecraft/unmapped/C_ctsfmifk;
+		ARG 0 builder
+	METHOD m_lvpiqxph fromJson (Lcom/google/gson/JsonElement;)Ljava/util/Optional;
+		ARG 0 jsonElement
+	METHOD m_natxrzae fromJson (Lcom/google/gson/JsonObject;Ljava/lang/String;Lnet/minecraft/unmapped/C_gzewtdot;)Ljava/util/Optional;
+		ARG 0 jsonObject
+		ARG 1 name
+		ARG 2 deserializer
 	METHOD m_npdomabq test (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 world
 		ARG 2 pos
 		ARG 3 entity
+	METHOD m_opnjebfi fromElement (Ljava/lang/String;Lnet/minecraft/unmapped/C_gzewtdot;Lcom/google/gson/JsonElement;)Ljava/util/Optional;
+		ARG 0 name
+		ARG 1 deserializer
+		ARG 2 jsonElement
+	METHOD m_qjfpptij wrap (Ljava/util/Optional;)Ljava/util/Optional;
+		ARG 0 entity
 	METHOD m_sqkvtqxf createAdvancementEntityLootContext (Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_iakykpgh;
 		ARG 0 player
 		ARG 1 target
 	METHOD m_txfawcdj test (Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 player
 		ARG 2 entity
+	METHOD m_wwfhkpji wrap (Lnet/minecraft/unmapped/C_kvkvpjlm;)Lnet/minecraft/unmapped/C_ctsfmifk;
+		ARG 0 predicate
+	METHOD m_yxtvlcic fromBuilders ([Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;)Ljava/util/List;
+		ARG 0 builders
+	METHOD m_zchfsdgz fromJsonArray (Lcom/google/gson/JsonObject;Ljava/lang/String;Lnet/minecraft/unmapped/C_gzewtdot;)Ljava/util/List;
+		ARG 0 jsonObject
+		ARG 1 name
+		ARG 2 deserializer
 	CLASS C_fnhnavbg Builder
 		FIELD f_adlgaflf targetedEntity Ljava/util/Optional;
 		FIELD f_agfbxblt distance Ljava/util/Optional;
@@ -37,8 +59,12 @@ CLASS net/minecraft/unmapped/C_kvkvpjlm net/minecraft/predicate/entity/EntityPre
 		FIELD f_tjhcdgoz location Ljava/util/Optional;
 		FIELD f_upesirxb flags Ljava/util/Optional;
 		FIELD f_xwwrgnab typeSpecific Ljava/util/Optional;
+		METHOD m_chvbngwo equipment (Lnet/minecraft/unmapped/C_pcnmkxrp;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 equipment
 		METHOD m_dscijmse vehicle (Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
 		METHOD m_dxowdvhv targetedEntity (Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
 		METHOD m_fydefeme tagged (Lnet/minecraft/unmapped/C_ednuhnnn;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
 			ARG 1 tag
 		METHOD m_gcigjkih typeSpecific (Lnet/minecraft/unmapped/C_ljtxhtrw;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
@@ -46,17 +72,24 @@ CLASS net/minecraft/unmapped/C_kvkvpjlm net/minecraft/predicate/entity/EntityPre
 		METHOD m_idxctzvt team (Ljava/lang/String;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
 			ARG 1 team
 		METHOD m_isspaqjq location (Lnet/minecraft/unmapped/C_ypvebgnl$C_okutxubz;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
 		METHOD m_kzfexoou distance (Lnet/minecraft/unmapped/C_ullximxc;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
 			ARG 1 distance
 		METHOD m_mqcqikci effects (Lnet/minecraft/unmapped/C_nysuqcvh$C_tmpwnbuk;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
 		METHOD m_nqtoxgxm flags (Lnet/minecraft/unmapped/C_rptqszvm$C_nbivukxv;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
 		METHOD m_pisabjzy nbt (Lnet/minecraft/unmapped/C_emmbeecz;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
 			ARG 1 nbt
 		METHOD m_ppezcjrt type (Lnet/minecraft/unmapped/C_wrnalooj;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
 			ARG 1 type
 		METHOD m_pthqlbeh build ()Lnet/minecraft/unmapped/C_kvkvpjlm;
 		METHOD m_qmnpijza passenger (Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
 		METHOD m_qztugqib steppingOn (Lnet/minecraft/unmapped/C_ypvebgnl$C_okutxubz;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
+		METHOD m_uivueovc equipment (Lnet/minecraft/unmapped/C_pcnmkxrp$C_artofvmh;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
+			ARG 1 builder
 		METHOD m_vkqspldb type (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;
 			ARG 1 type
 		METHOD m_zrmwluqr create ()Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;

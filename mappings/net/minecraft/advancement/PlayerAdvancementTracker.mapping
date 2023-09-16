@@ -4,11 +4,14 @@ CLASS net/minecraft/unmapped/C_hyeqtgvx net/minecraft/advancement/PlayerAdvancem
 	FIELD f_gjxxqvop LOGGER Lorg/slf4j/Logger;
 	FIELD f_heqienju playerManager Lnet/minecraft/unmapped/C_digmgtxw;
 	FIELD f_irznbzby owner Lnet/minecraft/unmapped/C_mxrobsgg;
+	FIELD f_ivqxewak nodes Ljava/util/Set;
 	FIELD f_jehxxcjj advancementProgresses Ljava/util/Map;
 	FIELD f_sikjpymk dirty Z
 	FIELD f_slcbnkdg visibleAdvancements Ljava/util/Set;
 	FIELD f_tjxvxhib progressUpdates Ljava/util/Set;
 	FIELD f_tmfkznzu currentDisplayTab Lnet/minecraft/unmapped/C_unoypvme;
+	FIELD f_vvrvziqs tree Lnet/minecraft/unmapped/C_xhjcixzl;
+	FIELD f_wylfyffs codec Lcom/mojang/serialization/Codec;
 	METHOD <init> (Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_digmgtxw;Lnet/minecraft/unmapped/C_fktoyupt;Ljava/nio/file/Path;Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 dataFixer
 		ARG 2 playerManager
@@ -16,25 +19,69 @@ CLASS net/minecraft/unmapped/C_hyeqtgvx net/minecraft/advancement/PlayerAdvancem
 		ARG 4 advancementsSaveFile
 		ARG 5 owner
 	METHOD m_awiiutgo revokeCriterion (Lnet/minecraft/unmapped/C_unoypvme;Ljava/lang/String;)Z
+		ARG 1 advancement
 		ARG 2 criterionName
 	METHOD m_beumusmu setDisplayTab (Lnet/minecraft/unmapped/C_unoypvme;)V
+		ARG 1 holder
 	METHOD m_blqhkaiq clearCriteria ()V
-	METHOD m_bucnvzph endTrackingCompleted (Lnet/minecraft/unmapped/C_unoypvme;)V
+	METHOD m_bucnvzph endTracking (Lnet/minecraft/unmapped/C_unoypvme;)V
+		ARG 1 advancementHolder
+	METHOD m_czdclwkv updateVisibility (Lnet/minecraft/unmapped/C_seqaydby;Ljava/util/Set;Ljava/util/Set;)V
+		ARG 1 root
+		ARG 2 visibleAdvancements
+		ARG 3 hiddenAdvancements
 	METHOD m_ecvsrmhv sendUpdate (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
+	METHOD m_flsopqse (Lnet/minecraft/unmapped/C_unoypvme;Lnet/minecraft/unmapped/C_bvqakncm;)V
+		ARG 2 display
+	METHOD m_fzsuujvd (Ljava/util/Map;Lnet/minecraft/unmapped/C_unoypvme;Lnet/minecraft/unmapped/C_rpzbknxp;)V
+		ARG 1 advancement
+		ARG 2 progress
 	METHOD m_guemlutk rewardEmptyAdvancements (Lnet/minecraft/unmapped/C_fktoyupt;)V
 		ARG 1 advancementLoader
+	METHOD m_iaanlovn (Lnet/minecraft/unmapped/C_fktoyupt;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_rpzbknxp;)V
+		ARG 2 advancementId
+		ARG 3 progress
 	METHOD m_jgahcliw reload (Lnet/minecraft/unmapped/C_fktoyupt;)V
 		ARG 1 advancementLoader
 	METHOD m_kgpamevw getProgress (Lnet/minecraft/unmapped/C_unoypvme;)Lnet/minecraft/unmapped/C_rpzbknxp;
+		ARG 1 holder
 	METHOD m_lcsyawvb setOwner (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 owner
 	METHOD m_pfzhwboq initProgress (Lnet/minecraft/unmapped/C_unoypvme;Lnet/minecraft/unmapped/C_rpzbknxp;)V
+		ARG 1 advancementHolder
 		ARG 2 progress
+	METHOD m_pjrrhgbk load (Lnet/minecraft/unmapped/C_fktoyupt;Lnet/minecraft/unmapped/C_hyeqtgvx$C_tpewgfns;)V
+		ARG 1 serverAdvancementLoader
+		ARG 2 data
+	METHOD m_pptrdaxw add (Lnet/minecraft/unmapped/C_unoypvme;)V
+		ARG 1 advancement
+	METHOD m_qrcupvar endTracking (Lnet/minecraft/unmapped/C_unoypvme;Ljava/lang/String;Lnet/minecraft/unmapped/C_rzypsigz;)V
+		ARG 1 advancement
+		ARG 2 name
+		ARG 3 criterion
+	METHOD m_qvumkguv data ()Lnet/minecraft/unmapped/C_hyeqtgvx$C_tpewgfns;
 	METHOD m_rsgkbelj load (Lnet/minecraft/unmapped/C_fktoyupt;)V
 		ARG 1 advancementLoader
+	METHOD m_wahppvup (Ljava/util/Set;Ljava/util/Set;Lnet/minecraft/unmapped/C_seqaydby;Z)V
+		ARG 3 node
+		ARG 4 shouldShow
+	METHOD m_xffosjia beginTracking (Lnet/minecraft/unmapped/C_unoypvme;)V
+		ARG 1 advancement
 	METHOD m_yjaqlufb beginTrackingAllAdvancements (Lnet/minecraft/unmapped/C_fktoyupt;)V
 		ARG 1 advancementLoader
 	METHOD m_ywfhjcpi grantCriterion (Lnet/minecraft/unmapped/C_unoypvme;Ljava/lang/String;)Z
+		ARG 1 advancement
 		ARG 2 criterionName
+	METHOD m_zebsrcbw beginTracking (Lnet/minecraft/unmapped/C_unoypvme;Ljava/lang/String;Lnet/minecraft/unmapped/C_rzypsigz;)V
+		ARG 1 advancement
+		ARG 2 name
+		ARG 3 criterion
 	METHOD m_zrnhuclw save ()V
+	CLASS C_tpewgfns Data
+		FIELD f_tnidkppv map Ljava/util/Map;
+		METHOD m_etgdpzmk map ()Ljava/util/Map;
+		METHOD m_pfrdizzn forEach (Ljava/util/function/BiConsumer;)V
+			ARG 1 biConsumer
+		METHOD m_sjgjbuba (Ljava/util/function/BiConsumer;Ljava/util/Map$Entry;)V
+			ARG 1 entry
