@@ -1,9 +1,10 @@
-CLASS net/minecraft/unmapped/C_xgxgovba net/minecraft/unmapped/AbstractAbuseReport
+CLASS net/minecraft/unmapped/C_xgxgovba net/minecraft/client/multiplayer/report/AbstractAbuseReport
 	FIELD f_ainklqsh comment Ljava/lang/String;
 	FIELD f_dwvpeavd reportCategory Lnet/minecraft/unmapped/C_bwnamvmh;
+	FIELD f_hyitouod creationTime Ljava/time/Instant;
 	FIELD f_kimagiqs senderUuid Ljava/util/UUID;
-	FIELD f_wzqcvddb reportedEntityUuid Ljava/util/UUID;
-	METHOD m_kimrezaz isReportedPlayer (Ljava/util/UUID;)Z
+	FIELD f_wzqcvddb offenderUuid Ljava/util/UUID;
+	METHOD m_kimrezaz isOffender (Ljava/util/UUID;)Z
 	METHOD m_lwdwvavt openAbuseReportScreen (Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_oxpapezz;)Lnet/minecraft/unmapped/C_wrmtlwqx;
 		ARG 1 parent
 		ARG 2 context
@@ -11,11 +12,11 @@ CLASS net/minecraft/unmapped/C_xgxgovba net/minecraft/unmapped/AbstractAbuseRepo
 	CLASS C_atrsrhcz BuildError
 		FIELD f_iaoujbtd COMMENT_TOO_LONG Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
 		FIELD f_mmueqhrs NO_CATEGORY_SELECTED Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
-		FIELD f_obupyfna NO_REPORTED_MESSAGES Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
-		FIELD f_qtojvcsw TOO_MANY_REPORTED_MESSAGES Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
+		FIELD f_obupyfna NO_MESSAGES_SELECTED Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
+		FIELD f_qtojvcsw TOO_MANY_MESSAGES_SELECTED Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
 		METHOD m_mjwzfntb createTooltip ()Lnet/minecraft/unmapped/C_skehaijy;
 	CLASS C_hjqidzpa BuildResult
-	CLASS C_nzypgnnc AbstractBuilder
+	CLASS C_nzypgnnc AbstractAbuseReportBuilder
 		FIELD f_ahhsruca draftReport Lnet/minecraft/unmapped/C_xgxgovba;
 		FIELD f_zysbuyxv abuseReportLimits Lcom/mojang/authlib/minecraft/report/AbuseReportLimits;
 		METHOD m_cujgrryu getComment ()Ljava/lang/String;
