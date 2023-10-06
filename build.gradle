@@ -323,7 +323,7 @@ task remapTargetUnpickDefinitions(type: RemapUnpickDefinitionsTask) {
 }
 
 task unpickTargetJar(type: UnpickJarTask) {
-	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries", "remapTargetUnpickDefinitions"
+	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries", "remapTargetUnpickDefinitions", "mapPerVersionMappingsJar"
 
 	inputFile.set mappings.fileConstants.perVersionMappingsJar
 	outputFile.set remapTargetMinecraftJar.inputJar
