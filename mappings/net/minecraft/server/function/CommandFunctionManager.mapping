@@ -1,15 +1,10 @@
 CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFunctionManager
 	COMMENT The command function manager implements execution of functions, like that from
 	COMMENT the {@code function} command.
-	FIELD f_amfffumb NO_TRACE_IN_FUNCTION Lnet/minecraft/unmapped/C_rdaqiwdt;
-		COMMENT A localized piece of text indicating that calling the debug command to debug
-		COMMENT functions from within a function is not supported.
 	FIELD f_cphekqnd LOAD_TAG_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_hiegggtl justLoaded Z
 		COMMENT Whether this command function manager has just {@linkplain #load(FunctionLoader)
 		COMMENT loaded} and should run all functions in the {@code minecraft:load} function tag.
-	FIELD f_hyzwneab execution Lnet/minecraft/unmapped/C_nbwcoknw$C_ueiryfzf;
-		COMMENT The active execution within this manager.
 	FIELD f_ikwppilw loader Lnet/minecraft/unmapped/C_coevuhwv;
 		COMMENT The source of functions for this command function manager.
 	FIELD f_quauqxob server Lnet/minecraft/server/MinecraftServer;
@@ -27,7 +22,6 @@ CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFun
 	METHOD m_fholwbwd getAllFunctions ()Ljava/lang/Iterable;
 	METHOD m_flzhjpiz load (Lnet/minecraft/unmapped/C_coevuhwv;)V
 		ARG 1 loader
-	METHOD m_hdkfxhto getMaxCommandChainLength ()I
 	METHOD m_iockbwxf getScheduledCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
 		COMMENT {@return the command source to execute scheduled functions} Scheduled functions
 		COMMENT are those from the {@code /schedule} command and those from the {@code
@@ -46,81 +40,5 @@ CLASS net/minecraft/unmapped/C_nbwcoknw net/minecraft/server/function/CommandFun
 	METHOD m_stsralpj executeAll (Ljava/util/Collection;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 functions
 		ARG 2 label
-	METHOD m_stviknmp execute (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;)I
-		COMMENT Executes a function.
-		COMMENT
-		COMMENT <p>This is same as calling {@link #execute(CommandFunction, ServerCommandSource,
-		COMMENT Tracer, NbtCompound) execute(function, source, null, null)}.
-		COMMENT
-		COMMENT @return the command output value
-		COMMENT @see #execute(CommandFunction, ServerCommandSource, Tracer, NbtCompound)
-		ARG 1 function
-			COMMENT the function
-		ARG 2 source
-			COMMENT the command source to execute with
-	METHOD m_trgeoxeb execute (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_nbwcoknw$C_ihdownls;Lnet/minecraft/unmapped/C_hhlwcnih;)I
 	METHOD m_wcucalqh getTag (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Collection;
 		ARG 1 id
-	CLASS C_hkyyjgwj Entry
-		FIELD f_alvcxeeb source Lnet/minecraft/unmapped/C_pennblrk;
-		FIELD f_jfyypoex depth I
-		FIELD f_jpzkdkvg element Lnet/minecraft/unmapped/C_soipoenw$C_wgtdithj;
-		METHOD <init> (Lnet/minecraft/unmapped/C_pennblrk;ILnet/minecraft/unmapped/C_soipoenw$C_wgtdithj;)V
-			ARG 1 source
-			ARG 2 depth
-			ARG 3 element
-		METHOD m_xqmrgfby execute (Lnet/minecraft/unmapped/C_nbwcoknw;Ljava/util/Deque;ILnet/minecraft/unmapped/C_nbwcoknw$C_ihdownls;)V
-			ARG 1 manager
-			ARG 2 entries
-			ARG 3 maxChainLength
-			ARG 4 tracer
-	CLASS C_ihdownls Tracer
-		COMMENT A tree-visitor-like tracer, useful for gaining insights on function execution.
-		METHOD m_hfygevic traceFunctionCall (ILnet/minecraft/unmapped/C_ncpywfca;I)V
-			ARG 1 depth
-			ARG 2 function
-			ARG 3 size
-		METHOD m_rejtbund traceCommandStart (ILjava/lang/String;)V
-			ARG 1 depth
-			ARG 2 command
-		METHOD m_rjbxidpf traceCommandEnd (ILjava/lang/String;I)V
-			ARG 1 depth
-			ARG 2 command
-			ARG 3 result
-		METHOD m_ybktvfsy traceError (ILjava/lang/String;)V
-			ARG 1 depth
-			ARG 2 message
-	CLASS C_ueiryfzf Execution
-		COMMENT An active execution of functions. It uses two deques to simulate a stack for a
-		COMMENT depth-first expansion of functions, as the function call stack depth may exceed
-		COMMENT the allowed JVM stack size.
-		COMMENT
-		COMMENT @see CommandFunctionManager#execution
-		FIELD f_iievdemo depth I
-		FIELD f_joazlwbh tracer Lnet/minecraft/unmapped/C_nbwcoknw$C_ihdownls;
-		FIELD f_kopyvitj queue Ljava/util/Deque;
-		FIELD f_uchbpyps waitlist Ljava/util/List;
-		METHOD <init> (Lnet/minecraft/unmapped/C_nbwcoknw;Lnet/minecraft/unmapped/C_nbwcoknw$C_ihdownls;)V
-			ARG 2 tracer
-		METHOD m_avixyysb reportError (Ljava/lang/String;)V
-			ARG 1 message
-		METHOD m_jtwxlovt run (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;)I
-			COMMENT Handles a new case in {@link CommandFunctionManager#execute(CommandFunction,
-			COMMENT ServerCommandSource, CommandFunctionManager.Tracer, NbtCompound)}.
-			COMMENT
-			COMMENT @return a value for the command result
-			ARG 1 function
-				COMMENT the function
-			ARG 2 source
-				COMMENT the command source
-		METHOD m_pjvwrxbj recursiveRun (Lnet/minecraft/unmapped/C_soipoenw;Lnet/minecraft/unmapped/C_pennblrk;)V
-			COMMENT Handles a recursive case in {@link CommandFunctionManager#execute(CommandFunction,
-			COMMENT ServerCommandSource, CommandFunctionManager.Tracer, NbtCompound)}.
-			COMMENT
-			COMMENT <p>This effectively swaps an entry with a command element with {@code /function}
-			COMMENT command at the head of the deque with another entry with a function element
-			COMMENT containing the actual command elemenets referenced in that function.
-			ARG 1 function
-				COMMENT the function
-			ARG 2 source
-				COMMENT the command source
