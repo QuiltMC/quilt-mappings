@@ -323,7 +323,7 @@ task remapTargetUnpickDefinitions(type: RemapUnpickDefinitionsTask) {
 }
 
 task unpickTargetJar(type: UnpickJarTask) {
-	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries", "remapTargetUnpickDefinitions"
+	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries", "remapTargetUnpickDefinitions", "mapPerVersionMappingsJar"
 
 	inputFile.set mappings.fileConstants.perVersionMappingsJar
 	outputFile.set remapTargetMinecraftJar.inputJar
@@ -394,7 +394,7 @@ javadoc {
 				"https://javadoc.io/doc/io.netty/netty-all/${project.netty}/",
 				'https://javadoc.lwjgl.org/',
 				'https://logging.apache.org/log4j/2.x/javadoc/log4j-api/',
-//				'https://fastutil.di.unimi.it/docs/',
+				'https://fastutil.di.unimi.it/docs/',
 				"https://commons.apache.org/proper/commons-logging/javadocs/api-release/",
 				"https://commons.apache.org/proper/commons-lang/javadocs/api-release/",
 				"https://commons.apache.org/proper/commons-io/apidocs/",
