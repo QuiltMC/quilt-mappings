@@ -1,0 +1,44 @@
+CLASS net/minecraft/unmapped/C_zjhfcbxz net/minecraft/client/gui/hud/debug/BandwidthUsageDebugChartRenderer
+	FIELD f_azmcvtfl MEDIUM_BANDWIDTH_USAGE_COLOR I
+		COMMENT The color for bandwidth usage of exactly 8 KiB/s.
+		COMMENT <p>
+		COMMENT In vanilla this is lavender with a color code of {@code a0a0ff}. Bandwidth usage colors
+		COMMENT are interpolated between
+		COMMENT {@link BandwidthUsageDebugChartRenderer#LOW_BANDWIDTH_USAGE_COLOR LOW_BANDWIDTH_USAGE_COLOR},
+		COMMENT this, and
+		COMMENT {@link BandwidthUsageDebugChartRenderer#HIGH_BANDWIDTH_USAGE_COLOR HIGH_BANDWIDTH_USAGE_COLOR}.
+	FIELD f_gkamsyjg CHART_TOP_VALUE I
+	FIELD f_qlacptbm LOW_BANDWIDTH_USAGE_COLOR I
+		COMMENT The color for bandwidth usage of exactly 0 B/s.
+		COMMENT <p>
+		COMMENT In vanilla this is cyan with a color code of {@code 00ffff}. Bandwidth usage colors are
+		COMMENT interpolated between this,
+		COMMENT {@link BandwidthUsageDebugChartRenderer#MEDIUM_BANDWIDTH_USAGE_COLOR MEDIUM_BANDWIDTH_USAGE_COLOR},
+		COMMENT and
+		COMMENT {@link BandwidthUsageDebugChartRenderer#HIGH_BANDWIDTH_USAGE_COLOR HIGH_BANDWIDTH_USAGE_COLOR}.
+	FIELD f_qlzaaafe HIGH_BANDWIDTH_USAGE_COLOR I
+		COMMENT The color for bandwidth usage of 1 MiB/s or higher.
+		COMMENT <p>
+		COMMENT In vanilla this is red with a color code of {@code ff0000}. Bandwidth usage colors are
+		COMMENT interpolated between
+		COMMENT {@link BandwidthUsageDebugChartRenderer#LOW_BANDWIDTH_USAGE_COLOR LOW_BANDWIDTH_USAGE_COLOR},
+		COMMENT {@link BandwidthUsageDebugChartRenderer#MEDIUM_BANDWIDTH_USAGE_COLOR MEDIUM_BANDWIDTH_USAGE_COLOR},
+		COMMENT and this.
+	FIELD f_sgccpnjk KILOBYTE I
+	FIELD f_xlugyeml MEGABYTE I
+	METHOD m_bvdrsedr drawUsageThreshold (Lnet/minecraft/unmapped/C_sedilmty;IIII)V
+		ARG 2 x
+		ARG 3 width
+		ARG 4 y
+		ARG 5 bandwidth
+	METHOD m_flazkxro appendBandwidthUsageUnit (D)Ljava/lang/String;
+		ARG 0 bytesPerSecond
+	METHOD m_htsewulb bandwidthLineLength (D)I
+		ARG 0 bytesPerSecond
+	METHOD m_mbzufylc drawUnderlinedLabel (Lnet/minecraft/unmapped/C_sedilmty;IIILjava/lang/String;)V
+		ARG 2 x
+		ARG 3 width
+		ARG 4 y
+		ARG 5 bandwidthLabel
+	METHOD m_qxeisfxn perTickToPerSecond (D)D
+		ARG 0 bytesPerTick

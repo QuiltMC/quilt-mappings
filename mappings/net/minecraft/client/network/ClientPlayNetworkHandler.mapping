@@ -3,6 +3,7 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	FIELD f_apuckpwu sessionId Ljava/util/UUID;
 	FIELD f_beytxqxu dataQueryHandler Lnet/minecraft/unmapped/C_kiomtpcs;
 	FIELD f_biurfzzv worldKeys Ljava/util/Set;
+	FIELD f_bnwfrupz closed Z
 	FIELD f_bpwcjaiw profile Lcom/mojang/authlib/GameProfile;
 	FIELD f_bsnhfuqe enabledFlags Lnet/minecraft/unmapped/C_czxxrbcp;
 	FIELD f_fmcklieu LOGGER Lorg/slf4j/Logger;
@@ -20,14 +21,17 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	FIELD f_okhxbsay UNSECURE_SERVER_TOAST_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_oscihfpd world Lnet/minecraft/unmapped/C_ghdnlrrw;
 	FIELD f_pwlckpdl commandDispatcher Lcom/mojang/brigadier/CommandDispatcher;
+	FIELD f_runyodpr seenInsecureChatWarning Z
 	FIELD f_sjbnncsn lastSeenMessageTracker Lnet/minecraft/unmapped/C_zwzonavy;
 	FIELD f_uqhgsszo UNSECURE_SERVER_TOAST Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_urauiwpa worldProperties Lnet/minecraft/unmapped/C_ghdnlrrw$C_nwouoiiq;
 	FIELD f_vtrzacei chunkLoadDistance I
 	FIELD f_wptpguga listedPlayers Ljava/util/Set;
-	FIELD f_wvoodfrp RECONFIGING Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_wvoodfrp RECONFIGURING_DISCONNECT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_xadarkvu random Lnet/minecraft/unmapped/C_rlomrsco;
 	METHOD m_aljluxvy getListedPlayers ()Ljava/util/Collection;
+	METHOD m_bezsknzh (Lnet/minecraft/unmapped/C_astfners;Lcom/mojang/datafixers/util/Pair;)V
+		ARG 1 slotAndStack
 	METHOD m_btbbdyot sendCommand (Ljava/lang/String;)Z
 		ARG 1 command
 	METHOD m_coppxivl getWorldKeys ()Ljava/util/Set;
@@ -44,6 +48,8 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 1 command
 	METHOD m_hluamyrn disconnect ()V
 	METHOD m_hqntbneu getWorld ()Lnet/minecraft/unmapped/C_ghdnlrrw;
+	METHOD m_joanhmaq (I)V
+		ARG 1 id
 	METHOD m_kktwaxkp getActiveTotemOfUndying (Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 0 player
 	METHOD m_krkrcsmq getDataQueryHandler ()Lnet/minecraft/unmapped/C_kiomtpcs;
@@ -59,6 +65,8 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	METHOD m_ngcanpet sendMessageAcknowledgment ()V
 	METHOD m_nnthzfll getCommandDispatcher ()Lcom/mojang/brigadier/CommandDispatcher;
 	METHOD m_nziwzrkj getConnection ()Lnet/minecraft/unmapped/C_oasmcckk;
+	METHOD m_oayrwreh handleUnknownCustomPayload (Lnet/minecraft/unmapped/C_oqfbzhlw;)V
+		ARG 1 payload
 	METHOD m_ojepywax getEnabledFlags ()Lnet/minecraft/unmapped/C_czxxrbcp;
 	METHOD m_owpxqxbm getPlayerListEntry (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdnfmxue;
 		ARG 1 profileName
@@ -76,6 +84,8 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	METHOD m_quieupaa getProfile ()Lcom/mojang/authlib/GameProfile;
 	METHOD m_rfxuxjoo isEnabled (Lnet/minecraft/unmapped/C_czxxrbcp;)Z
 		ARG 1 flags
+	METHOD m_rwonxwmk (Lnet/minecraft/unmapped/C_knypsere;Lnet/minecraft/unmapped/C_kvegafmh;)V
+		ARG 2 blockEntity
 	METHOD m_twqcihtd getPlayerList ()Ljava/util/Collection;
 	METHOD m_uccwwurs getServerInfo ()Lnet/minecraft/unmapped/C_xotldzgg;
 	METHOD m_ugyspzmn scheduleChunkRender (Lnet/minecraft/unmapped/C_hrdsvlkq;II)V
@@ -89,6 +99,8 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 	METHOD m_wkxolrzd getAdvancementHandler ()Lnet/minecraft/unmapped/C_wojlspxv;
 	METHOD m_xranmjii getPlayerListEntry (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_rdnfmxue;
 		ARG 1 uuid
+	METHOD m_xupvomdt getSpawnedEntity (Lnet/minecraft/unmapped/C_qdqrqwvy;)Lnet/minecraft/unmapped/C_astfners;
+		ARG 1 packet
 	METHOD m_yszhtlij parse (Ljava/lang/String;)Lcom/mojang/brigadier/ParseResults;
 		ARG 1 command
 	METHOD m_zdvdjxqm updateWorldChunk (IILnet/minecraft/unmapped/C_tilplatb;)V
@@ -96,4 +108,5 @@ CLASS net/minecraft/unmapped/C_nuofrxvi net/minecraft/client/network/ClientPlayN
 		ARG 2 z
 		ARG 3 data
 	METHOD m_zeqpblhe getCommandSource ()Lnet/minecraft/unmapped/C_vvqqprve;
+	METHOD m_ziemnttr refreshTags ()V
 	METHOD m_zietpfgc getSessionId ()Ljava/util/UUID;
