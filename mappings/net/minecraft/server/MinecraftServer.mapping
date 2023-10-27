@@ -17,10 +17,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	COMMENT @see net.minecraft.server.integrated.IntegratedServer
 	FIELD f_cprjvpov playerManager Lnet/minecraft/unmapped/C_digmgtxw;
 	FIELD f_cyhowiqj pvpEnabled Z
-	FIELD f_dsjdzrap PLAYER_SAMPLE_UPDATE_INTERVAL J
 	FIELD f_dzhyipcc MAX_STATUS_PLAYER_SAMPLE I
 	FIELD f_emdhztny saveHandler Lnet/minecraft/unmapped/C_wnawwdpy;
-	FIELD f_esvodfwj OVERLOADED_THRESHOLD I
 	FIELD f_fabfcdrs lastPlayerSampleUpdate J
 	FIELD f_fbididar recorder Lnet/minecraft/unmapped/C_owhdirgj;
 	FIELD f_fdsdqzpj serverGuiTickables Ljava/util/List;
@@ -42,14 +40,11 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_kjvvxrfe MAX_WORLD_BORDER_RADIUS I
 	FIELD f_kobephmh random Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_kprntweg AVERAGE_TICK_TIME_SMOOTHING F
-	FIELD f_kzloyzgf OVERLOADED_WARNING_INTERVAL I
 	FIELD f_lcymwmat needsRecorderSetup Z
 	FIELD f_lhjjpisf saveProperties Lnet/minecraft/unmapped/C_jkevluio;
 	FIELD f_ljukkmyt VANILLA_BRAND Ljava/lang/String;
 	FIELD f_lxhddphh session Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;
-	FIELD f_mblkmqrr MILLISECONDS_PER_TICK J
 	FIELD f_mdgbzxcp serverResourceManager Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;
-	FIELD f_mjgajucj lastTickLengths [J
 	FIELD f_mkwvxikt dataPackManager Lnet/minecraft/unmapped/C_dqfyacfy;
 	FIELD f_mzgxeppu hostProfile Lcom/mojang/authlib/GameProfile;
 	FIELD f_nobqkcyz preventProxyConnections Z
@@ -60,8 +55,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_piadzews scoreboard Lnet/minecraft/unmapped/C_orszeavg;
 	FIELD f_pjqvnnxv bossBarManager Lnet/minecraft/unmapped/C_xtwgkoiw;
 	FIELD f_psutxvxr AUTOSAVE_INTERVAL I
-	FIELD f_qhvtahcc nextTickTimestamp J
-	FIELD f_qtwsjtfk lastTimeReference J
 	FIELD f_qtxubclb stopped Z
 	FIELD f_rcysgese waitingForNextTick Z
 	FIELD f_rdiwmllx debugStart Lnet/minecraft/server/MinecraftServer$C_rfqdsgps;
@@ -72,15 +65,12 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_towfkfih favicon Lnet/minecraft/unmapped/C_bwttende$C_cgekazzo;
 	FIELD f_tvqgbnok ticks I
 	FIELD f_tyymbfil saving Z
-	FIELD f_ucujdczf tickTime F
-	FIELD f_uftadmvp timeReference J
 	FIELD f_undezdps profiler Lnet/minecraft/unmapped/C_eslcbfsq;
 	FIELD f_voqveisr metadata Lnet/minecraft/unmapped/C_bwttende;
 	FIELD f_vxfcywbl structureTemplateManager Lnet/minecraft/unmapped/C_zxhjfyir;
 	FIELD f_vzvmmomx proxy Ljava/net/Proxy;
 	FIELD f_wmdvdqlf serverId Ljava/lang/String;
 	FIELD f_wsnekgbx serverPort I
-	FIELD f_xoafdfeu MS_PER_TICK I
 	FIELD f_xpelegwm networkIo Lnet/minecraft/unmapped/C_mitbewqx;
 	FIELD f_ydhbqcwa ANONYMOUS_GAME_PROFILE Lcom/mojang/authlib/GameProfile;
 	FIELD f_ypvxjvas layeredRegistryManager Lnet/minecraft/unmapped/C_bcpxdrik;
@@ -115,8 +105,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_blfimkeo getLayeredRegistryManager ()Lnet/minecraft/unmapped/C_bcpxdrik;
 	METHOD m_btuswdlx getProxy ()Ljava/net/Proxy;
 	METHOD m_buftmakz getScoreboard ()Lnet/minecraft/unmapped/C_orszeavg;
-	METHOD m_byfxgwdz (Ljava/nio/file/Path;)Ljava/util/Optional;
-		ARG 0 foundPath
 	METHOD m_cccxtvft forcePlayerSampleUpdate ()V
 	METHOD m_ccqjjrlt getCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
 		COMMENT Creates a command source which represents this Minecraft server instance.
@@ -170,10 +158,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 0 throwable
 	METHOD m_gbtvfmwc dumpClasspath (Ljava/nio/file/Path;)V
 		ARG 1 path
-	METHOD m_gchupyrg getTickTime ()F
 	METHOD m_gejlddyg isLoading ()Z
-	METHOD m_gicdpqlb (Ljava/nio/file/Path;)Z
-		ARG 0 path
 	METHOD m_glmgndav getOverworld ()Lnet/minecraft/unmapped/C_bdwnwhiu;
 	METHOD m_gsecpirt shouldKeepTicking ()Z
 	METHOD m_gzgtxora startServer (Ljava/util/function/Function;)Lnet/minecraft/server/MinecraftServer;
@@ -319,8 +304,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_rganmsov startTickMetrics ()V
 	METHOD m_rgjgaqvc setServerIp (Ljava/lang/String;)V
 		ARG 1 serverIp
-	METHOD m_rtlqvzih (Ljava/nio/file/Path;)V
-		ARG 1 path
 	METHOD m_ryjguldn tick (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
 	METHOD m_savbqlxo setPlayerIdleTimeout (I)V
