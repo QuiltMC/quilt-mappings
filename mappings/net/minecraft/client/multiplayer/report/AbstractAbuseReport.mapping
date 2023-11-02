@@ -1,0 +1,45 @@
+CLASS net/minecraft/unmapped/C_xgxgovba net/minecraft/client/multiplayer/report/AbstractAbuseReport
+	FIELD f_ainklqsh comment Ljava/lang/String;
+	FIELD f_dwvpeavd category Lnet/minecraft/unmapped/C_bwnamvmh;
+	FIELD f_hyitouod timestamp Ljava/time/Instant;
+	FIELD f_kimagiqs senderUuid Ljava/util/UUID;
+	FIELD f_wzqcvddb offenderUuid Ljava/util/UUID;
+	METHOD <init> (Ljava/util/UUID;Ljava/time/Instant;Ljava/util/UUID;)V
+		ARG 1 senderUuid
+		ARG 2 timestamp
+		ARG 3 offenderUuid
+	METHOD m_kimrezaz isOffender (Ljava/util/UUID;)Z
+	METHOD m_lwdwvavt openAbuseReportScreen (Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_oxpapezz;)Lnet/minecraft/unmapped/C_wrmtlwqx;
+		ARG 1 parent
+		ARG 2 context
+	METHOD m_ycitnogx copy ()Lnet/minecraft/unmapped/C_xgxgovba;
+	CLASS C_atrsrhcz BuildError
+		FIELD f_iaoujbtd COMMENT_TOO_LONG Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
+		FIELD f_mmueqhrs NO_CATEGORY_SELECTED Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
+		FIELD f_obupyfna NO_MESSAGES_SELECTED Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
+		FIELD f_qtojvcsw TOO_MANY_MESSAGES_SELECTED Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
+		METHOD m_mjwzfntb createTooltip ()Lnet/minecraft/unmapped/C_skehaijy;
+		METHOD m_tmyasqnq message ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	CLASS C_hjqidzpa BuildResult
+		FIELD f_hvxbcvaw report Lcom/mojang/authlib/minecraft/report/AbuseReport;
+		FIELD f_iujwuvcw uuid Ljava/util/UUID;
+		FIELD f_nkmiufup reportType Lnet/minecraft/unmapped/C_enwrzvym;
+		METHOD m_bscdvrlv reportType ()Lnet/minecraft/unmapped/C_enwrzvym;
+		METHOD m_hteryzjl uuid ()Ljava/util/UUID;
+		METHOD m_jjrqagts report ()Lcom/mojang/authlib/minecraft/report/AbuseReport;
+	CLASS C_nzypgnnc AbstractAbuseReportBuilder
+		FIELD f_ahhsruca draftReport Lnet/minecraft/unmapped/C_xgxgovba;
+		FIELD f_zysbuyxv abuseReportLimits Lcom/mojang/authlib/minecraft/report/AbuseReportLimits;
+		METHOD m_cujgrryu getComment ()Ljava/lang/String;
+		METHOD m_lpdzwgad setComment (Ljava/lang/String;)V
+			ARG 1 comment
+		METHOD m_nblisycu isModified ()Z
+			COMMENT @return whether any builder fields are set
+		METHOD m_qkcrflvn build (Lnet/minecraft/unmapped/C_oxpapezz;)Lcom/mojang/datafixers/util/Either;
+			ARG 1 context
+		METHOD m_sddmgvfv getDraftReport ()Lnet/minecraft/unmapped/C_xgxgovba;
+		METHOD m_uaojjrsv getCategory ()Lnet/minecraft/unmapped/C_bwnamvmh;
+		METHOD m_vsrmodnt getBuildError ()Lnet/minecraft/unmapped/C_xgxgovba$C_atrsrhcz;
+		METHOD m_wesagqqd setCategory (Lnet/minecraft/unmapped/C_bwnamvmh;)V
+			ARG 1 category
+		METHOD m_wpnalvbh getReportedPlayerUuid ()Ljava/util/UUID;
