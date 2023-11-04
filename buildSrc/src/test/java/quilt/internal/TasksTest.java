@@ -6,6 +6,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.io.CleanupMode;
 import org.junit.jupiter.api.io.TempDir;
 import quilt.internal.tasks.build.AddProposedMappingsTask;
@@ -33,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static quilt.internal.util.MappingAssertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@EnabledIf("obfJarExists")
 public class TasksTest {
     private static final String PER_VERSION_NAMESPACE = Constants.PER_VERSION_MAPPINGS_NAME;
     private static final Path OBF_JAR = Path.of("build/libs/test-input-obf.jar").toAbsolutePath();
@@ -61,6 +63,10 @@ public class TasksTest {
 
     private static Path getResource(String name) throws URISyntaxException {
         return Path.of(TasksTest.class.getResource(name).toURI());
+    }
+
+    public static boolean obfJarExists() {
+        return Files.isRegularFile(OBF_JAR);
     }
 
     @BeforeAll

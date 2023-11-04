@@ -68,8 +68,13 @@ tasks.register("inputTestObf", JavaExec.class) {
 	mainClass = 'proguard.ProGuard'
 	classpath configurations.proGuard
 
+	if (!new File(file(System.properties['java.home']), 'jmods').exists()) {
+		println "Directory jmods does not exist in the Java home, skipping test jar obfuscation"
+		it.enabled = false
+	}
+
 	args '@src/test/resources/proguard-test.conf', '-injars', inputTestJar.archiveFile.get(),
-			'-libraryjars', '<java.home>/jmods',
+			'-libraryjars', '<java.home>/jmods/java.base.jmod(!**.jar;!module-info.class)',
 			'-outjars', file('build/libs/test-input-obf.jar'),
 			'-printmapping', file('build/resources/test/obf-mapping.txt')
 }
