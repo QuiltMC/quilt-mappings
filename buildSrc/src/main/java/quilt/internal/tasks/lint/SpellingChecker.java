@@ -96,7 +96,7 @@ public class SpellingChecker implements Checker<Entry<?>> {
             String[] packageNames = name.substring(0, name.lastIndexOf(PACKAGE_SEPARATOR)).split(String.valueOf(PACKAGE_SEPARATOR));
             for (String packageName : packageNames) {
                 String[] split = packageName.split("_");
-                namesToSplit.addAll(Set.of(split));
+                namesToSplit.addAll(List.of(split));
             }
         } else {
             // handle underscores
