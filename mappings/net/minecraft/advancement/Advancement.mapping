@@ -3,12 +3,48 @@ CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
 	FIELD f_emngvigd requirements Lnet/minecraft/unmapped/C_wbfyxnvb;
 	FIELD f_eqsfnrjr criteria Ljava/util/Map;
 	FIELD f_eykiurph display Ljava/util/Optional;
+	FIELD f_njhcraol name Ljava/util/Optional;
 	FIELD f_nwvdgawt sendsTelemetryEvent Z
 	FIELD f_uhuyjydl rewards Lnet/minecraft/unmapped/C_wptigggq;
+	METHOD <init> (Ljava/util/Optional;Ljava/util/Optional;Lnet/minecraft/unmapped/C_wptigggq;Ljava/util/Map;Lnet/minecraft/unmapped/C_wbfyxnvb;Z)V
+		ARG 1 id
+		ARG 2 display
+		ARG 3 rewards
+		ARG 4 criteria
+		ARG 5 requirements
+		ARG 6 sendsTelemetryEvent
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
-	METHOD m_ggypmlkv doesSendTelemetryEvent ()Z
-	CLASS C_dukbjvrv Task
+	METHOD m_bqlcljku toJson ()Lcom/google/gson/JsonObject;
+	METHOD m_ggypmlkv sendsTelemetryEvent ()Z
+	METHOD m_hcfbmzas (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 text
+	METHOD m_hpxxrezd fromPacket (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_kdwyuhdb;
+		ARG 0 buf
+	METHOD m_htjukofs parent ()Ljava/util/Optional;
+	METHOD m_jqhmxcpz (Lcom/google/gson/JsonObject;Lnet/minecraft/unmapped/C_bvqakncm;)V
+		ARG 1 display
+	METHOD m_ocjwqiep (Lcom/google/gson/JsonObject;Lnet/minecraft/unmapped/C_ncpywfca;)V
+		ARG 1 parent
+	METHOD m_ofikdsfj rewards ()Lnet/minecraft/unmapped/C_wptigggq;
+	METHOD m_ojjmhgkm fromJson (Lcom/google/gson/JsonObject;Lnet/minecraft/unmapped/C_gzewtdot;)Lnet/minecraft/unmapped/C_kdwyuhdb;
+		ARG 0 obj
+		ARG 1 deserializer
+	METHOD m_swogstqz getText (Lnet/minecraft/unmapped/C_unoypvme;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 advancementHolder
+	METHOD m_vdmpoqil requirements ()Lnet/minecraft/unmapped/C_wbfyxnvb;
+	METHOD m_vfnevnhx name ()Ljava/util/Optional;
+	METHOD m_wngxatfp display ()Ljava/util/Optional;
+	METHOD m_wsihwdxp empty ()Z
+	METHOD m_xazdqguv criteria ()Ljava/util/Map;
+	METHOD m_xbcnitcp createText (Lnet/minecraft/unmapped/C_bvqakncm;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 display
+	METHOD m_xfimowjn toPacket (Lnet/minecraft/unmapped/C_idfydwco;)V
+		ARG 1 buf
+	METHOD m_xqjzcrqy (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_bvqakncm;)V
+		ARG 0 buf
+		ARG 1 display
+	CLASS C_dukbjvrv Builder
 		FIELD f_bdgdqmsj sendsTelemetryEvent Z
 		FIELD f_cicbhyoi requirements Ljava/util/Optional;
 		FIELD f_gkkpggfx rewards Lnet/minecraft/unmapped/C_wptigggq;
@@ -16,8 +52,13 @@ CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
 		FIELD f_vlwysjpx criteria Lcom/google/common/collect/ImmutableMap$Builder;
 		FIELD f_vwzzsrub display Ljava/util/Optional;
 		FIELD f_wpvukjwy merger Lnet/minecraft/unmapped/C_wbfyxnvb$C_huwvdbdx;
+		METHOD m_ckalgnkc merger (Lnet/minecraft/unmapped/C_wbfyxnvb$C_huwvdbdx;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
+			ARG 1 merger
 		METHOD m_jlhvlwgp display (Lnet/minecraft/unmapped/C_bvqakncm;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 display
+		METHOD m_liavgrzl putCriteria (Ljava/lang/String;Lnet/minecraft/unmapped/C_rzypsigz;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
+			ARG 1 name
+			ARG 2 criterion
 		METHOD m_mpypjyhz display (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_gcthizso;ZZZ)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 icon
 			ARG 2 title
@@ -27,6 +68,10 @@ CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
 			ARG 6 showToast
 			ARG 7 announceToChat
 			ARG 8 hidden
+		METHOD m_mshncpue requirements (Lnet/minecraft/unmapped/C_wbfyxnvb;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
+			ARG 1 requirements
+		METHOD m_ofouvzjr parent (Lnet/minecraft/unmapped/C_unoypvme;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
+			ARG 1 advancementHolder
 		METHOD m_oqffddpf create ()Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 		METHOD m_ozlfpvhc display (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_gcthizso;ZZZ)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 icon
@@ -43,6 +88,7 @@ CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
 			ARG 2 id
 		METHOD m_uftuvurm parent (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 parentId
+		METHOD m_xcavlqpa sendsTelemetryEvent ()Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 		METHOD m_xfgxgmkz build (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_unoypvme;
 			ARG 1 id
 		METHOD m_xkgvhpps rewards (Lnet/minecraft/unmapped/C_wptigggq;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;

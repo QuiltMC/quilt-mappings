@@ -1,26 +1,39 @@
 CLASS net/minecraft/unmapped/C_rpzbknxp net/minecraft/advancement/AdvancementProgress
+	FIELD f_mhfgclex COMPLETED_TIME_FORMAT Ljava/time/format/DateTimeFormatter;
 	FIELD f_mkjaxtuk requirements Lnet/minecraft/unmapped/C_wbfyxnvb;
+	FIELD f_ojpamimu CRITERIA_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_oqxaffnd CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_otlapbhr criteriaProgresses Ljava/util/Map;
+	FIELD f_tfwtcnnx COMPLETED_TIME_CODEC Lcom/mojang/serialization/Codec;
 	METHOD <init> (Ljava/util/Map;)V
 		ARG 1 criteriaProgresses
 	METHOD compareTo compareTo (Ljava/lang/Object;)I
-		ARG 1 o
+		ARG 1 progress
 	METHOD m_bzdhtbyp fromPacket (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_rpzbknxp;
 		ARG 0 buf
 	METHOD m_cpbjharz reset (Ljava/lang/String;)Z
-		ARG 1 name
+		ARG 1 criterionName
 	METHOD m_dbcilcfp getProgressBarPercentage ()F
-	METHOD m_dcbyaeuq isAnyObtained ()Z
-	METHOD m_epppddpz obtain (Ljava/lang/String;)Z
-		ARG 1 name
+	METHOD m_dcbyaeuq anyCriteriaComplete ()Z
+	METHOD m_epppddpz complete (Ljava/lang/String;)Z
+		ARG 1 criterionName
+	METHOD m_goyprwze (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_ieqlmftm;)V
+		ARG 1 progress
+	METHOD m_hfxdkjxc (Lnet/minecraft/unmapped/C_rpzbknxp;)Ljava/util/Map;
+		ARG 0 progress
 	METHOD m_hjnaqzwo init (Lnet/minecraft/unmapped/C_wbfyxnvb;)V
+		ARG 1 requirements
 	METHOD m_hyuuzqmm getCriterionProgress (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ieqlmftm;
-		ARG 1 name
-	METHOD m_kxwhptqq isDone ()Z
+		ARG 1 criterionName
+	METHOD m_kxwhptqq isComplete ()Z
 	METHOD m_kzhoujvd countObtainedRequirements ()I
-	METHOD m_nkqqucnn getObtainedCriteria ()Ljava/lang/Iterable;
+	METHOD m_lsxzrdww (Ljava/time/Instant;)Ljava/time/temporal/TemporalAccessor;
+		ARG 0 instant
+	METHOD m_nkqqucnn getCompletedCriteria ()Ljava/lang/Iterable;
 	METHOD m_rzxbanct getProgressBarFraction ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-	METHOD m_ugtyagjo getUnobtainedCriteria ()Ljava/lang/Iterable;
+	METHOD m_tzjkxqzv isComplete (Ljava/lang/String;)Z
+		ARG 1 criterion
+	METHOD m_ugtyagjo getIncompleteCriteria ()Ljava/lang/Iterable;
 	METHOD m_uwumgwtz toPacket (Lnet/minecraft/unmapped/C_idfydwco;)V
 		ARG 1 buf
-	METHOD m_vsrrtfha getEarliestProgressObtainDate ()Ljava/time/Instant;
+	METHOD m_vsrrtfha getEarliestProgressCompletedDate ()Ljava/time/Instant;
