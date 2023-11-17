@@ -1,4 +1,24 @@
 CLASS net/minecraft/unmapped/C_hrhneqyx net/minecraft/advancement/AdvancementVisibilityEvaluator
-	METHOD m_exegzdua (Lnet/minecraft/unmapped/C_kdwyuhdb;Z)Lnet/minecraft/unmapped/C_hrhneqyx$C_bfuhkkvt;
+	FIELD f_pzrjzres VISIBILITY_DEPTH I
+	METHOD m_caogvyis evaluateVisibility (Lnet/minecraft/unmapped/C_seqaydby;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hrhneqyx$C_laxhphom;)V
+		ARG 0 node
+		ARG 1 visibilityPredicate
+		ARG 2 output
+	METHOD m_exegzdua getVisibility (Lnet/minecraft/unmapped/C_kdwyuhdb;Z)Lnet/minecraft/unmapped/C_hrhneqyx$C_bfuhkkvt;
 		ARG 0 advancement
 		ARG 1 alwaysShowIfPossible
+	METHOD m_ijazeico shouldShow (Lit/unimi/dsi/fastutil/Stack;)Z
+		ARG 0 visibilityStack
+	METHOD m_uejetdwx evaluateVisibilityRecursively (Lnet/minecraft/unmapped/C_seqaydby;Lit/unimi/dsi/fastutil/Stack;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hrhneqyx$C_laxhphom;)Z
+		ARG 0 node
+		ARG 1 visibilityStack
+		ARG 2 visibilityPredicate
+		ARG 3 output
+	CLASS C_bfuhkkvt Visibility
+		FIELD f_oxtroszl NO_CHANGE Lnet/minecraft/unmapped/C_hrhneqyx$C_bfuhkkvt;
+		FIELD f_vnsqmynm SHOW Lnet/minecraft/unmapped/C_hrhneqyx$C_bfuhkkvt;
+		FIELD f_wpaygqgi HIDE Lnet/minecraft/unmapped/C_hrhneqyx$C_bfuhkkvt;
+	CLASS C_laxhphom Output
+		METHOD accept accept (Lnet/minecraft/unmapped/C_seqaydby;Z)V
+			ARG 1 node
+			ARG 2 shouldShow
