@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockStateModelGenerator
 	FIELD f_alaeubcy simpleItemModelExemptionCollector Ljava/util/function/Consumer;
+	FIELD f_brxmxele CHISELED_BOOKSHELF_SLOT_MODEL_CACHE Ljava/util/Map;
 	FIELD f_ecvtijhk sandstoneModels Ljava/util/Map;
 	FIELD f_nivtbhfd nonOrientableTrapdoors Ljava/util/List;
 	FIELD f_pcbcdgpp modelCollector Ljava/util/function/BiConsumer;
@@ -17,11 +18,22 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_aatbebfe registerCake ()V
 	METHOD m_aaykitdm registerRod (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
+	METHOD m_abajmoto (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 i
+	METHOD m_aetvdwdb (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 1 texture
 	METHOD m_aezxlsub createSingletonBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ufuguevl;
 		ARG 0 block
 		ARG 1 modelId
 	METHOD m_ajuijexh registerJigsaw ()V
 	METHOD m_anojqlaf registerTripwire ()V
+	METHOD m_anzxptee createCustomFenceBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_wqokohwr;
+		ARG 0 fenceBlock
+		ARG 1 postModelId
+		ARG 2 northModelId
+		ARG 3 eastModelId
+		ARG 4 southModelId
+		ARG 5 westModelId
 	METHOD m_avlsmemt registerCauldron ()V
 	METHOD m_awycgmsg registerItemModel (Lnet/minecraft/unmapped/C_vorddnax;)V
 		ARG 1 item
@@ -32,6 +44,7 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 2 closedModelId
 		ARG 3 openWallModelId
 		ARG 4 closedWallModelId
+		ARG 5 uvLock
 	METHOD m_bbhtncaa registerBuiltinWithParticle (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_vorddnax;)V
 		ARG 1 block
 		ARG 2 particleSource
@@ -49,11 +62,23 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_bpfiayub registerStateWithModelReference (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
 		ARG 2 modelReference
+	METHOD m_buizvtas (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_waerxzys;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 2 phase
 	METHOD m_bxfenbel registerGourd (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 stemBlock
 		ARG 2 attachedStemBlock
 	METHOD m_bxsxmfvd createModelVariantWithRandomHorizontalRotations (Lnet/minecraft/unmapped/C_ncpywfca;)[Lnet/minecraft/unmapped/C_yigsfouo;
 		ARG 0 modelId
+	METHOD m_cbfhoczw createDoorBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_wqokohwr;
+		ARG 0 doorBlock
+		ARG 1 bottomLeftHingeClosedModelId
+		ARG 2 bottomLeftHingeOpenModelId
+		ARG 3 bottomRightHingeClosedModelId
+		ARG 4 bottomRightHingeOpenModelId
+		ARG 5 topLeftHingeClosedModelId
+		ARG 6 topLeftHingeOpenModelId
+		ARG 7 topRightHingeClosedModelId
+		ARG 8 topRightHingeOpenModelId
 	METHOD m_cerawgvb getTurtleEggModel (ILjava/lang/String;Lnet/minecraft/unmapped/C_pgmmajlq;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 eggs
 		ARG 2 prefix
@@ -67,23 +92,33 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 2 modelId
 	METHOD m_cmuqqsjg createEastDefaultHorizontalRotationStates ()Lnet/minecraft/unmapped/C_ujotlecn;
 	METHOD m_cocrvdsm registerBamboo ()V
+	METHOD m_cpvnkpqc (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
 	METHOD m_crabhdxy excludeFromSimpleItemModelGeneration (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
 	METHOD m_cvtztikf registerTintableCross (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ysvjbfkt$C_mqnwzrnb;)V
 		ARG 1 block
 		ARG 2 tintType
+	METHOD m_dashwcmx (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
 	METHOD m_dfxtgqon registerDoubleBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 block
 		ARG 2 upperHalfModelId
 		ARG 3 lowerHalfModelId
 	METHOD m_dkqexyeo registerCubeAllModelTexturePool (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_jphnvadg;
 		ARG 1 block
+	METHOD m_dnjqhzou registerCopperBulb (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
+		ARG 1 bulb
 	METHOD m_dqokmjdp createBooleanModelMap (Lnet/minecraft/unmapped/C_xhwijdsd;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ujotlecn;
 		ARG 0 property
 		ARG 1 trueModel
 		ARG 2 falseModel
 	METHOD m_dqusahgt registerBigDripleaf ()V
+	METHOD m_dxntchvt (Lnet/minecraft/unmapped/C_pgmmajlq;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_pgmmajlq;
+		ARG 1 id
 	METHOD m_ecublzrd registerSeaPickle ()V
+	METHOD m_eevbglbu (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
 	METHOD m_ekqfyyof registerFurnaceLikeOrientable (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
 	METHOD m_eteaimiq createAxisRotatedBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_wqokohwr;
@@ -91,14 +126,25 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 verticalModelId
 		ARG 2 horizontalModelId
 	METHOD m_ettyrbkd register ()V
+	METHOD m_ewobmawf registerCopperDoor (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
+		ARG 1 doorBlock
+		ARG 2 parent
 	METHOD m_exnmtdvm registerNetherPortal ()V
 	METHOD m_fasxgfba getFireSideModels (Lnet/minecraft/unmapped/C_mmxmpdoq;)Ljava/util/List;
 		ARG 1 texture
+	METHOD m_fceewwpj (Lnet/minecraft/unmapped/C_mmxmpdoq;II)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 3 key
 	METHOD m_ffgjqufk registerSimpleCubeAll (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
 	METHOD m_flhsnkoj (Lnet/minecraft/unmapped/C_pgmmajlq;)V
 		ARG 0 texture
+	METHOD m_fmgtdkrj (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
 	METHOD m_frnyhswu registerScaffolding ()V
+	METHOD m_geshbqqh (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
+	METHOD m_ggfwpfhb (Lnet/minecraft/unmapped/C_eonlnchv;)V
+		ARG 1 block
 	METHOD m_ggklywtr registerTintableCrossBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ysvjbfkt$C_mqnwzrnb;Lnet/minecraft/unmapped/C_pgmmajlq;)V
 		ARG 1 block
 		ARG 2 tintType
@@ -106,17 +152,37 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_gignkpum registerSoulFire ()V
 	METHOD m_glezpwwc registerCartographyTable ()V
 	METHOD m_glngxdiu registerSmithingTable ()V
+	METHOD m_gsesufti (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
 	METHOD m_guxcvxip registerRedstoneTorch ()V
+	METHOD m_gvxnftep (Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 hatch
+	METHOD m_gzmuclcb (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
+	METHOD m_hbkpmnyx (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 1 texture
+	METHOD m_hcupecjt addBookSlotModel (Lnet/minecraft/unmapped/C_xsihzhnp;Lnet/minecraft/unmapped/C_javqjqhm$C_gdifjgob;Lnet/minecraft/unmapped/C_nhjtezea$C_gkuxgtdu;Lnet/minecraft/unmapped/C_xhwijdsd;Lnet/minecraft/unmapped/C_zppcsbsk;Z)V
+		ARG 1 stateSupplier
+		ARG 2 facingCondition
+		ARG 3 rotation
+		ARG 4 occupiedProperty
+		ARG 5 model
+		ARG 6 occupied
 	METHOD m_hdcntxdm registerInfestedStone ()V
 	METHOD m_hdjwrzzm registerBuiltinWithParticle (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 block
 		ARG 2 particleSource
 	METHOD m_hdnhlbri registerSweetBerryBush ()V
 	METHOD m_hgpbwlgc registerInfestedDeepslate ()V
+	METHOD m_hjdevwtp registerWaxedCopperBulb (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
+		ARG 1 bulb
+		ARG 2 waxedBulb
 	METHOD m_hkwihedq registerPiston (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_pgmmajlq;)V
 		ARG 1 piston
 		ARG 2 extendedModelId
 		ARG 3 texture
+	METHOD m_hmoszmra (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
 	METHOD m_htcpxxln createBlockStateWithTwoModelAndRandomInversion (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ufuguevl;
 		ARG 0 block
 		ARG 1 firstModelId
@@ -133,16 +199,27 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_hyrygyep getDripstoneVariant (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_kfpkaqag;)Lnet/minecraft/unmapped/C_yigsfouo;
 		ARG 1 direction
 		ARG 2 thickness
+	METHOD m_ibtoybri createCopperBulbBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_wqokohwr;
+		ARG 2 base
+		ARG 3 lit
+		ARG 4 powered
+		ARG 5 litAndPowered
+	METHOD m_ifpfhtmc (Lnet/minecraft/unmapped/C_vukkmxtr;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 orientation
 	METHOD m_itgfivoo registerSculkSensor ()V
 	METHOD m_itofvnvc registerSunflower ()V
 	METHOD m_itvgmpcn registerAzalea (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
+	METHOD m_iulyvwat (Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 0 texture
 	METHOD m_ixrbrmbo registerCocoa ()V
 	METHOD m_jfasnsqr registerMushroomBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 mushroomBlock
 	METHOD m_jmkanmjf getTurtleEggModel (Ljava/lang/Integer;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 eggs
 		ARG 2 hatch
+	METHOD m_jmommkea (Lnet/minecraft/unmapped/C_vukkmxtr;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 orientation
 	METHOD m_jneeecjt registerAxisRotated (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_tkkixdtc$C_jbkydoyx;Lnet/minecraft/unmapped/C_tkkixdtc$C_jbkydoyx;)V
 		ARG 1 block
 		ARG 2 verticalModelFactory
@@ -160,7 +237,15 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 plantBlock
 		ARG 2 flowerPotBlock
 		ARG 3 tintType
+	METHOD m_jsniiwol (Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 delay
+		ARG 1 locked
+		ARG 2 powered
 	METHOD m_jspccrtm registerCaveVines ()V
+	METHOD m_juiovgan registerFrogspawn ()V
+	METHOD m_jziawvut (Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 0 texture
+	METHOD m_jzrspkqa registerCube (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 	METHOD m_kazkxzjv registerBeehive (Lnet/minecraft/unmapped/C_mmxmpdoq;Ljava/util/function/Function;)V
 		ARG 1 beehive
 		ARG 2 textureGetter
@@ -172,21 +257,46 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_kmakwxvc registerParentedItemModel (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 block
 		ARG 2 parentModelId
+	METHOD m_kocajcau ([ILit/unimi/dsi/fastutil/ints/Int2ObjectMap;Lnet/minecraft/unmapped/C_mmxmpdoq;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 4 age
+	METHOD m_koplgjdn (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
+	METHOD m_kpithqqh (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_waerxzys;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 2 phase
 	METHOD m_ksvcvhvs registerWallPlant (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
+	METHOD m_kugbqgue (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;Lnet/minecraft/unmapped/C_wqmdpcsg;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 6 powered
+		ARG 7 straightShape
+	METHOD m_lbggpcmw (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 2 bloom
+	METHOD m_ldjkenju ([ILnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ysvjbfkt$C_mqnwzrnb;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 4 stage
 	METHOD m_lhjyqfue registerPressurePlate (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 pressurePlate
 		ARG 2 textureSource
+	METHOD m_lhwwsxgs registerDustable (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 	METHOD m_ljmsqwrd registerSmoothStone ()V
+	METHOD m_lkdppgnq (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 4 lit
+		ARG 5 powered
 	METHOD m_lrwtqevx registerRespawnAnchor ()V
+	METHOD m_ltydbgkq (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 1 texture
 	METHOD m_luasfpcl getBambooBlockStateVariants (I)Ljava/util/List;
 		ARG 1 age
 	METHOD m_luencdhd registerBuiltin (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_ieiptmbq;
 		ARG 1 block
 		ARG 2 particleBlock
+	METHOD m_lupfabar (Ljava/lang/Boolean;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 attached
+		ARG 1 powered
 	METHOD m_luvphzzj registerLantern (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 lantern
 	METHOD m_lxgnwpnn registerChorusPlant ()V
+	METHOD m_lxmcyawv (Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/util/List;
+		ARG 1 eggs
+		ARG 2 hatch
 	METHOD m_lxxxuewp registerObserver ()V
 	METHOD m_maybkyfu registerBell ()V
 	METHOD m_mghkbdnj createMudBrickState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_wqokohwr;
@@ -194,7 +304,13 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 modelId
 		ARG 2 texture
 		ARG 3 modelCollector
+	METHOD m_mkszkjye registerMuddyMangroveRoots ()V
+	METHOD m_mlxfymcq (Lnet/minecraft/unmapped/C_mmxmpdoq;Ljava/lang/Integer;Lnet/minecraft/unmapped/C_ajkibnbh;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 age
+		ARG 2 half
 	METHOD m_mofryije registerComparator ()V
+	METHOD m_mpxslqqz (Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 0 texture
 	METHOD m_mqvibvqy createStoneState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_wqokohwr;
 		ARG 0 block
 		ARG 1 modelId
@@ -206,6 +322,7 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 3 model
 	METHOD m_mupvqcdv createUpDefaultFacingVariantMap ()Lnet/minecraft/unmapped/C_ujotlecn;
 	METHOD m_mvqqgxvm createNorthDefaultRotationStates ()Lnet/minecraft/unmapped/C_ujotlecn;
+	METHOD m_mwtfkfoc registerPitcherPlant ()V
 	METHOD m_mwuwtaow registerTurtleEgg ()V
 	METHOD m_myqwiymo registerSingleton (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_tkkixdtc$C_jbkydoyx;)V
 		ARG 1 block
@@ -216,22 +333,36 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_ncxhwjbj registerAxisRotated (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_tkkixdtc$C_jbkydoyx;)V
 		ARG 1 block
 		ARG 2 modelFactory
+	METHOD m_ndkdbens (Ljava/lang/Comparable;Lnet/minecraft/unmapped/C_yigsfouo;Lnet/minecraft/unmapped/C_yigsfouo;Ljava/lang/Comparable;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 3 value
+	METHOD m_ngiuljtx registerSnifferEgg ()V
 	METHOD m_nhkbvphl registerPistonHead ()V
 	METHOD m_nlfouokk createBlockStateWithRandomHorizontalRotations (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ufuguevl;
 		ARG 0 block
 		ARG 1 modelId
+	METHOD m_nmhkzxpj (Lnet/minecraft/unmapped/C_xsihzhnp;Lnet/minecraft/unmapped/C_javqjqhm$C_gdifjgob;Lnet/minecraft/unmapped/C_nhjtezea$C_gkuxgtdu;Lcom/mojang/datafixers/util/Pair;)V
+		ARG 4 pair
 	METHOD m_nngvqjdk fillDoorVariantMap (Lnet/minecraft/unmapped/C_ujotlecn$C_lufmsfds;Lnet/minecraft/unmapped/C_ajkibnbh;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ujotlecn$C_lufmsfds;
 		ARG 0 variantMap
 		ARG 1 targetHalf
-		ARG 2 regularModel
-		ARG 3 hingeModel
+		ARG 2 leftHingeClosedModel
+		ARG 3 leftHingeOpenModel
+		ARG 4 rightHingeClosedModel
+		ARG 5 rightHingeOpenModel
+	METHOD m_nnronpcz (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
+	METHOD m_nqcykqsh (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 layers
 	METHOD m_nvamqtbi registerGrassPath ()V
 	METHOD m_nwusmhrm registerBarrel ()V
+	METHOD m_odanwlbt registerCalibratedSculkSensor ()V
 	METHOD m_oekselca createFenceBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_wqokohwr;
 		ARG 0 fenceBlock
 		ARG 1 postModelId
 		ARG 2 sideModelId
 	METHOD m_oeuloqol registerFrostedIce ()V
+	METHOD m_oevigvxh (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 3 age
 	METHOD m_oububbdh registerCandle (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 candle
 		ARG 2 cake
@@ -239,10 +370,16 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 block
 		ARG 2 textureSuffix
 	METHOD m_ovirwzwn registerGrindstone ()V
+	METHOD m_oxrdxyqg registerPitcherCrop ()V
+	METHOD m_oxulsacv createUvLockedPillarBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_wqokohwr;
+		ARG 1 texture
+		ARG 2 modelCollector
 	METHOD m_oyptuzye registerStonecutter ()V
 	METHOD m_paheasaf registerNetherrack ()V
 	METHOD m_parvmmyo registerItemModel (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
+	METHOD m_pckimosn (Lnet/minecraft/unmapped/C_pgmmajlq;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_pgmmajlq;
+		ARG 1 id
 	METHOD m_pgdoxvrl registerCommandBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 commandBlock
 	METHOD m_phiipjec addJigsawOrientationToVariant (Lnet/minecraft/unmapped/C_vukkmxtr;Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
@@ -259,12 +396,18 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_prwetmeb registerRoots (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 root
 		ARG 2 pottedRoot
+	METHOD m_pufbzbcu registerChiseledBookshelf ()V
 	METHOD m_puuuxowi registerNorthDefaultHorizontalRotation (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
 	METHOD m_pwefsqmp registerGlassPane (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 glass
 		ARG 2 glassPane
 	METHOD m_pxwpoapy registerLever ()V
+	METHOD m_pxydxvus registerCopperTrapdoor (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
+		ARG 1 trapdoorBlock
+		ARG 2 parent
+	METHOD m_qbvjqmkr (Ljava/util/function/Function;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 hatch
 	METHOD m_qezzmiep registerCubeWithCustomTexture (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;Ljava/util/function/BiFunction;)V
 		ARG 1 block
 		ARG 2 otherTextureSource
@@ -300,6 +443,7 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 2 carpet
 	METHOD m_rtnuknml registerRedstoneLamp ()V
 	METHOD m_rzbkadfv registerHopper ()V
+	METHOD m_rzwirmpw registerFlowerbed (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 	METHOD m_sahttoul registerTopSoils ()V
 	METHOD m_sdvqthec registerEndPortalFrame ()V
 	METHOD m_sgdxdcop registerCampfire ([Lnet/minecraft/unmapped/C_mmxmpdoq;)V
@@ -313,7 +457,11 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_slkmsppy registerLightningRod ()V
 	METHOD m_slvvqxcz registerDaylightDetector ()V
 	METHOD m_smqitsxk createAxisRotatedVariantMap ()Lnet/minecraft/unmapped/C_ujotlecn;
+	METHOD m_sunnause (Lnet/minecraft/unmapped/C_mmxmpdoq;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 2 dusted
 	METHOD m_taixyhkk registerBrewingStand ()V
+	METHOD m_taqcexfm ([Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 charges
 	METHOD m_tegxqjie registerNorthDefaultHorizontalRotatable (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_pgmmajlq;)V
 		ARG 1 block
 		ARG 2 texture
@@ -324,6 +472,8 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_tnshpgmk createAxisRotatedBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_wqokohwr;
 		ARG 0 block
 		ARG 1 modelId
+	METHOD m_twiqwgku (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 1 texture
 	METHOD m_udzkaxjj registerOrientableTrapdoor (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 trapdoorBlock
 	METHOD m_uklrzqns registerCooker (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_tkkixdtc$C_jbkydoyx;)V
@@ -334,8 +484,20 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 2 tintType
 		ARG 3 texture
 	METHOD m_ussuonnk registerAmethysts ()V
+	METHOD m_uyjdjczk (Lnet/minecraft/unmapped/C_uihldlpc;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 mode
+	METHOD m_vgjywrmr registerCrafter ()V
+	METHOD m_vgpbeidr (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 id
 	METHOD m_vqpcrebn (Lnet/minecraft/unmapped/C_pgmmajlq;)V
 		ARG 0 texture
+	METHOD m_vvrdgvwj registerTintableStagedCrossBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ysvjbfkt$C_mqnwzrnb;Lnet/minecraft/unmapped/C_vzlztuyw;[I)V
+		ARG 2 tintType
+		ARG 3 stageProperty
+		ARG 4 stages
+	METHOD m_vxaizyos registerSculkCatalyst ()V
+	METHOD m_weietdrh (Lnet/minecraft/unmapped/C_yigsfouo;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 0 variant
 	METHOD m_wenfkmji registerMagmaBlock ()V
 	METHOD m_wjsytetv registerPistons ()V
 	METHOD m_wnmondte registerAmethyst (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
@@ -347,15 +509,20 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 3 ageTextureIndices
 	METHOD m_xapzqrnp registerLog (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_tpmbjwqh;
 		ARG 1 logBlock
+	METHOD m_xerymucr (Lnet/minecraft/unmapped/C_xsihzhnp;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_nhjtezea$C_gkuxgtdu;)V
+		ARG 4 rotation
 	METHOD m_xetrrkfn registerBed (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 bed
 		ARG 2 particleSource
+	METHOD m_xghzmykj registerSculkShrieker ()V
 	METHOD m_xgimwbyd registerParentedItemModel (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 item
 		ARG 2 parentModelId
 	METHOD m_xjbbguzb createSouthDefaultHorizontalRotationStates ()Lnet/minecraft/unmapped/C_ujotlecn;
 	METHOD m_xkekfvxk registerRotatable (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
+	METHOD m_xlpwtwzk (Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_yigsfouo;
+		ARG 1 age
 	METHOD m_xmchdlvl getFireFloorModels (Lnet/minecraft/unmapped/C_mmxmpdoq;)Ljava/util/List;
 		ARG 1 texture
 	METHOD m_xrawdmen registerFarmland ()V
@@ -398,12 +565,21 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 2 tintType
 	METHOD m_zebqtail registerLilyPad ()V
 	METHOD m_zestimlc registerChorusFlower ()V
+	METHOD m_zffcuixd registerHangingSign (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
+		ARG 1 log
+		ARG 2 hangingSign
+		ARG 3 wallSign
 	METHOD m_zivxhyxe registerTopSoil (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_yigsfouo;)V
 		ARG 1 topSoil
 		ARG 2 modelId
 		ARG 3 snowyVariant
 	METHOD m_zkwrcwzq registerShulkerBox (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 shulkerBox
+	METHOD m_zoxlycaq addSlotStateAndRotationVariants (Lnet/minecraft/unmapped/C_xsihzhnp;Lnet/minecraft/unmapped/C_javqjqhm$C_gdifjgob;Lnet/minecraft/unmapped/C_nhjtezea$C_gkuxgtdu;)V
+		ARG 1 stateSupplier
+		ARG 2 facingCondition
+		ARG 3 rotation
+	METHOD m_zutsvuwn registerMangrovePropagule ()V
 	METHOD m_zvzvirsj registerComposter ()V
 	METHOD m_zxkyyqmx registerAnvil (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 anvil
@@ -419,15 +595,18 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		METHOD m_ttgqmsdi includeWithItem (Lnet/minecraft/unmapped/C_zppcsbsk;[Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_ieiptmbq;
 			ARG 1 model
 			ARG 2 blocks
+	CLASS C_jhuevbcm BookSlotModelCacheKey
 	CLASS C_jphnvadg BlockTexturePool
 		FIELD f_cearzyke texture Lnet/minecraft/unmapped/C_pgmmajlq;
 		FIELD f_icadalep baseModelId Lnet/minecraft/unmapped/C_ncpywfca;
 		FIELD f_ihzuktky knownModels Ljava/util/Map;
+		FIELD f_narscpoc skippedModels Ljava/util/Set;
 		FIELD f_ouzoxrif family Lnet/minecraft/unmapped/C_eonlnchv;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ysvjbfkt;Lnet/minecraft/unmapped/C_pgmmajlq;)V
 			ARG 2 texture
 		METHOD m_bbbbnxkt stairs (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_jphnvadg;
 			ARG 1 block
+		METHOD m_bcruuyxo customFenceGate (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_jphnvadg;
 		METHOD m_eqavecux base (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_zppcsbsk;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_jphnvadg;
 			ARG 1 block
 			ARG 2 model
@@ -456,6 +635,9 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		METHOD m_lsnbsyaq ensureModel (Lnet/minecraft/unmapped/C_zppcsbsk;Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ncpywfca;
 			ARG 1 model
 			ARG 2 block
+		METHOD m_mmtayaup parented (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_jphnvadg;
+			ARG 1 parent
+			ARG 2 block
 		METHOD m_ngfqfdml pressurePlate (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_jphnvadg;
 			ARG 1 pressurePlateBlock
 		METHOD m_vragukvh (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_zppcsbsk;)Lnet/minecraft/unmapped/C_ncpywfca;
@@ -477,6 +659,7 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 			ARG 2 texture
 		METHOD m_dvxxaazg log (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_tpmbjwqh;
 			ARG 1 logBlock
+		METHOD m_jgmzdamz uvLockedLog (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_tpmbjwqh;
 		METHOD m_wrvrbfhc wood (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_tpmbjwqh;
 			ARG 1 woodBlock
 		METHOD m_yqsxsrke stem (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_tpmbjwqh;
