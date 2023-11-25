@@ -1,7 +1,7 @@
 package quilt.internal;
 
 public class Constants {
-    public static final String MINECRAFT_VERSION = "23w46a";
+    public static final String MINECRAFT_VERSION = "1.20.3-pre1";
 
     public static final String MAPPINGS_NAME = "quilt-mappings";
 
