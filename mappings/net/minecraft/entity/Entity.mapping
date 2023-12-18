@@ -56,7 +56,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_jxhcznzh world Lnet/minecraft/unmapped/C_cdctfzbn;
 	FIELD f_kbrdyccj netherPortalCooldown I
 	FIELD f_kfpdxrrc vehicle Lnet/minecraft/unmapped/C_astfners;
-	FIELD f_kksaxutc stepHeight F
 	FIELD f_kpcimogu uuid Ljava/util/UUID;
 	FIELD f_krxlkweq type Lnet/minecraft/unmapped/C_ogavsvbr;
 	FIELD f_kvjscloo BREATHING_DISTANCE_BELOW_EYES F
@@ -72,7 +71,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_nexrnbri wasInPowderSnow Z
 	FIELD f_nzehfinv dimensions Lnet/minecraft/unmapped/C_sszpscpo;
 	FIELD f_oanvevib TOTAL_AIR_SUPPLY I
-	FIELD f_ocqvsaqw collisionBlockState Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_oritxgsn crystalSoundIntensity F
 	FIELD f_oysssbsf ridingCooldown I
 	FIELD f_paqudcks UUID_KEY Ljava/lang/String;
@@ -169,8 +167,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_btnnyttp canBeHitByProjectile ()Z
 	METHOD m_buibyuls (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 0 entity
-	METHOD m_bwpgrwpv setStepHeight (F)V
-		ARG 1 height
 	METHOD m_bynvyahs (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
 		ARG 1 text
 	METHOD m_bzrtaquy getVehicle ()Lnet/minecraft/unmapped/C_astfners;
@@ -357,9 +353,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_gperiimb setRotation (FF)V
 		ARG 1 yaw
 		ARG 2 pitch
-	METHOD m_gqpbdhma emitGameEvent (Lnet/minecraft/unmapped/C_cgkchrmc;Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 1 event
-		ARG 2 entity
 	METHOD m_grytvnwh getLeashHoldPosition (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 delta
 	METHOD m_gtyitted getLerpedPos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -377,10 +370,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_gxhwoqaa getTeamColorValue ()I
 	METHOD m_hbtgnbjd getItemsEquipped ()Ljava/lang/Iterable;
 	METHOD m_hehkhdfc isFrozen ()Z
-	METHOD m_heuoaeon getNameTagYOffset ()F
-		COMMENT Gets the name tag Y offset of this entity, relative to its position.
-		COMMENT
-		COMMENT @return the name tag Y offset
 	METHOD m_hhmmivsh tryTickInVoid ()V
 	METHOD m_hhwoykag calculateNextStepSoundDistance ()F
 	METHOD m_hjjjfrzw getScoreboardTeam ()Lnet/minecraft/unmapped/C_dvkwmbxw;
@@ -482,7 +471,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
-	METHOD m_kfwdpcql getHeightOffset (Lnet/minecraft/unmapped/C_astfners;)F
 	METHOD m_kkieextx handleStatus (B)V
 		ARG 1 status
 	METHOD m_klrrgmfl isOnFire ()Z
@@ -556,9 +544,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 player
 	METHOD m_mcimzscq setOnFireFromLava ()V
 	METHOD m_mdjbjjrz getServer ()Lnet/minecraft/server/MinecraftServer;
-	METHOD m_mfupgmuw getEyeHeight (Lnet/minecraft/unmapped/C_ufdjspmk;Lnet/minecraft/unmapped/C_sszpscpo;)F
-		ARG 1 pose
-		ARG 2 dimensions
 	METHOD m_mhvikmsw isPushedByFluids ()Z
 	METHOD m_mnshvqhc getLerpedEyePos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 tickDelta
@@ -722,7 +707,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_ruylcvxe getBurningDuration ()I
 	METHOD m_rwwlsvsi getPitch (F)F
 		ARG 1 tickDelta
-	METHOD m_rxnauhcq getBlockStateAtPos ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_rxnxelrf collidesWithStateAtPos (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 pos
 		ARG 2 state
@@ -869,8 +853,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_vrnxwjtm canAvoidTraps ()Z
 	METHOD m_vrwpnkzf isLiving ()Z
 	METHOD m_vtzovzbl dampensVibrations ()Z
-	METHOD m_vuymzmdg emitGameEvent (Lnet/minecraft/unmapped/C_cgkchrmc;)V
-		ARG 1 event
 	METHOD m_vvclgqgj interactAt (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 player
 		ARG 2 hitPos

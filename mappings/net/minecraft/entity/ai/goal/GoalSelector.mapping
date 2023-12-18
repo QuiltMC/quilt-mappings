@@ -11,19 +11,14 @@ CLASS net/minecraft/unmapped/C_qospjrjn net/minecraft/entity/ai/goal/GoalSelecto
 	COMMENT goal cannot replace the other if it's running. The goal selector tries to run goals in the order
 	COMMENT they were added.
 	FIELD f_eemsznmi profiler Ljava/util/function/Supplier;
-	FIELD f_gsqmybud tickCount I
 	FIELD f_iunuprxe goals Ljava/util/Set;
-	FIELD f_jabfbtij timeInterval I
 	FIELD f_seehmxnn goalsByControl Ljava/util/Map;
 	FIELD f_sfjfyjvq REPLACEABLE_GOAL Lnet/minecraft/unmapped/C_wgswcjhs;
-	FIELD f_swhlxzef LOGGER Lorg/slf4j/Logger;
 	FIELD f_vmchmsdk disabledControls Ljava/util/EnumSet;
 	METHOD <init> (Ljava/util/function/Supplier;)V
 		ARG 1 profiler
 	METHOD m_akagomwl remove (Lnet/minecraft/unmapped/C_svjebams;)V
 		ARG 1 goal
-	METHOD m_elorurez (Lnet/minecraft/unmapped/C_svjebams;Lnet/minecraft/unmapped/C_wgswcjhs;)Z
-		ARG 1 prioritizedGoal
 	METHOD m_ftzoeovi goalCanReplaceAll (Lnet/minecraft/unmapped/C_wgswcjhs;Ljava/util/Map;)Z
 		ARG 0 goal
 		ARG 1 goalsByControl
@@ -37,15 +32,12 @@ CLASS net/minecraft/unmapped/C_qospjrjn net/minecraft/entity/ai/goal/GoalSelecto
 		ARG 2 enabled
 	METHOD m_gthacjtm (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_wgswcjhs;)Z
 		ARG 1 prioritizedGoal
-	METHOD m_ikdikwii getRunningGoals ()Ljava/util/stream/Stream;
 	METHOD m_jgxhmcyj tickGoals (Z)V
 		ARG 1 tickAll
 	METHOD m_jgygovod tick ()V
 	METHOD m_lfaldjmu clear (Ljava/util/function/Predicate;)V
 		ARG 1 predicate
 	METHOD m_mhoeonji getGoals ()Ljava/util/Set;
-	METHOD m_puiwaruk setTimeInterval (I)V
-		ARG 1 timeInterval
 	METHOD m_ugwtceby goalUsesAnyControl (Lnet/minecraft/unmapped/C_wgswcjhs;Ljava/util/EnumSet;)Z
 		ARG 0 goal
 		ARG 1 controls

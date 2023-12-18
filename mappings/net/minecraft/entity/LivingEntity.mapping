@@ -6,7 +6,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_azizbgcr SOUL_SPEED_BOOST_ID Ljava/util/UUID;
 	FIELD f_bwbjmspv DAMAGE_SOURCE_TIMEOUT I
 	FIELD f_coityhpi jumping Z
-	FIELD f_ctvzjmcr DEFAULT_EYE_HEIGHT F
 	FIELD f_debofomg riptideTicks I
 	FIELD f_dwqtqyxt STINGER_COUNT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ebtfxbod stuckArrowTimer I
@@ -211,8 +210,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_eyfojjsq canHaveStatusEffect (Lnet/minecraft/unmapped/C_wpfizwve;)Z
 		ARG 1 effect
 	METHOD m_fdrozcta getFallSounds ()Lnet/minecraft/unmapped/C_usxaxydn$C_krioeiaq;
-	METHOD m_fgcyglee getAttributeValue (Lnet/minecraft/unmapped/C_ppzfbbsy;)D
-		ARG 1 attribute
 	METHOD m_fgldaguj getActiveHand ()Lnet/minecraft/unmapped/C_laxmzoqs;
 	METHOD m_fmgoaoex takeShieldHit (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 attacker
@@ -234,14 +231,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_gkfkzdkd setDespawnCounter (I)V
 		ARG 1 despawnCounter
 	METHOD m_gmbpcsgg removeSoulSpeedBoost ()V
-	METHOD m_gmtlgjgb removeStatusEffectInternal (Lnet/minecraft/unmapped/C_jaqasomh;)Lnet/minecraft/unmapped/C_wpfizwve;
-		COMMENT Removes a status effect from this entity without calling any listener.
-		COMMENT
-		COMMENT <p>This method does not perform any cleanup or synchronization operation.
-		COMMENT Under most circumstances, calling {@link #removeStatusEffect(StatusEffect)} is highly preferable.
-		COMMENT
-		COMMENT @return the status effect removed
-		ARG 1 type
 	METHOD m_gpdznmro teleport (DDDZ)Z
 		ARG 1 x
 		ARG 3 y
@@ -262,9 +251,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_hbdaqklu canBreatheInWater ()Z
 	METHOD m_hcwncupw setJumping (Z)V
 		ARG 1 jumping
-	METHOD m_heqvdbfg getActiveEyeHeight (Lnet/minecraft/unmapped/C_ufdjspmk;Lnet/minecraft/unmapped/C_sszpscpo;)F
-		ARG 1 pose
-		ARG 2 dimensions
 	METHOD m_hgmzgyvy shouldAlwaysDropXp ()Z
 		COMMENT Returns if this entity may always drop experience, skipping any
 		COMMENT other checks.
@@ -307,8 +293,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 stack
 	METHOD m_jeizdffm getPreferredEquipmentSlot (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_yuycoehb;
 		ARG 0 stack
-	METHOD m_jeuoijmu getStatusEffect (Lnet/minecraft/unmapped/C_jaqasomh;)Lnet/minecraft/unmapped/C_wpfizwve;
-		ARG 1 effect
 	METHOD m_jhvcxqlb canEquip (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
 	METHOD m_jjznttvl skipExperienceDrop ()V
@@ -465,8 +449,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT @see #dropXp()
 		COMMENT @see #shouldAlwaysDropXp()
 		COMMENT @see #getXpToDrop()
-	METHOD m_rufdkrwn getBaseValue (Lnet/minecraft/unmapped/C_cjzoxshv;)D
-		ARG 1 attribute
 	METHOD m_rufhxvdu attackLivingEntity (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 target
 	METHOD m_rutfchol playBlockFallSound ()V
@@ -564,8 +546,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 2 playing
 	METHOD m_vmsltdwx addDeathParticles ()V
 	METHOD m_vnidpegi displaySoulSpeedEffects ()V
-	METHOD m_vntpoojt getAttributeValue (Lnet/minecraft/unmapped/C_cjzoxshv;)D
-		ARG 1 attribute
 	METHOD m_vwjazeju triggerItemPickedUpByEntityCriteria (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		COMMENT Called to trigger advancement criteria when an entity picks up an item
 		COMMENT thrown by a player.
@@ -601,20 +581,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_xotweprj indicateDamage (DD)V
 		ARG 1 x
 		ARG 3 z
-	METHOD m_xpojueyp getBaseValue (Lnet/minecraft/unmapped/C_ppzfbbsy;)D
-		ARG 1 attribute
 	METHOD m_xuirzakp getEquippedStack (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
 	METHOD m_xuxedegf isBaby ()Z
-	METHOD m_xzvpzpbu removeStatusEffect (Lnet/minecraft/unmapped/C_jaqasomh;)Z
-		COMMENT Removes a status effect from this entity.
-		COMMENT
-		COMMENT <p>Calling this method will call cleanup methods on the status effect and trigger synchronization of effect particles with watching clients. If this entity is a player,
-		COMMENT the change in the list of effects will also be synchronized with the corresponding client.
-		COMMENT
-		COMMENT @return whether the active status effects on this entity has been changed by
-		COMMENT this call
-		ARG 1 type
 	METHOD m_yanqzhib getXpToDrop ()I
 		COMMENT Called when this entity is killed and returns the amount of experience
 		COMMENT to drop.
@@ -647,11 +616,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_ythaxfga hurtByWater ()Z
 	METHOD m_ywumiypj setPositionInBed (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
-	METHOD m_zgpfruit getAttributeInstance (Lnet/minecraft/unmapped/C_ppzfbbsy;)Lnet/minecraft/unmapped/C_lzukavpx;
-		ARG 1 attribute
 	METHOD m_zhwrgbmx getPoses ()Lcom/google/common/collect/ImmutableList;
-	METHOD m_zrgxyjwv hasStatusEffect (Lnet/minecraft/unmapped/C_jaqasomh;)Z
-		ARG 1 effect
 	METHOD m_ztpokzjz getDamageTiltStrength ()F
 	METHOD m_zuisxtbe setStingerCount (I)V
 		ARG 1 stingerCount
