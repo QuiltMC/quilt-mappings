@@ -3,11 +3,11 @@ package quilt.internal.tasks.lint;
 import java.util.Locale;
 import java.util.function.Function;
 
-import cuchaz.enigma.translation.mapping.EntryMapping;
-import cuchaz.enigma.translation.representation.AccessFlags;
-import cuchaz.enigma.translation.representation.TypeDescriptor;
-import cuchaz.enigma.translation.representation.entry.Entry;
-import cuchaz.enigma.translation.representation.entry.FieldEntry;
+import org.quiltmc.enigma.api.translation.mapping.EntryMapping;
+import org.quiltmc.enigma.api.translation.representation.AccessFlags;
+import org.quiltmc.enigma.api.translation.representation.TypeDescriptor;
+import org.quiltmc.enigma.api.translation.representation.entry.Entry;
+import org.quiltmc.enigma.api.translation.representation.entry.FieldEntry;
 
 public final class FieldNamingChecker implements Checker<FieldEntry> {
     @Override

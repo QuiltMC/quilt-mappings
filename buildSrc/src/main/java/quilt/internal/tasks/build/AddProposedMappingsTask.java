@@ -12,20 +12,20 @@ import java.util.Locale;
 import java.util.Objects;
 
 import com.google.common.collect.Streams;
-import cuchaz.enigma.Enigma;
-import cuchaz.enigma.EnigmaProfile;
-import cuchaz.enigma.EnigmaProject;
-import cuchaz.enigma.api.service.NameProposalService;
-import cuchaz.enigma.command.Command;
-import cuchaz.enigma.command.FillClassMappingsCommand;
-import cuchaz.enigma.command.InsertProposedMappingsCommand;
-import cuchaz.enigma.command.MappingCommandsUtil;
-import cuchaz.enigma.translation.mapping.EntryMapping;
-import cuchaz.enigma.translation.mapping.MappingDelta;
-import cuchaz.enigma.translation.mapping.serde.MappingSaveParameters;
-import cuchaz.enigma.translation.mapping.tree.DeltaTrackingTree;
-import cuchaz.enigma.translation.mapping.tree.EntryTree;
-import cuchaz.enigma.utils.Utils;
+import org.quiltmc.enigma.api.Enigma;
+import org.quiltmc.enigma.api.EnigmaProfile;
+import org.quiltmc.enigma.api.EnigmaProject;
+import org.quiltmc.enigma.api.service.NameProposalService;
+import org.quiltmc.enigma.command.Command;
+import org.quiltmc.enigma.command.FillClassMappingsCommand;
+import org.quiltmc.enigma.command.InsertProposedMappingsCommand;
+import org.quiltmc.enigma.command.MappingCommandsUtil;
+import org.quiltmc.enigma.api.translation.mapping.EntryMapping;
+import org.quiltmc.enigma.api.translation.mapping.MappingDelta;
+import org.quiltmc.enigma.api.translation.mapping.serde.MappingSaveParameters;
+import org.quiltmc.enigma.api.translation.mapping.tree.DeltaTrackingTree;
+import org.quiltmc.enigma.api.translation.mapping.tree.EntryTree;
+import org.quiltmc.enigma.util.Utils;
 import net.fabricmc.mappingio.MappingWriter;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import net.fabricmc.mappingio.format.MappingFormat;
@@ -111,20 +111,20 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
     private static void runCommands(Path jar, Path input, Path output, String resultFormat, Path profilePath) throws Exception {
         EnigmaProfile profile = EnigmaProfile.read(profilePath);
-        Enigma enigma = Command.createEnigma(profile);
+        Enigma enigma = Command.createEnigma(profile, null);
 
         EnigmaProject project = Command.openProject(jar, input, enigma);
         NameProposalService[] nameProposalServices = enigma.getServices().get(NameProposalService.TYPE).toArray(new NameProposalService[0]);
 
         boolean debug = System.getProperty("qm.addProposedMappings.debug", "false").toLowerCase(Locale.ROOT).equals("true");
-        EntryTree<EntryMapping> withProposals = InsertProposedMappingsCommand.exec(nameProposalServices, project, debug);
+        EntryTree<EntryMapping> withProposals = InsertProposedMappingsCommand.exec(nameProposalServices, project);
 
         // TODO: Disable fillAll after fixing the tiny v2 writer to avoid adding unnecessary class names
         EntryTree<EntryMapping> result = FillClassMappingsCommand.exec(project.getJarIndex(), withProposals, true, debug);
 
         Utils.delete(output);
         MappingSaveParameters saveParameters = enigma.getProfile().getMappingSaveParameters();
-        MappingCommandsUtil.write(result, resultFormat, output, saveParameters);
+        MappingCommandsUtil.getWriter(resultFormat).write(result, output, saveParameters);
 
         if (debug) {
             Path debugFile = output.getParent().resolve(output.getFileName().toString() + "-delta.txt");

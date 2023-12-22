@@ -1,6 +1,6 @@
 package quilt.internal.tasks.build;
 
-import cuchaz.enigma.command.DropInvalidMappingsCommand;
+import org.quiltmc.enigma.command.DropInvalidMappingsCommand;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;

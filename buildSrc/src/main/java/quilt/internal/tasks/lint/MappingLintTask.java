@@ -11,19 +11,19 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
-import cuchaz.enigma.Enigma;
-import cuchaz.enigma.EnigmaProject;
-import cuchaz.enigma.ProgressListener;
-import cuchaz.enigma.analysis.index.EntryIndex;
-import cuchaz.enigma.classprovider.ClasspathClassProvider;
-import cuchaz.enigma.translation.mapping.EntryMapping;
-import cuchaz.enigma.translation.mapping.serde.MappingParseException;
-import cuchaz.enigma.translation.mapping.serde.enigma.EnigmaMappingsReader;
-import cuchaz.enigma.translation.mapping.tree.EntryTree;
-import cuchaz.enigma.translation.representation.AccessFlags;
-import cuchaz.enigma.translation.representation.entry.ClassEntry;
-import cuchaz.enigma.translation.representation.entry.Entry;
-import cuchaz.enigma.translation.representation.entry.MethodEntry;
+import org.quiltmc.enigma.api.Enigma;
+import org.quiltmc.enigma.api.EnigmaProject;
+import org.quiltmc.enigma.api.ProgressListener;
+import org.quiltmc.enigma.api.analysis.index.jar.EntryIndex;
+import org.quiltmc.enigma.api.class_provider.ClasspathClassProvider;
+import org.quiltmc.enigma.api.translation.mapping.EntryMapping;
+import org.quiltmc.enigma.api.translation.mapping.serde.MappingParseException;
+import org.quiltmc.enigma.api.translation.mapping.serde.enigma.EnigmaMappingsReader;
+import org.quiltmc.enigma.api.translation.mapping.tree.EntryTree;
+import org.quiltmc.enigma.api.translation.representation.AccessFlags;
+import org.quiltmc.enigma.api.translation.representation.entry.ClassEntry;
+import org.quiltmc.enigma.api.translation.representation.entry.Entry;
+import org.quiltmc.enigma.api.translation.representation.entry.MethodEntry;
 import javax.inject.Inject;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.ConfigurableFileCollection;
@@ -154,9 +154,9 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
                 Enigma enigma = Enigma.create();
                 EnigmaProject project = enigma.openJar(params.getJarFile().get().getAsFile().toPath(), new ClasspathClassProvider(), ProgressListener.none());
                 EntryTree<EntryMapping> mappings = readMappings(getParameters().getMappingFiles());
-                project.setMappings(mappings);
+                project.setMappings(mappings, ProgressListener.none());
                 Function<Entry<?>, AccessFlags> accessProvider = entry -> {
-                    EntryIndex index = project.getJarIndex().getEntryIndex();
+                    EntryIndex index = project.getJarIndex().getIndex(EntryIndex.class);
 
                     if (entry instanceof ClassEntry c) {
                         return index.getClassAccess(c);
