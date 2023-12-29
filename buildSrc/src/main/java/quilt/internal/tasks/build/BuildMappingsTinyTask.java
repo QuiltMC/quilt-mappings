@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import cuchaz.enigma.command.MapSpecializedMethodsCommand;
-import cuchaz.enigma.translation.mapping.serde.MappingParseException;
+import org.quiltmc.enigma.command.MapSpecializedMethodsCommand;
+import org.quiltmc.enigma.api.translation.mapping.serde.MappingParseException;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.OutputFile;
@@ -45,7 +45,6 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
     public static void buildMappingsTiny(Path perVersionMappingsJar, Path mappings, Path outputMappings) throws IOException, MappingParseException {
         MapSpecializedMethodsCommand.run(
                 perVersionMappingsJar,
-                "enigma",
                 mappings,
                 String.format("tinyv2:%s:named", Constants.PER_VERSION_MAPPINGS_NAME),
                 outputMappings
