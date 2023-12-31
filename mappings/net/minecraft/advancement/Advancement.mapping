@@ -1,8 +1,10 @@
 CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
+	FIELD f_bpbcihch CRITERIA_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_cbfwvpgh parent Ljava/util/Optional;
 	FIELD f_emngvigd requirements Lnet/minecraft/unmapped/C_wbfyxnvb;
 	FIELD f_eqsfnrjr criteria Ljava/util/Map;
 	FIELD f_eykiurph display Ljava/util/Optional;
+	FIELD f_ncipkedb CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_njhcraol name Ljava/util/Optional;
 	FIELD f_nwvdgawt sendsTelemetryEvent Z
 	FIELD f_uhuyjydl rewards Lnet/minecraft/unmapped/C_wptigggq;
@@ -15,13 +17,38 @@ CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
 		ARG 6 sendsTelemetryEvent
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
+	METHOD m_ddukknkz (Ljava/util/Map;)Lcom/mojang/serialization/DataResult;
+		ARG 0 map
 	METHOD m_ggypmlkv sendsTelemetryEvent ()Z
+	METHOD m_gzpyltqd (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_hpxxrezd fromPacket (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_kdwyuhdb;
 		ARG 0 buf
 	METHOD m_htjukofs parent ()Ljava/util/Optional;
+	METHOD m_jvmczssc validateCriteria (Lnet/minecraft/unmapped/C_jtpvewkp;Lnet/minecraft/unmapped/C_srnkfpki;)V
+		ARG 1 reporter
+		ARG 2 dataLookup
+	METHOD m_kxwbsmcw (Lnet/minecraft/unmapped/C_jtpvewkp;Lnet/minecraft/unmapped/C_srnkfpki;Ljava/lang/String;Lnet/minecraft/unmapped/C_rzypsigz;)V
+		ARG 2 key
+		ARG 3 criterion
+	METHOD m_nlkunzez (Lnet/minecraft/unmapped/C_kdwyuhdb;)Ljava/util/Optional;
+		ARG 0 advancement
+	METHOD m_nltrnngb (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_bvqakncm;)V
+		ARG 1 display
 	METHOD m_ofikdsfj rewards ()Lnet/minecraft/unmapped/C_wptigggq;
+	METHOD m_pzwagfwo validate (Lnet/minecraft/unmapped/C_kdwyuhdb;)Lcom/mojang/serialization/DataResult;
+		ARG 0 advancement
 	METHOD m_swogstqz getText (Lnet/minecraft/unmapped/C_unoypvme;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 advancementHolder
+	METHOD m_szjzyjkp (Lnet/minecraft/unmapped/C_kdwyuhdb;Lnet/minecraft/unmapped/C_wbfyxnvb;)Lnet/minecraft/unmapped/C_kdwyuhdb;
+		ARG 1 criterionKey
+	METHOD m_tbqwjxrn (Ljava/util/Optional;Ljava/util/Optional;Lnet/minecraft/unmapped/C_wptigggq;Ljava/util/Map;Ljava/util/Optional;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_kdwyuhdb;
+		ARG 0 id
+		ARG 1 display
+		ARG 2 rewards
+		ARG 3 criteria
+		ARG 4 requirements
+		ARG 5 sendsTelemetryEvent
 	METHOD m_vdmpoqil requirements ()Lnet/minecraft/unmapped/C_wbfyxnvb;
 	METHOD m_vfnevnhx name ()Ljava/util/Optional;
 	METHOD m_wngxatfp display ()Ljava/util/Optional;
@@ -29,6 +56,8 @@ CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
 	METHOD m_xazdqguv criteria ()Ljava/util/Map;
 	METHOD m_xbcnitcp createText (Lnet/minecraft/unmapped/C_bvqakncm;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 display
+	METHOD m_xeyczyky (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_xfimowjn toPacket (Lnet/minecraft/unmapped/C_idfydwco;)V
 		ARG 1 buf
 	CLASS C_dukbjvrv Builder
@@ -41,11 +70,28 @@ CLASS net/minecraft/unmapped/C_kdwyuhdb net/minecraft/advancement/Advancement
 		FIELD f_wpvukjwy merger Lnet/minecraft/unmapped/C_wbfyxnvb$C_huwvdbdx;
 		METHOD m_ckalgnkc merger (Lnet/minecraft/unmapped/C_wbfyxnvb$C_huwvdbdx;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 merger
+		METHOD m_htowdhjv display (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_onnxqlfg;ZZZ)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
+			ARG 2 title
+			ARG 3 description
+			ARG 4 background
+			ARG 5 type
+			ARG 6 showToast
+			ARG 7 announceToChat
+			ARG 8 hidden
 		METHOD m_jlhvlwgp display (Lnet/minecraft/unmapped/C_bvqakncm;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 display
 		METHOD m_liavgrzl putCriteria (Ljava/lang/String;Lnet/minecraft/unmapped/C_rzypsigz;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 name
 			ARG 2 criterion
+		METHOD m_mopntkkx display (Lnet/minecraft/unmapped/C_gmbqjnle;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_onnxqlfg;ZZZ)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
+			ARG 1 item
+			ARG 2 title
+			ARG 3 description
+			ARG 4 background
+			ARG 5 type
+			ARG 6 showToast
+			ARG 7 announceToChat
+			ARG 8 hidden
 		METHOD m_mshncpue requirements (Lnet/minecraft/unmapped/C_wbfyxnvb;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
 			ARG 1 requirements
 		METHOD m_ofouvzjr parent (Lnet/minecraft/unmapped/C_unoypvme;)Lnet/minecraft/unmapped/C_kdwyuhdb$C_dukbjvrv;
