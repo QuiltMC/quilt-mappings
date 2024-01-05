@@ -3,7 +3,9 @@ CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
 	FIELD f_bgdwgbfu lastShakeProgress F
 	FIELD f_bhmevkqm COLLAR_COLOR Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_glkqojhp furWet Z
+	FIELD f_ihxdjlyv ARMOR Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_lcbuuhzu WILD_MAX_HEALTH F
+	FIELD f_nxuzhctw ARMOR_MODIFIER_ID Ljava/util/UUID;
 	FIELD f_ocxdlcyn canShakeWaterOff Z
 	FIELD f_opennbir lastBegAnimationProgress F
 	FIELD f_oyucjpiv FOLLOW_TAMED_PREDICATE Ljava/util/function/Predicate;
@@ -13,6 +15,7 @@ CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
 	FIELD f_uuhetxwo ANGER_TIME_RANGE Lnet/minecraft/unmapped/C_hvilmtvi;
 	FIELD f_wjmkqevm begAnimationProgress F
 	FIELD f_ycekgyxv TAMED_MAX_HEALTH F
+	METHOD <init> (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_cdctfzbn;)V
 	METHOD m_aliqaiom getTailAngle ()F
 	METHOD m_dnvpayop setCollarColor (Lnet/minecraft/unmapped/C_arllgqae;)V
 		ARG 1 color
@@ -22,6 +25,8 @@ CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
 		COMMENT The wolf's fur will remain wet until the wolf shakes.
 	METHOD m_gvyvpuqi getBegAnimationProgress (F)F
 		ARG 1 tickDelta
+	METHOD m_hiauidnk (Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_jzrpycqo;)V
+		ARG 1 player1
 	METHOD m_jknxzpwn getShakeAnimationProgress (FF)F
 		ARG 1 tickDelta
 		ARG 2 offset
@@ -35,16 +40,22 @@ CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
 		ARG 1 tickDelta
 			COMMENT progress for linearly interpolating between the previous and current game state
 	METHOD m_netinndt getCollarColor ()Lnet/minecraft/unmapped/C_arllgqae;
+	METHOD m_njyokwrm (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+	METHOD m_nmgnehye hasArmor ()Z
+	METHOD m_nyuihsmo setArmor (Z)V
+		ARG 1 hasArmor
 	METHOD m_pcjygden setBegging (Z)V
 		ARG 1 begging
 	METHOD m_ptczuqbl resetShake ()V
 	METHOD m_qflbjcwd isBegging ()Z
+	METHOD m_rnleirmb (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 	METHOD m_siguawkr createAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
 	METHOD m_vozawutp canSpawn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_uzzvxofv;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)Z
 		ARG 0 type
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
+	METHOD m_xthjcgcz (Ljava/util/UUID;)V
 	METHOD m_xtssqhma (Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 0 entity
 	CLASS C_ittgaklu WolfEscapeDangerGoal
