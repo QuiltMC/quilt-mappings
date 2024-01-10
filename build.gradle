@@ -344,7 +344,7 @@ task decompileTargetVineflower(type: DecompileTask, dependsOn: [remapTargetMinec
 	input.set remapTargetMinecraftJar.outputJar
 	output.set file("namedTargetSrc")
 	decompiler = Decompilers.VINEFLOWER
-	libraries = configurations.decompileClasspath
+	libraries = files(configurations.decompileClasspath)
 
 	doFirst {
 		file("namedTargetSrc").deleteDir()
