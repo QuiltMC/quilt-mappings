@@ -130,8 +130,10 @@ remapUnpickDefinitions {
 	mappings = mergeTinyV2.outputMappings
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
@@ -291,7 +293,7 @@ task decompileCFR(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	input.set mappings.fileConstants.namedJar
 	output.set file("namedSrc")
 	decompiler = Decompilers.CFR
-	libraries = configurations.decompileClasspath
+	libraries = files(configurations.decompileClasspath)
 
 	doFirst {
 		file("namedSrc").deleteDir()
@@ -302,7 +304,7 @@ task decompileVineflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	input.set mappings.fileConstants.namedJar
 	output.set file("namedSrc")
 	decompiler = Decompilers.VINEFLOWER
-	libraries = configurations.decompileClasspath
+	libraries = files(configurations.decompileClasspath)
 
 	doFirst {
 		file("namedSrc").deleteDir()
