@@ -66,6 +66,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	COMMENT </tr>
 	COMMENT </table>
 	COMMENT </div>
+	FIELD f_aasxeeyb NON_AIR_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_beccreye NAME_KEY Ljava/lang/String;
 		COMMENT The key of the item stack's name in the {@linkplain #DISPLAY_KEY display NBT}, whose value is {@value}.
 	FIELD f_cjxcfrfc COLOR_KEY Ljava/lang/String;
@@ -84,10 +85,14 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	FIELD f_lnhsxpyy REPAIR_COST_KEY Ljava/lang/String;
 		COMMENT The key of the repair cost in an item stack's custom NBT, whose value is {@value}.
 	FIELD f_lrxqoedj EMPTY Lnet/minecraft/unmapped/C_sddaxwyk;
+	FIELD f_luweqvhq CUTTING_RECIPE_RESULT_CODEC Lcom/mojang/serialization/MapCodec;
 	FIELD f_lxaedfnb cooldown I
 	FIELD f_ohakxxel LOGGER Lorg/slf4j/Logger;
 	FIELD f_pyxekhhy canDestroyPredicate Lnet/minecraft/unmapped/C_uukjtqzj;
+	FIELD f_qlhuxehe RECIPE_RESULT_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_qqkxjbjo NON_AIR_ITEM_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_sjjnjocp VISIBLE_TOOLTIP_FLAG_VALUE I
+	FIELD f_swhvebgo ADVANCEMENT_DISPLAY_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_tkksfouf HIDE_FLAGS_KEY Ljava/lang/String;
 	FIELD f_tqvryqzt CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_tvtqdaiy LORE_KEY Ljava/lang/String;
@@ -111,6 +116,10 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;I)V
 		ARG 1 item
 		ARG 2 count
+	METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;ILjava/util/Optional;)V
+		ARG 1 item
+		ARG 2 count
+		ARG 3 nbt
 	METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;)V
 		ARG 1 item
 	METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;I)V
@@ -160,6 +169,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 2 state
 		ARG 3 pos
 		ARG 4 miner
+	METHOD m_epxyntkq (Lnet/minecraft/unmapped/C_cjzoxshv;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 item
+		ARG 1 nbt
 	METHOD m_eupjqzfc getNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT {@return the custom NBT of this item stack, may be {@code null}}
 		COMMENT
@@ -206,6 +218,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 otherSlot
 		ARG 2 clickType
 		ARG 3 player
+	METHOD m_hnsikyys (Ljava/text/DecimalFormat;)V
+		ARG 0 format
 	METHOD m_iadyttua usageTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;I)V
 		ARG 1 world
 		ARG 2 user
@@ -229,6 +243,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 count
 	METHOD m_kshgvahz matches (Ljava/util/function/Predicate;)Z
 		ARG 1 predicate
+	METHOD m_kuyejyiz (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_kvzdqphw getHideFlags ()I
 	METHOD m_lrvsfwxj canDestroy (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_gogfiawf;)Z
 		ARG 1 blockRegistry
@@ -261,13 +277,23 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 0 tooltip
 		ARG 1 enchantments
 	METHOD m_oicnibsx hasCustomName ()Z
+	METHOD m_olerdsuc (Lnet/minecraft/unmapped/C_byxnvdet$C_lhnnvezv;)Ljava/util/List;
+		ARG 0 result
 	METHOD m_oszmcroz onItemEntityDestroyed (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 entity
+	METHOD m_peugqiqx (Ljava/util/List;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_jxtrubuh;)V
+		ARG 2 enchantment
 	METHOD m_pjqbesil getItemBarStep ()I
 		COMMENT {@return the length of the filled section of the durability bar in pixels (out of 13)}
+	METHOD m_plmeneyk (Lnet/minecraft/unmapped/C_byxnvdet$C_uscixdxz;)Ljava/util/List;
+		ARG 0 result
+	METHOD m_pocwrlzm (Lnet/minecraft/unmapped/C_vorddnax;)Lcom/mojang/serialization/DataResult;
+		ARG 0 item
 	METHOD m_poxxatoa postHit (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 target
 		ARG 2 attacker
+	METHOD m_ppjkwpxs (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_npqneive;
+		ARG 0 block
 	METHOD m_pqebapbo getHolder ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_puozqtwx (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
@@ -278,6 +304,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
 		ARG 1 key
 	METHOD m_qetfuzie getRepairCost ()I
+	METHOD m_qjandoiq (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_qocirsqp writeNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT Writes the serialized item stack into the given {@link NbtCompound}.
 		COMMENT
@@ -287,6 +315,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 			COMMENT the NBT compound to write to
 	METHOD m_qxfxfsuy getItem ()Lnet/minecraft/unmapped/C_vorddnax;
 	METHOD m_rdrbrcjp addAttributeModifier (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;Lnet/minecraft/unmapped/C_yuycoehb;)V
+		ARG 1 attribute
 		ARG 2 modifier
 		ARG 3 slot
 	METHOD m_rghjmiwl setDamage (I)V
@@ -310,6 +339,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT @see #canCombine(ItemStack, ItemStack)
 		ARG 0 stack
 		ARG 1 otherStack
+	METHOD m_udfmonzo (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_uglewown getCount ()I
 		COMMENT {@return the count of items in this item stack}
 	METHOD m_uhghycli onClicked (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
@@ -380,6 +411,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 key
 	METHOD m_xqyyeqdc setHolder (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 holder
+	METHOD m_xthadass (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_xvzvtufo getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_yawcimjo getEntityHolder ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_ycpnizyd addHideFlag (Lnet/minecraft/unmapped/C_sddaxwyk$C_xgjxqlij;)V
