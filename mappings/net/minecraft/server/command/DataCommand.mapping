@@ -9,6 +9,8 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 	FIELD f_qmavfhhs MODIFY_EXPECTED_VALUE_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_rinogdqk GET_UNKNOWN_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_swutyqtg MODIFY_EXPECTED_OBJECT_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
+	METHOD m_apkvqzwt (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
 	METHOD m_bmqitaqv (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)I
 		ARG 1 context
 	METHOD m_bpzrerch (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)I
@@ -20,9 +22,9 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 		ARG 0 nbt
 	METHOD m_elsvzajt (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;Ljava/util/List;)I
 		ARG 0 context
-		ARG 1 nbt
-		ARG 2 nbtPath
-		ARG 3 list
+		ARG 1 sourceNbt
+		ARG 2 path
+		ARG 3 elements
 	METHOD m_glhcdcla nbtToString (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/lang/String;
 		ARG 0 nbt
 	METHOD m_iddynfjf (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;Ljava/util/List;)I
@@ -35,6 +37,8 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 		ARG 1 sourceNbt
 		ARG 2 path
 		ARG 3 elements
+	METHOD m_ikgqpooi (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
 	METHOD m_iorzbxjx executeGet (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_hhiwwgvm;Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;D)I
 		ARG 0 source
 		ARG 1 object
@@ -43,6 +47,8 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 	METHOD m_iwwjbtim getNbt (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;)Ljava/util/List;
 		ARG 0 context
 		ARG 1 type
+	METHOD m_juvwmvfw (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;
+		ARG 0 factory
 	METHOD m_kurcoulm (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lnet/minecraft/unmapped/C_runmekgk$C_ceumtqan;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 1 modifyOperation
 	METHOD m_oqmrqhjx executeModify (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lnet/minecraft/unmapped/C_runmekgk$C_ceumtqan;Ljava/util/List;)I
@@ -54,11 +60,20 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 		ARG 0 nbt
 	METHOD m_oxwwvvte addModifyArgument (Ljava/util/function/BiConsumer;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 0 subArgumentAdder
+	METHOD m_pebdmknp (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;Ljava/util/List;)I
+		ARG 0 context
+		ARG 1 sourceNbt
+		ARG 2 path
+		ARG 3 elements
+	METHOD m_pmwlevya (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/context/CommandContext;)I
+		ARG 1 context
 	METHOD m_ptducmmk executeGet (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_hhiwwgvm;)I
 		ARG 0 source
 		ARG 1 object
 	METHOD m_qabcwtyb (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lnet/minecraft/unmapped/C_runmekgk$C_ceumtqan;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 		ARG 1 modifyOperation
+	METHOD m_qargbfea (Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+		ARG 2 arguments
 	METHOD m_qjmyuocl (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 context
 	METHOD m_rkhqijnh executeMerge (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_hhiwwgvm;Lnet/minecraft/unmapped/C_hhlwcnih;)I
@@ -72,6 +87,14 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 	METHOD m_rliybygz getNbtFromSourcePath (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;)Ljava/util/List;
 		ARG 0 context
 		ARG 1 type
+	METHOD m_rvwchnyo (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+		ARG 1 arguments
+	METHOD m_rxfbpahy (Lcom/mojang/brigadier/builder/ArgumentBuilder;Lnet/minecraft/unmapped/C_runmekgk$C_dgfqqfje;)V
+		ARG 0 arguments
+		ARG 1 creator
+	METHOD m_sdmsrllf (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 start
+		ARG 1 end
 	METHOD m_sufmbujz (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lnet/minecraft/unmapped/C_runmekgk$C_ceumtqan;Lcom/mojang/brigadier/context/CommandContext;)I
 		ARG 1 modifyOperation
 		ARG 2 context
@@ -88,10 +111,17 @@ CLASS net/minecraft/unmapped/C_runmekgk net/minecraft/server/command/DataCommand
 		ARG 0 path
 	METHOD m_wgvzizqu nbtListToString (Ljava/util/List;Lnet/minecraft/unmapped/C_runmekgk$C_gcrgsjks;)Ljava/util/List;
 		ARG 0 nbtList
+		ARG 1 processor
 	METHOD m_wsbyfyqp register (Lcom/mojang/brigadier/CommandDispatcher;)V
 		ARG 0 dispatcher
+	METHOD m_wycsntkm (Lnet/minecraft/unmapped/C_pennblrk;)Z
+		ARG 0 source
+	METHOD m_xdlsmpdn (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+		ARG 1 arguments
 	METHOD m_yesdteea (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 context
+	METHOD m_yrpwmwqs (Lnet/minecraft/unmapped/C_runmekgk$C_zbamutva;Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+		ARG 1 arguments
 	METHOD m_zavixrqt executeGet (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_hhiwwgvm;Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;)I
 		ARG 0 source
 		ARG 1 object
