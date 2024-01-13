@@ -21,6 +21,8 @@ CLASS net/minecraft/unmapped/C_jyqwslie net/minecraft/util/UserCache
 	METHOD m_ecsofuym incrementAndGetAccessCount ()J
 	METHOD m_fvtljgha add (Lnet/minecraft/unmapped/C_jyqwslie$C_qruesmfp;)V
 		ARG 1 entry
+	METHOD m_grhslbaa (Lcom/google/gson/JsonArray;Ljava/text/DateFormat;Lnet/minecraft/unmapped/C_jyqwslie$C_qruesmfp;)V
+		ARG 2 entry
 	METHOD m_ibnbskll getByUuid (Ljava/util/UUID;)Ljava/util/Optional;
 		ARG 1 uuid
 	METHOD m_isvipnku clearExecutor ()V
@@ -42,10 +44,17 @@ CLASS net/minecraft/unmapped/C_jyqwslie net/minecraft/util/UserCache
 		ARG 0 value
 	METHOD m_wsmmmysu findByNameAsync (Ljava/lang/String;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 username
+	METHOD m_xnfvpkqi (Ljava/text/DateFormat;Ljava/util/List;Lcom/google/gson/JsonElement;)V
+		ARG 2 element
 	METHOD m_xyjytdmc entryToJson (Lnet/minecraft/unmapped/C_jyqwslie$C_qruesmfp;Ljava/text/DateFormat;)Lcom/google/gson/JsonElement;
 		ARG 0 entry
 		ARG 1 dateFormat
+	METHOD m_yhajgtgq getOfflineProfile (Ljava/lang/String;)Ljava/util/Optional;
+		ARG 0 username
 	CLASS C_fynkihtr
+		METHOD onProfileLookupFailed onProfileLookupFailed (Ljava/lang/String;Ljava/lang/Exception;)V
+			ARG 1 username
+			ARG 2 exception
 		METHOD onProfileLookupSucceeded onProfileLookupSucceeded (Lcom/mojang/authlib/GameProfile;)V
 			ARG 1 profile
 	CLASS C_qruesmfp Entry
