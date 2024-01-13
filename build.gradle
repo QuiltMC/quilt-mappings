@@ -130,8 +130,10 @@ remapUnpickDefinitions {
 	mappings = mergeTinyV2.outputMappings
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
@@ -148,6 +150,9 @@ license {
 	header file("HEADER")
 	include '**/*.java'
 }
+
+// Its artifact collides with the `tinyJar` one, just disable it since it isn't used either way
+tasks.jar.enabled = false
 
 task constantsJar(type: Jar) {
 	from sourceSets.constants.output
@@ -288,7 +293,7 @@ task decompileCFR(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	input.set mappings.fileConstants.namedJar
 	output.set file("namedSrc")
 	decompiler = Decompilers.CFR
-	libraries = configurations.decompileClasspath
+	libraries = files(configurations.decompileClasspath)
 
 	doFirst {
 		file("namedSrc").deleteDir()
@@ -299,7 +304,7 @@ task decompileVineflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
 	input.set mappings.fileConstants.namedJar
 	output.set file("namedSrc")
 	decompiler = Decompilers.VINEFLOWER
-	libraries = configurations.decompileClasspath
+	libraries = files(configurations.decompileClasspath)
 
 	doFirst {
 		file("namedSrc").deleteDir()
@@ -339,7 +344,7 @@ task decompileTargetVineflower(type: DecompileTask, dependsOn: [remapTargetMinec
 	input.set remapTargetMinecraftJar.outputJar
 	output.set file("namedTargetSrc")
 	decompiler = Decompilers.VINEFLOWER
-	libraries = configurations.decompileClasspath
+	libraries = files(configurations.decompileClasspath)
 
 	doFirst {
 		file("namedTargetSrc").deleteDir()
@@ -458,21 +463,28 @@ publishing {
 			artifactId Constants.MAPPINGS_NAME
 			version Constants.MAPPINGS_VERSION
 
+			// quilt-mappings-<version>-tiny.gz
 			artifact(compressTiny.compressedTiny) {
 				classifier "tiny"
 				builtBy compressTiny
 			}
+			// quilt-mappings-<version>.jar
 			artifact(tinyJar)
+			// quilt-mappings-<version>-v2.jar
 			artifact(v2UnmergedMappingsJar) {
 				classifier "v2"
 			}
+			// quilt-mappings-<version>-mergedv2.jar
 			artifact(v2MergedMappingsJar) {
 				classifier "mergedv2"
 			}
+			// quilt-mappings-<version>-constants.jar
 			artifact(constantsJar) {
 				classifier "constants"
 			}
+			// quilt-mappings-<version>-sources.jar
 			artifact sourcesJar
+			// quilt-mappings-<version>-javadoc.jar
 			artifact javadocJar
 
 			// See below the publishing block for intermediary artifact publishing
@@ -516,7 +528,9 @@ tasks.withType(AbstractPublishToMaven).all { AbstractPublishToMaven t ->
 				}
 			}
 
+			// quilt-mappings-<version>-intermediary-v2.jar
 			addArtifact(intermediaryV2MappingsJar, "intermediary-v2")
+			// quilt-mappings-<version>-intermediary-mergedv2.jar
 			addArtifact(intermediaryV2MergedMappingsJar, "intermediary-mergedv2")
 		}
 	}
