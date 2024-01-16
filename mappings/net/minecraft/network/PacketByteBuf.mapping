@@ -278,6 +278,14 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readPropertyMap()
 		COMMENT @see #writeProperty(Property)
 		ARG 1 propertyMap
+	METHOD m_aeyjpepw readUnlimitedText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+		COMMENT Reads a text from this buf, without limiting the max length of the JSON string
+		COMMENT it's represented by.
+		COMMENT
+		COMMENT @return the read text
+		COMMENT @see #writeText(Text)
+		COMMENT @see #MAX_TEXT_LENGTH
+		COMMENT @see #readUnlimitedText()
 	METHOD m_aghygfnm readMap (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;Lnet/minecraft/unmapped/C_idfydwco$C_qteuvzud;)Ljava/util/Map;
 		COMMENT Reads a map from this buf. The map is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} size followed by each key and value
@@ -336,10 +344,13 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT exceeds {@value #MAX_TEXT_LENGTH} in length
 		COMMENT @see #writeText(Text)
 		COMMENT @see #MAX_TEXT_LENGTH
+		COMMENT @see #readUnlimitedText()
 	METHOD m_cqyrnsig readJson (Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 		ARG 1 codec
 	METHOD m_cwtxzlod writeVec3d (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 vec3d
+	METHOD m_cynxfniu (Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
+		ARG 0 errorMessage
 	METHOD m_czlbxezf writeChunkPos (Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a chunk position to this buf. A chunk position is represented by
 		COMMENT a regular long.
@@ -499,6 +510,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeIntArray(int[])
 		ARG 1 list
 			COMMENT the list to write
+	METHOD m_icznxsji (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
+		ARG 1 errorMessage
 	METHOD m_iebqyozt readFromIterable (Lnet/minecraft/unmapped/C_feaetnaz;)Ljava/lang/Object;
 		ARG 1 iterable
 	METHOD m_itwwddfn writeNullable (Ljava/lang/Object;Lnet/minecraft/unmapped/C_idfydwco$C_urseyllo;)V
@@ -520,6 +533,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readNbt()
 		COMMENT @see #readNbt(NbtTagSizeTracker)
 		ARG 1 nbtElement
+	METHOD m_jntaktqt (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
+		ARG 1 errorMessage
 	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/Object;
 		COMMENT Reads an object from this buf as a compound NBT with the given codec.
 		COMMENT
@@ -987,6 +1002,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_zuejpfxx writeFromIterable (Lnet/minecraft/unmapped/C_feaetnaz;Ljava/lang/Object;)V
 		ARG 1 iterable
 		ARG 2 object
+	METHOD m_zwzghkkq (Lnet/minecraft/unmapped/C_oivssbvb;Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
+		ARG 1 errorMessage
 	METHOD markReaderIndex markReaderIndex ()Lio/netty/buffer/ByteBuf;
 	METHOD markWriterIndex markWriterIndex ()Lio/netty/buffer/ByteBuf;
 	METHOD maxCapacity maxCapacity ()I
