@@ -7,6 +7,7 @@ CLASS net/minecraft/unmapped/C_okajgatv net/minecraft/village/VillagerGossips
 		ARG 2 count
 	METHOD m_btdhprmy getCountForType (Lnet/minecraft/unmapped/C_jnfhmjij;Ljava/util/function/DoublePredicate;)J
 		ARG 1 type
+		ARG 2 gossipPredicate
 	METHOD m_cmrunlrj (Ljava/util/Map$Entry;)Ljava/util/stream/Stream;
 		ARG 0 reputation
 	METHOD m_dyfzaoev remove (Ljava/util/UUID;Lnet/minecraft/unmapped/C_jnfhmjij;)V
@@ -24,6 +25,9 @@ CLASS net/minecraft/unmapped/C_okajgatv net/minecraft/village/VillagerGossips
 	METHOD m_jvzpdrro remove (Ljava/util/UUID;Lnet/minecraft/unmapped/C_jnfhmjij;I)V
 		ARG 1 target
 		ARG 2 type
+		ARG 3 value
+	METHOD m_mfdelosw (Ljava/lang/String;)V
+		ARG 0 error
 	METHOD m_nqwszfst getReputationFor (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_okajgatv$C_mnkcxqlo;
 		ARG 1 target
 	METHOD m_onosnxyt remove (Lnet/minecraft/unmapped/C_jnfhmjij;)V
@@ -38,31 +42,52 @@ CLASS net/minecraft/unmapped/C_okajgatv net/minecraft/village/VillagerGossips
 		ARG 3 value
 	METHOD m_rezqyisg (Ljava/util/Map;Ljava/util/UUID;)V
 		ARG 2 uuid
+	METHOD m_rfitbfwx (Lnet/minecraft/unmapped/C_jnfhmjij;II)I
+		ARG 2 oldValue
+		ARG 3 newValue
 	METHOD m_wcwkvoru serialize (Lcom/mojang/serialization/DynamicOps;)Ljava/lang/Object;
+	METHOD m_xjaxlgjg (Lnet/minecraft/unmapped/C_okajgatv$C_pnqkiefx;)V
+		ARG 1 gossip
 	METHOD m_xljtefzx max (II)I
 		ARG 0 left
 		ARG 1 right
 	METHOD m_xwrjivdz (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_okajgatv$C_mnkcxqlo;
 		ARG 0 uuid
 	METHOD m_xygrbsoq getEntityReputationAssociatedGossips ()Ljava/util/Map;
+	METHOD m_zukrgdxj (Ljava/lang/String;)V
+		ARG 0 error
+	METHOD m_zupssiqn (Lcom/mojang/datafixers/util/Pair;)Ljava/util/stream/Stream;
+		ARG 0 pair
+	METHOD m_zyjkgftk (Ljava/util/function/DoublePredicate;Lnet/minecraft/unmapped/C_jnfhmjij;Lnet/minecraft/unmapped/C_okajgatv$C_mnkcxqlo;)Z
+		ARG 2 reputation
 	CLASS C_mnkcxqlo Reputation
 		FIELD f_jisfzctx associatedGossip Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 		METHOD m_gpfozpfq decay ()V
+		METHOD m_gsaizweb (Lit/unimi/dsi/fastutil/objects/Object2IntMap$Entry;)I
+			ARG 0 entry
+		METHOD m_hgdpgsmt (Ljava/util/UUID;Lit/unimi/dsi/fastutil/objects/Object2IntMap$Entry;)Lnet/minecraft/unmapped/C_okajgatv$C_pnqkiefx;
+			ARG 1 entry
 		METHOD m_iolecrpr remove (Lnet/minecraft/unmapped/C_jnfhmjij;)V
 			ARG 1 gossipType
 		METHOD m_jqfznkts entriesFor (Ljava/util/UUID;)Ljava/util/stream/Stream;
 			ARG 1 target
 		METHOD m_kdyhcplz clamp (Lnet/minecraft/unmapped/C_jnfhmjij;)V
 			ARG 1 gossipType
+		METHOD m_osvoawoz (Ljava/util/function/Predicate;Lit/unimi/dsi/fastutil/objects/Object2IntMap$Entry;)Z
+			ARG 1 entry
 		METHOD m_uwxxrmtf getValueFor (Ljava/util/function/Predicate;)I
 			ARG 1 gossipTypeFilter
 		METHOD m_vbbwagui isObsolete ()Z
 	CLASS C_pnqkiefx GossipEntry
+		FIELD f_dvxlyunl LIST_CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_eovwatal target Ljava/util/UUID;
 		FIELD f_fywsshjp value I
 		FIELD f_trirmzje type Lnet/minecraft/unmapped/C_jnfhmjij;
+		FIELD f_ywxfarxx CODEC Lcom/mojang/serialization/Codec;
 		METHOD <init> (Ljava/util/UUID;Lnet/minecraft/unmapped/C_jnfhmjij;I)V
 			ARG 1 target
 			ARG 2 type
 			ARG 3 value
+		METHOD m_vzcfrznw (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
 		METHOD m_zrjaoytq getValue ()I

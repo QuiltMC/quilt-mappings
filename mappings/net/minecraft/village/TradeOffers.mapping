@@ -1,24 +1,42 @@
 CLASS net/minecraft/unmapped/C_hqrlptsj net/minecraft/village/TradeOffers
+	FIELD f_bgitxoof EXPERIMENTAL_TRADES Ljava/util/Map;
 	FIELD f_ehhsrcrq NOVICE_BUY_XP I
+	FIELD f_enysgvin JUNGLE_TEMPLE_MAP Lnet/minecraft/unmapped/C_hqrlptsj$C_vlyzlpkn;
 	FIELD f_exjemjcl NOVICE_SELL_XP I
 	FIELD f_hjmalugw APPRENTICE_BUY_XP I
 	FIELD f_hmkyxmyt HIGH_PRICE_MULTIPLIER F
+	FIELD f_jkbnasfj TAIGA_VILLAGE_MAP Lnet/minecraft/unmapped/C_hqrlptsj$C_vlyzlpkn;
 	FIELD f_luhhionw WANDERING_TRADER_TRADES Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	FIELD f_mcgxxrlu JOURNEYMAN_SELL_XP I
+	FIELD f_nphorqse EXPERIMENTAL_WANDERING_TRADER_TRADES Ljava/util/List;
+	FIELD f_nuhchqkx SAVANNA_VILLAGE_MAP Lnet/minecraft/unmapped/C_hqrlptsj$C_vlyzlpkn;
+	FIELD f_qzbcywem DESERT_VILLAGE_MAP Lnet/minecraft/unmapped/C_hqrlptsj$C_vlyzlpkn;
 	FIELD f_qzkirmhk LOW_PRICE_MULTIPLIER F
 	FIELD f_rfclbdtx DEFAULT_MAX_USES I
 	FIELD f_sdcmuutz EXPERT_BUY_XP I
+	FIELD f_sntcwyhi SWAMP_HUT_MAP Lnet/minecraft/unmapped/C_hqrlptsj$C_vlyzlpkn;
 	FIELD f_ssyciguj PROFESSION_TO_LEVELED_TRADE Ljava/util/Map;
+	FIELD f_todnbxvl SNOWY_VILLAGE_MAP Lnet/minecraft/unmapped/C_hqrlptsj$C_vlyzlpkn;
 	FIELD f_tylxrmta APPRENTICE_SELL_XP I
 	FIELD f_vqbwpbnf COMMON_MAX_USES I
 	FIELD f_vxbbslmw MASTER_TRADE_XP I
+	FIELD f_wdaqmhhs PLAINS_VILLAGE_MAP Lnet/minecraft/unmapped/C_hqrlptsj$C_vlyzlpkn;
 	FIELD f_xkddlaga RARE_MAX_USES I
 	FIELD f_yxdcxrtp EXPERT_SELL_XP I
 	FIELD f_zeisnuhl JOURNEYMAN_BUY_XP I
+	METHOD m_bsecffhn enchant (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_jxtrubuh;I)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 item
+		ARG 1 enchantment
+		ARG 2 level
 	METHOD m_makateev copyToFastUtilMap (Lcom/google/common/collect/ImmutableMap;)Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 		ARG 0 map
+	METHOD m_pczxjhpu toItemStack (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 potionHolder
 	METHOD m_sswljyax (Ljava/util/HashMap;)V
 		ARG 0 map
+	METHOD m_tfklcdug createMasterLibrarianTradeFactory ()Lnet/minecraft/unmapped/C_hqrlptsj$C_bcdfyrkn;
+	METHOD m_vkhsaeon createLibrarianTradeFactory (I)Lnet/minecraft/unmapped/C_hqrlptsj$C_bcdfyrkn;
+		ARG 0 experience
 	CLASS C_aednyjcu SellPotionHoldingItemFactory
 		FIELD f_jskgbzeh experience I
 		FIELD f_kfnuzmil maxUses I
@@ -36,6 +54,8 @@ CLASS net/minecraft/unmapped/C_hqrlptsj net/minecraft/village/TradeOffers
 			ARG 5 price
 			ARG 6 maxUses
 			ARG 7 experience
+		METHOD m_yldrsluy (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Z
+			ARG 0 potion
 	CLASS C_bcdfyrkn Factory
 		COMMENT A factory to create trade offers.
 		METHOD m_goekcyhx create (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_argwryfu;
@@ -67,12 +87,38 @@ CLASS net/minecraft/unmapped/C_hqrlptsj net/minecraft/village/TradeOffers
 		FIELD f_tzmnlyxu multiplier F
 		FIELD f_vrezjoqy price I
 		FIELD f_xriqnzpf secondBuy Lnet/minecraft/unmapped/C_sddaxwyk;
+		METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;IILnet/minecraft/unmapped/C_sddaxwyk;IIIF)V
+			ARG 1 item
+			ARG 2 count
+			ARG 4 processedItem
+			ARG 5 processedItemCount
+		METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;IILnet/minecraft/unmapped/C_vorddnax;IIIF)V
+			ARG 1 item
+			ARG 2 count
+			ARG 3 price
+			ARG 4 processedItem
+			ARG 5 processedItemCount
+			ARG 6 maxUses
+			ARG 7 experience
+			ARG 8 multiplier
+	CLASS C_mhysqpkt EmptyFactory
 	CLASS C_oigljzdw EnchantBookFactory
+		FIELD f_ergftuze minLevel I
+		FIELD f_ewyrltat maxLevel I
+		FIELD f_fykexdki possibleEnchantments Ljava/util/List;
 		FIELD f_jzuznifm experience I
 		METHOD <init> (I)V
 			ARG 1 experience
+		METHOD <init> (III[Lnet/minecraft/unmapped/C_jxtrubuh;)V
+			ARG 4 possibleEnchantments
+		METHOD <init> (I[Lnet/minecraft/unmapped/C_jxtrubuh;)V
+			ARG 1 experience
+			ARG 2 possibleEnchantments
+		METHOD m_jdyctybw (I)[Lnet/minecraft/unmapped/C_jxtrubuh;
+			ARG 0 i
 	CLASS C_qgveffhr BuyForOneEmeraldFactory
 		FIELD f_eyddoaua experience I
+		FIELD f_kricdfec price I
 		FIELD f_tkfkyzcv multiplier F
 		FIELD f_uzbukszc maxUses I
 		METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;III)V
@@ -80,9 +126,20 @@ CLASS net/minecraft/unmapped/C_hqrlptsj net/minecraft/village/TradeOffers
 			ARG 2 price
 			ARG 3 maxUses
 			ARG 4 experience
+		METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;IIII)V
+			ARG 1 item
+			ARG 2 count
+			ARG 3 maxUses
+			ARG 4 experience
+			ARG 5 price
 	CLASS C_qmjmdnsj SuspiciousStewForEmeraldFactory
 		FIELD f_ipzfjord priceMultiplier F
+		FIELD f_qsehwyfa possibleEffects Ljava/util/List;
 		FIELD f_xcdyxocc experience I
+		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;II)V
+			ARG 1 effect
+			ARG 2 duration
+			ARG 3 experience
 	CLASS C_rnhfjpnc SellDyedArmorFactory
 		FIELD f_covriisu experience I
 		FIELD f_ebjlhqlk price I
@@ -133,6 +190,13 @@ CLASS net/minecraft/unmapped/C_hqrlptsj net/minecraft/village/TradeOffers
 			ARG 3 count
 			ARG 4 maxUses
 			ARG 5 experience
+		METHOD <init> (Lnet/minecraft/unmapped/C_vorddnax;IIIIF)V
+			ARG 1 item
+			ARG 2 price
+			ARG 3 count
+			ARG 4 maxUses
+			ARG 5 experience
+			ARG 6 multiplier
 	CLASS C_vlyzlpkn SellMapFactory
 		FIELD f_aapijarc mapName Ljava/lang/String;
 		FIELD f_gatuwlra price I
@@ -147,6 +211,10 @@ CLASS net/minecraft/unmapped/C_hqrlptsj net/minecraft/village/TradeOffers
 			ARG 4 iconType
 			ARG 5 maxUses
 			ARG 6 experience
+	CLASS C_vphnlyjn VillagerTypeSpecificFactory
+		METHOD m_ggpbncsc createTradeForBiomes (Lnet/minecraft/unmapped/C_hqrlptsj$C_bcdfyrkn;[Lnet/minecraft/unmapped/C_vhpfztda;)Lnet/minecraft/unmapped/C_hqrlptsj$C_vphnlyjn;
+			ARG 0 factory
+			ARG 1 villagerTypes
 	CLASS C_wututmqp TypeAwareBuyForOneEmeraldFactory
 		FIELD f_leqjftkp maxUses I
 		FIELD f_pxdyebdl count I
