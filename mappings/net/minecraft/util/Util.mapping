@@ -23,6 +23,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_cclbyaoh getChoiceTypeInternal (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
 		ARG 0 typeReference
 		ARG 1 id
+	METHOD m_ccqxalmw (Ljava/util/function/Function;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 function
 	METHOD m_chvwiayy getMaxBackgroundThreads ()I
 	METHOD m_drhjlchv fixedSizeList (Ljava/util/stream/IntStream;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 stream
@@ -55,6 +57,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_gxlhducm getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
 		ARG 0 t
 	METHOD m_hnnezaif getMainWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
+	METHOD m_jsqsuqek (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
+		ARG 0 runnable
+	METHOD m_jxtdpimf getDownloadWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_jzncpgce getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
 	METHOD m_kbwjpgkm deleteTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
@@ -72,6 +77,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		COMMENT @see #combine(List)
 		ARG 0 futures
 			COMMENT the completable futures to combine
+	METHOD m_kszryhbt (Ljava/util/stream/LongStream;I)Lcom/mojang/serialization/DataResult;
+		ARG 0 longStream
+		ARG 1 length
 	METHOD m_lgfbfuzz replaceInvalidChars (Ljava/lang/String;Lnet/minecraft/unmapped/C_zpuwkbhr;)Ljava/lang/String;
 		ARG 0 string
 		ARG 1 predicate
@@ -97,6 +105,11 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_oaamqqhk attemptShutdown (Ljava/util/concurrent/ExecutorService;)V
 		ARG 0 service
 	METHOD m_oigccakw startTimerHack ()V
+	METHOD m_onipypca (Ljava/util/function/Function;Ljava/util/function/Predicate;)Ljava/lang/Object;
+		ARG 0 function
+		ARG 1 predicate
+	METHOD m_ouznsrgl (Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicInteger;ZLjava/lang/Runnable;)Ljava/lang/Thread;
+		ARG 3 runnable
 	METHOD m_qiauzzux isBlank (Ljava/lang/String;)Z
 		ARG 0 string
 	METHOD m_qjjrrmre getMeasuringTimeMs ()J
@@ -217,8 +230,12 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		METHOD apply apply (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 	CLASS C_qgeblktr
 		METHOD getAsBoolean getAsBoolean ()Z
+	CLASS C_qygfqbqw
+		METHOD onTermination (Ljava/lang/Throwable;)V
+			ARG 1 throwable
 	CLASS C_tceggguc
 		FIELD f_boyitqoh cache Ljava/util/Map;
 		METHOD apply apply (Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 object
 	CLASS C_vroykftd
 		METHOD getAsBoolean getAsBoolean ()Z
