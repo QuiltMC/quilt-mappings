@@ -18,9 +18,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT  <td>{@link IntList}</td><td>{@link #readIntList()}</td><td>{@link #writeIntList(IntList)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
-	COMMENT  <td>{@link Map}</td><td>{@link #readMap(IntFunction, Reader, Reader)}</td><td>{@link #writeMap(Map, Writer, Writer)}</td>
-	COMMENT </tr>
-	COMMENT <tr>
 	COMMENT  <td>{@code byte[]}</td><td>{@link #readByteArray()}</td><td>{@link #writeByteArray(byte[])}</td>
 	COMMENT </tr>
 	COMMENT <tr>
@@ -28,9 +25,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@code long[]}</td><td>{@link #readLongArray()}</td><td>{@link #writeLongArray(long[])}</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT  <td>{@link BlockPos}</td><td>{@link #readBlockPos()}</td><td>{@link #writeBlockPos(BlockPos)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@link ChunkPos}</td><td>{@link #readChunkPos()}</td><td>{@link #writeChunkPos(ChunkPos)}</td>
@@ -49,15 +43,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@index VarLong}</td><td>{@link #readVarLong()}</td><td>{@link #writeVarLong(long)}</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT  <td>{@link UUID}</td><td>{@link #readUuid()}</td><td>{@link #writeUuid(UUID)}</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT  <td>{@link NbtCompound}</td><td>{@link #readNbt()}</td><td>{@link #writeNbt(NbtCompound)}</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT  <td>{@link ItemStack}</td><td>{@link #readItemStack()}</td><td>{@link #writeItemStack(ItemStack)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@link String}</td><td>{@link #readString()}</td><td>{@link #writeString(String)}</td>
@@ -287,6 +272,22 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #MAX_TEXT_LENGTH
 		COMMENT @see #readUnlimitedText()
 	METHOD m_aiozlifw readRegistryKey ()Lnet/minecraft/unmapped/C_xhhleach;
+	METHOD m_alotuvgi writeOptional (Ljava/util/Optional;Lnet/minecraft/unmapped/C_hiksfskl;)V
+		COMMENT Writes an optional value to this buf. An optional value is represented by
+		COMMENT a boolean indicating if the value is present, followed by the value only if
+		COMMENT the value is present.
+		COMMENT
+		COMMENT @see #readOptional(Reader)
+		ARG 1 value
+	METHOD m_amtujwvt (Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;)V
+		ARG 2 object
+	METHOD m_axpttudp readNullable (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
+		COMMENT Reads a nullable value from this buf. A nullable value is represented by a
+		COMMENT boolean indicating if the value is present, followed by the value only if
+		COMMENT it's present.
+		COMMENT
+		COMMENT @return the read value, or null
+		COMMENT @see #writeNullable(Object, Writer)
 	METHOD m_bczcqhop writeString (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a string to this buf. A string is represented by a byte array of
 		COMMENT its UTF-8 data. That byte array can have a maximum length of
@@ -338,6 +339,12 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return this buf, for chaining
 		ARG 1 array
 			COMMENT the array to write
+	METHOD m_dhyxvfyk readList (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/List;
+		COMMENT Reads a collection from this buf as an array list.
+		COMMENT
+		COMMENT @param <T> the list's entry type
+		COMMENT @return the read list
+		COMMENT @see #readCollection(IntFunction, Reader)
 	METHOD m_ebprrcum encode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes an object to this buf as a compound NBT with the given codec.
 		COMMENT
@@ -442,6 +449,13 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the list to write
 	METHOD m_icznxsji (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
+	METHOD m_itwwddfn writeNullable (Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
+		COMMENT Writes a nullable value to this buf. A nullable value is represented by a
+		COMMENT boolean indicating if the value is present, followed by the value only if
+		COMMENT it's present.
+		COMMENT
+		COMMENT @see #readNullable(Reader)
+		ARG 1 value
 	METHOD m_jntaktqt (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
 	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/Object;
@@ -503,6 +517,18 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the read block hit result
 		COMMENT @see #writeBlockHitResult(BlockHitResult)
+	METHOD m_lnjgpfbn (Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;Ljava/lang/Object;)V
+		ARG 3 key
+		ARG 4 value
+	METHOD m_minhepob readEither (Lnet/minecraft/unmapped/C_ajdohfrc;Lnet/minecraft/unmapped/C_ajdohfrc;)Lcom/mojang/datafixers/util/Either;
+		COMMENT Reads a value of two possible types, either left or right, from this buf.
+		COMMENT An Either value is represented by a boolean indicating whether to use the
+		COMMENT left type (true) or the right type (false), followed by the value of the
+		COMMENT indicated type.
+		COMMENT
+		COMMENT @param <L> the left type
+		COMMENT @param <R> the right type
+		COMMENT @see #writeEither(Either, Writer, Writer)
 	METHOD m_mlaqlvff writeInstant (Ljava/time/Instant;)V
 		COMMENT Writes an instant to this buf. An instant is represented by a long indicating
 		COMMENT the instant epoch milliseconds.
@@ -592,6 +618,28 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @see #writePropertyMap(PropertyMap)
 		COMMENT @see #readProperty()
+	METHOD m_rmsqcqnf writeEither (Lcom/mojang/datafixers/util/Either;Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;)V
+		COMMENT Writes a value of two possible types, either left or right, to this buf.
+		COMMENT An Either value is represented by a boolean indicating whether to use the
+		COMMENT left type (true) or the right type (false), followed by the value of the
+		COMMENT indicated type.
+		COMMENT
+		COMMENT @param <L> the left type
+		COMMENT @param <R> the right type
+		COMMENT @see #readEither(Reader, Reader)
+		ARG 1 either
+	METHOD m_sevbbzdm readCollection (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Collection;
+		COMMENT Reads a collection from this buf. The collection is stored as a leading
+		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
+		COMMENT sequentially.
+		COMMENT
+		COMMENT @param <T> the collection's entry type
+		COMMENT @param <C> the collection's type
+		COMMENT @return the read collection
+		COMMENT @see #writeCollection(Collection, Writer)
+		COMMENT @see #readList(Reader)
+		ARG 1 collectionFactory
+			COMMENT a factory that creates a collection with a given size
 	METHOD m_smxlihso readLongArray ()[J
 		COMMENT Reads an array of primitive longs from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the regular long (not var
@@ -618,9 +666,15 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return the read compound, may be {@code null}
 		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be read
 		COMMENT @throws RuntimeException if the compound exceeds the allowed maximum size
-		COMMENT @see #writeNbt(NbtCompound)
 		COMMENT @see #readNbt(NbtTagSizeTracker)
 		COMMENT @see #MAX_READ_NBT_SIZE
+	METHOD m_sxbdiyar readOptional (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Optional;
+		COMMENT Reads an optional value from this buf. An optional value is represented by
+		COMMENT a boolean indicating if the value is present, followed by the value only if
+		COMMENT the value is present.
+		COMMENT
+		COMMENT @return the read optional value
+		COMMENT @see #writeOptional(Optional, Writer)
 	METHOD m_tbiclwdt forEachInCollection (Ljava/util/function/Consumer;)V
 		COMMENT Iterates a collection from this buf. The collection is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} {@code size} followed by the entries
@@ -652,6 +706,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return this buf, for chaining
 		ARG 1 valueToId
 		ARG 2 value
+	METHOD m_tuovdjxm (Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;)V
+		ARG 2 object
 	METHOD m_ucosefkt decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 	METHOD m_uedohhct readNbt (Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 tagSizeTracker
@@ -722,6 +778,15 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_waiabpsw writeEnumSet (Ljava/util/EnumSet;Ljava/lang/Class;)V
 		ARG 1 set
 		ARG 2 enumClass
+	METHOD m_wqpnnsca writeCollection (Ljava/util/Collection;Lnet/minecraft/unmapped/C_hiksfskl;)V
+		COMMENT Writes a collection to this buf. The collection is stored as a leading
+		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
+		COMMENT sequentially.
+		COMMENT
+		COMMENT @param <T> the list's entry type
+		COMMENT @see #readCollection(IntFunction, Reader)
+		ARG 1 collection
+			COMMENT the collection to write
 	METHOD m_wxfnqbwh readVarInt ()I
 		COMMENT Reads a single var int from this buf.
 		COMMENT
@@ -736,6 +801,16 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT it's present.
 		COMMENT
 		COMMENT @see #writeProperty(Property)
+	METHOD m_xzxnbdko writeMap (Ljava/util/Map;Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;)V
+		COMMENT Writes a map to this buf. The map is stored as a leading
+		COMMENT {@linkplain #readVarInt() var int} size followed by each key and value
+		COMMENT pair.
+		COMMENT
+		COMMENT @param <K> the key type
+		COMMENT @param <V> the value type
+		COMMENT @see #readMap(IntFunction, Reader, Reader)
+		ARG 1 map
+			COMMENT the map to write
 	METHOD m_ybnsdtco readRegistryKey (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_xhhleach;
 		COMMENT Reads a registry key from this buf. A registry key is represented by an
 		COMMENT identifier.
