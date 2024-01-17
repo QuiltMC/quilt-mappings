@@ -8,6 +8,7 @@
       "dynOps"
     ]
   },
+  "com/mojang/serialization/MapCodec": "codec",
 
   // Data
   "net/minecraft/unmapped/C_nykrdyol": "exporter", // RecipeExporter
@@ -71,6 +72,9 @@
 
   // Block
   "net/minecraft/unmapped/C_mmxmpdoq": "block",
+  "net/minecraft/unmapped/C_jdakttms": "result", // BlockHitResult
+  "net/minecraft/unmapped/C_hgpogkhy": "type", // BlockSetType
+  "net/minecraft/unmapped/C_triydqro$C_xnkxsdfy": "settings", // AbstractBlock.Settings
 
   // Item
   "net/minecraft/unmapped/C_sddaxwyk": "stack", // ItemStack
@@ -89,6 +93,32 @@
     local_name: "reason",
     fallback: [
       "spawnReason"
+    ]
+  },
+
+  // Player
+  "net/minecraft/unmapped/C_jzrpycqo": { // PlayerEntity
+    local_name: "player",
+    fallback: [
+      "playerEntity"
+    ]
+  },
+  "net/minecraft/unmapped/C_mxrobsgg": { // ServerPlayerEntity
+    local_name: "player",
+    exclusive: true,
+    fallback: [
+      "playerEntity",
+      "serverPlayer",
+      "serverPlayerEntity"
+    ]
+  },
+  "net/minecraft/unmapped/C_jlopmfei": { // ClientPlayerEntity
+    local_name: "player",
+    exclusive: true,
+    fallback: [
+      "playerEntity",
+      "clientPlayer",
+      "clientPlayerEntity"
     ]
   },
 
@@ -181,6 +211,14 @@
     exclusive: true,
     fallback: [
       "bakedModel"
+    ]
+  },
+
+  // Server
+  "com/mojang/authlib/GameProfile": {
+    local_name: "profile",
+    fallback: [
+      "gameProfile"
     ]
   }
 }

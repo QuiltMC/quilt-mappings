@@ -22,6 +22,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 direction
+	METHOD m_bmyhbvlk createCodec (Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
+		ARG 0 settingsFunction
 	METHOD m_bneobcwj scheduledTick (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)V
 		ARG 1 state
 		ARG 2 world
@@ -33,6 +35,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 3 pos
 		ARG 4 oldState
 		ARG 5 notify
+	METHOD m_copdixka getSettingsCodec ()Lcom/mojang/serialization/codecs/RecordCodecBuilder;
 	METHOD m_csxalmdu calcBlockBreakingDelta (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)F
 		ARG 1 state
 		ARG 2 player
@@ -68,6 +71,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 2 world
 		ARG 3 pos
 	METHOD m_jzhgkbwu onInteract (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_gqmsalid;
+		ARG 5 entity
+		ARG 6 hand
+		ARG 7 hitResult
 	METHOD m_ktunuucb onBlockBreakStart (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 state
 		ARG 2 world
@@ -107,6 +113,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 2 stateFrom
 		ARG 3 direction
 	METHOD m_pguoxmgn onUse (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
+		ARG 4 entity
+		ARG 5 hitResult
 	METHOD m_phzfypqf getCollisionShape (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_pbfjvesm;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 1 state
 		ARG 2 world
@@ -122,6 +130,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
+	METHOD m_qjdjbqgu onExplosion (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
+		ARG 4 explosion
+		ARG 5 biConsumer
 	METHOD m_qjteufci onStacksDropped (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sddaxwyk;Z)V
 		ARG 1 state
 		ARG 2 world
@@ -406,6 +417,13 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 world
 			ARG 2 pos
 		METHOD m_qcyiqint hasComparatorOutput ()Z
+		METHOD m_qilylxum onUse (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
+			ARG 2 player
+			ARG 3 hitResult
+		METHOD m_qxwzfbgy onInteract (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_gqmsalid;
+			ARG 3 player
+			ARG 4 hand
+			ARG 5 hitResult
 		METHOD m_rkkqwejt hasSolidTopSurface (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 			ARG 1 world
 			ARG 2 pos
@@ -436,6 +454,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 		METHOD m_tjbimmww canBucketPlace (Lnet/minecraft/unmapped/C_rxhyurmy;)Z
 			ARG 1 fluid
+		METHOD m_trxxnxke isRegistryKey (Lnet/minecraft/unmapped/C_xhhleach;)Z
 		METHOD m_uawreshq getCameraCollisionShape (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_pbfjvesm;)Lnet/minecraft/unmapped/C_zscvhwbd;
 			ARG 1 world
 			ARG 2 pos
@@ -515,6 +534,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 3 direction
 		METHOD m_ynpgqgky isLiquid ()Z
 		METHOD m_yvamjply getBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
+		METHOD m_yylpqepz (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
+			ARG 3 explosion
+			ARG 4 biConsumer
 		METHOD m_zntvpiao getLuminance ()I
 			COMMENT {@return the light level emitted by this block state}
 		METHOD m_zrpxtrfo isToolRequired ()Z
@@ -589,6 +611,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_xndixxsg jumpVelocityMultiplier F
 		FIELD f_yebtulna pistonBehavior Lnet/minecraft/unmapped/C_mojvzhua;
 		METHOD m_bcasjlrn variantOf (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 0 block
 		METHOD m_bwwgnswz solid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_bzhfzklk emissiveLighting (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
@@ -661,6 +684,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 instrument
 		METHOD m_saqwnthq postProcess (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
+		METHOD m_scrsgkaj (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 0 block
 		METHOD m_secizybe (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 0 state
 			ARG 1 world

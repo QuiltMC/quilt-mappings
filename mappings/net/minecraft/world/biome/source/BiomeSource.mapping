@@ -1,7 +1,12 @@
 CLASS net/minecraft/unmapped/C_ajguowya net/minecraft/world/biome/source/BiomeSource
 	FIELD f_lmxlygmz CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_ympbsozp biomes Ljava/util/function/Supplier;
-	METHOD m_damjrvzf (IIIILjava/util/function/Predicate;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Lcom/mojang/datafixers/util/Pair;
+	METHOD m_damjrvzf locateBiome (IIIILjava/util/function/Predicate;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 radius
+		ARG 5 predicate
 		ARG 7 sampler
 	METHOD m_hsagconz addDebugInfo (Ljava/util/List;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)V
 		ARG 1 info
@@ -19,6 +24,14 @@ CLASS net/minecraft/unmapped/C_ajguowya net/minecraft/world/biome/source/BiomeSo
 		ARG 5 predicate
 			COMMENT checks if the current biome is one of the ones being searched for
 		ARG 6 sampler
+	METHOD m_nbxzexmk locateBiome (IIIIILjava/util/function/Predicate;Lnet/minecraft/unmapped/C_rlomrsco;ZLnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 radius
+		ARG 5 blockCheckInterval
+		ARG 6 predicate
+		ARG 9 noiseSampler
 	METHOD m_qutqwcbq getCodec ()Lcom/mojang/serialization/Codec;
 	METHOD m_swiafcco getBiomes ()Ljava/util/Set;
 	METHOD m_ycmulzaq getBiomesInArea (IIIILnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)Ljava/util/Set;

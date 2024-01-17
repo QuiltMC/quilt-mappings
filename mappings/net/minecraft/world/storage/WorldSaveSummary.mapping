@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_wfuumzdp net/minecraft/world/storage/WorldSaveSummary
+	FIELD f_amyuhymr SELECT_WORLD_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_bghpshkh file Ljava/nio/file/Path;
 	FIELD f_bvautaig worldInfo Lnet/minecraft/unmapped/C_tmnkpzlg;
 	FIELD f_hchnobwn versionInfo Lnet/minecraft/unmapped/C_zfrqkcfz;
@@ -17,20 +18,28 @@ CLASS net/minecraft/unmapped/C_wfuumzdp net/minecraft/world/storage/WorldSaveSum
 		ARG 7 file
 	METHOD compareTo (Ljava/lang/Object;)I
 		ARG 1 o
+	METHOD m_aymwctll canRecreate ()Z
 	METHOD m_bgefodvb getDisplayName ()Ljava/lang/String;
 	METHOD m_bgitrztg isHardcore ()Z
 	METHOD m_coanusxv getDetails ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_crkhefuo shouldBackup ()Z
+	METHOD m_csoxbxde canDelete ()Z
 	METHOD m_cwblqxgd createDetails ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_ekvjmryp getFile ()Ljava/nio/file/Path;
+	METHOD m_favsnebh canEdit ()Z
 	METHOD m_jkgficbn hasCheats ()Z
 	METHOD m_kbqhcyeh getName ()Ljava/lang/String;
+	METHOD m_ktmtuzrj canSelect ()Z
 	METHOD m_mugngsao getVersionInfo ()Lnet/minecraft/unmapped/C_zfrqkcfz;
 	METHOD m_ocpzcymq isLocked ()Z
 	METHOD m_proyhgnu getVersion ()Lnet/minecraft/unmapped/C_npqneive;
 	METHOD m_pwxpuekx doesRequireConversion ()Z
+	METHOD m_qfzernqt compareTo (Lnet/minecraft/unmapped/C_wfuumzdp;)I
 	METHOD m_qjljgfjx canBeLoaded ()Z
 	METHOD m_rotqtpar isUnavailable ()Z
+	METHOD m_spvdjgdg getSelectWorldText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_tldctpkk getConversionWarning ()Lnet/minecraft/unmapped/C_wfuumzdp$C_ddmqhdut;
+	METHOD m_vmewbqeb shouldDowngrade ()Z
 	METHOD m_wwqtumpx getLastPlayed ()J
 	METHOD m_xhjxtbsk getGameMode ()Lnet/minecraft/unmapped/C_lghcpyvl;
 	METHOD m_yhdjqnyp isExperimental ()Z
@@ -49,7 +58,18 @@ CLASS net/minecraft/unmapped/C_wfuumzdp net/minecraft/world/storage/WorldSaveSum
 		METHOD m_awuvvjxd promptsBackup ()Z
 		METHOD m_ghkwltkm needsBoldRedFormatting ()Z
 		METHOD m_hewyrbhf getTranslationKeySuffix ()Ljava/lang/String;
+	CLASS C_rtkvyjlw CorruptedSaveSummary
+		FIELD f_gkoblzhu lastPlayed J
+		FIELD f_nntrkuqz BUTTON_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_xizeuwat WARNING_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD <init> (Ljava/lang/String;Ljava/nio/file/Path;J)V
+			ARG 1 name
+			ARG 2 iconPath
+		METHOD m_tgqrhxzh (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+			ARG 0 style
 	CLASS C_zlzivdmd SymlinkSaveSummary
+		FIELD f_cujuvpey MORE_INFO_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_iauwlxvu TITLE_TEXT Lnet/minecraft/unmapped/C_rdaqiwdt;
 		METHOD <init> (Ljava/lang/String;Ljava/nio/file/Path;)V
 			ARG 1 name
 			ARG 2 file
