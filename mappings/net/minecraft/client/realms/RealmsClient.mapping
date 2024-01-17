@@ -4,9 +4,11 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	FIELD f_athahcgr OPS_ENDPOINT Ljava/lang/String;
 	FIELD f_bubcyppo WORLD_BACKUPS_ENDPOINT Ljava/lang/String;
 	FIELD f_cltszbkx WORLD_ENDPOINT_6 Ljava/lang/String;
+	FIELD f_cwysqaql CREATE_PRERELEASE_REALM Ljava/lang/String;
 	FIELD f_dmjtxeor COUNT_PENDING_ENDPOINT Ljava/lang/String;
 	FIELD f_dnybnkjq PING_STAT_ENDPOINT Ljava/lang/String;
 	FIELD f_drizbyfe WORLD_CLOSE_ENDPOINT Ljava/lang/String;
+	FIELD f_eevulvht LIST_USER_WORLDS_OF_ANY_TYPE Ljava/lang/String;
 	FIELD f_etwgndjl JOIN_PC_ENDPOINT Ljava/lang/String;
 	FIELD f_evorypsz WORLD_SLOT_ENDPOINT Ljava/lang/String;
 	FIELD f_ftmvcvst WORLD_BACKUPS_UPLOAD_ENDPOINT Ljava/lang/String;
@@ -26,6 +28,7 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	FIELD f_qkryvvlk INVITE_ENDPOINT Ljava/lang/String;
 	FIELD f_rljjnbei NEWS_ENDPOINT Ljava/lang/String;
 	FIELD f_rrqbuegt SUBSCRIPTIONS_ENDPOINT Ljava/lang/String;
+	FIELD f_rtjdzytu LIST_PRERELEASE_ELIGIBLE_REALMS Ljava/lang/String;
 	FIELD f_rxtbjcwy DISMISS_ENDPOINT Ljava/lang/String;
 	FIELD f_smtnkfye WORLD_ENDPOINT_2 Ljava/lang/String;
 	FIELD f_smwlemhh SEEN_ENDPOINT Ljava/lang/String;
@@ -36,6 +39,7 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	FIELD f_vrvngbpj CLIENT_COMPATIBLE_ENDPOINT Ljava/lang/String;
 	FIELD f_vwexrqhj TEMPLATES_ENDPOINT Ljava/lang/String;
 	FIELD f_wdnxeton WORLD_ENDPOINT Ljava/lang/String;
+	FIELD f_xdifsmjm ENVIRONMENT Lnet/minecraft/unmapped/C_ivysvyzf$C_eyrdsmnc;
 	FIELD f_xjawxxaz WORLD_SLOT_DOWNLOAD_ENDPOINT Ljava/lang/String;
 	FIELD f_xmvcqtmx ID_ENDPOINT Ljava/lang/String;
 	FIELD f_ybuslmwq WORLD_PROFILE_ENDPOINT Ljava/lang/String;
@@ -51,6 +55,9 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	METHOD m_aczccdkr putIntoMinigameMode (JLjava/lang/String;)Ljava/lang/Boolean;
 		ARG 1 worldId
 		ARG 3 minigameId
+	METHOD m_bzpqosuj listPrereleaseEligibleWorlds ()Ljava/util/List;
+	METHOD m_canyhfsv createPrereleaseRealm (Ljava/lang/Long;)Lnet/minecraft/unmapped/C_pwmwypfb;
+		ARG 1 parentWorldId
 	METHOD m_cmvgesxf agreeToTos ()V
 	METHOD m_ctkwscly uninviteMyselfFrom (J)V
 		ARG 1 worldId
@@ -111,6 +118,7 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 	METHOD m_rhxgdgrz switchSlot (JI)Z
 		ARG 1 worldId
 		ARG 3 slot
+	METHOD m_rkdypxsp mcoEnabled ()Z
 	METHOD m_skbxdtdu rejectInvitation (Ljava/lang/String;)V
 		ARG 1 invitationId
 	METHOD m_tcxgvniz create (Lnet/minecraft/unmapped/C_ayfeobid;)Lnet/minecraft/unmapped/C_ivysvyzf;
@@ -154,6 +162,8 @@ CLASS net/minecraft/unmapped/C_ivysvyzf net/minecraft/client/realms/RealmsClient
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V
 			ARG 3 baseUrl
 			ARG 4 protocol
+		METHOD m_hxuqzeid getEnvironment (Ljava/lang/String;)Ljava/util/Optional;
+			ARG 0 environment
 		METHOD valueOf (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ivysvyzf$C_eyrdsmnc;
 			ARG 0 name
 	CLASS C_ovclqquk CompatibleVersionResponse

@@ -14,15 +14,22 @@ CLASS net/minecraft/unmapped/C_ymwyplge net/minecraft/scoreboard/Scoreboard
 		ARG 2 criterion
 		ARG 3 displayName
 		ARG 4 renderType
+		ARG 5 autoUpdate
+		ARG 6 format
 	METHOD m_cfzvdwxh forEachScore (Lnet/minecraft/unmapped/C_adsgsrpw;Lnet/minecraft/unmapped/C_hswmfudr;Ljava/util/function/Consumer;)V
 		ARG 1 criterion
+		ARG 2 score
 		ARG 3 action
 	METHOD m_dbbenwlh getTeam (Ljava/lang/String;)Lnet/minecraft/unmapped/C_dvkwmbxw;
 		ARG 1 name
 	METHOD m_dejkbgda getTeamNames ()Ljava/util/Collection;
 	METHOD m_dnckhnhe getNullableObjective (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tlhwodcf;
 		ARG 1 name
+	METHOD m_ehrhtdjk removeScores (Lnet/minecraft/unmapped/C_hswmfudr;)V
+		ARG 1 holder
 	METHOD m_fcpprjwp updateScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;Lnet/minecraft/unmapped/C_jmgxjonl;)V
+		ARG 1 holder
+		ARG 2 objective
 		ARG 3 score
 	METHOD m_fuuujwji updateRemovedTeam (Lnet/minecraft/unmapped/C_dvkwmbxw;)V
 		ARG 1 team
@@ -31,39 +38,82 @@ CLASS net/minecraft/unmapped/C_ymwyplge net/minecraft/scoreboard/Scoreboard
 	METHOD m_gafhzqfy removePlayerFromTeam (Ljava/lang/String;Lnet/minecraft/unmapped/C_dvkwmbxw;)V
 		ARG 1 playerName
 		ARG 2 team
+	METHOD m_gmemzclj resetScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;)V
+		ARG 1 holder
+		ARG 2 objective
+	METHOD m_gzrrjdmh getOrCreateScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;Z)Lnet/minecraft/unmapped/C_qwlnyyss;
+		ARG 1 holder
+		ARG 2 objective
+		ARG 3 readOnly
 	METHOD m_hceuwazq getObjectiveNames ()Ljava/util/Collection;
+	METHOD m_hudewirl removeScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;)V
+		ARG 1 holder
+		ARG 2 objective
+	METHOD m_ibfgltsp (Ljava/lang/String;)Lnet/minecraft/unmapped/C_kqjthpfy;
+		ARG 0 scores
 	METHOD m_isvnusau getPlayerTeam (Ljava/lang/String;)Lnet/minecraft/unmapped/C_dvkwmbxw;
 		ARG 1 playerName
+	METHOD m_jhiwvwxm getOrCreateScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;)Lnet/minecraft/unmapped/C_qwlnyyss;
+		ARG 1 holder
+		ARG 2 objective
+	METHOD m_jmyuhbsu (Lnet/minecraft/unmapped/C_hqhtfwlr;Ljava/lang/String;Lnet/minecraft/unmapped/C_kqjthpfy;)V
+		ARG 1 objective
+		ARG 2 score
 	METHOD m_jrrzuixb updateScoreboardTeamAndPlayers (Lnet/minecraft/unmapped/C_dvkwmbxw;)V
 		ARG 1 team
 	METHOD m_kfhmjheo updateRemovedObjective (Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 1 objective
+	METHOD m_kfrjdnvg (Ljava/lang/String;Lnet/minecraft/unmapped/C_hqhtfwlr;Lnet/minecraft/unmapped/C_tlhwodcf;Lnet/minecraft/unmapped/C_jmgxjonl;)V
+		ARG 2 objective
+		ARG 3 score
 	METHOD m_lalyhssk setObjectiveSlot (Lnet/minecraft/unmapped/C_oakvluoh;Lnet/minecraft/unmapped/C_tlhwodcf;)V
+		ARG 1 slot
 		ARG 2 objective
 	METHOD m_ndjaudfx addPlayerToTeam (Ljava/lang/String;Lnet/minecraft/unmapped/C_dvkwmbxw;)Z
 		ARG 1 playerName
 		ARG 2 team
+	METHOD m_ntnuhjcd getScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;)Lnet/minecraft/unmapped/C_vgsaeqvm;
+		ARG 1 holder
+		ARG 2 objective
 	METHOD m_obtwmusn updatePlayerScore (Lnet/minecraft/unmapped/C_hswmfudr;)V
+		ARG 1 holder
 	METHOD m_pgyzkuih getTeams ()Ljava/util/Collection;
 	METHOD m_pmtoubwo updatePlayerScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;)V
+		ARG 1 holder
 		ARG 2 objective
 	METHOD m_qcyzmruh getEntriesForObjective (Lnet/minecraft/unmapped/C_tlhwodcf;)Ljava/util/Collection;
 		ARG 1 objective
 	METHOD m_qrishkvt removeObjective (Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 1 objective
 	METHOD m_rotvsepp getObjectiveForSlot (Lnet/minecraft/unmapped/C_oakvluoh;)Lnet/minecraft/unmapped/C_tlhwodcf;
+		ARG 1 slot
 	METHOD m_rqkikfdy updateObjective (Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 1 objective
 	METHOD m_sfhwfwqj getKnownPlayers ()Ljava/util/Collection;
 	METHOD m_tclghcjd getObjectives ()Ljava/util/Collection;
 	METHOD m_tgqiyvzg clearPlayerTeam (Ljava/lang/String;)Z
 		ARG 1 playerName
+	METHOD m_udrwnxtw (Lnet/minecraft/unmapped/C_tlhwodcf;Ljava/util/List;Ljava/lang/String;Lnet/minecraft/unmapped/C_kqjthpfy;)V
+		ARG 2 objective
+		ARG 3 score
+	METHOD m_ueychfdi (Lorg/apache/commons/lang3/mutable/MutableBoolean;Lnet/minecraft/unmapped/C_jmgxjonl;)V
+		ARG 1 score
 	METHOD m_veeekzrd updateExistingObjective (Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 1 objective
 	METHOD m_vtdbqyxb removeTeam (Lnet/minecraft/unmapped/C_dvkwmbxw;)V
 		ARG 1 team
+	METHOD m_wltptshg getScoresAsIntMap (Lnet/minecraft/unmapped/C_hswmfudr;)Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+		ARG 1 holder
 	METHOD m_xadhuroh resetEntityScore (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_xuunviiw getScores (Ljava/lang/String;)Lnet/minecraft/unmapped/C_kqjthpfy;
+		ARG 1 username
+	METHOD m_xxzvbusy (Ljava/lang/Object;)Ljava/util/List;
+		ARG 0 objective
 	METHOD m_yiqwjdqj (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 3 objective
 	METHOD m_yvmzvnqx toNbt ()Lnet/minecraft/unmapped/C_hqhtfwlr;
+	CLASS C_ahqtchzp
+		METHOD m_clejqecq setLocked (Z)V
+			ARG 1 lock
+		METHOD m_iklmynvq update ()V
