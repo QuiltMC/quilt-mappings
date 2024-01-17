@@ -144,7 +144,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_almiwujd isInLava ()Z
 	METHOD m_arkgrfeb tick ()V
 	METHOD m_ashzovao canAcceptPassenger ()Z
-	METHOD m_avzrjosw isServer ()Z
+	METHOD m_avzrjosw canAiMove ()Z
 	METHOD m_awmlhinf setVelocity (DDD)V
 		ARG 1 x
 		ARG 3 y
@@ -264,6 +264,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 slot
 		ARG 2 stack
 	METHOD m_enouepiv isImmuneToExplosion (Lnet/minecraft/unmapped/C_aahhrzpf;)Z
+		ARG 1 explosion
 	METHOD m_eoaarjeb setPose (Lnet/minecraft/unmapped/C_ufdjspmk;)V
 		ARG 1 pose
 	METHOD m_eoelkgqb isOnGround ()Z
@@ -367,6 +368,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 passenger
 		ARG 2 positionUpdater
 	METHOD m_gxfczhkq getLeashOffset ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_gxhbysyl isInFluid ()Z
 	METHOD m_gxhwoqaa getTeamColorValue ()I
 	METHOD m_hbtgnbjd getItemsEquipped ()Ljava/lang/Iterable;
 	METHOD m_hehkhdfc isFrozen ()Z
@@ -583,6 +585,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_nsggwems getSoundCategory ()Lnet/minecraft/unmapped/C_pqzizukq;
 	METHOD m_nstmjlot setAir (I)V
 		ARG 1 air
+	METHOD m_ntlxnitl emitGameEvent (Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 1 event
 	METHOD m_nxekaost getPortalRect (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_pneibfez;)Ljava/util/Optional;
 		ARG 1 destWorld
 		ARG 2 destPos
@@ -656,6 +660,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT @see #setRemoved(RemovalReason)
 	METHOD m_pedkbecv getParticleZ (D)D
 		ARG 1 widthScale
+	METHOD m_pfhawwtt canControlVehicle ()Z
 	METHOD m_pfpocpag getObservingLightPos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 tickDelta
 	METHOD m_phkweapi updatePosition (DDD)V
@@ -868,6 +873,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 5 z
 	METHOD m_wcqwgwbx getPermissionLevel ()I
 	METHOD m_wczujasu canFreeze ()Z
+	METHOD m_wfjjffoz emitGameEvent (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 event
+		ARG 2 entity
 	METHOD m_wghmcuvh setOnGround (Z)V
 		ARG 1 onGround
 	METHOD m_wgzrdnvs hasPassengerDeep (Lnet/minecraft/unmapped/C_astfners;)Z

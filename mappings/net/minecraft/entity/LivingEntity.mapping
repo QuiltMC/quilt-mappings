@@ -26,6 +26,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_huyhofoo serverY D
 	FIELD f_igcsnvae POTION_SWIRLS_COLOR Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_iiiqnngu SPRINTING_SPEED_BOOST Lnet/minecraft/unmapped/C_hdbqsqsm;
+	FIELD f_iismerxm ACTIVE_EFFECTS_KEY Ljava/lang/String;
 	FIELD f_ioiczfgs HAND_SLOTS I
 	FIELD f_isuahutr jumpingCooldown I
 	FIELD f_ivhrrxtj headYaw F
@@ -221,6 +222,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 entity
 		ARG 2 predicate
 	METHOD m_fyloosbv updateGlowing ()V
+	METHOD m_gbfixjfm updateAttribute (Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 1 attribute
 	METHOD m_gdlvulbl getAirSpeed ()F
 	METHOD m_gfhvqjeo getFallingInFluidAdjustedMovement (DZLnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 descentSpeed
@@ -238,6 +241,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT Under most circumstances, calling {@link #removeStatusEffect(Holder<StatusEffect>)} is highly preferable.
 		COMMENT
 		COMMENT @return the status effect removed
+		ARG 1 effect
 	METHOD m_gpdznmro teleport (DDDZ)Z
 		ARG 1 x
 		ARG 3 y
@@ -250,6 +254,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_guuxmwap canTarget (Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 1 target
 	METHOD m_gvdtmqle swapHandStacks ()V
+	METHOD m_gvffcdjw updateAttributes ()V
 	METHOD m_gvmhasrb getMovementSpeed ()F
 	METHOD m_gwksxurc setMovementSpeed (F)V
 		ARG 1 movementSpeed
@@ -282,6 +287,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_hxhnrklg updateLeaningPitch ()V
 	METHOD m_iarkvhcv getDespawnCounter ()I
 	METHOD m_iauzolbu isImmobile ()Z
+	METHOD m_idaajslm getAttributeValue (Lnet/minecraft/unmapped/C_cjzoxshv;)D
+		ARG 1 attribute
 	METHOD m_ifdopana onStatusEffectUpgraded (Lnet/minecraft/unmapped/C_wpfizwve;ZLnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 effect
 		ARG 2 reapplyEffect
@@ -301,6 +308,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_jeizdffm getPreferredEquipmentSlot (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_yuycoehb;
 		ARG 0 stack
 	METHOD m_jeuoijmu getStatusEffect (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_wpfizwve;
+		ARG 1 effect
 	METHOD m_jhvcxqlb canEquip (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
 	METHOD m_jjznttvl skipExperienceDrop ()V
@@ -432,6 +440,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_pwoagvwv getArmorInSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
 	METHOD m_qcwknova getJumpVelocity ()F
+	METHOD m_qhbjdevp getMaxRelativeHeadRotation ()F
 	METHOD m_qlumoklh onDismounted (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 vehicle
 	METHOD m_qlwogvxq spawnItemParticles (Lnet/minecraft/unmapped/C_sddaxwyk;I)V
@@ -439,8 +448,12 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 2 count
 	METHOD m_qrjyiaeu getScaleFactor ()F
 	METHOD m_qsbhsxhz isAffectedBySplashPotions ()Z
+	METHOD m_qsfhmwnj getAttributeBaseValue (Lnet/minecraft/unmapped/C_cjzoxshv;)D
+		ARG 1 attribute
 	METHOD m_qsomaeaq drop (Lnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 source
+	METHOD m_qukpzlyx getDefaultDimensions (Lnet/minecraft/unmapped/C_ufdjspmk;)Lnet/minecraft/unmapped/C_sszpscpo;
+		ARG 1 pose
 	METHOD m_rbjtcuvw positionInPortal (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 pos
 	METHOD m_redjlchk wakeUp ()V
@@ -462,6 +475,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_rutfchol playBlockFallSound ()V
 	METHOD m_rvjgoffm setAttacking (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 attacking
+	METHOD m_rzywzrvn getAgeScale ()F
 	METHOD m_scndcdpp knockback (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 target
 	METHOD m_scrnkbbn detectEquipmentUpdates ()V
@@ -481,6 +495,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_swoeftqi getRiddenSpeed (Lnet/minecraft/unmapped/C_jzrpycqo;)F
 		ARG 1 player
 	METHOD m_swttaoou knockDownwards ()V
+	METHOD m_swvraqsl getMaxAbsorption ()F
 	METHOD m_tdxfjzrk getStatusEffects ()Ljava/util/Collection;
 	METHOD m_tehtzmwu blockedByShield (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		ARG 1 source
@@ -591,7 +606,11 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 3 z
 	METHOD m_xuirzakp getEquippedStack (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
+	METHOD m_xusebikf wouldNotSuffocateInPose (Lnet/minecraft/unmapped/C_ufdjspmk;)Z
+		ARG 1 pose
 	METHOD m_xuxedegf isBaby ()Z
+	METHOD m_xvjtogym setAbsorptionAmountInternal (F)V
+		ARG 1 absorptionAmount
 	METHOD m_xzvpzpbu removeStatusEffect (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
 		COMMENT Removes a status effect from this entity.
 		COMMENT
@@ -600,6 +619,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT
 		COMMENT @return whether the active status effects on this entity has been changed by
 		COMMENT this call
+		ARG 1 effect
+	METHOD m_xzwxvody getHitbox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
 	METHOD m_yanqzhib getXpToDrop ()I
 		COMMENT Called when this entity is killed and returns the amount of experience
 		COMMENT to drop.
@@ -633,8 +654,10 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_ywumiypj setPositionInBed (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	METHOD m_zgpfruit getAttributeInstance (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_lzukavpx;
+		ARG 1 attribute
 	METHOD m_zhwrgbmx getPoses ()Lcom/google/common/collect/ImmutableList;
 	METHOD m_zrgxyjwv hasStatusEffect (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
+		ARG 1 effect
 	METHOD m_ztpokzjz getDamageTiltStrength ()F
 	METHOD m_zuisxtbe setStingerCount (I)V
 		ARG 1 stingerCount
