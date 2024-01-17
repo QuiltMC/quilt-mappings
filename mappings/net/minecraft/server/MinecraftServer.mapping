@@ -15,6 +15,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	COMMENT
 	COMMENT @see net.minecraft.server.dedicated.MinecraftDedicatedServer
 	COMMENT @see net.minecraft.server.integrated.IntegratedServer
+	FIELD f_akozhelv tickManager Lnet/minecraft/unmapped/C_ogibcuum;
 	FIELD f_cprjvpov playerManager Lnet/minecraft/unmapped/C_digmgtxw;
 	FIELD f_cyhowiqj pvpEnabled Z
 	FIELD f_dzhyipcc MAX_STATUS_PLAYER_SAMPLE I
@@ -22,19 +23,23 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_fabfcdrs lastPlayerSampleUpdate J
 	FIELD f_fbididar recorder Lnet/minecraft/unmapped/C_owhdirgj;
 	FIELD f_fdsdqzpj serverGuiTickables Ljava/util/List;
+	FIELD f_fgmsqlfx ticksUntilAutosave I
 	FIELD f_fluzdawl onlineMode Z
 	FIELD f_foqkzzmj DEMO_LEVEL_INFO Lnet/minecraft/unmapped/C_tmnkpzlg;
 	FIELD f_fwfwzdtg worldGenerationProgressListenerFactory Lnet/minecraft/unmapped/C_lausdaxu;
 	FIELD f_gievdvxf MAX_TICK_LATENCY I
+	FIELD f_gxteupmv OVERLOAD_THRESHOLD_NANOS J
 	FIELD f_hpkazkoy motd Ljava/lang/String;
 	FIELD f_hzvkdwzv TICK_STATS_SPAN I
 	FIELD f_iajreeug running Z
+	FIELD f_iastsxwn OVERLOADED_WARNING_INTERVAL_NANOS J
 	FIELD f_iwlcwdqu needsDebugSetup Z
 	FIELD f_iyplpobq flightEnabled Z
 	FIELD f_jcreuraz loading Z
 	FIELD f_jkdpidqz serverThread Ljava/lang/Thread;
 	FIELD f_jkeyeddz recorderResultConsumer Ljava/util/function/Consumer;
 	FIELD f_jrxuyggb commandFunctionManager Lnet/minecraft/unmapped/C_nbwcoknw;
+	FIELD f_jtvshidn lastOverloadWarningNanos J
 	FIELD f_kbmnbjqh workerExecutor Ljava/util/concurrent/Executor;
 	FIELD f_kcxvwygd dataCommandStorage Lnet/minecraft/unmapped/C_hrsnudrk;
 	FIELD f_kjvvxrfe MAX_WORLD_BORDER_RADIUS I
@@ -46,11 +51,14 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_lxhddphh session Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;
 	FIELD f_mdgbzxcp serverResourceManager Lnet/minecraft/server/MinecraftServer$C_eaujwdwn;
 	FIELD f_mkwvxikt dataPackManager Lnet/minecraft/unmapped/C_dqfyacfy;
+	FIELD f_mtseiqvc OVERLOADED_WARNING_INTERVAL_TICKS I
 	FIELD f_mzgxeppu hostProfile Lcom/mojang/authlib/GameProfile;
 	FIELD f_nobqkcyz preventProxyConnections Z
 	FIELD f_nqkjmudj keyPair Ljava/security/KeyPair;
 	FIELD f_optqvchp START_TICKET_CHUNK_RADIUS I
+	FIELD f_orfggppy MIN_AUTOSAVE_TICKS I
 	FIELD f_oskywuqs START_TICKET_CHUNKS I
+	FIELD f_ovoeaxru OVERLOAD_THRESHOLD_TICKS I
 	FIELD f_pcoxooyw serverIp Ljava/lang/String;
 	FIELD f_piadzews scoreboard Lnet/minecraft/unmapped/C_orszeavg;
 	FIELD f_pjqvnnxv bossBarManager Lnet/minecraft/unmapped/C_xtwgkoiw;
@@ -73,6 +81,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_wsnekgbx serverPort I
 	FIELD f_xpelegwm networkIo Lnet/minecraft/unmapped/C_mitbewqx;
 	FIELD f_ydhbqcwa ANONYMOUS_GAME_PROFILE Lcom/mojang/authlib/GameProfile;
+	FIELD f_yfosyphy averageTickTimeMillis F
 	FIELD f_ypvxjvas layeredRegistryManager Lnet/minecraft/unmapped/C_bcpxdrik;
 	FIELD f_yqwhnmdp demo Z
 	FIELD f_zehgtxec dataFixer Lcom/mojang/datafixers/DataFixer;
