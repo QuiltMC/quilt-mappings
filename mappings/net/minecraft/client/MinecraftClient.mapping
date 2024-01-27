@@ -49,6 +49,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_bckuoycd musicTracker Lnet/minecraft/unmapped/C_bqcuvynv;
 	FIELD f_bcynorao server Lnet/minecraft/unmapped/C_mxzbwazq;
 	FIELD f_bjcsaqmm socialInteractionsToast Lnet/minecraft/unmapped/C_fbzposnd;
+	FIELD f_bmectogs userPropertiesFuture Ljava/util/concurrent/CompletableFuture;
 	FIELD f_bwktqbao playerKeyPairManager Lnet/minecraft/unmapped/C_huqpbmju;
 	FIELD f_bzlzxgjd tutorialManager Lnet/minecraft/unmapped/C_eqosojcf;
 	FIELD f_ccoiwmig runDirectory Ljava/io/File;
@@ -112,6 +113,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_hnshbgwi debugRenderer Lnet/minecraft/unmapped/C_hlltolhp;
 	FIELD f_iamzunwl telemetryManager Lnet/minecraft/unmapped/C_cgkxybww;
 	FIELD f_ifjymafj tickProfilerResult Lnet/minecraft/unmapped/C_dzczqjri;
+	FIELD f_ifujnkge time J
 	FIELD f_ijkdedci options Lnet/minecraft/unmapped/C_lscptbhn;
 	FIELD f_ipmatcxh DEFAULT_FONT_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_iuqlwerq bufferBuilders Lnet/minecraft/unmapped/C_dfmwjguw;
@@ -148,11 +150,13 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_pbscqbnp resourceReloadFuture Ljava/util/concurrent/CompletableFuture;
 	FIELD f_pwhibjtl IS_SYSTEM_MAC Z
 	FIELD f_qhzgfpco ALT_TEXT_RENDERER_ID Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_qnkrqkzo pi J
 	FIELD f_qonfhpbw cameraEntity Lnet/minecraft/unmapped/C_astfners;
 	FIELD f_rctcsrrc versionType Ljava/lang/String;
 	FIELD f_rtfdwrej player Lnet/minecraft/unmapped/C_jlopmfei;
 		COMMENT Represents the client's own player.
 		COMMENT This field is not null when in game.
+	FIELD f_rxmfauqf commandHistory Lnet/minecraft/unmapped/C_tdolpopx;
 	FIELD f_smmzzjzi chunkCullingEnabled Z
 	FIELD f_svhgkmyf window Lnet/minecraft/unmapped/C_snosbckc;
 	FIELD f_svhtflji worldRenderer Lnet/minecraft/unmapped/C_sfkkabhx;
@@ -170,6 +174,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_vzhjrjmq entityRenderDispatcher Lnet/minecraft/unmapped/C_gmkqxljo;
 	FIELD f_wcmiwllx fpsCounter I
 	FIELD f_whquekgj skinProvider Lnet/minecraft/unmapped/C_pyciilvf;
+	FIELD f_wqjqquzt profileFuture Ljava/util/concurrent/CompletableFuture;
+	FIELD f_wsqclpxe disconnected Z
 	FIELD f_wwbdmehi entityModelLoader Lnet/minecraft/unmapped/C_qncyfzro;
 	FIELD f_wyxzvtjk is64Bit Z
 	FIELD f_xhefqypc integratedServerConnection Lnet/minecraft/unmapped/C_oasmcckk;
@@ -208,6 +214,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_bpwoykoi startMonitor (ZLnet/minecraft/unmapped/C_vuxtoiqa;)Lnet/minecraft/unmapped/C_eslcbfsq;
 		ARG 1 active
 		ARG 2 monitor
+	METHOD m_bspvtatu (Lnet/minecraft/unmapped/C_ymmazfhq;)Ljava/util/stream/Stream;
+		ARG 0 recipeResult
 	METHOD m_bteytekh render (Z)V
 		ARG 1 tick
 	METHOD m_buwtrqcs setLastInputType (Lnet/minecraft/unmapped/C_qdenxghm;)V
@@ -269,6 +277,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_goulgteh getTextureManager ()Lnet/minecraft/unmapped/C_rglkduer;
 	METHOD m_goyooblp openChatScreen (Ljava/lang/String;)V
 		ARG 1 text
+	METHOD m_gqstzsgs getUserProperties ()Lcom/mojang/authlib/minecraft/UserApiService$UserProperties;
 	METHOD m_gxeghdto reloadResources ()Ljava/util/concurrent/CompletableFuture;
 		COMMENT Reloads the client's resources.
 	METHOD m_hbdizzrx getResourcePackManager ()Lnet/minecraft/unmapped/C_dqfyacfy;
@@ -280,6 +289,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_hnadsrtd getFrameTime ()J
 	METHOD m_hpnybqgx getPaintingManager ()Lnet/minecraft/unmapped/C_kotvulld;
 	METHOD m_hwuesuuy getProfiler ()Lnet/minecraft/unmapped/C_eslcbfsq;
+	METHOD m_ieiaozel (ZLnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)Ljava/util/concurrent/CompletableFuture;
+		ARG 2 context
 	METHOD m_igshcbgp setMipmapLevels (I)V
 		ARG 1 mipmapLevels
 	METHOD m_imhnyksl getWindow ()Lnet/minecraft/unmapped/C_snosbckc;
@@ -292,6 +303,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT <p>The integrated server is only present when a local single player world is open.
 	METHOD m_jtfycguy getVersionType ()Ljava/lang/String;
 	METHOD m_jvlajuse onGameLoaded (Lnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)V
+		ARG 1 context
 	METHOD m_jytpvdsa countryEqualsISO3 (Ljava/lang/Object;)Z
 		ARG 0 o
 	METHOD m_kclqbfew cleanUpAfterCrash ()V
@@ -312,14 +324,20 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 3 version
 		ARG 4 options
 	METHOD m_lwpmozmo getNetworkProxy ()Ljava/net/Proxy;
+	METHOD m_mdnlxzjj (Lnet/minecraft/unmapped/C_ymmazfhq;Lnet/minecraft/unmapped/C_dscbrwbj;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 1 recipe
 	METHOD m_mgwfxoza getModStatus ()Lnet/minecraft/unmapped/C_wlkuksof;
 	METHOD m_mkztxxaq getRemoteResourcePackProvider ()Lnet/minecraft/unmapped/C_aqwrwsxs;
 	METHOD m_mmiukjyt addBlockEntityNbt (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_kvegafmh;)V
 		ARG 1 stack
 		ARG 2 blockEntity
 	METHOD m_mmruqhcv scheduleStop ()V
+	METHOD m_mnuoogxa printCrashReport ()V
 	METHOD m_moxkuxcg disconnect ()V
 	METHOD m_mqdbnddk handleInputEvents ()V
+	METHOD m_mucnpean getLauncherBrand ()Ljava/lang/String;
+	METHOD m_mzmvzugn (Lnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)Ljava/lang/Runnable;
+		ARG 1 context
 	METHOD m_ngtmdbml startIntegratedServer (Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Z)V
 		ARG 1 session
 		ARG 2 resourcePackManager
@@ -342,14 +360,19 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_ogqbmqly getBlockRenderManager ()Lnet/minecraft/unmapped/C_vdyoclwy;
 	METHOD m_ohjyajtu printCrashReport (Lnet/minecraft/unmapped/C_ayfeobid;Ljava/io/File;Lnet/minecraft/unmapped/C_bkefkbum;)V
 		COMMENT Prints the given crash report, and saves it as a file if it's not already.
+		ARG 1 file
 		ARG 2 report
 			COMMENT the crash report to print
 	METHOD m_omcqclml openPauseMenu (Z)V
 		ARG 1 pause
 	METHOD m_onpgsiax getRealms32BitWarningChecker ()Lnet/minecraft/unmapped/C_iempwoli;
+	METHOD m_otnidwgo (Ljava/util/function/Consumer;Ljava/nio/file/Path;)V
+		ARG 2 path
 	METHOD m_ousbngdi (Lnet/minecraft/unmapped/C_dzczqjri;)V
 		ARG 0 dump
 	METHOD m_oussibsz isTelemetryEnabled ()Z
+	METHOD m_owlsgyvi (Lnet/minecraft/unmapped/C_qympisds;)V
+		ARG 1 reportSection
 	METHOD m_oxcbqety getSocialInteractionsManager ()Lnet/minecraft/unmapped/C_rhqhwtoq;
 	METHOD m_oxhdduqg addSystemDetailsToCrashReport (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_dahbfdem;Ljava/lang/String;Lnet/minecraft/unmapped/C_lscptbhn;Lnet/minecraft/unmapped/C_bkefkbum;)V
 		ARG 0 client
@@ -358,6 +381,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 3 options
 		ARG 4 report
 	METHOD m_pfleqtyk getVideoWarningManager ()Lnet/minecraft/unmapped/C_giiyufuh;
+	METHOD m_plbpzajw resetDebugHudChunk ()Lnet/minecraft/unmapped/C_epxplegp;
 	METHOD m_ppqcqqyo stopRecorder ()V
 	METHOD m_ppypuskf displayPackLoadFailureToast (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 message
@@ -380,6 +404,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 5 height
 	METHOD m_qumbuvds getBufferBuilders ()Lnet/minecraft/unmapped/C_dfmwjguw;
 	METHOD m_qzdvutlp getResourceManager ()Lnet/minecraft/unmapped/C_tmnrpasf;
+	METHOD m_rccjeetx (Lnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)V
+		ARG 1 context
 	METHOD m_reukrcbm getTutorialManager ()Lnet/minecraft/unmapped/C_eqosojcf;
 	METHOD m_rgnkddrb takePanorama (Ljava/io/File;II)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		COMMENT Takes a panorama. The panorama is stored in the given {@code directory}, in
@@ -389,6 +415,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 directory
 		ARG 2 width
 		ARG 3 height
+	METHOD m_rhrgwrhn getCommandHistory ()Lnet/minecraft/unmapped/C_tdolpopx;
 	METHOD m_rofjwsoe getQuickPlayLogger ()Lnet/minecraft/unmapped/C_plekrknb;
 	METHOD m_rzjpaaju doAttack ()Z
 	METHOD m_rzmoptef doItemPick ()V
@@ -400,6 +427,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_ssowzzsw shouldRenderAsync ()Z
 	METHOD m_stbazwpo initFont (Z)V
 		ARG 1 forcesUnicode
+	METHOD m_swtmrwhg printCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)V
+		ARG 1 report
 	METHOD m_syjvubih setCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)V
 		ARG 1 crashReport
 	METHOD m_thxytytq onResourceReloadFailure (Ljava/lang/Throwable;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)V
@@ -418,6 +447,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 active
 		ARG 2 monitor
 	METHOD m_uhuiglxr isHudEnabled ()Z
+	METHOD m_uoolgbbk (Z)V
+		ARG 1 trusted
 	METHOD m_uottczas (Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 1 disconnectScreen
 	METHOD m_upqckqnd getBakedModelManager ()Lnet/minecraft/unmapped/C_wosoicga;
@@ -431,6 +462,8 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_vwoqgdbt is64Bit ()Z
 	METHOD m_wdcaieen checkIs64Bit ()Z
 	METHOD m_wgjcxgcz getRealmsDataFetcher ()Lnet/minecraft/unmapped/C_yyprjalz;
+	METHOD m_widwpwjd (Lnet/minecraft/unmapped/C_fprbxnfr;Ljava/util/function/Consumer;Ljava/util/List;)V
+		ARG 3 list
 	METHOD m_wipirsgk getInstance ()Lnet/minecraft/unmapped/C_ayfeobid;
 	METHOD m_wkcnjoym isMultiplayerEnabled ()Z
 	METHOD m_xlacueca getChatListener ()Lnet/minecraft/unmapped/C_bmbrcost;
@@ -452,6 +485,9 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_zvebxafj hasOutline (Lnet/minecraft/unmapped/C_astfners;)Z
 		COMMENT Checks if the provided {@code entity} should display an outline around its model.
 		ARG 1 entity
+	METHOD m_zynubuje (Lnet/minecraft/unmapped/C_nwvkrkad;)V
+		ARG 1 profiler
+	CLASS C_vfwwgdbg LoadingContext
 	CLASS C_xucqfcml ChatRestriction
 		COMMENT Represents the restrictions on chat on a Minecraft client.
 		COMMENT

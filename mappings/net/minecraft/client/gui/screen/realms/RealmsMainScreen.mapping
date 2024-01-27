@@ -6,6 +6,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	FIELD f_bzicbrdl pendingInvitesButton Lnet/minecraft/unmapped/C_uncfwjlr$C_vsvjmdaq;
 	FIELD f_dixtpcdf NEW_REALM_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_fdgnfevv newsButton Lnet/minecraft/unmapped/C_uncfwjlr$C_vsvjmdaq;
+	FIELD f_fhewopod widget Lnet/minecraft/unmapped/C_cqroimpa;
 	FIELD f_fyvtvtkl INVITE_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_geledlrq OPEN Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_gleimzay REALM_EXPIRED_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
@@ -15,6 +16,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	FIELD f_jtfehbdt LOGO_HEIGHT I
 	FIELD f_kjcwkfau leaveButton Lnet/minecraft/unmapped/C_buwziidm;
 	FIELD f_kmjtkmrs LOADING Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_laokacvd showSnapshots Z
 	FIELD f_lvbzhuvg LOGO_TEXTURE_WIDTH I
 	FIELD f_lwnbwnwd NO_REALMS Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_lzszrazz PENDING_INVITES_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -48,6 +50,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	FIELD f_xvmvgoxe LOGGER Lorg/slf4j/Logger;
 	FIELD f_ycjqhwln REALM_CLOSED_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_ydhsfxmv NO_REALMS_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_yqetxhnb SNAPSHOT Z
 	FIELD f_yyfnnvvc NEWS_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_zfclovwg notifications Ljava/util/List;
 	FIELD f_zllvwnxo renewButton Lnet/minecraft/unmapped/C_buwziidm;
@@ -61,17 +64,25 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		ARG 1 resultConsumer
 	METHOD m_bgzsbxbo isOwnedNotExpired (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 serverData
+	METHOD m_byigiajp noRealmsWidget ()Lnet/minecraft/unmapped/C_crjxgxtz;
 	METHOD m_iiyaspdq shouldConfigureButtonBeActive (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 server
 	METHOD m_ildtwubj shouldRenewButtonBeActive (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 server
+	METHOD m_jvvhompn (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_wrmtlwqx;)V
+		ARG 0 server
+		ARG 1 screen
 	METHOD m_lgrkydux pingRegions ()V
+	METHOD m_lwwrcldu (Lnet/minecraft/unmapped/C_sedilmty;Ljava/lang/String;I)V
+		ARG 2 message
+		ARG 3 color
 	METHOD m_mzhwlfdb updateButtonStates ()V
 	METHOD m_nykjkgxr onRenew (Lnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 server
 	METHOD m_qbrpgnib leaveServer (ZLnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 confirmed
 		ARG 2 server
+	METHOD m_qhhosbao isSnapshot ()Z
 	METHOD m_qwnzuazr dismissNotification (Ljava/util/UUID;)V
 		ARG 1 notificationUuid
 	METHOD m_rtkzebzs setupDataFetcher (Lnet/minecraft/unmapped/C_yyprjalz;)Lnet/minecraft/unmapped/C_tfgqmjhb$C_zolmsrgs;
@@ -83,11 +94,26 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		ARG 1 serverData
 	METHOD m_veeacmfr isSelfOwnedServer (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 serverData
+	METHOD m_yemkrboo (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_wrmtlwqx;Z)V
+		ARG 0 server
+		ARG 1 screen
 	METHOD m_ymxvcgqq leaveClicked (Lnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 selectedServer
 	METHOD m_ytletlev shouldPlayButtonBeActive (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 server
 	METHOD m_zdaeiqos removeSelection ()V
+	METHOD m_zxhakhrx (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 0 server
+		ARG 1 screen
+	CLASS C_cpcmqakr
+		FIELD f_lkmvudlg server Lnet/minecraft/unmapped/C_pwmwypfb;
+	CLASS C_exqbiexf
+		FIELD f_dkpayshd server Lnet/minecraft/unmapped/C_pwmwypfb;
+		FIELD f_phuojzzg SNAPSHOT_START Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_rgryxumt MAX_SNAPSHOTS I
+		METHOD <init> (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_pwmwypfb;)V
+			ARG 2 server
+		METHOD m_uhmvtdbp createSnapshotPopup ()V
 	CLASS C_givapydd NotificationMessageEntry
 		FIELD f_bjyntzlm textFrame Lnet/minecraft/unmapped/C_ozrdqjbi;
 		FIELD f_dxljrxbd OUTLINE_COLOR I
@@ -98,6 +124,8 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		FIELD f_snjrqeis grid Lnet/minecraft/unmapped/C_qykucwmu;
 		FIELD f_whpklvxd SIDE_MARGIN I
 		FIELD f_yuadjnql lastEntryWidth I
+		METHOD <init> (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_rdaqiwdt;ILnet/minecraft/unmapped/C_auzifczy;)V
+			ARG 4 notification
 		METHOD m_fwkevndb updateWidth (I)V
 			ARG 1 entryWidth
 		METHOD m_sogzsjua setEntryWidth (I)V
@@ -108,19 +136,28 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 			ARG 1 onPress
 			ARG 2 message
 	CLASS C_hsrdmghw AbstractEntry
+		METHOD m_opwjmivq (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_sedilmty;IIII)V
+			ARG 1 server
+		METHOD m_uldsupug (Lnet/minecraft/unmapped/C_sedilmty;IILnet/minecraft/unmapped/C_pwmwypfb;)V
+			ARG 4 server
 	CLASS C_nwsdpuom RealmEntryListWidget
 	CLASS C_oiabdumy RealmsRequest
 		METHOD request request (Lnet/minecraft/unmapped/C_ivysvyzf;)Ljava/lang/Object;
 			ARG 1 client
 	CLASS C_vsvjmdaq
 		FIELD f_qunatntl NOTIFICATION_COUNT_TEXTURES [Lnet/minecraft/unmapped/C_ncpywfca;
+		METHOD <init> (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_buwziidm$C_zlxjklbn;)V
+			ARG 1 message
+			ARG 2 texture
+			ARG 3 action
 	CLASS C_vvkxoqra RealmEntry
 		FIELD f_jfvtejrc SKIN_HEAD_LARGE_WIDTH I
-		FIELD f_qpfilxjr mServerData Lnet/minecraft/unmapped/C_pwmwypfb;
+		FIELD f_qpfilxjr serverData Lnet/minecraft/unmapped/C_pwmwypfb;
 		METHOD <init> (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_pwmwypfb;)V
-			ARG 2 serverData
+			ARG 2 server
 		METHOD m_ivipsczf onCreateRealmPress ()V
 		METHOD m_pyjwtyet onPlayButtonPress ()V
+		METHOD m_qkpvjvpb getServerData ()Lnet/minecraft/unmapped/C_pwmwypfb;
 	CLASS C_xxrzcqwc
 		METHOD run run ()V
 	CLASS C_zhiqacqy ButtonEntry
