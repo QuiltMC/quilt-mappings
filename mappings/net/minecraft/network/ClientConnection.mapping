@@ -12,6 +12,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_howpitdi NETWORK_PACKETS_MARKER Lorg/slf4j/Marker;
 	FIELD f_hudxxxbp CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_jrcdtkyf averagePacketsSent F
+	FIELD f_jtpabmmi performanceSampleLog Lnet/minecraft/unmapped/C_gxhfclcm;
 	FIELD f_kawdlrjp channel Lio/netty/channel/Channel;
 	FIELD f_lafevvyl queuedTasks Ljava/util/Queue;
 	FIELD f_lspmidtv LOGGER Lorg/slf4j/Logger;
@@ -32,6 +33,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		COMMENT <p>The formula is {@link #averagePacketsSent averagePacketsSent} = {@value}
 		COMMENT &times; {@link #packetsSentCounter packetsSentCounter} + (1 - {@value}) &times;
 		COMMENT {@code averagePacketsSent}.
+	FIELD f_zpzufgct HANDSHAKING Lnet/minecraft/unmapped/C_ppzmqyxe;
 	FIELD f_zrkidnxu packetsSentCounter I
 	METHOD <init> (Lnet/minecraft/unmapped/C_exeqxqdd;)V
 		ARG 1 side
@@ -69,6 +71,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_ejdecnhl addHandlers (Lio/netty/channel/ChannelPipeline;Lnet/minecraft/unmapped/C_exeqxqdd;Lnet/minecraft/unmapped/C_gxhfclcm;)V
 		ARG 0 pipeline
 		ARG 1 side
+		ARG 2 packetSizeHandler
 	METHOD m_faopouol flushInternal ()V
 	METHOD m_fqnxiapg submit (Ljava/util/function/Consumer;)V
 		ARG 1 task
@@ -76,6 +79,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 address
 		ARG 2 port
 		ARG 6 intent
+	METHOD m_hnclvsil getInboundHandlerConfig (Z)Ljava/lang/String;
+		ARG 0 receivingSide
 	METHOD m_honyjhko (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_jfnkfhlj addValidator (Lio/netty/channel/ChannelPipeline;Lnet/minecraft/unmapped/C_exeqxqdd;)V
@@ -89,8 +94,15 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		COMMENT sent by this connection.
 	METHOD m_kxmmachs setHandshakeListener (Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 1 listener
+	METHOD m_luuskhlm initPerformanceSampleLog (Lnet/minecraft/unmapped/C_fnzofwlw;)V
+		ARG 1 sampleLog
 	METHOD m_lyptmghi connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
+	METHOD m_mnslofbm (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
+		ARG 1 phase
+		ARG 2 listener
+	METHOD m_qjeqlspr (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
+		ARG 1 phase
 	METHOD m_qoorbrdh connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_nyzvjqyd;)V
 		ARG 1 address
 		ARG 2 port
@@ -105,6 +117,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 logIps
 	METHOD m_sigcqeza getAddress ()Ljava/net/SocketAddress;
 	METHOD m_sprgohsj flush ()V
+	METHOD m_ttkdcwpg getOutboundHandlerConfig (Z)Ljava/lang/String;
+		ARG 0 sendingSide
 	METHOD m_tulexlec tick ()V
 	METHOD m_uhgukhmf getAveragePacketsSent ()F
 	METHOD m_urabqmij isEncrypted ()Z
@@ -124,6 +138,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_vkqagjgi connect (Ljava/net/InetSocketAddress;ZLnet/minecraft/unmapped/C_fnzofwlw;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
 		ARG 1 useEpoll
+		ARG 2 performanceSampleLog
 	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
 		ARG 1 packet
 		ARG 2 listener
@@ -133,6 +148,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_xphjmqxa isOpen ()Z
+	METHOD m_yylgxjga addFlowControlHandler (Lio/netty/channel/ChannelPipeline;)V
+		ARG 1 pipeline
 	METHOD m_zbfykobd send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
 		ARG 1 packet
 		ARG 2 sendListener
@@ -142,4 +159,11 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		COMMENT by this connection.
 	CLASS C_eizoucfg
 		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
+			ARG 1 channel
+	CLASS C_qurkirxp
+		METHOD write (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;Lio/netty/channel/ChannelPromise;)V
+			ARG 1 context
+			ARG 3 promise
+	CLASS C_sggcdwlq
+		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
