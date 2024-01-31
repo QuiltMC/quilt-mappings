@@ -264,14 +264,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readPropertyMap()
 		COMMENT @see #writeProperty(Property)
 		ARG 1 propertyMap
-	METHOD m_aeyjpepw readUnlimitedText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-		COMMENT Reads a text from this buf, without limiting the max length of the JSON string
-		COMMENT it's represented by.
-		COMMENT
-		COMMENT @return the read text
-		COMMENT @see #writeText(Text)
-		COMMENT @see #MAX_TEXT_LENGTH
-		COMMENT @see #readUnlimitedText()
 	METHOD m_aiozlifw readRegistryKey ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_alotuvgi writeOptional (Ljava/util/Optional;Lnet/minecraft/unmapped/C_hiksfskl;)V
 		COMMENT Writes an optional value to this buf. An optional value is represented by
@@ -284,13 +276,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 2 object
 	METHOD m_appecnpy (Lio/netty/buffer/ByteBuf;)Lorg/joml/Quaternionf;
 		ARG 0 buf
-	METHOD m_axpttudp readNullable (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
-		COMMENT Reads a nullable value from this buf. A nullable value is represented by a
-		COMMENT boolean indicating if the value is present, followed by the value only if
-		COMMENT it's present.
-		COMMENT
-		COMMENT @return the read value, or null
-		COMMENT @see #writeNullable(Object, Writer)
 	METHOD m_bczcqhop writeString (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a string to this buf. A string is represented by a byte array of
 		COMMENT its UTF-8 data. That byte array can have a maximum length of
@@ -306,16 +291,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the string to write
 		ARG 2 maxLength
 			COMMENT the max length of the byte array
-	METHOD m_cmlzvtii readText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-		COMMENT Reads a text from this buf. A text is represented by a JSON string with
-		COMMENT max length {@value #MAX_TEXT_LENGTH}.
-		COMMENT
-		COMMENT @return the read text
-		COMMENT @throws io.netty.handler.codec.DecoderException if the JSON string read
-		COMMENT exceeds {@value #MAX_TEXT_LENGTH} in length
-		COMMENT @see #writeText(Text)
-		COMMENT @see #MAX_TEXT_LENGTH
-		COMMENT @see #readUnlimitedText()
 	METHOD m_cozckjjh (Lio/netty/buffer/ByteBuf;Lorg/joml/Vector3f;)V
 		ARG 0 buf
 	METHOD m_cqyrnsig readJson (Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
@@ -459,13 +434,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the list to write
 	METHOD m_icznxsji (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
-	METHOD m_itwwddfn writeNullable (Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
-		COMMENT Writes a nullable value to this buf. A nullable value is represented by a
-		COMMENT boolean indicating if the value is present, followed by the value only if
-		COMMENT it's present.
-		COMMENT
-		COMMENT @see #readNullable(Reader)
-		ARG 1 value
 	METHOD m_izfwnywx readUuid ()Ljava/util/UUID;
 	METHOD m_jntaktqt (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
@@ -599,14 +567,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @see #readGameProfile()
 		ARG 1 profile
-	METHOD m_qfjxezrl writeByteArray ([B)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes an array of primitive bytes to this buf. The array first has a
-		COMMENT var int indicating its length, followed by the actual bytes.
-		COMMENT
-		COMMENT @see #readByteArray()
-		COMMENT @return this buf, for chaining
-		ARG 1 array
-			COMMENT the array to write
 	METHOD m_qpcrbjwf readIntArray (I)[I
 		COMMENT Reads an array of primitive ints from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the var int entries. The array
@@ -882,17 +842,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeString(String, int)
 		ARG 1 string
 			COMMENT the string to write
-	METHOD m_zlshviwe writeText (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes a text to this buf. A text is represented by a JSON string with
-		COMMENT max length {@value #MAX_TEXT_LENGTH}.
-		COMMENT
-		COMMENT @return this buf, for chaining
-		COMMENT @throws io.netty.handler.codec.EncoderException if the JSON string
-		COMMENT written exceeds {@value #MAX_TEXT_LENGTH} in length
-		COMMENT @see #readText()
-		COMMENT @see #MAX_TEXT_LENGTH
-		ARG 1 text
-			COMMENT the text to write
 	METHOD m_zpmeltuk readByteArray ()[B
 		COMMENT Reads an array of primitive bytes from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the actual bytes. The array

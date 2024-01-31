@@ -6,7 +6,6 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 	FIELD f_bzsvwmpq jumpStrength F
 	FIELD f_cjthlgvf items Lnet/minecraft/unmapped/C_rsloiwzx;
 	FIELD f_cxooziyz EATING_FLAG I
-	FIELD f_drmwigvv ARMOR_INVENTORY_SLOT I
 	FIELD f_edcpbqlo sprintCounter I
 	FIELD f_etdluypy SADDLED_FLAG I
 	FIELD f_gdzbsaga eatingAnimationProgress F
@@ -39,10 +38,6 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 	METHOD m_begkskdk interactHorse (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 player
 		ARG 2 stack
-	METHOD m_btgeycjv hasArmorInSlot ()Z
-		COMMENT Whether this horse already has an item stack in its horse armor slot.
-		COMMENT
-		COMMENT @see #hasArmorSlot()
 	METHOD m_ccdflmtq getMinRearDelay ()I
 	METHOD m_cvbypqyf canBreed ()Z
 	METHOD m_czbjkona putPlayerOnBack (Lnet/minecraft/unmapped/C_jzrpycqo;)V
@@ -52,16 +47,9 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 		ARG 2 child
 	METHOD m_dvsjhdpy isWoodSoundGroup (Lnet/minecraft/unmapped/C_aevintex;)Z
 		ARG 1 group
-	METHOD m_dvzjlcqw tryApplyArmor (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;)V
-		ARG 1 player
 	METHOD m_egfguxbh rear ()V
 	METHOD m_enuwgjov setTame (Z)V
 		ARG 1 tame
-	METHOD m_fddewlyq isHorseArmor (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		COMMENT Whether the given item stack is valid for this horse's armor slot.
-		COMMENT
-		COMMENT @see #hasArmorSlot()
-		ARG 1 item
 	METHOD m_fewodyhu getRotationsFromRider (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_krlwdsom;
 		ARG 1 primaryPassenger
 	METHOD m_fntgsqxw addTemper (I)I
@@ -104,7 +92,6 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 	METHOD m_saoghlvq canRear ()Z
 	METHOD m_spsxznbg onChestedStatusChanged ()V
 	METHOD m_spuukbnf playJumpSound ()V
-	METHOD m_tqypfoqc updateSaddle ()V
 	METHOD m_tunrxouo wagTail ()V
 	METHOD m_tupzilkl bondWithPlayer (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		ARG 1 player
@@ -115,9 +102,6 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 		ARG 1 angry
 	METHOD m_wbgoobdc setTemper (I)V
 		ARG 1 temper
-	METHOD m_wusifldy createInventoryStackReference (ILjava/util/function/Predicate;)Lnet/minecraft/unmapped/C_xkkpnyvk;
-		ARG 1 slot
-		ARG 2 predicate
 	METHOD m_xcdgjriw getEatingGrassAnimationProgress (F)F
 		ARG 1 tickDelta
 	METHOD m_xwhupajn setBred (Z)V
@@ -127,16 +111,6 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 	METHOD m_ybupdvdi setEating ()V
 	METHOD m_yfyphuce getAngrySound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_yghrxdbt eatsGrass ()Z
-	METHOD m_ykhwtvdh hasArmorSlot ()Z
-		COMMENT Whether this horse has a slot for custom equipment besides a saddle.
-		COMMENT
-		COMMENT <p>In the item slot argument type, the slot is referred to as <code>
-		COMMENT horse.armor</code>. In this horse's screen, it appears in the middle of
-		COMMENT the left side, and right below the saddle slot if this horse has a saddle
-		COMMENT slot.
-		COMMENT
-		COMMENT <p>This is used by horse armors and llama carpets, but can be
-		COMMENT refitted to any purpose.
 	METHOD m_yukcocww getDismountLocation (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 dismountDirection
 		ARG 2 passenger
