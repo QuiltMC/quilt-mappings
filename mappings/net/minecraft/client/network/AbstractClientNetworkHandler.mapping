@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_xcfjcqcn net/minecraft/client/network/AbstractClientNetworkHandler
+	FIELD f_cxiqwwpi serverCookies Ljava/util/Map;
 	FIELD f_epofvvju serverInfo Lnet/minecraft/unmapped/C_xotldzgg;
 	FIELD f_ixguppmf connection Lnet/minecraft/unmapped/C_oasmcckk;
 	FIELD f_kjyjkrbj deferredPackets Ljava/util/List;
@@ -6,6 +7,8 @@ CLASS net/minecraft/unmapped/C_xcfjcqcn net/minecraft/client/network/AbstractCli
 	FIELD f_qcgabfsl CONNECTION_LOST Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ruhiglgi postDisconnectScreen Lnet/minecraft/unmapped/C_wrmtlwqx;
 	FIELD f_utwrhkbc telemetryManager Lnet/minecraft/unmapped/C_bfepxqwf;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_qqflkeyp;)V
+		ARG 3 connectionState
 	METHOD m_fhwlneml sendWhen (Lnet/minecraft/unmapped/C_zyjtrjrl;Ljava/util/function/BooleanSupplier;Ljava/time/Duration;)V
 		ARG 1 packet
 		ARG 2 sendCondition
@@ -17,10 +20,16 @@ CLASS net/minecraft/unmapped/C_xcfjcqcn net/minecraft/client/network/AbstractCli
 	METHOD m_lorzoqvg sendDeferredPackets ()V
 	METHOD m_pichzrup parseResourcePackUrl (Ljava/lang/String;)Ljava/net/URL;
 		ARG 0 url
+	METHOD m_uednupdt (Ljava/util/UUID;Ljava/net/URL;Ljava/lang/String;ZLnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_wrmtlwqx;
+		ARG 1 uuid
+		ARG 2 url
 	METHOD m_yevxfrxd send (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
+		ARG 1 packet
 	METHOD m_zsokzpat handleCustomPayload (Lnet/minecraft/unmapped/C_oqfbzhlw;)V
 		ARG 1 payload
 	METHOD m_zwgetqya createDisconnectScreen (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_wrmtlwqx;
 		ARG 1 reason
+	CLASS C_ovwzcfat
+		FIELD f_jlekrvky screen Lnet/minecraft/unmapped/C_wrmtlwqx;
 	CLASS C_qqkjxmmn DeferredPacket
 		COMMENT A packet which will not be sent until its {@code sendCondition} is satisfied.
