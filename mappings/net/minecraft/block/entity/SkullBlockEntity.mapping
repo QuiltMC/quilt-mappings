@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_vrhaavsg net/minecraft/block/entity/SkullBlockEntity
+	FIELD f_cylawnts NONNULL_EXECUTOR Ljava/util/concurrent/Executor;
 	FIELD f_fstdnzen powered Z
 	FIELD f_fwgdpesg owner Lcom/mojang/authlib/GameProfile;
 	FIELD f_hsmyslsr animationTicks I
@@ -10,13 +11,17 @@ CLASS net/minecraft/unmapped/C_vrhaavsg net/minecraft/block/entity/SkullBlockEnt
 	METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 pos
 		ARG 2 state
-	METHOD m_btgpxhvt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+	METHOD m_atwdezof (Ljava/lang/Runnable;)V
+		ARG 0 task
+	METHOD m_btgpxhvt resolveSkullOwner (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 0 nbt
-	METHOD m_ebobyxzo (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;)V
+	METHOD m_ebobyxzo resolveSkullOwner (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;)V
 		ARG 0 nbt
-	METHOD m_eoxjszqd (Ljava/lang/String;Lnet/minecraft/unmapped/C_vmxvaoqe;Ljava/util/function/BooleanSupplier;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 skullOwner
+	METHOD m_eoxjszqd fetchProfile (Ljava/lang/String;Lnet/minecraft/unmapped/C_vmxvaoqe;Ljava/util/function/BooleanSupplier;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 username
 		ARG 1 services
+		ARG 2 isCacheNull
 	METHOD m_fanntxcn getOwner ()Lcom/mojang/authlib/GameProfile;
 	METHOD m_flpykord setServices (Lnet/minecraft/unmapped/C_vmxvaoqe;Ljava/util/concurrent/Executor;)V
 		ARG 0 services
@@ -29,10 +34,16 @@ CLASS net/minecraft/unmapped/C_vrhaavsg net/minecraft/block/entity/SkullBlockEnt
 		ARG 1 tickDelta
 	METHOD m_qoowcevv (Ljava/util/function/BooleanSupplier;Lnet/minecraft/unmapped/C_vmxvaoqe;Ljava/util/Optional;)Ljava/util/Optional;
 		ARG 2 gameProfile
-	METHOD m_rrmjdeiy (Lnet/minecraft/unmapped/C_hhlwcnih;)Lcom/mojang/authlib/GameProfile;
+	METHOD m_rrmjdeiy getProfile (Lnet/minecraft/unmapped/C_hhlwcnih;)Lcom/mojang/authlib/GameProfile;
 		ARG 0 nbt
 	METHOD m_stbhfbap clientTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vrhaavsg;)V
 		ARG 3 skull
+	METHOD m_vsbyiyln fetchProfile (Ljava/lang/String;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 name
+	METHOD m_wfqfywws (Ljava/util/Optional;)V
+		ARG 1 profile
+	METHOD m_yahawkds (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;Ljava/util/Optional;)V
+		ARG 2 profile
 	METHOD m_yjhsliqo hasTextures (Lcom/mojang/authlib/GameProfile;)Z
 		ARG 0 gameProfile
 	METHOD m_yrfbflxq loadOwnerProperties ()V
