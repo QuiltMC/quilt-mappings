@@ -18,7 +18,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT  <td>{@link IntList}</td><td>{@link #readIntList()}</td><td>{@link #writeIntList(IntList)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
-	COMMENT  <td>{@code byte[]}</td><td>{@link #readByteArray()}</td><td>{@link #writeByteArray(byte[])}</td>
+	COMMENT  <td>{@code byte[]}</td><td>{@link #readByteArray()}</td><td></td>
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@code int[]}</td><td>{@link #readIntArray()}</td><td>{@link #writeIntArray(int[])}</td>
@@ -31,9 +31,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@link ChunkSectionPos}</td><td>{@link #readChunkSectionPos()}</td><td>{@link #writeChunkSectionPos(ChunkSectionPos)}</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT  <td>{@link Text}</td><td>{@link #readText()}</td><td>{@link #writeText(Text)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@link Enum}</td><td>{@link #readEnumConstant(Class)}</td><td>{@link #writeEnumConstant(Enum)}</td>
@@ -99,8 +96,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT written} in their string form.
 	FIELD f_xjiasaqf PUBLIC_KEY_SIZE I
 	FIELD f_zaehbsii MAX_TEXT_LENGTH I
-		COMMENT The maximum size, in terms of JSON string length, allowed of the text read by
-		COMMENT {@link #readText()} or written by {@link #writeText(Text)}.
 	METHOD <init> (Lio/netty/buffer/ByteBuf;)V
 		COMMENT Creates a packet byte buf that delegates its operations to the {@code
 		COMMENT parent} buf.
@@ -823,7 +818,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT has a length limit given by {@code maxSize}.
 		COMMENT
 		COMMENT @see #readByteArray()
-		COMMENT @see #writeByteArray(byte[])
 		COMMENT @return the read byte array
 		COMMENT @throws io.netty.handler.codec.DecoderException if the read array has a
 		COMMENT length over {@code maxSize}
@@ -848,7 +842,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT does not have a length limit.
 		COMMENT
 		COMMENT @see #readByteArray(int)
-		COMMENT @see #writeByteArray(byte[])
 		COMMENT @return the read byte array
 	METHOD m_zwzghkkq (Lnet/minecraft/unmapped/C_oivssbvb;Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
 		ARG 1 errorMessage

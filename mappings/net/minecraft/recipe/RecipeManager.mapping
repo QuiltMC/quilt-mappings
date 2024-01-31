@@ -35,6 +35,20 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 			COMMENT the input inventory
 		ARG 3 world
 			COMMENT the input world
+	METHOD m_hcqenhtt deserialize (Lnet/minecraft/unmapped/C_ncpywfca;Lcom/google/gson/JsonObject;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_dscbrwbj;
+		COMMENT Reads a recipe from a JSON object.
+		COMMENT
+		COMMENT @implNote Even though a recipe's {@linkplain Recipe#getSerializer() serializer}
+		COMMENT is stored in a {@code type} field in the JSON format and referred so in this
+		COMMENT method, its registry has key {@code minecraft:root/minecraft:recipe_serializer}
+		COMMENT and is thus named.
+		COMMENT
+		COMMENT @throws com.google.gson.JsonParseException if the recipe JSON is invalid
+		COMMENT @return the read recipe
+		ARG 0 id
+			COMMENT the recipe's ID
+		ARG 1 json
+			COMMENT the recipe JSON
 	METHOD m_hrukhdkd getAllMatches (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/List;
 		COMMENT Creates a list of all recipes of the given {@code type} that match the
 		COMMENT given {@code inventory} and {@code world}. The list is ordered by the
