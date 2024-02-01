@@ -75,9 +75,14 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_faopouol flushInternal ()V
 	METHOD m_fqnxiapg submit (Ljava/util/function/Consumer;)V
 		ARG 1 task
+	METHOD m_goioywdq (Lnet/minecraft/unmapped/C_xyumsucd;Lio/netty/channel/ChannelHandlerContext;)V
+		ARG 1 channelHandlerContext
 	METHOD m_gwpixgaq connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ifnchbtj;Lnet/minecraft/unmapped/C_uxoyljpb;)V
 		ARG 1 address
 		ARG 2 port
+		ARG 3 serverConnection
+		ARG 4 clientConnection
+		ARG 5 client
 		ARG 6 intent
 	METHOD m_hnclvsil getInboundHandlerConfig (Z)Ljava/lang/String;
 		ARG 0 receivingSide
@@ -94,14 +99,20 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		COMMENT sent by this connection.
 	METHOD m_kxmmachs setHandshakeListener (Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 1 listener
+	METHOD m_luflhjqj connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_jsvwwjov;)V
+		ARG 1 address
+		ARG 2 port
 	METHOD m_luuskhlm initPerformanceSampleLog (Lnet/minecraft/unmapped/C_pwpucsml;)V
 	METHOD m_lyptmghi connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
 	METHOD m_mnslofbm (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 1 phase
 		ARG 2 listener
+	METHOD m_qeznuhlz (ZLio/netty/channel/ChannelHandlerContext;)V
+		ARG 2 channelHandlerContext
 	METHOD m_qjeqlspr (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 1 phase
+		ARG 2 listener
 	METHOD m_qoorbrdh connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_nyzvjqyd;)V
 		ARG 1 address
 		ARG 2 port
@@ -114,6 +125,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 2 listener
 	METHOD m_rvagcspt getLoggableAddress (Z)Ljava/lang/String;
 		ARG 1 logIps
+	METHOD m_seunbusw (Lnet/minecraft/unmapped/C_iypsxyqr;Lio/netty/channel/ChannelHandlerContext;)V
+		ARG 1 channelHandlerContext
 	METHOD m_sigcqeza getAddress ()Ljava/net/SocketAddress;
 	METHOD m_sprgohsj flush ()V
 	METHOD m_ttkdcwpg getOutboundHandlerConfig (Z)Ljava/lang/String;
@@ -146,6 +159,12 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_xphjmqxa isOpen ()Z
+	METHOD m_xqhcjeev connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ifnchbtj;Z)V
+		ARG 1 address
+		ARG 2 port
+		ARG 3 serverConnection
+		ARG 4 clientConnection
+		ARG 5 client
 	METHOD m_yylgxjga addFlowControlHandler (Lio/netty/channel/ChannelPipeline;)V
 		ARG 1 pipeline
 	METHOD m_zbfykobd send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
