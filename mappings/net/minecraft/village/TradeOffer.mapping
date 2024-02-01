@@ -7,7 +7,9 @@ CLASS net/minecraft/unmapped/C_argwryfu net/minecraft/village/TradeOffer
 	FIELD f_lgvzktct demandBonus I
 	FIELD f_mgalkhcf maxUses I
 	FIELD f_orryzsqt merchantExperience I
+	FIELD f_qxgedhuk ignoreNbt Z
 	FIELD f_swwaavur specialPrice I
+	FIELD f_tjaybnuu PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_vcpzwcnv rewardingPlayerExperience Z
 	METHOD <init> (Lnet/minecraft/unmapped/C_argwryfu;)V
 		ARG 1 offer
@@ -47,6 +49,9 @@ CLASS net/minecraft/unmapped/C_argwryfu net/minecraft/village/TradeOffer
 	METHOD m_asyggsbs shouldRewardPlayerExperience ()Z
 		COMMENT Returns whether experience should be given to a player when
 		COMMENT they use this trade offer.
+	METHOD m_ckimwvin write (Lnet/minecraft/unmapped/C_bngyzsts;Lnet/minecraft/unmapped/C_argwryfu;)V
+		ARG 0 buf
+		ARG 1 offer
 	METHOD m_ddwttpmu resetUses ()V
 		COMMENT Resets the number of times this trade offer has been used.
 	METHOD m_fmnignmw getPriceMultiplier ()F
@@ -64,6 +69,9 @@ CLASS net/minecraft/unmapped/C_argwryfu net/minecraft/village/TradeOffer
 	METHOD m_jrpzwrcp depleteBuyItems (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 firstBuyStack
 		ARG 2 secondBuyStack
+	METHOD m_jwtgudye read (Lnet/minecraft/unmapped/C_bngyzsts;)Lnet/minecraft/unmapped/C_argwryfu;
+		ARG 0 buf
+	METHOD m_jxiehhbs shouldIgnoreNbt ()Z
 	METHOD m_kktwxkpz updateDemandBonus ()V
 		COMMENT Updates the demand bonus of this trade offer depending on its
 		COMMENT previous demand bonus, the number of times it has been used and
@@ -89,6 +97,7 @@ CLASS net/minecraft/unmapped/C_argwryfu net/minecraft/village/TradeOffer
 	METHOD m_netdstkk acceptsBuy (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Z)Z
 		ARG 0 given
 		ARG 1 sample
+		ARG 2 ignoreNbt
 	METHOD m_rfcgwqwz use ()V
 		COMMENT Increments the number of times this trade offer has been used.
 	METHOD m_rgdhugvk getUses ()I
