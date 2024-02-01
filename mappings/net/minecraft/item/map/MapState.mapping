@@ -47,11 +47,13 @@ CLASS net/minecraft/unmapped/C_nvpllgmg net/minecraft/item/map/MapState
 		ARG 1 showIcons
 		ARG 2 dimension
 	METHOD m_iiszqazf getPlayerMarkerPacket (Lnet/minecraft/unmapped/C_qqxyyzzm;Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_zyjtrjrl;
+		ARG 1 mapId
 		ARG 2 player
 	METHOD m_kpdzsvus getPlayerSyncData (Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_nvpllgmg$C_xlzqccwa;
 		ARG 1 player
 	METHOD m_kwgphzej fromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_nvpllgmg;
 		ARG 0 nbt
+		ARG 1 provider
 	METHOD m_laaivkum getMatchingMapPredicate (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/function/Predicate;
 		ARG 0 map
 	METHOD m_lropqhen markIconsDirty ()V
@@ -127,6 +129,7 @@ CLASS net/minecraft/unmapped/C_nvpllgmg net/minecraft/item/map/MapState
 		METHOD <init> (Lnet/minecraft/unmapped/C_nvpllgmg;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 			ARG 2 player
 		METHOD m_imwcnxuw getPacket (Lnet/minecraft/unmapped/C_qqxyyzzm;)Lnet/minecraft/unmapped/C_zyjtrjrl;
+			ARG 1 mapId
 		METHOD m_kzvvepxb markDirty (II)V
 			ARG 1 startX
 			ARG 2 startZ
@@ -137,6 +140,7 @@ CLASS net/minecraft/unmapped/C_nvpllgmg net/minecraft/item/map/MapState
 		FIELD f_fszlhajl height I
 		FIELD f_gqkxdszn colors [B
 		FIELD f_mvgeedzq width I
+		FIELD f_nkoevnxw PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 		FIELD f_pjlmhvsq startZ I
 		METHOD <init> (IIII[B)V
 			ARG 1 startX
@@ -146,3 +150,8 @@ CLASS net/minecraft/unmapped/C_nvpllgmg net/minecraft/item/map/MapState
 			ARG 5 colors
 		METHOD m_fclihvij setColorsTo (Lnet/minecraft/unmapped/C_nvpllgmg;)V
 			ARG 1 mapState
+		METHOD m_rpkebrem read (Lio/netty/buffer/ByteBuf;)Ljava/util/Optional;
+			ARG 0 buf
+		METHOD m_wtzdwnbe write (Lio/netty/buffer/ByteBuf;Ljava/util/Optional;)V
+			ARG 0 buf
+			ARG 1 updateData
