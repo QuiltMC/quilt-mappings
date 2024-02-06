@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_fkbelcxs net/minecraft/client/gui/screen/realms/R
 	FIELD f_bsgaeqld gameMode Lnet/minecraft/unmapped/C_lghcpyvl;
 	FIELD f_bwmqtifz commandBlocks Z
 	FIELD f_cejbnfuc nameEdit Lnet/minecraft/unmapped/C_vopzcnhf;
+	FIELD f_crjbizrf name Ljava/lang/String;
 	FIELD f_fmligpzc spawnProtection I
 	FIELD f_htwzwliq SPAWN_TOGGLE_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_iycehuji DEFAULT_GAME_MODE I
@@ -14,6 +15,7 @@ CLASS net/minecraft/unmapped/C_fkbelcxs net/minecraft/client/gui/screen/realms/R
 	FIELD f_pmrkroen column1_x I
 	FIELD f_rlvhdmgo spawnAnimals Z
 	FIELD f_sbfsrdvz worldType Lnet/minecraft/unmapped/C_pwmwypfb$C_ngehrxat;
+	FIELD f_slgxbztl defaultName Ljava/lang/String;
 	FIELD f_soiswjic spawnProtectionButton Lnet/minecraft/unmapped/C_fkbelcxs$C_lkicznwb;
 	FIELD f_stgibwhd SPAWN_PROTECTION Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_uzyfcyoy DIFFICULTIES Ljava/util/List;
@@ -30,6 +32,8 @@ CLASS net/minecraft/unmapped/C_fkbelcxs net/minecraft/client/gui/screen/realms/R
 	METHOD m_dcgyrquz (Lnet/minecraft/unmapped/C_ikfvpkkf;Lnet/minecraft/unmapped/C_lghcpyvl;)V
 		ARG 1 button
 		ARG 2 gameModeIndex
+	METHOD m_demjznbo (Ljava/util/function/Consumer;Z)V
+		ARG 2 confirmed
 	METHOD m_dhfeaafd saveSettings ()V
 	METHOD m_enomuxao (Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Boolean;)V
 		ARG 1 button
@@ -52,15 +56,23 @@ CLASS net/minecraft/unmapped/C_fkbelcxs net/minecraft/client/gui/screen/realms/R
 		ARG 2 fallbackIndex
 	METHOD m_moxrgfju (Ljava/lang/Boolean;)V
 		ARG 1 spawnAnimals
+	METHOD m_mylyevfw (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Boolean;)V
+		ARG 3 button
+		ARG 4 value
 	METHOD m_okeeljym (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_pfsxbqcf (Ljava/lang/Boolean;)V
 		ARG 1 spawnNpcs
 	METHOD m_rdlsnjut (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
+	METHOD m_rtmetkig setName (Ljava/lang/String;)V
+		ARG 1 name
 	METHOD m_tsnegvsx (Lnet/minecraft/unmapped/C_ikfvpkkf;Ljava/lang/Boolean;)V
 		ARG 1 button
 		ARG 2 commandBlocks
+	METHOD m_zekfapgn createToggleButtonCallback (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_hmzkrfiv;
+		ARG 1 confirmationText
+		ARG 2 applier
 	CLASS C_lkicznwb SettingsSlider
 		FIELD f_bfzxsniv max D
 		FIELD f_qqkeyefw min D
