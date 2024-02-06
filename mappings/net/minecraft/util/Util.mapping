@@ -63,7 +63,6 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 1 exceptionGetter
 	METHOD m_hnnezaif getMainWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_jsqsuqek (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
-		ARG 0 runnable
 	METHOD m_jxtdpimf getDownloadWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_jzncpgce getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
@@ -110,6 +109,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_nshqaczo next (Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 iterable
 		ARG 1 object
+	METHOD m_nwbatfgz (Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicInteger;Ljava/util/concurrent/ForkJoinPool;)Ljava/util/concurrent/ForkJoinWorkerThread;
+		ARG 2 pool
 	METHOD m_oaamqqhk attemptShutdown (Ljava/util/concurrent/ExecutorService;)V
 		ARG 0 service
 	METHOD m_oigccakw startTimerHack ()V
@@ -217,6 +218,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_zxlwmobp getRandom ([Ljava/lang/Object;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/lang/Object;
 		ARG 0 array
 		ARG 1 random
+	CLASS C_cyqlwwzq
+		METHOD run run ()V
 	CLASS C_etnademe
 		METHOD read read ()J
 	CLASS C_fqjbnqwz OperatingSystem
@@ -241,10 +244,14 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	CLASS C_nkazyyip
 		FIELD f_dixhweqx cache Ljava/util/Map;
 		METHOD apply apply (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 t
+			ARG 2 u
+		METHOD m_sdqdsriq (Ljava/util/function/BiFunction;Lcom/mojang/datafixers/util/Pair;)Ljava/lang/Object;
+			ARG 1 pair
 	CLASS C_qgeblktr
 		METHOD getAsBoolean getAsBoolean ()Z
 	CLASS C_qygfqbqw
-		METHOD onTermination (Ljava/lang/Throwable;)V
+		METHOD onTermination onTermination (Ljava/lang/Throwable;)V
 			ARG 1 throwable
 	CLASS C_tceggguc
 		FIELD f_boyitqoh cache Ljava/util/Map;
