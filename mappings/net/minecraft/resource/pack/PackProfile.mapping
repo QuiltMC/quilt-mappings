@@ -16,6 +16,17 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/PackProfile
 	METHOD m_ighpvmhu isPinned ()Z
 	METHOD m_imaaowzj createPack ()Lnet/minecraft/unmapped/C_tguinuvn;
 	METHOD m_jvtuqqod getCompatibility ()Lnet/minecraft/unmapped/C_pchdyjmm;
+	METHOD m_jzttceef of (Lnet/minecraft/unmapped/C_yebcvztn;Lnet/minecraft/unmapped/C_lvnjxuwi$C_dwhnbqlk;Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_yzksgymh;)Lnet/minecraft/unmapped/C_lvnjxuwi;
+		COMMENT Creates a resource pack profile from the given parameters.
+		COMMENT <p>
+		COMMENT Compared to calling the other {@code of} method, this utility method obtains the
+		COMMENT pack's metadata information from the pack created by the {@code packFactory}.
+		COMMENT If the created pack doesn't have metadata information, this method returns
+		COMMENT {@code null}.
+		COMMENT
+		COMMENT @return the created profile, or {@code null} if the pack's missing metadata
+		ARG 1 packFactory
+		ARG 2 type
 	METHOD m_kdcbkzcq getSource ()Lnet/minecraft/unmapped/C_evnnymfu;
 	METHOD m_nporsrud getRequestedFeatures ()Lnet/minecraft/unmapped/C_czxxrbcp;
 	METHOD m_pvddgias getDescription ()Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -28,6 +39,12 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/PackProfile
 	METHOD m_udfnquim getDisplayName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_vmckdhaa isAlwaysEnabled ()Z
 	CLASS C_dwhnbqlk PackFactory
+		METHOD m_juxacvht open (Lnet/minecraft/unmapped/C_yebcvztn;Lnet/minecraft/unmapped/C_lvnjxuwi$C_pqanagva;)Lnet/minecraft/unmapped/C_tguinuvn;
+			COMMENT Opens the primary resource pack and apply its overlays that support the current resource version.
+			COMMENT <p>
+			COMMENT In practice, this usually means wrapping the resource pack and its overlays in a {@link CompositeResourcePack}.
+		METHOD m_kokszcyq openPrimary (Lnet/minecraft/unmapped/C_yebcvztn;)Lnet/minecraft/unmapped/C_tguinuvn;
+			COMMENT Opens the primary resource pack only, without any overlays applied.
 	CLASS C_vcyazcku InsertionPosition
 		METHOD m_blrbakor insert (Ljava/util/List;Ljava/lang/Object;Ljava/util/function/Function;Z)I
 			ARG 1 items
