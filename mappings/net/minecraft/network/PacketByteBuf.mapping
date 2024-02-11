@@ -18,7 +18,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT  <td>{@link IntList}</td><td>{@link #readIntList()}</td><td>{@link #writeIntList(IntList)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
-	COMMENT  <td>{@code byte[]}</td><td>{@link #readByteArray()}</td><td>{@link #writeByteArray(byte[])}</td>
+	COMMENT  <td>{@code byte[]}</td><td>{@link #readByteArray()}</td><td></td>
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@code int[]}</td><td>{@link #readIntArray()}</td><td>{@link #writeIntArray(int[])}</td>
@@ -31,9 +31,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@link ChunkSectionPos}</td><td>{@link #readChunkSectionPos()}</td><td>{@link #writeChunkSectionPos(ChunkSectionPos)}</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT  <td>{@link Text}</td><td>{@link #readText()}</td><td>{@link #writeText(Text)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
 	COMMENT  <td>{@link Enum}</td><td>{@link #readEnumConstant(Class)}</td><td>{@link #writeEnumConstant(Enum)}</td>
@@ -99,8 +96,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT written} in their string form.
 	FIELD f_xjiasaqf PUBLIC_KEY_SIZE I
 	FIELD f_zaehbsii MAX_TEXT_LENGTH I
-		COMMENT The maximum size, in terms of JSON string length, allowed of the text read by
-		COMMENT {@link #readText()} or written by {@link #writeText(Text)}.
 	METHOD <init> (Lio/netty/buffer/ByteBuf;)V
 		COMMENT Creates a packet byte buf that delegates its operations to the {@code
 		COMMENT parent} buf.
@@ -240,6 +235,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD internalNioBuffer internalNioBuffer (II)Ljava/nio/ByteBuffer;
 		ARG 1 index
 		ARG 2 length
+	METHOD isContiguous isContiguous ()Z
 	METHOD isDirect isDirect ()Z
 	METHOD isReadOnly isReadOnly ()Z
 	METHOD isReadable isReadable ()Z
@@ -263,14 +259,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readPropertyMap()
 		COMMENT @see #writeProperty(Property)
 		ARG 1 propertyMap
-	METHOD m_aeyjpepw readUnlimitedText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-		COMMENT Reads a text from this buf, without limiting the max length of the JSON string
-		COMMENT it's represented by.
-		COMMENT
-		COMMENT @return the read text
-		COMMENT @see #writeText(Text)
-		COMMENT @see #MAX_TEXT_LENGTH
-		COMMENT @see #readUnlimitedText()
 	METHOD m_aiozlifw readRegistryKey ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_alotuvgi writeOptional (Ljava/util/Optional;Lnet/minecraft/unmapped/C_hiksfskl;)V
 		COMMENT Writes an optional value to this buf. An optional value is represented by
@@ -281,13 +269,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 value
 	METHOD m_amtujwvt (Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;)V
 		ARG 2 object
-	METHOD m_axpttudp readNullable (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
-		COMMENT Reads a nullable value from this buf. A nullable value is represented by a
-		COMMENT boolean indicating if the value is present, followed by the value only if
-		COMMENT it's present.
-		COMMENT
-		COMMENT @return the read value, or null
-		COMMENT @see #writeNullable(Object, Writer)
+	METHOD m_appecnpy (Lio/netty/buffer/ByteBuf;)Lorg/joml/Quaternionf;
+		ARG 0 buf
 	METHOD m_bczcqhop writeString (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a string to this buf. A string is represented by a byte array of
 		COMMENT its UTF-8 data. That byte array can have a maximum length of
@@ -303,16 +286,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the string to write
 		ARG 2 maxLength
 			COMMENT the max length of the byte array
-	METHOD m_cmlzvtii readText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-		COMMENT Reads a text from this buf. A text is represented by a JSON string with
-		COMMENT max length {@value #MAX_TEXT_LENGTH}.
-		COMMENT
-		COMMENT @return the read text
-		COMMENT @throws io.netty.handler.codec.DecoderException if the JSON string read
-		COMMENT exceeds {@value #MAX_TEXT_LENGTH} in length
-		COMMENT @see #writeText(Text)
-		COMMENT @see #MAX_TEXT_LENGTH
-		COMMENT @see #readUnlimitedText()
+	METHOD m_cozckjjh (Lio/netty/buffer/ByteBuf;Lorg/joml/Vector3f;)V
+		ARG 0 buf
 	METHOD m_cqyrnsig readJson (Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 		ARG 1 codec
 	METHOD m_cwtxzlod writeVec3d (Lnet/minecraft/unmapped/C_vgpupfxx;)V
@@ -345,6 +320,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @param <T> the list's entry type
 		COMMENT @return the read list
 		COMMENT @see #readCollection(IntFunction, Reader)
+	METHOD m_eaxeezjl writeNbt (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_idfydwco;
+		ARG 1 nbt
 	METHOD m_ebprrcum encode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes an object to this buf as a compound NBT with the given codec.
 		COMMENT
@@ -386,6 +363,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the read chunk section pos
 		COMMENT @see #writeChunkSectionPos(ChunkSectionPos)
+	METHOD m_fztuomot readPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_gnnqafau writeEnumConstant (Ljava/lang/Enum;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes an enum constant to this buf. An enum constant is represented
 		COMMENT by a var int indicating its ordinal.
@@ -426,6 +404,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @throws io.netty.handler.codec.DecoderException if the identifier's
 		COMMENT string form is longer than {@value #DEFAULT_MAX_STRING_LENGTH}
 		COMMENT @see #writeIdentifier(Identifier)
+	METHOD m_hpbnyaqq (Lio/netty/buffer/ByteBuf;Lorg/joml/Quaternionf;)V
+		ARG 0 buf
 	METHOD m_hudsjtrd writeVarLong (J)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a single var long to this buf.
 		COMMENT
@@ -449,13 +429,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the list to write
 	METHOD m_icznxsji (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
-	METHOD m_itwwddfn writeNullable (Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
-		COMMENT Writes a nullable value to this buf. A nullable value is represented by a
-		COMMENT boolean indicating if the value is present, followed by the value only if
-		COMMENT it's present.
-		COMMENT
-		COMMENT @see #readNullable(Reader)
-		ARG 1 value
+	METHOD m_izfwnywx readUuid ()Ljava/util/UUID;
 	METHOD m_jntaktqt (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
 	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/Object;
@@ -469,6 +443,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 2 codec
 			COMMENT the codec to decode the object
 		ARG 3 sizeTracker
+	METHOD m_jtoadldk writeNbt (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 0 buf
+		ARG 1 nbt
 	METHOD m_jyxjrtet writeDate (Ljava/util/Date;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a date to this buf. A date is represented by its time, a regular
 		COMMENT long.
@@ -488,6 +465,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readVarInt()
 		ARG 1 value
 			COMMENT the value to write
+	METHOD m_kjijcwgo (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 buf
 	METHOD m_kooigoir readInstant ()Ljava/time/Instant;
 		COMMENT Reads an instant from this buf. An instant is represented by a long indicating
 		COMMENT the instant epoch milliseconds.
@@ -520,6 +499,11 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_lnjgpfbn (Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;Ljava/lang/Object;)V
 		ARG 3 key
 		ARG 4 value
+	METHOD m_mafeqoqe (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
+		ARG 0 buf
+		ARG 1 nbtTagSizeTracker
+	METHOD m_mhlenoxy writePos (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 0 buf
 	METHOD m_minhepob readEither (Lnet/minecraft/unmapped/C_ajdohfrc;Lnet/minecraft/unmapped/C_ajdohfrc;)Lcom/mojang/datafixers/util/Either;
 		COMMENT Reads a value of two possible types, either left or right, from this buf.
 		COMMENT An Either value is represented by a boolean indicating whether to use the
@@ -529,6 +513,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @param <L> the left type
 		COMMENT @param <R> the right type
 		COMMENT @see #writeEither(Either, Writer, Writer)
+		ARG 1 leftReader
+		ARG 2 rightReader
 	METHOD m_mlaqlvff writeInstant (Ljava/time/Instant;)V
 		COMMENT Writes an instant to this buf. An instant is represented by a long indicating
 		COMMENT the instant epoch milliseconds.
@@ -544,6 +530,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return this buf, for chaining
 		ARG 1 array
 			COMMENT the array to write
+	METHOD m_ngzrehtb writeUuid (Lio/netty/buffer/ByteBuf;Ljava/util/UUID;)V
+		ARG 0 buf
 	METHOD m_nhmhnzug readBitSet (I)Ljava/util/BitSet;
 		ARG 1 bitSet
 	METHOD m_nhqatmjh writeJson (Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
@@ -574,14 +562,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @see #readGameProfile()
 		ARG 1 profile
-	METHOD m_qfjxezrl writeByteArray ([B)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes an array of primitive bytes to this buf. The array first has a
-		COMMENT var int indicating its length, followed by the actual bytes.
-		COMMENT
-		COMMENT @see #readByteArray()
-		COMMENT @return this buf, for chaining
-		ARG 1 array
-			COMMENT the array to write
 	METHOD m_qpcrbjwf readIntArray (I)[I
 		COMMENT Reads an array of primitive ints from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the var int entries. The array
@@ -628,6 +608,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @param <R> the right type
 		COMMENT @see #readEither(Reader, Reader)
 		ARG 1 either
+	METHOD m_rtpohocp writePos (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 0 buf
 	METHOD m_sevbbzdm readCollection (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Collection;
 		COMMENT Reads a collection from this buf. The collection is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
@@ -657,6 +639,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readChunkSectionPos()
 		ARG 1 pos
 			COMMENT the section position to write
+	METHOD m_ssdfjwgw writePos (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_idfydwco;
 	METHOD m_sulfwdjf readNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT Reads an NBT compound from this buf. The binary representation of NBT is
 		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If an NBT null is encountered,
@@ -727,6 +710,10 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return the read long array
 		ARG 1 toArray
 			COMMENT the array to reuse
+	METHOD m_vbjdgyoz (Lio/netty/buffer/ByteBuf;)Lorg/joml/Vector3f;
+		ARG 0 buf
+	METHOD m_vceclpms readUuid (Lio/netty/buffer/ByteBuf;)Ljava/util/UUID;
+		ARG 0 buf
 	METHOD m_vihbcqeq readIntList ()Lit/unimi/dsi/fastutil/ints/IntList;
 		COMMENT Reads a list of primitive ints from this buf. The ints are stored as var
 		COMMENT ints, with an extra var int in the beginning indicating the size.
@@ -778,6 +765,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_waiabpsw writeEnumSet (Ljava/util/EnumSet;Ljava/lang/Class;)V
 		ARG 1 set
 		ARG 2 enumClass
+	METHOD m_wqgdmkjs writeUuid (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_idfydwco;
 	METHOD m_wqpnnsca writeCollection (Ljava/util/Collection;Lnet/minecraft/unmapped/C_hiksfskl;)V
 		COMMENT Writes a collection to this buf. The collection is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
@@ -830,7 +818,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT has a length limit given by {@code maxSize}.
 		COMMENT
 		COMMENT @see #readByteArray()
-		COMMENT @see #writeByteArray(byte[])
 		COMMENT @return the read byte array
 		COMMENT @throws io.netty.handler.codec.DecoderException if the read array has a
 		COMMENT length over {@code maxSize}
@@ -849,30 +836,19 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeString(String, int)
 		ARG 1 string
 			COMMENT the string to write
-	METHOD m_zlshviwe writeText (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes a text to this buf. A text is represented by a JSON string with
-		COMMENT max length {@value #MAX_TEXT_LENGTH}.
-		COMMENT
-		COMMENT @return this buf, for chaining
-		COMMENT @throws io.netty.handler.codec.EncoderException if the JSON string
-		COMMENT written exceeds {@value #MAX_TEXT_LENGTH} in length
-		COMMENT @see #readText()
-		COMMENT @see #MAX_TEXT_LENGTH
-		ARG 1 text
-			COMMENT the text to write
 	METHOD m_zpmeltuk readByteArray ()[B
 		COMMENT Reads an array of primitive bytes from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the actual bytes. The array
 		COMMENT does not have a length limit.
 		COMMENT
 		COMMENT @see #readByteArray(int)
-		COMMENT @see #writeByteArray(byte[])
 		COMMENT @return the read byte array
 	METHOD m_zwzghkkq (Lnet/minecraft/unmapped/C_oivssbvb;Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
 		ARG 1 errorMessage
 	METHOD markReaderIndex markReaderIndex ()Lio/netty/buffer/ByteBuf;
 	METHOD markWriterIndex markWriterIndex ()Lio/netty/buffer/ByteBuf;
 	METHOD maxCapacity maxCapacity ()I
+	METHOD maxFastWritableBytes maxFastWritableBytes ()I
 	METHOD maxWritableBytes maxWritableBytes ()I
 	METHOD memoryAddress memoryAddress ()J
 	METHOD nioBuffer nioBuffer ()Ljava/nio/ByteBuffer;
