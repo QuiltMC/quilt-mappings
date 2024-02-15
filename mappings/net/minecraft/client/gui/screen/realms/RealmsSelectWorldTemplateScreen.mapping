@@ -3,13 +3,17 @@ CLASS net/minecraft/unmapped/C_snhgkfww net/minecraft/client/gui/screen/realms/R
 	FIELD f_bqkebdfv TRAILER_BUTTON_MESSAGE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_cmjjlevy warning [Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_crechwdi trailerButton Lnet/minecraft/unmapped/C_buwziidm;
+	FIELD f_ghjtcvco templateList Lnet/minecraft/unmapped/C_snhgkfww$C_lhhrrbjk;
 	FIELD f_gspdaqpw noTemplatesMessage Ljava/util/List;
 	FIELD f_hmajlgtg selectButton Lnet/minecraft/unmapped/C_buwziidm;
 	FIELD f_lbcgbxbq currentLink Ljava/lang/String;
+	FIELD f_leypshzg BUTTON_WIDTH I
 	FIELD f_lwtksedd callback Ljava/util/function/Consumer;
 	FIELD f_nbimklhc LOGGER Lorg/slf4j/Logger;
+	FIELD f_phfxupgb BUTTON_SPACING I
 	FIELD f_qnwiozww SELECT_BUTTON_MESSAGE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_qqhcqfyf worldType Lnet/minecraft/unmapped/C_pwmwypfb$C_ngehrxat;
+	FIELD f_uhrqppwq SLOT_FRAME_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_xcffhkun layout Lnet/minecraft/unmapped/C_cqroimpa;
 	FIELD f_znlbdojj publisherButton Lnet/minecraft/unmapped/C_buwziidm;
 	FIELD f_zyulfwrq selectedTemplate Lnet/minecraft/unmapped/C_bunsefgd;
@@ -29,6 +33,7 @@ CLASS net/minecraft/unmapped/C_snhgkfww net/minecraft/client/gui/screen/realms/R
 		ARG 2 x
 		ARG 3 y
 		ARG 4 messages
+	METHOD m_czhufoah getHeaderHeight ()I
 	METHOD m_dgdilwwd fetchWorldTemplates (Lnet/minecraft/unmapped/C_dxpgpqbw;Lnet/minecraft/unmapped/C_ivysvyzf;)Lcom/mojang/datafixers/util/Either;
 		ARG 1 templateList
 		ARG 2 realms
@@ -37,6 +42,8 @@ CLASS net/minecraft/unmapped/C_snhgkfww net/minecraft/client/gui/screen/realms/R
 	METHOD m_freieqju updateButtonStates ()V
 	METHOD m_ftfgplcs (Lnet/minecraft/unmapped/C_snhgkfww;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
 		ARG 1 widget
+	METHOD m_hdhpuydg (Lnet/minecraft/unmapped/C_dqfkpadj$C_ybeakzky;)I
+		ARG 1 segment
 	METHOD m_lgpvjbsf (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_lwdxonym onPublish ()V
@@ -47,15 +54,24 @@ CLASS net/minecraft/unmapped/C_snhgkfww net/minecraft/client/gui/screen/realms/R
 	METHOD m_vujbpsqv selectTemplate ()V
 	METHOD m_xswboqfn (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
+	CLASS C_lhhrrbjk WorldTemplateList
+		METHOD <init> (Lnet/minecraft/unmapped/C_snhgkfww;Ljava/lang/Iterable;)V
+			ARG 2 templates
+		METHOD m_brpgdbkq isEmpty ()Z
+		METHOD m_gnuobhcy addTemplate (Lnet/minecraft/unmapped/C_bunsefgd;)V
+		METHOD m_qgxomauh getTemplates ()Ljava/util/List;
+		METHOD m_vhwjgbtl (Lnet/minecraft/unmapped/C_snhgkfww$C_xxxtmdkl;)Lnet/minecraft/unmapped/C_bunsefgd;
+			ARG 0 entry
 	CLASS C_mplfdvxo
 		METHOD run run ()V
 	CLASS C_xxxtmdkl WorldTemplateObjectEntry
 		FIELD f_afaakhcg trailerButton Lnet/minecraft/unmapped/C_uucksmqv;
+		FIELD f_nqzvuvfg lastClickTime J
 		FIELD f_pheyltjv INFO_BUTTON_TEXTURES Lnet/minecraft/unmapped/C_fajlgudl;
-		FIELD f_rbplhdur mTemplate Lnet/minecraft/unmapped/C_bunsefgd;
+		FIELD f_rbplhdur template Lnet/minecraft/unmapped/C_bunsefgd;
 		FIELD f_rgazutol TRAILER_BUTTON_TEXTURES Lnet/minecraft/unmapped/C_fajlgudl;
 		FIELD f_suhuromj infoButton Lnet/minecraft/unmapped/C_uucksmqv;
-		FIELD f_vgaxupgk TRAILER_BUTTON_TEMPLATE Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_vgaxupgk TEMPLATE_TRAILER_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_vsqtgthb INFO_BUTTON_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 		METHOD <init> (Lnet/minecraft/unmapped/C_snhgkfww;Lnet/minecraft/unmapped/C_bunsefgd;)V
 			ARG 2 template
