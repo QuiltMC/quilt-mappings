@@ -1,8 +1,38 @@
 CLASS net/minecraft/unmapped/C_whfmirsi net/minecraft/client/gui/screen/realms/RealmsNotificationsScreen
+	FIELD f_ayzzdluh NEWS_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_iymbbtwm INVITE_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_lvbhqvqb hasUnseenNotifications Z
+	FIELD f_mrqrhkya dataListener Lnet/minecraft/unmapped/C_whfmirsi$C_karidune;
 	FIELD f_mzmklwkt hasUnreadNews Z
-	FIELD f_stmitskm numberOfPendingInvites I
+	FIELD f_ocegpgeu dataFetchListener Lnet/minecraft/unmapped/C_tfgqmjhb$C_zolmsrgs;
+	FIELD f_risujngp onlyNotificationsListener Lnet/minecraft/unmapped/C_whfmirsi$C_karidune;
+	FIELD f_rperyyhs UNSEEN_NOTIFICATION_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_stmitskm pendingInvitesCount I
+	FIELD f_wpfbphjt newsAndNotificationsListener Lnet/minecraft/unmapped/C_whfmirsi$C_karidune;
 	FIELD f_wvxtzuiy trialAvailable Z
 	FIELD f_xnscnlxs validClient Ljava/util/concurrent/CompletableFuture;
+	FIELD f_yhidvggc TRIAL_AVAILABLE_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	METHOD m_dfgriabo (Ljava/lang/Integer;)V
+		ARG 1 pendingInvitesCount
 	METHOD m_eihstwgk isTitleScreen ()Z
-	METHOD m_kzuryely shouldShowNotifications ()Z
+	METHOD m_guufnxia listenNotifications (Lnet/minecraft/unmapped/C_yyprjalz;Lnet/minecraft/unmapped/C_tfgqmjhb$C_zolmsrgs;)V
+		ARG 1 dataFetchers
+		ARG 2 listener
+	METHOD m_jwtrkimt (Lnet/minecraft/unmapped/C_aaohlqkp$C_pwjtucac;)Ljava/lang/Boolean;
+		ARG 0 error
+	METHOD m_kzuryely shouldShowNews ()Z
+	METHOD m_nbbxoisi (Lnet/minecraft/unmapped/C_yyprjalz;Lnet/minecraft/unmapped/C_gpedgsfu;)V
+		ARG 1 news
+	METHOD m_ovxolcsc (Ljava/util/List;)V
+		ARG 0 notifications
 	METHOD m_ozxqhojn drawIcons (Lnet/minecraft/unmapped/C_sedilmty;)V
+	METHOD m_qhprqvfq getDataListener ()Lnet/minecraft/unmapped/C_whfmirsi$C_karidune;
+	METHOD m_wocpnrwe (Ljava/lang/Boolean;)V
+		ARG 0 result
+	METHOD m_wxtdtdii listenInvitesAndNews (Lnet/minecraft/unmapped/C_yyprjalz;Lnet/minecraft/unmapped/C_tfgqmjhb$C_zolmsrgs;)V
+		ARG 1 dataFetcher
+		ARG 2 listener
+	CLASS C_karidune DataListener
+		METHOD m_hnzknymv hasExtraData ()Z
+		METHOD m_ngoewdzu listenData (Lnet/minecraft/unmapped/C_yyprjalz;)Lnet/minecraft/unmapped/C_tfgqmjhb$C_zolmsrgs;
+			ARG 1 dataFetchers
