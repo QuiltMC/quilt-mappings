@@ -1,10 +1,18 @@
 CLASS net/minecraft/unmapped/C_jpqqwpue net/minecraft/client/gui/screen/realms/RealmsResetWorldScreen
 	FIELD f_afqeglwi slot I
 	FIELD f_byxcutms INSPIRATION_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_cxpwfhia RESET_WORLD_WARNING Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_dbttgekm CREATE_REALM_SUBTITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_eaczsvng worldCreationTask Lnet/minecraft/unmapped/C_hspxlahv;
+	FIELD f_fizcwkxy CREATE_WORLD_SUBTITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_fvjmwyti RESET_WORLD_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_gvaomkif normalWorldTemplates Lnet/minecraft/unmapped/C_dxpgpqbw;
 	FIELD f_hgzjanfi SURVIVAL_SPAWN_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_hyssknyk WORLD_TEMPLATES Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_iipypboc INSPIRATION_WORLD_TEMPLATES Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_iswnymgz inspirationWorldTemplates Lnet/minecraft/unmapped/C_dxpgpqbw;
 	FIELD f_iyhlpxiu adventureWorldTemplates Lnet/minecraft/unmapped/C_dxpgpqbw;
+	FIELD f_jymkebek layout Lnet/minecraft/unmapped/C_cqroimpa;
 	FIELD f_lbvrntkm parent Lnet/minecraft/unmapped/C_wrmtlwqx;
 	FIELD f_oiyxedmc subtitleColor I
 	FIELD f_oljwvruw experienceWorldTemplates Lnet/minecraft/unmapped/C_dxpgpqbw;
@@ -12,16 +20,31 @@ CLASS net/minecraft/unmapped/C_jpqqwpue net/minecraft/client/gui/screen/realms/R
 	FIELD f_rkymuutr serverData Lnet/minecraft/unmapped/C_pwmwypfb;
 	FIELD f_sfxxvvgv UPLOAD_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_suveijsj subtitle Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_tapkiaxp CREATE_REALM Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_tgakxhiz EXPERIENCE_WORLD_TEMPLATES Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_trmmbooe ADVENTURE_WORLD_TEMPLATES Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_wzolaybz LOGGER Lorg/slf4j/Logger;
+	FIELD f_wzzsqiyl CREATING_WORLD Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_xdhjoftw taskTitle Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_xegietfk RESETTING_WORLD Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_xojthuxe NEW_WORLD_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_xwyhvsdq EXPERIENCE_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_yivxmovw resetCallback Ljava/lang/Runnable;
+	FIELD f_zenfhkdq CREATE_WORLD Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD <init> (Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_pwmwypfb;ILnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;ILnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_hspxlahv;Ljava/lang/Runnable;)V
+		ARG 4 title
 	METHOD m_bendzjoj (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_bqxubbxi onSelectWorldTemplate (Lnet/minecraft/unmapped/C_bunsefgd;)V
 		ARG 1 template
+	METHOD m_colxhfyf create (Lnet/minecraft/unmapped/C_wrmtlwqx;ILnet/minecraft/unmapped/C_pwmwypfb;Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_jpqqwpue;
+	METHOD m_cztdfsxh (Lnet/minecraft/unmapped/C_jpqqwpue;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
+		ARG 1 widget
+	METHOD m_fyxuttur runTasks (Lnet/minecraft/unmapped/C_oomisivy;)V
+		ARG 1 task
 	METHOD m_godhterv (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
+	METHOD m_jicjpfoi create (Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_hspxlahv;Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_jpqqwpue;
 	METHOD m_oavpeuwx (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_pkemekds (Lnet/minecraft/unmapped/C_buwziidm;)V
@@ -32,9 +55,14 @@ CLASS net/minecraft/unmapped/C_jpqqwpue net/minecraft/client/gui/screen/realms/R
 		ARG 1 button
 	METHOD m_rwjzxjka onResetNormalWorld (Lnet/minecraft/unmapped/C_bsvoqkvb;)V
 		ARG 1 info
+	METHOD m_uudnolas create (Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_pwmwypfb;Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_jpqqwpue;
 	METHOD m_uvqowjwl (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	CLASS C_awtthljb FrameButton
+		FIELD f_aoxmouyb FRAME_WIDTH I
+		FIELD f_brecvnkq TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+		FIELD f_lslcwfsf FRAME_SIZE I
+		FIELD f_mnoxasbj TEXTURE_SIZE I
 		FIELD f_waxodpaj image Lnet/minecraft/unmapped/C_ncpywfca;
 	CLASS C_dpfvrfoq
 		METHOD run run ()V
