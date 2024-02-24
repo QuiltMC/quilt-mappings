@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_hxzjzvro net/minecraft/entity/boss/dragon/EnderDragonFight
 	FIELD f_aqbmfegm crystals Ljava/util/List;
 	FIELD f_arhrijks AREA_TICKET_LEVEL I
+	FIELD f_bnqjwejj validPlayer Ljava/util/function/Predicate;
 	FIELD f_gpdnwquv world Lnet/minecraft/unmapped/C_bdwnwhiu;
 	FIELD f_guyeyjuy dragonKilled Z
 	FIELD f_hptqzozx GATEWAY_DISTANCE I
@@ -17,14 +18,21 @@ CLASS net/minecraft/unmapped/C_hxzjzvro net/minecraft/entity/boss/dragon/EnderDr
 	FIELD f_rwjglclv exitPortalLocation Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_smeanuag endPortalPattern Lnet/minecraft/unmapped/C_cgooxnaq;
 	FIELD f_swkloaoe endCrystalsAlive I
+	FIELD f_tcqxzkfm origin Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_ubefolbc doLegacyCheck Z
 	FIELD f_uuhsshrt crystalCountTimer I
+	FIELD f_vozrskjd skipChunksLoadedCheck Z
 	FIELD f_vpshgwjp gateways Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 	FIELD f_wjxdsjtq playerUpdateTimer I
 	FIELD f_xkcaplpq spawnStateTimer I
 	FIELD f_xxqubfnu dragonSpawnState Lnet/minecraft/unmapped/C_ubwoswoy;
 	FIELD f_ymkjvclv GATEWAY_COUNT I
+	METHOD <init> (Lnet/minecraft/unmapped/C_bdwnwhiu;JLnet/minecraft/unmapped/C_hxzjzvro$C_tunbvwoo;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 2 randomSeed
+		ARG 4 state
+		ARG 5 origin
 	METHOD m_bedwxlhk findEndPortal ()Lnet/minecraft/unmapped/C_cgooxnaq$C_nsqvhfir;
+	METHOD m_caaoxrzq clearGateways ()V
 	METHOD m_dfujlgkq tick ()V
 	METHOD m_dkwjfogr generateEndPortal (Z)V
 		ARG 1 previouslyKilled
@@ -39,6 +47,7 @@ CLASS net/minecraft/unmapped/C_hxzjzvro net/minecraft/entity/boss/dragon/EnderDr
 		ARG 1 dragon
 	METHOD m_ifpnrmna updateFight (Lnet/minecraft/unmapped/C_bsmypcfq;)V
 		ARG 1 dragon
+	METHOD m_kgnlaawg createState ()Lnet/minecraft/unmapped/C_hxzjzvro$C_tunbvwoo;
 	METHOD m_kijgsayl respawnDragon ()V
 	METHOD m_kpmmjgfp getDragonUuid ()Ljava/util/UUID;
 	METHOD m_lxgqgdqj createDragon ()Lnet/minecraft/unmapped/C_bsmypcfq;
@@ -48,12 +57,15 @@ CLASS net/minecraft/unmapped/C_hxzjzvro net/minecraft/entity/boss/dragon/EnderDr
 	METHOD m_rwtiksrm respawnDragon (Ljava/util/List;)V
 		ARG 1 crystals
 	METHOD m_scvcfqng checkDragonSeen ()V
+	METHOD m_trklmdhe (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)V
+		ARG 2 feature
 	METHOD m_tyuhxvkt hasPreviouslyKilled ()Z
 	METHOD m_uzglscsu crystalDestroyed (Lnet/minecraft/unmapped/C_akvrfxgg;Lnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 enderCrystal
 		ARG 2 source
 	METHOD m_uzlusufn setSpawnState (Lnet/minecraft/unmapped/C_ubwoswoy;)V
 		ARG 1 spawnState
+	METHOD m_vyjemojf setSkipChunksLoadedCheck ()V
 	CLASS C_tunbvwoo State
 		FIELD f_rimhawtz dragonUuid Ljava/util/Optional;
 		FIELD f_tepqsaqc DEFAULT Lnet/minecraft/unmapped/C_hxzjzvro$C_tunbvwoo;
