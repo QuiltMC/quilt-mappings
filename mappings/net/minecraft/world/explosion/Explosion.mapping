@@ -5,15 +5,28 @@ CLASS net/minecraft/unmapped/C_aahhrzpf net/minecraft/world/explosion/Explosion
 	FIELD f_fyfuqznk createFire Z
 	FIELD f_kwyrvmzu z D
 	FIELD f_ldasayda random Lnet/minecraft/unmapped/C_rlomrsco;
+	FIELD f_myjykbjv emitterParticle Lnet/minecraft/unmapped/C_nqucohct;
 	FIELD f_nfdacxse world Lnet/minecraft/unmapped/C_cdctfzbn;
 	FIELD f_niwlmbad x D
+	FIELD f_ojtzdxze soundEvent Lnet/minecraft/unmapped/C_cjzoxshv;
 	FIELD f_tjovbypl damageSource Lnet/minecraft/unmapped/C_sbxfkpyv;
 	FIELD f_wbrlvlio DEFAULT_BEHAVIOR Lnet/minecraft/unmapped/C_dmexlawk;
 	FIELD f_worknpnn y D
+	FIELD f_xbigvyvm particle Lnet/minecraft/unmapped/C_nqucohct;
 	FIELD f_xsxdhlzb power F
 	FIELD f_yrknfzdd entity Lnet/minecraft/unmapped/C_astfners;
 	FIELD f_zcwavomt destructionType Lnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;
 	FIELD f_zzlasfdu behavior Lnet/minecraft/unmapped/C_dmexlawk;
+	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_astfners;DDDFLjava/util/List;Lnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 2 entity
+		ARG 3 x
+		ARG 5 y
+		ARG 7 z
+		ARG 9 power
+		ARG 10 affectedBlocks
+		ARG 12 particle
+		ARG 13 emitterParticle
+		ARG 14 soundEvent
 	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_astfners;DDDFZLnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;)V
 		ARG 1 world
 		ARG 2 entity
@@ -33,22 +46,45 @@ CLASS net/minecraft/unmapped/C_aahhrzpf net/minecraft/world/explosion/Explosion
 		ARG 10 createFire
 		ARG 11 destructionType
 		ARG 12 affectedBlocks
+	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;DDDFZLnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 1 world
+		ARG 2 entity
+		ARG 3 damageSource
+		ARG 4 behavior
+		ARG 5 x
+		ARG 7 y
+		ARG 9 z
+		ARG 11 power
+		ARG 14 particle
+		ARG 15 emitterParticle
+		ARG 16 soundEvent
 	METHOD m_btdrawgr chooseBehavior (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_dmexlawk;
 		ARG 1 entity
 	METHOD m_dhpfcxja getEntity ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_ditilhwv clearAffectedBlocks ()V
+	METHOD m_gdcrqnny getParticle ()Lnet/minecraft/unmapped/C_nqucohct;
 	METHOD m_hyeznwfn getExposure (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;)F
 		ARG 0 source
 		ARG 1 entity
 	METHOD m_jgqsaodd getPosition ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_mxankppo getDamageSource (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_sbxfkpyv;
+		ARG 1 source
 	METHOD m_nbqwldyc getPower ()F
 	METHOD m_oiheoshm getCausingEntity ()Lnet/minecraft/unmapped/C_usxaxydn;
 	METHOD m_oivdgoim collectBlocksAndDamageEntities ()V
+	METHOD m_opijfldo getCausingEntity (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_usxaxydn;
+		ARG 0 source
 	METHOD m_ounmsbmr (Ljava/util/List;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 stack
+	METHOD m_oxcyztzx getEmitterParticle ()Lnet/minecraft/unmapped/C_nqucohct;
 	METHOD m_pjedevud getAffectedBlocks ()Ljava/util/List;
 	METHOD m_scvsetyy getAffectedPlayers ()Ljava/util/Map;
 	METHOD m_tcdjmset isDestructive ()Z
+	METHOD m_txuvunda getSoundEvent ()Lnet/minecraft/unmapped/C_cjzoxshv;
+	METHOD m_vcpjnikm mergeDrops (Ljava/util/List;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 0 existingDrops
+		ARG 1 drop
+	METHOD m_vsvasiko getDestructionType ()Lnet/minecraft/unmapped/C_aahhrzpf$C_bhnzljtn;
 	METHOD m_yxczltpy affectWorld (Z)V
 		ARG 1 particles
 			COMMENT whether this explosion should emit explosion or explosion emitter particles around the source of the explosion
