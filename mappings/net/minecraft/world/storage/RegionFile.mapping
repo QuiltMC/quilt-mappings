@@ -14,8 +14,21 @@ CLASS net/minecraft/unmapped/C_kykyawqb net/minecraft/world/storage/RegionFile
 	FIELD f_sidnvqle sectorData Ljava/nio/IntBuffer;
 	FIELD f_srhyfbtq SECTOR_INT_LIMIT I
 	FIELD f_torejiiv CHUNK_HEADER_SIZE I
+	FIELD f_ueduioyw path Ljava/nio/file/Path;
 	FIELD f_uzbltvoa EXTERNAL_STREAM_FLAG I
+	FIELD f_xepxlwml storageLocation Lnet/minecraft/unmapped/C_tzvgbkzf;
 	FIELD f_xggxxmgb outputChunkStreamVersion Lnet/minecraft/unmapped/C_jrihwgqn;
+	METHOD <init> (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;Ljava/nio/file/Path;Lnet/minecraft/unmapped/C_jrihwgqn;Z)V
+		ARG 1 storageLocation
+		ARG 2 path
+		ARG 3 directory
+		ARG 4 outputChunkStreamVersion
+		ARG 5 dsync
+	METHOD <init> (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;Ljava/nio/file/Path;Z)V
+		ARG 1 storageLocation
+		ARG 2 path
+		ARG 3 directory
+		ARG 4 dsync
 	METHOD close close ()V
 	METHOD m_abzgfeji getSectorData (Lnet/minecraft/unmapped/C_ynrszrtu;)I
 		ARG 1 pos
@@ -37,6 +50,7 @@ CLASS net/minecraft/unmapped/C_kykyawqb net/minecraft/world/storage/RegionFile
 		ARG 1 pos
 	METHOD m_hsrwnhct getSize (I)I
 		ARG 0 sectorData
+	METHOD m_inxcvyaw getPath ()Ljava/nio/file/Path;
 	METHOD m_isyqnhjt getExternalChunkPath (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/nio/file/Path;
 		ARG 1 chunkPos
 	METHOD m_jsumbmbn getChunkInputStream (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/io/DataInputStream;

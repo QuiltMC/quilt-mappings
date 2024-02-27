@@ -1,13 +1,20 @@
 CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 	FIELD f_aqzmpnqd upgradedChunkCount I
 	FIELD f_citxosrw keepUpgradingChunks Z
+	FIELD f_cpslsylz buffered Z
 	FIELD f_deqlyobn worlds Ljava/util/Set;
 	FIELD f_dzpntfoo totalChunkCount I
 	FIELD f_frolskzm eraseCache Z
+	FIELD f_gibhqwaa FINISHED_CHUNKS Lnet/minecraft/unmapped/C_npqneive;
 	FIELD f_hhfimkvd persistentStateManager Lnet/minecraft/unmapped/C_hsdphpvz;
+	FIELD f_hsjzkecg UPGRADING_ENTITIES Lnet/minecraft/unmapped/C_npqneive;
+	FIELD f_ibejvsgl totalRegionFileCount I
 	FIELD f_irolykku LOGGER Lorg/slf4j/Logger;
+	FIELD f_itsyqabx UPGRADING_POI Lnet/minecraft/unmapped/C_npqneive;
 	FIELD f_jtmnbhag dimensionProgress Lit/unimi/dsi/fastutil/objects/Reference2FloatMap;
 	FIELD f_nbwdozdh updateThread Ljava/lang/Thread;
+	FIELD f_ndykkudb FINISHED_POI Lnet/minecraft/unmapped/C_npqneive;
+	FIELD f_nnezkpjj registry Lnet/minecraft/unmapped/C_tqxyjqsk;
 	FIELD f_nxnlomkm UPDATE_THREAD_FACTORY Ljava/util/concurrent/ThreadFactory;
 	FIELD f_nzcxovsz NEW_PREFIX Ljava/lang/String;
 	FIELD f_ozofrqqg skippedChunkCount I
@@ -17,6 +24,14 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 	FIELD f_riylnter dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_uhbjghsq progress F
 	FIELD f_vkuqljbv status Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_waxkuxwz FINISHED_ENTITIES Lnet/minecraft/unmapped/C_npqneive;
+	FIELD f_zgbdxxsa UPGRADING_CHUNKS Lnet/minecraft/unmapped/C_npqneive;
+	METHOD <init> (Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_wqxmvzdq;ZZ)V
+		ARG 1 session
+		ARG 2 dataFixer
+		ARG 3 registryManager
+		ARG 4 eraseCache
+		ARG 5 buffered
 	METHOD m_bfxislhb getWorlds ()Ljava/util/Set;
 	METHOD m_cpnvjmte cancel ()V
 	METHOD m_ejyoaaiq isDone ()Z
@@ -26,8 +41,61 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 	METHOD m_mwciwufv getUpgradedChunkCount ()I
 	METHOD m_odmmiwiy getTotalChunkCount ()I
 	METHOD m_ptgwpfqg getProgress ()F
+	METHOD m_qltezbme newPath (Ljava/nio/file/Path;)Ljava/nio/file/Path;
+		ARG 0 path
 	METHOD m_qycehcat getStatus ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_ttzfkvij updateWorld ()V
 	METHOD m_xwtoipav (Ljava/lang/Thread;Ljava/lang/Throwable;)V
 		ARG 1 thread
 		ARG 2 throwable
+	CLASS C_adeqquth SimpleUpgrader
+		METHOD <init> (Lnet/minecraft/unmapped/C_jzcarjio;Lnet/minecraft/unmapped/C_ccrrfaqj;Ljava/lang/String;Lnet/minecraft/unmapped/C_npqneive;Lnet/minecraft/unmapped/C_npqneive;)V
+			ARG 2 dataFixType
+			ARG 3 name
+			ARG 4 runningText
+			ARG 5 finishedText
+		METHOD m_uduopfej upgrade (Lnet/minecraft/unmapped/C_gwzzviyw;Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
+			ARG 1 storageHandle
+			ARG 2 nbt
+	CLASS C_glywgfig DimensionUpgrades
+		FIELD f_bsdkbslm files Ljava/util/ListIterator;
+		FIELD f_lyzohflr dimensionKey Lnet/minecraft/unmapped/C_xhhleach;
+		FIELD f_vmpqbzkd storage Ljava/lang/Object;
+		METHOD m_htrlgdtk files ()Ljava/util/ListIterator;
+		METHOD m_ikzkkvld dimensionKey ()Lnet/minecraft/unmapped/C_xhhleach;
+		METHOD m_uxiftskh storage ()Ljava/lang/Object;
+	CLASS C_itdvsyqy Upgrader
+		FIELD f_htrsqjeu activeWriteTask Ljava/util/concurrent/CompletableFuture;
+		FIELD f_ixicfbbl storageLocationDiretoryName Ljava/lang/String;
+		FIELD f_rkcvpmgz finishedText Lnet/minecraft/unmapped/C_npqneive;
+		FIELD f_sfsmkgpy runningText Lnet/minecraft/unmapped/C_npqneive;
+		FIELD f_tfptrfsf storageLocationType Ljava/lang/String;
+		FIELD f_vywiwhgs dataFixType Lnet/minecraft/unmapped/C_ccrrfaqj;
+		METHOD <init> (Lnet/minecraft/unmapped/C_jzcarjio;Lnet/minecraft/unmapped/C_ccrrfaqj;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_npqneive;Lnet/minecraft/unmapped/C_npqneive;)V
+			ARG 2 dataFixType
+			ARG 3 storageLocationType
+			ARG 4 storageLocationDiretoryName
+			ARG 5 runningText
+			ARG 6 finishedText
+		METHOD m_dzhhhzbp getChunkUpgrades (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;)Ljava/util/ListIterator;
+			ARG 2 path
+		METHOD m_fldimjwd upgradeAll ()V
+		METHOD m_fqdxcpbl getStorageHandle (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;)Ljava/lang/AutoCloseable;
+			ARG 1 storageLocation
+			ARG 2 path
+		METHOD m_fyokhipm applyChanges (Lnet/minecraft/unmapped/C_kykyawqb;)V
+			ARG 1 regionFile
+		METHOD m_lhqivwal attemptUpgrade (Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/AutoCloseable;Lnet/minecraft/unmapped/C_ynrszrtu;)Z
+			ARG 2 object
+			ARG 3 chunkPos
+		METHOD m_lqesvzkq discoverChunkUpgrades (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;)Ljava/util/List;
+			ARG 0 storageLocation
+			ARG 1 path
+		METHOD m_rqoeibmv upgrade (Ljava/lang/AutoCloseable;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_xhhleach;)Z
+			ARG 1 chunkStorage
+			ARG 2 chunkPos
+		METHOD m_tkgcolez getDimensionUpgrades ()Ljava/util/List;
+	CLASS C_kxqvuzjo RegionFileChunkUpgrades
+	CLASS C_nzimilha WorldUpgrader
+	CLASS C_uqvgiflx EntityUpgrader
+	CLASS C_ygtlkebu POIUpgrader
