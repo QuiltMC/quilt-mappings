@@ -55,7 +55,7 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 			ARG 4 runningText
 			ARG 5 finishedText
 		METHOD m_uduopfej upgrade (Lnet/minecraft/unmapped/C_gwzzviyw;Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
-			ARG 1 storageHandle
+			ARG 1 storage
 			ARG 2 nbt
 	CLASS C_glywgfig DimensionUpgrades
 		FIELD f_bsdkbslm files Ljava/util/ListIterator;
@@ -66,21 +66,21 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 		METHOD m_uxiftskh storage ()Ljava/lang/Object;
 	CLASS C_itdvsyqy Upgrader
 		FIELD f_htrsqjeu activeWriteTask Ljava/util/concurrent/CompletableFuture;
-		FIELD f_ixicfbbl storageLocationDiretoryName Ljava/lang/String;
+		FIELD f_ixicfbbl storageDiretoryName Ljava/lang/String;
 		FIELD f_rkcvpmgz finishedText Lnet/minecraft/unmapped/C_npqneive;
 		FIELD f_sfsmkgpy runningText Lnet/minecraft/unmapped/C_npqneive;
-		FIELD f_tfptrfsf storageLocationType Ljava/lang/String;
+		FIELD f_tfptrfsf storageType Ljava/lang/String;
 		FIELD f_vywiwhgs dataFixType Lnet/minecraft/unmapped/C_ccrrfaqj;
 		METHOD <init> (Lnet/minecraft/unmapped/C_jzcarjio;Lnet/minecraft/unmapped/C_ccrrfaqj;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/unmapped/C_npqneive;Lnet/minecraft/unmapped/C_npqneive;)V
 			ARG 2 dataFixType
-			ARG 3 storageLocationType
-			ARG 4 storageLocationDiretoryName
+			ARG 3 storageType
+			ARG 4 storageDiretoryName
 			ARG 5 runningText
 			ARG 6 finishedText
 		METHOD m_dzhhhzbp getChunkUpgrades (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;)Ljava/util/ListIterator;
 			ARG 2 path
 		METHOD m_fldimjwd upgradeAll ()V
-		METHOD m_fqdxcpbl getStorageHandle (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;)Ljava/lang/AutoCloseable;
+		METHOD m_fqdxcpbl getRegionStorage (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;)Ljava/lang/AutoCloseable;
 			ARG 1 storageLocation
 			ARG 2 path
 		METHOD m_fyokhipm applyChanges (Lnet/minecraft/unmapped/C_kykyawqb;)V
@@ -96,6 +96,6 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 			ARG 2 chunkPos
 		METHOD m_tkgcolez getDimensionUpgrades ()Ljava/util/List;
 	CLASS C_kxqvuzjo RegionFileChunkUpgrades
-	CLASS C_nzimilha WorldUpgrader
+	CLASS C_nzimilha ChunkUpgrader
 	CLASS C_uqvgiflx EntityUpgrader
 	CLASS C_ygtlkebu POIUpgrader
