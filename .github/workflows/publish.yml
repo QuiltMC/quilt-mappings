@@ -24,12 +24,11 @@ jobs:
       # Generate the build number based on tags to allow per branch build numbers, not something github provides by default.
       - name: Generate build number
         id: buildnumber
-        uses: einaregilsson/build-number@v3
+        uses: onyxmueller/build-tag-number@v1
         with:
           token: ${{ secrets.github_token }}
-          prefix: ${{ github.ref }}
-
-      - run: ./gradlew build javadocJar publish --stacktrace
+          prefix: "build/${{ github.ref }}"
+      - run: ./gradlew build javadoc javadocJar publish --stacktrace
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -38,9 +37,9 @@ jobs:
           SNAPSHOTS_USERNAME: ${{ secrets.SNAPSHOTS_USERNAME }}
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
-      - name: Refresh Meta
-        uses: fjogeleit/http-request-action@master
+      - name: Update Quilt Meta
+        uses: quiltmc/update-quilt-meta@main
         with:
-          url: ${{ secrets.META_UPDATE_URL }}
-          method: 'GET'
-          preventFailureOnNoResponse: true
+          b2-key-id: ${{ secrets.META_B2_KEY_ID }}
+          b2-key: ${{ secrets.META_B2_KEY }}
+          cf-key: ${{ secrets.META_CF_KEY }}
