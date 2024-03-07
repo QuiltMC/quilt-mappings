@@ -16,11 +16,20 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 		ARG 4 dataFixer
 	METHOD m_acbaanbr create (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_bpwagnit;
 		ARG 0 path
+	METHOD m_anewxiun (Ljava/nio/file/Path;)Z
+		ARG 0 path
+	METHOD m_cycihmpm readNbt (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_ddtuooji getWorldSaveList ()Lnet/minecraft/unmapped/C_bpwagnit$C_aynhbbal;
+	METHOD m_debloqwb (Ljava/nio/file/Path;)Z
+		ARG 0 path
+	METHOD m_hbzcibdu getLastModified (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;)J
 	METHOD m_hqcuaqjn getEnabledFeatures (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_czxxrbcp;
 	METHOD m_hzomuijm getSymlinkValidator ()Lnet/minecraft/unmapped/C_jgxjjhjn;
+	METHOD m_itogwxmw readWorldGenSettings (Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;)Lcom/mojang/serialization/Dynamic;
 	METHOD m_kbwceymw loadCompactWorldData (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 0 path
+	METHOD m_mcpdpjml readSummary (Lcom/mojang/serialization/Dynamic;Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;Z)Lnet/minecraft/unmapped/C_wfuumzdp;
+		ARG 3 locked
 	METHOD m_mglixzcz createUncheckedSession (Ljava/lang/String;)Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;
 		COMMENT Creates a session without verifying symlinks.
 		ARG 1 name
@@ -30,6 +39,7 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 		ARG 1 packManager
 		ARG 2 safeMode
 	METHOD m_ovbzmrty getCurrentVersion ()I
+	METHOD m_pfuopsyy getLastModified (Ljava/nio/file/Path;)Ljava/time/Instant;
 	METHOD m_pxqlqsgm getBackupsDirectory ()Ljava/nio/file/Path;
 	METHOD m_tcjbtdab isWorldNameValid (Ljava/lang/String;)Z
 		ARG 1 name
@@ -44,6 +54,8 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 	METHOD m_xvdymvqq getFormatName ()Ljava/lang/String;
 	METHOD m_yekueuyb getSymlinkValidator (Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_jgxjjhjn;
 		ARG 0 file
+	METHOD m_yitrotqh (Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;)Z
+		ARG 0 worldDirectory
 	CLASS C_aynhbbal WorldList
 		FIELD f_yifrugyf worldSaves Ljava/util/List;
 		METHOD <init> (Ljava/util/List;)V
@@ -63,12 +75,15 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 		METHOD close close ()V
 		METHOD m_amukkubj checkValid ()V
 		METHOD m_bripcmby createSaveHandler ()Lnet/minecraft/unmapped/C_wnawwdpy;
+		METHOD m_cezgdkva saveLevelDat (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		METHOD m_frlakpac getIconFile ()Ljava/util/Optional;
 		METHOD m_gdygeqrw getDirectory (Lnet/minecraft/unmapped/C_ldtdvgrs;)Ljava/nio/file/Path;
 			ARG 1 savePath
 		METHOD m_kytlqtwd getDirectoryName ()Ljava/lang/String;
 		METHOD m_ltpgwzhg save (Ljava/lang/String;)V
 			ARG 1 name
+		METHOD m_nbggcwld editLevelDat (Ljava/util/function/Consumer;)V
+			ARG 1 editor
 		METHOD m_nrokxxpv createBackup ()J
 		METHOD m_nywumhbl backupLevelDataFile (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jkevluio;Lnet/minecraft/unmapped/C_hhlwcnih;)V
 			ARG 1 registryManager
@@ -79,8 +94,11 @@ CLASS net/minecraft/unmapped/C_bpwagnit net/minecraft/world/storage/WorldSaveSto
 			ARG 2 saveProperties
 		METHOD m_qlhjzadq getWorldSaveSummary (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_wfuumzdp;
 		METHOD m_tymqntik deleteSessionLock ()V
+		METHOD m_ucocnqxl getStorage ()Lnet/minecraft/unmapped/C_bpwagnit;
 		METHOD m_vbnwdyms getWorldDirectory (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/nio/file/Path;
 			ARG 1 key
+		METHOD m_wcmaksro getDirectory ()Lnet/minecraft/unmapped/C_bpwagnit$C_wxntpspm;
+		METHOD m_ydxwmjrn getLastModified (Z)Ljava/time/Instant;
 		CLASS C_broyznts
 			METHOD postVisitDirectory postVisitDirectory (Ljava/lang/Object;Ljava/io/IOException;)Ljava/nio/file/FileVisitResult;
 				ARG 1 path

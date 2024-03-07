@@ -3,10 +3,19 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 	FIELD f_bwcnjgqz preloadedChunks Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_kjhqnjbr MAX_VILLAGE_DISTANCE I
 	FIELD f_zaepnyld VILLAGE_SECTION_SIZE I
+	METHOD <init> (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;Lcom/mojang/datafixers/DataFixer;ZLnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_qpninoyb;)V
+		ARG 1 storageInfo
+		ARG 2 directory
+		ARG 3 dataFixer
+		ARG 4 dsync
+		ARG 5 registryManager
+		ARG 6 world
 	METHOD m_afhakdbq (Lnet/minecraft/unmapped/C_aurosfgf;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_hdurmsnk;)V
 		ARG 3 set
 	METHOD m_agkornyv getType (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
 		ARG 1 pos
+	METHOD m_bnugafgz getNearestPos (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/Optional;
+		ARG 2 posPredicate
 	METHOD m_dsxxnxyk getInCircle (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/stream/Stream;
 		ARG 1 typePredicate
 		ARG 2 pos
@@ -14,6 +23,9 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 		ARG 4 occupationStatus
 	METHOD m_evxnnkpe getDistanceFromNearestOccupied (Lnet/minecraft/unmapped/C_zubvmeye;)I
 		ARG 1 pos
+	METHOD m_ewsshoyd getFreeChunkTicketsAt (Lnet/minecraft/unmapped/C_hynzadkk;)I
+	METHOD m_fcmsgafb getTypesAndPositionsInCircleSorted (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/stream/Stream;
+		ARG 2 posPredicate
 	METHOD m_ffztljrx getPosition (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/Optional;
 		ARG 1 typePredicate
 		ARG 2 posPredicate
@@ -21,6 +33,7 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 		ARG 4 radius
 		ARG 5 occupationStatus
 	METHOD m_flhvikjr getInChunk (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/stream/Stream;
+		ARG 1 typePredicate
 		ARG 2 chunkPos
 		ARG 3 occupationStatus
 	METHOD m_hlfacbyy scanAndPopulate (Lnet/minecraft/unmapped/C_aurosfgf;Lnet/minecraft/unmapped/C_zubvmeye;Ljava/util/function/BiConsumer;)V
@@ -66,9 +79,13 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 			COMMENT the radius in blocks
 	METHOD m_qvdigcdn remove (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
+	METHOD m_rsbvkuag getTypesAndPositionsInCircle (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/stream/Stream;
+		ARG 1 typePredicate
+		ARG 2 posPredicate
 	METHOD m_safkagzh shouldScan (Lnet/minecraft/unmapped/C_aurosfgf;)Z
 		ARG 0 section
 	METHOD m_ssqvzvty hasTypeAt (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		ARG 1 registryKey
 		ARG 2 pos
 	METHOD m_tjmtajvw getPosition (Ljava/util/function/Predicate;Ljava/util/function/BiPredicate;Lnet/minecraft/unmapped/C_hynzadkk;I)Ljava/util/Optional;
 		ARG 1 typePredicate
@@ -89,6 +106,7 @@ CLASS net/minecraft/unmapped/C_uegwgivt net/minecraft/world/poi/PointOfInterestS
 		ARG 1 pos
 	METHOD m_zjhmevdx isOccupied (J)Z
 		ARG 1 pos
+	METHOD m_zwfcqkjd getNearestTypeAndPosition (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_uegwgivt$C_dzezdmdw;)Ljava/util/Optional;
 	CLASS C_dzezdmdw OccupationStatus
 		FIELD f_obwtwhau predicate Ljava/util/function/Predicate;
 		METHOD <init> (Ljava/lang/String;ILjava/util/function/Predicate;)V
