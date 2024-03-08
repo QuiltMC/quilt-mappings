@@ -3,15 +3,14 @@ CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAtt
 	FIELD f_aekcslxq baseValue D
 	FIELD f_axpfwlpj idToModifiers Ljava/util/Map;
 	FIELD f_hbhcmses value D
-	FIELD f_kbiwugqb persistentModifiers Ljava/util/Set;
+	FIELD f_kbiwugqb persistentModifiers Ljava/util/Map;
 	FIELD f_liwslfna dirty Z
 	FIELD f_mlqjboam type Lnet/minecraft/unmapped/C_cjzoxshv;
 	FIELD f_obppmvpj updateCallback Ljava/util/function/Consumer;
 	FIELD f_ybqmfnir operationToModifiers Ljava/util/Map;
 	METHOD m_ardmyaxt toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
-	METHOD m_bsifaddn (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;Ljava/util/Set;)V
+	METHOD m_bsifaddn (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;Ljava/util/Map;)V
 		ARG 1 operation
-		ARG 2 modifiers
 	METHOD m_butflrhp tryRemoveModifier (Ljava/util/UUID;)Z
 		ARG 1 uuid
 	METHOD m_gbtcpwti hasModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)Z
@@ -27,8 +26,6 @@ CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAtt
 	METHOD m_jtbrfpgz getBaseValue ()D
 		COMMENT Gets the base value of this attribute instance.
 		COMMENT This is the value before any attribute modifiers are applied.
-	METHOD m_kinpuhoz getModifiers (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Set;
-		ARG 1 operation
 	METHOD m_ljjavjgr addPersistentModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)V
 		ARG 1 modifier
 	METHOD m_mgkvtsyq clearModifiers ()V
@@ -37,9 +34,9 @@ CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAtt
 		COMMENT Computes this attribute's value, taking modifiers into account.
 		COMMENT
 		COMMENT <p>Attribute modifiers are applied in order by operation:
-		COMMENT <ul><li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#ADDITION ADDITION} // Adds the value of the modifier to the attribute's base value.</li>
-		COMMENT <li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#MULTIPLY_BASE MULTIPLY_BASE} // Multiplies the value of the modifier to the attributes base value, and then adds it to the total value.</li>
-		COMMENT <li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#MULTIPLY_TOTAL MULTIPLY_TOTAL} // Adds 1 to the value of the attribute modifier. Then multiplies the attribute's value by the total value of the attribute after addition and multiplication of the base value occur.</li>
+		COMMENT <ul><li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#ADD_VALUE ADDITION} // Adds the value of the modifier to the attribute's base value.</li>
+		COMMENT <li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#ADD_MULTIPLIED_BASE MULTIPLY_BASE} // Multiplies the value of the modifier to the attributes base value, and then adds it to the total value.</li>
+		COMMENT <li>{@link net.minecraft.entity.attribute.EntityAttributeModifier.Operation#ADD_MULTIPLIED_TOTAL MULTIPLY_TOTAL} // Adds 1 to the value of the attribute modifier. Then multiplies the attribute's value by the total value of the attribute after addition and multiplication of the base value occur.</li>
 		COMMENT </ul>
 	METHOD m_ojdeprdt getModifiersByOperation (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Collection;
 		ARG 1 operation
@@ -58,6 +55,6 @@ CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAtt
 		ARG 1 modifier
 	METHOD m_vvbgjynt removeModifier (Ljava/util/UUID;)V
 		ARG 1 uuid
-	METHOD m_xdafakih (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Set;
+	METHOD m_xdafakih (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Map;
 		ARG 0 operation
 	METHOD m_zxnpgjts getValue ()D

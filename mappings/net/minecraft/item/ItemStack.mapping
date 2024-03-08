@@ -5,7 +5,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	COMMENT
 	COMMENT <h3>NBT serialization</h3>
 	COMMENT
-	COMMENT An Item Stack can be serialized with {@link #writeNbt(NbtCompound)}, and deserialized with {@link #fromNbt(NbtCompound)}.
+	COMMENT An Item Stack can be serialized with <i>method lost</i>, and deserialized with <i>method lost</i>.
 	COMMENT
 	COMMENT <div class="quilt">
 	COMMENT <table border=1>
@@ -33,81 +33,16 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	COMMENT <p>
 	COMMENT Various methods are available to interact with the custom NBT, some methods might refer to a "sub NBT",
 	COMMENT a sub NBT is a child element of the custom NBT.
-	COMMENT
-	COMMENT <div class="quilt">
-	COMMENT <table border=1>
-	COMMENT <caption>Custom NBT operations</caption>
-	COMMENT <tr>
-	COMMENT   <th>Category</th><th>Method</th><th>Summary</th>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Custom NBT</td><td>{@link #hasNbt()}</td><td>Returns whether the item stack has custom NBT.</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Custom NBT</td><td>{@link #getNbt()}</td><td>Returns the custom NBT of the item stack.</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Custom NBT</td><td>{@link #getOrCreateNbt()}</td><td>Returns the custom NBT of the item stack, or creates one if absent.</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Custom NBT</td><td>{@link #setNbt(NbtCompound)}</td><td>Sets the custom NBT of the item stack.</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Sub Custom NBT</td><td>{@link #getSubNbt(String)}</td><td>Returns the sub NBT compound at the specified key.</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Sub Custom NBT</td><td>{@link #getOrCreateSubNbt(String)}</td><td>Returns the sub NBT compound at the specified key, or create one if absent.</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Sub Custom NBT</td><td>{@link #removeSubNbt(String)}</td><td>Removes the sub NBT element at the specified key.</td>
-	COMMENT </tr>
-	COMMENT <tr>
-	COMMENT   <td>Sub Custom NBT</td><td>{@link #setSubNbt(String, NbtElement)}</td><td>Sets the sub NBT element at the specified key.</td>
-	COMMENT </tr>
-	COMMENT </table>
-	COMMENT </div>
-	FIELD f_aasxeeyb NON_AIR_CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_beccreye NAME_KEY Ljava/lang/String;
-		COMMENT The key of the item stack's name in the {@linkplain #DISPLAY_KEY display NBT}, whose value is {@value}.
+	COMMENT <p>
+	COMMENT Custom NBT data needs to be re-evaluated as of the changes in 24w09a.
 	FIELD f_bnghiwgu PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
-	FIELD f_cjxcfrfc COLOR_KEY Ljava/lang/String;
-		COMMENT The key of the item's color in the {@linkplain #DISPLAY_KEY display NBT}, whose value is {@value}.
 	FIELD f_eqmyksbs item Lnet/minecraft/unmapped/C_vorddnax;
-	FIELD f_evsavsua UNBREAKABLE_KEY Ljava/lang/String;
-		COMMENT The key of the unbreakable boolean in an item stack's custom NBT, whose value is {@value}.
-	FIELD f_hydsywhw DAMAGE_KEY Ljava/lang/String;
-		COMMENT The key of the damage in an item stack's custom NBT, whose value is {@value}.
-	FIELD f_ibxmvtyb MODIFIER_FORMAT Ljava/text/DecimalFormat;
-	FIELD f_jerhzvta CAN_PLACE_ON_KEY Ljava/lang/String;
-	FIELD f_jewrbgks CAN_DESTROY_KEY Ljava/lang/String;
-	FIELD f_jzbuezyw DISPLAY_KEY Ljava/lang/String;
-		COMMENT The key of the display NBT in an item stack's custom NBT, whose value is {@value}.
 	FIELD f_llcklqth count I
-	FIELD f_lnhsxpyy REPAIR_COST_KEY Ljava/lang/String;
-		COMMENT The key of the repair cost in an item stack's custom NBT, whose value is {@value}.
 	FIELD f_lrxqoedj EMPTY Lnet/minecraft/unmapped/C_sddaxwyk;
-	FIELD f_luweqvhq CUTTING_RECIPE_RESULT_CODEC Lcom/mojang/serialization/MapCodec;
 	FIELD f_lxaedfnb cooldown I
 	FIELD f_ohakxxel LOGGER Lorg/slf4j/Logger;
-	FIELD f_pyxekhhy canDestroyPredicate Lnet/minecraft/unmapped/C_uukjtqzj;
-	FIELD f_qlhuxehe RECIPE_RESULT_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_qqkxjbjo NON_AIR_ITEM_CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_sjjnjocp VISIBLE_TOOLTIP_FLAG_VALUE I
-	FIELD f_swhvebgo ADVANCEMENT_DISPLAY_CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_tkksfouf HIDE_FLAGS_KEY Ljava/lang/String;
 	FIELD f_tqvryqzt CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_tvtqdaiy LORE_KEY Ljava/lang/String;
-		COMMENT The key of the item stack's lore in the {@linkplain #DISPLAY_KEY display NBT}, whose value is {@value}.
-	FIELD f_ucjiedhk canPlaceOnPredicate Lnet/minecraft/unmapped/C_uukjtqzj;
-	FIELD f_udcocifq ENCHANTMENTS_KEY Ljava/lang/String;
-		COMMENT The key of the enchantments in an item stack's custom NBT, whose value is {@value}.
-	FIELD f_vctnyloy LORE_STYLE Lnet/minecraft/unmapped/C_cpwnhism;
-	FIELD f_vfgrucdp nbt Lnet/minecraft/unmapped/C_hhlwcnih;
-		COMMENT Repesents the item stack's custom NBT.
-		COMMENT <p>
-		COMMENT Stored at the key {@code tag} in the serialized item stack NBT.
-		COMMENT
-		COMMENT @see <a href="nbt-operations">Item Stack NBT Operations</a>
 	FIELD f_ygsunlnh DISABLED Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_zbdizxtz holder Lnet/minecraft/unmapped/C_astfners;
 	METHOD <init> (Ljava/lang/Void;)V
@@ -117,33 +52,12 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;I)V
 		ARG 1 item
 		ARG 2 count
-	METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;ILjava/util/Optional;)V
-		ARG 1 item
-		ARG 2 count
-		ARG 3 nbt
 	METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;)V
 		ARG 1 item
 	METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;I)V
 		ARG 1 item
 		ARG 2 count
-	METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
-		ARG 1 nbt
-	METHOD m_aagwvrti setNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
-		COMMENT Sets the custom NBT of this item stack.
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-		ARG 1 nbt
-			COMMENT the custom NBT compound, may be {@code null} to reset
-	METHOD m_afvbohjf getAttributeModifiers (Lnet/minecraft/unmapped/C_yuycoehb;)Lcom/google/common/collect/Multimap;
-		ARG 1 slot
-	METHOD m_aowgnagv parseBlockTag (Ljava/lang/String;)Ljava/util/Collection;
-		ARG 0 tag
-	METHOD m_ardanyfx canPlaceOn (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_gogfiawf;)Z
-		ARG 1 blockRegistry
-		ARG 2 pos
 	METHOD m_arqkxkec getDamage ()I
-	METHOD m_bddqhpff (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/Optional;
-		ARG 0 stack
 	METHOD m_biphgkrd isUsedOnRelease ()Z
 	METHOD m_bpcuczsh setCount (I)V
 		COMMENT Sets the count of items in this item stack.
@@ -159,10 +73,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 3 slot
 		ARG 4 selected
 	METHOD m_dfvhukte getUseAction ()Lnet/minecraft/unmapped/C_olmwgcft;
-	METHOD m_dlvgozaz isSectionVisible (ILnet/minecraft/unmapped/C_sddaxwyk$C_xgjxqlij;)Z
-		COMMENT Determines whether the given tooltip section will be visible according to the given flags.
-		ARG 0 flags
-		ARG 1 tooltipSection
 	METHOD m_ehlafaks copyAndClear ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_eidhgyra isFood ()Z
 	METHOD m_emygxjdg postMine (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
@@ -170,13 +80,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 2 state
 		ARG 3 pos
 		ARG 4 miner
-	METHOD m_epxyntkq (Lnet/minecraft/unmapped/C_cjzoxshv;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		ARG 0 item
-		ARG 1 nbt
-	METHOD m_eupjqzfc getNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
-		COMMENT {@return the custom NBT of this item stack, may be {@code null}}
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
 	METHOD m_eyzvudzj isEnabled (Lnet/minecraft/unmapped/C_czxxrbcp;)Z
 		ARG 1 enabledFeatures
 	METHOD m_ezqoxeyg isOf (Lnet/minecraft/unmapped/C_vorddnax;)Z
@@ -185,10 +88,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 			COMMENT the item instance to match
 	METHOD m_fdjdvcpt getMaxDamage ()I
 	METHOD m_fggiijyg getMaxUseTime ()I
-	METHOD m_fzdiygap hasNbt ()Z
-		COMMENT {@return whether this item stack has custom NBT}
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
+	METHOD m_fgqlptaw getEncoded (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_oivssbvb;
+	METHOD m_fuopwkpz encode (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_oivssbvb;
 	METHOD m_gcouiubw isIn (Lnet/minecraft/unmapped/C_odfnijdo;)Z
 		COMMENT {@return whether this item is in the specified holder set}
 		ARG 1 set
@@ -200,12 +101,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_gwzgwsrv isEnchantable ()Z
 	METHOD m_hawykozc getMiningSpeedMultiplier (Lnet/minecraft/unmapped/C_txtbiemp;)F
 		ARG 1 state
-	METHOD m_hijqqkvs getOrCreateNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
-		COMMENT Returns the custom NBT of this item stack, or creates the custom NBT if the item stack did not have a custom NBT previously.
-		COMMENT
-		COMMENT @return the custom NBT of this item stack
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
 	METHOD m_hmrpegvi onClickedOnOther (Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		COMMENT Called when the stack is placed on another {@link ItemStack} in a slot.
 		COMMENT
@@ -215,8 +110,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 otherSlot
 		ARG 2 clickType
 		ARG 3 player
-	METHOD m_hnsikyys (Ljava/text/DecimalFormat;)V
-		ARG 0 format
 	METHOD m_iadyttua usageTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;I)V
 		ARG 1 world
 		ARG 2 user
@@ -227,7 +120,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 user
 		ARG 2 entity
 		ARG 3 hand
-	METHOD m_jhwlsqpw isUnbreakable ()Z
 	METHOD m_jowurkjh copy ()Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT Creates and returns a copy of this item stack.
 	METHOD m_jqebbfhj finishUsing (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sddaxwyk;
@@ -237,17 +129,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 count
 	METHOD m_kshgvahz matches (Ljava/util/function/Predicate;)Z
 		ARG 1 predicate
-	METHOD m_kuyejyiz (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
-	METHOD m_kvzdqphw getHideFlags ()I
-	METHOD m_lrvsfwxj canDestroy (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_gogfiawf;)Z
-		ARG 1 blockRegistry
-		ARG 2 pos
 	METHOD m_mhrovmoq itemsMatch (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 stack1
 		ARG 1 stack2
-	METHOD m_mlonpdxj setRepairCost (I)V
-		ARG 1 repairCost
 	METHOD m_msofzvly isSuitableFor (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		COMMENT Determines whether this item can be used as a suitable tool for mining the specified block.
 		COMMENT <p>
@@ -267,57 +151,28 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 amount
 			COMMENT the amount to increment
 	METHOD m_nosilizp isDamaged ()Z
-	METHOD m_nsgmohgt appendEnchantments (Ljava/util/List;Lnet/minecraft/unmapped/C_hqhtfwlr;)V
-		ARG 0 tooltip
-		ARG 1 enchantments
-	METHOD m_oicnibsx hasCustomName ()Z
+	METHOD m_nyilezsd encode (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_oivssbvb;
 	METHOD m_oszmcroz onItemEntityDestroyed (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 entity
 	METHOD m_pjqbesil getItemBarStep ()I
 		COMMENT {@return the length of the filled section of the durability bar in pixels (out of 13)}
-	METHOD m_pocwrlzm (Lnet/minecraft/unmapped/C_vorddnax;)Lcom/mojang/serialization/DataResult;
-		ARG 0 item
 	METHOD m_poxxatoa postHit (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 target
 		ARG 2 attacker
 	METHOD m_pqebapbo getHolder ()Lnet/minecraft/unmapped/C_cjzoxshv;
-	METHOD m_puozqtwx (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
 	METHOD m_pwfafzwz getCooldown ()I
-	METHOD m_qcvtavtd removeSubNbt (Ljava/lang/String;)V
-		COMMENT Removes the sub NBT element at the specified key in this item stack's custom NBT.
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-		ARG 1 key
-	METHOD m_qetfuzie getRepairCost ()I
-	METHOD m_qjandoiq (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
-	METHOD m_qocirsqp writeNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		COMMENT Writes the serialized item stack into the given {@link NbtCompound}.
-		COMMENT
-		COMMENT @return the written NBT compound
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-		ARG 1 nbt
-			COMMENT the NBT compound to write to
 	METHOD m_qxfxfsuy getItem ()Lnet/minecraft/unmapped/C_vorddnax;
 	METHOD m_rcukuoag (ILnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 2 entity
-		ARG 3 slot
-	METHOD m_rdrbrcjp addAttributeModifier (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;Lnet/minecraft/unmapped/C_yuycoehb;)V
-		ARG 1 attribute
-		ARG 2 modifier
 		ARG 3 slot
 	METHOD m_rghjmiwl setDamage (I)V
 		ARG 1 damage
 	METHOD m_rmdiknvo getMaxCount ()I
 	METHOD m_rvfytoek isItemBarVisible ()Z
-	METHOD m_sfljcwwq removeCustomName ()V
 	METHOD m_sfmosozi getItemBarColor ()I
 		COMMENT {@return the color of the filled section of the durability bar}
 	METHOD m_sjztniec isStackable ()Z
 	METHOD m_sqtvrdfj getFrame ()Lnet/minecraft/unmapped/C_hywnolpn;
-	METHOD m_sxojkkcd setCustomName (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		ARG 1 name
 	METHOD m_sxworkis matches (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
 		ARG 1 item
 	METHOD m_tcgbrtym isInFrame ()Z
@@ -325,11 +180,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT Returns whether the two given item stacks are equal.
 		COMMENT
 		COMMENT @return {@code true} if the two item stacks are equal, or {@code false} otherwise
-		COMMENT @see #canCombine(ItemStack, ItemStack)
+		COMMENT @see #itemsAndComponentsMatch(ItemStack, ItemStack)
 		ARG 0 stack
 		ARG 1 otherStack
-	METHOD m_udfmonzo (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 0 instance
 	METHOD m_uglewown getCount ()I
 		COMMENT {@return the count of items in this item stack}
 	METHOD m_uhghycli onClicked (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
@@ -343,18 +196,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 3 clickType
 		ARG 4 player
 		ARG 5 cursorStackReference
-	METHOD m_ujwwfdid getSubNbt (Ljava/lang/String;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		COMMENT {@return the NBT compound at the specified key in this item stack's custom NBT, may be {@code null}}
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-		ARG 1 key
-	METHOD m_umilgnei setSubNbt (Ljava/lang/String;Lnet/minecraft/unmapped/C_oivssbvb;)V
-		COMMENT Sets the given NBT element in the item stack's custom NBT at the specified key.
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-		ARG 1 key
-			COMMENT the key where to put the given {@link NbtElement}
-		ARG 2 nbt
 	METHOD m_umudukuf onCraft (Lnet/minecraft/unmapped/C_cdctfzbn;)V
 	METHOD m_utrmkjnp setCooldown (I)V
 		ARG 1 cooldown
@@ -362,17 +203,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_vncsdaoo hasGlint ()Z
 	METHOD m_vprylruv isEmpty ()Z
 		COMMENT {@return whether this item stack is empty}
-	METHOD m_vtkhlzwi getEnchantments ()Lnet/minecraft/unmapped/C_hqhtfwlr;
-	METHOD m_wdptrijv canCombine (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		COMMENT Returns whether the two given item stacks can be combined into one stack.
-		COMMENT <p>
-		COMMENT This depend whether the two stacks are of the same item type,
-		COMMENT and whether the NBT of the two stacks is equal.
-		COMMENT
-		COMMENT @return {@code true} if the two given item stacks can be combined, or {@code false} otherwise
-		COMMENT @see #areEqual(ItemStack, ItemStack)
-		ARG 0 stack
-		ARG 1 otherStack
 	METHOD m_whunqrso decrement (I)V
 		COMMENT Decrements the count of items in this item stack.
 		ARG 1 amount
@@ -387,23 +217,14 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT {@return whether this item is in the specified tag}
 		ARG 1 tag
 			COMMENT the item tag key
-	METHOD m_xcmgrzww fromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		COMMENT Deserializes an item stack from NBT.
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-		ARG 0 nbt
+	METHOD m_xdahsubv itemsAndComponentsMatch (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 0 stack
+		ARG 1 otherStack
 	METHOD m_xlccoiox getTranslationKey ()Ljava/lang/String;
-	METHOD m_xmgboejb getOrCreateSubNbt (Ljava/lang/String;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		COMMENT {@return the compound NBT at the specified key in this item stack's NBT, or a new compound if absent}
-		COMMENT
-		COMMENT @see <a href="#nbt-operations">Item Stack NBT Operations</a>
-		ARG 1 key
 	METHOD m_xqyyeqdc setHolder (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 holder
 	METHOD m_xvzvtufo getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_yawcimjo getEntityHolder ()Lnet/minecraft/unmapped/C_astfners;
-	METHOD m_ycpnizyd addHideFlag (Lnet/minecraft/unmapped/C_sddaxwyk$C_xgjxqlij;)V
-		ARG 1 tooltipSection
 	METHOD m_yrbtnzbt getRarity ()Lnet/minecraft/unmapped/C_mqmixksm;
 	METHOD m_ywdqmcbk getTooltip (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_taebrtdw;)Ljava/util/List;
 		ARG 1 player
@@ -415,6 +236,3 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_zszkcovn hasEnchantments ()Z
 	CLASS C_qbkytozl
 		FIELD f_ejfbjbgz ITEM_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
-	CLASS C_xgjxqlij TooltipSection
-		FIELD f_gnssdrqy flag I
-		METHOD m_lmmhbsev getFlag ()I
