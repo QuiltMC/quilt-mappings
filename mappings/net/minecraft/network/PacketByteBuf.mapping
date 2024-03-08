@@ -343,6 +343,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return the read bit set
 		COMMENT @see #writeBitSet(BitSet)
 	METHOD m_etdtxgpv readMap (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_ajdohfrc;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Map;
+		ARG 1 mapFactory
+		ARG 2 keyDecoder
+		ARG 3 valueDecoder
 	METHOD m_eznoskdd readMap (Lnet/minecraft/unmapped/C_ajdohfrc;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Map;
 	METHOD m_fjcnjxnm readString (I)Ljava/lang/String;
 		COMMENT Reads a string from this buf. A string is represented by a byte array of
@@ -356,7 +359,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeString(String, int)
 		ARG 1 maxLength
 			COMMENT the maximum length of the string read
-	METHOD m_fjolbvuh (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
+	METHOD m_fjolbvuh readNullable (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
 		ARG 1 decoder
 	METHOD m_ftclzqhi readChunkSectionPos ()Lnet/minecraft/unmapped/C_zubvmeye;
 		COMMENT Reads a chunk section position from this buf. A chunk section position is
@@ -513,7 +516,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_mafeqoqe readNbt (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 0 buf
 		ARG 1 nbtTagSizeTracker
-	METHOD m_mdkhzffo (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
+	METHOD m_mdkhzffo readNullable (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
 		ARG 0 buf
 		ARG 1 decoder
 	METHOD m_mhlenoxy readPos (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hynzadkk;
@@ -552,7 +555,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_olpsrdqq getMaxValidator (Ljava/util/function/IntFunction;I)Ljava/util/function/IntFunction;
 		ARG 0 applier
 		ARG 1 max
-	METHOD m_omssfaex (Lio/netty/buffer/ByteBuf;Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
+	METHOD m_omssfaex writeNullable (Lio/netty/buffer/ByteBuf;Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
 		ARG 0 buf
 		ARG 2 encoder
 	METHOD m_pihymbdn readQuaternion ()Lorg/joml/Quaternionf;
@@ -760,6 +763,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readCollection(IntFunction, Reader)
 		ARG 1 collection
 			COMMENT the collection to write
+		ARG 2 valueEncoder
 	METHOD m_wxfnqbwh readVarInt ()I
 		COMMENT Reads a single var int from this buf.
 		COMMENT
@@ -777,6 +781,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readMap(IntFunction, Reader, Reader)
 		ARG 1 map
 			COMMENT the map to write
+		ARG 2 keyEncoder
+		ARG 3 valueEncoder
 	METHOD m_ybnsdtco readRegistryKey (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_xhhleach;
 		COMMENT Reads a registry key from this buf. A registry key is represented by an
 		COMMENT identifier.
@@ -801,7 +807,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT length over {@code maxSize}
 		ARG 1 maxSize
 			COMMENT the max length of the read array
-	METHOD m_zcmiuaxl (Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
+	METHOD m_zcmiuaxl writeNullable (Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
 		ARG 2 encoder
 	METHOD m_zflhnxwv writeString (Ljava/lang/String;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a string to this buf. A string is represented by a byte array of
