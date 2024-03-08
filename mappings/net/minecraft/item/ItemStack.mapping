@@ -41,7 +41,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	FIELD f_lrxqoedj EMPTY Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_lxaedfnb cooldown I
 	FIELD f_ohakxxel LOGGER Lorg/slf4j/Logger;
-	FIELD f_qlhuxehe RECIPE_RESULT_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_qqkxjbjo NON_AIR_ITEM_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_tqvryqzt CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_ygsunlnh DISABLED Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -181,7 +180,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT Returns whether the two given item stacks are equal.
 		COMMENT
 		COMMENT @return {@code true} if the two item stacks are equal, or {@code false} otherwise
-		COMMENT @see #canCombine(ItemStack, ItemStack)
+		COMMENT @see #itemsAndComponentsMatch(ItemStack, ItemStack)
 		ARG 0 stack
 		ARG 1 otherStack
 	METHOD m_uglewown getCount ()I
@@ -204,16 +203,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_vncsdaoo hasGlint ()Z
 	METHOD m_vprylruv isEmpty ()Z
 		COMMENT {@return whether this item stack is empty}
-	METHOD m_wdptrijv canCombine (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		COMMENT Returns whether the two given item stacks can be combined into one stack.
-		COMMENT <p>
-		COMMENT This depend whether the two stacks are of the same item type,
-		COMMENT and whether the NBT of the two stacks is equal.
-		COMMENT
-		COMMENT @return {@code true} if the two given item stacks can be combined, or {@code false} otherwise
-		COMMENT @see #areEqual(ItemStack, ItemStack)
-		ARG 0 stack
-		ARG 1 otherStack
 	METHOD m_whunqrso decrement (I)V
 		COMMENT Decrements the count of items in this item stack.
 		ARG 1 amount
@@ -228,6 +217,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT {@return whether this item is in the specified tag}
 		ARG 1 tag
 			COMMENT the item tag key
+	METHOD m_xdahsubv itemsAndComponentsMatch (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 0 stack
+		ARG 1 otherStack
 	METHOD m_xlccoiox getTranslationKey ()Ljava/lang/String;
 	METHOD m_xqyyeqdc setHolder (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 holder
