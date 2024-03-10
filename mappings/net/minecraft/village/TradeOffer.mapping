@@ -1,48 +1,17 @@
 CLASS net/minecraft/unmapped/C_argwryfu net/minecraft/village/TradeOffer
-	FIELD f_ahlxvzwr secondBuyItem Lnet/minecraft/unmapped/C_sddaxwyk;
+	FIELD f_ahlxvzwr secondBuyItem Ljava/util/Optional;
 	FIELD f_ehdiengs sellItem Lnet/minecraft/unmapped/C_sddaxwyk;
-	FIELD f_fiwjfjsv firstBuyItem Lnet/minecraft/unmapped/C_sddaxwyk;
+	FIELD f_fiwjfjsv firstBuyItem Lnet/minecraft/unmapped/C_gqfxurno;
 	FIELD f_izfgozck priceMultiplier F
 	FIELD f_ldkgpymk uses I
 	FIELD f_lgvzktct demandBonus I
 	FIELD f_mgalkhcf maxUses I
 	FIELD f_orryzsqt merchantExperience I
-	FIELD f_qxgedhuk ignoreNbt Z
 	FIELD f_swwaavur specialPrice I
 	FIELD f_tjaybnuu PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_vcpzwcnv rewardingPlayerExperience Z
 	METHOD <init> (Lnet/minecraft/unmapped/C_argwryfu;)V
 		ARG 1 offer
-	METHOD <init> (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;IIF)V
-		ARG 1 buyItem
-		ARG 2 sellItem
-		ARG 3 maxUses
-		ARG 4 merchantExperience
-		ARG 5 priceMultiplier
-	METHOD <init> (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;IIF)V
-		ARG 1 firstBuyItem
-		ARG 2 secondBuyItem
-		ARG 3 sellItem
-		ARG 4 maxUses
-		ARG 5 merchantExperience
-		ARG 6 priceMultiplier
-	METHOD <init> (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;IIIF)V
-		ARG 1 firstBuyItem
-		ARG 2 secondBuyItem
-		ARG 3 sellItem
-		ARG 4 uses
-		ARG 5 maxUses
-		ARG 6 merchantExperience
-		ARG 7 priceMultiplier
-	METHOD <init> (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;IIIFI)V
-		ARG 1 firstBuyItem
-		ARG 2 secondBuyItem
-		ARG 3 sellItem
-		ARG 4 uses
-		ARG 5 maxUses
-		ARG 6 merchantExperience
-		ARG 7 priceMultiplier
-		ARG 8 demandBonus
 	METHOD m_akycaqxo getMerchantExperience ()I
 		COMMENT Returns the amount of experience that will be given to a merchant
 		COMMENT after this trade offer has been used.
@@ -71,7 +40,6 @@ CLASS net/minecraft/unmapped/C_argwryfu net/minecraft/village/TradeOffer
 		ARG 2 secondBuyStack
 	METHOD m_jwtgudye read (Lnet/minecraft/unmapped/C_bngyzsts;)Lnet/minecraft/unmapped/C_argwryfu;
 		ARG 0 buf
-	METHOD m_jxiehhbs shouldIgnoreNbt ()Z
 	METHOD m_kktwxkpz updateDemandBonus ()V
 		COMMENT Updates the demand bonus of this trade offer depending on its
 		COMMENT previous demand bonus, the number of times it has been used and
@@ -94,10 +62,6 @@ CLASS net/minecraft/unmapped/C_argwryfu net/minecraft/village/TradeOffer
 		COMMENT Returns the sell item of this trade offer.
 	METHOD m_msgntumj getMaxUses ()I
 		COMMENT Returns the maximum number of times this trade offer can be used.
-	METHOD m_netdstkk acceptsBuy (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Z)Z
-		ARG 0 given
-		ARG 1 sample
-		ARG 2 ignoreNbt
 	METHOD m_rfcgwqwz use ()V
 		COMMENT Increments the number of times this trade offer has been used.
 	METHOD m_rgdhugvk getUses ()I
