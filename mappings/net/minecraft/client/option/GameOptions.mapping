@@ -14,6 +14,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_cfdciozt enabledPlayerModelParts Ljava/util/Set;
 	FIELD f_cfrcggxy commandSuggestions Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_cgvttuzt language Ljava/lang/String;
+	FIELD f_cjfbzbpc MENU_BACKGROUND_BLURRINESS_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ckfylycx focusedChatHeight Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_cnqkqzfz entityDistanceScaling Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_cpeiozpi textBackgroundOpacity Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -61,6 +62,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_htwcmotv attackIndicator Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_ibtafktr NOTIFICATION_DISPLAY_TIME_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ieqpwpwh onboardAccessibility Z
+	FIELD f_igwatiec menuBackgroundBlurriness Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_itpgjgjg socialInteractionsKey Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT A key bind for opening {@linkplain net.minecraft.client.gui.screen.multiplayer.SocialInteractionsScreen the social interactions screen}.
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_P the P key} by default.
@@ -106,6 +108,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		COMMENT
 		COMMENT <p>The selected slot is the slot the mouse is over when in a screen.
 		COMMENT Otherwise, it is the main hand.
+	FIELD f_muftdvds japaneseGlyphVariants Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_mzoblepy realmsNotifications Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_necytowf useNativeTransport Z
 	FIELD f_njiqznte saveToolbarActivatorKey Lnet/minecraft/unmapped/C_sygikzty;
@@ -115,6 +118,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_nrolbpfd narratorHotkey Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_nrvqsydf client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_ntefrlbi ALLOW_SERVER_LISTINGS_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_nvenypzh DEFAULT_MENU_BACKGROUND_BLURRINESS D
 	FIELD f_nzrcbmhe playerListKey Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT A key bind for displaying {@linkplain net.minecraft.client.gui.hud.PlayerListHud the player list}.
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_TAB the tab key} by default.
@@ -249,6 +253,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_bahvhhci collectProfiledOptions ()Ljava/lang/String;
 	METHOD m_bhestnhy getPrioritizeChunkUpdates ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_bpcokkep getMouseSensitivity ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_britemnt getMenuBackgroundBlurriness ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_bxovxqnq getRawMouseInput ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_cbamyvvu getMaxFps ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_ciubwfcb (Ljava/lang/Double;)V
@@ -275,6 +280,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_eukbhyho (Lnet/minecraft/unmapped/C_inrattee;)Z
 		ARG 0 mode
 	METHOD m_ezcngbdl getChatOpacity ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_fcavaaeh getJapaneseGlyphsVariantsDefault ()Z
 	METHOD m_fejlgsqv toMouseWheelSensitivityValue (I)D
 		ARG 0 value
 	METHOD m_fkzzfctb getDarknessEffectScale ()Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -302,6 +308,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 0 value
 	METHOD m_idadxifs getHideSplashTexts ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_iiktkkyf getChatLineSpacing ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_iokxfzvk getForceUnicodeFontDefault ()V
 	METHOD m_ionmmgng addResourcePackProfilesToManager (Lnet/minecraft/unmapped/C_dqfyacfy;)V
 		ARG 1 manager
 	METHOD m_iorktnet getViewDistance ()Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -393,6 +400,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_spqkhbsl getFullscreen ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_spqqecdt accept (Lnet/minecraft/unmapped/C_lscptbhn$C_wgzdldrb;)V
 		ARG 1 visitor
+	METHOD m_suppkrlj (Lnet/minecraft/unmapped/C_lscptbhn$C_cupifpge;)V
+		ARG 1 visitor
 	METHOD m_syohccsr getShowSubtitles ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_szrsdlej getReducedDebugInfo ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_txjxblqd (I)Ljava/lang/Double;
@@ -418,6 +427,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_vtvjmoit getGenericValueText (Lnet/minecraft/unmapped/C_rdaqiwdt;I)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionText
 		ARG 1 value
+	METHOD m_wbqggaub (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 1 value
 	METHOD m_wennyfeo createSoundVolumeOption (Ljava/lang/String;Lnet/minecraft/unmapped/C_pqzizukq;)Lnet/minecraft/unmapped/C_vbibxkxv;
 		ARG 1 key
 		ARG 2 category
@@ -437,6 +448,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 1 perspective
 	METHOD m_xpiebngm getAllowServerListings ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_xqtjsjte getChatWidth ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_xtjorqxc (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 1 value
 	METHOD m_xveturrd (Ljava/lang/Double;)V
 		ARG 0 widthOption
 	METHOD m_ycvnefwl getHighContrast ()Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -447,6 +460,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_ykeyyaiw (Ljava/lang/Double;)V
 		ARG 0 value
 	METHOD m_yleaaaqn getEnableVsync ()Lnet/minecraft/unmapped/C_vbibxkxv;
+	METHOD m_ymgfscwm getJapaneseGlyphVariants ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_ynymrfrg getNarratorHotkey ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_yryptkmo getDamageTilt ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_ysetlpyj getDistortionEffectScale ()Lnet/minecraft/unmapped/C_vbibxkxv;
