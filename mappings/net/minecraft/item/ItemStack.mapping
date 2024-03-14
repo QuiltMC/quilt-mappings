@@ -35,6 +35,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	COMMENT a sub NBT is a child element of the custom NBT.
 	COMMENT <p>
 	COMMENT Custom NBT data needs to be re-evaluated as of the changes in 24w09a.
+	FIELD f_bgqyysyj components Lnet/minecraft/unmapped/C_jvfovkxa;
 	FIELD f_bnghiwgu PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_eqmyksbs item Lnet/minecraft/unmapped/C_vorddnax;
 	FIELD f_iboyubuh OPTIONAL_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
@@ -63,6 +64,10 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;ILnet/minecraft/unmapped/C_jvfovkxa;)V
 		ARG 1 item
 		ARG 3 components
+	METHOD m_aedabdbt appendModifierTooltip (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		ARG 1 textConsumer
+		ARG 3 attribute
+		ARG 4 modifier
 	METHOD m_arqkxkec getDamage ()I
 	METHOD m_biphgkrd isUsedOnRelease ()Z
 	METHOD m_bpcuczsh setCount (I)V
@@ -71,14 +76,19 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 			COMMENT the count of items
 	METHOD m_bqtrkfmc useOnBlock (Lnet/minecraft/unmapped/C_yyklzime;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 context
+	METHOD m_brrtttdn (Ljava/lang/String;)V
+		ARG 0 name
 	METHOD m_cgmsskmm split (I)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 amount
+	METHOD m_cpmzxurz canBreakInAdventureMode (Lnet/minecraft/unmapped/C_gogfiawf;)Z
 	METHOD m_cwjcossc inventoryTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_astfners;IZ)V
 		ARG 1 world
 		ARG 2 entity
 		ARG 3 slot
 		ARG 4 selected
 	METHOD m_dfvhukte getUseAction ()Lnet/minecraft/unmapped/C_olmwgcft;
+	METHOD m_dyvmnknh fromNbt (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 lookupProvider
 	METHOD m_ehlafaks copyAndClear ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_eidhgyra isFood ()Z
 	METHOD m_emygxjdg postMine (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
@@ -107,6 +117,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_gwzgwsrv isEnchantable ()Z
 	METHOD m_hawykozc getMiningSpeedMultiplier (Lnet/minecraft/unmapped/C_txtbiemp;)F
 		ARG 1 state
+	METHOD m_hdopgosb appendTooltip (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_taebrtdw;)V
+		ARG 1 type
 	METHOD m_hmrpegvi onClickedOnOther (Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		COMMENT Called when the stack is placed on another {@link ItemStack} in a slot.
 		COMMENT
@@ -116,23 +128,40 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 otherSlot
 		ARG 2 clickType
 		ARG 3 player
+	METHOD m_iaantrnc apply (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/function/BiFunction;)Ljava/lang/Object;
+		ARG 1 type
+		ARG 2 defaultValue
+		ARG 3 newValue
+		ARG 4 componentFactory
 	METHOD m_iadyttua usageTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;I)V
 		ARG 1 world
 		ARG 2 user
 		ARG 3 remainingUseTicks
 	METHOD m_iculdxhv isDamageable ()Z
+	METHOD m_igidwirs getComponentPatch ()Lnet/minecraft/unmapped/C_jqyoylib;
 	METHOD m_ihhujymf toHoverableText ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_imaclehj useOnEntity (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 user
 		ARG 2 entity
 		ARG 3 hand
+	METHOD m_izgziaft fromNbtOptional (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/Optional;
+		ARG 0 lookupProvider
+		ARG 1 nbt
 	METHOD m_jowurkjh copy ()Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT Creates and returns a copy of this item stack.
 	METHOD m_jqebbfhj finishUsing (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 world
 		ARG 2 user
+	METHOD m_kamdhzie apply (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;Ljava/util/function/UnaryOperator;)Ljava/lang/Object;
+		ARG 1 type
+		ARG 2 defaultValue
+		ARG 3 componentFactory
+	METHOD m_kdmqavat remove (Lnet/minecraft/unmapped/C_pscqxfcs;)Ljava/lang/Object;
 	METHOD m_kguduvdp withCount (I)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 count
+	METHOD m_khepgwsw forEachModifier (Lnet/minecraft/unmapped/C_yuycoehb;Ljava/util/function/BiConsumer;)V
+		ARG 1 slot
+		ARG 2 modifierConsumer
 	METHOD m_kmktysli getBreakSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_kshgvahz matches (Ljava/util/function/Predicate;)Z
 		ARG 1 predicate
@@ -161,6 +190,10 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_nyilezsd encode (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_oivssbvb;
 	METHOD m_oszmcroz onItemEntityDestroyed (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 entity
+	METHOD m_oujudcyn (Lnet/minecraft/unmapped/C_jxtrubuh;ILnet/minecraft/unmapped/C_qlclfxvn$C_vbojeisc;)V
+		ARG 2 builder
+	METHOD m_phvcusub appendModifierTooltips (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_jzrpycqo;)V
+		ARG 1 textConsumer
 	METHOD m_pjqbesil getItemBarStep ()I
 		COMMENT {@return the length of the filled section of the durability bar in pixels (out of 13)}
 	METHOD m_pocwrlzm (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
@@ -172,7 +205,12 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_puozqtwx (Lnet/minecraft/unmapped/C_cjzoxshv;)Lcom/mojang/serialization/DataResult;
 		ARG 0 holder
 	METHOD m_pwfafzwz getCooldown ()I
+	METHOD m_qiozuhii canPlaceOnInAdventureMode (Lnet/minecraft/unmapped/C_gogfiawf;)Z
+	METHOD m_qjandoiq (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_jqyoylib;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 item
+		ARG 1 patch
 	METHOD m_qxfxfsuy getItem ()Lnet/minecraft/unmapped/C_vorddnax;
+	METHOD m_qxooancw applyPatch (Lnet/minecraft/unmapped/C_jqyoylib;)V
 	METHOD m_rcukuoag (ILnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 2 entity
 		ARG 3 slot
@@ -194,6 +232,11 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT @see #itemsAndComponentsMatch(ItemStack, ItemStack)
 		ARG 0 stack
 		ARG 1 otherStack
+	METHOD m_tyuugrfg consume (ILnet/minecraft/unmapped/C_usxaxydn;)V
+		ARG 1 amount
+		ARG 2 entity
+	METHOD m_udfmonzo (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_uglewown getCount ()I
 		COMMENT {@return the count of items in this item stack}
 	METHOD m_uhghycli onClicked (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
@@ -210,6 +253,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_umudukuf onCraft (Lnet/minecraft/unmapped/C_cdctfzbn;)V
 	METHOD m_utrmkjnp setCooldown (I)V
 		ARG 1 cooldown
+	METHOD m_vchnqfkp applyComponents (Lnet/minecraft/unmapped/C_kouhnfig;)V
 	METHOD m_vhnmbpvg getDrinkSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_vncsdaoo hasGlint ()Z
 	METHOD m_vprylruv isEmpty ()Z
@@ -241,6 +285,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_ywdqmcbk getTooltip (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_taebrtdw;)Ljava/util/List;
 		ARG 1 player
 		ARG 2 context
+	METHOD m_yzsowcuq (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
+	METHOD m_zakagwqa set (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)Ljava/lang/Object;
 	METHOD m_zpjrlkav onCraftByPlayer (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;I)V
 		ARG 1 world
 		ARG 2 player

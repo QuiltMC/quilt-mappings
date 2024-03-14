@@ -2,6 +2,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	FIELD f_abyetwgs BLOCK_ITEMS Ljava/util/Map;
 	FIELD f_aztyznjt EAT_DURATION I
 	FIELD f_bkclyjsj MAX_DURABILITY_BAR_WIDTH I
+	FIELD f_cmbphknz components Lnet/minecraft/unmapped/C_kouhnfig;
 	FIELD f_ewqskwyi ATTACK_DAMAGE_MODIFIER_ID Ljava/util/UUID;
 	FIELD f_heedcfbq rarity Lnet/minecraft/unmapped/C_mqmixksm;
 	FIELD f_hqzbeglm requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
@@ -159,6 +160,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 5 selected
 	METHOD m_rdxwitrr getRecipeRemainder ()Lnet/minecraft/unmapped/C_vorddnax;
 		COMMENT Gets the remainder item that should be left behind when this item is used as a crafting ingredient.
+	METHOD m_rwziztnd validateComponents (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 	METHOD m_rxtlbzdr getName (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 1 stack
 	METHOD m_srbfwvie getTranslationKey ()Ljava/lang/String;
@@ -208,6 +210,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 slot
 	METHOD m_xzfkfodv getFoodComponent ()Lnet/minecraft/unmapped/C_cgikuact;
 		COMMENT {@return this item's {@link #foodComponent FoodComponent}, or {@code null} if none was set}
+	METHOD m_ylkygzjm getComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 	METHOD m_yvddkccr getUseAction (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_olmwgcft;
 		ARG 1 stack
 	METHOD m_znsmbimv use (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_upvihyur;
@@ -258,6 +261,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT If called, any item with this Settings instance is immune to fire and lava damage.
 			COMMENT
 			COMMENT @return this instance
+		METHOD m_klokuyzb buildComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 		METHOD m_nuwctbay recipeRemainder (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the recipe remainder for any item configured with this Settings instance.
 			COMMENT When an item with a recipe remainder is used in a crafting recipe, the remainder is left in the table or returned to the player.
@@ -277,6 +281,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		METHOD m_voqbvsse component (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 type
 			ARG 2 value
+		METHOD m_wosoxphz attributeModifiersComponent (Lnet/minecraft/unmapped/C_azfkqhlm;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 		METHOD m_wuwttdfr food (Lnet/minecraft/unmapped/C_cgikuact;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT When set, any item configured with this Settings instance will be edible based on the provided {@link FoodComponent}.
 			COMMENT
