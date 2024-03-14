@@ -193,6 +193,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 5 deltaZ
 	METHOD m_cjtrtfdq collidesWith (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 other
+	METHOD m_ckeimykr (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_pubtmkke;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 0 vehicle
+		ARG 1 passenger
 	METHOD m_clvtkwyd setFlag (IZ)V
 		ARG 1 index
 		ARG 2 value
@@ -371,6 +374,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_hehkhdfc isFrozen ()Z
 	METHOD m_hhmmivsh tryTickInVoid ()V
 	METHOD m_hhwoykag calculateNextStepSoundDistance ()F
+	METHOD m_hisokqyg setOnFireFor (I)V
+		ARG 1 ticks
 	METHOD m_hjjjfrzw getScoreboardTeam ()Lnet/minecraft/unmapped/C_dvkwmbxw;
 	METHOD m_hklyvsue raycast (DFZ)Lnet/minecraft/unmapped/C_eetoegzn;
 		ARG 1 maxDistance
@@ -676,6 +681,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 3 offsetY
 		ARG 5 offsetZ
 	METHOD m_pxtokmcp unsetRemoved ()V
+	METHOD m_pxzrmrny (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 entity
 	METHOD m_qbuogctw getPose ()Lnet/minecraft/unmapped/C_ufdjspmk;
 	METHOD m_qchceppc tickRiding ()V
 	METHOD m_qesgssdn entityDataRequiresOperator ()Z
@@ -747,6 +754,13 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 amount
 	METHOD m_tansqdcm shouldPlayAmethystChimeStepSound (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 	METHOD m_tcblutba getDataTracker ()Lnet/minecraft/unmapped/C_pyoaoolj;
+	METHOD m_tctkucqa lerpPosAndRotation (IDDDDD)V
+		ARG 1 step
+		ARG 2 x
+		ARG 4 y
+		ARG 6 z
+		ARG 8 yaw
+		ARG 10 pitch
 	METHOD m_thnmjffg addFlapEffects ()V
 		COMMENT Adds the effects of this entity flapping, usually to the world the entity
 		COMMENT is in.
@@ -903,6 +917,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_wwyehasy updatePoseAndDimensions ()V
 	METHOD m_wzcmdoil isTeamPlayer (Lnet/minecraft/unmapped/C_qgtzypup;)Z
 		ARG 1 team
+	METHOD m_xbkkrydd setOnFireForSeconds (I)V
+		ARG 1 seconds
 	METHOD m_xelmhfxy onBubbleColumnCollision (Z)V
 		ARG 1 drag
 	METHOD m_xfogfxdp isInsideWall ()Z
@@ -923,6 +939,11 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_xvflsbzg scheduleVelocityUpdate ()V
 	METHOD m_xwbgqvgs readNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
+	METHOD m_xwkoqqtf (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sszpscpo;F)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 entity
+		ARG 2 dimensions
+	METHOD m_xyjymteg (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 entity
 	METHOD m_xyqhaexi playCombinationStepSounds (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 primaryState
 		ARG 2 secondaryState
@@ -982,6 +1003,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT Creates a command source which represents this entity.
 		COMMENT
 		COMMENT @return the created command source
+	METHOD m_zoivpnyj getAttachments ()Lnet/minecraft/unmapped/C_pubtmkke;
 	METHOD m_zrismnrd checkWaterState ()V
 	METHOD m_zzzrellt teleport (Lnet/minecraft/unmapped/C_bdwnwhiu;DDDLjava/util/Set;FF)Z
 		ARG 1 world
