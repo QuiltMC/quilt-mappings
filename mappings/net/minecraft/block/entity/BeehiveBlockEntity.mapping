@@ -15,6 +15,7 @@ CLASS net/minecraft/unmapped/C_cyniebsl net/minecraft/block/entity/BeehiveBlockE
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 state
+		ARG 3 occupant
 		ARG 4 entities
 		ARG 5 beeState
 		ARG 6 flowerPos
@@ -27,6 +28,7 @@ CLASS net/minecraft/unmapped/C_cyniebsl net/minecraft/block/entity/BeehiveBlockE
 		ARG 4 bee
 	METHOD m_camfdiec isFullOfBees ()Z
 	METHOD m_czgkogzg addBee (Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;)V
+		ARG 1 occupant
 	METHOD m_jbfwnhjx angerBees (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cyniebsl$C_ajqcctan;)V
 		ARG 1 player
 		ARG 2 state
@@ -50,5 +52,12 @@ CLASS net/minecraft/unmapped/C_cyniebsl net/minecraft/block/entity/BeehiveBlockE
 		ARG 4 flowerPos
 	METHOD m_yfffskly isSmoked ()Z
 	CLASS C_ajqcctan BeeState
+	CLASS C_cakykluc Occupant
 	CLASS C_idqjupol Bee
 		FIELD f_rrbvfqoq ticksInHive I
+		METHOD <init> (Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;)V
+			ARG 1 occupant
+		METHOD m_bhatzkqu tick ()Z
+			COMMENT {@return whether the bee can leave the hive}
+		METHOD m_dhblhaks toOccupant ()Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;
+		METHOD m_vzehkgql hasNectar ()Z
