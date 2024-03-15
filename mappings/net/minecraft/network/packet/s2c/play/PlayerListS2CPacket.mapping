@@ -5,11 +5,14 @@ CLASS net/minecraft/unmapped/C_lmoadlft net/minecraft/network/packet/s2c/play/Pl
 	METHOD <init> (Ljava/util/EnumSet;Ljava/util/Collection;)V
 		ARG 1 actions
 		ARG 2 players
+	METHOD <init> (Lnet/minecraft/unmapped/C_bngyzsts;)V
+		ARG 1 buf
 	METHOD <init> (Lnet/minecraft/unmapped/C_lmoadlft$C_fbdheuhg;Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 action
 		ARG 2 player
 	METHOD m_eaqorlxr getNewEntries ()Ljava/util/List;
 	METHOD m_gyebwyff write (Lnet/minecraft/unmapped/C_bngyzsts;)V
+		ARG 1 buf
 	METHOD m_izcjxwvm (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_lmoadlft$C_ywzccojo;
 		ARG 1 buf
 	METHOD m_kaqgmypm getActions ()Ljava/util/EnumSet;
@@ -50,7 +53,13 @@ CLASS net/minecraft/unmapped/C_lmoadlft net/minecraft/network/packet/s2c/play/Pl
 		METHOD m_wdwpewqk (Lnet/minecraft/unmapped/C_bngyzsts;Lnet/minecraft/unmapped/C_lmoadlft$C_ywzccojo;)V
 			ARG 1 entry
 		CLASS C_ldrsfpcw Writer
+			METHOD write write (Lnet/minecraft/unmapped/C_bngyzsts;Lnet/minecraft/unmapped/C_lmoadlft$C_ywzccojo;)V
+				ARG 1 buf
+				ARG 2 entry
 		CLASS C_uugflzau Reader
+			METHOD read read (Lnet/minecraft/unmapped/C_lmoadlft$C_ttvoxjqr;Lnet/minecraft/unmapped/C_bngyzsts;)V
+				ARG 1 builder
+				ARG 2 buf
 	CLASS C_ttvoxjqr EntryBuilder
 		FIELD f_afvtowyz chatSession Lnet/minecraft/unmapped/C_sdodhjzp$C_igdefirc;
 		FIELD f_bxnmotcp displayName Lnet/minecraft/unmapped/C_rdaqiwdt;
