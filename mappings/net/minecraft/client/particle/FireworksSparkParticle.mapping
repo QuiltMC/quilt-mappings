@@ -5,6 +5,7 @@ CLASS net/minecraft/unmapped/C_ibnlagfc net/minecraft/client/particle/FireworksS
 		FIELD f_dsgcjuca blueFade F
 		FIELD f_ergissdr particleManager Lnet/minecraft/unmapped/C_ttbvlsde;
 		FIELD f_jhwvmkpd trail Z
+		FIELD f_jlydpzua flicker Z
 		FIELD f_kbfbsuje redFade F
 		FIELD f_ndseadeg greenFade F
 		METHOD <init> (Lnet/minecraft/unmapped/C_ghdnlrrw;DDDDDDLnet/minecraft/unmapped/C_ttbvlsde;Lnet/minecraft/unmapped/C_audtngae;)V
@@ -19,6 +20,8 @@ CLASS net/minecraft/unmapped/C_ibnlagfc net/minecraft/client/particle/FireworksS
 			ARG 15 spriteProvider
 		METHOD m_npuspoxk setTrail (Z)V
 			ARG 1 trail
+		METHOD m_quadxpru setFlicker (Z)V
+			ARG 1 flicker
 	CLASS C_qhjoanpc FlashFactory
 		FIELD f_owpniulr spriteProvider Lnet/minecraft/unmapped/C_audtngae;
 		METHOD <init> (Lnet/minecraft/unmapped/C_audtngae;)V
@@ -29,9 +32,19 @@ CLASS net/minecraft/unmapped/C_ibnlagfc net/minecraft/client/particle/FireworksS
 			ARG 1 spriteProvider
 	CLASS C_yoopssed FireworkParticle
 		FIELD f_avburvmv particleManager Lnet/minecraft/unmapped/C_ttbvlsde;
+		FIELD f_bzmyklme CREEPER_PATTERN [[D
+		FIELD f_gnomtwxp STAR_PATTERN [[D
 		FIELD f_qdvggukp explosions Ljava/util/List;
 		FIELD f_rywxrtzz flicker Z
 		FIELD f_yxqvlbam age I
+		METHOD <init> (Lnet/minecraft/unmapped/C_ghdnlrrw;DDDDDDLnet/minecraft/unmapped/C_ttbvlsde;Ljava/util/List;)V
+			ARG 1 world
+			ARG 2 x
+			ARG 4 y
+			ARG 6 z
+			ARG 8 velocityX
+			ARG 10 velocityY
+			ARG 12 velocityZ
 		METHOD m_kqfzmnos isFar ()Z
 		METHOD m_pltypelh addExplosionParticle (DDDDDDLit/unimi/dsi/fastutil/ints/IntList;Lit/unimi/dsi/fastutil/ints/IntList;ZZ)V
 			ARG 1 x
@@ -40,6 +53,8 @@ CLASS net/minecraft/unmapped/C_ibnlagfc net/minecraft/client/particle/FireworksS
 			ARG 7 velocityX
 			ARG 9 velocityY
 			ARG 11 velocityZ
+			ARG 13 colors
+			ARG 14 targetColors
 			ARG 15 trail
 			ARG 16 flicker
 		METHOD m_rldcdfoo explodeStar (D[[DLit/unimi/dsi/fastutil/ints/IntList;Lit/unimi/dsi/fastutil/ints/IntList;ZZZ)V
@@ -49,10 +64,14 @@ CLASS net/minecraft/unmapped/C_ibnlagfc net/minecraft/client/particle/FireworksS
 			ARG 7 flicker
 			ARG 8 keepShape
 		METHOD m_tvewmltn explodeBurst (Lit/unimi/dsi/fastutil/ints/IntList;Lit/unimi/dsi/fastutil/ints/IntList;ZZ)V
+			ARG 1 colors
+			ARG 2 targetColors
 			ARG 3 trail
 			ARG 4 flocker
 		METHOD m_yhhujqxb explodeBall (DILit/unimi/dsi/fastutil/ints/IntList;Lit/unimi/dsi/fastutil/ints/IntList;ZZ)V
 			ARG 1 size
 			ARG 3 amount
+			ARG 4 colors
+			ARG 5 targetColors
 			ARG 6 trail
 			ARG 7 flicker

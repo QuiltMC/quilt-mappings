@@ -78,6 +78,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_pfgaedzm MIN_TICKS_TO_FREEZE I
 	FIELD f_qazqhmfv SNEAKING_FLAG_INDEX I
 	FIELD f_qriixkyh SWIMMING_FLAG_INDEX I
+	FIELD f_qtxalbwz SAFE_FALL_DISTANCE I
 	FIELD f_qxfvmjxc lastRenderX D
 	FIELD f_qxqqtzyy NAME_VISIBLE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_rbybyzcg flyDistance F
@@ -154,6 +155,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT @implSpec This implementation expands this entity's bounding box by 1 in
 		COMMENT each axis and checks whether the expanded box's smallest enclosing
 		COMMENT axis-aligned integer box is fully loaded in the world.
+	METHOD m_bhrkenwn (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 rider
 	METHOD m_bibfwntw adjustMovementForSneaking (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_eojqvxuw;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 movement
 		ARG 2 type
@@ -165,6 +168,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_btnnyttp canBeHitByProjectile ()Z
 	METHOD m_buibyuls (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 0 entity
+	METHOD m_bvfopfeo (Lnet/minecraft/unmapped/C_sszpscpo;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 2 pos
 	METHOD m_bynvyahs (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
 		ARG 1 text
 	METHOD m_bzrtaquy getVehicle ()Lnet/minecraft/unmapped/C_astfners;
@@ -446,6 +451,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_jlyguhnu setInvulnerable (Z)V
 		ARG 1 invulnerable
 	METHOD m_jnzyorkg getLerpTargetYaw ()F
+	METHOD m_jofogjft getRegistryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq;
 	METHOD m_jplnglbd distanceTo (Lnet/minecraft/unmapped/C_astfners;)F
 		ARG 1 entity
 	METHOD m_jrpsebzm hasPose (Lnet/minecraft/unmapped/C_ufdjspmk;)Z
@@ -488,6 +494,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_lfpuwmgu removeAllPassengers ()V
 	METHOD m_lgmmhwrc hasPassenger (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 passenger
+	METHOD m_lhatfyyd getBlockStateAtPos ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_livkcpbq onSwimmingStart ()V
 	METHOD m_lmmpfjyz bypassesLandingEffects ()Z
 	METHOD m_lmrknzic (Lnet/minecraft/unmapped/C_txtbiemp;)Z
@@ -526,6 +533,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 axis
 		ARG 2 offsetFactor
 	METHOD m_lwugwlsw initDataTracker (Lnet/minecraft/unmapped/C_pyoaoolj$C_oqzxcugu;)V
+		ARG 1 builder
 	METHOD m_lygmgdif getHoldingItemAngle (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 item
 	METHOD m_lytsaqwc resetNetherPortalCooldown ()V
@@ -659,6 +667,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_plmkvbcv streamIntoPassengers ()Ljava/util/stream/Stream;
 	METHOD m_pnapxqoc updatePassengerPosition (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
+	METHOD m_psgotipc getProjectileDeflector (Lnet/minecraft/unmapped/C_ltpsyvhj;)Lnet/minecraft/unmapped/C_jslwmoew;
+		ARG 1 projectile
 	METHOD m_psnzmttx getVelocity ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_pvbcngmg getMaxFreezeTicks ()I
 	METHOD m_pwwzkeqh teleportToOffset (DDD)V
@@ -839,6 +849,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_visowrnn isSupportingBlock (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 	METHOD m_vjacwrod getRotationVecClient ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_vkgfaeyc getSplashSound ()Lnet/minecraft/unmapped/C_avavozay;
+	METHOD m_vkrbjcra getRidingPlayerCount ()I
 	METHOD m_vlnmoucu getRootVehicle ()Lnet/minecraft/unmapped/C_astfners;
 		COMMENT Gets the lowest entity this entity is riding.
 	METHOD m_vmlrfevg hasNetherPortalCooldown ()Z
