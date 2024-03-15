@@ -159,7 +159,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 2 defaultValue
 		ARG 3 componentFactory
 	METHOD m_kdmqavat remove (Lnet/minecraft/unmapped/C_pscqxfcs;)Ljava/lang/Object;
-	METHOD m_kguduvdp withCount (I)Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_kguduvdp copyWithCount (I)Lnet/minecraft/unmapped/C_sddaxwyk;
+		COMMENT Creates and returns a copy of this item stack with the given count.
 		ARG 1 count
 	METHOD m_khepgwsw forEachModifier (Lnet/minecraft/unmapped/C_yuycoehb;Ljava/util/function/BiConsumer;)V
 		ARG 1 slot
@@ -291,7 +292,14 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_yawcimjo getEntityHolder ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_yqbabycc createOptionalCodec (Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
 		ARG 0 fieldName
-	METHOD m_yqsxbejh transmuteCopy (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_yqsxbejh copyComponentsToNewStack (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_sddaxwyk;
+		COMMENT {@return a new item stack with the components copied from this stack}
+		COMMENT
+		COMMENT @see #copy
+		COMMENT @see #copyWithCount
+		COMMENT @see #copyComponentsToNewStackIgnoreEmpty
+			COMMENT the resulting stack's item
+			COMMENT the resulting stack's item count
 	METHOD m_yrbtnzbt getRarity ()Lnet/minecraft/unmapped/C_mqmixksm;
 	METHOD m_ywdqmcbk getTooltip (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_taebrtdw;)Ljava/util/List;
 		ARG 1 player
@@ -304,7 +312,14 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 2 player
 		ARG 3 amount
 	METHOD m_zszkcovn hasEnchantments ()Z
-	METHOD m_zzjqqsgn transmuteCopyIgnoreEmpty (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_zzjqqsgn copyComponentsToNewStackIgnoreEmpty (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_sddaxwyk;
+		COMMENT {@return a new item stack with the components copied from this stack, even if this stack is empty}
+		COMMENT
+		COMMENT @see #copy
+		COMMENT @see #copyWithCount
+		COMMENT @see #copyComponentsToNewStack
 		ARG 1 item
+			COMMENT the resulting stack's item
+			COMMENT the resulting stack's item count
 	CLASS C_qbkytozl
 		FIELD f_ejfbjbgz ITEM_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
