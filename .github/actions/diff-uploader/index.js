@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const { summary } = require('@actions/core/lib/summary');
-const {context, getOctokit} = require('@actions/github');
+const { context, getOctokit } = require('@actions/github');
 const fs = require("fs");
 
 const maxDiffCommentLength = 64000;
@@ -41,7 +41,7 @@ async function commentDiff(summary, diff, doComment) {
 
             // Formatting :pain:
             await doComment(
-`${pref}\<details\>
+                `${pref}\<details\>
 \<summary\>View the diff here (${i + 1}/${l}):\</summary\>
 \<br\>
 
@@ -49,12 +49,12 @@ async function commentDiff(summary, diff, doComment) {
 ${iDiff}
 \`\`\`
 \</details\>`
-);
+            );
         }
     } else {
 
         await doComment(
-`${summary}
+            `${summary}
 
 \<details\>
 \<summary\>View the diff here:\</summary\>
@@ -64,23 +64,23 @@ ${iDiff}
 ${diff}
 \`\`\`
 \</details\>`
-);
+        );
     }
 }
 
 async function main() {
-    const token = core.getInput('github-token', {required: true});
+    const token = core.getInput('github-token', { required: true });
     const octokit = getOctokit(token);
     const github = octokit.rest;
     const repo = context.repo.repo;
 
     const owner = context.repo.owner;
-    const baseParameters = {owner, repo};
+    const baseParameters = { owner, repo };
     let comment = async function (comment) {
         return console.log(comment);
     }
 
-    const targetSrcExists = core.getInput('target-src-exists', {required: true}) == 'true';
+    const targetSrcExists = core.getInput('target-src-exists', { required: true }) == 'true';
 
     if (context.eventName === "push") {
         comment = async function (comment) {
