@@ -2,9 +2,11 @@ CLASS net/minecraft/unmapped/C_hyurdhty net/minecraft/util/profiling/jfr/JfrStat
 	FIELD f_dcdgsmvx cpuLoads Ljava/util/List;
 	FIELD f_flaiszfw worldLoadDuration Ljava/time/Duration;
 	FIELD f_fujkndzc fileWrites Ljava/util/List;
+	FIELD f_jrnfvmhq chunkRegionWrite Ljava/util/Map;
 	FIELD f_jxrxpuip garbageCollectionCount I
 	FIELD f_lczhcgwo fileReads Ljava/util/List;
 	FIELD f_mlohnljq gcHeapSummaries Ljava/util/List;
+	FIELD f_peuufxbh chunkRegionRead Ljava/util/Map;
 	FIELD f_qymzrsxd startTime Ljava/time/Instant;
 	FIELD f_sflsznpm packetReads Ljava/util/Map;
 	FIELD f_sxwkzxaj threadAllocationStatistics Ljava/util/List;
@@ -15,9 +17,16 @@ CLASS net/minecraft/unmapped/C_hyurdhty net/minecraft/util/profiling/jfr/JfrStat
 	FIELD f_xjphwbyf packetSent Ljava/util/Map;
 	METHOD <init> (Ljava/util/stream/Stream;)V
 		ARG 1 eventStream
+	METHOD m_crsowpah (Ljava/time/Duration;Ljava/util/Map;)Lnet/minecraft/unmapped/C_kmmgeuyo;
+		ARG 0 duration
+		ARG 1 counters
 	METHOD m_dfsfobyc toStatsResult ()Lnet/minecraft/unmapped/C_ohlgrsme;
 	METHOD m_fnnfpmpa readEventStream (Ljava/util/stream/Stream;)V
 		ARG 1 eventStream
+	METHOD m_hgcfajqk addChunk (Ljdk/jfr/consumer/RecordedEvent;ILjava/util/Map;)V
+		ARG 1 event
+		ARG 2 bytes
+		ARG 3 chunkCounters
 	METHOD m_jwhvvzhv addPacket (Ljdk/jfr/consumer/RecordedEvent;ILjava/util/Map;)V
 		ARG 1 event
 		ARG 2 bytes
@@ -33,7 +42,7 @@ CLASS net/minecraft/unmapped/C_hyurdhty net/minecraft/util/profiling/jfr/JfrStat
 	CLASS C_ghrtcvot
 		METHOD hasNext hasNext ()Z
 		METHOD next next ()Ljava/lang/Object;
-	CLASS C_vhmnxjua PacketCounter
+	CLASS C_vhmnxjua Counter
 		FIELD f_uenqfvib totalSize J
 		FIELD f_unbdfmnw totalCount J
 		METHOD m_addmmahh toCountAndSize ()Lnet/minecraft/unmapped/C_kmmgeuyo$C_qnaqikgk;

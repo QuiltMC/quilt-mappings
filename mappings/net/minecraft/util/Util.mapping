@@ -16,10 +16,16 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_aidzvymm existenceCheckTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 path
 	METHOD m_akgydyyc shuffle (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)V
+		ARG 0 items
 		ARG 1 random
 	METHOD m_awkdanrv fixedSizeList (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
 		ARG 1 length
+	METHOD m_buzzcnhj backupAndReplace (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;Z)Z
+		ARG 0 current
+		ARG 1 newPath
+		ARG 2 backup
+		ARG 3 noRestoreOnFail
 	METHOD m_bzkcqiwy createIndexLookup (Ljava/util/List;)Ljava/util/function/ToIntFunction;
 		ARG 0 elements
 	METHOD m_cclbyaoh getChoiceTypeInternal (Lcom/mojang/datafixers/DSL$TypeReference;Ljava/lang/String;)Lcom/mojang/datafixers/types/Type;
@@ -53,15 +59,24 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 0 breakpointPauser
 	METHOD m_fppetslt getJVMFlags ()Ljava/util/stream/Stream;
 	METHOD m_ftciccth toMap ()Ljava/util/stream/Collector;
+	METHOD m_fwdpfvho mapWith (Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 	METHOD m_gatbnpas getIoWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_gdspwjqr memoize (Ljava/util/function/Function;)Ljava/util/function/Function;
 		ARG 0 function
+	METHOD m_ghqljhgl listWith (Ljava/util/List;Ljava/lang/Object;)Ljava/util/List;
 	METHOD m_gxlhducm getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
 		ARG 0 t
 	METHOD m_hcpbykqy getPartialOrThrow (Lcom/mojang/serialization/DataResult;Ljava/util/function/Function;)Ljava/lang/Object;
 		ARG 0 result
 		ARG 1 exceptionGetter
 	METHOD m_hnnezaif getMainWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
+	METHOD m_iphxtmra backupAndReplace (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+		ARG 0 current
+		ARG 1 newPath
+		ARG 2 backup
+	METHOD m_jsqsuqek (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
+		ARG 0 runnable
+		ARG 1 supplier
 	METHOD m_jxtdpimf getDownloadWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
 	METHOD m_jzncpgce getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
@@ -80,7 +95,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		COMMENT @see #combine(List)
 		ARG 0 futures
 			COMMENT the completable futures to combine
-	METHOD m_kszryhbt (Ljava/util/stream/LongStream;I)Lcom/mojang/serialization/DataResult;
+	METHOD m_kszryhbt decodeFixedLengthArray (Ljava/util/stream/LongStream;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 longStream
 		ARG 1 length
 	METHOD m_lgfbfuzz replaceInvalidChars (Ljava/lang/String;Lnet/minecraft/unmapped/C_zpuwkbhr;)Ljava/lang/String;
@@ -100,6 +115,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 1 random
 	METHOD m_mytcolvj createWorker (Ljava/lang/String;)Ljava/util/concurrent/ExecutorService;
 		ARG 0 name
+	METHOD m_nccitswt (Ljava/util/List;)Ljava/util/function/ToIntFunction;
+		ARG 0 items
 	METHOD m_ngxcbtrh logAndPause (Ljava/lang/String;Ljava/lang/Throwable;)V
 		ARG 0 message
 		ARG 1 t
@@ -161,6 +178,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_vgutcxlm getValueAsString (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Object;)Ljava/lang/String;
 		ARG 0 property
 		ARG 1 value
+	METHOD m_vpbpllsg getRegisteredName (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/lang/Object;)Ljava/lang/String;
 	METHOD m_vwigcqkp moveCursor (Ljava/lang/String;II)I
 		COMMENT Moves the {@code cursor} in the {@code string} by a {@code delta} amount.
 		COMMENT Skips surrogate characters.
