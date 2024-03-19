@@ -52,6 +52,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	METHOD m_ewcsdntg asBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
 	METHOD m_fjkbizwn isRedstonePowerSource (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
+	METHOD m_flnjgkno isTransparent (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 	METHOD m_fqngyjtr getOutlineShape (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_pbfjvesm;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 1 state
 		ARG 2 world
@@ -150,9 +151,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 3 pos
 		ARG 4 newState
 		ARG 5 moved
-	METHOD m_rwctfady canPathfindThrough (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_kjwlgpfr;)Z
-		ARG 1 state
-		ARG 2 type
+	METHOD m_rhslbcpd getSoundGroup (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_aevintex;
+	METHOD m_rmjjhoiz getRandomTicks (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 	METHOD m_sdymngiw randomTick (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)V
 		ARG 1 state
 		ARG 2 world
@@ -254,6 +254,10 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_yypdsdkn lavaIgnitable Z
 		FIELD f_zpvdfobl mapColor Lnet/minecraft/unmapped/C_mlrprqox;
 		FIELD f_zzuoeazs instrument Lnet/minecraft/unmapped/C_onjtjtsi;
+		METHOD m_aeqyhmrr neighborUpdate (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
+			ARG 2 pos
+			ARG 4 fromPos
+			ARG 5 notify
 		METHOD m_alvmezvc getInstrument ()Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD m_aoahmjkt getSoundGroup ()Lnet/minecraft/unmapped/C_aevintex;
 		METHOD m_aqzsbzoo checkSolid ()Z
@@ -520,7 +524,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 3 direction
 		METHOD m_ynpgqgky isLiquid ()Z
 		METHOD m_yvamjply getBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
-		METHOD m_yylpqepz (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
+		METHOD m_yylpqepz onExplosion (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
 			ARG 3 explosion
 			ARG 4 biConsumer
 		METHOD m_zntvpiao getLuminance ()I
@@ -621,6 +625,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 0 state
 			ARG 1 state
 			ARG 2 world
+			ARG 3 type
 		METHOD m_etdgbdsz replaceable ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_fqzrcagx jumpVelocityMultiplier (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 jumpVelocityMultiplier
@@ -670,7 +675,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 instrument
 		METHOD m_saqwnthq postProcess (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
-		METHOD m_scrsgkaj (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+		METHOD m_scrsgkaj copy (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 0 block
 		METHOD m_secizybe (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 0 state
