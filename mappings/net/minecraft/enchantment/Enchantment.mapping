@@ -1,16 +1,12 @@
 CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 	FIELD f_cbjwrotz registryEntry Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
-	FIELD f_cureoctn tag Lnet/minecraft/unmapped/C_ednuhnnn;
-	FIELD f_ewpvweeh rarity Lnet/minecraft/unmapped/C_jxtrubuh$C_dnkiztld;
 	FIELD f_idonjvqd translationKey Ljava/lang/String;
-	FIELD f_yoyeroqb slotTypes [Lnet/minecraft/unmapped/C_yuycoehb;
 	METHOD m_daqyrypu canAccept (Lnet/minecraft/unmapped/C_jxtrubuh;)Z
 		COMMENT {@return whether this enchantment can exist on an item stack with the
 		COMMENT {@code other} enchantment}
 		ARG 1 other
 	METHOD m_eizkkeej byRawId (I)Lnet/minecraft/unmapped/C_jxtrubuh;
 		ARG 0 id
-	METHOD m_fecfwekl getRarity ()Lnet/minecraft/unmapped/C_jxtrubuh$C_dnkiztld;
 	METHOD m_glfcpyqa getMaxLevel ()I
 		COMMENT Sets the maximum number of levels, such as Sharpness which has a maximum 5 levels, the enchantment has. Default: 1.
 	METHOD m_igxrorrr getMinLevel ()I
@@ -42,7 +38,6 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 	METHOD m_smaihzzt isAvailableForEnchantedBookOffer ()Z
 		COMMENT {@return whether this enchantment will appear in the enchanted book trade
 		COMMENT offers of librarian villagers}
-	METHOD m_smdtfkic getTag ()Lnet/minecraft/unmapped/C_ednuhnnn;
 	METHOD m_sufqbdfo isCursed ()Z
 		COMMENT {@return whether the enchantment is a curse. E.G: Curse of Binding}
 		COMMENT Enchantments that are cursed cannot be removed from the item, even in a Grindstone.
@@ -73,13 +68,3 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 		COMMENT {@return the amount of extra protection to apply to the Entity wearing something that has the enchantment, if the damage comes from a specific source specified with {@code source}}
 		ARG 1 level
 		ARG 2 source
-	CLASS C_dnkiztld Rarity
-		COMMENT The rarity is an attribute of an enchantment.
-		COMMENT
-		COMMENT <p>It affects the chance of getting an enchantment from enchanting or
-		COMMENT loots as well as the combination cost in anvil.
-		FIELD f_yjqkjiph weight I
-		METHOD <init> (Ljava/lang/String;II)V
-			ARG 3 weight
-		METHOD m_eihtptec getWeight ()I
-			COMMENT {@return the weight of an enchantment in weighted pickers}
