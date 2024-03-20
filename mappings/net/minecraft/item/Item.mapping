@@ -25,6 +25,15 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_dgdssmij fromBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_vorddnax;
 		COMMENT @deprecated Please use {@link Block#asItem}
 		ARG 0 block
+	METHOD m_dnwybntd isSuitableFor (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		COMMENT Determines whether this item can be used as a suitable tool for mining the specified block.
+		COMMENT Depending on block implementation, when combined together, the correct item and block may achieve a better mining speed and yield
+		COMMENT drops that would not be obtained when mining otherwise.
+		COMMENT <p>
+		COMMENT Note that this is not the <b>only</b> way to achieve "effectiveness" when mining.
+		COMMENT Other items, such as shears on string, may use their own logic
+		COMMENT and calls to this method might not return a value consistent to this rule for those items.
+		ARG 2 state
 	METHOD m_dxjqmgus isEnchantable (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		COMMENT {@return whether the given {@link ItemStack} is enchantable}
 		COMMENT
