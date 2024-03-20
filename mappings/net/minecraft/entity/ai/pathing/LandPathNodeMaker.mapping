@@ -1,18 +1,85 @@
 CLASS net/minecraft/unmapped/C_hdkjlatd net/minecraft/entity/ai/pathing/LandPathNodeMaker
 	FIELD f_eaajtylk Y_OFFSET D
+	FIELD f_kgztuylw neighborCache [Lnet/minecraft/unmapped/C_dfzwsdmo;
+	FIELD f_opbpsmbg DEFAULT_STEP_HEIGHT D
+	FIELD f_ybtkjkef collisionCache Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
 	FIELD f_zuqizohc collidedBoxes Lit/unimi/dsi/fastutil/objects/Object2BooleanMap;
 	METHOD m_bnggwgox checkBoxCollision (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
 		ARG 1 box
+	METHOD m_digplvvc (IIIJ)Lnet/minecraft/unmapped/C_hahxxnjs;
+		ARG 4 l
+	METHOD m_eqwgnoco getBlockedNode (III)Lnet/minecraft/unmapped/C_dfzwsdmo;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_etdbalqp getStart (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_dfzwsdmo;
+	METHOD m_femsgzut getLandNodeType (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hahxxnjs;
+	METHOD m_fkzockkt getNodeWithPenalty (IIILnet/minecraft/unmapped/C_hahxxnjs;F)Lnet/minecraft/unmapped/C_dfzwsdmo;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 type
+		ARG 5 penalty
+	METHOD m_franhrzn getNodeTypeFromState (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hahxxnjs;
+	METHOD m_ibznpaha findFirstGroundNodeBelow (III)Lnet/minecraft/unmapped/C_dfzwsdmo;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD m_jprttgje getNodeTypeFromNeighbors (Lnet/minecraft/unmapped/C_amrnepho;IIILnet/minecraft/unmapped/C_hahxxnjs;)Lnet/minecraft/unmapped/C_hahxxnjs;
+		ARG 0 context
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 fallback
+	METHOD m_kurdvfmr getJumpUpNode (IIIIDLnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hahxxnjs;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)Lnet/minecraft/unmapped/C_dfzwsdmo;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 maxYStep
+	METHOD m_kxrnaccr getPathNode (IIIIDLnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hahxxnjs;)Lnet/minecraft/unmapped/C_dfzwsdmo;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 maxYStep
+		ARG 5 prevFeetY
+		ARG 8 type
+	METHOD m_mefnvwvz findFirstNonWaterNodeBelow (IIILnet/minecraft/unmapped/C_dfzwsdmo;)Lnet/minecraft/unmapped/C_dfzwsdmo;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 node
 	METHOD m_mgexqmtg getNodeType (III)Lnet/minecraft/unmapped/C_hahxxnjs;
+	METHOD m_mkwbblfp isDiagonalValid (Lnet/minecraft/unmapped/C_dfzwsdmo;Lnet/minecraft/unmapped/C_dfzwsdmo;Lnet/minecraft/unmapped/C_dfzwsdmo;)Z
+		ARG 1 node
+		ARG 2 zNode
+		ARG 3 xDiagonalNode
 	METHOD m_nknwncol isValidAdjacentSuccessor (Lnet/minecraft/unmapped/C_dfzwsdmo;Lnet/minecraft/unmapped/C_dfzwsdmo;)Z
 		ARG 1 node
 		ARG 2 successor
 	METHOD m_owedamoz getFeetY (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)D
 		ARG 0 world
 		ARG 1 pos
+	METHOD m_qhhanrdd getNodeWithDefaultPenalty (IIILnet/minecraft/unmapped/C_hahxxnjs;)Lnet/minecraft/unmapped/C_dfzwsdmo;
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 type
+	METHOD m_rsepzcwn isDiagonalValid (Lnet/minecraft/unmapped/C_dfzwsdmo;)Z
+		ARG 1 node
+	METHOD m_tgzoopmb isBlocked (Lnet/minecraft/unmapped/C_hahxxnjs;)Z
+		ARG 0 type
 	METHOD m_tototrrw isAmphibious ()Z
 	METHOD m_tsskqbty getFeetY (Lnet/minecraft/unmapped/C_hynzadkk;)D
 		ARG 1 pos
+	METHOD m_txuqlgaw getLandNodeType (Lnet/minecraft/unmapped/C_amrnepho;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)Lnet/minecraft/unmapped/C_hahxxnjs;
 	METHOD m_wblphwtk hasPathfindingPenalty (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 	METHOD m_xjnpfsyx isBlocked (Lnet/minecraft/unmapped/C_dfzwsdmo;)Z
 		ARG 1 node
+	METHOD m_xmcbfbhg getCollidingNodeTypes (Lnet/minecraft/unmapped/C_amrnepho;III)Ljava/util/Set;
+		ARG 1 context
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+	METHOD m_xxklcrsi (Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/lang/Object;)Z
+		ARG 2 b
+	METHOD m_yzbojslm getStepHeight ()D
