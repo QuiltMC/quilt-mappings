@@ -1,0 +1,17 @@
+name: PR Manager
+on:
+  schedule:
+    - cron:  '0 12 * * *'
+  pull_request:
+    types: [ labeled ]
+
+permissions: 
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  check-fcp:
+    name: Manage PRs
+    uses: ./.github/actions/pr-manager
+    id: manage-prs
