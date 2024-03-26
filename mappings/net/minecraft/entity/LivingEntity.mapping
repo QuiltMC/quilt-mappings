@@ -326,10 +326,11 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT Gets the amount of health this entity has in half-hearts.
 		COMMENT
 		COMMENT @return the amount of health of this entity
+	METHOD m_kobcxaqs getJumpStrength ()F
 	METHOD m_ktkvypgf enterCombat ()V
 	METHOD m_kwjgylty swimUpward (Lnet/minecraft/unmapped/C_ednuhnnn;)V
 		ARG 1 tag
-	METHOD m_kzhoqled (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
+	METHOD m_kzhoqled equipStack (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 	METHOD m_lagxpcmk onStatusEffectRemoved (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 effect
@@ -367,6 +368,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT
 		COMMENT <p>This checks both the entity's main and off hand.
 		ARG 1 predicate
+	METHOD m_msbyrsaa getAllArmorItems ()Ljava/lang/Iterable;
 	METHOD m_mzepiaxw getControlledMovementInput (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT Returns the movement input when this entity is controlled by a player.
 		COMMENT
@@ -426,11 +428,14 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_pwoagvwv getArmorInSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
 	METHOD m_qhbjdevp getMaxRelativeHeadRotation ()F
+	METHOD m_qjxxiksy getHandItems ()Ljava/lang/Iterable;
 	METHOD m_qlumoklh onDismounted (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 vehicle
 	METHOD m_qlwogvxq spawnItemParticles (Lnet/minecraft/unmapped/C_sddaxwyk;I)V
 		ARG 1 stack
 		ARG 2 count
+	METHOD m_qmfzkten getJumpStrength (F)F
+		ARG 1 multiplier
 	METHOD m_qrjyiaeu getScaleFactor ()F
 	METHOD m_qsbhsxhz isAffectedBySplashPotions ()Z
 	METHOD m_qsfhmwnj getAttributeBaseValue (Lnet/minecraft/unmapped/C_cjzoxshv;)D
@@ -576,7 +581,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_wsbfbafs getAbsorptionAmount ()F
 	METHOD m_wslmhwgl getAttacker ()Lnet/minecraft/unmapped/C_usxaxydn;
 	METHOD m_wunuznfv isInCreativeMode ()Z
-	METHOD m_xcvctlld (Lnet/minecraft/unmapped/C_yuycoehb;)Z
+	METHOD m_xcvctlld canUseSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Z
 		ARG 1 slot
 	METHOD m_xgwxqkgb swingHand (Lnet/minecraft/unmapped/C_laxmzoqs;)V
 		ARG 1 hand
@@ -585,11 +590,16 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_xotweprj indicateDamage (DD)V
 		ARG 1 x
 		ARG 3 z
+	METHOD m_xqeoerfz getArmorItems ()Ljava/lang/Iterable;
 	METHOD m_xuirzakp getEquippedStack (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
 	METHOD m_xusebikf wouldNotSuffocateInPose (Lnet/minecraft/unmapped/C_ufdjspmk;)Z
 		ARG 1 pose
 	METHOD m_xuxedegf isBaby ()Z
+	METHOD m_xvjkmxro getEquippedItems ()Ljava/lang/Iterable;
+		COMMENT Gets all equipped items on this entity, including all armor and items in hand.
+		COMMENT @see #getAllArmorItems
+		COMMENT @see #getHandItems
 	METHOD m_xvjtogym setAbsorptionAmountInternal (F)V
 		ARG 1 absorptionAmount
 	METHOD m_xzvpzpbu removeStatusEffect (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
@@ -637,6 +647,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_zgpfruit getAttributeInstance (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_lzukavpx;
 		ARG 1 attribute
 	METHOD m_zhwrgbmx getPoses ()Lcom/google/common/collect/ImmutableList;
+	METHOD m_zjpztqou lerpHeadYaw (ID)V
+		ARG 1 headTrackingIncrements
+		ARG 2 serverHeadYaw
 	METHOD m_zrgxyjwv hasStatusEffect (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
 		ARG 1 effect
 	METHOD m_ztpokzjz getDamageTiltStrength ()F
