@@ -6,6 +6,7 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 	FIELD f_jdqfqfar nearPathStartPos Z
 	FIELD f_jpruxtyc lastActiveTickMs J
 	FIELD f_jqnetjyj currentNodeTimeout D
+	FIELD f_kgulcrtt STUCK_THRESHOLD_DISTANCE_FACTOR F
 	FIELD f_kwipzrjl shouldRecalculate Z
 	FIELD f_kygwztte currentPath Lnet/minecraft/unmapped/C_motipebf;
 	FIELD f_lcencwyr currentDistance I
@@ -22,6 +23,7 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 	FIELD f_unngfiir nodeMaker Lnet/minecraft/unmapped/C_pbtgpvfg;
 	FIELD f_wcsndowi lastRecalculateTime J
 	FIELD f_ytabmjrn entity Lnet/minecraft/unmapped/C_dxkfswlz;
+	FIELD f_zyochajd STUCK_CHECK_INTERVAL I
 	METHOD <init> (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_cdctfzbn;)V
 		ARG 1 mob
 		ARG 2 world
@@ -54,6 +56,7 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 		ARG 7 speed
 	METHOD m_ifpmpvgl resetRangeMultiplier ()V
 	METHOD m_ihvdiado canPathDirectlyThrough (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Z)Z
+		ARG 0 entity
 		ARG 1 origin
 		ARG 2 target
 		ARG 3 handleFluid
@@ -92,10 +95,13 @@ CLASS net/minecraft/unmapped/C_atbvfjwi net/minecraft/entity/ai/pathing/EntityNa
 	METHOD m_qetxokay setSpeed (D)V
 		ARG 1 speed
 	METHOD m_qkbmchty stop ()V
+	METHOD m_rfnahbaw canJumpToNext (Lnet/minecraft/unmapped/C_hahxxnjs;)Z
+		ARG 1 type
 	METHOD m_rhavjrcm createPathNodeNavigator (I)Lnet/minecraft/unmapped/C_jjtdffgj;
 		ARG 1 range
 	METHOD m_shecbiuf shouldJumpToNextNode (Lnet/minecraft/unmapped/C_vgpupfxx;)Z
 		ARG 1 currentPos
+	METHOD m_tbseeosg startMovingTo (DDDID)Z
 	METHOD m_ttwslddf recalculatePath ()V
 	METHOD m_tzgadsdi getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT The position to act as if the entity is at for pathfinding purposes
