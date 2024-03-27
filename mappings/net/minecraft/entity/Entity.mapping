@@ -34,6 +34,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_eyihyrff pistonMovementDelta [D
 	FIELD f_fbrwyrto inNetherPortal Z
 	FIELD f_fngqrxks standingEyeHeight F
+	FIELD f_ghlcqzgv CONTENTS_SLOT_INDEX I
 	FIELD f_gpwlbvdc lastNetherPortalPosition Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_gzzxrhqg RIDING_COOLDOWN I
 	FIELD f_habutjjj scoreboardTags Ljava/util/Set;
@@ -193,9 +194,10 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 5 deltaZ
 	METHOD m_cjtrtfdq collidesWith (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 other
-	METHOD m_ckeimykr (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_pubtmkke;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_ckeimykr getPassengerAttachmentPos (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_pubtmkke;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 vehicle
 		ARG 1 passenger
+		ARG 2 attachments
 	METHOD m_clvtkwyd setFlag (IZ)V
 		ARG 1 index
 		ARG 2 value
@@ -205,6 +207,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_cpoqqugf applyRotation (Lnet/minecraft/unmapped/C_mboglirk;)F
 		ARG 1 rotation
 	METHOD m_cqjiujoa getUuidAsString ()Ljava/lang/String;
+	METHOD m_crbtimbo getFacing ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_csskrddd updateVelocity (FLnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 speed
 		ARG 2 movementInput
@@ -345,6 +348,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_ghqcprlw onPlayerCollision (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 player
 	METHOD m_glbnrqjr getFirstPassenger ()Lnet/minecraft/unmapped/C_astfners;
+	METHOD m_gliwfays getGravity ()D
 	METHOD m_gmlierig setBodyYaw (F)V
 		ARG 1 bodyYaw
 	METHOD m_gmmuescl getRenderDistanceMultiplier ()D
@@ -676,12 +680,13 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 projectile
 	METHOD m_psnzmttx getVelocity ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_pvbcngmg getMaxFreezeTicks ()I
+	METHOD m_pvspcngk getDefaultGravity ()D
 	METHOD m_pwwzkeqh teleportToOffset (DDD)V
 		ARG 1 offsetX
 		ARG 3 offsetY
 		ARG 5 offsetZ
 	METHOD m_pxtokmcp unsetRemoved ()V
-	METHOD m_pxzrmrny (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_pxzrmrny getPassengerRidingPos (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 entity
 	METHOD m_qbuogctw getPose ()Lnet/minecraft/unmapped/C_ufdjspmk;
 	METHOD m_qchceppc tickRiding ()V
@@ -697,6 +702,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_qqdihtpc shouldSetPositionOnLoad ()Z
 	METHOD m_qshpzohi dropItem (Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_uqpzijng;
 		ARG 1 item
+	METHOD m_qufdccav onExploded (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 entity
 	METHOD m_qvezifat isDescending ()Z
 	METHOD m_qwhvqkqc setInPowderSnow (Z)V
 		ARG 1 inPowderSnow
@@ -799,6 +806,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT
 		COMMENT @implNote The swim height of 0 allows short entities like baby animals
 		COMMENT to start swimming to avoid suffocation.
+	METHOD m_uidprvfr applyGravity ()V
 	METHOD m_ujcgbwni squaredDistanceTo (DDD)D
 		ARG 1 x
 		ARG 3 y
@@ -939,10 +947,11 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_xvflsbzg scheduleVelocityUpdate ()V
 	METHOD m_xwbgqvgs readNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
-	METHOD m_xwkoqqtf (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sszpscpo;F)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_xwkoqqtf getPassengerAttachmentPos (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sszpscpo;F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 entity
 		ARG 2 dimensions
-	METHOD m_xyjymteg (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 3 scaleFactor
+	METHOD m_xyjymteg getVehicleAttachmentPos (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 entity
 	METHOD m_xyqhaexi playCombinationStepSounds (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 primaryState

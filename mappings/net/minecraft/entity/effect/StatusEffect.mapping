@@ -1,5 +1,7 @@
 CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	FIELD f_fcnodzqo color I
+	FIELD f_fromvzcw particleFactory Ljava/util/function/Function;
+	FIELD f_hrqsqyvx AMBIENT_PARTICLE_ALPHA I
 	FIELD f_pnqtkxvc type Lnet/minecraft/unmapped/C_mbktilxo;
 	FIELD f_rqynlpsa attributeModifiers Ljava/util/Map;
 	FIELD f_umzrptqr blendDuration I
@@ -7,6 +9,8 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	METHOD <init> (Lnet/minecraft/unmapped/C_mbktilxo;I)V
 		ARG 1 type
 		ARG 2 color
+	METHOD <init> (Lnet/minecraft/unmapped/C_mbktilxo;ILnet/minecraft/unmapped/C_nqucohct;)V
+		ARG 3 particle
 	METHOD m_azrqgeuc onApplied (Lnet/minecraft/unmapped/C_cohbwqne;I)V
 		ARG 1 attributes
 		ARG 2 amplifier
@@ -18,6 +22,8 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	METHOD m_despsamn applyUpdateEffect (Lnet/minecraft/unmapped/C_usxaxydn;I)Z
 		ARG 1 entity
 		ARG 2 amplifier
+	METHOD m_giqojxuj (ILnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
+		ARG 1 effect
 	METHOD m_hgarvyvx withBlendDuration (I)Lnet/minecraft/unmapped/C_jaqasomh;
 		ARG 1 blendDuration
 	METHOD m_igvnkdng isBeneficial ()Z
@@ -38,12 +44,16 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	METHOD m_sfpvrsws onRemoved (Lnet/minecraft/unmapped/C_cohbwqne;)V
 		ARG 1 attributes
 	METHOD m_shkzklwb getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_uosrujfk createParticle (Lnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
+		ARG 1 statusEffect
 	METHOD m_xccgpemy applyInstantEffect (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_usxaxydn;ID)V
 		ARG 1 source
 		ARG 2 attacker
 		ARG 3 target
 		ARG 4 amplifier
 		ARG 5 proximity
+	METHOD m_xpznhypy (Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
+		ARG 1 statusEffect
 	METHOD m_yxnpxply isInstant ()Z
 	CLASS C_xvxuthmo EntryAttributeModifierCreator
 		METHOD m_zhiowqzb create (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_hdbqsqsm;

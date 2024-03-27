@@ -140,18 +140,28 @@ CLASS net/minecraft/unmapped/C_rdaqiwdt net/minecraft/text/Text
 		COMMENT the supplied {@code length}.
 		ARG 1 length
 			COMMENT the max length allowed for the string representation of the text
-	CLASS C_iyijrxyu Serializer
-		COMMENT Represents a JSON serializer for {@link Text}.
+	CLASS C_iyijrxyu SerializationUtil
 		FIELD f_avuxccfb GSON Lcom/google/gson/Gson;
 		METHOD m_avvlujlm fromLenientJson (Ljava/lang/String;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_npqneive;
 			ARG 0 json
+		METHOD m_caetnclp fromJsonNullable (Lcom/google/gson/JsonElement;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_npqneive;
 		METHOD m_eorwnzsk toJson (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Ljava/lang/String;
 			ARG 0 text
-		METHOD m_fsepqjma (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lcom/google/gson/JsonElement;
+		METHOD m_fsepqjma toJsonElement (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lcom/google/gson/JsonElement;
 			ARG 0 text
-	CLASS C_poyaemhx
+			ARG 1 lookupProvider
+		METHOD m_npeyudcr fromJson (Ljava/lang/String;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_npqneive;
+		METHOD m_rjdnjbxy fromJson (Lcom/google/gson/JsonElement;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_npqneive;
+			ARG 0 json
+			ARG 1 lookupProvider
+	CLASS C_poyaemhx Serializer
+		COMMENT Represents a JSON serializer for {@link Text}.
+		FIELD f_utvsiwsp lookupProvider Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
 		METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Ljava/lang/Object;
 			ARG 1 jsonElement
 			ARG 2 type
+			ARG 3 context
 		METHOD serialize serialize (Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+			ARG 1 text
 			ARG 2 type
+			ARG 3 context
