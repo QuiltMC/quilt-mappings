@@ -5,6 +5,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	FIELD f_bfzmdzwe entityManager Lnet/minecraft/unmapped/C_jdbhctxz;
 	FIELD f_bljyejgt MAX_SCHEDULED_TICKS I
 	FIELD f_cpeuzhki raidManager Lnet/minecraft/unmapped/C_gyltordp;
+	FIELD f_egordcxu pathNodeTypeCache Lnet/minecraft/unmapped/C_utuhijqr;
 	FIELD f_gfhsuipm gameEventDispatcher Lnet/minecraft/unmapped/C_tcmbbpqi;
 	FIELD f_hzsuzwuz savingDisabled Z
 	FIELD f_ixkepxes randomSequences Lnet/minecraft/unmapped/C_xmjhbbku;
@@ -54,6 +55,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 		ARG 3 forced
 	METHOD m_cbjhfxlh isSleepingEnabled ()Z
 	METHOD m_ckqdfoye iterateEntities ()Ljava/lang/Iterable;
+	METHOD m_cmmftqtr getOrCreateRandom (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_rlomrsco;
 	METHOD m_dmjacdzr getPortalForcer ()Lnet/minecraft/unmapped/C_daetwwvm;
 	METHOD m_dvlikbhw onPlayerTeleport (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
@@ -73,6 +75,8 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 		ARG 1 entity
 	METHOD m_etqgghww dump (Ljava/nio/file/Path;)V
 		ARG 1 path
+	METHOD m_fejtkupl shouldTick (Lnet/minecraft/unmapped/C_hynzadkk;)Z
+	METHOD m_ftckrjes getRandomSequences ()Lnet/minecraft/unmapped/C_xmjhbbku;
 	METHOD m_ghlhwjgw sendToPlayerIfNearby (Lnet/minecraft/unmapped/C_mxrobsgg;ZDDDLnet/minecraft/unmapped/C_zyjtrjrl;)Z
 		ARG 1 player
 		ARG 2 force
@@ -103,7 +107,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 		ARG 1 box
 	METHOD m_ilvpytac getMatchingPlayers (Ljava/util/function/Predicate;)Ljava/util/List;
 		ARG 1 predicate
-	METHOD m_immceocf (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
+	METHOD m_immceocf shouldTick (Lnet/minecraft/unmapped/C_ynrszrtu;)Z
 		ARG 1 pos
 	METHOD m_inadgslt tickWeather ()V
 	METHOD m_inzidthk shouldCreateNewEntityWithPassenger (Lnet/minecraft/unmapped/C_astfners;)Z
@@ -117,10 +121,13 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 	METHOD m_jhwkhqgo isNearOccupiedPointOfInterest (Lnet/minecraft/unmapped/C_hynzadkk;I)Z
 		ARG 1 pos
 		ARG 2 maxDistance
+	METHOD m_jyqkjiyo areChunkEntitiesLoadedAndTicking (J)Z
+		ARG 1 pos
 	METHOD m_kdrjabqu getRandomAlivePlayer ()Lnet/minecraft/unmapped/C_mxrobsgg;
 	METHOD m_khthlbpk getForcedChunks ()Lit/unimi/dsi/fastutil/longs/LongSet;
 	METHOD m_kmlkcayc getOccupiedPointOfInterestDistance (Lnet/minecraft/unmapped/C_zubvmeye;)I
 		ARG 1 pos
+	METHOD m_krunbqkn getPathNodeTypeCache ()Lnet/minecraft/unmapped/C_utuhijqr;
 	METHOD m_ldvxbeho getSurface (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 pos
 	METHOD m_lgjatndm getMatchingPlayers (Ljava/util/function/Predicate;I)Ljava/util/List;
@@ -145,6 +152,7 @@ CLASS net/minecraft/unmapped/C_bdwnwhiu net/minecraft/server/world/ServerWorld
 		ARG 11 deltaY
 		ARG 13 deltaZ
 		ARG 15 speed
+	METHOD m_ofnkxfkf shouldTickEntities (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 	METHOD m_olxeedby locateBiome (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_hynzadkk;III)Lcom/mojang/datafixers/util/Pair;
 		ARG 1 predicate
 			COMMENT checks if the current biome is one of the ones being searched for
