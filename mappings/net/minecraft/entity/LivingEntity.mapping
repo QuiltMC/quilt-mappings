@@ -6,6 +6,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_azizbgcr SOUL_SPEED_BOOST_ID Ljava/util/UUID;
 	FIELD f_bwbjmspv DAMAGE_SOURCE_TIMEOUT I
 	FIELD f_coityhpi jumping Z
+	FIELD f_dddwkxrr bodyArmor Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_debofomg riptideTicks I
 	FIELD f_dwqtqyxt STINGER_COUNT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ebtfxbod stuckArrowTimer I
@@ -13,6 +14,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_fdustjrj POWDER_SNOW_SLOW_ID Ljava/util/UUID;
 	FIELD f_ffcustbq bodyTrackingIncrements I
 	FIELD f_figrybhh noDrag Z
+	FIELD f_fqazkkvr BODY_ARMOR_OFFSET I
 	FIELD f_fqkpwpyn handSwingProgress F
 	FIELD f_gikugpix lastAttackedTicks I
 	FIELD f_gkgtpexp MAX_MOVEMENT_DISTANCE D
@@ -21,9 +23,12 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_gzqrtqlw serverYaw D
 	FIELD f_hdvyydom MAX_VISIBILITY_TEST_RANGE D
 	FIELD f_hhueawxl attackingPlayer Lnet/minecraft/unmapped/C_jzrpycqo;
+	FIELD f_hkjqagmp DEFAULT_BABY_SCALE F
 	FIELD f_hoaujqhj handSwingTicks I
+	FIELD f_hplkgeec appliedScale F
 	FIELD f_huyhofoo serverY D
 	FIELD f_iiiqnngu SPRINTING_SPEED_BOOST Lnet/minecraft/unmapped/C_hdbqsqsm;
+	FIELD f_iiptolzx ITEM_USE_EFFECT_START_FRACTION F
 	FIELD f_iismerxm ACTIVE_EFFECTS_KEY Ljava/lang/String;
 	FIELD f_ioiczfgs HAND_SLOTS I
 	FIELD f_isuahutr jumpingCooldown I
@@ -31,6 +36,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_ixvzqhhj lastAttackedTime I
 	FIELD f_jhglsogm hurtTime I
 	FIELD f_jhjpjdjl randomSmallSeed F
+	FIELD f_kdeboxay PARTICLE_FREQUENCY_WHEN_INVISIBLE I
 	FIELD f_kfiskcbr preferredHand Lnet/minecraft/unmapped/C_laxmzoqs;
 	FIELD f_kimgjcqe scoreAmount I
 	FIELD f_kjdgaswv LOGGER Lorg/slf4j/Logger;
@@ -45,6 +51,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_mcoihohf itemUseTimeLeft I
 	FIELD f_mfltnpor effectsChanged Z
 	FIELD f_mikwhxdg skipExperienceDrop Z
+	FIELD f_mjweoijp POTION_SWIRLS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_mlsykvgi absorptionAmount F
 	FIELD f_naybbqec ITEM_USE_INTERVAL I
 	FIELD f_noitvgvb LARGE_HAT_RENDER_CULLING_SIZE F
@@ -210,6 +217,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_fsypkjee isTarget (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cjtyhinh;)Z
 		ARG 1 entity
 		ARG 2 predicate
+	METHOD m_fvvkbcbd setPotionSwirls ()V
 	METHOD m_fyloosbv updateGlowing ()V
 	METHOD m_gbfixjfm updateAttribute (Lnet/minecraft/unmapped/C_cjzoxshv;)V
 		ARG 1 attribute
@@ -352,6 +360,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_lzrgnjjo dropLoot (Lnet/minecraft/unmapped/C_sbxfkpyv;Z)V
 		ARG 1 source
 		ARG 2 causedByPlayer
+	METHOD m_midgwnho getSafeFallDistance (F)I
+		ARG 1 health
 	METHOD m_mlrktqxh setEquipment (Ljava/util/Map;)V
 		ARG 1 equipment
 	METHOD m_mluxghic setStackInHandSlot (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
@@ -383,10 +393,14 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 mask
 		ARG 2 value
 	METHOD m_nffkdjyj shouldDisplaySoulSpeedEffects ()Z
+	METHOD m_nmtlrqts (Lnet/minecraft/unmapped/C_cohbwqne;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		ARG 1 attribute
+		ARG 2 modifier
 	METHOD m_nutvedxs onEquipItem (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 		ARG 2 oldStack
 		ARG 3 toEquip
+	METHOD m_nwdilhgs sendEquipmentBreakStatus (Lnet/minecraft/unmapped/C_yuycoehb;)V
 	METHOD m_nwomssgw getOffHandStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_oafzlopj getSoundVolume ()F
 	METHOD m_ojlaryxr hasStackEquipped (Lnet/minecraft/unmapped/C_yuycoehb;)Z
@@ -486,7 +500,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 player
 	METHOD m_swttaoou knockDownwards ()V
 	METHOD m_swvraqsl getMaxAbsorption ()F
-	METHOD m_tcvuiywd (Lnet/minecraft/unmapped/C_avavozay;)V
+	METHOD m_tcvuiywd makeSound (Lnet/minecraft/unmapped/C_avavozay;)V
 		ARG 1 sound
 	METHOD m_tdxfjzrk getStatusEffects ()Ljava/util/Collection;
 	METHOD m_tehtzmwu blockedByShield (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
@@ -511,6 +525,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_trdfxuev tickRiptide (Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_hbcjzgoe;)V
 		ARG 1 a
 		ARG 2 b
+	METHOD m_tvyfqrdt (Lnet/minecraft/unmapped/C_cohbwqne;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		ARG 1 attribute
+		ARG 2 modifier
 	METHOD m_uhjfbatb tickControlled (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 player
 		ARG 2 input
@@ -530,6 +547,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_uwysofda updateLimbs (Z)V
 		ARG 1 flutter
 	METHOD m_uytukmik isSleeping ()Z
+	METHOD m_uzfdrlrs clampScale (F)F
+		ARG 1 scale
 	METHOD m_vchrqjlb addStatusEffect (Lnet/minecraft/unmapped/C_wpfizwve;)Z
 		COMMENT Adds a status effect to this entity without specifying a source entity.
 		COMMENT
@@ -578,6 +597,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 player
 		ARG 2 input
 	METHOD m_wqoypvjl applyFoodEffects (Lnet/minecraft/unmapped/C_cgikuact;)V
+		ARG 1 food
 	METHOD m_wsbfbafs getAbsorptionAmount ()F
 	METHOD m_wslmhwgl getAttacker ()Lnet/minecraft/unmapped/C_usxaxydn;
 	METHOD m_wunuznfv isInCreativeMode ()Z
@@ -650,6 +670,10 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_zjpztqou lerpHeadYaw (ID)V
 		ARG 1 headTrackingIncrements
 		ARG 2 serverHeadYaw
+	METHOD m_zmcmzkho damageEquipment (Lnet/minecraft/unmapped/C_sbxfkpyv;F[Lnet/minecraft/unmapped/C_yuycoehb;)V
+		ARG 1 source
+		ARG 2 amount
+		ARG 3 slots
 	METHOD m_zrgxyjwv hasStatusEffect (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
 		ARG 1 effect
 	METHOD m_ztpokzjz getDamageTiltStrength ()F
