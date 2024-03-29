@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_xcbqcvvm net/minecraft/datafixer/schema/Schema99
+	FIELD f_bmaggcmk ITEM_TO_ENTITY Ljava/util/Map;
 	FIELD f_egllvquq ITEM_TO_BLOCK_ENTITY Ljava/util/Map;
 	FIELD f_wjzmzffn ADD_NAMES Lcom/mojang/datafixers/types/templates/Hook$HookFunction;
 	FIELD f_xpuyjcmo LOGGER Lorg/slf4j/Logger;
@@ -6,15 +7,23 @@ CLASS net/minecraft/unmapped/C_xcbqcvvm net/minecraft/datafixer/schema/Schema99
 		ARG 1 versionKey
 		ARG 2 parent
 	METHOD m_gcagwrew targetDisplayTile (Lcom/mojang/datafixers/schemas/Schema;Ljava/util/Map;Ljava/lang/String;)V
+		ARG 1 map
 		ARG 2 entityId
+	METHOD m_smqzdrpk (Ljava/util/HashMap;)V
+		ARG 0 itemToBlockEntityHashMap
 	METHOD m_uglvoiot targetInTile (Lcom/mojang/datafixers/schemas/Schema;Ljava/util/Map;Ljava/lang/String;)V
+		ARG 1 map
 		ARG 2 entityId
 	METHOD m_vxcwoihc targetEquipment (Lcom/mojang/datafixers/schemas/Schema;Ljava/util/Map;Ljava/lang/String;)V
+		ARG 1 map
 		ARG 2 entityId
 	METHOD m_vyyvidoc targetItems (Lcom/mojang/datafixers/schemas/Schema;Ljava/util/Map;Ljava/lang/String;)V
+		ARG 1 map
 		ARG 2 entityId
 	METHOD m_xolowwlc targetEquipment (Lcom/mojang/datafixers/schemas/Schema;)Lcom/mojang/datafixers/types/templates/TypeTemplate;
 	METHOD m_zejlkvsb addNames (Lcom/mojang/serialization/Dynamic;Ljava/util/Map;Ljava/util/Map;)Ljava/lang/Object;
+		ARG 0 stack
+		ARG 1 renames
 	METHOD registerBlockEntities registerBlockEntities (Lcom/mojang/datafixers/schemas/Schema;)Ljava/util/Map;
 	METHOD registerEntities registerEntities (Lcom/mojang/datafixers/schemas/Schema;)Ljava/util/Map;
 	METHOD registerTypes registerTypes (Lcom/mojang/datafixers/schemas/Schema;Ljava/util/Map;Ljava/util/Map;)V
@@ -22,3 +31,5 @@ CLASS net/minecraft/unmapped/C_xcbqcvvm net/minecraft/datafixer/schema/Schema99
 		ARG 3 blockEntityTypes
 	CLASS C_gtlossfa
 		METHOD apply apply (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 ops
+			ARG 2 value
