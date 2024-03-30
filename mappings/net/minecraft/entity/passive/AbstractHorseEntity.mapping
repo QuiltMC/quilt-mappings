@@ -1,30 +1,39 @@
-CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEntity
+CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/AbstractHorseEntity
 	FIELD f_abtzxcfc lastEatingAnimationProgress F
 	FIELD f_alpcqiot saddle Lnet/minecraft/unmapped/C_pjtstjoq;
 	FIELD f_arsvwxpt inAir Z
 	FIELD f_buzirmfu lastEatingGrassAnimationProgress F
 	FIELD f_bzsvwmpq jumpStrength F
+	FIELD f_catxtgyu BREEDING_CROSS_FACTOR D
 	FIELD f_cjthlgvf items Lnet/minecraft/unmapped/C_rsloiwzx;
 	FIELD f_cxooziyz EATING_FLAG I
 	FIELD f_edcpbqlo sprintCounter I
 	FIELD f_etdluypy SADDLED_FLAG I
+	FIELD f_fstbmray MAX_MOVEMENT_SPEED_BONUS F
 	FIELD f_gdzbsaga eatingAnimationProgress F
 	FIELD f_glotgzzw INVENTORY_BASE_SIZE I
+	FIELD f_hbyhydyx SIDEWAYS_MOVEMENT_SPEED_FACTOR F
 	FIELD f_hdxhgdko eatingGrassTicks I
 	FIELD f_hlqzztcb lastAngryAnimationProgress F
 	FIELD f_hwysynes temper I
 	FIELD f_ilyxxrqs HORSE_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_jqseruff INVENTORY_SLOT_OFFSET I
+	FIELD f_jwphnzxz MIN_JUMP_STRENGTH_BONUS F
 	FIELD f_letngbqu TAMED_FLAG I
 	FIELD f_lxhtkynm angryAnimationProgress F
 	FIELD f_lysnitog playExtraHorseSounds Z
 	FIELD f_neellawu IS_BRED_HORSE Ljava/util/function/Predicate;
+	FIELD f_ntiwstyo MIN_HEALTH_BONUS F
 	FIELD f_nuwglgdu SADDLE_INVENTORY_SLOT I
 	FIELD f_nuzixylm EQUIPMENT_SLOT_OFFSET I
 	FIELD f_oquxiife eatingGrassAnimationProgress F
 	FIELD f_osljbzmg CHEST_SLOT_OFFSET I
+	FIELD f_rbeqlhug BACKWARDS_MOVEMENT_SPEED_FACTOR F
+	FIELD f_rewxrkfk MAX_HEALTH_BONUS F
 	FIELD f_rkfnbjcq EATING_GRASS_FLAG I
+	FIELD f_rsfxnpfu MIN_MOVEMENT_SPEED_BONUS F
 	FIELD f_swibgupj BRED_FLAG I
+	FIELD f_uflngrjo MAX_JUMP_STRENGTH_BONUS F
 	FIELD f_vcenovla angryTicks I
 	FIELD f_viztliev ANGRY_FLAG I
 	FIELD f_vzyvquhj jumping Z
@@ -61,6 +70,11 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 		ARG 1 player
 		ARG 2 item
 	METHOD m_gyxstozv isBred ()Z
+	METHOD m_hcmhlimb setChildAttribute (Lnet/minecraft/unmapped/C_jvojbnla;Lnet/minecraft/unmapped/C_ktznyhaj;Lnet/minecraft/unmapped/C_cjzoxshv;DD)V
+		ARG 1 mate
+		ARG 2 child
+		ARG 3 attribute
+		ARG 6 max
 	METHOD m_heiraznc isAngry ()Z
 	METHOD m_imwemfwv setOwnerUuid (Ljava/util/UUID;)V
 		ARG 1 uuid
@@ -85,10 +99,14 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 		ARG 1 group
 	METHOD m_nsgfuztq getHorseFlag (I)Z
 		ARG 1 bitmask
+	METHOD m_nskfvjdw updateSaddleFlag ()V
 	METHOD m_pgiwydii setHorseFlag (IZ)V
 		ARG 1 bitmask
 		ARG 2 flag
+	METHOD m_qhxpjozn generateSpeedBonus (Ljava/util/function/DoubleSupplier;)D
+		ARG 0 randomGetter
 	METHOD m_rebcmcfu getEatSound ()Lnet/minecraft/unmapped/C_avavozay;
+	METHOD m_rnxhdlpt equipBodyArmor (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 	METHOD m_saoghlvq canRear ()Z
 	METHOD m_spsxznbg onChestedStatusChanged ()V
 	METHOD m_spuukbnf playJumpSound ()V
@@ -96,6 +114,8 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 	METHOD m_tupzilkl bondWithPlayer (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		ARG 1 player
 	METHOD m_uhtevheg playEatingAnimation ()V
+	METHOD m_utvezgku generateMaxHealthBonus (Ljava/util/function/IntUnaryOperator;)F
+		ARG 0 randomGetter
 	METHOD m_uzaawbaz getMaxTemper ()I
 	METHOD m_vnhkinwe getTemper ()I
 	METHOD m_vrlngusg setAngry (Z)V
@@ -104,6 +124,12 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 		ARG 1 temper
 	METHOD m_xcdgjriw getEatingGrassAnimationProgress (F)F
 		ARG 1 tickDelta
+	METHOD m_xkwjgith calculateAttributeBaseValue (DDDDLnet/minecraft/unmapped/C_rlomrsco;)D
+		ARG 0 parentBase
+		ARG 2 mateBase
+		ARG 4 min
+		ARG 6 max
+		ARG 8 random
 	METHOD m_xwhupajn setBred (Z)V
 		ARG 1 bred
 	METHOD m_xwkhejaa getAngryAnimationProgress (F)F
@@ -115,5 +141,7 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/HorseBaseEn
 		ARG 1 dismountDirection
 		ARG 2 passenger
 	METHOD m_yvcfnlwg createBaseAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_zhrpcxsv generateJumpStrengthBonus (Ljava/util/function/DoubleSupplier;)D
+		ARG 0 randomGetter
 	METHOD m_zpkkhcub isDifferentInventory (Lnet/minecraft/unmapped/C_pjtstjoq;)Z
 		ARG 1 inventory
