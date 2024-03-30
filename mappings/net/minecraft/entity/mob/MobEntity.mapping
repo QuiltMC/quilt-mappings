@@ -7,6 +7,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_cyzznzel MOB_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ddgktbfn target Lnet/minecraft/unmapped/C_usxaxydn;
 	FIELD f_ddoijjlp DEFAULT_DROP_CHANCE F
+	FIELD f_duttfasp bodyArmorDropChance F
 	FIELD f_efwglgie PICKUP_REACH I
 	FIELD f_epnchdhu AI_DISABLED_FLAG I
 	FIELD f_fctspjcn handItems Lnet/minecraft/unmapped/C_rnrfftze;
@@ -24,6 +25,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_nzzqwalu pathfindingPenalties Ljava/util/Map;
 	FIELD f_oigfymps MAX_ENCHANTED_WEAPON_PROBABILITY F
 	FIELD f_omqaaiuh visibilityCache Lnet/minecraft/unmapped/C_vyefybqz;
+	FIELD f_osoyuxyj PRESERVE_ITEM_DROP_CHANCE I
 	FIELD f_pzxywady ambientSoundChance I
 	FIELD f_qlscjcje holdingEntityId I
 	FIELD f_qsoplnyt ITEM_PICKUP_REACH Lnet/minecraft/unmapped/C_ceivtqhh;
@@ -33,11 +35,15 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_uushnomk targetSelector Lnet/minecraft/unmapped/C_qospjrjn;
 	FIELD f_vuffzgdh lootTable Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_wklzyjov holdingEntity Lnet/minecraft/unmapped/C_astfners;
+	FIELD f_wkutgcpe DEFAULT_ATTACK_RANGE D
+	FIELD f_wtfqsbwv leashInfo Lcom/mojang/datafixers/util/Either;
 	FIELD f_xdwjzxrd handDropChances [F
 	FIELD f_ziddtuje GOAL_SELECTOR_UPDATE_INTERVAL I
 	FIELD f_zqtbccqn armorDropChances [F
 	FIELD f_zwyrnqpo MAX_WEAR_ARMOR_PROBABILITY F
 	METHOD m_ahhtjfdq getItemPickupReach ()Lnet/minecraft/unmapped/C_ceivtqhh;
+	METHOD m_akuajlxu getAttackDamageWith (Lnet/minecraft/unmapped/C_sddaxwyk;)D
+		ARG 1 weapon
 	METHOD m_avgkrrey loot (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 item
 	METHOD m_bafwglvj initEquipment (Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_jiailwzt;)V
@@ -74,6 +80,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 world
 		ARG 2 spawnReason
 		ARG 3 pos
+	METHOD m_gdorrohg clampHeadRotation ()V
 	METHOD m_gflspffg onPlayerSpawnedChild (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_dxkfswlz;)V
 		ARG 1 player
 		ARG 2 child
@@ -118,6 +125,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_kxilreut canPickupItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
 	METHOD m_lfujztja getLookControl ()Lnet/minecraft/unmapped/C_lgufpcrf;
+	METHOD m_lgazseuq hasComponentsOtherThanDamage (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_lofxmiwn setPersistent ()V
 	METHOD m_lpjmkwwe getMoveControl ()Lnet/minecraft/unmapped/C_azhvkebm;
 	METHOD m_lqlfsnxj getBodyYawSpeed ()I
@@ -137,6 +145,8 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 stack
 	METHOD m_nzxqjkay tryEquip (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 equipment
+	METHOD m_ouwoolzd equipFromLootTable (Lnet/minecraft/unmapped/C_ncpywfca;)V
+		ARG 1 lootTableId
 	METHOD m_owfqcyjj changeAngle (FFF)F
 		ARG 1 oldAngle
 		ARG 2 newAngle
@@ -150,6 +160,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_poddfqwd equipLootStack (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 		ARG 2 stack
+	METHOD m_psezodiw mayBeLeashed ()Z
 	METHOD m_pswyixar getMinAmbientSoundDelay ()I
 	METHOD m_ptlzvekd setCanPickUpLoot (Z)V
 		ARG 1 pickUpLoot
@@ -195,6 +206,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_wbeiezxn mobTick ()V
 	METHOD m_wdfnuhez getLookPitchSpeed ()I
 	METHOD m_wjpwvwky playSpawnEffects ()V
+	METHOD m_wjrpjxbl createEquipmentLootParameters (Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_nzsnkdtl;
 	METHOD m_wmjahmev getLookYawSpeed ()I
 	METHOD m_wuplhywr setBaby (Z)V
 		ARG 1 baby

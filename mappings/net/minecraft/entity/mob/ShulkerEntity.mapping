@@ -7,6 +7,7 @@ CLASS net/minecraft/unmapped/C_wepsgefi net/minecraft/entity/mob/ShulkerEntity
 	FIELD f_hlyfzsza teleportLerpTimer I
 	FIELD f_hxfmsvrp TELEPORT_STEPS I
 	FIELD f_kdytjkmi ATTACHED_FACE Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_mcgjemru MAX_SCALE F
 	FIELD f_nhqhcoaz NEARBY_SHULKER_SCAN_RADIUS I
 	FIELD f_odaehnvp prevAttachedBlock Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_qyhdlubn PEEK_AMOUNT Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -19,7 +20,11 @@ CLASS net/minecraft/unmapped/C_wepsgefi net/minecraft/entity/mob/ShulkerEntity
 	FIELD f_zdllrwfz MAX_SHELL_OPEN_DISTANCE F
 	METHOD m_agmrwfit createAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
 	METHOD m_aipehzdv getOpeningDeltaBoundingBox (FLnet/minecraft/unmapped/C_xpuuihxf;FF)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		ARG 0 scale
 		ARG 1 direction
+		ARG 2 prevExtraLength
+		ARG 3 extraLength
+	METHOD m_akuajlxu getAttackDamageWith (Lnet/minecraft/unmapped/C_sddaxwyk;)D
 	METHOD m_bcbqzxod getAttachedFace ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_bzwsabfi spawnNewShulker ()V
 	METHOD m_cuftthil findAttachSide (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_xpuuihxf;
@@ -32,9 +37,11 @@ CLASS net/minecraft/unmapped/C_wepsgefi net/minecraft/entity/mob/ShulkerEntity
 		ARG 1 face
 	METHOD m_kuzlyboe setPeekAmount (I)V
 		ARG 1 peekAmount
+	METHOD m_lgazseuq hasComponentsOtherThanDamage (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_lmhywaga tryAttachOrTeleport ()V
 	METHOD m_munteupc tickOpenProgress ()Z
 	METHOD m_nbdtojoo getRenderPosition (F)Ljava/util/Optional;
+		ARG 1 tickDelta
 	METHOD m_nnaejkue getColor ()Lnet/minecraft/unmapped/C_arllgqae;
 	METHOD m_nqxiwxry isPosBlocked (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
@@ -45,6 +52,7 @@ CLASS net/minecraft/unmapped/C_wepsgefi net/minecraft/entity/mob/ShulkerEntity
 	METHOD m_rufuhovj moveEntities ()V
 	METHOD m_ujepgyyt getOpenProgress (F)F
 		ARG 1 delta
+	METHOD m_wjrpjxbl createEquipmentLootParameters (Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_nzsnkdtl;
 	METHOD m_xqlguhxm getPeekAmount ()I
 	METHOD m_yjhdxjbh tryTeleport ()Z
 	CLASS C_chkjxtwk SearchForTargetGoal
