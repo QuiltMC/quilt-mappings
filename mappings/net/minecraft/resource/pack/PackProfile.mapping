@@ -8,6 +8,8 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/PackProfile
 	COMMENT The profiles are registered by {@link PackProvider}s.
 	COMMENT <p>
 	COMMENT Closing the profile doesn't have any effect.
+	FIELD f_dxhkeyoo metadata Lnet/minecraft/unmapped/C_lvnjxuwi$C_pqanagva;
+	FIELD f_fqgedowf packLocationInfo Lnet/minecraft/unmapped/C_yebcvztn;
 	FIELD f_ppqupxxe packFactory Lnet/minecraft/unmapped/C_lvnjxuwi$C_dwhnbqlk;
 	FIELD f_vyonutte LOGGER Lorg/slf4j/Logger;
 	METHOD equals (Ljava/lang/Object;)Z
@@ -16,6 +18,7 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/PackProfile
 	METHOD m_ighpvmhu isPinned ()Z
 	METHOD m_imaaowzj createPack ()Lnet/minecraft/unmapped/C_tguinuvn;
 	METHOD m_jvtuqqod getCompatibility ()Lnet/minecraft/unmapped/C_pchdyjmm;
+	METHOD m_jznpocba getPackLocationInfo ()Lnet/minecraft/unmapped/C_yebcvztn;
 	METHOD m_jzttceef of (Lnet/minecraft/unmapped/C_yebcvztn;Lnet/minecraft/unmapped/C_lvnjxuwi$C_dwhnbqlk;Lnet/minecraft/unmapped/C_abwutbbk;Lnet/minecraft/unmapped/C_yzksgymh;)Lnet/minecraft/unmapped/C_lvnjxuwi;
 		COMMENT Creates a resource pack profile from the given parameters.
 		COMMENT <p>
@@ -25,10 +28,14 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/PackProfile
 		COMMENT {@code null}.
 		COMMENT
 		COMMENT @return the created profile, or {@code null} if the pack's missing metadata
+		ARG 0 locationInfo
 		ARG 1 packFactory
 		ARG 2 type
 	METHOD m_kdcbkzcq getSource ()Lnet/minecraft/unmapped/C_evnnymfu;
 	METHOD m_nporsrud getRequestedFeatures ()Lnet/minecraft/unmapped/C_czxxrbcp;
+	METHOD m_pphzdvrq loadMetadata (Lnet/minecraft/unmapped/C_yebcvztn;Lnet/minecraft/unmapped/C_lvnjxuwi$C_dwhnbqlk;I)Lnet/minecraft/unmapped/C_lvnjxuwi$C_pqanagva;
+		ARG 1 packFactory
+		ARG 2 currentPackFormat
 	METHOD m_pvddgias getDescription ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_rrlmzqhj getName ()Ljava/lang/String;
 	METHOD m_tjsvikza getInformationText (Z)Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -43,8 +50,12 @@ CLASS net/minecraft/unmapped/C_lvnjxuwi net/minecraft/resource/pack/PackProfile
 			COMMENT Opens the primary resource pack and apply its overlays that support the current resource version.
 			COMMENT <p>
 			COMMENT In practice, this usually means wrapping the resource pack and its overlays in a {@link CompositeResourcePack}.
+			ARG 1 locationInfo
+			ARG 2 metadata
 		METHOD m_kokszcyq openPrimary (Lnet/minecraft/unmapped/C_yebcvztn;)Lnet/minecraft/unmapped/C_tguinuvn;
 			COMMENT Opens the primary resource pack only, without any overlays applied.
+			ARG 1 locationInfo
+	CLASS C_pqanagva Metadata
 	CLASS C_vcyazcku InsertionPosition
 		METHOD m_blrbakor insert (Ljava/util/List;Ljava/lang/Object;Ljava/util/function/Function;Z)I
 			ARG 1 items
