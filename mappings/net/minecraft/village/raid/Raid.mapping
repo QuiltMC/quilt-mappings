@@ -5,6 +5,7 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 	FIELD f_clnrejkb OUTSIDE_RAID_AREA_TIMEOUT I
 	FIELD f_cpajdkjy ticksActive J
 	FIELD f_cstfokux TICKS_PER_DAY I
+	FIELD f_dandncjl badOmenLevel I
 	FIELD f_defpxtbi active Z
 	FIELD f_egmjrlfl preRaidTicks I
 	FIELD f_eizpltqd DEFAULT_PRE_RAID_TICKS I
@@ -18,6 +19,7 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 	FIELD f_kyzgcvgr random Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_lwjerqav finishCooldown I
 	FIELD f_mihznwna VILLAGE_SEARCH_RADIUS I
+	FIELD f_mpawerox MAX_BAD_OMEN_LEVEL I
 	FIELD f_ngzvyrzk RAID_TIMEOUT_TICKS I
 	FIELD f_ogqgfypr RAID_ATTEMPT_FARTHEST I
 	FIELD f_okfqfabw waveToCaptain Ljava/util/Map;
@@ -52,6 +54,7 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 		ARG 1 wave
 		ARG 2 entity
 		ARG 3 countHealth
+	METHOD m_azkplhcc getBadOmenLevel ()I
 	METHOD m_bkcundwm getBonusCount (Lnet/minecraft/unmapped/C_szefbyex$C_mgsrpgzv;Lnet/minecraft/unmapped/C_rlomrsco;ILnet/minecraft/unmapped/C_jiailwzt;Z)I
 		ARG 1 member
 		ARG 3 wave
@@ -66,9 +69,12 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 	METHOD m_dllpoezn getCaptain (I)Lnet/minecraft/unmapped/C_iaguvmwh;
 		ARG 1 wave
 	METHOD m_dudktkmw isFinished ()Z
+	METHOD m_evxnagza getMaxBadOmenLevel ()I
 	METHOD m_ftutcsco shouldSpawnMoreGroups ()Z
 	METHOD m_fxiylzar addHero (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_gkjhoeun setBadOmenLevel (I)V
+		ARG 1 level
 	METHOD m_hnnchmuz playRaidHorn (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	METHOD m_hvxdnwas isPreRaid ()Z
@@ -79,6 +85,7 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 		ARG 1 proximity
 		ARG 2 tries
 	METHOD m_jvxffxut tick ()V
+	METHOD m_kkhfgadp start (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
 	METHOD m_mesmxuol getCenter ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_msoysvru hasSpawnedFinalWave ()Z
 	METHOD m_mwiqgpfz isInRaidDistance ()Ljava/util/function/Predicate;
