@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffectInstance
+	FIELD f_bjwawrjq MAX_AMPLIFIER I
 	FIELD f_bkslpncm amplifier I
 	FIELD f_cawgobpt LOGGER Lorg/slf4j/Logger;
 	FIELD f_cqswxreu hiddenEffect Lnet/minecraft/unmapped/C_wpfizwve;
@@ -10,6 +11,7 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 	FIELD f_fjrfbwth blendState Lnet/minecraft/unmapped/C_wpfizwve$C_wykyjmct;
 	FIELD f_hvgmvstv showParticles Z
 	FIELD f_ieofirpv ambient Z
+	FIELD f_jzszemkt MIN_AMPLIFIER I
 	FIELD f_phnnfhqn duration I
 	FIELD f_roivswws type Lnet/minecraft/unmapped/C_cjzoxshv;
 	FIELD f_sfiyfhvh INFINITE_DURATION I
@@ -36,6 +38,8 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 		ARG 4 ambient
 		ARG 5 showParticles
 		ARG 6 showIcon
+	METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_wpfizwve$C_ivhzuvgd;)V
+		ARG 2 details
 	METHOD <init> (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 that
 	METHOD compareTo compareTo (Ljava/lang/Object;)I
@@ -45,10 +49,13 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 	METHOD m_bbjmshxh getAmplifier ()I
 	METHOD m_bpgdokst mapDuration (Lit/unimi/dsi/fastutil/ints/Int2IntFunction;)I
 		ARG 1 mapper
+	METHOD m_bspyvfdb createParticle ()Lnet/minecraft/unmapped/C_nqucohct;
 	METHOD m_cqvpfuqq isInfinite ()Z
+	METHOD m_cxsaifnx getDetails ()Lnet/minecraft/unmapped/C_wpfizwve$C_ivhzuvgd;
 	METHOD m_dzdptdhl getDuration ()I
 	METHOD m_eihqlhtj fromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_wpfizwve;
 		ARG 0 nbt
+	METHOD m_entcpiae onEffectApplied (Lnet/minecraft/unmapped/C_usxaxydn;)V
 	METHOD m_eujryyfr update (Lnet/minecraft/unmapped/C_usxaxydn;Ljava/lang/Runnable;)Z
 		ARG 1 entity
 		ARG 2 overwriteCallback
@@ -59,6 +66,7 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 	METHOD m_jiwejrbn getDurationString ()Ljava/lang/String;
 	METHOD m_kayxpwex getEffectType ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_ohxkuhnm shouldShowIcon ()Z
+	METHOD m_osynuyei onEntityHurt (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 	METHOD m_qqtmdstn shouldShowParticles ()Z
 	METHOD m_qxzigndt lastsShorterThan (Lnet/minecraft/unmapped/C_wpfizwve;)Z
 		ARG 1 effect
@@ -81,6 +89,13 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 	METHOD m_yxwgbwgv endsWithin (I)Z
 		ARG 1 ticks
 	METHOD m_zhljuajd updateDuration ()I
+	METHOD m_zxegsuzr onEntityRemoved (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
+	CLASS C_ivhzuvgd Details
+		METHOD m_frzuuwir create (IIZZLjava/util/Optional;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_wpfizwve$C_ivhzuvgd;
+			ARG 3 showParticles
+			ARG 4 showIcon
+		METHOD m_wcumhbsy (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 1 instance
 	CLASS C_wykyjmct BlendState
 		FIELD f_joxeptyp prevFactor F
 		FIELD f_ptuqoimd factor F

@@ -1,19 +1,34 @@
 CLASS net/minecraft/unmapped/C_ueeoxhql net/minecraft/entity/passive/AllayEntity
 	FIELD f_agftpqlx vibrationData Lnet/minecraft/unmapped/C_ddxrijfx$C_qhpiojal;
 	FIELD f_bfdnvtqa vibrationCallback Lnet/minecraft/unmapped/C_ddxrijfx$C_vnbbhkol;
+	FIELD f_bmniulwu SPINNING_ANIMATION_DURATION F
+	FIELD f_cxgrajmm DANCING_LOOP_DURATION F
 	FIELD f_ecxyagii ITEM_PICKUP_REACH Lnet/minecraft/unmapped/C_ceivtqhh;
 	FIELD f_flhfrvyz inventory Lnet/minecraft/unmapped/C_rsloiwzx;
 	FIELD f_fwzlovqf CAN_DUPLICATE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_gqwygpsf sculkSensorListener Lnet/minecraft/unmapped/C_wpaexsvv;
 	FIELD f_iqgfejuv MEMORY_MODULES Lcom/google/common/collect/ImmutableList;
+	FIELD f_isxgvexv LIFTING_ITEM_ANIMATION_DURATION I
 	FIELD f_jxnwapwy THROWN_ITEM_PITCHES Lcom/google/common/collect/ImmutableList;
 	FIELD f_kkdwnmbg DUPLICATION_INGREDIENT Lnet/minecraft/unmapped/C_tcpsydrv;
+	FIELD f_lgixkfsj spinningAnimationTicks F
+	FIELD f_mqaniyob DUPLICATION_HEART_COUNT I
 	FIELD f_mtjnjlex DUPLICATION_COOLDOWN I
+	FIELD f_myblopii previousHoldingItemAnimationTicks F
 	FIELD f_oqiruvkz DANCING Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_oxparwgy dancingAnimationTicks F
 	FIELD f_qtotnwas duplicationCooldown J
+	FIELD f_rfaaxfvy previousSpinningAnimationTicks F
+	FIELD f_uwlxwlku jukeboxEventListener Lnet/minecraft/unmapped/C_wpaexsvv;
+	FIELD f_vcfrsywi holdingItemAnimationTicks F
 	FIELD f_xaexqzwn SENSORS Lcom/google/common/collect/ImmutableList;
 	METHOD m_amirmypp createAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_bywwptpx getSpinningAnimationProgress (F)F
+	METHOD m_evgblctp itemsMatch (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 left
+		ARG 2 right
 	METHOD m_ffajaezn isDancing ()Z
+	METHOD m_fixrglzq isSpinning ()Z
 	METHOD m_fonjkttd isOnPickupCooldown ()Z
 	METHOD m_gfmqthlt setDuplicationCooldown ()V
 	METHOD m_hmaumxma shouldStopDancing ()Z
@@ -24,11 +39,17 @@ CLASS net/minecraft/unmapped/C_ueeoxhql net/minecraft/entity/passive/AllayEntity
 		ARG 2 stack
 	METHOD m_pwttetfa isDuplicationItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_qqqbecdb canDuplicate ()Z
+	METHOD m_rajypowm areDifferentPotions (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 left
+		ARG 2 right
+	METHOD m_saqrjapl updateJukeboxPos (Lnet/minecraft/unmapped/C_hynzadkk;Z)V
+		ARG 2 playing
 	METHOD m_txcoglmk hasItem ()Z
 	METHOD m_vhszdjde duplicate ()V
 	METHOD m_ygywdeat setDancing (Z)V
 		ARG 1 dancing
-	CLASS C_mgclyirt
+	METHOD m_zlnrwbiq getHoldingItemAnimationProgress (F)F
+	CLASS C_mgclyirt JukeboxListener
 		FIELD f_wpiaphaa range I
 		FIELD f_xtnnnjvy positionSource Lnet/minecraft/unmapped/C_duzerrml;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ueeoxhql;Lnet/minecraft/unmapped/C_duzerrml;I)V
@@ -36,3 +57,4 @@ CLASS net/minecraft/unmapped/C_ueeoxhql net/minecraft/entity/passive/AllayEntity
 			ARG 3 range
 	CLASS C_tmikcbwp VibrationCallback
 		FIELD f_dcajsbvh positionSource Lnet/minecraft/unmapped/C_duzerrml;
+		FIELD f_jttiuqtr RANGE I

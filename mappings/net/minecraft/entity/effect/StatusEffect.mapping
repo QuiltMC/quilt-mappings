@@ -1,5 +1,9 @@
 CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
+	FIELD f_ejiuuoay requiredFeatures Lnet/minecraft/unmapped/C_czxxrbcp;
 	FIELD f_fcnodzqo color I
+	FIELD f_fromvzcw particleFactory Ljava/util/function/Function;
+	FIELD f_hrqsqyvx AMBIENT_PARTICLE_ALPHA I
+	FIELD f_ohrjpsvc applySound Ljava/util/Optional;
 	FIELD f_pnqtkxvc type Lnet/minecraft/unmapped/C_mbktilxo;
 	FIELD f_rqynlpsa attributeModifiers Ljava/util/Map;
 	FIELD f_umzrptqr blendDuration I
@@ -7,6 +11,10 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	METHOD <init> (Lnet/minecraft/unmapped/C_mbktilxo;I)V
 		ARG 1 type
 		ARG 2 color
+	METHOD <init> (Lnet/minecraft/unmapped/C_mbktilxo;ILnet/minecraft/unmapped/C_nqucohct;)V
+		ARG 3 particle
+	METHOD m_abuwruad setRequiredFeatures ([Lnet/minecraft/unmapped/C_kksdgidr;)Lnet/minecraft/unmapped/C_jaqasomh;
+		ARG 1 flags
 	METHOD m_azrqgeuc onApplied (Lnet/minecraft/unmapped/C_cohbwqne;I)V
 		ARG 1 attributes
 		ARG 2 amplifier
@@ -18,6 +26,8 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	METHOD m_despsamn applyUpdateEffect (Lnet/minecraft/unmapped/C_usxaxydn;I)Z
 		ARG 1 entity
 		ARG 2 amplifier
+	METHOD m_giqojxuj (ILnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
+		ARG 1 effect
 	METHOD m_hgarvyvx withBlendDuration (I)Lnet/minecraft/unmapped/C_jaqasomh;
 		ARG 1 blendDuration
 	METHOD m_igvnkdng isBeneficial ()Z
@@ -25,25 +35,43 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	METHOD m_irzxckrv shouldApplyUpdateEffect (II)Z
 		ARG 1 tick
 		ARG 2 amplifier
+	METHOD m_masoeeuk setApplySound (Lnet/minecraft/unmapped/C_avavozay;)Lnet/minecraft/unmapped/C_jaqasomh;
+		ARG 1 sound
 	METHOD m_nnnovhef addAttributeModifier (Lnet/minecraft/unmapped/C_cjzoxshv;Ljava/lang/String;DLnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Lnet/minecraft/unmapped/C_jaqasomh;
 		ARG 1 attribute
 		ARG 2 uuid
 		ARG 3 amount
 		ARG 5 operation
+	METHOD m_ntlsrlro onEntityHurt (Lnet/minecraft/unmapped/C_usxaxydn;ILnet/minecraft/unmapped/C_sbxfkpyv;F)V
+		ARG 1 entity
+		ARG 2 amplifier
+		ARG 3 source
+		ARG 4 amount
 	METHOD m_qlsxoyxu createAttributeModifiers (ILjava/util/function/BiConsumer;)V
 		ARG 1 amplifier
 		ARG 2 consumer
 	METHOD m_qpdmsuqi getType ()Lnet/minecraft/unmapped/C_mbktilxo;
+	METHOD m_rkyihfiu onEffectApplied (Lnet/minecraft/unmapped/C_usxaxydn;I)V
+		ARG 1 entity
+		ARG 2 amplifier
 	METHOD m_sdyrfndd loadTranslationKey ()Ljava/lang/String;
 	METHOD m_sfpvrsws onRemoved (Lnet/minecraft/unmapped/C_cohbwqne;)V
 		ARG 1 attributes
 	METHOD m_shkzklwb getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_tlfwwrri onEntityRemoved (Lnet/minecraft/unmapped/C_usxaxydn;ILnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
+		ARG 1 entity
+		ARG 2 amplifier
+		ARG 3 reason
+	METHOD m_uosrujfk createParticle (Lnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
+		ARG 1 statusEffect
 	METHOD m_xccgpemy applyInstantEffect (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_usxaxydn;ID)V
 		ARG 1 source
 		ARG 2 attacker
 		ARG 3 target
 		ARG 4 amplifier
 		ARG 5 proximity
+	METHOD m_xpznhypy (Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
+		ARG 1 statusEffect
 	METHOD m_yxnpxply isInstant ()Z
 	CLASS C_xvxuthmo EntryAttributeModifierCreator
 		METHOD m_zhiowqzb create (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_hdbqsqsm;

@@ -1,8 +1,10 @@
 CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
+	COMMENT Bark.
 	FIELD f_aftpehwe ANGER_TIME Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_bgdwgbfu lastShakeProgress F
 	FIELD f_bhmevkqm COLLAR_COLOR Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_glkqojhp furWet Z
+	FIELD f_igsbfcto ARMOR_REPAIR_UNIT F
 	FIELD f_lcbuuhzu WILD_MAX_HEALTH F
 	FIELD f_ocxdlcyn canShakeWaterOff Z
 	FIELD f_opennbir lastBegAnimationProgress F
@@ -12,6 +14,7 @@ CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
 	FIELD f_thwpaxgq shakeProgress F
 	FIELD f_uuhetxwo ANGER_TIME_RANGE Lnet/minecraft/unmapped/C_hvilmtvi;
 	FIELD f_wjmkqevm begAnimationProgress F
+	FIELD f_xkqfciml VARIANT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ycekgyxv TAMED_MAX_HEALTH F
 	METHOD m_aliqaiom getTailAngle ()F
 	METHOD m_dnvpayop setCollarColor (Lnet/minecraft/unmapped/C_arllgqae;)V
@@ -20,8 +23,11 @@ CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
 		COMMENT Returns whether this wolf's fur is wet.
 		COMMENT <p>
 		COMMENT The wolf's fur will remain wet until the wolf shakes.
+	METHOD m_goouxlmt shouldArmorAbsorbDamage (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
+		ARG 1 source
 	METHOD m_gvyvpuqi getBegAnimationProgress (F)F
 		ARG 1 tickDelta
+	METHOD m_ilqinxlz tryTame (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 	METHOD m_jknxzpwn getShakeAnimationProgress (FF)F
 		ARG 1 tickDelta
 		ARG 2 offset
@@ -48,9 +54,12 @@ CLASS net/minecraft/unmapped/C_xokssljs net/minecraft/entity/passive/WolfEntity
 		ARG 3 pos
 	METHOD m_xtssqhma (Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 0 entity
+	METHOD m_zwqarhhn getTexture ()Lnet/minecraft/unmapped/C_ncpywfca;
 	CLASS C_ittgaklu WolfEscapeDangerGoal
 		METHOD <init> (Lnet/minecraft/unmapped/C_xokssljs;D)V
 			ARG 2 speed
+	CLASS C_kmrolqsn WolfData
+		FIELD f_hoabkykg variant Lnet/minecraft/unmapped/C_cjzoxshv;
 	CLASS C_swdzamwe AvoidLlamaGoal
 		FIELD f_wpeusgad wolf Lnet/minecraft/unmapped/C_xokssljs;
 		METHOD <init> (Lnet/minecraft/unmapped/C_xokssljs;Lnet/minecraft/unmapped/C_xokssljs;Ljava/lang/Class;FDD)V
