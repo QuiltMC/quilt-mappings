@@ -2,11 +2,26 @@ CLASS net/minecraft/unmapped/C_vksdgrxp net/minecraft/client/toast/SystemToast
 	FIELD f_bipvvupq lines Ljava/util/List;
 	FIELD f_dehlhyhj width I
 	FIELD f_dfwjmbbk startTime J
-	FIELD f_ggdkfmlk type Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+	FIELD f_ggdkfmlk id Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+	FIELD f_haczpcaz TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_johlmggq justUpdated Z
+	FIELD f_kzthwuav hidden Z
 	FIELD f_rrihmzlp title Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_wiceeqnl MAX_LINE_SIZE I
+	METHOD <init> (Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/List;I)V
+		ARG 1 id
+		ARG 2 title
+		ARG 3 lines
+		ARG 4 width
+	METHOD <init> (Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 id
+		ARG 2 title
+		ARG 3 description
+	METHOD m_bfwllpne (Lnet/minecraft/unmapped/C_eqfjupcc;Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;)V
+		ARG 0 manager
+		ARG 1 id
 	METHOD m_elxcxvpw drawPart (Lnet/minecraft/unmapped/C_sedilmty;IIII)V
+		ARG 1 graphics
 		ARG 2 width
 		ARG 3 textureV
 		ARG 4 y
@@ -16,24 +31,52 @@ CLASS net/minecraft/unmapped/C_vksdgrxp net/minecraft/client/toast/SystemToast
 		ARG 1 worldName
 	METHOD m_fnkorczd add (Lnet/minecraft/unmapped/C_eqfjupcc;Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 0 manager
+		ARG 1 id
 		ARG 2 title
 		ARG 3 description
 	METHOD m_jwgfdkzb addWorldDeleteFailureToast (Lnet/minecraft/unmapped/C_ayfeobid;Ljava/lang/String;)V
 		ARG 0 client
 		ARG 1 worldName
+	METHOD m_kewnuctq addChunkLoadFailureToast (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_ynrszrtu;)V
+		ARG 0 client
+		ARG 1 chunkPos
+	METHOD m_ltbbvrya addLowDiscSpaceToast (Lnet/minecraft/unmapped/C_ayfeobid;)V
+		ARG 0 client
 	METHOD m_nvohfuwc setContent (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 title
 		ARG 2 description
-	METHOD m_saimreyq addPackCopyFailure (Lnet/minecraft/unmapped/C_ayfeobid;Ljava/lang/String;)V
+	METHOD m_saimreyq addPackCopyFailureToast (Lnet/minecraft/unmapped/C_ayfeobid;Ljava/lang/String;)V
 		ARG 0 client
 		ARG 1 directory
 	METHOD m_vkmbhoha show (Lnet/minecraft/unmapped/C_eqfjupcc;Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 0 manager
+		ARG 1 id
 		ARG 2 title
 		ARG 3 description
+	METHOD m_vqhfyjbx addChunkSaveFailureToast (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_ynrszrtu;)V
+		ARG 0 client
+		ARG 1 chunkPos
 	METHOD m_wvhbcnhf create (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_vksdgrxp;
 		ARG 0 client
+		ARG 1 id
 		ARG 2 title
 		ARG 3 description
+	METHOD m_yghdjgwj hide ()V
+	METHOD m_zfyvjxrz (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_eqfjupcc;J)Lnet/minecraft/unmapped/C_zqhkdxaf$C_sakiolwc;
+		ARG 1 graphics
 	METHOD m_zstagntz getTextAsList (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lcom/google/common/collect/ImmutableList;
 		ARG 0 text
+	CLASS C_ozahoshp Id
+		FIELD f_clfbgeac LOW_DISC_SPACE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_eaubzzts PACK_LOAD_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_gyvgirun WORLD_BACKUP Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_huccthof NARRATOR_TOGGLE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_idktqswd CHUNK_SAVE_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_juodhjqg PACK_COPY_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_ljqpikuh displayDuration J
+		FIELD f_mqomjafj CHUNK_LOAD_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_pmqexrwd UNSECURE_SERVER_WARNING Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_ukizbyuh PERIODIC_NOTIFICATION Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_wvqmemio WORLD_ACCESS_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		METHOD <init> (J)V
+			ARG 1 displayDuration
