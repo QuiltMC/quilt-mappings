@@ -5,8 +5,10 @@ CLASS net/minecraft/unmapped/C_vksdgrxp net/minecraft/client/toast/SystemToast
 	FIELD f_ggdkfmlk id Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 	FIELD f_haczpcaz TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_johlmggq justUpdated Z
+	FIELD f_kjsrdpxt LINE_SPACING I
 	FIELD f_kzthwuav hidden Z
 	FIELD f_rrihmzlp title Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_venbdjkm MARGIN I
 	FIELD f_wiceeqnl MAX_LINE_SIZE I
 	METHOD <init> (Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/List;I)V
 		ARG 1 id
@@ -17,7 +19,7 @@ CLASS net/minecraft/unmapped/C_vksdgrxp net/minecraft/client/toast/SystemToast
 		ARG 1 id
 		ARG 2 title
 		ARG 3 description
-	METHOD m_bfwllpne (Lnet/minecraft/unmapped/C_eqfjupcc;Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;)V
+	METHOD m_bfwllpne hide (Lnet/minecraft/unmapped/C_eqfjupcc;Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;)V
 		ARG 0 manager
 		ARG 1 id
 	METHOD m_elxcxvpw drawPart (Lnet/minecraft/unmapped/C_sedilmty;IIII)V
@@ -67,16 +69,21 @@ CLASS net/minecraft/unmapped/C_vksdgrxp net/minecraft/client/toast/SystemToast
 	METHOD m_zstagntz getTextAsList (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lcom/google/common/collect/ImmutableList;
 		ARG 0 text
 	CLASS C_ozahoshp Id
+		COMMENT Represents the system toast's unique identifier.
+		COMMENT <p>
+		COMMENT This allows toasts with different identifiers to co-exist, while toasts sharing the same one will overwrite each other.
 		FIELD f_clfbgeac LOW_DISC_SPACE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_eaubzzts PACK_LOAD_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_gyvgirun WORLD_BACKUP Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_huccthof NARRATOR_TOGGLE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_idktqswd CHUNK_SAVE_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_juodhjqg PACK_COPY_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
-		FIELD f_ljqpikuh displayDuration J
+		FIELD f_ljqpikuh displayMillis J
 		FIELD f_mqomjafj CHUNK_LOAD_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_pmqexrwd UNSECURE_SERVER_WARNING Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_ukizbyuh PERIODIC_NOTIFICATION Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		FIELD f_wvqmemio WORLD_ACCESS_FAILURE Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
 		METHOD <init> (J)V
-			ARG 1 displayDuration
+			COMMENT Creates a new system toast identifier.
+			ARG 1 displayMillis
+				COMMENT the display time in milliseconds
