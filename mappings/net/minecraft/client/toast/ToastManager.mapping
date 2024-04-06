@@ -2,11 +2,14 @@ CLASS net/minecraft/unmapped/C_eqfjupcc net/minecraft/client/toast/ToastManager
 	FIELD f_bajnubnx client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_htvfswup toastQueue Ljava/util/Deque;
 	FIELD f_jdphmpck visibleEntries Ljava/util/List;
+	FIELD f_nxdsdqky occupiedSlots Ljava/util/BitSet;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;)V
 		ARG 1 client
 	METHOD m_glbfkboq getToast (Ljava/lang/Class;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_zqhkdxaf;
 		ARG 1 toastClass
 		ARG 2 id
+	METHOD m_kkqckfsn (ILnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_eqfjupcc$C_owidtlkk;)Z
+		ARG 3 entry
 	METHOD m_lnyjvhnt clear ()V
 	METHOD m_lsmszfie getNotificationDisplayTime ()D
 	METHOD m_mekwzuff getGame ()Lnet/minecraft/unmapped/C_ayfeobid;
@@ -15,12 +18,19 @@ CLASS net/minecraft/unmapped/C_eqfjupcc net/minecraft/client/toast/ToastManager
 	METHOD m_ygkhoxvg draw (Lnet/minecraft/unmapped/C_sedilmty;)V
 	CLASS C_owidtlkk Entry
 		FIELD f_askvqgeh ANIMATION_TIME J
+		FIELD f_hcntplas index I
 		FIELD f_hdnxctnt visibleTime J
 		FIELD f_hzicsazt instance Lnet/minecraft/unmapped/C_zqhkdxaf;
 		FIELD f_jfhjtebi animationTime J
+		FIELD f_oqdewilb slotCount I
 		FIELD f_zgxamtqm visibility Lnet/minecraft/unmapped/C_zqhkdxaf$C_sakiolwc;
+		METHOD <init> (Lnet/minecraft/unmapped/C_eqfjupcc;Lnet/minecraft/unmapped/C_zqhkdxaf;II)V
+			ARG 2 instance
+			ARG 3 index
+			ARG 4 slotCount
 		METHOD m_bhkqqcoa getDisappearProgress (J)F
 			ARG 1 time
 		METHOD m_pbaihlsr getInstance ()Lnet/minecraft/unmapped/C_zqhkdxaf;
 		METHOD m_pzvnzqch draw (ILnet/minecraft/unmapped/C_sedilmty;)Z
 			ARG 1 x
+			ARG 2 graphics
