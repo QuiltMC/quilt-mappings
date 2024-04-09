@@ -7,8 +7,10 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 	FIELD f_cpoobbqt SNOW_ACCUMULATION_HEIGHT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_ctprlhvi LOG_ADMIN_COMMANDS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_ddlhpkfi DO_INSOMNIA Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_deqowufq PLAYERS_NETHER_PORTAL_CREATIVE_DELAY Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_djarkqql DO_IMMEDIATE_RESPAWN Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether a player should immediately respawn upon death.
+	FIELD f_dumcogor ENDER_PEARLS_VANISH_ON_DEATH Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_enlwvizg DO_LIMITED_CRAFTING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_ezxiljsj COMMAND_MODIFICATION_BLOCK_LIMIT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_fhvryuhr UNIVERSAL_ANGER Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
@@ -27,8 +29,10 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 	FIELD f_jnvebouf SEND_COMMAND_FEEDBACK Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_kjbyjrtx MOB_EXPLOSION_DROP_DECAY Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_knmgnowy FORGIVE_DEAD_PLAYERS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+	FIELD f_kptbwaek MAX_COMMAND_FORK_COUNT Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_kwjvqvpl SPECTATORS_GENERATE_CHUNKS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_kzskrcnw LOGGER Lorg/slf4j/Logger;
+	FIELD f_mregssfy PLAYERS_NETHER_PORTAL_DEFAULT_DELAY Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_npbkaozn DO_PATROL_SPAWNING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_nqnkyimm DO_MOB_GRIEFING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether mobs can modify the world.
@@ -69,6 +73,7 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		COMMENT In vanilla, this includes the visibility of coordinates on the clients' debug HUDs.
 	FIELD f_xhcxhtfb ANNOUNCE_ADVANCEMENTS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain AbstractGameRule game rule} which regulates whether a player's advancements should be announced in chat.
+	FIELD f_yewtvtkm SPAWN_CHUNK_RADIUS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 	FIELD f_zumpbxtd MAX_ENTITY_CRAMMING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain AbstractGameRule game rule} which regulates the number of entities that can be crammed into a block space before they incur cramming damage.
 	FIELD f_zwlbxxnu GLOBAL_SOUND_EVENTS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
@@ -85,7 +90,10 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 0 key
 	METHOD m_eyajgani (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
 		ARG 0 server
-		ARG 1 gameRule
+		ARG 1 rule
+	METHOD m_fnfqodra (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;)V
+		ARG 0 server
+		ARG 1 rule
 	METHOD m_gdklogjj accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;)V
 		COMMENT Make the visitor visit all registered game rules.
 		COMMENT <p>
@@ -93,6 +101,9 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		COMMENT {@link Visitor#visitBooleanGameRule(GameRules.Key, GameRules.Type)} or {@link Visitor#visitIntGameRule(GameRules.Key, GameRules.Type)},
 		COMMENT depending on whether it is a {@link BooleanGameRule} or a {@link IntGameRule}, for every game rule.
 		ARG 0 visitor
+	METHOD m_jlnexmku (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
+		ARG 0 server
+		ARG 1 rule
 	METHOD m_khbebsio toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_kkvdhcio copy ()Lnet/minecraft/unmapped/C_xmldumst;
 	METHOD m_magbttmy load (Lcom/mojang/serialization/DynamicLike;)V
@@ -194,12 +205,20 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 			ARG 2 initialValue
 		METHOD m_bfgdavud (ILnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;
 			ARG 1 type
+		METHOD m_bxinpuce (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;)V
+			ARG 0 server
+			ARG 1 rule
 		METHOD m_cnknhqzm setValue (ILnet/minecraft/server/MinecraftServer;)V
 			ARG 1 value
 			ARG 2 server
 		METHOD m_ncqmhctf validate (Ljava/lang/String;)Z
 			COMMENT Validates that an input is valid for this rule.
 			ARG 1 input
+		METHOD m_pzcrszpq create (IIILjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
+			ARG 0 initialValue
+			ARG 1 min
+			ARG 2 max
+			ARG 3 changeCallback
 		METHOD m_qfnkciid create (I)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
 			ARG 0 initialValue
 		METHOD m_tezsywhc create (ILjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
@@ -208,6 +227,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		METHOD m_ttwuvzoh getValue ()I
 		METHOD m_xmuwyaym parseInt (Ljava/lang/String;)I
 			ARG 0 input
+		METHOD m_xtomawsm (ILnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)Lnet/minecraft/unmapped/C_xmldumst$C_tdajhqee;
+			ARG 1 type
 	CLASS C_ubszziqk AbstractGameRule
 		FIELD f_edpaakqp type Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
 		METHOD <init> (Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
