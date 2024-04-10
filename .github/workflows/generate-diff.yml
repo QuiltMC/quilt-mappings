@@ -4,7 +4,7 @@ jobs:
   diff:
     strategy:
       matrix:
-        java: [17]
+        java: [21]
     runs-on: ubuntu-latest
     container:
       image: eclipse-temurin:${{ matrix.java }}
@@ -18,7 +18,7 @@ jobs:
           distribution: temurin
       - uses: gradle/wrapper-validation-action@v2
       - run: ./gradlew decompileVineflower decompileTargetVineflower --stacktrace
-        if: ${{ matrix.java == 17 }}
+        if: ${{ matrix.java == 21 }}
       - name: Check Target Decompiled
         id: can-create-diff
         uses: andstor/file-existence-action@v3
@@ -30,7 +30,7 @@ jobs:
         continue-on-error: true
       - name: Create diff comment
         uses: ./.github/actions/diff-uploader/
-        if: ${{ matrix.java == 17 }}
+        if: ${{ matrix.java == 21 }}
         id: diff-uploader
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

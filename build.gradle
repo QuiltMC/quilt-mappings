@@ -12,6 +12,10 @@ buildscript {
 			name "Fabric Repository"
 			url 'https://maven.fabricmc.net'
 		}
+		// remove when ASM fix is released
+		maven {
+			url = "https://repository.ow2.org/nexus/content/repositories/snapshots/"
+		}
 		mavenCentral()
 		mavenLocal()
 	}
@@ -61,9 +65,10 @@ repositories {
 		name "Quilt Snapshot Repository"
 		url "https://maven.quiltmc.org/repository/snapshot"
 	}
+	// remove when ASM fix is released
 	maven {
-		// Vineflower snapshots
-		url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+		name "OW2 Snapshots"
+		url "https://repository.ow2.org/nexus/content/repositories/snapshots/"
 	}
 	mavenLocal()
 }
@@ -131,13 +136,13 @@ remapUnpickDefinitions {
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-	it.options.release = 17
+	it.options.release = 21
 }
 
 sourceSets {
@@ -224,16 +229,6 @@ task buildIntermediary {
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
 	jarFile = mappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
-	// TODO: https://github.com/Vineflower/vineflower/issues/297
-	visitor { new ClassVisitor(Opcodes.ASM9, it) {
-		@Override
-		void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-			if (superName == "java/lang/Record") {
-				access |= Opcodes.ACC_RECORD
-			}
-			super.visit(version, access, name, signature, superName, interfaces)
-		}
-	} }
 
 	visitor(DraftsmanAdapterClassVisitor::new)
 	// Set protected/package-private classes to public so that we don't have any access compile errors.
@@ -375,7 +370,7 @@ javadoc {
 	// verbose = true // enable to debug
 	options {
 		// verbose() // enable to debug
-		source = "17"
+		source = "21"
 		encoding = 'UTF-8'
 		charSet = 'UTF-8'
 		memberLevel = JavadocMemberLevel.PRIVATE
@@ -407,7 +402,7 @@ javadoc {
 				"https://javadoc.quiltmc.org/quilt-loader/${libs.versions.quilt.loader.get()}/",
 				"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
 		)
-		// https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
+		// https://docs.oracle.com/en/java/javase/21/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
 		addBooleanOption 'Xdoclint:html', true
 		addBooleanOption 'Xdoclint:syntax', true
 		addBooleanOption 'Xdoclint:reference', true
