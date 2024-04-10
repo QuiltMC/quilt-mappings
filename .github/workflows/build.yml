@@ -4,7 +4,7 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [17, 19]
+        java: [21]
     runs-on: ubuntu-latest
     container:
       image: eclipse-temurin:${{ matrix.java }}
@@ -19,7 +19,7 @@ jobs:
       - uses: gradle/wrapper-validation-action@v2
       - run: ./gradlew build javadocJar --stacktrace
       - name: Build artifacts
-        if: ${{ matrix.java == 17 }}
+        if: ${{ matrix.java == 21 }}
         continue-on-error: true
         uses: actions/upload-artifact@v3
         with:
