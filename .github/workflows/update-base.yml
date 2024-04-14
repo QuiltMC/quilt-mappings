@@ -27,11 +27,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-      # The container image openjdk:17 doesn't have git installed
+      # The container image openjdk:21 doesn't have git installed
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
       - name: Drop invalid mappings
         run: ./gradlew dropInvalidMappings --stacktrace
       - name: Check for changes in the mappings directory
