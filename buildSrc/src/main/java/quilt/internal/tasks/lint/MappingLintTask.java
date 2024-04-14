@@ -102,7 +102,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
 
     private static EntryTree<EntryMapping> readMappings(FileCollection files) throws IOException, MappingParseException {
         Path[] paths = files.getFiles().stream().map(File::toPath).toArray(Path[]::new);
-        return EnigmaMappingsReader.readFiles(ProgressListener.none(), paths);
+        return EnigmaMappingsReader.readFiles(ProgressListener.createEmpty(), paths);
     }
 
     private static String getFullName(EntryTree<EntryMapping> mappings, Entry<?> entry) {
@@ -152,9 +152,9 @@ public abstract class MappingLintTask extends DefaultMappingsTask {
 
                 // Set up Enigma
                 Enigma enigma = Enigma.create();
-                EnigmaProject project = enigma.openJar(params.getJarFile().get().getAsFile().toPath(), new ClasspathClassProvider(), ProgressListener.none());
+                EnigmaProject project = enigma.openJar(params.getJarFile().get().getAsFile().toPath(), new ClasspathClassProvider(), ProgressListener.createEmpty());
                 EntryTree<EntryMapping> mappings = readMappings(getParameters().getMappingFiles());
-                project.setMappings(mappings, ProgressListener.none());
+                project.setMappings(mappings, ProgressListener.createEmpty());
                 Function<Entry<?>, AccessFlags> accessProvider = entry -> {
                     EntryIndex index = project.getJarIndex().getIndex(EntryIndex.class);
 
