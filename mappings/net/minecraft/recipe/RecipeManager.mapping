@@ -5,7 +5,6 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	FIELD f_hqaaykcp LOGGER Lorg/slf4j/Logger;
 	FIELD f_jrpzcqji recipeFlatMap Ljava/util/Map;
 	FIELD f_kwbdpvdv GSON Lcom/google/gson/Gson;
-	FIELD f_qlhewmmf recipes Ljava/util/Map;
 	FIELD f_yehcypye errored Z
 		COMMENT This isn't quite indicating an errored state; its value is only set to
 		COMMENT {@code false} and is never {@code true}, and isn't used anywhere.
@@ -64,15 +63,11 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 			COMMENT the input inventory
 		ARG 3 world
 			COMMENT the input world
-	METHOD m_hxrcxnun (Ljava/util/Map;)Ljava/util/stream/Stream;
-		ARG 0 map
 	METHOD m_iaavqdrh getRecipeFor (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
 		ARG 1 type
 		ARG 2 inventory
 		ARG 3 world
 		ARG 4 id
-	METHOD m_niofrzpv (Ljava/util/Map;)Ljava/util/stream/Stream;
-		ARG 0 map
 	METHOD m_oqvxqpcm createCheck (Lnet/minecraft/unmapped/C_rhnqznys;)Lnet/minecraft/unmapped/C_hjseusrb$C_bvtkxdyi;
 		ARG 0 type
 	METHOD m_pgjmabyy getRemainingStacks (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_rnrfftze;
@@ -109,10 +104,6 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 		COMMENT
 		COMMENT <p>The returned set does not update with the manager. Modifications to the
 		COMMENT returned set does not affect this manager.
-	METHOD m_wolrledc (Lnet/minecraft/unmapped/C_rhnqznys;)Lcom/google/common/collect/ImmutableMap$Builder;
-		ARG 0 recipeType
-	METHOD m_xkivhqgi getAllOfType (Lnet/minecraft/unmapped/C_rhnqznys;)Ljava/util/Map;
-		ARG 1 type
 	METHOD m_xyhfuata isErrored ()Z
 		COMMENT {@return the {@link #errored} field}
 		COMMENT This is unused in vanilla and will only return {@code false} without mods.
