@@ -6,10 +6,38 @@ CLASS net/minecraft/unmapped/C_qrzzgymy net/minecraft/text/TextCodecs
 	FIELD f_hltfryne UNLIMITED_TEXT_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_ptpqrytj STRINGIFIED_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_vzatxplp REGISTRY_OPTIONAL_TEXT_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
-	METHOD m_ijnwjepp ([Lnet/minecraft/unmapped/C_lgkqzafw;Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+	METHOD m_ijnwjepp dispatchingCodec ([Lnet/minecraft/unmapped/C_lgkqzafw;Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
 		ARG 1 codecGetter
 		ARG 2 typeGetter
+		ARG 3 dispatchingKey
 	METHOD m_ndbrkyjl createCodec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 	METHOD m_rikkdtmr combineTexts (Ljava/util/List;)Lnet/minecraft/unmapped/C_npqneive;
 		ARG 0 texts
+	METHOD m_zbnsyhol codec (I)Lcom/mojang/serialization/Codec;
+		ARG 0 maxSerializedLength
+	CLASS C_centaiuk
+		METHOD decode decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 text
+			ARG 3 prefix
+		METHOD m_pzwlfksi asJsonOps (Lcom/mojang/serialization/DynamicOps;)Lcom/mojang/serialization/DynamicOps;
+	CLASS C_lrvetqzz DispatchingCodec
+		FIELD f_lmvlzscs typedCodec Lcom/mojang/serialization/MapCodec;
+		FIELD f_rblrlrcz typeFieldName Ljava/lang/String;
+		FIELD f_vhegtley fuzzyCodec Lcom/mojang/serialization/MapCodec;
+		METHOD decode decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 input
+			ARG 3 prefix
+		METHOD keys keys (Lcom/mojang/serialization/DynamicOps;)Ljava/util/stream/Stream;
 	CLASS C_zbavalta FuzzyCodec
+		FIELD f_vhfezxzo codecs Ljava/util/List;
+		FIELD f_zjvghnjo encoderGetter Ljava/util/function/Function;
+		METHOD decode decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 input
+			ARG 3 prefix
+		METHOD keys keys (Lcom/mojang/serialization/DynamicOps;)Ljava/util/stream/Stream;
