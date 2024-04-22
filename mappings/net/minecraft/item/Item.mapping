@@ -128,6 +128,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		COMMENT
 		COMMENT <p>By default, returns true if the item has enchantments.
 		ARG 1 stack
+	METHOD m_proceewu getMaxStackSize ()I
 	METHOD m_ptxvhcty getOrCreateTranslationKey ()Ljava/lang/String;
 	METHOD m_qibylykw getTranslationKey (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/lang/String;
 		COMMENT Gets the translation key of this item using the provided item stack for context.
@@ -167,8 +168,9 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 2 fluidHandling
 	METHOD m_vlpdhsgt appendTooltip (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;Ljava/util/List;Lnet/minecraft/unmapped/C_taebrtdw;)V
 		ARG 1 stack
+		ARG 2 context
 		ARG 3 tooltip
-		ARG 4 context
+		ARG 4 config
 	METHOD m_vptgdmsr getDrinkSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_wanuqhiu isUsedOnRelease (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
@@ -220,6 +222,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT
 			COMMENT @return this instance
 			ARG 1 recipeRemainder
+		METHOD m_qvwjjfqj buildAndValidateComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 		METHOD m_robddprv maxDamage (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the maximum durability of any item configured with this Settings instance.
 			COMMENT
@@ -248,3 +251,12 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT @return this instance
 			ARG 1 rarity
 				COMMENT rarity to apply to items using this Settings instance
+	CLASS C_rdhfmrgz TooltipContext
+		FIELD f_kflbnvga EMPTY Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;
+		METHOD m_adcyfttv create (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;
+			ARG 0 lookup
+		METHOD m_cnghxzmx getMapState (Lnet/minecraft/unmapped/C_qqxyyzzm;)Lnet/minecraft/unmapped/C_nvpllgmg;
+			ARG 1 id
+		METHOD m_fyhcyijp getLookup ()Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+		METHOD m_iygpuvqa create (Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;
+		METHOD m_krwdvrdq getTickRate ()F
