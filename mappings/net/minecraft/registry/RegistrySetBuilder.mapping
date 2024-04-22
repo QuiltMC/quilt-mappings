@@ -7,13 +7,43 @@ CLASS net/minecraft/unmapped/C_tncydixy net/minecraft/registry/RegistrySetBuilde
 		ARG 2 lifecycle
 		ARG 3 bootstrap
 	METHOD m_iaaetqhl build (Lnet/minecraft/unmapped/C_wqxmvzdq;)Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+	METHOD m_kcbelwzp buildPatchedLookup (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lnet/minecraft/unmapped/C_nlcdnclu$C_bxhpbcyq;Ljava/util/Map;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+		ARG 2 baseLookupProvider
+		ARG 3 cloneableRegistries
+		ARG 4 initializedRegistries
+		ARG 5 patchLookupProvider
+	METHOD m_kfvtxeyc buildProvider (Lnet/minecraft/unmapped/C_tncydixy$C_mydfhsyb;Lnet/minecraft/unmapped/C_wqxmvzdq;Ljava/util/stream/Stream;)Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+		ARG 0 owner
+		ARG 2 lookups
+	METHOD m_kkeolqvv applyPatches (Lnet/minecraft/unmapped/C_hkebgttw;Lnet/minecraft/unmapped/C_nlcdnclu$C_bxhpbcyq;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lorg/apache/commons/lang3/mutable/MutableObject;)Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+		ARG 2 cloneableRegistries
+		ARG 4 patchLookupProvider
+		ARG 5 baseLookupProvider
+		ARG 6 lazyWrapper
 	METHOD m_neszlanl add (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_tncydixy$C_nxwigvql;)Lnet/minecraft/unmapped/C_tncydixy;
 		ARG 2 bootstrap
+	METHOD m_toqvdyew createLookup (Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Lifecycle;Lnet/minecraft/unmapped/C_hkebgttw;Ljava/util/Map;)Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+		ARG 1 lifecycle
+		ARG 2 owner
+		ARG 3 entries
 	METHOD m_uhodzprv wrapLookup (Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)Lnet/minecraft/unmapped/C_pzdchrcy;
 		ARG 0 lookup
 	CLASS C_dzakpbmy RegisteredValue
 	CLASS C_ibrokpip RegistryContents
+		METHOD m_zsotplrt buildLookup (Lnet/minecraft/unmapped/C_tncydixy$C_mydfhsyb;)Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+			ARG 1 owner
+	CLASS C_ieiskvte PatchedRegistries
+	CLASS C_jtqnucpo
+		METHOD m_slmblseh of (Lnet/minecraft/unmapped/C_tncydixy$C_mydfhsyb;Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)Lnet/minecraft/unmapped/C_tncydixy$C_jtqnucpo;
+			ARG 0 owner
+			ARG 1 lookup
+		METHOD m_xqvappuq of (Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)Lnet/minecraft/unmapped/C_tncydixy$C_jtqnucpo;
+			ARG 0 lookup
+	CLASS C_lupvcprw EmptyTagRegistryLookup
+	CLASS C_mydfhsyb UniversalOwner
+		METHOD m_szpucbxh cast ()Lnet/minecraft/unmapped/C_hkebgttw;
 	CLASS C_nxwigvql RegistryBootstrap
+		METHOD run run (Lnet/minecraft/unmapped/C_hqoyyfco;)V
 	CLASS C_rasqjhvp EmptyTagLookup
 		FIELD f_dyrwisci owner Lnet/minecraft/unmapped/C_hkebgttw;
 		METHOD <init> (Lnet/minecraft/unmapped/C_hkebgttw;)V
@@ -21,11 +51,24 @@ CLASS net/minecraft/unmapped/C_tncydixy net/minecraft/registry/RegistrySetBuilde
 	CLASS C_svehzhem RegistryStub
 		METHOD m_faeimqzw apply (Lnet/minecraft/unmapped/C_tncydixy$C_xxpyvqyn;)V
 			ARG 1 state
+		METHOD m_ikiojxvz collectRegisteredValues (Lnet/minecraft/unmapped/C_tncydixy$C_xxpyvqyn;)Lnet/minecraft/unmapped/C_tncydixy$C_ibrokpip;
+			ARG 1 state
 	CLASS C_uejpqakh ValueAndHolder
+	CLASS C_usrvzdsz EmptyTagLookupWrapper
+		FIELD f_wblvgsqa parent Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hkebgttw;Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)V
+			ARG 1 owner
+	CLASS C_vcrasote
+		METHOD m_bpnnoeac get (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+	CLASS C_vmdfhvom LazyHolder
+		FIELD f_rekjfnjh supplier Ljava/util/function/Supplier;
 	CLASS C_xlkunjxh UniversalLookup
 		FIELD f_nkjpmpim holders Ljava/util/Map;
 		METHOD m_kwtahmdp getOrCreate (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 	CLASS C_xxpyvqyn BuildState
+		METHOD m_gaysgpxx reportOrphanedValues ()V
 		METHOD m_hfvtdxvs create (Lnet/minecraft/unmapped/C_wqxmvzdq;Ljava/util/stream/Stream;)Lnet/minecraft/unmapped/C_tncydixy$C_xxpyvqyn;
 			ARG 1 registryKeys
+		METHOD m_szmfjjcg createBootstrapContext ()Lnet/minecraft/unmapped/C_hqoyyfco;
 		METHOD m_xtitxxee thrownOnError ()V
+		METHOD m_zcbyprjs reportUnreferencedKeys ()V
