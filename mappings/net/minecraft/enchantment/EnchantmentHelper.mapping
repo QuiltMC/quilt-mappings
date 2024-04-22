@@ -6,6 +6,7 @@ CLASS net/minecraft/unmapped/C_jakrppis net/minecraft/enchantment/EnchantmentHel
 		COMMENT Gets the level of an enchantment on an item stack.
 		ARG 0 enchantment
 		ARG 1 stack
+	METHOD m_cvzymgsw getSweepingEdgeMultiplier (Lnet/minecraft/unmapped/C_usxaxydn;)F
 	METHOD m_cwzufrfa hasFrostWalker (Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 0 entity
 	METHOD m_ebcyaldp getLoyalty (Lnet/minecraft/unmapped/C_sddaxwyk;)I
@@ -15,12 +16,15 @@ CLASS net/minecraft/unmapped/C_jakrppis net/minecraft/enchantment/EnchantmentHel
 		COMMENT {@code existing} enchantments}
 		ARG 0 existing
 		ARG 1 candidate
+	METHOD m_fbcdwuju getComponentType (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_pscqxfcs;
 	METHOD m_gfmalqgf onUserDamaged (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;)V
 		COMMENT This method is called when the user of the Item with the enchantment is damaged.
 		ARG 0 user
 		ARG 1 attacker
 	METHOD m_iaspatfp getRespiration (Lnet/minecraft/unmapped/C_usxaxydn;)I
 		ARG 0 entity
+	METHOD m_iefpfmdo updateEnchantments (Lnet/minecraft/unmapped/C_sddaxwyk;Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_qlclfxvn;
+		ARG 1 updater
 	METHOD m_jewispmg forEachEnchantment (Lnet/minecraft/unmapped/C_jakrppis$C_jdhxivxn;Ljava/lang/Iterable;)V
 		ARG 0 consumer
 		ARG 1 stacks
@@ -34,11 +38,18 @@ CLASS net/minecraft/unmapped/C_jakrppis net/minecraft/enchantment/EnchantmentHel
 		ARG 0 stack
 	METHOD m_kkmhqorr hasVanishingCurse (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 stack
+	METHOD m_knbmveqv (Lorg/apache/commons/lang3/mutable/MutableFloat;Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_jxtrubuh;I)V
+		ARG 2 enchantment
+		ARG 3 level
 	METHOD m_knenpeym getFireAspect (Lnet/minecraft/unmapped/C_usxaxydn;)I
 		ARG 0 entity
+	METHOD m_koeurtnx hasEnchantments (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_ktvqzwtx getKnockback (Lnet/minecraft/unmapped/C_usxaxydn;)I
 		ARG 0 entity
 	METHOD m_leiaofyl hasSilkTouch (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+	METHOD m_lsxqaewb (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_jxtrubuh;I)V
+		ARG 2 enchantment
+		ARG 3 level
 	METHOD m_mieewhwi chooseEquipmentWith (Lnet/minecraft/unmapped/C_jxtrubuh;Lnet/minecraft/unmapped/C_usxaxydn;Ljava/util/function/Predicate;)Ljava/util/Map$Entry;
 		COMMENT {@return a pair of an equipment slot and the item stack in the supplied
 		COMMENT entity's slot} It indicates the item stack has the enchantment supplied
@@ -52,12 +63,15 @@ CLASS net/minecraft/unmapped/C_jakrppis net/minecraft/enchantment/EnchantmentHel
 			COMMENT the entity to choose equipments from
 		ARG 2 condition
 			COMMENT extra conditions for the item stack to pass for selection
+	METHOD m_mimuzvcl canStoreEnchantments (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_mnatputa forEachEnchantment (Lnet/minecraft/unmapped/C_jakrppis$C_jdhxivxn;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 0 consumer
 		ARG 1 stack
 	METHOD m_mvsjkilb getArmorBreach (Lnet/minecraft/unmapped/C_astfners;F)F
+		ARG 0 entity
 	METHOD m_naelqumb enchant (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_sddaxwyk;IZ)Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT Enchants the {@code target} item stack and returns it.
+		ARG 0 features
 		ARG 2 target
 			COMMENT the item stack to enchant
 		ARG 3 level
@@ -66,6 +80,9 @@ CLASS net/minecraft/unmapped/C_jakrppis net/minecraft/enchantment/EnchantmentHel
 			COMMENT whether treasure enchantments may appear
 	METHOD m_nmfzbmmv hasBindingCurse (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 stack
+	METHOD m_nrticzny (Lorg/apache/commons/lang3/mutable/MutableInt;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_jxtrubuh;I)V
+		ARG 2 enchantment
+		ARG 3 level
 	METHOD m_ogntvpbr getRiptide (Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 0 stack
 	METHOD m_pcunrpng calculateRequiredExperienceLevel (Lnet/minecraft/unmapped/C_rlomrsco;IILnet/minecraft/unmapped/C_sddaxwyk;)I
@@ -91,6 +108,7 @@ CLASS net/minecraft/unmapped/C_jakrppis net/minecraft/enchantment/EnchantmentHel
 	METHOD m_pngonrhw getPossibleEntries (Lnet/minecraft/unmapped/C_czxxrbcp;ILnet/minecraft/unmapped/C_sddaxwyk;Z)Ljava/util/List;
 		COMMENT Gets all the possible entries for enchanting the {@code stack} at the
 		COMMENT given {@code power}.
+		ARG 0 features
 		ARG 1 power
 		ARG 2 stack
 		ARG 3 treasureAllowed
@@ -102,19 +120,30 @@ CLASS net/minecraft/unmapped/C_jakrppis net/minecraft/enchantment/EnchantmentHel
 		ARG 0 entity
 	METHOD m_udfcqeza generateEnchantments (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_sddaxwyk;IZ)Ljava/util/List;
 		COMMENT Generate the enchantments for enchanting the {@code stack}.
+		ARG 0 features
 		ARG 2 stack
 		ARG 3 level
 		ARG 4 treasureAllowed
+	METHOD m_uyoiclvv getComponent (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_qlclfxvn;
 	METHOD m_vonozfhq hasSoulSpeed (Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 0 entity
 	METHOD m_wfidublc getEnchantmentLevel (Lnet/minecraft/unmapped/C_jxtrubuh;Lnet/minecraft/unmapped/C_usxaxydn;)I
 		ARG 0 enchantment
+	METHOD m_wodwsbra (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_jxtrubuh;I)V
+		ARG 2 enchantment
+		ARG 3 level
 	METHOD m_ybhxtwqv set (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_qlclfxvn;)V
 		COMMENT Sets the enchantments on an item stack.
 		COMMENT
 		COMMENT <p>For enchanted books, it sets the enchantments to the item stack's
 		COMMENT stored enchantments than regular enchantments.
 		ARG 0 stack
+	METHOD m_yhaevnqm postHit (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_qlclfxvn;)V
+		ARG 0 attacker
+		ARG 1 target
+		ARG 2 component
+	METHOD m_yivqyckp getSweepingEdgeMultipler (I)F
+		ARG 0 level
 	METHOD m_ymaphuvh chooseEquipmentWith (Lnet/minecraft/unmapped/C_jxtrubuh;Lnet/minecraft/unmapped/C_usxaxydn;)Ljava/util/Map$Entry;
 		COMMENT {@return a pair of an equipment slot and the item stack in the supplied
 		COMMENT entity's slot} It indicates the item stack has the enchantment supplied.

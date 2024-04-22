@@ -9,9 +9,13 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	FIELD f_lfoqoljh recipeRemainder Lnet/minecraft/unmapped/C_vorddnax;
 	FIELD f_oajedmeb ATTACK_SPEED_MODIFIER_ID Ljava/util/UUID;
 	FIELD f_rxraouwr builtInRegistryHolder Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
+	FIELD f_vmipucxo ABSOLUTE_MAX_COUNT I
+	FIELD f_vwakrgmw DEFAULT_MAX_COUNT I
 	METHOD <init> (Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;)V
 		ARG 1 settings
 	METHOD m_bdsymcbv getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_bhfktmca getBonusAttackDamage (Lnet/minecraft/unmapped/C_jzrpycqo;F)F
+		ARG 2 baseAttackDamage
 	METHOD m_ckolblsl onCraft (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;)V
 		COMMENT Called when the item is made by crafting, smelting, smithing, etc.
 	METHOD m_cnsoybmp postMine (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_usxaxydn;)Z
@@ -25,7 +29,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_dgdssmij fromBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_vorddnax;
 		COMMENT @deprecated Please use {@link Block#asItem}
 		ARG 0 block
-	METHOD m_dnwybntd isSuitableFor (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_dnwybntd isCorrectForDrops (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		COMMENT Determines whether this item can be used as a suitable tool for mining the specified block.
 		COMMENT Depending on block implementation, when combined together, the correct item and block may achieve a better mining speed and yield
 		COMMENT drops that would not be obtained when mining otherwise.
@@ -120,6 +124,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 5 player
 		ARG 6 cursorStackReference
 	METHOD m_plxsgnqi postHit (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		COMMENT @return {@code true} if the hit should count as a usage of the item, or false otherwise
 		ARG 1 stack
 		ARG 2 target
 		ARG 3 attacker
