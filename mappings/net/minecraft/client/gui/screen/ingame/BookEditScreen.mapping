@@ -1,6 +1,6 @@
 CLASS net/minecraft/unmapped/C_thtsxcbc net/minecraft/client/gui/screen/ingame/BookEditScreen
 	FIELD f_agfaopqt signedByText Lnet/minecraft/unmapped/C_rdaqiwdt;
-	FIELD f_asecfnxz itemStack Lnet/minecraft/unmapped/C_sddaxwyk;
+	FIELD f_asecfnxz book Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_bdzlbiyf lastClickTime J
 	FIELD f_byrjmzkf signButton Lnet/minecraft/unmapped/C_buwziidm;
 	FIELD f_bzxaraax pageIndicatorText Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -18,10 +18,10 @@ CLASS net/minecraft/unmapped/C_thtsxcbc net/minecraft/client/gui/screen/ingame/B
 	FIELD f_llugymrd FINALIZE_WARNING Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_mkgltxev doneButton Lnet/minecraft/unmapped/C_buwziidm;
 	FIELD f_nxusxlhl previousPageButton Lnet/minecraft/unmapped/C_zirbhteg;
-	FIELD f_pzlxpute pageContent Lnet/minecraft/unmapped/C_thtsxcbc$C_tsbqegcf;
+	FIELD f_pzlxpute displayCache Lnet/minecraft/unmapped/C_thtsxcbc$C_tsbqegcf;
 	FIELD f_pzvednia title Ljava/lang/String;
 	FIELD f_qdfyqhdz WIDTH I
-	FIELD f_rwjbvudc currentPageSelectionManager Lnet/minecraft/unmapped/C_vyadpylu;
+	FIELD f_rwjbvudc pageSelectionManager Lnet/minecraft/unmapped/C_vyadpylu;
 	FIELD f_seiqwwup MAX_TEXT_WIDTH I
 	FIELD f_twlrzveg BLACK_CURSOR Lnet/minecraft/unmapped/C_apvkgwyi;
 	FIELD f_ugbdmcga player Lnet/minecraft/unmapped/C_jzrpycqo;
@@ -31,10 +31,10 @@ CLASS net/minecraft/unmapped/C_thtsxcbc net/minecraft/client/gui/screen/ingame/B
 	FIELD f_zmhitjkp GRAY_CURSOR Lnet/minecraft/unmapped/C_apvkgwyi;
 	METHOD <init> (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_laxmzoqs;)V
 		ARG 1 player
-		ARG 2 itemStack
+		ARG 2 book
 		ARG 3 hand
-	METHOD m_baxkgjgl countPages ()I
-	METHOD m_dbsblpoy invalidatePageContent ()V
+	METHOD m_baxkgjgl getPageCount ()I
+	METHOD m_dbsblpoy invalidateDisplayCache ()V
 	METHOD m_erssijxq changePage ()V
 	METHOD m_euzfxnlg (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
@@ -76,7 +76,7 @@ CLASS net/minecraft/unmapped/C_thtsxcbc net/minecraft/client/gui/screen/ingame/B
 		ARG 1 keyCode
 		ARG 2 scanCode
 		ARG 3 modifiers
-	METHOD m_qwxvkyug removeEmptyPages ()V
+	METHOD m_qwxvkyug removeTrailingEmptyPages ()V
 	METHOD m_ragnpovv getLineSelectionRectangle (Ljava/lang/String;Lnet/minecraft/unmapped/C_wtqrualh;IIII)Lnet/minecraft/unmapped/C_zccuaobs;
 		ARG 1 string
 		ARG 2 handler
@@ -93,14 +93,14 @@ CLASS net/minecraft/unmapped/C_thtsxcbc net/minecraft/client/gui/screen/ingame/B
 	METHOD m_tefpwzrk (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_uasjecnm moveToLineEnd ()V
-	METHOD m_ueafxuih createPageContent ()Lnet/minecraft/unmapped/C_thtsxcbc$C_tsbqegcf;
+	METHOD m_ueafxuih createDisplay ()Lnet/minecraft/unmapped/C_thtsxcbc$C_tsbqegcf;
 	METHOD m_urenivje moveUpLine ()V
 	METHOD m_uxhvlbhe getLineFromOffset ([II)I
 		ARG 0 lineStarts
 		ARG 1 position
 	METHOD m_vngkuvsw moveDownLine ()V
 	METHOD m_vzvrvbct appendNewPage ()V
-	METHOD m_wioblbnf getPageContent ()Lnet/minecraft/unmapped/C_thtsxcbc$C_tsbqegcf;
+	METHOD m_wioblbnf getDisplay ()Lnet/minecraft/unmapped/C_thtsxcbc$C_tsbqegcf;
 	METHOD m_xbqbmfse (Lorg/apache/commons/lang3/mutable/MutableInt;Ljava/lang/String;Lorg/apache/commons/lang3/mutable/MutableBoolean;Lit/unimi/dsi/fastutil/ints/IntList;Ljava/util/List;Lnet/minecraft/unmapped/C_cpwnhism;II)V
 		ARG 6 style
 	METHOD m_xhoeoyqe getCurrentPageContent ()Ljava/lang/String;
@@ -127,16 +127,16 @@ CLASS net/minecraft/unmapped/C_thtsxcbc net/minecraft/client/gui/screen/ingame/B
 			ARG 2 content
 			ARG 3 x
 			ARG 4 y
-	CLASS C_tsbqegcf PageContent
+	CLASS C_tsbqegcf Display
 		FIELD f_byapatxj lineStarts [I
-		FIELD f_efusfftt pageContent Ljava/lang/String;
+		FIELD f_efusfftt content Ljava/lang/String;
 		FIELD f_ekyapqbl position Lnet/minecraft/unmapped/C_thtsxcbc$C_ahmqwwwc;
 		FIELD f_otdyhmvk EMPTY Lnet/minecraft/unmapped/C_thtsxcbc$C_tsbqegcf;
 		FIELD f_qwmlaeto lines [Lnet/minecraft/unmapped/C_thtsxcbc$C_hweyaweg;
 		FIELD f_wdtezrkr selectionRectangles [Lnet/minecraft/unmapped/C_zccuaobs;
 		FIELD f_zapjbasf atEnd Z
 		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_thtsxcbc$C_ahmqwwwc;Z[I[Lnet/minecraft/unmapped/C_thtsxcbc$C_hweyaweg;[Lnet/minecraft/unmapped/C_zccuaobs;)V
-			ARG 1 pageContent
+			ARG 1 content
 			ARG 2 position
 			ARG 3 atEnd
 			ARG 4 lineStarts
