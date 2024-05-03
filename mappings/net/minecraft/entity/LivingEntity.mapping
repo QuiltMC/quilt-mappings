@@ -189,6 +189,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 			COMMENT the effect to set
 		ARG 2 source
 			COMMENT the source entity or {@code null} for non-entity sources
+	METHOD m_eobwecax dropXp (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 attacker
 	METHOD m_epkzhkqg deserializeBrain (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_rjqjaxef;
 		ARG 1 dynamic
 	METHOD m_exbsyzzv markEffectsDirty ()V
@@ -252,8 +254,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT Returns if this entity may always drop experience, skipping any
 		COMMENT other checks.
 		COMMENT
-		COMMENT @see #dropXp()
-		COMMENT @see #getXpToDrop()
+		COMMENT @see #dropXp(Entity)
+		COMMENT @see #getXpToDrop(ServerWorld, Entity)
 	METHOD m_hiwasxnu shouldDropLoot ()Z
 	METHOD m_hljdomqx canTakeDamage ()Z
 	METHOD m_hnmeqaaj applyEnchantmentsToDamage (Lnet/minecraft/unmapped/C_sbxfkpyv;F)F
@@ -450,9 +452,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT true}, this check is disregarded.
 		COMMENT
 		COMMENT @return {@code true} if this entity should drop experience on death, or {@code false} otherwise
-		COMMENT @see #dropXp()
+		COMMENT @see #dropXp(Entity)
 		COMMENT @see #shouldAlwaysDropXp()
-		COMMENT @see #getXpToDrop()
+		COMMENT @see #getXpToDrop(ServerWorld, Entity)
 	METHOD m_rufhxvdu attackLivingEntity (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 target
 	METHOD m_rutfchol playBlockFallSound ()V
@@ -603,6 +605,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT this call
 		ARG 1 effect
 	METHOD m_xzwxvody getHitbox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
+	METHOD m_yanqzhib getXpToDrop (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)I
 	METHOD m_ydvutmzi getLootTable ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_ykflpkfs damageHelmet (Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 		ARG 1 source
