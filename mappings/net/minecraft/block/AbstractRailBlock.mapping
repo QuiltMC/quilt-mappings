@@ -1,12 +1,12 @@
 CLASS net/minecraft/unmapped/C_mgkftsgg net/minecraft/block/AbstractRailBlock
-	FIELD f_afdevxyp allowCurves Z
+	FIELD f_afdevxyp uncurvable Z
 	FIELD f_hugfgcne WATERLOGGED Lnet/minecraft/unmapped/C_xhwijdsd;
 	FIELD f_qnbjbbpm STRAIGHT_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
 	FIELD f_vrvdpeyj ASCENDING_SHAPE Lnet/minecraft/unmapped/C_zscvhwbd;
 	METHOD <init> (ZLnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;)V
-		ARG 1 allowCurves
+		ARG 1 uncurvable
 		ARG 2 settings
-	METHOD m_gnxvkdbi canMakeCurves ()Z
+	METHOD m_gnxvkdbi isUncurvable ()Z
 	METHOD m_hrqcdmdw getShapeProperty ()Lnet/minecraft/unmapped/C_vzlztuyw;
 	METHOD m_lczpeazs isRail (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 0 state
@@ -15,12 +15,11 @@ CLASS net/minecraft/unmapped/C_mgkftsgg net/minecraft/block/AbstractRailBlock
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 notify
-	METHOD m_oyknusit shouldDropRail (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_wqmdpcsg;)Z
-		COMMENT Checks if this rail should be dropped.
+	METHOD m_oyknusit shouldBreak (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_wqmdpcsg;)Z
+		COMMENT Checks if this rail should break.
 		COMMENT
-		COMMENT <p>This method will return true if:
-		COMMENT <ul><li>The rail block is ascending.</li>
-		COMMENT <li>The block in the direction of ascent does not have a top rim.</li></ul>
+		COMMENT @return {@code true} if the block below has no top rim or if {@code shape} is ascending
+		COMMENT toward a block with no top rim, or {@code false} otherwise
 		ARG 0 pos
 		ARG 1 world
 		ARG 2 shape
