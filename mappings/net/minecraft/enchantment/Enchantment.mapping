@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 	FIELD f_cbjwrotz registryEntry Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
+	FIELD f_cytkilek properties Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
 	FIELD f_idonjvqd translationKey Ljava/lang/String;
 	METHOD <init> (Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;)V
 		ARG 1 properties
@@ -35,11 +36,15 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 		ARG 1 user
 		ARG 2 target
 		ARG 3 level
-	METHOD m_rtwmhoyh getMinPower (I)I
+	METHOD m_rtwmhoyh getMinCost (I)I
 		COMMENT {@return the minimum level required to by the player for the enchantment to be shown in the enchantment table.}
 		COMMENT It is not a 1:1 ratio. The majority of enchantments return something similar to `10 * level`, often with different scales depending on the maximum level and rarity of the enchantment.
 		ARG 1 level
-	METHOD m_rwnmjikl properties (Lnet/minecraft/unmapped/C_ednuhnnn;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
+	METHOD m_rwnmjikl createProperties (Lnet/minecraft/unmapped/C_ednuhnnn;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
+	METHOD m_sclzujte postHit (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;I)V
+		ARG 1 attacker
+		ARG 2 target
+		ARG 3 level
 	METHOD m_smaihzzt isAvailableForEnchantedBookOffer ()Z
 		COMMENT {@return whether this enchantment will appear in the enchanted book trade
 		COMMENT offers of librarian villagers}
@@ -59,18 +64,20 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 	METHOD m_vjzmieep cost (I)Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;
 	METHOD m_vssdpxdz getTranslationKey ()Ljava/lang/String;
 		COMMENT {@return gets key for translating the enchant in the lang files}
-	METHOD m_whhririh properties (Lnet/minecraft/unmapped/C_ednuhnnn;Lnet/minecraft/unmapped/C_ednuhnnn;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
+	METHOD m_whhririh createProperties (Lnet/minecraft/unmapped/C_ednuhnnn;Lnet/minecraft/unmapped/C_ednuhnnn;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
+		ARG 1 primaryItems
 	METHOD m_xaezlmue getAnvilCost ()I
 	METHOD m_ygnxsicw cost (II)Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;
 	METHOD m_zfqdifee getName (I)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		COMMENT {@return a translation key that is formatted to a specific color}
 		COMMENT By default this method changes enchantments that return {@code true} from {@code isCursed()} to have red names.
 		ARG 1 level
-	METHOD m_zrsimmxr properties (Lnet/minecraft/unmapped/C_ednuhnnn;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;ILnet/minecraft/unmapped/C_czxxrbcp;[Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
+	METHOD m_znzmqxec isPrimaryItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+	METHOD m_zrsimmxr createProperties (Lnet/minecraft/unmapped/C_ednuhnnn;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;ILnet/minecraft/unmapped/C_czxxrbcp;[Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
 	METHOD m_ztiddpby isAvailableForRandomSelection ()Z
 		COMMENT {@return whether this enchantment will appear in the enchanting table or
 		COMMENT loots with random enchant function}
-	METHOD m_ztycenho getMaxPower (I)I
+	METHOD m_ztycenho getMaxCost (I)I
 		COMMENT {@return the maximum level a Player is allowed before the enchant is not shown in the enchantment table}
 		COMMENT The default return is the minimum power level + 5.
 		ARG 1 level
@@ -79,4 +86,6 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 		ARG 1 level
 		ARG 2 source
 	CLASS C_jkttgiwc Cost
+		METHOD m_lpzheldf forLevel (I)I
+			ARG 1 level
 	CLASS C_ryljcnwe Properties
