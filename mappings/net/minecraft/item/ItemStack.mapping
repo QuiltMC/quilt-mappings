@@ -101,7 +101,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 item
 			COMMENT the item instance to match
 	METHOD m_fdjdvcpt getMaxDamage ()I
-	METHOD m_fggiijyg getMaxUseTime ()I
 	METHOD m_fgqlptaw getEncoded (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_oivssbvb;
 	METHOD m_fuopwkpz encode (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_oivssbvb;
 	METHOD m_gcouiubw isIn (Lnet/minecraft/unmapped/C_odfnijdo;)Z
@@ -170,20 +169,17 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_mhrovmoq itemsMatch (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 stack1
 		ARG 1 stack2
-	METHOD m_msofzvly isSuitableFor (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_msofzvly isCorrectForDrops (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		COMMENT Determines whether this item can be used as a suitable tool for mining the specified block.
 		COMMENT <p>
 		COMMENT Depending on block implementation, when combined together, the correct item and block may achieve a better mining speed and yield
 		COMMENT drops that would not be obtained when mining otherwise.
 		COMMENT
-		COMMENT @return values consistent with calls to {@link Item#isSuitableFor}
-		COMMENT @see Item#isSuitableFor(ItemStack, BlockState)
+		COMMENT @return values consistent with calls to {@link Item#isCorrectForDrops}
+		COMMENT @see Item#isCorrectForDrops(ItemStack, BlockState)
 		ARG 1 state
 	METHOD m_mwcbjbmu getTooltipData ()Ljava/util/Optional;
 	METHOD m_mwztqdza getEatSound ()Lnet/minecraft/unmapped/C_avavozay;
-	METHOD m_nisvbeaw addEnchantment (Lnet/minecraft/unmapped/C_jxtrubuh;I)V
-		ARG 1 enchantment
-		ARG 2 level
 	METHOD m_nivkbhlq increment (I)V
 		COMMENT Increments the count of items in this item stack.
 		ARG 1 amount
@@ -198,9 +194,6 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT {@return the length of the filled section of the durability bar in pixels (out of 13)}
 	METHOD m_pocwrlzm (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
-	METHOD m_poxxatoa postHit (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_jzrpycqo;)V
-		ARG 1 target
-		ARG 2 attacker
 	METHOD m_pqebapbo getHolder ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_puozqtwx (Lnet/minecraft/unmapped/C_cjzoxshv;)Lcom/mojang/serialization/DataResult;
 		ARG 0 holder
@@ -211,7 +204,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 patch
 	METHOD m_qxfxfsuy getItem ()Lnet/minecraft/unmapped/C_vorddnax;
 	METHOD m_qxooancw applyPatch (Lnet/minecraft/unmapped/C_jqyoylib;)V
-	METHOD m_rcukuoag (ILnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)V
+	METHOD m_rcukuoag damageEquipment (ILnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)V
+		ARG 1 damage
 		ARG 2 entity
 		ARG 3 slot
 	METHOD m_rghjmiwl setDamage (I)V
@@ -284,6 +278,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 holder
 	METHOD m_xvzvtufo getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_yawcimjo getEntityHolder ()Lnet/minecraft/unmapped/C_astfners;
+	METHOD m_yprgpdac takesDamageFrom (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
+		ARG 1 damageSource
 	METHOD m_yqsxbejh copyComponentsToNewStack (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT {@return a new item stack with the components copied from this stack}
 		COMMENT

@@ -3,7 +3,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_asrrjfdz attributes Lnet/minecraft/unmapped/C_cohbwqne;
 	FIELD f_atqwrmrh lastDamageTaken F
 	FIELD f_avsswxpi ELYTRA_DAMAGE_PER_FREE_FALL_TICKS I
-	FIELD f_azizbgcr SOUL_SPEED_BOOST_ID Ljava/util/UUID;
 	FIELD f_bwbjmspv DAMAGE_SOURCE_TIMEOUT I
 	FIELD f_coityhpi jumping Z
 	FIELD f_dddwkxrr bodyArmor Lnet/minecraft/unmapped/C_sddaxwyk;
@@ -115,6 +114,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_armeddpk getDamageTracker ()Lnet/minecraft/unmapped/C_xkhemiqp;
 	METHOD m_astmyzdc getHand (Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_yuycoehb;
 		ARG 0 hand
+	METHOD m_atmwnkdy (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 brainElement
 	METHOD m_awmtskvv getMovementSpeed (F)F
 		ARG 1 slipperiness
 	METHOD m_axkhmdzu getDeathSound ()Lnet/minecraft/unmapped/C_avavozay;
@@ -140,8 +141,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 2 amount
 	METHOD m_bowysnou applyStatusEffectToPassengers (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 effect
-	METHOD m_bpkuevcy shouldRemoveSoulSpeedBoost (Lnet/minecraft/unmapped/C_txtbiemp;)Z
-		ARG 1 landingState
 	METHOD m_bqffyrlc consumeItem ()V
 	METHOD m_btxmjhfy clearPotionSwirls ()V
 	METHOD m_bwbyqdts getLeaningPitch (F)F
@@ -155,7 +154,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_cehpabji setArmorInSlot (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 		ARG 2 armor
-	METHOD m_cgxjxqgc addSoulSpeedBoostIfNeeded ()V
 	METHOD m_clijnmhr isBlocking ()Z
 	METHOD m_cnzsqyai jump ()V
 	METHOD m_cqzdrxbt getDrinkSound (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_avavozay;
@@ -193,12 +191,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 			COMMENT the effect to set
 		ARG 2 source
 			COMMENT the source entity or {@code null} for non-entity sources
-	METHOD m_eobwecax dropXp ()V
-		COMMENT Drops experience when this entity is killed.
-		COMMENT
-		COMMENT <p>To control the details of experience dropping, consider overriding
-		COMMENT {@link #shouldAlwaysDropXp()}, {@link #shouldDropXp()}, and
-		COMMENT {@link #getXpToDrop()}.
+	METHOD m_eobwecax dropXp (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 attacker
 	METHOD m_epkzhkqg deserializeBrain (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_rjqjaxef;
 		ARG 1 dynamic
 	METHOD m_exbsyzzv markEffectsDirty ()V
@@ -226,11 +220,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 descentSpeed
 		ARG 3 descending
 		ARG 4 velocity
-	METHOD m_ggpkvkjt getRandom ()Lnet/minecraft/unmapped/C_rlomrsco;
 	METHOD m_giwixeor getLastAttackTime ()I
 	METHOD m_gkfkzdkd setDespawnCounter (I)V
 		ARG 1 despawnCounter
-	METHOD m_gmbpcsgg removeSoulSpeedBoost ()V
 	METHOD m_gmtlgjgb removeStatusEffectInternal (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_wpfizwve;
 		COMMENT Removes a status effect from this entity without calling any listener.
 		COMMENT
@@ -264,10 +256,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT Returns if this entity may always drop experience, skipping any
 		COMMENT other checks.
 		COMMENT
-		COMMENT @see #dropXp()
-		COMMENT @see #getXpToDrop()
+		COMMENT @see #dropXp(Entity)
+		COMMENT @see #getXpToDrop(ServerWorld, Entity)
 	METHOD m_hiwasxnu shouldDropLoot ()Z
-	METHOD m_hjnxuupd isOnSoulSpeedBlock ()Z
 	METHOD m_hljdomqx canTakeDamage ()Z
 	METHOD m_hnmeqaaj applyEnchantmentsToDamage (Lnet/minecraft/unmapped/C_sbxfkpyv;F)F
 		ARG 1 source
@@ -301,6 +292,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_itkmziir getMainArm ()Lnet/minecraft/unmapped/C_njjnizsa;
 	METHOD m_jclvfrxe tickItemStackUsage (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 stack
+	METHOD m_jdwmkavq (Ljava/util/List;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
+		ARG 2 slot
 	METHOD m_jeizdffm getPreferredEquipmentSlot (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_yuycoehb;
 		ARG 0 stack
 	METHOD m_jeuoijmu getStatusEffect (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_wpfizwve;
@@ -343,8 +336,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_ldeqpsrz canDisableShield ()Z
 	METHOD m_lgbaiieb slotEmitsEquipEvent (Lnet/minecraft/unmapped/C_yuycoehb;)Z
 		ARG 1 slot
-	METHOD m_lgbjnvrh applyMovementEffects (Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 pos
 	METHOD m_lhliifdm getArmor ()I
 	METHOD m_ljcawptq pushAway (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
@@ -390,10 +381,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_neqdbeuq setLivingFlag (IZ)V
 		ARG 1 mask
 		ARG 2 value
-	METHOD m_nffkdjyj shouldDisplaySoulSpeedEffects ()Z
-	METHOD m_nmtlrqts (Lnet/minecraft/unmapped/C_cohbwqne;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;)V
-		ARG 1 attribute
-		ARG 2 modifier
 	METHOD m_nutvedxs onEquipItem (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 		ARG 2 oldStack
@@ -469,9 +456,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT true}, this check is disregarded.
 		COMMENT
 		COMMENT @return {@code true} if this entity should drop experience on death, or {@code false} otherwise
-		COMMENT @see #dropXp()
+		COMMENT @see #dropXp(Entity)
 		COMMENT @see #shouldAlwaysDropXp()
-		COMMENT @see #getXpToDrop()
+		COMMENT @see #getXpToDrop(ServerWorld, Entity)
 	METHOD m_rufhxvdu attackLivingEntity (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 target
 	METHOD m_rutfchol playBlockFallSound ()V
@@ -482,10 +469,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 target
 	METHOD m_scrnkbbn detectEquipmentUpdates ()V
 	METHOD m_sebydyvw endCombat ()V
-	METHOD m_sephwywk dropEquipment (Lnet/minecraft/unmapped/C_sbxfkpyv;IZ)V
-		ARG 1 source
-		ARG 2 lootingMultiplier
-		ARG 3 allowDrops
 	METHOD m_sffkfemm getItemUseTimeLeft ()I
 	METHOD m_sgvyoptc getFallSound (I)Lnet/minecraft/unmapped/C_avavozay;
 		ARG 1 distance
@@ -523,9 +506,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_trdfxuev tickRiptide (Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_hbcjzgoe;)V
 		ARG 1 a
 		ARG 2 b
-	METHOD m_tvyfqrdt (Lnet/minecraft/unmapped/C_cohbwqne;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;)V
-		ARG 1 attribute
-		ARG 2 modifier
 	METHOD m_udqbhpxg equipStack (Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 slot
 	METHOD m_uhjfbatb tickControlled (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_vgpupfxx;)V
@@ -540,6 +520,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_unmnupmt applyDamage (Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 		ARG 1 source
 		ARG 2 amount
+		ARG 9 unabsorbedAmount
 	METHOD m_upnmcubv getEatSound (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_avavozay;
 		ARG 1 stack
 	METHOD m_urjobhnr tickHandSwing ()V
@@ -577,7 +558,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 songPosition
 		ARG 2 playing
 	METHOD m_vmsltdwx addDeathParticles ()V
-	METHOD m_vnidpegi displaySoulSpeedEffects ()V
 	METHOD m_vwjazeju triggerItemPickedUpByEntityCriteria (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		COMMENT Called to trigger advancement criteria when an entity picks up an item
 		COMMENT thrown by a player.
@@ -630,16 +610,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT this call
 		ARG 1 effect
 	METHOD m_xzwxvody getHitbox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
-	METHOD m_yanqzhib getXpToDrop ()I
-		COMMENT Called when this entity is killed and returns the amount of experience
-		COMMENT to drop.
-		COMMENT
-		COMMENT <p>{@code player} may be {@code null} if {@linkplain #shouldAlwaysDropXp
-		COMMENT shouldAlwaysDropXp()} returns {@code true}.
-		COMMENT
-		COMMENT @see #dropXp()
-		COMMENT @see #shouldAlwaysDropXp()
-		COMMENT @see #shouldDropXp()
+	METHOD m_yanqzhib getXpToDrop (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)I
 	METHOD m_ydvutmzi getLootTable ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_ykflpkfs damageHelmet (Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 		ARG 1 source
