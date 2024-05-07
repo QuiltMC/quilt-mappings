@@ -9,6 +9,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	FIELD f_lfoqoljh recipeRemainder Lnet/minecraft/unmapped/C_vorddnax;
 	FIELD f_oajedmeb ATTACK_SPEED_MODIFIER_ID Ljava/util/UUID;
 	FIELD f_rxraouwr builtInRegistryHolder Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
+	FIELD f_vmipucxo ABSOLUTE_MAX_COUNT I
+	FIELD f_vwakrgmw DEFAULT_MAX_COUNT I
 	METHOD <init> (Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;)V
 		ARG 1 settings
 	METHOD m_bdsymcbv getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -25,7 +27,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_dgdssmij fromBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_vorddnax;
 		COMMENT @deprecated Please use {@link Block#asItem}
 		ARG 0 block
-	METHOD m_dnwybntd isSuitableFor (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_dnwybntd isCorrectForDrops (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		COMMENT Determines whether this item can be used as a suitable tool for mining the specified block.
 		COMMENT Depending on block implementation, when combined together, the correct item and block may achieve a better mining speed and yield
 		COMMENT drops that would not be obtained when mining otherwise.
@@ -61,10 +63,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 2 world
 		ARG 3 user
 		ARG 4 remainingUseTicks
-	METHOD m_hwznhtnf getMaxUseTime (Lnet/minecraft/unmapped/C_sddaxwyk;)I
-		COMMENT {@return the maximum use (right-click) time of this item, in ticks}
-		COMMENT Once a player has used an item for said number of ticks, they stop using it, and {@link Item#finishUsing} is called.
-		ARG 1 stack
 	METHOD m_inqbslnb useOnEntity (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 stack
 		ARG 2 user
@@ -120,6 +118,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 5 player
 		ARG 6 cursorStackReference
 	METHOD m_plxsgnqi postHit (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+		COMMENT @return {@code true} if the hit should count as a usage of the item, or {@code false} otherwise
 		ARG 1 stack
 		ARG 2 target
 		ARG 3 attacker

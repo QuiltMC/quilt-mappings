@@ -49,6 +49,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 1 state
 		ARG 2 view
 		ARG 3 pos
+	METHOD m_enfnjurp (Ljava/util/function/Function;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 1 codecBuilder
 	METHOD m_ewcsdntg asBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
 	METHOD m_fjkbizwn isRedstonePowerSource (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
@@ -133,7 +135,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 3 pos
 	METHOD m_qjdjbqgu onExplosion (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
 		ARG 4 explosion
-		ARG 5 biConsumer
+		ARG 5 dropConsumer
 	METHOD m_qjteufci onStacksDropped (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sddaxwyk;Z)V
 		ARG 1 state
 		ARG 2 world
@@ -153,6 +155,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 5 moved
 	METHOD m_rhslbcpd getSoundGroup (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_aevintex;
 	METHOD m_rmjjhoiz getRandomTicks (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_rwctfady canPathfindThrough (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_kjwlgpfr;)Z
+		ARG 2 navigationType
 	METHOD m_sdymngiw randomTick (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)V
 		ARG 1 state
 		ARG 2 world
@@ -526,7 +530,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_yvamjply getBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
 		METHOD m_yylpqepz onExplosion (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
 			ARG 3 explosion
-			ARG 4 biConsumer
+			ARG 4 dropConsumer
 		METHOD m_zntvpiao getLuminance ()I
 			COMMENT {@return the light level emitted by this block state}
 		METHOD m_zrpxtrfo isToolRequired ()Z
@@ -681,7 +685,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 0 state
 			ARG 1 world
 			ARG 2 pos
-		METHOD m_shyyftwz requiresTool ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+		METHOD m_shyyftwz toolRequired ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_tzpskyoo (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 0 state
 			ARG 1 world
