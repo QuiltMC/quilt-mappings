@@ -8,7 +8,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	FIELD f_egnswwwb FORCED_TICKET_LEVEL I
 	FIELD f_ekyvcymk chunkStatusChangeListener Lnet/minecraft/unmapped/C_gtndfkbe;
 	FIELD f_epwhnhgx pointOfInterestStorage Lnet/minecraft/unmapped/C_uegwgivt;
-	FIELD f_fjgdpyoz chunkGenerator Lnet/minecraft/unmapped/C_kgfalbim;
 	FIELD f_forzslne storageName Ljava/lang/String;
 	FIELD f_gsztossn EAGER_CHUNK_SAVE_COOLDOWN_MS I
 	FIELD f_gwftgvse chunkSaveCooldowns Lit/unimi/dsi/fastutil/longs/Long2LongMap;
@@ -21,7 +20,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	FIELD f_ofyplwmc chunkTaskPrioritySystem Lnet/minecraft/unmapped/C_gxchrfeu;
 	FIELD f_ogfasnyn PROTO_CHUNK B
 	FIELD f_oratkgdp chunkHolderListDirty Z
-	FIELD f_pogbjqww loadedChunks Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_ptdjlogf unloadTaskQueue Ljava/util/Queue;
 	FIELD f_qgyepzej LEVEL_CHUNK B
 	FIELD f_qmxmwuww world Lnet/minecraft/unmapped/C_bdwnwhiu;
@@ -74,10 +72,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 entity
 	METHOD m_ftzrbjoo loadChunk (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 pos
-	METHOD m_fypcngse (Lnet/minecraft/unmapped/C_kgfalbim;)V
-		ARG 1 chunkGenerator
-	METHOD m_gfwkkrdp (Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
-		ARG 0 element
 	METHOD m_gknwalsf tickEntityMovement ()V
 		COMMENT Ticks and updates the tracked status of each tracker.
 		COMMENT
@@ -87,8 +81,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT players. This ensures all possible updates are accounted for.
 	METHOD m_hadjtdih save (Lnet/minecraft/unmapped/C_lwzmmmqr;)Z
 		ARG 1 chunk
-	METHOD m_hrlvjyna releaseLightTicket (Lnet/minecraft/unmapped/C_ynrszrtu;)V
-		ARG 1 pos
 	METHOD m_jjidpbzz sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 entity
 		ARG 2 packet
@@ -97,7 +89,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 pos
 	METHOD m_jtcoqmih tick (Ljava/util/function/BooleanSupplier;)V
 		ARG 1 shouldKeepTicking
-	METHOD m_jyhtxlyw reloadChunkGenerator ()V
 	METHOD m_lwnasrxx getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/lang/String;
 		ARG 1 chunkPos
 	METHOD m_lxukttpf dump (Ljava/io/Writer;)V
@@ -111,9 +102,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 2 margin
 		ARG 3 distanceToStatus
 	METHOD m_noyandst getTotalChunksLoadedCount ()I
-	METHOD m_nuqnfnbw getChunk (Lnet/minecraft/unmapped/C_gkderdjo;Lnet/minecraft/unmapped/C_kogtzhzt;)Ljava/util/concurrent/CompletableFuture;
-		ARG 1 holder
-		ARG 2 requiredStatus
 	METHOD m_oaspnrqg onChunkStatusChange (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_whqcauvq;)V
 		ARG 1 pos
 		ARG 2 newStatus
@@ -127,13 +115,9 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_phranalj sendToNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 entity
 		ARG 2 packet
-	METHOD m_ppfuhvxr upgradeChunk (Lnet/minecraft/unmapped/C_gkderdjo;Lnet/minecraft/unmapped/C_kogtzhzt;)Ljava/util/concurrent/CompletableFuture;
-		ARG 1 holder
-		ARG 2 requiredStatus
 	METHOD m_qcvnmgbx handlePlayerAddedOrRemoved (Lnet/minecraft/unmapped/C_mxrobsgg;Z)V
 		ARG 1 player
 		ARG 2 added
-	METHOD m_qvhzrohv convertToFullChunk (Lnet/minecraft/unmapped/C_gkderdjo;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 	METHOD m_stpepokf getChunkGenerator ()Lnet/minecraft/unmapped/C_kgfalbim;
 	METHOD m_tluosnso getUpdatedChunkNbt (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 pos
@@ -154,9 +138,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		ARG 1 pos
 		ARG 3 holder
 	METHOD m_xtsjwtbi updateHolderMap ()Z
-	METHOD m_xzgasiyg getRequiredStatusForGeneration (Lnet/minecraft/unmapped/C_kogtzhzt;I)Lnet/minecraft/unmapped/C_kogtzhzt;
-		ARG 1 centerChunkTargetStatus
-		ARG 2 distance
 	METHOD m_yizfeevy makeChunkTickable (Lnet/minecraft/unmapped/C_gkderdjo;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 holder
 	CLASS C_hwdtawcb TicketManager
