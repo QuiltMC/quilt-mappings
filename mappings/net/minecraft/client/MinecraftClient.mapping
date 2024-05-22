@@ -5,7 +5,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	COMMENT The Minecraft client instance may be obtained using {@link MinecraftClient#getInstance()}.
 	COMMENT
 	COMMENT <p>Rendering on a Minecraft client is split into several facilities.
-	COMMENT The primary entrypoint for rendering is {@link net.minecraft.client.render.GameRenderer#render(float, long, boolean)}.
+	COMMENT The primary entrypoint for rendering is {@link net.minecraft.client.render.GameRenderer#render(net.minecraft.unmapped.C_lrgsdfwv, boolean)}.
 	COMMENT <div class="quilt"><table border=1>
 	COMMENT <caption>Rendering facilities</caption>
 	COMMENT <tr>
@@ -78,7 +78,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_cqulrbtp chatNarratorManager Lnet/minecraft/unmapped/C_qwmxzagq;
 	FIELD f_cuhqrghd worldGenProgressTracker Ljava/util/concurrent/atomic/AtomicReference;
 	FIELD f_dhfmekui dataFixer Lcom/mojang/datafixers/DataFixer;
-	FIELD f_dhiyhtdj pausedTickDelta F
 	FIELD f_dufhrfcz toastManager Lnet/minecraft/unmapped/C_eqfjupcc;
 	FIELD f_duzlzhpe regionalComplianciesManager Lnet/minecraft/unmapped/C_bianxjxy;
 	FIELD f_eaotxiqe overlay Lnet/minecraft/unmapped/C_gtnnbmai;
@@ -182,7 +181,7 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT
 		COMMENT @see net.minecraft.client.gui.screen.ConnectScreen
 	FIELD f_yiluvghr targetedEntity Lnet/minecraft/unmapped/C_astfners;
-	FIELD f_yjhobbqr renderTickCounter Lnet/minecraft/unmapped/C_ewnwsuig;
+	FIELD f_yjhobbqr renderTickCounter Lnet/minecraft/unmapped/C_lrgsdfwv$C_xwflveoj;
 	FIELD f_ypxesqvh instance Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_yqtqkajc thread Ljava/lang/Thread;
 	FIELD f_ytluawot blockRenderManager Lnet/minecraft/unmapped/C_vdyoclwy;
@@ -304,12 +303,10 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 crashReport
 	METHOD m_kjzoybfi getCreativeHotbarStorage ()Lnet/minecraft/unmapped/C_twtdhnqb;
 	METHOD m_kqqsfyyw getSession ()Lnet/minecraft/unmapped/C_cwfizcnb;
-	METHOD m_kuckpnkp getTickDelta ()F
 	METHOD m_kxlqcbtr tick ()V
 	METHOD m_lcfptbuw handleBlockBreaking (Z)V
 		ARG 1 completeBreak
 	METHOD m_leficfia getMusicTracker ()Lnet/minecraft/unmapped/C_bqcuvynv;
-	METHOD m_lleaifgh getLastFrameDuration ()F
 	METHOD m_lmsvuglx addSystemDetailsToCrashReport (Lnet/minecraft/unmapped/C_fprbxnfr;Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_dahbfdem;Ljava/lang/String;Lnet/minecraft/unmapped/C_lscptbhn;)Lnet/minecraft/unmapped/C_fprbxnfr;
 		ARG 0 systemDetails
 		ARG 1 client
@@ -408,7 +405,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_sgsxylrl getItemRenderer ()Lnet/minecraft/unmapped/C_xjqetogb;
 	METHOD m_skbwigbs doItemUse ()V
 	METHOD m_smodvonk getSoundManager ()Lnet/minecraft/unmapped/C_hfmtwavd;
-	METHOD m_ssowzzsw shouldRenderAsync ()Z
 	METHOD m_swtmrwhg printCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)V
 		ARG 1 report
 	METHOD m_syjvubih setCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)V
