@@ -32,10 +32,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_exdxhnda PASSENGERS_KEY Ljava/lang/String;
 	FIELD f_eyfbjeig horizontalSpeed F
 	FIELD f_eyihyrff pistonMovementDelta [D
-	FIELD f_fbrwyrto inNetherPortal Z
 	FIELD f_fngqrxks standingEyeHeight F
 	FIELD f_ghlcqzgv CONTENTS_SLOT_INDEX I
-	FIELD f_gpwlbvdc lastNetherPortalPosition Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_gzzxrhqg RIDING_COOLDOWN I
 	FIELD f_habutjjj scoreboardTags Ljava/util/Set;
 	FIELD f_hefasmoa inPowderSnow Z
@@ -50,7 +48,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ihpdejin prevY D
 	FIELD f_ilwbyicy velocity Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_iskwetjb CUSTOM_NAME Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_jaoyzanc netherPortalTime I
 	FIELD f_jhbyfben ignoreCameraFrustum Z
 	FIELD f_jijbnlgf SLOW_LAVA_SPEED_FACTOR D
 	FIELD f_jncusoxk touchingWater Z
@@ -128,7 +125,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 5 movement
 	METHOD m_acgnvjmq isTeammate (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 other
-	METHOD m_aemmwice tickNetherPortal ()V
 	METHOD m_agpbjygj getControlledVehicle ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_agyyuimo getEyeHeight (Lnet/minecraft/unmapped/C_ufdjspmk;)F
 		ARG 1 pose
@@ -474,10 +470,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_klrwauzh refreshPositionAfterTeleport (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 pos
 	METHOD m_kmweazye getZ ()D
-	METHOD m_kojeekyg teleport (DDD)V
-		ARG 1 destX
-		ARG 3 destY
-		ARG 5 destZ
 	METHOD m_kqxvnqqn getWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
 		COMMENT {@return the world this entity is in}
 	METHOD m_krfnmqpx updateKilledAdvancementCriterion (Lnet/minecraft/unmapped/C_astfners;ILnet/minecraft/unmapped/C_sbxfkpyv;)V
@@ -563,11 +555,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 air
 	METHOD m_ntlxnitl emitGameEvent (Lnet/minecraft/unmapped/C_cjzoxshv;)V
 		ARG 1 event
-	METHOD m_nxekaost getPortalRect (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_pneibfez;)Ljava/util/Optional;
-		ARG 1 destWorld
-		ARG 2 destPos
-		ARG 3 destIsNether
-		ARG 4 worldBorder
 	METHOD m_oagnumwt getLerpTargetZ ()D
 	METHOD m_oavmpfqe getAir ()I
 	METHOD m_obkzfysl readCustomDataFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
@@ -643,8 +630,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
-	METHOD m_pjfzcdiu getPassengerClosestTo (Lnet/minecraft/unmapped/C_vgpupfxx;)Ljava/util/Optional;
-		ARG 1 pos
 	METHOD m_plmkvbcv streamIntoPassengers ()Ljava/util/stream/Stream;
 	METHOD m_pnapxqoc updatePassengerPosition (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
@@ -802,13 +787,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 entity
 	METHOD m_uvsfzohj handleAttack (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 attacker
-	METHOD m_uvuwhjxr getMaxNetherPortalTime ()I
-	METHOD m_uwdepeht moveToWorld (Lnet/minecraft/unmapped/C_astfners$C_bfxofopn;)Lnet/minecraft/unmapped/C_astfners;
-		COMMENT Moves this entity to another world.
-		COMMENT <p>
-		COMMENT Note all entities except server player entities are completely recreated at the destination.
-		COMMENT
-		COMMENT @return the entity in the other world
 	METHOD m_vbxcqznf adjustSingleAxisMovementForCollisions (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_cdctfzbn;Ljava/util/List;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 entity
 		ARG 1 movement
@@ -898,8 +876,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_xoeeitpc dismountsUnderwater ()Z
 	METHOD m_xoogehdd getYaw (F)F
 		ARG 1 tickDelta
-	METHOD m_xpomzkjr setInNetherPortal (Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 pos
 	METHOD m_xpuekaoa setUuid (Ljava/util/UUID;)V
 		ARG 1 uuid
 	METHOD m_xrvghdnl getLandingBlockStateLegacy ()Lnet/minecraft/unmapped/C_txtbiemp;

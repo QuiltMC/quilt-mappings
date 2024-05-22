@@ -9,7 +9,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_ewnrqslo LOCAL_CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_gaynmpqg side Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT The side this connection is to.
-	FIELD f_hgoaaoyc disconnectReason Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_howpitdi NETWORK_PACKETS_MARKER Lorg/slf4j/Marker;
 	FIELD f_hudxxxbp CLIENT_IO_GROUP Ljava/util/function/Supplier;
 	FIELD f_jrcdtkyf averagePacketsSent F
@@ -26,7 +25,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_vcukytvt errored Z
 	FIELD f_wborsynf NETWORK_MARKER Lorg/slf4j/Marker;
 	FIELD f_wdeykuqe disconnected Z
-	FIELD f_wfrrroev pendingDisconnectReason Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_yhdjpmsl CURRENT_PACKET_COUNTER_WEIGHT F
 		COMMENT Represents when the average packet counter is updated, what percent of the
 		COMMENT value of the average counter is set from the current counter.
@@ -61,7 +59,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_bnpqdudq hasChannel ()Z
-	METHOD m_bywquzql getDisconnectReason ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_cxygpyan disableAutoRead ()V
 	METHOD m_ebvsfyfg setupEncryption (Ljavax/crypto/Cipher;Ljavax/crypto/Cipher;)V
 		ARG 1 decryptionCipher
@@ -93,8 +90,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 0 pipeline
 		ARG 1 side
 	METHOD m_jitsmihi getAveragePacketsReceived ()F
-	METHOD m_kbtplepg disconnect (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
-		ARG 1 disconnectReason
 	METHOD m_kqbvmhdm getOppositeSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT Returns the opposite side of this connection, or the direction of the packets
 		COMMENT sent by this connection.
