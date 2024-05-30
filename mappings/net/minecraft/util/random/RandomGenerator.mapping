@@ -4,7 +4,10 @@ CLASS net/minecraft/unmapped/C_rlomrsco net/minecraft/util/random/RandomGenerato
 	COMMENT <p> This interface should be used instead of {@link java.util.Random} for random number generation.
 	FIELD f_dhenmqup GAUSSIAN_SPREAD_FACTOR D
 	METHOD m_afzjxjzq nextInt (I)I
-		ARG 1 bound
+		COMMENT @return a random value between {@code 0} (inclusive) and {@code max} (exclusive)
+		COMMENT @throws IllegalArgumentException if {@code max} isn't positive
+		ARG 1 max
+			COMMENT the upper limit on values (exclusive)
 	METHOD m_bggirwfo createPositionalRandomFactory ()Lnet/minecraft/unmapped/C_coqzjjrt;
 	METHOD m_culopwlx skip (I)V
 		ARG 1 count
@@ -23,11 +26,19 @@ CLASS net/minecraft/unmapped/C_rlomrsco net/minecraft/util/random/RandomGenerato
 	METHOD m_ngqtmirh createLegacy (J)Lnet/minecraft/unmapped/C_rlomrsco;
 		ARG 0 seed
 	METHOD m_paekwdby derive ()Lnet/minecraft/unmapped/C_rlomrsco;
-	METHOD m_schtxhxl rangeClosed (II)I
-		ARG 1 minInclusive
-		ARG 2 maxInclusive
-	METHOD m_sgbekski range (II)I
-		ARG 1 minInclusive
-		ARG 2 maxExclusive
+	METHOD m_schtxhxl range (II)I
+		COMMENT @return a random value between {@code min} (inclusive) and {@code max} (exclusive)
+		COMMENT @throws IllegalArgumentException if {@code min} is not less than {@code max}
+		ARG 1 min
+			COMMENT the lower limit on values (inclusive)
+		ARG 2 max
+			COMMENT the upper limit on values (exclusive)
+	METHOD m_sgbekski rangeInclusive (II)I
+		COMMENT @return a random value between {@code min} and {@code max} (both inclusive)
+		COMMENT @throws IllegalArgumentException if {@code min} is not less than {@code max}
+		ARG 1 min
+			COMMENT the lower limit on values (inclusive)
+		ARG 2 max
+			COMMENT the upper limit on values (inclusive)
 	METHOD m_udujxpxx createLegacy ()Lnet/minecraft/unmapped/C_rlomrsco;
 	METHOD m_zeaohzdb createThreaded ()Lnet/minecraft/unmapped/C_rlomrsco;
