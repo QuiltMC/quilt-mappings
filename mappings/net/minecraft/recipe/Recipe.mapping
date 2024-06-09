@@ -20,6 +20,9 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		COMMENT <p>
 		COMMENT The returned stack should not be modified. To obtain the actual output,
 		COMMENT call {@link #craft(Inventory, DynamicRegistryManager)}.
+		ARG 1 provider
+	METHOD m_jjsxdttb matches (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;)Z
+		ARG 1 input
 	METHOD m_njccjhdt getIngredients ()Lnet/minecraft/unmapped/C_rnrfftze;
 		COMMENT {@return the ingredients accepted as inputs for this recipe} Used by the recipe book
 		COMMENT when displaying a ghost form of this recipe on the crafting grid as well as for
@@ -37,12 +40,16 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 			COMMENT the width of the input inventory
 		ARG 2 height
 			COMMENT the height of the input inventory
+	METHOD m_pyffiody getRemainder (Lnet/minecraft/unmapped/C_cxmcihwl;)Lnet/minecraft/unmapped/C_rnrfftze;
+		ARG 1 input
 	METHOD m_qqucltqj showNotification ()Z
 		COMMENT {@return whenever this recipe should show a toast notification on being unlocked or not}
 	METHOD m_qzlhmcik isEmpty ()Z
 		COMMENT {@return whether this recipe has no ingredient or has any empty ingredient}
 		COMMENT The recipe book uses this to ignore recipes for display.
 	METHOD m_tikgmnde craft (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 1 input
+		ARG 2 provider
 	METHOD m_ttbvwfef getType ()Lnet/minecraft/unmapped/C_rhnqznys;
 		COMMENT {@return the type of this recipe}
 		COMMENT

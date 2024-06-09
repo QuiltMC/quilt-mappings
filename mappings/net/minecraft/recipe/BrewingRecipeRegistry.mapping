@@ -1,18 +1,50 @@
 CLASS net/minecraft/unmapped/C_ilssplzn net/minecraft/recipe/BrewingRecipeRegistry
+	FIELD f_aruotgdf potionRecipes Ljava/util/List;
+	FIELD f_dhquiuxe itemRecipes Ljava/util/List;
 	FIELD f_ltwfhqjw BREWING_TIME_SECONDS I
+	FIELD f_mxpxplfe bottomIngredients Ljava/util/List;
+	FIELD f_rhvjiasu EMPTY Lnet/minecraft/unmapped/C_ilssplzn;
+	METHOD m_bwccxzca create (Lnet/minecraft/unmapped/C_czxxrbcp;)Lnet/minecraft/unmapped/C_ilssplzn;
+	METHOD m_cugqmywj addVanillaRecipes (Lnet/minecraft/unmapped/C_ilssplzn$C_anvszzom;)V
+		ARG 0 builder
 	METHOD m_cwnwpxhs craft (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		ARG 1 input
+		ARG 1 topInput
+		ARG 2 bottomInput
 	METHOD m_fdkgeuuc hasItemRecipe (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 ingredient
-	METHOD m_ldkmprrc isValidIngredient (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+		ARG 1 bottomInput
+		ARG 2 topInput
+	METHOD m_kdcuqyob isBottomIngredient (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+	METHOD m_ldkmprrc isTopIngredient (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_lronsnat isPotionRecipeIngredient (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_ngonaytv hasPotionRecipe (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 ingredient
+		ARG 1 bottomInput
+		ARG 2 topInput
 	METHOD m_ngyngnto isBrewable (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
+		ARG 1 potion
 	METHOD m_wrviwmkr hasRecipe (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 ingredient
+		ARG 1 bottomInput
+		ARG 2 topInput
 	METHOD m_zqdnpuap isItemRecipeIngredient (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+	CLASS C_anvszzom Builder
+		FIELD f_cumxoxtw bottomIngredients Ljava/util/List;
+		FIELD f_exnloijq itemRecipes Ljava/util/List;
+		FIELD f_qqsssiby potionRecipes Ljava/util/List;
+		FIELD f_szfgeigs features Lnet/minecraft/unmapped/C_czxxrbcp;
+		METHOD m_ilqhdtus build ()Lnet/minecraft/unmapped/C_ilssplzn;
+		METHOD m_kjbtjqbn addItemRecipe (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_vorddnax;)V
+			ARG 1 bottomInput
+			ARG 2 topInput
+			ARG 3 output
+		METHOD m_omxvxkhk addStarterRecipes (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		METHOD m_pdipybln addBottomIngredient (Lnet/minecraft/unmapped/C_vorddnax;)V
+		METHOD m_sieojnmp addPotionRecipe (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+			ARG 1 bottomInput
+			ARG 2 topInput
+		METHOD m_uovaqaoc requirePotion (Lnet/minecraft/unmapped/C_vorddnax;)V
+			ARG 0 item
 	CLASS C_uuqlcqac Recipe
 		FIELD f_fszziriy ingredient Lnet/minecraft/unmapped/C_tcpsydrv;
 		FIELD f_qoekordr input Lnet/minecraft/unmapped/C_cjzoxshv;
 		FIELD f_srxxptri output Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD m_udixioab input ()Lnet/minecraft/unmapped/C_cjzoxshv;
+		METHOD m_yrmcoeqb output ()Lnet/minecraft/unmapped/C_cjzoxshv;
