@@ -3,6 +3,7 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 	COMMENT <p>
 	COMMENT The namespace and path must contain only lowercase letters ({@code [a-z]}), digits ({@code [0-9]}), or the characters {@code '_'}, {@code '.'}, and {@code '-'}.
 	COMMENT The path can also contain the standard path separator {@code '/'}.
+	COMMENT </p>
 	FIELD f_mkdmoqvz path Ljava/lang/String;
 	FIELD f_oqzsfwne NAMESPACE_SEPARATOR C
 	FIELD f_pupxcoog DEFAULT_NAMESPACE Ljava/lang/String;
@@ -18,19 +19,36 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 		ARG 1 other
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
+	METHOD m_anmnhtwf ofDefault (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_bkdtomxa isPathCharacterValid (C)Z
 		ARG 0 character
 	METHOD m_busiuktr withPrefix (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 prefix
 	METHOD m_cnnbwbsu extendPath (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 path
+	METHOD m_egmlfvuu of (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_gnhdfxba toShortTranslationKey ()Ljava/lang/String;
 	METHOD m_hokecmdu isPathValid (Ljava/lang/String;)Z
 		ARG 0 path
 	METHOD m_hwomsdhy isNamespaceCharacterValid (C)Z
 		ARG 0 character
+	METHOD m_icvwyhda fromCommandInputNonEmpty (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_jncqetor isCharValid (C)Z
 		ARG 0 c
+	METHOD m_kuwopdmn tryParse (Ljava/lang/String;C)Lnet/minecraft/unmapped/C_ncpywfca;
+		COMMENT Attempts to create an {@link Identifier} from the given {@code id}.
+		COMMENT <p>
+		COMMENT Takes a string of the form {@code <namespace><delimiter><path>}.
+		COMMENT </p>
+		COMMENT <p>
+		COMMENT Uses the {@value DEFAULT_NAMESPACE} namespace if {@code id} doesn't contain a {@code delimiter}.
+		COMMENT </p>
+		COMMENT
+		COMMENT @return the resulting {@link Identifier} if one could be parsed, or {@code null} otherwise
+		COMMENT
+		COMMENT @see #parse(String, char)
+		ARG 0 id
+		ARG 1 delimiter
 	METHOD m_kwahahgw fromCommandInput (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 0 reader
 	METHOD m_lxrliuax validatePath (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
@@ -43,7 +61,41 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 	METHOD m_nhedqonr toTranslationKey (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 		ARG 1 prefix
 		ARG 2 suffix
+	METHOD m_nofgkkgq parse (Ljava/lang/String;C)Lnet/minecraft/unmapped/C_ncpywfca;
+		COMMENT Creates an {@link Identifier} from the given {@code id}.
+		COMMENT <p>
+		COMMENT Takes a string of the form {@code <namespace><delimiter><path>}.
+		COMMENT </p>
+		COMMENT <p>
+		COMMENT Uses the {@value DEFAULT_NAMESPACE} namespace if {@code id} doesn't contain a {@code delimiter}.
+		COMMENT </p>
+		COMMENT
+		COMMENT @return the resulting {@link Identifier}
+		COMMENT
+		COMMENT @throws InvalidIdentifierException if a valid namespace and path couldn't be parsed
+		COMMENT
+		COMMENT @see #tryParse(String, char)
+		ARG 0 id
+		ARG 1 delimiter
 	METHOD m_objfgggc getNamespace ()Ljava/lang/String;
+	METHOD m_qfesvyds parse (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
+		COMMENT Creates an {@link Identifier} from the given {@code id}.
+		COMMENT <p>
+		COMMENT Takes a string of the form {@code <namespace>:<path>}, for example {@code minecraft:iron_ingot}.
+		COMMENT </p>
+		COMMENT <p>
+		COMMENT Uses the {@value DEFAULT_NAMESPACE} namespace if {@code id} doesn't contain a {@code :}.
+		COMMENT </p>
+		COMMENT
+		COMMENT @return the resulting {@link Identifier}
+		COMMENT
+		COMMENT @throws InvalidIdentifierException if a valid namespace and path couldn't be parsed
+		COMMENT
+		COMMENT @see #tryParse(String)
+	METHOD m_qrnvqzhd readToCursor (Lcom/mojang/brigadier/StringReader;)Ljava/lang/String;
+	METHOD m_ruyuqpbm ofValidated (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 0 namespace
+		ARG 1 path
 	METHOD m_uptbalai toTranslationKey (Ljava/lang/String;)Ljava/lang/String;
 		ARG 1 prefix
 	METHOD m_vaxsptoa validate (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
@@ -51,11 +103,17 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 	METHOD m_warlfrkf toUnderscoreSeparatedString ()Ljava/lang/String;
 	METHOD m_wutvcxlb toTranslationKey ()Ljava/lang/String;
 	METHOD m_wxhslhfx tryParse (Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
-		COMMENT Parses a string into an {@code Identifier}.
+		COMMENT Attempts to create an {@link Identifier} from the given {@code id}.
 		COMMENT <p>
 		COMMENT Takes a string of the form {@code <namespace>:<path>}, for example {@code minecraft:iron_ingot}.
+		COMMENT </p>
+		COMMENT <p>
+		COMMENT Uses the {@value DEFAULT_NAMESPACE} namespace if {@code id} doesn't contain a {@code :}.
+		COMMENT </p>
 		COMMENT
-		COMMENT @return resulting identifier, or {@code null} if the string couldn't be parsed as an identifier
+		COMMENT @return the resulting {@link Identifier}, or {@code null} if a valid namespace and path couldn't be parsed
+		COMMENT
+		COMMENT @see #parse(String)
 		ARG 0 id
 	METHOD m_ymfwdjmq validateNamespace (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 namespace
@@ -64,9 +122,9 @@ CLASS net/minecraft/unmapped/C_ncpywfca net/minecraft/util/Identifier
 	METHOD m_yzofquyk withPath (Ljava/util/function/UnaryOperator;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 pathOp
 	METHOD m_zcrfpfxe tryValidate (Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
-		COMMENT Attempts to create a new {@code Identifier} instance from the given namespace and path.
+		COMMENT Attempts to create an {@link Identifier} from the given {@code namespace} and {@code path}.
 		COMMENT
-		COMMENT @return resulting identifier, or {@code null} if the namespace or path are not valid
+		COMMENT @return the resulting {@link Identifier}, or {@code null} if {@code namespace} or {@code path} is invalid
 		ARG 0 namespace
 		ARG 1 path
 	CLASS C_duwyvzzl Serializer
