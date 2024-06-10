@@ -17,7 +17,7 @@ import org.quiltmc.enigma.api.EnigmaProfile;
 import org.quiltmc.enigma.api.EnigmaProject;
 import org.quiltmc.enigma.command.Command;
 import org.quiltmc.enigma.command.FillClassMappingsCommand;
-import org.quiltmc.enigma.command.MappingCommandsUtil;
+import org.quiltmc.enigma.command.CommandsUtil;
 import org.quiltmc.enigma.api.translation.mapping.EntryMapping;
 import org.quiltmc.enigma.api.translation.mapping.MappingDelta;
 import org.quiltmc.enigma.api.translation.mapping.serde.MappingSaveParameters;
@@ -97,8 +97,10 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
         runCommands(jar,
             commandInput,
             commandOutput,
-            String.format("tinyv2:%s:named", namespaces.get(0)),
-            profilePath);
+            profilePath,
+            namespaces.get(0),
+            "named"
+        );
 
         if (extraProcessing) {
             MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
@@ -108,7 +110,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
         }
     }
 
-    private static void runCommands(Path jar, Path input, Path output, String resultFormat, Path profilePath) throws Exception {
+    private static void runCommands(Path jar, Path input, Path output, Path profilePath, String fromNamespace, String toNamespace) throws Exception {
         EnigmaProfile profile = EnigmaProfile.read(profilePath);
         Enigma enigma = Command.createEnigma(profile, null);
 
@@ -122,8 +124,8 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
         Utils.delete(output);
         MappingSaveParameters profileParameters = enigma.getProfile().getMappingSaveParameters();
-        MappingSaveParameters saveParameters = new MappingSaveParameters(profileParameters.fileNameFormat(), /*writeProposedNames*/ true);
-        MappingCommandsUtil.getWriter(resultFormat).write(result, output, saveParameters);
+        MappingSaveParameters saveParameters = new MappingSaveParameters(profileParameters.fileNameFormat(), /*writeProposedNames*/ true, fromNamespace, toNamespace);
+        CommandsUtil.getReadWriteService(enigma, output).write(result, output, saveParameters);
 
         if (debug) {
             Path deltaFile = output.getParent().resolve(output.getFileName().toString() + "-fill-delta.txt");
