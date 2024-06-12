@@ -1,24 +1,46 @@
 CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
+	FIELD f_cvunyugc ENTRY_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_jnrqrvxn ENTRY_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
+	FIELD f_scwbgtxq MAX_LEVEL I
+	FIELD f_yozrarfo CODEC Lcom/mojang/serialization/Codec;
+	METHOD m_ajxstdmb createProperties (Lnet/minecraft/unmapped/C_odfnijdo;Lnet/minecraft/unmapped/C_odfnijdo;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_qfoqahef;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
 	METHOD m_glfcpyqa getMaxLevel ()I
 		COMMENT Sets the maximum number of levels, such as Sharpness which has a maximum 5 levels, the enchantment has. Default: 1.
+	METHOD m_iarnlloo isSupportedItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_igxrorrr getMinLevel ()I
 		COMMENT Sets the minimum number of levels, such as Sharpness which has a minimum of 1 level, the enchantment has. Default: 1.
+	METHOD m_jhglsmkm matchesSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Z
+		ARG 1 slot
 	METHOD m_khmhdqpw isAcceptableItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		COMMENT {@return the type of item ({@code stack}) that can have this applied to it}
 		ARG 1 stack
 	METHOD m_lcxutjum getWeight ()I
+	METHOD m_npijgbpy getSupportedItems ()Lnet/minecraft/unmapped/C_odfnijdo;
+	METHOD m_orywsswy (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
+	METHOD m_rftiggzk createProperties (Lnet/minecraft/unmapped/C_odfnijdo;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_qfoqahef;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
 	METHOD m_rtwmhoyh getMinPower (I)I
 		COMMENT {@return the minimum level required to by the player for the enchantment to be shown in the enchantment table.}
 		COMMENT It is not a 1:1 ratio. The majority of enchantments return something similar to `10 * level`, often with different scales depending on the maximum level and rarity of the enchantment.
 		ARG 1 level
 	METHOD m_tiaspbpv getEquipment (Lnet/minecraft/unmapped/C_usxaxydn;)Ljava/util/Map;
 		ARG 1 entity
+	METHOD m_tujulygf getEffect (Lnet/minecraft/unmapped/C_pscqxfcs;)Ljava/util/List;
 	METHOD m_vjzmieep cost (I)Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;
 	METHOD m_xaezlmue getAnvilCost ()I
+	METHOD m_ycasfcso areCompatible (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_cjzoxshv;)Z
+		ARG 0 enchantment1
+		ARG 1 enchantment2
 	METHOD m_ygnxsicw cost (II)Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;
+	METHOD m_zfqdifee getFullName (Lnet/minecraft/unmapped/C_cjzoxshv;I)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 enchantment
+		ARG 1 level
+	METHOD m_znzmqxec isPrimaryItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_ztycenho getMaxPower (I)I
 		COMMENT {@return the maximum level a Player is allowed before the enchant is not shown in the enchantment table}
 		COMMENT The default return is the minimum power level + 5.
 		ARG 1 level
 	CLASS C_jkttgiwc Cost
 	CLASS C_ryljcnwe Properties
+		METHOD m_vxpftpoe (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
