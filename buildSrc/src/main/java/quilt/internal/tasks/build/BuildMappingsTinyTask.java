@@ -46,8 +46,9 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
         MapSpecializedMethodsCommand.run(
                 perVersionMappingsJar,
                 mappings,
-                String.format("tinyv2:%s:named", Constants.PER_VERSION_MAPPINGS_NAME),
-                outputMappings
+                outputMappings,
+                Constants.PER_VERSION_MAPPINGS_NAME,
+                "named"
         );
     }
 
