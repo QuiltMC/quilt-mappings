@@ -4,20 +4,51 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 	FIELD f_scwbgtxq MAX_LEVEL I
 	FIELD f_yozrarfo CODEC Lcom/mojang/serialization/Codec;
 	METHOD m_ajxstdmb createProperties (Lnet/minecraft/unmapped/C_odfnijdo;Lnet/minecraft/unmapped/C_odfnijdo;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_qfoqahef;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
+	METHOD m_bhhtcbyx modifyCrossbowChargeTime (Lnet/minecraft/unmapped/C_rlomrsco;ILorg/apache/commons/lang3/mutable/MutableFloat;)V
+	METHOD m_chvflatp createItemContext (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_iakykpgh;
+		ARG 1 level
+	METHOD m_ciojbccw createEntityContext (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_iakykpgh;
+		ARG 1 level
+		ARG 2 entity
+		ARG 3 pos
+	METHOD m_dgttciah onProjectileSpawned (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_pjrjvgrp;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 3 context
 	METHOD m_glfcpyqa getMaxLevel ()I
 		COMMENT Sets the maximum number of levels, such as Sharpness which has a maximum 5 levels, the enchantment has. Default: 1.
 	METHOD m_iarnlloo isSupportedItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_igxrorrr getMinLevel ()I
 		COMMENT Sets the minimum number of levels, such as Sharpness which has a minimum of 1 level, the enchantment has. Default: 1.
+	METHOD m_ilvfmxkk modifyDamageFilteredValue (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lorg/apache/commons/lang3/mutable/MutableFloat;)V
 	METHOD m_jhglsmkm matchesSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Z
 		ARG 1 slot
+	METHOD m_kevrabge modifyProjectileCount (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_astfners;Lorg/apache/commons/lang3/mutable/MutableFloat;)V
 	METHOD m_khmhdqpw isAcceptableItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		COMMENT {@return the type of item ({@code stack}) that can have this applied to it}
 		ARG 1 stack
+	METHOD m_laluoqcj tick (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_pjrjvgrp;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 3 context
 	METHOD m_lcxutjum getWeight ()I
+	METHOD m_leklsjht createBlockHitContext (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_iakykpgh;
+		ARG 1 level
+		ARG 2 entity
+		ARG 3 pos
+	METHOD m_lypftmbv modifyUnfilteredValue (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_rlomrsco;ILorg/apache/commons/lang3/mutable/MutableFloat;)V
+		ARG 4 value
+	METHOD m_mfxiclqq reapplyLocationBasedEffects (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_pjrjvgrp;Lnet/minecraft/unmapped/C_usxaxydn;)V
+		ARG 2 level
+		ARG 3 context
+		ARG 4 entity
+	METHOD m_nfuegjdm builder (Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+		ARG 0 properties
 	METHOD m_npijgbpy getSupportedItems ()Lnet/minecraft/unmapped/C_odfnijdo;
 	METHOD m_orywsswy (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
+	METHOD m_ovgqiywz onHitBlock (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_pjrjvgrp;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_txtbiemp;)V
+		ARG 3 context
+	METHOD m_qirqbtfb applyEffects (Ljava/util/List;Lnet/minecraft/unmapped/C_iakykpgh;Ljava/util/function/Consumer;)V
+		ARG 0 effects
+		ARG 1 lootContext
+		ARG 2 effectConsumer
 	METHOD m_rftiggzk createProperties (Lnet/minecraft/unmapped/C_odfnijdo;IILnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;I[Lnet/minecraft/unmapped/C_qfoqahef;)Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
 	METHOD m_rtwmhoyh getMinPower (I)I
 		COMMENT {@return the minimum level required to by the player for the enchantment to be shown in the enchantment table.}
@@ -26,21 +57,63 @@ CLASS net/minecraft/unmapped/C_jxtrubuh net/minecraft/enchantment/Enchantment
 	METHOD m_tiaspbpv getEquipment (Lnet/minecraft/unmapped/C_usxaxydn;)Ljava/util/Map;
 		ARG 1 entity
 	METHOD m_tujulygf getEffect (Lnet/minecraft/unmapped/C_pscqxfcs;)Ljava/util/List;
+	METHOD m_ujjglmjb isImmuneToDamageFrom (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 	METHOD m_vjzmieep cost (I)Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;
+	METHOD m_webwhtnd modifyEntityFilteredValue (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_astfners;Lorg/apache/commons/lang3/mutable/MutableFloat;)V
+		ARG 6 value
+	METHOD m_wqtybzdx modifyItemFilteredCount (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_sddaxwyk;Lorg/apache/commons/lang3/mutable/MutableFloat;)V
+		ARG 5 value
 	METHOD m_xaezlmue getAnvilCost ()I
 	METHOD m_ycasfcso areCompatible (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_cjzoxshv;)Z
 		ARG 0 enchantment1
 		ARG 1 enchantment2
 	METHOD m_ygnxsicw cost (II)Lnet/minecraft/unmapped/C_jxtrubuh$C_jkttgiwc;
+	METHOD m_yyvgkyyg createDamageContext (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;)Lnet/minecraft/unmapped/C_iakykpgh;
+		ARG 1 level
+		ARG 2 entity
+		ARG 3 source
 	METHOD m_zfqdifee getFullName (Lnet/minecraft/unmapped/C_cjzoxshv;I)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 enchantment
 		ARG 1 level
+	METHOD m_zjsipvve createLocationContext (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_astfners;Z)Lnet/minecraft/unmapped/C_iakykpgh;
+		ARG 1 level
+		ARG 2 entity
+		ARG 3 enchantmentActive
+	METHOD m_zlpziyyk modifyProjectileSpread (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_astfners;Lorg/apache/commons/lang3/mutable/MutableFloat;)V
 	METHOD m_znzmqxec isPrimaryItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_ztycenho getMaxPower (I)I
 		COMMENT {@return the maximum level a Player is allowed before the enchant is not shown in the enchantment table}
 		COMMENT The default return is the minimum power level + 5.
 		ARG 1 level
+	CLASS C_epmoqirc Builder
+		FIELD f_fmooecif effectMapBuilder Lnet/minecraft/unmapped/C_kouhnfig$C_vfzyoahz;
+		FIELD f_radrlqvu properties Lnet/minecraft/unmapped/C_jxtrubuh$C_ryljcnwe;
+		FIELD f_wqwudsbq effectLists Ljava/util/Map;
+		FIELD f_ykzrjano exclusiveSet Lnet/minecraft/unmapped/C_odfnijdo;
+		METHOD m_bfbkshbc addEffect (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_zjvjrddv;Lnet/minecraft/unmapped/C_zjvjrddv;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+			ARG 1 type
+		METHOD m_eirhbvlq addEffect (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;Lnet/minecraft/unmapped/C_vqkczpuv$C_cjvmpogn;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+			ARG 1 type
+			ARG 3 conditions
+		METHOD m_fcblttrk build (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_jxtrubuh;
+		METHOD m_fywpvdlv withExclusiveSet (Lnet/minecraft/unmapped/C_odfnijdo;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+			ARG 1 exclusiveSet
+		METHOD m_ijzbgmuo getEffectsList (Lnet/minecraft/unmapped/C_pscqxfcs;)Ljava/util/List;
+		METHOD m_ilkklraq addEffect (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_kyhkwlnd;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+			ARG 1 type
+			ARG 2 effect
+		METHOD m_qoopatrn addEffect (Lnet/minecraft/unmapped/C_pscqxfcs;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+		METHOD m_uhlhfpbp addEffect (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+			ARG 1 type
+		METHOD m_vkishvxp addEffect (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_zjvjrddv;Lnet/minecraft/unmapped/C_zjvjrddv;Ljava/lang/Object;Lnet/minecraft/unmapped/C_vqkczpuv$C_cjvmpogn;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
+			ARG 1 type
+			ARG 5 conditions
+		METHOD m_vmwohqmn addSpecialEffect (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_jxtrubuh$C_epmoqirc;
 	CLASS C_jkttgiwc Cost
+		METHOD m_lpzheldf forLevel (I)I
+			ARG 1 level
+		METHOD m_zfvugdzh (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 instance
 	CLASS C_ryljcnwe Properties
 		METHOD m_vxpftpoe (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
