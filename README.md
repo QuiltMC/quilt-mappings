@@ -31,7 +31,14 @@ maven { url = "https://maven.quiltmc.org/repository/release/" }
 QM versions are named after the Minecraft version they target, followed by `+build.x`,
 with `x` being a number that increments with each new build of QM for that Minecraft version.
 For example, `1.18.2+build.1` is the first build of QM for Minecraft `1.18.2`. You can see additional
-information and see what the latest QM build for each Minecraft version is with [LambdAurora's import tool](https://lambdaurora.dev/tools/import_quilt.html).
+information and see what the latest QM build for each Minecraft version is with the [quilt import tool][quilt-import-tool].
+(For automatic queries, try the [versions API][quilt-meta-api-mappings-version-by-game-version].)
+
+  [quilt-import-tool]: https://quiltmc.org/en/usage/latest-versions/
+  [quilt-meta-api-mappings-version-by-game-version]: https://meta.quiltmc.org/#/v3/get_v3_versions_quilt_mappings__game_version_
+
+
+
 
 ## Contributing to QM
 
