@@ -25,7 +25,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	FIELD f_vcukytvt errored Z
 	FIELD f_wborsynf NETWORK_MARKER Lorg/slf4j/Marker;
 	FIELD f_wdeykuqe disconnected Z
-	FIELD f_wfrrroev pendingDisconnectReason Lnet/minecraft/unmapped/C_igbzvhln;
+	FIELD f_wfrrroev pendingDisconnectionDetails Lnet/minecraft/unmapped/C_igbzvhln;
 	FIELD f_yhdjpmsl CURRENT_PACKET_COUNTER_WEIGHT F
 		COMMENT Represents when the average packet counter is updated, what percent of the
 		COMMENT value of the average counter is set from the current counter.
@@ -35,6 +35,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		COMMENT {@code averagePacketsSent}.
 	FIELD f_zpzufgct HANDSHAKING Lnet/minecraft/unmapped/C_ppzmqyxe;
 	FIELD f_zrkidnxu packetsSentCounter I
+	FIELD f_zsqwmwtd disconnectionDetails Lnet/minecraft/unmapped/C_igbzvhln;
 	METHOD <init> (Lnet/minecraft/unmapped/C_exeqxqdd;)V
 		ARG 1 side
 	METHOD channelActive channelActive (Lio/netty/channel/ChannelHandlerContext;)V
@@ -61,6 +62,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 0 marker
 	METHOD m_bnpqdudq hasChannel ()Z
 	METHOD m_cxygpyan disableAutoRead ()V
+	METHOD m_dzmcexuz disconnect (Lnet/minecraft/unmapped/C_igbzvhln;)V
+		ARG 1 details
 	METHOD m_ebvsfyfg setupEncryption (Ljavax/crypto/Cipher;Ljavax/crypto/Cipher;)V
 		ARG 1 decryptionCipher
 		ARG 2 encryptionCipher
@@ -75,12 +78,12 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_fqnxiapg submit (Ljava/util/function/Consumer;)V
 		ARG 1 task
 	METHOD m_goioywdq (Lnet/minecraft/unmapped/C_xyumsucd;Lio/netty/channel/ChannelHandlerContext;)V
-		ARG 1 channelHandlerContext
+		ARG 1 context
 	METHOD m_gwpixgaq connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ifnchbtj;Lnet/minecraft/unmapped/C_uxoyljpb;)V
 		ARG 1 address
 		ARG 2 port
-		ARG 3 serverConnection
-		ARG 4 clientConnection
+		ARG 3 serverProtocol
+		ARG 4 clientProtocol
 		ARG 5 client
 		ARG 6 intent
 	METHOD m_hnclvsil getInboundHandlerConfig (Z)Ljava/lang/String;
@@ -96,19 +99,20 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		COMMENT sent by this connection.
 	METHOD m_kxmmachs setHandshakeListener (Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 1 listener
+	METHOD m_kykiqlcb disconnect (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 	METHOD m_luflhjqj connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_jsvwwjov;)V
 		ARG 1 address
 		ARG 2 port
 	METHOD m_luuskhlm initPerformanceSampleLog (Lnet/minecraft/unmapped/C_pwpucsml;)V
 	METHOD m_lyptmghi connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
-	METHOD m_mnslofbm (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
+	METHOD m_mnslofbm validateInboundProtocol (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 1 phase
 		ARG 2 listener
 	METHOD m_qeznuhlz (ZLio/netty/channel/ChannelHandlerContext;)V
 		ARG 2 channelHandlerContext
-	METHOD m_qjeqlspr (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
-		ARG 1 phase
+	METHOD m_qjeqlspr setupInboundProtocol (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
+		ARG 1 protocol
 		ARG 2 listener
 	METHOD m_qoorbrdh connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_nyzvjqyd;)V
 		ARG 1 address
@@ -123,9 +127,13 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_rvagcspt getLoggableAddress (Z)Ljava/lang/String;
 		ARG 1 logIps
 	METHOD m_seunbusw (Lnet/minecraft/unmapped/C_iypsxyqr;Lio/netty/channel/ChannelHandlerContext;)V
-		ARG 1 channelHandlerContext
+		ARG 1 context
 	METHOD m_sigcqeza getAddress ()Ljava/net/SocketAddress;
 	METHOD m_sprgohsj flush ()V
+	METHOD m_tckzsnsu setupOutboundProtocol (Lnet/minecraft/unmapped/C_ppzmqyxe;)V
+		ARG 1 protocol
+	METHOD m_tpxokfsb (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ifnchbtj;Ljava/lang/String;ILnet/minecraft/unmapped/C_uxoyljpb;Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_oasmcckk;)V
+		ARG 7 connection
 	METHOD m_ttkdcwpg getOutboundHandlerConfig (Z)Ljava/lang/String;
 		ARG 0 sendingSide
 	METHOD m_tulexlec tick ()V
@@ -151,6 +159,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 packet
 		ARG 2 listener
 		ARG 3 flush
+	METHOD m_wgetbbyv syncUninterruptibly (Lio/netty/channel/ChannelFuture;)V
+		ARG 0 future
 	METHOD m_wlmhzfek handleDisconnection ()V
 	METHOD m_wrxqepoa isLocal ()Z
 	METHOD m_wzyhrrka (Lorg/slf4j/Marker;)V
@@ -159,8 +169,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_xqhcjeev connect (Ljava/lang/String;ILnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ifnchbtj;Z)V
 		ARG 1 address
 		ARG 2 port
-		ARG 3 serverConnection
-		ARG 4 clientConnection
+		ARG 3 serverProtocol
+		ARG 4 clientProtocol
 		ARG 5 client
 		ARG 6 intent
 	METHOD m_yylgxjga addFlowControlHandler (Lio/netty/channel/ChannelPipeline;)V
@@ -169,6 +179,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 packet
 		ARG 2 sendListener
 		ARG 3 flush
+	METHOD m_zebgvkek getDisconnectionDetails ()Lnet/minecraft/unmapped/C_igbzvhln;
 	METHOD m_ziivfjpb getSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT Returns the side of this connection, or the direction of the packets received
 		COMMENT by this connection.
@@ -176,7 +187,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 1 channel
 	CLASS C_qurkirxp
-		METHOD write (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;Lio/netty/channel/ChannelPromise;)V
+		METHOD write write (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;Lio/netty/channel/ChannelPromise;)V
 			ARG 1 context
 			ARG 3 promise
 	CLASS C_sggcdwlq
