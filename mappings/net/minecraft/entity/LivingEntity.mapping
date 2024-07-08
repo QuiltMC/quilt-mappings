@@ -8,6 +8,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_dddwkxrr bodyArmor Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_debofomg riptideTicks I
 	FIELD f_dwqtqyxt STINGER_COUNT Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_ebbqhmet riptideAttackDamage F
 	FIELD f_ebtfxbod stuckArrowTimer I
 	FIELD f_fchmphst defaultMaxHealth I
 	FIELD f_ffcustbq bodyTrackingIncrements I
@@ -34,6 +35,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_ixvzqhhj lastAttackedTime I
 	FIELD f_jhglsogm hurtTime I
 	FIELD f_jhjpjdjl randomSmallSeed F
+	FIELD f_jnuwxyrg ATTRIBUTES_NBT_KEY Ljava/lang/String;
 	FIELD f_kdeboxay PARTICLE_FREQUENCY_WHEN_INVISIBLE I
 	FIELD f_kfiskcbr preferredHand Lnet/minecraft/unmapped/C_laxmzoqs;
 	FIELD f_kimgjcqe scoreAmount I
@@ -41,6 +43,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_kkplgjng lastBlockPos Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_kpdzsffg lastHandSwingProgress F
 	FIELD f_krdixdtc serverX D
+	FIELD f_ksfpoypz locationBasedEnchantmentEffects Lit/unimi/dsi/fastutil/objects/Reference2ObjectMap;
 	FIELD f_kvmdzdkx prevStepBobbingAmount F
 	FIELD f_lemmcmcu STUCK_ARROW_COUNT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_lrzhzlmv lastAttackTime I
@@ -73,6 +76,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_qqusshan lookDirection F
 	FIELD f_qujstjfe USING_RIPTIDE_FLAG I
 	FIELD f_rdmvhrge climbingPos Ljava/util/Optional;
+	FIELD f_rdukodcv POWDER_SNOW_SPEED_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_rfgkdbno ARMOR_SLOTS I
 	FIELD f_rmarlrpg stuckStingerTimer I
 	FIELD f_rybujahq randomLargeSeed F
@@ -83,7 +87,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_tdaipjuz deathTime I
 	FIELD f_tigklhec bodyYaw F
 	FIELD f_tlsbpgcr headTrackingIncrements I
+	FIELD f_tpyzixil riptideStack Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_tuyqisfy USING_ITEM_FLAG I
+	FIELD f_tzduhzwg SPRINTING_SPEED_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_uaqhrjbe maxHurtTime I
 	FIELD f_ubbibrmk brain Lnet/minecraft/unmapped/C_rjqjaxef;
 	FIELD f_uwmbnrvv SLEEPING_POSITION Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -162,6 +168,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_ctdiailf containsOnlyAmbientEffects (Ljava/util/Collection;)Z
 		ARG 0 effects
 	METHOD m_dbmgxkyo canWalkOnFluid (Lnet/minecraft/unmapped/C_xqketiuf;)Z
+	METHOD m_dcbdaqcf getKnockback (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;)F
+		ARG 1 attackedEntity
 	METHOD m_ddtvzuuf getStackInHand (Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 hand
 	METHOD m_dgbunafc onEquippedItemBroken (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_yuycoehb;)V
@@ -206,6 +214,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_fmgoaoex takeShieldHit (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 attacker
 	METHOD m_fnlaimtj tickActiveItemStack ()V
+	METHOD m_fpapzmyw onRemoval (Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
+		ARG 1 reason
 	METHOD m_fqffmeys setAttacker (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 attacker
 	METHOD m_fqywfcul clearActiveItem ()V
@@ -310,6 +320,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT A dead entity may not yet be removed given the {@linkplain #DEATH_DURATION death duration}.
 		COMMENT
 		COMMENT @return {@code true} if this entity is dead, or {@code false} otherwise
+	METHOD m_jtmdgtth hasLandedInFluid ()Z
 	METHOD m_jumclkqe shouldSpawnConsumptionEffects ()Z
 	METHOD m_khdpfurh setHealth (F)V
 		COMMENT Sets the amount of health this entity has in half-hearts.
@@ -330,9 +341,11 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 tag
 	METHOD m_lagxpcmk onStatusEffectRemoved (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 effect
+	METHOD m_lbpuzdpj getLocationBasedEnchantmentEffects ()Ljava/util/Map;
 	METHOD m_ldeqpsrz canDisableShield ()Z
 	METHOD m_lgbaiieb slotEmitsEquipEvent (Lnet/minecraft/unmapped/C_yuycoehb;)Z
 		ARG 1 slot
+	METHOD m_lgbjnvrh onChangedBlock (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
 	METHOD m_lhliifdm getArmor ()I
 	METHOD m_ljcawptq pushAway (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
@@ -423,6 +436,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_pwoagvwv getArmorInSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
 	METHOD m_qhbjdevp getMaxRelativeHeadRotation ()F
+	METHOD m_qjawpswz getBaseXpDropped ()I
 	METHOD m_qjxxiksy getHandItems ()Ljava/lang/Iterable;
 	METHOD m_qlumoklh onDismounted (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 vehicle
@@ -465,10 +479,14 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 target
 	METHOD m_scrnkbbn detectEquipmentUpdates ()V
 	METHOD m_sebydyvw endCombat ()V
+	METHOD m_sephwywk dropCustomLoot (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbxfkpyv;Z)V
+		ARG 2 source
+		ARG 3 playerKill
 	METHOD m_sffkfemm getItemUseTimeLeft ()I
 	METHOD m_sgvyoptc getFallSound (I)Lnet/minecraft/unmapped/C_avavozay;
 		ARG 1 distance
 	METHOD m_slpipvix isSleepingInBed ()Z
+	METHOD m_snrjmpmr eat (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cgikuact;)Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_spcfbchu clearStatusEffects ()Z
 	METHOD m_spqekiza tickCramming ()V
 	METHOD m_spwwmdyl getHurtSound (Lnet/minecraft/unmapped/C_sbxfkpyv;)Lnet/minecraft/unmapped/C_avavozay;
@@ -520,6 +538,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_upnmcubv getEatSound (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_avavozay;
 		ARG 1 stack
 	METHOD m_urjobhnr tickHandSwing ()V
+	METHOD m_usifxdhh tryEat (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_uuypiexz isClimbing ()Z
 	METHOD m_uwysofda updateLimbs (Z)V
 		ARG 1 flutter
