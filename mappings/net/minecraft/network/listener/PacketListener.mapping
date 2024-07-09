@@ -2,10 +2,15 @@ CLASS net/minecraft/unmapped/C_tkgdawqw net/minecraft/network/listener/PacketLis
 	COMMENT A packet listener listens to packets on a {@linkplain net.minecraft.network.ClientConnection
 	COMMENT connection}.
 	COMMENT
-	COMMENT <p>Its listener methods will be called on the netty event loop than the
+	COMMENT <p>Its listener methods will be called on the netty event loop, then the
 	COMMENT client or server game engine threads.
-	METHOD m_eqgvuckk getState ()Lnet/minecraft/unmapped/C_kxdobmrm;
+	METHOD m_dfsclzjh createDisconnectionDetails (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_igbzvhln;
+		ARG 2 cause
+	METHOD m_eqgvuckk getPhase ()Lnet/minecraft/unmapped/C_kxdobmrm;
+	METHOD m_jelicxwl onPacketException (Lnet/minecraft/unmapped/C_zyjtrjrl;Ljava/lang/Exception;)V
+		ARG 1 packet
 	METHOD m_ksdgvxqp addCrashReportInfo (Lnet/minecraft/unmapped/C_bkefkbum;Lnet/minecraft/unmapped/C_qympisds;)V
+		ARG 1 report
 		ARG 2 section
 	METHOD m_nygafwdh fillCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)V
 		ARG 1 report
@@ -14,5 +19,6 @@ CLASS net/minecraft/unmapped/C_tkgdawqw net/minecraft/network/listener/PacketLis
 	METHOD m_wtlhyems onDisconnected (Lnet/minecraft/unmapped/C_igbzvhln;)V
 		COMMENT Called when the connection this listener listens to has disconnected.
 		COMMENT Can be used to display the disconnection reason.
+		ARG 1 details
 	METHOD m_yyjbzspg shouldAccept (Lnet/minecraft/unmapped/C_zyjtrjrl;)Z
 		ARG 1 packet
