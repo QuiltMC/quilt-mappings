@@ -56,7 +56,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_cauyzlww getNavigation ()Lnet/minecraft/unmapped/C_atbvfjwi;
 	METHOD m_ckimhneu getPositionTarget ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_cpqekrmu clearPositionTarget ()V
-	METHOD m_cyqouyby dropAllEquipment ()V
+	METHOD m_cyqouyby dropPreservedEquipment ()V
 	METHOD m_dciqpbdm canImmediatelyDespawn (D)Z
 		ARG 1 distanceSquared
 	METHOD m_dijkljpy clearGoalsAndTasks ()V
@@ -128,7 +128,9 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_lqlfsnxj getBodyYawSpeed ()I
 	METHOD m_lxcdvhkn enchantEquipment (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_jiailwzt;)V
 		ARG 3 slot
-	METHOD m_mapkswnb dropEquipment (Ljava/util/function/Predicate;)Ljava/util/Set;
+	METHOD m_mapkswnb dropPreservedEquipment (Ljava/util/function/Predicate;)Ljava/util/Set;
+		COMMENT Drop equipment from slots that are guaranteed to drop and which match the passed {@code shouldDrop} predicate
+		COMMENT @return slots containing equipment that doesn't match the passed {@code shouldDrop} predicate
 		ARG 1 shouldDrop
 	METHOD m_mbyporyt createBodyControl ()Lnet/minecraft/unmapped/C_vofymfgv;
 	METHOD m_mowaxfbl isLeftHanded ()Z
