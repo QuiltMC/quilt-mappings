@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 	FIELD f_btfzhwye FONTS_JSON Ljava/lang/String;
 	FIELD f_dnbpmges textureManager Lnet/minecraft/unmapped/C_rglkduer;
 	FIELD f_gzybknod fontStorages Ljava/util/Map;
+	FIELD f_jujvnypn currentFont Lnet/minecraft/unmapped/C_zhhoxunt;
 	FIELD f_lytdbewf MISSING_STORAGE_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_odfjvvnp GSON Lcom/google/gson/Gson;
 	FIELD f_rezugjcx NAMESPACE Lnet/minecraft/unmapped/C_iiomeaxy;
@@ -11,8 +12,12 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 	METHOD <init> (Lnet/minecraft/unmapped/C_rglkduer;)V
 		ARG 1 manager
 	METHOD close close ()V
+	METHOD m_akfeobkl (Ljava/util/concurrent/Executor;Ljava/util/List;)Ljava/util/concurrent/CompletionStage;
+		ARG 2 entry
 	METHOD m_aoinyakl (Ljava/util/List;I)V
 		ARG 1 glyph
+	METHOD m_cxleadoj (Ljava/util/List;Lnet/minecraft/unmapped/C_wywmjnuh$C_bavmfosz;Ljava/util/concurrent/Executor;Ljava/util/List;)Ljava/util/concurrent/CompletionStage;
+		ARG 4 fonts
 	METHOD m_datmnrhc (Ljava/util/Set;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/List;)V
 		ARG 2 id
 		ARG 3 fonts
@@ -30,13 +35,28 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 		ARG 1 entry
 	METHOD m_irffyusm prepare (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
 		ARG 2 executor
+	METHOD m_jfxkkpxt (Lnet/minecraft/unmapped/C_wywmjnuh$C_bavmfosz;Ljava/util/concurrent/Executor;Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
+		ARG 3 filter
 	METHOD m_kzlvxpfw (Ljava/util/Map;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_hoztwset$C_afyppwxt;)V
 		ARG 1 id
 		ARG 2 entry
+	METHOD m_mhmjwsps getFont (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zhhoxunt;
+		ARG 1 id
 	METHOD m_mtaxmodw (Lnet/minecraft/unmapped/C_eslcbfsq;Lnet/minecraft/unmapped/C_hoztwset$C_mlohqlpb;)V
 		ARG 2 preparation
+	METHOD m_mxmumbin setCurrentFont (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zhhoxunt;
+		ARG 1 id
+	METHOD m_niezrltb (Ljava/util/List;Ljava/util/Map;Ljava/lang/Void;)Lnet/minecraft/unmapped/C_hoztwset$C_mlohqlpb;
+		ARG 2 _void
+	METHOD m_nklkfutg (Lnet/minecraft/unmapped/C_hoztwset$C_ekydylip;Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_hoztwset$C_afyppwxt;Lnet/minecraft/unmapped/C_odvtolcn$C_anbilzsz;Lnet/minecraft/unmapped/C_gxohhscv$C_dbnueaxr;)V
+		ARG 6 loader
+	METHOD m_okamyrvl fromGameOptions (Lnet/minecraft/unmapped/C_lscptbhn;)Ljava/util/Set;
+		ARG 0 options
+	METHOD m_rreterlv (Lnet/minecraft/unmapped/C_hoztwset$C_afyppwxt;Lnet/minecraft/unmapped/C_hoztwset$C_ekydylip;Lnet/minecraft/unmapped/C_odvtolcn$C_anbilzsz;Lnet/minecraft/unmapped/C_gxohhscv$C_wxrtqmdn;)V
+		ARG 3 reference
 	METHOD m_ryfntqre reload (Lnet/minecraft/unmapped/C_hoztwset$C_mlohqlpb;Lnet/minecraft/unmapped/C_eslcbfsq;)V
 		ARG 1 preparation
+	METHOD m_tnfmwadf updateFromGameOptions (Lnet/minecraft/unmapped/C_lscptbhn;)V
 	METHOD m_ufulkvsb createAntiFishyTextRenderer ()Lnet/minecraft/unmapped/C_mavozmpp;
 		COMMENT Creates an anti-malicious text renderer.
 		COMMENT <p>
@@ -49,8 +69,12 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 		COMMENT @see #createTextRenderer
 	METHOD m_vpphzugm finalizeProviderLoading (Ljava/util/List;Lnet/minecraft/unmapped/C_wywmjnuh$C_bavmfosz;)V
 		ARG 1 fonts
+		ARG 2 filteredFont
+	METHOD m_vserpwnh (Ljava/util/Map;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/List;)V
+		ARG 2 filtered
 	METHOD m_wgtqzrby resolveProviders (Ljava/util/List;)Ljava/util/Map;
 		ARG 1 entries
+	METHOD m_xdxewhir emptyFont ()Lnet/minecraft/unmapped/C_wywmjnuh$C_bavmfosz;
 	METHOD m_zexdlryp loadFontProviders (Ljava/util/List;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/List;
 		ARG 0 fontResources
 		ARG 1 id
@@ -59,12 +83,24 @@ CLASS net/minecraft/unmapped/C_hoztwset net/minecraft/client/font/FontManager
 			ARG 1 id
 		METHOD m_cbexdogi resolve (Ljava/util/function/Function;)Ljava/util/Optional;
 			ARG 1 fontLoader
+		METHOD m_ftfwkklu addFont (Lnet/minecraft/unmapped/C_hoztwset$C_ekydylip;Lnet/minecraft/unmapped/C_odvtolcn$C_anbilzsz;Ljava/util/concurrent/CompletableFuture;)V
+			ARG 3 font
 		METHOD m_psbwrwxw listBuilders ()Ljava/util/stream/Stream;
 		METHOD m_uzcfawvk (Lnet/minecraft/unmapped/C_hoztwset$C_chqbefoa;)Ljava/util/stream/Stream;
 			ARG 0 builder
+		METHOD m_wgzonana addReference (Lnet/minecraft/unmapped/C_hoztwset$C_ekydylip;Lnet/minecraft/unmapped/C_odvtolcn$C_anbilzsz;Lnet/minecraft/unmapped/C_gxohhscv$C_wxrtqmdn;)V
+			ARG 3 reference
 	CLASS C_chqbefoa Builder
+		METHOD m_bnvokcpw (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
+			ARG 2 reference
+		METHOD m_rcpuubqg addFilter (Lnet/minecraft/unmapped/C_wywmjnuh$C_bavmfosz;)Lnet/minecraft/unmapped/C_wywmjnuh$C_bavmfosz;
+			ARG 1 filteredFont
+		METHOD m_rkqzylpa (Lnet/minecraft/unmapped/C_wywmjnuh;)Ljava/util/List;
+			ARG 1 font
 		METHOD m_wtgjetaw build (Ljava/util/function/Function;)Ljava/util/Optional;
 			ARG 1 fontLoader
+		METHOD m_ziwbpczu (Ljava/util/concurrent/CompletableFuture;)Ljava/util/Optional;
+			ARG 1 future
 	CLASS C_ekydylip FontKey
 	CLASS C_mlohqlpb Preparation
 	CLASS C_zszljruf FontDefinitionFile
