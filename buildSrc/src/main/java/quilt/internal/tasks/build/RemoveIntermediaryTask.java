@@ -4,7 +4,7 @@ import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
 import net.fabricmc.mappingio.format.MappingFormat;
-import net.fabricmc.mappingio.format.Tiny2Writer;
+import net.fabricmc.mappingio.format.tiny.Tiny2FileWriter;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
@@ -54,8 +54,8 @@ public class RemoveIntermediaryTask extends DefaultMappingsTask {
     @VisibleForTesting
     public static void removeIntermediary(Path mappingsTinyInput, Path output) throws IOException {
         MemoryMappingTree tree = new MemoryMappingTree(false);
-        MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2, tree);
-        try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(output), false)) {
+        MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2_FILE, tree);
+        try (Tiny2FileWriter w = new Tiny2FileWriter(Files.newBufferedWriter(output), false)) {
             tree.accept(
                 new MappingSourceNsSwitch(
                     new MappingDstNsReorder(w, Collections.singletonList("named")), // Remove official namespace
