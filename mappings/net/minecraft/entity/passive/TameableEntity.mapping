@@ -4,13 +4,21 @@ CLASS net/minecraft/unmapped/C_sjwjnzbw net/minecraft/entity/passive/TameableEnt
 		COMMENT The tracked flags of tameable entities. Has the {@code 1} flag for {@linkplain
 		COMMENT #isInSittingPose() sitting pose} and the {@code 4} flag for {@linkplain
 		COMMENT #isTamed() tamed}.
+	FIELD f_ligkdvdj MIN_HORIZONTAL_DISTANCE_POST_TELEPORT I
 	FIELD f_rborvvvh OWNER_UUID Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_skrydxkf SQUARED_TELEPORT_DISTANCE I
+	FIELD f_xppimqpx MAX_HORIZONTAL_DISTANCE_POST_TELEPORT I
+	FIELD f_yebfrsme MAX_VERTICAL_DISTANCE_POST_TELEPORT I
 	METHOD m_enoyzrxs setSitting (Z)V
 		ARG 1 sitting
 	METHOD m_eqokagel isSitting ()Z
 	METHOD m_frgwjzaq canAttackWithOwner (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 1 target
 		ARG 2 owner
+	METHOD m_gdpxayae tryTeleportTo (III)Z
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
 	METHOD m_jaiutpwi isInSittingPose ()Z
 	METHOD m_lvckrpxt setTamed (ZZ)V
 		ARG 1 tamed
@@ -18,8 +26,13 @@ CLASS net/minecraft/unmapped/C_sjwjnzbw net/minecraft/entity/passive/TameableEnt
 	METHOD m_mflmktwd applyTamingSideEffects ()V
 	METHOD m_mkfladdv showEmoteParticle (Z)V
 		ARG 1 positive
+	METHOD m_mnstdzks canTeleportTo (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 	METHOD m_ofifzrdx setOwnerUuid (Ljava/util/UUID;)V
 		ARG 1 uuid
+	METHOD m_qlmizzto cannotFollowOwner ()Z
+	METHOD m_thjcypav tryTeleportNear (Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_vgrjbsrb canFlyToOwner ()Z
+	METHOD m_wzurfvbh shouldTryTeleportToOwner ()Z
 	METHOD m_xhsllqmu isTamed ()Z
 	METHOD m_yeburszk setInSittingPose (Z)V
 		ARG 1 inSittingPose
@@ -27,3 +40,8 @@ CLASS net/minecraft/unmapped/C_sjwjnzbw net/minecraft/entity/passive/TameableEnt
 		ARG 1 entity
 	METHOD m_ztvtqemk setOwner (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 player
+	METHOD m_zutxpjge tryTeleportToOwner ()V
+	CLASS C_zxvudoic TameablePanicGoal
+		METHOD <init> (Lnet/minecraft/unmapped/C_sjwjnzbw;DLnet/minecraft/unmapped/C_ednuhnnn;)V
+			ARG 3 speed
+			ARG 5 dangerousDamageTypes

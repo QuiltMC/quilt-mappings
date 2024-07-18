@@ -32,9 +32,12 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_tcesvuol lookControl Lnet/minecraft/unmapped/C_lgufpcrf;
 	FIELD f_uushnomk targetSelector Lnet/minecraft/unmapped/C_qospjrjn;
 	FIELD f_vuffzgdh lootTable Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_wfwaeazd leashData Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;
 	FIELD f_wkutgcpe DEFAULT_ATTACK_RANGE D
 	FIELD f_xdwjzxrd handDropChances [F
+	FIELD f_yqqanohh RANDOM_SPAWN_BONUS_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_ziddtuje GOAL_SELECTOR_UPDATE_INTERVAL I
+	FIELD f_zmktcisp PRESERVE_ITEM_DROP_CHANCE_THRESHOLD F
 	FIELD f_zqtbccqn armorDropChances [F
 	FIELD f_zwyrnqpo MAX_WEAR_ARMOR_PROBABILITY F
 	METHOD m_ahhtjfdq getItemPickupReach ()Lnet/minecraft/unmapped/C_ceivtqhh;
@@ -53,11 +56,13 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_cauyzlww getNavigation ()Lnet/minecraft/unmapped/C_atbvfjwi;
 	METHOD m_ckimhneu getPositionTarget ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_cpqekrmu clearPositionTarget ()V
+	METHOD m_cyqouyby dropPreservedEquipment ()V
 	METHOD m_dciqpbdm canImmediatelyDespawn (D)Z
 		ARG 1 distanceSquared
 	METHOD m_dijkljpy clearGoalsAndTasks ()V
 	METHOD m_dsykcsrd setAiDisabled (Z)V
 		ARG 1 aiDisabled
+	METHOD m_dwkutgwm playAttackSound ()V
 	METHOD m_eeaedybm createAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
 	METHOD m_enspzmcx isInWalkTargetRange (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
@@ -94,6 +99,10 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 sidewaysMovement
 	METHOD m_jdpupgbu getLootTableId ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_jjefzxbm getAmbientSound ()Lnet/minecraft/unmapped/C_avavozay;
+	METHOD m_jlsekxwk enchantEquipment (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_rlomrsco;FLnet/minecraft/unmapped/C_jiailwzt;)V
+		ARG 1 world
+		ARG 2 slot
+		ARG 4 chance
 	METHOD m_jrjjwiqr onStartPathfinding ()V
 	METHOD m_jrvaluhu updateDropChances (Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 1 slot
@@ -119,6 +128,10 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_lqlfsnxj getBodyYawSpeed ()I
 	METHOD m_lxcdvhkn enchantEquipment (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_jiailwzt;)V
 		ARG 3 slot
+	METHOD m_mapkswnb dropPreservedEquipment (Ljava/util/function/Predicate;)Ljava/util/Set;
+		COMMENT Drop equipment from slots that are guaranteed to drop and which match the passed {@code shouldDrop} predicate
+		COMMENT @return slots containing equipment that doesn't match the passed {@code shouldDrop} predicate
+		ARG 1 shouldDrop
 	METHOD m_mbyporyt createBodyControl ()Lnet/minecraft/unmapped/C_vofymfgv;
 	METHOD m_mowaxfbl isLeftHanded ()Z
 	METHOD m_mrbrckqf isDisallowedInPeaceful ()Z
