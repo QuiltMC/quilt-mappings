@@ -28,7 +28,7 @@ import org.quiltmc.enigma.util.Utils;
 import net.fabricmc.mappingio.MappingWriter;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import net.fabricmc.mappingio.format.MappingFormat;
-import net.fabricmc.mappingio.format.Tiny2Reader;
+import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.InputFile;
@@ -79,7 +79,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
         List<String> namespaces;
         try (Reader reader = Files.newBufferedReader(input, StandardCharsets.UTF_8)) {
-            namespaces = Tiny2Reader.getNamespaces(reader);
+            namespaces = Tiny2FileReader.getNamespaces(reader);
         }
 
         if (!namespaces.contains("named")) {
@@ -104,7 +104,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
         if (extraProcessing) {
             MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
-            try (MappingWriter writer = MappingWriter.create(output, MappingFormat.TINY_2)) {
+            try (MappingWriter writer = MappingWriter.create(output, MappingFormat.TINY_2_FILE)) {
                 outputTree.accept(writer);
             }
         }
@@ -154,7 +154,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
     private static boolean preprocessFile(Path inputMappings, Path output) throws Exception {
         MemoryMappingTree inputTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(inputMappings, StandardCharsets.UTF_8)) {
-            Tiny2Reader.read(reader, inputTree);
+            Tiny2FileReader.read(reader, inputTree);
         }
 
         // Reorder destination namespaces to put the named namespace first
@@ -166,7 +166,7 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
             dstNamespaces.set(0, "named");
             inputTree.accept(new MappingDstNsReorder(outputTree, dstNamespaces));
 
-            try (MappingWriter mappingWriter = MappingWriter.create(output, MappingFormat.TINY_2)) {
+            try (MappingWriter mappingWriter = MappingWriter.create(output, MappingFormat.TINY_2_FILE)) {
                 outputTree.accept(mappingWriter);
             }
 
@@ -180,12 +180,12 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
     private static MemoryMappingTree postProcessTree(Path inputMappings, Path processedMappings) throws Exception {
         MemoryMappingTree inputTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(inputMappings, StandardCharsets.UTF_8)) {
-            Tiny2Reader.read(reader, inputTree);
+            Tiny2FileReader.read(reader, inputTree);
         }
 
         MemoryMappingTree processedTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(processedMappings, StandardCharsets.UTF_8)) {
-            Tiny2Reader.read(reader, processedTree);
+            Tiny2FileReader.read(reader, processedTree);
         }
 
         // Merge trees

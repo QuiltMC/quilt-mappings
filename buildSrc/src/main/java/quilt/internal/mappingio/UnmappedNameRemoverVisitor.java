@@ -3,6 +3,7 @@ package quilt.internal.mappingio;
 import net.fabricmc.mappingio.MappedElementKind;
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.ForwardingMappingVisitor;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -119,10 +120,10 @@ public class UnmappedNameRemoverVisitor extends ForwardingMappingVisitor {
     }
 
     @Override
-    public boolean visitMethodVar(int lvtRowIndex, int lvIndex, int startOpIdx, String srcName) throws IOException {
+    public boolean visitMethodVar(int lvtRowIndex, int lvIndex, int startOpIdx, int endOpIdx, @Nullable String srcName) throws IOException {
         this.srcName = srcName;
 
-        return super.visitMethodVar(lvtRowIndex, lvIndex, startOpIdx, srcName);
+        return super.visitMethodVar(lvtRowIndex, lvIndex, startOpIdx, endOpIdx, srcName);
     }
 
     @Override

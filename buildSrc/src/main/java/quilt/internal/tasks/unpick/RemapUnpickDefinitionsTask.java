@@ -33,7 +33,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
-import net.fabricmc.mappingio.format.Tiny2Reader;
+import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
@@ -96,7 +96,7 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
                 // Use target namespace as fallback to source namespace
                 // Removes the need to add all the mappings to the file
                 MappingVisitor visitor = new MappingNsCompleter(mappingTree, Collections.singletonMap(fromM, toM));
-                Tiny2Reader.read(reader, visitor);
+                Tiny2FileReader.read(reader, visitor);
 
                 for (MappingTree.ClassMapping classMapping : mappingTree.getClasses()) {
                     classMappings.put(classMapping.getName(fromM), classMapping.getName(toM));
