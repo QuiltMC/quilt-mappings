@@ -6,13 +6,17 @@ CLASS net/minecraft/unmapped/C_dcmtgrvm net/minecraft/client/render/Camera
 	FIELD f_cqspulvd thirdPerson Z
 	FIELD f_cutvmukt lastCameraY F
 	FIELD f_inebbekr yaw F
-	FIELD f_irixwgfc tickDelta F
+	FIELD f_irixwgfc lastTickDelta F
+	FIELD f_jsosryyi DIAGONAL Lorg/joml/Vector3f;
+	FIELD f_kcbzdwpp VERTICAL Lorg/joml/Vector3f;
 	FIELD f_kttxnyjy ready Z
 	FIELD f_lkpfexrc blockPos Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 	FIELD f_milaksbm focusedEntity Lnet/minecraft/unmapped/C_astfners;
 	FIELD f_ubasiktk FOG_SCALE F
+	FIELD f_viuaolbc HORIZONTAL Lorg/joml/Vector3f;
 	FIELD f_vmsaybha horizontalPlane Lorg/joml/Vector3f;
 	FIELD f_wmojnkwy cameraY F
+	FIELD f_wovkceul DEFAULT_DISTANCE F
 	FIELD f_yazojrjc pitch F
 	FIELD f_ytglpkdt verticalPlane Lorg/joml/Vector3f;
 	METHOD m_aoenjstc getRotation ()Lorg/joml/Quaternionf;
@@ -21,6 +25,7 @@ CLASS net/minecraft/unmapped/C_dcmtgrvm net/minecraft/client/render/Camera
 	METHOD m_eseycesk getPitch ()F
 	METHOD m_gvuhcfbu updateEyeHeight ()V
 	METHOD m_jcwynaeb getYaw ()F
+	METHOD m_jihuttpb getLastTickDelta ()F
 	METHOD m_khyzixam getProjection ()Lnet/minecraft/unmapped/C_dcmtgrvm$C_bilbhifk;
 		COMMENT {@return the field of vision of this camera}
 		COMMENT
@@ -39,6 +44,7 @@ CLASS net/minecraft/unmapped/C_dcmtgrvm net/minecraft/client/render/Camera
 	METHOD m_qghtsmxy setPos (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 pos
 	METHOD m_rvxwqaii clipToSpace (F)F
+		ARG 1 distance
 	METHOD m_snkobkak getDiagonalPlane ()Lorg/joml/Vector3f;
 	METHOD m_tjxnqzzj isThirdPerson ()Z
 	METHOD m_uqqwnxbw getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -48,6 +54,9 @@ CLASS net/minecraft/unmapped/C_dcmtgrvm net/minecraft/client/render/Camera
 		ARG 5 z
 	METHOD m_xqbpyilg getHorizontalPlane ()Lorg/joml/Vector3f;
 	METHOD m_ybxzbbxk moveBy (FFF)V
+		ARG 1 z
+		ARG 2 y
+		ARG 3 x
 	METHOD m_ytihosqf getSubmersionType ()Lnet/minecraft/unmapped/C_gotsxzxm;
 	METHOD m_zmomxvnh isReady ()Z
 	CLASS C_bilbhifk Projection

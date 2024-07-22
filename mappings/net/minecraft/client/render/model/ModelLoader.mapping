@@ -10,6 +10,7 @@ CLASS net/minecraft/unmapped/C_gjnplkfz net/minecraft/client/render/model/ModelL
 	FIELD f_htzriirg FIRE_1 Lnet/minecraft/unmapped/C_djlixbky;
 	FIELD f_hxaewlwa modelsToBake Ljava/util/Map;
 	FIELD f_irckqypw WATER_OVERLAY Lnet/minecraft/unmapped/C_djlixbky;
+	FIELD f_itevaotj MISSING_MODEL Lnet/minecraft/unmapped/C_jcudnsmp;
 	FIELD f_izgenlnd SHIELD_BASE_NO_PATTERN Lnet/minecraft/unmapped/C_djlixbky;
 	FIELD f_jxdahvbg LAVA_FLOW Lnet/minecraft/unmapped/C_djlixbky;
 	FIELD f_pgpcuprk BLOCK_ENTITY_MARKER Lnet/minecraft/unmapped/C_wmxrezbu;
@@ -36,17 +37,40 @@ CLASS net/minecraft/unmapped/C_gjnplkfz net/minecraft/client/render/model/ModelL
 		ARG 4 blockStateResources
 	METHOD m_hgeoleul (I)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 0 stage
+	METHOD m_hulflyba addItemUnbakedModel (Lnet/minecraft/unmapped/C_jcudnsmp;)V
+	METHOD m_jnwivfmo addItemInventoryUnbakedModel (Lnet/minecraft/unmapped/C_ncpywfca;)V
 	METHOD m_jttuvliw getStateLookup ()Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 	METHOD m_llkjzunn bakeModels (Lnet/minecraft/unmapped/C_gjnplkfz$C_upggajsp;)V
+		ARG 1 sprites
 	METHOD m_rlrkrbpx getBakedModelMap ()Ljava/util/Map;
+	METHOD m_sqofxxzg addUnbakedModel (Lnet/minecraft/unmapped/C_jcudnsmp;Lnet/minecraft/unmapped/C_nrqwmhri;)V
+		ARG 1 id
+	METHOD m_tkfvgqfq (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 id
 	METHOD m_tzxfcora loadModelFromJson (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_wmxrezbu;
 		ARG 1 id
+	METHOD m_ucmlplkg (Lnet/minecraft/unmapped/C_wmxrezbu;)V
+		ARG 0 model
+	METHOD m_wvoxdgns addUnbakedModelAndLoadDependencies (Lnet/minecraft/unmapped/C_jcudnsmp;Lnet/minecraft/unmapped/C_nrqwmhri;)V
+		ARG 1 id
+	METHOD m_ypixvpjl (Lnet/minecraft/unmapped/C_gjnplkfz$C_upggajsp;Lnet/minecraft/unmapped/C_jcudnsmp;Lnet/minecraft/unmapped/C_nrqwmhri;)V
+		ARG 2 id
 	METHOD m_yydbomuy (Lnet/minecraft/unmapped/C_wmxrezbu;)V
 		ARG 0 blockModel
 	METHOD m_znmoyvgs getOrLoadModel (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_nrqwmhri;
 		ARG 1 id
+	METHOD m_zztfmkzm (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 0 stage
 	CLASS C_qnxaydxn ModelLoaderBaker
 		FIELD f_cjvdgfpd spriteGetter Ljava/util/function/Function;
+		METHOD <init> (Lnet/minecraft/unmapped/C_gjnplkfz;Lnet/minecraft/unmapped/C_gjnplkfz$C_upggajsp;Lnet/minecraft/unmapped/C_jcudnsmp;)V
+			ARG 2 sprites
+			ARG 3 id
 		METHOD m_rlqcwykb (Lnet/minecraft/unmapped/C_gjnplkfz$C_upggajsp;Lnet/minecraft/unmapped/C_jcudnsmp;Lnet/minecraft/unmapped/C_djlixbky;)Lnet/minecraft/unmapped/C_uflrwbwt;
+			ARG 2 material
+		METHOD m_rxnrsoki bake (Lnet/minecraft/unmapped/C_nrqwmhri;Lnet/minecraft/unmapped/C_vucyqort;)Lnet/minecraft/unmapped/C_nnhmhkbv;
+	CLASS C_upggajsp SpriteGetter
+		METHOD get get (Lnet/minecraft/unmapped/C_jcudnsmp;Lnet/minecraft/unmapped/C_djlixbky;)Lnet/minecraft/unmapped/C_uflrwbwt;
+			ARG 1 model
 			ARG 2 material
 	CLASS C_zmqtwahs BakedCacheKey

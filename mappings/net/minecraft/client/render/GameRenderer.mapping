@@ -39,12 +39,14 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	FIELD f_jytjxqos renderTypeEntityCutoutNonNullShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_kbobnnof renderTypeGlintDirectShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_kdgkcagx resourceManager Lnet/minecraft/unmapped/C_tmnrpasf;
+	FIELD f_lmlvaxsl confusionRenderTicks I
 	FIELD f_lropktia renderTypeGlintShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_mbaevbtg renderTypeEntityCutoutShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_mfkuvayv renderTypeEntitySmoothCutoutShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_mlczdlpl renderHand Z
 	FIELD f_mzcthkld mapRenderer Lnet/minecraft/unmapped/C_yzoxmlsd;
 	FIELD f_nmlpocve renderTypeEntityShadowShader Lnet/minecraft/unmapped/C_alllhitb;
+	FIELD f_ohawlhoh GUI_Z_NEAR F
 	FIELD f_oivnczcl renderTypeGuiTextHighlightShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_owutnayn renderTypeEntityDecalShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_pdfchroe renderTypeGuiShader Lnet/minecraft/unmapped/C_alllhitb;
@@ -62,9 +64,11 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	FIELD f_rocpizga ACTIVATE_ITEM_ANIMATION_TICKS I
 	FIELD f_ryldmtnx renderingPanorama Z
 	FIELD f_sdlhqvrk positionShader Lnet/minecraft/unmapped/C_alllhitb;
+	FIELD f_selqgmmt BLUR_OVERLAY Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_slarwzvl renderTypeLeashShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_srwcznra renderTypeCutoutMippedShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_ssktuhyz renderTypeTextIntensitySeeThroughShader Lnet/minecraft/unmapped/C_alllhitb;
+	FIELD f_tdedjfnc MAX_BLUR_RADIUS I
 	FIELD f_tglmbmbc renderTypeItemEntityTranslucentCullShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_tlbmrvcz skyDarkness F
 	FIELD f_tpmysuza renderTypeTextIntensityShader Lnet/minecraft/unmapped/C_alllhitb;
@@ -107,7 +111,7 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 1 blockOutlineEnabled
 	METHOD m_aikgilvz (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
-	METHOD m_albnpjas (F)V
+	METHOD m_albnpjas renderBlur (F)V
 		ARG 1 tickDelta
 	METHOD m_aqbgwqwa renderWithZoom (FFF)V
 		ARG 1 zoom
@@ -165,8 +169,11 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	METHOD m_ewctywzl renderHand (Lnet/minecraft/unmapped/C_dcmtgrvm;FLorg/joml/Matrix4f;)V
 		ARG 1 camera
 		ARG 2 tickDelta
+		ARG 3 matrix
 	METHOD m_exqkqibo getRenderTypeEntitySolidShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_faiovkfn (Lnet/minecraft/unmapped/C_alllhitb;)V
+		ARG 0 shader
+	METHOD m_flwgjzas (Lcom/mojang/datafixers/util/Pair;)V
 		ARG 0 shader
 	METHOD m_fprgccfu getRenderTypeOutlineShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_fqpzhfpa (Lnet/minecraft/unmapped/C_alllhitb;)V
@@ -207,6 +214,8 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 0 shader
 	METHOD m_itmjbcfm (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
+	METHOD m_itpnfnbt ensureHitInRange (Lnet/minecraft/unmapped/C_eetoegzn;Lnet/minecraft/unmapped/C_vgpupfxx;D)Lnet/minecraft/unmapped/C_eetoegzn;
+		ARG 0 hit
 	METHOD m_ivhdlzio getRenderTypeGuiShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_ivlafvpw shouldRenderBlockOutline ()Z
 	METHOD m_jnzvoadl getRenderTypeTextShader ()Lnet/minecraft/unmapped/C_alllhitb;
@@ -224,6 +233,8 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	METHOD m_krvflmxt (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
 	METHOD m_lcntmtcb getRenderTypeWaterMaskShader ()Lnet/minecraft/unmapped/C_alllhitb;
+	METHOD m_lfhocphr (Lcom/mojang/datafixers/util/Pair;)V
+		ARG 1 shader
 	METHOD m_lgkxjnlk getRenderTypeItemEntityTranslucentCullShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_lmvzyfzl getPositionColorShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_lyinxcpq getRenderTypeGuiOverlayShader ()Lnet/minecraft/unmapped/C_alllhitb;
@@ -248,6 +259,8 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 0 shader
 	METHOD m_naezieia (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
+	METHOD m_nbihrgjs (Ljava/nio/file/Path;)V
+		ARG 1 path
 	METHOD m_nhzigngy getMapRenderer ()Lnet/minecraft/unmapped/C_yzoxmlsd;
 	METHOD m_nnyxzoeh setRenderHand (Z)V
 		ARG 1 renderHand
@@ -298,6 +311,8 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	METHOD m_tdvujytd showFloatingItem (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 floatingItem
 	METHOD m_uwgotklk getPositionColorTexLightmapShader ()Lnet/minecraft/unmapped/C_alllhitb;
+	METHOD m_vdebydby loadBlur (Lnet/minecraft/unmapped/C_xadhkzfq;)V
+		ARG 1 factory
 	METHOD m_vfzbkknz (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
 	METHOD m_vjwcmgze getOverlayTexture ()Lnet/minecraft/unmapped/C_fomttbqy;
@@ -308,7 +323,14 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	METHOD m_vtnchlsw (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
 	METHOD m_vwvkdyvv getPositionColorLightmapShader ()Lnet/minecraft/unmapped/C_alllhitb;
+	METHOD m_vzamypqw getPotentialHit (Lnet/minecraft/unmapped/C_astfners;DDF)Lnet/minecraft/unmapped/C_eetoegzn;
+		ARG 1 entity
+		ARG 2 blockRange
+		ARG 4 entityRange
+		ARG 6 tickDelta
 	METHOD m_vzhzwpiw getRenderTypeEntityAlphaShader ()Lnet/minecraft/unmapped/C_alllhitb;
+	METHOD m_vziixqvb (Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 0 entity2
 	METHOD m_wckfkluv getRenderTypeBreezeWindShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_wdayaltf (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
@@ -346,6 +368,7 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	METHOD m_zqykowaq getRenderTypeTextBackgroundShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_zsqnygzx getRenderTypeTranslucentMovingBlockShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_zwbjkjqq getRenderTypeEntityDecalShader ()Lnet/minecraft/unmapped/C_alllhitb;
+	METHOD m_zyuofaee updateCrosshairTarget (F)V
 	METHOD m_zztjsgxy (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
 	METHOD m_zzvscezj setRenderingPanorama (Z)V

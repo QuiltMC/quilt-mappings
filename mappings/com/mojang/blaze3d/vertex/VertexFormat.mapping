@@ -1,17 +1,35 @@
 CLASS net/minecraft/unmapped/C_rnldvdpe com/mojang/blaze3d/vertex/VertexFormat
+	FIELD f_cjphjbaz mask I
 	FIELD f_eaizqugu buffer Lnet/minecraft/unmapped/C_lhjdxjis;
+	FIELD f_hbjccuou attributeIndices [I
+	FIELD f_hplpxqvf attributes Ljava/util/List;
 	FIELD f_magvnmca size I
 	FIELD f_thnfzsnr elements Ljava/util/List;
+	FIELD f_xqnvzjmq INVALID_ELEMENT I
+	METHOD <init> (Ljava/util/List;Ljava/util/List;Lit/unimi/dsi/fastutil/ints/IntList;I)V
+		ARG 3 offsets
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
 	METHOD m_brvxvqux clearAttribState ()V
 	METHOD m_etycqjdi setupAttribStateInternal ()V
+	METHOD m_fyghzmni getAttributeName (Lnet/minecraft/unmapped/C_gmhefnuu;)Ljava/lang/String;
+		ARG 1 element
 	METHOD m_hcbyafmb getBuffer ()Lnet/minecraft/unmapped/C_lhjdxjis;
+	METHOD m_itfposxz contains (Lnet/minecraft/unmapped/C_gmhefnuu;)Z
+		ARG 1 element
+	METHOD m_iwxekzmc (II)I
+		ARG 0 i
+		ARG 1 j
 	METHOD m_mocqgpdr setupAttribState ()V
 	METHOD m_nsxyklrn getShaderAttributes ()Ljava/util/List;
 	METHOD m_smhrgwhk clearAttribStateInternal ()V
+	METHOD m_sqevultz builder ()Lnet/minecraft/unmapped/C_rnldvdpe$C_ykggrxts;
+	METHOD m_tdtabkti getAttributeIndex (Lnet/minecraft/unmapped/C_gmhefnuu;)I
+		ARG 1 element
 	METHOD m_ximwvywi getElements ()Ljava/util/List;
 	METHOD m_xqvnddix getVertexSize ()I
+	METHOD m_xxfnxtpe getMask ()I
+	METHOD m_zildndhz getAttributeIndices ()[I
 	CLASS C_pmanqvls IndexType
 		FIELD f_edqjhrlc bytes I
 		FIELD f_escpcqoj glType I
@@ -36,3 +54,13 @@ CLASS net/minecraft/unmapped/C_rnldvdpe com/mojang/blaze3d/vertex/VertexFormat
 			ARG 6 connectedPrimitives
 		METHOD m_bxxouuqn indexCount (I)I
 			ARG 1 vertexCount
+	CLASS C_ykggrxts Builder
+		FIELD f_dxthypxa stride I
+		FIELD f_qswkwhrt offsets Lit/unimi/dsi/fastutil/ints/IntList;
+		FIELD f_xnjzdyal elements Lcom/google/common/collect/ImmutableMap$Builder;
+		METHOD m_bprhncfv build ()Lnet/minecraft/unmapped/C_rnldvdpe;
+		METHOD m_lbvtnvip addElement (Ljava/lang/String;Lnet/minecraft/unmapped/C_gmhefnuu;)Lnet/minecraft/unmapped/C_rnldvdpe$C_ykggrxts;
+			ARG 1 attribute
+			ARG 2 element
+		METHOD m_zofztfkz skip (I)Lnet/minecraft/unmapped/C_rnldvdpe$C_ykggrxts;
+			ARG 1 bytes

@@ -16,6 +16,8 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	FIELD f_gdynqbho TEXT_SEE_THROUGH Ljava/util/function/Function;
 	FIELD f_gstcctqo MEGABYTE I
 	FIELD f_gurjiuiq ENTITY_NO_OUTLINE Ljava/util/function/Function;
+	FIELD f_gwjnarqq CLOUDS Lnet/minecraft/unmapped/C_tizlwnnv;
+	FIELD f_gxlijjfi CLOUDS_DEPTH Lnet/minecraft/unmapped/C_tizlwnnv;
 	FIELD f_hxhpkyzf ENTITY_TRANSLUCENT Ljava/util/function/BiFunction;
 	FIELD f_inxwrkmo expectedBufferSize I
 	FIELD f_jkmtblbz TEXT_INTENSITY Ljava/util/function/Function;
@@ -54,6 +56,9 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		ARG 0 texture
 	METHOD m_betbxymq getGuiOverlay ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_bfrbakwz getArmorCutoutNoCull (Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;Z)Lnet/minecraft/unmapped/C_tizlwnnv$C_otpmelyb;
+		ARG 0 name
+		ARG 1 texture
+		ARG 2 decal
 	METHOD m_bnrgoaxp getDrawMode ()Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
 	METHOD m_bnwgdzyr (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
@@ -83,6 +88,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		ARG 0 texture
 	METHOD m_eplyaoof isOutline ()Z
 	METHOD m_ezhuwpgi getClouds (Z)Lnet/minecraft/unmapped/C_tizlwnnv$C_otpmelyb;
+		ARG 0 depth
 	METHOD m_fdssmrcg (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_frrfzhdc getDebugLineStrip (D)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -107,6 +113,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_ijulroee getWaterMask ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_jfdjboum getLines ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_jlfilozp getArmorEntityGlint ()Lnet/minecraft/unmapped/C_tizlwnnv;
+	METHOD m_jobkjsgk getCloudsDepth ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_jumxwpag (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_kboqswsf of (Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
@@ -124,6 +131,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_mfsjsgon getBlockLayers ()Ljava/util/List;
 	METHOD m_mfxtikhv getArmorDecalCutoutNoCull (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+	METHOD m_miosxdmw getDragonRays ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_mmabhois hasConnectedPrimitives ()Z
 	METHOD m_mwfnzrol getVertexFormat ()Lnet/minecraft/unmapped/C_rnldvdpe;
 	METHOD m_nimgchue getTranslucent ()Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -134,10 +142,14 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		ARG 1 affectsOutline
 	METHOD m_nzqeeqjc (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+	METHOD m_ocmzazwr getTranslucentEmissive (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
+		ARG 0 texture
 	METHOD m_oezrvzej (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_omxkkrgj (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+	METHOD m_pftczvoe isTranslucent ()Z
+	METHOD m_ploupyuu draw (Lnet/minecraft/unmapped/C_fpcijbbg;)V
 	METHOD m_ptssught getDirectEntityGlint ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_pulmztxt (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
@@ -195,12 +207,14 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_wayaljif getEntityShadow (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_wdwqsulq getGuiGhostRecipeOverlay ()Lnet/minecraft/unmapped/C_tizlwnnv;
+	METHOD m_wfxibejx getDragonRaysDepth ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_widtimmm getSolid ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_wnbqszyf getItemPhaseData ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 	METHOD m_xfopkxca getEyes (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_xhxmgsuq getItemEntityTranslucentCull (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
+	METHOD m_xlqyjlkw getClouds ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_xmhnzmof getCutout ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_xniglxhn getEntityTranslucentEmissive (Lnet/minecraft/unmapped/C_ncpywfca;Z)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
@@ -217,6 +231,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_yaakejdl getEntityTranslucentCull (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_ydueuccx getDebugQuads ()Lnet/minecraft/unmapped/C_tizlwnnv;
+	METHOD m_ydwzsclw getDebugStructureQuads ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_yghbecxm getGui ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_zffmcgyn getOutline (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
