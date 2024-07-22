@@ -76,7 +76,7 @@ CLASS net/minecraft/unmapped/C_pdtkdbte net/minecraft/entity/passive/VillagerEnt
 		ARG 1 world
 		ARG 2 time
 		ARG 4 requiredCount
-	METHOD m_ohxwrhdt clearDailyRestockCount ()V
+	METHOD m_ohxwrhdt doDailyRestock ()V
 	METHOD m_otzexgpv notifyDeath (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 killer
 	METHOD m_pagkeccz getAvailableFood ()I
@@ -106,7 +106,9 @@ CLASS net/minecraft/unmapped/C_pdtkdbte net/minecraft/entity/passive/VillagerEnt
 	METHOD m_ypommskk initBrain (Lnet/minecraft/unmapped/C_rjqjaxef;)V
 		ARG 1 brain
 	METHOD m_yuvzulud decayGossip ()V
-	METHOD m_zghwxgpj shouldRestock ()Z
+	METHOD m_zghwxgpj tryDailyRestock ()Z
+		COMMENT Updates {@code lastRestockCheckTime} and restocks trades if a day has passed.
+		COMMENT @return {@code true} if a mid-day restock should occur, or {@code false} otherwise
 	METHOD m_znfujvep sayNo ()V
 	METHOD m_zuttxskq beginTradeWith (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 customer
