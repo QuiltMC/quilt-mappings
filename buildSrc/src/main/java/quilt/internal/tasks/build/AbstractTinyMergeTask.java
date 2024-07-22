@@ -24,7 +24,7 @@ import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingNsCompleter;
 import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
 import net.fabricmc.mappingio.format.MappingFormat;
-import net.fabricmc.mappingio.format.Tiny2Writer;
+import net.fabricmc.mappingio.format.tiny.Tiny2FileWriter;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
@@ -68,9 +68,9 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
                                      Function<MappingVisitor, MappingVisitor> firstVisitor,
                                      Function<MappingVisitor, MappingVisitor> preWriteVisitor) throws IOException {
         MemoryMappingTree tree = new MemoryMappingTree(false); // hashed is the src namespace
-        MappingReader.read(mergeTinyInput, MappingFormat.TINY_2, tree);
-        MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2, tree);
-        try (Tiny2Writer w = new Tiny2Writer(Files.newBufferedWriter(outputMappings), false)) {
+        MappingReader.read(mergeTinyInput, MappingFormat.TINY_2_FILE, tree);
+        MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2_FILE, tree);
+        try (Tiny2FileWriter w = new Tiny2FileWriter(Files.newBufferedWriter(outputMappings), false)) {
             tree.accept(firstVisitor.apply(
                 new CompleteInitializersVisitor(
                     new MappingSourceNsSwitch(preWriteVisitor.apply(w), "official", /*Drop methods not in hashed*/ true)

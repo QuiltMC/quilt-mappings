@@ -1,0 +1,74 @@
+CLASS net/minecraft/unmapped/C_aqwrwsxs net/minecraft/client/resource/remote/RemoteResourcePackProvider
+	FIELD f_amjzhjsb SHA1_PATTERN Ljava/util/regex/Pattern;
+	FIELD f_egouhokf reloadCallback Lnet/minecraft/unmapped/C_mjfziaze$C_waclobzb;
+	FIELD f_hujhcick source Lnet/minecraft/unmapped/C_evnnymfu;
+	FIELD f_kbeypyri EMPTY_PROVIDER Lnet/minecraft/unmapped/C_johcixxq;
+	FIELD f_piafedhd downloadQueue Lnet/minecraft/unmapped/C_bnlklfes;
+	FIELD f_qleaebmu provider Lnet/minecraft/unmapped/C_johcixxq;
+	FIELD f_rhyfckxd createdProfiles I
+	FIELD f_toxcbfeq REMOTE_PACK_POSITION Lnet/minecraft/unmapped/C_yzksgymh;
+	FIELD f_xpbgeoqj feedback Lnet/minecraft/unmapped/C_tumlmgvl;
+	FIELD f_yicgvnrh SERVER_RESOURCE_PACK_DESCRIPTION Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_ylqgdhkx DEFAULT_FEEDBACK Lnet/minecraft/unmapped/C_tumlmgvl;
+	FIELD f_zgnnkpmh manager Lnet/minecraft/unmapped/C_wbxficvd;
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Ljava/nio/file/Path;Lnet/minecraft/unmapped/C_pdsiuywi$C_ccccxeyr;)V
+		ARG 2 downloadQueue
+		ARG 3 network
+	METHOD close close ()V
+	METHOD m_ahgmerhz createProvider (Ljava/util/List;)Lnet/minecraft/unmapped/C_johcixxq;
+	METHOD m_akhfcswe clear ()V
+	METHOD m_bxgvtflp createProfiles (Ljava/util/List;)Ljava/util/List;
+	METHOD m_cdtbbkyz onReload ()Lnet/minecraft/unmapped/C_mjfziaze;
+	METHOD m_czvbqirs reloadFailure ()V
+	METHOD m_dmalnrja (Ljava/util/function/Consumer;)V
+		ARG 1 consumer
+	METHOD m_eeemykbc createDownloader (Lnet/minecraft/unmapped/C_bnlklfes;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_cwfizcnb;Ljava/net/Proxy;)Lnet/minecraft/unmapped/C_qcnikyod;
+		ARG 1 queue
+		ARG 2 executor
+		ARG 3 session
+		ARG 4 proxy
+	METHOD m_gccxopjz reloadFromFailure ()V
+	METHOD m_hzevtjal getSha1Hash (Ljava/lang/String;)Lcom/google/common/hash/HashCode;
+	METHOD m_iatgkirl addPack (Ljava/util/UUID;Ljava/net/URL;Ljava/lang/String;)V
+		ARG 2 url
+	METHOD m_jdpengrg createDownloadedFuture (Ljava/util/UUID;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_kneyvfit success ()V
+	METHOD m_knzlaroh addLocalPack (Ljava/util/UUID;Ljava/nio/file/Path;)V
+		ARG 2 path
+	METHOD m_lvunqimi startReload (Lnet/minecraft/unmapped/C_mjfziaze$C_waclobzb;)V
+		ARG 1 callback
+	METHOD m_oklkcsby (Ljava/util/function/Consumer;)V
+		ARG 0 consumer
+	METHOD m_rzyzxtfp removeAllPacks ()V
+	METHOD m_scqhjkyv acceptAll ()V
+	METHOD m_sgtcfimr createConnectionFeedback (Lnet/minecraft/unmapped/C_oasmcckk;)Lnet/minecraft/unmapped/C_tumlmgvl;
+		ARG 0 connection
+	METHOD m_soqkhjpf removePack (Ljava/util/UUID;)V
+	METHOD m_ssxsctgx createDownloadListener (I)Lnet/minecraft/unmapped/C_vposufsj$C_jquudqeh;
+		ARG 1 packs
+	METHOD m_tnvfrmac initWorld ()V
+	METHOD m_whrfzbbp declineAll ()V
+	METHOD m_xltnjuoo createUpdater (Ljava/util/concurrent/Executor;)Ljava/lang/Runnable;
+		ARG 1 executor
+	METHOD m_xoqyphjf createProvider ()Lnet/minecraft/unmapped/C_johcixxq;
+	METHOD m_zmzqdgbf initRemote (Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_wbxficvd$C_bdltmbkr;)V
+		ARG 2 status
+	CLASS C_ludwcckl
+		FIELD f_beqnhhwp id Lnet/minecraft/unmapped/C_vksdgrxp$C_ozahoshp;
+		FIELD f_ewnjbkhb totalSize Ljava/util/OptionalLong;
+		FIELD f_fkcwysli downloads I
+		FIELD f_fxdywpla additionalInfo Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_tonxqzfr failures I
+		FIELD f_wzcqodju title Lnet/minecraft/unmapped/C_rdaqiwdt;
+		METHOD m_hcmuvepm updateToast (J)V
+			ARG 1 bytes
+		METHOD m_stgjfbkz showToast ()V
+	CLASS C_ooojwodg
+		FIELD f_bojtpdfw MAX_SIZE I
+		FIELD f_yfaonkwn SHA1 Lcom/google/common/hash/HashFunction;
+		METHOD m_adrnxoky getHeaders ()Ljava/util/Map;
+	CLASS C_vjvtzgyh
+		FIELD f_dsepgswd hasUpdate Z
+		FIELD f_pwmxtgcn scheduled Z
+		METHOD m_bojpxser runUpdates ()V
+		METHOD run run ()V
