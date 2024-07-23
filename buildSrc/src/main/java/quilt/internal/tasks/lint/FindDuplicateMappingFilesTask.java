@@ -52,12 +52,12 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
                                 },
                                 () -> mapNoClassFiles.add(mappingFile)
                             );
-
-                            if (!mappingFile.toString().endsWith(".mapping")) {
-                                wrongExtensionFiles.add(mappingFile);
-                            }
                         } else {
                             emptyFiles.add(mappingFile);
+                        }
+
+                        if (!mappingFile.toString().endsWith(".mapping")) {
+                            wrongExtensionFiles.add(mappingFile);
                         }
                     } catch (IOException e) {
                         throw new GradleException("Unexpected error accessing mapping file", e);
@@ -119,8 +119,8 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
             errorMessages.add(message);
 
             LOGGER.error("Found {}!", message);
-            for (final File mapNoClassFile : mapNoClassFiles) {
-                LOGGER.error("\t{}", mapNoClassFile);
+            for (final File wrongExtensionFile : wrongExtensionFiles) {
+                LOGGER.error("\t{}", wrongExtensionFile);
             }
         }
 
