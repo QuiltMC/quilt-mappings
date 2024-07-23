@@ -5,7 +5,6 @@ import com.google.common.collect.Multimap;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.TaskAction;
 
