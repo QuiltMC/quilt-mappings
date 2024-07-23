@@ -20,6 +20,7 @@ import quilt.internal.tasks.diff.RemapTargetMinecraftJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.tasks.lint.DownloadDictionaryFileTask;
+import quilt.internal.tasks.lint.FindDuplicateMappingFilesTask;
 import quilt.internal.tasks.lint.MappingLintTask;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
@@ -65,7 +66,11 @@ public class MappingsPlugin implements Plugin<Project> {
 
         tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
         tasks.create(DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class);
-        tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
+        final var mappingLintTask = tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
+        tasks.create(FindDuplicateMappingFilesTask.TASK_NAME, FindDuplicateMappingFilesTask.class, task -> {
+            task.getMappingDirectory().set(mappingLintTask.getMappingDirectory());
+            mappingLintTask.dependsOn(task);
+        });
 
         tasks.create(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class);
         tasks.create(DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class);
