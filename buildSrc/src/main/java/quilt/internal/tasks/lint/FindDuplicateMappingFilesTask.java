@@ -21,8 +21,8 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
     public static final String TASK_NAME = "findDuplicateMappingFiles";
 
     private static final Logger LOGGER = Logging.getLogger(FindDuplicateMappingFilesTask.class);
-    private static final Pattern MINECRAFT_CLASS = Pattern.compile("^CLASS net/minecraft/(?:\\w+/)*\\w+ ");
-    private static final Pattern BLAZE_CLASS = Pattern.compile("^CLASS com/mojang/blaze3d/(?:\\w+/)*\\w+ ");
+    private static final Pattern MINECRAFT_CLASS = Pattern.compile("^CLASS net/minecraft/(?:\\w+/)*\\w+(?= )");
+    private static final Pattern BLAZE_CLASS = Pattern.compile("^CLASS com/mojang/blaze3d/(?:\\w+/)*\\w+(?= )");
 
     @InputDirectory
     public abstract DirectoryProperty getMappingDirectory();
