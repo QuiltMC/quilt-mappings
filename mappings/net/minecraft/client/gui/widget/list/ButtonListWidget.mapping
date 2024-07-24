@@ -1,14 +1,55 @@
 CLASS net/minecraft/unmapped/C_pjaxgicy net/minecraft/client/gui/widget/list/ButtonListWidget
+	FIELD f_kebzqaty ROW_HEIGHT I
+	FIELD f_lzehroku parent Lnet/minecraft/unmapped/C_icuipuvj;
+	FIELD f_qufreasb ROW_WIDTH I
+	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;ILnet/minecraft/unmapped/C_icuipuvj;)V
+		ARG 1 client
+		ARG 2 width
+		ARG 3 parent
 	METHOD m_flltvmay getButtonFor (Lnet/minecraft/unmapped/C_vbibxkxv;)Lnet/minecraft/unmapped/C_kpvuxmkp;
 		ARG 1 option
 	METHOD m_gjwvjmwf getHoveredButton (DD)Ljava/util/Optional;
 		ARG 1 mouseX
 		ARG 3 mouseY
+	METHOD m_mqwjpbxp addEntry (Lnet/minecraft/unmapped/C_kpvuxmkp;Lnet/minecraft/unmapped/C_kpvuxmkp;)V
+		ARG 1 first
+		ARG 2 second
+	METHOD m_nwbmvhkb updateOptions ()V
 	METHOD m_ukioorfz addEntries ([Lnet/minecraft/unmapped/C_vbibxkxv;)V
 		ARG 1 options
+	METHOD m_wooylxsq addEntries (Ljava/util/List;)V
+		COMMENT Adds every widget to this {@code ButtonListWidget}, in columns of width two.
+		COMMENT This means that for every 0 <= n < ceil(widgets.size() / 2), a row will created,
+		COMMENT as [widgets[2n], widgets[2n + 1]] or optionally without the second if it does not exist.
+		ARG 1 widgets
+			COMMENT an interlaced list of buttons: every two buttons will be on its own row
 	METHOD m_xpaixlqh addSingleOptionEntry (Lnet/minecraft/unmapped/C_vbibxkxv;)V
 		ARG 1 option
+	CLASS C_getdwrzm OptionButtonEntry
+		FIELD f_ehdydpno widgetsByOption Ljava/util/Map;
+		METHOD <init> (Ljava/util/Map;Lnet/minecraft/unmapped/C_icuipuvj;)V
+			ARG 1 widgetsByOption
+			ARG 2 parent
+		METHOD m_novfgxfm create (Lnet/minecraft/unmapped/C_lscptbhn;Lnet/minecraft/unmapped/C_vbibxkxv;Lnet/minecraft/unmapped/C_icuipuvj;)Lnet/minecraft/unmapped/C_pjaxgicy$C_getdwrzm;
+			ARG 0 options
+			ARG 1 option
+			ARG 2 parent
+		METHOD m_oqortdmt create (Lnet/minecraft/unmapped/C_lscptbhn;Lnet/minecraft/unmapped/C_vbibxkxv;Lnet/minecraft/unmapped/C_vbibxkxv;Lnet/minecraft/unmapped/C_icuipuvj;)Lnet/minecraft/unmapped/C_pjaxgicy$C_getdwrzm;
+			ARG 0 options
+			ARG 1 firstOption
+			ARG 2 secondOption
+			ARG 3 parent
 	CLASS C_vvyqpynq ButtonEntry
 		FIELD f_iqnsrxgw buttons Ljava/util/List;
+		FIELD f_lsygkdkg parent Lnet/minecraft/unmapped/C_wrmtlwqx;
+		FIELD f_vnudhqjh WIDTH_PLUS_PADDING I
+		METHOD <init> (Ljava/util/List;Lnet/minecraft/unmapped/C_wrmtlwqx;)V
+			ARG 1 buttons
+			ARG 2 parent
 		METHOD m_javwjodi create (Ljava/util/List;Lnet/minecraft/unmapped/C_wrmtlwqx;)Lnet/minecraft/unmapped/C_pjaxgicy$C_vvyqpynq;
+			ARG 0 buttons
+			ARG 1 parent
 		METHOD m_wlrqgkxe create (Lnet/minecraft/unmapped/C_kpvuxmkp;Lnet/minecraft/unmapped/C_kpvuxmkp;Lnet/minecraft/unmapped/C_wrmtlwqx;)Lnet/minecraft/unmapped/C_pjaxgicy$C_vvyqpynq;
+			ARG 0 first
+			ARG 1 second
+			ARG 2 parent

@@ -2,10 +2,16 @@ CLASS net/minecraft/unmapped/C_bkzzefxr net/minecraft/client/gui/hud/debug/Abstr
 	FIELD f_dehsgucw CHART_HEIGHT I
 	FIELD f_kumhtbzz TEXT_COLOR I
 		COMMENT The color of the text used in the chart. {@code e0e0e0} as a hex color code.
+	FIELD f_mjzphdnx log Lnet/minecraft/unmapped/C_pbzqjmim;
 	FIELD f_roauydkh LINE_WIDTH I
+	FIELD f_txanrslq textRenderer Lnet/minecraft/unmapped/C_mavozmpp;
+	METHOD <init> (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_pbzqjmim;)V
+		ARG 1 textRenderer
+		ARG 2 log
 	METHOD m_ctbaldbu lineLength (D)I
 		ARG 1 value
 	METHOD m_jisutmkq drawBar (Lnet/minecraft/unmapped/C_sedilmty;III)V
+		ARG 1 graphics
 		ARG 2 y
 		ARG 3 x
 		ARG 4 index
@@ -17,14 +23,17 @@ CLASS net/minecraft/unmapped/C_bkzzefxr net/minecraft/client/gui/hud/debug/Abstr
 		COMMENT @return the width of the debug chart: {@code width} bounded by a maximum width.
 		ARG 1 width
 	METHOD m_qtkhwlsp drawOverlayBar (Lnet/minecraft/unmapped/C_sedilmty;III)V
+		ARG 1 graphics
 		ARG 2 y
 		ARG 3 x
 		ARG 4 index
 	METHOD m_rjcqkpru drawLabel (Lnet/minecraft/unmapped/C_sedilmty;Ljava/lang/String;II)V
+		ARG 1 graphics
 		ARG 2 label
 		ARG 3 x
 		ARG 4 y
 	METHOD m_sdtiatjq renderChart (Lnet/minecraft/unmapped/C_sedilmty;II)V
+		ARG 1 graphics
 		ARG 2 x
 		ARG 3 width
 	METHOD m_srllwucw getSampleColor (DDIDIDI)I
@@ -45,10 +54,12 @@ CLASS net/minecraft/unmapped/C_bkzzefxr net/minecraft/client/gui/hud/debug/Abstr
 			COMMENT the color representing a high sample value
 	METHOD m_tsrwlybb renderExtras (Lnet/minecraft/unmapped/C_sedilmty;III)V
 		COMMENT Renders additional labels and lines, such as labelled thresholds on the chart.
+		ARG 1 graphics
 		ARG 2 x
 		ARG 3 lineWidth
 		ARG 4 y
 	METHOD m_wfnvdedg drawTotalBar (Lnet/minecraft/unmapped/C_sedilmty;III)V
+		ARG 1 graphics
 		ARG 2 y
 		ARG 3 x
 		ARG 4 index

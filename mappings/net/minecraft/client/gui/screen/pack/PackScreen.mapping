@@ -7,9 +7,13 @@ CLASS net/minecraft/unmapped/C_vndksvfp net/minecraft/client/gui/screen/pack/Pac
 	FIELD f_ivsugvyu organizer Lnet/minecraft/unmapped/C_ufhpfkse;
 	FIELD f_jngxtjhn iconTextures Ljava/util/Map;
 	FIELD f_llcgdmwx LIST_WIDTH I
+	FIELD f_mhayfzdv AVAILABLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_mmxnyukg DROP_INFO Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_mwnaazqk availablePackList Lnet/minecraft/unmapped/C_redlhkpq;
 	FIELD f_pzllyobu selectedPackList Lnet/minecraft/unmapped/C_redlhkpq;
+	FIELD f_rxpvukhn SELECTED Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_tyoenvuz layout Lnet/minecraft/unmapped/C_cqroimpa;
+	FIELD f_ubudzntu OPEN_FOLDER Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_veqjrsdd refreshTimeout J
 	FIELD f_wqircovs directoryWatcher Lnet/minecraft/unmapped/C_vndksvfp$C_jmzzpyue;
 	FIELD f_zmqvyzmz UNKNOWN_PACK Lnet/minecraft/unmapped/C_ncpywfca;
@@ -20,6 +24,7 @@ CLASS net/minecraft/unmapped/C_vndksvfp net/minecraft/client/gui/screen/pack/Pac
 		ARG 4 title
 	METHOD m_aeflgnzp (Ljava/nio/file/Path;Ljava/nio/file/Path;Lorg/apache/commons/lang3/mutable/MutableBoolean;Ljava/nio/file/Path;)V
 		ARG 0 src
+		ARG 3 childPath
 	METHOD m_atlijxyn (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_awqzahkl copyPacks (Lnet/minecraft/unmapped/C_ayfeobid;Ljava/util/List;Ljava/nio/file/Path;)V
@@ -35,15 +40,25 @@ CLASS net/minecraft/unmapped/C_vndksvfp net/minecraft/client/gui/screen/pack/Pac
 	METHOD m_dzbyzahz loadPackIcon (Lnet/minecraft/unmapped/C_rglkduer;Lnet/minecraft/unmapped/C_lvnjxuwi;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 textureManager
 		ARG 2 resourcePackProfile
+	METHOD m_fyscnfrd (Lnet/minecraft/unmapped/C_lvnjxuwi;Ljava/lang/String;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 2 name
 	METHOD m_gnvbxkeb closeDirectoryWatcher ()V
 	METHOD m_hzqrsuug updatePackLists ()V
 	METHOD m_ixpydxed deselectAll ()V
 	METHOD m_kdjmhvkp updateFocus (Lnet/minecraft/unmapped/C_redlhkpq;)V
 		ARG 1 packList
+	METHOD m_kfcmbvxy (Lnet/minecraft/unmapped/C_vndksvfp;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
+		ARG 1 widget
+	METHOD m_ogxokewg (Ljava/nio/file/Path;Lorg/apache/commons/lang3/mutable/MutableBoolean;Ljava/nio/file/Path;)V
+		ARG 2 path
 	METHOD m_royhqmpl getPackIconTexture (Lnet/minecraft/unmapped/C_lvnjxuwi;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 packProfile
 	METHOD m_tkrwvtas (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
+	METHOD m_wbypmibe (Ljava/util/List;Z)V
+		ARG 2 confirmed
+	METHOD m_xnsamvdy (Lnet/minecraft/unmapped/C_redlhkpq;Ljava/lang/String;Lnet/minecraft/unmapped/C_ufhpfkse$C_grqcamjx;)V
+		ARG 3 pack
 	CLASS C_jmzzpyue DirectoryWatcher
 		FIELD f_dwpaobqq path Ljava/nio/file/Path;
 		FIELD f_xxhxyzde watchService Ljava/nio/file/WatchService;

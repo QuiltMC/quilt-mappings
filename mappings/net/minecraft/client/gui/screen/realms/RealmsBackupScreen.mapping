@@ -1,6 +1,8 @@
 CLASS net/minecraft/unmapped/C_jyywrsnb net/minecraft/client/gui/screen/realms/RealmsBackupScreen
 	FIELD f_hczynxkr UPLOADED Ljava/lang/String;
 	FIELD f_jbztxfsz downloadButton Lnet/minecraft/unmapped/C_buwziidm;
+	FIELD f_nezwzbvs DOWNLOAD Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_pdvzxrnz SPACING I
 	FIELD f_phdtrkiq BACKUPS Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_qflvecxn LOGGER Lorg/slf4j/Logger;
 	FIELD f_qysdulmb CHANGES_BUTTON_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -9,13 +11,20 @@ CLASS net/minecraft/unmapped/C_jyywrsnb net/minecraft/client/gui/screen/realms/R
 	FIELD f_vogabwjf backups Ljava/util/List;
 	FIELD f_xeaaapxl NO_BACKUPS Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_yclnmkxw slotId I
+	FIELD f_yeljvgcb layout Lnet/minecraft/unmapped/C_cqroimpa;
 	FIELD f_ymzumhza parent Lnet/minecraft/unmapped/C_knluxkhz;
 	FIELD f_ynjvujui RESTORE_BUTTON_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_znkegyiy backupsList Lnet/minecraft/unmapped/C_jyywrsnb$C_kneakrny;
 	METHOD <init> (Lnet/minecraft/unmapped/C_knluxkhz;Lnet/minecraft/unmapped/C_pwmwypfb;I)V
 		ARG 1 parent
 		ARG 2 serverData
 		ARG 3 slotId
+	METHOD m_bmyjiqdi (Lnet/minecraft/unmapped/C_pzklyvtm;)V
+		ARG 1 button
+	METHOD m_fauaiplw (Lnet/minecraft/unmapped/C_jyywrsnb;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
+		ARG 1 widget
 	METHOD m_qqxmlbzv downloadClicked ()V
+	METHOD m_uiexctln startBackupFetch ()V
 	METHOD m_wyoanioh (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_zqolbjnm (Lnet/minecraft/unmapped/C_buwziidm;)V
@@ -34,9 +43,21 @@ CLASS net/minecraft/unmapped/C_jyywrsnb net/minecraft/client/gui/screen/realms/R
 		FIELD f_zdmwsdfw children Ljava/util/List;
 		METHOD <init> (Lnet/minecraft/unmapped/C_jyywrsnb;Lnet/minecraft/unmapped/C_iyfhccqr;)V
 			ARG 2 backup
+		METHOD m_cdqahcod (Lnet/minecraft/unmapped/C_pzklyvtm;)V
+			ARG 1 button
 		METHOD m_eflfzqqe addChange (Ljava/lang/String;)V
 			ARG 1 metadataKey
+		METHOD m_gbtrdhpj (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_npqneive;
+			ARG 1 textSupplier
 		METHOD m_geqrcqvo updateChangeList (Lnet/minecraft/unmapped/C_iyfhccqr;)V
 			ARG 1 backup
+		METHOD m_hdeduczx (Lnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 1 button
+		METHOD m_igmscjbz (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_npqneive;
+			ARG 1 textSupplier
+		METHOD m_ojxypplh showRestorePrompt ()V
 		METHOD m_sjkwqmgw getMediumDatePresentation (Ljava/util/Date;)Ljava/lang/String;
 			ARG 1 lastModifiedDate
+		METHOD m_vamrbvmo getLastModifiedDateString ()Ljava/lang/String;
+		METHOD m_vtkoulva (Lnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 1 button

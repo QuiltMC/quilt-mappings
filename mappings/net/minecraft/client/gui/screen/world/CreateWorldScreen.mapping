@@ -5,12 +5,14 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 	FIELD f_hqkhcpia header Lnet/minecraft/unmapped/C_mbxnkehf;
 	FIELD f_htfhyyfx packManager Lnet/minecraft/unmapped/C_dqfyacfy;
 	FIELD f_hxpwlzvr ENTER_WORLD_NAME Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_lzksulbp layout Lnet/minecraft/unmapped/C_cqroimpa;
 	FIELD f_ntbjtmej TAB_COLUMN_WIDTH I
 	FIELD f_puiuugkf EXPERIMENTS Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_puwignwj HORIZONTAL_BUTTON_SPACING I
 	FIELD f_rsmdhran worldCreator Lnet/minecraft/unmapped/C_hypraqfe;
 	FIELD f_toffzjsn parent Lnet/minecraft/unmapped/C_wrmtlwqx;
 	FIELD f_trqmzvlv TEMP_DIR_PREFIX Ljava/lang/String;
+	FIELD f_ulkqfmxe TAB_HEADER_BACKGROUND Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_vqvehnjz LOGGER Lorg/slf4j/Logger;
 	FIELD f_vsdozuic VERTICAL_BUTTON_SPACING I
 	FIELD f_vvsnyqpp ALLOW_COMMANDS Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -41,6 +43,8 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 		ARG 1 name
 	METHOD m_dejxfssq (Lnet/minecraft/unmapped/C_dqfyacfy;)V
 		ARG 1 manager
+	METHOD m_drptqznx (Ljava/util/function/Consumer;Z)V
+		ARG 2 confirmed
 	METHOD m_evbwddxa openDataPacksScreen (Lnet/minecraft/unmapped/C_yknpgzdr;)V
 		ARG 1 settings
 	METHOD m_evhcwytp createDefaultLoadConfig (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;)Lnet/minecraft/unmapped/C_kjxfcecs$C_kculhjuh;
@@ -48,10 +52,17 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 		ARG 1 settings
 	METHOD m_ficgwtev createWorldInfo (Z)Lnet/minecraft/unmapped/C_tmnkpzlg;
 		ARG 1 debugWorld
+	METHOD m_fiszvdug (Lnet/minecraft/unmapped/C_njsjipmy;)Lnet/minecraft/unmapped/C_njsjipmy;
+		ARG 0 context
 	METHOD m_fqtykenm clearDataPackTempDir ()V
 	METHOD m_fsncvugn createStorageSession ()Ljava/util/Optional;
 	METHOD m_hmlmjfjy (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
+	METHOD m_ihwuesvr (Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+		ARG 2 childPath
+	METHOD m_jygzlswq (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Lnet/minecraft/unmapped/C_bcpxdrik;Lnet/minecraft/unmapped/C_ibkofvzc$C_mxqwwbun;)Lnet/minecraft/unmapped/C_njsjipmy;
+		ARG 2 registryManager
+		ARG 3 creationSettings
 	METHOD m_kfiwihuq copyDataPack (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		ARG 0 srcFolder
 		ARG 1 destFolder
@@ -65,27 +76,44 @@ CLASS net/minecraft/unmapped/C_ibkofvzc net/minecraft/client/gui/screen/world/Cr
 		ARG 2 manager
 		ARG 3 lifecycle
 	METHOD m_oitudqud onCloseScreen ()V
+	METHOD m_oolkgqdp (Ljava/lang/String;)Ljava/lang/IllegalStateException;
+		ARG 0 errorMessage
 	METHOD m_oopecwxc (Lnet/minecraft/unmapped/C_kpvuxmkp;)V
 		ARG 1 widget
+	METHOD m_pcjsztky (Ljava/nio/file/Path;)V
+		ARG 0 path
 	METHOD m_pcylhjnh getWorldCreator ()Lnet/minecraft/unmapped/C_hypraqfe;
 	METHOD m_qcsfhvrb (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;Lnet/minecraft/unmapped/C_bcpxdrik;Lnet/minecraft/unmapped/C_ibkofvzc$C_mxqwwbun;)Lnet/minecraft/unmapped/C_njsjipmy;
+		ARG 0 resourceManager
+		ARG 1 resources
 		ARG 2 registryManager
 		ARG 3 worldCreationSettings
+	METHOD m_rfejkzfn (Ljava/nio/file/Path;Ljava/nio/file/Path;)Z
+		ARG 1 childPath
 	METHOD m_sajvmluy open (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 0 client
 		ARG 1 parent
 	METHOD m_sgacyucm showMessage (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 0 client
 		ARG 1 message
+	METHOD m_spzhhpkv (Lnet/minecraft/unmapped/C_kjxfcecs$C_hkmknvtj;)Lnet/minecraft/unmapped/C_kjxfcecs$C_ijyqofsr;
+		ARG 1 context
 	METHOD m_tlckpqyc (Lnet/minecraft/unmapped/C_kjxfcecs$C_hkmknvtj;)Lnet/minecraft/unmapped/C_kjxfcecs$C_ijyqofsr;
 		ARG 0 context
 	METHOD m_udkaeyin (Lcom/mojang/serialization/DynamicOps;Lcom/google/gson/JsonElement;)Lcom/mojang/serialization/DataResult;
 		ARG 1 encodedOptions
 	METHOD m_umnykrgq getScannedDataPack (Lnet/minecraft/unmapped/C_yknpgzdr;)Lcom/mojang/datafixers/util/Pair;
 		ARG 1 settings
+	METHOD m_uvqcxsuo (Ljava/nio/file/Path;)Z
+		ARG 1 childPath
 	METHOD m_vfaqeuwk (Lnet/minecraft/unmapped/C_ibkofvzc;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
 		ARG 1 widget
+	METHOD m_vjzwlndv (Ljava/util/function/Consumer;Ljava/lang/Void;Ljava/lang/Throwable;)Ljava/lang/Object;
+		ARG 2 result
+		ARG 3 error
 	METHOD m_xdqbchlc createWorld ()V
+	METHOD m_ybclynik (Lorg/apache/commons/lang3/mutable/MutableObject;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+		ARG 2 childPAth
 	METHOD m_ycpfvuja getDataPackTempDir ()Ljava/nio/file/Path;
 	METHOD m_zeghowdv applyDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;ZLjava/util/function/Consumer;)V
 		ARG 1 dataPackManager

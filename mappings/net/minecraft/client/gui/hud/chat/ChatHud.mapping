@@ -32,6 +32,7 @@ CLASS net/minecraft/unmapped/C_uedmlrsy net/minecraft/client/gui/hud/chat/ChatHu
 	METHOD m_bzentyiw addMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 message
 	METHOD m_csgqmavu tickDeletionQueue ()V
+	METHOD m_doerxbdt resetVisibleMessages ()V
 	METHOD m_dslipgxb hasSelectedMessageTag (DLnet/minecraft/unmapped/C_skejqrts$C_ozgyzxme;Lnet/minecraft/unmapped/C_bzcwstys;)Z
 		ARG 1 x
 		ARG 3 line
@@ -49,13 +50,18 @@ CLASS net/minecraft/unmapped/C_uedmlrsy net/minecraft/client/gui/hud/chat/ChatHu
 	METHOD m_gnxqpnev getMessageEndAt (DD)I
 		ARG 1 x
 		ARG 3 y
+	METHOD m_ieibwato addMessage (Lnet/minecraft/unmapped/C_skejqrts;)V
+		ARG 1 message
 	METHOD m_itcpovxa toChatLineX (D)D
 		ARG 1 x
+	METHOD m_iudfmgeq toChatState ()Lnet/minecraft/unmapped/C_uedmlrsy$C_frlehikz;
 	METHOD m_kyfuayab (ILnet/minecraft/unmapped/C_uedmlrsy$C_hrdqyvbn;)Z
 		ARG 2 message
 	METHOD m_lqhjyrrj createDelayedMessageDeletion (Lnet/minecraft/unmapped/C_shphkjbi;)Lnet/minecraft/unmapped/C_uedmlrsy$C_hrdqyvbn;
 		ARG 1 signature
 	METHOD m_maliiwol updateDeletionQueue ()V
+	METHOD m_mqmrcyqk addVisibleMessage (Lnet/minecraft/unmapped/C_skejqrts;)V
+		ARG 1 message
 	METHOD m_mrpbvdcd scroll (I)V
 		ARG 1 lines
 	METHOD m_nvzrqfsc getWidth ()I
@@ -70,6 +76,7 @@ CLASS net/minecraft/unmapped/C_uedmlrsy net/minecraft/client/gui/hud/chat/ChatHu
 	METHOD m_rejamyax getWidth (D)I
 		ARG 0 widthOption
 	METHOD m_rlhqypho logChatMessage (Lnet/minecraft/unmapped/C_skejqrts;)V
+		ARG 1 message
 	METHOD m_sklddpff toChatLineY (D)D
 		ARG 1 y
 	METHOD m_tornqfrt hideMessage (Lnet/minecraft/unmapped/C_shphkjbi;)V
@@ -92,6 +99,18 @@ CLASS net/minecraft/unmapped/C_uedmlrsy net/minecraft/client/gui/hud/chat/ChatHu
 	METHOD m_yesxfqiq getMessageAt (DD)I
 		ARG 1 x
 		ARG 3 y
+	METHOD m_zbmekjfc restoreChatState (Lnet/minecraft/unmapped/C_uedmlrsy$C_frlehikz;)V
+		ARG 1 state
+	CLASS C_frlehikz ChatState
+		FIELD f_jyjfvysh deletionQueue Ljava/util/List;
+		FIELD f_mrnjixpt messageHistory Ljava/util/List;
+		FIELD f_wujuarvh messages Ljava/util/List;
+		METHOD <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+			ARG 1 messages
+			ARG 2 messageHistory
+			ARG 3 deletionQueue
 	CLASS C_hrdqyvbn DelayedMessageDeletion
 		FIELD f_ndhmikxf deletionTime I
+		FIELD f_oumrslbs signature Lnet/minecraft/unmapped/C_shphkjbi;
 		METHOD m_bqevvhtx deletionTime ()I
+		METHOD m_xwjipzci signature ()Lnet/minecraft/unmapped/C_shphkjbi;
