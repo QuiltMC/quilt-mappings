@@ -21,8 +21,8 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
     public static final String TASK_NAME = "findDuplicateMappingFiles";
 
     private static final Logger LOGGER = Logging.getLogger(FindDuplicateMappingFilesTask.class);
-    private static final Pattern MINECRAFT_CLASS = Pattern.compile("^CLASS net/minecraft/(?:\\w+/)*\\w+(?= )");
-    private static final Pattern BLAZE_CLASS = Pattern.compile("^CLASS com/mojang/blaze3d/(?:\\w+/)*\\w+(?= )");
+    private static final Pattern EXPECTED_CLASS =
+        Pattern.compile("^CLASS (?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+(?= )");
 
     @InputDirectory
     public abstract DirectoryProperty getMappingDirectory();
@@ -146,16 +146,9 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
     }
 
     private static Optional<String> getClassMatch(String firstLine) {
-        final var minecraftClassMatcher = MINECRAFT_CLASS.matcher(firstLine);
-        if (minecraftClassMatcher.find()) {
-            return Optional.of(minecraftClassMatcher.group(0));
-        } else {
-            final var blazeClassMatcher = BLAZE_CLASS.matcher(firstLine);
-            if (blazeClassMatcher.find()) {
-                return Optional.of(blazeClassMatcher.group(0));
-            } else {
-                return Optional.empty();
-            }
-        }
+        final var expectedClassMatcher = EXPECTED_CLASS.matcher(firstLine);
+        return expectedClassMatcher.find() ?
+            Optional.of(expectedClassMatcher.group(0)) :
+            Optional.empty();
     }
 }
