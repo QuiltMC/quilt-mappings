@@ -2,22 +2,22 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	COMMENT In charge of shaping, adding biome specific surface blocks, and carving chunks,
 	COMMENT as well as populating the generated chunks with {@linkplain net.minecraft.world.gen.feature.Feature features} and {@linkplain net.minecraft.entity.Entity entities}.
 	COMMENT Biome placement starts here, however all vanilla and most modded chunk generators delegate this to a {@linkplain net.minecraft.world.biome.source.BiomeSource biome source}.
-	FIELD f_acfecigk populationSource Lnet/minecraft/unmapped/C_ajguowya;
+	FIELD f_acfecigk biomeSource Lnet/minecraft/unmapped/C_ajguowya;
 		COMMENT Used to control the population step without replacing the actual biome that comes from the original {@link BiomeSource}.
 		COMMENT <p>
 		COMMENT This is used by {@link FlatChunkGenerator} to overwrite biome properties like whether lakes generate,
 		COMMENT while preserving the original biome identifier.
+	FIELD f_evyeazfo featureSteps Ljava/util/function/Supplier;
 	FIELD f_tgxfgajp settingsGetter Ljava/util/function/Function;
 	FIELD f_vzeswpuk CODEC Lcom/mojang/serialization/Codec;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;)V
-		ARG 1 biomeSource
 	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;Ljava/util/function/Function;)V
-		ARG 1 populationSource
 		ARG 2 generationSettingsGetter
 	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
 	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jibygqpu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zxhjfyir;)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
 		ARG 1 registryManager
+		ARG 2 concentricCalculator
 		ARG 3 structureManager
 		ARG 4 chunk
 		ARG 5 templateManager
@@ -69,13 +69,30 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 chunk
 		ARG 2 sectionPos
 		ARG 3 feature
+	METHOD m_gpjywhgs (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_efiavfys;)Z
+		ARG 2 start
+	METHOD m_guqvnsnd (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_efiavfys;)Z
+		ARG 1 start
 	METHOD m_gvpevbgi checkNotReferenced (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_efiavfys;)Z
 		ARG 0 structureManager
 		ARG 1 start
+	METHOD m_gxxzcexz find (Ljava/util/Set;Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_rhdulivw;ZLnet/minecraft/unmapped/C_dzcnonip;Lnet/minecraft/unmapped/C_ynrszrtu;)Lcom/mojang/datafixers/util/Pair;
+		ARG 0 features
+		ARG 2 structureManager
+		ARG 3 skipExistingChunks
+		ARG 4 placement
+		ARG 5 pos
 	METHOD m_gzmnagwo (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_qbjpvmph;
 		ARG 0 biome
-	METHOD m_hfetlfug (Ljava/util/List;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_hfetlfug addDebugLines (Ljava/util/List;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 1 lines
 		ARG 2 randomState
+	METHOD m_hwpfjgka (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_jibygqpu;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 9 structureSet
+	METHOD m_iinbgeei (Lnet/minecraft/unmapped/C_dzcnonip;)Ljava/util/Set;
+		ARG 0 placement
+	METHOD m_inhqqvlj (Lit/unimi/dsi/fastutil/ints/IntSet;Lnet/minecraft/unmapped/C_ukunbkuo$C_onfbwplh;Lnet/minecraft/unmapped/C_jewbaoib;)V
+		ARG 2 feature
 	METHOD m_jbuktzxf getHeightOnGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		ARG 1 x
 		ARG 2 z
@@ -87,12 +104,28 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 2 blender
 		ARG 3 structureManager
 		ARG 4 chunk
+	METHOD m_jnigshha (Lnet/minecraft/unmapped/C_quklzgtb;)Ljava/lang/Integer;
+		ARG 0 feature
 	METHOD m_jnrbhhio findFirst (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_odfnijdo;Lnet/minecraft/unmapped/C_hynzadkk;IZ)Lcom/mojang/datafixers/util/Pair;
 		ARG 2 structures
 		ARG 4 range
-	METHOD m_psbleumj findStructures (Ljava/util/Set;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_pwqsutzz;)Lcom/mojang/datafixers/util/Pair;
+		ARG 5 skipExistingChunks
+	METHOD m_juqkdmxz validateFeatureOrder ()V
+	METHOD m_locgzhcn findFirst (Ljava/util/Set;Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_rhdulivw;IIIZJLnet/minecraft/unmapped/C_cznbjngb;)Lcom/mojang/datafixers/util/Pair;
+		ARG 0 features
+		ARG 2 structureManager
+		ARG 3 chunkX
+		ARG 4 chunkZ
+		ARG 5 range
+		ARG 6 skipExistingChunks
+		ARG 7 seed
+		ARG 9 randomPlacement
+	METHOD m_pcreqlep (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_zorcemxg;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_efiavfys;)V
+		ARG 6 start
+	METHOD m_psbleumj findConcentricStructures (Ljava/util/Set;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_hynzadkk;ZLnet/minecraft/unmapped/C_pwqsutzz;)Lcom/mojang/datafixers/util/Pair;
 		ARG 1 structures
 		ARG 3 structureManager
+		ARG 5 skipExistingChunks
 		ARG 6 placement
 	METHOD m_puoyodgd getEntitySpawnList (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_ormqdxci;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_uymytghv;
 		ARG 1 biome
@@ -107,6 +140,8 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 world
 		ARG 2 structureManager
 		ARG 3 chunk
+	METHOD m_qhpminko (Lorg/apache/commons/lang3/mutable/MutableBoolean;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_efiavfys;)V
+		ARG 2 start
 	METHOD m_ruxnirnc getWorldHeight ()I
 	METHOD m_taborzul getSeaLevel ()I
 	METHOD m_ufytgbmf carve (Lnet/minecraft/unmapped/C_ezymcfey;JLnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_txmmiamu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rdrmebyw$C_smrpgmrn;)V

@@ -14,8 +14,12 @@ CLASS net/minecraft/unmapped/C_iwuefjcy net/minecraft/world/gen/foliage/FoliageP
 		ARG 6 giantTrunk
 	METHOD m_cwekonud placeFoliageBlock (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_iwuefjcy$C_pwcqvmho;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 0 world
+		ARG 1 placer
 		ARG 3 config
 		ARG 4 pos
+	METHOD m_fylecjal createFoliage (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_iwuefjcy$C_pwcqvmho;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;ILnet/minecraft/unmapped/C_iwuefjcy$C_uditupge;II)V
+		ARG 4 config
+		ARG 6 node
 	METHOD m_gnnnomut getRandomOffset (Lnet/minecraft/unmapped/C_rlomrsco;)I
 	METHOD m_hjzzwqgw getRandomHeight (Lnet/minecraft/unmapped/C_rlomrsco;ILnet/minecraft/unmapped/C_zthydktd;)I
 		ARG 2 trunkHeight
@@ -23,6 +27,7 @@ CLASS net/minecraft/unmapped/C_iwuefjcy net/minecraft/world/gen/foliage/FoliageP
 	METHOD m_jhbkooww generateSquare (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_iwuefjcy$C_pwcqvmho;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;Lnet/minecraft/unmapped/C_hynzadkk;IIZ)V
 		COMMENT Generates a square of leaves with the given radius. Sub-classes can use the method {@code isInvalidForLeaves} to exclude certain positions, such as corners.
 		ARG 1 world
+		ARG 2 placer
 		ARG 4 config
 		ARG 5 centerPos
 		ARG 6 radius
@@ -33,8 +38,22 @@ CLASS net/minecraft/unmapped/C_iwuefjcy net/minecraft/world/gen/foliage/FoliageP
 	METHOD m_lenjfbah getRandomRadius (Lnet/minecraft/unmapped/C_rlomrsco;I)I
 		ARG 2 baseHeight
 	METHOD m_lnntehfe getType ()Lnet/minecraft/unmapped/C_nqbkkupl;
+	METHOD m_njrdnobv placeFoliage (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_iwuefjcy$C_pwcqvmho;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;FLnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)Z
+		ARG 4 chance
+	METHOD m_nquaqgua createFoliage (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_iwuefjcy$C_pwcqvmho;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;ILnet/minecraft/unmapped/C_iwuefjcy$C_uditupge;III)V
+		ARG 2 placer
+		ARG 4 config
+		ARG 5 trunkHeight
+		ARG 6 node
+		ARG 7 foliageHeight
+		ARG 8 radius
+		ARG 9 offset
 	METHOD m_nstjonfo (Lnet/minecraft/unmapped/C_iwuefjcy;)Lnet/minecraft/unmapped/C_macfejbg;
 		ARG 0 placer
+	METHOD m_sydehvtv generateSquareWithHangingChances (Lnet/minecraft/unmapped/C_agsukcmb;Lnet/minecraft/unmapped/C_iwuefjcy$C_pwcqvmho;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_zthydktd;Lnet/minecraft/unmapped/C_hynzadkk;IIZFF)V
+		ARG 2 placer
+		ARG 9 hangingChance
+		ARG 10 hangingExtensionChance
 	METHOD m_uogkmekr (Lnet/minecraft/unmapped/C_iwuefjcy;)Lnet/minecraft/unmapped/C_macfejbg;
 		ARG 0 placer
 	METHOD m_uuoemfyq isInvalidForLeaves (Lnet/minecraft/unmapped/C_rlomrsco;IIIIZ)Z
@@ -44,6 +63,9 @@ CLASS net/minecraft/unmapped/C_iwuefjcy net/minecraft/world/gen/foliage/FoliageP
 		ARG 4 dz
 		ARG 5 radius
 		ARG 6 giantTrunk
+	CLASS C_pwcqvmho Placer
+		METHOD m_mrfeskow hasPlaced (Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		METHOD m_sdsuafsx placeBlock (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 	CLASS C_uditupge TreeNode
 		COMMENT A point on a tree to generate foliage around
 		FIELD f_hmmybfiv center Lnet/minecraft/unmapped/C_hynzadkk;
