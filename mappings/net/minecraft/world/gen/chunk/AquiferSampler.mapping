@@ -18,6 +18,7 @@ CLASS net/minecraft/unmapped/C_jpghdzxc net/minecraft/world/gen/chunk/AquiferSam
 		FIELD f_bgfzyqng fluidLevelSpreadNoise Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_bphghdum globalFluidPicker Lnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;
 		FIELD f_cbtggwbu Y_SEPARATION I
+		FIELD f_cqfdgzde erosion Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_euupitog Z_RANGE I
 		FIELD f_fguoiqqa startY I
 		FIELD f_goxbdjkm sizeZ I
@@ -34,6 +35,7 @@ CLASS net/minecraft/unmapped/C_jpghdzxc net/minecraft/world/gen/chunk/AquiferSam
 		FIELD f_qcbbphuq SURFACE_SAMPLING_OFFSETS_IN_CHUNKS [[I
 		FIELD f_qesflmcm FLOWING_UPDATE_SIMILARITY D
 		FIELD f_qgivfmbz X_SPACING I
+		FIELD f_ruekzlqf depth Lnet/minecraft/unmapped/C_kzwapyud;
 		FIELD f_sliohmag aquiferCache [Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;
 		FIELD f_sveovhqt sizeX I
 		FIELD f_usvvhfiv startX I
@@ -41,12 +43,24 @@ CLASS net/minecraft/unmapped/C_jpghdzxc net/minecraft/world/gen/chunk/AquiferSam
 		FIELD f_xxtmsvwx MAX_REASONABLE_DISTANCE_TO_AQUIFER_CENTER I
 		FIELD f_yrbxxmpa X_RANGE I
 		FIELD f_zbibbvvp fluidLevelFloodednessNoise Lnet/minecraft/unmapped/C_kzwapyud;
+		METHOD <init> (Lnet/minecraft/unmapped/C_rvjywqnu;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_fpiyqmft;Lnet/minecraft/unmapped/C_coqzjjrt;IILnet/minecraft/unmapped/C_jpghdzxc$C_vlyfprqt;)V
+			ARG 2 pos
+			ARG 3 noise
+			ARG 5 startY
+			ARG 6 endY
 		METHOD m_dwpfcsve getLocalZ (I)I
 			ARG 1 z
 		METHOD m_egmnmryf calculateDensity (Lnet/minecraft/unmapped/C_kzwapyud$C_rbrbrmhy;Lorg/apache/commons/lang3/mutable/MutableDouble;Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;)D
+			ARG 1 context
 			ARG 2 barrierNoise
 			ARG 3 firstFluidStatus
 			ARG 4 secondFluidStatus
+		METHOD m_eqgvzofh computeFluid (III)Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;
+		METHOD m_jornppzz computeRandomFluidLevel (IIII)I
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 defaultFluidLevel
 		METHOD m_muqvzfyx getWaterLevel (J)Lnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;
 			ARG 1 pos
 		METHOD m_nfqzoayk getLocalX (I)I
@@ -57,6 +71,16 @@ CLASS net/minecraft/unmapped/C_jpghdzxc net/minecraft/world/gen/chunk/AquiferSam
 			ARG 3 z
 		METHOD m_pdkrkukd getLocalY (I)I
 			ARG 1 y
+		METHOD m_pojobhho computeFluidType (IIILnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;I)Lnet/minecraft/unmapped/C_txtbiemp;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+			ARG 4 status
+			ARG 5 fluidLevel
+		METHOD m_ugdqmnec computeFluidLevel (IIILnet/minecraft/unmapped/C_jpghdzxc$C_zqkrhxlr;IZ)I
+			ARG 4 status
+			ARG 5 defaultFluidLevel
+			ARG 6 surfaceHeightEstimate
 		METHOD m_uwyipnzq maxDistance (II)D
 			ARG 0 a
 			ARG 1 b
