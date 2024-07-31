@@ -1,19 +1,72 @@
 CLASS net/minecraft/unmapped/C_lvxxsthn net/minecraft/client/gui/widget/CheckboxWidget
+	FIELD f_cnayjurh listener Lnet/minecraft/unmapped/C_lvxxsthn$C_npauekvc;
 	FIELD f_epfkmuwh CHECKBOX_HIGHLIGHTED Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_fiwvdbpa SPACING I
 	FIELD f_fmrbhduc CHECKBOX Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_frkkaocd TEXT_SPACING I
 	FIELD f_gygkawuq TEXT_COLOR I
 	FIELD f_phdyvtst checked Z
 	FIELD f_tbqpobgu CHECKBOX_SELECTED_HIGHLIGHTED Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_tvppaimz CHECKBOX_SELECTED Lnet/minecraft/unmapped/C_ncpywfca;
-	METHOD m_jmdnrbjd (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_mavozmpp;)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
+	FIELD f_uwwqpunt text Lnet/minecraft/unmapped/C_ivtezidq;
+	METHOD <init> (IIILnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_mavozmpp;ZLnet/minecraft/unmapped/C_lvxxsthn$C_npauekvc;)V
+		ARG 1 x
+		ARG 2 y
+		ARG 3 maxWidth
+		ARG 4 text
+		ARG 5 textRenderer
+		ARG 6 checked
+		ARG 7 listener
+	METHOD m_acpgyyuc computeWidth (ILnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_mavozmpp;)I
+		ARG 1 maxWidth
+		ARG 2 text
+		ARG 3 textRenderer
+	METHOD m_jmdnrbjd builder (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_mavozmpp;)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
 		ARG 0 text
+		ARG 1 textRenderer
+	METHOD m_kwftlykh computeTextWidth (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_mavozmpp;)I
+		ARG 0 text
+		ARG 1 textRenderer
 	METHOD m_nclcqadb isChecked ()Z
-	METHOD m_xueqpqgi (Lnet/minecraft/unmapped/C_mavozmpp;)I
+	METHOD m_xueqpqgi getTextPadding (Lnet/minecraft/unmapped/C_mavozmpp;)I
 		ARG 0 textRenderer
-	CLASS C_beiircfb
+	METHOD m_znhebevk computeHeight (Lnet/minecraft/unmapped/C_mavozmpp;)I
+		ARG 1 textRenderer
+	CLASS C_beiircfb Builder
+		FIELD f_cicpvmbg textRenderer Lnet/minecraft/unmapped/C_mavozmpp;
+		FIELD f_dnylzlyl text Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_ebzhcrbf option Lnet/minecraft/unmapped/C_vbibxkxv;
 		FIELD f_onytozpj tooltip Lnet/minecraft/unmapped/C_skehaijy;
-		METHOD m_dynyphhf setTooltip (Lnet/minecraft/unmapped/C_skehaijy;)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
+		FIELD f_tnkqoypz x I
+		FIELD f_umtqowkp maxWidth I
+		FIELD f_xeyixdox y I
+		FIELD f_xgmlxshy checked Z
+		FIELD f_yowemupg checkListener Lnet/minecraft/unmapped/C_lvxxsthn$C_npauekvc;
+		METHOD <init> (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_mavozmpp;)V
+			ARG 1 text
+			ARG 2 textRenderer
+		METHOD m_dynyphhf tooltip (Lnet/minecraft/unmapped/C_skehaijy;)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
 			ARG 1 tooltip
-	CLASS C_npauekvc
-		METHOD onValueChange (Lnet/minecraft/unmapped/C_lvxxsthn;Z)V
+		METHOD m_jeuweonu (Lnet/minecraft/unmapped/C_lvxxsthn;Z)V
 			ARG 1 widget
+			ARG 2 checked
+		METHOD m_jjrwjqye option (Lnet/minecraft/unmapped/C_vbibxkxv;)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
+			ARG 1 option
+		METHOD m_nzfkpxgk checked (Z)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
+			ARG 1 checked
+		METHOD m_piftuvee maxWidth (I)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
+			ARG 1 maxWidth
+		METHOD m_rygxmxec position (II)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
+			ARG 1 x
+			ARG 2 y
+		METHOD m_zgugmcut checkListener (Lnet/minecraft/unmapped/C_lvxxsthn$C_npauekvc;)Lnet/minecraft/unmapped/C_lvxxsthn$C_beiircfb;
+			ARG 1 listener
+		METHOD m_zjwvugfl build ()Lnet/minecraft/unmapped/C_lvxxsthn;
+	CLASS C_npauekvc CheckListener
+		FIELD f_mpjhkppa NO_OP Lnet/minecraft/unmapped/C_lvxxsthn$C_npauekvc;
+		METHOD m_uogpayqd (Lnet/minecraft/unmapped/C_lvxxsthn;Z)V
+			ARG 0 widget
+			ARG 1 checked
+		METHOD onValueChange onValueChange (Lnet/minecraft/unmapped/C_lvxxsthn;Z)V
+			ARG 1 widget
+			ARG 2 checked

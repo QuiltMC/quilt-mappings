@@ -2,10 +2,12 @@ CLASS net/minecraft/unmapped/C_vopzcnhf net/minecraft/client/gui/widget/TextFiel
 	FIELD f_aaxlfqis selectionEnd I
 	FIELD f_avkvsjop changedListener Ljava/util/function/Consumer;
 	FIELD f_cmnauqqj FORWARDS I
+	FIELD f_ddgsctui lastFocusTime J
 	FIELD f_ehdqdocj INSERT_CURSOR_COLOR I
 	FIELD f_flvepgtg hint Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_gcohdxnw drawsBackground Z
 	FIELD f_gizvhnzb INSERT_CURSOR_WIDTH I
+	FIELD f_gsnwbfnr CURSOR_BLINK_MS I
 	FIELD f_gyakfjgb uneditableColor I
 	FIELD f_imtjinqy focusUnlocked Z
 	FIELD f_kwetnhqz BACKWARDS I
@@ -38,6 +40,7 @@ CLASS net/minecraft/unmapped/C_vopzcnhf net/minecraft/client/gui/widget/TextFiel
 		ARG 6 copyFrom
 		ARG 7 text
 	METHOD <init> (Lnet/minecraft/unmapped/C_mavozmpp;IILnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 textRenderer
 		ARG 2 width
 		ARG 3 height
 		ARG 4 text
@@ -47,8 +50,11 @@ CLASS net/minecraft/unmapped/C_vopzcnhf net/minecraft/client/gui/widget/TextFiel
 		ARG 1 index
 	METHOD m_dsrbkblb setCursor (IZ)V
 		ARG 1 cursor
+		ARG 2 isSelection
 	METHOD m_dzvzpjnb write (Ljava/lang/String;)V
 		ARG 1 text
+	METHOD m_ecqmubpw eraseAtCursorPosition (I)V
+		ARG 1 cursorPosition
 	METHOD m_emxvspka setVisible (Z)V
 		ARG 1 visible
 	METHOD m_gchqdqaw getWordSkipPosition (II)I
@@ -68,6 +74,8 @@ CLASS net/minecraft/unmapped/C_vopzcnhf net/minecraft/client/gui/widget/TextFiel
 		ARG 1 wordOffset
 		ARG 2 cursorPosition
 		ARG 3 skipOverSpaces
+	METHOD m_iplsenyc updateFirstCharacter (I)V
+		ARG 1 index
 	METHOD m_irwzzxjx getText ()Ljava/lang/String;
 	METHOD m_jgyuuykz setEditable (Z)V
 		ARG 1 editable
@@ -97,9 +105,11 @@ CLASS net/minecraft/unmapped/C_vopzcnhf net/minecraft/client/gui/widget/TextFiel
 		ARG 1 offset
 	METHOD m_tbulvwaj moveCursor (IZ)V
 		ARG 1 offset
+		ARG 2 isSelection
 	METHOD m_tjkqxkxe setUneditableColor (I)V
 		ARG 1 color
 	METHOD m_uamercht setCursorToStart (Z)V
+		ARG 1 isSelection
 	METHOD m_ujpapjrq eraseCharacters (I)V
 		ARG 1 characterOffset
 	METHOD m_wjankemy getCursorPosWithOffset (I)I
@@ -118,3 +128,4 @@ CLASS net/minecraft/unmapped/C_vopzcnhf net/minecraft/client/gui/widget/TextFiel
 	METHOD m_zqejgyzq getWordSkipPosition (I)I
 		ARG 1 wordOffset
 	METHOD m_zxclplhg setCursorToEnd (Z)V
+		ARG 1 isSelection

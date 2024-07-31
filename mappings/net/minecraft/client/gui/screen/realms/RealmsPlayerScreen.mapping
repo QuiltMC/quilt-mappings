@@ -1,13 +1,19 @@
 CLASS net/minecraft/unmapped/C_owmmvzoi net/minecraft/client/gui/screen/realms/RealmsPlayerScreen
+	FIELD f_axudcdik invitationsList Lnet/minecraft/unmapped/C_owmmvzoi$C_ihqrugfx;
 	FIELD f_azlybfyt PLAYERS_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_dwmjjlji QUESTION Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_gqittmxw layout Lnet/minecraft/unmapped/C_cqroimpa;
 	FIELD f_idnwbdmb stateChanged Z
 	FIELD f_lxdgfyqe serverData Lnet/minecraft/unmapped/C_pwmwypfb;
+	FIELD f_nvhhoyne SPACING I
 	FIELD f_qwkljwep LOGGER Lorg/slf4j/Logger;
 	FIELD f_xujlrwsy parent Lnet/minecraft/unmapped/C_knluxkhz;
 	METHOD <init> (Lnet/minecraft/unmapped/C_knluxkhz;Lnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 parent
 		ARG 2 serverData
+	METHOD m_auhprqeg (Lnet/minecraft/unmapped/C_owmmvzoi;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
+		ARG 1 widget
+	METHOD m_jvscgeqv initInvitations ()V
 	METHOD m_mbdgtjhh (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_mzsbsrme backButtonClicked ()V
@@ -16,12 +22,41 @@ CLASS net/minecraft/unmapped/C_owmmvzoi net/minecraft/client/gui/screen/realms/R
 	CLASS C_ebbscyhc InvitedObjectEntry
 		FIELD f_ezlfcvdo makeOperatorButton Lnet/minecraft/unmapped/C_buwziidm;
 		FIELD f_iwajvqpi removeOperatorButton Lnet/minecraft/unmapped/C_buwziidm;
+		FIELD f_larmhgrv REMOVE_PLAYER Lnet/minecraft/unmapped/C_ncpywfca;
+		FIELD f_rbylnstn REMOVE_OPERATOR Lnet/minecraft/unmapped/C_ncpywfca;
 		FIELD f_ssqjmwwi removePlayerButton Lnet/minecraft/unmapped/C_buwziidm;
+		FIELD f_ullrlikm INVITE_NORMAL Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_utplludm OPERATOR_SPRITE_WIDTH I
+		FIELD f_vjdprtow OPERATOR_SPRITE_HEIGHT I
+		FIELD f_wrjftsht INVITE_REMOVE Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_wzsxnmcl INVITE_OP Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_yrxdfmqv playerInfo Lnet/minecraft/unmapped/C_uckflzvp;
+		FIELD f_zbgaczmk MAKE_OPERATOR Lnet/minecraft/unmapped/C_ncpywfca;
 		METHOD <init> (Lnet/minecraft/unmapped/C_owmmvzoi;Lnet/minecraft/unmapped/C_uckflzvp;)V
 			ARG 2 playerInfo
+		METHOD m_emysazsp updateOps (Lnet/minecraft/unmapped/C_okicnizs;)V
+			ARG 1 ops
+		METHOD m_hahiqagf deopPlayer (I)V
+			ARG 1 index
+		METHOD m_hvkguzat (Lnet/minecraft/unmapped/C_uckflzvp;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_npqneive;
+			ARG 1 textSupplier
+		METHOD m_jagblmvl (Lnet/minecraft/unmapped/C_uckflzvp;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_npqneive;
+			ARG 1 textSupplier
 		METHOD m_lcrgzomf (ILnet/minecraft/unmapped/C_buwziidm;)V
 			ARG 2 button
+		METHOD m_lerxpmdr updateOperatorButtons ()V
+		METHOD m_ntvsespc getOperatorButton ()Lnet/minecraft/unmapped/C_buwziidm;
+		METHOD m_nycgvaso uninvitePlayer (I)V
+			ARG 1 index
+		METHOD m_owrpwcuq opPlayer (I)V
+			ARG 1 index
+		METHOD m_pbmkwcep (Lnet/minecraft/unmapped/C_uckflzvp;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_npqneive;
+			ARG 1 textSupplier
+		METHOD m_twkiicrm (ILnet/minecraft/unmapped/C_buwziidm;)V
+			ARG 2 button
+		METHOD m_upljnvwt (Lnet/minecraft/unmapped/C_uckflzvp;IZ)V
+			ARG 3 confirmed
 		METHOD m_zfovvcfc (ILnet/minecraft/unmapped/C_buwziidm;)V
 			ARG 2 button
 	CLASS C_ihqrugfx InvitedObjectEntryListWidget
+		FIELD f_vbzshcdj ITEM_HEIGHT I
