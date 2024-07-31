@@ -1,17 +1,20 @@
 CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
+	FIELD f_cbrgjvfy blendingData Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;
 	FIELD f_dgguujmb EMPTY Lnet/minecraft/unmapped/C_pfqozslu;
 	FIELD f_hwvkcntf DENSITY_BLENDING_RANGE_CHUNKS I
 	FIELD f_jhzgfobi DENSITY_BLENDING_RANGE_CELLS I
 	FIELD f_ngiqjzuy SHIFT_NOISE Lnet/minecraft/unmapped/C_rxrtfjrt;
 	FIELD f_phpnetae HEIGHT_BLENDING_RANGE_CELLS I
+	FIELD f_psgkvuuf blendingDataForDensityBlending Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;
 	FIELD f_qstndhje OLD_CHUNK_HORIZONTAL_RADIUS D
 	FIELD f_sqwbcifk HEIGHT_BLENDING_RANGE_CHUNKS I
 	METHOD <init> (Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;)V
-		ARG 1 blendingData
-		ARG 2 blendingDataForDensityBlending
 	METHOD m_aicyryxs createOldChunkDistanceProvider (Lnet/minecraft/unmapped/C_jfjllmkc;Ljava/util/Map;)Lnet/minecraft/unmapped/C_pfqozslu$C_adfrewea;
+		ARG 0 data
+		ARG 1 neighbors
 	METHOD m_bpwodtxk (Ljava/util/List;Lnet/minecraft/unmapped/C_qjdfuoud;Lnet/minecraft/unmapped/C_jfjllmkc;)V
 		ARG 1 direction
+		ARG 2 neighborData
 	METHOD m_bskbymmx getBlendingDataValue (IIILnet/minecraft/unmapped/C_pfqozslu$C_oputthuz;)D
 		ARG 1 x
 		ARG 2 y
@@ -26,10 +29,22 @@ CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
 		ARG 10 startZ
 	METHOD m_dmtrgwbz getBlender (Lnet/minecraft/unmapped/C_ezymcfey;)Lnet/minecraft/unmapped/C_pfqozslu;
 		ARG 0 region
+	METHOD m_hplgcpzj (IILorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;IID)V
+		ARG 5 biomeX
+		ARG 6 biomeZ
+		ARG 7 height
+	METHOD m_hzfpdzfq (IIILorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;IIID)V
+		ARG 6 x
+		ARG 7 y
+		ARG 8 z
+		ARG 9 density
 	METHOD m_iflcqbrq (Lnet/minecraft/unmapped/C_nrynfjsf$C_uavkwagl;Lnet/minecraft/unmapped/C_nrynfjsf;)V
 		ARG 1 mask
 	METHOD m_ikgldbtv heightToOffset (D)D
 		ARG 0 height
+	METHOD m_incvmsck (IILorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableDouble;Ljava/lang/Long;Lnet/minecraft/unmapped/C_jfjllmkc;)V
+		ARG 5 chunkPos
+		ARG 6 data
 	METHOD m_isjgkuun (Lnet/minecraft/unmapped/C_pfqozslu$C_adfrewea;III)Z
 		ARG 1 x
 		ARG 2 y
@@ -44,12 +59,20 @@ CLASS net/minecraft/unmapped/C_pfqozslu net/minecraft/world/gen/chunk/Blender
 		ARG 4 x
 		ARG 5 y
 		ARG 6 z
+	METHOD m_ljozrpwk (IILorg/apache/commons/lang3/mutable/MutableDouble;Lorg/apache/commons/lang3/mutable/MutableObject;IILnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 4 biomeX
+		ARG 5 biomeZ
+		ARG 6 biome
 	METHOD m_ogyqdxkq (DDDDDDD)D
 		ARG 0 x
 		ARG 2 y
 		ARG 4 z
+		ARG 8 offsetX
+		ARG 10 offsetY
+		ARG 12 offsetZ
 	METHOD m_oyroclmg createOffsetOldChunkDistanceProvider (Lnet/minecraft/unmapped/C_qjdfuoud;Lnet/minecraft/unmapped/C_jfjllmkc;)Lnet/minecraft/unmapped/C_pfqozslu$C_adfrewea;
 		ARG 0 direction
+		ARG 1 data
 	METHOD m_pyxfjdtw (Ljava/util/List;DDD)D
 		ARG 1 x
 		ARG 3 y
