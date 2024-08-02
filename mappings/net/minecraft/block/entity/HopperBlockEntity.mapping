@@ -3,6 +3,7 @@ CLASS net/minecraft/unmapped/C_nblomyyt net/minecraft/block/entity/HopperBlockEn
 	FIELD f_hcniobcr SLOTS I
 	FIELD f_iqqzslts ITEM_MOVE_SPEED I
 	FIELD f_ktuvlsrj inventory Lnet/minecraft/unmapped/C_rnrfftze;
+	FIELD f_ntpbqxdl AVAILABLE_SLOTS_CACHE [[I
 	FIELD f_xxttfkhd lastTickTime J
 	METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 pos
@@ -28,7 +29,7 @@ CLASS net/minecraft/unmapped/C_nblomyyt net/minecraft/block/entity/HopperBlockEn
 	METHOD m_fqxkpglv getAvailableSlots (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_xpuuihxf;)[I
 		ARG 0 inventory
 		ARG 1 side
-	METHOD m_imdwtouv getInputItemEntities (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_exiahbos;)Ljava/util/List;
+	METHOD m_imdwtouv findInputItemEntities (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_exiahbos;)Ljava/util/List;
 		ARG 0 world
 		ARG 1 hopper
 	METHOD m_jgmuxsor insertAndExtract (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_nblomyyt;Ljava/util/function/BooleanSupplier;)Z
@@ -45,27 +46,32 @@ CLASS net/minecraft/unmapped/C_nblomyyt net/minecraft/block/entity/HopperBlockEn
 	METHOD m_jyzhdben extract (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_uqpzijng;)Z
 		ARG 0 inventory
 		ARG 1 itemEntity
+	METHOD m_keejzcsu createSlotIndices (I)[I
+		ARG 0 size
 	METHOD m_kpvuhija extract (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_exiahbos;)Z
 		ARG 0 world
 		ARG 1 hopper
-	METHOD m_opbelxmy getInputInventory (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_exiahbos;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_pjtstjoq;
+	METHOD m_nwcnbnxg findInventory (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;DDD)Lnet/minecraft/unmapped/C_pjtstjoq;
+	METHOD m_opbelxmy findInputInventory (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_exiahbos;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_pjtstjoq;
 		ARG 0 world
 		ARG 1 hopper
 	METHOD m_oshxfkng isDisabled ()Z
 	METHOD m_rnqdnnfm insert (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_nblomyyt;)Z
 		ARG 0 world
 		ARG 1 pos
+		ARG 2 blockEntity
 	METHOD m_smhbtkii transfer (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 0 from
 		ARG 1 to
 		ARG 2 stack
 		ARG 3 side
-	METHOD m_spdazaxi getInventoryAt (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_pjtstjoq;
+	METHOD m_spdazaxi findInventory (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_pjtstjoq;
 		ARG 0 world
 		ARG 1 pos
-	METHOD m_sqzuavxi getOutputInventory (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_nblomyyt;)Lnet/minecraft/unmapped/C_pjtstjoq;
+	METHOD m_sqzuavxi findOutputInventory (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_nblomyyt;)Lnet/minecraft/unmapped/C_pjtstjoq;
 		ARG 0 world
 		ARG 1 pos
+		ARG 2 blockEntity
 	METHOD m_tmplyjcc canExtract (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_sddaxwyk;ILnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 0 to
 		ARG 1 from
@@ -73,6 +79,10 @@ CLASS net/minecraft/unmapped/C_nblomyyt net/minecraft/block/entity/HopperBlockEn
 		ARG 3 slot
 		ARG 4 facing
 	METHOD m_vzdmljjn isFull ()Z
+	METHOD m_wilrgnln findRandomEntityInventory (Lnet/minecraft/unmapped/C_cdctfzbn;DDD)Lnet/minecraft/unmapped/C_pjtstjoq;
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
 	METHOD m_wobetygt canMergeItems (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 first
 		ARG 1 second
@@ -81,6 +91,7 @@ CLASS net/minecraft/unmapped/C_nblomyyt net/minecraft/block/entity/HopperBlockEn
 		ARG 1 stack
 		ARG 2 slot
 		ARG 3 side
+	METHOD m_ygjmxzlx findBlockInventory (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_pjtstjoq;
 	METHOD m_zawzrfob setCooldown (I)V
 		ARG 1 cooldown
 	METHOD m_zwwjuamk isInventoryFull (Lnet/minecraft/unmapped/C_pjtstjoq;Lnet/minecraft/unmapped/C_xpuuihxf;)Z

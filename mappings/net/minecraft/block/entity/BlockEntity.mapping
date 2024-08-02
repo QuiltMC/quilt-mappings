@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_kvegafmh net/minecraft/block/entity/BlockEntity
 	COMMENT Represents an object attached to a certain block which has a different instance for every occurence in the world.
+	FIELD f_acpxxkyo components Lnet/minecraft/unmapped/C_kouhnfig;
 	FIELD f_ebvcvspz cachedState Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_fsrkvtwf world Lnet/minecraft/unmapped/C_cdctfzbn;
 	FIELD f_muneaeoa LOGGER Lorg/slf4j/Logger;
@@ -10,16 +11,23 @@ CLASS net/minecraft/unmapped/C_kvegafmh net/minecraft/block/entity/BlockEntity
 		ARG 1 type
 		ARG 2 pos
 		ARG 3 state
-	METHOD m_auxezlat writeIdentifyingData (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+	METHOD m_apmtvpji addComponents (Lnet/minecraft/unmapped/C_kouhnfig$C_vfzyoahz;)V
+		ARG 1 builder
+	METHOD m_auxezlat writeId (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
+	METHOD m_cckjpvhm readComponents (Lnet/minecraft/unmapped/C_kvegafmh$C_uyhxhbrv;)V
+		ARG 1 access
 	METHOD m_cjlndzcv markDirty (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 state
 	METHOD m_culdahst readBlockPosFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 0 nbt
-	METHOD m_dzrbmfhv toIdentifiedNbt (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
+	METHOD m_dcspzwcg (Ljava/lang/String;)V
+		ARG 0 message
+	METHOD m_dzrbmfhv toNbtWithId (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 lookupProvider
+	METHOD m_efaugnfj getComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 	METHOD m_escrnqip toSyncedNbt (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		COMMENT Serializes the state of this block entity that is observable by clients.
 		COMMENT It is sent alongside the initial chunk data, as well as when the block
@@ -29,7 +37,7 @@ CLASS net/minecraft/unmapped/C_kvegafmh net/minecraft/block/entity/BlockEntity
 	METHOD m_ftinwujz markRemoved ()V
 	METHOD m_ghbzlfof toNbt (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 lookupProvider
-	METHOD m_gmqocbcr (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
+	METHOD m_gmqocbcr readNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
 		ARG 1 nbt
 		ARG 2 lookupProvider
 	METHOD m_idcywgkm createFromNbt (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_kvegafmh;
@@ -37,12 +45,16 @@ CLASS net/minecraft/unmapped/C_kvegafmh net/minecraft/block/entity/BlockEntity
 		ARG 1 state
 		ARG 2 nbt
 		ARG 3 lookupProvider
-	METHOD m_jcglyghm writeIdentifyingLocatingData (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+	METHOD m_ijpcosft tryParseCustomName (Ljava/lang/String;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+	METHOD m_ivkmsjmy toComponentlessNbtWithIdAndPos (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
+	METHOD m_jcglyghm writeIdAndPos (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
+	METHOD m_jhcvwprs copyComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 	METHOD m_jlguerjg copyItemDataRequiresOperator ()Z
 	METHOD m_jszkmdfp setCachedState (Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 state
 	METHOD m_jutqxnar isRemoved ()Z
+	METHOD m_kdfbpbpy applyComponents (Lnet/minecraft/unmapped/C_kouhnfig;Lnet/minecraft/unmapped/C_jqyoylib;)V
 	METHOD m_kdzukdvh setWorld (Lnet/minecraft/unmapped/C_cdctfzbn;)V
 		ARG 1 world
 	METHOD m_knsllsrv cancelRemoval ()V
@@ -55,7 +67,13 @@ CLASS net/minecraft/unmapped/C_kvegafmh net/minecraft/block/entity/BlockEntity
 		COMMENT {@link net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket#of(BlockEntity) BlockEntityUpdateS2CPacket.of(this)}.
 		COMMENT <p>
 		COMMENT The NBT will be passed to (TODO: restore link) on the client.
-	METHOD m_pcgjfrqh (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+	METHOD m_nywzerda (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Ljava/lang/String;Lnet/minecraft/unmapped/C_wgqvodus;)Lnet/minecraft/unmapped/C_kvegafmh;
+		ARG 3 type
+	METHOD m_obrnqsbc (Lnet/minecraft/unmapped/C_kouhnfig;)V
+		ARG 1 components
+	METHOD m_ohoktjws (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 nbt
+	METHOD m_pcgjfrqh removeComponentData (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt
 	METHOD m_phlhitmt markDirty ()V
 		COMMENT Marks this block entity as "dirty", in other words it marks it as needing to be saved to disk.
@@ -64,7 +82,7 @@ CLASS net/minecraft/unmapped/C_kvegafmh net/minecraft/block/entity/BlockEntity
 		ARG 1 stack
 		ARG 2 lookupProvider
 	METHOD m_qihknhoq getPos ()Lnet/minecraft/unmapped/C_hynzadkk;
-	METHOD m_qmckaiuk (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
+	METHOD m_qmckaiuk toComponentlessNbt (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 lookupProvider
 	METHOD m_qopnimsa writeNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
 		COMMENT Writes this block entity's custom data to the given NBT compound.
@@ -74,19 +92,33 @@ CLASS net/minecraft/unmapped/C_kvegafmh net/minecraft/block/entity/BlockEntity
 	METHOD m_qrmwzmws onSyncedBlockEvent (II)Z
 		ARG 1 type
 		ARG 2 data
-	METHOD m_rjyhuhsi (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
+	METHOD m_qtbhshck (Ljava/lang/String;)V
+		ARG 0 message
+	METHOD m_rjyhuhsi read (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
 		ARG 1 nbt
 		ARG 2 lookupProvider
+	METHOD m_rloeylgt applyComponents (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 	METHOD m_rtxjwbev getWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
-	METHOD m_trzmaydr (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
+	METHOD m_trzmaydr readNbtImpl (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
 		ARG 1 nbt
 		ARG 2 lookupProvider
-	METHOD m_xokvytvt toIdentifiedLocatedNbt (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
+	METHOD m_viatlzso (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Ljava/lang/String;Lnet/minecraft/unmapped/C_kvegafmh;)Lnet/minecraft/unmapped/C_kvegafmh;
+		ARG 3 blockEntity
+	METHOD m_xokvytvt toNbtWithIdAndPos (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 lookupProvider
 	METHOD m_yymkkcjv populateCrashReport (Lnet/minecraft/unmapped/C_qympisds;)V
 		ARG 1 crashReportSection
 	METHOD m_zasadoxf writeIdentifyingData (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_wgqvodus;)V
 		ARG 0 nbt
 		ARG 1 type
+	METHOD m_zevtxnnz setComponents (Lnet/minecraft/unmapped/C_kouhnfig;)V
+		ARG 1 components
 	METHOD m_zgvlsqwh getType ()Lnet/minecraft/unmapped/C_wgqvodus;
 	METHOD m_zqrrwulc getCachedState ()Lnet/minecraft/unmapped/C_txtbiemp;
+	CLASS C_qbkgjjcb ComponentHelper
+	CLASS C_uyhxhbrv ComponentAccess
+		METHOD m_gotgrppy get (Lnet/minecraft/unmapped/C_pscqxfcs;)Ljava/lang/Object;
+			ARG 1 type
+		METHOD m_uwrxlczq getOrDefault (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 type
+			ARG 2 defaultComponent

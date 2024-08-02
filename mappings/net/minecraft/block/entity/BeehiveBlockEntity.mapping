@@ -19,6 +19,8 @@ CLASS net/minecraft/unmapped/C_cyniebsl net/minecraft/block/entity/BeehiveBlockE
 		ARG 4 entities
 		ARG 5 beeState
 		ARG 6 flowerPos
+	METHOD m_avvceyuj (Lnet/minecraft/unmapped/C_triydqro$C_eibemhky;)Z
+		ARG 0 state
 	METHOD m_aysrthif serverTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cyniebsl;)V
 		ARG 0 world
 		ARG 1 pos
@@ -29,13 +31,18 @@ CLASS net/minecraft/unmapped/C_cyniebsl net/minecraft/block/entity/BeehiveBlockE
 	METHOD m_camfdiec isFullOfBees ()Z
 	METHOD m_czgkogzg addBee (Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;)V
 		ARG 1 occupant
+	METHOD m_izudhcbb (Ljava/lang/String;)V
+		ARG 0 message
 	METHOD m_jbfwnhjx angerBees (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cyniebsl$C_ajqcctan;)V
 		ARG 1 player
 		ARG 2 state
 		ARG 3 beeState
 	METHOD m_kxlqccck getBeeCount ()I
+	METHOD m_onkqbfmj (Ljava/util/List;)V
+		ARG 1 bees
 	METHOD m_oypeqdjf tryEnterHive (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_qwlovmrg getOccupants ()Ljava/util/List;
 	METHOD m_qxxpjewr hasNoBees ()Z
 	METHOD m_tbwpiwhq isNearFire ()Z
 	METHOD m_tutnubbv hasFlowerPos ()Z
@@ -55,9 +62,19 @@ CLASS net/minecraft/unmapped/C_cyniebsl net/minecraft/block/entity/BeehiveBlockE
 	CLASS C_cakykluc Occupant
 		FIELD f_mffcrvpw LIST_CODEC Lcom/mojang/serialization/Codec;
 		FIELD f_yzeidvrx CODEC Lcom/mojang/serialization/Codec;
+		METHOD m_bygqvptj increaseAge (ILnet/minecraft/unmapped/C_hgfgxpql;)V
+			ARG 0 ticks
+			ARG 1 bee
+		METHOD m_hzrqymrb loadEntity (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_astfners;
+		METHOD m_jrfplpwq (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_astfners;
+			ARG 0 entity
+		METHOD m_kiuyjtdd create (I)Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;
+		METHOD m_vlpkfwxg of (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;
+			ARG 0 entity
 		METHOD m_yqfrfgkm (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
 	CLASS C_idqjupol Bee
+		FIELD f_phfczzkq source Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;
 		FIELD f_rrbvfqoq ticksInHive I
 		METHOD <init> (Lnet/minecraft/unmapped/C_cyniebsl$C_cakykluc;)V
 			ARG 1 occupant
