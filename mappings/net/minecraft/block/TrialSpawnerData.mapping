@@ -8,19 +8,31 @@ CLASS net/minecraft/unmapped/C_kxkfzuix net/minecraft/block/TrialSpawnerData
 	FIELD f_nhtyttsu NEXT_WAVE_SPAWN_TIME_KEY Ljava/lang/String;
 	FIELD f_qcltsbcl registeredPlayers Ljava/util/Set;
 	FIELD f_tdzlonpc displayEntity Lnet/minecraft/unmapped/C_astfners;
+	FIELD f_toyfthwb BASE_TRIAL_OMEN_EFFECT_DURATION I
 	FIELD f_vhhqtdzo SPAWN_DATA_KEY Ljava/lang/String;
+	FIELD f_vvurntvw lootPool Lnet/minecraft/unmapped/C_owfsqzhr;
 	FIELD f_wunezcil nextMobSpawnTime J
+	FIELD f_xnjazxxb PLAYER_DETECTION_INTERVAL I
 	FIELD f_yqqgmcxl cooldownEndTime J
 	METHOD <init> (Ljava/util/Set;Ljava/util/Set;JJILjava/util/Optional;Ljava/util/Optional;)V
 		ARG 1 registeredPlayers
 		ARG 2 currentMobs
+	METHOD m_fazowizq choosePlayerWithOmen (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/List;)Ljava/util/Optional;
+		ARG 1 playerUuids
 	METHOD m_gutsddek (Lnet/minecraft/unmapped/C_kxkfzuix;)Ljava/util/Optional;
 		ARG 0 data
+	METHOD m_hczcnors (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_edcjbljn;)V
+		ARG 1 nbt
 	METHOD m_hqnuaozt detectPlayers (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jelkcvqk;)V
+		ARG 3 logic
 	METHOD m_jyshkmfh (Lnet/minecraft/unmapped/C_kxkfzuix;)Ljava/util/Set;
 		ARG 0 data
 	METHOD m_kjmtebfw isReadyToEjectReward (Lnet/minecraft/unmapped/C_bdwnwhiu;FI)Z
 		ARG 2 delay
+		ARG 3 cooldown
+	METHOD m_ksndgamr tryConvertBadOmenToTrialOmen (Lnet/minecraft/unmapped/C_jzrpycqo;)V
+	METHOD m_lcwzrxzo (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 entity
 	METHOD m_lehgjndi (Lnet/minecraft/unmapped/C_kxkfzuix;)Ljava/lang/Long;
 		ARG 0 data
 	METHOD m_lptaqeuw areMobsDead ()Z
@@ -35,9 +47,12 @@ CLASS net/minecraft/unmapped/C_kxkfzuix net/minecraft/block/TrialSpawnerData
 		ARG 2 config
 	METHOD m_phbcnwhj isReadyToOpenShutter (Lnet/minecraft/unmapped/C_bdwnwhiu;FI)Z
 		ARG 2 delay
+		ARG 3 cooldown
 	METHOD m_pyggveyz getOrCreateNextSpawnData (Lnet/minecraft/unmapped/C_jelkcvqk;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_edcjbljn;
 		ARG 1 spawnerLogic
 	METHOD m_qacxasem reset ()V
+	METHOD m_qagcinaf getLootPool (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_pocjjnjk;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_owfsqzhr;
+		ARG 2 config
 	METHOD m_qsauossa (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 0 instance
 	METHOD m_rdtrxuhq hasSpawnedAllMobs (Lnet/minecraft/unmapped/C_pocjjnjk;I)Z
@@ -47,11 +62,16 @@ CLASS net/minecraft/unmapped/C_kxkfzuix net/minecraft/block/TrialSpawnerData
 	METHOD m_rvfytrpa getLastDisplayEntityRotation ()D
 	METHOD m_sccvkbao setEntityType (Lnet/minecraft/unmapped/C_jelkcvqk;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_ogavsvbr;)V
 		ARG 3 entityType
+	METHOD m_whezyyzf discardMobs (Lnet/minecraft/unmapped/C_jelkcvqk;Lnet/minecraft/unmapped/C_bdwnwhiu;)V
+		ARG 1 logic
 	METHOD m_wlnuwqxo (Lnet/minecraft/unmapped/C_kxkfzuix;)Ljava/util/Set;
 		ARG 0 data
 	METHOD m_xfiavzlc (Lnet/minecraft/unmapped/C_kxkfzuix;)Ljava/lang/Long;
 		ARG 0 data
 	METHOD m_xhldgvye isCooldownFinished (Lnet/minecraft/unmapped/C_bdwnwhiu;)Z
+	METHOD m_yilegshe (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_jelkcvqk;Lnet/minecraft/unmapped/C_hynzadkk;Lcom/mojang/datafixers/util/Pair;)V
+		ARG 3 playerAndEffect
 	METHOD m_yjdsgxat getDisplayEntityRotation ()D
 	METHOD m_zaglgfuk (Lnet/minecraft/unmapped/C_kxkfzuix;)Ljava/lang/Integer;
 		ARG 0 data
+	METHOD m_zdufupjc getLootSeed (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)J
