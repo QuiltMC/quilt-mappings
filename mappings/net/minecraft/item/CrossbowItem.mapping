@@ -1,11 +1,17 @@
 CLASS net/minecraft/unmapped/C_fatxcdqp net/minecraft/item/CrossbowItem
+	FIELD f_afejkznv LOADING_SOUNDS Lnet/minecraft/unmapped/C_fatxcdqp$C_ldycibmo;
 	FIELD f_cbjxbbpk loaded Z
 	FIELD f_dshfujib RANGE I
 	FIELD f_gmdsjqiu CHARGE_PERCENT_START_CHARGING_SOUND F
 	FIELD f_hpqusjno FIREWORK_POWER F
 	FIELD f_jdxaczjr ARROW_POWER F
 	FIELD f_segrmdbr CHARGE_PERCENT_MID_CHARGE_SOUND F
+	FIELD f_tlhpgdvo MAX_LOAD_TIME F
 	FIELD f_xcgsrusg charged Z
+	METHOD m_bpqnhzpy getProjectileVelocity (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_vgpupfxx;F)Lorg/joml/Vector3f;
+		ARG 0 shooter
+		ARG 1 direction
+		ARG 2 yaw
 	METHOD m_btbqnuxf shootAll (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_sddaxwyk;FFLnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 world
 		ARG 2 entity
@@ -14,13 +20,28 @@ CLASS net/minecraft/unmapped/C_fatxcdqp net/minecraft/item/CrossbowItem
 		ARG 5 speed
 		ARG 6 divergence
 		ARG 7 target
+	METHOD m_ekggjwco (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 2 soundEvent
+	METHOD m_hrqmkzir (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 2 soundEvent
+	METHOD m_jwwdtsib getLoadingTime (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;)I
+	METHOD m_ngfgtwfo (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 2 soundEvent
 	METHOD m_pfmniexj getSpeed (Lnet/minecraft/unmapped/C_lukqwasx;)F
 		ARG 0 component
+	METHOD m_rdfsfcdp getLoadingSounds (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_fatxcdqp$C_ldycibmo;
 	METHOD m_tgjukcva loadProjectiles (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 shooter
 		ARG 1 projectile
 	METHOD m_tmspkiwg getSoundPitch (ZLnet/minecraft/unmapped/C_rlomrsco;)F
 		ARG 0 flag
 		ARG 1 random
+	METHOD m_uhdfuuhv getSoundPitch (Lnet/minecraft/unmapped/C_rlomrsco;I)F
+		ARG 1 index
 	METHOD m_wiqutonr isCharged (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 stack
+	METHOD m_xefbydko getLoadingProgress (ILnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;)F
+		ARG 0 usedTime
+	CLASS C_ldycibmo LoadingSounds
+		METHOD m_dvaiaquf (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+			ARG 0 sounds
