@@ -1,11 +1,13 @@
 CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	FIELD f_aafcvqyz ignoreFallDamageFromCurrentExplosion Z
 	FIELD f_ajlpyytq experienceProgress F
+	FIELD f_appyudwm currentExplosionResetGraceTime I
 	FIELD f_atseoraf currentExplosionCauser Lnet/minecraft/unmapped/C_astfners;
 	FIELD f_bbfupsoa WAKE_UP_DURATION I
 	FIELD f_bfdfefzi experiencePickUpDelay I
 	FIELD f_bmnezcwt experienceLevel I
 	FIELD f_boemmrdb selectedItem Lnet/minecraft/unmapped/C_sddaxwyk;
+	FIELD f_ccughjwx DEFAULT_EXPLOSION_RESET_GRACE_TIME I
 	FIELD f_ctdqwbpn totalExperience I
 	FIELD f_dgorlwne currentScreenHandler Lnet/minecraft/unmapped/C_mkrkudpa;
 	FIELD f_dhduzhea CRAFTING_SLOT_OFFSET I
@@ -88,6 +90,10 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 pos
 	METHOD m_dbuvscbh openStructureBlockScreen (Lnet/minecraft/unmapped/C_bfrzytnu;)V
 		ARG 1 structureBlock
+	METHOD m_dhkbsjyf getEnchantedDamage (Lnet/minecraft/unmapped/C_astfners;FLnet/minecraft/unmapped/C_sbxfkpyv;)F
+		ARG 1 target
+		ARG 2 baseDamage
+		ARG 3 source
 	METHOD m_dkwrlafa addScore (I)V
 		ARG 1 score
 	METHOD m_dpdotuxa wakeUp (ZZ)V
@@ -107,6 +113,9 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_foaanncl openHorseInventory (Lnet/minecraft/unmapped/C_ktznyhaj;Lnet/minecraft/unmapped/C_pjtstjoq;)V
 		ARG 1 horse
 		ARG 2 inventory
+	METHOD m_gbwbsnau startRiptideAttack (IFLnet/minecraft/unmapped/C_sddaxwyk;)V
+		ARG 1 riptideTicks
+		ARG 2 riptideAttackDamage
 	METHOD m_gdwvdivl openEditSignScreen (Lnet/minecraft/unmapped/C_axouvzlg;Z)V
 		ARG 1 sign
 		ARG 2 fromFront
@@ -215,6 +224,7 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_qupqytdv dropShoulderEntity (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 entityNbt
 	METHOD m_rbwjbvce updateTurtleHelmet ()V
+	METHOD m_rnkwwgyg shouldIgnoreFallDamageFromCurrentExplosion ()Z
 	METHOD m_rxawqnif isPartVisible (Lnet/minecraft/unmapped/C_vqnqadci;)Z
 		ARG 1 modelPart
 	METHOD m_rxnkeyjm dropItem (Lnet/minecraft/unmapped/C_sddaxwyk;ZZ)Lnet/minecraft/unmapped/C_uqpzijng;
@@ -234,6 +244,7 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		COMMENT Returns whether this player is in creative mode.
 	METHOD m_srbgfavo requestRespawn ()V
 	METHOD m_srzttqeq shouldDismount ()Z
+	METHOD m_tbdjuqar tryResetCurrentExplosion ()V
 	METHOD m_tblbycwa canInteractWithBlockAt (Lnet/minecraft/unmapped/C_hynzadkk;D)Z
 		ARG 2 additionalRange
 	METHOD m_tivcrymc getAbilities ()Lnet/minecraft/unmapped/C_tlquukty;
@@ -281,6 +292,8 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_xqgqqttg (Ljava/lang/String;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
 		ARG 2 style
 	METHOD m_xsfrgoea getSculkShriekerWarningManager ()Ljava/util/Optional;
+	METHOD m_xsgqhfmi setIgnoreFallDamageFromCurrentExplosion (Z)V
+		ARG 1 shouldIgnore
 	METHOD m_xuqwdmei setLastDeathPos (Ljava/util/Optional;)V
 		ARG 1 lastDeathPos
 	METHOD m_xvbnellz getEntityInteractionRange ()D

@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/RealmsMainScreen
+	FIELD f_aejhavvv playerLists Lnet/minecraft/unmapped/C_czwqrqci;
 	FIELD f_ajtnxorc EXPIRES_IN_A_DAY Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_alvmhryd EXPIRES_SOON Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_bbiuqgtd EXPIRED_RENEW Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -11,6 +12,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	FIELD f_fyvtvtkl INVITE_ICON_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_geledlrq OPEN Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_gleimzay REALM_EXPIRED_TEXTURE Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_gnsgzjld INCOMPATIBLE_RELEASE_TYPE_MESSAGE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_guxnafrw LEAVE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_gzcxhpth UNINITIALIZED Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_jlcpctfb serverList Lnet/minecraft/unmapped/C_gjfukqgc;
@@ -34,6 +36,7 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	FIELD f_pnacbfus UNINITIALIZED_BUTTON_NARRATION Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_prftbqsx CLOSED Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_puvilcjl newsLink Ljava/lang/String;
+	FIELD f_qdhjkbir INCOMPATIBLE_TITLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_qhyldita CONFIGURE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_qiukxtcq ITEM_HEIGHT I
 	FIELD f_qpvmcjoh backButton Lnet/minecraft/unmapped/C_buwziidm;
@@ -85,6 +88,8 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		ARG 1 loadStatus
 	METHOD m_cmcurybp markNotificationsAsSeen (Ljava/util/Collection;)V
 		ARG 1 notifications
+	METHOD m_dplyrxbk (Ljava/util/UUID;Ljava/lang/Object;)V
+		ARG 2 unused
 	METHOD m_dwgqqxsn (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_gwjurvjx resetPendingInvites ()V
@@ -99,6 +104,10 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	METHOD m_jvvhompn play (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_wrmtlwqx;)V
 		ARG 0 server
 		ARG 1 screen
+	METHOD m_kfibdccg (Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_pzklyvtm;)V
+		ARG 2 dialog
+	METHOD m_kratucpm (Ljava/lang/Throwable;)Ljava/lang/Void;
+		ARG 0 error
 	METHOD m_lgpjaxcb (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_lgrkydux pingRegions ()V
@@ -108,6 +117,8 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	METHOD m_mxpjcsoy (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_fxiqpxaf;)V
 		ARG 1 widget
 	METHOD m_mzhwlfdb updateButtonStates ()V
+	METHOD m_ncdqhepw (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_pzklyvtm;)V
+		ARG 2 button
 	METHOD m_nykjkgxr onRenew (Lnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 server
 	METHOD m_nzxelnxl getVersionText (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -120,6 +131,8 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	METHOD m_oteeiouk refresh ()V
 	METHOD m_qaviylvw (Lnet/minecraft/unmapped/C_yyprjalz$C_zjxvgcbt;)V
 		ARG 1 serverList
+	METHOD m_qbrpgnib startLeaveTask (Lnet/minecraft/unmapped/C_pwmwypfb;)V
+		ARG 1 server
 	METHOD m_qhhosbao isSnapshot ()Z
 	METHOD m_qwnzuazr dismissNotification (Ljava/util/UUID;)V
 		ARG 1 notificationUuid
@@ -127,6 +140,9 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		ARG 1 button
 	METHOD m_rtkzebzs setupDataFetcher (Lnet/minecraft/unmapped/C_yyprjalz;)Lnet/minecraft/unmapped/C_tfgqmjhb$C_zolmsrgs;
 		ARG 1 dataFetcher
+	METHOD m_sklqdwoj showNeedsUpgradeScreen (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_wrmtlwqx;)V
+		ARG 0 server
+		ARG 1 parent
 	METHOD m_smqnphhm resetServerList ()V
 	METHOD m_ssulbyvp createFooter (Lnet/minecraft/unmapped/C_uncfwjlr$C_ojhyljtj;)Lnet/minecraft/unmapped/C_xseakzsd;
 		ARG 1 loadStatus
@@ -140,17 +156,28 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		ARG 1 error
 	METHOD m_uwkoxluc shouldLeaveButtonBeActive (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
 		ARG 1 server
+	METHOD m_uxqnobsd (Lnet/minecraft/unmapped/C_czwqrqci;)V
+		ARG 1 playerLists
 	METHOD m_uyfoaanv configureClicked (Lnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 serverData
 	METHOD m_veeacmfr isSelfOwnedServer (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
+		ARG 0 server
 		ARG 1 serverData
+	METHOD m_vicixlmg (Lnet/minecraft/unmapped/C_yyprjalz;Lnet/minecraft/unmapped/C_gpedgsfu;)V
+		ARG 2 news
 	METHOD m_vjqotsrp (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_vpsrhejw updateLayout ()V
+	METHOD m_wzjaspte (Ljava/util/List;Lnet/minecraft/unmapped/C_ivysvyzf;)Ljava/lang/Object;
+		ARG 1 client
 	METHOD m_xhxonkqe (Lnet/minecraft/unmapped/C_buwziidm;)V
 		ARG 1 button
 	METHOD m_xixvhmyu createLayout (Lnet/minecraft/unmapped/C_uncfwjlr$C_ojhyljtj;)Lnet/minecraft/unmapped/C_cqroimpa;
 		ARG 1 loadStatus
+	METHOD m_ybrbefcw (Ljava/util/UUID;Lnet/minecraft/unmapped/C_auzifczy;)Z
+		ARG 1 notification
+	METHOD m_ydjnxzgt (Ljava/util/UUID;Lnet/minecraft/unmapped/C_ivysvyzf;)Ljava/lang/Object;
+		ARG 1 client
 	METHOD m_yemkrboo play (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_wrmtlwqx;Z)V
 		ARG 0 server
 		ARG 1 screen
@@ -161,6 +188,8 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	METHOD m_ymlzuivp getOwnedNonExpiredWorldIds ()Ljava/util/List;
 	METHOD m_ymxvcgqq leaveClicked (Lnet/minecraft/unmapped/C_pwmwypfb;)V
 		ARG 1 selectedServer
+	METHOD m_ynztlqmb (Ljava/util/List;Ljava/lang/Object;)V
+		ARG 2 unused
 	METHOD m_ytcxemjx addNotificationEntries (Lnet/minecraft/unmapped/C_auzifczy;)Z
 		ARG 1 notification
 	METHOD m_ytletlev shouldPlayButtonBeActive (Lnet/minecraft/unmapped/C_pwmwypfb;)Z
@@ -171,6 +200,9 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 	METHOD m_zxhakhrx showPlayConfirmationScreen (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_wrmtlwqx;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 0 server
 		ARG 1 screen
+		ARG 2 title
+		ARG 3 translationKey
+		ARG 4 text
 	CLASS C_cpcmqakr ParentEntry
 		FIELD f_gjlbszud tooltipProvider Lnet/minecraft/unmapped/C_fasqumtv;
 		FIELD f_lkmvudlg server Lnet/minecraft/unmapped/C_pwmwypfb;
@@ -211,13 +243,23 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 			ARG 1 onPress
 			ARG 2 message
 	CLASS C_hsrdmghw AbstractEntry
+		FIELD f_fzyoaley Y_SPACING I
 		FIELD f_pielkvwx STATUS_LIGHT_WIDTH I
+		FIELD f_tjokbasd X_SPACING I
 		FIELD f_ybasgscf STATUS_LIGHT_HEIGHT I
+		METHOD m_cclrepuq drawServerName (Lnet/minecraft/unmapped/C_sedilmty;Ljava/lang/String;IIII)V
+			ARG 1 graphics
+			ARG 2 string
+			ARG 3 x
+			ARG 4 y
+			ARG 5 maxX
+			ARG 6 color
 		METHOD m_ireiwxcu getNameX (I)I
 			ARG 1 entryX
 		METHOD m_jndftisw getLineHeight ()I
 		METHOD m_opwjmivq renderStatusIcon (Lnet/minecraft/unmapped/C_pwmwypfb;Lnet/minecraft/unmapped/C_sedilmty;IIII)V
 			ARG 1 server
+			ARG 2 graphics
 			ARG 3 x
 			ARG 4 y
 			ARG 5 mouseX
@@ -225,18 +267,24 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		METHOD m_qthxamhx getSecondLineY (I)I
 			ARG 1 firstLineY
 		METHOD m_uldsupug renderThirdLine (Lnet/minecraft/unmapped/C_sedilmty;IILnet/minecraft/unmapped/C_pwmwypfb;)V
+			ARG 1 graphics
 			ARG 2 entryY
 			ARG 3 entryX
 			ARG 4 server
 		METHOD m_uyrwtjkf drawStatusIcon (Lnet/minecraft/unmapped/C_sedilmty;IIIILnet/minecraft/unmapped/C_ncpywfca;Ljava/util/function/Supplier;)V
+			ARG 1 graphics
+			ARG 2 x
+			ARG 3 y
 			ARG 4 mouseX
 			ARG 5 mouseY
+			ARG 6 texture
 			ARG 7 tooltip
 		METHOD m_wmpkysar getThirdLineY (I)I
 			ARG 1 firstLineY
 		METHOD m_ybjmsycw getVersionRight (IILnet/minecraft/unmapped/C_rdaqiwdt;)I
 			ARG 1 entryX
 			ARG 2 entryWidth
+			ARG 3 text
 		METHOD m_zmghyxso getFirstLineY (I)I
 			ARG 1 entryY
 	CLASS C_nwsdpuom RealmEntryListWidget
@@ -261,18 +309,30 @@ CLASS net/minecraft/unmapped/C_uncfwjlr net/minecraft/client/gui/screen/realms/R
 		METHOD m_uwnplzte drawNotificationCountTexture (Lnet/minecraft/unmapped/C_sedilmty;)V
 	CLASS C_vvkxoqra RealmEntry
 		FIELD f_aznycvbu tooltip Lnet/minecraft/unmapped/C_fasqumtv;
+		FIELD f_ilobelrl ONLINE_PLAYERS Lnet/minecraft/unmapped/C_rdaqiwdt;
 		FIELD f_jfvtejrc SKIN_HEAD_LARGE_WIDTH I
 		FIELD f_qpfilxjr serverData Lnet/minecraft/unmapped/C_pwmwypfb;
+		FIELD f_unxbjyfx PLAYER_FACE_SIZE I
 		METHOD <init> (Lnet/minecraft/unmapped/C_uncfwjlr;Lnet/minecraft/unmapped/C_pwmwypfb;)V
 			ARG 2 server
 		METHOD m_blcpmwfx renderFirstLine (Lnet/minecraft/unmapped/C_sedilmty;III)V
+			ARG 1 graphics
 			ARG 2 entryY
 			ARG 3 entryX
 			ARG 4 entryWidth
 		METHOD m_dexdjbra renderSecondLine (Lnet/minecraft/unmapped/C_sedilmty;II)V
+			ARG 1 graphics
 			ARG 2 entryY
 			ARG 3 entryX
 		METHOD m_ivipsczf onCreateRealmPress ()V
+		METHOD m_jzfammlh renderOnlinePlayers (Lnet/minecraft/unmapped/C_sedilmty;IIIIII)Z
+			ARG 1 graphics
+			ARG 2 y
+			ARG 3 x
+			ARG 4 width
+			ARG 5 height
+			ARG 6 mouseX
+			ARG 7 mouseY
 		METHOD m_pyjwtyet onPlayButtonPress ()V
 		METHOD m_qkpvjvpb getServerData ()Lnet/minecraft/unmapped/C_pwmwypfb;
 	CLASS C_xxrzcqwc

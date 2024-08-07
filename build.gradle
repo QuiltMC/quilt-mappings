@@ -87,7 +87,6 @@ dependencies {
 	javadocClasspath(libs.quilt.loader)
 	javadocClasspath(libs.jetbrains.annotations)
 	javadocClasspath(libs.jsr305) // for some other jsr annotations
-	decompileClasspath(libs.cfr)
 	unpick(libs.unpick.cli)
 	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 	intermediary "net.fabricmc:intermediary:${minecraft_version}:v2"
@@ -280,17 +279,6 @@ task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode])
 	}
 	doLast {
 		logger.lifecycle ":Fake source generated"
-	}
-}
-
-task decompileCFR(type: DecompileTask, dependsOn: [mapNamedJar]) {
-	input.set mappings.fileConstants.namedJar
-	output.set file("namedSrc")
-	decompiler = Decompilers.CFR
-	libraries = files(configurations.decompileClasspath)
-
-	doFirst {
-		file("namedSrc").deleteDir()
 	}
 }
 

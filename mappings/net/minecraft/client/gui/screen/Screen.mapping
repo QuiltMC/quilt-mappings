@@ -14,6 +14,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	FIELD f_kreiluct children Ljava/util/List;
 	FIELD f_lysrduwi BACKGROUND_PANORAMA_RENDERER_ROTATING Lnet/minecraft/unmapped/C_dmftscsi;
 	FIELD f_mvugfdtw MOUSE_MOVE_NARRATION_DELAY J
+	FIELD f_npzkmprn narratorModeButton Lnet/minecraft/unmapped/C_ikfvpkkf;
 	FIELD f_oeooblbi selectables Ljava/util/List;
 	FIELD f_ofcdwhxy NARRATOR_MODE_CHANGE_DELAY J
 	FIELD f_ojzzsrar INWORLD_FOOTER_SEPARATOR Lnet/minecraft/unmapped/C_ncpywfca;
@@ -33,7 +34,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 1 title
 	METHOD m_acdaclus isPauseScreen ()Z
 	METHOD m_awpofqnh removed ()V
-	METHOD m_bncrkgkz (F)V
+	METHOD m_bncrkgkz renderBlur (F)V
 		ARG 1 tickDelta
 	METHOD m_bovegipe renderPanorama (Lnet/minecraft/unmapped/C_sedilmty;F)V
 		ARG 1 graphics
@@ -85,10 +86,14 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_iugdsrhk narrateScreen (Z)V
 		ARG 1 useTranslationsCache
 	METHOD m_iytoanop applyMouseMoveNarratorDelay ()V
+	METHOD m_jxvrltxf (Ljava/net/URI;Z)V
+		ARG 2 confirmed
 	METHOD m_keapshqu shouldNarrateNavigation ()Z
 	METHOD m_klvwxtca addScreenNarrations (Lnet/minecraft/unmapped/C_pofrkllk;)V
 		ARG 1 builder
 	METHOD m_kuxewqdw isNarratorActive ()Z
+	METHOD m_kwqejrhl updateNarratorState (Z)V
+		ARG 1 narratorOff
 	METHOD m_liiadbzl insertText (Ljava/lang/String;Z)V
 		ARG 1 text
 		ARG 2 override
@@ -99,6 +104,7 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		ARG 1 child
 	METHOD m_lnmhtyux handleTextClick (Lnet/minecraft/unmapped/C_cpwnhism;)Z
 		ARG 1 style
+	METHOD m_lnowjjjg resetDeferredTooltip ()V
 	METHOD m_mnimqwok setElementNarrationDelay (J)V
 		ARG 1 delayMs
 	METHOD m_ndigxngy tick ()V

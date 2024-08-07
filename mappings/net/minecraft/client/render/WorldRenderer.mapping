@@ -1,5 +1,6 @@
 CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRenderer
 	FIELD f_agpxpcxm SUN Lnet/minecraft/unmapped/C_ncpywfca;
+	FIELD f_cboyeijz cameraChunkZ I
 	FIELD f_cdatnkps END_SKY Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_cnqiydim transparencyShader Lnet/minecraft/unmapped/C_pdhhdxwe;
 	FIELD f_crrssrby lightSkyBuffer Lnet/minecraft/unmapped/C_lhjdxjis;
@@ -14,6 +15,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_gcyanlsp lastCameraY D
 	FIELD f_gepidnwk blockEntityCount I
 	FIELD f_gnmkbmxx lastCameraZ D
+	FIELD f_gqcuibba chunkBuilder Lnet/minecraft/unmapped/C_sjynkhfr;
 	FIELD f_hgjgxstw lastCameraX D
 	FIELD f_ivihlszs SNOW Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_izxsabgg MOON_PHASES Lnet/minecraft/unmapped/C_ncpywfca;
@@ -30,6 +32,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_ntktcmew rainSizeX [F
 	FIELD f_ntzttglo TRANSPARENT_SORT_AMOUNT I
 	FIELD f_ofkpyvlk DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
+	FIELD f_oppequxe currentSounds Ljava/util/Map;
 	FIELD f_ouqnhuws starsBuffer Lnet/minecraft/unmapped/C_lhjdxjis;
 	FIELD f_pgcyttka entityFramebuffer Lnet/minecraft/unmapped/C_xxwgvelc;
 	FIELD f_psrqwipd lastCloudsBlockZ I
@@ -54,6 +57,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_yievaftc RAIN Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_yikkuozy viewDistance I
 	FIELD f_ypfzydqz translucentFramebuffer Lnet/minecraft/unmapped/C_xxwgvelc;
+	FIELD f_yvsvzxdd cameraChunkY I
+	FIELD f_yzkmvnyb cameraChunkX I
 	FIELD f_yznrgjts SKY_RADIUS F
 	FIELD f_yzwscawv FORCEFIELD Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_zdbvvrzp cloudsBuffer Lnet/minecraft/unmapped/C_lhjdxjis;
@@ -239,11 +244,14 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_kgpnuhyu getEntityFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_khytiwdn setupFrustum (Lnet/minecraft/unmapped/C_vgpupfxx;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V
 		ARG 1 pos
-		ARG 2 projectionMatrix
+		ARG 2 modelViewMatrix
+		ARG 3 projectionMatrix
 	METHOD m_kkvlftbz addVertexFromFrustum (Lnet/minecraft/unmapped/C_igthdzux;Lorg/joml/Matrix4f;I)V
 		ARG 1 consumer
 		ARG 2 matrix
 		ARG 3 frustumIndex
+	METHOD m_kvtxvfgf createParticles (ILnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_lwmufxcy;)V
+		ARG 4 particle
 	METHOD m_lmslduiw addParticle (Lnet/minecraft/unmapped/C_nqucohct;ZZDDDDDD)V
 		ARG 1 parameters
 		ARG 2 shouldAlwaysSpawn
@@ -269,11 +277,14 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 3 camera
 		ARG 4 gameRenderer
 		ARG 5 lightmapTextureManager
-		ARG 6 projectionMatrix
+		ARG 6 modelViewMatrix
+		ARG 7 projectionMatrix
 	METHOD m_ntxphbrg getLightmapCoordinates (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 0 world
 		ARG 1 state
 		ARG 2 pos
+	METHOD m_obdmlaer (Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_tizlwnnv;)Lnet/minecraft/unmapped/C_igthdzux;
+		ARG 2 renderLayer
 	METHOD m_ognnlhul addChainedFilledBoxVertices (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igthdzux;DDDDDDFFFF)V
 		ARG 0 matrices
 		ARG 1 vertexConsumer
@@ -295,6 +306,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 5 maxY
 		ARG 6 maxZ
 	METHOD m_owgocfxp createSkyBuffer (Lnet/minecraft/unmapped/C_hiiunyvh;F)Lnet/minecraft/unmapped/C_fpcijbbg;
+		ARG 0 tessellator
 		ARG 1 y
 	METHOD m_qgbrxqob setBlockBreakingInfo (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 		ARG 1 entityId
@@ -304,7 +316,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_qwohxtzw renderWorldBorder (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
 		ARG 1 camera
 	METHOD m_qwqxlbnd renderSky (Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FLnet/minecraft/unmapped/C_dcmtgrvm;ZLjava/lang/Runnable;)V
-		ARG 1 projectionMatrix
+		ARG 1 modelViewMatrix
+		ARG 2 projectionMatrix
 		ARG 3 tickDelta
 		ARG 4 preStep
 		ARG 5 skipRendering
@@ -319,6 +332,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 9 matrices
 		ARG 10 vertexConsumers
 	METHOD m_rlcfnbww renderStars (Lnet/minecraft/unmapped/C_hiiunyvh;)Lnet/minecraft/unmapped/C_fpcijbbg;
+		ARG 1 tessellator
 	METHOD m_roxvmdfn getViewDistance ()D
 	METHOD m_rwjohyib scheduleBlockRerenderIfNeeded (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 pos
@@ -405,6 +419,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 4 y
 		ARG 6 z
 		ARG 8 color
+	METHOD m_znnjtopn getChunkBuilderDebugString ()Ljava/lang/String;
 	METHOD m_zvzvgwmw captureFrustum (Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;DDDLnet/minecraft/unmapped/C_jwzjqevg;)V
 		ARG 1 positionMatrix
 		ARG 2 projectionMatrix
@@ -412,6 +427,14 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 5 y
 		ARG 7 z
 		ARG 9 frustum
+	METHOD m_zwdrubpf drawQuadFace (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igthdzux;Lnet/minecraft/unmapped/C_xpuuihxf;FFFFFFFFFF)V
+		ARG 1 vertices
+		ARG 3 x1
+		ARG 4 y1
+		ARG 5 z1
+		ARG 6 x2
+		ARG 7 y2
+		ARG 8 z2
 	CLASS C_pxxobvor ShaderException
 		METHOD <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
 			ARG 1 message

@@ -42,8 +42,11 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 0 context
 		ARG 1 chunkX
 		ARG 2 chunkZ
+	METHOD m_ipwqctvh (Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;Lnet/minecraft/unmapped/C_quklzgtb$C_tbkxgvzz;)Z
+		ARG 1 biome
 	METHOD m_jlyvhzqo isValidBiome (Lnet/minecraft/unmapped/C_quklzgtb$C_tbkxgvzz;Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;)Z
 		ARG 0 generationStub
+		ARG 1 context
 	METHOD m_jpmonaqr (Lnet/minecraft/unmapped/C_quklzgtb;)Lnet/minecraft/unmapped/C_quklzgtb$C_dnbqyhbk;
 		ARG 0 structure
 	METHOD m_ksbmztmm settingsCodec (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
@@ -59,6 +62,9 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 3 z
 		ARG 4 height
 	METHOD m_ujvinxmf simpleCodec (Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
+		ARG 0 constructor
+	METHOD m_uxvmwaef getAverageCornerHeight (Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;IIII)I
+	METHOD m_wkkfndgb getValidStructurePosition (Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;)Ljava/util/Optional;
 	METHOD m_xicdrobb postPlace (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_ccebncrd;)V
 		ARG 1 world
 		ARG 2 structureManager
@@ -75,10 +81,6 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 1 heightmapType
 		ARG 2 generator
 	CLASS C_dnbqyhbk StructureSettings
-		FIELD f_cqolnngb biomes Lnet/minecraft/unmapped/C_odfnijdo;
-		FIELD f_pblwnlos terrainAdaptation Lnet/minecraft/unmapped/C_djexrdop;
-		FIELD f_rfmpamnb step Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
-		FIELD f_rgbfnyaw spawnOverrides Ljava/util/Map;
 		FIELD f_zxexyavz CODEC Lcom/mojang/serialization/MapCodec;
 		METHOD <init> (Lnet/minecraft/unmapped/C_odfnijdo;Ljava/util/Map;Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;Lnet/minecraft/unmapped/C_djexrdop;)V
 			ARG 1 biomes
@@ -93,6 +95,18 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		METHOD m_pwkhznhq biomes ()Lnet/minecraft/unmapped/C_odfnijdo;
 		METHOD m_tnqbumfi (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
+		CLASS C_iccqsinq Builder
+			FIELD f_enqxcttn spawnOverrides Ljava/util/Map;
+			FIELD f_fyuhjsvv biomes Lnet/minecraft/unmapped/C_odfnijdo;
+			FIELD f_waygvqli step Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
+			FIELD f_zssyckxe terrainAdaptation Lnet/minecraft/unmapped/C_djexrdop;
+			METHOD m_hnrooyoj step (Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;)Lnet/minecraft/unmapped/C_quklzgtb$C_dnbqyhbk$C_iccqsinq;
+				ARG 1 step
+			METHOD m_pwoapgwv spawnOverrides (Ljava/util/Map;)Lnet/minecraft/unmapped/C_quklzgtb$C_dnbqyhbk$C_iccqsinq;
+				ARG 1 spawnOverrides
+			METHOD m_qifpqpjb build ()Lnet/minecraft/unmapped/C_quklzgtb$C_dnbqyhbk;
+			METHOD m_wmourepz terrainAdaptation (Lnet/minecraft/unmapped/C_djexrdop;)Lnet/minecraft/unmapped/C_quklzgtb$C_dnbqyhbk$C_iccqsinq;
+				ARG 1 terrainAdaptation
 	CLASS C_ooyswlix GenerationContext
 		FIELD f_donfuvml validBiomePredicate Ljava/util/function/Predicate;
 		FIELD f_emvernnu seed J
@@ -148,6 +162,10 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 			ARG 2 generator
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
+		METHOD m_eqiwacgl (Lnet/minecraft/unmapped/C_jieseoeb;)Lnet/minecraft/unmapped/C_jieseoeb;
+			ARG 0 collector
 		METHOD m_guiylrez pos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_mwyfexiz (Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_jieseoeb;
+			ARG 0 collector
 		METHOD m_qmehuygq generator ()Lcom/mojang/datafixers/util/Either;
 		METHOD m_qwsjdhsg generate ()Lnet/minecraft/unmapped/C_jieseoeb;

@@ -1,12 +1,14 @@
 CLASS net/minecraft/unmapped/C_jfjllmkc net/minecraft/world/gen/chunk/BlendingData
 	FIELD f_aazboqdm hasCalculatedData Z
 	FIELD f_cupiwmld BLENDING_DENSITY_FACTOR D
+	FIELD f_dnsmigiv AIR_DENSITY D
 	FIELD f_ehvkmxqo densities [[D
 	FIELD f_facirogj DOUBLE_ARRAY_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_fexxbmsc CELL_WIDTH I
 	FIELD f_lrgvcpsn CELL_COLUMN_OUTSIDE_COUNT I
 	FIELD f_lyjjaooq CELL_COLUMN_COUNT I
 	FIELD f_ncrpcmxe CELL_HORIZONTAL_MAX_INDEX_OUTSIDE I
+	FIELD f_pmvgnwka SOLID_DENSITY D
 	FIELD f_pniweaig heights [D
 	FIELD f_pwugyskq CELL_HORIZONTAL_MAX_INDEX_INSIDE I
 	FIELD f_snbgqzak CELLS_PER_SECTION_Y I
@@ -18,39 +20,87 @@ CLASS net/minecraft/unmapped/C_jfjllmkc net/minecraft/world/gen/chunk/BlendingDa
 	FIELD f_togvlklx biomes Ljava/util/List;
 	FIELD f_vlvyzztq QUARTS_PER_SECTION I
 	FIELD f_zszrfboh SURFACE_BLOCKS Ljava/util/List;
+	METHOD <init> (IILjava/util/Optional;)V
+		ARG 1 oldBottomSectionY
+		ARG 2 oldTopSectionY
+		ARG 3 heights
+	METHOD m_delbhaqi getNorthWestIndex (II)I
+		ARG 0 chunkBiomeX
+		ARG 1 chunkBiomeZ
+	METHOD m_dgeashig getX (I)I
+		ARG 0 index
+	METHOD m_egokbydz getBiomeColumn (Lnet/minecraft/unmapped/C_lwzmmmqr;II)Ljava/util/List;
+		ARG 1 chunk
+		ARG 2 chunkBlockX
+		ARG 3 chunkBlockZ
 	METHOD m_gnmakmtl getDensityColumn (Lnet/minecraft/unmapped/C_lwzmmmqr;III)[D
-		ARG 1 x
-		ARG 2 z
-		ARG 3 height
+		ARG 1 chunk
+		ARG 2 chunkBlockX
+		ARG 3 chunkBlockZ
+		ARG 4 surfaceHeight
+	METHOD m_hjsuxbsc getCollidableBlockDensity ([DI)D
+		ARG 1 column
+		ARG 2 halfSectionY
+	METHOD m_ipznhlqu getBottomHalfSectionY ()I
+	METHOD m_kciqqhwt getBottomHalfSectionHeight (I)I
+		ARG 1 halfSectionY
+	METHOD m_kdkjfyxt (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+		ARG 0 instance
 	METHOD m_kswaabvq calculateData (Lnet/minecraft/unmapped/C_lwzmmmqr;Ljava/util/Set;)V
 		ARG 1 chunk
 		ARG 2 adjacentChunksWithNewNoise
+	METHOD m_lryxutls getSouthEastIndex (II)I
+		ARG 0 chunkBiomeX
+		ARG 1 chunkBiomeZ
 	METHOD m_mkevcgfg validateHeightsLength (Lnet/minecraft/unmapped/C_jfjllmkc;)Lcom/mojang/serialization/DataResult;
 		ARG 0 data
 	METHOD m_nxzfejge getHeight (III)D
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
+	METHOD m_nyjnuisq acceptHeights (IILnet/minecraft/unmapped/C_jfjllmkc$C_bnlexvzr;)V
+		ARG 1 minHalfSectionY
+		ARG 2 maxHalfSectionY
+		ARG 3 consumer
+	METHOD m_opdlcxgw getOldHeightLimit ()Lnet/minecraft/unmapped/C_qpninoyb;
+	METHOD m_pslasnyw getMaxWith0 (I)I
+		ARG 0 i
+	METHOD m_pwwirhcd getVerticalHalfSectionCount ()I
+	METHOD m_qmcebnfr (Lnet/minecraft/unmapped/C_jfjllmkc;)Ljava/util/Optional;
+		ARG 0 data
 	METHOD m_qtxxyqet addValuesForColumn (ILnet/minecraft/unmapped/C_lwzmmmqr;II)V
 		ARG 1 index
 		ARG 2 chunk
 		ARG 3 x
 		ARG 4 z
-	METHOD m_rtlixmks (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)D
+	METHOD m_rtlixmks getBelowCollidableBlockValue (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)D
 		ARG 0 chunk
 		ARG 1 mutablePos
 	METHOD m_sfmbavej getSurfaceHeight (Lnet/minecraft/unmapped/C_lwzmmmqr;II)I
-		ARG 1 x
-		ARG 2 z
+		ARG 1 chunk
+		ARG 2 x
+		ARG 3 z
 	METHOD m_szifbizq getAdjacentChunksWithNoise (Lnet/minecraft/unmapped/C_ldkphtbr;IIZ)Ljava/util/Set;
 		ARG 0 world
 		ARG 1 x
 		ARG 2 z
 		ARG 3 withOldNoise
+	METHOD m_tgurztaj getVerticalBiomeCount ()I
 	METHOD m_thfkgzxl isGround (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 0 chunk
 		ARG 1 pos
-	METHOD m_wobsymhv (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)D
+	METHOD m_ulhortww (D)Z
+		ARG 0 d
+	METHOD m_vtqjwwug acceptCollidableBlockDensities (IIIILnet/minecraft/unmapped/C_jfjllmkc$C_gemeohfo;)V
+		ARG 1 biomeX
+		ARG 2 biomeZ
+		ARG 3 minHalfSectionY
+		ARG 4 maxHalfSectionY
+		ARG 5 consumer
+	METHOD m_wjaezaby getBottomHalfSectionYPlusOne ()I
+	METHOD m_wlsfcccs ([D)V
+		ARG 0 ds
+	METHOD m_wobsymhv getCollidableBlockValue (Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)D
 		ARG 0 chunk
 		ARG 1 mutablePos
 	METHOD m_wtiarfao getBlendingData (Lnet/minecraft/unmapped/C_ezymcfey;II)Lnet/minecraft/unmapped/C_jfjllmkc;
@@ -58,6 +108,19 @@ CLASS net/minecraft/unmapped/C_jfjllmkc net/minecraft/world/gen/chunk/BlendingDa
 		ARG 1 x
 		ARG 2 z
 	METHOD m_xhoxewbi (Lnet/minecraft/unmapped/C_jfjllmkc;)Ljava/lang/Integer;
+		ARG 0 data
+	METHOD m_xpniqeyk getZ (I)I
+		ARG 0 index
+	METHOD m_xsvvknib acceptBiomes (IIILnet/minecraft/unmapped/C_jfjllmkc$C_ibtuqfha;)V
+		ARG 1 biomeX
+		ARG 2 biomeY
+		ARG 3 biomeZ
+		ARG 4 consumer
+	METHOD m_znzbddll getDensity (III)D
+		ARG 1 chunkBiomeX
+		ARG 2 halfSectionY
+		ARG 3 chunkBiomeZ
+	METHOD m_zyjyhkdi (Lnet/minecraft/unmapped/C_jfjllmkc;)Ljava/lang/Integer;
 		ARG 0 data
 	CLASS C_bnlexvzr HeightConsumer
 		METHOD consume consume (IID)V

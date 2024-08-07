@@ -1,6 +1,6 @@
 package quilt.internal.util;
 
-import net.fabricmc.mappingio.format.Tiny2Reader;
+import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;
@@ -18,7 +18,7 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
 
     public MappingsJavadocProvider(File mappingsFile, String namespace) throws IOException {
         try (Reader reader = Files.newBufferedReader(mappingsFile.toPath())) {
-            Tiny2Reader.read(reader, tree);
+            Tiny2FileReader.read(reader, tree);
         }
         namespaceId = tree.getNamespaceId(namespace);
     }

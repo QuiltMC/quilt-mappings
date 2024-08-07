@@ -1,9 +1,11 @@
 CLASS net/minecraft/unmapped/C_zhhoxunt net/minecraft/client/font/FontStorage
 	FIELD f_aiwolaxy glyphRendererCache Lnet/minecraft/unmapped/C_srmdcrvq;
 	FIELD f_deijrvpv glyphCache Lnet/minecraft/unmapped/C_srmdcrvq;
+	FIELD f_gdcoaemg fonts Ljava/util/List;
 	FIELD f_qxvstnog RANDOM Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_rzdttaxr blankGlyphRenderer Lnet/minecraft/unmapped/C_wrqtxozz;
 	FIELD f_tehtajjp glyphAtlases Ljava/util/List;
+	FIELD f_wgoeswrb filteredFonts Ljava/util/List;
 	FIELD f_whiqfyvx charactersByWidth Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	FIELD f_wrcgchkf MAX_GLYPH_ADVANCE F
 		COMMENT The maximum advance allowed for a glyph before it being considered malicious,
@@ -20,6 +22,10 @@ CLASS net/minecraft/unmapped/C_zhhoxunt net/minecraft/client/font/FontStorage
 		ARG 2 filterFishyGlyphs
 	METHOD m_bcxvxatg (I)[[Lnet/minecraft/unmapped/C_wrqtxozz;
 		ARG 0 i
+	METHOD m_drimvtcl updateAvailableFonts (Ljava/util/List;Ljava/util/Set;)Ljava/util/List;
+		ARG 1 filteredFonts
+		ARG 2 options
+	METHOD m_eejfzhrk reset ()V
 	METHOD m_eiqitttg bakeGlyph (I)Lnet/minecraft/unmapped/C_wrqtxozz;
 		ARG 1 codePoint
 	METHOD m_jyqartmo isGlyphFishy (Lnet/minecraft/unmapped/C_sxmfadan;)Z
@@ -29,15 +35,23 @@ CLASS net/minecraft/unmapped/C_zhhoxunt net/minecraft/client/font/FontStorage
 	METHOD m_lbqufroz (I)[[Lnet/minecraft/unmapped/C_zhhoxunt$C_kklzxalg;
 		ARG 0 i
 	METHOD m_nclahpgg getRectangleRenderer ()Lnet/minecraft/unmapped/C_wrqtxozz;
+	METHOD m_plrsgatd setOptions (Ljava/util/Set;)V
+		ARG 1 options
 	METHOD m_prqyajrl getObfuscatedGlyphRenderer (Lnet/minecraft/unmapped/C_sxmfadan;)Lnet/minecraft/unmapped/C_wrqtxozz;
 		ARG 1 glyph
 	METHOD m_psccwovv getGlyphRenderer (Lnet/minecraft/unmapped/C_etoytjqu;)Lnet/minecraft/unmapped/C_wrqtxozz;
 		ARG 1 glyphInfo
 	METHOD m_ptacwual getGlyphRenderer (I)Lnet/minecraft/unmapped/C_wrqtxozz;
 		ARG 1 codePoint
+	METHOD m_qbrvliaq (Ljava/util/List;Ljava/util/Set;I)V
+		ARG 3 glyph
+	METHOD m_qlrvltwv setFonts (Ljava/util/List;Ljava/util/Set;)V
+		ARG 1 filteredFonts
+		ARG 2 options
 	METHOD m_rnmgnefi (I)[Lnet/minecraft/unmapped/C_zhhoxunt$C_kklzxalg;
 		ARG 0 i
 	METHOD m_teijcklv closeGlyphAtlases ()V
+	METHOD m_vlgcdvsk getId ()Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_xoqfcpqv findGlyph (I)Lnet/minecraft/unmapped/C_zhhoxunt$C_kklzxalg;
 		ARG 1 codePoint
 	CLASS C_kklzxalg GlyphInfoFilter
