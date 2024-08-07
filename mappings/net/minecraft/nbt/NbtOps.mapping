@@ -25,14 +25,24 @@ CLASS net/minecraft/unmapped/C_fybaywjo net/minecraft/nbt/NbtOps
 		ARG 1 value
 	METHOD createByte (B)Ljava/lang/Object;
 		ARG 1 value
+	METHOD createByteList (Ljava/nio/ByteBuffer;)Ljava/lang/Object;
+		ARG 1 buffer
 	METHOD createDouble (D)Ljava/lang/Object;
 		ARG 1 value
 	METHOD createFloat (F)Ljava/lang/Object;
 		ARG 1 value
 	METHOD createInt (I)Ljava/lang/Object;
 		ARG 1 value
+	METHOD createIntList (Ljava/util/stream/IntStream;)Ljava/lang/Object;
+		ARG 1 stream
+	METHOD createList (Ljava/util/stream/Stream;)Ljava/lang/Object;
+		ARG 1 stream
 	METHOD createLong (J)Ljava/lang/Object;
 		ARG 1 value
+	METHOD createLongList (Ljava/util/stream/LongStream;)Ljava/lang/Object;
+		ARG 1 stream
+	METHOD createMap (Ljava/util/stream/Stream;)Ljava/lang/Object;
+		ARG 1 stream
 	METHOD createNumeric (Ljava/lang/Number;)Ljava/lang/Object;
 		ARG 1 value
 	METHOD createShort (S)Ljava/lang/Object;
@@ -59,17 +69,89 @@ CLASS net/minecraft/unmapped/C_fybaywjo net/minecraft/nbt/NbtOps
 		ARG 1 element
 	METHOD getStringValue (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
 		ARG 1 element
+	METHOD m_kvzwcnej tryUnwrap (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_oivssbvb;
+		ARG 0 nbt
+	METHOD m_vpbkfzmz createCollector (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/Optional;
+		ARG 0 element
 	METHOD mapBuilder mapBuilder ()Lcom/mojang/serialization/RecordBuilder;
 	METHOD mergeToList (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
 		ARG 1 list
 		ARG 2 value
+	METHOD mergeToList (Ljava/lang/Object;Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 1 list
+		ARG 2 values
 	METHOD mergeToMap (Ljava/lang/Object;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
 		ARG 1 element
+		ARG 2 values
 	METHOD mergeToMap (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
 		ARG 1 map
 		ARG 2 key
 		ARG 3 value
+	METHOD mergeToMap (Ljava/lang/Object;Ljava/util/Map;)Lcom/mojang/serialization/DataResult;
+		ARG 1 element
+		ARG 2 values
 	METHOD remove (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 		ARG 1 element
 		ARG 2 key
+	CLASS C_cfjsyyyh SimpleListCollector
+		FIELD f_zdfsryne result Lnet/minecraft/unmapped/C_hqhtfwlr;
+		METHOD <init> (Lnet/minecraft/unmapped/C_hqhtfwlr;)V
+			ARG 1 nbt
+		METHOD <init> (Lnet/minecraft/unmapped/C_oivssbvb;)V
+			ARG 1 element
 	CLASS C_cmafvjrt MapBuilder
+		METHOD append (Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 key
+			ARG 2 element
+			ARG 3 nbt
+		METHOD build (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 nbt
+			ARG 2 element
+	CLASS C_cpsqmvih ByteListCollector
+		FIELD f_ijtscyyp values Lit/unimi/dsi/fastutil/bytes/ByteArrayList;
+		METHOD <init> (B)V
+			ARG 1 value
+		METHOD <init> ([B)V
+			ARG 1 values
+	CLASS C_dwkvaauw LongListCollector
+		FIELD f_rjyiwlrj values Lit/unimi/dsi/fastutil/longs/LongArrayList;
+		METHOD <init> (J)V
+			ARG 1 value
+		METHOD <init> ([J)V
+			ARG 1 values
+	CLASS C_lrggpudd DelegatingListCollector
+		FIELD f_oknzgzfq INSTANCE Lnet/minecraft/unmapped/C_fybaywjo$C_lrggpudd;
+	CLASS C_nehsnwyp ListCollector
+		METHOD m_berihwml accept (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_fybaywjo$C_nehsnwyp;
+			ARG 1 element
+		METHOD m_fjtdnzmx accept (Ljava/lang/Iterable;)Lnet/minecraft/unmapped/C_fybaywjo$C_nehsnwyp;
+			ARG 1 elements
+		METHOD m_gxpktbdp acceptAll (Ljava/util/stream/Stream;)Lnet/minecraft/unmapped/C_fybaywjo$C_nehsnwyp;
+		METHOD m_mlztdcvi getResult ()Lnet/minecraft/unmapped/C_oivssbvb;
+	CLASS C_rkolbfzv IntListCollector
+		FIELD f_pvqmoapp values Lit/unimi/dsi/fastutil/ints/IntArrayList;
+		METHOD <init> (I)V
+			ARG 1 value
+		METHOD <init> ([I)V
+			ARG 1 values
+	CLASS C_yartmlgv
+		METHOD entries entries ()Ljava/util/stream/Stream;
+		METHOD get (Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 element
+		METHOD get (Ljava/lang/String;)Ljava/lang/Object;
+			ARG 1 key
+	CLASS C_zcsovcmj WrappingListCollector
+		FIELD f_kuucpbgx result Lnet/minecraft/unmapped/C_hqhtfwlr;
+		METHOD <init> (Lit/unimi/dsi/fastutil/bytes/ByteArrayList;)V
+			ARG 1 byteList
+		METHOD <init> (Lit/unimi/dsi/fastutil/ints/IntArrayList;)V
+			ARG 1 intList
+		METHOD <init> (Lit/unimi/dsi/fastutil/longs/LongArrayList;)V
+			ARG 1 longList
+		METHOD <init> (Ljava/util/Collection;)V
+			ARG 1 elements
+		METHOD m_fhjbuhyx isWrapper (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
+			ARG 0 nbt
+		METHOD m_ntfjawdo wrapElement (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		METHOD m_vxfjomvi wrapIfNeeded (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_oivssbvb;
+			ARG 0 element
