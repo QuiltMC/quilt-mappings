@@ -1,8 +1,10 @@
 CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 	COMMENT Represents an NBT compound object which holds unordered key-value pairs with distinct case-sensitive string keys.
+	FIELD f_aetpjbog ENTRY_SIZE I
 	FIELD f_ckdatsht CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_dopajgtr entries Ljava/util/Map;
 	FIELD f_ghusyxdr TYPE Lnet/minecraft/unmapped/C_ueidorcc;
+	FIELD f_qucoyxms SIZE I
 	METHOD <init> (Ljava/util/Map;)V
 		ARG 1 entries
 	METHOD equals (Ljava/lang/Object;)Z
@@ -68,6 +70,7 @@ CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 	METHOD m_oidzekic putInt (Ljava/lang/String;I)V
 		ARG 1 key
 		ARG 2 value
+	METHOD m_poylyjba createNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_pvrsstff putByteArray (Ljava/lang/String;Ljava/util/List;)V
 		ARG 1 key
 		ARG 2 value
@@ -98,6 +101,7 @@ CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 	METHOD m_sfeexgrr getList (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_hqhtfwlr;
 		ARG 1 key
 		ARG 2 type
+	METHOD m_smzpndim getEntries ()Ljava/util/Set;
 	METHOD m_ulzvmblb remove (Ljava/lang/String;)V
 		ARG 1 key
 	METHOD m_utczects copyFrom (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
@@ -131,13 +135,13 @@ CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 	METHOD m_zsbbwdsl getByteArray (Ljava/lang/String;)[B
 		ARG 1 key
 	CLASS C_krlbszwn
-		METHOD m_heopwcei (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_avcaqucb;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+		METHOD m_heopwcei parseCompound (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_avcaqucb;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
 			ARG 0 input
 			ARG 1 scanner
 			ARG 2 tracker
-		METHOD m_mlnxbtqt (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/String;
+		METHOD m_mlnxbtqt readString (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/String;
 			ARG 0 input
 			ARG 1 tracker
-		METHOD m_qbdkgvms (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		METHOD m_qbdkgvms readCompound (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_hhlwcnih;
 			ARG 0 input
 			ARG 1 tracker
