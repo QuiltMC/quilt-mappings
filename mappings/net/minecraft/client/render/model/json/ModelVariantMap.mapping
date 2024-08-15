@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_hsdreiyy net/minecraft/client/render/model/json/ModelVariantMap
+	FIELD f_xhpdqjri multipartModel Lnet/minecraft/unmapped/C_ktggvsoz$C_qwzooevt;
 	FIELD f_ygsmcwfz variantMap Ljava/util/Map;
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
@@ -12,6 +13,11 @@ CLASS net/minecraft/unmapped/C_hsdreiyy net/minecraft/client/render/model/json/M
 		ARG 1 key
 			COMMENT the variant's key
 	METHOD m_zypmupme getAllModels ()Ljava/util/Set;
+	METHOD m_chnfmqsx getMultipartModel ()Lnet/minecraft/unmapped/C_ktggvsoz$C_qwzooevt;
+	METHOD m_drlqvyqn fromJson (Lcom/google/gson/JsonElement;)Lnet/minecraft/unmapped/C_hsdreiyy;
+		ARG 0 json
+	METHOD m_jtjsogrn fromJson (Ljava/io/Reader;)Lnet/minecraft/unmapped/C_hsdreiyy;
+		ARG 0 reader
 	CLASS C_hnuuxbfk VariantAbsentException
 		COMMENT An unchecked exception indicating a variant is not found with a string key.
 	CLASS C_jekfaxit Deserializer
@@ -20,5 +26,8 @@ CLASS net/minecraft/unmapped/C_hsdreiyy net/minecraft/client/render/model/json/M
 			ARG 2 unused
 			ARG 3 context
 		METHOD m_rcnwsdnv variantsFromJson (Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Ljava/util/Map;
+			ARG 1 context
+			ARG 2 object
+		METHOD m_tljjcncn multipartFromJson (Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Lnet/minecraft/unmapped/C_ktggvsoz$C_qwzooevt;
 			ARG 1 context
 			ARG 2 object

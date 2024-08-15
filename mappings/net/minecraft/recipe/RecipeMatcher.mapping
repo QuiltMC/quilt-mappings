@@ -2,15 +2,32 @@ CLASS net/minecraft/unmapped/C_nyagoaau net/minecraft/recipe/RecipeMatcher
 	COMMENT Matching class that matches a recipe to its required resources.
 	COMMENT This specifically does not check patterns (See {@link ShapedRecipe} for that).
 	METHOD m_ilmcgbtf clear ()V
+	METHOD m_okheizlq consume (Ljava/lang/Object;I)V
+		COMMENT Consumes a resource from the pool of available items.
+		ARG 2 itemId
+			COMMENT the raw id of the item being consumed
+	METHOD m_wkrwvzbp addInput (Ljava/lang/Object;I)V
+		COMMENT Adds an input to be used for recipe matching.
+		ARG 2 itemId
+			COMMENT the raw ID of the item to match
 	CLASS C_tvjqrchc Matcher
 		FIELD f_bjsngxdw totalIngredients I
+		FIELD f_csjnvinn requiredItems Ljava/util/List;
 		FIELD f_ctzeokob requirementsMatrix Ljava/util/BitSet;
 		FIELD f_kclymipu totalRequiredItems I
 		FIELD f_uifobfbp ingredients Ljava/util/List;
 		FIELD f_wkisrowc ingredientItemLookup Lit/unimi/dsi/fastutil/ints/IntList;
 		METHOD m_lmstygqg unfulfillRequirement (I)V
 			ARG 1 itemId
+		METHOD m_bjscespa match (ILnet/minecraft/unmapped/C_nyagoaau$C_xftfxaqa;)Z
+			ARG 1 multiplier
 		METHOD m_wyqyvyeg getMaximumCrafts ()I
+		METHOD m_otmvcbma createItemRequirementList ()Ljava/util/List;
+		METHOD m_oxrukgsb needsRequirement (II)Z
+			ARG 1 itemIndex
+			ARG 2 ingredientIndex
+		METHOD m_ushjqgji countCrafts (ILnet/minecraft/unmapped/C_nyagoaau$C_xftfxaqa;)I
+			ARG 1 minimum
 		METHOD m_xzbczili getRequirement (I)Z
 			ARG 1 itemId
 		METHOD m_zleeorrf getRequirementIndex (I)I

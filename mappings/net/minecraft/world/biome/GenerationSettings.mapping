@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_qbjpvmph net/minecraft/world/biome/GenerationSettings
+	FIELD f_bppmeaer carvers Lnet/minecraft/unmapped/C_odfnijdo;
 	FIELD f_ehxdrimn INSTANCE Lnet/minecraft/unmapped/C_qbjpvmph;
 	FIELD f_sjmvfevc CODEC Lcom/mojang/serialization/MapCodec;
 	FIELD f_touhcpne features Ljava/util/List;
@@ -17,16 +18,21 @@ CLASS net/minecraft/unmapped/C_qbjpvmph net/minecraft/world/biome/GenerationSett
 	METHOD m_xdoxdwzp getFeatures ()Ljava/util/List;
 		COMMENT Returns the lists of features configured for each {@link net.minecraft.world.gen.GenerationStep.Feature feature generation step}, up to the highest step that has a configured feature.
 		COMMENT Entries are guaranteed to not be null, but may be empty lists if an earlier step has no features, but a later step does.
+	METHOD m_vupjajhg getCarversForStep ()Ljava/lang/Iterable;
+	METHOD m_yztnozcz (Lnet/minecraft/unmapped/C_qbjpvmph;)Lnet/minecraft/unmapped/C_odfnijdo;
+		ARG 0 settings
 	CLASS C_bwxzcdhs Builder
 		FIELD f_agwsfyrx features Lnet/minecraft/unmapped/C_pzdchrcy;
 		FIELD f_tfsvocsj carvers Lnet/minecraft/unmapped/C_pzdchrcy;
 		METHOD <init> (Lnet/minecraft/unmapped/C_pzdchrcy;Lnet/minecraft/unmapped/C_pzdchrcy;)V
 			ARG 1 features
 			ARG 2 carvers
+		METHOD m_jtwrhufd carver (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_qbjpvmph$C_bwxzcdhs;
 		METHOD m_qhxraujc feature (Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_qbjpvmph$C_bwxzcdhs;
 			ARG 1 featureStep
 	CLASS C_thdznmut PlainBuilder
 		FIELD f_butdfpqn features Ljava/util/List;
+		FIELD f_efnbqovo carvers Ljava/util/List;
 		METHOD m_bkbvlpsc feature (ILnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_qbjpvmph$C_thdznmut;
 			ARG 1 ordinal
 			ARG 2 feature
@@ -36,3 +42,5 @@ CLASS net/minecraft/unmapped/C_qbjpvmph net/minecraft/world/biome/GenerationSett
 			ARG 1 featureStep
 			ARG 2 feature
 		METHOD m_vmphwdbx build ()Lnet/minecraft/unmapped/C_qbjpvmph;
+		METHOD m_xiktqhbo carver (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_qbjpvmph$C_thdznmut;
+			ARG 1 carver

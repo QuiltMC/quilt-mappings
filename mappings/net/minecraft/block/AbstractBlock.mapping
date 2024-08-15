@@ -50,11 +50,14 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	METHOD m_ewcsdntg asBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
 	METHOD m_fjkbizwn isRedstonePowerSource (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
+	METHOD m_flnjgkno isTransparent (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 	METHOD m_fqngyjtr getOutlineShape (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_pbfjvesm;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 context
+	METHOD m_fsimvkxt getCullingShape (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 1 state
 	METHOD m_gzvkqagj createScreenHandlerFactory (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_soxpxdhu;
 		ARG 1 state
 		ARG 2 world
@@ -64,11 +67,17 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
+	METHOD m_jzhgkbwu onInteract (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
+		ARG 5 entity
+		ARG 6 hand
+		ARG 7 hitResult
 	METHOD m_ktunuucb onBlockBreakStart (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 player
+	METHOD m_kudnpwby getOpacity (Lnet/minecraft/unmapped/C_txtbiemp;)I
+		ARG 1 state
 	METHOD m_lcpckfxn prepare (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;II)V
 		ARG 1 state
 		ARG 2 world
@@ -116,6 +125,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
+	METHOD m_qjdjbqgu onExplosion (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
+		ARG 4 explosion
+		ARG 5 dropConsumer
 	METHOD m_qjteufci onStacksDropped (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sddaxwyk;Z)V
 		ARG 1 state
 		ARG 2 world
@@ -148,6 +160,12 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	METHOD m_tgwcmyam getDroppedStacks (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_nzsnkdtl$C_oqhigtaq;)Ljava/util/List;
 		ARG 1 state
 		ARG 2 lootParameterBuilder
+	METHOD m_tmlkosuh neighborUpdate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ctatbkvy;Z)V
+		ARG 1 state
+		ARG 2 world
+		ARG 3 pos
+		ARG 4 block
+		ARG 6 notify
 	METHOD m_umbsjste rotate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_txtbiemp;
 		COMMENT Applies a block rotation to a block state.
 		COMMENT
@@ -232,6 +250,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_yypdsdkn lavaIgnitable Z
 		FIELD f_zpvdfobl mapColor Lnet/minecraft/unmapped/C_mlrprqox;
 		FIELD f_zzuoeazs instrument Lnet/minecraft/unmapped/C_onjtjtsi;
+		METHOD m_aeqyhmrr neighborUpdate (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ctatbkvy;Z)V
+			ARG 2 pos
+			ARG 5 notify
 		METHOD m_alvmezvc getInstrument ()Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD m_aoahmjkt getSoundGroup ()Lnet/minecraft/unmapped/C_aevintex;
 		METHOD m_aqzsbzoo checkSolid ()Z
@@ -321,6 +342,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 type
 		METHOD m_jbtrwzlp getHolder ()Lnet/minecraft/unmapped/C_cjzoxshv;
 		METHOD m_jdjgfjtl initShapeCache ()V
+		METHOD m_jrjglqlg getCullingShape ()Lnet/minecraft/unmapped/C_zscvhwbd;
 		METHOD m_kbrtwnkq isIn (Lnet/minecraft/unmapped/C_odfnijdo;)Z
 			COMMENT {@return whether this block is in the specified holder set}
 			ARG 1 set
@@ -333,6 +355,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_lcyrgaem canPlaceAt (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 1 world
 			ARG 2 pos
+		METHOD m_loplhzxh getModelOffset (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
+			ARG 1 pos
 		METHOD m_lwfnozvx prepare (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;II)V
 			ARG 1 world
 			ARG 2 pos
@@ -368,10 +392,16 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 state
 			ARG 2 direction
 		METHOD m_pobwdefx exceedsCube ()Z
+		METHOD m_pppprjpr isTransparent ()Z
+		METHOD m_pvjmhzzb getOpacity ()I
 		METHOD m_qcyiqint hasComparatorOutput ()Z
 		METHOD m_qilylxum onUse (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
 			ARG 2 player
 			ARG 3 hitResult
+		METHOD m_qxwzfbgy onInteract (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
+			ARG 3 player
+			ARG 4 hand
+			ARG 5 hitResult
 		METHOD m_rkkqwejt hasSolidTopSurface (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 			ARG 1 world
 			ARG 2 pos
@@ -432,6 +462,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 			ARG 3 flags
 			ARG 4 maxUpdateDepth
+		METHOD m_vdryyqsm isOpaqueFullCube ()Z
 		METHOD m_vixzpdbd onProjectileHit (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_jdakttms;Lnet/minecraft/unmapped/C_ltpsyvhj;)V
 			ARG 1 world
 			ARG 2 state
@@ -471,8 +502,13 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 random
+		METHOD m_ylfeavtj getCullingFace (Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_zscvhwbd;
+			ARG 1 direction
 		METHOD m_ynpgqgky isLiquid ()Z
 		METHOD m_yvamjply getBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
+		METHOD m_yylpqepz onExplosion (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_aahhrzpf;Ljava/util/function/BiConsumer;)V
+			ARG 3 explosion
+			ARG 4 dropConsumer
 		METHOD m_zntvpiao getLuminance ()I
 			COMMENT {@return the light level emitted by this block state}
 		METHOD m_zrpxtrfo isToolRequired ()Z
