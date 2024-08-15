@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_fbgfoxlq net/minecraft/command/argument/MessageArgumentType
+	FIELD f_cdbftzle MESSAGE_TOO_LONG_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
 	FIELD f_gososwfv EXAMPLES Ljava/util/Collection;
 	METHOD getExamples getExamples ()Ljava/util/Collection;
 	METHOD m_hqcmqrcd resolveChatMessage (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;Ljava/util/function/Consumer;)V
@@ -10,18 +11,25 @@ CLASS net/minecraft/unmapped/C_fbgfoxlq net/minecraft/command/argument/MessageAr
 		ARG 1 source
 		ARG 2 message
 	METHOD m_jfbsfpcp message ()Lnet/minecraft/unmapped/C_fbgfoxlq;
+	METHOD m_mxevbskg (Lnet/minecraft/unmapped/C_zzdolisx;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_yjdbpemn;)V
+		ARG 3 filteredText
 	METHOD m_ugczxtkw getMessage (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 command
 		ARG 1 name
 	METHOD m_vcfzkjkl filterText (Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_zzdolisx;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 source
 		ARG 1 message
+	METHOD m_vkvzntou (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 length
+		ARG 1 expected
 	METHOD m_yvwbjaul resolveDisguisedMessage (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_pennblrk;Lnet/minecraft/unmapped/C_zzdolisx;)V
 		ARG 0 callback
 		ARG 1 source
 		ARG 2 message
 	METHOD parse parse (Lcom/mojang/brigadier/StringReader;)Ljava/lang/Object;
 		ARG 1 reader
+	METHOD parse (Lcom/mojang/brigadier/StringReader;Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 2 source
 	CLASS C_oyispbwk MessageSelector
 		FIELD f_fmeoapet start I
 		FIELD f_fnbwebzq end I
