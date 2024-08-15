@@ -2,7 +2,6 @@ CLASS net/minecraft/unmapped/C_bxlqmlyr net/minecraft/client/render/DimensionVis
 	FIELD f_asiwcmma skyType Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
 	FIELD f_babreqjd BY_IDENTIFIER Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
 	FIELD f_qqhpohhh cloudsHeight F
-	FIELD f_talqhtaw fogColor [F
 	FIELD f_umtaizac brightenLighting Z
 	FIELD f_uucsycwb alternateSkyColor Z
 	FIELD f_ygdcsmrc darkened Z
@@ -15,11 +14,6 @@ CLASS net/minecraft/unmapped/C_bxlqmlyr net/minecraft/client/render/DimensionVis
 	METHOD m_emwlwgoh isDarkened ()Z
 	METHOD m_meaqieev byDimensionType (Lnet/minecraft/unmapped/C_oxijnccf;)Lnet/minecraft/unmapped/C_bxlqmlyr;
 		ARG 0 dimensionType
-	METHOD m_mggqzypl getFogColorOverride (FF)[F
-		COMMENT {@return an RGBA fog color override based on the current sky angle, or {@code null} if fog color should not be overridden}
-		COMMENT This is used in vanilla to render sunset and sunrise fog.
-		ARG 1 skyAngle
-		ARG 2 tickDelta
 	METHOD m_nmrrztfm useThickFog (II)Z
 		ARG 1 camX
 		ARG 2 camY
@@ -41,7 +35,5 @@ CLASS net/minecraft/unmapped/C_bxlqmlyr net/minecraft/client/render/DimensionVis
 	CLASS C_yfaqgsln SkyType
 		FIELD f_gltaehdx END Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
 			COMMENT Signals the renderer to draw the end sky box over the sky (as in the vanilla End).
-		FIELD f_szvoyqrh NORMAL Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
-			COMMENT Signals the renderer to render a normal sky (as in the vanilla Overworld).
 		FIELD f_wsnpryxl NONE Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
 			COMMENT Signals the renderer not to render a sky.

@@ -5,15 +5,11 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 	FIELD f_deqlyobn worlds Ljava/util/Set;
 	FIELD f_dzpntfoo totalChunkCount I
 	FIELD f_frolskzm eraseCache Z
-	FIELD f_gibhqwaa FINISHED_CHUNKS Lnet/minecraft/unmapped/C_npqneive;
 	FIELD f_hhfimkvd persistentStateManager Lnet/minecraft/unmapped/C_hsdphpvz;
-	FIELD f_hsjzkecg UPGRADING_ENTITIES Lnet/minecraft/unmapped/C_npqneive;
 	FIELD f_ibejvsgl totalRegionCount I
 	FIELD f_irolykku LOGGER Lorg/slf4j/Logger;
-	FIELD f_itsyqabx UPGRADING_POI Lnet/minecraft/unmapped/C_npqneive;
 	FIELD f_jtmnbhag dimensionProgress Lit/unimi/dsi/fastutil/objects/Reference2FloatMap;
 	FIELD f_nbwdozdh updateThread Ljava/lang/Thread;
-	FIELD f_ndykkudb FINISHED_POI Lnet/minecraft/unmapped/C_npqneive;
 	FIELD f_nxnlomkm UPDATE_THREAD_FACTORY Ljava/util/concurrent/ThreadFactory;
 	FIELD f_nzcxovsz NEW_PREFIX Ljava/lang/String;
 	FIELD f_ozofrqqg skippedChunkCount I
@@ -23,8 +19,6 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 	FIELD f_riylnter dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_uhbjghsq progress F
 	FIELD f_vkuqljbv status Lnet/minecraft/unmapped/C_rdaqiwdt;
-	FIELD f_waxkuxwz FINISHED_ENTITIES Lnet/minecraft/unmapped/C_npqneive;
-	FIELD f_zgbdxxsa UPGRADING_CHUNKS Lnet/minecraft/unmapped/C_npqneive;
 	METHOD m_bfxislhb getWorlds ()Ljava/util/Set;
 	METHOD m_cpnvjmte cancel ()V
 	METHOD m_ejyoaaiq isDone ()Z
@@ -42,11 +36,6 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 		ARG 1 thread
 		ARG 2 throwable
 	CLASS C_adeqquth SimpleRegionStorageUpdater
-		METHOD <init> (Lnet/minecraft/unmapped/C_jzcarjio;Lnet/minecraft/unmapped/C_ccrrfaqj;Ljava/lang/String;Lnet/minecraft/unmapped/C_npqneive;Lnet/minecraft/unmapped/C_npqneive;)V
-			ARG 2 dataFixTypes
-			ARG 3 type
-			ARG 4 upgradingStatus
-			ARG 5 finishedStatus
 		METHOD m_uduopfej updateNbt (Lnet/minecraft/unmapped/C_gwzzviyw;Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
 			ARG 1 storage
 			ARG 2 nbt
@@ -54,8 +43,6 @@ CLASS net/minecraft/unmapped/C_jzcarjio net/minecraft/world/updater/WorldUpdater
 	CLASS C_itdvsyqy AbstractUpdater
 		FIELD f_htrsqjeu previousWriteFuture Ljava/util/concurrent/CompletableFuture;
 		FIELD f_ixicfbbl targetName Ljava/lang/String;
-		FIELD f_rkcvpmgz finishedStatus Lnet/minecraft/unmapped/C_npqneive;
-		FIELD f_sfsmkgpy upgradingStatus Lnet/minecraft/unmapped/C_npqneive;
 		FIELD f_tfptrfsf type Ljava/lang/String;
 		FIELD f_vywiwhgs dataFixTypes Lnet/minecraft/unmapped/C_ccrrfaqj;
 		METHOD m_dzhhhzbp getRegionsToProcess (Lnet/minecraft/unmapped/C_tzvgbkzf;Ljava/nio/file/Path;)Ljava/util/ListIterator;

@@ -77,10 +77,6 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 	FIELD f_zumpbxtd MAX_ENTITY_CRAMMING Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		COMMENT A {@linkplain AbstractGameRule game rule} which regulates the number of entities that can be crammed into a block space before they incur cramming damage.
 	FIELD f_zwlbxxnu GLOBAL_SOUND_EVENTS Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
-	METHOD <init> (Lcom/mojang/serialization/DynamicLike;)V
-		ARG 1 gameRules
-	METHOD <init> (Ljava/util/Map;)V
-		ARG 1 gameRules
 	METHOD m_annnbzfc setAllValues (Lnet/minecraft/unmapped/C_xmldumst;Lnet/minecraft/server/MinecraftServer;)V
 		ARG 1 other
 		ARG 2 server
@@ -100,12 +96,10 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		COMMENT The visitation involves calling both {@link Visitor#visitGameRule(GameRules.Key, GameRules.Type)} and
 		COMMENT {@link Visitor#visitBooleanGameRule(GameRules.Key, GameRules.Type)} or {@link Visitor#visitIntGameRule(GameRules.Key, GameRules.Type)},
 		COMMENT depending on whether it is a {@link BooleanGameRule} or a {@link IntGameRule}, for every game rule.
-		ARG 0 visitor
 	METHOD m_jlnexmku (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xmldumst$C_juzzykai;)V
 		ARG 0 server
 		ARG 1 rule
 	METHOD m_khbebsio toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
-	METHOD m_kkvdhcio copy ()Lnet/minecraft/unmapped/C_xmldumst;
 	METHOD m_magbttmy load (Lcom/mojang/serialization/DynamicLike;)V
 		ARG 1 gameRules
 	METHOD m_mijxrbwk get (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
@@ -120,7 +114,6 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 0 server
 		ARG 1 rule
 	METHOD m_wqjrkanc accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
-		ARG 0 consumer
 		ARG 1 key
 		ARG 2 type
 	METHOD m_zuudbppt register (Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
@@ -187,11 +180,6 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		FIELD f_ozxhwwyh gameRuleFactory Ljava/util/function/Function;
 		FIELD f_pzcyasul gameRuleAcceptor Lnet/minecraft/unmapped/C_xmldumst$C_bctfwntr;
 		FIELD f_tpnzzqev changeCallback Ljava/util/function/BiConsumer;
-		METHOD <init> (Ljava/util/function/Supplier;Ljava/util/function/Function;Ljava/util/function/BiConsumer;Lnet/minecraft/unmapped/C_xmldumst$C_bctfwntr;)V
-			ARG 1 argumentType
-			ARG 2 gameRuleFactory
-			ARG 3 changeCallback
-			ARG 4 gameRuleAcceptor
 		METHOD m_qkdrrjqk accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)V
 			ARG 1 consumer
 			ARG 2 key
@@ -214,11 +202,6 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		METHOD m_ncqmhctf validate (Ljava/lang/String;)Z
 			COMMENT Validates that an input is valid for this rule.
 			ARG 1 input
-		METHOD m_pzcrszpq create (IIILjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
-			ARG 0 initialValue
-			ARG 1 min
-			ARG 2 max
-			ARG 3 changeCallback
 		METHOD m_qfnkciid create (I)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;
 			ARG 0 initialValue
 		METHOD m_tezsywhc create (ILjava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;

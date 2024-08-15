@@ -24,13 +24,11 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_crrlnxqg age I
 	FIELD f_csywjyej velocityModified Z
 	FIELD f_ctqyfogx renderDistanceMultiplier D
-	FIELD f_czyqvinj wasOnFire Z
 	FIELD f_dirooojo chunkPos Lnet/minecraft/unmapped/C_ynrszrtu;
 	FIELD f_doofwhhb pos Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_euemepwt FALL_FLYING_FLAG_INDEX I
 	FIELD f_ewpmuavf timeUntilRegen I
 	FIELD f_exdxhnda PASSENGERS_KEY Ljava/lang/String;
-	FIELD f_eyfbjeig horizontalSpeed F
 	FIELD f_eyihyrff pistonMovementDelta [D
 	FIELD f_fngqrxks standingEyeHeight F
 	FIELD f_ghlcqzgv CONTENTS_SLOT_INDEX I
@@ -48,7 +46,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ihpdejin prevY D
 	FIELD f_ilwbyicy velocity Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_iskwetjb CUSTOM_NAME Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_jhbyfben ignoreCameraFrustum Z
 	FIELD f_jijbnlgf SLOW_LAVA_SPEED_FACTOR D
 	FIELD f_jncusoxk touchingWater Z
 	FIELD f_jxhcznzh world Lnet/minecraft/unmapped/C_cdctfzbn;
@@ -94,7 +91,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ssljujsr LOGGER Lorg/slf4j/Logger;
 	FIELD f_tigrjjuw DEFAULT_BOUNDING_BOX_WIDTH F
 	FIELD f_tklhtpht entityChangeListener Lnet/minecraft/unmapped/C_ylpvpknw;
-	FIELD f_tmgwwmbu prevHorizontalSpeed F
 	FIELD f_ujsjgylb fallDistance F
 	FIELD f_vdsiqqmt prevPitch F
 	FIELD f_vettyvgp hasVisualFire Z
@@ -236,7 +232,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 0 value
 	METHOD m_duektjoe adjustMovementForPiston (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 movement
-	METHOD m_dwjsksqw tryCheckBlockCollision ()V
 	METHOD m_dwotjukl toNbtList ([D)Lnet/minecraft/unmapped/C_hqhtfwlr;
 		ARG 1 values
 	METHOD m_dxohridw getMoveEffect ()Lnet/minecraft/unmapped/C_astfners$C_tcfxsqwc;
@@ -350,7 +345,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_gmlierig setBodyYaw (F)V
 		ARG 1 bodyYaw
 	METHOD m_gmmuescl getRenderDistanceMultiplier ()D
-	METHOD m_gnfqaher getYaw ()F
 	METHOD m_goqphzpp isInvulnerableTo (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		ARG 1 damageSource
 	METHOD m_gortryza tickInVoid ()V
@@ -503,8 +497,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_lhatfyyd getBlockStateAtPos ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_livkcpbq onSwimmingStart ()V
 	METHOD m_lmmpfjyz bypassesLandingEffects ()Z
-	METHOD m_lmrknzic (Lnet/minecraft/unmapped/C_txtbiemp;)Z
-		ARG 0 state
 	METHOD m_loccnuga onStoppedTrackingBy (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_lpcryaya setOnFire (Z)V
@@ -535,7 +527,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_mcimzscq setOnFireFromLava ()V
 	METHOD m_mdjbjjrz getServer ()Lnet/minecraft/server/MinecraftServer;
 	METHOD m_mhvikmsw isPushedByFluids ()Z
-	METHOD m_migwxxyu setOnGround (ZLnet/minecraft/unmapped/C_vgpupfxx;)V
 	METHOD m_mnshvqhc getLerpedEyePos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 tickDelta
 	METHOD m_mrxmgxtb kill ()V
@@ -548,7 +539,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_mvqgdaof isInSwimmingPose ()Z
 	METHOD m_mvydwrgl isCollidable ()Z
 	METHOD m_mwcgtbei getRotationClient ()Lnet/minecraft/unmapped/C_krlwdsom;
-	METHOD m_mwmobbqo getVisibilityBoundingBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
 	METHOD m_navgylsf addVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 delta
 	METHOD m_naxzebqy getBlockZ ()I
@@ -888,11 +878,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_wjodonhd isInvisible ()Z
 	METHOD m_wkqvrgdz canAddPassenger (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 passenger
-	METHOD m_wmrqudhe checkBlockCollision ()V
 	METHOD m_wmxlrpiw getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT {@return the position in the world of this entity}
 	METHOD m_wnmvwdkc playSwimSound ()V
-	METHOD m_wpbbqukl getPitch ()F
 	METHOD m_wqwhgnwv getSavedEntityId ()Ljava/lang/String;
 	METHOD m_wsfastbb copyFrom (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 original
@@ -998,14 +986,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT @return the created command source
 	METHOD m_zoivpnyj getAttachments ()Lnet/minecraft/unmapped/C_pubtmkke;
 	METHOD m_zrismnrd checkWaterState ()V
-	METHOD m_zzzrellt teleport (Lnet/minecraft/unmapped/C_bdwnwhiu;DDDLjava/util/Set;FF)Z
-		ARG 1 world
-		ARG 2 x
-		ARG 4 y
-		ARG 6 z
-		ARG 8 flags
-		ARG 9 yaw
-		ARG 10 pitch
 	CLASS C_aobkcgmf PositionUpdater
 		METHOD accept accept (Lnet/minecraft/unmapped/C_astfners;DDD)V
 			ARG 1 entity

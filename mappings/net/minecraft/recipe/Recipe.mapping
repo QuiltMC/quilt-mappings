@@ -13,8 +13,6 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 	FIELD f_mwhtvqku PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_aphdsjxe getSerializer ()Lnet/minecraft/unmapped/C_xfxrkzjt;
 		COMMENT {@return the serializer associated with this recipe}
-	METHOD m_ecyxgagp (Lnet/minecraft/unmapped/C_tcpsydrv;)Z
-		ARG 0 ingredient
 	METHOD m_edscftkq getResult (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT {@return a preview of the recipe's result}
 		COMMENT <p>
@@ -23,10 +21,6 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		ARG 1 provider
 	METHOD m_jjsxdttb matches (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;)Z
 		ARG 1 input
-	METHOD m_njccjhdt getIngredients ()Lnet/minecraft/unmapped/C_rnrfftze;
-		COMMENT {@return the ingredients accepted as inputs for this recipe} Used by the recipe book
-		COMMENT when displaying a ghost form of this recipe on the crafting grid as well as for
-		COMMENT previewing the possible inputs in the book itself.
 	METHOD m_nmeksozi isIgnoredInRecipeBook ()Z
 		COMMENT {@return whether this recipe is ignored by the recipe book} If a recipe
 		COMMENT is ignored by the recipe book, it will be never displayed. In addition,
@@ -44,9 +38,6 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		ARG 1 input
 	METHOD m_qqucltqj showNotification ()Z
 		COMMENT {@return whenever this recipe should show a toast notification on being unlocked or not}
-	METHOD m_qzlhmcik isEmpty ()Z
-		COMMENT {@return whether this recipe has no ingredient or has any empty ingredient}
-		COMMENT The recipe book uses this to ignore recipes for display.
 	METHOD m_tikgmnde craft (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 input
 		ARG 2 provider
@@ -63,7 +54,3 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		COMMENT the recipe book, recipes with the same group will belong to the same
 		COMMENT cell in the grid of recipes. If the string is empty, this recipe will
 		COMMENT belong to its own cell.
-	METHOD m_vcxbjggo createIcon ()Lnet/minecraft/unmapped/C_sddaxwyk;
-		COMMENT {@return an item rendered on the top left of the {@linkplain #getResult(DynamicRegistryManager)
-		COMMENT result preview} on the recipe toast when a new recipe is unlocked} This
-		COMMENT can be interpreted as a catalyst for the recipe.

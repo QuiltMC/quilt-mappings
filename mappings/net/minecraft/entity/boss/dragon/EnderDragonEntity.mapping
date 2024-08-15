@@ -12,14 +12,11 @@ CLASS net/minecraft/unmapped/C_bsmypcfq net/minecraft/entity/boss/dragon/EnderDr
 	FIELD f_eqjxdgyh ticksSinceDeath I
 	FIELD f_gbitvhky neck Lnet/minecraft/unmapped/C_coyfpkdd;
 	FIELD f_hizxaezh wingPosition F
-	FIELD f_jzbebsvn latestSegment I
 	FIELD f_kuwsuxxt DRAGON_DEATH_TIME_KEY Ljava/lang/String;
 	FIELD f_lasuowby yawAcceleration F
 	FIELD f_lcffcjzk MAX_GROWL_INTERVAL I
 	FIELD f_liyfiorc tail2 Lnet/minecraft/unmapped/C_coyfpkdd;
 	FIELD f_lvpbollf ticksUntilNextGrowl I
-	FIELD f_mgdjrsnz segmentCircularBuffer [[D
-		COMMENT (yaw, y, ?)
 	FIELD f_pehnbpli fightOrigin Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_qitbpopf pathNodes [Lnet/minecraft/unmapped/C_dfzwsdmo;
 		COMMENT The first 12 path nodes are used for end crystals; the others are not tied to them.
@@ -70,9 +67,6 @@ CLASS net/minecraft/unmapped/C_bsmypcfq net/minecraft/entity/boss/dragon/EnderDr
 	METHOD m_nomlcuzj wrapYawChange (D)F
 		ARG 1 yawDegrees
 	METHOD m_pamvmrhq setFightOrigin (Lnet/minecraft/unmapped/C_hynzadkk;)V
-	METHOD m_pdqzsqqq getSegmentProperties (IF)[D
-		ARG 1 segmentNumber
-		ARG 2 tickDelta
 	METHOD m_pzbmfkfv destroyBlocks (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
 		ARG 1 box
 	METHOD m_qrovnyxu damageCollidingEntities (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/List;)V
@@ -87,10 +81,6 @@ CLASS net/minecraft/unmapped/C_bsmypcfq net/minecraft/entity/boss/dragon/EnderDr
 		COMMENT * Disconnects from its crystal if it is removed
 		COMMENT * If it is connected to a crystal, then heals every 10 ticks
 		COMMENT * With a 1 in 10 chance each tick, searches for the nearest crystal and connects to it if present
-	METHOD m_vlsbguxa getChangeInNeckPitch (I[D[D)F
-		ARG 1 segmentOffset
-		ARG 2 segment1
-		ARG 3 segment2
 	METHOD m_waddpucb getBodyParts ()[Lnet/minecraft/unmapped/C_coyfpkdd;
 	METHOD m_yfbeuhuv getPhaseManager ()Lnet/minecraft/unmapped/C_hnmrcewa;
 	METHOD m_zlqezicl crystalDestroyed (Lnet/minecraft/unmapped/C_akvrfxgg;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sbxfkpyv;)V

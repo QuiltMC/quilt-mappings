@@ -8,7 +8,6 @@ CLASS net/minecraft/unmapped/C_dlxbwxyf net/minecraft/block/entity/AbstractFurna
 	FIELD f_fwsjbtjw TOP_SLOTS [I
 	FIELD f_hpqapnfb BURN_DECAY_RATE I
 	FIELD f_kekgcosu propertyDelegate Lnet/minecraft/unmapped/C_fwwsyhuv;
-	FIELD f_lvsjgcpq fuelMap Ljava/util/Map;
 	FIELD f_mzaccpku BOTTOM_SLOTS [I
 	FIELD f_nqwyvoxy TOTAL_COOK_TIME_DATA I
 	FIELD f_rhexgeen recipeCache Lnet/minecraft/unmapped/C_hjseusrb$C_bvtkxdyi;
@@ -26,12 +25,10 @@ CLASS net/minecraft/unmapped/C_dlxbwxyf net/minecraft/block/entity/AbstractFurna
 		ARG 2 pos
 		ARG 3 state
 		ARG 4 recipeType
-	METHOD m_avempppt createFuelTimeMap ()Ljava/util/Map;
 	METHOD m_dctsvboi canAcceptRecipeOutput (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_dscbrwbj;Lnet/minecraft/unmapped/C_rnrfftze;I)Z
 		ARG 1 recipe
 		ARG 2 slots
 		ARG 3 count
-	METHOD m_efzdyvrh resetFuelMap ()V
 	METHOD m_emoezrql dropExperienceForRecipesUsed (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_evnmsigw (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Integer;)V
@@ -41,22 +38,10 @@ CLASS net/minecraft/unmapped/C_dlxbwxyf net/minecraft/block/entity/AbstractFurna
 		ARG 1 world
 		ARG 2 pos
 	METHOD m_igiksnup isBurning ()Z
-	METHOD m_ihnyfmkd addFuel (Ljava/util/Map;Lnet/minecraft/unmapped/C_ednuhnnn;I)V
-		ARG 0 fuelTimes
-		ARG 1 tag
-		ARG 2 fuelTime
-	METHOD m_pgxxthxp addFuel (Ljava/util/Map;Lnet/minecraft/unmapped/C_gmbqjnle;I)V
-		ARG 0 fuelTimes
-		ARG 1 item
-		ARG 2 fuelTime
 	METHOD m_puidihmx (Lnet/minecraft/unmapped/C_dscbrwbj;)Ljava/lang/Integer;
 		ARG 0 recipe
 	METHOD m_pxcmdkyf (Ljava/util/List;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_vgpupfxx;Lit/unimi/dsi/fastutil/objects/Object2IntMap$Entry;Lnet/minecraft/unmapped/C_dscbrwbj;)V
 		ARG 4 recipe
-	METHOD m_qvddjqtt isNonFlammableWood (Lnet/minecraft/unmapped/C_vorddnax;)Z
-		COMMENT {@return whether the provided {@code item} is in the {@link
-		COMMENT net.minecraft.registry.tag.ItemTags#NON_FLAMMABLE_WOOD non_flammable_wood} tag}
-		ARG 0 item
 	METHOD m_szsvrwtz craftRecipe (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_dscbrwbj;Lnet/minecraft/unmapped/C_rnrfftze;I)Z
 		ARG 1 recipe
 		ARG 2 slots
@@ -71,10 +56,6 @@ CLASS net/minecraft/unmapped/C_dlxbwxyf net/minecraft/block/entity/AbstractFurna
 		ARG 1 pos
 		ARG 2 state
 		ARG 3 blockEntity
-	METHOD m_ymwsgyrr canUseAsFuel (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 0 stack
 	METHOD m_ynnrkguh getCookTime (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_dlxbwxyf;)I
 		ARG 0 world
 		ARG 1 blockEntity
-	METHOD m_zeyvozgy getFuelTime (Lnet/minecraft/unmapped/C_sddaxwyk;)I
-		ARG 1 fuel

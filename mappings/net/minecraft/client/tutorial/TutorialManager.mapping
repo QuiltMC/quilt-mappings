@@ -1,25 +1,14 @@
 CLASS net/minecraft/unmapped/C_eqosojcf net/minecraft/client/tutorial/TutorialManager
-	FIELD f_srroywzr bundleTutorial Lnet/minecraft/unmapped/C_wzztgtgy;
 	FIELD f_whrecsny client Lnet/minecraft/unmapped/C_ayfeobid;
-	FIELD f_yvhohpgm entries Ljava/util/List;
 	FIELD f_zjkaxnzc currentHandler Lnet/minecraft/unmapped/C_mgtwduld;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_lscptbhn;)V
 		ARG 1 client
 		ARG 2 options
-	METHOD m_cbtsjrjj (Lnet/minecraft/unmapped/C_fbzposnd;Lnet/minecraft/unmapped/C_eqosojcf$C_qnzwndri;)Z
-		ARG 1 entry
 	METHOD m_cxsctafw createHandler ()V
 	METHOD m_gdoijmnu onUpdateMouse (DD)V
 		ARG 1 deltaX
 		ARG 3 deltaY
 	METHOD m_gdrypffj destroyHandler ()V
-	METHOD m_huinebae add (Lnet/minecraft/unmapped/C_fbzposnd;I)V
-		COMMENT Adds an active tutorial entry to this manager and the corresponding toast
-		COMMENT to the client's toast manager.
-		ARG 1 toast
-			COMMENT the tutorial toast
-		ARG 2 ticks
-			COMMENT the time the toast will last, in client ticks
 	METHOD m_iidgujyx setStep (Lnet/minecraft/unmapped/C_goqonutr;)V
 		ARG 1 step
 	METHOD m_kcytucru tick ()V
@@ -42,11 +31,6 @@ CLASS net/minecraft/unmapped/C_eqosojcf net/minecraft/client/tutorial/TutorialMa
 		ARG 1 stack
 	METHOD m_qdxarwhu keyToText (Ljava/lang/String;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 name
-	METHOD m_qxpduiuz remove (Lnet/minecraft/unmapped/C_fbzposnd;)V
-		COMMENT Removes an active tutorial from this manager if it's present and hides
-		COMMENT the toast.
-		ARG 1 toast
-			COMMENT the tutorial toast
 	METHOD m_tzkiwfyp onMovement (Lnet/minecraft/unmapped/C_graemaps;)V
 		ARG 1 input
 	METHOD m_znnnhsvl onBlockBreaking (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;F)V
@@ -54,14 +38,3 @@ CLASS net/minecraft/unmapped/C_eqosojcf net/minecraft/client/tutorial/TutorialMa
 		ARG 2 pos
 		ARG 3 state
 		ARG 4 progress
-	CLASS C_qnzwndri Entry
-		FIELD f_diaeojro toast Lnet/minecraft/unmapped/C_fbzposnd;
-		FIELD f_fogpqenm expiry I
-		FIELD f_ooosvygm age I
-		METHOD <init> (Lnet/minecraft/unmapped/C_fbzposnd;I)V
-			ARG 1 toast
-			ARG 2 expiry
-		METHOD m_rqzbsicw tick ()Z
-			COMMENT Ticks this entry on a client tick.
-			COMMENT
-			COMMENT @return {@code true} if this entry should no longer tick

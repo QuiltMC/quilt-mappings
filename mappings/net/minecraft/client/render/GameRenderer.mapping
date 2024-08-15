@@ -23,12 +23,10 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	FIELD f_fxexuuvj lastSkyDarkness F
 	FIELD f_ghezvind blockOutlineEnabled Z
 	FIELD f_ghfxcqks camera Lnet/minecraft/unmapped/C_dcmtgrvm;
-	FIELD f_givekwop lastMovementFovMultiplier F
 	FIELD f_hhnrwvkc renderTypeEnergySwirlShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_hofkdago shader Lnet/minecraft/unmapped/C_pdhhdxwe;
 	FIELD f_hscpyzjy particleShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_htkdjwtv renderTypeArmorEntityGlintShader Lnet/minecraft/unmapped/C_alllhitb;
-	FIELD f_iccmshma movementFovMultiplier F
 	FIELD f_icifrvxs renderTypeEntityTranslucentShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_ifsxnalv renderTypeEntityNoOutlineShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_ihncqodp renderTypeCutoutShader Lnet/minecraft/unmapped/C_alllhitb;
@@ -44,13 +42,11 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	FIELD f_mbaevbtg renderTypeEntityCutoutShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_mfkuvayv renderTypeEntitySmoothCutoutShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_mlczdlpl renderHand Z
-	FIELD f_mzcthkld mapRenderer Lnet/minecraft/unmapped/C_yzoxmlsd;
 	FIELD f_nmlpocve renderTypeEntityShadowShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_ohawlhoh GUI_Z_NEAR F
 	FIELD f_oivnczcl renderTypeGuiTextHighlightShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_owutnayn renderTypeEntityDecalShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_pdfchroe renderTypeGuiShader Lnet/minecraft/unmapped/C_alllhitb;
-	FIELD f_pdofozgb NAUSEA_OVERLAY Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_poxlotsg blurShader Lnet/minecraft/unmapped/C_pdhhdxwe;
 	FIELD f_pymllugl DEBUG_DEPTH_BUFFER Z
 	FIELD f_qdnuxosx shaders Ljava/util/Map;
@@ -111,8 +107,6 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 1 blockOutlineEnabled
 	METHOD m_aikgilvz (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
-	METHOD m_albnpjas renderBlur (F)V
-		ARG 1 tickDelta
 	METHOD m_aqbgwqwa renderWithZoom (FFF)V
 		ARG 1 zoom
 		ARG 2 zoomX
@@ -191,10 +185,6 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 0 shader
 	METHOD m_hdgedcee getRenderTypeGuiTextHighlightShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_helltfuk getFarDepth ()F
-	METHOD m_hvifigzg getFov (Lnet/minecraft/unmapped/C_dcmtgrvm;FZ)D
-		ARG 1 camera
-		ARG 2 tickDelta
-		ARG 3 changingFov
 	METHOD m_hvnetuow (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
 	METHOD m_hvqbfazs (Lnet/minecraft/unmapped/C_alllhitb;)V
@@ -259,9 +249,6 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 0 shader
 	METHOD m_naezieia (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
-	METHOD m_nbihrgjs (Ljava/nio/file/Path;)V
-		ARG 1 path
-	METHOD m_nhzigngy getMapRenderer ()Lnet/minecraft/unmapped/C_yzoxmlsd;
 	METHOD m_nnyxzoeh setRenderHand (Z)V
 		ARG 1 renderHand
 	METHOD m_nrdobwoi getShader (Ljava/lang/String;)Lnet/minecraft/unmapped/C_alllhitb;
@@ -291,8 +278,6 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 0 shader
 	METHOD m_rqmathdh (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
-	METHOD m_rswaokwq getBasicProjectionMatrix (D)Lorg/joml/Matrix4f;
-		ARG 1 fov
 	METHOD m_rudtmfgh getShader ()Lnet/minecraft/unmapped/C_pdhhdxwe;
 	METHOD m_rvsaogwb getRenderTypeEntityNoOutlineShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_sfhcnkpm getRenderTypeSolidShader ()Lnet/minecraft/unmapped/C_alllhitb;
@@ -329,8 +314,6 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 4 entityRange
 		ARG 6 tickDelta
 	METHOD m_vzhzwpiw getRenderTypeEntityAlphaShader ()Lnet/minecraft/unmapped/C_alllhitb;
-	METHOD m_vziixqvb (Lnet/minecraft/unmapped/C_astfners;)Z
-		ARG 0 entity2
 	METHOD m_wckfkluv getRenderTypeBreezeWindShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_wdayaltf (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
@@ -350,12 +333,8 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	METHOD m_xtnwmdic renderWorld (Lnet/minecraft/unmapped/C_lrgsdfwv;)V
 	METHOD m_xuffrbmp (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
-	METHOD m_xzoqurim renderNauseaOverlay (Lnet/minecraft/unmapped/C_sedilmty;F)V
-		ARG 2 distortionAmount
 	METHOD m_yatmeolo (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
-	METHOD m_ydtgjvkb loadProjectionMatrix (Lorg/joml/Matrix4f;)V
-		ARG 1 matrix
 	METHOD m_yjgpoxkx (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
 	METHOD m_yxzmkufu render (Lnet/minecraft/unmapped/C_lrgsdfwv;Z)V

@@ -1,6 +1,5 @@
 CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInventory
 	FIELD f_atsclqcy main Lnet/minecraft/unmapped/C_rnrfftze;
-	FIELD f_baeujaxs ARMOR_SLOTS [I
 	FIELD f_ddlbxbuu MAIN_SIZE I
 		COMMENT The number of slots ({@value}) in the main (non-hotbar) section of the inventory.
 	FIELD f_efjgtpgx NOT_FOUND I
@@ -8,7 +7,6 @@ CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInvent
 		COMMENT (item not present / no available space) when querying the inventory's contents
 		COMMENT or to indicate no preference when inserting an item into the inventory.
 	FIELD f_hhxlkrup selectedSlot I
-	FIELD f_liupqzxa HELMET_SLOTS [I
 	FIELD f_muifvbni player Lnet/minecraft/unmapped/C_jzrpycqo;
 	FIELD f_qmvikygt ITEM_USAGE_COOLDOWN I
 		COMMENT The maximum cooldown ({@value} ticks) applied to timed use items such as the Eye of Ender.
@@ -33,8 +31,6 @@ CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInvent
 	METHOD m_bsuceyru removeOne (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 stack
 	METHOD m_cbuksxzb getSwappableHotbarSlot ()I
-	METHOD m_cpwlhjly populateRecipeFinder (Lnet/minecraft/unmapped/C_nyagoaau;)V
-		ARG 1 finder
 	METHOD m_cwfzntkt clone (Lnet/minecraft/unmapped/C_sxzqocrm;)V
 		ARG 1 other
 	METHOD m_foznfroj getEmptySlot ()I
@@ -85,13 +81,5 @@ CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInvent
 		ARG 1 stack
 	METHOD m_yglnlrvd getArmorStack (I)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
-	METHOD m_yhsscjlt scrollInHotbar (D)V
-		ARG 1 scrollAmount
 	METHOD m_zdusbkte addPickBlock (Lnet/minecraft/unmapped/C_sddaxwyk;)V
-		ARG 1 stack
-	METHOD m_zqdwohxx indexOf (Lnet/minecraft/unmapped/C_sddaxwyk;)I
-		COMMENT Given the item stack to search for, returns the equivalent slot index with a matching stack that is all of:
-		COMMENT not damaged, not enchanted, and not renamed.
-		COMMENT
-		COMMENT @return the index where a matching stack was found, or {@value #NOT_FOUND}
 		ARG 1 stack
