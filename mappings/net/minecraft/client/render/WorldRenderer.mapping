@@ -10,14 +10,19 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	FIELD f_gnmkbmxx lastCameraZ D
 	FIELD f_gqcuibba chunkBuilder Lnet/minecraft/unmapped/C_sjynkhfr;
 	FIELD f_hgjgxstw lastCameraX D
+	FIELD f_iyfhsakp weatherRenderer Lnet/minecraft/unmapped/C_iyksaosz;
 	FIELD f_knkykysk world Lnet/minecraft/unmapped/C_ghdnlrrw;
+	FIELD f_ndhcsyqn visibleEntities I
 	FIELD f_ntzttglo TRANSPARENT_SORT_AMOUNT I
 	FIELD f_qidtwjwt LOGGER Lorg/slf4j/Logger;
+	FIELD f_rywwteut cloudRenderer Lnet/minecraft/unmapped/C_jjygzmqz;
+	FIELD f_sihftard skyRenderer Lnet/minecraft/unmapped/C_tltwgmmc;
 	FIELD f_uhhggclp noCullingBlockEntities Ljava/util/Set;
 	FIELD f_uxeiwzyg shouldCaptureFrustum Z
 	FIELD f_vgmktpwa capturedFrustum Lnet/minecraft/unmapped/C_jwzjqevg;
 	FIELD f_wdwpkhmu ticks I
 	FIELD f_wjvfevmu lastCameraPitch D
+	FIELD f_xlackaqq worldBorderRenderer Lnet/minecraft/unmapped/C_wvmjwjez;
 	FIELD f_xqyukndo client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_yikkuozy viewDistance I
 	FIELD f_yvsvzxdd cameraChunkY I
@@ -61,6 +66,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_cqjwluwx onResized (II)V
 		ARG 1 width
 		ARG 2 height
+	METHOD m_cznvyjrv tickParticles (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
 	METHOD m_dwuopuwx updateNoCullingBlockEntities (Ljava/util/Collection;Ljava/util/Collection;)V
 		ARG 1 removed
 		ARG 2 added
@@ -78,6 +84,12 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 9 velocityX
 		ARG 11 velocityY
 		ARG 13 velocityZ
+	METHOD m_errmldkc addWeatherAndWorldBorderRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_grwstqbm;Lnet/minecraft/unmapped/C_vgpupfxx;FLnet/minecraft/unmapped/C_vidgpspy;)V
+		ARG 2 light
+		ARG 3 camera
+		ARG 4 tickDelta
+		ARG 5 fog
+	METHOD m_frxfkurs getCloudRenderer ()Lnet/minecraft/unmapped/C_jjygzmqz;
 	METHOD m_gtfdkthn addParticle (Lnet/minecraft/unmapped/C_nqucohct;ZDDDDDD)V
 		ARG 1 parameters
 		ARG 2 shouldAlwaysSpawn
@@ -107,12 +119,21 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 14 velocityZ
 	METHOD m_jrztaoei checkEmpty (Lnet/minecraft/unmapped/C_cnszsxvd;)V
 		ARG 1 matrices
+	METHOD m_juxepivw scheduleBlockRenderRange (IIIIII)V
+		ARG 1 x1
+		ARG 2 y1
+		ARG 3 z1
+		ARG 4 x2
+		ARG 5 y2
+		ARG 6 z2
 	METHOD m_jynwvyuq killFrustum ()V
 	METHOD m_kgpnuhyu getEntityFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_khytiwdn setupFrustum (Lnet/minecraft/unmapped/C_vgpupfxx;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V
 		ARG 1 pos
 		ARG 2 modelViewMatrix
 		ARG 3 projectionMatrix
+	METHOD m_kpmnucwk shouldRenderBottomSky (F)Z
+		ARG 1 tickDelta
 	METHOD m_lmslduiw addParticle (Lnet/minecraft/unmapped/C_nqucohct;ZZDDDDDD)V
 		ARG 1 parameters
 		ARG 2 shouldAlwaysSpawn
@@ -171,6 +192,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 3 updated
 	METHOD m_rxbalurb hasSkyBlockingEffect (Lnet/minecraft/unmapped/C_dcmtgrvm;)Z
 		ARG 1 camera
+	METHOD m_tamcgvjw offsetFrustum (Lnet/minecraft/unmapped/C_jwzjqevg;)Lnet/minecraft/unmapped/C_jwzjqevg;
 	METHOD m_tbgywtxm reload ()V
 	METHOD m_tgxmzbib getParticlesFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_uzhmpsuv scheduleBlockRender (III)V
@@ -181,6 +203,14 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 1 world
 	METHOD m_vznbfahy applyFrustum (Lnet/minecraft/unmapped/C_jwzjqevg;)V
 		ARG 1 frustum
+	METHOD m_wlewmnef addCloundRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_qaetpqjq;Lnet/minecraft/unmapped/C_vgpupfxx;FIF)V
+		ARG 2 viewMatrix
+		ARG 3 projectionMatrix
+		ARG 4 mode
+		ARG 5 camera
+		ARG 6 time
+		ARG 7 color
+		ARG 8 cloudHeight
 	METHOD m_xuzbjwzg canDrawEntityOutlines ()Z
 	METHOD m_xzqucjte scheduleChunkRender (IIIZ)V
 		ARG 1 x
@@ -189,7 +219,11 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 4 important
 	METHOD m_ydwujepn resetTransparencyShader ()V
 	METHOD m_ypwknjzq getCloudsFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
+	METHOD m_yyzjbtrm getChunkBuilder ()Lnet/minecraft/unmapped/C_sjynkhfr;
 	METHOD m_znnjtopn getChunkBuilderDebugString ()Ljava/lang/String;
+	METHOD m_zsfofipj addSkyRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_dcmtgrvm;FLnet/minecraft/unmapped/C_vidgpspy;)V
+		ARG 3 tickDelta
+		ARG 4 fog
 	CLASS C_pxxobvor ShaderException
 		METHOD <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
 			ARG 1 message
