@@ -1,5 +1,4 @@
-CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderSystem
-	FIELD LOGGER LOGGER Lorg/slf4j/Logger;
+CLASS com/mojang/blaze3d/systems/RenderSystem
 	FIELD MAX_SUPPORTED_TEXTURE_SIZE maxSupportedTextureSize I
 	FIELD MINIMUM_ATLAS_TEXTURE_SIZE MINIMUM_ATLAS_TEXTURE_SIZE I
 	FIELD RENDER_THREAD_TESSELATOR RENDER_THREAD_TESSELLATOR Lnet/minecraft/unmapped/C_hiiunyvh;
@@ -28,8 +27,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	FIELD vertexSorting vertexSorting Lnet/minecraft/unmapped/C_onfzhami;
 	METHOD activeTexture activeTexture (I)V
 		ARG 0 texture
-	METHOD assertOnRenderThread assertOnRenderThread ()V
-	METHOD assertOnRenderThreadOrInit assertOnRenderThreadOrInit ()V
 	METHOD backupProjectionMatrix backupProjectionMatrix ()V
 	METHOD beginInitialization beginInitialization ()V
 	METHOD bindTexture bindTexture (I)V
@@ -68,7 +65,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 1 green
 		ARG 2 blue
 		ARG 3 alpha
-	METHOD constructThreadException constructThreadException ()Ljava/lang/IllegalStateException;
 	METHOD defaultBlendFunc defaultBlendFunc ()V
 	METHOD deleteTexture deleteTexture (I)V
 		ARG 0 texture
@@ -79,7 +75,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD disableBlend disableBlend ()V
 	METHOD disableColorLogicOp disableColorLogicOp ()V
 	METHOD disableCull disableCull ()V
-	METHOD disableDepthTest disableDepthTest ()V
 	METHOD disablePolygonOffset disablePolygonOffset ()V
 	METHOD disableScissor disableScissor ()V
 	METHOD drawElements drawElements (III)V
@@ -89,9 +84,8 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD enableBlend enableBlend ()V
 	METHOD enableColorLogicOp enableColorLogicOp ()V
 	METHOD enableCull enableCull ()V
-	METHOD enableDepthTest enableDepthTest ()V
 	METHOD enablePolygonOffset enablePolygonOffset ()V
-	METHOD enableScissor enableScissor (IIII)V
+	METHOD enableScissor (IIII)V
 		ARG 0 x
 		ARG 1 y
 		ARG 2 width
@@ -173,9 +167,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD initRenderer initRenderer (IZ)V
 		ARG 0 debugVerbosity
 		ARG 1 debugSync
-	METHOD isFrozenAtPollEvents isFrozenAtPollEvents ()Z
-	METHOD isOnRenderThread isOnRenderThread ()Z
-	METHOD isOnRenderThreadOrInit isOnRenderThreadOrInit ()Z
 	METHOD lambda$static$0 (Lit/unimi/dsi/fastutil/ints/IntConsumer;I)V
 		ARG 0 indexBuilder
 		ARG 1 primitiveId
@@ -192,7 +183,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 	METHOD pixelStore pixelStore (II)V
 		ARG 0 pname
 		ARG 1 param
-	METHOD pollEvents pollEvents ()V
 	METHOD polygonMode polygonMode (II)V
 		ARG 0 face
 		ARG 1 mode
@@ -207,7 +197,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem com/mojang/blaze3d/systems/RenderS
 		ARG 4 format
 		ARG 5 type
 		ARG 6 pixels
-	METHOD recordRenderCall recordRenderCall (Lnet/minecraft/unmapped/C_ycxumudt;)V
+	METHOD recordRenderCall (Lnet/minecraft/unmapped/C_ycxumudt;)V
 		ARG 0 renderCall
 	METHOD renderCrosshair renderCrosshair (I)V
 		ARG 0 size
