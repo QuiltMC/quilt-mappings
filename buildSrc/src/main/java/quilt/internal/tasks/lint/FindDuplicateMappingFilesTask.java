@@ -32,7 +32,6 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
         final Multimap<String, File> allMappings = HashMultimap.create();
         final Set<String> duplicateMappings = new HashSet<>();
         final List<File> emptyFiles = new ArrayList<>();
-        final List<File> mapNoClassFiles = new ArrayList<>();
         final List<File> wrongExtensionFiles = new ArrayList<>();
 
         try (Stream<Path> mappingPaths = Files.walk(getMappingDirectory().get().getAsFile().toPath())) {
@@ -42,15 +41,14 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
                     try (var reader = new BufferedReader(new FileReader(mappingFile))) {
                         final String firstLine = reader.readLine();
                         if (firstLine != null) {
-                            getClassMatch(firstLine).ifPresentOrElse(
+                            getClassMatch(firstLine).ifPresent(
                                 classMatch -> {
                                     final Collection<File> classMappings = allMappings.get(classMatch);
 
                                     if (!classMappings.isEmpty()) duplicateMappings.add(classMatch);
 
                                     classMappings.add(mappingFile);
-                                },
-                                () -> mapNoClassFiles.add(mappingFile)
+                                }
                             );
                         } else {
                             emptyFiles.add(mappingFile);
@@ -95,19 +93,6 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
             LOGGER.error("Found {}!", message);
             for (final File emptyFile : emptyFiles) {
                 LOGGER.error("\t{}", emptyFile);
-            }
-        }
-
-        if (!mapNoClassFiles.isEmpty()) {
-            final String message = "%d file%s not mapping a class".formatted(
-                mapNoClassFiles.size(),
-                mapNoClassFiles.size() == 1 ? "" : "s"
-            );
-            errorMessages.add(message);
-
-            LOGGER.error("Found {}!", message);
-            for (final File mapNoClassFile : mapNoClassFiles) {
-                LOGGER.error("\t{}", mapNoClassFile);
             }
         }
 
