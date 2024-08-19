@@ -12,6 +12,8 @@ CLASS net/minecraft/unmapped/C_bxlqmlyr net/minecraft/client/render/DimensionVis
 		ARG 4 brightenLighting
 		ARG 5 darkened
 	METHOD m_emwlwgoh isDarkened ()Z
+	METHOD m_epzbsnbv hasSunriseOrSunset (F)Z
+		ARG 1 skyAngle
 	METHOD m_meaqieev byDimensionType (Lnet/minecraft/unmapped/C_oxijnccf;)Lnet/minecraft/unmapped/C_bxlqmlyr;
 		ARG 0 dimensionType
 	METHOD m_nmrrztfm useThickFog (II)Z
@@ -22,6 +24,8 @@ CLASS net/minecraft/unmapped/C_bxlqmlyr net/minecraft/client/render/DimensionVis
 		COMMENT fog during night.
 		ARG 1 color
 		ARG 2 sunHeight
+	METHOD m_rphtfkne getSunriseOrSunsetColor (F)I
+		ARG 1 skyAngle
 	METHOD m_seuvbniv (Lit/unimi/dsi/fastutil/objects/Object2ObjectArrayMap;)V
 		ARG 0 map
 	METHOD m_unvfkuhh shouldBrightenLighting ()Z
@@ -31,9 +35,10 @@ CLASS net/minecraft/unmapped/C_bxlqmlyr net/minecraft/client/render/DimensionVis
 	CLASS C_cgdnchhz End
 	CLASS C_tnsgxlcj Nether
 	CLASS C_ttikmpkq Overworld
+		FIELD f_ibugopdu SUNRISE_AND_SUNSET_TIMESPAN F
 		FIELD f_utiantsh CLOUDS_HEIGHT I
 	CLASS C_yfaqgsln SkyType
-		FIELD f_gltaehdx END Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
+		FIELD f_gltaehdx Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
 			COMMENT Signals the renderer to draw the end sky box over the sky (as in the vanilla End).
-		FIELD f_wsnpryxl NONE Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
+		FIELD f_wsnpryxl Lnet/minecraft/unmapped/C_bxlqmlyr$C_yfaqgsln;
 			COMMENT Signals the renderer not to render a sky.

@@ -49,6 +49,7 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	FIELD f_pdfchroe renderTypeGuiShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_poxlotsg blurShader Lnet/minecraft/unmapped/C_pdhhdxwe;
 	FIELD f_pymllugl DEBUG_DEPTH_BUFFER Z
+	FIELD f_pznyrodv fovModifier F
 	FIELD f_qdnuxosx shaders Ljava/util/Map;
 	FIELD f_qkmfiggp renderTypeCrumblingShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_qyluofyp floatingItemTimeLeft I
@@ -67,6 +68,7 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	FIELD f_tdedjfnc MAX_BLUR_RADIUS I
 	FIELD f_tglmbmbc renderTypeItemEntityTranslucentCullShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_tlbmrvcz skyDarkness F
+	FIELD f_tlsecmwt oldFovModifier F
 	FIELD f_tpmysuza renderTypeTextIntensityShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_tsgkqvjs renderTypeArmorGlintShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_tvdwlaza CAMERA_DEPTH F
@@ -93,6 +95,7 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	FIELD f_ymbcfhsq renderTypeBeaconBeamShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_zbxdjxbf LOGGER Lorg/slf4j/Logger;
 	FIELD f_zknzobnb viewDistance F
+	FIELD f_zktgstnv resourcePool Lnet/minecraft/unmapped/C_ainlnqzg;
 	FIELD f_zldagdzl renderTypeEntityGlintShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_zliffast renderTypeLinesShader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD f_zqptimld firstPersonRenderer Lnet/minecraft/unmapped/C_csxqddlf;
@@ -284,6 +287,7 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 	METHOD m_rqmathdh (Lnet/minecraft/unmapped/C_alllhitb;)V
 		ARG 0 shader
 	METHOD m_rswaokwq getBasicProjectionMatrix (F)Lorg/joml/Matrix4f;
+		ARG 1 fov
 	METHOD m_rudtmfgh getShader ()Lnet/minecraft/unmapped/C_pdhhdxwe;
 	METHOD m_rvsaogwb getRenderTypeEntityNoOutlineShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_sfhcnkpm getRenderTypeSolidShader ()Lnet/minecraft/unmapped/C_alllhitb;
@@ -301,6 +305,8 @@ CLASS net/minecraft/unmapped/C_sktkdoun net/minecraft/client/render/GameRenderer
 		ARG 0 shader
 	METHOD m_tdvujytd showFloatingItem (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 floatingItem
+	METHOD m_tufjpukz (Ljava/nio/file/Path;)V
+		ARG 1 path
 	METHOD m_uwgotklk getPositionColorTexLightmapShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD m_vdebydby loadBlur (Lnet/minecraft/unmapped/C_xadhkzfq;)V
 		ARG 1 factory
