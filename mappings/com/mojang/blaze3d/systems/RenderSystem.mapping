@@ -1,34 +1,15 @@
 CLASS com/mojang/blaze3d/systems/RenderSystem
 	FIELD MAX_SUPPORTED_TEXTURE_SIZE maxSupportedTextureSize I
-	FIELD MINIMUM_ATLAS_TEXTURE_SIZE I
-	FIELD RENDER_THREAD_TESSELATOR Lnet/minecraft/unmapped/C_hiiunyvh;
-	FIELD apiDescription Ljava/lang/String;
-	FIELD isInInit Z
-	FIELD lastDrawTime D
 	FIELD modelViewStack MODEL_VIEW_STACK Lorg/joml/Matrix4fStack;
-	FIELD pollEventsWaitStart Ljava/util/concurrent/atomic/AtomicLong;
-	FIELD pollingEvents Ljava/util/concurrent/atomic/AtomicBoolean;
-	FIELD projectionMatrix Lorg/joml/Matrix4f;
 	FIELD recordingQueue RECORDING_QUEUE Ljava/util/concurrent/ConcurrentLinkedQueue;
-	FIELD renderThread Ljava/lang/Thread;
-	FIELD savedProjectionMatrix Lorg/joml/Matrix4f;
-	FIELD savedVertexSorting Lnet/minecraft/unmapped/C_onfzhami;
 	FIELD shaderColor SHADER_COLOR [F
-	FIELD shaderGameTime F
-	FIELD shaderGlintAlpha F
 	FIELD shaderLightDirections SHADER_LIGHT_DIRECTIONS [Lorg/joml/Vector3f;
-	FIELD shaderLineWidth F
-	FIELD shader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD shaderTextures SHADER_TEXTURES [I
 	FIELD sharedSequential SHARED_SEQUENTIAL Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 	FIELD sharedSequentialLines SHARED_SEQUENTIAL_LINES Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 	FIELD sharedSequentialQuad SHARED_SEQUENTIAL_QUAD Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
-	FIELD textureMatrix Lorg/joml/Matrix4f;
-	FIELD vertexSorting Lnet/minecraft/unmapped/C_onfzhami;
 	METHOD activeTexture (I)V
 		ARG 0 texture
-	METHOD backupProjectionMatrix ()V
-	METHOD beginInitialization ()V
 	METHOD bindTexture (I)V
 		ARG 0 texture
 	METHOD bindTextureForSetup (I)V
@@ -65,52 +46,25 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 1 green
 		ARG 2 blue
 		ARG 3 alpha
-	METHOD defaultBlendFunc ()V
 	METHOD deleteTexture (I)V
 		ARG 0 texture
 	METHOD depthFunc (I)V
 		ARG 0 func
 	METHOD depthMask (Z)V
 		ARG 0 mask
-	METHOD disableBlend ()V
-	METHOD disableColorLogicOp ()V
-	METHOD disableCull ()V
-	METHOD disablePolygonOffset ()V
-	METHOD disableScissor ()V
 	METHOD drawElements (III)V
 		ARG 0 mode
 		ARG 1 first
 		ARG 2 count
-	METHOD enableBlend ()V
-	METHOD enableColorLogicOp ()V
-	METHOD enableCull ()V
-	METHOD enablePolygonOffset ()V
-	METHOD enableScissor (IIII)V
-	METHOD finishInitialization ()V
 	METHOD flipFrame (J)V
 		ARG 0 window
-	METHOD getApiDescription ()Ljava/lang/String;
-	METHOD getBackendDescription ()Ljava/lang/String;
-	METHOD getCapsString ()Ljava/lang/String;
-	METHOD getModelViewMatrix ()Lorg/joml/Matrix4f;
-	METHOD getModelViewStack ()Lorg/joml/Matrix4fStack;
-	METHOD getProjectionMatrix ()Lorg/joml/Matrix4f;
 	METHOD getSequentialBuffer (Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;)Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 		ARG 0 mode
-	METHOD getShader ()Lnet/minecraft/unmapped/C_alllhitb;
-	METHOD getShaderColor ()[F
-	METHOD getShaderGameTime ()F
-	METHOD getShaderGlintAlpha ()F
-	METHOD getShaderLineWidth ()F
 	METHOD getShaderTexture (I)I
 		ARG 0 location
 	METHOD getString (ILjava/util/function/Consumer;)V
 		ARG 0 name
 		ARG 1 consumer
-	METHOD getTextureMatrix ()Lorg/joml/Matrix4f;
-	METHOD getVertexSorting ()Lnet/minecraft/unmapped/C_onfzhami;
-	METHOD glBindBuffer (II)V
-	METHOD glBindVertexArray (I)V
 	METHOD glBufferData (ILjava/nio/ByteBuffer;I)V
 		ARG 0 target
 		ARG 1 data
@@ -158,8 +112,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 location
 		ARG 1 transpose
 		ARG 2 value
-	METHOD initBackendSystem ()Lnet/minecraft/unmapped/C_iphdqeiz$C_bcqaaecr;
-	METHOD initRenderThread ()V
 	METHOD initRenderer (IZ)V
 		ARG 0 debugVerbosity
 		ARG 1 debugSync
@@ -175,7 +127,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 width
 	METHOD logicOp (Lcom/mojang/blaze3d/platform/GlStateManager$C_hfcoodvl;)V
 		ARG 0 op
-	METHOD maxSupportedTextureSize ()I
 	METHOD pixelStore (II)V
 		ARG 0 pname
 		ARG 1 param
@@ -197,10 +148,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 renderCall
 	METHOD renderCrosshair (I)V
 		ARG 0 size
-	METHOD renderThreadTesselator ()Lnet/minecraft/unmapped/C_hiiunyvh;
-	METHOD replayQueue ()V
-	METHOD resetTextureMatrix ()V
-	METHOD restoreProjectionMatrix ()V
 	METHOD runAsFancy (Ljava/lang/Runnable;)V
 		ARG 0 runnable
 	METHOD setErrorCallback (Lorg/lwjgl/glfw/GLFWErrorCallbackI;)V
@@ -259,7 +206,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 sfail
 		ARG 1 dpfail
 		ARG 2 dppass
-	METHOD teardownOverlayColor ()V
 	METHOD texParameter (III)V
 		ARG 0 target
 		ARG 1 pname

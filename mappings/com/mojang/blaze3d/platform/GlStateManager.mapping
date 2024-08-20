@@ -1,5 +1,4 @@
 CLASS com/mojang/blaze3d/platform/GlStateManager
-	FIELD activeTexture I
 	METHOD _activeTexture (I)V
 		ARG 0 texture
 	METHOD _bindTexture (I)V
@@ -38,11 +37,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 0 func
 	METHOD _depthMask (Z)V
 		ARG 0 mask
-	METHOD _disableBlend ()V
-	METHOD _disableColorLogicOp ()V
-	METHOD _disableCull ()V
-	METHOD _disableDepthTest ()V
-	METHOD _disablePolygonOffset ()V
 	METHOD _disableVertexAttribArray (I)V
 		ARG 0 index
 	METHOD _drawElements (IIIJ)V
@@ -50,19 +44,10 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 1 count
 		ARG 2 type
 		ARG 3 indices
-	METHOD _enableBlend ()V
-	METHOD _enableColorLogicOp ()V
-	METHOD _enableCull ()V
-	METHOD _enableDepthTest ()V
-	METHOD _enablePolygonOffset ()V
-	METHOD _enableScissorTest ()V
 	METHOD _enableVertexAttribArray (I)V
 		ARG 0 index
-	METHOD _genTexture ()I
 	METHOD _genTextures ([I)V
 		ARG 0 ids
-	METHOD _getActiveTexture ()I
-	METHOD _getError ()I
 	METHOD _getInteger (I)I
 		ARG 0 pname
 	METHOD _getString (I)Ljava/lang/String;
@@ -145,8 +130,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 2 textureTarget
 		ARG 3 texture
 		ARG 4 level
-	METHOD _glGenBuffers ()I
-	METHOD _glGenVertexArrays ()I
 	METHOD _glGetAttribLocation (ILjava/lang/CharSequence;)I
 		ARG 0 program
 		ARG 1 name
@@ -426,10 +409,8 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		FIELD f_sdyyvzqb capState Lcom/mojang/blaze3d/platform/GlStateManager$C_rfswymsl;
 		FIELD f_yedzzjzb dstFactorAlpha I
 	CLASS DestFactor DestFactor
-		FIELD value I
 		METHOD <init> (Ljava/lang/String;II)V
 			ARG 3 value
 	CLASS SourceFactor SourceFactor
-		FIELD value I
 		METHOD <init> (Ljava/lang/String;II)V
 			ARG 3 value
