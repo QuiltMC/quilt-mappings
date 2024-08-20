@@ -1,15 +1,26 @@
 CLASS net/minecraft/unmapped/C_nyagoaau net/minecraft/recipe/RecipeMatcher
 	COMMENT Matching class that matches a recipe to its required resources.
 	COMMENT This specifically does not check patterns (See {@link ShapedRecipe} for that).
+	FIELD f_lzaqyyse amounts Lit/unimi/dsi/fastutil/objects/Reference2IntOpenHashMap;
 	METHOD m_ilmcgbtf clear ()V
 	METHOD m_okheizlq consume (Ljava/lang/Object;I)V
 		COMMENT Consumes a resource from the pool of available items.
-		ARG 2 itemId
-			COMMENT the raw id of the item being consumed
-	METHOD m_wkrwvzbp addInput (Ljava/lang/Object;I)V
+		ARG 1 input
+		ARG 2 amount
+	METHOD m_qzcfdjbc hasAny (Ljava/lang/Object;)Z
+		ARG 1 input
+	METHOD m_sbpnsepr account (Ljava/lang/Object;I)V
+	METHOD m_uachwhuy hasAtLeast (Ljava/lang/Object;I)Z
+		ARG 1 input
+		ARG 2 amount
+	METHOD m_wkrwvzbp put (Ljava/lang/Object;I)V
 		COMMENT Adds an input to be used for recipe matching.
-		ARG 2 itemId
-			COMMENT the raw ID of the item to match
+		ARG 1 input
+		ARG 2 amount
+	METHOD m_yhigjszt countCrafts (Ljava/util/List;ILnet/minecraft/unmapped/C_nyagoaau$C_xftfxaqa;)I
+		ARG 3 callback
+	METHOD m_yqdnhmqj match (Ljava/util/List;ILnet/minecraft/unmapped/C_nyagoaau$C_xftfxaqa;)Z
+		ARG 3 callback
 	CLASS C_tvjqrchc Matcher
 		FIELD f_bjsngxdw totalIngredients I
 		FIELD f_csjnvinn requiredItems Ljava/util/List;
@@ -17,18 +28,32 @@ CLASS net/minecraft/unmapped/C_nyagoaau net/minecraft/recipe/RecipeMatcher
 		FIELD f_kclymipu totalRequiredItems I
 		FIELD f_uifobfbp ingredients Ljava/util/List;
 		FIELD f_wkisrowc ingredientItemLookup Lit/unimi/dsi/fastutil/ints/IntList;
-		METHOD m_lmstygqg unfulfillRequirement (I)V
-			ARG 1 itemId
+		METHOD m_ajdwkhsu setInitialMatches ()V
 		METHOD m_bjscespa match (ILnet/minecraft/unmapped/C_nyagoaau$C_xftfxaqa;)Z
 			ARG 1 multiplier
-		METHOD m_wyqyvyeg getMaximumCrafts ()I
+			ARG 2 callback
+		METHOD m_demomdbv setMatch (II)V
+		METHOD m_lmstygqg unfulfillRequirement (I)V
+			ARG 1 itemId
+		METHOD m_oiaawhql getMatchIndex (II)I
+			ARG 1 itemIndex
+			ARG 2 ingredientIndex
 		METHOD m_otmvcbma createItemRequirementList ()Ljava/util/List;
 		METHOD m_oxrukgsb needsRequirement (II)Z
 			ARG 1 itemIndex
 			ARG 2 ingredientIndex
+		METHOD m_tzjdsahq isIndexedItem (I)Z
+			ARG 0 item
 		METHOD m_ushjqgji countCrafts (ILnet/minecraft/unmapped/C_nyagoaau$C_xftfxaqa;)I
 			ARG 1 minimum
+			ARG 2 callback
+		METHOD m_wyqyvyeg getMaximumCrafts ()I
 		METHOD m_xzbczili getRequirement (I)Z
 			ARG 1 itemId
+		METHOD m_zgebgjma getTotalRequiredItems ()I
 		METHOD m_zleeorrf getRequirementIndex (I)I
 			ARG 1 itemId
+	CLASS C_xftfxaqa ItemCallback
+		METHOD accept accept (Ljava/lang/Object;)V
+			ARG 1 item
+	CLASS C_yxyoqnti IngredientInfo
