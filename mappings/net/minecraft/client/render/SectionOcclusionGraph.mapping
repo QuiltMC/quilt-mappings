@@ -9,14 +9,32 @@ CLASS net/minecraft/unmapped/C_jnliocmw net/minecraft/client/render/SectionOcclu
 	FIELD f_ymkthglq state Ljava/util/concurrent/atomic/AtomicReference;
 	FIELD f_zjcqkfdk MINIMUM_ADVANCED_CULLING_DISTANCE I
 	METHOD m_acnafyha consumeFrustumUpdate ()Z
+	METHOD m_fqbmedyx runPartialUpdate (ZLnet/minecraft/unmapped/C_jwzjqevg;Ljava/util/List;Lnet/minecraft/unmapped/C_vgpupfxx;Lit/unimi/dsi/fastutil/longs/LongOpenHashSet;)V
+		ARG 1 insideCube
+		ARG 2 frustum
+		ARG 3 sections
+		ARG 4 cameraPos
 	METHOD m_geodkceg getNode (Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc;)Lnet/minecraft/unmapped/C_jnliocmw$C_rslogvyf;
 	METHOD m_gndifavm addSectionsInView (Lnet/minecraft/unmapped/C_jwzjqevg;Ljava/util/List;)V
 		ARG 1 frustum
 		ARG 2 sections
+	METHOD m_hkpcmvfm update (ZLnet/minecraft/unmapped/C_dcmtgrvm;Lnet/minecraft/unmapped/C_jwzjqevg;Ljava/util/List;Lit/unimi/dsi/fastutil/longs/LongOpenHashSet;)V
+		ARG 1 insideCube
+		ARG 3 frustum
+		ARG 4 sections
+	METHOD m_jsehgzmo getRelative (JLnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc;
+		ARG 3 section
 	METHOD m_kkoyotno waitAndReset (Lnet/minecraft/unmapped/C_rqhfsngs;)V
 		ARG 1 builtChunkStorage
 	METHOD m_mateoxjf queueSectionsWithNewNeighbors (Lnet/minecraft/unmapped/C_jnliocmw$C_limxhopi;)V
 		ARG 1 state
+	METHOD m_pabghxwa isInViewDistance (JJ)Z
+	METHOD m_qeysollx runFullUpdate (Lnet/minecraft/unmapped/C_jnliocmw$C_bxmhdxlt;Lnet/minecraft/unmapped/C_vgpupfxx;Ljava/util/Queue;ZLjava/util/function/Consumer;Lit/unimi/dsi/fastutil/longs/LongOpenHashSet;)V
+		ARG 1 storage
+		ARG 2 cameraPos
+		ARG 3 nodes
+		ARG 4 insideCube
+		ARG 5 newSectionConsumer
 	METHOD m_tnlfcbmb onChunkLoaded (Lnet/minecraft/unmapped/C_ynrszrtu;)V
 	METHOD m_tugelosl addNeighbors (Lnet/minecraft/unmapped/C_jnliocmw$C_gwrnvzqg;Lnet/minecraft/unmapped/C_ynrszrtu;)V
 		ARG 1 events
@@ -24,6 +42,9 @@ CLASS net/minecraft/unmapped/C_jnliocmw net/minecraft/client/render/SectionOcclu
 	METHOD m_viheltip scheduleFullUpdate ()V
 	METHOD m_xapgsdwa createInitialNodes (Lnet/minecraft/unmapped/C_dcmtgrvm;Ljava/util/Queue;)V
 		ARG 2 nodes
+	METHOD m_yxpdbtyy scheduleFullUpdate (ZLnet/minecraft/unmapped/C_dcmtgrvm;Lnet/minecraft/unmapped/C_vgpupfxx;Lit/unimi/dsi/fastutil/longs/LongOpenHashSet;)V
+		ARG 1 insideCube
+		ARG 3 cameraPos
 	CLASS C_bxmhdxlt Storage
 		FIELD f_jhkuqdps sectionToNode Lnet/minecraft/unmapped/C_jnliocmw$C_ndwzuzav;
 		FIELD f_ujhobiol sections Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
