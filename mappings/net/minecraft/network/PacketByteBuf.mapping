@@ -439,6 +439,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the list to write
 	METHOD m_icznxsji (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
+	METHOD m_irlunvcd readVec3d ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_izfwnywx readUuid ()Ljava/util/UUID;
 	METHOD m_jntaktqt (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
@@ -482,6 +483,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 0 buf
 	METHOD m_kjijcwgo readNbtCompound (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 buf
+	METHOD m_kjywmbol writeVec3d (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 0 buf
+		ARG 1 vec
 	METHOD m_kooigoir readInstant ()Ljava/time/Instant;
 		COMMENT Reads an instant from this buf. An instant is represented by a long indicating
 		COMMENT the instant epoch milliseconds.
@@ -546,6 +550,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_nhqatmjh writeJson (Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
 		ARG 1 codec
 		ARG 2 object
+	METHOD m_nxtbhhsr readVec3d (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 0 buf
 	METHOD m_odlpvkyf writePublicKey (Ljava/security/PublicKey;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a public key to this buf.
 		COMMENT A public key is represented by at most 512 primitive bytes.
@@ -683,6 +689,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 bytes
 	METHOD m_uedohhct readNbt (Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 tagSizeTracker
+	METHOD m_utowfkel writeVec3d (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 	METHOD m_uvlqpwrk readLongArray ([J)[J
 		COMMENT Reads an array of primitive longs from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the regular long (not var
