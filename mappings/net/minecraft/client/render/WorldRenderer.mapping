@@ -1,7 +1,5 @@
 CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRenderer
-	FIELD f_bigqxyls entityOutlineShader Lnet/minecraft/unmapped/C_pdhhdxwe;
 	FIELD f_cboyeijz cameraChunkZ I
-	FIELD f_cnqiydim transparencyShader Lnet/minecraft/unmapped/C_pdhhdxwe;
 	FIELD f_dprzqrwh frustum Lnet/minecraft/unmapped/C_jwzjqevg;
 	FIELD f_dqbrmnkm lastCameraYaw D
 	FIELD f_egoibmze CHUNK_SIZE I
@@ -127,7 +125,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 9 velocityX
 		ARG 11 velocityY
 		ARG 13 velocityZ
-	METHOD m_hbxqitbw loadTransparencyShader ()V
 	METHOD m_hsvhpyyt loadEntityOutlineShader ()V
 	METHOD m_huehuesi getLightmapCoordinates (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_hynzadkk;)I
 		ARG 0 world
@@ -180,7 +177,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 10 velocityX
 		ARG 12 velocityY
 		ARG 14 velocityZ
-	METHOD m_mmttqvye reloadTransparencyShader ()V
 	METHOD m_mpuuibox scheduleTerrainUpdate ()V
 	METHOD m_muehcdqf updateBlock (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;I)V
 		ARG 1 world
@@ -259,13 +255,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_vznbfahy applyFrustum (Lnet/minecraft/unmapped/C_jwzjqevg;)V
 		ARG 1 frustum
 	METHOD m_wcyzbxhv countRenderedSections ()I
-	METHOD m_whptjcei addMainPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_dcmtgrvm;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_vidgpspy;ZZLnet/minecraft/unmapped/C_lrgsdfwv;Lnet/minecraft/unmapped/C_eslcbfsq;)V
-		ARG 1 frameGraph
-		ARG 3 modelViewMatrix
-		ARG 4 projectionMatrix
-		ARG 5 fog
-		ARG 6 blockOutline
-		ARG 7 entityOutline
 	METHOD m_wlewmnef addCloudRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_qaetpqjq;Lnet/minecraft/unmapped/C_vgpupfxx;FIF)V
 		ARG 1 frameGraph
 		ARG 2 viewMatrix
@@ -281,7 +270,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 2 y
 		ARG 3 z
 		ARG 4 important
-	METHOD m_ydwujepn resetTransparencyShader ()V
 	METHOD m_yimwxysz scheduleTranslucentResort (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_tizlwnnv;)V
 		ARG 1 pos
 		ARG 2 layer
@@ -295,6 +283,3 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 3 tickDelta
 		ARG 4 fog
 	CLASS C_pxxobvor ShaderException
-		METHOD <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
-			ARG 1 message
-			ARG 2 cause

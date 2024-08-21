@@ -1,18 +1,14 @@
 CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkBuilder
 	FIELD f_ahdftdbj sectionBuilder Lnet/minecraft/unmapped/C_qphmhsxf;
-	FIELD f_dtjduquv tasks Ljava/util/Queue;
 	FIELD f_jsyjcjmv queuedTasks I
 	FIELD f_jyrbbucx camera Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_kmfkzwvn buffers Lnet/minecraft/unmapped/C_fnazfccz;
 	FIELD f_losuuhkx uploadQueue Ljava/util/Queue;
 	FIELD f_mirqeqau executor Ljava/util/concurrent/Executor;
-	FIELD f_mwlwkxtl priorityTasks Ljava/util/concurrent/PriorityBlockingQueue;
 	FIELD f_riknywno renderer Lnet/minecraft/unmapped/C_sfkkabhx;
 	FIELD f_tmavnhca bufferPool Lnet/minecraft/unmapped/C_awocslpo;
 	FIELD f_wiljtwvw taskExecutor Lnet/minecraft/unmapped/C_bhuwdyga;
 	FIELD f_wxcmutvp closed Z
-	FIELD f_xoftmotc MAX_HIGH_PRIORITY_QUOTA I
-	FIELD f_xuywwywj highPriorityQuota I
 	METHOD <init> (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_sfkkabhx;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_dfmwjguw;Lnet/minecraft/unmapped/C_vdyoclwy;Lnet/minecraft/unmapped/C_sicqxpzm;)V
 		ARG 4 bufferStorage
 		ARG 5 blockRenderManager
@@ -35,7 +31,6 @@ CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkB
 	METHOD m_onodhvgj setCamera (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 camera
 	METHOD m_oqvvuilz setWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
-	METHOD m_pbanztup pollTask ()Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_dafeytod;
 	METHOD m_qqonjvzv uploadVertexData (Lnet/minecraft/unmapped/C_fpcijbbg;Lnet/minecraft/unmapped/C_lhjdxjis;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 buffer
 		ARG 2 vertices
@@ -55,10 +50,8 @@ CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkB
 		FIELD f_efbrzllj needsImportantRebuild Z
 		FIELD f_jcyejnjx index I
 		FIELD f_lbepmavj sortTask Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_tztyrgso;
-		FIELD f_nlxqrsso failures Ljava/util/concurrent/atomic/AtomicInteger;
 		FIELD f_rgilmcfs SIZE I
 		FIELD f_tgudfvdi data Ljava/util/concurrent/atomic/AtomicReference;
-		FIELD f_tizngcbw neighbors [Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 		FIELD f_udjykkek needsRebuild Z
 		FIELD f_ufvtplrw buffers Ljava/util/Map;
 		FIELD f_ysmgvqny rebuildTask Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_ulcmkxuq;
@@ -68,9 +61,7 @@ CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkB
 		METHOD m_cejdjtap (Lnet/minecraft/unmapped/C_tizlwnnv;)Lnet/minecraft/unmapped/C_tizlwnnv;
 			ARG 0 layer
 		METHOD m_ektcraor needsRebuild ()Z
-		METHOD m_fctjayju getNeighbor (Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_hynzadkk;
 		METHOD m_fpcfnjwg createVertexSorting ()Lnet/minecraft/unmapped/C_onfzhami;
-		METHOD m_fppyjbjj cancelTasks ()Z
 		METHOD m_ggtdhlyn needsRebuild (Z)V
 			ARG 1 importantRebuild
 		METHOD m_hyqzqueo getData ()Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;
@@ -81,13 +72,8 @@ CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkB
 			ARG 2 y
 			ARG 3 z
 		METHOD m_kbhmydqx getSquaredDistanceToCamera ()D
-		METHOD m_ltblhvsd setOrigin (III)V
-			ARG 1 x
-			ARG 2 y
-			ARG 3 z
 		METHOD m_mxbbxnkh createRebuildTask (Lnet/minecraft/unmapped/C_blaazowi;)Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_dafeytod;
 			ARG 1 regionCache
-		METHOD m_nbdqnmpi doesChunkExist (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		METHOD m_niehtnqz set (Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;)V
 		METHOD m_ntorupzd clearBuffers ()V
 		METHOD m_nxdlgble rebuildBlocking (Lnet/minecraft/unmapped/C_blaazowi;)V
@@ -98,8 +84,6 @@ CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkB
 		METHOD m_qvakteqa scheduleRebuild (Lnet/minecraft/unmapped/C_sjynkhfr;Lnet/minecraft/unmapped/C_blaazowi;)V
 			ARG 1 builder
 		METHOD m_vilpmiub getBoundingBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
-		METHOD m_wdbxumgg ([Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;)V
-			ARG 0 neighbors
 		METHOD m_xuhqyblp cancelRebuild ()V
 		METHOD m_ycspbizp createSortTask (Lnet/minecraft/unmapped/C_tizlwnnv;Lnet/minecraft/unmapped/C_sjynkhfr;)Z
 			ARG 1 layer
@@ -107,7 +91,6 @@ CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkB
 		METHOD m_yiysmxwd reset ()V
 		CLASS C_dafeytod Task
 			FIELD f_ieqhemgl distance D
-			FIELD f_ypuqbnfm highPriority Z
 			FIELD f_zlyzuzir cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
 			METHOD compareTo (Ljava/lang/Object;)I
 				ARG 1 o
@@ -146,4 +129,3 @@ CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkB
 		METHOD m_cnqtwery getBlockEntites ()Ljava/util/List;
 		METHOD m_kppkuamn isEmpty (Lnet/minecraft/unmapped/C_tizlwnnv;)Z
 			ARG 1 layer
-		METHOD m_zxltqcaf hasNoLayers ()Z

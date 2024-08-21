@@ -19,7 +19,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	FIELD shaderGlintAlpha shaderGlintAlpha F
 	FIELD shaderLightDirections SHADER_LIGHT_DIRECTIONS [Lorg/joml/Vector3f;
 	FIELD shaderLineWidth shaderLineWidth F
-	FIELD shader shader Lnet/minecraft/unmapped/C_alllhitb;
 	FIELD shaderTextures SHADER_TEXTURES [I
 	FIELD sharedSequential SHARED_SEQUENTIAL Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 	FIELD sharedSequentialLines SHARED_SEQUENTIAL_LINES Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
@@ -87,7 +86,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	METHOD enableColorLogicOp enableColorLogicOp ()V
 	METHOD enableCull enableCull ()V
 	METHOD enablePolygonOffset enablePolygonOffset ()V
-	METHOD enableScissor (IIII)V
 	METHOD finishInitialization finishInitialization ()V
 	METHOD flipFrame flipFrame (J)V
 		ARG 0 window
@@ -99,7 +97,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	METHOD getProjectionMatrix getProjectionMatrix ()Lorg/joml/Matrix4f;
 	METHOD getSequentialBuffer getSequentialBuffer (Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;)Lcom/mojang/blaze3d/systems/RenderSystem$C_qjasdctt;
 		ARG 0 mode
-	METHOD getShader getShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD getShaderColor getShaderColor ()[F
 	METHOD getShaderFog getShaderFog ()Lnet/minecraft/unmapped/C_vidgpspy;
 	METHOD getShaderGameTime getShaderGameTime ()F
@@ -205,15 +202,11 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	METHOD replayQueue replayQueue ()V
 	METHOD resetTextureMatrix resetTextureMatrix ()V
 	METHOD restoreProjectionMatrix restoreProjectionMatrix ()V
-	METHOD runAsFancy runAsFancy (Ljava/lang/Runnable;)V
-		ARG 0 runnable
 	METHOD setErrorCallback setErrorCallback (Lorg/lwjgl/glfw/GLFWErrorCallbackI;)V
 		ARG 0 callback
 	METHOD setProjectionMatrix setProjectionMatrix (Lorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_onfzhami;)V
 		ARG 0 projectionMatrix
 		ARG 1 sorter
-	METHOD setShader setShader (Ljava/util/function/Supplier;)V
-		ARG 0 shader
 	METHOD setShaderColor setShaderColor (FFFF)V
 		ARG 0 red
 		ARG 1 green
@@ -253,8 +246,6 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	METHOD setupLevelDiffuseLighting setupWorldDiffuseLighting (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
 	METHOD setupOverlayColor setupOverlayColor (II)V
 		ARG 1 color
-	METHOD setupShaderLights setupShaderLights (Lnet/minecraft/unmapped/C_alllhitb;)V
-		ARG 0 shader
 	METHOD stencilFunc stencilFunc (III)V
 		ARG 0 func
 		ARG 1 ref

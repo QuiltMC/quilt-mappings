@@ -1,5 +1,4 @@
 CLASS com/mojang/blaze3d/platform/GlStateManager
-	FIELD activeTexture I
 	METHOD _activeTexture (I)V
 		ARG 0 texture
 	METHOD _bindTexture (I)V
@@ -15,7 +14,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 2 srcFactorAlpha
 		ARG 3 dstFactorAlpha
 	METHOD _clear (I)V
-		ARG 0 mask
 		ARG 0 red
 		ARG 1 green
 		ARG 2 blue
@@ -37,11 +35,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 0 func
 	METHOD _depthMask (Z)V
 		ARG 0 mask
-	METHOD _disableBlend ()V
-	METHOD _disableColorLogicOp ()V
-	METHOD _disableCull ()V
-	METHOD _disableDepthTest ()V
-	METHOD _disablePolygonOffset ()V
 	METHOD _disableVertexAttribArray (I)V
 		ARG 0 index
 	METHOD _drawElements (IIIJ)V
@@ -49,19 +42,10 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 1 count
 		ARG 2 type
 		ARG 3 indices
-	METHOD _enableBlend ()V
-	METHOD _enableColorLogicOp ()V
-	METHOD _enableCull ()V
-	METHOD _enableDepthTest ()V
-	METHOD _enablePolygonOffset ()V
-	METHOD _enableScissorTest ()V
 	METHOD _enableVertexAttribArray (I)V
 		ARG 0 index
-	METHOD _genTexture ()I
 	METHOD _genTextures ([I)V
 		ARG 0 ids
-	METHOD _getActiveTexture ()I
-	METHOD _getError ()I
 	METHOD _getInteger (I)I
 		ARG 0 pname
 	METHOD _getString (I)Ljava/lang/String;
@@ -144,8 +128,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 2 textureTarget
 		ARG 3 texture
 		ARG 4 level
-	METHOD _glGenBuffers ()I
-	METHOD _glGenVertexArrays ()I
 	METHOD _glGetAttribLocation (ILjava/lang/CharSequence;)I
 		ARG 0 program
 		ARG 1 name
@@ -230,7 +212,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 4 format
 		ARG 5 type
 		ARG 6 pixels
-	METHOD _scissorBox (IIII)V
 	METHOD _stencilFunc (III)V
 		ARG 0 func
 		ARG 1 ref
@@ -330,9 +311,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 1 pname
 	METHOD glLinkProgram (I)V
 		ARG 0 program
-	METHOD glShaderSource (ILjava/util/List;)V
-		ARG 0 shader
-		ARG 1 strings
 	METHOD lambda$static$0 (I)Lcom/mojang/blaze3d/platform/GlStateManager$C_vgejkzlz;
 		ARG 0 id
 	METHOD setupGui3DDiffuseLighting (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V

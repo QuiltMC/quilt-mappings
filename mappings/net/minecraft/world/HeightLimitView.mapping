@@ -7,15 +7,6 @@ CLASS net/minecraft/unmapped/C_qpninoyb net/minecraft/world/HeightLimitView
 		COMMENT @see #isOutOfHeightLimit(int)
 		ARG 1 pos
 			COMMENT the position to check
-	METHOD m_chdttpoi getTopSectionCoord ()I
-		COMMENT Returns the top section coordinate, exclusive, of this view.
-		COMMENT
-		COMMENT @implNote This implementation passes the {@linkplain #getTopY() top Y}
-		COMMENT through {@link net.minecraft.util.math.ChunkSectionPos#getSectionCoord(int)}.
-		COMMENT
-		COMMENT @return the top section coordinate
-		COMMENT @see #getBottomSectionCoord()
-		COMMENT @see #getTopY()
 	METHOD m_djwrhqjj sectionIndexToCoord (I)I
 		COMMENT Converts a zero-based section index to a section coordinate.
 		COMMENT
@@ -23,11 +14,6 @@ CLASS net/minecraft/unmapped/C_qpninoyb net/minecraft/world/HeightLimitView
 		COMMENT @see #sectionCoordToIndex(int) the inverse operation <code>sectionCoordToIndex</code>
 		ARG 1 index
 			COMMENT the zero-based section index
-	METHOD m_gvgqrdxa getBottomY ()I
-		COMMENT Returns the bottom Y level, or height, inclusive, of this view.
-		COMMENT
-		COMMENT @see #getTopY()
-		COMMENT @see #getHeight()
 	METHOD m_ijtlguze getSectionIndex (I)I
 		COMMENT Returns a zero-based section index to which the {@code y} level belongs.
 		COMMENT
@@ -36,15 +22,6 @@ CLASS net/minecraft/unmapped/C_qpninoyb net/minecraft/world/HeightLimitView
 	METHOD m_jxoydlll create (II)Lnet/minecraft/unmapped/C_qpninoyb;
 		ARG 0 bottomY
 		ARG 1 height
-	METHOD m_losfkptf getBottomSectionCoord ()I
-		COMMENT Returns the bottom section coordinate, inclusive, of this view.
-		COMMENT
-		COMMENT @implNote This implementation passes the {@linkplain #getBottomY() bottom Y}
-		COMMENT through {@link net.minecraft.util.math.ChunkSectionPos#getSectionCoord(int)}.
-		COMMENT
-		COMMENT @return the bottom section coordinate
-		COMMENT @see #getTopSectionCoord()
-		COMMENT @see #getBottomY()
 	METHOD m_ogckdmbr getHeight ()I
 		COMMENT Returns the difference in the {@linkplain #getBottomY() minimum} and
 		COMMENT {@linkplain #getTopY() maximum} height.
@@ -70,12 +47,6 @@ CLASS net/minecraft/unmapped/C_qpninoyb net/minecraft/world/HeightLimitView
 		COMMENT @return the number of sections
 		COMMENT @see #getTopSectionCoord()
 		COMMENT @see #getBottomSectionCoord()
-	METHOD m_uzxbhxug getTopY ()I
-		COMMENT Returns the top Y level, or height, exclusive, of this view.
-		COMMENT
-		COMMENT @implNote This implementation sums up the bottom Y and the height.
-		COMMENT @see #getBottomY()
-		COMMENT @see #getHeight()
 	METHOD m_xooekllz sectionCoordToIndex (I)I
 		COMMENT Converts a section coordinate to a zero-based section index.
 		COMMENT

@@ -27,7 +27,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_hplkgeec appliedScale F
 	FIELD f_huyhofoo serverY D
 	FIELD f_iiiqnngu SPRINTING_SPEED_BOOST Lnet/minecraft/unmapped/C_hdbqsqsm;
-	FIELD f_iiptolzx ITEM_USE_FRACTION_EFFECT_START F
 	FIELD f_iismerxm ACTIVE_EFFECTS_KEY Ljava/lang/String;
 	FIELD f_ioiczfgs HAND_SLOTS I
 	FIELD f_isuahutr jumpingCooldown I
@@ -54,7 +53,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_mikwhxdg skipExperienceDrop Z
 	FIELD f_mjweoijp POTION_SWIRLS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_mlsykvgi absorptionAmount F
-	FIELD f_naybbqec ITEM_USE_INTERVAL I
 	FIELD f_noitvgvb LARGE_HAT_RENDER_CULLING_SIZE F
 	FIELD f_noizhvzb BASE_JUMP_COEFFICIENT F
 	FIELD f_nzjhzxzv prevLookDirection F
@@ -161,8 +159,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 2 armor
 	METHOD m_clijnmhr isBlocking ()Z
 	METHOD m_cnzsqyai jump ()V
-	METHOD m_cqzdrxbt getDrinkSound (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_avavozay;
-		ARG 1 stack
 	METHOD m_crvwylmv setAbsorptionAmount (F)V
 		ARG 1 amount
 	METHOD m_ctdiailf containsOnlyAmbientEffects (Ljava/util/Collection;)Z
@@ -309,9 +305,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_jhvcxqlb canEquip (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
 	METHOD m_jjznttvl skipExperienceDrop ()V
-	METHOD m_jrnbkpuc spawnConsumptionEffects (Lnet/minecraft/unmapped/C_sddaxwyk;I)V
-		ARG 1 stack
-		ARG 2 particleCount
 	METHOD m_jsddcavv isDead ()Z
 		COMMENT Returns whether this entity is dead or not.
 		COMMENT <p>
@@ -319,7 +312,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT
 		COMMENT @return {@code true} if this entity is dead, or {@code false} otherwise
 	METHOD m_jtmdgtth hasLandedInFluid ()Z
-	METHOD m_jumclkqe shouldSpawnConsumptionEffects ()Z
 	METHOD m_khdpfurh setHealth (F)V
 		COMMENT Sets the amount of health this entity has in half-hearts.
 		COMMENT
@@ -337,8 +329,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_ktkvypgf enterCombat ()V
 	METHOD m_kwjgylty swimUpward (Lnet/minecraft/unmapped/C_ednuhnnn;)V
 		ARG 1 tag
-	METHOD m_lagxpcmk onStatusEffectRemoved (Lnet/minecraft/unmapped/C_wpfizwve;)V
-		ARG 1 effect
 	METHOD m_lbpuzdpj getLocationBasedEnchantmentEffects (Lnet/minecraft/unmapped/C_yuycoehb;)Ljava/util/Map;
 	METHOD m_ldeqpsrz canDisableShield ()Z
 	METHOD m_lgbaiieb slotEmitsEquipEvent (Lnet/minecraft/unmapped/C_yuycoehb;)Z
@@ -484,7 +474,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_sgvyoptc getFallSound (I)Lnet/minecraft/unmapped/C_avavozay;
 		ARG 1 distance
 	METHOD m_slpipvix isSleepingInBed ()Z
-	METHOD m_snrjmpmr eat (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cgikuact;)Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_spcfbchu clearStatusEffects ()Z
 	METHOD m_spqekiza tickCramming ()V
 	METHOD m_spwwmdyl getHurtSound (Lnet/minecraft/unmapped/C_sbxfkpyv;)Lnet/minecraft/unmapped/C_avavozay;
@@ -533,10 +522,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 source
 		ARG 2 amount
 		ARG 9 unabsorbedAmount
-	METHOD m_upnmcubv getEatSound (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_avavozay;
-		ARG 1 stack
 	METHOD m_urjobhnr tickHandSwing ()V
-	METHOD m_usifxdhh tryEat (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_uuypiexz isClimbing ()Z
 	METHOD m_uwysofda updateLimbs (Z)V
 		ARG 1 flutter
@@ -589,8 +575,6 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_wpnkklez travelControlled (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 player
 		ARG 2 input
-	METHOD m_wqoypvjl applyFoodEffects (Lnet/minecraft/unmapped/C_cgikuact;)V
-		ARG 1 food
 	METHOD m_wsbfbafs getAbsorptionAmount ()F
 	METHOD m_wslmhwgl getAttacker ()Lnet/minecraft/unmapped/C_usxaxydn;
 	METHOD m_wunuznfv isInCreativeMode ()Z
