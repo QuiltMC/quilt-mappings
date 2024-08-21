@@ -14,6 +14,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	FIELD savedProjectionMatrix savedProjectionMatrix Lorg/joml/Matrix4f;
 	FIELD savedVertexSorting savedVertexSorting Lnet/minecraft/unmapped/C_onfzhami;
 	FIELD shaderColor SHADER_COLOR [F
+	FIELD shaderFog shaderFog Lnet/minecraft/unmapped/C_vidgpspy;
 	FIELD shaderGameTime shaderGameTime F
 	FIELD shaderGlintAlpha shaderGlintAlpha F
 	FIELD shaderLightDirections SHADER_LIGHT_DIRECTIONS [Lorg/joml/Vector3f;
@@ -51,6 +52,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 1 dstFactor
 		ARG 2 srcAlpha
 		ARG 3 dstAlpha
+	METHOD clear clear (I)V
 	METHOD clearColor clearColor (FFFF)V
 		ARG 0 red
 		ARG 1 green
@@ -99,6 +101,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 0 mode
 	METHOD getShader getShader ()Lnet/minecraft/unmapped/C_alllhitb;
 	METHOD getShaderColor getShaderColor ()[F
+	METHOD getShaderFog getShaderFog ()Lnet/minecraft/unmapped/C_vidgpspy;
 	METHOD getShaderGameTime getShaderGameTime ()F
 	METHOD getShaderGlintAlpha getShaderGlintAlpha ()F
 	METHOD getShaderLineWidth getShaderLineWidth ()F
@@ -176,6 +179,7 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 	METHOD logicOp logicOp (Lcom/mojang/blaze3d/platform/GlStateManager$C_hfcoodvl;)V
 		ARG 0 op
 	METHOD maxSupportedTextureSize maxSupportedTextureSize ()I
+	METHOD overlayBlendFunc overlayBlendFunc ()V
 	METHOD pixelStore pixelStore (II)V
 		ARG 0 pname
 		ARG 1 param
@@ -215,6 +219,8 @@ CLASS com/mojang/blaze3d/systems/RenderSystem
 		ARG 1 green
 		ARG 2 blue
 		ARG 3 alpha
+	METHOD setShaderFog setShaderFog (Lnet/minecraft/unmapped/C_vidgpspy;)V
+		ARG 0 fog
 	METHOD setShaderGameTime setShaderGameTime (JF)V
 		ARG 0 ticks
 		ARG 2 tickDelta
