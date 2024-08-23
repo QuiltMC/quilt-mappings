@@ -40,11 +40,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		COMMENT Other items, such as shears on string, may use their own logic
 		COMMENT and calls to this method might not return a value consistent to this rule for those items.
 		ARG 2 state
-	METHOD m_dxjqmgus isEnchantable (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		COMMENT {@return whether the given {@link ItemStack} is enchantable}
-		COMMENT
-		COMMENT <p>By default, ItemStacks are enchantable if their max stack count is 1 and they can be damaged.
-		ARG 1 stack
 	METHOD m_dzfzcxuk isItemBarVisible (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
 	METHOD m_dzyyhvup getItemBarStep (Lnet/minecraft/unmapped/C_sddaxwyk;)I
@@ -74,7 +69,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 2 user
 		ARG 3 entity
 		ARG 4 hand
-	METHOD m_ivemyxsp getEatSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_jbvnrizt postDamageEntity (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		COMMENT Called when a {@link LivingEntity} hits another {@link LivingEntity}
 		COMMENT
@@ -163,12 +157,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 miner
-	METHOD m_tspifhtw getEnchantability ()I
-		COMMENT Gets the enchantability of an item.
-		COMMENT This specifies the ability of an item to receive enchantments when enchanted using an enchanting table.
-		COMMENT As the value increases, the amount and level of enchantments applied increase.
-		COMMENT
-		COMMENT <p>If the value of this method is 0, the item cannot be enchanted using an enchanting table.
 	METHOD m_ucwrwzur byRawId (I)Lnet/minecraft/unmapped/C_vorddnax;
 		ARG 0 id
 	METHOD m_uuqggdre getRawId (Lnet/minecraft/unmapped/C_vorddnax;)I
@@ -182,14 +170,13 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 2 context
 		ARG 3 tooltip
 		ARG 4 config
-	METHOD m_vptgdmsr getDrinkSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_wanuqhiu isUsedOnRelease (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
 	METHOD m_wolmtjeu getItemBarColor (Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 1 stack
 	METHOD m_xljmpsqi getAttributeModifiers ()Lnet/minecraft/unmapped/C_azfkqhlm;
 	METHOD m_ylkygzjm getComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
-	METHOD m_yvddkccr getUseAction (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_olmwgcft;
+	METHOD m_yvddkccr getUseAction (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_qeajvgxm;
 		ARG 1 stack
 	METHOD m_znsmbimv use (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		COMMENT Called when an item is used by a player.
@@ -250,12 +237,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			ARG 1 type
 			ARG 2 value
 		METHOD m_wosoxphz attributeModifiersComponent (Lnet/minecraft/unmapped/C_azfkqhlm;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
-		METHOD m_wuwttdfr food (Lnet/minecraft/unmapped/C_cgikuact;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
-			COMMENT When set, any item configured with this Settings instance will be edible based on the provided {@link FoodComponent}.
-			COMMENT
-			COMMENT @return this instance
-			ARG 1 foodComponent
-				COMMENT configured food properties for any item using this Settings instance
 		METHOD m_zglwepxe rarity (Lnet/minecraft/unmapped/C_mqmixksm;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the {@link Rarity} of any item configured with this Settings instance, which changes the color of its name.
 			COMMENT
