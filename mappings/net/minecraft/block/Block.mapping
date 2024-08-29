@@ -50,6 +50,8 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 	FIELD f_zatyqcqa CODEC Lcom/mojang/serialization/MapCodec;
 	FIELD f_zeveupfs NO_REDRAW I
 		COMMENT Used in conjunction with {@link #NOTIFY_LISTENERS} to suppress the render pass on clients.
+	FIELD f_zobgxnry SKIP_UPDATE_FOR_REDSTONE_WIRE I
+		COMMENT Skips {@link AbstractBlock#getStateForNeighborUpdate} call for redstone wire.
 	METHOD m_aqcetwet onSteppedOn (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_astfners;)V
 		COMMENT Called when an entity steps on this block.
 		ARG 1 world
@@ -192,6 +194,8 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 			COMMENT the bitwise flags for {@link net.minecraft.world.ModifiableWorld#setBlockState(BlockPos, BlockState, int, int)}
 		ARG 5 maxUpdateDepth
 			COMMENT the limit for the cascading block updates
+	METHOD m_oscwylqf updateEntityVelocityAfterFall (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 2 entity
 	METHOD m_pdzevtfw copyProperty (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 0 source
 		ARG 1 target
@@ -276,7 +280,9 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 2 stack
 	METHOD m_zpnlglhs shouldDrawSide (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 0 state
+		ARG 1 sideState
 		ARG 2 side
+	CLASS C_epynadow ShapePair
 	CLASS C_miiagdeq
 		METHOD load (Ljava/lang/Object;)Ljava/lang/Object;
 			ARG 1 shape
