@@ -54,6 +54,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	FIELD f_ynglkbif filterText Z
 	FIELD f_zkfgljmz lastHealthScore F
 	FIELD f_zwmomqsu cameraEntity Lnet/minecraft/unmapped/C_astfners;
+	FIELD f_dqffdmpu enderPearls Ljava/util/Set;
 	METHOD m_akgkagnq forgiveMobAnger ()V
 	METHOD m_ausyrzvm setWatchedSection (Lnet/minecraft/unmapped/C_zubvmeye;)V
 		COMMENT Sets the chunk section position the player's client is currently watching
@@ -183,6 +184,18 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_yhuimfko gameModeFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/lang/String;)Lnet/minecraft/unmapped/C_lghcpyvl;
 		ARG 0 nbt
 		ARG 1 key
+	METHOD m_cqxrhbhc addEnderPearlTicket (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ynrszrtu;)J
+		COMMENT Adds a chunk ender pearl chunk ticket to the ticket manager.
+		ARG 0 world
+		ARG 1 pos
+	METHOD m_zqdqyuoy addEnderPearl (Lnet/minecraft/unmapped/C_xmtgsyuv;)V
+		ARG 1 enderPearl
+	METHOD m_zyhxcats removeEnderPearl (Lnet/minecraft/unmapped/C_xmtgsyuv;)V
+		ARG 1 enderPearl
+	METHOD m_mzwgozhn getEnderPearls ()Ljava/util/Set;
+	METHOD m_gylcrlba loadEnderPearl (Lnet/minecraft/unmapped/C_xmtgsyuv;)J
+		COMMENT Loads the ender pearl's current chunk and adds it to the player's set of ender pearls.
+		ARG 1 enderPearl
 	CLASS C_ldooqqdw
 		METHOD m_lgvaefas sendPropertyUpdate (Lnet/minecraft/unmapped/C_mkrkudpa;II)V
 			ARG 1 handler
