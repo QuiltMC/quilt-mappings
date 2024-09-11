@@ -13,7 +13,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	FIELD f_vwakrgmw DEFAULT_MAX_COUNT I
 	METHOD <init> (Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;)V
 		ARG 1 settings
-	METHOD m_bdsymcbv getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_bhfktmca getAttackDamage (Lnet/minecraft/unmapped/C_astfners;FLnet/minecraft/unmapped/C_sbxfkpyv;)F
 		ARG 1 target
 		ARG 2 damage
@@ -54,9 +53,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 2 world
 		ARG 3 player
 	METHOD m_gtcfvxxg isNetworkSynced ()Z
-	METHOD m_hsttveiz canRepair (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 stack
-		ARG 2 ingredient
 	METHOD m_hwkxajsh onStoppedUsing (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;I)Z
 		ARG 1 stack
 		ARG 2 world
@@ -134,10 +130,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		COMMENT <p>By default, returns true if the item has enchantments.
 		ARG 1 stack
 	METHOD m_proceewu getMaxStackSize ()I
-	METHOD m_ptxvhcty getOrCreateTranslationKey ()Ljava/lang/String;
-	METHOD m_qibylykw getTranslationKey (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/lang/String;
-		COMMENT Gets the translation key of this item using the provided item stack for context.
-		ARG 1 stack
 	METHOD m_qqswvlkq inventoryTick (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_astfners;IZ)V
 		ARG 1 stack
 		ARG 2 world
@@ -147,10 +139,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_rdxwitrr getRecipeRemainder ()Lnet/minecraft/unmapped/C_vorddnax;
 		COMMENT Gets the remainder item that should be left behind when this item is used as a crafting ingredient.
 	METHOD m_rwziztnd validateComponents (Lnet/minecraft/unmapped/C_sddaxwyk;)V
-	METHOD m_rxtlbzdr getName (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_rdaqiwdt;
-		ARG 1 stack
-	METHOD m_srbfwvie getTranslationKey ()Ljava/lang/String;
-		COMMENT Gets the translation key of this item.
 	METHOD m_tkohmxbq canMine (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		COMMENT Checks if a player can break a block while holding the item.
 		ARG 1 state
@@ -174,7 +162,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 stack
 	METHOD m_wolmtjeu getItemBarColor (Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 1 stack
-	METHOD m_xljmpsqi getAttributeModifiers ()Lnet/minecraft/unmapped/C_azfkqhlm;
 	METHOD m_ylkygzjm getComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 	METHOD m_yvddkccr getUseAction (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_qeajvgxm;
 		ARG 1 stack
@@ -196,7 +183,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	CLASS C_bfrytpdl Settings
 		FIELD f_emilnckp recipeRemainder Lnet/minecraft/unmapped/C_vorddnax;
 		FIELD f_gjqaneav requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
-		FIELD f_mhwyzhjj COMPONENT_MAP_INTERNER Lcom/google/common/collect/Interner;
 		FIELD f_znexcclr builder Lnet/minecraft/unmapped/C_kouhnfig$C_vfzyoahz;
 		METHOD m_gdfazvhf maxCount (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the maximum stack count of any ItemStack with an Item using this Settings instance.
@@ -213,7 +199,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT If called, any item with this Settings instance is immune to fire and lava damage.
 			COMMENT
 			COMMENT @return this instance
-		METHOD m_klokuyzb buildComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 		METHOD m_nuwctbay recipeRemainder (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the recipe remainder for any item configured with this Settings instance.
 			COMMENT When an item with a recipe remainder is used in a crafting recipe, the remainder is left in the table or returned to the player.
@@ -222,7 +207,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			ARG 1 recipeRemainder
 		METHOD m_pvohmnyq jukeboxSong (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 song
-		METHOD m_qvwjjfqj buildAndValidateComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 		METHOD m_robddprv maxDamage (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the maximum durability of any item configured with this Settings instance.
 			COMMENT
