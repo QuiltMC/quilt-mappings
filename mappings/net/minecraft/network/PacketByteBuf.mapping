@@ -268,11 +268,15 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the string to write
 		ARG 2 maxLength
 			COMMENT the max length of the byte array
+	METHOD m_bsvmttqk readChunkPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 	METHOD m_cozckjjh writeVector3f (Lio/netty/buffer/ByteBuf;Lorg/joml/Vector3f;)V
 		ARG 0 buf
 		ARG 1 vector
 	METHOD m_cqyrnsig readJson (Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 		ARG 1 codec
+	METHOD m_cwijppyi writeChunkPos (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_ynrszrtu;)V
+		ARG 0 buf
+		ARG 1 pos
 	METHOD m_cynxfniu (Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
 		ARG 0 errorMessage
 	METHOD m_delcxvna writeIntArray ([I)Lnet/minecraft/unmapped/C_idfydwco;
@@ -293,6 +297,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @param <T> the list's entry type
 		COMMENT @return the read list
 		COMMENT @see #readCollection(IntFunction, Reader)
+	METHOD m_dmajsfxu writeChunkPos (Lnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_idfydwco;
+		ARG 1 pos
 	METHOD m_eaxeezjl writeNbt (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_idfydwco;
 		ARG 1 nbt
 	METHOD m_ebprrcum encode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_idfydwco;
@@ -577,6 +583,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT Writes a position to this buf. A position is represented by a regular long.
 		COMMENT
 		COMMENT @see #writePos(BlockPos)
+		ARG 0 buf
+	METHOD m_rwzwvdio readChunkPos (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_ynrszrtu;
 		ARG 0 buf
 	METHOD m_sevbbzdm readCollection (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Collection;
 		COMMENT Reads a collection from this buf. The collection is stored as a leading
