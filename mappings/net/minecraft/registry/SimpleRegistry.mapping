@@ -5,8 +5,10 @@ CLASS net/minecraft/unmapped/C_secmvxxe net/minecraft/registry/SimpleRegistry
 	FIELD f_mxojfjuq keyToRegistrationInfo Ljava/util/Map;
 	FIELD f_ntcgjudy lifecycle Lcom/mojang/serialization/Lifecycle;
 	FIELD f_oyicsmaj byId Ljava/util/Map;
+	FIELD f_tbjdirup tags Ljava/util/Map;
 	FIELD f_tmrvgtrj entryToRawId Lit/unimi/dsi/fastutil/objects/Reference2IntMap;
 	FIELD f_vizxqybx byKey Ljava/util/Map;
+	FIELD f_ynokispn tagBinding Lnet/minecraft/unmapped/C_secmvxxe$C_yoxjbwwh;
 	FIELD f_ytdkeyex frozen Z
 	METHOD <init> (Lnet/minecraft/unmapped/C_xhhleach;Lcom/mojang/serialization/Lifecycle;)V
 		ARG 2 lifecycle
@@ -21,3 +23,12 @@ CLASS net/minecraft/unmapped/C_secmvxxe net/minecraft/registry/SimpleRegistry
 	METHOD m_vnznjtqt requireNotFrozen (Lnet/minecraft/unmapped/C_xhhleach;)V
 	METHOD m_xynptmgp getValueFromNullable (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Ljava/lang/Object;
 		ARG 0 reference
+	CLASS C_yoxjbwwh TagBinding
+		METHOD m_gmncclhh forEach (Ljava/util/function/BiConsumer;)V
+			ARG 1 tagConsumer
+		METHOD m_gssqepda createBound (Ljava/util/Map;)Lnet/minecraft/unmapped/C_secmvxxe$C_yoxjbwwh;
+			ARG 0 tags
+		METHOD m_olzjqlsq createUnbound ()Lnet/minecraft/unmapped/C_secmvxxe$C_yoxjbwwh;
+		METHOD m_pwfplpoh stream ()Ljava/util/stream/Stream;
+		METHOD m_wikjbukt isBound ()Z
+		METHOD m_xuztrjlm get (Lnet/minecraft/unmapped/C_ednuhnnn;)Ljava/util/Optional;
