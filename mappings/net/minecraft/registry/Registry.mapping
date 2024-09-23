@@ -7,10 +7,15 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/registry/Registry
 		ARG 1 entry
 	METHOD m_ckzkjowv getKeys ()Ljava/util/Set;
 	METHOD m_dixnzblu createIntrusiveHolder (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
-		ARG 1 holder
+		ARG 1 entry
 	METHOD m_fiunuwfp freeze ()Lnet/minecraft/unmapped/C_tqxyjqsk;
+	METHOD m_hnixtpdg find (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
+	METHOD m_ifyosden get (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/Object;
+		ARG 1 entryKey
 	METHOD m_ikxlhrge getOrEmpty (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_iotvxcay find (I)Ljava/util/Optional;
+		ARG 1 rawId
 	METHOD m_jktnfzok registerHolder (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 0 registry
 		ARG 1 id
@@ -18,8 +23,10 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/registry/Registry
 	METHOD m_keyttxmd getTagOrEmpty (Lnet/minecraft/unmapped/C_ednuhnnn;)Ljava/lang/Iterable;
 		ARG 1 tag
 	METHOD m_ksueyykv getReferenceHolderWithLifecycle ()Lcom/mojang/serialization/Codec;
+	METHOD m_kxeijgiq get (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/lang/Object;
 	METHOD m_leajtcub stream ()Ljava/util/stream/Stream;
 	METHOD m_nlhggctm getRegistrationInfo (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+		ARG 1 key
 	METHOD m_nqhcjajy register (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 registry
 		ARG 1 id
@@ -27,6 +34,8 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/registry/Registry
 	METHOD m_nqoydeav getEntries ()Ljava/util/Set;
 	METHOD m_nzuihlla getRandomElement (Lnet/minecraft/unmapped/C_ednuhnnn;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/Optional;
 	METHOD m_pquqhkot holderByNameCodec ()Lcom/mojang/serialization/Codec;
+	METHOD m_prsibeni startTagReload (Lnet/minecraft/unmapped/C_loluvnda$C_shtfmyxy;)Lnet/minecraft/unmapped/C_tqxyjqsk$C_dbbudibo;
+		ARG 1 registryTags
 	METHOD m_pvyfqcdo getCodec ()Lcom/mojang/serialization/Codec;
 	METHOD m_qeyctvgm asHolderIdMap ()Lnet/minecraft/unmapped/C_feaetnaz;
 	METHOD m_qkhirdbw validateReference (Lnet/minecraft/unmapped/C_cjzoxshv;)Lcom/mojang/serialization/DataResult;
@@ -43,10 +52,10 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/registry/Registry
 		ARG 2 entry
 	METHOD m_vnyaisgo getOrEmpty (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/Optional;
 		ARG 1 id
-	METHOD m_vongjcbr getAny ()Ljava/util/Optional;
+	METHOD m_vongjcbr findAny ()Ljava/util/Optional;
 	METHOD m_vqpjfuha getId (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 1 entry
-	METHOD m_wicxsqqn getTags ()Ljava/util/stream/Stream;
+	METHOD m_wicxsqqn streamBoundTags ()Ljava/util/stream/Stream;
 	METHOD m_wvmzcded registryHolder (Lnet/minecraft/unmapped/C_tqxyjqsk;Lnet/minecraft/unmapped/C_xhhleach;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 		ARG 0 registry
 		ARG 1 key
@@ -55,6 +64,7 @@ CLASS net/minecraft/unmapped/C_tqxyjqsk net/minecraft/registry/Registry
 		ARG 0 registry
 		ARG 1 id
 		ARG 2 entry
-	CLASS C_dbbudibo
+	CLASS C_dbbudibo PendingTags
+		METHOD m_lucdhycj bind ()V
 		METHOD m_pipptaec getLookup ()Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 		METHOD m_spczqdtt getKey ()Lnet/minecraft/unmapped/C_xhhleach;
