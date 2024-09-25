@@ -41,8 +41,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_zqtbccqn armorDropChances [F
 	FIELD f_zwyrnqpo MAX_WEAR_ARMOR_PROBABILITY F
 	METHOD m_ahhtjfdq getItemPickupReach ()Lnet/minecraft/unmapped/C_ceivtqhh;
-	METHOD m_avgkrrey loot (Lnet/minecraft/unmapped/C_uqpzijng;)V
-		ARG 1 item
 	METHOD m_bafwglvj initEquipment (Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_jiailwzt;)V
 		ARG 2 difficulty
 	METHOD m_beqdzwrv setPositionTarget (Lnet/minecraft/unmapped/C_hynzadkk;I)V
@@ -54,7 +52,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_cauyzlww getNavigation ()Lnet/minecraft/unmapped/C_atbvfjwi;
 	METHOD m_ckimhneu getPositionTarget ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_cpqekrmu clearPositionTarget ()V
-	METHOD m_cyqouyby dropPreservedEquipment ()V
 	METHOD m_dciqpbdm canImmediatelyDespawn (D)Z
 		ARG 1 distanceSquared
 	METHOD m_dijkljpy clearGoalsAndTasks ()V
@@ -114,20 +111,12 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_lqlfsnxj getBodyYawSpeed ()I
 	METHOD m_lxcdvhkn enchantEquipment (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_jiailwzt;)V
 		ARG 3 slot
-	METHOD m_mapkswnb dropPreservedEquipment (Ljava/util/function/Predicate;)Ljava/util/Set;
-		COMMENT Drop equipment from slots that are guaranteed to drop and which match the passed {@code shouldDrop} predicate
-		COMMENT @return slots containing equipment that doesn't match the passed {@code shouldDrop} predicate
-		ARG 1 shouldDrop
 	METHOD m_mbyporyt createBodyControl ()Lnet/minecraft/unmapped/C_vofymfgv;
 	METHOD m_mowaxfbl isLeftHanded ()Z
 	METHOD m_mrbrckqf isDisallowedInPeaceful ()Z
 	METHOD m_mufhzdfi isInWalkTargetRange ()Z
 	METHOD m_mztbwniz movesIndependently ()Z
 		COMMENT When true, causes this entity to take over pathfinding for its controlling passenger.
-	METHOD m_nzdowltt canGather (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 stack
-	METHOD m_nzxqjkay tryEquip (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		ARG 1 equipment
 	METHOD m_owfqcyjj changeAngle (FFF)F
 		ARG 1 oldAngle
 		ARG 2 newAngle
@@ -180,7 +169,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 attacking
 	METHOD m_vljdject isAttacking ()Z
 	METHOD m_vwaprqzr getPositionTargetRange ()F
-	METHOD m_wbeiezxn mobTick ()V
 	METHOD m_wdfnuhez getLookPitchSpeed ()I
 	METHOD m_wjpwvwky playSpawnEffects ()V
 	METHOD m_wjrpjxbl createEquipmentLootParameters (Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_nzsnkdtl;
