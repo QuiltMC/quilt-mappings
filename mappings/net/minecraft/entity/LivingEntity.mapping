@@ -196,6 +196,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 			COMMENT the effect to set
 		ARG 2 source
 			COMMENT the source entity or {@code null} for non-entity sources
+	METHOD m_eobwecax dropXp (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 2 attacker
 	METHOD m_epkzhkqg deserializeBrain (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_rjqjaxef;
 		ARG 1 dynamic
 	METHOD m_exbsyzzv markEffectsDirty ()V
@@ -208,6 +210,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_fmgoaoex takeShieldHit (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 attacker
 	METHOD m_fnlaimtj tickActiveItemStack ()V
+	METHOD m_fpapzmyw onRemoval (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
+		ARG 2 reason
 	METHOD m_fqffmeys setAttacker (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 attacker
 	METHOD m_fqywfcul clearActiveItem ()V
@@ -254,7 +258,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT Returns if this entity may always drop experience, skipping any
 		COMMENT other checks.
 		COMMENT
-		COMMENT @see #dropXp(Entity)
+		COMMENT @see #dropXp(ServerWorld, Entity)
 		COMMENT @see #getXpToDrop(ServerWorld, Entity)
 	METHOD m_hiwasxnu shouldDropLoot ()Z
 	METHOD m_hljdomqx canTakeDamage ()Z
@@ -376,6 +380,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_okzjzswg getClimbingPos ()Ljava/util/Optional;
 	METHOD m_onvfjcen tickFallFlying ()V
 	METHOD m_oqedvyml getLastAttackedTime ()I
+	METHOD m_orenzeoc tryAttack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 2 target
 	METHOD m_orkiajsn getActiveStatusEffects ()Ljava/util/Map;
 	METHOD m_orzhhcmg heal (F)V
 		COMMENT Heals this entity by the given {@code amount} of half-hearts.
@@ -408,6 +414,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_pwoagvwv getArmorInSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
 	METHOD m_qhbjdevp getMaxRelativeHeadRotation ()F
+	METHOD m_qjawpswz getBaseXpDropped (Lnet/minecraft/unmapped/C_bdwnwhiu;)I
 	METHOD m_qjxxiksy getHandItems ()Ljava/lang/Iterable;
 	METHOD m_qlumoklh onDismounted (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 vehicle
@@ -437,7 +444,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT true}, this check is disregarded.
 		COMMENT
 		COMMENT @return {@code true} if this entity should drop experience on death, or {@code false} otherwise
-		COMMENT @see #dropXp(Entity)
+		COMMENT @see #dropXp(ServerWorld, Entity)
 		COMMENT @see #shouldAlwaysDropXp()
 		COMMENT @see #getXpToDrop(ServerWorld, Entity)
 	METHOD m_rufhxvdu attackLivingEntity (Lnet/minecraft/unmapped/C_usxaxydn;)V
@@ -501,6 +508,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 pos
 		ARG 2 state
 	METHOD m_umdbefol getSleepingDirection ()Lnet/minecraft/unmapped/C_xpuuihxf;
+	METHOD m_unmnupmt applyDamage (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
+		ARG 2 source
+		ARG 3 amount
 	METHOD m_urjobhnr tickHandSwing ()V
 	METHOD m_uuypiexz isClimbing ()Z
 	METHOD m_uwysofda updateLimbs (Z)V
@@ -545,6 +555,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_wdmfvspp getMaxHealth ()F
 	METHOD m_wehlnhpj getHandSwingProgress (F)F
 		ARG 1 tickDelta
+	METHOD m_whvujbsh dropInventory (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_widuipxk getAttributes ()Lnet/minecraft/unmapped/C_cohbwqne;
 	METHOD m_wjvypezh getRoll ()I
 	METHOD m_wmvelibz isHoldingOntoLadder ()Z
