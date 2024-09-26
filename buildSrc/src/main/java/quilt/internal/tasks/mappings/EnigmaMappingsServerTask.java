@@ -14,49 +14,51 @@ public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 	@InputFile
 	private final RegularFileProperty jarToMap;
 
+	private final List<String> args;
+
 	public EnigmaMappingsServerTask() {
+		Project project = this.getProject();
 		this.setGroup(Constants.Groups.MAPPINGS_GROUP);
 		this.getMainClass().set("org.quiltmc.enigma.network.DedicatedEnigmaServer");
-		this.classpath(getProject().getConfigurations().getByName("enigmaRuntime"));
+		this.classpath(project.getConfigurations().getByName("enigmaRuntime"));
 		this.jvmArgs("-Xmx2048m");
 
 		this.jarToMap = getObjectFactory().fileProperty();
-	}
 
-	@Override
-	public void exec() {
-		Project project = this.getProject();
 		var baseArgs = List.of(
 				"-jar", this.jarToMap.get().getAsFile().getAbsolutePath(),
 				"-mappings", project.file("mappings").getAbsolutePath(),
 				"-profile", "enigma_profile.json"
 		);
-		var args = new ArrayList<>(baseArgs);
+		this.args = new ArrayList<>(baseArgs);
 
 		if (project.hasProperty("port")) {
-			args.add("-port");
-			args.add(project.getProperties().get("port").toString());
+			this.args.add("-port");
+			this.args.add(project.getProperties().get("port").toString());
 		}
 		if (project.hasProperty("password")) {
-			args.add("-password");
-			args.add(project.getProperties().get("password").toString());
+			this.args.add("-password");
+			this.args.add(project.getProperties().get("password").toString());
 		}
 		if (project.hasProperty("log")) {
-			args.add("-log");
-			args.add(project.getProperties().get("log").toString());
+			this.args.add("-log");
+			this.args.add(project.getProperties().get("log").toString());
 		} else {
-			args.add("-log");
-			args.add("build/logs/server.log");
+			this.args.add("-log");
+			this.args.add("build/logs/server.log");
 		}
 		if (project.hasProperty("args")) {
-			args.addAll(List.of(project.getProperties().get("args").toString().split(" ")));
+			this.args.addAll(List.of(project.getProperties().get("args").toString().split(" ")));
 		}
+	}
 
-		args(args);
+	@Override
+	public void exec() {
+		args(this.args);
 		super.exec();
 	}
 
 	public RegularFileProperty getJarToMap() {
-		return jarToMap;
+		return this.jarToMap;
 	}
 }
