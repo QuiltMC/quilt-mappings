@@ -13,6 +13,8 @@ import java.util.List;
 public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 	@InputFile
 	private final RegularFileProperty jarToMap;
+	@InputFile
+	private final RegularFileProperty mappings;
 
 	private final List<String> serverArgs;
 
@@ -24,6 +26,8 @@ public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 		this.jvmArgs("-Xmx2048m");
 
 		this.jarToMap = getObjectFactory().fileProperty();
+		this.mappings = getObjectFactory().fileProperty();
+		this.mappings.convention(() -> this.getProject().file("mappings"));
 
 		this.serverArgs = new ArrayList<>();
 
@@ -51,7 +55,7 @@ public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 	public void exec() {
 		var args = new ArrayList<>(List.of(
 				"-jar", this.jarToMap.get().getAsFile().getAbsolutePath(),
-				"-mappings", this.getProject().file("mappings").getAbsolutePath(),
+				"-mappings", this.mappings.get().getAsFile().getAbsolutePath(),
 				"-profile", "enigma_profile.json"
 		));
 		args.addAll(this.serverArgs);
