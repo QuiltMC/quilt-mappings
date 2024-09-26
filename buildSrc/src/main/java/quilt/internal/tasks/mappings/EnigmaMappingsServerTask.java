@@ -14,7 +14,7 @@ public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 	@InputFile
 	private final RegularFileProperty jarToMap;
 
-	private final List<String> args;
+	private final List<String> serverArgs;
 
 	public EnigmaMappingsServerTask() {
 		Project project = this.getProject();
@@ -25,36 +25,38 @@ public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 
 		this.jarToMap = getObjectFactory().fileProperty();
 
-		var baseArgs = List.of(
-				"-jar", this.jarToMap.get().getAsFile().getAbsolutePath(),
-				"-mappings", project.file("mappings").getAbsolutePath(),
-				"-profile", "enigma_profile.json"
-		);
-		this.args = new ArrayList<>(baseArgs);
+		this.serverArgs = new ArrayList<>();
 
 		if (project.hasProperty("port")) {
-			this.args.add("-port");
-			this.args.add(project.getProperties().get("port").toString());
+			this.serverArgs.add("-port");
+			this.serverArgs.add(project.getProperties().get("port").toString());
 		}
 		if (project.hasProperty("password")) {
-			this.args.add("-password");
-			this.args.add(project.getProperties().get("password").toString());
+			this.serverArgs.add("-password");
+			this.serverArgs.add(project.getProperties().get("password").toString());
 		}
 		if (project.hasProperty("log")) {
-			this.args.add("-log");
-			this.args.add(project.getProperties().get("log").toString());
+			this.serverArgs.add("-log");
+			this.serverArgs.add(project.getProperties().get("log").toString());
 		} else {
-			this.args.add("-log");
-			this.args.add("build/logs/server.log");
+			this.serverArgs.add("-log");
+			this.serverArgs.add("build/logs/server.log");
 		}
 		if (project.hasProperty("args")) {
-			this.args.addAll(List.of(project.getProperties().get("args").toString().split(" ")));
+			this.serverArgs.addAll(List.of(project.getProperties().get("args").toString().split(" ")));
 		}
 	}
 
 	@Override
 	public void exec() {
-		args(this.args);
+		var args = new ArrayList<>(List.of(
+				"-jar", this.jarToMap.get().getAsFile().getAbsolutePath(),
+				"-mappings", this.getProject().file("mappings").getAbsolutePath(),
+				"-profile", "enigma_profile.json"
+		));
+		args.addAll(this.serverArgs);
+
+		args(args);
 		super.exec();
 	}
 
