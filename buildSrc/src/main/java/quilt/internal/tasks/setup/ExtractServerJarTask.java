@@ -39,7 +39,7 @@ public abstract class ExtractServerJarTask extends DefaultMappingsTask {
         FileUtils.copyFile(
             // TODO eliminate project access in task action
             this.getProject()
-                .zipTree(this.getServerBootstrapJar())
+                .zipTree(this.getServerBootstrapJar().get())
                 .matching(patternFilterable -> patternFilterable.include("META-INF/versions/*/server-*.jar"))
                 .getSingleFile(),
             this.getServerJar().get().getAsFile()
