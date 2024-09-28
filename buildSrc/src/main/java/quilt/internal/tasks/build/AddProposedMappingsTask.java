@@ -2,30 +2,20 @@ package quilt.internal.tasks.build;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.stream.Stream;
 
-import org.gradle.api.GradleException;
-import org.gradle.api.file.FileCollection;
-import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.tasks.InputFiles;
-import org.gradle.api.tasks.Optional;
-import org.jetbrains.annotations.NotNull;
 import org.quiltmc.enigma.api.Enigma;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import org.quiltmc.enigma.api.EnigmaProject;
-import org.quiltmc.enigma.api.service.JarIndexerService;
 import org.quiltmc.enigma.command.Command;
 import org.quiltmc.enigma.command.FillClassMappingsCommand;
 import org.quiltmc.enigma.command.CommandsUtil;
@@ -41,21 +31,16 @@ import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import net.fabricmc.mappingio.format.MappingFormat;
 import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
-import org.gradle.api.provider.Property;
+
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
-import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.EnigmaProfileConsumingTask;
+import quilt.internal.util.PropertyUtil;
 
-import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
-
-public abstract class AddProposedMappingsTask extends DefaultMappingsTask {
-    private static Path getPath(RegularFileProperty fileProperty) {
-        return fileProperty.map(RegularFile::getAsFile).map(File::toPath).get();
-    }
-
+public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask {
     @OutputFile
     public File outputMappings;
 
@@ -65,53 +50,24 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask {
     @InputFile
     public abstract RegularFileProperty getInputMappings();
 
-    @InputFile
-    public abstract RegularFileProperty getProfile();
-
-    @Optional
-    @InputFiles
-    protected abstract Property<FileCollection> getSimpleTypeFieldNames();
-
     public AddProposedMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
         this.outputMappings = new File(fileConstants.buildDir, getName() + ".tiny");
-
-        this.getSimpleTypeFieldNames().set(
-            this.getProfile()
-                .map(RegularFile::getAsFile)
-                .map(File::toPath)
-                .map(profilePath -> {
-                    try {
-                        return this.getProject().files(
-                            EnigmaProfile.read(profilePath).getServiceProfiles(JarIndexerService.TYPE).stream()
-                                .flatMap(service -> service.getArgument(SIMPLE_TYPE_FIELD_NAMES_PATH).stream())
-                                .map(stringOrStrings -> stringOrStrings.mapBoth(Stream::of, Collection::stream))
-                                .flatMap(bothStringStreams ->
-                                    bothStringStreams.left().orElseGet(bothStringStreams::rightOrThrow)
-                                )
-                                .toList()
-                        );
-                    } catch (IOException e) {
-                        throw new GradleException("Failed to read enigma profile", e);
-                    }
-                })
-        );
     }
 
     @TaskAction
     public void addProposedMappings() throws Exception {
         getLogger().lifecycle(":seeking auto-mappable entries");
 
-        Path input = getPath(this.getInputMappings());
+        Path input = PropertyUtil.getPath(this.getInputMappings());
         Path output = outputMappings.toPath();
-        Path jar = getPath(this.getInputJar());
-        Path profilePath = getPath(this.getProfile());
+        Path jar = PropertyUtil.getPath(this.getInputJar());
 
-        addProposedMappings(input, output, fileConstants.tempDir.toPath(), jar, profilePath);
+        addProposedMappings(input, output, fileConstants.tempDir.toPath(), jar, this.getEnigmaProfile().get());
     }
 
     @VisibleForTesting
-    public static void addProposedMappings(Path input, Path output, Path tempDir, Path jar, Path profilePath) throws Exception {
+    public static void addProposedMappings(Path input, Path output, Path tempDir, Path jar, EnigmaProfile profile) throws Exception {
         String name = output.getFileName().toString();
         Path preprocessedMappings = tempDir.resolve(name.replace(".tiny", "-preprocessed.tiny"));
         Path processedMappings = tempDir.resolve(name.replace(".tiny", "-processed.tiny"));
@@ -136,7 +92,7 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask {
         runCommands(jar,
             commandInput,
             commandOutput,
-            profilePath,
+            profile,
             namespaces.get(0),
             "named"
         );
@@ -149,8 +105,7 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask {
         }
     }
 
-    private static void runCommands(Path jar, Path input, Path output, Path profilePath, String fromNamespace, String toNamespace) throws Exception {
-        EnigmaProfile profile = EnigmaProfile.read(profilePath);
+    private static void runCommands(Path jar, Path input, Path output, EnigmaProfile profile, String fromNamespace, String toNamespace) throws Exception {
         Enigma enigma = Command.createEnigma(profile, null);
 
         EnigmaProject project = Command.openProject(jar, input, enigma);
