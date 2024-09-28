@@ -13,32 +13,36 @@ import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public class CompressTinyTask extends DefaultMappingsTask {
+public abstract class CompressTinyTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "compressTiny";
 
     @OutputFile
-    public File compressedTiny = new File(getProject().file("build/libs/"), String.format("%s-%s-tiny.gz", Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION));
+    public abstract RegularFileProperty getCompressedTiny();
 
     @InputFile
-    private final RegularFileProperty mappings;
+    protected abstract RegularFileProperty getMappings();
 
     public CompressTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        dependsOn(TinyJarTask.TASK_NAME, MergeTinyTask.TASK_NAME);
-        getOutputs().file(compressedTiny);
+        this.dependsOn(TinyJarTask.TASK_NAME, MergeTinyTask.TASK_NAME);
 
-        mappings = getProject().getObjects().fileProperty();
-        mappings.convention(this.getTaskByType(MergeTinyTask.class)::getOutputMappings);
+        this.getCompressedTiny().convention(() -> new File(
+            this.getProject().file("build/libs/"),
+            "%s-%s-tiny.gz".formatted(Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION)
+        ));
+
+        this.getMappings()
+            .convention(this.getTaskNamed(MergeTinyTask.TASK_NAME, MergeTinyTask.class).getOutputMappings());
     }
 
     @TaskAction
     public void compressTiny() throws IOException {
-        getLogger().lifecycle(":compressing tiny mappings");
+        this.getLogger().lifecycle(":compressing tiny mappings");
 
-        byte[] buffer = new byte[1024];
-        FileOutputStream fileOutputStream = new FileOutputStream(compressedTiny);
-        GZIPOutputStream outputStream = new GZIPOutputStream(fileOutputStream);
-        FileInputStream fileInputStream = new FileInputStream(mappings.get().getAsFile());
+        final byte[] buffer = new byte[1024];
+        final FileOutputStream fileOutputStream = new FileOutputStream(this.getCompressedTiny().get().getAsFile());
+        final GZIPOutputStream outputStream = new GZIPOutputStream(fileOutputStream);
+        final FileInputStream fileInputStream = new FileInputStream(this.getMappings().get().getAsFile());
 
         int length;
         while ((length = fileInputStream.read(buffer)) > 0) {
@@ -48,13 +52,5 @@ public class CompressTinyTask extends DefaultMappingsTask {
         fileInputStream.close();
         outputStream.finish();
         outputStream.close();
-    }
-
-    public File getCompressedTiny() {
-        return compressedTiny;
-    }
-
-    public RegularFileProperty getMappings() {
-        return mappings;
     }
 }

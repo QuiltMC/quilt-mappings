@@ -57,9 +57,17 @@ public class MappingsPlugin implements Plugin<Project> {
         tasks.create(MergeJarsTask.TASK_NAME, MergeJarsTask.class);
         tasks.create(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class);
 
-        tasks.create(DownloadPerVersionMappingsTask.TASK_NAME, DownloadPerVersionMappingsTask.class);
+        final var downloadPerVersionMappings =
+            tasks.create(DownloadPerVersionMappingsTask.TASK_NAME, DownloadPerVersionMappingsTask.class);
         tasks.create(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class);
-        tasks.create(BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class);
+        final var buildMappingsTiny = tasks.create(BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class);
+        tasks.create(INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, AddProposedMappingsTask.class, task -> {
+            task.dependsOn(downloadPerVersionMappings);
+
+            task.getInputJar().set(ext.getFileConstants().perVersionMappingsJar);
+            task.getInputMappings().set(buildMappingsTiny.getOutputMappings());
+        });
+
         tasks.create(MergeTinyTask.TASK_NAME, MergeTinyTask.class);
         tasks.create(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class);
         tasks.create(TinyJarTask.TASK_NAME, TinyJarTask.class);
@@ -75,10 +83,10 @@ public class MappingsPlugin implements Plugin<Project> {
 
         tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
         tasks.create(DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class);
-        final var mappingLintTask = tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
+        final var mappingLint = tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
         tasks.create(FindDuplicateMappingFilesTask.TASK_NAME, FindDuplicateMappingFilesTask.class, task -> {
-            task.getMappingDirectory().set(mappingLintTask.getMappingDirectory());
-            mappingLintTask.dependsOn(task);
+            task.getMappingDirectory().set(mappingLint.getMappingDirectory());
+            mappingLint.dependsOn(task);
         });
 
         tasks.create(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class);

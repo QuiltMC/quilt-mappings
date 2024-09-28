@@ -3,27 +3,31 @@ package quilt.internal.tasks.jarmapping;
 import java.util.Map;
 
 import quilt.internal.Constants;
-import quilt.internal.MappingsPlugin;
 import quilt.internal.tasks.build.AddProposedMappingsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 
-public class MapNamedJarTask extends MapJarTask {
+import static quilt.internal.MappingsPlugin.INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME;
+
+public abstract class MapNamedJarTask extends MapJarTask {
     public static final String TASK_NAME = "mapNamedJar";
 
     public MapNamedJarTask() {
         super(Constants.Groups.MAP_JAR_GROUP, Constants.PER_VERSION_MAPPINGS_NAME, "named");
 
-        getInputs().files(getTaskByName(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
+        this.getInputs()
+            .files(this.getTaskNamed(DownloadMinecraftLibrariesTask.TASK_NAME).getOutputs().getFiles().getFiles());
 
-        inputJar.convention(() -> fileConstants.unpickedJar);
-        mappingsFile.convention(() -> this.<AddProposedMappingsTask>getTaskByName(MappingsPlugin.INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME).getOutputMappings());
-        outputJar.convention(() -> fileConstants.namedJar);
+        this.getInputJar().convention(() -> this.fileConstants.unpickedJar);
+        this.getMappingsFile().convention(
+            this.getTaskNamed(INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, AddProposedMappingsTask.class)
+                .getOutputMappings()
+        );
+        this.getOutputJar().convention(() -> this.fileConstants.namedJar);
 
-        this.dependsOn(MappingsPlugin.INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, "unpickHashedJar");
+        this.dependsOn(INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, "unpickHashedJar");
     }
 
     public Map<String, String> getAdditionalMappings() {
         return JAVAX_TO_JETBRAINS;
     }
 }
-

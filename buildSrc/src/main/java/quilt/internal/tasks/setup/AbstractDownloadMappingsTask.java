@@ -1,6 +1,7 @@
 package quilt.internal.tasks.setup;
 
 import org.apache.commons.io.FileUtils;
+import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
@@ -11,43 +12,46 @@ import java.io.IOException;
 
 public abstract class AbstractDownloadMappingsTask extends DefaultMappingsTask {
     @OutputFile
-    public File jarFile;
+    public abstract RegularFileProperty getJarFile();
 
     @OutputFile
-    public File tinyFile;
+    public abstract RegularFileProperty getTinyFile();
 
     private final String mappingsName;
 
     public AbstractDownloadMappingsTask(String mappingsName) {
         super(Constants.Groups.SETUP_GROUP);
-        jarFile = new File(fileConstants.cacheFilesMinecraft, String.format("%s-%s.jar", Constants.MINECRAFT_VERSION, mappingsName));
-        tinyFile = new File(fileConstants.cacheFilesMinecraft, String.format("%s-%s.tiny", Constants.MINECRAFT_VERSION, mappingsName));
+        this.getJarFile().convention(() -> new File(
+            this.fileConstants.cacheFilesMinecraft,
+            "%s-%s.jar".formatted(Constants.MINECRAFT_VERSION, mappingsName)
+        ));
+        this.getTinyFile().convention(() -> new File(
+            this.fileConstants.cacheFilesMinecraft,
+            "%s-%s.tiny".formatted(Constants.MINECRAFT_VERSION, mappingsName)
+        ));
         
         this.mappingsName = mappingsName;
     }
 
     @TaskAction
     public void downloadMappings() throws IOException {
-        startDownload()
-                .src(getProject().getConfigurations().getByName(mappingsName).resolve().iterator().next().toURI().toString())
-                .dest(jarFile)
+        this.startDownload()
+                // TODO eliminate project access in task action
+                .src(this.getProject().getConfigurations().getByName(this.mappingsName).resolve().iterator().next().toURI().toString())
+                .dest(this.getJarFile().get().getAsFile())
                 .overwrite(false)
                 .download();
 
-        FileUtils.copyFile(getProject()
-                .zipTree(jarFile)
+        FileUtils.copyFile(
+            // TODO eliminate project access in task action
+            this.getProject()
+                .zipTree(this.getJarFile().get().getAsFile())
                 .getFiles()
                 .stream()
                 .filter(file -> file.getName().endsWith("mappings.tiny"))
                 .findFirst()
-                .get(), tinyFile);
-    }
-
-    public File getJarFile() {
-        return jarFile;
-    }
-
-    public File getTinyFile() {
-        return tinyFile;
+                .orElseThrow(),
+            this.getTinyFile().get().getAsFile()
+        );
     }
 }

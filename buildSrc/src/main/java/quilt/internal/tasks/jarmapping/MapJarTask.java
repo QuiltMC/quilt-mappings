@@ -17,13 +17,13 @@ public abstract class MapJarTask extends DefaultMappingsTask {
             "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
     );
     @InputFile
-    protected final RegularFileProperty inputJar;
+    protected abstract RegularFileProperty getInputJar();
 
     @InputFile
-    protected final RegularFileProperty mappingsFile;
+    protected abstract RegularFileProperty getMappingsFile();
 
     @OutputFile
-    protected final RegularFileProperty outputJar;
+    protected abstract RegularFileProperty getOutputJar();
 
     private final String from, to;
 
@@ -31,33 +31,24 @@ public abstract class MapJarTask extends DefaultMappingsTask {
         super(group);
         this.from = from;
         this.to = to;
-
-        inputJar = getProject().getObjects().fileProperty();
-        mappingsFile = getProject().getObjects().fileProperty();
-        outputJar = getProject().getObjects().fileProperty();
     }
 
     @TaskAction
     public void remapJar() {
-        getLogger().lifecycle(":mapping minecraft from " + from + " to " + to);
-        Map<String, String> additionalMappings = getAdditionalMappings();
-        JarRemapper.mapJar(outputJar.getAsFile().get(), inputJar.getAsFile().get(), mappingsFile.get().getAsFile(), fileConstants.libraries, from, to, builder -> builder.withMappings(out -> additionalMappings.forEach(out::acceptClass)));
+        this.getLogger().lifecycle(":mapping minecraft from " + this.from + " to " + this.to);
+        final Map<String, String> additionalMappings = this.getAdditionalMappings();
+        JarRemapper.mapJar(
+            this.getOutputJar().getAsFile().get(),
+            this.getInputJar().getAsFile().get(),
+            this.getMappingsFile().get().getAsFile(),
+            this.fileConstants.libraries,
+            this.from, this.to,
+            builder -> builder.withMappings(out -> additionalMappings.forEach(out::acceptClass))
+        );
     }
 
     @Internal
     public Map<String, String> getAdditionalMappings() {
         return Map.of();
-    }
-
-    public RegularFileProperty getInputJar() {
-        return inputJar;
-    }
-
-    public RegularFileProperty getMappingsFile() {
-        return mappingsFile;
-    }
-
-    public RegularFileProperty getOutputJar() {
-        return outputJar;
     }
 }

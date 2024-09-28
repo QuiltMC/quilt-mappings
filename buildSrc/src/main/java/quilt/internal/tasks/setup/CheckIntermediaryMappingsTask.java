@@ -9,7 +9,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import java.io.File;
 import java.util.Set;
 
-public class CheckIntermediaryMappingsTask extends DefaultMappingsTask {
+public abstract class CheckIntermediaryMappingsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "checkIntermediaryMappings";
 
     @Internal
@@ -25,8 +25,8 @@ public class CheckIntermediaryMappingsTask extends DefaultMappingsTask {
 
     @TaskAction
     public void checkIntermediaryMappings() {
-        Configuration configuration = getProject().getConfigurations().getByName("intermediary");
-        Set<File> files;
+        final Configuration configuration = this.getProject().getConfigurations().getByName("intermediary");
+        final Set<File> files;
 
         try {
             files = configuration.resolve();

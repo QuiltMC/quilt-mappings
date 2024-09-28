@@ -39,32 +39,21 @@ import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "remapUnpickDefinitions";
-    private final RegularFileProperty input;
-    private final RegularFileProperty mappings;
-    private final RegularFileProperty output;
+    @InputFile
+    public abstract RegularFileProperty getInput();
+
+    @InputFile
+    public abstract RegularFileProperty getMappings();
+
+    @OutputFile
+    public abstract RegularFileProperty getOutput();
 
     public RemapUnpickDefinitionsTask() {
         super(Constants.Groups.UNPICK);
-        input = getProject().getObjects().fileProperty();
-        CombineUnpickDefinitionsTask combineUnpickDefinitionsTask = getTaskByType(CombineUnpickDefinitionsTask.class);
-        input.set(combineUnpickDefinitionsTask.getOutput());
-        mappings = getProject().getObjects().fileProperty();
-        output = getProject().getObjects().fileProperty();
-    }
 
-    @InputFile
-    public RegularFileProperty getInput() {
-        return input;
-    }
-
-    @InputFile
-    public RegularFileProperty getMappings() {
-        return mappings;
-    }
-
-    @OutputFile
-    public RegularFileProperty getOutput() {
-        return output;
+        this.getInput().convention(
+            this.getTaskNamed(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class).getOutput()
+        );
     }
 
     @Inject
@@ -72,11 +61,11 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
 
     @TaskAction
     public void run() {
-        WorkQueue workQueue = getWorkerExecutor().noIsolation();
+        final WorkQueue workQueue = this.getWorkerExecutor().noIsolation();
         workQueue.submit(RemapAction.class, parameters -> {
-            parameters.getInput().set(getInput().get().getAsFile());
-            parameters.getMappings().set(getMappings().get().getAsFile());
-            parameters.getOutput().set(getOutput().get().getAsFile());
+            parameters.getInput().set(this.getInput().get().getAsFile());
+            parameters.getMappings().set(this.getMappings().get().getAsFile());
+            parameters.getOutput().set(this.getOutput().get().getAsFile());
         });
     }
 
@@ -85,30 +74,35 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
         try {
             Files.deleteIfExists(output);
 
-            Map<String, String> classMappings = new HashMap<>();
-            Map<MethodKey, String> methodMappings = new HashMap<>();
-            Map<FieldKey, String> fieldMappings = new HashMap<>();
-            String fromM = "named";
-            String toM = Constants.PER_VERSION_MAPPINGS_NAME;
+            final Map<String, String> classMappings = new HashMap<>();
+            final Map<MethodKey, String> methodMappings = new HashMap<>();
+            final Map<FieldKey, String> fieldMappings = new HashMap<>();
+            final String fromM = "named";
+            final String toM = Constants.PER_VERSION_MAPPINGS_NAME;
 
             try (BufferedReader reader = Files.newBufferedReader(mappings)) {
-                MemoryMappingTree mappingTree = new MemoryMappingTree();
+                final MemoryMappingTree mappingTree = new MemoryMappingTree();
                 // Use target namespace as fallback to source namespace
                 // Removes the need to add all the mappings to the file
-                MappingVisitor visitor = new MappingNsCompleter(mappingTree, Collections.singletonMap(fromM, toM));
+                final MappingVisitor visitor =
+                    new MappingNsCompleter(mappingTree, Collections.singletonMap(fromM, toM));
                 Tiny2FileReader.read(reader, visitor);
 
-                for (MappingTree.ClassMapping classMapping : mappingTree.getClasses()) {
+                for (final MappingTree.ClassMapping classMapping : mappingTree.getClasses()) {
                     classMappings.put(classMapping.getName(fromM), classMapping.getName(toM));
 
-                    for (MappingTree.MethodMapping methodMapping : classMapping.getMethods()) {
+                    for (final MappingTree.MethodMapping methodMapping : classMapping.getMethods()) {
                         methodMappings.put(
-                            new MethodKey(classMapping.getName(fromM), methodMapping.getName(fromM), methodMapping.getDesc(fromM)),
+                            new MethodKey(
+                                classMapping.getName(fromM),
+                                methodMapping.getName(fromM),
+                                methodMapping.getDesc(fromM)
+                            ),
                             methodMapping.getName(toM)
                         );
                     }
 
-                    for (MappingTree.FieldMapping fieldMapping : classMapping.getFields()) {
+                    for (final MappingTree.FieldMapping fieldMapping : classMapping.getFields()) {
                         fieldMappings.put(
                             new FieldKey(classMapping.getName(fromM), fieldMapping.getName(fromM)),
                             fieldMapping.getName(toM)
@@ -118,7 +112,7 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
             }
 
             try (UnpickV2Reader reader = new UnpickV2Reader(Files.newInputStream(input))) {
-                UnpickV2Writer writer = new UnpickV2Writer();
+                final UnpickV2Writer writer = new UnpickV2Writer();
                 reader.accept(new UnpickV2Remapper(classMappings, methodMappings, fieldMappings, writer));
                 Files.writeString(output, UnpickUtil.getLfOutput(writer));
             }
@@ -145,9 +139,9 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
 
         @Override
         public void execute() {
-            Path input = getParameters().getInput().get().toPath();
-            Path mappings = getParameters().getMappings().get().toPath();
-            Path output = getParameters().getOutput().get().toPath();
+            final Path input = this.getParameters().getInput().get().toPath();
+            final Path mappings = this.getParameters().getMappings().get().toPath();
+            final Path output = this.getParameters().getOutput().get().toPath();
             remapUnpickDefinitions(input, mappings, output);
         }
     }

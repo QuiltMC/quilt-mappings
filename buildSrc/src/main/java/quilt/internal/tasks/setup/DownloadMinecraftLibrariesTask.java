@@ -17,50 +17,53 @@ import quilt.internal.Constants;
 import quilt.internal.FileConstants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
+public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadMinecraftLibraries";
 
     @InputFile
-    private final RegularFileProperty versionFile;
+    public abstract RegularFileProperty getVersionFile();
 
     public DownloadMinecraftLibrariesTask() {
         super(Constants.Groups.SETUP_GROUP);
-        dependsOn(DownloadWantedVersionManifestTask.TASK_NAME);
 
-        versionFile = getProject().getObjects().fileProperty();
-        versionFile.convention(getTaskByType(DownloadWantedVersionManifestTask.class)::getVersionFile);
+        this.dependsOn(DownloadWantedVersionManifestTask.TASK_NAME);
 
-        getInputs().file(versionFile);
+        this.getVersionFile().convention(
+            this.getTaskNamed(DownloadWantedVersionManifestTask.TASK_NAME, DownloadWantedVersionManifestTask.class)
+                .getVersionFile()
+        );
 
-        getOutputs().dir(fileConstants.libraries);
-        outputsNeverUpToDate();
+        this.getOutputs().dir(this.fileConstants.libraries);
+        this.outputsNeverUpToDate();
     }
 
     @TaskAction
     public void downloadMinecraftLibrariesTask() throws IOException {
-        Version file = Version.fromString(FileUtils.readFileToString(versionFile.get().getAsFile(), StandardCharsets.UTF_8));
+        final Version file = Version.fromString(FileUtils.readFileToString(
+            this.getVersionFile().get().getAsFile(), StandardCharsets.UTF_8
+        ));
 
-        getLogger().lifecycle(":downloading minecraft libraries");
+        this.getLogger().lifecycle(":downloading minecraft libraries");
 
-        if (!fileConstants.libraries.exists()) {
-            fileConstants.libraries.mkdirs();
+        if (!this.fileConstants.libraries.exists()) {
+            this.fileConstants.libraries.mkdirs();
         }
 
-        AtomicBoolean failed = new AtomicBoolean(false);
+        final AtomicBoolean failed = new AtomicBoolean(false);
 
-        Object lock = new Object();
+        final Object lock = new Object();
 
         file.getLibraries().parallelStream().forEach(library -> {
-            Optional<DownloadableFile.PathDownload> artifact = library.getDownloads().getArtifact();
+            final Optional<DownloadableFile.PathDownload> artifact = library.getDownloads().getArtifact();
             if (artifact.isEmpty()) {
                 return;
             }
 
             try {
-                String url = artifact.get().getUrl();
-                startDownload()
+                final String url = artifact.get().getUrl();
+                this.startDownload()
                         .src(url)
-                        .dest(getArtifactFile(fileConstants, url))
+                        .dest(getArtifactFile(this.fileConstants, url))
                         .overwrite(false)
                         .download();
             } catch (IOException e) {
@@ -71,7 +74,7 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
             }
 
             synchronized (lock) {
-                getProject().getDependencies().add("decompileClasspath", library.getName());
+                this.getProject().getDependencies().add("decompileClasspath", library.getName());
             }
         });
 
@@ -82,9 +85,5 @@ public class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
 
     public static File getArtifactFile(FileConstants fileConstants, String url) {
         return new File(fileConstants.libraries, url.substring(url.lastIndexOf("/") + 1));
-    }
-
-    public RegularFileProperty getVersionFile() {
-        return versionFile;
     }
 }

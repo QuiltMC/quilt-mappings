@@ -13,46 +13,45 @@ import quilt.internal.tasks.setup.DownloadPerVersionMappingsTask;
 
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 
-public class InvertPerVersionMappingsTask extends DefaultMappingsTask {
+public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "invertPerVersionMappings";
 
     @InputFile
-    private final RegularFileProperty input;
+    protected abstract RegularFileProperty getInput();
 
     @OutputFile
-    public File invertedTinyFile = new File(fileConstants.cacheFilesMinecraft, String.format("%s-%s-inverted.tiny", Constants.MINECRAFT_VERSION, Constants.PER_VERSION_MAPPINGS_NAME));
+    public abstract RegularFileProperty getInvertedTinyFile();
 
     public InvertPerVersionMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
         this.dependsOn(DownloadPerVersionMappingsTask.TASK_NAME);
 
-        input = getProject().getObjects().fileProperty();
-        input.convention(getTaskByType(DownloadPerVersionMappingsTask.class)::getTinyFile);
+        this.getInvertedTinyFile().convention(() -> new File(
+            this.fileConstants.cacheFilesMinecraft,
+            "%s-%s-inverted.tiny".formatted(Constants.MINECRAFT_VERSION, Constants.PER_VERSION_MAPPINGS_NAME)
+        ));
+
+        this.getInput().convention(
+            this.getTaskNamed(DownloadPerVersionMappingsTask.TASK_NAME, DownloadPerVersionMappingsTask.class)
+                .getTinyFile()
+        );
     }
 
     @TaskAction
     public void invertPerVersionMappings() throws Exception {
-        getLogger().lifecycle(":building inverted {}", Constants.PER_VERSION_MAPPINGS_NAME);
+        this.getLogger().lifecycle(":building inverted {}", Constants.PER_VERSION_MAPPINGS_NAME);
 
-        invertMappings(input.get().getAsFile(), invertedTinyFile);
+        invertMappings(this.getInput().get().getAsFile(), this.getInvertedTinyFile().get().getAsFile());
     }
 
     @VisibleForTesting
     public static void invertMappings(File input, File output) throws Exception {
-        String[] args = {
+        final String[] args = {
                 input.getAbsolutePath(),
                 output.getAbsolutePath(),
                 Constants.PER_VERSION_MAPPINGS_NAME, "official"
         };
 
         new CommandReorderTinyV2().run(args);
-    }
-
-    public File getInvertedTinyFile() {
-        return invertedTinyFile;
-    }
-
-    public RegularFileProperty getInput() {
-        return input;
     }
 }

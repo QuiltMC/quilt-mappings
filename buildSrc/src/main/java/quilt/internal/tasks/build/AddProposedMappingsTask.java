@@ -42,7 +42,7 @@ import quilt.internal.util.PropertyUtil;
 
 public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask {
     @OutputFile
-    public File outputMappings;
+    public abstract RegularFileProperty getOutputMappings();
 
     @InputFile
     public abstract RegularFileProperty getInputJar();
@@ -52,27 +52,29 @@ public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask
 
     public AddProposedMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        this.outputMappings = new File(fileConstants.buildDir, getName() + ".tiny");
+        this.getOutputMappings().convention(() -> new File(this.fileConstants.buildDir, this.getName() + ".tiny"));
     }
 
     @TaskAction
     public void addProposedMappings() throws Exception {
-        getLogger().lifecycle(":seeking auto-mappable entries");
+        this.getLogger().lifecycle(":seeking auto-mappable entries");
 
-        Path input = PropertyUtil.getPath(this.getInputMappings());
-        Path output = outputMappings.toPath();
-        Path jar = PropertyUtil.getPath(this.getInputJar());
+        final Path input = PropertyUtil.getPath(this.getInputMappings());
+        final Path output = PropertyUtil.getPath(this.getOutputMappings());
+        final Path jar = PropertyUtil.getPath(this.getInputJar());
 
-        addProposedMappings(input, output, fileConstants.tempDir.toPath(), jar, this.getEnigmaProfile().get());
+        addProposedMappings(input, output, this.fileConstants.tempDir.toPath(), jar, this.getEnigmaProfile().get());
     }
 
     @VisibleForTesting
-    public static void addProposedMappings(Path input, Path output, Path tempDir, Path jar, EnigmaProfile profile) throws Exception {
-        String name = output.getFileName().toString();
-        Path preprocessedMappings = tempDir.resolve(name.replace(".tiny", "-preprocessed.tiny"));
-        Path processedMappings = tempDir.resolve(name.replace(".tiny", "-processed.tiny"));
+    public static void addProposedMappings(
+        Path input, Path output, Path tempDir, Path jar, EnigmaProfile profile
+    ) throws Exception {
+        final String name = output.getFileName().toString();
+        final Path preprocessedMappings = tempDir.resolve(name.replace(".tiny", "-preprocessed.tiny"));
+        final Path processedMappings = tempDir.resolve(name.replace(".tiny", "-processed.tiny"));
 
-        List<String> namespaces;
+        final List<String> namespaces;
         try (Reader reader = Files.newBufferedReader(input, StandardCharsets.UTF_8)) {
             namespaces = Tiny2FileReader.getNamespaces(reader);
         }
@@ -85,9 +87,9 @@ public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask
             Files.createDirectories(tempDir);
         }
 
-        boolean extraProcessing = preprocessFile(input, preprocessedMappings);
-        Path commandInput = extraProcessing ? preprocessedMappings : input;
-        Path commandOutput = extraProcessing ? processedMappings : output;
+        final boolean extraProcessing = preprocessFile(input, preprocessedMappings);
+        final Path commandInput = extraProcessing ? preprocessedMappings : input;
+        final Path commandOutput = extraProcessing ? processedMappings : output;
 
         runCommands(jar,
             commandInput,
@@ -98,7 +100,7 @@ public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask
         );
 
         if (extraProcessing) {
-            MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
+            final MemoryMappingTree outputTree = postProcessTree(input, processedMappings);
             try (MappingWriter writer = MappingWriter.create(output, MappingFormat.TINY_2_FILE)) {
                 outputTree.accept(writer);
             }
@@ -106,37 +108,37 @@ public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask
     }
 
     private static void runCommands(Path jar, Path input, Path output, EnigmaProfile profile, String fromNamespace, String toNamespace) throws Exception {
-        Enigma enigma = Command.createEnigma(profile, null);
+        final Enigma enigma = Command.createEnigma(profile, null);
 
-        EnigmaProject project = Command.openProject(jar, input, enigma);
+        final EnigmaProject project = Command.openProject(jar, input, enigma);
 
-        boolean debug = System.getProperty("qm.addProposedMappings.debug", "false").toLowerCase(Locale.ROOT).equals("true");
-        EntryTree<EntryMapping> withProposals = project.getRemapper().getMappings(); // Proposed names are automatically added when opening a project
+        final boolean debug = System.getProperty("qm.addProposedMappings.debug", "false").toLowerCase(Locale.ROOT).equals("true");
+        final EntryTree<EntryMapping> withProposals = project.getRemapper().getMappings(); // Proposed names are automatically added when opening a project
 
         // TODO: Disable fillAll after fixing the tiny v2 writer to avoid adding unnecessary class names
-        EntryTree<EntryMapping> result = FillClassMappingsCommand.exec(project.getJarIndex(), withProposals, true, debug);
+        final EntryTree<EntryMapping> result = FillClassMappingsCommand.exec(project.getJarIndex(), withProposals, true, debug);
 
         Utils.delete(output);
-        MappingSaveParameters profileParameters = enigma.getProfile().getMappingSaveParameters();
-        MappingSaveParameters saveParameters = new MappingSaveParameters(profileParameters.fileNameFormat(), /*writeProposedNames*/ true, fromNamespace, toNamespace);
+        final MappingSaveParameters profileParameters = enigma.getProfile().getMappingSaveParameters();
+        final MappingSaveParameters saveParameters = new MappingSaveParameters(profileParameters.fileNameFormat(), /*writeProposedNames*/ true, fromNamespace, toNamespace);
         CommandsUtil.getReadWriteService(enigma, output).write(result, output, saveParameters);
 
         if (debug) {
-            Path deltaFile = output.getParent().resolve(output.getFileName().toString() + "-fill-delta.txt");
-            MappingDelta<EntryMapping> fillDelta = ((DeltaTrackingTree<EntryMapping>) result).takeDelta();
+            final Path deltaFile = output.getParent().resolve(output.getFileName().toString() + "-fill-delta.txt");
+            final MappingDelta<EntryMapping> fillDelta = ((DeltaTrackingTree<EntryMapping>) result).takeDelta();
 
             try (BufferedWriter writer = Files.newBufferedWriter(deltaFile)) {
-                List<String> content = fillDelta.getChanges().getAllEntries()
+                final List<String> content = fillDelta.getChanges().getAllEntries()
                         .map(Objects::toString)
                         .toList();
 
-                for (String s : content) {
+                for (final String s : content) {
                     writer.write(s);
                     writer.newLine();
                 }
             }
 
-            Path debugFile = output.getParent().resolve(output.getFileName().toString() + "-tree.txt");
+            final Path debugFile = output.getParent().resolve(output.getFileName().toString() + "-tree.txt");
             try (BufferedWriter writer = Files.newBufferedWriter(debugFile)) {
                 EntryTreePrinter.print(new PrintWriter(writer), project.getRemapper().getProposedMappings());
             }
@@ -146,16 +148,16 @@ public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask
     // Reorder dst namespaces to `<src-namespace> named [others...]`
     // Enigma doesn't support multiple dst namespaces, and just uses the first one
     private static boolean preprocessFile(Path inputMappings, Path output) throws Exception {
-        MemoryMappingTree inputTree = new MemoryMappingTree();
+        final MemoryMappingTree inputTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(inputMappings, StandardCharsets.UTF_8)) {
             Tiny2FileReader.read(reader, inputTree);
         }
 
         // Reorder destination namespaces to put the named namespace first
-        List<String> dstNamespaces = new ArrayList<>(inputTree.getDstNamespaces());
-        if (!dstNamespaces.get(0).equals("named")) {
-            MemoryMappingTree outputTree = new MemoryMappingTree();
-            int i = dstNamespaces.indexOf("named");
+        final List<String> dstNamespaces = new ArrayList<>(inputTree.getDstNamespaces());
+        if (!dstNamespaces.getFirst().equals("named")) {
+            final MemoryMappingTree outputTree = new MemoryMappingTree();
+            final int i = dstNamespaces.indexOf("named");
             dstNamespaces.set(i, dstNamespaces.get(0));
             dstNamespaces.set(0, "named");
             inputTree.accept(new MappingDstNsReorder(outputTree, dstNamespaces));
@@ -172,30 +174,22 @@ public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask
 
     // Merge input mappings with the proposed mappings to restore the lost namespaces
     private static MemoryMappingTree postProcessTree(Path inputMappings, Path processedMappings) throws Exception {
-        MemoryMappingTree inputTree = new MemoryMappingTree();
+        final MemoryMappingTree inputTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(inputMappings, StandardCharsets.UTF_8)) {
             Tiny2FileReader.read(reader, inputTree);
         }
 
-        MemoryMappingTree processedTree = new MemoryMappingTree();
+        final MemoryMappingTree processedTree = new MemoryMappingTree();
         try (Reader reader = Files.newBufferedReader(processedMappings, StandardCharsets.UTF_8)) {
             Tiny2FileReader.read(reader, processedTree);
         }
 
         // Merge trees
-        MemoryMappingTree output = new MemoryMappingTree();
+        final MemoryMappingTree output = new MemoryMappingTree();
         inputTree.accept(output);
         // Merge processed tree after original to keep the original namespaces order
         processedTree.accept(output);
 
         return output;
-    }
-
-    public File getOutputMappings() {
-        return outputMappings;
-    }
-
-    public void setOutputMappings(File outputMappings) {
-        this.outputMappings = outputMappings;
     }
 }

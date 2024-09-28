@@ -8,23 +8,23 @@ import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 
 import java.io.File;
 
-public class DropInvalidMappingsTask extends DefaultMappingsTask {
+public abstract class DropInvalidMappingsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "dropInvalidMappings";
-    private final File mappings = getProject().file("mappings");
+    private final File mappings = this.getProject().file("mappings");
 
     public DropInvalidMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        getInputs().dir(mappings);
+        this.getInputs().dir(this.mappings);
         this.dependsOn(MapPerVersionMappingsJarTask.TASK_NAME);
     }
 
     @TaskAction
     public void dropInvalidMappings() {
-        getLogger().info(":dropping invalid mappings");
+        this.getLogger().info(":dropping invalid mappings");
 
-        String[] args = new String[]{
-                fileConstants.perVersionMappingsJar.getAbsolutePath(),
-                mappings.getAbsolutePath()
+        final String[] args = new String[]{
+            this.fileConstants.perVersionMappingsJar.getAbsolutePath(),
+            this.mappings.getAbsolutePath()
         };
 
         try {
