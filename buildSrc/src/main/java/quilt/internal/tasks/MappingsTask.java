@@ -7,7 +7,6 @@ import org.gradle.api.file.Directory;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.provider.Provider;
 import quilt.internal.MappingsExtension;
-import quilt.internal.MappingsPlugin;
 import quilt.internal.util.DownloadImmediate;
 
 // TODO check if tasks that depend on other other tasks' outputs have task dependencies that can be eliminated
@@ -43,7 +42,7 @@ public interface MappingsTask extends Task {
     }
 
     default MappingsExtension mappingsExt() {
-        return MappingsPlugin.getExtension(this.getProject());
+        return MappingsExtension.get(this.getProject());
     }
 
     default VersionCatalogsExtension versionCatalogs() {
