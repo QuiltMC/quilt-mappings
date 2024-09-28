@@ -23,11 +23,11 @@ public interface MappingsTask extends Task {
         return this.getProject().getTasks().named(name, taskClass).get();
     }
 
-    default RegularFile createRegularProjectFile(String path) {
+    default RegularFile regularProjectFileOf(String path) {
         return this.getProjectDirectory().file(path);
     }
 
-    default Provider<RegularFile> createRegularProjectFile(Provider<? extends CharSequence> path) {
+    default Provider<RegularFile> regularProjectFileOf(Provider<? extends CharSequence> path) {
         return this.getProjectDirectory().file(path);
     }
 

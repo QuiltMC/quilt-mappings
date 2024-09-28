@@ -25,18 +25,6 @@ public abstract class MergeJarsTask extends DefaultMappingsTask {
 
     public MergeJarsTask() {
         super(Constants.Groups.SETUP_GROUP);
-        this.dependsOn(ExtractServerJarTask.TASK_NAME);
-
-        this.getClientJar().convention(
-            this.getTaskNamed(DownloadMinecraftJarsTask.TASK_NAME, DownloadMinecraftJarsTask.class).getClientJar()
-        );
-        this.getServerJar().convention(
-            this.getTaskNamed(ExtractServerJarTask.TASK_NAME, ExtractServerJarTask.class).getServerJar()
-        );
-
-        this.getMergedFile().convention(
-            this.createRegularProjectFile(Constants.MINECRAFT_VERSION + "-merged.jar")
-        );
     }
 
     @TaskAction
