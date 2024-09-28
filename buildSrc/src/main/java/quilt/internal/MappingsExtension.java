@@ -15,6 +15,10 @@ public abstract class MappingsExtension {
 
     private final FileConstants fileConstants;
 
+    public static MappingsExtension get(Project project) {
+        return project.getExtensions().getByType(MappingsExtension.class);
+    }
+
     protected abstract RegularFileProperty getEnigmaProfileFile();
 
     public MappingsExtension(Project project) {

@@ -8,6 +8,7 @@ public abstract class DefaultMappingsTask extends DefaultTask implements Mapping
 
     public DefaultMappingsTask(String group) {
         this.fileConstants = this.mappingsExt().getFileConstants();
+        // TODO set groups in registerDefault methods instead of here
         this.setGroup(group);
     }
 }

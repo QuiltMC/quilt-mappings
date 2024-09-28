@@ -1,6 +1,5 @@
 package quilt.internal.tasks.setup;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.gradle.api.file.RegularFileProperty;
@@ -17,10 +16,6 @@ public abstract class DownloadVersionsManifestTask extends DefaultMappingsTask {
 
     public DownloadVersionsManifestTask() {
         super(Constants.Groups.SETUP_GROUP);
-
-        this.getManifestFile().convention(() ->
-            new File(this.fileConstants.cacheFilesMinecraft, "version_manifest_v2.json")
-        );
     }
 
     @TaskAction

@@ -9,7 +9,13 @@ import java.nio.file.Files;
 import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
+import org.gradle.api.GradleException;
+import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Property;
+import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.quiltmc.launchermeta.version_manifest.VersionEntry;
@@ -20,53 +26,58 @@ import quilt.internal.tasks.DefaultMappingsTask;
 public abstract class DownloadWantedVersionManifestTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "downloadWantedVersionManifest";
 
-    // TODO manifestVersion should probably be an input mapped from manifestFile
-    private final File manifestFile;
-    private final Optional<VersionEntry> manifestVersion;
+    @InputFile
+    public abstract RegularFileProperty getManifest();
+
+    @Internal("Fingerprinting is handled by getManifest and getReleaseTime")
+    protected abstract Property<VersionEntry> getManifestVersion();
+
+    @Input
+    @org.gradle.api.tasks.Optional
+    protected abstract Property<String> getReleaseTime();
 
     @OutputFile
     public abstract RegularFileProperty getVersionFile();
 
-    public DownloadWantedVersionManifestTask() throws IOException {
+    public DownloadWantedVersionManifestTask() {
         super(Constants.Groups.SETUP_GROUP);
-        this.dependsOn(DownloadVersionsManifestTask.TASK_NAME);
-        this.manifestFile = this.getTaskNamed(DownloadVersionsManifestTask.TASK_NAME, DownloadVersionsManifestTask.class)
-            .getManifestFile().get().getAsFile();
-        this.manifestVersion = getManifestVersion(this.manifestFile);
 
-        this.getInputs().property("versionsManifest", this.manifestFile);
+        // provide an informative error message if version data can't be obtained
+        this.getManifestVersion().convention(this.getProject().provider(() -> {
+            throw new GradleException("No version data for Minecraft version " + Constants.MINECRAFT_VERSION);
+        }));
+
+        this.getManifestVersion().set(
+            this.getManifest()
+                .map(RegularFile::getAsFile)
+                .map(DownloadWantedVersionManifestTask::getManifestVersion)
+                .map(version -> version.orElse(null))
+        );
+
         // have to grab the release time as there's a current timestamp on each element?!
-        this.getInputs().property(
-            "releaseTime",
-            this.manifestVersion.isPresent()
-                ? this.manifestVersion.get().getReleaseTime()
-                : -1
-        );
-        this.getVersionFile().convention(() ->
-            new File(this.fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + ".json")
-        );
+        // TODO I don't think this is necessary, the fact that getManifest is an input should take care of it.
+        this.getReleaseTime().convention(this.getManifestVersion().map(VersionEntry::getReleaseTime));
     }
 
     @TaskAction
     public void downloadWantedVersionManifestTask() throws IOException, URISyntaxException {
-        final Optional<VersionEntry> _manifestVersion = this.manifestVersion.isEmpty()
-            ? getManifestVersion(this.manifestFile)
-            : this.manifestVersion;
         //nb need to re-read here in case it didn't exist before
         final File versionFile = this.getVersionFile().get().getAsFile();
-        if (_manifestVersion.isPresent() || versionFile.exists()) {
-            if (_manifestVersion.isPresent()) {
-                FileUtils.copyURLToFile(new URI(_manifestVersion.get().getUrl()).toURL(), versionFile);
-            }
-        } else {
-            throw new RuntimeException("No version data for Minecraft version " + Constants.MINECRAFT_VERSION);
-        }
+
+        FileUtils.copyURLToFile(new URI(this.getManifestVersion().get().getUrl()).toURL(), versionFile);
     }
 
-    private static Optional<VersionEntry> getManifestVersion(File manifestFile) throws IOException {
-        final VersionManifest manifest = manifestFile.exists()
-            ? VersionManifest.fromReader(Files.newBufferedReader(manifestFile.toPath(), Charset.defaultCharset()))
-            : null;
+    private static Optional<VersionEntry> getManifestVersion(File manifestFile) {
+        final VersionManifest manifest;
+
+        try {
+            manifest = manifestFile.exists()
+                ? VersionManifest.fromReader(Files.newBufferedReader(manifestFile.toPath(), Charset.defaultCharset()))
+                : null;
+        } catch (IOException e) {
+            throw new GradleException("Failed to read manifest", e);
+        }
+
         return manifest == null
             ? Optional.empty()
             : manifest.getVersions().stream().filter(it -> it.getId().equals(Constants.MINECRAFT_VERSION)).findFirst();
