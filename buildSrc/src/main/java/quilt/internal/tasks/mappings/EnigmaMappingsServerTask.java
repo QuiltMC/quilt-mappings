@@ -1,7 +1,9 @@
 package quilt.internal.tasks.mappings;
 
 import org.gradle.api.Project;
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.JavaExec;
 import quilt.internal.Constants;
@@ -10,16 +12,16 @@ import quilt.internal.tasks.MappingsTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
+public abstract class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 	@InputFile
 	private final RegularFileProperty jarToMap;
-	@InputFile
-	private final RegularFileProperty mappings;
+	@InputDirectory
+	protected abstract DirectoryProperty getMappings();
 
 	private final List<String> serverArgs;
 
 	public EnigmaMappingsServerTask() {
-		Project project = this.getProject();
+		final Project project = this.getProject();
 		this.setGroup(Constants.Groups.MAPPINGS_GROUP);
 		this.getMainClass().set("org.quiltmc.enigma.network.DedicatedEnigmaServer");
 		this.classpath(project.getConfigurations().getByName("enigmaRuntime"));
@@ -27,7 +29,7 @@ public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 
 		this.jarToMap = getObjectFactory().fileProperty();
 		this.mappings = getObjectFactory().fileProperty();
-		this.mappings.convention(() -> this.getProject().file("mappings"));
+		this.getMappings().convention(project.getLayout().dir(project.provider(() -> project.file("mappings"))));
 
 		this.serverArgs = new ArrayList<>();
 
@@ -55,7 +57,7 @@ public class EnigmaMappingsServerTask extends JavaExec implements MappingsTask {
 	public void exec() {
 		var args = new ArrayList<>(List.of(
 				"-jar", this.jarToMap.get().getAsFile().getAbsolutePath(),
-				"-mappings", this.mappings.get().getAsFile().getAbsolutePath(),
+				"-mappings", this.getMappings().get().getAsFile().getAbsolutePath(),
 				"-profile", "enigma_profile.json"
 		));
 		args.addAll(this.serverArgs);
