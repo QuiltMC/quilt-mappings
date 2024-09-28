@@ -28,7 +28,6 @@ public abstract class EnigmaMappingsServerTask extends JavaExec implements Mappi
 		this.jvmArgs("-Xmx2048m");
 
 		this.jarToMap = getObjectFactory().fileProperty();
-		this.mappings = getObjectFactory().fileProperty();
 		this.getMappings().convention(project.getLayout().dir(project.provider(() -> project.file("mappings"))));
 
 		this.serverArgs = new ArrayList<>();
