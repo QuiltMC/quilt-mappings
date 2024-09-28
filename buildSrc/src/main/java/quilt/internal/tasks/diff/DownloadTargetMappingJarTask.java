@@ -45,27 +45,27 @@ public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask {
         );
 
         this.getTargetMappingsFile().convention(targetOrMappingsVersion.map(version ->
-            this.createRegularProjectFile(
+            this.regularProjectFileOf(
             TARGET_MAPPINGS + "/quilt-mappings-" + version + "/mappings/mappings.tiny"
             ))
         );
         this.getTargetUnpickFile().convention(targetOrMappingsVersion.map(version ->
-            this.createRegularProjectFile(
+            this.regularProjectFileOf(
                 TARGET_MAPPINGS + "/quilt-mappings-" + version + "/extras/unpick.json"
             )
         ));
         this.getTargetUnpickDefinitionsFile().convention(targetOrMappingsVersion.map(version ->
-            this.createRegularProjectFile(
+            this.regularProjectFileOf(
                 TARGET_MAPPINGS + "/quilt-mappings-" + version + "/extras/definitions.unpick"
             )
         ));
         this.getTargetUnpickRemappedDefinitionsFile().convention(targetOrMappingsVersion.map(version ->
-            this.createRegularProjectFile(
+            this.regularProjectFileOf(
                 TARGET_MAPPINGS + "/quilt-mappings-" + version + "remapped-unpick.unpick"
             )
         ));
         this.getTargetUnpickConstantsFile().convention(targetOrMappingsVersion.map(version ->
-            this.createRegularProjectFile(
+            this.regularProjectFileOf(
                 TARGET_MAPPINGS + "/quilt-mappings-" + version + "-constants.jar"
             )
         ));
