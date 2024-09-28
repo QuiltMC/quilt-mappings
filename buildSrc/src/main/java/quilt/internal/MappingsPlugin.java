@@ -50,54 +50,54 @@ public class MappingsPlugin implements Plugin<Project> {
             task.getEnigmaProfile().convention(ext.enigmaProfile)
         );
 
-        tasks.create(DownloadVersionsManifestTask.TASK_NAME, DownloadVersionsManifestTask.class);
-        tasks.create(DownloadWantedVersionManifestTask.TASK_NAME, DownloadWantedVersionManifestTask.class);
-        tasks.create(DownloadMinecraftJarsTask.TASK_NAME, DownloadMinecraftJarsTask.class);
-        tasks.create(ExtractServerJarTask.TASK_NAME, ExtractServerJarTask.class);
-        tasks.create(MergeJarsTask.TASK_NAME, MergeJarsTask.class);
-        tasks.create(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class);
+        tasks.register(DownloadVersionsManifestTask.TASK_NAME, DownloadVersionsManifestTask.class);
+        tasks.register(DownloadWantedVersionManifestTask.TASK_NAME, DownloadWantedVersionManifestTask.class);
+        tasks.register(DownloadMinecraftJarsTask.TASK_NAME, DownloadMinecraftJarsTask.class);
+        tasks.register(ExtractServerJarTask.TASK_NAME, ExtractServerJarTask.class);
+        tasks.register(MergeJarsTask.TASK_NAME, MergeJarsTask.class);
+        tasks.register(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class);
 
         final var downloadPerVersionMappings =
-            tasks.create(DownloadPerVersionMappingsTask.TASK_NAME, DownloadPerVersionMappingsTask.class);
-        tasks.create(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class);
+            tasks.register(DownloadPerVersionMappingsTask.TASK_NAME, DownloadPerVersionMappingsTask.class);
+        tasks.register(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class);
         final var buildMappingsTiny = tasks.create(BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class);
-        tasks.create(INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, AddProposedMappingsTask.class, task -> {
+        tasks.register(INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, AddProposedMappingsTask.class, task -> {
             task.dependsOn(downloadPerVersionMappings);
 
             task.getInputJar().set(ext.getFileConstants().perVersionMappingsJar);
             task.getInputMappings().set(buildMappingsTiny.getOutputMappings());
         });
 
-        tasks.create(MergeTinyTask.TASK_NAME, MergeTinyTask.class);
-        tasks.create(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class);
-        tasks.create(TinyJarTask.TASK_NAME, TinyJarTask.class);
-        tasks.create(CompressTinyTask.TASK_NAME, CompressTinyTask.class);
-        tasks.create(DropInvalidMappingsTask.TASK_NAME, DropInvalidMappingsTask.class);
+        tasks.register(MergeTinyTask.TASK_NAME, MergeTinyTask.class);
+        tasks.register(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class);
+        tasks.register(TinyJarTask.TASK_NAME, TinyJarTask.class);
+        tasks.register(CompressTinyTask.TASK_NAME, CompressTinyTask.class);
+        tasks.register(DropInvalidMappingsTask.TASK_NAME, DropInvalidMappingsTask.class);
 
-        tasks.create(MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class);
-        tasks.create(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class);
+        tasks.register(MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class);
+        tasks.register(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class);
 
-        tasks.create(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class);
-        tasks.create(RemapUnpickDefinitionsTask.TASK_NAME, RemapUnpickDefinitionsTask.class);
-        tasks.create(OpenGlConstantUnpickGenerator.TASK_NAME, OpenGlConstantUnpickGenerator.class);
+        tasks.register(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class);
+        tasks.register(RemapUnpickDefinitionsTask.TASK_NAME, RemapUnpickDefinitionsTask.class);
+        tasks.register(OpenGlConstantUnpickGenerator.TASK_NAME, OpenGlConstantUnpickGenerator.class);
 
-        tasks.create(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
-        tasks.create(DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class);
+        tasks.register(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
+        tasks.register(DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class);
         final var mappingLint = tasks.create(MappingLintTask.TASK_NAME, MappingLintTask.class);
-        tasks.create(FindDuplicateMappingFilesTask.TASK_NAME, FindDuplicateMappingFilesTask.class, task -> {
+        tasks.register(FindDuplicateMappingFilesTask.TASK_NAME, FindDuplicateMappingFilesTask.class, task -> {
             task.getMappingDirectory().set(mappingLint.getMappingDirectory());
             mappingLint.dependsOn(task);
         });
 
-        tasks.create(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class);
-        tasks.create(DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class);
-        tasks.create(MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class);
-        tasks.create(RemoveIntermediaryTask.TASK_NAME, RemoveIntermediaryTask.class);
+        tasks.register(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class);
+        tasks.register(DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class);
+        tasks.register(MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class);
+        tasks.register(RemoveIntermediaryTask.TASK_NAME, RemoveIntermediaryTask.class);
 
-        tasks.create(CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class);
-        tasks.create(DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class);
-        tasks.create(CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class);
-        tasks.create(RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class);
+        tasks.register(CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class);
+        tasks.register(DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class);
+        tasks.register(CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class);
+        tasks.register(RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class);
     }
 
     public static MappingsExtension getExtension(Project project) {
