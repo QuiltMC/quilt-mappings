@@ -32,36 +32,28 @@ import quilt.internal.util.UnpickUtil;
 
 public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "combineUnpickDefinitions";
-    private final DirectoryProperty input;
-    private final RegularFileProperty output;
-
-    public CombineUnpickDefinitionsTask() {
-        super(Constants.Groups.UNPICK);
-        input = getProject().getObjects().directoryProperty();
-        output = getProject().getObjects().fileProperty();
-
-        this.dependsOn(getProject().getTasks().withType(UnpickGen.class));
-    }
 
     @InputDirectory
-    public DirectoryProperty getInput() {
-        return input;
-    }
+    public abstract DirectoryProperty getInput();
 
     @OutputFile
-    public RegularFileProperty getOutput() {
-        return output;
-    }
+    public abstract RegularFileProperty getOutput();
 
     @Inject
     protected abstract WorkerExecutor getWorkerExecutor();
 
+    public CombineUnpickDefinitionsTask() {
+        super(Constants.Groups.UNPICK);
+
+        this.dependsOn(this.getProject().getTasks().withType(UnpickGen.class));
+    }
+
     @TaskAction
     public void run() {
-        WorkQueue workQueue = getWorkerExecutor().noIsolation();
+        final WorkQueue workQueue = this.getWorkerExecutor().noIsolation();
         workQueue.submit(CombineAction.class, parameters -> {
-            parameters.getInput().set(getInput());
-            parameters.getOutput().set(getOutput());
+            parameters.getInput().set(this.getInput());
+            parameters.getOutput().set(this.getOutput());
         });
     }
 
@@ -70,13 +62,13 @@ public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
         try {
             Files.deleteIfExists(output);
 
-            UnpickV2Writer writer = new UnpickV2Writer();
+            final UnpickV2Writer writer = new UnpickV2Writer();
 
             // Sort inputs to get reproducible outputs (also for testing)
-            List<File> files = new ArrayList<>(input);
+            final List<File> files = new ArrayList<>(input);
             files.sort(Comparator.comparing(File::getName));
 
-            for (File file : files) {
+            for (final File file : files) {
                 if (!file.getName().endsWith(".unpick")) {
                     continue;
                 }
@@ -107,8 +99,8 @@ public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
 
         @Override
         public void execute() {
-            Set<File> input = getParameters().getInput().getAsFileTree().getFiles();
-            Path output = getParameters().getOutput().getAsFile().get().toPath();
+            final Set<File> input = this.getParameters().getInput().getAsFileTree().getFiles();
+            final Path output = this.getParameters().getOutput().getAsFile().get().toPath();
             combineUnpickDefinitions(input, output);
         }
     }

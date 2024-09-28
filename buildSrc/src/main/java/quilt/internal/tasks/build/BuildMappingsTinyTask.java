@@ -14,35 +14,40 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
+import quilt.internal.util.PropertyUtil;
 
-public class BuildMappingsTinyTask extends DefaultMappingsTask {
+public abstract class BuildMappingsTinyTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "buildMappingsTiny";
     @InputDirectory
-    private final RegularFileProperty mappings;
+    public abstract RegularFileProperty getMappings();
 
     @OutputFile
-    public File outputMappings = new File(fileConstants.buildDir, String.format("%s.tiny", Constants.MAPPINGS_NAME));
+    public abstract RegularFileProperty getOutputMappings();
 
     public BuildMappingsTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        dependsOn(MapPerVersionMappingsJarTask.TASK_NAME);
-        mappings = getProject().getObjects().fileProperty();
-        mappings.set(getProject().file("mappings"));
+        this.dependsOn(MapPerVersionMappingsJarTask.TASK_NAME);
+        this.getOutputMappings().convention(() ->
+            new File(this.fileConstants.buildDir, String.format("%s.tiny", Constants.MAPPINGS_NAME))
+        );
+        this.getMappings().set(this.getProject().file("mappings"));
     }
 
     @TaskAction
     public void execute() throws IOException, MappingParseException {
-        getLogger().lifecycle(":generating tiny mappings");
+        this.getLogger().lifecycle(":generating tiny mappings");
 
         buildMappingsTiny(
-                fileConstants.perVersionMappingsJar.toPath(),
-                mappings.get().getAsFile().toPath(),
-                outputMappings.toPath()
+            this.fileConstants.perVersionMappingsJar.toPath(),
+            this.getMappings().get().getAsFile().toPath(),
+                PropertyUtil.getPath(this.getOutputMappings())
         );
     }
 
     @VisibleForTesting
-    public static void buildMappingsTiny(Path perVersionMappingsJar, Path mappings, Path outputMappings) throws IOException, MappingParseException {
+    public static void buildMappingsTiny(
+        Path perVersionMappingsJar, Path mappings, Path outputMappings
+    ) throws IOException, MappingParseException {
         MapSpecializedMethodsCommand.run(
                 perVersionMappingsJar,
                 mappings,
@@ -50,13 +55,5 @@ public class BuildMappingsTinyTask extends DefaultMappingsTask {
                 Constants.PER_VERSION_MAPPINGS_NAME,
                 "named"
         );
-    }
-
-    public File getOutputMappings() {
-        return outputMappings;
-    }
-
-    public RegularFileProperty getMappings() {
-        return mappings;
     }
 }

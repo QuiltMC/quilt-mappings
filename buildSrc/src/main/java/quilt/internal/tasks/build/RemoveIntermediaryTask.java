@@ -14,6 +14,7 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
+import quilt.internal.util.PropertyUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,55 +22,52 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 
-public class RemoveIntermediaryTask extends DefaultMappingsTask {
+public abstract class RemoveIntermediaryTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "removeIntermediary";
 
     @InputFile
-    private final RegularFileProperty input;
+    public abstract RegularFileProperty getInput();
 
     @OutputFile
-    public File outputMappings;
+    public abstract RegularFileProperty getOutputMappings();
 
     public RemoveIntermediaryTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, MergeIntermediaryTask.TASK_NAME);
-        onlyIf(task -> getTaskByType(CheckIntermediaryMappingsTask.class).isPresent());
+        this.dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, MergeIntermediaryTask.TASK_NAME);
+        this.onlyIf(task ->
+            this.getTaskNamed(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class).isPresent()
+        );
 
-        this.outputMappings = new File(fileConstants.buildDir, "mappings-intermediary.tiny");
-        getOutputs().file(this.outputMappings);
+        this.getOutputMappings().convention(() ->
+            new File(this.fileConstants.buildDir, "mappings-intermediary.tiny")
+        );
 
-        input = getProject().getObjects().fileProperty();
-        input.convention(getTaskByType(MergeIntermediaryTask.class)::getOutputMappings);
+        this.getInput().convention(
+            this.getTaskNamed(MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class).getOutputMappings()
+        );
     }
 
     @TaskAction
     public void removeIntermediary() throws Exception {
-        Path mappingsTinyInput = input.get().getAsFile().toPath();
-        Path output = outputMappings.toPath();
+        final Path mappingsTinyInput = PropertyUtil.getPath(this.getInput());
+        final Path output = PropertyUtil.getPath(this.getOutputMappings());
 
-        getLogger().lifecycle(":removing intermediary");
+        this.getLogger().lifecycle(":removing intermediary");
         removeIntermediary(mappingsTinyInput, output);
     }
 
     @VisibleForTesting
     public static void removeIntermediary(Path mappingsTinyInput, Path output) throws IOException {
-        MemoryMappingTree tree = new MemoryMappingTree(false);
+        final MemoryMappingTree tree = new MemoryMappingTree(false);
         MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2_FILE, tree);
         try (Tiny2FileWriter w = new Tiny2FileWriter(Files.newBufferedWriter(output), false)) {
             tree.accept(
                 new MappingSourceNsSwitch(
-                    new MappingDstNsReorder(w, Collections.singletonList("named")), // Remove official namespace
+                    // Remove official namespace
+                    new MappingDstNsReorder(w, Collections.singletonList("named")),
                     "intermediary"
                 )
             );
         }
-    }
-
-    public RegularFileProperty getInput() {
-        return input;
-    }
-
-    public File getOutputMappings() {
-        return outputMappings;
     }
 }

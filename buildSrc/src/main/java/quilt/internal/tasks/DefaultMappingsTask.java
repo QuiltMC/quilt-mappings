@@ -7,7 +7,7 @@ public abstract class DefaultMappingsTask extends DefaultTask implements Mapping
     protected final FileConstants fileConstants;
 
     public DefaultMappingsTask(String group) {
-        this.fileConstants = mappingsExt().getFileConstants();
+        this.fileConstants = this.mappingsExt().getFileConstants();
         this.setGroup(group);
     }
 }

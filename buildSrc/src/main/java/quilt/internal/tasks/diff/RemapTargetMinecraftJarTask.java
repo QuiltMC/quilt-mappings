@@ -5,22 +5,31 @@ import java.util.Map;
 import quilt.internal.Constants;
 import quilt.internal.tasks.jarmapping.MapJarTask;
 
-public class RemapTargetMinecraftJarTask extends MapJarTask {
+public abstract class RemapTargetMinecraftJarTask extends MapJarTask {
     public static final String TASK_NAME = "remapTargetMinecraftJar";
 
     public RemapTargetMinecraftJarTask() {
         super("diff", Constants.PER_VERSION_MAPPINGS_NAME, "named");
 
-        CheckTargetVersionExistsTask checkExists = getTaskByType(CheckTargetVersionExistsTask.class);
-        CheckUnpickVersionsMatchTask checkUnpickExists = getTaskByType(CheckUnpickVersionsMatchTask.class);
+        final CheckTargetVersionExistsTask checkExists =
+            this.getTaskNamed(CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class);
+        final CheckUnpickVersionsMatchTask checkUnpickExists =
+            this.getTaskNamed(CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class);
 
         this.onlyIf(task -> checkExists.getTargetVersion().isPresent() && checkUnpickExists.isMatch());
         this.dependsOn(DownloadTargetMappingJarTask.TASK_NAME, "unpickTargetJar");
-        DownloadTargetMappingJarTask downloadTarget = getTaskByType(DownloadTargetMappingJarTask.class);
+        final DownloadTargetMappingJarTask downloadTarget =
+            this.getTaskNamed(DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class);
 
-        inputJar.convention(() -> getProject().file(DownloadTargetMappingJarTask.TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "-unpicked.jar"));
-        mappingsFile.set(downloadTarget.getTargetMappingsFile());
-        outputJar.convention(() -> getProject().file(DownloadTargetMappingJarTask.TARGET_MAPPINGS + "/quilt-mappings-" + checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "-named.jar"));
+        this.getInputJar().convention(() -> this.getProject().file(
+            DownloadTargetMappingJarTask.TARGET_MAPPINGS + "/quilt-mappings-" +
+                checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "-unpicked.jar"
+        ));
+        this.getMappingsFile().set(downloadTarget.getTargetMappingsFile());
+        this.getOutputJar().convention(() -> this.getProject().file(
+            DownloadTargetMappingJarTask.TARGET_MAPPINGS + "/quilt-mappings-" +
+                checkExists.getTargetVersion().orElse(Constants.MAPPINGS_VERSION) + "-named.jar"
+        ));
     }
 
     public Map<String, String> getAdditionalMappings() {

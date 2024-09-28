@@ -12,11 +12,11 @@ import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public class CheckUnpickVersionsMatchTask extends DefaultMappingsTask {
+public abstract class CheckUnpickVersionsMatchTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "checkUnpickVersionsMatch";
 
     @InputFile
-    private final RegularFileProperty unpickJson;
+    public abstract RegularFileProperty getUnpickJson();
 
     @Internal
     private boolean match = false;
@@ -26,23 +26,26 @@ public class CheckUnpickVersionsMatchTask extends DefaultMappingsTask {
 
         this.dependsOn(DownloadTargetMappingJarTask.TASK_NAME);
 
-        this.onlyIf(task -> this.getTaskByType(CheckTargetVersionExistsTask.class).getTargetVersion().isPresent());
+        this.onlyIf(task ->
+            this.getTaskNamed(CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class)
+                .getTargetVersion().isPresent()
+        );
 
-        unpickJson = getProject().getObjects().fileProperty();
-        unpickJson.convention(getTaskByType(DownloadTargetMappingJarTask.class).getTargetUnpickFile());
+        this.getUnpickJson().convention(
+            this.getTaskNamed(DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class)
+                .getTargetUnpickFile()
+        );
     }
 
     @TaskAction
     public void checkMatch() throws IOException {
-        JsonElement parsed = JsonParser.parseReader(new FileReader(unpickJson.getAsFile().get()));
-        match = parsed.getAsJsonObject().get("unpickVersion").getAsString().equals(libs().findVersion("unpick").map(VersionConstraint::getRequiredVersion).orElse(""));
+        final JsonElement parsed = JsonParser.parseReader(new FileReader(this.getUnpickJson().getAsFile().get()));
+        this.match = parsed.getAsJsonObject().get("unpickVersion").getAsString().equals(
+            this.libs().findVersion("unpick").map(VersionConstraint::getRequiredVersion).orElse("")
+        );
     }
 
     public boolean isMatch() {
-        return match;
-    }
-
-    public RegularFileProperty getUnpickJson() {
-        return unpickJson;
+        return this.match;
     }
 }

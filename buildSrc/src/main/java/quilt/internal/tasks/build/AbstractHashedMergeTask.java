@@ -11,7 +11,10 @@ public abstract class AbstractHashedMergeTask extends AbstractTinyMergeTask {
 
     @Override
     public void mergeMappings() throws Exception {
-        File hashedTinyInput = this.getTaskByType(InvertPerVersionMappingsTask.class).getInvertedTinyFile();
-        mergeMappings(hashedTinyInput);
+        final File hashedTinyInput =
+            this.getTaskNamed(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class)
+                .getInvertedTinyFile().get().getAsFile();
+
+        this.mergeMappings(hashedTinyInput);
     }
 }

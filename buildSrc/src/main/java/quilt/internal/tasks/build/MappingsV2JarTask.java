@@ -11,35 +11,35 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
 import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 
-public class MappingsV2JarTask extends Jar implements MappingsTask {
+public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
     @InputFile
-    private final RegularFileProperty mappings;
+    public abstract RegularFileProperty getMappings();
 
     public MappingsV2JarTask() {
         this.setGroup(Constants.Groups.BUILD_MAPPINGS_GROUP);
         this.outputsNeverUpToDate();
-        getDestinationDirectory().set(getProject().file("build/libs"));
+        this.getDestinationDirectory().set(this.getProject().file("build/libs"));
 
-        File unpickMetaFile = mappingsExt().getFileConstants().unpickMeta;
-        String version = libs().findVersion("unpick").map(VersionConstraint::getRequiredVersion).orElseThrow(() -> new RuntimeException("Could not find unpick version"));
-        from(unpickMetaFile, copySpec -> {
+        final File unpickMetaFile = this.mappingsExt().getFileConstants().unpickMeta;
+        final String version = this.libs().findVersion("unpick").map(VersionConstraint::getRequiredVersion)
+            .orElseThrow(() -> new RuntimeException("Could not find unpick version"));
+
+        this.from(unpickMetaFile, copySpec -> {
             copySpec.expand(Map.of("version", version));
             copySpec.rename(unpickMetaFile.getName(), "extras/unpick.json");
         });
 
-        RegularFileProperty combineUnpickDefinitions = getTaskByType(CombineUnpickDefinitionsTask.class).getOutput();
-        from(combineUnpickDefinitions, copySpec -> {
-            copySpec.rename(combineUnpickDefinitions.get().getAsFile().getName(), "extras/definitions.unpick");
-        });
+        final RegularFileProperty combineUnpickDefinitions =
+            this.getTaskNamed(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class).getOutput();
+        this.from(combineUnpickDefinitions, copySpec ->
+            copySpec.rename(
+                combineUnpickDefinitions.get().getAsFile().getName(),
+                "extras/definitions.unpick"
+            )
+        );
 
-        mappings = getObjectFactory().fileProperty();
-
-        from(mappings, copySpec -> {
-            copySpec.rename((originalName) -> "mappings/mappings.tiny");
-        });
-    }
-
-    public RegularFileProperty getMappings() {
-        return mappings;
+        this.from(this.getMappings(), copySpec ->
+            copySpec.rename((originalName) -> "mappings/mappings.tiny")
+        );
     }
 }

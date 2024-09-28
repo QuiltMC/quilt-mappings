@@ -2,6 +2,7 @@ package quilt.internal.tasks.decompile;
 
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFiles;
@@ -23,89 +24,69 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DecompileTask extends DefaultMappingsTask {
-    private final Property<Decompilers> decompiler;
-    private Map<String, Object> decompilerOptions;
-    private final RegularFileProperty input;
-    private final RegularFileProperty output;
-    private final Property<FileCollection> libraries;
+public abstract class DecompileTask extends DefaultMappingsTask {
+    @Input
+    public abstract Property<Decompilers> getDecompiler();
+
+    @Optional
+    @Input
+    public abstract MapProperty<String, Object> getDecompilerOptions();
+
+    @Optional
+    @Input
+    public abstract Property<FileCollection> getLibraries();
+
+    @InputFiles
+    public abstract RegularFileProperty getInput();
+
+    @OutputDirectory
+    public abstract RegularFileProperty getOutput();
+
+    // TODO see if all three of these can be optional inputs
     private ClassJavadocProvider classJavadocProvider;
     private FieldJavadocProvider fieldJavadocProvider;
     private MethodJavadocProvider methodJavadocProvider;
 
     public DecompileTask() {
         super(Constants.Groups.DECOMPILE_GROUP);
-        input = getProject().getObjects().fileProperty();
-        output = getProject().getObjects().fileProperty();
-        decompiler = getProject().getObjects().property(Decompilers.class);
-        libraries = getProject().getObjects().property(FileCollection.class);
     }
 
     @TaskAction
     public void decompile() {
-        Map<String, Object> options = decompilerOptions == null ? new HashMap<>() : decompilerOptions;
-        Collection<File> libraries = this.libraries.getOrNull() == null ? Collections.emptyList() : this.libraries.get().getFiles();
+        final Map<String, Object> options = this.getDecompilerOptions().getOrElse(new HashMap<>());
 
-        AbstractDecompiler decompiler = getAbstractDecompiler();
+        final Collection<File> libraries = this.getLibraries().<Collection<File>>map(FileCollection::getFiles)
+            .getOrElse(Collections.emptyList());
 
-        if (classJavadocProvider != null) {
-            decompiler.withClassJavadocProvider(classJavadocProvider);
+        final AbstractDecompiler decompiler = this.getAbstractDecompiler();
+
+        if (this.classJavadocProvider != null) {
+            decompiler.withClassJavadocProvider(this.classJavadocProvider);
         }
-        if (fieldJavadocProvider != null) {
-            decompiler.withFieldJavadocProvider(fieldJavadocProvider);
+        if (this.fieldJavadocProvider != null) {
+            decompiler.withFieldJavadocProvider(this.fieldJavadocProvider);
         }
-        if (methodJavadocProvider != null) {
-            decompiler.withMethodJavadocProvider(methodJavadocProvider);
+        if (this.methodJavadocProvider != null) {
+            decompiler.withMethodJavadocProvider(this.methodJavadocProvider);
         }
 
-        decompiler.decompile(getInput().getAsFile().get(), getOutput().getAsFile().get(), options, libraries);
+        decompiler.decompile(this.getInput().getAsFile().get(), this.getOutput().getAsFile().get(), options, libraries);
     }
 
     @Internal
     public AbstractDecompiler getAbstractDecompiler() {
-        return decompiler.get().getProvider().provide(getProject());
-    }
-
-    @Input
-    public Property<Decompilers> getDecompiler() {
-        return decompiler;
-    }
-
-    @Optional
-    @Input
-    public Map<String, Object> getDecompilerOptions() {
-        return decompilerOptions;
-    }
-
-    @Optional
-    @Input
-    public Property<FileCollection> getLibraries() {
-        return libraries;
-    }
-
-    public void setDecompilerOptions(Map<String, Object> decompilerOptions) {
-        this.decompilerOptions = decompilerOptions;
-    }
-
-    @InputFiles
-    public RegularFileProperty getInput() {
-        return input;
-    }
-
-    @OutputDirectory
-    public RegularFileProperty getOutput() {
-        return output;
+        return this.getDecompiler().get().getProvider().provide(this.getProject());
     }
 
     public void classJavadocProvider(ClassJavadocProvider provider) {
-        classJavadocProvider = provider;
+        this.classJavadocProvider = provider;
     }
 
     public void fieldJavadocProvider(FieldJavadocProvider provider) {
-        fieldJavadocProvider = provider;
+        this.fieldJavadocProvider = provider;
     }
 
     public void methodJavadocProvider(MethodJavadocProvider provider) {
-        methodJavadocProvider = provider;
+        this.methodJavadocProvider = provider;
     }
 }
