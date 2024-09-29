@@ -38,7 +38,7 @@ import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
-import quilt.internal.util.PropertyUtil;
+import quilt.internal.util.ProviderUtil;
 
 public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask {
     @OutputFile
@@ -59,9 +59,9 @@ public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask
     public void addProposedMappings() throws Exception {
         this.getLogger().lifecycle(":seeking auto-mappable entries");
 
-        final Path input = PropertyUtil.getPath(this.getInputMappings());
-        final Path output = PropertyUtil.getPath(this.getOutputMappings());
-        final Path jar = PropertyUtil.getPath(this.getInputJar());
+        final Path input = ProviderUtil.getPath(this.getInputMappings());
+        final Path output = ProviderUtil.getPath(this.getOutputMappings());
+        final Path jar = ProviderUtil.getPath(this.getInputJar());
 
         addProposedMappings(input, output, this.fileConstants.tempDir.toPath(), jar, this.getEnigmaProfile().get());
     }

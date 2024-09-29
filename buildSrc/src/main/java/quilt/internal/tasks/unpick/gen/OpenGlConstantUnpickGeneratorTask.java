@@ -22,7 +22,10 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.MapProperty;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -34,10 +37,8 @@ import org.quiltmc.launchermeta.version.v1.Library;
 import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
-import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 
-public abstract class OpenGlConstantUnpickGenerator extends DefaultMappingsTask implements UnpickGen {
+public abstract class OpenGlConstantUnpickGeneratorTask extends DefaultMappingsTask implements UnpickGen {
     public static final String TASK_NAME = "openGlUnpickGen";
     public static final String OPEN_GL_REGISTRY =
         "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/xml/gl.xml";
@@ -52,16 +53,24 @@ public abstract class OpenGlConstantUnpickGenerator extends DefaultMappingsTask 
     @InputFile
     public abstract RegularFileProperty getVersionFile();
 
-    public OpenGlConstantUnpickGenerator() {
+    @InputFile
+    public abstract RegularFileProperty getPerVersionMappingsJar();
+
+    @Input
+    public abstract MapProperty<String, File> getArtifactsByUrl();
+
+    @OutputFile
+    public abstract RegularFileProperty getUnpickGlStateManagerDefinitions();
+
+    @OutputFile
+    public abstract RegularFileProperty getUnpickGlDefinitions();
+
+    public OpenGlConstantUnpickGeneratorTask() {
         super(Constants.Groups.UNPICK_GEN);
-        this.dependsOn(DownloadMinecraftLibrariesTask.TASK_NAME, MapPerVersionMappingsJarTask.TASK_NAME);
 
-        this.onlyIf(_task -> !this.fileConstants.unpickGlDefinitions.exists() ||
-                !this.fileConstants.unpickGlStateManagerDefinitions.exists());
-
-        this.getVersionFile().convention(() ->
-            this.getTaskNamed(DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class
-            ).getVersionFile().getAsFile().get()
+        this.onlyIf(unused ->
+            !this.getUnpickGlDefinitions().get().getAsFile().exists()
+                || !this.getUnpickGlStateManagerDefinitions().get().getAsFile().exists()
         );
     }
 
@@ -115,7 +124,8 @@ public abstract class OpenGlConstantUnpickGenerator extends DefaultMappingsTask 
                 .flatMap(Library.LibraryDownloads::getArtifact)
                 .map(DownloadableFile.PathDownload::getUrl)
                 .orElseThrow(() -> new IllegalStateException("Could not find lwjgl in version meta"));
-        final File lwjglFile = DownloadMinecraftLibrariesTask.getArtifactFile(this.fileConstants, lwjglUrl);
+        // final File lwjglFile = DownloadMinecraftLibrariesTask.getArtifactFile(this.fileConstants, lwjglUrl);
+        final File lwjglFile = this.getArtifactsByUrl().get().get(lwjglUrl);
 
         final Map<String, List<String>> constantToDefiningVersions = new HashMap<>();
         final Map<String, Map<Signature, List<String>>> functionToSignatureToDefiningVersions = new HashMap<>();
@@ -193,7 +203,7 @@ public abstract class OpenGlConstantUnpickGenerator extends DefaultMappingsTask 
         }
 
         {
-            final File unpickGl = this.fileConstants.unpickGlDefinitions;
+            final File unpickGl = this.getUnpickGlDefinitions().get().getAsFile();
             unpickGl.delete();
             unpickGl.createNewFile();
 
@@ -254,7 +264,7 @@ public abstract class OpenGlConstantUnpickGenerator extends DefaultMappingsTask 
         }
 
         {
-            final File unpickGlStateManager = this.fileConstants.unpickGlStateManagerDefinitions;
+            final File unpickGlStateManager = this.getUnpickGlStateManagerDefinitions().get().getAsFile();
             unpickGlStateManager.delete();
             unpickGlStateManager.createNewFile();
 
@@ -262,7 +272,7 @@ public abstract class OpenGlConstantUnpickGenerator extends DefaultMappingsTask 
             out.println("v2\n# This file was automatically generated, do not modify it\n");
 
             final Map<String, List<Signature>> methodToSignature = new HashMap<>();
-            try (ZipFile minecraftJar = new ZipFile(this.fileConstants.perVersionMappingsJar)) {
+            try (ZipFile minecraftJar = new ZipFile(this.getPerVersionMappingsJar().get().getAsFile())) {
                 final ClassReader reader = new ClassReader(
                     minecraftJar.getInputStream(minecraftJar.getEntry(GL_STATE_MANAGER_CLASS + ".class"))
                         .readAllBytes()

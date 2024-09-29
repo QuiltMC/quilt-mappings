@@ -14,7 +14,7 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
-import quilt.internal.util.PropertyUtil;
+import quilt.internal.util.ProviderUtil;
 
 public abstract class BuildMappingsTinyTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "buildMappingsTiny";
@@ -40,7 +40,7 @@ public abstract class BuildMappingsTinyTask extends DefaultMappingsTask {
         buildMappingsTiny(
             this.fileConstants.perVersionMappingsJar.toPath(),
             this.getMappings().get().getAsFile().toPath(),
-                PropertyUtil.getPath(this.getOutputMappings())
+                ProviderUtil.getPath(this.getOutputMappings())
         );
     }
 
