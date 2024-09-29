@@ -14,7 +14,7 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
-import quilt.internal.util.PropertyUtil;
+import quilt.internal.util.ProviderUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,8 +49,8 @@ public abstract class RemoveIntermediaryTask extends DefaultMappingsTask {
 
     @TaskAction
     public void removeIntermediary() throws Exception {
-        final Path mappingsTinyInput = PropertyUtil.getPath(this.getInput());
-        final Path output = PropertyUtil.getPath(this.getOutputMappings());
+        final Path mappingsTinyInput = ProviderUtil.getPath(this.getInput());
+        final Path output = ProviderUtil.getPath(this.getOutputMappings());
 
         this.getLogger().lifecycle(":removing intermediary");
         removeIntermediary(mappingsTinyInput, output);
