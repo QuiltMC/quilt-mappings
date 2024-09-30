@@ -1,11 +1,15 @@
 package quilt.internal;
 
+// TODO consider moving these to MappingsExtension
 public class Constants {
     public static final String MINECRAFT_VERSION = "1.21.2-pre3";
 
     public static final String MAPPINGS_NAME = "quilt-mappings";
 
     public static final String PER_VERSION_MAPPINGS_NAME = "hashed";
+
+    // TODO replace duplicates with this
+    public static final String INTERMEDIARY_MAPPINGS_NAME = "intermediary";
 
     public static final String MAPPINGS_VERSION = MINECRAFT_VERSION + "+build." + System.getenv().getOrDefault("BUILD_NUMBER", "local");
 

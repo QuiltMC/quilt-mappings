@@ -15,7 +15,7 @@ public final class ProviderUtil {
         return file.get().getAsFile().toPath();
     }
 
-    public static Provider<Directory> projectDirProviderOf(Project project, File directory) {
+    public static Provider<Directory> provideProjectDir(Project project, File directory) {
         return project.getLayout().dir(project.provider(() -> directory));
     }
 }
