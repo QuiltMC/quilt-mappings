@@ -4,10 +4,12 @@ import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
+import quilt.internal.MappingsPlugin;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
+import quilt.internal.tasks.setup.ExtractTinyMappingsTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,8 +35,9 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask {
         );
 
         this.getInput().convention(
-            this.getTaskNamed(DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class)
-                .getTinyFile()
+            this.getTaskNamed(
+                MappingsPlugin.EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class
+            ).getTinyFile()
         );
     }
 
