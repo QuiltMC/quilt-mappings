@@ -6,20 +6,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Function;
 
-import static quilt.internal.MappingsPlugin.INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME;
-
 public abstract class MergeTinyV2Task extends AbstractHashedMergeTask {
     public static final String TASK_NAME = "mergeTinyV2";
-
-    public MergeTinyV2Task() {
-        super("merged2.tiny");
-        this.dependsOn(InvertPerVersionMappingsTask.TASK_NAME, "v2UnmergedMappingsJar");
-
-        this.getInput().convention(
-            this.getTaskNamed(INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, AddProposedMappingsTask.class)
-                .getOutputMappings()
-        );
-    }
 
     @VisibleForTesting
     public static void mergeMappings(

@@ -24,7 +24,7 @@ import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     @InputFile
-    protected abstract RegularFileProperty getInput();
+    public abstract RegularFileProperty getInput();
 
     @OutputFile
     public abstract RegularFileProperty getOutputMappings();
@@ -32,16 +32,12 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     protected final String mergeName;
     protected final String fillName;
 
-    public AbstractTinyMergeTask(String outputMappings, String mergeName) {
-        this(outputMappings, mergeName, mergeName);
+    public AbstractTinyMergeTask(String mergeName) {
+        this(mergeName, mergeName);
     }
 
-    public AbstractTinyMergeTask(String outputMappings, String mergeName, String fillName) {
+    public AbstractTinyMergeTask(String mergeName, String fillName) {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        this.getOutputMappings().convention(() -> new File(this.fileConstants.buildDir, outputMappings));
-        this.getOutputs().file(this.getOutputMappings());
-
-        this.getInput().convention(this.getProject().getObjects().fileProperty());
 
         this.mergeName = mergeName;
         this.fillName = fillName;
