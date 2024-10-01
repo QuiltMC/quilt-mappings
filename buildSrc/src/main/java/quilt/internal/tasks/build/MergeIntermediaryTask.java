@@ -2,16 +2,14 @@ package quilt.internal.tasks.build;
 
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
+
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFile;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
-import quilt.internal.MappingsPlugin;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
-import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
-import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
-import quilt.internal.tasks.setup.ExtractTinyMappingsTask;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -19,33 +17,19 @@ import java.util.List;
 public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask {
     public static final String TASK_NAME = "mergeIntermediary";
 
+    @InputFile
+    public abstract RegularFileProperty getMergedTinyMappings();
+
     public MergeIntermediaryTask() {
         super(
-            "mappings-intermediaryMerged.tiny",
-            "intermediary",
+            Constants.INTERMEDIARY_MAPPINGS_NAME,
             Constants.PER_VERSION_MAPPINGS_NAME
-        );
-        this.dependsOn(
-            CheckIntermediaryMappingsTask.TASK_NAME,
-            DownloadIntermediaryMappingsTask.TASK_NAME,
-            MergeTinyV2Task.TASK_NAME
-        );
-        this.onlyIf(task ->
-            this.getTaskNamed(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class).isPresent()
-        );
-
-        this.getInput().convention(
-            this.getTaskNamed(
-                MappingsPlugin.EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class
-            ).getTinyFile()
         );
     }
 
     @Override
     public void mergeMappings() throws Exception {
-        final File tinyInput = this.getTaskNamed(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class)
-            .getOutputMappings().get().getAsFile();
-        this.mergeMappings(tinyInput);
+        this.mergeMappings(this.getMergedTinyMappings().get().getAsFile());
     }
 
     @Override

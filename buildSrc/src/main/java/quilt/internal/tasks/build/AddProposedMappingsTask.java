@@ -1,7 +1,6 @@
 package quilt.internal.tasks.build;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -41,18 +40,17 @@ import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.util.ProviderUtil;
 
 public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask {
-    @OutputFile
-    public abstract RegularFileProperty getOutputMappings();
-
     @InputFile
     public abstract RegularFileProperty getInputJar();
 
     @InputFile
     public abstract RegularFileProperty getInputMappings();
 
+    @OutputFile
+    public abstract RegularFileProperty getOutputMappings();
+
     public AddProposedMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        this.getOutputMappings().convention(() -> new File(this.fileConstants.buildDir, this.getName() + ".tiny"));
     }
 
     @TaskAction
