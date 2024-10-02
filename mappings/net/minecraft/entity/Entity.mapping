@@ -343,8 +343,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_gmlierig setBodyYaw (F)V
 		ARG 1 bodyYaw
 	METHOD m_gmmuescl getRenderDistanceMultiplier ()D
-	METHOD m_goqphzpp isInvulnerableTo (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
-		ARG 1 damageSource
 	METHOD m_gortryza tickInVoid ()V
 	METHOD m_gperiimb setRotation (FF)V
 		ARG 1 yaw
@@ -380,9 +378,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 destX
 		ARG 3 destY
 		ARG 5 destZ
-	METHOD m_hmduabhp dropItem (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_uqpzijng;
-		ARG 1 item
-		ARG 2 yOffset
 	METHOD m_hnfpqqwz getFluidHeight (Lnet/minecraft/unmapped/C_ednuhnnn;)D
 		ARG 1 tag
 	METHOD m_hpsqosvu setVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;)V
@@ -427,12 +422,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_imqrqpcf getRotationVec (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 tickDelta
 	METHOD m_iohdoxun teleportPassengers ()V
-	METHOD m_iqvzwgkr canModifyAt (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 1 world
+	METHOD m_iqvzwgkr canModifyAt (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 2 pos
 	METHOD m_iseshnfi isSpectator ()Z
-	METHOD m_iumntaeg dropStack (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_uqpzijng;
-		ARG 1 stack
 	METHOD m_iznakrow removeFromDimension ()V
 	METHOD m_izrsdktf handleFallDamage (FFLnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		ARG 1 fallDistance
@@ -527,7 +519,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_migwxxyu setOnGround (ZZLnet/minecraft/unmapped/C_vgpupfxx;)V
 	METHOD m_mnshvqhc getLerpedEyePos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 tickDelta
-	METHOD m_mrxmgxtb kill ()V
+	METHOD m_mrxmgxtb kill (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_mtipwdbc removeClickEvents (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 textComponent
 	METHOD m_muwkisky playSwimSound (F)V
@@ -664,8 +656,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_qoreltrp getFreezingScale ()F
 	METHOD m_qpmhbrns extinguishWithEffects ()V
 	METHOD m_qqdihtpc shouldSetPositionOnLoad ()Z
-	METHOD m_qshpzohi dropItem (Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_uqpzijng;
-		ARG 1 item
 	METHOD m_qufdccav onExploded (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
 	METHOD m_qvezifat isDescending ()Z
@@ -705,8 +695,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_sciubbmh getStandingEyeHeight ()F
 	METHOD m_sdtijuxq getPacketPositionCodec ()Lnet/minecraft/unmapped/C_kfofqpqr;
 	METHOD m_sflppqpo limitFallDistance ()V
-	METHOD m_sfrpnqnb hasPermissionLevel (I)Z
-		ARG 1 permissionLevel
 	METHOD m_shlbgxdt saveSelfNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
 		ARG 1 nbt
 	METHOD m_smbujbsa discard ()V
@@ -721,7 +709,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 movement
 	METHOD m_swzplugo canStartRiding (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
-	METHOD m_szxeksnh damage (Lnet/minecraft/unmapped/C_sbxfkpyv;F)Z
+	METHOD m_szxeksnh damage (Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 		ARG 1 source
 		ARG 2 amount
 	METHOD m_tansqdcm shouldPlayAmethystChimeStepSound (Lnet/minecraft/unmapped/C_txtbiemp;)Z
@@ -858,7 +846,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
-	METHOD m_wcqwgwbx getPermissionLevel ()I
 	METHOD m_wczujasu canFreeze ()Z
 	METHOD m_wfjjffoz emitGameEvent (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 event
@@ -883,9 +870,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 original
 	METHOD m_wtbkyvms removePassenger (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 passenger
-	METHOD m_wtzjdmqq dropStack (Lnet/minecraft/unmapped/C_sddaxwyk;F)Lnet/minecraft/unmapped/C_uqpzijng;
-		ARG 1 stack
-		ARG 2 yOffset
 	METHOD m_wwyehasy updatePoseAndDimensions ()V
 	METHOD m_wzcmdoil isTeamPlayer (Lnet/minecraft/unmapped/C_qgtzypup;)Z
 		ARG 1 team
@@ -975,10 +959,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_zjgainuo updateTrackedHeadRotation (FI)V
 		ARG 1 yaw
 		ARG 2 interpolationSteps
-	METHOD m_zlfbgvdy getCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
-		COMMENT Creates a command source which represents this entity.
-		COMMENT
-		COMMENT @return the created command source
 	METHOD m_zoivpnyj getAttachments ()Lnet/minecraft/unmapped/C_pubtmkke;
 	METHOD m_zrismnrd checkWaterState ()V
 	CLASS C_aobkcgmf PositionUpdater

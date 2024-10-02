@@ -167,6 +167,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 block
+		ARG 5 orientation
 		ARG 6 notify
 	METHOD m_umbsjste rotate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_txtbiemp;
 		COMMENT Applies a block rotation to a block state.
@@ -227,8 +228,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 3 pos
 		ARG 4 context
 	CLASS C_eibemhky AbstractBlockState
-		FIELD f_biaogsvo FULL_CULLING_FACES [Lnet/minecraft/unmapped/C_zscvhwbd;
-		FIELD f_bvttwnii EMPTY_CULLING_FACES [Lnet/minecraft/unmapped/C_zscvhwbd;
+		FIELD f_biaogsvo FULL_BLOCK_OCCLUSION_SHAPES [Lnet/minecraft/unmapped/C_zscvhwbd;
+		FIELD f_bsbhmsca cullingShape Lnet/minecraft/unmapped/C_zscvhwbd;
+		FIELD f_bvttwnii EMPTY_OCCLUSION_SHAPES [Lnet/minecraft/unmapped/C_zscvhwbd;
 		FIELD f_ciiuhosx opaque Z
 		FIELD f_cmbiwnda hasSidedTransparency Z
 		FIELD f_gbcdxrgd DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
@@ -238,6 +240,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_lqzypovm spawnsDustParticles Z
 		FIELD f_mkfwgndk solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_nijrkoes emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+		FIELD f_nsclhbdi opacity I
 		FIELD f_ochxyzpr solid Z
 		FIELD f_omahusur liquid Z
 		FIELD f_rmmimkow replaceable Z
@@ -249,6 +252,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_vskisdzk postProcessPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_wknecqnz luminance I
 		FIELD f_wvbmkgls suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+		FIELD f_xogzmbzi isTransparent Z
 		FIELD f_xwxdktuf hasRandomTicks Z
 		FIELD f_xxewnzdk opaqueFullCube Z
 		FIELD f_ycbjvypj cullingFaces [Lnet/minecraft/unmapped/C_zscvhwbd;
@@ -257,6 +261,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_zzuoeazs instrument Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD m_aeqyhmrr neighborUpdate (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ctatbkvy;Z)V
 			ARG 2 pos
+			ARG 4 orientation
 			ARG 5 notify
 		METHOD m_alvmezvc getInstrument ()Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD m_aoahmjkt getSoundGroup ()Lnet/minecraft/unmapped/C_aevintex;
@@ -326,6 +331,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT {@return whether this block state is an instance of the given block holder}
 			ARG 1 block
 				COMMENT the block holder to match
+		METHOD m_fpkvjpml ([Lnet/minecraft/unmapped/C_zscvhwbd;)V
+			ARG 0 directions
 		METHOD m_fuqgdrck isOf (Lnet/minecraft/unmapped/C_mmxmpdoq;)Z
 			COMMENT {@return whether this block state is an instance of the given block}
 			ARG 1 block
@@ -396,6 +403,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 direction
 		METHOD m_pobwdefx exceedsCube ()Z
 		METHOD m_pppprjpr isTransparent ()Z
+		METHOD m_ptlyqoli ([Lnet/minecraft/unmapped/C_zscvhwbd;)V
+			ARG 0 directions
 		METHOD m_pvjmhzzb getOpacity ()I
 		METHOD m_qcyiqint hasComparatorOutput ()Z
 		METHOD m_qilylxum onUse (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
