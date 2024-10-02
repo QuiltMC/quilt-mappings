@@ -53,7 +53,9 @@ public abstract class DecompileTask extends DefaultMappingsTask {
 
     @TaskAction
     public void decompile() {
-        final Map<String, Object> options = this.getDecompilerOptions().getOrElse(new HashMap<>());
+        // mapping to HashMap is required; the unmapped Map is unmodifiable and VineflowerDecompiler needs to modify it
+        // this issue occurred for decompileTargetVineflower
+        final Map<String, Object> options = this.getDecompilerOptions().map(HashMap::new).getOrElse(new HashMap<>());
 
         final Collection<File> libraries = this.getLibraries().<Collection<File>>map(FileCollection::getFiles)
             .getOrElse(Collections.emptyList());
@@ -73,6 +75,7 @@ public abstract class DecompileTask extends DefaultMappingsTask {
         decompiler.decompile(this.getInput().getAsFile().get(), this.getOutput().getAsFile().get(), options, libraries);
     }
 
+    // TODO see if this can use a BuildService
     @Internal
     public AbstractDecompiler getAbstractDecompiler() {
         return this.getDecompiler().get().getProvider().provide(this.getProject());

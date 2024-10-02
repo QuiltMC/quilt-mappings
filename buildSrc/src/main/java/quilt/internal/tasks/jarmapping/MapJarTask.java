@@ -2,7 +2,9 @@ package quilt.internal.tasks.jarmapping;
 
 import java.util.Map;
 
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
@@ -17,13 +19,16 @@ public abstract class MapJarTask extends DefaultMappingsTask {
             "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
     );
     @InputFile
-    protected abstract RegularFileProperty getInputJar();
+    public abstract RegularFileProperty getInputJar();
 
     @InputFile
-    protected abstract RegularFileProperty getMappingsFile();
+    public abstract RegularFileProperty getMappingsFile();
+
+    @InputDirectory
+    public abstract DirectoryProperty getLibrariesDir();
 
     @OutputFile
-    protected abstract RegularFileProperty getOutputJar();
+    public abstract RegularFileProperty getOutputJar();
 
     private final String from, to;
 
@@ -38,10 +43,10 @@ public abstract class MapJarTask extends DefaultMappingsTask {
         this.getLogger().lifecycle(":mapping minecraft from " + this.from + " to " + this.to);
         final Map<String, String> additionalMappings = this.getAdditionalMappings();
         JarRemapper.mapJar(
-            this.getOutputJar().getAsFile().get(),
-            this.getInputJar().getAsFile().get(),
+            this.getOutputJar().get().getAsFile(),
+            this.getInputJar().get().getAsFile(),
             this.getMappingsFile().get().getAsFile(),
-            this.fileConstants.libraries,
+            this.getLibrariesDir().get().getAsFile(),
             this.from, this.to,
             builder -> builder.withMappings(out -> additionalMappings.forEach(out::acceptClass))
         );

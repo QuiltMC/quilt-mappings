@@ -11,6 +11,11 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class MappingsExtension {
+    // TODO see if this can use a BuildService
+    /**
+     * {@link MappingsPlugin} configures all
+     * {@link quilt.internal.tasks.EnigmaProfileConsumingTask EnigmaProfileConsumingTask}s to use this profile.
+     */
     public final Provider<EnigmaProfile> enigmaProfile;
 
     private final FileConstants fileConstants;

@@ -8,6 +8,7 @@ import org.gradle.api.file.RegularFile;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.NotNull;
+import quilt.internal.decompile.Decompilers;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.tasks.build.AddProposedMappingsTask;
 import quilt.internal.tasks.build.BuildMappingsTinyTask;
@@ -20,10 +21,18 @@ import quilt.internal.tasks.build.MergeTinyTask;
 import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.build.TinyJarTask;
+import quilt.internal.tasks.decompile.DecompileTask;
 import quilt.internal.tasks.diff.CheckTargetVersionExistsTask;
 import quilt.internal.tasks.diff.CheckUnpickVersionsMatchTask;
+import quilt.internal.tasks.diff.DecompileTargetTask;
 import quilt.internal.tasks.diff.DownloadTargetMappingJarTask;
+import quilt.internal.tasks.diff.ExtractTargetMappingJarTask;
 import quilt.internal.tasks.diff.RemapTargetMinecraftJarTask;
+import quilt.internal.tasks.diff.RemapTargetUnpickDefinitionsTask;
+import quilt.internal.tasks.diff.TargetVersionConsumingTask;
+import quilt.internal.tasks.diff.UnpickTargetJarTask;
+import quilt.internal.tasks.diff.UnpickVersionsMatchConsumingTask;
+import quilt.internal.tasks.jarmapping.MapJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.tasks.lint.DownloadDictionaryFileTask;
@@ -41,9 +50,12 @@ import quilt.internal.tasks.setup.ExtractTinyMappingsTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask;
+import quilt.internal.tasks.unpick.UnpickJarTask;
 import quilt.internal.tasks.unpick.gen.OpenGlConstantUnpickGeneratorTask;
+import quilt.internal.util.MappingsJavadocProvider;
 
 import java.io.File;
+import java.nio.file.Path;
 
 import static quilt.internal.util.ProviderUtil.provideProjectDir;
 
@@ -53,6 +65,12 @@ public abstract class MappingsPlugin implements Plugin<Project> {
     public static final String DOWNLOAD_PER_VERSION_MAPPINGS_TASK_NAME = "downloadPerVersionMappings";
     public static final String EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME = "extractTinyPerVersionMappings";
     public static final String EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME = "extractTinyIntermediaryMappings";
+
+    // TODO probably move to FileConstants
+    public static final String TARGET_MAPPINGS_DIR = ".gradle/targets";
+
+    private static final String QUILT_MAPPINGS_PREFIX = "quilt-mappings-";
+    public static final String DECOMPILE_TARGET_VINEFLOWER_TASK_NAME = "decompileTargetVineflower";
 
     public static Provider<RegularFile> provideMappingsDestFile(
         Provider<Directory> destDir, String mappingsName, String fileExt
@@ -122,7 +140,7 @@ public abstract class MappingsPlugin implements Plugin<Project> {
             }
         );
 
-        final var extractServerJarTask = tasks.register(
+        final var extractServerJar = tasks.register(
             ExtractServerJarTask.TASK_NAME, ExtractServerJarTask.class,
             task -> {
                 task.getServerBootstrapJar().convention(
@@ -136,13 +154,15 @@ public abstract class MappingsPlugin implements Plugin<Project> {
             }
         );
 
-        tasks.register(MergeJarsTask.TASK_NAME, MergeJarsTask.class, task -> {
-            task.getClientJar().convention(downloadMinecraftJars.get().getClientJar());
-            task.getServerJar().convention(extractServerJarTask.flatMap(ExtractServerJarTask::getServerJar));
+        final var mergeJars = tasks.register(MergeJarsTask.TASK_NAME, MergeJarsTask.class, task -> {
+            task.getClientJar().convention(downloadMinecraftJars.flatMap(DownloadMinecraftJarsTask::getClientJar));
+            task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getServerJar));
 
             // TODO see if output jars like this can all go in a directory (build/minecraftJars/?)
-            task.getMergedFile().convention(() -> project.file(Constants.MINECRAFT_VERSION + "-merged.jar"));
+            final File mergedFile = project.file(Constants.MINECRAFT_VERSION + "-merged.jar");
+            task.getMergedFile().convention(() -> mergedFile);
         });
+
         final var downloadMinecraftLibraries = tasks.register(
             DownloadMinecraftLibrariesTask.TASK_NAME, DownloadMinecraftLibrariesTask.class,
             task -> {
@@ -152,6 +172,12 @@ public abstract class MappingsPlugin implements Plugin<Project> {
                 task.getLibrariesDir().convention(provideProjectDir(project, ext.getFileConstants().libraries));
             }
         );
+
+        tasks.withType(MapJarTask.class).configureEach(task -> {
+            task.getLibrariesDir().convention(
+                downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getLibrariesDir)
+            );
+        });
 
         final var downloadPerVersionMappings = tasks.register(
             DOWNLOAD_PER_VERSION_MAPPINGS_TASK_NAME, DownloadMappingsTask.class,
@@ -164,7 +190,8 @@ public abstract class MappingsPlugin implements Plugin<Project> {
                 );
             }
         );
-        tasks.register(
+
+        final var extractTinyPerVersionMappings = tasks.register(
             EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
             task -> {
                 task.getJarFile().convention(downloadPerVersionMappings.flatMap(DownloadMappingsTask::getJarFile));
@@ -173,23 +200,39 @@ public abstract class MappingsPlugin implements Plugin<Project> {
                 );
             }
         );
+
         final var invertPerVersionMappings =
             tasks.register(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class);
+
         final var buildMappingsTiny = tasks.register(BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class);
+
+        final var mapPerVersionMappingsJar = tasks.register(
+            MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class,
+            task -> {
+                task.getInputJar().convention(mergeJars.flatMap(MergeJarsTask::getMergedFile));
+
+                task.getMappingsFile().convention(
+                    extractTinyPerVersionMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
+                );
+
+                task.getOutputJar().convention(() -> ext.getFileConstants().perVersionMappingsJar);
+            }
+        );
+
         final var insertAutoGeneratedMappings = tasks.register(
             INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME, AddProposedMappingsTask.class,
             task -> {
-                // TODO eliminate this
-                task.dependsOn(downloadPerVersionMappings);
-
-                task.getInputJar().convention(() -> ext.getFileConstants().perVersionMappingsJar);
+                task.getInputJar().convention(
+                    mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+                );
 
                 task.getInputMappings().convention(buildMappingsTiny.flatMap(BuildMappingsTinyTask::getOutputMappings));
 
                 task.getOutputMappings().convention(() ->
                     new File(ext.getFileConstants().buildDir, INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME + ".tiny")
-            );
-        });
+                );
+            }
+        );
 
         tasks.register(
             MergeTinyTask.TASK_NAME, MergeTinyTask.class,
@@ -203,6 +246,7 @@ public abstract class MappingsPlugin implements Plugin<Project> {
                 task.getOutputMappings().convention(() -> new File(ext.getFileConstants().buildDir, "mappings.tiny"));
             }
         );
+
         final var mergeTinyV2 = tasks.register(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class, task -> {
             // TODO eliminate this
             task.dependsOn("v2UnmergedMappingsJar");
@@ -217,27 +261,42 @@ public abstract class MappingsPlugin implements Plugin<Project> {
 
             task.getOutputMappings().convention(() -> new File(ext.getFileConstants().buildDir, "merged2.tiny"));
         });
+
         tasks.register(TinyJarTask.TASK_NAME, TinyJarTask.class);
+
         tasks.register(CompressTinyTask.TASK_NAME, CompressTinyTask.class);
+
         tasks.register(DropInvalidMappingsTask.TASK_NAME, DropInvalidMappingsTask.class);
 
-        tasks.register(MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class);
-        tasks.register(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class);
+        tasks.register(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class, task -> {
+            // TODO eliminate this
+            task.dependsOn("unpickHashedJar");
+
+            // TODO make this take the output of unpickHashedJar
+            task.getInputJar().convention(() -> ext.getFileConstants().unpickedJar);
+            task.getMappingsFile().convention(
+                insertAutoGeneratedMappings.flatMap(AddProposedMappingsTask::getOutputMappings)
+            );
+
+            task.getOutputJar().convention(() -> ext.getFileConstants().namedJar);
+        });
 
         tasks.register(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class);
+
         tasks.register(RemapUnpickDefinitionsTask.TASK_NAME, RemapUnpickDefinitionsTask.class);
+
         tasks.register(OpenGlConstantUnpickGeneratorTask.TASK_NAME, OpenGlConstantUnpickGeneratorTask.class, task -> {
-            // TODO eliminate this
-            task.dependsOn(MapPerVersionMappingsJarTask.TASK_NAME);
+            task.getVersionFile().convention(
+                downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getVersionFile)
+            );
 
-            task.getVersionFile()
-                .convention(downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getVersionFile));
+            task.getPerVersionMappingsJar().convention(
+                mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+            );
 
-            task.getPerVersionMappingsJar().convention(() -> ext.getFileConstants().perVersionMappingsJar);
-
-            // TODO make sure this works even after MapPerVersionMappingsJarTask is updated
-            task.getArtifactsByUrl()
-                .convention(downloadMinecraftLibraries.flatMap(downloadTask -> downloadTask.artifactsByUrl));
+            task.getArtifactsByUrl().convention(
+                downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getArtifactsByUrl)
+            );
 
             task.getUnpickGlStateManagerDefinitions().convention(() ->
                 ext.getFileConstants().unpickGlStateManagerDefinitions
@@ -247,8 +306,11 @@ public abstract class MappingsPlugin implements Plugin<Project> {
         });
 
         tasks.register(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
+
         tasks.register(DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class);
+
         final var mappingLint = tasks.register(MappingLintTask.TASK_NAME, MappingLintTask.class);
+
         tasks.register(FindDuplicateMappingFilesTask.TASK_NAME, FindDuplicateMappingFilesTask.class,
             task -> {
                 task.getMappingDirectory().convention(mappingLint.get().getMappingDirectory());
@@ -258,6 +320,7 @@ public abstract class MappingsPlugin implements Plugin<Project> {
 
         final var checkIntermediaryMappings =
             tasks.register(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class);
+
         final var downloadIntermediaryMappings = tasks.register(
             DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class,
             task -> {
@@ -272,6 +335,7 @@ public abstract class MappingsPlugin implements Plugin<Project> {
                 task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
             }
         );
+
         final var extractTinyIntermediaryMappings = tasks.register(
             EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
             task -> {
@@ -281,6 +345,7 @@ public abstract class MappingsPlugin implements Plugin<Project> {
                 );
             }
         );
+
         tasks.register(
             MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class,
             task -> {
@@ -297,11 +362,150 @@ public abstract class MappingsPlugin implements Plugin<Project> {
                 );
             }
         );
+
         tasks.register(RemoveIntermediaryTask.TASK_NAME, RemoveIntermediaryTask.class);
 
-        tasks.register(CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class);
-        tasks.register(DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class);
-        tasks.register(CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class);
-        tasks.register(RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class);
+        final var checkTargetVersionExists = tasks.register(
+            CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class,
+            task -> {
+                task.outputsNeverUpToDate();
+                task.getMetaFile().convention(() -> new File(
+                    ext.getFileConstants().cacheFilesMinecraft,
+                    QUILT_MAPPINGS_PREFIX + Constants.MINECRAFT_VERSION + ".json"
+                ));
+            }
+        );
+
+        tasks.withType(TargetVersionConsumingTask.class).configureEach(task -> {
+            // TODO temporary, until CheckTargetVersionExistsTask is converted to a BuildService
+            task.dependsOn(checkTargetVersionExists);
+
+            task.getTargetVersion().convention(
+                checkTargetVersionExists.flatMap(CheckTargetVersionExistsTask::getTargetVersion)
+            );
+
+            task.onlyIf(unused -> task.getTargetVersion().isPresent());
+        });
+
+        final var downloadTargetMappingsJar = tasks.register(
+            DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class,
+            task -> {
+                task.getTargetUnpickConstantsFile().convention(task.provideVersionedProjectFile(version ->
+                    Path.of(TARGET_MAPPINGS_DIR, QUILT_MAPPINGS_PREFIX + version + "-constants.jar")
+                ));
+
+                task.getTargetJar().convention(task.provideVersionedProjectFile(version ->
+                    Path.of(MappingsPlugin.TARGET_MAPPINGS_DIR, "quilt-mappings-" + version + "-v2.jar")
+                ));
+            }
+        );
+
+        final var extractTargetMappingsJar = tasks.register(
+            ExtractTargetMappingJarTask.TASK_NAME, ExtractTargetMappingJarTask.class,
+            task -> {
+                task.getTargetJar().convention(
+                    downloadTargetMappingsJar.flatMap(DownloadTargetMappingJarTask::getTargetJar)
+                );
+                task.getExtractionDest().convention(task.provideVersionedProjectDir(version ->
+                    Path.of(MappingsPlugin.TARGET_MAPPINGS_DIR, "quilt-mappings-" + version)
+                ));
+            }
+        );
+
+        final var checkUnpickVersionsMatch = tasks.register(
+            CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class,
+            task -> {
+                task.getUnpickJson().convention(
+                    extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
+                        .map(dest -> dest.dir("extras").file("unpick.json"))
+                );
+            }
+        );
+
+        tasks.withType(UnpickVersionsMatchConsumingTask.class).configureEach(task -> {
+            // TODO temporary, until CheckUnpickVersionsMatchTask is converted to a BuildService
+            task.dependsOn(checkUnpickVersionsMatch);
+
+            task.getUnpickVersionsMatch().convention(
+                checkUnpickVersionsMatch.flatMap(CheckUnpickVersionsMatchTask::isMatch)
+            );
+
+            task.onlyIf(unused -> task.getUnpickVersionsMatch().getOrElse(false));
+        });
+
+        final var remapTargetUnpickDefinitions = tasks.register(
+            RemapTargetUnpickDefinitionsTask.TASK_NAME, RemapTargetUnpickDefinitionsTask.class,
+            task -> {
+                task.getInput().convention(
+                    extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
+                        .map(dest -> dest.dir("extras").file("definitions.unpick"))
+                );
+
+                task.getMappings().convention(
+                    extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
+                        .map(dest -> dest.dir("mappings").file("mappings.tiny"))
+                );
+
+                task.getOutput().convention(task.provideVersionedProjectFile(version ->
+                    Path.of(TARGET_MAPPINGS_DIR, QUILT_MAPPINGS_PREFIX + version + "remapped-unpick.unpick")
+                ));
+            }
+        );
+
+        final var unpickTargetJar = tasks.register(UnpickTargetJarTask.TASK_NAME, UnpickTargetJarTask.class, task -> {
+            task.getInputFile().convention(
+                mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+            );
+
+            task.getUnpickDefinition().convention(
+                remapTargetUnpickDefinitions.flatMap(RemapTargetUnpickDefinitionsTask::getOutput)
+            );
+
+            task.getUnpickConstantsJar().convention(
+                downloadTargetMappingsJar.flatMap(DownloadTargetMappingJarTask::getTargetUnpickConstantsFile)
+            );
+
+            task.getOutputFile().convention(task.provideVersionedProjectFile(version ->
+                Path.of(TARGET_MAPPINGS_DIR, QUILT_MAPPINGS_PREFIX + version + "-unpicked.jar")
+            ));
+        });
+
+        final var remapTargetMinecraftJar = tasks.register(
+            RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class,
+            task -> {
+                task.getInputJar().convention(unpickTargetJar.flatMap(UnpickTargetJarTask::getOutputFile));
+
+                task.getMappingsFile().convention(
+                    extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
+                        .map(dest -> dest.dir("mappings").file("mappings.tiny"))
+                );
+
+                task.getOutputJar().convention(task.provideVersionedProjectFile(version ->
+                    Path.of(TARGET_MAPPINGS_DIR, QUILT_MAPPINGS_PREFIX + version + "-named.jar")
+                ));
+            }
+        );
+
+        // TODO there was a non-fatal exception error logged by this a few times that I can't reproduce
+        //  It mentioned jetbrains, so it might have just been intellij being iffy
+        //  It was a FileSystemAlreadyExistsException
+        tasks.register(DECOMPILE_TARGET_VINEFLOWER_TASK_NAME, DecompileTargetTask.class, task -> {
+            task.getDecompiler().convention(Decompilers.VINEFLOWER);
+
+            task.getNamespace().convention("named");
+
+            task.getInput().convention(remapTargetMinecraftJar.flatMap(RemapTargetMinecraftJarTask::getOutputJar));
+
+            task.getLibraries().convention(
+                project.files(project.getConfigurations().named("decompileClasspath"))
+            );
+
+            task.getTargetMappingsFile().convention(
+                extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
+                    .map(dest -> dest.dir("mappings").file("mappings.tiny"))
+            );
+
+            task.getOutput().convention(() -> project.file("namedTargetSrc"));
+        });
     }
 }

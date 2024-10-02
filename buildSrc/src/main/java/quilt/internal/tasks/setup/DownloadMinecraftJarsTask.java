@@ -25,6 +25,7 @@ public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask {
     @InputFile
     public abstract RegularFileProperty getVersionFile();
 
+    // TODO put this in something Serializable or make this Transient
     @Internal("Fingerprinting is handled by getVersionFile")
     protected abstract Property<Version> getVersion();
 

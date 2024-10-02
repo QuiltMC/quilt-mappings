@@ -13,6 +13,13 @@ import java.util.stream.Stream;
 
 import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
 
+/**
+ * A task that takes an {@link EnigmaProfile} as input.
+ * <p>
+ * If {@link quilt.internal.MappingsPlugin MappingsPlugin} is applied, any {@code EnigmaProfileConsumingTask}s will use
+ * {@link quilt.internal.MappingsExtension MappingsExtension}'s
+ * {@link quilt.internal.MappingsExtension#enigmaProfile enigmaProfile} by default.
+ */
 public abstract class EnigmaProfileConsumingTask extends DefaultMappingsTask {
     @Internal(
         "An EnigmaProfile cannot be fingerprinted. " +
