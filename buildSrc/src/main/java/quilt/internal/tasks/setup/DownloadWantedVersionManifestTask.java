@@ -36,6 +36,7 @@ public abstract class DownloadWantedVersionManifestTask extends DefaultMappingsT
     @org.gradle.api.tasks.Optional
     protected abstract Property<String> getReleaseTime();
 
+    // TODO make WantedVersionConsumingTask interface for this
     @OutputFile
     public abstract RegularFileProperty getVersionFile();
 
