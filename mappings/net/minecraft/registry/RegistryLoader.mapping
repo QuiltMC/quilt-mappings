@@ -3,39 +3,86 @@ CLASS net/minecraft/unmapped/C_ratuauki net/minecraft/registry/RegistryLoader
 	FIELD f_jezobqyr SYNCED_REGISTRIES Ljava/util/List;
 	FIELD f_mbwjyulc WORLDGEN_REGISTRIES Ljava/util/List;
 	FIELD f_mwvwmgqu REGISTRATION_INFO_CACHE Ljava/util/function/Function;
+	FIELD f_ojcgnnbc KEY_COMPARATOR Ljava/util/Comparator;
 	FIELD f_ytrbmnwo DIMENSION_REGISTRIES Ljava/util/List;
-	METHOD m_bszcilsu printExceptions (Ljava/util/Map;)Lnet/minecraft/unmapped/C_zmbivxlv;
+	METHOD m_bszcilsu logAndCreateCrashException (Ljava/util/Map;)Lnet/minecraft/unmapped/C_zmbivxlv;
 		ARG 0 collectedExceptions
+	METHOD m_colxglbr (Ljava/util/Map;Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;)V
+		ARG 1 loader
+	METHOD m_dpiyppgl (Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)V
+		ARG 1 contentLoader
+		ARG 2 infoLookup
+	METHOD m_dzsznngh (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 0 entry
 	METHOD m_etwoconu loadFromManager (Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;Lnet/minecraft/unmapped/C_eexxncvi;Lcom/mojang/serialization/Decoder;Ljava/util/Map;)V
 		ARG 2 registry
 		ARG 3 elementDecoder
 		ARG 4 errors
+	METHOD m_gffqfamt (Ljava/util/Map;Lnet/minecraft/unmapped/C_ratuauki$C_qpshoosu;)Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;
+		ARG 1 registryData
+	METHOD m_gperoudv (Ljava/util/Map;Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;)V
+		ARG 1 contentLoader
+	METHOD m_guprgboh (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_ncpywfca;
+		ARG 0 entry
+	METHOD m_hozhswck (Ljava/lang/Boolean;)Lcom/mojang/serialization/Lifecycle;
+		ARG 0 unused
+	METHOD m_icshdwsu (Ljava/io/PrintWriter;Ljava/util/Map$Entry;)V
+		ARG 1 registryElementExceptions
 	METHOD m_iulkejcw createInfoForNewRegistry (Lnet/minecraft/unmapped/C_eexxncvi;)Lnet/minecraft/unmapped/C_piadqmzm$C_sznlrmbg;
 		ARG 0 registry
+	METHOD m_jqrxkesh load (Lnet/minecraft/unmapped/C_ratuauki$C_kprmzsuj;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+		ARG 0 loadingFunction
+		ARG 2 registryDatas
+	METHOD m_lcaitrsg (Ljava/util/Map;Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)V
+		ARG 1 lookup
+	METHOD m_lxzhrmte loadFromNetwork (Ljava/util/Map;Lnet/minecraft/unmapped/C_xadhkzfq;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+		ARG 0 entries
+		ARG 1 factory
 	METHOD m_mcjxwvrf createContext (Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;
-		ARG 0 registriesAndLoaders
+		ARG 0 lookups
+		ARG 1 contentLoaders
+	METHOD m_mhfvkskx (Lnet/minecraft/unmapped/C_ratuauki$C_kprmzsuj;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;)V
+		ARG 2 contentLoader
 	METHOD m_mzzokuhr loadElementFromResource (Lnet/minecraft/unmapped/C_eexxncvi;Lcom/mojang/serialization/Decoder;Lnet/minecraft/unmapped/C_piadqmzm;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_tuynegco;Lnet/minecraft/unmapped/C_jhxfjegj;)V
 		ARG 0 registry
 		ARG 1 decoder
 		ARG 2 ops
 		ARG 4 resource
+	METHOD m_nfxbkpmx (Ljava/util/Map;Lnet/minecraft/unmapped/C_xadhkzfq;Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)V
+		ARG 2 contentLoader
+		ARG 3 infoLookup
+	METHOD m_npgdgrqs createCrashException (Ljava/util/Map;)Lnet/minecraft/unmapped/C_zmbivxlv;
+		ARG 0 collectedExceptions
+	METHOD m_rbymmjgv (Ljava/io/PrintWriter;Ljava/util/Map$Entry;)V
+		ARG 1 elementException
 	METHOD m_rlsjdntz createInfoForContextRegistry (Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)Lnet/minecraft/unmapped/C_piadqmzm$C_sznlrmbg;
+		ARG 0 lookup
+	METHOD m_rxpksoew (Ljava/util/Optional;)Lnet/minecraft/unmapped/C_jhxfjegj;
+		ARG 0 pack
 	METHOD m_sqqlbqim loadFromNetwork (Ljava/util/Map;Lnet/minecraft/unmapped/C_xadhkzfq;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;Lnet/minecraft/unmapped/C_eexxncvi;Lcom/mojang/serialization/Decoder;Ljava/util/Map;)V
 		ARG 0 entries
 		ARG 1 factory
 		ARG 3 registry
 		ARG 4 elementDecoder
 		ARG 5 errors
+	METHOD m_vdmamojt loadFromResource (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/unmapped/C_wqxmvzdq$C_ggmzysrd;
+	METHOD m_xnajouwy logExceptions (Ljava/util/Map;)V
+		ARG 0 collectedExceptions
+	METHOD m_zgjrdisl (Ljava/lang/StringBuilder;Ljava/util/Map$Entry;)V
+		ARG 1 entry
 	CLASS C_kfdvqtiv ContentLoader
 		METHOD m_cclfkymr loadFromNetwork (Ljava/util/Map;Lnet/minecraft/unmapped/C_xadhkzfq;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)V
 		METHOD m_lvoknnbl loadFromResource (Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)V
 	CLASS C_kprmzsuj LoadingFunction
-		METHOD apply (Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)V
+		METHOD apply load (Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)V
 			ARG 1 loader
 			ARG 2 infoLookup
 	CLASS C_qpshoosu DecodingData
+		FIELD f_wwrfheei registry Lnet/minecraft/unmapped/C_xhhleach;
+		METHOD m_azjxntab registry ()Lnet/minecraft/unmapped/C_xhhleach;
 		METHOD m_qoqcvblw runWithData (Ljava/util/function/BiConsumer;)V
 			ARG 1 consumer
 		METHOD m_qxfeaogn createRegistryAndLoader (Lcom/mojang/serialization/Lifecycle;Ljava/util/Map;)Lnet/minecraft/unmapped/C_ratuauki$C_kfdvqtiv;
 			ARG 1 lifecycle
 			ARG 2 collectedExceptions
+	CLASS C_zhgblbig NetworkEntries

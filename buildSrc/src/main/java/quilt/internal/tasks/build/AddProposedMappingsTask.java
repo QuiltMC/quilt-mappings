@@ -2,19 +2,30 @@ package quilt.internal.tasks.build;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.stream.Stream;
 
+import org.gradle.api.GradleException;
+import org.gradle.api.file.FileCollection;
+import org.gradle.api.file.RegularFile;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFiles;
+import org.gradle.api.tasks.Optional;
+import org.jetbrains.annotations.NotNull;
 import org.quiltmc.enigma.api.Enigma;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import org.quiltmc.enigma.api.EnigmaProject;
+import org.quiltmc.enigma.api.service.JarIndexerService;
 import org.quiltmc.enigma.command.Command;
 import org.quiltmc.enigma.command.FillClassMappingsCommand;
 import org.quiltmc.enigma.command.CommandsUtil;
@@ -38,35 +49,63 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public class AddProposedMappingsTask extends DefaultMappingsTask {
+import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
+
+public abstract class AddProposedMappingsTask extends DefaultMappingsTask {
+    private static Path getPath(RegularFileProperty fileProperty) {
+        return fileProperty.map(RegularFile::getAsFile).map(File::toPath).get();
+    }
+
     @OutputFile
     public File outputMappings;
 
     @InputFile
-    private final Property<File> inputJar;
+    public abstract RegularFileProperty getInputJar();
 
     @InputFile
-    private final Property<File> inputMappings;
+    public abstract RegularFileProperty getInputMappings();
 
     @InputFile
-    private final Property<File> profile;
+    public abstract RegularFileProperty getProfile();
+
+    @Optional
+    @InputFiles
+    protected abstract Property<FileCollection> getSimpleTypeFieldNames();
 
     public AddProposedMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        outputMappings = new File(fileConstants.buildDir, getName() + ".tiny");
-        inputJar = getProject().getObjects().property(File.class);
-        inputMappings = getProject().getObjects().property(File.class);
-        profile = getProject().getObjects().property(File.class);
+        this.outputMappings = new File(fileConstants.buildDir, getName() + ".tiny");
+
+        this.getSimpleTypeFieldNames().set(
+            this.getProfile()
+                .map(RegularFile::getAsFile)
+                .map(File::toPath)
+                .map(profilePath -> {
+                    try {
+                        return this.getProject().files(
+                            EnigmaProfile.read(profilePath).getServiceProfiles(JarIndexerService.TYPE).stream()
+                                .flatMap(service -> service.getArgument(SIMPLE_TYPE_FIELD_NAMES_PATH).stream())
+                                .map(stringOrStrings -> stringOrStrings.mapBoth(Stream::of, Collection::stream))
+                                .flatMap(bothStringStreams ->
+                                    bothStringStreams.left().orElseGet(bothStringStreams::rightOrThrow)
+                                )
+                                .toList()
+                        );
+                    } catch (IOException e) {
+                        throw new GradleException("Failed to read enigma profile", e);
+                    }
+                })
+        );
     }
 
     @TaskAction
     public void addProposedMappings() throws Exception {
         getLogger().lifecycle(":seeking auto-mappable entries");
 
-        Path input = inputMappings.get().toPath();
+        Path input = getPath(this.getInputMappings());
         Path output = outputMappings.toPath();
-        Path jar = inputJar.get().toPath();
-        Path profilePath = profile.map(File::toPath).get();
+        Path jar = getPath(this.getInputJar());
+        Path profilePath = getPath(this.getProfile());
 
         addProposedMappings(input, output, fileConstants.tempDir.toPath(), jar, profilePath);
     }
@@ -203,17 +242,5 @@ public class AddProposedMappingsTask extends DefaultMappingsTask {
 
     public void setOutputMappings(File outputMappings) {
         this.outputMappings = outputMappings;
-    }
-
-    public Property<File> getInputJar() {
-        return inputJar;
-    }
-
-    public Property<File> getInputMappings() {
-        return inputMappings;
-    }
-
-    public Property<File> getProfile() {
-        return profile;
     }
 }

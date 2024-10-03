@@ -1,10 +1,11 @@
 CLASS net/minecraft/unmapped/C_vtbxyypo net/minecraft/registry/HolderLookup
-	METHOD m_cjhuibvn holders ()Ljava/util/stream/Stream;
+	METHOD m_cjhuibvn streamHolders ()Ljava/util/stream/Stream;
 	METHOD m_pgmbmohw streamTagKeys ()Ljava/util/stream/Stream;
 	METHOD m_rpikeuoc streamTags ()Ljava/util/stream/Stream;
 	METHOD m_vtchccnr streamElementKeys ()Ljava/util/stream/Stream;
 	CLASS C_drwjtlvl RegistryLookup
-		METHOD m_cplftviu matchesPredicate (Ljava/util/function/Predicate;)Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+		METHOD m_cplftviu withFilter (Ljava/util/function/Predicate;)Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+			COMMENT @return a view of this lookup with entries filtered by the passed {@code predicate}
 			ARG 1 predicate
 		METHOD m_kqnidhqe enabledIn (Lnet/minecraft/unmapped/C_czxxrbcp;)Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 			ARG 1 featureFlags
@@ -12,10 +13,21 @@ CLASS net/minecraft/unmapped/C_vtbxyypo net/minecraft/registry/HolderLookup
 			ARG 1 gatedObject
 		METHOD m_vhaoljfo getRegistryLifecycle ()Lcom/mojang/serialization/Lifecycle;
 		METHOD m_wgqigdhk getKey ()Lnet/minecraft/unmapped/C_xhhleach;
-		CLASS C_jyxfuyee Delegate
-			METHOD m_smgukdep lookup ()Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+		CLASS C_epoknvca
+			METHOD m_siwozrxd (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Z
+				ARG 1 holder
+			METHOD m_ysslswxl (Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Z
+				ARG 1 holder
+		CLASS C_jyxfuyee Delegating
+			METHOD m_smgukdep getDelegate ()Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 	CLASS C_etmlgbig Provider
 		METHOD m_dnidhibf create (Ljava/util/stream/Stream;)Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
 			ARG 0 lookups
-		METHOD m_pbceiquw streamRegistryKeys ()Ljava/util/stream/Stream;
+		METHOD m_hlpdjttt getLifecycle ()Lcom/mojang/serialization/Lifecycle;
+			COMMENT @return the {@link com.mojang.serialization.Lifecycle lifecycle} for this provider,
+			COMMENT determined by the least-stable lifecycle amongst its {@link #streamLookups lookups}
+		METHOD m_pbceiquw streamLookups ()Ljava/util/stream/Stream;
 		METHOD m_uwaazyzq createSerializationContext (Lcom/mojang/serialization/DynamicOps;)Lnet/minecraft/unmapped/C_piadqmzm;
+		METHOD m_vwprjgpp streamRegistryKeys ()Ljava/util/stream/Stream;
+		METHOD m_wwvmnchf (Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+			ARG 0 lookup
