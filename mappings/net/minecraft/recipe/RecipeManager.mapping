@@ -3,7 +3,24 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	COMMENT remainders. It is also integrated with a recipe loader, which loads recipes
 	COMMENT from data packs' JSON files.
 	FIELD f_hqaaykcp LOGGER Lorg/slf4j/Logger;
+	METHOD m_dsxpcpxk get (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+		COMMENT {@return a recipe with the given {@code id}, or empty if there is no such recipe}
+	METHOD m_hcqenhtt deserialize (Lnet/minecraft/unmapped/C_xhhleach;Lcom/google/gson/JsonObject;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_dscbrwbj;
+		COMMENT Reads a recipe from a JSON object.
+		COMMENT
+		COMMENT @implNote Even though a recipe's {@linkplain Recipe#getSerializer() serializer}
+		COMMENT is stored in a {@code type} field in the JSON format and referred so in this
+		COMMENT method, its registry has key {@code minecraft:root/minecraft:recipe_serializer}
+		COMMENT and is thus named.
+		COMMENT
+		COMMENT @throws com.google.gson.JsonParseException if the recipe JSON is invalid
+		COMMENT @return the read recipe
+		ARG 1 json
+			COMMENT the recipe JSON
+		ARG 2 lookupProvider
 	METHOD m_igyegyvq getFirstMatch (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_dscbrwbj;)Ljava/util/Optional;
+		ARG 1 type
+	METHOD m_jgeojtch get (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_dscbrwbj;
 		ARG 1 type
 	METHOD m_omtmmszf getFirstMatch (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/Optional;
 		ARG 1 type
@@ -15,3 +32,5 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 		COMMENT <p>The returned set does not update with the manager. Modifications to the
 		COMMENT returned set do not affect this manager.
 	CLASS C_bvtkxdyi CachedCheck
+		METHOD m_ltqsvwgf getFirstMatch (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_bdwnwhiu;)Ljava/util/Optional;
+			ARG 1 input
