@@ -103,6 +103,7 @@ import quilt.internal.tasks.build.TransformJarClassesTask
 import quilt.internal.tasks.decompile.DecompileTask
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask
 import quilt.internal.tasks.mappings.EnigmaMappingsTask
+import quilt.internal.tasks.mappings.EnigmaMappingsServerTask
 import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask
 import quilt.internal.tasks.unpick.UnpickJarTask
 import quilt.internal.util.MappingsJavadocProvider
@@ -183,6 +184,14 @@ task mappingsUnpicked(type: EnigmaMappingsTask, dependsOn: unpickHashedJar) {
 
 task mappings(type: EnigmaMappingsTask, dependsOn: "mapPerVersionMappingsJar") {
 	jarToMap.set mappings.fileConstants.perVersionMappingsJar
+}
+
+task mappingsUnpickedServer(type: EnigmaMappingsServerTask, dependsOn: unpickHashedJar) {
+	jarToMap.set unpickHashedJar.outputFile.get()
+}
+
+task mappingsServer(type: EnigmaMappingsServerTask, dependsOn: "mapPerVersionMappingsJar") {
+	jarToMap.set project.extensions.mappings.fileConstants.perVersionMappingsJar
 }
 
 // Only build jars for package infos if we need to actually expose stuff like annotation in the future.
