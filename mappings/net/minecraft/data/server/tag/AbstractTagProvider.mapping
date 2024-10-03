@@ -1,7 +1,7 @@
 CLASS net/minecraft/unmapped/C_zqlavbep net/minecraft/data/server/tag/AbstractTagProvider
 	FIELD f_bjnzkozm registryLoadFuture Ljava/util/concurrent/CompletableFuture;
 	FIELD f_dkneixhd pathResolver Lnet/minecraft/unmapped/C_ugkmwocs$C_ehniswvc;
-	FIELD f_geosnnbu key Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_geosnnbu registry Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_lubzhdwr tagBuilders Ljava/util/Map;
 	FIELD f_oiajybif tagLookupFuture Ljava/util/concurrent/CompletableFuture;
 	FIELD f_ppduqpro registryLookupFuture Ljava/util/concurrent/CompletableFuture;
@@ -14,7 +14,6 @@ CLASS net/minecraft/unmapped/C_zqlavbep net/minecraft/data/server/tag/AbstractTa
 	METHOD m_bitbfodv configure (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
 		ARG 1 lookup
 	METHOD m_dvcyjzus getOrCreateTagBuilder (Lnet/minecraft/unmapped/C_ednuhnnn;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
-		ARG 1 key
 	METHOD m_hwoaobva getTagLookupFuture ()Ljava/util/concurrent/CompletableFuture;
 	METHOD m_kjuqqirx getTagBuilder (Lnet/minecraft/unmapped/C_ednuhnnn;)Lnet/minecraft/unmapped/C_dgpijqhe;
 		ARG 1 key
@@ -23,22 +22,19 @@ CLASS net/minecraft/unmapped/C_zqlavbep net/minecraft/data/server/tag/AbstractTa
 		ARG 1 tagKey
 	METHOD m_zoqfcozb (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
 		ARG 1 lookupProvider
-	CLASS C_gojihseq ObjectBuilder
+	CLASS C_gojihseq ElementAdder
 		FIELD f_iepclmzl builder Lnet/minecraft/unmapped/C_dgpijqhe;
 		METHOD <init> (Lnet/minecraft/unmapped/C_dgpijqhe;)V
 			ARG 1 builder
 		METHOD m_ctewvair addOptional (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
-			ARG 1 id
 		METHOD m_cxnarzaz addTag (Lnet/minecraft/unmapped/C_ednuhnnn;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
-			ARG 1 key
-		METHOD m_mpsppbyn add (Ljava/util/List;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
-			ARG 1 keys
+		METHOD m_mpsppbyn addAll (Ljava/util/List;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
+			ARG 1 elements
 		METHOD m_nrwqjpbz add (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
-			ARG 1 key
+			ARG 1 element
 		METHOD m_nvcvrjhp addOptionalTag (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
-			ARG 1 id
-		METHOD m_qserlndq add ([Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
-			ARG 1 keys
+		METHOD m_qserlndq addAll ([Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_zqlavbep$C_gojihseq;
+			ARG 1 elements
 	CLASS C_wyxvvqqq TagLookup
 		METHOD contains (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 			ARG 1 key
