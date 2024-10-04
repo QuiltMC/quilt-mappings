@@ -473,6 +473,10 @@ public abstract class MappingsPlugin implements Plugin<Project> {
         final var remapTargetMinecraftJar = tasks.register(
             RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class,
             task -> {
+                // TODO temporary until CheckTargetVersionExists and CheckUnpickVersionsMatchTask
+                //  are converted to BuildService's
+                task.dependsOn(unpickTargetJar);
+
                 task.getInputJar().convention(unpickTargetJar.flatMap(UnpickTargetJarTask::getOutputFile));
 
                 task.getMappingsFile().convention(
