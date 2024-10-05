@@ -27,12 +27,12 @@ import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.tasks.unpick.gen.UnpickGen;
 import quilt.internal.util.UnpickUtil;
 
 public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "combineUnpickDefinitions";
 
+    // TODO convert this to a FileCollection
     @InputDirectory
     public abstract DirectoryProperty getInput();
 
@@ -44,8 +44,6 @@ public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
 
     public CombineUnpickDefinitionsTask() {
         super(Constants.Groups.UNPICK);
-
-        this.dependsOn(this.getProject().getTasks().withType(UnpickGen.class));
     }
 
     @TaskAction
@@ -64,6 +62,7 @@ public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
 
             final UnpickV2Writer writer = new UnpickV2Writer();
 
+            // TODO make this use a stream instead
             // Sort inputs to get reproducible outputs (also for testing)
             final List<File> files = new ArrayList<>(input);
             files.sort(Comparator.comparing(File::getName));
