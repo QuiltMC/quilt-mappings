@@ -48,16 +48,12 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     @OutputFile
     public abstract RegularFileProperty getOutput();
 
-    public RemapUnpickDefinitionsTask() {
-        super(Constants.Groups.UNPICK);
-
-        this.getInput().convention(
-            this.getTaskNamed(CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class).getOutput()
-        );
-    }
-
     @Inject
     protected abstract WorkerExecutor getWorkerExecutor();
+
+    public RemapUnpickDefinitionsTask() {
+        super(Constants.Groups.UNPICK);
+    }
 
     @TaskAction
     public void run() {
