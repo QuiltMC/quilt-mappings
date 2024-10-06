@@ -7,6 +7,8 @@ import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Internal;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import org.quiltmc.enigma.api.service.JarIndexerService;
+import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.QuiltMappingsPlugin;
 
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -16,9 +18,9 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
 /**
  * A task that takes an {@link EnigmaProfile} as input.
  * <p>
- * If {@link quilt.internal.MappingsPlugin MappingsPlugin} is applied, any {@code EnigmaProfileConsumingTask}s will use
- * {@link quilt.internal.MappingsExtension MappingsExtension}'s
- * {@link quilt.internal.MappingsExtension#enigmaProfile enigmaProfile} by default.
+ * If {@link QuiltMappingsPlugin MappingsPlugin} is applied, any {@code EnigmaProfileConsumingTask}s will use
+ * {@link QuiltMappingsExtension MappingsExtension}'s
+ * {@link QuiltMappingsExtension#enigmaProfile enigmaProfile} by default.
  */
 public abstract class EnigmaProfileConsumingTask extends DefaultMappingsTask {
     @Internal(
