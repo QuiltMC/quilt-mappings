@@ -7,6 +7,7 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
+import quilt.internal.QuiltMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import java.nio.file.Path;
  * <p>
  * A target version is a published Quilt Mappings version obtained from the Quilt maven.
  * <p>
- * If {@link quilt.internal.MappingsPlugin MappingsPlugin} is applied, any {@code TargetVersionConsumingTask}s
+ * If {@link QuiltMappingsPlugin MappingsPlugin} is applied, any {@code TargetVersionConsumingTask}s
  * will use {@value CheckTargetVersionExistsTask#TASK_NAME}'s
  * {@link CheckTargetVersionExistsTask#getTargetVersion() targetVersion} by default, and they'll only run if the
  * {@link #getTargetVersion() targetVersion} {@link Provider#isPresent() isPresent}.

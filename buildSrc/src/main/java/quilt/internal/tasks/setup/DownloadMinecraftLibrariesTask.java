@@ -132,7 +132,7 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
     /**
      * This is only populated after the task has run.
      * <p>
-     * It should only be accessed from other tasks' {@linkplain  TaskAction actions} and via
+     * It should only be accessed from other tasks' {@linkplain TaskAction actions} and via
      * {@linkplain MapProperty lazy} {@linkplain org.gradle.api.tasks.Input input}.
      */
     @Internal

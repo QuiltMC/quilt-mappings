@@ -1,3 +1,5 @@
+import quilt.internal.tasks.build.MappingsV2JarTask
+
 buildscript {
 	repositories {
 		maven {
@@ -29,13 +31,13 @@ plugins {
 	id 'java' // for constants, packages, javadoc
 	id 'maven-publish'
 	id 'org.cadixdev.licenser' version '0.6.1'
-	id "mappings-logic"
+	id "quilt-mappings"
 }
 
-mappings {
-	enigmaProfile = file('enigma_profile.json')
+quiltMappings {
+	enigmaProfileConfig = file('enigma/enigma_profile.json')
 
-	unpick = file('unpick/unpick.json')
+	unpickMeta = file('unpick/unpick.json')
 }
 
 combineUnpickDefinitions {
@@ -118,8 +120,8 @@ import quilt.internal.util.MappingsJavadocProvider
 // TODO consider moving cleanable things to build/ so this isn't necessary,
 //  or put them in .gradle/cleanable/ and only add that here (or MappingsPlugin)
 clean.doFirst {
-	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft
-	// , mappings.fileConstants.generatedUnpickDefinitions
+	delete quiltMappings.fileConstants.tempDir, quiltMappings.fileConstants.cacheFilesMinecraft
+	// , quiltMappings.fileConstants.generatedUnpickDefinitions
 }
 
 tasks.build.dependsOn "compressTiny", "tinyJar", "v2UnmergedMappingsJar", "v2MergedMappingsJar"
@@ -161,7 +163,7 @@ task mappingsUnpicked(type: EnigmaMappingsTask, dependsOn: unpickHashedJar) {
 }
 
 task mappings(type: EnigmaMappingsTask, dependsOn: "mapPerVersionMappingsJar") {
-	jarToMap.set mappings.fileConstants.perVersionMappingsJar
+	jarToMap.set quiltMappings.fileConstants.perVersionMappingsJar
 }
 
 task mappingsUnpickedServer(type: EnigmaMappingsServerTask, dependsOn: unpickHashedJar) {
@@ -169,23 +171,15 @@ task mappingsUnpickedServer(type: EnigmaMappingsServerTask, dependsOn: unpickHas
 }
 
 task mappingsServer(type: EnigmaMappingsServerTask, dependsOn: "mapPerVersionMappingsJar") {
-	jarToMap.set project.extensions.mappings.fileConstants.perVersionMappingsJar
+	jarToMap.set project.extensions.quiltMappings.fileConstants.perVersionMappingsJar
 }
 
 // Only build jars for package infos if we need to actually expose stuff like annotation in the future.
 
 build.dependsOn constantsJar, generatePackageInfoMappings
 
-task buildIntermediary {
-	dependsOn intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar
-
-	onlyIf {
-		return checkIntermediaryMappings.isPresent()
-	}
-}
-
 task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
-	jarFile = mappings.fileConstants.namedJar
+	jarFile = quiltMappings.fileConstants.namedJar
 	output = file(".gradle/temp/erased-classes/")
 
 	visitor(DraftsmanAdapterClassVisitor::new)
@@ -219,7 +213,7 @@ task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode])
 	input = eraseBytecode.output.asFile.get()
 	output = fakeSourceDir
 	decompiler = Decompilers.VINEFLOWER
-	libraries = files(mappings.fileConstants.libraries)
+	libraries = files(quiltMappings.fileConstants.libraries)
 	decompilerOptions = [
 			"rsy": "1", // remove synthetics
 			"dgs": "1", // decompile generic signatures
@@ -243,7 +237,7 @@ task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode])
 }
 
 task decompileVineflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
-	input.set mappings.fileConstants.namedJar
+	input.set quiltMappings.fileConstants.namedJar
 	output.set file("namedSrc")
 	decompiler = Decompilers.VINEFLOWER
 	libraries = files(configurations.decompileClasspath)
@@ -350,7 +344,7 @@ generatePackageInfoMappings {
 mappingLint {
 	dependsOn mapPerVersionMappingsJar
 	mappingDirectory = file("mappings")
-	jarFile = mappings.fileConstants.perVersionMappingsJar
+	jarFile = quiltMappings.fileConstants.perVersionMappingsJar
 }
 
 check.dependsOn mappingLint

@@ -72,7 +72,7 @@ public abstract class CheckTargetVersionExistsTask extends DefaultMappingsTask {
     /**
      * This is only populated after the task has run.
      * <p>
-     * It should only be accessed from other tasks' {@linkplain  TaskAction actions} or
+     * It should only be accessed from other tasks' {@linkplain TaskAction actions} or
      * {@linkplain org.gradle.api.Task#onlyIf predicates} and via
      * {@linkplain Property lazy} {@linkplain org.gradle.api.tasks.Input input}.
      * <p>
