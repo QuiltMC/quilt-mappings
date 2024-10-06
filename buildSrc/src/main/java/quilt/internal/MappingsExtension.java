@@ -2,6 +2,7 @@ package quilt.internal;
 
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Provider;
@@ -17,6 +18,8 @@ public abstract class MappingsExtension {
      * {@link quilt.internal.tasks.EnigmaProfileConsumingTask EnigmaProfileConsumingTask}s to use this profile.
      */
     public final Provider<EnigmaProfile> enigmaProfile;
+
+    public abstract RegularFileProperty getUnpick();
 
     private final FileConstants fileConstants;
 

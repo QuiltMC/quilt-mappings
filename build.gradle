@@ -33,7 +33,14 @@ plugins {
 }
 
 mappings {
-	enigmaProfile = file("enigma_profile.json")
+	enigmaProfile = file('enigma_profile.json')
+
+	unpick = file('unpick/unpick.json')
+}
+
+combineUnpickDefinitions {
+	// add static unpick definitions
+	unpickDefinitions.from 'unpick/definitions/'
 }
 
 def USE_SNAPSHOT_HASHES = false
@@ -111,8 +118,8 @@ import quilt.internal.util.MappingsJavadocProvider
 // TODO consider moving cleanable things to build/ so this isn't necessary,
 //  or put them in .gradle/cleanable/ and only add that here (or MappingsPlugin)
 clean.doFirst {
-	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft,
-			mappings.fileConstants.unpickGlDefinitions, mappings.fileConstants.unpickGlStateManagerDefinitions
+	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft
+	// , mappings.fileConstants.generatedUnpickDefinitions
 }
 
 tasks.build.dependsOn "compressTiny", "tinyJar", "v2UnmergedMappingsJar", "v2MergedMappingsJar"
