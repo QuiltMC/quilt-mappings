@@ -17,27 +17,21 @@ public class FileConstants {
     public final File dictionaryDir;
     public final File dictionaryFile;
 
-    public final File unpickDefinitions;
-    public final File unpickMeta;
-    public final File unpickGlDefinitions;
-    public final File unpickGlStateManagerDefinitions;
-
     public FileConstants(Project project) {
-        buildDir = project.file("build/mappings");
-        cacheFilesMinecraft = project.file(".gradle/minecraft");
-        tempDir = project.file(".gradle/temp");
-        libraries = new File(cacheFilesMinecraft, "libraries");
+        this.buildDir = project.file("build/mappings");
+        this.cacheFilesMinecraft = project.file(".gradle/minecraft");
+        this.tempDir = project.file(".gradle/temp");
+        this.libraries = new File(this.cacheFilesMinecraft, "libraries");
 
-        perVersionMappingsJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar");
-        unpickedJar = project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar");
-        namedJar = project.file(Constants.MINECRAFT_VERSION + "-named.jar");
+        this.perVersionMappingsJar =
+            project.file(Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar");
+        this.unpickedJar = project.file(
+            Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar"
+        );
+        this.namedJar = project.file(Constants.MINECRAFT_VERSION + "-named.jar");
 
-        dictionaryDir = project.file(".gradle/lint/dictionary");
-        dictionaryFile = project.file(dictionaryDir.toPath().resolve(DownloadDictionaryFileTask.REVISION + ".txt"));
-
-        unpickDefinitions = project.file("unpick-definitions");
-        unpickMeta = new File(unpickDefinitions, "unpick.json");
-        unpickGlDefinitions = new File(unpickDefinitions, "unpick_gl.unpick");
-        unpickGlStateManagerDefinitions = new File(unpickDefinitions, "unpick_glstatemanager.unpick");
+        this.dictionaryDir = project.file(".gradle/lint/dictionary");
+        this.dictionaryFile =
+            project.file(this.dictionaryDir.toPath().resolve(DownloadDictionaryFileTask.REVISION + ".txt"));
     }
 }

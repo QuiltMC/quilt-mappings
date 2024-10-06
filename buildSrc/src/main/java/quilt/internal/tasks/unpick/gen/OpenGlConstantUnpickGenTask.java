@@ -21,11 +21,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.io.FileUtils;
+import org.gradle.api.file.ConfigurableFileCollection;
+import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
+import org.gradle.api.tasks.OutputFiles;
 import org.gradle.api.tasks.TaskAction;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -38,7 +41,7 @@ import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public abstract class OpenGlConstantUnpickGeneratorTask extends DefaultMappingsTask implements UnpickGenTask {
+public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask implements UnpickGenTask {
     public static final String TASK_NAME = "openGlUnpickGen";
     public static final String OPEN_GL_REGISTRY =
         "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/xml/gl.xml";
@@ -56,6 +59,7 @@ public abstract class OpenGlConstantUnpickGeneratorTask extends DefaultMappingsT
     @InputFile
     public abstract RegularFileProperty getPerVersionMappingsJar();
 
+    // TODO rework this
     @Input
     public abstract MapProperty<String, File> getArtifactsByUrl();
 
@@ -65,12 +69,27 @@ public abstract class OpenGlConstantUnpickGeneratorTask extends DefaultMappingsT
     @OutputFile
     public abstract RegularFileProperty getUnpickGlDefinitions();
 
-    public OpenGlConstantUnpickGeneratorTask() {
+    @Override
+    public FileCollection getGeneratedUnpickDefinitions() {
+        return this.getGeneratedUnpickDefinitionsImpl();
+    }
+
+    @OutputFiles
+    protected abstract ConfigurableFileCollection getGeneratedUnpickDefinitionsImpl();
+
+    public OpenGlConstantUnpickGenTask() {
         super(Constants.Groups.UNPICK_GEN);
 
+        // TODO is this necessary?
+        //  If things changed, wouldn't we actually *want* to overwrite them?
         this.onlyIf(unused ->
             !this.getUnpickGlDefinitions().get().getAsFile().exists()
                 || !this.getUnpickGlStateManagerDefinitions().get().getAsFile().exists()
+        );
+
+        this.getGeneratedUnpickDefinitionsImpl().from(
+            this.getUnpickGlStateManagerDefinitions(),
+            this.getUnpickGlDefinitions()
         );
     }
 
