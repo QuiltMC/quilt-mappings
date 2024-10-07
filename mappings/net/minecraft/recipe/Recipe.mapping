@@ -13,12 +13,6 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 	FIELD f_mwhtvqku PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_aphdsjxe getSerializer ()Lnet/minecraft/unmapped/C_xfxrkzjt;
 		COMMENT {@return the serializer associated with this recipe}
-	METHOD m_edscftkq getResult (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		COMMENT {@return a preview of the recipe's result}
-		COMMENT <p>
-		COMMENT The returned stack should not be modified. To obtain the actual output,
-		COMMENT call {@link #craft(Inventory, DynamicRegistryManager)}.
-		ARG 1 provider
 	METHOD m_jjsxdttb matches (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;)Z
 		ARG 1 input
 	METHOD m_jzhvfhoe getWorkstation ()Lnet/minecraft/unmapped/C_sddaxwyk;
@@ -27,16 +21,6 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		COMMENT is ignored by the recipe book, it will be never displayed. In addition,
 		COMMENT it won't be restricted by the {@link net.minecraft.world.GameRules#DO_LIMITED_CRAFTING
 		COMMENT doLimitedCrafting} game rule.
-	METHOD m_nxpzgwsq fits (II)Z
-		COMMENT {@return whether this recipe will fit into the given grid size}
-		COMMENT <p>
-		COMMENT This is currently only used by recipe book.
-		ARG 1 width
-			COMMENT the width of the input inventory
-		ARG 2 height
-			COMMENT the height of the input inventory
-	METHOD m_pyffiody getRemainder (Lnet/minecraft/unmapped/C_cxmcihwl;)Lnet/minecraft/unmapped/C_rnrfftze;
-		ARG 1 input
 	METHOD m_qqucltqj showNotification ()Z
 		COMMENT {@return whenever this recipe should show a toast notification on being unlocked or not}
 	METHOD m_tikgmnde craft (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_sddaxwyk;
@@ -47,11 +31,3 @@ CLASS net/minecraft/unmapped/C_awrmdwqd net/minecraft/recipe/Recipe
 		COMMENT
 		COMMENT <p>The {@code type} in the recipe JSON format is the {@linkplain
 		COMMENT #getSerializer() serializer} instead.
-	METHOD m_umvnhtgd getGroup ()Ljava/lang/String;
-		COMMENT {@return a group this recipe belongs in, or an empty string} This is
-		COMMENT only used by the recipe book.
-		COMMENT
-		COMMENT <p>The group string is arbitrary, and is not rendered anywhere; in
-		COMMENT the recipe book, recipes with the same group will belong to the same
-		COMMENT cell in the grid of recipes. If the string is empty, this recipe will
-		COMMENT belong to its own cell.

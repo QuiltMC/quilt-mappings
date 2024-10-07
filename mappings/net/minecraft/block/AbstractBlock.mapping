@@ -3,7 +3,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	FIELD f_eagudpej slipperiness F
 	FIELD f_gtipwtfw requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
 	FIELD f_hcgxjldr jumpVelocityMultiplier F
-	FIELD f_hflsieep lootTableId Lnet/minecraft/unmapped/C_xhhleach;
+	FIELD f_hflsieep lootTableId Ljava/util/Optional;
 	FIELD f_hpfrgdhl velocityMultiplier F
 	FIELD f_hskzbzfq settings Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 	FIELD f_lyvgdypq soundGroup Lnet/minecraft/unmapped/C_aevintex;
@@ -11,6 +11,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	FIELD f_nsbwwaru DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_pqndzdga collidable Z
 	FIELD f_uxluwspt resistance F
+	FIELD f_zawgabdk translationKey Ljava/lang/String;
 	METHOD <init> (Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;)V
 		ARG 1 settings
 	METHOD m_bhohbmwk getWeakRedstonePower (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)I
@@ -48,6 +49,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	METHOD m_enfnjurp (Ljava/util/function/Function;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 		ARG 1 codecBuilder
 	METHOD m_ewcsdntg asBlock ()Lnet/minecraft/unmapped/C_mmxmpdoq;
+	METHOD m_fegczxns getTranslationKey ()Ljava/lang/String;
 	METHOD m_fjkbizwn isRedstonePowerSource (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
 	METHOD m_flnjgkno isTransparent (Lnet/minecraft/unmapped/C_txtbiemp;)Z
@@ -134,7 +136,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 3 pos
 		ARG 4 stack
 		ARG 5 dropExperience
-	METHOD m_qodrklgm getLootTableId ()Lnet/minecraft/unmapped/C_xhhleach;
+	METHOD m_qodrklgm getLootTableId ()Ljava/util/Optional;
 	METHOD m_qzmkwuwe canReplace (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_aiootljq;)Z
 		ARG 1 state
 		ARG 2 context
@@ -165,6 +167,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 block
+		ARG 5 orientation
 		ARG 6 notify
 	METHOD m_umbsjste rotate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_txtbiemp;
 		COMMENT Applies a block rotation to a block state.
@@ -205,36 +208,39 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 3 pos
 		ARG 4 direction
 	METHOD m_yfekyrxa asItem ()Lnet/minecraft/unmapped/C_vorddnax;
-	METHOD m_yvunqpeq getStateForNeighborUpdate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_txtbiemp;
+	METHOD m_yvunqpeq getStateForNeighborUpdate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_adoatlrf;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_txtbiemp;
 		COMMENT Gets the possibly updated block state of this block when a neighboring block is updated.
 		COMMENT
 		COMMENT @return the new state of this block
 		ARG 1 state
 			COMMENT the state of this block
-		ARG 2 direction
-			COMMENT the direction from this block to the neighbor
-		ARG 3 neighborState
-			COMMENT the state of the updated neighbor block
-		ARG 4 world
-			COMMENT the world
-		ARG 5 pos
+		ARG 4 pos
 			COMMENT the position of this block
+		ARG 5 direction
+			COMMENT the direction from this block to the neighbor
 		ARG 6 neighborPos
 			COMMENT the position of the neighbor block
+		ARG 7 neighborState
+			COMMENT the state of the updated neighbor block
 	METHOD m_zqsszxeb getCameraCollisionShape (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_pbfjvesm;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 context
 	CLASS C_eibemhky AbstractBlockState
+		FIELD f_biaogsvo FULL_BLOCK_OCCLUSION_SHAPES [Lnet/minecraft/unmapped/C_zscvhwbd;
+		FIELD f_bsbhmsca cullingShape Lnet/minecraft/unmapped/C_zscvhwbd;
+		FIELD f_bvttwnii EMPTY_OCCLUSION_SHAPES [Lnet/minecraft/unmapped/C_zscvhwbd;
 		FIELD f_ciiuhosx opaque Z
 		FIELD f_cmbiwnda hasSidedTransparency Z
+		FIELD f_gbcdxrgd DIRECTIONS [Lnet/minecraft/unmapped/C_xpuuihxf;
 		FIELD f_jnxtuzdb hardness F
 		FIELD f_jvcpotqu isAir Z
 		FIELD f_lpessbtt pistonBehavior Lnet/minecraft/unmapped/C_mojvzhua;
 		FIELD f_lqzypovm spawnsDustParticles Z
 		FIELD f_mkfwgndk solidBlockPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_nijrkoes emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+		FIELD f_nsclhbdi opacity I
 		FIELD f_ochxyzpr solid Z
 		FIELD f_omahusur liquid Z
 		FIELD f_rmmimkow replaceable Z
@@ -246,12 +252,16 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_vskisdzk postProcessPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_wknecqnz luminance I
 		FIELD f_wvbmkgls suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+		FIELD f_xogzmbzi isTransparent Z
 		FIELD f_xwxdktuf hasRandomTicks Z
+		FIELD f_xxewnzdk opaqueFullCube Z
+		FIELD f_ycbjvypj cullingFaces [Lnet/minecraft/unmapped/C_zscvhwbd;
 		FIELD f_yypdsdkn lavaIgnitable Z
 		FIELD f_zpvdfobl mapColor Lnet/minecraft/unmapped/C_mlrprqox;
 		FIELD f_zzuoeazs instrument Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD m_aeqyhmrr neighborUpdate (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ctatbkvy;Z)V
 			ARG 2 pos
+			ARG 4 orientation
 			ARG 5 notify
 		METHOD m_alvmezvc getInstrument ()Lnet/minecraft/unmapped/C_onjtjtsi;
 		METHOD m_aoahmjkt getSoundGroup ()Lnet/minecraft/unmapped/C_aevintex;
@@ -298,20 +308,18 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 			ARG 3 state
 			ARG 4 notify
-		METHOD m_ecruzwpj getStateForNeighborUpdate (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_txtbiemp;
+		METHOD m_ecruzwpj getStateForNeighborUpdate (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_adoatlrf;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_txtbiemp;
 			COMMENT Gets the possibly updated block state of this block when a neighboring block is updated.
 			COMMENT
 			COMMENT @return the new state of this block
-			ARG 1 direction
-				COMMENT the direction from this block to the neighbor
-			ARG 2 neighborState
-				COMMENT the state of the updated neighbor block
-			ARG 3 world
-				COMMENT the world
-			ARG 4 pos
+			ARG 3 pos
 				COMMENT the position of this block
+			ARG 4 direction
+				COMMENT the direction from this block to the neighbor
 			ARG 5 neighborPos
 				COMMENT the position of the neighbor block
+			ARG 6 neighborState
+				COMMENT the state of the updated neighbor block
 		METHOD m_efltdtfe getOutlineShape (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_zscvhwbd;
 			ARG 1 world
 			ARG 2 pos
@@ -323,6 +331,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT {@return whether this block state is an instance of the given block holder}
 			ARG 1 block
 				COMMENT the block holder to match
+		METHOD m_fpkvjpml ([Lnet/minecraft/unmapped/C_zscvhwbd;)V
+			ARG 0 directions
 		METHOD m_fuqgdrck isOf (Lnet/minecraft/unmapped/C_mmxmpdoq;)Z
 			COMMENT {@return whether this block state is an instance of the given block}
 			ARG 1 block
@@ -393,6 +403,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 direction
 		METHOD m_pobwdefx exceedsCube ()Z
 		METHOD m_pppprjpr isTransparent ()Z
+		METHOD m_ptlyqoli ([Lnet/minecraft/unmapped/C_zscvhwbd;)V
+			ARG 0 directions
 		METHOD m_pvjmhzzb getOpacity ()I
 		METHOD m_qcyiqint hasComparatorOutput ()Z
 		METHOD m_qilylxum onUse (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
@@ -433,6 +445,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_tjbimmww canBucketPlace (Lnet/minecraft/unmapped/C_rxhyurmy;)Z
 			ARG 1 fluid
 		METHOD m_trxxnxke isRegistryKey (Lnet/minecraft/unmapped/C_xhhleach;)Z
+			ARG 1 key
 		METHOD m_uawreshq getCameraCollisionShape (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_pbfjvesm;)Lnet/minecraft/unmapped/C_zscvhwbd;
 			ARG 1 world
 			ARG 2 pos
@@ -531,12 +544,12 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 				ARG 1 axis
 	CLASS C_hqjgaunn OffsetType
 	CLASS C_izsedryc ContextPredicate
-		METHOD test test (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		METHOD test (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 1 state
 			ARG 2 world
 			ARG 3 pos
 	CLASS C_knnwryez TypedContextPredicate
-		METHOD test test (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/lang/Object;)Z
+		METHOD test (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/lang/Object;)Z
 			ARG 1 state
 			ARG 2 world
 			ARG 3 pos
@@ -549,6 +562,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_czlbhsfs dynamicBounds Z
 		FIELD f_ddynwztk velocityMultiplier F
 		FIELD f_dfulysva toolRequired Z
+		FIELD f_eioycbda key Lnet/minecraft/unmapped/C_xhhleach;
 		FIELD f_gepbjyhg nonSolid Z
 		FIELD f_gljcimhm emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
 		FIELD f_hgzeyqby randomTicks Z
@@ -565,7 +579,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_obppjqdx opaque Z
 		FIELD f_pgktgiev offsetFunction Lnet/minecraft/unmapped/C_triydqro$C_mlfsdncu;
 		FIELD f_piwzbwkw suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
-		FIELD f_pxqjcqnw lootTableId Lnet/minecraft/unmapped/C_xhhleach;
+		FIELD f_pxqjcqnw lootTableId Lnet/minecraft/unmapped/C_jquyxssk;
 		FIELD f_stojhpmj solid Z
 		FIELD f_vgbjitlh spawnsDustParticles Z
 		FIELD f_vncuqezy luminance Ljava/util/function/ToIntFunction;
@@ -595,11 +609,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 predicate
 		METHOD m_edlblpmg offsetType (Lnet/minecraft/unmapped/C_triydqro$C_hqjgaunn;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 offsetType
-		METHOD m_egobildr (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;)Z
-			ARG 0 state
-			ARG 1 state
-			ARG 2 world
-			ARG 3 type
+		METHOD m_egobildr (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+			ARG 0 key
 		METHOD m_etdgbdsz replaceable ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_fqzrcagx jumpVelocityMultiplier (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 jumpVelocityMultiplier
@@ -613,19 +624,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_ixvdwzpv ticksRandomly ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_jjsywpzh slipperiness (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 slipperiness
-		METHOD m_jzrlfqyp (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
-			ARG 0 state
-			ARG 1 world
-			ARG 2 pos
 		METHOD m_ksnsduxl create ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
-		METHOD m_lmlzohax (Lnet/minecraft/unmapped/C_arllgqae;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_mlrprqox;
-			ARG 1 state
 		METHOD m_lzknvbog hardness (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 hardness
-		METHOD m_mbjlohca dropsLike (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
-			COMMENT Specifies that a block should drop the same items as a provided block.
-			ARG 1 source
-				COMMENT the block to copy item drops from
 		METHOD m_mkgblwbl nonSolid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_mkiacirn air ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_mylnzrvw mapColor (Lnet/minecraft/unmapped/C_mlrprqox;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -651,7 +652,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 predicate
 		METHOD m_scrsgkaj copy (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 0 block
-		METHOD m_secizybe (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
+		METHOD m_secizybe (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;)Z
 			ARG 0 state
 			ARG 1 world
 			ARG 2 pos
@@ -674,6 +675,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT @return this
 		METHOD m_vuhrtmql (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_mlrprqox;
 			ARG 0 state
+		METHOD m_vuvrdzlb key (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 1 key
 		METHOD m_wlqavdtn mapColor (Lnet/minecraft/unmapped/C_arllgqae;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 dyeColor
 		METHOD m_wrutkowk blockVision (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;

@@ -8,8 +8,10 @@
       "dynOps"
     ]
   },
+  "com/mojang/serialization/codecs/RecordCodecBuilder$Instance": "instance",
   "com/mojang/serialization/MapCodec": "codec",
   "net/minecraft/unmapped/C_qsrmwluu": "packetCodec", // PacketCodec
+  "com/mojang/datafixers/util/Pair": "pair",
 
   // Data
   "net/minecraft/unmapped/C_nykrdyol": "exporter", // RecipeExporter
@@ -27,10 +29,20 @@
   "net/minecraft/unmapped/C_pennblrk": "source", // ServerCommandSource
 
   // Registries
-  "net/minecraft/unmapped/C_tqxyjqsk": "registry",
-  "net/minecraft/unmapped/C_xhhleach": "registryKey",
+  "net/minecraft/unmapped/C_tqxyjqsk": { // Registry
+    local_name: "registry",
+    inherit: true
+  },
   "net/minecraft/unmapped/C_wqxmvzdq": "registryManager", // DynamicRegistryManager
   "net/minecraft/unmapped/C_hqoyyfco": "context", // BootstrapContext
+  "net/minecraft/unmapped/C_ednuhnnn": "tag", // TagKey
+  "net/minecraft/unmapped/C_ncpywfca": { // Identifier
+    local_name: "id",
+    exclusive: true,
+    fallback: [
+      "identifier"
+    ]
+  },
 
   // Client
   "net/minecraft/unmapped/C_ayfeobid": "client", // MinecraftClient
@@ -76,10 +88,23 @@
   "net/minecraft/unmapped/C_mmxmpdoq": "block",
   "net/minecraft/unmapped/C_jdakttms": "result", // BlockHitResult
   "net/minecraft/unmapped/C_hgpogkhy": "type", // BlockSetType
-  "net/minecraft/unmapped/C_triydqro$C_xnkxsdfy": "settings", // AbstractBlock.Settings
+  "net/minecraft/unmapped/C_triydqro$C_xnkxsdfy": { // AbstractBlock.Settings
+    local_name: "settings",
+    exclusive: true,
+    fallback : [
+      "blockSettings"
+    ]
+  },
 
   // Item
   "net/minecraft/unmapped/C_sddaxwyk": "stack", // ItemStack
+  "net/minecraft/unmapped/C_vorddnax$C_bfrytpdl": { // Item.Settings
+    local_name: "settings",
+    exclusive: true,
+    fallback: [
+      "itemSettings"
+    ]
+  },
   "net/minecraft/unmapped/C_lnokcayd": { // ItemGroup
     local_name: "group",
     fallback: [
@@ -90,11 +115,28 @@
   "net/minecraft/unmapped/C_lnokcayd$C_tndlmady": "visibility", // ItemGroup.Visibility
 
   // Entity
+  "net/minecraft/unmapped/C_astfners": "entity", // Entity
+  "net/minecraft/unmapped/C_usxaxydn": { // LivingEntity
+    local_name: "entity",
+    exclusive: true,
+    fallback: [
+      "livingEntity"
+    ]
+  },
   "net/minecraft/unmapped/C_rjqjaxef": "brain",
-  "net/minecraft/unmapped/C_uzzvxofv": {
+  "net/minecraft/unmapped/C_bhyaesep": { // SpawnReason
     local_name: "reason",
     fallback: [
       "spawnReason"
+    ]
+  },
+
+  // Village
+  "net/minecraft/unmapped/C_argwryfu": { // TradeOffer
+    local_name: "offer",
+    inherit: true,
+    fallback: [
+      "tradeOffer"
     ]
   },
 
@@ -138,6 +180,12 @@
 
   // Network
   "net/minecraft/unmapped/C_idfydwco": "buf", // PacketByteBuf
+  "net/minecraft/unmapped/C_mnjlaveb$C_mlxyrlwl": { // TagNetworkSerialization$NetworkPayload
+    local_name: "payload",
+    fallback: [
+      "networkPayload"
+    ]
+  },
 
   // World
   "net/minecraft/unmapped/C_cdctfzbn": "world",

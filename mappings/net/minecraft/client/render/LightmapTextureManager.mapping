@@ -4,10 +4,12 @@ CLASS net/minecraft/unmapped/C_grwstqbm net/minecraft/client/render/LightmapText
 	COMMENT Also contains some utilities to pack and unpack lightmap coordinates from sky and block light values,
 	COMMENT and some lightmap coordinates constants.
 	FIELD f_abtihkiy renderer Lnet/minecraft/unmapped/C_sktkdoun;
+	FIELD f_ekwpgxae target Lnet/minecraft/unmapped/C_gfnigxuu;
 	FIELD f_iaaiacfc MAX_BLOCK_LIGHT_COORDINATE I
 		COMMENT Represents the maximum block-light-wise lightmap coordinate whose value is {@value}.
 		COMMENT This is equivalent to a {@code 0} sky light and {@code 15} block light.
 	FIELD f_mgviipnc client Lnet/minecraft/unmapped/C_ayfeobid;
+	FIELD f_nceuetsw TEXTURE_SIZE I
 	FIELD f_ngbaqzyp flickerIntensity F
 	FIELD f_qdketniz dirty Z
 	FIELD f_swrlerdp MAX_SKY_LIGHT_COORDINATE I
@@ -19,7 +21,6 @@ CLASS net/minecraft/unmapped/C_grwstqbm net/minecraft/client/render/LightmapText
 	METHOD <init> (Lnet/minecraft/unmapped/C_sktkdoun;Lnet/minecraft/unmapped/C_ayfeobid;)V
 		ARG 1 renderer
 		ARG 2 client
-	METHOD close close ()V
 	METHOD m_crheesdy getDarknessGamma (F)F
 		ARG 1 tickDelta
 	METHOD m_dbomiadp getBlockLightCoordinates (I)I
@@ -33,8 +34,16 @@ CLASS net/minecraft/unmapped/C_grwstqbm net/minecraft/client/render/LightmapText
 	METHOD m_fwqkbqzx pack (II)I
 		ARG 0 block
 		ARG 1 sky
+	METHOD m_guwobvaf getBrightness (FI)F
+		ARG 1 lightLevel
 	METHOD m_kzjmpsfo tick ()V
 	METHOD m_ooqbyqsa update (F)V
 		ARG 1 delta
+	METHOD m_tcwayifp getPackedCoordsWithEmission (II)I
+		ARG 0 lightLevel
+		ARG 1 emission
+	METHOD m_tfptisda getBrightness (Lnet/minecraft/unmapped/C_oxijnccf;I)F
+		ARG 0 dimension
+		ARG 1 lightLevel
 	METHOD m_vcrzikjz disable ()V
 	METHOD m_yumestcc enable ()V

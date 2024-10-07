@@ -1,2 +1,115 @@
 CLASS net/minecraft/unmapped/C_sjynkhfr net/minecraft/client/render/chunk/ChunkBuilder
-	FIELD f_losuuhkx currentLinkedQueue Ljava/util/Queue;
+	FIELD f_ahdftdbj sectionBuilder Lnet/minecraft/unmapped/C_qphmhsxf;
+	FIELD f_jsyjcjmv queuedTasks I
+	FIELD f_jyrbbucx camera Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_kmfkzwvn buffers Lnet/minecraft/unmapped/C_fnazfccz;
+	FIELD f_losuuhkx uploadQueue Ljava/util/Queue;
+	FIELD f_mirqeqau executor Lnet/minecraft/unmapped/C_dhavtmvf;
+	FIELD f_riknywno renderer Lnet/minecraft/unmapped/C_sfkkabhx;
+	FIELD f_tmavnhca bufferPool Lnet/minecraft/unmapped/C_awocslpo;
+	FIELD f_wxcmutvp closed Z
+	METHOD m_ajxgsyha stop ()V
+	METHOD m_blkvydyc scheduleRunTasks ()V
+	METHOD m_cqnxjmac uploadIndexData (Lnet/minecraft/unmapped/C_wcwbedxs$C_thqtmwcx;Lnet/minecraft/unmapped/C_lhjdxjis;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 view
+		ARG 2 vertices
+	METHOD m_etrueqhc getQueuedTasks ()I
+	METHOD m_gstwbdjb addTask (Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_dafeytod;)V
+		ARG 1 task
+	METHOD m_hjgbafqf (Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletionStage;
+		ARG 0 future
+	METHOD m_jolodfem isEmpty ()Z
+	METHOD m_jxbkgmnw getFreeBuffers ()I
+	METHOD m_ljxpcrlr uploadAll ()V
+	METHOD m_nymgawbn rebuild (Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc;Lnet/minecraft/unmapped/C_blaazowi;)V
+		ARG 1 section
+	METHOD m_onodhvgj setCamera (Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 camera
+	METHOD m_oqvvuilz setWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;)V
+	METHOD m_qqonjvzv uploadVertexData (Lnet/minecraft/unmapped/C_fpcijbbg;Lnet/minecraft/unmapped/C_lhjdxjis;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 buffer
+		ARG 2 vertices
+	METHOD m_rncrkajk getUploadSize ()I
+	METHOD m_ulrgetxk (Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_dafeytod;Lnet/minecraft/unmapped/C_fnazfccz;Lnet/minecraft/unmapped/C_sjynkhfr$C_bjrkvbkq;Ljava/lang/Throwable;)V
+		ARG 3 result
+		ARG 4 throwable
+	METHOD m_vpmiiwpk clearBlocking ()V
+	METHOD m_wkizlcdd clear ()V
+	METHOD m_xbodoxel getCamera ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_zylogpyc getDebugString ()Ljava/lang/String;
+	CLASS C_bjrkvbkq Result
+	CLASS C_exmylrbc Section
+		FIELD f_almaaagk boundingBox Lnet/minecraft/unmapped/C_hbcjzgoe;
+		FIELD f_dnhxqcgc origin Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
+		FIELD f_eaeulzzw blockEntities Ljava/util/Set;
+		FIELD f_efbrzllj needsImportantRebuild Z
+		FIELD f_jcyejnjx index I
+		FIELD f_lbepmavj sortTask Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_tztyrgso;
+		FIELD f_rgilmcfs SIZE I
+		FIELD f_tgudfvdi data Ljava/util/concurrent/atomic/AtomicReference;
+		FIELD f_udjykkek needsRebuild Z
+		FIELD f_ufvtplrw buffers Ljava/util/Map;
+		FIELD f_ysmgvqny rebuildTask Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_ulcmkxuq;
+		METHOD m_akukfhve getBuffer (Lnet/minecraft/unmapped/C_tizlwnnv;)Lnet/minecraft/unmapped/C_lhjdxjis;
+			ARG 1 layer
+		METHOD m_apvthafb getOrigin ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_cejdjtap (Lnet/minecraft/unmapped/C_tizlwnnv;)Lnet/minecraft/unmapped/C_tizlwnnv;
+			ARG 0 layer
+		METHOD m_ektcraor needsRebuild ()Z
+		METHOD m_fpcfnjwg createVertexSorting ()Lnet/minecraft/unmapped/C_onfzhami;
+		METHOD m_fppyjbjj cancelTasks ()V
+		METHOD m_ggtdhlyn needsRebuild (Z)V
+			ARG 1 importantRebuild
+		METHOD m_hyqzqueo getData ()Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;
+		METHOD m_insqccll needsImportantRebuild ()Z
+		METHOD m_jccyislo shouldBuild ()Z
+		METHOD m_kbhmydqx getSquaredDistanceToCamera ()D
+		METHOD m_mxbbxnkh createRebuildTask (Lnet/minecraft/unmapped/C_blaazowi;)Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc$C_dafeytod;
+			ARG 1 regionCache
+		METHOD m_nbdqnmpi doesChunkExist (J)Z
+		METHOD m_niehtnqz set (Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;)V
+		METHOD m_ntorupzd clearBuffers ()V
+		METHOD m_nxdlgble rebuildBlocking (Lnet/minecraft/unmapped/C_blaazowi;)V
+		METHOD m_ovhckmcn setNoCullingBlockEntities (Ljava/util/Collection;)V
+			ARG 1 blockEntities
+		METHOD m_pltslqag (Lnet/minecraft/unmapped/C_tizlwnnv;)Lnet/minecraft/unmapped/C_lhjdxjis;
+			ARG 0 layer
+		METHOD m_qvakteqa scheduleRebuild (Lnet/minecraft/unmapped/C_sjynkhfr;Lnet/minecraft/unmapped/C_blaazowi;)V
+			ARG 1 builder
+		METHOD m_vilpmiub getBoundingBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
+		METHOD m_xuhqyblp cancelRebuild ()V
+		METHOD m_ycspbizp createSortTask (Lnet/minecraft/unmapped/C_sjynkhfr;)V
+			ARG 1 builder
+		METHOD m_yiysmxwd reset ()V
+		CLASS C_dafeytod Task
+			FIELD f_zlyzuzir cancelled Ljava/util/concurrent/atomic/AtomicBoolean;
+			METHOD m_csbvqlks getName ()Ljava/lang/String;
+			METHOD m_qbfmwizt run (Lnet/minecraft/unmapped/C_fnazfccz;)Ljava/util/concurrent/CompletableFuture;
+				ARG 1 storage
+			METHOD m_scnvnioz cancel ()V
+		CLASS C_tztyrgso SortTask
+			FIELD f_iwigmsua data Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;
+			METHOD m_cjwyvgeu (Lnet/minecraft/unmapped/C_sjynkhfr$C_mwntqdbp;Lnet/minecraft/unmapped/C_sjynkhfr$C_bjrkvbkq;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_sjynkhfr$C_bjrkvbkq;
+				ARG 2 result
+				ARG 3 throwable
+			METHOD m_lzlrpqup (Ljava/lang/Void;)Lnet/minecraft/unmapped/C_sjynkhfr$C_bjrkvbkq;
+				ARG 0 v
+		CLASS C_ulcmkxuq RebuildTask
+			FIELD f_zkbkfigj region Lnet/minecraft/unmapped/C_pnsarinu;
+			METHOD m_iskvxnoj (Ljava/util/List;Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;Lnet/minecraft/unmapped/C_tizlwnnv;Lnet/minecraft/unmapped/C_fpcijbbg;)V
+				ARG 3 layer
+				ARG 4 buffer
+			METHOD m_xxegcadj (Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;Lnet/minecraft/unmapped/C_sjynkhfr$C_mwntqdbp;Ljava/util/List;Ljava/lang/Throwable;)Lnet/minecraft/unmapped/C_sjynkhfr$C_bjrkvbkq;
+				ARG 3 voids
+				ARG 4 throwable
+	CLASS C_tspjbhud ChunkData
+		FIELD f_cixhztti EMPTY Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;
+		FIELD f_izdaounr sortingData Lnet/minecraft/unmapped/C_fpcijbbg$C_qwmaszfw;
+		FIELD f_lptrzyxj occlusionData Lnet/minecraft/unmapped/C_bfihfxcg;
+		FIELD f_sbebwngh layers Ljava/util/Set;
+		FIELD f_tczcdyxm UNCOMPILED Lnet/minecraft/unmapped/C_sjynkhfr$C_tspjbhud;
+		FIELD f_xxnfrtnf blockEntities Ljava/util/List;
+		METHOD m_chfbcmme isVisibleThrough (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		METHOD m_cnqtwery getBlockEntites ()Ljava/util/List;
+		METHOD m_kppkuamn isEmpty (Lnet/minecraft/unmapped/C_tizlwnnv;)Z
+			ARG 1 layer

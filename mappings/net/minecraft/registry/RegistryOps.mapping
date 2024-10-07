@@ -2,19 +2,37 @@ CLASS net/minecraft/unmapped/C_piadqmzm net/minecraft/registry/RegistryOps
 	FIELD f_vdicfwsi infoLookup Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;
 	METHOD <init> (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)V
 		ARG 2 infoLookup
+	METHOD m_bckocqhu (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_piadqmzm$C_sznlrmbg;)Ljava/util/Optional;
+		ARG 1 info
 	METHOD m_cbajopsh withRegistry (Lcom/mojang/serialization/Dynamic;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lcom/mojang/serialization/Dynamic;
 		ARG 1 lookupProvider
 	METHOD m_cbpcvxox create (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_piadqmzm;
 		ARG 1 provider
-	METHOD m_csmsiyjj retrieveElement (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+	METHOD m_csmsiyjj createElementVerifier (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+		ARG 0 element
+	METHOD m_hwvsonxs (Lnet/minecraft/unmapped/C_piadqmzm$C_sznlrmbg;)Lcom/mojang/serialization/DataResult;
+		ARG 0 info
+	METHOD m_kftazkdh (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
+		ARG 0 ignored
 	METHOD m_pztmqyhp getHolderProvider (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+		ARG 1 registry
+	METHOD m_skdgkhyw (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_pzdchrcy;
+		ARG 0 ignored
 	METHOD m_ullsawcn getOwner (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+		ARG 1 registry
 	METHOD m_uvzmikbu withDelegate (Lcom/mojang/serialization/DynamicOps;)Lnet/minecraft/unmapped/C_piadqmzm;
 	METHOD m_vbfmluid create (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/unmapped/C_piadqmzm$C_raywzonl;)Lnet/minecraft/unmapped/C_piadqmzm;
 		ARG 1 infoLookup
-	METHOD m_yxpznfcj retrieveGetter (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+	METHOD m_yxpznfcj createRegistryVerifier (Lnet/minecraft/unmapped/C_xhhleach;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+		ARG 0 registry
 	CLASS C_raywzonl RegistryInfoLookup
-		METHOD m_vxddufef lookup (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+		METHOD m_vxddufef getInfo (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+			ARG 1 registry
 	CLASS C_sznlrmbg RegistryInfo
 		METHOD m_kblhssdn create (Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;)Lnet/minecraft/unmapped/C_piadqmzm$C_sznlrmbg;
 			ARG 0 lookup
+	CLASS C_tbnrbtat MemoizedInfoLookup
+		FIELD f_weufdavy registryInfos Ljava/util/Map;
+		FIELD f_znfdfzvf provider Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+		METHOD m_rakmcorl createRegistryInfo (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
+			ARG 1 registry

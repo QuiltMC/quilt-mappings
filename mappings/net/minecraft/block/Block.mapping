@@ -18,7 +18,6 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 	COMMENT is defined by {@link appendProperties}.
 	COMMENT
 	COMMENT @see BlockState
-	FIELD f_bgfflzvf translationKey Ljava/lang/String;
 	FIELD f_bjwoutju NOTIFY_LISTENERS I
 		COMMENT Notifies listeners and clients who need to react when the block changes.
 	FIELD f_bqorapkz UPDATE_LIMIT I
@@ -50,6 +49,8 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 	FIELD f_zatyqcqa CODEC Lcom/mojang/serialization/MapCodec;
 	FIELD f_zeveupfs NO_REDRAW I
 		COMMENT Used in conjunction with {@link #NOTIFY_LISTENERS} to suppress the render pass on clients.
+	FIELD f_zobgxnry SKIP_UPDATE_FOR_REDSTONE_WIRE I
+		COMMENT Skips {@link AbstractBlock#getStateForNeighborUpdate} call for redstone wire.
 	METHOD m_aqcetwet onSteppedOn (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_astfners;)V
 		COMMENT Called when an entity steps on this block.
 		ARG 1 world
@@ -65,13 +66,6 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 	METHOD m_azwoptpw isShapeFullCube (Lnet/minecraft/unmapped/C_zscvhwbd;)Z
 		ARG 0 shape
 	METHOD m_bdlslsvh getStateManager ()Lnet/minecraft/unmapped/C_ezfeikaq;
-	METHOD m_bsuyxxeg getTranslationKey ()Ljava/lang/String;
-		COMMENT {@return the translation key for the name of this block}
-		COMMENT
-		COMMENT <p>By default, it returns {@code block.namespace.path} where {@code
-		COMMENT namespace} and {@code path} are of the identifier used for registering
-		COMMENT this block, but {@code /} in {@code path} is replaced with {@code .}.
-		COMMENT If the block is not registered, it returns {@code block.unregistered_sadface}.
 	METHOD m_bztcfiru getDroppedStacks (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_kvegafmh;)Ljava/util/List;
 		ARG 0 state
 		ARG 1 world
@@ -192,6 +186,8 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 			COMMENT the bitwise flags for {@link net.minecraft.world.ModifiableWorld#setBlockState(BlockPos, BlockState, int, int)}
 		ARG 5 maxUpdateDepth
 			COMMENT the limit for the cascading block updates
+	METHOD m_oscwylqf updateEntityVelocityAfterFall (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 2 entity
 	METHOD m_pdzevtfw copyProperty (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 0 source
 		ARG 1 target
@@ -276,20 +272,12 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 2 stack
 	METHOD m_zpnlglhs shouldDrawSide (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 0 state
+		ARG 1 sideState
 		ARG 2 side
+	CLASS C_epynadow ShapePair
 	CLASS C_miiagdeq
 		METHOD load (Ljava/lang/Object;)Ljava/lang/Object;
 			ARG 1 shape
-	CLASS C_ysitskrk NeighborGroup
-		FIELD f_iuethcuz facing Lnet/minecraft/unmapped/C_xpuuihxf;
-		FIELD f_ovrcrewh other Lnet/minecraft/unmapped/C_txtbiemp;
-		FIELD f_suhtzfht self Lnet/minecraft/unmapped/C_txtbiemp;
-		METHOD <init> (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)V
-			ARG 1 self
-			ARG 2 other
-			ARG 3 facing
-		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
 	CLASS C_znvnetlf
-		METHOD rehash rehash (I)V
+		METHOD rehash (I)V
 			ARG 1 newSize

@@ -1,10 +1,10 @@
 CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	FIELD f_ahvemmlp NIL_UUID Ljava/util/UUID;
-	FIELD f_ajmhlkot DOWNLOAD_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
+	FIELD f_ajmhlkot DOWNLOAD_WORKER_EXECUTOR Lnet/minecraft/unmapped/C_dhavtmvf;
 	FIELD f_faeenrac LOGGER Lorg/slf4j/Logger;
 	FIELD f_gsxvektl TICKER Lcom/google/common/base/Ticker;
 	FIELD f_ivdnjoxr LINEAR_LOOKUP_THRESHOLD I
-	FIELD f_kmtdmvfj IO_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
+	FIELD f_kmtdmvfj IO_WORKER_EXECUTOR Lnet/minecraft/unmapped/C_dhavtmvf;
 	FIELD f_lamtvexk MAX_THREADS_SYSTEM_PROPERTY Ljava/lang/String;
 	FIELD f_pshbhhha JAR_FILE_SYSTEM_PROVIDER Ljava/nio/file/spi/FileSystemProvider;
 	FIELD f_qqybtqnr nanoTimeSupplier Lnet/minecraft/unmapped/C_iphdqeiz$C_bcqaaecr;
@@ -12,7 +12,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	FIELD f_sxxdtide NANOS_PER_MILLI J
 	FIELD f_taiaktna DEFAULT_MAX_THREADS I
 	FIELD f_wikbskzx breakpointPauser Ljava/util/function/Consumer;
-	FIELD f_zimcxepj MAIN_WORKER_EXECUTOR Ljava/util/concurrent/ExecutorService;
+	FIELD f_zimcxepj MAIN_WORKER_EXECUTOR Lnet/minecraft/unmapped/C_dhavtmvf;
 	METHOD m_aidzvymm existenceCheckTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
 		ARG 0 path
 	METHOD m_akgydyyc shuffle (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)V
@@ -45,9 +45,6 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 0 biFunction
 	METHOD m_eguhqvxr throwOrPause (Ljava/lang/Throwable;)Ljava/lang/Throwable;
 		ARG 0 t
-	METHOD m_egytkosb debugSupplier (Ljava/lang/String;Ljava/util/function/Supplier;)Ljava/util/function/Supplier;
-		ARG 0 activeThreadName
-		ARG 1 supplier
 	METHOD m_ehppsmmu toArrayList ()Ljava/util/stream/Collector;
 		COMMENT {@return a collector that accumulates into a new array list, for the sake of mutability}
 	METHOD m_elihuwxg getEpochTimeMs ()J
@@ -65,12 +62,12 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_fppetslt getJVMFlags ()Ljava/util/stream/Stream;
 	METHOD m_ftciccth toMap ()Ljava/util/stream/Collector;
 	METHOD m_fwdpfvho mapWith (Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-	METHOD m_gatbnpas getIoWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
+	METHOD m_gatbnpas getIoWorkerExecutor ()Lnet/minecraft/unmapped/C_dhavtmvf;
 	METHOD m_gdspwjqr memoize (Ljava/util/function/Function;)Ljava/util/function/Function;
 		ARG 0 function
 	METHOD m_gxlhducm getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
 		ARG 0 t
-	METHOD m_hnnezaif getMainWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
+	METHOD m_hnnezaif getMainWorkerExecutor ()Lnet/minecraft/unmapped/C_dhavtmvf;
 	METHOD m_iphxtmra backupAndReplace (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		ARG 0 current
 		ARG 1 newPath
@@ -78,7 +75,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_jsqsuqek (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
 		ARG 0 runnable
 		ARG 1 supplier
-	METHOD m_jxtdpimf getDownloadWorkerExecutor ()Ljava/util/concurrent/ExecutorService;
+	METHOD m_jxtdpimf getDownloadWorkerExecutor ()Lnet/minecraft/unmapped/C_dhavtmvf;
 	METHOD m_jzncpgce getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
 	METHOD m_kbwjpgkm deleteTask (Ljava/nio/file/Path;)Ljava/util/function/BooleanSupplier;
@@ -111,7 +108,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_muatoqew copyShuffled ([Ljava/lang/Object;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
 		ARG 0 values
 		ARG 1 random
-	METHOD m_mytcolvj createWorker (Ljava/lang/String;)Ljava/util/concurrent/ExecutorService;
+	METHOD m_mytcolvj createWorker (Ljava/lang/String;)Lnet/minecraft/unmapped/C_dhavtmvf;
 		ARG 0 name
 	METHOD m_nccitswt createDefaultedIndexLookup (Ljava/util/List;)Ljava/util/function/ToIntFunction;
 		ARG 0 items
@@ -123,8 +120,6 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 1 object
 	METHOD m_nwbatfgz (Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicInteger;Ljava/util/concurrent/ForkJoinPool;)Ljava/util/concurrent/ForkJoinWorkerThread;
 		ARG 2 pool
-	METHOD m_oaamqqhk attemptShutdown (Ljava/util/concurrent/ExecutorService;)V
-		ARG 0 service
 	METHOD m_oigccakw startTimerHack ()V
 	METHOD m_onipypca (Ljava/util/function/Function;Ljava/util/function/Predicate;)Ljava/lang/Object;
 		ARG 0 function
@@ -158,9 +153,6 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 2 allowPartial
 	METHOD m_tpboltql cachedMapper (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_inohrqzb;
 		ARG 0 mapper
-	METHOD m_ucqgdvxm debugRunnable (Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Runnable;
-		ARG 0 activeThreadName
-		ARG 1 runnable
 	METHOD m_ucywpxge getRandom ([ILnet/minecraft/unmapped/C_rlomrsco;)I
 		ARG 0 array
 		ARG 1 random
@@ -198,7 +190,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_wciquilx toShuffledList (Ljava/util/stream/Stream;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
 		ARG 0 values
 		ARG 1 random
-	METHOD m_wkoofosm createIoWorker (Ljava/lang/String;Z)Ljava/util/concurrent/ExecutorService;
+	METHOD m_wkoofosm createIoWorker (Ljava/lang/String;Z)Lnet/minecraft/unmapped/C_dhavtmvf;
 		ARG 0 name
 		ARG 1 daemon
 	METHOD m_wpeqdapc createTranslationKey (Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/lang/String;
@@ -229,10 +221,6 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_zxlwmobp getRandom ([Ljava/lang/Object;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/lang/Object;
 		ARG 0 array
 		ARG 1 random
-	CLASS C_cyqlwwzq
-		METHOD run run ()V
-	CLASS C_etnademe
-		METHOD read read ()J
 	CLASS C_fqjbnqwz OperatingSystem
 		FIELD f_vamwfmdr name Ljava/lang/String;
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
@@ -244,25 +232,17 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 			ARG 1 uri
 		METHOD m_zghwojcz open (Ljava/io/File;)V
 			ARG 1 file
-	CLASS C_kvgfzrtq
-		METHOD getAsBoolean getAsBoolean ()Z
-	CLASS C_lsulyfwg
-		METHOD getAsBoolean getAsBoolean ()Z
 	CLASS C_nkazyyip
 		FIELD f_dixhweqx cache Ljava/util/Map;
-		METHOD apply apply (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+		METHOD apply (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 			ARG 1 t
 			ARG 2 u
 		METHOD m_sdqdsriq (Ljava/util/function/BiFunction;Lcom/mojang/datafixers/util/Pair;)Ljava/lang/Object;
 			ARG 1 pair
-	CLASS C_qgeblktr
-		METHOD getAsBoolean getAsBoolean ()Z
 	CLASS C_qygfqbqw
-		METHOD onTermination onTermination (Ljava/lang/Throwable;)V
+		METHOD onTermination (Ljava/lang/Throwable;)V
 			ARG 1 throwable
 	CLASS C_tceggguc
 		FIELD f_boyitqoh cache Ljava/util/Map;
-		METHOD apply apply (Ljava/lang/Object;)Ljava/lang/Object;
+		METHOD apply (Ljava/lang/Object;)Ljava/lang/Object;
 			ARG 1 object
-	CLASS C_vroykftd
-		METHOD getAsBoolean getAsBoolean ()Z

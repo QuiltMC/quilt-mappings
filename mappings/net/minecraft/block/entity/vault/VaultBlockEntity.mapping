@@ -1,0 +1,77 @@
+CLASS net/minecraft/unmapped/C_xclnoluc net/minecraft/block/entity/vault/VaultBlockEntity
+	FIELD f_obqunrna sharedData Lnet/minecraft/unmapped/C_czyoqmgb;
+	FIELD f_rckgphgi clientData Lnet/minecraft/unmapped/C_gyznndxk;
+	FIELD f_uordyfhu serverData Lnet/minecraft/unmapped/C_nsbycoiv;
+	FIELD f_yeczrayj config Lnet/minecraft/unmapped/C_cudfnjix;
+	METHOD m_aqgrjwek (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lnet/minecraft/unmapped/C_hhlwcnih;)V
+		ARG 2 nbt
+	METHOD m_bmrroywl getServerData ()Lnet/minecraft/unmapped/C_nsbycoiv;
+	METHOD m_ksmzflqf getSharedData ()Lnet/minecraft/unmapped/C_czyoqmgb;
+	METHOD m_pdkrtrkx toNbt (Lcom/mojang/serialization/Codec;Ljava/lang/Object;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_oivssbvb;
+		ARG 1 object
+		ARG 2 provider
+	METHOD m_sxksvmgb getConfig ()Lnet/minecraft/unmapped/C_cudfnjix;
+	METHOD m_xqjhnghf setConfig (Lnet/minecraft/unmapped/C_cudfnjix;)V
+		ARG 1 config
+	METHOD m_yvksvmlr getClientData ()Lnet/minecraft/unmapped/C_gyznndxk;
+	CLASS C_qktdibgk Client
+		FIELD f_bzouoldc ACTIVATION_PARTICLE_COUNT I
+		FIELD f_fsaupncd DEACTIVATION_PARTICLE_COUNT I
+		FIELD f_gaqeqnvc PARTICLE_TICK_RATE I
+		FIELD f_vbjguwjg IDLE_PARTICLE_CHANCE F
+		FIELD f_wafgtbgz AMBIENT_SOUND_CHANCE F
+		METHOD m_brlxwfpp isWithinConnectionRange (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_czyoqmgb;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
+			ARG 1 sharedData
+		METHOD m_bwknapnq shouldDisplayItems (Lnet/minecraft/unmapped/C_czyoqmgb;)Z
+			ARG 0 sharedData
+		METHOD m_foedtuhf emitIdleParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_czyoqmgb;Lnet/minecraft/unmapped/C_nqucohct;)V
+			ARG 3 effect
+		METHOD m_gognnvjb tick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_gyznndxk;Lnet/minecraft/unmapped/C_czyoqmgb;)V
+			ARG 3 clientData
+			ARG 4 sharedData
+		METHOD m_hhgictcy playIdleSounds (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_czyoqmgb;)V
+		METHOD m_hqwddzvl emitActivationParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_czyoqmgb;Lnet/minecraft/unmapped/C_nqucohct;)V
+			ARG 4 effect
+		METHOD m_jpksxuil getRandomCentralPosition (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_sjbrqyhj getKeyholePosition (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_stanxzly getRandomInternalPosition (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_tmcqsnlz emitConnectionParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_czyoqmgb;)V
+			ARG 3 sharedData
+		METHOD m_vclomjjx emitDeactivationParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_nqucohct;)V
+			ARG 2 effect
+		METHOD m_xjgorkip emitConnectionParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_jzrpycqo;)V
+			ARG 1 pos
+	CLASS C_vucktnfd Server
+		FIELD f_ttiayxfe INSERT_FAIL_SOUND_BUFFER_TICKS I
+		FIELD f_zjstwohq DISPLAY_CYCLE_RATE I
+		FIELD f_zudiweuu UNLOCKING_DELAY_TICKS I
+		METHOD m_cwaktlsr shouldCycleDisplayItem (JLnet/minecraft/unmapped/C_oocnpsfc;)Z
+			ARG 0 tick
+			ARG 2 state
+		METHOD m_fayzavvf playFailedInsertionSound (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_nsbycoiv;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_avavozay;)V
+			ARG 1 data
+			ARG 3 sound
+		METHOD m_qebtjepa canUnlock (Lnet/minecraft/unmapped/C_cudfnjix;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
+			ARG 0 config
+		METHOD m_quliyibc cycleDisplayItem (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_oocnpsfc;Lnet/minecraft/unmapped/C_cudfnjix;Lnet/minecraft/unmapped/C_czyoqmgb;Lnet/minecraft/unmapped/C_hynzadkk;)V
+			ARG 1 state
+			ARG 2 config
+			ARG 3 sharedData
+		METHOD m_suqfgtrx tick (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cudfnjix;Lnet/minecraft/unmapped/C_nsbycoiv;Lnet/minecraft/unmapped/C_czyoqmgb;)V
+			ARG 3 config
+			ARG 4 serverData
+			ARG 5 sharedData
+		METHOD m_tgurfdgk unlock (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cudfnjix;Lnet/minecraft/unmapped/C_nsbycoiv;Lnet/minecraft/unmapped/C_czyoqmgb;Ljava/util/List;)V
+			ARG 4 serverData
+		METHOD m_tlposeev setVaultState (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cudfnjix;Lnet/minecraft/unmapped/C_czyoqmgb;)V
+			ARG 2 old
+			ARG 3 newState
+			ARG 4 config
+			ARG 5 sharedData
+		METHOD m_tvelqevn canEject (Lnet/minecraft/unmapped/C_cudfnjix;Lnet/minecraft/unmapped/C_oocnpsfc;)Z
+			ARG 0 config
+			ARG 1 state
+		METHOD m_vsawgyip getRandomDisplayItem (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		METHOD m_vseniggs tryInsertKey (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cudfnjix;Lnet/minecraft/unmapped/C_nsbycoiv;Lnet/minecraft/unmapped/C_czyoqmgb;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;)V
+			ARG 3 config
+			ARG 4 serverData
