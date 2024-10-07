@@ -36,10 +36,11 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
+import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.util.ProviderUtil;
 
-public abstract class AddProposedMappingsTask extends EnigmaProfileConsumingTask {
+public abstract class AddProposedMappingsTask extends DefaultMappingsTask implements EnigmaProfileConsumingTask {
     @InputFile
     public abstract RegularFileProperty getInputJar();
 
