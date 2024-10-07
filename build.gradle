@@ -35,6 +35,8 @@ plugins {
 }
 
 quiltMappings {
+	mappingsDir = file('mappings/')
+
 	enigmaProfileConfig = file('enigma/enigma_profile.json')
 
 	unpickMeta = file('unpick/unpick.json')
@@ -87,12 +89,12 @@ repositories {
 
 // TODO move at least some of these to MappingsPlugin
 configurations {
-	enigmaRuntime
+	// enigmaRuntime
 	javadocClasspath
-	decompileClasspath
+	// decompileClasspath
 	unpick
-	hashed
-	intermediary
+	// hashed
+	// intermediary
 }
 
 dependencies {
@@ -156,22 +158,6 @@ tasks.jar.enabled = false
 task sourcesJar(type: Jar, dependsOn: classes) {
 	archiveClassifier = "sources"
 	from sourceSets.constants.allSource
-}
-
-task mappingsUnpicked(type: EnigmaMappingsTask, dependsOn: unpickHashedJar) {
-	jarToMap.set unpickHashedJar.outputFile.get()
-}
-
-task mappings(type: EnigmaMappingsTask, dependsOn: "mapPerVersionMappingsJar") {
-	jarToMap.set quiltMappings.fileConstants.perVersionMappingsJar
-}
-
-task mappingsUnpickedServer(type: EnigmaMappingsServerTask, dependsOn: unpickHashedJar) {
-	jarToMap.set unpickHashedJar.outputFile.get()
-}
-
-task mappingsServer(type: EnigmaMappingsServerTask, dependsOn: "mapPerVersionMappingsJar") {
-	jarToMap.set project.extensions.quiltMappings.fileConstants.perVersionMappingsJar
 }
 
 // Only build jars for package infos if we need to actually expose stuff like annotation in the future.
