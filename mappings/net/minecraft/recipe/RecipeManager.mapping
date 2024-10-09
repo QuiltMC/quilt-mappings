@@ -5,10 +5,13 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	FIELD f_avfppxeg displays Ljava/util/List;
 	FIELD f_cfijlewf registries Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
 	FIELD f_hqaaykcp LOGGER Lorg/slf4j/Logger;
+	FIELD f_kczkpctf RECIPE_PROPERTY_SETS Ljava/util/Map;
 	FIELD f_lwdpgeem propertySets Ljava/util/Map;
 	FIELD f_qlhewmmf recipes Lnet/minecraft/unmapped/C_rrkbzyqf;
 	FIELD f_sbxhtycx stonecuttingRecipes Lnet/minecraft/unmapped/C_qzkacgwi$C_kvadugef;
 	FIELD f_yzfonsti displayByRecipe Ljava/util/Map;
+	METHOD m_cuobwmoj createExtractorForSingleItemRecipe (Lnet/minecraft/unmapped/C_rhnqznys;)Lnet/minecraft/unmapped/C_hjseusrb$C_dpqqvooy;
+		ARG 0 type
 	METHOD m_dsxpcpxk get (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		COMMENT {@return a recipe with the given {@code id}, or empty if there is no such recipe}
 	METHOD m_enpjndth filterDisabled (Lnet/minecraft/unmapped/C_czxxrbcp;Ljava/util/List;)Ljava/util/List;
@@ -60,6 +63,16 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	CLASS C_bvtkxdyi CachedCheck
 		METHOD m_ltqsvwgf getFirstMatch (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_bdwnwhiu;)Ljava/util/Optional;
 			ARG 1 input
+	CLASS C_dpqqvooy IngredientExtractor
+		METHOD apply (Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/Optional;
+			ARG 1 recipe
 	CLASS C_ioxglbpe
 		FIELD f_kspyemsz key Lnet/minecraft/unmapped/C_xhhleach;
 	CLASS C_oqjlukte ServerDisplayInfo
+	CLASS C_xmfwsmdh IngredientCollector
+		FIELD f_cicntgdd finder Lnet/minecraft/unmapped/C_hjseusrb$C_dpqqvooy;
+		FIELD f_revcxqtv ingredients Ljava/util/List;
+		FIELD f_ylmrfukx key Lnet/minecraft/unmapped/C_xhhleach;
+		METHOD accept (Ljava/lang/Object;)V
+			ARG 1 recipe
+		METHOD m_jebcbuxt asPropertySet (Lnet/minecraft/unmapped/C_czxxrbcp;)Lnet/minecraft/unmapped/C_jgqrwysz;
