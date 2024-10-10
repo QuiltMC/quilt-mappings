@@ -2,11 +2,14 @@ CLASS net/minecraft/unmapped/C_inwsuliy net/minecraft/loot/LootTable
 	FIELD f_dyzbynxg type Lnet/minecraft/unmapped/C_ykthnceq;
 	FIELD f_euzdblpq combinedFunction Ljava/util/function/BiFunction;
 	FIELD f_fuzuxxka functions Ljava/util/List;
+	FIELD f_kozlclng DEFAULT_SEED J
 	FIELD f_laaskmuo randomSequenceId Ljava/util/Optional;
 	FIELD f_nawobxkn pools Ljava/util/List;
 	FIELD f_ookilagu GENERIC Lnet/minecraft/unmapped/C_ykthnceq;
 	FIELD f_rgkwwxmf LOGGER Lorg/slf4j/Logger;
+	FIELD f_rmuzkcnb HOLDER_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_sartmpeq EMPTY Lnet/minecraft/unmapped/C_inwsuliy;
+	FIELD f_wvxzdplc CODEC Lcom/mojang/serialization/Codec;
 	METHOD m_azuvczrx generateRawLoot (Lnet/minecraft/unmapped/C_nzsnkdtl;JLjava/util/function/Consumer;)V
 		ARG 1 parameterSet
 		ARG 2 seed
@@ -26,11 +29,15 @@ CLASS net/minecraft/unmapped/C_inwsuliy net/minecraft/loot/LootTable
 	METHOD m_henqulth generateLoot (Lnet/minecraft/unmapped/C_nzsnkdtl;Ljava/util/function/Consumer;)V
 		ARG 1 parameterSet
 		ARG 2 lootConsumer
+	METHOD m_hkmfceqo (Lnet/minecraft/unmapped/C_inwsuliy;)Ljava/util/List;
+		ARG 0 table
 	METHOD m_kdnetbvp generateLoot (Lnet/minecraft/unmapped/C_nzsnkdtl;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 		ARG 1 parameterSet
 	METHOD m_ksxvxexm generateRawLoot (Lnet/minecraft/unmapped/C_iakykpgh;Ljava/util/function/Consumer;)V
 		ARG 1 context
 		ARG 2 lootConsumer
+	METHOD m_lzrqgafz (Lnet/minecraft/unmapped/C_inwsuliy;)Ljava/util/Optional;
+		ARG 0 table
 	METHOD m_nsgsgvtn generateLoot (Lnet/minecraft/unmapped/C_nzsnkdtl;J)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 		ARG 1 parameterSet
 		ARG 2 seed
@@ -43,10 +50,15 @@ CLASS net/minecraft/unmapped/C_inwsuliy net/minecraft/loot/LootTable
 		ARG 2 lootConsumer
 	METHOD m_punwgoad generateLoot (Lnet/minecraft/unmapped/C_iakykpgh;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 		ARG 1 context
+	METHOD m_qwijqopm generateLoot (Lnet/minecraft/unmapped/C_nzsnkdtl;Lnet/minecraft/unmapped/C_rlomrsco;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+	METHOD m_shguvbkl (Lnet/minecraft/unmapped/C_inwsuliy;)Ljava/util/List;
+		ARG 0 table
 	METHOD m_smqsokwf getType ()Lnet/minecraft/unmapped/C_ykthnceq;
 	METHOD m_tmeopeok builder ()Lnet/minecraft/unmapped/C_inwsuliy$C_daaljsfu;
 	METHOD m_xfbhesuf processStacks (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
 		ARG 1 lootConsumer
+	METHOD m_ymonjzfv (Lnet/minecraft/unmapped/C_inwsuliy;)Lnet/minecraft/unmapped/C_ykthnceq;
+		ARG 0 table
 	CLASS C_daaljsfu Builder
 		FIELD f_azlxvnwl type Lnet/minecraft/unmapped/C_ykthnceq;
 		FIELD f_dnxcxqti pools Lcom/google/common/collect/ImmutableList$Builder;
@@ -58,3 +70,4 @@ CLASS net/minecraft/unmapped/C_inwsuliy net/minecraft/loot/LootTable
 		METHOD m_ggtisasp randomSequence (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_inwsuliy$C_daaljsfu;
 			ARG 1 id
 		METHOD m_jpkpymka type (Lnet/minecraft/unmapped/C_ykthnceq;)Lnet/minecraft/unmapped/C_inwsuliy$C_daaljsfu;
+			ARG 1 type
