@@ -1,13 +1,12 @@
 package quilt.internal.tasks;
 
 import org.gradle.api.Task;
-import org.gradle.api.artifacts.VersionCatalog;
-import org.gradle.api.artifacts.VersionCatalogsExtension;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.util.DownloadImmediate;
 
-// TODO check if tasks that depend on other other tasks' outputs have task dependencies that can be eliminated
+// TODO possibly eliminate this
 public interface MappingsTask extends Task {
+    // TODO move this to a separate interface
     default DownloadImmediate.Builder startDownload() {
         return new DownloadImmediate.Builder(this);
     }
@@ -17,20 +16,13 @@ public interface MappingsTask extends Task {
         return this.getProject().getTasks().named(name, taskClass).get();
     }
 
-    // TODO add explanations to calls
+    // TODO add explanations to calls, probably inline method
     default void outputsNeverUpToDate() {
         this.getOutputs().upToDateWhen(task -> false);
     }
 
+    // TODO eliminate this
     default QuiltMappingsExtension mappingsExt() {
         return QuiltMappingsExtension.get(this.getProject());
-    }
-
-    default VersionCatalogsExtension versionCatalogs() {
-        return this.getProject().getExtensions().getByType(VersionCatalogsExtension.class);
-    }
-
-    default VersionCatalog libs() {
-        return this.versionCatalogs().named("libs");
     }
 }
