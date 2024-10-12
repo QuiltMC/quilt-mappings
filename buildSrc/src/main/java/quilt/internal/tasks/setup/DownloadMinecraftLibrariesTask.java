@@ -46,7 +46,7 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
     protected abstract MapProperty<String, File> getArtifactsByUrlImpl();
 
     public DownloadMinecraftLibrariesTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
         // TODO is this because library sources may change even on the same version?
         this.outputsNeverUpToDate();
 
@@ -106,6 +106,7 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
                 // TODO this is screwy.
                 //  Could we put these in a configuration in MappingsPlugin
                 //  and pass the configuration to an input of this task?
+                //  Actually it looks like these could just go in an output directory
                 this.getProject().getDependencies().add("decompileClasspath", library.getName());
             }
 

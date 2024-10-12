@@ -13,7 +13,7 @@ public abstract class TinyJarTask extends Jar implements MappingsTask {
     public abstract RegularFileProperty getMappings();
 
     public TinyJarTask() {
-        this.setGroup(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        this.setGroup(Constants.Groups.BUILD_MAPPINGS);
         this.dependsOn(MergeTinyTask.TASK_NAME);
 
         this.getMappings().convention(

@@ -41,7 +41,7 @@ public abstract class DownloadWantedVersionManifestTask extends DefaultMappingsT
     public abstract RegularFileProperty getVersionFile();
 
     public DownloadWantedVersionManifestTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
 
         // provide an informative error message if version data can't be obtained
         this.getManifestVersion().convention(this.getProject().provider(() -> {

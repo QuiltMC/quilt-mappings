@@ -9,24 +9,31 @@ import org.gradle.api.artifacts.ConfigurationContainer;
 import org.gradle.api.artifacts.VersionCatalogsExtension;
 import org.gradle.api.artifacts.VersionConstraint;
 import org.gradle.api.file.Directory;
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.plugins.ExtensionContainer;
 import org.gradle.api.plugins.JavaBasePlugin;
 import org.gradle.api.plugins.JavaPluginExtension;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
+import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.bundling.Jar;
+import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.jetbrains.annotations.NotNull;
 import org.quiltmc.enigma.api.service.JarIndexerService;
 import quilt.internal.decompile.Decompilers;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
+import quilt.internal.tasks.MappingsDirConsumingTask;
 import quilt.internal.tasks.build.AddProposedMappingsTask;
 import quilt.internal.tasks.build.BuildMappingsTinyTask;
 import quilt.internal.tasks.build.CompressTinyTask;
 import quilt.internal.tasks.build.DropInvalidMappingsTask;
+import quilt.internal.tasks.build.EraseByteCodeTask;
+import quilt.internal.tasks.build.GenFakeSourceTask;
 import quilt.internal.tasks.build.GeneratePackageInfoMappingsTask;
 import quilt.internal.tasks.build.InvertPerVersionMappingsTask;
 import quilt.internal.tasks.build.MappingsV2JarTask;
@@ -35,6 +42,7 @@ import quilt.internal.tasks.build.MergeTinyTask;
 import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.build.TinyJarTask;
+import quilt.internal.tasks.decompile.DecompileVineflowerTask;
 import quilt.internal.tasks.diff.CheckTargetVersionExistsTask;
 import quilt.internal.tasks.diff.CheckUnpickVersionsMatchTask;
 import quilt.internal.tasks.diff.DecompileTargetTask;
@@ -48,12 +56,14 @@ import quilt.internal.tasks.diff.UnpickVersionsMatchConsumingTask;
 import quilt.internal.tasks.jarmapping.MapJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
+import quilt.internal.tasks.lint.Checker;
 import quilt.internal.tasks.lint.DownloadDictionaryFileTask;
 import quilt.internal.tasks.lint.FindDuplicateMappingFilesTask;
 import quilt.internal.tasks.lint.MappingLintTask;
 import quilt.internal.tasks.mappings.AbstractEnigmaMappingsTask;
 import quilt.internal.tasks.mappings.EnigmaMappingsServerTask;
 import quilt.internal.tasks.mappings.EnigmaMappingsTask;
+import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
 import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.DownloadMappingsTask;
@@ -69,14 +79,15 @@ import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask;
 import quilt.internal.tasks.unpick.UnpickJarTask;
 import quilt.internal.tasks.unpick.gen.OpenGlConstantUnpickGenTask;
 import quilt.internal.tasks.unpick.gen.UnpickGenTask;
+import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 
 import javax.inject.Inject;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
-import static quilt.internal.util.ProviderUtil.provideProjectDir;
 import static quilt.internal.util.ProviderUtil.toOptional;
 
 import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
@@ -129,42 +140,13 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         ENIGMA_SERVER_PROP_PREFIX + EnigmaMappingsServerTask.LOG_OPTION;
     public static final String ENIGMA_SERVER_ARGS_PROP = ENIGMA_SERVER_PROP_PREFIX + "args";
 
-    public static Provider<RegularFile> provideMappingsDestFile(
-        Provider<Directory> destDir, String mappingsName, String fileExt
-    ) {
-        return destDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + "-" + mappingsName + "." + fileExt));
-    }
-
     @Inject
     @NotNull
     public abstract ProviderFactory getProviders();
 
     @Override
     public void apply(@NotNull Project project) {
-        final ProjectLayout projectLayout = project.getLayout();
-
         final ProviderFactory providers = this.getProviders();
-
-        final ExtensionContainer extensions = project.getExtensions();
-
-        // adds the JavaPluginExtension
-        project.getPluginManager().apply(JavaBasePlugin.class);
-        // has sourceSets
-        final var javaExt = extensions.getByType(JavaPluginExtension.class);
-
-        final var ext = extensions.create(QuiltMappingsExtension.EXTENSION_NAME, QuiltMappingsExtension.class, project);
-
-        final ConfigurationContainer configurations = project.getConfigurations();
-
-        final Configuration enigmaRuntime = configurations.create(ENIGMA_RUNTIME_CONFIGURATION_NAME);
-        final Configuration decompileClasspath = configurations.create(DECOMPILE_CLASSPATH_CONFIGURATION_NAME);
-        final Configuration preVersionMappings = configurations.create(PER_VERSION_MAPPINGS_CONFIGURATION_NAME);
-        final Configuration intermediaryMappings = configurations.create(INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME);
-
-        final TaskContainer tasks = project.getTasks();
-
-        final Provider<Directory> mappingsDestDir =
-            provideProjectDir(project, ext.getFileConstants().cacheFilesMinecraft);
 
         final String unpickVersion = project.getExtensions().getByType(VersionCatalogsExtension.class)
             .named("libs")
@@ -179,13 +161,50 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 """
             ));
 
+        final ProjectLayout projectLayout = project.getLayout();
+
+        final Directory projectDir = projectLayout.getProjectDirectory();
+
+        final DirectoryProperty projectBuildDir = projectLayout.getBuildDirectory();
+
+        final Provider<Directory> mappingsBuildDir = projectBuildDir.dir("mappings");
+
+        final Directory cacheFilesMinecraft = projectDir.dir(".gradle/minecraft");
+
+        final BiFunction<String, String, RegularFile> createMappingsDest = (mappingsName, fileExt) ->
+            cacheFilesMinecraft.file(Constants.MINECRAFT_VERSION + "-" + mappingsName + "." + fileExt);
+
+        final ExtensionContainer extensions = project.getExtensions();
+
+        // adds the JavaPluginExtension and (indirectly) the clean task
+        project.getPluginManager().apply(JavaBasePlugin.class);
+        // has sourceSets
+        final var javaExt = extensions.getByType(JavaPluginExtension.class);
+
+        final var ext = extensions.create(QuiltMappingsExtension.EXTENSION_NAME, QuiltMappingsExtension.class, project);
+
+        final ConfigurationContainer configurations = project.getConfigurations();
+
+        final Configuration enigmaRuntime = configurations.create(ENIGMA_RUNTIME_CONFIGURATION_NAME);
+        // TODO eliminate this
+        final Configuration decompileClasspath = configurations.create(DECOMPILE_CLASSPATH_CONFIGURATION_NAME);
+        final Configuration preVersionMappings = configurations.create(PER_VERSION_MAPPINGS_CONFIGURATION_NAME);
+        final Configuration intermediaryMappings = configurations.create(INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME);
+
+        final TaskContainer tasks = project.getTasks();
+
+        // TODO probably just move any directory deleted here to build/ so this isn't needed
+        tasks.named(LifecycleBasePlugin.CLEAN_TASK_NAME, Delete.class, task -> {
+            task.delete(cacheFilesMinecraft);
+        });
+
         tasks.withType(EnigmaProfileConsumingTask.class).configureEach(task -> {
             task.getEnigmaProfile().convention(ext.enigmaProfile);
 
             task.getEnigmaProfileConfig().convention(ext.getEnigmaProfileConfig());
 
-            task.getSimpleTypeFieldNamesFiles().convention(
-                project.provider(() -> project.files(
+            task.getSimpleTypeFieldNamesFiles().from(
+                project.files(providers.provider(() ->
                     task.getEnigmaProfile().get().getServiceProfiles(JarIndexerService.TYPE).stream()
                         .flatMap(service -> service.getArgument(SIMPLE_TYPE_FIELD_NAMES_PATH).stream())
                         .map(stringOrStrings -> stringOrStrings.mapBoth(Stream::of, Collection::stream))
@@ -197,21 +216,35 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             );
         });
 
-        // provide an informative error message if no profile is specified
-        ext.getEnigmaProfileConfig().convention(() -> {
-            throw new GradleException(
-                "No enigma profile specified. " +
-                    "A profile must be specified to use an EnigmaProfileConsumingTask."
-            );
-        });
+        this.provideDefaultError(
+            ext.getEnigmaProfileConfig(),
+            "No enigma profile specified. " +
+                "A profile must be specified to use an " + EnigmaProfileConsumingTask.class.getSimpleName() + "."
+        );
+
+        {
+            final var mappingsDirOutputtingTasks = tasks.withType(MappingsDirOutputtingTask.class);
+
+            mappingsDirOutputtingTasks.configureEach(task -> {
+                task.getMappingsDir().convention(ext.getMappingsDir());
+            });
+
+            tasks.withType(MappingsDirConsumingTask.class).configureEach(task -> {
+                task.getMappingsDir().convention(ext.getMappingsDir());
+                task.getInputs().files(mappingsDirOutputtingTasks);
+            });
+        }
+
+        this.provideDefaultError(
+            ext.getMappingsDir(),
+            "No mappings directory specified. " +
+                "A directory must be specified to use a " + MappingsDirConsumingTask.class.getSimpleName() + "."
+        );
 
         final var downloadVersionsManifest = tasks.register(
             DownloadVersionsManifestTask.TASK_NAME, DownloadVersionsManifestTask.class,
             task -> {
-                task.getManifestFile().convention(() -> new File(
-                    ext.getFileConstants().cacheFilesMinecraft,
-                    "version_manifest_v2.json"
-                ));
+                task.getManifestFile().convention(cacheFilesMinecraft.file("version_manifest_v2.json"));
             }
         );
 
@@ -222,9 +255,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                     downloadVersionsManifest.flatMap(DownloadVersionsManifestTask::getManifestFile)
                 );
 
-                task.getVersionFile().convention(() ->
-                    new File(ext.getFileConstants().cacheFilesMinecraft, Constants.MINECRAFT_VERSION + ".json")
-                );
+                task.getVersionFile().convention(cacheFilesMinecraft.file(Constants.MINECRAFT_VERSION + ".json"));
             }
         );
 
@@ -235,15 +266,13 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                     downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::getVersionFile)
                 );
 
-                task.getClientJar().convention(() -> new File(
-                    ext.getFileConstants().cacheFilesMinecraft,
-                    Constants.MINECRAFT_VERSION + "-client.jar"
-                ));
+                task.getClientJar().convention(
+                    cacheFilesMinecraft.file(Constants.MINECRAFT_VERSION + "-client.jar")
+                );
 
-                task.getServerBootstrapJar().convention(() -> new File(
-                    ext.getFileConstants().cacheFilesMinecraft,
-                    Constants.MINECRAFT_VERSION + "-server-bootstrap.jar"
-                ));
+                task.getServerBootstrapJar().convention(
+                    cacheFilesMinecraft.file(Constants.MINECRAFT_VERSION + "-server-bootstrap.jar")
+                );
             }
         );
 
@@ -254,10 +283,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                     downloadMinecraftJars.flatMap(DownloadMinecraftJarsTask::getServerBootstrapJar)
                 );
 
-                task.getServerJar().convention(() -> new File(
-                    ext.getFileConstants().cacheFilesMinecraft,
-                    Constants.MINECRAFT_VERSION + "-server.jar"
-                ));
+                task.getServerJar().convention(
+                    cacheFilesMinecraft.file(Constants.MINECRAFT_VERSION + "-server.jar")
+                );
             }
         );
 
@@ -265,9 +293,8 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task.getClientJar().convention(downloadMinecraftJars.flatMap(DownloadMinecraftJarsTask::getClientJar));
             task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getServerJar));
 
-            // TODO see if output jars like this can all go in a directory (build/minecraftJars/?)
-            final File mergedFile = project.file(Constants.MINECRAFT_VERSION + "-merged.jar");
-            task.getMergedFile().convention(() -> mergedFile);
+            // TODO move this and other jars that are directly in the project dir to some sub dir
+            task.getMergedFile().convention(projectDir.file(Constants.MINECRAFT_VERSION + "-merged.jar"));
         });
 
         final var downloadMinecraftLibraries = tasks.register(
@@ -276,7 +303,8 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 task.getVersionFile().convention(
                     downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::getVersionFile)
                 );
-                task.getLibrariesDir().convention(provideProjectDir(project, ext.getFileConstants().libraries));
+
+                task.getLibrariesDir().convention(cacheFilesMinecraft.dir("libraries"));
             }
         );
 
@@ -292,7 +320,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 task.getMappingsConfiguration().convention(preVersionMappings);
 
                 task.getJarFile().convention(
-                    provideMappingsDestFile(mappingsDestDir, Constants.PER_VERSION_MAPPINGS_NAME, "jar")
+                    createMappingsDest.apply(Constants.PER_VERSION_MAPPINGS_NAME, "jar")
                 );
             }
         );
@@ -301,16 +329,22 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
             task -> {
                 task.getJarFile().convention(downloadPerVersionMappings.flatMap(DownloadMappingsTask::getJarFile));
-                task.getTinyFile().convention(
-                    provideMappingsDestFile(mappingsDestDir, Constants.PER_VERSION_MAPPINGS_NAME, "tiny")
-                );
+                task.getTinyFile().convention(createMappingsDest.apply(Constants.PER_VERSION_MAPPINGS_NAME, "tiny"));
             }
         );
 
-        final var invertPerVersionMappings =
-            tasks.register(InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class);
+        final var invertPerVersionMappings = tasks.register(
+            InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class,
+            task -> {
+                task.getInput().convention(
+                    extractTinyPerVersionMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
+                );
 
-        final var buildMappingsTiny = tasks.register(BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class);
+                task.getInvertedTinyFile().convention(
+                    createMappingsDest.apply(Constants.PER_VERSION_INVERTED_MAPPINGS_NAME, "tiny")
+                );
+            }
+        );
 
         final var mapPerVersionMappingsJar = tasks.register(
             MapPerVersionMappingsJarTask.TASK_NAME, MapPerVersionMappingsJarTask.class,
@@ -321,7 +355,23 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                     extractTinyPerVersionMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
                 );
 
-                task.getOutputJar().convention(() -> ext.getFileConstants().perVersionMappingsJar);
+                // TODO move this and other jars that are directly in the project dir to some sub dir
+                task.getOutputJar().convention(projectDir.file(
+                    Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar"
+                ));
+            }
+        );
+
+        final var buildMappingsTiny = tasks.register(
+            BuildMappingsTinyTask.TASK_NAME, BuildMappingsTinyTask.class,
+            task -> {
+                task.getPerVersionMappingsJar().convention(
+                    mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+                );
+
+                task.getOutputMappings().convention(
+                    mappingsBuildDir.map(dir -> dir.file(Constants.MAPPINGS_NAME + ".tiny"))
+                );
             }
         );
 
@@ -334,30 +384,32 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
                 task.getInputMappings().convention(buildMappingsTiny.flatMap(BuildMappingsTinyTask::getOutputMappings));
 
-                task.getOutputMappings().convention(() ->
-                    new File(ext.getFileConstants().buildDir, INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME + ".tiny")
+                task.getOutputMappings().convention(
+                    // TODO naming this file after the task is a bit silly
+                    mappingsBuildDir.map(dir -> dir.file(INSERT_AUTO_GENERATED_MAPPINGS_TASK_NAME + ".tiny"))
                 );
             }
         );
 
-        tasks.register(
-            MergeTinyTask.TASK_NAME, MergeTinyTask.class,
-            task -> {
-                task.getInput().convention(buildMappingsTiny.flatMap(BuildMappingsTinyTask::getOutputMappings));
+        tasks.register(MergeTinyTask.TASK_NAME, MergeTinyTask.class, task -> {
+            task.getInput().convention(buildMappingsTiny.flatMap(BuildMappingsTinyTask::getOutputMappings));
 
-                task.getHashedTinyMappings().convention(
-                    invertPerVersionMappings.flatMap(InvertPerVersionMappingsTask::getInvertedTinyFile)
-                );
+            task.getHashedTinyMappings().convention(
+                invertPerVersionMappings.flatMap(InvertPerVersionMappingsTask::getInvertedTinyFile)
+            );
 
-                task.getOutputMappings().convention(() -> new File(ext.getFileConstants().buildDir, "mappings.tiny"));
-            }
-        );
+            task.getOutputMappings().convention(mappingsBuildDir.map(dir -> dir.file("mappings.tiny")));
+        });
 
         tasks.register(TinyJarTask.TASK_NAME, TinyJarTask.class);
 
         tasks.register(CompressTinyTask.TASK_NAME, CompressTinyTask.class);
 
-        tasks.register(DropInvalidMappingsTask.TASK_NAME, DropInvalidMappingsTask.class);
+        tasks.register(DropInvalidMappingsTask.TASK_NAME, DropInvalidMappingsTask.class, task -> {
+            task.getPerVersionMappingsJar().convention(
+                mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+            );
+        });
 
         tasks.register(OpenGlConstantUnpickGenTask.TASK_NAME, OpenGlConstantUnpickGenTask.class, task -> {
             task.getVersionFile().convention(
@@ -372,29 +424,22 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getArtifactsByUrl)
             );
 
-            final Provider<Directory> buildDirProvider = provideProjectDir(project, ext.getFileConstants().buildDir);
-
             task.getUnpickGlStateManagerDefinitions().convention(
-                buildDirProvider.map(dir -> dir.file("unpick_glstatemanager.unpick"))
+                mappingsBuildDir.map(dir -> dir.file("unpick_glstatemanager.unpick"))
             );
 
             task.getUnpickGlDefinitions().convention(
-                buildDirProvider.map(dir -> dir.file("unpick_gl.unpick"))
+                mappingsBuildDir.map(dir -> dir.file("unpick_gl.unpick"))
             );
         });
 
         final var combineUnpickDefinitions = tasks.register(
             CombineUnpickDefinitionsTask.TASK_NAME, CombineUnpickDefinitionsTask.class,
             task -> {
-                task.getUnpickDefinitions().from(project.provider(() ->
-                    project.getTasks().withType(UnpickGenTask.class).stream()
-                        .map(UnpickGenTask::getGeneratedUnpickDefinitions)
-                        .toList()
-                ));
+                task.getUnpickDefinitions().from(project.getTasks().withType(UnpickGenTask.class));
 
                 task.getOutput().convention(
-                    provideProjectDir(project, ext.getFileConstants().buildDir)
-                        .map(dir -> dir.file("definitions.unpick"))
+                    mappingsBuildDir.map(dir -> dir.file("definitions.unpick"))
                 );
             }
         );
@@ -405,14 +450,42 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task.getArchiveClassifier().convention(CONSTANTS_SOURCE_SET_NAME);
         });
 
-        tasks.register(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class);
+        tasks.register(GeneratePackageInfoMappingsTask.TASK_NAME, GeneratePackageInfoMappingsTask.class, task -> {
+            task.getPackageName().convention("net/minecraft/unused/packageinfo/");
 
-        tasks.register(DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class);
+            task.getInputJar().convention(mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar));
+        });
 
-        final var mappingLint = tasks.register(MappingLintTask.TASK_NAME, MappingLintTask.class);
+        final var downloadDictionaryFile = tasks.register(
+            DownloadDictionaryFileTask.TASK_NAME, DownloadDictionaryFileTask.class,
+            task -> {
+                // configuration is in build.gradle because it depends on an external url that is prone to change
+                // the output file configuration could be moved here if its name didn't contain the revision
+
+                this.provideDefaultError(
+                    task.getUrl(),
+                    "No url specified. " +
+                        "A url must be specified to use " + task.getName() + " or any task that depends on it."
+                );
+
+                this.provideDefaultError(
+                    task.getOutput(),
+                    "No output specified." +
+                        "An output must be specified to use " + task.getName() + " or any task that depends on it."
+                );
+            }
+        );
+
+        final var mappingLint = tasks.register(MappingLintTask.TASK_NAME, MappingLintTask.class, task -> {
+            task.getJarFile().convention(mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar));
+
+            task.getCheckers().addAll(Checker.DEFAULT_CHECKERS);
+
+            task.getDictionaryFile().convention(downloadDictionaryFile.flatMap(DownloadDictionaryFileTask::getOutput));
+        });
 
         tasks.register(FindDuplicateMappingFilesTask.TASK_NAME, FindDuplicateMappingFilesTask.class, task -> {
-            task.getMappingDirectory().convention(mappingLint.get().getMappingDirectory());
+            task.getMappingDirectory().convention(mappingLint.get().getMappingsDir());
             mappingLint.get().dependsOn(task);
         });
 
@@ -422,20 +495,74 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final var downloadIntermediaryMappings = tasks.register(
             DownloadIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.class,
             task -> {
-                // TODO eliminate this
+                // TODO temporary, until CheckIntermediaryMappingsTask is eliminated
                 task.dependsOn(checkIntermediaryMappings);
+                task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
 
                 task.getMappingsConfiguration().convention(intermediaryMappings);
 
-                task.getJarFile().convention(
-                    provideMappingsDestFile(mappingsDestDir, Constants.INTERMEDIARY_MAPPINGS_NAME, "jar")
-                );
-
-                task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
+                task.getJarFile().convention(createMappingsDest.apply(Constants.INTERMEDIARY_MAPPINGS_NAME, "jar"));
             }
         );
 
-        final var removeIntermediary = tasks.register(RemoveIntermediaryTask.TASK_NAME, RemoveIntermediaryTask.class);
+        final var mergeTinyV2 = tasks.register(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class, task -> {
+            // TODO this used to be dependent on v2UnmergedMappingsJar, but afaict it has no effect on this task
+
+            task.getInput().convention(
+                insertAutoGeneratedMappings.flatMap(AddProposedMappingsTask::getOutputMappings)
+            );
+
+            task.getHashedTinyMappings().convention(
+                invertPerVersionMappings.flatMap(InvertPerVersionMappingsTask::getInvertedTinyFile)
+            );
+
+            task.getOutputMappings().convention(
+                mappingsBuildDir.map(dir -> dir.file("merged2.tiny"))
+            );
+        });
+
+        final var extractTinyIntermediaryMappings = tasks.register(
+            EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
+            task -> {
+                task.getJarFile().convention(downloadIntermediaryMappings.flatMap(DownloadMappingsTask::getJarFile));
+
+                task.getTinyFile().convention(createMappingsDest.apply(Constants.INTERMEDIARY_MAPPINGS_NAME, "tiny"));
+            }
+        );
+
+        final var mergeIntermediary = tasks.register(
+            MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class,
+            task -> {
+                // TODO temporary, until CheckIntermediaryMappingsTask is eliminated
+                task.dependsOn(checkIntermediaryMappings);
+                task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
+
+                task.getInput().convention(
+                    extractTinyIntermediaryMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
+                );
+
+                task.getMergedTinyMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
+
+                task.getOutputMappings().convention(
+                    mappingsBuildDir.map(dir -> dir.file("mappings-intermediaryMerged.tiny"))
+                );
+            }
+        );
+
+        final var removeIntermediary = tasks.register(
+            RemoveIntermediaryTask.TASK_NAME, RemoveIntermediaryTask.class,
+            task -> {
+                // TODO temporary, until CheckIntermediaryMappingsTask is eliminated
+                task.dependsOn(checkIntermediaryMappings);
+                task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
+
+                task.getInput().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
+
+                task.getOutputMappings().convention(
+                    mappingsBuildDir.map(dir -> dir.file("mappings-intermediary.tiny"))
+                );
+            }
+        );
 
         tasks.withType(MappingsV2JarTask.class).configureEach(task -> {
             task.getUnpickMeta().convention(ext.getUnpickMeta());
@@ -444,7 +571,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 combineUnpickDefinitions.flatMap(CombineUnpickDefinitionsTask::getOutput)
             );
 
-            task.getDestinationDirectory().convention(projectLayout.getBuildDirectory().dir("libs"));
+            task.getDestinationDirectory().convention(projectBuildDir.dir("libs"));
         });
 
         {
@@ -464,29 +591,13 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             INTERMEDIARY_V_2_MAPPINGS_JAR_TASK_NAME, MappingsV2JarTask.class, unpickVersion
         );
         intermediaryV2MappingsJar.configure(task -> {
-                // TODO eliminate this
-                task.dependsOn(checkIntermediaryMappings);
+            // TODO temporary, until CheckIntermediaryMappingsTask is eliminated
+            task.dependsOn(checkIntermediaryMappings);
+            task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
 
-                task.getMappings().convention(removeIntermediary.flatMap(RemoveIntermediaryTask::getOutputMappings));
+            task.getMappings().convention(removeIntermediary.flatMap(RemoveIntermediaryTask::getOutputMappings));
 
-                task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "intermediary-v2.jar");
-
-                task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
-            }
-        );
-
-        final var mergeTinyV2 = tasks.register(MergeTinyV2Task.TASK_NAME, MergeTinyV2Task.class, task -> {
-            // TODO this used to be dependent on v2UnmergedMappingsJar, but afaict it has no effect on this task
-
-            task.getInput().convention(
-                insertAutoGeneratedMappings.flatMap(AddProposedMappingsTask::getOutputMappings)
-            );
-
-            task.getHashedTinyMappings().convention(
-                invertPerVersionMappings.flatMap(InvertPerVersionMappingsTask::getInvertedTinyFile)
-            );
-
-            task.getOutputMappings().convention(() -> new File(ext.getFileConstants().buildDir, "merged2.tiny"));
+            task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "intermediary-v2.jar");
         });
 
         {
@@ -507,9 +618,8 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
                 task.getMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
-                task.getOutput().convention(() -> new File(
-                    ext.getFileConstants().buildDir,
-                    Constants.PER_VERSION_MAPPINGS_NAME + "-definitions.unpick"
+                task.getOutput().convention(mappingsBuildDir.map(dir ->
+                    dir.file(Constants.PER_VERSION_MAPPINGS_NAME + "-definitions.unpick")
                 ));
             }
         );
@@ -525,21 +635,24 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
             task.getUnpickConstantsJar().set(constantsJar.flatMap(Jar::getArchiveFile));
 
-            task.getOutputFile().convention(() -> ext.getFileConstants().unpickedJar);
+            // TODO move this and other jars that are directly in the project dir to some sub dir
+            task.getOutputFile().convention(projectDir.file(
+                Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar"
+            ));
         });
 
-        tasks.register(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class, task -> {
+        final var mapNamedJar = tasks.register(MapNamedJarTask.TASK_NAME, MapNamedJarTask.class, task -> {
             task.getInputJar().convention(unpickHashedJar.flatMap(UnpickJarTask::getOutputFile));
 
             task.getMappingsFile().convention(
                 insertAutoGeneratedMappings.flatMap(AddProposedMappingsTask::getOutputMappings)
             );
 
-            task.getOutputJar().convention(() -> ext.getFileConstants().namedJar);
+            task.getOutputJar().convention(projectDir.file(Constants.MINECRAFT_VERSION + "-named.jar"));
         });
 
         tasks.withType(AbstractEnigmaMappingsTask.class).configureEach(task -> {
-            task.getMappingsDir().convention(ext.getMappingsDir());
+            // task.getMappingsDir().convention(ext.getMappingsDir());
 
             task.classpath(enigmaRuntime);
 
@@ -565,8 +678,8 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
             task.getLog().convention(
                 providers.gradleProperty(ENIGMA_SERVER_LOG_PROP)
-                    .map(projectLayout.getProjectDirectory()::file)
-                    .orElse(projectLayout.getBuildDirectory().file("logs/server.log"))
+                    .map(projectDir::file)
+                    .orElse(projectBuildDir.file("logs/server.log"))
             );
 
             toOptional(
@@ -582,50 +695,65 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task.getJarToMap().convention(mapPerVersionMappingsJar.flatMap(MapJarTask::getOutputJar));
         });
 
-        final var extractTinyIntermediaryMappings = tasks.register(
-            EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
-            task -> {
-                task.getJarFile().convention(downloadIntermediaryMappings.flatMap(DownloadMappingsTask::getJarFile));
-                task.getTinyFile().convention(
-                    provideMappingsDestFile(mappingsDestDir, Constants.INTERMEDIARY_MAPPINGS_NAME, "tiny")
-                );
-            }
-        );
-
-        final var mergeIntermediary = tasks.register(
-            MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class,
-            task -> {
-                // TODO eliminate this
-                task.dependsOn(checkIntermediaryMappings);
-
-                task.getInput().convention(
-                    extractTinyIntermediaryMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
-                );
-
-                task.getMergedTinyMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
-
-                task.getOutputMappings().convention(() ->
-                    new File(ext.getFileConstants().buildDir, "mappings-intermediaryMerged.tiny")
-                );
-
-                task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
-            }
-        );
-
         final var intermediaryV2MergedMappingsJar = tasks.register(
             INTERMEDIARY_V_2_MERGED_MAPPINGS_JAR_TASK_NAME, MappingsV2JarTask.class, unpickVersion
         );
         intermediaryV2MergedMappingsJar.configure(task -> {
-                // TODO eliminate this
-                task.dependsOn(checkIntermediaryMappings);
+            // TODO temporary, until CheckIntermediaryMappingsTask is eliminated
+            task.dependsOn(checkIntermediaryMappings);
+            task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
 
-                task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "intermediary-mergedv2.jar");
+            task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "intermediary-mergedv2.jar");
 
-                task.getMappings().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
+            task.getMappings().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
+        });
 
-                task.onlyIf(unused -> checkIntermediaryMappings.get().isPresent());
-            }
-        );
+        final var eraseBytecode = tasks.register(EraseByteCodeTask.TASK_NAME, EraseByteCodeTask.class, task -> {
+            task.getJarFile().convention(mapNamedJar.flatMap(MapNamedJarTask::getOutputJar));
+
+            task.getOutput().convention(projectDir.dir(".gradle/temp/erased-classes/"));
+        });
+
+        tasks.register(GenFakeSourceTask.TASK_NAME, GenFakeSourceTask.class, task -> {
+            task.getDecompiler().convention(Decompilers.VINEFLOWER);
+
+            task.getSources().from(eraseBytecode.flatMap(EraseByteCodeTask::getOutput));
+
+            task.getLibraries().from(
+                downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getLibrariesDir)
+            );
+
+            task.getDefaultJavadocSource().convention(providers.of(
+                MappingsJavadocProvider.Source.class,
+                spec -> spec.parameters(params -> {
+                    params.getMappingsFile().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
+
+                    params.getNamespace().convention("named");
+                })
+            ));
+
+            task.getOutput().convention(projectDir.file(".gradle/temp/fakeSource"));
+        });
+
+        tasks.register("decompileVineflower", DecompileVineflowerTask.class, task -> {
+            task.getSources().from(mapNamedJar.flatMap(MapNamedJarTask::getOutputJar));
+
+            task.getLibraries().from(project.files(decompileClasspath));
+
+            task.getDefaultJavadocSource().convention(providers.of(
+                MappingsJavadocProvider.Source.class,
+                spec -> spec.parameters(params -> {
+                    params.getMappingsFile().convention(
+                        insertAutoGeneratedMappings.flatMap(AddProposedMappingsTask::getOutputMappings)
+                    );
+
+                    params.getNamespace().convention("named");
+                })
+            ));
+
+            // TODO move this once generateDiff task eliminates magic strings
+            task.getOutput().convention(projectDir.file("namedSrc"));
+        });
 
         tasks.register(BUILD_INTERMEDIARY_TASK_NAME, DefaultTask.class, task -> {
             task.dependsOn(intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar);
@@ -636,10 +764,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task -> {
                 task.outputsNeverUpToDate();
 
-                task.getMetaFile().convention(() -> new File(
-                    ext.getFileConstants().cacheFilesMinecraft,
-                    QUILT_MAPPINGS_PREFIX + Constants.MINECRAFT_VERSION + ".json"
-                ));
+                task.getMetaFile().convention(
+                    cacheFilesMinecraft.file(QUILT_MAPPINGS_PREFIX + Constants.MINECRAFT_VERSION + ".json")
+                );
             }
         );
 
@@ -662,7 +789,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 ));
 
                 task.getTargetJar().convention(task.provideVersionedProjectFile(version ->
-                    Path.of(QuiltMappingsPlugin.TARGET_MAPPINGS_DIR, "quilt-mappings-" + version + "-v2.jar")
+                    Path.of(TARGET_MAPPINGS_DIR, "quilt-mappings-" + version + "-v2.jar")
                 ));
             }
         );
@@ -674,7 +801,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                     downloadTargetMappingsJar.flatMap(DownloadTargetMappingJarTask::getTargetJar)
                 );
                 task.getExtractionDest().convention(task.provideVersionedProjectDir(version ->
-                    Path.of(QuiltMappingsPlugin.TARGET_MAPPINGS_DIR, "quilt-mappings-" + version)
+                    Path.of(TARGET_MAPPINGS_DIR, "quilt-mappings-" + version)
                 ));
             }
         );
@@ -759,24 +886,36 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             }
         );
 
-        // TODO there was a non-fatal exception error logged by this a few times that I can't reproduce
-        //  It mentioned jetbrains, so it might have just been intellij being iffy
-        //  It was a FileSystemAlreadyExistsException
+        // TODO rename this and its name to "vineflower decompile"
+        //  once generateDiff task eliminates magic strings
         tasks.register(DECOMPILE_TARGET_VINEFLOWER_TASK_NAME, DecompileTargetTask.class, task -> {
             task.getDecompiler().convention(Decompilers.VINEFLOWER);
 
-            task.getNamespace().convention("named");
+            task.getSources().from(remapTargetMinecraftJar.flatMap(RemapTargetMinecraftJarTask::getOutputJar));
 
-            task.getInput().convention(remapTargetMinecraftJar.flatMap(RemapTargetMinecraftJarTask::getOutputJar));
+            task.getLibraries().from(project.files(decompileClasspath));
 
-            task.getLibraries().convention(project.files(decompileClasspath));
+            task.getDefaultJavadocSource().convention(providers.of(
+                MappingsJavadocProvider.Source.class,
+                spec -> spec.parameters(params -> {
+                    params.getMappingsFile().convention(
+                        extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
+                            .map(dest -> dest.dir("mappings").file("mappings.tiny"))
+                    );
 
-            task.getTargetMappingsFile().convention(
-                extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
-                    .map(dest -> dest.dir("mappings").file("mappings.tiny"))
-            );
+                    params.getNamespace().convention("named");
+                })
+            ));
 
-            task.getOutput().convention(() -> project.file("namedTargetSrc"));
+            // TODO move this once generateDiff task eliminates magic strings
+            task.getOutput().convention(projectDir.file("namedTargetSrc"));
         });
+
+        // TODO add generateDiff task,
+        //  allow passing its output location on command line and pass it in generate-diff.yml
+    }
+
+    private void provideDefaultError(Property<?> property, String errorMessage) {
+        property.convention(this.getProviders().provider(() -> { throw new GradleException(errorMessage); }));
     }
 }

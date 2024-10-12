@@ -21,6 +21,7 @@ import org.quiltmc.enigma.api.translation.representation.entry.Entry;
 import org.quiltmc.enigma.api.translation.representation.entry.MethodEntry;
 
 public class SpellingChecker implements Checker<Entry<?>> {
+    // TODO make this an input and centralize the string
     private static final String PACKAGE_INFO_CLASS_PACKAGE = "net/minecraft/unused/packageinfo/";
     private static final String METHOD_PREFIX = "m_";
     private static final String CLASS_PREFIX = "C_";

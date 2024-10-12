@@ -20,7 +20,7 @@ public abstract class ExtractServerJarTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getServerJar();
 
     public ExtractServerJarTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
     }
 
     @TaskAction

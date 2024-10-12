@@ -2,6 +2,9 @@ package quilt.internal.util;
 
 import org.gradle.api.Project;
 import org.gradle.api.file.Directory;
+import org.gradle.api.file.DirectoryProperty;
+import org.gradle.api.file.FileSystemLocation;
+import org.gradle.api.file.FileSystemLocationProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Provider;
 
@@ -12,8 +15,8 @@ import java.util.Optional;
 public final class ProviderUtil {
     private ProviderUtil() { }
 
-    public static Path getPath(RegularFileProperty file) {
-        return file.get().getAsFile().toPath();
+    public static Path getPath(FileSystemLocationProperty<?> location) {
+        return location.get().getAsFile().toPath();
     }
 
     public static  <T> Optional<T> toOptional(Provider<T> provider) {

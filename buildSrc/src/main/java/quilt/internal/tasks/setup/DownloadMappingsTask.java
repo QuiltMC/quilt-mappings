@@ -19,7 +19,7 @@ public abstract class DownloadMappingsTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getJarFile();
 
     public DownloadMappingsTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
     }
 
     @TaskAction

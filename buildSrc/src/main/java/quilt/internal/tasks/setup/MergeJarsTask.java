@@ -24,7 +24,7 @@ public abstract class MergeJarsTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getMergedFile();
 
     public MergeJarsTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
     }
 
     @TaskAction

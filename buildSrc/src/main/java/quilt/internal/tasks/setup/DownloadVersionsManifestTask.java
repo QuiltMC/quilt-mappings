@@ -15,7 +15,7 @@ public abstract class DownloadVersionsManifestTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getManifestFile();
 
     public DownloadVersionsManifestTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
     }
 
     @TaskAction

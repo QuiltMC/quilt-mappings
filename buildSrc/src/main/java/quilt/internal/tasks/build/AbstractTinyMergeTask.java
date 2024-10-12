@@ -37,7 +37,7 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     }
 
     public AbstractTinyMergeTask(String mergeName, String fillName) {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        super(Constants.Groups.BUILD_MAPPINGS);
 
         this.mergeName = mergeName;
         this.fillName = fillName;

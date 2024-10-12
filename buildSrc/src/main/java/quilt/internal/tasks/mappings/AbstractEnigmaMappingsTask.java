@@ -1,22 +1,26 @@
 package quilt.internal.tasks.mappings;
 
-import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.JavaExec;
+import org.gradle.api.tasks.UntrackedTask;
 import quilt.internal.Constants;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
+import quilt.internal.tasks.MappingsDirConsumingTask;
 
-public abstract class AbstractEnigmaMappingsTask extends JavaExec implements EnigmaProfileConsumingTask {
+@UntrackedTask(because =
+    """
+    These input and output to the same directory, which doesn't work with Gradle's task graph.
+    These tasks' outputs should not be consumed by other tasks.
+    """
+)
+public abstract class AbstractEnigmaMappingsTask extends JavaExec
+        implements EnigmaProfileConsumingTask, MappingsDirConsumingTask {
     @InputFile
     public abstract RegularFileProperty getJarToMap();
 
-    @InputDirectory
-    public abstract DirectoryProperty getMappingsDir();
-
     public AbstractEnigmaMappingsTask() {
-        this.setGroup(Constants.Groups.MAPPINGS_GROUP);
+        this.setGroup(Constants.Groups.MAPPINGS);
     }
 
     @Override

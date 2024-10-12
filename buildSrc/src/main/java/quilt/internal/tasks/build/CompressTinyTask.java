@@ -23,7 +23,7 @@ public abstract class CompressTinyTask extends DefaultMappingsTask {
     protected abstract RegularFileProperty getMappings();
 
     public CompressTinyTask() {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        super(Constants.Groups.BUILD_MAPPINGS);
         this.dependsOn(TinyJarTask.TASK_NAME, MergeTinyTask.TASK_NAME);
 
         this.getCompressedTiny().convention(() -> new File(

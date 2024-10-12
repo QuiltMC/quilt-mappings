@@ -51,7 +51,7 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
     public abstract RegularFileProperty getOutputMappings();
 
     public AddProposedMappingsTask() {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        super(Constants.Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction
@@ -62,6 +62,8 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
         final Path output = ProviderUtil.getPath(this.getOutputMappings());
         final Path jar = ProviderUtil.getPath(this.getInputJar());
 
+        // TODO figure out what this tempDir is for
+        //  the only tasks that output there depend on this task
         addProposedMappings(input, output, this.fileConstants.tempDir.toPath(), jar, this.getEnigmaProfile().get());
     }
 
@@ -91,11 +93,9 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
         final Path commandOutput = extraProcessing ? processedMappings : output;
 
         runCommands(jar,
-            commandInput,
-            commandOutput,
+            commandInput, commandOutput,
             profile,
-            namespaces.get(0),
-            "named"
+            namespaces.getFirst(), "named"
         );
 
         if (extraProcessing) {
