@@ -6,14 +6,16 @@ import java.io.IOException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.gradle.api.GradleException;
-import org.gradle.api.artifacts.VersionConstraint;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.tasks.DefaultMappingsTask;
+
+import javax.inject.Inject;
 
 // TODO see if this can be replaced with a ValueSource or a BuildService
 /**
@@ -28,6 +30,10 @@ public abstract class CheckUnpickVersionsMatchTask extends DefaultMappingsTask i
     @Internal
     protected abstract Property<Boolean> getMatch();
 
+    @Input
+    public abstract Property<String> getUnpickVersion();
+
+    @Inject
     public CheckUnpickVersionsMatchTask() {
         super("diff");
 
@@ -45,9 +51,7 @@ public abstract class CheckUnpickVersionsMatchTask extends DefaultMappingsTask i
     public void checkMatch() throws IOException {
         final JsonElement parsed = JsonParser.parseReader(new FileReader(this.getUnpickMeta().getAsFile().get()));
         this.getMatch().set(
-            parsed.getAsJsonObject().get("unpickVersion").getAsString().equals(
-                this.libs().findVersion("unpick").map(VersionConstraint::getRequiredVersion).orElse("")
-            )
+            parsed.getAsJsonObject().get("unpickVersion").getAsString().equals(this.getUnpickVersion().get())
         );
     }
 

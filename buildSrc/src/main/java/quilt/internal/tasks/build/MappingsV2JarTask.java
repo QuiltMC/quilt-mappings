@@ -2,8 +2,6 @@ package quilt.internal.tasks.build;
 
 import java.util.Map;
 
-import org.gradle.api.GradleException;
-import org.gradle.api.artifacts.VersionConstraint;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Provider;
@@ -11,6 +9,8 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.jvm.tasks.Jar;
 import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
+
+import javax.inject.Inject;
 
 /**
  * TODO is this an accurate description?<br>
@@ -46,26 +46,21 @@ public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
     @InputFile
     public abstract RegularFileProperty getMappings();
 
-    public MappingsV2JarTask() {
+    // unpick version can't be a property because it's used when the task is instantiated
+    public final String unpickVersion;
+
+    @Inject
+    public MappingsV2JarTask(String unpickVersion) {
         this.setGroup(Constants.Groups.BUILD_MAPPINGS_GROUP);
         // TODO why?
         this.outputsNeverUpToDate();
 
-        final String version = this.libs().findVersion("unpick")
-            .map(VersionConstraint::getRequiredVersion)
-            // provide an informative error message if no version is specified
-            .orElseThrow(() -> new GradleException(
-                """
-                Could not find unpick version.
-                \tIn order to use any MappingsV2JarTask, an "unpick" version must be specified in the 'libs' \
-                version catalog (usually by adding it to 'gradle/libs.versions.toml').\
-                """
-            ));
+        this.unpickVersion = unpickVersion;
 
         final Provider<RegularFile> unpickMeta = this.getUnpickMeta();
 
         this.from(unpickMeta, copySpec -> {
-            copySpec.expand(Map.of("version", version));
+            copySpec.expand(Map.of("version", this.unpickVersion));
 
             copySpec.rename(unused -> JAR_UNPICK_META_PATH);
         });

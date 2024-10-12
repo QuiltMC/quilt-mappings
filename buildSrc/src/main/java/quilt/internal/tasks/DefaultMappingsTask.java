@@ -3,6 +3,7 @@ package quilt.internal.tasks;
 import org.gradle.api.DefaultTask;
 import quilt.internal.FileConstants;
 
+// TODO possibly eliminate this
 public abstract class DefaultMappingsTask extends DefaultTask implements MappingsTask {
     protected final FileConstants fileConstants;
 
