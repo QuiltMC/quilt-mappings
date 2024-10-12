@@ -23,7 +23,7 @@ public abstract class ExtractTinyMappingsTask extends DefaultMappingsTask {
     private final FileTree jarZipTree;
 
     public ExtractTinyMappingsTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
 
         // zipTree accesses the passed path lazily so passing jarFile here is ok
         this.jarZipTree = this.getProject().zipTree(this.getJarFile());

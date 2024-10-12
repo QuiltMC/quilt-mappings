@@ -51,7 +51,7 @@ public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
 
     @Inject
     public MappingsV2JarTask(String unpickVersion) {
-        this.setGroup(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        this.setGroup(Constants.Groups.BUILD_MAPPINGS);
         // TODO why?
         this.outputsNeverUpToDate();
 

@@ -39,7 +39,7 @@ public abstract class TransformJarClassesTask extends DefaultMappingsTask {
     public abstract DirectoryProperty getOutput();
 
     public TransformJarClassesTask() {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
+        super(Constants.Groups.BUILD_MAPPINGS);
     }
 
     public void visitor(VisitorFactory visitorFactory) {

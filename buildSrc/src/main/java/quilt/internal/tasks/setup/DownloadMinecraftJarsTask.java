@@ -36,7 +36,7 @@ public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getServerBootstrapJar();
 
     public DownloadMinecraftJarsTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
 
         this.getVersion().convention(this.getVersionFile().map(file -> {
             try {

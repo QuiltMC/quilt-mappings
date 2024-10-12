@@ -1,5 +1,6 @@
 package quilt.internal.tasks;
 
+import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
@@ -52,5 +53,5 @@ public interface EnigmaProfileConsumingTask extends MappingsTask {
      * so they must be considered for up-to-date checks.
      */
     @InputFiles
-    Property<FileCollection> getSimpleTypeFieldNamesFiles();
+    ConfigurableFileCollection getSimpleTypeFieldNamesFiles();
 }

@@ -19,7 +19,7 @@ public abstract class CheckIntermediaryMappingsTask extends DefaultMappingsTask 
     private boolean present = false;
 
     public CheckIntermediaryMappingsTask() {
-        super(Constants.Groups.SETUP_GROUP);
+        super(Constants.Groups.SETUP);
     }
 
     public boolean isPresent() {

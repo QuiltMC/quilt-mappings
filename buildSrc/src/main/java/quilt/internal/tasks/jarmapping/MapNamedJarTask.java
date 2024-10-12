@@ -8,7 +8,7 @@ public abstract class MapNamedJarTask extends MapJarTask {
     public static final String TASK_NAME = "mapNamedJar";
 
     public MapNamedJarTask() {
-        super(Constants.Groups.MAP_JAR_GROUP, Constants.PER_VERSION_MAPPINGS_NAME, "named");
+        super(Constants.Groups.MAP_JAR, Constants.PER_VERSION_MAPPINGS_NAME, "named");
     }
 
     public Map<String, String> getAdditionalMappings() {

@@ -59,7 +59,8 @@ public abstract class EnigmaMappingsServerTask extends AbstractEnigmaMappingsTas
 
 	public EnigmaMappingsServerTask() {
 		// this configuration can stay here because it's what makes this an EnigmaMappingsServerTask
-		this.getMainClass().convention(DedicatedEnigmaServer.class.getName()).finalizeValue();
+		this.getMainClass().set(DedicatedEnigmaServer.class.getName());
+		this.getMainClass().finalizeValue();
 	}
 
 	@Override

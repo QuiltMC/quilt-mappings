@@ -13,10 +13,8 @@ import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
 import quilt.internal.util.ProviderUtil;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,19 +30,7 @@ public abstract class RemoveIntermediaryTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getOutputMappings();
 
     public RemoveIntermediaryTask() {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        this.dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, MergeIntermediaryTask.TASK_NAME);
-        this.onlyIf(task ->
-            this.getTaskNamed(CheckIntermediaryMappingsTask.TASK_NAME, CheckIntermediaryMappingsTask.class).isPresent()
-        );
-
-        this.getOutputMappings().convention(() ->
-            new File(this.fileConstants.buildDir, "mappings-intermediary.tiny")
-        );
-
-        this.getInput().convention(
-            this.getTaskNamed(MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class).getOutputMappings()
-        );
+        super(Constants.Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

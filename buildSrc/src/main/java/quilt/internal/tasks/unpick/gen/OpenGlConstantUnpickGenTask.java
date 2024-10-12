@@ -69,14 +69,6 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
     @OutputFile
     public abstract RegularFileProperty getUnpickGlDefinitions();
 
-    @Override
-    public FileCollection getGeneratedUnpickDefinitions() {
-        return this.getGeneratedUnpickDefinitionsImpl();
-    }
-
-    @OutputFiles
-    protected abstract ConfigurableFileCollection getGeneratedUnpickDefinitionsImpl();
-
     public OpenGlConstantUnpickGenTask() {
         super(Constants.Groups.UNPICK_GEN);
 
@@ -85,11 +77,6 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
         this.onlyIf(unused ->
             !this.getUnpickGlDefinitions().get().getAsFile().exists()
                 || !this.getUnpickGlStateManagerDefinitions().get().getAsFile().exists()
-        );
-
-        this.getGeneratedUnpickDefinitionsImpl().from(
-            this.getUnpickGlStateManagerDefinitions(),
-            this.getUnpickGlDefinitions()
         );
     }
 
