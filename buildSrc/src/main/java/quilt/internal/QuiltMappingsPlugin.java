@@ -6,14 +6,12 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
-import org.gradle.api.artifacts.ResolveException;
 import org.gradle.api.artifacts.VersionCatalogsExtension;
 import org.gradle.api.artifacts.VersionConstraint;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFile;
-import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.plugins.ExtensionContainer;
 import org.gradle.api.plugins.JavaBasePlugin;
@@ -25,7 +23,6 @@ import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.bundling.Jar;
-import org.gradle.internal.resolve.ArtifactResolveException;
 import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.jetbrains.annotations.NotNull;
 import org.quiltmc.enigma.api.service.JarIndexerService;
@@ -69,7 +66,6 @@ import quilt.internal.tasks.mappings.AbstractEnigmaMappingsTask;
 import quilt.internal.tasks.mappings.EnigmaMappingsServerTask;
 import quilt.internal.tasks.mappings.EnigmaMappingsTask;
 import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
-import quilt.internal.tasks.setup.DownloadMappingsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
@@ -85,10 +81,8 @@ import quilt.internal.tasks.unpick.gen.UnpickGenTask;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 
 import javax.inject.Inject;
-import java.io.File;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
@@ -193,7 +187,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final Configuration enigmaRuntime = configurations.create(ENIGMA_RUNTIME_CONFIGURATION_NAME);
         // TODO eliminate this
         final Configuration decompileClasspath = configurations.create(DECOMPILE_CLASSPATH_CONFIGURATION_NAME);
-        final Configuration preVersionMappings = configurations.create(PER_VERSION_MAPPINGS_CONFIGURATION_NAME);
+        final Configuration perVersionMappings = configurations.create(PER_VERSION_MAPPINGS_CONFIGURATION_NAME);
         final Configuration intermediaryMappings = configurations.create(INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME);
 
         final TaskContainer tasks = project.getTasks();
@@ -319,21 +313,10 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             );
         });
 
-        final var downloadPerVersionMappings = tasks.register(
-            DOWNLOAD_PER_VERSION_MAPPINGS_TASK_NAME, DownloadMappingsTask.class,
-            task -> {
-                task.getMappingsConfiguration().convention(preVersionMappings);
-
-                task.getJarFile().convention(
-                    createMappingsDest.apply(Constants.PER_VERSION_MAPPINGS_NAME, "jar")
-                );
-            }
-        );
-
         final var extractTinyPerVersionMappings = tasks.register(
             EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
             task -> {
-                task.getJarFile().convention(downloadPerVersionMappings.flatMap(DownloadMappingsTask::getJarFile));
+                task.getJarFile().convention(task.provideRequiredFile(perVersionMappings));
                 task.getTinyFile().convention(createMappingsDest.apply(Constants.PER_VERSION_MAPPINGS_NAME, "tiny"));
             }
         );
@@ -528,21 +511,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final var extractTinyIntermediaryMappings = tasks.register(
             EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
             task -> {
-                task.getJarFile().convention(
-                    providers.provider(() -> {
-                        try {
-                            return intermediaryMappings.getSingleFile();
-                        } catch (ResolveException e) {
-                            // returning null results in an empty provider
-                            return null;
-                        }
-                    })
-                    .flatMap(file -> {
-                        final RegularFileProperty regularFile = this.getObjects().fileProperty();
-                        regularFile.set(file);
-                        return regularFile;
-                    })
-                );
+                task.getJarFile().convention(task.provideOptionalFile(intermediaryMappings));
 
                 task.getTinyFile().convention(createMappingsDest.apply(Constants.INTERMEDIARY_MAPPINGS_NAME, "tiny"));
             }
