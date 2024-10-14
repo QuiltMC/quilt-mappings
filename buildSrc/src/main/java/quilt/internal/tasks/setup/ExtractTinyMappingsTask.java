@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.gradle.api.file.FileTree;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
@@ -14,6 +15,7 @@ import java.io.IOException;
 public abstract class ExtractTinyMappingsTask extends DefaultMappingsTask {
     public static final String TINY_MAPPINGS_FILE_NAME_SUFFIX = "mappings.tiny";
 
+    @Optional
     @InputFile
     public abstract RegularFileProperty getJarFile();
 
@@ -24,6 +26,8 @@ public abstract class ExtractTinyMappingsTask extends DefaultMappingsTask {
 
     public ExtractTinyMappingsTask() {
         super(Constants.Groups.SETUP);
+
+        this.onlyIf(unused -> this.getJarFile().isPresent());
 
         // zipTree accesses the passed path lazily so passing jarFile here is ok
         this.jarZipTree = this.getProject().zipTree(this.getJarFile());
