@@ -6,6 +6,7 @@ import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Optional;
 import org.gradle.jvm.tasks.Jar;
 import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
@@ -43,6 +44,7 @@ public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
     @InputFile
     public abstract RegularFileProperty getUnpickDefinition();
 
+    @Optional
     @InputFile
     public abstract RegularFileProperty getMappings();
 
@@ -52,6 +54,7 @@ public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
     @Inject
     public MappingsV2JarTask(String unpickVersion) {
         this.setGroup(Constants.Groups.BUILD_MAPPINGS);
+
         // TODO why?
         this.outputsNeverUpToDate();
 
