@@ -60,9 +60,7 @@ public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
 
         this.unpickVersion = unpickVersion;
 
-        final Provider<RegularFile> unpickMeta = this.getUnpickMeta();
-
-        this.from(unpickMeta, copySpec -> {
+        this.from(this.getUnpickMeta(), copySpec -> {
             copySpec.expand(Map.of("version", this.unpickVersion));
 
             copySpec.rename(unused -> JAR_UNPICK_META_PATH);

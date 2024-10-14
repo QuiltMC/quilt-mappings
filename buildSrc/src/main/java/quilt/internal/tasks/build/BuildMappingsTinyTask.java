@@ -33,7 +33,6 @@ public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implemen
         this.getLogger().lifecycle(":generating tiny mappings");
 
         buildMappingsTiny(
-            // this.fileConstants.perVersionMappingsJar.toPath(),
             ProviderUtil.getPath(this.getPerVersionMappingsJar()),
             ProviderUtil.getPath(this.getMappingsDir()),
             ProviderUtil.getPath(this.getOutputMappings())

@@ -46,9 +46,9 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     }
 
     @TaskAction
-    public abstract void mergeMappings() throws Exception;
+    public abstract void mergeMappings() throws IOException;
 
-    protected void mergeMappings(File mergeTinyInput) throws Exception {
+    protected void mergeMappings(File mergeTinyInput) throws IOException {
         final File mappingsTinyInput = this.getInput().get().getAsFile();
 
         this.getLogger().lifecycle(":merging {} and {}", Constants.MAPPINGS_NAME, this.mergeName);
@@ -59,10 +59,20 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
         );
     }
 
+    protected MappingVisitor getFirstVisitor(MappingVisitor next) {
+        return next;
+    }
+
+    protected MappingVisitor getPreWriteVisitor(MappingVisitor writer) {
+        return writer;
+    }
+
     @VisibleForTesting
-    public static void mergeMappings(Path mappingsTinyInput, Path mergeTinyInput, Path outputMappings,
-                                     Function<MappingVisitor, MappingVisitor> firstVisitor,
-                                     Function<MappingVisitor, MappingVisitor> preWriteVisitor) throws IOException {
+    public static void mergeMappings(
+        Path mappingsTinyInput, Path mergeTinyInput, Path outputMappings,
+        Function<MappingVisitor, MappingVisitor> firstVisitor,
+        Function<MappingVisitor, MappingVisitor> preWriteVisitor
+    ) throws IOException {
         final MemoryMappingTree tree = new MemoryMappingTree(false); // hashed is the src namespace
         MappingReader.read(mergeTinyInput, MappingFormat.TINY_2_FILE, tree);
         MappingReader.read(mappingsTinyInput, MappingFormat.TINY_2_FILE, tree);
@@ -78,13 +88,5 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
                 )
             ));
         }
-    }
-
-    protected MappingVisitor getFirstVisitor(MappingVisitor next) {
-        return next;
-    }
-
-    protected MappingVisitor getPreWriteVisitor(MappingVisitor writer) {
-        return writer;
     }
 }

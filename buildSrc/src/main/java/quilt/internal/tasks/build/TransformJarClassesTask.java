@@ -3,6 +3,10 @@ package quilt.internal.tasks.build;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.ListProperty;
+import org.gradle.api.specs.Spec;
+import org.gradle.api.specs.Specs;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
@@ -17,20 +21,22 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public abstract class TransformJarClassesTask extends DefaultMappingsTask {
-    private final List<VisitorFactory> visitorFactories = new ArrayList<>();
-    private final List<Predicate<ClassNode>> filters = new ArrayList<>();
+    @Input
+    public abstract ListProperty<VisitorFactory> getVisitorFactories();
+
+    @Input
+    public abstract ListProperty<Spec<ClassNode>> getFilters();
 
     @InputFile
     public abstract RegularFileProperty getJarFile();
@@ -40,14 +46,6 @@ public abstract class TransformJarClassesTask extends DefaultMappingsTask {
 
     public TransformJarClassesTask() {
         super(Constants.Groups.BUILD_MAPPINGS);
-    }
-
-    public void visitor(VisitorFactory visitorFactory) {
-        this.visitorFactories.add(visitorFactory);
-    }
-
-    public void filter(Predicate<ClassNode> filter) {
-        this.filters.add(filter);
     }
 
     @TaskAction
@@ -65,14 +63,14 @@ public abstract class TransformJarClassesTask extends DefaultMappingsTask {
             }
         }
 
-        final Predicate<ClassNode> filter = this.filters.stream().reduce(Predicate::and).orElse(node -> true);
+        final Spec<ClassNode> filter = Specs.intersect(this.getFilters().get());
 
         final Map<String, byte[]> transformedClassFiles = new HashMap<>();
         for (final String name : classFiles.keySet()) {
             final ClassReader reader = new ClassReader(classFiles.get(name));
             final ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
             ClassVisitor visitor = writer;
-            for (final VisitorFactory visitorFactory : this.visitorFactories) {
+            for (final VisitorFactory visitorFactory : this.getVisitorFactories().get()) {
                 visitor = visitorFactory.create(visitor);
             }
 
@@ -82,7 +80,7 @@ public abstract class TransformJarClassesTask extends DefaultMappingsTask {
             final ClassNode node = (ClassNode) visitor;
 
             reader.accept(visitor, 0);
-            if (filter.test(node)) {
+            if (filter.isSatisfiedBy(node)) {
                 transformedClassFiles.put(name, writer.toByteArray());
             }
         }
@@ -102,7 +100,7 @@ public abstract class TransformJarClassesTask extends DefaultMappingsTask {
         }
     }
 
-    public interface VisitorFactory {
+    public interface VisitorFactory extends Serializable {
         ClassVisitor create(ClassVisitor visitor);
     }
 

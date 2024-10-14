@@ -38,7 +38,7 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask {
     }
 
     @Override
-    public void mergeMappings() throws Exception {
+    public void mergeMappings() throws IOException {
         this.mergeMappings(this.getMergedTinyMappings().get().getAsFile());
     }
 
@@ -47,32 +47,9 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask {
         return firstVisitor(next);
     }
 
-    private static MappingVisitor firstVisitor(MappingVisitor next) {
-        // Copy unobfuscated names to the named namespace, since intermediary would override them
-        return new DoubleNsCompleterVisitor(
-                // Fix bug when intermediary doesn't have a mapping but hashed does
-                // (i.e. `net/minecraft/client/main/Main$2`)
-                new DoubleNsCompleterVisitor(
-                        new UnmappedNameRemoverVisitor(next, "named", Constants.PER_VERSION_MAPPINGS_NAME),
-                        // Copy names from `official` to `named` if `intermediary` is empty
-                        "named",
-                        "intermediary",
-                        "official"
-                ),
-                // Copy names from `official` to `named` if `hashed` is empty
-                "named",
-                Constants.PER_VERSION_MAPPINGS_NAME,
-                "official"
-        );
-    }
-
     @Override
     protected MappingVisitor getPreWriteVisitor(MappingVisitor writer) {
         return preWriteVisitor(writer);
-    }
-
-    private static MappingVisitor preWriteVisitor(MappingVisitor writer) {
-        return new MappingDstNsReorder(writer, List.of("intermediary", "named")); // Remove hashed namespace
     }
 
     @VisibleForTesting
@@ -82,6 +59,33 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask {
         AbstractTinyMergeTask.mergeMappings(intermediaryMappings, mergeTinyV2Output, outputMappings,
             MergeIntermediaryTask::firstVisitor,
             MergeIntermediaryTask::preWriteVisitor
+        );
+    }
+
+    private static MappingVisitor firstVisitor(MappingVisitor next) {
+        // Copy unobfuscated names to the named namespace, since intermediary would override them
+        return new DoubleNsCompleterVisitor(
+            // Fix bug when intermediary doesn't have a mapping but hashed does
+            // (i.e. `net/minecraft/client/main/Main$2`)
+            new DoubleNsCompleterVisitor(
+                new UnmappedNameRemoverVisitor(next, "named", Constants.PER_VERSION_MAPPINGS_NAME),
+                // Copy names from `official` to `named` if `intermediary` is empty
+                "named",
+                "intermediary",
+                "official"
+            ),
+            // Copy names from `official` to `named` if `hashed` is empty
+            "named",
+            Constants.PER_VERSION_MAPPINGS_NAME,
+            "official"
+        );
+    }
+
+    private static MappingVisitor preWriteVisitor(MappingVisitor writer) {
+        return new MappingDstNsReorder(
+            writer,
+            // Remove hashed namespace
+            List.of("intermediary", "named")
         );
     }
 }

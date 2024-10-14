@@ -8,13 +8,13 @@ public abstract class EraseByteCodeTask extends TransformJarClassesTask {
     public static final String TASK_NAME = "eraseBytecode";
 
     public EraseByteCodeTask() {
-        this.visitor(DraftsmanAdapterClassVisitor::new);
+        this.getVisitorFactories().add(DraftsmanAdapterClassVisitor::new);
         // Set protected/package-private classes to public so that we don't have any access compile errors.
         // TODO: Fix this by putting the classes in the same package. Javadoc shows the modifier
-        this.visitor(PublicClassVisitor::new);
+        this.getVisitorFactories().add(PublicClassVisitor::new);
 
         // filter out anonymous classes
-        this.filter(classNode -> classNode.outerClass == null);
+        this.getFilters().add(classNode -> classNode.outerClass == null);
     }
 
     private static class PublicClassVisitor extends ClassVisitor {
