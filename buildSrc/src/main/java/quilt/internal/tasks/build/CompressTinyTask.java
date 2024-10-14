@@ -1,6 +1,5 @@
 package quilt.internal.tasks.build;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,37 +19,29 @@ public abstract class CompressTinyTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getCompressedTiny();
 
     @InputFile
-    protected abstract RegularFileProperty getMappings();
+    public abstract RegularFileProperty getMappings();
 
     public CompressTinyTask() {
         super(Constants.Groups.BUILD_MAPPINGS);
-        this.dependsOn(TinyJarTask.TASK_NAME, MergeTinyTask.TASK_NAME);
-
-        this.getCompressedTiny().convention(() -> new File(
-            this.getProject().file("build/libs/"),
-            "%s-%s-tiny.gz".formatted(Constants.MAPPINGS_NAME, Constants.MAPPINGS_VERSION)
-        ));
-
-        this.getMappings()
-            .convention(this.getTaskNamed(MergeTinyTask.TASK_NAME, MergeTinyTask.class).getOutputMappings());
     }
 
     @TaskAction
     public void compressTiny() throws IOException {
         this.getLogger().lifecycle(":compressing tiny mappings");
 
-        final byte[] buffer = new byte[1024];
-        final FileOutputStream fileOutputStream = new FileOutputStream(this.getCompressedTiny().get().getAsFile());
-        final GZIPOutputStream outputStream = new GZIPOutputStream(fileOutputStream);
-        final FileInputStream fileInputStream = new FileInputStream(this.getMappings().get().getAsFile());
+        try (
+            final var outputStream =
+                new GZIPOutputStream(new FileOutputStream(this.getCompressedTiny().get().getAsFile()));
+            final var fileInputStream = new FileInputStream(this.getMappings().get().getAsFile())
+        ) {
+            final byte[] buffer = new byte[1024];
 
-        int length;
-        while ((length = fileInputStream.read(buffer)) > 0) {
-            outputStream.write(buffer, 0, length);
+            int length;
+            while ((length = fileInputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+
+            outputStream.finish();
         }
-
-        fileInputStream.close();
-        outputStream.finish();
-        outputStream.close();
     }
 }
