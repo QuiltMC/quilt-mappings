@@ -1,35 +1,37 @@
 package quilt.internal.tasks.setup;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public class ExtractServerJarTask extends DefaultMappingsTask {
+public abstract class ExtractServerJarTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "extractServerJar";
 
+    @InputFile
+    public abstract RegularFileProperty getServerBootstrapJar();
+
     @OutputFile
-    private final File serverJar;
+    public abstract RegularFileProperty getServerJar();
 
     public ExtractServerJarTask() {
-        super(Constants.Groups.SETUP_GROUP);
-        dependsOn(DownloadMinecraftJarsTask.TASK_NAME);
-
-        getInputs().file(this.getTaskByType(DownloadMinecraftJarsTask.class).getServerBootstrapJar());
-
-        serverJar = new File(fileConstants.cacheFilesMinecraft, Constants.MINECRAFT_VERSION + "-server.jar");
+        super(Constants.Groups.SETUP);
     }
 
     @TaskAction
     public void extractServerJar() throws IOException {
-        FileUtils.copyFile(getProject().zipTree(this.getTaskByType(DownloadMinecraftJarsTask.class).getServerBootstrapJar()).matching(patternFilterable -> patternFilterable.include("META-INF/versions/*/server-*.jar")).getSingleFile(), serverJar);
-    }
-
-    public File getServerJar() {
-        return serverJar;
+        FileUtils.copyFile(
+            // TODO eliminate project access in task action
+            this.getProject()
+                .zipTree(this.getServerBootstrapJar().get())
+                .matching(patternFilterable -> patternFilterable.include("META-INF/versions/*/server-*.jar"))
+                .getSingleFile(),
+            this.getServerJar().get().getAsFile()
+        );
     }
 }

@@ -1,7 +1,8 @@
 package quilt.internal.tasks.decompile;
 
-import org.gradle.api.file.FileCollection;
+import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFiles;
@@ -15,97 +16,93 @@ import quilt.internal.decompile.Decompilers;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;
 import quilt.internal.decompile.javadoc.FieldJavadocProvider;
 import quilt.internal.decompile.javadoc.MethodJavadocProvider;
+import quilt.internal.decompile.javadoc.UniversalJavadocProvider;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DecompileTask extends DefaultMappingsTask {
-    private final Property<Decompilers> decompiler;
-    private Map<String, Object> decompilerOptions;
-    private final RegularFileProperty input;
-    private final RegularFileProperty output;
-    private final Property<FileCollection> libraries;
-    private ClassJavadocProvider classJavadocProvider;
-    private FieldJavadocProvider fieldJavadocProvider;
-    private MethodJavadocProvider methodJavadocProvider;
+import static quilt.internal.util.ProviderUtil.toOptional;
+
+public abstract class DecompileTask extends DefaultMappingsTask {
+    @Input
+    public abstract Property<Decompilers> getDecompiler();
+
+    @Optional
+    @Input
+    public abstract MapProperty<String, Object> getDecompilerOptions();
+
+    /**
+     * If this is present,
+     * {@link #getClassJavadocSource() classJavadocSource},
+     * {@link #getFieldJavadocSource() fieldJavadocSource}, and
+     * {@link #getMethodJavadocSource() methodJavadocSource}
+     * will each use this {@link quilt.internal.decompile.javadoc.JavadocProvider JavadocProvider}
+     * if they haven't been assigned their own.
+     */
+    @Optional
+    @Input
+    public abstract Property<UniversalJavadocProvider> getDefaultJavadocSource();
+
+    @Optional
+    @Input
+    public abstract Property<ClassJavadocProvider> getClassJavadocSource();
+
+    @Optional
+    @Input
+    public abstract Property<FieldJavadocProvider> getFieldJavadocSource();
+
+    @Optional
+    @Input
+    public abstract Property<MethodJavadocProvider> getMethodJavadocSource();
+
+    @InputFiles
+    public abstract ConfigurableFileCollection getSources();
+
+    @InputFiles
+    public abstract ConfigurableFileCollection getLibraries();
+
+    @OutputDirectory
+    public abstract RegularFileProperty getOutput();
 
     public DecompileTask() {
-        super(Constants.Groups.DECOMPILE_GROUP);
-        input = getProject().getObjects().fileProperty();
-        output = getProject().getObjects().fileProperty();
-        decompiler = getProject().getObjects().property(Decompilers.class);
-        libraries = getProject().getObjects().property(FileCollection.class);
+        super(Constants.Groups.DECOMPILE);
+
+        this.getClassJavadocSource().convention(this.getDefaultJavadocSource());
+        this.getFieldJavadocSource().convention(this.getDefaultJavadocSource());
+        this.getMethodJavadocSource().convention(this.getDefaultJavadocSource());
     }
 
     @TaskAction
-    public void decompile() {
-        Map<String, Object> options = decompilerOptions == null ? new HashMap<>() : decompilerOptions;
-        Collection<File> libraries = this.libraries.getOrNull() == null ? Collections.emptyList() : this.libraries.get().getFiles();
+    public void decompile() throws IOException {
+        final AbstractDecompiler decompiler = this.getAbstractDecompiler();
 
-        AbstractDecompiler decompiler = getAbstractDecompiler();
+        toOptional(this.getClassJavadocSource())
+            .ifPresent(decompiler::withClassJavadocProvider);
 
-        if (classJavadocProvider != null) {
-            decompiler.withClassJavadocProvider(classJavadocProvider);
-        }
-        if (fieldJavadocProvider != null) {
-            decompiler.withFieldJavadocProvider(fieldJavadocProvider);
-        }
-        if (methodJavadocProvider != null) {
-            decompiler.withMethodJavadocProvider(methodJavadocProvider);
-        }
+        toOptional(this.getFieldJavadocSource())
+            .ifPresent(decompiler::withFieldJavadocProvider);
 
-        decompiler.decompile(getInput().getAsFile().get(), getOutput().getAsFile().get(), options, libraries);
+        toOptional(this.getMethodJavadocSource())
+            .ifPresent(decompiler::withMethodJavadocProvider);
+
+        decompiler.decompile(
+            this.getSources().getFiles(),
+            this.getOutput().get().getAsFile(),
+            // mapping to HashMap is required; the unmapped Map is unmodifiable and VineflowerDecompiler needs to
+            // modify it (this issue occurred for decompileTargetVineflower)
+            this.getDecompilerOptions().map(HashMap::new).getOrElse(new HashMap<>()),
+            this.getLibraries().getFiles()
+        );
     }
 
+    // TODO see if this can use a BuildService
+    //  actually it probably doesn't need project access and can be done directly in the task action
     @Internal
     public AbstractDecompiler getAbstractDecompiler() {
-        return decompiler.get().getProvider().provide(getProject());
-    }
-
-    @Input
-    public Property<Decompilers> getDecompiler() {
-        return decompiler;
-    }
-
-    @Optional
-    @Input
-    public Map<String, Object> getDecompilerOptions() {
-        return decompilerOptions;
-    }
-
-    @Optional
-    @Input
-    public Property<FileCollection> getLibraries() {
-        return libraries;
-    }
-
-    public void setDecompilerOptions(Map<String, Object> decompilerOptions) {
-        this.decompilerOptions = decompilerOptions;
-    }
-
-    @InputFiles
-    public RegularFileProperty getInput() {
-        return input;
-    }
-
-    @OutputDirectory
-    public RegularFileProperty getOutput() {
-        return output;
-    }
-
-    public void classJavadocProvider(ClassJavadocProvider provider) {
-        classJavadocProvider = provider;
-    }
-
-    public void fieldJavadocProvider(FieldJavadocProvider provider) {
-        fieldJavadocProvider = provider;
-    }
-
-    public void methodJavadocProvider(MethodJavadocProvider provider) {
-        methodJavadocProvider = provider;
+        return this.getDecompiler().get().getProvider().provide(this.getProject());
     }
 }

@@ -1,45 +1,75 @@
 package quilt.internal.tasks.build;
 
-import java.io.File;
 import java.util.Map;
 
-import org.gradle.api.artifacts.VersionConstraint;
+import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Optional;
 import org.gradle.jvm.tasks.Jar;
 import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
-import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 
-public class MappingsV2JarTask extends Jar implements MappingsTask {
+import javax.inject.Inject;
+
+/**
+ * TODO is this an accurate description?<br>
+ * A task that creates a jar file with Quilt's v2 mapping format.
+ * <p>
+ * If {@link quilt.internal.QuiltMappingsPlugin QuiltMappingsPlugin} is applied:
+ * <ul>
+ *     <li>
+ *     {@link #getUnpickMeta() unpickMeta} will default to
+ *     {@link quilt.internal.QuiltMappingsExtension QuiltMappingsExtension}'s
+ *     {@link quilt.internal.QuiltMappingsExtension#getUnpickMeta() unpickMeta}
+ *     <li>
+ *     {@link #getUnpickDefinition() unpickDefinition} will default to
+ *     {@value quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#TASK_NAME}'s
+ *     {@link quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#getOutput() output}
+ *     <li>
+ *     {@link #getDestinationDirectory() destinationDirectory} will default to
+ *     {@code libs/} inside the project build directory
+ * </ul>
+ *
+ */
+public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
+    public static final String JAR_UNPICK_META_PATH = "extras/unpick.json";
+    public static final String JAR_UNPICK_DEFINITION_PATH = "extras/definitions.unpick";
+    public static final String JAR_MAPPINGS_PATH = "mappings/mappings.tiny";
+
     @InputFile
-    private final RegularFileProperty mappings;
+    public abstract RegularFileProperty getUnpickMeta();
 
-    public MappingsV2JarTask() {
-        this.setGroup(Constants.Groups.BUILD_MAPPINGS_GROUP);
+    @InputFile
+    public abstract RegularFileProperty getUnpickDefinition();
+
+    @Optional
+    @InputFile
+    public abstract RegularFileProperty getMappings();
+
+    // unpick version can't be a property because it's used when the task is instantiated
+    public final String unpickVersion;
+
+    @Inject
+    public MappingsV2JarTask(String unpickVersion) {
+        this.setGroup(Constants.Groups.BUILD_MAPPINGS);
+
+        // TODO why?
         this.outputsNeverUpToDate();
-        getDestinationDirectory().set(getProject().file("build/libs"));
 
-        File unpickMetaFile = mappingsExt().getFileConstants().unpickMeta;
-        String version = libs().findVersion("unpick").map(VersionConstraint::getRequiredVersion).orElseThrow(() -> new RuntimeException("Could not find unpick version"));
-        from(unpickMetaFile, copySpec -> {
-            copySpec.expand(Map.of("version", version));
-            copySpec.rename(unpickMetaFile.getName(), "extras/unpick.json");
+        this.unpickVersion = unpickVersion;
+
+        final Provider<RegularFile> unpickMeta = this.getUnpickMeta();
+
+        this.from(unpickMeta, copySpec -> {
+            copySpec.expand(Map.of("version", this.unpickVersion));
+
+            copySpec.rename(unused -> JAR_UNPICK_META_PATH);
         });
 
-        RegularFileProperty combineUnpickDefinitions = getTaskByType(CombineUnpickDefinitionsTask.class).getOutput();
-        from(combineUnpickDefinitions, copySpec -> {
-            copySpec.rename(combineUnpickDefinitions.get().getAsFile().getName(), "extras/definitions.unpick");
-        });
+        this.from(this.getUnpickDefinition(), copySpec -> copySpec.rename(unused -> JAR_UNPICK_DEFINITION_PATH));
 
-        mappings = getObjectFactory().fileProperty();
-
-        from(mappings, copySpec -> {
-            copySpec.rename((originalName) -> "mappings/mappings.tiny");
-        });
-    }
-
-    public RegularFileProperty getMappings() {
-        return mappings;
+        this.from(this.getMappings(), copySpec -> copySpec.rename(unused -> JAR_MAPPINGS_PATH));
     }
 }

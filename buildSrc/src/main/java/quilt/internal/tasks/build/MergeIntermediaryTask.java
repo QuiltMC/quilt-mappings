@@ -2,33 +2,44 @@ package quilt.internal.tasks.build;
 
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
+
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Optional;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
-import quilt.internal.tasks.setup.CheckIntermediaryMappingsTask;
-import quilt.internal.tasks.setup.DownloadIntermediaryMappingsTask;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-public class MergeIntermediaryTask extends AbstractTinyMergeTask {
+import static quilt.internal.util.ProviderUtil.exists;
+
+public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask {
     public static final String TASK_NAME = "mergeIntermediary";
 
-    public MergeIntermediaryTask() {
-        super("mappings-intermediaryMerged.tiny", "intermediary", Constants.PER_VERSION_MAPPINGS_NAME);
-        dependsOn(CheckIntermediaryMappingsTask.TASK_NAME, DownloadIntermediaryMappingsTask.TASK_NAME, MergeTinyV2Task.TASK_NAME);
-        onlyIf(task -> getTaskByType(CheckIntermediaryMappingsTask.class).isPresent());
+    @Override
+    @Optional
+    @InputFile
+    public abstract RegularFileProperty getInput();
 
-        input.convention(getTaskByType(DownloadIntermediaryMappingsTask.class)::getTinyFile);
+    @InputFile
+    public abstract RegularFileProperty getMergedTinyMappings();
+
+    public MergeIntermediaryTask() {
+        super(
+            Constants.INTERMEDIARY_MAPPINGS_NAME,
+            Constants.PER_VERSION_MAPPINGS_NAME
+        );
+
+        this.onlyIf(unused -> exists(this.getInput()));
     }
 
     @Override
     public void mergeMappings() throws Exception {
-        File tinyInput = this.getTaskByType(MergeTinyV2Task.class).getOutputMappings();
-        mergeMappings(tinyInput);
+        this.mergeMappings(this.getMergedTinyMappings().get().getAsFile());
     }
 
     @Override
@@ -39,7 +50,8 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     private static MappingVisitor firstVisitor(MappingVisitor next) {
         // Copy unobfuscated names to the named namespace, since intermediary would override them
         return new DoubleNsCompleterVisitor(
-                // Fix bug when intermediary doesn't have a mapping but hashed does (i.e. `net/minecraft/client/main/Main$2`)
+                // Fix bug when intermediary doesn't have a mapping but hashed does
+                // (i.e. `net/minecraft/client/main/Main$2`)
                 new DoubleNsCompleterVisitor(
                         new UnmappedNameRemoverVisitor(next, "named", Constants.PER_VERSION_MAPPINGS_NAME),
                         // Copy names from `official` to `named` if `intermediary` is empty
@@ -64,7 +76,9 @@ public class MergeIntermediaryTask extends AbstractTinyMergeTask {
     }
 
     @VisibleForTesting
-    public static void mergeMappings(Path intermediaryMappings, Path mergeTinyV2Output, Path outputMappings) throws IOException {
+    public static void mergeMappings(
+        Path intermediaryMappings, Path mergeTinyV2Output, Path outputMappings
+    ) throws IOException {
         AbstractTinyMergeTask.mergeMappings(intermediaryMappings, mergeTinyV2Output, outputMappings,
             MergeIntermediaryTask::firstVisitor,
             MergeIntermediaryTask::preWriteVisitor

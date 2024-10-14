@@ -1,33 +1,36 @@
-package quilt.internal.util;
+package quilt.internal.decompile.javadoc;
+
+import org.gradle.api.GradleException;
+import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Property;
+import org.gradle.api.provider.ValueSource;
+import org.gradle.api.provider.ValueSourceParameters;
 
 import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
-import quilt.internal.decompile.javadoc.ClassJavadocProvider;
-import quilt.internal.decompile.javadoc.FieldJavadocProvider;
-import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 
-public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavadocProvider, MethodJavadocProvider {
-    private final MemoryMappingTree tree = new MemoryMappingTree();
+public class MappingsJavadocProvider implements UniversalJavadocProvider {
+    private transient final MemoryMappingTree tree = new MemoryMappingTree();
     private final int namespaceId;
 
     public MappingsJavadocProvider(File mappingsFile, String namespace) throws IOException {
         try (Reader reader = Files.newBufferedReader(mappingsFile.toPath())) {
-            Tiny2FileReader.read(reader, tree);
+            Tiny2FileReader.read(reader, this.tree);
         }
-        namespaceId = tree.getNamespaceId(namespace);
+        this.namespaceId = this.tree.getNamespaceId(namespace);
     }
 
     @Override
     public String provideClassJavadoc(String className, boolean isRecord) {
-        MappingTree.ClassMapping mapping = tree.getClass(className, namespaceId);
+        final MappingTree.ClassMapping mapping = this.tree.getClass(className, this.namespaceId);
         if (mapping != null) {
-            StringBuilder javadoc;
+            final StringBuilder javadoc;
             if (mapping.getComment() != null) {
                 javadoc = new StringBuilder(mapping.getComment());
                 javadoc.append("\n\n");
@@ -52,11 +55,12 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
 
     @Override
     public String provideFieldJavadoc(String fieldName, String descriptor, String owner) {
-        MappingTree.ClassMapping ownerMapping = tree.getClass(owner, namespaceId);
+        final MappingTree.ClassMapping ownerMapping = this.tree.getClass(owner, this.namespaceId);
         if (ownerMapping != null) {
-            MappingTree.FieldMapping fieldMapping = ownerMapping.getField(fieldName, descriptor, namespaceId);
+            final MappingTree.FieldMapping fieldMapping =
+                ownerMapping.getField(fieldName, descriptor, this.namespaceId);
             if (fieldMapping != null) {
-                StringBuilder javadoc;
+                final StringBuilder javadoc;
                 if (fieldMapping.getComment() != null) {
                     javadoc = new StringBuilder(fieldMapping.getComment());
                     javadoc.append("\n\n");
@@ -65,10 +69,11 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 }
 
                 // Add mapping info
-                for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
-                    String namespace = tree.getNamespaceName(i);
-                    String name = fieldMapping.getName(namespace);
-                    String selector = "L" + ownerMapping.getName(namespace) + ";" + name + ":" + fieldMapping.getDesc(namespace);
+                for (int i = this.tree.getMinNamespaceId(); i < this.tree.getMaxNamespaceId(); i++) {
+                    final String namespace = this.tree.getNamespaceName(i);
+                    final String name = fieldMapping.getName(namespace);
+                    final String selector =
+                        "L" + ownerMapping.getName(namespace) + ";" + name + ":" + fieldMapping.getDesc(namespace);
                     javadoc.append("@mapping {@literal ");
                     javadoc.append(namespace).append(" ").append(name).append(" ").append(selector).append("}");
                     javadoc.append("\n");
@@ -83,11 +88,12 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
 
     @Override
     public String provideMethodJavadoc(String methodName, String descriptor, String owner) {
-        MappingTree.ClassMapping ownerMapping = tree.getClass(owner, namespaceId);
+        final MappingTree.ClassMapping ownerMapping = this.tree.getClass(owner, this.namespaceId);
         if (ownerMapping != null) {
-            MappingTree.MethodMapping methodMapping = ownerMapping.getMethod(methodName, descriptor, namespaceId);
+            final MappingTree.MethodMapping methodMapping =
+                ownerMapping.getMethod(methodName, descriptor, this.namespaceId);
             if (methodMapping != null) {
-                StringBuilder javadoc;
+                final StringBuilder javadoc;
                 if (methodMapping.getComment() != null) {
                     javadoc = new StringBuilder(methodMapping.getComment());
                     javadoc.append("\n\n");
@@ -96,10 +102,12 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 }
 
                 // Generate @param tags
-                StringBuilder argComments = new StringBuilder();
+                final StringBuilder argComments = new StringBuilder();
                 for (MappingTree.MethodArgMapping argMapping : methodMapping.getArgs()) {
                     if (argMapping.getComment() != null) {
-                        argComments.append("@param ").append(argMapping.getName(namespaceId)).append(" ").append(argMapping.getComment());
+                        argComments.append("@param ")
+                            .append(argMapping.getName(this.namespaceId)).append(" ")
+                            .append(argMapping.getComment());
                         argComments.append("\n");
                     }
                 }
@@ -110,10 +118,10 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
                 }
 
                 // Add mapping info
-                for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
-                    String namespace = tree.getNamespaceName(i);
-                    String name = methodMapping.getName(namespace);
-                    String selector = "L" + ownerMapping.getName(namespace) + ";" + name + methodMapping.getDesc(namespace);
+                for (int i = this.tree.getMinNamespaceId(); i < this.tree.getMaxNamespaceId(); i++) {
+                    final String namespace = this.tree.getNamespaceName(i);
+                    final String name = methodMapping.getName(namespace);
+                    final String selector = "L" + ownerMapping.getName(namespace) + ";" + name + methodMapping.getDesc(namespace);
                     javadoc.append("@mapping {@literal ");
                     javadoc.append(namespace).append(" ").append(name).append(" ").append(selector).append("}");
                     javadoc.append("\n");
@@ -124,5 +132,27 @@ public class MappingsJavadocProvider implements ClassJavadocProvider, FieldJavad
         }
 
         return "Mapping not found";
+    }
+
+    public static abstract class Source implements ValueSource<MappingsJavadocProvider, Source.Params> {
+        @Override
+        public MappingsJavadocProvider obtain() {
+            final Params params = this.getParameters();
+
+            try {
+                return new MappingsJavadocProvider(
+                    params.getMappingsFile().get().getAsFile(),
+                    params.getNamespace().get()
+                );
+            } catch (IOException e) {
+                throw new GradleException("Failed to create javadoc provider", e);
+            }
+        }
+
+        public interface Params extends ValueSourceParameters {
+            RegularFileProperty getMappingsFile();
+
+            Property<String> getNamespace();
+        }
     }
 }

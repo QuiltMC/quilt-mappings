@@ -2,7 +2,9 @@ package quilt.internal.tasks.jarmapping;
 
 import java.util.Map;
 
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
@@ -17,13 +19,16 @@ public abstract class MapJarTask extends DefaultMappingsTask {
             "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
     );
     @InputFile
-    protected final RegularFileProperty inputJar;
+    public abstract RegularFileProperty getInputJar();
 
     @InputFile
-    protected final RegularFileProperty mappingsFile;
+    public abstract RegularFileProperty getMappingsFile();
+
+    @InputDirectory
+    public abstract DirectoryProperty getLibrariesDir();
 
     @OutputFile
-    protected final RegularFileProperty outputJar;
+    public abstract RegularFileProperty getOutputJar();
 
     private final String from, to;
 
@@ -31,33 +36,24 @@ public abstract class MapJarTask extends DefaultMappingsTask {
         super(group);
         this.from = from;
         this.to = to;
-
-        inputJar = getProject().getObjects().fileProperty();
-        mappingsFile = getProject().getObjects().fileProperty();
-        outputJar = getProject().getObjects().fileProperty();
     }
 
     @TaskAction
     public void remapJar() {
-        getLogger().lifecycle(":mapping minecraft from " + from + " to " + to);
-        Map<String, String> additionalMappings = getAdditionalMappings();
-        JarRemapper.mapJar(outputJar.getAsFile().get(), inputJar.getAsFile().get(), mappingsFile.get().getAsFile(), fileConstants.libraries, from, to, builder -> builder.withMappings(out -> additionalMappings.forEach(out::acceptClass)));
+        this.getLogger().lifecycle(":mapping minecraft from " + this.from + " to " + this.to);
+        final Map<String, String> additionalMappings = this.getAdditionalMappings();
+        JarRemapper.mapJar(
+            this.getOutputJar().get().getAsFile(),
+            this.getInputJar().get().getAsFile(),
+            this.getMappingsFile().get().getAsFile(),
+            this.getLibrariesDir().get().getAsFile(),
+            this.from, this.to,
+            builder -> builder.withMappings(out -> additionalMappings.forEach(out::acceptClass))
+        );
     }
 
     @Internal
     public Map<String, String> getAdditionalMappings() {
         return Map.of();
-    }
-
-    public RegularFileProperty getInputJar() {
-        return inputJar;
-    }
-
-    public RegularFileProperty getMappingsFile() {
-        return mappingsFile;
-    }
-
-    public RegularFileProperty getOutputJar() {
-        return outputJar;
     }
 }

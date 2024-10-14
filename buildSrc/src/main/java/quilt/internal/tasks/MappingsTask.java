@@ -1,39 +1,28 @@
 package quilt.internal.tasks;
 
 import org.gradle.api.Task;
-import org.gradle.api.artifacts.VersionCatalog;
-import org.gradle.api.artifacts.VersionCatalogsExtension;
-import quilt.internal.MappingsExtension;
-import quilt.internal.MappingsPlugin;
+import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.util.DownloadImmediate;
 
+// TODO possibly eliminate this
 public interface MappingsTask extends Task {
+    // TODO move this to a separate interface
     default DownloadImmediate.Builder startDownload() {
         return new DownloadImmediate.Builder(this);
     }
 
-    @SuppressWarnings("unchecked")
-    default <T extends Task> T getTaskByName(String taskName) {
-        return (T) getProject().getTasks().getByName(taskName);
+    // TODO eliminate this
+    default <T extends Task> T getTaskNamed(String name, Class<T> taskClass) {
+        return this.getProject().getTasks().named(name, taskClass).get();
     }
 
-    default <T extends Task> T getTaskByType(Class<T> taskClass) {
-        return getProject().getTasks().stream().filter(task -> taskClass.isAssignableFrom(task.getClass())).map(taskClass::cast).findAny().orElseThrow();
-    }
-
+    // TODO add explanations to calls, probably inline method
     default void outputsNeverUpToDate() {
         this.getOutputs().upToDateWhen(task -> false);
     }
 
-    default MappingsExtension mappingsExt() {
-        return MappingsPlugin.getExtension(getProject());
-    }
-
-    default VersionCatalogsExtension versionCatalogs() {
-        return getProject().getExtensions().getByType(VersionCatalogsExtension.class);
-    }
-
-    default VersionCatalog libs() {
-        return versionCatalogs().named("libs");
+    // TODO eliminate this
+    default QuiltMappingsExtension mappingsExt() {
+        return QuiltMappingsExtension.get(this.getProject());
     }
 }

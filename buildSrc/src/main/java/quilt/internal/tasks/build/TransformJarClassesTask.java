@@ -28,43 +28,35 @@ import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class TransformJarClassesTask extends DefaultMappingsTask {
-    private final RegularFileProperty jarFile;
-    private final DirectoryProperty output;
+public abstract class TransformJarClassesTask extends DefaultMappingsTask {
     private final List<VisitorFactory> visitorFactories = new ArrayList<>();
     private final List<Predicate<ClassNode>> filters = new ArrayList<>();
 
-    public TransformJarClassesTask() {
-        super(Constants.Groups.BUILD_MAPPINGS_GROUP);
-        jarFile = getProject().getObjects().fileProperty();
-        output = getProject().getObjects().directoryProperty();
-    }
-
     @InputFile
-    public RegularFileProperty getJarFile() {
-        return jarFile;
-    }
+    public abstract RegularFileProperty getJarFile();
 
     @OutputDirectory
-    public DirectoryProperty getOutput() {
-        return output;
+    public abstract DirectoryProperty getOutput();
+
+    public TransformJarClassesTask() {
+        super(Constants.Groups.BUILD_MAPPINGS);
     }
 
     public void visitor(VisitorFactory visitorFactory) {
-        visitorFactories.add(visitorFactory);
+        this.visitorFactories.add(visitorFactory);
     }
 
     public void filter(Predicate<ClassNode> filter) {
-        filters.add(filter);
+        this.filters.add(filter);
     }
 
     @TaskAction
     public void transform() throws IOException {
-        Map<String, byte[]> classFiles = new HashMap<>();
-        try (ZipFile zipFile = new ZipFile(jarFile.getAsFile().get())) {
-            List<? extends ZipEntry> entries = Collections.list(zipFile.entries());
-            for (ZipEntry entry : entries) {
-                String name = entry.getName();
+        final Map<String, byte[]> classFiles = new HashMap<>();
+        try (ZipFile zipFile = new ZipFile(this.getJarFile().getAsFile().get())) {
+            final List<? extends ZipEntry> entries = Collections.list(zipFile.entries());
+            for (final ZipEntry entry : entries) {
+                final String name = entry.getName();
                 if (name.endsWith(".class")) {
                     try (InputStream stream = zipFile.getInputStream(entry)) {
                         classFiles.put(name, stream.readAllBytes());
@@ -73,21 +65,21 @@ public class TransformJarClassesTask extends DefaultMappingsTask {
             }
         }
 
-        Predicate<ClassNode> filter = filters.stream().reduce(Predicate::and).orElse(node -> true);
+        final Predicate<ClassNode> filter = this.filters.stream().reduce(Predicate::and).orElse(node -> true);
 
-        Map<String, byte[]> transformedClassFiles = new HashMap<>();
-        for (String name : classFiles.keySet()) {
-            ClassReader reader = new ClassReader(classFiles.get(name));
-            ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
+        final Map<String, byte[]> transformedClassFiles = new HashMap<>();
+        for (final String name : classFiles.keySet()) {
+            final ClassReader reader = new ClassReader(classFiles.get(name));
+            final ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
             ClassVisitor visitor = writer;
-            for (VisitorFactory visitorFactory : visitorFactories) {
+            for (final VisitorFactory visitorFactory : this.visitorFactories) {
                 visitor = visitorFactory.create(visitor);
             }
 
             if (!(visitor instanceof ClassNode)) {
                 visitor = new ForwardingClassNode(visitor);
             }
-            ClassNode node = (ClassNode) visitor;
+            final ClassNode node = (ClassNode) visitor;
 
             reader.accept(visitor, 0);
             if (filter.test(node)) {
@@ -96,12 +88,12 @@ public class TransformJarClassesTask extends DefaultMappingsTask {
         }
 
         // Ensure the output directory is empty
-        File outputFile = output.getAsFile().get();
+        final File outputFile = this.getOutput().getAsFile().get();
         FileUtils.deleteDirectory(outputFile);
-        Path outputPath = outputFile.toPath();
+        final Path outputPath = outputFile.toPath();
 
-        for (String name : transformedClassFiles.keySet()) {
-            Path path = outputPath.resolve(name);
+        for (final String name : transformedClassFiles.keySet()) {
+            final Path path = outputPath.resolve(name);
             if (!Files.exists(path.getParent())) {
                 Files.createDirectories(path.getParent());
             }
@@ -110,7 +102,7 @@ public class TransformJarClassesTask extends DefaultMappingsTask {
         }
     }
 
-    interface VisitorFactory {
+    public interface VisitorFactory {
         ClassVisitor create(ClassVisitor visitor);
     }
 
@@ -125,7 +117,7 @@ public class TransformJarClassesTask extends DefaultMappingsTask {
         @Override
         public void visitEnd() {
             super.visitEnd();
-            this.accept(visitor);
+            this.accept(this.visitor);
         }
     }
 }
