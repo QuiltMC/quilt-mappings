@@ -43,7 +43,6 @@ import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.decompile.DecompileVineflowerTask;
-import quilt.internal.tasks.diff.CheckUnpickVersionsMatchTask;
 import quilt.internal.tasks.diff.DecompileTargetTask;
 import quilt.internal.tasks.diff.DownloadTargetMappingJarTask;
 import quilt.internal.tasks.diff.DownloadTargetMetaFileTask;
@@ -53,6 +52,7 @@ import quilt.internal.tasks.diff.RemapTargetUnpickDefinitionsTask;
 import quilt.internal.tasks.diff.TargetVersionConsumingTask;
 import quilt.internal.tasks.diff.UnpickTargetJarTask;
 import quilt.internal.tasks.diff.UnpickVersionsMatchConsumingTask;
+import quilt.internal.tasks.diff.UnpickVersionsMatchSource;
 import quilt.internal.tasks.jarmapping.MapJarTask;
 import quilt.internal.tasks.jarmapping.MapNamedJarTask;
 import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
@@ -791,27 +791,41 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             }
         );
 
-        final var checkUnpickVersionsMatch = tasks.register(
-            CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class,
-            task -> {
-                task.getUnpickVersion().convention(unpickVersion);
+        // final var checkUnpickVersionsMatch = tasks.register(
+        //     CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class,
+        //     task -> {
+        //         task.getUnpickVersion().convention(unpickVersion);
+        //
+        //         task.getUnpickMeta().convention(
+        //             extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
+        //                 .map(dest -> dest.file(MappingsV2JarTask.JAR_UNPICK_META_PATH))
+        //         );
+        //     }
+        // );
 
-                task.getUnpickMeta().convention(
+        final Provider<Boolean> unpickVersionsMatch = providers.of(
+            UnpickVersionsMatchSource.class,
+            spec -> spec.parameters(params -> {
+                params.getUnpickVersion().convention(unpickVersion);
+
+                params.getUnpickMeta().convention(
                     extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
                         .map(dest -> dest.file(MappingsV2JarTask.JAR_UNPICK_META_PATH))
                 );
-            }
+            })
         );
 
         tasks.withType(UnpickVersionsMatchConsumingTask.class).configureEach(task -> {
-            // TODO temporary, until CheckUnpickVersionsMatchTask is converted to a BuildService
-            task.dependsOn(checkUnpickVersionsMatch);
+            // // TODO temporary, until CheckUnpickVersionsMatchTask is converted to a BuildService
+            // task.dependsOn(checkUnpickVersionsMatch);
 
-            task.getUnpickVersionsMatch().convention(
-                checkUnpickVersionsMatch.flatMap(CheckUnpickVersionsMatchTask::isMatch)
-            );
+            // task.getUnpickVersionsMatch().convention(
+            //     checkUnpickVersionsMatch.flatMap(CheckUnpickVersionsMatchTask::isMatch)
+            // );
 
-            task.onlyIf(unused -> task.getUnpickVersionsMatch().getOrElse(false));
+            task.getUnpickVersionsMatch().convention(unpickVersionsMatch);
+
+            task.onlyIf(unused -> task.getUnpickVersionsMatch().get());
         });
 
         final var remapTargetUnpickDefinitions = tasks.register(
