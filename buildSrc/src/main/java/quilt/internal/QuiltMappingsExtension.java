@@ -1,7 +1,6 @@
 package quilt.internal;
 
 import org.gradle.api.GradleException;
-import org.gradle.api.Project;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
@@ -32,15 +31,7 @@ public abstract class QuiltMappingsExtension {
 
     public abstract RegularFileProperty getUnpickMeta();
 
-    private final FileConstants fileConstants;
-
-    public static QuiltMappingsExtension get(Project project) {
-        return project.getExtensions().getByType(QuiltMappingsExtension.class);
-    }
-
-    public QuiltMappingsExtension(Project project) {
-        this.fileConstants = new FileConstants(project);
-
+    public QuiltMappingsExtension() {
         this.enigmaProfile = this.getEnigmaProfileConfig()
             .map(RegularFile::getAsFile)
             .map(File::toPath)
@@ -53,7 +44,4 @@ public abstract class QuiltMappingsExtension {
             });
     }
 
-    public FileConstants getFileConstants() {
-        return this.fileConstants;
-    }
 }

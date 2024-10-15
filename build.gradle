@@ -105,12 +105,6 @@ dependencies {
 	intermediary "net.fabricmc:intermediary:${minecraft_version}:v2"
 }
 
-// TODO consider moving cleanable things to build/ so this isn't necessary,
-//  or put them in .gradle/cleanable/ and only add that here (or MappingsPlugin)
-clean.doFirst {
-	delete quiltMappings.fileConstants.tempDir
-}
-
 tasks.build.dependsOn "compressTiny", "tinyJar", "v2UnmergedMappingsJar", "v2MergedMappingsJar"
 
 // TODO move all custom tasks and their configuration to MappingsPlugin

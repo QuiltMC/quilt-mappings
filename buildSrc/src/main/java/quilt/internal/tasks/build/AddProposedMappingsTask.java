@@ -41,6 +41,8 @@ import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.util.ProviderUtil;
 
 public abstract class AddProposedMappingsTask extends DefaultMappingsTask implements EnigmaProfileConsumingTask {
+    public static final String NAMED_NAMESPACE = "named";
+
     @InputFile
     public abstract RegularFileProperty getInputJar();
 
@@ -50,6 +52,22 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
     @OutputFile
     public abstract RegularFileProperty getOutputMappings();
 
+    /**
+     * TODO is this an accurate explanation? Also since this isn't created with the current inputs idk how to test it.
+     * This file will only be created if the first namespace of
+     * {@link #getInputMappings() inputMappings} is {@value NAMED_NAMESPACE}.
+     */
+    @OutputFile
+    public abstract RegularFileProperty getPreprocessedMappings();
+
+    /**
+     * TODO is this an accurate explanation? Also since this isn't created with the current inputs idk how to test it.
+     * This file will only be created if the first namespace of
+     * {@link #getInputMappings() inputMappings} is {@value NAMED_NAMESPACE}.
+     */
+    @OutputFile
+    public abstract RegularFileProperty getProcessedMappings();
+
     public AddProposedMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS);
     }
@@ -58,35 +76,40 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
     public void addProposedMappings() throws Exception {
         this.getLogger().lifecycle(":seeking auto-mappable entries");
 
-        final Path input = ProviderUtil.getPath(this.getInputMappings());
-        final Path output = ProviderUtil.getPath(this.getOutputMappings());
-        final Path jar = ProviderUtil.getPath(this.getInputJar());
-
-        // TODO figure out what this tempDir is for
-        //  the only tasks that output there depend on this task
-        addProposedMappings(input, output, this.fileConstants.tempDir.toPath(), jar, this.getEnigmaProfile().get());
+        // addProposedMappings(input, output, this.fileConstants.tempDir.toPath(), jar, this.getEnigmaProfile().get());
+        addProposedMappings(
+            ProviderUtil.getPath(this.getInputMappings()),
+            ProviderUtil.getPath(this.getOutputMappings()),
+            ProviderUtil.getPath(this.getPreprocessedMappings()),
+            ProviderUtil.getPath(this.getProcessedMappings()),
+            ProviderUtil.getPath(this.getInputJar()),
+            this.getEnigmaProfile().get()
+        );
     }
 
     @VisibleForTesting
     public static void addProposedMappings(
-        Path input, Path output, Path tempDir, Path jar, EnigmaProfile profile
+        Path input, Path output, Path preprocessedMappings, Path processedMappings, Path jar, EnigmaProfile profile
     ) throws Exception {
-        final String name = output.getFileName().toString();
-        final Path preprocessedMappings = tempDir.resolve(name.replace(".tiny", "-preprocessed.tiny"));
-        final Path processedMappings = tempDir.resolve(name.replace(".tiny", "-processed.tiny"));
+        // final String name = output.getFileName().toString();
+        // final Path preprocessedMappings = tempDir.resolve(name.replace(".tiny", "-preprocessed.tiny"));
+        // final Path processedMappings = tempDir.resolve(name.replace(".tiny", "-processed.tiny"));
 
         final List<String> namespaces;
         try (Reader reader = Files.newBufferedReader(input, StandardCharsets.UTF_8)) {
             namespaces = Tiny2FileReader.getNamespaces(reader);
         }
 
-        if (!namespaces.contains("named")) {
+        if (!namespaces.contains(NAMED_NAMESPACE)) {
             throw new IllegalArgumentException("Input mappings must contain the named namespace");
         }
 
-        if (!Files.exists(tempDir)) {
-            Files.createDirectories(tempDir);
-        }
+        // if (!Files.exists(tempDir)) {
+        //     Files.createDirectories(tempDir);
+        // }
+        Files.createDirectories(preprocessedMappings);
+        Files.createDirectories(processedMappings);
+
 
         final boolean extraProcessing = preprocessFile(input, preprocessedMappings);
         final Path commandInput = extraProcessing ? preprocessedMappings : input;
@@ -95,7 +118,7 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
         runCommands(jar,
             commandInput, commandOutput,
             profile,
-            namespaces.getFirst(), "named"
+            namespaces.getFirst(), NAMED_NAMESPACE
         );
 
         if (extraProcessing) {
@@ -106,20 +129,31 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
         }
     }
 
-    private static void runCommands(Path jar, Path input, Path output, EnigmaProfile profile, String fromNamespace, String toNamespace) throws Exception {
+    private static void runCommands(
+        Path jar, Path input, Path output, EnigmaProfile profile, String fromNamespace, String toNamespace
+    ) throws Exception {
         final Enigma enigma = Command.createEnigma(profile, null);
 
         final EnigmaProject project = Command.openProject(jar, input, enigma);
 
-        final boolean debug = System.getProperty("qm.addProposedMappings.debug", "false").toLowerCase(Locale.ROOT).equals("true");
-        final EntryTree<EntryMapping> withProposals = project.getRemapper().getMappings(); // Proposed names are automatically added when opening a project
+        final boolean debug = System.getProperty("qm.addProposedMappings.debug", "false")
+            .toLowerCase(Locale.ROOT)
+            .equals("true");
+
+        // Proposed names are automatically added when opening a project
+        final EntryTree<EntryMapping> withProposals = project.getRemapper().getMappings();
 
         // TODO: Disable fillAll after fixing the tiny v2 writer to avoid adding unnecessary class names
-        final EntryTree<EntryMapping> result = FillClassMappingsCommand.exec(project.getJarIndex(), withProposals, true, debug);
+        final EntryTree<EntryMapping> result = FillClassMappingsCommand
+            .exec(project.getJarIndex(), withProposals, true, debug);
 
         Utils.delete(output);
         final MappingSaveParameters profileParameters = enigma.getProfile().getMappingSaveParameters();
-        final MappingSaveParameters saveParameters = new MappingSaveParameters(profileParameters.fileNameFormat(), /*writeProposedNames*/ true, fromNamespace, toNamespace);
+        final MappingSaveParameters saveParameters = new MappingSaveParameters(
+            profileParameters.fileNameFormat(), true,
+            fromNamespace, toNamespace
+        );
+
         CommandsUtil.getReadWriteService(enigma, output).write(result, output, saveParameters);
 
         if (debug) {
@@ -154,11 +188,11 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
 
         // Reorder destination namespaces to put the named namespace first
         final List<String> dstNamespaces = new ArrayList<>(inputTree.getDstNamespaces());
-        if (!dstNamespaces.getFirst().equals("named")) {
+        if (!dstNamespaces.getFirst().equals(NAMED_NAMESPACE)) {
             final MemoryMappingTree outputTree = new MemoryMappingTree();
-            final int i = dstNamespaces.indexOf("named");
-            dstNamespaces.set(i, dstNamespaces.get(0));
-            dstNamespaces.set(0, "named");
+            final int i = dstNamespaces.indexOf(NAMED_NAMESPACE);
+            dstNamespaces.set(i, dstNamespaces.getFirst());
+            dstNamespaces.set(0, NAMED_NAMESPACE);
             inputTree.accept(new MappingDstNsReorder(outputTree, dstNamespaces));
 
             try (MappingWriter mappingWriter = MappingWriter.create(output, MappingFormat.TINY_2_FILE)) {

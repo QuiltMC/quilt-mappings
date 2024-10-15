@@ -10,9 +10,6 @@ import org.gradle.api.tasks.Optional;
 import quilt.internal.QuiltMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
-import java.io.File;
-import java.nio.file.Path;
-
 /**
  * A task that takes a target version as input.
  * <p>
@@ -29,30 +26,20 @@ public interface TargetVersionConsumingTask extends MappingsTask {
     Property<String> getTargetVersion();
 
     /**
-     * @param pathFactory receives the {@linkplain #getTargetVersion() target version}
-     *                   and returns the path of the file to be provided; the path must represent a {@link RegularFile},
-     *                   and relative paths will be resolved against the
-     *                   {@linkplain org.gradle.api.file.ProjectLayout#getProjectDirectory() project directory}
+     * @param destinationDir the {@link Directory} the provided file will be resolved against
+     * @param namer receives the {@link #getTargetVersion() targetVersion}
+     *             and returns the name of the file to be provided
      */
-    default Provider<RegularFile> provideVersionedProjectFile(Transformer<Path, String> pathFactory) {
-        return this.getProject().getLayout().file(this.providerVersionedFile(pathFactory));
+    default Provider<RegularFile> provideVersionedFile(Directory destinationDir, Transformer<String, String> namer) {
+        return this.getTargetVersion().map(namer).map(destinationDir::file);
     }
 
     /**
-     * @param pathFactory receives the {@linkplain #getTargetVersion() target version}
-     *                   and returns the path of the file to be provided; the path must represent a {@link Directory},
-     *                   and relative paths will be resolved against the
-     *                   {@linkplain org.gradle.api.file.ProjectLayout#getProjectDirectory() project directory}
+     * @param destinationDir the {@link Directory} the provided directory will be resolved against
+     * @param namer receives the {@link #getTargetVersion() targetVersion}
+     *             and returns the name of the directory to be provided
      */
-    default Provider<Directory> provideVersionedProjectDir(Transformer<Path, String> pathFactory) {
-        return this.getProject().getLayout().dir(this.providerVersionedFile(pathFactory));
-    }
-
-    /**
-     * @param pathFactory receives the {@linkplain #getTargetVersion() target version}
-     *                   and returns the path of the file to be provided
-     */
-    default Provider<File> providerVersionedFile(Transformer<Path, String> pathFactory) {
-        return this.getTargetVersion().map(pathFactory).map(Path::toFile);
+    default Provider<Directory> provideVersionedDir(Directory destinationDir, Transformer<String, String> namer) {
+        return this.getTargetVersion().map(namer).map(destinationDir::dir);
     }
 }
