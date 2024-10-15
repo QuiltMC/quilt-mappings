@@ -4,9 +4,10 @@ import java.util.Map;
 
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.MapProperty;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.tasks.DefaultMappingsTask;
@@ -18,6 +19,9 @@ public abstract class MapJarTask extends DefaultMappingsTask {
             "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
             "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
     );
+
+    @Input
+    public abstract MapProperty<String, String> getAdditionalMappings();
 
     @InputFile
     public abstract RegularFileProperty getInputJar();
@@ -42,7 +46,7 @@ public abstract class MapJarTask extends DefaultMappingsTask {
     @TaskAction
     public void remapJar() {
         this.getLogger().lifecycle(":mapping minecraft from " + this.from + " to " + this.to);
-        final Map<String, String> additionalMappings = this.getAdditionalMappings();
+        final Map<String, String> additionalMappings = this.getAdditionalMappings().get();
         JarRemapper.mapJar(
             this.getOutputJar().get().getAsFile(),
             this.getInputJar().get().getAsFile(),
@@ -51,11 +55,5 @@ public abstract class MapJarTask extends DefaultMappingsTask {
             this.from, this.to,
             builder -> builder.withMappings(out -> additionalMappings.forEach(out::acceptClass))
         );
-    }
-
-    // TODO make this a MapProperty input
-    @Internal
-    public Map<String, String> getAdditionalMappings() {
-        return Map.of();
     }
 }

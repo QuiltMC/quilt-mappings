@@ -1,7 +1,5 @@
 package quilt.internal.tasks.jarmapping;
 
-import java.util.Map;
-
 import quilt.internal.Constants;
 
 public abstract class MapNamedJarTask extends MapJarTask {
@@ -9,9 +7,7 @@ public abstract class MapNamedJarTask extends MapJarTask {
 
     public MapNamedJarTask() {
         super(Constants.Groups.MAP_JAR, Constants.PER_VERSION_MAPPINGS_NAME, "named");
-    }
 
-    public Map<String, String> getAdditionalMappings() {
-        return JAVAX_TO_JETBRAINS;
+        this.getAdditionalMappings().putAll(JAVAX_TO_JETBRAINS);
     }
 }

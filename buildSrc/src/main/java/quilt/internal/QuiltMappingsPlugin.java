@@ -87,8 +87,6 @@ import static quilt.internal.util.ProviderUtil.toOptional;
 
 import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
 
-// TODO extract common providers, possibly convert FileConstants to providers instead of files
-
 /**
  * TODO javadoc, including every configureEach, every configuration
  */
@@ -816,13 +814,6 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         );
 
         tasks.withType(UnpickVersionsMatchConsumingTask.class).configureEach(task -> {
-            // // TODO temporary, until CheckUnpickVersionsMatchTask is converted to a BuildService
-            // task.dependsOn(checkUnpickVersionsMatch);
-
-            // task.getUnpickVersionsMatch().convention(
-            //     checkUnpickVersionsMatch.flatMap(CheckUnpickVersionsMatchTask::isMatch)
-            // );
-
             task.getUnpickVersionsMatch().convention(unpickVersionsMatch);
 
             task.onlyIf(unused -> task.getUnpickVersionsMatch().get());
@@ -870,10 +861,6 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final var remapTargetMinecraftJar = tasks.register(
             RemapTargetMinecraftJarTask.TASK_NAME, RemapTargetMinecraftJarTask.class,
             task -> {
-                // TODO temporary until CheckTargetVersionExists and CheckUnpickVersionsMatchTask
-                //  are converted to BuildService's
-                task.dependsOn(unpickTargetJar);
-
                 task.getInputJar().convention(unpickTargetJar.flatMap(UnpickTargetJarTask::getOutputFile));
 
                 task.getMappingsFile().convention(
