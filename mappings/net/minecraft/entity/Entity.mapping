@@ -57,6 +57,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_llpiaiql fireTicks I
 	FIELD f_lnfbdcex firstUpdate Z
 	FIELD f_ltxgrrxv noClip Z
+	FIELD f_lwsftgrz queuedCollisionChecks Ljava/util/List;
 	FIELD f_metfcppr velocityDirty Z
 	FIELD f_mhlwwcep POSE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_mnnqnavj glowing Z
@@ -72,6 +73,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_pfezymmj prevYaw F
 	FIELD f_pfgaedzm MIN_TICKS_TO_FREEZE I
 	FIELD f_qazqhmfv SNEAKING_FLAG_INDEX I
+	FIELD f_qckvmvwz collidingBlockPositions Lit/unimi/dsi/fastutil/longs/LongSet;
 	FIELD f_qriixkyh SWIMMING_FLAG_INDEX I
 	FIELD f_qtxalbwz SAFE_FALL_DISTANCE I
 	FIELD f_qxfvmjxc lastRenderX D
@@ -91,6 +93,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ssljujsr LOGGER Lorg/slf4j/Logger;
 	FIELD f_tigrjjuw DEFAULT_BOUNDING_BOX_WIDTH F
 	FIELD f_tklhtpht entityChangeListener Lnet/minecraft/unmapped/C_ylpvpknw;
+	FIELD f_ujgsyoqm collidingBlocks Ljava/util/Set;
 	FIELD f_ujsjgylb fallDistance F
 	FIELD f_vdsiqqmt prevPitch F
 	FIELD f_vettyvgp hasVisualFire Z
@@ -132,6 +135,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 pose
 	METHOD m_ahglzvvg getBodyY (D)D
 		ARG 1 heightScale
+	METHOD m_ahrprint getPitch ()F
 	METHOD m_ajnomikh getEffectiveExplosionResistance (Lnet/minecraft/unmapped/C_aahhrzpf;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xqketiuf;F)F
 		ARG 1 explosion
 		ARG 2 world
@@ -159,7 +163,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 type
 	METHOD m_bikcqssn setInsidePortal (Lnet/minecraft/unmapped/C_teerivzm;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 portal
-	METHOD m_bjibgujk onRemoved ()V
+	METHOD m_bjibgujk onRemovedClient ()V
 	METHOD m_bmjmwuig setBoundingBox (Lnet/minecraft/unmapped/C_hbcjzgoe;)V
 		ARG 1 boundingBox
 	METHOD m_bqujtsnz isSubmergedInWater ()Z
@@ -169,6 +173,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 0 entity
 		ARG 2 expectedCollisions
 		ARG 3 entityBoundingBox
+	METHOD m_bujlfnum dropStack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_uqpzijng;
+	METHOD m_bxezczwg dropStack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;F)Lnet/minecraft/unmapped/C_uqpzijng;
+		ARG 3 yOffset
 	METHOD m_bzrtaquy getVehicle ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_bzveerey collides ()Z
 	METHOD m_cckfyxyf fall (DZLnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;)V
@@ -337,6 +344,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_fzshfvfl isSprinting ()Z
 	METHOD m_gakqenyv getLerpTargetPitch ()F
 	METHOD m_gavkvalj hasWings ()Z
+	METHOD m_gbjymqob onRemoved (Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
+		ARG 1 reason
 	METHOD m_ggpcigyk addVelocityInternal (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 velocity
 	METHOD m_ghqcprlw onPlayerCollision (Lnet/minecraft/unmapped/C_jzrpycqo;)V
@@ -540,6 +549,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 widthScale
 	METHOD m_ncryhhth copyPositionAndRotation (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_ndosmusf getYaw ()F
 	METHOD m_ngysbrcu getSwimSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_nhuepqoa getOppositeRotationVector (FF)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 pitch
@@ -702,6 +712,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_shlbgxdt saveSelfNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
 		ARG 1 nbt
 	METHOD m_smbujbsa discard ()V
+	METHOD m_smqilrfl dropStack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_uqpzijng;
 	METHOD m_spboarji isTouchingWater ()Z
 		COMMENT {@return whether this entity's hitbox is touching water}
 	METHOD m_spnjhgke resetFallDistance ()V
@@ -880,6 +891,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 tickDelta
 	METHOD m_xpuekaoa setUuid (Ljava/util/UUID;)V
 		ARG 1 uuid
+	METHOD m_xrhuexzc dropStack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_gmbqjnle;)Lnet/minecraft/unmapped/C_uqpzijng;
 	METHOD m_xrvghdnl getLandingBlockStateLegacy ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_xthhawdp onStartedTrackingBy (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
@@ -894,6 +906,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 entity
 		ARG 2 dimensions
 		ARG 3 scaleFactor
+	METHOD m_xxnsgkmf queueCollisionCheck (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)V
 	METHOD m_xyjymteg getVehicleAttachmentPos (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 entity
 	METHOD m_xyqhaexi playCombinationStepSounds (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)V
@@ -955,6 +968,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 2 interpolationSteps
 	METHOD m_zoivpnyj getAttachments ()Lnet/minecraft/unmapped/C_pubtmkke;
 	METHOD m_zrismnrd checkWaterState ()V
+	CLASS C_aipuagbw Movement
 	CLASS C_aobkcgmf PositionUpdater
 		METHOD accept (Lnet/minecraft/unmapped/C_astfners;DDD)V
 			ARG 1 entity

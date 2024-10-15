@@ -14,10 +14,18 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 	FIELD f_xnopevsr id I
 	FIELD f_yxdvzmgt vec3i Lnet/minecraft/unmapped/C_ceivtqhh;
 	FIELD f_zbhygcbw CODEC Lnet/minecraft/unmapped/C_lgkqzafw$C_nxwenkbc;
+	METHOD m_aceixrsp getFacing (DDD)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 x
+		ARG 2 y
+		ARG 4 z
 	METHOD m_arokrhof validateVertical (Lnet/minecraft/unmapped/C_xpuuihxf;)Lcom/mojang/serialization/DataResult;
 		ARG 0 direction
 	METHOD m_atdyqmtg getId ()I
 	METHOD m_buxxiflp getOpposite ()Lnet/minecraft/unmapped/C_xpuuihxf;
+	METHOD m_ckfxacqi getFacing (FFF)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD m_cmaqxlom byId (I)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 id
 	METHOD m_dfjhoqwe fromHorizontal (I)Lnet/minecraft/unmapped/C_xpuuihxf;
@@ -30,12 +38,20 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 	METHOD m_hntyvpnl get (Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 direction
 		ARG 1 axis
+	METHOD m_icbobqmt getFacing (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 vec
 	METHOD m_iuvhambs getAxis ()Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
 	METHOD m_iztsoygw getUnitVector ()Lorg/joml/Vector3f;
 	METHOD m_lxrgvhbm getOffsetY ()I
+	METHOD m_nmryvhog asVec3d ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_nyqvqnqv transform (Lorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 position
 		ARG 1 direction
+	METHOD m_obcinsgd fromVec (IIILnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+		ARG 3 fallback
 	METHOD m_oqyobyjy getOffsetX ()I
 	METHOD m_osvadcjw rotateYClockwise ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_pbuextkm rotateCounterclockwise (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf;
@@ -51,6 +67,8 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 	METHOD m_qnbvkhac getLookDirectionForAxis (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 entity
 		ARG 1 axis
+	METHOD m_rgctwylt fromVec (Lnet/minecraft/unmapped/C_ceivtqhh;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 vec
 	METHOD m_rybsiiha getName ()Ljava/lang/String;
 	METHOD m_rzedosik from (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 axis
@@ -59,6 +77,7 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		ARG 0 entity
 	METHOD m_ucwgyusq getShuffledDirections (Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/Collection;
 		ARG 0 random
+	METHOD m_uinacubi asVec3i ()Lnet/minecraft/unmapped/C_ceivtqhh;
 	METHOD m_veocfmwg pointsTo (F)Z
 		COMMENT {@return whether the given yaw points to the direction}
 		COMMENT
@@ -67,6 +86,8 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		COMMENT <p>This always returns {@code false} for vertical directions.
 		ARG 1 yaw
 	METHOD m_vyhskrab getOffsetZ ()I
+	METHOD m_vzfadujr getHorizontalDegrees (Lnet/minecraft/unmapped/C_xpuuihxf;)F
+		COMMENT Gets the degrees of the {@code direction}, relative to {@link Direction#SOUTH}
 	METHOD m_wstyzrap (Lnet/minecraft/unmapped/C_xpuuihxf;)I
 		ARG 0 direction
 	METHOD m_xwgdebbi getRotationQuaternion ()Lorg/joml/Quaternionf;
@@ -103,10 +124,13 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 			ARG 0 name
 		METHOD m_jwnubmio isVertical ()Z
 		METHOD m_qewftacv getName ()Ljava/lang/String;
+		METHOD m_symjvdwr getDirections ()[Lnet/minecraft/unmapped/C_xpuuihxf;
+		METHOD m_uhgjjbza getPositive ()Lnet/minecraft/unmapped/C_xpuuihxf;
 		METHOD m_vfobospg choose (III)I
 			ARG 1 x
 			ARG 2 y
 			ARG 3 z
+		METHOD m_wxwlsnud getNegative ()Lnet/minecraft/unmapped/C_xpuuihxf;
 		METHOD m_xfsvouev isHorizontal ()Z
 		METHOD m_xipigoyp pickRandomAxis (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
 			ARG 0 random
