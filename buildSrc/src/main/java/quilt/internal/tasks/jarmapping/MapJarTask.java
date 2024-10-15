@@ -18,6 +18,7 @@ public abstract class MapJarTask extends DefaultMappingsTask {
             "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
             "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
     );
+
     @InputFile
     public abstract RegularFileProperty getInputJar();
 
@@ -52,6 +53,7 @@ public abstract class MapJarTask extends DefaultMappingsTask {
         );
     }
 
+    // TODO make this a MapProperty input
     @Internal
     public Map<String, String> getAdditionalMappings() {
         return Map.of();

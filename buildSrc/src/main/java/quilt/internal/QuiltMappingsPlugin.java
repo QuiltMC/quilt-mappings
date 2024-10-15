@@ -5,7 +5,6 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.Transformer;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
 import org.gradle.api.artifacts.VersionCatalogsExtension;
@@ -44,10 +43,10 @@ import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.decompile.DecompileVineflowerTask;
-import quilt.internal.tasks.diff.CheckTargetVersionExistsTask;
 import quilt.internal.tasks.diff.CheckUnpickVersionsMatchTask;
 import quilt.internal.tasks.diff.DecompileTargetTask;
 import quilt.internal.tasks.diff.DownloadTargetMappingJarTask;
+import quilt.internal.tasks.diff.DownloadTargetMetaFileTask;
 import quilt.internal.tasks.diff.ExtractTargetMappingJarTask;
 import quilt.internal.tasks.diff.RemapTargetMinecraftJarTask;
 import quilt.internal.tasks.diff.RemapTargetUnpickDefinitionsTask;
@@ -80,10 +79,8 @@ import quilt.internal.tasks.unpick.gen.UnpickGenTask;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 
 import javax.inject.Inject;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static quilt.internal.util.ProviderUtil.toOptional;
@@ -741,29 +738,29 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task.dependsOn(intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar);
         });
 
-        final var checkTargetVersionExists = tasks.register(
-            CheckTargetVersionExistsTask.TASK_NAME, CheckTargetVersionExistsTask.class,
-            task -> {
-                task.outputsNeverUpToDate();
+        {
+            final var downloadTargetMetaFile = tasks.register(
+                DownloadTargetMetaFileTask.TASK_NAME, DownloadTargetMetaFileTask.class,
+                task -> {
+                    task.outputsNeverUpToDate();
 
-                task.getMetaFile().convention(
-                    minecraftDir.map(dir ->
-                        dir.file(QUILT_MAPPINGS_PREFIX + Constants.MINECRAFT_VERSION + ".json")
-                    )
-                );
-            }
-        );
-
-        tasks.withType(TargetVersionConsumingTask.class).configureEach(task -> {
-            // TODO temporary, until CheckTargetVersionExistsTask is converted to a BuildService
-            task.dependsOn(checkTargetVersionExists);
-
-            task.getTargetVersion().convention(
-                checkTargetVersionExists.flatMap(CheckTargetVersionExistsTask::getTargetVersion)
+                    task.getMetaFile().convention(
+                        minecraftDir.map(dir ->
+                            dir.file(QUILT_MAPPINGS_PREFIX + Constants.MINECRAFT_VERSION + ".json")
+                        )
+                    );
+                }
             );
 
-            task.onlyIf(unused -> task.getTargetVersion().isPresent());
-        });
+            final Provider<String> targetVersion =
+                downloadTargetMetaFile.flatMap(DownloadTargetMetaFileTask::provideTargetVersion);
+
+            tasks.withType(TargetVersionConsumingTask.class).configureEach(task -> {
+                task.getTargetVersion().convention(targetVersion);
+
+                task.onlyIf(unused -> task.getTargetVersion().isPresent());
+            });
+        }
 
         final var downloadTargetMappingsJar = tasks.register(
             DownloadTargetMappingJarTask.TASK_NAME, DownloadTargetMappingJarTask.class,

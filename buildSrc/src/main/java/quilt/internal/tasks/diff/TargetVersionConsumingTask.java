@@ -16,8 +16,8 @@ import quilt.internal.tasks.MappingsTask;
  * A target version is a published Quilt Mappings version obtained from the Quilt maven.
  * <p>
  * If {@link QuiltMappingsPlugin MappingsPlugin} is applied, any {@code TargetVersionConsumingTask}s
- * will use {@value CheckTargetVersionExistsTask#TASK_NAME}'s
- * {@link CheckTargetVersionExistsTask#getTargetVersion() targetVersion} by default, and they'll only run if the
+ * will use the {@linkplain DownloadTargetMetaFileTask#provideTargetVersion() target version}
+ * {@value DownloadTargetMetaFileTask#TASK_NAME} provides by default, and they'll only run if their
  * {@link #getTargetVersion() targetVersion} {@link Provider#isPresent() isPresent}.
  */
 public interface TargetVersionConsumingTask extends MappingsTask {
