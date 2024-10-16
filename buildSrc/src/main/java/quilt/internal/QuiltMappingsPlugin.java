@@ -277,11 +277,11 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final var extractServerJar = tasks.register(
             ExtractServerJarTask.TASK_NAME, ExtractServerJarTask.class,
             task -> {
-                task.getServerBootstrapJar().convention(
+                task.getZippedFile().convention(
                     downloadMinecraftJars.flatMap(DownloadMinecraftJarsTask::getServerBootstrapJar)
                 );
 
-                task.getServerJar().convention(
+                task.getExtractionDest().convention(
                     minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + "-server.jar"))
                 );
             }
@@ -289,7 +289,8 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
         final var mergeJars = tasks.register(MergeJarsTask.TASK_NAME, MergeJarsTask.class, task -> {
             task.getClientJar().convention(downloadMinecraftJars.flatMap(DownloadMinecraftJarsTask::getClientJar));
-            task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getServerJar));
+
+            task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
             // TODO move this and other jars that are directly in the project dir to some sub dir
             task.getMergedFile().convention(projectDir.file(Constants.MINECRAFT_VERSION + "-merged.jar"));
@@ -315,8 +316,11 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final var extractTinyPerVersionMappings = tasks.register(
             EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME, ExtractTinyMappingsTask.class,
             task -> {
-                task.getJarFile().convention(this.provideRequiredFile(perVersionMappings));
-                task.getTinyFile().convention(provideMappingsDest.apply(Constants.PER_VERSION_MAPPINGS_NAME, "tiny"));
+                task.getZippedFile().convention(this.provideRequiredFile(perVersionMappings));
+
+                task.getExtractionDest().convention(
+                    provideMappingsDest.apply(Constants.PER_VERSION_MAPPINGS_NAME, "tiny")
+                );
             }
         );
 
@@ -324,7 +328,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             InvertPerVersionMappingsTask.TASK_NAME, InvertPerVersionMappingsTask.class,
             task -> {
                 task.getInput().convention(
-                    extractTinyPerVersionMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
+                    extractTinyPerVersionMappings.flatMap(ExtractTinyMappingsTask::getExtractionDest)
                 );
 
                 task.getInvertedTinyFile().convention(
@@ -339,7 +343,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 task.getInputJar().convention(mergeJars.flatMap(MergeJarsTask::getMergedFile));
 
                 task.getMappingsFile().convention(
-                    extractTinyPerVersionMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
+                    extractTinyPerVersionMappings.flatMap(ExtractTinyMappingsTask::getExtractionDest)
                 );
 
                 // TODO move this and other jars that are directly in the project dir to some sub dir
@@ -523,7 +527,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final var extractTinyIntermediaryMappings = tasks.register(
             ExtractTinyIntermediaryMappingsTask.TASK_NAME, ExtractTinyIntermediaryMappingsTask.class,
             task -> {
-                task.getTinyFile().convention(
+                task.getExtractionDest().convention(
                     provideMappingsDest.apply(Constants.INTERMEDIARY_MAPPINGS_NAME, "tiny")
                 );
             }
@@ -537,7 +541,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             });
 
             extractTinyIntermediaryMappings.configure(task -> {
-                task.getJarFile().convention(intermediaryFile);
+                task.getZippedFile().convention(intermediaryFile);
             });
         }
 
@@ -545,7 +549,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             MergeIntermediaryTask.TASK_NAME, MergeIntermediaryTask.class,
             task -> {
                 task.getInput().convention(
-                    extractTinyIntermediaryMappings.flatMap(ExtractTinyMappingsTask::getTinyFile)
+                    extractTinyIntermediaryMappings.flatMap(ExtractTinyMappingsTask::getExtractionDest)
                 );
 
                 task.getMergedTinyMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
@@ -790,7 +794,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final var extractTargetMappingsJar = tasks.register(
             ExtractTargetMappingJarTask.TASK_NAME, ExtractTargetMappingJarTask.class,
             task -> {
-                task.getTargetJar().convention(
+                task.getZippedFile().convention(
                     downloadTargetMappingsJar.flatMap(DownloadTargetMappingJarTask::getTargetJar)
                 );
 

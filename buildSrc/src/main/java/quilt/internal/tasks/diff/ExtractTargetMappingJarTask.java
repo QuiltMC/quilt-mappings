@@ -1,39 +1,12 @@
 package quilt.internal.tasks.diff;
 
-import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.file.FileTree;
-import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.OutputDirectory;
-import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
-import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.ExtractZippedFilesTask;
 
-public abstract class ExtractTargetMappingJarTask extends DefaultMappingsTask implements TargetVersionConsumingTask {
+public abstract class ExtractTargetMappingJarTask extends ExtractZippedFilesTask implements TargetVersionConsumingTask {
     public static final String TASK_NAME = "extractTargetMappingsJar";
-
-    @InputFile
-    public abstract RegularFileProperty getTargetJar();
-
-    @OutputDirectory
-    public abstract DirectoryProperty getExtractionDest();
-
-    private final FileTree targetJarZipTree;
 
     public ExtractTargetMappingJarTask() {
         super(Constants.Groups.DIFF);
-
-        this.targetJarZipTree = this.getProject().zipTree(this.getTargetJar());
-    }
-
-    @TaskAction
-    public void extractTargetMappings() {
-        this.targetJarZipTree
-            .getAsFileTree()
-            .visit(fileVisitDetails ->
-                fileVisitDetails.copyTo(
-                    this.getExtractionDest().file(fileVisitDetails.getRelativePath().getPathString()).get().getAsFile()
-                )
-            );
     }
 }
