@@ -7,8 +7,9 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.DownloadTask;
 
-public abstract class DownloadVersionsManifestTask extends DefaultMappingsTask {
+public abstract class DownloadVersionsManifestTask extends DefaultMappingsTask implements DownloadTask {
     public static final String TASK_NAME = "downloadVersionsManifest";
 
     @OutputFile

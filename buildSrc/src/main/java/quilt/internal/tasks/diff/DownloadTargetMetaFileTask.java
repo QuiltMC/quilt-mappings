@@ -8,8 +8,10 @@ import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.DownloadTask;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -22,7 +24,8 @@ import java.util.stream.StreamSupport;
 /**
  * @see TargetVersionConsumingTask
  */
-public abstract class DownloadTargetMetaFileTask extends DefaultMappingsTask {
+@DisableCachingByDefault(because = "output depends on a remote source that may change")
+public abstract class DownloadTargetMetaFileTask extends DefaultMappingsTask implements DownloadTask {
     public static final String TASK_NAME = "downloadTargetMetaFile";
 
     @OutputFile

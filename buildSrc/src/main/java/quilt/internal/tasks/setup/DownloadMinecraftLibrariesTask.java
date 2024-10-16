@@ -22,14 +22,18 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.work.DisableCachingByDefault;
 import org.quiltmc.launchermeta.version.v1.DownloadableFile;
 import org.quiltmc.launchermeta.version.v1.Library;
 import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.DownloadTask;
 
 // TODO see if this can be replaced with a ValueSource or a BuildService
-public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask {
+// TODO why?
+@DisableCachingByDefault(because = "unknown")
+public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask implements DownloadTask {
     public static final String TASK_NAME = "downloadMinecraftLibraries";
 
     @InputFile
@@ -47,8 +51,6 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
 
     public DownloadMinecraftLibrariesTask() {
         super(Constants.Groups.SETUP);
-        // TODO is this because library sources may change even on the same version?
-        this.outputsNeverUpToDate();
 
         this.getVersion().convention(this.getVersionFile().map(file -> {
             try {

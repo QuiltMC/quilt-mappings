@@ -18,8 +18,9 @@ import org.quiltmc.launchermeta.version.v1.Downloads;
 import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.DownloadTask;
 
-public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask {
+public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask implements DownloadTask {
     public static final String TASK_NAME = "downloadMinecraftJars";
 
     @InputFile

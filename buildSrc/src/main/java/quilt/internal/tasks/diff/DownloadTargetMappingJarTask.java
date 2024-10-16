@@ -7,8 +7,10 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.DownloadTask;
 
-public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask implements TargetVersionConsumingTask {
+public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask implements
+        TargetVersionConsumingTask, DownloadTask {
     public static final String TASK_NAME = "downloadTargetMappingsJar";
 
     @OutputFile
