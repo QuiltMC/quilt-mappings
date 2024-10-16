@@ -25,16 +25,13 @@ import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
-import quilt.internal.QuiltMappingsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
 /**
- * Combines many unpick definition files into one new file.
- * <p>
- * If {@link QuiltMappingsPlugin} is applied, the
- * {@linkplain quilt.internal.tasks.unpick.gen.UnpickGenTask#getGeneratedUnpickDefinitions() generated definitions}
- * from all {@link quilt.internal.tasks.unpick.gen.UnpickGenTask UnpickGenTask}s will be amongst those combined.
+ * Combines many unpick definition files into the {@link #getOutput() output}.
+ *
+ * @see quilt.internal.tasks.unpick.gen.UnpickGenTask UnpickGenTask
  */
 public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "combineUnpickDefinitions";

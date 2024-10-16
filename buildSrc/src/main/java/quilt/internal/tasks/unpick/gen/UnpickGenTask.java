@@ -1,15 +1,14 @@
 package quilt.internal.tasks.unpick.gen;
 
-import org.gradle.api.Task;
-import org.gradle.api.file.FileCollection;
-import org.gradle.api.tasks.OutputFiles;
+import quilt.internal.tasks.MappingsTask;
 
 /**
  * A task that outputs unpick files.
  * <p>
- * If {@link quilt.internal.QuiltMappingsPlugin QuiltMappingsPlugin} is applied, the {@link Task#getOutputs() outputs}
- * of all {@code UnpickGenTask}s will be passed as input to
- * {@value quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#TASK_NAME},
+ * {@link quilt.internal.QuiltMappingsPlugin QuiltMappingsPlugin} adds the
+ * {@link org.gradle.api.Task#getOutputs() outputs} of all
+ * {@code UnpickGenTask}s to {@value quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#TASK_NAME}'s
+ * {@link quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#getUnpickDefinitions() unpickDefinitions},
  * so implementing tasks should <i>only</i> output unpick files.
  */
-public interface UnpickGenTask extends Task { }
+public interface UnpickGenTask extends MappingsTask { }
