@@ -6,7 +6,6 @@ import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFiles;
-import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
@@ -19,11 +18,8 @@ import quilt.internal.decompile.javadoc.MethodJavadocProvider;
 import quilt.internal.decompile.javadoc.UniversalJavadocProvider;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 import static quilt.internal.util.ProviderUtil.toOptional;
 
@@ -78,7 +74,7 @@ public abstract class DecompileTask extends DefaultMappingsTask {
 
     @TaskAction
     public void decompile() throws IOException {
-        final AbstractDecompiler decompiler = this.getAbstractDecompiler();
+        final AbstractDecompiler decompiler = this.getDecompiler().get().create(this.getLogger());
 
         toOptional(this.getClassJavadocSource())
             .ifPresent(decompiler::withClassJavadocProvider);
@@ -97,12 +93,5 @@ public abstract class DecompileTask extends DefaultMappingsTask {
             this.getDecompilerOptions().map(HashMap::new).getOrElse(new HashMap<>()),
             this.getLibraries().getFiles()
         );
-    }
-
-    // TODO see if this can use a BuildService
-    //  actually it probably doesn't need project access and can be done directly in the task action
-    @Internal
-    public AbstractDecompiler getAbstractDecompiler() {
-        return this.getDecompiler().get().getProvider().provide(this.getProject());
     }
 }

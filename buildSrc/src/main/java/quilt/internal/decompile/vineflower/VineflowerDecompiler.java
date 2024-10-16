@@ -1,8 +1,9 @@
 package quilt.internal.decompile.vineflower;
 
 import net.fabricmc.fernflower.api.IFabricJavadocProvider;
-import org.gradle.api.Project;
+
 import org.gradle.api.logging.LogLevel;
+import org.gradle.api.logging.Logger;
 import org.jetbrains.java.decompiler.main.decompiler.BaseDecompiler;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
@@ -23,12 +24,14 @@ public class VineflowerDecompiler extends AbstractDecompiler {
     private FieldJavadocProvider fieldJavadocProvider;
     private MethodJavadocProvider methodJavadocProvider;
 
-    public VineflowerDecompiler(Project project) {
-        super(project);
+    public VineflowerDecompiler(Logger logger) {
+        super(logger);
     }
 
     @Override
-    public void decompile(Collection<File> sources, File outputDir, Map<String, Object> options, Collection<File> libraries) {
+    public void decompile(
+        Collection<File> sources, File outputDir, Map<String, Object> options, Collection<File> libraries
+    ) {
         final Path outputPath = outputDir.toPath();
 
         // disable "inconsistent inner class" warning due to spam in the logs
@@ -38,7 +41,11 @@ public class VineflowerDecompiler extends AbstractDecompiler {
         if (this.javadocProvider != null) {
             javadocProvider = this.javadocProvider;
         } else if (this.hasMemberJavadocProvider()) {
-            javadocProvider = new VineflowerJavadocProvider(this.classJavadocProvider, this.fieldJavadocProvider, this.methodJavadocProvider);
+            javadocProvider = new VineflowerJavadocProvider(
+                this.classJavadocProvider,
+                this.fieldJavadocProvider,
+                this.methodJavadocProvider
+            );
         }
 
         if (javadocProvider != null) {
@@ -51,7 +58,7 @@ public class VineflowerDecompiler extends AbstractDecompiler {
 
         sources.forEach(decompiler::addSource);
 
-        for (File library : libraries) {
+        for (final File library : libraries) {
             decompiler.addLibrary(library);
         }
 
@@ -59,7 +66,9 @@ public class VineflowerDecompiler extends AbstractDecompiler {
     }
 
     private boolean hasMemberJavadocProvider() {
-        return this.classJavadocProvider != null || this.fieldJavadocProvider != null || this.methodJavadocProvider != null;
+        return this.classJavadocProvider != null
+            || this.fieldJavadocProvider != null
+            || this.methodJavadocProvider != null;
     }
 
     public void withFabricJavadocProvider(IFabricJavadocProvider javadocProvider) {
@@ -93,12 +102,12 @@ public class VineflowerDecompiler extends AbstractDecompiler {
 
         @Override
         public void writeMessage(String message, Severity severity) {
-            getProject().getLogger().log(getLogLevel(severity), message);
+            VineflowerDecompiler.this.getLogger().log(getLogLevel(severity), message);
         }
 
         @Override
         public void writeMessage(String message, Severity severity, Throwable t) {
-            getProject().getLogger().log(getLogLevel(severity), message, t);
+            VineflowerDecompiler.this.getLogger().log(getLogLevel(severity), message, t);
         }
     }
 }
