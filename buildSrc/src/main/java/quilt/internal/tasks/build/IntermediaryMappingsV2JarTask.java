@@ -1,14 +1,12 @@
 package quilt.internal.tasks.build;
 
+import quilt.internal.tasks.setup.IntermediaryDependantTask;
+
 import javax.inject.Inject;
 
-import static quilt.internal.util.ProviderUtil.exists;
-
-public abstract class IntermediaryMappingsV2JarTask extends MappingsV2JarTask {
+public abstract class IntermediaryMappingsV2JarTask extends MappingsV2JarTask implements IntermediaryDependantTask {
     @Inject
     public IntermediaryMappingsV2JarTask(String unpickVersion) {
         super(unpickVersion);
-
-        this.onlyIf(unused -> exists(this.getMappings()));
     }
 }
