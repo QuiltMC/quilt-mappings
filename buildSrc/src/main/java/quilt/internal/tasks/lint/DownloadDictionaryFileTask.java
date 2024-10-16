@@ -12,7 +12,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.DownloadTask;
 
 public abstract class DownloadDictionaryFileTask extends DefaultMappingsTask implements DownloadTask {
-    public static final String TASK_NAME = "downloadDictionaryFile";
+    public static final String DOWNLOAD_DICTIONARY_FILE_TASK_NAME = "downloadDictionaryFile";
 
     @Input
     public abstract Property<String> getUrl();

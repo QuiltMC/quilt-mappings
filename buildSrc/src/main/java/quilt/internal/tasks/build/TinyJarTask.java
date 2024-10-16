@@ -7,7 +7,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
 
 public abstract class TinyJarTask extends Jar implements MappingsTask {
-    public static final String TASK_NAME = "tinyJar";
+    public static final String TINY_JAR_TASK_NAME = "tinyJar";
 
     public static final String JAR_MAPPINGS_PATH = "mappings/mappings.tiny";
 

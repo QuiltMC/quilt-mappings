@@ -41,8 +41,10 @@ public abstract class EnigmaMappingsServerTask extends AbstractEnigmaMappingsTas
 	public static final String PORT_OPTION = "port";
 	public static final String PASSWORD_OPTION = "password";
 	public static final String LOG_OPTION = "log";
+    public static final String MAPPINGS_UNPICKED_SERVER_TASK_NAME = "mappingsUnpickedServer";
+    public static final String MAPPINGS_SERVER_TASK_NAME = "mappingsServer";
 
-	@Optional
+    @Optional
 	@Option(option = PORT_OPTION, description = "The port the Enigma server will run on.")
 	@Input
 	public abstract Property<String> getPort();

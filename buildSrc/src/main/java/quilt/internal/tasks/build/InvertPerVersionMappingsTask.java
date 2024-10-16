@@ -13,7 +13,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 
 public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
-    public static final String TASK_NAME = "invertPerVersionMappings";
+    public static final String INVERT_PER_VERSION_MAPPINGS_TASK_NAME = "invertPerVersionMappings";
 
     @InputFile
     public abstract RegularFileProperty getInput();

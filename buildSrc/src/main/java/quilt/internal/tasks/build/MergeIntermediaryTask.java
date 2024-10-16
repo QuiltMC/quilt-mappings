@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implements IntermediaryDependantTask {
-    public static final String TASK_NAME = "mergeIntermediary";
+    public static final String MERGE_INTERMEDIARY_TASK_NAME = "mergeIntermediary";
 
     @InputFile
     public abstract RegularFileProperty getMergedTinyMappings();

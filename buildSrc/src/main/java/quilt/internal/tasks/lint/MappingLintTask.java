@@ -53,7 +53,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
 public abstract class MappingLintTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
-    public static final String TASK_NAME = "mappingLint";
+    public static final String MAPPING_LINT_TASK_NAME = "mappingLint";
 
     @Incremental
     @InputDirectory

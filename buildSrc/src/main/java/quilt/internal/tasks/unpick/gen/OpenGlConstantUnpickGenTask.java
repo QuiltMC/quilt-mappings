@@ -21,14 +21,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.io.FileUtils;
-import org.gradle.api.file.ConfigurableFileCollection;
-import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
-import org.gradle.api.tasks.OutputFiles;
 import org.gradle.api.tasks.TaskAction;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -42,7 +39,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask implements UnpickGenTask {
-    public static final String TASK_NAME = "openGlUnpickGen";
+    public static final String OPEN_GL_CONSTANT_UNPICK_GEN_TASK_NAME = "openGlUnpickGen";
     public static final String OPEN_GL_REGISTRY =
         "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/xml/gl.xml";
     public static final String GL_STATE_MANAGER_CLASS = "com/mojang/blaze3d/platform/GlStateManager";

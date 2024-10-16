@@ -7,7 +7,7 @@ import quilt.internal.tasks.MappingsTask;
  * <p>
  * {@link quilt.internal.QuiltMappingsPlugin QuiltMappingsPlugin} adds the
  * {@link org.gradle.api.Task#getOutputs() outputs} of all
- * {@code UnpickGenTask}s to {@value quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#TASK_NAME}'s
+ * {@code UnpickGenTask}s to {@value quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#COMBINE_UNPICK_DEFINITIONS_TASK_NAME}'s
  * {@link quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#getUnpickDefinitions() unpickDefinitions},
  * so implementing tasks should <i>only</i> output unpick files.
  */

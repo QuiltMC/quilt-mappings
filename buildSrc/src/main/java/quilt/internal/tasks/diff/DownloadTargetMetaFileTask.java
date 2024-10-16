@@ -26,7 +26,7 @@ import java.util.stream.StreamSupport;
  */
 @DisableCachingByDefault(because = "output depends on a remote source that may change")
 public abstract class DownloadTargetMetaFileTask extends DefaultMappingsTask implements DownloadTask {
-    public static final String TASK_NAME = "downloadTargetMetaFile";
+    public static final String DOWNLOAD_TARGET_META_FILE_TASK_NAME = "downloadTargetMetaFile";
 
     @OutputFile
     public abstract RegularFileProperty getMetaFile();

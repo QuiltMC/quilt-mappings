@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Function;
 
 public abstract class MergeTinyV2Task extends AbstractHashedMergeTask {
-    public static final String TASK_NAME = "mergeTinyV2";
+    public static final String MERGE_TINY_V_2_TASK_NAME = "mergeTinyV2";
 
     @VisibleForTesting
     public static void mergeMappings(

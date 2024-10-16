@@ -3,7 +3,7 @@ package quilt.internal.tasks.jarmapping;
 import quilt.internal.Constants;
 
 public abstract class MapNamedJarTask extends MapJarTask {
-    public static final String TASK_NAME = "mapNamedJar";
+    public static final String MAP_NAMED_JAR_TASK_NAME = "mapNamedJar";
 
     public MapNamedJarTask() {
         super(Constants.Groups.MAP_JAR, Constants.PER_VERSION_MAPPINGS_NAME, "named");

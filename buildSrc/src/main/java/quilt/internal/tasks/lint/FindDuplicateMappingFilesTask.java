@@ -2,13 +2,12 @@ package quilt.internal.tasks.lint;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
-import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.logging.Logger;
-import org.gradle.api.logging.Logging;
-import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.TaskAction;
+import quilt.internal.Constants;
+import quilt.internal.tasks.DefaultMappingsTask;
+import quilt.internal.tasks.MappingsDirConsumingTask;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -17,15 +16,15 @@ import java.util.regex.Pattern;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
-    public static final String TASK_NAME = "findDuplicateMappingFiles";
+public abstract class FindDuplicateMappingFilesTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
+    public static final String FIND_DUPLICATE_MAPPING_FILES_TASK_NAME = "findDuplicateMappingFiles";
 
-    private static final Logger LOGGER = Logging.getLogger(FindDuplicateMappingFilesTask.class);
     private static final Pattern EXPECTED_CLASS =
         Pattern.compile("^CLASS (?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+(?= )");
 
-    @InputDirectory
-    public abstract DirectoryProperty getMappingDirectory();
+    public FindDuplicateMappingFilesTask() {
+        super(Constants.Groups.LINT);
+    }
 
     @TaskAction
     public void run() {
@@ -34,7 +33,7 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
         final List<File> emptyFiles = new ArrayList<>();
         final List<File> wrongExtensionFiles = new ArrayList<>();
 
-        try (Stream<Path> mappingPaths = Files.walk(getMappingDirectory().get().getAsFile().toPath())) {
+        try (Stream<Path> mappingPaths = Files.walk(this.getMappingsDir().get().getAsFile().toPath())) {
             mappingPaths.map(Path::toFile)
                 .filter(File::isFile)
                 .forEach(mappingFile -> {
@@ -65,6 +64,7 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
             throw new GradleException("Unexpected error accessing mappings directory", e);
         }
 
+        final Logger logger = this.getLogger();
         final List<String> errorMessages = new ArrayList<>();
         if (!duplicateMappings.isEmpty()) {
             final String message = "%d class%s mapped by multiple files".formatted(
@@ -73,12 +73,12 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
             );
             errorMessages.add(message);
 
-            LOGGER.error("Found {}!", message);
+            logger.error("Found {}!", message);
             for (final String duplicateMapping : duplicateMappings) {
-                LOGGER.error("\t{} is mapped by:", duplicateMapping);
+                logger.error("\t{} is mapped by:", duplicateMapping);
 
                 for (final File mappingFile : allMappings.get(duplicateMapping)) {
-                    LOGGER.error("\t\t{}", mappingFile);
+                    logger.error("\t\t{}", mappingFile);
                 }
             }
         }
@@ -90,9 +90,9 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
             );
             errorMessages.add(message);
 
-            LOGGER.error("Found {}!", message);
+            logger.error("Found {}!", message);
             for (final File emptyFile : emptyFiles) {
-                LOGGER.error("\t{}", emptyFile);
+                logger.error("\t{}", emptyFile);
             }
         }
 
@@ -103,9 +103,9 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask {
             );
             errorMessages.add(message);
 
-            LOGGER.error("Found {}!", message);
+            logger.error("Found {}!", message);
             for (final File wrongExtensionFile : wrongExtensionFiles) {
-                LOGGER.error("\t{}", wrongExtensionFile);
+                logger.error("\t{}", wrongExtensionFile);
             }
         }
 

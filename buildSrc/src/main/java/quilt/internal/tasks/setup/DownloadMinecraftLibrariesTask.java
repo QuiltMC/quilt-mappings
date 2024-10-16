@@ -34,7 +34,7 @@ import quilt.internal.tasks.DownloadTask;
 // TODO why?
 @DisableCachingByDefault(because = "unknown")
 public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask implements DownloadTask {
-    public static final String TASK_NAME = "downloadMinecraftLibraries";
+    public static final String DOWNLOAD_MINECRAFT_LIBRARIES_TASK_NAME = "downloadMinecraftLibraries";
 
     @InputFile
     public abstract RegularFileProperty getVersionFile();

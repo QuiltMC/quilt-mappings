@@ -7,7 +7,7 @@ import quilt.internal.decompile.Decompilers;
 import java.io.IOException;
 
 public abstract class DecompileVineflowerTask extends DecompileTask {
-    public static final String TASK_NAME = "decompileVineflower";
+    public static final String DECOMPILE_VINEFLOWER_TASK_NAME = "decompileVineflower";
 
     public DecompileVineflowerTask() {
         this.getDecompiler().set(Decompilers.VINEFLOWER);

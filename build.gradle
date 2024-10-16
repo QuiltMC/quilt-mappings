@@ -32,7 +32,7 @@ plugins {
 	id 'java' // for constants, packages, javadoc
 	id 'maven-publish'
 	id 'org.cadixdev.licenser' version '0.6.1'
-	id "quilt-mappings"
+	id 'quilt-mappings'
 }
 
 quiltMappings {
@@ -91,7 +91,6 @@ repositories {
 // TODO move at least some of these to MappingsPlugin
 configurations {
 	javadocClasspath
-	unpick
 }
 
 dependencies {
@@ -198,7 +197,7 @@ javadoc {
 		addBooleanOption 'Xdoclint:accessibility', true
 		addStringOption '-notimestamp'
 	}
-	source fileTree(tasks.named(GenFakeSourceTask.TASK_NAME, GenFakeSourceTask).flatMap(GenFakeSourceTask::getOutput)) +
+	source fileTree(tasks.named(GenFakeSourceTask.GEN_FAKE_SOURCE_TASK_NAME, GenFakeSourceTask).flatMap(GenFakeSourceTask::getOutput)) +
 		sourceSets.constants.allJava + sourceSets.packageDocs.allJava
 	classpath = configurations.javadocClasspath + downloadMinecraftLibraries.outputs.files.asFileTree + mapNamedJar.outputs.files.asFileTree
 

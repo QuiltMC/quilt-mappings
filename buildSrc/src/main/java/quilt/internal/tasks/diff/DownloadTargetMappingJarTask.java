@@ -12,7 +12,7 @@ import quilt.internal.tasks.DownloadTask;
 
 public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask implements
         TargetVersionConsumingTask, DownloadTask {
-    public static final String TASK_NAME = "downloadTargetMappingsJar";
+    public static final String DOWNLOAD_TARGET_MAPPINGS_JAR_TASK_NAME = "downloadTargetMappingsJar";
 
     @OutputFile
     public abstract RegularFileProperty getTargetJar();

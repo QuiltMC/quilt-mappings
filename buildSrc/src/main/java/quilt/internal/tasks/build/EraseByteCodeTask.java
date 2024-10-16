@@ -5,7 +5,7 @@ import org.objectweb.asm.Opcodes;
 import org.quiltmc.draftsman.asm.visitor.DraftsmanAdapterClassVisitor;
 
 public abstract class EraseByteCodeTask extends TransformJarClassesTask {
-    public static final String TASK_NAME = "eraseBytecode";
+    public static final String ERASE_BYTECODE_TASK_NAME = "eraseBytecode";
 
     public EraseByteCodeTask() {
         this.getVisitorFactories().add(DraftsmanAdapterClassVisitor::new);

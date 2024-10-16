@@ -22,7 +22,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 public abstract class RemoveIntermediaryTask extends DefaultMappingsTask implements IntermediaryDependantTask {
-    public static final String TASK_NAME = "removeIntermediary";
+    public static final String REMOVE_INTERMEDIARY_TASK_NAME = "removeIntermediary";
 
     @InputFile
     public abstract RegularFileProperty getInput();

@@ -21,7 +21,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.DownloadTask;
 
 public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask implements DownloadTask {
-    public static final String TASK_NAME = "downloadMinecraftJars";
+    public static final String DOWNLOAD_MINECRAFT_JARS_TASK_NAME = "downloadMinecraftJars";
 
     @InputFile
     public abstract RegularFileProperty getVersionFile();

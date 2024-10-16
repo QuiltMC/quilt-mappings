@@ -10,11 +10,10 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.MappingsTask;
 
 public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
+    public static final String UNPICK_HASHED_JAR_TASK_NAME = "unpickHashedJar";
+
     @InputFile
     public abstract RegularFileProperty getInputFile();
-
-    @OutputFile
-    public abstract RegularFileProperty getOutputFile();
 
     @InputFile
     public abstract RegularFileProperty getUnpickDefinition();
@@ -22,11 +21,13 @@ public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
     @InputFile
     public abstract RegularFileProperty getUnpickConstantsJar();
 
+    @OutputFile
+    public abstract RegularFileProperty getOutputFile();
+
     public UnpickJarTask() {
         this.setGroup(Constants.Groups.UNPICK);
 
-        this.getMainClass().set("daomephsta.unpick.cli.Main");
-        this.classpath(this.getProject().getConfigurations().getByName("unpick"));
+        this.getMainClass().set(daomephsta.unpick.cli.Main.class.getName());
     }
 
     @Override

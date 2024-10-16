@@ -25,12 +25,11 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public abstract class GeneratePackageInfoMappingsTask extends DefaultMappingsTask implements MappingsDirOutputtingTask {
-    public static final String TASK_NAME = "generatePackageInfoMappings";
+    public static final String GENERATE_PACKAGE_INFO_MAPPINGS_TASK_NAME = "generatePackageInfoMappings";
 
     @Input
     public abstract Property<String> getPackageName();

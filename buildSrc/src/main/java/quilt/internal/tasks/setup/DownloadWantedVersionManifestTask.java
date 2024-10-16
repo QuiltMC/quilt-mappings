@@ -24,7 +24,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class DownloadWantedVersionManifestTask extends DefaultMappingsTask {
-    public static final String TASK_NAME = "downloadWantedVersionManifest";
+    public static final String DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME = "downloadWantedVersionManifest";
 
     @InputFile
     public abstract RegularFileProperty getManifest();

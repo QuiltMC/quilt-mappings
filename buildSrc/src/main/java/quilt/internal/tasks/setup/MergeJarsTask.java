@@ -12,7 +12,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import net.fabricmc.stitch.merge.JarMerger;
 
 public abstract class MergeJarsTask extends DefaultMappingsTask {
-    public static final String TASK_NAME = "mergeJars";
+    public static final String MERGE_JARS_TASK_NAME = "mergeJars";
 
     @InputFile
     public abstract RegularFileProperty getClientJar();

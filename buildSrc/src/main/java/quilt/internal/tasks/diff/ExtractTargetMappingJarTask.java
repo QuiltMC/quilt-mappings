@@ -4,7 +4,7 @@ import quilt.internal.Constants;
 import quilt.internal.tasks.ExtractZippedFilesTask;
 
 public abstract class ExtractTargetMappingJarTask extends ExtractZippedFilesTask implements TargetVersionConsumingTask {
-    public static final String TASK_NAME = "extractTargetMappingsJar";
+    public static final String EXTRACT_TARGET_MAPPINGS_JAR_TASK_NAME = "extractTargetMappingsJar";
 
     public ExtractTargetMappingJarTask() {
         super(Constants.Groups.DIFF);

@@ -10,7 +10,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.DownloadTask;
 
 public abstract class DownloadVersionsManifestTask extends DefaultMappingsTask implements DownloadTask {
-    public static final String TASK_NAME = "downloadVersionsManifest";
+    public static final String DOWNLOAD_VERSIONS_MANIFEST_TASK_NAME = "downloadVersionsManifest";
 
     @OutputFile
     public abstract RegularFileProperty getManifestFile();

@@ -10,7 +10,7 @@ import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
 public abstract class DropInvalidMappingsTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
-    public static final String TASK_NAME = "dropInvalidMappings";
+    public static final String DROP_INVALID_MAPPINGS_TASK_NAME = "dropInvalidMappings";
 
     @InputFile
     public abstract RegularFileProperty getPerVersionMappingsJar();

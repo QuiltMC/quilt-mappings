@@ -38,7 +38,7 @@ import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
-    public static final String TASK_NAME = "remapUnpickDefinitions";
+    public static final String REMAP_UNPICK_DEFINITIONS_TASK_NAME = "remapUnpickDefinitions";
     @InputFile
     public abstract RegularFileProperty getInput();
 
