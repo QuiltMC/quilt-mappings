@@ -6,6 +6,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
+import quilt.internal.Constants;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class ExtractTargetMappingJarTask extends DefaultMappingsTask implements TargetVersionConsumingTask {
@@ -20,7 +21,7 @@ public abstract class ExtractTargetMappingJarTask extends DefaultMappingsTask im
     private final FileTree targetJarZipTree;
 
     public ExtractTargetMappingJarTask() {
-        super("diff");
+        super(Constants.Groups.DIFF);
 
         this.targetJarZipTree = this.getProject().zipTree(this.getTargetJar());
     }

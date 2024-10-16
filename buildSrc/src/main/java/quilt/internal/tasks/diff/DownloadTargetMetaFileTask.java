@@ -55,7 +55,7 @@ public abstract class DownloadTargetMetaFileTask extends DefaultMappingsTask imp
     protected abstract ObjectFactory getObjects();
 
     public DownloadTargetMetaFileTask() {
-        super("diff");
+        super(Constants.Groups.DIFF);
     }
 
     @TaskAction

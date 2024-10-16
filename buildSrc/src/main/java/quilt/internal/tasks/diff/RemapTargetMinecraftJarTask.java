@@ -7,7 +7,7 @@ public abstract class RemapTargetMinecraftJarTask extends MapJarTask implements 
     public static final String TASK_NAME = "remapTargetMinecraftJar";
 
     public RemapTargetMinecraftJarTask() {
-        super("diff", Constants.PER_VERSION_MAPPINGS_NAME, "named");
+        super(Constants.Groups.DIFF, Constants.PER_VERSION_MAPPINGS_NAME, "named");
 
         this.getAdditionalMappings().putAll(JAVAX_TO_JETBRAINS);
     }
