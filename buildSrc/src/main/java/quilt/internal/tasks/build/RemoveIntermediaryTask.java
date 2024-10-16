@@ -26,7 +26,6 @@ import static quilt.internal.util.ProviderUtil.exists;
 public abstract class RemoveIntermediaryTask extends DefaultMappingsTask {
     public static final String TASK_NAME = "removeIntermediary";
 
-    @Optional
     @InputFile
     public abstract RegularFileProperty getInput();
 

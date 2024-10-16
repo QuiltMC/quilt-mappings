@@ -30,23 +30,22 @@ public abstract class DownloadTargetMetaFileTask extends DefaultMappingsTask {
 
     public Provider<String> provideTargetVersion() {
         // TODO does putting the mapped provider in this property make it cache?
-        return this.getObjects().property(String.class)
-            .convention(this.getMetaFile().map(metaFile -> {
-                final JsonElement parsed;
-                try {
-                    parsed = JsonParser.parseReader(new FileReader(metaFile.getAsFile()));
-                } catch (FileNotFoundException e) {
-                    throw new GradleException("Failed to open meta file", e);
-                }
+        return this.getObjects().property(String.class).convention(this.getMetaFile().map(metaFile -> {
+            final JsonElement parsed;
+            try {
+                parsed = JsonParser.parseReader(new FileReader(metaFile.getAsFile()));
+            } catch (FileNotFoundException e) {
+                throw new GradleException("Failed to open meta file", e);
+            }
 
-                return StreamSupport.stream(parsed.getAsJsonArray().spliterator(), false)
-                    .max(Comparator.comparing(
-                        element -> element.getAsJsonObject().get("build").getAsInt(),
-                        Integer::compare
-                    ))
-                    .map(element -> element.getAsJsonObject().get("version").getAsString())
-                    .orElse(null);
-            }));
+            return StreamSupport.stream(parsed.getAsJsonArray().spliterator(), false)
+                .max(Comparator.comparing(
+                    element -> element.getAsJsonObject().get("build").getAsInt(),
+                    Integer::compare
+                ))
+                .map(element -> element.getAsJsonObject().get("version").getAsString())
+                .orElse(null);
+        }));
     }
 
     @Inject

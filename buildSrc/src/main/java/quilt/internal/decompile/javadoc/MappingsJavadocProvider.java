@@ -39,9 +39,9 @@ public class MappingsJavadocProvider implements UniversalJavadocProvider {
             }
 
             // Add mapping info
-            for (int i = tree.getMinNamespaceId(); i < tree.getMaxNamespaceId(); i++) {
-                String namespace = tree.getNamespaceName(i);
-                String name = mapping.getName(namespace);
+            for (int i = this.tree.getMinNamespaceId(); i < this.tree.getMaxNamespaceId(); i++) {
+                final String namespace = this.tree.getNamespaceName(i);
+                final String name = mapping.getName(namespace);
                 javadoc.append("@mapping {@literal ");
                 javadoc.append(namespace).append(" ").append(name).append("}");
                 javadoc.append("\n");

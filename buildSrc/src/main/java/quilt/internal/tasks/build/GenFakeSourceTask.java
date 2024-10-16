@@ -1,16 +1,12 @@
 package quilt.internal.tasks.build;
 
-import org.apache.commons.io.FileUtils;
-import org.gradle.api.GradleException;
-import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.tasks.InputFile;
-import quilt.internal.tasks.decompile.DecompileTask;
-import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
+import org.gradle.api.tasks.TaskAction;
+import quilt.internal.tasks.decompile.DecompileVineflowerTask;
 
 import java.io.IOException;
 import java.util.Map;
 
-public abstract class GenFakeSourceTask extends DecompileTask {
+public abstract class GenFakeSourceTask extends DecompileVineflowerTask {
     public static final String TASK_NAME = "genFakeSource";
 
     public GenFakeSourceTask() {
@@ -25,9 +21,8 @@ public abstract class GenFakeSourceTask extends DecompileTask {
     }
 
     @Override
+    @TaskAction
     public void decompile() throws IOException {
-        FileUtils.deleteDirectory(this.getOutput().get().getAsFile());
-
         super.decompile();
 
         this.getLogger().lifecycle(":Fake source generated");

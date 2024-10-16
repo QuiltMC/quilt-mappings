@@ -4,7 +4,6 @@ import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.FileTree;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.tasks.DefaultMappingsTask;
@@ -13,7 +12,6 @@ public abstract class ExtractTargetMappingJarTask extends DefaultMappingsTask im
     public static final String TASK_NAME = "extractTargetMappingsJar";
 
     @InputFile
-    @Optional
     public abstract RegularFileProperty getTargetJar();
 
     @OutputDirectory

@@ -20,11 +20,6 @@ import static quilt.internal.util.ProviderUtil.exists;
 public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask {
     public static final String TASK_NAME = "mergeIntermediary";
 
-    @Override
-    @Optional
-    @InputFile
-    public abstract RegularFileProperty getInput();
-
     @InputFile
     public abstract RegularFileProperty getMergedTinyMappings();
 

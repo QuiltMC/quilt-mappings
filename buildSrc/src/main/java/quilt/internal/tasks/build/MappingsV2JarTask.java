@@ -44,7 +44,6 @@ public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
     @InputFile
     public abstract RegularFileProperty getUnpickDefinition();
 
-    @Optional
     @InputFile
     public abstract RegularFileProperty getMappings();
 

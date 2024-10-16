@@ -26,19 +26,17 @@ public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask i
         final String targetVersion = this.getTargetVersion().get();
 
         final File targetMappingsJar = this.getTargetJar().get().getAsFile();
+
+        final String urlPrefix = "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-mappings/" +
+            targetVersion + "/quilt-mappings-" + targetVersion;
+
         this.startDownload()
-                .src(
-                    "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-mappings/" + targetVersion +
-                        "/quilt-mappings-" + targetVersion + "-v2.jar"
-                )
+                .src(urlPrefix + "-v2.jar")
                 .dest(targetMappingsJar)
                 .download();
 
         this.startDownload()
-                .src(
-                    "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-mappings/" + targetVersion +
-                        "/quilt-mappings-" + targetVersion + "-constants.jar"
-                )
+                .src(urlPrefix + "-constants.jar")
                 .dest(this.getTargetUnpickConstantsFile().get().getAsFile())
                 .download();
     }

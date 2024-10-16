@@ -43,7 +43,7 @@ import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.RemoveIntermediaryTask;
 import quilt.internal.tasks.build.TinyJarTask;
 import quilt.internal.tasks.decompile.DecompileVineflowerTask;
-import quilt.internal.tasks.diff.DecompileTargetTask;
+import quilt.internal.tasks.diff.DecompileTargetVineflowerTask;
 import quilt.internal.tasks.diff.DownloadTargetMappingJarTask;
 import quilt.internal.tasks.diff.DownloadTargetMetaFileTask;
 import quilt.internal.tasks.diff.ExtractTargetMappingJarTask;
@@ -102,7 +102,6 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
     public static final String PER_VERSION_MAPPINGS_CONFIGURATION_NAME = Constants.PER_VERSION_MAPPINGS_NAME;
     public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = Constants.INTERMEDIARY_MAPPINGS_NAME;
 
-    public static final String DECOMPILE_TARGET_VINEFLOWER_TASK_NAME = "decompileTargetVineflower";
     public static final String CONSTANTS_JAR_TASK_NAME = "constantsJar";
     public static final String UNPICK_HASHED_JAR_TASK_NAME = "unpickHashedJar";
     public static final String V_2_UNMERGED_MAPPINGS_JAR_TASK_NAME = "v2UnmergedMappingsJar";
@@ -124,9 +123,8 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         ENIGMA_SERVER_PROP_PREFIX + EnigmaMappingsServerTask.LOG_OPTION;
     public static final String ENIGMA_SERVER_ARGS_PROP = ENIGMA_SERVER_PROP_PREFIX + "args";
 
-    private static final String QUILT_MAPPINGS_PREFIX = "quilt-mappings-";
-    private static final String ARCHIVE_FILE_NAME_PREFIX =
-        Constants.MAPPINGS_NAME + "-" + Constants.MAPPINGS_VERSION;
+    private static final String MAPPINGS_NAME_PREFIX = Constants.MAPPINGS_NAME + "-";
+    private static final String ARCHIVE_FILE_NAME_PREFIX = MAPPINGS_NAME_PREFIX + Constants.MAPPINGS_VERSION;
 
     @Inject
     public abstract ProviderFactory getProviders();
@@ -680,9 +678,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             INTERMEDIARY_V_2_MERGED_MAPPINGS_JAR_TASK_NAME, IntermediaryMappingsV2JarTask.class, unpickVersion
         );
         intermediaryV2MergedMappingsJar.configure(task -> {
-            task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "-intermediary-mergedv2.jar");
-
             task.getMappings().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
+
+            task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "-intermediary-mergedv2.jar");
         });
 
         final var eraseBytecode = tasks.register(EraseByteCodeTask.TASK_NAME, EraseByteCodeTask.class, task -> {
@@ -692,8 +690,6 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         });
 
         tasks.register(GenFakeSourceTask.TASK_NAME, GenFakeSourceTask.class, task -> {
-            task.getDecompiler().convention(Decompilers.VINEFLOWER);
-
             task.getSources().from(eraseBytecode.flatMap(EraseByteCodeTask::getOutput));
 
             task.getLibraries().from(
@@ -712,7 +708,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task.getOutput().convention(tempDir.map(dir -> dir.file("fakeSource")));
         });
 
-        tasks.register("decompileVineflower", DecompileVineflowerTask.class, task -> {
+        tasks.register(DecompileVineflowerTask.TASK_NAME, DecompileVineflowerTask.class, task -> {
             task.getSources().from(mapNamedJar.flatMap(MapNamedJarTask::getOutputJar));
 
             task.getLibraries().from(project.files(decompileClasspath));
@@ -744,7 +740,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
                     task.getMetaFile().convention(
                         minecraftDir.map(dir ->
-                            dir.file(QUILT_MAPPINGS_PREFIX + Constants.MINECRAFT_VERSION + ".json")
+                            dir.file(MAPPINGS_NAME_PREFIX + Constants.MINECRAFT_VERSION + ".json")
                         )
                     );
                 }
@@ -765,12 +761,12 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task -> {
                 task.getTargetUnpickConstantsFile().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QUILT_MAPPINGS_PREFIX + version + "-constants.jar"
+                    version -> MAPPINGS_NAME_PREFIX + version + "-constants.jar"
                 ));
 
                 task.getTargetJar().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QUILT_MAPPINGS_PREFIX + version + "-v2.jar"
+                    version -> MAPPINGS_NAME_PREFIX + version + "-v2.jar"
                 ));
             }
         );
@@ -784,22 +780,10 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
                 task.getExtractionDest().convention(task.provideVersionedDir(
                     targetsDir,
-                    version -> QUILT_MAPPINGS_PREFIX + version
+                    version -> MAPPINGS_NAME_PREFIX + version
                 ));
             }
         );
-
-        // final var checkUnpickVersionsMatch = tasks.register(
-        //     CheckUnpickVersionsMatchTask.TASK_NAME, CheckUnpickVersionsMatchTask.class,
-        //     task -> {
-        //         task.getUnpickVersion().convention(unpickVersion);
-        //
-        //         task.getUnpickMeta().convention(
-        //             extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
-        //                 .map(dest -> dest.file(MappingsV2JarTask.JAR_UNPICK_META_PATH))
-        //         );
-        //     }
-        // );
 
         final Provider<Boolean> unpickVersionsMatch = providers.of(
             UnpickVersionsMatchSource.class,
@@ -834,7 +818,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
                 task.getOutput().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QUILT_MAPPINGS_PREFIX + version + "remapped-unpick.unpick"
+                    version -> MAPPINGS_NAME_PREFIX + version + "remapped-unpick.unpick"
                 ));
             }
         );
@@ -854,7 +838,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
             task.getOutputFile().convention(task.provideVersionedFile(
                 targetsDir,
-                version -> QUILT_MAPPINGS_PREFIX + version + "-unpicked.jar"
+                version -> MAPPINGS_NAME_PREFIX + version + "-unpicked.jar"
             ));
         });
 
@@ -870,14 +854,12 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
                 task.getOutputJar().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QUILT_MAPPINGS_PREFIX + version + "-named.jar"
+                    version -> MAPPINGS_NAME_PREFIX + version + "-named.jar"
                 ));
             }
         );
 
-        tasks.register(DECOMPILE_TARGET_VINEFLOWER_TASK_NAME, DecompileTargetTask.class, task -> {
-            task.getDecompiler().convention(Decompilers.VINEFLOWER);
-
+        tasks.register(DecompileTargetVineflowerTask.TASK_NAME, DecompileTargetVineflowerTask.class, task -> {
             task.getSources().from(remapTargetMinecraftJar.flatMap(RemapTargetMinecraftJarTask::getOutputJar));
 
             task.getLibraries().from(project.files(decompileClasspath));
