@@ -1,9 +1,9 @@
 package quilt.internal.tasks;
 
-import quilt.internal.util.DownloadImmediate;
+import quilt.internal.util.Downloader;
 
 public interface DownloadTask extends MappingsTask {
-    default DownloadImmediate.Builder startDownload() {
-        return new DownloadImmediate.Builder(this);
+    default Downloader startDownload() {
+        return new Downloader(this);
     }
 }
