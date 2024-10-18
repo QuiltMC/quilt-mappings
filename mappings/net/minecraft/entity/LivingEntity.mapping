@@ -66,7 +66,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_oyncoeen MIN_MOVEMENT_DISTANCE D
 	FIELD f_phnacmet prevBodyYaw F
 	FIELD f_pjcisjtc stepBobbingAmount F
-	FIELD f_pldzhgrb movementSpeed F
+	FIELD f_pldzhgrb baseAccelerationFactor F
 	FIELD f_prubtnbt activeStatusEffects Ljava/util/Map;
 	FIELD f_pxramaew forwardSpeed F
 	FIELD f_qalszaps dead Z
@@ -117,7 +117,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_armeddpk getDamageTracker ()Lnet/minecraft/unmapped/C_xkhemiqp;
 	METHOD m_astmyzdc getHand (Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_yuycoehb;
 		ARG 0 hand
-	METHOD m_awmtskvv getMovementSpeed (F)F
+	METHOD m_awmtskvv getAccelerationFactor (F)F
 		ARG 1 slipperiness
 	METHOD m_axkhmdzu getDeathSound ()Lnet/minecraft/unmapped/C_avavozay;
 	METHOD m_ayeajhdm setCurrentHand (Lnet/minecraft/unmapped/C_laxmzoqs;)V
@@ -175,6 +175,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_eajivoso isUndead ()Z
 	METHOD m_eclhumtu getStackInHandSlot (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 slot
+	METHOD m_eehgexpm travelDefault (Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 movementInput
 	METHOD m_eerxjifd removePowderSnowSlow ()V
 	METHOD m_ejiuyguk isFallFlying ()Z
 	METHOD m_eljjwntg setStatusEffect (Lnet/minecraft/unmapped/C_wpfizwve;Lnet/minecraft/unmapped/C_astfners;)V
@@ -215,7 +217,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_fyloosbv updateGlowing ()V
 	METHOD m_gbfixjfm updateAttribute (Lnet/minecraft/unmapped/C_cjzoxshv;)V
 		ARG 1 attribute
-	METHOD m_gdlvulbl getAirSpeed ()F
+	METHOD m_gdlvulbl getAirAccelerationFactor ()F
 	METHOD m_gfhvqjeo getFallingInFluidAdjustedMovement (DZLnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 descentSpeed
 		ARG 3 descending
@@ -242,9 +244,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 air
 	METHOD m_gvdtmqle swapHandStacks ()V
 	METHOD m_gvffcdjw updateAttributes ()V
-	METHOD m_gvmhasrb getMovementSpeed ()F
-	METHOD m_gwksxurc setMovementSpeed (F)V
-		ARG 1 movementSpeed
+	METHOD m_gvmhasrb getBaseAccelerationFactor ()F
+	METHOD m_gwksxurc setBaseAccelerationFactor (F)V
+		ARG 1 factor
 	METHOD m_gxsldibl getLootTableSeed ()J
 	METHOD m_gxxlbgpz getMainHandStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_hbdaqklu canBreatheInWater ()Z
@@ -265,7 +267,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 item
 		ARG 2 count
 	METHOD m_hobjxuks getBrain ()Lnet/minecraft/unmapped/C_rjqjaxef;
-	METHOD m_huhprabe getBaseMovementSpeedMultiplier ()F
+	METHOD m_huhprabe getBaseWaterAccelerationFactor ()F
 	METHOD m_hxaqkpon handleFrictionAndCalculateMovement (Lnet/minecraft/unmapped/C_vgpupfxx;F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 movementInput
 		ARG 2 slipperiness
@@ -527,6 +529,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_vckvknnt getStackReference (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_xkkpnyvk;
 		ARG 0 entity
 		ARG 1 slot
+	METHOD m_viviwntz travelInFluid (Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 movementInput
 	METHOD m_vixrfdxj hasEquipmentChanged (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		COMMENT Returns whether the equipment has changed based on the previous and new values.
 		COMMENT
@@ -554,6 +558,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_whvujbsh dropInventory (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_widuipxk getAttributes ()Lnet/minecraft/unmapped/C_cohbwqne;
 	METHOD m_wjvypezh getRoll ()I
+	METHOD m_wkgrdcha fallFlyTravel ()V
 	METHOD m_wmvelibz isHoldingOntoLadder ()Z
 		COMMENT @return {@code true} if this entity should not lose height while in a climbing state
 		COMMENT @see net.minecraft.entity.LivingEntity
