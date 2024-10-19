@@ -134,6 +134,7 @@ public class MappingsJavadocProvider implements UniversalJavadocProvider {
         return "Mapping not found";
     }
 
+    // TODO replace this with a mapped provider so it carries dependency info
     public static abstract class Source implements ValueSource<MappingsJavadocProvider, Source.Params> {
         @Override
         public MappingsJavadocProvider obtain() {

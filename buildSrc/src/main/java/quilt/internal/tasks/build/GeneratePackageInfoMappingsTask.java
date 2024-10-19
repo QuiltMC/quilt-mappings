@@ -38,10 +38,12 @@ public abstract class GeneratePackageInfoMappingsTask extends DefaultMappingsTas
     public abstract RegularFileProperty getInputJar();
 
     @OutputDirectory
-    protected abstract DirectoryProperty getOutputDir();
+    abstract DirectoryProperty getOutputDir();
 
     public GeneratePackageInfoMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS);
+
+        this.getPackageName().convention("net/minecraft/unused/packageinfo/");
 
         this.getOutputDir().convention(this.getMappingsDir().zip(this.getPackageName(), Directory::dir));
     }

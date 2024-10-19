@@ -36,11 +36,12 @@ import javax.inject.Inject;
 // TODO why?
 @DisableCachingByDefault(because = "unknown")
 public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
+    public static final String V_2_UNMERGED_MAPPINGS_JAR_TASK_NAME = "v2UnmergedMappingsJar";
+    public static final String V_2_MERGED_MAPPINGS_JAR_TASK_NAME = "v2MergedMappingsJar";
+
     public static final String JAR_UNPICK_META_PATH = "extras/unpick.json";
     public static final String JAR_UNPICK_DEFINITION_PATH = "extras/definitions.unpick";
     public static final String JAR_MAPPINGS_PATH = "mappings/mappings.tiny";
-    public static final String V_2_UNMERGED_MAPPINGS_JAR_TASK_NAME = "v2UnmergedMappingsJar";
-    public static final String V_2_MERGED_MAPPINGS_JAR_TASK_NAME = "v2MergedMappingsJar";
 
     @InputFile
     public abstract RegularFileProperty getUnpickMeta();

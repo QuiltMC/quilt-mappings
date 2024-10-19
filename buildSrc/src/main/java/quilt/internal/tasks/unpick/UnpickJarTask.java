@@ -2,8 +2,10 @@ package quilt.internal.tasks.unpick;
 
 import java.util.List;
 
+import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.OutputFile;
 import quilt.internal.Constants;
@@ -21,6 +23,9 @@ public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
     @InputFile
     public abstract RegularFileProperty getUnpickConstantsJar();
 
+    @InputFiles
+    public abstract ConfigurableFileCollection getDecompileClasspathFiles();
+
     @OutputFile
     public abstract RegularFileProperty getOutputFile();
 
@@ -28,6 +33,7 @@ public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
         this.setGroup(Constants.Groups.UNPICK);
 
         this.getMainClass().set(daomephsta.unpick.cli.Main.class.getName());
+        this.getMainClass().finalizeValue();
     }
 
     @Override
@@ -39,7 +45,7 @@ public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
             this.getUnpickConstantsJar().get().getAsFile().getAbsolutePath()
         ));
 
-        this.args(this.getProject().getConfigurations().getByName("decompileClasspath").getFiles());
+        this.args(this.getDecompileClasspathFiles().getAsFileTree().getFiles());
         super.exec();
     }
 }

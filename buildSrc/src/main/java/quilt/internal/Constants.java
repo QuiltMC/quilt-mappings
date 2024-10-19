@@ -31,5 +31,6 @@ public class Constants {
         public static final String LINT = "lint";
         public static final String UNPICK_GEN = UNPICK_NAME + " gen";
         public static final String DIFF = "diff";
+        public static final String JAVADOC_GENERATION = "javadoc generation";
     }
 }

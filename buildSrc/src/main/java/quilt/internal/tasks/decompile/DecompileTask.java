@@ -1,6 +1,7 @@
 package quilt.internal.tasks.decompile;
 
 import org.gradle.api.file.ConfigurableFileCollection;
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
@@ -62,7 +63,7 @@ public abstract class DecompileTask extends DefaultMappingsTask {
     public abstract ConfigurableFileCollection getLibraries();
 
     @OutputDirectory
-    public abstract RegularFileProperty getOutput();
+    public abstract DirectoryProperty getOutput();
 
     public DecompileTask() {
         super(Constants.Groups.DECOMPILE);

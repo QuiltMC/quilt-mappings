@@ -20,5 +20,10 @@ public abstract class DecompileVineflowerTask extends DecompileTask {
         FileUtils.deleteDirectory(this.getOutput().get().getAsFile());
 
         super.decompile();
+
+        // TODO see if updating vineflower fixes non-fatal exception:
+        //  java.nio.file.FileSystemAlreadyExistsException
+        //  in org.jetbrains.java.decompiler.main.plugins.JarPluginLoader:init
+        //  if not, manually close the FileSystem here
     }
 }

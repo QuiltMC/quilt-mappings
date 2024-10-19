@@ -11,23 +11,24 @@ import org.gradle.api.artifacts.VersionCatalogsExtension;
 import org.gradle.api.artifacts.VersionConstraint;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
+import org.gradle.api.file.FileTree;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.plugins.ExtensionContainer;
-import org.gradle.api.plugins.JavaBasePlugin;
-import org.gradle.api.plugins.JavaPluginExtension;
+import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
-import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskContainer;
+import org.gradle.api.tasks.javadoc.Javadoc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.enigma.api.service.JarIndexerService;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
+import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
 import quilt.internal.tasks.build.AddProposedMappingsTask;
 import quilt.internal.tasks.build.BuildIntermediaryTask;
 import quilt.internal.tasks.build.BuildMappingsTinyTask;
@@ -68,20 +69,23 @@ import quilt.internal.tasks.mappings.EnigmaMappingsTask;
 import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
 import quilt.internal.tasks.setup.ConstantsJarTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
-import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
 import quilt.internal.tasks.setup.DownloadWantedVersionManifestTask;
 import quilt.internal.tasks.setup.ExtractTinyIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.ExtractServerJarTask;
 import quilt.internal.tasks.setup.ExtractTinyMappingsTask;
 import quilt.internal.tasks.setup.IntermediaryDependantTask;
+import quilt.internal.tasks.setup.JavadocJarTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
+import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.tasks.setup.SourcesJarTask;
 import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
 import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask;
 import quilt.internal.tasks.unpick.UnpickJarTask;
 import quilt.internal.tasks.unpick.gen.OpenGlConstantUnpickGenTask;
 import quilt.internal.tasks.unpick.gen.UnpickGenTask;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
+import quilt.internal.util.VersionDownloadInfo;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -94,17 +98,17 @@ import static quilt.internal.util.ProviderUtil.toOptional;
 
 import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
 
+// TODO inject ArchiveOperations to tasks for zipTree
+
 /**
  * TODO javadoc, including every configureEach, every configuration
  */
 public abstract class QuiltMappingsPlugin implements Plugin<Project> {
-    public static final String CONSTANTS_SOURCE_SET_NAME = "constants";
-
     public static final String ENIGMA_RUNTIME_CONFIGURATION_NAME = "enigmaRuntime";
-    public static final String DECOMPILE_CLASSPATH_CONFIGURATION_NAME = "decompileClasspath";
     public static final String PER_VERSION_MAPPINGS_CONFIGURATION_NAME = Constants.PER_VERSION_MAPPINGS_NAME;
     public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = Constants.INTERMEDIARY_MAPPINGS_NAME;
     public static final String UNPICK_CONFIGURATION_NAME = Constants.UNPICK_NAME;
+    public static final String JAVADOC_CLASSPATH_CONFIGURATION_NAME = "javadocClasspath";
 
     private static final String ENIGMA_SERVER_PROP_PREFIX = "enigma_server_";
     public static final String ENIGMA_SERVER_PORT_PROP =
@@ -127,6 +131,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
     @Override
     public void apply(@NotNull Project project) {
         final ProviderFactory providers = this.getProviders();
+        final ObjectFactory objects = this.getObjects();
 
         final String unpickVersion = project.getExtensions().getByType(VersionCatalogsExtension.class)
             .named("libs")
@@ -161,22 +166,18 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
         final ExtensionContainer extensions = project.getExtensions();
 
-        // adds the JavaPluginExtension
-        project.getPluginManager().apply(JavaBasePlugin.class);
-
-        // has sourceSets
-        final var javaExt = extensions.getByType(JavaPluginExtension.class);
+        // for javadoc and build tasks
+        project.getPluginManager().apply(JavaPlugin.class);
 
         final var ext = extensions.create(QuiltMappingsExtension.EXTENSION_NAME, QuiltMappingsExtension.class);
 
         final ConfigurationContainer configurations = project.getConfigurations();
 
         final Configuration enigmaRuntime = configurations.create(ENIGMA_RUNTIME_CONFIGURATION_NAME);
-        // TODO eliminate this
-        final Configuration decompileClasspath = configurations.create(DECOMPILE_CLASSPATH_CONFIGURATION_NAME);
         final Configuration perVersionMappings = configurations.create(PER_VERSION_MAPPINGS_CONFIGURATION_NAME);
         final Configuration intermediaryMappings = configurations.create(INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME);
         final Configuration unpick = configurations.create(UNPICK_CONFIGURATION_NAME);
+        final Configuration javadocClasspath = configurations.create(JAVADOC_CLASSPATH_CONFIGURATION_NAME);
 
         final TaskContainer tasks = project.getTasks();
 
@@ -227,34 +228,40 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             DownloadVersionsManifestTask.DOWNLOAD_VERSIONS_MANIFEST_TASK_NAME,
             DownloadVersionsManifestTask.class,
             task -> {
-                task.getManifestFile().convention(
-                    minecraftDir.map(dir -> dir.file("version_manifest_v2.json"))
-                );
+                task.getDest().convention(minecraftDir.map(dir -> dir.file("version_manifest_v2.json")));
             }
         );
 
-        final var downloadWantedVersionManifest = tasks.register(
-            DownloadWantedVersionManifestTask.DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME,
-            DownloadWantedVersionManifestTask.class,
-            task -> {
-                task.getManifest().convention(
-                    downloadVersionsManifest.flatMap(DownloadVersionsManifestTask::getManifestFile)
+        {
+            final var downloadWantedVersionManifest = tasks.register(
+                DownloadWantedVersionManifestTask.DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME,
+                DownloadWantedVersionManifestTask.class,
+                task -> {
+                    task.getManifestVersion().convention(
+                        downloadVersionsManifest.flatMap(DownloadVersionsManifestTask::provideVersionEntry)
+                    );
+
+                    task.getDest().convention(
+                        minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + ".json"))
+                    );
+                }
+            );
+
+            // put mapped provider in a property so all tasks use the same cached value
+            final Provider<VersionDownloadInfo> versionDownloadInfo =
+                objects.property(VersionDownloadInfo.class).convention(
+                    downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::provideVersionDownloadInfo)
                 );
 
-                task.getVersionFile().convention(
-                    minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + ".json"))
-                );
-            }
-        );
+            tasks.withType(VersionDownloadInfoConsumingTask.class).configureEach(task -> {
+                task.getVersionDownloadInfo().convention(versionDownloadInfo);
+            });
+        }
 
         final var downloadMinecraftJars = tasks.register(
             DownloadMinecraftJarsTask.DOWNLOAD_MINECRAFT_JARS_TASK_NAME,
             DownloadMinecraftJarsTask.class,
             task -> {
-                task.getVersionFile().convention(
-                    downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::getVersionFile)
-                );
-
                 task.getClientJar().convention(
                     minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + "-client.jar"))
                 );
@@ -296,10 +303,6 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             DownloadMinecraftLibrariesTask.DOWNLOAD_MINECRAFT_LIBRARIES_TASK_NAME,
             DownloadMinecraftLibrariesTask.class,
             task -> {
-                task.getVersionFile().convention(
-                    downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::getVersionFile)
-                );
-
                 task.getLibrariesDir().convention(minecraftDir.map(dir -> dir.dir("libraries")));
             }
         );
@@ -419,8 +422,6 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
                 task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + ".jar");
 
-                task.getArchiveClassifier().convention("");
-
                 task.getDestinationDirectory().convention(libsDir);
             }
         );
@@ -449,19 +450,15 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         );
 
         tasks.register(
-            OpenGlConstantUnpickGenTask.OPEN_GL_CONSTANT_UNPICK_GEN_TASK_NAME,
+            OpenGlConstantUnpickGenTask.OPEN_GL_UNPICK_GEN_TASK_NAME,
             OpenGlConstantUnpickGenTask.class,
             task -> {
-                task.getVersionFile().convention(
-                    downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getVersionFile)
-                );
-
                 task.getPerVersionMappingsJar().convention(
                     mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
                 );
 
-                task.getArtifactsByUrl().convention(
-                    downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getArtifactsByUrl)
+                task.getArtifactsByName().convention(
+                    downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getArtifactsByName)
                 );
 
                 task.getUnpickGlStateManagerDefinitions().convention(
@@ -486,22 +483,13 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             }
         );
 
-        final var constantsJar = tasks.register(
-            ConstantsJarTask.CONSTANTS_JAR_TASK_NAME,
-            ConstantsJarTask.class,
-            task -> {
-                task.from(javaExt.getSourceSets().named(CONSTANTS_SOURCE_SET_NAME).map(SourceSet::getOutput));
-
-                task.getArchiveClassifier().convention(CONSTANTS_SOURCE_SET_NAME);
-            }
-        );
+        // constants are configured in build.gradle because they're' from a project source set
+        final var constantsJar = tasks.register(ConstantsJarTask.CONSTANTS_JAR_TASK_NAME, ConstantsJarTask.class);
 
         tasks.register(
             GeneratePackageInfoMappingsTask.GENERATE_PACKAGE_INFO_MAPPINGS_TASK_NAME,
             GeneratePackageInfoMappingsTask.class,
             task -> {
-                task.getPackageName().convention("net/minecraft/unused/packageinfo/");
-
                 task.getInputJar().convention(mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar));
             }
         );
@@ -520,9 +508,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 );
 
                 this.provideDefaultError(
-                    task.getOutput(),
-                    "No output specified." +
-                        "An output must be specified to use " + task.getName() + " or any task that depends on it."
+                    task.getDest(),
+                    "No dest specified." +
+                        "An dest must be specified to use " + task.getName() + " or any task that depends on it."
                 );
             }
         );
@@ -539,11 +527,15 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 // this does mappings verification but has no output to depend on
                 task.dependsOn(findDuplicateMappingFiles);
 
-                task.getJarFile().convention(mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar));
+                task.getJarFile().convention(
+                    mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+                );
 
                 task.getCheckers().addAll(Checker.DEFAULT_CHECKERS);
 
-                task.getDictionaryFile().convention(downloadDictionaryFile.flatMap(DownloadDictionaryFileTask::getOutput));
+                task.getDictionaryFile().convention(
+                    downloadDictionaryFile.flatMap(DownloadDictionaryFileTask::getDest)
+                );
             }
         );
 
@@ -680,16 +672,24 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             }
         );
 
+        tasks.withType(UnpickJarTask.class).configureEach(task -> {
+            task.classpath(unpick);
+
+            task.getInputFile().convention(
+                mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+            );
+
+            task.getDecompileClasspathFiles().from(
+                downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getLibrariesDir)
+                    .map(Directory::getAsFileTree)
+                    .map(FileTree::getFiles)
+            );
+        });
+
         final var unpickHashedJar = tasks.register(
             UnpickJarTask.UNPICK_HASHED_JAR_TASK_NAME,
             UnpickJarTask.class,
             task -> {
-                task.classpath(unpick);
-
-                task.getInputFile().convention(
-                    mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
-                );
-
                 task.getUnpickDefinition().convention(
                     remapUnpickDefinitions.flatMap(RemapUnpickDefinitionsTask::getOutput)
                 );
@@ -735,7 +735,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             EnigmaMappingsTask.MAPPINGS_TASK_NAME,
             EnigmaMappingsTask.class,
             task -> {
-                task.getJarToMap().convention(mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar));
+                task.getJarToMap().convention(
+                    mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
+                );
             }
         );
 
@@ -796,7 +798,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             }
         );
 
-        tasks.register(
+        final var genFakeSource = tasks.register(
             GenFakeSourceTask.GEN_FAKE_SOURCE_TASK_NAME,
             GenFakeSourceTask.class,
             task -> {
@@ -809,13 +811,13 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 task.getDefaultJavadocSource().convention(providers.of(
                     MappingsJavadocProvider.Source.class,
                     spec -> spec.parameters(params -> {
-                        params.getMappingsFile().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
+                        params.getMappingsFile().set(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
-                        params.getNamespace().convention("named");
+                        params.getNamespace().set("named");
                     })
                 ));
 
-                task.getOutput().convention(tempDir.map(dir -> dir.file("fakeSource")));
+                task.getOutput().convention(tempDir.map(dir -> dir.dir("fakeSource")));
             }
         );
 
@@ -825,21 +827,23 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task -> {
                 task.getSources().from(mapNamedJar.flatMap(MapNamedJarTask::getOutputJar));
 
-                task.getLibraries().from(project.files(decompileClasspath));
+                task.getLibraries().from(
+                    downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getLibrariesDir)
+                );
 
                 task.getDefaultJavadocSource().convention(providers.of(
                     MappingsJavadocProvider.Source.class,
                     spec -> spec.parameters(params -> {
-                        params.getMappingsFile().convention(
+                        params.getMappingsFile().set(
                             insertAutoGeneratedMappings.flatMap(AddProposedMappingsTask::getOutputMappings)
                         );
 
-                        params.getNamespace().convention("named");
+                        params.getNamespace().set("named");
                     })
                 ));
 
                 // TODO move this once generateDiff task eliminates magic strings
-                task.getOutput().convention(projectDir.file("namedSrc"));
+                task.getOutput().convention(projectDir.dir("namedSrc"));
             }
         );
 
@@ -856,16 +860,16 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 DownloadTargetMetaFileTask.DOWNLOAD_TARGET_META_FILE_TASK_NAME,
                 DownloadTargetMetaFileTask.class,
                 task -> {
-                    task.getMetaFile().convention(
-                        minecraftDir.map(dir ->
-                            dir.file(MAPPINGS_NAME_PREFIX + Constants.MINECRAFT_VERSION + ".json")
-                        )
-                    );
+                    task.getDest().convention(minecraftDir.map(dir ->
+                        dir.file(MAPPINGS_NAME_PREFIX + Constants.MINECRAFT_VERSION + ".json")
+                    ));
                 }
             );
 
-            final Provider<String> targetVersion =
-                downloadTargetMetaFile.flatMap(DownloadTargetMetaFileTask::provideTargetVersion);
+            // put mapped provider in a property so all tasks use the same cached value
+            final Provider<String> targetVersion = objects.property(String.class).convention(
+                downloadTargetMetaFile.flatMap(DownloadTargetMetaFileTask::provideTargetVersion)
+            );
 
             tasks.withType(TargetVersionConsumingTask.class).configureEach(task -> {
                 task.getTargetVersion().convention(targetVersion);
@@ -948,10 +952,6 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             UnpickTargetJarTask.UNPICK_TARGET_JAR_TASK_NAME,
             UnpickTargetJarTask.class,
             task -> {
-                task.getInputFile().convention(
-                    mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
-                );
-
                 task.getUnpickDefinition().convention(
                     remapTargetUnpickDefinitions.flatMap(RemapTargetUnpickDefinitionsTask::getOutput)
                 );
@@ -991,7 +991,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             task -> {
                 task.getSources().from(remapTargetMinecraftJar.flatMap(RemapTargetMinecraftJarTask::getOutputJar));
 
-                task.getLibraries().from(project.files(decompileClasspath));
+                task.getLibraries().from(
+                    downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getLibrariesDir)
+                );
 
                 task.getDefaultJavadocSource().convention(providers.of(
                     MappingsJavadocProvider.Source.class,
@@ -1007,11 +1009,34 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             );
 
             // TODO move this once generateDiff task eliminates magic strings
-            task.getOutput().convention(projectDir.file("namedTargetSrc"));
+            task.getOutput().convention(projectDir.dir("namedTargetSrc"));
         });
 
         // TODO add generateDiff task,
         //  allow passing its output location on command line and pass it in generate-diff.yml
+
+        // sources are added in build.gradle because they're from a project source set
+        tasks.register(SourcesJarTask.SOURCES_JAR_TASK_NAME, SourcesJarTask.class);
+
+        final var javadoc = tasks.named(JavaPlugin.JAVADOC_TASK_NAME, Javadoc.class, task -> {
+            task.setGroup(Constants.Groups.JAVADOC_GENERATION);
+
+            task.source(genFakeSource.flatMap(GenFakeSourceTask::getOutput).map(Directory::getAsFileTree));
+
+            task.setClasspath(
+                projectDir.files(
+                    javadocClasspath,
+                    downloadMinecraftLibraries
+                        .flatMap(DownloadMinecraftLibrariesTask::getLibrariesDir)
+                        .map(Directory::getAsFileTree),
+                    mapNamedJar.flatMap(MapNamedJarTask::getOutputJar)
+                )
+            );
+        });
+
+        tasks.register(JavadocJarTask.JAVADOC_JAR_TASK_NAME, JavadocJarTask.class, task -> {
+            task.from(javadoc.map(Javadoc::getDestinationDir));
+        });
     }
 
     private void provideDefaultError(Property<?> property, String errorMessage) {
@@ -1039,18 +1064,17 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
     }
 
     /**
-     * Provides a single optional file from the passed {@link Configuration resolvableConfiguration}.
+     * Provides a single optional file from the passed {@code resolvableConfiguration}.
      *
      * @param resolvableConfiguration a {@link Configuration#isCanBeResolved() resolvable} {@link Configuration}
-     *                               that should only hold an intermediary mappings jar
+     *                               that should hold exactly one file
      *
-     * @return a provider holding the contents of the passed {@link Configuration resolvableConfiguration} if
+     * @return a provider holding the contents of the passed {@code resolvableConfiguration} if
      * resolution succeeds and it contains exactly one file, or an empty provider if resolution fails
      *
-     * @throws IllegalArgumentException if the passed {@link Configuration resolvableConfiguration} is not
+     * @throws IllegalArgumentException if the passed {@code resolvableConfiguration} is not
      * {@link Configuration#isCanBeResolved() resolvable}
-     * @throws IllegalStateException if the passed {@link Configuration resolvableConfiguration}
-     * doesn't contain exactly one file
+     * @throws IllegalStateException if the passed {@code resolvableConfiguration} doesn't contain exactly one file
      */
     public Provider<RegularFile> provideOptionalFile(Configuration resolvableConfiguration) {
         return this.provideFile(resolvableConfiguration, configuration -> {
@@ -1064,19 +1088,17 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
     }
 
     /**
-     * Provides a single required file from the passed {@link Configuration resolvableConfiguration}.
+     * Provides a single required file from the passed {@code resolvableConfiguration}.
      *
      * @param resolvableConfiguration a {@link Configuration#isCanBeResolved() resolvable} {@link Configuration}
-     *                               that should only hold an intermediary mappings jar
+     *                               that should hold exactly one file
      *
      * @return a provider holding the contents of the passed {@link Configuration resolvableConfiguration}
      *
-     * @throws IllegalArgumentException if the passed {@link Configuration resolvableConfiguration} is not
+     * @throws IllegalArgumentException if the passed {@code resolvableConfiguration} is not
      * {@link Configuration#isCanBeResolved() resolvable}
-     * @throws ResolveException if an error occurs in the resolution of the passed
-     * {@link Configuration resolvableConfiguration}
-     * @throws IllegalStateException if the passed {@link Configuration resolvableConfiguration}
-     * doesn't contain exactly one file
+     * @throws ResolveException if an error occurs in the resolution of the passed {@code resolvableConfiguration}
+     * @throws IllegalStateException if the passed {@code resolvableConfiguration} doesn't contain exactly one file
      */
     public Provider<RegularFile> provideRequiredFile(Configuration resolvableConfiguration) {
         return this.provideFile(resolvableConfiguration, Configuration::getSingleFile);

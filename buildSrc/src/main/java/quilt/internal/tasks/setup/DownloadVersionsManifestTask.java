@@ -1,31 +1,27 @@
 package quilt.internal.tasks.setup;
 
-import java.io.IOException;
-
-import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.tasks.OutputFile;
-import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.file.RegularFile;
+import org.gradle.api.provider.Provider;
+import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants;
-import quilt.internal.tasks.DefaultMappingsTask;
-import quilt.internal.tasks.DownloadTask;
+import quilt.internal.tasks.SimpleDownloadTask;
+import quilt.internal.util.SerializableVersionEntry;
 
-public abstract class DownloadVersionsManifestTask extends DefaultMappingsTask implements DownloadTask {
+@DisableCachingByDefault(because = "Output depends on a remote source that may change.")
+public abstract class DownloadVersionsManifestTask extends SimpleDownloadTask {
     public static final String DOWNLOAD_VERSIONS_MANIFEST_TASK_NAME = "downloadVersionsManifest";
 
-    @OutputFile
-    public abstract RegularFileProperty getManifestFile();
+    public Provider<SerializableVersionEntry> provideVersionEntry() {
+        return this.getDest()
+            .map(RegularFile::getAsFile)
+            .map(SerializableVersionEntry::of);
+    }
 
     public DownloadVersionsManifestTask() {
         super(Constants.Groups.SETUP);
-    }
 
-    @TaskAction
-    public void downloadVersionsManifestTask() throws IOException {
-        this.getLogger().lifecycle(":downloading minecraft versions manifest");
-        this.startDownload()
-                .src("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
-                .dest(this.getManifestFile().get().getAsFile())
-                .overwrite(true)
-                .download();
+        this.getPreDownloadLifecycle().convention(":downloading minecraft versions manifest");
+
+        this.getUrl().convention("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json");
     }
 }
