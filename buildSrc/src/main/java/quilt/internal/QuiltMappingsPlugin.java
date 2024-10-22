@@ -21,6 +21,7 @@ import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
+import org.gradle.api.services.BuildServiceRegistry;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.gradle.language.base.plugins.LifecycleBasePlugin;
@@ -86,6 +87,7 @@ import quilt.internal.tasks.unpick.UnpickJarTask;
 import quilt.internal.tasks.unpick.gen.OpenGlConstantUnpickGenTask;
 import quilt.internal.tasks.unpick.gen.UnpickGenTask;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
+import quilt.internal.util.EnigmaProfileService;
 import quilt.internal.util.VersionDownloadInfo;
 
 import javax.inject.Inject;
@@ -163,10 +165,10 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             );
         };
 
-        final ExtensionContainer extensions = project.getExtensions();
-
         // adds tasks: javadoc, jar, check, build
         project.getPluginManager().apply(JavaPlugin.class);
+
+        final ExtensionContainer extensions = project.getExtensions();
 
         final var ext = extensions.create(QuiltMappingsExtension.EXTENSION_NAME, QuiltMappingsExtension.class);
 
@@ -178,25 +180,43 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         final Configuration unpick = configurations.create(UNPICK_CONFIGURATION_NAME);
         final Configuration javadocClasspath = configurations.create(JAVADOC_CLASSPATH_CONFIGURATION_NAME);
 
+        final BuildServiceRegistry services = project.getGradle().getSharedServices();
+
+        final var enigmaProfile = services.registerIfAbsent(
+            EnigmaProfileService.ENIGMA_PROFILE_SERVICE_NAME,
+            EnigmaProfileService.class,
+            spec -> spec.parameters(params -> {
+                params.getProfileConfig().convention(ext.getEnigmaProfileConfig());
+            })
+        );
+
         final TaskContainer tasks = project.getTasks();
 
-        tasks.withType(EnigmaProfileConsumingTask.class).configureEach(task -> {
-            task.getEnigmaProfile().convention(ext.enigmaProfile);
-
-            task.getEnigmaProfileConfig().convention(ext.getEnigmaProfileConfig());
-
-            task.getSimpleTypeFieldNamesFiles().from(
-                project.files(providers.provider(() ->
-                    task.getEnigmaProfile().get().getServiceProfiles(JarIndexerService.TYPE).stream()
-                        .flatMap(service -> service.getArgument(SIMPLE_TYPE_FIELD_NAMES_PATH).stream())
-                        .map(stringOrStrings -> stringOrStrings.mapBoth(Stream::of, Collection::stream))
-                        .flatMap(bothStringStreams ->
-                            bothStringStreams.left().orElseGet(bothStringStreams::rightOrThrow)
-                        )
-                        .toList()
-                ))
+        {
+            // save this in a property so all tasks use the same cached value
+            final var simpleTypeFieldNamePaths = objects.listProperty(String.class);
+            simpleTypeFieldNamePaths.set(
+                enigmaProfile
+                    .map(EnigmaProfileService::getProfile)
+                    .map(profile ->
+                        profile.getServiceProfiles(JarIndexerService.TYPE).stream()
+                            .flatMap(service -> service.getArgument(SIMPLE_TYPE_FIELD_NAMES_PATH).stream())
+                            .map(stringOrStrings -> stringOrStrings.mapBoth(Stream::of, Collection::stream))
+                            .flatMap(bothStringStreams ->
+                                bothStringStreams.left().orElseGet(bothStringStreams::rightOrThrow)
+                            )
+                            .toList()
+                    )
             );
-        });
+
+            tasks.withType(EnigmaProfileConsumingTask.class).configureEach(task -> {
+                task.getEnigmaProfileService().convention(enigmaProfile);
+
+                task.getEnigmaProfileConfig().convention(ext.getEnigmaProfileConfig());
+
+                task.getSimpleTypeFieldNamesFiles().from(simpleTypeFieldNamePaths);
+            });
+        }
 
         this.provideDefaultError(
             ext.getEnigmaProfileConfig(),
@@ -386,14 +406,14 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 );
 
                 task.getPreprocessedMappings().convention(
-                    tempDir.zip(task.getInputMappings(), (dir, output) ->
-                        dir.file(getNameWithExtension(output, "-preprocessed.tiny"))
+                    tempDir.zip(task.getInputMappings(), (dir, input) ->
+                        dir.file(getNameWithExtension(input, "-preprocessed.tiny"))
                     )
                 );
 
                 task.getProcessedMappings().convention(
-                    tempDir.zip(task.getInputMappings(), (dir, output) ->
-                        dir.file(getNameWithExtension(output, "-processed.tiny"))
+                    tempDir.zip(task.getInputMappings(), (dir, input) ->
+                        dir.file(getNameWithExtension(input, "-processed.tiny"))
                     )
                 );
             }

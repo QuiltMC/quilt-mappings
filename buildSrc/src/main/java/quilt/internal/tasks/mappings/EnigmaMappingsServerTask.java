@@ -60,7 +60,6 @@ public abstract class EnigmaMappingsServerTask extends AbstractEnigmaMappingsTas
 	public abstract RegularFileProperty getLog();
 
 	public EnigmaMappingsServerTask() {
-		// this configuration can stay here because it's what makes this an EnigmaMappingsServerTask
 		this.getMainClass().set(DedicatedEnigmaServer.class.getName());
 		this.getMainClass().finalizeValue();
 	}

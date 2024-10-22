@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
-// TODO make VersionEntryConsumingTask interface for this
 public final class SerializableVersionEntry extends VersionEntry implements Serializable {
     public static @Nullable SerializableVersionEntry of(File manifestFile) {
         final VersionManifest manifest;
