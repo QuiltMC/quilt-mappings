@@ -98,8 +98,6 @@ import static quilt.internal.util.ProviderUtil.toOptional;
 
 import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
 
-// TODO inject ArchiveOperations to tasks for zipTree
-
 /**
  * TODO javadoc, including every configureEach, every configuration
  */
