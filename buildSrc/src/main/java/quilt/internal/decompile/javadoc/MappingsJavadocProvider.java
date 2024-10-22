@@ -1,10 +1,8 @@
 package quilt.internal.decompile.javadoc;
 
 import org.gradle.api.GradleException;
-import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.provider.Property;
-import org.gradle.api.provider.ValueSource;
-import org.gradle.api.provider.ValueSourceParameters;
+import org.gradle.api.file.RegularFile;
+import org.gradle.api.provider.Provider;
 
 import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MappingTree;
@@ -134,26 +132,19 @@ public class MappingsJavadocProvider implements UniversalJavadocProvider {
         return "Mapping not found";
     }
 
-    // TODO replace this with a mapped provider so it carries dependency info
-    public static abstract class Source implements ValueSource<MappingsJavadocProvider, Source.Params> {
-        @Override
-        public MappingsJavadocProvider obtain() {
-            final Params params = this.getParameters();
+    public static Provider<MappingsJavadocProvider> provideNamed(Provider<RegularFile> mappings) {
+        return provide(mappings, "named");
+    }
 
+    public static Provider<MappingsJavadocProvider> provide(
+        Provider<RegularFile> mappings, String namespace
+    ) {
+        return mappings.map(mappingsFile -> {
             try {
-                return new MappingsJavadocProvider(
-                    params.getMappingsFile().get().getAsFile(),
-                    params.getNamespace().get()
-                );
+                return new MappingsJavadocProvider(mappingsFile.getAsFile(), namespace);
             } catch (IOException e) {
                 throw new GradleException("Failed to create javadoc provider", e);
             }
-        }
-
-        public interface Params extends ValueSourceParameters {
-            RegularFileProperty getMappingsFile();
-
-            Property<String> getNamespace();
-        }
+        });
     }
 }
