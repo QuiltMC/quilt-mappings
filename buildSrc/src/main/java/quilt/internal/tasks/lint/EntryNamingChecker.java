@@ -13,7 +13,11 @@ public class EntryNamingChecker implements Checker<Entry<?>> {
     private static final String UNMAPPED_CLASS_PACKAGE = "net/minecraft/unmapped/";
 
     @Override
-    public void check(Entry<?> entry, EntryMapping mapping, Function<Entry<?>, AccessFlags> accessProvider, ErrorReporter errorReporter) {
+    public void check(
+        Entry<?> entry, EntryMapping mapping,
+        Function<Entry<?>, AccessFlags> accessProvider,
+        ErrorReporter errorReporter
+    ) {
         if (mapping.targetName() == null) {
             return;
         }

@@ -3,6 +3,7 @@ package quilt.internal.tasks.setup;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFile;
+import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.OutputDirectory;
@@ -15,6 +16,7 @@ import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
 import quilt.internal.util.DownloadUtil;
 import quilt.internal.util.VersionDownloadInfo;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Map;
@@ -39,6 +41,9 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
     public Provider<Map<String, File>> getArtifactsByName() {
         return this.getArtifactsByNameImpl();
     }
+
+    @Inject
+    protected abstract ObjectFactory getObjects();
 
     public DownloadMinecraftLibrariesTask() {
         super(Constants.Groups.SETUP);

@@ -31,6 +31,8 @@ import java.util.zip.ZipFile;
 public abstract class GeneratePackageInfoMappingsTask extends DefaultMappingsTask implements MappingsDirOutputtingTask {
     public static final String GENERATE_PACKAGE_INFO_MAPPINGS_TASK_NAME = "generatePackageInfoMappings";
 
+    public static final String DEFAULT_PACKAGE_NAME = "net/minecraft/unused/packageinfo/";
+
     @Input
     public abstract Property<String> getPackageName();
 
@@ -43,7 +45,7 @@ public abstract class GeneratePackageInfoMappingsTask extends DefaultMappingsTas
     public GeneratePackageInfoMappingsTask() {
         super(Constants.Groups.BUILD_MAPPINGS);
 
-        this.getPackageName().convention("net/minecraft/unused/packageinfo/");
+        this.getPackageName().convention(DEFAULT_PACKAGE_NAME);
 
         this.getOutputDir().convention(this.getMappingsDir().zip(this.getPackageName(), Directory::dir));
     }

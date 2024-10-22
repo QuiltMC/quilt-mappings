@@ -13,8 +13,12 @@ public final class JavadocChecker implements Checker<Entry<?>> {
     private static final Pattern PARAM_DOC_LINE = Pattern.compile("^@param\\s+[^<].*$");
 
     @Override
-    public void check(Entry<?> entry, EntryMapping mapping, Function<Entry<?>, AccessFlags> accessProvider, ErrorReporter errorReporter) {
-        String javadoc = mapping.javadoc();
+    public void check(
+        Entry<?> entry, EntryMapping mapping,
+        Function<Entry<?>, AccessFlags> accessProvider,
+        ErrorReporter errorReporter
+    ) {
+        final String javadoc = mapping.javadoc();
 
         if (javadoc != null && !javadoc.isEmpty()) {
             if (entry instanceof LocalVariableEntry lv && lv.isArgument()) {
@@ -32,7 +36,8 @@ public final class JavadocChecker implements Checker<Entry<?>> {
                 }
             } else if (entry instanceof MethodEntry) {
                 if (javadoc.lines().anyMatch(JavadocChecker::isRegularMethodParameter)) {
-                    errorReporter.error("method javadoc contains parameter docs, which should be on the parameter itself");
+                    errorReporter
+                        .error("method javadoc contains parameter docs, which should be on the parameter itself");
                 }
             }
         }

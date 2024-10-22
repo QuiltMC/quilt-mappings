@@ -33,7 +33,11 @@ public interface Checker<E extends Entry<?>> extends Serializable {
      * @param accessProvider a function that provides the access flags of an entry
      * @param errorReporter  the error reporter
      */
-    void check(E entry, EntryMapping mapping, Function<Entry<?>, AccessFlags> accessProvider, ErrorReporter errorReporter);
+    void check(
+        E entry, EntryMapping mapping,
+        Function<Entry<?>, AccessFlags> accessProvider,
+        ErrorReporter errorReporter
+    );
 
     /**
      * Updates the checker with extension properties
@@ -53,7 +57,7 @@ public interface Checker<E extends Entry<?>> extends Serializable {
     default Checker<Entry<?>> withTypeGuard(Class<E> entryType) {
         return (entry, mapping, access, errorReporter) -> {
             if (entryType.isInstance(entry)) {
-                check(entryType.cast(entry), mapping, access, errorReporter);
+                this.check(entryType.cast(entry), mapping, access, errorReporter);
             }
         };
     }

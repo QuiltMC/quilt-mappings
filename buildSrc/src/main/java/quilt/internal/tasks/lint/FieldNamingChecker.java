@@ -11,22 +11,28 @@ import org.quiltmc.enigma.api.translation.representation.entry.FieldEntry;
 
 public final class FieldNamingChecker implements Checker<FieldEntry> {
     @Override
-    public void check(FieldEntry entry, EntryMapping mapping, Function<Entry<?>, AccessFlags> accessProvider, ErrorReporter errorReporter) {
+    public void check(
+        FieldEntry entry, EntryMapping mapping,
+        Function<Entry<?>, AccessFlags> accessProvider,
+        ErrorReporter errorReporter
+    ) {
         if (mapping.targetName() == null) {
             return;
         }
 
-        AccessFlags access = accessProvider.apply(entry);
+        final AccessFlags access = accessProvider.apply(entry);
 
         if (access == null) {
             throw new RuntimeException("Invalid mappings detected. Please run './gradlew dropInvalidMappings'.");
         }
 
-        TypeDescriptor descriptor = entry.getDesc();
-        boolean isAtomic = descriptor.isType() && descriptor.getTypeEntry().getFullName().toLowerCase(Locale.ROOT).contains("atomic");
+        final TypeDescriptor descriptor = entry.getDesc();
+        final boolean isAtomic = descriptor.isType()
+            && descriptor.getTypeEntry().getFullName().toLowerCase(Locale.ROOT).contains("atomic");
         if (isAtomic) {
             if (startsWithUppercase(mapping.targetName())) {
-                errorReporter.error("atomic field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
+                errorReporter
+                    .error("atomic field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
             }
         } else if (access.isStatic() && access.isFinal()) {
             if (!isConstantCase(mapping.targetName())) {
@@ -38,8 +44,9 @@ public final class FieldNamingChecker implements Checker<FieldEntry> {
             }
         } else {
             if (startsWithUppercase(mapping.targetName())) {
-                String error = access.isFinal() ? "non-static" : "non-final";
-                errorReporter.error(error + " field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
+                final String error = access.isFinal() ? "non-static" : "non-final";
+                errorReporter
+                    .error(error + " field starts with uppercase character '" + mapping.targetName().charAt(0) + "'");
             }
         }
     }

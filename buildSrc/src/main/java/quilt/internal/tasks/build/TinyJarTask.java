@@ -17,9 +17,6 @@ public abstract class TinyJarTask extends Jar implements MappingsTask {
     public TinyJarTask() {
         this.setGroup(Constants.Groups.BUILD_MAPPINGS);
 
-        // TODO see if this is necessary
-        this.getArchiveClassifier().convention("");
-
         this.from(this.getMappings()).rename(original -> JAR_MAPPINGS_PATH);
     }
 }

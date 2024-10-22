@@ -13,7 +13,7 @@ public interface ErrorReporter extends BiConsumer<Severity, String> {
      * @param message the error message
      */
     default void error(String message) {
-        accept(Severity.ERROR, message);
+        this.accept(Severity.ERROR, message);
     }
 
     /**
@@ -22,6 +22,6 @@ public interface ErrorReporter extends BiConsumer<Severity, String> {
      * @param message the error message
      */
     default void warning(String message) {
-        accept(Severity.WARNING, message);
+        this.accept(Severity.WARNING, message);
     }
 }
