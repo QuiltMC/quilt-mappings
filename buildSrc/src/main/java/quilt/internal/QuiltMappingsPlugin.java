@@ -23,6 +23,7 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.javadoc.Javadoc;
+import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.enigma.api.service.JarIndexerService;
@@ -164,7 +165,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
 
         final ExtensionContainer extensions = project.getExtensions();
 
-        // for javadoc and build tasks
+        // adds tasks: javadoc, jar, check, build
         project.getPluginManager().apply(JavaPlugin.class);
 
         final var ext = extensions.create(QuiltMappingsExtension.EXTENSION_NAME, QuiltMappingsExtension.class);
@@ -424,6 +425,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             }
         );
 
+        // Its artifact collides with the `tinyJar` one, just disable it since it isn't used either way
+        tasks.named(JavaPlugin.JAR_TASK_NAME).configure(task -> task.setEnabled(false));
+
         tasks.register(
             CompressTinyTask.COMPRESS_TINY_TASK_NAME,
             CompressTinyTask.class,
@@ -518,7 +522,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
             FindDuplicateMappingFilesTask.class
         );
 
-        tasks.register(
+        final var mappingLint = tasks.register(
             MappingLintTask.MAPPING_LINT_TASK_NAME,
             MappingLintTask.class,
             task -> {
@@ -536,6 +540,8 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 );
             }
         );
+
+        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).configure(task -> task.dependsOn(mappingLint));
 
         final var mergeTinyV2 = tasks.register(
             MergeTinyV2Task.MERGE_TINY_V_2_TASK_NAME,
@@ -640,7 +646,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         intermediaryV2MappingsJar.configure(task -> {
             task.getMappings().convention(removeIntermediary.flatMap(RemoveIntermediaryTask::getOutputMappings));
 
-            task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "-intermediary-v2.jar");
+            task.getArchiveFileName().convention(
+                ARCHIVE_FILE_NAME_PREFIX + "-" + IntermediaryMappingsV2JarTask.CLASSIFIER + ".jar"
+            );
         });
 
         {
@@ -783,7 +791,9 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         intermediaryV2MergedMappingsJar.configure(task -> {
             task.getMappings().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
 
-            task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + "-intermediary-mergedv2.jar");
+            task.getArchiveFileName().convention(
+                ARCHIVE_FILE_NAME_PREFIX + "-" + IntermediaryMappingsV2JarTask.MERGED_CLASSIFIER + ".jar"
+            );
         });
 
         final var eraseBytecode = tasks.register(

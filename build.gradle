@@ -1,6 +1,9 @@
+import org.gradle.api.internal.file.FileOperations
 import quilt.internal.Constants
+import quilt.internal.tasks.build.IntermediaryMappingsV2JarTask
 
 import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
+import static quilt.internal.Constants.MINECRAFT_VERSION
 
 buildscript {
 	repositories {
@@ -31,9 +34,15 @@ buildscript {
 
 plugins {
 	id 'maven-publish'
-	id 'org.cadixdev.licenser' version '0.6.1'
 	id 'quilt-mappings'
+	alias libs.plugins.licenser
 }
+
+final USE_SNAPSHOT_HASHES = false
+
+final ENV = System.getenv()
+
+version = Constants.MAPPINGS_VERSION
 
 sourceSets {
 	// for constantsJar and sourcesJar input
@@ -80,22 +89,17 @@ tasks.constantsJar {
 tasks.build.dependsOn constantsJar, generatePackageInfoMappings,
 	compressTiny, tinyJar, v2UnmergedMappingsJar, v2MergedMappingsJar
 
-// TODO look into alternatives, move to QuiltMappingsPlugin if kept
-// Its artifact collides with the `tinyJar` one, just disable it since it isn't used either way
-tasks.jar.enabled = false
-
-tasks.check.dependsOn mappingLint
+final FileOperations fileOperations = project.fileOperations
 
 // configure lazily because we get buildDirectory
 tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	// Needed for javadoc to find the doclet classes.
 	dependsOn docletClasses
 
-	outputs.upToDateWhen { false }
+	// TODO why?
+	outputs.doNotCacheIf("unknown", Specs.satisfyAll())
 
-	// destinationDir = file("${layout.buildDirectory.get()}/docs/${project.version}")
 	destinationDir = layout.buildDirectory.get().dir('docs').dir(project.version.toString()).getAsFile()
-	// destinationDir = file("${buildDir}/docs/${project.version}")
 	def docletResources = sourceSets.doclet.resources.asFileTree
 
 	// Failing on error is important to ensure that a Javadoc jar is available.
@@ -161,27 +165,18 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	}
 
 	doLast {
-		// TODO eliminate project access during task execution
-		project.copy {
-			from docletResources
-			include 'copy_on_click.js'
-			into destinationDir
+		fileOperations.copy {
+			it.from docletResources
+			it.include 'copy_on_click.js'
+			it.into destinationDir
 		}
 	}
 }
 
-def USE_SNAPSHOT_HASHES = false
-
-def minecraft_version = Constants.MINECRAFT_VERSION
-
-def ENV = System.getenv()
-
-version = Constants.MAPPINGS_VERSION
-
 if (ENV.BRANCH_NAME) {
 	def branch = ENV.BRANCH_NAME.substring(ENV.BRANCH_NAME.lastIndexOf('/') + 1)
-	if (minecraft_version != branch) {
-		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${minecraft_version})")
+	if (MINECRAFT_VERSION != branch) {
+		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${MINECRAFT_VERSION})")
 	}
 }
 
@@ -217,8 +212,8 @@ dependencies {
 	javadocClasspath(libs.jetbrains.annotations)
 	javadocClasspath(libs.jsr305) // for some other jsr annotations
 	unpick(libs.unpick.cli)
-	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
-	intermediary "net.fabricmc:intermediary:${minecraft_version}:v2"
+	hashed "org.quiltmc:hashed:${MINECRAFT_VERSION}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
+	intermediary "net.fabricmc:intermediary:${MINECRAFT_VERSION}:v2"
 }
 
 java {
@@ -309,11 +304,10 @@ tasks.withType(AbstractPublishToMaven).configureEach { AbstractPublishToMaven t 
 				}
 			}
 
-			// TODO extract these magic strings
 			// quilt-mappings-<version>-intermediary-v2.jar
-			addArtifact(intermediaryV2MappingsJar, 'intermediary-v2')
+			addArtifact(intermediaryV2MappingsJar, IntermediaryMappingsV2JarTask.CLASSIFIER)
 			// quilt-mappings-<version>-intermediary-mergedv2.jar
-			addArtifact(intermediaryV2MergedMappingsJar, 'intermediary-mergedv2')
+			addArtifact(intermediaryV2MergedMappingsJar, IntermediaryMappingsV2JarTask.MERGED_CLASSIFIER)
 		}
 	}
 }
