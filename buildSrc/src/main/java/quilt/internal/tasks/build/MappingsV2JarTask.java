@@ -6,7 +6,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.jvm.tasks.Jar;
 import org.gradle.work.DisableCachingByDefault;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.MappingsTask;
 
 import javax.inject.Inject;
@@ -57,7 +57,7 @@ public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
 
     @Inject
     public MappingsV2JarTask(String unpickVersion) {
-        this.setGroup(Constants.Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
 
         this.unpickVersion = unpickVersion;
 

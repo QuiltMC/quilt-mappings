@@ -1,6 +1,6 @@
 package quilt.internal.tasks.setup;
 
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.ExtractSingleZippedFileTask;
 
 public abstract class ExtractTinyMappingsTask extends ExtractSingleZippedFileTask {
@@ -10,7 +10,7 @@ public abstract class ExtractTinyMappingsTask extends ExtractSingleZippedFileTas
 
     public ExtractTinyMappingsTask() {
         super(
-            Constants.Groups.SETUP,
+            Groups.SETUP,
             filterable -> filterable.include(TINY_MAPPINGS_PATTERN)
         );
     }

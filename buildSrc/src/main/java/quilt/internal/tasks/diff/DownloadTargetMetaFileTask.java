@@ -6,6 +6,7 @@ import org.gradle.api.GradleException;
 import org.gradle.api.provider.Provider;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.SimpleDownloadTask;
 
 import java.io.FileNotFoundException;
@@ -40,7 +41,7 @@ public abstract class DownloadTargetMetaFileTask extends SimpleDownloadTask {
     }
 
     public DownloadTargetMetaFileTask() {
-        super(Constants.Groups.DIFF);
+        super(Groups.DIFF);
 
         this.getUrl().convention(
             "https://meta.quiltmc.org/v3/versions/quilt-mappings/" + Constants.MINECRAFT_VERSION

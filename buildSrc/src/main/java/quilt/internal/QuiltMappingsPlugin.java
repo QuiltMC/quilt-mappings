@@ -28,6 +28,7 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.enigma.api.service.JarIndexerService;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
@@ -353,7 +354,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
                 );
 
                 task.getInvertedTinyFile().convention(
-                    provideMappingsDest.apply(Constants.PER_VERSION_INVERTED_MAPPINGS_NAME, "tiny")
+                    provideMappingsDest.apply(Constants.PER_VERSION_MAPPINGS_NAME + "-inverted", "tiny")
                 );
             }
         );
@@ -1027,7 +1028,7 @@ public abstract class QuiltMappingsPlugin implements Plugin<Project> {
         tasks.register(SourcesJarTask.SOURCES_JAR_TASK_NAME, SourcesJarTask.class);
 
         final var javadoc = tasks.named(JavaPlugin.JAVADOC_TASK_NAME, Javadoc.class, task -> {
-            task.setGroup(Constants.Groups.JAVADOC_GENERATION);
+            task.setGroup(Groups.JAVADOC_GENERATION);
 
             task.source(genFakeSource.flatMap(GenFakeSourceTask::getOutput).map(Directory::getAsFileTree));
 

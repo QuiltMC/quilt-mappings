@@ -11,7 +11,8 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
+import quilt.internal.Constants.Namespaces;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.setup.IntermediaryDependantTask;
 import quilt.internal.util.ProviderUtil;
@@ -31,7 +32,7 @@ public abstract class RemoveIntermediaryTask extends DefaultMappingsTask impleme
     public abstract RegularFileProperty getOutputMappings();
 
     public RemoveIntermediaryTask() {
-        super(Constants.Groups.BUILD_MAPPINGS);
+        super(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction
@@ -39,7 +40,7 @@ public abstract class RemoveIntermediaryTask extends DefaultMappingsTask impleme
         final Path mappingsTinyInput = ProviderUtil.getPath(this.getInput());
         final Path output = ProviderUtil.getPath(this.getOutputMappings());
 
-        this.getLogger().lifecycle(":removing intermediary");
+        this.getLogger().lifecycle(":removing " + Namespaces.INTERMEDIARY);
         removeIntermediary(mappingsTinyInput, output);
     }
 
@@ -51,8 +52,8 @@ public abstract class RemoveIntermediaryTask extends DefaultMappingsTask impleme
             tree.accept(
                 new MappingSourceNsSwitch(
                     // Remove official namespace
-                    new MappingDstNsReorder(w, Collections.singletonList("named")),
-                    "intermediary"
+                    new MappingDstNsReorder(w, Collections.singletonList(Namespaces.NAMED)),
+                    Namespaces.INTERMEDIARY
                 )
             );
         }

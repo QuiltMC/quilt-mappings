@@ -2,7 +2,6 @@ package quilt.internal.tasks.decompile;
 
 import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
@@ -10,7 +9,7 @@ import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.decompile.AbstractDecompiler;
 import quilt.internal.decompile.Decompilers;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;
@@ -66,7 +65,7 @@ public abstract class DecompileTask extends DefaultMappingsTask {
     public abstract DirectoryProperty getOutput();
 
     public DecompileTask() {
-        super(Constants.Groups.DECOMPILE);
+        super(Groups.DECOMPILE);
 
         this.getClassJavadocSource().convention(this.getDefaultJavadocSource());
         this.getFieldJavadocSource().convention(this.getDefaultJavadocSource());

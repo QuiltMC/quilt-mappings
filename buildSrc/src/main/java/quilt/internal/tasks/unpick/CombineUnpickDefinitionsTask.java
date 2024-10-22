@@ -24,7 +24,7 @@ import org.gradle.workers.WorkAction;
 import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
@@ -46,7 +46,7 @@ public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
     protected abstract WorkerExecutor getWorkerExecutor();
 
     public CombineUnpickDefinitionsTask() {
-        super(Constants.Groups.UNPICK);
+        super(Groups.UNPICK);
     }
 
     @TaskAction

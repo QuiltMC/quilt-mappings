@@ -2,7 +2,7 @@ package quilt.internal.tasks.build;
 
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ public abstract class AbstractHashedMergeTask extends AbstractTinyMergeTask {
     public abstract RegularFileProperty getHashedTinyMappings();
 
     public AbstractHashedMergeTask() {
-        super(Constants.PER_VERSION_MAPPINGS_NAME);
+        super(Groups.PER_VERSION);
     }
 
     @Override

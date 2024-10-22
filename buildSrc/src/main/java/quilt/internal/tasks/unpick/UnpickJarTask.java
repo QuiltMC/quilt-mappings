@@ -8,7 +8,7 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.OutputFile;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.MappingsTask;
 
 public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
@@ -30,7 +30,7 @@ public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
     public abstract RegularFileProperty getOutputFile();
 
     public UnpickJarTask() {
-        this.setGroup(Constants.Groups.UNPICK);
+        this.setGroup(Groups.UNPICK);
 
         this.getMainClass().set(daomephsta.unpick.cli.Main.class.getName());
         this.getMainClass().finalizeValue();

@@ -48,7 +48,7 @@ import org.gradle.workers.WorkAction;
 import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
@@ -72,7 +72,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask implements Map
     public abstract WorkerExecutor getWorkerExecutor();
 
     public MappingLintTask() {
-        super(Constants.Groups.LINT);
+        super(Groups.LINT);
 
         // Ignore outputs for up-to-date checks as there aren't any (so only inputs are checked)
         // This is required because mappingsDir is @Incremental and this task has no outputs

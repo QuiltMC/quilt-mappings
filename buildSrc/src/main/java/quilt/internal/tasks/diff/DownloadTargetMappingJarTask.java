@@ -3,7 +3,7 @@ package quilt.internal.tasks.diff;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.DownloadUtil;
 
@@ -17,7 +17,7 @@ public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask i
     public abstract RegularFileProperty getTargetUnpickConstantsFile();
 
     public DownloadTargetMappingJarTask() {
-        super(Constants.Groups.DIFF);
+        super(Groups.DIFF);
     }
 
     @TaskAction

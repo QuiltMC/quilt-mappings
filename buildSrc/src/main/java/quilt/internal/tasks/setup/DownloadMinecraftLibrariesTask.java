@@ -10,7 +10,7 @@ import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.OutputFiles;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.work.DisableCachingByDefault;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
 import quilt.internal.util.DownloadUtil;
@@ -46,7 +46,7 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
     protected abstract ObjectFactory getObjects();
 
     public DownloadMinecraftLibrariesTask() {
-        super(Constants.Groups.SETUP);
+        super(Groups.SETUP);
 
         // put this in a property to cache it
         final Provider<Map<NamedUrl, RegularFile>> artifactsByNamedUrl =
@@ -56,7 +56,7 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
 
         this.getArtifactsByNamedUrl().convention(artifactsByNamedUrl);
 
-        // doesn't map from getArtifactsByNamedUrl() because that
+        // don't map from getArtifactsByNamedUrl() because that
         // would access a task output before execution has completed
         this.getArtifactsByNameImpl().set(
             artifactsByNamedUrl

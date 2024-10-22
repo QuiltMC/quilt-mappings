@@ -9,7 +9,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class CompressTinyTask extends DefaultMappingsTask {
@@ -22,7 +22,7 @@ public abstract class CompressTinyTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getCompressedTiny();
 
     public CompressTinyTask() {
-        super(Constants.Groups.BUILD_MAPPINGS);
+        super(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

@@ -35,7 +35,7 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.util.ProviderUtil;
@@ -71,7 +71,7 @@ public abstract class AddProposedMappingsTask extends DefaultMappingsTask implem
     public abstract RegularFileProperty getProcessedMappings();
 
     public AddProposedMappingsTask() {
-        super(Constants.Groups.BUILD_MAPPINGS);
+        super(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

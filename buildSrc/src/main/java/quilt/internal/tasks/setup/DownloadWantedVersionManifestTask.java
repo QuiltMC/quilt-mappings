@@ -6,7 +6,7 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.OutputFile;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.SimpleDownloadTask;
 import quilt.internal.util.SerializableVersionEntry;
 import quilt.internal.util.VersionDownloadInfo;
@@ -27,7 +27,7 @@ public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTa
     }
 
     public DownloadWantedVersionManifestTask() {
-        super(Constants.Groups.SETUP);
+        super(Groups.SETUP);
 
         // have to grab the release time as there's a current timestamp on each element?!
         // TODO I don't think this is necessary, the fact that manifestVersion is an input should take care of it.

@@ -7,6 +7,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
+import quilt.internal.Constants.Namespaces;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
 import quilt.internal.tasks.setup.IntermediaryDependantTask;
@@ -59,16 +60,16 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implem
             // Fix bug when intermediary doesn't have a mapping but hashed does
             // (i.e. `net/minecraft/client/main/Main$2`)
             new DoubleNsCompleterVisitor(
-                new UnmappedNameRemoverVisitor(next, "named", Constants.PER_VERSION_MAPPINGS_NAME),
+                new UnmappedNameRemoverVisitor(next, Namespaces.NAMED, Namespaces.PER_VERSION),
                 // Copy names from `official` to `named` if `intermediary` is empty
-                "named",
-                "intermediary",
-                "official"
+                Namespaces.NAMED,
+                Namespaces.INTERMEDIARY,
+                Namespaces.OFFICIAL
             ),
             // Copy names from `official` to `named` if `hashed` is empty
-            "named",
-            Constants.PER_VERSION_MAPPINGS_NAME,
-            "official"
+            Namespaces.NAMED,
+            Namespaces.PER_VERSION,
+            Namespaces.OFFICIAL
         );
     }
 
@@ -76,7 +77,7 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implem
         return new MappingDstNsReorder(
             writer,
             // Remove hashed namespace
-            List.of("intermediary", "named")
+            List.of(Namespaces.INTERMEDIARY, Namespaces.NAMED)
         );
     }
 }

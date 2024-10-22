@@ -10,7 +10,8 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
+import quilt.internal.Constants.Namespaces;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 import quilt.internal.util.ProviderUtil;
@@ -25,7 +26,7 @@ public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implemen
     public abstract RegularFileProperty getOutputMappings();
 
     public BuildMappingsTinyTask() {
-        super(Constants.Groups.BUILD_MAPPINGS);
+        super(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction
@@ -47,7 +48,7 @@ public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implemen
                 perVersionMappingsJar,
                 mappings,
                 outputMappings,
-                Constants.PER_VERSION_MAPPINGS_NAME,
+                Namespaces.PER_VERSION,
                 "named"
         );
     }

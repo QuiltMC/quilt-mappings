@@ -10,6 +10,7 @@ import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.io.CleanupMode;
 import org.junit.jupiter.api.io.TempDir;
 import org.quiltmc.enigma.api.EnigmaProfile;
+import quilt.internal.Constants.Namespaces;
 import quilt.internal.tasks.build.AddProposedMappingsTask;
 import quilt.internal.tasks.build.BuildMappingsTinyTask;
 import quilt.internal.tasks.build.InvertPerVersionMappingsTask;
@@ -37,7 +38,7 @@ import static quilt.internal.util.MappingAssertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @EnabledIf("obfJarExists")
 public class TasksTest {
-    private static final String PER_VERSION_NAMESPACE = Constants.PER_VERSION_MAPPINGS_NAME;
+    private static final String PER_VERSION_NAMESPACE = Namespaces.PER_VERSION;
     private static final Path OBF_JAR = Path.of("build/libs/test-input-obf.jar").toAbsolutePath();
 
     @TempDir(

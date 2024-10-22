@@ -29,7 +29,8 @@ import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
+import quilt.internal.Constants.Namespaces;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
@@ -52,7 +53,7 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     protected abstract WorkerExecutor getWorkerExecutor();
 
     public RemapUnpickDefinitionsTask() {
-        super(Constants.Groups.UNPICK);
+        super(Groups.UNPICK);
     }
 
     @TaskAction
@@ -73,8 +74,8 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
             final Map<String, String> classMappings = new HashMap<>();
             final Map<MethodKey, String> methodMappings = new HashMap<>();
             final Map<FieldKey, String> fieldMappings = new HashMap<>();
-            final String fromM = "named";
-            final String toM = Constants.PER_VERSION_MAPPINGS_NAME;
+            final String fromM = Namespaces.NAMED;
+            final String toM = Namespaces.PER_VERSION;
 
             try (BufferedReader reader = Files.newBufferedReader(mappings)) {
                 final MemoryMappingTree mappingTree = new MemoryMappingTree();

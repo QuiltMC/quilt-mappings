@@ -5,7 +5,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.quiltmc.enigma.command.DropInvalidMappingsCommand;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
@@ -16,7 +16,7 @@ public abstract class DropInvalidMappingsTask extends DefaultMappingsTask implem
     public abstract RegularFileProperty getPerVersionMappingsJar();
 
     public DropInvalidMappingsTask() {
-        super(Constants.Groups.BUILD_MAPPINGS);
+        super(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

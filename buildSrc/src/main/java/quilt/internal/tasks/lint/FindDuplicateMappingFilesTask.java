@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import org.gradle.api.GradleException;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
@@ -23,7 +23,7 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultMappingsTask 
         Pattern.compile("^CLASS (?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+(?= )");
 
     public FindDuplicateMappingFilesTask() {
-        super(Constants.Groups.LINT);
+        super(Groups.LINT);
     }
 
     @TaskAction

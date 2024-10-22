@@ -15,7 +15,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 import java.io.File;
@@ -45,7 +45,7 @@ public abstract class TransformJarClassesTask extends DefaultMappingsTask {
     public abstract DirectoryProperty getOutput();
 
     public TransformJarClassesTask() {
-        super(Constants.Groups.BUILD_MAPPINGS);
+        super(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

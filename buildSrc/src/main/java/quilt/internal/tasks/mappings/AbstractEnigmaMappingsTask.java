@@ -4,7 +4,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.UntrackedTask;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
@@ -20,7 +20,7 @@ public abstract class AbstractEnigmaMappingsTask extends JavaExec
     public abstract RegularFileProperty getJarToMap();
 
     public AbstractEnigmaMappingsTask() {
-        this.setGroup(Constants.Groups.MAPPINGS);
+        this.setGroup(Groups.MAPPINGS);
     }
 
     @Override

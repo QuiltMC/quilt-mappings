@@ -33,6 +33,7 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask implements UnpickGenTask {
@@ -64,7 +65,7 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
     public abstract RegularFileProperty getUnpickGlDefinitions();
 
     public OpenGlConstantUnpickGenTask() {
-        super(Constants.Groups.UNPICK_GEN);
+        super(Groups.UNPICK_GEN);
 
         // TODO is this necessary?
         //  If things changed, wouldn't we actually *want* to overwrite them?

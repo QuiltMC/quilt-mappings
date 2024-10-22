@@ -9,7 +9,7 @@ import com.google.common.io.Files;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
 import quilt.internal.util.DownloadUtil;
@@ -25,7 +25,7 @@ public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask impl
     public abstract RegularFileProperty getServerBootstrapJar();
 
     public DownloadMinecraftJarsTask() {
-        super(Constants.Groups.SETUP);
+        super(Groups.SETUP);
 
         // TODO I'm not sure that this is necessary
         //  VersionDownloadInfoConsumingTasks indirectly depend on

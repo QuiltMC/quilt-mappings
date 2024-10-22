@@ -3,7 +3,7 @@ package quilt.internal.tasks.setup;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.provider.Provider;
 import org.gradle.work.DisableCachingByDefault;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.SimpleDownloadTask;
 import quilt.internal.util.SerializableVersionEntry;
 
@@ -18,7 +18,7 @@ public abstract class DownloadVersionsManifestTask extends SimpleDownloadTask {
     }
 
     public DownloadVersionsManifestTask() {
-        super(Constants.Groups.SETUP);
+        super(Groups.SETUP);
 
         this.getPreDownloadLifecycle().convention(":downloading minecraft versions manifest");
 

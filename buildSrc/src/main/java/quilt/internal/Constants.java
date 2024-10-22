@@ -9,9 +9,6 @@ public class Constants {
 
     public static final String PER_VERSION_MAPPINGS_NAME = "hashed";
 
-    public static final String PER_VERSION_INVERTED_MAPPINGS_NAME = PER_VERSION_MAPPINGS_NAME + "-inverted";
-
-    // TODO replace duplicates with this
     public static final String INTERMEDIARY_MAPPINGS_NAME = "intermediary";
 
     // TODO why does this use a system variable? CI/CD?
@@ -21,16 +18,24 @@ public class Constants {
 
     public static final String UNPICK_NAME = "unpick";
 
-    public static final class Groups {
-        public static final String SETUP = "jar setup";
-        public static final String MAPPINGS = MAPPINGS_NAME;
-        public static final String BUILD_MAPPINGS = "build mappings";
-        public static final String MAP_JAR = "jar mapping";
-        public static final String DECOMPILE = "decompile";
-        public static final String UNPICK = UNPICK_NAME;
-        public static final String LINT = "lint";
-        public static final String UNPICK_GEN = UNPICK_NAME + " gen";
-        public static final String DIFF = "diff";
-        public static final String JAVADOC_GENERATION = "javadoc generation";
+    public interface Groups {
+        String SETUP = "jar setup";
+        String MAPPINGS = MAPPINGS_NAME;
+        String BUILD_MAPPINGS = "build mappings";
+        String MAP_JAR = "jar mapping";
+        String DECOMPILE = "decompile";
+        String UNPICK = UNPICK_NAME;
+        String LINT = "lint";
+        String UNPICK_GEN = UNPICK_NAME + " gen";
+        String DIFF = "diff";
+        String JAVADOC_GENERATION = "javadoc generation";
+        String PER_VERSION = PER_VERSION_MAPPINGS_NAME;
+    }
+
+    public interface Namespaces {
+        String INTERMEDIARY = INTERMEDIARY_MAPPINGS_NAME;
+        String PER_VERSION = PER_VERSION_MAPPINGS_NAME;
+        String NAMED = "named";
+        String OFFICIAL = "official";
     }
 }

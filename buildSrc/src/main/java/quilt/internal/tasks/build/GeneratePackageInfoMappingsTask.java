@@ -12,7 +12,7 @@ import org.gradle.api.tasks.TaskAction;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
-import quilt.internal.Constants;
+import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
 
@@ -43,7 +43,7 @@ public abstract class GeneratePackageInfoMappingsTask extends DefaultMappingsTas
     abstract DirectoryProperty getOutputDir();
 
     public GeneratePackageInfoMappingsTask() {
-        super(Constants.Groups.BUILD_MAPPINGS);
+        super(Groups.BUILD_MAPPINGS);
 
         this.getPackageName().convention(DEFAULT_PACKAGE_NAME);
 
