@@ -7,11 +7,16 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 import net.fabricmc.stitch.merge.JarMerger;
 
 public abstract class MergeJarsTask extends DefaultMappingsTask {
+    /**
+     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
+     * {@link MinecraftJarsPlugin MinecraftJarsPlugin}.
+     */
     public static final String MERGE_JARS_TASK_NAME = "mergeJars";
 
     @InputFile

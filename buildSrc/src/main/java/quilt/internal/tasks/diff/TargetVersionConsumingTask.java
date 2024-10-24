@@ -7,7 +7,7 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
-import quilt.internal.QuiltMappingsPlugin;
+import quilt.internal.plugin.QuiltMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
 /**

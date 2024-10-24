@@ -2,13 +2,14 @@ package quilt.internal.tasks.mappings;
 
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.tasks.Internal;
+import quilt.internal.plugin.QuiltMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
 /**
  * A task that outputs mappings to the {@linkplain #getMappingsDir() mappings directory}.
  * <p>
  * All tasks that output to the mappings directory should implement this interface so
- * {@link quilt.internal.QuiltMappingsPlugin QuiltMappingsPlugin} can add their outputs to the inputs of
+ * {@link QuiltMappingsPlugin QuiltMappingsPlugin} can add their outputs to the inputs of
  * {@link quilt.internal.tasks.MappingsDirConsumingTask MappingsDirConsumingTask}s.
  * <p>
  * An implementing task should <i>only</i> output to files within {@link #getMappingsDir() mappingsDir} and should

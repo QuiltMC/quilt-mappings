@@ -7,11 +7,16 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.OutputFile;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.tasks.SimpleDownloadTask;
 import quilt.internal.util.SerializableVersionEntry;
 import quilt.internal.util.VersionDownloadInfo;
 
 public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTask {
+    /**
+     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
+     * {@link MinecraftJarsPlugin MinecraftJarsPlugin}.
+     */
     public static final String DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME = "downloadWantedVersionManifest";
 
     @Input

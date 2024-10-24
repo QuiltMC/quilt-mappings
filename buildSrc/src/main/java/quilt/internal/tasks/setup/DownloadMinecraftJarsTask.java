@@ -10,12 +10,18 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
 import quilt.internal.util.DownloadUtil;
 import quilt.internal.util.VersionDownloadInfo;
 
-public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask implements VersionDownloadInfoConsumingTask {
+public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask implements
+        VersionDownloadInfoConsumingTask {
+    /**
+     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
+     * {@link MinecraftJarsPlugin MinecraftJarsPlugin}.
+     */
     public static final String DOWNLOAD_MINECRAFT_JARS_TASK_NAME = "downloadMinecraftJars";
 
     @OutputFile

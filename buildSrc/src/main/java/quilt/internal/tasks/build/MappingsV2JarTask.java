@@ -7,6 +7,7 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.jvm.tasks.Jar;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.QuiltMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
 import javax.inject.Inject;
@@ -15,7 +16,7 @@ import javax.inject.Inject;
  * TODO is this an accurate description?<br>
  * A task that creates a jar file with Quilt's v2 mapping format.
  * <p>
- * {@link quilt.internal.QuiltMappingsPlugin QuiltMappingsPlugin} applies the following defaults to all
+ * {@link QuiltMappingsPlugin QuiltMappingsPlugin} applies the following defaults to all
  * {@code MappingsV2JarTask}s:
  * <ul>
  *     <li>

@@ -8,27 +8,28 @@ import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Internal;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import quilt.internal.QuiltMappingsExtension;
-import quilt.internal.QuiltMappingsPlugin;
 import quilt.internal.util.EnigmaProfileService;
 
 /**
  * A task that takes an {@link EnigmaProfile} as input.
  * <p>
- * {@link QuiltMappingsPlugin MappingsPlugin} applies the following defaults:
+ * {@link quilt.internal.plugin.QuiltMappingsBasePlugin QuiltMappingsBasePlugin}
+ * {@linkplain org.gradle.api.tasks.TaskCollection#configureEach configures} the following defaults:
  * <ul>
  *     <li>
- *     {@link #getEnigmaProfileService() enigmaProfileService} will default to the
+ *     {@link #getEnigmaProfileService() enigmaProfileService}: the
  *     {@value quilt.internal.util.EnigmaProfileService#ENIGMA_PROFILE_SERVICE_NAME} service
  *     which reads {@link quilt.internal.QuiltMappingsExtension MappingsExtension}'s
  *     {@link QuiltMappingsExtension#getEnigmaProfileConfig() enigmaProfileConfig}
  *     <li>
- *     {@link #getEnigmaProfileConfig() enigmaProfileConfig} will default to
+ *     {@link #getEnigmaProfileConfig() enigmaProfileConfig}:
  *     {@link quilt.internal.QuiltMappingsExtension MappingsExtension}'s
  *     {@link QuiltMappingsExtension#getEnigmaProfileConfig() enigmaProfileConfig}
  *     <li>
- *     {@link #getSimpleTypeFieldNamesFiles() simpleTypeFieldNamesFiles} will populate based on the
+ *     {@link #getSimpleTypeFieldNamesFiles() simpleTypeFieldNamesFiles}: the
  *     {@value quilt.internal.util.EnigmaProfileService#ENIGMA_PROFILE_SERVICE_NAME} service's
- *     {@link EnigmaProfileService#getProfile() profile}
+ *     {@link EnigmaProfileService#getProfile() profile}'s
+ *     {@value org.quiltmc.enigma_plugin.Arguments#SIMPLE_TYPE_FIELD_NAMES_PATH}s
  * </ul>
  */
 public interface EnigmaProfileConsumingTask extends MappingsTask {

@@ -6,10 +6,9 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
-import org.gradle.api.tasks.UntrackedTask;
 import org.gradle.api.tasks.options.Option;
-import org.gradle.work.DisableCachingByDefault;
 import org.quiltmc.enigma.network.DedicatedEnigmaServer;
+import quilt.internal.plugin.QuiltMappingsPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +23,16 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  * Additional args can be specified when invoking the task using the
  * {@link JavaExec#setArgsString(String) --args} option.
  * <p>
- * If {@link quilt.internal.QuiltMappingsPlugin QuiltMappingsPlugin} is applied
+ * If {@link QuiltMappingsPlugin QuiltMappingsPlugin} is applied
  * the following gradle properties will be searched for default values:
  * <ul>
- *     <li> {@value quilt.internal.QuiltMappingsPlugin#ENIGMA_SERVER_PORT_PROP}
+ *     <li> {@value QuiltMappingsPlugin#ENIGMA_SERVER_PORT_PROP}
  *     for the {@link #getPort() port}
- *     <li> {@value quilt.internal.QuiltMappingsPlugin#ENIGMA_SERVER_PASSWORD_PROP}
+ *     <li> {@value QuiltMappingsPlugin#ENIGMA_SERVER_PASSWORD_PROP}
  *     for the {@link #getPassword() password}
- *     <li> {@value quilt.internal.QuiltMappingsPlugin#ENIGMA_SERVER_LOG_PROP}
+ *     <li> {@value QuiltMappingsPlugin#ENIGMA_SERVER_LOG_PROP}
  *     for the {@link #getLog() log} path
- *     <li> {@value quilt.internal.QuiltMappingsPlugin#ENIGMA_SERVER_ARGS_PROP}
+ *     <li> {@value QuiltMappingsPlugin#ENIGMA_SERVER_ARGS_PROP}
  *     for any additional command line args
  * </ul>
  */

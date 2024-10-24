@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
  * so they can be cached and the {@link org.quiltmc.launchermeta.version.v1.Version Version}
  * needn't be parsed by multiple {@link org.gradle.api.Task Task}s.
  */
-public class VersionDownloadInfo implements Serializable {
+// TODO consider replacing this with a NonSerializableObjectParser class
+public final class VersionDownloadInfo implements Serializable {
     public static VersionDownloadInfo of(File versionFile) {
         final Version version;
         try {
@@ -35,7 +36,7 @@ public class VersionDownloadInfo implements Serializable {
             new GradleException("Version has no server download")
         ));
 
-        final Map<String, String> libraryArtifactsUrlsByName = version.getLibraries().stream()
+        final Map<String, String> libraryArtifactUrlsByName = version.getLibraries().stream()
             .flatMap(library ->
                 library.getDownloads().getArtifact()
                     .map(DownloadableFile.PathDownload::getUrl)
@@ -47,7 +48,7 @@ public class VersionDownloadInfo implements Serializable {
             )
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        return new VersionDownloadInfo(client, server, libraryArtifactsUrlsByName);
+        return new VersionDownloadInfo(client, server, libraryArtifactUrlsByName);
     }
 
     private final SerializableDownloadableFile client;
@@ -68,7 +69,11 @@ public class VersionDownloadInfo implements Serializable {
         return this.libraryArtifactUrlsByName;
     }
 
-    private VersionDownloadInfo(SerializableDownloadableFile client, SerializableDownloadableFile server, Map<String, String> libraryArtifactUrlsByName) {
+    private VersionDownloadInfo(
+        SerializableDownloadableFile client,
+        SerializableDownloadableFile server,
+        Map<String, String> libraryArtifactUrlsByName
+    ) {
         this.client = client;
         this.server = server;
         this.libraryArtifactUrlsByName = libraryArtifactUrlsByName;

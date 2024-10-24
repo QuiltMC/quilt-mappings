@@ -1,10 +1,9 @@
 package quilt.internal.tasks.diff;
 
 import org.gradle.api.provider.Property;
-import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
-import quilt.internal.QuiltMappingsPlugin;
+import quilt.internal.plugin.QuiltMappingsPlugin;
 
 /**
  * A task that takes whether two unpick versions match as input.
