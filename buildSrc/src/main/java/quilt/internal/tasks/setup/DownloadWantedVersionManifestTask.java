@@ -9,6 +9,7 @@ import org.gradle.api.tasks.OutputFile;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.tasks.SimpleDownloadTask;
+import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
 import quilt.internal.util.SerializableVersionEntry;
 import quilt.internal.util.VersionDownloadInfo;
 
@@ -25,6 +26,10 @@ public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTa
     @OutputFile
     public abstract RegularFileProperty getDest();
 
+    /**
+     * @see VersionDownloadInfoConsumingTask
+     * @see MinecraftJarsPlugin
+     */
     public Provider<VersionDownloadInfo> provideVersionDownloadInfo() {
         return this.getDest()
                 .map(RegularFile::getAsFile)

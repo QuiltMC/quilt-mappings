@@ -49,10 +49,14 @@ import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MappingsVerificationPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
 public abstract class MappingLintTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
+    /**
+     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MappingsVerificationPlugin}.
+     */
     public static final String MAPPING_LINT_TASK_NAME = "mappingLint";
 
     @Incremental

@@ -10,9 +10,11 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants.Groups;
 import quilt.internal.Constants.Namespaces;
+import quilt.internal.plugin.MapIntermediaryPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.setup.IntermediaryDependantTask;
 import quilt.internal.util.ProviderUtil;
@@ -23,6 +25,9 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 public abstract class RemoveIntermediaryTask extends DefaultMappingsTask implements IntermediaryDependantTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapIntermediaryPlugin}.
+     */
     public static final String REMOVE_INTERMEDIARY_TASK_NAME = "removeIntermediary";
 
     @InputFile

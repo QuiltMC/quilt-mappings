@@ -10,9 +10,16 @@ import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskCollection;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.JarRemapper;
 
+/**
+ * Creates a jar file by applying mappings to an input jar.
+ * <p>
+ * {@link MapMinecraftJarsPlugin} {@linkplain TaskCollection#configureEach configures} some defaults.
+ */
 public abstract class MapJarTask extends DefaultMappingsTask {
     public static final Map<String, String> JAVAX_TO_JETBRAINS = Map.of(
             "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",

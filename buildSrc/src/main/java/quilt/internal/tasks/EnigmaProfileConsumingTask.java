@@ -6,31 +6,15 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Internal;
+import org.gradle.api.tasks.TaskCollection;
 import org.quiltmc.enigma.api.EnigmaProfile;
-import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.util.EnigmaProfileService;
 
 /**
  * A task that takes an {@link EnigmaProfile} as input.
  * <p>
- * {@link quilt.internal.plugin.QuiltMappingsBasePlugin QuiltMappingsBasePlugin}
- * {@linkplain org.gradle.api.tasks.TaskCollection#configureEach configures} the following defaults:
- * <ul>
- *     <li>
- *     {@link #getEnigmaProfileService() enigmaProfileService}: the
- *     {@value quilt.internal.util.EnigmaProfileService#ENIGMA_PROFILE_SERVICE_NAME} service
- *     which reads {@link quilt.internal.QuiltMappingsExtension MappingsExtension}'s
- *     {@link QuiltMappingsExtension#getEnigmaProfileConfig() enigmaProfileConfig}
- *     <li>
- *     {@link #getEnigmaProfileConfig() enigmaProfileConfig}:
- *     {@link quilt.internal.QuiltMappingsExtension MappingsExtension}'s
- *     {@link QuiltMappingsExtension#getEnigmaProfileConfig() enigmaProfileConfig}
- *     <li>
- *     {@link #getSimpleTypeFieldNamesFiles() simpleTypeFieldNamesFiles}: the
- *     {@value quilt.internal.util.EnigmaProfileService#ENIGMA_PROFILE_SERVICE_NAME} service's
- *     {@link EnigmaProfileService#getProfile() profile}'s
- *     {@value org.quiltmc.enigma_plugin.Arguments#SIMPLE_TYPE_FIELD_NAMES_PATH}s
- * </ul>
+ * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures} default values.
  */
 public interface EnigmaProfileConsumingTask extends MappingsTask {
     @Internal("@ServiceReference is @Incubating")

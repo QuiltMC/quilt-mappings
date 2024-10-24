@@ -2,11 +2,13 @@ package quilt.internal.plugin;
 
 import org.gradle.api.Project;
 import org.gradle.api.file.Directory;
-import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskContainer;
+import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import quilt.internal.Constants;
+import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
 import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
 import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
@@ -17,23 +19,25 @@ import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.util.VersionDownloadInfo;
 
 /**
- * {@link TaskContainer#register Registers} tasks that download and extract Minecraft's client, server, and library jars.
+ * {@link TaskContainer#register Registers} tasks that download and extract
+ * Minecraft's client, server, and library jars.
  * <p>
  * Additionally:
  * <ul>
  *     <li> {@link TaskContainer#register registers} {@value MergeJarsTask#MERGE_JARS_TASK_NAME}
  *          which merges the client and server jars
- *     <li> {@linkplain org.gradle.api.tasks.TaskCollection#configureEach configures}
- *          {@link VersionDownloadInfoConsumingTask}s
+ *     <li> {@linkplain org.gradle.api.tasks.TaskCollection#configureEach configures} the default value of
+ *          {@link VersionDownloadInfoConsumingTask}s'
+ *          {@link VersionDownloadInfoConsumingTask#getVersionDownloadInfo versionDownloadInfo} to
+ *          {@value DownloadWantedVersionManifestTask#DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME}'s
+ *          {@linkplain DownloadWantedVersionManifestTask#provideVersionDownloadInfo provided}
+ *          {@link VersionDownloadInfo}
  * </ul>
  */
-public abstract class MinecraftJarsPlugin implements MappingsProjectPlugin {
+public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPlugin<MinecraftJarsPlugin.Tasks> {
+
     @Override
-    public void apply(@NotNull Project project) {
-        final ObjectFactory objects = this.getObjects();
-
-        final Directory projectDir = this.getProjectDir();
-
+    protected Tasks applyImpl(@NotNull Project project) {
         final Provider<Directory> minecraftDir = this.getMinecraftDir();
 
         final TaskContainer tasks = project.getTasks();
@@ -63,7 +67,7 @@ public abstract class MinecraftJarsPlugin implements MappingsProjectPlugin {
 
             // put mapped provider in a property so all tasks use the same cached value
             final Provider<VersionDownloadInfo> versionDownloadInfo =
-                objects.property(VersionDownloadInfo.class).convention(
+                this.getObjects().property(VersionDownloadInfo.class).convention(
                     downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::provideVersionDownloadInfo)
                 );
 
@@ -100,7 +104,7 @@ public abstract class MinecraftJarsPlugin implements MappingsProjectPlugin {
             }
         );
 
-        tasks.register(
+        final var mergeJars = tasks.register(
             MergeJarsTask.MERGE_JARS_TASK_NAME,
             MergeJarsTask.class,
             task -> {
@@ -109,16 +113,25 @@ public abstract class MinecraftJarsPlugin implements MappingsProjectPlugin {
                 task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
                 // TODO move this and other jars that are directly in the project dir to some sub dir
-                task.getMergedFile().convention(projectDir.file(Constants.MINECRAFT_VERSION + "-merged.jar"));
+                task.getMergedFile().convention(
+                    this.getProjectDir().file(Constants.MINECRAFT_VERSION + "-merged.jar")
+                );
             }
         );
 
-        tasks.register(
+        final var downloadMinecraftLibraries = tasks.register(
             DownloadMinecraftLibrariesTask.DOWNLOAD_MINECRAFT_LIBRARIES_TASK_NAME,
             DownloadMinecraftLibrariesTask.class,
             task -> {
                 task.getLibrariesDir().convention(minecraftDir.map(dir -> dir.dir("libraries")));
             }
         );
+
+        return new Tasks(mergeJars, downloadMinecraftLibraries);
     }
+
+    public record Tasks(
+        TaskProvider<MergeJarsTask> mergeJars,
+        TaskProvider<DownloadMinecraftLibrariesTask> downloadMinecraftLibraries
+    ) { }
 }

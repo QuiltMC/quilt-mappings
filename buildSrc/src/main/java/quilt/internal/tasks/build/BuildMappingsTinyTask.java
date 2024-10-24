@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.TaskContainer;
 import org.quiltmc.enigma.command.MapSpecializedMethodsCommand;
 import org.quiltmc.enigma.api.translation.mapping.serde.MappingParseException;
 import org.gradle.api.file.RegularFileProperty;
@@ -12,11 +13,15 @@ import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants.Groups;
 import quilt.internal.Constants.Namespaces;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 import quilt.internal.util.ProviderUtil;
 
 public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
+     */
     public static final String BUILD_MAPPINGS_TINY_TASK_NAME = "buildMappingsTiny";
 
     @InputFile

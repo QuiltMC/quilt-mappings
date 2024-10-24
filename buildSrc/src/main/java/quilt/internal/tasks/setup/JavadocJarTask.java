@@ -1,11 +1,16 @@
 package quilt.internal.tasks.setup;
 
+import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.bundling.Jar;
 import quilt.internal.Constants;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.ProcessMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
 public abstract class JavadocJarTask extends Jar implements MappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
+     */
     public static final String JAVADOC_JAR_TASK_NAME = "javadocJar";
 
     public JavadocJarTask() {

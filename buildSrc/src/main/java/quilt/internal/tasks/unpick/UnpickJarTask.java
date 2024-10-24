@@ -8,10 +8,21 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.OutputFile;
+import org.gradle.api.tasks.TaskCollection;
+import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.tasks.MappingsTask;
 
+/**
+ * Unpicks a jar file using {@link daomephsta.unpick.cli.Main}.
+ * <p>
+ * {@link MapV2Plugin} {@linkplain TaskCollection#configureEach configures} some defaults.
+ */
 public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String UNPICK_HASHED_JAR_TASK_NAME = "unpickHashedJar";
 
     @InputFile
@@ -31,6 +42,8 @@ public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
 
     public UnpickJarTask() {
         this.setGroup(Groups.UNPICK);
+        // TODO see if daomephsta.unpick.cli.Main can be added to the classpath here, directly,
+        //  eliminating the need for the unpick configuration
 
         this.getMainClass().set(daomephsta.unpick.cli.Main.class.getName());
         this.getMainClass().finalizeValue();

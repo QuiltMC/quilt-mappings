@@ -1,12 +1,18 @@
 package quilt.internal.tasks.build;
 
+import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
+import quilt.internal.plugin.MapV2Plugin;
+import quilt.internal.plugin.MappingsVerificationPlugin;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Function;
 
 public abstract class MergeTinyV2Task extends AbstractHashedMergeTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String MERGE_TINY_V_2_TASK_NAME = "mergeTinyV2";
 
     @VisibleForTesting

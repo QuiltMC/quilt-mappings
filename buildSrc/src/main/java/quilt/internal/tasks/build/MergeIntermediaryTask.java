@@ -5,11 +5,13 @@ import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.Constants.Namespaces;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
+import quilt.internal.plugin.MapIntermediaryPlugin;
 import quilt.internal.tasks.setup.IntermediaryDependantTask;
 
 import java.io.IOException;
@@ -17,6 +19,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implements IntermediaryDependantTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapIntermediaryPlugin}.
+     */
     public static final String MERGE_INTERMEDIARY_TASK_NAME = "mergeIntermediary";
 
     @InputFile

@@ -1,12 +1,17 @@
 package quilt.internal.tasks.build;
 
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
+import quilt.internal.plugin.ProcessMappingsPlugin;
 import quilt.internal.tasks.decompile.DecompileVineflowerTask;
 
 import java.io.IOException;
 import java.util.Map;
 
 public abstract class GenFakeSourceTask extends DecompileVineflowerTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
+     */
     public static final String GEN_FAKE_SOURCE_TASK_NAME = "genFakeSource";
 
     public GenFakeSourceTask() {

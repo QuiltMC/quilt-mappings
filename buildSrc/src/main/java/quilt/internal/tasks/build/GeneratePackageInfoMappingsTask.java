@@ -9,10 +9,12 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
 
@@ -29,6 +31,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public abstract class GeneratePackageInfoMappingsTask extends DefaultMappingsTask implements MappingsDirOutputtingTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
+     */
     public static final String GENERATE_PACKAGE_INFO_MAPPINGS_TASK_NAME = "generatePackageInfoMappings";
 
     public static final String DEFAULT_PACKAGE_NAME = "net/minecraft/unused/packageinfo/";

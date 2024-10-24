@@ -20,11 +20,13 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import org.gradle.workers.WorkAction;
 import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
@@ -34,6 +36,9 @@ import quilt.internal.util.UnpickUtil;
  * @see quilt.internal.tasks.unpick.gen.UnpickGenTask UnpickGenTask
  */
 public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String COMBINE_UNPICK_DEFINITIONS_TASK_NAME = "combineUnpickDefinitions";
 
     @InputFiles

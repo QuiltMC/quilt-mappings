@@ -1,10 +1,16 @@
 package quilt.internal.tasks.build;
 
+import org.gradle.api.tasks.TaskContainer;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 import org.quiltmc.draftsman.asm.visitor.DraftsmanAdapterClassVisitor;
+import quilt.internal.plugin.MapV2Plugin;
+import quilt.internal.plugin.ProcessMappingsPlugin;
 
 public abstract class EraseByteCodeTask extends TransformJarClassesTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
+     */
     public static final String ERASE_BYTECODE_TASK_NAME = "eraseBytecode";
 
     public EraseByteCodeTask() {

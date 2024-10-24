@@ -85,20 +85,46 @@ test {
 
 gradlePlugin {
 	plugins {
+		final pluginPackage = 'quilt.internal.plugin.'
+
 		quiltMappingsBase {
 			id = 'quilt-mappings-base'
-			implementationClass = 'quilt.internal.plugin.QuiltMappingsBasePlugin'
-
+			implementationClass = pluginPackage + 'QuiltMappingsBasePlugin'
 		}
 
 		minecraftJars {
 			id = 'minecraft-jars'
-			implementationClass = 'quilt.internal.plugin.MinecraftJarsPlugin'
+			implementationClass = pluginPackage + 'MinecraftJarsPlugin'
+		}
+
+		mapMinecraftJars {
+			id = 'map-minecraft-jars'
+			implementationClass = pluginPackage + 'MapMinecraftJarsPlugin'
+		}
+
+		mapV2 {
+			id = 'map-v2'
+			implementationClass = pluginPackage + 'MapV2Plugin'
+		}
+
+		mapIntermediary {
+			id = 'map-intermediary'
+			implementationClass = pluginPackage + 'MapIntermediaryPlugin'
+		}
+
+		mappingsVerification {
+			id = 'mappings-verification'
+			implementationClass = pluginPackage + 'MappingsVerificationPlugin'
+		}
+
+		processMappings {
+			id = 'process-mappings'
+			implementationClass = pluginPackage + 'ProcessMappingsPlugin'
 		}
 
 		quiltMappings {
 			id = 'quilt-mappings'
-			implementationClass = 'quilt.internal.plugin.QuiltMappingsPlugin'
+			implementationClass = pluginPackage + 'QuiltMappingsPlugin'
 		}
 	}
 }

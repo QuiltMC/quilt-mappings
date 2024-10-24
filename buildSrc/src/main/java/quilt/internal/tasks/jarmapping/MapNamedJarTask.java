@@ -1,9 +1,14 @@
 package quilt.internal.tasks.jarmapping;
 
+import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.Constants.Groups;
 import quilt.internal.Constants.Namespaces;
+import quilt.internal.plugin.MapV2Plugin;
 
 public abstract class MapNamedJarTask extends MapJarTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String MAP_NAMED_JAR_TASK_NAME = "mapNamedJar";
 
     public MapNamedJarTask() {

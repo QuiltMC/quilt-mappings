@@ -11,6 +11,7 @@ import org.gradle.api.tasks.OutputFiles;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
@@ -33,6 +34,9 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
      */
     public static final String DOWNLOAD_MINECRAFT_LIBRARIES_TASK_NAME = "downloadMinecraftLibraries";
 
+    /**
+     * @see MapMinecraftJarsPlugin
+     */
     @OutputDirectory
     public abstract DirectoryProperty getLibrariesDir();
 

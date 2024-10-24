@@ -2,11 +2,16 @@ package quilt.internal.tasks.decompile;
 
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.decompile.Decompilers;
+import quilt.internal.plugin.ProcessMappingsPlugin;
 
 import java.io.IOException;
 
 public abstract class DecompileVineflowerTask extends DecompileTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
+     */
     public static final String DECOMPILE_VINEFLOWER_TASK_NAME = "decompileVineflower";
 
     public DecompileVineflowerTask() {

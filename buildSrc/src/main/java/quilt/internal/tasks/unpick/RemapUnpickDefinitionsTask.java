@@ -24,6 +24,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import org.gradle.workers.WorkAction;
 import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
@@ -31,6 +32,7 @@ import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants.Groups;
 import quilt.internal.Constants.Namespaces;
+import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
@@ -39,6 +41,9 @@ import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
 public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String REMAP_UNPICK_DEFINITIONS_TASK_NAME = "remapUnpickDefinitions";
     @InputFile
     public abstract RegularFileProperty getInput();

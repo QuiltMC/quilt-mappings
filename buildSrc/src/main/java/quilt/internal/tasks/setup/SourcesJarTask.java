@@ -2,11 +2,16 @@ package quilt.internal.tasks.setup;
 
 import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.tasks.InputFiles;
+import org.gradle.api.tasks.TaskContainer;
 import org.gradle.jvm.tasks.Jar;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.ProcessMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
 public abstract class SourcesJarTask extends Jar implements MappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
+     */
     public static final String SOURCES_JAR_TASK_NAME = "sourcesJar";
 
     @InputFiles

@@ -37,11 +37,12 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  * </ul>
  */
 public abstract class EnigmaMappingsServerTask extends AbstractEnigmaMappingsTask {
+	public static final String MAPPINGS_SERVER_TASK_NAME = "mappingsServer";
+	public static final String MAPPINGS_UNPICKED_SERVER_TASK_NAME = "mappingsUnpickedServer";
+
 	public static final String PORT_OPTION = "port";
 	public static final String PASSWORD_OPTION = "password";
 	public static final String LOG_OPTION = "log";
-    public static final String MAPPINGS_UNPICKED_SERVER_TASK_NAME = "mappingsUnpickedServer";
-    public static final String MAPPINGS_SERVER_TASK_NAME = "mappingsServer";
 
     @Optional
 	@Option(option = PORT_OPTION, description = "The port the Enigma server will run on.")

@@ -9,10 +9,15 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class CompressTinyTask extends DefaultMappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
+     */
     public static final String COMPRESS_TINY_TASK_NAME = "compressTiny";
 
     @InputFile

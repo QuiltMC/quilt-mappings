@@ -6,15 +6,20 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants;
 import quilt.internal.Constants.Groups;
 import quilt.internal.Constants.Namespaces;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 
 public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
+     */
     public static final String INVERT_PER_VERSION_MAPPINGS_TASK_NAME = "invertPerVersionMappings";
 
     @InputFile

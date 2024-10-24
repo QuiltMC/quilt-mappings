@@ -27,6 +27,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskContainer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
@@ -34,9 +35,13 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import quilt.internal.Constants;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.tasks.DefaultMappingsTask;
 
 public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask implements UnpickGenTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String OPEN_GL_UNPICK_GEN_TASK_NAME = "openGlUnpickGen";
 
     public static final String OPEN_GL_REGISTRY =

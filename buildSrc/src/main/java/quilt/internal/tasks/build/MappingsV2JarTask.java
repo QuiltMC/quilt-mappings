@@ -4,40 +4,33 @@ import java.util.Map;
 
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.TaskCollection;
+import org.gradle.api.tasks.TaskContainer;
 import org.gradle.jvm.tasks.Jar;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.plugin.QuiltMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
 import javax.inject.Inject;
 
 /**
- * TODO is this an accurate description?<br>
  * A task that creates a jar file with Quilt's v2 mapping format.
  * <p>
- * {@link QuiltMappingsPlugin QuiltMappingsPlugin} applies the following defaults to all
- * {@code MappingsV2JarTask}s:
- * <ul>
- *     <li>
- *     {@link quilt.internal.QuiltMappingsExtension QuiltMappingsExtension}'s
- *     {@link quilt.internal.QuiltMappingsExtension#getUnpickMeta() unpickMeta}
- *     to {@link #getUnpickMeta() unpickMeta}
- *     <li>
- *     {@value quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#COMBINE_UNPICK_DEFINITIONS_TASK_NAME}'s
- *     {@link quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask#getOutput() output}
- *     to {@link #getUnpickDefinition() unpickDefinition}
- *     <li>
- *     {@code libs/} inside the
- *     {@linkplain org.gradle.api.file.ProjectLayout#getBuildDirectory() project build directory}
- *     to {@link #getDestinationDirectory() destinationDirectory}
- * </ul>
+ * {@link MapV2Plugin} {@linkplain TaskCollection#configureEach configures} some defaults.
  */
 
 // TODO why?
 @DisableCachingByDefault(because = "unknown")
 public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String V_2_UNMERGED_MAPPINGS_JAR_TASK_NAME = "v2UnmergedMappingsJar";
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
+     */
     public static final String V_2_MERGED_MAPPINGS_JAR_TASK_NAME = "v2MergedMappingsJar";
 
     public static final String JAR_UNPICK_META_PATH = "extras/unpick.json";
