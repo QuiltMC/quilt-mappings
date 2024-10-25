@@ -42,19 +42,19 @@ public class TestUtil {
     }
 
     public static MemoryMappingTree readTinyV2(Path path) throws IOException {
-        return readTree(path, MappingFormat.TINY_2);
+        return readTree(path, MappingFormat.TINY_2_FILE);
     }
 
     public static void writeTinyV2(Path path, MappingTree tree) throws IOException {
-        writeTree(path, tree, MappingFormat.TINY_2);
+        writeTree(path, tree, MappingFormat.TINY_2_FILE);
     }
 
     public static MemoryMappingTree readEnigma(Path path) throws IOException {
-        return readTree(path, MappingFormat.ENIGMA);
+        return readTree(path, MappingFormat.ENIGMA_DIR);
     }
 
     public static void writeEnigma(Path path, MappingTree tree) throws IOException {
-        writeTree(path, tree, MappingFormat.ENIGMA);
+        writeTree(path, tree, MappingFormat.ENIGMA_DIR);
     }
 
     public static UnpickFile readUnpickFile(Path path, Path jar) throws Exception {

@@ -1,5 +1,6 @@
 package quilt.internal;
 
+import daomephsta.unpick.constantmappers.datadriven.parser.UnpickSyntaxException;
 import net.fabricmc.mappingio.tree.MappingTree;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -48,6 +49,7 @@ public class TasksTest {
     private static Path mappingsDir;
     private static Path profilePath;
     private static Path unpickDefinitions;
+    private static Path brokenUnpickDefinitions;
 
     private static Path perVersionMappingsJar;
     private static Path outputsDir;
@@ -91,6 +93,7 @@ public class TasksTest {
         mappingsDir = testProjectDir.resolve("mappings/");
         profilePath = testProjectDir.resolve("enigma_profile.json");
         unpickDefinitions = testProjectDir.resolve("unpick-definitions/");
+        brokenUnpickDefinitions = testProjectDir.resolve("broken-unpick-definitions/");
 
         perVersionMappings = getResource("/test-intermediate.tiny");
         perVersionMappingsJar = testProjectDir.resolve("test-hashed.jar");
@@ -261,6 +264,13 @@ public class TasksTest {
         assertTrue(file.isSimpleConstantGroup("g_type"));
         assertEquals("g_type", file.getParameterConstantGroup("com/example/GClass", "fromType", "(I)Ljava/lang/String;", 0));
         assertEquals("g_type", file.getReturnConstantGroup("com/example/GClass", "toType", "(Ljava/lang/String;)I"));
+    }
+
+    @Test
+    public void testCombineBrokenUnpickDefinitions() {
+        Path output = outputsDir.resolve("broken-combined-definitions.unpick");
+        Collection<File> input = List.of(brokenUnpickDefinitions.toFile().listFiles());
+        assertThrows(UnpickSyntaxException.class, () -> CombineUnpickDefinitionsTask.combineUnpickDefinitions(input, output));
     }
 
     @Test
