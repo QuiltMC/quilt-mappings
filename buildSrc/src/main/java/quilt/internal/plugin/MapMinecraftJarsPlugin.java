@@ -216,8 +216,9 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
                 task.getMappings().convention(mergeTiny.flatMap(MergeTinyTask::getOutputMappings));
 
                 task.getCompressedTiny().convention(
-                    tinyJar.flatMap(TinyJarTask::getDestinationDirectory)
-                        .map(dir -> dir.file(ARCHIVE_FILE_NAME_PREFIX + "-tiny.gz"))
+                    tinyJar.flatMap(TinyJarTask::getDestinationDirectory).map(dir ->
+                        dir.file(ARCHIVE_FILE_NAME_PREFIX + "-" + CompressTinyTask.TINY_CLASSIFIER + ".gz")
+                    )
                 );
             }
         );

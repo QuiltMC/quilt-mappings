@@ -7,6 +7,7 @@ import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.ProcessMappingsPlugin;
 import quilt.internal.tasks.MappingsTask;
 
+// TODO move this back to build.gradle?
 public abstract class JavadocJarTask extends Jar implements MappingsTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.

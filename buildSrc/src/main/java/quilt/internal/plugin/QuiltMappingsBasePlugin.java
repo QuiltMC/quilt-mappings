@@ -60,6 +60,7 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
  */
 public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
     static final String MAPPINGS_NAME_PREFIX = Constants.MAPPINGS_NAME + "-";
+    // TODO extract QuiltMappingsArchiveTask interface and apply these there
     static final String ARCHIVE_FILE_NAME_PREFIX = MAPPINGS_NAME_PREFIX + Constants.MAPPINGS_VERSION;
 
     @Nullable

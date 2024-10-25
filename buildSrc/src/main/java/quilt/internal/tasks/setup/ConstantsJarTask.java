@@ -8,11 +8,14 @@ import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.tasks.MappingsTask;
 
+// TODO move this back to build.gradle?
 public abstract class ConstantsJarTask extends Jar implements MappingsTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */
     public static final String CONSTANTS_JAR_TASK_NAME = "constantsJar";
+
+    public static final String CONSTANTS_CLASSIFIER = "constants";
 
     @InputFiles
     public abstract ConfigurableFileCollection getConstants();
@@ -20,7 +23,7 @@ public abstract class ConstantsJarTask extends Jar implements MappingsTask {
     public ConstantsJarTask() {
         this.setGroup(Groups.SETUP);
 
-        this.getArchiveClassifier().convention("constants");
+        this.getArchiveClassifier().convention(CONSTANTS_CLASSIFIER);
 
         this.from(this.getConstants());
     }

@@ -1,6 +1,9 @@
 import org.gradle.api.internal.file.FileOperations
 import quilt.internal.Constants
 import quilt.internal.tasks.build.IntermediaryMappingsV2JarTask
+import quilt.internal.tasks.build.CompressTinyTask
+import quilt.internal.tasks.build.MappingsV2JarTask
+import quilt.internal.tasks.setup.ConstantsJarTask
 
 import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
 import static quilt.internal.Constants.MINECRAFT_VERSION
@@ -240,23 +243,25 @@ publishing {
 
 			// quilt-mappings-<version>-tiny.gz
 			artifact(compressTiny.compressedTiny) {
-				classifier 'tiny'
+				classifier CompressTinyTask.TINY_CLASSIFIER
 				builtBy compressTiny
 			}
 			// quilt-mappings-<version>.jar
 			artifact(tinyJar)
 			// quilt-mappings-<version>-v2.jar
 			artifact(v2UnmergedMappingsJar) {
-				classifier 'v2'
+				classifier MappingsV2JarTask.V_2_CLASSIFIER
 			}
 			// quilt-mappings-<version>-mergedv2.jar
 			artifact(v2MergedMappingsJar) {
-				classifier 'mergedv2'
+				classifier MappingsV2JarTask.MERGED_V2_CLASSIFIER
 			}
 			// quilt-mappings-<version>-constants.jar
 			artifact(constantsJar) {
-				classifier 'constants'
+				classifier ConstantsJarTask.CONSTANTS_CLASSIFIER
 			}
+
+			// TODO why don't these specify classifiers?
 			// quilt-mappings-<version>-sources.jar
 			artifact sourcesJar
 			// quilt-mappings-<version>-javadoc.jar

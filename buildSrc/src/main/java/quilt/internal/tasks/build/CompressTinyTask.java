@@ -20,6 +20,8 @@ public abstract class CompressTinyTask extends DefaultMappingsTask {
      */
     public static final String COMPRESS_TINY_TASK_NAME = "compressTiny";
 
+    public static final String TINY_CLASSIFIER = "tiny";
+
     @InputFile
     public abstract RegularFileProperty getMappings();
 
