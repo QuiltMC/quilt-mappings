@@ -5,14 +5,19 @@ import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.ListProperty;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.specs.Specs;
+import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.Exec;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
+import org.gradle.api.tasks.PathSensitive;
+import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.options.Option;
+import org.gradle.process.ExecResult;
 import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.MappingsTask;
 
@@ -24,17 +29,27 @@ import java.util.List;
 
 import static quilt.internal.util.ProviderUtil.toOptional;
 
+/**
+ * Takes the {@value DIFF_COMMAND} between the contents of two directories and saves the output to a
+ * {@linkplain #getDest() destination} file.<br>
+ * Both directories ({@link #getFirst() first} and {@link #getSecond() second}) must be non-empty.
+ * <p>
+ * Properties may be specified on the command line when invoking the task.
+ * <p>
+ * Requires the <a href="https://www.gnu.org/software/diffutils/">{@value DIFF_COMMAND_PHRASE}</a> be available to
+ * command line processes, usually via the {@code PATH} system environment variable.
+ */
+@CacheableTask
 public abstract class DiffDirectoriesTask extends Exec implements MappingsTask {
     public static final String GENERATE_DIFF_TASK_NAME = "generateDiff";
 
     public static final String DIFF_COMMAND = "diff";
 
-    private static final String EXIT_VALUE_1_ERROR =
-        "Process 'command '" + DIFF_COMMAND + "'' finished with non-zero exit value 1";
+    private static final String DIFF_COMMAND_PHRASE = DIFF_COMMAND + " command";
 
     @Option(
         option = "args",
-        description = "Additional args passed to the " + DIFF_COMMAND + " command."
+        description = "Additional args passed to the " + DIFF_COMMAND_PHRASE + "."
     )
     @Optional
     @Input
@@ -42,21 +57,25 @@ public abstract class DiffDirectoriesTask extends Exec implements MappingsTask {
 
     @Option(
         option = "first",
-        description = "The first file passed to the " + DIFF_COMMAND + " command."
+        description = "The first file passed to the " + DIFF_COMMAND_PHRASE + "."
     )
+    // required because Exec has @DisableCachingByDefault but this has @CacheableTask
+    @PathSensitive(PathSensitivity.ABSOLUTE)
     @InputDirectory
     public abstract DirectoryProperty getFirst();
 
     @Option(
         option = "second",
-        description = "The second file passed to the " + DIFF_COMMAND + " command."
+        description = "The second file passed to the " + DIFF_COMMAND_PHRASE + "."
     )
+    // required because Exec has @DisableCachingByDefault but this has @CacheableTask
+    @PathSensitive(PathSensitivity.ABSOLUTE)
     @InputDirectory
     public abstract DirectoryProperty getSecond();
 
     @Option(
         option = "dest",
-        description = "The location to save the " + DIFF_COMMAND + " command output to."
+        description = "The location to save the " + DIFF_COMMAND_PHRASE + " output to."
     )
     @OutputFile
     public abstract RegularFileProperty getDest();
@@ -66,10 +85,8 @@ public abstract class DiffDirectoriesTask extends Exec implements MappingsTask {
 
         this.setExecutable(DIFF_COMMAND);
 
-        this.getOutputs().cacheIf(
-            "Re-enable caching because Exec has @DisableCachingByDefault",
-            Specs.satisfyAll()
-        );
+        // exit value 1 means there was a difference between the inputs, so we do our own check
+        this.setIgnoreExitValue(true);
 
         this.getArgumentProviders().add(() -> {
             // require neither directory is empty so the diff isn't just the full contents of one of them
@@ -109,13 +126,15 @@ public abstract class DiffDirectoriesTask extends Exec implements MappingsTask {
             throw new GradleException("Failed to access destination file", e);
         }
 
-        try {
-            super.exec();
-        } catch (GradleException e) {
-            // ignore exit value 1 which just means there was a difference between the inputs
-            if (!e.getMessage().equals(EXIT_VALUE_1_ERROR)) {
-                throw new GradleException("Error executing " + DIFF_COMMAND, e);
-            }
+        super.exec();
+
+        final int exitValue = this.getExecutionResult().get().getExitValue();
+        switch (exitValue) {
+            case 0 -> this.getLogger().lifecycle(":no difference");
+            case 1 -> { }
+            default -> throw new GradleException(
+                "Process 'command '" + DIFF_COMMAND + "'' finished with unexpected exit value " + exitValue
+            );
         }
     }
 }
