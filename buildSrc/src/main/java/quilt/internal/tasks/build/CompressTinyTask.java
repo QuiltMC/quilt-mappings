@@ -7,14 +7,14 @@ import java.util.zip.GZIPOutputStream;
 
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
+import quilt.internal.tasks.ArtifactFileProducingTask;
 import quilt.internal.tasks.DefaultMappingsTask;
 
-public abstract class CompressTinyTask extends DefaultMappingsTask {
+public abstract class CompressTinyTask extends DefaultMappingsTask implements ArtifactFileProducingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -24,9 +24,6 @@ public abstract class CompressTinyTask extends DefaultMappingsTask {
 
     @InputFile
     public abstract RegularFileProperty getMappings();
-
-    @OutputFile
-    public abstract RegularFileProperty getCompressedTiny();
 
     public CompressTinyTask() {
         super(Groups.BUILD_MAPPINGS);
@@ -38,13 +35,13 @@ public abstract class CompressTinyTask extends DefaultMappingsTask {
 
         try (
             final var outputStream =
-                new GZIPOutputStream(new FileOutputStream(this.getCompressedTiny().get().getAsFile()));
-            final var fileInputStream = new FileInputStream(this.getMappings().get().getAsFile())
+                new GZIPOutputStream(new FileOutputStream(this.getArtifactFile().get().getAsFile()));
+            final var inputStream = new FileInputStream(this.getMappings().get().getAsFile())
         ) {
             final byte[] buffer = new byte[1024];
 
             int length;
-            while ((length = fileInputStream.read(buffer)) > 0) {
+            while ((length = inputStream.read(buffer)) > 0) {
                 outputStream.write(buffer, 0, length);
             }
 

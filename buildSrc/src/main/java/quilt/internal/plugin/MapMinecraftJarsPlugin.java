@@ -192,7 +192,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
             }
         );
 
-        final var tinyJar = tasks.register(
+        tasks.register(
             TinyJarTask.TINY_JAR_TASK_NAME,
             TinyJarTask.class,
             task -> {
@@ -215,11 +215,15 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
             task -> {
                 task.getMappings().convention(mergeTiny.flatMap(MergeTinyTask::getOutputMappings));
 
-                task.getCompressedTiny().convention(
-                    tinyJar.flatMap(TinyJarTask::getDestinationDirectory).map(dir ->
-                        dir.file(ARCHIVE_FILE_NAME_PREFIX + "-" + CompressTinyTask.TINY_CLASSIFIER + ".gz")
-                    )
-                );
+                task.getArtifactBaseName().convention(Constants.MAPPINGS_NAME);
+
+                task.getArtifactVersion().convention(Constants.MAPPINGS_VERSION);
+
+                task.getArtifactClassifier().convention(CompressTinyTask.TINY_CLASSIFIER);
+
+                task.getArtifactExtension().convention("gz");
+
+                task.getDestinationDirectory().convention(this.getLibsDir());
             }
         );
 

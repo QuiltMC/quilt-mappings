@@ -8,7 +8,6 @@ import org.jetbrains.annotations.Nullable;
 import org.quiltmc.launchermeta.version_manifest.VersionEntry;
 import org.quiltmc.launchermeta.version_manifest.VersionManifest;
 import quilt.internal.Constants;
-import quilt.internal.tasks.setup.DownloadWantedVersionManifestTask;
 
 import java.io.File;
 import java.io.IOException;

@@ -8,6 +8,7 @@ import quilt.internal.Constants.Groups;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 
+// TODO use getArgumentProviders instead of overriding exec
 @UntrackedTask(because =
     """
     These input and output to the same directory, which doesn't work with Gradle's task graph.
