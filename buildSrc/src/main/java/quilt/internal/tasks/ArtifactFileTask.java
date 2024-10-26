@@ -1,5 +1,6 @@
 package quilt.internal.tasks;
 
+import org.gradle.api.Task;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.model.ObjectFactory;
@@ -22,7 +23,7 @@ import javax.inject.Inject;
  * The path to the {@link #getArtifactFile() artifactFile} is built from the task's name and destination properties,
  * and {@link MavenPublication#artifact(Object)} can interpolate artifact metadata from the name's format.
  */
-public interface ArtifactFileProducingTask extends MappingsTask {
+public interface ArtifactFileTask extends Task {
     @Inject
     ObjectFactory getObjects();
 
@@ -63,9 +64,9 @@ public interface ArtifactFileProducingTask extends MappingsTask {
     default Provider<RegularFile> getArtifactFile() {
         // zzzzzip
         return this.getArtifactBaseName()
-            .zip(this.getArtifactAppendix().orElse(""), ArtifactFileProducingTask::dashJoin)
-            .zip(this.getArtifactVersion().orElse(""), ArtifactFileProducingTask::dashJoin)
-            .zip(this.getArtifactClassifier().orElse(""), ArtifactFileProducingTask::dashJoin)
+            .zip(this.getArtifactAppendix().orElse(""), ArtifactFileTask::dashJoin)
+            .zip(this.getArtifactVersion().orElse(""), ArtifactFileTask::dashJoin)
+            .zip(this.getArtifactClassifier().orElse(""), ArtifactFileTask::dashJoin)
             .zip(this.getArtifactExtension(), (name, ext) -> name + "." + ext)
             .zip(this.getDestinationDirectory(), (name, dest) -> dest.file(name));
     }

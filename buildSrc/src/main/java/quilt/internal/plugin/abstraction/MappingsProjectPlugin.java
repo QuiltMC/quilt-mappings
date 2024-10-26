@@ -59,10 +59,6 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
         return this.getBuildDir().dir("mappings");
     }
 
-    default Provider<Directory> getLibsDir() {
-        return this.getBuildDir().dir("libs");
-    }
-
     default Provider<Directory> getMinecraftDir() {
         return this.getBuildDir().dir("minecraft");
     }

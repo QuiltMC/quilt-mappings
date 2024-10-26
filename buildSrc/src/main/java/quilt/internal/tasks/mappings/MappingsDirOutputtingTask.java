@@ -3,9 +3,7 @@ package quilt.internal.tasks.mappings;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskCollection;
-import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
-import quilt.internal.plugin.QuiltMappingsPlugin;
 import quilt.internal.tasks.MappingsDirConsumingTask;
 import quilt.internal.tasks.MappingsTask;
 

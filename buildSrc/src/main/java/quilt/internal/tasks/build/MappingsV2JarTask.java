@@ -6,24 +6,30 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
+import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.jvm.tasks.Jar;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
-import quilt.internal.plugin.QuiltMappingsPlugin;
-import quilt.internal.tasks.MappingsTask;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
+import quilt.internal.tasks.QuiltMappingsArtifactTask;
 
 import javax.inject.Inject;
 
 /**
- * A task that creates a jar file with Quilt's v2 mapping format.
+ * Creates a jar file with Quilt's v2 mapping format.
  * <p>
- * {@link MapV2Plugin} {@linkplain TaskCollection#configureEach configures} some defaults.
+ * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures} a default
+ * {@link AbstractArchiveTask#getArchiveBaseName() archiveBaseName} and
+ * {@link AbstractArchiveTask#getArchiveVersion() archiveVersion}.<br>
+ * {@link MapV2Plugin} {@linkplain TaskCollection#configureEach configures} a default
+ * {@link MappingsV2JarTask#getUnpickMeta() unpickMeta} and
+ * {@link MappingsV2JarTask#getUnpickDefinition() unpickDefinition}.
  */
 
 // TODO why?
 @DisableCachingByDefault(because = "unknown")
-public abstract class MappingsV2JarTask extends Jar implements MappingsTask {
+public abstract class MappingsV2JarTask extends Jar implements QuiltMappingsArtifactTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */

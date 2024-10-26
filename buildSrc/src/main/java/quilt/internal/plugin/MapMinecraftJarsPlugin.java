@@ -26,8 +26,6 @@ import quilt.internal.tasks.setup.ExtractTinyMappingsTask;
 import quilt.internal.tasks.setup.MergeJarsTask;
 import quilt.internal.util.FileUtil;
 
-import static quilt.internal.plugin.QuiltMappingsBasePlugin.ARCHIVE_FILE_NAME_PREFIX;
-
 /**
  * {@linkplain TaskContainer#register Registers} tasks that map Minecraft jars.
  * <p>
@@ -197,10 +195,6 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
             TinyJarTask.class,
             task -> {
                 task.getMappings().convention(mergeTiny.flatMap(MergeTinyTask::getOutputMappings));
-
-                task.getArchiveFileName().convention(ARCHIVE_FILE_NAME_PREFIX + ".jar");
-
-                task.getDestinationDirectory().convention(this.getLibsDir());
             }
         );
 
@@ -220,10 +214,6 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
                 task.getArtifactVersion().convention(Constants.MAPPINGS_VERSION);
 
                 task.getArtifactClassifier().convention(CompressTinyTask.TINY_CLASSIFIER);
-
-                task.getArtifactExtension().convention("gz");
-
-                task.getDestinationDirectory().convention(this.getLibsDir());
             }
         );
 

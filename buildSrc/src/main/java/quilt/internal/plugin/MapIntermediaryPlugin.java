@@ -19,6 +19,7 @@ import quilt.internal.tasks.build.IntermediaryMappingsV2JarTask;
 import quilt.internal.tasks.build.MergeIntermediaryTask;
 import quilt.internal.tasks.build.MergeTinyV2Task;
 import quilt.internal.tasks.build.RemoveIntermediaryTask;
+import quilt.internal.tasks.jarmapping.MapJarTask;
 import quilt.internal.tasks.setup.ExtractTinyIntermediaryMappingsTask;
 import quilt.internal.tasks.setup.ExtractTinyMappingsTask;
 import quilt.internal.tasks.setup.IntermediaryDependantTask;
@@ -123,9 +124,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
         intermediaryV2MappingsJar.configure(task -> {
             task.getMappings().convention(removeIntermediary.flatMap(RemoveIntermediaryTask::getOutputMappings));
 
-            task.getArchiveFileName().convention(
-                QuiltMappingsBasePlugin.ARCHIVE_FILE_NAME_PREFIX + "-" + IntermediaryMappingsV2JarTask.CLASSIFIER + ".jar"
-            );
+            task.getArchiveClassifier().convention(IntermediaryMappingsV2JarTask.CLASSIFIER);
         });
 
         final var intermediaryV2MergedMappingsJar = tasks.register(
@@ -136,9 +135,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
         intermediaryV2MergedMappingsJar.configure(task -> {
             task.getMappings().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
 
-            task.getArchiveFileName().convention(
-                QuiltMappingsBasePlugin.ARCHIVE_FILE_NAME_PREFIX + "-" + IntermediaryMappingsV2JarTask.MERGED_CLASSIFIER + ".jar"
-            );
+            task.getArchiveClassifier().convention(IntermediaryMappingsV2JarTask.MERGED_CLASSIFIER);
         });
 
         tasks.register(

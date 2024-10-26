@@ -5,14 +5,17 @@ import org.gradle.api.Task;
 import org.gradle.api.services.BuildServiceRegistry;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
+import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.enigma.api.service.JarIndexerService;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
+import quilt.internal.tasks.ArtifactFileTask;
 import quilt.internal.tasks.EnigmaProfileConsumingTask;
 import quilt.internal.tasks.MappingsDirConsumingTask;
+import quilt.internal.tasks.QuiltMappingsArtifactTask;
 import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
 import quilt.internal.util.EnigmaProfileService;
 
@@ -57,11 +60,18 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
  *              <li> passes the {@link Task#getOutputs() outputs} of each {@link MappingsDirOutputtingTask}
  *                   to {@link Task#getInputs() inputs}
  *          </ul>
+ *    <li> {@linkplain TaskCollection#configureEach configures} the following defaults for
+ *         {@link QuiltMappingsArtifactTask}s that subclass {@link ArtifactFileTask}/{@link AbstractArchiveTask}:
+ *         <ul>
+ *             <li> {@link ArtifactFileTask#getArtifactBaseName() artifactBaseName}/{@link
+ *                  AbstractArchiveTask#getArchiveBaseName() archiveBaseName}: {@value Constants#MAPPINGS_NAME}
+ *             <li> {@link ArtifactFileTask#getArtifactVersion() artifactVersion}/{@link
+ *                  AbstractArchiveTask#getArchiveVersion() archiveVersion}:
+ *                  {@link Constants#MAPPINGS_VERSION MAPPINGS_VERSION}
+ *         </ul>
  */
 public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
     static final String MAPPINGS_NAME_PREFIX = Constants.MAPPINGS_NAME + "-";
-    // TODO extract QuiltMappingsArchiveTask interface and apply these there
-    static final String ARCHIVE_FILE_NAME_PREFIX = MAPPINGS_NAME_PREFIX + Constants.MAPPINGS_VERSION;
 
     @Nullable
     private QuiltMappingsExtension ext;
@@ -130,6 +140,31 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
             "No mappings directory specified. " +
                 "A directory must be specified to use a " + MappingsDirConsumingTask.class.getSimpleName() + "."
         );
+
+        tasks.withType(ArtifactFileTask.class).configureEach(task -> {
+            this.provideDefaultError(
+                task.getDestinationDirectory(),
+                "No destination directory specified"
+            );
+
+            task.getDestinationDirectory().set(this.getBuildDir().dir("libs"));
+        });
+
+        tasks.withType(ArtifactFileTask.class)
+            .matching(QuiltMappingsArtifactTask::isInstance)
+            .configureEach(task -> {
+                task.getArtifactBaseName().convention(Constants.MAPPINGS_NAME);
+
+                task.getArtifactVersion().convention(Constants.MAPPINGS_VERSION);
+            });
+
+        tasks.withType(AbstractArchiveTask.class)
+            .matching(QuiltMappingsArtifactTask::isInstance)
+            .configureEach(task -> {
+                task.getArchiveBaseName().convention(Constants.MAPPINGS_NAME);
+
+                task.getArchiveVersion().convention(Constants.MAPPINGS_VERSION);
+            });
     }
 
     public QuiltMappingsExtension getExt() {
