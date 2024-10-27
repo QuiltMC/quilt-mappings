@@ -12,11 +12,11 @@ import org.quiltmc.enigma.api.service.JarIndexerService;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
-import quilt.internal.tasks.ArtifactFileTask;
-import quilt.internal.tasks.EnigmaProfileConsumingTask;
-import quilt.internal.tasks.MappingsDirConsumingTask;
-import quilt.internal.tasks.QuiltMappingsArtifactTask;
-import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
+import quilt.internal.task.ArtifactFileTask;
+import quilt.internal.task.EnigmaProfileConsumingTask;
+import quilt.internal.task.MappingsDirConsumingTask;
+import quilt.internal.task.QuiltMappingsArtifactTask;
+import quilt.internal.task.mappings.MappingsDirOutputtingTask;
 import quilt.internal.util.EnigmaProfileService;
 
 import java.util.Collection;

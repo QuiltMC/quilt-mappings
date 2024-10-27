@@ -9,9 +9,9 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.plugins.ExtensionContainer;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
-import quilt.internal.tasks.EnigmaProfileConsumingTask;
-import quilt.internal.tasks.MappingsDirConsumingTask;
-import quilt.internal.tasks.mappings.MappingsDirOutputtingTask;
+import quilt.internal.task.EnigmaProfileConsumingTask;
+import quilt.internal.task.MappingsDirConsumingTask;
+import quilt.internal.task.mappings.MappingsDirOutputtingTask;
 import quilt.internal.util.EnigmaProfileService;
 
 import javax.inject.Inject;

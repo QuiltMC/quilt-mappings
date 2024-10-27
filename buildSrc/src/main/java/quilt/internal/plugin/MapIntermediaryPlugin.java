@@ -14,15 +14,14 @@ import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
-import quilt.internal.tasks.build.BuildIntermediaryTask;
-import quilt.internal.tasks.build.IntermediaryMappingsV2JarTask;
-import quilt.internal.tasks.build.MergeIntermediaryTask;
-import quilt.internal.tasks.build.MergeTinyV2Task;
-import quilt.internal.tasks.build.RemoveIntermediaryTask;
-import quilt.internal.tasks.jarmapping.MapJarTask;
-import quilt.internal.tasks.setup.ExtractTinyIntermediaryMappingsTask;
-import quilt.internal.tasks.setup.ExtractTinyMappingsTask;
-import quilt.internal.tasks.setup.IntermediaryDependantTask;
+import quilt.internal.task.build.BuildIntermediaryTask;
+import quilt.internal.task.build.IntermediaryMappingsV2JarTask;
+import quilt.internal.task.build.MergeIntermediaryTask;
+import quilt.internal.task.build.MergeTinyV2Task;
+import quilt.internal.task.build.RemoveIntermediaryTask;
+import quilt.internal.task.setup.ExtractTinyIntermediaryMappingsTask;
+import quilt.internal.task.setup.ExtractTinyMappingsTask;
+import quilt.internal.task.setup.IntermediaryDependantTask;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks related to

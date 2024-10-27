@@ -14,15 +14,15 @@ import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
-import quilt.internal.tasks.build.AddProposedMappingsTask;
-import quilt.internal.tasks.build.EraseByteCodeTask;
-import quilt.internal.tasks.build.GenFakeSourceTask;
-import quilt.internal.tasks.build.MergeTinyV2Task;
-import quilt.internal.tasks.decompile.DecompileVineflowerTask;
-import quilt.internal.tasks.jarmapping.MapNamedJarTask;
-import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
-import quilt.internal.tasks.setup.JavadocJarTask;
-import quilt.internal.tasks.setup.SourcesJarTask;
+import quilt.internal.task.build.AddProposedMappingsTask;
+import quilt.internal.task.build.EraseByteCodeTask;
+import quilt.internal.task.build.GenFakeSourceTask;
+import quilt.internal.task.build.MergeTinyV2Task;
+import quilt.internal.task.decompile.DecompileVineflowerTask;
+import quilt.internal.task.jarmapping.MapNamedJarTask;
+import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.task.setup.JavadocJarTask;
+import quilt.internal.task.setup.SourcesJarTask;
 
 /**
  * {@link TaskContainer#register Registers} tasks that process jars and mappings output by tasks from other plugins.

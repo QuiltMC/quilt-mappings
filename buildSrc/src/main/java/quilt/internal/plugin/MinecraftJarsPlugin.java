@@ -8,13 +8,13 @@ import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
-import quilt.internal.tasks.VersionDownloadInfoConsumingTask;
-import quilt.internal.tasks.setup.DownloadMinecraftJarsTask;
-import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
-import quilt.internal.tasks.setup.DownloadVersionsManifestTask;
-import quilt.internal.tasks.setup.DownloadWantedVersionManifestTask;
-import quilt.internal.tasks.setup.ExtractServerJarTask;
-import quilt.internal.tasks.setup.MergeJarsTask;
+import quilt.internal.task.VersionDownloadInfoConsumingTask;
+import quilt.internal.task.setup.DownloadMinecraftJarsTask;
+import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.task.setup.DownloadVersionsManifestTask;
+import quilt.internal.task.setup.DownloadWantedVersionManifestTask;
+import quilt.internal.task.setup.ExtractServerJarTask;
+import quilt.internal.task.setup.MergeJarsTask;
 import quilt.internal.util.VersionDownloadInfo;
 
 /**

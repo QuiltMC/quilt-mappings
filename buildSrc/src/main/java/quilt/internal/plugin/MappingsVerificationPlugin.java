@@ -8,11 +8,11 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
-import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
-import quilt.internal.tasks.lint.Checker;
-import quilt.internal.tasks.lint.DownloadDictionaryFileTask;
-import quilt.internal.tasks.lint.FindDuplicateMappingFilesTask;
-import quilt.internal.tasks.lint.MappingLintTask;
+import quilt.internal.task.jarmapping.MapPerVersionMappingsJarTask;
+import quilt.internal.task.lint.Checker;
+import quilt.internal.task.lint.DownloadDictionaryFileTask;
+import quilt.internal.task.lint.FindDuplicateMappingFilesTask;
+import quilt.internal.task.lint.MappingLintTask;
 
 /**
  * {@link TaskContainer#register Registers} tasks that verify the mappings in {@link QuiltMappingsExtension}'s

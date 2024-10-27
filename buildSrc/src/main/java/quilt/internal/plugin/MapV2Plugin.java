@@ -14,19 +14,19 @@ import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
-import quilt.internal.tasks.build.AddProposedMappingsTask;
-import quilt.internal.tasks.build.InvertPerVersionMappingsTask;
-import quilt.internal.tasks.build.MappingsV2JarTask;
-import quilt.internal.tasks.build.MergeTinyV2Task;
-import quilt.internal.tasks.jarmapping.MapNamedJarTask;
-import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask;
-import quilt.internal.tasks.setup.ConstantsJarTask;
-import quilt.internal.tasks.setup.DownloadMinecraftLibrariesTask;
-import quilt.internal.tasks.unpick.CombineUnpickDefinitionsTask;
-import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask;
-import quilt.internal.tasks.unpick.UnpickJarTask;
-import quilt.internal.tasks.unpick.gen.OpenGlConstantUnpickGenTask;
-import quilt.internal.tasks.unpick.gen.UnpickGenTask;
+import quilt.internal.task.build.AddProposedMappingsTask;
+import quilt.internal.task.build.InvertPerVersionMappingsTask;
+import quilt.internal.task.build.MappingsV2JarTask;
+import quilt.internal.task.build.MergeTinyV2Task;
+import quilt.internal.task.jarmapping.MapNamedJarTask;
+import quilt.internal.task.jarmapping.MapPerVersionMappingsJarTask;
+import quilt.internal.task.setup.ConstantsJarTask;
+import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.task.unpick.CombineUnpickDefinitionsTask;
+import quilt.internal.task.unpick.RemapUnpickDefinitionsTask;
+import quilt.internal.task.unpick.UnpickJarTask;
+import quilt.internal.task.unpick.gen.OpenGlConstantUnpickGenTask;
+import quilt.internal.task.unpick.gen.UnpickGenTask;
 
 /**
  * {@link TaskContainer#register Registers} tasks that output mappings in Quilt's v2 format.
