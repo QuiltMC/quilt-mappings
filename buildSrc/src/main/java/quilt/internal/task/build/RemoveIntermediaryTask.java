@@ -6,10 +6,14 @@ import net.fabricmc.mappingio.adapter.MappingSourceNsSwitch;
 import net.fabricmc.mappingio.format.MappingFormat;
 import net.fabricmc.mappingio.format.tiny.Tiny2FileWriter;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
+
+import org.gradle.api.Task;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants.Groups;
@@ -24,6 +28,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 
+/**
+ * TODO is this (and the name) accurate? It looks like it actually replaces official with intermediary.<br><br>
+ * Removes the {@value Namespaces#INTERMEDIARY} namespace from the {@link #getInput() input} mappings.
+ *
+ * @see MapIntermediaryPlugin MapIntermediaryPlugin's configureEach
+ */
 public abstract class RemoveIntermediaryTask extends DefaultMappingsTask implements IntermediaryDependantTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapIntermediaryPlugin}.

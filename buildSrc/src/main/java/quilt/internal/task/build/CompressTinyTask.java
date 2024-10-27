@@ -19,10 +19,8 @@ import quilt.internal.task.QuiltMappingsArtifactTask;
 
 /**
  * Compresses the input {@link #getMappings() mappings} using GZip.
- * <p>
- * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures} a default
- * {@link ArtifactFileTask#getArtifactBaseName() archiveBaseName} and
- * {@link ArtifactFileTask#getArtifactVersion() archiveVersion}.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
 public abstract class CompressTinyTask extends DefaultMappingsTask implements
         ArtifactFileTask, QuiltMappingsArtifactTask {

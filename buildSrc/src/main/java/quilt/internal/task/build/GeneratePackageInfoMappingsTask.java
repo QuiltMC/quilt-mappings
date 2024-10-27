@@ -15,6 +15,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.mappings.MappingsDirOutputtingTask;
 
@@ -30,6 +31,9 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+/**
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ */
 public abstract class GeneratePackageInfoMappingsTask extends DefaultMappingsTask implements MappingsDirOutputtingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.

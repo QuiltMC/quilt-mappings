@@ -16,8 +16,8 @@ import quilt.internal.task.MappingsTask;
 
 /**
  * Unpicks a jar file using {@link daomephsta.unpick.cli.Main}.
- * <p>
- * {@link MapV2Plugin} {@linkplain TaskCollection#configureEach configures} some defaults.
+ *
+ * @see MapV2Plugin MapV2Plugin's configuration
  */
 public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
     /**

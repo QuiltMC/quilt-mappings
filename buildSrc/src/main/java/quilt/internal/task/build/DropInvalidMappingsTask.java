@@ -8,9 +8,17 @@ import org.quiltmc.enigma.command.DropInvalidMappingsCommand;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 
+/**
+ * Removes any invalid mappings found in the passed {@link #getMappingsDir() mappingsDir}.
+ * <p>
+ * Invalid mappings are usually the result of differences between Minecraft versions.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ */
 public abstract class DropInvalidMappingsTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.

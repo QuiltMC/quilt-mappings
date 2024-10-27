@@ -13,10 +13,8 @@ import quilt.internal.task.QuiltMappingsArtifactTask;
 
 /**
  * Creates a jar file with the input {@link #getMappings() mappings} located at {@value JAR_MAPPINGS_PATH}.
- * <p>
- * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures} a default
- * {@link AbstractArchiveTask#getArchiveBaseName() archiveBaseName} and
- * {@link AbstractArchiveTask#getArchiveVersion() archiveVersion}.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
 public abstract class TinyJarTask extends Jar implements QuiltMappingsArtifactTask {
     /**

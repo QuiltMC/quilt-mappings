@@ -16,9 +16,9 @@ import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.JarRemapper;
 
 /**
- * Creates a jar file by applying mappings to an input jar.
- * <p>
- * {@link MapMinecraftJarsPlugin} {@linkplain TaskCollection#configureEach configures} some defaults.
+ * Copies a {@linkplain #getInputJar() Jar} and applies {@linkplain #getMappingsFile() mappings}.
+ *
+ * @see MapMinecraftJarsPlugin MapMinecraftJarsPlugin's configureEach
  */
 public abstract class MapJarTask extends DefaultMappingsTask {
     public static final Map<String, String> JAVAX_TO_JETBRAINS = Map.of(

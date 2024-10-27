@@ -17,9 +17,8 @@ import quilt.internal.task.MappingsTask;
  * An implementing task should <i>only</i> output to files within {@link #getMappingsDir() mappingsDir} and should
  * <b>not</b> output to the whole directory unless it is an {@link org.gradle.api.tasks.UntrackedTask @UntrackedTask}
  * whose output is not intended for consumption by other tasks.
- * <p>
- * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures}
- * a default {@link #getMappingsDir mappingsDir}.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
 public interface MappingsDirOutputtingTask extends MappingsTask {
     @Internal(

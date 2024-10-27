@@ -5,6 +5,9 @@ import quilt.internal.Constants.Groups;
 import quilt.internal.Constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 
+/**
+ * @see MapMinecraftJarsPlugin MapMinecraftJarsPlugin's configureEach
+ */
 public abstract class MapPerVersionMappingsJarTask extends MapJarTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.

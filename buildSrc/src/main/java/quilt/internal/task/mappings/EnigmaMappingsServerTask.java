@@ -8,6 +8,7 @@ import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.options.Option;
 import org.quiltmc.enigma.network.DedicatedEnigmaServer;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.plugin.QuiltMappingsPlugin;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  *     <li> {@value QuiltMappingsPlugin#ENIGMA_SERVER_ARGS_PROP}
  *     for any additional command line args
  * </ul>
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
 public abstract class EnigmaMappingsServerTask extends AbstractEnigmaMappingsTask {
 	public static final String MAPPINGS_SERVER_TASK_NAME = "mappingsServer";

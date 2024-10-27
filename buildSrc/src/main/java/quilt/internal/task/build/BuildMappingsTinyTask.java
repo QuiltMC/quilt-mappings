@@ -14,10 +14,14 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants.Groups;
 import quilt.internal.Constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 import quilt.internal.util.ProviderUtil;
 
+/**
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ */
 public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.

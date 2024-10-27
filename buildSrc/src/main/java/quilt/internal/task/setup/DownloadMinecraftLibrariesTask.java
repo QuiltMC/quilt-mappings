@@ -24,6 +24,11 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Downloads the Minecraft's libraries for the passed {@linkplain #getVersionDownloadInfo version}.
+ *
+ * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
+ */
 // TODO why?
 @DisableCachingByDefault(because = "unknown")
 public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask implements

@@ -11,9 +11,8 @@ import quilt.internal.plugin.QuiltMappingsBasePlugin;
  * <p>
  * Has no effect if the implementing task isn't a subclass of either
  * {@link ArtifactFileTask} or {@link AbstractArchiveTask}.
- * <p>
- * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach(Action) configures}
- * the base name and the version.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
 public interface QuiltMappingsArtifactTask extends MappingsTask {
     static boolean isInstance(Task task) {

@@ -1,8 +1,14 @@
 package quilt.internal.task.setup;
 
+import org.gradle.api.Task;
+import org.gradle.api.specs.Spec;
+import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.plugin.MapIntermediaryPlugin;
 
+/**
+ * @see MapIntermediaryPlugin MapIntermediaryPlugin's configureEach
+ */
 public abstract class ExtractTinyIntermediaryMappingsTask extends ExtractTinyMappingsTask
         implements IntermediaryDependantTask {
     /**

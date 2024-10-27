@@ -5,9 +5,13 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.UntrackedTask;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 
+/**
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ */
 // TODO use getArgumentProviders instead of overriding exec
 @UntrackedTask(because =
     """

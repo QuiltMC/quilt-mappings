@@ -38,10 +38,18 @@ import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.EnigmaProfileConsumingTask;
+import quilt.internal.util.EnigmaProfileService;
 import quilt.internal.util.ProviderUtil;
 
+/**
+ * Runs {@link Enigma} to add any proposed mappings from proposers configured in the passed
+ * {@linkplain #getEnigmaProfileService() Enigma profile}.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ */
 public abstract class AddProposedMappingsTask extends DefaultMappingsTask implements EnigmaProfileConsumingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.

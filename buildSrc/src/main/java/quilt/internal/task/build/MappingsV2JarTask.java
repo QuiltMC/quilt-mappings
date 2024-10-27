@@ -4,9 +4,7 @@ import java.util.Map;
 
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
-import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.jvm.tasks.Jar;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants.Groups;
@@ -18,13 +16,9 @@ import javax.inject.Inject;
 
 /**
  * Creates a jar file with Quilt's v2 mapping format.
- * <p>
- * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures} a default
- * {@link AbstractArchiveTask#getArchiveBaseName() archiveBaseName} and
- * {@link AbstractArchiveTask#getArchiveVersion() archiveVersion}.<br>
- * {@link MapV2Plugin} {@linkplain TaskCollection#configureEach configures} a default
- * {@link MappingsV2JarTask#getUnpickMeta() unpickMeta} and
- * {@link MappingsV2JarTask#getUnpickDefinition() unpickDefinition}.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ * @see MapV2Plugin MapV2Plugin's configureEach
  */
 
 // TODO why?

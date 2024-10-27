@@ -13,8 +13,8 @@ import quilt.internal.util.EnigmaProfileService;
 
 /**
  * A task that takes an {@link EnigmaProfile} as input.
- * <p>
- * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures} default values.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
 public interface EnigmaProfileConsumingTask extends MappingsTask {
     @Internal("@ServiceReference is @Incubating")

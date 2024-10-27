@@ -50,9 +50,19 @@ import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MappingsVerificationPlugin;
+import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 
+/**
+ * Runs the mappings in the passed {@link #getMappingsDir() mappingsDir} through the passed {@link #getCheckers()}.<br>
+ * The task fails if any {@link Checker}'s
+ * {@link Checker#check(Entry, EntryMapping, Function, ErrorReporter) check} fails.
+ * <p>
+ * Spelling and naming convention {@link Checker}s are amongst the {@link Checker#DEFAULT_CHECKERS DEFAULT_CHECKERS}.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ */
 public abstract class MappingLintTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MappingsVerificationPlugin}.

@@ -16,6 +16,11 @@ import quilt.internal.task.VersionDownloadInfoConsumingTask;
 import quilt.internal.util.DownloadUtil;
 import quilt.internal.util.VersionDownloadInfo;
 
+/**
+ * Downloads the Minecraft client and server jars for the passed {@linkplain #getVersionDownloadInfo version}.
+ *
+ * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
+ */
 public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask implements
         VersionDownloadInfoConsumingTask {
     /**

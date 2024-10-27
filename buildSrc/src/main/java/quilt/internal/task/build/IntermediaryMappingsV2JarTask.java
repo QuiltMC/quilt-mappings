@@ -1,11 +1,10 @@
 package quilt.internal.task.build;
 
-import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
-import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import quilt.internal.Constants;
 import quilt.internal.Constants.Namespaces;
 import quilt.internal.plugin.MapIntermediaryPlugin;
+import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.setup.IntermediaryDependantTask;
 
@@ -13,10 +12,10 @@ import javax.inject.Inject;
 
 /**
  * Creates a jar file containing {@value Constants#INTERMEDIARY_MAPPINGS_NAME} mappings in Quilt's v2 mapping format.
- * <p>
- * {@link QuiltMappingsBasePlugin} {@linkplain TaskCollection#configureEach configures} a default
- * {@link AbstractArchiveTask#getArchiveBaseName() archiveBaseName} and
- * {@link AbstractArchiveTask#getArchiveVersion() archiveVersion}.
+ *
+ * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
+ * @see MapIntermediaryPlugin MapIntermediaryPlugin's configureEach
+ * @see MapV2Plugin MapV2Plugin's configureEach
  */
 public abstract class IntermediaryMappingsV2JarTask extends MappingsV2JarTask implements IntermediaryDependantTask {
     /**

@@ -1,6 +1,7 @@
 package quilt.internal.plugin;
 
 import org.gradle.api.Project;
+import org.gradle.api.Task;
 import org.gradle.api.plugins.PluginContainer;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
@@ -25,7 +26,8 @@ import quilt.internal.task.lint.MappingLintTask;
  * </ul>
  *
  * If {@link LifecycleBasePlugin} is applied, configures the {@value LifecycleBasePlugin#CHECK_TASK_NAME} task
- * to depend on the {@value MappingLintTask#MAPPING_LINT_TASK_NAME} task, which in turn depends on the
+ * to {@linkplain Task#dependsOn(Object...) depend on} the {@value MappingLintTask#MAPPING_LINT_TASK_NAME} task,
+ * which in turn {@linkplain Task#dependsOn(Object...) depend on} the
  * {@value FindDuplicateMappingFilesTask#FIND_DUPLICATE_MAPPING_FILES_TASK_NAME} task.
  */
 public abstract class MappingsVerificationPlugin implements MappingsProjectPlugin {
