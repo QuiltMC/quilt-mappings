@@ -201,12 +201,26 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 			COMMENT the effect to set
 		ARG 2 source
 			COMMENT the source entity or {@code null} for non-entity sources
-	METHOD m_emvhacmb isBeingSeenBy (Lnet/minecraft/unmapped/C_usxaxydn;DZZLjava/util/function/Predicate;[Ljava/util/function/DoubleSupplier;)Z
-		ARG 2 rotationCheckOffset
-		ARG 4 adjustToDistance
+	METHOD m_emvhacmb isSeenBy (Lnet/minecraft/unmapped/C_usxaxydn;DZZLjava/util/function/Predicate;[Ljava/util/function/DoubleSupplier;)Z
+		COMMENT @return {@code true} if the passed {@code entity} sees this entity and
+		COMMENT isn't {@code filter}ed, or {@code false} otherwise
+		ARG 1
+			COMMENT the entity to check
+		ARG 2 tolerance
+			COMMENT the maximum allowable angle between the passed {@code entity}'s
+			COMMENT rotation and the vector between the entities
+		ARG 4 accountForDistance
+			COMMENT whether to reduce the {@code tolerance} based on distance
 		ARG 5 visualShape
-		ARG 6 predicate
-		ARG 7 entityEyeYChecks
+			COMMENT whether to check the passed {@code entity}'s
+			COMMENT {@link net.minecraft.world.RaycastContext.ShapeType#VISUAL VISUAL} shape
+			COMMENT instead of its
+			COMMENT {@link net.minecraft.world.RaycastContext.ShapeType#COLLIDER COLLIDER} shape
+		ARG 6 filter
+			COMMENT an additional check to exclude entities whose gaze needn't be considered
+		ARG 7 eyeYsToCheck
+			COMMENT suppliers of eye Ys that should be checked;
+			COMMENT the first that results in a vector within the tolerance will be used
 	METHOD m_eobwecax dropXp (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 2 attacker
 	METHOD m_epkzhkqg deserializeBrain (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_rjqjaxef;
