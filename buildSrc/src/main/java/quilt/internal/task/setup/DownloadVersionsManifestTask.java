@@ -6,7 +6,7 @@ import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.SimpleDownloadTask;
-import quilt.internal.util.SerializableVersionEntry;
+import quilt.internal.util.serializable.SerializableVersionEntry;
 
 @DisableCachingByDefault(because = "Output depends on a remote source that may change.")
 public abstract class DownloadVersionsManifestTask extends SimpleDownloadTask {

@@ -6,23 +6,24 @@ import java.io.IOException;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
+import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.quiltmc.launchermeta.version.v1.DownloadableFile;
+import org.quiltmc.launchermeta.version.v1.Downloads;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.DefaultMappingsTask;
-import quilt.internal.task.VersionDownloadInfoConsumingTask;
+import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.util.DownloadUtil;
-import quilt.internal.util.VersionDownloadInfo;
 
 /**
- * Downloads the Minecraft client and server jars for the passed {@linkplain #getVersionDownloadInfo version}.
+ * Downloads the Minecraft client and server jars for the passed {@linkplain #getVersionParser version}.
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
-public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask implements
-        VersionDownloadInfoConsumingTask {
+public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask implements VersionParserConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
      * {@link MinecraftJarsPlugin MinecraftJarsPlugin}.
@@ -39,7 +40,7 @@ public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask impl
         super(Groups.SETUP);
 
         // TODO I'm not sure that this is necessary
-        //  VersionDownloadInfoConsumingTasks indirectly depend on
+        //  VersionParserConsumingTasks indirectly depend on
         //  DownloadVersionManifestFileTask which has @DisableCachingByDefault.
         //  I'm not sure if gradle considers output files to have been updated when they're overwritten with
         //  the same content.
@@ -49,11 +50,11 @@ public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask impl
             try {
                 final File clientJar = this.getClientJar().get().getAsFile();
                 final File serverBootstrapJar = this.getServerBootstrapJar().get().getAsFile();
-                final VersionDownloadInfo info = this.getVersionDownloadInfo().get();
+                final Downloads downloads = this.getVersionParser().get().get().getDownloads();
 
                 return clientJar.exists() && serverBootstrapJar.exists()
-                    && validateChecksum(clientJar, info.getClient().getSha1())
-                    && validateChecksum(serverBootstrapJar, info.getServer().getSha1());
+                    && validateChecksum(clientJar, downloads.getClient().getSha1())
+                    && validateChecksum(serverBootstrapJar, getServerOrThrow(downloads).getSha1());
             } catch (Exception e) {
                 return false;
             }
@@ -64,21 +65,26 @@ public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask impl
     public void download() {
         this.getLogger().lifecycle(":downloading minecraft jars");
 
-        final VersionDownloadInfo info = this.getVersionDownloadInfo().get();
+        final Downloads downloads = this.getVersionParser().get().get().getDownloads();
 
         DownloadUtil.download(
-            info.getClient().getUrl(),
+            downloads.getClient().getUrl(),
             this.getClientJar().get().getAsFile(),
             false,
             this.getLogger()
         );
 
         DownloadUtil.download(
-            info.getServer().getUrl(),
+            getServerOrThrow(downloads).getUrl(),
             this.getServerBootstrapJar().get().getAsFile(),
             false,
             this.getLogger()
         );
+    }
+
+    private static DownloadableFile getServerOrThrow(Downloads downloads) {
+        return downloads.getServer()
+            .orElseThrow(() -> new GradleException("Version has no server download"));
     }
 
     @SuppressWarnings("deprecation")

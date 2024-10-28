@@ -3,14 +3,14 @@ package quilt.internal.task;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import quilt.internal.plugin.MinecraftJarsPlugin;
-import quilt.internal.util.VersionDownloadInfo;
+import quilt.internal.util.serializable.VersionParser;
 
 /**
- * A task that takes {@link VersionDownloadInfo} as input.
+ * A task that takes {@link VersionParser} as input.
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
-public interface VersionDownloadInfoConsumingTask extends MappingsTask {
+public interface VersionParserConsumingTask extends MappingsTask {
     @Input
-    Property<VersionDownloadInfo> getVersionDownloadInfo();
+    Property<VersionParser> getVersionParser();
 }

@@ -1,4 +1,4 @@
-package quilt.internal.util;
+package quilt.internal.util.serializable;
 
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;

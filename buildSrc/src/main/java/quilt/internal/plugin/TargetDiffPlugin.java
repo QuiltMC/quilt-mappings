@@ -109,7 +109,8 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
             );
 
             // put mapped provider in a property so all tasks use the same cached value
-            final Provider<String> targetVersion = this.getObjects().property(String.class).convention(
+            final Property<String> targetVersion = this.getObjects().property(String.class);
+            targetVersion.set(
                 downloadTargetMetaFile.flatMap(DownloadTargetMetaFileTask::provideTargetVersion)
             );
 

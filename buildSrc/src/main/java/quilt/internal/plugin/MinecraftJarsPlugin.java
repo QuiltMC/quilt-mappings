@@ -2,20 +2,21 @@ package quilt.internal.plugin;
 
 import org.gradle.api.Project;
 import org.gradle.api.file.Directory;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
-import quilt.internal.task.VersionDownloadInfoConsumingTask;
+import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.task.setup.DownloadMinecraftJarsTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.task.setup.DownloadVersionsManifestTask;
 import quilt.internal.task.setup.DownloadWantedVersionManifestTask;
 import quilt.internal.task.setup.ExtractServerJarTask;
 import quilt.internal.task.setup.MergeJarsTask;
-import quilt.internal.util.VersionDownloadInfo;
+import quilt.internal.util.serializable.VersionParser;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks that download and extract
@@ -26,15 +27,14 @@ import quilt.internal.util.VersionDownloadInfo;
  *     <li> {@link TaskContainer#register registers} {@value MergeJarsTask#MERGE_JARS_TASK_NAME}
  *          which merges the client and server jars
  *     <li> {@linkplain org.gradle.api.tasks.TaskCollection#configureEach configures} the default value of
- *          {@link VersionDownloadInfoConsumingTask}s'
- *          {@link VersionDownloadInfoConsumingTask#getVersionDownloadInfo versionDownloadInfo} to
+ *          {@link VersionParserConsumingTask}s'
+ *          {@link VersionParserConsumingTask#getVersionParser versionParser} to
  *          {@value DownloadWantedVersionManifestTask#DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME}'s
- *          {@linkplain DownloadWantedVersionManifestTask#provideVersionDownloadInfo provided}
- *          {@link VersionDownloadInfo}
+ *          {@linkplain DownloadWantedVersionManifestTask#provideVersionParser provided}
+ *          {@link VersionParser}
  * </ul>
  */
 public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPlugin<MinecraftJarsPlugin.Tasks> {
-
     @Override
     protected Tasks applyImpl(@NotNull Project project) {
         final Provider<Directory> minecraftDir = this.getMinecraftDir();
@@ -65,13 +65,13 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             );
 
             // put mapped provider in a property so all tasks use the same cached value
-            final Provider<VersionDownloadInfo> versionDownloadInfo =
-                this.getObjects().property(VersionDownloadInfo.class).convention(
-                    downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::provideVersionDownloadInfo)
-                );
+            final Property<VersionParser> versionParser = this.getObjects().property(VersionParser.class);
+            versionParser.set(
+                downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::provideVersionParser)
+            );
 
-            tasks.withType(VersionDownloadInfoConsumingTask.class).configureEach(task -> {
-                task.getVersionDownloadInfo().convention(versionDownloadInfo);
+            tasks.withType(VersionParserConsumingTask.class).configureEach(task -> {
+                task.getVersionParser().convention(versionParser);
             });
         }
 

@@ -1,4 +1,4 @@
-package quilt.internal.util;
+package quilt.internal.util.serializable;
 
 import org.quiltmc.launchermeta.version.v1.DownloadableFile;
 

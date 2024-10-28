@@ -10,13 +10,15 @@ import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.OutputFiles;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.work.DisableCachingByDefault;
+import org.quiltmc.launchermeta.version.v1.DownloadableFile;
+import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.DefaultMappingsTask;
-import quilt.internal.task.VersionDownloadInfoConsumingTask;
+import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.util.DownloadUtil;
-import quilt.internal.util.VersionDownloadInfo;
+import quilt.internal.util.serializable.VersionParser;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -25,14 +27,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Downloads the Minecraft's libraries for the passed {@linkplain #getVersionDownloadInfo version}.
+ * Downloads the Minecraft's libraries for the passed {@linkplain #getVersionParser version}.
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
 // TODO why?
 @DisableCachingByDefault(because = "unknown")
 public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask implements
-        VersionDownloadInfoConsumingTask {
+    VersionParserConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
      * {@link MinecraftJarsPlugin MinecraftJarsPlugin}.
@@ -65,7 +67,9 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
         // put this in a property to cache it
         final Provider<Map<NamedUrl, RegularFile>> artifactsByNamedUrl =
             this.getObjects().mapProperty(NamedUrl.class, RegularFile.class).convention(
-                this.getVersionDownloadInfo().map(info -> getArtifactsByNamedUrl(info, this.getLibrariesDir().get()))
+                this.getVersionParser()
+                    .map(VersionParser::get)
+                    .map(version -> getArtifactsByNamedUrl(version, this.getLibrariesDir().get()))
             );
 
         this.getArtifactsByNamedUrl().convention(artifactsByNamedUrl);
@@ -88,8 +92,17 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
         );
     }
 
-    private static Map<NamedUrl, RegularFile> getArtifactsByNamedUrl(VersionDownloadInfo info, Directory destDir) {
-        return info.getLibraryArtifactUrlsByName().entrySet().stream()
+    private static Map<NamedUrl, RegularFile> getArtifactsByNamedUrl(Version version, Directory destDir) {
+        return version.getLibraries().stream()
+            .flatMap(library ->
+                library.getDownloads().getArtifact()
+                    .map(DownloadableFile.PathDownload::getUrl)
+                    .map(artifact -> Map.entry(
+                        library.getName(),
+                        artifact
+                    ))
+                    .stream()
+            )
             .collect(Collectors.toMap(
                 entry -> new NamedUrl(entry.getKey(), entry.getValue()),
                 entry -> artifactOf(entry.getValue(), destDir)
