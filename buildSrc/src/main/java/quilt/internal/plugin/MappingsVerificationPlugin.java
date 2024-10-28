@@ -16,7 +16,7 @@ import quilt.internal.task.lint.FindDuplicateMappingFilesTask;
 import quilt.internal.task.lint.MappingLintTask;
 
 /**
- * {@link TaskContainer#register Registers} tasks that verify the mappings in {@link QuiltMappingsExtension}'s
+ * {@linkplain TaskContainer#register Registers} tasks that verify the mappings in {@link QuiltMappingsExtension}'s
  * {@link QuiltMappingsExtension#getMappingsDir() mappingsDir}.
  * <p>
  * Applies:

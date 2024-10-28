@@ -4,9 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.gradle.api.GradleException;
 import org.gradle.api.provider.Provider;
+import org.gradle.api.tasks.TaskContainer;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.Constants;
 import quilt.internal.Constants.Groups;
+import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.SimpleDownloadTask;
 
 import java.io.FileNotFoundException;
@@ -19,6 +21,9 @@ import java.util.stream.StreamSupport;
  */
 @DisableCachingByDefault(because = "Output depends on a remote source that may change.")
 public abstract class DownloadTargetMetaFileTask extends SimpleDownloadTask {
+    /**
+     * {@linkplain TaskContainer#register Registered} by {@link TargetDiffPlugin}.
+     */
     public static final String DOWNLOAD_TARGET_META_FILE_TASK_NAME = "downloadTargetMetaFile";
 
     public Provider<String> provideTargetVersion() {

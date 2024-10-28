@@ -45,12 +45,6 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
         return this.getLayout().getProjectDirectory();
     }
 
-    // TODO is it important that this is in .gradle/ instead of build/?
-    //  It means it doesn't get cleaned, and idk how to retrieve the configured gradle project cache dir
-    default Directory getTargetsDir() {
-        return this.getProjectDir().dir(".gradle/targets");
-    }
-
     default DirectoryProperty getBuildDir() {
         return this.getLayout().getBuildDirectory();
     }

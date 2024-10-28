@@ -29,7 +29,7 @@ import quilt.internal.task.unpick.gen.OpenGlConstantUnpickGenTask;
 import quilt.internal.task.unpick.gen.UnpickGenTask;
 
 /**
- * {@link TaskContainer#register Registers} tasks that output mappings in Quilt's v2 format.
+ * {@linkplain TaskContainer#register Registers} tasks that output mappings in Quilt's v2 format.
  * <p>
  * Applies:
  * <ul>

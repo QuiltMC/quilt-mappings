@@ -12,7 +12,8 @@ import quilt.internal.task.MappingsDirConsumingTask;
 /**
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-// TODO use getArgumentProviders instead of overriding exec
+// TODO use getArgumentProviders instead of overriding exec,
+//  see if classpath can be set directly without the need for a configuration
 @UntrackedTask(because =
     """
     These input and output to the same directory, which doesn't work with Gradle's task graph.

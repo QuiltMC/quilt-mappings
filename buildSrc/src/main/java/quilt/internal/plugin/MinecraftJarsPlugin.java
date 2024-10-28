@@ -18,7 +18,7 @@ import quilt.internal.task.setup.MergeJarsTask;
 import quilt.internal.util.VersionDownloadInfo;
 
 /**
- * {@link TaskContainer#register Registers} tasks that download and extract
+ * {@linkplain TaskContainer#register Registers} tasks that download and extract
  * Minecraft's client, server, and library jars.
  * <p>
  * Additionally:

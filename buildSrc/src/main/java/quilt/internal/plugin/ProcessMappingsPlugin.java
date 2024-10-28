@@ -25,7 +25,8 @@ import quilt.internal.task.setup.JavadocJarTask;
 import quilt.internal.task.setup.SourcesJarTask;
 
 /**
- * {@link TaskContainer#register Registers} tasks that process jars and mappings output by tasks from other plugins.
+ * {@linkplain TaskContainer#register Registers} tasks that
+ * process jars and mappings output by tasks from other plugins.
  * <p>
  * Applies:
  * <ul>
