@@ -67,12 +67,10 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
  *                  AbstractArchiveTask#getArchiveBaseName() archiveBaseName}: {@value Constants#MAPPINGS_NAME}
  *             <li> {@link ArtifactFileTask#getArtifactVersion() artifactVersion}/{@link
  *                  AbstractArchiveTask#getArchiveVersion() archiveVersion}:
- *                  {@link Constants#MAPPINGS_VERSION MAPPINGS_VERSION}
+ *                  {@link QuiltMappingsExtension}'s {@link QuiltMappingsExtension#getMappingsVersion() mappingsVersion}
  *         </ul>
  */
 public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
-    static final String MAPPINGS_NAME_PREFIX = Constants.MAPPINGS_NAME + "-";
-
     @Nullable
     private QuiltMappingsExtension ext;
 
@@ -155,7 +153,7 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
             .configureEach(task -> {
                 task.getArtifactBaseName().convention(Constants.MAPPINGS_NAME);
 
-                task.getArtifactVersion().convention(Constants.MAPPINGS_VERSION);
+                task.getArtifactVersion().convention(this.ext.getMappingsVersion());
             });
 
         tasks.withType(AbstractArchiveTask.class)
@@ -163,7 +161,7 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
             .configureEach(task -> {
                 task.getArchiveBaseName().convention(Constants.MAPPINGS_NAME);
 
-                task.getArchiveVersion().convention(Constants.MAPPINGS_VERSION);
+                task.getArchiveVersion().convention(this.ext.getMappingsVersion());
             });
     }
 

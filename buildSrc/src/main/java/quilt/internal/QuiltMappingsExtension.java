@@ -7,6 +7,8 @@ import org.gradle.api.artifacts.VersionConstraint;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.plugins.ExtensionContainer;
+import org.gradle.api.provider.Property;
+import org.gradle.api.provider.Provider;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.EnigmaProfileConsumingTask;
@@ -23,6 +25,10 @@ public abstract class QuiltMappingsExtension {
     public static final String EXTENSION_NAME = "quiltMappings";
 
     private static final String DEFAULT_CATALOG_NAME = "libs";
+
+    public abstract Property<String> getMinecraftVersion();
+
+    public abstract Property<String> getMappingsVersion();
 
     /**
      * @see MappingsDirOutputtingTask
@@ -64,5 +70,9 @@ public abstract class QuiltMappingsExtension {
                 \tusually by adding it to 'gradle/%s.versions.toml'.
                 """.formatted(Constants.UNPICK_NAME, Constants.UNPICK_NAME, DEFAULT_CATALOG_NAME, DEFAULT_CATALOG_NAME)
             ));
+    }
+
+    public Provider<String> provideSuffixedMinecraftVersion(String suffix) {
+        return this.getMinecraftVersion().map(version -> version + suffix);
     }
 }

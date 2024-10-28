@@ -86,9 +86,9 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
             ExtractTinyIntermediaryMappingsTask.EXTRACT_TINY_INTERMEDIARY_MAPPINGS_TASK_NAME,
             ExtractTinyIntermediaryMappingsTask.class,
             task -> {
-                task.getExtractionDest().convention(
-                    this.provideMappingsDest(Constants.INTERMEDIARY_MAPPINGS_NAME, "tiny")
-                );
+                task.getExtractionDest().convention(this.provideBuildMappingsDirFile(
+                    ext.provideSuffixedMinecraftVersion("-" + Constants.INTERMEDIARY_MAPPINGS_NAME + "." + "tiny")
+                ));
             }
         );
 
@@ -119,7 +119,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
                 task.getMergedTinyMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
                 task.getOutputMappings().convention(
-                    this.getMappingsDir().map(dir -> dir.file("mappings-intermediaryMerged.tiny"))
+                    this.getBuildMappingsDir().map(dir -> dir.file("mappings-intermediaryMerged.tiny"))
                 );
             }
         );
@@ -131,7 +131,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
                 task.getInput().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
 
                 task.getOutputMappings().convention(
-                    this.getMappingsDir().map(dir -> dir.file("mappings-intermediary.tiny"))
+                    this.getBuildMappingsDir().map(dir -> dir.file("mappings-intermediary.tiny"))
                 );
             }
         );

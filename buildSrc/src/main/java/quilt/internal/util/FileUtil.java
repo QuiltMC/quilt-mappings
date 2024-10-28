@@ -6,6 +6,10 @@ import org.gradle.api.file.RegularFile;
 public final class FileUtil {
     private FileUtil() { }
 
+    public static String getPathWithExtension(RegularFile file, String extensionReplacement) {
+        return replaceExtension(file.getAsFile().getPath(), extensionReplacement);
+    }
+
     public static String getNameWithExtension(RegularFile file, String extensionReplacement) {
         return replaceExtension(file.getAsFile().getName(), extensionReplacement);
     }

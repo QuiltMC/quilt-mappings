@@ -2,12 +2,14 @@ package quilt.internal.plugin;
 
 import org.gradle.api.Project;
 import org.gradle.api.file.Directory;
+import org.gradle.api.file.RegularFile;
+import org.gradle.api.plugins.PluginContainer;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
-import quilt.internal.Constants;
+import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.task.setup.DownloadMinecraftJarsTask;
@@ -16,6 +18,7 @@ import quilt.internal.task.setup.DownloadVersionsManifestTask;
 import quilt.internal.task.setup.DownloadWantedVersionManifestTask;
 import quilt.internal.task.setup.ExtractServerJarTask;
 import quilt.internal.task.setup.MergeJarsTask;
+import quilt.internal.util.serializable.SerializableVersionEntry;
 import quilt.internal.util.serializable.VersionParser;
 
 /**
@@ -39,6 +42,10 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
     protected Tasks applyImpl(@NotNull Project project) {
         final Provider<Directory> minecraftDir = this.getMinecraftDir();
 
+        final PluginContainer plugins = project.getPlugins();
+
+        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+
         final TaskContainer tasks = project.getTasks();
 
         final var downloadVersionsManifest = tasks.register(
@@ -55,11 +62,13 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
                 DownloadWantedVersionManifestTask.class,
                 task -> {
                     task.getManifestVersion().convention(
-                        downloadVersionsManifest.flatMap(DownloadVersionsManifestTask::provideVersionEntry)
+                        downloadVersionsManifest.flatMap(DownloadVersionsManifestTask::getDest)
+                            .map(RegularFile::getAsFile)
+                            .zip(ext.getMinecraftVersion(), SerializableVersionEntry::of)
                     );
 
                     task.getDest().convention(
-                        minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + ".json"))
+                        minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion(".json")))
                     );
                 }
             );
@@ -80,11 +89,11 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             DownloadMinecraftJarsTask.class,
             task -> {
                 task.getClientJar().convention(
-                    minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + "-client.jar"))
+                    minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion("-client.jar")))
                 );
 
                 task.getServerBootstrapJar().convention(
-                    minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + "-server-bootstrap.jar"))
+                    minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion("-server-bootstrap.jar")))
                 );
             }
         );
@@ -98,7 +107,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
                 );
 
                 task.getExtractionDest().convention(
-                    minecraftDir.map(dir -> dir.file(Constants.MINECRAFT_VERSION + "-server.jar"))
+                    minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion("-server.jar")))
                 );
             }
         );
@@ -113,7 +122,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
 
                 // TODO move this and other jars that are directly in the project dir to some sub dir
                 task.getMergedFile().convention(
-                    this.getProjectDir().file(Constants.MINECRAFT_VERSION + "-merged.jar")
+                    this.getProjectDir().file(ext.provideSuffixedMinecraftVersion("-merged.jar"))
                 );
             }
         );

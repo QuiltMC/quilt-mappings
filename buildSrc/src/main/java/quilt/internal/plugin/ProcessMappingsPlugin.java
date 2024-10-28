@@ -12,6 +12,7 @@ import org.gradle.api.tasks.TaskProvider;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
+import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.build.AddProposedMappingsTask;
@@ -66,6 +67,8 @@ public abstract class ProcessMappingsPlugin extends DefaultTaskedMappingsProject
 
         // adds javadoc task
         plugins.apply(JavaPlugin.class);
+
+        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MinecraftJarsPlugin.Tasks minecraftJarsTasks =
             plugins.apply(MinecraftJarsPlugin.class).getTasks();
@@ -154,6 +157,8 @@ public abstract class ProcessMappingsPlugin extends DefaultTaskedMappingsProject
         });
 
         tasks.register(JavadocJarTask.JAVADOC_JAR_TASK_NAME, JavadocJarTask.class, task -> {
+            task.getArchiveVersion().convention(ext.getMappingsVersion());
+
             task.from(javadoc.map(Javadoc::getDestinationDir));
         });
 

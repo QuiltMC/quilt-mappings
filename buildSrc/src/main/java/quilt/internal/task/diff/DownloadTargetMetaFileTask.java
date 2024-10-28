@@ -3,10 +3,11 @@ package quilt.internal.task.diff;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.gradle.api.GradleException;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.work.DisableCachingByDefault;
-import quilt.internal.Constants;
 import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.SimpleDownloadTask;
@@ -25,6 +26,9 @@ public abstract class DownloadTargetMetaFileTask extends SimpleDownloadTask {
      * {@linkplain TaskContainer#register Registered} by {@link TargetDiffPlugin}.
      */
     public static final String DOWNLOAD_TARGET_META_FILE_TASK_NAME = "downloadTargetMetaFile";
+
+    @Input
+    public abstract Property<String> getMinecraftVersion();
 
     public Provider<String> provideTargetVersion() {
         return this.getDest().map(metaFile -> {
@@ -49,7 +53,7 @@ public abstract class DownloadTargetMetaFileTask extends SimpleDownloadTask {
         super(Groups.DIFF);
 
         this.getUrl().convention(
-            "https://meta.quiltmc.org/v3/versions/quilt-mappings/" + Constants.MINECRAFT_VERSION
+            this.getMinecraftVersion().map(version -> "https://meta.quiltmc.org/v3/versions/quilt-mappings/" + version)
         );
     }
 }

@@ -15,7 +15,6 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
 import org.jetbrains.annotations.Nullable;
-import quilt.internal.Constants;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -49,8 +48,12 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
         return this.getLayout().getBuildDirectory();
     }
 
-    default Provider<Directory> getMappingsDir() {
+    default Provider<Directory> getBuildMappingsDir() {
         return this.getBuildDir().dir("mappings");
+    }
+
+    default Provider<RegularFile> provideBuildMappingsDirFile(Provider<String> path) {
+        return this.getBuildMappingsDir().zip(path, Directory::file);
     }
 
     default Provider<Directory> getMinecraftDir() {
@@ -60,12 +63,6 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
     default Provider<Directory> getTempDir() {
         return this.getBuildDir().dir("temp");
     }
-
-    default Provider<RegularFile> provideMappingsDest(String mappingsName, String fileExt) {
-        return this.getMinecraftDir().map(dir ->
-            dir.file(Constants.MINECRAFT_VERSION + "-" + mappingsName + "." + fileExt)
-        );
-    };
 
     default void provideDefaultError(Property<?> property, String errorMessage) {
         property.convention(this.getProviders().provider(() -> { throw new GradleException(errorMessage); }));

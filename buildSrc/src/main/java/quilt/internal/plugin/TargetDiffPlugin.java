@@ -39,7 +39,7 @@ import java.io.IOException;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks that download the latest published Quilt Mappings for the current
- * {@link Constants#MINECRAFT_VERSION MINECRAFT_VERSION} so the
+ * {@link QuiltMappingsExtension#getMinecraftVersion() minecraftVersion} so the
  * {@value DiffDirectoriesTask#GENERATE_DIFF_TASK_NAME} task can {@value DiffDirectoriesTask#DIFF_COMMAND} them with
  * this project's current mappings.
  * <p>
@@ -74,6 +74,8 @@ import java.io.IOException;
  * </ul>
  */
 public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
+    private static final String MAPPINGS_NAME_PREFIX = Constants.MAPPINGS_NAME + "-";
+
     @Override
     public void apply(@NotNull Project project) {
         // TODO is it important that this is in .gradle/ instead of build/?
@@ -102,8 +104,10 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 DownloadTargetMetaFileTask.DOWNLOAD_TARGET_META_FILE_TASK_NAME,
                 DownloadTargetMetaFileTask.class,
                 task -> {
-                    task.getDest().convention(this.getMinecraftDir().map(dir ->
-                        dir.file(QuiltMappingsBasePlugin.MAPPINGS_NAME_PREFIX + Constants.MINECRAFT_VERSION + ".json")
+                    task.getMinecraftVersion().convention(ext.getMinecraftVersion());
+
+                    task.getDest().convention(this.getMinecraftDir().flatMap(dir ->
+                        dir.file(ext.getMinecraftVersion().map(version -> MAPPINGS_NAME_PREFIX + version + ".json"))
                     ));
                 }
             );
@@ -127,12 +131,12 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
             task -> {
                 task.getTargetUnpickConstantsFile().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QuiltMappingsBasePlugin.MAPPINGS_NAME_PREFIX + version + "-constants.jar"
+                    version -> MAPPINGS_NAME_PREFIX + version + "-constants.jar"
                 ));
 
                 task.getTargetJar().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QuiltMappingsBasePlugin.MAPPINGS_NAME_PREFIX + version + "-v2.jar"
+                    version -> MAPPINGS_NAME_PREFIX + version + "-v2.jar"
                 ));
             }
         );
@@ -147,7 +151,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 task.getExtractionDest().convention(task.provideVersionedDir(
                     targetsDir,
-                    version -> QuiltMappingsBasePlugin.MAPPINGS_NAME_PREFIX + version
+                    version -> MAPPINGS_NAME_PREFIX + version
                 ));
             }
         );
@@ -185,7 +189,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 task.getOutput().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QuiltMappingsBasePlugin.MAPPINGS_NAME_PREFIX + version + "remapped-unpick.unpick"
+                    version -> MAPPINGS_NAME_PREFIX + version + "remapped-unpick.unpick"
                 ));
             }
         );
@@ -204,7 +208,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 task.getOutputFile().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QuiltMappingsBasePlugin.MAPPINGS_NAME_PREFIX + version + "-unpicked.jar"
+                    version -> MAPPINGS_NAME_PREFIX + version + "-unpicked.jar"
                 ));
             }
         );
@@ -222,7 +226,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 task.getOutputJar().convention(task.provideVersionedFile(
                     targetsDir,
-                    version -> QuiltMappingsBasePlugin.MAPPINGS_NAME_PREFIX + version + "-named.jar"
+                    version -> MAPPINGS_NAME_PREFIX + version + "-named.jar"
                 ));
             }
         );

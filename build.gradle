@@ -4,7 +4,6 @@ import quilt.internal.plugin.MapIntermediaryPlugin
 import quilt.internal.task.build.IntermediaryMappingsV2JarTask
 
 import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
-import static quilt.internal.Constants.MINECRAFT_VERSION
 
 plugins {
 	id 'maven-publish'
@@ -18,7 +17,9 @@ final USE_SNAPSHOT_HASHES = false
 
 final ENV = System.getenv()
 
-version = Constants.MAPPINGS_VERSION
+final MINECRAFT_VERSION = libs.versions.minecraft.get()
+
+version = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault("BUILD_NUMBER", "local")}"
 
 sourceSets {
 	// for constantsJar and sourcesJar input
@@ -30,6 +31,10 @@ sourceSets {
 }
 
 quiltMappings {
+	minecraftVersion = MINECRAFT_VERSION
+
+	mappingsVersion = project.version
+
 	mappingsDir = file('mappings/')
 
 	enigmaProfileConfig = file('enigma/enigma_profile.json')
@@ -76,7 +81,7 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	outputs.doNotCacheIf("unknown", Specs.satisfyAll())
 
 	destinationDir = layout.buildDirectory.get().dir('docs').dir(project.version.toString()).getAsFile()
-	def docletResources = sourceSets.doclet.resources.asFileTree
+	final docletResources = sourceSets.doclet.resources.asFileTree
 
 	// Failing on error is important to ensure that a Javadoc jar is available.
 	failOnError = true
@@ -212,7 +217,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId 'org.quiltmc'
 			artifactId Constants.MAPPINGS_NAME
-			version Constants.MAPPINGS_VERSION
+			version project.version
 
 			// quilt-mappings-<version>-tiny.gz
 			compressTiny.artifact(maven)

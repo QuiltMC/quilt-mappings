@@ -101,7 +101,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 );
 
                 task.getOutputMappings().convention(
-                    this.getMappingsDir().map(dir -> dir.file("merged2.tiny"))
+                    this.getBuildMappingsDir().map(dir -> dir.file("merged2.tiny"))
                 );
             }
         );
@@ -119,11 +119,11 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 );
 
                 task.getUnpickGlStateManagerDefinitions().convention(
-                    this.getMappingsDir().map(dir -> dir.file("unpick_glstatemanager.unpick"))
+                    this.getBuildMappingsDir().map(dir -> dir.file("unpick_glstatemanager.unpick"))
                 );
 
                 task.getUnpickGlDefinitions().convention(
-                    this.getMappingsDir().map(dir -> dir.file("unpick_gl.unpick"))
+                    this.getBuildMappingsDir().map(dir -> dir.file("unpick_gl.unpick"))
                 );
             }
         );
@@ -135,7 +135,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 task.getUnpickDefinitions().from(project.getTasks().withType(UnpickGenTask.class));
 
                 task.getOutput().convention(
-                    this.getMappingsDir().map(dir -> dir.file("definitions.unpick"))
+                    this.getBuildMappingsDir().map(dir -> dir.file("definitions.unpick"))
                 );
             }
         );
@@ -148,7 +148,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
 
                 task.getMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
-                task.getOutput().convention(this.getMappingsDir().map(dir ->
+                task.getOutput().convention(this.getBuildMappingsDir().map(dir ->
                     dir.file(Constants.PER_VERSION_MAPPINGS_NAME + "-definitions.unpick")
                 ));
             }
@@ -182,9 +182,9 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 task.getUnpickConstantsJar().set(constantsJar.flatMap(ConstantsJarTask::getArchiveFile));
 
                 // TODO move this and other jars that are directly in the project dir to some sub dir
-                task.getOutputFile().convention(this.getProjectDir().file(
-                    Constants.MINECRAFT_VERSION + "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar"
-                ));
+                task.getOutputFile().convention(this.getProjectDir().file(ext.provideSuffixedMinecraftVersion(
+                    "-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar"
+                )));
             }
         );
 
@@ -199,7 +199,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 );
 
                 task.getOutputJar().convention(
-                    this.getProjectDir().file(Constants.MINECRAFT_VERSION + "-named.jar")
+                    this.getProjectDir().file(ext.provideSuffixedMinecraftVersion("-named.jar"))
                 );
             }
         );
