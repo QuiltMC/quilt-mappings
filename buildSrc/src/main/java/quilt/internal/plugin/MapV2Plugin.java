@@ -41,10 +41,11 @@ import quilt.internal.task.unpick.gen.UnpickGenTask;
  * <ul>
  *     <li> creates the {@value UNPICK_CONFIGURATION_NAME} {@link Configuration}
  *     <li> adds the the {@value UNPICK_CONFIGURATION_NAME} {@link Configuration} to
- *          {@link UnpickJarTask}s' {@link JavaExec#classpath(Object...) classpath};
- *          {@value UNPICK_CONFIGURATION_NAME} must include
- *         {@link daomephsta.unpick.cli.Main} in order to use {@link UnpickJarTask}s
- *    <li> {@link TaskCollection#configureEach(Action) configures}
+ *          {@linkplain TaskCollection#configureEach(Action) each} {@link UnpickJarTask}s'
+ *          {@link JavaExec#classpath(Object...) classpath};<br>
+ *          {@value UNPICK_CONFIGURATION_NAME} must include {@link daomephsta.unpick.cli.Main}
+ *          and its dependencies in order to use {@link UnpickJarTask}s
+ *    <li> {@linkplain TaskCollection#configureEach(Action) configures}
  *          the following defaults for {@link MappingsV2JarTask}s:
  *          <ul>
  *              <li> {@link MappingsV2JarTask#getUnpickMeta() unpickMeta}: {@link QuiltMappingsExtension}'s

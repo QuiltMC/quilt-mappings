@@ -11,7 +11,6 @@ import org.gradle.api.tasks.options.Option;
 import org.quiltmc.enigma.network.DedicatedEnigmaServer;
 import quilt.internal.plugin.EnigmaMappingsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
-import quilt.internal.plugin.QuiltMappingsPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,29 +60,26 @@ public abstract class EnigmaMappingsServerTask extends AbstractEnigmaMappingsTas
 	public EnigmaMappingsServerTask() {
 		this.getMainClass().set(DedicatedEnigmaServer.class.getName());
 		this.getMainClass().finalizeValue();
-	}
 
-	@Override
-	public void exec() {
-		final List<String> optionalArgs = new ArrayList<>();
+		this.getArgumentProviders().add(() -> {
+			final List<String> optionalArgs = new ArrayList<>();
 
-		toOptional(this.getPort()).ifPresent(port -> {
-			optionalArgs.add("-" + PORT_OPTION);
-			optionalArgs.add(port);
+			toOptional(this.getPort()).ifPresent(port -> {
+				optionalArgs.add("-" + PORT_OPTION);
+				optionalArgs.add(port);
+			});
+
+			toOptional(this.getPassword()).ifPresent(password -> {
+				optionalArgs.add("-" + PASSWORD_OPTION);
+				optionalArgs.add(password);
+			});
+
+			toOptional(this.getLog().getAsFile()).ifPresent(log -> {
+				optionalArgs.add("-" + LOG_OPTION);
+				optionalArgs.add(log.getAbsolutePath());
+			});
+
+			return optionalArgs;
 		});
-
-		toOptional(this.getPassword()).ifPresent(password -> {
-			optionalArgs.add("-" + PASSWORD_OPTION);
-			optionalArgs.add(password);
-		});
-
-		toOptional(this.getLog().getAsFile()).ifPresent(log -> {
-			optionalArgs.add("-" + LOG_OPTION);
-			optionalArgs.add(log.getAbsolutePath());
-		});
-
-        this.args(optionalArgs);
-
-		super.exec();
 	}
 }

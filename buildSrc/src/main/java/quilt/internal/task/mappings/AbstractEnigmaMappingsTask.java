@@ -9,34 +9,29 @@ import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 
+import java.util.List;
+
 /**
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-// TODO use getArgumentProviders instead of overriding exec,
-//  see if classpath can be set directly without the need for a configuration
 @UntrackedTask(because =
     """
     These input and output to the same directory, which doesn't work with Gradle's task graph.
     These tasks' outputs should not be consumed by other tasks.
     """
 )
-public abstract class AbstractEnigmaMappingsTask extends JavaExec
-        implements EnigmaProfileConsumingTask, MappingsDirConsumingTask {
+public abstract class AbstractEnigmaMappingsTask extends JavaExec implements
+        EnigmaProfileConsumingTask, MappingsDirConsumingTask {
     @InputFile
     public abstract RegularFileProperty getJarToMap();
 
     public AbstractEnigmaMappingsTask() {
         this.setGroup(Groups.MAPPINGS);
-    }
 
-    @Override
-    public void exec() {
-        this.args(
+        this.getArgumentProviders().add(() -> List.of(
             "-jar", this.getJarToMap().get().getAsFile().getAbsolutePath(),
             "-mappings", this.getMappingsDir().get().getAsFile().getAbsolutePath(),
             "-profile", this.getEnigmaProfileConfig().get().getAsFile().getAbsolutePath()
-        );
-
-        super.exec();
+        ));
     }
 }
