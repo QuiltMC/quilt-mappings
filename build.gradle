@@ -1,45 +1,18 @@
 import org.gradle.api.internal.file.FileOperations
 import quilt.internal.Constants
+import quilt.internal.plugin.MapIntermediaryPlugin
 import quilt.internal.task.build.IntermediaryMappingsV2JarTask
-import quilt.internal.task.build.CompressTinyTask
-import quilt.internal.task.build.MappingsV2JarTask
-import quilt.internal.task.setup.ConstantsJarTask
 
 import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
 import static quilt.internal.Constants.MINECRAFT_VERSION
-
-buildscript {
-	repositories {
-		maven {
-			name 'Quilt Releases'
-			url 'https://maven.quiltmc.org/repository/release/'
-		}
-		maven {
-			name 'Quilt Snapshot Repository'
-			url 'https://maven.quiltmc.org/repository/snapshot/'
-		}
-		maven {
-			name "Fabric Repository"
-			url 'https://maven.fabricmc.net'
-		}
-		// TODO remove when ASM fix is released
-		maven {
-			url = 'https://repository.ow2.org/nexus/content/repositories/snapshots/'
-		}
-		mavenCentral()
-		mavenLocal()
-	}
-	dependencies {
-		classpath(libs.unpick)
-		classpath(libs.unpick.format.utils)
-	}
-}
 
 plugins {
 	id 'maven-publish'
 	id 'quilt-mappings'
 	alias libs.plugins.licenser
 }
+
+final INTERMEDIARY_PROVIDER = plugins.apply(MapIntermediaryPlugin).provideIntermediary()
 
 final USE_SNAPSHOT_HASHES = false
 
@@ -74,7 +47,7 @@ tasks.downloadDictionaryFile {
 	// TODO this should probably be published to quilt maven, see #442
 	url = "https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/${revision}/allowed_english_words.txt"
 
-	// TODO does this really need the revision in the name? If not this could go in QuiltMappingsPlugin
+	// TODO does this really need the revision in the name? If not this could go in MappingsVerificationPlugin
 	//  Also this seems like something that should go in build/ so it can be cleaned
 	dest = project.file(".gradle/lint/dictionary/${revision}.txt")
 }
@@ -234,8 +207,6 @@ license {
 	include '**/*.java'
 }
 
-// TODO test if artifacts get correct metadata without explicit configuration
-//  and that compressTiny builds automatically
 publishing {
 	publications {
 		maven(MavenPublication) {
@@ -244,24 +215,15 @@ publishing {
 			version Constants.MAPPINGS_VERSION
 
 			// quilt-mappings-<version>-tiny.gz
-			artifact(compressTiny.artifactFile) {
-				classifier CompressTinyTask.TINY_CLASSIFIER
-				// builtBy compressTiny
-			}
+			compressTiny.artifact(maven)
 			// quilt-mappings-<version>.jar
 			artifact(tinyJar)
 			// quilt-mappings-<version>-v2.jar
-			artifact(v2UnmergedMappingsJar) {
-				classifier MappingsV2JarTask.V_2_CLASSIFIER
-			}
+			artifact(v2UnmergedMappingsJar)
 			// quilt-mappings-<version>-mergedv2.jar
-			artifact(v2MergedMappingsJar) {
-				classifier MappingsV2JarTask.MERGED_V2_CLASSIFIER
-			}
+			artifact(v2MergedMappingsJar)
 			// quilt-mappings-<version>-constants.jar
-			artifact(constantsJar) {
-				classifier ConstantsJarTask.CONSTANTS_CLASSIFIER
-			}
+			artifact(constantsJar)
 
 			// quilt-mappings-<version>-sources.jar
 			artifact sourcesJar
@@ -295,16 +257,15 @@ publishing {
 	}
 }
 
-tasks.withType(AbstractPublishToMaven).configureEach { AbstractPublishToMaven t ->
-	// Won't run if checkIntermediaryMappings returns false
+tasks.withType(AbstractPublishToMaven).configureEach {
+	// Won't run if INTERMEDIARY_PROVIDER is absent
 	dependsOn buildIntermediary
 
 	doFirst {
-		if (checkIntermediaryMappings.isPresent()) {
-			MavenPublication p = it.publication
-			def addArtifact = { Task task, String artifactClassifier ->
-				if (p.getArtifacts().findAll {a -> a.getClassifier() == artifactClassifier }.isEmpty()) {
-					p.artifact(task) {
+		if (INTERMEDIARY_PROVIDER.isPresent()) {
+			final addArtifact = { Task task, String artifactClassifier ->
+				if (publication.artifacts.findAll { it.classifier == artifactClassifier }.isEmpty()) {
+					publication.artifact(task) {
 						classifier artifactClassifier
 					}
 				}

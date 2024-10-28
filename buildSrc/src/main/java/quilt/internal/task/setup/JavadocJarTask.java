@@ -7,18 +7,19 @@ import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.ProcessMappingsPlugin;
 import quilt.internal.task.MappingsTask;
 
-// TODO move this back to build.gradle?
 public abstract class JavadocJarTask extends Jar implements MappingsTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
      */
     public static final String JAVADOC_JAR_TASK_NAME = "javadocJar";
 
+    public static final String JAVADOC_CLASSIFIER = "javadoc";
+
     public JavadocJarTask() {
         this.setGroup(Groups.JAVADOC_GENERATION);
 
         this.getArchiveVersion().convention(Constants.MAPPINGS_VERSION);
 
-        this.getArchiveClassifier().convention("javadoc");
+        this.getArchiveClassifier().convention(JAVADOC_CLASSIFIER);
     }
 }

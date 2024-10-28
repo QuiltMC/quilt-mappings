@@ -8,12 +8,13 @@ import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.ProcessMappingsPlugin;
 import quilt.internal.task.MappingsTask;
 
-// TODO move this back to build.gradle?
 public abstract class SourcesJarTask extends Jar implements MappingsTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
      */
     public static final String SOURCES_JAR_TASK_NAME = "sourcesJar";
+
+    public static final String SOURCES_CLASSIFIER = "sources";
 
     @InputFiles
     public abstract ConfigurableFileCollection getSources();
@@ -21,7 +22,7 @@ public abstract class SourcesJarTask extends Jar implements MappingsTask {
     public SourcesJarTask() {
         this.setGroup(Groups.SETUP);
 
-        this.getArchiveClassifier().convention("sources");
+        this.getArchiveClassifier().convention(SOURCES_CLASSIFIER);
 
         this.from(this.getSources());
     }

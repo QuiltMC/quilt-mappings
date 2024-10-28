@@ -8,7 +8,6 @@ import quilt.internal.Constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.task.MappingsTask;
 
-// TODO move this back to build.gradle?
 public abstract class ConstantsJarTask extends Jar implements MappingsTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.

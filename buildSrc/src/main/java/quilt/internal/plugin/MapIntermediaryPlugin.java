@@ -6,11 +6,13 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.plugins.PluginContainer;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
@@ -22,6 +24,8 @@ import quilt.internal.task.build.RemoveIntermediaryTask;
 import quilt.internal.task.setup.ExtractTinyIntermediaryMappingsTask;
 import quilt.internal.task.setup.ExtractTinyMappingsTask;
 import quilt.internal.task.setup.IntermediaryDependantTask;
+
+import java.util.Objects;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks related to
@@ -46,6 +50,19 @@ import quilt.internal.task.setup.IntermediaryDependantTask;
  */
 public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
     public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = Constants.INTERMEDIARY_MAPPINGS_NAME;
+
+    @Nullable
+    private Provider<RegularFile> intermediaryProvider;
+
+    /**
+     * @throws NullPointerException if this plugin hasn't finished {@linkplain #apply(Project) applying}
+     */
+    public Provider<RegularFile> provideIntermediary() {
+        return Objects.requireNonNull(
+            this.intermediaryProvider,
+            Constants.INTERMEDIARY_MAPPINGS_NAME + " not yet populated"
+        );
+    }
 
     @Override
     public void apply(@NotNull Project project) {
@@ -76,16 +93,20 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
         );
 
         {
-            final Provider<RegularFile> intermediaryFile = this.provideOptionalFile(intermediaryMappings);
+            final Property<RegularFile> intermediaryProperty = this.getObjects().fileProperty();
+            intermediaryProperty.set(this.provideOptionalFile(intermediaryMappings));
 
-            tasks.withType(IntermediaryDependantTask.class).configureEach(task -> {
-                task.onlyIf(unused -> intermediaryFile.isPresent());
-            });
-
-            extractTinyIntermediaryMappings.configure(task -> {
-                task.getZippedFile().convention(intermediaryFile);
-            });
+            this.intermediaryProvider = intermediaryProperty;
         }
+
+        tasks.withType(IntermediaryDependantTask.class).configureEach(task -> {
+            task.onlyIf(unused -> this.intermediaryProvider.isPresent());
+        });
+
+        extractTinyIntermediaryMappings.configure(task -> {
+            task.getZippedFile().convention(this.intermediaryProvider);
+        });
+
 
         final var mergeIntermediary = tasks.register(
             MergeIntermediaryTask.MERGE_INTERMEDIARY_TASK_NAME,
