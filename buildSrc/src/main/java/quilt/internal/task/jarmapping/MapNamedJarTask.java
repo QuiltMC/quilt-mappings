@@ -15,6 +15,8 @@ public abstract class MapNamedJarTask extends MapJarTask {
      */
     public static final String MAP_NAMED_JAR_TASK_NAME = "mapNamedJar";
 
+    public static final String NAMED_CLASSIFIER = Namespaces.NAMED;
+
     public MapNamedJarTask() {
         super(Groups.MAP_JAR, Namespaces.PER_VERSION, Namespaces.NAMED);
 

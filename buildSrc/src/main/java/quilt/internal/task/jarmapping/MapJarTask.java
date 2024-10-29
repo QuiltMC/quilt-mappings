@@ -2,6 +2,7 @@ package quilt.internal.task.jarmapping;
 
 import java.util.Map;
 
+import com.google.common.collect.ImmutableMap;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.MapProperty;
@@ -10,10 +11,11 @@ import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
-import org.gradle.api.tasks.TaskCollection;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.JarRemapper;
+
+import static quilt.internal.Constants.PER_VERSION_MAPPINGS_NAME;
 
 /**
  * Copies a {@linkplain #getInputJar() Jar} and applies {@linkplain #getMappingsFile() mappings}.
@@ -21,11 +23,14 @@ import quilt.internal.util.JarRemapper;
  * @see MapMinecraftJarsPlugin MapMinecraftJarsPlugin's configureEach
  */
 public abstract class MapJarTask extends DefaultMappingsTask {
-    public static final Map<String, String> JAVAX_TO_JETBRAINS = Map.of(
-            "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
-            "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
-            "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
+    public static final ImmutableMap<String, String> JAVAX_TO_JETBRAINS = ImmutableMap.of(
+        "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
+        "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
+        "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
     );
+
+    public static final String UNPICKED_CLASSIFIER = "unpicked";
+    public static final String PER_VERSION_UNPICKED_CLASSIFIER = PER_VERSION_MAPPINGS_NAME + "-" + UNPICKED_CLASSIFIER;
 
     @Input
     public abstract MapProperty<String, String> getAdditionalMappings();
@@ -53,7 +58,9 @@ public abstract class MapJarTask extends DefaultMappingsTask {
     @TaskAction
     public void remapJar() {
         this.getLogger().lifecycle(":mapping minecraft from " + this.from + " to " + this.to);
+
         final Map<String, String> additionalMappings = this.getAdditionalMappings().get();
+
         JarRemapper.mapJar(
             this.getOutputJar().get().getAsFile(),
             this.getInputJar().get().getAsFile(),

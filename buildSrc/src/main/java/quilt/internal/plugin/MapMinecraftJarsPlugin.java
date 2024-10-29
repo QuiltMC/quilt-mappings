@@ -8,6 +8,7 @@ import org.gradle.api.plugins.PluginContainer;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
+import org.gradle.jvm.tasks.Jar;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
@@ -27,6 +28,7 @@ import quilt.internal.task.setup.ExtractTinyMappingsTask;
 import quilt.internal.task.setup.MergeJarsTask;
 import quilt.internal.util.FileUtil;
 
+import static quilt.internal.task.jarmapping.MapPerVersionMappingsJarTask.PER_VERSION_CLASSIFIER;
 import static quilt.internal.util.FileUtil.getNameWithExtension;
 import static quilt.internal.util.FileUtil.getPathWithExtension;
 
@@ -134,7 +136,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
 
                 task.getOutputJar().convention(
                     this.provideMappedMinecraftBuildFile(
-                        ext.provideSuffixedMinecraftVersion("-" + Constants.PER_VERSION_MAPPINGS_NAME + ".jar")
+                        ext.provideSuffixedMinecraftVersion("-" + PER_VERSION_CLASSIFIER + "." + Jar.DEFAULT_EXTENSION)
                     )
                 );
             }
@@ -149,7 +151,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
                 );
 
                 task.getOutputMappings().convention(
-                    this.getMappingsBuildDir().map(dir -> dir.file(Constants.MAPPINGS_NAME + ".tiny"))
+                    this.provideMappingsBuildFile(Constants.MAPPINGS_NAME + ".tiny")
                 );
             }
         );
@@ -194,7 +196,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
                     invertPerVersionMappings.flatMap(InvertPerVersionMappingsTask::getInvertedTinyFile)
                 );
 
-                task.getOutputMappings().convention(this.getMappingsBuildDir().map(dir -> dir.file("mappings.tiny")));
+                task.getOutputMappings().convention(this.provideMappingsBuildFile("mappings.tiny"));
             }
         );
 

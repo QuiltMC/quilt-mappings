@@ -52,6 +52,10 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
         return this.getBuildDir().dir("mappings");
     }
 
+    default Provider<RegularFile> provideMappingsBuildFile(String path) {
+        return this.getMappingsBuildDir().map(dir -> dir.file(path));
+    }
+
     default Provider<RegularFile> provideMappingsBuildFile(Provider<String> path) {
         return this.getMappingsBuildDir().zip(path, Directory::file);
     }

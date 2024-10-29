@@ -11,4 +11,6 @@ import quilt.internal.task.MappingsTask;
  * {@link quilt.internal.task.unpick.CombineUnpickDefinitionsTask#getUnpickDefinitions() unpickDefinitions},
  * so implementing tasks should <i>only</i> output unpick files.
  */
-public interface UnpickGenTask extends MappingsTask { }
+public interface UnpickGenTask extends MappingsTask {
+    String UNPICK_EXTENSION = "unpick";
+}

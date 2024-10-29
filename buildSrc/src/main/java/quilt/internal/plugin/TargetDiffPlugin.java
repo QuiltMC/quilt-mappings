@@ -6,6 +6,7 @@ import org.gradle.api.Action;
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
+import org.gradle.api.Transformer;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.plugins.PluginContainer;
@@ -15,6 +16,7 @@ import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
+import org.gradle.jvm.tasks.Jar;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
@@ -37,11 +39,19 @@ import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static quilt.internal.Constants.UNPICK_NAME;
+import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
+import static quilt.internal.task.build.MappingsV2JarTask.V2_CLASSIFIER;
+import static quilt.internal.task.jarmapping.MapJarTask.UNPICKED_CLASSIFIER;
+import static quilt.internal.task.jarmapping.MapNamedJarTask.NAMED_CLASSIFIER;
+import static quilt.internal.task.setup.ConstantsJarTask.CONSTANTS_CLASSIFIER;
+import static quilt.internal.task.unpick.gen.UnpickGenTask.UNPICK_EXTENSION;
+
 /**
  * {@linkplain TaskContainer#register Registers} tasks that download the latest published Quilt Mappings for the current
  * {@link QuiltMappingsExtension#getMinecraftVersion() minecraftVersion} so the
- * {@value DiffDirectoriesTask#GENERATE_DIFF_TASK_NAME} task can {@value DiffDirectoriesTask#DIFF_COMMAND} them with
- * this project's current mappings.
+ * {@value DiffDirectoriesTask#GENERATE_DIFF_TASK_NAME} task can {@value DiffDirectoriesTask#DIFF_COMMAND}
+ * them with this project's mappings.
  * <p>
  * The generated {@value DiffDirectoriesTask#DIFF_COMMAND} is useful when reviewing new mappings.
  * <p>
@@ -74,14 +84,8 @@ import java.io.IOException;
  * </ul>
  */
 public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
-    private static final String MAPPINGS_NAME_PREFIX = Constants.MAPPINGS_NAME + "-";
-
     @Override
     public void apply(@NotNull Project project) {
-        // TODO is it important that this is in .gradle/ instead of build/?
-        //  It means it doesn't get cleaned, and idk how to retrieve the configured gradle project cache dir
-        final Directory targetsDir = this.getProjectDir().dir(".gradle/targets");
-
         final PluginContainer plugins = project.getPlugins();
 
         final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
@@ -107,7 +111,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                     task.getMinecraftVersion().convention(ext.getMinecraftVersion());
 
                     task.getDest().convention(this.provideMinecraftBuildFile(
-                        ext.getMinecraftVersion().map(version -> MAPPINGS_NAME_PREFIX + version + ".json")
+                        task.getMinecraftVersion().map(createQuiltFileNameBuilder(".json"))
                     ));
                 }
             );
@@ -129,15 +133,13 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
             DownloadTargetMappingJarTask.DOWNLOAD_TARGET_MAPPINGS_JAR_TASK_NAME,
             DownloadTargetMappingJarTask.class,
             task -> {
-                task.getTargetUnpickConstantsFile().convention(task.provideVersionedFile(
-                    targetsDir,
-                    version -> MAPPINGS_NAME_PREFIX + version + "-constants.jar"
-                ));
+                task.getTargetUnpickConstantsFile().convention(
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), CONSTANTS_CLASSIFIER)
+                );
 
-                task.getTargetJar().convention(task.provideVersionedFile(
-                    targetsDir,
-                    version -> MAPPINGS_NAME_PREFIX + version + "-v2.jar"
-                ));
+                task.getTargetJar().convention(
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), V2_CLASSIFIER)
+                );
             }
         );
 
@@ -149,10 +151,9 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                     downloadTargetMappingsJar.flatMap(DownloadTargetMappingJarTask::getTargetJar)
                 );
 
-                task.getExtractionDest().convention(task.provideVersionedDir(
-                    targetsDir,
-                    version -> MAPPINGS_NAME_PREFIX + version
-                ));
+                task.getExtractionDest().convention(
+                    this.provideQuiltTargetBuildDir(task.getTargetVersion(), "")
+                );
             }
         );
 
@@ -184,12 +185,11 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 task.getMappings().convention(
                     extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
-                        .map(dest -> dest.file(MappingsV2JarTask.JAR_MAPPINGS_PATH))
+                        .map(dest -> dest.file(JAR_MAPPINGS_PATH))
                 );
 
-                task.getOutput().convention(task.provideVersionedFile(
-                    targetsDir,
-                    version -> MAPPINGS_NAME_PREFIX + version + "remapped-unpick.unpick"
+                task.getOutput().convention(this.provideQuiltTargetBuildFile(
+                    task.getTargetVersion(), "remapped-" + UNPICK_NAME, UNPICK_EXTENSION
                 ));
             }
         );
@@ -206,10 +206,9 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                     downloadTargetMappingsJar.flatMap(DownloadTargetMappingJarTask::getTargetUnpickConstantsFile)
                 );
 
-                task.getOutputFile().convention(task.provideVersionedFile(
-                    targetsDir,
-                    version -> MAPPINGS_NAME_PREFIX + version + "-unpicked.jar"
-                ));
+                task.getOutputFile().convention(
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), UNPICKED_CLASSIFIER)
+                );
             }
         );
 
@@ -221,13 +220,12 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 task.getMappingsFile().convention(
                     extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
-                        .map(dest -> dest.dir("mappings").file("mappings.tiny"))
+                        .map(dest -> dest.file(JAR_MAPPINGS_PATH))
                 );
 
-                task.getOutputJar().convention(task.provideVersionedFile(
-                    targetsDir,
-                    version -> MAPPINGS_NAME_PREFIX + version + "-named.jar"
-                ));
+                task.getOutputJar().convention(
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), NAMED_CLASSIFIER)
+                );
             }
         );
 
@@ -243,7 +241,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 task.getDefaultJavadocSource().convention(MappingsJavadocProvider.provideNamed(
                     extractTargetMappingsJar.flatMap(ExtractTargetMappingJarTask::getExtractionDest)
-                        .map(dest -> dest.dir("mappings").file("mappings.tiny"))
+                        .map(dest -> dest.file(JAR_MAPPINGS_PATH))
                 ));
 
                 // TODO move this to build/ once generate-diff.yml uses generateDiff
@@ -267,6 +265,28 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
         );
     }
 
+    public Provider<Directory> getTargetsBuildDir() {
+        return this.getBuildDir().dir("targets");
+    }
+
+    public Provider<RegularFile> provideQuiltTargetBuildFile(Provider<String> version, String pathSuffix) {
+        return this.getTargetsBuildDir().zip(version.map(createQuiltFileNameBuilder(pathSuffix)), Directory::file);
+    }
+
+    public Provider<RegularFile> provideQuiltTargetBuildFile(
+        Provider<String> version, String classifier, String extension
+    ) {
+        return this.provideQuiltTargetBuildFile(version, "-" + classifier + "." + extension);
+    }
+
+    public Provider<RegularFile> provideQuiltTargetBuildJarFile(Provider<String> version, String classifier) {
+        return this.provideQuiltTargetBuildFile(version, classifier, Jar.DEFAULT_EXTENSION);
+    }
+
+    public Provider<Directory> provideQuiltTargetBuildDir(Provider<String> version, String pathSuffix) {
+        return this.getTargetsBuildDir().zip(version.map(createQuiltFileNameBuilder(pathSuffix)), Directory::dir);
+    }
+
     public static Provider<Boolean> provideUnpickVersionsMatch(
         String unpickVersion, Provider<RegularFile> unpickMeta
     ) {
@@ -283,5 +303,9 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
             })
             .map(targetVersion -> targetVersion.equals(unpickVersion))
             .orElse(false);
+    }
+
+    private static Transformer<String, String> createQuiltFileNameBuilder(String pathSuffix) {
+        return version -> Constants.MAPPINGS_NAME + "-" + version + pathSuffix;
     }
 }

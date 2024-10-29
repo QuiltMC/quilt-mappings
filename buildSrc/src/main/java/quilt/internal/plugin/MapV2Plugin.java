@@ -10,6 +10,7 @@ import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
+import org.gradle.jvm.tasks.Jar;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
@@ -18,6 +19,7 @@ import quilt.internal.task.build.AddProposedMappingsTask;
 import quilt.internal.task.build.InvertPerVersionMappingsTask;
 import quilt.internal.task.build.MappingsV2JarTask;
 import quilt.internal.task.build.MergeTinyV2Task;
+import quilt.internal.task.jarmapping.MapJarTask;
 import quilt.internal.task.jarmapping.MapNamedJarTask;
 import quilt.internal.task.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.task.setup.ConstantsJarTask;
@@ -27,6 +29,15 @@ import quilt.internal.task.unpick.RemapUnpickDefinitionsTask;
 import quilt.internal.task.unpick.UnpickJarTask;
 import quilt.internal.task.unpick.gen.OpenGlConstantUnpickGenTask;
 import quilt.internal.task.unpick.gen.UnpickGenTask;
+
+import static quilt.internal.Constants.PER_VERSION_MAPPINGS_NAME;
+import static quilt.internal.Constants.UNPICK_NAME;
+import static quilt.internal.task.build.MappingsV2JarTask.MERGED_V2_CLASSIFIER;
+import static quilt.internal.task.build.MappingsV2JarTask.V2_CLASSIFIER;
+import static quilt.internal.task.jarmapping.MapJarTask.PER_VERSION_UNPICKED_CLASSIFIER;
+import static quilt.internal.task.jarmapping.MapJarTask.UNPICKED_CLASSIFIER;
+import static quilt.internal.task.jarmapping.MapNamedJarTask.NAMED_CLASSIFIER;
+import static quilt.internal.task.unpick.gen.UnpickGenTask.UNPICK_EXTENSION;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks that output mappings in Quilt's v2 format.
@@ -58,7 +69,7 @@ import quilt.internal.task.unpick.gen.UnpickGenTask;
  * Note: v2 {@value Constants#INTERMEDIARY_MAPPINGS_NAME} mappings are created by {@link MapIntermediaryPlugin} tasks.
  */
 public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<MapV2Plugin.Tasks> {
-    public static final String UNPICK_CONFIGURATION_NAME = Constants.UNPICK_NAME;
+    public static final String UNPICK_CONFIGURATION_NAME = UNPICK_NAME;
 
     @Override
     protected Tasks applyImpl(@NotNull Project project) {
@@ -101,7 +112,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 );
 
                 task.getOutputMappings().convention(
-                    this.getMappingsBuildDir().map(dir -> dir.file("merged2.tiny"))
+                    this.provideMappingsBuildFile("merged2.tiny")
                 );
             }
         );
@@ -119,11 +130,11 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 );
 
                 task.getUnpickGlStateManagerDefinitions().convention(
-                    this.getMappingsBuildDir().map(dir -> dir.file("unpick_glstatemanager.unpick"))
+                    this.provideMappingsBuildFile(UNPICK_NAME + "_glstatemanager." + UNPICK_EXTENSION)
                 );
 
                 task.getUnpickGlDefinitions().convention(
-                    this.getMappingsBuildDir().map(dir -> dir.file("unpick_gl.unpick"))
+                    this.provideMappingsBuildFile(UNPICK_NAME + "_gl." + UNPICK_EXTENSION)
                 );
             }
         );
@@ -135,7 +146,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 task.getUnpickDefinitions().from(project.getTasks().withType(UnpickGenTask.class));
 
                 task.getOutput().convention(
-                    this.getMappingsBuildDir().map(dir -> dir.file("definitions.unpick"))
+                    this.provideMappingsBuildFile("definitions." + UNPICK_EXTENSION)
                 );
             }
         );
@@ -148,9 +159,9 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
 
                 task.getMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
-                task.getOutput().convention(this.getMappingsBuildDir().map(dir ->
-                    dir.file(Constants.PER_VERSION_MAPPINGS_NAME + "-definitions.unpick")
-                ));
+                task.getOutput().convention(
+                    this.provideMappingsBuildFile(PER_VERSION_MAPPINGS_NAME + "-definitions." + UNPICK_EXTENSION)
+                );
             }
         );
 
@@ -182,9 +193,9 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 task.getUnpickConstantsJar().set(constantsJar.flatMap(ConstantsJarTask::getArchiveFile));
 
                 task.getOutputFile().convention(
-                    this.provideMappedMinecraftBuildFile(
-                        ext.provideSuffixedMinecraftVersion("-" + Constants.PER_VERSION_MAPPINGS_NAME + "-unpicked.jar")
-                    )
+                    this.provideMappedMinecraftBuildFile(ext.provideSuffixedMinecraftVersion(
+                        "-" + PER_VERSION_UNPICKED_CLASSIFIER + "." + Jar.DEFAULT_EXTENSION
+                    ))
                 );
             }
         );
@@ -200,7 +211,9 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 );
 
                 task.getOutputJar().convention(
-                    this.provideMappedMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-named.jar"))
+                    this.provideMappedMinecraftBuildFile(ext.provideSuffixedMinecraftVersion(
+                        "-" + NAMED_CLASSIFIER + "." + Jar.DEFAULT_EXTENSION
+                    ))
                 );
             }
         );
@@ -211,13 +224,11 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
             task.getUnpickDefinition().convention(
                 combineUnpickDefinitions.flatMap(CombineUnpickDefinitionsTask::getOutput)
             );
-
-            // task.getDestinationDirectory().convention(this.getLibsDir());
         });
 
         {
             final var v2UnmergedMappingsJar = tasks.register(
-                MappingsV2JarTask.V_2_UNMERGED_MAPPINGS_JAR_TASK_NAME,
+                MappingsV2JarTask.V2_UNMERGED_MAPPINGS_JAR_TASK_NAME,
                 MappingsV2JarTask.class,
                 ext.getUnpickVersion()
             );
@@ -226,19 +237,19 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                     insertAutoGeneratedMappings.flatMap(AddProposedMappingsTask::getOutputMappings)
                 );
 
-                task.getArchiveClassifier().convention(MappingsV2JarTask.V_2_CLASSIFIER);
+                task.getArchiveClassifier().convention(V2_CLASSIFIER);
             });
         }
 
         final var v2MergedMappingsJar = tasks.register(
-            MappingsV2JarTask.V_2_MERGED_MAPPINGS_JAR_TASK_NAME,
+            MappingsV2JarTask.V2_MERGED_MAPPINGS_JAR_TASK_NAME,
             MappingsV2JarTask.class,
             ext.getUnpickVersion()
         );
         v2MergedMappingsJar.configure(task -> {
             task.getMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
-            task.getArchiveClassifier().convention(MappingsV2JarTask.MERGED_V2_CLASSIFIER);
+            task.getArchiveClassifier().convention(MERGED_V2_CLASSIFIER);
         });
 
         return new Tasks(mergeTinyV2, unpickHashedJar, mapNamedJar);

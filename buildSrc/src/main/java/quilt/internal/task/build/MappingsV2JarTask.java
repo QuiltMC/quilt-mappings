@@ -27,18 +27,18 @@ public abstract class MappingsV2JarTask extends Jar implements QuiltMappingsArti
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */
-    public static final String V_2_UNMERGED_MAPPINGS_JAR_TASK_NAME = "v2UnmergedMappingsJar";
+    public static final String V2_UNMERGED_MAPPINGS_JAR_TASK_NAME = "v2UnmergedMappingsJar";
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */
-    public static final String V_2_MERGED_MAPPINGS_JAR_TASK_NAME = "v2MergedMappingsJar";
+    public static final String V2_MERGED_MAPPINGS_JAR_TASK_NAME = "v2MergedMappingsJar";
 
-    public static final String V_2_CLASSIFIER = "v2";
+    public static final String V2_CLASSIFIER = "v2";
     public static final String MERGED_V2_CLASSIFIER = "mergedv2";
 
     public static final String JAR_UNPICK_META_PATH = "extras/unpick.json";
     public static final String JAR_UNPICK_DEFINITION_PATH = "extras/definitions.unpick";
-    public static final String JAR_MAPPINGS_PATH = "mappings/mappings.tiny";
+    public static final String JAR_MAPPINGS_PATH = TinyJarTask.JAR_MAPPINGS_PATH;
 
     @InputFile
     public abstract RegularFileProperty getUnpickMeta();

@@ -119,7 +119,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
                 task.getMergedTinyMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
                 task.getOutputMappings().convention(
-                    this.getMappingsBuildDir().map(dir -> dir.file("mappings-intermediaryMerged.tiny"))
+                    this.provideMappingsBuildFile("mappings-intermediaryMerged.tiny")
                 );
             }
         );
@@ -131,7 +131,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
                 task.getInput().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
 
                 task.getOutputMappings().convention(
-                    this.getMappingsBuildDir().map(dir -> dir.file("mappings-intermediary.tiny"))
+                    this.provideMappingsBuildFile("mappings-intermediary.tiny")
                 );
             }
         );

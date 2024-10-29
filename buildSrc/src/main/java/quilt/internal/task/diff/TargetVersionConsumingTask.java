@@ -7,7 +7,6 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
-import quilt.internal.plugin.QuiltMappingsPlugin;
 import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.MappingsTask;
 
@@ -33,11 +32,33 @@ public interface TargetVersionConsumingTask extends MappingsTask {
     }
 
     /**
+     * @param destinationDir the {@link Directory} the provided file will be resolved against
+     * @param namer receives the {@link #getTargetVersion() targetVersion}
+     *             and returns the name of the file to be provided
+     */
+    default Provider<RegularFile> provideVersionedFile(
+        Provider<Directory> destinationDir, Transformer<String, String> namer
+    ) {
+        return destinationDir.zip(this.getTargetVersion().map(namer), Directory::file);
+    }
+
+    /**
      * @param destinationDir the {@link Directory} the provided directory will be resolved against
      * @param namer receives the {@link #getTargetVersion() targetVersion}
      *             and returns the name of the directory to be provided
      */
     default Provider<Directory> provideVersionedDir(Directory destinationDir, Transformer<String, String> namer) {
         return this.getTargetVersion().map(namer).map(destinationDir::dir);
+    }
+
+    /**
+     * @param destinationDir the {@link Directory} the provided directory will be resolved against
+     * @param namer receives the {@link #getTargetVersion() targetVersion}
+     *             and returns the name of the directory to be provided
+     */
+    default Provider<Directory> provideVersionedDir(
+        Provider<Directory> destinationDir, Transformer<String, String> namer
+    ) {
+        return destinationDir.zip(this.getTargetVersion().map(namer), Directory::dir);
     }
 }
