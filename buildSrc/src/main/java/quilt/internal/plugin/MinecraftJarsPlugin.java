@@ -40,8 +40,6 @@ import quilt.internal.util.serializable.VersionParser;
 public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPlugin<MinecraftJarsPlugin.Tasks> {
     @Override
     protected Tasks applyImpl(@NotNull Project project) {
-        final Provider<Directory> minecraftDir = this.getMinecraftDir();
-
         final PluginContainer plugins = project.getPlugins();
 
         final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
@@ -52,7 +50,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             DownloadVersionsManifestTask.DOWNLOAD_VERSIONS_MANIFEST_TASK_NAME,
             DownloadVersionsManifestTask.class,
             task -> {
-                task.getDest().convention(minecraftDir.map(dir -> dir.file("version_manifest_v2.json")));
+                task.getDest().convention(this.provideMinecraftBuildFile("version_manifest_v2.json"));
             }
         );
 
@@ -68,7 +66,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
                     );
 
                     task.getDest().convention(
-                        minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion(".json")))
+                        this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion(".json"))
                     );
                 }
             );
@@ -89,11 +87,11 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             DownloadMinecraftJarsTask.class,
             task -> {
                 task.getClientJar().convention(
-                    minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion("-client.jar")))
+                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-client.jar"))
                 );
 
                 task.getServerBootstrapJar().convention(
-                    minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion("-server-bootstrap.jar")))
+                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-server-bootstrap.jar"))
                 );
             }
         );
@@ -107,7 +105,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
                 );
 
                 task.getExtractionDest().convention(
-                    minecraftDir.flatMap(dir -> dir.file(ext.provideSuffixedMinecraftVersion("-server.jar")))
+                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-server.jar"))
                 );
             }
         );
@@ -120,9 +118,8 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
 
                 task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
-                // TODO move this and other jars that are directly in the project dir to some sub dir
                 task.getMergedFile().convention(
-                    this.getProjectDir().file(ext.provideSuffixedMinecraftVersion("-merged.jar"))
+                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-merged.jar"))
                 );
             }
         );
@@ -131,7 +128,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             DownloadMinecraftLibrariesTask.DOWNLOAD_MINECRAFT_LIBRARIES_TASK_NAME,
             DownloadMinecraftLibrariesTask.class,
             task -> {
-                task.getLibrariesDir().convention(minecraftDir.map(dir -> dir.dir("libraries")));
+                task.getLibrariesDir().convention(this.getMinecraftBuildDir().map(dir -> dir.dir("libraries")));
             }
         );
 

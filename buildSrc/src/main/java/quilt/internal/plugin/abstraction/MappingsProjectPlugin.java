@@ -48,16 +48,32 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
         return this.getLayout().getBuildDirectory();
     }
 
-    default Provider<Directory> getBuildMappingsDir() {
+    default Provider<Directory> getMappingsBuildDir() {
         return this.getBuildDir().dir("mappings");
     }
 
-    default Provider<RegularFile> provideBuildMappingsDirFile(Provider<String> path) {
-        return this.getBuildMappingsDir().zip(path, Directory::file);
+    default Provider<RegularFile> provideMappingsBuildFile(Provider<String> path) {
+        return this.getMappingsBuildDir().zip(path, Directory::file);
     }
 
-    default Provider<Directory> getMinecraftDir() {
+    default Provider<Directory> getMinecraftBuildDir() {
         return this.getBuildDir().dir("minecraft");
+    }
+
+    default Provider<RegularFile> provideMinecraftBuildFile(String path) {
+        return this.getMinecraftBuildDir().map(dir -> dir.file(path));
+    }
+
+    default Provider<RegularFile> provideMinecraftBuildFile(Provider<String> path) {
+        return this.getMinecraftBuildDir().zip(path, Directory::file);
+    }
+
+    default Provider<Directory> getMappedMinecraftBuildDir() {
+        return this.getMinecraftBuildDir().map(dir -> dir.dir("mapped"));
+    }
+
+    default Provider<RegularFile> provideMappedMinecraftBuildFile(Provider<String> path) {
+        return this.getMappedMinecraftBuildDir().zip(path, Directory::file);
     }
 
     default Provider<Directory> getTempDir() {
@@ -121,9 +137,9 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
                 return resolver.apply(resolvableConfiguration);
             })
             .flatMap(file -> {
-                final RegularFileProperty regularFile = this.getObjects().fileProperty();
-                regularFile.set(file);
-                return regularFile;
+                final RegularFileProperty fileProperty = this.getObjects().fileProperty();
+                fileProperty.set(file);
+                return fileProperty;
             });
     }
 }

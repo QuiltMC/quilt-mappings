@@ -106,8 +106,8 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 task -> {
                     task.getMinecraftVersion().convention(ext.getMinecraftVersion());
 
-                    task.getDest().convention(this.getMinecraftDir().flatMap(dir ->
-                        dir.file(ext.getMinecraftVersion().map(version -> MAPPINGS_NAME_PREFIX + version + ".json"))
+                    task.getDest().convention(this.provideMinecraftBuildFile(
+                        ext.getMinecraftVersion().map(version -> MAPPINGS_NAME_PREFIX + version + ".json")
                     ));
                 }
             );
