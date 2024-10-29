@@ -8,9 +8,9 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
-import quilt.internal.Constants.Groups;
-import quilt.internal.Constants.Namespaces;
+import quilt.internal.constants.Constants;
+import quilt.internal.constants.Groups;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.task.DefaultMappingsTask;
 

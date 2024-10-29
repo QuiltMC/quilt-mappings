@@ -10,6 +10,7 @@ import org.gradle.api.plugins.ExtensionContainer;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.quiltmc.enigma.api.EnigmaProfile;
+import quilt.internal.constants.Constants;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;

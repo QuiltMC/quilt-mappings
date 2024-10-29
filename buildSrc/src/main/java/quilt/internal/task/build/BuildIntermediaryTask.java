@@ -1,7 +1,7 @@
 package quilt.internal.task.build;
 
 import org.gradle.api.tasks.TaskContainer;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapIntermediaryPlugin;
 import quilt.internal.task.DefaultMappingsTask;
 

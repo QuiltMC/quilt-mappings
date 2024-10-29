@@ -15,7 +15,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.task.DefaultMappingsTask;
 
 import java.io.File;

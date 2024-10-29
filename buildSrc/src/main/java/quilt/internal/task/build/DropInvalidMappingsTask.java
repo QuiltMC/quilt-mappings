@@ -6,7 +6,7 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskContainer;
 import org.quiltmc.enigma.command.DropInvalidMappingsCommand;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;

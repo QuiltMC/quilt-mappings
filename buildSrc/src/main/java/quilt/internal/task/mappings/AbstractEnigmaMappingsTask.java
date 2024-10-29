@@ -4,7 +4,7 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.UntrackedTask;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;

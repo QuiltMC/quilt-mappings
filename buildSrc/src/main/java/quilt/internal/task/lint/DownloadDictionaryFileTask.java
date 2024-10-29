@@ -1,6 +1,6 @@
 package quilt.internal.task.lint;
 
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MappingsVerificationPlugin;
 import quilt.internal.task.SimpleDownloadTask;
 

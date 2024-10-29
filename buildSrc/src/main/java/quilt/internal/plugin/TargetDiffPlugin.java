@@ -16,9 +16,10 @@ import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
-import org.gradle.jvm.tasks.Jar;
 import org.jetbrains.annotations.NotNull;
-import quilt.internal.Constants;
+import quilt.internal.constants.Constants;
+import quilt.internal.constants.Classifiers;
+import quilt.internal.constants.Extensions;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
@@ -39,13 +40,8 @@ import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static quilt.internal.Constants.UNPICK_NAME;
+import static quilt.internal.constants.Constants.UNPICK_NAME;
 import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
-import static quilt.internal.task.build.MappingsV2JarTask.V2_CLASSIFIER;
-import static quilt.internal.task.jarmapping.MapJarTask.UNPICKED_CLASSIFIER;
-import static quilt.internal.task.jarmapping.MapNamedJarTask.NAMED_CLASSIFIER;
-import static quilt.internal.task.setup.ConstantsJarTask.CONSTANTS_CLASSIFIER;
-import static quilt.internal.task.unpick.gen.UnpickGenTask.UNPICK_EXTENSION;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks that download the latest published Quilt Mappings for the current
@@ -111,7 +107,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                     task.getMinecraftVersion().convention(ext.getMinecraftVersion());
 
                     task.getDest().convention(this.provideMinecraftBuildFile(
-                        task.getMinecraftVersion().map(createQuiltFileNameBuilder(".json"))
+                        task.getMinecraftVersion().map(createQuiltFileNameBuilder("." + Extensions.JSON))
                     ));
                 }
             );
@@ -134,11 +130,11 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
             DownloadTargetMappingJarTask.class,
             task -> {
                 task.getTargetUnpickConstantsFile().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), CONSTANTS_CLASSIFIER)
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.CONSTANTS)
                 );
 
                 task.getTargetJar().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), V2_CLASSIFIER)
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.V2)
                 );
             }
         );
@@ -189,7 +185,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 );
 
                 task.getOutput().convention(this.provideQuiltTargetBuildFile(
-                    task.getTargetVersion(), "remapped-" + UNPICK_NAME, UNPICK_EXTENSION
+                    task.getTargetVersion(), "remapped-" + UNPICK_NAME, Extensions.UNPICK
                 ));
             }
         );
@@ -207,7 +203,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 );
 
                 task.getOutputFile().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), UNPICKED_CLASSIFIER)
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.UNPICKED)
                 );
             }
         );
@@ -224,7 +220,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 );
 
                 task.getOutputJar().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), NAMED_CLASSIFIER)
+                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.NAMED)
                 );
             }
         );
@@ -280,7 +276,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
     }
 
     public Provider<RegularFile> provideQuiltTargetBuildJarFile(Provider<String> version, String classifier) {
-        return this.provideQuiltTargetBuildFile(version, classifier, Jar.DEFAULT_EXTENSION);
+        return this.provideQuiltTargetBuildFile(version, classifier, Extensions.JAR);
     }
 
     public Provider<Directory> provideQuiltTargetBuildDir(Provider<String> version, String pathSuffix) {

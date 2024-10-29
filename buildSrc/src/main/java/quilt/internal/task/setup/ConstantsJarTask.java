@@ -4,7 +4,8 @@ import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.jvm.tasks.Jar;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Classifiers;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.task.MappingsTask;
 
@@ -14,15 +15,13 @@ public abstract class ConstantsJarTask extends Jar implements MappingsTask {
      */
     public static final String CONSTANTS_JAR_TASK_NAME = "constantsJar";
 
-    public static final String CONSTANTS_CLASSIFIER = "constants";
-
     @InputFiles
     public abstract ConfigurableFileCollection getConstants();
 
     public ConstantsJarTask() {
         this.setGroup(Groups.SETUP);
 
-        this.getArchiveClassifier().convention(CONSTANTS_CLASSIFIER);
+        this.getArchiveClassifier().convention(Classifiers.CONSTANTS);
 
         this.from(this.getConstants());
     }

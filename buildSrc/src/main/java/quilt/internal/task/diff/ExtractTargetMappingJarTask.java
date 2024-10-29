@@ -1,7 +1,7 @@
 package quilt.internal.task.diff;
 
 import org.gradle.api.tasks.TaskContainer;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.ExtractZippedFilesTask;
 

@@ -11,8 +11,9 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Constants;
+import quilt.internal.constants.Groups;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.mappingio.CompleteInitializersVisitor;
 import quilt.internal.task.DefaultMappingsTask;
 
@@ -80,7 +81,7 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
                 new CompleteInitializersVisitor(
                     new MappingSourceNsSwitch(
                         preWriteVisitor.apply(w),
-                        "official",
+                        Namespaces.OFFICIAL,
                         // Drop methods not in hashed
                         true
                     )

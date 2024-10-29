@@ -11,8 +11,8 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants.Groups;
-import quilt.internal.Constants.Namespaces;
+import quilt.internal.constants.Groups;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
@@ -58,7 +58,7 @@ public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implemen
                 mappings,
                 outputMappings,
                 Namespaces.PER_VERSION,
-                "named"
+                Namespaces.NAMED
         );
     }
 }

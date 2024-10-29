@@ -3,15 +3,12 @@ package quilt.internal.task.build;
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingDstNsReorder;
 
-import org.gradle.api.Task;
 import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.Constants;
-import quilt.internal.Constants.Namespaces;
+import quilt.internal.constants.Constants;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
 import quilt.internal.plugin.MapIntermediaryPlugin;

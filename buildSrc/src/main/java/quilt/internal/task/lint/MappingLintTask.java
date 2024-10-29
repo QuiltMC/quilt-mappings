@@ -48,7 +48,7 @@ import org.gradle.workers.WorkAction;
 import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MappingsVerificationPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;

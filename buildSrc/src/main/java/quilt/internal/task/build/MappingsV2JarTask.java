@@ -7,12 +7,15 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.jvm.tasks.Jar;
 import org.gradle.work.DisableCachingByDefault;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.QuiltMappingsArtifactTask;
 
 import javax.inject.Inject;
+
+import static quilt.internal.constants.Constants.UNPICK_NAME;
 
 /**
  * Creates a jar file with Quilt's v2 mapping format.
@@ -33,11 +36,9 @@ public abstract class MappingsV2JarTask extends Jar implements QuiltMappingsArti
      */
     public static final String V2_MERGED_MAPPINGS_JAR_TASK_NAME = "v2MergedMappingsJar";
 
-    public static final String V2_CLASSIFIER = "v2";
-    public static final String MERGED_V2_CLASSIFIER = "mergedv2";
-
-    public static final String JAR_UNPICK_META_PATH = "extras/unpick.json";
-    public static final String JAR_UNPICK_DEFINITION_PATH = "extras/definitions.unpick";
+    private static final String EXTRAS_DIR = "extras/";
+    public static final String JAR_UNPICK_META_PATH = EXTRAS_DIR + UNPICK_NAME + "." + Extensions.JSON;
+    public static final String JAR_UNPICK_DEFINITION_PATH = EXTRAS_DIR + "definitions." + Extensions.UNPICK;
     public static final String JAR_MAPPINGS_PATH = TinyJarTask.JAR_MAPPINGS_PATH;
 
     @InputFile

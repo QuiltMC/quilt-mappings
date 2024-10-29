@@ -13,7 +13,9 @@ import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import quilt.internal.Constants;
+import quilt.internal.constants.Constants;
+import quilt.internal.constants.Classifiers;
+import quilt.internal.constants.Extensions;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
 import quilt.internal.task.build.BuildIntermediaryTask;
@@ -26,6 +28,8 @@ import quilt.internal.task.setup.ExtractTinyMappingsTask;
 import quilt.internal.task.setup.IntermediaryDependantTask;
 
 import java.util.Objects;
+
+import static quilt.internal.constants.Constants.INTERMEDIARY_MAPPINGS_NAME;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks related to
@@ -49,7 +53,7 @@ import java.util.Objects;
  * </ul>
  */
 public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
-    public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = Constants.INTERMEDIARY_MAPPINGS_NAME;
+    public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = INTERMEDIARY_MAPPINGS_NAME;
 
     @Nullable
     private Provider<RegularFile> intermediaryProvider;
@@ -60,7 +64,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
     public Provider<RegularFile> provideIntermediary() {
         return Objects.requireNonNull(
             this.intermediaryProvider,
-            Constants.INTERMEDIARY_MAPPINGS_NAME + " not yet populated"
+            INTERMEDIARY_MAPPINGS_NAME + " not yet populated"
         );
     }
 
@@ -87,7 +91,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
             ExtractTinyIntermediaryMappingsTask.class,
             task -> {
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-" + Constants.INTERMEDIARY_MAPPINGS_NAME + "." + "tiny")
+                    ext.provideSuffixedMinecraftVersion("-" + INTERMEDIARY_MAPPINGS_NAME + "." + Extensions.TINY)
                 ));
             }
         );
@@ -118,9 +122,9 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
 
                 task.getMergedTinyMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
-                task.getOutputMappings().convention(
-                    this.provideMappingsBuildFile("mappings-intermediaryMerged.tiny")
-                );
+                task.getOutputMappings().convention(this.provideMappingsBuildFile(
+                    "mappings-" + Classifiers.INTERMEDIARY + "Merged." + Extensions.TINY
+                ));
             }
         );
 
@@ -131,7 +135,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
                 task.getInput().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
 
                 task.getOutputMappings().convention(
-                    this.provideMappingsBuildFile("mappings-intermediary.tiny")
+                    this.provideMappingsBuildFile("mappings-" + Classifiers.INTERMEDIARY + "." + Extensions.TINY)
                 );
             }
         );
@@ -144,7 +148,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
         intermediaryV2MappingsJar.configure(task -> {
             task.getMappings().convention(removeIntermediary.flatMap(RemoveIntermediaryTask::getOutputMappings));
 
-            task.getArchiveClassifier().convention(IntermediaryMappingsV2JarTask.CLASSIFIER);
+            task.getArchiveClassifier().convention(Classifiers.INTERMEDIARY_V2);
         });
 
         final var intermediaryV2MergedMappingsJar = tasks.register(
@@ -155,7 +159,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
         intermediaryV2MergedMappingsJar.configure(task -> {
             task.getMappings().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));
 
-            task.getArchiveClassifier().convention(IntermediaryMappingsV2JarTask.MERGED_CLASSIFIER);
+            task.getArchiveClassifier().convention(Classifiers.INTERMEDIARY_V2_MERGED);
         });
 
         tasks.register(

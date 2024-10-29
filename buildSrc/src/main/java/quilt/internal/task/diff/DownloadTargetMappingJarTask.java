@@ -4,7 +4,9 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.TaskContainer;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Classifiers;
+import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.DownloadUtil;
@@ -36,12 +38,14 @@ public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask i
             targetVersion + "/quilt-mappings-" + targetVersion;
 
         DownloadUtil.download(
-            urlPrefix + "-v2.jar", this.getTargetJar().get().getAsFile(),
+            urlPrefix + "-" + Classifiers.V2 + "." + Extensions.JAR,
+            this.getTargetJar().get().getAsFile(),
             false, this.getLogger()
         );
 
         DownloadUtil.download(
-            urlPrefix + "-constants.jar", this.getTargetUnpickConstantsFile().get().getAsFile(),
+            urlPrefix + "-" + Classifiers.CONSTANTS + "." + Extensions.JAR,
+            this.getTargetUnpickConstantsFile().get().getAsFile(),
             false, this.getLogger()
         );
     }

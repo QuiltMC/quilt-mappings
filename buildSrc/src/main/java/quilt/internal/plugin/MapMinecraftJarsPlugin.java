@@ -8,9 +8,10 @@ import org.gradle.api.plugins.PluginContainer;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
-import org.gradle.jvm.tasks.Jar;
 import org.jetbrains.annotations.NotNull;
-import quilt.internal.Constants;
+import quilt.internal.constants.Constants;
+import quilt.internal.constants.Classifiers;
+import quilt.internal.constants.Extensions;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.build.AddProposedMappingsTask;
@@ -26,9 +27,7 @@ import quilt.internal.task.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.task.setup.ExtractTinyMappingsTask;
 import quilt.internal.task.setup.MergeJarsTask;
-import quilt.internal.util.FileUtil;
 
-import static quilt.internal.task.jarmapping.MapPerVersionMappingsJarTask.PER_VERSION_CLASSIFIER;
 import static quilt.internal.util.FileUtil.getNameWithExtension;
 import static quilt.internal.util.FileUtil.getPathWithExtension;
 
@@ -94,7 +93,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
                 task.getZippedFile().convention(this.provideRequiredFile(perVersionMappings));
 
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-" + Constants.PER_VERSION_MAPPINGS_NAME + "." + "tiny")
+                    ext.provideSuffixedMinecraftVersion("-" + Classifiers.PER_VERSION + "." + Extensions.TINY)
                 ));
             }
         );
@@ -109,7 +108,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
 
                 task.getInvertedTinyFile().convention(
                     task.getInput()
-                        .map(input -> getPathWithExtension(input, "-inverted.tiny"))
+                        .map(input -> getPathWithExtension(input, "-inverted." + Extensions.TINY))
                         .map(this.getProjectDir()::file)
                 );
             }
@@ -136,7 +135,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
 
                 task.getOutputJar().convention(
                     this.provideMappedMinecraftBuildFile(
-                        ext.provideSuffixedMinecraftVersion("-" + PER_VERSION_CLASSIFIER + "." + Jar.DEFAULT_EXTENSION)
+                        ext.provideSuffixedMinecraftVersion("-" + Classifiers.PER_VERSION + "." + Extensions.JAR)
                     )
                 );
             }
@@ -151,7 +150,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
                 );
 
                 task.getOutputMappings().convention(
-                    this.provideMappingsBuildFile(Constants.MAPPINGS_NAME + ".tiny")
+                    this.provideMappingsBuildFile(Constants.MAPPINGS_NAME + "." + Extensions.TINY)
                 );
             }
         );
@@ -168,19 +167,19 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
 
                 task.getOutputMappings().convention(
                     this.getMappingsBuildDir().zip(task.getInputMappings(), (dir, input) ->
-                        dir.file(getNameWithExtension(input, "-inserted.tiny"))
+                        dir.file(getNameWithExtension(input, "-inserted." + Extensions.TINY))
                     )
                 );
 
                 task.getPreprocessedMappings().convention(
                     this.getTempDir().zip(task.getInputMappings(), (dir, input) ->
-                        dir.file(getNameWithExtension(input, "-preprocessed.tiny"))
+                        dir.file(getNameWithExtension(input, "-preprocessed." + Extensions.TINY))
                     )
                 );
 
                 task.getProcessedMappings().convention(
                     this.getTempDir().zip(task.getInputMappings(), (dir, input) ->
-                        dir.file(getNameWithExtension(input, "-processed.tiny"))
+                        dir.file(getNameWithExtension(input, "-processed." + Extensions.TINY))
                     )
                 );
             }
@@ -196,7 +195,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
                     invertPerVersionMappings.flatMap(InvertPerVersionMappingsTask::getInvertedTinyFile)
                 );
 
-                task.getOutputMappings().convention(this.provideMappingsBuildFile("mappings.tiny"));
+                task.getOutputMappings().convention(this.provideMappingsBuildFile("mappings." + Extensions.TINY));
             }
         );
 
@@ -223,7 +222,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
 
                 task.getArtifactVersion().convention(ext.getMappingsVersion());
 
-                task.getArtifactClassifier().convention(CompressTinyTask.TINY_CLASSIFIER);
+                task.getArtifactClassifier().convention(Classifiers.TINY);
             }
         );
 

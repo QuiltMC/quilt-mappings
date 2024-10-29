@@ -10,7 +10,7 @@ import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.api.io.CleanupMode;
 import org.junit.jupiter.api.io.TempDir;
 import org.quiltmc.enigma.api.EnigmaProfile;
-import quilt.internal.Constants.Namespaces;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.task.build.AddProposedMappingsTask;
 import quilt.internal.task.build.BuildMappingsTinyTask;
 import quilt.internal.task.build.InvertPerVersionMappingsTask;

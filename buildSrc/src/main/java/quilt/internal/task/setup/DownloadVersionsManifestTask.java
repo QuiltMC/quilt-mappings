@@ -1,7 +1,8 @@
 package quilt.internal.task.setup;
 
 import org.gradle.work.DisableCachingByDefault;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.SimpleDownloadTask;
 
@@ -18,6 +19,8 @@ public abstract class DownloadVersionsManifestTask extends SimpleDownloadTask {
 
         this.getPreDownloadLifecycle().convention(":downloading minecraft versions manifest");
 
-        this.getUrl().convention("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json");
+        this.getUrl().convention(
+            "https://piston-meta.mojang.com/mc/game/version_manifest_v2." + Extensions.JSON
+        );
     }
 }

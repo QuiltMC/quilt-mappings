@@ -8,9 +8,9 @@ import java.util.zip.GZIPOutputStream;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskAction;
-import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.ArtifactFileTask;
@@ -29,9 +29,7 @@ public abstract class CompressTinyTask extends DefaultMappingsTask implements
      */
     public static final String COMPRESS_TINY_TASK_NAME = "compressTiny";
 
-    public static final String TINY_CLASSIFIER = "tiny";
-
-    public static final String DEFAULT_EXTENSION = "gz";
+    public static final String DEFAULT_EXTENSION = Extensions.GZ;
 
     @InputFile
     public abstract RegularFileProperty getMappings();

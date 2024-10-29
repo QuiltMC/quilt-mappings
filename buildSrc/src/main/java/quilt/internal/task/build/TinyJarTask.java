@@ -2,11 +2,10 @@ package quilt.internal.task.build;
 
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
-import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.jvm.tasks.Jar;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.QuiltMappingsArtifactTask;
@@ -22,7 +21,7 @@ public abstract class TinyJarTask extends Jar implements QuiltMappingsArtifactTa
      */
     public static final String TINY_JAR_TASK_NAME = "tinyJar";
 
-    public static final String JAR_MAPPINGS_PATH = "mappings/mappings.tiny";
+    public static final String JAR_MAPPINGS_PATH = "mappings/mappings." + Extensions.TINY;
 
     @InputFile
     public abstract RegularFileProperty getMappings();

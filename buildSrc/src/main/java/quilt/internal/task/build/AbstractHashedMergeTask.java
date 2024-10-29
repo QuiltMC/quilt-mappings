@@ -2,7 +2,7 @@ package quilt.internal.task.build;
 
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 
 import java.io.IOException;
 

@@ -6,7 +6,7 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.OutputFile;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.SimpleDownloadTask;
 import quilt.internal.task.VersionParserConsumingTask;

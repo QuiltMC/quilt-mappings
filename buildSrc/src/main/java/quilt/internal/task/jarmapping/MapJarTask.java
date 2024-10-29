@@ -15,8 +15,6 @@ import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.JarRemapper;
 
-import static quilt.internal.Constants.PER_VERSION_MAPPINGS_NAME;
-
 /**
  * Copies a {@linkplain #getInputJar() Jar} and applies {@linkplain #getMappingsFile() mappings}.
  *
@@ -28,9 +26,6 @@ public abstract class MapJarTask extends DefaultMappingsTask {
         "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
         "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
     );
-
-    public static final String UNPICKED_CLASSIFIER = "unpicked";
-    public static final String PER_VERSION_UNPICKED_CLASSIFIER = PER_VERSION_MAPPINGS_NAME + "-" + UNPICKED_CLASSIFIER;
 
     @Input
     public abstract MapProperty<String, String> getAdditionalMappings();

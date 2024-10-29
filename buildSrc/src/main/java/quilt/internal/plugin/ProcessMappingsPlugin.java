@@ -11,8 +11,8 @@ import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.jetbrains.annotations.NotNull;
-import quilt.internal.Constants;
 import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.constants.Groups;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.build.AddProposedMappingsTask;
@@ -141,7 +141,7 @@ public abstract class ProcessMappingsPlugin extends DefaultTaskedMappingsProject
         tasks.register(SourcesJarTask.SOURCES_JAR_TASK_NAME, SourcesJarTask.class);
 
         final var javadoc = tasks.named(JavaPlugin.JAVADOC_TASK_NAME, Javadoc.class, task -> {
-            task.setGroup(Constants.Groups.JAVADOC_GENERATION);
+            task.setGroup(Groups.JAVADOC_GENERATION);
 
             task.source(genFakeSource.flatMap(GenFakeSourceTask::getOutput).map(Directory::getAsFileTree));
 

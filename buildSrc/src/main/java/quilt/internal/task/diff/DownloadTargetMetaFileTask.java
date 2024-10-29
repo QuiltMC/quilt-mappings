@@ -8,7 +8,7 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.work.DisableCachingByDefault;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.SimpleDownloadTask;
 

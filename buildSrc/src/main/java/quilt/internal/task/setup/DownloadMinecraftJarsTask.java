@@ -12,7 +12,7 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.quiltmc.launchermeta.version.v1.DownloadableFile;
 import org.quiltmc.launchermeta.version.v1.Downloads;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.VersionParserConsumingTask;

@@ -1,14 +1,13 @@
 package quilt.internal.plugin;
 
 import org.gradle.api.Project;
-import org.gradle.api.file.Directory;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.plugins.PluginContainer;
 import org.gradle.api.provider.Property;
-import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
+import quilt.internal.constants.Extensions;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.VersionParserConsumingTask;
@@ -50,7 +49,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             DownloadVersionsManifestTask.DOWNLOAD_VERSIONS_MANIFEST_TASK_NAME,
             DownloadVersionsManifestTask.class,
             task -> {
-                task.getDest().convention(this.provideMinecraftBuildFile("version_manifest_v2.json"));
+                task.getDest().convention(this.provideMinecraftBuildFile("version_manifest_v2." + Extensions.JSON));
             }
         );
 
@@ -66,7 +65,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
                     );
 
                     task.getDest().convention(
-                        this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion(".json"))
+                        this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("." + Extensions.JSON))
                     );
                 }
             );
@@ -86,13 +85,13 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             DownloadMinecraftJarsTask.DOWNLOAD_MINECRAFT_JARS_TASK_NAME,
             DownloadMinecraftJarsTask.class,
             task -> {
-                task.getClientJar().convention(
-                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-client.jar"))
-                );
+                task.getClientJar().convention(this.provideMinecraftBuildFile(
+                    ext.provideSuffixedMinecraftVersion("-client." + Extensions.JAR)
+                ));
 
-                task.getServerBootstrapJar().convention(
-                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-server-bootstrap.jar"))
-                );
+                task.getServerBootstrapJar().convention(this.provideMinecraftBuildFile(
+                    ext.provideSuffixedMinecraftVersion("-server-bootstrap." + Extensions.JAR)
+                ));
             }
         );
 
@@ -105,7 +104,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
                 );
 
                 task.getExtractionDest().convention(
-                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-server.jar"))
+                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-server." + Extensions.JAR))
                 );
             }
         );
@@ -119,7 +118,7 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
                 task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
                 task.getMergedFile().convention(
-                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-merged.jar"))
+                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR))
                 );
             }
         );

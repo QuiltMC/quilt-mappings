@@ -1,7 +1,8 @@
 package quilt.internal.task.setup;
 
 import org.gradle.api.tasks.TaskContainer;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.task.ExtractSingleZippedFileTask;
 
@@ -11,7 +12,7 @@ public abstract class ExtractTinyMappingsTask extends ExtractSingleZippedFileTas
      */
     public static final String EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME = "extractTinyPerVersionMappings";
 
-    private static final String TINY_MAPPINGS_PATTERN = "**/*mappings.tiny";
+    private static final String TINY_MAPPINGS_PATTERN = "**/*mappings." + Extensions.TINY;
 
     public ExtractTinyMappingsTask() {
         super(

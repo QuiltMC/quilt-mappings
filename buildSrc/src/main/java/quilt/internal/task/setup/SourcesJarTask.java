@@ -4,7 +4,8 @@ import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.jvm.tasks.Jar;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Classifiers;
+import quilt.internal.constants.Groups;
 import quilt.internal.plugin.ProcessMappingsPlugin;
 import quilt.internal.task.MappingsTask;
 
@@ -14,15 +15,13 @@ public abstract class SourcesJarTask extends Jar implements MappingsTask {
      */
     public static final String SOURCES_JAR_TASK_NAME = "sourcesJar";
 
-    public static final String SOURCES_CLASSIFIER = "sources";
-
     @InputFiles
     public abstract ConfigurableFileCollection getSources();
 
     public SourcesJarTask() {
         this.setGroup(Groups.SETUP);
 
-        this.getArchiveClassifier().convention(SOURCES_CLASSIFIER);
+        this.getArchiveClassifier().convention(Classifiers.SOURCES);
 
         this.from(this.getSources());
     }

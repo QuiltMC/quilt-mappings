@@ -1,7 +1,7 @@
 import org.gradle.api.internal.file.FileOperations
-import quilt.internal.Constants
+import quilt.internal.constants.Constants
+import quilt.internal.constants.Classifiers
 import quilt.internal.plugin.MapIntermediaryPlugin
-import quilt.internal.task.build.IntermediaryMappingsV2JarTask
 
 import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
 
@@ -277,9 +277,9 @@ tasks.withType(AbstractPublishToMaven).configureEach {
 			}
 
 			// quilt-mappings-<version>-intermediary-v2.jar
-			addArtifact(intermediaryV2MappingsJar, IntermediaryMappingsV2JarTask.CLASSIFIER)
+			addArtifact(intermediaryV2MappingsJar, Classifiers.INTERMEDIARY_V2)
 			// quilt-mappings-<version>-intermediary-mergedv2.jar
-			addArtifact(intermediaryV2MergedMappingsJar, IntermediaryMappingsV2JarTask.MERGED_CLASSIFIER)
+			addArtifact(intermediaryV2MergedMappingsJar, Classifiers.INTERMEDIARY_V2_MERGED)
 		}
 	}
 }

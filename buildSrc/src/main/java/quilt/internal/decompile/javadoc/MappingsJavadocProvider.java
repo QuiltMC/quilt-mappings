@@ -3,6 +3,7 @@ package quilt.internal.decompile.javadoc;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.provider.Provider;
+import quilt.internal.constants.Namespaces;
 
 import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MappingTree;
@@ -133,7 +134,7 @@ public class MappingsJavadocProvider implements UniversalJavadocProvider {
     }
 
     public static Provider<MappingsJavadocProvider> provideNamed(Provider<RegularFile> mappings) {
-        return provide(mappings, "named");
+        return provide(mappings, Namespaces.NAMED);
     }
 
     public static Provider<MappingsJavadocProvider> provide(

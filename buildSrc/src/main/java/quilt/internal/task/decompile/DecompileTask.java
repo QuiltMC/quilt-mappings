@@ -9,7 +9,7 @@ import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
-import quilt.internal.Constants.Groups;
+import quilt.internal.constants.Groups;
 import quilt.internal.decompile.AbstractDecompiler;
 import quilt.internal.decompile.Decompilers;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;

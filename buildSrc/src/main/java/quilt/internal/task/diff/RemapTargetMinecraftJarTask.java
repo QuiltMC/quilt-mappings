@@ -1,8 +1,8 @@
 package quilt.internal.task.diff;
 
 import org.gradle.api.tasks.TaskContainer;
-import quilt.internal.Constants.Groups;
-import quilt.internal.Constants.Namespaces;
+import quilt.internal.constants.Groups;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.jarmapping.MapJarTask;

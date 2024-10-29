@@ -9,7 +9,7 @@ import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.enigma.api.service.JarIndexerService;
-import quilt.internal.Constants;
+import quilt.internal.constants.Constants;
 import quilt.internal.QuiltMappingsExtension;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
 import quilt.internal.task.ArtifactFileTask;
