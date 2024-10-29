@@ -4,7 +4,6 @@ import org.gradle.api.Action;
 import org.gradle.api.Task;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFile;
-import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.publish.maven.MavenArtifact;
@@ -14,12 +13,12 @@ import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 
-import javax.inject.Inject;
-
-// TODO would it be screwy to implement PublishArtifact on this?
-//  That way we could pass the task itself to MavenPublication#artifact.
-//  Also, is there some way to make it so calling ConfigurablePublishArtifact::builtBy isn't necessary,
-//  similar to AbstractArchiveTask? (obsoleting this class' #artifact methods)
+// TODO Is there a way to make it so MavenPublication#artifact will accept
+//  these tasks directly and run them to build their outputs, similar to AbstractArchiveTask?
+//  (eliminating the need for the artifact convenience methods)
+//  I considered implementing PublishArtifact on this, but it's annotated with @HasInternalProtocol.
+//  This suggests that it would work but doesn't recommend it:
+//  https://github.com/gradle/gradle/issues/17273#issuecomment-858400396
 
 /**
  * A task that produces an {@link #getArtifactFile() artifactFile}.
@@ -28,9 +27,6 @@ import javax.inject.Inject;
  * and {@link MavenPublication#artifact(Object)} can interpolate artifact metadata from the name's format.
  */
 public interface ArtifactFileTask extends Task {
-    @Inject
-    ObjectFactory getObjects();
-
     @Input
     Property<String> getArtifactBaseName();
 
@@ -76,8 +72,41 @@ public interface ArtifactFileTask extends Task {
     }
 
     /**
+     * Convenient hack to provide this task as an artifact source.
+     * <p>
+     * If this task's {@link #getArtifactFile() artifactFile} is its only output,
+     * {@link MavenPublication#artifact(Object)} can retrieve it from this method's
+     * provider and automatically run this task to build it.
+     * <p>
+     * <b>Accesses {@link #getProject() project}: do not use during task execution</b>.
+     * <p>
+     * Build script usage:
+     * <pre>
+     *     {@code
+     *          publishing {
+     *            publications {
+     *              maven(MavenPublication) {
+     *                artifact exampleArtifactFileTask.artifact
+     *              }
+     *            }
+     *          }
+     *      }
+     * </pre>
+     *
+     * @return a provider of this task
+     */
+    @Internal("not an input or an output")
+    default Provider<ArtifactFileTask> getArtifact() {
+        // can't use a Provider from a ProviderFactory, I think it has to ba a TaskProvider
+        return this.getProject().getTasks().named(this.getName(), ArtifactFileTask.class);
+    }
+
+    /**
      * Add an {@linkplain MavenArtifact artifact} to the passed {@code publication} consisting of this task's
      * {@link #getArtifactFile() artifactFile} and {@link MavenArtifact#builtBy(Object...) builtBy} this task.
+     * <p>
+     * Prefer {@link #getArtifact() artifact} for tasks whose only output is their
+     * {@link #getArtifactFile() artifactFile}.
      * <p>
      * Build script usage:
      * <pre>

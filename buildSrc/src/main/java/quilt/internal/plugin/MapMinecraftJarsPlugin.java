@@ -45,7 +45,7 @@ import static quilt.internal.util.FileUtil.getPathWithExtension;
  *     <li> creates the {@value PER_VERSION_MAPPINGS_CONFIGURATION_NAME} configuration,
  *          to which mappings must be added in order to use the
  *          {@value ExtractTinyMappingsTask#EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME} task
- *     <li> if the {@link JavaPlugin} is applied, {@link org.gradle.api.Task#setEnabled(boolean) disables} the
+ *     <li> if the {@link JavaPlugin} is applied, {@linkplain org.gradle.api.Task#setEnabled(boolean) disables} the
  *          {@value JavaPlugin#JAR_TASK_NAME} task so its output doesn't collide with the
  *          {@value TinyJarTask#TINY_JAR_TASK_NAME} task's output
  *     <li> {@linkplain TaskCollection#configureEach(Action) configures} {@link MapJarTask}s
