@@ -187,12 +187,9 @@ repositories {
 }
 
 dependencies {
-	enigmaRuntime(libs.enigma.swing)
-	enigmaRuntime(libs.enigma.plugin)
 	javadocClasspath(libs.quilt.loader)
 	javadocClasspath(libs.jetbrains.annotations)
 	javadocClasspath(libs.jsr305) // for some other jsr annotations
-	unpick(libs.unpick.cli)
 	hashed "org.quiltmc:hashed:${MINECRAFT_VERSION}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 	intermediary "net.fabricmc:intermediary:${MINECRAFT_VERSION}:v2"
 }
@@ -219,6 +216,7 @@ publishing {
 			artifactId Constants.MAPPINGS_NAME
 			version project.version
 
+			// TODO pass task provider
 			// quilt-mappings-<version>-tiny.gz
 			compressTiny.artifact(maven)
 			// quilt-mappings-<version>.jar

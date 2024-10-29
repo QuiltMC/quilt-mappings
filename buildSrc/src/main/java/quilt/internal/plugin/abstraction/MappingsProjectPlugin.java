@@ -4,7 +4,9 @@ import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
+import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.ResolveException;
+import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
@@ -145,5 +147,14 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
                 fileProperty.set(file);
                 return fileProperty;
             });
+    }
+
+    default void addDependencyWithCapability(
+        DependencyHandler dependencies, Configuration configuration,
+        String dependencyNotation, String capabilityNotation
+    ) {
+        final var dependency = (ModuleDependency) dependencies.add(configuration.getName(), dependencyNotation);
+        //noinspection DataFlowIssue; dependencyNotation is not a provider, so dependency is not null
+        dependency.capabilities(capabilities -> capabilities.requireCapability(capabilityNotation));
     }
 }

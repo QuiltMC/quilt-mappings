@@ -6,6 +6,7 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
 import org.gradle.api.plugins.PluginContainer;
 import org.gradle.api.provider.ProviderFactory;
+import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
@@ -28,16 +29,17 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  * <p>
  * Additionally:
  * <ul>
- *     <li> {@linkplain ConfigurationContainer#create(String) creates} the
- *          {@value ENIGMA_RUNTIME_CONFIGURATION_NAME} {@link Configuration}
  *     <li> {@linkplain TaskCollection#configureEach(Action) configures}
- *          {@link AbstractEnigmaMappingsTask}s with the following defaults:
- *          <ul>
- *              <li> adds the {@value ENIGMA_RUNTIME_CONFIGURATION_NAME} {@link Configuration}
- *                   to the {@link AbstractEnigmaMappingsTask#classpath(Object...) classpath}
- *              <li> {@linkplain AbstractEnigmaMappingsTask#jvmArgs tells the JVM} to allocate
- *                   {@linkplain #DEFAULT_ENIGMA_JVM_MEMORY_ARG 2Gb of memory} for {@link Enigma}
- *          </ul>
+ *          {@link AbstractEnigmaMappingsTask}s so {@linkplain AbstractEnigmaMappingsTask#jvmArgs the JVM} allocates
+ *          {@linkplain #DEFAULT_ENIGMA_JVM_MEMORY_ARG 2Gb of memory} for {@link Enigma}
+ *     <li> {@linkplain ConfigurationContainer#create(String) creates} the
+ *          {@value ENIGMA_SWING_CONFIGURATION_NAME} and {@value ENIGMA_SERVER_CONFIGURATION_NAME}
+ *          {@link Configuration}s and populates them
+ *     <li> {@linkplain TaskCollection#configureEach(Action) configures}
+ *          {@link EnigmaMappingsTask}s'/{@link EnigmaMappingsServerTask}s'
+ *          {@link JavaExec#classpath(Object...) classpath} to include the
+ *          {@value ENIGMA_SWING_CONFIGURATION_NAME}/{@value ENIGMA_SERVER_CONFIGURATION_NAME}
+ *          {@link Configuration}, respectively
  *     <li> {@linkplain TaskCollection#configureEach(Action) configures} {@link EnigmaMappingsServerTask}s
  *          to search the following gradle properties for default values:
  *          <ul>
@@ -52,7 +54,8 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  * </ul>
  */
 public abstract class EnigmaMappingsPlugin implements MappingsProjectPlugin {
-    public static final String ENIGMA_RUNTIME_CONFIGURATION_NAME = "enigmaRuntime";
+    public static final String ENIGMA_SWING_CONFIGURATION_NAME = "enigmaSwing";
+    public static final String ENIGMA_SERVER_CONFIGURATION_NAME = "enigmaServer";
 
     public static final String DEFAULT_ENIGMA_JVM_MEMORY_ARG = "-Xmx2048m";
 
@@ -67,7 +70,22 @@ public abstract class EnigmaMappingsPlugin implements MappingsProjectPlugin {
 
     @Override
     public void apply(@NotNull Project project) {
-        final Configuration enigmaRuntime = project.getConfigurations().create(ENIGMA_RUNTIME_CONFIGURATION_NAME);
+        final ConfigurationContainer configurations = project.getConfigurations();
+
+        final Configuration enigmaSwing = configurations.create(ENIGMA_SWING_CONFIGURATION_NAME);
+        final Configuration enigmaServer = configurations.create(ENIGMA_SERVER_CONFIGURATION_NAME);
+
+        this.addDependencyWithCapability(
+            project.getDependencies(), enigmaSwing,
+            "quilt.internal:classpath-holders",
+            "quilt.internal:classpath-holders-enigma-swing"
+        );
+
+        this.addDependencyWithCapability(
+            project.getDependencies(), enigmaServer,
+            "quilt.internal:classpath-holders",
+            "quilt.internal:classpath-holders-enigma-server"
+        );
 
         final PluginContainer plugins = project.getPlugins();
 
@@ -88,9 +106,11 @@ public abstract class EnigmaMappingsPlugin implements MappingsProjectPlugin {
         final TaskContainer tasks = project.getTasks();
 
         tasks.withType(AbstractEnigmaMappingsTask.class).configureEach(task -> {
-            task.classpath(enigmaRuntime);
-
             task.jvmArgs(DEFAULT_ENIGMA_JVM_MEMORY_ARG);
+        });
+
+        tasks.withType(EnigmaMappingsTask.class).configureEach(task -> {
+            task.classpath(enigmaSwing);
         });
 
         tasks.register(
@@ -112,6 +132,8 @@ public abstract class EnigmaMappingsPlugin implements MappingsProjectPlugin {
         );
 
         tasks.withType(EnigmaMappingsServerTask.class).configureEach(task -> {
+            task.classpath(enigmaServer);
+
             final ProviderFactory providers = this.getProviders();
 
             task.getPort().convention(

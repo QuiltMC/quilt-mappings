@@ -44,12 +44,10 @@ import static quilt.internal.constants.Constants.UNPICK_NAME;
  * </ul>
  * Additionally:
  * <ul>
- *     <li> creates the {@value UNPICK_CONFIGURATION_NAME} {@link Configuration}
- *     <li> adds the the {@value UNPICK_CONFIGURATION_NAME} {@link Configuration} to
- *          {@linkplain TaskCollection#configureEach(Action) each} {@link UnpickJarTask}s'
- *          {@link JavaExec#classpath(Object...) classpath};<br>
- *          {@value UNPICK_CONFIGURATION_NAME} must include {@link daomephsta.unpick.cli.Main}
- *          and its dependencies in order to use {@link UnpickJarTask}s
+ *     <li> creates and populates the {@value UNPICK_CLI_CONFIGURATION_NAME} {@link Configuration}
+ *     <li> {@linkplain TaskCollection#configureEach(Action) configures} {@link UnpickJarTask}s'
+ *          {@link JavaExec#classpath(Object...) classpath} to include the
+ *          {@value UNPICK_CLI_CONFIGURATION_NAME} {@link Configuration}
  *    <li> {@linkplain TaskCollection#configureEach(Action) configures}
  *          the following defaults for {@link MappingsV2JarTask}s:
  *          <ul>
@@ -63,11 +61,17 @@ import static quilt.internal.constants.Constants.UNPICK_NAME;
  * Note: v2 {@value Constants#INTERMEDIARY_MAPPINGS_NAME} mappings are created by {@link MapIntermediaryPlugin} tasks.
  */
 public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<MapV2Plugin.Tasks> {
-    public static final String UNPICK_CONFIGURATION_NAME = UNPICK_NAME;
+    public static final String UNPICK_CLI_CONFIGURATION_NAME = UNPICK_NAME + "Cli";
 
     @Override
     protected Tasks applyImpl(@NotNull Project project) {
-        final Configuration unpick = project.getConfigurations().create(UNPICK_CONFIGURATION_NAME);
+        final Configuration unpickCli = project.getConfigurations().create(UNPICK_CLI_CONFIGURATION_NAME);
+
+        this.addDependencyWithCapability(
+            project.getDependencies(), unpickCli,
+            "quilt.internal:classpath-holders",
+            "quilt.internal:classpath-holders-unpick-cli"
+        );
 
         // apply required plugins and save their registered objects
         final PluginContainer plugins = project.getPlugins();
@@ -163,7 +167,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
         final var constantsJar = tasks.register(ConstantsJarTask.CONSTANTS_JAR_TASK_NAME, ConstantsJarTask.class);
 
         tasks.withType(UnpickJarTask.class).configureEach(task -> {
-            task.classpath(unpick);
+            task.classpath(unpickCli);
 
             task.getInputFile().convention(
                 mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
