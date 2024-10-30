@@ -135,13 +135,17 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	failOnError = true
 	maxMemory = '2G'
 
-	// enable to debug
-	final debug = false
+	final debug = providers.gradleProperty('quilt.mappings.debug.javadoc')
+		.map(Boolean::getBoolean)
+		.getOrElse(false)
+
 	verbose = debug
+
 	options {
 		if (debug) {
 			verbose()
 		}
+
 		source = '21'
 		encoding = 'UTF-8'
 		charSet = 'UTF-8'
