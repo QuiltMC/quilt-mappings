@@ -15,6 +15,7 @@ import quilt.internal.constants.Constants;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
 import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.build.AddProposedMappingsTask;
 import quilt.internal.task.build.BuildMappingsTinyTask;
@@ -64,12 +65,11 @@ import static quilt.internal.util.FileUtil.getPathWithExtension;
  * Note:
  * <ul>
  *     <li> v2 mappings are created by {@link MapV2Plugin} tasks
- *     <li> {@value Constants#INTERMEDIARY_MAPPINGS_NAME} mappings are created by
- *          {@link MapIntermediaryPlugin} tasks
+ *     <li> {@value Namespaces#INTERMEDIARY} mappings are created by {@link MapIntermediaryPlugin} tasks
  * </ul>
  */
 public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjectPlugin<MapMinecraftJarsPlugin.Tasks> {
-    public static final String PER_VERSION_MAPPINGS_CONFIGURATION_NAME = Constants.PER_VERSION_MAPPINGS_NAME;
+    public static final String PER_VERSION_MAPPINGS_CONFIGURATION_NAME = Namespaces.PER_VERSION;
 
     @Override
     protected Tasks applyImpl(@NotNull Project project) {

@@ -8,7 +8,6 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.constants.Constants;
 import quilt.internal.constants.Groups;
 import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
@@ -34,7 +33,7 @@ public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
 
     @TaskAction
     public void invertPerVersionMappings() throws Exception {
-        this.getLogger().lifecycle(":building inverted {}", Constants.PER_VERSION_MAPPINGS_NAME);
+        this.getLogger().lifecycle(":building inverted {}", Namespaces.PER_VERSION);
 
         invertMappings(this.getInput().get().getAsFile(), this.getInvertedTinyFile().get().getAsFile());
     }

@@ -13,10 +13,10 @@ import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import quilt.internal.constants.Constants;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
 import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
 import quilt.internal.task.build.BuildIntermediaryTask;
 import quilt.internal.task.build.IntermediaryMappingsV2JarTask;
@@ -29,11 +29,8 @@ import quilt.internal.task.setup.IntermediaryDependantTask;
 
 import java.util.Objects;
 
-import static quilt.internal.constants.Constants.INTERMEDIARY_MAPPINGS_NAME;
-
 /**
- * {@linkplain TaskContainer#register Registers} tasks related to
- * {@value Constants#INTERMEDIARY_MAPPINGS_NAME} mappings.
+ * {@linkplain TaskContainer#register Registers} tasks related to {@value Namespaces#INTERMEDIARY} mappings.
  * <p>
  * Applies:
  * <ul>
@@ -53,7 +50,7 @@ import static quilt.internal.constants.Constants.INTERMEDIARY_MAPPINGS_NAME;
  * </ul>
  */
 public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
-    public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = INTERMEDIARY_MAPPINGS_NAME;
+    public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = Namespaces.INTERMEDIARY;
 
     @Nullable
     private Provider<RegularFile> intermediaryProvider;
@@ -64,7 +61,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
     public Provider<RegularFile> provideIntermediary() {
         return Objects.requireNonNull(
             this.intermediaryProvider,
-            INTERMEDIARY_MAPPINGS_NAME + " not yet populated"
+            Namespaces.INTERMEDIARY + " not yet populated"
         );
     }
 
@@ -91,7 +88,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
             ExtractTinyIntermediaryMappingsTask.class,
             task -> {
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-" + INTERMEDIARY_MAPPINGS_NAME + "." + Extensions.TINY)
+                    ext.provideSuffixedMinecraftVersion("-" + Namespaces.INTERMEDIARY + "." + Extensions.TINY)
                 ));
             }
         );
@@ -110,7 +107,6 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
         extractTinyIntermediaryMappings.configure(task -> {
             task.getZippedFile().convention(this.intermediaryProvider);
         });
-
 
         final var mergeIntermediary = tasks.register(
             MergeIntermediaryTask.MERGE_INTERMEDIARY_TASK_NAME,

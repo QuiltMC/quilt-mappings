@@ -11,5 +11,5 @@ public interface Groups {
     String UNPICK_GEN = Constants.UNPICK_NAME + " gen";
     String DIFF = "diff";
     String JAVADOC_GENERATION = "javadoc generation";
-    String PER_VERSION = Constants.PER_VERSION_MAPPINGS_NAME;
+    String PER_VERSION = Namespaces.PER_VERSION;
 }

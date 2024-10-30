@@ -11,10 +11,10 @@ import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
-import quilt.internal.constants.Constants;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
 import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.build.AddProposedMappingsTask;
 import quilt.internal.task.build.InvertPerVersionMappingsTask;
@@ -30,7 +30,6 @@ import quilt.internal.task.unpick.UnpickJarTask;
 import quilt.internal.task.unpick.gen.OpenGlConstantUnpickGenTask;
 import quilt.internal.task.unpick.gen.UnpickGenTask;
 
-import static quilt.internal.constants.Constants.PER_VERSION_MAPPINGS_NAME;
 import static quilt.internal.constants.Constants.UNPICK_NAME;
 
 /**
@@ -58,7 +57,7 @@ import static quilt.internal.constants.Constants.UNPICK_NAME;
  *          </ul>
  * </ul>
  *
- * Note: v2 {@value Constants#INTERMEDIARY_MAPPINGS_NAME} mappings are created by {@link MapIntermediaryPlugin} tasks.
+ * Note: v2 {@value Namespaces#INTERMEDIARY} mappings are created by {@link MapIntermediaryPlugin} tasks.
  */
 public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<MapV2Plugin.Tasks> {
     public static final String UNPICK_CLI_CONFIGURATION_NAME = UNPICK_NAME + "Cli";
@@ -156,7 +155,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 task.getMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
                 task.getOutput().convention(
-                    this.provideMappingsBuildFile(PER_VERSION_MAPPINGS_NAME + "-definitions." + Extensions.UNPICK)
+                    this.provideMappingsBuildFile(Namespaces.PER_VERSION + "-definitions." + Extensions.UNPICK)
                 );
             }
         );

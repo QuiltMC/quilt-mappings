@@ -7,7 +7,6 @@ import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskContainer;
 import org.jetbrains.annotations.VisibleForTesting;
-import quilt.internal.constants.Constants;
 import quilt.internal.constants.Namespaces;
 import quilt.internal.mappingio.DoubleNsCompleterVisitor;
 import quilt.internal.mappingio.UnmappedNameRemoverVisitor;
@@ -31,10 +30,7 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implem
     public abstract RegularFileProperty getMergedTinyMappings();
 
     public MergeIntermediaryTask() {
-        super(
-            Constants.INTERMEDIARY_MAPPINGS_NAME,
-            Constants.PER_VERSION_MAPPINGS_NAME
-        );
+        super(Namespaces.INTERMEDIARY, Namespaces.PER_VERSION);
     }
 
     @Override
