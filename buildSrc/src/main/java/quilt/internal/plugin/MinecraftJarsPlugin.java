@@ -1,7 +1,6 @@
 package quilt.internal.plugin;
 
 import org.gradle.api.Project;
-import org.gradle.api.file.RegularFile;
 import org.gradle.api.plugins.PluginContainer;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.TaskContainer;
@@ -13,7 +12,6 @@ import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
 import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.task.setup.DownloadMinecraftJarsTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
-import quilt.internal.task.setup.DownloadVersionsManifestTask;
 import quilt.internal.task.setup.DownloadWantedVersionManifestTask;
 import quilt.internal.task.setup.ExtractServerJarTask;
 import quilt.internal.task.setup.MergeJarsTask;
@@ -45,23 +43,22 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
 
         final TaskContainer tasks = project.getTasks();
 
-        final var downloadVersionsManifest = tasks.register(
-            DownloadVersionsManifestTask.DOWNLOAD_VERSIONS_MANIFEST_TASK_NAME,
-            DownloadVersionsManifestTask.class,
-            task -> {
-                task.getDest().convention(this.provideMinecraftBuildFile("version_manifest_v2." + Extensions.JSON));
-            }
-        );
-
         {
             final var downloadWantedVersionManifest = tasks.register(
                 DownloadWantedVersionManifestTask.DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME,
                 DownloadWantedVersionManifestTask.class,
                 task -> {
                     task.getManifestVersion().convention(
-                        downloadVersionsManifest.flatMap(DownloadVersionsManifestTask::getDest)
-                            .map(RegularFile::getAsFile)
-                            .zip(ext.getMinecraftVersion(), SerializableVersionEntry::of)
+                        this.getProviders().of(
+                            SerializableVersionEntry.Source.class,
+                            spec -> spec.parameters(params -> {
+                                params.getUrl().set(
+                                    "https://piston-meta.mojang.com/mc/game/version_manifest_v2." + Extensions.JSON
+                                );
+
+                                params.getVersion().set(ext.getMinecraftVersion());
+                            })
+                        )
                     );
 
                     task.getDest().convention(
