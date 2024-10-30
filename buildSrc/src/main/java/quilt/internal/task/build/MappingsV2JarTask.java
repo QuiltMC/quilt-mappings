@@ -23,9 +23,6 @@ import static quilt.internal.constants.Constants.UNPICK_NAME;
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  * @see MapV2Plugin MapV2Plugin's configureEach
  */
-
-// TODO why?
-@DisableCachingByDefault(because = "unknown")
 public abstract class MappingsV2JarTask extends Jar implements QuiltMappingsArtifactTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
