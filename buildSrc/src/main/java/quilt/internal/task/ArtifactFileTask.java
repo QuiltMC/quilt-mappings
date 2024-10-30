@@ -13,7 +13,7 @@ import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 
-// TODO Is there a way to make it so MavenPublication#artifact will accept
+// TODO QUESTION Is there a way to make it so MavenPublication#artifact will accept
 //  these tasks directly and run them to build their outputs, similar to AbstractArchiveTask?
 //  (eliminating the need for the artifact convenience methods)
 //  I considered implementing PublishArtifact on this, but it's annotated with @HasInternalProtocol.

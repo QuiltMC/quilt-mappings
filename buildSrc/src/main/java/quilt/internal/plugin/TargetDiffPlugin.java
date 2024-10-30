@@ -240,12 +240,12 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                         .map(dest -> dest.file(JAR_MAPPINGS_PATH))
                 ));
 
-                // TODO move this to build/ once generate-diff.yml uses generateDiff
+                // TODO LATER move this to build/ once generate-diff.yml uses generateDiff
                 task.getOutput().convention(this.getProjectDir().dir("namedTargetSrc"));
             }
         );
 
-        // TODO use this in generate-diff.yml
+        // TODO LATER use this in generate-diff.yml
         tasks.register(
             DiffDirectoriesTask.GENERATE_DIFF_TASK_NAME,
             DiffDirectoriesTask.class,

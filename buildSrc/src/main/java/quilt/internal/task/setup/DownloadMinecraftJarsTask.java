@@ -39,7 +39,7 @@ public abstract class DownloadMinecraftJarsTask extends DefaultMappingsTask impl
     public DownloadMinecraftJarsTask() {
         super(Groups.SETUP);
 
-        // TODO I'm not sure that this is necessary
+        // TODO CACHE I'm not sure that this is necessary
         //  VersionParserConsumingTasks indirectly depend on
         //  DownloadVersionManifestFileTask which has @DisableCachingByDefault.
         //  I'm not sure if gradle considers output files to have been updated when they're overwritten with

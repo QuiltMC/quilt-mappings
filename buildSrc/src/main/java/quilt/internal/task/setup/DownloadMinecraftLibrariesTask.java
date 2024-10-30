@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
-// TODO why?
+// TODO CACHE why?
 @DisableCachingByDefault(because = "unknown")
 public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask implements
     VersionParserConsumingTask {

@@ -40,7 +40,7 @@ public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTa
         super(Groups.SETUP);
 
         // have to grab the release time as there's a current timestamp on each element?!
-        // TODO I don't think this is necessary, the fact that manifestVersion is an input should take care of it.
+        // TODO CACHE I don't think this is necessary, the fact that manifestVersion is an input should take care of it.
         //  If it's not necessary, we could eliminate SerializableVersionEntry and parse the VersionEntry in the
         //  task action like before
         //  (and not extend SimpleDownloadTask since we'd take the manifest file as input instead of a url).

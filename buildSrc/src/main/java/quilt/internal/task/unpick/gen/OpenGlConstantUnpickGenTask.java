@@ -70,7 +70,7 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
     public OpenGlConstantUnpickGenTask() {
         super(Groups.UNPICK_GEN);
 
-        // TODO is this necessary?
+        // TODO CACHE is this necessary?
         //  If things changed, wouldn't we actually *want* to overwrite them?
         this.onlyIf(unused ->
             !this.getUnpickGlDefinitions().get().getAsFile().exists()
