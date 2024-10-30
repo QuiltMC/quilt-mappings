@@ -21,8 +21,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.provider.MapProperty;
-import org.gradle.api.tasks.Input;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
@@ -55,11 +54,8 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
     @InputFile
     public abstract RegularFileProperty getPerVersionMappingsJar();
 
-    @Input
-    public abstract MapProperty<String, File> getArtifactsByName();
-
     @InputFile
-    abstract RegularFileProperty getLwjglFile();
+    public abstract RegularFileProperty getLwjglFile();
 
     @OutputFile
     public abstract RegularFileProperty getUnpickGlStateManagerDefinitions();
@@ -69,21 +65,6 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
 
     public OpenGlConstantUnpickGenTask() {
         super(Groups.UNPICK_GEN);
-
-        // TODO CACHE is this necessary?
-        //  If things changed, wouldn't we actually *want* to overwrite them?
-        this.onlyIf(unused ->
-            !this.getUnpickGlDefinitions().get().getAsFile().exists()
-                || !this.getUnpickGlStateManagerDefinitions().get().getAsFile().exists()
-        );
-
-        this.getLwjglFile().fileProvider(this.getArtifactsByName().map(artifactsByName ->
-            artifactsByName.entrySet().stream()
-                .filter(entry -> LWJGL_LIBRARY_PREDICATE.test(entry.getKey()))
-                .map(Map.Entry::getValue)
-                .findFirst()
-                .orElseThrow(() -> new GradleException("Could not find lwjgl in Minecraft libraries"))
-        ));
     }
 
     @TaskAction
@@ -341,6 +322,16 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
                 }
             }
         }
+    }
+
+    public static Provider<File> provideLwjgl(Provider<Map<String, File>> artifactsByName) {
+        return artifactsByName.map(artifacts ->
+            artifacts.entrySet().stream()
+                .filter(entry -> LWJGL_LIBRARY_PREDICATE.test(entry.getKey()))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElseThrow(() -> new GradleException("Could not find lwjgl in Minecraft libraries"))
+        );
     }
 
     private static void addParam(JsonNode param, List<GlParam> params) {

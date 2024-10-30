@@ -123,9 +123,9 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                     mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
                 );
 
-                task.getArtifactsByName().convention(
+                task.getLwjglFile().fileProvider(OpenGlConstantUnpickGenTask.provideLwjgl(
                     downloadMinecraftLibraries.flatMap(DownloadMinecraftLibrariesTask::getArtifactsByName)
-                );
+                ));
 
                 task.getUnpickGlStateManagerDefinitions().convention(
                     this.provideMappingsBuildFile(UNPICK_NAME + "_glstatemanager." + Extensions.UNPICK)
