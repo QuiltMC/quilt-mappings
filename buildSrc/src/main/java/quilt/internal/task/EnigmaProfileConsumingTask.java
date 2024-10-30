@@ -6,7 +6,6 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.TaskCollection;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.util.EnigmaProfileService;
@@ -30,13 +29,12 @@ public interface EnigmaProfileConsumingTask extends MappingsTask {
     RegularFileProperty getEnigmaProfileConfig();
 
     /**
-     * Holds any {@value org.quiltmc.enigma_plugin.Arguments#SIMPLE_TYPE_FIELD_NAMES_PATH}s
-     * configuration files obtained from {@link #getEnigmaProfileService() enigmaProfileService}'s
+     * Holds any files referenced by {@link #getEnigmaProfileService() enigmaProfileService}'s
      * {@link EnigmaProfileService#getProfile() profile}.
      * <p>
      * {@link EnigmaProfileConsumingTask}s may not access these files directly, but they affect Enigma's behavior,
      * so they must be considered for up-to-date checks.
      */
     @InputFiles
-    ConfigurableFileCollection getSimpleTypeFieldNamesFiles();
+    ConfigurableFileCollection getProfileFileDependencies();
 }

@@ -43,7 +43,7 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
  *              <li> {@link EnigmaProfileConsumingTask#getEnigmaProfileConfig() enigmaProfileConfig}:
  *                   {@link QuiltMappingsExtension MappingsExtension}'s
  *                   {@link QuiltMappingsExtension#getEnigmaProfileConfig() enigmaProfileConfig}
- *              <li> {@link EnigmaProfileConsumingTask#getSimpleTypeFieldNamesFiles() simpleTypeFieldNamesFiles}:
+ *              <li> {@link EnigmaProfileConsumingTask#getProfileFileDependencies() profileFileDependencies}:
  *                   the {@value EnigmaProfileService#ENIGMA_PROFILE_SERVICE_NAME} service's
  *                   {@link EnigmaProfileService#getProfile() profile}'s
  *                   {@value org.quiltmc.enigma_plugin.Arguments#SIMPLE_TYPE_FIELD_NAMES_PATH}s
@@ -112,7 +112,7 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
 
             task.getEnigmaProfileConfig().convention(this.ext.getEnigmaProfileConfig());
 
-            task.getSimpleTypeFieldNamesFiles().from(simpleTypeFieldNamePaths);
+            task.getProfileFileDependencies().from(simpleTypeFieldNamePaths);
         });
 
         this.provideDefaultError(
