@@ -155,7 +155,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 task.getMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
 
                 task.getOutput().convention(
-                    this.provideMappingsBuildFile(Namespaces.PER_VERSION + "-definitions." + Extensions.UNPICK)
+                    this.provideMappingsBuildFile(Namespaces.INTERMEDIATE + "-definitions." + Extensions.UNPICK)
                 );
             }
         );
@@ -189,7 +189,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
 
                 task.getOutputFile().convention(
                     this.provideMappedMinecraftBuildFile(ext.provideSuffixedMinecraftVersion(
-                        "-" + Classifiers.PER_VERSION_UNPICKED + "." + Extensions.JAR
+                        "-" + Classifiers.INTERMEDIATE_UNPICKED + "." + Extensions.JAR
                     ))
                 );
             }

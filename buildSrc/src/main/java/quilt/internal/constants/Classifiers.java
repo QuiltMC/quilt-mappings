@@ -1,9 +1,9 @@
 package quilt.internal.constants;
 
 public interface Classifiers {
-    String INTERMEDIARY = Namespaces.INTERMEDIARY;
-    String PER_VERSION = Namespaces.PER_VERSION;
+    String INTERMEDIATE = Namespaces.INTERMEDIATE;
     String NAMED = Namespaces.NAMED;
+    String INTERMEDIARY = Namespaces.INTERMEDIARY;
 
     String V2 = "v2";
     String MERGED_V2 = "merged" + V2;
@@ -11,7 +11,7 @@ public interface Classifiers {
     String INTERMEDIARY_V2_MERGED = INTERMEDIARY + "-" + MERGED_V2;
 
     String UNPICKED = "unpicked";
-    String PER_VERSION_UNPICKED = PER_VERSION + "-" + UNPICKED;
+    String INTERMEDIATE_UNPICKED = INTERMEDIATE + "-" + UNPICKED;
 
     String TINY = Constants.TINY_NAME;
 

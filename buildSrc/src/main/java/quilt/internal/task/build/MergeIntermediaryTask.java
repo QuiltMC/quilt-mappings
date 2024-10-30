@@ -30,7 +30,7 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implem
     public abstract RegularFileProperty getMergedTinyMappings();
 
     public MergeIntermediaryTask() {
-        super(Namespaces.INTERMEDIARY, Namespaces.PER_VERSION);
+        super(Namespaces.INTERMEDIARY, Namespaces.INTERMEDIATE);
     }
 
     @Override
@@ -64,7 +64,7 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implem
             // Fix bug when intermediary doesn't have a mapping but hashed does
             // (i.e. `net/minecraft/client/main/Main$2`)
             new DoubleNsCompleterVisitor(
-                new UnmappedNameRemoverVisitor(next, Namespaces.NAMED, Namespaces.PER_VERSION),
+                new UnmappedNameRemoverVisitor(next, Namespaces.NAMED, Namespaces.INTERMEDIATE),
                 // Copy names from `official` to `named` if `intermediary` is empty
                 Namespaces.NAMED,
                 Namespaces.INTERMEDIARY,
@@ -72,7 +72,7 @@ public abstract class MergeIntermediaryTask extends AbstractTinyMergeTask implem
             ),
             // Copy names from `official` to `named` if `hashed` is empty
             Namespaces.NAMED,
-            Namespaces.PER_VERSION,
+            Namespaces.INTERMEDIATE,
             Namespaces.OFFICIAL
         );
     }

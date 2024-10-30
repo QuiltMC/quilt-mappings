@@ -10,7 +10,7 @@ public abstract class ExtractTinyMappingsTask extends ExtractSingleZippedFileTas
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
-    public static final String EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME = "extractTinyPerVersionMappings";
+    public static final String EXTRACT_TINY_INTERMEDIATE_MAPPINGS_TASK_NAME = "extractTinyIntermediateMappings";
 
     private static final String TINY_MAPPINGS_PATTERN = "**/*mappings." + Extensions.TINY;
 

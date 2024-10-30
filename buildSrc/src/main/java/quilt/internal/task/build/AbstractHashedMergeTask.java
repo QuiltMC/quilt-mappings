@@ -11,7 +11,7 @@ public abstract class AbstractHashedMergeTask extends AbstractTinyMergeTask {
     public abstract RegularFileProperty getHashedTinyMappings();
 
     public AbstractHashedMergeTask() {
-        super(Groups.PER_VERSION);
+        super(Groups.INTERMEDIATE);
     }
 
     @Override

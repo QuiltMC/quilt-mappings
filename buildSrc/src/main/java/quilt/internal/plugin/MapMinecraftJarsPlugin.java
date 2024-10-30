@@ -48,9 +48,9 @@ import static quilt.internal.util.FileUtil.getPathWithExtension;
  * <p>
  * Additionally:
  * <ul>
- *     <li> creates the {@value PER_VERSION_MAPPINGS_CONFIGURATION_NAME} configuration,
+ *     <li> creates the {@value INTERMEDIATE_MAPPINGS_CONFIGURATION_NAME} configuration,
  *          to which mappings must be added in order to use the
- *          {@value ExtractTinyMappingsTask#EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME} task
+ *          {@value ExtractTinyMappingsTask#EXTRACT_TINY_INTERMEDIATE_MAPPINGS_TASK_NAME} task
  *     <li> if the {@link JavaPlugin} is applied, {@linkplain org.gradle.api.Task#setEnabled(boolean) disables} the
  *          {@value JavaPlugin#JAR_TASK_NAME} task so its output doesn't collide with the
  *          {@value TinyJarTask#TINY_JAR_TASK_NAME} task's output
@@ -69,12 +69,12 @@ import static quilt.internal.util.FileUtil.getPathWithExtension;
  * </ul>
  */
 public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjectPlugin<MapMinecraftJarsPlugin.Tasks> {
-    public static final String PER_VERSION_MAPPINGS_CONFIGURATION_NAME = Namespaces.PER_VERSION;
+    public static final String INTERMEDIATE_MAPPINGS_CONFIGURATION_NAME = Namespaces.INTERMEDIATE;
 
     @Override
     protected Tasks applyImpl(@NotNull Project project) {
         final Configuration perVersionMappings =
-            project.getConfigurations().create(PER_VERSION_MAPPINGS_CONFIGURATION_NAME);
+            project.getConfigurations().create(INTERMEDIATE_MAPPINGS_CONFIGURATION_NAME);
 
         // apply required plugins and save their registered objects
         final PluginContainer plugins = project.getPlugins();
@@ -96,19 +96,19 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
         final TaskContainer tasks = project.getTasks();
 
         final var extractTinyPerVersionMappings = tasks.register(
-            ExtractTinyMappingsTask.EXTRACT_TINY_PER_VERSION_MAPPINGS_TASK_NAME,
+            ExtractTinyMappingsTask.EXTRACT_TINY_INTERMEDIATE_MAPPINGS_TASK_NAME,
             ExtractTinyMappingsTask.class,
             task -> {
                 task.getZippedFile().convention(this.provideRequiredFile(perVersionMappings));
 
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-" + Classifiers.PER_VERSION + "." + Extensions.TINY)
+                    ext.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.TINY)
                 ));
             }
         );
 
         final var invertPerVersionMappings = tasks.register(
-            InvertPerVersionMappingsTask.INVERT_PER_VERSION_MAPPINGS_TASK_NAME,
+            InvertPerVersionMappingsTask.INVERT_INTERMEDIATE_MAPPINGS_TASK_NAME,
             InvertPerVersionMappingsTask.class,
             task -> {
                 task.getInput().convention(
@@ -131,7 +131,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
         });
 
         final var mapPerVersionMappingsJar = tasks.register(
-            MapPerVersionMappingsJarTask.MAP_PER_VERSION_MAPPINGS_JAR_TASK_NAME,
+            MapPerVersionMappingsJarTask.MAP_INTERMEDIATE_MAPPINGS_JAR_TASK_NAME,
             MapPerVersionMappingsJarTask.class,
             task -> {
                 task.getInputJar().convention(
@@ -144,7 +144,7 @@ public abstract class MapMinecraftJarsPlugin extends DefaultTaskedMappingsProjec
 
                 task.getOutputJar().convention(
                     this.provideMappedMinecraftBuildFile(
-                        ext.provideSuffixedMinecraftVersion("-" + Classifiers.PER_VERSION + "." + Extensions.JAR)
+                        ext.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.JAR)
                     )
                 );
             }

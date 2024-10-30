@@ -80,7 +80,7 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
             final Map<MethodKey, String> methodMappings = new HashMap<>();
             final Map<FieldKey, String> fieldMappings = new HashMap<>();
             final String fromM = Namespaces.NAMED;
-            final String toM = Namespaces.PER_VERSION;
+            final String toM = Namespaces.INTERMEDIATE;
 
             try (BufferedReader reader = Files.newBufferedReader(mappings)) {
                 final MemoryMappingTree mappingTree = new MemoryMappingTree();

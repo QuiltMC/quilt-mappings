@@ -19,7 +19,7 @@ public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
-    public static final String INVERT_PER_VERSION_MAPPINGS_TASK_NAME = "invertPerVersionMappings";
+    public static final String INVERT_INTERMEDIATE_MAPPINGS_TASK_NAME = "invertIntermediateMappings";
 
     @InputFile
     public abstract RegularFileProperty getInput();
@@ -33,7 +33,7 @@ public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
 
     @TaskAction
     public void invertPerVersionMappings() throws Exception {
-        this.getLogger().lifecycle(":building inverted {}", Namespaces.PER_VERSION);
+        this.getLogger().lifecycle(":building inverted {}", Namespaces.INTERMEDIATE);
 
         invertMappings(this.getInput().get().getAsFile(), this.getInvertedTinyFile().get().getAsFile());
     }
@@ -42,7 +42,7 @@ public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
     public static void invertMappings(File input, File output) throws Exception {
         final String[] args = {
                 input.getAbsolutePath(), output.getAbsolutePath(),
-                Namespaces.PER_VERSION, Namespaces.OFFICIAL
+                Namespaces.INTERMEDIATE, Namespaces.OFFICIAL
         };
 
         new CommandReorderTinyV2().run(args);

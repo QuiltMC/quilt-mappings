@@ -57,7 +57,7 @@ public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implemen
                 perVersionMappingsJar,
                 mappings,
                 outputMappings,
-                Namespaces.PER_VERSION,
+                Namespaces.INTERMEDIATE,
                 Namespaces.NAMED
         );
     }

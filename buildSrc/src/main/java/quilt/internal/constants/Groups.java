@@ -7,9 +7,9 @@ public interface Groups {
     String MAP_JAR = "jar mapping";
     String DECOMPILE = "decompile";
     String UNPICK = Constants.UNPICK_NAME;
-    String LINT = "lint";
     String UNPICK_GEN = Constants.UNPICK_NAME + " gen";
+    String LINT = "lint";
     String DIFF = "diff";
     String JAVADOC_GENERATION = "javadoc generation";
-    String PER_VERSION = Namespaces.PER_VERSION;
+    String INTERMEDIATE = Namespaces.INTERMEDIATE;
 }
