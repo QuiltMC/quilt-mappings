@@ -1,6 +1,6 @@
 import org.gradle.api.internal.file.FileOperations
-import quilt.internal.constants.Constants
 import quilt.internal.constants.Classifiers
+import quilt.internal.constants.Constants
 import quilt.internal.plugin.MapIntermediaryPlugin
 
 import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
@@ -21,6 +21,13 @@ final MINECRAFT_VERSION = libs.versions.minecraft.get()
 
 version = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault('BUILD_NUMBER', 'local')}"
 
+if (ENV.BRANCH_NAME) {
+	def branch = ENV.BRANCH_NAME.substring(ENV.BRANCH_NAME.lastIndexOf('/') + 1)
+	if (MINECRAFT_VERSION != branch) {
+		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${MINECRAFT_VERSION})")
+	}
+}
+
 sourceSets {
 	// for constantsJar and sourcesJar input
 	constants
@@ -28,6 +35,56 @@ sourceSets {
 	packageDocs
 	// for javadoc input
 	doclet
+}
+
+repositories {
+	ivy {
+		// hack to download file from url
+		url = 'https://raw.githubusercontent.com'
+
+		patternLayout {
+			artifact '/[organisation]/[module]/[revision]/allowed_english_words.txt'
+		}
+
+		metadataSources { artifact() }
+	}
+
+	maven {
+		name 'Mojang'
+		url 'https://libraries.minecraft.net/'
+	}
+	mavenCentral()
+	maven {
+		name 'Quilt Repository'
+		url 'https://maven.quiltmc.org/repository/release'
+	}
+	maven {
+		name 'Fabric Repository'
+		url 'https://maven.fabricmc.net'
+	}
+	maven {
+		name 'Quilt Snapshot Repository'
+		url 'https://maven.quiltmc.org/repository/snapshot'
+	}
+	// TODO remove when ASM fix is released
+	maven {
+		url = 'https://repository.ow2.org/nexus/content/repositories/snapshots/'
+	}
+	mavenLocal()
+}
+
+configurations {
+	dictionary
+}
+
+dependencies {
+	dictionary libs.dictionary
+
+	javadocClasspath(libs.quilt.loader)
+	javadocClasspath(libs.jetbrains.annotations)
+	javadocClasspath(libs.jsr305) // for some other jsr annotations
+	hashed "org.quiltmc:hashed:${MINECRAFT_VERSION}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
+	intermediary "net.fabricmc:intermediary:${MINECRAFT_VERSION}:v2"
 }
 
 quiltMappings {
@@ -47,11 +104,8 @@ tasks.combineUnpickDefinitions {
 	unpickDefinitions.from 'unpick/definitions/'
 }
 
-tasks.downloadDictionaryFile {
-	final revision = libs.versions.dictionary.revision.get()
-	// TODO this should probably be published to quilt maven, see #442
-	//  Then this task can be eliminated
-	url = "https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/${revision}/allowed_english_words.txt"
+tasks.mappingLint {
+	dictionaryFile = configurations.dictionary.singleFile
 }
 
 tasks.sourcesJar {
@@ -149,46 +203,6 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 			it.into destinationDir
 		}
 	}
-}
-
-if (ENV.BRANCH_NAME) {
-	def branch = ENV.BRANCH_NAME.substring(ENV.BRANCH_NAME.lastIndexOf('/') + 1)
-	if (MINECRAFT_VERSION != branch) {
-		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${MINECRAFT_VERSION})")
-	}
-}
-
-repositories {
-	maven {
-		name 'Mojang'
-		url 'https://libraries.minecraft.net/'
-	}
-	mavenCentral()
-	maven {
-		name 'Quilt Repository'
-		url 'https://maven.quiltmc.org/repository/release'
-	}
-	maven {
-		name 'Fabric Repository'
-		url 'https://maven.fabricmc.net'
-	}
-	maven {
-		name 'Quilt Snapshot Repository'
-		url 'https://maven.quiltmc.org/repository/snapshot'
-	}
-	// TODO remove when ASM fix is released
-	maven {
-		url = 'https://repository.ow2.org/nexus/content/repositories/snapshots/'
-	}
-	mavenLocal()
-}
-
-dependencies {
-	javadocClasspath(libs.quilt.loader)
-	javadocClasspath(libs.jetbrains.annotations)
-	javadocClasspath(libs.jsr305) // for some other jsr annotations
-	hashed "org.quiltmc:hashed:${MINECRAFT_VERSION}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
-	intermediary "net.fabricmc:intermediary:${MINECRAFT_VERSION}:v2"
 }
 
 java {
