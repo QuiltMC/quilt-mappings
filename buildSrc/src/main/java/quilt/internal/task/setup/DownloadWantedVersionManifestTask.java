@@ -23,6 +23,7 @@ public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTa
     @Input
     public abstract Property<SerializableVersionEntry> getManifestVersion();
 
+    @Override
     @OutputFile
     public abstract RegularFileProperty getDest();
 
@@ -38,16 +39,6 @@ public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTa
 
     public DownloadWantedVersionManifestTask() {
         super(Groups.SETUP);
-
-        // have to grab the release time as there's a current timestamp on each element?!
-        // TODO CACHE I don't think this is necessary, the fact that manifestVersion is an input should take care of it.
-        //  If it's not necessary, we could eliminate SerializableVersionEntry and parse the VersionEntry in the
-        //  task action like before
-        //  (and not extend SimpleDownloadTask since we'd take the manifest file as input instead of a url).
-        this.getInputs().property(
-            "releaseTime",
-            this.getManifestVersion().map(SerializableVersionEntry::getReleaseTime)
-        );
 
         this.getUrl().convention(this.getManifestVersion().map(SerializableVersionEntry::getUrl));
     }
