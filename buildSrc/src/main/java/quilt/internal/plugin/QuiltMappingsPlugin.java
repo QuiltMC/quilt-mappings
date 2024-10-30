@@ -22,7 +22,6 @@ public abstract class QuiltMappingsPlugin implements MappingsProjectPlugin {
         plugins.apply(MapIntermediaryPlugin.class);
         plugins.apply(ProcessMappingsPlugin.class);
         plugins.apply(EnigmaMappingsPlugin.class);
-        plugins.apply(MappingsVerificationPlugin.class);
         plugins.apply(TargetDiffPlugin.class);
     }
 }

@@ -6,7 +6,7 @@ import org.gradle.api.GradleException;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.constants.Groups;
-import quilt.internal.plugin.MappingsVerificationPlugin;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  */
 public abstract class FindDuplicateMappingFilesTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
     /**
-     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MappingsVerificationPlugin}.
+     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
     public static final String FIND_DUPLICATE_MAPPING_FILES_TASK_NAME = "findDuplicateMappingFiles";
 

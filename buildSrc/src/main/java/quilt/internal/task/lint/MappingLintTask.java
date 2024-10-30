@@ -49,7 +49,7 @@ import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
 import quilt.internal.constants.Groups;
-import quilt.internal.plugin.MappingsVerificationPlugin;
+import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
@@ -65,7 +65,7 @@ import quilt.internal.task.MappingsDirConsumingTask;
  */
 public abstract class MappingLintTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
     /**
-     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MappingsVerificationPlugin}.
+     * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
     public static final String MAPPING_LINT_TASK_NAME = "mappingLint";
 
