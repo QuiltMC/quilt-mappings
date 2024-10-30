@@ -1,5 +1,6 @@
 package quilt.internal.task.setup;
 
+import org.gradle.api.GradleException;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFile;
@@ -9,7 +10,6 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.OutputFiles;
 import org.gradle.api.tasks.TaskAction;
-import org.gradle.work.DisableCachingByDefault;
 import org.quiltmc.launchermeta.version.v1.DownloadableFile;
 import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.constants.Groups;
@@ -18,12 +18,18 @@ import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.util.DownloadUtil;
+import quilt.internal.util.ProviderUtil;
 import quilt.internal.util.serializable.VersionParser;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -31,8 +37,6 @@ import java.util.stream.Collectors;
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
-// TODO CACHE why?
-@DisableCachingByDefault(because = "unknown")
 public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask implements
     VersionParserConsumingTask {
     /**
@@ -87,7 +91,25 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
 
     @TaskAction
     public void download() {
-        this.getArtifactsByNamedUrl().get().entrySet().parallelStream().forEach(entry ->
+        final Set<Map.Entry<NamedUrl, RegularFile>> newArtifactEntries =
+            new HashSet<>(this.getArtifactsByNamedUrl().get().entrySet());
+
+        final Set<File> oldArtifacts;
+        try (var librariesStream = Files.list(ProviderUtil.getPath(this.getLibrariesDir()))) {
+            oldArtifacts = librariesStream.map(Path::toFile).collect(Collectors.toCollection(HashSet::new));
+        } catch (IOException e) {
+            throw new GradleException("Failed to access previous output", e);
+        }
+
+        newArtifactEntries.removeIf(entry ->
+            oldArtifacts.remove(entry.getValue().getAsFile())
+        );
+
+        oldArtifacts.stream()
+            .filter(File::isFile)
+            .forEach(File::delete);
+
+        newArtifactEntries.parallelStream().forEach(entry ->
             DownloadUtil.download(entry.getKey().url, entry.getValue().getAsFile(), false, this.getLogger())
         );
     }
