@@ -74,7 +74,7 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	// Needed for javadoc to find the doclet classes.
 	dependsOn docletClasses
 
-	// TODO why?
+	// TODO QUESTION why?
 	outputs.doNotCacheIf("unknown", Specs.satisfyAll())
 
 	destinationDir = layout.buildDirectory.get().dir('docs').dir(project.version.toString()).getAsFile()
@@ -213,10 +213,7 @@ publishing {
 			artifactId Constants.MAPPINGS_NAME
 			version project.version
 
-			// TODO pass task provider
 			// quilt-mappings-<version>-tiny.gz
-			// compressTiny.artifact(maven)
-			// artifact(tasks.named('compressTiny'))
 			artifact compressTiny.artifact
 			// quilt-mappings-<version>.jar
 			artifact tinyJar
