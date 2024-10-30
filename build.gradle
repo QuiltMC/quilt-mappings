@@ -19,7 +19,7 @@ final ENV = System.getenv()
 
 final MINECRAFT_VERSION = libs.versions.minecraft.get()
 
-version = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault("BUILD_NUMBER", "local")}"
+version = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault('BUILD_NUMBER', 'local')}"
 
 sourceSets {
 	// for constantsJar and sourcesJar input
@@ -33,7 +33,7 @@ sourceSets {
 quiltMappings {
 	minecraftVersion = MINECRAFT_VERSION
 
-	mappingsVersion = project.version
+	mappingsVersion = project.version.toString()
 
 	mappingsDir = file('mappings/')
 
@@ -50,11 +50,8 @@ tasks.combineUnpickDefinitions {
 tasks.downloadDictionaryFile {
 	final revision = libs.versions.dictionary.revision.get()
 	// TODO this should probably be published to quilt maven, see #442
+	//  Then this task can be eliminated
 	url = "https://raw.githubusercontent.com/ix0rai/qm-base-allowed-wordlist/${revision}/allowed_english_words.txt"
-
-	// TODO does this really need the revision in the name? If not this could go in MappingsVerificationPlugin
-	//  Also this seems like something that should go in build/ so it can be cleaned
-	dest = project.file(".gradle/lint/dictionary/${revision}.txt")
 }
 
 tasks.sourcesJar {

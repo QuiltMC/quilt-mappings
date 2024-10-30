@@ -2,7 +2,9 @@ package quilt.internal.plugin;
 
 import org.gradle.api.Project;
 import org.gradle.api.Task;
+import org.gradle.api.file.Directory;
 import org.gradle.api.plugins.PluginContainer;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.gradle.language.base.plugins.LifecycleBasePlugin;
@@ -55,18 +57,17 @@ public abstract class MappingsVerificationPlugin implements MappingsProjectPlugi
             DownloadDictionaryFileTask.class,
             task -> {
                 // configuration is in build.gradle because it depends on an external url that is prone to change
-                // TODO the output file configuration could be moved here if its name didn't contain the revision
-
                 this.provideDefaultError(
                     task.getUrl(),
                     "No url specified. " +
                         "A url must be specified to use " + task.getName() + " or any task that depends on it."
                 );
 
-                this.provideDefaultError(
-                    task.getDest(),
-                    "No dest specified." +
-                        "An dest must be specified to use " + task.getName() + " or any task that depends on it."
+                task.getDest().convention(
+                    this.getBuildDir().zip(
+                        task.getUrl().map(MappingsVerificationPlugin::getDefaultDictionaryName),
+                        Directory::file
+                    )
                 );
             }
         );
@@ -98,5 +99,13 @@ public abstract class MappingsVerificationPlugin implements MappingsProjectPlugi
         plugins.withType(LifecycleBasePlugin.class, lifecycle -> {
             tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).configure(task -> task.dependsOn(mappingLint));
         });
+    }
+
+    private static String getDefaultDictionaryName(String url) {
+        final int iSlash = url.lastIndexOf('/');
+
+        return (iSlash >= 0 && iSlash < url.length() - 1)
+            ? url.substring(iSlash)
+            : "dictionary.txt";
     }
 }
