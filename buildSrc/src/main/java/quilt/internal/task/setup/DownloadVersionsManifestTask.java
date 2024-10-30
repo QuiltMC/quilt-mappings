@@ -1,12 +1,13 @@
 package quilt.internal.task.setup;
 
+import org.gradle.api.tasks.UntrackedTask;
 import org.gradle.work.DisableCachingByDefault;
 import quilt.internal.constants.Extensions;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
 import quilt.internal.task.SimpleDownloadTask;
 
-@DisableCachingByDefault(because = "Output depends on a remote source that may change.")
+@UntrackedTask(because = "Output depends on a remote source that may change.")
 public abstract class DownloadVersionsManifestTask extends SimpleDownloadTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
