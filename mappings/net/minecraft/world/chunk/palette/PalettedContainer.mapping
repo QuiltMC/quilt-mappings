@@ -5,6 +5,8 @@ CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/Palett
 	FIELD f_llvpfuzb noOpPaletteResizeHandler Lnet/minecraft/unmapped/C_sxhmfrig;
 	FIELD f_stnxqmvw MIN_PALETTE_BITS I
 	FIELD f_wylupdgt lockHelper Lnet/minecraft/unmapped/C_wmkxzols;
+	METHOD <init> (Lnet/minecraft/unmapped/C_aehiirzw;)V
+		ARG 1 container
 	METHOD <init> (Lnet/minecraft/unmapped/C_feaetnaz;Ljava/lang/Object;Lnet/minecraft/unmapped/C_aehiirzw$C_sxtmudnl;)V
 		ARG 1 idList
 		ARG 2 initialValue
@@ -25,6 +27,12 @@ CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/Palett
 	METHOD m_faqwumtl getCompatibleData (Lnet/minecraft/unmapped/C_aehiirzw$C_zdxjpjcl;I)Lnet/minecraft/unmapped/C_aehiirzw$C_zdxjpjcl;
 		ARG 1 data
 		ARG 2 bits
+	METHOD m_gaaogrqy (Lnet/minecraft/unmapped/C_aehiirzw;)Lnet/minecraft/unmapped/C_kedlqxpi;
+		ARG 0 container
+	METHOD m_icdpjwqw (Lnet/minecraft/unmapped/C_feaetnaz;Lnet/minecraft/unmapped/C_aehiirzw$C_sxtmudnl;Lnet/minecraft/unmapped/C_kedlqxpi$C_pmiurczo;)Lcom/mojang/serialization/DataResult;
+		ARG 0 indexedIterable
+		ARG 1 provider
+		ARG 2 serializedContainer
 	METHOD m_iyxhoppi setUnsafe (IIILjava/lang/Object;)Ljava/lang/Object;
 		ARG 1 x
 		ARG 2 y
@@ -33,21 +41,37 @@ CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/Palett
 	METHOD m_jmdckqbg createPalettedCodec (Lnet/minecraft/unmapped/C_feaetnaz;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_aehiirzw$C_sxtmudnl;Ljava/lang/Object;)Lcom/mojang/serialization/Codec;
 		ARG 0 iterable
 		ARG 2 paletteProvider
+	METHOD m_kauefbou (Lnet/minecraft/unmapped/C_luszrgkm;I)I
+		ARG 2 id
+	METHOD m_kndsljtr (ILjava/lang/Object;)I
+		ARG 0 unused1
+		ARG 1 unused2
+	METHOD m_lgziovkn (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_peoxnqbd;I)V
+		ARG 2 i
 	METHOD m_lmrbywvo readPacket (Lnet/minecraft/unmapped/C_idfydwco;)V
+	METHOD m_lzbroaos (Lnet/minecraft/unmapped/C_kedlqxpi$C_znpcjlst;Lnet/minecraft/unmapped/C_feaetnaz;Lnet/minecraft/unmapped/C_aehiirzw$C_sxtmudnl;Lnet/minecraft/unmapped/C_kedlqxpi$C_pmiurczo;)Lcom/mojang/serialization/DataResult;
+		ARG 3 serializedContainer
 	METHOD m_mrxrbahp set (ILjava/lang/Object;)V
 		ARG 1 index
 		ARG 2 value
+	METHOD m_nigdiyci (Lnet/minecraft/unmapped/C_feaetnaz;Lnet/minecraft/unmapped/C_aehiirzw$C_sxtmudnl;Lnet/minecraft/unmapped/C_kedlqxpi;)Lnet/minecraft/unmapped/C_kedlqxpi$C_pmiurczo;
+		ARG 2 readableContainer
 	METHOD m_olzskczg setAndGetOldValue (ILjava/lang/Object;)Ljava/lang/Object;
 		ARG 1 index
 		ARG 2 value
 	METHOD m_pmnijqjw (ILjava/lang/Object;)I
 		ARG 0 newSize
 		ARG 1 added
+	METHOD m_pyobdhvd (Lit/unimi/dsi/fastutil/ints/Int2IntOpenHashMap;I)V
+		ARG 1 i
+	METHOD m_rgneznao (Lnet/minecraft/unmapped/C_aehiirzw$C_hfkxccvh;Lit/unimi/dsi/fastutil/ints/Int2IntMap$Entry;)V
+		ARG 2 entry
 	METHOD m_szxyhmkq createCodec (Lnet/minecraft/unmapped/C_feaetnaz;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_aehiirzw$C_sxtmudnl;Ljava/lang/Object;Lnet/minecraft/unmapped/C_kedlqxpi$C_znpcjlst;)Lcom/mojang/serialization/Codec;
 		ARG 0 idList
 		ARG 1 entryCodec
 		ARG 2 paletteProvider
 		ARG 3 partialId
+		ARG 4 reader
 	METHOD m_tldeonzq applyEach ([ILjava/util/function/IntUnaryOperator;)V
 		ARG 0 appliedTo
 		ARG 1 operator
@@ -68,6 +92,8 @@ CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/Palett
 		ARG 4 value
 	METHOD m_zcurgtmk get (I)Ljava/lang/Object;
 		ARG 1 index
+	METHOD m_zgdzdior (Lnet/minecraft/unmapped/C_feaetnaz;Lnet/minecraft/unmapped/C_peoxnqbd;I)I
+		ARG 2 id
 	CLASS C_hfkxccvh CountConsumer
 	CLASS C_jljriypz Configuration
 		FIELD f_kgezzzmr factory Lnet/minecraft/unmapped/C_peoxnqbd$C_oextuzvq;
