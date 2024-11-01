@@ -60,9 +60,11 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 2 consumer
 	METHOD m_mjwvwhyy (Lnet/minecraft/unmapped/C_quklzgtb;)Lit/unimi/dsi/fastutil/longs/LongSet;
 		ARG 0 key
+	METHOD m_mkactvip isSerializable ()Z
 	METHOD m_ntljehgr getOrCreateChunkNoiseSampler (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_rvjywqnu;
 		ARG 1 noiseSamplerCreator
 	METHOD m_oeshvinu getPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
+	METHOD m_pcowjlry tryMarkSaved ()Z
 	METHOD m_pkqflpwq hasBelowZeroRetrogen ()Z
 	METHOD m_pmdbdcxs getHeightmap (Lnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;)Lnet/minecraft/unmapped/C_ybztoekc;
 		ARG 1 type
@@ -70,13 +72,17 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 0 biomeRegistry
 		ARG 1 sectionArray
 	METHOD m_ptmjitse hasStructureReferences ()Z
+	METHOD m_puwtdbeb isSectionEmpty (I)Z
+		ARG 1 coord
 	METHOD m_pzyvuftt getHighestFilledSectionYOffset ()I
 	METHOD m_qaecgkls setInhabitedTime (J)V
 		ARG 1 inhabitedTime
 	METHOD m_qdoylksi markBlockForPostProcessing (Lit/unimi/dsi/fastutil/shorts/ShortList;I)V
+		ARG 1 sections
 		ARG 2 index
 	METHOD m_qhwssies setBlockState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Z)Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_qlsrwmuw getBelowZeroRetrogen ()Lnet/minecraft/unmapped/C_empvvetb;
+	METHOD m_rbxakgwa getStatus ()Lnet/minecraft/unmapped/C_kogtzhzt;
 	METHOD m_rgzeprey setBiomesFromNoise (Lnet/minecraft/unmapped/C_nhlknxak;Lnet/minecraft/unmapped/C_ohqwadgy$C_pigoipju;)V
 		ARG 1 biomeSupplier
 		ARG 2 sampler
@@ -88,10 +94,13 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 1 pos
 	METHOD m_ryislatp isLightCorrect ()Z
 	METHOD m_smvmtzoy getPackedBlockEntityNbt (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 1 pos
+		ARG 2 registryManager
 	METHOD m_sogpxvqe getBlockEntityNbt (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 pos
 	METHOD m_tmmlzzvg hasHeightmap (Lnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;)Z
 		ARG 1 type
+	METHOD m_twktjquw markNeedsSaving ()V
 	METHOD m_udykeqsw areSectionsEmptyBetween (II)Z
 		ARG 1 lowerHeight
 		ARG 2 upperHeight
@@ -102,6 +111,10 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 		ARG 1 type
 		ARG 2 heightmap
 	METHOD m_wljtnein getTicksForSerialization (J)Lnet/minecraft/unmapped/C_lwzmmmqr$C_ozbhqkkq;
+		ARG 1 time
+			COMMENT used to convert from
+			COMMENT {@link net.minecraft.world.tick.OrderedTick#triggerTick() OrderedTick.triggerTick}
+			COMMENT to {@link net.minecraft.world.tick.Tick#delay() Tick.delay}
 	METHOD m_xbdheuaq (Lnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;)Lnet/minecraft/unmapped/C_ybztoekc;
 		ARG 1 heightmapType
 	METHOD m_xkejgfig getHeightmaps ()Ljava/util/Collection;
@@ -110,3 +123,8 @@ CLASS net/minecraft/unmapped/C_lwzmmmqr net/minecraft/world/chunk/Chunk
 	METHOD m_yrcpifpe setLightCorrect (Z)V
 		ARG 1 lightCorrect
 	METHOD m_yuipgvpr getInhabitedTime ()J
+	CLASS C_ozbhqkkq PackedTicks
+		FIELD f_juvuxeon blockTicks Ljava/util/List;
+		FIELD f_rhsbjeav fluidTicks Ljava/util/List;
+		METHOD m_dpqohxww blockTicks ()Ljava/util/List;
+		METHOD m_yjluxaun fluidTicks ()Ljava/util/List;
