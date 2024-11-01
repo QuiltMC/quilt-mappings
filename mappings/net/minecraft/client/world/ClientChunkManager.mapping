@@ -30,8 +30,10 @@ CLASS net/minecraft/unmapped/C_rxbefbuv net/minecraft/client/world/ClientChunkMa
 		ARG 3 buf
 		ARG 4 nbt
 		ARG 5 consumer
+	METHOD m_yfdsyahd getLoadedEmptySections ()Lit/unimi/dsi/fastutil/longs/LongOpenHashSet;
 	CLASS C_tfcolboi ClientChunkMap
 		FIELD f_beqrondb centerChunkX I
+		FIELD f_iopqblvb loadedEmptySections Lit/unimi/dsi/fastutil/longs/LongOpenHashSet;
 		FIELD f_iuuqegjv radius I
 		FIELD f_kbcvrkzo chunks Ljava/util/concurrent/atomic/AtomicReferenceArray;
 		FIELD f_sxbcqsci loadedChunkCount I
@@ -39,9 +41,20 @@ CLASS net/minecraft/unmapped/C_rxbefbuv net/minecraft/client/world/ClientChunkMa
 		FIELD f_wfoyaoab diameter I
 		METHOD <init> (Lnet/minecraft/unmapped/C_rxbefbuv;I)V
 			ARG 2 radius
+		METHOD m_amnberdl onSectionEmptinessChanged (IIIZ)V
+			ARG 1 chunkX
+			ARG 2 sectionCoord
+			ARG 3 chunkZ
+			ARG 4 emptySection
 		METHOD m_dpjpfdqy isInRadius (II)Z
 			ARG 1 chunkX
 			ARG 2 chunkZ
+		METHOD m_fkdgglmo removeEmptySections (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+			ARG 1 chunk
+		METHOD m_gfizlrgc unload (ILnet/minecraft/unmapped/C_hrdsvlkq;)V
+			ARG 2 chunk
+		METHOD m_mjkggrto addEmptySections (Lnet/minecraft/unmapped/C_hrdsvlkq;)V
+			ARG 1 chunk
 		METHOD m_pciippob getIndex (II)I
 			ARG 1 chunkX
 			ARG 2 chunkZ
@@ -49,3 +62,4 @@ CLASS net/minecraft/unmapped/C_rxbefbuv net/minecraft/client/world/ClientChunkMa
 			ARG 1 fileName
 		METHOD m_vlowadnu getChunk (I)Lnet/minecraft/unmapped/C_hrdsvlkq;
 			ARG 1 index
+		METHOD m_wufvlhmm replace (ILnet/minecraft/unmapped/C_hrdsvlkq;)V
