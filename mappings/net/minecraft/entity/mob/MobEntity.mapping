@@ -19,6 +19,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_irlmhwzh navigation Lnet/minecraft/unmapped/C_atbvfjwi;
 	FIELD f_kfwdpftf positionTargetRange F
 	FIELD f_mhavoyoi bodyArmor Lnet/minecraft/unmapped/C_sddaxwyk;
+	FIELD f_mulpcwks EQUIPMENT_INIT_ORDER Ljava/util/List;
 	FIELD f_mxvsbror armorItems Lnet/minecraft/unmapped/C_rnrfftze;
 	FIELD f_nwzksedo goalSelector Lnet/minecraft/unmapped/C_qospjrjn;
 	FIELD f_nzzqwalu pathfindingPenalties Ljava/util/Map;
@@ -91,12 +92,16 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_jrjjwiqr onStartPathfinding ()V
 	METHOD m_jrvaluhu updateDropChances (Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 1 slot
+	METHOD m_kbemoobx dropEquipment (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_kdlnwtnv lookAtEntity (Lnet/minecraft/unmapped/C_astfners;FF)V
 		ARG 1 targetEntity
 		ARG 2 maxYawChange
 		ARG 3 maxPitchChange
 	METHOD m_kmgypgaa getPenalty (Lnet/minecraft/unmapped/C_hahxxnjs;)F
 		ARG 1 nodeType
+	METHOD m_kmhfjgdo convert (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_pkxijcfk;Lnet/minecraft/unmapped/C_bhyaesep;Lnet/minecraft/unmapped/C_pkxijcfk$C_olacbmtc;)Lnet/minecraft/unmapped/C_dxkfswlz;
+		ARG 1 newType
+		ARG 4 postConversionCallback
 	METHOD m_koijwctm hasPositionTarget ()Z
 	METHOD m_kqnvykqn enchantMainHandItem (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_jiailwzt;)V
 	METHOD m_kuhfocmh interactMob (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
@@ -114,6 +119,9 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_lxcdvhkn enchantEquipment (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_jiailwzt;)V
 		ARG 3 slot
 	METHOD m_mbyporyt createBodyControl ()Lnet/minecraft/unmapped/C_vofymfgv;
+	METHOD m_mkazpcha getAttributeValue (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_yuycoehb;)D
+		ARG 2 attribute
+		ARG 3 slot
 	METHOD m_mowaxfbl isLeftHanded ()Z
 	METHOD m_mrbrckqf isDisallowedInPeaceful ()Z
 	METHOD m_mufhzdfi isInWalkTargetRange ()Z
@@ -123,6 +131,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 2 stack
 	METHOD m_nzxqjkay tryEquip (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 2 equipment
+	METHOD m_onipdsbr getHandDropChances ()[F
 	METHOD m_owfqcyjj changeAngle (FFF)F
 		ARG 1 oldAngle
 		ARG 2 newAngle
@@ -143,12 +152,16 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 0 equipmentSlot
 		ARG 1 equipmentLevel
 	METHOD m_rpistqzo isWearingBodyArmor ()Z
+	METHOD m_rpqyatoj convert (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_pkxijcfk;Lnet/minecraft/unmapped/C_pkxijcfk$C_olacbmtc;)Lnet/minecraft/unmapped/C_dxkfswlz;
 	METHOD m_ruuttiyq isPersistent ()Z
 	METHOD m_rxurkduy getAttackTarget ()Lnet/minecraft/unmapped/C_usxaxydn;
 	METHOD m_saekgdkn stopMoving ()V
+	METHOD m_seslsqmb dropEquipment (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Predicate;)Ljava/util/Set;
+		ARG 2 dropPredicate
 	METHOD m_swfiqufm prefersNewEquipment (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_yuycoehb;)Z
 		ARG 1 newStack
 		ARG 2 oldStack
+		ARG 3 slot
 	METHOD m_szmqgzqm equipRandomly (Lnet/minecraft/unmapped/C_fiwnwrrf;)V
 		ARG 1 equipmentTable
 	METHOD m_tjejbxzp canUseRangedWeapon (Lnet/minecraft/unmapped/C_axrfhndl;)Z
@@ -167,6 +180,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 3 difficulty
 	METHOD m_uebjilbs equipRandomly (Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/Map;)V
 		ARG 1 lootTable
+		ARG 2 dropChances
 	METHOD m_uqccedlq canSpawn (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_bhyaesep;)Z
 		ARG 1 world
 	METHOD m_utndsklm equipBodyArmor (Lnet/minecraft/unmapped/C_sddaxwyk;)V
@@ -196,5 +210,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 upwardSpeed
 	METHOD m_yrminwpr onEatingGrass ()V
 	METHOD m_ywtdditi getLimitPerChunk ()I
+	METHOD m_zdbceqxv getArmorDropChances ()[F
 	METHOD m_zdjlhmwq getVisibilityCache ()Lnet/minecraft/unmapped/C_vyefybqz;
 	METHOD m_zjfgbeap isAiDisabled ()Z

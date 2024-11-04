@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
+	FIELD f_akmjjvkl RESTRICTED_WANDER_DISTANCE_REDUCTION I
 	FIELD f_bdaqdvyx MIN_HIVE_RETURN_DISTANCE I
 		COMMENT The minimum distance that bees will immediately return to their hive at.
 	FIELD f_cjeyxcuq TICKS_SINCE_POLLINATION_KEY Ljava/lang/String;
@@ -17,6 +18,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 	FIELD f_ilshqlkm MAX_POLLINATED_CROPS I
 	FIELD f_jlzhazod pollinateGoal Lnet/minecraft/unmapped/C_hgfgxpql$C_hstezuru;
 	FIELD f_jrbdvmhv LOCATING_NEW_HIVE_COOLDOWN I
+	FIELD f_jsypygyo MIN_RETRY_FINDING_FLOWER_COOLDOWN I
 	FIELD f_lpvsbgtm HIVE_SEARCH_RANGE I
 	FIELD f_mdrowaus HIVE_POS_KEY Ljava/lang/String;
 	FIELD f_mfeadoih ANGER Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -35,6 +37,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 	FIELD f_rgimjzcr flowerPos Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_rllxzote HAS_NECTAR_KEY Ljava/lang/String;
 	FIELD f_smwphlyv LOCATING_NEW_FLOWER_COOLDOWN I
+	FIELD f_sxtbecla DEFAULT_WANDER_DISTANCE_REDUCTION I
 	FIELD f_uwirnwkg moveToHiveGoal Lnet/minecraft/unmapped/C_hgfgxpql$C_aorvosrb;
 	FIELD f_vbzxsdle NEAR_TARGET_FLAG I
 	FIELD f_vgpnrcpq ticksInsideWater I
@@ -42,6 +45,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 	FIELD f_whtbodsz MIN_ATTACK_DISTANCE I
 	FIELD f_wuqtubpu targetUuid Ljava/util/UUID;
 	FIELD f_xjbjocrt CANNOT_ENTER_HIVE_TICKS_KEY Ljava/lang/String;
+	FIELD f_xliifucf MAX_RETRY_FINDING_FLOWER_COOLDOWN I
 	FIELD f_xyzgfgra HAS_STUNG_KEY Ljava/lang/String;
 	FIELD f_ycjsovuu moveToFlowerGoal Lnet/minecraft/unmapped/C_hgfgxpql$C_svuqecsc;
 	FIELD f_yqhwyhuf STING_DEATH_COUNTDOWN I
@@ -50,6 +54,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 	METHOD m_beiolhwp setBeeFlag (IZ)V
 		ARG 1 bit
 		ARG 2 value
+	METHOD m_biootsai getHive ()Lnet/minecraft/unmapped/C_cyniebsl;
 	METHOD m_bypgkjae updateBodyPitch ()V
 	METHOD m_cihpsqgl setHasStung (Z)V
 		ARG 1 hasStung
@@ -57,6 +62,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 	METHOD m_hxcrhdeh createAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
 	METHOD m_ifoynezy canEnterHive ()Z
 	METHOD m_ikwzmvgi getMoveGoalTicks ()I
+	METHOD m_inydwqhr isNightOrRaining (Lnet/minecraft/unmapped/C_cdctfzbn;)Z
 	METHOD m_ixtjacit onHoneyDelivered ()V
 	METHOD m_jnvzmqwd setHasNectar (Z)V
 		ARG 1 hasNectar
@@ -69,6 +75,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 	METHOD m_kxszurdg setCannotEnterHiveTicks (I)V
 		ARG 1 ticks
 	METHOD m_lksmfqbw setHivePos (Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_lqhqjghk loseHive ()V
 	METHOD m_mkieglfb isTooFar (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
 	METHOD m_nhjjyvbc getBeeFlag (I)Z
@@ -99,6 +106,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 		ARG 12 effect
 	METHOD m_xrvxkqxv startMovingTo (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
+	METHOD m_xwinkfzm loseFlower ()V
 	METHOD m_yoduviar hasStung ()Z
 	METHOD m_zkthdefj hasNectar ()Z
 	METHOD m_zycchyeq isHiveNearFire ()Z
@@ -135,6 +143,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 		FIELD f_bklijrhn running Z
 		FIELD f_boohtxxx nextTarget Lnet/minecraft/unmapped/C_vgpupfxx;
 		FIELD f_djxwnopq POSITION_CHANGE_PROBABILITY I
+		FIELD f_hkwowzec FLOWER_SEARCH_RADIUS I
 		FIELD f_hlpjktns flowerPredicate Ljava/util/function/Predicate;
 		FIELD f_ithpcqbu ticks I
 		FIELD f_lnbcclwg HOVER_HEIGHT_WITHIN_FLOWER F
@@ -143,6 +152,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 		FIELD f_uciamvdk SPEED_MODIFIER F
 		FIELD f_umrooslu lastPollinationTick I
 		FIELD f_uxwaxwno pollinationTicks I
+		FIELD f_vfufljpq ticksUnderWater Lit/unimi/dsi/fastutil/longs/Long2LongOpenHashMap;
 		FIELD f_vqmimsbg MAX_POLLINATION_TICKS I
 		FIELD f_zevpzupt MIN_POLLINATION_TICKS I
 		METHOD m_enlpoqja getFlower ()Ljava/util/Optional;
@@ -158,6 +168,10 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 		METHOD m_luyzthep canBeeStart ()Z
 	CLASS C_jmbatlcy BeeWanderAroundGoal
 		METHOD m_gyqotsry getRandomLocation ()Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_nsvntrdd getMaxWanderDistance ()I
+	CLASS C_kgvzcksa ValidateHiveGoal
+		FIELD f_lbrpizqw ticksUntilNextCheck I
+		FIELD f_zlysqrjr lastValidationTick J
 	CLASS C_svuqecsc MoveToFlowerGoal
 		FIELD f_flkrlasm MAX_FLOWER_NAVIGATION_TICKS I
 		FIELD f_omakwtwb ticks I
@@ -175,3 +189,7 @@ CLASS net/minecraft/unmapped/C_hgfgxpql net/minecraft/entity/passive/BeeEntity
 		METHOD <init> (Lnet/minecraft/unmapped/C_hgfgxpql;)V
 			ARG 1 bee
 		METHOD m_tcocmqdv canSting ()Z
+	CLASS C_yzizfveb ValidateFlowerGoal
+		FIELD f_rlboddkm ticksUntilNextCheck I
+		FIELD f_vllnymkd lastValidationTick J
+		METHOD m_ddrgxphk isFlower (Lnet/minecraft/unmapped/C_hynzadkk;)Z

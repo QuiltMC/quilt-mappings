@@ -31,6 +31,7 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
 	METHOD m_armyzcig getZLength ()D
+	METHOD m_cappoqdf getMinPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_earezljt getAverageSideLength ()D
 	METHOD m_emgqmgbh raycast (Ljava/lang/Iterable;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_jdakttms;
 		ARG 0 boxes
@@ -42,6 +43,7 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		ARG 1 to
 	METHOD m_hagzytre from (Lnet/minecraft/unmapped/C_hmqypqzz;)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		ARG 0 mutable
+	METHOD m_hicseajv getMaxPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_hwfgvpmt contract (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT @see #expand(double)
 		ARG 1 value
@@ -131,6 +133,9 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 	METHOD m_qawrpvjc contains (Lnet/minecraft/unmapped/C_vgpupfxx;)Z
 		COMMENT Checks if the given position is in this box.
 		ARG 1 pos
+	METHOD m_qikitayk collides (Lnet/minecraft/unmapped/C_vgpupfxx;Ljava/util/List;)Z
+		ARG 1 offset
+		ARG 2 boxes
 	METHOD m_rkqksbvs getMin (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)D
 		ARG 1 axis
 	METHOD m_rptaaemx of (Lnet/minecraft/unmapped/C_vgpupfxx;DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
@@ -147,10 +152,14 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		COMMENT corners.
 		ARG 1 pos1
 		ARG 2 pos2
+	METHOD m_ttpbzbdo traceCollisionSide (Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_vgpupfxx;[DLnet/minecraft/unmapped/C_xpuuihxf;DDD)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 box
 	METHOD m_uegujhig withMinZ (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT Creates a box with the minimum Z provided and all other coordinates
 		COMMENT of this box.
 		ARG 1 minZ
+	METHOD m_uquuyker raycast (DDDDDDLnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Ljava/util/Optional;
+		ARG 13 end
 	METHOD m_utbwwbwl squaredMagnitude (Lnet/minecraft/unmapped/C_vgpupfxx;)D
 		ARG 1 vec
 	METHOD m_uzekxbgu withMaxX (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
@@ -172,6 +181,19 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 	METHOD m_wsmxurzz expand (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT @see #contract(double)
 		ARG 1 value
+	METHOD m_wywdjpzc traceCollisionSide (DDDDDDLnet/minecraft/unmapped/C_vgpupfxx;[DLnet/minecraft/unmapped/C_xpuuihxf;DDD)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 minX
+		ARG 2 minY
+		ARG 4 minZ
+		ARG 6 maxX
+		ARG 8 maxY
+		ARG 10 maxZ
+		ARG 12 start
+		ARG 13 traceDistanceResult
+		ARG 14 direction
+		ARG 15 deltaX
+		ARG 17 deltaY
+		ARG 19 deltaZ
 	METHOD m_xejolzay offset (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT Creates a box that is translated by {@code x}, {@code y}, {@code z} on
 		COMMENT each axis from this box.
@@ -184,3 +206,4 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		ARG 1 maxY
 	METHOD m_zmkdorxa getMax (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)D
 		ARG 1 axis
+	METHOD m_zpsbullj getBottomCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;

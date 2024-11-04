@@ -14,18 +14,25 @@ CLASS net/minecraft/unmapped/C_brvrbzqh net/minecraft/entity/ai/brain/sensor/Sen
 	FIELD f_kfqocqmk DEFAULT_RUN_TIME I
 	FIELD f_olgwztxk ATTACKABLE_TARGET_PREDICATE_IGNORE_VISIBILITY_OR_DISTANCE_SCALING Lnet/minecraft/unmapped/C_cjtyhinh;
 	FIELD f_savrjxrj ATTACKABLE_TARGET_PREDICATE Lnet/minecraft/unmapped/C_cjtyhinh;
+	FIELD f_tqpujoog DEFAULT_TARGETING_RANGE I
 	METHOD <init> (I)V
 		ARG 1 senseInterval
+	METHOD m_aputesvt hasRecentlyPassed (ILjava/util/function/BiPredicate;)Ljava/util/function/BiPredicate;
+		ARG 0 testedTicks
+		ARG 1 predicate
+	METHOD m_cqcoyxpn hasRecentlyBeenAttackable (Lnet/minecraft/unmapped/C_usxaxydn;I)Ljava/util/function/BiPredicate;
+		ARG 1 testedTicks
 	METHOD m_dzzsgvsj tick (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 world
 		ARG 2 entity
-	METHOD m_namfjgwr testAttackableTargetPredicateIgnoreVisibility (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+	METHOD m_namfjgwr canAttackIgnoreVisibility (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 1 entity
 		ARG 2 target
-	METHOD m_pjqiwcnh testTargetPredicate (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+	METHOD m_oaooofgj updateTargetingRanges (Lnet/minecraft/unmapped/C_usxaxydn;)V
+	METHOD m_pjqiwcnh canTarget (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 1 entity
 		ARG 2 target
-	METHOD m_rtpssfaw testAttackableTargetPredicate (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
+	METHOD m_rtpssfaw canAttack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 1 entity
 		ARG 2 target
 	METHOD m_ssofdmup sense (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)V
