@@ -220,7 +220,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_ytakrfoj optionsFile Ljava/io/File;
 	FIELD f_yuefmyhf pickItemKey Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT A key bind for holding an item corresponding to the {@linkplain net.minecraft.entity.Entity#getPickBlockStack() entity}
-		COMMENT or {@linkplain net.minecraft.block.Block#getPickStack(net.minecraft.world.WorldView,
+		COMMENT or {@linkplain net.minecraft.block.AbstractBlock#getPickStack(net.minecraft.world.WorldView,
 		COMMENT net.minecraft.util.math.BlockPos, net.minecraft.block.BlockState) block} the player is looking at.
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_MOUSE_BUTTON_MIDDLE the middle mouse button} by default.
 	FIELD f_yvffzbrl rawMouseInput Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -431,31 +431,9 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		ARG 0 sliderValue
 	CLASS C_cupifpge Visitor
 		METHOD m_lctuaxnl visitOption (Ljava/lang/String;Lnet/minecraft/unmapped/C_vbibxkxv;)V
-			ARG 1 key
-			ARG 2 option
-	CLASS C_jalnwwrt
-		METHOD m_jkglpaia find (Ljava/lang/String;)Ljava/lang/String;
-			ARG 1 key
-	CLASS C_runhizzk
-		METHOD m_ukcqoglz print (Ljava/lang/String;)V
-			ARG 1 key
-		METHOD m_xtvqgkuv (Ljava/lang/String;Ljava/io/PrintWriter;Lcom/google/gson/JsonElement;)V
-			ARG 3 result
 	CLASS C_wgzdldrb TypeVisitor
 		METHOD m_dzdzxyaq visitBoolean (Ljava/lang/String;Z)Z
-			ARG 1 key
-			ARG 2 current
 		METHOD m_itiuscyr visitString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-			ARG 1 key
-			ARG 2 current
 		METHOD m_nzfiomzf visitInt (Ljava/lang/String;I)I
-			ARG 1 key
-			ARG 2 current
 		METHOD m_sboqkmez visitObject (Ljava/lang/String;Ljava/lang/Object;Ljava/util/function/Function;Ljava/util/function/Function;)Ljava/lang/Object;
-			ARG 1 key
-			ARG 2 current
-			ARG 3 decoder
-			ARG 4 encoder
 		METHOD m_svchcgao visitFloat (Ljava/lang/String;F)F
-			ARG 1 key
-			ARG 2 current
