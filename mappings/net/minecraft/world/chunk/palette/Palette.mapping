@@ -10,7 +10,6 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 	METHOD m_cgvusdyw hasAny (Ljava/util/function/Predicate;)Z
 		COMMENT {@return {@code true} if any entry in this palette passes the {@code
 		COMMENT predicate}}
-		ARG 1 predicate
 	METHOD m_frsswtag getId (Ljava/lang/Object;)I
 		COMMENT {@return the identifier of an object in this palette}
 		COMMENT <p>
@@ -18,26 +17,18 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 		COMMENT register the object. If the palette is too small to include this object,
 		COMMENT a {@linkplain PaletteResizeListener resize listener} will be called and
 		COMMENT this palette may be discarded.
-		ARG 1 object
-			COMMENT the object to look up
 	METHOD m_gholllny getEntry (I)Ljava/lang/Object;
 		COMMENT {@return the object associated with the given {@code id}}
 		COMMENT
 		COMMENT @throws MissingPaletteEntryException if this identifier does not exist in this palette
-		ARG 1 id
-			COMMENT the identifier to look up
 	METHOD m_hrjyiuxt copy (Lnet/minecraft/unmapped/C_sxhmfrig;)Lnet/minecraft/unmapped/C_peoxnqbd;
 	METHOD m_ljtxzsdf getPacketSize ()I
 		COMMENT {@return the serialized size of this palette in a byte buf, in bytes}
 	METHOD m_lprmlgjn write (Lnet/minecraft/unmapped/C_idfydwco;)V
 		COMMENT Writes this palette to the {@code buf}.
-		ARG 1 buf
-			COMMENT the packet byte buffer
 	METHOD m_osqhbwdc read (Lnet/minecraft/unmapped/C_idfydwco;)V
 		COMMENT Initializes this palette from the {@code buf}.
 		COMMENT Clears the preexisting data in this palette.
-		ARG 1 buf
-			COMMENT the packet byte buffer
 	METHOD m_yfzgggar size ()I
 		COMMENT {@return the size of the palette}
 	CLASS C_oextuzvq Factory
@@ -46,12 +37,3 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 			COMMENT Creates a palette.
 			COMMENT
 			COMMENT @return the created new palette
-			ARG 1 bits
-				COMMENT the number of bits each entry uses in the storage
-			ARG 2 idList
-				COMMENT the indices of possible palette entries and their full integer identifiers;
-				COMMENT useful for palette serialization
-			ARG 3 listener
-				COMMENT the resize listener, called when this palette runs out of capacity when
-				COMMENT assigning index to new entries
-			ARG 4 list

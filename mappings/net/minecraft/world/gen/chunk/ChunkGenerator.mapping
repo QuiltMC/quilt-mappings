@@ -13,7 +13,7 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD <init> (Lnet/minecraft/unmapped/C_ajguowya;Ljava/util/function/Function;)V
 		ARG 2 generationSettingsGetter
 	METHOD m_ajumqnmd getBiomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
-	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jibygqpu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zxhjfyir;)V
+	METHOD m_bbjdszxg setStructureStarts (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_jibygqpu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_xhhleach;)V
 		COMMENT Determines which structures should start in the given chunk and creates their starting points.
 		ARG 1 registryManager
 		ARG 2 concentricCalculator
@@ -25,7 +25,7 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 1 structureSetLookup
 		ARG 2 randomState
 		ARG 3 seed
-	METHOD m_dbfhxbvh tryGenerateStructure (Lnet/minecraft/unmapped/C_nmlisvai$C_gmatxzeb;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;JLnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_zubvmeye;)Z
+	METHOD m_dbfhxbvh tryGenerateStructure (Lnet/minecraft/unmapped/C_nmlisvai$C_gmatxzeb;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;JLnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_xhhleach;)Z
 		ARG 1 structureSelectionEntry
 		ARG 2 structureManager
 		ARG 3 registryManager
@@ -37,25 +37,12 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 10 sectionPos
 	METHOD m_dmhpibgx getColumnSample (IILnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)Lnet/minecraft/unmapped/C_lydpvmkv;
 		COMMENT Returns a sample of all the block states in a column for use in structure generation.
-		ARG 1 x
-		ARG 2 z
-		ARG 3 world
-		ARG 4 randomState
 	METHOD m_dsmekobm getSettings (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_qbjpvmph;
 		ARG 1 biome
 	METHOD m_evqkkueh populateNoise (Lnet/minecraft/unmapped/C_pfqozslu;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Generates the base shape of the chunk out of the basic block states as decided by this chunk generator's config.
-		ARG 1 blender
-		ARG 2 randomState
-		ARG 3 structureManager
-		ARG 4 chunk
 	METHOD m_eyzuuexw getHeight (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		COMMENT Returns the raw noise height of a column for use in structure generation.
-		ARG 1 x
-		ARG 2 z
-		ARG 3 heightmap
-		ARG 4 world
-		ARG 5 randomState
 	METHOD m_ffmeoonw generateFeatures (Lnet/minecraft/unmapped/C_ldkphtbr;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_rhdulivw;)V
 		ARG 1 world
 		ARG 2 chunk
@@ -84,10 +71,8 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_gzmnagwo (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_qbjpvmph;
 		ARG 0 biome
 	METHOD m_hfetlfug addDebugLines (Ljava/util/List;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 lines
-		ARG 2 randomState
-	METHOD m_hwpfjgka (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_jibygqpu;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_cjzoxshv;)V
-		ARG 9 structureSet
+	METHOD m_hwpfjgka (Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_zubvmeye;Lnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_jibygqpu;Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 10 structureSet
 	METHOD m_iinbgeei (Lnet/minecraft/unmapped/C_dzcnonip;)Ljava/util/Set;
 		ARG 0 placement
 	METHOD m_inhqqvlj (Lit/unimi/dsi/fastutil/ints/IntSet;Lnet/minecraft/unmapped/C_ukunbkuo$C_onfbwplh;Lnet/minecraft/unmapped/C_jewbaoib;)V
@@ -145,12 +130,6 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 	METHOD m_taborzul getSeaLevel ()I
 	METHOD m_ufytgbmf carve (Lnet/minecraft/unmapped/C_ezymcfey;JLnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_txmmiamu;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 		COMMENT Generates caves for the given chunk.
-		ARG 1 chunkRegion
-		ARG 2 seed
-		ARG 4 randomState
-		ARG 5 biomeAccess
-		ARG 6 structureManager
-		ARG 7 chunk
 	METHOD m_wocuxbxx getHeightInGround (IILnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;Lnet/minecraft/unmapped/C_qpninoyb;Lnet/minecraft/unmapped/C_edfiqifk;)I
 		ARG 1 x
 		ARG 2 z
@@ -159,13 +138,8 @@ CLASS net/minecraft/unmapped/C_kgfalbim net/minecraft/world/gen/chunk/ChunkGener
 		ARG 5 randomState
 	METHOD m_woetbmqo buildSurface (Lnet/minecraft/unmapped/C_ezymcfey;Lnet/minecraft/unmapped/C_rhdulivw;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_lwzmmmqr;)V
 		COMMENT Places the surface blocks of the biomes after the noise has been generated.
-		ARG 1 region
-		ARG 2 structureManager
-		ARG 3 randomState
-		ARG 4 chunk
 	METHOD m_wzarohnq getCodecKey ()Ljava/util/Optional;
 	METHOD m_xoblypwv populateEntities (Lnet/minecraft/unmapped/C_ezymcfey;)V
-		ARG 1 region
 	METHOD m_xuesqjcb getMinimumY ()I
 	METHOD m_yhwflvjc getSpawnHeight (Lnet/minecraft/unmapped/C_qpninoyb;)I
 		ARG 1 world
