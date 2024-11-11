@@ -5,7 +5,9 @@ import java.util.stream.Stream;
 
 import com.google.common.collect.Streams;
 import org.gradle.api.file.ConfigurableFileCollection;
+import org.gradle.api.file.FileSystemLocation;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.JavaExec;
@@ -47,16 +49,19 @@ public abstract class UnpickJarTask extends JavaExec {
         this.getMainClass().finalizeValue();
 
         this.getArgumentProviders().add(() ->
-            Streams.concat(
-                Stream.of(
-                    this.getInputFile().get().getAsFile().getAbsolutePath(),
-                    this.getOutputFile().get().getAsFile().getAbsolutePath(),
-                    this.getUnpickDefinition().get().getAsFile().getAbsolutePath(),
-                    this.getUnpickConstantsJar().get().getAsFile().getAbsolutePath()
-                ),
-                this.getDecompileClasspathFiles().getAsFileTree().getFiles().stream()
-                    .map(File::getAbsolutePath)
-            ).toList()
+            Streams
+                .concat(
+                    Stream
+                        .of(
+                            this.getInputFile(), this.getOutputFile(),
+                            this.getUnpickDefinition(), this.getUnpickConstantsJar()
+                        )
+                        .map(Provider::get)
+                        .map(FileSystemLocation::getAsFile),
+                    this.getDecompileClasspathFiles().getAsFileTree().getFiles().stream()
+                )
+                .map(File::getAbsolutePath)
+                .toList()
         );
     }
 }
