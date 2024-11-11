@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_tahhkgty net/minecraft/entity/vehicle/AbstractMin
 	FIELD f_cbqkmsxd ADJACENT_RAIL_POSITIONS_BY_SHAPE Ljava/util/Map;
 	FIELD f_eskwdyms onRails Z
 	FIELD f_figrvmbr VILLAGER_PASSENGER_ATTACHMENT_POS Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_jhroxpze controller Lnet/minecraft/unmapped/C_jjtchizm;
 	FIELD f_lotwtnbj yawFlipped Z
 	FIELD f_revdcqip CUSTOM_BLOCK_ID Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_tbmsamms CUSTOM_BLOCK_OFFSET Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -14,20 +15,36 @@ CLASS net/minecraft/unmapped/C_tahhkgty net/minecraft/entity/vehicle/AbstractMin
 		ARG 3 x
 		ARG 5 y
 		ARG 7 z
+	METHOD m_afluazez getPowerDirection (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_alrnhgzw isRideable ()Z
 	METHOD m_cnkjmfhl onActivatorRail (IIIZ)V
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
 		ARG 4 powered
+	METHOD m_eipriqms initPos (DDD)V
+		ARG 1 x
+		ARG 3 y
+		ARG 5 z
 	METHOD m_glkhmiur setCustomBlock (Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 state
+	METHOD m_gwoyqxww setYawFlipped (Z)V
+		ARG 1 yawFlipped
 	METHOD m_hdngxmge getBlockOffset ()I
 	METHOD m_hgtepult (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 1 pos
+	METHOD m_hxgtbizm isYawFlipped ()Z
+	METHOD m_inslfgor isFirstUpdate ()Z
+	METHOD m_masylmsi setOnRails (Z)V
+		ARG 1 onRails
 	METHOD m_ounzrtxb create (Lnet/minecraft/unmapped/C_cdctfzbn;DDDLnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_bhyaesep;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_tahhkgty;
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
+		ARG 7 type
+	METHOD m_pzrmwujl getController ()Lnet/minecraft/unmapped/C_jjtchizm;
+	METHOD m_raaevxrz isNewBehaviorActive (Lnet/minecraft/unmapped/C_cdctfzbn;)Z
+	METHOD m_rpovghnz isSelfPropelling ()Z
 	METHOD m_simptyqn moveOnRail (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_staqlmtx getDefaultContainedBlock ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_upansguo getContainedBlock ()Lnet/minecraft/unmapped/C_txtbiemp;
@@ -41,9 +58,15 @@ CLASS net/minecraft/unmapped/C_tahhkgty net/minecraft/entity/vehicle/AbstractMin
 		ARG 1 offset
 	METHOD m_xtdpuoft willHitBlockAt (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
+	METHOD m_ydndwdak stepAlongRail (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_wqmdpcsg;D)D
 	METHOD m_yrpbpsae moveOffRail (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_yvrwkcqb applySlowdown (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 velocity
+	METHOD m_zmsijsbh pushOtherMinecart (Lnet/minecraft/unmapped/C_tahhkgty;DD)V
+		ARG 1 minecart
+		ARG 2 xOverlap
+		ARG 4 zOverlap
 	METHOD m_zqqbmhzn hasCustomBlock ()Z
 	METHOD m_zrztaorn (Ljava/util/EnumMap;)V
 		ARG 0 map
+	METHOD m_zvxsupdf locateAffectingRailOrSelf ()Lnet/minecraft/unmapped/C_hynzadkk;

@@ -1,0 +1,65 @@
+CLASS net/minecraft/unmapped/C_btculrky net/minecraft/entity/vehicle/ExperimentalMinecartController
+	FIELD f_hikwcdre lastLerpStep Lnet/minecraft/unmapped/C_btculrky$C_xoihtwzz;
+	FIELD f_icggxsas Y_OFFSET_ON_RAIL D
+	FIELD f_jbgmphca currentLerpSteps Ljava/util/List;
+	FIELD f_kxhjtdkb REFRESH_TICKS I
+	FIELD f_ljrpmnlw currentTotalWeight D
+	FIELD f_mnqowxmz lerpSteps Ljava/util/List;
+	FIELD f_rhqsxplj ticksToNextUpdate I
+	FIELD f_tbzdvaef cachedTicksToNextUpdate I
+	FIELD f_uqdjwxfd cachedPartialTick F
+	FIELD f_yhexcgfs lastPartialTickStep Lnet/minecraft/unmapped/C_btculrky$C_dzjsmtju;
+	FIELD f_zosxuhfo V_SHAPED_TRACK_STOP_THRESHOLD D
+	METHOD m_djwrnguw getLerpedPitch (F)F
+	METHOD m_hptwubgx boostFromPoweredRail (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 velocity
+	METHOD m_hzzcyntk decelerateFromPoweredRail (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 velocity
+	METHOD m_izllixuq setRotation (FF)V
+		ARG 1 yaw
+		ARG 2 pitch
+	METHOD m_jbchdtyf setLastLerpStep ()V
+	METHOD m_kmamcsdp restIfInVShape (Lnet/minecraft/unmapped/C_wqmdpcsg;Lnet/minecraft/unmapped/C_wqmdpcsg;)Z
+		ARG 1 currentRailShape
+		ARG 2 nextRailShape
+	METHOD m_lcsmvxnj pushEntities (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
+		ARG 1 bounds
+	METHOD m_lysdpqwh getLerpedPos (F)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_lzgrxckh getLerpedVelocity (F)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_odbcfrkh adjustToRails (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Z)V
+		ARG 3 ignoreWeight
+	METHOD m_qvaafauq getPartialTickStep (F)Lnet/minecraft/unmapped/C_btculrky$C_dzjsmtju;
+		ARG 1 tickDelta
+	METHOD m_qxvvmicx getLerpedYaw (F)F
+	METHOD m_tamvnwwk pickUpEntities (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
+		ARG 1 bounds
+	METHOD m_udvfwekl hasCurrentLerpSteps ()Z
+	METHOD m_udyxcniz applyPlayerInputVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 velocity
+	METHOD m_whxsvdci calculateTrackVelocity (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_btculrky$C_yianzbtt;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_wqmdpcsg;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 2 currentVelocity
+		ARG 3 iteration
+		ARG 6 shape
+	METHOD m_xucvbevm isDescending (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_wqmdpcsg;)Z
+		ARG 1 velocity
+		ARG 2 shape
+	METHOD m_yfseascf applySlopeAcceleration (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_wqmdpcsg;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 velocity
+		ARG 2 shape
+	METHOD m_zwxvpqxy tickClient ()V
+	CLASS C_dzjsmtju PartialTickStep
+	CLASS C_xoihtwzz Step
+		FIELD f_cpwhtplq zero Lnet/minecraft/unmapped/C_btculrky$C_xoihtwzz;
+		FIELD f_detfpquq velocity Lnet/minecraft/unmapped/C_vgpupfxx;
+		FIELD f_dkmnnaot yaw F
+		FIELD f_mnuzwqgi pitch F
+		METHOD m_albtrwoo yaw ()F
+		METHOD m_xoottmay velocity ()Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_xpxfoqjx pitch ()F
+	CLASS C_yianzbtt MovementIteration
+		FIELD f_atrvdqal hasDecelerated Z
+		FIELD f_benbzlsn hasBoosted Z
+		FIELD f_ccpdmmpc hasAppliedSlopeAcceleration Z
+		FIELD f_eqovgqok remainingMovement D
+		FIELD f_vcuwlxde initial Z
+		METHOD m_phqxttmg shouldContinue ()Z
