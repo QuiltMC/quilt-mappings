@@ -1,8 +1,6 @@
 package quilt.internal.task;
 
-import org.gradle.api.Action;
 import org.gradle.api.Task;
-import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 
@@ -14,7 +12,7 @@ import quilt.internal.plugin.QuiltMappingsBasePlugin;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public interface QuiltMappingsArtifactTask extends MappingsTask {
+public interface QuiltMappingsArtifactTask extends Task {
     static boolean isInstance(Task task) {
         return task instanceof QuiltMappingsArtifactTask;
     }

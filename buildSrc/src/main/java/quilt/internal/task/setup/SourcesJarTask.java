@@ -7,9 +7,8 @@ import org.gradle.jvm.tasks.Jar;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.ProcessMappingsPlugin;
-import quilt.internal.task.MappingsTask;
 
-public abstract class SourcesJarTask extends Jar implements MappingsTask {
+public abstract class SourcesJarTask extends Jar {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link ProcessMappingsPlugin}.
      */

@@ -1,5 +1,6 @@
 package quilt.internal.task.diff;
 
+import org.gradle.api.Task;
 import org.gradle.api.Transformer;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.RegularFile;
@@ -8,7 +9,6 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
 import quilt.internal.plugin.TargetDiffPlugin;
-import quilt.internal.task.MappingsTask;
 
 /**
  * A task that takes a target version as input.
@@ -17,7 +17,7 @@ import quilt.internal.task.MappingsTask;
  *
  * @see TargetDiffPlugin TargetDiffPlugin's configureEach
  */
-public interface TargetVersionConsumingTask extends MappingsTask {
+public interface TargetVersionConsumingTask extends Task {
     @Input
     @Optional
     Property<String> getTargetVersion();

@@ -1,5 +1,6 @@
 package quilt.internal.task;
 
+import org.gradle.api.Task;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.tasks.InputDirectory;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
@@ -9,7 +10,7 @@ import quilt.internal.plugin.QuiltMappingsBasePlugin;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public interface MappingsDirConsumingTask extends MappingsTask {
+public interface MappingsDirConsumingTask extends Task {
     @InputDirectory
     DirectoryProperty getMappingsDir();
 }

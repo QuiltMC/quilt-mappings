@@ -1,11 +1,10 @@
 package quilt.internal.task.mappings;
 
+import org.gradle.api.Task;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.TaskCollection;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.MappingsDirConsumingTask;
-import quilt.internal.task.MappingsTask;
 
 /**
  * A task that outputs mappings to the {@linkplain #getMappingsDir() mappings directory}.
@@ -20,7 +19,7 @@ import quilt.internal.task.MappingsTask;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public interface MappingsDirOutputtingTask extends MappingsTask {
+public interface MappingsDirOutputtingTask extends Task {
     @Internal(
         """
         This is only used to resolve relative output paths against.

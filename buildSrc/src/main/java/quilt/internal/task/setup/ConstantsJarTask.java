@@ -7,9 +7,8 @@ import org.gradle.jvm.tasks.Jar;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
-import quilt.internal.task.MappingsTask;
 
-public abstract class ConstantsJarTask extends Jar implements MappingsTask {
+public abstract class ConstantsJarTask extends Jar {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */

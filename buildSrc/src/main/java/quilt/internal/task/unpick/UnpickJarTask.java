@@ -13,14 +13,13 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskContainer;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
-import quilt.internal.task.MappingsTask;
 
 /**
  * Unpicks a jar file using {@link daomephsta.unpick.cli.Main}.
  *
  * @see MapV2Plugin MapV2Plugin's configureEach
  */
-public abstract class UnpickJarTask extends JavaExec implements MappingsTask {
+public abstract class UnpickJarTask extends JavaExec {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */

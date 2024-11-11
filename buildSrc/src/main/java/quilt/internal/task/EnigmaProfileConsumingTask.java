@@ -1,5 +1,6 @@
 package quilt.internal.task;
 
+import org.gradle.api.Task;
 import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
@@ -15,7 +16,7 @@ import quilt.internal.util.EnigmaProfileService;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public interface EnigmaProfileConsumingTask extends MappingsTask {
+public interface EnigmaProfileConsumingTask extends Task {
     @Internal("@ServiceReference is @Incubating")
     Property<EnigmaProfileService> getEnigmaProfileService();
 

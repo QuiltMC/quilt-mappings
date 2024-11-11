@@ -18,7 +18,6 @@ import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.options.Option;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.TargetDiffPlugin;
-import quilt.internal.task.MappingsTask;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,7 +38,7 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  * command line processes, usually via the {@code PATH} system environment variable.
  */
 @CacheableTask
-public abstract class DiffDirectoriesTask extends Exec implements MappingsTask {
+public abstract class DiffDirectoriesTask extends Exec {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link TargetDiffPlugin}.
      */
