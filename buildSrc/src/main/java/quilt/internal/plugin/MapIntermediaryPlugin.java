@@ -58,7 +58,7 @@ public abstract class MapIntermediaryPlugin extends DefaultExtensionedMappingsPr
         // apply required plugins and save their registered objects
         final PluginContainer plugins = project.getPlugins();
 
-        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+        final QuiltMappingsExtension quiltExt = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MapV2Plugin.Tasks mappingsV2Tasks =
             plugins.apply(MapV2Plugin.class).getExt().getTasks();
@@ -73,7 +73,7 @@ public abstract class MapIntermediaryPlugin extends DefaultExtensionedMappingsPr
             ExtractTinyIntermediaryMappingsTask.class,
             task -> {
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-" + Namespaces.INTERMEDIARY + "." + Extensions.TINY)
+                    quiltExt.provideSuffixedMinecraftVersion("-" + Namespaces.INTERMEDIARY + "." + Extensions.TINY)
                 ));
             }
         );
@@ -125,7 +125,7 @@ public abstract class MapIntermediaryPlugin extends DefaultExtensionedMappingsPr
         final var intermediaryV2MappingsJar = tasks.register(
             IntermediaryMappingsV2JarTask.INTERMEDIARY_V_2_MAPPINGS_JAR_TASK_NAME,
             IntermediaryMappingsV2JarTask.class,
-            ext.getUnpickVersion()
+            quiltExt.getUnpickVersion()
         );
         intermediaryV2MappingsJar.configure(task -> {
             task.getMappings().convention(removeIntermediary.flatMap(RemoveIntermediaryTask::getOutputMappings));
@@ -136,7 +136,7 @@ public abstract class MapIntermediaryPlugin extends DefaultExtensionedMappingsPr
         final var intermediaryV2MergedMappingsJar = tasks.register(
             IntermediaryMappingsV2JarTask.INTERMEDIARY_V_2_MERGED_MAPPINGS_JAR_TASK_NAME,
             IntermediaryMappingsV2JarTask.class,
-            ext.getUnpickVersion()
+            quiltExt.getUnpickVersion()
         );
         intermediaryV2MergedMappingsJar.configure(task -> {
             task.getMappings().convention(mergeIntermediary.flatMap(MergeIntermediaryTask::getOutputMappings));

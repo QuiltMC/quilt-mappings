@@ -85,7 +85,7 @@ public abstract class MapMinecraftJarsPlugin extends
         // configures MappingsDirOutputtingTasks (generatePackageInfoMappings)
         // configures MappingsDirConsumingTasks
         //  (buildMappingsTiny, dropInvalidMappings, findDuplicateMappingFiles, mappingLint)
-        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+        final QuiltMappingsExtension quiltExt = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MinecraftJarsPlugin.Tasks minecraftJarsTasks =
             plugins.apply(MinecraftJarsPlugin.class).getExt().getTasks();
@@ -104,7 +104,7 @@ public abstract class MapMinecraftJarsPlugin extends
                 task.getZippedFile().convention(this.provideRequiredFile(perVersionMappings));
 
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.TINY)
+                    quiltExt.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.TINY)
                 ));
             }
         );
@@ -146,7 +146,7 @@ public abstract class MapMinecraftJarsPlugin extends
 
                 task.getOutputJar().convention(
                     this.provideMappedMinecraftBuildFile(
-                        ext.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.JAR)
+                        quiltExt.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.JAR)
                     )
                 );
             }
@@ -231,7 +231,7 @@ public abstract class MapMinecraftJarsPlugin extends
 
                 task.getArtifactBaseName().convention(Constants.MAPPINGS_NAME);
 
-                task.getArtifactVersion().convention(ext.getMappingsVersion());
+                task.getArtifactVersion().convention(quiltExt.getMappingsVersion());
 
                 task.getArtifactClassifier().convention(Classifiers.TINY);
             }

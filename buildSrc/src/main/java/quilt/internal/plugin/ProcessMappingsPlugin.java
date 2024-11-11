@@ -69,7 +69,7 @@ public abstract class ProcessMappingsPlugin extends DefaultExtensionedMappingsPr
         // adds javadoc task
         plugins.apply(JavaPlugin.class);
 
-        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+        final QuiltMappingsExtension quiltExt = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MinecraftJarsPlugin.Tasks minecraftJarsTasks =
             plugins.apply(MinecraftJarsPlugin.class).getExt().getTasks();
@@ -158,7 +158,7 @@ public abstract class ProcessMappingsPlugin extends DefaultExtensionedMappingsPr
         });
 
         tasks.register(JavadocJarTask.JAVADOC_JAR_TASK_NAME, JavadocJarTask.class, task -> {
-            task.getArchiveVersion().convention(ext.getMappingsVersion());
+            task.getArchiveVersion().convention(quiltExt.getMappingsVersion());
 
             task.from(javadoc.map(Javadoc::getDestinationDir));
         });

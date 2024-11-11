@@ -84,7 +84,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
     public void apply(@NotNull Project project) {
         final PluginContainer plugins = project.getPlugins();
 
-        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+        final QuiltMappingsExtension quiltExt = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MinecraftJarsPlugin.Tasks minecraftJarsTasks =
             plugins.apply(MinecraftJarsPlugin.class).getExt().getTasks();
@@ -104,7 +104,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 DownloadTargetMetaFileTask.DOWNLOAD_TARGET_META_FILE_TASK_NAME,
                 DownloadTargetMetaFileTask.class,
                 task -> {
-                    task.getMinecraftVersion().convention(ext.getMinecraftVersion());
+                    task.getMinecraftVersion().convention(quiltExt.getMinecraftVersion());
 
                     task.getDest().convention(this.provideMinecraftBuildFile(
                         task.getMinecraftVersion().map(createQuiltFileNameBuilder("." + Extensions.JSON))
@@ -157,7 +157,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
             // put mapped provider in a property so all tasks use the same cached value
             final Property<Boolean> unpickVersionsMatch = this.getObjects().property(Boolean.class);
             unpickVersionsMatch.set(provideUnpickVersionsMatch(
-                ext.getUnpickVersion(),
+                quiltExt.getUnpickVersion(),
                 extractTargetMappingsJar
                     .flatMap(ExtractTargetMappingJarTask::getExtractionDest)
                     .map(dest -> dest.file(MappingsV2JarTask.JAR_UNPICK_META_PATH))

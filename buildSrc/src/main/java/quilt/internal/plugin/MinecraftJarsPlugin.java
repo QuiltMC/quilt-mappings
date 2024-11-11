@@ -40,7 +40,7 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
     protected MinecraftJarsExtension applyImpl(@NotNull Project project) {
         final PluginContainer plugins = project.getPlugins();
 
-        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+        final QuiltMappingsExtension quiltExt = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final TaskContainer tasks = project.getTasks();
 
@@ -57,13 +57,13 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                                     "https://piston-meta.mojang.com/mc/game/version_manifest_v2." + Extensions.JSON
                                 );
 
-                                params.getVersion().set(ext.getMinecraftVersion());
+                                params.getVersion().set(quiltExt.getMinecraftVersion());
                             })
                         )
                     );
 
                     task.getDest().convention(
-                        this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("." + Extensions.JSON))
+                        this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("." + Extensions.JSON))
                     );
                 }
             );
@@ -84,11 +84,11 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
             DownloadMinecraftJarsTask.class,
             task -> {
                 task.getClientJar().convention(this.provideMinecraftBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-client." + Extensions.JAR)
+                    quiltExt.provideSuffixedMinecraftVersion("-client." + Extensions.JAR)
                 ));
 
                 task.getServerBootstrapJar().convention(this.provideMinecraftBuildFile(
-                    ext.provideSuffixedMinecraftVersion("-server-bootstrap." + Extensions.JAR)
+                    quiltExt.provideSuffixedMinecraftVersion("-server-bootstrap." + Extensions.JAR)
                 ));
             }
         );
@@ -102,7 +102,7 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                 );
 
                 task.getExtractionDest().convention(
-                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-server." + Extensions.JAR))
+                    this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("-server." + Extensions.JAR))
                 );
             }
         );
@@ -116,7 +116,7 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                 task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
                 task.getMergedFile().convention(
-                    this.provideMinecraftBuildFile(ext.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR))
+                    this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR))
                 );
             }
         );
