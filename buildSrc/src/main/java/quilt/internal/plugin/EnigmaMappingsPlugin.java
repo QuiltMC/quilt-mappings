@@ -91,15 +91,15 @@ public abstract class EnigmaMappingsPlugin implements MappingsProjectPlugin {
 
         // configures EnigmaProfileConsumingTasks + MappingsDirConsumingTasks
         //  (mappings, mappingsUnpicked, mappingsServer, mappingsUnpickedServer)
-        plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+        plugins.apply(QuiltMappingsBasePlugin.class);
 
         final MapMinecraftJarsPlugin.Tasks mapMinecraftJarsTasks =
-            plugins.apply(MapMinecraftJarsPlugin.class).getTasks();
+            plugins.apply(MapMinecraftJarsPlugin.class).getExt().getTasks();
         final TaskProvider<MapPerVersionMappingsJarTask> mapPerVersionMappingsJar =
             mapMinecraftJarsTasks.mapPerVersionMappingsJar();
 
         final MapV2Plugin.Tasks mappingsV2Tasks =
-            plugins.apply(MapV2Plugin.class).getTasks();
+            plugins.apply(MapV2Plugin.class).getExt().getTasks();
         final TaskProvider<UnpickJarTask> unpickHashedJar =
             mappingsV2Tasks.unpickHashedJar();
 

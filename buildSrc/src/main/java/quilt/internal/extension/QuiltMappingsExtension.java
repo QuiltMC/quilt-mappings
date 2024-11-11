@@ -1,4 +1,4 @@
-package quilt.internal;
+package quilt.internal.extension;
 
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
@@ -23,7 +23,7 @@ public abstract class QuiltMappingsExtension {
     /**
      * {@linkplain ExtensionContainer#create Created} by {@link QuiltMappingsBasePlugin}.
      */
-    public static final String EXTENSION_NAME = "quiltMappings";
+    public static final String NAME = "quiltMappings";
 
     private static final String DEFAULT_CATALOG_NAME = "libs";
 

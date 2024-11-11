@@ -7,11 +7,10 @@ import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.quiltmc.enigma.api.service.JarIndexerService;
 import quilt.internal.constants.Constants;
-import quilt.internal.QuiltMappingsExtension;
-import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
+import quilt.internal.extension.QuiltMappingsExtension;
+import quilt.internal.plugin.abstraction.DefaultExtensionedMappingsProjectPlugin;
 import quilt.internal.task.ArtifactFileTask;
 import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;
@@ -20,7 +19,6 @@ import quilt.internal.task.mappings.MappingsDirOutputtingTask;
 import quilt.internal.util.EnigmaProfileService;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
@@ -30,7 +28,7 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
  * <p>
  * Adds no tasks, but performs setup and {@linkplain TaskCollection#configureEach configures} several types of tasks:
  * <ul>
- *     <li> creates the {@value QuiltMappingsExtension#EXTENSION_NAME} extension
+ *     <li> creates the {@value QuiltMappingsExtension#NAME} extension
  *     <li> {@linkplain TaskContainer#register registers} the
  *          {@value EnigmaProfileService#ENIGMA_PROFILE_SERVICE_NAME} service
  *     <li> {@linkplain TaskCollection#configureEach configures} the following defaults for
@@ -70,14 +68,11 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
  *                  {@link QuiltMappingsExtension}'s {@link QuiltMappingsExtension#getMappingsVersion() mappingsVersion}
  *         </ul>
  */
-public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
-    @Nullable
-    private QuiltMappingsExtension ext;
-
+public abstract class QuiltMappingsBasePlugin extends DefaultExtensionedMappingsProjectPlugin<QuiltMappingsExtension> {
     @Override
-    public void apply(@NotNull Project project) {
-        this.ext = project.getExtensions()
-            .create(QuiltMappingsExtension.EXTENSION_NAME, QuiltMappingsExtension.class);
+    protected QuiltMappingsExtension applyImpl(@NotNull Project project) {
+        final var ext = project.getExtensions()
+            .create(QuiltMappingsExtension.NAME, QuiltMappingsExtension.class);
 
         final BuildServiceRegistry services = project.getGradle().getSharedServices();
 
@@ -85,7 +80,7 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
             EnigmaProfileService.ENIGMA_PROFILE_SERVICE_NAME,
             EnigmaProfileService.class,
             spec -> spec.parameters(params -> {
-                params.getProfileConfig().convention(this.ext.getEnigmaProfileConfig());
+                params.getProfileConfig().convention(ext.getEnigmaProfileConfig());
             })
         );
 
@@ -110,13 +105,13 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
         tasks.withType(EnigmaProfileConsumingTask.class).configureEach(task -> {
             task.getEnigmaProfileService().convention(enigmaProfile);
 
-            task.getEnigmaProfileConfig().convention(this.ext.getEnigmaProfileConfig());
+            task.getEnigmaProfileConfig().convention(ext.getEnigmaProfileConfig());
 
             task.getProfileFileDependencies().from(simpleTypeFieldNamePaths);
         });
 
         this.provideDefaultError(
-            this.ext.getEnigmaProfileConfig(),
+            ext.getEnigmaProfileConfig(),
             "No enigma profile specified. " +
                 "A profile must be specified to use an " + EnigmaProfileConsumingTask.class.getSimpleName() + "."
         );
@@ -124,17 +119,17 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
         final var mappingsDirOutputtingTasks = tasks.withType(MappingsDirOutputtingTask.class);
 
         mappingsDirOutputtingTasks.configureEach(task -> {
-            task.getMappingsDir().convention(this.ext.getMappingsDir());
+            task.getMappingsDir().convention(ext.getMappingsDir());
         });
 
         tasks.withType(MappingsDirConsumingTask.class).configureEach(task -> {
-            task.getMappingsDir().convention(this.ext.getMappingsDir());
+            task.getMappingsDir().convention(ext.getMappingsDir());
 
             task.getInputs().files(mappingsDirOutputtingTasks);
         });
 
         this.provideDefaultError(
-            this.ext.getMappingsDir(),
+            ext.getMappingsDir(),
             "No mappings directory specified. " +
                 "A directory must be specified to use a " + MappingsDirConsumingTask.class.getSimpleName() + "."
         );
@@ -153,7 +148,7 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
             .configureEach(task -> {
                 task.getArtifactBaseName().convention(Constants.MAPPINGS_NAME);
 
-                task.getArtifactVersion().convention(this.ext.getMappingsVersion());
+                task.getArtifactVersion().convention(ext.getMappingsVersion());
             });
 
         tasks.withType(AbstractArchiveTask.class)
@@ -161,11 +156,9 @@ public abstract class QuiltMappingsBasePlugin implements MappingsProjectPlugin {
             .configureEach(task -> {
                 task.getArchiveBaseName().convention(Constants.MAPPINGS_NAME);
 
-                task.getArchiveVersion().convention(this.ext.getMappingsVersion());
+                task.getArchiveVersion().convention(ext.getMappingsVersion());
             });
-    }
 
-    public QuiltMappingsExtension getExt() {
-        return Objects.requireNonNull(this.ext, "Extension not yet registered");
+        return ext;
     }
 }

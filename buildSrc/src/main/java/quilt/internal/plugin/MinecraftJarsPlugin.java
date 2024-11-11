@@ -7,8 +7,9 @@ import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.constants.Extensions;
-import quilt.internal.QuiltMappingsExtension;
-import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
+import quilt.internal.extension.MinecraftJarsExtension;
+import quilt.internal.extension.QuiltMappingsExtension;
+import quilt.internal.plugin.abstraction.DefaultExtensionedMappingsProjectPlugin;
 import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.task.setup.DownloadMinecraftJarsTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
@@ -34,9 +35,9 @@ import quilt.internal.util.serializable.VersionParser;
  *          {@link VersionParser}
  * </ul>
  */
-public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPlugin<MinecraftJarsPlugin.Tasks> {
+public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProjectPlugin<MinecraftJarsExtension> {
     @Override
-    protected Tasks applyImpl(@NotNull Project project) {
+    protected MinecraftJarsExtension applyImpl(@NotNull Project project) {
         final PluginContainer plugins = project.getPlugins();
 
         final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
@@ -128,7 +129,10 @@ public abstract class MinecraftJarsPlugin extends DefaultTaskedMappingsProjectPl
             }
         );
 
-        return new Tasks(mergeJars, downloadMinecraftLibraries);
+        return project.getExtensions().create(
+            MinecraftJarsExtension.NAME, MinecraftJarsExtension.class,
+            new Tasks(mergeJars, downloadMinecraftLibraries)
+        );
     }
 
     public record Tasks(

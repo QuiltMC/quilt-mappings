@@ -13,9 +13,10 @@ import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
-import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.extension.MapV2Extension;
+import quilt.internal.extension.QuiltMappingsExtension;
 import quilt.internal.constants.Namespaces;
-import quilt.internal.plugin.abstraction.DefaultTaskedMappingsProjectPlugin;
+import quilt.internal.plugin.abstraction.DefaultExtensionedMappingsProjectPlugin;
 import quilt.internal.task.build.AddProposedMappingsTask;
 import quilt.internal.task.build.InvertPerVersionMappingsTask;
 import quilt.internal.task.build.MappingsV2JarTask;
@@ -59,11 +60,11 @@ import static quilt.internal.constants.Constants.UNPICK_NAME;
  *
  * Note: v2 {@value Namespaces#INTERMEDIARY} mappings are created by {@link MapIntermediaryPlugin} tasks.
  */
-public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<MapV2Plugin.Tasks> {
+public abstract class MapV2Plugin extends DefaultExtensionedMappingsProjectPlugin<MapV2Extension> {
     public static final String UNPICK_CLI_CONFIGURATION_NAME = UNPICK_NAME + "Cli";
 
     @Override
-    protected Tasks applyImpl(@NotNull Project project) {
+    protected MapV2Extension applyImpl(@NotNull Project project) {
         final Configuration unpickCli = project.getConfigurations().create(UNPICK_CLI_CONFIGURATION_NAME);
 
         this.addDependencyWithCapability(
@@ -75,15 +76,15 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
         // apply required plugins and save their registered objects
         final PluginContainer plugins = project.getPlugins();
 
-        final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
+        final QuiltMappingsExtension quiltExt = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MinecraftJarsPlugin.Tasks minecraftJarsTasks =
-            plugins.apply(MinecraftJarsPlugin.class).getTasks();
+            plugins.apply(MinecraftJarsPlugin.class).getExt().getTasks();
         final TaskProvider<DownloadMinecraftLibrariesTask> downloadMinecraftLibraries =
             minecraftJarsTasks.downloadMinecraftLibraries();
 
         final MapMinecraftJarsPlugin.Tasks mapMinecraftJarsTasks =
-            plugins.apply(MapMinecraftJarsPlugin.class).getTasks();
+            plugins.apply(MapMinecraftJarsPlugin.class).getExt().getTasks();
         final TaskProvider<MapPerVersionMappingsJarTask> mapPerVersionMappingsJar =
             mapMinecraftJarsTasks.mapPerVersionMappingsJar();
         final TaskProvider<InvertPerVersionMappingsTask> invertPerVersionMappings =
@@ -188,7 +189,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 task.getUnpickConstantsJar().set(constantsJar.flatMap(ConstantsJarTask::getArchiveFile));
 
                 task.getOutputFile().convention(
-                    this.provideMappedMinecraftBuildFile(ext.provideSuffixedMinecraftVersion(
+                    this.provideMappedMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion(
                         "-" + Classifiers.INTERMEDIATE_UNPICKED + "." + Extensions.JAR
                     ))
                 );
@@ -206,7 +207,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
                 );
 
                 task.getOutputJar().convention(
-                    this.provideMappedMinecraftBuildFile(ext.provideSuffixedMinecraftVersion(
+                    this.provideMappedMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion(
                         "-" + Classifiers.NAMED + "." + Extensions.JAR
                     ))
                 );
@@ -214,7 +215,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
         );
 
         tasks.withType(MappingsV2JarTask.class).configureEach(task -> {
-            task.getUnpickMeta().convention(ext.getUnpickMeta());
+            task.getUnpickMeta().convention(quiltExt.getUnpickMeta());
 
             task.getUnpickDefinition().convention(
                 combineUnpickDefinitions.flatMap(CombineUnpickDefinitionsTask::getOutput)
@@ -225,7 +226,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
             final var v2UnmergedMappingsJar = tasks.register(
                 MappingsV2JarTask.V2_UNMERGED_MAPPINGS_JAR_TASK_NAME,
                 MappingsV2JarTask.class,
-                ext.getUnpickVersion()
+                quiltExt.getUnpickVersion()
             );
             v2UnmergedMappingsJar.configure(task -> {
                 task.getMappings().convention(
@@ -239,7 +240,7 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
         final var v2MergedMappingsJar = tasks.register(
             MappingsV2JarTask.V2_MERGED_MAPPINGS_JAR_TASK_NAME,
             MappingsV2JarTask.class,
-            ext.getUnpickVersion()
+            quiltExt.getUnpickVersion()
         );
         v2MergedMappingsJar.configure(task -> {
             task.getMappings().convention(mergeTinyV2.flatMap(MergeTinyV2Task::getOutputMappings));
@@ -247,7 +248,10 @@ public abstract class MapV2Plugin extends DefaultTaskedMappingsProjectPlugin<Map
             task.getArchiveClassifier().convention(Classifiers.MERGED_V2);
         });
 
-        return new Tasks(mergeTinyV2, unpickHashedJar, mapNamedJar);
+        return project.getExtensions().create(
+            MapV2Extension.NAME, MapV2Extension.class,
+            new Tasks(mergeTinyV2, unpickHashedJar, mapNamedJar)
+        );
     }
 
     public record Tasks(

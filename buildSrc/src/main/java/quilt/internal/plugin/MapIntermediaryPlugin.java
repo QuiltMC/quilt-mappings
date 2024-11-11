@@ -12,12 +12,12 @@ import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
-import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.extension.MapIntermediaryExtension;
+import quilt.internal.extension.QuiltMappingsExtension;
 import quilt.internal.constants.Namespaces;
-import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
+import quilt.internal.plugin.abstraction.DefaultExtensionedMappingsProjectPlugin;
 import quilt.internal.task.build.BuildIntermediaryTask;
 import quilt.internal.task.build.IntermediaryMappingsV2JarTask;
 import quilt.internal.task.build.MergeIntermediaryTask;
@@ -26,8 +26,6 @@ import quilt.internal.task.build.RemoveIntermediaryTask;
 import quilt.internal.task.setup.ExtractTinyIntermediaryMappingsTask;
 import quilt.internal.task.setup.ExtractTinyMappingsTask;
 import quilt.internal.task.setup.IntermediaryDependantTask;
-
-import java.util.Objects;
 
 /**
  * {@linkplain TaskContainer#register Registers} tasks related to {@value Namespaces#INTERMEDIARY} mappings.
@@ -49,24 +47,11 @@ import java.util.Objects;
  *          successfully {@linkplain Configuration#resolve() resolves}
  * </ul>
  */
-public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
+public abstract class MapIntermediaryPlugin extends DefaultExtensionedMappingsProjectPlugin<MapIntermediaryExtension> {
     public static final String INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME = Namespaces.INTERMEDIARY;
 
-    @Nullable
-    private Provider<RegularFile> intermediaryProvider;
-
-    /**
-     * @throws NullPointerException if this plugin hasn't finished {@linkplain #apply(Project) applying}
-     */
-    public Provider<RegularFile> provideIntermediary() {
-        return Objects.requireNonNull(
-            this.intermediaryProvider,
-            Namespaces.INTERMEDIARY + " not yet populated"
-        );
-    }
-
     @Override
-    public void apply(@NotNull Project project) {
+    protected MapIntermediaryExtension applyImpl(@NotNull Project project) {
         final ConfigurationContainer configurations = project.getConfigurations();
         final Configuration intermediaryMappings = configurations.create(INTERMEDIARY_MAPPINGS_CONFIGURATION_NAME);
 
@@ -76,7 +61,7 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
         final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MapV2Plugin.Tasks mappingsV2Tasks =
-            plugins.apply(MapV2Plugin.class).getTasks();
+            plugins.apply(MapV2Plugin.class).getExt().getTasks();
         final TaskProvider<MergeTinyV2Task> mergeTinyV2 =
             mappingsV2Tasks.mergeTinyV2();
 
@@ -93,19 +78,20 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
             }
         );
 
+        final Provider<RegularFile> intermediaryFile;
         {
             final Property<RegularFile> intermediaryProperty = this.getObjects().fileProperty();
             intermediaryProperty.set(this.provideOptionalFile(intermediaryMappings));
 
-            this.intermediaryProvider = intermediaryProperty;
+            intermediaryFile = intermediaryProperty;
         }
 
         tasks.withType(IntermediaryDependantTask.class).configureEach(task -> {
-            task.onlyIf(unused -> this.intermediaryProvider.isPresent());
+            task.onlyIf(unused -> intermediaryFile.isPresent());
         });
 
         extractTinyIntermediaryMappings.configure(task -> {
-            task.getZippedFile().convention(this.intermediaryProvider);
+            task.getZippedFile().convention(intermediaryFile);
         });
 
         final var mergeIntermediary = tasks.register(
@@ -164,6 +150,10 @@ public abstract class MapIntermediaryPlugin implements MappingsProjectPlugin {
             task -> {
                 task.dependsOn(intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar);
             }
+        );
+
+        return project.getExtensions().create(
+            MapIntermediaryExtension.NAME, MapIntermediaryExtension.class, intermediaryFile
         );
     }
 }

@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import quilt.internal.constants.Constants;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
-import quilt.internal.QuiltMappingsExtension;
+import quilt.internal.extension.QuiltMappingsExtension;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
 import quilt.internal.task.build.MappingsV2JarTask;
@@ -87,12 +87,12 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
         final QuiltMappingsExtension ext = plugins.apply(QuiltMappingsBasePlugin.class).getExt();
 
         final MinecraftJarsPlugin.Tasks minecraftJarsTasks =
-            plugins.apply(MinecraftJarsPlugin.class).getTasks();
+            plugins.apply(MinecraftJarsPlugin.class).getExt().getTasks();
         final TaskProvider<DownloadMinecraftLibrariesTask> downloadMinecraftLibraries =
             minecraftJarsTasks.downloadMinecraftLibraries();
 
         final ProcessMappingsPlugin.Tasks processMappingsTasks =
-            plugins.apply(ProcessMappingsPlugin.class).getTasks();
+            plugins.apply(ProcessMappingsPlugin.class).getExt().getTasks();
         final var decompileVineflower =
             processMappingsTasks.decompileVineflower();
 
