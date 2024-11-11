@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.function.Function;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
@@ -15,7 +16,6 @@ import quilt.internal.constants.Constants;
 import quilt.internal.constants.Groups;
 import quilt.internal.constants.Namespaces;
 import quilt.internal.mappingio.CompleteInitializersVisitor;
-import quilt.internal.task.DefaultMappingsTask;
 
 import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.MappingVisitor;
@@ -24,7 +24,7 @@ import net.fabricmc.mappingio.format.MappingFormat;
 import net.fabricmc.mappingio.format.tiny.Tiny2FileWriter;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
-public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
+public abstract class AbstractTinyMergeTask extends DefaultTask {
     @InputFile
     public abstract RegularFileProperty getInput();
 
@@ -39,7 +39,7 @@ public abstract class AbstractTinyMergeTask extends DefaultMappingsTask {
     }
 
     public AbstractTinyMergeTask(String mergeName, String fillName) {
-        super(Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
 
         this.mergeName = mergeName;
         this.fillName = fillName;

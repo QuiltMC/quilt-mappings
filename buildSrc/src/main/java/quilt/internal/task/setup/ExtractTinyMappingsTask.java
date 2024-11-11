@@ -15,9 +15,8 @@ public abstract class ExtractTinyMappingsTask extends ExtractSingleZippedFileTas
     private static final String TINY_MAPPINGS_PATTERN = "**/*mappings." + Extensions.TINY;
 
     public ExtractTinyMappingsTask() {
-        super(
-            Groups.SETUP,
-            filterable -> filterable.include(TINY_MAPPINGS_PATTERN)
-        );
+        super(filterable -> filterable.include(TINY_MAPPINGS_PATTERN));
+
+        this.setGroup(Groups.SETUP);
     }
 }

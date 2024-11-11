@@ -1,5 +1,6 @@
 package quilt.internal.task.build;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
@@ -9,7 +10,6 @@ import org.gradle.api.tasks.TaskAction;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 
 /**
@@ -19,7 +19,7 @@ import quilt.internal.task.MappingsDirConsumingTask;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public abstract class DropInvalidMappingsTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
+public abstract class DropInvalidMappingsTask extends DefaultTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -29,7 +29,7 @@ public abstract class DropInvalidMappingsTask extends DefaultMappingsTask implem
     public abstract RegularFileProperty getPerVersionMappingsJar();
 
     public DropInvalidMappingsTask() {
-        super(Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

@@ -15,6 +15,6 @@ public abstract class ExtractTargetMappingJarTask extends ExtractZippedFilesTask
     public static final String EXTRACT_TARGET_MAPPINGS_JAR_TASK_NAME = "extractTargetMappingsJar";
 
     public ExtractTargetMappingJarTask() {
-        super(Groups.DIFF);
+        this.setGroup(Groups.DIFF);
     }
 }

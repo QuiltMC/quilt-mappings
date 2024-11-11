@@ -38,7 +38,7 @@ public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTa
     }
 
     public DownloadWantedVersionManifestTask() {
-        super(Groups.SETUP);
+        this.setGroup(Groups.SETUP);
 
         this.getUrl().convention(this.getManifestVersion().map(SerializableVersionEntry::getUrl));
     }

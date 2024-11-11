@@ -14,6 +14,7 @@ import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Reader;
 import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Writer;
 import javax.inject.Inject;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.RegularFileProperty;
@@ -27,7 +28,6 @@ import org.gradle.workers.WorkerExecutor;
 import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
 /**
@@ -35,7 +35,7 @@ import quilt.internal.util.UnpickUtil;
  *
  * @see quilt.internal.task.unpick.gen.UnpickGenTask UnpickGenTask
  */
-public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
+public abstract class CombineUnpickDefinitionsTask extends DefaultTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */
@@ -51,7 +51,7 @@ public abstract class CombineUnpickDefinitionsTask extends DefaultMappingsTask {
     protected abstract WorkerExecutor getWorkerExecutor();
 
     public CombineUnpickDefinitionsTask() {
-        super(Groups.UNPICK);
+        this.setGroup(Groups.UNPICK);
     }
 
     @TaskAction

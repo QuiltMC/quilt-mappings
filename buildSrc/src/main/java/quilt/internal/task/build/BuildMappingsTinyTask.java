@@ -3,6 +3,7 @@ package quilt.internal.task.build;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskContainer;
 import org.quiltmc.enigma.command.MapSpecializedMethodsCommand;
@@ -15,14 +16,13 @@ import quilt.internal.constants.Groups;
 import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 import quilt.internal.util.ProviderUtil;
 
 /**
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
+public abstract class BuildMappingsTinyTask extends DefaultTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -35,7 +35,7 @@ public abstract class BuildMappingsTinyTask extends DefaultMappingsTask implemen
     public abstract RegularFileProperty getOutputMappings();
 
     public BuildMappingsTinyTask() {
-        super(Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

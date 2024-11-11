@@ -50,7 +50,7 @@ public abstract class DownloadTargetMetaFileTask extends SimpleDownloadTask {
     }
 
     public DownloadTargetMetaFileTask() {
-        super(Groups.DIFF);
+        this.setGroup(Groups.DIFF);
 
         this.getUrl().convention(
             this.getMinecraftVersion().map(version -> "https://meta.quiltmc.org/v3/versions/quilt-mappings/" + version)

@@ -1,5 +1,6 @@
 package quilt.internal.task.setup;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
@@ -15,7 +16,6 @@ import org.quiltmc.launchermeta.version.v1.Version;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.MinecraftJarsPlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.util.DownloadUtil;
 import quilt.internal.util.ProviderUtil;
@@ -37,8 +37,7 @@ import java.util.stream.Collectors;
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
-public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask implements
-    VersionParserConsumingTask {
+public abstract class DownloadMinecraftLibrariesTask extends DefaultTask implements VersionParserConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
      * {@link MinecraftJarsPlugin MinecraftJarsPlugin}.
@@ -66,7 +65,7 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
     protected abstract ObjectFactory getObjects();
 
     public DownloadMinecraftLibrariesTask() {
-        super(Groups.SETUP);
+        this.setGroup(Groups.SETUP);
 
         // put this in a property to cache it
         final Provider<Map<NamedUrl, RegularFile>> artifactsByNamedUrl =
@@ -83,8 +82,9 @@ public abstract class DownloadMinecraftLibrariesTask extends DefaultMappingsTask
         this.getArtifactsByNameImpl().set(
             artifactsByNamedUrl
                 .map(urlDestsByName ->
-                    urlDestsByName.entrySet().stream()
-                        .collect(Collectors.toMap(entry -> entry.getKey().name(), entry -> entry.getValue().getAsFile()))
+                    urlDestsByName.entrySet().stream().collect(Collectors.toMap(entry ->
+                        entry.getKey().name(), entry -> entry.getValue().getAsFile())
+                    )
                 )
         );
     }

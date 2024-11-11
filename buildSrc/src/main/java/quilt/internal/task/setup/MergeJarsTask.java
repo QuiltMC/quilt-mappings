@@ -2,17 +2,17 @@ package quilt.internal.task.setup;
 
 import java.io.IOException;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MinecraftJarsPlugin;
-import quilt.internal.task.DefaultMappingsTask;
 
 import net.fabricmc.stitch.merge.JarMerger;
 
-public abstract class MergeJarsTask extends DefaultMappingsTask {
+public abstract class MergeJarsTask extends DefaultTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
      * {@link MinecraftJarsPlugin MinecraftJarsPlugin}.
@@ -29,7 +29,7 @@ public abstract class MergeJarsTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getMergedFile();
 
     public MergeJarsTask() {
-        super(Groups.SETUP);
+        this.setGroup(Groups.SETUP);
     }
 
     @TaskAction

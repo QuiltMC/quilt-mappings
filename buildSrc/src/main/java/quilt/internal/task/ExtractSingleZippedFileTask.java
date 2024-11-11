@@ -20,9 +20,7 @@ public abstract class ExtractSingleZippedFileTask extends AbstractExtractZipTask
      * @param filter a filter that selects exactly one file to be extracted from the
      * {@link #getZippedFile() zippedFile}
      */
-    public ExtractSingleZippedFileTask(String group, Action<? super PatternFilterable> filter) {
-        super(group);
-
+    public ExtractSingleZippedFileTask(Action<? super PatternFilterable> filter) {
         this.getFilter().set(filter);
         this.getFilter().finalizeValue();
     }

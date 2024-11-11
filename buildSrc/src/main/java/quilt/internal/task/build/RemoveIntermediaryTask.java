@@ -7,6 +7,7 @@ import net.fabricmc.mappingio.format.MappingFormat;
 import net.fabricmc.mappingio.format.tiny.Tiny2FileWriter;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
@@ -16,7 +17,6 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.constants.Groups;
 import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapIntermediaryPlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.setup.IntermediaryDependantTask;
 import quilt.internal.util.ProviderUtil;
 
@@ -31,7 +31,7 @@ import java.util.Collections;
  *
  * @see MapIntermediaryPlugin MapIntermediaryPlugin's configureEach
  */
-public abstract class RemoveIntermediaryTask extends DefaultMappingsTask implements IntermediaryDependantTask {
+public abstract class RemoveIntermediaryTask extends DefaultTask implements IntermediaryDependantTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapIntermediaryPlugin}.
      */
@@ -44,7 +44,7 @@ public abstract class RemoveIntermediaryTask extends DefaultMappingsTask impleme
     public abstract RegularFileProperty getOutputMappings();
 
     public RemoveIntermediaryTask() {
-        super(Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
+import org.gradle.api.DefaultTask;
 import org.quiltmc.enigma.api.Enigma;
 import org.quiltmc.enigma.api.EnigmaProject;
 import org.quiltmc.enigma.api.ProgressListener;
@@ -51,7 +52,6 @@ import org.gradle.workers.WorkerExecutor;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 
 /**
@@ -63,7 +63,7 @@ import quilt.internal.task.MappingsDirConsumingTask;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public abstract class MappingLintTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
+public abstract class MappingLintTask extends DefaultTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -86,7 +86,7 @@ public abstract class MappingLintTask extends DefaultMappingsTask implements Map
     public abstract WorkerExecutor getWorkerExecutor();
 
     public MappingLintTask() {
-        super(Groups.LINT);
+        this.setGroup(Groups.LINT);
 
         // Ignore outputs for up-to-date checks as there aren't any (so only inputs are checked)
         // This is required because mappingsDir is @Incremental and this task has no outputs

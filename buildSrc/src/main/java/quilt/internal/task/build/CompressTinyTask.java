@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPOutputStream;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.TaskAction;
@@ -14,7 +15,6 @@ import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.ArtifactFileTask;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.QuiltMappingsArtifactTask;
 
 /**
@@ -22,8 +22,7 @@ import quilt.internal.task.QuiltMappingsArtifactTask;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public abstract class CompressTinyTask extends DefaultMappingsTask implements
-        ArtifactFileTask, QuiltMappingsArtifactTask {
+public abstract class CompressTinyTask extends DefaultTask implements ArtifactFileTask, QuiltMappingsArtifactTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -35,7 +34,7 @@ public abstract class CompressTinyTask extends DefaultMappingsTask implements
     public abstract RegularFileProperty getMappings();
 
     public CompressTinyTask() {
-        super(Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
 
         this.getArtifactExtension().convention(DEFAULT_EXTENSION);
     }

@@ -1,5 +1,6 @@
 package quilt.internal.task.diff;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
@@ -8,13 +9,12 @@ import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.TargetDiffPlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.DownloadUtil;
 
 /**
  * @see TargetDiffPlugin TargetDiffPlugin's configureEach
  */
-public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask implements TargetVersionConsumingTask {
+public abstract class DownloadTargetMappingJarTask extends DefaultTask implements TargetVersionConsumingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link TargetDiffPlugin}.
      */
@@ -27,7 +27,7 @@ public abstract class DownloadTargetMappingJarTask extends DefaultMappingsTask i
     public abstract RegularFileProperty getTargetUnpickConstantsFile();
 
     public DownloadTargetMappingJarTask() {
-        super(Groups.DIFF);
+        this.setGroup(Groups.DIFF);
     }
 
     @TaskAction

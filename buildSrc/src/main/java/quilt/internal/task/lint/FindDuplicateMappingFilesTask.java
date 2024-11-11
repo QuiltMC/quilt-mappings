@@ -2,13 +2,13 @@ package quilt.internal.task.lint;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 
 import java.io.*;
@@ -29,7 +29,7 @@ import java.util.stream.Stream;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public abstract class FindDuplicateMappingFilesTask extends DefaultMappingsTask implements MappingsDirConsumingTask {
+public abstract class FindDuplicateMappingFilesTask extends DefaultTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -41,7 +41,7 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultMappingsTask 
         Pattern.compile("^CLASS (?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+(?= )");
 
     public FindDuplicateMappingFilesTask() {
-        super(Groups.LINT);
+        this.setGroup(Groups.LINT);
     }
 
     @TaskAction

@@ -3,6 +3,7 @@ package quilt.internal.task.jarmapping;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.MapProperty;
@@ -12,7 +13,6 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.JarRemapper;
 
 /**
@@ -20,7 +20,7 @@ import quilt.internal.util.JarRemapper;
  *
  * @see MapMinecraftJarsPlugin MapMinecraftJarsPlugin's configureEach
  */
-public abstract class MapJarTask extends DefaultMappingsTask {
+public abstract class MapJarTask extends DefaultTask {
     public static final ImmutableMap<String, String> JAVAX_TO_JETBRAINS = ImmutableMap.of(
         "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
         "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
@@ -45,7 +45,7 @@ public abstract class MapJarTask extends DefaultMappingsTask {
     private final String from, to;
 
     public MapJarTask(String group, String from, String to) {
-        super(group);
+        this.setGroup(group);
         this.from = from;
         this.to = to;
     }

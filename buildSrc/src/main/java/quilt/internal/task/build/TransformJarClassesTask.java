@@ -1,6 +1,7 @@
 package quilt.internal.task.build;
 
 import org.apache.commons.io.FileUtils;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.ListProperty;
@@ -16,7 +17,6 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import quilt.internal.constants.Groups;
-import quilt.internal.task.DefaultMappingsTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public abstract class TransformJarClassesTask extends DefaultMappingsTask {
+public abstract class TransformJarClassesTask extends DefaultTask {
     @Input
     public abstract ListProperty<VisitorFactory> getVisitorFactories();
 
@@ -45,7 +45,7 @@ public abstract class TransformJarClassesTask extends DefaultMappingsTask {
     public abstract DirectoryProperty getOutput();
 
     public TransformJarClassesTask() {
-        super(Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

@@ -1,5 +1,6 @@
 package quilt.internal.task;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
@@ -10,7 +11,7 @@ import quilt.internal.util.DownloadUtil;
 
 import static quilt.internal.util.ProviderUtil.toOptional;
 
-public abstract class SimpleDownloadTask extends DefaultMappingsTask {
+public abstract class SimpleDownloadTask extends DefaultTask {
     @Input
     public abstract Property<String> getUrl();
 
@@ -43,10 +44,6 @@ public abstract class SimpleDownloadTask extends DefaultMappingsTask {
 
     @OutputFile
     public abstract RegularFileProperty getDest();
-
-    public SimpleDownloadTask(String group) {
-        super(group);
-    }
 
     @TaskAction
     public void download() {

@@ -2,6 +2,7 @@ package quilt.internal.task.build;
 
 import java.io.File;
 
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
@@ -11,11 +12,10 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.constants.Groups;
 import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
-import quilt.internal.task.DefaultMappingsTask;
 
 import net.fabricmc.stitch.commands.tinyv2.CommandReorderTinyV2;
 
-public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
+public abstract class InvertPerVersionMappingsTask extends DefaultTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -28,7 +28,7 @@ public abstract class InvertPerVersionMappingsTask extends DefaultMappingsTask {
     public abstract RegularFileProperty getInvertedTinyFile();
 
     public InvertPerVersionMappingsTask() {
-        super(Groups.BUILD_MAPPINGS);
+        this.setGroup(Groups.BUILD_MAPPINGS);
     }
 
     @TaskAction

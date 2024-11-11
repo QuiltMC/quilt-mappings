@@ -15,9 +15,8 @@ public abstract class ExtractServerJarTask extends ExtractSingleZippedFileTask {
     public static final String SERVER_JAR_PATTERN = "META-INF/versions/*/server-*." + Extensions.JAR;
 
     public ExtractServerJarTask() {
-        super(
-            Groups.SETUP,
-            filterable -> filterable.include(SERVER_JAR_PATTERN)
-        );
+        super(filterable -> filterable.include(SERVER_JAR_PATTERN));
+
+        this.setGroup(Groups.SETUP);
     }
 }

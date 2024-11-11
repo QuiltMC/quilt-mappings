@@ -1,6 +1,7 @@
 package quilt.internal.task;
 
 import org.gradle.api.Action;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.ArchiveOperations;
 import org.gradle.api.file.FileTree;
 import org.gradle.api.file.RegularFileProperty;
@@ -14,7 +15,7 @@ import org.gradle.api.tasks.util.PatternFilterable;
 import javax.inject.Inject;
 import java.io.IOException;
 
-public abstract class AbstractExtractZipTask extends DefaultMappingsTask {
+public abstract class AbstractExtractZipTask extends DefaultTask {
     @Optional
     @Input
     protected abstract Property<Action<? super PatternFilterable>> getFilter();
@@ -24,10 +25,6 @@ public abstract class AbstractExtractZipTask extends DefaultMappingsTask {
 
     @Inject
     protected abstract ArchiveOperations getArchiveOperations();
-
-    public AbstractExtractZipTask(String group) {
-        super(group);
-    }
 
     @TaskAction
     public final void extract() throws IOException {

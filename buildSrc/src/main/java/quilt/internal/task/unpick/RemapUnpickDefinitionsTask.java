@@ -18,6 +18,8 @@ import daomephsta.unpick.constantmappers.datadriven.parser.v2.UnpickV2Writer;
 import javax.inject.Inject;
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.adapter.MappingNsCompleter;
+
+import org.gradle.api.DefaultTask;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
@@ -33,14 +35,13 @@ import org.jetbrains.annotations.VisibleForTesting;
 import quilt.internal.constants.Groups;
 import quilt.internal.constants.Namespaces;
 import quilt.internal.plugin.MapV2Plugin;
-import quilt.internal.task.DefaultMappingsTask;
 import quilt.internal.util.UnpickUtil;
 
 import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
-public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
+public abstract class RemapUnpickDefinitionsTask extends DefaultTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */
@@ -58,7 +59,7 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
     protected abstract WorkerExecutor getWorkerExecutor();
 
     public RemapUnpickDefinitionsTask() {
-        super(Groups.UNPICK);
+        this.setGroup(Groups.UNPICK);
     }
 
     @TaskAction
@@ -136,8 +137,7 @@ public abstract class RemapUnpickDefinitionsTask extends DefaultMappingsTask {
 
     public abstract static class RemapAction implements WorkAction<RemapParameters> {
         @Inject
-        public RemapAction() {
-        }
+        public RemapAction() { }
 
         @Override
         public void execute() {

@@ -8,10 +8,6 @@ public abstract class ExtractZippedFilesTask extends AbstractExtractZipTask {
     @OutputDirectory
     public abstract DirectoryProperty getExtractionDest();
 
-    public ExtractZippedFilesTask(String group) {
-        super(group);
-    }
-
     @Override
     protected void extractImpl(FileTree filteredZipTree) {
         filteredZipTree.visit(fileVisitDetails ->

@@ -19,6 +19,7 @@ import java.util.zip.ZipFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Provider;
@@ -33,9 +34,8 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapV2Plugin;
-import quilt.internal.task.DefaultMappingsTask;
 
-public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask implements UnpickGenTask {
+public abstract class OpenGlConstantUnpickGenTask extends DefaultTask implements UnpickGenTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link MapV2Plugin}.
      */
@@ -64,7 +64,7 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultMappingsTask im
     public abstract RegularFileProperty getUnpickGlDefinitions();
 
     public OpenGlConstantUnpickGenTask() {
-        super(Groups.UNPICK_GEN);
+        this.setGroup(Groups.UNPICK_GEN);
     }
 
     @TaskAction
