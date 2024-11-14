@@ -77,10 +77,6 @@ repositories {
 		name 'Quilt Snapshot Repository'
 		url 'https://maven.quiltmc.org/repository/snapshot'
 	}
-	// TODO remove when ASM fix is released
-	maven {
-		url = 'https://repository.ow2.org/nexus/content/repositories/snapshots/'
-	}
 	mavenLocal()
 }
 
@@ -93,7 +89,8 @@ dependencies {
 
 	javadocClasspath(libs.quilt.loader)
 	javadocClasspath(libs.jetbrains.annotations)
-	javadocClasspath(libs.jsr305) // for some other jsr annotations
+	// for some other jsr annotations
+	javadocClasspath(libs.jsr305)
 	hashed "org.quiltmc:hashed:${MINECRAFT_VERSION}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
 	intermediary "net.fabricmc:intermediary:${MINECRAFT_VERSION}:v2"
 }
