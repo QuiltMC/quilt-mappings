@@ -4,6 +4,7 @@ import org.gradle.api.Action;
 import org.gradle.api.Task;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFile;
+import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.publish.maven.MavenArtifact;
@@ -13,20 +14,23 @@ import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 
-// TODO QUESTION Is there a way to make it so MavenPublication#artifact will accept
-//  these tasks directly and run them to build their outputs, similar to AbstractArchiveTask?
-//  (eliminating the need for the artifact convenience methods)
-//  I considered implementing PublishArtifact on this, but it's annotated with @HasInternalProtocol.
-//  This suggests that it would work but doesn't recommend it:
-//  https://github.com/gradle/gradle/issues/17273#issuecomment-858400396
+import javax.inject.Inject;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static quilt.internal.util.ProviderUtil.toOptional;
 
 /**
  * A task that produces an {@link #getArtifactFile() artifactFile}.
  * <p>
- * The path to the {@link #getArtifactFile() artifactFile} is built from the task's name and destination properties,
- * and {@link MavenPublication#artifact(Object)} can interpolate artifact metadata from the name's format.
+ * The path to the {@link #getArtifactFile() artifactFile} is built from the task's name and destination properties.<br>
+ * Rather than passing the {@link #getArtifactFile() artifactFile} to {@link MavenPublication#artifact(Object)}, use
+ * one of the {@link #artifact} helper methods to publish it to a maven.
  */
 public interface ArtifactFileTask extends Task {
+    @Inject
+    ObjectFactory getObjects();
+
     @Input
     Property<String> getArtifactBaseName();
 
@@ -57,8 +61,8 @@ public interface ArtifactFileTask extends Task {
      * The path to the file takes the form:<br>
      * {@code [destination]/[baseName]-[appendix]-[version]-[classifier].[extension]}
      * <p>
-     * This standard format allows {@link MavenPublication#artifact(Object)} to interpolate the
-     * {@linkplain #getArtifactClassifier() classifier} and the {@linkplain #getArtifactExtension() extension}.
+     * <i>Don't</i> pass this to {@link MavenPublication#artifact(Object)},
+     * use one the task's {@link #artifact} helper methods instead.
      */
     @OutputFile
     default Provider<RegularFile> getArtifactFile() {
@@ -67,54 +71,24 @@ public interface ArtifactFileTask extends Task {
             .zip(this.getArtifactAppendix().orElse(""), ArtifactFileTask::dashJoin)
             .zip(this.getArtifactVersion().orElse(""), ArtifactFileTask::dashJoin)
             .zip(this.getArtifactClassifier().orElse(""), ArtifactFileTask::dashJoin)
-            .zip(this.getArtifactExtension(), (name, ext) -> name + "." + ext)
+            .zip(this.getArtifactExtension(), ArtifactFileTask::dotJoin)
             .zip(this.getDestinationDirectory(), (name, dest) -> dest.file(name));
     }
 
     /**
-     * Convenient hack to provide this task as an artifact source.
-     * <p>
-     * If this task's {@link #getArtifactFile() artifactFile} is its only output,
-     * {@link MavenPublication#artifact(Object)} can retrieve it from this method's
-     * provider and automatically run this task to build it.
-     * <p>
-     * <b>Accesses {@link #getProject() project}: do not use during task execution</b>.
-     * <p>
+     * Adds an {@linkplain MavenArtifact artifact} to the passed {@code publication} that:
+     * <ul>
+     *     <li> contains this tasks' {@linkplain #getArtifactFile() artifact}
+     *     <li> has this tasks' {@linkplain #getArtifactClassifier() classifier}
+     *     <li> is {@link MavenArtifact#builtBy(Object...) builtBy} this task
+     * </ul>
      * Build script usage:
      * <pre>
      *     {@code
      *          publishing {
      *            publications {
      *              maven(MavenPublication) {
-     *                artifact exampleArtifactFileTask.artifact
-     *              }
-     *            }
-     *          }
-     *      }
-     * </pre>
-     *
-     * @return a provider of this task
-     */
-    @Internal("not an input or an output")
-    default Provider<ArtifactFileTask> getArtifact() {
-        // can't use a Provider from a ProviderFactory, I think it has to ba a TaskProvider
-        return this.getProject().getTasks().named(this.getName(), ArtifactFileTask.class);
-    }
-
-    /**
-     * Add an {@linkplain MavenArtifact artifact} to the passed {@code publication} consisting of this task's
-     * {@link #getArtifactFile() artifactFile} and {@link MavenArtifact#builtBy(Object...) builtBy} this task.
-     * <p>
-     * Prefer {@link #getArtifact() artifact} for tasks whose only output is their
-     * {@link #getArtifactFile() artifactFile}.
-     * <p>
-     * Build script usage:
-     * <pre>
-     *     {@code
-     *          publishing {
-     *            publications {
-     *              maven(MavenPublication) {
-     *                exampleArtifactFileTask.artifact(maven)
+     *                exampleArtifactFileTask.artifact maven
      *              }
      *            }
      *          }
@@ -126,6 +100,7 @@ public interface ArtifactFileTask extends Task {
     default MavenArtifact artifact(MavenPublication publication) {
         return publication.artifact(this.getArtifactFile(), artifact -> {
             artifact.builtBy(this);
+            toOptional(this.getArtifactClassifier()).ifPresent(artifact::setClassifier);
         });
     }
 
@@ -136,8 +111,8 @@ public interface ArtifactFileTask extends Task {
      *          publishing {
      *            publications {
      *              maven(MavenPublication) {
-     *                exampleArtifactFileTask.artifact(maven) {
-     *                  classifier 'example-classifier'
+     *                exampleArtifactFileTask.artifact maven {
+     *                  classifier 'example-adhoc-classifier'
      *                }
      *              }
      *            }
@@ -156,8 +131,16 @@ public interface ArtifactFileTask extends Task {
     }
 
     private static String dashJoin(String left, String right) {
-        return right.isEmpty()
-            ? left
-            : left + "-" + right;
+        return joinNonEmpty("-", left, right);
+    }
+
+    private static String dotJoin(String left, String right) {
+        return joinNonEmpty(".", left, right);
+    }
+
+    private static String joinNonEmpty(String separator, String... strings) {
+        return Stream.of(strings)
+            .filter(string -> !string.isEmpty())
+            .collect(Collectors.joining(separator));
     }
 }
