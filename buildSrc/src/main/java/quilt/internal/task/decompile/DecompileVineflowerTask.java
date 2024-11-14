@@ -37,11 +37,11 @@ public abstract class DecompileVineflowerTask extends DecompileTask {
             }
         }
 
-        // TODO QUESTION this sometimes logs a non-fatal exception:
-        //  java.nio.file.FileSystemAlreadyExistsException
-        //  it's thrown from
-        //  org.jetbrains.java.decompiler.main.plugins.JarPluginLoader:init
-        //  it seems harmless
+        // This sometimes logs a non-fatal exception:
+        // java.nio.file.FileSystemAlreadyExistsException
+        // it's thrown from
+        // org.jetbrains.java.decompiler.main.plugins.JarPluginLoader:init
+        // it seems harmless
         super.decompile();
     }
 }
