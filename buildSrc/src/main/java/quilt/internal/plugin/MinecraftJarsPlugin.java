@@ -2,7 +2,6 @@ package quilt.internal.plugin;
 
 import org.gradle.api.Project;
 import org.gradle.api.plugins.PluginContainer;
-import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 import org.jetbrains.annotations.NotNull;
@@ -68,14 +67,12 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                 }
             );
 
-            // put mapped provider in a property so all tasks use the same cached value
-            final Property<VersionParser> versionParser = this.getObjects().property(VersionParser.class);
-            versionParser.set(
-                downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::provideVersionParser)
-            );
-
+            // provideVersionParser is already cached in a property
             tasks.withType(VersionParserConsumingTask.class).configureEach(task -> {
-                task.getVersionParser().convention(versionParser);
+                task.getVersionParser().convention(
+                    // versionParser
+                    downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::provideVersionParser)
+                );
             });
         }
 

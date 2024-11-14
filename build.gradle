@@ -1,14 +1,28 @@
 import org.gradle.api.internal.file.FileOperations
+import org.quiltmc.launchermeta.version.v1.Library
+import org.quiltmc.launchermeta.version.v1.Version
 import quilt.internal.constants.Classifiers
 import quilt.internal.constants.Constants
+import quilt.internal.task.setup.DownloadWantedVersionManifestTask
+import quilt.internal.util.serializable.VersionParser
+
+import java.util.stream.Collectors
+import java.util.stream.Stream
 
 import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
+import static quilt.internal.task.setup.DownloadWantedVersionManifestTask.DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME
 
 plugins {
 	id 'maven-publish'
 	id 'quilt-mappings'
 	alias libs.plugins.licenser
 }
+
+// put these in fields so we don't have to worry about inadvertently accessing the project during task execution
+final FileOperations FILE_OPERATIONS = project.fileOperations
+final ProviderFactory PROVIDERS = project.providers
+final ObjectFactory OBJECTS = project.objects
+final Logger LOGGER = project.logger
 
 final USE_SNAPSHOT_HASHES = false
 
@@ -118,12 +132,79 @@ tasks.constantsJar {
 tasks.build.dependsOn constantsJar, generatePackageInfoMappings,
 	compressTiny, tinyJar, v2UnmergedMappingsJar, v2MergedMappingsJar
 
-final FileOperations fileOperations = project.fileOperations
-
 // configure lazily because we get buildDirectory
 tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	// Needed for javadoc to find the doclet classes.
 	dependsOn docletClasses
+
+	final versionParser = tasks
+		.named(DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME, DownloadWantedVersionManifestTask)
+		.flatMap(DownloadWantedVersionManifestTask::provideVersionParser)
+
+	final MapProperty<String, String> minecraftLibVersionsByModule = OBJECTS.mapProperty(String, String)
+	minecraftLibVersionsByModule.set(versionParser
+		.map(VersionParser::get)
+		.map(Version::getLibraries)
+		.map {
+			it.stream()
+				.map(Library::getName)
+				.flatMap { moduleName ->
+					final delim = ':'
+					final moduleParts = moduleName.split(delim)
+
+					if (moduleParts.length == 3 || moduleParts.length == 4) {
+						return Stream.of(Map.entry(moduleParts[0] + delim + moduleParts[1], moduleParts[2]))
+					} else {
+						LOGGER.error("Unrecognized module format: ${moduleName}")
+
+						return Stream.empty()
+					}
+				}
+				.distinct()
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+		}
+	)
+
+	final Closure<Provider<String>> provideModuleVersion = { String module ->
+		final versionProperty = OBJECTS.property(String)
+			.convention(PROVIDERS.provider { throw new GradleException("Missing version for module: ${module}") })
+
+		versionProperty.set(minecraftLibVersionsByModule.getting(module))
+
+		return versionProperty
+	}
+
+	final Closure<Provider<String>> formatVersionedUrl = { String baseUrl, Provider<String> version ->
+		version.map {"${baseUrl}/${it}/" as String }
+	}
+
+	final gsonUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/com.google.code.gson/gson',
+		provideModuleVersion('com.google.code.gson:gson')
+	)
+
+	// use hardcoded version because minecraft depends on a version that doesn't have javadocs
+	final nettyUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/io.netty/netty-all',
+		libs.versions.netty.with.javadoc
+	)
+
+	final commonsCompressUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/org.apache.commons/commons-compress',
+		provideModuleVersion('org.apache.commons:commons-compress')
+	)
+
+	final commonsCodecUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/commons-codec/commons-codec',
+		provideModuleVersion('commons-codec:commons-codec')
+	)
+
+	[
+		gsonUrl: gsonUrl,
+		nettyUrl: nettyUrl,
+		commonsCompressUrl: commonsCompressUrl,
+		commonsCodecUrl: commonsCodecUrl
+	].each(inputs::property)
 
 	destinationDir = layout.buildDirectory.get().dir('docs').dir(project.version.toString()).getAsFile()
 	final docletResources = sourceSets.doclet.resources.asFileTree
@@ -133,7 +214,7 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	maxMemory = '2G'
 
 	final debug = providers.gradleProperty('quilt.mappings.debug.javadoc')
-		.map(Boolean::getBoolean)
+		.map(Boolean::parseBoolean)
 		.getOrElse(false)
 
 	verbose = debug
@@ -158,23 +239,6 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 		it.use()
 
 		addBooleanOption '-allow-script-in-comments', true
-		links(
-			"https://javadoc.io/doc/com.google.guava/guava/${libs.versions.guava.get()}/",
-			"https://javadoc.io/doc/com.google.code.gson/gson/${project.gson}/",
-			"https://javadoc.io/doc/org.jetbrains/annotations/${libs.versions.jetbrains.annotations.get()}/",
-			"https://javadoc.io/doc/com.google.code.findbugs/jsr305/${libs.versions.jsr305.get()}/",
-			"https://javadoc.io/doc/org.apache.commons/commons-compress/${project.commons_compress}/",
-			"https://javadoc.io/doc/io.netty/netty-all/${project.netty}/",
-			'https://javadoc.lwjgl.org/',
-			'https://logging.apache.org/log4j/2.x/javadoc/log4j-api/',
-			'https://fastutil.di.unimi.it/docs/',
-			'https://commons.apache.org/proper/commons-logging/javadocs/api-release/',
-			'https://commons.apache.org/proper/commons-lang/javadocs/api-release/',
-			'https://commons.apache.org/proper/commons-io/apidocs/',
-			"https://commons.apache.org/proper/commons-codec/archives/${project.commons_codec}/apidocs/",
-			"https://javadoc.quiltmc.org/quilt-loader/${libs.versions.quilt.loader.get()}/",
-			"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
-		)
 		// https://docs.oracle.com/en/java/javase/21/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
 		addBooleanOption 'Xdoclint:html', true
 		addBooleanOption 'Xdoclint:syntax', true
@@ -188,6 +252,24 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	doFirst {
 		// lazy setting
 		options {
+			links(
+				"https://javadoc.io/doc/com.google.guava/guava/${libs.versions.guava.get()}/",
+				gsonUrl.get(),
+				"https://javadoc.io/doc/org.jetbrains/annotations/${libs.versions.jetbrains.annotations.get()}/",
+				"https://javadoc.io/doc/com.google.code.findbugs/jsr305/${libs.versions.jsr305.get()}/",
+				commonsCompressUrl.get(),
+				nettyUrl.get(),
+				'https://javadoc.lwjgl.org/',
+				'https://logging.apache.org/log4j/2.x/javadoc/log4j-api/',
+				'https://fastutil.di.unimi.it/docs/',
+				'https://commons.apache.org/proper/commons-logging/javadocs/api-release/',
+				'https://commons.apache.org/proper/commons-lang/javadocs/api-release/',
+				'https://commons.apache.org/proper/commons-io/apidocs/',
+				commonsCodecUrl.get(),
+				"https://javadoc.quiltmc.org/quilt-loader/${libs.versions.quilt.loader.get()}/",
+				"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
+			)
+
 			tagletPath sourceSets.doclet.output.classesDirs.files.toList()
 			header docletResources.filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
 			addFileOption '-add-stylesheet', docletResources.filter { it.name == 'style.css' }.singleFile
@@ -195,7 +277,7 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 	}
 
 	doLast {
-		fileOperations.copy {
+		FILE_OPERATIONS.copy {
 			it.from docletResources
 			it.include 'copy_on_click.js'
 			it.into destinationDir
