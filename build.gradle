@@ -22,7 +22,6 @@ plugins {
 final FileOperations FILE_OPERATIONS = project.fileOperations
 final ProviderFactory PROVIDERS = project.providers
 final ObjectFactory OBJECTS = project.objects
-final Logger LOGGER = project.logger
 
 final USE_SNAPSHOT_HASHES = false
 
@@ -152,7 +151,7 @@ tasks.named(JAVADOC_TASK_NAME, Javadoc) {
 					if (moduleParts.length == 3 || moduleParts.length == 4) {
 						return Stream.of(Map.entry(moduleParts[0] + delim + moduleParts[1], moduleParts[2]))
 					} else {
-						LOGGER.error("Unrecognized module format: ${moduleName}")
+						logger.error("Unrecognized module format: ${moduleName}")
 
 						return Stream.empty()
 					}
