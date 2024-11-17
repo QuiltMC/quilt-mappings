@@ -10,6 +10,7 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 	METHOD m_cgvusdyw hasAny (Ljava/util/function/Predicate;)Z
 		COMMENT {@return {@code true} if any entry in this palette passes the {@code
 		COMMENT predicate}}
+		ARG 1 predicate
 	METHOD m_frsswtag getId (Ljava/lang/Object;)I
 		COMMENT {@return the identifier of an object in this palette}
 		COMMENT <p>
@@ -17,10 +18,12 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 		COMMENT register the object. If the palette is too small to include this object,
 		COMMENT a {@linkplain PaletteResizeListener resize listener} will be called and
 		COMMENT this palette may be discarded.
+		ARG 1 entry
 	METHOD m_gholllny getEntry (I)Ljava/lang/Object;
 		COMMENT {@return the object associated with the given {@code id}}
 		COMMENT
 		COMMENT @throws MissingPaletteEntryException if this identifier does not exist in this palette
+		ARG 1 id
 	METHOD m_hrjyiuxt copy (Lnet/minecraft/unmapped/C_sxhmfrig;)Lnet/minecraft/unmapped/C_peoxnqbd;
 		ARG 1 listener
 	METHOD m_ljtxzsdf getPacketSize ()I
@@ -38,3 +41,7 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 			COMMENT Creates a palette.
 			COMMENT
 			COMMENT @return the created new palette
+			ARG 1 indexBits
+			ARG 2 idList
+			ARG 3 resizeListener
+			ARG 4 entries
