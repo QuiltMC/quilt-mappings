@@ -253,6 +253,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 2 encoder
 	METHOD m_appecnpy readQuaternion (Lio/netty/buffer/ByteBuf;)Lorg/joml/Quaternionf;
 		ARG 0 buf
+	METHOD m_axcuwjgm writeSyncId (Lio/netty/buffer/ByteBuf;I)V
+		ARG 1 value
 	METHOD m_bczcqhop writeString (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a string to this buf. A string is represented by a byte array of
 		COMMENT its UTF-8 data. That byte array can have a maximum length of
@@ -462,6 +464,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the value to write
 	METHOD m_kgkdgazl readByteArray (Lio/netty/buffer/ByteBuf;)[B
 		ARG 0 buf
+	METHOD m_kieeshls readSyncId (Lio/netty/buffer/ByteBuf;)I
 	METHOD m_kjijcwgo readNbtCompound (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 0 buf
 	METHOD m_kjywmbol writeVec3d (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_vgpupfxx;)V
@@ -501,6 +504,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_lnjgpfbn (Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;Ljava/lang/Object;)V
 		ARG 3 key
 		ARG 4 value
+	METHOD m_lzbievog writeSynId (I)V
+		COMMENT Identical to {@link #writeVarInt(int)}, except that this returns {@code void}.
 	METHOD m_mafeqoqe readNbt (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 0 buf
 		ARG 1 nbtTagSizeTracker
@@ -764,6 +769,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeVarInt(int)
 	METHOD m_xfwjnxlt readEnumSet (Ljava/lang/Class;)Ljava/util/EnumSet;
 		ARG 1 enumClass
+	METHOD m_xqhpexur readSyncId ()I
+		COMMENT Identical to {@link #readVarInt()}
 	METHOD m_xzxnbdko writeMap (Ljava/util/Map;Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;)V
 		COMMENT Writes a map to this buf. The map is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} size followed by each key and value
