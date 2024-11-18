@@ -4,25 +4,41 @@ CLASS net/minecraft/unmapped/C_ezfeikaq net/minecraft/state/StateManager
 	FIELD f_rcgtpxta owner Ljava/lang/Object;
 	FIELD f_uwlkpgmz VALID_NAME_PATTERN Ljava/util/regex/Pattern;
 	METHOD <init> (Ljava/util/function/Function;Ljava/lang/Object;Lnet/minecraft/unmapped/C_ezfeikaq$C_bvioiinr;Ljava/util/Map;)V
+		ARG 1 defaultGetter
 		ARG 2 owner
 		ARG 3 factory
 		ARG 4 propertiesMap
 	METHOD m_alltwqrg getOwner ()Ljava/lang/Object;
-	METHOD m_awxshyln (Lcom/mojang/serialization/MapCodec;Ljava/util/function/Supplier;Ljava/lang/String;Lnet/minecraft/unmapped/C_vzlztuyw;)Lcom/mojang/serialization/MapCodec;
+	METHOD m_awxshyln withProperty (Lcom/mojang/serialization/MapCodec;Ljava/util/function/Supplier;Ljava/lang/String;Lnet/minecraft/unmapped/C_vzlztuyw;)Lcom/mojang/serialization/MapCodec;
+		ARG 1 defaultState
+		ARG 2 fieldName
 		ARG 3 property
+	METHOD m_bqysdzbh (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_jccsnmmo;)Lcom/mojang/datafixers/util/Pair;
+		ARG 1 state
 	METHOD m_ctrmtsld getProperties ()Ljava/util/Collection;
+	METHOD m_fhwcxpdh (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/util/List;)Ljava/util/stream/Stream;
+		ARG 1 accumulatedValuesByProperty
 	METHOD m_gmmlvrdp getStates ()Lcom/google/common/collect/ImmutableList;
+	METHOD m_rogdrdlq (Ljava/util/List;Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Comparable;)Ljava/util/List;
+		ARG 2 value
 	METHOD m_txztxpfq getDefaultState ()Lnet/minecraft/unmapped/C_jccsnmmo;
+	METHOD m_vmxbvtll (Ljava/lang/String;)V
+		ARG 0 unused
 	METHOD m_wvbitcxo getProperty (Ljava/lang/String;)Lnet/minecraft/unmapped/C_vzlztuyw;
 		ARG 1 name
+	METHOD m_xfmbcshc (Lnet/minecraft/unmapped/C_ezfeikaq$C_bvioiinr;Ljava/lang/Object;Lcom/mojang/serialization/MapCodec;Ljava/util/Map;Ljava/util/List;Ljava/util/List;)V
+		ARG 5 valuesByProperty
 	CLASS C_bvioiinr Factory
+		METHOD create (Ljava/lang/Object;Lit/unimi/dsi/fastutil/objects/Reference2ObjectArrayMap;Lcom/mojang/serialization/MapCodec;)Ljava/lang/Object;
+			ARG 1 owner
+			ARG 2 valuesByProperty
 	CLASS C_mfnsmxhw Builder
 		FIELD f_zuenzuvv namedProperties Ljava/util/Map;
 		FIELD f_zuytdmea owner Ljava/lang/Object;
 		METHOD <init> (Ljava/lang/Object;)V
 			ARG 1 owner
 		METHOD m_aboxtjvt build (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ezfeikaq$C_bvioiinr;)Lnet/minecraft/unmapped/C_ezfeikaq;
-			ARG 1 ownerToStateFunction
+			ARG 1 defaultGetter
 			ARG 2 factory
 		METHOD m_jhptkiqu validate (Lnet/minecraft/unmapped/C_vzlztuyw;)V
 			ARG 1 property
