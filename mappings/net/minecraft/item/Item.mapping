@@ -30,6 +30,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_dgdssmij fromBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_vorddnax;
 		COMMENT @deprecated Please use {@link Block#asItem}
 		ARG 0 block
+	METHOD m_dhikqitd (Lnet/minecraft/unmapped/C_cjzoxshv;)Lcom/mojang/serialization/DataResult;
+		ARG 0 holder
 	METHOD m_dnwybntd isCorrectForDrops (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		COMMENT Determines whether this item can be used as a suitable tool for mining the specified block.
 		COMMENT Depending on block implementation, when combined together, the correct item and block may achieve a better mining speed and yield
@@ -45,6 +47,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 stack
 	METHOD m_ectuffur onItemEntityDestroyed (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 entity
+	METHOD m_eryjwjll getTranslationKey ()Ljava/lang/String;
+	METHOD m_fujwecfy getDefaultName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_fwxnsuhn onCraftByPlayer (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		COMMENT Called when a player acquires the item by crafting, smelting, smithing, etc.
 		ARG 1 stack
@@ -69,11 +73,13 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 2 target
 		ARG 3 attacker
 	METHOD m_jcukmzxf getBreakSound ()Lnet/minecraft/unmapped/C_avavozay;
+	METHOD m_jmfyhzjb getName (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_kdfhbywf getRecipeRemainder ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_knbnsgbn finishUsing (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 stack
 		ARG 2 world
 		ARG 3 user
+	METHOD m_kolwcjef getDamageSourceOverride (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_lthgnjiq getDefaultStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_mtceqnlj useOnBlock (Lnet/minecraft/unmapped/C_yyklzime;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		COMMENT Called when an item is used on a block.
@@ -177,15 +183,23 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 3 hand
 			COMMENT the hand used
 	CLASS C_bfrytpdl Settings
+		FIELD f_bjfsycph translationKeyDerivation Lnet/minecraft/unmapped/C_jquyxssk;
 		FIELD f_emilnckp recipeRemainder Lnet/minecraft/unmapped/C_vorddnax;
 		FIELD f_gjqaneav requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
 		FIELD f_guuibeel key Lnet/minecraft/unmapped/C_xhhleach;
+		FIELD f_skphhhqp ITEM_TRANSLATION_KEY_DERIVATION Lnet/minecraft/unmapped/C_jquyxssk;
+		FIELD f_uadyawee BLOCK_TRANSLATION_KEY_DERIVATION Lnet/minecraft/unmapped/C_jquyxssk;
+		FIELD f_ykroqrcr itemModelIdDerivation Lnet/minecraft/unmapped/C_jquyxssk;
 		FIELD f_znexcclr builder Lnet/minecraft/unmapped/C_kouhnfig$C_vfzyoahz;
+		METHOD m_aazohtuq (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/String;
+			ARG 0 key
+		METHOD m_bcgoheyn (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/String;
+			ARG 0 key
 		METHOD m_dmwpwxbl food (Lnet/minecraft/unmapped/C_cgikuact;Lnet/minecraft/unmapped/C_ybwnbwdi;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 food
 			ARG 2 consumable
 		METHOD m_fazzsuba food (Lnet/minecraft/unmapped/C_cgikuact;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
-		METHOD m_fcpbtbaw (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
+		METHOD m_fcpbtbaw repairable (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 repairMaterial
 		METHOD m_gdfazvhf maxCount (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the maximum stack count of any ItemStack with an Item using this Settings instance.
@@ -202,15 +216,38 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT If called, any item with this Settings instance is immune to fire and lava damage.
 			COMMENT
 			COMMENT @return this instance
+		METHOD m_izmhkfvq getItemModelId ()Lnet/minecraft/unmapped/C_ncpywfca;
+		METHOD m_izydtxyr itemTranslationKey ()Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
+			COMMENT Derive the translation key for this item from its
+			COMMENT {@link net.minecraft.util.Identifier Identifier}
+			COMMENT with the format {@code item.<namespace>.<path>}.
+			COMMENT
+			COMMENT @return this instance
+		METHOD m_kjgzqxrg blockTranslationKey ()Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
+			COMMENT Derive the translation key for this item from its
+			COMMENT {@link net.minecraft.util.Identifier Identifier}
+			COMMENT with the format {@code block.<namespace>.<path>}.
+			COMMENT
+			COMMENT @return this instance
+		METHOD m_lgxlwnkm useRemainder (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
+			COMMENT Sets an item to return to the user when this item is consumed during usage.
+			COMMENT
+			COMMENT @return this instance
+		METHOD m_mnrxwepx translationKey (Ljava/lang/String;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 		METHOD m_nuwctbay recipeRemainder (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the recipe remainder for any item configured with this Settings instance.
 			COMMENT When an item with a recipe remainder is used in a crafting recipe, the remainder is left in the table or returned to the player.
 			COMMENT
 			COMMENT @return this instance
 			ARG 1 recipeRemainder
+		METHOD m_paekqxyr getTranslationKey ()Ljava/lang/String;
 		METHOD m_pvohmnyq jukeboxSong (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 song
+		METHOD m_qouwqhww enchantable (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
+		METHOD m_qtwmcgsu equipable (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 		METHOD m_qvwjjfqj buildAndValidateComponents (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_kouhnfig;
+			ARG 1 name
+			ARG 2 itemModelId
 		METHOD m_robddprv maxDamage (I)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the maximum durability of any item configured with this Settings instance.
 			COMMENT
@@ -219,6 +256,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 			COMMENT @return this instance
 			ARG 1 maxDamage
 				COMMENT maximum durability of an ItemStack using an item with this Item.Settings instance
+		METHOD m_slcmhicj swapEquipable (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 		METHOD m_tsalbwou requiredFlags ([Lnet/minecraft/unmapped/C_kksdgidr;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 flags
 		METHOD m_voqbvsse component (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
@@ -229,6 +267,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		METHOD m_wosoxphz attributeModifiersComponent (Lnet/minecraft/unmapped/C_azfkqhlm;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 		METHOD m_xgbhdxzx key (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 key
+		METHOD m_xrxbstmi useCooldown (F)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 		METHOD m_zglwepxe rarity (Lnet/minecraft/unmapped/C_mqmixksm;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			COMMENT Sets the {@link Rarity} of any item configured with this Settings instance, which changes the color of its name.
 			COMMENT
@@ -242,5 +281,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		METHOD m_adcyfttv create (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;
 			ARG 0 lookup
 		METHOD m_cnghxzmx getMapState (Lnet/minecraft/unmapped/C_qqxyyzzm;)Lnet/minecraft/unmapped/C_nvpllgmg;
+			ARG 1 id
 		METHOD m_fyhcyijp getLookup ()Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
+		METHOD m_iygpuvqa of (Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;
 		METHOD m_krwdvrdq getTickRate ()F
