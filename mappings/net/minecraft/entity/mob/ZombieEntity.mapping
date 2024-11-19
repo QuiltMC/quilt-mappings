@@ -1,5 +1,5 @@
 CLASS net/minecraft/unmapped/C_hlzqkibq net/minecraft/entity/mob/ZombieEntity
-	FIELD f_aqispqmf inWaterTime I
+	FIELD f_aqispqmf timeInWater I
 	FIELD f_bkkffcav CAN_BREAK_DOORS_PROBABILITY F
 	FIELD f_cbavnqhn LEADER_ZOMBIE_BONUS_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_cgelqhxp ZOMBIE_LEADER_CHANCE F
@@ -23,9 +23,11 @@ CLASS net/minecraft/unmapped/C_hlzqkibq net/minecraft/entity/mob/ZombieEntity
 	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;)V
 		ARG 1 world
 	METHOD m_byfmkeyh shouldBeBaby (Lnet/minecraft/unmapped/C_rlomrsco;)Z
+	METHOD m_cfjxvslc infectVillager (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_pdtkdbte;)Z
 	METHOD m_cinojixn (Lnet/minecraft/unmapped/C_mpbjgxic;)Z
 		ARG 0 difficulty
-	METHOD m_dcbwxskt setTicksUntilWaterConversion (I)V
+	METHOD m_ckckhijq canSpawnInFluid ()Z
+	METHOD m_dcbwxskt setConvertingInWater (I)V
 		ARG 1 ticksUntilWaterConversion
 	METHOD m_dolaqwdc setCanBreakDoors (Z)V
 		ARG 1 canBreakDoors
@@ -39,10 +41,14 @@ CLASS net/minecraft/unmapped/C_hlzqkibq net/minecraft/entity/mob/ZombieEntity
 		ARG 1 entityType
 	METHOD m_pcnwswoc createAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
 	METHOD m_tgmcedmt initAttributes ()V
+	METHOD m_ufmnerao setTimeInWater (I)V
+		ARG 1 time
 	METHOD m_vpvzzidd applyAttributeModifiers (F)V
 		ARG 1 chanceMultiplier
 	METHOD m_vtxgwfro burnsInDaylight ()Z
 	METHOD m_wiihxgpu isConvertingInWater ()Z
+	METHOD m_zcxforui setTicksUntilWaterConversion (I)V
+		ARG 1 ticks
 	METHOD m_zfhqmnbl canBreakDoors ()Z
 	CLASS C_abgqtxqj ZombieData
 		FIELD f_bwrjberv baby Z

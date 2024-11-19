@@ -44,7 +44,12 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 0 nbt
 		ARG 1 world
 		ARG 3 entityProcessor
+	METHOD m_doxdnahd createBoatFactory (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
+		ARG 0 dropItem
 	METHOD m_faoepycm getDimensions ()Lnet/minecraft/unmapped/C_sszpscpo;
+	METHOD m_gmedtjoz spawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_bhyaesep;ZZ)Lnet/minecraft/unmapped/C_astfners;
+		ARG 6 alignPosition
+		ARG 7 invertY
 	METHOD m_hekybjlx getSpawnBox (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		ARG 1 x
 		ARG 3 y
@@ -52,6 +57,8 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 	METHOD m_hhehahrt loadEntityFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Ljava/util/Optional;
 		ARG 0 nbt
 		ARG 1 world
+	METHOD m_hyyvvjps createChestBoatFactory (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
+		ARG 0 dropItem
 	METHOD m_ijebmrdp appendCustomEntityStackSpawnConfig (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)Ljava/util/function/Consumer;
 		ARG 0 previous
 		ARG 3 player
@@ -71,10 +78,15 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 	METHOD m_mzwuvsgt appendDefaultStackSpawnConfig (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)Ljava/util/function/Consumer;
 		ARG 0 previous
 		ARG 3 player
+	METHOD m_navxebru createChestRaftFactory (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
+		ARG 0 dropItem
 	METHOD m_ncqhbjml getHeight ()F
+	METHOD m_nmoiyemp spawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_bhyaesep;ZZ)Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_nshhmmgl get (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 0 id
+	METHOD m_oebfrxli create (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_oqyurndf getWidth ()F
+	METHOD m_osxbzipi createFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Ljava/util/Optional;
 	METHOD m_pebhwwxb getId (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_ncpywfca;
 		ARG 0 type
 	METHOD m_qprblwyz isSaveable ()Z
@@ -89,7 +101,11 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 1 player
 		ARG 2 entity
 		ARG 3 nbt
+	METHOD m_tjmuaxwr create (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_bhyaesep;ZZ)Lnet/minecraft/unmapped/C_astfners;
+		ARG 2 consumer
+		ARG 5 alignPosition
 	METHOD m_tnzvrnms alwaysUpdateVelocity ()Z
+	METHOD m_tqxwdyaw spawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_bhyaesep;)Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_trtwdwmq getTrackTickInterval ()I
 	METHOD m_wbaqqhrp getMaxTrackDistance ()I
 		COMMENT Returns the tracking distance, <b>in chunks</b>, of this type of entity
@@ -100,6 +116,8 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 	METHOD m_wpubgsdl register (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;)Lnet/minecraft/unmapped/C_ogavsvbr;
 		ARG 0 type
 		ARG 1 builder
+	METHOD m_ytnkhrki createRaftFactory (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
+		ARG 0 dropItem
 	METHOD m_znjphnxr getTranslationKey ()Ljava/lang/String;
 	CLASS C_mopkbakb Builder
 		FIELD f_akcgsfjm fireImmune Z
@@ -111,9 +129,11 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		FIELD f_lwhqlwvm factory Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
 		FIELD f_nmmzrtfm saveable Z
 		FIELD f_qcebxifq spawnDimensionsScale F
+		FIELD f_qdlfxewu translationKey Lnet/minecraft/unmapped/C_jquyxssk;
 		FIELD f_rpsdjoxa trackingTickInterval I
 		FIELD f_rzcfynrt attachmentType Lnet/minecraft/unmapped/C_pubtmkke$C_qexjibym;
 		FIELD f_tntzkbun spawnableFarFromPlayer Z
+		FIELD f_uuowbxbh lootTable Lnet/minecraft/unmapped/C_jquyxssk;
 		FIELD f_xtndxyps spawnGroup Lnet/minecraft/unmapped/C_ormqdxci;
 		METHOD <init> (Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;Lnet/minecraft/unmapped/C_ormqdxci;)V
 			ARG 1 factory
@@ -159,6 +179,7 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		METHOD m_onnfrfmf spawnableFarFromPlayer ()Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;
 		METHOD m_phyefhwa setEyeHeight (F)Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;
 			ARG 1 eyeHeight
+		METHOD m_qgatngvl emptyLootTable ()Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;
 		METHOD m_qzcjtflv disableSaving ()Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;
 		METHOD m_tfrskfvg create (Lnet/minecraft/unmapped/C_ormqdxci;)Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;
 			ARG 0 spawnGroup

@@ -12,9 +12,31 @@
   "com/mojang/serialization/MapCodec": "codec",
   "net/minecraft/unmapped/C_qsrmwluu": "packetCodec", // PacketCodec
   "com/mojang/datafixers/util/Pair": "pair",
+  "net/minecraft/unmapped/C_lgkqzafw$C_nxwenkbc": { // StringIdentifiable.EnumCodec
+    local_name: "codec",
+    fallback: [
+      "enumCodec"
+    ]
+  },
 
   // Data
   "net/minecraft/unmapped/C_nykrdyol": "exporter", // RecipeExporter
+
+  // Loot
+  "net/minecraft/unmapped/C_ykthnceq$C_frcifljd": "builder", // LootContextType$Builder
+  "net/minecraft/unmapped/C_iakykpgh": { // LootContext
+    local_name: "context",
+    fallback: [
+      "lootContext"
+    ]
+  },
+  "net/minecraft/unmapped/C_tmxhskql": { // LootFunction
+    local_name: "function",
+    inherit: true,
+    fallback: [
+      "lootFunction"
+    ]
+  },
 
   // DFU
   "com/mojang/datafixers/schemas/Schema": "schema",
@@ -48,13 +70,13 @@
   "net/minecraft/unmapped/C_ayfeobid": "client", // MinecraftClient
   "net/minecraft/unmapped/C_cnszsxvd": "matrices", // MatrixStack
   "net/minecraft/unmapped/C_igrgeffe": "vertexConsumers", // VertexConsumerProvider
-  "net/minecraft/unmapped/C_mavozmpp": "textRenderer",
-  "net/minecraft/unmapped/C_nxnqmnng": "bufferBuilder",
+  "net/minecraft/unmapped/C_mavozmpp": "textRenderer", // TextRenderer
+  "net/minecraft/unmapped/C_nxnqmnng": "bufferBuilder", // BufferBuilder
   "com/mojang/text2speech/Narrator": "narrator",
 
   // Pos
   "net/minecraft/unmapped/C_hynzadkk": "pos", // BlockPos
-  "net/minecraft/unmapped/C_hynzadkk$C_egqitdjk": {
+  "net/minecraft/unmapped/C_hynzadkk$C_egqitdjk": { // BlockPos.Mutable
     local_name: "pos",
     "fallback": [
       "mutablePos"
@@ -64,8 +86,8 @@
 
   // Common
   "net/minecraft/unmapped/C_rlomrsco": "random", // RandomGenerator
-  "net/minecraft/unmapped/C_xpuuihxf": "direction",
-  "net/minecraft/unmapped/C_eslcbfsq": "profiler",
+  "net/minecraft/unmapped/C_xpuuihxf": "direction", // Direction
+  "net/minecraft/unmapped/C_eslcbfsq": "profiler", // Profiler
   "java/util/UUID": "uuid",
 
   // States
@@ -85,7 +107,7 @@
   },
 
   // Block
-  "net/minecraft/unmapped/C_mmxmpdoq": "block",
+  "net/minecraft/unmapped/C_mmxmpdoq": "block", // Block
   "net/minecraft/unmapped/C_jdakttms": "result", // BlockHitResult
   "net/minecraft/unmapped/C_hgpogkhy": "type", // BlockSetType
   "net/minecraft/unmapped/C_triydqro$C_xnkxsdfy": { // AbstractBlock.Settings
@@ -125,7 +147,7 @@
       "livingEntity"
     ]
   },
-  "net/minecraft/unmapped/C_rjqjaxef": "brain",
+  "net/minecraft/unmapped/C_rjqjaxef": "brain", // Brain
   "net/minecraft/unmapped/C_bhyaesep": { // SpawnReason
     local_name: "reason",
     fallback: [
@@ -177,8 +199,8 @@
   },
 
   // Resources
-  "net/minecraft/unmapped/C_tguinuvn": "resourcePack",
-  "net/minecraft/unmapped/C_tmnrpasf": "resourceManager",
+  "net/minecraft/unmapped/C_tguinuvn": "resourcePack", // ResourcePack
+  "net/minecraft/unmapped/C_tmnrpasf": "resourceManager", // ResourceManager
   "net/minecraft/unmapped/C_carvbxzj": { // AutoCloseableResourceManager
     local_name: "resourceManager",
     fallback: [
@@ -189,6 +211,11 @@
   "net/minecraft/unmapped/C_tjllhmjy": "dataPackSettings", // DataPackSettings
 
   // Network
+  "net/minecraft/unmapped/C_zyjtrjrl": { // Packet
+    local_name: "packet",
+    exclusive: true,
+    inherit: true
+  },
   "net/minecraft/unmapped/C_idfydwco": "buf", // PacketByteBuf
   "net/minecraft/unmapped/C_mnjlaveb$C_mlxyrlwl": { // TagNetworkSerialization$NetworkPayload
     local_name: "payload",
@@ -198,7 +225,7 @@
   },
 
   // World
-  "net/minecraft/unmapped/C_cdctfzbn": "world",
+  "net/minecraft/unmapped/C_cdctfzbn": "world", // World
   "net/minecraft/unmapped/C_agsukcmb": { // TestableWorld
     local_name: "world",
     fallback: [
@@ -255,9 +282,16 @@
     ]
   },
 
+  // World Gen
+  "net/minecraft/unmapped/C_amgmvhcu$C_cjbnnnee": "builder", // ChunkLoadingStep$Builder
+  // ChunkLoadingTask#doWork params
+  "net/minecraft/unmapped/C_nclgamck": "context", // ChunkGenerationContext
+  "net/minecraft/unmapped/C_amgmvhcu": "step", // ChunkLoadingStep
+  "net/minecraft/unmapped/C_lwzmmmqr": "chunk", // Chunk
+
   // Rendering
   "net/minecraft/unmapped/C_dcmtgrvm": "camera", // Camera
-  "net/minecraft/unmapped/C_gjnplkfz": "modelLoader",
+  "net/minecraft/unmapped/C_gjnplkfz": "modelLoader", // ModelLoader
   "net/minecraft/unmapped/C_sedilmty": "graphics", // GuiGraphics
   "net/minecraft/unmapped/C_nrqwmhri": { // Unbaked Model
     local_name: "model",
@@ -276,7 +310,7 @@
   "net/minecraft/unmapped/C_lrgsdfwv": "tracker", // DeltaTracker
 
   // Server
-  "net/minecraft/unmapped/C_aqemmrby": "tracer",
+  "net/minecraft/unmapped/C_aqemmrby": "tracer", // Tracer
   "com/mojang/authlib/GameProfile": {
     local_name: "profile",
     fallback: [
