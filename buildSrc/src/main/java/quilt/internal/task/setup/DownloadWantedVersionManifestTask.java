@@ -4,6 +4,7 @@ import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
+import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputFile;
@@ -14,6 +15,7 @@ import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.util.serializable.SerializableVersionEntry;
 import quilt.internal.util.serializable.VersionParser;
 
+@CacheableTask
 public abstract class DownloadWantedVersionManifestTask extends SimpleDownloadTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by

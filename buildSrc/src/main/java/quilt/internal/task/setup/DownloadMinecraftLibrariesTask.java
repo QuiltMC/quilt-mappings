@@ -8,6 +8,7 @@ import org.gradle.api.file.RegularFile;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Provider;
+import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.OutputFiles;
 import org.gradle.api.tasks.TaskAction;
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
+@CacheableTask
 public abstract class DownloadMinecraftLibrariesTask extends DefaultTask implements VersionParserConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by

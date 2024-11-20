@@ -3,6 +3,7 @@ package quilt.internal.task.setup;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.quiltmc.launchermeta.version.v1.DownloadableFile;
@@ -17,6 +18,7 @@ import quilt.internal.util.DownloadUtil;
  *
  * @see MinecraftJarsPlugin MinecraftJarsPlugin's configureEach
  */
+@CacheableTask
 public abstract class DownloadMinecraftJarsTask extends DefaultTask implements VersionParserConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by
