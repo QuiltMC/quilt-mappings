@@ -1,12 +1,19 @@
 CLASS net/minecraft/unmapped/C_yagtbmmk net/minecraft/server/network/EntityTrackerEntry
 	FIELD f_afmemlns tickInterval I
-	FIELD f_azdezkau positionCodec Lnet/minecraft/unmapped/C_kfofqpqr;
+	FIELD f_azdezkau positionSync Lnet/minecraft/unmapped/C_kfofqpqr;
+	FIELD f_bfaquegw yawBinaryDegrees B
+	FIELD f_cbgllnly UPDATE_INTERVAL I
 	FIELD f_etjcgfpa trackingTick I
+	FIELD f_gpplxcrf pitchBinaryDegrees B
+	FIELD f_gqawuilg headYawBinaryDegrees B
 	FIELD f_hfbzwigq receiver Ljava/util/function/Consumer;
+	FIELD f_hfrlpept MAX_UPDATES_WITHOUT_VEHICLE I
+	FIELD f_iysahyco POSITION_MISMATCH_THRESHOLD_SQUARED D
 	FIELD f_jsyknaxw ROTATION_TOLERANCE_LEVEL I
 	FIELD f_kqffoygs alwaysUpdateVelocity Z
 	FIELD f_kqnuyquf trackedDataValues Ljava/util/List;
 	FIELD f_ntqyhxlt hadVehicle Z
+	FIELD f_svwgozfs velocity Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_tmfcvxyd entity Lnet/minecraft/unmapped/C_astfners;
 	FIELD f_tyxkohyw LOGGER Lorg/slf4j/Logger;
 	FIELD f_vzoyjppi lastOnGround Z
@@ -30,12 +37,22 @@ CLASS net/minecraft/unmapped/C_yagtbmmk net/minecraft/server/network/EntityTrack
 	METHOD m_eszryakz streamRemovedPassengers (Ljava/util/List;Ljava/util/List;)Ljava/util/stream/Stream;
 		ARG 0 passengers
 		ARG 1 lastPassengers
+	METHOD m_geeoyljx getHeadYaw ()F
+	METHOD m_jsiwtcvg sync (Lnet/minecraft/unmapped/C_btculrky;BBZ)V
+		ARG 1 controller
+		ARG 2 yawBinaryDegrees
+		ARG 3 pitchBinaryDegrees
+		ARG 4 forceUpdate
 	METHOD m_mvnvigmx tick ()V
 	METHOD m_njjxygjo stopTracking (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
+	METHOD m_prqemssi getPitch ()F
 	METHOD m_rkxayulq startTracking (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
+	METHOD m_tfqzhjsn getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_tvkyggkq getVelocity ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_vkpuoeqj (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 0 entity
 	METHOD m_vwyonfvn (Ljava/util/List;Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 entity
+	METHOD m_zviazfhq getYaw ()F
