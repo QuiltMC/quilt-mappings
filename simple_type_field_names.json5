@@ -11,6 +11,7 @@
   "com/mojang/serialization/codecs/RecordCodecBuilder$Instance": "instance",
   "com/mojang/serialization/MapCodec": "codec",
   "net/minecraft/unmapped/C_qsrmwluu": "packetCodec", // PacketCodec
+  "net/minecraft/unmapped/C_pscqxfcs$C_pevyyrle": "builder", // DataComponentType.Builder,
   "com/mojang/datafixers/util/Pair": "pair",
   "net/minecraft/unmapped/C_lgkqzafw$C_nxwenkbc": { // StringIdentifiable.EnumCodec
     local_name: "codec",
@@ -23,7 +24,7 @@
   "net/minecraft/unmapped/C_nykrdyol": "exporter", // RecipeExporter
 
   // Loot
-  "net/minecraft/unmapped/C_ykthnceq$C_frcifljd": "builder", // LootContextType$Builder
+  "net/minecraft/unmapped/C_ykthnceq$C_frcifljd": "builder", // LootContextType.Builder
   "net/minecraft/unmapped/C_iakykpgh": { // LootContext
     local_name: "context",
     fallback: [
@@ -216,8 +217,12 @@
     exclusive: true,
     inherit: true
   },
-  "net/minecraft/unmapped/C_idfydwco": "buf", // PacketByteBuf
-  "net/minecraft/unmapped/C_mnjlaveb$C_mlxyrlwl": { // TagNetworkSerialization$NetworkPayload
+  "io/netty/buffer/ByteBuf": { // ByteBuf
+    local_name: "buf",
+    inherit: true,
+    exclusive: true
+  },
+  "net/minecraft/unmapped/C_mnjlaveb$C_mlxyrlwl": { // TagNetworkSerialization.NetworkPayload
     local_name: "payload",
     fallback: [
       "networkPayload"

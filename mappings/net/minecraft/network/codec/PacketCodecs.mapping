@@ -9,6 +9,7 @@ CLASS net/minecraft/unmapped/C_anfarvhg net/minecraft/network/codec/PacketCodecs
 	FIELD f_ggqudulf BYTE_ARRAY Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_hljuwgvd UNSIGNED_SHORT Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_jbsfgkwv OPTIONAL_NBT Lnet/minecraft/unmapped/C_qsrmwluu;
+	FIELD f_jjaqookl BINARY_DEGREES Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_jvjadjsq QUATERNIONF Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_kcibtezy NBT_ELEMENT Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_kvwzvahn GAME_PROFILE Lnet/minecraft/unmapped/C_qsrmwluu;
@@ -17,6 +18,7 @@ CLASS net/minecraft/unmapped/C_anfarvhg net/minecraft/network/codec/PacketCodecs
 	FIELD f_ojxoerea LONG Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_pvgxhbfa NBT_COMPOUND Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_rfaaqzbo DOUBLE Lnet/minecraft/unmapped/C_qsrmwluu;
+	FIELD f_spersuxp SYNC_ID Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_supiohbz MAX_INITIAL_SIZE I
 	FIELD f_uragsrtm SHORT Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_uyscbhlw INT Lnet/minecraft/unmapped/C_qsrmwluu;
@@ -26,9 +28,17 @@ CLASS net/minecraft/unmapped/C_anfarvhg net/minecraft/network/codec/PacketCodecs
 		ARG 0 factory
 		ARG 1 elementCodec
 		ARG 2 maxSize
+	METHOD m_blreoqsc (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		ARG 0 element
 	METHOD m_ciouqnhu optional (Lnet/minecraft/unmapped/C_qsrmwluu;)Lnet/minecraft/unmapped/C_qsrmwluu;
+	METHOD m_cnutlypo (Ljava/lang/Integer;)Ljava/util/OptionalInt;
+		ARG 0 i
+	METHOD m_dolrpazd (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_oivssbvb;
+		ARG 0 compound
 	METHOD m_dpnrrusl map (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_qsrmwluu;Lnet/minecraft/unmapped/C_qsrmwluu;)Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_egxexijk fromRegistryCodec (Lcom/mojang/serialization/Codec;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_qsrmwluu;
+	METHOD m_exbtwozt (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/lang/Object;
+		ARG 1 input
 	METHOD m_fcmaafce nbtElement (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_qsrmwluu;
 		ARG 0 sizeTracker
 	METHOD m_fhfovxvd registryValue (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_qsrmwluu;
@@ -38,6 +48,8 @@ CLASS net/minecraft/unmapped/C_anfarvhg net/minecraft/network/codec/PacketCodecs
 	METHOD m_hnoeqrke factory (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_qsrmwluu;)Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_hzgsqquo fromCodec (Lcom/mojang/serialization/Codec;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_jqcxtmyk entryOf (Lnet/minecraft/unmapped/C_feaetnaz;)Lnet/minecraft/unmapped/C_qsrmwluu;
+	METHOD m_kzbtkccu (Lcom/mojang/serialization/Codec;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_oivssbvb;
+		ARG 1 input
 	METHOD m_likrvuxr holderSet (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_qsrmwluu;
 		ARG 0 registry
 	METHOD m_limimtjq fromCodec (Lcom/mojang/serialization/Codec;)Lnet/minecraft/unmapped/C_qsrmwluu;
@@ -47,15 +59,19 @@ CLASS net/minecraft/unmapped/C_anfarvhg net/minecraft/network/codec/PacketCodecs
 		ARG 0 left
 		ARG 1 right
 	METHOD m_mxlbflvn (Lnet/minecraft/unmapped/C_oivssbvb;Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
-		ARG 1 string
+		ARG 1 error
 	METHOD m_npmxjnbl toCollection ()Lnet/minecraft/unmapped/C_qsrmwluu$C_afmwjpzk;
 	METHOD m_nqqkdxck map (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_qsrmwluu;Lnet/minecraft/unmapped/C_qsrmwluu;I)Lnet/minecraft/unmapped/C_qsrmwluu;
 		ARG 0 factory
 		ARG 1 keyCodec
 		ARG 2 valueCodec
 		ARG 3 maxSize
+	METHOD m_nqvkoznf (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
+		ARG 1 error
 	METHOD m_oloxdgqd toCollection (I)Lnet/minecraft/unmapped/C_qsrmwluu$C_afmwjpzk;
 		ARG 0 maxSize
+	METHOD m_oukcdhft (Ljava/util/OptionalInt;)Ljava/lang/Integer;
+		ARG 0 optional
 	METHOD m_oxatcqxo indexed (Ljava/util/function/IntFunction;Ljava/util/function/ToIntFunction;)Lnet/minecraft/unmapped/C_qsrmwluu;
 		ARG 0 indexToValue
 		ARG 1 valueToIndex
@@ -65,7 +81,7 @@ CLASS net/minecraft/unmapped/C_anfarvhg net/minecraft/network/codec/PacketCodecs
 	METHOD m_ttkrtamq fromRegistryCodecUnlimited (Lcom/mojang/serialization/Codec;)Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_ugyvwjlm registry (Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_qsrmwluu;
 		ARG 0 registry
-		ARG 1 registryTransformer
+		ARG 1 iterableGetter
 	METHOD m_vpmnqxks holder (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_qsrmwluu;)Lnet/minecraft/unmapped/C_qsrmwluu;
 		ARG 0 registry
 	METHOD m_ydaogaft byteArray (I)Lnet/minecraft/unmapped/C_qsrmwluu;
@@ -75,3 +91,11 @@ CLASS net/minecraft/unmapped/C_anfarvhg net/minecraft/network/codec/PacketCodecs
 		ARG 2 maxSize
 	METHOD m_yypssatp toCollection (Ljava/util/function/IntFunction;)Lnet/minecraft/unmapped/C_qsrmwluu$C_afmwjpzk;
 		ARG 0 factory
+	CLASS C_bmyndbtu
+		FIELD f_gfiglypb DIRECT_ID I
+		METHOD m_bdkwuzch getHolderIdMap (Lnet/minecraft/unmapped/C_bngyzsts;)Lnet/minecraft/unmapped/C_feaetnaz;
+	CLASS C_kafuxsar
+		METHOD m_sqbtyjcv getIterable (Lnet/minecraft/unmapped/C_bngyzsts;)Lnet/minecraft/unmapped/C_feaetnaz;
+	CLASS C_wfaqdxcz
+		FIELD f_igiynzhh IDENTIFIER_ID I
+		FIELD f_swbwkgxh holderCodec Lnet/minecraft/unmapped/C_qsrmwluu;
