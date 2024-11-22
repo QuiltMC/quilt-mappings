@@ -7,7 +7,7 @@
  * in their intermediary names.
  *
  * <p>Unmapped classes go into this package by default. This package additionally contains
- * {@link Bootstrap}, {@link SharedConstants}, and {@link MinecraftVersion} classes.
+ * {@link Bootstrapper}, {@link SharedConstants}, and {@link MinecraftVersion} classes.
  *
  */
 
