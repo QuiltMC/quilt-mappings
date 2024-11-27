@@ -6,11 +6,11 @@ plugins {
 repositories {
 	mavenCentral()
 	maven {
-		name "Quilt Repositiory"
+		name "Quilt Repository"
 		url "https://maven.quiltmc.org/repository/release"
 	}
 	maven {
-		name "Quilt Snapshot Repositiory"
+		name "Quilt Snapshot Repository"
 		url "https://maven.quiltmc.org/repository/snapshot"
 	}
 	maven {
@@ -21,10 +21,6 @@ repositories {
 		name "Mojang"
 		url 'https://libraries.minecraft.net/'
 	}
-	// remove when ASM fix is released
-	maven {
-		url = "https://repository.ow2.org/nexus/content/repositories/snapshots/"
-	}
 	mavenLocal()
 }
 
@@ -34,7 +30,6 @@ configurations {
 
 dependencies {
 	implementation(libs.commons.io)
-	implementation(libs.download.task)
 	implementation(libs.guava)
 	implementation(libs.jackson.xml)
 	implementation(libs.launchermeta.parser)
@@ -86,9 +81,51 @@ test {
 
 gradlePlugin {
 	plugins {
-		mappingsLogic {
-			id = 'mappings-logic'
-			implementationClass = 'quilt.internal.MappingsPlugin'
+		final pluginPackage = 'quilt.internal.plugin.'
+
+		quiltMappingsBase {
+			id = 'quilt-mappings-base'
+			implementationClass = pluginPackage + 'QuiltMappingsBasePlugin'
+		}
+
+		minecraftJars {
+			id = 'minecraft-jars'
+			implementationClass = pluginPackage + 'MinecraftJarsPlugin'
+		}
+
+		mapMinecraftJars {
+			id = 'map-minecraft-jars'
+			implementationClass = pluginPackage + 'MapMinecraftJarsPlugin'
+		}
+
+		mapV2 {
+			id = 'map-v2'
+			implementationClass = pluginPackage + 'MapV2Plugin'
+		}
+
+		mapIntermediary {
+			id = 'map-intermediary'
+			implementationClass = pluginPackage + 'MapIntermediaryPlugin'
+		}
+
+		processMappings {
+			id = 'process-mappings'
+			implementationClass = pluginPackage + 'ProcessMappingsPlugin'
+		}
+
+		enigmaMappings {
+			id = 'enigma-mappings'
+			implementationClass = pluginPackage + 'EnigmaMappingsPlugin'
+		}
+
+		targetDiff {
+			id = 'target-diff'
+			implementationClass = pluginPackage + 'TargetDiffPlugin'
+		}
+
+		quiltMappings {
+			id = 'quilt-mappings'
+			implementationClass = pluginPackage + 'QuiltMappingsPlugin'
 		}
 	}
 }

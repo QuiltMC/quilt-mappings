@@ -1,6 +1,6 @@
 package quilt.internal.decompile;
 
-import org.gradle.api.Project;
+import org.gradle.api.logging.Logger;
 import quilt.internal.decompile.javadoc.ClassJavadocProvider;
 import quilt.internal.decompile.javadoc.FieldJavadocProvider;
 import quilt.internal.decompile.javadoc.MethodJavadocProvider;
@@ -11,20 +11,24 @@ import java.util.Collection;
 import java.util.Map;
 
 public abstract class AbstractDecompiler {
-    private final Project project;
+    private final Logger logger;
 
-    public AbstractDecompiler(Project project) {
-        this.project = project;
+    public AbstractDecompiler(Logger logger) {
+        this.logger = logger;
     }
 
-    public void decompile(Path file, Path outputDir, Map<String, Object> options, Collection<File> libraries) {
-        decompile(file.toFile(), outputDir.toFile(), options, libraries);
+    public void decompile(
+        Collection<Path> sources, Path outputDir, Map<String, Object> options, Collection<File> libraries
+    ) {
+        this.decompile(sources.stream().map(Path::toFile).toList(), outputDir.toFile(), options, libraries);
     }
 
-    public abstract void decompile(File file, File outputDir, Map<String, Object> options, Collection<File> libraries);
+    public abstract void decompile(
+        Collection<File> sources, File outputDir, Map<String, Object> options, Collection<File> libraries
+    );
 
-    protected Project getProject() {
-        return project;
+    protected Logger getLogger() {
+        return this.logger;
     }
 
     public void withClassJavadocProvider(ClassJavadocProvider javadocProvider) {

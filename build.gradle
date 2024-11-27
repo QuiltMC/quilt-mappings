@@ -1,134 +1,284 @@
-buildscript {
-	repositories {
-		maven {
-			name 'Quilt Releases'
-			url 'https://maven.quiltmc.org/repository/release/'
-		}
-		maven {
-			name 'Quilt Snapshot Repository'
-			url 'https://maven.quiltmc.org/repository/snapshot/'
-		}
-		maven {
-			name "Fabric Repository"
-			url 'https://maven.fabricmc.net'
-		}
-		mavenCentral()
-		mavenLocal()
-	}
-	dependencies {
-		classpath(libs.unpick)
-		classpath(libs.unpick.format.utils)
-	}
-}
+import org.gradle.api.internal.file.FileOperations
+import org.quiltmc.launchermeta.version.v1.Library
+import org.quiltmc.launchermeta.version.v1.Version
+import quilt.internal.constants.Classifiers
+import quilt.internal.constants.Constants
+import quilt.internal.task.setup.DownloadWantedVersionManifestTask
+import quilt.internal.util.serializable.VersionParser
+
+import java.util.stream.Collectors
+import java.util.stream.Stream
+
+import static org.gradle.api.plugins.JavaPlugin.JAVADOC_TASK_NAME
+import static quilt.internal.task.setup.DownloadWantedVersionManifestTask.DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME
 
 plugins {
-	id 'java' // for constants, packages, javadoc
 	id 'maven-publish'
-	id 'org.cadixdev.licenser' version '0.6.1'
-	id "mappings-logic"
+	id 'quilt-mappings'
+	alias libs.plugins.licenser
 }
 
-def USE_SNAPSHOT_HASHES = false
+// put these in fields so we don't have to worry about inadvertently accessing the project during task execution
+final FileOperations FILE_OPERATIONS = project.fileOperations
+final ProviderFactory PROVIDERS = project.providers
+final ObjectFactory OBJECTS = project.objects
 
-def minecraft_version = Constants.MINECRAFT_VERSION
+final USE_SNAPSHOT_HASHES = false
 
-def ENV = System.getenv()
+final ENV = System.getenv()
 
-version = Constants.MAPPINGS_VERSION
+final MINECRAFT_VERSION = libs.versions.minecraft.get()
+
+version = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault('BUILD_NUMBER', 'local')}"
 
 if (ENV.BRANCH_NAME) {
 	def branch = ENV.BRANCH_NAME.substring(ENV.BRANCH_NAME.lastIndexOf('/') + 1)
-	if (minecraft_version != branch) {
-		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${minecraft_version})")
+	if (MINECRAFT_VERSION != branch) {
+		throw new IllegalStateException("Branch name (${branch}) does not match the mc version (${MINECRAFT_VERSION})")
 	}
 }
 
+sourceSets {
+	// for constantsJar and sourcesJar input
+	constants
+	// package info files, for javadoc input
+	packageDocs
+	// for javadoc input
+	doclet
+}
+
 repositories {
+	ivy {
+		// hack to download file from url
+		url = 'https://raw.githubusercontent.com'
+
+		patternLayout {
+			artifact '/[organisation]/[module]/[revision]/allowed_english_words.txt'
+		}
+
+		metadataSources { artifact() }
+	}
+
 	maven {
-		name "Mojang"
+		name 'Mojang'
 		url 'https://libraries.minecraft.net/'
 	}
 	mavenCentral()
 	maven {
-		name "Quilt Repository"
-		url "https://maven.quiltmc.org/repository/release"
+		name 'Quilt Repository'
+		url 'https://maven.quiltmc.org/repository/release'
 	}
 	maven {
-		name "Fabric Repository"
+		name 'Fabric Repository'
 		url 'https://maven.fabricmc.net'
 	}
 	maven {
-		name "Quilt Snapshot Repository"
-		url "https://maven.quiltmc.org/repository/snapshot"
-	}
-	// remove when ASM fix is released
-	maven {
-		url = "https://repository.ow2.org/nexus/content/repositories/snapshots/"
+		name 'Quilt Snapshot Repository'
+		url 'https://maven.quiltmc.org/repository/snapshot'
 	}
 	mavenLocal()
 }
 
 configurations {
-	enigmaRuntime
-	javadocClasspath
-	decompileClasspath
-	unpick
-	hashed
-	intermediary
+	dictionary
 }
 
 dependencies {
-	enigmaRuntime(libs.enigma.swing)
-	enigmaRuntime(libs.enigma.plugin)
+	dictionary libs.dictionary
+
 	javadocClasspath(libs.quilt.loader)
 	javadocClasspath(libs.jetbrains.annotations)
-	javadocClasspath(libs.jsr305) // for some other jsr annotations
-	unpick(libs.unpick.cli)
-	hashed "org.quiltmc:hashed:${minecraft_version}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
-	intermediary "net.fabricmc:intermediary:${minecraft_version}:v2"
+	// for some other jsr annotations
+	javadocClasspath(libs.jsr305)
+	hashed "org.quiltmc:hashed:${MINECRAFT_VERSION}${USE_SNAPSHOT_HASHES ? "-SNAPSHOT" : ""}"
+	intermediary "net.fabricmc:intermediary:${MINECRAFT_VERSION}:v2"
 }
 
-import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.Opcodes
-import org.quiltmc.draftsman.asm.visitor.DraftsmanAdapterClassVisitor
-import quilt.internal.Constants
-import quilt.internal.decompile.Decompilers
-import quilt.internal.tasks.build.AddProposedMappingsTask
-import quilt.internal.tasks.build.MappingsV2JarTask
-import quilt.internal.tasks.build.TransformJarClassesTask
-import quilt.internal.tasks.decompile.DecompileTask
-import quilt.internal.tasks.jarmapping.MapPerVersionMappingsJarTask
-import quilt.internal.tasks.mappings.EnigmaMappingsTask
-import quilt.internal.tasks.mappings.EnigmaMappingsServerTask
-import quilt.internal.tasks.unpick.RemapUnpickDefinitionsTask
-import quilt.internal.tasks.unpick.UnpickJarTask
-import quilt.internal.util.MappingsJavadocProvider
+quiltMappings {
+	minecraftVersion = MINECRAFT_VERSION
 
-clean.doFirst {
-	delete mappings.fileConstants.tempDir, mappings.fileConstants.cacheFilesMinecraft,
-			mappings.fileConstants.unpickGlDefinitions, mappings.fileConstants.unpickGlStateManagerDefinitions
+	mappingsVersion = project.version.toString()
+
+	mappingsDir = file('mappings/')
+
+	enigmaProfileConfig = file('enigma/enigma_profile.json')
+
+	unpickMeta = file('unpick/unpick.json')
 }
 
-tasks.build.dependsOn "compressTiny", "tinyJar", "v2UnmergedMappingsJar", "v2MergedMappingsJar"
-
-task insertAutoGeneratedMappings(dependsOn: [buildMappingsTiny, downloadPerVersionMappings], type: AddProposedMappingsTask) {
-	final enigmaProfile = file("enigma_profile.json")
-
-	inputJar.set mappings.fileConstants.perVersionMappingsJar
-	inputMappings.set buildMappingsTiny.outputMappings
-	profile.set enigmaProfile
+tasks.combineUnpickDefinitions {
+	// add project's static unpick definitions
+	unpickDefinitions.from 'unpick/definitions/'
 }
 
-combineUnpickDefinitions {
-	input = mappings.fileConstants.unpickDefinitions
-	output = new File(mappings.fileConstants.buildDir, 'definitions.unpick')
+tasks.mappingLint {
+	dictionaryFile = configurations.dictionary.singleFile
 }
 
-def remappedDefinitions = new File(mappings.fileConstants.buildDir, Constants.PER_VERSION_MAPPINGS_NAME + '-definitions.unpick')
-remapUnpickDefinitions {
-	dependsOn mergeTinyV2
-	output = remappedDefinitions
-	mappings = mergeTinyV2.outputMappings
+tasks.sourcesJar {
+	sources.from sourceSets.constants.allSource
+}
+
+tasks.constantsJar {
+	constants.from sourceSets.constants.output
+}
+
+// Only build jars for package infos if we need to actually expose stuff like annotation in the future.
+
+tasks.build.dependsOn constantsJar, generatePackageInfoMappings,
+	compressTiny, tinyJar, v2UnmergedMappingsJar, v2MergedMappingsJar
+
+// configure lazily because we get buildDirectory
+tasks.named(JAVADOC_TASK_NAME, Javadoc) {
+	// Needed for javadoc to find the doclet classes.
+	dependsOn docletClasses
+
+	final versionParser = tasks
+		.named(DOWNLOAD_WANTED_VERSION_MANIFEST_TASK_NAME, DownloadWantedVersionManifestTask)
+		.flatMap(DownloadWantedVersionManifestTask::provideVersionParser)
+
+	final MapProperty<String, String> minecraftLibVersionsByModule = OBJECTS.mapProperty(String, String)
+	minecraftLibVersionsByModule.set(versionParser
+		.map(VersionParser::get)
+		.map(Version::getLibraries)
+		.map {
+			it.stream()
+				.map(Library::getName)
+				.flatMap { moduleName ->
+					final delim = ':'
+					final moduleParts = moduleName.split(delim)
+
+					if (moduleParts.length == 3 || moduleParts.length == 4) {
+						return Stream.of(Map.entry(moduleParts[0] + delim + moduleParts[1], moduleParts[2]))
+					} else {
+						logger.error("Unrecognized module format: ${moduleName}")
+
+						return Stream.empty()
+					}
+				}
+				.distinct()
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+		}
+	)
+
+	final Closure<Provider<String>> provideModuleVersion = { String module ->
+		final versionProperty = OBJECTS.property(String)
+			.convention(PROVIDERS.provider { throw new GradleException("Missing version for module: ${module}") })
+
+		versionProperty.set(minecraftLibVersionsByModule.getting(module))
+
+		return versionProperty
+	}
+
+	final Closure<Provider<String>> formatVersionedUrl = { String baseUrl, Provider<String> version ->
+		version.map {"${baseUrl}/${it}/" as String }
+	}
+
+	final gsonUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/com.google.code.gson/gson',
+		provideModuleVersion('com.google.code.gson:gson')
+	)
+
+	// use hardcoded version because minecraft depends on a version that doesn't have javadocs
+	final nettyUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/io.netty/netty-all',
+		libs.versions.netty.with.javadoc
+	)
+
+	final commonsCompressUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/org.apache.commons/commons-compress',
+		provideModuleVersion('org.apache.commons:commons-compress')
+	)
+
+	final commonsCodecUrl = formatVersionedUrl(
+		'https://javadoc.io/doc/commons-codec/commons-codec',
+		provideModuleVersion('commons-codec:commons-codec')
+	)
+
+	[
+		gsonUrl: gsonUrl,
+		nettyUrl: nettyUrl,
+		commonsCompressUrl: commonsCompressUrl,
+		commonsCodecUrl: commonsCodecUrl
+	].each(inputs::property)
+
+	destinationDir = layout.buildDirectory.get().dir('docs').dir(project.version.toString()).getAsFile()
+	final docletResources = sourceSets.doclet.resources.asFileTree
+
+	// Failing on error is important to ensure that a Javadoc jar is available.
+	failOnError = true
+	maxMemory = '2G'
+
+	final debug = providers.gradleProperty('quilt.mappings.debug.javadoc')
+		.map(Boolean::parseBoolean)
+		.getOrElse(false)
+
+	verbose = debug
+
+	options {
+		if (debug) {
+			verbose()
+		}
+
+		source = '21'
+		encoding = 'UTF-8'
+		charSet = 'UTF-8'
+		memberLevel = JavadocMemberLevel.PRIVATE
+		splitIndex true
+		tags(
+			'apiNote:a:API Note:',
+			'implSpec:a:Implementation Requirements:',
+			'implNote:a:Implementation Note:'
+		)
+		taglets 'quilt.internal.taglet.MappingTaglet'
+		// taglet path, header, extra stylesheet settings deferred
+		it.use()
+
+		addBooleanOption '-allow-script-in-comments', true
+		// https://docs.oracle.com/en/java/javase/21/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
+		addBooleanOption 'Xdoclint:html', true
+		addBooleanOption 'Xdoclint:syntax', true
+		addBooleanOption 'Xdoclint:reference', true
+		addBooleanOption 'Xdoclint:accessibility', true
+		addStringOption '-notimestamp'
+	}
+
+	source sourceSets.constants.allJava + sourceSets.packageDocs.allJava
+
+	doFirst {
+		// lazy setting
+		options {
+			links(
+				"https://javadoc.io/doc/com.google.guava/guava/${libs.versions.guava.get()}/",
+				gsonUrl.get(),
+				"https://javadoc.io/doc/org.jetbrains/annotations/${libs.versions.jetbrains.annotations.get()}/",
+				"https://javadoc.io/doc/com.google.code.findbugs/jsr305/${libs.versions.jsr305.get()}/",
+				commonsCompressUrl.get(),
+				nettyUrl.get(),
+				'https://javadoc.lwjgl.org/',
+				'https://logging.apache.org/log4j/2.x/javadoc/log4j-api/',
+				'https://fastutil.di.unimi.it/docs/',
+				'https://commons.apache.org/proper/commons-logging/javadocs/api-release/',
+				'https://commons.apache.org/proper/commons-lang/javadocs/api-release/',
+				'https://commons.apache.org/proper/commons-io/apidocs/',
+				commonsCodecUrl.get(),
+				"https://javadoc.quiltmc.org/quilt-loader/${libs.versions.quilt.loader.get()}/",
+				"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
+			)
+
+			tagletPath sourceSets.doclet.output.classesDirs.files.toList()
+			header docletResources.filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
+			addFileOption '-add-stylesheet', docletResources.filter { it.name == 'style.css' }.singleFile
+		}
+	}
+
+	doLast {
+		FILE_OPERATIONS.copy {
+			it.from docletResources
+			it.include 'copy_on_click.js'
+			it.into destinationDir
+		}
+	}
 }
 
 java {
@@ -137,339 +287,33 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = "UTF-8"
+	it.options.encoding = 'UTF-8'
 	it.options.release = 21
 }
 
-sourceSets {
-	constants
-	packageDocs // package info files
-	doclet
-}
-
 license {
-	header file("HEADER")
+	header file('HEADER')
 	include '**/*.java'
 }
-
-// Its artifact collides with the `tinyJar` one, just disable it since it isn't used either way
-tasks.jar.enabled = false
-
-task constantsJar(type: Jar) {
-	from sourceSets.constants.output
-	archiveClassifier = "constants"
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-	archiveClassifier = "sources"
-	from sourceSets.constants.allSource
-}
-
-task unpickHashedJar(type: UnpickJarTask) {
-	inputFile.set mappings.fileConstants.perVersionMappingsJar
-	outputFile.set mappings.fileConstants.unpickedJar
-	unpickDefinition.set remapUnpickDefinitions.output.get()
-	unpickConstantsJar.set constantsJar.archiveFile
-
-	dependsOn MapPerVersionMappingsJarTask.TASK_NAME, "constantsJar", remapUnpickDefinitions
-}
-
-task mappingsUnpicked(type: EnigmaMappingsTask, dependsOn: unpickHashedJar) {
-	jarToMap.set unpickHashedJar.outputFile.get()
-}
-
-task mappings(type: EnigmaMappingsTask, dependsOn: "mapPerVersionMappingsJar") {
-	jarToMap.set mappings.fileConstants.perVersionMappingsJar
-}
-
-task mappingsUnpickedServer(type: EnigmaMappingsServerTask, dependsOn: unpickHashedJar) {
-	jarToMap.set unpickHashedJar.outputFile.get()
-}
-
-task mappingsServer(type: EnigmaMappingsServerTask, dependsOn: "mapPerVersionMappingsJar") {
-	jarToMap.set project.extensions.mappings.fileConstants.perVersionMappingsJar
-}
-
-// Only build jars for package infos if we need to actually expose stuff like annotation in the future.
-
-build.dependsOn constantsJar, generatePackageInfoMappings
-
-task v2UnmergedMappingsJar(type: MappingsV2JarTask, dependsOn: [insertAutoGeneratedMappings, combineUnpickDefinitions]) {
-	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-v2.jar"
-	mappings = insertAutoGeneratedMappings.outputMappings
-}
-
-task v2MergedMappingsJar(dependsOn: ["mergeTinyV2"], type: MappingsV2JarTask) {
-	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-mergedv2.jar"
-	mappings = mergeTinyV2.outputMappings
-}
-
-task intermediaryV2MappingsJar(dependsOn: ["removeIntermediary"], type: MappingsV2JarTask) {
-	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediary-v2.jar"
-	mappings = removeIntermediary.outputMappings
-
-	onlyIf {
-		return checkIntermediaryMappings.isPresent()
-	}
-}
-
-task intermediaryV2MergedMappingsJar(dependsOn: ["mergeIntermediary"], type: MappingsV2JarTask) {
-	archiveFileName = "${Constants.MAPPINGS_NAME}-${Constants.MAPPINGS_VERSION}-intermediary-mergedv2.jar"
-	mappings = mergeIntermediary.outputMappings
-
-	onlyIf {
-		return checkIntermediaryMappings.isPresent()
-	}
-}
-
-task buildIntermediary {
-	dependsOn intermediaryV2MappingsJar, intermediaryV2MergedMappingsJar
-
-	onlyIf {
-		return checkIntermediaryMappings.isPresent()
-	}
-}
-
-task eraseBytecode(type: TransformJarClassesTask, dependsOn: mapNamedJar) {
-	jarFile = mappings.fileConstants.namedJar
-	output = file(".gradle/temp/erased-classes/")
-
-	visitor(DraftsmanAdapterClassVisitor::new)
-	// Set protected/package-private classes to public so that we don't have any access compile errors.
-	// TODO: Fix this by putting the classes in the same package. Javadoc shows the modifier
-	visitor { new ClassVisitor(Opcodes.ASM9, it) {
-		private int toPublicAccess(int access) {
-			if ((access & Opcodes.ACC_PROTECTED) != 0 || ((access & Opcodes.ACC_PRIVATE) == 0 && (access & Opcodes.ACC_PUBLIC) == 0)) {
-				access = access & ~Opcodes.ACC_PROTECTED
-				access = access | Opcodes.ACC_PUBLIC
-			}
-			return access
-		}
-
-		@Override
-		void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-			super.visit(version, toPublicAccess(access), name, signature, superName, interfaces)
-		}
-
-		@Override
-		void visitInnerClass(String name, String outerName, String innerName, int access) {
-			super.visitInnerClass(name, outerName, innerName, toPublicAccess(access))
-		}
-	} }
-
-	filter({ it.outerClass == null }) // filter out anonymous classes
-}
-
-def fakeSourceDir = file(".gradle/temp/fakeSource")
-task genFakeSource(type: DecompileTask, dependsOn: [mergeTinyV2, eraseBytecode]) {
-	input = eraseBytecode.output.asFile.get()
-	output = fakeSourceDir
-	decompiler = Decompilers.VINEFLOWER
-	libraries = files(mappings.fileConstants.libraries)
-	decompilerOptions = [
-			"rsy": "1", // remove synthetics
-			"dgs": "1", // decompile generic signatures
-			"pll": "99999" // pll (Preferred Line Length) is length for line wrapping
-	]
-
-	// Tell gradle not to skip if the mappings file changed
-	inputs.file(mergeTinyV2.outputMappings)
-
-	doFirst {
-		fakeSourceDir.deleteDir()
-
-		def jdProvider = new MappingsJavadocProvider(mergeTinyV2.outputMappings, "named")
-		classJavadocProvider(jdProvider)
-		fieldJavadocProvider(jdProvider)
-		methodJavadocProvider(jdProvider)
-	}
-	doLast {
-		logger.lifecycle ":Fake source generated"
-	}
-}
-
-task decompileVineflower(type: DecompileTask, dependsOn: [mapNamedJar]) {
-	input.set mappings.fileConstants.namedJar
-	output.set file("namedSrc")
-	decompiler = Decompilers.VINEFLOWER
-	libraries = files(configurations.decompileClasspath)
-
-	doFirst {
-		file("namedSrc").deleteDir()
-
-		def javadocProvider = new MappingsJavadocProvider(insertAutoGeneratedMappings.outputMappings, "named")
-		classJavadocProvider(javadocProvider)
-		fieldJavadocProvider(javadocProvider)
-		methodJavadocProvider(javadocProvider)
-	}
-}
-
-task remapTargetUnpickDefinitions(type: RemapUnpickDefinitionsTask) {
-	dependsOn "checkUnpickVersionsMatch", "downloadTargetMappingsJar"
-	output.set downloadTargetMappingsJar.targetUnpickRemappedDefinitionsFile
-	mappings.set downloadTargetMappingsJar.targetMappingsFile
-	input.set downloadTargetMappingsJar.targetUnpickDefinitionsFile
-
-	onlyIf {
-		checkUnpickVersionsMatch.match
-	}
-}
-
-task unpickTargetJar(type: UnpickJarTask) {
-	dependsOn "checkUnpickVersionsMatch", "downloadMinecraftLibraries", "remapTargetUnpickDefinitions", "mapPerVersionMappingsJar"
-
-	inputFile.set mappings.fileConstants.perVersionMappingsJar
-	outputFile.set remapTargetMinecraftJar.inputJar
-	unpickDefinition.set remapTargetUnpickDefinitions.output
-	unpickConstantsJar.set downloadTargetMappingsJar.targetUnpickConstantsFile
-
-	onlyIf {
-		checkUnpickVersionsMatch.match
-	}
-}
-
-task decompileTargetVineflower(type: DecompileTask, dependsOn: [remapTargetMinecraftJar]) {
-	input.set remapTargetMinecraftJar.outputJar
-	output.set file("namedTargetSrc")
-	decompiler = Decompilers.VINEFLOWER
-	libraries = files(configurations.decompileClasspath)
-
-	doFirst {
-		file("namedTargetSrc").deleteDir()
-
-		def javadocProvider = new MappingsJavadocProvider(downloadTargetMappingsJar.targetMappingsFile.get().getAsFile(), "named")
-		classJavadocProvider(javadocProvider)
-		fieldJavadocProvider(javadocProvider)
-		methodJavadocProvider(javadocProvider)
-	}
-
-	onlyIf {
-		checkUnpickVersionsMatch.match
-	}
-}
-
-javadoc {
-	dependsOn genFakeSource
-	dependsOn downloadMinecraftLibraries
-	dependsOn docletClasses // Needed for javadoc to find the doclet classes.
-	group = "javadoc generation"
-	outputs.upToDateWhen { false }
-	destinationDir = file("${buildDir}/docs/${project.version}")
-	def docletResources = sourceSets.doclet.resources.asFileTree
-
-	failOnError = true // Failing on error is important to ensure that a Javadoc jar is available.
-	maxMemory = '2G'
-
-	// verbose = true // enable to debug
-	options {
-		// verbose() // enable to debug
-		source = "21"
-		encoding = 'UTF-8'
-		charSet = 'UTF-8'
-		memberLevel = JavadocMemberLevel.PRIVATE
-		splitIndex true
-		tags(
-				'apiNote:a:API Note:',
-				'implSpec:a:Implementation Requirements:',
-				'implNote:a:Implementation Note:'
-		)
-		taglets "quilt.internal.taglet.MappingTaglet"
-		// taglet path, header, extra stylesheet settings deferred
-		it.use()
-
-		addBooleanOption "-allow-script-in-comments", true
-		links(
-				"https://javadoc.io/doc/com.google.guava/guava/${libs.versions.guava.get()}/",
-				"https://javadoc.io/doc/com.google.code.gson/gson/${project.gson}/",
-				"https://javadoc.io/doc/org.jetbrains/annotations/${libs.versions.jetbrains.annotations.get()}/",
-				"https://javadoc.io/doc/com.google.code.findbugs/jsr305/${libs.versions.jsr305.get()}/",
-				"https://javadoc.io/doc/org.apache.commons/commons-compress/${project.commons_compress}/",
-				"https://javadoc.io/doc/io.netty/netty-all/${project.netty}/",
-				'https://javadoc.lwjgl.org/',
-				'https://logging.apache.org/log4j/2.x/javadoc/log4j-api/',
-				'https://fastutil.di.unimi.it/docs/',
-				"https://commons.apache.org/proper/commons-logging/javadocs/api-release/",
-				"https://commons.apache.org/proper/commons-lang/javadocs/api-release/",
-				"https://commons.apache.org/proper/commons-io/apidocs/",
-				"https://commons.apache.org/proper/commons-codec/archives/${project.commons_codec}/apidocs/",
-				"https://javadoc.quiltmc.org/quilt-loader/${libs.versions.quilt.loader.get()}/",
-				"https://docs.oracle.com/en/java/javase/${project.java}/docs/api/"
-		)
-		// https://docs.oracle.com/en/java/javase/21/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet
-		addBooleanOption 'Xdoclint:html', true
-		addBooleanOption 'Xdoclint:syntax', true
-		addBooleanOption 'Xdoclint:reference', true
-		addBooleanOption 'Xdoclint:accessibility', true
-		addStringOption '-notimestamp'
-	}
-	source fileTree(fakeSourceDir) + sourceSets.constants.allJava + sourceSets.packageDocs.allJava
-	classpath = configurations.javadocClasspath + downloadMinecraftLibraries.outputs.files.asFileTree + mapNamedJar.outputs.files.asFileTree
-
-	doLast {
-		project.copy {
-			from docletResources
-			include "copy_on_click.js"
-			into javadoc.outputDirectory
-		}
-	}
-
-	doFirst {
-		// lazy setting
-		options {
-			tagletPath sourceSets.doclet.output.classesDirs.files.toList()
-			header docletResources.filter { it.name == 'javadoc_header.txt' }.singleFile.text.trim()
-			addFileOption "-add-stylesheet", docletResources.filter { it.name == 'style.css' }.singleFile
-		}
-	}
-}
-
-task javadocJar(type: Jar, dependsOn: ["javadoc"]) {
-	group = "javadoc generation"
-
-	from javadoc.destinationDir
-
-	archiveVersion.set Constants.MAPPINGS_VERSION
-	archiveClassifier = 'javadoc'
-}
-
-generatePackageInfoMappings {
-	packageName = "net/minecraft/unused/packageinfo/"
-}
-
-mappingLint {
-	dependsOn mapPerVersionMappingsJar
-	mappingDirectory = file("mappings")
-	jarFile = mappings.fileConstants.perVersionMappingsJar
-}
-
-check.dependsOn mappingLint
 
 publishing {
 	publications {
 		maven(MavenPublication) {
 			groupId 'org.quiltmc'
 			artifactId Constants.MAPPINGS_NAME
-			version Constants.MAPPINGS_VERSION
+			version project.version
 
 			// quilt-mappings-<version>-tiny.gz
-			artifact(compressTiny.compressedTiny) {
-				classifier "tiny"
-				builtBy compressTiny
-			}
+			compressTiny.artifact maven
 			// quilt-mappings-<version>.jar
-			artifact(tinyJar)
+			artifact tinyJar
 			// quilt-mappings-<version>-v2.jar
-			artifact(v2UnmergedMappingsJar) {
-				classifier "v2"
-			}
+			artifact v2UnmergedMappingsJar
 			// quilt-mappings-<version>-mergedv2.jar
-			artifact(v2MergedMappingsJar) {
-				classifier "mergedv2"
-			}
+			artifact v2MergedMappingsJar
 			// quilt-mappings-<version>-constants.jar
-			artifact(constantsJar) {
-				classifier "constants"
-			}
+			artifact constantsJar
+
 			// quilt-mappings-<version>-sources.jar
 			artifact sourcesJar
 			// quilt-mappings-<version>-javadoc.jar
@@ -478,6 +322,7 @@ publishing {
 			// See below the publishing block for intermediary artifact publishing
 		}
 	}
+
 	repositories {
 		if (ENV.MAVEN_URL) {
 			maven {
@@ -501,25 +346,24 @@ publishing {
 	}
 }
 
-tasks.withType(AbstractPublishToMaven).all { AbstractPublishToMaven t ->
-	// Won't run if checkIntermediaryMappings returns false
+tasks.withType(AbstractPublishToMaven).configureEach {
+	// Won't run if mapIntermediary.intermediaryFile is absent
 	dependsOn buildIntermediary
 
 	doFirst {
-		if (checkIntermediaryMappings.isPresent()) {
-			MavenPublication p = it.publication
-			def addArtifact = { Task task, String artifactClassifier ->
-				if (p.getArtifacts().findAll {a -> a.getClassifier() == artifactClassifier }.isEmpty()) {
-					p.artifact(task) {
+		if (mapIntermediary.intermediaryFile.isPresent()) {
+			final addArtifact = { Task task, String artifactClassifier ->
+				if (publication.artifacts.findAll { it.classifier == artifactClassifier }.isEmpty()) {
+					publication.artifact(task) {
 						classifier artifactClassifier
 					}
 				}
 			}
 
 			// quilt-mappings-<version>-intermediary-v2.jar
-			addArtifact(intermediaryV2MappingsJar, "intermediary-v2")
+			addArtifact(intermediaryV2MappingsJar, Classifiers.INTERMEDIARY_V2)
 			// quilt-mappings-<version>-intermediary-mergedv2.jar
-			addArtifact(intermediaryV2MergedMappingsJar, "intermediary-mergedv2")
+			addArtifact(intermediaryV2MergedMappingsJar, Classifiers.INTERMEDIARY_V2_MERGED)
 		}
 	}
 }

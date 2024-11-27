@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+}
+
+// these contain the classpath contents necessary for JavaExec tasks registered by buildSrc plugins
+configurations {
+    configurations.ext.classpathHolder = { String configName, String capabilityName ->
+        configurations.create(configName) {
+            canBeResolved = false
+
+            attributes.attribute Usage.USAGE_ATTRIBUTE, objects.named(Usage, Usage.JAVA_RUNTIME)
+
+            components.java.addVariantsFromConfiguration(it) { }
+
+            outgoing.capability "$group:$capabilityName:$version"
+        }
+    }
+
+    // for UnpickJarTask
+    classpathHolder 'unpickCli', "$name-unpick-cli"
+
+    // for EnigmaMappingsTask
+    classpathHolder 'enigmaSwing', "$name-enigma-swing"
+
+    // for EnigmaMappingsServerTask
+    classpathHolder 'enigmaServer', "$name-enigma-server"
+}
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name "Quilt Repository"
+        url "https://maven.quiltmc.org/repository/release"
+    }
+
+    maven {
+        name "Fabric Repository"
+        url 'https://maven.fabricmc.net'
+    }
+
+    // TODO remove when ASM fix is released
+    maven {
+        url = "https://repository.ow2.org/nexus/content/repositories/snapshots/"
+    }
+}
+
+dependencies {
+    unpickCli libs.unpick.cli
+
+    enigmaSwing libs.enigma.swing
+    enigmaSwing libs.enigma.plugin
+
+    enigmaServer libs.enigma.server
+    enigmaServer libs.enigma.plugin
+}
