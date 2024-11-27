@@ -27,7 +27,7 @@ public final class DownloadUtil {
                 """
                 Failed to download:
                 \tfrom: %s
-                \tto: %s
+                \tto: %s\
                 """.formatted(url, dest),
                 e
             );

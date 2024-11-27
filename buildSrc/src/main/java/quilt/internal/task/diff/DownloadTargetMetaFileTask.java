@@ -12,6 +12,7 @@ import quilt.internal.constants.Groups;
 import quilt.internal.plugin.TargetDiffPlugin;
 import quilt.internal.task.SimpleDownloadTask;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Comparator;
@@ -31,10 +32,15 @@ public abstract class DownloadTargetMetaFileTask extends SimpleDownloadTask {
     public abstract Property<String> getMinecraftVersion();
 
     public Provider<String> provideTargetVersion() {
-        return this.getDest().map(metaFile -> {
+        return this.getDest().map(metaDest -> {
             final JsonElement parsed;
             try {
-                parsed = JsonParser.parseReader(new FileReader(metaFile.getAsFile()));
+                final File metaFile = metaDest.getAsFile();
+                if (!metaFile.exists()) {
+                    return null;
+                }
+
+                parsed = JsonParser.parseReader(new FileReader(metaFile));
             } catch (FileNotFoundException e) {
                 throw new GradleException("Failed to open meta file", e);
             }
@@ -55,5 +61,14 @@ public abstract class DownloadTargetMetaFileTask extends SimpleDownloadTask {
         this.getUrl().convention(
             this.getMinecraftVersion().map(version -> "https://meta.quiltmc.org/v3/versions/quilt-mappings/" + version)
         );
+    }
+
+    @Override
+    public void download() {
+        try {
+            super.download();
+        } catch (GradleException e) {
+            this.getLogger().lifecycle(":target meta file unavailable");
+        }
     }
 }
