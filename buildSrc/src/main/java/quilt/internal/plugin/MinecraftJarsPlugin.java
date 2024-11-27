@@ -12,6 +12,7 @@ import quilt.internal.plugin.abstraction.DefaultExtensionedMappingsProjectPlugin
 import quilt.internal.task.VersionParserConsumingTask;
 import quilt.internal.task.setup.DownloadMinecraftJarsTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.task.setup.DownloadMojangMappingsTask;
 import quilt.internal.task.setup.DownloadWantedVersionManifestTask;
 import quilt.internal.task.setup.ExtractServerJarTask;
 import quilt.internal.task.setup.MergeJarsTask;
@@ -98,9 +99,9 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                     downloadMinecraftJars.flatMap(DownloadMinecraftJarsTask::getServerBootstrapJar)
                 );
 
-                task.getExtractionDest().convention(
-                    this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("-server." + Extensions.JAR))
-                );
+                task.getExtractionDest().convention(this.provideMinecraftBuildFile(
+                    quiltExt.provideSuffixedMinecraftVersion("-server." + Extensions.JAR)
+                ));
             }
         );
 
@@ -112,9 +113,9 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
 
                 task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
-                task.getMergedFile().convention(
-                    this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR))
-                );
+                task.getMergedFile().convention(this.provideMinecraftBuildFile(
+                quiltExt.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR)
+                ));
             }
         );
 
@@ -123,6 +124,20 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
             DownloadMinecraftLibrariesTask.class,
             task -> {
                 task.getLibrariesDir().convention(this.getMinecraftBuildDir().map(dir -> dir.dir("libraries")));
+            }
+        );
+
+        tasks.register(
+            DownloadMojangMappingsTask.DOWNLOAD_MOJANG_MAPPINGS_TASK_NAME,
+            DownloadMojangMappingsTask.class,
+            task -> {
+                task.getClientMappings().convention(
+                    this.getMinecraftBuildDir().map(dir -> dir.file("client." + Extensions.TXT))
+                );
+
+                task.getServerMappings().convention(
+                    this.getMinecraftBuildDir().map(dir -> dir.file("server." + Extensions.TXT))
+                );
             }
         );
 
