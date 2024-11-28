@@ -7,10 +7,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Optional;
+
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_OK;
 
 public final class DownloadUtil {
     private DownloadUtil() { }
@@ -93,5 +98,24 @@ public final class DownloadUtil {
      */
     public static URL urlOfUnhandled(String url) throws MalformedURLException, URISyntaxException {
         return new URI(url).toURL();
+    }
+
+    public static Optional<HttpURLConnection> openAvailableConnection(String httpUrl) {
+        return openAvailableConnection(urlOf(httpUrl));
+    }
+
+    public static Optional<HttpURLConnection> openAvailableConnection(URL httpUrl) {
+        try {
+            if (httpUrl.openConnection() instanceof HttpURLConnection connection) {
+                final int code = connection.getResponseCode();
+                if (code >= HTTP_OK && code < HTTP_BAD_REQUEST) {
+                    return Optional.of(connection);
+                }
+            }
+        } catch (IOException e) {
+            throw new GradleException("Failed to connect to url: " + httpUrl, e);
+        }
+
+        return Optional.empty();
     }
 }

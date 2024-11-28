@@ -28,7 +28,6 @@ import quilt.internal.task.decompile.DecompileVineflowerTask;
 import quilt.internal.task.diff.DecompileTargetVineflowerTask;
 import quilt.internal.task.diff.DiffDirectoriesTask;
 import quilt.internal.task.diff.DownloadTargetMappingJarTask;
-import quilt.internal.task.diff.DownloadTargetMetaFileTask;
 import quilt.internal.task.diff.ExtractTargetMappingJarTask;
 import quilt.internal.task.diff.RemapTargetMinecraftJarTask;
 import quilt.internal.task.diff.RemapTargetUnpickDefinitionsTask;
@@ -36,6 +35,7 @@ import quilt.internal.task.diff.TargetVersionConsumingTask;
 import quilt.internal.task.diff.UnpickTargetJarTask;
 import quilt.internal.task.diff.UnpickVersionsMatchConsumingTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
+import quilt.internal.util.TargetVersionSource;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -57,8 +57,7 @@ import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
  *          {@link TargetVersionConsumingTask}s with the following defaults:
  *          <ul>
  *              <li> {@link TargetVersionConsumingTask#getTargetVersion() targetVersion}:
- *                   {@value DownloadTargetMetaFileTask#DOWNLOAD_TARGET_META_FILE_TASK_NAME}'s
- *                   {@linkplain DownloadTargetMetaFileTask#provideTargetVersion() provided target version}
+ *                   a version obtained from a {@link TargetVersionSource}
  *              <li> run {@link Task#onlyIf(Spec) onlyIf} their
  *                   {@link TargetVersionConsumingTask#getTargetVersion() targetVersion}
  *                   {@link Provider#isPresent() isPresent}
@@ -100,22 +99,14 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
         final TaskContainer tasks = project.getTasks();
 
         {
-            final var downloadTargetMetaFile = tasks.register(
-                DownloadTargetMetaFileTask.DOWNLOAD_TARGET_META_FILE_TASK_NAME,
-                DownloadTargetMetaFileTask.class,
-                task -> {
-                    task.getMinecraftVersion().convention(quiltExt.getMinecraftVersion());
-
-                    task.getDest().convention(this.provideMinecraftBuildFile(
-                        task.getMinecraftVersion().map(createQuiltFileNameBuilder("." + Extensions.JSON))
-                    ));
-                }
-            );
-
-            // put mapped provider in a property so all tasks use the same cached value
             final Property<String> targetVersion = this.getObjects().property(String.class);
             targetVersion.set(
-                downloadTargetMetaFile.flatMap(DownloadTargetMetaFileTask::provideTargetVersion)
+                this.getProviders().of(
+                    TargetVersionSource.class,
+                    spec -> spec.parameters(params ->
+                        params.getMinecraftVersion().set(quiltExt.getMinecraftVersion())
+                    )
+                )
             );
 
             tasks.withType(TargetVersionConsumingTask.class).configureEach(task -> {
@@ -297,7 +288,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
                 return parsed.getAsJsonObject().get("unpickVersion").getAsString();
             })
-            .map(targetVersion -> targetVersion.equals(unpickVersion))
+            .map(targetUnpickVersion -> targetUnpickVersion.equals(unpickVersion))
             .orElse(false);
     }
 
