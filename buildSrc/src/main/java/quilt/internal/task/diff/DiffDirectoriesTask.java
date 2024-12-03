@@ -14,10 +14,8 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
-import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.options.Option;
 import quilt.internal.constants.Groups;
-import quilt.internal.plugin.TargetDiffPlugin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,11 +37,6 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  */
 @CacheableTask
 public abstract class DiffDirectoriesTask extends Exec {
-    /**
-     * {@linkplain TaskContainer#register Registered} by {@link TargetDiffPlugin}.
-     */
-    public static final String GENERATE_DIFF_TASK_NAME = "generateDiff";
-
     public static final String DIFF_COMMAND = "diff";
 
     private static final String DIFF_COMMAND_PHRASE = DIFF_COMMAND + " command";

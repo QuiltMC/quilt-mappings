@@ -27,6 +27,7 @@ import quilt.internal.task.build.MappingsV2JarTask;
 import quilt.internal.task.decompile.DecompileVineflowerTask;
 import quilt.internal.task.diff.DecompileTargetVineflowerTask;
 import quilt.internal.task.diff.DiffDirectoriesTask;
+import quilt.internal.task.diff.DiffTargetTask;
 import quilt.internal.task.diff.DownloadTargetMappingJarTask;
 import quilt.internal.task.diff.ExtractTargetMappingJarTask;
 import quilt.internal.task.diff.RemapTargetMinecraftJarTask;
@@ -46,7 +47,7 @@ import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
 /**
  * {@linkplain TaskContainer#register Registers} tasks that download the latest published Quilt Mappings for the current
  * {@link QuiltMappingsExtension#getMinecraftVersion() minecraftVersion} so the
- * {@value DiffDirectoriesTask#GENERATE_DIFF_TASK_NAME} task can {@value DiffDirectoriesTask#DIFF_COMMAND}
+ * {@value DiffTargetTask#DIFF_TARGET_TASK_NAME} task can {@value DiffDirectoriesTask#DIFF_COMMAND}
  * them with this project's mappings.
  * <p>
  * The generated {@value DiffDirectoriesTask#DIFF_COMMAND} is useful when reviewing new mappings.
@@ -238,8 +239,8 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
 
         // TODO LATER use this in generate-diff.yml
         tasks.register(
-            DiffDirectoriesTask.GENERATE_DIFF_TASK_NAME,
-            DiffDirectoriesTask.class,
+            DiffTargetTask.DIFF_TARGET_TASK_NAME,
+            DiffTargetTask.class,
             task -> {
                 task.getAdditionalArgs().add("-bur");
 
