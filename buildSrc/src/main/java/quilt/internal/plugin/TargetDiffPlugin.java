@@ -3,6 +3,7 @@ package quilt.internal.plugin;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.gradle.api.Action;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -20,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import quilt.internal.constants.Constants;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.extension.QuiltMappingsExtension;
 import quilt.internal.decompile.javadoc.MappingsJavadocProvider;
 import quilt.internal.plugin.abstraction.MappingsProjectPlugin;
@@ -40,6 +42,7 @@ import quilt.internal.util.TargetVersionSource;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 
 import static quilt.internal.constants.Constants.UNPICK_NAME;
 import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
@@ -47,8 +50,8 @@ import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
 /**
  * {@linkplain TaskContainer#register Registers} tasks that download the latest published Quilt Mappings for the current
  * {@link QuiltMappingsExtension#getMinecraftVersion() minecraftVersion} so the
- * {@value DiffTargetTask#DIFF_TARGET_TASK_NAME} task can {@value DiffDirectoriesTask#DIFF_COMMAND}
- * them with this project's mappings.
+ * {@value DiffTargetTask#DIFF_TARGET_TASK_NAME} (or {@value #LAZILY_DIFF_TARGET_TASK_NAME}) task can
+ * {@value DiffDirectoriesTask#DIFF_COMMAND} them with this project's mappings.
  * <p>
  * The generated {@value DiffDirectoriesTask#DIFF_COMMAND} is useful when reviewing new mappings.
  * <p>
@@ -80,6 +83,16 @@ import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
  * </ul>
  */
 public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
+    /**
+     * A wrapper for {@value DiffTargetTask#DIFF_TARGET_TASK_NAME} that conditionally depends on
+     * {@value DiffTargetTask#DIFF_TARGET_TASK_NAME} only if its
+     * {@link TargetVersionConsumingTask#getTargetVersion() targetVersion} {@link Provider#isPresent() isPresent}.
+     * <p>
+     * This is a hack to prevent unnecessarily generating sources using local mappings when
+     * {@link TargetVersionConsumingTask#getTargetVersion() targetVersion} isn't present.
+     */
+    public static final String LAZILY_DIFF_TARGET_TASK_NAME = "lazilyDiffTarget";
+
     @Override
     public void apply(@NotNull Project project) {
         final PluginContainer plugins = project.getPlugins();
@@ -232,13 +245,12 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                         .map(dest -> dest.file(JAR_MAPPINGS_PATH))
                 ));
 
-                // TODO LATER move this to build/ once generate-diff.yml uses generateDiff
+                // TODO LATER move this to build/ once generate-diff.yml uses lazilyDiffTarget
                 task.getOutput().convention(this.getProjectDir().dir("namedTargetSrc"));
             }
         );
 
-        // TODO LATER use this in generate-diff.yml
-        tasks.register(
+        final var diffTarget = tasks.register(
             DiffTargetTask.DIFF_TARGET_TASK_NAME,
             DiffTargetTask.class,
             task -> {
@@ -249,6 +261,25 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 task.getSecond().convention(decompileVineflower.flatMap(DecompileVineflowerTask::getOutput));
 
                 task.getDest().convention(this.getBuildDir().file("target.diff"));
+            }
+        );
+
+        // TODO LATER use this in generate-diff.yml
+        tasks.register(
+            LAZILY_DIFF_TARGET_TASK_NAME,
+            DefaultTask.class,
+            task -> {
+                task.setGroup(Groups.DIFF);
+
+                // This provider is safe to get at configuration time because it comes from a ValueSource.
+                // Configuring diffTarget's targetVersion to a provider mapped from a task output would break this.
+                final Property<String> targetVersion = diffTarget.get().getTargetVersion();
+                targetVersion.finalizeValue();
+                final boolean targetVersionPresent = targetVersion.isPresent();
+
+                task.setEnabled(targetVersionPresent);
+
+                task.dependsOn(targetVersionPresent ? diffTarget : Collections.emptyList());
             }
         );
     }
