@@ -8,7 +8,7 @@ import quilt.internal.task.decompile.DecompileVineflowerTask;
  * @see TargetDiffPlugin TargetDiffPlugin's configureEach
  */
 public abstract class DecompileTargetVineflowerTask extends DecompileVineflowerTask implements
-        TargetVersionConsumingTask {
+        UnpickVersionsMatchConsumingTask {
     /**
      * {@linkplain TaskContainer#register Registered} by {@link TargetDiffPlugin}.
      */

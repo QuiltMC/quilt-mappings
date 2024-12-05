@@ -18,6 +18,7 @@ import org.gradle.api.tasks.options.Option;
 import quilt.internal.constants.Groups;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -108,19 +109,24 @@ public abstract class DiffDirectoriesTask extends Exec {
     @Override
     @TaskAction
     public void exec() {
+        final File dest;
         try {
-            final File dest = this.getDest().get().getAsFile();
+            dest = this.getDest().get().getAsFile();
 
             dest.getParentFile().mkdirs();
 
             dest.createNewFile();
-
-            this.setStandardOutput(new FileOutputStream(dest.getAbsolutePath()));
         } catch (IOException e) {
-            throw new GradleException("Failed to access destination file", e);
+            throw new GradleException("Failed to create destination file", e);
         }
 
-        super.exec();
+        try (var out = new FileOutputStream(dest.getAbsolutePath())) {
+            this.setStandardOutput(out);
+
+            super.exec();
+        } catch (IOException e) {
+            throw new GradleException("Failed to write to destination", e);
+        }
 
         final int exitValue = this.getExecutionResult().get().getExitValue();
         switch (exitValue) {
