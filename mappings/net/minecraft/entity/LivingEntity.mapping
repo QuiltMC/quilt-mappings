@@ -21,6 +21,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_glylybzo lastDamageTime J
 	FIELD f_gmsrgmfi leaningPitch F
 	FIELD f_hdvyydom MAX_VISIBILITY_TEST_RANGE D
+	FIELD f_hhueawxl attackingPlayer Lnet/minecraft/unmapped/C_xolbcmjn;
 	FIELD f_hkjqagmp DEFAULT_BABY_SCALE F
 	FIELD f_hoaujqhj handSwingTicks I
 	FIELD f_iiiqnngu SPRINTING_SPEED_BOOST Lnet/minecraft/unmapped/C_hdbqsqsm;
@@ -92,6 +93,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_ysdmvlsq equippedHand Lnet/minecraft/unmapped/C_rnrfftze;
 	FIELD f_zgtmqjrv HEALTH Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_zkhdmkcl ARMOR_SLOT_OFFSET I
+	FIELD f_ztvierdp attacker Lnet/minecraft/unmapped/C_xolbcmjn;
 	FIELD f_zuarxhuv damageTracker Lnet/minecraft/unmapped/C_xkhemiqp;
 	FIELD f_zzzdmler OFF_HAND_ACTIVE_FLAG I
 	METHOD m_aabhytmz clearSleepingPosition ()V
@@ -393,6 +395,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_otdsojah tickNewAi ()V
 	METHOD m_oymopclz generateLoot (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbxfkpyv;Z)V
 		ARG 3 fromPlayer
+	METHOD m_ozivsxrd turnHead (F)V
+		ARG 1 bodyRotation
 	METHOD m_pdfqoxex travel (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		COMMENT Allows you to do certain speed and velocity calculations. This is useful for custom vehicle behavior, or custom entity movement. This is not to be confused with AI.
 		COMMENT
@@ -570,6 +574,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_whvujbsh dropInventory (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_widuipxk getAttributes ()Lnet/minecraft/unmapped/C_cohbwqne;
 	METHOD m_wjvypezh getRoll ()I
+	METHOD m_wkgrdcha fallFlyTravel (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 	METHOD m_wmvelibz isHoldingOntoLadder ()Z
 		COMMENT @return {@code true} if this entity should not lose height while in a climbing state
 		COMMENT @see net.minecraft.entity.LivingEntity
