@@ -14,12 +14,11 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
-import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.options.Option;
 import quilt.internal.constants.Groups;
-import quilt.internal.plugin.TargetDiffPlugin;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,11 +38,6 @@ import static quilt.internal.util.ProviderUtil.toOptional;
  */
 @CacheableTask
 public abstract class DiffDirectoriesTask extends Exec {
-    /**
-     * {@linkplain TaskContainer#register Registered} by {@link TargetDiffPlugin}.
-     */
-    public static final String GENERATE_DIFF_TASK_NAME = "generateDiff";
-
     public static final String DIFF_COMMAND = "diff";
 
     private static final String DIFF_COMMAND_PHRASE = DIFF_COMMAND + " command";
@@ -115,19 +109,24 @@ public abstract class DiffDirectoriesTask extends Exec {
     @Override
     @TaskAction
     public void exec() {
+        final File dest;
         try {
-            final File dest = this.getDest().get().getAsFile();
+            dest = this.getDest().get().getAsFile();
 
             dest.getParentFile().mkdirs();
 
             dest.createNewFile();
-
-            this.setStandardOutput(new FileOutputStream(dest.getAbsolutePath()));
         } catch (IOException e) {
-            throw new GradleException("Failed to access destination file", e);
+            throw new GradleException("Failed to create destination file", e);
         }
 
-        super.exec();
+        try (var out = new FileOutputStream(dest.getAbsolutePath())) {
+            this.setStandardOutput(out);
+
+            super.exec();
+        } catch (IOException e) {
+            throw new GradleException("Failed to write to destination", e);
+        }
 
         final int exitValue = this.getExecutionResult().get().getExitValue();
         switch (exitValue) {

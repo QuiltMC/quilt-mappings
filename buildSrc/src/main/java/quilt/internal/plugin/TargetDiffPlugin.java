@@ -27,8 +27,10 @@ import quilt.internal.task.build.MappingsV2JarTask;
 import quilt.internal.task.decompile.DecompileVineflowerTask;
 import quilt.internal.task.diff.DecompileTargetVineflowerTask;
 import quilt.internal.task.diff.DiffDirectoriesTask;
+import quilt.internal.task.diff.DiffTargetTask;
 import quilt.internal.task.diff.DownloadTargetMappingJarTask;
 import quilt.internal.task.diff.ExtractTargetMappingJarTask;
+import quilt.internal.task.diff.LazilyDiffTargetTask;
 import quilt.internal.task.diff.RemapTargetMinecraftJarTask;
 import quilt.internal.task.diff.RemapTargetUnpickDefinitionsTask;
 import quilt.internal.task.diff.TargetVersionConsumingTask;
@@ -39,6 +41,7 @@ import quilt.internal.util.TargetVersionSource;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 
 import static quilt.internal.constants.Constants.UNPICK_NAME;
 import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
@@ -46,8 +49,9 @@ import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
 /**
  * {@linkplain TaskContainer#register Registers} tasks that download the latest published Quilt Mappings for the current
  * {@link QuiltMappingsExtension#getMinecraftVersion() minecraftVersion} so the
- * {@value DiffDirectoriesTask#GENERATE_DIFF_TASK_NAME} task can {@value DiffDirectoriesTask#DIFF_COMMAND}
- * them with this project's mappings.
+ * {@value DiffTargetTask#DIFF_TARGET_TASK_NAME}
+ * (or {@value LazilyDiffTargetTask#LAZILY_DIFF_TARGET_TASK_NAME}) task can
+ * {@value DiffDirectoriesTask#DIFF_COMMAND} them with this project's mappings.
  * <p>
  * The generated {@value DiffDirectoriesTask#DIFF_COMMAND} is useful when reviewing new mappings.
  * <p>
@@ -231,15 +235,14 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                         .map(dest -> dest.file(JAR_MAPPINGS_PATH))
                 ));
 
-                // TODO LATER move this to build/ once generate-diff.yml uses generateDiff
+                // TODO LATER move this to build/ once generate-diff.yml uses lazilyDiffTarget
                 task.getOutput().convention(this.getProjectDir().dir("namedTargetSrc"));
             }
         );
 
-        // TODO LATER use this in generate-diff.yml
-        tasks.register(
-            DiffDirectoriesTask.GENERATE_DIFF_TASK_NAME,
-            DiffDirectoriesTask.class,
+        final var diffTarget = tasks.register(
+            DiffTargetTask.DIFF_TARGET_TASK_NAME,
+            DiffTargetTask.class,
             task -> {
                 task.getAdditionalArgs().add("-bur");
 
@@ -248,6 +251,26 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 task.getSecond().convention(decompileVineflower.flatMap(DecompileVineflowerTask::getOutput));
 
                 task.getDest().convention(this.getBuildDir().file("target.diff"));
+            }
+        );
+
+        // TODO LATER use this in generate-diff.yml
+        tasks.register(
+            LazilyDiffTargetTask.LAZILY_DIFF_TARGET_TASK_NAME,
+            LazilyDiffTargetTask.class,
+            task -> {
+                // This provider is safe to get when dependOn is evaluated because it comes from a ValueSource.
+                // Configuring diffTarget's targetVersion to a provider mapped from a task output would break this.
+                task.dependsOn(this.getProviders().provider(() -> {
+                    final Property<String> targetVersion = diffTarget.get().getTargetVersion();
+                    targetVersion.finalizeValue();
+
+                    if (targetVersion.isPresent()) {
+                        return diffTarget;
+                    } else {
+                        return Collections.emptyList();
+                    }
+                }));
             }
         );
     }
