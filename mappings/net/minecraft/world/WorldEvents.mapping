@@ -40,7 +40,7 @@ CLASS net/minecraft/unmapped/C_kkbhcwdu net/minecraft/world/WorldEvents
 		COMMENT <br>Plays the dispenser fail sound event.
 		COMMENT <p>Called by {@link net.minecraft.block.dispenser.DispenserBlock#dispense(net.minecraft.server.world.ServerWorld, net.minecraft.block.BlockState, net.minecraft.util.math.BlockPos) DispenserBlock#dispense},
 		COMMENT {@link net.minecraft.block.DropperBlock#dispense(net.minecraft.server.world.ServerWorld, net.minecraft.block.BlockState, net.minecraft.util.math.BlockPos) DropperBlock#dispense},
-		COMMENT and {@link net.minecraft.block.dispenser.FallibleItemDispenserBehavior#playSound(net.minecraft.util.math.BlockPointer) FallibleItemDispenserBehavior#playSound}
+		COMMENT and {@link net.minecraft.block.dispenser.FallibleDispenserBehavior#playSound(net.minecraft.block.dispenser.DispenserContext) FallibleDispenserBehavior#playSound}
 	FIELD f_dxpbmduz HUSK_CONVERTS_TO_ZOMBIE I
 		COMMENT A Husk converts into a Zombie.
 		COMMENT <br>Plays the husk convert to zombie sound event.
@@ -100,9 +100,9 @@ CLASS net/minecraft/unmapped/C_kkbhcwdu net/minecraft/world/WorldEvents
 	FIELD f_hcwfwxmp DISPENSER_DISPENSES I
 		COMMENT A Dispenser dispenses an item.
 		COMMENT <br>Plays the dispensing sound event.
-		COMMENT <p>Called by {@link net.minecraft.block.dispenser.BoatDispenserBehavior#playSound(net.minecraft.util.math.BlockPointer) BoatDispenserBehavior#playSound},
-		COMMENT {@link net.minecraft.block.dispenser.FallibleItemDispenserBehavior#playSound(net.minecraft.util.math.BlockPointer) FallibleItemDispenserBehavior#playSound},
-		COMMENT and {@link net.minecraft.block.dispenser.ItemDispenserBehavior#playSound(net.minecraft.util.math.BlockPointer) ItemDispenserBehavior#playSound}
+		COMMENT <p>Called by {@link net.minecraft.block.dispenser.BoatDispenserBehavior#playSound(net.minecraft.block.dispenser.DispenserContext) BoatDispenserBehavior#playSound},
+		COMMENT {@link net.minecraft.block.dispenser.FallibleDispenserBehavior#playSound(net.minecraft.block.dispenser.DispenserContext) FallibleItemDispenserBehavior#playSound},
+		COMMENT and {@link net.minecraft.block.dispenser.DefaultDispenserBehavior#playSound(net.minecraft.block.dispenser.DispenserContext) ItemDispenserBehavior#playSound}
 	FIELD f_inmlykmt ENDER_DRAGON_BREAKS_BLOCK I
 		COMMENT An Ender Dragon breaks a block.
 		COMMENT <br>Spawns an explosion particle.
@@ -149,7 +149,7 @@ CLASS net/minecraft/unmapped/C_kkbhcwdu net/minecraft/world/WorldEvents
 		COMMENT Bone meal is used.
 		COMMENT <br>Plays the bone meal item used sound event and spawns happy villager particles.
 		COMMENT <p>Called by {@link net.minecraft.item.BoneMealItem#useOnBlock(net.minecraft.item.ItemUsageContext) BoneMealItem#useOnBlock},
-		COMMENT an anonymus class in {@link net.minecraft.block.dispenser.DispenserBehavior#registerDefaults() DispenserBehavior#registerDefaults},
+		COMMENT an anonymus class in {@link net.minecraft.block.dispenser.DispenserBehavior#bootstrap() DispenserBehavior#bootstrap},
 		COMMENT and {@link net.minecraft.entity.ai.brain.task.BoneMealTask#keepRunning(net.minecraft.server.world.ServerWorld, net.minecraft.entity.passive.VillagerEntity, long) BoneMealTask#keepRunning}
 	FIELD f_mraaptwq TRIAL_SPAWNER_DETECTS_PLAYER I
 	FIELD f_mwaqmoge DISPENSER_LAUNCHES_PROJECTILE I
