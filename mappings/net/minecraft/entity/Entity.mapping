@@ -94,6 +94,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ssljujsr LOGGER Lorg/slf4j/Logger;
 	FIELD f_tigrjjuw DEFAULT_BOUNDING_BOX_WIDTH F
 	FIELD f_tklhtpht entityChangeListener Lnet/minecraft/unmapped/C_ylpvpknw;
+	FIELD f_ujsjgylb fallDistance D
 	FIELD f_vdsiqqmt prevPitch F
 	FIELD f_vettyvgp hasVisualFire Z
 	FIELD f_vlasppic pistonMovementTick J
@@ -437,6 +438,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_iseshnfi isSpectator ()Z
 	METHOD m_iybimkec shouldApplyBlockCollisionEffects ()Z
 	METHOD m_iznakrow removeFromDimension ()V
+	METHOD m_izrsdktf handleFallDamage (DFLnet/minecraft/unmapped/C_sbxfkpyv;)Z
+		ARG 3 fallDistance
+		ARG 4 damageSource
 	METHOD m_jaflucyh canSprintAsVehicle ()Z
 	METHOD m_jaiycnbg damageClient (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		ARG 1 source
@@ -478,6 +482,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_krfnmqpx updateKilledAdvancementCriterion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 killer
 		ARG 2 score
+	METHOD m_ksoidzkr collides (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Ljava/util/List;)Z
+		ARG 1 oldPos
+		ARG 2 newPos
 	METHOD m_kvelccqq applyMirror (Lnet/minecraft/unmapped/C_qomzaqud;)F
 		ARG 1 mirror
 	METHOD m_kvxkjouy setFireTicks (I)V
@@ -856,6 +863,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_wjodonhd isInvisible ()Z
 	METHOD m_wkqvrgdz canAddPassenger (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 1 passenger
+	METHOD m_wmrqudhe checkBlockCollisions (Ljava/util/List;Lnet/minecraft/unmapped/C_astfners$C_oyjomgjq;)V
+		ARG 1 collisionChecks
 	METHOD m_wmxlrpiw getPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT {@return the position in the world of this entity}
 	METHOD m_wnmvwdkc playSwimSound ()V
