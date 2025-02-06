@@ -52,6 +52,7 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 		ARG 2 wave
 		ARG 3 extra
 	METHOD m_ciifszic isActive ()Z
+	METHOD m_cysuwdln markDirty (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_dllpoezn getCaptain (I)Lnet/minecraft/unmapped/C_iaguvmwh;
 		ARG 1 wave
 	METHOD m_dudktkmw isFinished ()Z
@@ -61,15 +62,23 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 		ARG 1 entity
 	METHOD m_gkjhoeun setBadOmenLevel (I)V
 		ARG 1 level
+	METHOD m_hnnchmuz playRaidHorn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 2 pos
 	METHOD m_hvxdnwas isPreRaid ()Z
 	METHOD m_iarhyjws hasSpawnedExtraWave ()Z
 	METHOD m_ihifrprf invalidate ()V
+	METHOD m_ilwmzynv removeObsoleteRaiders (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
+	METHOD m_jnntkqxs getRavagerSpawnLocation (Lnet/minecraft/unmapped/C_bdwnwhiu;I)Lnet/minecraft/unmapped/C_hynzadkk;
+		ARG 2 proximity
+	METHOD m_jvxffxut tick (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_kkhfgadp start (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
 	METHOD m_mesmxuol getCenter ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_msoysvru hasSpawnedFinalWave ()Z
 	METHOD m_mwiqgpfz isInRaidDistance ()Ljava/util/function/Predicate;
+	METHOD m_ncpwdmit preCalculateRavagerSpawnLocation (Lnet/minecraft/unmapped/C_bdwnwhiu;)Ljava/util/Optional;
 	METHOD m_nodtgeic updateBar ()V
 	METHOD m_odulvant getRaiderCount ()I
+	METHOD m_ohbdkubj moveRaidCenter (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_ohyrjokd removeLeader (I)V
 		ARG 1 wave
 	METHOD m_orpkrvnp setWaveCaptain (ILnet/minecraft/unmapped/C_iaguvmwh;)V
@@ -79,16 +88,27 @@ CLASS net/minecraft/unmapped/C_szefbyex net/minecraft/village/raid/Raid
 		ARG 1 center
 	METHOD m_pbwmgtdj createOminousBanner (Lnet/minecraft/unmapped/C_pzdchrcy;)Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_pcjjizjn getGroupsSpawned ()I
+	METHOD m_prgonsry addRaider (Lnet/minecraft/unmapped/C_bdwnwhiu;ILnet/minecraft/unmapped/C_iaguvmwh;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
+		ARG 2 wave
+		ARG 3 raider
+		ARG 4 pos
+		ARG 5 existing
+	METHOD m_rshbtejz spawnNextWave (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 2 pos
 	METHOD m_rvyhugft hasLost ()Z
 	METHOD m_sxehawhg getEnchantmentChance ()F
 	METHOD m_upnrpmew hasSpawned ()Z
 	METHOD m_vvadisvs isSpawningExtraWave ()Z
 	METHOD m_vzteskok hasWon ()Z
 	METHOD m_wfjndsvw hasExtraWave ()Z
+	METHOD m_ykzdnyxz updateBarToPlayers (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_yondxzyr getMaxWaves (Lnet/minecraft/unmapped/C_mpbjgxic;)I
 		ARG 1 difficulty
 	METHOD m_yonjbfvp getAllRaiders ()Ljava/util/Set;
 	METHOD m_zagijkkj hasStarted ()Z
+	METHOD m_zdjkplmy removeFromWave (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_iaguvmwh;Z)V
+		ARG 2 entity
+		ARG 3 countHealth
 	METHOD m_zfqbnypl getTotalHealth ()F
 	METHOD m_zmfpxjlb hasStopped ()Z
 	METHOD m_zpxnmupw canSpawnRaiders ()Z
