@@ -91,8 +91,12 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 heightmapType
 		ARG 2 x
 		ARG 3 z
+	METHOD m_gjrrggxd getEntity (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_grulnbqw setLowHealth (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_usxaxydn;
 		ARG 1 entity
+	METHOD m_gscthheo (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)I
+		ARG 1 left
+		ARG 2 right
 	METHOD m_gsrdhesf expectContainerWith (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_vorddnax;)V
 		ARG 1 pos
 		ARG 2 item
@@ -125,6 +129,15 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_kvfnkfpy createPositionedException (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_rfnivdbk;
 	METHOD m_ljtglfiu failIf (Ljava/lang/Runnable;)V
 		ARG 1 assertion
+	METHOD m_lpzqvmww getEntities (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vgpupfxx;D)Ljava/util/List;
+		COMMENT Gets all entities of the passed {@code type} within the passed {@code range}
+		COMMENT of the passed {@code pos}.<br>
+		COMMENT The searched volume is a cube with side length {@code 2 * range} centered on
+		COMMENT the passed {@code pos}.<br>
+		COMMENT Only {@linkplain net.minecraft.entity.Entity#isAlive() living}
+		COMMENT entities are included.
+		ARG 1 type
+		ARG 3 range
 	METHOD m_mbwngbkd useBlock (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 2 player
 	METHOD m_mdidoddl failIfEver (Ljava/lang/Runnable;)V
@@ -180,6 +193,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_pnwfnpgr onEachTick (Ljava/lang/Runnable;)V
 		ARG 1 task
 	METHOD m_prxxdiqp createException (Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/unmapped/C_otqlbxyg;
+	METHOD m_pvmdhspp damage (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 	METHOD m_pwjisoih expectEntityToTouch (Lnet/minecraft/unmapped/C_ogavsvbr;DDD)V
 		ARG 1 testedType
 		ARG 2 x
@@ -280,6 +294,10 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_whzpqrkd succeedWhenBlockExists (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 block
 		ARG 2 pos
+	METHOD m_wnsmvzzz getEntities (Lnet/minecraft/unmapped/C_ogavsvbr;IIID)Ljava/util/List;
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
 	METHOD m_wsatanfq expectNoEntityAt (Lnet/minecraft/unmapped/C_ogavsvbr;III)V
 		ARG 1 testedType
 		ARG 2 x
@@ -300,11 +318,23 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
+	METHOD m_xzgypwhm kill (Lnet/minecraft/unmapped/C_astfners;)V
 	METHOD m_ypdbgair expectSameStates (Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 checkedBlockBox
 		ARG 2 correctStatePos
 	METHOD m_yuvbhzzq (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 entity
+	METHOD m_yyaycipv getEntity (Lnet/minecraft/unmapped/C_ogavsvbr;IIID)Lnet/minecraft/unmapped/C_astfners;
+		COMMENT Gets a single entity of the passed {@code type} within the passed {@code range}
+		COMMENT of the passed {@code x}, {@code y}, and {@code z} coordinates.<br>
+		COMMENT Fails if either no entities or more than one entity of the passed {@code type}
+		COMMENT is found.
+		COMMENT
+		COMMENT @see net.minecraft.test.TestContext#getEntities(EntityType, Vec3d, double)
+		COMMENT getEntities(EntityType, Vec3d, double) for more details
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
 	METHOD m_yyyvrxkj expectEntities (Lnet/minecraft/unmapped/C_ogavsvbr;I)V
 		ARG 1 testType
 		ARG 2 expectedTotalCount
