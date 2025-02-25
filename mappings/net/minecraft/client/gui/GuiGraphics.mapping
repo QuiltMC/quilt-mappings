@@ -26,7 +26,6 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 text
 		ARG 3 centerX
 		ARG 4 y
-		ARG 5 color
 	METHOD m_aqwpauhl getMatrices ()Lnet/minecraft/unmapped/C_cnszsxvd;
 	METHOD m_bkqdhrbo drawItem (Lnet/minecraft/unmapped/C_sddaxwyk;II)V
 		ARG 1 stack
@@ -52,27 +51,24 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 4 endX
 		ARG 5 endY
 		ARG 6 z
-		ARG 7 startColor
-		ARG 8 endColor
+		ARG 7 startArgb
+		ARG 8 endArgb
 	METHOD m_drzxcihj drawText (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_apvkgwyi;IIIZ)I
 		ARG 1 renderer
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
-		ARG 5 color
 		ARG 6 shadowed
 	METHOD m_dtzkkevs drawCenteredShadowedText (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_apvkgwyi;III)V
 		ARG 1 renderer
 		ARG 2 text
 		ARG 3 centerX
 		ARG 4 y
-		ARG 5 color
 	METHOD m_eahpxxls drawText (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/lang/String;IIIZ)I
 		ARG 1 renderer
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
-		ARG 5 color
 		ARG 6 shadowed
 	METHOD m_ebuaeomg drawTooltip (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/util/List;Ljava/util/Optional;II)V
 		ARG 1 textRenderer
@@ -85,14 +81,15 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
-		ARG 5 color
 	METHOD m_elwzmupc drawVerticalLine (Lnet/minecraft/unmapped/C_tizlwnnv;IIII)V
 		ARG 1 layer
 		ARG 2 x
 		ARG 3 startY
 		ARG 4 endY
-		ARG 5 color
+		ARG 5 argb
 	METHOD m_eqooacma getScaledWindowWidth ()I
+	METHOD m_exdtewmm drawWrappedShadowedText (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_xzalvetc;IIII)V
+	METHOD m_fgoqvxux drawTexture (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ncpywfca;IIFFIIIIIII)V
 	METHOD m_fppvckue drawItemWithoutEntity (Lnet/minecraft/unmapped/C_sddaxwyk;III)V
 		ARG 2 x
 		ARG 3 y
@@ -104,7 +101,6 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
-		ARG 5 color
 	METHOD m_gkkozeoj drawOrderedTooltip (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/util/List;II)V
 		ARG 1 textRenderer
 		ARG 2 tooltip
@@ -117,32 +113,23 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 4 x2
 		ARG 5 y2
 		ARG 6 z
-		ARG 7 color
+		ARG 7 argb
 	METHOD m_hqomnrdc drawVerticalLine (IIII)V
 		ARG 1 x
 		ARG 2 startY
 		ARG 3 endY
-		ARG 4 color
 	METHOD m_htkumxha fillGradient (IIIIII)V
-		ARG 1 startX
-		ARG 2 startY
-		ARG 3 endX
-		ARG 4 endY
-		ARG 5 startColor
-		ARG 6 endColor
 	METHOD m_igbamavo fill (IIIIII)V
 		ARG 1 x1
 		ARG 2 y1
 		ARG 3 x2
 		ARG 4 y2
 		ARG 5 z
-		ARG 6 color
 	METHOD m_iyiasovk drawText (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_rdaqiwdt;IIIZ)I
 		ARG 1 renderer
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
-		ARG 5 color
 		ARG 6 shadowed
 	METHOD m_izryvoaf drawItem (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;IIII)V
 		ARG 1 entity
@@ -158,6 +145,13 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
+	METHOD m_kpwmfaru drawGuiTexture (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ncpywfca;IIIII)V
+		ARG 1 getTextureLayer
+		ARG 3 x
+		ARG 4 y
+		ARG 5 width
+		ARG 6 height
+		ARG 7 argb
 	METHOD m_mkpgruvf drawTooltip (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/util/List;Lnet/minecraft/unmapped/C_imjripdz;II)V
 		ARG 1 textRenderer
 		ARG 2 tooltip
@@ -182,20 +176,14 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 1 textRenderer
 		ARG 3 x
 		ARG 4 y
+	METHOD m_oikvgwpo (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ncpywfca;IIIIFFFFI)V
+		ARG 1 getTextureLayer
 	METHOD m_pqueyzid drawCenteredShadowedText (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/lang/String;III)V
 		ARG 1 renderer
 		ARG 2 text
 		ARG 3 centerX
 		ARG 4 y
-		ARG 5 color
 	METHOD m_pqwsozot fillGradient (IIIIIII)V
-		ARG 1 startX
-		ARG 2 startY
-		ARG 3 endX
-		ARG 4 endY
-		ARG 5 z
-		ARG 6 startColor
-		ARG 7 endColor
 	METHOD m_pwihpxdk disableScissor ()V
 	METHOD m_qsqjleim fillRenderLayer (Lnet/minecraft/unmapped/C_tizlwnnv;IIIII)V
 		ARG 1 layer
@@ -209,12 +197,14 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 2 y1
 		ARG 3 x2
 		ARG 4 y2
-		ARG 5 color
+	METHOD m_qvdirkns drawStretchedSprite (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_uflrwbwt;IIIII)V
+		ARG 2 sprite
 	METHOD m_qzfxvtcq drawItem (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sddaxwyk;III)V
 		ARG 1 entity
 		ARG 3 x
 		ARG 4 y
 		ARG 5 seed
+	METHOD m_rixppaza drawGuiTexture (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ncpywfca;IIII)V
 	METHOD m_roxvdzgq enableScissor (IIII)V
 		ARG 1 x1
 		ARG 2 y1
@@ -226,13 +216,17 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 y1
 		ARG 4 x2
 		ARG 5 y2
-		ARG 6 color
+	METHOD m_skyykpog drawWrappedText (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_xzalvetc;IIIIZ)V
+		ARG 3 x
+		ARG 4 y
+		ARG 6 argb
+		ARG 7 shadowed
 	METHOD m_sudqwiay drawHorizontalLine (Lnet/minecraft/unmapped/C_tizlwnnv;IIII)V
 		ARG 1 layer
 		ARG 2 startX
 		ARG 3 endX
 		ARG 4 y
-		ARG 5 color
+		ARG 5 argb
 	METHOD m_svnmgxlh drawItem (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;III)V
 		ARG 1 entity
 		ARG 4 x
@@ -244,7 +238,7 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 3 x
 		ARG 4 y
 		ARG 5 width
-		ARG 6 color
+		ARG 6 argb
 	METHOD m_tlyyxcls drawTooltip (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_rdaqiwdt;II)V
 		ARG 1 textRenderer
 		ARG 2 text
@@ -255,42 +249,34 @@ CLASS net/minecraft/unmapped/C_sedilmty net/minecraft/client/gui/GuiGraphics
 		ARG 1 startX
 		ARG 2 endX
 		ARG 3 y
-		ARG 4 color
 	METHOD m_vhjbvjfc drawShadowedText (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_apvkgwyi;III)I
 		ARG 1 renderer
 		ARG 2 text
 		ARG 3 x
 		ARG 4 y
-		ARG 5 color
 	METHOD m_vykpaeif fillGradient (Lnet/minecraft/unmapped/C_tizlwnnv;IIIIIII)V
 		ARG 1 layer
-		ARG 2 startX
-		ARG 3 startY
-		ARG 4 endX
-		ARG 5 endY
-		ARG 6 startColor
-		ARG 7 endColor
-		ARG 8 z
 	METHOD m_ydjpndiv drawBorder (IIIII)V
 		ARG 1 x
 		ARG 2 y
 		ARG 3 width
 		ARG 4 height
-		ARG 5 color
 	METHOD m_yrmetwxg drawNineSlicedSprite (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_uflrwbwt;Lnet/minecraft/unmapped/C_ctosjovs$C_ycdqkkvr;IIIII)V
 		ARG 2 sprite
 		ARG 3 nineSlice
 		ARG 4 x
 		ARG 5 y
-		ARG 6 z
-		ARG 7 width
-		ARG 8 height
+		ARG 6 width
+		ARG 7 height
+		ARG 8 argb
 	METHOD m_zpgnewud drawTooltip (Lnet/minecraft/unmapped/C_mavozmpp;Ljava/util/List;IILnet/minecraft/unmapped/C_imjripdz;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 textRenderer
 		ARG 2 tooltip
 		ARG 3 x
 		ARG 4 y
 		ARG 5 positioner
+	METHOD m_zrsopato (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ncpywfca;IIIIIIII)V
+		ARG 1 getTextureLayer
 	METHOD m_zumlicds renderHoverEffect (Lnet/minecraft/unmapped/C_mavozmpp;Lnet/minecraft/unmapped/C_cpwnhism;II)V
 		ARG 1 textRenderer
 		ARG 2 style
