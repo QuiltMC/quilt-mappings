@@ -3,6 +3,11 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	FIELD f_vrgpmicj test Lnet/minecraft/unmapped/C_agwojffm;
 	METHOD <init> (Lnet/minecraft/unmapped/C_agwojffm;)V
 		ARG 1 test
+	METHOD m_abxgdwsl expectSingleContainedItem (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_vorddnax;)V
+		COMMENT Fails if there is not a
+		COMMENT {@link net.minecraft.block.entity.LockableContainerBlockEntity LockableContainerBlockEntity}
+		COMMENT at the passed {@code pos} containing exactly one of the passed {@code item}.
+		ARG 2 item
 	METHOD m_aedbauxq setBlockState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 pos
 		ARG 2 state
@@ -25,7 +30,14 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 y
 		ARG 3 z
 	METHOD m_bfdtogek tickPrecipitation ()V
+	METHOD m_bghclhqs checkBlockEntity (Lnet/minecraft/unmapped/C_hynzadkk;Ljava/lang/Class;Ljava/util/function/Predicate;Ljava/util/function/Supplier;)V
+		ARG 3 predicate
+		ARG 4 getError
 	METHOD m_bkazxwlu markFinalClause ()V
+	METHOD m_blyljduc setPos (Lnet/minecraft/unmapped/C_dxkfswlz;FFF)V
+		ARG 1 mob
+	METHOD m_bnqyizon (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 1 wrongBlock
 	METHOD m_bogdvsjt succeedWhenEntityAbsent (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 type
 		ARG 2 pos
@@ -40,34 +52,42 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_ciyzewjg spawnMob (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_dxkfswlz;
 		ARG 1 type
 		ARG 2 pos
+	METHOD m_cvvwqmzk expectEqual (Ljava/lang/Object;Ljava/lang/Object;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 left
+		ARG 2 right
+		ARG 3 error
 	METHOD m_cwiwswyj expectEntity (Lnet/minecraft/unmapped/C_ogavsvbr;)V
 		ARG 1 testedType
+	METHOD m_cxxmjelm checkEntitiesData (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;Ljava/util/function/Function;Ljava/lang/Object;)V
+		ARG 2 type
+		ARG 3 getData
+		ARG 4 expectedData
 	METHOD m_dfaxzeen getWorld ()Lnet/minecraft/unmapped/C_bdwnwhiu;
 	METHOD m_dfmqgzom assertTrue (ZLnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 value
+		ARG 2 error
 	METHOD m_dfzsbsqp expectDifferentBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 block
-		ARG 2 pos
 	METHOD m_dluzbveu spawnEntity (Lnet/minecraft/unmapped/C_ogavsvbr;FFF)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 type
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
 	METHOD m_drszdxud expectSameStates (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 checkedPos
-		ARG 2 correctStatePos
+		ARG 1 pos1
+		ARG 2 pos2
 	METHOD m_dszcogek getBlockState (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 1 pos
 	METHOD m_dttandyg expectEntityHasEffect (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_cjzoxshv;I)V
 		ARG 1 entity
 		ARG 2 expectedEffect
 		ARG 3 expectedAmplifier
+	METHOD m_duaduhgl getEntities (Lnet/minecraft/unmapped/C_ogavsvbr;)Ljava/util/List;
+		ARG 1 type
 	METHOD m_egavxzhi walkTo (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_hynzadkk;F)Lnet/minecraft/unmapped/C_slbbddbd;
 		ARG 1 entity
 		ARG 2 pos
 		ARG 3 speed
 	METHOD m_eqeskuqo useBlock (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_jdakttms;)V
-		ARG 2 player
 		ARG 3 hit
 	METHOD m_exkyxbtk succeedIf (Ljava/lang/Runnable;)V
 		COMMENT Completes the test if the provided {@code assertion} runs without throwing an exception, fails otherwise
@@ -80,20 +100,27 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 pos
 		ARG 2 block
 	METHOD m_fpexvbmd expectBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 block
-		ARG 2 pos
 	METHOD m_fzhmkzew expectEntityAt (Lnet/minecraft/unmapped/C_ogavsvbr;III)V
 		ARG 1 testedType
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
+	METHOD m_gdhxmifw checkEntities (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;Ljava/util/function/Predicate;)V
+		ARG 2 type
+		ARG 3 predicate
 	METHOD m_gicnpzrl getRelativeHeight (Lnet/minecraft/unmapped/C_ybztoekc$C_wkdeqzbn;II)I
 		ARG 1 heightmapType
 		ARG 2 x
 		ARG 3 z
+	METHOD m_gjbykyjf throwException (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 	METHOD m_gjrrggxd getEntity (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_astfners;
+	METHOD m_glwttjsp checkState (Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/function/Predicate;Ljava/util/function/Function;)V
+		ARG 2 predicate
+		ARG 3 getError
+	METHOD m_gmuaiplb getEntitiesAround (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;D)Ljava/util/List;
+		ARG 1 type
+		ARG 3 range
 	METHOD m_grulnbqw setLowHealth (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_usxaxydn;
-		ARG 1 entity
 	METHOD m_gscthheo (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)I
 		ARG 1 left
 		ARG 2 right
@@ -109,12 +136,23 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_gwhaqtld spawnEntity (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 type
 		ARG 2 pos
+	METHOD m_hkaigjth throwPositionedExceptionAt (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_astfners;)V
 	METHOD m_hljaiapf expectEntityStoringItem (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vorddnax;)V
-		ARG 2 testedType
+		ARG 2 type
 		ARG 3 expectedItem
 	METHOD m_hofxilao succeedWhenEntityPresent (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 type
 		ARG 2 pos
+	METHOD m_hotzmjdt checkEntity (Lnet/minecraft/unmapped/C_astfners;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 2 predicate
+		ARG 3 error
+	METHOD m_hqswwjau checkBlock (Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/function/Predicate;Ljava/util/function/Function;)V
+		ARG 2 predicate
+		ARG 3 getError
+	METHOD m_hsmqakpt (Ljava/lang/Object;)Z
+		ARG 0 entity
+	METHOD m_htazjjzu (Ljava/lang/Runnable;J)V
+		ARG 2 tick
 	METHOD m_hxsuicar useBlock (Lnet/minecraft/unmapped/C_hynzadkk;)V
 	METHOD m_iqrwdfxo spawnItemEntity (Lnet/minecraft/unmapped/C_vorddnax;FFF)Lnet/minecraft/unmapped/C_uqpzijng;
 		ARG 1 item
@@ -122,11 +160,11 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 3 y
 		ARG 4 z
 	METHOD m_jtpzuawe expectEntityAround (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;D)V
-		COMMENT Fails if there is no entity of the given {@code testedType} in a box centered around {@code pos}
-		ARG 1 testedType
-		ARG 2 pos
-		ARG 3 range
+		COMMENT Fails if there is no entity of the given {@code type} in a box centered around {@code pos}
+	METHOD m_jynapibf expectEntityIn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hbcjzgoe;)V
+		ARG 1 type
 	METHOD m_kvfnkfpy createPositionedException (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_rfnivdbk;
+	METHOD m_lahynbii getRotation ()Lnet/minecraft/unmapped/C_mboglirk;
 	METHOD m_ljtglfiu failIf (Ljava/lang/Runnable;)V
 		ARG 1 assertion
 	METHOD m_lpzqvmww getEntities (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vgpupfxx;D)Ljava/util/List;
@@ -139,7 +177,6 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 type
 		ARG 3 range
 	METHOD m_mbwngbkd useBlock (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
-		ARG 2 player
 	METHOD m_mdidoddl failIfEver (Ljava/lang/Runnable;)V
 		ARG 1 assertion
 	METHOD m_mfctcsuu setBiome (Lnet/minecraft/unmapped/C_xhhleach;)V
@@ -157,15 +194,24 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 clazz
 	METHOD m_neawohhp assertFalse (ZLnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 value
+		ARG 2 error
+	METHOD m_nfcyuocl checkEntityProperty (Lnet/minecraft/unmapped/C_astfners;Ljava/util/function/Function;Ljava/lang/Object;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 2 getProperty
+		ARG 3 expectedProperty
+		ARG 4 error
+	METHOD m_njsuucke (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 3 pos
 	METHOD m_nxdzuxuc expectEmptyContainer (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
 	METHOD m_ocafvsoi removeBlock (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
-	METHOD m_ohxjpyru succeedWhenEntityData (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;Ljava/util/function/Function;Ljava/lang/Object;)V
+	METHOD m_ohxjpyru succeedWhenEntitiesData (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ogavsvbr;Ljava/util/function/Function;Ljava/lang/Object;)V
 		ARG 1 pos
 		ARG 2 type
-		ARG 3 entityDataGetter
-		ARG 4 data
+		ARG 3 getData
+		ARG 4 expectedData
+	METHOD m_oijmhkgs (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)Z
+		ARG 3 unused
 	METHOD m_oiohxsat expectItemEntitiesAround (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_hynzadkk;DI)V
 		ARG 1 testedItem
 		ARG 2 pos
@@ -176,8 +222,8 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
+	METHOD m_otyiokbc forceScheduledTick (Lnet/minecraft/unmapped/C_hynzadkk;)V
 	METHOD m_owjgxyil expectBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;III)V
-		ARG 1 block
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
@@ -195,7 +241,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_prxxdiqp createException (Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/unmapped/C_otqlbxyg;
 	METHOD m_pvmdhspp damage (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;F)V
 	METHOD m_pwjisoih expectEntityToTouch (Lnet/minecraft/unmapped/C_ogavsvbr;DDD)V
-		ARG 1 testedType
+		ARG 1 type
 		ARG 2 x
 		ARG 4 y
 		ARG 6 z
@@ -206,11 +252,11 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
+	METHOD m_qdyzytbu expectState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
 	METHOD m_qevncvlj expectEntityAt (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 entity
 		ARG 2 pos
 	METHOD m_qfuzmhgl expectDifferentBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;III)V
-		ARG 1 block
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
@@ -224,14 +270,12 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_qqoqozya forEachBlockInStructure (Ljava/util/function/Consumer;)V
 		ARG 1 action
 	METHOD m_qsgsebgj setToDrown (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_usxaxydn;
-		ARG 1 entity
 	METHOD m_qwmxlmwq spawnEntity (Lnet/minecraft/unmapped/C_ogavsvbr;III)Lnet/minecraft/unmapped/C_astfners;
 		ARG 1 type
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
 	METHOD m_qxkefahd pushButton (Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 pos
 	METHOD m_rbrwxmcj createMockCreativeServerPlayerInWorld ()Lnet/minecraft/unmapped/C_mxrobsgg;
 	METHOD m_rcgskruf setBlockState (IIILnet/minecraft/unmapped/C_txtbiemp;)V
 		ARG 1 x
@@ -243,7 +287,9 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 3 expectedItem
 	METHOD m_rzwkrpzf getAbsolute (Lnet/minecraft/unmapped/C_hbcjzgoe;)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		ARG 1 box
+	METHOD m_saxfkftb throwPositionedException (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_hynzadkk;)V
 	METHOD m_sicjnrjb createMockPlayer (Lnet/minecraft/unmapped/C_lghcpyvl;)Lnet/minecraft/unmapped/C_jzrpycqo;
+		ARG 1 gameMode
 	METHOD m_slklpxwi toggleLever (III)V
 		ARG 1 x
 		ARG 2 y
@@ -256,9 +302,14 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_swlzxaws getRelative (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 pos
 	METHOD m_syezbhne createTimedTaskRunner ()Lnet/minecraft/unmapped/C_slbbddbd;
+	METHOD m_tbrsmhpr (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 1 unused
 	METHOD m_tduxdgjs expectEntityAt (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 testedType
 		ARG 2 pos
+	METHOD m_toyuouec expectEntityIn (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 2 box
+		ARG 3 error
 	METHOD m_tpletuhv useStackOnBlock (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)V
 		ARG 1 player
 	METHOD m_uakshunm spawnEntity (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_astfners;
@@ -266,6 +317,8 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		COMMENT the passed {@code pos}.
 		ARG 1 type
 		ARG 2 pos
+	METHOD m_ugzeoqgq expectNoEntityIn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_hbcjzgoe;)V
+		ARG 1 type
 	METHOD m_ujuutnza succeedWhenEntityPresent (Lnet/minecraft/unmapped/C_ogavsvbr;III)V
 		ARG 1 type
 		ARG 2 x
@@ -278,6 +331,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		COMMENT <p>The test also fails if the assertion succeeds before the given {@code tick}
 		ARG 1 tick
 		ARG 2 runnable
+	METHOD m_uwjfslld expectTaggedBlock (Lnet/minecraft/unmapped/C_ednuhnnn;Lnet/minecraft/unmapped/C_hynzadkk;)V
 	METHOD m_vascsfiz getAbsolute (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 pos
 	METHOD m_viyraybu toggleLever (Lnet/minecraft/unmapped/C_hynzadkk;)V
@@ -285,12 +339,18 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 	METHOD m_vqxpckep expectItemEntityAt (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_hynzadkk;D)V
 		ARG 1 testedItem
 		ARG 3 range
+	METHOD m_vrowaprc (Ljava/lang/Runnable;J)V
+		ARG 2 tick
+	METHOD m_vvjupxhv (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;)Z
+		ARG 1 foundEntity
 	METHOD m_wcpnbkte spawnMob (Lnet/minecraft/unmapped/C_ogavsvbr;III)Lnet/minecraft/unmapped/C_dxkfswlz;
 		ARG 1 type
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
-	METHOD m_whpymqgk getTestBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
+	METHOD m_wetxykpz (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)Z
+		ARG 2 unused
+	METHOD m_whpymqgk getAbsoluteBounds ()Lnet/minecraft/unmapped/C_hbcjzgoe;
 	METHOD m_whzpqrkd succeedWhenBlockExists (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 block
 		ARG 2 pos
@@ -320,7 +380,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 4 z
 	METHOD m_xzgypwhm kill (Lnet/minecraft/unmapped/C_astfners;)V
 	METHOD m_ypdbgair expectSameStates (Lnet/minecraft/unmapped/C_hmqypqzz;Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 checkedBlockBox
+		ARG 1 box
 		ARG 2 correctStatePos
 	METHOD m_yuvbhzzq (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 entity
@@ -344,7 +404,7 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 type
 		ARG 2 pos
 	METHOD m_zfnqmtfe expectNoEntityToTouch (Lnet/minecraft/unmapped/C_ogavsvbr;DDD)V
-		ARG 1 testedType
+		ARG 1 type
 		ARG 2 x
 		ARG 4 y
 		ARG 6 z
@@ -352,7 +412,11 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		COMMENT Spawns the passed {@code item} entity at the bottom north west corner
 		COMMENT of the passed {@code pos}.
 		ARG 1 item
+	METHOD m_zjtmtrcw checkBlockPropertyValue (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/util/function/Predicate;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 2 property
+		ARG 3 valuePredicate
+		ARG 4 error
 	METHOD m_zrpigmcd getRelative (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 pos
-	METHOD m_zwilfbyq getRelativeBounds ()Lnet/minecraft/unmapped/C_hbcjzgoe;
+	METHOD m_zwilfbyq getBounds ()Lnet/minecraft/unmapped/C_hbcjzgoe;
 	METHOD m_zzrmayxo spawnItemEntity (Lnet/minecraft/unmapped/C_vorddnax;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_uqpzijng;
