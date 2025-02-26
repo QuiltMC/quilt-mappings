@@ -1,0 +1,76 @@
+CLASS net/minecraft/unmapped/C_slbbddbd net/minecraft/test/TestTaskSequence
+	COMMENT Holds a sequence of tasks to be run for a {@link #test}.
+	COMMENT <p>
+	COMMENT {@linkplain #test Tests} try running any remaining tasks each tick.<br>
+	COMMENT Each tick, tasks are completed until one fails.<br>
+	COMMENT A task fails if it throws a
+	COMMENT {@link net.minecraft.test.GameTestException GameTestException}.
+	COMMENT
+	COMMENT @see net.minecraft.test.TestContext#createTaskSequence() createTaskSequence()
+	FIELD f_dceumnvh tasks Ljava/util/List;
+	FIELD f_laliwahc test Lnet/minecraft/unmapped/C_agwojffm;
+	FIELD f_uonlewcl prevCompletedTick I
+	METHOD <init> (Lnet/minecraft/unmapped/C_agwojffm;)V
+		ARG 1 test
+	METHOD m_culdbhre expectAfter (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Adds the passed {@code task} and waits for the passed {@code delay} to attempt
+		COMMENT running it.
+		COMMENT <p>
+		COMMENT The {@code task} will only be attempted once, and if it fails,
+		COMMENT the {@link #test} fails.
+		ARG 1 delay
+			COMMENT the number of ticks to wait before running the passed {@code task},
+			COMMENT relative to the tick when the previous task completed
+		ARG 2 task
+	METHOD m_hzkmfnrv expectAt (JLjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Adds the passed {@code task} and requires it be successful only after exactly
+		COMMENT the passed {@code successDelay} has passed.
+		COMMENT <p>
+		COMMENT The {@code task} is run every tick until it succeeds.<br>
+		COMMENT If the {@code task} is successful before or after {@code successDelay},
+		COMMENT it causes the {@link #test} to fail.
+		ARG 1 successDelay
+			COMMENT the exact number of ticks that must pass before the passed {@code task} succeeds,
+			COMMENT relative to the tick when the previous task completed
+		ARG 3 task
+	METHOD m_jtywgcow runOrFail (Ljava/lang/Runnable;)V
+		ARG 1 task
+	METHOD m_kxztjfwm succeed ()V
+		COMMENT Causes the {@link #test} to succeed once prior added tasks have completed.
+	METHOD m_ndryulqk await (Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Once reached, the passed {@code task} will repeat until it succeeds or the
+		COMMENT {@link #test} times out.
+		ARG 1 task
+	METHOD m_negtjhjf fail (Ljava/util/function/Supplier;)V
+		COMMENT Cuases the {@link #test} to fail with an exception created by the passed
+		COMMENT {@code exceptionSupplier} once prior added tasks have completed.
+		ARG 1 exceptionSupplier
+	METHOD m_rtosaukf runTasks (I)V
+		ARG 1 testTick
+	METHOD m_sbznpemx expect (Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Once reached, the passed {@code task} must be successful, otherwise the
+		COMMENT {@link #test} fails.
+		ARG 1 task
+	METHOD m_stsofrqu runReported (I)V
+	METHOD m_woeesxrq trigger ()Lnet/minecraft/unmapped/C_slbbddbd$C_ktwdwqxw;
+	METHOD m_yaecigfs expectFor (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Adds the passed {@code task} which, once reached, must succeed on each tick
+		COMMENT until the passed number of {@code ticks} have passed.
+		COMMENT <p>
+		COMMENT Any failure causes the {@link #test} to fail.
+		ARG 1 ticks
+			COMMENT the number of ticks to run the passed {@code task} for
+		ARG 2 task
+	METHOD m_zbwitmsh idle (I)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Prevents subsequent tasks from running until the passed
+		COMMENT {@code delay} is over.
+		ARG 1 delay
+			COMMENT the number of ticks to idle for, relative to
+			COMMENT the last tick on which a task completed
+	METHOD m_zgvpyocn runSilently (I)V
+	CLASS C_ktwdwqxw Trigger
+		FIELD f_altxqvwn UNTRIGGERED_TICK I
+		FIELD f_oygmyyfp triggeredTick I
+		METHOD m_brourrwc checkTrigger ()V
+		METHOD m_sscufdja trigger (I)V
+			ARG 1 testTick
