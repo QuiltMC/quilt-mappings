@@ -1,12 +1,14 @@
 CLASS net/minecraft/unmapped/C_agwojffm net/minecraft/test/GameTestState
-	FIELD f_aptnrqfd initialized Z
+	FIELD f_aptnrqfd structurePlaced Z
 	FIELD f_cncaolaa tick I
-	FIELD f_cykwpirb throwable Lnet/minecraft/unmapped/C_xggjaikv;
+	FIELD f_cykwpirb failure Lnet/minecraft/unmapped/C_xggjaikv;
 	FIELD f_cyllvwin timedTaskRunners Ljava/util/Collection;
 	FIELD f_czxnhwhd world Lnet/minecraft/unmapped/C_bdwnwhiu;
 	FIELD f_esamtawu ticksByRunnables Lit/unimi/dsi/fastutil/objects/Object2LongMap;
+	FIELD f_hgdnqoqj rotation Lnet/minecraft/unmapped/C_mboglirk;
 	FIELD f_iqjevdoe stopwatch Lcom/google/common/base/Stopwatch;
 	FIELD f_jxoiaeip listeners Ljava/util/Collection;
+	FIELD f_otnwlnho blockEntity Lnet/minecraft/unmapped/C_ionovaet;
 	FIELD f_qwmjtgds ticksLeft I
 	FIELD f_ubhmztut chunksLoaded Z
 	FIELD f_zphgfhwv completed Z
@@ -15,10 +17,13 @@ CLASS net/minecraft/unmapped/C_agwojffm net/minecraft/test/GameTestState
 	METHOD m_bpcnxmsm createTaskSequence ()Lnet/minecraft/unmapped/C_slbbddbd;
 	METHOD m_cnhpofyv addListener (Lnet/minecraft/unmapped/C_nvnirinq;)V
 		ARG 1 listener
+	METHOD m_daugcudj fail (Lnet/minecraft/unmapped/C_xggjaikv;)V
+		ARG 1 failure
 	METHOD m_djxnapzc isCompleted ()Z
 	METHOD m_dyzxadjo tick (Lnet/minecraft/unmapped/C_zehlpsdx;)V
 	METHOD m_fwlfkqnr (Lnet/minecraft/unmapped/C_zehlpsdx;Lnet/minecraft/unmapped/C_nvnirinq;)V
 		ARG 2 listener
+	METHOD m_gbxnkzzc placeStructure ()V
 	METHOD m_giejubvy isRequired ()Z
 	METHOD m_iqwgczmb getWorld ()Lnet/minecraft/unmapped/C_bdwnwhiu;
 	METHOD m_jhstkdxl (Lnet/minecraft/unmapped/C_astfners;)Z
@@ -30,7 +35,7 @@ CLASS net/minecraft/unmapped/C_agwojffm net/minecraft/test/GameTestState
 	METHOD m_nrcnweey complete ()V
 	METHOD m_ojiztyhj (Lnet/minecraft/unmapped/C_slbbddbd;)V
 		ARG 1 runner
-	METHOD m_oyrbpwjs getThrowable ()Lnet/minecraft/unmapped/C_xggjaikv;
+	METHOD m_oyrbpwjs getFailure ()Lnet/minecraft/unmapped/C_xggjaikv;
 	METHOD m_ozjkeznl getTicksLeft ()I
 	METHOD m_pnghyswr tickTests ()V
 	METHOD m_pzmifyhz start ()V
@@ -45,8 +50,11 @@ CLASS net/minecraft/unmapped/C_agwojffm net/minecraft/test/GameTestState
 	METHOD m_vntlfywv runAtTick (JLjava/lang/Runnable;)V
 		ARG 1 tick
 		ARG 3 runnable
+	METHOD m_vnznhqsf fail (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 1 failure
 	METHOD m_wizlbadc isPassed ()Z
 	METHOD m_wrjdjkvm isFlaky ()Z
+	METHOD m_wsjwuzzz getPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_wzfspxut getMaxAttempts ()I
 	METHOD m_xnccdubt isFailed ()Z
 	METHOD m_xsidzmjn getTick ()I
