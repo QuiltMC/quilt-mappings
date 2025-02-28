@@ -1,6 +1,6 @@
 CLASS net/minecraft/unmapped/C_rojckazs net/minecraft/util/ArgbHelper
-	METHOD m_cbkekekb from8Bit (I)F
-		ARG 0 i
+	METHOD m_cbkekekb getFloatChannel (I)F
+		ARG 0 channel
 	METHOD m_cmigvcvv opaque (I)I
 		ARG 0 argb
 	METHOD m_cppeddcz color (FFFF)I
@@ -8,51 +8,83 @@ CLASS net/minecraft/unmapped/C_rojckazs net/minecraft/util/ArgbHelper
 		ARG 1 r
 		ARG 2 g
 		ARG 3 b
-	METHOD m_gqgmqulr color (Lnet/minecraft/unmapped/C_vgpupfxx;)I
-		ARG 0 color
-	METHOD m_guvkltvj red (I)I
+	METHOD m_gqgmqulr packOpaque (Lnet/minecraft/unmapped/C_vgpupfxx;)I
+		ARG 0 rgb
+	METHOD m_guvkltvj getRed (I)I
 		ARG 0 argb
-	METHOD m_hbbprclp to8Bit (F)I
-		ARG 0 f
+	METHOD m_hbbprclp getChannelByte (F)I
+		COMMENT @return an int in the range {@code 0} to {@code 255} (inclusive),
+		COMMENT assuming {@code channel} is within expected bounds
+		ARG 0 channel
+			COMMENT a float in the range {@code 0.0f} to {@code 1.0f} (inclusive)
+			COMMENT representing a color channel
 	METHOD m_iteakipu scaleRgb (II)I
-		COMMENT Maintains the alpha level
+		COMMENT Multiplies the red, green, and blue channels of the passed {@code argb} color
+		COMMENT by the passed {@code scale} divided by {@code 255}.
+		COMMENT The alpha channel is maintained.
 		ARG 0 argb
 		ARG 1 scale
 			COMMENT divided by {@code 255} to give a {@code 0.0f} to {@code 1.0f} range
+	METHOD m_ivueguoz getAlphaFloat (I)F
+		COMMENT @return a float in the range {@code 0.0f} to {@code 1.0f} (inclusive)
+		COMMENT representing the alpha channel of the passed {@code argb}
 	METHOD m_jlwyusxi scaleRgb (IF)I
-		COMMENT Maintains the alpha level
+		COMMENT Multiplies the red, green, and blue channels of the passed {@code argb} color
+		COMMENT by the passed {@code scale}.
+		COMMENT <p>
+		COMMENT The alpha channel is maintained.
 		ARG 0 argb
 		ARG 1 scale
 	METHOD m_jnipdhea lerp (FII)I
 		ARG 1 color1
 		ARG 2 color2
+	METHOD m_liqkydqi getGreenFloat (I)F
+		COMMENT @return a float in the range {@code 0.0f} to {@code 1.0f} (inclusive)
+		COMMENT representing the green channel of the passed {@code argb}
 	METHOD m_mjkqavea white (F)I
 		ARG 0 alpha
 	METHOD m_mtvumula multiply (II)I
-		ARG 0 color1
-		ARG 1 color2
-	METHOD m_muaupjpo color (III)I
+		ARG 0 argb1
+		ARG 1 argb2
+	METHOD m_muaupjpo packOpaque (III)I
+	METHOD m_pfbiaxas scaleRgb (IFFF)I
+		COMMENT Multiplies the red, green, and blue channels of the passed {@code argb} color
+		COMMENT by the passed {@code rScale}, {@code gScale}, and {@code bScale}, respectively.
+		COMMENT <p>
+		COMMENT The alpha channel is maintained.
+		ARG 0 argb
+		ARG 1 rScale
+		ARG 2 gScale
+		ARG 3 bScale
 	METHOD m_plfhxcfp transparent (I)I
 		ARG 0 argb
-	METHOD m_rtmaaugy color (IIII)I
+	METHOD m_remteudb getRedFloat (I)F
+		COMMENT @return a float in the range {@code 0.0f} to {@code 1.0f} (inclusive)
+		COMMENT representing the red channel of the passed {@code argb}
+	METHOD m_rtmaaugy pack (IIII)I
 		ARG 0 a
 		ARG 1 r
 		ARG 2 g
 		ARG 3 b
-	METHOD m_tcuubxtk blue (I)I
+	METHOD m_sahjlgen unpack (I)Lorg/joml/Vector3f;
+		ARG 0 rgb
+	METHOD m_tcuubxtk getBlue (I)I
 		ARG 0 argb
+	METHOD m_tgsehvbj getBlueFloat (I)F
+		COMMENT @return a float in the range {@code 0.0f} to {@code 1.0f} (inclusive)
+		COMMENT representing the blue channel of the passed {@code argb}
 	METHOD m_ufaioapl color (II)I
 		ARG 0 alpha
 		ARG 1 rgb
 	METHOD m_uodjinfn average (II)I
 		ARG 0 color1
 		ARG 1 color2
-	METHOD m_vbjlonbj alpha (I)I
+	METHOD m_vbjlonbj getAlpha (I)I
 		ARG 0 argb
 	METHOD m_ygeoqadn toAbgr (I)I
 		COMMENT Swaps the R and B bytes.
 		ARG 0 argb
-	METHOD m_yuwqoysr green (I)I
+	METHOD m_yuwqoysr getGreen (I)I
 		ARG 0 argb
 	METHOD m_ywhxgdzj fromAbgr (I)I
 		ARG 0 abgr
