@@ -12,7 +12,7 @@ CLASS net/minecraft/unmapped/C_slbbddbd net/minecraft/test/TestTaskSequence
 	FIELD f_uonlewcl prevCompletedTick I
 	METHOD <init> (Lnet/minecraft/unmapped/C_agwojffm;)V
 		ARG 1 test
-	METHOD m_culdbhre expectAfter (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+	METHOD m_culdbhre thenAfter (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
 		COMMENT Adds the passed {@code task} and waits for the passed {@code delay} to attempt
 		COMMENT running it.
 		COMMENT <p>
@@ -22,7 +22,7 @@ CLASS net/minecraft/unmapped/C_slbbddbd net/minecraft/test/TestTaskSequence
 			COMMENT the number of ticks to wait before running the passed {@code task},
 			COMMENT relative to the tick when the previous task completed
 		ARG 2 task
-	METHOD m_hzkmfnrv expectAt (JLjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+	METHOD m_hzkmfnrv thenAt (JLjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
 		COMMENT Adds the passed {@code task} and requires it be successful only after exactly
 		COMMENT the passed {@code successDelay} has passed.
 		COMMENT <p>
@@ -47,13 +47,13 @@ CLASS net/minecraft/unmapped/C_slbbddbd net/minecraft/test/TestTaskSequence
 		ARG 1 exceptionSupplier
 	METHOD m_rtosaukf runTasks (I)V
 		ARG 1 testTick
-	METHOD m_sbznpemx expect (Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+	METHOD m_sbznpemx then (Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
 		COMMENT Once reached, the passed {@code task} must be successful, otherwise the
 		COMMENT {@link #test} fails.
 		ARG 1 task
 	METHOD m_stsofrqu runReported (I)V
 	METHOD m_woeesxrq trigger ()Lnet/minecraft/unmapped/C_slbbddbd$C_ktwdwqxw;
-	METHOD m_yaecigfs expectFor (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+	METHOD m_yaecigfs thenFor (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
 		COMMENT Adds the passed {@code task} which, once reached, must succeed on each tick
 		COMMENT until the passed number of {@code ticks} have passed.
 		COMMENT <p>
@@ -62,8 +62,8 @@ CLASS net/minecraft/unmapped/C_slbbddbd net/minecraft/test/TestTaskSequence
 			COMMENT the number of ticks to run the passed {@code task} for
 		ARG 2 task
 	METHOD m_zbwitmsh idle (I)Lnet/minecraft/unmapped/C_slbbddbd;
-		COMMENT Prevents subsequent tasks from running until the passed
-		COMMENT {@code delay} is over.
+		COMMENT Prevents subsequent tasks from running until the given
+		COMMENT {@code delay} has passed.
 		ARG 1 delay
 			COMMENT the number of ticks to idle for, relative to
 			COMMENT the last tick on which a task completed
