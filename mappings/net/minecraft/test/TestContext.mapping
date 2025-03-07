@@ -1,4 +1,29 @@
 CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
+	COMMENT Context for a test instance.<br>
+	COMMENT Contains methods for converting between relative test space and absolute world
+	COMMENT space, along with methods for defining when a test passes or fails.<br>
+	COMMENT Methods annotated with {@code @GameTest} receive the context for the test
+	COMMENT instance they're testing.
+	COMMENT <p>
+	COMMENT The location and rotation of test instances vary between runs, so tests use
+	COMMENT locations relative the test structure's bottom north west corner for
+	COMMENT consistency.<br>
+	COMMENT {@code TestContext} methods take positions/boxes/etc. in this relative space.<br>
+	COMMENT However if you need to call methods of non-test classes that take those as input,
+	COMMENT use {@link #getAbsolute} methods to convert to absolute
+	COMMENT world space.<br>
+	COMMENT Conversely, if non-test class's methods return those types, use
+	COMMENT {@link #getRelative} methods to convert to relative test space.
+	COMMENT <p>
+	COMMENT A tests' success is controlled by
+	COMMENT {@link net.minecraft.test.GameTestException GameTestException}s.<br>
+	COMMENT The {@code check...} and {@code expect...} methods are reusable ways to express
+	COMMENT common expectations, while the {@code assert...} and
+	COMMENT {@code create/throwException...} methods provide ways to define custom
+	COMMENT expectations.<br>
+	COMMENT Use {@link #createTaskSequence()} to define expectations accross time.
+	COMMENT
+	COMMENT @see net.minecraft.test.TestTaskSequence TestTaskSequence
 	FIELD f_svwcatnv hasFinalClause Z
 	FIELD f_vrgpmicj test Lnet/minecraft/unmapped/C_agwojffm;
 	METHOD <init> (Lnet/minecraft/unmapped/C_agwojffm;)V
