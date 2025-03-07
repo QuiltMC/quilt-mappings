@@ -1,10 +1,58 @@
 CLASS net/minecraft/unmapped/C_slbbddbd net/minecraft/test/TestTaskSequence
-	COMMENT Holds a sequence of tasks to be run for a {@link #test}.
+	COMMENT Holds a sequence of tasks to be run for a {@link #test}.<br>
+	COMMENT These tasks represent expectations of what will occur during a test.
 	COMMENT <p>
 	COMMENT {@linkplain #test Tests} try running any remaining tasks each tick.<br>
-	COMMENT Each tick, tasks are completed until one fails.<br>
+	COMMENT Each tick, sequenced tasks are completed until one fails.<br>
 	COMMENT A task fails if it throws a
 	COMMENT {@link net.minecraft.test.GameTestException GameTestException}.
+	COMMENT <p>
+	COMMENT Most methods return the {@code TestTaskSequence} instance they were called on,
+	COMMENT allowing for convenient method chaining.
+	COMMENT For example, given a test whose structure has an item in a
+	COMMENT {@link net.minecraft.block.DropperBlock dropper}
+	COMMENT facing up with a
+	COMMENT {@link net.minecraft.block.ButtonBlock button}
+	COMMENT next to it and the following local variables:
+	COMMENT <ul>
+	COMMENT   <li> {@link net.minecraft.test.TestContext TestContext context}
+	COMMENT   <li> {@link net.minecraft.util.math.BlockPos BlockPos dropperPos}
+	COMMENT   <li> {@link net.minecraft.util.math.BlockPos BlockPos buttonPos}
+	COMMENT   <li> {@link net.minecraft.item.Item Item item}
+	COMMENT </ul>
+	COMMENT
+	COMMENT You could write a test like so:
+	COMMENT <pre>{@code
+	COMMENT context.pushButton(buttonPos);
+	COMMENT
+	COMMENT context.createTaskSequence()
+	COMMENT   .then(() -> context.expectBlockProperty(dropperPos, DispenserBlock.TRIGGERED, true))
+	COMMENT   .await(() -> context.expectItemEntity(item))
+	COMMENT   .succeed();
+	COMMENT }</pre>
+	COMMENT
+	COMMENT The test succeeds if the dropper triggers and then dropps its item.<br>
+	COMMENT However this test could be more specific. Specificity is important in tests so
+	COMMENT that they don't erroneously succeed, and so if they fail, they fail early and
+	COMMENT give informative errors.<br>
+	COMMENT
+	COMMENT This test could be improved like so:
+	COMMENT <pre>{@code
+	COMMENT context.pushButton(buttonPos);
+	COMMENT
+	COMMENT context.createTaskSequence()
+	COMMENT   .then(() -> context.expectBlockProperty(dropperPos, DispenserBlock.TRIGGERED, true))
+	COMMENT   .thenAt(4, () -> context.expectItemEntityAt(item, dropperPos.up(), 1.0d))
+	COMMENT   .then(() -> context.expectEmptyContainer(dropperPos))
+	COMMENT   .succeed();
+	COMMENT }</pre>
+	COMMENT
+	COMMENT This version only succeeds if:
+	COMMENT <ol>
+	COMMENT   <li> the dropper triggers
+	COMMENT   <li> after exactly 4 ticks the item drops above the dropper
+	COMMENT   <li> the dropper is empty
+	COMMENT </ol>
 	COMMENT
 	COMMENT @see net.minecraft.test.TestContext#createTaskSequence() createTaskSequence()
 	FIELD f_dceumnvh tasks Ljava/util/List;
