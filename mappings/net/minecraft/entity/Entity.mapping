@@ -337,12 +337,18 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 state
 		ARG 2 multiplier
 	METHOD m_fuenwjjy damage (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbxfkpyv;F)Z
+		ARG 2 source
+		ARG 3 amount
 	METHOD m_fymcirnf setCustomName (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 name
 	METHOD m_fzshfvfl isSprinting ()Z
 	METHOD m_gavkvalj hasWings ()Z
 	METHOD m_gbjymqob onRemoved (Lnet/minecraft/unmapped/C_astfners$C_emmohndu;)V
 		ARG 1 reason
+	METHOD m_gdhndfjk handlePassengerFallDamage (DFLnet/minecraft/unmapped/C_sbxfkpyv;)V
+		ARG 1 fallDistance
+		ARG 3 damageMultiplier
+		ARG 4 source
 	METHOD m_ggpcigyk addVelocityInternal (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 velocity
 	METHOD m_ghqcprlw onPlayerCollision (Lnet/minecraft/unmapped/C_jzrpycqo;)V
@@ -433,8 +439,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_iybimkec shouldApplyBlockCollisionEffects ()Z
 	METHOD m_iznakrow removeFromDimension ()V
 	METHOD m_izrsdktf handleFallDamage (DFLnet/minecraft/unmapped/C_sbxfkpyv;)Z
-		ARG 3 fallDistance
-		ARG 4 damageSource
+		ARG 1 fallDistance
+		ARG 3 damageMultiplier
+		ARG 4 source
 	METHOD m_jaflucyh canSprintAsVehicle ()Z
 	METHOD m_jaiycnbg damageClient (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		ARG 1 source
@@ -511,6 +518,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 axis
 		ARG 2 offsetFactor
 	METHOD m_lwugwlsw initDataTracker (Lnet/minecraft/unmapped/C_pyoaoolj$C_oqzxcugu;)V
+		ARG 1 builder
 	METHOD m_lygmgdif getHoldingItemAngle (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 item
 	METHOD m_lytsaqwc resetNetherPortalCooldown ()V
@@ -557,6 +565,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 event
 	METHOD m_oavmpfqe getAir ()I
 	METHOD m_obkzfysl readCustomDataFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+		ARG 1 nbt
 	METHOD m_obyhheyh handleDamagingEvent (Lnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 source
 	METHOD m_odnkfosg getEyePos ()Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -678,6 +687,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_rxnxelrf collidesWithStateAtPos (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 pos
 		ARG 2 state
+	METHOD m_rygbzimu onBubbleColumnTopCollision (ZLnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 1 drag
 	METHOD m_ryjpmajv shouldRender (DDD)Z
 		ARG 1 cameraX
 		ARG 3 cameraY
@@ -868,7 +879,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 team
 	METHOD m_xbkkrydd setOnFireForSeconds (F)V
 		ARG 1 seconds
-	METHOD m_xelmhfxy onBubbleColumnCollision (Z)V
+	METHOD m_xelmhfxy onBubbleColumnSubmersedCollision (Z)V
 		ARG 1 drag
 	METHOD m_xfogfxdp isInsideWall ()Z
 	METHOD m_xgebmwpj setPrevPos ()V
@@ -884,6 +895,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_xujkzfqh offsetZ (D)D
 		ARG 1 widthScale
 	METHOD m_xuwbpohg writeCustomDataToNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
+		ARG 1 nbt
 	METHOD m_xvflsbzg scheduleVelocityUpdate ()V
 	METHOD m_xwbgqvgs readNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 nbt

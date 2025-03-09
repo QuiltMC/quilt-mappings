@@ -183,7 +183,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_eydqxqbv getRecentDamageSource ()Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_eyfojjsq canHaveStatusEffect (Lnet/minecraft/unmapped/C_wpfizwve;)Z
 		ARG 1 effect
-	METHOD m_fcllvyfo forEachGiftItem (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/BiConsumer;)Z
+	METHOD m_fcbyuewz (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nzsnkdtl$C_oqhigtaq;)Lnet/minecraft/unmapped/C_nzsnkdtl;
+		ARG 2 builder
+	METHOD m_fcllvyfo generateGiftLoot (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/BiConsumer;)Z
 	METHOD m_fdrozcta getFallSounds ()Lnet/minecraft/unmapped/C_usxaxydn$C_krioeiaq;
 	METHOD m_fgegzwmf canFallFly ()Z
 	METHOD m_fgldaguj getActiveHand ()Lnet/minecraft/unmapped/C_laxmzoqs;
@@ -296,7 +298,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 health
 			COMMENT the amount of health
 	METHOD m_kivskbpm computeFallDamage (DF)I
-		ARG 3 fallDistance
+		ARG 1 fallDistance
+		ARG 3 damageMultiplier
 	METHOD m_knkzhatw getHealth ()F
 		COMMENT Gets the amount of health this entity has in half-hearts.
 		COMMENT
@@ -387,6 +390,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT flying entities}.
 		ARG 1 movementInput
 			COMMENT represents the sidewaysSpeed, upwardSpeed, and forwardSpeed of the entity in that order
+	METHOD m_pewhzjbc computeUnsafeFallenDistance (D)D
+		ARG 1 fallDistance
 	METHOD m_pizrjaok onStatusEffectApplied (Lnet/minecraft/unmapped/C_wpfizwve;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 effect
 		ARG 2 source
@@ -394,7 +399,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 arm
 	METHOD m_pjwqmpzm setStuckArrowCount (I)V
 		ARG 1 stuckArrowCount
-	METHOD m_pljlrlsh forEachShearingItem (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_sddaxwyk;Ljava/util/function/BiConsumer;)V
+	METHOD m_pljlrlsh generateShearingLoot (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_sddaxwyk;Ljava/util/function/BiConsumer;)V
 	METHOD m_pumlpncf getJumpBoostVelocityModifier ()F
 	METHOD m_pusvfpox createBrainProfile ()Lnet/minecraft/unmapped/C_rjqjaxef$C_liifzsnq;
 	METHOD m_qhbjdevp getMaxRelativeHeadRotation ()F
@@ -424,9 +429,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 3 newSpeed
 	METHOD m_redjlchk wakeUp ()V
 	METHOD m_rimpghsg getArmorVisibility ()F
-	METHOD m_rkacnhvq forEachGeneratedItem (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Z
-		ARG 3 contextParameterFactory
-		ARG 4 lootConsumer
+	METHOD m_rkacnhvq generateLoot (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Z
+		ARG 3 buildParameters
+		ARG 4 lootAction
 	METHOD m_rtgyxdad shouldDropXp ()Z
 		COMMENT Returns if this entity should drop experience on death when the {@linkplain
 		COMMENT net.minecraft.world.GameRules#DO_MOB_LOOT doMobLoot} game rule is
@@ -546,6 +551,8 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	METHOD m_wdmfvspp getMaxHealth ()F
 	METHOD m_wehlnhpj getHandSwingProgress (F)F
 		ARG 1 tickDelta
+	METHOD m_wgvxkmrn (Lnet/minecraft/unmapped/C_nzsnkdtl$C_oqhigtaq;)Lnet/minecraft/unmapped/C_nzsnkdtl;
+		ARG 1 builder
 	METHOD m_whvujbsh dropInventory (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_widuipxk getAttributes ()Lnet/minecraft/unmapped/C_cohbwqne;
 	METHOD m_wjvypezh getRoll ()I
