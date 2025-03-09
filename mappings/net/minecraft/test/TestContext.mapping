@@ -189,8 +189,11 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 type
 	METHOD m_kvfnkfpy createPositionedException (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_rfnivdbk;
 	METHOD m_lahynbii getRotation ()Lnet/minecraft/unmapped/C_mboglirk;
-	METHOD m_ljtglfiu failIf (Ljava/lang/Runnable;)V
-		ARG 1 assertion
+	METHOD m_ljtglfiu failIfEver (Ljava/lang/Runnable;)V
+		COMMENT Runs the passed {@code negativeAssertion} each tick and causes the test to fail
+		COMMENT if it ever does <i>not</i> throw a
+		COMMENT {@link net.minecraft.test.GameTestException GameTestException}.
+		ARG 1 negativeAssertion
 	METHOD m_lpzqvmww getEntitiesNear (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vgpupfxx;D)Ljava/util/List;
 		COMMENT Gets all entities of the passed {@code type} within the passed {@code range}
 		COMMENT of the passed {@code pos}.<br>
@@ -201,7 +204,9 @@ CLASS net/minecraft/unmapped/C_ncfucati net/minecraft/test/TestContext
 		ARG 1 type
 		ARG 3 range
 	METHOD m_mbwngbkd useBlock (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
-	METHOD m_mdidoddl failIfEver (Ljava/lang/Runnable;)V
+	METHOD m_mdidoddl alwaysAssert (Ljava/lang/Runnable;)V
+		COMMENT Runs the passed {@code assertion} each tick and causes the test to fail if it
+		COMMENT ever throws an exception.
 		ARG 1 assertion
 	METHOD m_mfctcsuu setBiome (Lnet/minecraft/unmapped/C_xhhleach;)V
 		ARG 1 biome
