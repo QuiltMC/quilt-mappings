@@ -10,12 +10,14 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 	FIELD f_hsekmekl LOGGER Lorg/slf4j/Logger;
 	FIELD f_kjunxshk BITS_Y J
 	FIELD f_ktlgsitz SIZE_BITS_Y I
+	FIELD f_lmtvgjwi MAX_XZ I
 	FIELD f_mcthbtbh PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_rkdfzepm BITS_Z J
+	FIELD f_tkvjsduy SIZE_BITS_XZ I
 	FIELD f_tudfxhtp BIT_SHIFT_Z I
 	FIELD f_tuydkllc CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_tziahdbe ORIGIN Lnet/minecraft/unmapped/C_hynzadkk;
-		COMMENT The block position which x, y, and z values are all zero.
+		COMMENT The block position at which x, y, and z are all zero.
 	FIELD f_uqzvztbx BIT_SHIFT_Y I
 	FIELD f_xfvuulqh BIT_SHIFT_X I
 	METHOD <init> (Lnet/minecraft/unmapped/C_ceivtqhh;)V
@@ -26,6 +28,15 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		ARG 0 packedPos
 	METHOD m_cprltrsg removeChunkSectionLocalY (J)J
 		ARG 0 y
+	METHOD m_dnbavdft clamp (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		COMMENT @return a new {@code Vec3d} with the components of the given vector
+		COMMENT clamped within this {@code BlockPos}
+		ARG 1 vec
+	METHOD m_dtustqhj min (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
+		COMMENT @return a {@code BlockPos} whose components are the minimum of each of the
+		COMMENT corresponding components of the passed positions.
+		ARG 0 pos1
+		ARG 1 pos2
 	METHOD m_dvruotvh iterateRandomly (Lnet/minecraft/unmapped/C_rlomrsco;IIIIIII)Ljava/lang/Iterable;
 		COMMENT Iterates through {@code count} random block positions in the given area.
 		COMMENT
@@ -50,6 +61,7 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		ARG 1 maxDepth
 		ARG 2 maxIterations
 		ARG 3 consumer
+		ARG 4 assess
 	METHOD m_elynlcyj unpackLongY (J)I
 		ARG 0 packedPos
 	METHOD m_fkelicrp iterate (Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/lang/Iterable;
@@ -74,12 +86,17 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		ARG 3 range
 			COMMENT the maximum distance from the given pos in any axis
 	METHOD m_kijgmyso asLong ()J
+	METHOD m_kuzfrxxn max (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
+		COMMENT @return a {@code BlockPos} whose components are the maximum of each of the
+		COMMENT corresponding components of the passed positions.
+		ARG 0 pos1
+		ARG 1 pos2
 	METHOD m_kxtxdkke add (JIII)J
 		ARG 0 value
 		ARG 2 x
 		ARG 3 y
 		ARG 4 z
-	METHOD m_lsxjsqgq ofCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_lsxjsqgq getCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_mbxphwhv toImmutable ()Lnet/minecraft/unmapped/C_hynzadkk;
 		COMMENT Returns an immutable block position with the same x, y, and z as this
 		COMMENT position.
@@ -152,7 +169,7 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		COMMENT position won't affect the returned position.
 	METHOD m_rragasjv rotate (Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 rotation
-	METHOD m_rtputfdg ofBottomCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_rtputfdg getBottomCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_tqivdexo (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/stream/IntStream;
 		ARG 0 pos
 	METHOD m_uxberzqa stream (Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/stream/Stream;
@@ -182,7 +199,16 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		ARG 3 condition
 	METHOD m_ygxwoupi (Ljava/util/stream/IntStream;)Lcom/mojang/serialization/DataResult;
 		ARG 0 stream
+	CLASS C_bqrjtkuh
+		FIELD f_tpagvski remaining I
+	CLASS C_bsemxekq TraversalAction
 	CLASS C_cezuesns
+		FIELD f_anpcilbi mirrorZ Z
+		FIELD f_bqbqykop manhattanDistance I
+		FIELD f_lzuylacs x I
+		FIELD f_mvzmmckl y I
+		FIELD f_sgckldvy maxY I
+		FIELD f_tevzisst maxX I
 		FIELD f_wrktxqgb pos Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 	CLASS C_egqitdjk Mutable
 		METHOD <init> (DDD)V
@@ -243,6 +269,20 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 			ARG 2 x
 			ARG 3 y
 			ARG 4 z
+	CLASS C_kdxftdqs
+		FIELD f_bfobkugi directions [Lnet/minecraft/unmapped/C_xpuuihxf;
+		FIELD f_hdugvnye maxTurns I
+		FIELD f_jfleeamr turns I
+		FIELD f_jzfmsrrs priorZ I
+		FIELD f_nlxryftf sideStep I
+		FIELD f_odrtbvww sideLength I
+		FIELD f_prempvdo priorX I
+		FIELD f_tlvwycmu priorY I
+	CLASS C_wcxwnyvn
+		METHOD m_hjleqlex (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_hynzadkk;)V
+			ARG 2 pos
+		METHOD m_qduvmdsm (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hynzadkk;
+			ARG 1 buf
 	CLASS C_ztsnshls
 		FIELD f_lgtbqrhx pos Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 		FIELD f_nhmdgdci currentIndex I
