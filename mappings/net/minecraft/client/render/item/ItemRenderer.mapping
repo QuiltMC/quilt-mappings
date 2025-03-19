@@ -3,9 +3,12 @@ CLASS net/minecraft/unmapped/C_xjqetogb net/minecraft/client/render/item/ItemRen
 	FIELD f_curtyzhw COMPASS_WITH_GLINT_GUI_MODEL_MULTIPLIER F
 	FIELD f_kwmbfert ITEM_ENCHANTED_GLINT Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_lhkcxhvw GUI_SLOT_CENTER_Y I
+	FIELD f_octcdxzh NO_TINT I
 	FIELD f_pomzspwm COMPASS_FOIL_TEXTURE_SCALE F
 	FIELD f_tzvbwrqo ENTITY_ENCHANTED_GLINT Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_uimgkpsz GUI_SLOT_CENTER_X I
+	FIELD f_wocxkytf renderState Lnet/minecraft/unmapped/C_hvackyip;
+	FIELD f_zbeulqsn ITEM_DECORATION_OFFSET I
 	METHOD m_bzrkiozs getArmorGlintConsumer (Lnet/minecraft/unmapped/C_igrgeffe;Lnet/minecraft/unmapped/C_tizlwnnv;Z)Lnet/minecraft/unmapped/C_igthdzux;
 		ARG 0 provider
 		ARG 1 layer
@@ -19,6 +22,7 @@ CLASS net/minecraft/unmapped/C_xjqetogb net/minecraft/client/render/item/ItemRen
 		ARG 0 matrices
 		ARG 1 vertices
 		ARG 2 quads
+		ARG 3 tints
 		ARG 4 light
 		ARG 5 overlay
 	METHOD m_eqolelzj getItemGlintConsumer (Lnet/minecraft/unmapped/C_igrgeffe;Lnet/minecraft/unmapped/C_tizlwnnv;ZZ)Lnet/minecraft/unmapped/C_igthdzux;
@@ -33,8 +37,16 @@ CLASS net/minecraft/unmapped/C_xjqetogb net/minecraft/client/render/item/ItemRen
 		ARG 8 light
 		ARG 9 overlay
 		ARG 10 seed
+	METHOD m_fepxzrkv render (Lnet/minecraft/unmapped/C_byhguelf;Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;II[ILnet/minecraft/unmapped/C_nnhmhkbv;Lnet/minecraft/unmapped/C_tizlwnnv;Lnet/minecraft/unmapped/C_hvackyip$C_aytbigki;)V
+		ARG 0 transformationMode
+		ARG 3 light
+		ARG 4 overlay
+		ARG 5 tints
+		ARG 7 layer
+		ARG 8 glintType
 	METHOD m_qpesfboj renderBakedItemModel (Lnet/minecraft/unmapped/C_nnhmhkbv;[IIILnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igthdzux;)V
 		ARG 0 model
+		ARG 1 tints
 		ARG 2 light
 		ARG 3 overlay
 		ARG 4 matrices
@@ -43,3 +55,6 @@ CLASS net/minecraft/unmapped/C_xjqetogb net/minecraft/client/render/item/ItemRen
 		ARG 0 provider
 		ARG 1 layer
 		ARG 2 entry
+	METHOD m_ymofutkb getColor ([II)I
+		ARG 0 colors
+		ARG 1 index
