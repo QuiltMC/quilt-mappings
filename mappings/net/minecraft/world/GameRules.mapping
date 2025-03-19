@@ -80,6 +80,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 	METHOD m_annnbzfc setAllValues (Lnet/minecraft/unmapped/C_xmldumst;Lnet/minecraft/server/MinecraftServer;)V
 		ARG 1 other
 		ARG 2 server
+	METHOD m_czylcdtl createKeyCodec (Ljava/lang/Class;)Lcom/mojang/serialization/Codec;
+		ARG 0 ruleClass
 	METHOD m_dpsrpyxn getIntValue (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)I
 		ARG 1 gameRule
 	METHOD m_dvpplngi (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Ljava/lang/String;
@@ -90,6 +92,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		COMMENT The visitation involves calling both {@link Visitor#visitGameRule(GameRules.Key, GameRules.Type)} and
 		COMMENT {@link Visitor#visitBooleanGameRule(GameRules.Key, GameRules.Type)} or {@link Visitor#visitIntGameRule(GameRules.Key, GameRules.Type)},
 		COMMENT depending on whether it is a {@link BooleanGameRule} or a {@link IntGameRule}, for every game rule.
+	METHOD m_igwmmzzg (Ljava/lang/Class;Ljava/util/Map$Entry;)Z
+		ARG 1 entry
 	METHOD m_khbebsio toNbt ()Lnet/minecraft/unmapped/C_hhlwcnih;
 	METHOD m_kkvdhcio copy (Lnet/minecraft/unmapped/C_czxxrbcp;)Lnet/minecraft/unmapped/C_xmldumst;
 	METHOD m_magbttmy load (Lcom/mojang/serialization/DynamicLike;)V
@@ -100,11 +104,17 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		ARG 1 key
 		ARG 2 other
 		ARG 3 server
+	METHOD m_stjtfpbf (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
+		ARG 0 key
+	METHOD m_ujubwrah (Ljava/lang/Class;Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 1 name
 	METHOD m_vkgvfrzn getBooleanValue (Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Z
 		ARG 1 gameRule
 	METHOD m_wqjrkanc accept (Lnet/minecraft/unmapped/C_xmldumst$C_avotqrag;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)V
 		ARG 1 visitor
 		ARG 2 key
+	METHOD m_zswhrtpk (Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;)Z
+		ARG 1 key
 	METHOD m_zuudbppt register (Ljava/lang/String;Lnet/minecraft/unmapped/C_xmldumst$C_vkqoqsmj;Lnet/minecraft/unmapped/C_xmldumst$C_mymgluou;)Lnet/minecraft/unmapped/C_xmldumst$C_iuaedxxw;
 		ARG 0 name
 		ARG 1 category
@@ -162,6 +172,7 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 			ARG 1 type
 	CLASS C_mymgluou Type
 		FIELD f_hnrsjwnv argumentType Ljava/util/function/Supplier;
+		FIELD f_ikovlbbf ruleClass Ljava/lang/Class;
 		FIELD f_ozxhwwyh gameRuleFactory Ljava/util/function/Function;
 		FIELD f_pzcyasul gameRuleAcceptor Lnet/minecraft/unmapped/C_xmldumst$C_bctfwntr;
 		FIELD f_tpnzzqev changeCallback Ljava/util/function/BiConsumer;
@@ -206,6 +217,8 @@ CLASS net/minecraft/unmapped/C_xmldumst net/minecraft/world/GameRules
 		METHOD m_emtbituz getCommandResult ()I
 		METHOD m_gahlkrnn serialize ()Ljava/lang/String;
 		METHOD m_lfnwcotw setValue (Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;Lnet/minecraft/server/MinecraftServer;)V
+			ARG 1 rule
+			ARG 2 server
 		METHOD m_mrykegon getThis ()Lnet/minecraft/unmapped/C_xmldumst$C_ubszziqk;
 		METHOD m_ntgysflg setValue (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V
 			ARG 1 context
