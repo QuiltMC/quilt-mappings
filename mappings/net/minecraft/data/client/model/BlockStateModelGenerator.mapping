@@ -3,19 +3,32 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	FIELD f_pcbcdgpp modelCollector Ljava/util/function/BiConsumer;
 	FIELD f_rrpxezpu VARIANT_POOL_FUNCTIONS Ljava/util/Map;
 	FIELD f_uftjkmfb blockStateCollector Ljava/util/function/Consumer;
+	FIELD f_xitkbpgy CONNECTION_VARIANT_FUNCTIONS Ljava/util/Map;
+		COMMENT A map from a boolean property about connection on one direction to a
+		COMMENT function that creates a block state variant for connection on that
+		COMMENT direction with a given connection model.
 	METHOD m_aatbebfe registerCake ()V
 	METHOD m_aaykitdm registerRod (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
+	METHOD m_aezxlsub createSingletonBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_ufuguevl;
+		ARG 0 block
 	METHOD m_ajuijexh registerJigsaw ()V
 	METHOD m_anojqlaf registerTripwire ()V
+	METHOD m_anzxptee createCustomFenceBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 fenceBlock
 	METHOD m_avlsmemt registerCauldron ()V
 	METHOD m_baccbhio registerStructureBlock ()V
+	METHOD m_bahuxwtr createFenceGateBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Z)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 fenceGateBlock
+		ARG 5 uvLock
 	METHOD m_bbhtncaa registerBuiltinWithParticle (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_vorddnax;)V
 		ARG 1 block
 		ARG 2 particleSource
 	METHOD m_bjtaqbun registerNorthDefaultHorizontalRotated (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_tkkixdtc$C_jbkydoyx;)V
 		ARG 1 block
 		ARG 2 modelFactory
+	METHOD m_blyumoja getFireUpModels (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_bfdbeegn;
+		ARG 1 texture
 	METHOD m_bpfiayub registerStateWithModelReference (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
 		ARG 2 modelReference
@@ -23,11 +36,19 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 stemBlock
 		ARG 2 attachedStemBlock
 	METHOD m_cbfmkwcm registerVault ()V
+	METHOD m_cfhgxizg createButtonBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 buttonBlock
+	METHOD m_cjjliakj registerAxisRotated (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;)V
+		ARG 1 block
 	METHOD m_cocrvdsm registerBamboo ()V
+	METHOD m_dfxtgqon registerDoubleBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)V
+		ARG 1 block
 	METHOD m_dkqexyeo registerCubeAllModelTexturePool (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_ysvjbfkt$C_jphnvadg;
 		ARG 1 block
 	METHOD m_dnjqhzou registerCopperBulb (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 bulb
+	METHOD m_dqokmjdp createBooleanModelMap (Lnet/minecraft/unmapped/C_xhwijdsd;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_ujotlecn;
+		ARG 0 property
 	METHOD m_dqusahgt registerBigDripleaf ()V
 	METHOD m_ecublzrd registerSeaPickle ()V
 	METHOD m_ekqfyyof registerFurnaceLikeOrientable (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
@@ -37,6 +58,8 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 doorBlock
 		ARG 2 parent
 	METHOD m_exnmtdvm registerNetherPortal ()V
+	METHOD m_fasxgfba getFireSideModels (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_bfdbeegn;
+		ARG 1 texture
 	METHOD m_ffgjqufk registerSimpleCubeAll (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
 	METHOD m_frnyhswu registerScaffolding ()V
@@ -44,6 +67,11 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_glezpwwc registerCartographyTable ()V
 	METHOD m_glngxdiu registerSmithingTable ()V
 	METHOD m_guxcvxip registerRedstoneTorch ()V
+	METHOD m_hcupecjt addBookSlotModel (Lnet/minecraft/unmapped/C_xsihzhnp;Lnet/minecraft/unmapped/C_icddimns;Lnet/minecraft/unmapped/C_jffsbkpa;Lnet/minecraft/unmapped/C_xhwijdsd;Lnet/minecraft/unmapped/C_zppcsbsk;Z)V
+		ARG 1 stateSupplier
+		ARG 4 occupiedProperty
+		ARG 5 model
+		ARG 6 occupied
 	METHOD m_hdcntxdm registerInfestedStone ()V
 	METHOD m_hdjwrzzm registerBuiltinWithParticle (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_ncpywfca;)V
 		ARG 1 block
@@ -53,7 +81,13 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_hjdevwtp registerWaxedCopperBulb (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 bulb
 		ARG 2 waxedBulb
+	METHOD m_hkwihedq registerPiston (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_pgmmajlq;)V
+		ARG 1 piston
+		ARG 3 texture
 	METHOD m_htouohii registerPetrifiedOakSlab ()V
+	METHOD m_hyrygyep getDripstoneVariant (Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_kfpkaqag;)Lnet/minecraft/unmapped/C_bfdbeegn;
+		ARG 1 direction
+		ARG 2 thickness
 	METHOD m_itgfivoo registerSculkSensor ()V
 	METHOD m_itofvnvc registerSunflower ()V
 	METHOD m_itvgmpcn registerAzalea (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
@@ -80,19 +114,31 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 beehive
 		ARG 2 textureGetter
 	METHOD m_khayyhto registerRedstone ()V
+	METHOD m_klkdextb createPressurePlateBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 pressurePlateBlock
 	METHOD m_lhjyqfue registerPressurePlate (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 pressurePlate
 		ARG 2 textureSource
 	METHOD m_lhwwsxgs registerDustable (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 	METHOD m_ljmsqwrd registerSmoothStone ()V
 	METHOD m_lrwtqevx registerRespawnAnchor ()V
+	METHOD m_luasfpcl getBambooBlockStateVariants (I)Lnet/minecraft/unmapped/C_bfdbeegn;
+		ARG 1 age
 	METHOD m_luvphzzj registerLantern (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 lantern
 	METHOD m_lxgnwpnn registerChorusPlant ()V
 	METHOD m_lxxxuewp registerObserver ()V
 	METHOD m_maybkyfu registerBell ()V
+	METHOD m_mghkbdnj createMudBrickState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_blazqqmb;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 block
+		ARG 2 texture
+		ARG 3 modelCollector
 	METHOD m_mkszkjye registerMuddyMangroveRoots ()V
 	METHOD m_mofryije registerComparator ()V
+	METHOD m_mqvibvqy createStoneState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_blazqqmb;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 block
+		ARG 2 texture
+		ARG 3 modelCollector
 	METHOD m_mwtfkfoc registerPitcherPlant ()V
 	METHOD m_mwuwtaow registerTurtleEgg ()V
 	METHOD m_mzdkyxgy registerTorch (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
@@ -103,16 +149,23 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_nvamqtbi registerGrassPath ()V
 	METHOD m_nwusmhrm registerBarrel ()V
 	METHOD m_odanwlbt registerCalibratedSculkSensor ()V
+	METHOD m_oekselca createFenceBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 fenceBlock
 	METHOD m_oeuloqol registerFrostedIce ()V
 	METHOD m_oububbdh registerCandle (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 candle
 		ARG 2 cake
 	METHOD m_ovirwzwn registerGrindstone ()V
 	METHOD m_oxrdxyqg registerPitcherCrop ()V
+	METHOD m_oxulsacv createUvLockedPillarBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 1 texture
+		ARG 2 modelCollector
 	METHOD m_oyptuzye registerStonecutter ()V
 	METHOD m_paheasaf registerNetherrack ()V
 	METHOD m_pgdoxvrl registerCommandBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 commandBlock
+	METHOD m_phiipjec addJigsawOrientationToVariant (Lnet/minecraft/unmapped/C_vukkmxtr;)Lnet/minecraft/unmapped/C_jffsbkpa;
+		ARG 0 orientation
 	METHOD m_pixvjnen registerTrialSpawner ()V
 	METHOD m_pjuiolyd registerTripwireHook ()V
 	METHOD m_plkinhmd registerLightBlock ()V
@@ -136,6 +189,9 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 block
 		ARG 2 otherTextureSource
 		ARG 3 textureFactory
+	METHOD m_qhrtywiz createValueFencedModelMap (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Comparable;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_ujotlecn;
+		ARG 0 property
+		ARG 1 fence
 	METHOD m_qnltdjlo registerRepeater ()V
 	METHOD m_qoufwelq registerNetherrackBottomCustomTop (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
@@ -202,10 +258,18 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_xghzmykj registerSculkShrieker ()V
 	METHOD m_xkekfvxk registerRotatable (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 block
+	METHOD m_xmchdlvl getFireFloorModels (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_bfdbeegn;
+		ARG 1 texture
 	METHOD m_xrawdmen registerFarmland ()V
+	METHOD m_xrodyxbs createWallBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 wallBlock
 	METHOD m_xwogaivy registerCoralFan (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 coralFanBlock
 		ARG 2 coralWallFanBlock
+	METHOD m_xwwulybf createDeepslateState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_blazqqmb;Lnet/minecraft/unmapped/C_pgmmajlq;Ljava/util/function/BiConsumer;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 block
+		ARG 2 texture
+		ARG 3 modelCollector
 	METHOD m_xytavhtz registerSmallDripleaf ()V
 	METHOD m_yaqqiwxt registerRandomHorizontalRotations (Lnet/minecraft/unmapped/C_tkkixdtc$C_jbkydoyx;[Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 modelFactory
@@ -214,6 +278,10 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	METHOD m_ymexyozf registerPumpkins ()V
 	METHOD m_yonzegma registerDoor (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 doorBlock
+	METHOD m_ypqcefwf createSlabBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 slabBlock
+	METHOD m_yyopcyqu createStairsBlockState (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)Lnet/minecraft/unmapped/C_twfyqgeb;
+		ARG 0 stairsBlock
 	METHOD m_zagedreb registerFire ()V
 	METHOD m_zcugyzpv registerTurnableRail (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
 		ARG 1 rail
@@ -225,8 +293,12 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 		ARG 1 log
 		ARG 2 hangingSign
 		ARG 3 wallSign
+	METHOD m_zivxhyxe registerTopSoil (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_bfdbeegn;Lnet/minecraft/unmapped/C_bfdbeegn;)V
+		ARG 1 topSoil
 	METHOD m_zkwrcwzq registerShulkerBox (Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_arllgqae;)V
 		ARG 1 shulkerBox
+	METHOD m_zoxlycaq addSlotStateAndRotationVariants (Lnet/minecraft/unmapped/C_xsihzhnp;Lnet/minecraft/unmapped/C_icddimns;Lnet/minecraft/unmapped/C_jffsbkpa;)V
+		ARG 1 stateSupplier
 	METHOD m_zutsvuwn registerMangrovePropagule ()V
 	METHOD m_zvzvirsj registerComposter ()V
 	METHOD m_zxkyyqmx registerAnvil (Lnet/minecraft/unmapped/C_mmxmpdoq;)V
@@ -234,6 +306,7 @@ CLASS net/minecraft/unmapped/C_ysvjbfkt net/minecraft/data/client/model/BlockSta
 	CLASS C_jhuevbcm BookSlotModelCacheKey
 	CLASS C_jphnvadg BlockTexturePool
 		FIELD f_cearzyke texture Lnet/minecraft/unmapped/C_pgmmajlq;
+		FIELD f_icadalep baseModelId Lnet/minecraft/unmapped/C_blazqqmb;
 		FIELD f_ihzuktky knownModels Ljava/util/Map;
 		FIELD f_narscpoc skippedModels Ljava/util/Set;
 		FIELD f_ouzoxrif family Lnet/minecraft/unmapped/C_eonlnchv;

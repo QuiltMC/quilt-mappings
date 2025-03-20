@@ -9,11 +9,20 @@ CLASS net/minecraft/unmapped/C_nqsxthnh net/minecraft/resource/SimpleResourceRel
 		COMMENT The weight of either prepare or apply stages' progress in the total progress
 		COMMENT calculation. Has value {@value}.
 	FIELD f_gfyktslg reloaderCount I
+	FIELD f_hfilwdja appliedCount Ljava/util/concurrent/atomic/AtomicInteger;
 	FIELD f_mitzjbwz waitingReloaders Ljava/util/Set;
+	FIELD f_rzvuqgmk toApplyCount Ljava/util/concurrent/atomic/AtomicInteger;
 	FIELD f_vkcaoqmt FIRST_PREPARE_APPLY_WEIGHT I
 		COMMENT The weight of either prepare or apply stages' progress in the total progress
 		COMMENT calculation. Has value {@value}.
 	FIELD f_xhhrscjo prepareStageFuture Ljava/util/concurrent/CompletableFuture;
+	METHOD m_fdirnkhq create (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;)Lnet/minecraft/unmapped/C_dzecaeok;
+		COMMENT Creates a simple resource reload without additional results.
+		ARG 0 manager
+		ARG 1 reloaders
+		ARG 2 prepareExecutor
+		ARG 3 applyExecutor
+		ARG 4 initialStage
 	METHOD m_obrutakb create (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;Z)Lnet/minecraft/unmapped/C_dzecaeok;
 		ARG 0 manager
 		ARG 1 reloaders
