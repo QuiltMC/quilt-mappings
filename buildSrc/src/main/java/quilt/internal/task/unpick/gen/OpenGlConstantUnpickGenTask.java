@@ -43,7 +43,7 @@ public abstract class OpenGlConstantUnpickGenTask extends DefaultTask implements
 
     public static final String OPEN_GL_REGISTRY =
         "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/xml/gl.xml";
-    public static final String GL_STATE_MANAGER_CLASS = "com/mojang/blaze3d/platform/GlStateManager";
+    public static final String GL_STATE_MANAGER_CLASS = "com/mojang/blaze3d/opengl/GlStateManager";
 
     public static final List<String> OPEN_GL_VERSIONS =
         List.of("11", "12", "13", "14", "15", "20", "21", "30", "31", "32");
