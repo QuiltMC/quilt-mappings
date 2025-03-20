@@ -7,7 +7,6 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	FIELD f_aowxqqcr hasCrumbling Z
 	FIELD f_ciwsflac TEXT Ljava/util/function/Function;
 	FIELD f_ckqgfrsh ENTITY_DECAL Ljava/util/function/Function;
-	FIELD f_cruxjkld EYES Ljava/util/function/BiFunction;
 	FIELD f_derbiikl ITEM_ENTITY_TRANSLUCENT_CULL Ljava/util/function/Function;
 	FIELD f_dluznqhz TEXT_INTENSITY_SEE_THROUGH Ljava/util/function/Function;
 	FIELD f_dxbfeduy CROSSHAIR Ljava/util/function/Function;
@@ -26,7 +25,6 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	FIELD f_jkmtblbz TEXT_INTENSITY Ljava/util/function/Function;
 	FIELD f_kfxquoif TEXT_INTENSITY_POLYGON_OFFSET Ljava/util/function/Function;
 	FIELD f_mgnrryvz ENTITY_CUTOUT Ljava/util/function/Function;
-	FIELD f_mwwhmycc drawMode Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
 	FIELD f_otxumvoh ENTITY_SOLID Ljava/util/function/Function;
 	FIELD f_owlpygmr CUTOUT_BUFFER_SIZE I
 	FIELD f_ravpjrir SOLID_BUFFER_SIZE I
@@ -43,17 +41,7 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	FIELD f_yqvdrflq GUI_TEXTURED_OVERLAY Ljava/util/function/Function;
 	FIELD f_zfjxdick DEBUG_LINE_STRIP_FACTORY Ljava/util/function/Function;
 	FIELD f_zqtnklpi BEACON_BEAM Ljava/util/function/BiFunction;
-	FIELD f_zuyjnfnl vertexFormat Lnet/minecraft/unmapped/C_rnldvdpe;
 	FIELD f_zvctsqgr TEXT_POLYGON_OFFSET Ljava/util/function/Function;
-	METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_rnldvdpe;Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;IZZLjava/lang/Runnable;Ljava/lang/Runnable;)V
-		ARG 1 name
-		ARG 2 vertexFormat
-		ARG 3 drawMode
-		ARG 4 expectedBufferSize
-		ARG 5 hasCrumbling
-		ARG 6 translucent
-		ARG 7 startAction
-		ARG 8 endAction
 	METHOD m_anawimrj (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_anoumxob getGuiTextured (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -61,10 +49,6 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_baqvxxdi getEntitySolid (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_betbxymq getGuiOverlay ()Lnet/minecraft/unmapped/C_tizlwnnv;
-	METHOD m_bfrbakwz getArmorCutoutNoCull (Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;Z)Lnet/minecraft/unmapped/C_tizlwnnv$C_otpmelyb;
-		ARG 0 name
-		ARG 1 texture
-		ARG 2 decal
 	METHOD m_bnrgoaxp getDrawMode ()Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;
 	METHOD m_bnwgdzyr (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
@@ -93,9 +77,6 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_eodxypva getEntitySmoothCutout (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_eplyaoof isOutline ()Z
-	METHOD m_ezhuwpgi getClouds (ZZ)Lnet/minecraft/unmapped/C_tizlwnnv$C_otpmelyb;
-		ARG 0 depth
-		ARG 1 cull
 	METHOD m_fdssmrcg (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_flkcsqyo getGuiNauseaOverlay ()Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -106,33 +87,20 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_ggmyrrtc getTextIntensitySeeThrough (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_glwsbfei getCloudsFlat ()Lnet/minecraft/unmapped/C_tizlwnnv;
-	METHOD m_gmswhtfe getTripwirePhaseData ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 	METHOD m_gpbocanz hasCrumbling ()Z
 	METHOD m_hfsmielv getTextBackgroundSeeThrough ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_hoctkqlf (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
-	METHOD m_htmbmewy of (Ljava/lang/String;Lnet/minecraft/unmapped/C_rnldvdpe;Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;IZZLnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;)Lnet/minecraft/unmapped/C_tizlwnnv$C_otpmelyb;
-		ARG 0 name
-		ARG 1 vertexFormat
-		ARG 2 drawMode
-		ARG 3 expectedBufferSize
-		ARG 4 hasCrumbling
-		ARG 5 translucent
-		ARG 6 phases
 	METHOD m_hyadiakp getCrosshair (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_ijulroee getWaterMask ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_iokzpdac getGuiTexturedOverlay (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
-		ARG 0 texture
-	METHOD m_ioprmssj (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_jfdjboum getLines ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_jlfilozp getArmorEntityGlint ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_jobkjsgk getCloudsDepth ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_jumxwpag (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
-	METHOD m_kboqswsf of (Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
-		ARG 0 shader
 	METHOD m_kjlgxamr getDebugSectionQuads ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_kjsymkok (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
@@ -161,8 +129,6 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_nzqeeqjc (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_ocmzazwr getTranslucentEmissive (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
-		ARG 0 texture
-	METHOD m_oezrvzej (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_omxkkrgj (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
@@ -202,12 +168,6 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_tdqsdhpv getEndGateway ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_tjnwbtua (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
-	METHOD m_uauexmpv of (Ljava/lang/String;Lnet/minecraft/unmapped/C_rnldvdpe;Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;ILnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;)Lnet/minecraft/unmapped/C_tizlwnnv$C_otpmelyb;
-		ARG 0 name
-		ARG 1 vertexFormat
-		ARG 2 drawMode
-		ARG 3 expectedBufferSize
-		ARG 4 phaseData
 	METHOD m_ugdgexll getLeash ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_uoqknzkc getTripwire ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_upvaymmi getBlockBreaking (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -222,14 +182,11 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 	METHOD m_uyqydjhy getEntityGlint ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_vlvhhilo getVignette (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
-	METHOD m_wadinvlb (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
-		ARG 0 texture
 	METHOD m_wayaljif getEntityShadow (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_wdwqsulq getGuiGhostRecipeOverlay ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_wfxibejx getDragonRaysDepth ()Lnet/minecraft/unmapped/C_tizlwnnv;
 	METHOD m_widtimmm getSolid ()Lnet/minecraft/unmapped/C_tizlwnnv;
-	METHOD m_wnbqszyf getItemPhaseData ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 	METHOD m_xfopkxca getEyes (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
 		ARG 0 texture
 	METHOD m_xhxmgsuq getItemEntityTranslucentCull (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
@@ -269,92 +226,33 @@ CLASS net/minecraft/unmapped/C_tizlwnnv net/minecraft/client/render/RenderLayer
 		FIELD f_gksitatb phases Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 		FIELD f_lklwjhwn affectedOutline Ljava/util/Optional;
 		FIELD f_rlpwmmie CULLING_LAYERS Ljava/util/function/BiFunction;
-		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_rnldvdpe;Lnet/minecraft/unmapped/C_rnldvdpe$C_ptsbsfse;IZZLnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;)V
-			ARG 1 name
-			ARG 2 vertexFormat
-			ARG 3 drawMode
-			ARG 4 expectedBufferSize
-			ARG 5 hasCrumbling
-			ARG 6 translucent
-			ARG 7 phases
-		METHOD m_bknmqqto getPhases ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
-		METHOD m_khjweejz (Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_tizlwnnv;
-			ARG 1 texture
-		METHOD m_sxpkevmp (Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;)Lnet/minecraft/unmapped/C_tizlwnnv;
-			ARG 0 texture
-			ARG 1 culling
 	CLASS C_rympudia MultiPhaseParameters
-		FIELD f_ahqghcwc depthTest Lnet/minecraft/unmapped/C_yzzfidwp$C_nkzrqjhs;
 		FIELD f_dydjlbjf texture Lnet/minecraft/unmapped/C_yzzfidwp$C_nowrkyrj;
-		FIELD f_gssuzofl shader Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;
-		FIELD f_hhctjprg target Lnet/minecraft/unmapped/C_yzzfidwp$C_uoafqnwi;
 		FIELD f_iqeydlqj outlineMode Lnet/minecraft/unmapped/C_tizlwnnv$C_mpecwgqi;
-		FIELD f_ishluadz layering Lnet/minecraft/unmapped/C_yzzfidwp$C_vrnvavuu;
-		FIELD f_ldkxfgjk cull Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;
-		FIELD f_mprlrimm lightmap Lnet/minecraft/unmapped/C_yzzfidwp$C_dpwyhlfm;
-		FIELD f_pnttscew colorLogic Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;
-		FIELD f_qonlkpdj texturing Lnet/minecraft/unmapped/C_yzzfidwp$C_vxvdrdhn;
 		FIELD f_rlqotuxj phases Lcom/google/common/collect/ImmutableList;
-		FIELD f_xjpvdtpw transparency Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;
-		FIELD f_xqgftxqt writeMaskState Lnet/minecraft/unmapped/C_yzzfidwp$C_aognicdc;
-		FIELD f_zltibsec overlay Lnet/minecraft/unmapped/C_yzzfidwp$C_gxsnmcus;
-		FIELD f_zudcbgdn lineWidth Lnet/minecraft/unmapped/C_yzzfidwp$C_zraaemdb;
-		METHOD <init> (Lnet/minecraft/unmapped/C_yzzfidwp$C_nowrkyrj;Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;Lnet/minecraft/unmapped/C_yzzfidwp$C_nkzrqjhs;Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;Lnet/minecraft/unmapped/C_yzzfidwp$C_dpwyhlfm;Lnet/minecraft/unmapped/C_yzzfidwp$C_gxsnmcus;Lnet/minecraft/unmapped/C_yzzfidwp$C_vrnvavuu;Lnet/minecraft/unmapped/C_yzzfidwp$C_uoafqnwi;Lnet/minecraft/unmapped/C_yzzfidwp$C_vxvdrdhn;Lnet/minecraft/unmapped/C_yzzfidwp$C_aognicdc;Lnet/minecraft/unmapped/C_yzzfidwp$C_zraaemdb;Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;Lnet/minecraft/unmapped/C_tizlwnnv$C_mpecwgqi;)V
-			ARG 1 texture
-			ARG 2 shader
-			ARG 3 transparency
-			ARG 4 depthTest
-			ARG 5 cull
-			ARG 6 lightmap
-			ARG 7 overlay
-			ARG 8 layering
-			ARG 9 target
-			ARG 10 texturing
-			ARG 11 writeMaskState
-			ARG 12 lineWidth
-			ARG 13 colorLogic
-			ARG 14 outlineMode
 		METHOD m_bpkykzvd builder ()Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 		CLASS C_dpvtqibq Builder
 			FIELD f_auluqkwb target Lnet/minecraft/unmapped/C_yzzfidwp$C_uoafqnwi;
-			FIELD f_ayblorpd shader Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;
 			FIELD f_bjnfymjn lightmap Lnet/minecraft/unmapped/C_yzzfidwp$C_dpwyhlfm;
-			FIELD f_caepbkqs depthTest Lnet/minecraft/unmapped/C_yzzfidwp$C_nkzrqjhs;
 			FIELD f_dapndmbi overlay Lnet/minecraft/unmapped/C_yzzfidwp$C_gxsnmcus;
-			FIELD f_haknzamj transparency Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;
 			FIELD f_hlhfamgn texturing Lnet/minecraft/unmapped/C_yzzfidwp$C_vxvdrdhn;
 			FIELD f_hnjpmlld texture Lnet/minecraft/unmapped/C_yzzfidwp$C_nowrkyrj;
-			FIELD f_oooilbly colorLogic Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;
-			FIELD f_qgjcipng cull Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;
 			FIELD f_tgxiaydd layering Lnet/minecraft/unmapped/C_yzzfidwp$C_vrnvavuu;
-			FIELD f_tjiudxyg writeMaskState Lnet/minecraft/unmapped/C_yzzfidwp$C_aognicdc;
 			FIELD f_zxhvfbjd lineWidth Lnet/minecraft/unmapped/C_yzzfidwp$C_zraaemdb;
 			METHOD m_bgvdzkpt texturing (Lnet/minecraft/unmapped/C_yzzfidwp$C_vxvdrdhn;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 texturing
-			METHOD m_ezwfougm depthTest (Lnet/minecraft/unmapped/C_yzzfidwp$C_nkzrqjhs;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
-				ARG 1 depthTest
-			METHOD m_fditaxxb cull (Lnet/minecraft/unmapped/C_yzzfidwp$C_dbcirgwl;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
-				ARG 1 cull
 			METHOD m_fhoxkadc texture (Lnet/minecraft/unmapped/C_yzzfidwp$C_nowrkyrj;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 texture
-			METHOD m_futkkpbx writeMaskState (Lnet/minecraft/unmapped/C_yzzfidwp$C_aognicdc;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
-				ARG 1 writeMaskState
 			METHOD m_ieqnsjal build (Z)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
 				ARG 1 affectsOutline
-			METHOD m_jjkjwwbr colorLogic (Lnet/minecraft/unmapped/C_yzzfidwp$C_ziyeyhbp;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
-				ARG 1 colorLogic
 			METHOD m_jwrisfru lightmap (Lnet/minecraft/unmapped/C_yzzfidwp$C_dpwyhlfm;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 lightmap
 			METHOD m_klolhcic lineWidth (Lnet/minecraft/unmapped/C_yzzfidwp$C_zraaemdb;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 lineWidth
-			METHOD m_oejpgdxs transparency (Lnet/minecraft/unmapped/C_yzzfidwp$C_teqnhgnk;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
-				ARG 1 transparency
 			METHOD m_omghnhwj target (Lnet/minecraft/unmapped/C_yzzfidwp$C_uoafqnwi;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 target
 			METHOD m_pltntloh overlay (Lnet/minecraft/unmapped/C_yzzfidwp$C_gxsnmcus;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 overlay
-			METHOD m_pnapuosw shader (Lnet/minecraft/unmapped/C_yzzfidwp$C_sjhugikn;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
-				ARG 1 shader
 			METHOD m_qlckomuv layering (Lnet/minecraft/unmapped/C_yzzfidwp$C_vrnvavuu;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia$C_dpvtqibq;
 				ARG 1 layering
 			METHOD m_vuebafmb build (Lnet/minecraft/unmapped/C_tizlwnnv$C_mpecwgqi;)Lnet/minecraft/unmapped/C_tizlwnnv$C_rympudia;
