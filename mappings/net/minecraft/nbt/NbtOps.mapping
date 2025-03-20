@@ -18,7 +18,6 @@ CLASS net/minecraft/unmapped/C_fybaywjo net/minecraft/nbt/NbtOps
 		COMMENT with an ordered list of values in serialization). In fact, since
 		COMMENT Minecraft NBT lists can only contain elements of the same type, this op
 		COMMENT cannot compress maps.
-	FIELD f_zjvitncb MARKER_KEY Ljava/lang/String;
 	METHOD convertTo (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 2 element
 	METHOD createBoolean (Z)Ljava/lang/Object;
@@ -69,8 +68,6 @@ CLASS net/minecraft/unmapped/C_fybaywjo net/minecraft/nbt/NbtOps
 		ARG 1 element
 	METHOD getStringValue (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
 		ARG 1 element
-	METHOD m_kvzwcnej tryUnwrap (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_oivssbvb;
-		ARG 0 nbt
 	METHOD m_vpbkfzmz createCollector (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/Optional;
 		ARG 0 element
 	METHOD mergeToList (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
@@ -92,12 +89,6 @@ CLASS net/minecraft/unmapped/C_fybaywjo net/minecraft/nbt/NbtOps
 	METHOD remove (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 		ARG 1 element
 		ARG 2 key
-	CLASS C_cfjsyyyh SimpleListCollector
-		FIELD f_zdfsryne result Lnet/minecraft/unmapped/C_hqhtfwlr;
-		METHOD <init> (Lnet/minecraft/unmapped/C_hqhtfwlr;)V
-			ARG 1 nbt
-		METHOD <init> (Lnet/minecraft/unmapped/C_oivssbvb;)V
-			ARG 1 element
 	CLASS C_cmafvjrt MapBuilder
 		METHOD append (Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 			ARG 1 key
@@ -108,18 +99,12 @@ CLASS net/minecraft/unmapped/C_fybaywjo net/minecraft/nbt/NbtOps
 			ARG 2 element
 	CLASS C_cpsqmvih ByteListCollector
 		FIELD f_ijtscyyp values Lit/unimi/dsi/fastutil/bytes/ByteArrayList;
-		METHOD <init> (B)V
-			ARG 1 value
 		METHOD <init> ([B)V
 			ARG 1 values
 	CLASS C_dwkvaauw LongListCollector
 		FIELD f_rjyiwlrj values Lit/unimi/dsi/fastutil/longs/LongArrayList;
-		METHOD <init> (J)V
-			ARG 1 value
 		METHOD <init> ([J)V
 			ARG 1 values
-	CLASS C_lrggpudd DelegatingListCollector
-		FIELD f_oknzgzfq INSTANCE Lnet/minecraft/unmapped/C_fybaywjo$C_nehsnwyp;
 	CLASS C_nehsnwyp ListCollector
 		METHOD m_berihwml accept (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_fybaywjo$C_nehsnwyp;
 		METHOD m_fjtdnzmx accept (Ljava/lang/Iterable;)Lnet/minecraft/unmapped/C_fybaywjo$C_nehsnwyp;
@@ -129,22 +114,5 @@ CLASS net/minecraft/unmapped/C_fybaywjo net/minecraft/nbt/NbtOps
 		METHOD m_mlztdcvi getResult ()Lnet/minecraft/unmapped/C_oivssbvb;
 	CLASS C_rkolbfzv IntListCollector
 		FIELD f_pvqmoapp values Lit/unimi/dsi/fastutil/ints/IntArrayList;
-		METHOD <init> (I)V
-			ARG 1 value
 		METHOD <init> ([I)V
 			ARG 1 values
-	CLASS C_zcsovcmj WrappingListCollector
-		FIELD f_kuucpbgx result Lnet/minecraft/unmapped/C_hqhtfwlr;
-		METHOD <init> (Lit/unimi/dsi/fastutil/bytes/ByteArrayList;)V
-			ARG 1 list
-		METHOD <init> (Lit/unimi/dsi/fastutil/ints/IntArrayList;)V
-			ARG 1 list
-		METHOD <init> (Lit/unimi/dsi/fastutil/longs/LongArrayList;)V
-			ARG 1 list
-		METHOD <init> (Ljava/util/Collection;)V
-			ARG 1 elements
-		METHOD m_fhjbuhyx isWrapper (Lnet/minecraft/unmapped/C_hhlwcnih;)Z
-			ARG 0 nbt
-		METHOD m_ntfjawdo wrapElement (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		METHOD m_vxfjomvi wrapIfNeeded (Lnet/minecraft/unmapped/C_oivssbvb;)Lnet/minecraft/unmapped/C_oivssbvb;
-			ARG 0 element
