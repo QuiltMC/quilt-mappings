@@ -253,6 +253,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 2 encoder
 	METHOD m_appecnpy readQuaternion (Lio/netty/buffer/ByteBuf;)Lorg/joml/Quaternionf;
 		ARG 0 buf
+	METHOD m_aqriaemp readLongArray (Lio/netty/buffer/ByteBuf;)[J
 	METHOD m_axcuwjgm writeSyncId (Lio/netty/buffer/ByteBuf;I)V
 		ARG 1 value
 	METHOD m_bczcqhop writeString (Ljava/lang/String;I)Lnet/minecraft/unmapped/C_idfydwco;
@@ -270,6 +271,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the string to write
 		ARG 2 maxLength
 			COMMENT the max length of the byte array
+	METHOD m_bdfynlyg writeLongArray (Lio/netty/buffer/ByteBuf;[J)V
 	METHOD m_bsvmttqk readChunkPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 	METHOD m_cozckjjh writeVector3f (Lio/netty/buffer/ByteBuf;Lorg/joml/Vector3f;)V
 		ARG 0 buf
@@ -281,6 +283,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 pos
 	METHOD m_cynxfniu (Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
 		ARG 0 errorMessage
+	METHOD m_dbkaehfk readFixedLengthLongArray ([J)[J
 	METHOD m_delcxvna writeIntArray ([I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes an array of primitive ints to this buf. The array first has a
 		COMMENT var int indicating its length, followed by the var int entries.
@@ -520,15 +523,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @see #readInstant()
 		ARG 1 instant
-	METHOD m_mvznudvi writeLongArray ([J)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes an array of primitive longs to this buf. The array first has a
-		COMMENT var int indicating its length, followed by the regular long (not var
-		COMMENT long) values.
-		COMMENT
-		COMMENT @see #readLongArray()
-		COMMENT @return this buf, for chaining
-		ARG 1 array
-			COMMENT the array to write
 	METHOD m_ngzrehtb writeUuid (Lio/netty/buffer/ByteBuf;Ljava/util/UUID;)V
 		ARG 0 buf
 	METHOD m_nhmhnzug readBitSet (I)Ljava/util/BitSet;
@@ -536,6 +530,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_nhqatmjh writeJson (Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
 		ARG 1 codec
 		ARG 2 object
+	METHOD m_nljfpbrg writeFixedLengthLongArray (Lio/netty/buffer/ByteBuf;[J)V
+		ARG 1 array
 	METHOD m_nxtbhhsr readVec3d (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 0 buf
 	METHOD m_odlpvkyf writePublicKey (Ljava/security/PublicKey;)Lnet/minecraft/unmapped/C_idfydwco;
@@ -560,6 +556,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @see #readRegistryKey(RegistryKey)
 		ARG 1 key
+	METHOD m_qhcyzpbc writeFixedLengthLongArray ([J)Lnet/minecraft/unmapped/C_idfydwco;
 	METHOD m_qpcrbjwf readIntArray (I)[I
 		COMMENT Reads an array of primitive ints from this buf. The array first has a
 		COMMENT var int indicating its length, followed by the var int entries. The array
@@ -610,8 +607,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT long) values. The array does not have a length limit.
 		COMMENT
 		COMMENT @see #writeLongArray(long[])
-		COMMENT @see #readLongArray(long[])
-		COMMENT @see #readLongArray(long[], int)
+		COMMENT @see #readLongArray(ByteBuf)
 		COMMENT @return the read long array
 	METHOD m_smzphvvy writeChunkSectionPos (Lnet/minecraft/unmapped/C_zubvmeye;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Reads a chunk section position from this buf. A chunk section position is
@@ -678,28 +674,14 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_uedohhct readNbt (Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 tagSizeTracker
 	METHOD m_utowfkel writeVec3d (Lnet/minecraft/unmapped/C_vgpupfxx;)V
-	METHOD m_uvlqpwrk readLongArray ([J)[J
-		COMMENT Reads an array of primitive longs from this buf. The array first has a
-		COMMENT var int indicating its length, followed by the regular long (not var
-		COMMENT long) values. The array does not have a length limit.
-		COMMENT
-		COMMENT <p>Only when {@code toArray} is not {@code null} and {@code
-		COMMENT toArray.length} equals to the length var int read will the {@code
-		COMMENT toArray} be reused and returned; otherwise, a new array
-		COMMENT of proper size is created.
-		COMMENT
-		COMMENT @see #writeLongArray(long[])
-		COMMENT @see #readLongArray()
-		COMMENT @see #readLongArray(long[], int)
-		COMMENT @return the read long array
-		ARG 1 toArray
-			COMMENT the array to reuse
 	METHOD m_vbjdgyoz readVector3f (Lio/netty/buffer/ByteBuf;)Lorg/joml/Vector3f;
 		ARG 0 buf
 	METHOD m_vceclpms readUuid (Lio/netty/buffer/ByteBuf;)Ljava/util/UUID;
 		ARG 0 buf
 	METHOD m_vhgdjglx writeVector3f (Lorg/joml/Vector3f;)V
 		ARG 1 vector
+	METHOD m_vhlqdhru readFixedLengthLongArray (Lio/netty/buffer/ByteBuf;[J)[J
+		ARG 1 array
 	METHOD m_vihbcqeq readIntList ()Lit/unimi/dsi/fastutil/ints/IntList;
 		COMMENT Reads a list of primitive ints from this buf. The ints are stored as var
 		COMMENT ints, with an extra var int in the beginning indicating the size.
@@ -717,26 +699,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the value read
 		COMMENT @see #writeVarLong(long)
-	METHOD m_vqdikdfq readLongArray ([JI)[J
-		COMMENT Reads an array of primitive longs from this buf. The array first has a
-		COMMENT var int indicating its length, followed by the regular long (not var
-		COMMENT long) values. The array has a length limit of {@code maxSize}.
-		COMMENT
-		COMMENT <p>Only when {@code toArray} is not {@code null} and {@code
-		COMMENT toArray.length} equals to the length var int read will the {@code
-		COMMENT toArray} be reused and returned; otherwise, a new array
-		COMMENT of proper size is created.
-		COMMENT
-		COMMENT @see #writeLongArray(long[])
-		COMMENT @see #readLongArray()
-		COMMENT @see #readLongArray(long[])
-		COMMENT @return the read long array
-		COMMENT @throws io.netty.handler.codec.DecoderException if the read array has a
-		COMMENT length over {@code maxSize}
-		ARG 1 toArray
-			COMMENT the array to reuse
-		ARG 2 maxSize
-			COMMENT the max length of the read array
 	METHOD m_vquxgdau writeIdentifier (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes an identifier to this buf. An identifier is represented by its
 		COMMENT string form. The written identifier's byte array can have a max length of
@@ -767,6 +729,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the value read
 		COMMENT @see #writeVarInt(int)
+	METHOD m_wzudmtun writeLongArray ([J)Lnet/minecraft/unmapped/C_idfydwco;
 	METHOD m_xfwjnxlt readEnumSet (Ljava/lang/Class;)Ljava/util/EnumSet;
 		ARG 1 enumClass
 	METHOD m_xqhpexur readSyncId ()I

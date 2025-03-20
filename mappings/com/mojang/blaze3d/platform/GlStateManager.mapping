@@ -3,11 +3,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 0 texture
 	METHOD _bindTexture (I)V
 		ARG 0 texture
-	METHOD _blendEquation (I)V
-		ARG 0 mode
-	METHOD _blendFunc (II)V
-		ARG 0 srcFactor
-		ARG 1 dstFactor
 	METHOD _blendFuncSeparate (IIII)V
 		ARG 0 srcFactorRGB
 		ARG 1 dstFactorRGB
@@ -17,8 +12,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 0 red
 	METHOD _clearDepth (D)V
 		ARG 0 depth
-	METHOD _clearStencil (I)V
-		ARG 0 stencil
 	METHOD _colorMask (ZZZZ)V
 		ARG 0 red
 		ARG 1 green
@@ -26,8 +19,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 3 alpha
 	METHOD _deleteTexture (I)V
 		ARG 0 texture
-	METHOD _deleteTextures ([I)V
-		ARG 0 ids
 	METHOD _depthFunc (I)V
 		ARG 0 func
 	METHOD _depthMask (Z)V
@@ -41,8 +32,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 3 indices
 	METHOD _enableVertexAttribArray (I)V
 		ARG 0 index
-	METHOD _genTextures ([I)V
-		ARG 0 ids
 	METHOD _getInteger (I)I
 		ARG 0 pname
 	METHOD _getString (I)Ljava/lang/String;
@@ -67,9 +56,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 	METHOD _glBindFramebuffer (II)V
 		ARG 0 target
 		ARG 1 framebuffer
-	METHOD _glBindRenderbuffer (II)V
-		ARG 0 target
-		ARG 1 renderbuffer
 	METHOD _glBindVertexArray (I)V
 		ARG 0 array
 	METHOD _glBlitFrameBuffer (IIIIIIIIII)V
@@ -91,21 +77,10 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 0 target
 		ARG 1 data
 		ARG 2 usage
-	METHOD _glCopyTexSubImage2D (IIIIIIII)V
-		ARG 0 target
-		ARG 1 level
-		ARG 2 xoffset
-		ARG 3 yoffset
-		ARG 4 x
-		ARG 5 y
-		ARG 6 width
-		ARG 7 height
 	METHOD _glDeleteBuffers (I)V
 		ARG 0 buffer
 	METHOD _glDeleteFramebuffers (I)V
 		ARG 0 framebuffer
-	METHOD _glDeleteRenderbuffers (I)V
-		ARG 0 buffer
 	METHOD _glDeleteVertexArrays (I)V
 		ARG 0 array
 	METHOD _glDrawPixels (IIIIJ)V
@@ -114,31 +89,15 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 2 format
 		ARG 3 type
 		ARG 4 pixels
-	METHOD _glFramebufferRenderbuffer (IIII)V
-		ARG 0 target
-		ARG 1 attachment
-		ARG 2 renderbufferTarget
-		ARG 3 renderbuffer
 	METHOD _glFramebufferTexture2D (IIIII)V
 		ARG 0 target
 		ARG 1 attachment
 		ARG 2 textureTarget
 		ARG 3 texture
 		ARG 4 level
-	METHOD _glGetAttribLocation (ILjava/lang/CharSequence;)I
-		ARG 0 program
-		ARG 1 name
 	METHOD _glGetUniformLocation (ILjava/lang/CharSequence;)I
 		ARG 0 program
 		ARG 1 name
-	METHOD _glMapBuffer (II)Ljava/nio/ByteBuffer;
-		ARG 0 target
-		ARG 1 access
-	METHOD _glRenderbufferStorage (IIII)V
-		ARG 0 target
-		ARG 1 internalFormat
-		ARG 2 width
-		ARG 3 height
 	METHOD _glUniform1 (ILjava/nio/FloatBuffer;)V
 		ARG 0 location
 		ARG 1 value
@@ -151,9 +110,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 	METHOD _glUniform2 (ILjava/nio/FloatBuffer;)V
 		ARG 0 location
 		ARG 1 value
-	METHOD _glUniform2 (ILjava/nio/IntBuffer;)V
-		ARG 0 location
-		ARG 1 value
 	METHOD _glUniform3 (ILjava/nio/FloatBuffer;)V
 		ARG 0 location
 		ARG 1 value
@@ -163,21 +119,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 	METHOD _glUniform4 (ILjava/nio/FloatBuffer;)V
 		ARG 0 location
 		ARG 1 value
-	METHOD _glUniform4 (ILjava/nio/IntBuffer;)V
-		ARG 0 location
-		ARG 1 value
-	METHOD _glUniformMatrix2 (IZLjava/nio/FloatBuffer;)V
-		ARG 0 location
-		ARG 1 transpose
-		ARG 2 value
-	METHOD _glUniformMatrix3 (IZLjava/nio/FloatBuffer;)V
-		ARG 0 location
-		ARG 1 transpose
-		ARG 2 value
-	METHOD _glUniformMatrix4 (IZLjava/nio/FloatBuffer;)V
-		ARG 0 location
-		ARG 1 transpose
-		ARG 2 value
 	METHOD _glUnmapBuffer (I)V
 		ARG 0 target
 	METHOD _glUseProgram (I)V
@@ -214,16 +155,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 1 y
 		ARG 2 width
 		ARG 3 height
-	METHOD _stencilFunc (III)V
-		ARG 0 func
-		ARG 1 ref
-		ARG 2 mask
-	METHOD _stencilMask (I)V
-		ARG 0 mask
-	METHOD _stencilOp (III)V
-		ARG 0 sfail
-		ARG 1 dpfail
-		ARG 2 dppass
 	METHOD _texImage2D (IIIIIIIILjava/nio/IntBuffer;)V
 		ARG 0 target
 		ARG 1 level
@@ -234,10 +165,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 6 format
 		ARG 7 type
 		ARG 8 pixels
-	METHOD _texParameter (IIF)V
-		ARG 0 target
-		ARG 1 pname
-		ARG 2 param
 	METHOD _texParameter (III)V
 		ARG 0 target
 		ARG 1 pname
@@ -252,15 +179,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 6 format
 		ARG 7 type
 		ARG 8 pixels
-	METHOD _upload (IIIIILnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;Ljava/nio/IntBuffer;Ljava/util/function/Consumer;)V
-		ARG 0 mipLevels
-		ARG 1 xOffset
-		ARG 2 yOffset
-		ARG 3 width
-		ARG 4 height
-		ARG 5 format
-		ARG 6 pixels
-		ARG 7 pixelConsumer
 	METHOD _vertexAttribIPointer (IIIIJ)V
 		ARG 0 index
 		ARG 1 size
@@ -325,15 +243,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		ARG 0 light0
 		ARG 1 light1
 		ARG 2 modelMatrix
-	METHOD upload (IIIIILnet/minecraft/unmapped/C_ayikuhxa$C_pfzicqtf;Ljava/nio/IntBuffer;Ljava/util/function/Consumer;)V
-		ARG 0 mipLevels
-		ARG 1 xOffset
-		ARG 2 yOffset
-		ARG 3 width
-		ARG 4 height
-		ARG 5 format
-		ARG 6 pixels
-		ARG 7 pixelConsumer
 	CLASS C_hfcoodvl LogicOp
 		FIELD f_yldbwizx value I
 		METHOD <init> (Ljava/lang/String;II)V
@@ -348,7 +257,6 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		FIELD f_ypmxoikk mask Z
 	CLASS C_kjkfvpuw CullFaceState
 		FIELD f_bdjnyusi capState Lcom/mojang/blaze3d/platform/GlStateManager$C_rfswymsl;
-		FIELD f_kemptnat mode I
 	CLASS C_rfswymsl CapabilityTracker
 		FIELD f_hhbmewrs cap I
 		FIELD f_yrartblk state Z
@@ -363,21 +271,10 @@ CLASS com/mojang/blaze3d/platform/GlStateManager
 		FIELD f_fhggttsu green Z
 		FIELD f_hwplloga red Z
 		FIELD f_mvlpjdoy alpha Z
-	CLASS C_roxsdpvm StencilState
-		FIELD f_mcyluymp dpfail I
-		FIELD f_ndkihycn mask I
-		FIELD f_ppbmzags sfail I
-		FIELD f_tvwpiexg subState Lcom/mojang/blaze3d/platform/GlStateManager$C_ujnqfyff;
-		FIELD f_vftbzrcc dppass I
 	CLASS C_ugvwtbhw PolygonOffsetState
 		FIELD f_gyoycbcx factor F
 		FIELD f_migprwzf capFill Lcom/mojang/blaze3d/platform/GlStateManager$C_rfswymsl;
-		FIELD f_qwwdjvag capLine Lcom/mojang/blaze3d/platform/GlStateManager$C_rfswymsl;
 		FIELD f_smwicdkx units F
-	CLASS C_ujnqfyff StencilSubState
-		FIELD f_bxurbzar func I
-		FIELD f_qqbdulmb mask I
-		FIELD f_rfgtidqq ref I
 	CLASS C_ujpcnblf ScissorTestState
 		FIELD f_qgmmtcow capState Lcom/mojang/blaze3d/platform/GlStateManager$C_rfswymsl;
 	CLASS C_vfgqorge LogicOpState

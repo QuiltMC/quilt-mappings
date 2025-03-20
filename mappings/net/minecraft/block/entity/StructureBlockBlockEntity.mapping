@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_bfrzytnu net/minecraft/block/entity/StructureBloc
 	FIELD f_evbnocyi showBoundingBox Z
 	FIELD f_fdytftki integrity F
 	FIELD f_fwyazwsi showAir Z
+	FIELD f_iuqnbokt strict Z
 	FIELD f_jhaicskj MAX_OFFSET_PER_AXIS I
 	FIELD f_jjhdjqus ignoreEntities Z
 	FIELD f_nfzauhsk mirror Lnet/minecraft/unmapped/C_qomzaqud;
@@ -22,12 +23,18 @@ CLASS net/minecraft/unmapped/C_bfrzytnu net/minecraft/block/entity/StructureBloc
 		ARG 2 state
 	METHOD m_afqpipqw loadStructure (Lnet/minecraft/unmapped/C_abvlwuej;)V
 		ARG 1 structure
-	METHOD m_aungqrkm saveStructure ()Z
+	METHOD m_aungqrkm trySaveStructure ()Z
+	METHOD m_cbladcsc isStrict ()Z
 	METHOD m_ckswvfcr (Lnet/minecraft/unmapped/C_bfrzytnu;)Z
 		ARG 1 blockEntity
 	METHOD m_cmapwvsu loadStructure (Lnet/minecraft/unmapped/C_bdwnwhiu;)Z
 	METHOD m_dbpggljc hasStructureName ()Z
 	METHOD m_eayxohne isPowered ()Z
+	METHOD m_emtcvuvg trySaveStructure (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_ceivtqhh;ZLjava/lang/String;Z)Z
+		ARG 3 dimensions
+		ARG 4 excludeEntities
+		ARG 5 author
+		ARG 6 export
 	METHOD m_esxdpotw isStructureAvailable ()Z
 	METHOD m_fjvuynie setOffset (Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 pos
@@ -58,7 +65,7 @@ CLASS net/minecraft/unmapped/C_bfrzytnu net/minecraft/block/entity/StructureBloc
 		ARG 1 ignoreEntities
 	METHOD m_mgveadpg setShowBoundingBox (Z)V
 		ARG 1 showBoundingBox
-	METHOD m_mjmqymso saveStructure (Z)Z
+	METHOD m_mjmqymso trySaveStructure (Z)Z
 		ARG 1 saveToTemplateManager
 	METHOD m_ngzpofdm updateBlockMode ()V
 	METHOD m_ocgsmzzf getSize ()Lnet/minecraft/unmapped/C_ceivtqhh;
@@ -78,6 +85,8 @@ CLASS net/minecraft/unmapped/C_bfrzytnu net/minecraft/block/entity/StructureBloc
 	METHOD m_stspsmas getSeed ()J
 	METHOD m_stuyyfzs setPowered (Z)V
 		ARG 1 powered
+	METHOD m_tibmoltu setStrict (Z)V
+		ARG 1 strict
 	METHOD m_tnlrfepu shouldShowAir ()Z
 	METHOD m_uayhwtgg shouldIgnoreEntities ()Z
 	METHOD m_whnztpcx (Lnet/minecraft/unmapped/C_kvegafmh;)Lnet/minecraft/unmapped/C_bfrzytnu;

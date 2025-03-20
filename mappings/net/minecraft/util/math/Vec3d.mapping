@@ -12,23 +12,25 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 	FIELD f_ajarpvjd ZERO Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT The zero vector (0, 0, 0).
 	FIELD f_ipicmfad z D
-		COMMENT The Z coordinate of this vector.
+		COMMENT The Z component of this vector.
 	FIELD f_lqljvjwr x D
-		COMMENT The X coordinate of this vector.
+		COMMENT The X component of this vector.
 	FIELD f_soxpmyqi y D
-		COMMENT The Y coordinate of this vector.
+		COMMENT The Y component of this vector.
 	FIELD f_wqbdtlcm CODEC Lcom/mojang/serialization/Codec;
 	METHOD <init> (DDD)V
-		COMMENT Creates a vector of the given coordinates.
+		COMMENT Creates a vector with the given components.
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
+	METHOD <init> (Lnet/minecraft/unmapped/C_ceivtqhh;)V
+		ARG 1 vec3i
 	METHOD <init> (Lorg/joml/Vector3f;)V
 		ARG 1 vector3f
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
 	METHOD m_alqruvpu distanceTo (Lnet/minecraft/unmapped/C_vgpupfxx;)D
-		COMMENT Returns the distance between this vector and the given vector.
+		COMMENT @return the distance between this vector and the given vector
 		COMMENT
 		COMMENT @see #squaredDistanceTo(Vec3d)
 		ARG 1 vec
@@ -43,7 +45,7 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		COMMENT
 		COMMENT @see #horizontalLengthSquared()
 	METHOD m_awjlkdrp floorAlongAxes (Ljava/util/EnumSet;)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Applies the floor function to the coordinates chosen by the given axes.
+		COMMENT Applies the floor function to the components chosen by the given axes.
 		ARG 1 axes
 	METHOD m_bbbnszun lengthSquared ()D
 		COMMENT {@return the squared length of this vector}
@@ -52,16 +54,15 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		COMMENT
 		COMMENT @see #length()
 	METHOD m_bmuezmjb subtract (DDD)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Subtracts the given vector from this vector.
+		COMMENT @return the difference between this vector and the given vector
 		COMMENT
 		COMMENT @see #relativize(Vec3d)
-		COMMENT @return the difference between this vector and the given vector
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
 	METHOD m_bqpgrsvq multiply (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Returns a vector whose coordinates are the product of each pair of
-		COMMENT coordinates in this vector and the given vector.
+		COMMENT @return a vector whose components are the product of each pair of
+		COMMENT components in this vector and the given vector
 		COMMENT
 		COMMENT @see #multiply(double, double, double)
 		COMMENT @see #multiply(double)
@@ -70,7 +71,7 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		ARG 1 axis
 		ARG 2 value
 	METHOD m_bywaolrt add (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Returns the sum of this vector and the given vector.
+		COMMENT @return the sum of this vector and the given vector.
 		COMMENT
 		COMMENT @see #add(double, double, double)
 		ARG 1 vec
@@ -80,17 +81,24 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		ARG 1 vec
 		ARG 2 horizontalRange
 		ARG 4 verticalRange
+	METHOD m_fmwyowuw subtract (D)Lnet/minecraft/unmapped/C_vgpupfxx;
+		COMMENT @return a vector whose components are the differences between this vector's
+		COMMENT components and the given value
+		COMMENT
+		COMMENT @see #subtract(double, double, double)
+		COMMENT @see #relativize(Vec3d)
+		ARG 1 value
 	METHOD m_fxwxkkfw withinRange (Lnet/minecraft/unmapped/C_ogbhoqwb;D)Z
 		ARG 1 pos
 		ARG 2 range
 	METHOD m_fxxujqjs ofCenter (Lnet/minecraft/unmapped/C_ceivtqhh;D)Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT Creates a vector representing the center of the given block position but
-		COMMENT with the given offset for the Y coordinate.
+		COMMENT with the given offset for the Y component.
 		COMMENT
 		COMMENT @return a vector of {@code (vec.getX() + 0.5, vec.getY() + deltaY,
 		COMMENT vec.getZ() + 0.5)}
 		ARG 0 vec
-		ARG 1 deltaY
+		ARG 1 yOffset
 	METHOD m_gnztuhtx horizontalLengthSquared ()D
 		COMMENT {@return the squared horizontal length of this vector}
 		COMMENT
@@ -98,11 +106,10 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		COMMENT
 		COMMENT @see #horizontalLength()
 	METHOD m_gwcsdigx subtract (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Subtracts the given vector from this vector.
+		COMMENT @return the difference between this vector and the given vector
 		COMMENT
 		COMMENT @see #subtract(double, double, double)
 		COMMENT @see #relativize(Vec3d)
-		COMMENT @return the difference between this vector and the given vector
 		ARG 1 vec
 	METHOD m_inkhpppd fromPolar (FF)Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT Converts pitch and yaw into a direction vector.
@@ -111,15 +118,13 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		ARG 0 pitch
 		ARG 1 yaw
 	METHOD m_jkqlgsab normalize ()Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Normalizes this vector.
-		COMMENT
-		COMMENT <p>Normalized vector is a vector with the same direction but with
-		COMMENT length 1. Each coordinate of normalized vector has value between 0
+		COMMENT Returns the normalized form of this vector.
+		COMMENT <p>
+		COMMENT A normalized vector is a vector with the same direction but with
+		COMMENT length 1. Each component of normalized vector is between 0
 		COMMENT and 1.
-		COMMENT
-		COMMENT @return the normalized vector of this vector
 	METHOD m_kcgfovqu multiply (D)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Return a vector whose coordinates are the coordinates of this vector
+		COMMENT Return a vector whose components are the components of this vector
 		COMMENT each multiplied by the given scalar value.
 		COMMENT
 		COMMENT @see #multiply(Vec3d)
@@ -145,14 +150,13 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 	METHOD m_mpspxixx projectOnto (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_nmcmnhiy horizontal ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_ozbglzhr relativize (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Subtracts this vector from the given vector.
+		COMMENT @return the difference between the given vector and this vector
 		COMMENT
 		COMMENT @see #subtract(Vec3d)
-		COMMENT @return the difference between the given vector and this vector
 		ARG 1 vec
 	METHOD m_pxdtoofl multiply (DDD)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Returns a vector whose coordinates are the product of each pair of
-		COMMENT coordinates in this vector and the given vector.
+		COMMENT @return a vector whose components are the product of each pair of
+		COMMENT components in this vector and the given vector
 		COMMENT
 		COMMENT @see #multiply(Vec3d)
 		COMMENT @see #multiply(double)
@@ -163,6 +167,8 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		COMMENT Rotates this vector by the given angle counterclockwise around the Y axis.
 		ARG 1 angle
 			COMMENT the angle in radians
+	METHOD m_qrrkmzlm add (D)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 value
 	METHOD m_qylyuhwf squaredDistanceTo (DDD)D
 		COMMENT Returns the squared distance between this vector and the given vector.
 		COMMENT
@@ -201,16 +207,16 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 		COMMENT @see #ofCenter(Vec3i)
 		ARG 0 vec
 	METHOD m_ucyqfjmh dotProduct (Lnet/minecraft/unmapped/C_vgpupfxx;)D
-		COMMENT Returns the dot product of this vector and the given vector.
+		COMMENT @return the dot product of this vector and the given vector.
 		ARG 1 vec
 	METHOD m_vyabsuqr getComponentAlongAxis (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)D
-		COMMENT Returns the coordinate chosen by the given axis.
+		COMMENT Returns the component chosen by the given axis.
 		ARG 1 axis
 	METHOD m_wfythugr relative (Lnet/minecraft/unmapped/C_xpuuihxf;D)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 direction
 		ARG 2 value
 	METHOD m_wgagsgsw crossProduct (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Returns the cross product of this vector and the given vector.
+		COMMENT @return the cross product of this vector and the given vector
 		ARG 1 vec
 	METHOD m_xmwspcmd rotateZ (F)Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT Rotates this vector by the given angle counterclockwise around the Z axis.
@@ -231,12 +237,12 @@ CLASS net/minecraft/unmapped/C_vgpupfxx net/minecraft/util/math/Vec3d
 	METHOD m_ydmcvwmi unpackRgb (I)Lnet/minecraft/unmapped/C_vgpupfxx;
 		COMMENT Converts a packed RGB color into a vector of (red, green, blue).
 		COMMENT
-		COMMENT @return the vector representing the given color; each coordinate has
+		COMMENT @return the vector representing the given color; each component has
 		COMMENT value between 0 and 1
 		ARG 0 rgb
 			COMMENT the color in the 0xRRGGBB format
 	METHOD m_yerpdxmq add (DDD)Lnet/minecraft/unmapped/C_vgpupfxx;
-		COMMENT Returns the sum of this vector and the given vector.
+		COMMENT @return the sum of this vector and the given vector
 		COMMENT
 		COMMENT @see #add(Vec3d)
 		ARG 1 x

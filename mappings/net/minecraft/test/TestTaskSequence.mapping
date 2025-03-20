@@ -1,0 +1,124 @@
+CLASS net/minecraft/unmapped/C_slbbddbd net/minecraft/test/TestTaskSequence
+	COMMENT Holds a sequence of tasks to be run for a {@link #test}.<br>
+	COMMENT These tasks represent expectations of what will occur during a test.
+	COMMENT <p>
+	COMMENT {@linkplain #test Tests} try running any remaining tasks each tick.<br>
+	COMMENT Each tick, sequenced tasks are completed until one fails.<br>
+	COMMENT A task fails if it throws a
+	COMMENT {@link net.minecraft.test.GameTestException GameTestException}.
+	COMMENT <p>
+	COMMENT Most methods return the {@code TestTaskSequence} instance they were called on,
+	COMMENT allowing for convenient method chaining.
+	COMMENT For example, given a test whose structure has an item in a
+	COMMENT {@link net.minecraft.block.DropperBlock dropper}
+	COMMENT facing up with a
+	COMMENT {@link net.minecraft.block.ButtonBlock button}
+	COMMENT next to it and the following local variables:
+	COMMENT <ul>
+	COMMENT   <li> {@link net.minecraft.test.TestContext TestContext context}
+	COMMENT   <li> {@link net.minecraft.util.math.BlockPos BlockPos dropperPos}
+	COMMENT   <li> {@link net.minecraft.util.math.BlockPos BlockPos buttonPos}
+	COMMENT   <li> {@link net.minecraft.item.Item Item item}
+	COMMENT </ul>
+	COMMENT
+	COMMENT You could write a test like so:
+	COMMENT <pre>{@code
+	COMMENT context.pushButton(buttonPos);
+	COMMENT
+	COMMENT context.createTaskSequence()
+	COMMENT   .then(() -> context.expectBlockProperty(dropperPos, DispenserBlock.TRIGGERED, true))
+	COMMENT   .await(() -> context.expectItemEntity(item))
+	COMMENT   .succeed();
+	COMMENT }</pre>
+	COMMENT
+	COMMENT The test succeeds if the dropper triggers and then dropps its item.<br>
+	COMMENT However this test could be more specific. Specificity is important in tests so
+	COMMENT that they don't erroneously succeed, and so if they fail, they fail early and
+	COMMENT give informative errors.<br>
+	COMMENT
+	COMMENT This test could be improved like so:
+	COMMENT <pre>{@code
+	COMMENT context.pushButton(buttonPos);
+	COMMENT
+	COMMENT context.createTaskSequence()
+	COMMENT   .then(() -> context.expectBlockProperty(dropperPos, DispenserBlock.TRIGGERED, true))
+	COMMENT   .thenAt(4, () -> context.expectItemEntityNear(item, dropperPos.up(), 1.0d))
+	COMMENT   .then(() -> context.expectEmptyContainer(dropperPos))
+	COMMENT   .succeed();
+	COMMENT }</pre>
+	COMMENT
+	COMMENT This version only succeeds if:
+	COMMENT <ol>
+	COMMENT   <li> the dropper triggers
+	COMMENT   <li> after exactly 4 ticks the item drops above the dropper
+	COMMENT   <li> the dropper is empty
+	COMMENT </ol>
+	COMMENT
+	COMMENT @see net.minecraft.test.TestContext#createTaskSequence() createTaskSequence()
+	FIELD f_dceumnvh tasks Ljava/util/List;
+	FIELD f_laliwahc test Lnet/minecraft/unmapped/C_agwojffm;
+	FIELD f_uonlewcl prevCompletedTick I
+	METHOD <init> (Lnet/minecraft/unmapped/C_agwojffm;)V
+		ARG 1 test
+	METHOD m_culdbhre thenAfter (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Adds the passed {@code task} and waits for the passed {@code delay} to attempt
+		COMMENT running it.
+		COMMENT <p>
+		COMMENT The {@code task} will only be attempted once, and if it fails,
+		COMMENT the {@link #test} fails.
+		ARG 1 delay
+			COMMENT the number of ticks to wait before running the passed {@code task},
+			COMMENT relative to the tick when the previous task completed
+		ARG 2 task
+	METHOD m_hzkmfnrv thenAt (JLjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Adds the passed {@code task} and requires it be successful only after exactly
+		COMMENT the passed {@code successDelay} has passed.
+		COMMENT <p>
+		COMMENT The {@code task} is run every tick until it succeeds.<br>
+		COMMENT If the {@code task} is successful before or after {@code successDelay},
+		COMMENT it causes the {@link #test} to fail.
+		ARG 1 successDelay
+			COMMENT the exact number of ticks that must pass before the passed {@code task} succeeds,
+			COMMENT relative to the tick when the previous task completed
+		ARG 3 task
+	METHOD m_jtywgcow runOrFail (Ljava/lang/Runnable;)V
+		ARG 1 task
+	METHOD m_kxztjfwm succeed ()V
+		COMMENT Causes the {@link #test} to succeed once prior added tasks have completed.
+	METHOD m_ndryulqk await (Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Once reached, the passed {@code task} will repeat until it succeeds or the
+		COMMENT {@link #test} times out.
+		ARG 1 task
+	METHOD m_negtjhjf fail (Ljava/util/function/Supplier;)V
+		COMMENT Causes the {@link #test} to fail with an exception created by the passed
+		COMMENT {@code exceptionSupplier} once prior added tasks have completed.
+		ARG 1 exceptionSupplier
+	METHOD m_rtosaukf runTasks (I)V
+		ARG 1 testTick
+	METHOD m_sbznpemx then (Ljava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Once reached, the passed {@code task} must be successful, otherwise the
+		COMMENT {@link #test} fails.
+		ARG 1 task
+	METHOD m_stsofrqu runReported (I)V
+	METHOD m_woeesxrq trigger ()Lnet/minecraft/unmapped/C_slbbddbd$C_ktwdwqxw;
+	METHOD m_yaecigfs thenFor (ILjava/lang/Runnable;)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Adds the passed {@code task} which, once reached, must succeed on each tick
+		COMMENT until the passed number of {@code ticks} have passed.
+		COMMENT <p>
+		COMMENT Any failure causes the {@link #test} to fail.
+		ARG 1 ticks
+			COMMENT the number of ticks to run the passed {@code task} for
+		ARG 2 task
+	METHOD m_zbwitmsh idle (I)Lnet/minecraft/unmapped/C_slbbddbd;
+		COMMENT Prevents subsequent tasks from running until the given
+		COMMENT {@code delay} has passed.
+		ARG 1 delay
+			COMMENT the number of ticks to idle for, relative to
+			COMMENT the last tick on which a task completed
+	METHOD m_zgvpyocn runSilently (I)V
+	CLASS C_ktwdwqxw Trigger
+		FIELD f_altxqvwn UNTRIGGERED_TICK I
+		FIELD f_oygmyyfp triggeredTick I
+		METHOD m_brourrwc checkTrigger ()V
+		METHOD m_sscufdja trigger (I)V
+			ARG 1 testTick
