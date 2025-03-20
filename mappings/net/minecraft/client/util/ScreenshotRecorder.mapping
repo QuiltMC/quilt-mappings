@@ -1,34 +1,12 @@
 CLASS net/minecraft/unmapped/C_craqpqxw net/minecraft/client/util/ScreenshotRecorder
 	COMMENT A screenshot recorder takes screenshots and saves them into tga file format. It also
 	COMMENT holds a few utility methods for other types of screenshots.
-	FIELD f_fjxqmfdq stream Ljava/io/DataOutputStream;
-	FIELD f_kknqipme height I
-	FIELD f_kmvvfwwz unitHeight I
-	FIELD f_odhezoam buffer [B
-	FIELD f_qbsyukhj file Ljava/io/File;
 	FIELD f_thmnivov LOGGER Lorg/slf4j/Logger;
 	FIELD f_ymjndgta SCREENSHOTS_DIRECTORY Ljava/lang/String;
-	FIELD f_zsbdrwes width I
-	METHOD <init> (Ljava/io/File;III)V
-		COMMENT Creates a screenshot recorder for huge screenshots.
-		COMMENT
-		COMMENT @see net.minecraft.client.MinecraftClient#takeHugeScreenshot
-		ARG 1 gameDirectory
-		ARG 2 width
-		ARG 3 height
-		ARG 4 unitHeight
 	METHOD m_cyvkwkpf saveScreenshot (Ljava/io/File;Lnet/minecraft/unmapped/C_xxwgvelc;Ljava/util/function/Consumer;)V
 		ARG 0 gameDirectory
 		ARG 1 framebuffer
 		ARG 2 messageReceiver
-	METHOD m_gexubpeu finish ()Ljava/io/File;
-		COMMENT Finish taking the screenshot and return the complete tga file.
-		COMMENT
-		COMMENT @return the tga file
-	METHOD m_kfcodylb writeToStream ()V
-		COMMENT Writes the contents in the {@link #buffer} into the {@link #stream}.
-	METHOD m_oiwzfmgc takeScreenshot (Lnet/minecraft/unmapped/C_xxwgvelc;)Lnet/minecraft/unmapped/C_ayikuhxa;
-		ARG 0 framebuffer
 	METHOD m_prypveve saveScreenshot (Ljava/io/File;Ljava/lang/String;Lnet/minecraft/unmapped/C_xxwgvelc;Ljava/util/function/Consumer;)V
 		ARG 0 gameDirectory
 		ARG 1 fileName
@@ -36,10 +14,3 @@ CLASS net/minecraft/unmapped/C_craqpqxw net/minecraft/client/util/ScreenshotReco
 		ARG 3 messageReceiver
 	METHOD m_qfjmbcrt getScreenshotFilename (Ljava/io/File;)Ljava/io/File;
 		ARG 0 directory
-	METHOD m_zjtfwjtu getIntoBuffer (Ljava/nio/ByteBuffer;IIII)V
-		COMMENT Transports image data from {@code data} into {@link #buffer}.
-		ARG 1 data
-		ARG 2 startWidth
-		ARG 3 startHeight
-		ARG 4 unitWidth
-		ARG 5 unitHeight
