@@ -27,6 +27,7 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		COMMENT The default setBlockState behavior. Same as {@code NOTIFY_NEIGHBORS | NOTIFY_LISTENERS}.
 	FIELD f_fmkkgoft MOVED I
 		COMMENT Signals that the current block is being moved to a different location, usually because of a piston.
+	FIELD f_grnanfzp UPDATE_SKIP_ON_PLACE I
 	FIELD f_hncvzxyf defaultState Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_hyfvlkab FORCE_STATE I
 		COMMENT Bypass virtual block state changes and forces the passed state to be stored as-is.
@@ -37,6 +38,8 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 	FIELD f_nexeeilp stateManager Lnet/minecraft/unmapped/C_ezfeikaq;
 	FIELD f_ngtlhrdq FULL_CUBE_SHAPE_CACHE Lcom/google/common/cache/LoadingCache;
 	FIELD f_okywtldq STATE_IDS Lnet/minecraft/unmapped/C_lwiadjvw;
+	FIELD f_pelzkawq UPDATE_SKIP_BLOCK_ENTITY_SIDEEFFECTS I
+	FIELD f_rnbszkxo UPDATE_SKIP_ALL_SIDEEFFECTS I
 	FIELD f_sqfncgqq LOGGER Lorg/slf4j/Logger;
 	FIELD f_utymbzpn REDRAW_ON_MAIN_THREAD I
 		COMMENT Forces a synchronous redraw on clients.
@@ -73,8 +76,13 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 3 blockEntity
 	METHOD m_cbjpaznf getBlockFromItem (Lnet/minecraft/unmapped/C_vorddnax;)Lnet/minecraft/unmapped/C_mmxmpdoq;
 		ARG 0 item
+	METHOD m_cixqwdon createXYCenteredCuboid (DDD)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 0 xySize
 	METHOD m_cwuunnrc cannotConnect (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 0 state
+	METHOD m_dtmmhfqw createXZCenteredCuboid (DDDD)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 0 xSize
+		ARG 2 zSize
 	METHOD m_dvztrwyo getStateFromRawId (I)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 0 stateId
 	METHOD m_eapglecc precipitationTick (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_orlkpefs$C_xwlyzxea;)V
@@ -91,6 +99,10 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 5 stack
 	METHOD m_eslctrgs (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 2 stack
+	METHOD m_ewgcevbe (Lnet/minecraft/unmapped/C_vzlztuyw;)Ljava/lang/Object;
+		ARG 0 property
+	METHOD m_ewwwkauf (Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_vzlztuyw;
+		ARG 0 property
 	METHOD m_fgtteebr hasDynamicBounds ()Z
 	METHOD m_fuvqealb onPlaced (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 world
@@ -98,6 +110,8 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 3 state
 		ARG 4 placer
 		ARG 5 itemStack
+	METHOD m_fvtdilcl createXYCenteredCuboid (DDDD)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 2 ySize
 	METHOD m_goutaqfi shouldDropItemsOnExplosion (Lnet/minecraft/unmapped/C_aahhrzpf;)Z
 		ARG 1 explosion
 	METHOD m_grdgsfjs postProcessState (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_txtbiemp;
@@ -105,6 +119,9 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 1 world
 		ARG 2 pos
 	METHOD m_gsgxvzbp getName ()Lnet/minecraft/unmapped/C_npqneive;
+	METHOD m_gvapgzox stateWith (Lnet/minecraft/unmapped/C_jccsnmmo;Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_jccsnmmo;
+		ARG 0 state
+		ARG 2 value
 	METHOD m_gzevdpnp getBlastResistance ()F
 	METHOD m_hittbukc canMobSpawnInside (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
@@ -112,7 +129,7 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		COMMENT Called when this block is destroyed by an explosion.
 		ARG 2 pos
 		ARG 3 explosion
-	METHOD m_iipllqny createCuboidShape (DDDDDD)Lnet/minecraft/unmapped/C_zscvhwbd;
+	METHOD m_iipllqny createCuboid (DDDDDD)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 0 minX
 		ARG 2 minY
 		ARG 4 minZ
@@ -120,18 +137,25 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 8 maxY
 		ARG 10 maxZ
 	METHOD m_iwedynhy getPlacementState (Lnet/minecraft/unmapped/C_aiootljq;)Lnet/minecraft/unmapped/C_txtbiemp;
-		ARG 1 ctx
+		ARG 1 context
 	METHOD m_jajpdzzy sideCoversSmallSquare (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 side
 	METHOD m_jeqzqmog (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 2 stack
+	METHOD m_jmmkoich createXZCenteredCuboid (DDD)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 0 xzSize
 	METHOD m_jweqgtyb onLandedUpon (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;D)V
 		ARG 1 world
 		ARG 2 state
 		ARG 3 pos
 		ARG 4 entity
+	METHOD m_kchifbxg createShapeGetter (Ljava/util/function/Function;)Ljava/util/function/Function;
+		ARG 1 getShapeForState
+	METHOD m_kismeqwe createShapeArray (ILjava/util/function/IntFunction;)[Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 0 size
+		ARG 1 getShape
 	METHOD m_ksyzaetw dropStacks (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 0 state
 		ARG 1 world
@@ -212,6 +236,8 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 random
+	METHOD m_qmkndjvo createCenteredCube (D)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 0 size
 	METHOD m_qnwpfxhz getVelocityMultiplier ()F
 	METHOD m_rvydtzjt getDroppedStacks (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_kvegafmh;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/List;
 		ARG 0 state
@@ -225,11 +251,15 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 1 to
 		ARG 2 world
 		ARG 3 pos
+	METHOD m_smollgqm createXCenteredCuboid (DDDDD)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 0 xSize
 	METHOD m_sslzkkcf dropStacks (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_kvegafmh;)V
 		ARG 0 state
 		ARG 1 world
 		ARG 2 pos
 		ARG 3 blockEntity
+	METHOD m_swedjjpo (Lnet/minecraft/unmapped/C_txtbiemp;Ljava/util/Map$Entry;)Z
+		ARG 1 entry
 	METHOD m_thiabdjl getDefaultState ()Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_tjijvtpb onBreak (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_jzrpycqo;)Lnet/minecraft/unmapped/C_txtbiemp;
 		ARG 1 world
@@ -257,8 +287,19 @@ CLASS net/minecraft/unmapped/C_mmxmpdoq net/minecraft/block/Block
 		ARG 0 world
 		ARG 1 pos
 		ARG 2 stack
+	METHOD m_zfmftrtj createShapeGetter (Ljava/util/function/Function;[Lnet/minecraft/unmapped/C_vzlztuyw;)Ljava/util/function/Function;
+		ARG 1 getShapeForSate
+		ARG 2 ignoredProperties
+	METHOD m_zhkrlkwq createCenteredCuboid (DDD)Lnet/minecraft/unmapped/C_zscvhwbd;
+		ARG 2 ySize
 	METHOD m_zpnlglhs shouldDrawSide (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 0 state
 		ARG 1 sideState
 		ARG 2 side
 	CLASS C_epynadow ShapePair
+	CLASS C_miiagdeq
+		METHOD load (Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 key
+	CLASS C_znvnetlf
+		METHOD rehash (I)V
+			ARG 1 newN
