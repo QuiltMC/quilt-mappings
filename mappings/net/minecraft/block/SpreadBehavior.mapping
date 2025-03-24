@@ -1,4 +1,4 @@
-CLASS net/minecraft/unmapped/C_twpgwpwn net/minecraft/block/LichenSpreadBehavior
+CLASS net/minecraft/unmapped/C_twpgwpwn net/minecraft/block/SpreadBehavior
 	FIELD f_dzdqprmy settings Lnet/minecraft/unmapped/C_twpgwpwn$C_bkszmbsg;
 	FIELD f_hxidotvq PLACEMENT_TYPES [Lnet/minecraft/unmapped/C_twpgwpwn$C_qizcpldd;
 	METHOD <init> (Lnet/minecraft/unmapped/C_qpwigkki;)V
@@ -11,7 +11,7 @@ CLASS net/minecraft/unmapped/C_twpgwpwn net/minecraft/block/LichenSpreadBehavior
 		ARG 1 state
 		ARG 2 world
 		ARG 3 pos
-		ARG 4 direction
+		ARG 4 facing
 		ARG 5 postProcess
 	METHOD m_huvmmobp (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;ZLnet/minecraft/unmapped/C_xpuuihxf;)Ljava/util/Optional;
 		ARG 6 dir
@@ -19,8 +19,8 @@ CLASS net/minecraft/unmapped/C_twpgwpwn net/minecraft/block/LichenSpreadBehavior
 		ARG 1 state
 		ARG 2 view
 		ARG 3 pos
-		ARG 4 dirA
-		ARG 5 dirB
+		ARG 4 facing
+		ARG 5 direction
 		ARG 6 spreadPredicate
 	METHOD m_jfrwlpgd (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 2 dir
@@ -66,7 +66,7 @@ CLASS net/minecraft/unmapped/C_twpgwpwn net/minecraft/block/LichenSpreadBehavior
 		ARG 5 random
 		ARG 6 postProcess
 	METHOD m_zxdekzte (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;ZLnet/minecraft/unmapped/C_xpuuihxf;)Ljava/util/Optional;
-		ARG 6 dir
+		ARG 6 direction
 	CLASS C_bkszmbsg LichenGrowSettings
 		METHOD m_bkjsmvdk hasDirection (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 			ARG 1 state
@@ -84,18 +84,17 @@ CLASS net/minecraft/unmapped/C_twpgwpwn net/minecraft/block/LichenSpreadBehavior
 			ARG 4 postProcess
 		METHOD m_uqmmicii getPlacementTypes ()[Lnet/minecraft/unmapped/C_twpgwpwn$C_qizcpldd;
 		METHOD m_usfyhdsi canSpreadTo (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_twpgwpwn$C_evcfujfb;)Z
+			ARG 3 placement
 	CLASS C_evcfujfb Placement
-		FIELD f_hnshqxjx pos Lnet/minecraft/unmapped/C_hynzadkk;
-		FIELD f_prscndxq face Lnet/minecraft/unmapped/C_xpuuihxf;
 		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)V
 			ARG 1 pos
 			ARG 2 face
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
-		METHOD m_qvcivskc pos ()Lnet/minecraft/unmapped/C_hynzadkk;
-		METHOD m_wzrvmsnr face ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	CLASS C_qizcpldd PlacementType
 		METHOD m_wikhcnvz getPlacement (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_twpgwpwn$C_evcfujfb;
+			ARG 2 direction
+			ARG 3 facing
 	CLASS C_tubanqjd DefaultLichenSpreadBehavior
 		FIELD f_fvrmmeon block Lnet/minecraft/unmapped/C_qpwigkki;
 		METHOD <init> (Lnet/minecraft/unmapped/C_qpwigkki;)V
@@ -107,3 +106,5 @@ CLASS net/minecraft/unmapped/C_twpgwpwn net/minecraft/block/LichenSpreadBehavior
 			ARG 4 dir
 			ARG 5 state
 	CLASS C_voceixjn LichenSpreadPredicate
+		METHOD test (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_twpgwpwn$C_evcfujfb;)Z
+			ARG 3 placement

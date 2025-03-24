@@ -1,9 +1,10 @@
 CLASS net/minecraft/unmapped/C_hbdlqish net/minecraft/block/RedstoneWireBlock
 	FIELD f_bcvuxzmx POWER Lnet/minecraft/unmapped/C_vltzvhxi;
 	FIELD f_fyjjmxtv WIRE_CONNECTION_SOUTH Lnet/minecraft/unmapped/C_cgckxfsw;
+	FIELD f_hilvmyql shapeGetter Ljava/util/function/Function;
 	FIELD f_isurntyc WIRE_CONNECTION_NORTH Lnet/minecraft/unmapped/C_cgckxfsw;
 	FIELD f_jjwmffoj DIRECTION_TO_WIRE_CONNECTION_PROPERTY Ljava/util/Map;
-	FIELD f_laswtpnf COLORS [I
+	FIELD f_laswtpnf COLORS_BY_POWER [I
 	FIELD f_lhkdefum WIRE_CONNECTION_WEST Lnet/minecraft/unmapped/C_cgckxfsw;
 	FIELD f_ooedtwdp dotState Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_psbskmvz CODEC Lcom/mojang/serialization/MapCodec;
@@ -11,6 +12,8 @@ CLASS net/minecraft/unmapped/C_hbdlqish net/minecraft/block/RedstoneWireBlock
 	FIELD f_qomovzle WIRE_CONNECTION_EAST Lnet/minecraft/unmapped/C_cgckxfsw;
 	FIELD f_quuiddba wiresGivePower Z
 	FIELD f_qwcrdmpx controller Lnet/minecraft/unmapped/C_lakkobyv;
+	METHOD m_ahfsctfo ([I)V
+		ARG 0 colorsByPower
 	METHOD m_brufkqwu updateNeighbors (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 1 world
 		ARG 2 pos
@@ -30,7 +33,8 @@ CLASS net/minecraft/unmapped/C_hbdlqish net/minecraft/block/RedstoneWireBlock
 		ARG 3 oldState
 		ARG 4 newState
 	METHOD m_kofgxicj getWireColor (I)I
-		ARG 0 powerLevel
+		ARG 0 power
+	METHOD m_mgogczbz createShapeGetter ()Ljava/util/function/Function;
 	METHOD m_nmxjtrcu addPoweredParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_hynzadkk;ILnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_xpuuihxf;FF)V
 		ARG 0 world
 		ARG 1 random

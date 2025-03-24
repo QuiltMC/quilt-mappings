@@ -8,9 +8,11 @@ CLASS net/minecraft/unmapped/C_peaveboq net/minecraft/world/BlockView
 		ARG 0 context
 	METHOD m_cwgupilf getBlockState (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_txtbiemp;
 	METHOD m_futnjlxi collectCollisions (Lit/unimi/dsi/fastutil/longs/LongSet;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_peaveboq$C_pmqljjcz;)I
+		ARG 0 visitedPositions
 		ARG 1 startPos
 		ARG 2 endPos
 		ARG 3 box
+		ARG 4 visitor
 	METHOD m_gpwzkbdj raycast (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Ljava/lang/Object;Ljava/util/function/BiFunction;Ljava/util/function/Function;)Ljava/lang/Object;
 		ARG 0 start
 		ARG 1 end
@@ -34,6 +36,10 @@ CLASS net/minecraft/unmapped/C_peaveboq net/minecraft/world/BlockView
 	METHOD m_ueemzmzo (Lnet/minecraft/unmapped/C_uyikqwzv;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_jdakttms;
 		ARG 1 context
 		ARG 2 pos
+	METHOD m_umvjwyir collectCollisions (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_peaveboq$C_pmqljjcz;)V
+		ARG 0 from
+		ARG 1 to
+		ARG 2 box
 	METHOD m_uqbtjvun raycastBlock (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_jdakttms;
 		ARG 1 start
 		ARG 2 end
@@ -46,3 +52,6 @@ CLASS net/minecraft/unmapped/C_peaveboq net/minecraft/world/BlockView
 		ARG 0 context
 	METHOD m_zqixworh getStatesInBox (Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/stream/Stream;
 		ARG 1 box
+	CLASS C_pmqljjcz CollisionVisitor
+		METHOD visit (Lnet/minecraft/unmapped/C_hynzadkk;I)V
+			ARG 2 iteration
