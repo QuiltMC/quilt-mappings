@@ -1,30 +1,49 @@
-CLASS net/minecraft/unmapped/C_zcaovjhs net/minecraft/util/collection/WeightedList
-	FIELD f_foiaoslh random Lnet/minecraft/unmapped/C_rlomrsco;
-	FIELD f_nkovmckk entries Ljava/util/List;
+CLASS net/minecraft/unmapped/C_bvkdjias net/minecraft/util/collection/WeightedList
+	FIELD f_cwfvplde impl Lnet/minecraft/unmapped/C_bvkdjias$C_wsrfqrrn;
+	FIELD f_dgdnntpb MIN_COMPACT_WEIGHT_SUM I
+	FIELD f_qareelam weightSum I
+	FIELD f_qeespzdd entries Ljava/util/List;
 	METHOD <init> (Ljava/util/List;)V
-		ARG 1 list
-	METHOD m_hxwgwpcn shuffle ()Lnet/minecraft/unmapped/C_zcaovjhs;
-	METHOD m_jowdppdv (Lnet/minecraft/unmapped/C_zcaovjhs$C_jkfpyrca;)V
+		ARG 1 entries
+	METHOD m_bqytjolk map (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_bvkdjias;
+		ARG 1 mapper
+	METHOD m_dbueagjr createNonEmptyCodec (Lcom/mojang/serialization/MapCodec;)Lcom/mojang/serialization/Codec;
+	METHOD m_euuafcab (Ljava/util/function/Function;Lnet/minecraft/unmapped/C_hwvdvfmt;)Lnet/minecraft/unmapped/C_hwvdvfmt;
 		ARG 1 entry
-	METHOD m_ociexkmf stream ()Ljava/util/stream/Stream;
-	METHOD m_qkixgtkk createCodec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
-		ARG 0 codec
-	METHOD m_tkhxhnwf add (Ljava/lang/Object;I)Lnet/minecraft/unmapped/C_zcaovjhs;
-		ARG 1 data
-		ARG 2 weight
-	METHOD m_zhejvbky (Lnet/minecraft/unmapped/C_zcaovjhs;)Ljava/util/List;
-		ARG 0 weightedList
-	CLASS C_jkfpyrca Entry
-		FIELD f_ivikegey shuffledOrder D
-		FIELD f_qrqordhh data Ljava/lang/Object;
-		FIELD f_suwmibmw weight I
-		METHOD <init> (Ljava/lang/Object;I)V
-			ARG 1 data
-			ARG 2 weight
-		METHOD m_eswnguyk getElement ()Ljava/lang/Object;
-		METHOD m_myftqaed createCodec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
-			ARG 0 codec
-		METHOD m_vitekfkz getShuffledOrder ()D
-		METHOD m_wimyripe setShuffledOrder (F)V
-			ARG 1 random
-		METHOD m_yuaucprh getWeight ()I
+	METHOD m_fjcmuvat chooseOrThrow (Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/lang/Object;
+		COMMENT @throws IllegalStateException if this list is empty
+	METHOD m_ieoacgfn getEntries ()Ljava/util/List;
+		COMMENT Returns the entries of this list.
+		COMMENT <p>
+		COMMENT The list is unmodifiable.
+	METHOD m_iltxdqxs of ([Lnet/minecraft/unmapped/C_hwvdvfmt;)Lnet/minecraft/unmapped/C_bvkdjias;
+	METHOD m_knfttcss choose (Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/Optional;
+	METHOD m_meiyqivj of (Ljava/util/List;)Lnet/minecraft/unmapped/C_bvkdjias;
+	METHOD m_sdrdllpl createCodec (Lcom/mojang/serialization/MapCodec;)Lcom/mojang/serialization/Codec;
+		ARG 0 valueCodec
+	METHOD m_tmiytjod empty ()Lnet/minecraft/unmapped/C_bvkdjias;
+	METHOD m_txfpijht isEmpty ()Z
+	METHOD m_vykxvqkv contains (Ljava/lang/Object;)Z
+		ARG 1 value
+	METHOD m_ylinjudz createNonEmptyCodec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+	METHOD m_yxvmrvck builder ()Lnet/minecraft/unmapped/C_bvkdjias$C_ykcycqkc;
+	METHOD m_zsvgtahm of (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_bvkdjias;
+	METHOD m_zswsmxis createCodec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+		ARG 0 valueCodec
+	CLASS C_jhjimjer FlatImpl
+		FIELD f_uujxbmfj entriesByWeightIndex [Ljava/lang/Object;
+		METHOD <init> (Ljava/util/List;I)V
+			ARG 1 entries
+			ARG 2 weightSum
+	CLASS C_skqkwwdw CompactImpl
+		FIELD f_xvrobjpc entries [Lnet/minecraft/unmapped/C_hwvdvfmt;
+		METHOD <init> (Ljava/util/List;)V
+			ARG 1 entries
+	CLASS C_wsrfqrrn WeightIndexed
+		METHOD m_pjjrgmpj getEntry (I)Ljava/lang/Object;
+			ARG 1 weightIndex
+	CLASS C_ykcycqkc Builder
+		FIELD f_ckepfnev entries Lcom/google/common/collect/ImmutableList$Builder;
+		METHOD m_hetlsrmx build ()Lnet/minecraft/unmapped/C_bvkdjias;
+		METHOD m_mmundxji add (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_bvkdjias$C_ykcycqkc;
+		METHOD m_xregoffp add (Ljava/lang/Object;I)Lnet/minecraft/unmapped/C_bvkdjias$C_ykcycqkc;
