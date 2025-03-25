@@ -3,7 +3,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	FIELD f_eagudpej slipperiness F
 	FIELD f_gtipwtfw requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
 	FIELD f_hcgxjldr jumpVelocityMultiplier F
-	FIELD f_hflsieep lootTableId Ljava/util/Optional;
+	FIELD f_hflsieep lootTable Ljava/util/Optional;
 	FIELD f_hpfrgdhl velocityMultiplier F
 	FIELD f_hskzbzfq settings Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 	FIELD f_lyvgdypq soundGroup Lnet/minecraft/unmapped/C_aevintex;
@@ -93,6 +93,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 2 world
 		ARG 3 pos
 		ARG 4 entity
+		ARG 5 effectManager
 	METHOD m_mfmohedo hasSidedTransparency (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
 	METHOD m_mjglzdvu getRenderType (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_obvqhpgv;
@@ -111,7 +112,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 2 stateFrom
 		ARG 3 direction
 	METHOD m_orfjlsuz getPickStack (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Z)Lnet/minecraft/unmapped/C_sddaxwyk;
-		ARG 4 withComponents
+		ARG 4 includeComponents
 	METHOD m_pguoxmgn onUse (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_jdakttms;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 4 entity
 		ARG 5 hitResult
@@ -139,7 +140,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 3 pos
 		ARG 4 stack
 		ARG 5 dropExperience
-	METHOD m_qodrklgm getLootTableId ()Ljava/util/Optional;
+	METHOD m_qodrklgm getLootTable ()Ljava/util/Optional;
 	METHOD m_qzmkwuwe canReplace (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_aiootljq;)Z
 		ARG 1 state
 		ARG 2 context
@@ -165,6 +166,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		ARG 4 block
 		ARG 5 orientation
 		ARG 6 notify
+	METHOD m_twpfvvna onReplaced (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
+		ARG 4 suppressUpdates
 	METHOD m_umbsjste rotate (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_mboglirk;)Lnet/minecraft/unmapped/C_txtbiemp;
 		COMMENT Applies a block rotation to a block state.
 		COMMENT
@@ -309,6 +312,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT Gets the possibly updated block state of this block when a neighboring block is updated.
 			COMMENT
 			COMMENT @return the new state of this block
+			ARG 2 tickAccess
 			ARG 3 pos
 				COMMENT the position of this block
 			ARG 4 direction
@@ -344,6 +348,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 2 pos
 		METHOD m_iaogtews getRenderingSeed (Lnet/minecraft/unmapped/C_hynzadkk;)J
 			ARG 1 pos
+		METHOD m_ibhctugj getPickStack (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;Z)Lnet/minecraft/unmapped/C_sddaxwyk;
+			ARG 3 includeComponents
 		METHOD m_ikryvqun isSolid ()Z
 		METHOD m_iqyhrmls materialReplaceable ()Z
 		METHOD m_iznnuukl canPathfindThrough (Lnet/minecraft/unmapped/C_kjwlgpfr;)Z
@@ -450,6 +456,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 1 world
 			ARG 2 pos
 			ARG 3 entity
+			ARG 4 effectManager
+		METHOD m_umphpklk onReplaced (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
+			ARG 3 suppressUpdates
 		METHOD m_umxslqzf isIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 			COMMENT {@return whether this block is in the specified tag}
 			ARG 1 tag
@@ -538,6 +547,8 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 	CLASS C_hqjgaunn OffsetType
 	CLASS C_izsedryc ContextPredicate
 	CLASS C_knnwryez TypedContextPredicate
+		METHOD test (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;Ljava/lang/Object;)Z
+			ARG 4 type
 	CLASS C_mlfsdncu OffsetFunction
 	CLASS C_xnkxsdfy Settings
 		FIELD f_bhzlstcj postProcessPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
@@ -549,6 +560,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_eioycbda key Lnet/minecraft/unmapped/C_xhhleach;
 		FIELD f_gepbjyhg nonSolid Z
 		FIELD f_gljcimhm emissiveLightingPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
+		FIELD f_gxswpnob translationKey Lnet/minecraft/unmapped/C_jquyxssk;
 		FIELD f_hgzeyqby randomTicks Z
 		FIELD f_hzpexiar mapColorGetter Ljava/util/function/Function;
 		FIELD f_ivzlotoq replaceable Z
@@ -563,7 +575,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		FIELD f_obppjqdx opaque Z
 		FIELD f_pgktgiev offsetFunction Lnet/minecraft/unmapped/C_triydqro$C_mlfsdncu;
 		FIELD f_piwzbwkw suffocationPredicate Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;
-		FIELD f_pxqjcqnw lootTableId Lnet/minecraft/unmapped/C_jquyxssk;
+		FIELD f_pxqjcqnw lootTable Lnet/minecraft/unmapped/C_jquyxssk;
 		FIELD f_stojhpmj solid Z
 		FIELD f_vgbjitlh spawnsDustParticles Z
 		FIELD f_vncuqezy luminance Ljava/util/function/ToIntFunction;
@@ -575,6 +587,7 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_bcasjlrn variantOf (Lnet/minecraft/unmapped/C_triydqro;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 0 block
 		METHOD m_bwwgnswz solid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+		METHOD m_bybxvckr getLootTable ()Ljava/util/Optional;
 		METHOD m_bzhfzklk emissiveLighting (Lnet/minecraft/unmapped/C_triydqro$C_izsedryc;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 predicate
 		METHOD m_cfcitqhx requiredFlags ([Lnet/minecraft/unmapped/C_kksdgidr;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -608,12 +621,21 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 		METHOD m_ixvdwzpv ticksRandomly ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_jjsywpzh slipperiness (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 slipperiness
+		METHOD m_jzrlfqyp (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/String;
+			ARG 0 key
 		METHOD m_ksnsduxl create ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_lzknvbog hardness (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 hardness
 		METHOD m_mkgblwbl nonSolid ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_mkiacirn air ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 		METHOD m_mylnzrvw mapColor (Lnet/minecraft/unmapped/C_vhpmxtfv;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			ARG 1 color
+		METHOD m_nbpsnvhc lootTable (Ljava/util/Optional;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			COMMENT Sets the block's loot table.
+			COMMENT <p>
+			COMMENT If not set explicitly via this method, the loot table will be derived from
+			COMMENT the block's {@linkplain #key(RegistryKey) registry key} with the form
+			COMMENT {@code <namespace>:blocks/<path>}.
 		METHOD m_nfvnphha allowsSpawning (Lnet/minecraft/unmapped/C_triydqro$C_knnwryez;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			COMMENT Specifies logic that calculates whether an entity can spawn on a block.
 			ARG 1 predicate
@@ -627,6 +649,15 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			COMMENT Specifies the light level emitted by a block.
 			ARG 1 luminance
 				COMMENT a per block state light level, with values between 0 and 15
+		METHOD m_oileiccy translationKey (Ljava/lang/String;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+			COMMENT Sets the block's translation key.
+			COMMENT <p>
+			COMMENT If not set explicitly via this method, the translation key will be derived from
+			COMMENT the block's {@linkplain #key(RegistryKey) registry key} with the form
+			COMMENT {@code block.<namespace>.<path>}.<br>
+			COMMENT Any {@code /} characters in the {@code <path>} will be replaced with
+			COMMENT {@code .} characters.
+			ARG 1 translationKey
 		METHOD m_pbfkvwez strength (F)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
 			ARG 1 strength
 		METHOD m_riwmybec instrument (Lnet/minecraft/unmapped/C_onjtjtsi;)Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
@@ -639,7 +670,9 @@ CLASS net/minecraft/unmapped/C_triydqro net/minecraft/block/AbstractBlock
 			ARG 0 state
 			ARG 1 world
 			ARG 2 pos
+			ARG 3 type
 		METHOD m_shyyftwz toolRequired ()Lnet/minecraft/unmapped/C_triydqro$C_xnkxsdfy;
+		METHOD m_telcghnd getTranslationKey ()Ljava/lang/String;
 		METHOD m_tzpskyoo (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 0 state
 			ARG 1 world
