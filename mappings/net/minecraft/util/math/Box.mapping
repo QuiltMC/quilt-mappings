@@ -45,9 +45,16 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		ARG 0 mutable
 	METHOD m_hicseajv getMaxPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_hwfgvpmt contract (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with this box's bounds contracted by the passed amount
+		COMMENT in both directions of each axis.
+		COMMENT
+		COMMENT @see #contract(double, double, double)
 		COMMENT @see #expand(double)
 		ARG 1 value
 	METHOD m_icqbqiis contract (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with this box's bounds contracted by the passed amounts
+		COMMENT in both directions of each axis.
+		COMMENT
 		COMMENT @see #expand(double, double, double)
 		ARG 1 x
 		ARG 3 y
@@ -59,7 +66,12 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		COMMENT @see #offset(double, double, double)
 		ARG 1 blockPos
 	METHOD m_iigjxfsp stretch (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_hbcjzgoe;
-		ARG 1 scale
+		COMMENT Creates a box with this box's bounds stretched by the passed amounts
+		COMMENT along each axis in the direction corresponding to the sign of the amount.
+		COMMENT
+		COMMENT @see #stretch(double, double, double)
+		COMMENT @see #contract(double, double, double)
+		ARG 1 amounts
 	METHOD m_itihbbap withMinX (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
 		COMMENT Creates a box with the minimum X provided and all other coordinates
 		COMMENT of this box.
@@ -73,11 +85,19 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		ARG 3 y
 		ARG 5 z
 	METHOD m_jaxcobme shrink (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with this box's bounds shrunk by the passed amounts
+		COMMENT along each axis in the direction corresponding to the sign of the amount.
+		COMMENT
+		COMMENT @see #stretch(double, double, double)
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
 	METHOD m_jnmfrlwx getXLength ()D
 	METHOD m_mhprjdid stretch (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with this box's bounds stretched by the passed amounts
+		COMMENT along each axis in the direction corresponding to the sign of the amount.
+		COMMENT
+		COMMENT @see #shrink(double, double, double)
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
@@ -128,6 +148,9 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		COMMENT Checks if any of the coordinates of this box is {@linkplain
 		COMMENT Double#isNaN(double) not a number}.
 	METHOD m_pzvscshx expand (DDD)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with this box's bounds expanded by the passed amounts
+		COMMENT in both directions of each axis.
+		COMMENT
 		COMMENT @see #contract(double, double, double)
 		ARG 1 x
 		ARG 3 y
@@ -181,8 +204,12 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 		COMMENT of this box.
 		ARG 1 maxZ
 	METHOD m_wsmxurzz expand (D)Lnet/minecraft/unmapped/C_hbcjzgoe;
+		COMMENT Creates a box with this box's bounds shifted by the passed amount
+		COMMENT in both directions of each axis.
+		COMMENT
+		COMMENT @see #expand(double, double, double)
 		COMMENT @see #contract(double)
-		ARG 1 value
+		ARG 1 amount
 	METHOD m_wywdjpzc traceCollisionSide (DDDDDDLnet/minecraft/unmapped/C_vgpupfxx;[DLnet/minecraft/unmapped/C_xpuuihxf;DDD)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 minX
 		ARG 2 minY
@@ -209,3 +236,20 @@ CLASS net/minecraft/unmapped/C_hbcjzgoe net/minecraft/util/math/Box
 	METHOD m_zmkdorxa getMax (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)D
 		ARG 1 axis
 	METHOD m_zpsbullj getBottomCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	CLASS C_zisdqdzu Builder
+		COMMENT Helper class for building {@link Box}es.
+		COMMENT <p>
+		COMMENT Be sure to {@link #enclose} at least two different positions before
+		COMMENT {@linkplain #build building}.<br>
+		COMMENT {@linkplain #build Building} without enclosing any positions results in a
+		COMMENT very large box, while building after enclosing only one position results
+		COMMENT in a box whose volume is zero.
+		FIELD f_acgqisxb maxX F
+		FIELD f_ekjelnno minX F
+		FIELD f_jkjlwpzx maxZ F
+		FIELD f_juuqvbzk maxY F
+		FIELD f_svuopsfn minZ F
+		FIELD f_wzofnmjz minY F
+		METHOD m_srzvdcaj enclose (Lorg/joml/Vector3fc;)V
+			ARG 1 pos
+		METHOD m_udflcevg build ()Lnet/minecraft/unmapped/C_hbcjzgoe;
