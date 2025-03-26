@@ -571,7 +571,14 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 slot
 	METHOD m_xgwxqkgb swingHand (Lnet/minecraft/unmapped/C_laxmzoqs;)V
 		ARG 1 hand
-	METHOD m_xjvsabgy buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_xjvsabgy buildLivingAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+		COMMENT Builds attributes common to all living entities.<br>
+		COMMENT Subclasses of {@code LivingEntity} should add their custom attributes to the
+		COMMENT builder this returns.
+		COMMENT <p>
+		COMMENT Note: this isn't named {@code buildAttributes} because subclasses call it from
+		COMMENT their methods with that name without using the {@code LivingEntity} class
+		COMMENT qualifier, so naming it as such would cause recursion.
 	METHOD m_xnfqqzkv isMobOrPlayer ()Z
 	METHOD m_xotweprj indicateDamage (DD)V
 		ARG 1 x
