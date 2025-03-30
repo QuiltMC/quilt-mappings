@@ -3,9 +3,20 @@ plugins {
     alias libs.plugins.quilt.loom
 }
 
+final ENV = System.getenv()
+
+final MINECRAFT_VERSION = coreLibs.versions.minecraft.get()
+
+final CORE_VERSION = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault('BUILD_NUMBER', 'local')}"
+
 dependencies {
     // implementation project(':core')
 
-    minecraft(libs.minecraft)
-    mappings(files(project(':core').tasks.tinyJar.archiveFile))
+    minecraft(coreLibs.minecraft)
+    // mappings("org.quiltmc:quilt-mappings:${CORE_VERSION}")
+    mappings('org.quiltmc:quilt-mappings:+') {
+        // capabilities {
+        //     requireCapability 'org.quiltmc:gametest-exposure'
+        // }
+    }
 }

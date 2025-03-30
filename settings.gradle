@@ -1,28 +1,24 @@
 pluginManagement {
-	repositories {
-		maven {
-			name = "Quilt"
-			url = "https://maven.quiltmc.org/repository/release"
-		}
-		maven {
-			name = 'Fabric'
-			url = 'https://maven.fabricmc.net/'
-		}
-		gradlePluginPortal()
-	}
+    repositories {
+        maven {
+            name = 'Quilt'
+            url = 'https://maven.quiltmc.org/repository/release'
+        }
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+    }
 }
 
-// This check is done here before any plugins that may require java 21 are able to load.
-if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_21)) {
-	throw new UnsupportedOperationException("Quilt Mappings's buildscript requires Java 21 or higher. (current version: " + JavaVersion.current() + ")")
+dependencyResolutionManagement {
+    versionCatalogs {
+        coreLibs {
+            from(files("core/gradle/libs.versions.toml"))
+        }
+    }
 }
 
-rootProject.name = "quilt-mappings"
-
-include 'core'
-include 'gametest'
-
-var localSettings = file("local.settings.gradle")
-if (localSettings.exists()) {
-	apply(from: localSettings)
-}
+includeBuild('core')
+include('gametest')
