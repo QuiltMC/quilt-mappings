@@ -20,5 +20,10 @@ dependencyResolutionManagement {
     }
 }
 
-includeBuild('core')
+includeBuild('core') {
+    dependencySubstitution {
+        substitute module('org.quiltmc:quilt-mappings') using project(':')
+    }
+}
+
 include('gametest')
