@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+    id 'java-gradle-plugin'}
+
+gradlePlugin {
+    plugins {
+        dummy {
+            id = 'dummy'
+            implementationClass = 'quilt.internal.plugin.DummyPlugin'
+        }
+    }
+}
+
+tasks.named('jar') {
+    dependsOn(project(':').tasks.publishGametestVerifyPublicationToGametestVerifyRepository)
+}

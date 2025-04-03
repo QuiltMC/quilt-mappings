@@ -1,6 +1,14 @@
 plugins {
     id 'java'
+    id 'dummy'
     alias libs.plugins.quilt.loom
+}
+
+repositories {
+    maven {
+        name = 'gametestVerify'
+        url = '../core/build/gametest-verify'
+    }
 }
 
 dependencies {
@@ -8,5 +16,5 @@ dependencies {
 
     minecraft(coreLibs.minecraft)
     // mappings('org.quiltmc:quilt-mappings')
-    mappings('org.quiltmc:gametest-verify')
+    mappings('org.quiltmc:gametest-verify:+')
 }

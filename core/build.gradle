@@ -103,7 +103,7 @@ artifacts {
 	gametestVerify(tasks.tinyJar)
 
 	// quilt-mappings-<version>-tiny.gz
-	gametestVerify tasks.compressTiny.artifactFile
+	// gametestVerify tasks.compressTiny.artifactFile
 	// quilt-mappings-<version>.jar
 	gametestVerify tasks.tinyJar
 	// quilt-mappings-<version>-v2.jar
@@ -125,7 +125,7 @@ interface ComponentMaker {
 }
 
 final componentMaker = objects.newInstance(ComponentMaker)
-final gametestVerifyComponent = componentMaker.factory.adhoc("gametestVerify")
+final gametestVerifyComponent = componentMaker.factory.adhoc('gametestVerify')
 project.components.add(gametestVerifyComponent)
 gametestVerifyComponent.addVariantsFromConfiguration(configurations.gametestVerify) {}
 
@@ -135,6 +135,13 @@ publishing {
 			groupId 'org.quiltmc'
 			artifactId 'gametest-verify'
 			from components.gametestVerify
+		}
+	}
+
+	repositories {
+		maven {
+			name = 'gametestVerify'
+			url = project.layout.buildDirectory.dir('gametest-verify')
 		}
 	}
 }
