@@ -16,5 +16,9 @@ dependencies {
 
     minecraft(coreLibs.minecraft)
     // mappings('org.quiltmc:quilt-mappings')
-    mappings (variantOf(libs.gametest.verify.mappings)  { classifier 'intermediary-v2' })
+    // mappings (variantOf(libs.gametest.verify.mappings)  { classifier 'intermediary-v2' })
+    // final coreVersion = '1.21.5+build.local'
+    final coreVersion = "${coreLibs.versions.minecraft.get()}+build.${System.getenv().getOrDefault('BUILD_NUMBER', 'local')}"
+
+    mappings "org.quiltmc:gametest-verify:${coreVersion}:intermediary-v2"
 }
