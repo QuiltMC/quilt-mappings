@@ -2,27 +2,30 @@ CLASS net/minecraft/unmapped/C_rxtmregr net/minecraft/entity/passive/CatEntity
 	COMMENT Meow.
 	FIELD f_cmwfbyhe DEFAULT_VARIANT Lnet/minecraft/unmapped/C_xhhleach;
 	FIELD f_crlwzfoc HEAD_DOWN Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_czqfqakz prevSleepAnimation F
-	FIELD f_ebcwdxuh tailCurlAnimation F
+	FIELD f_czqfqakz prevSleepAnimationProgress F
+	FIELD f_ebcwdxuh tailCurlAnimationProgress F
 	FIELD f_fembngch WALKING_SPEED D
 	FIELD f_gaahrhec TEMPTED_SPEED D
 	FIELD f_hqvkpijz fleeGoal Lnet/minecraft/unmapped/C_rxtmregr$C_jlusltvy;
-	FIELD f_iywwshas sleepAnimation F
+	FIELD f_iywwshas sleepAnimationProgress F
 	FIELD f_jycwwapx VARIANT Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_krqstxdp headDownAnimation F
+	FIELD f_krqstxdp headDownAnimationProgress F
 	FIELD f_lfmjmddd COLLAR_COLOR Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_lsvomhnh SPRINTING_SPEED D
 	FIELD f_mhntxktq nearSleepingPlayer Z
-	FIELD f_qmmhiplw prevHeadDownAnimation F
-	FIELD f_rbvswzvj prevTailCurlAnimation F
+	FIELD f_qmmhiplw prevHeadDownAnimationProgress F
+	FIELD f_rbvswzvj prevTailCurlAnimationProgress F
 	FIELD f_uqdbaiuw temptGoal Lnet/minecraft/unmapped/C_klcypqlq;
 	FIELD f_yzqtqxyg IN_SLEEPING_POSE Lnet/minecraft/unmapped/C_rinmcaxy;
-	METHOD m_abjrsyno getTailCurlAnimation (F)F
+	METHOD m_abjrsyno getTailCurlAnimationProgress (F)F
 		ARG 1 tickDelta
 	METHOD m_cqsgalyd setHeadDown (Z)V
 		ARG 1 headDown
+	METHOD m_fstqrogl setVariant (Lnet/minecraft/unmapped/C_cjzoxshv;)V
+		ARG 1 variant
 	METHOD m_hklpzhfy updateAnimations ()V
 	METHOD m_hrmkvfwy buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_jbxeoyhf getVariant ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_jegafqgf tryTame (Lnet/minecraft/unmapped/C_jzrpycqo;)V
 	METHOD m_jmkrmfxa isNearSleepingPlayer ()Z
 	METHOD m_lamyttdk isInSleepingPose ()Z
@@ -33,10 +36,10 @@ CLASS net/minecraft/unmapped/C_rxtmregr net/minecraft/entity/passive/CatEntity
 		COMMENT Sets whether this cat is in a sleeping pose or not.
 		ARG 1 sleeping
 			COMMENT {@code true} if this cat is in a sleeping pose, or {@code false} otherwise
-	METHOD m_pedhhxbx getSleepAnimation (F)F
+	METHOD m_pedhhxbx getSleepAnimationProgress (F)F
 		ARG 1 tickDelta
 	METHOD m_sklrirdg hiss ()V
-	METHOD m_tavxjrmu getHeadDownAnimation (F)F
+	METHOD m_tavxjrmu getHeadDownAnimationProgress (F)F
 		ARG 1 tickDelta
 	METHOD m_vtfjmalp isHeadDown ()Z
 	METHOD m_wuadlgeg flee ()V
