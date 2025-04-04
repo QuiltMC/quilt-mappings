@@ -4,13 +4,21 @@ plugins {
 
 gradlePlugin {
     plugins {
-        dummy {
-            id = 'dummy'
-            implementationClass = 'quilt.internal.plugin.DummyPlugin'
+        gametestable {
+            id = 'gametestable'
+            implementationClass = 'quilt.internal.plugin.GametestablePlugin'
         }
     }
 }
 
 tasks.named('jar') {
-    dependsOn(project(':').tasks.publishGametestablePublicationToGametestableRepository)
+    dependsOn(rootProject.tasks.publishGametestablePublicationToGametestableRepository)
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Version': rootProject.version
+        )
+    }
 }

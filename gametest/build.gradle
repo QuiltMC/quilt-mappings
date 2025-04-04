@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'dummy'
+    id 'gametestable'
     alias libs.plugins.quilt.loom
 }
 
@@ -14,7 +14,5 @@ repositories {
 dependencies {
     minecraft(coreLibs.minecraft)
 
-    final coreBuild = System.getenv().getOrDefault('BUILD_NUMBER', 'local')
-    final coreVersion = "${coreLibs.versions.minecraft.get()}+build.${coreBuild}"
-    mappings "org.quiltmc:gametestable-quilt-mappings:${coreVersion}:intermediary-v2"
+    mappings "org.quiltmc:gametestable-quilt-mappings:${gametestable.version}:intermediary-v2"
 }
