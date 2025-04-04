@@ -1,7 +1,23 @@
 plugins {
     id 'java'
     id 'gametestable'
-    alias libs.plugins.quilt.loom
+    alias libs.plugins.fabric.loom
+}
+
+loom {
+    runs {
+        gametest {
+            name 'Game Test'
+            source sourceSets.main
+
+            server()
+
+            ideConfigGenerated(true)
+
+            vmArg '-Dfabric-api.gametest'
+            vmArg "-Dfabric-api.gametest.report-file=${project.layout.buildDirectory.file('gametest.xml').get().getAsFile()}"
+        }
+    }
 }
 
 repositories {
@@ -13,6 +29,24 @@ repositories {
 
 dependencies {
     minecraft(coreLibs.minecraft)
-
     mappings "org.quiltmc:gametestable-quilt-mappings:${gametestable.version}:intermediary-v2"
+
+    modImplementation libs.fabric.loader
+    modImplementation libs.fabric.api
+}
+
+processResources {
+    final expanding = [
+        version: gametestable.version,
+        group: 'org.quilt.internal',
+        minecraft_version: coreLibs.versions.minecraft.get(),
+        fabric_loader_version: libs.versions.fabric.loader.get(),
+        fabric_api_version: libs.versions.fabric.api.get()
+    ]
+
+    inputs.properties(expanding)
+
+    filesMatching('fabric.mod.json') {
+        expand expanding
+    }
 }
