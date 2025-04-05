@@ -83,15 +83,15 @@ repositories {
 configurations {
 	dictionary
 
-	gametestable {
-		canBeConsumed = true
-		canBeResolved = false
-		transitive = false
-
-		attributes {
-			attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category, Category.LIBRARY))
-		}
-	}
+	// gametestable {
+	// 	canBeConsumed = true
+	// 	canBeResolved = false
+	// 	transitive = false
+	//
+	// 	attributes {
+	// 		attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category, Category.LIBRARY))
+	// 	}
+	// }
 }
 
 dependencies {
@@ -310,37 +310,37 @@ license {
 	include '**/*.java'
 }
 
-artifacts {
-	gametestable tasks.tinyJar
+// artifacts {
+// 	gametestable tasks.tinyJar
+//
+// 	// quilt-mappings-<version>-tiny.gz
+// 	gametestable (tasks.compressTiny.artifactFile) {
+// 		builtBy tasks.compressTiny
+// 	}
+// 	// quilt-mappings-<version>.jar
+// 	gametestable tasks.tinyJar
+// 	// quilt-mappings-<version>-v2.jar
+// 	gametestable tasks.v2UnmergedMappingsJar
+// 	// quilt-mappings-<version>-mergedv2.jar
+// 	gametestable tasks.v2MergedMappingsJar
+// 	// quilt-mappings-<version>-constants.jar
+// 	gametestable tasks.constantsJar
+//
+// 	// quilt-mappings-<version>-sources.jar
+// 	gametestable tasks.sourcesJar
+// 	// quilt-mappings-<version>-javadoc.jar
+// 	gametestable tasks.javadocJar
+// }
 
-	// quilt-mappings-<version>-tiny.gz
-	gametestable (tasks.compressTiny.artifactFile) {
-		builtBy tasks.compressTiny
-	}
-	// quilt-mappings-<version>.jar
-	gametestable tasks.tinyJar
-	// quilt-mappings-<version>-v2.jar
-	gametestable tasks.v2UnmergedMappingsJar
-	// quilt-mappings-<version>-mergedv2.jar
-	gametestable tasks.v2MergedMappingsJar
-	// quilt-mappings-<version>-constants.jar
-	gametestable tasks.constantsJar
-
-	// quilt-mappings-<version>-sources.jar
-	gametestable tasks.sourcesJar
-	// quilt-mappings-<version>-javadoc.jar
-	gametestable tasks.javadocJar
-}
-
-interface ComponentMaker {
-	@Inject
-	SoftwareComponentFactory getFactory()
-}
-
-final componentMaker = objects.newInstance(ComponentMaker)
-final gametestableComponent = componentMaker.factory.adhoc('gametestable')
-project.components.add(gametestableComponent)
-gametestableComponent.addVariantsFromConfiguration(configurations.gametestable) {}
+// interface ComponentMaker {
+// 	@Inject
+// 	SoftwareComponentFactory getFactory()
+// }
+//
+// final componentMaker = objects.newInstance(ComponentMaker)
+// final gametestableComponent = componentMaker.factory.adhoc('gametestable')
+// project.components.add(gametestableComponent)
+// gametestableComponent.addVariantsFromConfiguration(configurations.gametestable) {}
 
 publishing {
 	publications {
@@ -368,12 +368,12 @@ publishing {
 			// See below the publishing block for intermediary artifact publishing
 		}
 
-		// for gametest project
-		gametestable(MavenPublication) {
-			groupId 'org.quiltmc'
-			artifactId 'gametestable-quilt-mappings'
-			from components.gametestable
-		}
+		// // for gametest project
+		// gametestable(MavenPublication) {
+		// 	groupId 'org.quiltmc'
+		// 	artifactId 'gametestable-quilt-mappings'
+		// 	from components.gametestable
+		// }
 	}
 
 	repositories {
@@ -406,23 +406,23 @@ publishing {
 	}
 }
 
-final publishPredicateConfiguration = {
-	final predicate = provider {
-		(
-			repository == publishing.repositories.gametestable &&
-			publication == publishing.publications.gametestable
-		) || (
-			repository != publishing.repositories.gametestable &&
-			publication != publishing.publications.gametestable
-		)
-	}
-	onlyIf("publishing only gametestable to the gametestable repo, or everything else to everywhere else") {
-		predicate.get()
-	}
-}
-
-tasks.withType(PublishToMavenRepository).configureEach(publishPredicateConfiguration)
-tasks.withType(PublishToMavenLocal).configureEach(publishPredicateConfiguration)
+// final publishPredicateConfiguration = {
+// 	final predicate = provider {
+// 		(
+// 			repository == publishing.repositories.gametestable &&
+// 			publication == publishing.publications.gametestable
+// 		) || (
+// 			repository != publishing.repositories.gametestable &&
+// 			publication != publishing.publications.gametestable
+// 		)
+// 	}
+// 	onlyIf("publishing only gametestable to the gametestable repo, or everything else to everywhere else") {
+// 		predicate.get()
+// 	}
+// }
+//
+// tasks.withType(PublishToMavenRepository).configureEach(publishPredicateConfiguration)
+// tasks.withType(PublishToMavenLocal).configureEach(publishPredicateConfiguration)
 
 tasks.withType(AbstractPublishToMaven).configureEach {
 	// Won't run if mapIntermediary.intermediaryFile is absent
