@@ -23,12 +23,12 @@ loom {
 repositories {
     maven {
         name = 'gametest'
-        url = '../core/build/gametestable'
+        url = '../build/gametestable'
     }
 }
 
 dependencies {
-    minecraft(coreLibs.minecraft)
+    minecraft(rootLibs.minecraft)
     mappings "org.quiltmc:gametestable-quilt-mappings:${gametestable.version}:intermediary-v2"
 
     modImplementation libs.fabric.loader
@@ -39,7 +39,7 @@ processResources {
     final expanding = [
         version: gametestable.version,
         group: 'org.quilt.internal',
-        minecraft_version: coreLibs.versions.minecraft.get(),
+        minecraft_version: rootLibs.versions.minecraft.get(),
         fabric_loader_version: libs.versions.fabric.loader.get(),
         fabric_api_version: libs.versions.fabric.api.get()
     ]
