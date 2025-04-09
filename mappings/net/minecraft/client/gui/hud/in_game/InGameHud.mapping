@@ -47,7 +47,6 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/in_game/InG
 	FIELD f_qhujscvo HEARTS_PER_ROW I
 	FIELD f_qtdjdpzm title Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_roimcgzs bossBarHud Lnet/minecraft/unmapped/C_vpkfuxkl;
-	FIELD f_rwhujnyh JUMP_BAR_PROGRESS Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_rzrztcjp ticks I
 	FIELD f_sspkqdil AUTOSAVE_FADE_SPEED_FACTOR F
 	FIELD f_sufivads canShowChatDisabledScreen Z
@@ -55,10 +54,8 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/in_game/InG
 	FIELD f_tvzqnily lastHealthCheckTime J
 	FIELD f_utygbpqv overlayMessage Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_vflnqbid client Lnet/minecraft/unmapped/C_ayfeobid;
-	FIELD f_vovrjqxz renderList Lnet/minecraft/unmapped/C_nihbhmxv;
 	FIELD f_vrirzdji FOOD_FULL_HUNGER Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_wafytgbv HEART_VEHICLE_FULL Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_wbaqdnkr EXPERIENCE_BAR_PROGRESS Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_wbtwkuwi vignetteDarkness F
 	FIELD f_xaxyfvom CROSSHAIR_ATTACK_INDICATOR_PROGRESS Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_xcfkuvos spectatorHud Lnet/minecraft/unmapped/C_ybztcyiy;
@@ -66,15 +63,12 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/in_game/InG
 	FIELD f_xlbbyvwz renderHealthValue I
 	FIELD f_xpbfsavr lastAutosaveIndicatorAlpha F
 	FIELD f_xrlzwbek EFFECT_BACKGROUND Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_xtbenypu JUMP_BAR_BACKGROUND Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_xwzjlhlv EFFECT_BACKGROUND_AMBIENT Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_xxxihcuk SCOREBOARD_COMPARATOR Ljava/util/Comparator;
 	FIELD f_yafbelbl HEART_SIZE I
-	FIELD f_yhumvrht EXPERIENCE_BAR_BACKGROUND Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_yjiesqbj autosaveIndicatorAlpha F
 	FIELD f_yorzlrbh CROSSHAIR Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_yqesrjzr spyglassScale F
-	FIELD f_yxxcqdip JUMP_BAR_COOLDOWN Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_zcsyhyls HOTBAR_OFFHAND_LEFT Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_zmeylqar ARMOR_EMPTY Lnet/minecraft/unmapped/C_ncpywfca;
 	METHOD m_agllrwwz getCameraPlayer ()Lnet/minecraft/unmapped/C_jzrpycqo;
@@ -108,14 +102,10 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/in_game/InG
 		ARG 3 opacity
 	METHOD m_dijxijhk renderHeldItemTooltip (Lnet/minecraft/unmapped/C_sedilmty;)V
 		ARG 1 graphics
-	METHOD m_emuzsdpx renderExperienceBar (Lnet/minecraft/unmapped/C_sedilmty;I)V
-		ARG 1 graphics
-		ARG 2 x
 	METHOD m_ettyzsyv render (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_lrgsdfwv;)V
 		ARG 1 graphics
 	METHOD m_fmuufkwf renderDemoTimer (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_lrgsdfwv;)V
 		ARG 1 graphics
-	METHOD m_fnmhcrhd shouldRenderExperience ()Z
 	METHOD m_fvwzoqkl getHeartCount (Lnet/minecraft/unmapped/C_usxaxydn;)I
 		ARG 1 entity
 	METHOD m_fydpkivs setSubtitle (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
@@ -137,8 +127,8 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/in_game/InG
 		ARG 2 remainTicks
 		ARG 3 fadeOutTicks
 	METHOD m_lcsxraft renderPlayerList (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_lrgsdfwv;)V
-	METHOD m_mocrhtmt (Lnet/minecraft/unmapped/C_lfemghur;)Z
-		ARG 0 entry
+	METHOD m_mocrhtmt (Lnet/minecraft/unmapped/C_ymwyplge;Lnet/minecraft/unmapped/C_zhwspcux;Lnet/minecraft/unmapped/C_lfemghur;)Lnet/minecraft/unmapped/C_nepwsmgw$C_utdjjnqv;
+		ARG 3 entry
 	METHOD m_nenfurdx renderHungerBar (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_jzrpycqo;II)V
 		ARG 1 graphics
 		ARG 2 player
@@ -147,10 +137,6 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/in_game/InG
 	METHOD m_nfjwrptj getTextRenderer ()Lnet/minecraft/unmapped/C_mavozmpp;
 	METHOD m_oafggdwi renderStatusEffectOverlay (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_lrgsdfwv;)V
 		ARG 1 graphics
-	METHOD m_oxmnnwnm renderMountJumpBar (Lnet/minecraft/unmapped/C_yerxgbau;Lnet/minecraft/unmapped/C_sedilmty;I)V
-		ARG 1 mount
-		ARG 2 graphics
-		ARG 3 x
 	METHOD m_oyrilkmm tick (Z)V
 		ARG 1 paused
 	METHOD m_pjslufig renderHotbarItem (Lnet/minecraft/unmapped/C_sedilmty;IILnet/minecraft/unmapped/C_lrgsdfwv;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_sddaxwyk;I)V
@@ -193,7 +179,6 @@ CLASS net/minecraft/unmapped/C_nepwsmgw net/minecraft/client/gui/hud/in_game/InG
 	METHOD m_wkdzfhws setDefaultTitleFade ()V
 	METHOD m_wwnerxsu renderMountHealth (Lnet/minecraft/unmapped/C_sedilmty;)V
 		ARG 1 graphics
-	METHOD m_wyafzzmv renderExperienceLevel (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_lrgsdfwv;)V
 	METHOD m_xgoqlosf tickAutosaveIndicator ()V
 	METHOD m_xqvrdrrt getHeartRows (I)I
 		ARG 1 heartCount

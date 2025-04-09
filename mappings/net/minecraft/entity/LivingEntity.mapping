@@ -60,7 +60,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_prubtnbt activeStatusEffects Ljava/util/Map;
 	FIELD f_pxramaew forwardSpeed F
 	FIELD f_qalszaps dead Z
-	FIELD f_qcmvoplx roll I
+	FIELD f_qcmvoplx fallFlyingTicks I
 	FIELD f_qujstjfe USING_RIPTIDE_FLAG I
 	FIELD f_rdmvhrge climbingPos Ljava/util/Optional;
 	FIELD f_rdukodcv POWDER_SNOW_SPEED_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
@@ -390,7 +390,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT <p>
 		COMMENT See vanilla examples in
 		COMMENT {@linkplain net.minecraft.entity.passive.TamableMountEntity#travel mounts}
-		COMMENT and {@linkplain net.minecraft.entity.mob.FlyingEntity#travel flying entities}.
+		COMMENT and {@linkplain net.minecraft.entity.mob.GuardianEntity#travel guardians}.
 		ARG 1 movementInput
 			COMMENT represents the sidewaysSpeed, upwardSpeed, and forwardSpeed of the entity in that order
 	METHOD m_pewhzjbc computeUnsafeFallenDistance (D)D
@@ -556,7 +556,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 tickDelta
 	METHOD m_whvujbsh dropInventory (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_widuipxk getAttributes ()Lnet/minecraft/unmapped/C_cohbwqne;
-	METHOD m_wjvypezh getRoll ()I
+	METHOD m_wjvypezh getFallFlyingTicks ()I
 	METHOD m_wkgrdcha fallFlyTravel (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 	METHOD m_wmvelibz isHoldingOntoLadder ()Z
 		COMMENT @return {@code true} if this entity should not lose height while in a climbing state
@@ -571,7 +571,14 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 slot
 	METHOD m_xgwxqkgb swingHand (Lnet/minecraft/unmapped/C_laxmzoqs;)V
 		ARG 1 hand
-	METHOD m_xjvsabgy buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_xjvsabgy buildLivingAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+		COMMENT Builds attributes common to all living entities.<br>
+		COMMENT Subclasses of {@code LivingEntity} should add their custom attributes to the
+		COMMENT builder this returns.
+		COMMENT <p>
+		COMMENT Note: this isn't named {@code buildAttributes} because subclasses call it from
+		COMMENT their methods with that name without using the {@code LivingEntity} class
+		COMMENT qualifier, so naming it as such would cause recursion.
 	METHOD m_xnfqqzkv isMobOrPlayer ()Z
 	METHOD m_xotweprj indicateDamage (DD)V
 		ARG 1 x

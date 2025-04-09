@@ -95,7 +95,6 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/TamableMoun
 	METHOD m_lsugyvio executeRiderJump (FLnet/minecraft/unmapped/C_vgpupfxx;)V
 		ARG 1 jumpStrength
 		ARG 2 movementInput
-	METHOD m_lxexzfqi isInAir ()Z
 	METHOD m_mhthkgcc playWalkSound (Lnet/minecraft/unmapped/C_aevintex;)V
 		ARG 1 group
 	METHOD m_nsgfuztq getHorseFlag (I)Z
@@ -143,7 +142,14 @@ CLASS net/minecraft/unmapped/C_ktznyhaj net/minecraft/entity/passive/TamableMoun
 	METHOD m_yukcocww getDismountLocation (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 dismountDirection
 		ARG 2 passenger
-	METHOD m_yvcfnlwg buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_yvcfnlwg buildTamableMountAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+		COMMENT Builds attributes common to all tamable mount entities.<br>
+		COMMENT Subclasses of {@code TamableMountEntity} should add their custom attributes to
+		COMMENT the builder this returns.
+		COMMENT <p>
+		COMMENT Note: this isn't named {@code buildAttributes} because subclasses call it from
+		COMMENT their methods with that name without using the {@code TamableMountEntity} class
+		COMMENT qualifier, so naming it as such would cause recursion.
 	METHOD m_zhrpcxsv generateJumpStrengthBonus (Ljava/util/function/DoubleSupplier;)D
 		ARG 0 randomizer
 	METHOD m_zpkkhcub isDifferentInventory (Lnet/minecraft/unmapped/C_pjtstjoq;)Z
