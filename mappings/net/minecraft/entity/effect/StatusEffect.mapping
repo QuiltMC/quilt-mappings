@@ -2,10 +2,13 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	FIELD f_ejiuuoay requiredFeatures Lnet/minecraft/unmapped/C_czxxrbcp;
 	FIELD f_fcnodzqo color I
 	FIELD f_fromvzcw particleFactory Ljava/util/function/Function;
+	FIELD f_gvbuoigw blendOutStartTick I
 	FIELD f_hrqsqyvx AMBIENT_PARTICLE_ALPHA I
 	FIELD f_ohrjpsvc applySound Ljava/util/Optional;
 	FIELD f_pnqtkxvc type Lnet/minecraft/unmapped/C_mbktilxo;
+	FIELD f_pqyzbhuh blendOutTicks I
 	FIELD f_rqynlpsa attributeModifiers Ljava/util/Map;
+	FIELD f_snaunmts blendInTicks I
 	FIELD f_yqqwyxsb translationKey Ljava/lang/String;
 	METHOD <init> (Lnet/minecraft/unmapped/C_mbktilxo;I)V
 		ARG 1 type
@@ -31,6 +34,10 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 	METHOD m_irzxckrv shouldApplyUpdateEffect (II)Z
 		ARG 1 tick
 		ARG 2 amplifier
+	METHOD m_lhqpbhph setBlendTicks (III)Lnet/minecraft/unmapped/C_jaqasomh;
+		ARG 1 blendInTicks
+		ARG 2 blendOutTicks
+		ARG 3 blendOutStartTick
 	METHOD m_masoeeuk setApplySound (Lnet/minecraft/unmapped/C_avavozay;)Lnet/minecraft/unmapped/C_jaqasomh;
 		ARG 1 sound
 	METHOD m_nnnovhef addAttributeModifier (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_ncpywfca;DLnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Lnet/minecraft/unmapped/C_jaqasomh;
@@ -42,6 +49,8 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 		ARG 3 amplifier
 		ARG 4 source
 		ARG 5 amount
+	METHOD m_qftkxrcf setBlendTicks (I)Lnet/minecraft/unmapped/C_jaqasomh;
+		ARG 1 ticks
 	METHOD m_qlsxoyxu createAttributeModifiers (ILjava/util/function/BiConsumer;)V
 		ARG 1 amplifier
 		ARG 2 consumer
@@ -57,8 +66,10 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 		ARG 2 entity
 		ARG 3 amplifier
 		ARG 4 reason
+	METHOD m_tvtbjjqp getBlendOutTicks ()I
 	METHOD m_uosrujfk createParticle (Lnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
 		ARG 1 statusEffect
+	METHOD m_vbesjumk getWearOffDuration ()I
 	METHOD m_wbxrdluz (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_avavozay;)V
 		ARG 1 sound
 	METHOD m_xccgpemy applyInstantEffect (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_usxaxydn;ID)V
@@ -69,7 +80,11 @@ CLASS net/minecraft/unmapped/C_jaqasomh net/minecraft/entity/effect/StatusEffect
 		ARG 6 proximity
 	METHOD m_xpznhypy (Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_wpfizwve;)Lnet/minecraft/unmapped/C_nqucohct;
 		ARG 1 statusEffect
+	METHOD m_yvarmyhs (Ljava/util/function/BiConsumer;ILnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_jaqasomh$C_xvxuthmo;)V
+		ARG 2 attribute
+		ARG 3 modifierCreator
 	METHOD m_yxnpxply isInstant ()Z
+	METHOD m_zxxrwtbz getBlendInTicks ()I
 	CLASS C_xvxuthmo EntryAttributeModifierCreator
 		METHOD m_zhiowqzb create (I)Lnet/minecraft/unmapped/C_hdbqsqsm;
 			ARG 1 amplifier
