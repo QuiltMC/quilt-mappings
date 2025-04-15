@@ -77,10 +77,9 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_dwuopuwx updateNoCullingBlockEntities (Ljava/util/Collection;Ljava/util/Collection;)V
 		ARG 1 removed
 		ARG 2 added
-	METHOD m_dxaxfxmt addParticlesPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_dcmtgrvm;FLnet/minecraft/unmapped/C_vidgpspy;)V
+	METHOD m_dxaxfxmt addParticlesPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_dcmtgrvm;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 frameGraph
 		ARG 3 tickDelta
-		ARG 4 fog
 	METHOD m_eesirxud setupTerrain (Lnet/minecraft/unmapped/C_dcmtgrvm;Lnet/minecraft/unmapped/C_jwzjqevg;ZZ)V
 		ARG 1 camera
 		ARG 2 frustum
@@ -95,11 +94,10 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 9 velocityX
 		ARG 11 velocityY
 		ARG 13 velocityZ
-	METHOD m_errmldkc addWeatherAndWorldBorderRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_vgpupfxx;FLnet/minecraft/unmapped/C_vidgpspy;)V
+	METHOD m_errmldkc addWeatherAndWorldBorderRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_vgpupfxx;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 frameGraph
 		ARG 2 camera
 		ARG 3 tickDelta
-		ARG 4 fog
 	METHOD m_erxhtaop getSections ()Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
 	METHOD m_evewmmqp renderBlockEntities (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;Lnet/minecraft/unmapped/C_dcmtgrvm;F)V
 		ARG 2 entityVertices
@@ -190,13 +188,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 4 maxX
 		ARG 5 maxY
 		ARG 6 maxZ
-	METHOD m_pckpreyt renderSectionLayer (Lnet/minecraft/unmapped/C_tizlwnnv;DDDLorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V
+	METHOD m_pckpreyt renderSectionLayer (Lnet/minecraft/unmapped/C_tizlwnnv;[Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 layer
-		ARG 2 x
-		ARG 4 y
-		ARG 6 z
-		ARG 8 modelViewMatrix
-		ARG 9 projectionMatrix
 	METHOD m_qgbrxqob setBlockBreakingInfo (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 		ARG 1 entityId
 		ARG 2 pos
@@ -225,10 +218,9 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_tboyskxy onSectionBecomingNonEmpty (J)V
 		ARG 1 chunkSectionPos
 	METHOD m_tgxmzbib getParticlesFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
-	METHOD m_uptmaubw addLateDebugPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vidgpspy;)V
+	METHOD m_uptmaubw addLateDebugPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_vgpupfxx;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 frameGraph
 		ARG 2 camera
-		ARG 3 fog
 	METHOD m_uyzrbqdi rebuildSections (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
 	METHOD m_uzhmpsuv scheduleBlockRender (III)V
 		ARG 1 x
@@ -242,13 +234,11 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_vznbfahy applyFrustum (Lnet/minecraft/unmapped/C_jwzjqevg;)V
 		ARG 1 frustum
 	METHOD m_wcyzbxhv countRenderedSections ()I
-	METHOD m_whptjcei addMainPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_jwzjqevg;Lnet/minecraft/unmapped/C_dcmtgrvm;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lnet/minecraft/unmapped/C_vidgpspy;ZZLnet/minecraft/unmapped/C_lrgsdfwv;Lnet/minecraft/unmapped/C_eslcbfsq;)V
+	METHOD m_whptjcei addMainPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_jwzjqevg;Lnet/minecraft/unmapped/C_dcmtgrvm;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;ZZLnet/minecraft/unmapped/C_lrgsdfwv;Lnet/minecraft/unmapped/C_eslcbfsq;)V
 		ARG 1 frameGraph
 		ARG 4 modelViewMatrix
-		ARG 5 projectionMatrix
-		ARG 6 fog
-		ARG 7 blockOutline
-		ARG 8 entityOutline
+		ARG 6 blockOutline
+		ARG 7 entityOutline
 	METHOD m_wlewmnef addCloudRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_qaetpqjq;Lnet/minecraft/unmapped/C_vgpupfxx;FIF)V
 		ARG 1 frameGraph
 		ARG 2 mode
@@ -269,7 +259,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_yzsrltvt renderBreakingProgress (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_dcmtgrvm;Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;)V
 		ARG 3 vertices
 	METHOD m_znnjtopn getChunkDebugString ()Ljava/lang/String;
-	METHOD m_zsfofipj addSkyRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_dcmtgrvm;FLnet/minecraft/unmapped/C_vidgpspy;)V
+	METHOD m_zsfofipj addSkyRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_dcmtgrvm;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 frameGraph
 		ARG 3 tickDelta
-		ARG 4 fog
