@@ -28,6 +28,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_wfwaeazd leashData Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;
 	FIELD f_whkkgkyp positionTarget Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_wkutgcpe DEFAULT_ATTACK_RANGE D
+	FIELD f_xjabburn equipmentDropChances Lnet/minecraft/unmapped/C_zkbnpubo;
 	FIELD f_yqqanohh RANDOM_SPAWN_BONUS_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_ziddtuje GOAL_SELECTOR_UPDATE_INTERVAL I
 	FIELD f_zwyrnqpo MAX_WEAR_ARMOR_PROBABILITY F
@@ -75,7 +76,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_jrjjwiqr onStartPathfinding ()V
 	METHOD m_jrvaluhu updateDropChances (Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 1 slot
-	METHOD m_kbemoobx dropEquipment (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
+	METHOD m_kbemoobx dropPreservedEquipment (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_kdlnwtnv lookAtEntity (Lnet/minecraft/unmapped/C_astfners;FF)V
 		ARG 1 targetEntity
 		ARG 2 maxYawChange
@@ -137,8 +138,11 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_ruuttiyq isPersistent ()Z
 	METHOD m_rxurkduy getAttackTarget ()Lnet/minecraft/unmapped/C_usxaxydn;
 	METHOD m_saekgdkn stopMoving ()V
-	METHOD m_seslsqmb dropEquipment (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Predicate;)Ljava/util/Set;
-		ARG 2 dropPredicate
+	METHOD m_seslsqmb dropPreservedEquipment (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Predicate;)Ljava/util/Set;
+		COMMENT Drop equipment from slots that are guaranteed to drop and which match the passed {@code shouldDrop} predicate
+		COMMENT
+		COMMENT @return slots containing equipment that doesn't match the passed {@code shouldDrop} predicate
+		ARG 2 shouldDrop
 	METHOD m_swfiqufm prefersNewEquipment (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_yuycoehb;)Z
 		ARG 1 newStack
 		ARG 2 oldStack
@@ -188,6 +192,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_yqlrvwhj setUpwardSpeed (F)V
 		ARG 1 upwardSpeed
 	METHOD m_yrminwpr onEatingGrass ()V
+	METHOD m_ytsrwkkb getEquipmentDropChances ()Lnet/minecraft/unmapped/C_zkbnpubo;
 	METHOD m_ywtdditi getLimitPerChunk ()I
 	METHOD m_zdjlhmwq getVisibilityCache ()Lnet/minecraft/unmapped/C_vyefybqz;
 	METHOD m_zjfgbeap isAiDisabled ()Z
