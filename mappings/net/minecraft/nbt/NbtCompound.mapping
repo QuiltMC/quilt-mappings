@@ -10,32 +10,77 @@ CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
 	METHOD m_akpyephd forEachEntry (Ljava/util/function/BiConsumer;)V
+	METHOD m_alcoozvv getBooleanOrDefault (Ljava/lang/String;Z)Z
+		ARG 1 key
+		ARG 2 defaultValue
 	METHOD m_avrwostq getCompound (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
 	METHOD m_bkqkiizz parse (Ljava/lang/String;Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/DynamicOps;)Ljava/util/Optional;
+	METHOD m_bvhphunw getByteOrDefault (Ljava/lang/String;B)B
+		ARG 1 key
+		ARG 2 defaultValue
+	METHOD m_cbyhvemj (Ljava/lang/String;)V
+		ARG 1 error
 	METHOD m_dduhveow putBoolean (Ljava/lang/String;Z)V
 		ARG 1 key
 		ARG 2 value
+	METHOD m_dnjahadr decode (Lcom/mojang/serialization/MapCodec;Lcom/mojang/serialization/DynamicOps;)Ljava/util/Optional;
+	METHOD m_ebxzolrp putLongArray (Ljava/lang/String;[J)V
+		ARG 1 key
+		ARG 2 values
 	METHOD m_ecfctwhl getShort (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
 	METHOD m_eeoapzdo get (Ljava/lang/String;)Lnet/minecraft/unmapped/C_oivssbvb;
 		ARG 1 key
+	METHOD m_ffivrpmq (Lnet/minecraft/unmapped/C_hhlwcnih;)Lcom/mojang/serialization/Dynamic;
+		ARG 0 compound
 	METHOD m_gaatmqcw encodeNullable (Ljava/lang/String;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
 	METHOD m_gbrpdjkp getBoolean (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_gekweplg getOrCreateCompound (Ljava/lang/String;)Lnet/minecraft/unmapped/C_hhlwcnih;
+		COMMENT Gets the {@link net.minecraft.nbt.NbtCompound NbtCompound} associated with the
+		COMMENT passed {@code key}, or creates a new, empty compound if one is not associated
+		COMMENT with the key.<br>
+		COMMENT If a compound is not associated with the passed {@code key}, the created compound
+		COMMENT is <i>not</i> associated with the key.
+	METHOD m_hqonqygk putIntArray (Ljava/lang/String;[I)V
+		ARG 1 key
+		ARG 2 values
+	METHOD m_hykqulqn (Ljava/util/HashMap;Ljava/lang/String;Lnet/minecraft/unmapped/C_oivssbvb;)V
+		ARG 1 key
+		ARG 2 value
+	METHOD m_idwkqlnh getIntOrDefault (Ljava/lang/String;I)I
+		ARG 1 key
+		ARG 2 defaultValue
 	METHOD m_jedcpeht getIntArray (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_juoaudna getDoubleOrDefault (Ljava/lang/String;D)D
+		ARG 1 key
+		ARG 2 defaultValue
+	METHOD m_jvmebihe getValues ()Ljava/util/Collection;
 	METHOD m_keybbgol getDouble (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_kpricfvf copyEncodedFrom (Lcom/mojang/serialization/MapCodec;Ljava/lang/Object;)V
 	METHOD m_ksegnvlx isEmpty ()Z
+	METHOD m_lgibwvcy decode (Lcom/mojang/serialization/MapCodec;)Ljava/util/Optional;
 	METHOD m_lrbjkvou parse (Ljava/lang/String;Lcom/mojang/serialization/Codec;)Ljava/util/Optional;
 	METHOD m_lrjfdlkj containsKey (Ljava/lang/String;)Z
 		ARG 1 key
+	METHOD m_lrrgpqit putByteArray (Ljava/lang/String;[B)V
+		ARG 1 ey
+		ARG 2 values
+	METHOD m_lvtdfpfl (Ljava/lang/String;Lnet/minecraft/unmapped/C_oivssbvb;Ljava/lang/String;)V
+		ARG 2 error
+	METHOD m_mahtmmjp getFloatOrDefault (Ljava/lang/String;F)F
+		ARG 1 key
+		ARG 2 defaultValue
 	METHOD m_mdviseki putShort (Ljava/lang/String;S)V
 		ARG 1 key
 		ARG 2 value
 	METHOD m_mgfrkezk getInt (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_mkqrxhfs copyEncodedFrom (Lcom/mojang/serialization/MapCodec;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)V
+		ARG 3 value
 	METHOD m_nsgektrx putByte (Ljava/lang/String;B)V
 		ARG 1 key
 		ARG 2 value
@@ -49,6 +94,9 @@ CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 		ARG 1 key
 	METHOD m_qpzjsrgy getFloat (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_qxzujzvq getImpl (Ljava/lang/String;)Ljava/util/Optional;
+		ARG 1 key
+	METHOD m_qzfmangb getKeySet ()Ljava/util/Set;
 	METHOD m_rbqvikxy encode (Ljava/lang/String;Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)V
 		ARG 4 value
 	METHOD m_rfwtapdj putLong (Ljava/lang/String;J)V
@@ -70,6 +118,9 @@ CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 	METHOD m_sfeexgrr getList (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
 	METHOD m_smzpndim getEntries ()Ljava/util/Set;
+	METHOD m_uisixvit getStringOrDefault (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+		ARG 1 key
+		ARG 2 defaultValue
 	METHOD m_ulzvmblb remove (Ljava/lang/String;)V
 		ARG 1 key
 	METHOD m_utczects copyFrom (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
@@ -83,9 +134,26 @@ CLASS net/minecraft/unmapped/C_hhlwcnih net/minecraft/nbt/NbtCompound
 		ARG 1 key
 	METHOD m_xahmwjgq encode (Ljava/lang/String;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
 	METHOD m_yupkiakq getSize ()I
+	METHOD m_ywhjkhlf getOrCreateList (Ljava/lang/String;)Lnet/minecraft/unmapped/C_hqhtfwlr;
+		COMMENT Gets the {@link net.minecraft.nbt.NbtList NbtList} associated with the
+		COMMENT passed {@code key}, or creates a new, empty list if one is not associated
+		COMMENT with the key.<br>
+		COMMENT If a list is not associated with the passed {@code key}, the created list
+		COMMENT is <i>not</i> associated with the key.
 	METHOD m_zdwtkqww putString (Ljava/lang/String;Ljava/lang/String;)V
 		ARG 1 key
 		ARG 2 value
 	METHOD m_znsznhci encodeNullable (Ljava/lang/String;Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)V
 	METHOD m_zsbbwdsl getByteArray (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 key
+	METHOD m_zuqktqvm getShortOrDefault (Ljava/lang/String;S)S
+		ARG 1 key
+		ARG 2 defaultValue
+	METHOD m_zzjlswge getLongOrDefault (Ljava/lang/String;J)J
+		ARG 1 key
+		ARG 2 defaultValue
+	CLASS C_krlbszwn
+		METHOD m_heopwcei doAcceptImpl (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_avcaqucb;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_avcaqucb$C_ysedvtle;
+			ARG 1 scanner
+		METHOD m_mlnxbtqt readString (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/String;
+		METHOD m_qbdkgvms readCompound (Ljava/io/DataInput;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_hhlwcnih;
