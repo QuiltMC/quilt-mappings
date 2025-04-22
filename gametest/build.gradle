@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'gametestable'
-    alias libs.plugins.fabric.loom
+    alias rootLibs.plugins.fabric.loom
 }
 
 loom {
@@ -31,8 +31,8 @@ dependencies {
     minecraft(rootLibs.minecraft)
     mappings "org.quiltmc:quilt-mappings:${gametestable.version}:intermediary-v2"
 
-    modImplementation libs.fabric.loader
-    modImplementation libs.fabric.api
+    modImplementation rootLibs.fabric.loader
+    modImplementation rootLibs.fabric.api
 }
 
 processResources {
@@ -40,8 +40,8 @@ processResources {
         version: gametestable.version,
         group: 'org.quilt.internal',
         minecraft_version: rootLibs.versions.minecraft.get(),
-        fabric_loader_version: libs.versions.fabric.loader.get(),
-        fabric_api_version: libs.versions.fabric.api.get()
+        fabric_loader_version: rootLibs.versions.fabric.loader.get(),
+        fabric_api_version: rootLibs.versions.fabric.api.get()
     ]
 
     inputs.properties(expanding)
