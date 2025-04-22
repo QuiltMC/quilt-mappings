@@ -17,6 +17,8 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: temurin
       - uses: gradle/wrapper-validation-action@v2
+      - name: build root project
+        run: ./gradlew build javadocJar
       - name: make gametest gradle executable
         working-directory: ./gametest
         run: chmod +x ./gradlew
