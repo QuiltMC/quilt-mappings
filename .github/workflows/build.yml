@@ -17,7 +17,8 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: temurin
       - uses: gradle/wrapper-validation-action@v2
-      - run: ./gradlew build javadocJar --stacktrace
+      - run: ./gradlew build runGametest --stacktrace
+        working-directory: ./gametest
       - name: Build artifacts
         if: ${{ matrix.java == 21 }}
         continue-on-error: true
