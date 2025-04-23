@@ -1,37 +1,75 @@
 CLASS net/minecraft/unmapped/C_zehlpsdx net/minecraft/test/TestsRunner
+	FIELD f_dbnrxvxy initialStructureSpawner Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;
+	FIELD f_erntoaqd environment Lnet/minecraft/unmapped/C_cjzoxshv;
+	FIELD f_hmxfhbel batchListeners Ljava/util/List;
 	FIELD f_jggofwhk batches Lcom/google/common/collect/ImmutableList;
+	FIELD f_jpdtmcgz stopped Z
+	FIELD f_kveivkfr tests Ljava/util/List;
 	FIELD f_nrvkgege DEFAULT_TESTS_PER_ROW I
+	FIELD f_qwescvul pendingReruns Ljava/util/List;
 	FIELD f_rypdqgwe manager Lnet/minecraft/unmapped/C_odaqsfbm;
+	FIELD f_skooysqe batcher Lnet/minecraft/unmapped/C_zehlpsdx$C_hcfflhmv;
+	FIELD f_uwpffzog inPlaceStructureSpawner Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;
+	FIELD f_vrgfxqzr stopOnFailure Z
 	METHOD <init> (Lnet/minecraft/unmapped/C_zehlpsdx$C_hcfflhmv;Ljava/util/Collection;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_odaqsfbm;Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;Z)V
-		ARG 1 batcher
 		ARG 2 batches
+	METHOD m_csbtofwi (Lnet/minecraft/unmapped/C_hellwqqt;Lnet/minecraft/unmapped/C_pdlleeki;)V
+		ARG 1 listener
+	METHOD m_idvanata runBatch (I)V
+		ARG 1 batchIndex
+	METHOD m_ienkpsmb getTests ()Ljava/util/List;
+	METHOD m_ixdsdyox clearEnvironment ()V
 	METHOD m_kcolvlxr clearDebugMarkers (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 0 world
 	METHOD m_khhztofc (Lnet/minecraft/unmapped/C_agwojffm;)V
-		ARG 0 state
+		ARG 0 test
 	METHOD m_ljeknxcq (Lnet/minecraft/unmapped/C_hellwqqt;)Ljava/util/stream/Stream;
 		ARG 0 batch
+	METHOD m_mzotgloa (Lnet/minecraft/unmapped/C_agwojffm;)Ljava/lang/String;
+		ARG 0 test
+	METHOD m_pboesdin addBatchListener (Lnet/minecraft/unmapped/C_pdlleeki;)V
+		ARG 1 listener
 	METHOD m_pohkhjby retry (Lnet/minecraft/unmapped/C_agwojffm;)V
-		ARG 1 state
+		ARG 1 test
+	METHOD m_rjnhfydy (Lnet/minecraft/unmapped/C_agwojffm;Lnet/minecraft/unmapped/C_agwojffm;Lnet/minecraft/unmapped/C_nvnirinq;)V
+		ARG 3 listener
+	METHOD m_skajbonx spawnTestStructures (Ljava/util/Collection;)Ljava/util/Collection;
+		ARG 1 tests
+	METHOD m_sqthvofs rerun ()V
+	METHOD m_szvqpdky start ()V
+	METHOD m_uykthrch spawnStructure (Lnet/minecraft/unmapped/C_agwojffm;)Ljava/util/Optional;
+	METHOD m_wditevmr clear ()V
 	CLASS C_fcpnwoqt StructureSpawner
-		FIELD f_ctkdarwq EMPTY Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;
+		FIELD f_ctkdarwq NO_OP Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;
+		FIELD f_pmquulnd IN_PLACE Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;
 		METHOD m_mcsgpivy (Lnet/minecraft/unmapped/C_agwojffm;)Ljava/util/Optional;
-			ARG 0 state
+			ARG 0 test
+		METHOD m_nkljuhpj onBatchStart (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		METHOD m_wqabgkzi (Lnet/minecraft/unmapped/C_agwojffm;)Ljava/util/Optional;
-			ARG 0 state
+			ARG 0 test
 		METHOD spawnStructure (Lnet/minecraft/unmapped/C_agwojffm;)Ljava/util/Optional;
-			ARG 1 state
+			ARG 1 test
 	CLASS C_fdecdedy
 		METHOD m_ghkkbopi (J)V
 			ARG 1 pos
+		METHOD m_phgblbsc (Lnet/minecraft/unmapped/C_hellwqqt;Lnet/minecraft/unmapped/C_pdlleeki;)V
+			ARG 1 listener
+		METHOD m_vvvhuprb finish ()V
+		METHOD m_yhyeyvee (J)V
+			ARG 1 pos
 	CLASS C_hbopzgyi Builder
+		FIELD f_cffpqxja stopOnFailure Z
 		FIELD f_cviovbge manager Lnet/minecraft/unmapped/C_odaqsfbm;
 		FIELD f_eiwlikiv batches Ljava/util/Collection;
+		FIELD f_lhfodsjd inPlaceStructureSpawner Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;
 		FIELD f_wnhvqems batcher Lnet/minecraft/unmapped/C_zehlpsdx$C_hcfflhmv;
+		FIELD f_zrrwnaem initialStructureSpawner Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;
 		METHOD m_abbbvkwq build ()Lnet/minecraft/unmapped/C_zehlpsdx;
-		METHOD m_emzufvnb (Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;)Lnet/minecraft/unmapped/C_zehlpsdx$C_hbopzgyi;
+		METHOD m_emzufvnb inPlaceStructureSpawner (Lnet/minecraft/unmapped/C_zehlpsdx$C_fcpnwoqt;)Lnet/minecraft/unmapped/C_zehlpsdx$C_hbopzgyi;
 			ARG 1 spawner
-		METHOD m_huznldcr (Lnet/minecraft/unmapped/C_iajlwkhz;)Lnet/minecraft/unmapped/C_zehlpsdx$C_hbopzgyi;
+		METHOD m_hrxihzaw stopOnFailure (Z)Lnet/minecraft/unmapped/C_zehlpsdx$C_hbopzgyi;
+			ARG 1 stop
+		METHOD m_huznldcr initialStructureSpawner (Lnet/minecraft/unmapped/C_iajlwkhz;)Lnet/minecraft/unmapped/C_zehlpsdx$C_hbopzgyi;
 			ARG 1 spawner
 		METHOD m_mdhvlunx ofBatches (Ljava/util/Collection;Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_zehlpsdx$C_hbopzgyi;
 			ARG 0 batches
@@ -40,4 +78,4 @@ CLASS net/minecraft/unmapped/C_zehlpsdx net/minecraft/test/TestsRunner
 		METHOD m_vevjzonz ofStates (Ljava/util/Collection;Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_zehlpsdx$C_hbopzgyi;
 	CLASS C_hcfflhmv Batcher
 		METHOD batch (Ljava/util/Collection;)Ljava/util/Collection;
-			ARG 1 states
+			ARG 1 tests
