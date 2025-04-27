@@ -13,9 +13,6 @@ loom {
             server()
 
             ideConfigGenerated(true)
-
-            vmArg '-Dfabric-api.gametest'
-            vmArg "-Dfabric-api.gametest.report-file=${project.layout.buildDirectory.file('gametest.xml').get().getAsFile()}"
         }
     }
 }
@@ -32,7 +29,7 @@ dependencies {
     mappings "org.quiltmc:quilt-mappings:${gametestable.version}:intermediary-v2"
 
     modImplementation rootLibs.fabric.loader
-    modImplementation rootLibs.fabric.api
+    // modImplementation rootLibs.fabric.api
 }
 
 processResources {
@@ -41,7 +38,6 @@ processResources {
         group: 'org.quilt.internal',
         minecraft_version: rootLibs.versions.minecraft.get(),
         fabric_loader_version: rootLibs.versions.fabric.loader.get(),
-        fabric_api_version: rootLibs.versions.fabric.api.get()
     ]
 
     inputs.properties(expanding)
@@ -49,4 +45,32 @@ processResources {
     filesMatching('fabric.mod.json') {
         expand expanding
     }
+}
+
+// mod test data isn't loaded without fapi, so copy it to a datapack
+final copyDataToDatapack = tasks.register('copyDataToDatapack', Copy) {
+    from 'src/main/resources/data'
+    into 'run/world/datapacks/gametests/data'
+
+    final packRoot = destinationDir.toPath().parent
+
+    outputs.dir(packRoot)
+
+    doFirst {
+        packRoot.deleteDir()
+        packRoot.toFile().mkdirs()
+        packRoot.resolve('pack.mcmeta').toFile().text =
+            """\
+            {
+              "pack": {
+                "description": "Test Game",
+                "pack_format": 74
+              }
+            }
+            """.stripIndent()
+    }
+}
+
+tasks.named('runGametest') {
+    dependsOn copyDataToDatapack
 }

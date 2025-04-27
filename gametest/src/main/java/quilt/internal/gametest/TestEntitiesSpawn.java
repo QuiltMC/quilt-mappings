@@ -1,7 +1,5 @@
 package quilt.internal.gametest;
 
-import net.fabricmc.fabric.api.gametest.v1.GameTest;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
@@ -15,10 +13,10 @@ import net.minecraft.world.GameMode;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+// C_pxdgchfu is AbstractTestFunction
 public class TestEntitiesSpawn extends C_pxdgchfu {
     public static final String PATH = "entities_spawn";
 
-    // @GameTest
     public static void spawnEachEntity(TestContext context) {
         Registries.ENTITY_TYPE.stream()
             .filter(type -> type != EntityType.PLAYER)
