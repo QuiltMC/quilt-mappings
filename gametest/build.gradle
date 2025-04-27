@@ -48,26 +48,8 @@ processResources {
 
 // mod test data isn't loaded without fapi, so copy it to a datapack
 final copyDataToDatapack = tasks.register('copyDataToDatapack', Copy) {
-    from 'src/main/resources/data'
-    into 'run/world/datapacks/gametests/data'
-
-    final packRoot = destinationDir.toPath().parent
-
-    outputs.dir(packRoot)
-
-    doFirst {
-        packRoot.deleteDir()
-        packRoot.toFile().mkdirs()
-        packRoot.resolve('pack.mcmeta').toFile().text =
-            """\
-            {
-              "pack": {
-                "description": "Test Game",
-                "pack_format": 74
-              }
-            }
-            """.stripIndent()
-    }
+    from 'gametest_data_pack'
+    into 'run/world/datapacks/gametest_data_pack'
 }
 
 tasks.named('runGametest') {
