@@ -2,7 +2,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_airbwnli moveControl Lnet/minecraft/unmapped/C_azhvkebm;
 	FIELD f_ajdoejzx MAX_PICKUP_LOOT_PROBABILITY F
 	FIELD f_bbapxczi persistent Z
-	FIELD f_bhnvelth positionTarget Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_chzsgmuy pickUpLoot Z
 	FIELD f_cyzznzel MOB_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ddgktbfn target Lnet/minecraft/unmapped/C_usxaxydn;
@@ -14,7 +13,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_hdjycqoz MAX_ENCHANTED_ARMOR_PROBABILITY F
 	FIELD f_icyyyrgv bodyControl Lnet/minecraft/unmapped/C_vofymfgv;
 	FIELD f_irlmhwzh navigation Lnet/minecraft/unmapped/C_atbvfjwi;
-	FIELD f_kfwdpftf positionTargetRange F
 	FIELD f_mulpcwks EQUIPMENT_INIT_ORDER Ljava/util/List;
 	FIELD f_nwzksedo goalSelector Lnet/minecraft/unmapped/C_qospjrjn;
 	FIELD f_nzzqwalu pathfindingPenalties Ljava/util/Map;
@@ -28,6 +26,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_uushnomk targetSelector Lnet/minecraft/unmapped/C_qospjrjn;
 	FIELD f_vuffzgdh lootTable Ljava/util/Optional;
 	FIELD f_wfwaeazd leashData Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;
+	FIELD f_whkkgkyp positionTarget Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_wkutgcpe DEFAULT_ATTACK_RANGE D
 	FIELD f_yqqanohh RANDOM_SPAWN_BONUS_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_ziddtuje GOAL_SELECTOR_UPDATE_INTERVAL I
@@ -37,15 +36,10 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 2 item
 	METHOD m_bafwglvj initEquipment (Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_jiailwzt;)V
 		ARG 2 difficulty
-	METHOD m_beqdzwrv setPositionTarget (Lnet/minecraft/unmapped/C_hynzadkk;I)V
-		ARG 1 target
-		ARG 2 range
 	METHOD m_bjfgjghl prefersNewDamageableItem (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 newStack
 		ARG 2 oldStack
 	METHOD m_cauyzlww getNavigation ()Lnet/minecraft/unmapped/C_atbvfjwi;
-	METHOD m_ckimhneu getPositionTarget ()Lnet/minecraft/unmapped/C_hynzadkk;
-	METHOD m_cpqekrmu clearPositionTarget ()V
 	METHOD m_dciqpbdm canImmediatelyDespawn (D)Z
 		ARG 1 distanceSquared
 	METHOD m_dijkljpy clearGoalsAndTasks ()V
@@ -53,8 +47,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 aiDisabled
 	METHOD m_dwkutgwm playAttackSound ()V
 	METHOD m_eeaedybm buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
-	METHOD m_enspzmcx isInWalkTargetRange (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 1 pos
 	METHOD m_erwclnrx setLeftHanded (Z)V
 		ARG 1 leftHanded
 	METHOD m_faldjosq getBodyArmor ()Lnet/minecraft/unmapped/C_sddaxwyk;
@@ -93,7 +85,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_kmhfjgdo convert (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_pkxijcfk;Lnet/minecraft/unmapped/C_bhyaesep;Lnet/minecraft/unmapped/C_pkxijcfk$C_olacbmtc;)Lnet/minecraft/unmapped/C_dxkfswlz;
 		ARG 1 newType
 		ARG 4 postConversionCallback
-	METHOD m_koijwctm hasPositionTarget ()Z
 	METHOD m_kqnvykqn enchantMainHandItem (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_jiailwzt;)V
 	METHOD m_kuhfocmh interactMob (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 player
@@ -114,13 +105,13 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 3 slot
 	METHOD m_mowaxfbl isLeftHanded ()Z
 	METHOD m_mrbrckqf isDisallowedInPeaceful ()Z
-	METHOD m_mufhzdfi isInWalkTargetRange ()Z
 	METHOD m_mztbwniz movesIndependently ()Z
 		COMMENT When true, causes this entity to take over pathfinding for its controlling passenger.
 	METHOD m_nzdowltt canGather (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 2 stack
 	METHOD m_nzxqjkay tryEquip (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 2 equipment
+	METHOD m_ocoscmiz getPositionTarget ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_owfqcyjj changeAngle (FFF)F
 		ARG 1 oldAngle
 		ARG 2 newAngle
@@ -177,7 +168,6 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_vkgkwryw setAttacking (Z)V
 		ARG 1 attacking
 	METHOD m_vljdject isAttacking ()Z
-	METHOD m_vwaprqzr getPositionTargetRange ()F
 	METHOD m_wbeiezxn mobTick (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_wdfnuhez getLookPitchSpeed ()I
 	METHOD m_wjpwvwky playSpawnEffects ()V
