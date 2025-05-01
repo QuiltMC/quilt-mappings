@@ -54,7 +54,7 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 1 x
 		ARG 3 y
 		ARG 5 z
-	METHOD m_hhehahrt loadEntityFromNbt (Lnet/minecraft/unmapped/C_djkzhngg;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Ljava/util/Optional;
+	METHOD m_hhehahrt loadEntityImpl (Lnet/minecraft/unmapped/C_djkzhngg;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Ljava/util/Optional;
 		ARG 1 world
 	METHOD m_hyyvvjps createChestBoatFactory (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
 		ARG 0 dropItem
@@ -74,14 +74,15 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 1 pos
 		ARG 2 invertY
 		ARG 3 boundingBox
-	METHOD m_mxrztqke (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/stream/Stream;
-		ARG 0 nbt
+	METHOD m_mggoexzg create (Lnet/minecraft/unmapped/C_djkzhngg;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Ljava/util/Optional;
+		ARG 0 reader
 	METHOD m_mzwuvsgt appendDefaultStackSpawnConfig (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;)Ljava/util/function/Consumer;
 		ARG 0 previous
 		ARG 3 creator
 	METHOD m_navxebru createChestRaftFactory (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_ogavsvbr$C_pasczndl;
 		ARG 0 dropItem
 	METHOD m_ncqhbjml getHeight ()F
+	METHOD m_neqplhzm loadEntityWithPassengers (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_nmoiyemp spawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_bhyaesep;ZZ)Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_nshhmmgl get (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 0 id
@@ -91,20 +92,23 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		ARG 0 type
 	METHOD m_pkvpjeky (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_astfners;
 		ARG 2 type
+	METHOD m_ppolztms (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;Lnet/minecraft/unmapped/C_djkzhngg;Ljava/util/function/Consumer;)V
+		ARG 2 element
+		ARG 3 adder
 	METHOD m_qprblwyz isSaveable ()Z
 	METHOD m_qwgbrbqg createDefaultStackSpawnConfig (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;)Ljava/util/function/Consumer;
 		ARG 2 creator
 	METHOD m_qxlrmhco getLootTable ()Ljava/util/Optional;
-	METHOD m_rdswxkej streamFromNbt (Lnet/minecraft/unmapped/C_djkzhngg$C_fxibbtlz;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Ljava/util/stream/Stream;
+	METHOD m_rdswxkej streamLoadingEntityWithPassenders (Lnet/minecraft/unmapped/C_djkzhngg$C_fxibbtlz;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;)Ljava/util/stream/Stream;
+		ARG 0 reader
 		ARG 1 world
-	METHOD m_rsrwhlle (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;Lnet/minecraft/unmapped/C_hhlwcnih;Ljava/util/function/Consumer;)V
-		ARG 2 compound
-		ARG 3 add
 	METHOD m_teaexptf loadFromEntityNbt (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_incrreuu;)V
 		ARG 0 world
 		ARG 1 creator
 		ARG 2 entity
 		ARG 3 nbt
+	METHOD m_thzlkypw loadEntityWithPassengers (Lnet/minecraft/unmapped/C_djkzhngg;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_bhyaesep;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_astfners;
+		ARG 3 action
 	METHOD m_tjmuaxwr create (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_bhyaesep;ZZ)Lnet/minecraft/unmapped/C_astfners;
 		ARG 2 configure
 		ARG 5 alignPosition
@@ -115,7 +119,8 @@ CLASS net/minecraft/unmapped/C_ogavsvbr net/minecraft/entity/EntityType
 		COMMENT Returns the tracking distance, <b>in chunks</b>, of this type of entity
 		COMMENT for clients. This will be then modified by the server's tracking
 		COMMENT distance multiplier.
-	METHOD m_wjaaowcn fromNbt (Lnet/minecraft/unmapped/C_djkzhngg;)Ljava/util/Optional;
+	METHOD m_wjaaowcn read (Lnet/minecraft/unmapped/C_djkzhngg;)Ljava/util/Optional;
+		ARG 0 reader
 	METHOD m_wpubgsdl register (Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_ogavsvbr$C_mopkbakb;)Lnet/minecraft/unmapped/C_ogavsvbr;
 		ARG 0 type
 		ARG 1 builder
