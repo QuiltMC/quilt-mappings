@@ -5,13 +5,13 @@ CLASS net/minecraft/unmapped/C_ffdemnov net/minecraft/util/dynamic/ForwardingDyn
 		ARG 1 delegate
 	METHOD convertTo (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 1 ops
-		ARG 2 object
+		ARG 2 value
 	METHOD createBoolean (Z)Ljava/lang/Object;
 		ARG 1 bl
 	METHOD createByte (B)Ljava/lang/Object;
 		ARG 1 b
 	METHOD createByteList (Ljava/nio/ByteBuffer;)Ljava/lang/Object;
-		ARG 1 byteBuffer
+		ARG 1 bytes
 	METHOD createDouble (D)Ljava/lang/Object;
 		ARG 1 d
 	METHOD createFloat (F)Ljava/lang/Object;
@@ -19,15 +19,17 @@ CLASS net/minecraft/unmapped/C_ffdemnov net/minecraft/util/dynamic/ForwardingDyn
 	METHOD createInt (I)Ljava/lang/Object;
 		ARG 1 i
 	METHOD createIntList (Ljava/util/stream/IntStream;)Ljava/lang/Object;
-		ARG 1 intStream
+		ARG 1 ints
 	METHOD createList (Ljava/util/stream/Stream;)Ljava/lang/Object;
 		ARG 1 stream
 	METHOD createLong (J)Ljava/lang/Object;
 		ARG 1 l
 	METHOD createLongList (Ljava/util/stream/LongStream;)Ljava/lang/Object;
-		ARG 1 longStream
+		ARG 1 longs
+	METHOD createMap (Ljava/util/Map;)Ljava/lang/Object;
+		ARG 1 map
 	METHOD createMap (Ljava/util/stream/Stream;)Ljava/lang/Object;
-		ARG 1 stream
+		ARG 1 entries
 	METHOD createNumeric (Ljava/lang/Number;)Ljava/lang/Object;
 		ARG 1 number
 	METHOD createShort (S)Ljava/lang/Object;
@@ -35,40 +37,99 @@ CLASS net/minecraft/unmapped/C_ffdemnov net/minecraft/util/dynamic/ForwardingDyn
 	METHOD createString (Ljava/lang/String;)Ljava/lang/Object;
 		ARG 1 string
 	METHOD getBooleanValue (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 value
 	METHOD getByteBuffer (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 bytes
 	METHOD getIntStream (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 ints
 	METHOD getList (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 list
 	METHOD getLongStream (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 longs
 	METHOD getMap (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 map
 	METHOD getMapEntries (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 map
 	METHOD getMapValues (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 map
 	METHOD getNumberValue (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 value
 	METHOD getStream (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 list
 	METHOD getStringValue (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
+		ARG 1 value
 	METHOD mergeToList (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
-		ARG 2 object2
+		ARG 1 list
+		ARG 2 value
 	METHOD mergeToList (Ljava/lang/Object;Ljava/util/List;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
-		ARG 2 list
+		ARG 1 list
+		ARG 2 values
 	METHOD mergeToMap (Ljava/lang/Object;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
-		ARG 2 mapLike
+		ARG 1 map
+		ARG 2 values
 	METHOD mergeToMap (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-		ARG 1 object
-		ARG 2 object2
-		ARG 3 object3
+		ARG 1 map
+		ARG 2 key
+		ARG 3 value
+	METHOD mergeToMap (Ljava/lang/Object;Ljava/util/Map;)Lcom/mojang/serialization/DataResult;
+		ARG 1 map
+		ARG 2 values
+	METHOD mergeToPrimitive (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+		ARG 1 prefix
+		ARG 2 value
 	METHOD remove (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
-		ARG 1 object
+		ARG 1 value
 		ARG 2 string
+	CLASS C_ilmarwjv ListBuilder
+		FIELD f_rnfdejzp delegate Lcom/mojang/serialization/ListBuilder;
+		METHOD add (Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/ListBuilder;
+			ARG 1 value
+		METHOD add (Ljava/lang/Object;)Lcom/mojang/serialization/ListBuilder;
+			ARG 1 value
+		METHOD add (Ljava/lang/Object;Lcom/mojang/serialization/Encoder;)Lcom/mojang/serialization/ListBuilder;
+			ARG 1 input
+			ARG 2 encoder
+		METHOD addAll (Ljava/lang/Iterable;Lcom/mojang/serialization/Encoder;)Lcom/mojang/serialization/ListBuilder;
+			ARG 1 inputs
+			ARG 2 encoder
+		METHOD build (Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/DataResult;
+			ARG 1 value
+		METHOD build (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 value
+		METHOD m_gjctrama (Lcom/mojang/serialization/Encoder;Ljava/lang/Object;)V
+			ARG 2 value
+		METHOD mapError (Ljava/util/function/UnaryOperator;)Lcom/mojang/serialization/ListBuilder;
+			ARG 1 mapper
+		METHOD withErrorsFrom (Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/ListBuilder;
+			ARG 1 result
+	CLASS C_oqietril MapBuilder
+		FIELD f_kvkvtlba delegate Lcom/mojang/serialization/RecordBuilder;
+		METHOD add (Lcom/mojang/serialization/DataResult;Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 key
+			ARG 2 value
+		METHOD add (Ljava/lang/Object;Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 key
+			ARG 2 value
+		METHOD add (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 key
+			ARG 2 value
+		METHOD add (Ljava/lang/String;Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 key
+			ARG 2 value
+		METHOD add (Ljava/lang/String;Ljava/lang/Object;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 key
+			ARG 2 value
+		METHOD add (Ljava/lang/String;Ljava/lang/Object;Lcom/mojang/serialization/Encoder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 key
+			ARG 2 input
+			ARG 3 encoder
+		METHOD build (Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/DataResult;
+			ARG 1 value
+		METHOD build (Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 value
+		METHOD mapError (Ljava/util/function/UnaryOperator;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 mapper
+		METHOD setLifecycle (Lcom/mojang/serialization/Lifecycle;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 lifecycle
+		METHOD withErrorsFrom (Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 result
