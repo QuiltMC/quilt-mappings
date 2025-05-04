@@ -24,6 +24,7 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 		ARG 1 value
 		ARG 2 derivative
 	METHOD m_srjaaord mapAll (Lnet/minecraft/unmapped/C_cjntsjzo$C_qkrrahuh;)Lnet/minecraft/unmapped/C_cjntsjzo;
+		ARG 1 visitor
 	METHOD m_tzkhhrfn builder (Lnet/minecraft/unmapped/C_oqsszdfo;Lnet/minecraft/unmapped/C_oqsszdfo;)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
 		ARG 0 locationFunction
 		ARG 1 valueTransformer
@@ -47,28 +48,54 @@ CLASS net/minecraft/unmapped/C_cjntsjzo net/minecraft/util/math/Spline
 			ARG 1 location
 			ARG 2 value
 			ARG 3 derivative
+		METHOD m_pnlgmxgl add (FF)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
+			ARG 2 value
 		METHOD m_popwgklw add (FFF)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
 			ARG 1 location
 			ARG 2 value
 			ARG 3 derivative
+		METHOD m_rqsqbeoz add (FLnet/minecraft/unmapped/C_cjntsjzo;)Lnet/minecraft/unmapped/C_cjntsjzo$C_ehccgxyt;
 	CLASS C_lqwqjkzu Multipoint
 		FIELD f_ivhtjacg derivatives [F
 		FIELD f_ozvnesch values Ljava/util/List;
-		FIELD f_qyyujczb coordinate Lnet/minecraft/unmapped/C_oqsszdfo;
+		FIELD f_qyyujczb coordinateGetter Lnet/minecraft/unmapped/C_oqsszdfo;
 		FIELD f_yhosvmdy locations [F
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_bobkwyxi coordinate ()Lnet/minecraft/unmapped/C_oqsszdfo;
 		METHOD m_cpnccmvr floatArrayToString ([F)Ljava/lang/String;
 			ARG 1 floats
+		METHOD m_cttnjmgr (F[FI)Z
+			ARG 2 location
 		METHOD m_dyabikck derivatives ()[F
+		METHOD m_fjnyzdpy linearlyExtend (F[FF[FI)F
+			ARG 0 bound
+			ARG 1 locations
+			ARG 2 valueBound
+			ARG 3 derivatives
+			ARG 4 index
+		METHOD m_gxafayog findStart ([FF)I
+			ARG 0 locations
+			ARG 1 coordinate
+		METHOD m_pyyfhxta (Lnet/minecraft/unmapped/C_cjntsjzo$C_qkrrahuh;Lnet/minecraft/unmapped/C_cjntsjzo;)Lnet/minecraft/unmapped/C_cjntsjzo;
+			ARG 1 value
 		METHOD m_ulugzisy locations ()[F
 		METHOD m_vxyikhyn ([FI)D
 			ARG 1 i
 		METHOD m_xqthrdpz (D)Ljava/lang/String;
 			ARG 0 d
 		METHOD m_xwsszjde values ()Ljava/util/List;
+		METHOD m_xxxqhvgu requireValidLengths ([FLjava/util/List;[F)V
+			ARG 0 locations
+			ARG 1 values
+			ARG 2 derivatives
+		METHOD m_zmdwhaqw of (Lnet/minecraft/unmapped/C_oqsszdfo;[FLjava/util/List;[F)Lnet/minecraft/unmapped/C_cjntsjzo$C_lqwqjkzu;
+			ARG 0 coordinateGetter
+			ARG 1 locations
+			ARG 3 derivatives
 	CLASS C_qkrrahuh CoordinateVisitor
+		METHOD visit (Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 value
 	CLASS C_rvhsfgpe FixedFloatFunction
 		FIELD f_ybflqycv value F
 		METHOD <init> (F)V
