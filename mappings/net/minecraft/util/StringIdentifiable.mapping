@@ -40,13 +40,18 @@ CLASS net/minecraft/unmapped/C_lgkqzafw net/minecraft/util/StringIdentifiable
 		METHOD m_uijinkjp getOrElse (Ljava/lang/String;Ljava/lang/Enum;)Ljava/lang/Enum;
 			ARG 1 id
 			ARG 2 defaultValue
+		METHOD m_uqmvdcez getOrElse (Ljava/lang/String;Ljava/util/function/Supplier;)Ljava/lang/Enum;
+			ARG 2 defaultGetter
 	CLASS C_pqjtrzhx Codec
-		FIELD f_rxuzavfd underlyingCodec Lcom/mojang/serialization/Codec;
+		FIELD f_rxuzavfd delegate Lcom/mojang/serialization/Codec;
 		METHOD <init> ([Lnet/minecraft/unmapped/C_lgkqzafw;Ljava/util/function/Function;Ljava/util/function/ToIntFunction;)V
 			ARG 1 values
 			ARG 2 stringToElement
 			ARG 3 elementToId
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
 		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
-			ARG 1 value
+			ARG 1 input
+			ARG 3 prefix
 		METHOD m_potjftpu ([Lnet/minecraft/unmapped/C_lgkqzafw;I)Lnet/minecraft/unmapped/C_lgkqzafw;
 			ARG 1 id
