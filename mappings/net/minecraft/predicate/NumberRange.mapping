@@ -1,10 +1,14 @@
 CLASS net/minecraft/unmapped/C_nihhkamy net/minecraft/predicate/NumberRange
-	FIELD f_cfxpiscn EXCEPTION_EMPTY Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
-	FIELD f_ryyerrzl EXCEPTION_SWAPPED Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
+	FIELD f_cfxpiscn EMPTY_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
+	FIELD f_ryyerrzl SWAPPED_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	METHOD m_iqrpbscp getMin ()Ljava/util/Optional;
+	METHOD m_jhzdhdlf createCodec (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_nihhkamy$C_nfiuvfys;)Lcom/mojang/serialization/Codec;
+		ARG 0 numberCodec
+		ARG 1 factory
 	METHOD m_lalsrvxs getMax ()Ljava/util/Optional;
 	METHOD m_ltinwfvw parse (Lcom/mojang/brigadier/StringReader;Lnet/minecraft/unmapped/C_nihhkamy$C_jreuzyex;Ljava/util/function/Function;Ljava/util/function/Supplier;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_nihhkamy;
 		ARG 0 commandReader
+		ARG 1 commandFactory
 		ARG 2 converter
 		ARG 3 exceptionTypeSupplier
 		ARG 4 mapper
@@ -12,17 +16,39 @@ CLASS net/minecraft/unmapped/C_nihhkamy net/minecraft/predicate/NumberRange
 		ARG 0 reader
 		ARG 1 converter
 		ARG 2 exceptionTypeSupplier
+	METHOD m_omcttnbh (Lnet/minecraft/unmapped/C_nihhkamy$C_nfiuvfys;Lcom/mojang/datafixers/util/Either;)Lnet/minecraft/unmapped/C_nihhkamy;
+		ARG 1 rangeOrExact
+	METHOD m_squvigxo (Lnet/minecraft/unmapped/C_nihhkamy;)Lcom/mojang/datafixers/util/Either;
+		ARG 0 range
+	METHOD m_svcglhhq (Lnet/minecraft/unmapped/C_nihhkamy$C_nfiuvfys;Ljava/lang/Number;)Lnet/minecraft/unmapped/C_nihhkamy;
+		ARG 1 number
+	METHOD m_tohyqshf createPacketCodec (Lnet/minecraft/unmapped/C_qsrmwluu;Lnet/minecraft/unmapped/C_nihhkamy$C_nfiuvfys;)Lnet/minecraft/unmapped/C_qsrmwluu;
+		ARG 0 numberCodec
+		ARG 1 factory
 	METHOD m_ttzchrrm isDummy ()Z
+	METHOD m_waxupsxq (Lnet/minecraft/unmapped/C_nihhkamy;)Lnet/minecraft/unmapped/C_nihhkamy;
+		ARG 0 range
+	METHOD m_xnrwgyok toExact ()Ljava/util/Optional;
 	METHOD m_xpcbxkqc isNextCharValid (Lcom/mojang/brigadier/StringReader;)Z
 		ARG 0 reader
 	CLASS C_jreuzyex CommandFactory
+		METHOD create (Lcom/mojang/brigadier/StringReader;Ljava/util/Optional;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_nihhkamy;
+			ARG 2 min
+			ARG 3 max
 	CLASS C_mujuochb IntRange
 		FIELD f_bgngiydc maxSquared Ljava/util/Optional;
 		FIELD f_fciapavv minSquared Ljava/util/Optional;
 		FIELD f_lqncxgvg ANY Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
+		METHOD <init> (Ljava/util/Optional;Ljava/util/Optional;)V
+			ARG 1 min
+			ARG 2 max
+		METHOD m_dblpldtu (Ljava/lang/Integer;)Ljava/lang/Long;
+			ARG 0 n
 		METHOD m_fdqmwkvp fromStringReader (Lcom/mojang/brigadier/StringReader;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 reader
 			ARG 1 converter
+		METHOD m_lplierzt (Ljava/lang/Integer;)Ljava/lang/Long;
+			ARG 0 min2
 		METHOD m_lsxwlioa between (II)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 min
 			ARG 1 max
@@ -31,27 +57,51 @@ CLASS net/minecraft/unmapped/C_nihhkamy net/minecraft/predicate/NumberRange
 		METHOD m_sztoqtmf parse (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 reader
 		METHOD m_tvuukdtv squared (Ljava/util/Optional;)Ljava/util/Optional;
+			ARG 0 number
+		METHOD m_udnvpihs testSquared (J)Z
+			ARG 1 value
 		METHOD m_urmdctrd test (I)Z
 			ARG 1 value
+		METHOD m_vttpaaph (Ljava/lang/Integer;)Ljava/lang/Integer;
+			ARG 0 i
 		METHOD m_zaacvmhk parse (Lcom/mojang/brigadier/StringReader;Ljava/util/Optional;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 reader
+			ARG 1 min
+			ARG 2 max
 		METHOD m_zfjxrqdp atLeast (I)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 value
 		METHOD m_zhpgzufj exactly (I)Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 			ARG 0 value
 	CLASS C_nfiuvfys Factory
+		METHOD create (Ljava/util/Optional;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_nihhkamy;
+			ARG 1 min
+			ARG 2 max
+	CLASS C_odkkntko
+		FIELD f_lvrwikym MAX_BIT I
+		FIELD f_wilpvkoi MIN_BIT I
+		METHOD m_cozsxbks (Lnet/minecraft/unmapped/C_qsrmwluu;Lio/netty/buffer/ByteBuf;Ljava/lang/Number;)V
+			ARG 2 max
+		METHOD m_zcnfohuw (Lnet/minecraft/unmapped/C_qsrmwluu;Lio/netty/buffer/ByteBuf;Ljava/lang/Number;)V
+			ARG 2 min
 	CLASS C_qatgyzfn FloatRange
 		FIELD f_jwxokqnq squaredMin Ljava/util/Optional;
 		FIELD f_oydeehsg ANY Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
 		FIELD f_viflunmo squaredMax Ljava/util/Optional;
+		METHOD m_ehltymvq (Ljava/lang/Double;)Ljava/lang/Double;
+			ARG 0 n
 		METHOD m_fyonzumn square (Ljava/util/Optional;)Ljava/util/Optional;
+			ARG 0 number
 		METHOD m_giijxnoj parse (Lcom/mojang/brigadier/StringReader;Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
 			ARG 0 reader
 			ARG 1 mapper
 		METHOD m_gyocfnro atMost (D)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
 			ARG 0 value
+		METHOD m_ivipuhnr (Ljava/lang/Double;)Ljava/lang/Double;
+			ARG 0 d
 		METHOD m_keoxrhbh create (Lcom/mojang/brigadier/StringReader;Ljava/util/Optional;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
 			ARG 0 reader
+			ARG 1 min
+			ARG 2 max
 		METHOD m_lrhuesqv test (D)Z
 			ARG 1 value
 		METHOD m_sphipens parse (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_nihhkamy$C_qatgyzfn;
