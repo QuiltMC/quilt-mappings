@@ -1,7 +1,9 @@
 CLASS net/minecraft/unmapped/C_rdabfjzm net/minecraft/component/type/BundleContentsComponent
+	FIELD f_dtfvzywj selectedStackIndex I
 	FIELD f_ehknovtd weight Lorg/apache/commons/lang3/math/Fraction;
 	FIELD f_jpdcvazc DEFAULT Lnet/minecraft/unmapped/C_rdabfjzm;
 	FIELD f_kbkowtvy NO_STACK_INDEX I
+	FIELD f_kyifvpbp NO_SELECTED_STACK_INDEX I
 	FIELD f_pbnmkdnq stacks Ljava/util/List;
 	FIELD f_twsofqzh NESTED_BUNDLE_WEIGHT Lorg/apache/commons/lang3/math/Fraction;
 	METHOD <init> (Ljava/util/List;)V
@@ -20,15 +22,22 @@ CLASS net/minecraft/unmapped/C_rdabfjzm net/minecraft/component/type/BundleConte
 	METHOD m_osbljvar (Lnet/minecraft/unmapped/C_rdabfjzm;)Ljava/util/List;
 		ARG 0 component
 	METHOD m_snqazrew streamCopies ()Ljava/util/stream/Stream;
+	METHOD m_tfkyelzu getSelectedStackIndex ()I
 	METHOD m_vyzdvdcc parse (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
 		ARG 0 stacks
 	METHOD m_vzoucgoc canInsert (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_xaoywwbi copyContents ()Ljava/lang/Iterable;
+	METHOD m_ymqptjyp countStacksToShow ()I
+	METHOD m_zcglojmh hasSelectedStack ()Z
 	CLASS C_yphifkae Builder
 		FIELD f_jajsrtxb weight Lorg/apache/commons/lang3/math/Fraction;
+		FIELD f_lagpskyq selectedStackIndex I
 		FIELD f_yhroaggz stacks Ljava/util/List;
 		METHOD <init> (Lnet/minecraft/unmapped/C_rdabfjzm;)V
 			ARG 1 component
+		METHOD m_abwtvznm selectedStackIndex (I)V
+		METHOD m_chuuddgz isInvalid (I)Z
+			ARG 1 index
 		METHOD m_jgvkdksp getWeight ()Lorg/apache/commons/lang3/math/Fraction;
 		METHOD m_lrhhcvgk build ()Lnet/minecraft/unmapped/C_rdabfjzm;
 		METHOD m_njvlfmlu tryInsert (Lnet/minecraft/unmapped/C_sddaxwyk;)I
