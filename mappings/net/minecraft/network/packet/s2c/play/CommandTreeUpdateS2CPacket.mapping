@@ -9,8 +9,6 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 	FIELD f_shvoqtem TYPE_LITERAL B
 	FIELD f_whpewcll MASK B
 	FIELD f_wtdnbsoj CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
-	METHOD <init> (Lcom/mojang/brigadier/tree/RootCommandNode;)V
-		ARG 1 commandTree
 	METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
 		ARG 1 buf
 	METHOD m_dcigsfhx validate (Ljava/util/List;Ljava/util/function/BiPredicate;)V
@@ -22,17 +20,10 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 		ARG 1 flags
 	METHOD m_jebnlxkj readCommandNode (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_vzeoulff$C_irxeyhvf;
 		ARG 0 buf
-	METHOD m_kyfvkrqc getCommandTree (Lnet/minecraft/unmapped/C_bprdujxm;)Lcom/mojang/brigadier/tree/RootCommandNode;
-		ARG 1 context
 	METHOD m_mzuqkiag (Ljava/util/function/BiPredicate;Ljava/util/List;Lit/unimi/dsi/fastutil/ints/IntSet;I)Z
 		ARG 3 index
-	METHOD m_opvncnpa createNodeData (Lcom/mojang/brigadier/tree/CommandNode;Lit/unimi/dsi/fastutil/objects/Object2IntMap;)Lnet/minecraft/unmapped/C_vzeoulff$C_irxeyhvf;
-		ARG 0 node
-		ARG 1 nodes
 	METHOD m_qlyjkgkv traverse (Lcom/mojang/brigadier/tree/RootCommandNode;)Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 		ARG 0 commandTree
-	METHOD m_sidanbvm createCommandNodes (Lit/unimi/dsi/fastutil/objects/Object2IntMap;)Ljava/util/List;
-		ARG 0 nodes
 	METHOD m_udbndlky (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_vzeoulff$C_irxeyhvf;)V
 		ARG 1 commandNode
 	METHOD m_vkhvddsd write (Lnet/minecraft/unmapped/C_idfydwco;)V
@@ -55,25 +46,18 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 		FIELD f_ilvmukkm nodes Ljava/util/List;
 		FIELD f_peraevec context Lnet/minecraft/unmapped/C_bprdujxm;
 		FIELD f_rmwcykdw entries Ljava/util/List;
-		METHOD m_jxmqjagu (Lcom/mojang/brigadier/context/CommandContext;)I
-			ARG 0 context
 		METHOD m_xligpunh resolve (I)Lcom/mojang/brigadier/tree/CommandNode;
 			ARG 1 index
 	CLASS C_oiqqdfah Node
 		METHOD m_xrazseov write (Lnet/minecraft/unmapped/C_idfydwco;)V
-		METHOD m_ykkmupml build (Lnet/minecraft/unmapped/C_bprdujxm;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 	CLASS C_vuntotjx LiteralNode
 		FIELD f_lnhawqwm id Ljava/lang/String;
 	CLASS C_xvscvcsz ArgumentNode
 		FIELD f_blzxvwug id Ljava/lang/String;
 		FIELD f_dnaozebn suggestionId Lnet/minecraft/unmapped/C_ncpywfca;
 		FIELD f_mndqyfwo argumentType Lnet/minecraft/unmapped/C_yvmgapuw$C_jhdtbgye;
-		METHOD <init> (Lcom/mojang/brigadier/tree/ArgumentCommandNode;)V
-			ARG 1 commandNode
 		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_yvmgapuw$C_jhdtbgye;Lnet/minecraft/unmapped/C_ncpywfca;)V
 			ARG 3 suggestionId
-		METHOD m_bncjsviq getSuggestionId (Lcom/mojang/brigadier/suggestion/SuggestionProvider;)Lnet/minecraft/unmapped/C_ncpywfca;
-			ARG 0 provider
 		METHOD m_mkgsnfyv write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_yvmgapuw$C_jhdtbgye;)V
 			ARG 1 template
 		METHOD m_spdpgdxu write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_yvmgapuw;Lnet/minecraft/unmapped/C_yvmgapuw$C_jhdtbgye;)V
