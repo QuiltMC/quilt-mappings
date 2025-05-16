@@ -3,6 +3,7 @@ package quilt.internal.gametest.mixin;
 import net.minecraft.resource.pack.PackManager;
 import net.minecraft.server.Main;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.test.TestManager;
 import net.minecraft.test.TestServer;
 import net.minecraft.world.storage.WorldSaveStorage;
 
@@ -39,6 +40,8 @@ class MainMixin {
         MinecraftServer.startServer((thread) -> TestServer.create(
             thread, session, packManager, Optional.empty(), false
         ));
+        // method_71664 is startTicking
+        TestManager.INSTANCE.method_71664();
 
         return packManager;
     }
