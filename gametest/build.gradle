@@ -1,3 +1,5 @@
+import static java.util.concurrent.TimeUnit.SECONDS
+
 plugins {
     id 'java'
     id 'gametestable'
@@ -24,9 +26,18 @@ repositories {
     }
 }
 
+configurations.mappings {
+    resolutionStrategy {
+        // do not cache mappings
+        cacheChangingModulesFor 0, SECONDS
+    }
+}
+
 dependencies {
     minecraft(rootLibs.minecraft)
-    mappings "org.quiltmc:quilt-mappings:${gametestable.version}:intermediary-v2"
+    mappings ("org.quiltmc:quilt-mappings:${gametestable.version}:intermediary-v2") {
+        changing = true
+    }
 
     modImplementation rootLibs.quilt.loader
 }
