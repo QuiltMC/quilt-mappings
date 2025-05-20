@@ -1,10 +1,10 @@
 CLASS net/minecraft/unmapped/C_zelyotsz net/minecraft/command/argument/ItemPredicateArgumentType
 	FIELD f_bezmrynk ITEM_PREDICATE_MALFORMED_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
-	FIELD f_bljoiblj ITEM_PREDICATE_PARSERS Ljava/util/Map;
+	FIELD f_bljoiblj ITEM_CHECKERS Ljava/util/Map;
 	FIELD f_idwkgjot COUNT Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_jobwnunr EXAMPLES Ljava/util/Collection;
 	FIELD f_mcjybgrl UNKNOWN_ITEM_TAG_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
-	FIELD f_toutwicj COMPONENT_PREDICATE_PARSERS Ljava/util/Map;
+	FIELD f_toutwicj COMPONENT_CHECKERS Ljava/util/Map;
 	FIELD f_vjmneygw UNKNOWN_ITEM_COMPONENT_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_yrhmyaou MALFORMED_ITEM_COMPONENT_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
 	FIELD f_ytoqnfuh ITEM_PREDICATE_UNKNOWN_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
@@ -40,7 +40,7 @@ CLASS net/minecraft/unmapped/C_zelyotsz net/minecraft/command/argument/ItemPredi
 		ARG 0 list
 	METHOD m_vlqcwcku (Lnet/minecraft/unmapped/C_zelyotsz$C_weudnhcg;)Lnet/minecraft/unmapped/C_zelyotsz$C_weudnhcg;
 		ARG 0 parser
-	CLASS C_vvlghner ItemPredicateParser
+	CLASS C_vvlghner ItemChecker
 		METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)V
 			ARG 1 componentPredicateType
 		METHOD m_avzhhely (Lcom/mojang/brigadier/ImmutableStringReader;Ljava/lang/String;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
@@ -50,13 +50,15 @@ CLASS net/minecraft/unmapped/C_zelyotsz net/minecraft/command/argument/ItemPredi
 		METHOD m_zyhgqydt parse (Lcom/mojang/brigadier/ImmutableStringReader;Lcom/mojang/serialization/Dynamic;)Ljava/util/function/Predicate;
 			ARG 1 reader
 	CLASS C_wadhfwgl Context
-		FIELD f_jcaowuwh componentTypeLookup Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
-		FIELD f_jubyyvxm componentPredicateTypeLookup Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+		FIELD f_jcaowuwh components Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
+		FIELD f_jubyyvxm predicates Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 		FIELD f_oxwgbwcz lookupProvider Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
 		FIELD f_xwwieyfc itemLookup Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 		METHOD m_bpisirfg (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Z
 			ARG 0 holder
-	CLASS C_weudnhcg ComponentPredicateParser
+		METHOD m_mogezwjm (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Lnet/minecraft/unmapped/C_ncpywfca;
+			ARG 0 holder
+	CLASS C_weudnhcg ComponentChecker
 		METHOD m_cgociuhf (Lcom/mojang/brigadier/ImmutableStringReader;Ljava/lang/String;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
 			ARG 2 error
 		METHOD m_fqtyhngv parse (Lcom/mojang/brigadier/ImmutableStringReader;Lcom/mojang/serialization/Dynamic;)Ljava/util/function/Predicate;
