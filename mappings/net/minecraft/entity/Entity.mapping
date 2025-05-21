@@ -28,6 +28,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_ctqyfogx renderDistanceMultiplier D
 	FIELD f_dirooojo chunkPos Lnet/minecraft/unmapped/C_ynrszrtu;
 	FIELD f_doofwhhb pos Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_dxwipdtk MAX_COLLISION_CHECKS_PER_TICK I
 	FIELD f_euemepwt FALL_FLYING_FLAG_INDEX I
 	FIELD f_ewpmuavf timeUntilRegen I
 	FIELD f_eyihyrff pistonMovementDelta [D
@@ -348,6 +349,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 			COMMENT the player
 		ARG 2 hand
 			COMMENT the hand the player used to interact with this entity
+	METHOD m_ffsvjqnb clearQueuedCollisionChecks ()V
 	METHOD m_fgmpibkk setId (I)V
 		COMMENT Sets the network identifier of this entity.
 		COMMENT
@@ -484,6 +486,13 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_iqvzwgkr canModifyAt (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 2 pos
 	METHOD m_iseshnfi isSpectator ()Z
+	METHOD m_iwygqrea queueCollisionCheck (Ljava/util/List;)V
+		ARG 1 check
+	METHOD m_ixqkofwo dropStack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_uqpzijng;
+		COMMENT @return {@code null} if the passed {@code stack} is
+		COMMENT {@linkplain net.minecraft.item.ItemStack#isEmpty empty}, or the spawned
+		COMMENT {@link net.minecraft.entity.ItemEntity ItemEntity} otherwise
+		ARG 3 offset
 	METHOD m_iybimkec shouldApplyBlockCollisionEffects ()Z
 	METHOD m_iznakrow removeFromDimension ()V
 	METHOD m_izrsdktf handleFallDamage (DFLnet/minecraft/unmapped/C_sbxfkpyv;)Z
@@ -842,6 +851,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		COMMENT
 		COMMENT @implNote The swim height of 0 allows short entities like baby animals
 		COMMENT to start swimming to avoid suffocation.
+	METHOD m_ufxbxqpd tryShearEquipment (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_dxkfswlz;)Z
+		ARG 1 shearer
+		ARG 4 target
 	METHOD m_uidprvfr applyGravity ()V
 	METHOD m_ujcgbwni getSquaredDistanceTo (DDD)D
 		ARG 1 x
