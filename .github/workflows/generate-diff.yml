@@ -19,13 +19,18 @@ jobs:
       - uses: gradle/wrapper-validation-action@v2
       - name: Decompile sources and create diff
         run: ./gradlew lazilyDiffTarget
+      - name: Check Diff Created
+        id: check-diff-created
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "build/target.diff"
       - name: Create diff comment
         uses: ./.github/actions/diff-uploader/
         if: ${{ matrix.java == 21 }}
         id: diff-uploader
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          target-src-exists: ${{ steps.can-create-diff.outputs.files_exists }}
+          target-src-exists: ${{ steps.check-diff-created.outputs.files_exists }}
       - name: Upload diff
         if: hashFiles('target.diff') != ''
         uses: actions/upload-artifact@v4
