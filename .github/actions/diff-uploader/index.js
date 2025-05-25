@@ -107,7 +107,7 @@ async function main() {
     }
 
     try {
-        const diff_buffer = fs.readFileSync("target.diff");
+        const diff_buffer = fs.readFileSync("build/target.diff");
         const diff = diff_buffer.toString();
 
         if (diff === "") {
