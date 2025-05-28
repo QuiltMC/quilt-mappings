@@ -53,9 +53,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 0 address
 		ARG 1 useEpoll
 		ARG 2 connection
-	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
+	METHOD m_bgcagbfi sendImmediately (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/channel/ChannelFutureListener;Z)V
 		ARG 1 packet
-		ARG 2 listener
 		ARG 3 flush
 	METHOD m_bhwloxoc getPacketListener ()Lnet/minecraft/unmapped/C_tkgdawqw;
 	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
@@ -121,9 +120,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_rgronykr handlePacket (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 0 packet
 		ARG 1 listener
-	METHOD m_rsirbonf send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;)V
-		ARG 1 packet
-		ARG 2 listener
 	METHOD m_rvagcspt getLoggableAddress (Z)Ljava/lang/String;
 		ARG 1 logIps
 	METHOD m_seunbusw (Lnet/minecraft/unmapped/C_iypsxyqr;Lio/netty/channel/ChannelHandlerContext;)V
@@ -155,9 +151,8 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_vkqagjgi connect (Ljava/net/InetSocketAddress;ZLnet/minecraft/unmapped/C_pwpucsml;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
 		ARG 1 useEpoll
-	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
+	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/channel/ChannelFutureListener;Z)V
 		ARG 1 packet
-		ARG 2 listener
 		ARG 3 flush
 	METHOD m_wgetbbyv syncUninterruptibly (Lio/netty/channel/ChannelFuture;)V
 		ARG 0 future
@@ -175,10 +170,6 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 6 intent
 	METHOD m_yylgxjga addFlowControlHandler (Lio/netty/channel/ChannelPipeline;)V
 		ARG 1 pipeline
-	METHOD m_zbfykobd send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lnet/minecraft/unmapped/C_zddpfpkk;Z)V
-		ARG 1 packet
-		ARG 2 sendListener
-		ARG 3 flush
 	METHOD m_zebgvkek getDisconnectionDetails ()Lnet/minecraft/unmapped/C_igbzvhln;
 	METHOD m_ziivfjpb getSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT Returns the side of this connection, or the direction of the packets received
