@@ -254,7 +254,6 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
             }
         );
 
-        // TODO LATER use this in generate-diff.yml
         tasks.register(
             LazilyDiffTargetTask.LAZILY_DIFF_TARGET_TASK_NAME,
             LazilyDiffTargetTask.class,
