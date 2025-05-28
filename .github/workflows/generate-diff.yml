@@ -17,24 +17,20 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: temurin
       - uses: gradle/wrapper-validation-action@v2
-      - run: ./gradlew decompileVineflower decompileTargetVineflower --stacktrace
-        if: ${{ matrix.java == 21 }}
-      - name: Check Target Decompiled
-        id: can-create-diff
+      - name: Decompile sources and create diff
+        run: ./gradlew lazilyDiffTarget
+      - name: Check Diff Created
+        id: check-diff-created
         uses: andstor/file-existence-action@v3
         with:
-          files: "namedTargetSrc/net/minecraft/client/main/Main.java"
-      - name: Create diff
-        if: ${{ steps.can-create-diff.outputs.files_exists == 'true' }}
-        run: diff -bur namedTargetSrc/ namedSrc/ > target.diff
-        continue-on-error: true
+          files: "build/target.diff"
       - name: Create diff comment
         uses: ./.github/actions/diff-uploader/
         if: ${{ matrix.java == 21 }}
         id: diff-uploader
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          target-src-exists: ${{ steps.can-create-diff.outputs.files_exists }}
+          target-src-exists: ${{ steps.check-diff-created.outputs.files_exists }}
       - name: Upload diff
         if: hashFiles('target.diff') != ''
         uses: actions/upload-artifact@v4
