@@ -1,16 +1,28 @@
 CLASS net/minecraft/unmapped/C_dtsrsfye net/minecraft/entity/AreaEffectCloudEntity
+	FIELD f_aitlatgw DEFAULT_AGE I
+	FIELD f_bokkvtlv durationScale F
 	FIELD f_cmvhxlzn MIN_RADIUS F
 	FIELD f_dblgpftb durationOnUse I
 	FIELD f_dcbuthnz DEFAULT_RADIUS F
-	FIELD f_fnmdnkyf affectedEntities Ljava/util/Map;
+	FIELD f_ffoblivo DEFAULT_REAPPLICATION_DELAY I
+	FIELD f_fnmdnkyf reapplicationTicksByEntity Ljava/util/Map;
+	FIELD f_foiwowic DEFAULT_POTION_DURATION_SCALE F
 	FIELD f_hbcphlsn owner Lnet/minecraft/unmapped/C_xolbcmjn;
+	FIELD f_iifsuogg DEFAULT_LINGERING_DURATION I
+	FIELD f_mcjezepk DEFAULT_PARTICLE_EFFECT Lnet/minecraft/unmapped/C_gjiczies;
 	FIELD f_mzzwujqa waitTime I
+	FIELD f_pdaasbkb DEFAULT_DURATION_ON_USE I
 	FIELD f_ptifiiup potionContents Lnet/minecraft/unmapped/C_xpqegwnr;
 	FIELD f_qxguiqim RADIUS Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_qyoykbvk particleEffect Lnet/minecraft/unmapped/C_nqucohct;
 	FIELD f_qzqthyoy MAX_RADIUS F
+	FIELD f_shoniujg DEFAULT_RADIUS_ON_USE F
 	FIELD f_taokxghk radiusGrowth F
 	FIELD f_tcsjekly HEIGHT F
+	FIELD f_tuzwxaxf INFINITE_DURATION I
+	FIELD f_vctlqcim DEFAULT_RADIUS_PER_TICK F
 	FIELD f_vdfsdyql radiusOnUse F
+	FIELD f_vjdmlebb DEFAULT_WAIT_TIME I
 	FIELD f_wihxxpfv PARTICLE_ID Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_xafxhgoq APPLY_EFFECT_PER_TICK I
 	FIELD f_xehknean WAITING Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -29,6 +41,8 @@ CLASS net/minecraft/unmapped/C_dtsrsfye net/minecraft/entity/AreaEffectCloudEnti
 	METHOD m_ereonukk setDurationOnUse (I)V
 		ARG 1 durationOnUse
 	METHOD m_euwjyelc getRadius ()F
+	METHOD m_fimfnotf setParticleEffect (Lnet/minecraft/unmapped/C_nqucohct;)V
+		ARG 1 effect
 	METHOD m_flhzipiq setRadiusOnUse (F)V
 		ARG 1 radius
 	METHOD m_fplpcruv setDuration (I)V
@@ -40,8 +54,12 @@ CLASS net/minecraft/unmapped/C_dtsrsfye net/minecraft/entity/AreaEffectCloudEnti
 	METHOD m_jpxfgsej addEffect (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 effect
 	METHOD m_krcrpiuw getParticleType ()Lnet/minecraft/unmapped/C_nqucohct;
+	METHOD m_lnceljgo (Ljava/util/Map$Entry;)Z
+		ARG 1 entry
 	METHOD m_lpnocsoi setOwner (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 owner
+	METHOD m_ntaatizw setDurationScale (F)V
+		ARG 1 scale
 	METHOD m_nwhbrxxw setWaitTime (I)V
 		ARG 1 ticks
 	METHOD m_pexreefj setPotionContents (Lnet/minecraft/unmapped/C_xpqegwnr;)V
@@ -52,3 +70,4 @@ CLASS net/minecraft/unmapped/C_dtsrsfye net/minecraft/entity/AreaEffectCloudEnti
 	METHOD m_volshxzg isWaiting ()Z
 	METHOD m_wqpyilil getDuration ()I
 	METHOD m_xulccvfs tickServer (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
+	METHOD m_ypvxcnlo updateParticleData ()V
