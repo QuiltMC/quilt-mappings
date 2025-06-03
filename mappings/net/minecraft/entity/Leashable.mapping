@@ -1,28 +1,81 @@
 CLASS net/minecraft/unmapped/C_gbavazgo net/minecraft/entity/Leashable
-	FIELD f_crwvitgo MAX_LEASH_LENGTH D
+	FIELD f_crwvitgo DEFAULT_MAX_LEASH_LENGTH D
+	FIELD f_eblskylh SPRING_DAMPENING F
+	FIELD f_fgoxkuky PULL_MULTIPLIER Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_hqumivqd LEASH_HOLDER_OFFSET_FACTOR Ljava/util/List;
 	FIELD f_hwlweeax LEASH_NBT_KEY Ljava/lang/String;
-	FIELD f_iiewyzxn STRETCH_DISTANCE D
+	FIELD f_icwmppaf QUAD_LEASH_OFFSET_FACTORS Ljava/util/List;
+	FIELD f_iiewyzxn DEFAULT_PULL_THRESHOLD D
+	FIELD f_lcyjyhtb TORSIONAL_ELASTICITY D
+	FIELD f_tntkkdur STIFFNESS D
+	FIELD f_uutxzxka LEASHABLE_OFFSET_FACTOR Ljava/util/List;
+	FIELD f_vmnyoroc MAXIMUM_LEASHED_DISTANCE D
+	METHOD m_agcvyesn tickLeashed (Lnet/minecraft/unmapped/C_astfners;)V
+		ARG 1 holder
+	METHOD m_brbnwutv dropLeash ()V
+	METHOD m_damipxvm applyLeashPulls (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;)Z
+		ARG 1 leashHolder
+		ARG 2 leashData
+	METHOD m_dtqzazqr getPullThreshold ()D
 	METHOD m_egrefywv isLeashed ()Z
 	METHOD m_epgfrqcc attachLeash (Lnet/minecraft/unmapped/C_astfners;Z)V
 	METHOD m_feakufat hasLeashData ()Z
 	METHOD m_fmujdyoh readLeashData (Lnet/minecraft/unmapped/C_djkzhngg;)V
-	METHOD m_frfgxbsb applyCloseRangeBehavior (Lnet/minecraft/unmapped/C_astfners;)V
+	METHOD m_frfgxbsb onLooseLeashTick (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
+	METHOD m_gnmtyuso createQuadLeashOffsets (Lnet/minecraft/unmapped/C_astfners;DDDD)[Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 forwardFactor
+		ARG 3 zFactor
+		ARG 5 xFactor
+		ARG 7 yFactor
 	METHOD m_gnuhezcf getLeashHolder (Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_astfners;
 		ARG 0 leashed
+	METHOD m_gpophcoy calculatePulls (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Ljava/util/List;Ljava/util/List;)Ljava/util/List;
+		ARG 0 leashable
+		ARG 1 leashHolder
+		ARG 2 leashableOffsetFactors
+		ARG 3 leashHolderOffsetFactors
+	METHOD m_gwlvyiep getHeldLeashables (Lnet/minecraft/unmapped/C_astfners;)Ljava/util/List;
+		ARG 0 holder
+	METHOD m_gxfemicl removeLeash ()V
 	METHOD m_hkieuyqm getLeashData ()Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;
+	METHOD m_hskteemq getAngularDrag (Lnet/minecraft/unmapped/C_astfners;)F
+		ARG 0 leashable
+	METHOD m_hvwqeacy canBeQuadLeashed ()Z
+	METHOD m_hyeqdukm getNearbyLeashables (Lnet/minecraft/unmapped/C_astfners;Ljava/util/function/Predicate;)Ljava/util/List;
+	METHOD m_icdbliwm getQuadLeashAttachmentOffsets ()[Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_jywtllgu setDelayedLeashHolderId (I)V
 		ARG 1 delayedLeashHolderId
-	METHOD m_kkwyhrvj applyTooFarBehavior ()V
+	METHOD m_kangjhum onLeashPull ()V
+	METHOD m_kkwyhrvj onLeashLengthExceeded ()V
+	METHOD m_klnnueyu getLeashOffset ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_lccupwok setLeashData (Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;)V
+		ARG 1 data
+	METHOD m_mcdgpyka getLeashOffset (F)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 tickDelta
+	METHOD m_onphfbfp getDistanceTo (Lnet/minecraft/unmapped/C_astfners;)D
 	METHOD m_ovrpaqfw attachLeash (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_astfners;Z)V
 		ARG 0 entity
 		ARG 1 leashHolder
 		ARG 2 sendPacket
+	METHOD m_slcvzuif getNearbyLeashables (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_vgpupfxx;Ljava/util/function/Predicate;)Ljava/util/List;
+		ARG 1 pos
+		ARG 2 predicate
+	METHOD m_tgzaeiau canBeLeashedBy (Lnet/minecraft/unmapped/C_astfners;)Z
+	METHOD m_twruooup getMaxLeashLength ()D
+	METHOD m_uejcpshj (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_gbavazgo;)Z
+		ARG 1 leashable
+	METHOD m_uybzglkt getPull (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;DLnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Ljava/util/Optional;
+		ARG 0 heldPos
+		ARG 1 leashedPos
+		ARG 2 threshold
+		ARG 4 leashableMovement
+		ARG 5 leashedOffset
+	METHOD m_viwtpsbf onLeashDetached ()V
 	METHOD m_xkmzlwed getLeashHolder ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_xvyvanvw canBeLeashed ()Z
 	METHOD m_ydkqpzwu tickLeash (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 1 entity
+		ARG 1 leashable
 	METHOD m_ydrqybvl writeLeashData (Lnet/minecraft/unmapped/C_kespdwpv;Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;)V
 		ARG 2 data
 	METHOD m_yvbpzuud resolveLeashData (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;)V
@@ -32,8 +85,19 @@ CLASS net/minecraft/unmapped/C_gbavazgo net/minecraft/entity/Leashable
 		ARG 1 sendPacket
 		ARG 2 dropItem
 	CLASS C_trsxpkpu LeashData
+		FIELD f_itczsnez angularMomentum D
 		FIELD f_tsbjpbyd leashHolder Lnet/minecraft/unmapped/C_astfners;
 		FIELD f_yxdlhpfy delayedLeashHolderId I
 		FIELD f_znxcvkfw delayedLeashData Lcom/mojang/datafixers/util/Either;
 		METHOD m_kskpcsjf setLeashHolder (Lnet/minecraft/unmapped/C_astfners;)V
 			ARG 1 holder
+		METHOD m_rnqfbcpb (Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;)Lcom/mojang/datafixers/util/Either;
+			ARG 0 data
+	CLASS C_vprxhypn Pull
+		FIELD f_jilewirw zero Lnet/minecraft/unmapped/C_gbavazgo$C_vprxhypn;
+		METHOD m_fogmvmhh ofSum (Ljava/util/List;)Lnet/minecraft/unmapped/C_gbavazgo$C_vprxhypn;
+			ARG 0 pulls
+		METHOD m_kzdgcnps multiplied (D)Lnet/minecraft/unmapped/C_gbavazgo$C_vprxhypn;
+		METHOD m_zyuvyumd calculateTorque (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)D
+			ARG 0 force1
+			ARG 1 force2
