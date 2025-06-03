@@ -11,9 +11,11 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_dwqtqyxt STINGER_COUNT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ebbqhmet riptideAttackDamage F
 	FIELD f_ebtfxbod stuckArrowTimer I
+	FIELD f_eoqnrfuf SADDLE_SLOT_ID I
+	FIELD f_euqvtgsv interpolator Lnet/minecraft/unmapped/C_sdgyrixf;
 	FIELD f_fchmphst defaultMaxHealth I
 	FIELD f_figrybhh noDrag Z
-	FIELD f_fqazkkvr BODY_ARMOR_OFFSET I
+	FIELD f_fqazkkvr BODY_ARMOR_SLOT_ID I
 	FIELD f_fqkpwpyn handSwingProgress F
 	FIELD f_gikugpix lastAttackedTicks I
 	FIELD f_gkgtpexp MAX_MOVEMENT_DISTANCE D
@@ -35,8 +37,11 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_kkplgjng lastBlockPos Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_kpdzsffg lastHandSwingProgress F
 	FIELD f_ksfpoypz locationBasedEnchantmentEffects Ljava/util/EnumMap;
+	FIELD f_kxixcgpr waypointIcon Lnet/minecraft/unmapped/C_xucdsrtl$C_ozyhcqwy;
 	FIELD f_lemmcmcu STUCK_ARROW_COUNT Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_lljjppvn INPUT_FRICTION F
 	FIELD f_lrzhzlmv lastAttackTime I
+	FIELD f_lzsyjpdn lastEquipment Ljava/util/Map;
 	FIELD f_mawomqmy LIVING_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_mcoacjpn SWING_DURATION I
 	FIELD f_mcoihohf itemUseTimeLeft I
@@ -46,7 +51,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_mlsykvgi absorptionAmount F
 	FIELD f_noitvgvb LARGE_HAT_RENDER_CULLING_SIZE F
 	FIELD f_noizhvzb BASE_JUMP_COEFFICIENT F
-	FIELD f_obgdercz EQUIPMENT_SLOT_OFFSET I
+	FIELD f_obgdercz HAND_SLOT_ID_OFFSET I
 	FIELD f_oigploen activeItemStack Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_okrsohgs serverHeadYaw D
 	FIELD f_olsxmkqm PLAYER_DAMAGE_TIME I
@@ -86,9 +91,10 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 	FIELD f_xuuimtvm SLEEPING_DIMENSIONS Lnet/minecraft/unmapped/C_sszpscpo;
 	FIELD f_yjtbngeu despawnCounter I
 	FIELD f_zgtmqjrv HEALTH Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_zkhdmkcl ARMOR_SLOT_OFFSET I
+	FIELD f_zkhdmkcl ARMOR_SLOT_ID_OFFSET I
 	FIELD f_ztvierdp attacker Lnet/minecraft/unmapped/C_xolbcmjn;
 	FIELD f_zuarxhuv damageTracker Lnet/minecraft/unmapped/C_xkhemiqp;
+	FIELD f_zzxchzob equipment Lnet/minecraft/unmapped/C_okmgcumg;
 	FIELD f_zzzdmler OFF_HAND_ACTIVE_FLAG I
 	METHOD m_aabhytmz clearSleepingPosition ()V
 	METHOD m_almxocpv hasNoDrag ()Z
@@ -290,6 +296,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		COMMENT A dead entity may not yet be removed given the {@linkplain #DEATH_DURATION death duration}.
 		COMMENT
 		COMMENT @return {@code true} if this entity is dead, or {@code false} otherwise
+	METHOD m_jsxsxmgo dropStack (Lnet/minecraft/unmapped/C_sddaxwyk;ZZ)Lnet/minecraft/unmapped/C_uqpzijng;
 	METHOD m_jtmdgtth hasLandedInFluid ()Z
 	METHOD m_khdpfurh setHealth (F)V
 		COMMENT Sets the amount of health this entity has in half-hearts.
@@ -324,6 +331,9 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 hand
 		ARG 2 fromServerPlayer
 	METHOD m_lrhbwltd getActiveItem ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_ltnuxlgk dropStackImpl (Lnet/minecraft/unmapped/C_sddaxwyk;ZZ)Lnet/minecraft/unmapped/C_uqpzijng;
+		ARG 2 randomizeVelocity
+		ARG 3 setThrower
 	METHOD m_luzswycb isInvulnerableTo (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		ARG 2 source
 	METHOD m_midgwnho getSafeFallDistance (F)I
@@ -469,6 +479,7 @@ CLASS net/minecraft/unmapped/C_usxaxydn net/minecraft/entity/LivingEntity
 		ARG 1 player
 	METHOD m_swttaoou knockDownwards ()V
 	METHOD m_swvraqsl getMaxAbsorption ()F
+	METHOD m_sxygqbew createEquipment ()Lnet/minecraft/unmapped/C_okmgcumg;
 	METHOD m_tcvuiywd makeSound (Lnet/minecraft/unmapped/C_avavozay;)V
 		ARG 1 sound
 	METHOD m_tdxfjzrk getStatusEffects ()Ljava/util/Collection;
