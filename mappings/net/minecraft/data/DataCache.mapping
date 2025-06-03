@@ -14,6 +14,8 @@ CLASS net/minecraft/unmapped/C_sdjwtmhs net/minecraft/data/DataCache
 		ARG 3 version
 	METHOD m_agtpfcyr getPath (Ljava/lang/String;)Ljava/nio/file/Path;
 		ARG 1 providerName
+	METHOD m_anwaaimn (Lnet/minecraft/unmapped/C_sdjwtmhs$C_brknvdua;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_sdjwtmhs$C_dleuahtm;
+		ARG 1 ignored
 	METHOD m_lnghmvmn run (Ljava/lang/String;Lnet/minecraft/unmapped/C_sdjwtmhs$C_hkhplcrf;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 providerName
 		ARG 2 updater
@@ -25,7 +27,14 @@ CLASS net/minecraft/unmapped/C_sdjwtmhs net/minecraft/data/DataCache
 	METHOD m_varvkyie readCache (Ljava/nio/file/Path;Ljava/nio/file/Path;)Lnet/minecraft/unmapped/C_sdjwtmhs$C_hysgzlgb;
 		ARG 0 root
 		ARG 1 providerPath
-	CLASS C_brknvdua CachedDataWriter
+	METHOD m_vyecrzau (Ljava/util/Set;Ljava/lang/String;Lnet/minecraft/unmapped/C_sdjwtmhs$C_hysgzlgb;)V
+		ARG 2 name
+		ARG 3 cache
+	CLASS C_aijcipku
+		METHOD visitFile (Ljava/lang/Object;Ljava/nio/file/attribute/BasicFileAttributes;)Ljava/nio/file/FileVisitResult;
+			ARG 1 path
+			ARG 2 attributes
+	CLASS C_brknvdua CachedWriter
 		FIELD f_auqbziix cacheMisses Ljava/util/concurrent/atomic/AtomicInteger;
 		FIELD f_fuqlgxhu oldCache Lnet/minecraft/unmapped/C_sdjwtmhs$C_hysgzlgb;
 		FIELD f_myhheiqf providerName Ljava/lang/String;
@@ -37,6 +46,8 @@ CLASS net/minecraft/unmapped/C_sdjwtmhs net/minecraft/data/DataCache
 		METHOD m_tvcboxdy finish ()Lnet/minecraft/unmapped/C_sdjwtmhs$C_dleuahtm;
 	CLASS C_dleuahtm UpdateResult
 	CLASS C_hkhplcrf CacheUpdater
+		METHOD update (Lnet/minecraft/unmapped/C_temnquoh;)Ljava/util/concurrent/CompletableFuture;
+			ARG 1 writer
 	CLASS C_hysgzlgb ProviderCache
 		METHOD m_ekcmvbmk get (Ljava/nio/file/Path;)Lcom/google/common/hash/HashCode;
 			ARG 1 path
