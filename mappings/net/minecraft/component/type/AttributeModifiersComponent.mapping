@@ -8,10 +8,15 @@ CLASS net/minecraft/unmapped/C_azfkqhlm net/minecraft/component/type/AttributeMo
 	METHOD m_bpimhffk forEachModifier (Lnet/minecraft/unmapped/C_qfoqahef;Ljava/util/function/BiConsumer;)V
 		ARG 1 slots
 		ARG 2 consumer
+	METHOD m_btrvtwgo appendTooltip (Lnet/minecraft/unmapped/C_qfoqahef;Lorg/apache/commons/lang3/function/TriConsumer;)V
+		ARG 1 slots
+		ARG 2 appender
 	METHOD m_gdqixgmv with (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;Lnet/minecraft/unmapped/C_qfoqahef;)Lnet/minecraft/unmapped/C_azfkqhlm;
 		ARG 1 attribute
 		ARG 2 modifier
 		ARG 3 group
+	METHOD m_mjzxuzjp (Ljava/text/DecimalFormat;)V
+		ARG 0 format
 	METHOD m_pxeavngw builder ()Lnet/minecraft/unmapped/C_azfkqhlm$C_vinsjuvn;
 	METHOD m_zgatrfmf forEachModifier (Lnet/minecraft/unmapped/C_yuycoehb;Ljava/util/function/BiConsumer;)V
 		ARG 1 slot
@@ -23,6 +28,37 @@ CLASS net/minecraft/unmapped/C_azfkqhlm net/minecraft/component/type/AttributeMo
 			ARG 1 attribute
 		METHOD m_vdrgfbcy (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
 			ARG 0 instance
+	CLASS C_kqgfvdat Display
+		METHOD m_brnkyddm getDefault ()Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat;
+		METHOD m_eakhcuqk appendTooltip (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+			ARG 1 appender
+			ARG 3 attribute
+			ARG 4 modifier
+		METHOD m_oopxewmk (Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat$C_ojlwbbdy;)Lcom/mojang/serialization/MapCodec;
+			ARG 0 type
+		METHOD m_pfcndfzi createOverride (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat;
+		METHOD m_tfwgfjdw getType ()Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat$C_ojlwbbdy;
+		METHOD m_vdlizjqr getHidden ()Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat;
+		CLASS C_dzmzhicx Default
+			FIELD f_bnylsies INSTANCE Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat$C_dzmzhicx;
+		CLASS C_mgthfrsm TextOverride
+		CLASS C_ojlwbbdy Type
+			FIELD f_dldijpgb PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
+			FIELD f_gghwmced id I
+			FIELD f_ihtbbqjd displayPacketCodec Lnet/minecraft/unmapped/C_qsrmwluu;
+			FIELD f_ngsnvvya CODEC Lcom/mojang/serialization/Codec;
+			FIELD f_osileacz BY_ID Ljava/util/function/IntFunction;
+			FIELD f_vhovflbf name Ljava/lang/String;
+			FIELD f_xsymxlek displayCodec Lcom/mojang/serialization/MapCodec;
+			METHOD <init> (Ljava/lang/String;ILjava/lang/String;ILcom/mojang/serialization/MapCodec;Lnet/minecraft/unmapped/C_qsrmwluu;)V
+				ARG 5 displayCodec
+				ARG 6 displayPacketCodec
+			METHOD m_hmonervm getId ()I
+			METHOD m_mvdoryuu getDisplayPacketCodec ()Lnet/minecraft/unmapped/C_qsrmwluu;
+		CLASS C_zqihgvbt Hidden
+			FIELD f_btuowncb INSTANCE Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat$C_zqihgvbt;
 	CLASS C_vinsjuvn Builder
 		FIELD f_bsskwrts entries Lcom/google/common/collect/ImmutableList$Builder;
 		METHOD m_fdlmvuhx build ()Lnet/minecraft/unmapped/C_azfkqhlm;
+		METHOD m_gxxrjlfn add (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;Lnet/minecraft/unmapped/C_qfoqahef;Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat;)Lnet/minecraft/unmapped/C_azfkqhlm$C_vinsjuvn;
+		METHOD m_ogejypzl add (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;Lnet/minecraft/unmapped/C_qfoqahef;)Lnet/minecraft/unmapped/C_azfkqhlm$C_vinsjuvn;

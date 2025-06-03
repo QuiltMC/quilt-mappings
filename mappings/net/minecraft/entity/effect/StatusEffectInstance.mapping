@@ -54,13 +54,21 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 	METHOD m_bspyvfdb createParticle ()Lnet/minecraft/unmapped/C_nqucohct;
 	METHOD m_cqvpfuqq isInfinite ()Z
 	METHOD m_cxsaifnx getDetails ()Lnet/minecraft/unmapped/C_wpfizwve$C_ivhzuvgd;
+	METHOD m_dkmpeuvv tickClient ()V
 	METHOD m_dzdptdhl getDuration ()I
 	METHOD m_entcpiae onEffectApplied (Lnet/minecraft/unmapped/C_usxaxydn;)V
 	METHOD m_fckfddyy isOngoing ()Z
 	METHOD m_hyaduncp upgrade (Lnet/minecraft/unmapped/C_wpfizwve;)Z
 		ARG 1 that
+	METHOD m_ivbfijys update (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;Ljava/lang/Runnable;)Z
+		COMMENT @return {@code true} if this effect has remaining duration after updating,
+		COMMENT or {@code false} otherwise
+		ARG 3 onHiddenPromoted
 	METHOD m_jiwejrbn getDurationString ()Ljava/lang/String;
 	METHOD m_kayxpwex getEffectType ()Lnet/minecraft/unmapped/C_cjzoxshv;
+	METHOD m_lmtqupbk tryPromoteHidden ()Z
+	METHOD m_mrnzllmn (FI)I
+		ARG 1 duration
 	METHOD m_msyibwpl (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_wpfizwve$C_ivhzuvgd;)Lnet/minecraft/unmapped/C_wpfizwve;
 		ARG 1 hiddenDetails
 	METHOD m_ohxkuhnm shouldShowIcon ()Z
@@ -73,12 +81,16 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 		ARG 2 tickDelta
 	METHOD m_ttewyopb isOfType (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
 		ARG 1 type
+	METHOD m_uhoohagn withScaledDuration (F)Lnet/minecraft/unmapped/C_wpfizwve;
+		ARG 1 scale
 	METHOD m_uhzuhbds isAmbient ()Z
 	METHOD m_voaqtpqg copyBlendState (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 other
 	METHOD m_vqnuhydc applyToEntity (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 entity
 	METHOD m_whnvneco skipBlending ()V
+	METHOD m_wulzjcot (I)I
+		ARG 0 duration
 	METHOD m_xedzspyz getTranslationKey ()Ljava/lang/String;
 	METHOD m_xwkrgskr copyFrom (Lnet/minecraft/unmapped/C_wpfizwve;)V
 		ARG 1 that
@@ -106,3 +118,5 @@ CLASS net/minecraft/unmapped/C_wpfizwve net/minecraft/entity/effect/StatusEffect
 		METHOD m_psejherm getBlendFactor (Lnet/minecraft/unmapped/C_usxaxydn;F)F
 			ARG 1 entity
 			ARG 2 tickDelta
+		METHOD m_vpcajelm shouldBlendIn (Lnet/minecraft/unmapped/C_wpfizwve;)Z
+			ARG 0 effect
