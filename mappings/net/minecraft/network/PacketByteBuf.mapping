@@ -251,6 +251,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readOptional(Reader)
 		ARG 1 value
 		ARG 2 encoder
+	METHOD m_amtujwvt (Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;)V
+		ARG 2 right
 	METHOD m_appecnpy readQuaternion (Lio/netty/buffer/ByteBuf;)Lorg/joml/Quaternionf;
 		ARG 0 buf
 	METHOD m_aqriaemp readLongArray (Lio/netty/buffer/ByteBuf;)[J
@@ -353,6 +355,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the read chunk section pos
 		COMMENT @see #writeChunkSectionPos(ChunkSectionPos)
+	METHOD m_fwyrkdqd (Ljava/lang/String;)Lio/netty/handler/codec/DecoderException;
+		ARG 0 error
 	METHOD m_fztuomot readPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_gnnqafau writeEnumConstant (Ljava/lang/Enum;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes an enum constant to this buf. An enum constant is represented
@@ -513,6 +517,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 decoder
 	METHOD m_mhlenoxy readPos (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 0 buf
+	METHOD m_minhepob readEither (Lnet/minecraft/unmapped/C_ajdohfrc;Lnet/minecraft/unmapped/C_ajdohfrc;)Lcom/mojang/datafixers/util/Either;
+		ARG 1 leftDecoder
+		ARG 2 rightDecoder
 	METHOD m_mlaqlvff writeInstant (Ljava/time/Instant;)V
 		COMMENT Writes an instant to this buf. An instant is represented by a long indicating
 		COMMENT the instant epoch milliseconds.
@@ -577,6 +584,10 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 bitSet
 			COMMENT the bit set to write
 	METHOD m_rhfpxyxp readVector3f ()Lorg/joml/Vector3f;
+	METHOD m_rmsqcqnf writeEither (Lcom/mojang/datafixers/util/Either;Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;)V
+		ARG 1 either
+		ARG 2 leftEncoder
+		ARG 3 rightEncoder
 	METHOD m_rtpohocp writePos (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		COMMENT Writes a position to this buf. A position is represented by a regular long.
 		COMMENT
@@ -664,6 +675,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @return this buf, for chaining
 		ARG 1 valueToId
 		ARG 2 value
+	METHOD m_tuovdjxm (Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;)V
+		ARG 2 left
 	METHOD m_ucosefkt decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 	METHOD m_ueausfqv writeByteArray ([B)Lnet/minecraft/unmapped/C_idfydwco;
 		ARG 1 bytes
@@ -728,6 +741,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_wzudmtun writeLongArray ([J)Lnet/minecraft/unmapped/C_idfydwco;
 	METHOD m_xfwjnxlt readEnumSet (Ljava/lang/Class;)Ljava/util/EnumSet;
 		ARG 1 enumClass
+	METHOD m_xjbrzckh decode (Lcom/mojang/serialization/Codec;)Ljava/lang/Object;
 	METHOD m_xqhpexur readSyncId ()I
 		COMMENT Identical to {@link #readVarInt()}
 	METHOD m_xzxnbdko writeMap (Ljava/util/Map;Lnet/minecraft/unmapped/C_hiksfskl;Lnet/minecraft/unmapped/C_hiksfskl;)V
