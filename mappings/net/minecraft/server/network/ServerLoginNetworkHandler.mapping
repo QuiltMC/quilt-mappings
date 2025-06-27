@@ -12,8 +12,10 @@ CLASS net/minecraft/unmapped/C_rktsiyfy net/minecraft/server/network/ServerLogin
 	COMMENT UUID conflicts), it will accept the player by sending a login success
 	COMMENT packet and then transitions the connection's packet listener to a {@link
 	COMMENT ServerPlayNetworkHandler}.
+	FIELD f_aejkpgmx profileName Ljava/lang/String;
 	FIELD f_ckpkjeza server Lnet/minecraft/server/MinecraftServer;
 	FIELD f_dosbbvgm loginTicks I
+	FIELD f_dvaeyfsc transferred Z
 	FIELD f_hypsreru nonce [B
 		COMMENT A nonce is a randomly generated id used in client and server communication to improve cryptographic security.
 	FIELD f_kankoaiw serverId Ljava/lang/String;
@@ -24,7 +26,11 @@ CLASS net/minecraft/unmapped/C_rktsiyfy net/minecraft/server/network/ServerLogin
 	FIELD f_wbgiazuc state Lnet/minecraft/unmapped/C_rktsiyfy$C_bmkviojz;
 	METHOD m_mfmegsst disconnect (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 		ARG 1 reason
+	METHOD m_obujeagt finishLogin (Lcom/mojang/authlib/GameProfile;)V
+	METHOD m_punuujdn verify (Lcom/mojang/authlib/GameProfile;)V
+	METHOD m_rfitqaym isLoggedIn (Lcom/mojang/authlib/GameProfile;)Z
 	METHOD m_roysjhxy getConnectionInfo ()Ljava/lang/String;
+	METHOD m_zyeixpac startVerification (Lcom/mojang/authlib/GameProfile;)V
 	CLASS C_bmkviojz State
 	CLASS C_rtixocex
 		METHOD m_kbrfjkkq getClientAddress ()Ljava/net/InetAddress;
