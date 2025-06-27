@@ -32,6 +32,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		COMMENT @see #getWatchedSection()
 		COMMENT @see #setWatchedSection(ChunkSectionPos)
 	FIELD f_ldmwjyxg requestedViewDistance I
+	FIELD f_lqlcdtmt commandOutput Lnet/minecraft/unmapped/C_ngpvhugm;
 	FIELD f_mfajmfxx spawnExtraParticlesOnFall Z
 	FIELD f_myvtmhev raidOmenPos Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_onahzxmm interactionManager Lnet/minecraft/unmapped/C_egnasquq;
@@ -49,6 +50,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	FIELD f_wtszcwij CREATIVE_BLOCK_INTERACTION_RANGE_MODIFIER Lnet/minecraft/unmapped/C_hdbqsqsm;
 	FIELD f_wxiufufe screenHandlerListener Lnet/minecraft/unmapped/C_juruncbf;
 	FIELD f_ygoxduda seenCredits Z
+	FIELD f_ykxzgnke particlesMode Lnet/minecraft/unmapped/C_ohzhuhsr;
 	FIELD f_ynglkbif filterText Z
 	FIELD f_zkfgljmz lastHealthScore F
 	FIELD f_zwmomqsu cameraEntity Lnet/minecraft/unmapped/C_astfners;
@@ -86,6 +88,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 0 world
 		ARG 1 pos
 	METHOD m_ctvsftwy getTextStream ()Lnet/minecraft/unmapped/C_ibcyuwyk;
+	METHOD m_dmwhgwkv sendSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
 	METHOD m_dzllwyda copyFrom (Lnet/minecraft/unmapped/C_mxrobsgg;Z)V
 		ARG 1 oldPlayer
 		ARG 2 alive
@@ -120,6 +123,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 1 overlay
 	METHOD m_itdwcvgj worldChanged (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 1 origin
+	METHOD m_jdnfjiqa createCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
 	METHOD m_jjdnefmi getLastClientMovementIntent ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_juidebgy tickFallStartPos ()V
 	METHOD m_kbplwriu calculateSpawnOffsetMultiplier (I)I
@@ -138,6 +142,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 1 pos
 		ARG 2 direction
 	METHOD m_oacdnmbp setClientSettings (Lnet/minecraft/unmapped/C_elrtgpva;)V
+		ARG 1 info
 	METHOD m_obnaqvtb getStatHandler ()Lnet/minecraft/unmapped/C_cakpthuz;
 	METHOD m_ppkclwkr isBedTooFarAway (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
@@ -147,6 +152,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_qtkqrrlq areClientChatColorsEnabled ()Z
 	METHOD m_rfxbxqjm onSpawn (Lnet/minecraft/unmapped/C_mkrkudpa;)V
 		ARG 1 screenHandler
+	METHOD m_rtkbvrqw createClientInfo ()Lnet/minecraft/unmapped/C_elrtgpva;
 	METHOD m_rxryenyl isBedTooFarAway (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 1 pos
 		ARG 2 direction
@@ -175,6 +181,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_wujubsor createCommonPlayerSpawnInfo (Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_zsjubkei;
 	METHOD m_xkkpozuc changeGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)Z
 		ARG 1 gameMode
+	METHOD m_xxjfeuye getCommandOutput ()Lnet/minecraft/unmapped/C_ngpvhugm;
 	METHOD m_ygkpsrag getRecipeBook ()Lnet/minecraft/unmapped/C_ypnziuiu;
 	METHOD m_yhuimfko gameModeFromNbt (Lnet/minecraft/unmapped/C_djkzhngg;Ljava/lang/String;)Lnet/minecraft/unmapped/C_lghcpyvl;
 		ARG 1 key
