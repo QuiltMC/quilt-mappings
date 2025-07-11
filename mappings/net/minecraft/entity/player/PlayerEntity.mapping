@@ -84,7 +84,6 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 exhaustion
 	METHOD m_cyztjdcs getSleepTimer ()I
 	METHOD m_dbtftdzu trySleep (Lnet/minecraft/unmapped/C_hynzadkk;)Lcom/mojang/datafixers/util/Either;
-		ARG 1 pos
 	METHOD m_dbuvscbh openStructureBlockScreen (Lnet/minecraft/unmapped/C_bfrzytnu;)V
 		ARG 1 structureBlock
 	METHOD m_dhkbsjyf getEnchantedDamage (Lnet/minecraft/unmapped/C_astfners;FLnet/minecraft/unmapped/C_sbxfkpyv;)F
@@ -126,7 +125,6 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 2 actionBar
 	METHOD m_gvkpkpeh sendAbilitiesUpdate ()V
 	METHOD m_hiqfmqtd collideWithEntity (Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 1 entity
 	METHOD m_hmruvmge canDropItems ()Z
 	METHOD m_hsjkkbpv createCooldownManager ()Lnet/minecraft/unmapped/C_kqeizhow;
 	METHOD m_hvzvdxyh canModifyBlocks ()Z
@@ -182,8 +180,6 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 stat
 	METHOD m_pftgkyaq getInventory ()Lnet/minecraft/unmapped/C_sxzqocrm;
 	METHOD m_pgilclev interact (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
-		ARG 1 entity
-		ARG 2 hand
 	METHOD m_phtfwlwf getAttackCooldownProgressPerTick ()F
 	METHOD m_pjxfwdrg useBook (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_laxmzoqs;)V
 		COMMENT Called when the player uses (defaults to right click) a writable or written
@@ -211,7 +207,6 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		ARG 1 score
 	METHOD m_qdltphmv getBlockInteractionRange ()D
 	METHOD m_qesbiptv doesNotSuffocate (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 1 pos
 	METHOD m_qkqqfigv getLastDeathPos ()Ljava/util/Optional;
 	METHOD m_qtitwlfy openHandledScreen (Lnet/minecraft/unmapped/C_soxpxdhu;)Ljava/util/OptionalInt;
 		ARG 1 factory
@@ -227,7 +222,6 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_sfqjvugq canConsume (Z)Z
 		ARG 1 ignoreHunger
 	METHOD m_sfwtnckg shouldDamagePlayer (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
-		ARG 1 player
 	METHOD m_sirejmwm getScoreboard ()Lnet/minecraft/unmapped/C_ymwyplge;
 	METHOD m_sjvgkdvm updateShoulderEntity (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 entityNbt
@@ -247,15 +241,11 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_ueqkhipu setShoulderEntityLeft (Lnet/minecraft/unmapped/C_hhlwcnih;)V
 		ARG 1 entityNbt
 	METHOD m_uetxsnjs isBlockBreakingRestricted (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_lghcpyvl;)Z
-		ARG 1 world
-		ARG 2 pos
 		ARG 3 gameMode
 	METHOD m_veqhacwa updateWaterSubmersionState ()Z
 	METHOD m_vgsdyrnl clearExplosionData ()V
 	METHOD m_vtwmzrot canPlaceOn (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 pos
 		ARG 2 facing
-		ARG 3 stack
 	METHOD m_wbynhygu hasSpaceBelow (DDD)Z
 		ARG 1 xOffset
 		ARG 3 zOffset
@@ -267,7 +257,6 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 		COMMENT it returns {@code true}.
 		COMMENT
 		COMMENT @see net.minecraft.item.Item#isCorrectForDrops(ItemStack, BlockState)
-		ARG 1 state
 	METHOD m_wkrnfehf addExperience (I)V
 		ARG 1 experience
 	METHOD m_wlnzbbpj canFoodHeal ()Z
@@ -288,12 +277,10 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	METHOD m_yhpkrzzv openCommandBlockScreen (Lnet/minecraft/unmapped/C_qpgfeghp;)V
 		ARG 1 commandBlock
 	METHOD m_yiuyfgxw giveItemStack (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 stack
 	METHOD m_yljkgzmc getEnchantmentTableSeed ()I
 	METHOD m_yoqvnsaz addEnchantedHitParticles (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 target
 	METHOD m_ypptjcsn canInteractWithEntity (Lnet/minecraft/unmapped/C_astfners;D)Z
-		ARG 1 entity
 	METHOD m_yscaqmsb addCritParticles (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 target
 	METHOD m_yyygctyr triggerRecipeCraftedCriteria (Lnet/minecraft/unmapped/C_dscbrwbj;Ljava/util/List;)V
@@ -306,5 +293,4 @@ CLASS net/minecraft/unmapped/C_jzrpycqo net/minecraft/entity/player/PlayerEntity
 	CLASS C_wdhcnmsn SleepFailureReason
 		FIELD f_xgwynlaa text Lnet/minecraft/unmapped/C_rdaqiwdt;
 		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_rdaqiwdt;)V
-			ARG 3 text
 		METHOD m_ydlreieg toText ()Lnet/minecraft/unmapped/C_rdaqiwdt;

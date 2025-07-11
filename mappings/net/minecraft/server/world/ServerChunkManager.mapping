@@ -4,7 +4,6 @@ CLASS net/minecraft/unmapped/C_ebcmvjwj net/minecraft/server/world/ServerChunkMa
 	FIELD f_hmdmznvi spawnAnimals Z
 	FIELD f_ihdjlbqp persistentStateManager Lnet/minecraft/unmapped/C_hsdphpvz;
 	FIELD f_ixxxjgez mainThreadExecutor Lnet/minecraft/unmapped/C_ebcmvjwj$C_poschgqw;
-	FIELD f_obcjuaxe world Lnet/minecraft/unmapped/C_bdwnwhiu;
 	FIELD f_ooqjqvki spawnInfo Lnet/minecraft/unmapped/C_rvfygodd$C_tsgfqxij;
 	FIELD f_qtzeurch serverThread Ljava/lang/Thread;
 	FIELD f_sxcfajbf delegate Lnet/minecraft/unmapped/C_gxrpzacc;
@@ -15,9 +14,7 @@ CLASS net/minecraft/unmapped/C_ebcmvjwj net/minecraft/server/world/ServerChunkMa
 	FIELD f_znyjhajj lastMobSpawningTime J
 	FIELD f_zqqnrbsq chunkStatusCache [Lnet/minecraft/unmapped/C_kogtzhzt;
 	METHOD <init> (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_zxhjfyir;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_kgfalbim;IIZLnet/minecraft/unmapped/C_jnfclwgd;Lnet/minecraft/unmapped/C_gtndfkbe;Ljava/util/function/Supplier;)V
-		ARG 1 world
 		ARG 2 saveStorageSession
-		ARG 3 dataFixer
 		ARG 4 structureTemplateManager
 		ARG 5 executor
 		ARG 6 chunkGenerator
@@ -32,7 +29,6 @@ CLASS net/minecraft/unmapped/C_ebcmvjwj net/minecraft/server/world/ServerChunkMa
 	METHOD m_aspyldja applyViewDistance (I)V
 		ARG 1 watchDistance
 	METHOD m_dbjrpnkk loadEntity (Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 1 entity
 	METHOD m_dyvlbydm save (Z)V
 		ARG 1 flush
 	METHOD m_epauxdtp isTickingFutureReady (J)Z
@@ -57,13 +53,10 @@ CLASS net/minecraft/unmapped/C_ebcmvjwj net/minecraft/server/world/ServerChunkMa
 		ARG 1 pos
 		ARG 3 chunkConsumer
 	METHOD m_kyogxysq markForUpdate (Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 pos
 	METHOD m_kzjxxowq getPointOfInterestStorage ()Lnet/minecraft/unmapped/C_uegwgivt;
 	METHOD m_lfwksham getChunkLoadingDebugInfo (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/lang/String;
 		ARG 1 pos
 	METHOD m_mdptitzk sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-		ARG 1 entity
-		ARG 2 packet
 	METHOD m_nymxeyxj tick ()Z
 	METHOD m_oxbkyszn updatePosition (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		COMMENT Updates the chunk section position of the {@code player}. This can either be a
@@ -71,7 +64,6 @@ CLASS net/minecraft/unmapped/C_ebcmvjwj net/minecraft/server/world/ServerChunkMa
 		COMMENT
 		COMMENT <p>This updates the section position player's client is currently watching and
 		COMMENT the player's position in its entity tracker.
-		ARG 1 player
 	METHOD m_pbsddogt tickChunks ()V
 	METHOD m_pcqpeovk getSpawnInfo ()Lnet/minecraft/unmapped/C_rvfygodd$C_tsgfqxij;
 	METHOD m_pqlghyyn getChunkGenerator ()Lnet/minecraft/unmapped/C_kgfalbim;
@@ -83,14 +75,9 @@ CLASS net/minecraft/unmapped/C_ebcmvjwj net/minecraft/server/world/ServerChunkMa
 		ARG 1 simulationDistance
 	METHOD m_xxonvyvn getChunkNbtScanner ()Lnet/minecraft/unmapped/C_mxmjmfvn;
 	METHOD m_ygtjllyp sendToNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-		ARG 1 entity
-		ARG 2 packet
 	METHOD m_yvjnruii putInCache (JLnet/minecraft/unmapped/C_lwzmmmqr;Lnet/minecraft/unmapped/C_kogtzhzt;)V
 		ARG 1 pos
-		ARG 3 chunk
 		ARG 4 status
 	METHOD m_yxbwpive unloadEntity (Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 1 entity
 	CLASS C_poschgqw MainThreadExecutor
 		METHOD <init> (Lnet/minecraft/unmapped/C_ebcmvjwj;Lnet/minecraft/unmapped/C_cdctfzbn;)V
-			ARG 2 world

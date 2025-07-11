@@ -7,15 +7,12 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 	COMMENT obtained from other places as map keys, etc., you should call {@link
 	COMMENT #toImmutable()} to obtain an immutable block position.
 	FIELD f_bxvvupqt BITS_X J
-	FIELD f_hsekmekl LOGGER Lorg/slf4j/Logger;
 	FIELD f_kjunxshk BITS_Y J
 	FIELD f_ktlgsitz SIZE_BITS_Y I
 	FIELD f_lmtvgjwi MAX_XZ I
-	FIELD f_mcthbtbh PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_rkdfzepm BITS_Z J
 	FIELD f_tkvjsduy SIZE_BITS_XZ I
 	FIELD f_tudfxhtp BIT_SHIFT_Z I
-	FIELD f_tuydkllc CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_tziahdbe ORIGIN Lnet/minecraft/unmapped/C_hynzadkk;
 		COMMENT The block position at which x, y, and z are all zero.
 	FIELD f_uqzvztbx BIT_SHIFT_Y I
@@ -42,7 +39,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		COMMENT
 		COMMENT <p>The iterator yields positions in no specific order. The same position
 		COMMENT may be returned multiple times by the iterator.
-		ARG 0 random
 		ARG 1 count
 			COMMENT the number of positions to iterate
 		ARG 2 minX
@@ -78,7 +74,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		COMMENT
 		COMMENT <p>The iterator yields positions in no specific order. The same position
 		COMMENT may be returned multiple times by the iterator.
-		ARG 0 random
 		ARG 1 count
 			COMMENT the number of positions to iterate
 		ARG 2 around
@@ -140,7 +135,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		ARG 1 y
 	METHOD m_qsregrem offset (JLnet/minecraft/unmapped/C_xpuuihxf;)J
 		ARG 0 value
-		ARG 2 direction
 	METHOD m_qwyfxequ iterateOutwards (Lnet/minecraft/unmapped/C_hynzadkk;III)Ljava/lang/Iterable;
 		COMMENT Iterates block positions around the {@code center}. The iteration order
 		COMMENT is mainly based on the manhattan distance of the position from the
@@ -171,7 +165,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		ARG 1 rotation
 	METHOD m_rtputfdg getBottomCenter ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_tqivdexo (Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/stream/IntStream;
-		ARG 0 pos
 	METHOD m_uxberzqa stream (Lnet/minecraft/unmapped/C_hbcjzgoe;)Ljava/util/stream/Stream;
 		ARG 0 box
 	METHOD m_uyfzkufr create (DDD)Lnet/minecraft/unmapped/C_hynzadkk;
@@ -193,7 +186,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 	METHOD m_xeifthwj ([I)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 0 values
 	METHOD m_yepfwcyc findClosest (Lnet/minecraft/unmapped/C_hynzadkk;IILjava/util/function/Predicate;)Ljava/util/Optional;
-		ARG 0 pos
 		ARG 1 horizontalRange
 		ARG 2 verticalRange
 		ARG 3 condition
@@ -231,7 +223,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 		METHOD m_klpxfzmm move (Lnet/minecraft/unmapped/C_xpuuihxf;I)Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 			COMMENT Moves this mutable block position by the given distance in the given
 			COMMENT direction.
-			ARG 1 direction
 			ARG 2 distance
 		METHOD m_nbguwfxm move (III)Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 			COMMENT Moves the mutable block position by the delta x, y, and z provided.
@@ -240,7 +231,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 			ARG 3 dz
 		METHOD m_pxnmleol move (Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 			COMMENT Moves this mutable block position by 1 block in the given direction.
-			ARG 1 direction
 		METHOD m_rnnkiykv set (Lnet/minecraft/unmapped/C_ceivtqhh;Lnet/minecraft/unmapped/C_ceivtqhh;)Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 			COMMENT Sets this mutable block position to the sum of the given vectors.
 			ARG 1 vec1
@@ -261,7 +251,6 @@ CLASS net/minecraft/unmapped/C_hynzadkk net/minecraft/util/math/BlockPos
 			COMMENT Sets this mutable block position to the offset position of the given
 			COMMENT pos by the given direction.
 			ARG 1 pos
-			ARG 2 direction
 		METHOD m_wyccekkg set (Lnet/minecraft/unmapped/C_ceivtqhh;III)Lnet/minecraft/unmapped/C_hynzadkk$C_egqitdjk;
 			COMMENT Sets this mutable block position to the sum of the given position and the
 			COMMENT given x, y, and z.

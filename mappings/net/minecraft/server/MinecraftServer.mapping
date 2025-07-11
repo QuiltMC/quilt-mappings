@@ -43,7 +43,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_kbmnbjqh workerExecutor Ljava/util/concurrent/Executor;
 	FIELD f_kcxvwygd dataCommandStorage Lnet/minecraft/unmapped/C_hrsnudrk;
 	FIELD f_kjvvxrfe MAX_WORLD_BORDER_RADIUS I
-	FIELD f_kobephmh random Lnet/minecraft/unmapped/C_rlomrsco;
 	FIELD f_kprntweg AVERAGE_TICK_TIME_SMOOTHING F
 	FIELD f_lcymwmat needsRecorderSetup Z
 	FIELD f_lhjjpisf saveProperties Lnet/minecraft/unmapped/C_jkevluio;
@@ -67,7 +66,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_rdiwmllx debugStart Lnet/minecraft/server/MinecraftServer$C_rfqdsgps;
 	FIELD f_rveeicnt recorderDumpConsumer Ljava/util/function/Consumer;
 	FIELD f_sdzgycyv enforceWhitelist Z
-	FIELD f_tcqyqsco LOGGER Lorg/slf4j/Logger;
 	FIELD f_tlfkjive worlds Ljava/util/Map;
 	FIELD f_towfkfih favicon Lnet/minecraft/unmapped/C_bwttende$C_cgekazzo;
 	FIELD f_tvqgbnok ticks I
@@ -83,18 +81,10 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_yfosyphy averageTickTimeMillis F
 	FIELD f_ypvxjvas layeredRegistryManager Lnet/minecraft/unmapped/C_bcpxdrik;
 	FIELD f_yqwhnmdp demo Z
-	FIELD f_zehgtxec dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_zknekmqa services Lnet/minecraft/unmapped/C_vmxvaoqe;
 	FIELD f_zsibtikt playerIdleTimeout I
 	METHOD <init> (Ljava/lang/Thread;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_vmxvaoqe;Lnet/minecraft/unmapped/C_lausdaxu;)V
-		ARG 1 serverThread
-		ARG 2 session
-		ARG 3 dataPackManager
 		ARG 4 worldStem
-		ARG 5 proxy
-		ARG 6 dataFixer
-		ARG 7 services
-		ARG 8 worldGenerationProgressListenerFactory
 	METHOD m_aazpmrxf getServerPort ()I
 	METHOD m_abjphurm getSpawnProtectionRadius ()I
 	METHOD m_abpffcdv setFlightEnabled (Z)V
@@ -211,7 +201,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_ihpdtrms setDifficultyLocked (Z)V
 		ARG 1 locked
 	METHOD m_iiseoobd kickNonWhitelistedPlayers (Lnet/minecraft/unmapped/C_pennblrk;)V
-		ARG 1 source
 	METHOD m_ioqdmdme createSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
 	METHOD m_iqernmfn requireResourcePack ()Z
 	METHOD m_ixudjtvq setDefaultGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)V
@@ -225,7 +214,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 file
 	METHOD m_klzymbhx getRunDirectory ()Ljava/nio/file/Path;
 	METHOD m_kpuwgkkc createFilterer (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_ibcyuwyk;
-		ARG 1 player
 	METHOD m_ktxbigdk stop (Z)V
 		ARG 1 wait
 	METHOD m_kxzipmze getCommandManager ()Lnet/minecraft/unmapped/C_rieemtgi;
@@ -235,7 +223,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_lgofwaos setPlayerManager (Lnet/minecraft/unmapped/C_digmgtxw;)V
 		ARG 1 playerManager
 	METHOD m_lhntuhvs getSpawnRadius (Lnet/minecraft/unmapped/C_bdwnwhiu;)I
-		ARG 1 world
 	METHOD m_lprqwxbm setServerId (Ljava/lang/String;)V
 		ARG 1 serverId
 	METHOD m_magpcgdt getWorldRegistryKeys ()Ljava/util/Set;
@@ -268,7 +255,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_ocdvptth getTimeReference ()J
 	METHOD m_odqgvsye isHardcore ()Z
 	METHOD m_ogbnhrls setupSpawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_gjwbvqct;ZZ)V
-		ARG 0 world
 		ARG 1 worldProperties
 		ARG 2 bonusChest
 		ARG 3 debugWorld
@@ -336,7 +322,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT
 		COMMENT @return true if the Minecraft server was successfully setup, false if the server failed to be setup.
 	METHOD m_thodqaod getPermissionLevel (Lcom/mojang/authlib/GameProfile;)I
-		ARG 1 profile
 	METHOD m_tnfyjhlb loadDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;ZZ)Lnet/minecraft/unmapped/C_yknpgzdr;
 		ARG 0 resourcePackManager
 		ARG 2 safeMode
@@ -346,16 +331,12 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_udgarlbd getAdvancementLoader ()Lnet/minecraft/unmapped/C_fktoyupt;
 	METHOD m_ugiwpfro isSaving ()Z
 	METHOD m_ujrjhmlu isSpawnProtected (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
-		ARG 1 world
-		ARG 2 pos
-		ARG 3 player
 	METHOD m_ukyqvfzq loadWorld ()V
 	METHOD m_ultpqydc getWorld (Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_bdwnwhiu;
 		ARG 1 key
 	METHOD m_uoetguec getCommandFunctionManager ()Lnet/minecraft/unmapped/C_nbwcoknw;
 	METHOD m_urgvyfxa getRateLimit ()I
 	METHOD m_vdtdrqyt sendDifficulty (Lnet/minecraft/unmapped/C_mxrobsgg;)V
-		ARG 1 player
 	METHOD m_veqmzcfr hasGui ()Z
 	METHOD m_vfwcplyx shouldEnforceSecureProfile ()Z
 	METHOD m_vnajegce getGameProfileRepo ()Lcom/mojang/authlib/GameProfileRepository;
@@ -403,7 +384,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT A dedicated Minecraft server only accepts remote connections.
 	METHOD m_xturscpm getPlayerNames ()[Ljava/lang/String;
 	METHOD m_xvswnjyk getPlayerInteractionManager (Lnet/minecraft/unmapped/C_mxrobsgg;)Lnet/minecraft/unmapped/C_egnasquq;
-		ARG 1 player
 	METHOD m_xwbfzczq addSystemDetails (Lnet/minecraft/unmapped/C_fprbxnfr;)Lnet/minecraft/unmapped/C_fprbxnfr;
 		ARG 1 details
 	METHOD m_ykrfoxdw getFile (Ljava/lang/String;)Ljava/nio/file/Path;
@@ -426,31 +406,15 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_zvxfodpo runOneTask ()Z
 	CLASS C_eaujwdwn ResourceManagerHolder
 		FIELD f_nnwzxwwj resources Lnet/minecraft/unmapped/C_migzkpst;
-		FIELD f_scqzsofq resourceManager Lnet/minecraft/unmapped/C_carvbxzj;
 		METHOD <init> (Lnet/minecraft/unmapped/C_carvbxzj;Lnet/minecraft/unmapped/C_migzkpst;)V
-			ARG 1 resourceManager
-			ARG 2 resources
 		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
-		METHOD m_eleegnzj resourceManager ()Lnet/minecraft/unmapped/C_carvbxzj;
 		METHOD m_qjfjejzw resources ()Lnet/minecraft/unmapped/C_migzkpst;
 	CLASS C_qhjevvjt ServerResourcePackProperties
-		FIELD f_jbhmjxid prompt Lnet/minecraft/unmapped/C_rdaqiwdt;
-		FIELD f_kcqlqhpu url Ljava/lang/String;
-		FIELD f_qgrulebc hash Ljava/lang/String;
-		FIELD f_zgeqzvlo isRequired Z
 		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
-		METHOD m_ekewhndq prompt ()Lnet/minecraft/unmapped/C_rdaqiwdt;
-		METHOD m_lejoovgu hash ()Ljava/lang/String;
-		METHOD m_ulllxjgk isRequired ()Z
-		METHOD m_uohobxmw url ()Ljava/lang/String;
 	CLASS C_rfqdsgps DebugStart
 		FIELD f_ggyrakcw time J
 		FIELD f_vheedmcz tick I
 		METHOD <init> (JI)V
-			ARG 1 time
-			ARG 3 tick
 		METHOD m_mcjydrzb end (JI)Lnet/minecraft/unmapped/C_dzczqjri;
 			ARG 1 endTime
 			ARG 3 endTick

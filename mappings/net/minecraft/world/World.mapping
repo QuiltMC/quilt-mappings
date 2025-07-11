@@ -8,7 +8,6 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	FIELD f_dwvdsrbg dimension Lnet/minecraft/unmapped/C_cjzoxshv;
 	FIELD f_dxefaeyr blockEntityTickers Ljava/util/List;
 	FIELD f_flkepbnh biomeAccess Lnet/minecraft/unmapped/C_txmmiamu;
-	FIELD f_frtivcct registryManager Lnet/minecraft/unmapped/C_wqxmvzdq;
 	FIELD f_fzftbvmv MAX_UPDATE_DEPTH I
 	FIELD f_hfugkrtt thunderGradient F
 	FIELD f_ifvsmesg iteratingTickingBlockEntities Z
@@ -18,7 +17,6 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	FIELD f_khmymmmr thread Ljava/lang/Thread;
 	FIELD f_khwqfnyv TICKS_PER_DAY I
 	FIELD f_kzmsvqir MAX_BRIGHTNESS I
-	FIELD f_lmvypcus CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_ltnvvkbh MIN_Y I
 	FIELD f_nbddkahl neighborUpdater Lnet/minecraft/unmapped/C_rwmwglbe;
 	FIELD f_oturqgfy tickOrder J
@@ -40,34 +38,25 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 0 y
 	METHOD m_aoyyyffm getDimensionHolder ()Lnet/minecraft/unmapped/C_cjzoxshv;
 	METHOD m_cftbxfln isDirectionSolid (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
-		ARG 1 pos
-		ARG 2 entity
-		ARG 3 direction
 	METHOD m_cgohzhbh getFuelTimes ()Lnet/minecraft/unmapped/C_smdnyqwx;
 	METHOD m_cnpexxbj setLightningTicksLeft (I)V
 		ARG 1 lightningTicksLeft
 	METHOD m_cpgionsz getRegistryKey ()Lnet/minecraft/unmapped/C_xhhleach;
 	METHOD m_cwgxxeck hasRain (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 1 pos
 	METHOD m_cylusepa markDirty (Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 pos
 	METHOD m_cypmckfu getSpawnAngle ()F
 	METHOD m_deqhnown syncGlobalEvent (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 		ARG 1 eventId
-		ARG 2 pos
 		ARG 3 data
 	METHOD m_dmpgcjnl updateListeners (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;I)V
 	METHOD m_dpwyfaqh (Ljava/util/function/Predicate;Ljava/util/List;ILnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_astfners;)Lnet/minecraft/unmapped/C_gibrwunu$C_ulnnautc;
-		ARG 4 entity
 	METHOD m_dttcpcvt getSpawnPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_efjguyjg setRainGradient (F)V
 		ARG 1 rainGradient
 	METHOD m_eicusrke scheduleBlockRerenderIfNeeded (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)V
-		ARG 1 pos
 		ARG 2 old
 		ARG 3 updated
 	METHOD m_ejbgumac shouldUpdatePostDeath (Lnet/minecraft/unmapped/C_astfners;)Z
-		ARG 1 entity
 	METHOD m_eoeuakuf isSavingDisabled ()Z
 	METHOD m_fammcwty getRandomPosInChunk (IIII)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 x
@@ -78,20 +67,15 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_fojiqtxv spawnExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;DDDFZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_nqucohct;Lnet/minecraft/unmapped/C_cjzoxshv;)V
 	METHOD m_gbuudpbq getBrewingRecipeRegistry ()Lnet/minecraft/unmapped/C_ilssplzn;
 	METHOD m_glgjrdin shouldTickBlocksAt (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 1 pos
 	METHOD m_hgbtqxau spawnExplosion (Lnet/minecraft/unmapped/C_astfners;DDDFZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)V
 	METHOD m_hpmlbpqg spawnExplosion (Lnet/minecraft/unmapped/C_astfners;DDDFLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)V
 	METHOD m_hqnvlben isThundering ()Z
 	METHOD m_hydwjjyu spawnExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;Lnet/minecraft/unmapped/C_vgpupfxx;FZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)V
 	METHOD m_idhpmqoa tickBlockEntities ()V
 	METHOD m_iesdkxpk removeBlockEntity (Lnet/minecraft/unmapped/C_hynzadkk;)V
-		ARG 1 pos
 	METHOD m_iktqnbus sendPacket (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-		ARG 1 packet
 	METHOD m_ipzhyyma initWeatherGradients ()V
 	METHOD m_izxuuard addSyncedBlockEvent (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;II)V
-		ARG 1 pos
-		ARG 2 block
 		ARG 3 type
 		ARG 4 data
 	METHOD m_jmpgqbuj calculateAmbientDarkness ()V
@@ -106,18 +90,13 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 11 delay
 	METHOD m_kvxjplzd setBlockBreakingInfo (ILnet/minecraft/unmapped/C_hynzadkk;I)V
 	METHOD m_leykbaxa setBlockState (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
-		ARG 1 pos
-		ARG 2 state
 	METHOD m_ljwwyazj addBlockBreakParticles (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
-		ARG 1 pos
-		ARG 2 state
 	METHOD m_lrfooggi setMobSpawnOptions (Z)V
 		ARG 1 spawnMonsters
 	METHOD m_mlvimbbc getRecipeManager ()Lnet/minecraft/unmapped/C_wzaefoxm;
 	METHOD m_mmqmrwak asString ()Ljava/lang/String;
 	METHOD m_mnoqfxga isRaining ()Z
 	METHOD m_mtjavzfl canPlayerModifyAt (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 2 pos
 	METHOD m_mvyixtge setThunderGradient (F)V
 		ARG 1 thunderGradient
 	METHOD m_nycdauex isDebugWorld ()Z
@@ -126,7 +105,6 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		COMMENT Debug worlds are not modifiable and are typically meant for development and debug use only.
 		COMMENT See <a href="https://minecraft.wiki/w/Debug_mode">the Minecraft wiki</a> as well.
 	METHOD m_oazwjzyp isInBuildLimit (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 1 pos
 	METHOD m_odduxhhc getEntityLookup ()Lnet/minecraft/unmapped/C_mmgrdxia;
 	METHOD m_odeocggc getScoreboard ()Lnet/minecraft/unmapped/C_ymwyplge;
 	METHOD m_offwleab getSkyAngleRadians (F)F
@@ -141,17 +119,11 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 9 velocityY
 		ARG 11 velocityZ
 	METHOD m_ouvbezuy canSetBlock (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 1 pos
 	METHOD m_pjrzcnon spawnExplosion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;Lnet/minecraft/unmapped/C_dmexlawk;DDDFZLnet/minecraft/unmapped/C_cdctfzbn$C_dlzvrbnu;)V
 	METHOD m_plfbuzkn isValidHorizontally (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 0 pos
 	METHOD m_pzvdwzsl updateNeighborsExcept (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;Lnet/minecraft/unmapped/C_xpuuihxf;Lnet/minecraft/unmapped/C_ctatbkvy;)V
-		ARG 1 pos
 		ARG 2 sourceBlock
-		ARG 3 direction
 	METHOD m_qsuwatgh updateComparators (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_mmxmpdoq;)V
-		ARG 1 pos
-		ARG 2 block
 	METHOD m_qziyykad getDamageSources ()Lnet/minecraft/unmapped/C_lddxcbik;
 	METHOD m_rojxhffu addImportantParticle (Lnet/minecraft/unmapped/C_nqucohct;ZDDDDDD)V
 		ARG 1 parameters
@@ -163,10 +135,8 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 11 velocityY
 		ARG 13 velocityZ
 	METHOD m_rsnbcuug getWorldChunk (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hrdsvlkq;
-		ARG 1 pos
 	METHOD m_rzbihfgi isNaturalNight ()Z
 	METHOD m_shcorzhl broadcastDamageEvent (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;)V
-		ARG 1 entity
 		ARG 2 damageSource
 	METHOD m_sskjdjng playSound (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FFZ)V
 		ARG 2 sound
@@ -175,19 +145,15 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 5 pitch
 		ARG 6 delay
 	METHOD m_thuraolg isTopSolid (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_astfners;)Z
-		ARG 1 pos
-		ARG 2 entity
 	METHOD m_ufcotfaw getTickManager ()Lnet/minecraft/unmapped/C_phmnykiz;
 	METHOD m_uhrnzysl tickEntity (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 tickConsumer
-		ARG 2 entity
 	METHOD m_wapcarkl collectEntities (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Predicate;Ljava/util/List;)V
 		ARG 1 filter
 		ARG 2 box
 		ARG 3 predicate
 		ARG 4 collection
 	METHOD m_wziyyyom addBlockEntity (Lnet/minecraft/unmapped/C_kvegafmh;)V
-		ARG 1 blockEntity
 	METHOD m_xggntttw collectEntities (Lnet/minecraft/unmapped/C_ocpldaah;Lnet/minecraft/unmapped/C_hbcjzgoe;Ljava/util/function/Predicate;Ljava/util/List;I)V
 		ARG 1 filter
 		ARG 2 box
@@ -200,9 +166,7 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 	METHOD m_yjpgenqy shouldTickBlocksInChunk (J)Z
 		ARG 1 chunkPos
 	METHOD m_ysqwrcop isValid (Lnet/minecraft/unmapped/C_hynzadkk;)Z
-		ARG 0 pos
 	METHOD m_zbbtlkrj playSoundFromEntity (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_avavozay;Lnet/minecraft/unmapped/C_pqzizukq;FF)V
-		ARG 1 entity
 		ARG 2 sound
 		ARG 3 category
 		ARG 4 volume
@@ -218,7 +182,6 @@ CLASS net/minecraft/unmapped/C_cdctfzbn net/minecraft/world/World
 		ARG 10 velocityY
 		ARG 12 velocityZ
 	METHOD m_zlmwnihs sendEntityStatus (Lnet/minecraft/unmapped/C_astfners;B)V
-		ARG 1 entity
 		ARG 2 status
 	CLASS C_dlzvrbnu ExplosionSourceType
 		FIELD f_yaqxvfrt name Ljava/lang/String;

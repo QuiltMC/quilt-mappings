@@ -12,7 +12,6 @@ CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathAr
 	FIELD f_ygjsuegf NOTHING_FOUND_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	FIELD f_zfdfgeqs INVALID_PATH_NODE_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	METHOD m_hruawrtu parseNode (Lcom/mojang/brigadier/StringReader;Z)Lnet/minecraft/unmapped/C_xondkbcs$C_blxxczzh;
-		ARG 0 reader
 		ARG 1 root
 	METHOD m_lywsfpat nbtPath ()Lnet/minecraft/unmapped/C_xondkbcs;
 	METHOD m_muwfcwxe (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
@@ -20,11 +19,9 @@ CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathAr
 	METHOD m_poptnltc (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 index
 	METHOD m_qfioycxa readName (Lcom/mojang/brigadier/StringReader;)Ljava/lang/String;
-		ARG 0 reader
 	METHOD m_qrbitsnq isNameCharacter (C)Z
 		ARG 0 c
 	METHOD m_stggwydj readCompoundChildNode (Lcom/mojang/brigadier/StringReader;Ljava/lang/String;)Lnet/minecraft/unmapped/C_xondkbcs$C_blxxczzh;
-		ARG 0 reader
 		ARG 1 name
 	METHOD m_tnmfping (Lnet/minecraft/unmapped/C_hhlwcnih;Lnet/minecraft/unmapped/C_oivssbvb;)Z
 		ARG 1 nbt
@@ -33,10 +30,8 @@ CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathAr
 	METHOD m_wbdwwacb getPredicate (Lnet/minecraft/unmapped/C_hhlwcnih;)Ljava/util/function/Predicate;
 		ARG 0 filter
 	METHOD m_yeakpxtc getNbtPath (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Lnet/minecraft/unmapped/C_xondkbcs$C_rgpfrkey;
-		ARG 0 context
 		ARG 1 name
 	METHOD parse (Lcom/mojang/brigadier/StringReader;)Ljava/lang/Object;
-		ARG 1 reader
 	CLASS C_abcnqxqb AllListElementNode
 		FIELD f_lchgcunm INSTANCE Lnet/minecraft/unmapped/C_xondkbcs$C_abcnqxqb;
 	CLASS C_blxxczzh PathNode
@@ -60,32 +55,24 @@ CLASS net/minecraft/unmapped/C_xondkbcs net/minecraft/command/argument/NbtPathAr
 		FIELD f_fseurwjw filter Lnet/minecraft/unmapped/C_hhlwcnih;
 		FIELD f_lahdkwxi predicate Ljava/util/function/Predicate;
 		METHOD <init> (Lnet/minecraft/unmapped/C_hhlwcnih;)V
-			ARG 1 filter
 		METHOD m_fpwrdycp (Ljava/util/List;Lorg/apache/commons/lang3/mutable/MutableBoolean;Lnet/minecraft/unmapped/C_oivssbvb;)V
 			ARG 2 _nbt
 	CLASS C_bynmloqe IndexedListElementNode
 		FIELD f_wxzimbgr index I
 		METHOD <init> (I)V
-			ARG 1 index
 	CLASS C_gipmbcio FilteredNamedNode
 		FIELD f_dtgglerx filter Lnet/minecraft/unmapped/C_hhlwcnih;
 		FIELD f_exwnuwoi name Ljava/lang/String;
 		FIELD f_tbptvmwz predicate Ljava/util/function/Predicate;
 		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_hhlwcnih;)V
-			ARG 1 name
-			ARG 2 filter
 	CLASS C_jyuceqqr NamedNode
 		FIELD f_fordzlbg name Ljava/lang/String;
 		METHOD <init> (Ljava/lang/String;)V
-			ARG 1 name
 	CLASS C_rgpfrkey NbtPath
 		FIELD f_aogbdohi nodeEndIndices Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 		FIELD f_tudauuyt nodes [Lnet/minecraft/unmapped/C_xondkbcs$C_blxxczzh;
 		FIELD f_umgfvbxl string Ljava/lang/String;
 		METHOD <init> (Ljava/lang/String;[Lnet/minecraft/unmapped/C_xondkbcs$C_blxxczzh;Lit/unimi/dsi/fastutil/objects/Object2IntMap;)V
-			ARG 1 string
-			ARG 2 nodes
-			ARG 3 nodeEndIndices
 		METHOD m_btosoubp createNothingFoundException (Lnet/minecraft/unmapped/C_xondkbcs$C_blxxczzh;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
 			ARG 1 node
 		METHOD m_dhocbhvt get (Lnet/minecraft/unmapped/C_oivssbvb;)Ljava/util/List;

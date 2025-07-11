@@ -10,7 +10,6 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 	FIELD f_whpewcll MASK B
 	FIELD f_wtdnbsoj CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD <init> (Lnet/minecraft/unmapped/C_idfydwco;)V
-		ARG 1 buf
 	METHOD m_dcigsfhx validate (Ljava/util/List;Ljava/util/function/BiPredicate;)V
 		ARG 0 commandNodeData
 		ARG 1 validator
@@ -19,7 +18,6 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 	METHOD m_hbnsdhxt read (Lnet/minecraft/unmapped/C_idfydwco;B)Lnet/minecraft/unmapped/C_vzeoulff$C_oiqqdfah;
 		ARG 1 flags
 	METHOD m_jebnlxkj readCommandNode (Lnet/minecraft/unmapped/C_idfydwco;)Lnet/minecraft/unmapped/C_vzeoulff$C_irxeyhvf;
-		ARG 0 buf
 	METHOD m_kyfvkrqc getCommandTree (Lnet/minecraft/unmapped/C_bprdujxm;Lnet/minecraft/unmapped/C_vzeoulff$C_wtatsrvq;)Lcom/mojang/brigadier/tree/RootCommandNode;
 		ARG 1 context
 	METHOD m_mzuqkiag (Ljava/util/function/BiPredicate;Ljava/util/List;Lit/unimi/dsi/fastutil/ints/IntSet;I)Z
@@ -37,13 +35,8 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 	CLASS C_irxeyhvf CommandNodeData
 		FIELD f_bnaktlld node Lnet/minecraft/unmapped/C_vzeoulff$C_oiqqdfah;
 		FIELD f_eckdjrcz childNodeIndices [I
-		FIELD f_rzrsdnmn flags I
 		FIELD f_xofhrgkq redirectNodeIndex I
 		METHOD <init> (Lnet/minecraft/unmapped/C_vzeoulff$C_oiqqdfah;II[I)V
-			ARG 1 node
-			ARG 2 flags
-			ARG 3 redirectNodeIndex
-			ARG 4 childNodeIndices
 		METHOD m_eijlsxqi canResolve (Lit/unimi/dsi/fastutil/ints/IntSet;)Z
 			ARG 1 indices
 		METHOD m_mhcvweoz canBuild (Lit/unimi/dsi/fastutil/ints/IntSet;)Z
@@ -59,11 +52,7 @@ CLASS net/minecraft/unmapped/C_vzeoulff net/minecraft/network/packet/s2c/play/Co
 		METHOD m_xrazseov write (Lnet/minecraft/unmapped/C_idfydwco;)V
 		METHOD m_ykkmupml build (Lnet/minecraft/unmapped/C_bprdujxm;Lnet/minecraft/unmapped/C_vzeoulff$C_wtatsrvq;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
 	CLASS C_vuntotjx LiteralNode
-		FIELD f_lnhawqwm id Ljava/lang/String;
 	CLASS C_xvscvcsz ArgumentNode
-		FIELD f_blzxvwug id Ljava/lang/String;
-		FIELD f_dnaozebn suggestionId Lnet/minecraft/unmapped/C_ncpywfca;
-		FIELD f_mndqyfwo argumentType Lnet/minecraft/unmapped/C_yvmgapuw$C_jhdtbgye;
 		METHOD <init> (Ljava/lang/String;Lnet/minecraft/unmapped/C_yvmgapuw$C_jhdtbgye;Lnet/minecraft/unmapped/C_ncpywfca;)V
 			ARG 3 suggestionId
 		METHOD m_mkgsnfyv write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_yvmgapuw$C_jhdtbgye;)V
