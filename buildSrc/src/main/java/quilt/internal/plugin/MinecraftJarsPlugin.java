@@ -114,7 +114,7 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                 task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
                 task.getMergedFile().convention(this.provideMinecraftBuildFile(
-                quiltExt.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR)
+                    quiltExt.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR)
                 ));
             }
         );
