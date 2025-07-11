@@ -138,7 +138,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 index
 		ARG 2 force
 	METHOD equals (Ljava/lang/Object;)Z
-		ARG 1 o
 	METHOD forEachByte (IILio/netty/util/ByteProcessor;)I
 		ARG 1 index
 		ARG 2 length
@@ -254,7 +253,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_amtujwvt (Lnet/minecraft/unmapped/C_hiksfskl;Ljava/lang/Object;)V
 		ARG 2 right
 	METHOD m_appecnpy readQuaternion (Lio/netty/buffer/ByteBuf;)Lorg/joml/Quaternionf;
-		ARG 0 buf
 	METHOD m_aqriaemp readLongArray (Lio/netty/buffer/ByteBuf;)[J
 	METHOD m_axcuwjgm writeSyncId (Lio/netty/buffer/ByteBuf;I)V
 		ARG 1 value
@@ -276,10 +274,8 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_bdfynlyg writeLongArray (Lio/netty/buffer/ByteBuf;[J)V
 	METHOD m_bsvmttqk readChunkPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 	METHOD m_cozckjjh writeVector3f (Lio/netty/buffer/ByteBuf;Lorg/joml/Vector3f;)V
-		ARG 0 buf
 		ARG 1 vector
 	METHOD m_cwijppyi writeChunkPos (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_ynrszrtu;)V
-		ARG 0 buf
 		ARG 1 pos
 	METHOD m_dbkaehfk readFixedLengthLongArray ([J)[J
 	METHOD m_delcxvna writeIntArray ([I)Lnet/minecraft/unmapped/C_idfydwco;
@@ -316,7 +312,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 3 object
 			COMMENT the object to write to this buf
 	METHOD m_elpmwnes writeByteArray (Lio/netty/buffer/ByteBuf;[B)V
-		ARG 0 buf
 		ARG 1 bytes
 	METHOD m_eppgezam writeGlobalPos (Lnet/minecraft/unmapped/C_ovcqqyqp;)V
 		COMMENT Writes a global pos to this buf. A global pos is represented by a registry key
@@ -399,7 +394,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT string form is longer than {@value #DEFAULT_MAX_STRING_LENGTH}
 		COMMENT @see #writeIdentifier(Identifier)
 	METHOD m_hpbnyaqq writeQuaternion (Lio/netty/buffer/ByteBuf;Lorg/joml/Quaternionf;)V
-		ARG 0 buf
 		ARG 1 quaternion
 	METHOD m_htwizfmu readVarInt (Ljava/util/function/IntFunction;)Ljava/lang/Object;
 		ARG 1 intFunction
@@ -430,7 +424,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_jntaktqt (Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException;
 		ARG 1 errorMessage
 	METHOD m_jqypukxt readByteArray (Lio/netty/buffer/ByteBuf;I)[B
-		ARG 0 buf
 		ARG 1 maxSize
 	METHOD m_jrgknvio decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_fozrrtcx;)Ljava/lang/Object;
 		COMMENT Reads an object from this buf as a compound NBT with the given codec.
@@ -444,7 +437,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 			COMMENT the codec to decode the object
 		ARG 3 sizeTracker
 	METHOD m_jtoadldk writeNbt (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_oivssbvb;)V
-		ARG 0 buf
 		ARG 1 nbt
 	METHOD m_jyxjrtet writeDate (Ljava/util/Date;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a date to this buf. A date is represented by its time, a regular
@@ -466,12 +458,9 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 value
 			COMMENT the value to write
 	METHOD m_kgkdgazl readByteArray (Lio/netty/buffer/ByteBuf;)[B
-		ARG 0 buf
 	METHOD m_kieeshls readSyncId (Lio/netty/buffer/ByteBuf;)I
 	METHOD m_kjijcwgo readNbtCompound (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hhlwcnih;
-		ARG 0 buf
 	METHOD m_kjywmbol writeVec3d (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_vgpupfxx;)V
-		ARG 0 buf
 		ARG 1 vec
 	METHOD m_kooigoir readInstant ()Ljava/time/Instant;
 		COMMENT Reads an instant from this buf. An instant is represented by a long indicating
@@ -510,13 +499,10 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_lzbievog writeSynId (I)V
 		COMMENT Identical to {@link #writeVarInt(int)}, except that this returns {@code void}.
 	METHOD m_mafeqoqe readNbt (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_fozrrtcx;)Lnet/minecraft/unmapped/C_oivssbvb;
-		ARG 0 buf
 		ARG 1 nbtTagSizeTracker
 	METHOD m_mdkhzffo readNullable (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/lang/Object;
-		ARG 0 buf
 		ARG 1 decoder
 	METHOD m_mhlenoxy readPos (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_hynzadkk;
-		ARG 0 buf
 	METHOD m_minhepob readEither (Lnet/minecraft/unmapped/C_ajdohfrc;Lnet/minecraft/unmapped/C_ajdohfrc;)Lcom/mojang/datafixers/util/Either;
 		ARG 1 leftDecoder
 		ARG 2 rightDecoder
@@ -527,16 +513,13 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readInstant()
 		ARG 1 instant
 	METHOD m_ngzrehtb writeUuid (Lio/netty/buffer/ByteBuf;Ljava/util/UUID;)V
-		ARG 0 buf
 	METHOD m_nhmhnzug readBitSet (I)Ljava/util/BitSet;
 		ARG 1 bitSet
 	METHOD m_nhqatmjh writeJson (Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
-		ARG 1 codec
 		ARG 2 object
 	METHOD m_nljfpbrg writeFixedLengthLongArray (Lio/netty/buffer/ByteBuf;[J)V
 		ARG 1 array
 	METHOD m_nxtbhhsr readVec3d (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_vgpupfxx;
-		ARG 0 buf
 	METHOD m_odlpvkyf writePublicKey (Ljava/security/PublicKey;)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a public key to this buf.
 		COMMENT A public key is represented by at most 512 primitive bytes.
@@ -550,7 +533,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 0 applier
 		ARG 1 max
 	METHOD m_omssfaex writeNullable (Lio/netty/buffer/ByteBuf;Ljava/lang/Object;Lnet/minecraft/unmapped/C_hiksfskl;)V
-		ARG 0 buf
 		ARG 2 encoder
 	METHOD m_pihymbdn readQuaternion ()Lorg/joml/Quaternionf;
 	METHOD m_plevnncf writeRegistryKey (Lnet/minecraft/unmapped/C_xhhleach;)V
@@ -592,9 +574,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT Writes a position to this buf. A position is represented by a regular long.
 		COMMENT
 		COMMENT @see #writePos(BlockPos)
-		ARG 0 buf
 	METHOD m_rwzwvdio readChunkPos (Lio/netty/buffer/ByteBuf;)Lnet/minecraft/unmapped/C_ynrszrtu;
-		ARG 0 buf
 	METHOD m_sevbbzdm readCollection (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Collection;
 		COMMENT Reads a collection from this buf. The collection is stored as a leading
 		COMMENT {@linkplain #readVarInt() var int} size followed by the entries
@@ -684,9 +664,7 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		ARG 1 tagSizeTracker
 	METHOD m_utowfkel writeVec3d (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 	METHOD m_vbjdgyoz readVector3f (Lio/netty/buffer/ByteBuf;)Lorg/joml/Vector3f;
-		ARG 0 buf
 	METHOD m_vceclpms readUuid (Lio/netty/buffer/ByteBuf;)Ljava/util/UUID;
-		ARG 0 buf
 	METHOD m_vhgdjglx writeVector3f (Lorg/joml/Vector3f;)V
 		ARG 1 vector
 	METHOD m_vhlqdhru readFixedLengthLongArray (Lio/netty/buffer/ByteBuf;[J)[J

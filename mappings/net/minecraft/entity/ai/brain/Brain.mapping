@@ -25,13 +25,11 @@ CLASS net/minecraft/unmapped/C_rjqjaxef net/minecraft/entity/ai/brain/Brain
 	FIELD f_nkvabvkg activityStartTime J
 	FIELD f_rtubrbed requiredActivityMemories Ljava/util/Map;
 	FIELD f_smzqymsz coreActivities Ljava/util/Set;
-	FIELD f_wlkujdyc LOGGER Lorg/slf4j/Logger;
 	FIELD f_zntdmkab possibleActivities Ljava/util/Set;
 	METHOD <init> (Ljava/util/Collection;Ljava/util/Collection;Lcom/google/common/collect/ImmutableList;Ljava/util/function/Supplier;)V
 		ARG 1 memories
 		ARG 2 sensors
 		ARG 3 memoryEntries
-		ARG 4 codecSupplier
 	METHOD m_aaggitrb (Lnet/minecraft/unmapped/C_vbbyoqyw;)V
 		ARG 1 type
 	METHOD m_anqydkjt setActivityTasks (Lnet/minecraft/unmapped/C_gqmpgxlw;ILcom/google/common/collect/ImmutableList;)V
@@ -68,8 +66,6 @@ CLASS net/minecraft/unmapped/C_rjqjaxef net/minecraft/entity/ai/brain/Brain
 		ARG 2 value
 		ARG 3 startTime
 	METHOD m_iglzmmbk tick (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)V
-		ARG 1 world
-		ARG 2 entity
 	METHOD m_iispjiqw tickMemories ()V
 	METHOD m_ivmteovz getFirstPossibleNonCoreActivity ()Ljava/util/Optional;
 	METHOD m_izdwevme getOptionalMemory (Lnet/minecraft/unmapped/C_vbbyoqyw;)Ljava/util/Optional;
@@ -87,8 +83,6 @@ CLASS net/minecraft/unmapped/C_rjqjaxef net/minecraft/entity/ai/brain/Brain
 	METHOD m_ohoedyiz (Ljava/lang/Object;Ljava/lang/Object;)Z
 		ARG 1 value
 	METHOD m_oigmxqji updateTasks (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)V
-		ARG 1 world
-		ARG 2 entity
 	METHOD m_pbnnwlmf createProfile (Ljava/util/Collection;Ljava/util/Collection;)Lnet/minecraft/unmapped/C_rjqjaxef$C_liifzsnq;
 		ARG 0 memoryModules
 		ARG 1 sensors
@@ -126,10 +120,7 @@ CLASS net/minecraft/unmapped/C_rjqjaxef net/minecraft/entity/ai/brain/Brain
 	METHOD m_vccfdhyy getMemoryExpiry (Lnet/minecraft/unmapped/C_vbbyoqyw;)J
 		ARG 1 type
 	METHOD m_vwayzhqi encode (Lcom/mojang/serialization/DynamicOps;)Lcom/mojang/serialization/DataResult;
-		ARG 1 ops
 	METHOD m_wcfmakvv startTasks (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)V
-		ARG 1 world
-		ARG 2 entity
 	METHOD m_xfsxaids setCoreActivities (Ljava/util/Set;)V
 		ARG 1 coreActivities
 	METHOD m_xgmjswxr forgetIrrelevantMemories (Lnet/minecraft/unmapped/C_gqmpgxlw;)V
@@ -138,12 +129,8 @@ CLASS net/minecraft/unmapped/C_rjqjaxef net/minecraft/entity/ai/brain/Brain
 		ARG 1 type
 		ARG 2 value
 	METHOD m_xqwztwxk tickSensors (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)V
-		ARG 1 world
-		ARG 2 entity
 	METHOD m_ybtdhfpa setActivityTasks (Lnet/minecraft/unmapped/C_gqmpgxlw;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V
 	METHOD m_yrkjvfkz stopAllTasks (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_usxaxydn;)V
-		ARG 1 world
-		ARG 2 entity
 	METHOD m_zchvmsvx resetPossibleActivities ()V
 	METHOD m_ziwhzzzz hasMemoryModule (Lnet/minecraft/unmapped/C_vbbyoqyw;)Z
 		ARG 1 type
@@ -155,15 +142,10 @@ CLASS net/minecraft/unmapped/C_rjqjaxef net/minecraft/entity/ai/brain/Brain
 		FIELD f_rlefpyrr type Lnet/minecraft/unmapped/C_vbbyoqyw;
 		FIELD f_udqwttlq memory Ljava/util/Optional;
 		METHOD <init> (Lnet/minecraft/unmapped/C_vbbyoqyw;Ljava/util/Optional;)V
-			ARG 1 type
-			ARG 2 memory
 		METHOD m_eszxfpxa serialize (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)V
-			ARG 1 ops
 			ARG 2 builder
 		METHOD m_frgleqoi (Lcom/mojang/serialization/RecordBuilder;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;)V
-			ARG 3 codec
 		METHOD m_uytxzscb apply (Lnet/minecraft/unmapped/C_rjqjaxef;)V
-			ARG 1 brain
 		METHOD m_vczcpmfa of (Lnet/minecraft/unmapped/C_vbbyoqyw;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_rjqjaxef$C_cxpzmffb;
 			ARG 0 type
 			ARG 1 memory
@@ -174,10 +156,7 @@ CLASS net/minecraft/unmapped/C_rjqjaxef net/minecraft/entity/ai/brain/Brain
 		COMMENT sensors a brain can have.
 		FIELD f_bkeohmgt sensors Ljava/util/Collection;
 		FIELD f_oewlrzqb memoryModules Ljava/util/Collection;
-		FIELD f_ttwqgfey codec Lcom/mojang/serialization/Codec;
 		METHOD <init> (Ljava/util/Collection;Ljava/util/Collection;)V
-			ARG 1 memoryModules
-			ARG 2 sensors
 		METHOD m_ulbvfzpz deserialize (Lcom/mojang/serialization/Dynamic;)Lnet/minecraft/unmapped/C_rjqjaxef;
 			ARG 1 data
 	CLASS C_ptnuukko

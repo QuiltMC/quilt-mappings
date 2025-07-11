@@ -1,12 +1,10 @@
 CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	FIELD f_bjnksoor SCREEN_USAGE Lnet/minecraft/unmapped/C_rdaqiwdt;
-	FIELD f_bpxgxhlg textRenderer Lnet/minecraft/unmapped/C_mavozmpp;
 	FIELD f_bvobnjsr INWORLD_MENU_BACKGROUND Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_dapowlyi initialized Z
 	FIELD f_dnkxkbyx FOOTER_SEPARATOR Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_enzwkzjs selected Lnet/minecraft/unmapped/C_womhzmwc;
 	FIELD f_erfyrjld HEADER_SEPARATOR Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_fnsnmohs LOGGER Lorg/slf4j/Logger;
 	FIELD f_htifmqlv title Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_kmcqeiie width I
 	FIELD f_kreiluct children Ljava/util/List;
@@ -15,7 +13,6 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	FIELD f_oeooblbi selectables Ljava/util/List;
 	FIELD f_ofcdwhxy NARRATOR_MODE_CHANGE_DELAY J
 	FIELD f_ojzzsrar INWORLD_FOOTER_SEPARATOR Lnet/minecraft/unmapped/C_ncpywfca;
-	FIELD f_psnbmvaj client Lnet/minecraft/unmapped/C_ayfeobid;
 	FIELD f_qdzbfdgb narrator Lnet/minecraft/unmapped/C_yviluxux;
 	FIELD f_qqbyyhim KEYBOARD_ACTION_NARRATION_DELAY J
 	FIELD f_quytvjxb INWORLD_HEADER_SEPARATOR Lnet/minecraft/unmapped/C_ncpywfca;
@@ -28,19 +25,15 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	FIELD f_ywhydtya SCREEN_INIT_NARRATION_DELAY J
 	FIELD f_zjysrtvv screenExecutor Ljava/util/concurrent/Executor;
 	METHOD <init> (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
-		ARG 1 title
 	METHOD m_acdaclus isPauseScreen ()Z
 	METHOD m_awpofqnh removed ()V
 	METHOD m_bncrkgkz renderBlur (Lnet/minecraft/unmapped/C_sedilmty;)V
 	METHOD m_bovegipe renderPanorama (Lnet/minecraft/unmapped/C_sedilmty;F)V
-		ARG 1 graphics
 		ARG 2 tickDelta
 	METHOD m_bplrnryk renderMenuBackground (Lnet/minecraft/unmapped/C_sedilmty;)V
-		ARG 1 graphics
 	METHOD m_ckkbzfqx createTabNavigation (Lnet/minecraft/unmapped/C_veciqgge;)Lnet/minecraft/unmapped/C_ltcpucbp$C_ypmtwpcy;
 		ARG 1 direction
 	METHOD m_diqdtrjj init (Lnet/minecraft/unmapped/C_ayfeobid;II)V
-		ARG 1 client
 		ARG 2 width
 		ARG 3 height
 	METHOD m_efvbcpbf onDisplayed ()V
@@ -51,18 +44,14 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_fggwkeeq getTitle ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_fogjthpz focusCurrentPath ()V
 	METHOD m_frxoqyrs resize (Lnet/minecraft/unmapped/C_ayfeobid;II)V
-		ARG 1 client
 		ARG 2 width
 		ARG 3 height
 	METHOD m_gqwpvknz getTooltipFromItem (Lnet/minecraft/unmapped/C_ayfeobid;Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/List;
-		ARG 0 client
-		ARG 1 stack
 	METHOD m_gseqedxv isCopy (I)Z
 		ARG 0 keyCode
 	METHOD m_guegvdae isSelectAll (I)Z
 		ARG 0 code
 	METHOD m_hjitkdkn renderMenuBackgroundTexture (Lnet/minecraft/unmapped/C_sedilmty;Lnet/minecraft/unmapped/C_ncpywfca;IIFFII)V
-		ARG 0 graphics
 		ARG 1 texture
 		ARG 2 x
 		ARG 3 y
@@ -103,7 +92,6 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_pfwvzdim renderWithTooltip (Lnet/minecraft/unmapped/C_sedilmty;IIF)V
 		COMMENT Renders this screen along with deferred text tooltip,
 		COMMENT ensuring the tooltip is rendered on top.
-		ARG 1 graphics
 		ARG 2 mouseX
 			COMMENT the mouse X-coordinate on the screen
 		ARG 3 mouseY
@@ -114,7 +102,6 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_psfweybj renderWorldOverlayBackground (Lnet/minecraft/unmapped/C_sedilmty;)V
 		COMMENT Renders the fullscreen dark overlay background used when a world is loaded.
 	METHOD m_qfxudleh renderBackground (Lnet/minecraft/unmapped/C_sedilmty;IIF)V
-		ARG 1 graphics
 		ARG 2 mouseX
 		ARG 3 mouseY
 		ARG 4 delta
@@ -148,7 +135,6 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 	METHOD m_wjyrnuws addDrawable (Lnet/minecraft/unmapped/C_dtfldood;)Lnet/minecraft/unmapped/C_dtfldood;
 		ARG 1 drawable
 	METHOD m_wvbxumwq renderMenuBackground (Lnet/minecraft/unmapped/C_sedilmty;IIII)V
-		ARG 1 graphics
 		ARG 2 x
 		ARG 3 y
 		ARG 4 width
@@ -166,6 +152,3 @@ CLASS net/minecraft/unmapped/C_wrmtlwqx net/minecraft/client/gui/screen/Screen
 		FIELD f_foukflut selectable Lnet/minecraft/unmapped/C_womhzmwc;
 		FIELD f_gdwhvlqd index I
 		METHOD <init> (Lnet/minecraft/unmapped/C_womhzmwc;ILnet/minecraft/unmapped/C_womhzmwc$C_gfpnbsjt;)V
-			ARG 1 selectable
-			ARG 2 index
-			ARG 3 selectType

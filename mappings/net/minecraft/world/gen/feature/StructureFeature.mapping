@@ -3,7 +3,6 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 	FIELD f_naccwevr DIRECT_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_rfftwmba CODEC Lcom/mojang/serialization/Codec;
 	METHOD <init> (Lnet/minecraft/unmapped/C_quklzgtb$C_dnbqyhbk;)V
-		ARG 1 settings
 	METHOD m_abxexbas getLowestCornerHeight (Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;IIII)I
 		ARG 0 context
 		ARG 1 x
@@ -11,7 +10,6 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 3 width
 		ARG 4 height
 	METHOD m_awwkybrx (Ljava/util/function/Function;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-		ARG 1 instance
 	METHOD m_dckijrrf getType ()Lnet/minecraft/unmapped/C_yaozqavy;
 	METHOD m_dozyucdf adjustBoundingBox (Lnet/minecraft/unmapped/C_hmqypqzz;)Lnet/minecraft/unmapped/C_hmqypqzz;
 		ARG 1 box
@@ -27,7 +25,6 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 2 rotation
 	METHOD m_dzjzdkll getTerrainAdaptation ()Lnet/minecraft/unmapped/C_djexrdop;
 	METHOD m_egvfbazt generate (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;JLnet/minecraft/unmapped/C_ynrszrtu;ILnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)Lnet/minecraft/unmapped/C_efiavfys;
-		ARG 3 registryManager
 		ARG 4 chunkGenerator
 		ARG 5 biomeSource
 		ARG 6 randomState
@@ -35,7 +32,6 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 8 seed
 		ARG 10 chunkPos
 		ARG 11 startReferences
-		ARG 12 world
 		ARG 13 validBiomePredicate
 	METHOD m_etbsnvzz getSpawnOverrides ()Ljava/util/Map;
 	METHOD m_gadyyyat getLowestCornerHeight (Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;II)I
@@ -50,7 +46,6 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 	METHOD m_jpmonaqr (Lnet/minecraft/unmapped/C_quklzgtb;)Lnet/minecraft/unmapped/C_quklzgtb$C_dnbqyhbk;
 		ARG 0 structure
 	METHOD m_ksbmztmm settingsCodec (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
-		ARG 0 instance
 	METHOD m_qlvjonmq getGenerationStep ()Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
 	METHOD m_tfytmvqt getBiomes ()Lnet/minecraft/unmapped/C_odfnijdo;
 	METHOD m_tgkjthyd findGenerationPos (Lnet/minecraft/unmapped/C_quklzgtb$C_ooyswlix;)Ljava/util/Optional;
@@ -68,7 +63,6 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 1 world
 		ARG 2 structureManager
 		ARG 3 chunkGenerator
-		ARG 4 random
 		ARG 5 boundingBox
 		ARG 6 chunkPos
 		ARG 7 children
@@ -80,20 +74,9 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 		ARG 1 heightmapType
 		ARG 2 generator
 	CLASS C_dnbqyhbk StructureSettings
-		FIELD f_zxexyavz CODEC Lcom/mojang/serialization/MapCodec;
 		METHOD <init> (Lnet/minecraft/unmapped/C_odfnijdo;Ljava/util/Map;Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;Lnet/minecraft/unmapped/C_djexrdop;)V
-			ARG 1 biomes
-			ARG 2 spawnOverrides
-			ARG 3 step
-			ARG 4 terrainAdaptation
 		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
-		METHOD m_dhffeeup spawnOverrides ()Ljava/util/Map;
-		METHOD m_gfiaahnv step ()Lnet/minecraft/unmapped/C_rdrmebyw$C_eibovkzt;
-		METHOD m_lgkcyklg terrainAdaptation ()Lnet/minecraft/unmapped/C_djexrdop;
-		METHOD m_pwkhznhq biomes ()Lnet/minecraft/unmapped/C_odfnijdo;
 		METHOD m_tnqbumfi (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
-			ARG 0 instance
 		CLASS C_iccqsinq Builder
 			FIELD f_enqxcttn spawnOverrides Ljava/util/Map;
 			FIELD f_fyuhjsvv biomes Lnet/minecraft/unmapped/C_odfnijdo;
@@ -108,63 +91,32 @@ CLASS net/minecraft/unmapped/C_quklzgtb net/minecraft/world/gen/feature/Structur
 				ARG 1 terrainAdaptation
 	CLASS C_ooyswlix GenerationContext
 		FIELD f_donfuvml validBiomePredicate Ljava/util/function/Predicate;
-		FIELD f_emvernnu seed J
-		FIELD f_gpwizfke biomeSource Lnet/minecraft/unmapped/C_ajguowya;
-		FIELD f_kquxlsiw structureTemplateManager Lnet/minecraft/unmapped/C_zxhjfyir;
-		FIELD f_nsdcymdw randomState Lnet/minecraft/unmapped/C_edfiqifk;
-		FIELD f_rqukfbnm random Lnet/minecraft/unmapped/C_zorcemxg;
 		FIELD f_rwbuuncg registryManager Lnet/minecraft/unmapped/C_wqxmvzdq;
-		FIELD f_sovtjnvt chunkGenerator Lnet/minecraft/unmapped/C_kgfalbim;
-		FIELD f_upveidre chunkPos Lnet/minecraft/unmapped/C_ynrszrtu;
 		FIELD f_xtmcrjbm world Lnet/minecraft/unmapped/C_qpninoyb;
 		METHOD <init> (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;JLnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)V
-			ARG 1 registryManager
 			ARG 2 chunkGenerator
 			ARG 3 biomeSource
 			ARG 4 randomState
 			ARG 5 structureTemplateManager
 			ARG 6 seed
 			ARG 8 chunkPos
-			ARG 9 world
 			ARG 10 validBiome
 		METHOD <init> (Lnet/minecraft/unmapped/C_wqxmvzdq;Lnet/minecraft/unmapped/C_kgfalbim;Lnet/minecraft/unmapped/C_ajguowya;Lnet/minecraft/unmapped/C_edfiqifk;Lnet/minecraft/unmapped/C_zxhjfyir;Lnet/minecraft/unmapped/C_zorcemxg;JLnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_qpninoyb;Ljava/util/function/Predicate;)V
-			ARG 1 registryManager
-			ARG 2 chunkGenerator
-			ARG 3 biomeSource
-			ARG 4 randomState
-			ARG 5 structureTemplateManager
-			ARG 6 random
-			ARG 7 seed
-			ARG 9 chunkPos
-			ARG 10 world
-			ARG 11 validBiomePredicate
 		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
-		METHOD m_jfdrxuds chunkGenerator ()Lnet/minecraft/unmapped/C_kgfalbim;
 		METHOD m_kaezljay validBiomePredicate ()Ljava/util/function/Predicate;
 		METHOD m_nphbhame createRandom (JLnet/minecraft/unmapped/C_ynrszrtu;)Lnet/minecraft/unmapped/C_zorcemxg;
 			ARG 0 seed
 			ARG 2 chunkPos
-		METHOD m_pjhoqmfu chunkPos ()Lnet/minecraft/unmapped/C_ynrszrtu;
 		METHOD m_rycdegub registryManager ()Lnet/minecraft/unmapped/C_wqxmvzdq;
-		METHOD m_tkaxscfe structureTemplateManager ()Lnet/minecraft/unmapped/C_zxhjfyir;
-		METHOD m_ucvywzsi biomeSource ()Lnet/minecraft/unmapped/C_ajguowya;
-		METHOD m_udwiasgb random ()Lnet/minecraft/unmapped/C_zorcemxg;
-		METHOD m_vezyzlri seed ()J
-		METHOD m_vgwucwno randomState ()Lnet/minecraft/unmapped/C_edfiqifk;
 		METHOD m_wllmmxjq world ()Lnet/minecraft/unmapped/C_qpninoyb;
 	CLASS C_tbkxgvzz GenerationStub
-		FIELD f_hubqyhba generator Lcom/mojang/datafixers/util/Either;
 		FIELD f_oxhrusbk pos Lnet/minecraft/unmapped/C_hynzadkk;
 		METHOD <init> (Lnet/minecraft/unmapped/C_hynzadkk;Ljava/util/function/Consumer;)V
-			ARG 1 pos
 			ARG 2 generator
 		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
 		METHOD m_eqiwacgl (Lnet/minecraft/unmapped/C_jieseoeb;)Lnet/minecraft/unmapped/C_jieseoeb;
 			ARG 0 collector
 		METHOD m_guiylrez pos ()Lnet/minecraft/unmapped/C_hynzadkk;
 		METHOD m_mwyfexiz (Ljava/util/function/Consumer;)Lnet/minecraft/unmapped/C_jieseoeb;
 			ARG 0 collector
-		METHOD m_qmehuygq generator ()Lcom/mojang/datafixers/util/Either;
 		METHOD m_qwsjdhsg generate ()Lnet/minecraft/unmapped/C_jieseoeb;

@@ -3,7 +3,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	FIELD f_bkclyjsj MAX_DURABILITY_BAR_WIDTH I
 	FIELD f_cmbphknz components Lnet/minecraft/unmapped/C_kouhnfig;
 	FIELD f_hqzbeglm requiredFlags Lnet/minecraft/unmapped/C_czxxrbcp;
-	FIELD f_jphyibzg LOGGER Lorg/slf4j/Logger;
 	FIELD f_kdmqzdxr translationKey Ljava/lang/String;
 	FIELD f_lfoqoljh recipeRemainder Lnet/minecraft/unmapped/C_vorddnax;
 	FIELD f_nucbkqeo BASE_ATTACK_SPEED Lnet/minecraft/unmapped/C_ncpywfca;
@@ -12,7 +11,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	FIELD f_vmipucxo ABSOLUTE_MAX_COUNT I
 	FIELD f_vwakrgmw DEFAULT_MAX_COUNT I
 	METHOD <init> (Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;)V
-		ARG 1 settings
 	METHOD m_bhfktmca getAttackDamage (Lnet/minecraft/unmapped/C_astfners;FLnet/minecraft/unmapped/C_sbxfkpyv;)F
 		ARG 1 target
 		ARG 2 damage
@@ -20,16 +18,10 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_ckolblsl onCraft (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;)V
 		COMMENT Called when the item is made by crafting, smelting, smithing, etc.
 	METHOD m_cnsoybmp postMine (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_usxaxydn;)Z
-		ARG 1 stack
-		ARG 2 world
-		ARG 3 state
-		ARG 4 pos
 		ARG 5 miner
 	METHOD m_cqkbztpf getTooltipData (Lnet/minecraft/unmapped/C_sddaxwyk;)Ljava/util/Optional;
-		ARG 1 stack
 	METHOD m_dgdssmij fromBlock (Lnet/minecraft/unmapped/C_mmxmpdoq;)Lnet/minecraft/unmapped/C_vorddnax;
 		COMMENT @deprecated Please use {@link Block#asItem}
-		ARG 0 block
 	METHOD m_dhikqitd (Lnet/minecraft/unmapped/C_cjzoxshv;)Lcom/mojang/serialization/DataResult;
 		ARG 0 holder
 	METHOD m_dnwybntd isCorrectForDrops (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)Z
@@ -40,31 +32,20 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		COMMENT Note that this is not the <b>only</b> way to achieve "effectiveness" when mining.
 		COMMENT Other items, such as shears on string, may use their own logic
 		COMMENT and calls to this method might not return a value consistent to this rule for those items.
-		ARG 2 state
 	METHOD m_dzfzcxuk isItemBarVisible (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 stack
 	METHOD m_dzyyhvup getItemBarStep (Lnet/minecraft/unmapped/C_sddaxwyk;)I
-		ARG 1 stack
 	METHOD m_ectuffur onItemEntityDestroyed (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 entity
 	METHOD m_eryjwjll getTranslationKey ()Ljava/lang/String;
 	METHOD m_fujwecfy getDefaultName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_fwxnsuhn onCraftByPlayer (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		COMMENT Called when a player acquires the item by crafting, smelting, smithing, etc.
-		ARG 1 stack
-		ARG 2 player
 	METHOD m_hwkxajsh onStoppedUsing (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;I)Z
-		ARG 1 stack
-		ARG 2 world
 		ARG 3 user
 		ARG 4 remainingUseTicks
 	METHOD m_hwznhtnf getUseTicks (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;)I
-		ARG 2 entity
 	METHOD m_inqbslnb useOnEntity (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
-		ARG 1 stack
 		ARG 2 user
-		ARG 3 entity
-		ARG 4 hand
 	METHOD m_jbvnrizt postDamageEntity (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)V
 		COMMENT Called when a {@link LivingEntity} hits another {@link LivingEntity}
 		COMMENT
@@ -74,8 +55,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 	METHOD m_jmfyhzjb getName (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_kdfhbywf getRecipeRemainder ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_knbnsgbn finishUsing (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sddaxwyk;
-		ARG 1 stack
-		ARG 2 world
 		ARG 3 user
 	METHOD m_kolwcjef getDamageSourceOverride (Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sbxfkpyv;
 	METHOD m_lthgnjiq getDefaultStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
@@ -89,15 +68,11 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 context
 			COMMENT the usage context
 	METHOD m_mvuvxzgn usageTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sddaxwyk;I)V
-		ARG 1 world
 		ARG 2 user
-		ARG 3 stack
 		ARG 4 remainingUseTicks
 	METHOD m_nczseldo canBeNested ()Z
 		COMMENT @return true if the item can be placed inside of shulker boxes or bundles.
 	METHOD m_nstqircw getMiningSpeedMultiplier (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_txtbiemp;)F
-		ARG 1 stack
-		ARG 2 state
 	METHOD m_nugtdlpo getBuiltInRegistryHolder ()Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;
 	METHOD m_pfwgoldc onClickedOnOther (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		COMMENT Called when an {@link ItemStack} of this item is placed on another {@link ItemStack} in a slot.
@@ -107,7 +82,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		COMMENT @return whether an action was performed
 		ARG 1 thisStack
 		ARG 2 otherSlot
-		ARG 4 player
 	METHOD m_pktzlvtx onClicked (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
 		COMMENT Called when another {@link ItemStack} is placed on an {@link ItemStack} of this item.
 		COMMENT
@@ -117,42 +91,31 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 thisStack
 		ARG 2 otherStack
 		ARG 3 thisSlot
-		ARG 5 player
 		ARG 6 cursorStackReference
 	METHOD m_plxsgnqi postHit (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)V
-		ARG 1 stack
 		ARG 2 target
 		ARG 3 attacker
 	METHOD m_pppzvkhc hasGlint (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		COMMENT Checks if the glint effect should be applied when the item is rendered.
 		COMMENT
 		COMMENT <p>By default, returns true if the item has enchantments.
-		ARG 1 stack
 	METHOD m_proceewu getMaxStackSize ()I
 	METHOD m_qqswvlkq inventoryTick (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_yuycoehb;)V
-		ARG 1 stack
-		ARG 3 entity
 	METHOD m_rwziztnd validateComponents (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 	METHOD m_ucwrwzur byRawId (I)Lnet/minecraft/unmapped/C_vorddnax;
 		ARG 0 id
 	METHOD m_uuqggdre getRawId (Lnet/minecraft/unmapped/C_vorddnax;)I
 		ARG 0 item
 	METHOD m_vkltyloi raycast (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_uyikqwzv$C_krdrvutw;)Lnet/minecraft/unmapped/C_jdakttms;
-		ARG 0 world
-		ARG 1 player
 		ARG 2 fluidHandling
 	METHOD m_vlpdhsgt appendTooltip (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;Lnet/minecraft/unmapped/C_idvlscju;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_taebrtdw;)V
-		ARG 1 stack
 		ARG 2 context
 		ARG 5 config
 	METHOD m_vxcjacsu showOpWarnings (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 	METHOD m_wanuqhiu isUsedOnRelease (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
-		ARG 1 stack
 	METHOD m_wolmtjeu getItemBarColor (Lnet/minecraft/unmapped/C_sddaxwyk;)I
-		ARG 1 stack
 	METHOD m_ylkygzjm getComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 	METHOD m_yvddkccr getUseAction (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_qeajvgxm;
-		ARG 1 stack
 	METHOD m_znsmbimv use (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		COMMENT Called when an item is used by a player.
 		COMMENT The use action, by default, is bound to the right mouse button.

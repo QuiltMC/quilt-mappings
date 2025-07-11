@@ -1,7 +1,6 @@
 CLASS net/minecraft/unmapped/C_jyqwslie net/minecraft/util/UserCache
 	FIELD f_bdvyqlxf byUuid Ljava/util/Map;
 	FIELD f_efnhwmdc byName Ljava/util/Map;
-	FIELD f_esihftsh LOGGER Lorg/slf4j/Logger;
 	FIELD f_hwcqxwlt gson Lcom/google/gson/Gson;
 	FIELD f_hwskcdke profileRepository Lcom/mojang/authlib/GameProfileRepository;
 	FIELD f_kciivbdp pendingRequests Ljava/util/Map;
@@ -12,8 +11,6 @@ CLASS net/minecraft/unmapped/C_jyqwslie net/minecraft/util/UserCache
 	FIELD f_vaekkarg cacheFile Ljava/io/File;
 	FIELD f_zkgkjgvr MAX_SAVED_ENTRIES I
 	METHOD <init> (Lcom/mojang/authlib/GameProfileRepository;Ljava/io/File;)V
-		ARG 1 profileRepository
-		ARG 2 cacheFile
 	METHOD m_akxutvud getDateFormat ()Ljava/text/DateFormat;
 	METHOD m_bclynljx save ()V
 	METHOD m_cwjwuxvy setExecutor (Ljava/util/concurrent/Executor;)V
@@ -24,7 +21,6 @@ CLASS net/minecraft/unmapped/C_jyqwslie net/minecraft/util/UserCache
 	METHOD m_grhslbaa (Lcom/google/gson/JsonArray;Ljava/text/DateFormat;Lnet/minecraft/unmapped/C_jyqwslie$C_qruesmfp;)V
 		ARG 2 entry
 	METHOD m_ibnbskll getByUuid (Ljava/util/UUID;)Ljava/util/Optional;
-		ARG 1 uuid
 	METHOD m_isvipnku clearExecutor ()V
 	METHOD m_mhkvcozj shouldUseRemote ()Z
 	METHOD m_nztdenmk entryFromJson (Lcom/google/gson/JsonElement;Ljava/text/DateFormat;)Ljava/util/Optional;
@@ -34,7 +30,6 @@ CLASS net/minecraft/unmapped/C_jyqwslie net/minecraft/util/UserCache
 		ARG 0 repository
 		ARG 1 name
 	METHOD m_soafsxnh add (Lcom/mojang/authlib/GameProfile;)V
-		ARG 1 profile
 	METHOD m_uieecydh findByName (Ljava/lang/String;)Ljava/util/Optional;
 		ARG 1 name
 	METHOD m_uonvyifw load ()Ljava/util/List;
@@ -53,11 +48,8 @@ CLASS net/minecraft/unmapped/C_jyqwslie net/minecraft/util/UserCache
 		ARG 0 username
 	CLASS C_qruesmfp Entry
 		FIELD f_lfkedzut expirationDate Ljava/util/Date;
-		FIELD f_lxfbiypj profile Lcom/mojang/authlib/GameProfile;
 		FIELD f_qtnnkxol lastAccessed J
 		METHOD <init> (Lcom/mojang/authlib/GameProfile;Ljava/util/Date;)V
-			ARG 1 profile
-			ARG 2 expirationDate
 		METHOD m_bbiptlmk getExpirationDate ()Ljava/util/Date;
 		METHOD m_gfcwirmq setLastAccessed (J)V
 			ARG 1 lastAccessed

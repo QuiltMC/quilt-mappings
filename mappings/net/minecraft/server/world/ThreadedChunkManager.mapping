@@ -1,6 +1,5 @@
 CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunkManager
 	FIELD f_carfuwla worldGenerationProgressListener Lnet/minecraft/unmapped/C_jnfclwgd;
-	FIELD f_cdallcyb LOGGER Lorg/slf4j/Logger;
 	FIELD f_cqzzgluy CHUNKS_SAVED_EAGERLY_PER_TICK I
 	FIELD f_dklgoyoo playerChunkWatchingManager Lnet/minecraft/unmapped/C_xqwearey;
 	FIELD f_dltbfmui persistentStateManagerFactory Ljava/util/function/Supplier;
@@ -20,7 +19,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	FIELD f_oratkgdp chunkHolderListDirty Z
 	FIELD f_ptdjlogf unloadTaskQueue Ljava/util/Queue;
 	FIELD f_qgyepzej LEVEL_CHUNK B
-	FIELD f_qmxmwuww world Lnet/minecraft/unmapped/C_bdwnwhiu;
 	FIELD f_rdwkfvxr totalChunksLoadedCount Ljava/util/concurrent/atomic/AtomicInteger;
 	FIELD f_seaevrfq UNKNOWN_CHUNK B
 	FIELD f_sycrtqtt currentChunkHolders Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
@@ -39,7 +37,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_czcetwxs updateWatchedSection (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		COMMENT Updates the watched chunk section position for the {@code player}, and sends a
 		COMMENT render distance update packet to the client.
-		ARG 1 player
 	METHOD m_djmbcnos getCurrentChunkHolder (J)Lnet/minecraft/unmapped/C_gkderdjo;
 		ARG 1 pos
 	METHOD m_dtwrvman getConcentricRingPlacementCalculator ()Lnet/minecraft/unmapped/C_jibygqpu;
@@ -53,7 +50,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_fpkjnjma getChunkHolder (J)Lnet/minecraft/unmapped/C_gkderdjo;
 		ARG 1 pos
 	METHOD m_fqdyjolg unloadEntity (Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 1 entity
 	METHOD m_ftzrbjoo loadChunk (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 pos
 	METHOD m_gknwalsf tickEntityMovement ()V
@@ -64,10 +60,7 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT has changed chunk sections, and updates all entities tracking status to those
 		COMMENT players. This ensures all possible updates are accounted for.
 	METHOD m_hadjtdih save (Lnet/minecraft/unmapped/C_lwzmmmqr;)Z
-		ARG 1 chunk
 	METHOD m_jjidpbzz sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-		ARG 1 entity
-		ARG 2 packet
 	METHOD m_jmusvkuf getLightingProvider ()Lnet/minecraft/unmapped/C_bdzdhzyc;
 	METHOD m_jnrpdvfn getCompletedLevelSupplier (J)Ljava/util/function/IntSupplier;
 		ARG 1 pos
@@ -94,12 +87,8 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT position for both entity tracking and chunk loading (watching) logic.
 		COMMENT
 		COMMENT @see ServerChunkManager#updatePosition(ServerPlayerEntity)
-		ARG 1 player
 	METHOD m_phranalj sendToNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-		ARG 1 entity
-		ARG 2 packet
 	METHOD m_qcvnmgbx handlePlayerAddedOrRemoved (Lnet/minecraft/unmapped/C_mxrobsgg;Z)V
-		ARG 1 player
 		ARG 2 added
 	METHOD m_stpepokf getChunkGenerator ()Lnet/minecraft/unmapped/C_kgfalbim;
 	METHOD m_tluosnso getUpdatedChunkNbt (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/concurrent/CompletableFuture;
@@ -108,14 +97,11 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_tusokupf getFutureStatus (Ljava/util/concurrent/CompletableFuture;)Ljava/lang/String;
 		ARG 0 future
 	METHOD m_uaxkqmvj doesNotGenerateChunks (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
-		ARG 1 player
 	METHOD m_uchmpocv save (Z)V
 		ARG 1 flush
 	METHOD m_uncqnsbt sendWatchPackets (Lnet/minecraft/unmapped/C_mxrobsgg;)V
-		ARG 1 player
 	METHOD m_uzubdbov makeChunkEntitiesTickable (Lnet/minecraft/unmapped/C_gkderdjo;)Ljava/util/concurrent/CompletableFuture;
 	METHOD m_vbcydxmf loadEntity (Lnet/minecraft/unmapped/C_astfners;)V
-		ARG 1 entity
 	METHOD m_wczqgwje getTicketManager ()Lnet/minecraft/unmapped/C_mrjqexcd;
 	METHOD m_xqsmixbi tryUnloadChunk (JLnet/minecraft/unmapped/C_gkderdjo;)V
 		ARG 1 pos
@@ -130,7 +116,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT entity's network ID.
 		COMMENT
 		COMMENT @see ThreadedChunkManager#entityTrackers
-		FIELD f_ahfpwude entity Lnet/minecraft/unmapped/C_astfners;
 		FIELD f_cqgkhynw listeners Ljava/util/Set;
 		FIELD f_dxgjztvf maxDistance I
 		FIELD f_gtsdnhft entry Lnet/minecraft/unmapped/C_yagtbmmk;
@@ -140,12 +125,9 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 			COMMENT tickEntityMovement()} to bypass unnecessary status updates before calling
 			COMMENT {@link #updateTrackedStatus(ServerPlayerEntity) updateTrackedStatus()}.
 		METHOD <init> (Lnet/minecraft/unmapped/C_gxrpzacc;Lnet/minecraft/unmapped/C_astfners;IIZ)V
-			ARG 2 entity
-			ARG 3 maxDistance
 			ARG 4 tickInterval
 			ARG 5 alwaysUpdateVelocity
 		METHOD equals (Ljava/lang/Object;)Z
-			ARG 1 o
 		METHOD m_fkuwftaz updateTrackedStatus (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 			COMMENT Updates the tracked status of this tracker's entity for the {@code player}.
 			COMMENT
@@ -153,14 +135,11 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 			COMMENT listener is added if it is not in the listeners; if this tracker should not be
 			COMMENT listened by the player, the player's tracking listener is removed if it is in
 			COMMENT the listeners.
-			ARG 1 player
 		METHOD m_gahpejvf stopTracking ()V
 		METHOD m_grtlxbqe stopTracking (Lnet/minecraft/unmapped/C_mxrobsgg;)V
-			ARG 1 player
 		METHOD m_pexcnzwn adjustTrackingDistance (I)I
 			ARG 1 initialDistance
 		METHOD m_qplwouhs sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-			ARG 1 packet
 		METHOD m_qrgjvysv updateTrackedStatus (Ljava/util/List;)V
 			COMMENT Updates the tracked status of this tracker's entity for the given players.
 			COMMENT
@@ -168,4 +147,3 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 			ARG 1 players
 		METHOD m_ubnzhkyb getMaxTrackDistance ()I
 		METHOD m_yvjpwxjg sendToNearbyPlayers (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-			ARG 1 packet
