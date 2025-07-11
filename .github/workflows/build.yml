@@ -19,12 +19,9 @@ jobs:
       - uses: gradle/wrapper-validation-action@v2
       - name: build root project
         run: ./gradlew build javadocJar --stacktrace
-      - name: make gametest gradle executable
-        working-directory: ./gametest
-        run: chmod +x ./gradlew
       - name: build and run gametest
         working-directory: ./gametest
-        run: ./gradlew build runGametest --stacktrace
+        run: ../gradlew build runGametest --stacktrace
       - name: Build artifacts
         if: ${{ matrix.java == 21 }}
         continue-on-error: true
