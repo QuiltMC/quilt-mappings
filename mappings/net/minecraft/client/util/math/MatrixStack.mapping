@@ -6,6 +6,9 @@ CLASS net/minecraft/unmapped/C_cnszsxvd net/minecraft/client/util/math/MatrixSta
 	COMMENT All other operations are applied to the last matrix pushed onto the stack.
 	COMMENT Those operations can be: translate, scale, rotate, multiply with other matrices, etc.
 	COMMENT Popping a matrix will have the effect of reverting all changes made to it.
+	FIELD f_jlvwhptg entries Ljava/util/List;
+	FIELD f_ybvqpwmj depth I
+	METHOD m_azchpoqu isEmpty ()Z
 	METHOD m_bdztuoiy pop ()V
 		COMMENT Pops the current matrices from the stack.
 	METHOD m_cavdvhuq scale (FFF)V
@@ -28,6 +31,10 @@ CLASS net/minecraft/unmapped/C_cnszsxvd net/minecraft/client/util/math/MatrixSta
 			COMMENT the translation amount on the Y axis
 		ARG 3 z
 			COMMENT the translation amount on the Z axis
+	METHOD m_trgkbjmf translate (Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		COMMENT Translates the model.
+		ARG 1 vec
+			COMMENT a vector representing the amount to translate on each axis
 	METHOD m_tweczbqs rotateAround (Lorg/joml/Quaternionfc;FFF)V
 		COMMENT Applies the rotation transformation of the given {@link Quaternionfc} to the current matrix
 		COMMENT while using {@code (oX, oY, oZ)} as the rotation origin.
@@ -37,6 +44,7 @@ CLASS net/minecraft/unmapped/C_cnszsxvd net/minecraft/client/util/math/MatrixSta
 			COMMENT the Y coordinate of the rotation origin
 		ARG 4 z
 			COMMENT the Z coordinate of the rotation origin
+	METHOD m_txxnyixh multiply (Lorg/joml/Matrix4fc;)V
 	METHOD m_wkzmzfvs translate (DDD)V
 		COMMENT Translates the model.
 		ARG 1 x
@@ -47,18 +55,42 @@ CLASS net/minecraft/unmapped/C_cnszsxvd net/minecraft/client/util/math/MatrixSta
 			COMMENT the translation amount on the Z axis
 	METHOD m_xeddsamb loadIdentity ()V
 		COMMENT Loads the identity matrix for the current model and normal matrices.
+	METHOD m_zrhmxhas rotate (Lorg/joml/Quaternionfc;)V
 	CLASS C_pqokfevb Entry
 		FIELD f_hvtbvbok normalized Z
 		FIELD f_jfjsqzmb normalMatrix Lorg/joml/Matrix3f;
 		FIELD f_qmkzpkwl modelMatrix Lorg/joml/Matrix4f;
+		METHOD m_ahkoclra transformNormal (Lorg/joml/Vector3fc;Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+			ARG 1 normal
+		METHOD m_elovbgkn rotate (Lorg/joml/Quaternionfc;)V
+			ARG 1 quaternion
 		METHOD m_hmmszgvl getNormal ()Lorg/joml/Matrix3f;
+		METHOD m_kesgvcdr setIdentity ()V
+		METHOD m_pykzvzph computeNormalMatrix ()V
+		METHOD m_rldfetuq translate (FFF)Lorg/joml/Matrix4f;
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
+		METHOD m_rypaorcx rotateAround (Lorg/joml/Quaternionfc;FFF)V
+			ARG 1 quaternion
+			ARG 2 x
+			ARG 3 y
+			ARG 4 z
 		METHOD m_sgddbcul getModel ()Lorg/joml/Matrix4f;
 			COMMENT {@return the model matrix}
 			COMMENT <p>
 			COMMENT The model matrix contains the position and rotation data needed for a model to render.
+		METHOD m_stdlygzs multiply (Lorg/joml/Matrix4fc;)V
+			ARG 1 matrix
 		METHOD m_uzgcjwjk copy ()Lnet/minecraft/unmapped/C_cnszsxvd$C_pqokfevb;
+		METHOD m_wipkvexw copyFrom (Lnet/minecraft/unmapped/C_cnszsxvd$C_pqokfevb;)V
+			ARG 1 entry
 		METHOD m_xityczkk transformNormal (FFFLorg/joml/Vector3f;)Lorg/joml/Vector3f;
 			ARG 1 normalX
 			ARG 2 normalY
 			ARG 3 normalZ
 			ARG 4 dest
+		METHOD m_yyxhhpxg scale (FFF)V
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
