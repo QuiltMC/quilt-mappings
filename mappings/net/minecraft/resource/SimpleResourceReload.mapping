@@ -11,25 +11,66 @@ CLASS net/minecraft/unmapped/C_nqsxthnh net/minecraft/resource/SimpleResourceRel
 	FIELD f_gfyktslg reloaderCount I
 	FIELD f_hfilwdja appliedCount Ljava/util/concurrent/atomic/AtomicInteger;
 	FIELD f_mitzjbwz waitingReloaders Ljava/util/Set;
+	FIELD f_pvmlgrdr toPrepareCount Ljava/util/concurrent/atomic/AtomicInteger;
 	FIELD f_rzvuqgmk toApplyCount Ljava/util/concurrent/atomic/AtomicInteger;
 	FIELD f_vkcaoqmt FIRST_PREPARE_APPLY_WEIGHT I
 		COMMENT The weight of either prepare or apply stages' progress in the total progress
 		COMMENT calculation. Has value {@value}.
 	FIELD f_xhhrscjo prepareStageFuture Ljava/util/concurrent/CompletableFuture;
+	FIELD f_xqdujjtj preparedCount Ljava/util/concurrent/atomic/AtomicInteger;
+	METHOD m_azeomvpt (Ljava/util/concurrent/Executor;Ljava/lang/Runnable;)V
+		ARG 2 runnable
+	METHOD m_ckbnwfwi start (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/List;Lnet/minecraft/unmapped/C_nqsxthnh$C_rrqbjnfe;Ljava/util/concurrent/CompletableFuture;)V
+		ARG 3 manager
+		ARG 6 initialStage
+	METHOD m_crdmugvl prepare (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/List;Lnet/minecraft/unmapped/C_nqsxthnh$C_rrqbjnfe;Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 preparer
+		ARG 2 applier
+		ARG 3 manager
+		ARG 4 reloaders
+		ARG 5 factory
+		ARG 6 initialStage
+	METHOD m_farauret getProgressFactor (III)I
+		ARG 0 prepareCount
+		ARG 1 applyCount
+		ARG 2 reloaderCount
+	METHOD m_fdbyxamt createSynchronizer (Lnet/minecraft/unmapped/C_msqwzogj;Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/Executor;)Lnet/minecraft/unmapped/C_msqwzogj$C_yodorvdw;
+		ARG 1 reloader
+		ARG 2 initialStage
+		ARG 3 applier
 	METHOD m_fdirnkhq create (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;)Lnet/minecraft/unmapped/C_dzecaeok;
 		COMMENT Creates a simple resource reload without additional results.
 		ARG 0 manager
 		ARG 1 reloaders
-		ARG 2 prepareExecutor
-		ARG 3 applyExecutor
+		ARG 2 preparer
+		ARG 3 applier
 		ARG 4 initialStage
+	METHOD m_mjnyxaij (Ljava/util/concurrent/Executor;Ljava/lang/Runnable;)V
+		ARG 2 runnable
 	METHOD m_obrutakb create (Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;Z)Lnet/minecraft/unmapped/C_dzecaeok;
 		ARG 0 manager
 		ARG 1 reloaders
-		ARG 2 prepareExecutor
-		ARG 3 applyExecutor
+		ARG 2 preparer
+		ARG 3 applier
 		ARG 4 initialStage
 		ARG 5 profiled
+	CLASS C_hshtnhnh
+		METHOD m_buadvrsf (Ljava/lang/Object;Lnet/minecraft/unmapped/C_djdmkjpx;Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 ignored1
+			ARG 2 ignored2
 	CLASS C_rrqbjnfe Factory
 		COMMENT A factory that creates a completable future for each reloader in the
 		COMMENT resource reload.
+		FIELD f_fcboyvqx SIMPLE Lnet/minecraft/unmapped/C_nqsxthnh$C_rrqbjnfe;
+		METHOD create (Lnet/minecraft/unmapped/C_msqwzogj$C_yodorvdw;Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_msqwzogj;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+			ARG 1 synchronizer
+			ARG 2 manager
+			ARG 3 reloader
+			ARG 4 preparer
+			ARG 5 applier
+		METHOD m_fkvvsvbj (Lnet/minecraft/unmapped/C_msqwzogj$C_yodorvdw;Lnet/minecraft/unmapped/C_tmnrpasf;Lnet/minecraft/unmapped/C_msqwzogj;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+			ARG 0 synchronizer
+			ARG 1 manager
+			ARG 2 reloader
+			ARG 3 preparer
+			ARG 4 applier

@@ -1,33 +1,53 @@
 CLASS net/minecraft/unmapped/C_jelkcvqk net/minecraft/world/TrialSpawnerLogic
 	FIELD f_byggmrue playerDetector Lnet/minecraft/unmapped/C_kkiexczn;
+	FIELD f_culvqbdv config Lnet/minecraft/unmapped/C_jelkcvqk$C_xttlddfe;
 	FIELD f_cyizsevm AMBIENT_SOUND_CHANCE F
 	FIELD f_gbkgifex forceSpawning Z
+	FIELD f_ggxvkzdp DETECT_PLAYER_SPAWN_BUFFER I
 	FIELD f_gtjnizww data Lnet/minecraft/unmapped/C_zubqgkxt;
 	FIELD f_jgbopvuf spawner Lnet/minecraft/unmapped/C_jelkcvqk$C_onmhuuws;
 	FIELD f_jjqhihbg MAX_MOB_TRACKING_DISTANCE I
+	FIELD f_kurwkuaj DEFAULT_REQUIRED_PLAYER_RANGE I
+	FIELD f_mmgnanmo DEFAULT_TARGET_COOLDOWN_TICKS I
 	FIELD f_oeictsyk ominous Z
 	FIELD f_rqyxrnno playerDetectionSelector Lnet/minecraft/unmapped/C_kkiexczn$C_ztluwxut;
 	FIELD f_sobdyvtw MAX_MOB_TRACKING_RANGE I
 	METHOD m_aakzgwdf spawnMob (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/Optional;
 	METHOD m_bfccdstr addSpawnParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;Lnet/minecraft/unmapped/C_lwmufxcy;)V
+		ARG 3 type
 	METHOD m_bfmdqsfz getPlayerDetector ()Lnet/minecraft/unmapped/C_kkiexczn;
 	METHOD m_bftllosi tickClient (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
 	METHOD m_dalhosuv addEjectItemParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)V
+	METHOD m_dbjsyosp getRequiredPlayerRange ()I
 	METHOD m_dgbojbgg isOminous ()Z
+	METHOD m_drhrdfzo readData (Lnet/minecraft/unmapped/C_djkzhngg;)V
+		ARG 1 reader
+	METHOD m_emwhuihm getNormalConfig ()Lnet/minecraft/unmapped/C_pocjjnjk;
 	METHOD m_eoussynw setState (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_mefvrcdp;)V
 		ARG 2 state
 	METHOD m_ggqvmzns ejectLoot (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xhhleach;)V
 		ARG 3 lootTable
 	METHOD m_gtgamtxz getState ()Lnet/minecraft/unmapped/C_mefvrcdp;
+	METHOD m_icakhtha getData ()Lnet/minecraft/unmapped/C_zubqgkxt;
 	METHOD m_kdobayrz forceSpawning ()V
 	METHOD m_kyyyomnv hasLineOfSight (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Z
 		ARG 1 spawnerPos
 		ARG 2 spawnPos
+	METHOD m_lkhhftqt getActiveConfig ()Lnet/minecraft/unmapped/C_pocjjnjk;
 	METHOD m_mugawpjd tickServer (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Z)V
 		ARG 3 ominous
+	METHOD m_nszglagl setNotOminous (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_oadpbnsh setOminous (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_oylmwdbl writeData (Lnet/minecraft/unmapped/C_kespdwpv;)V
+		ARG 1 writer
+	METHOD m_riwkvjis spawning (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_cdctfzbn;)V
+	METHOD m_rjdmwubv addBecameOminousParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)V
+	METHOD m_sjjbcxon getOminousConfig ()Lnet/minecraft/unmapped/C_pocjjnjk;
 	METHOD m_ukxfwbge canSpawnMobs (Lnet/minecraft/unmapped/C_bdwnwhiu;)Z
+	METHOD m_ulelhmwm getTargetCooldownTicks ()I
 	METHOD m_wubotvnx addDetectionParticles (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;ILnet/minecraft/unmapped/C_nqucohct;)V
 		ARG 3 detectedPlayers
+		ARG 4 type
 	METHOD m_wujvpyvr setPlayerDetector (Lnet/minecraft/unmapped/C_kkiexczn;)V
 		ARG 1 playerDetector
 	METHOD m_ykbnfxwa getPlayerDetectionSelector ()Lnet/minecraft/unmapped/C_kkiexczn$C_ztluwxut;
@@ -38,3 +58,15 @@ CLASS net/minecraft/unmapped/C_jelkcvqk net/minecraft/world/TrialSpawnerLogic
 		METHOD m_qubjusrv setState (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_mefvrcdp;)V
 			ARG 2 state
 		METHOD m_wvpnseil updateListeners ()V
+	CLASS C_vhsnwpwm FlameParticle
+		FIELD f_cykfosmj type Lnet/minecraft/unmapped/C_lwmufxcy;
+		METHOD <init> (Ljava/lang/String;ILnet/minecraft/unmapped/C_lwmufxcy;)V
+			ARG 3 type
+		METHOD m_cyctivcj getId ()I
+		METHOD m_lbeqbvhn byId (I)Lnet/minecraft/unmapped/C_jelkcvqk$C_vhsnwpwm;
+			ARG 0 id
+	CLASS C_xttlddfe FullConfig
+		FIELD f_lrkmejvv targetCooldownTicks I
+		FIELD f_ojxfrvnv DEFAULT Lnet/minecraft/unmapped/C_jelkcvqk$C_xttlddfe;
+		METHOD m_nbrqugcn spawning (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_jelkcvqk$C_xttlddfe;
+		METHOD m_vqkihanx targetCooldownTicks ()I
