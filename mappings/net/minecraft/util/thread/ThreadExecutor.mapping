@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_wfxvpelc net/minecraft/util/thread/ThreadExecutor
+	FIELD f_dekdzqnq WAIT_TIME_NANOS J
 	FIELD f_jbvsaprb name Ljava/lang/String;
 	FIELD f_kxdzbkhv LOGGER Lorg/slf4j/Logger;
 	FIELD f_pfyykeai executionsInProgress I
@@ -20,6 +21,7 @@ CLASS net/minecraft/unmapped/C_wfxvpelc net/minecraft/util/thread/ThreadExecutor
 	METHOD m_jurnilqy submitAsync (Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 runnable
 	METHOD m_numnjvus canExecute (Ljava/lang/Runnable;)Z
+		ARG 1 task
 	METHOD m_pakonlbf executeIfPossible (Ljava/lang/Runnable;)V
 		ARG 1 runnable
 	METHOD m_qqwrpvfd submitAndJoin (Ljava/lang/Runnable;)V
@@ -27,6 +29,8 @@ CLASS net/minecraft/unmapped/C_wfxvpelc net/minecraft/util/thread/ThreadExecutor
 	METHOD m_ujgbwjcf getTaskCount ()I
 	METHOD m_uvhkkife getThread ()Ljava/lang/Thread;
 	METHOD m_vgbcguai runTasks ()V
+	METHOD m_whuexbgr isCausedByMemoryLimitation (Ljava/lang/Throwable;)Z
+		ARG 0 throwable
 	METHOD m_xakfizli waitForTasks ()V
 	METHOD m_yxzbunwm runTask ()Z
 	METHOD m_zpwzffjx isOnThread ()Z

@@ -149,6 +149,9 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 0 object
 		ARG 1 element
 		ARG 2 defaultByte
+	METHOD m_siqzqqip deserializeOrNull (Lcom/google/gson/Gson;Ljava/io/Reader;Lcom/google/gson/reflect/TypeToken;)Ljava/lang/Object;
+		ARG 0 gson
+		ARG 1 reader
 	METHOD m_smcppbnl deserialize (Lcom/google/gson/Gson;Ljava/io/Reader;Lcom/google/gson/reflect/TypeToken;)Ljava/lang/Object;
 		ARG 0 gson
 		ARG 1 reader
@@ -190,6 +193,7 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 	METHOD m_wqbaggjd asString (Lcom/google/gson/JsonElement;Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 element
 		ARG 1 name
+	METHOD m_xkhnvulx excedesCharacterLimit (Lcom/google/gson/JsonElement;I)Z
 	METHOD m_xtjihmpb hasElement (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
 		ARG 0 object
 		ARG 1 element
@@ -221,3 +225,16 @@ CLASS net/minecraft/unmapped/C_qtbzyiey net/minecraft/util/JsonHelper
 		ARG 0 object
 		ARG 1 name
 		ARG 2 defaultItem
+	CLASS C_bdffjnwo CharacterLimiter
+		FIELD f_ujbygvcs limit I
+		FIELD f_wbppxwcf count I
+		METHOD append (C)Ljava/lang/Appendable;
+			ARG 1 c
+		METHOD append (Ljava/lang/CharSequence;)Ljava/lang/Appendable;
+			ARG 1 chars
+		METHOD append (Ljava/lang/CharSequence;II)Ljava/lang/Appendable;
+			ARG 1 chars
+			ARG 2 start
+			ARG 3 end
+		METHOD m_wtieeoat incrementCount (I)Ljava/lang/Appendable;
+			ARG 1 amount
