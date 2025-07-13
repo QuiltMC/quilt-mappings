@@ -7,16 +7,33 @@ CLASS net/minecraft/unmapped/C_fsjpkzrx net/minecraft/predicate/StatePredicate
 	METHOD m_bbmuquuo test (Lnet/minecraft/unmapped/C_ezfeikaq;Lnet/minecraft/unmapped/C_jccsnmmo;)Z
 		ARG 1 stateManager
 		ARG 2 container
+	METHOD m_brnkgkqz (Ljava/util/List;)Ljava/util/Map;
+		ARG 0 list
 	METHOD m_flzybrzb reportFirstMissing (Lnet/minecraft/unmapped/C_ezfeikaq;)Ljava/util/Optional;
 		ARG 1 stateManager
 	METHOD m_gmelzunj test (Lnet/minecraft/unmapped/C_xqketiuf;)Z
 		ARG 1 state
 	METHOD m_igwihkjs test (Lnet/minecraft/unmapped/C_txtbiemp;)Z
 		ARG 1 state
+	METHOD m_ksspcjar (Ljava/util/Map;)Ljava/util/List;
+		ARG 0 map
+	METHOD m_ovntdmnb (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_fsjpkzrx$C_tmunpmxs;
+		ARG 0 entry
 	CLASS C_tmunpmxs Condition
 		FIELD f_rqaysqvr key Ljava/lang/String;
 		METHOD m_bgzcwfmt reportMissing (Lnet/minecraft/unmapped/C_ezfeikaq;)Ljava/util/Optional;
 			ARG 1 factory
+		METHOD m_drruxara allows (Lnet/minecraft/unmapped/C_ezfeikaq;Lnet/minecraft/unmapped/C_jccsnmmo;)Z
+			ARG 1 manager
+	CLASS C_uplrqwiy ValueMatcher
+		METHOD m_aysckpoj (Lnet/minecraft/unmapped/C_fsjpkzrx$C_uplrqwiy;)Lcom/mojang/datafixers/util/Either;
+			ARG 0 predicate
+		METHOD m_fqlgmpcg test (Lnet/minecraft/unmapped/C_jccsnmmo;Lnet/minecraft/unmapped/C_vzlztuyw;)Z
+			ARG 1 state
+			ARG 2 property
+		METHOD m_mronhvgo (Lnet/minecraft/unmapped/C_fsjpkzrx$C_uplrqwiy;)Lcom/mojang/datafixers/util/Either;
+			ARG 0 predicate
+	CLASS C_uvoyvsdu ExactValueMatcher
 	CLASS C_wpxfzjkz Builder
 		FIELD f_ooulyvzv conditions Lcom/google/common/collect/ImmutableList$Builder;
 		METHOD m_enqclpth exactMatch (Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/String;)Lnet/minecraft/unmapped/C_fsjpkzrx$C_wpxfzjkz;
@@ -33,3 +50,4 @@ CLASS net/minecraft/unmapped/C_fsjpkzrx net/minecraft/predicate/StatePredicate
 			ARG 1 property
 			ARG 2 value
 		METHOD m_zuubmyma build ()Ljava/util/Optional;
+	CLASS C_yeamratb ValueRangeMatcher

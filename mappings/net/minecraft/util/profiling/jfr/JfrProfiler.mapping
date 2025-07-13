@@ -1,5 +1,5 @@
 CLASS net/minecraft/unmapped/C_ldgcilfu net/minecraft/util/profiling/jfr/JfrProfiler
-	FIELD f_atdvyejs averageTickTime F
+	FIELD f_atdvyejs averageTickMillis F
 	FIELD f_cjjoqbpw summaryRecorderByAddress Ljava/util/Map;
 	FIELD f_dtvvxbmq INSTANCE Lnet/minecraft/unmapped/C_ldgcilfu;
 	FIELD f_hhyohtxl LOGGER Lorg/slf4j/Logger;
@@ -17,12 +17,22 @@ CLASS net/minecraft/unmapped/C_ldgcilfu net/minecraft/util/profiling/jfr/JfrProf
 	FIELD f_vskbgtdg STORAGE Ljava/lang/String;
 	FIELD f_yrercakh DATE_TIME_FORMATTER Ljava/time/format/DateTimeFormatter;
 	METHOD m_bfiaputh getInstance ()Lnet/minecraft/unmapped/C_ldgcilfu;
+	METHOD m_ebdpvhjl (Lnet/minecraft/util/profiling/jfr/event/ChunkGenerationEvent;Z)V
+		ARG 1 success
 	METHOD m_jywoeamh addListener ()V
 	METHOD m_medzxfpg (Lnet/minecraft/unmapped/C_nadflczy;Ljava/lang/String;Ljdk/jfr/Recording;)V
 		ARG 2 recording
 	METHOD m_njdfcnzk getOrCreateSummaryRecorder (Ljava/net/SocketAddress;)Lnet/minecraft/util/profiling/jfr/event/NetworkSummaryEvent$C_yxoelhgu;
 		ARG 1 remoteAddress
+	METHOD m_plczyicj (Lnet/minecraft/util/profiling/jfr/event/WorldLoadFinishedEvent;Z)V
+		ARG 1 success
 	METHOD m_tgrpuvqt startProfiling (Ljava/io/Reader;Lnet/minecraft/unmapped/C_nadflczy;)Z
 		ARG 1 reader
 		ARG 2 side
 			COMMENT the side of the profiler, only relevant for the recording name
+	METHOD m_wcefjdge (Lnet/minecraft/util/profiling/jfr/event/StructureGenerationEvent;Z)V
+		ARG 1 success
+	CLASS C_drnkpfah
+		FIELD f_pobnrtoi delegate Lnet/minecraft/unmapped/C_icovikpg;
+		METHOD recordingStateChanged (Ljdk/jfr/Recording;)V
+			ARG 1 recording

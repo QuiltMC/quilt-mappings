@@ -10,19 +10,22 @@ CLASS net/minecraft/unmapped/C_hyurdhty net/minecraft/util/profiling/jfr/JfrStat
 	FIELD f_qymzrsxd startTime Ljava/time/Instant;
 	FIELD f_sflsznpm packetReads Ljava/util/Map;
 	FIELD f_sxwkzxaj threadAllocationStatistics Ljava/util/List;
-	FIELD f_tzpfhjsr chunkGenerationData Ljava/util/List;
+	FIELD f_tzpfhjsr chunkGenerationStats Ljava/util/List;
 	FIELD f_vsgnqaow endTime Ljava/time/Instant;
 	FIELD f_vvbvtrgx serverTickTimes Ljava/util/List;
 	FIELD f_vwxftmgh totalGarbageCollectionDuration Ljava/time/Duration;
 	FIELD f_xjphwbyf packetSent Ljava/util/Map;
+	FIELD f_zhflnlxw structureGenerationStats Ljava/util/List;
 	METHOD <init> (Ljava/util/stream/Stream;)V
 		ARG 1 eventStream
-	METHOD m_crsowpah (Ljava/time/Duration;Ljava/util/Map;)Lnet/minecraft/unmapped/C_kmmgeuyo;
+	METHOD m_crsowpah createSummary (Ljava/time/Duration;Ljava/util/Map;)Lnet/minecraft/unmapped/C_kmmgeuyo;
 		ARG 0 duration
 		ARG 1 counters
 	METHOD m_dfsfobyc toStatsResult ()Lnet/minecraft/unmapped/C_ohlgrsme;
 	METHOD m_fnnfpmpa readEventStream (Ljava/util/stream/Stream;)V
 		ARG 1 eventStream
+	METHOD m_gwngyvkg (Ljava/util/Map$Entry;)Lcom/mojang/datafixers/util/Pair;
+		ARG 0 entry
 	METHOD m_hgcfajqk addChunk (Ljdk/jfr/consumer/RecordedEvent;ILjava/util/Map;)V
 		ARG 1 event
 		ARG 2 bytes
@@ -37,11 +40,15 @@ CLASS net/minecraft/unmapped/C_hyurdhty net/minecraft/util/profiling/jfr/JfrStat
 		ARG 1 event
 		ARG 2 list
 		ARG 3 bytesKey
+	METHOD m_pzppvchf (Lnet/minecraft/unmapped/C_xaublqcq;)Lnet/minecraft/unmapped/C_hyurdhty$C_vhmnxjua;
+		ARG 0 chunk
+	METHOD m_scghczsw (Lnet/minecraft/unmapped/C_yxogwmzq;)Lnet/minecraft/unmapped/C_hyurdhty$C_vhmnxjua;
+		ARG 0 packet
 	METHOD m_xbtvdaxc (Ljdk/jfr/consumer/RecordedEvent;)V
 		ARG 1 event
 	CLASS C_vhmnxjua Counter
-		FIELD f_uenqfvib totalSize J
-		FIELD f_unbdfmnw totalCount J
-		METHOD m_addmmahh toCountAndSize ()Lnet/minecraft/unmapped/C_kmmgeuyo$C_qnaqikgk;
+		FIELD f_uenqfvib size J
+		FIELD f_unbdfmnw count J
+		METHOD m_addmmahh createTotals ()Lnet/minecraft/unmapped/C_kmmgeuyo$C_qnaqikgk;
 		METHOD m_dthmmuqf add (I)V
 			ARG 1 bytes

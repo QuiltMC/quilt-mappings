@@ -3,19 +3,21 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	COMMENT
 	COMMENT <p>It has a few methods to create checkers for {@code Codec.flatXmap} to add
 	COMMENT extra value validation to encoding and decoding. See the implementation of
-	COMMENT {@link #toNonEmptyList(Codec)}.
+	COMMENT {@link #validateNonEmptyList(Codec)}.
 	FIELD f_aylcbfcj IDENTIFIER_PATH Lcom/mojang/serialization/Codec;
 	FIELD f_bcprdsha FROM_OPTIONAL_LONG Ljava/util/function/Function;
 	FIELD f_bwjbifvs BIT_SET Lcom/mojang/serialization/Codec;
 	FIELD f_bxtwhxeq PLAYER_NAME Lcom/mojang/serialization/Codec;
 	FIELD f_dawkqtjs POSITIVE_FLOAT Lcom/mojang/serialization/Codec;
+	FIELD f_etmlclow CHAT_STRING Lcom/mojang/serialization/Codec;
 	FIELD f_gkaqcuyx GAME_PROFILE Lcom/mojang/serialization/Codec;
-	FIELD f_hebpgars QUATERNIONF_COMPONENTS Lcom/mojang/serialization/Codec;
+	FIELD f_hebpgars QUATERNION_F_COMPONENTS Lcom/mojang/serialization/Codec;
 	FIELD f_iihsofbk NONNEGATIVE_INT Lcom/mojang/serialization/Codec;
 	FIELD f_irpmwmlr PROPERTY_MAP Lcom/mojang/serialization/Codec;
 	FIELD f_kkbuuhjf TAG_ENTRY_ID Lcom/mojang/serialization/Codec;
+	FIELD f_kpfajxoh VECTOR_3I Lcom/mojang/serialization/Codec;
 	FIELD f_mnhteojj TO_OPTIONAL_LONG Ljava/util/function/Function;
-	FIELD f_mowibqnt QUATERNIONF Lcom/mojang/serialization/Codec;
+	FIELD f_mowibqnt QUATERNION_F Lcom/mojang/serialization/Codec;
 	FIELD f_oawolklc PROPERTY Lcom/mojang/serialization/Codec;
 	FIELD f_oqekknlk UNSIGNED_BYTE Lcom/mojang/serialization/Codec;
 	FIELD f_ozwtoxnd INSTANT Lcom/mojang/serialization/Codec;
@@ -24,24 +26,43 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	FIELD f_qgiapsmp JSON_ELEMENT Lcom/mojang/serialization/Codec;
 	FIELD f_sumxgdro ESCAPED_STRING Lcom/mojang/serialization/Codec;
 	FIELD f_thyofzrm POSITIVE_INT Lcom/mojang/serialization/Codec;
-	FIELD f_tppidfcj MATRIX4F Lcom/mojang/serialization/Codec;
+	FIELD f_tppidfcj MATRIX_4F Lcom/mojang/serialization/Codec;
 	FIELD f_uhyrgrvq NONNEGATIVE_FLOAT Lcom/mojang/serialization/Codec;
+	FIELD f_utgzkxja URI Lcom/mojang/serialization/Codec;
 	FIELD f_uyxpihii OPAQUE_COLOR Lcom/mojang/serialization/Codec;
 	FIELD f_vgxoxqji COLOR Lcom/mojang/serialization/Codec;
 	FIELD f_vzxbwyel INT_CODEPOINT Lcom/mojang/serialization/Codec;
 	FIELD f_wqiemdiy NON_EMPTY_STRING Lcom/mojang/serialization/Codec;
 	FIELD f_xoyqtfku JAVA_OBJECT Lcom/mojang/serialization/Codec;
-	FIELD f_xprfobkx AXISANGLE4F Lcom/mojang/serialization/Codec;
-	FIELD f_yqsdivjg VECTOR4F Lcom/mojang/serialization/Codec;
-	FIELD f_zhwzaxnp VECTOR3F Lcom/mojang/serialization/Codec;
+	FIELD f_xprfobkx AXIS_ANGLE_4F Lcom/mojang/serialization/Codec;
+	FIELD f_yeymmlzh VECTOR_2F Lcom/mojang/serialization/Codec;
+	FIELD f_yqsdivjg VECTOR_4F Lcom/mojang/serialization/Codec;
+	FIELD f_zhwzaxnp VECTOR_3F Lcom/mojang/serialization/Codec;
 	FIELD f_zwudgozf GAME_PROFILE_WITHOUT_PROPERTIES Lcom/mojang/serialization/MapCodec;
+	METHOD m_aaivceov (Lcom/mojang/datafixers/util/Either;)Ljava/util/List;
+		ARG 0 listOrIndividual
 	METHOD m_ahlasxan withLifecycle (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 1 entryLifecycleGetter
 		ARG 2 lifecycleGetter
+	METHOD m_alobyyku (Lnet/minecraft/unmapped/C_odfnijdo;)Lcom/mojang/serialization/DataResult;
+		ARG 0 holders
+	METHOD m_atetnuvo (IILjava/lang/Integer;)Ljava/lang/String;
+		ARG 2 i
+	METHOD m_avzgrvah (Ljava/util/List;)Ljava/util/List;
+		ARG 0 list
+	METHOD m_awjfgfbh ([B)Ljava/lang/String;
+		ARG 0 bytes
+	METHOD m_bernpbal (Ljava/util/function/ToIntFunction;ILjava/lang/Object;)Lcom/mojang/serialization/DataResult;
+		ARG 2 element
+	METHOD m_bpcsbcqp (Ljava/util/OptionalLong;)Ljava/util/Optional;
+		ARG 0 optionalLong
 	METHOD m_bylmenao withLifecycle (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 1 lifecycleGetter
+	METHOD m_cdmeobin (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 path
 	METHOD m_ceqposdb (Lcom/mojang/authlib/properties/PropertyMap;Ljava/lang/String;Ljava/util/List;)V
 		ARG 1 name
+		ARG 2 values
 	METHOD m_cjkdnnjx (Ljava/util/List;)Lorg/joml/Vector2f;
 		ARG 0 list2
 	METHOD m_ckrjzkfs (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
@@ -52,37 +73,80 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 2 typeCodec
 		ARG 3 typeGetter
 		ARG 4 parameterCodecGetter
+	METHOD m_dgxtsajw (IILjava/util/function/Function;Ljava/lang/Integer;)Lcom/mojang/serialization/DataResult;
+		ARG 3 i
 	METHOD m_dmqewsll (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
 	METHOD m_dujfhivb orElsePartial (Ljava/lang/Object;)Lcom/mojang/serialization/Codec$ResultFunction;
 		ARG 0 partial
 	METHOD m_dzpokpmb (Lcom/mojang/authlib/GameProfile;Ljava/lang/String;Lcom/mojang/authlib/properties/Property;)V
-		ARG 1 string
+		ARG 1 name
+		ARG 2 property
+	METHOD m_etbyxgup (Ljava/util/function/Function;Ljava/util/Collection;)Lcom/mojang/serialization/DataResult;
+		ARG 1 collection
+	METHOD m_fgoneaqg (FFLjava/util/function/Function;Ljava/lang/Float;)Lcom/mojang/serialization/DataResult;
+		ARG 3 f
+	METHOD m_fiaxcoze (Ljava/util/function/BiFunction;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+		ARG 1 part
 	METHOD m_flhgmmki fromOps (Lcom/mojang/serialization/DynamicOps;)Lcom/mojang/serialization/Codec;
+	METHOD m_gcywmtgx (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 0 list
+	METHOD m_gfbpogmh (Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Pair;
+		ARG 2 combined
+	METHOD m_gglkhqew (Lorg/joml/Vector4f;)Ljava/util/List;
+		ARG 0 vec
+	METHOD m_ghvbhxpe (Lorg/joml/Quaternionf;)Ljava/util/List;
+		ARG 0 quaternion
+	METHOD m_gqyerxxs (Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Either;
+		ARG 2 combined
 	METHOD m_gtuotoel createStrictUnboundedMap (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)Lnet/minecraft/unmapped/C_tyjpezxh$C_psivvwhx;
 		ARG 0 keyCodec
 		ARG 1 elementCodec
+	METHOD m_gykcrqhi (Ljava/util/List;)Lorg/joml/Matrix4f;
+		ARG 0 list2
+	METHOD m_gyrtopxy (Ljava/util/stream/LongStream;)Ljava/util/BitSet;
+		ARG 0 longs
+	METHOD m_hduhtdch (Ljava/time/format/DateTimeFormatter;Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 1 string
 	METHOD m_hvqosais createIdentifiedElement (Ljava/util/function/ToIntFunction;Ljava/util/function/IntFunction;I)Lcom/mojang/serialization/Codec;
 		ARG 0 idGetter
 		ARG 1 elementGetter
 		ARG 2 unknownId
-	METHOD m_idhvndeb toNonEmptyMap (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
-		ARG 0 mapCodec
+	METHOD m_idhvndeb validateNonEmptyMap (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+		ARG 0 codec
 	METHOD m_ifdvuwzy formattedTime (Ljava/time/format/DateTimeFormatter;)Lcom/mojang/serialization/Codec;
 		ARG 0 formatter
 	METHOD m_ihvqsgya createContextRetrievalCodec (Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
 		ARG 0 retriever
 	METHOD m_ilnvpqgy optionalEmptyMap (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
-	METHOD m_juozehmq toNonEmptyHolderSet (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
-		ARG 0 holderSetCodec
+	METHOD m_iuewvnnu (Ljava/lang/Float;)Ljava/lang/String;
+		ARG 0 f
+	METHOD m_jdcprfrs (Ljava/lang/Integer;)Ljava/lang/String;
+		ARG 0 i
+	METHOD m_jigaydrf (Ljava/util/function/Function;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+		ARG 1 id
+	METHOD m_jmasfeyx (Ljava/util/List;)Lcom/mojang/datafixers/util/Either;
+		ARG 0 list2
+	METHOD m_jolfjyka (ILjava/util/Map;)Lcom/mojang/serialization/DataResult;
+		ARG 1 map
+	METHOD m_juozehmq validateNonEmptyHolderSet (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+		ARG 0 codec
 	METHOD m_kbffjffi withExceptionCatchingDecoder (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		ARG 0 codec
 	METHOD m_kcbwhxls (Ljava/util/List;)Lorg/joml/Vector3i;
-		ARG 0 fixedList
+		ARG 0 list2
+	METHOD m_lewgvjbt (Ljava/lang/String;Ljava/lang/String;Ljava/util/Optional;)Lcom/mojang/authlib/properties/Property;
+		ARG 0 name
+		ARG 1 value
+		ARG 2 signature
 	METHOD m_lfovegiy createRangedInt (IILjava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 min
 		ARG 1 max
 		ARG 2 messageFactory
+	METHOD m_lfujswdv (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 string
+	METHOD m_lleazmzn (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 0 list
 	METHOD m_lrcwcdqs orCompressed (Lcom/mojang/serialization/MapCodec;Lcom/mojang/serialization/MapCodec;)Lcom/mojang/serialization/MapCodec;
 		ARG 0 uncompressed
 		ARG 1 compressed
@@ -90,26 +154,44 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		ARG 0 codec
 	METHOD m_lxagintb (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/Dynamic;
 		ARG 1 object
-	METHOD m_lybgbxfe createEqualTypeChecker (Ljava/util/function/Function;)Ljava/util/function/Function;
+	METHOD m_lybgbxfe createCollectionTypeVerifier (Ljava/util/function/Function;)Ljava/util/function/Function;
 		ARG 0 typeGetter
 	METHOD m_mcwzjvkz (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
+	METHOD m_mfpnjepb (Lorg/joml/Vector2f;)Ljava/util/List;
+		ARG 0 vec
+	METHOD m_mgvopkql (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 string
+	METHOD m_mhgxozyd (Ljava/lang/Float;)Ljava/lang/String;
+		ARG 0 f
 	METHOD m_mkkelpbv createRangedFloat (FF)Lcom/mojang/serialization/Codec;
 	METHOD m_mljuucpo (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
 		ARG 0 string
 	METHOD m_mxydmzvu (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
-	METHOD m_njoxfqbl sizeLimitedMap (Lcom/mojang/serialization/Codec;I)Lcom/mojang/serialization/Codec;
+	METHOD m_njoxfqbl verifyMapSizeLimit (Lcom/mojang/serialization/Codec;I)Lcom/mojang/serialization/Codec;
 		ARG 1 maxSize
-	METHOD m_nsiytucc toNonEmptyList (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
-		ARG 0 listCodec
+	METHOD m_nmlmpohe (Lcom/mojang/authlib/properties/PropertyMap;)Lcom/mojang/datafixers/util/Either;
+		ARG 0 propertyMap
+	METHOD m_nsiytucc validateNonEmptyList (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+		ARG 0 codec
 	METHOD m_nuxvjbjt createRangedInt (II)Lcom/mojang/serialization/Codec;
 		ARG 0 min
 		ARG 1 max
-	METHOD m_pknstmhl createCodecForPairObject (Lcom/mojang/serialization/Codec;Ljava/lang/String;Ljava/lang/String;Ljava/util/function/BiFunction;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
-		ARG 0 pairCodec
-		ARG 1 leftFieldName
-		ARG 2 rightFieldName
+	METHOD m_nvmahqoi (Ljava/util/Optional;)Ljava/util/OptionalLong;
+		ARG 0 optional
+	METHOD m_ofjtbdjs (FFLjava/lang/Float;)Ljava/lang/String;
+		ARG 2 f
+	METHOD m_paojkcnu (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 string
+	METHOD m_pbrvpbbc (Lorg/joml/Vector3i;)Ljava/util/List;
+		ARG 0 vec
+	METHOD m_pfauagxl (Lorg/joml/Vector4f;)Ljava/lang/Integer;
+		ARG 0 vec
+	METHOD m_pknstmhl createCombined (Lcom/mojang/serialization/Codec;Ljava/lang/String;Ljava/lang/String;Ljava/util/function/BiFunction;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+		ARG 0 partCodec
+		ARG 1 leftName
+		ARG 2 rightName
 		ARG 3 combiner
 		ARG 4 leftGetter
 		ARG 5 rightGetter
@@ -118,33 +200,109 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 	METHOD m_ptgpydga individualOrList (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		ARG 0 individualCodec
 		ARG 1 listCodec
+	METHOD m_qbqrfzdn (Ljava/util/BitSet;)Ljava/util/stream/LongStream;
+		ARG 0 bits
+	METHOD m_qnvdlovm (Lorg/joml/AxisAngle4f;)Ljava/lang/Float;
+		ARG 0 axisAngle
+	METHOD m_qsvytnwp (Lcom/mojang/authlib/properties/PropertyMap;Ljava/util/Map;)V
+		ARG 1 map
+	METHOD m_qxxrjldc (Ljava/util/function/Function;Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 1 id
+	METHOD m_riwoifsz (Lcom/mojang/authlib/properties/PropertyMap;Ljava/util/List;)V
+		ARG 1 properties
+	METHOD m_sfrdssuh (Lcom/mojang/datafixers/util/Either;)Lcom/mojang/authlib/properties/PropertyMap;
+		ARG 0 mapOrProperties
 	METHOD m_sltnwzrc createExclusiveMinRangedFloat (FFLjava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 min
 		ARG 1 max
 		ARG 2 messageFactory
+	METHOD m_spzosery (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 string
+	METHOD m_szibgwdf (Lcom/mojang/authlib/properties/Property;)Ljava/util/Optional;
+		ARG 0 property
+	METHOD m_tmfqobpn (Ljava/util/function/BiFunction;Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 1 parts
+	METHOD m_traryqmn (Lorg/joml/Vector3f;)Ljava/util/List;
+		ARG 0 vec
 	METHOD m_ttngfrec createRangedFloat (FFLjava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 min
 		ARG 1 max
 		ARG 2 messageFactory
+	METHOD m_ttytqiie createIdentifiedValue (Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+		ARG 0 valueGetter
+	METHOD m_uassoxba (Ljava/lang/Integer;)Lcom/mojang/serialization/DataResult;
+		ARG 0 i
+	METHOD m_ucdisesb (Ljava/util/function/IntFunction;Ljava/lang/Integer;)Lcom/mojang/serialization/DataResult;
+		ARG 1 id
+	METHOD m_upbymkkv (Ljava/lang/Integer;)Ljava/lang/String;
+		ARG 0 i
 	METHOD m_usbyrfkj (Ljava/util/List;)Lorg/joml/Quaternionf;
-		ARG 0 fixedList
+		ARG 0 list2
+	METHOD m_uwqlwwsn (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 string
 	METHOD m_uyhsvlud orCompressed (Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
 		ARG 0 uncompressed
 		ARG 1 compressed
+	METHOD m_uywslctn (Ljava/util/List;)Lorg/joml/Vector4f;
+		ARG 0 list2
 	METHOD m_vionurow (Ljava/util/function/Function;Ljava/util/function/Function;Ljava/lang/Object;)Ljava/util/List;
-		ARG 2 individual
+		ARG 2 combined
+	METHOD m_wbkelfso (Lorg/joml/Matrix4fc;)Ljava/util/List;
+		ARG 0 matrix
+	METHOD m_wbwqgbrh (Lcom/mojang/authlib/GameProfile;Lcom/mojang/authlib/properties/PropertyMap;)Lcom/mojang/authlib/GameProfile;
+		ARG 1 propertyMap
 	METHOD m_wdvkpnng (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
 		ARG 0 name
 	METHOD m_weauhyrp individualOrList (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+	METHOD m_wexhoitc (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+		ARG 0 string
+	METHOD m_wfrwcwjm (Ljava/util/function/BiFunction;Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 1 parts2
+	METHOD m_wfukvmjh (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
+		ARG 0 list
 	METHOD m_wifswwjp object2BooleanMap (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+	METHOD m_wingqypx (Ljava/util/Map;)Lcom/mojang/serialization/DataResult;
+		ARG 0 map
+	METHOD m_wkbzktmj (FFLjava/util/function/Function;Ljava/lang/Float;)Lcom/mojang/serialization/DataResult;
+		ARG 3 f
+	METHOD m_wkcrajer (Lorg/joml/AxisAngle4f;)Lorg/joml/Vector3f;
+		ARG 0 axisAngle
 	METHOD m_wnlfxiwt (Ljava/util/List;)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
+	METHOD m_wttckqft (Ljava/util/function/BiFunction;Lcom/mojang/datafixers/util/Either;)Lcom/mojang/serialization/DataResult;
+		ARG 1 partOrCombined
 	METHOD m_xcvyoezm createIdentifiedElement (Lcom/mojang/serialization/Codec;Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
 		ARG 0 idCodec
 		ARG 1 idGetter
 		ARG 2 elementGetter
+	METHOD m_xhinkzvq (Ljava/util/function/Function;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+		ARG 1 element
+	METHOD m_yabsmkfm (Lorg/joml/Vector3f;)Ljava/lang/Integer;
+		ARG 0 vec
 	METHOD m_ykbqyyyz (Ljava/lang/String;Ljava/util/regex/PatternSyntaxException;)Ljava/lang/String;
 		ARG 0 string
+	CLASS C_cuqomsnk
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 input
+			ARG 3 prefix
+	CLASS C_lduttodi
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+	CLASS C_ltlpgnmp
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 input
+			ARG 3 prefix
+	CLASS C_nxvxcuuo
+		METHOD apply (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+			ARG 3 result
+		METHOD coApply (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+			ARG 3 result
 	CLASS C_pdblrsjv TagEntryId
 		FIELD f_fbymtsno tag Z
 		FIELD f_gbgbiokr id Lnet/minecraft/unmapped/C_ncpywfca;
@@ -168,6 +326,12 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 			ARG 2 mapLike
 		METHOD m_ywaubwiz (Ljava/lang/Object;Ljava/util/Map;)Lcom/mojang/datafixers/util/Pair;
 			ARG 1 map
+	CLASS C_rmkztixd
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 input
+			ARG 3 prefix
 	CLASS C_vszvntmz IdMap
 		FIELD f_jiznivyz valuesById Lcom/google/common/collect/BiMap;
 		METHOD m_pumnslpj createValueCodec (Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
@@ -175,3 +339,26 @@ CLASS net/minecraft/unmapped/C_tyjpezxh net/minecraft/util/dynamic/Codecs
 		METHOD m_vcuybwjv put (Ljava/lang/Object;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_tyjpezxh$C_vszvntmz;
 			ARG 1 id
 			ARG 2 value
+	CLASS C_vwclxfsu
+		METHOD apply (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+			ARG 3 result
+		METHOD coApply (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;Lcom/mojang/serialization/DataResult;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+			ARG 3 result
+	CLASS C_xmqgqbsp
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+			ARG 1 input
+			ARG 3 prefix
+		METHOD m_dsdzbjrq encodeStart (Lcom/mojang/serialization/Codec;Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+	CLASS C_yruhnvhw
+		METHOD decode (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 2 input
+		METHOD encode (Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+			ARG 1 input
+			ARG 3 prefix
+		METHOD m_vbpqbdmv isEmptyMap (Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Z
+			ARG 1 input

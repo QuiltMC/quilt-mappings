@@ -7,9 +7,12 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	FIELD f_hqaaykcp LOGGER Lorg/slf4j/Logger;
 	FIELD f_kczkpctf RECIPE_PROPERTY_SETS Ljava/util/Map;
 	FIELD f_lwdpgeem propertySets Ljava/util/Map;
+	FIELD f_mgtjzayv FILE_NAMESPACE Lnet/minecraft/unmapped/C_iiomeaxy;
 	FIELD f_qlhewmmf recipes Lnet/minecraft/unmapped/C_rrkbzyqf;
 	FIELD f_sbxhtycx stonecuttingRecipes Lnet/minecraft/unmapped/C_qzkacgwi$C_kvadugef;
 	FIELD f_yzfonsti displayByRecipe Ljava/util/Map;
+	METHOD m_amhwusvy (Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/Optional;
+		ARG 0 recipe
 	METHOD m_cuobwmoj createExtractorForSingleItemRecipe (Lnet/minecraft/unmapped/C_rhnqznys;)Lnet/minecraft/unmapped/C_hjseusrb$C_dpqqvooy;
 		ARG 0 type
 	METHOD m_dsxpcpxk get (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
@@ -17,6 +20,12 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	METHOD m_enpjndth filterDisabled (Lnet/minecraft/unmapped/C_czxxrbcp;Ljava/util/List;)Ljava/util/List;
 		ARG 0 features
 		ARG 1 ingredients
+	METHOD m_eywhgoaz (Ljava/util/List;Lnet/minecraft/unmapped/C_czxxrbcp;Ljava/util/List;Lnet/minecraft/unmapped/C_dscbrwbj;)V
+		ARG 3 recipe
+	METHOD m_gilvqxap (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/Optional;
+		ARG 1 recipe
+	METHOD m_gtiabvzv (Lnet/minecraft/unmapped/C_hjseusrb$C_xmfwsmdh;)Lnet/minecraft/unmapped/C_xhhleach;
+		ARG 0 ingredient
 	METHOD m_hcqenhtt deserialize (Lnet/minecraft/unmapped/C_xhhleach;Lcom/google/gson/JsonObject;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)Lnet/minecraft/unmapped/C_dscbrwbj;
 		COMMENT Reads a recipe from a JSON object.
 		COMMENT
@@ -30,19 +39,35 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 		ARG 1 json
 			COMMENT the recipe JSON
 		ARG 2 lookupProvider
+	METHOD m_icuyhpeq (Lnet/minecraft/unmapped/C_awrmdwqd;Lnet/minecraft/unmapped/C_hjseusrb$C_xmfwsmdh;)V
+		ARG 1 ingredient
 	METHOD m_igyegyvq getFirstMatch (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_dscbrwbj;)Ljava/util/Optional;
 		ARG 1 type
 	METHOD m_jgeojtch get (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_xhhleach;)Lnet/minecraft/unmapped/C_dscbrwbj;
 		ARG 1 type
+	METHOD m_lxxkxvtr (Ljava/util/List;Lnet/minecraft/unmapped/C_ncpywfca;Lnet/minecraft/unmapped/C_awrmdwqd;)V
+		ARG 2 recipe
+	METHOD m_obdclwip (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hjseusrb$C_oqjlukte;)V
+		ARG 1 displayInfo
 	METHOD m_omtmmszf getFirstMatch (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/Optional;
 		ARG 1 type
+	METHOD m_onzjdcbh (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_tcpsydrv;)Z
+		ARG 1 ingredient
 	METHOD m_oqvxqpcm createCheck (Lnet/minecraft/unmapped/C_rhnqznys;)Lnet/minecraft/unmapped/C_hjseusrb$C_bvtkxdyi;
 		ARG 0 type
+	METHOD m_orprvfvv (Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/Optional;
+		ARG 0 recipe
 	METHOD m_pmavtcuv getSynchronizedPropertySets ()Ljava/util/Map;
+	METHOD m_regfdgzl (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_cjzoxshv;)Z
+		ARG 1 item
 	METHOD m_rjyhicja get (Lnet/minecraft/unmapped/C_tglmjehp;)Lnet/minecraft/unmapped/C_hjseusrb$C_oqjlukte;
 		ARG 1 display
+	METHOD m_tnyoiilv (Lit/unimi/dsi/fastutil/objects/Object2IntMap;Ljava/lang/Object;)I
+		ARG 1 group
 	METHOD m_tziaudbn isEnabled (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_tcpsydrv;)Z
 		ARG 0 features
+		ARG 1 ingredient
+	METHOD m_uijyqeab (Lnet/minecraft/unmapped/C_czxxrbcp;Lnet/minecraft/unmapped/C_hjseusrb$C_xmfwsmdh;)Lnet/minecraft/unmapped/C_jgqrwysz;
 		ARG 1 ingredient
 	METHOD m_vdaiapfc getSynchronizedStonecuttingRecipes ()Lnet/minecraft/unmapped/C_qzkacgwi$C_kvadugef;
 	METHOD m_vrjdrstk getRecipes ()Ljava/util/Collection;
@@ -53,6 +78,10 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	METHOD m_wzltkytn forEachDisplay (Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/Consumer;)V
 		ARG 1 key
 		ARG 2 consumer
+	METHOD m_yaytthyj (Lnet/minecraft/unmapped/C_hjseusrb$C_oqjlukte;)Lnet/minecraft/unmapped/C_xhhleach;
+		ARG 0 display
+	METHOD m_ycuyimxd (Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/Optional;
+		ARG 0 recipe
 	METHOD m_yhwkrsrr getFirstMatch (Lnet/minecraft/unmapped/C_rhnqznys;Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/Optional;
 		ARG 2 input
 	METHOD m_zjlbqobl finalizeLoading (Lnet/minecraft/unmapped/C_czxxrbcp;)V
@@ -60,9 +89,14 @@ CLASS net/minecraft/unmapped/C_hjseusrb net/minecraft/recipe/RecipeManager
 	METHOD m_zvzhojlr collectDisplayInfo (Ljava/lang/Iterable;Lnet/minecraft/unmapped/C_czxxrbcp;)Ljava/util/List;
 		ARG 0 recipes
 		ARG 1 features
+	METHOD m_zwsvcjwt (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_hjseusrb$C_xmfwsmdh;
+		ARG 0 entry
 	CLASS C_bvtkxdyi CachedCheck
 		METHOD m_ltqsvwgf getFirstMatch (Lnet/minecraft/unmapped/C_cxmcihwl;Lnet/minecraft/unmapped/C_bdwnwhiu;)Ljava/util/Optional;
+			ARG 1 input
 	CLASS C_dpqqvooy IngredientExtractor
+		METHOD apply (Lnet/minecraft/unmapped/C_awrmdwqd;)Ljava/util/Optional;
+			ARG 1 recipe
 	CLASS C_ioxglbpe
 		FIELD f_kspyemsz key Lnet/minecraft/unmapped/C_xhhleach;
 	CLASS C_oqjlukte ServerDisplayInfo
