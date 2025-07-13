@@ -60,6 +60,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_bjjkjdwd (Lorg/slf4j/Marker;)V
 		ARG 0 marker
 	METHOD m_bnpqdudq hasChannel ()Z
+	METHOD m_bzftdfud send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/channel/ChannelFutureListener;)V
 	METHOD m_cxygpyan disableAutoRead ()V
 	METHOD m_dzmcexuz disconnect (Lnet/minecraft/unmapped/C_igbzvhln;)V
 		ARG 1 details
@@ -72,7 +73,9 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_ejdecnhl addHandlers (Lio/netty/channel/ChannelPipeline;Lnet/minecraft/unmapped/C_exeqxqdd;ZLnet/minecraft/unmapped/C_gxhfclcm;)V
 		ARG 0 pipeline
 		ARG 1 side
+		ARG 2 local
 		ARG 3 packetSizeHandler
+	METHOD m_etpcqour send (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/channel/ChannelFutureListener;Z)V
 	METHOD m_faopouol flushInternal ()V
 	METHOD m_fqnxiapg submit (Ljava/util/function/Consumer;)V
 		ARG 1 task
@@ -105,9 +108,13 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_luuskhlm initPerformanceSampleLog (Lnet/minecraft/unmapped/C_pwpucsml;)V
 	METHOD m_lyptmghi connectLocal (Ljava/net/SocketAddress;)Lnet/minecraft/unmapped/C_oasmcckk;
 		ARG 0 address
+	METHOD m_mbsmnzkr createOutboundHandler (Z)Lio/netty/channel/ChannelOutboundHandler;
+		ARG 0 local
 	METHOD m_mnslofbm validateInboundProtocol (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
 		ARG 1 phase
 		ARG 2 listener
+	METHOD m_padwfxcg (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/channel/ChannelFutureListener;ZLnet/minecraft/unmapped/C_oasmcckk;)V
+		ARG 3 connection
 	METHOD m_qeznuhlz (ZLio/netty/channel/ChannelHandlerContext;)V
 		ARG 2 channelHandlerContext
 	METHOD m_qjeqlspr setupInboundProtocol (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_tkgdawqw;)V
@@ -128,6 +135,9 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_sprgohsj flush ()V
 	METHOD m_tckzsnsu setupOutboundProtocol (Lnet/minecraft/unmapped/C_ppzmqyxe;)V
 		ARG 1 protocol
+	METHOD m_tnzecwyk createInboundHandler (Lnet/minecraft/unmapped/C_gxhfclcm;Z)Lio/netty/channel/ChannelInboundHandler;
+		ARG 0 sizeHandler
+		ARG 1 local
 	METHOD m_tpxokfsb (Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_ifnchbtj;Ljava/lang/String;ILnet/minecraft/unmapped/C_uxoyljpb;Lnet/minecraft/unmapped/C_ppzmqyxe;Lnet/minecraft/unmapped/C_oasmcckk;)V
 		ARG 7 connection
 	METHOD m_ttkdcwpg getOutboundHandlerConfig (Z)Ljava/lang/String;
@@ -153,6 +163,7 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 		ARG 1 useEpoll
 	METHOD m_vyytglie sendInternal (Lnet/minecraft/unmapped/C_zyjtrjrl;Lio/netty/channel/ChannelFutureListener;Z)V
 		ARG 1 packet
+		ARG 2 listener
 		ARG 3 flush
 	METHOD m_wgetbbyv syncUninterruptibly (Lio/netty/channel/ChannelFuture;)V
 		ARG 0 future
@@ -174,3 +185,14 @@ CLASS net/minecraft/unmapped/C_oasmcckk net/minecraft/network/ClientConnection
 	METHOD m_ziivfjpb getSide ()Lnet/minecraft/unmapped/C_exeqxqdd;
 		COMMENT Returns the side of this connection, or the direction of the packets received
 		COMMENT by this connection.
+	CLASS C_eizoucfg
+		METHOD initChannel (Lio/netty/channel/Channel;)V
+			ARG 1 channel
+	CLASS C_qurkirxp
+		METHOD write (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;Lio/netty/channel/ChannelPromise;)V
+			ARG 1 context
+			ARG 2 message
+			ARG 3 promise
+	CLASS C_sggcdwlq
+		METHOD initChannel (Lio/netty/channel/Channel;)V
+			ARG 1 channel
