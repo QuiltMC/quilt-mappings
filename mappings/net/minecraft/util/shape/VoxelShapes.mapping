@@ -6,12 +6,12 @@ CLASS net/minecraft/unmapped/C_dodusopt net/minecraft/util/shape/VoxelShapes
 	FIELD f_xmvqitrh BIG_EPSILON D
 	FIELD f_yjjfoqpz BLOCK_CUBE_CENTER Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_aehmakwy adjacentSidesCoverSquare (Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
-		ARG 0 one
-		ARG 1 two
+		ARG 0 shape1
+		ARG 1 shape2
 		ARG 2 direction
 	METHOD m_akrmbmeq combine (Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_glcezlyp;)Lnet/minecraft/unmapped/C_zscvhwbd;
-		ARG 0 one
-		ARG 1 two
+		ARG 0 shape1
+		ARG 1 shape2
 		ARG 2 function
 	METHOD m_asazhhav createHorizontalAxisRotations (Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_vgpupfxx;)Ljava/util/Map;
 		ARG 0 shape
@@ -33,7 +33,7 @@ CLASS net/minecraft/unmapped/C_dodusopt net/minecraft/util/shape/VoxelShapes
 		ARG 0 first
 		ARG 1 second
 	METHOD m_fjbpqyxs equal (Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_zscvhwbd;)Z
-	METHOD m_fmsttcki createListPair (ILit/unimi/dsi/fastutil/doubles/DoubleList;Lit/unimi/dsi/fastutil/doubles/DoubleList;ZZ)Lnet/minecraft/unmapped/C_dbdmfnqs;
+	METHOD m_fmsttcki createPairList (ILit/unimi/dsi/fastutil/doubles/DoubleList;Lit/unimi/dsi/fastutil/doubles/DoubleList;ZZ)Lnet/minecraft/unmapped/C_dbdmfnqs;
 		ARG 0 size
 		ARG 1 first
 		ARG 2 second
@@ -51,14 +51,17 @@ CLASS net/minecraft/unmapped/C_dodusopt net/minecraft/util/shape/VoxelShapes
 		ARG 1 box
 		ARG 2 shapes
 		ARG 3 maxDistance
+	METHOD m_hfizytuh isSideCovered (Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
+		ARG 0 shape
+		ARG 1 neighbor
 	METHOD m_jdunsxdn withRotation (Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_yipxoxer;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 0 shape
 		ARG 1 transformation
 		ARG 2 center
 	METHOD m_kapgkzas cuboid (Lnet/minecraft/unmapped/C_hbcjzgoe;)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 0 box
-	METHOD m_kbwcodsv fullCube ()Lnet/minecraft/unmapped/C_zscvhwbd;
-	METHOD m_objlzzkv empty ()Lnet/minecraft/unmapped/C_zscvhwbd;
+	METHOD m_kbwcodsv getFullCube ()Lnet/minecraft/unmapped/C_zscvhwbd;
+	METHOD m_objlzzkv getEmpty ()Lnet/minecraft/unmapped/C_zscvhwbd;
 	METHOD m_opygggbs cuboidUnchecked (DDDDDD)Lnet/minecraft/unmapped/C_zscvhwbd;
 		ARG 0 minX
 		ARG 2 minY
@@ -85,6 +88,11 @@ CLASS net/minecraft/unmapped/C_dodusopt net/minecraft/util/shape/VoxelShapes
 		ARG 3 shape1
 		ARG 4 shape2
 		ARG 5 predicate
+	METHOD m_sgtftikj createTransformedPositions (Lit/unimi/dsi/fastutil/doubles/DoubleList;ZDD)Lit/unimi/dsi/fastutil/doubles/DoubleList;
+		ARG 0 pointPositions
+		ARG 1 flip
+		ARG 2 component
+		ARG 4 anchor
 	METHOD m_vycbkbgi lcm (II)J
 		ARG 0 a
 		ARG 1 b
@@ -108,3 +116,10 @@ CLASS net/minecraft/unmapped/C_dodusopt net/minecraft/util/shape/VoxelShapes
 	METHOD m_zflvxdgn createHorizontalDirectionRotations (Lnet/minecraft/unmapped/C_zscvhwbd;Lnet/minecraft/unmapped/C_vgpupfxx;)Ljava/util/Map;
 		ARG 0 shape
 	CLASS C_spddrqcv BoxConsumer
+		METHOD consume accept (DDDDDD)V
+			ARG 1 minX
+			ARG 3 minY
+			ARG 5 minZ
+			ARG 7 maxX
+			ARG 9 maxY
+			ARG 11 maxZ

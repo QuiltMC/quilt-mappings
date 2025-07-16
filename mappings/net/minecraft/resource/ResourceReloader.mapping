@@ -7,7 +7,14 @@ CLASS net/minecraft/unmapped/C_msqwzogj net/minecraft/resource/ResourceReloader
 	COMMENT (completes preparation in one method)
 	COMMENT @see SynchronousResourceReloader SynchronousResourceReloader
 	COMMENT (performs all reloading in the apply executor)
+	METHOD reload (Lnet/minecraft/unmapped/C_msqwzogj$C_yodorvdw;Lnet/minecraft/unmapped/C_tmnrpasf;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 synchronizer
+		ARG 2 manager
+		ARG 3 preparer
+		ARG 4 applier
 	CLASS C_yodorvdw Synchronizer
 		COMMENT A synchronizer to indicate completion of a reloader's prepare stage and
 		COMMENT to allow start of the apply stage only if all reloaders have finished
 		COMMENT the prepare stage.
+		METHOD wait (Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
+			ARG 1 value

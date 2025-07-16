@@ -13,6 +13,8 @@ CLASS net/minecraft/unmapped/C_ynrszrtu net/minecraft/util/math/ChunkPos
 	FIELD f_rcnwbvtz COORD_BITS J
 	FIELD f_rjwwzeot x I
 	FIELD f_ubdvlncb HASH_Z_XOR I
+	FIELD f_umhupgxd MAX_AXIS_VALUE I
+	FIELD f_vdxymktd SAFETY_MARGIN_CHUNK_COUNT I
 	METHOD <init> (II)V
 		ARG 1 x
 		ARG 2 z
@@ -41,10 +43,21 @@ CLASS net/minecraft/unmapped/C_ynrszrtu net/minecraft/util/math/ChunkPos
 		ARG 1 regionZ
 	METHOD m_mypltpaf getPackedZ (J)I
 		ARG 0 pos
+	METHOD m_nebywadi (Ljava/util/stream/IntStream;)Lcom/mojang/serialization/DataResult;
+		ARG 0 ints
+	METHOD m_odhmogtb maxAxisDistance (Lnet/minecraft/unmapped/C_ynrszrtu;)I
+		ARG 1 pos
 	METHOD m_pbdcnqil getCenterZ ()I
+	METHOD m_pfeeuphp (Lnet/minecraft/unmapped/C_ynrszrtu;)Ljava/util/stream/IntStream;
+		ARG 0 pos
+	METHOD m_pvgiqfnp maxAxisDistance (II)I
+		ARG 1 x
+		ARG 2 z
 	METHOD m_qcedmndj maxOfRegion (II)Lnet/minecraft/unmapped/C_ynrszrtu;
 		ARG 0 regionX
 		ARG 1 regionZ
+	METHOD m_qssypvzo ([I)Lnet/minecraft/unmapped/C_ynrszrtu;
+		ARG 0 array
 	METHOD m_qzugcpxj hash (II)I
 		ARG 0 x
 		ARG 1 z
@@ -75,3 +88,7 @@ CLASS net/minecraft/unmapped/C_ynrszrtu net/minecraft/util/math/ChunkPos
 		ARG 3 offsetZ
 	METHOD m_zwtzmthx getSquaredDistance (Lnet/minecraft/unmapped/C_ynrszrtu;)I
 		ARG 1 pos
+	CLASS C_injlizxd
+		FIELD f_flwwbaba pos Lnet/minecraft/unmapped/C_ynrszrtu;
+		METHOD tryAdvance (Ljava/util/function/Consumer;)Z
+			ARG 1 action

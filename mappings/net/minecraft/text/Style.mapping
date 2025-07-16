@@ -8,6 +8,7 @@ CLASS net/minecraft/unmapped/C_cpwnhism net/minecraft/text/Style
 	FIELD f_akgqrpsz color Lnet/minecraft/unmapped/C_wvsbwbil;
 	FIELD f_asegqccv clickEvent Lnet/minecraft/unmapped/C_djywfbme;
 	FIELD f_ccdlxlro underlined Ljava/lang/Boolean;
+	FIELD f_eauogzjo shadowColor Ljava/lang/Integer;
 	FIELD f_ivadppyn font Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_lyfnndrz EMPTY Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT An empty style.
@@ -19,19 +20,22 @@ CLASS net/minecraft/unmapped/C_cpwnhism net/minecraft/text/Style
 	FIELD f_shbyrpex insertion Ljava/lang/String;
 	FIELD f_uorxvlwb italic Ljava/lang/Boolean;
 	FIELD f_wxbzpcki obfuscated Ljava/lang/Boolean;
+	METHOD <init> (Lnet/minecraft/unmapped/C_wvsbwbil;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Lnet/minecraft/unmapped/C_djywfbme;Lnet/minecraft/unmapped/C_qhrnrrcp;Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;)V
+		ARG 11 font
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 1 o
 	METHOD m_ajyzlxsn create (Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)Lnet/minecraft/unmapped/C_cpwnhism;
 		ARG 0 color
-		ARG 1 bold
-		ARG 2 italic
-		ARG 3 underlined
-		ARG 4 strikethrough
-		ARG 5 obfuscated
-		ARG 6 clickEvent
-		ARG 7 hoverEvent
-		ARG 8 insertion
-		ARG 9 font
+		ARG 1 shadowColor
+		ARG 2 bold
+		ARG 3 italic
+		ARG 4 underline
+		ARG 5 strikethrough
+		ARG 6 obfuscated
+		ARG 7 clickEvent
+		ARG 8 hoverEvent
+		ARG 9 insertion
+		ARG 10 font
 	METHOD m_akzhywag checkEmptyAfterChange (Lnet/minecraft/unmapped/C_cpwnhism;Ljava/lang/Object;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT Checks whether a new style, with a changed attribute is empty, in which case is
 		COMMENT replaced by the {@link #EMPTY empty style instance}.
@@ -51,6 +55,7 @@ CLASS net/minecraft/unmapped/C_cpwnhism net/minecraft/text/Style
 		COMMENT attributes of this style.
 		ARG 1 clickEvent
 			COMMENT the new click event
+	METHOD m_dsxnakha getShadowColor ()Ljava/lang/Integer;
 	METHOD m_ecpsptfx withObfuscated (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_cpwnhism;
 		ARG 1 obfuscated
 	METHOD m_fnvclztz isItalic ()Z
@@ -95,6 +100,8 @@ CLASS net/minecraft/unmapped/C_cpwnhism net/minecraft/text/Style
 			COMMENT the new italic property
 	METHOD m_ubifhpoy withColor (I)Lnet/minecraft/unmapped/C_cpwnhism;
 		ARG 1 rgbColor
+	METHOD m_uqijukmm withShadowColor (I)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 shadowColor
 	METHOD m_urugkexy withInsertion (Ljava/lang/String;)Lnet/minecraft/unmapped/C_cpwnhism;
 		COMMENT Returns a new style with the insertion provided and all other
 		COMMENT attributes of this style.
@@ -149,6 +156,15 @@ CLASS net/minecraft/unmapped/C_cpwnhism net/minecraft/text/Style
 		COMMENT
 		COMMENT <p>An insertion is inserted when a piece of text clicked while shift key
 		COMMENT is down in the chat HUD.
+	CLASS C_azplftfl
+		FIELD f_szmdllpx notFirst Z
+		METHOD m_ndzksqsj tryAppendComma ()V
+		METHOD m_njcscenk tryAppendBoolean (Ljava/lang/String;Ljava/lang/Boolean;)V
+			ARG 1 key
+			ARG 2 value
+		METHOD m_obhctqwj tryAppendValue (Ljava/lang/String;Ljava/lang/Object;)V
+			ARG 1 key
+			ARG 2 value
 	CLASS C_esbikpbl Serializer
 		COMMENT A JSON serializer for {@link Style}.
 		FIELD f_atpuoola MAP_CODEC Lcom/mojang/serialization/MapCodec;
@@ -164,6 +180,8 @@ CLASS net/minecraft/unmapped/C_cpwnhism net/minecraft/text/Style
 		METHOD m_iqktaued (Lnet/minecraft/unmapped/C_cpwnhism;)Ljava/util/Optional;
 			ARG 0 style
 		METHOD m_jgcldkbr (Lnet/minecraft/unmapped/C_cpwnhism;)Ljava/util/Optional;
+			ARG 0 style
+		METHOD m_kzujxcyz (Lnet/minecraft/unmapped/C_cpwnhism;)Ljava/util/Optional;
 			ARG 0 style
 		METHOD m_ldouzppd (Lnet/minecraft/unmapped/C_cpwnhism;)Ljava/util/Optional;
 			ARG 0 style

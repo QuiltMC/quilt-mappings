@@ -1,32 +1,65 @@
 CLASS net/minecraft/unmapped/C_hvackyip net/minecraft/client/render/item/ItemRenderState
 	FIELD f_jqpewvuc layers [Lnet/minecraft/unmapped/C_hvackyip$C_bzitpxhm;
 	FIELD f_kfruekvk layerCount I
+	FIELD f_lbebfjdn oversizedInGui Z
+	FIELD f_letyjiuu animated Z
+	FIELD f_nhakoklv bounds Lnet/minecraft/unmapped/C_hbcjzgoe;
 	FIELD f_qopjqwav transformationMode Lnet/minecraft/unmapped/C_byhguelf;
 	METHOD m_aiejqtpc clear ()V
+	METHOD m_amivkpnv isAnimated ()Z
+	METHOD m_dtkvrcjm isOversizedInGui ()Z
+	METHOD m_fafajbqi addModelIdentity (Ljava/lang/Object;)V
+		ARG 1 identity
 	METHOD m_geygovhf getFirstLayer ()Lnet/minecraft/unmapped/C_hvackyip$C_bzitpxhm;
 	METHOD m_iiyavrpb newLayer ()Lnet/minecraft/unmapped/C_hvackyip$C_bzitpxhm;
 	METHOD m_lukaatrw addLayers (I)V
 		ARG 1 count
 	METHOD m_miswrkti getParticleSprite (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_uflrwbwt;
 	METHOD m_sairbzkx isEmpty ()Z
+	METHOD m_smvytigb setOversizedInGui (Z)V
+		ARG 1 oversized
+	METHOD m_uoycwicz forEachVertex (Ljava/util/function/Consumer;)V
+		ARG 1 action
 	METHOD m_vihndgyt render (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;II)V
 		ARG 3 light
 		ARG 4 overlay
 	METHOD m_vlfyrptr isSideLit ()Z
+	METHOD m_xqvtiypl setAnimated ()V
+	METHOD m_zwodlkgr getBounds ()Lnet/minecraft/unmapped/C_hbcjzgoe;
 	CLASS C_aytbigki GlintType
 	CLASS C_bzitpxhm LayerState
+		FIELD f_ayjtpedv EMPTY_VERTICES [Lorg/joml/Vector3f;
+		FIELD f_fcylfcfj particleIcon Lnet/minecraft/unmapped/C_uflrwbwt;
 		FIELD f_hlzsufzi glintType Lnet/minecraft/unmapped/C_hvackyip$C_aytbigki;
+		FIELD f_hyxbfhwz transformation Lnet/minecraft/unmapped/C_gzxtwwlq;
+		FIELD f_lkrijqii usesBlockLight Z
 		FIELD f_rmofhlzt specialRenderer Lnet/minecraft/unmapped/C_necuazyi;
+		FIELD f_srmutxfj quads Ljava/util/List;
+		FIELD f_tzvcnisl EMPTY_VERTICES_GETTER Ljava/util/function/Supplier;
 		FIELD f_uiskcfdy tints [I
+		FIELD f_ulkichaf verticesGetter Ljava/util/function/Supplier;
 		FIELD f_vevjiouw specialRenderData Ljava/lang/Object;
 		FIELD f_xdzfwnjb layer Lnet/minecraft/unmapped/C_tizlwnnv;
 		METHOD m_aqzjgmec prepareTints (I)[I
 			ARG 1 count
+		METHOD m_ayggwxek setLayer (Lnet/minecraft/unmapped/C_tizlwnnv;)V
+			ARG 1 layer
+		METHOD m_cuccpzgy setUsesBlockLight (Z)V
+			ARG 1 usesBlockLight
 		METHOD m_eojnvwpj render (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe;II)V
 			ARG 3 light
 			ARG 4 overlay
 		METHOD m_galplucl setGlintType (Lnet/minecraft/unmapped/C_hvackyip$C_aytbigki;)V
 			ARG 1 type
 		METHOD m_giaafktl clear ()V
+		METHOD m_gnszbspu setVerticesGetter (Ljava/util/function/Supplier;)V
+			ARG 1 getter
+		METHOD m_hmzyzmyj getQuads ()Ljava/util/List;
+		METHOD m_jjqxjmjv setTransformation (Lnet/minecraft/unmapped/C_gzxtwwlq;)V
+			ARG 1 transformation
+		METHOD m_mziaoojw setParticleIcon (Lnet/minecraft/unmapped/C_uflrwbwt;)V
+			ARG 1 icon
 		METHOD m_nvltpyzg eraseType (Lnet/minecraft/unmapped/C_necuazyi;)Lnet/minecraft/unmapped/C_necuazyi;
 			ARG 0 renderer
+		METHOD m_quehbjsj setSpecialModelRenderer (Lnet/minecraft/unmapped/C_necuazyi;Ljava/lang/Object;)V
+			ARG 2 data
