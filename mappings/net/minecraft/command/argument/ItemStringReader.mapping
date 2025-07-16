@@ -1,22 +1,30 @@
 CLASS net/minecraft/unmapped/C_aggscjva net/minecraft/command/argument/ItemStringReader
 	FIELD f_aplmwlmb ASSIGNMENT_OPERATOR C
 	FIELD f_cmtaezhv ITEM_COMPONENT_REPEATED_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
-	FIELD f_fwzjhzyb ITEM_ID_INVALID_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
-	FIELD f_hhcgpsuq RIGHT_SQUARE_BRACKET C
-	FIELD f_hkgvkeaa LEFT_SQUARE_BRACKET C
-	FIELD f_khcndogj SEPARATOR C
+	FIELD f_fwzjhzyb INVALID_ITEM_ID_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
+	FIELD f_hhcgpsuq COMPONENTS_END C
+	FIELD f_hkgvkeaa COMPONENTS_START C
+	FIELD f_hxfugzgd SUGGEST_NOTHING Ljava/util/function/Function;
+	FIELD f_kgirzukz nbtReader Lnet/minecraft/unmapped/C_jjafokvs;
+	FIELD f_khcndogj COMPONENT_SEPARATOR C
 	FIELD f_lrafhxvx ITEM_COMPONENT_EXPECTED_EXCEPTION Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
 	FIELD f_mdcplqwg REMOVAL_OPERATOR C
+	FIELD f_qmjmakhc itemLookup Lnet/minecraft/unmapped/C_vtbxyypo$C_drwjtlvl;
 	FIELD f_rbdjlisn ITEM_MALFORMED_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
-	FIELD f_vdbeciht ITEM_COMPONENT_MALFORMED_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
-	FIELD f_ytehdehq ITEM_COMPONENT_UNKNOWN_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
+	FIELD f_sjsgfzxg ops Lnet/minecraft/unmapped/C_piadqmzm;
+	FIELD f_vdbeciht MALFORMED_ITEM_COMPONENT_EXCEPTION Lcom/mojang/brigadier/exceptions/Dynamic2CommandExceptionType;
+	FIELD f_ytehdehq UNKNOWN_ITEM_COMPONENT_EXCEPTION Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
 	METHOD <init> (Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;)V
 		ARG 1 provider
+	METHOD m_ccdupztg read (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_aggscjva$C_rktfpfda;
 	METHOD m_ddjirgwr (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 id
+	METHOD m_eygiwywa (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 component
 	METHOD m_foxgstkg (Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
 		ARG 0 error
 	METHOD m_hyizojlu (Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/brigadier/Message;
+		ARG 0 component
 		ARG 1 error
 	METHOD m_ivxgcrfn (Lcom/mojang/brigadier/StringReader;Ljava/lang/String;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
 		ARG 1 error
@@ -24,8 +32,48 @@ CLASS net/minecraft/unmapped/C_aggscjva net/minecraft/command/argument/ItemStrin
 		ARG 0 id
 	METHOD m_seifydji getSuggestions (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 builder
+	METHOD m_soczdarj read (Lcom/mojang/brigadier/StringReader;Lnet/minecraft/unmapped/C_aggscjva$C_uvpoavmx;)V
+		ARG 2 visitor
+	METHOD m_teqbcvvp validateItemComponents (Lcom/mojang/brigadier/StringReader;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_jqyoylib;)V
+		ARG 1 item
 	CLASS C_rktfpfda ItemResult
 		FIELD f_vwmvrpsk item Lnet/minecraft/unmapped/C_cjzoxshv;
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_feznkgdg item ()Lnet/minecraft/unmapped/C_cjzoxshv;
+	CLASS C_tgvloggv SuggestionsVisitor
+		FIELD f_dqwswbut suggester Ljava/util/function/Function;
+		METHOD m_jzmakvwu createSuggestionsAtCursor (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lcom/mojang/brigadier/StringReader;)Ljava/util/concurrent/CompletableFuture;
+	CLASS C_uvpoavmx Visitor
+		METHOD m_bksxjjpe setSuggester (Ljava/util/function/Function;)V
+			ARG 1 suggester
+		METHOD m_gbddekgx removeComponent (Lnet/minecraft/unmapped/C_pscqxfcs;)V
+			ARG 1 type
+		METHOD m_javzcgqv setItem (Lnet/minecraft/unmapped/C_cjzoxshv;)V
+			ARG 1 item
+		METHOD m_nbgbsswo putComponent (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)V
+			ARG 1 type
+			ARG 2 value
+	CLASS C_vvlkkwvb Reader
+		FIELD f_xazpmfcs visitor Lnet/minecraft/unmapped/C_aggscjva$C_uvpoavmx;
+		METHOD m_djgrzoxo trySuggestAssignment (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+		METHOD m_dsqxclpk suggestComponents (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Ljava/lang/String;)Ljava/util/concurrent/CompletableFuture;
+			ARG 2 suffix
+		METHOD m_ebyindnr suggestComponents (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+		METHOD m_fzfpqdkm suggestComponentsRemoval (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+		METHOD m_ggwajjyt trySuggestComponentsStart (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+		METHOD m_ilxkhmkl trySuggestComponentsSeparatorOrEnd (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+		METHOD m_krrbjycd readComponents ()V
+		METHOD m_lzksdrct suggestItemIds (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+		METHOD m_mpviigld read ()V
+		METHOD m_pjsqfyoe (Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_ncpywfca;
+			ARG 0 entry
+		METHOD m_sztfkvuw (Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Ljava/lang/String;Ljava/util/Map$Entry;)V
+			ARG 2 entry
+		METHOD m_tpivlbau (ILnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/String;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
+			ARG 3 error
+		METHOD m_uxhrstbp readComponent (Lnet/minecraft/unmapped/C_jjafokvs;Lnet/minecraft/unmapped/C_piadqmzm;Lnet/minecraft/unmapped/C_pscqxfcs;)V
+			ARG 1 nbtReader
+			ARG 2 ops
+		METHOD m_yrdanivb readComponentType (Lcom/mojang/brigadier/StringReader;)Lnet/minecraft/unmapped/C_pscqxfcs;
+		METHOD m_zhrfpmvf readItem ()V

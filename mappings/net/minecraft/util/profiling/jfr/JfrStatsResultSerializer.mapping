@@ -5,27 +5,64 @@ CLASS net/minecraft/unmapped/C_ffhuqccj net/minecraft/util/profiling/jfr/JfrStat
 	FIELD f_kzhszehq TOTAL_BYTES_KEY Ljava/lang/String;
 	FIELD f_syhqlyem DURATION_NANOS_TOTAL_KEY Ljava/lang/String;
 	FIELD f_twwinjpf BYTES_PER_SECOND_KEY Ljava/lang/String;
-	METHOD m_acionnpb getPacketsJson (Lnet/minecraft/unmapped/C_yxogwmzq;Lcom/google/gson/JsonObject;)V
+	METHOD m_acionnpb addPacketsJson (Lnet/minecraft/unmapped/C_yxogwmzq;Lcom/google/gson/JsonObject;)V
 		ARG 0 packet
 		ARG 1 jsonObject
-	METHOD m_eajmrmbb getChunkGenerationJson (Ljava/util/List;)Lcom/google/gson/JsonElement;
+	METHOD m_avynbxhl (Lcom/google/gson/JsonObject;Lcom/google/gson/JsonObject;)V
+		ARG 1 json
+	METHOD m_cteqmidz (Ljava/lang/String;Ljava/lang/Double;Lcom/google/gson/JsonObject;)V
+		ARG 2 json
+	METHOD m_cufkfqbe (Lcom/google/gson/JsonArray;Lcom/google/gson/JsonObject;Lnet/minecraft/unmapped/C_tcheapem;Ljava/lang/String;Ljava/util/List;)V
+		ARG 3 name
+		ARG 4 stat
+	METHOD m_eajmrmbb createChunkGenerationJson (Ljava/util/List;)Lcom/google/gson/JsonElement;
+		ARG 1 stats
+	METHOD m_evvvhmeh createPacketDataJson (Lnet/minecraft/unmapped/C_ohlgrsme;)Lcom/google/gson/JsonElement;
 		ARG 1 data
-	METHOD m_evvvhmeh getPacketDataJson (Lnet/minecraft/unmapped/C_ohlgrsme;)Lcom/google/gson/JsonElement;
+	METHOD m_gvazjjoa createGarbageCollectionDataJson (Lnet/minecraft/unmapped/C_owqgaehd$C_hzjsjrif;)Lcom/google/gson/JsonElement;
 		ARG 1 data
-	METHOD m_gvazjjoa getGarbageCollectionDataJson (Lnet/minecraft/unmapped/C_owqgaehd$C_hzjsjrif;)Lcom/google/gson/JsonElement;
-		ARG 1 data
-	METHOD m_kxfewqzu getServerTickTimesJson (Ljava/util/List;)Lcom/google/gson/JsonElement;
+	METHOD m_gxievssc (Lnet/minecraft/unmapped/C_emigiptf;)Lcom/google/gson/JsonElement;
+		ARG 0 stat2
+	METHOD m_gyjopajy (Lcom/google/gson/JsonObject;Lcom/google/gson/JsonObject;)V
+		ARG 1 json
+	METHOD m_gzdmislt (Lcom/google/gson/JsonObject;Ljava/lang/Integer;Ljava/lang/Double;)V
+		ARG 1 index
+		ARG 2 nanos
+	METHOD m_haubsdac (Lcom/google/gson/JsonArray;Ljava/lang/String;Ljava/lang/Double;)V
+		ARG 1 thread
+		ARG 2 allocations
+	METHOD m_jqrjllep createStructureGenerationJson (Ljava/util/List;)Lcom/google/gson/JsonElement;
+		ARG 1 stats
+	METHOD m_kxfewqzu createServerTickTimesJson (Ljava/util/List;)Lcom/google/gson/JsonElement;
 		ARG 1 serverTickTimes
-	METHOD m_pehkdhro getFileIoJson (Lnet/minecraft/unmapped/C_ohlgrsme;)Lcom/google/gson/JsonElement;
+	METHOD m_nisjjdau (Lnet/minecraft/unmapped/C_sdckouei;)Lcom/google/gson/JsonElement;
+		ARG 0 stat
+	METHOD m_octamvoj (Ljava/util/List;Ljava/util/function/ToDoubleFunction;)Lcom/google/gson/JsonObject;
+		ARG 0 loads
+		ARG 1 loadGetter
+	METHOD m_pehkdhro createFileIoJson (Lnet/minecraft/unmapped/C_ohlgrsme;)Lcom/google/gson/JsonElement;
 		ARG 1 data
-	METHOD m_qkubpbrj getChunksJson (Lnet/minecraft/unmapped/C_xaublqcq;Lcom/google/gson/JsonObject;)V
+	METHOD m_qkubpbrj addChunksJson (Lnet/minecraft/unmapped/C_xaublqcq;Lcom/google/gson/JsonObject;)V
 		ARG 0 chunk
 		ARG 1 jsonObject
 	METHOD m_qmvffehs toJsonString (Lnet/minecraft/unmapped/C_ohlgrsme;)Ljava/lang/String;
 		ARG 1 data
-	METHOD m_seafcgeg getAllocationDataJson (Lnet/minecraft/unmapped/C_awovbzfl$C_tpmhqmot;)Lcom/google/gson/JsonElement;
+	METHOD m_seafcgeg createAllocationDataJson (Lnet/minecraft/unmapped/C_awovbzfl$C_tpmhqmot;)Lcom/google/gson/JsonElement;
 		ARG 1 data
-	METHOD m_txbqvcfi getFilesIoDataJson (Lnet/minecraft/unmapped/C_hlnuiwlk$C_khejogpp;)Lcom/google/gson/JsonElement;
+	METHOD m_smzmmzuk createSummaryJson (Lnet/minecraft/unmapped/C_kmmgeuyo;Ljava/util/function/BiConsumer;)Lcom/google/gson/JsonElement;
+		ARG 1 summary
+		ARG 2 totalsEntryAction
+	METHOD m_txbqvcfi createFilesIoDataJson (Lnet/minecraft/unmapped/C_hlnuiwlk$C_khejogpp;)Lcom/google/gson/JsonElement;
 		ARG 1 data
+	METHOD m_virvfnev (Lcom/google/gson/JsonObject;Ljava/lang/Integer;Ljava/lang/Double;)V
+		ARG 1 index
+		ARG 2 nanos
+	METHOD m_vtvinvrz (Lcom/google/gson/JsonObject;Ljava/lang/Integer;Ljava/lang/Double;)V
+		ARG 1 index
+		ARG 2 millis
+	METHOD m_ynqmmjeo (Lnet/minecraft/unmapped/C_juyelqwu;)D
+		ARG 0 timeData
 	METHOD m_zefsjrhi getCpuLoadsJson (Ljava/util/List;)Lcom/google/gson/JsonElement;
 		ARG 1 cpuLoads
+	METHOD m_zufwajxw (Lcom/google/gson/JsonObject;Lcom/google/gson/JsonArray;)V
+		ARG 1 json

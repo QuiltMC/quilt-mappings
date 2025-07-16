@@ -1,6 +1,7 @@
 CLASS net/minecraft/unmapped/C_hirptovz net/minecraft/predicate/PlayerPredicate
 	FIELD f_biwhdxrw recipes Lit/unimi/dsi/fastutil/objects/Object2BooleanMap;
 	FIELD f_fimlronk gameMode Lnet/minecraft/unmapped/C_uafqtlvc;
+	FIELD f_jirbgkwl LOOKING_AT_RANGE I
 	FIELD f_mxmwuhmx advancements Ljava/util/Map;
 	FIELD f_vmcukqfg experienceLevel Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;
 	FIELD f_vxsybuyy stats Ljava/util/List;
@@ -12,6 +13,8 @@ CLASS net/minecraft/unmapped/C_hirptovz net/minecraft/predicate/PlayerPredicate
 		METHOD test (Ljava/lang/Object;)Z
 			ARG 1 progress
 	CLASS C_cegktaty AdvancementPredicate
+		METHOD m_exwmrxdy (Lnet/minecraft/unmapped/C_hirptovz$C_cegktaty;)Lcom/mojang/datafixers/util/Either;
+			ARG 0 predicate
 	CLASS C_pvnsojur StatsPredicate
 		FIELD f_csqshbbf type Lnet/minecraft/unmapped/C_qwzfcpmd;
 		FIELD f_lysfutkd stat Ljava/util/function/Supplier;
@@ -22,9 +25,9 @@ CLASS net/minecraft/unmapped/C_hirptovz net/minecraft/predicate/PlayerPredicate
 		METHOD m_ohenjxlo (Lnet/minecraft/unmapped/C_qwzfcpmd;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;)Lnet/minecraft/unmapped/C_hirptovz$C_pvnsojur;
 			ARG 1 value
 			ARG 2 range
-		METHOD m_tzizbxiw (Lnet/minecraft/unmapped/C_qwzfcpmd;)Lcom/mojang/serialization/MapCodec;
+		METHOD m_tzizbxiw createCodec (Lnet/minecraft/unmapped/C_qwzfcpmd;)Lcom/mojang/serialization/MapCodec;
 			ARG 0 type
-		METHOD m_zckxfddo (Lnet/minecraft/unmapped/C_udjcmsxa;)Z
+		METHOD m_zckxfddo test (Lnet/minecraft/unmapped/C_udjcmsxa;)Z
 			ARG 1 handler
 	CLASS C_veyywklk Builder
 		FIELD f_gtdcqxly gameMode Lnet/minecraft/unmapped/C_uafqtlvc;
@@ -33,20 +36,26 @@ CLASS net/minecraft/unmapped/C_hirptovz net/minecraft/predicate/PlayerPredicate
 		FIELD f_nyobdzin stats Lcom/google/common/collect/ImmutableList$Builder;
 		FIELD f_pgauqijp recipes Lit/unimi/dsi/fastutil/objects/Object2BooleanMap;
 		FIELD f_rvsgabdi lookingAt Ljava/util/Optional;
+		FIELD f_yjzxifbk input Ljava/util/Optional;
 		METHOD m_dxuypdjk lookingAt (Lnet/minecraft/unmapped/C_kvkvpjlm$C_fnhnavbg;)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
 			ARG 1 builder
 		METHOD m_fdtneroe stat (Lnet/minecraft/unmapped/C_qwzfcpmd;Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
-			ARG 3 value
+			ARG 2 value
+			ARG 3 range
 		METHOD m_fvsyfktx advancement (Lnet/minecraft/unmapped/C_ncpywfca;Ljava/util/Map;)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
 			ARG 1 id
 			ARG 2 criteria
 		METHOD m_gifamqoo experienceLevel (Lnet/minecraft/unmapped/C_nihhkamy$C_mujuochb;)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
 			ARG 1 experienceLevel
 		METHOD m_hhioyqhk gameMode (Lnet/minecraft/unmapped/C_uafqtlvc;)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
+			ARG 1 mode
 		METHOD m_ksisuwga build ()Lnet/minecraft/unmapped/C_hirptovz;
 		METHOD m_lrewmukb create ()Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
 		METHOD m_orkjujgi recipe (Lnet/minecraft/unmapped/C_xhhleach;Z)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
+			ARG 1 recipe
 			ARG 2 unlocked
+		METHOD m_rxlxtdnu input (Lnet/minecraft/unmapped/C_eazgdkyi;)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
+			ARG 1 input
 		METHOD m_wqcsncmt advancement (Lnet/minecraft/unmapped/C_ncpywfca;Z)Lnet/minecraft/unmapped/C_hirptovz$C_veyywklk;
 			ARG 1 id
 			ARG 2 done

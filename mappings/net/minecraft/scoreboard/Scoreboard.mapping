@@ -4,6 +4,7 @@ CLASS net/minecraft/unmapped/C_ymwyplge net/minecraft/scoreboard/Scoreboard
 	FIELD f_nmmgzrxc teams Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
 	FIELD f_plpybfmg teamsByPlayer Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
 	FIELD f_qbcvvjxw objectivesByCriterion Lit/unimi/dsi/fastutil/objects/Reference2ObjectMap;
+	FIELD f_uzkhlsar HIDDEN_SCORE_PREFIX Ljava/lang/String;
 	FIELD f_zpkdzrwx objectiveSlots Ljava/util/Map;
 	METHOD m_aepiuhxu addTeam (Ljava/lang/String;)Lnet/minecraft/unmapped/C_dvkwmbxw;
 		ARG 1 name
@@ -20,11 +21,15 @@ CLASS net/minecraft/unmapped/C_ymwyplge net/minecraft/scoreboard/Scoreboard
 		ARG 1 criterion
 		ARG 2 score
 		ARG 3 action
+	METHOD m_cipkdtdz addObjective (Lnet/minecraft/unmapped/C_tlhwodcf$C_nmhfrsfm;)V
+		ARG 1 packed
 	METHOD m_dbbenwlh getTeam (Ljava/lang/String;)Lnet/minecraft/unmapped/C_dvkwmbxw;
 		ARG 1 name
 	METHOD m_dejkbgda getTeamNames ()Ljava/util/Collection;
 	METHOD m_dnckhnhe getNullableObjective (Ljava/lang/String;)Lnet/minecraft/unmapped/C_tlhwodcf;
 		ARG 1 name
+	METHOD m_efgzbbgr addScore (Lnet/minecraft/unmapped/C_ymwyplge$C_wcknhacr;)V
+		ARG 1 score
 	METHOD m_ehrhtdjk removeScores (Lnet/minecraft/unmapped/C_hswmfudr;)V
 		ARG 1 holder
 	METHOD m_fcpprjwp updateScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;Lnet/minecraft/unmapped/C_jmgxjonl;)V
@@ -61,6 +66,8 @@ CLASS net/minecraft/unmapped/C_ymwyplge net/minecraft/scoreboard/Scoreboard
 	METHOD m_lalyhssk setObjectiveSlot (Lnet/minecraft/unmapped/C_oakvluoh;Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 1 slot
 		ARG 2 objective
+	METHOD m_moyelohi (Ljava/util/Map$Entry;)Ljava/util/stream/Stream;
+		ARG 0 scoresEntry
 	METHOD m_ndjaudfx addPlayerToTeam (Ljava/lang/String;Lnet/minecraft/unmapped/C_dvkwmbxw;)Z
 		ARG 1 playerName
 		ARG 2 team
@@ -82,6 +89,7 @@ CLASS net/minecraft/unmapped/C_ymwyplge net/minecraft/scoreboard/Scoreboard
 	METHOD m_rqkikfdy updateObjective (Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 1 objective
 	METHOD m_sfhwfwqj getKnownPlayers ()Ljava/util/Collection;
+	METHOD m_sqciquck getEntries ()Ljava/util/List;
 	METHOD m_tclghcjd getObjectives ()Ljava/util/Collection;
 	METHOD m_tgqiyvzg clearPlayerTeam (Ljava/lang/String;)Z
 		ARG 1 playerName
@@ -104,3 +112,12 @@ CLASS net/minecraft/unmapped/C_ymwyplge net/minecraft/scoreboard/Scoreboard
 		ARG 0 objective
 	METHOD m_yiqwjdqj (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_tlhwodcf;)V
 		ARG 3 objective
+	METHOD m_zeqekjpr (Ljava/lang/String;Ljava/util/Map$Entry;)Lnet/minecraft/unmapped/C_ymwyplge$C_wcknhacr;
+		ARG 1 scoreEntry
+	METHOD m_zqvfojnh addTeam (Lnet/minecraft/unmapped/C_dvkwmbxw$C_gsorpuos;)V
+		ARG 1 settings
+	CLASS C_ahqtchzp
+		METHOD m_clejqecq setLocked (Z)V
+			ARG 1 locked
+		METHOD m_iklmynvq updateScore ()V
+	CLASS C_wcknhacr PackedEntry

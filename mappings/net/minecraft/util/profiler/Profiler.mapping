@@ -1,7 +1,9 @@
 CLASS net/minecraft/unmapped/C_eslcbfsq net/minecraft/util/profiler/Profiler
 	FIELD f_hxbkuvru ROOT_NAME Ljava/lang/String;
 	METHOD m_habnlnco push (Ljava/util/function/Supplier;)V
+		ARG 1 namer
 	METHOD m_jjmwsbti swap (Ljava/lang/String;)V
+		ARG 1 name
 	METHOD m_kztfmexz endTick ()V
 	METHOD m_nzpjxjnd visit (Ljava/lang/String;I)V
 		COMMENT Increment the visit count for a marker.
@@ -9,8 +11,14 @@ CLASS net/minecraft/unmapped/C_eslcbfsq net/minecraft/util/profiler/Profiler
 		COMMENT <p>
 		COMMENT This is useful to keep track of number of calls made to performance-
 		COMMENT wise expensive methods.
+		ARG 1 marker
+		ARG 2 count
+	METHOD m_pozihedb pushZone (Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_faujnouj;
+		ARG 1 namer
 	METHOD m_ppktxxru startTick ()V
 	METHOD m_qgopqkdg pop ()V
+	METHOD m_rbivwaqo setZoneColor (I)V
+		ARG 1 rgb
 	METHOD m_rifejyps visit (Ljava/lang/String;)V
 		COMMENT Increment the visit count for a marker.
 		COMMENT
@@ -32,8 +40,15 @@ CLASS net/minecraft/unmapped/C_eslcbfsq net/minecraft/util/profiler/Profiler
 		ARG 0 profiler1
 		ARG 1 profiler2
 	METHOD m_spoxxagd markSampleType (Lnet/minecraft/unmapped/C_oqsgkejx;)V
+		ARG 1 type
+	METHOD m_uejmuftp addZoneText (Ljava/lang/String;)V
+		ARG 1 text
+	METHOD m_vrfurtgp addZoneValue (J)V
+		ARG 1 value
 	METHOD m_wxtsuaiq swap (Ljava/util/function/Supplier;)V
+		ARG 1 namer
 	METHOD m_yoqjygir push (Ljava/lang/String;)V
+		ARG 1 name
 	METHOD m_zqflletf visit (Ljava/util/function/Supplier;I)V
 		COMMENT Increment the visit count for a marker.
 		COMMENT
@@ -45,4 +60,9 @@ CLASS net/minecraft/unmapped/C_eslcbfsq net/minecraft/util/profiler/Profiler
 		COMMENT This method is preferred if getting the marker is costly; the
 		COMMENT supplier won't be called if the profiler is disabled.
 		ARG 1 markerGetter
+		ARG 2 count
+	METHOD m_zqvmpjqi pushZone (Ljava/lang/String;)Lnet/minecraft/unmapped/C_faujnouj;
+		ARG 1 name
 	CLASS C_dlrpyhhs Combined
+		FIELD f_dxitxkgy profiler1 Lnet/minecraft/unmapped/C_eslcbfsq;
+		FIELD f_tiijgziq profiler2 Lnet/minecraft/unmapped/C_eslcbfsq;

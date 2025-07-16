@@ -22,7 +22,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_akgydyyc shuffle (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)V
 		ARG 0 items
 		ARG 1 random
-	METHOD m_awkdanrv fixedSizeList (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
+	METHOD m_awkdanrv verifyListSize (Ljava/util/List;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 list
 		ARG 1 length
 	METHOD m_bgibgaeu allOf ([Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
@@ -46,7 +46,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 0 type
 	METHOD m_cshpnelu anyOf ([Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
 		ARG 0 predicates
-	METHOD m_drhjlchv fixedSizeList (Ljava/util/stream/IntStream;I)Lcom/mojang/serialization/DataResult;
+	METHOD m_drhjlchv createFixedSizeArray (Ljava/util/stream/IntStream;I)Lcom/mojang/serialization/DataResult;
 		ARG 0 stream
 		ARG 1 length
 	METHOD m_dxqrqrhx pause (Ljava/lang/String;)V
@@ -67,6 +67,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_eyzgphxu isHorizontallySymmetric (IILjava/util/List;)Z
 		ARG 0 width
 		ARG 1 height
+		ARG 2 list
 	METHOD m_ffmggoki setBreakpointPauser (Ljava/util/function/Consumer;)V
 		ARG 0 breakpointPauser
 	METHOD m_fppetslt getJVMFlags ()Ljava/util/stream/Stream;
@@ -75,6 +76,8 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_ftciccth toMap ()Ljava/util/stream/Collector;
 	METHOD m_fwdpfvho mapWith (Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 	METHOD m_gatbnpas getIoWorkerExecutor ()Lnet/minecraft/unmapped/C_dhavtmvf;
+	METHOD m_gbntwsbv (Ljava/util/List;Ljava/lang/Void;)Ljava/util/List;
+		ARG 1 ignored
 	METHOD m_gdspwjqr memoize (Ljava/util/function/Function;)Ljava/util/function/Function;
 		ARG 0 function
 	METHOD m_gxlhducm getInnermostMessage (Ljava/lang/Throwable;)Ljava/lang/String;
@@ -99,18 +102,26 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 0 predicate
 	METHOD m_irualxtr (Ljava/lang/Object;)Z
 		ARG 0 unused
+	METHOD m_jbljaxmn (Ljava/util/function/Consumer;Ljava/util/List;ILjava/lang/Object;Ljava/lang/Throwable;)V
+		ARG 3 value
+		ARG 4 throwable
+	METHOD m_jdqqjanb (Ljava/util/function/Function;Ljava/util/Map$Entry;)Ljava/lang/Object;
+		ARG 1 entry
 	METHOD m_jdyqedzb anyOf (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
 		ARG 0 predicate1
 		ARG 1 predicate2
 		ARG 2 predicate3
 	METHOD m_jpnvbfqy appendAndCopyImmutable (Ljava/util/List;Ljava/lang/Object;)Ljava/util/List;
+	METHOD m_jrafutuc debugSupplier (Ljava/util/function/Supplier;Ljava/util/function/Supplier;)Ljava/util/function/Supplier;
+		ARG 0 supplier
+		ARG 1 messageGetter
 	METHOD m_jsawotje allOf (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
 		ARG 0 predicate1
 		ARG 1 predicate2
 		ARG 2 predicate3
-	METHOD m_jsqsuqek (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
+	METHOD m_jsqsuqek debugRunnable (Ljava/lang/Runnable;Ljava/util/function/Supplier;)Ljava/lang/Runnable;
 		ARG 0 runnable
-		ARG 1 supplier
+		ARG 1 messageGetter
 	METHOD m_jxtdpimf getDownloadWorkerExecutor ()Lnet/minecraft/unmapped/C_dhavtmvf;
 	METHOD m_jzncpgce getLast (Ljava/util/List;)Ljava/lang/Object;
 		ARG 0 list
@@ -121,9 +132,9 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_kpixdiyc combineSafe (Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Combines a list of {@code futures} into one future that holds a list
 		COMMENT of their results.
-		COMMENT
-		COMMENT <p>This version expects all futures to complete successfully and is not
-		COMMENT optimized in case any of the input futures throws.
+		COMMENT <p>
+		COMMENT Expects all futures to complete successfully and is not
+		COMMENT optimized in case any of the input futures throw.
 		COMMENT
 		COMMENT @return the combined future
 		COMMENT @see #combine(List)
@@ -140,6 +151,10 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_liaesfeu getRandomOrEmpty (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/Optional;
 		ARG 0 list
 		ARG 1 random
+	METHOD m_lijhimtv (Ljava/util/function/Consumer;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 2 string
+	METHOD m_lkmceeac (Ljava/util/concurrent/CompletableFuture;Ljava/util/List;Ljava/lang/Throwable;)V
+		ARG 2 throwable
 	METHOD m_ltllnhdf allOf (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
 		ARG 0 predicate1
 		ARG 1 predicate2
@@ -169,10 +184,25 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 1 predicate2
 		ARG 2 predicate3
 		ARG 3 predicate4
+	METHOD m_odlcpqdv combineCancelable (Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
+		COMMENT Combines a list of {@code futures} into one future that holds a list
+		COMMENT of their results.
+		COMMENT <p>
+		COMMENT The returned future is fail-fast; if any of the input futures fails,
+		COMMENT the returned future will be immediately completed exceptionally and
+		COMMENT all passed {@code futures} will be canceled.
+		COMMENT
+		COMMENT @return the combined future
+		COMMENT @see #combineSafe(List)
+		ARG 0 futures
+			COMMENT the completable futures to combine
 	METHOD m_oigccakw startTimerHack ()V
 	METHOD m_onipypca awaitInitialization (Ljava/util/function/Function;Ljava/util/function/Predicate;)Ljava/lang/Object;
 		ARG 0 factory
 		ARG 1 checkComplete
+	METHOD m_otgatepv runNamed (Ljava/lang/Runnable;Ljava/lang/String;)V
+		ARG 0 runnable
+		ARG 1 name
 	METHOD m_ouznsrgl (Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicInteger;ZLjava/lang/Runnable;)Ljava/lang/Thread;
 		ARG 3 runnable
 	METHOD m_oxzqbkzs none ()Ljava/util/function/Predicate;
@@ -185,18 +215,27 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_prdvozkz (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/lang/Object;)Z
 		ARG 5 t
 	METHOD m_qjjrrmre getMeasuringTimeMs ()J
+	METHOD m_qlmewlbt (Ljava/util/List;Ljava/lang/Void;)Ljava/util/List;
+		ARG 1 ignored
 	METHOD m_qpdauvpg ifPresentOrElse (Ljava/util/Optional;Ljava/util/function/Consumer;Ljava/lang/Runnable;)Ljava/util/Optional;
 		ARG 0 optional
 		ARG 1 presentAction
 		ARG 2 elseAction
 	METHOD m_rjgutuoq (Ljava/nio/file/spi/FileSystemProvider;)Z
 		ARG 0 fileSystemProvider
+	METHOD m_rjmfelbx (Lnet/minecraft/unmapped/C_zpuwkbhr;I)Ljava/lang/String;
+		ARG 1 c
 	METHOD m_rmfqlirq getOperatingSystem ()Lnet/minecraft/unmapped/C_lvarvugc$C_fqjbnqwz;
 	METHOD m_rpwoeqxt mapEnum (Ljava/lang/Class;Ljava/util/function/Function;)Ljava/util/Map;
 		ARG 0 enumClass
 		ARG 1 mapper
+	METHOD m_rsxcooyf withTransformedValues (Ljava/util/Map;Ljava/util/function/Function;)Ljava/util/Map;
+		ARG 0 map
+		ARG 1 transformer
 	METHOD m_rtqfrpal (Ljava/lang/Object;)Z
 		ARG 0 unused
+	METHOD m_rtsyqcqd (Ljava/lang/String;)Z
+		ARG 0 arg
 	METHOD m_rucymwoq (Ljava/lang/String;)V
 		ARG 0 string
 	METHOD m_saniutqg getRandom (Ljava/util/List;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/lang/Object;
@@ -216,11 +255,14 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 2 allowPartial
 	METHOD m_tpboltql cachedMapper (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_inohrqzb;
 		ARG 0 mapper
+	METHOD m_uakmbgpv getAvailableBackgroundThreads ()I
 	METHOD m_ucywpxge getRandom ([ILnet/minecraft/unmapped/C_rlomrsco;)I
 		ARG 0 array
 		ARG 1 random
 	METHOD m_uduxgasu attemptTasks ([Ljava/util/function/BooleanSupplier;)Z
 		ARG 0 tasks
+	METHOD m_ulyzwfto createUri (Ljava/lang/String;)Ljava/net/URI;
+		ARG 0 uri
 	METHOD m_uocsgxgb logAndPause (Ljava/lang/String;)V
 		ARG 0 message
 	METHOD m_uwfxdzgv anyOf (Ljava/util/function/Predicate;Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
@@ -238,6 +280,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 0 property
 		ARG 1 value
 	METHOD m_vpbpllsg getRegisteredName (Lnet/minecraft/unmapped/C_tqxyjqsk;Ljava/lang/Object;)Ljava/lang/String;
+		ARG 1 entry
 	METHOD m_vwigcqkp moveCursor (Ljava/lang/String;II)I
 		COMMENT Moves the {@code cursor} in the {@code string} by a {@code delta} amount.
 		COMMENT Skips surrogate characters.
@@ -247,10 +290,10 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_wbwlvhhn combine (Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
 		COMMENT Combines a list of {@code futures} into one future that holds a list
 		COMMENT of their results.
-		COMMENT
-		COMMENT <p>The returned future is fail-fast; if any of the input futures fails,
-		COMMENT this returned future will be immediately completed exceptionally than
-		COMMENT waiting for other input futures.
+		COMMENT <p>
+		COMMENT The returned future is fail-fast; if any of the input futures fails,
+		COMMENT the returned future will be immediately completed exceptionally rather
+		COMMENT than wait for other input futures.
 		COMMENT
 		COMMENT @return the combined future
 		COMMENT @see #combineSafe(List)
@@ -265,7 +308,7 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_wpeqdapc createTranslationKey (Ljava/lang/String;Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/lang/String;
 		ARG 0 type
 		ARG 1 id
-	METHOD m_wpgsfqzf addPrefix (Ljava/lang/String;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
+	METHOD m_wpgsfqzf withPrefix (Ljava/lang/String;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
 		ARG 0 prefix
 		ARG 1 consumer
 	METHOD m_wqqejnnb anyOf (Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
@@ -275,6 +318,13 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 	METHOD m_wznbpzed copyShuffled (Lit/unimi/dsi/fastutil/objects/ObjectArrayList;Lnet/minecraft/unmapped/C_rlomrsco;)Ljava/util/List;
 		ARG 0 values
 		ARG 1 random
+	METHOD m_xdtzcgqs viewWithTransformedValues (Ljava/util/Map;Lcom/google/common/base/Function;)Ljava/util/Map;
+		COMMENT @see com.google.common.collect.Maps#transformValues Maps.transformValues
+		ARG 0 map
+		ARG 1 transformer
+	METHOD m_xjiphzqy combineFailFast (Ljava/util/List;Ljava/util/function/Consumer;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 futures
+		ARG 1 onError
 	METHOD m_xkundsnc prependAndCopyImmutable (Ljava/lang/Object;Ljava/util/List;)Ljava/util/List;
 	METHOD m_xlutpbns anyOf (Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Ljava/util/function/Predicate;)Ljava/util/function/Predicate;
 		ARG 0 predicate1
@@ -283,12 +333,17 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		ARG 3 predicate4
 		ARG 4 predicate5
 	METHOD m_xtrebjef getMeasuringTimeNano ()J
+	METHOD m_xumqyimr (Ljava/util/List;[Ljava/util/concurrent/CompletableFuture;Ljava/util/function/Consumer;Ljava/util/concurrent/CompletableFuture;)V
+		ARG 3 future
 	METHOD m_ydhyxwlc relativeCopy (Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		COMMENT Copies a file contained in the folder {@code src} to the folder {@code dest}.
 		COMMENT This will replicate any path structure that may exist between {@code src} and {@code toCopy}.
 		ARG 0 src
 		ARG 1 dest
 		ARG 2 toCopy
+	METHOD m_ymdeoxnr getIncreasedCapacity (II)I
+		ARG 0 current
+		ARG 1 min
 	METHOD m_yrtzlgsc attemptTasks (ILjava/lang/String;[Ljava/util/function/BooleanSupplier;)Z
 		ARG 0 retries
 		ARG 1 taskName
@@ -307,9 +362,25 @@ CLASS net/minecraft/unmapped/C_lvarvugc net/minecraft/util/Util
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
 			ARG 3 name
 		METHOD m_cpefuxuc getName ()Ljava/lang/String;
+		METHOD m_efpifgzp open (Ljava/nio/file/Path;)V
+			ARG 1 path
+		METHOD m_nmwxpsxk toRunCommand (Ljava/net/URI;)[Ljava/lang/String;
+			ARG 1 uri
 		METHOD m_sgnbfxds open (Ljava/net/URI;)V
 			ARG 1 uri
 		METHOD m_ukwepfnn open (Ljava/lang/String;)V
 			ARG 1 uri
 		METHOD m_zghwojcz open (Ljava/io/File;)V
 			ARG 1 file
+	CLASS C_nkazyyip
+		FIELD f_dixhweqx cache Ljava/util/Map;
+		METHOD apply (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 input1
+			ARG 2 input2
+	CLASS C_qygfqbqw
+		METHOD onTermination (Ljava/lang/Throwable;)V
+			ARG 1 throwable
+	CLASS C_tceggguc
+		FIELD f_boyitqoh cache Ljava/util/Map;
+		METHOD apply (Ljava/lang/Object;)Ljava/lang/Object;
+			ARG 1 input

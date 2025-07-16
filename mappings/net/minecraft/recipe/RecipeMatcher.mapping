@@ -1,8 +1,15 @@
 CLASS net/minecraft/unmapped/C_nyagoaau net/minecraft/recipe/RecipeMatcher
 	COMMENT Matching class that matches a recipe to its required resources.
 	COMMENT This specifically does not check patterns (See {@link ShapedRecipe} for that).
-	FIELD f_lzaqyyse amounts Lit/unimi/dsi/fastutil/objects/Reference2IntOpenHashMap;
+	FIELD f_lzaqyyse amountsByItem Lit/unimi/dsi/fastutil/objects/Reference2IntOpenHashMap;
+	METHOD m_guksqxsb getMatchingItems (Ljava/lang/Iterable;)Ljava/util/List;
+		ARG 1 ingredients
 	METHOD m_ilmcgbtf clear ()V
+	METHOD m_jmsuzpwf anyAccept (Ljava/lang/Iterable;Ljava/lang/Object;)Z
+		ARG 0 ingredients
+		ARG 1 item
+	METHOD m_myfdorte getMaxCraftableAmount (Ljava/util/List;)I
+		ARG 1 ingredients
 	METHOD m_okheizlq consume (Ljava/lang/Object;I)V
 		COMMENT Consumes a resource from the pool of available items.
 		ARG 1 input
@@ -92,4 +99,7 @@ CLASS net/minecraft/unmapped/C_nyagoaau net/minecraft/recipe/RecipeMatcher
 		METHOD m_zwqnriuw getVisitedIngredientIndexOffset ()I
 	CLASS C_xftfxaqa ItemCallback
 		METHOD accept accept (Ljava/lang/Object;)V
-	CLASS C_yxyoqnti IngredientInfo
+			ARG 1 item
+	CLASS C_yxyoqnti IngredientAccess
+		METHOD acceptsItem (Ljava/lang/Object;)Z
+			ARG 1 item

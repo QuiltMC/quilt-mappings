@@ -4,11 +4,14 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 	FIELD f_bqmoexgm HORIZONTAL [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_cbbzbcev axis Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
 	FIELD f_fudaavft BY_ID Ljava/util/function/IntFunction;
+	FIELD f_hhoseebr vec3fc Lorg/joml/Vector3fc;
 	FIELD f_jqokexui oppositeId I
 	FIELD f_midvwggr ALL_SORTED [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_nxrqizwh PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_qmkvdeuo direction Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;
 	FIELD f_suuqwjwk vec3d Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_uyqoolor ID_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_vmdwtpre HORIZONTAL_ID_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_wytgjiez horizontalId I
 	FIELD f_xneestkm ALL [Lnet/minecraft/unmapped/C_xpuuihxf;
 	FIELD f_xnopevsr id I
@@ -32,7 +35,7 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		ARG 0 value
 	METHOD m_egpdzvgz rotateXClockwise ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_ffngupha rotateXCounterclockwise ()Lnet/minecraft/unmapped/C_xpuuihxf;
-	METHOD m_fsfcsxhu getDirection ()Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;
+	METHOD m_fsfcsxhu getAxisDirection ()Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;
 	METHOD m_gdxixwix rotateYCounterclockwise ()Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_gksmdspg random (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_xpuuihxf;
 	METHOD m_hntyvpnl get (Lnet/minecraft/unmapped/C_xpuuihxf$C_ozjqcgqq;Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf;
@@ -45,6 +48,7 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 	METHOD m_lxrgvhbm getOffsetY ()I
 	METHOD m_nmryvhog asVec3d ()Lnet/minecraft/unmapped/C_vgpupfxx;
 	METHOD m_nyqvqnqv transform (Lorg/joml/Matrix4fc;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
+		ARG 0 matrix
 		ARG 1 direction
 	METHOD m_obcinsgd fromVec (IIILnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 0 x
@@ -87,6 +91,7 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 	METHOD m_vyhskrab getOffsetZ ()I
 	METHOD m_vzfadujr getHorizontalDegrees (Lnet/minecraft/unmapped/C_xpuuihxf;)F
 		COMMENT Gets the degrees of the {@code direction}, relative to {@link Direction#SOUTH}
+	METHOD m_wxqsiaqj asVec3fc ()Lorg/joml/Vector3fc;
 	METHOD m_xwgdebbi getRotationQuaternion ()Lorg/joml/Quaternionf;
 	METHOD m_ydwhfihm rotateClockwise (Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;)Lnet/minecraft/unmapped/C_xpuuihxf;
 		ARG 1 axis
@@ -114,13 +119,23 @@ CLASS net/minecraft/unmapped/C_xpuuihxf net/minecraft/util/math/Direction
 		METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
 			ARG 3 name
 		METHOD m_avmpldsj choose (DDD)D
+			ARG 1 x
+			ARG 3 y
+			ARG 5 z
 		METHOD m_hfqxfgee fromName (Ljava/lang/String;)Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
 			ARG 0 name
 		METHOD m_jwnubmio isVertical ()Z
 		METHOD m_qewftacv getName ()Ljava/lang/String;
+		METHOD m_sxucship choose (ZZZ)Z
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
 		METHOD m_symjvdwr getDirections ()[Lnet/minecraft/unmapped/C_xpuuihxf;
 		METHOD m_uhgjjbza getPositive ()Lnet/minecraft/unmapped/C_xpuuihxf;
 		METHOD m_vfobospg choose (III)I
+			ARG 1 x
+			ARG 2 y
+			ARG 3 z
 		METHOD m_wxwlsnud getNegative ()Lnet/minecraft/unmapped/C_xpuuihxf;
 		METHOD m_xfsvouev isHorizontal ()Z
 		METHOD m_xipigoyp pickRandomAxis (Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_xpuuihxf$C_rmpfouoz;
