@@ -290,6 +290,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_dsukauvx updateSubmergedInWaterState ()V
 	METHOD m_dtzgxqjr setRenderDistanceMultiplier (D)V
 		ARG 0 value
+	METHOD m_ducgrghl debugBlockCollision (Lnet/minecraft/unmapped/C_hynzadkk;ZZ)V
+		ARG 2 blockCollision
+		ARG 3 fluidCollision
 	METHOD m_duektjoe adjustMovementForPiston (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 movement
 	METHOD m_dvrgqnea getInterpolator ()Lnet/minecraft/unmapped/C_sdgyrixf;
@@ -486,6 +489,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_iqvzwgkr canModifyAt (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 2 pos
 	METHOD m_iseshnfi isSpectator ()Z
+	METHOD m_iwygqrea queueCollisionCheck (Lnet/minecraft/unmapped/C_astfners$C_aipuagbw;)V
+		ARG 1 movement
 	METHOD m_ixqkofwo dropStack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_uqpzijng;
 		COMMENT @return {@code null} if the passed {@code stack} is
 		COMMENT {@linkplain net.minecraft.item.ItemStack#isEmpty empty}, or the spawned
@@ -647,6 +652,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_oqjzpmsb setSwimming (Z)V
 		ARG 1 swimming
 	METHOD m_oryyldou isCustomNameVisible ()Z
+	METHOD m_otkcayod deQueueCollisionCheck ()V
 	METHOD m_ounwsonv isInvulnerable ()Z
 	METHOD m_owcsemrf doesNotCollide (DDD)Z
 		ARG 1 offsetX
@@ -724,6 +730,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 3 destY
 		ARG 5 destZ
 	METHOD m_qkqqfrjy getLastPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_qlyjsjoc handleBlockCollisionEffects (Ljava/util/List;Lnet/minecraft/unmapped/C_bummdtgu$C_ybqvbnjz;)V
+		ARG 1 movements
+		ARG 2 collisionManager
 	METHOD m_qmsqmnke doesRenderOnFire ()Z
 	METHOD m_qoreltrp getFreezingScale ()F
 	METHOD m_qpmhbrns extinguishWithEffects ()V
@@ -1036,6 +1045,10 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 entity
 	METHOD m_ywnmbdjz getWeaponStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_yxossras getMaxAir ()I
+	METHOD m_yzkgfwgp handleBlockCollisionEffects (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_bummdtgu$C_ybqvbnjz;Lit/unimi/dsi/fastutil/longs/LongSet;)V
+		ARG 2 to
+		ARG 3 collisionManager
+		ARG 4 collidingBlockPositions
 	METHOD m_yzuahesn getPrimaryStepSoundPos (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_zbffjahn refreshPosition ()V
 	METHOD m_zcvlfcid move (Lnet/minecraft/unmapped/C_eojqvxuw;Lnet/minecraft/unmapped/C_vgpupfxx;)V
