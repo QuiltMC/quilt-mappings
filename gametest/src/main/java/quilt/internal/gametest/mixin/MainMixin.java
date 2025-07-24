@@ -40,8 +40,7 @@ class MainMixin {
         MinecraftServer.startServer((thread) -> TestServer.create(
             thread, session, packManager, Optional.empty(), false
         ));
-        // method_71664 is startTicking
-        TestManager.INSTANCE.method_71664();
+        TestManager.INSTANCE.startTicking();
 
         return packManager;
     }
