@@ -1,6 +1,8 @@
 CLASS net/minecraft/unmapped/C_nknvrhfn net/minecraft/entity/decoration/ArmorStandEntity
 	FIELD f_auvsnpeu HEAD_OFFSET D
 	FIELD f_bakejrew disabledSlots I
+	FIELD f_bdjdtzas DEFAULT_SHOW_ARMS Z
+	FIELD f_cztaudgy DEFAULT_INVISIBLE Z
 	FIELD f_dygcmpso SMALL_FLAG I
 	FIELD f_eextqtfq ARMOR_STAND_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_eqjycsoi DEFAULT_LEFT_LEG_ROTATION Lnet/minecraft/unmapped/C_eocijcdh;
@@ -11,6 +13,7 @@ CLASS net/minecraft/unmapped/C_nknvrhfn net/minecraft/entity/decoration/ArmorSta
 	FIELD f_hledmzpc TRACKER_HEAD_ROTATION Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ihlpaimj HIDE_BASE_PLATE_FLAG I
 	FIELD f_jqsgttid FEET_OFFSET D
+	FIELD f_kxxwfmdq DEFAULT_DISABLED_SLOTS I
 	FIELD f_lsrlfled DISABLE_ITEM_TAKE_OFFSET I
 	FIELD f_ltzkfijb WOBBLE_DURATION I
 	FIELD f_mpsgxhqr SMALL_DIMENSIONS Lnet/minecraft/unmapped/C_sszpscpo;
@@ -20,6 +23,7 @@ CLASS net/minecraft/unmapped/C_nknvrhfn net/minecraft/entity/decoration/ArmorSta
 	FIELD f_nzpnpxtw DEFAULT_LEFT_ARM_ROTATION Lnet/minecraft/unmapped/C_eocijcdh;
 	FIELD f_opgsiyvu TRACKER_LEFT_LEG_ROTATION Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_phnxsexj MARKER_FLAG I
+	FIELD f_psvihtwq DEFAULT_MARKER Z
 	FIELD f_qnhkdyut CHEST_OFFSET D
 	FIELD f_rzevixqb TRACKER_LEFT_ARM_ROTATION Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_srwmxyee RIDEABLE_MINECART_PREDICATE Ljava/util/function/Predicate;
@@ -30,6 +34,8 @@ CLASS net/minecraft/unmapped/C_nknvrhfn net/minecraft/entity/decoration/ArmorSta
 	FIELD f_wjlcjana MARKER_DIMENSIONS Lnet/minecraft/unmapped/C_sszpscpo;
 	FIELD f_wlljxznk DEFAULT_BODY_ROTATION Lnet/minecraft/unmapped/C_eocijcdh;
 	FIELD f_xnsfjgdv lastHitTime J
+	FIELD f_yftkmlll DEFAULT_NO_BASE_PLATE Z
+	FIELD f_zxsofnag DEFAULT_SMALL Z
 	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;DDD)V
 		ARG 1 world
 		ARG 2 x
@@ -52,6 +58,7 @@ CLASS net/minecraft/unmapped/C_nknvrhfn net/minecraft/entity/decoration/ArmorSta
 		ARG 2 bitField
 		ARG 3 set
 	METHOD m_fjamjtjb showsArms ()Z
+	METHOD m_fkeapzvj createPose ()Lnet/minecraft/unmapped/C_nknvrhfn$C_cuiyqhcn;
 	METHOD m_foqjlatj setLeftLegRotation (Lnet/minecraft/unmapped/C_eocijcdh;)V
 		ARG 1 angle
 	METHOD m_fqivefvy isMarker ()Z
@@ -66,6 +73,8 @@ CLASS net/minecraft/unmapped/C_nknvrhfn net/minecraft/entity/decoration/ArmorSta
 		ARG 1 slot
 	METHOD m_nendfomc buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
 	METHOD m_npsgczto playBreakSound ()V
+	METHOD m_nvjbctcm setPose (Lnet/minecraft/unmapped/C_nknvrhfn$C_cuiyqhcn;)V
+		ARG 1 pose
 	METHOD m_pgcyrpjv spawnBreakParticles ()V
 	METHOD m_phaftboj getLeftLegRotation ()Lnet/minecraft/unmapped/C_eocijcdh;
 	METHOD m_qidmuyim setShowArms (Z)V
@@ -93,3 +102,5 @@ CLASS net/minecraft/unmapped/C_nknvrhfn net/minecraft/entity/decoration/ArmorSta
 	METHOD m_yrstsnkh slotFromPosition (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_yuycoehb;
 		ARG 1 hitPos
 	METHOD m_zqjkpqot getLeftArmRotation ()Lnet/minecraft/unmapped/C_eocijcdh;
+	CLASS C_cuiyqhcn Pose
+		FIELD f_jritfhxt DEFAULT Lnet/minecraft/unmapped/C_nknvrhfn$C_cuiyqhcn;
