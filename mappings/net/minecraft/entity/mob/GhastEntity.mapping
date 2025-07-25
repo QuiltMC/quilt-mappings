@@ -1,11 +1,13 @@
 CLASS net/minecraft/unmapped/C_fdzgodmg net/minecraft/entity/mob/GhastEntity
 	FIELD f_paccnhak SHOOTING Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_tututexk fireballStrength I
+	FIELD f_vbmumaif DEFAULT_FIREBALL_STRENGTH B
 	METHOD m_fekrfazo wasReturnedToSender (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		COMMENT Checks whether the {@link DamageSource} was a fireball reflected by a player.
 		COMMENT @return {@code true} if the damage source was a fireball reflected by a player, or {@code false} otherwise
 		ARG 0 damageSource
 	METHOD m_jdowfhlp buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_kyqwyvgo updateYaw (Lnet/minecraft/unmapped/C_dxkfswlz;)V
 	METHOD m_sjhbwljk setShooting (Z)V
 		ARG 1 shooting
 	METHOD m_tksvcdnv getFireballStrength ()I
@@ -15,7 +17,16 @@ CLASS net/minecraft/unmapped/C_fdzgodmg net/minecraft/entity/mob/GhastEntity
 		ARG 1 world
 		ARG 3 pos
 	CLASS C_eguvynvm FlyRandomlyGoal
+		FIELD f_knlmomhw MAX_ATTEMPTS I
 		FIELD f_uvwslrbk ghast Lnet/minecraft/unmapped/C_dxkfswlz;
+		FIELD f_yharzaok maxTargetOffset I
+		METHOD m_cmlexuyc canTarget (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_vgpupfxx;I)Z
+			ARG 2 maxOffset
+		METHOD m_gspaecsq findTarget (Lnet/minecraft/unmapped/C_dxkfswlz;I)Lnet/minecraft/unmapped/C_vgpupfxx;
+			ARG 1 maxOffset
+		METHOD m_krgcwwjj randomizeWithinHome (Lnet/minecraft/unmapped/C_dxkfswlz;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		METHOD m_tkskcrhk randomize (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_rlomrsco;)Lnet/minecraft/unmapped/C_vgpupfxx;
+			ARG 0 pos
 	CLASS C_ncudatqk LookAtTargetGoal
 		FIELD f_hwvtysnh ghast Lnet/minecraft/unmapped/C_dxkfswlz;
 	CLASS C_uvsgpibh ShootFireballGoal
@@ -23,8 +34,17 @@ CLASS net/minecraft/unmapped/C_fdzgodmg net/minecraft/entity/mob/GhastEntity
 		FIELD f_sfnnyyxt ghast Lnet/minecraft/unmapped/C_fdzgodmg;
 		METHOD <init> (Lnet/minecraft/unmapped/C_fdzgodmg;)V
 			ARG 1 ghast
-	CLASS C_woknjlgn GhastMoveControl
+	CLASS C_woknjlgn MoveControl
+		FIELD f_drwajvyf happy Z
 		FIELD f_jwmswdmz ghast Lnet/minecraft/unmapped/C_dxkfswlz;
 		FIELD f_kjoknnoa collisionCheckCooldown I
+		FIELD f_ykpzvypj isStill Ljava/util/function/BooleanSupplier;
+		METHOD m_aifjbysy canPathTo (Lnet/minecraft/unmapped/C_peaveboq;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;ZZ)Z
+			ARG 2 ghastPos
+			ARG 3 target
+			ARG 5 touchingWater
+			ARG 6 inLava
+		METHOD m_lrziqvim (Lnet/minecraft/unmapped/C_hbcjzgoe;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;ZZLnet/minecraft/unmapped/C_hynzadkk;I)Z
+			ARG 7 iteration
 		METHOD m_xdtybxya willCollide (Lnet/minecraft/unmapped/C_vgpupfxx;)Z
-			ARG 1 direction
+			ARG 1 targetOffset

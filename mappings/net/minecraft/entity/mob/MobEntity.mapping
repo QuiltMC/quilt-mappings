@@ -3,6 +3,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_ajdoejzx MAX_PICKUP_LOOT_PROBABILITY F
 	FIELD f_bbapxczi persistent Z
 	FIELD f_chzsgmuy pickUpLoot Z
+	FIELD f_cytzxewp DEFAULT_PERSISTENCE_REQUIRED Z
 	FIELD f_cyzznzel MOB_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ddgktbfn target Lnet/minecraft/unmapped/C_usxaxydn;
 	FIELD f_efwglgie PICKUP_REACH I
@@ -11,24 +12,32 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	FIELD f_glqvyrmd lootTableSeed J
 	FIELD f_gpqxsoam experiencePoints I
 	FIELD f_hdjycqoz MAX_ENCHANTED_ARMOR_PROBABILITY F
+	FIELD f_hvqtkjiy DROP_CHANCES_KEY Ljava/lang/String;
 	FIELD f_icyyyrgv bodyControl Lnet/minecraft/unmapped/C_vofymfgv;
 	FIELD f_irlmhwzh navigation Lnet/minecraft/unmapped/C_atbvfjwi;
+	FIELD f_kgkkbuqg NO_AI_KEY Ljava/lang/String;
 	FIELD f_mulpcwks EQUIPMENT_INIT_ORDER Ljava/util/List;
 	FIELD f_nwzksedo goalSelector Lnet/minecraft/unmapped/C_qospjrjn;
 	FIELD f_nzzqwalu pathfindingPenalties Ljava/util/Map;
 	FIELD f_oigfymps MAX_ENCHANTED_WEAPON_PROBABILITY F
 	FIELD f_omqaaiuh visibilityCache Lnet/minecraft/unmapped/C_vyefybqz;
+	FIELD f_owvmggnm DEFAULT_LEFT_HANDED Z
 	FIELD f_pzxywady ambientSoundChance I
 	FIELD f_qsoplnyt ITEM_PICKUP_REACH Lnet/minecraft/unmapped/C_ceivtqhh;
+	FIELD f_rdhzdxlr CAN_PICK_UP_LOOT_KEY Ljava/lang/String;
 	FIELD f_sqjsiqdf jumpControl Lnet/minecraft/unmapped/C_tmduotiw;
 	FIELD f_srixsinn LEFT_HANDED_FLAG I
 	FIELD f_tcesvuol lookControl Lnet/minecraft/unmapped/C_lgufpcrf;
+	FIELD f_thbudfzd homeRadius I
+	FIELD f_tjqgdgni LEFT_HANDED_KEY Ljava/lang/String;
 	FIELD f_uushnomk targetSelector Lnet/minecraft/unmapped/C_qospjrjn;
+	FIELD f_vejnliqr DEFAULT_CAN_PICK_UP_LOOT Z
 	FIELD f_vuffzgdh lootTable Ljava/util/Optional;
 	FIELD f_wfwaeazd leashData Lnet/minecraft/unmapped/C_gbavazgo$C_trsxpkpu;
-	FIELD f_whkkgkyp positionTarget Lnet/minecraft/unmapped/C_hynzadkk;
+	FIELD f_whkkgkyp home Lnet/minecraft/unmapped/C_hynzadkk;
 	FIELD f_wkutgcpe DEFAULT_ATTACK_RANGE D
 	FIELD f_xjabburn equipmentDropChances Lnet/minecraft/unmapped/C_zkbnpubo;
+	FIELD f_xmiuejgm DEFAULT_NO_AI Z
 	FIELD f_yqqanohh RANDOM_SPAWN_BONUS_MODIFIER_ID Lnet/minecraft/unmapped/C_ncpywfca;
 	FIELD f_ziddtuje GOAL_SELECTOR_UPDATE_INTERVAL I
 	FIELD f_zwyrnqpo MAX_WEAR_ARMOR_PROBABILITY F
@@ -47,11 +56,20 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_dsykcsrd setAiDisabled (Z)V
 		ARG 1 aiDisabled
 	METHOD m_dwkutgwm playAttackSound ()V
+	METHOD m_eabfflhq preffersNewArmor (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_yuycoehb;)Z
+		ARG 1 newArmor
+		ARG 2 oldArmor
 	METHOD m_eeaedybm buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
+	METHOD m_epiypbqm clearHomeRadius ()V
 	METHOD m_erwclnrx setLeftHanded (Z)V
 		ARG 1 leftHanded
 	METHOD m_faldjosq getBodyArmor ()Lnet/minecraft/unmapped/C_sddaxwyk;
+	METHOD m_farojbcm setHome (Lnet/minecraft/unmapped/C_hynzadkk;I)V
+		ARG 1 home
+		ARG 2 radius
 	METHOD m_fisapugx getJumpControl ()Lnet/minecraft/unmapped/C_tmduotiw;
+	METHOD m_fpirgiuj (Lnet/minecraft/unmapped/C_svjebams;)Z
+		ARG 0 goal
 	METHOD m_frolgtzg playAmbientSound ()V
 	METHOD m_galurjhs resetSoundDelay ()V
 	METHOD m_gdcidprz canMobSpawn (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_bhyaesep;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rlomrsco;)Z
@@ -65,10 +83,15 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_gtwocchw updateGoalControls ()V
 	METHOD m_hykyexft setTarget (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 target
+	METHOD m_iszwmkjh preffersNewWeapon (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_yuycoehb;)Z
+		ARG 1 newWeapon
+		ARG 2 oldWeapon
 	METHOD m_itjttsuo initGoals ()V
 	METHOD m_jdphaheu setSidewaysSpeed (F)V
 		ARG 1 sidewaysMovement
 	METHOD m_jjefzxbm getAmbientSound ()Lnet/minecraft/unmapped/C_avavozay;
+	METHOD m_jkyscsfv isInHome (Lnet/minecraft/unmapped/C_vgpupfxx;)Z
+		ARG 1 pos
 	METHOD m_jlsekxwk enchantEquipment (Lnet/minecraft/unmapped/C_jmnzlycd;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_rlomrsco;FLnet/minecraft/unmapped/C_jiailwzt;)V
 		ARG 1 world
 		ARG 2 slot
@@ -95,6 +118,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 entity
 	METHOD m_kxilreut canPickupItem (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 stack
+	METHOD m_ldocmdgh createEquipmentInventory (Lnet/minecraft/unmapped/C_yuycoehb;)Lnet/minecraft/unmapped/C_pjtstjoq;
 	METHOD m_lfujztja getLookControl ()Lnet/minecraft/unmapped/C_lgufpcrf;
 	METHOD m_lofxmiwn setPersistent ()V
 	METHOD m_lpjmkwwe getMoveControl ()Lnet/minecraft/unmapped/C_azhvkebm;
@@ -109,11 +133,12 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_mrbrckqf isDisallowedInPeaceful ()Z
 	METHOD m_mztbwniz movesIndependently ()Z
 		COMMENT When true, causes this entity to take over pathfinding for its controlling passenger.
+	METHOD m_ntvgsokt getHomeRadius ()I
 	METHOD m_nzdowltt canGather (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 2 stack
 	METHOD m_nzxqjkay tryEquip (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 2 equipment
-	METHOD m_ocoscmiz getPositionTarget ()Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_ocoscmiz getHome ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_owfqcyjj changeAngle (FFF)F
 		ARG 1 oldAngle
 		ARG 2 newAngle
@@ -136,6 +161,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_rpistqzo isWearingBodyArmor ()Z
 	METHOD m_rpqyatoj convert (Lnet/minecraft/unmapped/C_ogavsvbr;Lnet/minecraft/unmapped/C_pkxijcfk;Lnet/minecraft/unmapped/C_pkxijcfk$C_olacbmtc;)Lnet/minecraft/unmapped/C_dxkfswlz;
 	METHOD m_ruuttiyq isPersistent ()Z
+	METHOD m_rxlmkyhd hasHome ()Z
 	METHOD m_rxurkduy getAttackTarget ()Lnet/minecraft/unmapped/C_usxaxydn;
 	METHOD m_saekgdkn stopMoving ()V
 	METHOD m_seslsqmb dropPreservedEquipment (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/util/function/Predicate;)Ljava/util/Set;
@@ -149,6 +175,8 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 3 slot
 	METHOD m_szmqgzqm equipRandomly (Lnet/minecraft/unmapped/C_fiwnwrrf;)V
 		ARG 1 equipmentTable
+	METHOD m_tcqmwdcv clearLeashAngularMomentum ()V
+	METHOD m_thurzwcl isInHome ()Z
 	METHOD m_tjejbxzp canUseRangedWeapon (Lnet/minecraft/unmapped/C_axrfhndl;)Z
 		ARG 1 weapon
 	METHOD m_todoiyds clearGoalsAndTasks (Ljava/util/function/Predicate;)V
@@ -166,6 +194,7 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_uebjilbs equipRandomly (Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/Map;)V
 		ARG 1 lootTable
 		ARG 2 dropChances
+	METHOD m_ulpptnjs hasValidEquipment (Lnet/minecraft/unmapped/C_yuycoehb;)Z
 	METHOD m_uqccedlq canSpawn (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_bhyaesep;)Z
 		ARG 1 world
 	METHOD m_utndsklm equipBodyArmor (Lnet/minecraft/unmapped/C_sddaxwyk;)V
@@ -185,9 +214,12 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 		ARG 1 count
 	METHOD m_xipuyppw canSpawn (Lnet/minecraft/unmapped/C_eemzphbi;)Z
 		ARG 1 world
+	METHOD m_xjleopwq (Lnet/minecraft/unmapped/C_kespdwpv;Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 loot
 	METHOD m_xmtehbhc setForwardSpeed (F)V
 		ARG 1 forwardSpeed
 	METHOD m_xozpkuaw sendAiDebugData ()V
+	METHOD m_ydtokxcc canShearEquipment (Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 	METHOD m_ymvczssz isAffectedByDaylight ()Z
 	METHOD m_yqlrvwhj setUpwardSpeed (F)V
 		ARG 1 upwardSpeed
@@ -197,3 +229,4 @@ CLASS net/minecraft/unmapped/C_dxkfswlz net/minecraft/entity/mob/MobEntity
 	METHOD m_zdjlhmwq getVisibilityCache ()Lnet/minecraft/unmapped/C_vyefybqz;
 	METHOD m_zjfgbeap isAiDisabled ()Z
 	METHOD m_zqkovfvg getPreferredWeapons ()Lnet/minecraft/unmapped/C_ednuhnnn;
+	METHOD m_zqzxvdjt isInHome (Lnet/minecraft/unmapped/C_hynzadkk;)Z
