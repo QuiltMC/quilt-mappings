@@ -1,16 +1,29 @@
 CLASS net/minecraft/unmapped/C_juzydrbx net/minecraft/entity/projectile/thrown/EyeOfEnderEntity
 	FIELD f_azshsyjb lifespan I
 	FIELD f_dsomuhan dropsItem Z
+	FIELD f_flnzrrxh MAX_CLOSE_TARGET_DISTANCE F
 	FIELD f_ftehkous ITEM Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_ikfggvjv target Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_qfiyzhkt DISTANT_TARGET_DIRECTION_Y_OFFSET F
 	FIELD f_xqykrtsq MIN_CAMERA_DISTANCE_SQUARED F
 	METHOD <init> (Lnet/minecraft/unmapped/C_cdctfzbn;DDD)V
 		ARG 1 world
 		ARG 2 x
 		ARG 4 y
 		ARG 6 z
+	METHOD m_fniedfyl addParticles (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 pos
+		ARG 2 velocity
 	METHOD m_ilhdyacs createEnderEyeStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_qnneluqn initTargetPos (Lnet/minecraft/unmapped/C_vgpupfxx;)V
 		COMMENT Sets where the eye will fly towards.
-		COMMENT If close enough, it will fly directly towards it, otherwise, it will fly upwards, in the direction of the BlockPos.
+		COMMENT <p>
+		COMMENT If close enough, it will fly directly towards it. Otherwise, it will fly upwards
+		COMMENT in the direction of the passed {@code pos}.
+		ARG 1 pos
+	METHOD m_vgmkltff adjustVelocity (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 0 velocity
+		ARG 1 pos
+		ARG 2 target
 	METHOD m_ykvckpnt setItem (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 stack
