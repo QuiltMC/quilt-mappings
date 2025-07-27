@@ -1,11 +1,14 @@
 CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInventory
+	FIELD f_aqxlbnia SADDLE_SLOT I
 	FIELD f_atsclqcy main Lnet/minecraft/unmapped/C_rnrfftze;
+	FIELD f_chuuzmwb BODY_SLOT I
 	FIELD f_ddlbxbuu MAIN_SIZE I
 		COMMENT The number of slots ({@value}) in the main (non-hotbar) section of the inventory.
 	FIELD f_efjgtpgx NOT_FOUND I
 		COMMENT The slot index ({@value}) used to indicate no result
 		COMMENT (item not present / no available space) when querying the inventory's contents
 		COMMENT or to indicate no preference when inserting an item into the inventory.
+	FIELD f_epogyqll EQUIPMENT_SLOTS_BY_ID Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
 	FIELD f_hhxlkrup selectedSlot I
 	FIELD f_muifvbni player Lnet/minecraft/unmapped/C_jzrpycqo;
 	FIELD f_qmvikygt ITEM_USAGE_COOLDOWN I
@@ -18,6 +21,7 @@ CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInvent
 		COMMENT The number of columns ({@value}) in the inventory.
 		COMMENT
 		COMMENT <p>The same value dictates the size of the player's hotbar, excluding the offhand slot.</p>
+	FIELD f_txsgxayq equippedStacks Lnet/minecraft/unmapped/C_okmgcumg;
 	FIELD f_zhaszfsy changeCount I
 	METHOD m_agfxrwtb contains (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 		ARG 1 key
@@ -51,12 +55,16 @@ CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInvent
 	METHOD m_joxvrlyb insertStack (ILnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 1 slot
 		ARG 2 stack
-	METHOD m_julzohay writeNbt (Lnet/minecraft/unmapped/C_kespdwpv$C_hmmmpget;)V
+	METHOD m_julzohay write (Lnet/minecraft/unmapped/C_kespdwpv$C_hmmmpget;)V
+		ARG 1 writer
+	METHOD m_kymsgeht setSelectedStack (Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_lhflraib createUpdatePacket (I)Lnet/minecraft/unmapped/C_yjakgqnt;
 		ARG 1 slot
+	METHOD m_lttgttvo getMain ()Lnet/minecraft/unmapped/C_rnrfftze;
 	METHOD m_mqaefcrf getOccupiedSlotWithRoomForStack (Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 1 stack
-	METHOD m_owslrmqz swapSlotWithHotbar (I)V
+	METHOD m_nrtgegwt getSelectedSlot ()I
+	METHOD m_owslrmqz swapWithHotbar (I)V
 		ARG 1 slot
 	METHOD m_qstschyr getMatchingSlot (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 1 item
@@ -65,14 +73,20 @@ CLASS net/minecraft/unmapped/C_sxzqocrm net/minecraft/entity/player/PlayerInvent
 		ARG 2 stack
 	METHOD m_sqstcgyz getSlotWithStack (Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 1 stack
+	METHOD m_tjnqwbhx setSelectedSlot (I)V
+		COMMENT @throws IllegalArgumentException if the passed {@code slot} is not a
+		COMMENT {@linkplain #isValidHotbarSlot(int) valid hotbar slot}
 	METHOD m_upysxszu getChangeCount ()I
 	METHOD m_wfyaqwua getHotbarSize ()I
-	METHOD m_wisvsnby readNbt (Lnet/minecraft/unmapped/C_djkzhngg$C_knzjfpbq;)V
+	METHOD m_wisvsnby read (Lnet/minecraft/unmapped/C_djkzhngg$C_knzjfpbq;)V
+		ARG 1 reader
 	METHOD m_wtjgxszd dropAll ()V
 	METHOD m_wxyieztp offer (Lnet/minecraft/unmapped/C_sddaxwyk;Z)V
 		ARG 1 stack
 		ARG 2 notifiesClient
-	METHOD m_xbduwkdk isValidHotbarIndex (I)Z
+	METHOD m_xbduwkdk isValidHotbarSlot (I)Z
 		ARG 0 slot
 	METHOD m_xukgmrex addStack (Lnet/minecraft/unmapped/C_sddaxwyk;)I
 		ARG 1 stack
+	METHOD m_ydlcxxjs moveToHotbar (Lnet/minecraft/unmapped/C_sddaxwyk;)V
+	METHOD m_zrkzxrbk getSelectedStack ()Lnet/minecraft/unmapped/C_sddaxwyk;

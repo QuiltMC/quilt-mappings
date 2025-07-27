@@ -1,29 +1,39 @@
 CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlayerEntity
+	FIELD f_ahjtibay ENDER_PEARL_DIMENSION_KEY Ljava/lang/String;
 	FIELD f_aigmlatx screenHandlerSyncId I
 	FIELD f_ancsmfuf lastExperienceScore I
 	FIELD f_awxwtkbc lastLevelScore I
+	FIELD f_aypwdfqm FLY_STAT_RECORDING_SPEED I
+	FIELD f_bisatnfo VERTICAL_FOGIVENESS_RANGE I
 	FIELD f_bpaumbdz lastClientInput Lnet/minecraft/unmapped/C_lkjruazd;
 	FIELD f_capnwlvs levitationStartPos Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_cfahbfba fallStartPos Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_cosaarly ENDER_PEARLS_KEY Ljava/lang/String;
 	FIELD f_czcwatdw lastAirScore I
 	FIELD f_dqffdmpu thrownEnderPearls Ljava/util/Set;
 	FIELD f_eahsbljj screenHandlerSyncHandler Lnet/minecraft/unmapped/C_ccogdvwm;
 	FIELD f_ecegdczc notInAnyWorld Z
+	FIELD f_ecrfaigy ENDER_PEARL_TICKET_RADIUS I
+	FIELD f_etyhlpnk DEFAULT_SEEN_CREDITS Z
 	FIELD f_ewcehdmp syncedFoodLevel I
 	FIELD f_ffakgupn statHandler Lnet/minecraft/unmapped/C_cakpthuz;
 	FIELD f_fkzaomsn CREATIVE_ENTITY_INTERACTION_RANGE_MODIFIER Lnet/minecraft/unmapped/C_hdbqsqsm;
 	FIELD f_fmywgmel levitationStartTick I
 	FIELD f_glnuzcvl networkHandler Lnet/minecraft/unmapped/C_hwbabymg;
+	FIELD f_gmpmdcwt WAYPOINT_TRANSMIT_RANGE_CROUCH_MODIFIER Lnet/minecraft/unmapped/C_hdbqsqsm;
 	FIELD f_gszqcwcl disconnected Z
 	FIELD f_hdfccasf lastActionTime J
 	FIELD f_hnshkvqc syncedSaturationIsZero Z
 	FIELD f_hnwsfwxm enteredNetherPos Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_hrcpmxqf syncedHealth F
+	FIELD f_hrcxblhc spawnPoint Lnet/minecraft/unmapped/C_mxrobsgg$C_rbotfxsd;
 	FIELD f_htmanizc advancementTracker Lnet/minecraft/unmapped/C_hyeqtgvx;
+	FIELD f_hyufqyrv movement Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_jmjzglen LOGGER Lorg/slf4j/Logger;
 	FIELD f_jqhahngd sculkShriekerWarningManager Lnet/minecraft/unmapped/C_klpebnoe;
 	FIELD f_juibkpvw language Ljava/lang/String;
 	FIELD f_kanetbai inTeleportationState Z
+	FIELD f_kdrqbovn BLOCK_INTERACTION_DISTANCE_VERIFICATION_BUFFER D
 	FIELD f_kgzajahg watchedSection Lnet/minecraft/unmapped/C_zubvmeye;
 		COMMENT A chunk section position indicating where the player's client is currently
 		COMMENT watching chunks from. Used referentially for the game to update the chunks
@@ -31,29 +41,37 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		COMMENT
 		COMMENT @see #getWatchedSection()
 		COMMENT @see #setWatchedSection(ChunkSectionPos)
+	FIELD f_kojhzwsx ENTITY_INTERACTION_DISTANCE_VERIFICATION_BUFFER D
 	FIELD f_ldmwjyxg requestedViewDistance I
 	FIELD f_lqlcdtmt commandOutput Lnet/minecraft/unmapped/C_ngpvhugm;
 	FIELD f_mfajmfxx spawnExtraParticlesOnFall Z
 	FIELD f_myvtmhev raidOmenPos Lnet/minecraft/unmapped/C_hynzadkk;
+	FIELD f_nntqutkk object Ljava/lang/Object;
+	FIELD f_olaqmrvs HORIZONTAL_FORGIVENSS_RANGE I
 	FIELD f_onahzxmm interactionManager Lnet/minecraft/unmapped/C_egnasquq;
 	FIELD f_oxxbizze syncedExperience I
 	FIELD f_qcackqxh enteredLavaOnVehiclePos Lnet/minecraft/unmapped/C_vgpupfxx;
+	FIELD f_qehhxsfo DEFAULT_SPAWN_EXTRA_PARTICLES_ON_FALL Z
 	FIELD f_qrxvbodj clientChatVisibility Lnet/minecraft/unmapped/C_wafwmsvb;
+	FIELD f_rxgyrgij renderArea Lnet/minecraft/unmapped/C_niowvjqq;
 	FIELD f_selmotls lastArmorScore I
 	FIELD f_slrxmizd server Lnet/minecraft/server/MinecraftServer;
 	FIELD f_spwankpb recipeBook Lnet/minecraft/unmapped/C_ypnziuiu;
 	FIELD f_sqvynxvm lastFoodScore I
 	FIELD f_tlemovvv clientChatColorsEnabled Z
 	FIELD f_tmepkkvu textStream Lnet/minecraft/unmapped/C_ibcyuwyk;
+	FIELD f_tqyakkbm SET_SPAWN Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_uitrvqbw chatSession Lnet/minecraft/unmapped/C_sdodhjzp;
 	FIELD f_vwyacvpk allowsListing Z
 	FIELD f_wtszcwij CREATIVE_BLOCK_INTERACTION_RANGE_MODIFIER Lnet/minecraft/unmapped/C_hdbqsqsm;
 	FIELD f_wxiufufe screenHandlerListener Lnet/minecraft/unmapped/C_juruncbf;
+	FIELD f_ybeojqyy DIMENSION_KEY Ljava/lang/String;
 	FIELD f_ygoxduda seenCredits Z
 	FIELD f_ykxzgnke particlesMode Lnet/minecraft/unmapped/C_ohzhuhsr;
 	FIELD f_ynglkbif filterText Z
 	FIELD f_zkfgljmz lastHealthScore F
 	FIELD f_zwmomqsu cameraEntity Lnet/minecraft/unmapped/C_astfners;
+	METHOD m_afrhtnjp copySpawnPoint (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 	METHOD m_akgkagnq forgiveMobAnger ()V
 	METHOD m_ausyrzvm setWatchedSection (Lnet/minecraft/unmapped/C_zubvmeye;)V
 		COMMENT Sets the chunk section position the player's client is currently watching
@@ -63,6 +81,8 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		COMMENT @see #getWatchedSection()
 		ARG 1 section
 			COMMENT the updated section position
+	METHOD m_auynogad updateMovementStats (DDD)V
+	METHOD m_awcskget updateModifiers ()V
 	METHOD m_ayjhwfdn getAdvancementTracker ()Lnet/minecraft/unmapped/C_hyeqtgvx;
 	METHOD m_bapgikfh getServerGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)Lnet/minecraft/unmapped/C_lghcpyvl;
 		COMMENT Returns the server game mode the player should be set to, namely the forced game mode.
@@ -72,7 +92,8 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		COMMENT
 		COMMENT @see MinecraftServer#getForcedGameMode
 		ARG 1 backupGameMode
-	METHOD m_bcanpraa writeGameModeNbt (Lnet/minecraft/unmapped/C_kespdwpv;)V
+	METHOD m_bbwiwvtt writeVehicle (Lnet/minecraft/unmapped/C_kespdwpv;)V
+	METHOD m_bcanpraa writeGameMode (Lnet/minecraft/unmapped/C_kespdwpv;)V
 	METHOD m_bmcjwhux getCameraEntity ()Lnet/minecraft/unmapped/C_astfners;
 	METHOD m_bshhomos setCameraEntity (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 entity
@@ -80,24 +101,45 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 1 anchorPoint
 		ARG 2 targetEntity
 		ARG 3 targetAnchor
-	METHOD m_cebghmrm updateScoreboardScore (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_hswmfudr;[Lnet/minecraft/unmapped/C_adsgsrpw;)V
-		ARG 3 criterions
+	METHOD m_bvxwqsur getSpawnPoint ()Lnet/minecraft/unmapped/C_mxrobsgg$C_rbotfxsd;
+	METHOD m_cebghmrm updateKillScores (Lnet/minecraft/unmapped/C_hswmfudr;Lnet/minecraft/unmapped/C_hswmfudr;[Lnet/minecraft/unmapped/C_adsgsrpw;)V
+		ARG 2 subject
+		ARG 3 criteria
 	METHOD m_cicbiveh markHealthDirty ()V
+	METHOD m_cjdhmaqg canReceiveWaypoints ()Z
 	METHOD m_cqxrhbhc addEnderPearlTicket (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_ynrszrtu;)J
 		COMMENT Adds an ender pearl chunk ticket to the ticket manager.
 		ARG 0 world
 		ARG 1 pos
 	METHOD m_ctvsftwy getTextStream ()Lnet/minecraft/unmapped/C_ibcyuwyk;
+	METHOD m_cztqeded isCollidingIn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
+		ARG 2 box
 	METHOD m_dmwhgwkv sendSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+	METHOD m_dpqdahtb setMovement (Lnet/minecraft/unmapped/C_vgpupfxx;)V
+		ARG 1 movement
 	METHOD m_dzllwyda copyFrom (Lnet/minecraft/unmapped/C_mxrobsgg;Z)V
 		ARG 1 oldPlayer
 		ARG 2 alive
 	METHOD m_eenhzbrz sendServerMetadata (Lnet/minecraft/unmapped/C_bwttende;)V
 		ARG 1 metadata
 	METHOD m_ehhcdgvv setRaidOmenPos (Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_epmlkdds setLastClientInput (Lnet/minecraft/unmapped/C_lkjruazd;)V
+		ARG 1 input
 	METHOD m_esetupfd playerTick ()V
+	METHOD m_etsgudiw readVehicle (Lnet/minecraft/unmapped/C_djkzhngg;)V
+	METHOD m_evedvxjw (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/util/stream/Stream;
+		ARG 1 recipe
+	METHOD m_evmlwyoy (Lnet/minecraft/unmapped/C_djdmkjpx;)V
+		ARG 1 unit
+	METHOD m_ewivonmy updateVehicleMovementStats (DDD)V
 	METHOD m_fawxnykw setGameMode (Lnet/minecraft/unmapped/C_djkzhngg;)V
+	METHOD m_fjhuwazb (Lnet/minecraft/unmapped/C_xhhleach;)Z
+		ARG 1 recipe
+	METHOD m_fkkjbhxa (Lnet/minecraft/unmapped/C_ypnziuiu$C_vqmaadjr;)V
+		ARG 1 book
 	METHOD m_fwokftay allowsListing ()Z
+	METHOD m_gwuckbqk (ILnet/minecraft/unmapped/C_qwlnyyss;)V
+		ARG 1 scoreAccess
 	METHOD m_gylcrlba loadEnderPearl (Lnet/minecraft/unmapped/C_xmtgsyuv;)J
 		COMMENT Loads the ender pearl's current chunk and adds it to the player's set of ender pearls.
 		ARG 1 enderPearl
@@ -112,6 +154,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		COMMENT
 		COMMENT @see #watchedSection
 		COMMENT @see #setWatchedSection(ChunkSectionPos)
+	METHOD m_hkmzxron readEnderPearls (Lnet/minecraft/unmapped/C_djkzhngg;)V
 	METHOD m_hkspsypv getPlayerListName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_hmjyuwow getClientChatVisibility ()Lnet/minecraft/unmapped/C_wafwmsvb;
 	METHOD m_hoiwaxpe onTeleportationDone ()V
@@ -123,15 +166,26 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 1 overlay
 	METHOD m_itdwcvgj worldChanged (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 1 origin
+	METHOD m_izruuyul onWon ()V
 	METHOD m_jdnfjiqa createCommandSource ()Lnet/minecraft/unmapped/C_pennblrk;
+	METHOD m_jhyjhfyn (Lnet/minecraft/unmapped/C_sxzqocrm;I)V
+		ARG 2 slot
 	METHOD m_jjdnefmi getLastClientMovementIntent ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_jpjsvuqt respawn (ZLnet/minecraft/unmapped/C_sqhjwpkh$C_saosxlyx;)Lnet/minecraft/unmapped/C_sqhjwpkh;
+		ARG 2 transition
 	METHOD m_juidebgy tickFallStartPos ()V
+	METHOD m_jzwrbooz (ILnet/minecraft/unmapped/C_qwlnyyss;)V
+		ARG 1 score
+	METHOD m_kahhlttm readEnderPearl (Lnet/minecraft/unmapped/C_djkzhngg;)V
 	METHOD m_kbplwriu calculateSpawnOffsetMultiplier (I)I
 		ARG 1 horizontalSpawnArea
+	METHOD m_kqhsyghp getLastClientInput ()Lnet/minecraft/unmapped/C_lkjruazd;
 	METHOD m_krzsingq setExperiencePoints (I)V
 		ARG 1 points
 	METHOD m_lmerldlu isDisconnected ()Z
-	METHOD m_lrtlnong writeEnderPearlsNbt (Lnet/minecraft/unmapped/C_kespdwpv;)V
+	METHOD m_lrtlnong writeEnderPearls (Lnet/minecraft/unmapped/C_kespdwpv;)V
+	METHOD m_lymzipkb (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_mxrobsgg$C_edsacgfr;
+		ARG 1 wakeUpPos
 	METHOD m_mionnykm setServerWorld (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 	METHOD m_mmpafyms sendSystemMessage (Lnet/minecraft/unmapped/C_rdaqiwdt;Z)V
 		ARG 1 message
@@ -144,14 +198,29 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_oacdnmbp setClientSettings (Lnet/minecraft/unmapped/C_elrtgpva;)V
 		ARG 1 info
 	METHOD m_obnaqvtb getStatHandler ()Lnet/minecraft/unmapped/C_cakpthuz;
+	METHOD m_pbwwtvam (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/Consumer;)V
+		ARG 1 recipe
+		ARG 2 adder
+	METHOD m_pontikuw (Lnet/minecraft/unmapped/C_hlqarogo;)Z
+		ARG 1 hostile
 	METHOD m_ppkclwkr isBedTooFarAway (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
 	METHOD m_pyfbhche setSpawnPoint (Lnet/minecraft/unmapped/C_mxrobsgg$C_rbotfxsd;Z)V
-		ARG 2 spawnPointSet
+		ARG 1 point
+		ARG 2 sendMessageOnChange
 	METHOD m_qaobxrty incrementScreenHandlerSyncId ()V
+	METHOD m_qebwrwfm wasStationary (DDD)Z
+		ARG 0 dx
+		ARG 2 dy
+		ARG 4 dz
+	METHOD m_qlrqxklu (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
+	METHOD m_qrafccti setRenderArea (Lnet/minecraft/unmapped/C_niowvjqq;)V
+		ARG 1 area
 	METHOD m_qtkqrrlq areClientChatColorsEnabled ()Z
 	METHOD m_rfxbxqjm onSpawn (Lnet/minecraft/unmapped/C_mkrkudpa;)V
 		ARG 1 screenHandler
+	METHOD m_rmsklpll trySendMapMarkerUpdates (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 	METHOD m_rtkbvrqw createClientInfo ()Lnet/minecraft/unmapped/C_elrtgpva;
 	METHOD m_rxryenyl isBedTooFarAway (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Z
 		ARG 1 pos
@@ -161,11 +230,17 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_taedfzyx shouldFilterMessagesSentTo (Lnet/minecraft/unmapped/C_mxrobsgg;)Z
 		ARG 1 player
 	METHOD m_tbpwsjiy getChatSession ()Lnet/minecraft/unmapped/C_sdodhjzp;
+	METHOD m_tcgfsciw findSpawnDest (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_mxrobsgg$C_rbotfxsd;Z)Ljava/util/Optional;
+		ARG 1 point
+		ARG 2 died
+	METHOD m_tkqcbqjg (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_mxrobsgg$C_edsacgfr;
+		ARG 1 dest
 	METHOD m_tsbczhxe isInTeleportationState ()Z
 	METHOD m_ttfujhny sendChatMessage (Lnet/minecraft/unmapped/C_glgnifxw;ZLnet/minecraft/unmapped/C_hasnsypd$C_iocvgdxe;)V
 		ARG 1 message
 		ARG 2 filterMaskEnabled
 		ARG 3 parameters
+	METHOD m_ucwfkaov getRenderArea ()Lnet/minecraft/unmapped/C_niowvjqq;
 	METHOD m_ujyxsuep onDisconnect ()V
 	METHOD m_ulcuzxzs updateScores (Lnet/minecraft/unmapped/C_adsgsrpw;I)V
 		ARG 1 criterion
@@ -173,6 +248,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_uxjbfcwl getRaidOmenPos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_vrtyhqjd setChatSession (Lnet/minecraft/unmapped/C_sdodhjzp;)V
 		ARG 1 chatSession
+	METHOD m_waafemhd getPlayerListOrder ()I
 	METHOD m_wgyjvvco resetRaidOmenPos ()V
 	METHOD m_wnaewudz isPvpEnabled ()Z
 	METHOD m_wrxsxpkn setExperienceLevel (I)V
@@ -181,6 +257,7 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 	METHOD m_wujubsor createCommonPlayerSpawnInfo (Lnet/minecraft/unmapped/C_bdwnwhiu;)Lnet/minecraft/unmapped/C_zsjubkei;
 	METHOD m_xkkpozuc changeGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)Z
 		ARG 1 gameMode
+	METHOD m_xvawkxcc getRequestedViewDistance ()I
 	METHOD m_xxjfeuye getCommandOutput ()Lnet/minecraft/unmapped/C_ngpvhugm;
 	METHOD m_ygkpsrag getRecipeBook ()Lnet/minecraft/unmapped/C_ypnziuiu;
 	METHOD m_yhuimfko gameModeFromNbt (Lnet/minecraft/unmapped/C_djkzhngg;Ljava/lang/String;)Lnet/minecraft/unmapped/C_lghcpyvl;
@@ -189,3 +266,26 @@ CLASS net/minecraft/unmapped/C_mxrobsgg net/minecraft/server/network/ServerPlaye
 		ARG 1 enderPearl
 	METHOD m_zyhxcats removeEnderPearl (Lnet/minecraft/unmapped/C_xmtgsyuv;)V
 		ARG 1 enderPearl
+	CLASS C_edsacgfr SpawnDestination
+		METHOD m_danijxoo getFacingPointYaw (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;)F
+			ARG 0 dest
+			ARG 1 spawnPoint
+		METHOD m_ebzmgewk of (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_mxrobsgg$C_edsacgfr;
+			ARG 0 dest
+			ARG 1 spawnPoint
+	CLASS C_ldooqqdw
+		FIELD f_tekolpea componentHashCache Lcom/google/common/cache/LoadingCache;
+		METHOD m_lgvaefas updatePropertyImpl (Lnet/minecraft/unmapped/C_mkrkudpa;II)V
+			ARG 1 handler
+			ARG 2 id
+			ARG 3 value
+		CLASS C_admmwvzo
+			METHOD load (Ljava/lang/Object;)Ljava/lang/Object;
+				ARG 1 component
+			METHOD m_flxkjqie (Lnet/minecraft/unmapped/C_qkjwbfhx;Ljava/lang/String;)Ljava/lang/IllegalArgumentException;
+				ARG 1 error
+	CLASS C_rbotfxsd SpawnPoint
+		METHOD m_houlqbnz getDimension (Lnet/minecraft/unmapped/C_mxrobsgg$C_rbotfxsd;)Lnet/minecraft/unmapped/C_xhhleach;
+			ARG 0 point
+		METHOD m_safzimyb locationMatches (Lnet/minecraft/unmapped/C_mxrobsgg$C_rbotfxsd;)Z
+			ARG 1 point

@@ -1,13 +1,50 @@
 CLASS net/minecraft/unmapped/C_ypnziuiu net/minecraft/server/network/ServerRecipeBook
 	FIELD f_adesvwxa RECIPE_BOOK_KEY Ljava/lang/String;
+	FIELD f_dryeywza displayResolver Lnet/minecraft/unmapped/C_ypnziuiu$C_fmmllvga;
 	FIELD f_lfrrjxay LOGGER Lorg/slf4j/Logger;
+	FIELD f_mbrbvedd known Ljava/util/Set;
+	FIELD f_vwhltalv toBeDisplayed Ljava/util/Set;
+	METHOD m_cpttvoky addToBeDisplayed (Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 recipe
+	METHOD m_dktbtjvn isKnown (Lnet/minecraft/unmapped/C_xhhleach;)Z
+		ARG 1 recipe
+	METHOD m_ggtxkbdm copyFrom (Lnet/minecraft/unmapped/C_ypnziuiu$C_vqmaadjr;Ljava/util/function/Predicate;)V
+		ARG 1 packed
 	METHOD m_kjatblgn handleList (Ljava/util/List;Ljava/util/function/Consumer;Ljava/util/function/Predicate;)V
+		ARG 1 recipes
 		ARG 2 handler
+		ARG 3 recognizer
+	METHOD m_qauvkvfy (Ljava/util/List;Lnet/minecraft/unmapped/C_dsptsoym;)V
+		ARG 1 entry
 	METHOD m_qlxmdpvi lockRecipes (Ljava/util/Collection;Lnet/minecraft/unmapped/C_mxrobsgg;)I
 		ARG 1 recipes
 		ARG 2 player
 	METHOD m_rxududzw sendInitRecipesPacket (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
+	METHOD m_sjsfldor (Ljava/util/List;Lnet/minecraft/unmapped/C_dscbrwbj;Lnet/minecraft/unmapped/C_dsptsoym;)V
+		ARG 2 display
+	METHOD m_smzesdcn pack ()Lnet/minecraft/unmapped/C_ypnziuiu$C_vqmaadjr;
+	METHOD m_tdfwwcsh removeKnown (Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 recipe
+	METHOD m_tumfxcdw addKnown (Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 recipe
+	METHOD m_uioqhvae (Ljava/util/List;Lnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_dsptsoym;)V
+		ARG 3 display
+	METHOD m_ullfvwbf removeTobeDisplayed (Lnet/minecraft/unmapped/C_xhhleach;)V
+		ARG 1 recipe
 	METHOD m_vtiywdsn unlockRecipes (Ljava/util/Collection;Lnet/minecraft/unmapped/C_mxrobsgg;)I
 		ARG 1 recipes
 		ARG 2 player
+	METHOD m_wxhsclrn copyFrom (Lnet/minecraft/unmapped/C_ypnziuiu;)V
+		ARG 1 other
+	METHOD m_zcihqsdz unpack (Lnet/minecraft/unmapped/C_ypnziuiu$C_vqmaadjr;)V
+		ARG 1 packed
+	CLASS C_fmmllvga DisplayResolver
+		METHOD displaysForRecipe resolve (Lnet/minecraft/unmapped/C_xhhleach;Ljava/util/function/Consumer;)V
+			ARG 1 recipe
+			ARG 2 adder
+	CLASS C_vqmaadjr Packed
+		FIELD f_hwajfuro toBeDisplayed Ljava/util/List;
+		FIELD f_nzkxhmpx options Lnet/minecraft/unmapped/C_krpwsfph;
+		METHOD m_buzxyrdj toBeDisplayed ()Ljava/util/List;
+		METHOD m_nsiayins options ()Lnet/minecraft/unmapped/C_krpwsfph;
