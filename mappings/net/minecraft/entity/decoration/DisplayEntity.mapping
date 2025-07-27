@@ -24,10 +24,13 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	FIELD f_owzwxrlm GLOW_COLOR_OVERRIDE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_pcqrtoci VIEW_RANGE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_pebjmjqa updateInterpolationDuration Z
+	FIELD f_powhdosz DEFAULT_START_INTERPOLATION I
 	FIELD f_qawhpaou HEIGHT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_qfnokasi interpolationProgress F
 	FIELD f_qxpwolsf SHADOW_RADIUS_KEY Ljava/lang/String;
 	FIELD f_rrozolcg TRANSLATION Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_rsfepywv DEFAULT_INTERPOLATION_DURATION I
+	FIELD f_sxmonsvq INITIAL_HEIGHT F
 	FIELD f_tlzklppc SHADOW_STRENGTH_KEY Ljava/lang/String;
 	FIELD f_tqjbnsuz NO_BRIGHTNESS_OVERRIDE I
 	FIELD f_uaimxenm BRIGHTNESS_OVERRIDE Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -35,15 +38,20 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	FIELD f_uwuepspo interpolationStart J
 	FIELD f_vayhsclz RIGHT_ROTATION Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_vmgxiagt RENDER_STATE_IDS Lit/unimi/dsi/fastutil/ints/IntSet;
+	FIELD f_vumfwpov INITIAL_VIEW_RANGE F
 	FIELD f_wfsednzd START_INTERPOLATION_KEY Ljava/lang/String;
+	FIELD f_wkculdhp INITIAL_POSITION_ROTATION_INTERPOLATION_DURATION I
 	FIELD f_wpcewhgi INITIAL_SHADOW_RADIUS F
 	FIELD f_xgnfhngl BILLBOARD_KEY Ljava/lang/String;
 	FIELD f_xlyoeing INTERPOLATION_DURATION Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_zflourbb INITIAL_WIDTH F
 	FIELD f_zfworekp interpolator Lnet/minecraft/unmapped/C_sdgyrixf;
 	FIELD f_zlrldkqq LOGGER Lorg/slf4j/Logger;
 	FIELD f_zmedthph HEIGHT_KEY Ljava/lang/String;
 	METHOD m_anrfuahp getViewRange ()F
 	METHOD m_cfgjadmn updateRenderData (ZF)V
+		ARG 1 interpolate
+		ARG 2 interpolationProgress
 	METHOD m_crsnfjzr setGlowColorOverride (I)V
 		ARG 1 override
 	METHOD m_ctwyttpa setInterpolationDuration (I)V
@@ -89,11 +97,13 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	METHOD m_ykgoueyp setShadowRadius (F)V
 		ARG 1 radius
 	METHOD m_zesirgas getGlowColorOverride ()I
-	CLASS C_aefytrhe AbstractInterpolator
+	CLASS C_aefytrhe Interpolator
 		METHOD constant (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_zdeutotk$C_aefytrhe;
 			ARG 0 value
+		METHOD get interpolate (F)Ljava/lang/Object;
+			ARG 1 progress
 		METHOD m_xavndidf (Ljava/lang/Object;F)Ljava/lang/Object;
-			ARG 1 f
+			ARG 1 progress
 	CLASS C_btdrhauy LinearFloatInterpolator
 	CLASS C_cozbiatm BillboardRenderConstraints
 		FIELD f_afcfxjuf BY_ID Ljava/util/function/IntFunction;
@@ -112,17 +122,21 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 	CLASS C_eotnewog IntInterpolator
 		METHOD constant (I)Lnet/minecraft/unmapped/C_zdeutotk$C_eotnewog;
 			ARG 0 value
+		METHOD get interpolate (F)I
+			ARG 1 progress
 		METHOD m_vtnrumje (IF)I
-			ARG 1 i
+			ARG 1 progress
 	CLASS C_fdgxcfnt RenderState
 	CLASS C_kalfqsxh ARGB32Interpolator
 	CLASS C_mpyykwwj TransformationInterpolator
 	CLASS C_ncfzfjmg FloatInterpolator
 		METHOD constant (F)Lnet/minecraft/unmapped/C_zdeutotk$C_ncfzfjmg;
 			ARG 0 value
+		METHOD get interpolate (F)F
+			ARG 1 progress
 		METHOD m_nqtknbun (FF)F
-			ARG 1 f
-	CLASS C_ruprkvfh TextDisplayEntity
+			ARG 1 progress
+	CLASS C_ruprkvfh Text
 		FIELD f_bzbrolxv renderData Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_mvidrtny;
 		FIELD f_cjxhpagy SEE_THROUGH_FLAG B
 		FIELD f_cxxrvjvt INITIAL_TEXT_OPACITY B
@@ -136,6 +150,7 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 		FIELD f_mblrkqbg DEFAULT_BACKGROUND_KEY Ljava/lang/String;
 		FIELD f_mcjpxhse TEXT_DISPLAY_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
 		FIELD f_nrdyskvo BACKGROUND_KEY Ljava/lang/String;
+		FIELD f_oogftpgq INITIAL_LINE_WIDTH I
 		FIELD f_pdxvniyi TEXT Lnet/minecraft/unmapped/C_rinmcaxy;
 		FIELD f_pfyjwtvs cachedLine Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_hkiddmgs;
 		FIELD f_pvhhpwoq SHADOW_KEY Ljava/lang/String;
@@ -194,6 +209,9 @@ CLASS net/minecraft/unmapped/C_zdeutotk net/minecraft/entity/decoration/DisplayE
 			METHOD m_wjjanlea width ()I
 		CLASS C_mvidrtny RenderData
 		CLASS C_stdatsys LineSplitter
+			METHOD split (Lnet/minecraft/unmapped/C_rdaqiwdt;I)Lnet/minecraft/unmapped/C_zdeutotk$C_ruprkvfh$C_hkiddmgs;
+				ARG 1 text
+				ARG 2 width
 	CLASS C_ukdbitoi LinearIntInterpolator
 	CLASS C_yooamzmm ItemDisplayEntity
 		FIELD f_cbyffnkw renderData Lnet/minecraft/unmapped/C_zdeutotk$C_yooamzmm$C_quljyame;

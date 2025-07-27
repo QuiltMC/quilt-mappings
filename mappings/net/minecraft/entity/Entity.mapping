@@ -48,7 +48,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_hyixntpo submergedInWater Z
 	FIELD f_hzlmaqrc removalReason Lnet/minecraft/unmapped/C_astfners$C_emmohndu;
 	FIELD f_idqxcmak DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0 D
-	FIELD f_ihpdejin prevY D
+	FIELD f_ihpdejin lastY D
 	FIELD f_ilwbyicy velocity Lnet/minecraft/unmapped/C_vgpupfxx;
 	FIELD f_iskwetjb CUSTOM_NAME Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_jaapvywi YXZ_AXES Lcom/google/common/collect/ImmutableList;
@@ -78,7 +78,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_oritxgsn crystalSoundIntensity F
 	FIELD f_oysssbsf ridingCooldown I
 	FIELD f_pebbtyzx NO_GRAVITY Lnet/minecraft/unmapped/C_rinmcaxy;
-	FIELD f_pfezymmj prevYaw F
+	FIELD f_pfezymmj lastYaw F
 	FIELD f_pfgaedzm MIN_TICKS_TO_FREEZE I
 	FIELD f_psantzmq AIR_KEY Ljava/lang/String;
 	FIELD f_qazqhmfv SNEAKING_FLAG_INDEX I
@@ -107,14 +107,14 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_trtwybfg YZX_AXES Lcom/google/common/collect/ImmutableList;
 	FIELD f_ujsjgylb fallDistance D
 	FIELD f_ulxrtxuh FIRE_KEY Ljava/lang/String;
-	FIELD f_vdsiqqmt prevPitch F
+	FIELD f_vdsiqqmt lastPitch F
 	FIELD f_vettyvgp hasVisualFire Z
 	FIELD f_vlasppic pistonMovementTick J
 	FIELD f_vqbkceyr PASSENGERS_KEY Ljava/lang/String;
 	FIELD f_vwokuaty yaw F
 	FIELD f_vzixfazc ID_KEY Ljava/lang/String;
 	FIELD f_waoxjimm alwaysSyncPosition Z
-	FIELD f_waxazwex prevZ D
+	FIELD f_waxazwex lastZ D
 	FIELD f_wphccfzk GLOWING_FLAG_INDEX I
 	FIELD f_wqxxdylj ON_FIRE_FLAG_INDEX I
 	FIELD f_wtzimzjs bounds Lnet/minecraft/unmapped/C_hbcjzgoe;
@@ -127,7 +127,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	FIELD f_yqhkkypy currentCollisionChecks Ljava/util/List;
 	FIELD f_yqjyujwv SILENT Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_yxegongc ROTATION_KEY Ljava/lang/String;
-	FIELD f_yyonjapw prevX D
+	FIELD f_yyonjapw lastX D
 	FIELD f_yyqamqtt verticalCollision Z
 	FIELD f_zesrveqd pitch F
 	FIELD f_zntizrau AIR Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -290,6 +290,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_dsukauvx updateSubmergedInWaterState ()V
 	METHOD m_dtzgxqjr setRenderDistanceMultiplier (D)V
 		ARG 0 value
+	METHOD m_ducgrghl debugBlockCollision (Lnet/minecraft/unmapped/C_hynzadkk;ZZ)V
+		ARG 2 blockCollision
+		ARG 3 fluidCollision
 	METHOD m_duektjoe adjustMovementForPiston (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
 		ARG 1 movement
 	METHOD m_dvrgqnea getInterpolator ()Lnet/minecraft/unmapped/C_sdgyrixf;
@@ -486,6 +489,8 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_iqvzwgkr canModifyAt (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 2 pos
 	METHOD m_iseshnfi isSpectator ()Z
+	METHOD m_iwygqrea queueCollisionCheck (Lnet/minecraft/unmapped/C_astfners$C_aipuagbw;)V
+		ARG 1 movement
 	METHOD m_ixqkofwo dropStack (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_uqpzijng;
 		COMMENT @return {@code null} if the passed {@code stack} is
 		COMMENT {@linkplain net.minecraft.item.ItemStack#isEmpty empty}, or the spawned
@@ -537,7 +542,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_kmweazye getZ ()D
 	METHOD m_kqxvnqqn getWorld ()Lnet/minecraft/unmapped/C_cdctfzbn;
 		COMMENT {@return the world this entity is in}
-	METHOD m_krfnmqpx updateKilledAdvancementCriterion (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;)V
+	METHOD m_krfnmqpx updateKillStats (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 killer
 		ARG 2 score
 	METHOD m_ksoidzkr collides (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Ljava/util/List;)Z
@@ -632,7 +637,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 event
 	METHOD m_oavmpfqe getAir ()I
 	METHOD m_obkzfysl readCustomData (Lnet/minecraft/unmapped/C_djkzhngg;)V
-		ARG 1 reader
 	METHOD m_obyhheyh handleDamagingEvent (Lnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 source
 	METHOD m_odnkfosg getEyePos ()Lnet/minecraft/unmapped/C_vgpupfxx;
@@ -647,6 +651,7 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_oqjzpmsb setSwimming (Z)V
 		ARG 1 swimming
 	METHOD m_oryyldou isCustomNameVisible ()Z
+	METHOD m_otkcayod deQueueCollisionCheck ()V
 	METHOD m_ounwsonv isInvulnerable ()Z
 	METHOD m_owcsemrf doesNotCollide (DDD)Z
 		ARG 1 offsetX
@@ -724,6 +729,9 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 3 destY
 		ARG 5 destZ
 	METHOD m_qkqqfrjy getLastPos ()Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_qlyjsjoc handleBlockCollisionEffects (Ljava/util/List;Lnet/minecraft/unmapped/C_bummdtgu$C_ybqvbnjz;)V
+		ARG 1 movements
+		ARG 2 collisionManager
 	METHOD m_qmsqmnke doesRenderOnFire ()Z
 	METHOD m_qoreltrp getFreezingScale ()F
 	METHOD m_qpmhbrns extinguishWithEffects ()V
@@ -988,7 +996,6 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 	METHOD m_xujkzfqh offsetZ (D)D
 		ARG 1 widthScale
 	METHOD m_xuwbpohg writeCustomData (Lnet/minecraft/unmapped/C_kespdwpv;)V
-		ARG 1 writer
 	METHOD m_xvflsbzg scheduleVelocityUpdate ()V
 	METHOD m_xwbgqvgs readData (Lnet/minecraft/unmapped/C_djkzhngg;)V
 		ARG 1 reader
@@ -1036,6 +1043,10 @@ CLASS net/minecraft/unmapped/C_astfners net/minecraft/entity/Entity
 		ARG 1 entity
 	METHOD m_ywnmbdjz getWeaponStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_yxossras getMaxAir ()I
+	METHOD m_yzkgfwgp handleBlockCollisionEffects (Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_bummdtgu$C_ybqvbnjz;Lit/unimi/dsi/fastutil/longs/LongSet;)V
+		ARG 2 to
+		ARG 3 collisionManager
+		ARG 4 collidingBlockPositions
 	METHOD m_yzuahesn getPrimaryStepSoundPos (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_zbffjahn refreshPosition ()V
 	METHOD m_zcvlfcid move (Lnet/minecraft/unmapped/C_eojqvxuw;Lnet/minecraft/unmapped/C_vgpupfxx;)V

@@ -10,16 +10,19 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 	FIELD f_gvpwdnqm BABY_DIMENSIONS Lnet/minecraft/unmapped/C_sszpscpo;
 	FIELD f_hqimehqj CROUCHING_FLAG I
 	FIELD f_hrbsnbst VARIANT Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_jtrpxkwe DEFAULT_SLEEPING Z
 	FIELD f_lkqzfnlu WALKING_FLAG I
 	FIELD f_lmfkncww lastHeadRollProgress F
 	FIELD f_nmhvuowd eatingTime I
 	FIELD f_pnamnksn CHASING_FLAG I
+	FIELD f_qbbuxtmr DEFAULT_CROUCHING Z
 	FIELD f_tajwrmin extraRollingHeight F
 	FIELD f_upcmpkhx followFishGoal Lnet/minecraft/unmapped/C_svjebams;
 	FIELD f_vkugpcrl followChickenAndRabbitGoal Lnet/minecraft/unmapped/C_svjebams;
 	FIELD f_wshlzrjm OWNER Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_xuhsuger ROLLING_HEAD_FLAG I
 	FIELD f_ycsmhxsv OTHER_TRUSTED Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_yjgxmsps DEFAULT_SITTING Z
 	FIELD f_ymqfryvu SITTING_FLAG I
 	FIELD f_ysgxoajz MIN_TICKS_BEFORE_EATING I
 	FIELD f_zbozchcc FOX_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
@@ -34,6 +37,8 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 		ARG 1 tickDelta
 	METHOD m_deelmhsk (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_bdwnwhiu;)Z
 		ARG 0 entity
+	METHOD m_dehaypsg setVariant (Lnet/minecraft/unmapped/C_axinhusn$C_dqmtshhc;)V
+		ARG 1 variant
 	METHOD m_dgmreqad getVariant ()Lnet/minecraft/unmapped/C_axinhusn$C_dqmtshhc;
 	METHOD m_entdqhly getHeadRoll (F)F
 		ARG 1 tickDelta
@@ -54,12 +59,17 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 		ARG 1 sleeping
 	METHOD m_ljsbiiim setSitting (Z)V
 		ARG 1 sitting
+	METHOD m_mgrbgsfw (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_xolbcmjn;)Z
+		ARG 1 reference
+	METHOD m_mmuojxfd setOwnerOrTrusted (Lnet/minecraft/unmapped/C_xolbcmjn;)V
+		ARG 1 entity
 	METHOD m_nkcqsqrd (Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 1 entity
 	METHOD m_nuviczfv canJumpChase (Lnet/minecraft/unmapped/C_axinhusn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
 		ARG 0 fox
 		ARG 1 chasedEntity
 	METHOD m_onrungke canTrust (Lnet/minecraft/unmapped/C_usxaxydn;)Z
+	METHOD m_poswsotl setOwnerOrTrusted (Lnet/minecraft/unmapped/C_usxaxydn;)V
 	METHOD m_ptzfkeez dropItem (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 stack
 	METHOD m_rlytqius setAggressive (Z)V
@@ -68,6 +78,7 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 		ARG 1 entity
 	METHOD m_tklrsolc (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 entity
+	METHOD m_tryhdody clearTrusted ()V
 	METHOD m_uesdupqb isSitting ()Z
 	METHOD m_umwbpcmy stopSleeping ()V
 	METHOD m_uphzwtbt setWalking (Z)V
@@ -81,6 +92,7 @@ CLASS net/minecraft/unmapped/C_axinhusn net/minecraft/entity/passive/FoxEntity
 		ARG 1 bitmask
 	METHOD m_vwosazqj (Lnet/minecraft/unmapped/C_astfners;)Z
 		ARG 0 entity
+	METHOD m_wtfplsqf streamTrusted ()Ljava/util/stream/Stream;
 	METHOD m_wvzovpqx (Lnet/minecraft/unmapped/C_uqpzijng;)Z
 		ARG 0 item
 	METHOD m_xkpkacqa setRollingHead (Z)V
