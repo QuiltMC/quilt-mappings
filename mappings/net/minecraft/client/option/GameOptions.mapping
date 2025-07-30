@@ -75,7 +75,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	FIELD f_jifdqecg COLON_SPLITTER Lcom/google/common/base/Splitter;
 	FIELD f_jizzkrys hudHidden Z
 	FIELD f_jkzhvfef fovEffectScale Lnet/minecraft/unmapped/C_vbibxkxv;
-	FIELD f_jlwpdhyd TINY_RENDER_DISTANCE I
 	FIELD f_jmyqxpyv inventoryKey Lnet/minecraft/unmapped/C_sygikzty;
 		COMMENT A key bind for opening {@linkplain net.minecraft.client.gui.screen.ingame.InventoryScreen the inventory screen}.
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_E the E key} by default.
@@ -89,7 +88,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_LEFT_SHIFT the left shift key} by default.
 	FIELD f_ksekzwfh GSON Lcom/google/gson/Gson;
 	FIELD f_ksufhkpu unfocusedChatHeight Lnet/minecraft/unmapped/C_vbibxkxv;
-	FIELD f_lbwraefi TOGGLE_KEY Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_lgsplhkk chatWidth Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_lugkzotv DARKNESS_EFFECT_SCALE_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_mankscfj FABULOUS_GRAPHICS_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -127,7 +125,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_F2 the F2 key} by default.
 	FIELD f_oloplstq hideMatchedNames Lnet/minecraft/unmapped/C_vbibxkxv;
 	FIELD f_omtrgaxs backgroundForChatOnly Lnet/minecraft/unmapped/C_vbibxkxv;
-	FIELD f_oohnvsvi HOLD_KEY Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_ooijlban cinematicCamera Z
 	FIELD f_ortsfpzi lastServer Ljava/lang/String;
 	FIELD f_oszcapbu GLINT_SPEED_TOOLTIP Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -215,7 +212,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 		COMMENT A key bind for opening {@linkplain net.minecraft.client.gui.screen.advancement.AdvancementsScreen the advancements screen}.
 		COMMENT Bound to {@linkplain org.lwjgl.glfw.GLFW#GLFW_KEY_L the L key} by default.
 	FIELD f_yeebnsez DEFAULT_AUDIO_DEVICE Ljava/lang/String;
-	FIELD f_yjrsmnja NORMAL_RENDER_DISTANCE I
 	FIELD f_ypspzdxa glDebugVerbosity I
 	FIELD f_ytakrfoj optionsFile Ljava/io/File;
 	FIELD f_yuefmyhf pickItemKey Lnet/minecraft/unmapped/C_sygikzty;
@@ -250,8 +246,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_britemnt getMenuBackgroundBlurriness ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_bxovxqnq getRawMouseInput ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_cbamyvvu getMaxFps ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_ciubwfcb (Ljava/lang/Double;)V
-		ARG 0 value
 	METHOD m_dfmwaprr (Ljava/lang/Double;)I
 		ARG 0 value
 	METHOD m_dloazeof getToggleableSprint ()Lnet/minecraft/unmapped/C_vbibxkxv;
@@ -297,8 +291,8 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_jxqsgejw getSoundVolumeOption (Lnet/minecraft/unmapped/C_pqzizukq;)Lnet/minecraft/unmapped/C_vbibxkxv;
 		ARG 1 category
 	METHOD m_jyvvrwul getSmoothLighting ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_kahxxvbc (Ljava/lang/Boolean;)V
-		ARG 0 value
+	METHOD m_kahxxvbc (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 1 value
 	METHOD m_kbtabcxw getCommandSuggestions ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_kpzvovkp getCloudRenderMode ()Lnet/minecraft/unmapped/C_qaetpqjq;
 	METHOD m_kraoffqu setPlayerModelPart (Lnet/minecraft/unmapped/C_vqnqadci;Z)V
@@ -346,11 +340,9 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_pnnarsvo getTextBackgroundColor (F)I
 		ARG 1 fallbackOpacity
 	METHOD m_pokgrxum getMouseWheelSensitivity ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_qqoxucqo (Ljava/lang/Double;)V
+	METHOD m_qqoxucqo (Ljava/lang/Double;)Ljava/lang/Integer;
 		ARG 0 value
 	METHOD m_qwwlgewu getTouchscreen ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_qyoajfck (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_skehaijy;
-		ARG 0 value
 	METHOD m_rzdobeug getAttackIndicator ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_sbbywbvn update (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_hhlwcnih;
 		ARG 1 nbt
@@ -377,9 +369,7 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_uzsgyade getEntityShadows ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_vcnnxrai load ()V
 	METHOD m_vdrrucwu getHideMatchedNames ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_vgfsadzm (Ljava/lang/Boolean;)V
-		ARG 0 value
-	METHOD m_vthilnvw (Ljava/lang/Double;)V
+	METHOD m_vgfsadzm (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_skehaijy;
 		ARG 0 value
 	METHOD m_vtvjmoit getGenericValueText (Lnet/minecraft/unmapped/C_rdaqiwdt;I)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionText
@@ -413,7 +403,6 @@ CLASS net/minecraft/unmapped/C_lscptbhn net/minecraft/client/option/GameOptions
 	METHOD m_ynymrfrg getNarratorHotkey ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_yryptkmo getDamageTilt ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_ysetlpyj getDistortionEffectScale ()Lnet/minecraft/unmapped/C_vbibxkxv;
-	METHOD m_zamhlxrz getInvertYMouse ()Lnet/minecraft/unmapped/C_vbibxkxv;
 	METHOD m_zaxcyuyi (Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 0 optionText
 		ARG 1 value
