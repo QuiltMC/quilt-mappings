@@ -75,7 +75,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT
 		COMMENT @see #antiFishyTextRenderer
 	FIELD f_cqulrbtp chatNarratorManager Lnet/minecraft/unmapped/C_qwmxzagq;
-	FIELD f_cuhqrghd worldGenProgressTracker Ljava/util/concurrent/atomic/AtomicReference;
 	FIELD f_dhfmekui dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_duzlzhpe regionalComplianciesManager Lnet/minecraft/unmapped/C_bianxjxy;
 	FIELD f_eaotxiqe overlay Lnet/minecraft/unmapped/C_gtnnbmai;
@@ -85,7 +84,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_ejyvfwpb recorder Lnet/minecraft/unmapped/C_owhdirgj;
 	FIELD f_ekirdrwp itemRenderer Lnet/minecraft/unmapped/C_xjqetogb;
 	FIELD f_epjlpqwy skipGameRender Z
-	FIELD f_fdoocsky fpsDebugString Ljava/lang/String;
 	FIELD f_fdshidvd currentScreen Lnet/minecraft/unmapped/C_wrmtlwqx;
 		COMMENT The Minecraft client's currently open screen.
 		COMMENT This field should only be used to get the current screen.
@@ -112,7 +110,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	FIELD f_iuqlwerq bufferBuilders Lnet/minecraft/unmapped/C_dfmwjguw;
 	FIELD f_ivvuitjx blockColors Lnet/minecraft/unmapped/C_iiyegykq;
 	FIELD f_jdtmkbfx splashTextLoader Lnet/minecraft/unmapped/C_iyhcmfwn;
-	FIELD f_jdwcaqvb guiAtlasManager Lnet/minecraft/unmapped/C_ihnghycr;
 	FIELD f_jgndswme attackCooldown I
 	FIELD f_juejclec worldStorage Lnet/minecraft/unmapped/C_bpwagnit;
 	FIELD f_kgwygzao COMPLETED_UNIT_FUTURE Ljava/util/concurrent/CompletableFuture;
@@ -122,17 +119,14 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		COMMENT Represents the world the client is currently viewing.
 		COMMENT This field is not null when in game.
 	FIELD f_lgunvkff chatListener Lnet/minecraft/unmapped/C_bmbrcost;
-	FIELD f_lsguuoub renderTaskQueue Ljava/util/Queue;
 	FIELD f_lyhucjkw soundManager Lnet/minecraft/unmapped/C_hfmtwavd;
 	FIELD f_lzdqneej blockEntityRenderDispatcher Lnet/minecraft/unmapped/C_sicqxpzm;
 	FIELD f_mcryntrs interactionManager Lnet/minecraft/unmapped/C_uxbydbcj;
-	FIELD f_mexskmmu mapDecorationSpriteManager Lnet/minecraft/unmapped/C_qlzllcic;
 	FIELD f_mhjdihfd resourceReloadLogger Lnet/minecraft/unmapped/C_ykwlusnp;
 	FIELD f_mjmiqpir onlineChatEnabled Z
 	FIELD f_mvfcsyrr lastInputType Lnet/minecraft/unmapped/C_qdenxghm;
 	FIELD f_nbvedrif resourcePackManager Lnet/minecraft/unmapped/C_dqfyacfy;
 	FIELD f_ncllbtgx gameVersion Ljava/lang/String;
-	FIELD f_ndtzozso paintingManager Lnet/minecraft/unmapped/C_kotvulld;
 	FIELD f_nlwwgtxe wireFrame Z
 	FIELD f_odykessb bakedModelManager Lnet/minecraft/unmapped/C_wosoicga;
 	FIELD f_ofpfrevi mouse Lnet/minecraft/unmapped/C_zgebrxop;
@@ -243,7 +237,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_fnnphfvj getEntityRenderDispatcher ()Lnet/minecraft/unmapped/C_gmkqxljo;
 	METHOD m_fquuldng isPaused ()Z
 	METHOD m_fsvbdqcr getResourcePackDir ()Ljava/nio/file/Path;
-	METHOD m_futlsgwc getWorldGenerationProgressTracker ()Lnet/minecraft/unmapped/C_qtaaqxsg;
 	METHOD m_fvpjtpsc updateWindowTitle ()V
 	METHOD m_gbdqzmqi getGameVersion ()Ljava/lang/String;
 	METHOD m_gjlephcr setCameraEntity (Lnet/minecraft/unmapped/C_astfners;)V
@@ -260,13 +253,11 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_gxeghdto reloadResources ()Ljava/util/concurrent/CompletableFuture;
 		COMMENT Reloads the client's resources.
 	METHOD m_hbdizzrx getResourcePackManager ()Lnet/minecraft/unmapped/C_dqfyacfy;
-	METHOD m_hbzestyd getGuiAtlasManager ()Lnet/minecraft/unmapped/C_ihnghycr;
 	METHOD m_hfnsejey isFabulousGraphicsOrBetter ()Z
 	METHOD m_hknmykuo handleGlErrorByDisableVsync (IJ)V
 		ARG 1 error
 		ARG 2 description
 	METHOD m_hnadsrtd getFrameTime ()J
-	METHOD m_hpnybqgx getPaintingManager ()Lnet/minecraft/unmapped/C_kotvulld;
 	METHOD m_hwgsxlaq getMapRenderer ()Lnet/minecraft/unmapped/C_yzoxmlsd;
 	METHOD m_ieiaozel reloadResources (ZLnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 fromFailure
@@ -323,8 +314,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 		ARG 1 screen
 	METHOD m_oefzpsnx setChatReportContext (Lnet/minecraft/unmapped/C_vbiguolf;)V
 		ARG 1 environment
-	METHOD m_offtbgfs joinWorld (Lnet/minecraft/unmapped/C_ghdnlrrw;Lnet/minecraft/unmapped/C_lpjorxyp$C_lpezbgbl;)V
-		ARG 1 world
 	METHOD m_ogdgxfac addDetailsToCrashReport (Lnet/minecraft/unmapped/C_bkefkbum;)Lnet/minecraft/unmapped/C_bkefkbum;
 		ARG 1 report
 	METHOD m_ogqbmqly getBlockRenderManager ()Lnet/minecraft/unmapped/C_vdyoclwy;
@@ -384,8 +373,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_tiwzsgum handleResourceReloadException (Ljava/lang/Throwable;Lnet/minecraft/unmapped/C_ayfeobid$C_vfwwgdbg;)V
 		ARG 1 exception
 	METHOD m_txocaejx startOnlineMode ()V
-	METHOD m_ubufromq getSpriteAtlas (Lnet/minecraft/unmapped/C_ncpywfca;)Ljava/util/function/Function;
-		ARG 1 id
 	METHOD m_ucomtdmf getMusic ()Lnet/minecraft/unmapped/C_yxwwrdut;
 	METHOD m_udwclhsz archiveProfilingReport (Lnet/minecraft/unmapped/C_fprbxnfr;Ljava/util/List;)Ljava/nio/file/Path;
 		ARG 1 details
@@ -410,7 +397,6 @@ CLASS net/minecraft/unmapped/C_ayfeobid net/minecraft/client/MinecraftClient
 	METHOD m_yadnzivw isDemo ()Z
 	METHOD m_yknnrfie createSignatureValidator ()Lnet/minecraft/unmapped/C_yvuwcvkm;
 	METHOD m_ymfxsgvs getChatNarratorManager ()Lnet/minecraft/unmapped/C_qwmxzagq;
-	METHOD m_yoajyhla getMapDecorationSpriteManager ()Lnet/minecraft/unmapped/C_qlzllcic;
 	METHOD m_yqabtlyp forcedNameChange ()Z
 	METHOD m_yxvsqbme hasReducedDebugInfo ()Z
 	METHOD m_yyiisqrp isWindowFocused ()Z

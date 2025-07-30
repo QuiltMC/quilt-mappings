@@ -26,7 +26,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_fgmsqlfx ticksUntilAutosave I
 	FIELD f_fluzdawl onlineMode Z
 	FIELD f_foqkzzmj DEMO_LEVEL_INFO Lnet/minecraft/unmapped/C_tmnkpzlg;
-	FIELD f_fwfwzdtg worldGenerationProgressListenerFactory Lnet/minecraft/unmapped/C_lausdaxu;
 	FIELD f_gievdvxf MAX_TICK_LATENCY I
 	FIELD f_gxteupmv OVERLOAD_THRESHOLD_NANOS J
 	FIELD f_hpkazkoy motd Ljava/lang/String;
@@ -86,15 +85,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_zehgtxec dataFixer Lcom/mojang/datafixers/DataFixer;
 	FIELD f_zknekmqa services Lnet/minecraft/unmapped/C_vmxvaoqe;
 	FIELD f_zsibtikt playerIdleTimeout I
-	METHOD <init> (Ljava/lang/Thread;Lnet/minecraft/unmapped/C_bpwagnit$C_unecclfw;Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_tljyhzqp;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/unmapped/C_vmxvaoqe;Lnet/minecraft/unmapped/C_lausdaxu;)V
-		ARG 1 serverThread
-		ARG 2 session
-		ARG 3 dataPackManager
-		ARG 4 worldStem
-		ARG 5 proxy
-		ARG 6 dataFixer
-		ARG 7 services
-		ARG 8 worldGenerationProgressListenerFactory
 	METHOD m_aazpmrxf getServerPort ()I
 	METHOD m_abjphurm getSpawnProtectionRadius ()I
 	METHOD m_abpffcdv setFlightEnabled (Z)V
@@ -172,8 +162,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_gsecpirt shouldKeepTicking ()Z
 	METHOD m_gzgtxora startServer (Ljava/util/function/Function;)Lnet/minecraft/server/MinecraftServer;
 		ARG 0 serverFactory
-	METHOD m_hahcripn createWorlds (Lnet/minecraft/unmapped/C_jnfclwgd;)V
-		ARG 1 worldGenerationProgressListener
 	METHOD m_haucxujx getKeyPair ()Ljava/security/KeyPair;
 	METHOD m_hfghaotl getNetworkIo ()Lnet/minecraft/unmapped/C_mitbewqx;
 	METHOD m_hlglehvn save (ZZZ)Z
@@ -234,8 +222,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_lfumvlqy shouldLogTickTime ()Z
 	METHOD m_lgofwaos setPlayerManager (Lnet/minecraft/unmapped/C_digmgtxw;)V
 		ARG 1 playerManager
-	METHOD m_lhntuhvs getSpawnRadius (Lnet/minecraft/unmapped/C_bdwnwhiu;)I
-		ARG 1 world
 	METHOD m_lprqwxbm setServerId (Ljava/lang/String;)V
 		ARG 1 serverId
 	METHOD m_magpcgdt getWorldRegistryKeys ()Ljava/util/Set;
@@ -243,7 +229,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_mnwbpdpc getStructureTemplateManager ()Lnet/minecraft/unmapped/C_zxhjfyir;
 	METHOD m_naezauaw setMotd (Ljava/lang/String;)V
 		ARG 1 motd
-	METHOD m_nbgabzip getUserCache ()Lnet/minecraft/unmapped/C_jyqwslie;
 	METHOD m_nmnnkpqd isPvpEnabled ()Z
 	METHOD m_nouspmoz isRunning ()Z
 	METHOD m_nzaslqis getForcedGameMode ()Lnet/minecraft/unmapped/C_lghcpyvl;
@@ -267,11 +252,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT @see #setHostProfile(GameProfile)
 	METHOD m_ocdvptth getTimeReference ()J
 	METHOD m_odqgvsye isHardcore ()Z
-	METHOD m_ogbnhrls setupSpawn (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_gjwbvqct;ZZ)V
-		ARG 0 world
-		ARG 1 worldProperties
-		ARG 2 bonusChest
-		ARG 3 debugWorld
 	METHOD m_opevzklp getDataFixer ()Lcom/mojang/datafixers/DataFixer;
 	METHOD m_opjlzrwc getDataPackManager ()Lnet/minecraft/unmapped/C_dqfyacfy;
 	METHOD m_orlnkvix syncTime ()V
@@ -335,14 +315,11 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		COMMENT This method does several things including loading server properties and loading worlds.
 		COMMENT
 		COMMENT @return true if the Minecraft server was successfully setup, false if the server failed to be setup.
-	METHOD m_thodqaod getPermissionLevel (Lcom/mojang/authlib/GameProfile;)I
-		ARG 1 profile
 	METHOD m_tnfyjhlb loadDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;ZZ)Lnet/minecraft/unmapped/C_yknpgzdr;
 		ARG 0 resourcePackManager
 		ARG 2 safeMode
 	METHOD m_tnvwblvm getOpPermissionLevel ()I
 	METHOD m_tozcksne getPlayerManager ()Lnet/minecraft/unmapped/C_digmgtxw;
-	METHOD m_ttqfvxjp isHost (Lcom/mojang/authlib/GameProfile;)Z
 	METHOD m_udgarlbd getAdvancementLoader ()Lnet/minecraft/unmapped/C_fktoyupt;
 	METHOD m_ugiwpfro isSaving ()Z
 	METHOD m_ujrjhmlu isSpawnProtected (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
@@ -364,8 +341,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_vwhonaog getServerMetadata ()Lnet/minecraft/unmapped/C_bwttende;
 	METHOD m_vwhvrlxk stopRecorder ()V
 	METHOD m_vycxzbgk shutdown ()V
-	METHOD m_wcdfzsgy prepareStartRegion (Lnet/minecraft/unmapped/C_jnfclwgd;)V
-		ARG 1 worldGenerationProgressListener
 	METHOD m_wcoicbji runTasksTillTickEnd ()V
 	METHOD m_whhpkgqi getHostProfile ()Lcom/mojang/authlib/GameProfile;
 		COMMENT {@return the game profile of the single-player host of this server}
