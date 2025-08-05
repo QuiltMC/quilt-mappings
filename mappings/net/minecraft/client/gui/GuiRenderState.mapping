@@ -7,8 +7,8 @@ CLASS net/minecraft/unmapped/C_tglmxwur net/minecraft/client/gui/GuiRenderState
 	FIELD f_xqnhegab currentLayer Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;
 	METHOD m_amlcgshj ascendAboveIntersection (Lnet/minecraft/unmapped/C_erwldarl;)V
 		ARG 1 area
-	METHOD m_augugezf (Lorg/apache/commons/lang3/mutable/MutableInt;Lnet/minecraft/unmapped/C_tglmxwur$C_pktkszsr;Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;)V
-		ARG 2 layer
+	METHOD m_augugezf (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;)V
+		ARG 1 layer
 	METHOD m_erjrsvfv forEachLayer (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_tglmxwur$C_sxxkyzny;)V
 		ARG 1 action
 		ARG 2 group
@@ -16,7 +16,6 @@ CLASS net/minecraft/unmapped/C_tglmxwur net/minecraft/client/gui/GuiRenderState
 		ARG 2 layer
 	METHOD m_glnyeaqk (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;)V
 		ARG 2 layer
-	METHOD m_gntygumq descendLayer ()V
 	METHOD m_gxachtsl clear ()V
 	METHOD m_jbuvbyyo ascendLayer ()V
 	METHOD m_jexsbitn tryAddElement (Lnet/minecraft/unmapped/C_ooyzmtem;)V
@@ -28,8 +27,7 @@ CLASS net/minecraft/unmapped/C_tglmxwur net/minecraft/client/gui/GuiRenderState
 	METHOD m_miotjciy forEachLayerInBranch (Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;Ljava/util/function/Consumer;)V
 		ARG 1 layer
 		ARG 2 action
-	METHOD m_nitvrzel forEachSimpleElement (Lnet/minecraft/unmapped/C_tglmxwur$C_pktkszsr;Lnet/minecraft/unmapped/C_tglmxwur$C_sxxkyzny;)V
-		ARG 1 action
+	METHOD m_nitvrzel forEachSimpleElement (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_tglmxwur$C_sxxkyzny;)V
 	METHOD m_ntsayusb blur ()V
 	METHOD m_pqnivnbd tryAddItem (Lnet/minecraft/unmapped/C_vcyfotaz;)V
 		ARG 1 state
@@ -60,7 +58,6 @@ CLASS net/minecraft/unmapped/C_tglmxwur net/minecraft/client/gui/GuiRenderState
 		FIELD f_boqlylal up Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;
 		FIELD f_dokeirex elementStates Ljava/util/List;
 		FIELD f_fjnixycj glyphStates Ljava/util/List;
-		FIELD f_fzmsxzwa down Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;
 		FIELD f_jgzuthkj textStates Ljava/util/List;
 		FIELD f_morepsmw parent Lnet/minecraft/unmapped/C_tglmxwur$C_bbvmbslj;
 		FIELD f_pwseteda specialStates Ljava/util/List;
@@ -75,8 +72,4 @@ CLASS net/minecraft/unmapped/C_tglmxwur net/minecraft/client/gui/GuiRenderState
 			ARG 1 state
 		METHOD m_zzmkqamh addSpecial (Lnet/minecraft/unmapped/C_behagbok;)V
 			ARG 1 state
-	CLASS C_pktkszsr SimpleElementConsumer
-		METHOD accept (Lnet/minecraft/unmapped/C_ooyzmtem;I)V
-			ARG 1 state
-			ARG 2 depth
 	CLASS C_sxxkyzny LayerGroup
