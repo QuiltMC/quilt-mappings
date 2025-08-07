@@ -1,0 +1,57 @@
+CLASS net/minecraft/unmapped/C_tnxeefvs net/minecraft/block/SideChainable
+	METHOD m_ardrizlr setChain (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_lydqtkgz;)V
+		ARG 1 world
+		ARG 3 chain
+	METHOD m_brnczult createNeighbors (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_xpuuihxf;)Lnet/minecraft/unmapped/C_tnxeefvs$C_idphpjhs;
+		ARG 1 world
+	METHOD m_ematfzkw getMaxChainLength ()I
+	METHOD m_fjqqpfmu canConnect (II)Z
+		ARG 1 connectionLength
+		ARG 2 currentLength
+	METHOD m_fxqboyev isAlreadyConnected (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		ARG 1 state
+		ARG 2 oldState
+	METHOD m_oooocvwb forEachNeighborPos (Ljava/util/function/IntFunction;Lnet/minecraft/unmapped/C_lydqtkgz;Ljava/util/function/Consumer;)V
+		ARG 1 distanceToNeighbor
+		ARG 2 chain
+		ARG 3 action
+	METHOD m_qetovfel getFacing (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_xpuuihxf;
+	METHOD m_qightrqr disconnectNeighbors (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;)V
+	METHOD m_wiudfylx updateConnections (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)V
+		ARG 1 world
+		ARG 3 state
+		ARG 4 oldState
+	METHOD m_xodcxgcb getChain (Lnet/minecraft/unmapped/C_txtbiemp;)Lnet/minecraft/unmapped/C_lydqtkgz;
+	METHOD m_xxagnngw withChain (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_lydqtkgz;)Lnet/minecraft/unmapped/C_txtbiemp;
+		ARG 2 chain
+	METHOD m_zefvvdtk canConnect (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_zmtvgcdv findNeighbors (Lnet/minecraft/unmapped/C_vdvbsyle;Lnet/minecraft/unmapped/C_hynzadkk;)Ljava/util/List;
+	CLASS C_idphpjhs Neighbors
+		FIELD f_cloqkylm world Lnet/minecraft/unmapped/C_vdvbsyle;
+		METHOD m_ekudkeee canConnect (Lnet/minecraft/unmapped/C_txtbiemp;)Z
+		METHOD m_hbliogml get (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_tnxeefvs$C_kpdajsco;
+		METHOD m_ldnnydjs getLeft ()Lnet/minecraft/unmapped/C_tnxeefvs$C_kpdajsco;
+		METHOD m_mdfkwwku getLeft (I)Lnet/minecraft/unmapped/C_tnxeefvs$C_kpdajsco;
+			ARG 1 distance
+		METHOD m_mrdpztfq getRight ()Lnet/minecraft/unmapped/C_tnxeefvs$C_kpdajsco;
+		METHOD m_wsixxdtj getRight (I)Lnet/minecraft/unmapped/C_tnxeefvs$C_kpdajsco;
+			ARG 1 distance
+		METHOD m_yrlrqwee get (Lnet/minecraft/unmapped/C_xpuuihxf;Ljava/lang/Integer;)Lnet/minecraft/unmapped/C_tnxeefvs$C_kpdajsco;
+			ARG 2 distance
+		METHOD m_zdoxanwj world ()Lnet/minecraft/unmapped/C_vdvbsyle;
+	CLASS C_kpdajsco Neighbor
+		METHOD m_aijjhjmf disconnectLeft ()V
+		METHOD m_cwvmaymr connectLeft ()V
+		METHOD m_rgmscprc connectRight ()V
+		METHOD m_skejvhhw connectsTowards (Lnet/minecraft/unmapped/C_lydqtkgz;)Z
+			ARG 1 chain
+		METHOD m_trchlech isEndOrUnconnectable ()Z
+		METHOD m_ybbekpiw pos ()Lnet/minecraft/unmapped/C_hynzadkk;
+		METHOD m_zdtoiwpj disconnectRight ()V
+	CLASS C_nuhbkyzu SideChainNeighbor
+		FIELD f_hduvxcyp world Lnet/minecraft/unmapped/C_vdvbsyle;
+		FIELD f_nnqnaepu chain Lnet/minecraft/unmapped/C_lydqtkgz;
+		METHOD m_hdugdist world ()Lnet/minecraft/unmapped/C_vdvbsyle;
+		METHOD m_zoepbsst chain ()Lnet/minecraft/unmapped/C_lydqtkgz;
+	CLASS C_vpqbymwk EmptyNeighbor
+		METHOD m_ybbekpiw pos ()Lnet/minecraft/unmapped/C_hynzadkk;
