@@ -1,22 +1,49 @@
 package quilt.internal.task.lint;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
+import org.gradle.api.file.DirectoryProperty;
+import org.gradle.api.file.FileType;
+import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.logging.Logger;
+import org.gradle.api.tasks.InputDirectory;
+import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.work.ChangeType;
+import org.gradle.work.FileChange;
+import org.gradle.work.Incremental;
+import org.gradle.work.InputChanges;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.MappingsDirConsumingTask;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.nio.file.Path;
-import java.util.stream.Stream;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Searches the passed {@link #getMappingsDir() mappingsDir} for any mappings files that map the same class.<br>
@@ -38,49 +65,135 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask implemen
     public static final String MAPPING_EXTENSION = "mapping";
 
     private static final Pattern EXPECTED_CLASS =
-        Pattern.compile("^CLASS (?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+(?= )");
+        Pattern.compile("(?<=^CLASS )(?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+");
+
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Collector<FileChange, ?, List<File>> CHANGE_TO_FILE_LIST_COLLECTOR = Collector.of(
+        ArrayList::new,
+        (list, change) -> list.add(change.getFile()),
+        (left, right) -> {
+            left.addAll(right);
+            return left;
+        }
+    );
+
+    @Incremental
+    @InputDirectory
+    public abstract DirectoryProperty getMappingsDir();
+
+    @OutputFile
+    public abstract RegularFileProperty getValidMappingCache();
 
     public FindDuplicateMappingFilesTask() {
         this.setGroup(Groups.LINT);
     }
 
     @TaskAction
-    public void run() {
+    public void run(InputChanges changes) {
+        final File mappingsDir = this.getMappingsDir().get().getAsFile();
+
         final Multimap<String, File> allMappings = HashMultimap.create();
+
+        final File cacheFile = this.getValidMappingCache().get().getAsFile();
+        final Consumer<File> removeIfCached;
+
+        {
+            final BiMap<String, File> cache = this.readCache(cacheFile, mappingsDir);
+            cache.forEach(allMappings::put);
+
+            removeIfCached = file -> {
+                final String cachedClassName = cache.inverse().get(file);
+                if (cachedClassName != null) {
+                    allMappings.remove(cachedClassName, file);
+                }
+            };
+        }
+
         final Set<String> duplicateMappings = new HashSet<>();
+        final List<File> malformedClassFiles = new ArrayList<>();
         final List<File> emptyFiles = new ArrayList<>();
         final List<File> wrongExtensionFiles = new ArrayList<>();
 
-        try (Stream<Path> mappingPaths = Files.walk(this.getMappingsDir().get().getAsFile().toPath())) {
-            mappingPaths.map(Path::toFile)
-                .filter(File::isFile)
-                .forEach(mappingFile -> {
-                    try (var reader = new BufferedReader(new FileReader(mappingFile))) {
-                        final String firstLine = reader.readLine();
-                        if (firstLine != null) {
-                            getClassMatch(firstLine).ifPresent(
-                                classMatch -> {
-                                    final Collection<File> classMappings = allMappings.get(classMatch);
+        final Iterable<FileChange> fileChanges = changes.getFileChanges(this.getMappingsDir());
 
-                                    if (!classMappings.isEmpty()) duplicateMappings.add(classMatch);
+        final Map<Boolean, List<File>> fileChangesByRemoved = StreamSupport
+            .stream(fileChanges.spliterator(), false)
+            .filter(change -> change.getFileType() == FileType.FILE)
+            .collect(Collectors.partitioningBy(
+                change -> change.getChangeType() == ChangeType.REMOVED,
+                CHANGE_TO_FILE_LIST_COLLECTOR
+            ));
 
-                                    classMappings.add(mappingFile);
-                                }
-                            );
-                        } else {
-                            emptyFiles.add(mappingFile);
-                        }
+        // handle removals first in case of renames
+        fileChangesByRemoved.get(true).forEach(removeIfCached);
 
-                        if (!mappingFile.toString().endsWith("." + MAPPING_EXTENSION)) {
-                            wrongExtensionFiles.add(mappingFile);
-                        }
-                    } catch (IOException e) {
-                        throw new GradleException("Unexpected error accessing " + MAPPING_EXTENSION + " file", e);
-                    }
-                });
-        } catch (IOException e) {
-            throw new GradleException("Unexpected error accessing " + MAPPING_EXTENSION + "s directory", e);
-        }
+        fileChangesByRemoved.get(false).forEach(mappingFile -> {
+            removeIfCached.accept(mappingFile);
+
+            try (var reader = new BufferedReader(new FileReader(mappingFile))) {
+                final String firstLine = reader.readLine();
+                if (firstLine != null) {
+                    getClassName(firstLine).ifPresentOrElse(
+                        className -> {
+                            final Collection<File> classMappings = allMappings.get(className);
+
+                            if (!classMappings.isEmpty()) {
+                                duplicateMappings.add(className);
+                            }
+
+                            classMappings.add(mappingFile);
+                        },
+                        () -> malformedClassFiles.add(mappingFile)
+                    );
+                } else {
+                    emptyFiles.add(mappingFile);
+                }
+
+                if (!mappingFile.toString().endsWith("." + MAPPING_EXTENSION)) {
+                    wrongExtensionFiles.add(mappingFile);
+                }
+            } catch (IOException e) {
+                this.deleteCache(cacheFile);
+                throw new GradleException("Unexpected error accessing " + MAPPING_EXTENSION + " file", e);
+            }
+        });
+
+        // for (final FileChange change : fileChanges) {
+        //     if (change.getFileType() == FileType.FILE) {
+        //         final File mappingFile = change.getFile();
+        //
+        //         removeIfCached.accept(mappingFile);
+        //
+        //         if (change.getChangeType() != ChangeType.REMOVED) {
+        //             try (var reader = new BufferedReader(new FileReader(mappingFile))) {
+        //                 final String firstLine = reader.readLine();
+        //                 if (firstLine != null) {
+        //                     getClassName(firstLine).ifPresentOrElse(
+        //                         className -> {
+        //                             final Collection<File> classMappings = allMappings.get(className);
+        //
+        //                             if (!classMappings.isEmpty()) {
+        //                                 duplicateMappings.add(className);
+        //                             }
+        //
+        //                             classMappings.add(mappingFile);
+        //                         },
+        //                         () -> malformedClassFiles.add(mappingFile)
+        //                     );
+        //                 } else {
+        //                     emptyFiles.add(mappingFile);
+        //                 }
+        //
+        //                 if (!mappingFile.toString().endsWith("." + MAPPING_EXTENSION)) {
+        //                     wrongExtensionFiles.add(mappingFile);
+        //                 }
+        //             } catch (IOException e) {
+        //                 this.deleteCache(cacheFile);
+        //                 throw new GradleException("Unexpected error accessing " + MAPPING_EXTENSION + " file", e);
+        //             }
+        //         }
+        //     }
+        // }
 
         final Logger logger = this.getLogger();
         final List<String> errorMessages = new ArrayList<>();
@@ -101,11 +214,26 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask implemen
             }
         }
 
+        if (!malformedClassFiles.isEmpty()) {
+            final String message = "%d files with malformed class format%s".formatted(
+                malformedClassFiles.size(),
+                malformedClassFiles.size() == 1 ? "" : "s"
+            );
+
+            errorMessages.add(message);
+
+            logger.error("Found {}!", message);
+            for (final File malformedClassFile : malformedClassFiles) {
+                logger.error("\t{}", malformedClassFile);
+            }
+        }
+
         if (!emptyFiles.isEmpty()) {
             final String message = "%d empty file%s".formatted(
                 emptyFiles.size(),
                 emptyFiles.size() == 1 ? "" : "s"
             );
+
             errorMessages.add(message);
 
             logger.error("Found {}!", message);
@@ -144,14 +272,70 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask implemen
 
             fullError.append(errorMessages.getLast()).append("! See the log for details.");
 
+            this.writeCache(allMappings, cacheFile, mappingsDir);
+
             throw new GradleException(fullError.toString());
+        }
+
+        this.writeCache(allMappings, cacheFile, mappingsDir);
+    }
+
+    private void writeCache(Multimap<String, File> mappings, File cacheFile, File mappingsDir) {
+        try (var writer = new FileWriter(cacheFile)) {
+            cacheFile.getParentFile().mkdirs();
+            cacheFile.createNewFile();
+            final Path mappingsPath = mappingsDir.toPath();
+            GSON.toJson(
+                mappings.asMap().entrySet().stream()
+                    .filter(entry -> entry.getValue().size() == 1)
+                    .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> mappingsPath.relativize(entry.getValue().iterator().next().toPath()).toString().replace('\\', '/')
+                    )),
+                writer
+            );
+        } catch (IOException e) {
+            this.getLogger().error("Unexpected error writing cache", e);
+            this.deleteCache(cacheFile);
         }
     }
 
-    private static Optional<String> getClassMatch(String firstLine) {
-        final var expectedClassMatcher = EXPECTED_CLASS.matcher(firstLine);
-        return expectedClassMatcher.find() ?
-            Optional.of(expectedClassMatcher.group(0)) :
+    private BiMap<String, File> readCache(File cacheFile, File mappingsDir) {
+        final Path mappingsPath = mappingsDir.toPath();
+
+        if (cacheFile.exists()) {
+            try (var reader = new JsonReader(new FileReader(cacheFile))) {
+                return GSON.<Map<String, String>>fromJson(reader, new TypeToken<Map<String, String>>() { }.getType())
+                    .entrySet()
+                    .stream()
+                    .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> mappingsPath.resolve(entry.getValue()).toFile(),
+                        (left, right) -> {
+                            throw new IllegalArgumentException(
+                                "Duplicate class name for files:\n\t%s\n\t%s".formatted(left, right)
+                            );
+                        },
+                        HashBiMap::create
+                    ));
+            } catch (IOException | IllegalArgumentException e) {
+                this.getLogger().error("Unexpected error reading cache; clearing", e);
+                return HashBiMap.create();
+            }
+        } else {
+            return HashBiMap.create();
+        }
+    }
+
+    private void deleteCache(File cacheFile) {
+        this.getLogger().error("Deleting cache");
+        cacheFile.delete();
+    }
+
+    private static Optional<String> getClassName(String line) {
+        final var matcher = EXPECTED_CLASS.matcher(line);
+        return matcher.find() ?
+            Optional.of(matcher.group(0)) :
             Optional.empty();
     }
 }

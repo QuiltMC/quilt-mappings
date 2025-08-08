@@ -259,7 +259,10 @@ public abstract class MapMinecraftJarsPlugin extends
 
         final var findDuplicateMappingFiles = tasks.register(
             FindDuplicateMappingFilesTask.FIND_DUPLICATE_MAPPING_FILES_TASK_NAME,
-            FindDuplicateMappingFilesTask.class
+            FindDuplicateMappingFilesTask.class,
+            task -> {
+                task.getValidMappingCache().convention(this.getBuildDir().file("valid-mapping-cache.json"));
+            }
         );
 
         final var mappingLint = tasks.register(
