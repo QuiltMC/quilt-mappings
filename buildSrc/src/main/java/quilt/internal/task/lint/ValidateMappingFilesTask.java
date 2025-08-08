@@ -67,7 +67,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
     private static final Pattern EXPECTED_CLASS =
         Pattern.compile("(?<=^CLASS )(?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+");
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new Gson();
     private static final Collector<FileChange, ?, List<File>> CHANGE_TO_FILE_LIST_COLLECTOR = Collector.of(
         ArrayList::new,
         (list, change) -> list.add(change.getFile()),
@@ -114,10 +114,8 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
         final List<File> emptyFiles = new ArrayList<>();
         final List<File> wrongExtensionFiles = new ArrayList<>();
 
-        final Iterable<FileChange> fileChanges = changes.getFileChanges(this.getMappingsDir());
-
         final Map<Boolean, List<File>> fileChangesByRemoved = StreamSupport
-            .stream(fileChanges.spliterator(), false)
+            .stream(changes.getFileChanges(this.getMappingsDir()).spliterator(), false)
             .filter(change -> change.getFileType() == FileType.FILE)
             .collect(Collectors.partitioningBy(
                 change -> change.getChangeType() == ChangeType.REMOVED,
@@ -252,7 +250,12 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
                     .filter(entry -> entry.getValue().size() == 1)
                     .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> mappingsPath.relativize(entry.getValue().iterator().next().toPath()).toString().replace('\\', '/')
+                        entry -> {
+                            final String relativePath = mappingsPath
+                                .relativize(entry.getValue().iterator().next().toPath())
+                                .toString().replace('\\', '/');
+                            return relativePath.substring(0, relativePath.length() - (Extensions.MAPPING.length() + 1));
+                        }
                     )),
                 writer
             );
@@ -272,7 +275,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
                     .stream()
                     .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> mappingsPath.resolve(entry.getValue()).toFile(),
+                        entry -> mappingsPath.resolve(entry.getValue() + "." + Extensions.MAPPING).toFile(),
                         (left, right) -> {
                             throw new IllegalArgumentException(
                                 "Duplicate class name for files:\n\t%s\n\t%s".formatted(left, right)
