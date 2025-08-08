@@ -21,6 +21,7 @@ import org.gradle.work.ChangeType;
 import org.gradle.work.FileChange;
 import org.gradle.work.Incremental;
 import org.gradle.work.InputChanges;
+import quilt.internal.constants.Extensions;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
@@ -52,17 +53,16 @@ import java.util.stream.StreamSupport;
  * Duplicate mappings are usually the result of running {@code git merge/rebase} and
  * inadvertently combining two histories that give the same class two different names.
  * <p>
- * Any file that's empty or that lacks the {@value MAPPING_EXTENSION} extension will also be reported.
+ * Any file that's empty, lacks the {@value Extensions#MAPPING} extension,
+ * or doesn't begin with a class mapping will also be reported.
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public abstract class FindDuplicateMappingFilesTask extends DefaultTask implements MappingsDirConsumingTask {
+public abstract class ValidateMappingFilesTask extends DefaultTask implements MappingsDirConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
-    public static final String FIND_DUPLICATE_MAPPING_FILES_TASK_NAME = "findDuplicateMappingFiles";
-
-    public static final String MAPPING_EXTENSION = "mapping";
+    public static final String VALIDATE_MAPPING_FILES_TASK_NAME = "validateMappingFiles";
 
     private static final Pattern EXPECTED_CLASS =
         Pattern.compile("(?<=^CLASS )(?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+");
@@ -84,8 +84,8 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask implemen
     @OutputFile
     public abstract RegularFileProperty getValidMappingCache();
 
-    public FindDuplicateMappingFilesTask() {
-        this.setGroup(Groups.LINT);
+    public ValidateMappingFilesTask() {
+        this.setGroup(Groups.CHECK_MAPPINGS);
     }
 
     @TaskAction
@@ -149,51 +149,16 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask implemen
                     emptyFiles.add(mappingFile);
                 }
 
-                if (!mappingFile.toString().endsWith("." + MAPPING_EXTENSION)) {
+                if (!mappingFile.toString().endsWith("." + Extensions.MAPPING)) {
                     wrongExtensionFiles.add(mappingFile);
                 }
             } catch (IOException e) {
                 this.deleteCache(cacheFile);
-                throw new GradleException("Unexpected error accessing " + MAPPING_EXTENSION + " file", e);
+                throw new GradleException("Unexpected error accessing " + Extensions.MAPPING + " file", e);
             }
         });
 
-        // for (final FileChange change : fileChanges) {
-        //     if (change.getFileType() == FileType.FILE) {
-        //         final File mappingFile = change.getFile();
-        //
-        //         removeIfCached.accept(mappingFile);
-        //
-        //         if (change.getChangeType() != ChangeType.REMOVED) {
-        //             try (var reader = new BufferedReader(new FileReader(mappingFile))) {
-        //                 final String firstLine = reader.readLine();
-        //                 if (firstLine != null) {
-        //                     getClassName(firstLine).ifPresentOrElse(
-        //                         className -> {
-        //                             final Collection<File> classMappings = allMappings.get(className);
-        //
-        //                             if (!classMappings.isEmpty()) {
-        //                                 duplicateMappings.add(className);
-        //                             }
-        //
-        //                             classMappings.add(mappingFile);
-        //                         },
-        //                         () -> malformedClassFiles.add(mappingFile)
-        //                     );
-        //                 } else {
-        //                     emptyFiles.add(mappingFile);
-        //                 }
-        //
-        //                 if (!mappingFile.toString().endsWith("." + MAPPING_EXTENSION)) {
-        //                     wrongExtensionFiles.add(mappingFile);
-        //                 }
-        //             } catch (IOException e) {
-        //                 this.deleteCache(cacheFile);
-        //                 throw new GradleException("Unexpected error accessing " + MAPPING_EXTENSION + " file", e);
-        //             }
-        //         }
-        //     }
-        // }
+        this.writeCache(allMappings, cacheFile, mappingsDir);
 
         final Logger logger = this.getLogger();
         final List<String> errorMessages = new ArrayList<>();
@@ -243,10 +208,11 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask implemen
         }
 
         if (!wrongExtensionFiles.isEmpty()) {
-            final String message = ("%d file%s without the " + MAPPING_EXTENSION + " extension").formatted(
+            final String message = ("%d file%s without the " + Extensions.MAPPING + " extension").formatted(
                 wrongExtensionFiles.size(),
                 wrongExtensionFiles.size() == 1 ? "" : "s"
             );
+
             errorMessages.add(message);
 
             logger.error("Found {}!", message);
@@ -272,12 +238,8 @@ public abstract class FindDuplicateMappingFilesTask extends DefaultTask implemen
 
             fullError.append(errorMessages.getLast()).append("! See the log for details.");
 
-            this.writeCache(allMappings, cacheFile, mappingsDir);
-
             throw new GradleException(fullError.toString());
         }
-
-        this.writeCache(allMappings, cacheFile, mappingsDir);
     }
 
     private void writeCache(Multimap<String, File> mappings, File cacheFile, File mappingsDir) {

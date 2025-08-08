@@ -86,7 +86,7 @@ public abstract class MappingLintTask extends DefaultTask implements MappingsDir
     public abstract WorkerExecutor getWorkerExecutor();
 
     public MappingLintTask() {
-        this.setGroup(Groups.LINT);
+        this.setGroup(Groups.CHECK_MAPPINGS);
 
         // Ignore outputs for up-to-date checks as there aren't any (so only inputs are checked)
         // This is required because mappingsDir is @Incremental and this task has no outputs

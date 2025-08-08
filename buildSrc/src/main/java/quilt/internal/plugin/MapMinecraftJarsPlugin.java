@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import quilt.internal.constants.Constants;
 import quilt.internal.constants.Classifiers;
 import quilt.internal.constants.Extensions;
+import quilt.internal.constants.Groups;
 import quilt.internal.extension.MapMinecraftJarsExtension;
 import quilt.internal.extension.QuiltMappingsExtension;
 import quilt.internal.constants.Namespaces;
@@ -29,7 +30,7 @@ import quilt.internal.task.build.TinyJarTask;
 import quilt.internal.task.jarmapping.MapJarTask;
 import quilt.internal.task.jarmapping.MapPerVersionMappingsJarTask;
 import quilt.internal.task.lint.Checker;
-import quilt.internal.task.lint.FindDuplicateMappingFilesTask;
+import quilt.internal.task.lint.ValidateMappingFilesTask;
 import quilt.internal.task.lint.MappingLintTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
 import quilt.internal.task.setup.ExtractTinyMappingsTask;
@@ -61,7 +62,7 @@ import static quilt.internal.util.FileUtil.getPathWithExtension;
  *          {@link DownloadMinecraftLibrariesTask#getLibrariesDir() librariesDir}
  *     <li> if {@link LifecycleBasePlugin} is applied, configures the {@value LifecycleBasePlugin#CHECK_TASK_NAME} task
  *          to {@linkplain Task#dependsOn(Object...) depend on} the
- *          {@value MappingLintTask#MAPPING_LINT_TASK_NAME} task
+ *          {@value #CHECK_MAPPINGS_TASK_NAME} task
  * </ul>
  * Note:
  * <ul>
@@ -71,6 +72,8 @@ import static quilt.internal.util.FileUtil.getPathWithExtension;
  */
 public abstract class MapMinecraftJarsPlugin extends
         DefaultExtensionedMappingsProjectPlugin<MapMinecraftJarsExtension> {
+    public static final String CHECK_MAPPINGS_TASK_NAME = "checkMappings";
+
     public static final String INTERMEDIATE_MAPPINGS_CONFIGURATION_NAME = Namespaces.INTERMEDIATE;
 
     @Override
@@ -258,8 +261,8 @@ public abstract class MapMinecraftJarsPlugin extends
         );
 
         final var findDuplicateMappingFiles = tasks.register(
-            FindDuplicateMappingFilesTask.FIND_DUPLICATE_MAPPING_FILES_TASK_NAME,
-            FindDuplicateMappingFilesTask.class,
+            ValidateMappingFilesTask.VALIDATE_MAPPING_FILES_TASK_NAME,
+            ValidateMappingFilesTask.class,
             task -> {
                 task.getValidMappingCache().convention(this.getBuildDir().file("valid-mapping-cache.json"));
             }
@@ -269,8 +272,7 @@ public abstract class MapMinecraftJarsPlugin extends
             MappingLintTask.MAPPING_LINT_TASK_NAME,
             MappingLintTask.class,
             task -> {
-                // this does mappings verification but has no output to depend on
-                task.dependsOn(findDuplicateMappingFiles);
+                task.shouldRunAfter(findDuplicateMappingFiles);
 
                 task.getJarFile().convention(
                     mapPerVersionMappingsJar.flatMap(MapPerVersionMappingsJarTask::getOutputJar)
@@ -285,8 +287,13 @@ public abstract class MapMinecraftJarsPlugin extends
             }
         );
 
+        final var checkMappings = tasks.register(CHECK_MAPPINGS_TASK_NAME, task -> {
+            task.setGroup(Groups.CHECK_MAPPINGS);
+            task.dependsOn(findDuplicateMappingFiles, mappingLint);
+        });
+
         plugins.withType(LifecycleBasePlugin.class, lifecycle -> {
-            tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).configure(task -> task.dependsOn(mappingLint));
+            tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).configure(task -> task.dependsOn(checkMappings));
         });
 
         return project.getExtensions().create(
