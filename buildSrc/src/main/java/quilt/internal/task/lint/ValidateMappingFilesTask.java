@@ -6,7 +6,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
@@ -21,6 +20,7 @@ import org.gradle.work.ChangeType;
 import org.gradle.work.FileChange;
 import org.gradle.work.Incremental;
 import org.gradle.work.InputChanges;
+import org.jetbrains.annotations.Nullable;
 import quilt.internal.constants.Extensions;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
@@ -53,8 +53,13 @@ import java.util.stream.StreamSupport;
  * Duplicate mappings are usually the result of running {@code git merge/rebase} and
  * inadvertently combining two histories that give the same class two different names.
  * <p>
- * Any file that's empty, lacks the {@value Extensions#MAPPING} extension,
- * or doesn't begin with a class mapping will also be reported.
+ * Also validates tha mapping files:
+ * <ul>
+ *     <li> aren't empty
+ *     <li> have the {@value Extensions#MAPPING} extension
+ *     <li> begin with a class mapping
+ *     <li> map a class that matches their file name
+ * </ul>
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
@@ -64,8 +69,13 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
      */
     public static final String VALIDATE_MAPPING_FILES_TASK_NAME = "validateMappingFiles";
 
-    private static final Pattern EXPECTED_CLASS =
-        Pattern.compile("(?<=^CLASS )(?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+");
+    private static final String CLASS_OBF_GROUP = "obf";
+    private static final String EXPECTED_CLASS_NAME_GROUP = "name";
+    private static final Pattern EXPECTED_CLASS = Pattern.compile(
+        "(?<=^CLASS )" +
+            "(?<" + CLASS_OBF_GROUP + ">(?:net/minecraft|com/mojang/blaze3d)/(?:\\w+/)*\\w+)(?: " +
+            "(?<" + EXPECTED_CLASS_NAME_GROUP + ">.*))?"
+    );
 
     private static final Gson GSON = new Gson();
     private static final Collector<FileChange, ?, List<File>> CHANGE_TO_FILE_LIST_COLLECTOR = Collector.of(
@@ -76,6 +86,11 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             return left;
         }
     );
+
+    private static String getPathWithoutMappingExtension(Path path) {
+        final String pathString = path.toString().replace('\\', '/');
+        return pathString.substring(0, pathString.length() - (Extensions.MAPPING.length() + 1));
+    }
 
     @Incremental
     @InputDirectory
@@ -91,6 +106,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
     @TaskAction
     public void run(InputChanges changes) {
         final File mappingsDir = this.getMappingsDir().get().getAsFile();
+        final Path mappingsDirPath = mappingsDir.toPath();
 
         final Multimap<String, File> allMappings = HashMultimap.create();
 
@@ -98,7 +114,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
         final Consumer<File> removeIfCached;
 
         {
-            final BiMap<String, File> cache = this.readCache(cacheFile, mappingsDir);
+            final BiMap<String, File> cache = this.readCache(cacheFile, mappingsDirPath);
             cache.forEach(allMappings::put);
 
             removeIfCached = file -> {
@@ -111,6 +127,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
 
         final Set<String> duplicateMappings = new HashSet<>();
         final List<File> malformedClassFiles = new ArrayList<>();
+        final List<File> nameMismatchFiles = new ArrayList<>();
         final List<File> emptyFiles = new ArrayList<>();
         final List<File> wrongExtensionFiles = new ArrayList<>();
 
@@ -131,15 +148,20 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             try (var reader = new BufferedReader(new FileReader(mappingFile))) {
                 final String firstLine = reader.readLine();
                 if (firstLine != null) {
-                    getClassName(firstLine).ifPresentOrElse(
-                        className -> {
-                            final Collection<File> classMappings = allMappings.get(className);
+                    getClassMapping(firstLine).ifPresentOrElse(
+                        classMapping -> {
+                            final Path path = mappingsDirPath.relativize(mappingFile.toPath());
+                            if (!getPathWithoutMappingExtension(path).equals(classMapping.getName())) {
+                                nameMismatchFiles.add(mappingFile);
+                            } else {
+                                final Collection<File> classMappings = allMappings.get(classMapping.obf());
 
-                            if (!classMappings.isEmpty()) {
-                                duplicateMappings.add(className);
+                                if (!classMappings.isEmpty()) {
+                                    duplicateMappings.add(classMapping.obf());
+                                }
+
+                                classMappings.add(mappingFile);
                             }
-
-                            classMappings.add(mappingFile);
                         },
                         () -> malformedClassFiles.add(mappingFile)
                     );
@@ -156,7 +178,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             }
         });
 
-        this.writeCache(allMappings, cacheFile, mappingsDir);
+        this.writeCache(allMappings, cacheFile, mappingsDirPath);
 
         final Logger logger = this.getLogger();
         final List<String> errorMessages = new ArrayList<>();
@@ -174,6 +196,20 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
                 for (final File mappingFile : allMappings.get(duplicateMapping)) {
                     logger.error("\t\t{}", mappingFile);
                 }
+            }
+        }
+
+        if (!nameMismatchFiles.isEmpty()) {
+            final String message = "%d mismatched class name file%s".formatted(
+                nameMismatchFiles.size(),
+                nameMismatchFiles.size() == 1 ? "" : "s"
+            );
+
+            errorMessages.add(message);
+
+            logger.error("Found {}!", message);
+            for (final File nameMismatchFile : nameMismatchFiles) {
+                logger.error("\t{}", nameMismatchFile);
             }
         }
 
@@ -240,22 +276,18 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
         }
     }
 
-    private void writeCache(Multimap<String, File> mappings, File cacheFile, File mappingsDir) {
+    private void writeCache(Multimap<String, File> mappings, File cacheFile, Path mappingsDir) {
         try (var writer = new FileWriter(cacheFile)) {
             cacheFile.getParentFile().mkdirs();
             cacheFile.createNewFile();
-            final Path mappingsPath = mappingsDir.toPath();
             GSON.toJson(
                 mappings.asMap().entrySet().stream()
                     .filter(entry -> entry.getValue().size() == 1)
                     .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> {
-                            final String relativePath = mappingsPath
-                                .relativize(entry.getValue().iterator().next().toPath())
-                                .toString().replace('\\', '/');
-                            return relativePath.substring(0, relativePath.length() - (Extensions.MAPPING.length() + 1));
-                        }
+                        entry -> getPathWithoutMappingExtension(
+                            mappingsDir.relativize(entry.getValue().iterator().next().toPath())
+                        )
                     )),
                 writer
             );
@@ -265,9 +297,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
         }
     }
 
-    private BiMap<String, File> readCache(File cacheFile, File mappingsDir) {
-        final Path mappingsPath = mappingsDir.toPath();
-
+    private BiMap<String, File> readCache(File cacheFile, Path mappingsDir) {
         if (cacheFile.exists()) {
             try (var reader = new JsonReader(new FileReader(cacheFile))) {
                 return GSON.<Map<String, String>>fromJson(reader, new TypeToken<Map<String, String>>() { }.getType())
@@ -275,7 +305,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
                     .stream()
                     .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> mappingsPath.resolve(entry.getValue() + "." + Extensions.MAPPING).toFile(),
+                        entry -> mappingsDir.resolve(entry.getValue() + "." + Extensions.MAPPING).toFile(),
                         (left, right) -> {
                             throw new IllegalArgumentException(
                                 "Duplicate class name for files:\n\t%s\n\t%s".formatted(left, right)
@@ -297,10 +327,23 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
         cacheFile.delete();
     }
 
-    private static Optional<String> getClassName(String line) {
+    private static Optional<ClassMapping> getClassMapping(String line) {
         final var matcher = EXPECTED_CLASS.matcher(line);
         return matcher.find() ?
-            Optional.of(matcher.group(0)) :
+            Optional.of(ClassMapping.of(
+                matcher.group(CLASS_OBF_GROUP),
+                matcher.group(EXPECTED_CLASS_NAME_GROUP)
+            )) :
             Optional.empty();
+    }
+
+    private record ClassMapping(String obf, Optional<String> target) {
+        static ClassMapping of(String obf, @Nullable String name) {
+            return new ClassMapping(obf, Optional.ofNullable(name));
+        }
+
+        String getName() {
+            return this.target.orElse(this.obf);
+        }
     }
 }
