@@ -87,7 +87,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
         }
     );
 
-    private static String getPathWithoutMappingExtension(Path path) {
+    private static String normalizedWithoutMappingExtension(Path path) {
         final String pathString = path.toString().replace('\\', '/');
         return pathString.substring(0, pathString.length() - (Extensions.MAPPING.length() + 1));
     }
@@ -151,7 +151,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
                     getClassMapping(firstLine).ifPresentOrElse(
                         classMapping -> {
                             final Path path = mappingsDirPath.relativize(mappingFile.toPath());
-                            if (!getPathWithoutMappingExtension(path).equals(classMapping.getName())) {
+                            if (!normalizedWithoutMappingExtension(path).equals(classMapping.getName())) {
                                 nameMismatchFiles.add(mappingFile);
                             } else {
                                 final Collection<File> classMappings = allMappings.get(classMapping.obf());
@@ -285,7 +285,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
                     .filter(entry -> entry.getValue().size() == 1)
                     .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> getPathWithoutMappingExtension(
+                        entry -> normalizedWithoutMappingExtension(
                             mappingsDir.relativize(entry.getValue().iterator().next().toPath())
                         )
                     )),
