@@ -8,16 +8,21 @@ CLASS net/minecraft/unmapped/C_gstiksvs net/minecraft/entity/projectile/Persiste
 	FIELD f_hdbcayjq WATER_DRAG F
 	FIELD f_igmdnyfz pickupType Lnet/minecraft/unmapped/C_gstiksvs$C_pbhnbeyk;
 	FIELD f_juvjveta piercedEntities Lit/unimi/dsi/fastutil/ints/IntOpenHashSet;
+	FIELD f_mngxbtew DEFAULT_PIERCE_LEVEL B
 	FIELD f_ncskhrlt inBlockState Lnet/minecraft/unmapped/C_txtbiemp;
 	FIELD f_orpxztyk weapon Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_pnuxpkjk CRITICAL_FLAG I
 	FIELD f_pqiurqmt PIERCE_LEVEL Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_qazfvpcx BASE_ARROW_DAMAGE D
 	FIELD f_rnapwtld SHAKE_TICKS I
+	FIELD f_snnyjqyd DEFAULT_IN_GROUND Z
 	FIELD f_umpvtnwi PROJECTILE_FLAGS Lnet/minecraft/unmapped/C_rinmcaxy;
+	FIELD f_vqcewxuv DEFAULT_CRITICAL Z
 	FIELD f_wcrdrutf stack Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_wgfwlrwg shake I
+	FIELD f_wshsuhjd DEFAULT_LIFE S
 	FIELD f_wuzchbwg damage D
+	FIELD f_xolavzrb DEFAULT_SHAKE B
 	FIELD f_yqrknjkl IN_GROUND Lnet/minecraft/unmapped/C_rinmcaxy;
 	METHOD <init> (Lnet/minecraft/unmapped/C_ogavsvbr;DDDLnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)V
 		ARG 1 type
@@ -42,6 +47,7 @@ CLASS net/minecraft/unmapped/C_gstiksvs net/minecraft/entity/projectile/Persiste
 		ARG 1 sound
 	METHOD m_ijqsvqvi getDefaultItemStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_isgasunb applyKnockback (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sbxfkpyv;)V
+		ARG 1 knockee
 	METHOD m_izcgrjes setDamage (D)V
 		ARG 1 damage
 	METHOD m_kntlthra getSound ()Lnet/minecraft/unmapped/C_avavozay;
@@ -53,8 +59,8 @@ CLASS net/minecraft/unmapped/C_gstiksvs net/minecraft/entity/projectile/Persiste
 		ARG 1 player
 	METHOD m_qmtcwgrn setStack (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 	METHOD m_qnxttchu setProjectileFlag (IZ)V
-		ARG 1 index
-		ARG 2 flag
+		ARG 1 flag
+		ARG 2 value
 	METHOD m_rjnoixne (Lnet/minecraft/unmapped/C_vorddnax;)V
 		ARG 1 item
 	METHOD m_sepatgdc age ()V
@@ -67,7 +73,7 @@ CLASS net/minecraft/unmapped/C_gstiksvs net/minecraft/entity/projectile/Persiste
 		ARG 1 critical
 	METHOD m_whtcpczr onHit (Lnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 target
-	METHOD m_wrkmrnze getDragInWater ()F
+	METHOD m_wrkmrnze getWaterDrag ()F
 	METHOD m_wznrraqn getStack ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_xmbclleg setInGround (Z)V
 	METHOD m_xnefdmre isCritical ()Z
@@ -77,3 +83,5 @@ CLASS net/minecraft/unmapped/C_gstiksvs net/minecraft/entity/projectile/Persiste
 	CLASS C_pbhnbeyk PickupPermission
 		METHOD m_eoybyvvn fromOrdinal (I)Lnet/minecraft/unmapped/C_gstiksvs$C_pbhnbeyk;
 			ARG 0 ordinal
+		METHOD m_goehwory (Lnet/minecraft/unmapped/C_gstiksvs$C_pbhnbeyk;)Ljava/lang/Byte;
+			ARG 0 permission

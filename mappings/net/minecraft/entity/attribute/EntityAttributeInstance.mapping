@@ -10,8 +10,11 @@ CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAtt
 	FIELD f_ybqmfnir operationToModifiers Ljava/util/Map;
 	METHOD m_basvthgj removeModifier (Lnet/minecraft/unmapped/C_ncpywfca;)Z
 		ARG 1 id
+	METHOD m_bgzotehi unpack (Lnet/minecraft/unmapped/C_lzukavpx$C_gkutuzut;)V
+		ARG 1 packed
 	METHOD m_bsifaddn (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;Ljava/util/Map;)V
 		ARG 1 operation
+		ARG 2 modifiers
 	METHOD m_fcqlvfzc replacePersistentModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)V
 		ARG 1 modifier
 	METHOD m_gbtcpwti hasModifier (Lnet/minecraft/unmapped/C_ncpywfca;)Z
@@ -45,6 +48,7 @@ CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAtt
 		COMMENT </ul>
 	METHOD m_ojdeprdt getModifiersByOperation (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Collection;
 		ARG 1 operation
+	METHOD m_qlrxnufw pack ()Lnet/minecraft/unmapped/C_lzukavpx$C_gkutuzut;
 	METHOD m_rhfwxbjf addTemporaryModifier (Lnet/minecraft/unmapped/C_hdbqsqsm;)V
 		COMMENT Adds a temporary attribute modifier.
 		COMMENT The modifier will not be serialized.
@@ -61,3 +65,6 @@ CLASS net/minecraft/unmapped/C_lzukavpx net/minecraft/entity/attribute/EntityAtt
 	METHOD m_xdafakih (Lnet/minecraft/unmapped/C_hdbqsqsm$C_pljpmmzs;)Ljava/util/Map;
 		ARG 0 operation
 	METHOD m_zxnpgjts getValue ()D
+	CLASS C_gkutuzut Packed
+		FIELD f_hxhrlkgo CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_ndkcndhm LIST_CODEC Lcom/mojang/serialization/Codec;

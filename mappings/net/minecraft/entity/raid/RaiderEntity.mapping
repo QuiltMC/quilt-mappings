@@ -1,10 +1,14 @@
 CLASS net/minecraft/unmapped/C_iaguvmwh net/minecraft/entity/raid/RaiderEntity
 	FIELD f_biexexew raid Lnet/minecraft/unmapped/C_szefbyex;
+	FIELD f_boxrvtni DEFAULT_WAVE I
 	FIELD f_ecbzydno ableToJoinRaid Z
 	FIELD f_hszqhamp outOfRaidCounter I
+	FIELD f_kapqrbwc DEFAULT_CAN_JOIN_RAID Z
 	FIELD f_ncoaofla OBTAINABLE_OMINOUS_BANNER_PREDICATE Ljava/util/function/Predicate;
 	FIELD f_rktqrheh CELEBRATING Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_zkxivcsk wave I
+	METHOD m_aoaeshli (Lnet/minecraft/unmapped/C_kespdwpv;I)V
+		ARG 1 id
 	METHOD m_bewyufgq getOutOfRaidCounter ()I
 	METHOD m_bfgvwscq setCelebrating (Z)V
 		ARG 1 celebrating
@@ -18,6 +22,7 @@ CLASS net/minecraft/unmapped/C_iaguvmwh net/minecraft/entity/raid/RaiderEntity
 		ARG 1 ableToJoinRaid
 	METHOD m_onpzsxkg addBonusForWave (Lnet/minecraft/unmapped/C_bdwnwhiu;IZ)V
 		ARG 2 wave
+		ARG 3 ignored
 	METHOD m_pvlitune getRaid ()Lnet/minecraft/unmapped/C_szefbyex;
 	METHOD m_ravxtbtq (Lnet/minecraft/unmapped/C_uqpzijng;)Z
 		ARG 0 itemEntity
@@ -28,10 +33,14 @@ CLASS net/minecraft/unmapped/C_iaguvmwh net/minecraft/entity/raid/RaiderEntity
 	METHOD m_xyumoqnj canJoinRaid ()Z
 	METHOD m_ypwbvbpo setOutOfRaidCounter (I)V
 		ARG 1 counter
+	METHOD m_zwxuijao (Lnet/minecraft/unmapped/C_bdwnwhiu;Ljava/lang/Integer;)V
+		ARG 2 id
 	CLASS C_dingymoh PatrolApproachGoal
 		FIELD f_ccjohomu closeRaiderPredicate Lnet/minecraft/unmapped/C_cjtyhinh;
 		FIELD f_kbsyzlhy raider Lnet/minecraft/unmapped/C_iaguvmwh;
 		FIELD f_tbbrhtuy squaredDistance F
+		METHOD <init> (Lnet/minecraft/unmapped/C_tupngryd;F)V
+			ARG 2 distance
 	CLASS C_eixofpsc CelebrateGoal
 		FIELD f_lnlkrwfy raider Lnet/minecraft/unmapped/C_iaguvmwh;
 		METHOD <init> (Lnet/minecraft/unmapped/C_iaguvmwh;Lnet/minecraft/unmapped/C_iaguvmwh;)V
@@ -49,6 +58,8 @@ CLASS net/minecraft/unmapped/C_iaguvmwh net/minecraft/entity/raid/RaiderEntity
 			ARG 4 distance
 		METHOD m_boiwccle tryFindHome ()Z
 		METHOD m_hnatgpmn purgeMemory ()V
+		METHOD m_kenkuedl (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
+			ARG 0 poiType
 		METHOD m_pjypreaf isRaiding ()Z
 		METHOD m_snbezfbo canLootHome (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 			ARG 1 pos

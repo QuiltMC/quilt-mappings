@@ -6,31 +6,54 @@ CLASS net/minecraft/unmapped/C_vbugwmii net/minecraft/entity/mob/CreakingEntity
 	FIELD f_erznzcem CRUMBLING Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_gnorwjlj invulnerabilityAnimationState Lnet/minecraft/unmapped/C_kxntavoz;
 	FIELD f_iflztenn attackCooldown I
+	FIELD f_iunqojip DEATH_ANIMATION_DURATION I
+	FIELD f_izfbuckb stuckPlayerCount I
 	FIELD f_jujfnssl ACTIVE Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_mtuothfq crumblingAnimationState Lnet/minecraft/unmapped/C_kxntavoz;
 	FIELD f_mzkqzzle ATTACK_ANIMATION_DURATION I
 	FIELD f_nmjsivwg eyeFlickerTime I
+	FIELD f_odepcruq HEART_POS Lnet/minecraft/unmapped/C_rinmcaxy;
 	FIELD f_ofciybzl eyesGlowing Z
+	FIELD f_ptguvdgz INVULNERABILITY_ANIMATION_DURATION I
 	FIELD f_rcowlgzl FOLLOW_RANGE F
+	FIELD f_roxbnmmr invulnerabilityTicks I
 	FIELD f_sdmnlrcu MAX_HEALTH I
 	FIELD f_sjorwcyp ORANGE I
 	FIELD f_sqbcuhao ATTACK_INTERVAL I
 	FIELD f_stkvvsxy attackAnimationState Lnet/minecraft/unmapped/C_kxntavoz;
 	FIELD f_tocwldwq ACTIVATION_RANGE_SQUARED F
+	FIELD f_wypppkgp PLAYER_STUCK_THRESHOLD I
 	FIELD f_yaenaqzq FIGHTING_MOVEMENT_SPEED F
+	METHOD m_bhvjapqu getHeartPos ()Lnet/minecraft/unmapped/C_hynzadkk;
+	METHOD m_bntgyzgy finishDeathAnimation ()V
+	METHOD m_dxlqnntx hasHeart ()Z
+	METHOD m_dyypgakn trySetAttacker (Lnet/minecraft/unmapped/C_sbxfkpyv;)Lnet/minecraft/unmapped/C_jzrpycqo;
+		COMMENT @return the player attacking this creaking, or {@code null} if there isn't one
+		ARG 1 source
 	METHOD m_japnsene setActive (Z)V
 	METHOD m_jkvxeltg buildAttributes ()Lnet/minecraft/unmapped/C_sdjuuzrz$C_tehwrjus;
-	METHOD m_jysxmfcv (Lnet/minecraft/unmapped/C_sbxfkpyv;)V
+	METHOD m_jysxmfcv onHeartDisconnected (Lnet/minecraft/unmapped/C_sbxfkpyv;)V
 		ARG 1 source
+	METHOD m_kyyxuuzo deactivate ()V
 	METHOD m_ohccomft animate ()V
+	METHOD m_pdevjnhk activate (Lnet/minecraft/unmapped/C_jzrpycqo;)V
+		ARG 1 target
 	METHOD m_qnnyojvb checkCanMove ()Z
+	METHOD m_rdyjwwcg isStuckByPlayers ()Z
 	METHOD m_rjsnoulh isCrumbling ()Z
+	METHOD m_ufybmgri setHeartPos (Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_vaxvtexl initHeartPos (Lnet/minecraft/unmapped/C_hynzadkk;)V
 	METHOD m_vbarudri areEyesGlowing ()Z
 	METHOD m_vhivxqyn setCrumbling ()V
 	METHOD m_vrawqntp updateEyeFlicker ()V
 	METHOD m_xchtvnyy canMove ()Z
 	METHOD m_xkvsljnw isActive ()Z
-	CLASS C_bhmfzyyn CreakingJumpControl
-	CLASS C_hkgbvofv CreakingMoveControl
-	CLASS C_hnlwfmab CreakingLookControl
-	CLASS C_pukuzfds CreakingBodyControl
+	CLASS C_bhmfzyyn JumpControl
+	CLASS C_hkgbvofv MoveControl
+	CLASS C_hmzakxgv Navigation
+		METHOD <init> (Lnet/minecraft/unmapped/C_vbugwmii;Lnet/minecraft/unmapped/C_vbugwmii;Lnet/minecraft/unmapped/C_cdctfzbn;)V
+			ARG 2 creaking
+	CLASS C_hnlwfmab LookControl
+	CLASS C_jxkkzdqe HomePathNodeMaker
+		FIELD f_rfjvbago MAX_HOME_DISTANCE_SQUARED I
+	CLASS C_pukuzfds BodyControl
