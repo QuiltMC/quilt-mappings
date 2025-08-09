@@ -24,18 +24,27 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	COMMENT </tr>
 	COMMENT </table>
 	COMMENT </div>
+	FIELD f_aasxeeyb SINGLE_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_bgqyysyj components Lnet/minecraft/unmapped/C_jvfovkxa;
 	FIELD f_bnghiwgu PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
+	FIELD f_duuhtyre OPTIONAL_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_eculldrq LIST_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_eqmyksbs item Lnet/minecraft/unmapped/C_vorddnax;
+	FIELD f_fpitlmtc OPTIONAL_LIMITED_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
+	FIELD f_gwlvilfo VALIDATED_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_gxetpkhn MAP_CODEC Lcom/mojang/serialization/MapCodec;
 	FIELD f_iboyubuh OPTIONAL_PACKET_CODEC Lnet/minecraft/unmapped/C_qsrmwluu;
 	FIELD f_llcklqth count I
+	FIELD f_lpaemjik VALIDATED_SINGLE_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_lrxqoedj EMPTY Lnet/minecraft/unmapped/C_sddaxwyk;
 	FIELD f_lxaedfnb cooldown I
 	FIELD f_ohakxxel LOGGER Lorg/slf4j/Logger;
 	FIELD f_rrbqzuyq SIMPLE_ITEM_CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_tqvryqzt CODEC Lcom/mojang/serialization/Codec;
 	FIELD f_ygsunlnh DISABLED Lnet/minecraft/unmapped/C_rdaqiwdt;
+	FIELD f_yneunsno UNBREAKABLE Lnet/minecraft/unmapped/C_rdaqiwdt;
 	FIELD f_zbdizxtz holder Lnet/minecraft/unmapped/C_astfners;
+	FIELD f_zqzebytk OP_WARNINGS Ljava/util/List;
 	METHOD <init> (Ljava/lang/Void;)V
 		ARG 1 unused
 	METHOD <init> (Lnet/minecraft/unmapped/C_cjzoxshv;)V
@@ -53,6 +62,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD <init> (Lnet/minecraft/unmapped/C_gmbqjnle;ILnet/minecraft/unmapped/C_jvfovkxa;)V
 		ARG 1 item
 		ARG 3 components
+	METHOD m_abowndct isAboutToBreak ()Z
+	METHOD m_apomheda damage (ILnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_laxmzoqs;)V
 	METHOD m_arqkxkec getDamage ()I
 	METHOD m_biphgkrd isUsedOnRelease ()Z
 	METHOD m_bpcuczsh setCount (I)V
@@ -70,10 +81,13 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT @see #copyComponentsToNewStack(ItemConvertable, int)
 		ARG 1 item
 			COMMENT the resulting item stack's item
+	METHOD m_ckupoleb getDefaultName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_cpmzxurz canBreakInAdventureMode (Lnet/minecraft/unmapped/C_gogfiawf;)Z
 	METHOD m_cwjcossc inventoryTick (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 1 world
 		ARG 2 entity
+	METHOD m_dcuepyme canMineAt (Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
+	METHOD m_dfjlwstf canRepair (Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 	METHOD m_dfvhukte getUseAction ()Lnet/minecraft/unmapped/C_qeajvgxm;
 	METHOD m_ehlafaks copyAndClear ()Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_ejzzxfrl getItemComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
@@ -82,6 +96,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 2 state
 		ARG 3 pos
 		ARG 4 miner
+	METHOD m_etkjstut createOptionalPacketCodec (Lnet/minecraft/unmapped/C_qsrmwluu;)Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_eyzvudzj isEnabled (Lnet/minecraft/unmapped/C_czxxrbcp;)Z
 		ARG 1 enabledFeatures
 	METHOD m_ezqoxeyg isOf (Lnet/minecraft/unmapped/C_vorddnax;)Z
@@ -89,7 +104,10 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 item
 			COMMENT the item instance to match
 	METHOD m_fdjdvcpt getMaxDamage ()I
+	METHOD m_ffurchrl damageWithoutBreaking (ILnet/minecraft/unmapped/C_jzrpycqo;)V
 	METHOD m_fggiijyg getUseTicks (Lnet/minecraft/unmapped/C_usxaxydn;)I
+	METHOD m_gbuhgijv getDurabilityChange (ILnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_mxrobsgg;)I
+		ARG 1 damage
 	METHOD m_gcouiubw isIn (Lnet/minecraft/unmapped/C_odfnijdo;)Z
 		COMMENT {@return whether this item is in the specified holder set}
 		ARG 1 set
@@ -104,6 +122,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_hdopgosb appendTooltip (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;Lnet/minecraft/unmapped/C_idvlscju;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_taebrtdw;)V
 		ARG 1 componentType
 		ARG 2 context
+		ARG 3 tooltipComponent
 		ARG 5 config
 	METHOD m_hmrpegvi onClickedOnOther (Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;)Z
 		COMMENT Called when the stack is placed on another {@link ItemStack} in a slot.
@@ -113,9 +132,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT @return whether an action was performed
 		ARG 1 otherSlot
 		ARG 3 player
-	METHOD m_hskgqwrk damageEquipment (ILnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_mxrobsgg;Ljava/util/function/Consumer;)V
-		ARG 1 damage
-		ARG 4 consumer
+	METHOD m_hnsikyys (Ljava/util/Optional;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 stack
+	METHOD m_hskgqwrk damage (ILnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_mxrobsgg;Ljava/util/function/Consumer;)V
 	METHOD m_iaantrnc apply (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/function/BiFunction;)Ljava/lang/Object;
 		ARG 1 type
 		ARG 2 defaultValue
@@ -126,6 +145,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 2 user
 		ARG 3 remainingUseTicks
 	METHOD m_iculdxhv isDamageable ()Z
+	METHOD m_iewylrep createValidatedPacketCodec (Lnet/minecraft/unmapped/C_qsrmwluu;)Lnet/minecraft/unmapped/C_qsrmwluu;
 	METHOD m_igbhhnoy copyComponentsToNewStack (Lnet/minecraft/unmapped/C_gmbqjnle;I)Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT {@return a new item stack with the components copied from this stack, unless this stack is empty, then returns an empty item stack}
 		COMMENT
@@ -142,11 +162,20 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 3 hand
 	METHOD m_imgzslzn listHashCode (Ljava/util/List;)I
 		ARG 0 stacks
+	METHOD m_istxpccx (Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_jqyoylib;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 item
+		ARG 1 components
+	METHOD m_jklbgnte (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;Lnet/minecraft/unmapped/C_vorddnax;)V
+		ARG 2 stack
 	METHOD m_jowurkjh copy ()Lnet/minecraft/unmapped/C_sddaxwyk;
 		COMMENT Creates and returns a copy of this item stack.
 	METHOD m_jqebbfhj finishUsing (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 world
 		ARG 2 user
+	METHOD m_jrosqnot (Lorg/apache/commons/lang3/mutable/MutableBoolean;Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_qfoqahef;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;Lnet/minecraft/unmapped/C_azfkqhlm$C_kqgfvdat;)V
+		ARG 4 attribute
+		ARG 5 modifier
+		ARG 6 display
 	METHOD m_kamdhzie apply (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;Ljava/util/function/UnaryOperator;)Ljava/lang/Object;
 		ARG 1 type
 		ARG 2 defaultValue
@@ -157,6 +186,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 count
 	METHOD m_kshgvahz matches (Ljava/util/function/Predicate;)Z
 		ARG 1 predicate
+	METHOD m_lulbgdsa getFormattedName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_lxuscpmx copyComponents ()Lnet/minecraft/unmapped/C_kouhnfig;
 	METHOD m_mhrovmoq itemsMatch (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 stack1
@@ -179,6 +209,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 1 amount
 			COMMENT the amount to increment
 	METHOD m_nosilizp isDamaged ()Z
+	METHOD m_nphkgyhm createOptionalMapCodec (Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+		ARG 0 key
+	METHOD m_ohkezqkf getCustomName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	METHOD m_olrjfwfo validate (Lnet/minecraft/unmapped/C_sddaxwyk;)Lcom/mojang/serialization/DataResult;
 	METHOD m_oszmcroz onItemEntityDestroyed (Lnet/minecraft/unmapped/C_uqpzijng;)V
 		ARG 1 entity
@@ -187,8 +220,13 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT
 		COMMENT @see Item#postDamageEntity
 		ARG 1 target
+		ARG 2 attacker
+	METHOD m_oujudcyn (Lnet/minecraft/unmapped/C_cjzoxshv;ILnet/minecraft/unmapped/C_qlclfxvn$C_vbojeisc;)V
+		ARG 2 enchantments
 	METHOD m_phvcusub appendModifierTooltips (Ljava/util/function/Consumer;Lnet/minecraft/unmapped/C_idvlscju;Lnet/minecraft/unmapped/C_jzrpycqo;)V
 		ARG 1 appender
+		ARG 2 component
+	METHOD m_pjciqabm getUseRemainder (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_sddaxwyk;)Lnet/minecraft/unmapped/C_sddaxwyk;
 	METHOD m_pjqbesil getItemBarStep ()I
 		COMMENT {@return the length of the filled section of the durability bar in pixels (out of 13)}
 	METHOD m_poxxatoa postHit (Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)Z
@@ -197,14 +235,18 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_qiozuhii canPlaceOnInAdventureMode (Lnet/minecraft/unmapped/C_gogfiawf;)Z
 	METHOD m_qxfxfsuy getItem ()Lnet/minecraft/unmapped/C_vorddnax;
 	METHOD m_qxooancw applyPatch (Lnet/minecraft/unmapped/C_jqyoylib;)V
-	METHOD m_rcukuoag damageEquipment (ILnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)V
+	METHOD m_rcukuoag damage (ILnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_yuycoehb;)V
 		ARG 1 damage
-		ARG 2 entity
+		ARG 2 owner
 		ARG 3 slot
 	METHOD m_rghjmiwl setDamage (I)V
 		ARG 1 damage
 	METHOD m_rmdiknvo getMaxCount ()I
+	METHOD m_rqzgggqc (Lnet/minecraft/unmapped/C_cpwnhism;)Lnet/minecraft/unmapped/C_cpwnhism;
+		ARG 1 style
 	METHOD m_rvfytoek isItemBarVisible ()Z
+	METHOD m_saymlnod applyAttributeModifiers (Lnet/minecraft/unmapped/C_yuycoehb;Ljava/util/function/BiConsumer;)V
+		ARG 2 applicator
 	METHOD m_sfmosozi getItemBarColor ()I
 		COMMENT {@return the color of the filled section of the durability bar}
 	METHOD m_sjztniec isStackable ()Z
@@ -212,6 +254,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		ARG 0 left
 		ARG 1 right
 	METHOD m_sqtvrdfj getFrame ()Lnet/minecraft/unmapped/C_hywnolpn;
+	METHOD m_staooslz shouldBreak ()Z
 	METHOD m_sxworkis matches (Lnet/minecraft/unmapped/C_cjzoxshv;)Z
 		ARG 1 item
 	METHOD m_tcgbrtym isInFrame ()Z
@@ -224,6 +267,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 		COMMENT @see #itemsAndComponentsMatch(ItemStack, ItemStack)
 		ARG 0 stack
 		ARG 1 otherStack
+	METHOD m_tniqycmq containsNonDefaultComponent (Lnet/minecraft/unmapped/C_pscqxfcs;)Z
 	METHOD m_tobuehwl copyAndConsume (ILnet/minecraft/unmapped/C_usxaxydn;)Lnet/minecraft/unmapped/C_sddaxwyk;
 		ARG 1 amount
 		ARG 2 entity
@@ -231,6 +275,9 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_tyuugrfg consume (ILnet/minecraft/unmapped/C_usxaxydn;)V
 		ARG 1 amount
 		ARG 2 entity
+	METHOD m_tzbjoobc copyFrom (Lnet/minecraft/unmapped/C_pscqxfcs;Lnet/minecraft/unmapped/C_hmcnusfu;)V
+		ARG 1 type
+		ARG 2 components
 	METHOD m_uglewown getCount ()I
 		COMMENT {@return the count of items in this item stack}
 	METHOD m_uhghycli onClicked (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
@@ -246,6 +293,7 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_umudukuf onCraft (Lnet/minecraft/unmapped/C_cdctfzbn;)V
 	METHOD m_utrkycgn appendTooltip (Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;Lnet/minecraft/unmapped/C_idvlscju;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_taebrtdw;Ljava/util/function/Consumer;)V
 		ARG 1 context
+		ARG 2 component
 		ARG 4 config
 		ARG 5 appender
 	METHOD m_utrmkjnp setCooldown (I)V
@@ -268,6 +316,10 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_wjqnxase getEnchantments ()Lnet/minecraft/unmapped/C_qlclfxvn;
 	METHOD m_wnspogky streamTags ()Ljava/util/stream/Stream;
 		COMMENT {@return a stream of tag keys this item is in}
+	METHOD m_wybatvzo (Ljava/util/Optional;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 stack
+	METHOD m_wydijwai (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_djdmkjpx;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 1 unit
 	METHOD m_xbbrlqhc isIn (Lnet/minecraft/unmapped/C_ednuhnnn;)Z
 		COMMENT {@return whether this item is in the specified tag}
 		ARG 1 tag
@@ -275,6 +327,8 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_xdahsubv itemsAndComponentsMatch (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;)Z
 		ARG 0 stack
 		ARG 1 otherStack
+	METHOD m_xjswqojl (Lnet/minecraft/unmapped/C_vorddnax;)V
+		ARG 0 ignored
 	METHOD m_xqyyeqdc setHolder (Lnet/minecraft/unmapped/C_astfners;)V
 		ARG 1 holder
 	METHOD m_xvzvtufo getName ()Lnet/minecraft/unmapped/C_rdaqiwdt;
@@ -284,11 +338,17 @@ CLASS net/minecraft/unmapped/C_sddaxwyk net/minecraft/item/ItemStack
 	METHOD m_yprgpdac takesDamageFrom (Lnet/minecraft/unmapped/C_sbxfkpyv;)Z
 		ARG 1 damageSource
 	METHOD m_yrbtnzbt getRarity ()Lnet/minecraft/unmapped/C_mqmixksm;
+	METHOD m_yvfkzlxj (Lorg/apache/commons/lang3/function/TriConsumer;Lnet/minecraft/unmapped/C_cjzoxshv;Lnet/minecraft/unmapped/C_hdbqsqsm;)V
+		ARG 1 attribute
+		ARG 2 modifier
 	METHOD m_ywdqmcbk getTooltip (Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_taebrtdw;)Ljava/util/List;
 		ARG 1 context
 		ARG 2 player
 		ARG 3 config
 	METHOD m_zakagwqa set (Lnet/minecraft/unmapped/C_pscqxfcs;Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD m_zbrzqwly damageImpl (ILnet/minecraft/unmapped/C_mxrobsgg;Ljava/util/function/Consumer;)V
+		ARG 1 damage
+		ARG 3 onBreak
 	METHOD m_ziizvhrc appendEquipmentGroupModifiers (Lnet/minecraft/unmapped/C_qfoqahef;Lorg/apache/commons/lang3/function/TriConsumer;)V
 		ARG 1 slots
 		ARG 2 appender
