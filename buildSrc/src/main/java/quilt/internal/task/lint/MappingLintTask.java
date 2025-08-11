@@ -13,7 +13,10 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.gradle.api.DefaultTask;
+import org.gradle.api.provider.Property;
+import org.gradle.api.tasks.Internal;
 import org.quiltmc.enigma.api.Enigma;
+import org.quiltmc.enigma.api.EnigmaProfile;
 import org.quiltmc.enigma.api.EnigmaProject;
 import org.quiltmc.enigma.api.ProgressListener;
 import org.quiltmc.enigma.api.analysis.index.jar.EntryIndex;
@@ -49,10 +52,13 @@ import org.gradle.workers.WorkAction;
 import org.gradle.workers.WorkParameters;
 import org.gradle.workers.WorkQueue;
 import org.gradle.workers.WorkerExecutor;
+import org.quiltmc.enigma.command.Command;
 import quilt.internal.constants.Groups;
 import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
+import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;
+import quilt.internal.util.EnigmaProfileService;
 
 /**
  * Runs the mappings in the passed {@link #getMappingsDir() mappingsDir} through the passed {@link #getCheckers()}.<br>
@@ -63,7 +69,8 @@ import quilt.internal.task.MappingsDirConsumingTask;
  *
  * @see QuiltMappingsBasePlugin QuiltMappingsBasePlugin's configureEach
  */
-public abstract class MappingLintTask extends DefaultTask implements MappingsDirConsumingTask {
+public abstract class MappingLintTask extends DefaultTask implements
+        MappingsDirConsumingTask, EnigmaProfileConsumingTask {
     /**
      * {@linkplain org.gradle.api.tasks.TaskContainer#register Registered} by {@link MapMinecraftJarsPlugin}.
      */
@@ -101,6 +108,7 @@ public abstract class MappingLintTask extends DefaultTask implements MappingsDir
             parameters.getJarFile().set(this.getJarFile());
             parameters.getCheckers().set(this.getCheckers());
             parameters.getSpellingFile().set(this.getDictionaryFile().get().getAsFile());
+            parameters.getEnigmaProfileService().set(this.getEnigmaProfileService());
 
             for (final FileChange change : changes.getFileChanges(this.getMappingsDir())) {
                 if (change.getChangeType() != ChangeType.REMOVED && change.getFileType() == FileType.FILE) {
@@ -145,6 +153,9 @@ public abstract class MappingLintTask extends DefaultTask implements MappingsDir
         RegularFileProperty getSpellingFile();
 
         SetProperty<Checker<Entry<?>>> getCheckers();
+
+        @Internal("@ServiceReference is @Incubating")
+        Property<EnigmaProfileService> getEnigmaProfileService();
     }
 
     public abstract static class LintAction implements WorkAction<LintParameters> {
@@ -165,7 +176,8 @@ public abstract class MappingLintTask extends DefaultTask implements MappingsDir
                 final Map<Severity, List<String>> messagesBySeverity = new EnumMap<>(Severity.class);
 
                 // Set up Enigma
-                final Enigma enigma = Enigma.create();
+                final EnigmaProfile profile = params.getEnigmaProfileService().get().getProfile();
+                final Enigma enigma = Command.createEnigma(profile, null);
                 final EnigmaProject project = enigma.openJar(
                     params.getJarFile().get().getAsFile().toPath(),
                     new ClasspathClassProvider(),
