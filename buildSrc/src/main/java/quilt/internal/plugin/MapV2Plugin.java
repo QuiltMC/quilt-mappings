@@ -139,7 +139,7 @@ public abstract class MapV2Plugin extends DefaultExtensionedMappingsProjectPlugi
             CombineUnpickDefinitionsTask.COMBINE_UNPICK_DEFINITIONS_TASK_NAME,
             CombineUnpickDefinitionsTask.class,
             task -> {
-                task.getUnpickDefinitions().from(project.getTasks().withType(UnpickGenTask.class));
+                task.getUnpickDefinitions().from(tasks.withType(UnpickGenTask.class));
 
                 task.getOutput().convention(
                     this.provideMappingsBuildFile("definitions." + Extensions.UNPICK)
