@@ -235,8 +235,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                         .map(dest -> dest.file(JAR_MAPPINGS_PATH))
                 ));
 
-                // TODO LATER move this to build/ once generate-diff.yml uses lazilyDiffTarget
-                task.getOutput().convention(this.getProjectDir().dir("namedTargetSrc"));
+                task.getOutput().convention(this.getMappingsBuildDir().map(dir -> dir.dir("namedTargetSrc")));
             }
         );
 
