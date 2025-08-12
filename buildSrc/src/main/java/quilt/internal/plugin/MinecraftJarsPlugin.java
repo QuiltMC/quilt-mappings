@@ -71,7 +71,6 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
             // provideVersionParser is already cached in a property
             tasks.withType(VersionParserConsumingTask.class).configureEach(task -> {
                 task.getVersionParser().convention(
-                    // versionParser
                     downloadWantedVersionManifest.flatMap(DownloadWantedVersionManifestTask::provideVersionParser)
                 );
             });
