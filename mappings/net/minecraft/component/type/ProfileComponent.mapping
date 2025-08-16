@@ -1,11 +1,35 @@
 CLASS net/minecraft/unmapped/C_iqgmrwok net/minecraft/component/type/ProfileComponent
 	FIELD f_bmdljmxz CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_cvidwwkc EXECUTOR Ljava/util/concurrent/Executor;
 	FIELD f_joqhzrfo FULL_CODEC Lcom/mojang/serialization/Codec;
+	FIELD f_mcosqzco internalExecutor Ljava/util/concurrent/Executor;
+	FIELD f_xtsnwhyh resolver Lnet/minecraft/unmapped/C_iqgmrwok$C_itbwrqxb;
 	METHOD <init> (Ljava/util/Optional;Ljava/util/Optional;Lcom/mojang/authlib/properties/PropertyMap;)V
 		ARG 1 name
 		ARG 2 id
 		ARG 3 properties
+	METHOD m_adrfxnwk setupResolver (Lnet/minecraft/unmapped/C_vmxvaoqe;Ljava/util/concurrent/Executor;)V
+		ARG 1 executor
+	METHOD m_erdyvlqn clearResolver ()V
 	METHOD m_frcmbhum resolve ()Ljava/util/concurrent/CompletableFuture;
+	METHOD m_gmllcavu createProfile (Ljava/util/Optional;Ljava/util/Optional;Lcom/mojang/authlib/properties/PropertyMap;)Lcom/mojang/authlib/GameProfile;
+		ARG 2 properties
+	METHOD m_lfnwgcpn (Ljava/lang/String;)Lnet/minecraft/unmapped/C_iqgmrwok;
+		ARG 0 name
+	METHOD m_nxiptevj createProfile (Ljava/util/Optional;Ljava/util/Optional;)Lcom/mojang/authlib/GameProfile;
+		ARG 0 uuid
+		ARG 1 name
 	METHOD m_pnmdffid isResolved ()Z
+	METHOD m_pztnvaql tryResolve ()Lnet/minecraft/unmapped/C_iqgmrwok;
 	METHOD m_tbbkspqi createProfile (Ljava/util/Optional;)Lnet/minecraft/unmapped/C_iqgmrwok;
 		ARG 1 name
+	METHOD m_vpgjrcti resolveImpl ()Ljava/util/concurrent/CompletableFuture;
+	METHOD m_wttwlolu (Ljava/lang/Runnable;)V
+		ARG 0 runnable
+	CLASS C_itbwrqxb Resolver
+		FIELD f_chhkppwk cachedProfilesByUuid Lcom/google/common/cache/LoadingCache;
+		FIELD f_wowqiogm cachedProfilesByName Lcom/google/common/cache/LoadingCache;
+		METHOD <init> (Lnet/minecraft/unmapped/C_vmxvaoqe;)V
+			ARG 1 services
+		METHOD m_mkqaaeba getProfile (Lnet/minecraft/unmapped/C_iqgmrwok;)Ljava/util/concurrent/CompletableFuture;
+			ARG 1 component
