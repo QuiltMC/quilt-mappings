@@ -2,7 +2,7 @@ CLASS net/minecraft/unmapped/C_nyiqvxcn net/minecraft/data/DataProvider
 	FIELD f_mkydivae FIXED_ORDER_FIELDS Ljava/util/function/ToIntFunction;
 	FIELD f_opmypmak LOGGER Lorg/slf4j/Logger;
 	FIELD f_rftlymvj JSON_KEY_SORTER Ljava/util/Comparator;
-	METHOD m_erzxphou writeToPath (Lnet/minecraft/unmapped/C_temnquoh;Lcom/google/gson/JsonElement;Ljava/nio/file/Path;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_erzxphou writeStable (Lnet/minecraft/unmapped/C_temnquoh;Lcom/google/gson/JsonElement;Ljava/nio/file/Path;)Ljava/util/concurrent/CompletableFuture;
 		ARG 0 writer
 		ARG 1 json
 		ARG 2 path
@@ -13,8 +13,26 @@ CLASS net/minecraft/unmapped/C_nyiqvxcn net/minecraft/data/DataProvider
 		COMMENT will cause an exception
 	METHOD m_gpszpvej run (Lnet/minecraft/unmapped/C_temnquoh;)Ljava/util/concurrent/CompletableFuture;
 		ARG 1 writer
+	METHOD m_hldvczyk (Ljava/util/function/Function;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_temnquoh;Ljava/util/Map$Entry;)Ljava/util/concurrent/CompletableFuture;
+		ARG 3 entry
+	METHOD m_hohnuall write (Lnet/minecraft/unmapped/C_temnquoh;Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_ugkmwocs$C_ehniswvc;Ljava/util/Map;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_kmgnhnll (Lcom/mojang/serialization/Codec;Ljava/lang/Object;)Lcom/google/gson/JsonElement;
+		ARG 1 value
+	METHOD m_mjmapvtm write (Lnet/minecraft/unmapped/C_temnquoh;Ljava/util/function/Function;Ljava/util/function/Function;Ljava/util/Map;)Ljava/util/concurrent/CompletableFuture;
+		ARG 0 writer
+		ARG 1 serializer
+		ARG 2 pathResolver
+		ARG 3 values
+	METHOD m_oiidqwdo writeStable (Lnet/minecraft/unmapped/C_temnquoh;Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;Lcom/mojang/serialization/Codec;Ljava/lang/Object;Ljava/nio/file/Path;)Ljava/util/concurrent/CompletableFuture;
+		ARG 1 lookupProvider
 	METHOD m_pgghgory (Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;)V
 		ARG 0 map
+	METHOD m_wetvrfbf writeStable (Lnet/minecraft/unmapped/C_temnquoh;Lcom/mojang/serialization/Codec;Ljava/lang/Object;Ljava/nio/file/Path;)Ljava/util/concurrent/CompletableFuture;
 	METHOD m_wydopbbv (Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 string
+	METHOD m_xbbohxfp write (Lnet/minecraft/unmapped/C_temnquoh;Lcom/mojang/serialization/Codec;Ljava/util/function/Function;Ljava/util/Map;)Ljava/util/concurrent/CompletableFuture;
+	METHOD m_yadhhapq writeStable (Lnet/minecraft/unmapped/C_temnquoh;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Ljava/lang/Object;Ljava/nio/file/Path;)Ljava/util/concurrent/CompletableFuture;
+		ARG 3 value
 	CLASS C_oersiawb Factory
+		METHOD create (Lnet/minecraft/unmapped/C_ugkmwocs;)Lnet/minecraft/unmapped/C_nyiqvxcn;
+			ARG 1 output
