@@ -60,7 +60,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 3 user
 		ARG 4 remainingUseTicks
 	METHOD m_hwznhtnf getUseTicks (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;)I
-		ARG 2 entity
+		ARG 2 user
 	METHOD m_inqbslnb useOnEntity (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_laxmzoqs;)Lnet/minecraft/unmapped/C_ozuepbyj;
 		ARG 1 stack
 		ARG 2 user
@@ -108,7 +108,8 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		COMMENT @see #onClicked
 		COMMENT @return whether an action was performed
 		ARG 1 thisStack
-		ARG 2 otherSlot
+		ARG 2 other
+		ARG 3 type
 		ARG 4 player
 	METHOD m_pktzlvtx onClicked (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_nhvqfffd;Lnet/minecraft/unmapped/C_qcuteihm;Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_xkkpnyvk;)Z
 		COMMENT Called when another {@link ItemStack} is placed on an {@link ItemStack} of this item.
@@ -119,6 +120,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 thisStack
 		ARG 2 otherStack
 		ARG 3 thisSlot
+		ARG 4 type
 		ARG 5 player
 		ARG 6 cursorStackReference
 	METHOD m_plxsgnqi postHit (Lnet/minecraft/unmapped/C_sddaxwyk;Lnet/minecraft/unmapped/C_usxaxydn;Lnet/minecraft/unmapped/C_usxaxydn;)V
@@ -135,7 +137,6 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		ARG 1 stack
 		ARG 3 entity
 		ARG 4 slot
-	METHOD m_rwziztnd validateComponents (Lnet/minecraft/unmapped/C_sddaxwyk;)V
 	METHOD m_ucwrwzur byRawId (I)Lnet/minecraft/unmapped/C_vorddnax;
 		ARG 0 id
 	METHOD m_uuqggdre getRawId (Lnet/minecraft/unmapped/C_vorddnax;)I
@@ -187,6 +188,7 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		METHOD m_afqddqrj tool (Lnet/minecraft/unmapped/C_bemqmqey;Lnet/minecraft/unmapped/C_ednuhnnn;FFF)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 			ARG 1 material
 			ARG 2 mineableTag
+		METHOD m_akjvsqws spawnEgg (Lnet/minecraft/unmapped/C_ogavsvbr;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
 		METHOD m_bcgoheyn (Lnet/minecraft/unmapped/C_xhhleach;)Ljava/lang/String;
 			ARG 0 key
 		METHOD m_dmwpwxbl food (Lnet/minecraft/unmapped/C_cgikuact;Lnet/minecraft/unmapped/C_ybwnbwdi;)Lnet/minecraft/unmapped/C_vorddnax$C_bfrytpdl;
@@ -298,3 +300,4 @@ CLASS net/minecraft/unmapped/C_vorddnax net/minecraft/item/Item
 		METHOD m_fyhcyijp getLookup ()Lnet/minecraft/unmapped/C_vtbxyypo$C_etmlgbig;
 		METHOD m_iygpuvqa of (Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_vorddnax$C_rdhfmrgz;
 		METHOD m_krwdvrdq getTickRate ()F
+		METHOD m_xanpdwrg isPeaceful ()Z
