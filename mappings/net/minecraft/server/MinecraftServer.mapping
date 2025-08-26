@@ -17,7 +17,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	COMMENT @see net.minecraft.server.integrated.IntegratedServer
 	FIELD f_akozhelv tickManager Lnet/minecraft/unmapped/C_ogibcuum;
 	FIELD f_cprjvpov playerManager Lnet/minecraft/unmapped/C_digmgtxw;
-	FIELD f_cyhowiqj pvpEnabled Z
 	FIELD f_dzhyipcc MAX_STATUS_PLAYER_SAMPLE I
 	FIELD f_emdhztny saveHandler Lnet/minecraft/unmapped/C_wnawwdpy;
 	FIELD f_fabfcdrs lastPlayerSampleUpdate J
@@ -33,7 +32,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_iajreeug running Z
 	FIELD f_iastsxwn OVERLOADED_WARNING_INTERVAL_NANOS J
 	FIELD f_iwlcwdqu needsDebugSetup Z
-	FIELD f_iyplpobq flightEnabled Z
 	FIELD f_jcreuraz loading Z
 	FIELD f_jkdpidqz serverThread Ljava/lang/Thread;
 	FIELD f_jkeyeddz recorderResultConsumer Ljava/util/function/Consumer;
@@ -78,7 +76,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_wmdvdqlf serverId Ljava/lang/String;
 	FIELD f_wsnekgbx serverPort I
 	FIELD f_xpelegwm networkIo Lnet/minecraft/unmapped/C_mitbewqx;
-	FIELD f_ydhbqcwa ANONYMOUS_GAME_PROFILE Lcom/mojang/authlib/GameProfile;
+	FIELD f_ydhbqcwa ANONYMOUS_GAME_PROFILE Lnet/minecraft/unmapped/C_zavnbfdi;
 	FIELD f_yfosyphy averageTickMillis F
 	FIELD f_ypvxjvas layeredRegistryManager Lnet/minecraft/unmapped/C_bcpxdrik;
 	FIELD f_yqwhnmdp demo Z
@@ -86,9 +84,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD f_zknekmqa services Lnet/minecraft/unmapped/C_vmxvaoqe;
 	FIELD f_zsibtikt playerIdleTimeout I
 	METHOD m_aazpmrxf getServerPort ()I
-	METHOD m_abjphurm getSpawnProtectionRadius ()I
-	METHOD m_abpffcdv setFlightEnabled (Z)V
-		ARG 1 flightEnabled
 	METHOD m_acpovbib createServerMetadata ()Lnet/minecraft/unmapped/C_bwttende;
 	METHOD m_aefyjgaj adjustTrackingDistance (I)I
 		ARG 1 initialDistance
@@ -200,8 +195,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 path
 	METHOD m_ihpdtrms setDifficultyLocked (Z)V
 		ARG 1 locked
-	METHOD m_iiseoobd kickNonWhitelistedPlayers (Lnet/minecraft/unmapped/C_pennblrk;)V
-		ARG 1 source
+	METHOD m_iiseoobd kickNonWhitelistedPlayers ()V
 	METHOD m_iqernmfn requireResourcePack ()Z
 	METHOD m_ixudjtvq setDefaultGameMode (Lnet/minecraft/unmapped/C_lghcpyvl;)V
 		ARG 1 gameMode
@@ -314,8 +308,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_srzlhtrj (Lnet/minecraft/unmapped/C_dzczqjri;)V
 		ARG 1 ignored
 	METHOD m_telvrtyu shouldPreventProxyConnections ()Z
-	METHOD m_tfmvlvzf setPvpEnabled (Z)V
-		ARG 1 pvpEnabled
 	METHOD m_tfzihhsk setupServer ()Z
 		COMMENT Setups a Minecraft server to be ready for players to connect.
 		COMMENT This method does several things including loading server properties and loading worlds.
@@ -325,7 +317,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_tnfyjhlb loadDataPacks (Lnet/minecraft/unmapped/C_dqfyacfy;Lnet/minecraft/unmapped/C_yknpgzdr;ZZ)Lnet/minecraft/unmapped/C_yknpgzdr;
 		ARG 0 resourcePackManager
 		ARG 2 safeMode
-	METHOD m_tnvwblvm getOpPermissionLevel ()I
 	METHOD m_tozcksne getPlayerManager ()Lnet/minecraft/unmapped/C_digmgtxw;
 	METHOD m_ttqfvxjp isHost (Lnet/minecraft/unmapped/C_zavnbfdi;)Z
 	METHOD m_udgarlbd getAdvancementLoader ()Lnet/minecraft/unmapped/C_fktoyupt;
@@ -362,9 +353,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD m_wkntqsof getMessageDecorator ()Lnet/minecraft/unmapped/C_gjowlytq;
 	METHOD m_wktlzxaq exit ()V
 	METHOD m_wpevisnw getModdedStatusMessage ()Lnet/minecraft/unmapped/C_wlkuksof;
-	METHOD m_wtjbvmza isFlightEnabled ()Z
 	METHOD m_wuxtoyee getGameRules ()Lnet/minecraft/unmapped/C_xmldumst;
-	METHOD m_wyhqhpek getPlayerIdleTimeout ()I
 	METHOD m_xchalxdt saveAllWorlds (ZZZ)Z
 		COMMENT Saves the server to the data storage device.
 		COMMENT <p>
