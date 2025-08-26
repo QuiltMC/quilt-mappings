@@ -8,7 +8,6 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	FIELD f_gwzutkia BANNED_IPS_FILE Ljava/io/File;
 	FIELD f_hzbuciyd ops Lnet/minecraft/unmapped/C_bkrwbmlh;
 	FIELD f_ibywdhpx server Lnet/minecraft/server/MinecraftServer;
-	FIELD f_jdcrxyqk maxPlayers I
 	FIELD f_jkcqzwfc LATENCY_UPDATE_INTERVAL I
 	FIELD f_knmbusbu saveHandler Lnet/minecraft/unmapped/C_wnawwdpy;
 	FIELD f_kxdchaxd DATE_FORMATTER Ljava/text/SimpleDateFormat;
@@ -21,14 +20,8 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	FIELD f_sfaqcgxd WHITELIST_FILE Ljava/io/File;
 	FIELD f_uesyywbz whitelist Lnet/minecraft/unmapped/C_indzsqqb;
 	FIELD f_ukbtafme bannedProfiles Lnet/minecraft/unmapped/C_dtxlpdok;
-	FIELD f_wyxwtdwu whitelistEnabled Z
 	FIELD f_ycuqhtxl simulationDistance I
 	FIELD f_zscwvcda advancementTrackers Ljava/util/Map;
-	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/unmapped/C_bcpxdrik;Lnet/minecraft/unmapped/C_wnawwdpy;I)V
-		ARG 1 server
-		ARG 2 registryManager
-		ARG 3 saveHandler
-		ARG 4 maxPlayers
 	METHOD m_aanidhbc sendToAll (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 packet
 	METHOD m_alhdvtsy getServer ()Lnet/minecraft/server/MinecraftServer;
@@ -67,8 +60,6 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_gzunbvqs savePlayerData (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_hgihvlst getPlayerNames ()[Ljava/lang/String;
-	METHOD m_hhzxvoqt getPlayer (Ljava/util/UUID;)Lnet/minecraft/unmapped/C_mxrobsgg;
-		ARG 1 uuid
 	METHOD m_hwptlmmi saveAllPlayerData ()V
 	METHOD m_ihjtyqjy sendToAround (Lnet/minecraft/unmapped/C_jzrpycqo;DDDDLnet/minecraft/unmapped/C_xhhleach;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
 		ARG 1 player
@@ -89,7 +80,6 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_knqfidpk getMaxPlayerCount ()I
 	METHOD m_lcjqwsri getCurrentPlayerCount ()I
 	METHOD m_lcqhthnk getWhitelistedNames ()[Ljava/lang/String;
-	METHOD m_mddxogwe addToOperators (Lnet/minecraft/unmapped/C_zavnbfdi;)V
 	METHOD m_mflhwexj disconnectDuplicateLogins (Ljava/util/UUID;)Z
 	METHOD m_mjqfucaf addWorldBorderListener (Lnet/minecraft/unmapped/C_bdwnwhiu;)V
 		ARG 1 world
@@ -99,8 +89,7 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 	METHOD m_mqvtmcqp sendCommandTree (Lnet/minecraft/unmapped/C_mxrobsgg;I)V
 		ARG 1 player
 		ARG 2 permissionLevel
-	METHOD m_ngykykkq onPlayerConnect (Lnet/minecraft/unmapped/C_oasmcckk;Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_eyqfalbd;)V
-		ARG 1 connection
+	METHOD m_ngykykkq onPlayerConnect (Lnet/minecraft/unmapped/C_rwsjyxug;Lnet/minecraft/unmapped/C_mxrobsgg;Lnet/minecraft/unmapped/C_eyqfalbd;)V
 		ARG 2 player
 	METHOD m_oepngqek updatePlayerLatency ()V
 	METHOD m_oqpuylzn sendSystemMessageToOtherTeams (Lnet/minecraft/unmapped/C_jzrpycqo;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
@@ -124,8 +113,6 @@ CLASS net/minecraft/unmapped/C_digmgtxw net/minecraft/server/PlayerManager
 		ARG 1 player
 		ARG 2 world
 	METHOD m_ufzzdnwm onDataPacksReloaded ()V
-	METHOD m_utvtiiwg setWhitelistEnabled (Z)V
-		ARG 1 whitelistEnabled
 	METHOD m_vppvrdqj sendPlayerStatus (Lnet/minecraft/unmapped/C_mxrobsgg;)V
 		ARG 1 player
 	METHOD m_xievpzlg isSecure (Lnet/minecraft/unmapped/C_zzdolisx;)Z
