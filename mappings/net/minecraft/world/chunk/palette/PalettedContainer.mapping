@@ -1,9 +1,12 @@
 CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/PalettedContainer
+	FIELD f_bfbmxeef paletteProvider Lnet/minecraft/unmapped/C_rvczxjrz;
 	FIELD f_edgidzdn data Lnet/minecraft/unmapped/C_aehiirzw$C_zdxjpjcl;
 	FIELD f_stnxqmvw MIN_PALETTE_BITS I
 	FIELD f_wylupdgt lockHelper Lnet/minecraft/unmapped/C_wmkxzols;
 	METHOD <init> (Lnet/minecraft/unmapped/C_aehiirzw;)V
 		ARG 1 container
+	METHOD m_adiygqxy read (Lnet/minecraft/unmapped/C_rvczxjrz;Lnet/minecraft/unmapped/C_kedlqxpi$C_pmiurczo;)Lcom/mojang/serialization/DataResult;
+		ARG 1 serializedContainer
 	METHOD m_faqwumtl getCompatibleData (Lnet/minecraft/unmapped/C_aehiirzw$C_zdxjpjcl;I)Lnet/minecraft/unmapped/C_aehiirzw$C_zdxjpjcl;
 		ARG 1 data
 		ARG 2 bits
@@ -12,6 +15,7 @@ CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/Palett
 		ARG 2 y
 		ARG 3 z
 		ARG 4 value
+	METHOD m_jmdckqbg createPalettedCodec (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_rvczxjrz;Ljava/lang/Object;)Lcom/mojang/serialization/Codec;
 	METHOD m_lmrbywvo readPacket (Lnet/minecraft/unmapped/C_idfydwco;)V
 	METHOD m_mrxrbahp set (ILjava/lang/Object;)V
 		ARG 1 index
@@ -19,12 +23,17 @@ CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/Palett
 	METHOD m_olzskczg setAndGetOldValue (ILjava/lang/Object;)Ljava/lang/Object;
 		ARG 1 index
 		ARG 2 value
+	METHOD m_szxyhmkq createCodec (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_rvczxjrz;Ljava/lang/Object;Lnet/minecraft/unmapped/C_kedlqxpi$C_znpcjlst;)Lcom/mojang/serialization/Codec;
+		ARG 0 entryCodec
+		ARG 2 partialId
+		ARG 3 reader
 	METHOD m_udggqttg unlock ()V
 	METHOD m_vtsjlcza setSync (IIILjava/lang/Object;)Ljava/lang/Object;
 		ARG 1 x
 		ARG 2 y
 		ARG 3 z
 		ARG 4 value
+	METHOD m_xbfuvkjx createReadableCodec (Lcom/mojang/serialization/Codec;Lnet/minecraft/unmapped/C_rvczxjrz;Ljava/lang/Object;)Lcom/mojang/serialization/Codec;
 	METHOD m_xsfxrokt lock ()V
 	METHOD m_yguodurj set (IIILjava/lang/Object;)V
 		ARG 1 x
@@ -37,10 +46,16 @@ CLASS net/minecraft/unmapped/C_aehiirzw net/minecraft/world/chunk/palette/Palett
 	CLASS C_zdxjpjcl Data
 		FIELD f_iurhaapq palette Lnet/minecraft/unmapped/C_peoxnqbd;
 		FIELD f_tgtlwtrx storage Lnet/minecraft/unmapped/C_nwtdaytc;
+		FIELD f_xzrprvit configuration Lnet/minecraft/unmapped/C_uatabqag;
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
+		METHOD m_dhihluul configuration ()Lnet/minecraft/unmapped/C_uatabqag;
 		METHOD m_dtngidhm palette ()Lnet/minecraft/unmapped/C_peoxnqbd;
 		METHOD m_flalzzmu copyFrom (Lnet/minecraft/unmapped/C_peoxnqbd;Lnet/minecraft/unmapped/C_nwtdaytc;)V
 			ARG 1 palette
 			ARG 2 storage
+		METHOD m_mcfvelua copyData ()Lnet/minecraft/unmapped/C_aehiirzw$C_zdxjpjcl;
+		METHOD m_nlfqtswo getPacketSize (Lnet/minecraft/unmapped/C_feaetnaz;)I
 		METHOD m_ovcnzfkp storage ()Lnet/minecraft/unmapped/C_nwtdaytc;
+		METHOD m_uqcdjygh write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_feaetnaz;)V
+			ARG 1 buf
