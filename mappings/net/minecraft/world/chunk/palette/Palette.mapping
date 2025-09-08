@@ -10,7 +10,7 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 	METHOD m_cgvusdyw hasAny (Ljava/util/function/Predicate;)Z
 		COMMENT {@return {@code true} if any entry in this palette passes the {@code
 		COMMENT predicate}}
-	METHOD m_frsswtag getId (Ljava/lang/Object;)I
+	METHOD m_frsswtag getId (Ljava/lang/Object;Lnet/minecraft/unmapped/C_sxhmfrig;)I
 		COMMENT {@return the identifier of an object in this palette}
 		COMMENT <p>
 		COMMENT If the object does not yet exist in this palette, this palette will
@@ -21,19 +21,15 @@ CLASS net/minecraft/unmapped/C_peoxnqbd net/minecraft/world/chunk/palette/Palett
 		COMMENT {@return the object associated with the given {@code id}}
 		COMMENT
 		COMMENT @throws MissingPaletteEntryException if this identifier does not exist in this palette
-	METHOD m_hrjyiuxt copy (Lnet/minecraft/unmapped/C_sxhmfrig;)Lnet/minecraft/unmapped/C_peoxnqbd;
-	METHOD m_ljtxzsdf getPacketSize ()I
+	METHOD m_hrjyiuxt copy ()Lnet/minecraft/unmapped/C_peoxnqbd;
+	METHOD m_ljtxzsdf getPacketSize (Lnet/minecraft/unmapped/C_feaetnaz;)I
 		COMMENT {@return the serialized size of this palette in a byte buf, in bytes}
-	METHOD m_lprmlgjn write (Lnet/minecraft/unmapped/C_idfydwco;)V
+	METHOD m_lprmlgjn write (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_feaetnaz;)V
 		COMMENT Writes this palette to the {@code buf}.
-	METHOD m_osqhbwdc read (Lnet/minecraft/unmapped/C_idfydwco;)V
+	METHOD m_osqhbwdc read (Lnet/minecraft/unmapped/C_idfydwco;Lnet/minecraft/unmapped/C_feaetnaz;)V
 		COMMENT Initializes this palette from the {@code buf}.
 		COMMENT Clears the preexisting data in this palette.
 	METHOD m_yfzgggar size ()I
 		COMMENT {@return the size of the palette}
 	CLASS C_oextuzvq Factory
 		COMMENT An interface for easy creation of palettes.
-		METHOD create create (ILnet/minecraft/unmapped/C_feaetnaz;Lnet/minecraft/unmapped/C_sxhmfrig;Ljava/util/List;)Lnet/minecraft/unmapped/C_peoxnqbd;
-			COMMENT Creates a palette.
-			COMMENT
-			COMMENT @return the created new palette
