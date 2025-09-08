@@ -12,6 +12,8 @@ import quilt.internal.plugin.MapMinecraftJarsPlugin;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
 import quilt.internal.task.MappingsDirConsumingTask;
 
+import java.nio.file.Path;
+
 /**
  * Removes any invalid mappings found in the passed {@link #getMappingsDir() mappingsDir}.
  * <p>
@@ -36,13 +38,10 @@ public abstract class DropInvalidMappingsTask extends DefaultTask implements Map
     public void dropInvalidMappings() {
         this.getLogger().info(":dropping invalid mappings");
 
-        final String[] args = new String[]{
-            this.getPerVersionMappingsJar().get().getAsFile().getAbsolutePath(),
-            this.getMappingsDir().get().getAsFile().getAbsolutePath()
-        };
-
         try {
-            new DropInvalidMappingsCommand().run(args);
+            final Path jar = this.getPerVersionMappingsJar().get().getAsFile().toPath().toAbsolutePath();
+            final Path mappings = this.getMappingsDir().get().getAsFile().toPath().toAbsolutePath();
+            DropInvalidMappingsCommand.run(jar, mappings, mappings);
         } catch (Exception e) {
             throw new GradleException("Failed to drop mappings", e);
         }
