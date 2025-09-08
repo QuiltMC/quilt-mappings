@@ -4,25 +4,19 @@ CLASS net/minecraft/unmapped/C_fxiqpxaf net/minecraft/client/gui/Element
 	COMMENT <p>
 	COMMENT Mouse coordinate is bounded by the size of the window in
 	COMMENT pixels.
-	METHOD m_cbyglwbg keyReleased (III)Z
+	METHOD m_cbyglwbg keyReleased (Lnet/minecraft/unmapped/C_tuexkjlb;)Z
 		COMMENT Callback for when a key down event has been captured.
 		COMMENT
 		COMMENT The key code is identified by the constants in
 		COMMENT {@link org.lwjgl.glfw.GLFW GLFW} class.
 		COMMENT
 		COMMENT @return {@code true} to indicate that the event handling is successful/valid
-		COMMENT @see net.minecraft.client.Keyboard#onKey(long, int, int, int, int)
+		COMMENT @see net.minecraft.client.Keyboard#onKey(long, int, net.minecraft.client.input.KeyEvent)
 		COMMENT @see org.lwjgl.glfw.GLFW#GLFW_KEY_Q
 		COMMENT @see org.lwjgl.glfw.GLFWKeyCallbackI#invoke(long, int, int, int, int)
-		ARG 1 keyCode
-			COMMENT the named key code of the event as described in the {@link org.lwjgl.glfw.GLFW GLFW} class
-		ARG 2 scanCode
-			COMMENT the unique/platform-specific scan code of the keyboard input
-		ARG 3 modifiers
-			COMMENT a GLFW bitfield describing the modifier keys that are held down (see <a href="https://www.glfw.org/docs/3.3/group__mods.html">GLFW Modifier key flags</a>)
 	METHOD m_duvbqmml getArea ()Lnet/minecraft/unmapped/C_erwldarl;
 	METHOD m_fagkaubv getCurrentFocusPath ()Lnet/minecraft/unmapped/C_ballifpu;
-	METHOD m_fpfqbhfx mouseClicked (DDIZ)Z
+	METHOD m_fpfqbhfx mouseClicked (Lnet/minecraft/unmapped/C_vvcrnmew;Z)Z
 		COMMENT Callback for when a mouse button down event
 		COMMENT has been captured.
 		COMMENT
@@ -30,14 +24,8 @@ CLASS net/minecraft/unmapped/C_fxiqpxaf net/minecraft/client/gui/Element
 		COMMENT {@link org.lwjgl.glfw.GLFW GLFW} class.
 		COMMENT
 		COMMENT @return {@code true} to indicate that the event handling is successful/valid
-		COMMENT @see net.minecraft.client.Mouse#onMouseButton(long, int, int, int)
+		COMMENT @see net.minecraft.client.Mouse#onMouseButton(long, net.minecraft.client.input.MouseButtonInfo, int)
 		COMMENT @see org.lwjgl.glfw.GLFW#GLFW_MOUSE_BUTTON_1
-		ARG 1 mouseX
-			COMMENT the X coordinate of the mouse
-		ARG 3 mouseY
-			COMMENT the Y coordinate of the mouse
-		ARG 5 button
-			COMMENT the mouse button number
 	METHOD m_gexodpgp mouseMoved (DD)V
 		COMMENT Callback for when a mouse move event has been captured.
 		COMMENT
@@ -46,20 +34,16 @@ CLASS net/minecraft/unmapped/C_fxiqpxaf net/minecraft/client/gui/Element
 			COMMENT the X coordinate of the mouse
 		ARG 3 mouseY
 			COMMENT the Y coordinate of the mouse
-	METHOD m_jstdhuev charTyped (CI)Z
+	METHOD m_jstdhuev charTyped (Lnet/minecraft/unmapped/C_fteygouq;)Z
 		COMMENT Callback for when a character input has been captured.
 		COMMENT
 		COMMENT The key code is identified by the constants in
 		COMMENT {@link org.lwjgl.glfw.GLFW GLFW} class.
 		COMMENT
 		COMMENT @return {@code true} to indicate that the event handling is successful/valid
-		COMMENT @see net.minecraft.client.Keyboard#onChar(long, int, int)
+		COMMENT @see net.minecraft.client.Keyboard#onChar(long, net.minecraft.client.input.CharacterEvent)
 		COMMENT @see org.lwjgl.glfw.GLFW#GLFW_KEY_Q
 		COMMENT @see org.lwjgl.glfw.GLFWKeyCallbackI#invoke(long, int, int, int, int)
-		ARG 1 c
-			COMMENT the captured character
-		ARG 2 modifiers
-			COMMENT a GLFW bitfield describing the modifier keys that are held down (see <a href="https://www.glfw.org/docs/3.3/group__mods.html">GLFW Modifier key flags</a>)
 	METHOD m_nxrnpxyk isMouseOver (DD)Z
 		COMMENT Checks if the mouse position is within the bound
 		COMMENT of the element.
@@ -69,23 +53,17 @@ CLASS net/minecraft/unmapped/C_fxiqpxaf net/minecraft/client/gui/Element
 			COMMENT the X coordinate of the mouse
 		ARG 3 mouseY
 			COMMENT the Y coordinate of the mouse
-	METHOD m_qwrbtcbl keyPressed (III)Z
+	METHOD m_qwrbtcbl keyPressed (Lnet/minecraft/unmapped/C_tuexkjlb;)Z
 		COMMENT Callback for when a key down event has been captured.
 		COMMENT
 		COMMENT The key code is identified by the constants in
 		COMMENT {@link org.lwjgl.glfw.GLFW GLFW} class.
 		COMMENT
 		COMMENT @return {@code true} to indicate that the event handling is successful/valid
-		COMMENT @see net.minecraft.client.Keyboard#onKey(long, int, int, int, int)
+		COMMENT @see net.minecraft.client.Keyboard#onKey(long, int, net.minecraft.client.input.KeyEvent)
 		COMMENT @see org.lwjgl.glfw.GLFW#GLFW_KEY_Q
 		COMMENT @see org.lwjgl.glfw.GLFWKeyCallbackI#invoke(long, int, int, int, int)
-		ARG 1 keyCode
-			COMMENT the named key code of the event as described in the {@link org.lwjgl.glfw.GLFW GLFW} class
-		ARG 2 scanCode
-			COMMENT the unique/platform-specific scan code of the keyboard input
-		ARG 3 modifiers
-			COMMENT a GLFW bitfield describing the modifier keys that are held down (see <a href="https://www.glfw.org/docs/3.3/group__mods.html">GLFW Modifier key flags</a>)
-	METHOD m_shbmcoxj mouseDragged (DDIDD)Z
+	METHOD m_shbmcoxj mouseDragged (Lnet/minecraft/unmapped/C_vvcrnmew;DD)Z
 		COMMENT Callback for when a mouse button drag event
 		COMMENT has been captured.
 		COMMENT
@@ -95,18 +73,12 @@ CLASS net/minecraft/unmapped/C_fxiqpxaf net/minecraft/client/gui/Element
 		COMMENT @return {@code true} to indicate that the event handling is successful/valid
 		COMMENT @see net.minecraft.client.Mouse#onCursorPos(long, double, double)
 		COMMENT @see org.lwjgl.glfw.GLFW#GLFW_MOUSE_BUTTON_1
-		ARG 1 mouseX
+		ARG 2 mouseX
 			COMMENT the current X coordinate of the mouse
-		ARG 3 mouseY
+		ARG 4 mouseY
 			COMMENT the current Y coordinate of the mouse
-		ARG 5 button
-			COMMENT the mouse button number
-		ARG 6 deltaX
-			COMMENT the difference of the current X with the previous X coordinate
-		ARG 8 deltaY
-			COMMENT the difference of the current Y with the previous Y coordinate
 	METHOD m_sxncwtsd setFocused (Z)V
-	METHOD m_vygbkdkf mouseReleased (DDI)Z
+	METHOD m_vygbkdkf mouseReleased (Lnet/minecraft/unmapped/C_vvcrnmew;)Z
 		COMMENT Callback for when a mouse button release event
 		COMMENT has been captured.
 		COMMENT
@@ -114,14 +86,8 @@ CLASS net/minecraft/unmapped/C_fxiqpxaf net/minecraft/client/gui/Element
 		COMMENT {@link org.lwjgl.glfw.GLFW GLFW} class.
 		COMMENT
 		COMMENT @return {@code true} to indicate that the event handling is successful/valid
-		COMMENT @see net.minecraft.client.Mouse#onMouseButton(long, int, int, int)
+		COMMENT @see net.minecraft.client.Mouse#onMouseButton(long, net.minecraft.client.input.MouseButtonInfo, int)
 		COMMENT @see org.lwjgl.glfw.GLFW#GLFW_MOUSE_BUTTON_1
-		ARG 1 mouseX
-			COMMENT the X coordinate of the mouse
-		ARG 3 mouseY
-			COMMENT the Y coordinate of the mouse
-		ARG 5 button
-			COMMENT the mouse button number
 	METHOD m_whraqgee isFocused ()Z
 	METHOD m_yirxqyjo nextFocusPath (Lnet/minecraft/unmapped/C_ltcpucbp;)Lnet/minecraft/unmapped/C_ballifpu;
 		ARG 1 event

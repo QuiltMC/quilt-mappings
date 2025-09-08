@@ -7,8 +7,6 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 	FIELD f_knkzbnpx maxRadius I
 	FIELD f_lforvemw warningTime I
 	FIELD f_sssgwdin damagePerBlock D
-	FIELD f_toyylbpi DEFAULT_BORDER Lnet/minecraft/unmapped/C_pneibfez$C_koayjdos;
-	FIELD f_wmydarfu safeZone D
 	FIELD f_xygrkzdm MAX_SIZE D
 	FIELD f_yumwsdac warningBlocks I
 	METHOD m_agoadbhk getListeners ()Ljava/util/List;
@@ -31,10 +29,8 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 	METHOD m_fbbkckdz addListener (Lnet/minecraft/unmapped/C_oeeocvfz;)V
 		ARG 1 listener
 	METHOD m_fijwfksk getSizeLerpTarget ()D
-	METHOD m_gghmggzw write ()Lnet/minecraft/unmapped/C_pneibfez$C_koayjdos;
 	METHOD m_hghifpnu contains (Lnet/minecraft/unmapped/C_hynzadkk;)Z
 		ARG 1 pos
-	METHOD m_hrnecmit getSizeLerpTime ()J
 	METHOD m_icldefya asVoxelShape ()Lnet/minecraft/unmapped/C_zscvhwbd;
 	METHOD m_irhvnhxb getCenterX ()D
 	METHOD m_jsnaccqt getDistanceInsideBorder (Lnet/minecraft/unmapped/C_astfners;)D
@@ -73,16 +69,9 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 		ARG 1 x
 		ARG 3 z
 	METHOD m_shclqsot getStage ()Lnet/minecraft/unmapped/C_eabcdwzy;
-	METHOD m_suimnfyl setSafeZone (D)V
-		COMMENT Sets the safe zone of this border and notifies all listeners.
-		ARG 1 safeZone
 	METHOD m_suylfcrm setMaxRadius (I)V
 		COMMENT Sets the maximum radius of this border and notifies its area.
 		ARG 1 maxRadius
-	METHOD m_tegoerqq getSafeZone ()D
-		COMMENT Returns the safe zone of this border.
-		COMMENT
-		COMMENT <p>The default value is 5.0.
 	METHOD m_uaflvqmh load (Lnet/minecraft/unmapped/C_pneibfez$C_koayjdos;)V
 		ARG 1 properties
 	METHOD m_ugghurew getDamagePerBlock ()D
@@ -130,11 +119,9 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 		FIELD f_htijduel safeZone D
 		FIELD f_jfppmkhx warningTime I
 		FIELD f_lfcnpvnu centerX D
-		FIELD f_nakxugdf sizeLerpTime J
 		FIELD f_pfzaqxzg size D
 		FIELD f_phygimsi centerZ D
 		FIELD f_qbfwbzjb warningBlocks I
-		FIELD f_voxwpbtc sizeLerpTarget D
 		METHOD <init> (DDDDIIDJD)V
 			ARG 1 centerX
 			ARG 3 centerZ
@@ -147,19 +134,6 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 			ARG 15 sizeLerpTarget
 		METHOD <init> (Lnet/minecraft/unmapped/C_pneibfez;)V
 			ARG 1 worldBorder
-		METHOD m_asurbull getWarningTime ()I
-		METHOD m_btawsilq writeNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)V
-			ARG 1 nbt
-		METHOD m_ccfbbyzi fromDynamic (Lcom/mojang/serialization/DynamicLike;Lnet/minecraft/unmapped/C_pneibfez$C_koayjdos;)Lnet/minecraft/unmapped/C_pneibfez$C_koayjdos;
-			ARG 1 properties
-		METHOD m_dsmxdcba getWarningBlocks ()I
-		METHOD m_dtgfbjqm getCenterX ()D
-		METHOD m_hfyvrjgo getSizeLerpTarget ()D
-		METHOD m_jadxqtxd getCenterZ ()D
-		METHOD m_lxzjofvk getSafeZone ()D
-		METHOD m_nololknn getSize ()D
-		METHOD m_tdydkcnr getSizeLerpTime ()J
-		METHOD m_thsezyhe getDamagePerBlock ()D
 	CLASS C_ubxsbnzy MovingArea
 		FIELD f_dkwcszsx oldSize D
 		FIELD f_gzkcyzfv timeDuration D
@@ -175,7 +149,6 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 		METHOD m_buwvvfgr getBoundSouth ()D
 		METHOD m_dqjicgmd onMaxRadiusChanged ()V
 		METHOD m_jvrhfdwg getSizeLerpTarget ()D
-		METHOD m_kbyatwkn getSizeLerpTime ()J
 		METHOD m_lrqpajyi getBoundWest ()D
 		METHOD m_lzeetxkt onCenterChanged ()V
 		METHOD m_mteyowuq asVoxelShape ()Lnet/minecraft/unmapped/C_zscvhwbd;
