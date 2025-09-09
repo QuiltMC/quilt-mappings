@@ -63,9 +63,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT players. This ensures all possible updates are accounted for.
 	METHOD m_hadjtdih save (Lnet/minecraft/unmapped/C_lwzmmmqr;)Z
 		ARG 1 chunk
-	METHOD m_jjidpbzz sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-		ARG 1 entity
-		ARG 2 packet
 	METHOD m_jmusvkuf getLightingProvider ()Lnet/minecraft/unmapped/C_bdzdhzyc;
 	METHOD m_jnrpdvfn getCompletedLevelSupplier (J)Ljava/util/function/IntSupplier;
 		ARG 1 pos
@@ -76,7 +73,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 	METHOD m_lxukttpf dump (Ljava/io/Writer;)V
 		ARG 1 writer
 	METHOD m_mlsrnydb getRandomState ()Lnet/minecraft/unmapped/C_edfiqifk;
-	METHOD m_mtihtfpz entryIterator ()Ljava/lang/Iterable;
 	METHOD m_mvnaomen getSquaredDistance (Lnet/minecraft/unmapped/C_ynrszrtu;Lnet/minecraft/unmapped/C_vgpupfxx;)D
 		ARG 0 pos
 	METHOD m_nhddmlfy getRegion (Lnet/minecraft/unmapped/C_gkderdjo;ILjava/util/function/IntFunction;)Ljava/util/concurrent/CompletableFuture;
@@ -92,9 +88,6 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 		COMMENT
 		COMMENT @see ServerChunkManager#updatePosition(ServerPlayerEntity)
 		ARG 1 player
-	METHOD m_phranalj sendToNearbyPlayers (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-		ARG 1 entity
-		ARG 2 packet
 	METHOD m_qcvnmgbx handlePlayerAddedOrRemoved (Lnet/minecraft/unmapped/C_mxrobsgg;Z)V
 		ARG 1 player
 		ARG 2 added
@@ -156,13 +149,9 @@ CLASS net/minecraft/unmapped/C_gxrpzacc net/minecraft/server/world/ThreadedChunk
 			ARG 1 player
 		METHOD m_pexcnzwn adjustTrackingDistance (I)I
 			ARG 1 initialDistance
-		METHOD m_qplwouhs sendToOtherNearbyPlayers (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-			ARG 1 packet
 		METHOD m_qrgjvysv updateTrackedStatus (Ljava/util/List;)V
 			COMMENT Updates the tracked status of this tracker's entity for the given players.
 			COMMENT
 			COMMENT @see updateTrackedStatus(ServerPlayerEntity)
 			ARG 1 players
 		METHOD m_ubnzhkyb getMaxTrackDistance ()I
-		METHOD m_yvjpwxjg sendToNearbyPlayers (Lnet/minecraft/unmapped/C_zyjtrjrl;)V
-			ARG 1 packet
