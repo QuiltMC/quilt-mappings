@@ -1,6 +1,5 @@
 CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRenderer
 	FIELD f_cboyeijz cameraChunkZ I
-	FIELD f_dprzqrwh frustum Lnet/minecraft/unmapped/C_jwzjqevg;
 	FIELD f_dqbrmnkm lastCameraYaw D
 	FIELD f_egoibmze CHUNK_SIZE I
 	FIELD f_fpgxhitd blockEntityRenderDispatcher Lnet/minecraft/unmapped/C_sicqxpzm;
@@ -68,11 +67,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_cznvyjrv tickParticles (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
 	METHOD m_dxaxfxmt addParticlesPass (Lnet/minecraft/unmapped/C_obrvgeej;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 frameGraph
-	METHOD m_eesirxud setupTerrain (Lnet/minecraft/unmapped/C_dcmtgrvm;Lnet/minecraft/unmapped/C_jwzjqevg;ZZ)V
-		ARG 1 camera
-		ARG 2 frustum
-		ARG 3 hasForcedFrustum
-		ARG 4 spectator
 	METHOD m_errmldkc addWeatherAndWorldBorderRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_vgpupfxx;FLcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 frameGraph
 		ARG 2 camera
@@ -111,10 +105,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_jwysdltg hasNoChunkBuildTasks ()Z
 	METHOD m_jynwvyuq killFrustum ()V
 	METHOD m_kgpnuhyu getEntityFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
-	METHOD m_khytiwdn setupFrustum (Lnet/minecraft/unmapped/C_vgpupfxx;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V
-		ARG 1 pos
-		ARG 2 modelViewMatrix
-		ARG 3 projectionMatrix
 	METHOD m_kpmnucwk shouldRenderBottomSky (F)Z
 		ARG 1 tickDelta
 	METHOD m_krdmlhzv getCapturedFrustum ()Lnet/minecraft/unmapped/C_jwzjqevg;
@@ -136,12 +126,6 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 4 newState
 		ARG 5 flags
 	METHOD m_nimwchzu drawEntityOutlinesFramebuffer ()V
-	METHOD m_nsrbbxvx render (Lnet/minecraft/unmapped/C_lioynfcp;Lnet/minecraft/unmapped/C_lrgsdfwv;ZLnet/minecraft/unmapped/C_dcmtgrvm;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Vector4f;Z)V
-		ARG 1 resourceAllocator
-		ARG 3 renderBlockOutline
-		ARG 4 camera
-		ARG 5 modelViewMatrix
-		ARG 6 projectionMatrix
 	METHOD m_olbxkwmx scheduleBlockRenders (IIIIII)V
 		ARG 1 minX
 		ARG 2 minY
