@@ -38,6 +38,12 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_acyjjnqq removeBlockBreakingInfo (Lnet/minecraft/unmapped/C_hluhvldy;)V
 		ARG 1 info
 	METHOD m_admjmrdo onSectionBuilt (Lnet/minecraft/unmapped/C_sjynkhfr$C_exmylrbc;)V
+	METHOD m_bsijywav drawBlockOutline (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igthdzux;DDDLnet/minecraft/unmapped/C_sckclmrn;I)V
+		ARG 1 matrices
+		ARG 2 consumer
+		ARG 3 offsetX
+		ARG 5 offsetY
+		ARG 7 offsetZ
 	METHOD m_cjgrgtiz scheduleBlockRenders (III)V
 		ARG 1 x
 		ARG 2 y
@@ -49,7 +55,13 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 2 height
 	METHOD m_dxaxfxmt addParticlesPass (Lnet/minecraft/unmapped/C_obrvgeej;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
 		ARG 1 frameGraph
+	METHOD m_errmldkc addWeatherAndWorldBorderRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_vgpupfxx;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
+		ARG 1 frameGraph
+		ARG 2 camera
 	METHOD m_erxhtaop getSections ()Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+	METHOD m_fkbybhsb renderBlockOutline (Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;Lnet/minecraft/unmapped/C_cnszsxvd;ZLnet/minecraft/unmapped/C_remxgboe;)V
+		ARG 1 vertices
+		ARG 3 renderTranslucentBlocks
 	METHOD m_frxfkurs getCloudRenderer ()Lnet/minecraft/unmapped/C_jjygzmqz;
 	METHOD m_hsvhpyyt loadEntityOutlineShader ()V
 	METHOD m_huehuesi getLightmapCoordinates (Lnet/minecraft/unmapped/C_xjeuupup;Lnet/minecraft/unmapped/C_hynzadkk;)I
@@ -99,6 +111,7 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 2 pos
 		ARG 3 stage
 	METHOD m_qnvtgvdp captureFrustum ()V
+	METHOD m_qtfwhseg tick (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
 	METHOD m_qypseyuy getWeatherFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_roxvmdfn getViewDistance ()D
 	METHOD m_rwjohyib scheduleBlockRerenderIfNeeded (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_txtbiemp;)V
@@ -113,6 +126,9 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_tboyskxy onSectionBecomingNonEmpty (J)V
 		ARG 1 chunkSectionPos
 	METHOD m_tgxmzbib getParticlesFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
+	METHOD m_uptmaubw addLateDebugPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_vgpupfxx;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lnet/minecraft/unmapped/C_jwzjqevg;)V
+		ARG 1 frameGraph
+		ARG 2 camera
 	METHOD m_uyzrbqdi rebuildSections (Lnet/minecraft/unmapped/C_dcmtgrvm;)V
 	METHOD m_uzhmpsuv scheduleBlockRender (III)V
 		ARG 1 x
@@ -123,6 +139,10 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 	METHOD m_vznbfahy applyFrustum (Lnet/minecraft/unmapped/C_jwzjqevg;)V
 		ARG 1 frustum
 	METHOD m_wcyzbxhv countRenderedSections ()I
+	METHOD m_whptjcei addMainPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_jwzjqevg;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;ZLnet/minecraft/unmapped/C_remxgboe;Lnet/minecraft/unmapped/C_lrgsdfwv;Lnet/minecraft/unmapped/C_eslcbfsq;)V
+		ARG 1 frameGraph
+		ARG 3 modelViewMatrix
+		ARG 5 blockOutline
 	METHOD m_wlewmnef addCloudRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_qaetpqjq;Lnet/minecraft/unmapped/C_vgpupfxx;FIF)V
 		ARG 1 frameGraph
 		ARG 2 mode
@@ -140,4 +160,8 @@ CLASS net/minecraft/unmapped/C_sfkkabhx net/minecraft/client/render/WorldRendere
 		ARG 1 pos
 	METHOD m_ypwknjzq getCloudsFramebuffer ()Lnet/minecraft/unmapped/C_xxwgvelc;
 	METHOD m_yyzjbtrm getChunkBuilder ()Lnet/minecraft/unmapped/C_sjynkhfr;
+	METHOD m_yzsrltvt renderBreakingProgress (Lnet/minecraft/unmapped/C_cnszsxvd;Lnet/minecraft/unmapped/C_igrgeffe$C_insrqxjm;Lnet/minecraft/unmapped/C_remxgboe;)V
+		ARG 2 vertices
 	METHOD m_znnjtopn getChunkDebugString ()Ljava/lang/String;
+	METHOD m_zsfofipj addSkyRenderPass (Lnet/minecraft/unmapped/C_obrvgeej;Lnet/minecraft/unmapped/C_dcmtgrvm;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
+		ARG 1 frameGraph
