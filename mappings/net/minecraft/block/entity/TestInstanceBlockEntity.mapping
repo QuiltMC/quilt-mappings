@@ -1,4 +1,5 @@
 CLASS net/minecraft/unmapped/C_ionovaet net/minecraft/block/entity/TestInstanceBlockEntity
+	FIELD f_adpqpaak errors Ljava/util/List;
 	FIELD f_gpceeemx RUNNING_SEGMENTS Ljava/util/List;
 	FIELD f_njpmstlt STRUCTURE_OFFSET Lnet/minecraft/unmapped/C_ceivtqhh;
 	FIELD f_ppeqmwra FAILURE_SEGMENTS Ljava/util/List;
@@ -36,6 +37,7 @@ CLASS net/minecraft/unmapped/C_ionovaet net/minecraft/block/entity/TestInstanceB
 		ARG 1 sendMessage
 	METHOD m_kpyvjolx placeStructure (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_abvlwuej;)V
 		ARG 2 structure
+	METHOD m_kyarbmzj clearErrors ()V
 	METHOD m_kycitfpq setFinished ()V
 	METHOD m_oqltqskt setData (Lnet/minecraft/unmapped/C_ionovaet$C_tqlcqxvy;)V
 		ARG 1 data
@@ -58,17 +60,25 @@ CLASS net/minecraft/unmapped/C_ionovaet net/minecraft/block/entity/TestInstanceB
 		COMMENT or {@link java.util.Optional#empty() Optional.empty()} otherwise
 		ARG 1 sendMessage
 	METHOD m_trhyoema getTestKey ()Ljava/util/Optional;
+	METHOD m_trtmvdrb getErrors ()Ljava/util/List;
 	METHOD m_uxsovudj tryReset (Ljava/util/function/Consumer;)V
 		ARG 1 sendMessage
 	METHOD m_uzejcgvj (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_hynzadkk;ZLjava/util/function/Consumer;Lnet/minecraft/unmapped/C_hynzadkk;)V
 		ARG 4 pos
 	METHOD m_vobfpzvq encloseInBarriers ()V
 	METHOD m_wsjirrzu tryPlaceStructure ()Z
+	METHOD m_xakogmhs addError (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_rdaqiwdt;)V
+		ARG 2 message
 	METHOD m_yhklcewi getStructurePos (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_yolyiibe (Lnet/minecraft/unmapped/C_cjzoxshv$C_rjzpeyec;)Ljava/lang/Boolean;
 		ARG 0 test
 	METHOD m_yxsaytba getRotatedStructurePos ()Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_zkruojou getStructureBox ()Lnet/minecraft/unmapped/C_hbcjzgoe;
+	CLASS C_tdrwnmym Error
+		FIELD f_szbkywcz message Lnet/minecraft/unmapped/C_rdaqiwdt;
+		FIELD f_xilmdtqb LIST_CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_yucbdxhp CODEC Lcom/mojang/serialization/Codec;
+		METHOD m_sslomfwk message ()Lnet/minecraft/unmapped/C_rdaqiwdt;
 	CLASS C_tqlcqxvy Data
 		METHOD m_hoqxjtyf withError (Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_ionovaet$C_tqlcqxvy;
 			ARG 1 message
