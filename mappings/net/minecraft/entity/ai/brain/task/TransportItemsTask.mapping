@@ -1,0 +1,131 @@
+CLASS net/minecraft/unmapped/C_qlwyqnpn net/minecraft/entity/ai/brain/task/TransportItemsTask
+	FIELD f_abuhlmcs onStartTraveling Ljava/util/function/Consumer;
+	FIELD f_addeyjnl target Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;
+	FIELD f_bxrymimf CONTINUE_INTERACTION_RANGE D
+	FIELD f_cfwcneak TARGET_INTERACTION_DURATION I
+	FIELD f_dwythopn interactionTickers Ljava/util/Map;
+	FIELD f_dznzseeu PATH_ENDED_INTERACTION_RANGE D
+	FIELD f_eeoggacm MAX_VISITED_POSITIONS I
+	FIELD f_esfzhwwv INTERACTION_RANGE D
+	FIELD f_ggpwlmwz MAX_TRANSPORTED_STACK_SIZE I
+	FIELD f_ijwztexm interactionTicks I
+	FIELD f_jcovxshe IDLE_COOLDOWN I
+	FIELD f_jvgaqnwb destPredicate Ljava/util/function/Predicate;
+	FIELD f_kcnzsamz VISITED_POSITIONS_MEMORY_DURATION I
+	FIELD f_mxpgkxii canNotUseTargetPredicate Ljava/util/function/Predicate;
+	FIELD f_nyiojbjc interactionState Lnet/minecraft/unmapped/C_qlwyqnpn$C_aggtsqwi;
+	FIELD f_obqnmslf horizontalSearchDistance I
+	FIELD f_qybhnvum QUEUE_RANGE D
+	FIELD f_sjaelovm PASSENGER_MOB_TARGET_SEARCH_DISTANCE I
+	FIELD f_ssyuzfks sourcePredicate Ljava/util/function/Predicate;
+	FIELD f_txbjgwse MAX_UNREACHABLE_POSITIONS I
+	FIELD f_yokoqpun transportState Lnet/minecraft/unmapped/C_qlwyqnpn$C_zlleqlpw;
+	FIELD f_zbjhcbst verticalSearchDistance I
+	FIELD f_zcjxhknx speedMultiplier F
+	METHOD m_adilpmwe isTargetInRange (DLnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_vgpupfxx;)Z
+		ARG 1 horizontalRange
+		ARG 3 target
+		ARG 6 pos
+	METHOD m_aevivezl canDeposit (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)Z
+	METHOD m_aulqthzb startTraveling (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_bihppfac onTargetCompleted (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_bvhcpwck takeStackImpl (Lnet/minecraft/unmapped/C_pjtstjoq;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 0 inventory
+	METHOD m_clzpnwip tickInteractionImpl (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_hqdayibh;)V
+		ARG 1 target
+	METHOD m_dqopuoco getInteractionRange (Lnet/minecraft/unmapped/C_hqdayibh;)D
+	METHOD m_egtxhbih depositStack (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)V
+	METHOD m_faexkfqy isTargetBlocked (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;)Z
+		ARG 2 target
+	METHOD m_fqkhkqqk getUnreachableTransportBlockPositions (Lnet/minecraft/unmapped/C_hqdayibh;)Ljava/util/Set;
+	METHOD m_fsrofbbs addHalfHeight (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 2 pos
+	METHOD m_fwatfiio isNotEmpty (Lnet/minecraft/unmapped/C_pjtstjoq;)Z
+		ARG 0 inventory
+	METHOD m_gbqgdbnc getVerticalSearchDistance (Lnet/minecraft/unmapped/C_hqdayibh;)I
+	METHOD m_gdnoacue stopMoving (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_gludzyxb createTargetInteractionCallback (Lnet/minecraft/unmapped/C_qlwyqnpn$C_aggtsqwi;)Ljava/util/function/BiConsumer;
+		ARG 1 state
+	METHOD m_gsfwkwbi (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_qlwyqnpn$C_qrqwoplu;)V
+		ARG 3 ticker
+	METHOD m_jlmcdnqd updateInvalidTarget (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hqdayibh;)Z
+	METHOD m_juvqjkla pathIsNotUnreachable (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_hqdayibh;)Z
+		ARG 2 target
+	METHOD m_khsholtu abandonTarget (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_mnwcasku (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;)Lnet/minecraft/unmapped/C_ovcqqyqp;
+		ARG 1 connectedTarget
+	METHOD m_mwugokjz markVisitedAsUnreachable (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)V
+		ARG 3 visited
+	METHOD m_ntftllko completeTargetInteraction (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;Ljava/util/function/BiConsumer;Ljava/util/function/BiConsumer;Ljava/util/function/BiConsumer;Ljava/util/function/BiConsumer;)V
+		ARG 2 inventory
+		ARG 3 onTakeStack
+		ARG 4 onTakeNoStack
+		ARG 5 onDepositStack
+		ARG 6 onDepositNoStack
+	METHOD m_ntyceudf tickInteraction (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hqdayibh;)V
+		ARG 1 target
+	METHOD m_nubtcsjh canSeeTarget (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_vgpupfxx;)Z
+		ARG 1 target
+		ARG 4 pos
+	METHOD m_oouozrfi targetMatchesWorld (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;)Z
+		ARG 2 target
+	METHOD m_pftktmpr hasValidTarget (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hqdayibh;)Z
+	METHOD m_pklvvfoq getCenter (Lnet/minecraft/unmapped/C_hqdayibh;)Lnet/minecraft/unmapped/C_vgpupfxx;
+	METHOD m_punlybva isCurrentPathFinished (Lnet/minecraft/unmapped/C_hqdayibh;)Z
+	METHOD m_pweggsxs startQueuing (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_qlafymaa walkTowardsTarget (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_qqdpcjuw depositStackImpl (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)Lnet/minecraft/unmapped/C_sddaxwyk;
+		ARG 1 inventory
+	METHOD m_rxdlixnl (Lnet/minecraft/unmapped/C_qlwyqnpn$C_aggtsqwi;Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)V
+		ARG 3 inventory
+	METHOD m_sbddqzsl getVisitedBlockPositions (Lnet/minecraft/unmapped/C_hqdayibh;)Ljava/util/Set;
+	METHOD m_sibjswcb (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)V
+		ARG 2 entity
+		ARG 3 inventory
+	METHOD m_spfxfxqu streamConnectedTargets (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;)Ljava/util/stream/Stream;
+	METHOD m_suhkgxcm setTransportationState (Lnet/minecraft/unmapped/C_qlwyqnpn$C_zlleqlpw;)V
+		ARG 1 state
+	METHOD m_tbrkiilr startTargetInteraction (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_hqdayibh;)V
+		ARG 1 target
+	METHOD m_tqnygjue tickQueue (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_tuxmjgbi takeStack (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)V
+	METHOD m_uaeilomo canNotUseTarget (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;)Z
+	METHOD m_udjkxkzf getHorizontalSearchDistance (Lnet/minecraft/unmapped/C_hqdayibh;)I
+	METHOD m_udotfbow createSearchArea (Lnet/minecraft/unmapped/C_hqdayibh;)Lnet/minecraft/unmapped/C_hbcjzgoe;
+	METHOD m_umqmpuyh resumeTraveling (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_uvhgmhiz tryAddVisitedBlock (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)V
+	METHOD m_uwathnuq isLocked (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;)Z
+		ARG 1 target
+	METHOD m_venxxsvy isTargetReachable (Lnet/minecraft/unmapped/C_cdctfzbn;ZLnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_hqdayibh;)Z
+		ARG 2 inRange
+	METHOD m_vonqtftr stopTargeting (Lnet/minecraft/unmapped/C_hqdayibh;)V
+	METHOD m_wmbjvbhp (Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_vgpupfxx;Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_jdakttms;
+		ARG 3 offset
+	METHOD m_xtgsaiqe tryCreateTarget (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_kvegafmh;Ljava/util/Set;Ljava/util/Set;Lnet/minecraft/unmapped/C_hbcjzgoe;)Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;
+		ARG 6 searchArea
+	METHOD m_xtrmnvus hasTriedVisiting (Ljava/util/Set;Ljava/util/Set;Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;)Z
+		ARG 1 visited
+		ARG 2 unreachable
+	METHOD m_yltuaqgc canPickupItems (Lnet/minecraft/unmapped/C_hqdayibh;)Z
+	METHOD m_yrirdafp (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)V
+		ARG 2 entity
+		ARG 3 inventory
+	METHOD m_ytkxjifh setInteractionState (Lnet/minecraft/unmapped/C_qlwyqnpn$C_aggtsqwi;)V
+		ARG 1 state
+	METHOD m_zhgfvuer shouldTarget (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_txtbiemp;)Z
+	METHOD m_zjjuijsw tickTravel (Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hqdayibh;)V
+		ARG 1 target
+	METHOD m_zmqgfmko hasMatchingItem (Lnet/minecraft/unmapped/C_hqdayibh;Lnet/minecraft/unmapped/C_pjtstjoq;)Z
+		ARG 1 inventory
+	METHOD m_zsbjpkuv getInteractionPos (Lnet/minecraft/unmapped/C_motipebf;Lnet/minecraft/unmapped/C_hqdayibh;)Lnet/minecraft/unmapped/C_vgpupfxx;
+		ARG 1 path
+	METHOD m_zwunzpsi findTarget (Lnet/minecraft/unmapped/C_bdwnwhiu;Lnet/minecraft/unmapped/C_hqdayibh;)Ljava/util/Optional;
+	CLASS C_aggtsqwi InteractionState
+	CLASS C_prnmkdep Target
+		FIELD f_jyeqjiqy inventory Lnet/minecraft/unmapped/C_pjtstjoq;
+		METHOD m_dcusngea of (Lnet/minecraft/unmapped/C_kvegafmh;Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;
+		METHOD m_gdwqnvmx getInventory (Lnet/minecraft/unmapped/C_kvegafmh;Lnet/minecraft/unmapped/C_txtbiemp;Lnet/minecraft/unmapped/C_cdctfzbn;Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_pjtstjoq;
+		METHOD m_npenjdfn of (Lnet/minecraft/unmapped/C_hynzadkk;Lnet/minecraft/unmapped/C_cdctfzbn;)Lnet/minecraft/unmapped/C_qlwyqnpn$C_prnmkdep;
+		METHOD m_tzcaqrym inventory ()Lnet/minecraft/unmapped/C_pjtstjoq;
+	CLASS C_qrqwoplu InteractionTicker
+	CLASS C_zlleqlpw TransportState
