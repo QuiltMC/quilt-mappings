@@ -1,17 +1,6 @@
 CLASS net/minecraft/unmapped/C_rkpddiir net/minecraft/world/biome/BiomeEffects
 	FIELD f_bvrjtiub CODEC Lcom/mojang/serialization/Codec;
-	FIELD f_dlbzybnx foliageColor Ljava/util/Optional;
-	FIELD f_hjgvkyni additionsSound Ljava/util/Optional;
-	FIELD f_pdtzbiaj grassColorModifier Lnet/minecraft/unmapped/C_rkpddiir$C_estplwrp;
-	FIELD f_pslenagg moodSound Ljava/util/Optional;
 	FIELD f_sjjjliav particleConfig Ljava/util/Optional;
-	FIELD f_skeqzosh waterFogColor I
-	FIELD f_tepovbtm music Ljava/util/Optional;
-	FIELD f_tynzhsxs grassColor Ljava/util/Optional;
-	FIELD f_ubmgeduo fogColor I
-	FIELD f_vrrsdevt loopSound Ljava/util/Optional;
-	FIELD f_wdlrcqss waterColor I
-	FIELD f_xgkocjan skyColor I
 	METHOD m_adjblyej getAdditionsSound ()Ljava/util/Optional;
 		COMMENT Returns the additions sound.
 		COMMENT
@@ -31,6 +20,8 @@ CLASS net/minecraft/unmapped/C_rkpddiir net/minecraft/world/biome/BiomeEffects
 		ARG 0 effects
 	METHOD m_dntvsoan (Lnet/minecraft/unmapped/C_rkpddiir;)Ljava/lang/Integer;
 		ARG 0 effects
+	METHOD m_eeiiwfkg (Lnet/minecraft/unmapped/C_rkpddiir;)Ljava/lang/Float;
+		ARG 0 effects
 	METHOD m_fknixxbq (Lnet/minecraft/unmapped/C_rkpddiir;)Ljava/lang/Integer;
 		ARG 0 effects
 	METHOD m_fkxcwtmw getFoliageColor ()Ljava/util/Optional;
@@ -42,9 +33,11 @@ CLASS net/minecraft/unmapped/C_rkpddiir net/minecraft/world/biome/BiomeEffects
 	METHOD m_lwecibwe (Lnet/minecraft/unmapped/C_rkpddiir;)Lnet/minecraft/unmapped/C_rkpddiir$C_estplwrp;
 		ARG 0 effects
 	METHOD m_ozetnubg getMusic ()Ljava/util/Optional;
+	METHOD m_pgeqygok getMusicVolume ()F
+	METHOD m_psykijan getDryFoliageColor ()Ljava/util/Optional;
 	METHOD m_rblxpilw (Lnet/minecraft/unmapped/C_rkpddiir;)Ljava/util/Optional;
 		ARG 0 effects
-	METHOD m_rfxbffiq getLoopSound ()Ljava/util/Optional;
+	METHOD m_rfxbffiq getAmbientSound ()Ljava/util/Optional;
 		COMMENT Returns the loop sound.
 		COMMENT
 		COMMENT <p>A loop sound is played continuously as an ambient sound whenever the
@@ -63,6 +56,8 @@ CLASS net/minecraft/unmapped/C_rkpddiir net/minecraft/world/biome/BiomeEffects
 	METHOD m_xrqsglom (Lnet/minecraft/unmapped/C_rkpddiir;)Ljava/lang/Integer;
 		ARG 0 effects
 	METHOD m_xzozoyah getSkyColor ()I
+	METHOD m_ypkajevd (Lnet/minecraft/unmapped/C_rkpddiir;)Ljava/util/Optional;
+		ARG 0 effects
 	METHOD m_zpcyqsuh getGrassColor ()Ljava/util/Optional;
 	CLASS C_estplwrp GrassColorModifier
 		FIELD f_ivcgdnaj name Ljava/lang/String;
@@ -71,39 +66,53 @@ CLASS net/minecraft/unmapped/C_rkpddiir net/minecraft/world/biome/BiomeEffects
 			ARG 3 name
 		METHOD m_fgudonhg getName ()Ljava/lang/String;
 		METHOD m_qunlxvgq getModifiedGrassColor (DDI)I
+			ARG 1 x
+			ARG 3 z
+			ARG 5 baseColor
 	CLASS C_qwzfkrqq Builder
 		FIELD f_aelwcybp moodSound Ljava/util/Optional;
-		FIELD f_alxwjxyc musicSound Ljava/util/Optional;
+		FIELD f_alxwjxyc music Ljava/util/Optional;
 		FIELD f_cygubvtn grassColor Ljava/util/Optional;
+		FIELD f_hmatxrdm dryFoliageColor Ljava/util/Optional;
 		FIELD f_ijvswxpu fogColor Ljava/util/OptionalInt;
 		FIELD f_ikiwxhtd additionsSound Ljava/util/Optional;
-		FIELD f_ohhkirxy loopSound Ljava/util/Optional;
+		FIELD f_mqurycnh musicVolume F
+		FIELD f_ohhkirxy ambientSound Ljava/util/Optional;
 		FIELD f_taofjter waterColor Ljava/util/OptionalInt;
 		FIELD f_tvudcsru grassColorModifier Lnet/minecraft/unmapped/C_rkpddiir$C_estplwrp;
 		FIELD f_twfzhaat skyColor Ljava/util/OptionalInt;
 		FIELD f_txmnxthm foliageColor Ljava/util/Optional;
 		FIELD f_uqcoysxm waterFogColor Ljava/util/OptionalInt;
 		FIELD f_zqzpuvvv particleConfig Ljava/util/Optional;
-		METHOD m_biduyefw loopSound (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
+		METHOD m_biduyefw ambientSound (Lnet/minecraft/unmapped/C_cjzoxshv;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
 			ARG 1 sound
+		METHOD m_dvvjexdw music (Lnet/minecraft/unmapped/C_usodapnd;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
+			ARG 1 music
 		METHOD m_fxdwhkyq grassColor (I)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 grassColor
+			ARG 1 color
 		METHOD m_gqkgacnl particleConfig (Lnet/minecraft/unmapped/C_uukjsnep;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 particleConfig
+			ARG 1 config
 		METHOD m_khcbezcq fogColor (I)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 fogColor
+			ARG 1 color
 		METHOD m_lljpjekg waterColor (I)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 waterColor
+			ARG 1 color
+		METHOD m_mrqglqbr dryFoliageColor (I)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
+			ARG 1 color
 		METHOD m_nsxegtja additionsSound (Lnet/minecraft/unmapped/C_pcdkepep;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 additionsSound
+			ARG 1 sound
 		METHOD m_oeroptvg moodSound (Lnet/minecraft/unmapped/C_pywtusyz;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 moodSound
+			ARG 1 sound
 		METHOD m_ortemfee foliageColor (I)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 foliageColor
+			ARG 1 color
 		METHOD m_pkbafmal build ()Lnet/minecraft/unmapped/C_rkpddiir;
+		METHOD m_qaimtgub musicVolume (F)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
+			ARG 1 volume
 		METHOD m_tpgqnmkl grassColorModifier (Lnet/minecraft/unmapped/C_rkpddiir$C_estplwrp;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 grassColorModifier
+			ARG 1 modifier
+		METHOD m_vkeafqry noMusic ()Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
 		METHOD m_vpmmiupp waterFogColor (I)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 waterFogColor
+			ARG 1 color
+		METHOD m_xcntlsgn music (Lnet/minecraft/unmapped/C_bvkdjias;)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
+			ARG 1 music
 		METHOD m_ydnvivup skyColor (I)Lnet/minecraft/unmapped/C_rkpddiir$C_qwzfkrqq;
-			ARG 1 skyColor
+			ARG 1 color

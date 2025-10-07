@@ -22,6 +22,7 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 		ARG 1 effects
 	METHOD m_bxcqopci getTemperature (Lnet/minecraft/unmapped/C_hynzadkk;I)F
 		ARG 1 blockPos
+		ARG 2 seaLevel
 	METHOD m_ccbcmngk (Lnet/minecraft/unmapped/C_orlkpefs;)Lnet/minecraft/unmapped/C_orlkpefs$C_eraitncf;
 		ARG 0 biome
 	METHOD m_ceymkdve canSetSnow (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;)Z
@@ -42,6 +43,7 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 	METHOD m_fzluldde getDefaultGrassColor ()I
 	METHOD m_gdqwjlfa computeTemperature (Lnet/minecraft/unmapped/C_hynzadkk;I)F
 		ARG 1 pos
+		ARG 2 seaLevel
 	METHOD m_hwnmdrhy getFogColor ()I
 	METHOD m_iosnxqmg (Lnet/minecraft/unmapped/C_orlkpefs;)Lnet/minecraft/unmapped/C_ypgfhxmz;
 		ARG 0 biome
@@ -49,6 +51,7 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 		ARG 1 x
 		ARG 3 z
 	METHOD m_jaxultdc getAdditionsSound ()Ljava/util/Optional;
+	METHOD m_kahreuex getGrassColor ()I
 	METHOD m_kfrabqcq getPrecipitationAt (Lnet/minecraft/unmapped/C_hynzadkk;I)Lnet/minecraft/unmapped/C_orlkpefs$C_xwlyzxea;
 	METHOD m_kspyocvf getGenerationSettings ()Lnet/minecraft/unmapped/C_qbjpvmph;
 	METHOD m_ktofobbo getTemperature ()F
@@ -56,7 +59,8 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 		ARG 0 instance
 	METHOD m_lmfmdeyy isColdEnoughToSnow (Lnet/minecraft/unmapped/C_hynzadkk;I)Z
 		ARG 1 pos
-	METHOD m_nkfekxcm getLoopSound ()Ljava/util/Optional;
+	METHOD m_mitzqvhc getMusicVolume ()F
+	METHOD m_nkfekxcm getAmbientSound ()Ljava/util/Optional;
 	METHOD m_odukezkb getWaterFogColor ()I
 	METHOD m_osufipcg doesNotSnow (Lnet/minecraft/unmapped/C_hynzadkk;I)Z
 		ARG 1 pos
@@ -70,10 +74,12 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 	METHOD m_sfuutlab getSkyColor ()I
 	METHOD m_sipbqfgi getMusic ()Ljava/util/Optional;
 	METHOD m_sovebmbx getSpawnSettings ()Lnet/minecraft/unmapped/C_ypgfhxmz;
+	METHOD m_squvksdz getDefaultDryFoliageColor ()I
 	METHOD m_vbqsdlwy canSetIce (Lnet/minecraft/unmapped/C_eemzphbi;Lnet/minecraft/unmapped/C_hynzadkk;Z)Z
 		ARG 1 world
 		ARG 2 pos
 		ARG 3 doWaterCheck
+	METHOD m_xatvstoz getDryFoliageColor ()I
 	METHOD m_zexssfli getDefaultFoliageColor ()I
 	METHOD m_zkumgrhb (Lnet/minecraft/unmapped/C_orlkpefs;)Lnet/minecraft/unmapped/C_orlkpefs$C_eraitncf;
 		ARG 0 biome
@@ -124,5 +130,9 @@ CLASS net/minecraft/unmapped/C_orlkpefs net/minecraft/world/biome/Biome
 			ARG 3 name
 		METHOD m_qpkqrrnb getName ()Ljava/lang/String;
 		METHOD m_zxaxmtmu getModifiedTemperature (Lnet/minecraft/unmapped/C_hynzadkk;F)F
+			ARG 2 baseTemperature
+	CLASS C_uopftqmq
+		METHOD rehash (I)V
+			ARG 1 ignored
 	CLASS C_xwlyzxea Precipitation
 		FIELD f_qggdjoyo name Ljava/lang/String;

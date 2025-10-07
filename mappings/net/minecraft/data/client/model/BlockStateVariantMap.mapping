@@ -1,11 +1,28 @@
 CLASS net/minecraft/unmapped/C_ujotlecn net/minecraft/data/client/model/BlockStateVariantMap
-	COMMENT An equivalence to the {@code Map<String, WeightedUnbakedModel>}
-	COMMENT passed to the constructor of {@code ModelVariantMap}.
+	COMMENT Facilitates generating a map of property values to variants.
+	COMMENT
+	COMMENT @param <V> the variant type
 	FIELD f_minppjdq variants Ljava/util/Map;
-	METHOD m_bsqwtsij checkAllPropertyDefinitions ()V
+	METHOD m_bsqwtsij validatePropertyValues ()V
+	METHOD m_btryzcpn ofWeighted (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_flmmzuad;
+	METHOD m_bzemjxxg ofWeighted (Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_krntilxf;
+	METHOD m_dwkywtzk ofOperation (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_flmmzuad;
 	METHOD m_iqqrwxrs getProperties ()Ljava/util/List;
+	METHOD m_jjpqooav ofOperation (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_rznkaccw;
+	METHOD m_jvkcmxaz ofOperation (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_lufmsfds;
+	METHOD m_laqylymg ofOperation (Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_krntilxf;
+	METHOD m_mqojbwjf ofWeighted (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_rznkaccw;
 	METHOD m_mrxfcapc register (Lnet/minecraft/unmapped/C_ayzqehku;Ljava/lang/Object;)V
-	METHOD m_wwoayjvh getVariants ()Ljava/util/Map;
+		ARG 1 propertyValues
+		ARG 2 variant
+	METHOD m_owxxvcmq ofWeighted (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_lufmsfds;
+	METHOD m_pdzpnpdv (Lnet/minecraft/unmapped/C_ayzqehku;)Z
+		ARG 1 propertyValues
+	METHOD m_vzmgepqc ofWeighted (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_volezcdc;
+	METHOD m_wbpbegin (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_ayzqehku;)Ljava/util/stream/Stream;
+		ARG 1 propertyValues
+	METHOD m_wnxrmmwm ofOperation (Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_vzlztuyw;)Lnet/minecraft/unmapped/C_ujotlecn$C_volezcdc;
+	METHOD m_wwoayjvh copyVariants ()Ljava/util/Map;
 	CLASS C_flmmzuad QuintupleProperty
 		FIELD f_ehlopflc third Lnet/minecraft/unmapped/C_vzlztuyw;
 		FIELD f_ieifmidu fourth Lnet/minecraft/unmapped/C_vzlztuyw;
@@ -18,21 +35,31 @@ CLASS net/minecraft/unmapped/C_ujotlecn net/minecraft/data/client/model/BlockSta
 			ARG 3 third
 			ARG 4 fourth
 			ARG 5 fifth
-		METHOD m_ivqqhnlf register (Lcom/mojang/datafixers/util/Function5;)Lnet/minecraft/unmapped/C_ujotlecn;
+		METHOD m_ivqqhnlf generate (Lcom/mojang/datafixers/util/Function5;)Lnet/minecraft/unmapped/C_ujotlecn;
+			ARG 1 variantFactory
+		METHOD m_jzizqacv register (Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ujotlecn$C_flmmzuad;
+			ARG 1 first
+			ARG 2 second
+			ARG 3 third
+			ARG 4 fourth
+			ARG 5 fifth
+			ARG 6 variant
 		METHOD m_lagqbmbg (Lcom/mojang/datafixers/util/Function5;Ljava/lang/Comparable;)V
-			ARG 2 firstValue
+			ARG 2 first
 		METHOD m_lmyvppgl (Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function5;Ljava/lang/Comparable;)V
-			ARG 1 fifthValue
+			ARG 6 fifth
 		METHOD m_mesiebvp (Ljava/lang/Comparable;Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function5;Ljava/lang/Comparable;)V
-			ARG 1 thirdValue
+			ARG 4 third
 		METHOD m_toknkpwy (Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function5;Ljava/lang/Comparable;)V
-			ARG 1 secondValue
+			ARG 3 second
 		METHOD m_vgxlyemt (Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function5;Ljava/lang/Comparable;)V
-			ARG 1 fourthValue
+			ARG 5 fourth
 	CLASS C_krntilxf SingleProperty
 		FIELD f_ezbxidzi property Lnet/minecraft/unmapped/C_vzlztuyw;
 		METHOD <init> (Lnet/minecraft/unmapped/C_vzlztuyw;)V
 			ARG 1 property
+		METHOD m_drpjnccw register (Ljava/lang/Comparable;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ujotlecn$C_krntilxf;
+			ARG 2 variant
 		METHOD m_jqdbofqe register (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_ujotlecn;
 			ARG 1 variantFactory
 		METHOD m_nxjweibc (Ljava/util/function/Function;Ljava/lang/Comparable;)V
@@ -48,14 +75,21 @@ CLASS net/minecraft/unmapped/C_ujotlecn net/minecraft/data/client/model/BlockSta
 			ARG 3 third
 			ARG 4 fourth
 		METHOD m_dyjviskl (Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function4;Ljava/lang/Comparable;)V
-			ARG 1 fourthValue
+			ARG 5 fourth
 		METHOD m_eqyuerne (Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function4;Ljava/lang/Comparable;)V
-			ARG 1 secondValue
+			ARG 3 second
 		METHOD m_exqlwwon (Ljava/lang/Comparable;Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function4;Ljava/lang/Comparable;)V
-			ARG 1 thirdValue
+			ARG 4 third
+		METHOD m_igrjocaa register (Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ujotlecn$C_lufmsfds;
+			ARG 1 first
+			ARG 2 second
+			ARG 3 third
+			ARG 4 fourth
+			ARG 5 variant
 		METHOD m_lhwvawrx (Lcom/mojang/datafixers/util/Function4;Ljava/lang/Comparable;)V
-			ARG 2 firstValue
+			ARG 2 first
 		METHOD m_thzquucx register (Lcom/mojang/datafixers/util/Function4;)Lnet/minecraft/unmapped/C_ujotlecn;
+			ARG 1 variantFactory
 	CLASS C_rznkaccw TripleProperty
 		FIELD f_gwckodww first Lnet/minecraft/unmapped/C_vzlztuyw;
 		FIELD f_hfirohhn second Lnet/minecraft/unmapped/C_vzlztuyw;
@@ -64,13 +98,19 @@ CLASS net/minecraft/unmapped/C_ujotlecn net/minecraft/data/client/model/BlockSta
 			ARG 1 first
 			ARG 2 second
 			ARG 3 third
+		METHOD m_edjdvbjg register (Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ujotlecn$C_rznkaccw;
+			ARG 1 first
+			ARG 2 second
+			ARG 3 third
+			ARG 4 variant
 		METHOD m_exawshkj register (Lcom/mojang/datafixers/util/Function3;)Lnet/minecraft/unmapped/C_ujotlecn;
+			ARG 1 variantFactory
 		METHOD m_sipkkmny (Lcom/mojang/datafixers/util/Function3;Ljava/lang/Comparable;)V
-			ARG 2 firstValue
+			ARG 2 first
 		METHOD m_sqjbyslf (Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function3;Ljava/lang/Comparable;)V
-			ARG 1 secondValue
+			ARG 3 second
 		METHOD m_xeugtptr (Ljava/lang/Comparable;Ljava/lang/Comparable;Lcom/mojang/datafixers/util/Function3;Ljava/lang/Comparable;)V
-			ARG 1 thirdValue
+			ARG 4 third
 	CLASS C_volezcdc DoubleProperty
 		FIELD f_exkosfqb second Lnet/minecraft/unmapped/C_vzlztuyw;
 		FIELD f_giidngqv first Lnet/minecraft/unmapped/C_vzlztuyw;
@@ -78,8 +118,12 @@ CLASS net/minecraft/unmapped/C_ujotlecn net/minecraft/data/client/model/BlockSta
 			ARG 1 first
 			ARG 2 second
 		METHOD m_gyfljrah (Ljava/util/function/BiFunction;Ljava/lang/Comparable;)V
-			ARG 2 firstValue
+			ARG 2 first
+		METHOD m_ivfqguwn register (Ljava/lang/Comparable;Ljava/lang/Comparable;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ujotlecn$C_volezcdc;
+			ARG 1 first
+			ARG 2 second
+			ARG 3 variant
 		METHOD m_ognatqfp register (Ljava/util/function/BiFunction;)Lnet/minecraft/unmapped/C_ujotlecn;
 			ARG 1 variantFactory
 		METHOD m_qnlhjcci (Ljava/lang/Comparable;Ljava/util/function/BiFunction;Ljava/lang/Comparable;)V
-			ARG 3 secondValue
+			ARG 3 second
