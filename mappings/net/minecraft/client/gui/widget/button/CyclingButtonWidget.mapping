@@ -12,13 +12,27 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 	FIELD f_ubcidkfh values Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
 	METHOD m_cqdzljkb composeText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 1 value
+	METHOD m_jktlprsw onOffBuilder (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Z)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
+		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
+		COMMENT and {@linkplain Boolean#FALSE} values. It displays
+		COMMENT {@code on} for {@code true} and {@code off} for {@code false}.
+		COMMENT Its current initial value is {@code true}.
+		ARG 0 on
+		ARG 1 off
+		ARG 2 initialValue
 	METHOD m_jwrniozw composeGenericOptionText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_npqneive;
 		ARG 1 value
+	METHOD m_ldavqpeg builder (Ljava/util/function/Function;Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
+		ARG 1 initialValue
 	METHOD m_lycxswnt updateTooltip ()V
 	METHOD m_mxugbexk getValue (I)Ljava/lang/Object;
 		ARG 1 offset
 	METHOD m_nlpdevjj cycle (I)V
 		ARG 1 amount
+	METHOD m_tsnfvosc onOffBuilder (Z)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
+		ARG 0 initialValue
+	METHOD m_uucoplnf (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 2 value
 	METHOD m_vdgtlpbb internalSetValue (Ljava/lang/Object;)V
 		ARG 1 value
 	METHOD m_vyqonlij getGenericNarrationMessage ()Lnet/minecraft/unmapped/C_npqneive;
@@ -29,6 +43,9 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 		COMMENT "Option: Value".
 	METHOD m_wanyzkhq setValue (Ljava/lang/Object;)V
 		ARG 1 value
+	METHOD m_xontfblc builder (Ljava/util/function/Function;Ljava/util/function/Supplier;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
+	METHOD m_xzqqnaar (Ljava/lang/Boolean;)Lnet/minecraft/unmapped/C_rdaqiwdt;
+		ARG 0 value
 	METHOD m_zjjuuwww getValue ()Ljava/lang/Object;
 	CLASS C_djnbpyue Builder
 		COMMENT A builder to easily create cycling button widgets.
@@ -37,8 +54,9 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 		COMMENT with at least one default (non-alternative) value in the list before
 		COMMENT building.
 		COMMENT
-		COMMENT @see CyclingButtonWidget#builder(Function)
+		COMMENT @see CyclingButtonWidget#builder(Function, Supplier)
 		FIELD f_ckzcauof optionTextOmitted Z
+		FIELD f_kdyrkoss initialValueGetter Ljava/util/function/Supplier;
 		FIELD f_nndpoujz tooltipSupplier Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;
 		FIELD f_pqufyfbe valueToText Ljava/util/function/Function;
 		FIELD f_qzlybxkn narrationMessageFactory Ljava/util/function/Function;
@@ -47,6 +65,8 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 			ARG 0 value
 		METHOD m_alxxamyn values (Ljava/util/Collection;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 			ARG 1 values
+		METHOD m_jzxbfgwv optionTextOmitted (Z)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
+			ARG 1 omitted
 		METHOD m_kxxawnyf build (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ikfvpkkf$C_hmzkrfiv;)Lnet/minecraft/unmapped/C_ikfvpkkf;
 			ARG 1 optionText
 			ARG 2 callback
@@ -103,6 +123,7 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 		METHOD m_vahoyxin values ([Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 			COMMENT Sets the option values for this button.
 			ARG 1 values
+		METHOD m_zntukqxe optionTextOmitted ()Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 		METHOD m_zrnvdsew values (Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 			COMMENT Sets the option values for this button.
 			ARG 1 values
