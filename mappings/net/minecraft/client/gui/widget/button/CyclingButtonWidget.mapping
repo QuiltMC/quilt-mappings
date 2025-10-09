@@ -10,39 +10,8 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 	FIELD f_pkhehiyk HAS_ALT_DOWN Ljava/util/function/BooleanSupplier;
 	FIELD f_skyfeqxy index I
 	FIELD f_ubcidkfh values Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
-	METHOD <init> (IIIILnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;ILjava/lang/Object;Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;Ljava/util/function/Function;Ljava/util/function/Function;Lnet/minecraft/unmapped/C_ikfvpkkf$C_hmzkrfiv;Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;Z)V
-		ARG 1 x
-		ARG 2 y
-		ARG 3 width
-		ARG 4 height
-		ARG 5 message
-		ARG 6 optionText
-		ARG 7 index
-		ARG 8 value
-		ARG 9 values
-		ARG 10 valueToText
-		ARG 11 narrationMessageFactory
-		ARG 12 callback
-		ARG 13 tooltipFactory
-		ARG 14 optionTextOmitted
 	METHOD m_cqdzljkb composeText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_rdaqiwdt;
 		ARG 1 value
-	METHOD m_jktlprsw onOffBuilder (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_rdaqiwdt;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
-		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
-		COMMENT and {@linkplain Boolean#FALSE} values. It displays
-		COMMENT {@code on} for {@code true} and {@code off} for {@code false}.
-		COMMENT Its current initial value is {@code true}.
-		ARG 0 on
-		ARG 1 off
-	METHOD m_jsgmqbgj onOffBuilder (Z)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
-		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
-		COMMENT and {@linkplain Boolean#FALSE} values.
-		COMMENT It displays {@link net.minecraft.text.CommonTexts#ON} for {@code true},
-		COMMENT and {@link net.minecraft.text.CommonTexts#OFF} for {@code false}.
-		COMMENT <p>
-		COMMENT Its current initial value is {@code initialValue}.
-		ARG 0 initialValue
-			COMMENT the initial value
 	METHOD m_jwrniozw composeGenericOptionText (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_npqneive;
 		ARG 1 value
 	METHOD m_lycxswnt updateTooltip ()V
@@ -50,9 +19,6 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 		ARG 1 offset
 	METHOD m_nlpdevjj cycle (I)V
 		ARG 1 amount
-	METHOD m_rddtjrbk builder (Ljava/util/function/Function;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
-		COMMENT Creates a new builder for a cycling button widget.
-		ARG 0 valueToText
 	METHOD m_vdgtlpbb internalSetValue (Ljava/lang/Object;)V
 		ARG 1 value
 	METHOD m_vyqonlij getGenericNarrationMessage ()Lnet/minecraft/unmapped/C_npqneive;
@@ -63,13 +29,6 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 		COMMENT "Option: Value".
 	METHOD m_wanyzkhq setValue (Ljava/lang/Object;)V
 		ARG 1 value
-	METHOD m_wymfsxew onOffBuilder ()Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
-		COMMENT Creates a builder for a cycling button widget that only has {@linkplain Boolean#TRUE}
-		COMMENT and {@linkplain Boolean#FALSE} values.
-		COMMENT It displays {@link net.minecraft.text.CommonTexts#ON} for {@code true},
-		COMMENT and {@link net.minecraft.text.CommonTexts#OFF} for {@code false}.
-		COMMENT <p>
-		COMMENT Its current initial value is {@code true}.
 	METHOD m_zjjuuwww getValue ()Ljava/lang/Object;
 	CLASS C_djnbpyue Builder
 		COMMENT A builder to easily create cycling button widgets.
@@ -80,30 +39,14 @@ CLASS net/minecraft/unmapped/C_ikfvpkkf net/minecraft/client/gui/widget/button/C
 		COMMENT
 		COMMENT @see CyclingButtonWidget#builder(Function)
 		FIELD f_ckzcauof optionTextOmitted Z
-		FIELD f_gmdgxahb value Ljava/lang/Object;
-		FIELD f_gntjovxt initialIndex I
 		FIELD f_nndpoujz tooltipSupplier Lnet/minecraft/unmapped/C_vbibxkxv$C_msgaqezv;
 		FIELD f_pqufyfbe valueToText Ljava/util/function/Function;
 		FIELD f_qzlybxkn narrationMessageFactory Ljava/util/function/Function;
 		FIELD f_yckmykpa values Lnet/minecraft/unmapped/C_ikfvpkkf$C_qjymjbvs;
-		METHOD <init> (Ljava/util/function/Function;)V
-			COMMENT Creates a builder.
-			COMMENT
-			COMMENT @see CyclingButtonWidget#builder(Function)
-			ARG 1 valueToText
 		METHOD m_accuyfsm (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_skehaijy;
 			ARG 0 value
 		METHOD m_alxxamyn values (Ljava/util/Collection;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
 			ARG 1 values
-		METHOD m_jippvtaa initially (Ljava/lang/Object;)Lnet/minecraft/unmapped/C_ikfvpkkf$C_djnbpyue;
-			COMMENT Sets the initial value of this button widget.
-			COMMENT
-			COMMENT <p>This is not effective if {@code value} is not in the default
-			COMMENT values (i.e. excluding alternative values).
-			COMMENT
-			COMMENT <p>If this is not called, the initial value defaults to the first
-			COMMENT value in the values list supplied.
-			ARG 1 value
 		METHOD m_kxxawnyf build (Lnet/minecraft/unmapped/C_rdaqiwdt;Lnet/minecraft/unmapped/C_ikfvpkkf$C_hmzkrfiv;)Lnet/minecraft/unmapped/C_ikfvpkkf;
 			ARG 1 optionText
 			ARG 2 callback
