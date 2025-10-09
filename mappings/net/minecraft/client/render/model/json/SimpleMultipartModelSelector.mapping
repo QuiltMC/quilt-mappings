@@ -1,1 +1,45 @@
 CLASS net/minecraft/unmapped/C_txovxfri net/minecraft/client/render/model/json/SimpleMultipartModelSelector
+	FIELD f_jizproyb valueSelectors Ljava/util/Map;
+	FIELD f_tkfnvjot LOGGER Lorg/slf4j/Logger;
+	METHOD m_aouahoxu valueSelectors ()Ljava/util/Map;
+	METHOD m_fwujqmkc valueSelectorToPredicate (Lnet/minecraft/unmapped/C_ezfeikaq;Ljava/lang/String;Lnet/minecraft/unmapped/C_txovxfri$C_mgwcfgor;)Ljava/util/function/Predicate;
+		ARG 0 stateManager
+		ARG 1 propertyName
+		ARG 2 valueSelector
+	METHOD m_whvfrujk (Ljava/util/List;Lnet/minecraft/unmapped/C_ezfeikaq;Ljava/lang/String;Lnet/minecraft/unmapped/C_txovxfri$C_mgwcfgor;)V
+		ARG 2 propertyName
+		ARG 3 selector
+	CLASS C_mgwcfgor ValueSelector
+		FIELD f_hutijxox CODEC_INT_OR_BOOL Lcom/mojang/serialization/Codec;
+		FIELD f_mvzjoada SPLITTER Lcom/google/common/base/Splitter;
+		FIELD f_tluxktxe JOINER Lcom/google/common/base/Joiner;
+		FIELD f_txhncewf CODEC Lcom/mojang/serialization/Codec;
+		FIELD f_zjruracg terms Ljava/util/List;
+		METHOD <init> (Ljava/util/List;)V
+			ARG 1 terms
+		METHOD m_leqzaazc terms ()Ljava/util/List;
+		METHOD m_ozzpqxpe (Ljava/lang/Object;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_txovxfri$C_ylyzkcjm;)Ljava/util/function/Predicate;
+			ARG 3 term
+		METHOD m_qgegbgyi deserialize (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+			ARG 0 value
+		METHOD m_svjbyqxl parseProperty (Ljava/lang/Object;Lnet/minecraft/unmapped/C_vzlztuyw;Ljava/lang/String;)Ljava/lang/Comparable;
+			ARG 1 owner
+			ARG 2 property
+			ARG 3 value
+		METHOD m_xlsvvvzb termToPredicate (Ljava/lang/Object;Lnet/minecraft/unmapped/C_vzlztuyw;Lnet/minecraft/unmapped/C_txovxfri$C_ylyzkcjm;)Ljava/util/function/Predicate;
+			ARG 1 owner
+			ARG 2 property
+			ARG 3 term
+		METHOD m_zftaeyzg termsToPredicate (Ljava/lang/Object;Lnet/minecraft/unmapped/C_vzlztuyw;)Ljava/util/function/Predicate;
+			ARG 1 owner
+			ARG 2 property
+	CLASS C_ylyzkcjm SelectorTerm
+		FIELD f_cytrmvhi INVERT_PREFIX Ljava/lang/String;
+		FIELD f_vhevdluf value Ljava/lang/String;
+		FIELD f_wrdrbpxh invert Z
+		METHOD <init> (Ljava/lang/String;Z)V
+			ARG 1 value
+			ARG 2 invert
+		METHOD m_eellkxlu fromString (Ljava/lang/String;)Lnet/minecraft/unmapped/C_txovxfri$C_ylyzkcjm;
+		METHOD m_llbkaxwb value ()Ljava/lang/String;
+		METHOD m_riylftbv invert ()Z
