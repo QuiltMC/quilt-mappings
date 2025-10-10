@@ -53,7 +53,7 @@ import java.util.stream.StreamSupport;
  * Duplicate mappings are usually the result of running {@code git merge/rebase} and
  * inadvertently combining two histories that give the same class two different names.
  * <p>
- * Also validates tha mapping files:
+ * Also validates that mapping files:
  * <ul>
  *     <li> aren't empty
  *     <li> have the {@value Extensions#MAPPING} extension
