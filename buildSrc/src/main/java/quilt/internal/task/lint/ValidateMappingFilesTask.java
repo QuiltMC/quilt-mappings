@@ -192,10 +192,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             logger.error("Found {}!", message);
             for (final String duplicateMapping : duplicateMappings) {
                 logger.error("\t{} is mapped by:", duplicateMapping);
-
-                for (final File mappingFile : allMappings.get(duplicateMapping)) {
-                    logger.error("\t\t{}", mappingFile);
-                }
+                this.logMappingFileErrors(allMappings.get(duplicateMapping), 2);
             }
         }
 
@@ -208,9 +205,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             errorMessages.add(message);
 
             logger.error("Found {}!", message);
-            for (final File nameMismatchFile : nameMismatchFiles) {
-                logger.error("\t{}", nameMismatchFile);
-            }
+            this.logMappingFileErrors(nameMismatchFiles, 1);
         }
 
         if (!malformedClassFiles.isEmpty()) {
@@ -222,9 +217,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             errorMessages.add(message);
 
             logger.error("Found {}!", message);
-            for (final File malformedClassFile : malformedClassFiles) {
-                logger.error("\t{}", malformedClassFile);
-            }
+            this.logMappingFileErrors(malformedClassFiles, 1);
         }
 
         if (!emptyFiles.isEmpty()) {
@@ -236,9 +229,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             errorMessages.add(message);
 
             logger.error("Found {}!", message);
-            for (final File emptyFile : emptyFiles) {
-                logger.error("\t{}", emptyFile);
-            }
+            this.logMappingFileErrors(emptyFiles, 1);
         }
 
         if (!wrongExtensionFiles.isEmpty()) {
@@ -250,9 +241,7 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             errorMessages.add(message);
 
             logger.error("Found {}!", message);
-            for (final File wrongExtensionFile : wrongExtensionFiles) {
-                logger.error("\t{}", wrongExtensionFile);
-            }
+            this.logMappingFileErrors(wrongExtensionFiles, 1);
         }
 
         if (!errorMessages.isEmpty()) {
@@ -273,6 +262,13 @@ public abstract class ValidateMappingFilesTask extends DefaultTask implements Ma
             fullError.append(errorMessages.getLast()).append("! See the log for details.");
 
             throw new GradleException(fullError.toString());
+        }
+    }
+
+    private void logMappingFileErrors(Iterable<File> files, int indent) {
+        final Path mappingsParent = this.getMappingsDir().get().getAsFile().toPath().getParent();
+        for (final File file : files) {
+            this.getLogger().error("{}{}", "\t".repeat(indent), mappingsParent.relativize(file.toPath()));
         }
     }
 
