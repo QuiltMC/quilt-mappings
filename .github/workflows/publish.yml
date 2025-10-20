@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v2
 
-      # Ensure that releases are not ran in parallel, this ensures that the latest commit is the latest release
+      # Ensure that releases are not run in parallel, this ensures that the latest commit is the latest release
       # See https://github.com/softprops/turnstyle
       - name: Turnstyle
         uses: softprops/turnstyle@v1
@@ -52,7 +52,7 @@ jobs:
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
 
-      # Increment the build number based on tags to allow per branch build numbers, not something GitHub provides by default.
+      # Increment the build number based on tags to allow per-branch build numbers, not something GitHub provides by default.
       - name: Increment build number
         id: buildnumber
         uses: onyxmueller/build-tag-number@v1
