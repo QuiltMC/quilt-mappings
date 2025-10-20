@@ -8,6 +8,11 @@ jobs:
       image: eclipse-temurin:21
       options: --user root
     steps:
+      - name: Install git
+        run: apt-get update && apt-get install -y git
+      - name: Configure git for container
+        run: git config --global --add safe.directory "$(pwd)"
+
       - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v2
 
@@ -21,18 +26,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build before generating build number so the build number doesn't needlessly increase in the event of an error.
+      # Fetch tags because they're used to store build number.
+      - name: Fetch tags
+        run: git fetch --tags origin
+      # Check for existing tag created by previous runs of "Increment build number".
+      # Extract build number if present, otherwise start at 0.
+      - name: Set build number
+        shell: bash
+        run: |
+          output=$(git tag -l build/${{ github.ref }}-build-number-*)
+          buildNumber=$(if [[ $output ]]; then echo $output | grep -oP "(?<=build-number-)[0-9]+$"; else echo 0; fi)
+          echo "BUILD_NUMBER=$buildNumber" >> $GITHUB_ENV
+
+      - name: Ensure gradlew is executable
+        run: chmod +x ./gradlew
+      # Publish before incrementing build number so it doesn't increase in the event of an error.
       - name: Build
-        run: ./gradlew build javadocJar --stacktrace
-      # Generate the build number based on tags to allow per branch build numbers, not something GitHub provides by default.
-      - name: Generate build number
-        id: buildnumber
-        uses: onyxmueller/build-tag-number@v1
-        with:
-          token: ${{ secrets.github_token }}
-          prefix: "build/${{ github.ref }}"
-      - name: Publish
-        run: ./gradlew publish --stacktrace
+        run: ./gradlew build javadocJar publish --stacktrace
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -41,6 +51,15 @@ jobs:
           SNAPSHOTS_USERNAME: ${{ secrets.SNAPSHOTS_USERNAME }}
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
+
+      # Increment the build number based on tags to allow per branch build numbers, not something GitHub provides by default.
+      - name: Increment build number
+        id: buildnumber
+        uses: onyxmueller/build-tag-number@v1
+        with:
+          token: ${{ secrets.github_token }}
+          prefix: "build/${{ github.ref }}"
+
       - name: Update Quilt Meta
         uses: quiltmc/update-quilt-meta@main
         with:
