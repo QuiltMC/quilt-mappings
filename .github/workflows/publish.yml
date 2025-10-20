@@ -41,7 +41,7 @@ jobs:
       - name: Ensure gradlew is executable
         run: chmod +x ./gradlew
       # Publish before incrementing build number so it doesn't increase in the event of an error.
-      - name: Build
+      - name: Publish
         run: ./gradlew build javadocJar publish --stacktrace
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
