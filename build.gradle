@@ -29,9 +29,7 @@ final ENV = System.getenv()
 
 final MINECRAFT_VERSION = libs.versions.minecraft.get()
 
-// add 1 to BUILD_NUMBER because it starts at 0
-// parseInt also ensures failure if there's a malformed build-number-NAN tag
-version = "${MINECRAFT_VERSION}+build.${(ENV.BUILD_NUMBER ? Integer.parseInt(ENV.BUILD_NUMBER) + 1 : 'local' as String)}"
+version = "${MINECRAFT_VERSION}+build.${(ENV.BUILD_NUMBER ? ENV.BUILD_NUMBER : 'local')}"
 
 if (ENV.BRANCH_NAME) {
 	def branch = ENV.BRANCH_NAME.substring(ENV.BRANCH_NAME.lastIndexOf('/') + 1)

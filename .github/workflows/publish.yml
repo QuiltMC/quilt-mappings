@@ -37,8 +37,8 @@ jobs:
         # This should be true so long as we don't set delete_previous_tag: false for "Increment build number".
         run: |
           output=$(git tag -l build/${{ github.ref }}-build-number-*)
-          buildNumber=$(if [[ $output ]]; then echo $output | grep -oP "(?<=build-number-)[0-9]+$"; else echo 0; fi)
-          echo "BUILD_NUMBER=$buildNumber" >> $GITHUB_ENV
+          priorBuild=$(if [[ $output ]]; then echo $output | grep -oP "(?<=build-number-)[0-9]+$"; else echo 0; fi)
+          echo "BUILD_NUMBER=$((priorBuild + 1))" >> $GITHUB_ENV
 
       - name: Ensure gradlew is executable
         run: chmod +x ./gradlew
