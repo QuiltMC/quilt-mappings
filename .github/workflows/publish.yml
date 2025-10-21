@@ -30,14 +30,15 @@ jobs:
       - name: Fetch tags
         run: git fetch --tags origin
       # Check for existing tag created by previous runs of "Increment build number".
-      # Extract build number if present, otherwise start at 0.
+      # Extract prior build number if present, otherwise default to 0.
+      # Add 1 for this build number.
       - name: Set build number
         shell: bash
         # This assumes at most one build-number-N tag will be found.
         # This should be true so long as we don't set delete_previous_tag: false for "Increment build number".
         run: |
-          output=$(git tag -l build/${{ github.ref }}-build-number-*)
-          priorBuild=$(if [[ $output ]]; then echo $output | grep -oP "(?<=build-number-)[0-9]+$"; else echo 0; fi)
+          priorTag=$(git tag -l build/${{ github.ref }}-build-number-*)
+          priorBuild=$(if [[ $priorTag ]]; then echo $priorTag | grep -oP "(?<=build-number-)[0-9]+$"; else echo 0; fi)
           echo "BUILD_NUMBER=$((priorBuild + 1))" >> $GITHUB_ENV
 
       - name: Ensure gradlew is executable
@@ -54,7 +55,7 @@ jobs:
           SNAPSHOTS_PASSWORD: ${{ secrets.SNAPSHOTS_PASSWORD }}
           BRANCH_NAME: ${{ github.ref }}
 
-      # Increment the build number based on tags to allow per-branch build numbers, not something GitHub provides by default.
+      # Increment the per-branch build number tag, not something GitHub provides by default.
       - name: Increment build number
         id: buildnumber
         uses: onyxmueller/build-tag-number@v1
