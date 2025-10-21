@@ -29,7 +29,7 @@ final ENV = System.getenv()
 
 final MINECRAFT_VERSION = libs.versions.minecraft.get()
 
-version = "${MINECRAFT_VERSION}+build.${(ENV.BUILD_NUMBER ? ENV.BUILD_NUMBER : 'local')}"
+version = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault('BUILD_NUMBER', 'local')}"
 
 if (ENV.BRANCH_NAME) {
 	def branch = ENV.BRANCH_NAME.substring(ENV.BRANCH_NAME.lastIndexOf('/') + 1)
