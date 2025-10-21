@@ -33,6 +33,8 @@ jobs:
       # Extract build number if present, otherwise start at 0.
       - name: Set build number
         shell: bash
+        # This assumes at most one build-number-N tag will be found.
+        # This should be true so long as we don't set delete_previous_tag: false for "Increment build number".
         run: |
           output=$(git tag -l build/${{ github.ref }}-build-number-*)
           buildNumber=$(if [[ $output ]]; then echo $output | grep -oP "(?<=build-number-)[0-9]+$"; else echo 0; fi)
