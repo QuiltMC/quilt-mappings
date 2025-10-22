@@ -69,9 +69,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	COMMENT  <td>{@link RegistryKey}</td><td>{@link #readRegistryKey(RegistryKey)}</td><td>{@link #writeRegistryKey(RegistryKey)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
-	COMMENT  <td>{@link Date}</td><td>{@link #readDate()}</td><td>{@link #writeDate(Date)}</td>
-	COMMENT </tr>
-	COMMENT <tr>
 	COMMENT  <td>{@link Instant}</td><td>{@link #readInstant()}</td><td>{@link #writeInstant(Instant)}</td>
 	COMMENT </tr>
 	COMMENT <tr>
@@ -431,14 +428,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 	METHOD m_jtoadldk writeNbt (Lio/netty/buffer/ByteBuf;Lnet/minecraft/unmapped/C_oivssbvb;)V
 		ARG 0 buf
 		ARG 1 nbt
-	METHOD m_jyxjrtet writeDate (Ljava/util/Date;)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes a date to this buf. A date is represented by its time, a regular
-		COMMENT long.
-		COMMENT
-		COMMENT @return this buf, for chaining
-		COMMENT @see #readDate()
-		ARG 1 date
-			COMMENT the date to write
 	METHOD m_kggdjvdd writeVarInt (I)Lnet/minecraft/unmapped/C_idfydwco;
 		COMMENT Writes a single var int to this buf.
 		COMMENT
@@ -474,12 +463,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #writeIntArray(int[])
 		COMMENT @see #readIntList()
 		COMMENT @return the read byte array
-	METHOD m_lbjyfuqf readDate ()Ljava/util/Date;
-		COMMENT Reads a date from this buf. A date is represented by its time, a regular
-		COMMENT long.
-		COMMENT
-		COMMENT @return the read date
-		COMMENT @see #writeDate(Date)
 	METHOD m_lfwlrnnj readBlockHitResult ()Lnet/minecraft/unmapped/C_jdakttms;
 		COMMENT Reads a block hit result from this buf. A block hit result is represented
 		COMMENT by a block position, a direction enum constant, 3 floats for the hit
