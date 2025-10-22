@@ -1,8 +1,11 @@
 package quilt.internal.plugin;
 
+import org.gradle.api.Action;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.services.BuildServiceRegistry;
+import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
@@ -15,8 +18,10 @@ import quilt.internal.task.ArtifactFileTask;
 import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 import quilt.internal.task.QuiltMappingsArtifactTask;
+import quilt.internal.task.diff.TargetVersionConsumingTask;
 import quilt.internal.task.mappings.MappingsDirOutputtingTask;
 import quilt.internal.util.EnigmaProfileService;
+import quilt.internal.util.Version;
 
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -67,6 +72,15 @@ import static org.quiltmc.enigma_plugin.Arguments.SIMPLE_TYPE_FIELD_NAMES_PATH;
  *                  AbstractArchiveTask#getArchiveVersion() archiveVersion}:
  *                  {@link QuiltMappingsExtension}'s {@link QuiltMappingsExtension#getMappingsVersion() mappingsVersion}
  *         </ul>
+ *     <li> {@linkplain TaskCollection#configureEach(Action) configures}
+ *          {@link TargetVersionConsumingTask}s with the following defaults:
+ *          <ul>
+ *              <li> {@link TargetVersionConsumingTask#getTargetVersion() targetVersion}:
+ *                   {@link QuiltMappingsExtension}'s {@link QuiltMappingsExtension#getTargetVersion() targetVersion}
+ *              <li> run {@link Task#onlyIf(Spec) onlyIf} their
+ *                   {@link TargetVersionConsumingTask#getTargetVersion() targetVersion}
+ *                   {@link Provider#isPresent() isPresent}
+ *          </ul>
  */
 public abstract class QuiltMappingsBasePlugin extends DefaultExtensionedMappingsProjectPlugin<QuiltMappingsExtension> {
     @Override
@@ -158,6 +172,21 @@ public abstract class QuiltMappingsBasePlugin extends DefaultExtensionedMappings
 
                 task.getArchiveVersion().convention(ext.getMappingsVersion());
             });
+
+        ext.getTargetVersion().set(
+            this.getProviders().of(
+                Version.TargetSource.class,
+                spec -> spec.parameters(params ->
+                    params.getMinecraftVersion().set(ext.getMinecraftVersion())
+                )
+            )
+        );
+
+        tasks.withType(TargetVersionConsumingTask.class).configureEach(task -> {
+            task.getTargetVersion().convention(ext.getTargetVersion());
+
+            task.onlyIf(unused -> task.getTargetVersion().isPresent());
+        });
 
         return ext;
     }

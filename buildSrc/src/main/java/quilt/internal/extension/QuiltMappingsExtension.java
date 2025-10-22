@@ -8,7 +8,6 @@ import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.plugins.ExtensionContainer;
 import org.gradle.api.provider.Property;
-import org.gradle.api.provider.Provider;
 import org.quiltmc.enigma.api.EnigmaProfile;
 import quilt.internal.constants.Constants;
 import quilt.internal.plugin.QuiltMappingsBasePlugin;
@@ -16,6 +15,7 @@ import quilt.internal.task.EnigmaProfileConsumingTask;
 import quilt.internal.task.MappingsDirConsumingTask;
 import quilt.internal.task.mappings.MappingsDirOutputtingTask;
 import quilt.internal.util.EnigmaProfileService;
+import quilt.internal.util.Version;
 
 import javax.inject.Inject;
 
@@ -27,7 +27,7 @@ public abstract class QuiltMappingsExtension {
 
     private static final String DEFAULT_CATALOG_NAME = "libs";
 
-    public abstract Property<String> getMinecraftVersion();
+    public abstract Property<Version> getTargetVersion();
 
     public abstract Property<String> getMappingsVersion();
 
@@ -52,7 +52,12 @@ public abstract class QuiltMappingsExtension {
 
     public abstract RegularFileProperty getUnpickMeta();
 
+    private final String minecraftVersion;
     private final String unpickVersion;
+
+    public String getMinecraftVersion() {
+        return this.minecraftVersion;
+    }
 
     public String getUnpickVersion() {
         return this.unpickVersion;
@@ -60,20 +65,25 @@ public abstract class QuiltMappingsExtension {
 
     @Inject
     public QuiltMappingsExtension(Project project) {
-        this.unpickVersion = project.getExtensions().getByType(VersionCatalogsExtension.class)
+        this.minecraftVersion = getLibsVersion(project, "minecraft");
+        this.unpickVersion = getLibsVersion(project, Constants.UNPICK_NAME);
+    }
+
+    private static String getLibsVersion(Project project, String versionName) {
+        return project.getExtensions().getByType(VersionCatalogsExtension.class)
             .named(DEFAULT_CATALOG_NAME)
-            .findVersion(Constants.UNPICK_NAME)
+            .findVersion(versionName)
             .map(VersionConstraint::getRequiredVersion)
             .orElseThrow(() -> new GradleException(
                 """
                 Could not find %s version.
                 \tAn '%s' version must be specified in the '%s' version catalog,
                 \tusually by adding it to 'gradle/%s.versions.toml'.
-                """.formatted(Constants.UNPICK_NAME, Constants.UNPICK_NAME, DEFAULT_CATALOG_NAME, DEFAULT_CATALOG_NAME)
+                """.formatted(versionName, versionName, DEFAULT_CATALOG_NAME, DEFAULT_CATALOG_NAME)
             ));
     }
 
-    public Provider<String> provideSuffixedMinecraftVersion(String suffix) {
-        return this.getMinecraftVersion().map(version -> version + suffix);
+    public String provideSuffixedMinecraftVersion(String suffix) {
+        return this.getMinecraftVersion() + suffix;
     }
 }

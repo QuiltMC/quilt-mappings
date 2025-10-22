@@ -16,6 +16,7 @@ public abstract class QuiltMappingsPlugin implements MappingsProjectPlugin {
         final PluginContainer plugins = project.getPlugins();
 
         plugins.apply(QuiltMappingsBasePlugin.class);
+        plugins.apply(MappingsVersionPlugin.class);
         plugins.apply(MinecraftJarsPlugin.class);
         plugins.apply(MapMinecraftJarsPlugin.class);
         plugins.apply(MapV2Plugin.class);

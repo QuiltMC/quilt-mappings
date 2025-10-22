@@ -29,7 +29,7 @@ final ENV = System.getenv()
 
 final MINECRAFT_VERSION = libs.versions.minecraft.get()
 
-version = "${MINECRAFT_VERSION}+build.${ENV.getOrDefault('BUILD_NUMBER', 'local')}"
+// project version is set by MappingsVersionPlugin
 
 if (ENV.BRANCH_NAME) {
 	def branch = ENV.BRANCH_NAME.substring(ENV.BRANCH_NAME.lastIndexOf('/') + 1)
@@ -98,10 +98,6 @@ dependencies {
 }
 
 quiltMappings {
-	minecraftVersion = MINECRAFT_VERSION
-
-	mappingsVersion = project.version.toString()
-
 	mappingsDir = file('mappings/')
 
 	enigmaProfileConfig = file('enigma/enigma_profile.json')

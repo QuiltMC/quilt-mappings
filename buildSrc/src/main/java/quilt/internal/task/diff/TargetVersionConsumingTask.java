@@ -9,6 +9,7 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
 import quilt.internal.plugin.TargetDiffPlugin;
+import quilt.internal.util.Version;
 
 /**
  * A task that takes a target version as input.
@@ -20,7 +21,11 @@ import quilt.internal.plugin.TargetDiffPlugin;
 public interface TargetVersionConsumingTask extends Task {
     @Input
     @Optional
-    Property<String> getTargetVersion();
+    Property<Version> getTargetVersion();
+
+    default Provider<String> provideTargetVersionString() {
+        return this.getTargetVersion().map(Version::string);
+    }
 
     /**
      * @param destinationDir the {@link Directory} the provided file will be resolved against
@@ -28,7 +33,7 @@ public interface TargetVersionConsumingTask extends Task {
      *             and returns the name of the file to be provided
      */
     default Provider<RegularFile> provideVersionedFile(Directory destinationDir, Transformer<String, String> namer) {
-        return this.getTargetVersion().map(namer).map(destinationDir::file);
+        return this.provideTargetVersionString().map(namer).map(destinationDir::file);
     }
 
     /**
@@ -39,7 +44,7 @@ public interface TargetVersionConsumingTask extends Task {
     default Provider<RegularFile> provideVersionedFile(
         Provider<Directory> destinationDir, Transformer<String, String> namer
     ) {
-        return destinationDir.zip(this.getTargetVersion().map(namer), Directory::file);
+        return destinationDir.zip(this.provideTargetVersionString().map(namer), Directory::file);
     }
 
     /**
@@ -48,7 +53,7 @@ public interface TargetVersionConsumingTask extends Task {
      *             and returns the name of the directory to be provided
      */
     default Provider<Directory> provideVersionedDir(Directory destinationDir, Transformer<String, String> namer) {
-        return this.getTargetVersion().map(namer).map(destinationDir::dir);
+        return this.provideTargetVersionString().map(destinationDir::dir);
     }
 
     /**
@@ -59,6 +64,6 @@ public interface TargetVersionConsumingTask extends Task {
     default Provider<Directory> provideVersionedDir(
         Provider<Directory> destinationDir, Transformer<String, String> namer
     ) {
-        return destinationDir.zip(this.getTargetVersion().map(namer), Directory::dir);
+        return destinationDir.zip(this.provideTargetVersionString(), Directory::dir);
     }
 }
