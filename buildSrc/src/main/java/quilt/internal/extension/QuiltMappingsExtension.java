@@ -82,8 +82,4 @@ public abstract class QuiltMappingsExtension {
                 """.formatted(versionName, versionName, DEFAULT_CATALOG_NAME, DEFAULT_CATALOG_NAME)
             ));
     }
-
-    public String provideSuffixedMinecraftVersion(String suffix) {
-        return this.getMinecraftVersion() + suffix;
-    }
 }

@@ -73,7 +73,7 @@ public abstract class MapIntermediaryPlugin extends DefaultExtensionedMappingsPr
             ExtractTinyIntermediaryMappingsTask.class,
             task -> {
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    quiltExt.provideSuffixedMinecraftVersion("-" + Namespaces.INTERMEDIARY + "." + Extensions.TINY)
+                    quiltExt.getMinecraftVersion() + "-" + Namespaces.INTERMEDIARY + "." + Extensions.TINY
                 ));
             }
         );
