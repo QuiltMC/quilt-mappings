@@ -14,7 +14,6 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 		COMMENT Returns the maximum radius of this border, in blocks.
 		COMMENT
 		COMMENT <p>The default value is 29999984.
-	METHOD m_bxlhwbmt getBoundWest ()D
 	METHOD m_cqocgglm canCollide (Lnet/minecraft/unmapped/C_astfners;Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
 		ARG 1 entity
 		ARG 2 box
@@ -39,17 +38,12 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 		ARG 1 pos
 	METHOD m_kbsbhpcu contains (Lnet/minecraft/unmapped/C_hbcjzgoe;)Z
 		ARG 1 box
-	METHOD m_kfyxxtft interpolateSize (DDJ)V
-		ARG 1 fromSize
-		ARG 3 toSize
-		ARG 5 time
 	METHOD m_lsneixdd removeListener (Lnet/minecraft/unmapped/C_oeeocvfz;)V
 		ARG 1 listener
 	METHOD m_mmctmagp contains (DDD)Z
 		ARG 1 x
 		ARG 3 z
 		ARG 5 offset
-	METHOD m_moelrhva getBoundNorth ()D
 	METHOD m_nnfnigje getWarningTime ()I
 		COMMENT Returns the warning time of this border, in ticks.
 		COMMENT <p>Once a player goes beyond the border, this is the time before a message
@@ -72,8 +66,6 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 	METHOD m_suylfcrm setMaxRadius (I)V
 		COMMENT Sets the maximum radius of this border and notifies its area.
 		ARG 1 maxRadius
-	METHOD m_uaflvqmh load (Lnet/minecraft/unmapped/C_pneibfez$C_koayjdos;)V
-		ARG 1 properties
 	METHOD m_ugghurew getDamagePerBlock ()D
 		COMMENT Returns the damage increase per block beyond this border, in hearts.
 		COMMENT <p>Once an entity goes beyond the border and the safe zone, damage will be
@@ -91,12 +83,10 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 	METHOD m_xgkkutln setWarningBlocks (I)V
 		COMMENT Sets the warning blocks of this border and notifies all listeners.
 		ARG 1 warningBlocks
-	METHOD m_xjmigxbn getBoundEast ()D
 	METHOD m_xxbozamz clamp (Lnet/minecraft/unmapped/C_vgpupfxx;)Lnet/minecraft/unmapped/C_hynzadkk;
 		ARG 1 vec
 	METHOD m_yqehsxmb clamp (Lnet/minecraft/unmapped/C_hynzadkk;)Lnet/minecraft/unmapped/C_hynzadkk;
 	METHOD m_yrcphygs tick ()V
-	METHOD m_yxcbppzo getBoundSouth ()D
 	METHOD m_ztkzbzhx getWarningBlocks ()I
 		COMMENT Returns the warning distance of this border, in blocks.
 		COMMENT <p>When an entity approaches the border, this is the distance from which
@@ -140,20 +130,12 @@ CLASS net/minecraft/unmapped/C_pneibfez net/minecraft/world/border/WorldBorder
 		FIELD f_illafgnj timeStart J
 		FIELD f_pspajbvk newSize D
 		FIELD f_wrwrceni timeEnd J
-		METHOD <init> (Lnet/minecraft/unmapped/C_pneibfez;DDJ)V
-			ARG 2 oldSize
-			ARG 4 newSize
-			ARG 6 timeDuration
 	CLASS C_wvskmywr Area
-		METHOD m_bjnlxxyk getBoundNorth ()D
-		METHOD m_buwvvfgr getBoundSouth ()D
 		METHOD m_dqjicgmd onMaxRadiusChanged ()V
 		METHOD m_jvrhfdwg getSizeLerpTarget ()D
-		METHOD m_lrqpajyi getBoundWest ()D
 		METHOD m_lzeetxkt onCenterChanged ()V
 		METHOD m_mteyowuq asVoxelShape ()Lnet/minecraft/unmapped/C_zscvhwbd;
 		METHOD m_mzwlince getStage ()Lnet/minecraft/unmapped/C_eabcdwzy;
-		METHOD m_tmhvulgw getBoundEast ()D
 		METHOD m_uauoaitp getSize ()D
 		METHOD m_uctuxlfw getShrinkingSpeed ()D
 		METHOD m_yhygdxfh getAreaInstance ()Lnet/minecraft/unmapped/C_pneibfez$C_wvskmywr;
