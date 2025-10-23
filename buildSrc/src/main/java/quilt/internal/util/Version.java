@@ -18,6 +18,8 @@ import java.util.stream.StreamSupport;
 import static quilt.internal.util.DownloadUtil.openAvailableConnection;
 
 public record Version(String string, int build) implements Serializable {
+    public static final Comparator<Version> BUILD_COMPARATOR = Comparator.comparing(Version::build, Integer::compare);
+
     public abstract static class TargetSource implements ValueSource<Version, TargetSource.Params> {
         private static final String BUILD_KEY = "build";
         private static final String VERSION_KEY = "version";
@@ -44,14 +46,11 @@ public record Version(String string, int build) implements Serializable {
 
                     return StreamSupport.stream(meta.getAsJsonArray().spliterator(), false)
                         .map(JsonElement::getAsJsonObject)
-                        .max(Comparator.comparing(
-                            json -> json.get(BUILD_KEY).getAsInt(),
-                            Integer::compare
-                        ))
                         .map(json -> new Version(
                             json.get(VERSION_KEY).getAsString(),
                             json.get(BUILD_KEY).getAsInt()
-                        ));
+                        ))
+                        .max(BUILD_COMPARATOR);
                 })
                 .orElse(null);
         }
