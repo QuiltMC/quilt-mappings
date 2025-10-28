@@ -1,6 +1,4 @@
 CLASS net/minecraft/unmapped/C_bzltaclp net/minecraft/client/realms/FileDownload
-	FIELD f_eaqsxylc httpRequest Lorg/apache/http/client/methods/HttpGet;
-	FIELD f_frsnaael requestConfig Lorg/apache/http/client/config/RequestConfig;
 	FIELD f_gnnjdwkx finished Z
 	FIELD f_lxvnkciw error Z
 	FIELD f_mjyvqoba LOGGER Lorg/slf4j/Logger;
@@ -16,44 +14,10 @@ CLASS net/minecraft/unmapped/C_bzltaclp net/minecraft/client/realms/FileDownload
 		ARG 2 archive
 		ARG 3 storage
 	METHOD m_cjkfjjrv cancel ()V
-	METHOD m_rcsnsgsn downloadWorld (Lnet/minecraft/unmapped/C_flzypcmt;Ljava/lang/String;Lnet/minecraft/unmapped/C_gkfhfgts$C_ktbxglcu;Lnet/minecraft/unmapped/C_bpwagnit;)V
-		ARG 1 download
-		ARG 2 message
-		ARG 3 status
-		ARG 4 storage
 	METHOD m_rpfdqznu findAvailableFolderName (Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 folder
-	METHOD m_urropctb contentLength (Ljava/lang/String;)J
-		ARG 1 downloadLink
 	METHOD m_yeoxglvf isFinished ()Z
 	METHOD m_yvoqzvin isExtracting ()Z
-	CLASS C_benbxuff ProgressListener
-		FIELD f_fpzaumdb worldName Ljava/lang/String;
-		FIELD f_hyallfju levelStorageSource Lnet/minecraft/unmapped/C_bpwagnit;
-		FIELD f_mqybkiil tempFile Ljava/io/File;
-		FIELD f_yllfygoz downloadStatus Lnet/minecraft/unmapped/C_gkfhfgts$C_ktbxglcu;
-		METHOD <init> (Lnet/minecraft/unmapped/C_bzltaclp;Ljava/lang/String;Ljava/io/File;Lnet/minecraft/unmapped/C_bpwagnit;Lnet/minecraft/unmapped/C_gkfhfgts$C_ktbxglcu;)V
-			ARG 2 worldName
-			ARG 3 tempFile
-			ARG 4 levelStorageSource
-			ARG 5 downloadStatus
-		METHOD actionPerformed (Ljava/awt/event/ActionEvent;)V
-			ARG 1 e
-	CLASS C_bwbtihzc ResourcePackProgressListener
-		FIELD f_jrsozlhh worldDownload Lnet/minecraft/unmapped/C_flzypcmt;
-		FIELD f_nrnwdjin downloadStatus Lnet/minecraft/unmapped/C_gkfhfgts$C_ktbxglcu;
-		FIELD f_spgdzwxe tempFile Ljava/io/File;
-		METHOD <init> (Lnet/minecraft/unmapped/C_bzltaclp;Ljava/io/File;Lnet/minecraft/unmapped/C_gkfhfgts$C_ktbxglcu;Lnet/minecraft/unmapped/C_flzypcmt;)V
-			ARG 2 tempFile
-			ARG 3 downloadStatus
-			ARG 4 worldDownload
-		METHOD actionPerformed ensureResourcePack (Ljava/awt/event/ActionEvent;)V
-			ARG 1 e
 	CLASS C_ksdlnjra DownloadCountingOutputStream
-		FIELD f_clivteyx listener Ljava/awt/event/ActionListener;
-		METHOD <init> (Ljava/io/OutputStream;)V
-			ARG 1 outputStream
 		METHOD afterWrite (I)V
 			ARG 1 n
-		METHOD m_jxxbfxws setListener (Ljava/awt/event/ActionListener;)V
-			ARG 1 listener
