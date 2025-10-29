@@ -20,6 +20,6 @@ public abstract class RemapTargetMinecraftJarTask extends MapJarTask implements 
     public RemapTargetMinecraftJarTask() {
         super(Groups.DIFF, Namespaces.INTERMEDIATE, Namespaces.NAMED);
 
-        this.getAdditionalMappings().putAll(JAVAX_TO_JETBRAINS);
+        this.getAdditionalMappings().putAll(ANNOTATION_REPLACEMENTS);
     }
 }
