@@ -21,10 +21,10 @@ import quilt.internal.util.JarRemapper;
  * @see MapMinecraftJarsPlugin MapMinecraftJarsPlugin's configureEach
  */
 public abstract class MapJarTask extends DefaultTask {
-    public static final ImmutableMap<String, String> JAVAX_TO_JETBRAINS = ImmutableMap.of(
-        "javax/annotation/Nullable", "org/jetbrains/annotations/Nullable",
-        "javax/annotation/Nonnull", "org/jetbrains/annotations/NotNull",
-        "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable"
+    public static final ImmutableMap<String, String> ANNOTATION_REPLACEMENTS = ImmutableMap.of(
+        "javax/annotation/concurrent/Immutable", "org/jetbrains/annotations/Unmodifiable",
+        "org/jspecify/annotations/Nullable", "org/jetbrains/annotations/Nullable",
+        "org/jspecify/annotations/NonNull", "org/jetbrains/annotations/NotNull"
     );
 
     @Input
