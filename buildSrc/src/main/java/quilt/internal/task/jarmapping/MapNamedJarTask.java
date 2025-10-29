@@ -18,6 +18,6 @@ public abstract class MapNamedJarTask extends MapJarTask {
     public MapNamedJarTask() {
         super(Groups.MAP_JAR, Namespaces.INTERMEDIATE, Namespaces.NAMED);
 
-        this.getAdditionalMappings().putAll(JAVAX_TO_JETBRAINS);
+        this.getAdditionalMappings().putAll(ANNOTATION_REPLACEMENTS);
     }
 }
