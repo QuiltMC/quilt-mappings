@@ -374,15 +374,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT @see #readString(int)
 		COMMENT @see #writeString(String)
 		COMMENT @see #writeString(String, int)
-	METHOD m_hlqduwys readIdentifier ()Lnet/minecraft/unmapped/C_ncpywfca;
-		COMMENT Reads an identifier from this buf. An identifier is represented by its
-		COMMENT string form. The read identifier's string form can have a max length of
-		COMMENT {@value #DEFAULT_MAX_STRING_LENGTH}.
-		COMMENT
-		COMMENT @return the read identifier
-		COMMENT @throws io.netty.handler.codec.DecoderException if the identifier's
-		COMMENT string form is longer than {@value #DEFAULT_MAX_STRING_LENGTH}
-		COMMENT @see #writeIdentifier(Identifier)
 	METHOD m_htwizfmu readVarInt (Ljava/util/function/IntFunction;)Ljava/lang/Object;
 		ARG 1 intFunction
 	METHOD m_hudsjtrd writeVarLong (J)Lnet/minecraft/unmapped/C_idfydwco;
@@ -668,17 +659,6 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT
 		COMMENT @return the value read
 		COMMENT @see #writeVarLong(long)
-	METHOD m_vquxgdau writeIdentifier (Lnet/minecraft/unmapped/C_ncpywfca;)Lnet/minecraft/unmapped/C_idfydwco;
-		COMMENT Writes an identifier to this buf. An identifier is represented by its
-		COMMENT string form. The written identifier's byte array can have a max length of
-		COMMENT {@value #DEFAULT_MAX_STRING_LENGTH}.
-		COMMENT
-		COMMENT @return the read identifier
-		COMMENT @throws io.netty.handler.codec.EncoderException if the {@code id}'s
-		COMMENT byte array is longer than {@value #DEFAULT_MAX_STRING_LENGTH}
-		COMMENT @see #readIdentifier()
-		ARG 1 id
-			COMMENT the identifier to write
 	METHOD m_waiabpsw writeEnumSet (Ljava/util/EnumSet;Ljava/lang/Class;)V
 		ARG 1 set
 		ARG 2 enumClass
