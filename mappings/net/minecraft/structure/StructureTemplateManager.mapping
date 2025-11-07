@@ -16,20 +16,31 @@ CLASS net/minecraft/unmapped/C_zxhjfyir net/minecraft/structure/StructureTemplat
 		ARG 4 blockLookup
 	METHOD m_amkgvngf createStructureFromNbt (Lnet/minecraft/unmapped/C_hhlwcnih;)Lnet/minecraft/unmapped/C_abvlwuej;
 		ARG 1 nbt
+	METHOD m_bisjucta (Lnet/minecraft/unmapped/C_dbqpwypu;Ljava/lang/Throwable;)V
+		ARG 1 throwable
+	METHOD m_crqnadcw exportStructure (Lnet/minecraft/unmapped/C_dbqpwypu;Ljava/lang/String;)Ljava/nio/file/Path;
+		COMMENT @throws net.minecraft.util.InvalidIdentifierException
+		COMMENT if the passed {@code id} contains consecutive {@code /} characters.
+		ARG 2 extension
 	METHOD m_dtdhfcuj (Ljava/nio/file/Path;)Z
 		ARG 0 path
 	METHOD m_ecbbymnn (Ljava/lang/String;Ljava/nio/file/Path;Ljava/nio/file/attribute/BasicFileAttributes;)Z
 		ARG 1 path
 		ARG 2 attributes
+	METHOD m_ehejovkt tryExportStructure (Lnet/minecraft/unmapped/C_dbqpwypu;)Z
 	METHOD m_ejyfvhod streamTemplates ()Ljava/util/stream/Stream;
 	METHOD m_fevkmeqm forEachResourceInDirectory (Ljava/nio/file/Path;Ljava/lang/String;Ljava/lang/String;Ljava/util/function/Consumer;)V
 		ARG 1 directory
 		ARG 2 idNamespace
 		ARG 3 extension
 		ARG 4 resourceAction
+	METHOD m_ghddvuph removeStructure (Lnet/minecraft/unmapped/C_dbqpwypu;)V
 	METHOD m_hqdkclwt (Ljava/util/function/Consumer;Ljava/lang/String;Ljava/util/function/Function;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
 		ARG 5 subPath
+	METHOD m_jlaprynr getStructureOrBlank (Lnet/minecraft/unmapped/C_dbqpwypu;)Lnet/minecraft/unmapped/C_abvlwuej;
 	METHOD m_jspnmjgr listGeneratedFileStructures ()Ljava/util/stream/Stream;
+	METHOD m_lvrxtkjb loadStructureFromResource (Lnet/minecraft/unmapped/C_dbqpwypu;)Ljava/util/Optional;
+	METHOD m_ncueaeui loadStructureFromGeneratedFile (Lnet/minecraft/unmapped/C_dbqpwypu;)Ljava/util/Optional;
 	METHOD m_nwvaxfua relativizePath (Ljava/nio/file/Path;Ljava/nio/file/Path;)Ljava/lang/String;
 		ARG 1 base
 		ARG 2 path
@@ -38,16 +49,21 @@ CLASS net/minecraft/unmapped/C_zxhjfyir net/minecraft/structure/StructureTemplat
 		ARG 1 resourceManager
 	METHOD m_pclddqvq (Lnet/minecraft/unmapped/C_zxhjfyir$C_pwzsxxmx;)Ljava/util/stream/Stream;
 		ARG 0 source
+	METHOD m_qnddjfyt getStructure (Lnet/minecraft/unmapped/C_dbqpwypu;)Ljava/util/Optional;
+	METHOD m_sdcfglns tryLoadStructure (Lnet/minecraft/unmapped/C_dbqpwypu;)Ljava/util/Optional;
 	METHOD m_unhddjra listResourceStructures ()Ljava/util/stream/Stream;
 	METHOD m_uqnfamcj readStructure (Ljava/io/InputStream;)Lnet/minecraft/unmapped/C_abvlwuej;
 		ARG 1 inputStream
 	METHOD m_xntkmtxe load (Lnet/minecraft/unmapped/C_zxhjfyir$C_ymoxixhf;Ljava/util/function/Consumer;)Ljava/util/Optional;
 		ARG 1 inputStreamOpener
 		ARG 2 exceptionHandler
+	METHOD m_xrztfonc loadTestStructure (Lnet/minecraft/unmapped/C_dbqpwypu;)Ljava/util/Optional;
 	METHOD m_yanvcqen (Ljava/nio/file/Path;Ljava/lang/Throwable;)V
 		ARG 1 throwable
 	METHOD m_ycwgnvey (ILjava/lang/String;)Ljava/lang/String;
 		ARG 1 path
+	METHOD m_yvafgzob loadFromSnbt (Lnet/minecraft/unmapped/C_dbqpwypu;Ljava/nio/file/Path;)Ljava/util/Optional;
+		ARG 2 directory
 	CLASS C_pwzsxxmx Source
 		FIELD f_amtqxwdy lister Ljava/util/function/Supplier;
 		FIELD f_zqmxsjqh loader Ljava/util/function/Function;

@@ -7,12 +7,17 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 	METHOD <init> (Lnet/minecraft/unmapped/C_abwutbbk;Ljava/lang/String;)V
 		ARG 1 type
 		ARG 2 namespace
+	METHOD m_aycxhzro getMetadataPath (Lnet/minecraft/unmapped/C_dbqpwypu;)Lnet/minecraft/unmapped/C_dbqpwypu;
+	METHOD m_cnowmawm getReadSupplier (Lnet/minecraft/unmapped/C_dbqpwypu;Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_zccdhhqk;
+		ARG 2 original
 	METHOD m_dyzgrmts addPack (Lnet/minecraft/unmapped/C_tguinuvn;Ljava/util/function/Predicate;)V
 		COMMENT Adds a filtered resource pack to this resource manager.
 		ARG 1 pack
 			COMMENT the resource pack to add
 		ARG 2 filter
 			COMMENT the filter to ignore matched resources
+	METHOD m_fnnnviyo (Ljava/util/function/Predicate;Ljava/util/Map;Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_dbqpwypu;Lnet/minecraft/unmapped/C_zccdhhqk;)V
+		ARG 4 readSupplier
 	METHOD m_hkrcaact addPack (Lnet/minecraft/unmapped/C_tguinuvn;)V
 		COMMENT Adds a resource pack to this resource manager.
 		ARG 1 pack
@@ -24,8 +29,12 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 		ARG 4 resources
 	METHOD m_kcnkkzsn (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;)Lnet/minecraft/unmapped/C_tguinuvn;
 		ARG 0 pack
+	METHOD m_kxyhinjf (Ljava/util/function/Predicate;Ljava/util/Map;Lnet/minecraft/unmapped/C_tguinuvn;ILjava/util/Map;Lnet/minecraft/unmapped/C_dbqpwypu;Lnet/minecraft/unmapped/C_zccdhhqk;)V
+		ARG 6 readSupplier
 	METHOD m_lqmmqomr getResourceMetadataSupplier (Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_zccdhhqk;
 		ARG 0 readSupplier
+	METHOD m_pbwncwwu getMetadataReader (Lnet/minecraft/unmapped/C_dbqpwypu;I)Lnet/minecraft/unmapped/C_zccdhhqk;
+		ARG 2 packIndex
 	METHOD m_qenaqzow addPack (Ljava/lang/String;Lnet/minecraft/unmapped/C_tguinuvn;Ljava/util/function/Predicate;)V
 		COMMENT Adds a resource pack to this resource manager.
 		ARG 1 name
@@ -40,16 +49,26 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 			COMMENT the resource pack's name
 		ARG 2 filter
 			COMMENT the filter to ignore matched resources
+	METHOD m_rxfgyxkj (Ljava/util/Map;Ljava/util/Map;Lnet/minecraft/unmapped/C_dbqpwypu;Lnet/minecraft/unmapped/C_aejwawvo$C_tiygmwnw;)V
+		ARG 3 entry
 	METHOD m_siazzzxz getResourceMetadataFromInputStream (Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_bzrwskbr;
 		ARG 0 readSupplier
+	METHOD m_uhymwqrl createResource (Lnet/minecraft/unmapped/C_tguinuvn;Lnet/minecraft/unmapped/C_dbqpwypu;Lnet/minecraft/unmapped/C_zccdhhqk;Lnet/minecraft/unmapped/C_zccdhhqk;)Lnet/minecraft/unmapped/C_tuynegco;
+		ARG 2 readSupplier
+		ARG 3 metadataSupplier
 	METHOD m_wouyhykl applyResourceFiltersToResources (Lnet/minecraft/unmapped/C_aejwawvo$C_vpsqfwkd;Ljava/util/Map;)V
 		ARG 0 pack
 		ARG 1 resources
+	METHOD m_zilcqyqm isMetadataPath (Lnet/minecraft/unmapped/C_dbqpwypu;)Z
 	CLASS C_ffuwstjy ResourceEntries
 		FIELD f_fvbbqyhn metadataSources Ljava/util/Map;
+		FIELD f_kzegmwcm path Lnet/minecraft/unmapped/C_dbqpwypu;
+		FIELD f_yfdzmjku metadataId Lnet/minecraft/unmapped/C_dbqpwypu;
 		METHOD equals (Ljava/lang/Object;)Z
 			ARG 1 o
 		METHOD m_mxxgyemx metadataSources ()Ljava/util/Map;
+		METHOD m_ocfiwyje path ()Lnet/minecraft/unmapped/C_dbqpwypu;
+		METHOD m_pjhuyvag metadataId ()Lnet/minecraft/unmapped/C_dbqpwypu;
 	CLASS C_shzbvflf ResourceEntry
 	CLASS C_vpsqfwkd PackEntry
 		FIELD f_bmuebumu pack Lnet/minecraft/unmapped/C_tguinuvn;
@@ -63,6 +82,8 @@ CLASS net/minecraft/unmapped/C_aejwawvo net/minecraft/resource/NamespaceResource
 			ARG 1 o
 		METHOD m_cglcipmy filter ()Ljava/util/function/Predicate;
 		METHOD m_kgqizoht name ()Ljava/lang/String;
+		METHOD m_ngdvfyth isExcludedFromLowerPriority (Lnet/minecraft/unmapped/C_dbqpwypu;)Z
+			COMMENT {@return {@code true} if the given identifier is excluded from lower priority packs, or {@code false} otherwise}
 		METHOD m_nuumnyiv pack ()Lnet/minecraft/unmapped/C_tguinuvn;
 		METHOD m_qavznufk removeUsingFilter (Ljava/util/Collection;)V
 			COMMENT Removes identifiers from lower priority packs that match this entry's filter.
