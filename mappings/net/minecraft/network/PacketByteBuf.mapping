@@ -580,13 +580,14 @@ CLASS net/minecraft/unmapped/C_idfydwco net/minecraft/network/PacketByteBuf
 		COMMENT Reads an NBT compound from this buf. The binary representation of NBT is
 		COMMENT handled by {@link net.minecraft.nbt.NbtIo}. If an NBT null is encountered,
 		COMMENT this method returns {@code null}. The compound can have a maximum size of
-		COMMENT {@value #MAX_READ_NBT_SIZE} bytes.
+		COMMENT {@value net.minecraft.nbt.NbtSizeTracker#MAX_COMPRESSED_SIZE} bytes.
 		COMMENT
 		COMMENT @return the read compound, may be {@code null}
 		COMMENT @throws io.netty.handler.codec.EncoderException if the NBT cannot be read
 		COMMENT @throws RuntimeException if the compound exceeds the allowed maximum size
 		COMMENT @see #readNbt(NbtTagSizeTracker)
-		COMMENT @see #MAX_READ_NBT_SIZE
+		COMMENT @see net.minecraft.nbt.NbtSizeTracker#createCompressed()
+		COMMENT NbtSizeTracker.createCompressed()
 	METHOD m_sxbdiyar readOptional (Lnet/minecraft/unmapped/C_ajdohfrc;)Ljava/util/Optional;
 		COMMENT Reads an optional value from this buf. An optional value is represented by
 		COMMENT a boolean indicating if the value is present, followed by the value only if
