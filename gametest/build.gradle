@@ -1,0 +1,68 @@
+import static java.util.concurrent.TimeUnit.SECONDS
+
+plugins {
+    id 'java'
+    id 'gametestable'
+    alias rootLibs.plugins.quilt.loom
+}
+
+loom {
+    runs {
+        gametest {
+            name 'Game Test'
+            source sourceSets.main
+
+            server()
+
+            ideConfigGenerated(true)
+        }
+    }
+}
+
+repositories {
+    maven {
+        name = 'gametest'
+        url = '../build/gametestable'
+    }
+}
+
+configurations.mappings {
+    resolutionStrategy {
+        // do not cache mappings
+        cacheChangingModulesFor 0, SECONDS
+    }
+}
+
+dependencies {
+    minecraft(rootLibs.minecraft)
+    mappings ("org.quiltmc:quilt-mappings:${gametestable.version}:intermediary-v2") {
+        changing = true
+    }
+
+    modImplementation rootLibs.quilt.loader
+}
+
+processResources {
+    final expanding = [
+        version: gametestable.version,
+        group: 'org.quilt.internal',
+        minecraft_version: rootLibs.versions.minecraft.get(),
+        quilt_loader_version: rootLibs.versions.quilt.loader.get(),
+    ]
+
+    inputs.properties(expanding)
+
+    filesMatching('quilt.mod.json') {
+        expand expanding
+    }
+}
+
+// mod test data isn't loaded without fapi, so copy it to a datapack
+final copyDataToDatapack = tasks.register('copyDataToDatapack', Copy) {
+    from 'gametest_data_pack'
+    into 'run/world/datapacks/gametest_data_pack'
+}
+
+tasks.named('runGametest') {
+    dependsOn copyDataToDatapack
+}

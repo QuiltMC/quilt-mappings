@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'java-gradle-plugin'
+}
+
+gradlePlugin {
+    plugins {
+        gametestable {
+            id = 'gametestable'
+            implementationClass = 'quilt.internal.plugin.GametestablePlugin'
+        }
+    }
+}
+
+tasks.named('jar') {
+    dependsOn(rootProject.tasks.named('publishMavenPublicationToGametestableRepository'))
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Version': rootProject.version
+        )
+    }
+}

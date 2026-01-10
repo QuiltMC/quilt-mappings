@@ -6,6 +6,7 @@ import quilt.internal.constants.Constants
 import quilt.internal.task.setup.DownloadWantedVersionManifestTask
 import quilt.internal.util.serializable.VersionParser
 
+import javax.inject.Inject
 import java.util.stream.Collectors
 import java.util.stream.Stream
 
@@ -345,6 +346,13 @@ publishing {
 				}
 			}
 		}
+
+		// for gametest project, local repo
+		maven {
+			name = 'gametestable'
+			url = project.layout.buildDirectory.dir('gametestable')
+		}
+
 		mavenLocal()
 	}
 }
