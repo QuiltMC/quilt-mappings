@@ -17,17 +17,6 @@ public abstract class EnigmaProfileService implements BuildService<EnigmaProfile
     private final EnigmaProfile profile;
 
     public EnigmaProfileService() {
-        // this.profile = this.getParameters().getProfileConfig()
-        //     .map(RegularFile::getAsFile)
-        //     .map(File::toPath)
-        //     .map(profilePath -> {
-        //         try {
-        //             return EnigmaProfile.read(profilePath);
-        //         } catch (IOException e) {
-        //             throw new GradleException("Failed to read enigma profile", e);
-        //         }
-        //     }).get();
-
         final Path profilePath = this.getParameters().getProfileConfig().get().getAsFile().toPath();
         try {
             this.profile = EnigmaProfile.read(profilePath);

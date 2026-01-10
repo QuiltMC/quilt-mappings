@@ -8,7 +8,7 @@ public interface Groups {
     String DECOMPILE = "decompile";
     String UNPICK = Constants.UNPICK_NAME;
     String UNPICK_GEN = Constants.UNPICK_NAME + " gen";
-    String LINT = "lint";
+    String CHECK_MAPPINGS = "check mappings";
     String DIFF = "diff";
     String JAVADOC_GENERATION = "javadoc generation";
     String INTERMEDIATE = Namespaces.INTERMEDIATE;

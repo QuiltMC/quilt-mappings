@@ -8,4 +8,5 @@ public interface Extensions {
     String UNPICK = Constants.UNPICK_NAME;
     String GZ = "gz";
     String JSON = "json";
+    String MAPPING = "mapping";
 }
