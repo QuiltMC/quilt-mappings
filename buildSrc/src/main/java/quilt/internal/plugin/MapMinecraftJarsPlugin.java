@@ -104,7 +104,7 @@ public abstract class MapMinecraftJarsPlugin extends
                 task.getZippedFile().convention(this.provideRequiredFile(perVersionMappings));
 
                 task.getExtractionDest().convention(this.provideMappingsBuildFile(
-                    quiltExt.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.TINY)
+                    quiltExt.getMinecraftVersion() + "-" + Classifiers.INTERMEDIATE + "." + Extensions.TINY
                 ));
             }
         );
@@ -146,7 +146,7 @@ public abstract class MapMinecraftJarsPlugin extends
 
                 task.getOutputJar().convention(
                     this.provideMappedMinecraftBuildFile(
-                        quiltExt.provideSuffixedMinecraftVersion("-" + Classifiers.INTERMEDIATE + "." + Extensions.JAR)
+                        quiltExt.getMinecraftVersion() + "-" + Classifiers.INTERMEDIATE + "." + Extensions.JAR
                     )
                 );
             }

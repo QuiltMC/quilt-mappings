@@ -78,8 +78,8 @@ public interface MappingsProjectPlugin extends Plugin<Project> {
         return this.getMinecraftBuildDir().map(dir -> dir.dir("mapped"));
     }
 
-    default Provider<RegularFile> provideMappedMinecraftBuildFile(Provider<String> path) {
-        return this.getMappedMinecraftBuildDir().zip(path, Directory::file);
+    default Provider<RegularFile> provideMappedMinecraftBuildFile(String path) {
+        return this.getMappedMinecraftBuildDir().map(dir -> dir.file(path));
     }
 
     default Provider<Directory> getTempDir() {

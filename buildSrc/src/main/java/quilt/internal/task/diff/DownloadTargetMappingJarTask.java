@@ -32,7 +32,7 @@ public abstract class DownloadTargetMappingJarTask extends DefaultTask implement
 
     @TaskAction
     public void download() {
-        final String targetVersion = this.getTargetVersion().get();
+        final String targetVersion = this.provideTargetVersionString().get();
 
         final String urlPrefix = "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-mappings/" +
             targetVersion + "/quilt-mappings-" + targetVersion;

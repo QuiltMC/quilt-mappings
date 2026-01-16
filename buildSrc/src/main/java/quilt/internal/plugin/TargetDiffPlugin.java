@@ -33,11 +33,9 @@ import quilt.internal.task.diff.ExtractTargetMappingJarTask;
 import quilt.internal.task.diff.LazilyDiffTargetTask;
 import quilt.internal.task.diff.RemapTargetMinecraftJarTask;
 import quilt.internal.task.diff.RemapTargetUnpickDefinitionsTask;
-import quilt.internal.task.diff.TargetVersionConsumingTask;
 import quilt.internal.task.diff.UnpickTargetJarTask;
 import quilt.internal.task.diff.UnpickVersionsMatchConsumingTask;
 import quilt.internal.task.setup.DownloadMinecraftLibrariesTask;
-import quilt.internal.util.TargetVersionSource;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -55,31 +53,18 @@ import static quilt.internal.task.build.MappingsV2JarTask.JAR_MAPPINGS_PATH;
  * <p>
  * The generated {@value DiffDirectoriesTask#DIFF_COMMAND} is useful when reviewing new mappings.
  * <p>
- * Additionally:
+ * Additionally {@linkplain TaskCollection#configureEach(Action) configures}
+ * {@link UnpickVersionsMatchConsumingTask}s with the following defaults:
  * <ul>
- *     <li> {@linkplain TaskCollection#configureEach(Action) configures}
- *          {@link TargetVersionConsumingTask}s with the following defaults:
- *          <ul>
- *              <li> {@link TargetVersionConsumingTask#getTargetVersion() targetVersion}:
- *                   a version obtained from a {@link TargetVersionSource}
- *              <li> run {@link Task#onlyIf(Spec) onlyIf} their
- *                   {@link TargetVersionConsumingTask#getTargetVersion() targetVersion}
- *                   {@link Provider#isPresent() isPresent}
- *          </ul>
- *     <li> {@linkplain TaskCollection#configureEach(Action) configures}
- *          {@link UnpickVersionsMatchConsumingTask}s with the following defaults:
- *          <ul>
- *              <li> {@link UnpickVersionsMatchConsumingTask#getUnpickVersionsMatch() unpickVersionsMatch}:
- *                   this plugin's {@linkplain #provideUnpickVersionsMatch provided check}
- *                   comparing {@link QuiltMappingsExtension}'s
- *                   {@link QuiltMappingsExtension#getUnpickVersion() unpickVersion} and the
- *                   {@linkplain MappingsV2JarTask#JAR_UNPICK_META_PATH unpick meta} from the
- *                   {@value ExtractTargetMappingJarTask#EXTRACT_TARGET_MAPPINGS_JAR_TASK_NAME} task's
- *                   {@linkplain ExtractTargetMappingJarTask#getExtractionDest extracted jar}
- *              <li> run {@link Task#onlyIf(Spec) onlyIf}
- *                   {@link UnpickVersionsMatchConsumingTask#getUnpickVersionsMatch() unpickVersionsMatch}
- *                   is {@code true}
- *          </ul>
+ *     <li> {@link UnpickVersionsMatchConsumingTask#getUnpickVersionsMatch() unpickVersionsMatch}:
+ *          this plugin's {@linkplain #provideUnpickVersionsMatch provided check}
+ *          comparing {@link QuiltMappingsExtension}'s
+ *          {@link QuiltMappingsExtension#getUnpickVersion() unpickVersion} and the
+ *          {@linkplain MappingsV2JarTask#JAR_UNPICK_META_PATH unpick meta} from the
+ *          {@value ExtractTargetMappingJarTask#EXTRACT_TARGET_MAPPINGS_JAR_TASK_NAME} task's
+ *          {@linkplain ExtractTargetMappingJarTask#getExtractionDest extracted jar}
+ *     <li> run {@link Task#onlyIf(Spec) onlyIf}
+ *          {@link UnpickVersionsMatchConsumingTask#getUnpickVersionsMatch() unpickVersionsMatch} is {@code true}
  * </ul>
  */
 public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
@@ -102,34 +87,16 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
         // register this plugin's tasks
         final TaskContainer tasks = project.getTasks();
 
-        {
-            final Property<String> targetVersion = this.getObjects().property(String.class);
-            targetVersion.set(
-                this.getProviders().of(
-                    TargetVersionSource.class,
-                    spec -> spec.parameters(params ->
-                        params.getMinecraftVersion().set(quiltExt.getMinecraftVersion())
-                    )
-                )
-            );
-
-            tasks.withType(TargetVersionConsumingTask.class).configureEach(task -> {
-                task.getTargetVersion().convention(targetVersion);
-
-                task.onlyIf(unused -> task.getTargetVersion().isPresent());
-            });
-        }
-
         final var downloadTargetMappingsJar = tasks.register(
             DownloadTargetMappingJarTask.DOWNLOAD_TARGET_MAPPINGS_JAR_TASK_NAME,
             DownloadTargetMappingJarTask.class,
             task -> {
                 task.getTargetUnpickConstantsFile().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.CONSTANTS)
+                    this.provideQuiltTargetBuildJarFile(task.provideTargetVersionString(), Classifiers.CONSTANTS)
                 );
 
                 task.getTargetJar().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.V2)
+                    this.provideQuiltTargetBuildJarFile(task.provideTargetVersionString(), Classifiers.V2)
                 );
             }
         );
@@ -143,7 +110,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 );
 
                 task.getExtractionDest().convention(
-                    this.provideQuiltTargetBuildDir(task.getTargetVersion(), "")
+                    this.provideQuiltTargetBuildDir(task.provideTargetVersionString(), "")
                 );
             }
         );
@@ -180,7 +147,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 );
 
                 task.getOutput().convention(this.provideQuiltTargetBuildFile(
-                    task.getTargetVersion(), "remapped-" + UNPICK_NAME, Extensions.UNPICK
+                    task.provideTargetVersionString(), "remapped-" + UNPICK_NAME, Extensions.UNPICK
                 ));
             }
         );
@@ -198,7 +165,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 );
 
                 task.getOutputFile().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.UNPICKED)
+                    this.provideQuiltTargetBuildJarFile(task.provideTargetVersionString(), Classifiers.UNPICKED)
                 );
             }
         );
@@ -215,7 +182,7 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 );
 
                 task.getOutputJar().convention(
-                    this.provideQuiltTargetBuildJarFile(task.getTargetVersion(), Classifiers.NAMED)
+                    this.provideQuiltTargetBuildJarFile(task.provideTargetVersionString(), Classifiers.NAMED)
                 );
             }
         );
@@ -260,8 +227,9 @@ public abstract class TargetDiffPlugin implements MappingsProjectPlugin {
                 // This provider is safe to get when dependOn is evaluated because it comes from a ValueSource.
                 // Configuring diffTarget's targetVersion to a provider mapped from a task output would break this.
                 task.dependsOn(this.getProviders().provider(() -> {
-                    final Property<String> targetVersion = diffTarget.get().getTargetVersion();
-                    targetVersion.finalizeValue();
+                    final DiffTargetTask diffTargetTask = diffTarget.get();
+                    diffTargetTask.getTargetVersion().finalizeValue();
+                    final Provider<String> targetVersion = diffTargetTask.provideTargetVersionString();
 
                     if (targetVersion.isPresent()) {
                         return diffTarget;

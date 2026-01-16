@@ -62,7 +62,7 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                     );
 
                     task.getDest().convention(
-                        this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("." + Extensions.JSON))
+                        this.provideMinecraftBuildFile(quiltExt.getMinecraftVersion() + "." + Extensions.JSON)
                     );
                 }
             );
@@ -80,11 +80,11 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
             DownloadMinecraftJarsTask.class,
             task -> {
                 task.getClientJar().convention(this.provideMinecraftBuildFile(
-                    quiltExt.provideSuffixedMinecraftVersion("-client." + Extensions.JAR)
+                    quiltExt.getMinecraftVersion() + "-client." + Extensions.JAR
                 ));
 
                 task.getServerBootstrapJar().convention(this.provideMinecraftBuildFile(
-                    quiltExt.provideSuffixedMinecraftVersion("-server-bootstrap." + Extensions.JAR)
+                    quiltExt.getMinecraftVersion() + "-server-bootstrap." + Extensions.JAR
                 ));
             }
         );
@@ -98,7 +98,7 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                 );
 
                 task.getExtractionDest().convention(
-                    this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("-server." + Extensions.JAR))
+                    this.provideMinecraftBuildFile(quiltExt.getMinecraftVersion() + "-server." + Extensions.JAR)
                 );
             }
         );
@@ -112,7 +112,7 @@ public abstract class MinecraftJarsPlugin extends DefaultExtensionedMappingsProj
                 task.getServerJar().convention(extractServerJar.flatMap(ExtractServerJarTask::getExtractionDest));
 
                 task.getMergedFile().convention(
-                    this.provideMinecraftBuildFile(quiltExt.provideSuffixedMinecraftVersion("-merged." + Extensions.JAR))
+                    this.provideMinecraftBuildFile(quiltExt.getMinecraftVersion() + "-merged." + Extensions.JAR)
                 );
             }
         );

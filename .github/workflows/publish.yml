@@ -21,18 +21,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build before generating build number so the build number doesn't needlessly increase in the event of an error.
-      - name: Build
-        run: ./gradlew build javadocJar --stacktrace
-      # Generate the build number based on tags to allow per branch build numbers, not something GitHub provides by default.
-      - name: Generate build number
-        id: buildnumber
-        uses: onyxmueller/build-tag-number@v1
-        with:
-          token: ${{ secrets.github_token }}
-          prefix: "build/${{ github.ref }}"
       - name: Publish
-        run: ./gradlew publish --stacktrace
+        run: ./gradlew build javadocJar publish --stacktrace
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
