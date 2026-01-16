@@ -77,7 +77,7 @@ public abstract class QuiltMappingsExtension {
             .orElseThrow(() -> new GradleException(
                 """
                 Could not find %s version.
-                \tAn '%s' version must be specified in the '%s' version catalog,
+                \tA version of '%s' must be specified in the '%s' version catalog,
                 \tusually by adding it to 'gradle/%s.versions.toml'.
                 """.formatted(versionName, versionName, DEFAULT_CATALOG_NAME, DEFAULT_CATALOG_NAME)
             ));
